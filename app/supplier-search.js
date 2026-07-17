@@ -28,8 +28,12 @@
   function card(s){
     function sec(title,html){return '<div style="margin:14px 0 0;"><div style="font-size:11px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;color:'+DIM+';margin-bottom:6px;">'+title+'</div>'+html+'</div>';}
     var h='<div style="border:1px solid '+LINE+';border-radius:11px;padding:16px 18px;background:#fdfcf9;">';
-    h+='<div style="font-size:20px;font-weight:700;color:'+INK+';">'+esc(s.name)+(s.autoDetected?' <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#7a5b14;background:#f3e8cf;border-radius:99px;padding:2px 8px;vertical-align:3px;">AUTO — VERIFY AT SOURCE</span>':'')+'</div>';
-    if(s.note) h+='<p style="margin:4px 0 0;font-size:13.5px;color:#37485a;">'+esc(s.note)+'</p>';
+    // header: image/monogram + name
+    var _w=s.name.replace(/^the\s+/i,'').split(/[\s\-—,\.]+/).filter(Boolean);var inits=esc((/^[A-Za-z0-9]{2,4}$/.test(_w[0]||'')?_w[0]:_w.slice(0,2).map(function(w){return w[0];}).join('')).toUpperCase());
+    var ph='<div style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid '+LINE+';display:flex;align-items:center;justify-content:center;font-weight:700;color:'+G+';font-size:16px;">'+inits+'</div>';
+    var thumb = s.image ? '<img src="'+esc(s.image)+'" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid '+LINE+';" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div style="display:none;width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid '+LINE+';align-items:center;justify-content:center;font-weight:700;color:'+G+';font-size:16px;">'+inits+'</div>' : ph;
+    h+='<div style="display:flex;gap:13px;align-items:flex-start;">'+thumb+'<div><div style="font-size:20px;font-weight:700;color:'+INK+';">'+esc(s.name)+(s.autoDetected?' <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#7a5b14;background:#f3e8cf;border-radius:99px;padding:2px 8px;vertical-align:3px;">AUTO — VERIFY AT SOURCE</span>':'')+'</div>'+
+      (s.note?'<p style="margin:4px 0 0;font-size:13.5px;color:#37485a;">'+esc(s.note)+'</p>':'')+'</div></div>';
     if(s.specialities&&s.specialities.length) h+='<div style="margin-top:8px;">'+s.specialities.map(function(x){return '<span style="display:inline-block;background:#f3ead2;color:#7a5b14;border-radius:99px;padding:3px 10px;font-size:11.5px;font-weight:600;margin-right:6px;">'+esc(x)+'</span>';}).join('')+'</div>';
 
     // frameworks
