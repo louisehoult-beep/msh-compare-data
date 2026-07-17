@@ -17,5 +17,19 @@ jobs:
           git config user.name "compare-refresh-bot"
           git config user.email "actions@github.com"
           git add data state
-          git diff --cached --quiet || git commit -m "Weekly refresh $(date -u +%F)"
+          git diff --cached --quiet || git commit -m "Daily refresh $(date -u +%F)"
           git push
+      - name: Phone alert if new items (ntfy)
+        run: |
+          N=$(python3 -c "import json;print(len(json.load(open('state/last_run.json'))['added']))" 2>/dev/null || echo 0)
+          if [ "$N" -gt 0 ]; then
+            curl -s -H "Title: Medical Sales Hub - Compare tab" -H "Priority: default" -H "Tags: mag" \
+              -d "$N new item(s) auto-detected on the Compare tab. Claude will draft the rep lines by 07:10; check them on your dashboard or the Med Sales Tools page." \
+              ntfy.sh/eth-hub-lou-4437
+          fi
+      - name: Phone alert on failure (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Medical Sales Hub - pipeline FAILED" -H "Priority: high" -H "Tags: warning" \
+            -d "The daily compare-tab refresh failed. Check github.com/louisehoult-beep/msh-compare-data/actions" \
+            ntfy.sh/eth-hub-lou-4437
