@@ -27,18 +27,40 @@ NEWS_MAX  = 30          # suppliers to run a news query for per run (curated fir
 NEWS_DAYS = 550         # ~18 months
 NEWS_KEEP = 4           # verified stories kept per supplier
 
-# Publishers that COUNT toward verification (established trade/national/official).
-REPUTABLE = ["bbc","reuters","financial times","ft.com","the guardian","the times",
-  "telegraph","sky news","the independent","bloomberg","associated press","ap news",
-  "med-technews","med-tech","medtech dive","medtechdive","massdevice","medical device network",
-  "medicaldevice-network","clinical services journal","national health executive","healthcare today",
-  "health tech world","pharmaphorum","fierce","hospital healthcare","digital health","nursing times",
-  "pulse today","health service journal","hsj","building better healthcare","medwatch","medical plastics news",
-  "the pharma letter","european pharmaceutical","med-tech innovation","medical product outsourcing"]
-# Never count these (PR wires / stock-tip / syndication spam).
+# A publisher COUNTS toward verification if (a) it is a named reputable outlet OR
+# (b) its name signals a clinical / medical-device publication (MED_KEYWORDS) --
+# unless it is on the PR-wire / stock-tip blocklist, which always overrides.
+
+# (a) named outlets: national/general reputable + specific medtech & clinical titles
+#     (incl. free/open-access) that MED_KEYWORDS might miss.
+REPUTABLE = [
+  # national / general reputable
+  "bbc","reuters","financial times","ft.com","the guardian","the times","telegraph",
+  "sky news","the independent","bloomberg","associated press","ap news","the economist",
+  # medtech / device trade press (free + paid)
+  "med-technews","med-tech innovation","medtech dive","medtechdive","massdevice","fierce",
+  "medical product outsourcing","medical plastics news","md+di","mddi","device talks","devicetalks",
+  "ns medical devices","medtech insight","medtech world","medtech intelligence","drug delivery business",
+  "medical design","medical device developments","european medical device","biospace","medcity",
+  # clinical / hospital / nursing / pharmacy trade + journals (free + paid)
+  "clinical services journal","hospital healthcare","national health executive","healthcare today",
+  "health tech world","pharmaphorum","pharmatimes","the pharma letter","pharmafile","pharmaceutical journal",
+  "digital health","building better healthcare","health service journal","hsj","nursing times",
+  "nursing standard","independent nurse","british journal of nursing","gp online","pulse today",
+  "the bmj","bmj","lancet","nature","npj","jama","plos","cochrane","biomed central","bmc",
+  "journal of wound care","journal of vascular access","infection prevention","open access government",
+  "health europa","omnia health","healthcare in europe","hospital times","medwatch","medtech europe"]
+
+# (b) name-signal heuristic -> "all clinical & medical-device publications, even free"
+MED_KEYWORDS = ["medical","clinical","medtech","med-tech","medicine","hospital","nursing","nurse",
+  "surgery","surgical","pharma","device","diagnostic","therapy","therapeutic","healthcare","health tech",
+  "journal of","bmj","lancet","biomed","cardiolog","oncolog","radiolog","wound","vascular","nhs"]
+
+# Never count these (PR wires / stock-tip / SEO-syndication spam) -- always overrides (a) and (b).
 PRWIRE = ["globenewswire","prnewswire","pr newswire","businesswire","business wire","einnews","openpr",
   "yahoo finance","simply wall","marketbeat","stocktitan","zacks","insider monkey","defense world",
-  "investing.com","tipranks","gurufocus","benzinga","seeking alpha","accesswire","newsfilecorp"]
+  "investing.com","tipranks","gurufocus","benzinga","seeking alpha","accesswire","newsfilecorp",
+  "healthline","verywell","patch.com","medianews","stocktwits","fool.com","barchart","nasdaq.com"]
 
 log = lambda m: print("[supplier-index]", m)
 def norm(s): return re.sub(r"[^a-z0-9]+", " ", str(s or "").lower()).strip()
@@ -55,8 +77,9 @@ def load(p, default):
 
 def reputable(pub):
     p = (pub or "").lower()
-    if not p or any(x in p for x in PRWIRE): return False
-    return any(x in p for x in REPUTABLE)
+    if not p or any(x in p for x in PRWIRE): return False   # blocklist always wins
+    if any(x in p for x in REPUTABLE): return True          # named reputable outlet
+    return any(x in p for x in MED_KEYWORDS)                # any clinical / device publication
 
 def parse_date(s):
     for fmt in ("%a, %d %b %Y %H:%M:%S %Z", "%a, %d %b %Y %H:%M:%S %z"):
