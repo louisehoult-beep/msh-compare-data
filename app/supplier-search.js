@@ -69,6 +69,16 @@
       }).join(''));
     } else h+=sec('Alerts &amp; recalls','<div style="font-size:13px;color:'+GREEN+';">No current alert indexed.</div>');
 
+    // news (only stories corroborated by >=2 reputable sources reach here)
+    if(s.news&&s.news.length){
+      h+=sec('News · verified by 2+ sources', s.news.map(function(nw){
+        var srcs=(nw.sources||[]).map(function(x){return x.url?'<a href="'+esc(x.url)+'" target="_blank" rel="noopener" style="color:'+G+';font-weight:600;">'+esc(x.publisher)+' ↗</a>':esc(x.publisher);}).join(' · ');
+        return '<div style="padding:8px 0;border-bottom:1px solid #f0ece3;font-size:13px;">'+
+          '<span style="color:'+GREEN+';font-weight:700;">✓</span> <b>'+esc(nw.headline)+'</b>'+
+          (nw.date?' <span style="color:'+DIM+';">· '+esc(nw.date)+'</span>':'')+
+          '<br><span style="color:'+DIM+';font-size:12px;">Corroborated by: </span>'+srcs+'</div>';
+      }).join(''));
+    }
     // links
     if(s.links&&s.links.length){
       h+=sec('Links', s.links.map(function(l){return '<a href="'+esc(l.url)+'" target="_blank" rel="noopener" style="color:'+G+';font-weight:600;font-size:13px;margin-right:14px;">'+esc(l.label)+' ↗</a>';}).join(''));
