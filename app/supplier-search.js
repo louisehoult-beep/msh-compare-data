@@ -28,7 +28,7 @@
   function card(s){
     function sec(title,html){return '<div style="margin:14px 0 0;"><div style="font-size:11px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;color:'+DIM+';margin-bottom:6px;">'+title+'</div>'+html+'</div>';}
     var h='<div style="border:1px solid '+LINE+';border-radius:11px;padding:16px 18px;background:#fdfcf9;">';
-    h+='<div style="font-size:20px;font-weight:700;color:'+INK+';">'+esc(s.name)+'</div>';
+    h+='<div style="font-size:20px;font-weight:700;color:'+INK+';">'+esc(s.name)+(s.autoDetected?' <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#7a5b14;background:#f3e8cf;border-radius:99px;padding:2px 8px;vertical-align:3px;">AUTO — VERIFY AT SOURCE</span>':'')+'</div>';
     if(s.note) h+='<p style="margin:4px 0 0;font-size:13.5px;color:#37485a;">'+esc(s.note)+'</p>';
     if(s.specialities&&s.specialities.length) h+='<div style="margin-top:8px;">'+s.specialities.map(function(x){return '<span style="display:inline-block;background:#f3ead2;color:#7a5b14;border-radius:99px;padding:3px 10px;font-size:11.5px;font-weight:600;margin-right:6px;">'+esc(x)+'</span>';}).join('')+'</div>';
 
@@ -47,6 +47,17 @@
       h+=sec('Products / brands', s.products.map(function(p){return '<span style="display:inline-block;border:1px solid '+LINE+';border-radius:99px;padding:4px 11px;font-size:12.5px;margin:0 5px 5px 0;color:#37485a;">'+esc(p)+'</span>';}).join(''));
     }
 
+    // awards
+    if(s.awards&&s.awards.length){
+      var aw=s.awards.slice(0,8);
+      h+=sec('Awards won ('+s.awards.length+')', aw.map(function(a){
+        return '<div style="padding:7px 0;border-bottom:1px solid #f0ece3;font-size:13px;"><b>'+esc(a.title||'Contract')+'</b>'+
+          (a.value?' <span style="color:'+GREEN+';font-weight:700;">'+esc(a.value)+'</span>':'')+
+          (a.date?' <span style="color:'+DIM+';">· '+esc(a.date)+'</span>':'')+
+          (a.buyer?'<br><span style="color:#37485a;font-size:12.5px;">Buyer: '+esc(a.buyer)+'</span>':'')+
+          (a.url?' <a href="'+esc(a.url)+'" target="_blank" rel="noopener" style="color:'+G+';font-weight:600;">↗</a>':'')+'</div>';
+      }).join('') + (s.awards.length>8?'<div style="font-size:12px;color:'+DIM+';margin-top:4px;">+'+(s.awards.length-8)+' more — see the Award Tracker.</div>':''));
+    }
     // alerts
     if(s.alerts&&s.alerts.length){
       h+=sec('Alerts &amp; recalls', s.alerts.map(function(a){
