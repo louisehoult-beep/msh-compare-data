@@ -1,4 +1,4 @@
-name: Daily compare-tab refresh
+name: Daily compare-tab + supplier-index refresh
 on:
   schedule:
     - cron: "15 3 * * *"   # daily 03:15 UTC
@@ -12,6 +12,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Fetch and merge (append-only)
         run: python3 fetch_issues.py
+      - name: Rebuild supplier index (curated seed + medical awards + recalls)
+        run: python3 build_supplier_index.py
       - name: Commit if changed
         run: |
           git config user.name "compare-refresh-bot"
