@@ -1,0 +1,21 @@
+name: Weekly compare-tab refresh
+on:
+  schedule:
+    - cron: "15 3 * * 1"   # Mondays 03:15 UTC
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch and merge (append-only)
+        run: python3 fetch_issues.py
+      - name: Commit if changed
+        run: |
+          git config user.name "compare-refresh-bot"
+          git config user.email "actions@github.com"
+          git add data state
+          git diff --cached --quiet || git commit -m "Weekly refresh $(date -u +%F)"
+          git push
