@@ -5,7 +5,7 @@ try{fetch(DATA_URL,{cache:'no-store'}).then(function(r){return r.json();}).then(
   if(j){if(j.specialities){
     for(var k in j.specialities){if(D[k]){if(j.specialities[k].issues){D[k].issues=j.specialities[k].issues;}}}
     var st=document.getElementById('cp-stamp');
-    if(st){if(j.dataAsOf){st.textContent='Data last checked '+j.dataAsOf+' (refreshes weekly). Frameworks and supply notices change \u2014 always open the source link and confirm current status before using anything in a conversation or tender.';}}
+    if(st){if(j.dataAsOf){st.textContent='Data last checked '+j.dataAsOf+' (refreshed daily). Frameworks and supply notices change \u2014 always open the source link and confirm current status before using anything in a conversation or tender.';}}
     if(document.getElementById('sec-comp')){render();}
   }}
 }).catch(function(e){});}catch(e){}
