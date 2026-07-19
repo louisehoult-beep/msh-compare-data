@@ -50,7 +50,9 @@
   function render(index, cfg, seed, nhssc){
     var suppliers = (index && index.suppliers) || [];
     var seedMap = {}; ((seed && seed.suppliers) || []).forEach(function(s){ seedMap[s.name] = s; });
-    suppliers.forEach(function(s){ var sd = seedMap[s.name]; if (sd){ ['voice','products','frameworks','specialities','alerts'].forEach(function(k){ if (sd[k] && (!Array.isArray(sd[k]) || sd[k].length)) s[k] = sd[k]; }); } });
+    suppliers.forEach(function(s){ var sd = seedMap[s.name]; if (sd){ ['voice','products','frameworks','specialities'].forEach(function(k){ if (sd[k] && (!Array.isArray(sd[k]) || sd[k].length)) s[k] = sd[k]; });
+      // alerts: union of curated seed + auto-detected index, deduped by url/title
+      if (sd.alerts && sd.alerts.length){ var seenA = {}, mergedA = []; sd.alerts.concat(s.alerts || []).forEach(function(a){ var kk = String(a.url || a.title || '').toLowerCase(); if (kk && seenA[kk]) return; seenA[kk] = 1; mergedA.push(a); }); s.alerts = mergedA; } } });
     var have = {}; suppliers.forEach(function(s){ have[s.name] = 1; });
     ((seed && seed.suppliers) || []).forEach(function(s){ if (!have[s.name]){ s.curated = true; suppliers.push(s); } });
 
@@ -224,7 +226,7 @@
       }
       if (!mine && v) mine = find(pool) || find(PRODUCTS);
       if (!mine && !v && pool.length && pool.length <= 1) mine = pool[0];
-      out.innerHTML = compare(mine, selAng.sel.value, edgeInp.value.trim());
+      out.innerHTML = compare(mine, selAng.sel.value, edgeInp.value.trim(), v, selSup.sel.value);
       addCopy(out);
       var hb = out.querySelector('#msh-handoff');
       if (hb){
@@ -356,8 +358,18 @@
         + '</ul>';
     }
 
-    function compare(mine, angle, edge){
-      if (!mine){ return '<div style="color:#8a6d00;font-size:14px;padding:8px 0;">Type your product above (start typing to pick from the list) and press Compare.</div>'; }
+    function compare(mine, angle, edge, typed, chosenSup){
+      if (!mine){
+        if (typed){
+          var mailSub = encodeURIComponent('Product request — NHS Intelligence Hub');
+          var mailBody = encodeURIComponent('Please add this product to the Product Comparison tool:\n\nProduct: ' + typed + '\nCompany: ' + (chosenSup || '(not selected)') + '\nAnything else useful (speciality, who sells it, a link):\n');
+          return '<div style="background:#fbf3df;border:1px solid #e8d5a8;border-radius:10px;padding:14px 16px;font-size:14px;line-height:1.65;color:#7a5b14;">'
+            + '<strong>\u201c' + esc(typed) + '\u201d isn\u2019t tracked yet.</strong> Nothing here is guessed — products only appear once they\u2019ve been verified against the live NHS Supply Chain catalogue and the suppliers\u2019 own published information.'
+            + '<div style="margin-top:8px;"><a href="mailto:louisehoult@elevateandthrive.uk?subject=' + mailSub + '&body=' + mailBody + '" style="display:inline-block;background:#6B2A34;color:#fff;border-radius:8px;padding:10px 18px;font-weight:700;font-size:13.5px;text-decoration:none;">Request this product &rarr;</a>'
+            + '<span style="font-size:12.5px;color:#8a8778;margin-left:10px;">it goes through the same verification and is usually live within a working day</span></div></div>';
+        }
+        return '<div style="color:#8a6d00;font-size:14px;padding:8px 0;">Type your product above (start typing to pick from the list) and press Compare.</div>';
+      }
       var comps = competitorsOf(mine);
       var h = '<div style="font-size:13px;color:#6b7684;margin:6px 0 4px;">Your product: <strong>' + esc(mine.name) + '</strong> (' + esc(mine.supplier) + ')' + (mine.type ? ' · type: ' + esc(mine.type) : '') + ' · ' + comps.length + ' competing products found</div>';
 
