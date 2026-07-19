@@ -387,6 +387,52 @@
       else if (dMine) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you\\u2019re live on the NHS Supply Chain catalogue (codes below) — ordering is the easy part.</div>';
       h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">The case for switching — what are you giving them?</div><div style="font-size:14px;line-height:1.65;color:#39424d;margin-top:6px;">' + caseHtml + '</div></div>';
 
+      // WHY ONE OVER THE OTHER — real differences derived from the live catalogue
+      // descriptions (material / mechanism / format / readiness), each with why it
+      // matters in the buying conversation. Honest: only what the data supports.
+      function attrsOf(p){
+        var d2 = detailFor(p); if (!d2) return null;
+        var txt = d2.items.map(function(it){ return it.desc || ''; }).join(' | ').toLowerCase();
+        var a = { packs: d2.items.length };
+        if (/oxidised|oxidized|regenerated cellulose|\borc\b/.test(txt)) a.material = 'oxidised regenerated cellulose (plant-derived)';
+        else if (/gelatin/.test(txt)) a.material = /porcine/.test(txt) ? 'porcine gelatin' : 'gelatin';
+        else if (/collagen/.test(txt)) a.material = 'collagen (animal-derived)';
+        else if (/fibrin|thrombin/.test(txt)) a.material = 'biologic (fibrin/thrombin)';
+        else if (/chitosan/.test(txt)) a.material = 'chitosan';
+        if (/fibrillar/.test(txt)) a.form = 'fibrillar fabric';
+        else if (/knit|fabric/.test(txt)) a.form = 'knitted fabric';
+        else if (/powder/.test(txt)) a.form = 'powder';
+        else if (/matrix|applicator|flowable/.test(txt)) a.form = 'flowable matrix (applicator)';
+        else if (/patch/.test(txt)) a.form = 'patch';
+        else if (/sponge/.test(txt)) a.form = 'sponge';
+        else if (/sealant|adhesive/.test(txt)) a.form = 'sealant/adhesive';
+        return a;
+      }
+      var myA = attrsOf(mine);
+      if (myA && (myA.material || myA.form)){
+        var diffs2 = [];
+        comps.slice(0, 5).forEach(function(p){
+          var pa = attrsOf(p); if (!pa) return;
+          var line = '<strong>vs ' + esc(p.name) + '</strong> (' + esc(p.supplier) + '): ';
+          var pts = [];
+          if (pa.material && myA.material && pa.material !== myA.material){
+            pts.push('they are ' + esc(pa.material) + ', you are ' + esc(myA.material));
+            if (/porcine/.test(pa.material) && /plant/.test(myA.material)) pts.push('<em>why it matters:</em> porcine-origin products are declined by some patients on faith or personal grounds — a plant-derived alternative removes that conversation entirely');
+            else if (/biologic/.test(pa.material) && !/biologic/.test(myA.material)) pts.push('<em>why it matters:</em> biologic components bring preparation, storage and cost considerations a ready-to-use mechanical haemostat avoids');
+            else if (/biologic/.test(myA.material) && !/biologic/.test(pa.material)) pts.push('<em>why it matters:</em> your active biologic mechanism is the premium argument — position on speed/reliability of haemostasis, not price');
+          }
+          if (pa.form && myA.form && pa.form !== myA.form){
+            pts.push('their format is ' + esc(pa.form) + ', yours is ' + esc(myA.form));
+            if (/flowable/.test(pa.form) && /fabric|sponge|patch/.test(myA.form)) pts.push('<em>why it matters:</em> a flowable needs an applicator and prep at the table; a fabric is open-and-apply');
+          }
+          if (!pts.length && pa.packs !== myA.packs) pts.push('closest match in material and format — the differences are pack range (' + myA.packs + ' vs ' + pa.packs + '), price and service, so your edge above carries the argument');
+          if (pts.length) diffs2.push(line + pts.join('; ') + '.');
+        });
+        if (diffs2.length){
+          h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + OX + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">Why one over the other — real differences from the catalogue data</div><div style="font-size:13.5px;line-height:1.65;color:#39424d;margin-top:6px;"><ul style="margin:2px 0 0;padding-left:18px;">' + diffs2.map(function(x){ return '<li style="margin:4px 0;">' + x + '</li>'; }).join('') + '</ul></div><div style="font-size:11.5px;color:#8a8778;margin-top:6px;">Derived from the products\\u2019 own NHS Supply Chain catalogue descriptions. Class-level differences — always confirm specifics against the manufacturer\\u2019s IFU before quoting clinically.</div></div>';
+        }
+      }
+
       // On-page product detail (image + every pack code) for your product + top competitors
       var withDetail = [mine].concat(comps).filter(function(p){ return detailFor(p); });
       if (withDetail.length){
