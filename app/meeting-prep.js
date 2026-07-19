@@ -69,6 +69,24 @@
     var out = el('div', 'margin-top:6px;'); wrap.appendChild(out);
     MOUNT.innerHTML = ''; MOUNT.appendChild(wrap);
 
+    // Hand-off from the Product Comparison tool: prefill the company and carry
+    // the focus product into the brief.
+    var focusProduct = '';
+    var handNote = el('div', 'display:none;background:#edf5ee;border:1px solid #bcd9c7;border-radius:8px;padding:8px 12px;margin:-6px 0 12px;font-size:13px;color:#14432f;');
+    wrap.insertBefore(handNote, out);
+    function applyHandoff(ev){
+      var h = (ev && ev.detail) || null;
+      if (!h){ try { h = JSON.parse(localStorage.getItem('mshPrepHandoff') || 'null'); } catch(e){} }
+      if (!h || !h.company || (Date.now() - (h.ts || 0)) > 600000) return;
+      var opts = [].slice.call(selCo.sel.options).map(function(o){ return o.value; });
+      if (opts.indexOf(h.company) !== -1) selCo.sel.value = h.company;
+      focusProduct = h.product || '';
+      handNote.style.display = 'block';
+      handNote.innerHTML = 'Carried over from Product Comparison: <strong>' + esc(focusProduct) + '</strong> (' + esc(h.company) + ') — pick the trust and who you&rsquo;re meeting, then <strong>Prepare me</strong>.';
+    }
+    window.addEventListener('msh-prep-handoff', applyHandoff);
+    applyHandoff();
+
     btn.addEventListener('click', function(){
       var co = suppliers.filter(function(s){ return s.name === selCo.sel.value; })[0];
       var tr = (cfg.trusts || []).filter(function(t){ return t.name === selTr.sel.value; })[0];
@@ -115,8 +133,12 @@
       // Audience-tailored angle
       if (aud && AUD[aud]){ h += panel('The angle for ' + esc(aud), AUD[aud].line, '#6b7684'); }
 
+      if (focusProduct){
+        h += panel('Your focus product today', '<strong>' + esc(focusProduct) + '</strong> — the full like-for-like comparison, live NHS Supply Chain codes and points to highlight are one scroll up in the Product Comparison. Lead your value case with it.', '#2E6B3E');
+      }
       if (!isEarly && co && co.products && co.products.length){
-        h += panel('Your products to talk to', li(co.products.map(esc)));
+        var plist = co.products.map(function(p){ var n = esc(typeof p === 'string' ? p : (p && p.name) || ''); return (focusProduct && n === esc(focusProduct)) ? '<strong>' + n + ' (focus)</strong>' : n; });
+        h += panel('Your products to talk to', li(plist));
       }
 
       // Competitors & how you stack up
@@ -173,7 +195,11 @@
         'Use “how are you finding the new NHS Supply Chain catalogue?” as a natural opener.'
       ];
       h += panel('How to use this in the meeting', li(howItems));
-      h += '<div style="font-size:12px;color:#8a8778;margin-top:10px;">Assembled from the live Hub — supplier directory, frameworks, Live Desk and Tools. Verify framework/award status at source before quoting.</div>';
+      h += '<div style="background:#fdfbf6;border:1px solid #e0c98a;border-radius:10px;padding:16px 18px;margin:14px 0 6px;text-align:center;">'
+        + '<div style="font-size:14.5px;line-height:1.65;color:#39424d;"><em>The Hub has done the homework — this is your intel. Your skill as a salesperson is what turns it into a sale: walk in as a partner in their care, not a supplier at the door.</em></div>'
+        + '<div style="font-size:13px;color:' + GOLD + ';font-weight:700;margin-top:8px;">&ldquo;Trust is the glue of life.&rdquo; &mdash; Stephen R. Covey</div>'
+        + '</div>';
+      h += '<div style="font-size:12px;color:#8a8778;margin-top:6px;">Assembled from the live Hub — supplier directory, frameworks, Live Desk and Tools. Verify framework/award status at source before quoting.</div>';
       return h;
     }
   }
