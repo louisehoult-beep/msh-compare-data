@@ -174,6 +174,24 @@
     ebox.appendChild(edgeInp); opt.appendChild(ebox);
     var selAng = mkSelect('Objection / angle (optional)', ['', 'Price / cost', 'Value & capacity', 'Clinical evidence', 'Sustainability', 'Objection handling (MSTP)']);
     opt.appendChild(selAng.box); wrap.appendChild(opt);
+
+    // Optional prices: reps often don't have them — when they do, the savings
+    // calculation becomes the number for procurement.
+    var priceRow = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:-6px 0 14px;padding:10px 12px;background:' + SOFT + ';border:1px dashed ' + LINE + ';border-radius:10px;');
+    priceRow.appendChild(el('div', 'flex-basis:100%;font-size:12.5px;font-weight:700;color:#5a6470;', 'Do you know the current prices? If so, add them and the savings are calculated below. (optional — leave blank if not)'));
+    function mkNum(label, ph, width){
+      var box = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:' + width + 'px;');
+      box.appendChild(el('label', 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#9a958a;', esc(label)));
+      var inpN = el('input', 'padding:9px 12px;border:1px solid ' + LINE + ';border-radius:8px;font-size:13.5px;background:#fff !important;color:#20303f !important;');
+      inpN.type = 'text'; inpN.inputMode = 'decimal'; inpN.placeholder = ph;
+      box.appendChild(inpN); return { box: box, inp: inpN };
+    }
+    var pMine = mkNum('Your price per unit (\u00a3)', 'e.g. 0.85', 170);
+    var pTheirs = mkNum('Their price per unit (\u00a3)', 'incumbent / competitor', 170);
+    var pVol = mkNum('Units the hospital buys per year', 'e.g. 20000', 220);
+    priceRow.appendChild(pMine.box); priceRow.appendChild(pTheirs.box); priceRow.appendChild(pVol.box);
+    wrap.appendChild(priceRow);
+    function numOf(inpEl){ var v = parseFloat(String(inpEl.inp.value).replace(/[\u00a3,\s]/g, '')); return (isFinite(v) && v > 0) ? v : null; }
     function mkSelect(label, opts){
       var box = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:210px;');
       box.appendChild(el('label', 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#9a958a;', esc(label)));
@@ -393,6 +411,10 @@
         if ((myA0.latex || pa.latex) && myA0.latex !== pa.latex) return false;
         return true;
       }
+      var vMine = numOf(pMine), vTheirs = numOf(pTheirs), vVol = numOf(pVol);
+      var saveUnit = (vMine != null && vTheirs != null) ? (vTheirs - vMine) : null;
+      var saveAnnual = (saveUnit != null && vVol != null) ? saveUnit * vVol : null;
+      function gbp(n){ var neg = n < 0; n = Math.abs(n); var s = n >= 100 ? Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : n.toFixed(2); return (neg ? '\u2212\u00a3' : '\u00a3') + s; }
       var reasons = [];
       function alertsFor(p){
         var sA = SUPOBJ[p.supplier]; if (!sA || !sA.alerts || !sA.alerts.length) return [];
@@ -402,6 +424,11 @@
       var compAlerted = comps.slice(0, 6).map(function(p){ return { p: p, al: alertsFor(p) }; }).filter(function(x){ return x.al.length; });
       var mineAlerts = alertsFor(mine);
       if (edge) reasons.push('<strong>Your edge (lead with this):</strong> ' + esc(edge) + '. That is the reason for the meeting — everything below supports it.');
+      if (saveAnnual != null && saveAnnual > 0){
+        reasons.push('<strong>The number for procurement:</strong> at the prices you\u2019ve entered, switching saves ' + gbp(saveUnit) + ' per unit — ' + gbp(saveAnnual) + ' a year at ' + vVol.toLocaleString('en-GB') + ' units. Full breakdown below; verify both prices on the catalogue before you quote it.');
+      } else if (saveAnnual != null && saveAnnual < 0){
+        reasons.push('<strong>Price honesty:</strong> at the prices you\u2019ve entered, you are ' + gbp(-saveUnit) + ' more per unit (' + gbp(-saveAnnual) + ' a year). Price will not win this one — build the value case instead: value-based procurement caps whole-life cost at 40% of the score, and value (training, resilience, outcomes) carries 60%.');
+      }
       compAlerted.forEach(function(x){
         var a = x.al[0];
         reasons.push('<strong>Live MHRA / safety action on a rival line:</strong> ' + esc(x.p.name) + ' — ' + esc(a.title) + (a.date ? ' (' + esc(a.date) + ')' : '') + '. ' + esc(a.detail || '') + (a.use ? ' <em>' + esc(a.use) + '</em>' : '') + (a.url ? ' <a href="' + a.url + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11px;font-weight:600;">official alert &#8599;</a>' : '') + ' Quote the official alert verbatim — never embellish a safety issue.');
@@ -478,11 +505,24 @@
       else if (dMine) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you’re live on the NHS Supply Chain catalogue (codes below) — ordering is the easy part.</div>';
       h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">The case for switching — what are you giving them?</div><div style="font-size:14px;line-height:1.65;color:#39424d;margin-top:6px;">' + caseHtml + '</div></div>';
 
+      if (saveAnnual != null){
+        var srows = ''
+          + '<tr><td style="padding:5px 8px;color:#5a6470;">Their price per unit</td><td style="padding:5px 8px;text-align:right;font-weight:700;">' + gbp(vTheirs) + '</td></tr>'
+          + '<tr style="border-top:1px solid ' + LINE + ';"><td style="padding:5px 8px;color:#5a6470;">Your price per unit</td><td style="padding:5px 8px;text-align:right;font-weight:700;">' + gbp(vMine) + '</td></tr>'
+          + '<tr style="border-top:1px solid ' + LINE + ';"><td style="padding:5px 8px;color:#5a6470;">Difference per unit</td><td style="padding:5px 8px;text-align:right;font-weight:700;">' + gbp(saveUnit) + '</td></tr>'
+          + '<tr style="border-top:1px solid ' + LINE + ';"><td style="padding:5px 8px;color:#5a6470;">Units per year</td><td style="padding:5px 8px;text-align:right;font-weight:700;">' + vVol.toLocaleString('en-GB') + '</td></tr>'
+          + '<tr style="border-top:2px solid ' + (saveAnnual > 0 ? GRN : OX) + ';"><td style="padding:6px 8px;font-weight:800;">' + (saveAnnual > 0 ? 'Annual saving to the trust' : 'Annual cost of choosing you on price alone') + '</td><td style="padding:6px 8px;text-align:right;font-weight:800;font-size:15px;color:' + (saveAnnual > 0 ? GRN : OX) + ';">' + gbp(Math.abs(saveAnnual)) + (vTheirs ? ' <span style="font-size:11.5px;color:#6b7684;font-weight:600;">(' + Math.abs(Math.round(saveUnit / vTheirs * 100)) + '% ' + (saveAnnual > 0 ? 'less' : 'more') + ')</span>' : '') + '</td></tr>';
+        var snote = saveAnnual > 0
+          ? 'Put this number next to the trust\u2019s own published savings target (their annual report / board papers — the \u201cHelp me prepare\u201d brief pulls it) and the conversation changes. Verify both prices on the live catalogue before you quote them.'
+          : 'Do not lead on price. Lead on the value side value-based procurement actually scores — training, implementation support, resilience, outcomes (60% of the score; whole-life cost is capped at 40%) — and build the number in the Value Case Calculator. Verify both prices on the live catalogue first.';
+        h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + (saveAnnual > 0 ? GRN : OX) + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">The savings calculation — your numbers, worked through</div><div style="font-size:12px;color:#6b7684;margin:2px 0 8px;">Based on the prices you entered. Framework prices move — always confirm on the catalogue (customer login) before quoting.</div><table style="border-collapse:collapse;min-width:300px;max-width:440px;width:100%;font-size:13px;">' + srows + '</table><div style="font-size:13px;line-height:1.6;color:#39424d;margin-top:8px;">' + snote + '</div></div>';
+      }
+
       // WHY TRUSTS ACTUALLY SWITCH — the evidenced drivers (researched & sourced),
       // auto-mapped: which does THIS case activate? Ticked = live in your case now.
       var DRIVERS = [
         {n:'Cost pressure / CIP savings', ev:'Product switches are a standard cost-improvement lever (Carter set a \u00a3700m procurement savings target; system needs \u00a311bn in 2025/26).', src:'https://www.gov.uk/government/news/review-shows-how-nhs-hospitals-can-save-money-and-improve-care',
-          on: /sav|price|cost|%|cheap/i.test(edge||''), note:'your edge is a saving — quantify it against their CIP target'},
+          on: /sav|price|cost|%|cheap/i.test(edge||'') || (saveAnnual != null && saveAnnual > 0), note: (saveAnnual != null && saveAnnual > 0) ? ('your saving is quantified below (' + gbp(saveAnnual) + '/year) — set it against their CIP target') : 'your edge is a saving — quantify it against their CIP target'},
         {n:'Contract / framework renewal cycle', ev:'Frameworks run 2\u20134 years and new suppliers join at re-tender \u2014 the natural switch window.', src:'https://www.supplychain.nhs.uk/suppliers/contract-and-tender-process/',
           on: /award|202[6-8]/.test(mine.fwDates||''), note: mine.fwDates ? ('your framework timing: ' + mine.fwDates) : 'check the category\u2019s renewal date in the Procurement Calendar'},
         {n:'Value-based procurement scoring', ev:'DHSC national standard: five value domains carry a minimum 60% combined weighting; whole-life cost is capped at 40% \u2014 better-value challengers can beat cheaper incumbents.', src:'https://www.gov.uk/government/publications/value-based-procurement-for-medical-technology',
