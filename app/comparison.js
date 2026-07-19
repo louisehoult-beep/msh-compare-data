@@ -484,7 +484,7 @@
         var plainRivals = comps.slice(0,6).filter(function(p){ var a = attrsOf(p); return a && !a.silver; });
         if (plainRivals.length === comps.slice(0,6).length && comps.length){ reasons.push('<strong>Antimicrobial element:</strong> your catalogue entry carries a silver/antimicrobial component the listed competitors\u2019 entries do not mention — infection prevention is a scored, board-level priority. Confirm the claim wording against your IFU before quoting it clinically.'); }
       }
-      reasons.push('<strong>Sustainability:</strong> carbon is scored at tender (Evergreen from Apr 2026) — if your product or packaging carries a carbon advantage, quantify it in the Sustainability Calculator; it feeds the tender weighting.');
+      reasons.push('<strong>Sustainability (not checked here):</strong> this comparison has not assessed either product\u2019s sustainability — the catalogue doesn\u2019t carry that data. Carbon and social value are scored at tender (Evergreen from Apr 2026), so if you think your product, packaging or logistics might carry a sustainability benefit for the trust, work it up in the Sustainability Calculator on this page.');
       reasons.push('<strong>Price check:</strong> framework prices are visible to catalogue account holders — compare unit and whole-life cost there before the meeting; if you win on price, that is the simplest case of all.');
       var caseHtml;
       if (!edge && !wobbly.length && !kp(mine)){
