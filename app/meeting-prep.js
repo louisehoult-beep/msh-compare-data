@@ -71,7 +71,7 @@
 
     // Hand-off from the Product Comparison tool: prefill the company and carry
     // the focus product into the brief.
-    var focusProduct = '';
+    var focusProduct = '', focusEdge = '';
     var handNote = el('div', 'display:none;background:#edf5ee;border:1px solid #bcd9c7;border-radius:8px;padding:8px 12px;margin:-6px 0 12px;font-size:13px;color:#14432f;');
     wrap.insertBefore(handNote, out);
     function applyHandoff(ev){
@@ -81,6 +81,7 @@
       var opts = [].slice.call(selCo.sel.options).map(function(o){ return o.value; });
       if (opts.indexOf(h.company) !== -1) selCo.sel.value = h.company;
       focusProduct = h.product || '';
+      focusEdge = h.edge || '';
       handNote.style.display = 'block';
       handNote.innerHTML = 'Carried over from Product Comparison: <strong>' + esc(focusProduct) + '</strong> (' + esc(h.company) + ') — pick the trust and who you&rsquo;re meeting, then <strong>Prepare me</strong>.';
     }
@@ -134,11 +135,7 @@
       if (aud && AUD[aud]){ h += panel('The angle for ' + esc(aud), AUD[aud].line, '#6b7684'); }
 
       if (focusProduct){
-        h += panel('Your focus product today', '<strong>' + esc(focusProduct) + '</strong> — the full like-for-like comparison, live NHS Supply Chain codes and points to highlight are one scroll up in the Product Comparison. Lead your value case with it.', '#2E6B3E');
-      }
-      if (!isEarly && co && co.products && co.products.length){
-        var plist = co.products.map(function(p){ var n = esc(typeof p === 'string' ? p : (p && p.name) || ''); return (focusProduct && n === esc(focusProduct)) ? '<strong>' + n + ' (focus)</strong>' : n; });
-        h += panel('Your products to talk to', li(plist));
+        h += panel('Your focus product today', '<strong>' + esc(focusProduct) + '</strong>' + (focusEdge ? ' — <strong>your edge: ' + esc(focusEdge) + '</strong>. Lead with the edge; the like-for-like comparison (one scroll up) makes the switch low-risk.' : ' — the full like-for-like comparison, live NHS Supply Chain codes and the case for switching are one scroll up in the Product Comparison.'), '#2E6B3E');
       }
 
       // Competitors & how you stack up
@@ -170,15 +167,46 @@
       }
 
       if (tr){
+        var body = esc(tr.context)
+          + (tr.news ? '<br><span style="color:#6b7684;">Recent: ' + esc(tr.news) + '</span>' : '');
+        // From their own annual report — real figures, real source, no homework.
+        if (tr.reportFacts && tr.reportFacts.length){
+          var rf = tr.reportFacts.map(function(f){
+            return esc(f.fact) + (f.figure ? ' — <strong>' + esc(f.figure) + '</strong>' : '')
+              + (f.source ? ' <a href="' + esc(f.source) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11.5px;font-weight:600;">' + esc(f.where || 'source') + ' &#8599;</a>' : '');
+          });
+          body += '<div style="margin-top:10px;font-weight:700;">From their own annual report &amp; board papers:</div>' + li(rf);
+        }
+        // Named people — verified from public sources.
+        if (tr.people && tr.people.length){
+          var pl = tr.people.map(function(p){
+            var b = '<strong>' + esc(p.name) + '</strong> — ' + esc(p.role) + (p.note ? '. <span style="color:#6b7684;">' + esc(p.note) + '</span>' : '') + '<br>';
+            if (p.linkedin) b += liBtn('LinkedIn profile', p.linkedin);
+            else b += liBtn('Find them on LinkedIn', 'https://www.linkedin.com/search/results/people/?keywords=' + encodeURIComponent('"' + p.name + '" ' + trustShort(tr.name)));
+            b += liBtn('Their recent posts', 'https://www.linkedin.com/search/results/content/?keywords=' + encodeURIComponent('"' + p.name + '"') + '&sortBy=%22date_posted%22');
+            if (p.source) b += ' <a href="' + esc(p.source) + '" target="_blank" rel="noopener" style="font-size:11.5px;color:#8a8778;">verified source &#8599;</a>';
+            return b;
+          });
+          body += '<div style="margin-top:10px;font-weight:700;">Who you’re likely dealing with (named, from public sources):</div>' + li(pl);
+        }
+        // Role-level fallbacks with one-click lookups.
         var ctc = (tr.contacts || []).map(function(c){
           return '<strong>' + esc(c.role) + '</strong> — ' + esc(c.note)
             + '<br>' + liBtn('Find them on LinkedIn', liPeopleUrl(c.role, tr.name))
             + liBtn('Their recent posts', liPostsUrl(c.role, tr.name));
         });
-        h += panel('The trust: ' + esc(tr.name), esc(tr.context)
-          + (tr.news ? '<br><span style="color:#6b7684;">Recent: ' + esc(tr.news) + '</span>' : '')
-          + '<div style="margin-top:8px;font-weight:700;">Link it to their strategy:</div> read the trust’s latest annual report and board papers for their stated priorities (finances, capacity, net zero, digital) and tie your pitch to one of them.'
-          + (ctc.length ? '<div style="margin-top:8px;font-weight:700;">Who you’re meeting — looked up for you (opens in your LinkedIn):</div>' + li(ctc) : ''));
+        if (ctc.length && !(tr.people && tr.people.length)){
+          body += '<div style="margin-top:8px;font-weight:700;">Who you’re meeting — looked up for you (opens in your LinkedIn):</div>' + li(ctc);
+        }
+        // What voices at/around the trust are saying publicly.
+        if (tr.voices && tr.voices.length){
+          var vl = tr.voices.map(function(v){
+            return '<strong>' + esc(v.who) + '</strong>' + (v.role ? ' (' + esc(v.role) + ')' : '') + (v.date ? ' <span style="color:#8a8778;font-size:11.5px;">' + esc(v.date) + '</span>' : '') + ' — ' + esc(v.what)
+              + (v.source ? ' <a href="' + esc(v.source) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11.5px;font-weight:600;">source &#8599;</a>' : '');
+          });
+          body += '<div style="margin-top:10px;font-weight:700;">What they’re saying publicly:</div>' + li(vl);
+        }
+        h += panel('The trust: ' + esc(tr.name), body);
       } else if (trName && trName !== 'Other / any trust'){
         h += panel('The trust', 'No seeded profile yet — pull the trust’s latest annual report and news for its strategy and cost pressures, then go straight to the right people: '
           + '<br>' + liBtn('Procurement lead on LinkedIn', liPeopleUrl('Head of Procurement', trName))
