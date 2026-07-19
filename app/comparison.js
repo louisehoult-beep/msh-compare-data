@@ -61,7 +61,7 @@
     var wrap = el('div', 'font-family:Inter,system-ui,sans-serif;color:' + INK + ';');
     wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:' + OX + ';', 'NHS Intelligence Hub'));
     wrap.appendChild(el('div', 'font-size:24px;font-weight:800;margin:2px 0 4px;', 'Product Comparison'));
-    wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:720px;margin-bottom:12px;', 'Type <strong>your product</strong> — the tool finds the competing products automatically and compares them at product level (supplier, framework, code where known, key points), then shows the real difference and how to use it.'));
+    wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:720px;margin-bottom:12px;', 'Type <strong>your product</strong> — the tool finds the competing products automatically and compares them at product level (supplier, framework, live NHSSC-code lookup, key points), then shows the real difference and how to use it.'));
 
     var bar = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:10px;padding:12px;margin-bottom:14px;');
     // product autocomplete
@@ -112,7 +112,7 @@
         + '<td style="padding:7px 9px;">' + esc(p.name) + (mine ? ' <span style="color:' + OX + ';font-size:11px;">(you)</span>' : '') + '</td>'
         + '<td style="padding:7px 9px;">' + esc(p.supplier) + '</td>'
         + '<td style="padding:7px 9px;color:#5a6470;font-size:12.5px;">' + (p.framework ? esc(p.framework) : '<span style="color:#8a8778;">—</span>') + '</td>'
-        + '<td style="padding:7px 9px;color:#5a6470;">' + (p.code ? esc(p.code) : '<span style="color:#8a8778;">—</span>') + '</td>'
+        + '<td style="padding:7px 9px;color:#5a6470;">' + (p.code ? esc(p.code) : '<a href="https://pilot.supplychain.nhs.uk/search?query=' + encodeURIComponent(p.name.replace(/\s*\(.*?\)\s*/g,' ').trim()) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;">look up &#8599;</a>') + '</td>'
         + '<td style="padding:7px 9px;color:#39424d;font-size:12.5px;">' + (kpt ? esc(kpt) : '<span style="color:#8a8778;">—</span>') + '</td></tr>';
     }
 
@@ -157,7 +157,7 @@
       var prompt = 'Compare ' + mine.name + ' (' + mine.supplier + ') against ' + names + ' for an NHS buyer: the key clinical and practical differences, where each wins, and how I sell ' + mine.name + ' against them. Bullet points.';
       h += '<div style="background:' + SOFT + ';border:1px dashed ' + GOLD + ';border-radius:10px;padding:12px 16px;margin:12px 0;"><div style="font-size:13px;font-weight:700;color:' + INK + ';">Deep product-by-product detail — copy into your AI assistant:</div><div style="font-size:13px;color:#39424d;background:#fff;border:1px solid ' + LINE + ';border-radius:6px;padding:8px 10px;margin-top:6px;font-family:ui-monospace,Menlo,monospace;">' + esc(prompt) + '</div><div style="font-size:12px;color:#8a8778;margin-top:6px;">Once the Hub’s AI integration is live, this answers itself in-tool.</div></div>';
 
-      h += '<div style="font-size:12px;color:#8a8778;">Product names are the suppliers’ own; framework is top-level (verify the lot at source); NHSSC codes populate where held (many not yet indexed — the catalogue is login-gated). Nothing is invented.</div>';
+      h += '<div style="font-size:12px;color:#8a8778;">Product names are the suppliers’ own; framework is top-level (verify the lot at source); the <strong>NHSSC-code</strong> column links to the live public NHS Supply Chain catalogue — click to see every NPC / MPC code and pack size (prices need login). Nothing is invented.</div>';
       return h;
     }
 
