@@ -132,6 +132,9 @@
       if (!mine){ return '<div style="color:#8a6d00;font-size:14px;padding:8px 0;">Type your product above (start typing to pick from the list) and press Compare.</div>'; }
       var comps = competitorsOf(mine);
       var h = '<div style="font-size:13px;color:#6b7684;margin:6px 0 4px;">Your product: <strong>' + esc(mine.name) + '</strong> (' + esc(mine.supplier) + ')' + (mine.type ? ' · type: ' + esc(mine.type) : '') + ' · ' + comps.length + ' competing products found</div>';
+      var sq = mine.supplier.indexOf('—') >= 0 ? mine.supplier.split('—')[1] : mine.supplier;
+      sq = sq.replace(/\(.*?\)/g,'').replace(/,/g,' ').replace(/\bLtd\b|\bLimited\b|\bUK\b|\bGroup\b/gi,'').trim();
+      h += '<div style="font-size:12.5px;margin:0 0 8px;"><a href="https://pilot.supplychain.nhs.uk/search?query=' + encodeURIComponent(sq) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;">See all of ' + esc(mine.supplier) + '&rsquo;s live products &amp; NPC codes on NHS Supply Chain &#8599;</a></div>';
       h += '<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px;background:#fff;border:1px solid ' + LINE + ';border-radius:10px;">'
         + '<thead><tr style="background:' + OX + ';color:#fff;text-align:left;"><th style="padding:8px 9px;">Product</th><th style="padding:8px 9px;">Supplier</th><th style="padding:8px 9px;">On framework</th><th style="padding:8px 9px;">NHSSC code</th><th style="padding:8px 9px;">Key point</th></tr></thead><tbody>'
         + row(mine, true) + comps.map(function(p){ return row(p, false); }).join('') + '</tbody></table></div>';
