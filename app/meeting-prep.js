@@ -34,6 +34,9 @@
     var suppliers = (index && index.suppliers) || [];
     var seedMap = {}; ((seed && seed.suppliers) || []).forEach(function(s){ seedMap[s.name] = s; });
     suppliers.forEach(function(s){ var sd = seedMap[s.name]; if (sd){ if (sd.voice) s.voice = sd.voice; if (sd.products && sd.products.length) s.products = sd.products; if (sd.frameworks && sd.frameworks.length) s.frameworks = sd.frameworks; if (sd.specialities && sd.specialities.length) s.specialities = sd.specialities; } });
+    // Union in any curated seed supplier not yet in the index, so new suppliers show immediately (independent of the refresh cadence).
+    var have = {}; suppliers.forEach(function(s){ have[s.name] = 1; });
+    ((seed && seed.suppliers) || []).forEach(function(s){ if (!have[s.name]){ s.curated = true; suppliers.push(s); } });
     var curated = suppliers.filter(function(s){ return s.curated; }).sort(byName);
     var rest = suppliers.filter(function(s){ return !s.curated; }).sort(byName);
     function byName(a,b){ return (a.name||'').toLowerCase() < (b.name||'').toLowerCase() ? -1 : 1; }
