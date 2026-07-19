@@ -21,7 +21,47 @@ KEYWORDS = {
     "continence": ["foley", "urinary catheter", "intermittent catheter", "urology",
                    "continence", "urine drainage", "sheath", "urethral",
                    "catheter valve", "leg bag", "nephrostomy", "self-retaining catheter"],
+    "skin-prep": ["chlorhexidine", "skin disinfect", "skin antisep", "antiseptic applicator",
+                  "povidone iodine", "skin preparation"],
 }
+
+# Tracked-product matching: an alert naming a product from the supplier seed is
+# attached to that supplier automatically ('use' stays human-only; co is flagged
+# coAuto so a human can overrule on review).
+SEED_PATH = pathlib.Path("data/supplier-seed.json")
+PRODUCT_STOP = {"safety", "medical", "surgical", "system", "device", "sterile",
+    "products", "range", "series", "clear", "closed", "needlefree", "connector",
+    "connectors", "applicator", "dressing", "dressings", "catheter", "catheters",
+    "cannula", "syringe", "syringes", "wipes", "gloves", "suture", "sutures",
+    "stapler", "haemostat", "hydrogel", "compression", "standard", "premium"}
+
+SUP_STOP = {"medical", "healthcare", "health", "group", "limited", "systems",
+    "international", "industries", "surgical", "diagnostics", "pharma", "professional"}
+
+def product_tokens():
+    """(product_token, supplier_name, supplier_name_tokens) — a match requires the
+    product token AND a supplier-name token, both word-bounded, in the alert text.
+    Multi-vendor FSN round-ups are excluded upstream."""
+    toks = []
+    try:
+        seed = json.loads(SEED_PATH.read_text())
+        for s in seed.get("suppliers", []):
+            sname = s.get("name", "")
+            stoks = {w for w in re.findall(r"[a-z0-9]{4,}", (sname + " " + " ".join(s.get("aliases", []) or [])).lower()) if w not in SUP_STOP}
+            if not stoks:
+                continue
+            for p in s.get("products", []):
+                name = (p if isinstance(p, str) else p.get("name", "")).strip()
+                t = re.sub(r"[^a-z0-9]", "", re.split(r"[\s(/]", name.lower())[0])
+                if len(t) >= 5 and t not in PRODUCT_STOP:
+                    toks.append((t, sname, stoks))
+    except Exception:
+        pass
+    return toks
+
+def word_hit(tok, hay_plain, hay_dehyph):
+    pat = r"(?<![a-z0-9])" + re.escape(tok) + r"(?![a-z0-9])"
+    return re.search(pat, hay_plain) is not None or re.search(pat, hay_dehyph) is not None
 
 UA = {"User-Agent": "Mozilla/5.0 (msh-compare-data; weekly refresh; contact via repo)"}
 
@@ -40,7 +80,7 @@ def gov_uk_alerts(log):
     try:
         raw = fetch("https://www.gov.uk/api/search.json"
                     "?filter_format=medical_safety_alert&order=-public_timestamp"
-                    "&count=25&fields=title,link,public_timestamp,description")
+                    "&count=60&fields=title,link,public_timestamp,description")
         for r in json.loads(raw).get("results", []):
             title = r.get("title", "")
             desc = r.get("description") or ""
@@ -83,9 +123,37 @@ def main():
     existing_urls = {i["url"].rstrip("/") for sp in store["specialities"].values() for i in sp["issues"]}
 
     candidates = gov_uk_alerts(log) + nhssc_notices(log)
+    ptoks = product_tokens()
+    log.append(f"tracked-product tokens: {len(ptoks)}")
+    for spec in list(KEYWORDS.keys()) + ["product-match"]:
+        store["specialities"].setdefault(spec, {"label": spec.replace("-", " ").title(), "issues": []})
     added = []
     for c in candidates:
         if c["url"].rstrip("/") in existing_urls:
+            continue
+        hay_plain = c["hay"]
+        hay_dehyph = c["hay"].replace("-", "").replace(" ", "")
+        is_roundup = c["title"].lower().startswith("field safety notices")
+        hitco = ""
+        if not is_roundup:
+            for t, sup, stoks in ptoks:
+                if word_hit(t, hay_plain, hay_dehyph) and any(word_hit(st, hay_plain, hay_dehyph) for st in stoks):
+                    hitco = sup; break
+        if hitco:
+            item = {
+                "id": re.sub(r"[^a-z0-9]+", "-", c["url"].lower())[-60:].strip("-"),
+                "d": month_label(c["date"]) if c["date"] else month_label(datetime.date.today().isoformat()),
+                "co": hitco, "coAuto": True,
+                "p": c["title"][:160],
+                "s": f"Auto-detected from {c['src']} - names a tracked product. Open the source and verify before use.",
+                "use": "",
+                "url": c["url"],
+                "autoDetected": True,
+                "firstSeen": datetime.date.today().isoformat(),
+            }
+            store["specialities"]["product-match"]["issues"].append(item)
+            existing_urls.add(c["url"].rstrip("/"))
+            added.append(f"product-match [{hitco}]: {c['title'][:80]}")
             continue
         for spec, kws in KEYWORDS.items():
             if any(k in c["hay"] for k in kws):
