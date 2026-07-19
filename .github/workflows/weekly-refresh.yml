@@ -1,0 +1,46 @@
+name: Weekly refresh (NHSSC cache + trust directory)
+
+# Refreshes the two live datasets behind the Hub's Med Sales Tools, weekly and
+# laptop-independent:
+#  - data/nhssc-cache.json   — product NPC/MPC codes, pack sizes, status and
+#                              images from the public NHS Supply Chain pilot
+#                              catalogue (merge-preserving: never shrinks;
+#                              keeps entity-verified finds and the agent-built
+#                              notCatalogue map)
+#  - data/prep-config.json   — trustDirectory rebuilt from the official NHS ODS
+#                              register (name, ODS code, town, postcode, type),
+#                              preserving profiled trusts and all other config
+# Both scripts hard-abort rather than commit a shrunken dataset.
+
+on:
+  schedule:
+    - cron: "30 4 * * 0"     # Sundays 04:30 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install Playwright
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Refresh trust directory (NHS ODS)
+        run: python scripts/refresh_trusts.py
+      - name: Refresh NHSSC product cache (merge-preserving)
+        run: python scripts/refresh_nhssc_cache.py
+      - name: Commit updates
+        run: |
+          git config user.name "hub-bot"
+          git config user.email "contact@elevateandthrive.uk"
+          git add data/nhssc-cache.json data/prep-config.json
+          git diff --cached --quiet || git commit -m "weekly refresh: NHSSC cache + trust directory $(date -u +'%F')"
+          git push
