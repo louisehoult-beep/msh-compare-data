@@ -559,6 +559,33 @@
         }
       }
 
+      // SIDE BY SIDE — the products themselves, next to each other, so the rep
+      // looks with their own eyes; followed by coaching prompts the tool cannot
+      // answer for them (their own product knowledge, service and training offer).
+      var sbs = [mine].concat(comps.slice(0, 5)).map(function(p){
+        var d3 = detailFor(p); var it3 = d3 && d3.items && d3.items.filter(function(x){ return x.img; })[0];
+        return it3 ? { p: p, img: it3.img } : null;
+      }).filter(Boolean);
+      if (sbs.length >= 2){
+        var cells = sbs.map(function(x){
+          var isMine = x.p === mine;
+          return '<div style="flex:1 1 150px;max-width:210px;text-align:center;padding:10px;border:2px solid ' + (isMine ? GRN : LINE) + ';border-radius:10px;background:#fff;">'
+            + '<img src="' + esc(x.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display=\'none\'" style="width:100%;height:150px;object-fit:contain;background:#fff;">'
+            + '<div style="font-weight:800;font-size:13px;margin-top:6px;">' + esc(x.p.name) + (isMine ? ' <span style="color:' + GRN + ';font-size:11px;">(you)</span>' : '') + '</div>'
+            + '<div style="font-size:11.5px;color:#6b7684;">' + esc(x.p.supplier) + '</div></div>';
+        }).join('');
+        h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;">'
+          + '<div style="font-size:15px;font-weight:800;">Look at them side by side — then think like the customer</div>'
+          + '<div style="font-size:12.5px;color:#6b7684;margin:2px 0 10px;">Live product photographs from the NHS Supply Chain catalogue. The data above tells you what is listed; your own eyes and product knowledge find the rest.</div>'
+          + '<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start;">' + cells + '</div>'
+          + '<div style="margin-top:12px;padding:10px 14px;background:#fbf7ec;border-left:3px solid ' + GOLD + ';border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.65;color:#39424d;"><strong>Now add what only you know:</strong>'
+          + '<ul style="margin:4px 0 0;padding-left:18px;">'
+          + '<li style="margin:3px 0;">What other differences are you aware of from handling or demonstrating these products — application, feel, packaging, waste, shelf life?</li>'
+          + '<li style="margin:3px 0;">What else could make this customer interested — delivery times, UK stockholding, price, sustainability, pack sizes that match how they order?</li>'
+          + '<li style="margin:3px 0;">What comes with your product beyond the product itself — training, clinical support, implementation help, audit support? Training and implementation support are explicitly scored in NHS value-based procurement, so say so.</li>'
+          + '</ul></div></div>';
+      }
+
       // On-page product detail (image + every pack code) for your product + top competitors
       var withDetail = [mine].concat(comps).filter(function(p){ return detailFor(p); });
       if (withDetail.length){
