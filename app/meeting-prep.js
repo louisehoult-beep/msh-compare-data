@@ -9,18 +9,35 @@
   var GOLD = '#a8842c', INK = '#20303f', LINE = '#e6e2d8', PANEL = '#ffffff', SOFT = '#f7f5ef';
   var IDX = BASE + 'data/supplier-index.json?cb=' + Date.now();
   var CFG = BASE + 'data/prep-config.json?cb=' + Date.now();
+  var SEED = BASE + 'data/supplier-seed.json?cb=' + Date.now();
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
 
   MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:' + INK + ';padding:6px 0;">Loading meeting prep…</div>';
 
-  Promise.all([ fetch(IDX).then(function(r){return r.json();}), fetch(CFG).then(function(r){return r.json();}) ])
-    .then(function(res){ render(res[0], res[1]); })
+  Promise.all([
+    fetch(IDX).then(function(r){return r.json();}),
+    fetch(CFG).then(function(r){return r.json();}),
+    fetch(SEED).then(function(r){return r.json();}).catch(function(){return {suppliers:[]};})
+  ])
+    .then(function(res){ render(res[0], res[1], res[2]); })
     .catch(function(){ MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;">Meeting prep is temporarily unavailable — please try again shortly.</div>'; });
 
-  function render(index, cfg){
+  function render(index, cfg, seed){
     var suppliers = (index && index.suppliers) || [];
+    // Overlay the authoritative curated seed (voice/products/frameworks) so brand voice
+    // is available immediately, independent of the index refresh cadence.
+    var seedMap = {};
+    ((seed && seed.suppliers) || []).forEach(function(s){ seedMap[s.name] = s; });
+    suppliers.forEach(function(s){
+      var sd = seedMap[s.name];
+      if (sd){
+        if (sd.voice) s.voice = sd.voice;
+        if (sd.products && sd.products.length) s.products = sd.products;
+        if (sd.frameworks && sd.frameworks.length) s.frameworks = sd.frameworks;
+      }
+    });
     var curated = suppliers.filter(function(s){ return s.curated; });
     var rest = suppliers.filter(function(s){ return !s.curated; });
     curated.sort(byName); rest.sort(byName);
