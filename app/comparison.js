@@ -548,8 +548,8 @@
           if (myA.bloodctl && !pa.bloodctl) pts.push('your entry specifies blood-control technology theirs does not mention — a sharps/exposure-safety angle (the 2013 Sharps Regulations make exposure reduction a legal duty)');
           if (pa.bloodctl && !myA.bloodctl) pts.push('their entry specifies blood-control technology yours does not — know your answer on exposure safety');
           if (myA.needlefree && !pa.needlefree) pts.push('your entry includes an integrated needle-free connector theirs does not mention — fewer parts to order and fewer connections to break');
-          if (myA.tint && !pa.tint) pts.push('your entry is a tinted solution and theirs does not mention tint — clinicians can see exactly where skin has been prepped');
-          if (pa.tint && !myA.tint) pts.push('their entry is a tinted solution and yours does not mention tint — be ready for the visible-coverage point');
+          if (myA.tint && !pa.tint) pts.push('your range includes a tinted option and theirs does not mention one — clinicians can see exactly where skin has been prepped');
+          if (pa.tint && !myA.tint) pts.push('their range includes a tinted option and yours does not mention one — be ready for the visible-coverage point');
           if (pa.dehp && !myA.dehp) pts.push('their entry notes DEHP and yours does not mention it — if your product is DEHP-free, that supports the safety and sustainability conversation (verify before claiming)');
           if (!pts.length && (myA.material || myA.form) && pa.packs !== myA.packs) pts.push('closest match in material and format — the differences are pack range (' + myA.packs + ' vs ' + pa.packs + '), price and service, so your edge above carries the argument');
           if (pts.length) diffs2.push(line + pts.join('; ') + '.');
