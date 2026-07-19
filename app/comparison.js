@@ -92,7 +92,7 @@
     // 3 Product type -> 4 product name OR NHSSC code -> Compare.
     var SUPOBJ = {}; suppliers.forEach(function(s){ SUPOBJ[s.name] = s; });
     var SPECMAP = {
-      'vascular access': ['cannula','picc','midline','catheter','connector','flush','securement','needle','syringe','extension set','giving set','iv set','stopcock','infusion pump','syringe pump','pump'],
+      'vascular access': ['cannula','picc','midline','catheter','connector','flush','securement','needle','syringe','extension set','giving set','iv set','stopcock','infusion pump','syringe pump','pump','antisepsis','antiseptic','skin prep','skin disinfect','applicator','swabstick','swab','tourniquet','blood culture'],
       'wound care': ['dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','npwt','negative pressure','wound','tape','plaster','sealant'],
       'surgical haemostasis': ['haemostat','sealant','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue'],
       'enteral feeding': ['enteral','feeding','feeding tube','peg tube','syringe','connector'],
@@ -450,7 +450,13 @@
         if (trueTwin){
           caseHtml += '<div style="margin-top:10px;padding:10px 14px;background:#edf5ee;border-left:3px solid ' + GRN + ';border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.6;color:#39424d;"><strong>Then true like-for-like closes it.</strong> ' + esc(trueTwin.name) + ' is the same product type in the same format — the same steps to use, just from a different supplier. That means no retraining, no change to how theatres work, a simple side-by-side evaluation and a straight swap on the order template. Switching is a low-risk decision — that is the point to make, not \u201cwe\u2019re the same\u201d.</div>';
         } else if (top){
-          caseHtml += '<div style="margin-top:10px;padding:10px 14px;background:#edf5ee;border-left:3px solid ' + GRN + ';border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.6;color:#39424d;"><strong>Then make the switch easy.</strong> ' + esc(top.name) + ' is the same class but a different format — the evaluation is still straightforward, but be upfront that the steps differ and plan familiarisation/training into your offer. Owning that honestly is more credible than glossing it.</div>';
+          var ta2 = attrsOf(top);
+          var sameForm2 = myA0 && ta2 && myA0.form && ta2.form && myA0.form === ta2.form;
+          if (sameForm2){
+            caseHtml += '<div style="margin-top:10px;padding:10px 14px;background:#edf5ee;border-left:3px solid ' + GRN + ';border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.6;color:#39424d;"><strong>Then make the evaluation easy.</strong> ' + esc(top.name) + ' is the same format, so the physical steps are familiar and the evaluation is light. It is still not a \u201cstraight swap\u201d claim — the status or material difference above is exactly what the evaluation should test and document. That honesty is your credibility.</div>';
+          } else {
+            caseHtml += '<div style="margin-top:10px;padding:10px 14px;background:#edf5ee;border-left:3px solid ' + GRN + ';border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.6;color:#39424d;"><strong>Then make the switch easy.</strong> ' + esc(top.name) + ' is the same class but a different format — the evaluation is still straightforward, but be upfront that the steps differ and plan familiarisation/training into your offer. Owning that honestly is more credible than glossing it.</div>';
+          }
         }
       }
       if (fwFor(mine)) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you’re on ' + esc(fwFor(mine)) + ' — ordering is the easy part.</div>';
