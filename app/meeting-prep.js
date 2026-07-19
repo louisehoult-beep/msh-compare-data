@@ -49,7 +49,12 @@
     var bar = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:10px;padding:12px;margin-bottom:14px;');
     var selCo = mkSelect('Your company', [''].concat(curated.map(nm)).concat(rest.length ? ['— other suppliers —'] : []).concat(rest.map(nm)));
     var selSp = mkSelect('Speciality', [''].concat(cfg.specialities || []));
-    var selTr = mkSelect('Hospital / trust', [''].concat((cfg.trusts || []).map(function(t){return t.name;})).concat(['Other / any trust']));
+    var profiledNames = (cfg.trusts || []).map(function(t){ return t.name; });
+    var trustDir = (cfg.trustDirectory || []).filter(function(n){ return profiledNames.indexOf(n) === -1; });
+    var selTr = mkSelect('Hospital / trust', ['']
+      .concat(profiledNames.length ? ['— full Hub profile —'] : []).concat(profiledNames)
+      .concat(trustDir.length ? ['— all NHS trusts —'] : []).concat(trustDir)
+      .concat(['Other / any trust']));
     var selAud = mkSelect('Who you’re meeting', ['', 'Procurement / finance', 'Clinical manager', 'Clinical end-user', 'Sustainability lead']);
     var earlyWrap = el('label', 'font-size:13px;color:#4a5766;display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;');
     var early = el('input'); early.type = 'checkbox';
