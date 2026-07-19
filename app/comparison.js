@@ -19,7 +19,7 @@
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
   function nk(s){ return String(s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
 
-  var TYPES = ['antisepsis','antiseptic','chlorhexidine','skin prep','skin disinfect','disinfectant','applicator','swabstick','swab','tourniquet','blood culture','cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','tape','plaster','npwt','negative pressure','wound','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','tracheostomy','tracheal','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','lancet','connector','stopcock','extension set','giving set','iv set','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct ','x-ray','mammography','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','warming','securement','ostomy','urostomy','stoma','nephrostomy','foley','feeding','enteral','feeding tube','peg tube','slide sheet','glucose','sensor','test strip','electrode','scalpel','blade','forceps','retractor','trocar','clip','clamp','specimen','drainage','chest drain','suction','mask','circuit','cpap','oxygen','nebuliser','filter','lubricant'];
+  var TYPES = ['antisepsis','antiseptic','chlorhexidine','skin prep','skin disinfect','disinfectant','applicator','swabstick','swab','tourniquet','blood culture','cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','tape','plaster','npwt','negative pressure','wound','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','tracheostomy','tracheal','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','lancet','connector','stopcock','extension set','giving set','iv set','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct scan','x-ray','mammography','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','warming','securement','ostomy','urostomy','stoma','nephrostomy','foley','feeding','enteral','feeding tube','peg tube','slide sheet','glucose','sensor','test strip','electrode','scalpel','blade','forceps','retractor','trocar','clip','clamp','specimen','drainage','chest drain','suction','mask','circuit','cpap','oxygen','nebuliser','filter','lubricant'];
   var KEYPOINTS = {
     'BD — Becton, Dickinson': { 'nexiva': 'Closed IV system — fewer blood exposures/disconnections vs an open cannula', 'chloraprep': 'Single-use 2% CHG / 70% IPA sterile applicator' },
     'Coloplast': { 'speedicath': 'Ready-to-use hydrophilic catheter — no water needed' },
@@ -106,10 +106,52 @@
       box.appendChild(sel); return { box: box, sel: sel };
     }
 
+    // Guided filter for reps who don't know the product name: supplier -> category -> product.
+    var browse = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;background:' + SOFT + ';border:1px dashed ' + LINE + ';border-radius:10px;padding:10px 12px;margin:-6px 0 12px;');
+    browse.appendChild(el('div', 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6b7684;flex-basis:100%;', 'Don&rsquo;t know the product name? Filter down instead'));
+    var supNames = []; var supSeen = {};
+    PRODUCTS.forEach(function(p){ if (!supSeen[p.supplier]){ supSeen[p.supplier] = 1; supNames.push(p.supplier); } });
+    supNames.sort(function(a, b){ return a.toLowerCase() < b.toLowerCase() ? -1 : 1; });
+    var bSup = mkSelect('1 · Supplier', [''].concat(supNames));
+    var bCat = mkSelect('2 · Category', ['']);
+    var bPrd = mkSelect('3 · Product', ['']);
+    bCat.sel.disabled = true; bPrd.sel.disabled = true;
+    browse.appendChild(bSup.box); browse.appendChild(bCat.box); browse.appendChild(bPrd.box);
+    wrap.appendChild(browse);
+    function catLabel(t){ return t ? t.charAt(0).toUpperCase() + t.slice(1) : 'Other'; }
+    function fillSelect(sel, opts, placeholder){
+      sel.innerHTML = '';
+      var o0 = el('option'); o0.value = ''; o0.textContent = placeholder; sel.appendChild(o0);
+      opts.forEach(function(o){ var op = el('option'); op.value = o.value; op.textContent = o.label; sel.appendChild(op); });
+    }
+    bSup.sel.addEventListener('change', function(){
+      var sup = bSup.sel.value;
+      bPrd.sel.disabled = true; fillSelect(bPrd.sel, [], '— choose —');
+      if (!sup){ bCat.sel.disabled = true; fillSelect(bCat.sel, [], '— choose —'); return; }
+      var cats = {}, order = [];
+      PRODUCTS.forEach(function(p){ if (p.supplier === sup){ var c = catLabel(p.type); if (!cats[c]){ cats[c] = 1; order.push(c); } } });
+      order.sort();
+      fillSelect(bCat.sel, [{value:'*', label:'All products'}].concat(order.map(function(c){ return {value:c, label:c}; })), '— choose —');
+      bCat.sel.disabled = false;
+    });
+    bCat.sel.addEventListener('change', function(){
+      var sup = bSup.sel.value, cat = bCat.sel.value;
+      if (!cat){ bPrd.sel.disabled = true; fillSelect(bPrd.sel, [], '— choose —'); return; }
+      var prods = PRODUCTS.filter(function(p){ return p.supplier === sup && (cat === '*' || catLabel(p.type) === cat); });
+      prods.sort(function(a, b){ return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1; });
+      fillSelect(bPrd.sel, prods.map(function(p){ return {value: p.name + '  ·  ' + p.supplier, label: p.name}; }), '— choose —');
+      bPrd.sel.disabled = false;
+    });
+    bPrd.sel.addEventListener('change', function(){
+      if (!bPrd.sel.value) return;
+      inp.value = bPrd.sel.value;
+      doCompare();
+    });
+
     var out = el('div', 'margin-top:6px;'); wrap.appendChild(out);
     MOUNT.innerHTML = ''; MOUNT.appendChild(wrap);
 
-    btn.addEventListener('click', function(){
+    function doCompare(){
       var v = inp.value.trim();
       var mine = PRODUCTS.filter(function(p){ return (p.name+'  ·  '+p.supplier) === v; })[0]
               || PRODUCTS.filter(function(p){ return p.name.toLowerCase() === v.toLowerCase(); })[0]
@@ -117,7 +159,8 @@
       out.innerHTML = compare(mine, selAng.sel.value);
       addCopy(out);
       out.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    }
+    btn.addEventListener('click', doCompare);
 
     function link(text, id){ return '<a href="https://elevateandthrive.uk/?page_id=' + id + '" style="color:' + GOLD + ';font-weight:600;">' + text + '</a>'; }
     function lookupUrl(name){ return 'https://pilot.supplychain.nhs.uk/search?query=' + encodeURIComponent(String(name).replace(/\s*\(.*?\)\s*/g,' ').trim()); }
