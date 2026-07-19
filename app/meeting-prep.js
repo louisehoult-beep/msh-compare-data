@@ -225,7 +225,7 @@
             if (p.source) b += ' <a href="' + esc(p.source) + '" target="_blank" rel="noopener" style="font-size:11.5px;color:#8a8778;">verified source &#8599;</a>';
             return b;
           });
-          body += '<div style="margin-top:10px;font-weight:700;">Who you’re likely dealing with (named, from public sources):</div>' + li(pl);
+          body += '<div style="margin-top:10px;font-weight:700;">Publicly listed contacts to be aware of:</div>' + li(pl);
         }
         // Role-level fallbacks with one-click lookups.
         var ctc = (tr.contacts || []).map(function(c){
