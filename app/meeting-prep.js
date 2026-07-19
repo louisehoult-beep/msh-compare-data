@@ -198,6 +198,10 @@
         if (ctc.length && !(tr.people && tr.people.length)){
           body += '<div style="margin-top:8px;font-weight:700;">Who you’re meeting — looked up for you (opens in your LinkedIn):</div>' + li(ctc);
         }
+        // How their procurement actually works (booking systems, team structure).
+        if (tr.structure){
+          body += '<div style="margin-top:10px;font-weight:700;">How their procurement works:</div><div style="font-size:13px;line-height:1.6;color:#39424d;">' + esc(tr.structure) + '</div>';
+        }
         // What voices at/around the trust are saying publicly.
         if (tr.voices && tr.voices.length){
           var vl = tr.voices.map(function(v){
