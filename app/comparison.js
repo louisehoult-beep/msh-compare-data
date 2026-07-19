@@ -23,7 +23,10 @@
   var KEYPOINTS = {
     'BD — Becton, Dickinson': { 'nexiva': 'Closed IV system — fewer blood exposures/disconnections vs an open cannula', 'chloraprep': 'Single-use 2% CHG / 70% IPA sterile applicator' },
     'Coloplast': { 'speedicath': 'Ready-to-use hydrophilic catheter — no water needed' },
-    'Smith+Nephew': { 'pico': 'Single-use NPWT, no canister — NICE MTG43 evidence' }
+    'Smith+Nephew': { 'pico': 'Single-use NPWT, no canister — NICE MTG43 evidence' },
+    'GBUK Group': { 'pahacel': 'Oxidised regenerated cellulose (ORC) haemostat — same class as Surgicel; knit and fibrillar formats on NHS Supply Chain', 'surgiclean': 'Absorbable haemostat range alongside Pahacel' },
+    'Johnson & Johnson MedTech': { 'surgicel': 'The established ORC haemostat brand (Ethicon)', 'spongostan': 'Absorbable porcine gelatin sponge', 'surgiflo': 'Flowable gelatin haemostatic matrix' },
+    'Baxter Healthcare Ltd': { 'floseal': 'Flowable gelatin + thrombin haemostatic matrix', 'tisseel': 'Two-component fibrin sealant', 'hemopatch': 'Sealing haemostat patch' }
   };
   var ANGLE = {
     'Price / cost': 'Compare framework price (NHS Supply Chain, confirmed) and whole-life cost, then link it to the trust’s own savings target (their latest annual report) and build the number in the Value Case Calculator.',
