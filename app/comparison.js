@@ -85,17 +85,83 @@
     var wrap = el('div', 'font-family:Inter,system-ui,sans-serif;color:' + INK + ';');
     wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:' + OX + ';', 'NHS Intelligence Hub'));
     wrap.appendChild(el('div', 'font-size:24px;font-weight:800;margin:2px 0 4px;', 'Product Comparison'));
-    wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:720px;margin-bottom:12px;', 'Type <strong>your product</strong> — the tool finds the competing products automatically and compares them like-for-like, showing the <strong>real NHS Supply Chain detail on the page</strong>: product image, description and every pack’s NPC / MPC code.'));
+    wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:720px;margin-bottom:12px;', 'Pick your <strong>company</strong>, narrow by <strong>speciality</strong> and <strong>product type</strong>, then type the <strong>product name or an NHSSC code</strong> — the tool finds the competing products automatically and compares them like-for-like, with the <strong>real NHS Supply Chain detail on the page</strong>: product image, description and every pack’s NPC / MPC code.'));
 
-    var bar = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:10px;padding:12px;margin-bottom:14px;');
-    var pbox = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:300px;flex:2;');
-    pbox.appendChild(el('label', 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6b7684;', 'Your product'));
-    var inp = el('input', 'padding:9px 10px;border:1px solid ' + LINE + ';border-radius:8px;font-size:14px;'); inp.type='text'; inp.setAttribute('list','msh-prod-list'); inp.placeholder='e.g. BD Nexiva, Aquacel, SpeediCath…';
+    // Search flow: 1 Company -> 2 Speciality (from the supplier directory) ->
+    // 3 Product type -> 4 product name OR NHSSC code -> Compare.
+    var SUPOBJ = {}; suppliers.forEach(function(s){ SUPOBJ[s.name] = s; });
+    var SPECMAP = {
+      'vascular access': ['cannula','picc','midline','catheter','connector','flush','securement','needle','syringe','extension set','giving set','iv set','stopcock','infusion pump','syringe pump','pump'],
+      'wound care': ['dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','npwt','negative pressure','wound','tape','plaster','sealant'],
+      'surgical haemostasis': ['haemostat','sealant','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue'],
+      'enteral feeding': ['enteral','feeding','feeding tube','peg tube','syringe','connector'],
+      'patient handling': ['slide sheet','sling','hoist','bed','mattress','cushion','wheelchair'],
+      'continence': ['catheter','ostomy','urostomy','stoma','foley','nephrostomy','drainage'],
+      'ophthalmology': ['iol','intraocular','phaco'],
+      'diabetes': ['glucose','sensor','test strip','lancet','needle','pump'],
+      'surgery / theatres': ['suture','stapler','staple','haemostat','sealant','drape','gown','glove','scalpel','blade','forceps','retractor','trocar','clip','clamp','mesh','skin closure','tissue adhesive','electrode','suction','warming','warmer','scope','endoscope']
+    };
+    var bar = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:10px;padding:12px;margin-bottom:10px;');
+    var supNames0 = [], supSeen0 = {};
+    PRODUCTS.forEach(function(p){ if (!supSeen0[p.supplier]){ supSeen0[p.supplier] = 1; supNames0.push(p.supplier); } });
+    supNames0.sort(function(a,b){ return a.toLowerCase() < b.toLowerCase() ? -1 : 1; });
+    var selSup = mkSelect('1 · Company', [''].concat(supNames0));
+    var selSpec = mkSelect('2 · Speciality', ['']); selSpec.sel.disabled = true;
+    var selType = mkSelect('3 · Product type', ['']); selType.sel.disabled = true;
+    var pbox = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:260px;flex:2;');
+    pbox.appendChild(el('label', 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6b7684;', '4 · Product name or NHSSC code'));
+    var inp = el('input', 'padding:10px 12px;border:1px solid ' + LINE + ';border-radius:8px;font-size:14px;background:#fff !important;color:#20303f !important;'); inp.type='text'; inp.setAttribute('list','msh-prod-list'); inp.placeholder='e.g. Pahacel — or a code like ELS924';
     var dl = el('datalist'); dl.id='msh-prod-list';
-    var seen={}; PRODUCTS.forEach(function(p){ var v=p.name+'  ·  '+p.supplier; if(!seen[v]){ seen[v]=1; var o=el('option'); o.value=v; dl.appendChild(o);} });
-    pbox.appendChild(inp); pbox.appendChild(dl); bar.appendChild(pbox);
-    var btn = el('button', 'background:' + OX + ';color:#fff;border:0;border-radius:8px;padding:10px 18px;font-weight:700;font-size:14px;cursor:pointer;', 'Compare');
-    bar.appendChild(btn); wrap.appendChild(bar);
+    pbox.appendChild(inp); pbox.appendChild(dl);
+    var btn = el('button', 'background:#6B2A34 !important;color:#ffffff !important;border:0;border-radius:8px;padding:12px 24px;font-weight:800;font-size:15px;cursor:pointer;letter-spacing:.3px;box-shadow:0 1px 3px rgba(0,0,0,.15);', 'Compare');
+    bar.appendChild(selSup.box); bar.appendChild(selSpec.box); bar.appendChild(selType.box); bar.appendChild(pbox); bar.appendChild(btn);
+    wrap.appendChild(bar);
+    function rawTypesFor(sup, spec){
+      var allowed = spec ? SPECMAP[spec.toLowerCase()] : null;
+      var seenT = {}, out = [];
+      PRODUCTS.forEach(function(p){
+        if (sup && p.supplier !== sup) return;
+        if (!p.type) return;
+        if (allowed && allowed.indexOf(p.type) === -1) return;
+        if (!seenT[p.type]){ seenT[p.type] = 1; out.push(p.type); }
+      });
+      out.sort(); return out;
+    }
+    function subset(){
+      var sup = selSup.sel.value, spec = selSpec.sel.value, typ = selType.sel.value;
+      var allowed = (spec && !typ) ? SPECMAP[spec.toLowerCase()] : null;
+      return PRODUCTS.filter(function(p){
+        if (sup && p.supplier !== sup) return false;
+        if (typ && p.type !== typ) return false;
+        if (allowed && p.type && allowed.indexOf(p.type) === -1) return false;
+        return true;
+      });
+    }
+    function refreshList(){
+      dl.innerHTML = '';
+      var seenO = {};
+      subset().slice(0, 500).forEach(function(p){ var v = p.name + '  ·  ' + p.supplier; if (!seenO[v]){ seenO[v] = 1; var o = el('option'); o.value = v; dl.appendChild(o); } });
+    }
+    function fillSel(sel, opts, labelFn){
+      sel.innerHTML = '';
+      var o0 = el('option'); o0.value = ''; o0.textContent = '— all —'; sel.appendChild(o0);
+      opts.forEach(function(o){ var op = el('option'); op.value = o; op.textContent = labelFn ? labelFn(o) : o; sel.appendChild(op); });
+    }
+    selSup.sel.addEventListener('change', function(){
+      var sup = selSup.sel.value;
+      var s = SUPOBJ[sup];
+      fillSel(selSpec.sel, (s && s.specialities || []).slice().sort());
+      selSpec.sel.disabled = !sup;
+      fillSel(selType.sel, rawTypesFor(sup, ''), function(t){ return t.charAt(0).toUpperCase() + t.slice(1); });
+      selType.sel.disabled = !sup;
+      refreshList();
+    });
+    selSpec.sel.addEventListener('change', function(){
+      fillSel(selType.sel, rawTypesFor(selSup.sel.value, selSpec.sel.value), function(t){ return t.charAt(0).toUpperCase() + t.slice(1); });
+      refreshList();
+    });
+    selType.sel.addEventListener('change', refreshList);
+    refreshList();
 
     // Secondary / optional refinement — the like-for-like comparison is the main output.
     var opt = el('div', 'display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;margin:-6px 0 14px;padding-left:2px;');
@@ -105,61 +171,35 @@
     function mkSelect(label, opts){
       var box = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:210px;');
       box.appendChild(el('label', 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#9a958a;', esc(label)));
-      var sel = el('select', 'padding:7px 10px;border:1px solid ' + LINE + ';border-radius:8px;font-size:13px;background:#fff;color:#6b7684;');
+      var sel = el('select', 'padding:9px 10px;border:1px solid ' + LINE + ';border-radius:8px;font-size:13.5px;background:#ffffff !important;color:#20303f !important;');
       opts.forEach(function(o){ var op = el('option'); op.value = o; op.textContent = o || '— none —'; sel.appendChild(op); });
       box.appendChild(sel); return { box: box, sel: sel };
     }
-
-    // Guided filter for reps who don't know the product name: supplier -> category -> product.
-    var browse = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;background:' + SOFT + ';border:1px dashed ' + LINE + ';border-radius:10px;padding:10px 12px;margin:-6px 0 12px;');
-    browse.appendChild(el('div', 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6b7684;flex-basis:100%;', 'Don&rsquo;t know the product name? Filter down instead'));
-    var supNames = []; var supSeen = {};
-    PRODUCTS.forEach(function(p){ if (!supSeen[p.supplier]){ supSeen[p.supplier] = 1; supNames.push(p.supplier); } });
-    supNames.sort(function(a, b){ return a.toLowerCase() < b.toLowerCase() ? -1 : 1; });
-    var bSup = mkSelect('1 · Supplier', [''].concat(supNames));
-    var bCat = mkSelect('2 · Category', ['']);
-    var bPrd = mkSelect('3 · Product', ['']);
-    bCat.sel.disabled = true; bPrd.sel.disabled = true;
-    browse.appendChild(bSup.box); browse.appendChild(bCat.box); browse.appendChild(bPrd.box);
-    wrap.appendChild(browse);
-    function catLabel(t){ return t ? t.charAt(0).toUpperCase() + t.slice(1) : 'Other'; }
-    function fillSelect(sel, opts, placeholder){
-      sel.innerHTML = '';
-      var o0 = el('option'); o0.value = ''; o0.textContent = placeholder; sel.appendChild(o0);
-      opts.forEach(function(o){ var op = el('option'); op.value = o.value; op.textContent = o.label; sel.appendChild(op); });
-    }
-    bSup.sel.addEventListener('change', function(){
-      var sup = bSup.sel.value;
-      bPrd.sel.disabled = true; fillSelect(bPrd.sel, [], '— choose —');
-      if (!sup){ bCat.sel.disabled = true; fillSelect(bCat.sel, [], '— choose —'); return; }
-      var cats = {}, order = [];
-      PRODUCTS.forEach(function(p){ if (p.supplier === sup){ var c = catLabel(p.type); if (!cats[c]){ cats[c] = 1; order.push(c); } } });
-      order.sort();
-      fillSelect(bCat.sel, [{value:'*', label:'All products'}].concat(order.map(function(c){ return {value:c, label:c}; })), '— choose —');
-      bCat.sel.disabled = false;
-    });
-    bCat.sel.addEventListener('change', function(){
-      var sup = bSup.sel.value, cat = bCat.sel.value;
-      if (!cat){ bPrd.sel.disabled = true; fillSelect(bPrd.sel, [], '— choose —'); return; }
-      var prods = PRODUCTS.filter(function(p){ return p.supplier === sup && (cat === '*' || catLabel(p.type) === cat); });
-      prods.sort(function(a, b){ return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1; });
-      fillSelect(bPrd.sel, prods.map(function(p){ return {value: p.name + '  ·  ' + p.supplier, label: p.name}; }), '— choose —');
-      bPrd.sel.disabled = false;
-    });
-    bPrd.sel.addEventListener('change', function(){
-      if (!bPrd.sel.value) return;
-      inp.value = bPrd.sel.value;
-      doCompare();
-    });
 
     var out = el('div', 'margin-top:6px;'); wrap.appendChild(out);
     MOUNT.innerHTML = ''; MOUNT.appendChild(wrap);
 
     function doCompare(){
       var v = inp.value.trim();
-      var mine = PRODUCTS.filter(function(p){ return (p.name+'  ·  '+p.supplier) === v; })[0]
-              || PRODUCTS.filter(function(p){ return p.name.toLowerCase() === v.toLowerCase(); })[0]
-              || PRODUCTS.filter(function(p){ return v && p.name.toLowerCase().indexOf(v.toLowerCase()) !== -1; })[0];
+      var pool = subset();
+      var mine = null;
+      // NHSSC code search: NPC or MPC typed directly.
+      var code = v.toUpperCase().replace(/[^A-Z0-9]/g, '');
+      if (code.length >= 4 && /\d/.test(code)){
+        for (var ck in cp){
+          if ((cp[ck].items || []).some(function(it){ return it.npc === code || it.mpc === code; })){
+            mine = PRODUCTS.filter(function(p){ return nk(p.name) === nk(ck); })[0];
+            if (mine) break;
+          }
+        }
+      }
+      function find(list){
+        return list.filter(function(p){ return (p.name+'  ·  '+p.supplier) === v; })[0]
+            || list.filter(function(p){ return p.name.toLowerCase() === v.toLowerCase(); })[0]
+            || list.filter(function(p){ return v && p.name.toLowerCase().indexOf(v.toLowerCase()) !== -1; })[0];
+      }
+      if (!mine && v) mine = find(pool) || find(PRODUCTS);
+      if (!mine && !v && pool.length && pool.length <= 1) mine = pool[0];
       out.innerHTML = compare(mine, selAng.sel.value);
       addCopy(out);
       var hb = out.querySelector('#msh-handoff');
@@ -370,7 +410,7 @@
 
     function addCopy(container){
       if (!container.textContent || container.textContent.indexOf('Type your product') !== -1) return;
-      var b = el('button', 'background:' + INK + ';color:#fff;border:0;border-radius:8px;padding:8px 14px;font-weight:700;font-size:13px;cursor:pointer;margin:4px 0 10px;', 'Copy brief');
+      var b = el('button', 'background:#a8842c !important;color:#ffffff !important;border:0;border-radius:8px;padding:9px 16px;font-weight:800;font-size:13.5px;cursor:pointer;margin:4px 0 10px;box-shadow:0 1px 3px rgba(0,0,0,.12);', 'Copy brief');
       b.addEventListener('click', function(){ var t = container.innerText.replace('Copy brief','').trim(); if (navigator.clipboard) { navigator.clipboard.writeText(t); b.textContent='Copied ✓'; setTimeout(function(){ b.textContent='Copy brief'; }, 1500); } });
       container.insertBefore(b, container.firstChild);
     }
