@@ -50,7 +50,7 @@
   function render(index, cfg, seed, nhssc){
     var suppliers = (index && index.suppliers) || [];
     var seedMap = {}; ((seed && seed.suppliers) || []).forEach(function(s){ seedMap[s.name] = s; });
-    suppliers.forEach(function(s){ var sd = seedMap[s.name]; if (sd){ ['voice','products','frameworks','specialities'].forEach(function(k){ if (sd[k] && (!Array.isArray(sd[k]) || sd[k].length)) s[k] = sd[k]; }); } });
+    suppliers.forEach(function(s){ var sd = seedMap[s.name]; if (sd){ ['voice','products','frameworks','specialities','alerts'].forEach(function(k){ if (sd[k] && (!Array.isArray(sd[k]) || sd[k].length)) s[k] = sd[k]; }); } });
     var have = {}; suppliers.forEach(function(s){ have[s.name] = 1; });
     ((seed && seed.suppliers) || []).forEach(function(s){ if (!have[s.name]){ s.curated = true; suppliers.push(s); } });
 
@@ -394,7 +394,21 @@
         return true;
       }
       var reasons = [];
+      function alertsFor(p){
+        var sA = SUPOBJ[p.supplier]; if (!sA || !sA.alerts || !sA.alerts.length) return [];
+        var keyw = (String(p.name).split(/[\s(]/)[0] || '').toLowerCase();
+        return sA.alerts.filter(function(a){ return keyw && ((a.title || '') + ' ' + (a.detail || '')).toLowerCase().indexOf(keyw) !== -1; });
+      }
+      var compAlerted = comps.slice(0, 6).map(function(p){ return { p: p, al: alertsFor(p) }; }).filter(function(x){ return x.al.length; });
+      var mineAlerts = alertsFor(mine);
       if (edge) reasons.push('<strong>Your edge (lead with this):</strong> ' + esc(edge) + '. That is the reason for the meeting — everything below supports it.');
+      compAlerted.forEach(function(x){
+        var a = x.al[0];
+        reasons.push('<strong>Live MHRA / safety action on a rival line:</strong> ' + esc(x.p.name) + ' — ' + esc(a.title) + (a.date ? ' (' + esc(a.date) + ')' : '') + '. ' + esc(a.detail || '') + (a.use ? ' <em>' + esc(a.use) + '</em>' : '') + (a.url ? ' <a href="' + a.url + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11px;font-weight:600;">official alert &#8599;</a>' : '') + ' Quote the official alert verbatim — never embellish a safety issue.');
+      });
+      if (mineAlerts.length){
+        reasons.push('<strong>Be upfront — your own line carries an active alert:</strong> ' + esc(mineAlerts[0].title) + '. Raise it before they do, with your remediation story ready; credibility is won here.');
+      }
       var wobbly = comps.filter(function(p){ var d2 = detailFor(p); return d2 && d2.items.some(function(it){ return it.status; }); }).slice(0, 2);
       if (wobbly.length){
         reasons.push('<strong>Supply reliability:</strong> ' + wobbly.map(function(p){ return esc(p.name) + ' (' + esc(p.supplier) + ')'; }).join(' and ') + ' currently show a suspended or updated pack on the live catalogue. If that is their incumbent, continuity of supply is your opening — a stockout is the one problem procurement cannot ignore.');
@@ -483,8 +497,8 @@
           on: (typeof trueTwin !== 'undefined' && !!trueTwin), note:'true like-for-like = a light evaluation \u2014 design it WITH their clinical lead'},
         {n:'Training & implementation support (scored)', ev:'Ease of use, training and implementation support are explicitly scored inside the mandatory 60% VBP value weighting.', src:'https://www.gov.uk/government/publications/value-based-procurement-for-medical-technology',
           on: ((typeof trueTwin !== 'undefined' && !!trueTwin) || /train|support|implement|educat/i.test(edge||'')), note:'same-steps switch or a training offer \u2014 either scores here'},
-        {n:'Safety alerts & regulation', ev:'MHRA alerts and regulation force substitutions (e.g. the 2013 Sharps Regulations drove NHS-wide device switches).', src:'https://www.hse.gov.uk/pubns/hsis7.htm',
-          on: false, note:'watch the Live Desk \u2014 if an alert touches the incumbent, this becomes your strongest driver overnight'},
+        {n:'Safety alerts & regulation', ev:'MHRA alerts and regulation force substitutions (e.g. the 2013 Sharps Regulations drove NHS-wide device switches).', src: (compAlerted.length && compAlerted[0].al[0].url) ? compAlerted[0].al[0].url : 'https://www.hse.gov.uk/pubns/hsis7.htm',
+          on: compAlerted.length > 0, note: compAlerted.length ? ('a live MHRA action touches ' + compAlerted[0].p.name + ' \u2014 this is your strongest driver right now') : 'watch the Live Desk \u2014 if an alert touches the incumbent, this becomes your strongest driver overnight'},
         {n:'Sustainability / net zero', ev:'10% minimum social value weighting now; full scope 1\u20133 Carbon Reduction Plans required from April 2027.', src:'https://www.england.nhs.uk/long-read/2027-nhs-carbon-reduction-plan-requirements/',
           on: /carbon|sustain|green|packag/i.test(edge||''), note:'if you hold a carbon/packaging advantage, it is scored \u2014 quantify it in the Sustainability Calculator'},
         {n:'Relationships & trust', ev:'Established supplier contacts cement incumbents (published NHS evidence) \u2014 which is why the relationship IS the strategy.', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC8512597/',
