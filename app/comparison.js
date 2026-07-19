@@ -154,6 +154,17 @@
       return '<img src="' + esc(it.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display=\'none\'" style="width:' + px + 'px;height:' + px + 'px;object-fit:contain;background:#fff;border:1px solid ' + LINE + ';border-radius:6px;flex:0 0 auto;">';
     }
 
+    // Supplier frameworks are supplier-level facts; only attribute one to a product
+    // when the product's own category appears in the framework name — never imply a
+    // haemostat is "on" the supplier's cannula framework.
+    function fwFor(p){
+      if (!p.framework) return '';
+      var f = p.framework.toLowerCase();
+      if (p.type && f.indexOf(p.type) !== -1) return p.framework;
+      var toks = (p.name.toLowerCase().match(/[a-z]{5,}/g) || []);
+      for (var i = 0; i < toks.length; i++){ if (f.indexOf(toks[i]) !== -1) return p.framework; }
+      return '';
+    }
     function row(p, mine){
       var hl = mine ? 'background:#fbeef0;font-weight:600;' : '';
       var kpt = kp(p);
@@ -173,7 +184,7 @@
       return '<tr style="' + hl + 'border-bottom:1px solid ' + LINE + ';vertical-align:top;">'
         + '<td style="padding:7px 9px;">' + prodCell + '</td>'
         + '<td style="padding:7px 9px;">' + esc(p.supplier) + '</td>'
-        + '<td style="padding:7px 9px;color:#5a6470;font-size:12.5px;">' + (p.framework ? esc(p.framework) : '<span style="color:#8a8778;">—</span>') + '</td>'
+        + '<td style="padding:7px 9px;color:#5a6470;font-size:12.5px;">' + (fwFor(p) ? esc(fwFor(p)) : '<span style="color:#8a8778;">—</span>') + '</td>'
         + '<td style="padding:7px 9px;color:#5a6470;">' + codeCell + '</td>'
         + '<td style="padding:7px 9px;color:#39424d;font-size:12.5px;">' + (kpt ? esc(kpt) : '<span style="color:#8a8778;">—</span>') + '</td></tr>';
     }
@@ -204,7 +215,7 @@
       return 'Handle it the MSTP way — <strong>Acknowledge &rarr; Reframe &rarr; One more question</strong>:'
         + '<ul style="margin:4px 0 0;padding-left:18px;">'
         + '<li><strong>Acknowledge:</strong> “' + esc(c) + ' is a solid choice — I can see why you use it.”</li>'
-        + '<li><strong>Reframe</strong> to your edge: ' + esc(edge) + (mine.framework ? ' — and it’s on ' + esc(mine.framework) + '.' : '.') + '</li>'
+        + '<li><strong>Reframe</strong> to your edge: ' + esc(edge) + (fwFor(mine) ? ' — and it’s on ' + esc(fwFor(mine)) + '.' : (detailFor(mine) ? ' — and it’s on the live NHS Supply Chain catalogue.' : '.')) + '</li>'
         + '<li><strong>One more question:</strong> “If I could show you where ' + esc(mine.name) + ' saves time or reduces a complication versus ' + esc(top ? top.name : 'your current option') + ', would that be worth a short trial?”</li>'
         + '</ul>';
     }
@@ -231,9 +242,10 @@
 
       // real difference
       var diffs = [];
-      if (mine.framework) diffs.push('You’re on <strong>' + esc(mine.framework) + '</strong> — make the buying route easy.');
-      var offFw = comps.filter(function(p){ return !p.framework; }).length;
-      if (offFw) diffs.push(offFw + ' competing product(s) show no confirmed framework — a route advantage worth naming.');
+      if (fwFor(mine)) diffs.push('You’re on <strong>' + esc(fwFor(mine)) + '</strong> — make the buying route easy.');
+      else if (detailFor(mine)) diffs.push('You’re listed on the live NHS Supply Chain catalogue (codes below) — make the buying route easy.');
+      var offFw = comps.filter(function(p){ return !fwFor(p) && !detailFor(p); }).length;
+      if (offFw) diffs.push(offFw + ' competing product(s) show no confirmed framework or live catalogue listing — a route advantage worth naming.');
       if (kp(mine)) diffs.push('Your edge: ' + esc(kp(mine)));
       diffs.push('The detailed spec difference: use the AI prompt below (or it answers itself once the Hub AI is live).');
       h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + OX + ';border-radius:10px;padding:14px 16px;margin:14px 0 12px;"><div style="font-size:15px;font-weight:800;">The real difference — and how to use it</div><div style="font-size:14px;line-height:1.6;color:#39424d;margin-top:4px;"><ul style="margin:2px 0 0;padding-left:18px;">' + diffs.map(function(x){return '<li style="margin:2px 0;">'+x+'</li>';}).join('') + '</ul></div></div>';
