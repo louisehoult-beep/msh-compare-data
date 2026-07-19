@@ -134,7 +134,22 @@
       function add(p){ var k = p.name + '|' + p.supplier; if (p.supplier !== mine.supplier && !seen[k]){ seen[k] = 1; out.push(p); } }
       if (mine.type){
         var same = PRODUCTS.filter(function(p){ return p.supplier !== mine.supplier && p.type === mine.type; });
-        same.sort(function(a, b){ return specOverlap(mine.specs, b.specs) - specOverlap(mine.specs, a.specs); });
+        // Rank the closest like-for-like first: overlap of 8-char word stems from the
+        // product name + its live catalogue description (e.g. Pahacel [ORC] ranks
+        // Surgicel [ORC] above a flowable matrix), then cached detail, then speciality.
+        function stems(p){
+          var d = CACHE[nk(p.name)];
+          var txt = p.name + ' ' + ((d && d.items && d.items[0] && d.items[0].desc) || '');
+          var out = {}; (txt.toLowerCase().match(/[a-z]{5,}/g) || []).forEach(function(w){ out[w.slice(0, 8)] = 1; });
+          return out;
+        }
+        var myStems = stems(mine);
+        function score(p){
+          var n = 0, s = stems(p);
+          for (var k in s){ if (myStems[k]) n++; }
+          return n * 10 + (detailFor(p) ? 5 : 0) + specOverlap(mine.specs, p.specs);
+        }
+        same.sort(function(a, b){ return score(b) - score(a); });
         same.forEach(add);
       } else {
         var mt = sigTokens(mine.name);
