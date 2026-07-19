@@ -21,7 +21,8 @@
 
   var TYPES = ['antisepsis','antiseptic','chlorhexidine','skin prep','skin disinfect','disinfectant','applicator','swabstick','swab','tourniquet','blood culture','cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','tape','plaster','npwt','negative pressure','wound','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','tracheostomy','tracheal','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','lancet','connector','stopcock','extension set','giving set','iv set','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct scan','x-ray','mammography','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','warming','securement','ostomy','urostomy','stoma','nephrostomy','foley','feeding','enteral','feeding tube','peg tube','slide sheet','glucose','sensor','test strip','electrode','scalpel','blade','forceps','retractor','trocar','clip','clamp','specimen','drainage','chest drain','suction','mask','circuit','cpap','oxygen','nebuliser','filter','lubricant'];
   var KEYPOINTS = {
-    'BD — Becton, Dickinson': { 'nexiva': 'Closed IV system — fewer blood exposures/disconnections vs an open cannula', 'chloraprep': 'Single-use 2% CHG / 70% IPA sterile applicator' },
+    'BD — Becton, Dickinson': { 'nexiva': 'Closed IV system — fewer blood exposures/disconnections vs an open cannula', 'chloraprep': 'Licensed medicinal product (UK marketing authorisation) — 2% CHG / 70% IPA sterile applicator, indicated for skin disinfection before invasive procedures' },
+    'PDI (EMEA)': { 'prevantics': 'Tinted 2% CHG / 70% IPA applicator range — listed as a PT1 skin biocide in the UK (not a licensed medicine)' },
     'Coloplast': { 'speedicath': 'Ready-to-use hydrophilic catheter — no water needed' },
     'Smith+Nephew': { 'pico': 'Single-use NPWT, no canister — NICE MTG43 evidence' },
     'GBUK Group': { 'pahacel': 'Oxidised regenerated cellulose (ORC) haemostat — same class as Surgicel; knit and fibrillar formats on NHS Supply Chain', 'surgiclean': 'Absorbable haemostat range alongside Pahacel' },
@@ -369,6 +370,15 @@
         else if (/patch/.test(txt)) a.form = 'patch';
         else if (/sponge/.test(txt)) a.form = 'sponge';
         else if (/sealant|adhesive/.test(txt)) a.form = 'sealant/adhesive';
+        if (/medicinal product/.test(txt)) a.reg = 'a licensed medicinal product';
+        else if (/biocide/.test(txt)) a.reg = 'a biocide (not a licensed medicine)';
+        if (/latex.?free/.test(txt)) a.latex = 'latex-free';
+        else if (/\blatex\b/.test(txt)) a.latex = 'natural rubber latex';
+        if (/silver alloy|silver.?coated|\bsilver\b/.test(txt)) a.silver = true;
+        if (/blood control/.test(txt)) a.bloodctl = true;
+        if (/needle.?free/.test(txt)) a.needlefree = true;
+        if (/\btint/.test(txt)) a.tint = true;
+        if (/\bdehp\b/.test(txt)) a.dehp = true;
         return a;
       }
       var myA0 = attrsOf(mine);
@@ -377,6 +387,9 @@
         if (!myA0 || !pa || !myA0.form || !pa.form || myA0.form !== pa.form) return false;
         // same format = same steps; a KNOWN material difference breaks it
         if (myA0.material && pa.material && myA0.material !== pa.material) return false;
+        // a regulatory-status or latex difference also breaks a "straight swap"
+        if ((myA0.reg || pa.reg) && myA0.reg !== pa.reg) return false;
+        if ((myA0.latex || pa.latex) && myA0.latex !== pa.latex) return false;
         return true;
       }
       var reasons = [];
@@ -401,11 +414,27 @@
         if (bioRivals.length){ reasons.push('<strong>Prep, storage and cost class:</strong> ' + bioRivals.map(function(p){ return esc(p.name); }).join(' and ') + ' carry biologic components (prep/storage/cost implications); yours is ready off the shelf.'); }
         if (/biologic/.test(myA0.material)){ reasons.push('<strong>Performance positioning:</strong> your active biologic mechanism is the premium argument — position on speed and reliability of haemostasis, not price.'); }
       }
+      if (myA0 && myA0.reg && /licensed/.test(myA0.reg)){
+        var biocideRivals = comps.slice(0,6).filter(function(p){ var a = attrsOf(p); return a && a.reg && /biocide/.test(a.reg); });
+        if (biocideRivals.length){ reasons.push('<strong>Regulatory status (your strongest card):</strong> the catalogue lists your product as a <em>medicinal product</em> while ' + biocideRivals.map(function(p){ return esc(p.name); }).join(' and ') + ' is listed as a <em>biocide</em>. For skin prep before an invasive procedure, a licensed medicine with that indication is the defensible procurement choice — verify both products\u2019 SmPC/labelling, then lead with the licence.'); }
+      }
+      if (myA0 && myA0.reg && /biocide/.test(myA0.reg)){
+        var licRivals = comps.slice(0,6).filter(function(p){ var a = attrsOf(p); return a && a.reg && /licensed/.test(a.reg); });
+        if (licRivals.length){ reasons.push('<strong>Be ready for the licence question:</strong> ' + licRivals.map(function(p){ return esc(p.name); }).join(' and ') + ' is listed on the catalogue as a licensed <em>medicinal product</em> while yours is listed as a <em>biocide</em>. If the intended use is pre-procedure skin prep, expect medicines-policy scrutiny — know your regulatory position and intended-use wording before the meeting.'); }
+      }
+      if (myA0 && myA0.latex === 'latex-free'){
+        var latexRivals = comps.slice(0,6).filter(function(p){ var a = attrsOf(p); return a && a.latex === 'natural rubber latex'; });
+        if (latexRivals.length){ reasons.push('<strong>Latex-free:</strong> ' + latexRivals.map(function(p){ return esc(p.name); }).join(' and ') + ' is natural rubber latex on the catalogue listing; yours is latex-free — latex allergy affects patients <em>and</em> staff, and many trust policies now default to latex-free. A genuine clinical-choice reason.'); }
+      }
+      if (myA0 && myA0.silver){
+        var plainRivals = comps.slice(0,6).filter(function(p){ var a = attrsOf(p); return a && !a.silver; });
+        if (plainRivals.length === comps.slice(0,6).length && comps.length){ reasons.push('<strong>Antimicrobial element:</strong> your catalogue entry carries a silver/antimicrobial component the listed competitors\u2019 entries do not mention — infection prevention is a scored, board-level priority. Confirm the claim wording against your IFU before quoting it clinically.'); }
+      }
       reasons.push('<strong>Sustainability:</strong> carbon is scored at tender (Evergreen from Apr 2026) — if your product or packaging carries a carbon advantage, quantify it in the Sustainability Calculator; it feeds the tender weighting.');
       reasons.push('<strong>Price check:</strong> framework prices are visible to catalogue account holders — compare unit and whole-life cost there before the meeting; if you win on price, that is the simplest case of all.');
       var caseHtml;
       if (!edge && !wobbly.length && !kp(mine)){
-        caseHtml = '<div style="background:#fbf3df;border:1px solid #e8d5a8;border-radius:8px;padding:10px 14px;margin:0 0 8px;font-size:13.5px;color:#7a5b14;"><strong>The data shows no obvious switch reason — so what\\u2019s yours?</strong> If nothing is wrong with their current supplier, the trust has no reason to change. Type your edge above (a price saving, next-day supply, service and training, UK stockholding, clinical preference) and the case builds around it.</div>'
+        caseHtml = '<div style="background:#fbf3df;border:1px solid #e8d5a8;border-radius:8px;padding:10px 14px;margin:0 0 8px;font-size:13.5px;color:#7a5b14;"><strong>The data shows no obvious switch reason — so what’s yours?</strong> If nothing is wrong with their current supplier, the trust has no reason to change. Type your edge above (a price saving, next-day supply, service and training, UK stockholding, clinical preference) and the case builds around it.</div>'
           + (reasons.length ? '<ul style="margin:2px 0 0;padding-left:18px;">' + reasons.map(function(x){ return '<li style="margin:3px 0;">' + x + '</li>'; }).join('') + '</ul>' : '');
       } else {
         caseHtml = '<ul style="margin:2px 0 0;padding-left:18px;">' + reasons.map(function(x){ return '<li style="margin:3px 0;">' + x + '</li>'; }).join('') + '</ul>';
@@ -424,8 +453,8 @@
           caseHtml += '<div style="margin-top:10px;padding:10px 14px;background:#edf5ee;border-left:3px solid ' + GRN + ';border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.6;color:#39424d;"><strong>Then make the switch easy.</strong> ' + esc(top.name) + ' is the same class but a different format — the evaluation is still straightforward, but be upfront that the steps differ and plan familiarisation/training into your offer. Owning that honestly is more credible than glossing it.</div>';
         }
       }
-      if (fwFor(mine)) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you\\u2019re on ' + esc(fwFor(mine)) + ' — ordering is the easy part.</div>';
-      else if (dMine) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you\\u2019re live on the NHS Supply Chain catalogue (codes below) — ordering is the easy part.</div>';
+      if (fwFor(mine)) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you’re on ' + esc(fwFor(mine)) + ' — ordering is the easy part.</div>';
+      else if (dMine) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you’re live on the NHS Supply Chain catalogue (codes below) — ordering is the easy part.</div>';
       h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">The case for switching — what are you giving them?</div><div style="font-size:14px;line-height:1.65;color:#39424d;margin-top:6px;">' + caseHtml + '</div></div>';
 
       // WHY TRUSTS ACTUALLY SWITCH — the evidenced drivers (researched & sourced),
@@ -467,7 +496,8 @@
       // descriptions (material / mechanism / format / readiness), each with why it
       // matters in the buying conversation. Honest: only what the data supports.
       var myA = attrsOf(mine);
-      if (myA && (myA.material || myA.form)){
+      function sellable(a){ return !!(a && (a.material || a.form || a.reg || a.latex || a.silver || a.bloodctl || a.needlefree || a.tint || a.dehp)); }
+      if (myA && (sellable(myA) || comps.slice(0,5).some(function(p){ return sellable(attrsOf(p)); }))){
         var diffs2 = [];
         comps.slice(0, 5).forEach(function(p){
           var pa = attrsOf(p); if (!pa) return;
@@ -483,11 +513,28 @@
             pts.push('their format is ' + esc(pa.form) + ', yours is ' + esc(myA.form));
             if (/flowable/.test(pa.form) && /fabric|sponge|patch/.test(myA.form)) pts.push('<em>why it matters:</em> a flowable needs an applicator and prep at the table; a fabric is open-and-apply');
           }
-          if (!pts.length && pa.packs !== myA.packs) pts.push('closest match in material and format — the differences are pack range (' + myA.packs + ' vs ' + pa.packs + '), price and service, so your edge above carries the argument');
+          if ((myA.reg || pa.reg) && myA.reg !== pa.reg){
+            pts.push('the catalogue lists yours as ' + esc(myA.reg || 'unstated') + ' and theirs as ' + esc(pa.reg || 'unstated'));
+            if (myA.reg && /licensed/.test(myA.reg) && pa.reg && /biocide/.test(pa.reg)) pts.push('<em>why it matters:</em> for skin prep before invasive procedures, medicines and IPC policies generally require a licensed medicine with that indication — a biocide is for general skin disinfection. This is the difference that wins the meeting; verify both SmPCs/labels first');
+            else if (myA.reg && /biocide/.test(myA.reg) && pa.reg && /licensed/.test(pa.reg)) pts.push('<em>why it matters:</em> expect the licensing question if the use is pre-procedure skin prep — prepare your regulatory answer before the meeting');
+          }
+          if ((myA.latex || pa.latex) && myA.latex !== pa.latex){
+            pts.push('yours is ' + esc(myA.latex || 'latex status unstated') + ', theirs is ' + esc(pa.latex || 'latex status unstated'));
+            if (myA.latex === 'latex-free' && pa.latex === 'natural rubber latex') pts.push('<em>why it matters:</em> latex allergy (patients and staff) makes latex-free the default in many trust policies');
+          }
+          if (myA.silver && !pa.silver) pts.push('your entry carries a silver/antimicrobial element theirs does not mention — an infection-prevention angle (confirm against your IFU before quoting clinically)');
+          if (pa.silver && !myA.silver) pts.push('their entry carries a silver/antimicrobial element yours does not — be ready to answer the infection-prevention question');
+          if (myA.bloodctl && !pa.bloodctl) pts.push('your entry specifies blood-control technology theirs does not mention — a sharps/exposure-safety angle (the 2013 Sharps Regulations make exposure reduction a legal duty)');
+          if (pa.bloodctl && !myA.bloodctl) pts.push('their entry specifies blood-control technology yours does not — know your answer on exposure safety');
+          if (myA.needlefree && !pa.needlefree) pts.push('your entry includes an integrated needle-free connector theirs does not mention — fewer parts to order and fewer connections to break');
+          if (myA.tint && !pa.tint) pts.push('your entry is a tinted solution and theirs does not mention tint — clinicians can see exactly where skin has been prepped');
+          if (pa.tint && !myA.tint) pts.push('their entry is a tinted solution and yours does not mention tint — be ready for the visible-coverage point');
+          if (pa.dehp && !myA.dehp) pts.push('their entry notes DEHP and yours does not mention it — if your product is DEHP-free, that supports the safety and sustainability conversation (verify before claiming)');
+          if (!pts.length && (myA.material || myA.form) && pa.packs !== myA.packs) pts.push('closest match in material and format — the differences are pack range (' + myA.packs + ' vs ' + pa.packs + '), price and service, so your edge above carries the argument');
           if (pts.length) diffs2.push(line + pts.join('; ') + '.');
         });
         if (diffs2.length){
-          h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + OX + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">Why one over the other — real differences from the catalogue data</div><div style="font-size:13.5px;line-height:1.65;color:#39424d;margin-top:6px;"><ul style="margin:2px 0 0;padding-left:18px;">' + diffs2.map(function(x){ return '<li style="margin:4px 0;">' + x + '</li>'; }).join('') + '</ul></div><div style="font-size:11.5px;color:#8a8778;margin-top:6px;">Derived from the products\\u2019 own NHS Supply Chain catalogue descriptions. Class-level differences — always confirm specifics against the manufacturer\\u2019s IFU before quoting clinically.</div></div>';
+          h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + OX + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">Why one over the other — real differences from the catalogue data</div><div style="font-size:13.5px;line-height:1.65;color:#39424d;margin-top:6px;"><ul style="margin:2px 0 0;padding-left:18px;">' + diffs2.map(function(x){ return '<li style="margin:4px 0;">' + x + '</li>'; }).join('') + '</ul></div><div style="font-size:11.5px;color:#8a8778;margin-top:6px;">Derived from the products’ own NHS Supply Chain catalogue descriptions. Class-level differences — always confirm specifics against the manufacturer’s IFU before quoting clinically.</div></div>';
         }
       }
 
