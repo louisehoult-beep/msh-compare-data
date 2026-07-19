@@ -12,8 +12,8 @@
 
   function shell(){
     MOUNT.innerHTML=''+
-    '<div style="font-family:Inter,-apple-system,Segoe UI,sans-serif;background:#fff;border:1px solid '+LINE+';border-top:3px solid '+G+';border-radius:12px;box-shadow:0 1px 3px rgba(29,39,51,.06);overflow:hidden;margin:0 0 8px;">'+
-      '<div style="padding:16px 18px 6px;">'+
+    '<div style="font-family:Inter,-apple-system,Segoe UI,sans-serif;margin:0;">'+
+      '<div style="padding:2px 0 6px;">'+
         '<div style="font-size:11.5px;letter-spacing:2px;font-weight:700;color:'+G+';">SUPPLIER INTELLIGENCE SEARCH</div>'+
         '<p style="margin:5px 0 12px;font-size:13.5px;color:'+DIM+';">Type a supplier or brand — get their frameworks, products, and live alerts/recalls, all in one place. <span id="mssCount"></span></p>'+
         '<input id="mssInput" list="mssList" autocomplete="off" placeholder="e.g. BD, Vygon, Coloplast, Nexiva…" '+
