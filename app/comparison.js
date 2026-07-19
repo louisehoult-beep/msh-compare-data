@@ -162,6 +162,14 @@
               || PRODUCTS.filter(function(p){ return v && p.name.toLowerCase().indexOf(v.toLowerCase()) !== -1; })[0];
       out.innerHTML = compare(mine, selAng.sel.value);
       addCopy(out);
+      var hb = out.querySelector('#msh-handoff');
+      if (hb){
+        hb.addEventListener('click', function(){
+          var payload = { company: hb.getAttribute('data-supplier'), product: hb.getAttribute('data-product'), ts: Date.now() };
+          try { localStorage.setItem('mshPrepHandoff', JSON.stringify(payload)); } catch(e){}
+          try { window.dispatchEvent(new CustomEvent('msh-prep-handoff', { detail: payload })); } catch(e){}
+        });
+      }
       out.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     btn.addEventListener('click', doCompare);
@@ -295,6 +303,35 @@
         + row(mine, true) + comps.map(function(p){ return row(p, false); }).join('') + '</tbody></table></div>';
       if (!comps.length) h += '<div style="font-size:12.5px;color:#8a8778;margin-top:4px;">No competing products matched automatically — broaden the product name or check the supplier directory.</div>';
 
+      // Product-specific: how yours compares + points worth highlighting (all from real data)
+      var hi = [];
+      var top = comps[0];
+      if (top){
+        var myWords = (mine.name + ' ' + ((detailFor(mine) && detailFor(mine).items[0].desc) || '')).toLowerCase().match(/[a-z]{5,}/g) || [];
+        var topWords = (top.name + ' ' + ((detailFor(top) && detailFor(top).items[0].desc) || '')).toLowerCase().match(/[a-z]{5,}/g) || [];
+        var topStem = {}; topWords.forEach(function(w){ topStem[w.slice(0,8)] = 1; });
+        var sharedSeen = {}, shared = [];
+        myWords.forEach(function(w){ var s = w.slice(0,8); if (topStem[s] && !sharedSeen[s]){ sharedSeen[s] = 1; shared.push(w); } });
+        hi.push('<strong>Closest like-for-like: ' + esc(top.name) + '</strong> (' + esc(top.supplier) + ')' + (shared.length ? ' — same class: <em>' + esc(shared.slice(0,4).join(', ')) + '</em>.' : '.') + ' That is the comparison the buyer will make — open with it, don’t wait for it.');
+      }
+      var dMine = detailFor(mine);
+      if (dMine && dMine.items.length){
+        var line = '<strong>Your live catalogue range:</strong> ' + dMine.items.length + ' pack format' + (dMine.items.length > 1 ? 's' : '') + ' listed';
+        var dTop = top && detailFor(top);
+        if (dTop) line += ' (vs ' + dTop.items.length + ' for ' + esc(top.name) + ')';
+        hi.push(line + ' — match the format conversation to how their theatres actually order.');
+      }
+      var wobbly = comps.filter(function(p){ var d2 = detailFor(p); return d2 && d2.items.some(function(it){ return it.status; }); }).slice(0, 2);
+      if (wobbly.length){
+        hi.push('<strong>Catalogue watch:</strong> ' + wobbly.map(function(p){ return esc(p.name); }).join(' and ') + ' currently show a suspended/updated pack on the live catalogue — know their supply position before they raise yours.');
+      }
+      if (kp(mine)) hi.push('<strong>Lead with your edge:</strong> ' + esc(kp(mine)) + '.');
+      if (fwFor(mine)) hi.push('<strong>Buying route:</strong> you’re on ' + esc(fwFor(mine)) + ' — make ordering the easy part.');
+      else if (dMine) hi.push('<strong>Buying route:</strong> you’re live on the NHS Supply Chain catalogue (codes below) — make ordering the easy part.');
+      if (hi.length){
+        h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">How yours compares — points to highlight</div><div style="font-size:14px;line-height:1.65;color:#39424d;margin-top:4px;"><ul style="margin:2px 0 0;padding-left:18px;">' + hi.map(function(x){ return '<li style="margin:3px 0;">' + x + '</li>'; }).join('') + '</ul></div></div>';
+      }
+
       // On-page product detail (image + every pack code) for your product + top competitors
       var withDetail = [mine].concat(comps).filter(function(p){ return detailFor(p); });
       if (withDetail.length){
@@ -325,6 +362,8 @@
       var prompt = 'Compare ' + mine.name + ' (' + mine.supplier + ') against ' + names + ' for an NHS buyer: the key clinical and practical differences, where each wins, and how I sell ' + mine.name + ' against them. Bullet points.';
       h += '<div style="background:' + SOFT + ';border:1px dashed ' + GOLD + ';border-radius:10px;padding:12px 16px;margin:12px 0;"><div style="font-size:13px;font-weight:700;color:' + INK + ';">Deep product-by-product detail — copy into your AI assistant:</div><div style="font-size:13px;color:#39424d;background:#fff;border:1px solid ' + LINE + ';border-radius:6px;padding:8px 10px;margin-top:6px;font-family:ui-monospace,Menlo,monospace;">' + esc(prompt) + '</div><div style="font-size:12px;color:#8a8778;margin-top:6px;">Once the Hub’s AI integration is live, this answers itself in-tool.</div></div>';
 
+      // Hand-off into "Help me prepare" — carries this product & supplier across.
+      h += '<div style="margin:14px 0 6px;"><a href="#msh-meeting-prep" id="msh-handoff" data-supplier="' + esc(mine.supplier) + '" data-product="' + esc(mine.name) + '" style="display:inline-block;background:' + GRN + ';color:#fff;border-radius:8px;padding:11px 20px;font-weight:700;font-size:14px;text-decoration:none;">Take this into &ldquo;Help me prepare&rdquo; &rarr;</a><span style="font-size:12px;color:#8a8778;margin-left:10px;">carries this product into your meeting brief</span></div>';
       h += '<div style="font-size:12px;color:#8a8778;">Product names are the suppliers’ own; framework is top-level (verify the lot at source); NPC / MPC codes and images are from the public NHS Supply Chain catalogue (prices need login). Nothing is invented.</div>';
       return h;
     }
