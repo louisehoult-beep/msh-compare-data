@@ -5,7 +5,7 @@ try{fetch(DATA_URL,{cache:'no-store'}).then(function(r){return r.json();}).then(
   if(j){if(j.specialities){
     for(var k in j.specialities){if(D[k]){if(j.specialities[k].issues){D[k].issues=j.specialities[k].issues;}}}
     var st=document.getElementById('cp-stamp');
-    if(st){if(j.dataAsOf){st.textContent='Data last checked '+j.dataAsOf+' (refreshed daily). Frameworks and supply notices change \u2014 always open the source link and confirm current status before using anything in a conversation or tender.';}}
+    if(st){st.textContent='Frameworks and supply notices change \u2014 always open the source link and confirm current status before using anything in a conversation or tender.';}
     if(document.getElementById('sec-comp')){render();}
   }}
 }).catch(function(e){});}catch(e){}
@@ -19,8 +19,8 @@ function buildPane(){
   var h='';
   h+='<div class="mst__calcintro">';
   h+='<h3 class="mst__ih">What this does</h3>';
-  h+='<p class="mst__ip">Pick your speciality, product type and who you are &mdash; it shows the competitor set on the <strong>live NHS Supply Chain framework</strong>, with links to each manufacturer, plus current recalls, delistings and supply gaps you can use to your advantage. Every fact is drawn from NHS Supply Chain notices, MHRA alerts and manufacturer sites &mdash; sources linked throughout.</p>';
-  h+='<p class="mst__ip" id="cp-stamp" style="color:#75808d;">Researched and verified 17/07/2026. Frameworks and supply notices change &mdash; always open the source link and confirm current status before using anything in a conversation or tender.</p>';
+  h+='<p class="mst__ip">Shows the competitor set on the live NHS Supply Chain framework for your product type &mdash; with current recalls, delistings and supply gaps. Every fact comes from reputable, verified NHS sources, linked throughout.</p>';
+  h+='<p class="mst__ip" id="cp-stamp" style="color:#75808d;">Frameworks and supply notices change &mdash; always open the source link and confirm current status before using anything in a conversation or tender.</p>';
   h+='</div>';
   h+='<div class="mst__controls">';
   h+='<label class="mst__lab">Speciality<select class="mst__sel" id="cp-spec"></select></label>';
@@ -35,6 +35,7 @@ function buildPane(){
 function fill(sel,opts){sel.innerHTML='';opts.forEach(function(o){var op=document.createElement('option');op.value=o[0];op.textContent=o[1];sel.appendChild(op);});}
 function render(){
   var spec=document.getElementById('cp-spec').value;
+  if(!spec){return;}
   var S=D[spec];
   var type=document.getElementById('cp-type').value;
   var me=document.getElementById('cp-me').value;
@@ -81,6 +82,7 @@ function render(){
 }
 function onSpec(){
   var spec=document.getElementById('cp-spec').value;
+  if(!spec){document.getElementById('cp-route').innerHTML='';document.getElementById('cp-table').innerHTML='';document.getElementById('cp-issues').innerHTML='';fill(document.getElementById('cp-type'),[['all','All product types']]);fill(document.getElementById('cp-me'),[['','Select your company (optional)']]);return;}
   var S=D[spec];
   var t=[['all','All product types']];
   for(var k in S.types){t.push([k,S.types[k]]);}
@@ -124,7 +126,7 @@ function build(){
     var mapSec=document.getElementById('sec-map');
     var pane=buildPane();
     mapSec.parentNode.insertBefore(pane,mapSec.nextSibling);
-    fill(document.getElementById('cp-spec'),[['vascular',D.vascular.label],['continence',D.continence.label]]);
+    fill(document.getElementById('cp-spec'),[['','Select\u2026'],['vascular',D.vascular.label],['continence',D.continence.label]]);
     onSpec();
     document.getElementById('cp-spec').addEventListener('change',onSpec);
     document.getElementById('cp-type').addEventListener('change',render);
