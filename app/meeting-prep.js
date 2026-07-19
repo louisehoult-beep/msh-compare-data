@@ -66,7 +66,7 @@
       opts.forEach(function(o){ var op = el('option'); op.value = (o.indexOf('—') === 0 ? '' : o); op.textContent = o || '— choose —'; if (o.indexOf('—') === 0) op.disabled = true; sel.appendChild(op); });
       box.appendChild(sel); return { box: box, sel: sel };
     }
-    var out = el('div', 'margin-top:6px;'); wrap.appendChild(out);
+    var out = el('div', 'margin-top:6px;'); out.id='msh-prep-out'; wrap.appendChild(out);
     MOUNT.innerHTML = ''; MOUNT.appendChild(wrap);
 
     // Hand-off from the Product Comparison tool: prefill the company and carry
@@ -88,10 +88,36 @@
     window.addEventListener('msh-prep-handoff', applyHandoff);
     applyHandoff();
 
+    function printPack(){
+      var cmp = document.getElementById('msh-compare-out');
+      var pk = window.open('', '_blank');
+      if (!pk){ alert('Allow pop-ups to print the pack.'); return; }
+      var today = new Date().toLocaleDateString('en-GB');
+      pk.document.write('<!doctype html><html><head><title>Meeting pack — NHS Intelligence Hub</title><style>'
+        + 'body{font-family:Georgia,"Times New Roman",serif;color:#111;margin:24px;line-height:1.5;}'
+        + 'h1{font-size:20px;margin:0 0 2px;} .sub{color:#555;font-size:12px;margin-bottom:18px;}'
+        + 'img{max-width:70px;height:auto;} table{border-collapse:collapse;} td,th{border-bottom:1px solid #ccc;padding:4px 8px;font-size:11px;text-align:left;}'
+        + 'a{color:#111;text-decoration:none;} button,input,select,datalist{display:none!important;}'
+        + '.pagebreak{page-break-before:always;} div{max-width:100%;}'
+        + '@media print{ a[href]:after{content:"";} }'
+        + '</style></head><body>'
+        + '<h1>Meeting pack — NHS Intelligence Hub</h1>'
+        + '<div class="sub">Prepared ' + today + ' · Product information from the suppliers\u2019 own websites and the NHS Supply Chain catalogue · Verify framework/status at source before quoting.</div>'
+        + (cmp && cmp.innerHTML ? '<h2 style="font-size:15px;">Product comparison &amp; the case for switching</h2>' + cmp.innerHTML + '<div class="pagebreak"></div>' : '')
+        + '<h2 style="font-size:15px;">Meeting brief</h2>' + out.innerHTML
+        + '</body></html>');
+      pk.document.close();
+      setTimeout(function(){ pk.print(); }, 600);
+    }
     btn.addEventListener('click', function(){
       var co = suppliers.filter(function(s){ return s.name === selCo.sel.value; })[0];
       var tr = (cfg.trusts || []).filter(function(t){ return t.name === selTr.sel.value; })[0];
       out.innerHTML = brief(co, selCo.sel.value, selSp.sel.value, tr, selTr.sel.value, selAud.sel.value, early.checked, suppliers, cfg);
+      if (out.textContent && out.textContent.indexOf('Pick your company') === -1){
+        var pb = el('button', 'background:#20303f !important;color:#ffffff !important;border:0;border-radius:8px;padding:10px 18px;font-weight:800;font-size:13.5px;cursor:pointer;margin:0 0 12px;box-shadow:0 1px 3px rgba(0,0,0,.15);', 'Print / download the full meeting pack');
+        pb.addEventListener('click', printPack);
+        out.insertBefore(pb, out.firstChild);
+      }
       out.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
