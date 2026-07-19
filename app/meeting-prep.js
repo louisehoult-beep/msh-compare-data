@@ -54,7 +54,7 @@
     var earlyWrap = el('label', 'font-size:13px;color:#4a5766;display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;');
     var early = el('input'); early.type = 'checkbox';
     earlyWrap.appendChild(early); earlyWrap.appendChild(document.createTextNode('Early-stage (no product yet)'));
-    var btn = el('button', 'background:' + INK + ';color:#fff;border:0;border-radius:8px;padding:10px 18px;font-weight:700;font-size:14px;cursor:pointer;', 'Prepare me');
+    var btn = el('button', 'background:#6B2A34 !important;color:#ffffff !important;border:0;border-radius:8px;padding:12px 24px;font-weight:800;font-size:15px;cursor:pointer;letter-spacing:.3px;box-shadow:0 1px 3px rgba(0,0,0,.15);', 'Prepare me');
     [selCo.box, selSp.box, selTr.box, selAud.box].forEach(function(b){ bar.appendChild(b); });
     var side = el('div', 'display:flex;flex-direction:column;gap:8px;'); side.appendChild(earlyWrap); side.appendChild(btn); bar.appendChild(side);
     wrap.appendChild(bar);
@@ -196,7 +196,7 @@
       ];
       h += panel('How to use this in the meeting', li(howItems));
       h += '<div style="background:#fdfbf6;border:1px solid #e0c98a;border-radius:10px;padding:16px 18px;margin:14px 0 6px;text-align:center;">'
-        + '<div style="font-size:14.5px;line-height:1.65;color:#39424d;"><em>The Hub has done the homework — this is your intel. Your skill as a salesperson is what turns it into a sale: walk in as a partner in their care, not a supplier at the door.</em></div>'
+        + '<div style="font-size:14.5px;line-height:1.65;color:#39424d;"><em>The Hub has done the homework — this is your intel. Your skill as a salesperson is what turns it into a sale: people buy from people, and the relationship matters. Walk in as a partner in their care, not a supplier at the door.</em></div>'
         + '<div style="font-size:13px;color:' + GOLD + ';font-weight:700;margin-top:8px;">&ldquo;Trust is the glue of life.&rdquo; &mdash; Stephen R. Covey</div>'
         + '</div>';
       h += '<div style="font-size:12px;color:#8a8778;margin-top:6px;">Assembled from the live Hub — supplier directory, frameworks, Live Desk and Tools. Verify framework/award status at source before quoting.</div>';
