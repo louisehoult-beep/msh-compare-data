@@ -68,7 +68,7 @@
       (s.products || []).forEach(function(p){
         var name = typeof p === 'string' ? p : (p && p.name);
         if (!name) return;
-        PRODUCTS.push({ name: name, code: (p && p.code) || '', supplier: s.name, specs: s.specialities || [], framework: (s.frameworks && s.frameworks[0] && s.frameworks[0].name) || '', voice: s.voice, type: typeForProduct(name) });
+        PRODUCTS.push({ name: name, code: (p && p.code) || '', supplier: s.name, specs: s.specialities || [], framework: (s.frameworks && s.frameworks[0] && s.frameworks[0].name) || '', fwDates: (s.frameworks && s.frameworks[0] && s.frameworks[0].dates) || '', voice: s.voice, type: typeForProduct(name) });
       });
     });
     function typeOf(n){ n = (n||'').toLowerCase(); for (var i=0;i<TYPES.length;i++){ if (n.indexOf(TYPES[i]) !== -1) return TYPES[i].trim(); } return ''; }
@@ -427,6 +427,41 @@
       if (fwFor(mine)) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you\\u2019re on ' + esc(fwFor(mine)) + ' — ordering is the easy part.</div>';
       else if (dMine) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you\\u2019re live on the NHS Supply Chain catalogue (codes below) — ordering is the easy part.</div>';
       h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">The case for switching — what are you giving them?</div><div style="font-size:14px;line-height:1.65;color:#39424d;margin-top:6px;">' + caseHtml + '</div></div>';
+
+      // WHY TRUSTS ACTUALLY SWITCH — the evidenced drivers (researched & sourced),
+      // auto-mapped: which does THIS case activate? Ticked = live in your case now.
+      var DRIVERS = [
+        {n:'Cost pressure / CIP savings', ev:'Product switches are a standard cost-improvement lever (Carter set a \u00a3700m procurement savings target; system needs \u00a311bn in 2025/26).', src:'https://www.gov.uk/government/news/review-shows-how-nhs-hospitals-can-save-money-and-improve-care',
+          on: /sav|price|cost|%|cheap/i.test(edge||''), note:'your edge is a saving — quantify it against their CIP target'},
+        {n:'Contract / framework renewal cycle', ev:'Frameworks run 2\u20134 years and new suppliers join at re-tender \u2014 the natural switch window.', src:'https://www.supplychain.nhs.uk/suppliers/contract-and-tender-process/',
+          on: /award|202[6-8]/.test(mine.fwDates||''), note: mine.fwDates ? ('your framework timing: ' + mine.fwDates) : 'check the category\u2019s renewal date in the Procurement Calendar'},
+        {n:'Value-based procurement scoring', ev:'DHSC national standard: five value domains carry a minimum 60% combined weighting; whole-life cost is capped at 40% \u2014 better-value challengers can beat cheaper incumbents.', src:'https://www.gov.uk/government/publications/value-based-procurement-in-medtech',
+          on: true, note:'build the number in the Value Case Calculator \u2014 this is the scoring system your case is judged in'},
+        {n:'Supply disruption / discontinuation', ev:'A forced suture switch in South Yorkshire saved \u00a3553,000 and spread to two more trusts \u2014 disruption is a proven switch trigger.', src:'https://www.supplychain.nhs.uk/news-article/suture-switch-collaboration-saves-money-and-improves-quality/',
+          on: (typeof wobbly !== 'undefined' && wobbly.length > 0), note:'a rival line shows a suspended/updated pack \u2014 lead with continuity of supply'},
+        {n:'Supply-chain resilience / dual sourcing', ev:'Resilience is one of the five scored VBP value domains \u2014 a like-for-like second source de-risks a single-supplier category.', src:'https://www.nhsconfed.org/publications/supply-chain-resilience',
+          on: comps.length > 0, note:'position as sensible dual-sourcing, not a rip-and-replace'},
+        {n:'Standardisation / rationalising variation', ev:'Carter found 30,000 suppliers, 20,000 brands and 400,000+ product codes across 22 trusts \u2014 consolidation is policy.', src:'https://www.gov.uk/government/news/review-shows-how-nhs-hospitals-can-save-money-and-improve-care',
+          on: comps.length >= 5, note:'a fragmented category \u2014 offer to simplify their range'},
+        {n:'Clinical evaluation & clinician acceptance', ev:'Switches stick when clinicians co-own the evaluation; resistance breeds workarounds (published NHS evidence).', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC8512597/',
+          on: (typeof trueTwin !== 'undefined' && !!trueTwin), note:'true like-for-like = a light evaluation \u2014 design it WITH their clinical lead'},
+        {n:'Training & implementation support (scored)', ev:'Ease of use, training and implementation support are explicitly scored inside the mandatory 60% VBP value weighting.', src:'https://www.gov.uk/government/publications/value-based-procurement-in-medtech',
+          on: ((typeof trueTwin !== 'undefined' && !!trueTwin) || /train|support|implement|educat/i.test(edge||'')), note:'same-steps switch or a training offer \u2014 either scores here'},
+        {n:'Safety alerts & regulation', ev:'MHRA alerts and regulation force substitutions (e.g. the 2013 Sharps Regulations drove NHS-wide device switches).', src:'https://www.hse.gov.uk/pubns/hsis7.htm',
+          on: false, note:'watch the Live Desk \u2014 if an alert touches the incumbent, this becomes your strongest driver overnight'},
+        {n:'Sustainability / net zero', ev:'10% minimum social value weighting now; full scope 1\u20133 Carbon Reduction Plans required from April 2027.', src:'https://www.england.nhs.uk/long-read/2027-nhs-carbon-reduction-plan-requirements/',
+          on: /carbon|sustain|green|packag/i.test(edge||''), note:'if you hold a carbon/packaging advantage, it is scored \u2014 quantify it in the Sustainability Calculator'},
+        {n:'Relationships & trust', ev:'Established supplier contacts cement incumbents (published NHS evidence) \u2014 which is why the relationship IS the strategy.', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC8512597/',
+          on: true, note:'people buy from people \u2014 your presence, service and follow-through are a scored and felt differentiator'},
+        {n:'GIRFT data exposure', ev:'GIRFT\u2019s specialty reports flag procurement variation and directly prompt trusts to review products.', src:'https://gettingitrightfirsttime.co.uk/',
+          on: /theatre|surg/i.test((mine.specs||[]).join(' ')) || mine.type === 'haemostat', note:'a surgical category \u2014 GIRFT variation data supports the standardisation conversation'}
+      ];
+      var dOn = DRIVERS.filter(function(d){ return d.on; });
+      var dOff = DRIVERS.filter(function(d){ return !d.on; });
+      function drow(d, on){
+        return '<li style="margin:4px 0;' + (on ? '' : 'opacity:.55;') + '"><strong>' + (on ? '\u2713 ' : '\u00b7 ') + esc(d.n) + '</strong> — ' + d.ev + (on && d.note ? ' <span style="color:#14432f;font-weight:600;">Your case: ' + d.note + '.</span>' : (d.note ? ' <span style="color:#8a8778;">' + d.note + '.</span>' : '')) + ' <a href="' + d.src + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-size:11px;font-weight:600;">source &#8599;</a></li>';
+      }
+      h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GOLD + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">Why trusts actually switch — and where your case lands</div><div style="font-size:12px;color:#6b7684;margin:2px 0 6px;">The evidenced switch drivers from published NHS sources. \u2713 = active in your case now (' + dOn.length + ' of ' + DRIVERS.length + ').</div><ul style="margin:2px 0 0;padding-left:18px;font-size:13px;line-height:1.6;color:#39424d;">' + dOn.map(function(d){ return drow(d, true); }).join('') + dOff.map(function(d){ return drow(d, false); }).join('') + '</ul></div>';
 
       // WHY ONE OVER THE OTHER — real differences derived from the live catalogue
       // descriptions (material / mechanism / format / readiness), each with why it
