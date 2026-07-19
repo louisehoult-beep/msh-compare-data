@@ -55,6 +55,10 @@
     // Live NHSSC detail cache, keyed by normalised product name.
     var CACHE = {}; var cp = (nhssc && nhssc.products) || {};
     for (var k in cp){ CACHE[nk(k)] = cp[k]; }
+    // Products verified as NOT catalogue lines (capital equipment, software,
+    // medicines-route etc.) — shown honestly instead of a dead-end lookup link.
+    var NOTCAT = {}; var ncp = (nhssc && nhssc.notCatalogue) || {};
+    for (var k2 in ncp){ NOTCAT[nk(k2)] = ncp[k2]; }
     function detailFor(prod){ return CACHE[nk(prod.name)] || null; }
     function liveItem(d){ if (!d || !d.items || !d.items.length) return null; for (var i=0;i<d.items.length;i++){ if (!d.items[i].status) return d.items[i]; } return d.items[0]; }
 
@@ -236,6 +240,8 @@
           + '<br><a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;font-size:11px;">all codes &#8599;</a>';
       } else if (p.code){
         codeCell = esc(p.code);
+      } else if (NOTCAT[nk(p.name)]){
+        codeCell = '<span style="color:#8a8778;font-size:11.5px;font-style:italic;">not a catalogue line — ' + esc(NOTCAT[nk(p.name)].reason) + '</span>';
       } else {
         codeCell = '<a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;">look up &#8599;</a>';
       }
