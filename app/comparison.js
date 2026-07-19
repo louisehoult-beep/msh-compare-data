@@ -19,7 +19,7 @@
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
   function nk(s){ return String(s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
 
-  var TYPES = ['cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','stapler','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','npwt','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','connector','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct ','x-ray','mammography','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','securement','ostomy','urostomy','enteral','feeding tube','slide sheet'];
+  var TYPES = ['antisepsis','antiseptic','chlorhexidine','skin prep','skin disinfect','disinfectant','applicator','swabstick','swab','tourniquet','blood culture','cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','tape','plaster','npwt','negative pressure','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','tracheostomy','tracheal','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','lancet','connector','stopcock','extension set','giving set','iv set','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct ','x-ray','mammography','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','warming','securement','ostomy','urostomy','stoma','nephrostomy','foley','feeding','enteral','feeding tube','peg tube','slide sheet','glucose','sensor','test strip','electrode','scalpel','blade','forceps','retractor','trocar','clip','clamp','specimen','drainage','chest drain','suction','mask','circuit','cpap','oxygen','nebuliser','filter','lubricant'];
   var KEYPOINTS = {
     'BD — Becton, Dickinson': { 'nexiva': 'Closed IV system — fewer blood exposures/disconnections vs an open cannula', 'chloraprep': 'Single-use 2% CHG / 70% IPA sterile applicator' },
     'Coloplast': { 'speedicath': 'Ready-to-use hydrophilic catheter — no water needed' },
@@ -110,11 +110,30 @@
 
     function link(text, id){ return '<a href="https://elevateandthrive.uk/?page_id=' + id + '" style="color:' + GOLD + ';font-weight:600;">' + text + '</a>'; }
     function lookupUrl(name){ return 'https://pilot.supplychain.nhs.uk/search?query=' + encodeURIComponent(String(name).replace(/\s*\(.*?\)\s*/g,' ').trim()); }
+    var GENERIC_WORDS = { 'system':1,'safety':1,'products':1,'medical':1,'range':1,'solution':1,'solutions':1,'products':1,'closed':1,'sterile':1,'single':1,'device':1,'plus':1,'ultra':1,'flex':1,'select':1,'advance':1,'advanced':1 };
+    function sigTokens(name){
+      return (String(name).toLowerCase().match(/[a-z]{5,}/g) || []).filter(function(w){ return !GENERIC_WORDS[w]; });
+    }
+    function specOverlap(a, b){ var n = 0; (a || []).forEach(function(x){ if ((b || []).indexOf(x) !== -1) n++; }); return n; }
+    // Like-for-like: same device TYPE (category) only. Speciality is used to RANK
+    // within the same type, never to pull in unrelated categories. If the product
+    // has no recognised type, fall back to a shared distinctive product-name word.
     function competitorsOf(mine){
-      var byType = mine.type ? PRODUCTS.filter(function(p){ return p.supplier !== mine.supplier && p.type === mine.type; }) : [];
-      var bySpec = PRODUCTS.filter(function(p){ return p.supplier !== mine.supplier && p.specs.some(function(x){ return mine.specs.indexOf(x) !== -1; }); });
       var seen = {}, out = [];
-      byType.concat(bySpec).forEach(function(p){ var k = p.name + '|' + p.supplier; if (!seen[k]){ seen[k] = 1; out.push(p); } });
+      function add(p){ var k = p.name + '|' + p.supplier; if (p.supplier !== mine.supplier && !seen[k]){ seen[k] = 1; out.push(p); } }
+      if (mine.type){
+        var same = PRODUCTS.filter(function(p){ return p.supplier !== mine.supplier && p.type === mine.type; });
+        same.sort(function(a, b){ return specOverlap(mine.specs, b.specs) - specOverlap(mine.specs, a.specs); });
+        same.forEach(add);
+      } else {
+        var mt = sigTokens(mine.name);
+        if (mt.length){
+          PRODUCTS.forEach(function(p){
+            if (p.supplier === mine.supplier) return;
+            if (sigTokens(p.name).some(function(w){ return mt.indexOf(w) !== -1; })) add(p);
+          });
+        }
+      }
       return out.slice(0, 12);
     }
 
