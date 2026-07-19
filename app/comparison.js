@@ -180,7 +180,7 @@
       box.appendChild(sel); return { box: box, sel: sel };
     }
 
-    var out = el('div', 'margin-top:6px;'); wrap.appendChild(out);
+    var out = el('div', 'margin-top:6px;'); out.id='msh-compare-out'; wrap.appendChild(out);
     MOUNT.innerHTML = ''; MOUNT.appendChild(wrap);
 
     function doCompare(){
@@ -353,46 +353,9 @@
       // the same" — lead with what the trust gains.
       var top = comps[0];
       var dMine = detailFor(mine);
-      var reasons = [];
-      if (edge) reasons.push('<strong>Your edge (lead with this):</strong> ' + esc(edge) + '. That is the reason for the meeting — everything below supports it.');
-      var wobbly = comps.filter(function(p){ var d2 = detailFor(p); return d2 && d2.items.some(function(it){ return it.status; }); }).slice(0, 2);
-      if (wobbly.length){
-        reasons.push('<strong>Supply reliability:</strong> ' + wobbly.map(function(p){ return esc(p.name) + ' (' + esc(p.supplier) + ')'; }).join(' and ') + ' currently show a suspended or updated pack on the live catalogue. If that is their incumbent, continuity of supply is your opening — a stockout is the one problem procurement cannot ignore.');
-      }
-      if (comps.length){
-        reasons.push('<strong>Second-source resilience:</strong> NHS value-based procurement scores supply-chain resilience, not just price. A like-for-like second source de-risks a single-supplier category — you are not asking them to drop anyone, just to dual-source sensibly.');
-      }
-      var dTop = top && detailFor(top);
-      if (dMine && dTop && dMine.items.length > dTop.items.length){
-        reasons.push('<strong>Range fit:</strong> you list ' + dMine.items.length + ' pack formats against ' + dTop.items.length + ' for ' + esc(top.name) + ' — match the format conversation to how their theatres actually order.');
-      }
-      if (kp(mine)) reasons.push('<strong>Product edge:</strong> ' + esc(kp(mine)) + '.');
-      var caseHtml;
-      if (!edge && !wobbly.length && !kp(mine)){
-        caseHtml = '<div style="background:#fbf3df;border:1px solid #e8d5a8;border-radius:8px;padding:10px 14px;margin:0 0 8px;font-size:13.5px;color:#7a5b14;"><strong>The data shows no obvious switch reason — so what\\u2019s yours?</strong> If nothing is wrong with their current supplier, the trust has no reason to change. Type your edge above (a price saving, next-day supply, service and training, UK stockholding, clinical preference) and the case builds around it.</div>'
-          + (reasons.length ? '<ul style="margin:2px 0 0;padding-left:18px;">' + reasons.map(function(x){ return '<li style="margin:3px 0;">' + x + '</li>'; }).join('') + '</ul>' : '');
-      } else {
-        caseHtml = '<ul style="margin:2px 0 0;padding-left:18px;">' + reasons.map(function(x){ return '<li style="margin:3px 0;">' + x + '</li>'; }).join('') + '</ul>';
-      }
-      // like-for-like as the CLOSER, never the opener
-      if (top){
-        var myWords = (mine.name + ' ' + ((dMine && dMine.items[0].desc) || '')).toLowerCase().match(/[a-z]{5,}/g) || [];
-        var topWords = (top.name + ' ' + ((dTop && dTop.items[0].desc) || '')).toLowerCase().match(/[a-z]{5,}/g) || [];
-        var topStem = {}; topWords.forEach(function(w){ topStem[w.slice(0,8)] = 1; });
-        var sharedSeen = {}, shared = [];
-        myWords.forEach(function(w){ var s = w.slice(0,8); if (topStem[s] && !sharedSeen[s]){ sharedSeen[s] = 1; shared.push(w); } });
-        caseHtml += '<div style="margin-top:10px;padding:10px 14px;background:#edf5ee;border-left:3px solid ' + GRN + ';border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.6;color:#39424d;"><strong>Then like-for-like closes it.</strong> Once your reason is on the table, being the same class as ' + esc(top.name) + (shared.length ? ' (' + esc(shared.slice(0,3).join(', ')) + ')' : '') + ' works <em>for</em> you: no clinical retraining, no pathway change, a straightforward side-by-side evaluation and simple substitution on the order template. Switching becomes a low-risk decision for the trust — that is the point to make, not \\u201cwe\\u2019re the same\\u201d.</div>';
-      }
-      if (fwFor(mine)) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you\\u2019re on ' + esc(fwFor(mine)) + ' — ordering is the easy part.</div>';
-      else if (dMine) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you\\u2019re live on the NHS Supply Chain catalogue (codes below) — ordering is the easy part.</div>';
-      h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">The case for switching — what are you giving them?</div><div style="font-size:14px;line-height:1.65;color:#39424d;margin-top:6px;">' + caseHtml + '</div></div>';
-
-      // WHY ONE OVER THE OTHER — real differences derived from the live catalogue
-      // descriptions (material / mechanism / format / readiness), each with why it
-      // matters in the buying conversation. Honest: only what the data supports.
       function attrsOf(p){
         var d2 = detailFor(p); if (!d2) return null;
-        var txt = d2.items.map(function(it){ return it.desc || ''; }).join(' | ').toLowerCase();
+        var txt = (p.name + ' | ' + d2.items.map(function(it){ return it.desc || ''; }).join(' | ')).toLowerCase();
         var a = { packs: d2.items.length };
         if (/oxidised|oxidized|regenerated cellulose|\borc\b/.test(txt)) a.material = 'oxidised regenerated cellulose (plant-derived)';
         else if (/gelatin/.test(txt)) a.material = /porcine/.test(txt) ? 'porcine gelatin' : 'gelatin';
@@ -408,6 +371,66 @@
         else if (/sealant|adhesive/.test(txt)) a.form = 'sealant/adhesive';
         return a;
       }
+      var myA0 = attrsOf(mine);
+      function sameSteps(p){
+        var pa = attrsOf(p);
+        if (!myA0 || !pa || !myA0.form || !pa.form || myA0.form !== pa.form) return false;
+        // same format = same steps; a KNOWN material difference breaks it
+        if (myA0.material && pa.material && myA0.material !== pa.material) return false;
+        return true;
+      }
+      var reasons = [];
+      if (edge) reasons.push('<strong>Your edge (lead with this):</strong> ' + esc(edge) + '. That is the reason for the meeting — everything below supports it.');
+      var wobbly = comps.filter(function(p){ var d2 = detailFor(p); return d2 && d2.items.some(function(it){ return it.status; }); }).slice(0, 2);
+      if (wobbly.length){
+        reasons.push('<strong>Supply reliability:</strong> ' + wobbly.map(function(p){ return esc(p.name) + ' (' + esc(p.supplier) + ')'; }).join(' and ') + ' currently show a suspended or updated pack on the live catalogue. If that is their incumbent, continuity of supply is your opening — a stockout is the one problem procurement cannot ignore.');
+      }
+      if (comps.length){
+        reasons.push('<strong>Second-source resilience:</strong> NHS value-based procurement scores supply-chain resilience, not just price. A like-for-like second source de-risks a single-supplier category — you are not asking them to drop anyone, just to dual-source sensibly.');
+      }
+      var dTop = top && detailFor(top);
+      if (dMine && dTop && dMine.items.length > dTop.items.length){
+        reasons.push('<strong>Range fit:</strong> you list ' + dMine.items.length + ' pack formats against ' + dTop.items.length + ' for ' + esc(top.name) + ' — match the format conversation to how their theatres actually order.');
+      }
+      if (kp(mine)) reasons.push('<strong>Product edge:</strong> ' + esc(kp(mine)) + '.');
+      // Material / mechanism reasons drawn from the catalogue descriptions
+      if (myA0 && myA0.material){
+        var porcineRivals = comps.slice(0,6).filter(function(p){ var a=attrsOf(p); return a && /porcine|gelatin|collagen/.test(a.material||'') && !/porcine|gelatin|collagen/.test(myA0.material); });
+        if (porcineRivals.length){ reasons.push('<strong>Material consideration:</strong> ' + porcineRivals.map(function(p){ return esc(p.name); }).join(' and ') + ' are animal-derived (see differences below); yours is ' + esc(myA0.material) + ' — for some patients and faith groups that is a genuine clinical-choice reason.'); }
+        var bioRivals = comps.slice(0,6).filter(function(p){ var a=attrsOf(p); return a && /biologic/.test(a.material||'') && !/biologic/.test(myA0.material); });
+        if (bioRivals.length){ reasons.push('<strong>Prep, storage and cost class:</strong> ' + bioRivals.map(function(p){ return esc(p.name); }).join(' and ') + ' carry biologic components (prep/storage/cost implications); yours is ready off the shelf.'); }
+        if (/biologic/.test(myA0.material)){ reasons.push('<strong>Performance positioning:</strong> your active biologic mechanism is the premium argument — position on speed and reliability of haemostasis, not price.'); }
+      }
+      reasons.push('<strong>Sustainability:</strong> carbon is scored at tender (Evergreen from Apr 2026) — if your product or packaging carries a carbon advantage, quantify it in the Sustainability Calculator; it feeds the tender weighting.');
+      reasons.push('<strong>Price check:</strong> framework prices are visible to catalogue account holders — compare unit and whole-life cost there before the meeting; if you win on price, that is the simplest case of all.');
+      var caseHtml;
+      if (!edge && !wobbly.length && !kp(mine)){
+        caseHtml = '<div style="background:#fbf3df;border:1px solid #e8d5a8;border-radius:8px;padding:10px 14px;margin:0 0 8px;font-size:13.5px;color:#7a5b14;"><strong>The data shows no obvious switch reason — so what\\u2019s yours?</strong> If nothing is wrong with their current supplier, the trust has no reason to change. Type your edge above (a price saving, next-day supply, service and training, UK stockholding, clinical preference) and the case builds around it.</div>'
+          + (reasons.length ? '<ul style="margin:2px 0 0;padding-left:18px;">' + reasons.map(function(x){ return '<li style="margin:3px 0;">' + x + '</li>'; }).join('') + '</ul>' : '');
+      } else {
+        caseHtml = '<ul style="margin:2px 0 0;padding-left:18px;">' + reasons.map(function(x){ return '<li style="margin:3px 0;">' + x + '</li>'; }).join('') + '</ul>';
+      }
+      // like-for-like as the CLOSER, never the opener
+      if (top){
+        var myWords = (mine.name + ' ' + ((dMine && dMine.items[0].desc) || '')).toLowerCase().match(/[a-z]{5,}/g) || [];
+        var topWords = (top.name + ' ' + ((dTop && dTop.items[0].desc) || '')).toLowerCase().match(/[a-z]{5,}/g) || [];
+        var topStem = {}; topWords.forEach(function(w){ topStem[w.slice(0,8)] = 1; });
+        var sharedSeen = {}, shared = [];
+        myWords.forEach(function(w){ var s = w.slice(0,8); if (topStem[s] && !sharedSeen[s]){ sharedSeen[s] = 1; shared.push(w); } });
+        var trueTwin = comps.filter(sameSteps)[0];
+        if (trueTwin){
+          caseHtml += '<div style="margin-top:10px;padding:10px 14px;background:#edf5ee;border-left:3px solid ' + GRN + ';border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.6;color:#39424d;"><strong>Then true like-for-like closes it.</strong> ' + esc(trueTwin.name) + ' is the same product type in the same format — the same steps to use, just from a different supplier. That means no retraining, no change to how theatres work, a simple side-by-side evaluation and a straight swap on the order template. Switching is a low-risk decision — that is the point to make, not \u201cwe\u2019re the same\u201d.</div>';
+        } else if (top){
+          caseHtml += '<div style="margin-top:10px;padding:10px 14px;background:#edf5ee;border-left:3px solid ' + GRN + ';border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.6;color:#39424d;"><strong>Then make the switch easy.</strong> ' + esc(top.name) + ' is the same class but a different format — the evaluation is still straightforward, but be upfront that the steps differ and plan familiarisation/training into your offer. Owning that honestly is more credible than glossing it.</div>';
+        }
+      }
+      if (fwFor(mine)) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you\\u2019re on ' + esc(fwFor(mine)) + ' — ordering is the easy part.</div>';
+      else if (dMine) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you\\u2019re live on the NHS Supply Chain catalogue (codes below) — ordering is the easy part.</div>';
+      h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">The case for switching — what are you giving them?</div><div style="font-size:14px;line-height:1.65;color:#39424d;margin-top:6px;">' + caseHtml + '</div></div>';
+
+      // WHY ONE OVER THE OTHER — real differences derived from the live catalogue
+      // descriptions (material / mechanism / format / readiness), each with why it
+      // matters in the buying conversation. Honest: only what the data supports.
       var myA = attrsOf(mine);
       if (myA && (myA.material || myA.form)){
         var diffs2 = [];
