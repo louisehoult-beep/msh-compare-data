@@ -334,7 +334,7 @@
         + '<ul style="margin:4px 0 0;padding-left:18px;">'
         + '<li><strong>Acknowledge:</strong> “' + esc(c) + ' is a solid choice — I can see why you use it.”</li>'
         + '<li><strong>Reframe</strong> to your edge: ' + esc(edge) + (fwFor(mine) ? ' — and it’s on ' + esc(fwFor(mine)) + '.' : (detailFor(mine) ? ' — and it’s on the live NHS Supply Chain catalogue.' : '.')) + '</li>'
-        + '<li><strong>One more question:</strong> “If I could show you where ' + esc(mine.name) + ' saves time or reduces a complication versus ' + esc(top ? top.name : 'your current option') + ', would that be worth a short trial?”</li>'
+        + '<li><strong>One more question:</strong> think of one more question — your own, for this customer. What could you ask that moves them one step forward?</li>'
         + '</ul>';
     }
 
@@ -563,16 +563,27 @@
       // looks with their own eyes; followed by coaching prompts the tool cannot
       // answer for them (their own product knowledge, service and training offer).
       var sbs = [mine].concat(comps.slice(0, 5)).map(function(p){
-        var d3 = detailFor(p); var it3 = d3 && d3.items && d3.items.filter(function(x){ return x.img; })[0];
-        return it3 ? { p: p, img: it3.img } : null;
+        var d3 = detailFor(p); if (!d3 || !d3.items) return null;
+        // real product photos: live packs first (a suspended pack's photo is a
+        // last resort), distinct URLs only, group shots boosted, max 3
+        var seenU = {}, imgs = [];
+        d3.items.filter(function(x){ return !x.status; }).concat(d3.items.filter(function(x){ return x.status; })).forEach(function(x){
+          if (x.img && !seenU[x.img]){ seenU[x.img] = 1; imgs.push(x.img); }
+        });
+        imgs.sort(function(a, b){ return (/group/i.test(b) ? 1 : 0) - (/group/i.test(a) ? 1 : 0); });
+        return imgs.length ? { p: p, imgs: imgs.slice(0, 3) } : null;
       }).filter(Boolean);
       if (sbs.length >= 2){
         var cells = sbs.map(function(x){
           var isMine = x.p === mine;
-          return '<div style="flex:1 1 150px;max-width:210px;text-align:center;padding:10px;border:2px solid ' + (isMine ? GRN : LINE) + ';border-radius:10px;background:#fff;">'
-            + '<img src="' + esc(x.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display=\'none\'" style="width:100%;height:150px;object-fit:contain;background:#fff;">'
+          var ih = x.imgs.length > 1 ? 110 : 150;
+          var imrow = '<div style="display:flex;gap:6px;">' + x.imgs.map(function(u){
+            return '<a href="' + esc(u) + '" target="_blank" rel="noopener" style="flex:1;min-width:0;"><img src="' + esc(u) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.style.display=\'none\'" style="width:100%;height:' + ih + 'px;object-fit:contain;background:#fff;border:1px solid #f0ede5;border-radius:6px;"></a>';
+          }).join('') + '</div>';
+          return '<div style="flex:1 1 240px;max-width:340px;text-align:center;padding:10px;border:2px solid ' + (isMine ? GRN : LINE) + ';border-radius:10px;background:#fff;">' + imrow
             + '<div style="font-weight:800;font-size:13px;margin-top:6px;">' + esc(x.p.name) + (isMine ? ' <span style="color:' + GRN + ';font-size:11px;">(you)</span>' : '') + '</div>'
-            + '<div style="font-size:11.5px;color:#6b7684;">' + esc(x.p.supplier) + '</div></div>';
+            + '<div style="font-size:11.5px;color:#6b7684;">' + esc(x.p.supplier) + '</div>'
+            + '<div style="font-size:10.5px;color:#9a958a;margin-top:2px;">click a photo for full size</div></div>';
         }).join('');
         h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;">'
           + '<div style="font-size:15px;font-weight:800;">Look at them side by side — then think like the customer</div>'
