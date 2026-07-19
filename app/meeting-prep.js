@@ -83,6 +83,14 @@
     }
     function li(items){ return '<ul style="margin:4px 0 0;padding-left:18px;">' + items.map(function(i){ return '<li style="margin:3px 0;">' + i + '</li>'; }).join('') + '</ul>'; }
     function link(text, id){ return '<a href="https://elevateandthrive.uk/?page_id=' + id + '" style="color:' + GOLD + ';font-weight:600;">' + text + '</a>'; }
+    // One-click LinkedIn lookups: the tool builds the exact people-search and
+    // recent-posts search and opens them in the rep's own logged-in LinkedIn.
+    // (LinkedIn blocks server-side scraping, so deep links are the robust route.)
+    function trustShort(name){ return String(name || '').replace(/ NHS Foundation Trust| NHS Trust/gi, '').trim(); }
+    function roleCore(role){ return String(role || '').split('/')[0].split('(')[0].trim(); }
+    function liBtn(text, url){ return '<a href="' + url + '" target="_blank" rel="noopener" style="display:inline-block;background:#0a66c2;color:#fff;border-radius:99px;padding:3px 12px;font-size:11.5px;font-weight:700;text-decoration:none;margin:3px 6px 0 0;">' + text + ' &#8599;</a>'; }
+    function liPeopleUrl(role, trust){ return 'https://www.linkedin.com/search/results/people/?keywords=' + encodeURIComponent('"' + trustShort(trust) + '" ' + roleCore(role)); }
+    function liPostsUrl(role, trust){ return 'https://www.linkedin.com/search/results/content/?keywords=' + encodeURIComponent('"' + trustShort(trust) + '" ' + roleCore(role)) + '&sortBy=%22date_posted%22'; }
 
     function competitors(co, sp, all){
       var specs = sp ? [sp] : ((co && co.specialities) || []);
@@ -140,11 +148,19 @@
       }
 
       if (tr){
-        var ctc = (tr.contacts || []).map(function(c){ return '<strong>' + esc(c.role) + '</strong> — ' + esc(c.note); });
+        var ctc = (tr.contacts || []).map(function(c){
+          return '<strong>' + esc(c.role) + '</strong> — ' + esc(c.note)
+            + '<br>' + liBtn('Find them on LinkedIn', liPeopleUrl(c.role, tr.name))
+            + liBtn('Their recent posts', liPostsUrl(c.role, tr.name));
+        });
         h += panel('The trust: ' + esc(tr.name), esc(tr.context)
           + (tr.news ? '<br><span style="color:#6b7684;">Recent: ' + esc(tr.news) + '</span>' : '')
           + '<div style="margin-top:8px;font-weight:700;">Link it to their strategy:</div> read the trust’s latest annual report and board papers for their stated priorities (finances, capacity, net zero, digital) and tie your pitch to one of them.'
-          + (ctc.length ? '<div style="margin-top:8px;font-weight:700;">Who to look up first (check their recent LinkedIn posts):</div>' + li(ctc) : ''));
+          + (ctc.length ? '<div style="margin-top:8px;font-weight:700;">Who you’re meeting — looked up for you (opens in your LinkedIn):</div>' + li(ctc) : ''));
+      } else if (trName && trName !== 'Other / any trust'){
+        h += panel('The trust', 'No seeded profile yet — pull the trust’s latest annual report and news for its strategy and cost pressures, then go straight to the right people: '
+          + '<br>' + liBtn('Procurement lead on LinkedIn', liPeopleUrl('Head of Procurement', trName))
+          + liBtn('Clinical leads on LinkedIn', liPeopleUrl('Clinical lead', trName)));
       } else if (trName){
         h += panel('The trust', 'No seeded profile yet — pull the trust’s latest annual report and news for its strategy and cost pressures, identify the procurement lead and a clinical champion, and read their recent public LinkedIn posts before you go in.');
       }
