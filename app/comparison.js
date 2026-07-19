@@ -61,10 +61,18 @@
       (s.products || []).forEach(function(p){
         var name = typeof p === 'string' ? p : (p && p.name);
         if (!name) return;
-        PRODUCTS.push({ name: name, code: (p && p.code) || '', supplier: s.name, specs: s.specialities || [], framework: (s.frameworks && s.frameworks[0] && s.frameworks[0].name) || '', voice: s.voice, type: typeOf(name) });
+        PRODUCTS.push({ name: name, code: (p && p.code) || '', supplier: s.name, specs: s.specialities || [], framework: (s.frameworks && s.frameworks[0] && s.frameworks[0].name) || '', voice: s.voice, type: typeForProduct(name) });
       });
     });
     function typeOf(n){ n = (n||'').toLowerCase(); for (var i=0;i<TYPES.length;i++){ if (n.indexOf(TYPES[i]) !== -1) return TYPES[i].trim(); } return ''; }
+    // Type from the product name; if the name has no category word, fall back to the
+    // real NHS Supply Chain catalogue description (e.g. "Intermittent Catheter…",
+    // "IV Cannula…") so cached products still match like-for-like.
+    function typeForProduct(name){
+      var t = typeOf(name);
+      if (!t){ var d = CACHE[nk(name)]; if (d && d.items){ for (var i = 0; i < d.items.length && !t; i++){ t = typeOf(d.items[i].desc || ''); } } }
+      return t;
+    }
     function kp(prod){ var m = KEYPOINTS[prod.supplier]; if (!m) return ''; var n = prod.name.toLowerCase(); for (var k in m){ if (n.indexOf(k) !== -1) return m[k]; } return ''; }
 
     var wrap = el('div', 'font-family:Inter,system-ui,sans-serif;color:' + INK + ';');
