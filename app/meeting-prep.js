@@ -50,10 +50,17 @@
     var selCo = mkSelect('Your company', [''].concat(curated.map(nm)).concat(rest.length ? ['— other suppliers —'] : []).concat(rest.map(nm)));
     var selSp = mkSelect('Speciality', [''].concat(cfg.specialities || []));
     var profiledNames = (cfg.trusts || []).map(function(t){ return t.name; });
-    var trustDir = (cfg.trustDirectory || []).filter(function(n){ return profiledNames.indexOf(n) === -1; });
+    // trustDirectory entries may be strings (legacy) or {n,code,town,postcode,kind} objects.
+    var DIRMAP = {};
+    var dirEntries = (cfg.trustDirectory || []).map(function(e){ return typeof e === 'string' ? { n: e } : e; })
+      .filter(function(e){ return profiledNames.indexOf(e.n) === -1; });
+    dirEntries.forEach(function(e){ DIRMAP[e.n] = e; });
+    var hosp = dirEntries.filter(function(e){ return !e.kind || e.kind === 'Hospital / acute'; }).map(function(e){ return e.n; });
+    var others = dirEntries.filter(function(e){ return e.kind && e.kind !== 'Hospital / acute'; }).map(function(e){ return e.n; });
     var selTr = mkSelect('Hospital / trust', ['']
       .concat(profiledNames.length ? ['— full Hub profile —'] : []).concat(profiledNames)
-      .concat(trustDir.length ? ['— all NHS trusts —'] : []).concat(trustDir)
+      .concat(hosp.length ? ['— hospital / acute trusts —'] : []).concat(hosp)
+      .concat(others.length ? ['— community, mental health & ambulance —'] : []).concat(others)
       .concat(['Other / any trust']));
     var selAud = mkSelect('Who you’re meeting', ['', 'Procurement / finance', 'Clinical manager', 'Clinical end-user', 'Sustainability lead']);
     var earlyWrap = el('label', 'font-size:13px;color:#4a5766;display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;');
@@ -243,9 +250,16 @@
         }
         h += panel('The trust: ' + esc(tr.name), body);
       } else if (trName && trName !== 'Other / any trust'){
-        h += panel('The trust', 'No seeded profile yet — pull the trust’s latest annual report and news for its strategy and cost pressures, then go straight to the right people: '
+        var de = DIRMAP[trName] || {};
+        var meta = [];
+        if (de.town) meta.push('HQ: ' + esc(de.town) + (de.postcode ? ' (' + esc(de.postcode) + ')' : ''));
+        if (de.code) meta.push('ODS code: ' + esc(de.code));
+        h += panel('The trust: ' + esc(trName),
+          (meta.length ? '<span style="color:#6b7684;font-size:12.5px;">' + meta.join(' · ') + ' — NHS ODS register</span><br>' : '')
+          + 'No deep Hub profile yet for this trust — you still get the essentials: pull its latest annual report for strategy and cost pressures, and go straight to the right people:'
           + '<br>' + liBtn('Procurement lead on LinkedIn', liPeopleUrl('Head of Procurement', trName))
-          + liBtn('Clinical leads on LinkedIn', liPeopleUrl('Clinical lead', trName)));
+          + liBtn('Clinical leads on LinkedIn', liPeopleUrl('Clinical lead', trName))
+          + ' <a href="https://www.google.com/search?q=' + encodeURIComponent('"' + trName + '" annual report') + '" target="_blank" rel="noopener" style="display:inline-block;background:#fff;border:1px solid ' + LINE + ';border-radius:99px;padding:3px 12px;font-size:11.5px;font-weight:700;color:#6B2A34;text-decoration:none;margin:3px 6px 0 0;">Find their annual report &#8599;</a>');
       } else if (trName){
         h += panel('The trust', 'No seeded profile yet — pull the trust’s latest annual report and news for its strategy and cost pressures, identify the procurement lead and a clinical champion, and read their recent public LinkedIn posts before you go in.');
       }
