@@ -639,7 +639,7 @@
         }).join('');
         h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;">'
           + '<div style="font-size:15px;font-weight:800;">Look at them side by side — then think like the customer</div>'
-          + '<div style="font-size:12.5px;color:#6b7684;margin:2px 0 10px;">Live product photographs from the NHS Supply Chain catalogue. The data above tells you what is listed; your own eyes and product knowledge find the rest.</div>'
+          + '<div style="font-size:12.5px;color:#6b7684;margin:2px 0 10px;">Live photographs from the NHS Supply Chain catalogue, exactly as each supplier uploaded them; sometimes the product itself, sometimes in its packaging. The data above tells you what is listed; your own eyes and product knowledge find the rest.</div>'
           + '<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start;">' + cells + '</div>'
           + '<div style="margin-top:12px;padding:10px 14px;background:#fbf7ec;border-left:3px solid ' + GOLD + ';border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.65;color:#39424d;"><strong>Now add what only you know:</strong>'
           + '<ul style="margin:4px 0 0;padding-left:18px;">'
