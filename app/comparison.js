@@ -163,10 +163,14 @@
     selType.sel.addEventListener('change', refreshList);
     refreshList();
 
-    // Secondary / optional refinement — the like-for-like comparison is the main output.
-    var opt = el('div', 'display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;margin:-6px 0 14px;padding-left:2px;');
-    opt.appendChild(el('span', 'font-size:12px;color:#8a8778;align-self:center;', 'Optional — tailor the “how to use it” note:'));
-    var selAng = mkSelect('What matters most (optional)', ['', 'Price / cost', 'Value & capacity', 'Clinical evidence', 'Sustainability', 'Objection handling (MSTP)']);
+    // Your edge: the reason the trust would switch — the case builder leads with this.
+    var opt = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin:-6px 0 14px;padding-left:2px;');
+    var ebox = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:300px;flex:2;');
+    ebox.appendChild(el('label', 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6b7684;', 'Your edge — what are you giving them? (recommended)'));
+    var edgeInp = el('input', 'padding:9px 12px;border:1px solid ' + LINE + ';border-radius:8px;font-size:13.5px;background:#fff !important;color:#20303f !important;');
+    edgeInp.type = 'text'; edgeInp.placeholder = 'e.g. 15% saving vs incumbent · next-day supply · on-site training · UK stockholding';
+    ebox.appendChild(edgeInp); opt.appendChild(ebox);
+    var selAng = mkSelect('Objection / angle (optional)', ['', 'Price / cost', 'Value & capacity', 'Clinical evidence', 'Sustainability', 'Objection handling (MSTP)']);
     opt.appendChild(selAng.box); wrap.appendChild(opt);
     function mkSelect(label, opts){
       var box = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:210px;');
@@ -200,12 +204,12 @@
       }
       if (!mine && v) mine = find(pool) || find(PRODUCTS);
       if (!mine && !v && pool.length && pool.length <= 1) mine = pool[0];
-      out.innerHTML = compare(mine, selAng.sel.value);
+      out.innerHTML = compare(mine, selAng.sel.value, edgeInp.value.trim());
       addCopy(out);
       var hb = out.querySelector('#msh-handoff');
       if (hb){
         hb.addEventListener('click', function(){
-          var payload = { company: hb.getAttribute('data-supplier'), product: hb.getAttribute('data-product'), ts: Date.now() };
+          var payload = { company: hb.getAttribute('data-supplier'), product: hb.getAttribute('data-product'), edge: edgeInp.value.trim(), ts: Date.now() };
           try { localStorage.setItem('mshPrepHandoff', JSON.stringify(payload)); } catch(e){}
           try { window.dispatchEvent(new CustomEvent('msh-prep-handoff', { detail: payload })); } catch(e){}
         });
@@ -332,7 +336,7 @@
         + '</ul>';
     }
 
-    function compare(mine, angle){
+    function compare(mine, angle, edge){
       if (!mine){ return '<div style="color:#8a6d00;font-size:14px;padding:8px 0;">Type your product above (start typing to pick from the list) and press Compare.</div>'; }
       var comps = competitorsOf(mine);
       var h = '<div style="font-size:13px;color:#6b7684;margin:6px 0 4px;">Your product: <strong>' + esc(mine.name) + '</strong> (' + esc(mine.supplier) + ')' + (mine.type ? ' · type: ' + esc(mine.type) : '') + ' · ' + comps.length + ' competing products found</div>';
@@ -343,34 +347,45 @@
         + row(mine, true) + comps.map(function(p){ return row(p, false); }).join('') + '</tbody></table></div>';
       if (!comps.length) h += '<div style="font-size:12.5px;color:#8a8778;margin-top:4px;">No competing products matched automatically — broaden the product name or check the supplier directory.</div>';
 
-      // Product-specific: how yours compares + points worth highlighting (all from real data)
-      var hi = [];
+      // THE CASE FOR SWITCHING. A trust with a working incumbent needs a REASON to
+      // change — find one in the data, take the rep's edge if given, and only then
+      // use like-for-like as the closer (low-risk switch). Never lead with "it's
+      // the same" — lead with what the trust gains.
       var top = comps[0];
+      var dMine = detailFor(mine);
+      var reasons = [];
+      if (edge) reasons.push('<strong>Your edge (lead with this):</strong> ' + esc(edge) + '. That is the reason for the meeting — everything below supports it.');
+      var wobbly = comps.filter(function(p){ var d2 = detailFor(p); return d2 && d2.items.some(function(it){ return it.status; }); }).slice(0, 2);
+      if (wobbly.length){
+        reasons.push('<strong>Supply reliability:</strong> ' + wobbly.map(function(p){ return esc(p.name) + ' (' + esc(p.supplier) + ')'; }).join(' and ') + ' currently show a suspended or updated pack on the live catalogue. If that is their incumbent, continuity of supply is your opening — a stockout is the one problem procurement cannot ignore.');
+      }
+      if (comps.length){
+        reasons.push('<strong>Second-source resilience:</strong> NHS value-based procurement scores supply-chain resilience, not just price. A like-for-like second source de-risks a single-supplier category — you are not asking them to drop anyone, just to dual-source sensibly.');
+      }
+      var dTop = top && detailFor(top);
+      if (dMine && dTop && dMine.items.length > dTop.items.length){
+        reasons.push('<strong>Range fit:</strong> you list ' + dMine.items.length + ' pack formats against ' + dTop.items.length + ' for ' + esc(top.name) + ' — match the format conversation to how their theatres actually order.');
+      }
+      if (kp(mine)) reasons.push('<strong>Product edge:</strong> ' + esc(kp(mine)) + '.');
+      var caseHtml;
+      if (!edge && !wobbly.length && !kp(mine)){
+        caseHtml = '<div style="background:#fbf3df;border:1px solid #e8d5a8;border-radius:8px;padding:10px 14px;margin:0 0 8px;font-size:13.5px;color:#7a5b14;"><strong>The data shows no obvious switch reason — so what\\u2019s yours?</strong> If nothing is wrong with their current supplier, the trust has no reason to change. Type your edge above (a price saving, next-day supply, service and training, UK stockholding, clinical preference) and the case builds around it.</div>'
+          + (reasons.length ? '<ul style="margin:2px 0 0;padding-left:18px;">' + reasons.map(function(x){ return '<li style="margin:3px 0;">' + x + '</li>'; }).join('') + '</ul>' : '');
+      } else {
+        caseHtml = '<ul style="margin:2px 0 0;padding-left:18px;">' + reasons.map(function(x){ return '<li style="margin:3px 0;">' + x + '</li>'; }).join('') + '</ul>';
+      }
+      // like-for-like as the CLOSER, never the opener
       if (top){
-        var myWords = (mine.name + ' ' + ((detailFor(mine) && detailFor(mine).items[0].desc) || '')).toLowerCase().match(/[a-z]{5,}/g) || [];
-        var topWords = (top.name + ' ' + ((detailFor(top) && detailFor(top).items[0].desc) || '')).toLowerCase().match(/[a-z]{5,}/g) || [];
+        var myWords = (mine.name + ' ' + ((dMine && dMine.items[0].desc) || '')).toLowerCase().match(/[a-z]{5,}/g) || [];
+        var topWords = (top.name + ' ' + ((dTop && dTop.items[0].desc) || '')).toLowerCase().match(/[a-z]{5,}/g) || [];
         var topStem = {}; topWords.forEach(function(w){ topStem[w.slice(0,8)] = 1; });
         var sharedSeen = {}, shared = [];
         myWords.forEach(function(w){ var s = w.slice(0,8); if (topStem[s] && !sharedSeen[s]){ sharedSeen[s] = 1; shared.push(w); } });
-        hi.push('<strong>Closest like-for-like: ' + esc(top.name) + '</strong> (' + esc(top.supplier) + ')' + (shared.length ? ' — same class: <em>' + esc(shared.slice(0,4).join(', ')) + '</em>.' : '.') + ' That is the comparison the buyer will make — open with it, don’t wait for it.');
+        caseHtml += '<div style="margin-top:10px;padding:10px 14px;background:#edf5ee;border-left:3px solid ' + GRN + ';border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.6;color:#39424d;"><strong>Then like-for-like closes it.</strong> Once your reason is on the table, being the same class as ' + esc(top.name) + (shared.length ? ' (' + esc(shared.slice(0,3).join(', ')) + ')' : '') + ' works <em>for</em> you: no clinical retraining, no pathway change, a straightforward side-by-side evaluation and simple substitution on the order template. Switching becomes a low-risk decision for the trust — that is the point to make, not \\u201cwe\\u2019re the same\\u201d.</div>';
       }
-      var dMine = detailFor(mine);
-      if (dMine && dMine.items.length){
-        var line = '<strong>Your live catalogue range:</strong> ' + dMine.items.length + ' pack format' + (dMine.items.length > 1 ? 's' : '') + ' listed';
-        var dTop = top && detailFor(top);
-        if (dTop) line += ' (vs ' + dTop.items.length + ' for ' + esc(top.name) + ')';
-        hi.push(line + ' — match the format conversation to how their theatres actually order.');
-      }
-      var wobbly = comps.filter(function(p){ var d2 = detailFor(p); return d2 && d2.items.some(function(it){ return it.status; }); }).slice(0, 2);
-      if (wobbly.length){
-        hi.push('<strong>Catalogue watch:</strong> ' + wobbly.map(function(p){ return esc(p.name); }).join(' and ') + ' currently show a suspended/updated pack on the live catalogue — know their supply position before they raise yours.');
-      }
-      if (kp(mine)) hi.push('<strong>Lead with your edge:</strong> ' + esc(kp(mine)) + '.');
-      if (fwFor(mine)) hi.push('<strong>Buying route:</strong> you’re on ' + esc(fwFor(mine)) + ' — make ordering the easy part.');
-      else if (dMine) hi.push('<strong>Buying route:</strong> you’re live on the NHS Supply Chain catalogue (codes below) — make ordering the easy part.');
-      if (hi.length){
-        h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">How yours compares — points to highlight</div><div style="font-size:14px;line-height:1.65;color:#39424d;margin-top:4px;"><ul style="margin:2px 0 0;padding-left:18px;">' + hi.map(function(x){ return '<li style="margin:3px 0;">' + x + '</li>'; }).join('') + '</ul></div></div>';
-      }
+      if (fwFor(mine)) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you\\u2019re on ' + esc(fwFor(mine)) + ' — ordering is the easy part.</div>';
+      else if (dMine) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you\\u2019re live on the NHS Supply Chain catalogue (codes below) — ordering is the easy part.</div>';
+      h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">The case for switching — what are you giving them?</div><div style="font-size:14px;line-height:1.65;color:#39424d;margin-top:6px;">' + caseHtml + '</div></div>';
 
       // On-page product detail (image + every pack code) for your product + top competitors
       var withDetail = [mine].concat(comps).filter(function(p){ return detailFor(p); });
