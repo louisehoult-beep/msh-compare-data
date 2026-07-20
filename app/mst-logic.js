@@ -61,7 +61,32 @@
   function stakeKeys(p,s){var base=(s==='primary'&&p.tp)?TPL[p.tp]:TPL[p.t];var extra=(s==='primary'&&p.xp)?p.xp:(p.x||[]);var all=base.concat(extra);var seen={},out=[];all.forEach(function(k){if(k!=='patient'&&!seen[k]){seen[k]=1;out.push(k);}});out.push('patient');return out;}
   function productsFor(spec){return P.filter(function(p){return p.s===spec;});}
   function currentProduct(){var l=productsFor(state.spec);return l[state.prodIdx]||l[0]||{n:'your product',p:'the problem you solve',s:state.spec||'',t:'dev',area:''};}
-  function fillGeo(){var h='';GEOS.forEach(function(g){h+='<optgroup label="'+g.r+'">';g.n.forEach(function(nm){h+='<option>NHS '+nm+' ICB</option>';});h+='</optgroup>';});$('m-geo').innerHTML=h;}
+  function fillGeo(){var h='';GEOS.forEach(function(g){h+='<optgroup label="'+g.r+'">';g.n.forEach(function(nm){h+='<option>NHS '+nm+' ICB</option>';});h+='</optgroup>';});$('m-geo').innerHTML=h;fixNote();}
+  /* The on-page note lives in WP page 1109's content, not here, and still read
+     "42 ICBs ... consolidating into roughly 26 clusters across 2026-27" - both
+     wrong since 01/04/2026. The note sits inside a 26,000-character block, so
+     editing it in wp-admin means rewriting all of it by hand. Correcting it from
+     here keeps the number in the same version-controlled place as the list it
+     describes, so the two can never drift apart again.
+     If the block is ever rewritten cleanly in wp-admin, this becomes a no-op. */
+  function fixNote(){
+    var n=document.querySelector('.mst__note');
+    if(!n)return;
+    var h=n.innerHTML;
+    /* Anchor on the surrounding stable text rather than matching the sentence's
+       punctuation - WordPress renders the en-dash inconsistently as a character
+       or an entity, and an exact regex would silently fail to match. */
+    var start=h.indexOf('42 ICBs are shown');
+    var end=h.indexOf('Roles and levers');
+    if(start===-1||end===-1||end<start)return;
+    n.innerHTML=h.slice(0,start)
+      +'36 ICBs are shown, grouped by NHS region — the first merger round took effect on 1 April 2026 '
+      +'(42 → 36), affecting London, the East of England and the South East only. A second round is '
+      +'proposed for 1 April 2027, but the number and boundaries are not yet decided: clusters were asked '
+      +'to submit merged footprints by 14 July 2026, with approvals expected in autumn 2026 and the '
+      +'outcome tied to Local Government Reorganisation. '
+      +h.slice(end);
+  }
   function fillSpec(){$('m-spec').innerHTML='<option value="">Select\u2026</option>'+SPECS.map(function(s){return '<option value="'+s.id+'">'+s.label+'</option>';}).join('');$('m-spec').value=state.spec;}
   function fillProd(){if(!state.spec){$('m-prod').innerHTML='<option value="">\u2014</option>';return;}var list=productsFor(state.spec);$('m-prod').innerHTML=list.map(function(p,i){return '<option value="'+i+'">'+p.n+'</option>';}).join('');if(state.prodIdx>=list.length)state.prodIdx=0;$('m-prod').value=state.prodIdx;}
   function ensureSetting(){var p=currentProduct();var ss=settingsOf(p);if(ss.indexOf(state.setting)<0)state.setting=ss[0];var only=ss.length===1;$('m-sec').style.display=ss.indexOf('secondary')>=0?'':'none';$('m-pri').style.display=ss.indexOf('primary')>=0?'':'none';$('m-sec').classList.toggle('mst__segbtn--on',state.setting==='secondary');$('m-pri').classList.toggle('mst__segbtn--on',state.setting==='primary');$('m-setwrap').style.opacity=only?'.7':'1';}
