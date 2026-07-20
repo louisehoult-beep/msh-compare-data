@@ -59,7 +59,18 @@
   var state={spec:'',prodIdx:0,setting:'secondary'};
   function settingsOf(p){return p.set==='sp'?['secondary','primary']:(p.set==='s'?['secondary']:['primary']);}
   function stakeKeys(p,s){var base=(s==='primary'&&p.tp)?TPL[p.tp]:TPL[p.t];var extra=(s==='primary'&&p.xp)?p.xp:(p.x||[]);var all=base.concat(extra);var seen={},out=[];all.forEach(function(k){if(k!=='patient'&&!seen[k]){seen[k]=1;out.push(k);}});out.push('patient');return out;}
-  function productsFor(spec){return P.filter(function(p){return p.s===spec;});}
+  /* Sub-specialities (e.g. bloodcoll under vascular): picking the PARENT rolls up
+     its children's products too, so a rep working Vascular access sees blood
+     collection products as well. Picking the child alone still shows only its
+     own products. Generic over any SPECS.parent, not hardcoded to one pair -
+     this was previously wired into meeting-prep.js's speciality-map.json logic
+     but never into the Stakeholder Mapper itself, which is why blood collection
+     did not appear under Vascular access here despite the products existing. */
+  function productsFor(spec){
+    var kids=SPECS.filter(function(s){return s.parent===spec;}).map(function(s){return s.id;});
+    var wanted=[spec].concat(kids);
+    return P.filter(function(p){return wanted.indexOf(p.s)!==-1;});
+  }
   function currentProduct(){var l=productsFor(state.spec);return l[state.prodIdx]||l[0]||{n:'your product',p:'the problem you solve',s:state.spec||'',t:'dev',area:''};}
   function fillGeo(){var h='';GEOS.forEach(function(g){h+='<optgroup label="'+g.r+'">';g.n.forEach(function(nm){h+='<option>NHS '+nm+' ICB</option>';});h+='</optgroup>';});$('m-geo').innerHTML=h;fixNote();}
   /* The on-page note lives in WP page 1109's content, not here, and still read
