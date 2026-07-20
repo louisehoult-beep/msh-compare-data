@@ -1,0 +1,360 @@
+<!-- ============================================================
+     WHO'S WHO — NAME AVAILABILITY MAP
+     Hub-ready Custom HTML block. Palette per brand-guide.md
+     (Oxblood #6B2A34, Charcoal Blue #2B3440, Blush #C9A9A6,
+     Pewter #8C8880, Gold #9A7A2E). Rust #B5593A NOT used.
+
+     Every role below is taken from the Stakeholder Mapper's own
+     role library (mst-logic.js, 17 roles). Every availability
+     verdict is traced to the 20/07/2026 real-names research.
+     Nothing here is estimated.
+     ============================================================ -->
+<div class="wwm">
+<style>
+.wwm{--ink:#1d2733;--ox:#6B2A34;--cb:#2B3440;--blush:#C9A9A6;--pew:#8C8880;--gold:#9A7A2E;
+  --cream:#f7f4ee;--line:#e6e0d4;--grn:#2E6B3E;
+  font-family:Inter,-apple-system,'Segoe UI',Arial,sans-serif;background:var(--cream);
+  padding:26px;color:var(--ink);line-height:1.6;}
+.wwm *{box-sizing:border-box}
+.wwm__in{max-width:1200px;margin:0 auto}
+.wwm__eyebrow{text-transform:uppercase;letter-spacing:1.5px;font-size:11px;font-weight:700;color:var(--gold);margin-bottom:6px}
+.wwm h1{font-size:27px;font-weight:800;margin:0 0 8px;line-height:1.2}
+.wwm__lede{font-size:15px;color:#4a5766;max-width:800px;margin:0 0 22px}
+.wwm__card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:18px}
+.wwm__card--hero{border-top:3px solid var(--ox)}
+.wwm h2{font-size:16px;font-weight:800;margin:0 0 12px;letter-spacing:.2px}
+.wwm h3{font-size:13px;font-weight:800;margin:0 0 4px}
+.wwm p{margin:0 0 10px;font-size:14.5px}
+.wwm__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.wwm__role{border:1px solid var(--line);border-radius:11px;padding:12px 14px;background:#fff}
+.wwm__role--t1{border-left:4px solid var(--grn)}
+.wwm__role--t2{border-left:4px solid var(--gold)}
+.wwm__role--t3{border-left:4px solid var(--ox)}
+.wwm__role--unv{border-left:4px solid var(--pew);background:#fbfaf8}
+.wwm__who{font-size:12.5px;color:#6b7684;margin:2px 0 8px}
+.wwm__src{font-size:12.5px;color:#4a5766;border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+.wwm__src b{color:var(--ink)}
+.wwm__tierhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.wwm__pill{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+  padding:3px 10px;border-radius:99px;color:#fff}
+.wwm__pill--t1{background:var(--grn)} .wwm__pill--t2{background:var(--gold)}
+.wwm__pill--t3{background:var(--ox)} .wwm__pill--unv{background:var(--pew)}
+.wwm__count{font-size:12.5px;color:#6b7684}
+/* inverse bar */
+.wwm__bars{display:grid;gap:7px;margin:14px 0 6px}
+.wwm__bar{display:grid;grid-template-columns:210px 1fr 60px;gap:10px;align-items:center;font-size:13px}
+.wwm__bar span:first-child{font-weight:600}
+.wwm__track{background:#eee9e0;border-radius:99px;height:15px;overflow:hidden}
+.wwm__fill{height:100%;border-radius:99px}
+.wwm__num{text-align:right;font-weight:800;font-size:12.5px;font-variant-numeric:tabular-nums}
+.wwm__tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.wwm__tbl th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:#6b7684;
+  border-bottom:2px solid var(--line);padding:7px 9px}
+.wwm__tbl td{border-bottom:1px solid var(--line);padding:9px;vertical-align:top}
+.wwm__tag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.wwm__tag--ok{background:#e4f0e6;color:var(--grn)}
+.wwm__tag--ask{background:#f7efd9;color:#7a5f12}
+.wwm__tag--no{background:#f3e3e5;color:var(--ox)}
+.wwm__note{background:#fbfaf8;border-left:3px solid var(--pew);padding:11px 14px;border-radius:0 8px 8px 0;
+  font-size:13.5px;color:#4a5766;margin:12px 0 0}
+.wwm__warn{background:#fdf6f7;border-left:3px solid var(--ox);padding:12px 15px;border-radius:0 8px 8px 0;
+  font-size:14px;margin:0 0 18px}
+.wwm__scroll{overflow-x:auto}
+@media(max-width:640px){.wwm__bar{grid-template-columns:130px 1fr 48px;font-size:12px}}
+</style>
+<div class="wwm__in">
+
+  <div class="wwm__eyebrow">NHS INTELLIGENCE HUB · STAKEHOLDER MAPPER</div>
+  <h1>Who&rsquo;s who — what we can name, and what you have to earn</h1>
+  <p class="wwm__lede">The Stakeholder Mapper names <b>17 roles</b> across its product templates. This map shows, for
+  each one, whether a real named individual can be obtained from a public source — and if not, why not. Every verdict
+  is traced to a primary source. Nothing here is estimated.</p>
+
+  <div class="wwm__warn">
+    <b>The finding that matters:</b> there is an almost exact inverse relationship between how much a role influences
+    a device decision and how findable that person is. The roles the mapper flags as critical — procurement category
+    manager, IPC lead, MDSO, EBME — are precisely the ones no public register lists. The roles registers <i>do</i>
+    list reliably — Caldicott Guardian, SIRO, Information Asset Owner — aren&rsquo;t in the mapper at all, because
+    they rarely decide a device purchase.
+    <br><br>
+    That isn&rsquo;t a gap to apologise for. <b>The name of the category manager for your product line is only
+    obtainable through the relationship — it cannot be bought, scraped or FOI&rsquo;d. That is exactly why it is
+    worth something.</b>
+  </div>
+
+  <div class="wwm__card wwm__card--hero">
+    <h2>Name coverage across the 17 mapper roles</h2>
+    <div class="wwm__bars">
+      <div class="wwm__bar"><span>Named now, lawfully</span>
+        <div class="wwm__track"><div class="wwm__fill" style="width:11.8%;background:#2E6B3E"></div></div>
+        <span class="wwm__num">2 / 17</span></div>
+      <div class="wwm__bar"><span>Partial / findable</span>
+        <div class="wwm__track"><div class="wwm__fill" style="width:29.4%;background:#9A7A2E"></div></div>
+        <span class="wwm__num">5 / 17</span></div>
+      <div class="wwm__bar"><span>Earn it — relationship only</span>
+        <div class="wwm__track"><div class="wwm__fill" style="width:47%;background:#6B2A34"></div></div>
+        <span class="wwm__num">8 / 17</span></div>
+      <div class="wwm__bar"><span>Not yet checked</span>
+        <div class="wwm__track"><div class="wwm__fill" style="width:11.8%;background:#8C8880"></div></div>
+        <span class="wwm__num">2 / 17</span></div>
+    </div>
+    <p class="wwm__note">Patient/carer is counted in &ldquo;earn it&rdquo; but is a different case — never a
+    prospecting target. Percentages are of the mapper&rsquo;s role library, not of any individual account.</p>
+  </div>
+
+  <!-- ================= TIER 1 ================= -->
+  <div class="wwm__card">
+    <div class="wwm__tierhead">
+      <span class="wwm__pill wwm__pill--t1">Named now</span>
+      <h2 style="margin:0">Free, lawful, and published for exactly this purpose</h2>
+      <span class="wwm__count">2 roles</span>
+    </div>
+    <div class="wwm__grid" style="margin-top:12px">
+
+      <div class="wwm__role wwm__role--t1">
+        <h3>Procurement — national category lead</h3>
+        <div class="wwm__who">NHS Supply Chain category manager</div>
+        <div class="wwm__src"><b>Source:</b> NHS Supply Chain category contacts (~70 individuals, direct email and
+        mobile). <b>Published so suppliers can make contact</b> — the strongest lawful-basis position of any source
+        found, because your purpose matches the publication purpose.
+        <br><br><b>Timing:</b> NHS Supply Chain states the engagement window itself — <b>9 to 15 months before the
+        current arrangement expires</b>. Pair with its procurement calendar (~80 contract launches over 18 months).
+        <br><br><b>Limit:</b> these are national leads, not the category manager inside a given trust. They complement
+        trust relationships; they don&rsquo;t replace them. Handle under the outreach evidence standard — not a bulk list.</div>
+      </div>
+
+      <div class="wwm__role wwm__role--t1">
+        <h3>Payer — trust board tier only</h3>
+        <div class="wwm__who">Chief Finance Officer / Finance Director</div>
+        <div class="wwm__src"><b>Source:</b> ODS Senior Information Risk Owner register — ~11,363 rows, roughly
+        280&ndash;293 at trusts and ICBs. Free, Open Government Licence, bulk downloadable. Email fill rate 31%.
+        <br><br><b>Limit — read this before relying on it:</b> the mapper&rsquo;s Payer is the
+        <i>divisional / finance manager who holds the budget</i>. That person is <b>not</b> in any register. The board
+        CFO is findable; the budget-holder you actually pitch to is not.</div>
+      </div>
+
+    </div>
+    <p class="wwm__note"><b>Also freely available — but not roles your mapper asks for:</b> Caldicott Guardian
+    (~364&ndash;378 at trusts/ICBs, 86% email fill), Information Asset Owners (215 at trusts, 100% email fill),
+    plus CMO / Medical Director / Chief Nurse / CIO. Useful for Information Governance routes on digital products —
+    which is the one product type where this tier genuinely decides.</p>
+  </div>
+
+  <!-- ================= TIER 2 ================= -->
+  <div class="wwm__card">
+    <div class="wwm__tierhead">
+      <span class="wwm__pill wwm__pill--t2">Partial</span>
+      <h2 style="margin:0">Findable for some trusts, some of the time</h2>
+      <span class="wwm__count">5 roles</span>
+    </div>
+    <div class="wwm__grid" style="margin-top:12px">
+
+      <div class="wwm__role wwm__role--t2">
+        <h3>Any role at a trust currently tendering</h3>
+        <div class="wwm__who">Named contact on the notice</div>
+        <div class="wwm__src"><b>Source:</b> Find a Tender OCDS API (use the API — the HTML notice pages return 403
+        to scripted requests).
+        <br><br><b>Three things that change the number:</b> there is <b>no job-title field anywhere in the OCDS
+        schema</b>, so you cannot tell a Head of Procurement from a junior buyer. The 69.7% headline fill rate is
+        inflated by Wales at 93.2% — <b>England alone is 42.5%</b>. And ~4% of names are departmental
+        (&ldquo;Procurement Team&rdquo;) rather than people.
+        <br><br><b>Counter-intuitive:</b> Procurement Act 2023 notices score <i>lower</i> (44.4% vs 76.4%), because
+        &ldquo;person&rdquo; in UK law includes bodies corporate. Don&rsquo;t assume the new Act helps.
+        <br><br><b>Why partial coverage is fine:</b> a trust that is tendering is a trust worth a call, and the
+        tender is your reason to make it.</div>
+      </div>
+
+      <div class="wwm__role wwm__role--t2">
+        <h3>EBME / clinical engineering</h3>
+        <div class="wwm__who">EBME / medical physics / clinical engineering</div>
+        <div class="wwm__src"><b>Source:</b> Register of Clinical Technologists — <b>therct.org.uk</b> (public, free)
+        — 688 named Medical Engineering registrants, 1,055 across all scopes. AHCS register adds ~160 more.
+        <br><br><b>Hard limit:</b> name and <b>town only</b> — no employer, no job title. It establishes who exists,
+        not who works where. IPEM&rsquo;s terms prohibit systematic downloading.
+        <br><br>Roughly 10&ndash;15% of acute trusts publish named clinical engineering staff on department pages,
+        skewed to large teaching centres. Realistic route is manual research per target.</div>
+      </div>
+
+      <div class="wwm__role wwm__role--t2">
+        <h3>Pharmacy / aseptic</h3>
+        <div class="wwm__who">Chief pharmacist / aseptic services lead</div>
+        <div class="wwm__src"><b>Source:</b> some Chief Pharmacists appear in the ODS registers.
+        <br><br><b>Do not use ABPI Disclosure UK for this.</b> It carries 25 Chief/Deputy Chief Pharmacists and looks
+        ideal — but the identity data is licensed from IQVIA OneKey, whose terms expressly prohibit
+        &ldquo;compiling an internal database&rdquo; and commercial extraction. A CRM import is precisely both.</div>
+      </div>
+
+      <div class="wwm__role wwm__role--t2">
+        <h3>Medicines optimisation</h3>
+        <div class="wwm__who">Formulary pharmacist</div>
+        <div class="wwm__src">Same position and same ABPI/IQVIA restriction as Pharmacy. Area Prescribing Committee
+        <i>membership categories</i> are published (13+ categories); the named individuals in the seats generally
+        are not.</div>
+      </div>
+
+      <div class="wwm__role wwm__role--t2">
+        <h3>Decision-maker</h3>
+        <div class="wwm__who">Clinical lead + product evaluation committee</div>
+        <div class="wwm__src">The clinical lead is sometimes identifiable via a royal college register — but the two
+        best (RCP, RCoA) are both permission-blocked. <b>Committee membership is not published anywhere.</b>
+        You can learn the committee&rsquo;s <i>cycle and criteria</i> without a name, and that is often the more
+        valuable half.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= TIER 3 ================= -->
+  <div class="wwm__card">
+    <div class="wwm__tierhead">
+      <span class="wwm__pill wwm__pill--t3">Earn it</span>
+      <h2 style="margin:0">Not obtainable from any public source — by structure, not by oversight</h2>
+      <span class="wwm__count">8 roles</span>
+    </div>
+    <p>Across ODS, CQC, CIPS, the professional bodies, trust board papers and FOI, these roles are absent. In the ODS
+    registers, filtered across <b>20,000+ named individuals</b>: procurement <b>3</b>, IPC <b>1</b>, MDSO <b>1</b>,
+    EBME <b>5</b>, Category Manager <b>0</b>.</p>
+    <div class="wwm__grid" style="margin-top:12px">
+      <div class="wwm__role wwm__role--t3"><h3>Procurement — trust category manager</h3>
+        <div class="wwm__who">The person who actually buys your category</div>
+        <div class="wwm__src">The single most valuable name in the map, and the least obtainable. See the three
+        closed doors below.</div></div>
+      <div class="wwm__role wwm__role--t3"><h3>Infection Prevention &amp; Control</h3>
+        <div class="wwm__who">IPC lead nurse / team</div>
+        <div class="wwm__src">ODS: <b>1</b> across 20,000+ rows.</div></div>
+      <div class="wwm__role wwm__role--t3"><h3>User</h3>
+        <div class="wwm__who">Front-line clinical team</div>
+        <div class="wwm__src">Never published as a named list. Met, not looked up.</div></div>
+      <div class="wwm__role wwm__role--t3"><h3>Tissue viability</h3>
+        <div class="wwm__who">TVN / service</div>
+        <div class="wwm__src">No register. Occasionally named on a trust service page.</div></div>
+      <div class="wwm__role wwm__role--t3"><h3>Microbiology / pathology</h3>
+        <div class="wwm__who">Service lead</div>
+        <div class="wwm__src">Would be reachable via the RCP register — permission-blocked.</div></div>
+      <div class="wwm__role wwm__role--t3"><h3>Antimicrobial stewardship</h3>
+        <div class="wwm__who">Micro consultant / pharmacist</div>
+        <div class="wwm__src">No register lists post-holders by trust.</div></div>
+      <div class="wwm__role wwm__role--t3"><h3>Decontamination / SSD &amp; Sharps / H&amp;S</h3>
+        <div class="wwm__who">Sterile services lead; H&amp;S committee</div>
+        <div class="wwm__src">Committee roles; membership unpublished.</div></div>
+      <div class="wwm__role wwm__role--t3"><h3>Dietetics / nutrition</h3>
+        <div class="wwm__who">Nutrition support team</div>
+        <div class="wwm__src">No register.</div></div>
+    </div>
+
+    <h2 style="margin:20px 0 8px">Why — the three closed doors</h2>
+    <div class="wwm__grid">
+      <div class="wwm__role"><h3>Registers stop at the exec tier</h3>
+        <div class="wwm__src">Caldicott Guardians and SIROs are named because information-governance statute requires
+        those accountabilities to be visible. <b>Nothing requires a trust to publish who buys its wound care.</b></div></div>
+      <div class="wwm__role"><h3>FOI does not open it</h3>
+        <div class="wwm__src">ICO decision <b>IC-340495-F0W1</b> (2025) is almost exactly this case: a supplier asked
+        a trust for the contracts manager&rsquo;s name and email. The ICO backed the trust — accepting the commercial
+        motive as a legitimate interest, but failing it on necessity.
+        <br><br><b>The practical trap:</b> FOI-obtained data triggers an Article 14 duty to tell each person where you
+        got their details. Your opening line becomes &ldquo;I obtained your details via a Freedom of Information
+        request to your employer.&rdquo; A materially worse opener than almost any alternative.</div></div>
+      <div class="wwm__role"><h3>The profession doesn&rsquo;t publish its own</h3>
+        <div class="wwm__src">CIPS runs ~54,600 public profiles but <b>cannot be searched by employer</b> — free text
+        does not reach bios, so &ldquo;NHS&rdquo; returns nothing. UK pool ~480; a 60-profile sample contained
+        <b>zero</b> NHS trust staff. Board papers are a firm negative too: across six trusts and ~170 author lines,
+        Head of Procurement 0, MDSO 0, EBME 0, Category Manager 0.</div></div>
+    </div>
+  </div>
+
+  <!-- ================= UNVERIFIED ================= -->
+  <div class="wwm__card">
+    <div class="wwm__tierhead">
+      <span class="wwm__pill wwm__pill--unv">Not yet checked</span>
+      <h2 style="margin:0">Stated as open rather than guessed</h2>
+      <span class="wwm__count">2 roles</span>
+    </div>
+    <div class="wwm__grid" style="margin-top:12px">
+      <div class="wwm__role wwm__role--unv"><h3>Sustainability / Green Plan lead</h3>
+        <div class="wwm__src">Trust Green Plans are published and <i>may</i> name a lead. Not checked in the
+        20/07/2026 research — do not assume either way.</div></div>
+      <div class="wwm__role wwm__role--unv"><h3>Radiation protection</h3>
+        <div class="wwm__who">RPA / Medical Physics Expert</div>
+        <div class="wwm__src">RPAs are a statutory appointment, so a route may exist. Not checked — flagged rather
+        than claimed.</div></div>
+    </div>
+  </div>
+
+  <!-- ================= SOURCES ================= -->
+  <div class="wwm__card">
+    <h2>Every source checked — and its verdict</h2>
+    <div class="wwm__scroll">
+    <table class="wwm__tbl">
+      <thead><tr><th>Source</th><th>What it gives</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><b>NHS Supply Chain</b> category contacts</td>
+          <td>~70 national category managers, direct email + mobile, mapped to speciality. Engagement window stated.</td>
+          <td><span class="wwm__tag wwm__tag--ok">USE — best available</span></td></tr>
+        <tr><td><b>ODS registers</b> (Caldicott / SIRO / IAO)</td>
+          <td>3 files, plain HTTPS GET, no key, Open Government Licence. Name, job title, ODS code, organisation, email.</td>
+          <td><span class="wwm__tag wwm__tag--ok">USE — exec tier only</span></td></tr>
+        <tr><td><b>Find a Tender</b> (OCDS API)</td>
+          <td>Named contact on live notices. England fill 42.5%. No job-title field.</td>
+          <td><span class="wwm__tag wwm__tag--ok">USE — via API, not HTML</span></td></tr>
+        <tr><td><b>Contracts Finder</b></td>
+          <td>Effectively legacy — 94 of 100 recent releases were awards, not live tenders. Different parameter names to FTS.</td>
+          <td><span class="wwm__tag wwm__tag--ask">LOW VALUE now</span></td></tr>
+        <tr><td><b>NHS Jobs</b></td>
+          <td>The single best source for procurement, pharmacy and EBME names at scale, with current data. Self-refreshing, and a buying signal in itself.</td>
+          <td><span class="wwm__tag wwm__tag--ask">ASK FIRST — needs written agreement</span></td></tr>
+        <tr><td><b>RCP Register of Fellows</b></td>
+          <td>~12,000 UK fellows: name, region, trust, specialty. Filterable by 111 specialties.</td>
+          <td><span class="wwm__tag wwm__tag--ask">ASK FIRST — terms prohibit copying</span></td></tr>
+        <tr><td><b>RCoA</b> Regional Advisers</td>
+          <td>Per-trust by definition — possibly the best-shaped data of any professional body.</td>
+          <td><span class="wwm__tag wwm__tag--ask">ASK FIRST — robots.txt blocks bots explicitly</span></td></tr>
+        <tr><td><b>Register of Clinical Technologists</b></td>
+          <td>688 Medical Engineering registrants. Name + town only, no employer.</td>
+          <td><span class="wwm__tag wwm__tag--ask">MANUAL ONLY</span></td></tr>
+        <tr><td><b>LinkedIn</b></td>
+          <td>—</td>
+          <td><span class="wwm__tag wwm__tag--no">OUT — see below</span></td></tr>
+        <tr><td><b>ABPI Disclosure UK</b></td>
+          <td>18,399 people with speciality, role, institution — but IQVIA OneKey licence bars internal databases and commercial extraction.</td>
+          <td><span class="wwm__tag wwm__tag--no">OUT — licence</span></td></tr>
+        <tr><td><b>CIPS</b></td>
+          <td>Cannot be searched by employer. Zero NHS trust staff in a 60-profile sample.</td>
+          <td><span class="wwm__tag wwm__tag--no">DEAD END</span></td></tr>
+        <tr><td><b>Trust board papers / annual reports</b></td>
+          <td>0 procurement, 0 MDSO, 0 EBME across ~170 author lines. Structural, not sampling.</td>
+          <td><span class="wwm__tag wwm__tag--no">DEAD END</span></td></tr>
+        <tr><td><b>FOI</b></td>
+          <td>Names sometimes ordered disclosed; direct emails withheld in every NHS case found.</td>
+          <td><span class="wwm__tag wwm__tag--no">OUT — and harms the opener</span></td></tr>
+        <tr><td><b>ABPI / ABHI membership</b></td>
+          <td>Company records only (~150 pharma, ~400 medtech). Your customers&rsquo; employers, not NHS buyers.</td>
+          <td><span class="wwm__tag wwm__tag--no">NOT APPLICABLE</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="wwm__note"><b>Why LinkedIn is out — the practical reason before the legal one.</b> Automated profile
+    views appear in the target&rsquo;s &ldquo;who viewed your profile&rdquo; feed, attributed to whoever is logged in.
+    A Hub tool that scraped NHS staff profiles would surface in those people&rsquo;s notifications —
+    <b>attributed to your members</b>. That is a reputational risk you would be shipping to your customers. LinkedIn
+    also returns HTTP 999 to programmatic access and its terms prohibit automated collection.
+    <br><br><b>Correction worth carrying:</b> <b>hcsa.org.uk is NOT the Health Care Supply Association</b> — it is a
+    Hampshire schools netball site. The real HCSA is <b>nhsprocurement.org.uk</b>. Don&rsquo;t let the wrong domain
+    reach a config or outreach list.</p>
+  </div>
+
+  <div class="wwm__card" style="border-top:3px solid var(--gold)">
+    <h2>What this means for how you sell</h2>
+    <p>A rep looking at a map showing two evidenced names, five findable with a lookup, and eight marked
+    &ldquo;you must earn this&rdquo; has a genuinely useful account plan. They can see the <i>shape</i> of what they
+    don&rsquo;t know. That is materially better than a tool that returns eight roles and leaves them guessing which
+    are real.</p>
+    <p style="margin-bottom:0"><b>The gap is the product.</b> Anything a competitor could buy from a list is not an
+    advantage. The eight roles in the red tier are your reason to be in the building.</p>
+  </div>
+
+  <p style="font-size:12px;color:#8a94a0;margin:14px 0 0">Compiled 20/07/2026 from the Stakeholder Mapper role library
+  (17 roles) and primary-source research. Availability verdicts reflect sources checked on that date; permission-blocked
+  sources may open if asked. Named individuals move — always confirm per target before use.</p>
+
+</div>
+</div>
