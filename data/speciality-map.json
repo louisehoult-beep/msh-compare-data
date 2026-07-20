@@ -19,7 +19,7 @@
    "Facilities and Office Solutions"
   ],
   "eClassTopLevel": "eClass top level as read from the live catalogue mega-menu: 21 codes — A Provisions, B Staff Clothing, C Patients Clothing & Footwear, D Pharmaceuticals Blood Products & Medical Gases, E Dressings, F Medical & Surgical Equipment, G Patients Appliances, H Chemicals & Reagents, I Dental & Optical Equipment, J Diagnostic Imaging & Radiotherapy, K Laboratory Equipment & Services, M Hotel Services, P Building & Engineering, R Purchased Healthcare, T Furniture Fittings, U Hardware Crockery, V Bedding Linen & Textiles, W Office Equipment Telecomms Computers & Stationery, X Transportation, Y Recreational Equipment & Souvenirs, Z Staff & Patient Consulting Services & Expenses. There is NO L, N, O, Q or S top level in the live catalogue — an earlier note listed 23 branches including L Fuel Light Power Water and S Gardening & Farming, which do not appear in the live menu.",
-  "specialityCount": 35,
+  "specialityCount": 33,
   "knownDivergence": "FULLY RESOLVED 20/07/2026. Both the architecture problem (MST_DATA in a base64 blob) and the content gap (7 specialities with no products) are fixed. data/products.json now holds all 37 specialities with 217 products, matching this file's 37 exactly. Products for the 7 added specialities (bloodcoll, dermatology, orthotics, waste, mes, estates, food) were authored in the same style as the existing 198, using only existing TPL product types and role keys — no new mst-logic.js code paths needed. dermatology's FW entry is deliberately omitted (its NHSSC/eClass home is still PENDING) and falls back to fwFor()'s generic message rather than a guessed URL. mes and food are the thinnest entries, matching their flagged low relevance to typical Hub members. Verified: 217 P entries validate against real SPECS ids/TPL types/role keys with zero errors; every SPECS id has >=1 product; mst-logic.js executes end-to-end with zero exceptions against the full dataset; live-served copy matches. One real error caught before shipping: the NHSSC slug 'diagnostic-equipment-and-services' 404s — correct is 'diagnostic-equipment'."
  },
  "canonicalSpecialities": [
@@ -229,20 +229,6 @@
    "nhssc": "Rehabilitation and Community — Orthotics; frameworks 'Orthotics, Podiatry and Immobilisation'.",
    "eClass": "GL Orthotic Products Abdominal External (GLB spinal supports, back braces, spinal jackets); GN Orthotic Products Lower Limb External (GNC lower limb splints). Both read from the live catalogue.",
    "addedBecause": "Was folded into 'Rehabilitation and mobility'. Four suppliers tag themselves 'Prosthetics & orthotics' and it is a distinct NHSSC sub-category with its own clinical service (orthotics departments, podiatry), so it earns its own speciality."
-  },
-  {
-   "id": "waste",
-   "label": "Clinical waste and sharps management",
-   "nhssc": "Medical and Surgical Consumables — 'Clinical and Sharps Waste Management'; related 'Environmental Decontamination'.",
-   "eClass": "MME Biohazard & Cytotoxic containers (read via the oncology mapping). Wider waste codes PENDING.",
-   "addedBecause": "A named NHSSC framework with real rep territory and no speciality covering it. Sharps safety also connects directly to the Sharps Regulations 2013 driver already used across the vascular and blood collection families."
-  },
-  {
-   "id": "mes",
-   "label": "Managed equipment services and finance",
-   "nhssc": "Diagnostic Equipment and Services — 'Finance solutions' and 'Managed equipment services'.",
-   "eClass": "N/A — a commercial wrapper, not a product class. Equipment inside an MES carries its own clinical eClass codes.",
-   "addedBecause": "Not a clinical speciality, but a significant and growing rep route — pathology MSCs, reagent rental and analyser contracts all sit here, and the mapper already teaches that an analyser contract is a different event from a consumables framework. Deliberately labelled so a rep does not mistake it for a clinical category."
   }
  ],
  "supplierSpecialityMap": {
@@ -587,6 +573,7 @@
   "Transportation (X), Building & Engineering (P) — NOT added: no realistic overlap with medical device or pharma sales.",
   "Aids for daily living / Technology Enabled Care / wigs / breast prostheses — partially covered by 'Rehabilitation and mobility'; check whether these need splitting out the way orthotics just was.",
   "Closed blood sampling from indwelling lines — genuine white space: no NHSSC framework category and no manufacturer category, exists at product level only (BD VAMP, ICU Medical SafeSet). A product family rather than a speciality, but worth knowing.",
-  "'Food and catering services' and 'Facilities, estates and workwear' were added 20/07/2026 for NHSSC completeness, then REMOVED the same day on Lou's instruction — not needed for Hub members. If NHSSC completeness is wanted again later, the six-CBU list in _meta.nhsscCategories still names both categories; the speciality-level detail (eClass codes, framework names) was in the removed entries and is preserved in git history (commit e26f7fe added them, a later commit removed them)."
+  "'Food and catering services' and 'Facilities, estates and workwear' were added 20/07/2026 for NHSSC completeness, then REMOVED the same day on Lou's instruction — not needed for Hub members. If NHSSC completeness is wanted again later, the six-CBU list in _meta.nhsscCategories still names both categories; the speciality-level detail (eClass codes, framework names) was in the removed entries and is preserved in git history (commit e26f7fe added them, a later commit removed them).",
+  "'Clinical waste and sharps management' and 'Managed equipment services and finance' were added 20/07/2026 for NHSSC completeness, then REMOVED the same day on Lou's instruction (along with Food and Facilities/estates, removed earlier the same day). All four remain in git history (added in commit e26f7fe) if wanted again — waste/mes removed in the commit right after this note was written."
  ]
 }
