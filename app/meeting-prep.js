@@ -48,6 +48,29 @@
 
     var bar = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:10px;padding:12px;margin-bottom:14px;');
     var selCo = mkSelect('Your company', [''].concat(curated.map(nm)).concat(rest.length ? ['— other suppliers —'] : []).concat(rest.map(nm)));
+    // Product picker. Was missing entirely — product could only reach the brief
+    // via hand-off from Product Comparison, so anyone starting here had no way
+    // to say what they sell. Repopulates whenever the company changes.
+    var selPr = mkSelect('Product', ['']);
+    function fillProducts(){
+      var co = suppliers.filter(function(s){ return s.name === selCo.sel.value; })[0];
+      var prods = (co && co.products) || [];
+      var keep = selPr.sel.value;
+      selPr.sel.innerHTML = '';
+      var opts = [''].concat(prods);
+      opts.forEach(function(o){
+        var op = el('option'); op.value = o;
+        op.textContent = o || (prods.length ? '— choose —' : '— pick your company first —');
+        selPr.sel.appendChild(op);
+      });
+      if (keep && prods.indexOf(keep) !== -1) selPr.sel.value = keep;
+      selPr.sel.disabled = !prods.length;
+      selPr.sel.style.background = prods.length ? '#fff' : '#f4f2ee';
+    }
+    selCo.sel.addEventListener('change', fillProducts);
+    // Picking a product means you are not early-stage; keep the two in step.
+    selPr.sel.addEventListener('change', function(){ if (selPr.sel.value) early.checked = false; });
+
     var selSp = mkSelect('Speciality', [''].concat(cfg.specialities || []));
     var profiledNames = (cfg.trusts || []).map(function(t){ return t.name; });
     // trustDirectory entries may be strings (legacy) or {n,code,town,postcode,kind} objects.
@@ -67,7 +90,8 @@
     var early = el('input'); early.type = 'checkbox';
     earlyWrap.appendChild(early); earlyWrap.appendChild(document.createTextNode('Early-stage (no product yet)'));
     var btn = el('button', 'background:#6B2A34 !important;color:#ffffff !important;border:0;border-radius:8px;padding:12px 24px;font-weight:800;font-size:15px;cursor:pointer;letter-spacing:.3px;box-shadow:0 1px 3px rgba(0,0,0,.15);', 'Prepare me');
-    [selCo.box, selSp.box, selTr.box, selAud.box].forEach(function(b){ bar.appendChild(b); });
+    [selCo.box, selPr.box, selSp.box, selTr.box, selAud.box].forEach(function(b){ bar.appendChild(b); });
+    fillProducts();
     var side = el('div', 'display:flex;flex-direction:column;gap:8px;'); side.appendChild(earlyWrap); side.appendChild(btn); bar.appendChild(side);
     wrap.appendChild(bar);
     function nm(s){ return s.name; }
@@ -94,6 +118,13 @@
       if (opts.indexOf(h.company) !== -1) selCo.sel.value = h.company;
       focusProduct = h.product || '';
       focusEdge = h.edge || '';
+      // Reflect the carried-over product in the picker so the two never disagree.
+      fillProducts();
+      if (focusProduct){
+        var pOpts = [].slice.call(selPr.sel.options).map(function(o){ return o.value; });
+        if (pOpts.indexOf(focusProduct) !== -1) selPr.sel.value = focusProduct;
+        early.checked = false;
+      }
       handNote.style.display = 'block';
       handNote.innerHTML = 'Carried over from Product Comparison: <strong>' + esc(focusProduct) + '</strong> (' + esc(h.company) + ') — pick the trust and who you&rsquo;re meeting, then <strong>Prepare me</strong>.';
     }
@@ -122,6 +153,8 @@
       setTimeout(function(){ pk.print(); }, 600);
     }
     btn.addEventListener('click', function(){
+      // An explicitly chosen product wins over a stale Product Comparison hand-off.
+      if (selPr.sel.value){ focusProduct = selPr.sel.value; focusEdge = ''; }
       var co = suppliers.filter(function(s){ return s.name === selCo.sel.value; })[0];
       var tr = (cfg.trusts || []).filter(function(t){ return t.name === selTr.sel.value; })[0];
       out.innerHTML = brief(co, selCo.sel.value, selSp.sel.value, tr, selTr.sel.value, selAud.sel.value, early.checked, suppliers, cfg);
