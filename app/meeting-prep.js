@@ -73,6 +73,16 @@
         if (m && m.to) m.to.forEach(function(id){ out[id] = 1; });
         else if (LABEL_TO_ID[s]) out[LABEL_TO_ID[s]] = 1;
       });
+      /* Roll child specialities into their parent (e.g. Blood collection /
+         phlebotomy is filed under Vascular access in the taxonomy, with its
+         own buying stakeholder — see speciality-map.json's placementNote).
+         Selecting the parent must also surface child-only suppliers, same as
+         mst-logic.js's SPECS[].parent rollup for the Stakeholder Mapper —
+         otherwise picking "Vascular access" here silently misses GBUK and
+         anyone else who only sells blood collection. */
+      if (CANON) CANON.forEach(function(c){
+        if (c.parent && out[c.parent]) out[c.id] = 1;
+      });
       return Object.keys(out);
     }
     /* A supplier's specialities and its product tags were unconnected, so a
