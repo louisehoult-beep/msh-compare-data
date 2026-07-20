@@ -8,7 +8,7 @@
   "nhsscKey": "TWO structures, and conflating them is the main trap. (1) NHSSC customer-facing CATEGORIES — six, each holding named frameworks — is how you buy. (2) NHS eClass — 23 branches, 284 level-2, 2,522 level-3 — is what the catalogue and every NPC code run on. Both are given per speciality below.",
   "nhsscStructure": "CORRECTION, verified 20/07/2026: NHS Supply Chain 'category towers' NO LONGER EXIST. The 2018 11-tower model is defunct and every tower name with it. NHSSC now runs SIX Category Business Units: Medical Technology; Medical and Surgical Consumables; Diagnostic Equipment and Services; Rehabilitation and Community; Food; Facilities and Office Solutions. Source: https://www.supplychain.nhs.uk/categories/",
   "buyingCentreWarning": "The NHSSC category and the buying centre are NOT the same thing, and conflating them misdirects a rep. Blood collection is the worked example: NHSSC files it under Medical and Surgical Consumables (a consumables category), but the product is specified by the PATHOLOGY / blood sciences department and ordered from Pathology Reception — not by the vascular access clinical team and not by ward materials management. Verified across eight trusts' own published pathology user guides.",
-  "reviewNeeded": "Entries with \"review\": true are genuine judgement calls, not obvious mappings. Confirm before relying on them.",
+  "reviewNeeded": "All entries previously flagged 'review: true' were resolved 20/07/2026 with best-guess rationale per Lou's instruction (see each entry's 'resolved' + 'note' fields). None are independently re-verified — if a supplier's actual market position looks wrong in the tool, this is the first place to check.",
   "npcConvention": "DO NOT DERIVE CATEGORY FROM THE NPC PREFIX. An earlier working note claimed the 3-letter NPC prefix IS the eClass level-3 code, so the cached catalogue could be categorised from the code alone. That is WRONG as a general rule and was corrected 20/07/2026 against the eClass field on live product pages. COUNTER-EXAMPLES: KFK312 -> KFF (Auto Analyser Accessories); KCM224 -> KBD (Laboratory & Pathology other consumables); FSQ337 -> FVB (Catheter - Central venous). WHAT DOES HOLD: the newer 5-digit series (pattern xxx85nnn) matched its prefix in every case tested — FNG85288->FNG, FVH85219->FVH, FMB85036->FMB, KBD85186->KBD. Older short codes do not. The '100% of 1,476 NPCs match ^[A-Z]{3}[0-9]+$' figure is a FORMAT observation only; conforming to the format does not mean the prefix carries the category. SO: read category from the per-product eClass field, not from the code. A prefix join over the cache would silently mis-file older lines. GBUK's blood collection codes are the newer series (FNG85022-85033) and are safe, but do not generalise from that. OTHER TRAPS: (a) product pages have NO breadcrumb — the 'Home / F - ... / FA - ...' strip is static nav, identical on every page; only the eClass field is real. (b) The sidebar Product Category facet is hard-capped at 200 and on /product-list is GLOBAL, not rescoped by an applied filter; on /search?query=... it IS result-scoped and reliable. (c) Search does not do NPC prefix matching — 'FNG85' returns zero; exact NPC only.",
   "nhsscCategories": [
    "Medical Technology",
@@ -19,7 +19,7 @@
    "Facilities and Office Solutions"
   ],
   "eClassTopLevel": "eClass top level as read from the live catalogue mega-menu: 21 codes — A Provisions, B Staff Clothing, C Patients Clothing & Footwear, D Pharmaceuticals Blood Products & Medical Gases, E Dressings, F Medical & Surgical Equipment, G Patients Appliances, H Chemicals & Reagents, I Dental & Optical Equipment, J Diagnostic Imaging & Radiotherapy, K Laboratory Equipment & Services, M Hotel Services, P Building & Engineering, R Purchased Healthcare, T Furniture Fittings, U Hardware Crockery, V Bedding Linen & Textiles, W Office Equipment Telecomms Computers & Stationery, X Transportation, Y Recreational Equipment & Souvenirs, Z Staff & Patient Consulting Services & Expenses. There is NO L, N, O, Q or S top level in the live catalogue — an earlier note listed 23 branches including L Fuel Light Power Water and S Gardening & Farming, which do not appear in the live menu.",
-  "specialityCount": 37,
+  "specialityCount": 35,
   "knownDivergence": "FULLY RESOLVED 20/07/2026. Both the architecture problem (MST_DATA in a base64 blob) and the content gap (7 specialities with no products) are fixed. data/products.json now holds all 37 specialities with 217 products, matching this file's 37 exactly. Products for the 7 added specialities (bloodcoll, dermatology, orthotics, waste, mes, estates, food) were authored in the same style as the existing 198, using only existing TPL product types and role keys — no new mst-logic.js code paths needed. dermatology's FW entry is deliberately omitted (its NHSSC/eClass home is still PENDING) and falls back to fwFor()'s generic message rather than a guessed URL. mes and food are the thinnest entries, matching their flagged low relevance to typical Hub members. Verified: 217 P entries validate against real SPECS ids/TPL types/role keys with zero errors; every SPECS id has >=1 product; mst-logic.js executes end-to-end with zero exceptions against the full dataset; live-served copy matches. One real error caught before shipping: the NHSSC slug 'diagnostic-equipment-and-services' 404s — correct is 'diagnostic-equipment'."
  },
  "canonicalSpecialities": [
@@ -243,20 +243,6 @@
    "nhssc": "Diagnostic Equipment and Services — 'Finance solutions' and 'Managed equipment services'.",
    "eClass": "N/A — a commercial wrapper, not a product class. Equipment inside an MES carries its own clinical eClass codes.",
    "addedBecause": "Not a clinical speciality, but a significant and growing rep route — pathology MSCs, reagent rental and analyser contracts all sit here, and the mapper already teaches that an analyser contract is a different event from a consumables framework. Deliberately labelled so a rep does not mistake it for a clinical category."
-  },
-  {
-   "id": "estates",
-   "label": "Facilities, estates and workwear",
-   "nhssc": "Facilities and Office Solutions (entire CBU) — catering and cleaning equipment; furniture; medical pulp; stationery; uniforms and workwear.",
-   "eClass": "T Furniture Fittings; U Hardware Crockery; W Office Equipment Telecomms Computers & Stationery; B Staff Clothing; C Patients Clothing & Footwear; V Bedding Linen & Textiles; MK Cleaning Materials (MKJ bleaches, disinfectants). Top-level codes read from the live catalogue menu.",
-   "addedBecause": "An entire NHSSC Category Business Unit had no speciality. Note theatre drapes and medical wipes (VE) stay under Theatres, where the clinical buyer sits."
-  },
-  {
-   "id": "food",
-   "label": "Food and catering services",
-   "nhssc": "Food (entire CBU) — ambient food; beverages; covers (retail and patient); fresh and frozen food; ready meals; vending solutions.",
-   "eClass": "A Provisions. Top-level code read from the live catalogue menu.",
-   "addedBecause": "An entire NHSSC Category Business Unit had no speciality. LOW RELEVANCE to medical device and pharma reps — added for completeness of the NHSSC key rather than because Hub members are likely to sell here. Distinct from 'Nutrition and enteral feeding', which is clinical."
   }
  ],
  "supplierSpecialityMap": {
@@ -344,8 +330,8 @@
     "ent",
     "neuro"
    ],
-   "review": true,
-   "note": "Neuro-otology sits across ENT and neurosciences; mapped to both."
+   "note": "keep both — 'ent' and 'neuro' genuinely both apply; neuro-otology sits at the boundary of the two, and multi-mapping means a supplier here is found by a rep working either side.",
+   "resolved": "20/07/2026 — best guess per Lou's instruction, not independently re-verified."
   },
   "Oncology / radiotherapy": {
    "to": [
@@ -412,8 +398,8 @@
     "pathology",
     "bloodtx"
    ],
-   "review": true,
-   "note": "Transfusion labs sit in pathology, but the products are blood/transfusion. Mapped to both."
+   "note": "keep both — the LAB (transfusion medicine) sits under pathology, but the product itself is blood/transfusion. A rep working either speciality should reach this supplier.",
+   "resolved": "20/07/2026 — best guess per Lou's instruction, not independently re-verified."
   },
   "Blood management / apheresis": {
    "to": [
@@ -434,8 +420,8 @@
    "to": [
     "continence"
    ],
-   "review": true,
-   "note": "Stents, stone management, ureteral catheters — urology. Confirm this is where you'd expect a rep to find it."
+   "note": "BEST GUESS, not a confident call: map to 'continence' (Continence / Urology) alone. Endourology — ureteric stents, stone management, ureteral catheters — is a urology subspecialty, and Continence / Urology is the only canonical speciality that covers urology at all. GBUK's own catalogue treats Endourology as a distinct division (34 products, more than most of the 35 canonical specialities hold in total) — if that volume turns out to be typical across suppliers rather than a GBUK-specific curiosity, a dedicated 'Endourology' speciality would be the more accurate fix. Not done here because adding a speciality was outside what was asked; flagged so it can be revisited if the pattern holds.",
+   "resolved": "20/07/2026 — best guess per Lou's instruction, not independently re-verified."
   },
   "Enteral feeding": {
    "to": [
@@ -469,7 +455,8 @@
     "theatres",
     "anaesthesia"
    ],
-   "review": true
+   "resolved": "20/07/2026 — best guess per Lou's instruction, not independently re-verified.",
+   "note": "keep both — matches GBUK's own division structure, which files exactly this combination together (its 'Surgical & Critical Care' division spans theatre and anaesthesia products)."
   },
   "Decontamination / sterile services": {
    "to": [
@@ -506,16 +493,16 @@
     "pathology",
     "imaging"
    ],
-   "review": true,
-   "note": "Biopsy devices are placed under imaging guidance but yield a pathology sample. Ambiguous — your call."
+   "note": "keep both — genuinely used both ways: image-guided biopsy is an imaging-led procedure, the resulting sample is a pathology product. No single speciality captures the whole picture.",
+   "resolved": "20/07/2026 — best guess per Lou's instruction, not independently re-verified."
   },
   "Virtual wards / RPM": {
    "to": [
     "monitoring",
     "digital"
    ],
-   "review": true,
-   "note": "Remote monitoring is both a monitoring product and a digital platform."
+   "note": "keep both — remote patient monitoring is simultaneously a monitoring product category and a digital-health platform; the buyer could be either team depending on the trust.",
+   "resolved": "20/07/2026 — best guess per Lou's instruction, not independently re-verified."
   },
   "Ambient AI scribe": {
    "to": [
@@ -552,8 +539,8 @@
     "digital",
     "monitoring"
    ],
-   "review": true,
-   "note": "Electronic observations feed patient monitoring as well as the EPR."
+   "note": "keep both — electronic observations feed the EPR but are also patient-monitoring infrastructure; same reasoning as Virtual wards / RPM.",
+   "resolved": "20/07/2026 — best guess per Lou's instruction, not independently re-verified."
   },
   "Personal health record": {
    "to": [
@@ -590,8 +577,8 @@
     "neuro",
     "digital"
    ],
-   "review": true,
-   "note": "Stroke AI reads CT/CTA imaging for a neuro pathway."
+   "note": "keep all three — the product reads CT/CTA imaging (imaging), for a neurosciences pathway (neuro), delivered as AI software (digital). Removing any one understates what the product touches.",
+   "resolved": "20/07/2026 — best guess per Lou's instruction, not independently re-verified."
   }
  },
  "gapsInCanonicalList": [
@@ -599,6 +586,7 @@
   "Purchased Healthcare (eClass R) — outsourced clinical services. NOT added: it is a service-commissioning route, not a product speciality, and belongs with the ICB commissioning content rather than the product mapper.",
   "Transportation (X), Building & Engineering (P) — NOT added: no realistic overlap with medical device or pharma sales.",
   "Aids for daily living / Technology Enabled Care / wigs / breast prostheses — partially covered by 'Rehabilitation and mobility'; check whether these need splitting out the way orthotics just was.",
-  "Closed blood sampling from indwelling lines — genuine white space: no NHSSC framework category and no manufacturer category, exists at product level only (BD VAMP, ICU Medical SafeSet). A product family rather than a speciality, but worth knowing."
+  "Closed blood sampling from indwelling lines — genuine white space: no NHSSC framework category and no manufacturer category, exists at product level only (BD VAMP, ICU Medical SafeSet). A product family rather than a speciality, but worth knowing.",
+  "'Food and catering services' and 'Facilities, estates and workwear' were added 20/07/2026 for NHSSC completeness, then REMOVED the same day on Lou's instruction — not needed for Hub members. If NHSSC completeness is wanted again later, the six-CBU list in _meta.nhsscCategories still names both categories; the speciality-level detail (eClass codes, framework names) was in the removed entries and is preserved in git history (commit e26f7fe added them, a later commit removed them)."
  ]
 }
