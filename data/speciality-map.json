@@ -1,0 +1,562 @@
+{
+ "_meta": {
+  "purpose": "Canonical speciality vocabulary for the Med Sales Tools, plus the mapping that reconciles the three lists that had drifted apart.",
+  "problem": "Three vocabularies existed with nothing reconciling them, matched by exact string equality: MST_DATA.SPECS (30, Stakeholder Mapper), prep-config.specialities (8, 'Help me prepare' dropdown), and free-text supplier.specialities (60 distinct strings across 188 suppliers). Consequence: 3 of the 8 dropdown values matched NO supplier at all (Surgery / theatres, Diabetes, Pathology / cold chain), returning zero competitors silently; and 146 of 188 suppliers (78%) were unreachable from any dropdown speciality.",
+  "canonical": "MST_DATA.SPECS (30) is the canonical vocabulary. Chosen by Lou 20/07/2026.",
+  "multiMap": "A supplier string may map to MORE THAN ONE canonical speciality where it genuinely spans both (e.g. 'Respiratory / anaesthesia'). Forcing a single pick would make a supplier unreachable from half its real market.",
+  "built": "2026-07-20",
+  "nhsscKey": "TWO structures, and conflating them is the main trap. (1) NHSSC customer-facing CATEGORIES — six, each holding named frameworks — is how you buy. (2) NHS eClass — 23 branches, 284 level-2, 2,522 level-3 — is what the catalogue and every NPC code run on. Both are given per speciality below.",
+  "nhsscStructure": "CORRECTION, verified 20/07/2026: NHS Supply Chain 'category towers' NO LONGER EXIST. The 2018 11-tower model is defunct and every tower name with it. NHSSC now runs SIX Category Business Units: Medical Technology; Medical and Surgical Consumables; Diagnostic Equipment and Services; Rehabilitation and Community; Food; Facilities and Office Solutions. Source: https://www.supplychain.nhs.uk/categories/",
+  "buyingCentreWarning": "The NHSSC category and the buying centre are NOT the same thing, and conflating them misdirects a rep. Blood collection is the worked example: NHSSC files it under Medical and Surgical Consumables (a consumables category), but the product is specified by the PATHOLOGY / blood sciences department and ordered from Pathology Reception — not by the vascular access clinical team and not by ward materials management. Verified across eight trusts' own published pathology user guides.",
+  "reviewNeeded": "Entries with \"review\": true are genuine judgement calls, not obvious mappings. Confirm before relying on them.",
+  "npcConvention": "An NPC is a 3-letter eClass level-3 code plus a sequential number: ELA844 -> 'ELA - Foam Dressings'; FNG85022 -> 'FNG - Needle blood sampling'. Verified 100% of 1,476 unique NPCs in nhssc-cache.json match ^[A-Z]{3}[0-9]+$. So cached products can be categorised from the code alone, no re-fetch needed. CAVEATS: (a) the public eClass API only publishes eClass-2017v1 while NHSSC runs an extended version — 40 of 208 live prefixes (HHH, GHB, GCZ, FSQ, FRJ, IVZ, ISY...) are absent and must be read from the live product page's eClass field, so coverage is 74.4%; (b) roll up to LEVEL 3, not level 2 — level-2 names mislead (FS is labelled 'Laparoscopy' but contains FST Intravenous accessories and FSB Needlefree Collection System); (c) the breadcrumb strip on product pages is a static nav menu, NOT the product's path — only the eClass field is authoritative. Full lookup: Elevate-and-Thrive-HQ/Hub-Data-Verification/eclass-npc-prefix-lookup.json",
+  "nhsscCategories": [
+   "Medical Technology",
+   "Medical and Surgical Consumables",
+   "Diagnostic Equipment and Services",
+   "Rehabilitation and Community",
+   "Food",
+   "Facilities and Office Solutions"
+  ]
+ },
+ "canonicalSpecialities": [
+  {
+   "id": "continence",
+   "label": "Continence / Urology",
+   "nhssc": "Rehabilitation and Community — Urology and Bowel Management; Disposable and Washable Continence Care",
+   "eClass": "GP Colostomy/Ileostomy/Urostomy & Continence; FU Urological catheters & valves"
+  },
+  {
+   "id": "vascular",
+   "label": "Vascular access",
+   "nhssc": "Medical and Surgical Consumables — Intravenous Cannula; Central Venous Catheters; Extension Sets and Lines",
+   "eClass": "FV Intravenous cannulas, catheters & accessories; EU Vascular Products"
+  },
+  {
+   "id": "bloodcoll",
+   "label": "Blood collection / phlebotomy",
+   "nhssc": "Medical and Surgical Consumables — Blood Collection Devices (2024/S 000-033791); Blood Draw Tools and Accessories (2024/S 000-009366; Lot 1 Lancets, Lot 2 Tourniquets, Lot 3 Vein Locators)",
+   "nhsscNote": "Lancets sit on a SEPARATE framework — 'Blood Draw Tools and Accessories', 2024/S 000-009366, 37 suppliers. Originally tendered together with the tubes, then awarded as two frameworks. Do not group them.",
+   "buyingCentre": "PATHOLOGY / blood sciences — NOT vascular access. The pathology department specifies the product and stocks it (ordered from Pathology Reception or Pathology Stores); general procurement executes the requisition but does not choose. Brand standardisation is trust- or network-wide and hard-locked — Lancashire Teaching and Sandwell both REJECT samples in the wrong container. Displacing an incumbent is a lab-level project, not a ward sale.",
+   "sellingNote": "Manufacturers sell blood collection alongside vascular access (GBUK Vascular, Greiner Bio-One Preanalytics), which is why it feels like one patch commercially — but the NHS buys them through different people on different clocks. Blood culture BOTTLES are different again: closed-system consumables locked to the installed analyser, bought by direct award. King's/Synnovis switched bioMérieux to BD and stated in the notice that 'there is not a viable or compatible alternative'. The bottle follows the box — a rep cannot win bottle business by competing on the bottle.",
+   "addedBecause": "Was entirely absent from both the mapper's 8 vascular products and GBUK's supplier record, despite GBUK being an awarded supplier on the NHSSC Blood Collection Devices framework. Flagged by Lou 20/07/2026.",
+   "eClass": "FNG Needle blood sampling (tubes, needles, holders, winged sets, lancets); FVH Tourniquets & Armboards; FMB/FMC Syringe arterial blood sampling; HAE Microbiology (blood culture bottles); KBD/KFF laboratory",
+   "parent": "vascular",
+   "placementNote": "SITS UNDER VASCULAR ACCESS, with a DIFFERENT stakeholder. Two independent research threads converged on this, and it reverses an earlier working assumption that it belonged under pathology. CATEGORY EVIDENCE (all points one way): NHSSC files Blood Collection Devices under Medical and Surgical Consumables, directly alongside Intravenous Cannula, Central Venous Catheters and Extension Sets — NOT in Diagnostic Equipment and Services where Pathology lives. eClass FNG (Needle blood sampling) sits under F Medical & Surgical Equipment; tourniquets are FVH, literally inside FV vascular access. The NHSSC catalogue tree puts blood collection under Medical > Clinical products, while Medical > Pathology is a separate tree. BD reorganised to match, effective 01/10/2025: its Medical Essentials segment holds exactly two units — Medication Delivery Solutions (vascular access) and Specimen Management (Vacutainer) — having moved Preanalytical OUT of Life Sciences. GBUK does the same: Blood Collection is one of the eight categories inside its Vascular range. THE CAVEAT A REP MUST BE TAUGHT: the category is unified but the BUYING CENTRE is not. Pathology / blood sciences specifies; procurement transacts. Verified in trusts' own published user guides (Hull: requisitions go via the Pathology Supplies Team; Worcestershire: tubes ordered from the laboratory, not general stores). Standardisation has moved up to the pathology NETWORK, so it is increasingly a network-hub decision. Selling tubes to procurement alone loses on specification; selling to pathology alone loses on the route. ONLY blood culture bottles (HAE Microbiology) and lab transport (KBD/KFF) genuinely sit in pathology's branches — and bottles are a closed proprietary consumable travelling with the analyser contract.",
+   "stakeholderOverride": "Blood Sciences / Pathology network — NOT the Vascular Access Team, IPC or critical care who own the rest of the vascular families."
+  },
+  {
+   "id": "wound",
+   "label": "Wound care",
+   "nhssc": "Rehabilitation and Community — Advanced Wound Care; General Wound Care; Negative Pressure Wound Therapy",
+   "eClass": "E Dressings (EL Wound Management, EI, EJ, EK); FXS Wound Closure"
+  },
+  {
+   "id": "cardiology",
+   "label": "Cardiology",
+   "nhssc": "Medical Technology — Interventional Cardiology; Structural Heart Valve Devices and VADs",
+   "eClass": "FR Cardiology & vascular imaging, interventional & cath lab; FK CRT/defib generators"
+  },
+  {
+   "id": "diabetes",
+   "label": "Diabetes / CGM",
+   "nhssc": "Medical and Surgical Consumables — Insulin Pumps and Associated Products. CGM: UNVERIFIED — no dedicated eClass L3 or framework found",
+   "eClass": "DFA Diabetes; FMR Syringe insulin; FNJ Needle for insulin pen; HHD/HHH HbA1c"
+  },
+  {
+   "id": "endoscopy",
+   "label": "Endoscopy",
+   "nhssc": "Medical Technology — Endoscopy, Endourology and Oncology Ablation; Diagnostics — Flexible Endoscopes",
+   "eClass": "FK Diagnostics — scopes, specula & accessories"
+  },
+  {
+   "id": "respiratory",
+   "label": "Respiratory",
+   "nhssc": "Medical and Surgical Consumables — Respiratory solutions",
+   "eClass": "FF Ventilators, respiratory therapy & accessories; FD"
+  },
+  {
+   "id": "theatres",
+   "label": "Theatres / surgical",
+   "nhssc": "Medical and Surgical Consumables — Electrosurgical Consumables; Medical Hollowware",
+   "eClass": "FC Surgical Instruments; EV Procedure Packs; VE Disposable Theatre Drapes & Wipes; FT Gloves Medical; FG electrosurgical"
+  },
+  {
+   "id": "handling",
+   "label": "Moving and handling",
+   "nhssc": "Rehabilitation and Community — Pressure Area Care and Patient Handling",
+   "eClass": "XP Materials Handling Equipment; TL Beds, Cots & Mattresses; VR Mattress Covers & Pillows"
+  },
+  {
+   "id": "ent",
+   "label": "ENT",
+   "nhssc": "Diagnostic Equipment and Services — ENT Endoscopes and Associated Options",
+   "eClass": "Spread across FK and FC — no ENT device branch in eClass (weak fit)"
+  },
+  {
+   "id": "ophthalmology",
+   "label": "Ophthalmology",
+   "nhssc": "Medical Technology — Complete Ophthalmology Solutions 3",
+   "eClass": "IV Ophthalmic Equipment & Consumables; GD Optical Appliances"
+  },
+  {
+   "id": "ortho",
+   "label": "Orthopaedics and trauma",
+   "nhssc": "Medical Technology — Total Orthopaedic Solutions 3",
+   "eClass": "FQ Medical Prostheses; ES Orthopaedic Products; EA Orthopaedic Casting Materials"
+  },
+  {
+   "id": "gastro",
+   "label": "Gastroenterology",
+   "nhssc": "SPLIT — no single NHSSC home",
+   "eClass": "FA Clinical nutrition; FK scopes; DA GI drugs"
+  },
+  {
+   "id": "renal",
+   "label": "Renal and dialysis",
+   "nhssc": "Diagnostic Equipment and Services — Renal products",
+   "eClass": "FW Renal Consumables; DU Dialysis Products"
+  },
+  {
+   "id": "womens",
+   "label": "Women's health and maternity",
+   "nhssc": "Rehabilitation and Community — Maternity, Obstetrics, Gynaecology and Sexual Health Products; Obstetrics and Vinyl Pessaries",
+   "eClass": "DG Obstetrics & Gynaecology; EO Maternity Sanitary Pads; GB Contraceptive Devices"
+  },
+  {
+   "id": "neuro",
+   "label": "Neurosciences",
+   "nhssc": "Medical Technology — Neuromodulation Devices and Associated Products",
+   "eClass": "FCP Neurosurgical/spinal instrument sets; FSP Neurosurgical consumables; FQR Spinal & Cranial Implants"
+  },
+  {
+   "id": "anaesthesia",
+   "label": "Anaesthesia and critical care",
+   "nhssc": "Medical and Surgical Consumables — Airway Management Products; Diagnostics — Anaesthesia Machines, Ventilators",
+   "eClass": "FD Anaesthetic, Oxygen & Humidification; FE Airway management, thoracentesis & resus; FF Ventilators; DO Anaesthesia"
+  },
+  {
+   "id": "imaging",
+   "label": "Diagnostics and imaging",
+   "nhssc": "Diagnostic Equipment and Services — CT Scanners; Mammography; Fluoroscopy; Contrast Injectors",
+   "eClass": "J Diagnostic Imaging & Radiotherapy (JA, JM, JN, JT); DP X-ray Contrast Media"
+  },
+  {
+   "id": "oncology",
+   "label": "Oncology and infusion",
+   "nhssc": "Diagnostics — Brachytherapy Seeds. NOTE: infusion sits in FK/FST, not under oncology",
+   "eClass": "FPI Chemotherapy equipment & supplies; DH Malignant Disease drugs; MME Biohazard & Cytotoxic containers"
+  },
+  {
+   "id": "ostomy",
+   "label": "Ostomy and stoma care",
+   "nhssc": "Rehabilitation and Community — Urology and Bowel Management",
+   "eClass": "GP Colostomy/Ileostomy/Urostomy & Continence (GCC, GCE, GCT, GCZ live)"
+  },
+  {
+   "id": "nutrition",
+   "label": "Nutrition and enteral feeding",
+   "nhssc": "Medical and Surgical Consumables — Enteral Feeding, Bile Bags; Infant Feeding and Accessories",
+   "eClass": "FA Clinical nutrition (FAA Enteral feeding infusion pumps); DI Nutrition and Blood drugs"
+  },
+  {
+   "id": "audiology",
+   "label": "Audiology and hearing",
+   "nhssc": "Medical Technology — Hearing Aids; Audiological Diagnostics Implantable Devices",
+   "eClass": "GF Audiology (GFA, GFB); GHB hearing aids, GHD cochlear (live)"
+  },
+  {
+   "id": "dental",
+   "label": "Dental and maxillofacial",
+   "nhssc": "Diagnostics — Dental Technologies, Implants and Related Consumables. Maxillofacial: UNVERIFIED, no distinct code",
+   "eClass": "I Dental & Optical (IB, IC, IK, IR, IT); GG Orthodontic Appliances"
+  },
+  {
+   "id": "infection",
+   "label": "Infection prevention and PPE",
+   "nhssc": "Medical and Surgical Consumables — Examination Gloves; Hand Hygiene; Clinical and Sharps Waste Management",
+   "eClass": "FT Gloves Medical; ET Sterilization Packaging; MK Cleaning Materials; DEC/DMK/MRB skin disinfectants"
+  },
+  {
+   "id": "pathology",
+   "label": "Pathology and laboratory",
+   "nhssc": "Diagnostic Equipment and Services — Laboratory Diagnostics, Point of Care Testing and Pathology (2023/S 000-028831). Lot 1 Managed Services and Lot 5 Specimen Collection & Storage are deliberately fenced apart — Greiner and Sarstedt are on Lot 5 and ABSENT from Lot 1, so an analyser managed service does NOT cover collection consumables",
+   "nhsscNote": "Lot 1 and Lot 5 are deliberately fenced off from each other — Greiner Bio-One and Sarstedt sit on Lot 5 and are ABSENT from Lot 1. So an analyser managed-service contract does NOT cover specimen collection consumables. An analyser renewal is not a tube opportunity, and vice versa.",
+   "eClass": "H Chemicals & Reagents (HA, HF, HH); K Laboratory Equipment & Services (KB, KC, KF)"
+  },
+  {
+   "id": "rehab",
+   "label": "Rehabilitation and mobility",
+   "nhssc": "Rehabilitation and Community — Wheelchairs; Orthotics, Podiatry and Immobilisation; Physiotherapy and Occupational Therapy",
+   "eClass": "G Patients Appliances (GA, GK–GO, GT, GV, GW)"
+  },
+  {
+   "id": "ssd",
+   "label": "Sterile services and decontamination",
+   "nhssc": "Diagnostics — Decontamination Capital Equipment; Consumables — Instrument Decontamination and Accessories",
+   "eClass": "MFB Decontamination Equipment; MFD Sterilisers, Autoclaves, Disinfectors; ET Sterilization Packaging"
+  },
+  {
+   "id": "monitoring",
+   "label": "Patient monitoring",
+   "nhssc": "Diagnostic Equipment and Services — Patient monitoring; Patient Assessment Devices",
+   "eClass": "FJ Diagnostics — Monitoring (FJH BP cuffs, FJK pulse oximetry); FB sensors & cables"
+  },
+  {
+   "id": "bloodtx",
+   "label": "Blood and transfusion",
+   "nhssc": "NO NHSSC framework found. Blood COMPONENTS come from NHS Blood and Transplant, not NHSSC. Blood COLLECTION is covered — see bloodcoll. (NHSBT split is reasoned, not sourced — UNVERIFIED)",
+   "eClass": "DX Blood Products (under D)"
+  },
+  {
+   "id": "digital",
+   "label": "Digital and medical IT",
+   "nhssc": "Diagnostics — Medical IT, Digital Diagnostic Solutions. PARTIAL — most trust digital/EPR is bought outside NHSSC",
+   "eClass": "WA Computer Hardware & Software; WF Telecommunications"
+  }
+ ],
+ "supplierSpecialityMap": {
+  "Digital health / AI": {
+   "to": [
+    "digital"
+   ]
+  },
+  "Patient handling": {
+   "to": [
+    "handling"
+   ]
+  },
+  "Women’s health / maternity": {
+   "to": [
+    "womens"
+   ]
+  },
+  "Women’s health": {
+   "to": [
+    "womens"
+   ]
+  },
+  "Wound care": {
+   "to": [
+    "wound"
+   ]
+  },
+  "Respiratory / anaesthesia": {
+   "to": [
+    "respiratory",
+    "anaesthesia"
+   ],
+   "note": "15 suppliers — the largest split. Genuinely spans both; single-mapping would hide half their market."
+  },
+  "Infection prevention": {
+   "to": [
+    "infection"
+   ]
+  },
+  "Theatre / surgical": {
+   "to": [
+    "theatres"
+   ]
+  },
+  "Cardiology / interventional": {
+   "to": [
+    "cardiology"
+   ]
+  },
+  "Orthopaedics / spine": {
+   "to": [
+    "ortho"
+   ]
+  },
+  "Continence & urology": {
+   "to": [
+    "continence"
+   ]
+  },
+  "Continence": {
+   "to": [
+    "continence"
+   ]
+  },
+  "Urology / continence": {
+   "to": [
+    "continence"
+   ]
+  },
+  "Continence / stoma": {
+   "to": [
+    "continence",
+    "ostomy"
+   ]
+  },
+  "ENT / audiology": {
+   "to": [
+    "ent",
+    "audiology"
+   ]
+  },
+  "ENT / neuro-otology": {
+   "to": [
+    "ent",
+    "neuro"
+   ],
+   "review": true,
+   "note": "Neuro-otology sits across ENT and neurosciences; mapped to both."
+  },
+  "Oncology / radiotherapy": {
+   "to": [
+    "oncology"
+   ]
+  },
+  "Oncology / infusion": {
+   "to": [
+    "oncology"
+   ]
+  },
+  "Ophthalmology": {
+   "to": [
+    "ophthalmology"
+   ]
+  },
+  "Vascular access": {
+   "to": [
+    "vascular"
+   ]
+  },
+  "Imaging / capital": {
+   "to": [
+    "imaging"
+   ]
+  },
+  "Dental / maxillofacial": {
+   "to": [
+    "dental"
+   ]
+  },
+  "Pathology / diagnostics": {
+   "to": [
+    "pathology"
+   ]
+  },
+  "Diagnostics / pathology": {
+   "to": [
+    "pathology"
+   ]
+  },
+  "Pathology / molecular": {
+   "to": [
+    "pathology"
+   ]
+  },
+  "Pathology / haematology": {
+   "to": [
+    "pathology"
+   ]
+  },
+  "Pathology / haemostasis": {
+   "to": [
+    "pathology"
+   ]
+  },
+  "Pathology / microbiology": {
+   "to": [
+    "pathology"
+   ]
+  },
+  "Pathology / transfusion": {
+   "to": [
+    "pathology",
+    "bloodtx"
+   ],
+   "review": true,
+   "note": "Transfusion labs sit in pathology, but the products are blood/transfusion. Mapped to both."
+  },
+  "Blood management / apheresis": {
+   "to": [
+    "bloodtx"
+   ]
+  },
+  "Renal / dialysis": {
+   "to": [
+    "renal"
+   ]
+  },
+  "Endoscopy": {
+   "to": [
+    "endoscopy"
+   ]
+  },
+  "Endourology": {
+   "to": [
+    "continence"
+   ],
+   "review": true,
+   "note": "Stents, stone management, ureteral catheters — urology. Confirm this is where you'd expect a rep to find it."
+  },
+  "Enteral feeding": {
+   "to": [
+    "nutrition"
+   ]
+  },
+  "Prosthetics & orthotics": {
+   "to": [
+    "rehab"
+   ]
+  },
+  "Surgical haemostasis": {
+   "to": [
+    "theatres"
+   ]
+  },
+  "Surgical robotics": {
+   "to": [
+    "theatres"
+   ]
+  },
+  "Surgery / mesh": {
+   "to": [
+    "theatres"
+   ]
+  },
+  "Surgical & critical care": {
+   "to": [
+    "theatres",
+    "anaesthesia"
+   ],
+   "review": true
+  },
+  "Decontamination / sterile services": {
+   "to": [
+    "ssd"
+   ]
+  },
+  "Cold chain / lab": {
+   "to": [
+    "pathology"
+   ]
+  },
+  "Point of care": {
+   "to": [
+    "pathology"
+   ]
+  },
+  "Specialty testing": {
+   "to": [
+    "pathology"
+   ]
+  },
+  "Biosciences": {
+   "to": [
+    "pathology"
+   ]
+  },
+  "Genomics": {
+   "to": [
+    "pathology"
+   ]
+  },
+  "Biopsy": {
+   "to": [
+    "pathology",
+    "imaging"
+   ],
+   "review": true,
+   "note": "Biopsy devices are placed under imaging guidance but yield a pathology sample. Ambiguous — your call."
+  },
+  "Virtual wards / RPM": {
+   "to": [
+    "monitoring",
+    "digital"
+   ],
+   "review": true,
+   "note": "Remote monitoring is both a monitoring product and a digital platform."
+  },
+  "Ambient AI scribe": {
+   "to": [
+    "digital"
+   ]
+  },
+  "Clinical comms / ambient AI": {
+   "to": [
+    "digital"
+   ]
+  },
+  "AI governance": {
+   "to": [
+    "digital"
+   ]
+  },
+  "Predictive AI": {
+   "to": [
+    "digital"
+   ]
+  },
+  "EPR": {
+   "to": [
+    "digital"
+   ]
+  },
+  "EPR / CDS": {
+   "to": [
+    "digital"
+   ]
+  },
+  "EPR / e-obs": {
+   "to": [
+    "digital",
+    "monitoring"
+   ],
+   "review": true,
+   "note": "Electronic observations feed patient monitoring as well as the EPR."
+  },
+  "Personal health record": {
+   "to": [
+    "digital"
+   ]
+  },
+  "Patient engagement": {
+   "to": [
+    "digital"
+   ]
+  },
+  "Radiology AI": {
+   "to": [
+    "imaging",
+    "digital"
+   ]
+  },
+  "Breast screening AI": {
+   "to": [
+    "imaging",
+    "digital"
+   ]
+  },
+  "Dermatology AI": {
+   "to": [
+    "imaging",
+    "digital"
+   ],
+   "review": true,
+   "note": "No dermatology speciality exists in the canonical 30 — mapped to imaging/digital as the nearest fit. Consider whether dermatology should be added."
+  },
+  "Stroke AI": {
+   "to": [
+    "imaging",
+    "neuro",
+    "digital"
+   ],
+   "review": true,
+   "note": "Stroke AI reads CT/CTA imaging for a neuro pathway."
+  }
+ },
+ "gapsInCanonicalList": [
+  "Dermatology — no canonical speciality; one supplier maps to imaging/digital as a fallback.",
+  "Waste management — NHSSC has Clinical and Sharps Waste Management and Environmental Decontamination frameworks. Real rep territory, no speciality here.",
+  "Facilities / estates — the entire Facilities and Office Solutions category (furniture, uniforms, stationery, medical pulp, catering and cleaning equipment) has no speciality.",
+  "Food — the entire Food category (eClass A Provisions) has no speciality.",
+  "Bedding, linen and textiles (eClass V) — theatre drapes, bed linen, mattress covers.",
+  "Finance Solutions / Managed Equipment Services — commercial wrappers rather than clinical specialities, but significant rep territory.",
+  "Purchased Healthcare (eClass R) — outsourced clinical services.",
+  "Prosthetics & orthotics currently folds into Rehabilitation and mobility — check that is how you'd teach it."
+ ]
+}

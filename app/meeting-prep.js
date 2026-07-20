@@ -11,6 +11,8 @@
   var IDX = BASE + 'data/supplier-index.json?cb=' + Date.now();
   var CFG = BASE + 'data/prep-config.json?cb=' + Date.now();
   var SEED = BASE + 'data/supplier-seed.json?cb=' + Date.now();
+  var SPECMAP = BASE + 'data/speciality-map.json?cb=' + Date.now();
+  var PRODUCTS = BASE + 'data/supplier-products.json?cb=' + Date.now();
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
@@ -26,11 +28,58 @@
   Promise.all([
     fetch(IDX).then(function(r){return r.json();}),
     fetch(CFG).then(function(r){return r.json();}),
-    fetch(SEED).then(function(r){return r.json();}).catch(function(){return {suppliers:[]};})
-  ]).then(function(res){ render(res[0], res[1], res[2]); })
+    fetch(SEED).then(function(r){return r.json();}).catch(function(){return {suppliers:[]};}),
+    fetch(SPECMAP).then(function(r){return r.json();}).catch(function(){return null;}),
+    fetch(PRODUCTS).then(function(r){return r.json();}).catch(function(){return null;})
+  ]).then(function(res){ render(res[0], res[1], res[2], res[3], res[4]); })
     .catch(function(){ MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;">Meeting prep is temporarily unavailable — please try again shortly.</div>'; });
 
-  function render(index, cfg, seed){
+  function render(index, cfg, seed, specMap, prodFile){
+    /* Verified full ranges live in supplier-products.json, NOT in the seed —
+       supplier-seed.json is declared human-owned and never-overwritten by
+       build_supplier_index.py, and Lou's hand-written product names carry
+       meaning the raw catalogue titles don't. So: a supplier present in the
+       products file uses that verified, speciality-tagged range; a supplier
+       absent from it falls back to the seed's curated list, untagged and
+       therefore unfiltered. Lets the sweep expand one supplier at a time. */
+    var PRODS = (prodFile && prodFile.suppliers) || null;
+    function verifiedRangeFor(name){
+      if (!PRODS || !name) return null;
+      if (PRODS[name]) return PRODS[name];
+      for (var k in PRODS){
+        var al = PRODS[k].aliases || [];
+        if (al.indexOf(name) !== -1) return PRODS[k];
+      }
+      return null;
+    }
+    /* Canonical speciality vocabulary. Three lists had drifted apart and were
+       matched by exact string equality: the mapper's 30, this tool's 8, and 60
+       free-text strings across the suppliers. The result was that 3 of the 8
+       dropdown values matched NO supplier at all - returning an empty competitor
+       list that read as "no competitors" rather than "lookup failed" - and 146
+       of 188 suppliers were unreachable from any speciality.
+       speciality-map.json reconciles all three onto the mapper's 30. Falls back
+       to the old exact-match behaviour if the map cannot be loaded. */
+    var CANON = (specMap && specMap.canonicalSpecialities) || null;
+    var SMAP  = (specMap && specMap.supplierSpecialityMap) || null;
+    var LABEL_TO_ID = {}; if (CANON) CANON.forEach(function(c){ LABEL_TO_ID[c.label] = c.id; });
+    // A supplier string may map to SEVERAL canonical ids where it genuinely spans
+    // both (e.g. "Respiratory / anaesthesia"), so a supplier is reachable from
+    // either side of its real market rather than an arbitrary single pick.
+    function canonIds(list){
+      var out = {};
+      (list || []).forEach(function(s){
+        var m = SMAP && SMAP[s];
+        if (m && m.to) m.to.forEach(function(id){ out[id] = 1; });
+        else if (LABEL_TO_ID[s]) out[LABEL_TO_ID[s]] = 1;
+      });
+      return Object.keys(out);
+    }
+    function sharesSpeciality(a, b){
+      if (!SMAP){ return (a || []).some(function(x){ return (b || []).indexOf(x) !== -1; }); }
+      var A = canonIds(a), B = canonIds(b);
+      return A.some(function(id){ return B.indexOf(id) !== -1; });
+    }
     var suppliers = (index && index.suppliers) || [];
     var seedMap = {}; ((seed && seed.suppliers) || []).forEach(function(s){ seedMap[s.name] = s; });
     suppliers.forEach(function(s){ var sd = seedMap[s.name]; if (sd){ if (sd.voice) s.voice = sd.voice; if (sd.products && sd.products.length) s.products = sd.products; if (sd.frameworks && sd.frameworks.length) s.frameworks = sd.frameworks; if (sd.specialities && sd.specialities.length) s.specialities = sd.specialities; } });
@@ -52,26 +101,70 @@
     // via hand-off from Product Comparison, so anyone starting here had no way
     // to say what they sell. Repopulates whenever the company changes.
     var selPr = mkSelect('Product', ['']);
+    /* A product entry is either a plain string (legacy, untagged) or
+       {n:'name', s:'Speciality'} once it has been speciality-tagged. Normalising
+       here lets tagging roll out supplier by supplier without a flag day - a
+       supplier with tags filters correctly, one without still lists its range. */
+    function normProducts(co){
+      var verified = verifiedRangeFor(co && co.name);
+      var list = verified ? verified.products : ((co && co.products) || []);
+      return list.map(function(p){
+        return typeof p === 'string' ? { n: p, s: '' } : { n: p.n || p.name || '', s: p.s || p.speciality || '' };
+      }).filter(function(p){ return p.n; });
+    }
     function fillProducts(){
       var co = suppliers.filter(function(s){ return s.name === selCo.sel.value; })[0];
-      var prods = (co && co.products) || [];
+      var all = normProducts(co);
+      var spec = selSp.sel.value;
+      var tagged = all.filter(function(p){ return p.s; });
+      // Only filter when this supplier actually has tags AND a speciality is chosen.
+      // Otherwise showing a filtered-looking list would imply a scoping we can't do.
+      // Compare on canonical id so a product tagged with an id, a canonical
+      // label, or a legacy supplier string all resolve to the same speciality.
+      function specId(v){
+        if (!v) return '';
+        if (LABEL_TO_ID[v]) return LABEL_TO_ID[v];
+        var viaMap = SMAP && SMAP[v] && SMAP[v].to && SMAP[v].to[0];
+        return viaMap || v;
+      }
+      var want = specId(spec);
+      /* Sub-specialities. Blood collection sits UNDER vascular access — NHSSC,
+         eClass, BD's own segments and GBUK's own catalogue all file it there —
+         but it has a different buying centre (pathology/blood sciences), so it
+         stays separately selectable. Picking the parent must therefore include
+         the children, or a rep working vascular would miss half the category. */
+      var kids = CANON ? CANON.filter(function(c){ return c.parent === want; })
+                              .map(function(c){ return c.id; }) : [];
+      var wanted = [want].concat(kids);
+      var scoped = (spec && tagged.length)
+        ? all.filter(function(p){ return wanted.indexOf(specId(p.s)) !== -1; })
+        : all;
+      var partial = spec && tagged.length && tagged.length < all.length;
       var keep = selPr.sel.value;
       selPr.sel.innerHTML = '';
-      var opts = [''].concat(prods);
-      opts.forEach(function(o){
-        var op = el('option'); op.value = o;
-        op.textContent = o || (prods.length ? '— choose —' : '— pick your company first —');
+      [''].concat(scoped.map(function(p){ return p.n; })).forEach(function(n){
+        var op = el('option'); op.value = n;
+        op.textContent = n || (!all.length ? '— pick your company first —'
+          : (scoped.length ? '— choose —' : '— none listed for this speciality —'));
         selPr.sel.appendChild(op);
       });
-      if (keep && prods.indexOf(keep) !== -1) selPr.sel.value = keep;
-      selPr.sel.disabled = !prods.length;
-      selPr.sel.style.background = prods.length ? '#fff' : '#f4f2ee';
+      if (keep && scoped.some(function(p){ return p.n === keep; })) selPr.sel.value = keep;
+      selPr.sel.disabled = !scoped.length;
+      selPr.sel.style.background = scoped.length ? '#fff' : '#f4f2ee';
+      // Be honest when the range is only part-tagged, rather than silently
+      // presenting an incomplete list as if it were the whole speciality.
+      var hint = document.getElementById('msh-prod-hint');
+      if (hint) hint.textContent = partial
+        ? 'Showing tagged products for this speciality; this supplier’s range is still being tagged.'
+        : '';
     }
     selCo.sel.addEventListener('change', fillProducts);
     // Picking a product means you are not early-stage; keep the two in step.
     selPr.sel.addEventListener('change', function(){ if (selPr.sel.value) early.checked = false; });
 
-    var selSp = mkSelect('Speciality', [''].concat(cfg.specialities || []));
+    // Canonical 30 when the map is available, else the legacy 8 from prep-config.
+    var SPEC_OPTS = CANON ? CANON.map(function(c){ return c.label; }) : (cfg.specialities || []);
+    var selSp = mkSelect('Speciality', [''].concat(SPEC_OPTS));
     var profiledNames = (cfg.trusts || []).map(function(t){ return t.name; });
     // trustDirectory entries may be strings (legacy) or {n,code,town,postcode,kind} objects.
     var DIRMAP = {};
@@ -91,6 +184,11 @@
     earlyWrap.appendChild(early); earlyWrap.appendChild(document.createTextNode('Early-stage (no product yet)'));
     var btn = el('button', 'background:#6B2A34 !important;color:#ffffff !important;border:0;border-radius:8px;padding:12px 24px;font-weight:800;font-size:15px;cursor:pointer;letter-spacing:.3px;box-shadow:0 1px 3px rgba(0,0,0,.15);', 'Prepare me');
     [selCo.box, selPr.box, selSp.box, selTr.box, selAud.box].forEach(function(b){ bar.appendChild(b); });
+    // Changing speciality must re-scope the product list, not just the brief.
+    selSp.sel.addEventListener('change', fillProducts);
+    var prodHint = el('div', 'font-size:11.5px;color:#8a6d00;margin-top:3px;line-height:1.4;');
+    prodHint.id = 'msh-prod-hint';
+    selPr.box.appendChild(prodHint);
     fillProducts();
     var side = el('div', 'display:flex;flex-direction:column;gap:8px;'); side.appendChild(earlyWrap); side.appendChild(btn); bar.appendChild(side);
     wrap.appendChild(bar);
@@ -188,7 +286,7 @@
       var seen = {}; var out = [];
       all.forEach(function(s){
         if (!co || s.name === co.name) return;
-        var share = (s.specialities || []).some(function(x){ return specs.indexOf(x) !== -1; });
+        var share = sharesSpeciality(specs, s.specialities);
         if (share && !seen[s.name]){ seen[s.name] = 1; out.push(s); }
       });
       out.sort(function(a,b){ return (a.curated?0:1) - (b.curated?0:1); });
