@@ -18,7 +18,9 @@
    "Food",
    "Facilities and Office Solutions"
   ],
-  "eClassTopLevel": "eClass top level as read from the live catalogue mega-menu: 21 codes — A Provisions, B Staff Clothing, C Patients Clothing & Footwear, D Pharmaceuticals Blood Products & Medical Gases, E Dressings, F Medical & Surgical Equipment, G Patients Appliances, H Chemicals & Reagents, I Dental & Optical Equipment, J Diagnostic Imaging & Radiotherapy, K Laboratory Equipment & Services, M Hotel Services, P Building & Engineering, R Purchased Healthcare, T Furniture Fittings, U Hardware Crockery, V Bedding Linen & Textiles, W Office Equipment Telecomms Computers & Stationery, X Transportation, Y Recreational Equipment & Souvenirs, Z Staff & Patient Consulting Services & Expenses. There is NO L, N, O, Q or S top level in the live catalogue — an earlier note listed 23 branches including L Fuel Light Power Water and S Gardening & Farming, which do not appear in the live menu."
+  "eClassTopLevel": "eClass top level as read from the live catalogue mega-menu: 21 codes — A Provisions, B Staff Clothing, C Patients Clothing & Footwear, D Pharmaceuticals Blood Products & Medical Gases, E Dressings, F Medical & Surgical Equipment, G Patients Appliances, H Chemicals & Reagents, I Dental & Optical Equipment, J Diagnostic Imaging & Radiotherapy, K Laboratory Equipment & Services, M Hotel Services, P Building & Engineering, R Purchased Healthcare, T Furniture Fittings, U Hardware Crockery, V Bedding Linen & Textiles, W Office Equipment Telecomms Computers & Stationery, X Transportation, Y Recreational Equipment & Souvenirs, Z Staff & Patient Consulting Services & Expenses. There is NO L, N, O, Q or S top level in the live catalogue — an earlier note listed 23 branches including L Fuel Light Power Water and S Gardening & Farming, which do not appear in the live menu.",
+  "specialityCount": 37,
+  "knownDivergence": "DELIBERATE, NOT DRIFT — but watch it. This file now holds 37 specialities. MST_DATA.SPECS (base64 inside WP page 1109 block 5, which drives the Stakeholder Mapper's own dropdown) still holds 30. The 7 extra are blood collection plus the six added 20/07/2026. They are intentionally absent from the mapper because the mapper pairs each speciality with a PRODUCT TAXONOMY and there are no products for them yet - showing them there would give a rep an empty dropdown. The moment products exist for any of the 7, add them to MST_DATA too. If MST_DATA is ever migrated out of the base64 block into git (it serialises losslessly - 30 specialities, 198 products, no function fields), this file should become its single source and the divergence disappears."
  },
  "canonicalSpecialities": [
   {
@@ -214,6 +216,48 @@
    "label": "Digital and medical IT",
    "nhssc": "Diagnostics — Medical IT, Digital Diagnostic Solutions. PARTIAL — most trust digital/EPR is bought outside NHSSC",
    "eClass": "WA Computer Hardware & Software; WF Telecommunications"
+  },
+  {
+   "id": "dermatology",
+   "label": "Dermatology and skin health",
+   "nhssc": "No dedicated NHSSC sub-category found in the six CBUs. Skin antisepsis sits under Medical and Surgical Consumables (Skin Cleansing, Disinfection and Hygiene, 2025/S 000-001018); phototherapy and diagnostic imaging devices route through Diagnostic Equipment and Services. PENDING a dedicated framework check.",
+   "eClass": "PENDING — not read from the live catalogue. Skin/wound overlap sits in E Dressings; topical agents in D Pharmaceuticals.",
+   "addedBecause": "A supplier tagged 'Dermatology AI' had no home and was falling back to imaging/digital. Dermatology is a real clinical speciality with its own buying centre."
+  },
+  {
+   "id": "orthotics",
+   "label": "Prosthetics and orthotics",
+   "nhssc": "Rehabilitation and Community — Orthotics; frameworks 'Orthotics, Podiatry and Immobilisation'.",
+   "eClass": "GL Orthotic Products Abdominal External (GLB spinal supports, back braces, spinal jackets); GN Orthotic Products Lower Limb External (GNC lower limb splints). Both read from the live catalogue.",
+   "addedBecause": "Was folded into 'Rehabilitation and mobility'. Four suppliers tag themselves 'Prosthetics & orthotics' and it is a distinct NHSSC sub-category with its own clinical service (orthotics departments, podiatry), so it earns its own speciality."
+  },
+  {
+   "id": "waste",
+   "label": "Clinical waste and sharps management",
+   "nhssc": "Medical and Surgical Consumables — 'Clinical and Sharps Waste Management'; related 'Environmental Decontamination'.",
+   "eClass": "MME Biohazard & Cytotoxic containers (read via the oncology mapping). Wider waste codes PENDING.",
+   "addedBecause": "A named NHSSC framework with real rep territory and no speciality covering it. Sharps safety also connects directly to the Sharps Regulations 2013 driver already used across the vascular and blood collection families."
+  },
+  {
+   "id": "mes",
+   "label": "Managed equipment services and finance",
+   "nhssc": "Diagnostic Equipment and Services — 'Finance solutions' and 'Managed equipment services'.",
+   "eClass": "N/A — a commercial wrapper, not a product class. Equipment inside an MES carries its own clinical eClass codes.",
+   "addedBecause": "Not a clinical speciality, but a significant and growing rep route — pathology MSCs, reagent rental and analyser contracts all sit here, and the mapper already teaches that an analyser contract is a different event from a consumables framework. Deliberately labelled so a rep does not mistake it for a clinical category."
+  },
+  {
+   "id": "estates",
+   "label": "Facilities, estates and workwear",
+   "nhssc": "Facilities and Office Solutions (entire CBU) — catering and cleaning equipment; furniture; medical pulp; stationery; uniforms and workwear.",
+   "eClass": "T Furniture Fittings; U Hardware Crockery; W Office Equipment Telecomms Computers & Stationery; B Staff Clothing; C Patients Clothing & Footwear; V Bedding Linen & Textiles; MK Cleaning Materials (MKJ bleaches, disinfectants). Top-level codes read from the live catalogue menu.",
+   "addedBecause": "An entire NHSSC Category Business Unit had no speciality. Note theatre drapes and medical wipes (VE) stay under Theatres, where the clinical buyer sits."
+  },
+  {
+   "id": "food",
+   "label": "Food and catering services",
+   "nhssc": "Food (entire CBU) — ambient food; beverages; covers (retail and patient); fresh and frozen food; ready meals; vending solutions.",
+   "eClass": "A Provisions. Top-level code read from the live catalogue menu.",
+   "addedBecause": "An entire NHSSC Category Business Unit had no speciality. LOW RELEVANCE to medical device and pharma reps — added for completeness of the NHSSC key rather than because Hub members are likely to sell here. Distinct from 'Nutrition and enteral feeding', which is clinical."
   }
  ],
  "supplierSpecialityMap": {
@@ -401,8 +445,10 @@
   },
   "Prosthetics & orthotics": {
    "to": [
+    "orthotics",
     "rehab"
-   ]
+   ],
+   "note": "Split out to its own speciality 20/07/2026, but kept mapped to rehab as well - these were rehab's ONLY four suppliers, and a prosthetics/orthotics supplier genuinely sits in rehabilitation territory. Removing it entirely would have emptied rehab."
   },
   "Surgical haemostasis": {
    "to": [
@@ -534,11 +580,10 @@
   },
   "Dermatology AI": {
    "to": [
-    "imaging",
+    "dermatology",
     "digital"
    ],
-   "review": true,
-   "note": "No dermatology speciality exists in the canonical 30 — mapped to imaging/digital as the nearest fit. Consider whether dermatology should be added."
+   "note": "Now has a proper home; previously fell back to imaging/digital."
   },
   "Stroke AI": {
    "to": [
@@ -551,13 +596,10 @@
   }
  },
  "gapsInCanonicalList": [
-  "Dermatology — no canonical speciality; one supplier maps to imaging/digital as a fallback.",
-  "Waste management — NHSSC has Clinical and Sharps Waste Management and Environmental Decontamination frameworks. Real rep territory, no speciality here.",
-  "Facilities / estates — the entire Facilities and Office Solutions category (furniture, uniforms, stationery, medical pulp, catering and cleaning equipment) has no speciality.",
-  "Food — the entire Food category (eClass A Provisions) has no speciality.",
-  "Bedding, linen and textiles (eClass V) — theatre drapes, bed linen, mattress covers.",
-  "Finance Solutions / Managed Equipment Services — commercial wrappers rather than clinical specialities, but significant rep territory.",
-  "Purchased Healthcare (eClass R) — outsourced clinical services.",
-  "Prosthetics & orthotics currently folds into Rehabilitation and mobility — check that is how you'd teach it."
+  "Bedding, linen and textiles (eClass V) — folded into 'Facilities, estates and workwear'. Theatre drapes and medical wipes (VE) stay under Theatres, where the clinical buyer is.",
+  "Purchased Healthcare (eClass R) — outsourced clinical services. NOT added: it is a service-commissioning route, not a product speciality, and belongs with the ICB commissioning content rather than the product mapper.",
+  "Transportation (X), Building & Engineering (P) — NOT added: no realistic overlap with medical device or pharma sales.",
+  "Aids for daily living / Technology Enabled Care / wigs / breast prostheses — partially covered by 'Rehabilitation and mobility'; check whether these need splitting out the way orthotics just was.",
+  "Closed blood sampling from indwelling lines — genuine white space: no NHSSC framework category and no manufacturer category, exists at product level only (BD VAMP, ICU Medical SafeSet). A product family rather than a speciality, but worth knowing."
  ]
 }

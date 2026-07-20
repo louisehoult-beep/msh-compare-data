@@ -75,9 +75,29 @@
       });
       return Object.keys(out);
     }
-    function sharesSpeciality(a, b){
-      if (!SMAP){ return (a || []).some(function(x){ return (b || []).indexOf(x) !== -1; }); }
-      var A = canonIds(a), B = canonIds(b);
+    /* A supplier's specialities and its product tags were unconnected, so a
+       supplier could sell a whole category and still be unreachable from it —
+       GBUK sells 9 blood collection lines but its seed specialities never say
+       "blood collection", so it returned no competitors there. Deriving the
+       extra specialities from the verified product tags fixes that without
+       editing the curated seed. */
+    function supplierSpecIds(s){
+      var ids = canonIds(s && s.specialities);
+      var v = verifiedRangeFor(s && s.name);
+      if (v){
+        var seen = {};
+        ids.forEach(function(i){ seen[i] = 1; });
+        (v.products || []).forEach(function(p){ if (p.s) seen[p.s] = 1; });
+        ids = Object.keys(seen);
+      }
+      return ids;
+    }
+    function sharesSpeciality(a, bSupplier){
+      if (!SMAP){
+        var bl = (bSupplier && bSupplier.specialities) || [];
+        return (a || []).some(function(x){ return bl.indexOf(x) !== -1; });
+      }
+      var A = canonIds(a), B = supplierSpecIds(bSupplier);
       return A.some(function(id){ return B.indexOf(id) !== -1; });
     }
     var suppliers = (index && index.suppliers) || [];
@@ -286,7 +306,7 @@
       var seen = {}; var out = [];
       all.forEach(function(s){
         if (!co || s.name === co.name) return;
-        var share = sharesSpeciality(specs, s.specialities);
+        var share = sharesSpeciality(specs, s);
         if (share && !seen[s.name]){ seen[s.name] = 1; out.push(s); }
       });
       out.sort(function(a,b){ return (a.curated?0:1) - (b.curated?0:1); });
