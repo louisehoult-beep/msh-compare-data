@@ -151,6 +151,25 @@ def check_moves(moves, trust_codes, blocked, contacts):
         if (m.get("name") or "").strip().lower() in blocked:
             FAIL("moves", "%r has opted out but still appears in people-moves.json" % m.get("name"))
 
+        # CONCURRENT BUYERS. A trust where two contacts were active at the same
+        # time has more than one buyer, so a new name cannot be read as taking
+        # over from anyone. Lancashire and South Cumbria passed the gap rule and
+        # the evidence floor and was still wrong on exactly this.
+        if contacts and moves.get("singleThreadedOnly"):
+            ent = sorted(contacts.get(m.get("trust"), []), key=lambda e: e["first"])
+            for a_i in range(len(ent)):
+                clash = None
+                for b_i in range(a_i + 1, len(ent)):
+                    a, b = ent[a_i], ent[b_i]
+                    if a["last"] >= b["first"] and b["last"] >= a["first"]:
+                        clash = (a["name"], b["name"]); break
+                if clash:
+                    FAIL("moves", "CONCURRENT BUYERS — trust %r has %r and %r active at the same "
+                                  "time, so the move claimed for %r is not a handover, it is a "
+                                  "trust with more than one buyer."
+                                  % (m.get("trust"), clash[0], clash[1], m.get("name")))
+                    break
+
         # EVIDENCE FLOOR. A name on a single notice is a data point, not a
         # post-holder. The first two moves that cleared the 60-day rule were
         # both one-notice-each at large trusts — i.e. two different buyers, not
