@@ -1,0 +1,38 @@
+#!/bin/sh
+# Publish gate for hand-pushes.
+#
+# The Hub fetches this repo directly, so `git push` IS a publish — there is no
+# staging step between here and a paying member's screen. On 24/07/2026 a hand
+# push put 145 false job changes about named NHS staff on the Hub, and a second
+# one published real people's contact details before anyone had agreed to.
+#
+# Install once per clone:
+#     git config core.hooksPath hooks
+#
+# Override only when you have read the failures and decided they are wrong:
+#     git push --no-verify
+
+repo="$(git rev-parse --show-toplevel)"
+cd "$repo" || exit 1
+
+if [ ! -f verify.py ]; then
+  echo "pre-push: verify.py not found — refusing to push blind." >&2
+  exit 1
+fi
+
+echo "pre-push: running the publish gate..."
+if python3 verify.py; then
+  exit 0
+fi
+
+cat >&2 <<'MSG'
+
+  PUSH BLOCKED — verify.py failed.
+
+  This repo is served straight to the Medical Sales Hub. Pushing now puts the
+  failures above in front of paying members.
+
+  Fix them, or if you are certain the gate is wrong, say so in the commit
+  message and use:  git push --no-verify
+MSG
+exit 1

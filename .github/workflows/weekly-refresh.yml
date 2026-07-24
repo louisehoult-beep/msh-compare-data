@@ -40,6 +40,8 @@ jobs:
         run: python scripts/refresh_trusts.py
       - name: Refresh NHSSC product cache (merge-preserving)
         run: python scripts/refresh_nhssc_cache.py
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
       - name: Commit updates
         run: |
           git config user.name "hub-bot"

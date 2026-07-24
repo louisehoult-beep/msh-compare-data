@@ -1,0 +1,38 @@
+name: Verify (publish gate)
+
+# Runs on EVERY push and pull request. The Hub fetches this repo's files
+# directly, so a push IS a publish — there is no staging step between this
+# repo and what a paying member sees on WP page 1109.
+#
+# On 24/07/2026 this repo published 145 false job changes about named NHS staff
+# because nothing checked derived data before it went out. verify.py is that
+# check. If this workflow is red, what is on the Hub right now is suspect —
+# fix it or revert, do not merge past it.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch: {}
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2          # verify.py compares against HEAD for the shrink guard
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Publish gate
+        run: python3 verify.py
+      - name: Prove the gate still catches the incident it was built for
+        run: python3 test_verify.py
+      - name: Phone alert if the live data is bad (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Medical Sales Hub - LIVE DATA FAILED VERIFY" -H "Priority: high" -H "Tags: rotating_light" \
+            -d "msh-compare-data failed its publish gate. The Hub serves this repo directly, so members may be seeing bad data right now. github.com/louisehoult-beep/msh-compare-data/actions" \
+            ntfy.sh/eth-hub-lou-4437

@@ -1,7 +1,9 @@
 {
- "note": "Observed changes of named contact on NHS procurement notices (Find a Tender). Recorded only where every previously-seen contact at that trust stopped appearing at least 60 days before this name first appeared. Evidence of a changed remit, not an announced appointment, and never inferred from scan order.",
+ "note": "Observed changes of named contact on NHS procurement notices (Find a Tender). Recorded only where every previously-seen contact at that trust stopped appearing at least 60 days before this name first appeared, AND both names are established contacts (2+ notices each, the predecessor active over 30+ days). Evidence of a changed remit, not an announced appointment, and never inferred from scan order.",
  "source": "Find a Tender (OCDS API), Open Government Licence v3",
  "gapDays": 60,
+ "minNotices": 2,
+ "minSpanDays": 30,
  "moves": [],
  "asOf": "24/07/2026"
 }

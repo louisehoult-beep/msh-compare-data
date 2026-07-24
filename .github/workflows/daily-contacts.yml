@@ -37,6 +37,8 @@ jobs:
           python-version: "3.12"
       - name: Scan Find a Tender for named NHS trust contacts
         run: python scripts/refresh_fts_contacts.py --days ${{ github.event.inputs.days || 4 }}
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
       - name: Commit if changed
         run: |
           git config user.name "hub-bot"
