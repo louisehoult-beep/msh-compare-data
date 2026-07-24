@@ -113,6 +113,18 @@ def check_moves(moves, trust_codes, blocked, contacts):
     rows = moves.get("moves", [])
     gap = int(moves.get("gapDays") or 0)
     min_notices = int(moves.get("minNotices") or 0)
+    # A moves file must DECLARE every rule it was generated under. Anything
+    # missing means it came from an older generator, and the checks below would
+    # silently skip rather than fail — which is how the Lancashire false
+    # handover came back after being fixed: a background backfill rewrote the
+    # file with pre-fix code and the gate waved it through. Fail closed.
+    if rows:
+        for flag in ("gapDays", "minNotices", "minSpanDays", "singleThreadedOnly"):
+            if moves.get(flag) in (None, ""):
+                FAIL("moves", "people-moves.json does not declare %r. It was written by an older "
+                              "generator than the one in scripts/, so the rules it claims cannot be "
+                              "checked. Re-run: python3 scripts/refresh_fts_contacts.py "
+                              "--rebuild-moves" % flag)
     if rows and min_notices < 2:
         FAIL("moves", "people-moves.json declares minNotices=%s. Below 2, a single notice becomes "
                       "a claimed job change — do not publish moves on that basis." % min_notices)
@@ -155,7 +167,7 @@ def check_moves(moves, trust_codes, blocked, contacts):
         # time has more than one buyer, so a new name cannot be read as taking
         # over from anyone. Lancashire and South Cumbria passed the gap rule and
         # the evidence floor and was still wrong on exactly this.
-        if contacts and moves.get("singleThreadedOnly"):
+        if contacts:
             ent = sorted(contacts.get(m.get("trust"), []), key=lambda e: e["first"])
             for a_i in range(len(ent)):
                 clash = None
