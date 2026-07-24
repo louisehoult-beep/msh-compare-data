@@ -148,9 +148,6 @@ def main(argv):
     store = load(OUT_PATH, {"source": "Find a Tender (OCDS API), Open Government Licence v3",
                             "sourceUrl": "https://www.find-tender.service.gov.uk/",
                             "windows": [], "trusts": {}})
-    before = {c: {e["name"].lower(): dict(e) for e in v}
-              for c, v in store["trusts"].items()}
-
     url = "%s?updatedFrom=%sT00:00:00&updatedTo=%sT00:00:00&limit=100" % (API, frm, to)
     pages = releases = matched = 0
     t0 = time.time()
@@ -203,34 +200,48 @@ def main(argv):
                   % (pages, releases, matched, time.time() - t0), flush=True)
 
     # ---- observed changes → people-moves.json -------------------------------
-    # Only a genuinely NEW name at a trust that ALREADY had a different named
-    # contact counts. A first-ever contact for a trust is coverage, not a move.
-    moves = load(MOVES_PATH, {"note": "Observed changes of named contact on NHS procurement "
-                                      "notices (Find a Tender). Evidence of a change of remit, "
-                                      "not an announced appointment. Never inferred.",
-                              "source": "Find a Tender (OCDS API), Open Government Licence v3",
-                              "moves": []})
-    seen_keys = {(m["trust"], m["name"].lower()) for m in moves["moves"]}
+    # ⚠️ DERIVED FROM THE STORED DATA, NOT FROM A BEFORE/AFTER DIFF OF THIS RUN.
+    # The diff version was wrong and produced 145 false moves out of 145: a
+    # backfill walks BACKWARDS in time, so every earlier-month name looked like
+    # it had "replaced" someone it actually preceded. Scan order must not be
+    # able to invent a job change.
+    #
+    # The rule now, deliberately strict: a move is recorded only where EVERY
+    # contact previously seen at that trust had stopped appearing at least
+    # GAP_DAYS before this name first appeared. That is a roster that turned
+    # over, not a trust that simply has several buyers. Two people who alternate
+    # on notices are not a move, and neither is a second name appearing
+    # alongside the first.
+    #
+    # This will report few moves, and that is the honest number. Do not loosen
+    # it to make the panel look busier.
+    GAP_DAYS = 60
+    moves = {"note": "Observed changes of named contact on NHS procurement notices "
+                     "(Find a Tender). Recorded only where every previously-seen contact "
+                     "at that trust stopped appearing at least %d days before this name "
+                     "first appeared. Evidence of a changed remit, not an announced "
+                     "appointment, and never inferred from scan order." % GAP_DAYS,
+             "source": "Find a Tender (OCDS API), Open Government Licence v3",
+             "gapDays": GAP_DAYS, "moves": []}
     for code, entries in store["trusts"].items():
-        prior = before.get(code)
-        if not prior:
-            continue
-        for e in entries:
-            k = e["name"].lower()
-            if k in prior or (code, k) in seen_keys:
+        ordered = sorted(entries, key=lambda e: e["first"])
+        for i, a in enumerate(ordered):
+            earlier = ordered[:i]
+            if not earlier:
                 continue
-            predecessors = sorted(prior.values(), key=lambda x: x["last"], reverse=True)
+            a_first = datetime.date.fromisoformat(a["first"])
+            gaps = [b for b in earlier
+                    if (a_first - datetime.date.fromisoformat(b["last"])).days >= GAP_DAYS]
+            if len(gaps) != len(earlier):
+                continue                      # someone was still active — not a handover
+            prev = max(earlier, key=lambda b: b["last"])
             moves["moves"].append({
-                "trust": code,
-                "name": e["name"],
-                "email": e["email"],
-                "firstSeen": e["first"],
-                "replaces": predecessors[0]["name"] if predecessors else None,
-                "replacesLastSeen": predecessors[0]["last"] if predecessors else None,
-                "notice": e["notice"],
-                "ocid": e["ocid"],
+                "trust": code, "name": a["name"], "email": a["email"],
+                "firstSeen": a["first"],
+                "replaces": prev["name"], "replacesLastSeen": prev["last"],
+                "notice": a["notice"], "ocid": a["ocid"],
             })
-            seen_keys.add((code, k))
+
     moves["moves"].sort(key=lambda m: m["firstSeen"], reverse=True)
     moves["asOf"] = today.strftime("%d/%m/%Y")
 
