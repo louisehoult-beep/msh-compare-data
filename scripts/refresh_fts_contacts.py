@@ -137,10 +137,27 @@ def derive_moves(store):
                      "remit, not an announced appointment, and never inferred from scan "
                      "order." % (GAP_DAYS, MIN_NOTICES, MIN_SPAN_DAYS),
              "source": "Find a Tender (OCDS API), Open Government Licence v3",
-             "gapDays": GAP_DAYS, "minNotices": MIN_NOTICES,
+             "gapDays": GAP_DAYS, "minNotices": MIN_NOTICES, "singleThreadedOnly": True,
              "minSpanDays": MIN_SPAN_DAYS, "moves": []}
     for code, entries in store.get("trusts", {}).items():
         ordered = sorted(entries, key=lambda e: e["first"])
+        # SINGLE-THREADED TEST. If any two contacts at this trust were active at
+        # overlapping times, the trust plainly has more than one buyer working
+        # at once, and a new name appearing cannot be read as anyone taking over
+        # from anyone. Lancashire and South Cumbria is the case that proved it:
+        # seven contacts, with Emily McShane-Riding and Nicola Hicks overlapping
+        # by a month, yet the gap rule alone still called it a handover.
+        overlap = False
+        for a_i in range(len(ordered)):
+            for b_i in range(a_i + 1, len(ordered)):
+                a, b = ordered[a_i], ordered[b_i]
+                if a["last"] >= b["first"] and b["last"] >= a["first"]:
+                    overlap = True
+                    break
+            if overlap:
+                break
+        if overlap:
+            continue
         for i, a in enumerate(ordered):
             earlier = ordered[:i]
             if not earlier:
