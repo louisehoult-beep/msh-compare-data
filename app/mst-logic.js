@@ -26,7 +26,7 @@
     microbiology:{icon:'flask',role:'Microbiology / pathology',whoSec:'Microbiology / pathology service lead',whoPri:'Community pathology link',cares:'Avoidable repeat tests, lab capacity, turnaround, cost per test',evidence:'Local repeat-rate audit plus lab cost modelling',hook:'Fewer avoidable repeats equals released lab capacity and faster turnaround',risk:'Holds the data that proves or sinks your case; engage early',spin:function(p,s){return['What proportion of your workload is avoidable repeat or contamination linked to '+p.area+'?','What does each avoidable test cost the lab in time and capacity?','Across the year, how much capacity goes on that?','If it halved, what would you do with the released capacity?'];}},
     stewardship:{icon:'pill',role:'Antimicrobial stewardship',whoSec:'Antimicrobial stewardship lead (micro consultant / pharmacist)',whoPri:'ICB / PCN prescribing and AMR lead',cares:'Inappropriate prescribing, AMR, over-treatment',evidence:'Link between the problem and unnecessary prescribing; stewardship outcomes',hook:'Fewer false positives directly supports your AMR targets',risk:'A credibility multiplier; their endorsement de-risks the case',spin:function(p,s){return['How much prescribing traces back to '+p.problem+'?','Where does it drive over-treatment or resistance risk?','What is the AMR and safety cost across the year?','If we cut it, how would that move your stewardship numbers?'];}},
     sharps:{icon:'alert',role:'Sharps safety / H&S',whoSec:'Sharps safety / health and safety committee',whoPri:'Community H&S / sharps lead',cares:'Needlestick injuries, staff safety, sharps regulations compliance',evidence:'Incident-rate data and safety-engineered device evidence',hook:'Fewer needlestick incidents, safer staff and regulatory compliance',risk:'Safety mandate can accelerate adoption, or block a non-compliant device',spin:function(p,s){return['What is your current rate of sharps / needlestick incidents in '+p.area+'?','Where are staff most exposed with the current devices?','What do those incidents cost in time, testing and staff wellbeing?','If a safer device cut incidents, how would that support your safety obligations?'];}},
-    procurement:{icon:'cart',role:'Procurement',whoSec:'Procurement category manager',whoPri:'ICB procurement / supply lead',cares:'Price, framework compliance, total cost, maverick-spend control',evidence:'Framework position, price benchmarking, total cost of ownership',hook:'A compliant, better-value route that fits your category plan',risk:'Off-framework or poor-value routes get rejected regardless of clinical merit',spin:function(p,s){return['What framework and pricing are you on for '+p.area+' today?','Where are the off-contract or maverick-spend risks?','What does fragmented buying cost you in price and compliance?','If I offered a compliant, better-value route, would that help your category plan?'];}},
+    procurement:{icon:'cart',role:'Procurement',whoSec:'Category manager for YOUR speciality (not the department)',whoPri:'ICB procurement / supply lead',cares:'Price, framework compliance, total cost, maverick-spend control',evidence:'Framework position, price benchmarking, total cost of ownership',hook:'A compliant, better-value route that fits your category plan',risk:'Off-framework or poor-value routes get rejected regardless of clinical merit',spin:function(p,s){return['What framework and pricing are you on for '+p.area+' today?','Where are the off-contract or maverick-spend risks?','What does fragmented buying cost you in price and compliance?','If I offered a compliant, better-value route, would that help your category plan?'];}},
     tissue_viability:{icon:'bandage',role:'Tissue viability',whoSec:'Tissue viability nurse (TVN) / service',whoPri:'Community TVN service',cares:'Healing rates, avoidable pressure / wound harm, nurse-visit burden',evidence:'Healing-time and avoidable-harm data',hook:'Faster healing equals fewer visits, shorter stays, less avoidable harm',risk:'Owns the harm metrics; a key clinical gatekeeper for wound/skin products',spin:function(p,s){return['What is your current rate of the skin / wound problem behind '+p.problem+'?','Where does the current approach delay healing or add harm?','What does that cost in nurse visits, length of stay and harm reporting?','If healing improved, how would that help your service and harm metrics?'];}},
     ebme:{icon:'wrench',role:'EBME / clinical engineering',whoSec:'EBME / medical physics / clinical engineering',whoPri:'Community equipment service',cares:'Maintenance, training, uptime, servicing (incl. LOLER), capital fit',evidence:'Servicing/maintenance profile, training need, uptime data',hook:'Lower servicing burden and reliable uptime for your team',risk:'Can veto on maintenance, safety or interoperability grounds',spin:function(p,s){return['How does the current equipment fit your maintenance, training and servicing load?','Where does downtime or servicing create risk or cost?','What does that mean for safety, uptime and your team workload?','If a device reduced servicing burden, how would that help your department?'];}},
     decontamination:{icon:'droplet',role:'Decontamination / SSD',whoSec:'Decontamination / sterile services lead',whoPri:'Community decontamination link',cares:'Reprocessing load, compliance (JAG / HTM), capacity, traceability',evidence:'Reprocessing volumes, compliance position, capacity modelling',hook:'Less reprocessing equals more throughput and easier compliance',risk:'Compliance failures here stop a whole service; engage early',spin:function(p,s){return['What is your current reprocessing load and compliance position (JAG / HTM) for '+p.area+'?','Where do bottlenecks or failures create risk or delay?','What does that cost in capacity, repeat work and compliance risk?','If we reduced reprocessing, how would that help throughput and compliance?'];}},
@@ -101,7 +101,7 @@
   function fillSpec(){$('m-spec').innerHTML='<option value="">Select\u2026</option>'+SPECS.map(function(s){return '<option value="'+s.id+'">'+s.label+'</option>';}).join('');$('m-spec').value=state.spec;}
   function fillProd(){if(!state.spec){$('m-prod').innerHTML='<option value="">\u2014</option>';return;}var list=productsFor(state.spec);$('m-prod').innerHTML=list.map(function(p,i){return '<option value="'+i+'">'+p.n+'</option>';}).join('');if(state.prodIdx>=list.length)state.prodIdx=0;$('m-prod').value=state.prodIdx;}
   function ensureSetting(){var p=currentProduct();var ss=settingsOf(p);if(ss.indexOf(state.setting)<0)state.setting=ss[0];var only=ss.length===1;$('m-sec').style.display=ss.indexOf('secondary')>=0?'':'none';$('m-pri').style.display=ss.indexOf('primary')>=0?'':'none';$('m-sec').classList.toggle('mst__segbtn--on',state.setting==='secondary');$('m-pri').classList.toggle('mst__segbtn--on',state.setting==='primary');$('m-setwrap').style.opacity=only?'.7':'1';}
-  function render(){if(!state.spec){$('m-problem').innerHTML='<b>Select your speciality above</b> to build the stakeholder map.';$('m-geoline').innerHTML='';$('m-intel').innerHTML='';$('m-path').innerHTML='';$('m-cards').innerHTML='';['m-diagram','m-contacts','m-sheet','m-territory'].forEach(function(id){if($(id))$(id).innerHTML='';});return;}var p=currentProduct();p.area=(SPECS.filter(function(x){return x.id===state.spec;})[0]||{}).label||state.spec;ensureSetting();var s=state.setting;var settingLabel=s==='secondary'?'Acute trust / hospital':'Primary care, community and ICB';$('m-problem').innerHTML='<b>Problem to anchor on:</b> '+p.p+'  · <b>Setting:</b> '+settingLabel;$('m-geoline').innerHTML='<b style="color:var(--ink)">'+$('m-geo').value+'</b> — identify the named '+(s==='primary'?'ICB / community':'trust')+' Payer, Decision-maker and IPC leads locally; org structures are real, individuals confirmed per target.';renderIntel(p,s);renderPath(p,s);var keys=stakeKeys(p,s);var html='';keys.forEach(function(k){var lib=L[k];if(!lib)return;var who=s==='primary'?(lib.whoPri||lib.whoSec):lib.whoSec;var spin='';if(lib.spin){var lab=['Situation','Problem','Implication','Need-payoff'];var pa={problem:p.p,area:p.area};var qs=lib.spin(pa,s);spin='<div class="mst__spin"><div class="mst__spinh">SPIN questions</div>'+qs.map(function(q,i){return '<div><span>'+lab[i]+':</span> '+q+'</div>';}).join('')+'</div>';}html+='<div class="mst__c"><div class="mst__chead"><div class="mst__ico">'+(ICON[lib.icon]||'')+'</div><div><div class="mst__role">'+lib.role+'</div><div class="mst__who">'+who+'</div></div></div>'+(lib.cares?'<div class="mst__f"><b>Cares about:</b> '+lib.cares+'</div>':'')+(lib.evidence?'<div class="mst__f"><b>Evidence they demand:</b> '+lib.evidence+'</div>':'')+(lib.hook?'<div class="mst__f"><b>Your hook:</b> '+lib.hook+'</div>':'')+spin+(lib.risk?'<div class="mst__risk"><b style="color:var(--ink)">Risk / uncertainty:</b> '+lib.risk+'</div>':'')+nameBlock(k,lib)+'</div>';});html+='<div class="mst__c" style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px"><div class="mst__f" style="margin:0"><b style="color:var(--ink)">Build the financial case for this product</b><br>Sends the problem above into the Value Case Calculator.</div><button class="mst__btn mst__btn--primary" id="m-tocalc" type="button">Open value calculator</button></div>';$('m-cards').innerHTML=html;$('m-tocalc').addEventListener('click',function(){$('c-prob').value=p.p.charAt(0).toUpperCase()+p.p.slice(1);showTab('calc');calc();$('c-cost').focus();});renderTrustLine(s);ensureMounts();renderDiagram(p,s);renderContacts();renderToolbar(p,s);renderTerritory(p,s);}
+  function render(){if(!state.spec){$('m-problem').innerHTML='<b>Select your speciality above</b> to build the stakeholder map.';$('m-geoline').innerHTML='';$('m-intel').innerHTML='';$('m-path').innerHTML='';$('m-cards').innerHTML='';['m-diagram','m-contacts','m-sheet','m-territory'].forEach(function(id){if($(id))$(id).innerHTML='';});return;}var p=currentProduct();p.area=(SPECS.filter(function(x){return x.id===state.spec;})[0]||{}).label||state.spec;ensureSetting();var s=state.setting;var settingLabel=s==='secondary'?'Acute trust / hospital':'Primary care, community and ICB';$('m-problem').innerHTML='<b>Problem to anchor on:</b> '+p.p+'  · <b>Setting:</b> '+settingLabel;$('m-geoline').innerHTML='<b style="color:var(--ink)">'+$('m-geo').value+'</b> — identify the named '+(s==='primary'?'ICB / community':'trust')+' Payer, Decision-maker and IPC leads locally; org structures are real, individuals confirmed per target.';renderIntel(p,s);renderPath(p,s);var keys=stakeKeys(p,s);var html='';keys.forEach(function(k){var lib=L[k];if(!lib)return;var who=s==='primary'?(lib.whoPri||lib.whoSec):lib.whoSec;var spin='';if(lib.spin){var lab=['Situation','Problem','Implication','Need-payoff'];var pa={problem:p.p,area:p.area};var qs=lib.spin(pa,s);spin='<div class="mst__spin"><div class="mst__spinh">SPIN questions</div>'+qs.map(function(q,i){return '<div><span>'+lab[i]+':</span> '+q+'</div>';}).join('')+'</div>';}html+='<div class="mst__c"><div class="mst__chead"><div class="mst__ico">'+(ICON[lib.icon]||'')+'</div><div><div class="mst__role">'+lib.role+'</div><div class="mst__who">'+who+'</div></div></div>'+(lib.cares?'<div class="mst__f"><b>Cares about:</b> '+lib.cares+'</div>':'')+(lib.evidence?'<div class="mst__f"><b>Evidence they demand:</b> '+lib.evidence+'</div>':'')+(lib.hook?'<div class="mst__f"><b>Your hook:</b> '+lib.hook+'</div>':'')+spin+(lib.risk?'<div class="mst__risk"><b style="color:var(--ink)">Risk / uncertainty:</b> '+lib.risk+'</div>':'')+nameBlock(k,lib)+nameCapture(k,lib)+'</div>';});html+='<div class="mst__c" style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px"><div class="mst__f" style="margin:0"><b style="color:var(--ink)">Build the financial case for this product</b><br>Sends the problem above into the Value Case Calculator.</div><button class="mst__btn mst__btn--primary" id="m-tocalc" type="button">Open value calculator</button></div>';$('m-cards').innerHTML=sourcingNotes()+html;$('m-tocalc').addEventListener('click',function(){$('c-prob').value=p.p.charAt(0).toUpperCase()+p.p.slice(1);showTab('calc');calc();$('c-cost').focus();});renderTrustLine(s);ensureMounts();renderDiagram(p,s);renderContacts();renderToolbar(p,s);renderTerritory(p,s);wireCapture();}
   var gbp=function(n){if(!isFinite(n))return '£0';return new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP',maximumFractionDigits:(Math.abs(n)>=1000?0:2)}).format(n);};
   var num=function(id){var v=parseFloat($(id).value);return isNaN(v)?0:v;};
   function mrow(l,v,hero){return '<div class="mst__metric"><span class="mst__ml">'+l+'</span><span class="mst__mv'+(hero?' mst__mv--hero':'')+'">'+v+'</span></div>';}
@@ -155,8 +155,8 @@
       how:'No register lists antimicrobial stewardship post-holders by trust.', links:[]},
     sharps: {prompt:'Relationship only. Committee', tier:'earn', li:'health and safety manager',
       how:'A committee role. Membership is not published.', links:[]},
-    procurement: {prompt:'Supply Chain leads, live tenders', tier:'partial', li:'procurement category manager',
-      how:'Two different people, two different answers. The NHS Supply Chain <b>national</b> category lead is published for supplier contact — the strongest lawful basis of any source, because your purpose matches the publication purpose, and NHS Supply Chain states the engagement window itself: 9 to 15 months before the current arrangement expires. The <b>trust</b> category manager who buys your line is the single most valuable name in this map and the least obtainable: ODS returns 0, board papers 0 across ~170 author lines, and the ICO backed a trust withholding exactly this in IC-340495-F0W1. Where a trust is currently tendering, Find a Tender names a contact — see below.',
+    procurement: {prompt:'Ask by CATEGORY, not "procurement"', tier:'partial', li:'procurement category manager',
+      how:'<b>There is no single "procurement contact" at a trust.</b> Every hospital has several, split by category and speciality and sitting at different levels — a Head of Procurement setting strategy, category managers owning particular product areas, and operational buyers raising the orders. The one you need is the category manager for <i>your</i> speciality, and the person who buys wound care is very often not the person who buys theatre kit. Ask for the category, never for "procurement".<br><br>Beyond the trust: the NHS Supply Chain <b>national</b> category lead is published for supplier contact — the strongest lawful basis of any source, because your purpose matches the publication purpose, and NHS Supply Chain states the engagement window itself: 9 to 15 months before the current arrangement expires. The <b>trust</b> category manager who buys your line is the single most valuable name in this map and the least obtainable: ODS returns 0, board papers 0 across ~170 author lines, and the ICO backed a trust withholding exactly this in IC-340495-F0W1. Where a trust is currently tendering, Find a Tender names a contact — see below.',
       links:[['NHS Supply Chain — categories','https://www.supplychain.nhs.uk/categories/'],
              ['NHS Supply Chain — contact','https://www.supplychain.nhs.uk/contact-us/'],
              ['HCSA (Health Care Supply Association)','https://www.nhsprocurement.org.uk/']]},
@@ -229,6 +229,14 @@
     +'.mst__chipt button{border:0;background:rgba(0,0,0,.06);border-radius:50%;width:17px;height:17px;'
     +'line-height:1;cursor:pointer;font-size:12px;color:#5a6675}'
     +'.mst__chipt button:hover{background:rgba(0,0,0,.13)}'
+    +'.mst__cap{border-top:1px dashed rgba(0,0,0,.14);margin-top:9px;padding-top:9px}'
+    +'.mst__caph{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:5px}'
+    +'.mst__caph span{font-weight:400;color:var(--muted)}'
+    +'.mst__capi{width:100%;box-sizing:border-box;font:inherit;font-size:12.5px;padding:5px 8px;'
+    +'margin-bottom:4px;border:1px solid rgba(0,0,0,.16);border-radius:7px;background:#fff}'
+    +'.mst__capi:focus{outline:2px solid rgba(107,42,52,.35);outline-offset:-1px}'
+    +'.mst__chipt i{font-style:normal;font-weight:400;font-size:11px;color:var(--muted)}'
+    +'.mst__chipt--on i{color:#2E6B3E;font-weight:700}'
     +'@media(max-width:640px){.mst__ctbl{font-size:11.5px}}';
     document.head.appendChild(st);
   }
@@ -448,7 +456,8 @@
     return keys.map(function(k){
       var lib=L[k]; if(!lib)return null;
       var r=ROUTE[k]||{}, tier=TIER[r.tier||'earn'];
-      return {role:lib.role,
+      var got=t?captured(t.code,k):null;
+      return {got:got||{}, role:lib.role,
               who:s==='primary'?(lib.whoPri||lib.whoSec):lib.whoSec,
               cares:lib.cares||'',
               hook:lib.hook||'',
@@ -601,8 +610,9 @@
               'Date met','What they care about','Your hook','Next action',
               'Route to a real name','LinkedIn search'].map(csvCell).join(','));
     rows.forEach(function(r){
-      out.push([r.role,r.who,r.tier,'','','','','','',r.cares,r.hook,'',r.how,r.li]
-        .map(csvCell).join(','));
+      var g=r.got||{};
+      out.push([r.role,r.who,r.tier,g.name||'',g.title||'',g.contact||'','','','',
+                r.cares,r.hook,'',r.how,r.li].map(csvCell).join(','));
     });
     var held=contactsFor(t);
     if(held&&held.length){
@@ -747,6 +757,7 @@
       +'.dg-hub2{font:700 17px Inter,Arial,sans-serif;fill:#1d2733}'
       +'.dg-hub3{font:400 11px Inter,Arial,sans-serif;fill:#5a6675}'
       +'.dg-nm{font:400 8px Inter,Arial,sans-serif;fill:#9aa3ad;letter-spacing:.6px}'
+      +'.dg-got{font:700 12px Inter,Arial,sans-serif;fill:#2E6B3E}'
       +'.dg-a{cursor:pointer}.dg-a:hover .dg-card{fill:#fdfcf9;stroke-width:2.4}'
       +'</style>'
       +'<rect width="'+W+'" height="'+H+'" fill="#fbfaf8"/>';
@@ -798,10 +809,20 @@
           svg+='<text x="'+(x+14)+'" y="'+(whoY+j*12)+'" class="dg-who">'+esc(l)+'</text>';
         });
       /* the blank a rep writes the real name on */
-      svg+='<line x1="'+(x+14)+'" y1="'+(y+66)+'" x2="'+(x+CW-12)+'" y2="'+(y+66)
-        +'" stroke="#c9cfd6" stroke-width="1" stroke-dasharray="3 3"/>'
-        +'<text x="'+(x+14)+'" y="'+(y+75)+'" class="dg-nm">NAME</text>';
-      if(r.prompt){
+      var got=t?captured(t.code,k):null;
+      if(got&&got.name){
+        svg+='<text x="'+(x+14)+'" y="'+(y+72)+'" class="dg-got">'
+          +esc(wrapSVG(got.name,24,1)[0])+'</text>';
+        if(got.title){
+          svg+='<text x="'+(x+14)+'" y="'+(y+83)+'" class="dg-who">'
+            +esc(wrapSVG(got.title,30,1)[0])+'</text>';
+        }
+      }else{
+        svg+='<line x1="'+(x+14)+'" y1="'+(y+66)+'" x2="'+(x+CW-12)+'" y2="'+(y+66)
+          +'" stroke="#c9cfd6" stroke-width="1" stroke-dasharray="3 3"/>'
+          +'<text x="'+(x+14)+'" y="'+(y+75)+'" class="dg-nm">NAME</text>';
+      }
+      if(r.prompt&&!(got&&got.name)){
         svg+='<text x="'+(x+14)+'" y="'+(y+89)+'" class="dg-how">'
           +esc(wrapSVG(r.prompt,32,1)[0])+'</text>';
       }
@@ -1009,6 +1030,23 @@
     printDoc('My stakeholder maps ('+list.length+' trusts)',css,body);
   }
 
+  function territoryChipsHTML(list){
+    return list.map(function(tr){
+      var n=namedCount(tr.code);
+      return '<span class="mst__chipt'+(n?' mst__chipt--on':'')+'">'+esc(tr.n)
+        +'<i>'+(n?n+' named':'none yet')+'</i>'
+        +'<button type="button" data-terr="'+esc(tr.code)+'" aria-label="Remove '+esc(tr.n)
+        +' from my patch">\u00d7</button></span>';
+    }).join('');
+  }
+  function renderTerritoryChips(){
+    var host=$('m-territory'); if(!host) return;
+    var wrap=host.querySelector('.mst__terr'); if(!wrap) return;
+    wrap.innerHTML=territoryChipsHTML(territoryTrusts());
+    Array.prototype.forEach.call(wrap.querySelectorAll('[data-terr]'),function(b){
+      b.addEventListener('click',function(){ toggleTerritory(b.getAttribute('data-terr')); render(); });
+    });
+  }
   function renderTerritory(p,s){
     var host=$('m-territory'); if(!host) return;
     if(!state.spec){ host.innerHTML=''; return; }
@@ -1020,12 +1058,7 @@
       +'<b>Saved in this browser only</b>, on this device, and never sent anywhere.</div>';
     if(list.length){
       h+='<div class="mst__terr">';
-      list.forEach(function(tr){
-        h+='<span class="mst__chipt">'+esc(tr.n)
-          +'<button type="button" data-terr="'+esc(tr.code)+'" aria-label="Remove '+esc(tr.n)
-          +' from my patch">×</button></span>';
-      });
-      h+='</div>';
+      h+=territoryChipsHTML(list)+'</div>';
     }else{
       h+='<div class="mst__empty" style="margin-bottom:8px">Nothing saved yet.</div>';
     }
@@ -1054,6 +1087,102 @@
     Array.prototype.forEach.call(host.querySelectorAll('[data-terr]'),function(b){
       b.addEventListener('click',function(){ toggleTerritory(b.getAttribute('data-terr')); render(); });
     });
+  }
+
+
+  /* ==========================================================================
+     NAMES A REP HAS ACTUALLY FOUND
+     A patch is worked in parallel, not one hospital at a time, so names arrive
+     in dribs across several trusts over weeks. These are kept per trust and per
+     role in the browser, filled straight into the cards and the diagram, and
+     carried into every print and CSV so the sheet stops being blank.
+
+     localStorage: this device, this browser, never sent anywhere. That is a
+     deliberate limit, not an oversight — the Hub does not want a copy of a
+     member's account intelligence, and they would not want us to have it.
+     ========================================================================== */
+  var NAMES_KEY='msh_names_v1';
+
+  function allNames(){
+    try{ return JSON.parse(localStorage.getItem(NAMES_KEY)||'{}'); }catch(e){ return {}; }
+  }
+  function namesFor(code){ return (allNames()[code]||{}); }
+  function captured(code,roleKey){
+    var r=namesFor(code)[roleKey];
+    return (r&&(r.name||r.title||r.contact))?r:null;
+  }
+  function setName(code,roleKey,field,value){
+    var all=allNames();
+    if(!all[code]) all[code]={};
+    if(!all[code][roleKey]) all[code][roleKey]={};
+    all[code][roleKey][field]=value;
+    var r=all[code][roleKey];
+    if(!r.name&&!r.title&&!r.contact) delete all[code][roleKey];
+    if(!Object.keys(all[code]).length) delete all[code];
+    try{ localStorage.setItem(NAMES_KEY,JSON.stringify(all)); }catch(e){}
+  }
+  function namedCount(code){
+    var m=namesFor(code), n=0;
+    for(var k in m){ if(m[k]&&m[k].name) n++; }
+    return n;
+  }
+
+  /* The capture strip that sits on every stakeholder card. */
+  function nameCapture(roleKey,lib){
+    var t=selectedTrust(); if(!t) return '';
+    var v=namesFor(t.code)[roleKey]||{};
+    var id=function(f){ return 'nm-'+roleKey+'-'+f; };
+    return '<div class="mst__cap">'
+      +'<div class="mst__caph">Who is it here? <span>saved on this device only</span></div>'
+      +'<input class="mst__capi" id="'+id('name')+'" data-role="'+esc(roleKey)+'" data-f="name" '
+      +'placeholder="Name" value="'+esc(v.name||'')+'">'
+      +'<input class="mst__capi" id="'+id('title')+'" data-role="'+esc(roleKey)+'" data-f="title" '
+      +'placeholder="Job title (ask, do not assume)" value="'+esc(v.title||'')+'">'
+      +'<input class="mst__capi" id="'+id('contact')+'" data-role="'+esc(roleKey)+'" data-f="contact" '
+      +'placeholder="Email or phone" value="'+esc(v.contact||'')+'">'
+      +'</div>';
+  }
+  function wireCapture(){
+    var t=selectedTrust(); if(!t) return;
+    Array.prototype.forEach.call(document.querySelectorAll('.mst__capi'),function(el){
+      el.addEventListener('input',function(){
+        setName(t.code,el.getAttribute('data-role'),el.getAttribute('data-f'),el.value);
+        var d=$('m-diagram');
+        /* Repaint the diagram only, so typing does not tear down the field
+           being typed into. */
+        if(d&&d.querySelector('.mst__dgwrap')){
+          d.querySelector('.mst__dgwrap').innerHTML=buildDiagram(currentProduct(),state.setting);
+        }
+        var tr=$('m-territory');
+        if(tr&&tr.querySelector('.mst__terr')) renderTerritoryChips();
+      });
+    });
+  }
+
+  /* Standing advice that applies to every role, not just one. */
+  function sourcingNotes(){
+    return '<div class="mst__c" style="grid-column:1/-1">'
+      +'<div class="mst__role" style="margin-bottom:2px">Before you go looking for a single name</div>'
+      +'<div class="mst__f"><b>Check your own CRM first.</b> Somebody covered this patch before you. '
+      +'Whoever it was will have left names, call notes and history against these accounts, and that '
+      +'is better than anything you can look up: it tells you who actually engaged, who blocked, and '
+      +'what was already tried. Start there, then use the routes below for the gaps.</div>'
+      +'<div class="mst__f"><b>There is rarely one buyer.</b> Every trust has several procurement '
+      +'people, split by category and speciality and sitting at different levels: a Head of '
+      +'Procurement setting strategy, category managers owning product areas, operational buyers '
+      +'raising orders. The person who buys wound care is very often not the person who buys theatre '
+      +'kit. Ask for the category manager for your speciality by name of category, never for '
+      +'&ldquo;procurement&rdquo;.</div>'
+      +'<div class="mst__f"><b>LinkedIn gives you an in, not the answer.</b> The names that surface '
+      +'there are frequently not the exact person who buys your line. Treat a LinkedIn name as a warm '
+      +'route into the building, someone who can tell you who actually holds your category, rather '
+      +'than as the contact itself.</div>'
+      +'<div class="mst__f" style="border-top:1px dashed rgba(0,0,0,.14);padding-top:9px;margin-top:2px">'
+      +'<b>And the bit new reps get wrong: they want to hear from you.</b> NHS procurement and clinical '
+      +'teams are under real pressure to release cash and improve outcomes, and they cannot do that '
+      +'without knowing what is available. A rep who turns up with evidence, a route to market and a '
+      +'saving they can bank is not an interruption, they are part of how the job gets done. Go in '
+      +'expecting a welcome, not an apology.</div></div>';
   }
 
   $('m-spec').addEventListener('change',function(){state.spec=this.value;state.prodIdx=0;fillProd();render();});
