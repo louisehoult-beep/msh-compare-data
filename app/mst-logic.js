@@ -101,7 +101,7 @@
   function fillSpec(){$('m-spec').innerHTML='<option value="">Select\u2026</option>'+SPECS.map(function(s){return '<option value="'+s.id+'">'+s.label+'</option>';}).join('');$('m-spec').value=state.spec;}
   function fillProd(){if(!state.spec){$('m-prod').innerHTML='<option value="">\u2014</option>';return;}var list=productsFor(state.spec);$('m-prod').innerHTML=list.map(function(p,i){return '<option value="'+i+'">'+p.n+'</option>';}).join('');if(state.prodIdx>=list.length)state.prodIdx=0;$('m-prod').value=state.prodIdx;}
   function ensureSetting(){var p=currentProduct();var ss=settingsOf(p);if(ss.indexOf(state.setting)<0)state.setting=ss[0];var only=ss.length===1;$('m-sec').style.display=ss.indexOf('secondary')>=0?'':'none';$('m-pri').style.display=ss.indexOf('primary')>=0?'':'none';$('m-sec').classList.toggle('mst__segbtn--on',state.setting==='secondary');$('m-pri').classList.toggle('mst__segbtn--on',state.setting==='primary');$('m-setwrap').style.opacity=only?'.7':'1';}
-  function render(){if(!state.spec){$('m-problem').innerHTML='<b>Select your speciality above</b> to build the stakeholder map.';$('m-geoline').innerHTML='';$('m-intel').innerHTML='';$('m-path').innerHTML='';$('m-cards').innerHTML='';if($('m-contacts'))$('m-contacts').innerHTML='';if($('m-sheet'))$('m-sheet').innerHTML='';return;}var p=currentProduct();p.area=(SPECS.filter(function(x){return x.id===state.spec;})[0]||{}).label||state.spec;ensureSetting();var s=state.setting;var settingLabel=s==='secondary'?'Acute trust / hospital':'Primary care, community and ICB';$('m-problem').innerHTML='<b>Problem to anchor on:</b> '+p.p+'  · <b>Setting:</b> '+settingLabel;$('m-geoline').innerHTML='<b style="color:var(--ink)">'+$('m-geo').value+'</b> — identify the named '+(s==='primary'?'ICB / community':'trust')+' Payer, Decision-maker and IPC leads locally; org structures are real, individuals confirmed per target.';renderIntel(p,s);renderPath(p,s);var keys=stakeKeys(p,s);var html='';keys.forEach(function(k){var lib=L[k];if(!lib)return;var who=s==='primary'?(lib.whoPri||lib.whoSec):lib.whoSec;var spin='';if(lib.spin){var lab=['Situation','Problem','Implication','Need-payoff'];var pa={problem:p.p,area:p.area};var qs=lib.spin(pa,s);spin='<div class="mst__spin"><div class="mst__spinh">SPIN questions</div>'+qs.map(function(q,i){return '<div><span>'+lab[i]+':</span> '+q+'</div>';}).join('')+'</div>';}html+='<div class="mst__c"><div class="mst__chead"><div class="mst__ico">'+(ICON[lib.icon]||'')+'</div><div><div class="mst__role">'+lib.role+'</div><div class="mst__who">'+who+'</div></div></div>'+(lib.cares?'<div class="mst__f"><b>Cares about:</b> '+lib.cares+'</div>':'')+(lib.evidence?'<div class="mst__f"><b>Evidence they demand:</b> '+lib.evidence+'</div>':'')+(lib.hook?'<div class="mst__f"><b>Your hook:</b> '+lib.hook+'</div>':'')+spin+(lib.risk?'<div class="mst__risk"><b style="color:var(--ink)">Risk / uncertainty:</b> '+lib.risk+'</div>':'')+nameBlock(k,lib)+'</div>';});html+='<div class="mst__c" style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px"><div class="mst__f" style="margin:0"><b style="color:var(--ink)">Build the financial case for this product</b><br>Sends the problem above into the Value Case Calculator.</div><button class="mst__btn mst__btn--primary" id="m-tocalc" type="button">Open value calculator</button></div>';$('m-cards').innerHTML=html;$('m-tocalc').addEventListener('click',function(){$('c-prob').value=p.p.charAt(0).toUpperCase()+p.p.slice(1);showTab('calc');calc();$('c-cost').focus();});renderTrustLine(s);ensureMounts();renderContacts();renderToolbar(p,s);}
+  function render(){if(!state.spec){$('m-problem').innerHTML='<b>Select your speciality above</b> to build the stakeholder map.';$('m-geoline').innerHTML='';$('m-intel').innerHTML='';$('m-path').innerHTML='';$('m-cards').innerHTML='';['m-diagram','m-contacts','m-sheet','m-territory'].forEach(function(id){if($(id))$(id).innerHTML='';});return;}var p=currentProduct();p.area=(SPECS.filter(function(x){return x.id===state.spec;})[0]||{}).label||state.spec;ensureSetting();var s=state.setting;var settingLabel=s==='secondary'?'Acute trust / hospital':'Primary care, community and ICB';$('m-problem').innerHTML='<b>Problem to anchor on:</b> '+p.p+'  · <b>Setting:</b> '+settingLabel;$('m-geoline').innerHTML='<b style="color:var(--ink)">'+$('m-geo').value+'</b> — identify the named '+(s==='primary'?'ICB / community':'trust')+' Payer, Decision-maker and IPC leads locally; org structures are real, individuals confirmed per target.';renderIntel(p,s);renderPath(p,s);var keys=stakeKeys(p,s);var html='';keys.forEach(function(k){var lib=L[k];if(!lib)return;var who=s==='primary'?(lib.whoPri||lib.whoSec):lib.whoSec;var spin='';if(lib.spin){var lab=['Situation','Problem','Implication','Need-payoff'];var pa={problem:p.p,area:p.area};var qs=lib.spin(pa,s);spin='<div class="mst__spin"><div class="mst__spinh">SPIN questions</div>'+qs.map(function(q,i){return '<div><span>'+lab[i]+':</span> '+q+'</div>';}).join('')+'</div>';}html+='<div class="mst__c"><div class="mst__chead"><div class="mst__ico">'+(ICON[lib.icon]||'')+'</div><div><div class="mst__role">'+lib.role+'</div><div class="mst__who">'+who+'</div></div></div>'+(lib.cares?'<div class="mst__f"><b>Cares about:</b> '+lib.cares+'</div>':'')+(lib.evidence?'<div class="mst__f"><b>Evidence they demand:</b> '+lib.evidence+'</div>':'')+(lib.hook?'<div class="mst__f"><b>Your hook:</b> '+lib.hook+'</div>':'')+spin+(lib.risk?'<div class="mst__risk"><b style="color:var(--ink)">Risk / uncertainty:</b> '+lib.risk+'</div>':'')+nameBlock(k,lib)+'</div>';});html+='<div class="mst__c" style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px"><div class="mst__f" style="margin:0"><b style="color:var(--ink)">Build the financial case for this product</b><br>Sends the problem above into the Value Case Calculator.</div><button class="mst__btn mst__btn--primary" id="m-tocalc" type="button">Open value calculator</button></div>';$('m-cards').innerHTML=html;$('m-tocalc').addEventListener('click',function(){$('c-prob').value=p.p.charAt(0).toUpperCase()+p.p.slice(1);showTab('calc');calc();$('c-cost').focus();});renderTrustLine(s);ensureMounts();renderDiagram(p,s);renderContacts();renderToolbar(p,s);renderTerritory(p,s);}
   var gbp=function(n){if(!isFinite(n))return '£0';return new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP',maximumFractionDigits:(Math.abs(n)>=1000?0:2)}).format(n);};
   var num=function(id){var v=parseFloat($(id).value);return isNaN(v)?0:v;};
   function mrow(l,v,hero){return '<div class="mst__metric"><span class="mst__ml">'+l+'</span><span class="mst__mv'+(hero?' mst__mv--hero':'')+'">'+v+'</span></div>';}
@@ -137,50 +137,50 @@
      (data/whos-who.html in this repo) — not re-judged, not estimated.
      tier: named | partial | earn | unchecked                                  */
   var ROUTE = {
-    payer: {tier:'partial', li:'director of finance',
+    payer: {prompt:'ODS SIRO register, then LinkedIn', tier:'partial', li:'director of finance',
       how:'The board Chief Finance Officer is named in the ODS SIRO register (~280–293 rows at trusts and ICBs, 31% carry an email). The divisional or service finance manager who actually holds the budget you are pitching to is in no register.',
       links:[['ODS registers (Caldicott / SIRO / IAO)','https://digital.nhs.uk/services/organisation-data-service/export-data-files/csv-downloads/miscellaneous']]},
-    decision_maker: {tier:'earn', li:'clinical lead',
+    decision_maker: {prompt:'Ask for the committee cycle', tier:'earn', li:'clinical lead',
       how:'Product evaluation committee membership is not published anywhere, and the two best clinical registers (RCP Fellows, RCoA Regional Advisers) are both permission-blocked. You can still get the committee’s cycle and submission criteria without a name — often the more valuable half.',
       links:[]},
-    user: {tier:'earn', li:'clinical nurse specialist',
+    user: {prompt:'Met on the ward, not looked up', tier:'earn', li:'clinical nurse specialist',
       how:'Never published as a named list. This one is met, not looked up.', links:[]},
-    ipc: {tier:'earn', li:'infection prevention and control',
+    ipc: {prompt:'Relationship only. No register', tier:'earn', li:'infection prevention and control',
       how:'Filtered across 20,000+ named individuals in the ODS registers, IPC returned exactly 1. No register lists trust IPC leads.',
       links:[]},
-    microbiology: {tier:'earn', li:'consultant microbiologist',
+    microbiology: {prompt:'Relationship only. RCP blocked', tier:'earn', li:'consultant microbiologist',
       how:'Would be reachable via the RCP Register of Fellows — which is permission-blocked, its terms prohibit copying.',
       links:[]},
-    stewardship: {tier:'earn', li:'antimicrobial pharmacist',
+    stewardship: {prompt:'Relationship only. No register', tier:'earn', li:'antimicrobial pharmacist',
       how:'No register lists antimicrobial stewardship post-holders by trust.', links:[]},
-    sharps: {tier:'earn', li:'health and safety manager',
+    sharps: {prompt:'Relationship only. Committee', tier:'earn', li:'health and safety manager',
       how:'A committee role. Membership is not published.', links:[]},
-    procurement: {tier:'partial', li:'procurement category manager',
+    procurement: {prompt:'Supply Chain leads, live tenders', tier:'partial', li:'procurement category manager',
       how:'Two different people, two different answers. The NHS Supply Chain <b>national</b> category lead is published for supplier contact — the strongest lawful basis of any source, because your purpose matches the publication purpose, and NHS Supply Chain states the engagement window itself: 9 to 15 months before the current arrangement expires. The <b>trust</b> category manager who buys your line is the single most valuable name in this map and the least obtainable: ODS returns 0, board papers 0 across ~170 author lines, and the ICO backed a trust withholding exactly this in IC-340495-F0W1. Where a trust is currently tendering, Find a Tender names a contact — see below.',
       links:[['NHS Supply Chain — categories','https://www.supplychain.nhs.uk/categories/'],
              ['NHS Supply Chain — contact','https://www.supplychain.nhs.uk/contact-us/'],
              ['HCSA (Health Care Supply Association)','https://www.nhsprocurement.org.uk/']]},
-    tissue_viability: {tier:'earn', li:'tissue viability nurse',
+    tissue_viability: {prompt:'Trust service page, LinkedIn', tier:'earn', li:'tissue viability nurse',
       how:'No register. Occasionally named on a trust service page.', links:[]},
-    ebme: {tier:'partial', li:'clinical engineering',
+    ebme: {prompt:'RCT register: name and town only', tier:'partial', li:'clinical engineering',
       how:'The Register of Clinical Technologists lists 688 named Medical Engineering registrants (1,055 across all scopes), free and public — but <b>name and town only</b>, no employer and no job title. It establishes who exists, not who works where. Roughly 10–15% of acute trusts publish named clinical engineering staff on department pages, skewed to large teaching centres.',
       links:[['Register of Clinical Technologists','https://www.therct.org.uk/']]},
-    decontamination: {tier:'earn', li:'sterile services manager',
+    decontamination: {prompt:'Relationship only. Committee', tier:'earn', li:'sterile services manager',
       how:'A committee and service role. Membership is not published.', links:[]},
-    sustainability: {tier:'unchecked', li:'sustainability lead',
+    sustainability: {prompt:'Trust Green Plan (unchecked)', tier:'unchecked', li:'sustainability lead',
       how:'Trust Green Plans are published and <i>may</i> name a lead. This was not checked in the 20/07/2026 research — flagged as open rather than claimed either way.',
       links:[]},
-    medicines: {tier:'partial', li:'formulary pharmacist',
+    medicines: {prompt:'ODS registers. Never ABPI', tier:'partial', li:'formulary pharmacist',
       how:'Some pharmacists appear in the ODS registers. Area Prescribing Committee membership <i>categories</i> are published; the named individuals in the seats generally are not. Do not use ABPI Disclosure UK — its identity data is licensed from IQVIA OneKey, whose terms expressly prohibit compiling an internal database or commercial extraction, which is precisely what a CRM import is.',
       links:[['ODS registers','https://digital.nhs.uk/services/organisation-data-service/export-data-files/csv-downloads/miscellaneous']]},
-    dietitian: {tier:'earn', li:'dietitian', how:'No register.', links:[]},
-    radiation_protection: {tier:'unchecked', li:'radiation protection adviser',
+    dietitian: {prompt:'Relationship only. No register', tier:'earn', li:'dietitian', how:'No register.', links:[]},
+    radiation_protection: {prompt:'Statutory RPA (unchecked)', tier:'unchecked', li:'radiation protection adviser',
       how:'Radiation Protection Advisers are a statutory appointment, so a route may well exist. Not checked in the 20/07/2026 research — flagged rather than claimed.',
       links:[]},
-    pharmacy: {tier:'partial', li:'chief pharmacist',
+    pharmacy: {prompt:'ODS registers. Never ABPI', tier:'partial', li:'chief pharmacist',
       how:'Some Chief Pharmacists appear in the ODS registers. Same ABPI / IQVIA restriction as medicines optimisation — do not import from Disclosure UK.',
       links:[['ODS registers','https://digital.nhs.uk/services/organisation-data-service/export-data-files/csv-downloads/miscellaneous']]},
-    patient: {tier:'na', li:'',
+    patient: {prompt:'', tier:'na', li:'',
       how:'Never a prospecting target. Patient and carer experience reaches you through PALS, complaints and CQC — not through a name you look up.',
       links:[]}
   };
@@ -219,6 +219,16 @@
     +'color:var(--muted);border-bottom:2px solid rgba(0,0,0,.12);padding:6px 8px}'
     +'.mst__ctbl td{border-bottom:1px solid rgba(0,0,0,.08);padding:7px 8px;vertical-align:top}'
     +'.mst__empty{font-size:12.5px;color:var(--muted);line-height:1.6}'
+    +'.mst__dgwrap{background:#fbfaf8;border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:6px}'
+    +'.mst__dgres{margin-top:10px;font-size:12.5px;line-height:1.6}'
+    +'.mst__dgres b{color:var(--ink)}'
+    +'.mst__dgnote{margin-top:7px;color:var(--muted);font-size:12.5px;line-height:1.6}'
+    +'.mst__terr{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}'
+    +'.mst__chipt{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;'
+    +'background:#fff;border:1px solid rgba(0,0,0,.16);border-radius:99px;padding:3px 6px 3px 11px}'
+    +'.mst__chipt button{border:0;background:rgba(0,0,0,.06);border-radius:50%;width:17px;height:17px;'
+    +'line-height:1;cursor:pointer;font-size:12px;color:#5a6675}'
+    +'.mst__chipt button:hover{background:rgba(0,0,0,.13)}'
     +'@media(max-width:640px){.mst__ctbl{font-size:11.5px}}';
     document.head.appendChild(st);
   }
@@ -254,6 +264,7 @@
     return TRUSTS.filter(function(t){return t.icbName===want;});
   }
   function selectedTrust(){
+    if(TRUST_OVERRIDE) return TRUST_OVERRIDE;   /* territory pack renders trusts that are not selected */
     var el=$('m-trust');
     if(!el||!el.value)return null;
     for(var i=0;i<TRUSTS.length;i++){if(TRUSTS[i].code===el.value)return TRUSTS[i];}
@@ -484,6 +495,7 @@
       +'.note{font-size:9px;color:#5a6675;background:#f7f4ee;border-left:3px solid #9A7A2E;'
       +'padding:6px 8px;margin:6px 0}'
       +'.foot{font-size:8.5px;color:#7a838f;margin-top:14px;border-top:1px solid #e6e0d4;padding-top:6px}'
+      +'svg{width:100%;height:auto}'
       +'@page{size:A4;margin:11mm}'
       +'@media print{.noprint{display:none}}';
     var h='<h1>Account map — '+esc(H.trust)+'</h1>'
@@ -494,6 +506,7 @@
       +'<p class="meta"><b>Problem to anchor on:</b> '+esc(H.problem)+'</p>'
       +'<p class="meta"><b>Rep:</b> ______________________  <b>Prepared:</b> '+today()
       +'  <b>Review by:</b> ______________</p>';
+    h+='<div style="margin:8px 0 4px">'+buildDiagram(p,s)+'</div>';
     if(H.bc)h+='<div class="note"><b>Buying centre.</b> '+esc(H.bc)+'</div>';
     h+='<div class="note">Three people have to line up on almost every NHS purchase: a <b>clinical champion</b> '
       +'who wants it, a <b>procurement gatekeeper</b> who can buy it compliantly, and a <b>budget holder</b> who '
@@ -554,6 +567,10 @@
   }
   function printSheet(p,s){
     var d=buildSheetHTML(p,s);
+    printDoc(d.title,d.css,d.body);
+  }
+  function printDoc(title,css,body){
+    var d={title:title,css:css,body:body};
     /* An iframe rather than window.open — popup blockers kill the latter and the
        member just sees nothing happen. */
     var old=document.getElementById('mst-printframe');
@@ -632,19 +649,410 @@
         +'map — useful, but there is nobody to name.'))+'</div>'
       +'<div class="mst__toolbar">'
       +'<button class="mst__btn mst__btn--primary" id="m-print" type="button">Print account map (A4)</button>'
-      +'<button class="mst__btn" id="m-csv" type="button">Download as CSV</button></div></div>';
+      +'<button class="mst__btn" id="m-csv" type="button">Download as CSV</button>'
+      +'<button class="mst__btn" id="m-png" type="button">Download map (PNG)</button>'
+      +'<button class="mst__btn" id="m-svg" type="button">Download map (SVG)</button></div></div>';
     $('m-print').addEventListener('click',function(){printSheet(p,s);});
     $('m-csv').addEventListener('click',function(){downloadCSV(p,s);});
+    $('m-png').addEventListener('click',function(){downloadPNG(p,s);});
+    $('m-svg').addEventListener('click',function(){downloadSVG(p,s);});
   }
 
   /* Mount points, appended once after the existing cards grid. */
   function ensureMounts(){
     var cards=$('m-cards'); if(!cards)return;
-    ['m-contacts','m-sheet'].forEach(function(id){
+    if(!$('m-diagram')){
+      var d=document.createElement('div');
+      d.id='m-diagram'; d.className='mst__cards';
+      cards.parentNode.insertBefore(d,cards);
+    }
+    ['m-contacts','m-sheet','m-territory'].forEach(function(id){
       if($(id))return;
       var d=document.createElement('div');
       d.id=id; d.className='mst__cards';
       cards.parentNode.insertBefore(d,cards.nextSibling);
+    });
+  }
+
+
+  /* ==========================================================================
+     STAKEHOLDER MAP — the diagram
+     Added 24/07/2026. The printable sheet is a checklist; this is the account
+     at a glance. The point of it is the GAPS: a whole group with no names in it
+     reads instantly as "this deal cannot close yet", which a blank row in a
+     table never does.
+
+     Patient and product sit at the centre because that is what everyone in the
+     ring is actually deciding about. Roles orbit in three groups — who wants
+     it, who can block it, who funds and buys it — the same "three people
+     aligned" idea the rest of the tool is built on.
+
+     Each node carries the route to a real name, and links straight out to the
+     LinkedIn search for that role at that trust.
+
+     ⚠️ WHAT THIS DELIBERATELY DOES NOT DO. It never drops a published contact
+     name into a role node. The Find a Tender data carries NO job-title field,
+     so attaching a named person to "Procurement" or "Decision-maker" would be
+     inventing a link the source does not support — the same class of error that
+     put 145 false job changes on this page on 24/07/2026. Published names are
+     shown separately, unattached to any role, and labelled as such.
+     ========================================================================== */
+  var GROUPS = {
+    clinical: {label:'WANTS IT · clinical demand', colour:'#2E6B3E',
+      keys:['decision_maker','user','ipc','tissue_viability','microbiology',
+            'stewardship','dietitian','pharmacy','medicines']},
+    gate: {label:'CAN BLOCK IT · safety & technical', colour:'#9A7A2E',
+      keys:['ebme','decontamination','sharps','radiation_protection','sustainability']},
+    money: {label:'FUNDS & BUYS IT · money & route', colour:'#6B2A34',
+      keys:['payer','procurement']}
+  };
+  var GROUP_ORDER = ['clinical','gate','money'];
+
+  function groupOf(key){
+    for(var g in GROUPS){ if(GROUPS[g].keys.indexOf(key)>-1) return g; }
+    return 'clinical';
+  }
+  function wrapSVG(text,max,limit){
+    var words=String(text||'').split(/\s+/), lines=[], cur='';
+    for(var i=0;i<words.length;i++){
+      var t=cur?cur+' '+words[i]:words[i];
+      if(t.length>max&&cur){ lines.push(cur); cur=words[i]; }
+      else { cur=t; }
+      if(lines.length>=limit) break;
+    }
+    if(cur&&lines.length<limit) lines.push(cur);
+    return lines;
+  }
+
+  function buildDiagram(p,s){
+    var t=selectedTrust(), keys=stakeKeys(p,s).filter(function(k){return k!=='patient';});
+    /* Order the ring so each group is contiguous — the whole point is being able
+       to see at a glance that a group is entirely empty. */
+    var ordered=[];
+    GROUP_ORDER.forEach(function(g){
+      keys.forEach(function(k){ if(groupOf(k)===g) ordered.push(k); });
+    });
+
+    var W=900,H=660,CX=450,CY=318,RX=312,RY=207,CW=170,CH=96;
+    var n=ordered.length||1;
+    var svg='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" role="img" '
+      +'aria-label="Stakeholder map for '+esc(t?t.n:'this account')+'" '
+      +'style="width:100%;height:auto;display:block">'
+      +'<style>'
+      +'.dg-role{font:700 15px Inter,Arial,sans-serif}'
+      +'.dg-who{font:400 10.5px Inter,Arial,sans-serif;fill:#5a6675}'
+      +'.dg-how{font:400 9.5px Inter,Arial,sans-serif;fill:#7a838f}'
+      +'.dg-lab{font:700 9px Inter,Arial,sans-serif;letter-spacing:.8px}'
+      +'.dg-hub1{font:700 11px Inter,Arial,sans-serif;letter-spacing:1.4px;fill:#8C8880}'
+      +'.dg-hub2{font:700 17px Inter,Arial,sans-serif;fill:#1d2733}'
+      +'.dg-hub3{font:400 11px Inter,Arial,sans-serif;fill:#5a6675}'
+      +'.dg-nm{font:400 8px Inter,Arial,sans-serif;fill:#9aa3ad;letter-spacing:.6px}'
+      +'.dg-a{cursor:pointer}.dg-a:hover .dg-card{fill:#fdfcf9;stroke-width:2.4}'
+      +'</style>'
+      +'<rect width="'+W+'" height="'+H+'" fill="#fbfaf8"/>';
+
+    var pts=[];
+    for(var i=0;i<n;i++){
+      var a=-Math.PI/2+(2*Math.PI*i/n);
+      var x=CX+RX*Math.cos(a), y=CY+RY*Math.sin(a);
+      pts.push([x,y,ordered[i]]);
+      svg+='<line x1="'+CX+'" y1="'+CY+'" x2="'+x.toFixed(1)+'" y2="'+y.toFixed(1)
+        +'" stroke="#ded7ca" stroke-width="1.2"/>';
+    }
+
+    /* The hub: what every role in the ring is actually deciding about. */
+    svg+='<ellipse cx="'+CX+'" cy="'+CY+'" rx="130" ry="88" fill="#ffffff" '
+      +'stroke="#6B2A34" stroke-width="2"/>'
+      +'<text x="'+CX+'" y="'+(CY-48)+'" text-anchor="middle" class="dg-hub1">THE PATIENT</text>';
+    var pn=wrapSVG(p.n,22,2);
+    pn.forEach(function(l,j){
+      svg+='<text x="'+CX+'" y="'+(CY-18+j*19)+'" text-anchor="middle" class="dg-hub2">'+esc(l)+'</text>';
+    });
+    svg+='<text x="'+CX+'" y="'+(CY+(pn.length>1?26:22))+'" text-anchor="middle" class="dg-hub3">'
+      +esc(p.area||'')+'</text>'
+      +'<text x="'+CX+'" y="'+(CY+(pn.length>1?44:40))+'" text-anchor="middle" class="dg-hub3">'
+      +esc(s==='primary'?'Primary care / community':'Acute trust')+'</text>';
+
+    pts.forEach(function(pt){
+      var k=pt[2], lib=L[k]; if(!lib) return;
+      var g=GROUPS[groupOf(k)], r=ROUTE[k]||{}, tier=TIER[r.tier||'earn'];
+      var x=pt[0]-CW/2, y=pt[1]-CH/2;
+      var href=(t&&r.li)?liURL(t.n,r.li):'';
+      svg+=href?('<a class="dg-a" href="'+esc(href)+'" target="_blank" rel="noopener nofollow">'):'<g>';
+      svg+='<rect class="dg-card" x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+CW+'" height="'+CH
+        +'" rx="11" fill="#ffffff" stroke="'+g.colour+'" stroke-width="1.4"/>'
+        /* findability stripe: colour AND a fixed position, so it survives mono printing */
+        +'<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="5" height="'+CH+'" rx="2.5" fill="'+tier[1]+'"/>'
+        ;
+      /* A long role gets two lines rather than losing half of itself: "Infection
+         Prevention" is not the same role as "Infection Prevention and Control".
+         When it takes two, the who-line gives one up so nothing collides. */
+      var rl=wrapSVG(lib.role,21,2);
+      rl.forEach(function(l,j){
+        svg+='<text x="'+(x+14)+'" y="'+(y+19+j*14)+'" class="dg-role" fill="'+g.colour+'">'
+          +esc(l)+'</text>';
+      });
+      var whoY=y+(rl.length>1?47:34);
+      wrapSVG(s==='primary'?(lib.whoPri||lib.whoSec):lib.whoSec,29,rl.length>1?1:2)
+        .forEach(function(l,j){
+          svg+='<text x="'+(x+14)+'" y="'+(whoY+j*12)+'" class="dg-who">'+esc(l)+'</text>';
+        });
+      /* the blank a rep writes the real name on */
+      svg+='<line x1="'+(x+14)+'" y1="'+(y+66)+'" x2="'+(x+CW-12)+'" y2="'+(y+66)
+        +'" stroke="#c9cfd6" stroke-width="1" stroke-dasharray="3 3"/>'
+        +'<text x="'+(x+14)+'" y="'+(y+75)+'" class="dg-nm">NAME</text>';
+      if(r.prompt){
+        svg+='<text x="'+(x+14)+'" y="'+(y+89)+'" class="dg-how">'
+          +esc(wrapSVG(r.prompt,32,1)[0])+'</text>';
+      }
+      svg+=href?'</a>':'</g>';
+    });
+
+    /* Two scales, labelled, so nobody reads colour as importance. */
+    var lx=16, ly=H-52;
+    svg+='<text x="'+lx+'" y="'+ly+'" class="dg-lab" fill="#5a6675">GROUP (border)</text>';
+    GROUP_ORDER.forEach(function(g,j){
+      var gx=lx+112+j*168;
+      svg+='<rect x="'+gx+'" y="'+(ly-9)+'" width="11" height="11" rx="2.5" fill="#fff" stroke="'
+        +GROUPS[g].colour+'" stroke-width="2"/>'
+        +'<text x="'+(gx+17)+'" y="'+ly+'" class="dg-who">'+esc(GROUPS[g].label)+'</text>';
+    });
+    svg+='<text x="'+lx+'" y="'+(ly+22)+'" class="dg-lab" fill="#5a6675">CAN YOU GET A NAME? (stripe)</text>';
+    ['named','partial','earn','unchecked'].forEach(function(k,j){
+      var gx=lx+190+j*126;
+      svg+='<rect x="'+gx+'" y="'+(ly+13)+'" width="11" height="11" rx="2.5" fill="'+TIER[k][1]+'"/>'
+        +'<text x="'+(gx+17)+'" y="'+(ly+22)+'" class="dg-who">'+esc(TIER[k][0])+'</text>';
+    });
+    return svg+'</svg>';
+  }
+
+  /* Resources strip — where to go looking, scoped to the selected trust. */
+  function diagramResources(t){
+    if(!t) return '';
+    var held=contactsFor(t), moves=movesFor(t);
+    var h='<div class="mst__dgres"><b>Where to look for '+esc(t.n)+'</b>';
+    h+='<a class="mst__lnk" target="_blank" rel="noopener" href="'+esc(ftsURL(t.n))
+      +'">This trust on Find a Tender ↗</a>'
+      +'<a class="mst__lnk" target="_blank" rel="noopener" href="'
+      +esc('https://www.linkedin.com/search/results/people/?keywords='+encodeURIComponent('"'+t.n+'"'))
+      +'">Everyone at this trust on LinkedIn ↗</a>'
+      +'<a class="mst__lnk" target="_blank" rel="noopener" href="https://www.supplychain.nhs.uk/categories/">'
+      +'NHS Supply Chain category leads ↗</a>'
+      +'<a class="mst__lnk" target="_blank" rel="noopener" href="https://www.nhsprocurement.org.uk/">HCSA ↗</a>'
+      +'<a class="mst__lnk" target="_blank" rel="noopener" '
+      +'href="https://digital.nhs.uk/services/organisation-data-service/export-data-files/csv-downloads/miscellaneous">'
+      +'ODS registers (CFO, Caldicott) ↗</a>'
+      +'<a class="mst__lnk" target="_blank" rel="noopener" href="https://www.therct.org.uk/">'
+      +'Clinical Technologists (EBME) ↗</a>';
+    /* Counts only, with the honest caveat — never pinned to a role on the map. */
+    if(held===null){
+      h+='<div class="mst__dgnote">Checking what is already published for this trust…</div>';
+    }else if(held.length){
+      h+='<div class="mst__dgnote"><b>'+held.length+' name'+(held.length===1?'':'s')
+        +' already published</b> on this trust’s own tender notices'
+        +(moves&&moves.length?', and '+moves.length+' observed change of named contact':'')
+        +'. They are listed under the map below rather than pinned to a role, because '
+        +'<b>the source carries no job titles</b> — matching a name to a seat would be a guess.</div>';
+    }else{
+      h+='<div class="mst__dgnote">No names published on this trust’s notices in the period '
+        +'harvested so far. That is coverage, not an answer — use the links above.</div>';
+    }
+    return h+'</div>';
+  }
+
+  function renderDiagram(p,s){
+    var host=$('m-diagram'); if(!host) return;
+    if(!state.spec){ host.innerHTML=''; return; }
+    var t=selectedTrust();
+    host.innerHTML='<div class="mst__c" style="grid-column:1/-1">'
+      +'<div class="mst__role" style="margin-bottom:2px">Stakeholder map'
+      +(t?' — '+esc(t.n):'')+'</div>'
+      +'<div class="mst__f" style="margin:0 0 10px">Everyone in the ring is deciding about the same '
+      +'thing: your product, for that patient. <b>The gaps are the point.</b> A group with no names in '
+      +'it is not a tidy account with a bit missing, it is a deal that cannot close yet. Each card '
+      +'carries how to get that name, and opens the LinkedIn search for that role at this trust.'
+      +(t?'':' <b>Pick a trust above</b> to make this an account map rather than a generic one.')
+      +'</div>'
+      +'<div class="mst__dgwrap">'+buildDiagram(p,s)+'</div>'
+      +diagramResources(t)+'</div>';
+  }
+
+
+  /* ==========================================================================
+     DOWNLOADS AND "MY TERRITORY"
+     A rep does not have one hospital, they have a patch. This keeps a list of
+     their trusts in the browser and prints the whole set as one pack, one map
+     per trust, so the account maps get made once and filled in over weeks.
+
+     Stored in localStorage, so it is per browser and per device and never
+     leaves the machine. Nothing about a member's territory is sent anywhere.
+     ========================================================================== */
+  var TERRITORY_KEY='msh_territory_v1';
+  /* selectedTrust() reads the dropdown; the territory pack needs to render a
+     map for a trust that is NOT selected. This override is always cleared in a
+     finally, so a thrown error can never leave the UI pointing at the wrong
+     trust. */
+  var TRUST_OVERRIDE=null;
+
+  function territory(){
+    try{ return JSON.parse(localStorage.getItem(TERRITORY_KEY)||'[]'); }
+    catch(e){ return []; }
+  }
+  function saveTerritory(list){
+    try{ localStorage.setItem(TERRITORY_KEY,JSON.stringify(list)); }catch(e){}
+  }
+  function territoryTrusts(){
+    var want=territory();
+    return TRUSTS.filter(function(t){return want.indexOf(t.code)>-1;})
+                 .sort(function(a,b){return a.n<b.n?-1:1;});
+  }
+  function inTerritory(code){ return territory().indexOf(code)>-1; }
+  function toggleTerritory(code){
+    var l=territory(), i=l.indexOf(code);
+    if(i>-1) l.splice(i,1); else l.push(code);
+    saveTerritory(l);
+  }
+
+  function download(blob,filename){
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download=filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.parentNode.removeChild(a);},1500);
+  }
+  function slug(s){
+    return String(s||'map').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  }
+  function mapName(t,p,ext){
+    return 'stakeholder-map-'+slug((t?t.code+'-'+t.n:'icb')+'-'+(p&&p.n?p.n:''))+'.'+ext;
+  }
+
+  function downloadSVG(p,s){
+    var t=selectedTrust();
+    download(new Blob([buildDiagram(p,s)],{type:'image/svg+xml;charset=utf-8'}),
+             mapName(t,p,'svg'));
+  }
+  /* PNG via canvas. The SVG carries its own <style> and no external references,
+     so the canvas is never tainted and toBlob works. 2x for a crisp paste into
+     a deck or an email. */
+  function downloadPNG(p,s){
+    var t=selectedTrust(), svg=buildDiagram(p,s), scale=2, W=900, H=660;
+    var img=new Image();
+    var url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml;charset=utf-8'}));
+    img.onload=function(){
+      var c=document.createElement('canvas');
+      c.width=W*scale; c.height=H*scale;
+      var ctx=c.getContext('2d');
+      ctx.fillStyle='#fbfaf8'; ctx.fillRect(0,0,c.width,c.height);
+      ctx.drawImage(img,0,0,c.width,c.height);
+      URL.revokeObjectURL(url);
+      if(c.toBlob){ c.toBlob(function(b){ if(b) download(b,mapName(t,p,'png')); },'image/png'); }
+    };
+    img.onerror=function(){
+      URL.revokeObjectURL(url);
+      alert('The PNG could not be generated in this browser. The SVG download works everywhere '
+            +'and gives a sharper image.');
+    };
+    img.src=url;
+  }
+
+  /* One printable pack: a map plus a fill-in table per trust in the patch. */
+  function printTerritory(p,s){
+    var list=territoryTrusts();
+    if(!list.length){
+      alert('No trusts saved yet. Use "Add this trust to my patch" on each account first.');
+      return;
+    }
+    var css='body{font-family:Inter,-apple-system,"Segoe UI",Arial,sans-serif;color:#1d2733;'
+      +'font-size:10.5px;line-height:1.45;margin:0;padding:14px}'
+      +'h1{font-size:16px;margin:0 0 2px}h2{font-size:11px;text-transform:uppercase;letter-spacing:1px;'
+      +'margin:12px 0 5px;color:#6B2A34;border-bottom:1px solid #e6e0d4;padding-bottom:3px}'
+      +'.meta{font-size:9.5px;color:#4a5766;margin:0 0 6px}'
+      +'table{width:100%;border-collapse:collapse;margin-bottom:4px}'
+      +'th{background:#f7f4ee;text-align:left;font-size:8px;text-transform:uppercase;letter-spacing:.6px;'
+      +'color:#5a6675;border:1px solid #d9d2c4;padding:3px 5px}'
+      +'td{border:1px solid #d9d2c4;padding:4px 5px;vertical-align:top}'
+      +'.fill{background:#fcfbf8}.pill{display:inline-block;font-size:7.5px;font-weight:700;color:#fff;'
+      +'padding:1px 5px;border-radius:99px;text-transform:uppercase}'
+      +'.acct{page-break-after:always}.acct:last-child{page-break-after:auto}'
+      +'svg{width:100%;height:auto}'
+      +'.foot{font-size:8px;color:#7a838f;margin-top:8px;border-top:1px solid #e6e0d4;padding-top:5px}'
+      +'@page{size:A4 portrait;margin:10mm}';
+    var body='';
+    list.forEach(function(tr){
+      TRUST_OVERRIDE=tr;
+      try{
+        var rows=sheetRows(p,s);
+        body+='<div class="acct"><h1>'+esc(tr.n)+'</h1>'
+          +'<p class="meta">ODS '+esc(tr.code)+(tr.town?' · '+esc(tr.town):'')
+          +(tr.kind?' · '+esc(tr.kind):'')+' · NHS '+esc(tr.icbName)+' ICB'
+          +' &nbsp;|&nbsp; <b>'+esc(p.n)+'</b> · '+esc(p.area)
+          +' &nbsp;|&nbsp; Rep: ____________  Prepared: '+today()+'</p>';
+        body+=buildDiagram(p,s);
+        body+='<h2>Fill in the names</h2><table><tr><th style="width:15%">Role</th>'
+          +'<th style="width:20%">Who this is</th><th style="width:11%">Findable?</th>'
+          +'<th style="width:18%">Name</th><th style="width:14%">Job title</th>'
+          +'<th style="width:16%">Email / phone</th><th style="width:6%">Met?</th></tr>';
+        rows.forEach(function(r){
+          body+='<tr><td><b>'+esc(r.role)+'</b></td><td>'+esc(r.who)+'</td>'
+            +'<td><span class="pill" style="background:'+r.tierColour+'">'+esc(r.tier)+'</span></td>'
+            +'<td class="fill">&nbsp;</td><td class="fill">&nbsp;</td>'
+            +'<td class="fill">&nbsp;</td><td class="fill">&nbsp;</td></tr>';
+        });
+        body+='</table><div class="foot">Medical Sales Hub — Stakeholder Mapper. Organisation data: '
+          +'NHS ODS (Open Government Licence)'+(TRUST_ASOF?', as at '+esc(TRUST_ASOF):'')
+          +'. Individuals move; confirm every name against the trust before you use it.</div></div>';
+      } finally {
+        TRUST_OVERRIDE=null;
+      }
+    });
+    printDoc('My stakeholder maps ('+list.length+' trusts)',css,body);
+  }
+
+  function renderTerritory(p,s){
+    var host=$('m-territory'); if(!host) return;
+    if(!state.spec){ host.innerHTML=''; return; }
+    var t=selectedTrust(), list=territoryTrusts();
+    var h='<div class="mst__c" style="grid-column:1/-1">'
+      +'<div class="mst__role" style="margin-bottom:2px">My patch</div>'
+      +'<div class="mst__f" style="margin:0 0 8px">Save the trusts you actually cover and print the '
+      +'whole set in one go, a map per hospital. Same product range, different people at every one. '
+      +'<b>Saved in this browser only</b>, on this device, and never sent anywhere.</div>';
+    if(list.length){
+      h+='<div class="mst__terr">';
+      list.forEach(function(tr){
+        h+='<span class="mst__chipt">'+esc(tr.n)
+          +'<button type="button" data-terr="'+esc(tr.code)+'" aria-label="Remove '+esc(tr.n)
+          +' from my patch">×</button></span>';
+      });
+      h+='</div>';
+    }else{
+      h+='<div class="mst__empty" style="margin-bottom:8px">Nothing saved yet.</div>';
+    }
+    h+='<div class="mst__toolbar">';
+    if(t){
+      h+='<button class="mst__btn" id="m-terradd" type="button">'
+        +(inTerritory(t.code)?'Remove this trust from my patch':'Add this trust to my patch')+'</button>';
+    }
+    if(list.length){
+      h+='<button class="mst__btn mst__btn--primary" id="m-terrprint" type="button">'
+        +'Print all my maps ('+list.length+')</button>';
+      h+='<button class="mst__btn" id="m-terrclear" type="button">Clear</button>';
+    }
+    h+='</div></div>';
+    host.innerHTML=h;
+    var add=$('m-terradd');
+    if(add) add.addEventListener('click',function(){ toggleTerritory(t.code); render(); });
+    var pr=$('m-terrprint');
+    if(pr) pr.addEventListener('click',function(){ printTerritory(p,s); });
+    var cl=$('m-terrclear');
+    if(cl) cl.addEventListener('click',function(){
+      if(confirm('Clear every trust from your patch? The maps themselves are not affected.')){
+        saveTerritory([]); render();
+      }
+    });
+    Array.prototype.forEach.call(host.querySelectorAll('[data-terr]'),function(b){
+      b.addEventListener('click',function(){ toggleTerritory(b.getAttribute('data-terr')); render(); });
     });
   }
 
