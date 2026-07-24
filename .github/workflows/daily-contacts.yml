@@ -1,0 +1,52 @@
+name: Daily trust contact index (Find a Tender)
+
+# Builds data/trust-contacts.json — named contacts on NHS trusts' own public
+# procurement notices — and data/people-moves.json, the observed changes that
+# fall out of tracking those names over time.
+#
+# ⚠️ WHY DAILY AND NOT ONE BIG BACKFILL. The Find a Tender OCDS API returns
+# HTTP 429 with Retry-After after a small number of requests (observed
+# 24/07/2026: about a dozen calls, Retry-After 120s). Scanning a long period in
+# one run is not possible. This scans a short rolling window each day and
+# appends, so coverage accumulates. Do not widen --days to "catch up faster" —
+# you will just spend the whole run sleeping on 429s.
+#
+# The window is 4 days, not 1, so a single failed run self-heals the next day.
+
+on:
+  schedule:
+    - cron: "40 5 * * *"     # daily 05:40 UTC, after the weekly trust refresh
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "How many days back to scan (default 4)"
+        required: false
+        default: "4"
+
+permissions:
+  contents: write
+
+jobs:
+  contacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Scan Find a Tender for named NHS trust contacts
+        run: python scripts/refresh_fts_contacts.py --days ${{ github.event.inputs.days || 4 }}
+      - name: Commit if changed
+        run: |
+          git config user.name "hub-bot"
+          git config user.email "contact@elevateandthrive.uk"
+          git add data/trust-contacts.json data/people-moves.json
+          git diff --cached --quiet || git commit -m "trust contact index $(date -u +'%F')"
+          git push
+      - name: Phone alert on failure (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Medical Sales Hub - contact index FAILED" -H "Priority: default" -H "Tags: warning" \
+            -d "The daily Find a Tender contact scan failed. The Stakeholder Mapper still works; the names panel just stops updating. Check github.com/louisehoult-beep/msh-compare-data/actions" \
+            ntfy.sh/eth-hub-lou-4437
