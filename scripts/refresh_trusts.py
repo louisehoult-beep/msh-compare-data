@@ -87,11 +87,33 @@ def clean(n):
 
 
 def kind(name):
+    """Trust sector, derived from the NAME ONLY — and deliberately refusing to
+    guess past what the name proves.
+
+    ⚠️ THE OLD VERSION RETURNED 'Hospital / acute' AS A CATCH-ALL AND WAS WRONG
+    ABOUT ROUGHLY A FIFTH OF TRUSTS. Nottinghamshire Healthcare, Sussex
+    Partnership, Mersey Care and Pennine Care are all mental health trusts, and
+    all four were being labelled acute hospitals on the Stakeholder Mapper.
+
+    "Healthcare" and "Partnership" cannot be used as rules: Nottinghamshire
+    Healthcare is mental health, Northumbria Healthcare and Imperial College
+    Healthcare are acute. There is no keyword that separates them, so the
+    ambiguous ones now return None and the UI groups them as "Acute and other
+    trusts" rather than asserting a sector nobody verified.
+
+    ODS carries no sector field — checked 24/07/2026 across all 202 live
+    trusts, the only active non-primary roles are RO57 (Foundation Trust
+    status), RO7 (HOSPICE, plainly legacy noise on 60 trusts) and RO268
+    (medicine supplier). A properly evidenced sector would have to come from
+    NHS England submission lists (MHSDS for mental health, Ambulance Quality
+    Indicators for ambulance), which is a real build and a monthly dependency.
+    Until someone does that, None means "not established", not "acute".
+    """
     u = name.upper()
-    if 'AMBULANCE' in u: return 'Ambulance'
+    if 'AMBULANCE' in u: return 'Ambulance service'
     if 'MENTAL HEALTH' in u or 'PSYCHIAT' in u: return 'Mental health'
     if 'COMMUNITY' in u and 'HOSPITAL' not in u: return 'Community'
-    return 'Hospital / acute'
+    return None
 
 
 def fetch_detail(o):
@@ -139,7 +161,7 @@ def main():
               "check before trusting their region: %s" % (len(stray), ', '.join(stray[:10])),
               file=sys.stderr)
 
-    live.sort(key=lambda e: (0 if e['kind'] == 'Hospital / acute' else 1, e['n']))
+    live.sort(key=lambda e: (0 if e['kind'] is None else 1, e['n']))
     today = datetime.date.today().strftime('%d/%m/%Y')
 
     # ---- data/trust-map.json — the Stakeholder Mapper's trust drill-down ----

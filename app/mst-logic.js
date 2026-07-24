@@ -273,8 +273,11 @@
     ensureTrustSelect();
     var el=$('m-trust'); if(!el)return;
     var keep=el.value, list=trustsInICB();
-    var groups={}, order=['Hospital / acute','Mental health','Community','Ambulance'];
-    list.forEach(function(t){(groups[t.kind]=groups[t.kind]||[]).push(t);});
+    /* kind===null means ODS gave no sector and the name did not prove one — the
+       group is honestly "and other", not silently "acute". See kind() in
+       scripts/refresh_trusts.py for why "Healthcare"/"Partnership" can't be rules. */
+    var groups={}, order=['Acute and other trusts','Mental health','Community','Ambulance service'];
+    list.forEach(function(t){var k=t.kind||'Acute and other trusts';(groups[k]=groups[k]||[]).push(t);});
     var h='<option value="">— Whole ICB (no single trust) —</option>';
     order.forEach(function(k){
       if(!groups[k])return;
@@ -306,7 +309,7 @@
     }
     var h='<div class="mst__tline"><b>'+esc(t.n)+'</b> · ODS '+esc(t.code)
       +(t.town?' · '+esc(t.town):'')+(t.postcode?' '+esc(t.postcode):'')
-      +' · '+esc(t.kind)+' · commissioned by <b>NHS '+esc(t.icbName)+' ICB</b>'
+      +(t.kind?' · '+esc(t.kind):'')+' · commissioned by <b>NHS '+esc(t.icbName)+' ICB</b>'
       +(t.region?' ('+esc(t.region)+')':'')+'</div>';
     if(t.bc==='DLN'){
       h+='<div class="mst__tline" style="color:var(--muted)"><b>Buying centre:</b> '+BUYING_CENTRE_NOTE+'</div>';
@@ -447,7 +450,7 @@
     var t=selectedTrust();
     return {trust:t?t.n:('Whole ICB — '+$('m-geo').value),
             code:t?t.code:'', town:t?[t.town,t.postcode].filter(Boolean).join(' '):'',
-            kind:t?t.kind:'', icb:t?('NHS '+t.icbName+' ICB'):$('m-geo').value,
+            kind:t?(t.kind||''):'', icb:t?('NHS '+t.icbName+' ICB'):$('m-geo').value,
             region:t?(t.region||''):'',
             bc:(t&&t.bc==='DLN')?BUYING_CENTRE_NOTE:'',
             product:p.n, spec:p.area, problem:p.p,

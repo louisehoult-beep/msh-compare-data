@@ -47,6 +47,13 @@ OPTOUT_PATH = "data/contacts-optout.json"
 PAGE_SLEEP = 3.0        # polite floor between pages
 MAX_WAIT = 600          # give up on a 429 that wants longer than this
 
+# Retention. A contact whose most recent notice is older than this is dropped.
+# 24 months is deliberately just past NHS Supply Chain's own stated supplier
+# engagement window (9–15 months before an arrangement expires), so a contact
+# stays only while they are plausibly still the person to ask. THIS NUMBER IS
+# STATED IN THE PUBLISHED PRIVACY NOTICE — if you change it, change that too.
+RETENTION_MONTHS = 24
+
 # Words that mean the "contact name" is a desk, not a person.
 DEPARTMENTAL = re.compile(
     r"\b(team|dept|department|office|procurement|purchasing|supplies|supply|contracts?|"
@@ -227,6 +234,22 @@ def main(argv):
     moves["moves"].sort(key=lambda m: m["firstSeen"], reverse=True)
     moves["asOf"] = today.strftime("%d/%m/%Y")
 
+    # ---- retention ------------------------------------------------------
+    # Enforced on every run, not on a separate schedule, so the published
+    # retention promise cannot quietly drift from what the file actually holds.
+    cutoff = (today - datetime.timedelta(days=int(RETENTION_MONTHS * 30.44))).isoformat()
+    expired = 0
+    for code in list(store["trusts"]):
+        keep = [e for e in store["trusts"][code] if e["last"] >= cutoff]
+        expired += len(store["trusts"][code]) - len(keep)
+        if keep:
+            store["trusts"][code] = keep
+        else:
+            del store["trusts"][code]
+    moves["moves"] = [m for m in moves["moves"] if m["firstSeen"] >= cutoff]
+    if expired:
+        print("retention: dropped %d contact(s) last seen before %s" % (expired, cutoff))
+
     # Sweep opt-outs out of everything already stored, including past moves.
     if blocked_names or blocked_emails:
         def kept(e):
@@ -244,6 +267,7 @@ def main(argv):
     store["windows"] = (store.get("windows", []) + [{"from": frm, "to": to,
                                                      "releases": releases, "run": today.isoformat()}])[-60:]
     store["asOf"] = today.strftime("%d/%m/%Y")
+    store["retentionMonths"] = RETENTION_MONTHS
     store["trustsCovered"] = len(store["trusts"])
     store["contactsTotal"] = sum(len(v) for v in store["trusts"].values())
     for v in store["trusts"].values():
