@@ -52,9 +52,15 @@ must stay that way — automated profile views show up in the target's "who
 viewed your profile" feed attributed to *your member*. See `data/whos-who.html`.
 
 **Named contacts are personal data.** OGL covers copyright, not UK GDPR lawful
-basis. Article 14 notice is due within one month or at first contact. If the two
-contact files are absent the mapper degrades to an honest empty state, so
-removing them is a valid way to switch the feature off.
+basis. Lou approved publishing names and work emails on 24/07/2026. Article 14
+is discharged in the panel itself: it tells the member to say where the details
+came from at first contact, and gives them the sentence. Keep that wording — it
+is the compliance, not decoration.
+
+If the two contact files are absent the mapper degrades to an honest empty
+state, so **deleting them is a valid way to switch the feature off.** To drop
+one person on request, remove their entry from `data/trust-contacts.json` and
+add them to the harvester's skip handling — the next run must not re-add them.
 
 ## app/comptab.js
 The Compare tab's full client-side code. The WordPress page (1109, block

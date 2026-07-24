@@ -410,12 +410,21 @@
       });
       h+='</table></div>';
     }
+    /* Article 14 UK GDPR: these people did not give us their details, so they are
+       owed an explanation of where they came from — within one month, or at first
+       contact, whichever is sooner. The member making the approach is the one who
+       discharges that, so the wording they need is spelled out here rather than
+       buried in a privacy notice they will never read. */
     h+='<div class="mst__empty" style="margin-top:10px;border-top:1px dashed rgba(0,0,0,.14);padding-top:8px">'
-      +'Source: Find a Tender OCDS API, Open Government Licence v3'
-      +(CONTACTS&&CONTACTS.asOf?' · index as at '+esc(CONTACTS.asOf):'')
-      +'. These are work contact details published for enquiries about a specific procurement — not a '
-      +'mailing list. Approach under the Hub’s outreach standard: short, problem-first, referencing the '
-      +'notice. Tell people where you got their details.</div></div>';
+      +'<b>Where these came from, and what you owe them.</b> Source: Find a Tender OCDS API, Open '
+      +'Government Licence v3'+(CONTACTS&&CONTACTS.asOf?' · index as at '+esc(CONTACTS.asOf):'')
+      +'. Each person was named as the enquiry contact on the public procurement notice shown — these '
+      +'are work contact details published for that purpose, not a mailing list, and nobody here gave '
+      +'you their details directly. <b>UK GDPR Article 14 means you must tell them where you got them, '
+      +'at first contact.</b> One line does it: <i>“I found your details on [trust]’s notice for '
+      +'[subject] on Find a Tender.”</i> That is also a better opener than anything cold. Approach under '
+      +'the Hub’s outreach standard — short, problem-first, about the notice. If someone asks you not to '
+      +'contact them again, stop, and tell us so we can drop them from the index.</div></div>';
     host.innerHTML=h;
   }
 
