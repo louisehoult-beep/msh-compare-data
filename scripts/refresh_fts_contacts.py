@@ -104,8 +104,86 @@ def load(path, default):
     return default
 
 
+GAP_DAYS = 60           # see derive_moves()
+MIN_NOTICES = 2         # a name on ONE notice is a data point, not a post-holder
+MIN_SPAN_DAYS = 30      # the predecessor must have been established, then stopped
+
+
+def derive_moves(store):
+    """Observed changes of named contact, derived from the stored index.
+
+    ⚠️ DERIVED FROM THE DATA, NEVER FROM A BEFORE/AFTER DIFF OF ONE RUN.
+    The diff version was wrong and produced 145 false moves out of 145: a
+    backfill walks BACKWARDS in time, so every earlier-month name looked like
+    it had "replaced" someone it actually preceded. Scan order must not be able
+    to invent a job change.
+
+    The rule, deliberately strict: a move is recorded only where EVERY contact
+    previously seen at that trust stopped appearing at least GAP_DAYS before
+    this name first appeared. That is a roster that turned over — not a trust
+    that simply has several buyers, and not two people who alternate on
+    notices. It also suppresses the same person under two spellings
+    ("Lou Tomney" / "Louise Tomney"), because those overlap rather than follow
+    one another.
+
+    This will report few moves. That is the honest number. Do not loosen it to
+    make the panel look busier.
+    """
+    moves = {"note": "Observed changes of named contact on NHS procurement notices "
+                     "(Find a Tender). Recorded only where every previously-seen contact "
+                     "at that trust stopped appearing at least %d days before this name "
+                     "first appeared, AND both names are established contacts (%d+ notices "
+                     "each, the predecessor active over %d+ days). Evidence of a changed "
+                     "remit, not an announced appointment, and never inferred from scan "
+                     "order." % (GAP_DAYS, MIN_NOTICES, MIN_SPAN_DAYS),
+             "source": "Find a Tender (OCDS API), Open Government Licence v3",
+             "gapDays": GAP_DAYS, "minNotices": MIN_NOTICES,
+             "minSpanDays": MIN_SPAN_DAYS, "moves": []}
+    for code, entries in store.get("trusts", {}).items():
+        ordered = sorted(entries, key=lambda e: e["first"])
+        for i, a in enumerate(ordered):
+            earlier = ordered[:i]
+            if not earlier:
+                continue
+            if a.get("n", 1) < MIN_NOTICES:
+                continue                     # the newcomer is one notice, not a post-holder
+            a_first = datetime.date.fromisoformat(a["first"])
+            gapped = [b for b in earlier
+                      if (a_first - datetime.date.fromisoformat(b["last"])).days >= GAP_DAYS]
+            if len(gapped) != len(earlier):
+                continue                     # someone was still active — not a handover
+            prev = max(earlier, key=lambda b: b["last"])
+            # The predecessor must have been ESTABLISHED and then stopped. One
+            # notice in May followed by a different name in July is a trust with
+            # more than one buyer, not a handover — that is exactly what the
+            # first two survivors of the 60-day rule turned out to be.
+            if prev.get("n", 1) < MIN_NOTICES:
+                continue
+            prev_span = (datetime.date.fromisoformat(prev["last"])
+                         - datetime.date.fromisoformat(prev["first"])).days
+            if prev_span < MIN_SPAN_DAYS:
+                continue
+            moves["moves"].append({
+                "trust": code, "name": a["name"], "email": a["email"],
+                "firstSeen": a["first"],
+                "replaces": prev["name"], "replacesLastSeen": prev["last"],
+                "notice": a["notice"], "ocid": a["ocid"],
+            })
+    moves["moves"].sort(key=lambda m: m["firstSeen"], reverse=True)
+    return moves
+
+
 def main(argv):
     today = datetime.date.today()
+    if "--rebuild-moves" in argv:
+        # Re-derive moves from the stored index, no network. Use after a change
+        # to derive_moves(), or to repair a file written by an older version.
+        store = load(OUT_PATH, {"trusts": {}})
+        moves = derive_moves(store)
+        moves["asOf"] = today.strftime("%d/%m/%Y")
+        json.dump(moves, open(MOVES_PATH, "w"), ensure_ascii=False, indent=1)
+        print("rebuilt people-moves.json from the stored index: %d move(s)" % len(moves["moves"]))
+        return
     frm = to = None
     days = 3
     i = 0
@@ -199,50 +277,7 @@ def main(argv):
             print("  %d pages / %d releases / %d NHS contact hits / %ds"
                   % (pages, releases, matched, time.time() - t0), flush=True)
 
-    # ---- observed changes → people-moves.json -------------------------------
-    # ⚠️ DERIVED FROM THE STORED DATA, NOT FROM A BEFORE/AFTER DIFF OF THIS RUN.
-    # The diff version was wrong and produced 145 false moves out of 145: a
-    # backfill walks BACKWARDS in time, so every earlier-month name looked like
-    # it had "replaced" someone it actually preceded. Scan order must not be
-    # able to invent a job change.
-    #
-    # The rule now, deliberately strict: a move is recorded only where EVERY
-    # contact previously seen at that trust had stopped appearing at least
-    # GAP_DAYS before this name first appeared. That is a roster that turned
-    # over, not a trust that simply has several buyers. Two people who alternate
-    # on notices are not a move, and neither is a second name appearing
-    # alongside the first.
-    #
-    # This will report few moves, and that is the honest number. Do not loosen
-    # it to make the panel look busier.
-    GAP_DAYS = 60
-    moves = {"note": "Observed changes of named contact on NHS procurement notices "
-                     "(Find a Tender). Recorded only where every previously-seen contact "
-                     "at that trust stopped appearing at least %d days before this name "
-                     "first appeared. Evidence of a changed remit, not an announced "
-                     "appointment, and never inferred from scan order." % GAP_DAYS,
-             "source": "Find a Tender (OCDS API), Open Government Licence v3",
-             "gapDays": GAP_DAYS, "moves": []}
-    for code, entries in store["trusts"].items():
-        ordered = sorted(entries, key=lambda e: e["first"])
-        for i, a in enumerate(ordered):
-            earlier = ordered[:i]
-            if not earlier:
-                continue
-            a_first = datetime.date.fromisoformat(a["first"])
-            gaps = [b for b in earlier
-                    if (a_first - datetime.date.fromisoformat(b["last"])).days >= GAP_DAYS]
-            if len(gaps) != len(earlier):
-                continue                      # someone was still active — not a handover
-            prev = max(earlier, key=lambda b: b["last"])
-            moves["moves"].append({
-                "trust": code, "name": a["name"], "email": a["email"],
-                "firstSeen": a["first"],
-                "replaces": prev["name"], "replacesLastSeen": prev["last"],
-                "notice": a["notice"], "ocid": a["ocid"],
-            })
-
-    moves["moves"].sort(key=lambda m: m["firstSeen"], reverse=True)
+    moves = derive_moves(store)
     moves["asOf"] = today.strftime("%d/%m/%Y")
 
     # ---- retention ------------------------------------------------------
