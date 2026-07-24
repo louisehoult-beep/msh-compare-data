@@ -107,6 +107,20 @@ def _(tmp):
     return "minNotices"
 
 
+@case("a moves file from an older generator that does not declare its rules")
+def _(tmp):
+    d = json.load(open("data/people-moves.json"))
+    code, two = pick(1, 2)
+    if not code:
+        return None
+    d.pop("singleThreadedOnly", None)          # what an older generator wrote
+    d["moves"] = [{"trust": code, "name": two[0]["name"], "email": "",
+                   "firstSeen": "2026-07-20", "replaces": two[1]["name"],
+                   "replacesLastSeen": "2026-05-01", "notice": "x", "ocid": "y"}]
+    json.dump(d, open("data/people-moves.json", "w"))
+    return "does not declare"
+
+
 @case("a contact kept past the published retention period")
 def _(tmp):
     d = json.load(open("data/trust-contacts.json"))
