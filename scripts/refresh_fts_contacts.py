@@ -42,6 +42,7 @@ UA = {"User-Agent": "MedicalSalesHub/1.0 (+https://elevateandthrive.uk; trust co
 MAP_PATH = "data/trust-map.json"
 OUT_PATH = "data/trust-contacts.json"
 MOVES_PATH = "data/people-moves.json"
+OPTOUT_PATH = "data/contacts-optout.json"
 
 PAGE_SLEEP = 3.0        # polite floor between pages
 MAX_WAIT = 600          # give up on a 429 that wants longer than this
@@ -124,6 +125,19 @@ def main(argv):
     # Longest first so "Guy's and St Thomas'" wins over a shorter accidental substring.
     keys = sorted(index, key=len, reverse=True)
 
+    # ---- opt-outs -------------------------------------------------------
+    # Someone who asks not to be contacted must STAY gone. Deleting their row
+    # from trust-contacts.json is not enough — the next run would re-harvest
+    # them from the same notice. Their name goes here and is filtered on the
+    # way in, and stripped from anything already stored.
+    optout = load(OPTOUT_PATH, {"note": "Names that must never appear in the contact index. "
+                                        "Add a lower-cased name here when someone asks not to be "
+                                        "contacted; the harvester filters them on the way in and "
+                                        "removes them from what is already stored.",
+                                "names": [], "emails": []})
+    blocked_names = {n.strip().lower() for n in optout.get("names", []) if n.strip()}
+    blocked_emails = {e.strip().lower() for e in optout.get("emails", []) if e.strip()}
+
     store = load(OUT_PATH, {"source": "Find a Tender (OCDS API), Open Government Licence v3",
                             "sourceUrl": "https://www.find-tender.service.gov.uk/",
                             "windows": [], "trusts": {}})
@@ -150,6 +164,8 @@ def main(argv):
                 cp = p.get("contactPoint") or {}
                 nm = (cp.get("name") or "").strip()
                 if len(nm) < 4 or " " not in nm or DEPARTMENTAL.search(nm):
+                    continue
+                if nm.lower() in blocked_names or (cp.get("email") or "").strip().lower() in blocked_emails:
                     continue
                 pk = norm(pname)
                 match = next((k for k in keys if pk.startswith(k) or k in pk), None)
@@ -210,6 +226,20 @@ def main(argv):
             seen_keys.add((code, k))
     moves["moves"].sort(key=lambda m: m["firstSeen"], reverse=True)
     moves["asOf"] = today.strftime("%d/%m/%Y")
+
+    # Sweep opt-outs out of everything already stored, including past moves.
+    if blocked_names or blocked_emails:
+        def kept(e):
+            return (e["name"].lower() not in blocked_names
+                    and (e.get("email") or "").lower() not in blocked_emails)
+        for code in list(store["trusts"]):
+            store["trusts"][code] = [e for e in store["trusts"][code] if kept(e)]
+            if not store["trusts"][code]:
+                del store["trusts"][code]
+        moves["moves"] = [m for m in moves["moves"]
+                          if m["name"].lower() not in blocked_names
+                          and (m.get("email") or "").lower() not in blocked_emails
+                          and (m.get("replaces") or "").lower() not in blocked_names]
 
     store["windows"] = (store.get("windows", []) + [{"from": frm, "to": to,
                                                      "releases": releases, "run": today.isoformat()}])[-60:]
