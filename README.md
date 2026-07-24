@@ -30,6 +30,32 @@ can amend; automation in THIS repo still never writes 'use' lines itself.
 - `state/last_run.json` records what each run scanned and added.
 - Rollback: this is git - revert the commit.
 
+## Stakeholder Mapper — trust level (added 24/07/2026)
+`app/mst-logic.js` drills below the ICB to the individual trust. It injects its
+own trust picker, styles and panels, so nothing on WP page 1109 needs editing.
+
+| File | What it drives |
+|---|---|
+| `data/trust-map.json` | 202 legally-live NHS trusts, each with the ICB that commissions it (ODS, weekly) |
+| `data/trust-contacts.json` | Named contacts on each trust's own Find a Tender notices (daily) |
+| `data/people-moves.json` | Observed changes of named contact — evidence, never an inferred appointment |
+
+**The trust list is filtered on legal end date, not status.** ODS keeps merged
+and dissolved trusts at `Status:Active` indefinitely — 45 of them as at
+24/07/2026, including Weston Area Health (gone 2020) and Ipswich Hospital
+(gone 2018). They were all in the Meeting Prep directory until this run. Never
+rebuild either list from `Status` alone.
+
+**LinkedIn.** The mapper renders search links the member clicks themselves.
+Nothing here fetches, scrapes or pre-loads anything from linkedin.com, and it
+must stay that way — automated profile views show up in the target's "who
+viewed your profile" feed attributed to *your member*. See `data/whos-who.html`.
+
+**Named contacts are personal data.** OGL covers copyright, not UK GDPR lawful
+basis. Article 14 notice is due within one month or at first contact. If the two
+contact files are absent the mapper degrades to an honest empty state, so
+removing them is a valid way to switch the feature off.
+
 ## app/comptab.js
 The Compare tab's full client-side code. The WordPress page (1109, block
 MST-COMPARE-LOADER) contains only a tiny loader that fetches and runs this

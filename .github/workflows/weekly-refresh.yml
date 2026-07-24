@@ -10,6 +10,9 @@ name: Weekly refresh (NHSSC cache + trust directory)
 #  - data/prep-config.json   — trustDirectory rebuilt from the official NHS ODS
 #                              register (name, ODS code, town, postcode, type),
 #                              preserving profiled trusts and all other config
+#  - data/trust-map.json     — every legally-live trust with the ICB that
+#                              commissions it, for the Stakeholder Mapper's
+#                              trust-level drill-down. Same crawl as above.
 # Both scripts hard-abort rather than commit a shrunken dataset.
 
 on:
@@ -33,7 +36,7 @@ jobs:
         run: |
           pip install playwright
           python -m playwright install --with-deps chromium
-      - name: Refresh trust directory (NHS ODS)
+      - name: Refresh trust directory + trust→ICB map (NHS ODS)
         run: python scripts/refresh_trusts.py
       - name: Refresh NHSSC product cache (merge-preserving)
         run: python scripts/refresh_nhssc_cache.py
@@ -41,6 +44,6 @@ jobs:
         run: |
           git config user.name "hub-bot"
           git config user.email "contact@elevateandthrive.uk"
-          git add data/nhssc-cache.json data/prep-config.json
-          git diff --cached --quiet || git commit -m "weekly refresh: NHSSC cache + trust directory $(date -u +'%F')"
+          git add data/nhssc-cache.json data/prep-config.json data/trust-map.json
+          git diff --cached --quiet || git commit -m "weekly refresh: NHSSC cache + trust directory + trust map $(date -u +'%F')"
           git push
