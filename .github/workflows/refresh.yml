@@ -3,6 +3,16 @@ on:
   schedule:
     - cron: "15 3 * * *"   # daily 03:15 UTC
   workflow_dispatch:
+# ⚠️ ADDED 26/07/2026. All three writers push to this one repo on overlapping
+# schedules and none of them had a concurrency group, so a long job could lose a
+# race it had already done the work for. On 26/07 the weekly refresh ran for 49
+# minutes, then its push was REJECTED ("fetch first") because daily-contacts.yml
+# landed at 07:56 inside that window. Three files of computed NHSSC cache and
+# trust-directory data were discarded and the trust directory did not refresh
+# that week. This group serialises the writers so they queue instead of racing.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
 permissions:
   contents: write
 jobs:
@@ -30,7 +40,28 @@ jobs:
           git config user.email "actions@github.com"
           git add data state
           git diff --cached --quiet || git commit -m "Daily refresh $(date -u +%F)"
-          git push
+          # ⚠️ ADDED 26/07/2026. A bare `git push` here silently threw away completed
+          # work whenever another writer landed first. Retry on rebase, and RE-RUN
+          # THE GATE after any rebase: the rebase combines this run's data with
+          # another writer's, and that combination has not been gated yet. Root
+          # CLAUDE.md rule 13 - if the gate fails, the data is wrong, so refuse to
+          # push rather than loosening anything.
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first). Rebasing and re-running the gate, attempt $attempt of 5."
+            git pull --rebase --autostash
+            python3 verify.py || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi
       - name: Phone alert if new items (ntfy)
         run: |
           N=$(python3 -c "import json;print(len(json.load(open('state/last_run.json'))['added']))" 2>/dev/null || echo 0)
