@@ -14,6 +14,16 @@ jobs:
         run: python3 fetch_issues.py
       - name: Rebuild supplier index (curated seed + medical awards + recalls)
         run: python3 build_supplier_index.py
+      # ⚠️ ADDED 26/07/2026. This workflow was the ONE writer of the three that
+      # committed to this repo without running the gate first, while
+      # weekly-refresh.yml and daily-contacts.yml both did. A push here is a live
+      # publish to paying members on Med Sales Tools within seconds — there is no
+      # staging step and no review — so an ungated daily writer is exactly the hole
+      # that let 145 false NHS job changes reach members in July. Root CLAUDE.md
+      # rule 13. If this step fails, the data is wrong: fix the data, never loosen
+      # the check to make the push go through.
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
       - name: Commit if changed
         run: |
           git config user.name "compare-refresh-bot"
