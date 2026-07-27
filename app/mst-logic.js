@@ -371,6 +371,83 @@
     if(!t||!MOVES)return null;
     return (MOVES.moves||[]).filter(function(m){return m.trust===t.code;});
   }
+
+  /* ---- relevance: which of these names are about the rep's own area ------
+     Added 27/07/2026. Until then this panel showed the twelve most recent
+     names at the trust and nothing else, so a vascular access rep opening
+     Somerset was handed the person who ran a datacentre rack tender. Across
+     the whole index only about one notice title in eleven is clinical.
+
+     The sort key is scripts/notice_tags.py, applied in the pipeline and
+     re-derived by verify.py on every publish. Each contact carries:
+       spec : speciality ids whose vocabulary appears in the NOTICE TITLE
+       cls  : clinical | nonclinical | unclear
+
+     ⚠️ THIS SORTS. IT NEVER HIDES, AND IT NEVER JUDGES A PERSON.
+     A tag says the TITLE matched — Find a Tender carries no job title, so it
+     is not evidence of anyone's remit. And an untagged notice is usually a
+     short or coded title ("IT454", "UHL_A_Neurophysiology_2628.V.0.1"), not
+     an irrelevant person. Every name stays reachable on the page. Presenting
+     an untagged contact as "not relevant to you" would be inventing a verdict
+     the source cannot support — the same class of error as the 145 false job
+     changes on 24/07/2026.                                                   */
+  function specKeys(){
+    /* The rep's speciality plus anything rolled up under it, so a vascular
+       access rep also sees blood collection notices — same parent rollup the
+       product list uses, not a second hardcoded table. */
+    var out=[state.spec];
+    SPECS.forEach(function(s){ if(s.parent===state.spec) out.push(s.id); });
+    return out;
+  }
+  function splitByRelevance(list){
+    var keys=specKeys(), mine=[], clin=[], rest=[];
+    (list||[]).forEach(function(c){
+      var tags=c.spec||[], hit=false;
+      for(var i=0;i<tags.length;i++){ if(keys.indexOf(tags[i])>-1){hit=true;break;} }
+      if(hit) mine.push(c);
+      else if(c.cls==='clinical') clin.push(c);
+      else rest.push(c);
+    });
+    return {mine:mine, clin:clin, rest:rest};
+  }
+  function contactRows(rows){
+    var h='<div style="overflow-x:auto"><table class="mst__ctbl"><tr><th>Name</th><th>Contact</th>'
+      +'<th>Last seen</th><th>Notice it came from</th></tr>';
+    rows.forEach(function(c){
+      h+='<tr><td><b>'+esc(c.name)+'</b>'+(c.n>1?'<br><span style="color:var(--muted)">'+c.n
+        +' notices</span>':'')+'</td><td>'
+        +(c.email?'<a href="mailto:'+esc(c.email)+'">'+esc(c.email)+'</a>':'—')
+        +(c.tel?'<br>'+esc(c.tel):'')+'</td><td>'+esc(c.last)+'</td><td>'
+        +esc(c.notice||'—')+'</td></tr>';
+    });
+    return h+'</table></div>';
+  }
+  /* How well covered is THIS trust, against the rest of the index? A rep who
+     opens three thin accounts in a row concludes the tool is empty. These are
+     the only honest answers, and all of them are counted rather than estimated:
+     how many names, over what period, and where this trust sits against the
+     other 189. We do not publish "N notices, M named a person" — harvest
+     windows overlap between runs, so any cumulative notice count would
+     double-count, and a smaller true number beats a bigger invented one. */
+  function coverageLine(list){
+    if(!CONTACTS)return '';
+    var med=CONTACTS.medianPerTrust, cov='';
+    if(CONTACTS.coverageFrom&&CONTACTS.coverageTo)
+      cov=' The index covers notices published between '+esc(CONTACTS.coverageFrom)
+         +' and '+esc(CONTACTS.coverageTo)+'.';
+    if(!list||!list.length){
+      return '<div class="mst__empty">Nothing on file for this trust yet.'+cov
+        +(med?' Across the '+CONTACTS.trustsCovered+' trusts that do have names, the median is '
+          +med+'.':'')
+        +' A trust that has not published a notice naming a person in that period will be empty — '
+        +'that is coverage, not an answer about the trust.</div>';
+    }
+    var first=list[0].first, last=list[0].last;
+    list.forEach(function(c){ if(c.first<first)first=c.first; if(c.last>last)last=c.last; });
+    return '<div class="mst__empty">'+list.length+' name'+(list.length===1?'':'s')
+      +' on file, from notices between '+esc(first)+' and '+esc(last)+'.'
+      +(med?' The median trust in this index has '+med+'.':'')+cov+'</div>';
+  }
   function renderContacts(){
     var host=$('m-contacts'); if(!host)return;
     var t=selectedTrust();
@@ -382,29 +459,56 @@
     if(list===null){
       h+='<div class="mst__empty">Loading the contact index…</div>';
     }else if(!list.length){
-      h+='<div class="mst__empty">'+(CONTACTS.unavailable
-        ?'The contact index could not be loaded just now — this is a loading problem, not an empty trust. '
-        :'Nothing on file for this trust yet. ')+'The index is built from named '
-        +'contacts on this trust’s own Find a Tender notices, and only covers the period harvested so '
-        +'far — a trust that has not published a notice in that window will be empty, which is coverage, '
-        +'not an answer. Use the source links on each role card above, and '
+      h+=(CONTACTS.unavailable
+        ?'<div class="mst__empty">The contact index could not be loaded just now — this is a loading '
+         +'problem, not an empty trust.</div>'
+        :coverageLine(list))
+        +'<div class="mst__empty">Use the source links on each role card above, and '
         +'<a href="'+esc(ftsURL(t.n))+'" target="_blank" rel="noopener">check Find a Tender directly</a>.</div>';
     }else{
-      h+='<div class="mst__empty" style="margin-bottom:4px">From this trust’s own public procurement '
+      var g=splitByRelevance(list), area=esc(currentProduct().area||'your speciality');
+      h+=coverageLine(list)
+        +'<div class="mst__empty" style="margin-bottom:4px">From this trust’s own public procurement '
         +'notices (Find a Tender, Open Government Licence). Each name was published as the enquiry contact '
         +'for the notice shown — that notice is your reason to make contact, and there is no job-title '
-        +'field in the data, so do not assume seniority. People move: verify before you use a name.</div>'
-        +'<div style="overflow-x:auto"><table class="mst__ctbl"><tr><th>Name</th><th>Contact</th>'
-        +'<th>Last seen</th><th>Notice it came from</th></tr>';
-      list.slice(0,12).forEach(function(c){
-        h+='<tr><td><b>'+esc(c.name)+'</b>'+(c.n>1?'<br><span style="color:var(--muted)">'+c.n
-          +' notices</span>':'')+'</td><td>'
-          +(c.email?'<a href="mailto:'+esc(c.email)+'">'+esc(c.email)+'</a>':'—')
-          +(c.tel?'<br>'+esc(c.tel):'')+'</td><td>'+esc(c.last)+'</td><td>'
-          +esc(c.notice||'—')+'</td></tr>';
-      });
-      h+='</table></div>';
-      if(list.length>12)h+='<div class="mst__empty">Showing the 12 most recent of '+list.length+'.</div>';
+        +'field in the data, so do not assume seniority. People move: verify before you use a name.</div>';
+
+      /* 1. The rep's own area, first and in full. */
+      h+='<div class="mst__role" style="margin:12px 0 2px">Named on a '+area+' notice here</div>';
+      if(g.mine.length){
+        h+=contactRows(g.mine.slice(0,12));
+        if(g.mine.length>12)h+='<div class="mst__empty">Showing 12 of '+g.mine.length+'.</div>';
+      }else{
+        h+='<div class="mst__empty">None of this trust’s named notices matched '+area+'. That is '
+          +'usually because the trust buys your category through a framework rather than its own '
+          +'tender, or because the notice title was too short to tell — not because nobody here buys '
+          +'it. The names below are still the trust’s own procurement people.</div>';
+      }
+
+      /* 2. Clinical, but somebody else's category. Still a live route in. */
+      if(g.clin.length){
+        h+='<div class="mst__role" style="margin:14px 0 2px">Named on other clinical notices here</div>'
+          +'<div class="mst__empty" style="margin-bottom:4px">A different category to yours, so treat '
+          +'them as a route into the trust rather than your buyer.</div>'
+          +contactRows(g.clin.slice(0,8));
+        if(g.clin.length>8)h+='<div class="mst__empty">Showing 8 of '+g.clin.length+'.</div>';
+      }
+
+      /* 3. Everything else, collapsed but never removed. A title that matched
+            nothing is a short title, not a verdict on the person. */
+      if(g.rest.length){
+        h+='<details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">'
+          +'Everything else at this trust ('+g.rest.length+')</summary>'
+          +'<div class="mst__empty" style="margin:6px 0 4px">Mostly estates, IT, catering and corporate '
+          +'contracts, plus notices whose title says too little either way. Kept because a short or '
+          +'coded title is a limit of the data, not proof the person is no use to you.</div>'
+          +contactRows(g.rest.slice(0,20));
+        if(g.rest.length>20)h+='<div class="mst__empty">Showing 20 of '+g.rest.length+'.</div>';
+        h+='</details>';
+      }
+      if(CONTACTS.tagRule)
+        h+='<div class="mst__empty" style="margin-top:8px"><b>How this was sorted.</b> '
+          +esc(CONTACTS.tagRule)+'</div>';
     }
 
     /* Observed changes — a change of named contact, never an inferred appointment. */
@@ -412,12 +516,22 @@
     if(moves===null){
       h+='<div class="mst__empty">Loading…</div>';
     }else if(!moves.length){
+      /* An empty panel at 189 trusts out of 190 reads as broken unless you say
+         how rare the thing being tracked actually is. The test is deliberately
+         strict — it was loosened once and published 145 false job changes on
+         24/07/2026 — so the national total is the context that makes an empty
+         panel read as rarity rather than failure. */
+      var tot=(MOVES.moves||[]).length, cov=CONTACTS&&CONTACTS.trustsCovered;
       h+='<div class="mst__empty">'+(MOVES.unavailable
         ?'The change index could not be loaded just now. '
-        :'No change of named contact observed for this trust. ')+'This tracks one '
-        +'specific, evidenced thing: when the person named on this trust’s procurement notices changes. '
-        +'It is not a feed of announced appointments — no public register of NHS procurement job moves '
-        +'exists, which is exactly why the relationship is worth something.</div>';
+        :'No change of named contact observed for this trust. ')
+        +(!MOVES.unavailable&&cov?'<b>Nor at most trusts: '+tot+' observed across all '+cov
+          +' trusts in the index.</b> ':'')
+        +'This tracks one specific, evidenced thing: when the person named on this trust’s procurement '
+        +'notices changes, and the previous name stops appearing. It is not a feed of announced '
+        +'appointments — no public register of NHS procurement job moves exists, which is exactly why '
+        +'the relationship is worth something. The bar is set high on purpose: a name on one notice is '
+        +'a data point, not a post-holder.</div>';
     }else{
       h+='<div class="mst__empty" style="margin-bottom:4px">A new name appearing where a different one used '
         +'to sign the notices. Evidence that a remit changed — not an announced appointment. Worth a call: '
@@ -470,7 +584,12 @@
     var t=selectedTrust();
     return {trust:t?t.n:('Whole ICB — '+$('m-geo').value),
             code:t?t.code:'', town:t?[t.town,t.postcode].filter(Boolean).join(' '):'',
-            kind:t?(t.kind||''):'', icb:t?('NHS '+t.icbName+' ICB'):$('m-geo').value,
+            /* ODS carries no sector field — checked across all 202 live trusts on
+               24/07/2026, and again on 27/07. Only ambulance, mental health and
+               community are provable from the name, so the rest say so rather
+               than printing a blank the reader has to interpret. It is NOT a
+               synonym for acute: guessing that was wrong about a fifth of trusts. */
+            kind:t?(t.kind||'Sector not established'):'', icb:t?('NHS '+t.icbName+' ICB'):$('m-geo').value,
             region:t?(t.region||''):'',
             bc:(t&&t.bc==='DLN')?BUYING_CENTRE_NOTE:'',
             product:p.n, spec:p.area, problem:p.p,
@@ -542,14 +661,22 @@
     h+='</table>';
     var held=contactsFor(t);
     if(held&&held.length){
+      /* Ordered by relevance, not recency — the ten names you carry into the
+         building should start with the ones named on a notice in your own
+         category. Same sort as the on-screen panel. */
+      var gs=splitByRelevance(held), ordered=gs.mine.concat(gs.clin, gs.rest);
       h+='<h2>Names already published for this trust</h2>'
         +'<p class="meta">From this trust’s own Find a Tender notices (Open Government Licence). '
-        +'No job-title field exists in the source — do not assume seniority. Verify before use.</p>'
-        +'<table><tr><th style="width:22%">Name</th><th style="width:26%">Contact</th>'
-        +'<th style="width:12%">Last seen</th><th style="width:40%">Notice</th></tr>';
-      held.slice(0,10).forEach(function(c){
+        +'Ordered with your own category first. No job-title field exists in the source — do not '
+        +'assume seniority. Verify before use.</p>'
+        +'<table><tr><th style="width:20%">Name</th><th style="width:24%">Contact</th>'
+        +'<th style="width:10%">Last seen</th><th style="width:34%">Notice</th>'
+        +'<th style="width:12%">Your area?</th></tr>';
+      ordered.slice(0,10).forEach(function(c){
+        var mine=gs.mine.indexOf(c)>-1;
         h+='<tr><td>'+esc(c.name)+'</td><td>'+esc(c.email||'—')+(c.tel?'<br>'+esc(c.tel):'')
-          +'</td><td>'+esc(c.last)+'</td><td>'+esc(c.notice||'—')+'</td></tr>';});
+          +'</td><td>'+esc(c.last)+'</td><td>'+esc(c.notice||'—')+'</td><td>'
+          +(mine?'Yes':(c.cls==='clinical'?'Other clinical':'No match'))+'</td></tr>';});
       h+='</table>';
     }
     if(steps.length){
@@ -618,11 +745,16 @@
     if(held&&held.length){
       out.push('');
       out.push(['Names already published for this trust (Find a Tender, OGL) — no job-title field exists '
-                +'in the source; verify before use'].map(csvCell).join(','));
-      out.push(['Name','Email','Phone','First seen','Last seen','Notices','Notice it came from']
-        .map(csvCell).join(','));
-      held.forEach(function(c){
-        out.push([c.name,c.email,c.tel,c.first,c.last,c.n,c.notice].map(csvCell).join(','));});
+                +'in the source; verify before use. Sorted with your own category first.']
+                .map(csvCell).join(','));
+      out.push(['Name','Email','Phone','First seen','Last seen','Notices','Notice it came from',
+                'Your area?','Speciality the notice title matched'].map(csvCell).join(','));
+      var gc=splitByRelevance(held);
+      gc.mine.concat(gc.clin, gc.rest).forEach(function(c){
+        var mine=gc.mine.indexOf(c)>-1;
+        out.push([c.name,c.email,c.tel,c.first,c.last,c.n,c.notice,
+                  mine?'Yes':(c.cls==='clinical'?'Other clinical':'No match'),
+                  (c.spec||[]).join('; ')].map(csvCell).join(','));});
     }
     var moves=movesFor(t);
     if(moves&&moves.length){
@@ -869,8 +1001,11 @@
     if(held===null){
       h+='<div class="mst__dgnote">Checking what is already published for this trust…</div>';
     }else if(held.length){
+      var gd=splitByRelevance(held);
       h+='<div class="mst__dgnote"><b>'+held.length+' name'+(held.length===1?'':'s')
         +' already published</b> on this trust’s own tender notices'
+        +(gd.mine.length?', <b>'+gd.mine.length+' of them on a notice in your own category</b>'
+                        :', <b>none of them on a notice in your own category</b>')
         +(moves&&moves.length?', and '+moves.length+' observed change of named contact':'')
         +'. They are listed under the map below rather than pinned to a role, because '
         +'<b>the source carries no job titles</b> — matching a name to a seat would be a guess.</div>';

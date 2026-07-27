@@ -154,10 +154,66 @@ def _(tmp):
     return "Refusing a shrunken directory"
 
 
+@case("a vocabulary edit that only re-tagged the day's new contacts")
+def _(tmp):
+    # The realistic failure: someone widens a speciality term, the daily run
+    # tags what it harvested, and the other 1,390 rows keep sorting under the
+    # old rules. Nothing looks broken on screen.
+    d = json.load(open("data/trust-contacts.json"))
+    code = list(d["trusts"])[0]
+    d["trusts"][code][0]["spec"] = ["vascular"]
+    d["trusts"][code][0]["cls"] = "clinical"
+    json.dump(d, open("data/trust-contacts.json", "w"))
+    return "disagree with the current vocabulary"
+
+
+@case("contacts published with no relevance tags at all")
+def _(tmp):
+    d = json.load(open("data/trust-contacts.json"))
+    for code in list(d["trusts"])[:3]:
+        for e in d["trusts"][code]:
+            e.pop("spec", None); e.pop("cls", None)
+    json.dump(d, open("data/trust-contacts.json", "w"))
+    return "no tags at all"
+
+
+@case("a speciality term greedy enough to claim everyone")
+def _(tmp):
+    # A regex widened until it matches any notice. The panel would show a
+    # vascular rep every contact at every trust, and look busy doing it.
+    d = json.load(open("data/trust-contacts.json"))
+    for code in d["trusts"]:
+        for e in d["trusts"][code]:
+            e["spec"] = ["vascular"]; e["cls"] = "clinical"
+    json.dump(d, open("data/trust-contacts.json", "w"))
+    return "too greedy"
+
+
+@case("relevance tags shipped without the rule they were derived under")
+def _(tmp):
+    d = json.load(open("data/trust-contacts.json"))
+    d["tagRule"] = ""
+    json.dump(d, open("data/trust-contacts.json", "w"))
+    return "ships with its rule"
+
+
+@case("a speciality tagged that the dropdown cannot select")
+def _(tmp):
+    # Tagging against speciality-map.json's canonical list rather than the live
+    # SPECS dropdown is the easy version of this mistake: 'neonatal' is in one
+    # and not the other, so every neonatal tag would be invisible.
+    p = "data/products.json"
+    d = json.load(open(p))
+    d["SPECS"] = [s for s in d["SPECS"] if s.get("id") != "vascular"]
+    json.dump(d, open(p, "w"))
+    return "nobody can select"
+
+
 def main():
     # Snapshot every file a case might touch, so the repo is left untouched.
     tmp = tempfile.mkdtemp()
-    watched = FILES + ["data/trust-map.json", "data/contacts-optout.json"]
+    watched = FILES + ["data/trust-map.json", "data/contacts-optout.json",
+                       "data/products.json"]
     for f in watched:
         if os.path.exists(f):
             shutil.copy(f, os.path.join(tmp, f.replace("/", "_")))
