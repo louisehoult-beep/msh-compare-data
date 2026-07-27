@@ -29,12 +29,25 @@ backfill in one run is not possible. So: run daily over a short window, append,
 and let coverage build. Always honour Retry-After — do not lower the sleeps to
 make a run finish faster, you will just get throttled harder.
 
+WHICH OF THESE NAMES MATTER TO A GIVEN REP
+Every contact carries the title of the notice they were named on, and that
+title is tagged against the speciality vocabulary the page's own dropdown uses
+(scripts/notice_tags.py), so the Hub can put the names in a rep's own area at
+the top instead of showing the twelve most recent. Measured 27/07/2026 across
+the whole index: 533 clinical, 132 plainly non-clinical, 735 whose title says
+too little either way. A tag records what the TITLE matched — never a person's
+remit, which this source does not carry. See notice_tags.py for the rule and
+its limits.
+
 USAGE
   python3 scripts/refresh_fts_contacts.py            # daily: last 3 days
   python3 scripts/refresh_fts_contacts.py --days 30  # catch up after an outage
   python3 scripts/refresh_fts_contacts.py --from 2025-01-01 --to 2025-02-01
+  python3 scripts/refresh_fts_contacts.py --retag    # re-tag stored notices, no network
 """
 import json, urllib.request, urllib.error, re, sys, time, datetime, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import notice_tags
 
 API = "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages"
 UA = {"User-Agent": "MedicalSalesHub/1.0 (+https://elevateandthrive.uk; trust contact index)",
@@ -190,8 +203,57 @@ def derive_moves(store):
     return moves
 
 
+def finalise(store):
+    """Re-tag every stored notice and recompute the coverage figures.
+
+    Tagging runs over the WHOLE index on every run, not just newly-harvested
+    rows, so the vocabulary in notice_tags.py and the tags in the published file
+    can never drift apart. verify.py re-derives them independently and fails the
+    publish if they disagree — cheap insurance against a vocabulary edit that
+    silently only applies to whatever was harvested that day.
+    """
+    retagged = 0
+    for entries in store.get("trusts", {}).values():
+        for e in entries:
+            spec, cls = notice_tags.tag(e.get("notice"))
+            if e.get("spec") != spec or e.get("cls") != cls:
+                retagged += 1
+            e["spec"], e["cls"] = spec, cls
+
+    # ---- coverage, stated exactly and only from what is held ------------
+    # A rep opening a thin trust needs to know whether the trust is thin or the
+    # index is. These are the honest answers: how many names, over what period,
+    # and how this trust sits against the rest. No estimate, and no denominator
+    # we cannot count. We deliberately do NOT publish "N notices, M named a
+    # person": harvest windows overlap between runs, so any cumulative notice
+    # count would double-count. A smaller true number beats a bigger invented one.
+    per = sorted(len(v) for v in store.get("trusts", {}).values())
+    store["medianPerTrust"] = per[len(per) // 2] if per else 0
+    wins = store.get("windows") or []
+    if wins:
+        store["coverageFrom"] = min(w["from"] for w in wins)
+        store["coverageTo"] = max(w["to"] for w in wins)
+    store["tagRule"] = notice_tags.RULE
+    counts = {"clinical": 0, "nonclinical": 0, "unclear": 0}
+    for entries in store.get("trusts", {}).values():
+        for e in entries:
+            counts[e["cls"]] = counts.get(e["cls"], 0) + 1
+    store["noticeClassCounts"] = counts
+    return retagged
+
+
 def main(argv):
     today = datetime.date.today()
+    if "--retag" in argv:
+        # Re-tag the stored index against the current vocabulary. No network.
+        # Run this after editing notice_tags.py.
+        store = load(OUT_PATH, {"trusts": {}})
+        n = finalise(store)
+        store["asOf"] = today.strftime("%d/%m/%Y")
+        json.dump(store, open(OUT_PATH, "w"), ensure_ascii=False, indent=1)
+        print("re-tagged %d of %d contact(s); classes now %s"
+              % (n, store.get("contactsTotal", 0), store["noticeClassCounts"]))
+        return
     if "--rebuild-moves" in argv:
         # Re-derive moves from the stored index, no network. Use after a change
         # to derive_moves(), or to repair a file written by an older version.
@@ -273,18 +335,24 @@ def main(argv):
                 t = index[match]
                 bucket = store["trusts"].setdefault(t["code"], [])
                 existing = next((e for e in bucket if e["name"].lower() == nm.lower()), None)
+                # The notice shown is always the most recent one, so its tags are
+                # re-derived whenever that notice changes — never left stale.
                 if existing:
                     existing["n"] = existing.get("n", 1) + 1
                     existing["first"] = min(existing["first"], date)
                     if date >= existing["last"]:
+                        spec, cls = notice_tags.tag(title)
                         existing.update(last=date, notice=title[:180], ocid=ocid,
+                                        spec=spec, cls=cls,
                                         email=(cp.get("email") or existing.get("email", "")).strip(),
                                         tel=(cp.get("telephone") or existing.get("tel", "")).strip())
                 else:
+                    spec, cls = notice_tags.tag(title)
                     bucket.append({"name": nm, "email": (cp.get("email") or "").strip(),
                                    "tel": (cp.get("telephone") or "").strip(),
                                    "first": date, "last": date, "n": 1,
-                                   "notice": title[:180], "ocid": ocid})
+                                   "notice": title[:180], "ocid": ocid,
+                                   "spec": spec, "cls": cls})
                 matched += 1
         pages += 1
         url = (d.get("links") or {}).get("next")
@@ -335,6 +403,7 @@ def main(argv):
     store["contactsTotal"] = sum(len(v) for v in store["trusts"].values())
     for v in store["trusts"].values():
         v.sort(key=lambda e: e["last"], reverse=True)
+    finalise(store)
 
     json.dump(store, open(OUT_PATH, "w"), ensure_ascii=False, indent=1)
     json.dump(moves, open(MOVES_PATH, "w"), ensure_ascii=False, indent=1)

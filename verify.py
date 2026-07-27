@@ -264,6 +264,90 @@ def check_contacts(store, trust_codes, blocked, retention_months):
 
 
 # --------------------------------------------------------------------------
+# 2b. NOTICE TAGS — the relevance sort on the contacts panel
+#
+# The panel puts names whose notice title matches the rep's speciality above
+# the rest. That ordering is a DERIVED claim, so under root constitution rule
+# 14 it needs the rule shipped with it, an invariant that fails if the logic
+# broke, and a refusal to fire on thin evidence.
+#
+# The invariant that matters: tags in the published file must equal what the
+# current vocabulary produces from the same title. If someone edits the
+# vocabulary and only the day's new rows get tagged, half the index sorts under
+# the old rules and nothing else would notice.
+# --------------------------------------------------------------------------
+def check_tags(store, products):
+    if store is None:
+        return
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "scripts"))
+        import notice_tags
+    except Exception as e:
+        FAIL("tags", "cannot import scripts/notice_tags.py (%s) — the contacts panel sorts by "
+                     "these tags, so a broken vocabulary must not publish." % e)
+        return
+
+    # Tag against what the member can actually SELECT, not against the wider
+    # canonical list. A tag for a speciality missing from the dropdown is work
+    # nobody will ever see. (products.json -> SPECS fills that dropdown.)
+    selectable = {s.get("id") for s in (products or {}).get("SPECS", [])}
+    if not selectable:
+        FAIL("tags", "no SPECS read from products.json — cannot check the tag vocabulary "
+                     "against the speciality dropdown.")
+        return
+    unknown = set(notice_tags.SPEC_TERMS) - selectable
+    if unknown:
+        FAIL("tags", "notice_tags.py tags specialities the dropdown has no entry for: %s. A name "
+                     "filed under a speciality nobody can select is invisible."
+                     % ", ".join(sorted(unknown)))
+
+    total = drift = untagged = 0
+    spec_hits = {}
+    for code, entries in store.get("trusts", {}).items():
+        for e in entries:
+            total += 1
+            want_spec, want_cls = notice_tags.tag(e.get("notice"))
+            if e.get("spec") is None or e.get("cls") is None:
+                untagged += 1
+                continue
+            if sorted(e.get("spec") or []) != want_spec or e.get("cls") != want_cls:
+                drift += 1
+                if drift == 1:
+                    FAIL("tags", "stored tags disagree with the current vocabulary — e.g. %r under "
+                                 "%s is stored as %s/%s but re-derives as %s/%s. Run "
+                                 "`python3 scripts/refresh_fts_contacts.py --retag`."
+                                 % ((e.get("notice") or "")[:60], code, e.get("cls"),
+                                    e.get("spec"), want_cls, want_spec))
+            for s in (e.get("spec") or []):
+                spec_hits[s] = spec_hits.get(s, 0) + 1
+    if drift > 1:
+        FAIL("tags", "%d of %d contacts carry tags that disagree with the current vocabulary."
+                     % (drift, total))
+    if untagged:
+        FAIL("tags", "%d of %d contacts have no tags at all — they would sort to the bottom for "
+                     "every speciality. Run --retag." % (untagged, total))
+
+    # EVIDENCE FLOOR. A term broad enough to claim a large share of every
+    # trust's notices is not evidence of a speciality, it is a bad regex. At
+    # 27/07/2026 the biggest single speciality holds 40 of 1,400 (2.9%).
+    for s, hits in spec_hits.items():
+        if total and hits / total > 0.25:
+            FAIL("tags", "speciality %r matches %d of %d notice titles (%.0f%%). No real speciality "
+                         "is a quarter of NHS tendering — the vocabulary for it is too greedy, and "
+                         "a rep would be shown everyone." % (s, hits, total, 100.0 * hits / total))
+
+    # The rule must travel with the data (rule 14a). A member sorting by
+    # relevance has to be able to see what "relevant" was taken to mean.
+    if not (store.get("tagRule") or "").strip():
+        FAIL("tags", "trust-contacts.json carries tags but not the rule they were derived under. "
+                     "A derived claim ships with its rule or it does not ship.")
+    counts = store.get("noticeClassCounts") or {}
+    if counts and counts.get("clinical", 0) == 0:
+        FAIL("tags", "not one notice classified as clinical across the whole index — the classifier "
+                     "is broken, and every rep would see an empty relevant list.")
+
+
+# --------------------------------------------------------------------------
 # 3. TRUST MAP
 # --------------------------------------------------------------------------
 def check_trust_map(tm):
@@ -398,6 +482,7 @@ def main():
 
     trust_codes = check_trust_map(load("trust-map.json"))
     n = check_contacts(load("trust-contacts.json"), trust_codes, blocked, retention) or 0
+    check_tags(load("trust-contacts.json"), load("products.json"))
     check_moves(load("people-moves.json"), trust_codes, blocked,
                 (load("trust-contacts.json") or {}).get("trusts", {}))
     check_privacy(n, retention, offline)
