@@ -67,7 +67,10 @@ SPEC_TERMS = {
     # would thank you for.
     'continence': r"continence|urolog|catheter valve|urinary cathet|intermittent cathet|"
                   r"foley|urine drainage|bladder (scan|irrigat|management|care)|incontinence",
-    'ostomy': r"ostomy|stoma|colostomy|ileostomy|urostomy",
+    # 'stoma' MUST stay word-bounded: unbounded it matches "stomach", which on
+    # 30/07/2026 filed an Allurion gastric balloon safety notice under ostomy.
+    # 'ostomy' already covers colostomy / ileostomy / urostomy as substrings.
+    'ostomy': r"ostomy|\bstomas?\b|colostomy|ileostomy|urostomy",
     'bloodcoll': r"phlebotomy|blood sampling|blood collection|venous blood|vacutainer|lancet",
     'wound': r"wound care|wound management|wound dressing|\bdressings?\b|tissue viability|"
              r"negative pressure wound|\bnpwt\b|pressure ulcer|wound closure|sutur|"

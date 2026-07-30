@@ -1,0 +1,18 @@
+{
+ "notDeletedButFixed": "The 16-20 February 2026 round-up is deliberately NOT on this list, and it is the useful precedent. On 30/07/2026 the daily curation run opened that index page, found the one relevant notice on it, and rewrote the entry as 'Convatec EsteemBody one-piece intestinal ostomy bag, open-ended (MHRA ref 38578479)' with a real sales angle, autoDetected:false, and a description that says plainly it came off the FSN listing. That is what a round-up is for: a person extracts the notice, automation never guesses it. So a round-up in the feed has two honest endings - curated into a specific notice, or suppressed - and suppression is not automatically the right one. The 6-10 April page below is suppressed because Lou judged it out of scope on 29/07; if it is worth the Convatec treatment instead, delete its entry here and let curation have it.",
+ "note": "Notices judged NOT to belong in the Compare feed. Read by fetch_issues.py, which never adds a suppressed URL and removes one already stored. This exists because the store is append-only AND the fetcher re-reads still-live sources daily, so deleting a false positive by hand buys one day: on 29/07/2026 three were deleted at 10:33-10:44 BST and the 30/07 07:00 run put them straight back, stamped as new. A judgement has to live where the fetcher reads it. Keyed on source URL, which is stable. Suppressing a notice says nothing about whether the notice is TRUE - the Philips one below is accurate and about real ventilators. It says the notice is not about this audience's specialities. An item carrying a human 'use' line is never removed by this list; it is logged and left for a person.",
+ "urls": {
+  "https://www.gov.uk/drug-device-alerts/field-safety-notices-6-to-10-april-2026": {
+   "reason": "gov.uk weekly round-up INDEX page, not a notice. Names no single product and never says what any fault was. Reached the feed under continence on a word buried in the page body. Round-ups are now refused outright by fetch_issues.py; this entry clears the one already stored.",
+   "judgedBy": "Lou",
+   "judgedOn": "2026-07-29",
+   "loggedOn": "2026-07-30"
+  },
+  "https://www.supplychain.nhs.uk/icn/field-safety-notice-philips-circuit-selection-on-trilogy-evo-trilogy-evo-o2-trilogy-evo-universal-and-trilogy-ev300-platform-user-interface/": {
+   "reason": "Accurate NHS Supply Chain notice about real Philips ventilators, but respiratory - outside vascular access, continence and urology, and skin prep. Filed here by the product matcher, not by a fault in the notice. Suppressed on scope, not on truth.",
+   "judgedBy": "Lou",
+   "judgedOn": "2026-07-29",
+   "loggedOn": "2026-07-30"
+  }
+ }
+}

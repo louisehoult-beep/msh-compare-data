@@ -209,11 +209,79 @@ def _(tmp):
     return "nobody can select"
 
 
+def issues(**over):
+    d = json.load(open("data/compare-issues.json"))
+    d.update(over)
+    return d
+
+
+def put_issue(d, spec, **fields):
+    """Drop one item into a speciality, for the compare-feed cases below."""
+    item = {"d": "Jul 2026", "co": "", "p": "An item", "s": "x", "use": "",
+            "url": "https://example.invalid/notice", "autoDetected": True}
+    item.update(fields)
+    d["specialities"].setdefault(spec, {"label": spec.title(), "issues": []})
+    d["specialities"][spec]["issues"].append(item)
+    return d
+
+
+# --- the 22/07-30/07 Compare-feed false positives --------------------------
+# Three items were in front of paying members for over a week, were deleted by
+# hand on 29/07, and two were re-added by the refresh the next morning because
+# nothing checked. These four cases are that incident, split into its parts.
+
+@case("a gov.uk weekly round-up index page filed as if it were one notice")
+def _(tmp):
+    d = put_issue(issues(), "continence",
+                  p="Field Safety Notices: 6 to 10 April 2026",
+                  url="https://www.gov.uk/drug-device-alerts/field-safety-notices-6-to-10-april-2026")
+    json.dump(d, open("data/compare-issues.json", "w"))
+    return "ROUND-UP index page"
+
+
+@case("a suppressed notice back in the feed after a re-run")
+def _(tmp):
+    sup = json.load(open("data/suppressed-notices.json"))
+    url = next(iter(sup["urls"]))
+    d = put_issue(issues(), "vascular", p="Judged out of scope, yet here it is", url=url)
+    json.dump(d, open("data/compare-issues.json", "w"))
+    return "on the suppression list but is back in the feed"
+
+
+@case("a compare-feed item with no source link")
+def _(tmp):
+    # The dashboard keys Lou's tick boxes on this URL, so a missing one silently
+    # detaches her sign-off as well as making the claim uncheckable.
+    d = put_issue(issues(), "vascular", p="Unsourced claim", url="")
+    json.dump(d, open("data/compare-issues.json", "w"))
+    return "has no source URL"
+
+
+@case("the same notice filed under two specialities")
+def _(tmp):
+    d = issues()
+    url = "https://www.supplychain.nhs.uk/icn/duplicated-notice/"
+    put_issue(d, "vascular", p="Once", url=url)
+    put_issue(d, "continence", p="Twice", url=url)
+    json.dump(d, open("data/compare-issues.json", "w"))
+    return "filed twice"
+
+
+@case("an empty compare feed")
+def _(tmp):
+    d = issues()
+    for blk in d["specialities"].values():
+        blk["issues"] = []
+    json.dump(d, open("data/compare-issues.json", "w"))
+    return "Compare feed is empty"
+
+
 def main():
     # Snapshot every file a case might touch, so the repo is left untouched.
     tmp = tempfile.mkdtemp()
     watched = FILES + ["data/trust-map.json", "data/contacts-optout.json",
-                       "data/products.json"]
+                       "data/products.json", "data/compare-issues.json",
+                       "data/suppressed-notices.json"]
     for f in watched:
         if os.path.exists(f):
             shutil.copy(f, os.path.join(tmp, f.replace("/", "_")))
