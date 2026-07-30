@@ -53,7 +53,7 @@ import json, os, re, subprocess, sys, datetime, shutil
 from urllib.request import Request, urlopen
 
 DATA = "data"
-PRIVACY_URL = "https://elevateandthrive.uk/privacy-policy/"
+PRIVACY_URL = "https://medsalesintelligencehub.co.uk/privacy-policy/"
 PRIVACY_MARKER = "NHS Contact Information in the Medical Sales Hub"
 UA = {"User-Agent": "Mozilla/5.0 (msh-compare-data verify)"}
 
