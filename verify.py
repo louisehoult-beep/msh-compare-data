@@ -461,6 +461,104 @@ def check_shrink():
                            % (path, o, n, (1 - n / o) * 100))
 
 
+# --------------------------------------------------------------------------
+# 7. COMPARE FEED — the Compare tab's live issues
+# --------------------------------------------------------------------------
+# Added 30/07/2026. Until today this gate did not look at compare-issues.json at
+# all, which is why three false positives sat in front of paying members for over
+# a week: gov.uk weekly round-up INDEX pages filed as though each were a single
+# notice about a single product, plus a respiratory notice outside every tracked
+# speciality. Deleting them by hand on 29/07 held for one night; the 30/07 refresh
+# re-added them because nothing stopped it. These are the checks that would have.
+COMPARE_ROUNDUP = re.compile(r"^\s*field safety notices\b", re.I)
+
+
+def check_compare(store, suppress, comptab_js):
+    if not store:
+        WARN("compare", "data/compare-issues.json is missing — the Compare tab's live "
+                        "issues panel will fall back to whatever is baked into comptab.js.")
+        return
+    specs = store.get("specialities") or {}
+    if not specs:
+        FAIL("compare", "compare-issues.json carries no specialities at all.")
+        return
+
+    seen_urls = {}
+    total = 0
+    for sp, blk in specs.items():
+        for it in (blk or {}).get("issues", []) or []:
+            total += 1
+            url = (it.get("url") or "").strip()
+            title = it.get("p") or ""
+
+            # Every claim needs a source a reader can open. No exceptions.
+            if not url:
+                FAIL("compare", "%s: %r has no source URL. Nobody can check it, and the "
+                                "dashboard keys your tick boxes on that URL." % (sp, title[:60]))
+            elif not url.startswith("https://"):
+                FAIL("compare", "%s: %r has a non-HTTPS source (%r)." % (sp, title[:60], url[:60]))
+            else:
+                key = url.rstrip("/")
+                if key in seen_urls:
+                    FAIL("compare", "the same notice is filed twice: %r appears under %s and %s."
+                                    % (url[:70], seen_urls[key], sp))
+                seen_urls[key] = sp
+
+            # The incident check. An index of other people's notices is not a
+            # notice: it names no product and never says what the fault was.
+            # Citing a round-up as a SOURCE is fine — a person can open it and
+            # read out the one notice that matters, which is what happened to the
+            # 16-20 February page (now "Convatec EsteemBody ... ref 38578479").
+            # What is not fine is an item still WEARING the round-up's title,
+            # because then nobody has done that reading.
+            curated = not it.get("autoDetected") or (it.get("use") or "").strip()
+            if COMPARE_ROUNDUP.match(title):
+                if curated:
+                    WARN("compare", "%s: %r has been curated but still carries the round-up's "
+                                    "title. Name the actual notice and product, as the Convatec "
+                                    "EsteemBody entry does." % (sp, title[:70]))
+                else:
+                    FAIL("compare", "%s: %r is a gov.uk weekly ROUND-UP index page, not a notice "
+                                    "about a product — it names no product and never says what "
+                                    "the fault was. This is the 22/07-30/07 false-positive class. "
+                                    "Automation must refuse these; extracting one notice from a "
+                                    "round-up is a person's job." % (sp, title[:70]))
+
+            # A judgement already made must not be silently undone by a re-run.
+            if url.rstrip("/") in suppress and not (it.get("use") or "").strip():
+                FAIL("compare", "%s: %r is on the suppression list but is back in the feed. "
+                                "That is exactly what happened on 30/07/2026 — check "
+                                "fetch_issues.py is reading data/suppressed-notices.json."
+                                % (sp, title[:60]))
+
+            if not (it.get("d") or "").strip():
+                WARN("compare", "%s: %r carries no date label." % (sp, title[:60]))
+
+    # An item filed under a speciality the Compare tab cannot render is invisible
+    # to members: comptab.js merges j.specialities[k] only where D[k] already
+    # exists, and its dropdown is hard-coded. Filing work nobody can see is the
+    # quiet version of losing it.
+    if comptab_js:
+        renderable = set(re.findall(r'"([a-z][a-z0-9-]*)"\s*:\s*\{\s*"label"', comptab_js))
+        if renderable:
+            invisible = {}
+            for sp, blk in specs.items():
+                n = len((blk or {}).get("issues", []) or [])
+                if n and sp not in renderable:
+                    invisible[sp] = n
+            if invisible:
+                WARN("compare", "%d item(s) are filed under specialities the Compare tab cannot "
+                                "render, so members never see them: %s. Renderable today: %s. "
+                                "Either widen comptab.js or stop filing there."
+                                % (sum(invisible.values()),
+                                   ", ".join("%s (%d)" % (k, v) for k, v in sorted(invisible.items())),
+                                   ", ".join(sorted(renderable))))
+
+    if total == 0:
+        FAIL("compare", "the Compare feed is empty — refusing to publish a blank live-issues panel.")
+    return total
+
+
 def main():
     offline = "--offline" in sys.argv
     as_json = "--json" in sys.argv
@@ -487,6 +585,19 @@ def main():
                 (load("trust-contacts.json") or {}).get("trusts", {}))
     check_privacy(n, retention, offline)
     check_js()
+
+    suppress = set()
+    sup = load("suppressed-notices.json") or {}
+    for u in (sup.get("urls") or {}):
+        suppress.add(u.rstrip("/"))
+    try:
+        comptab_js = open(os.path.join("app", "comptab.js")).read()
+    except Exception:
+        comptab_js = ""
+        WARN("compare", "could not read app/comptab.js — cannot check that every filed "
+                        "speciality is one the Compare tab can actually render.")
+    check_compare(load("compare-issues.json"), suppress, comptab_js)
+
     check_shrink()
 
     if as_json:
