@@ -534,25 +534,32 @@ def check_compare(store, suppress, comptab_js):
             if not (it.get("d") or "").strip():
                 WARN("compare", "%s: %r carries no date label." % (sp, title[:60]))
 
-    # An item filed under a speciality the Compare tab cannot render is invisible
-    # to members: comptab.js merges j.specialities[k] only where D[k] already
-    # exists, and its dropdown is hard-coded. Filing work nobody can see is the
-    # quiet version of losing it.
+    # Until 30/07/2026 comptab.js merged the feed with `if(D[k])`, so a speciality
+    # without a hand-researched entry was silently dropped and 14 of 24 items were
+    # in the data and invisible on the page. It now creates an entry for any
+    # speciality carrying notices, so the guard is that nobody reinstates the drop.
     if comptab_js:
-        renderable = set(re.findall(r'"([a-z][a-z0-9-]*)"\s*:\s*\{\s*"label"', comptab_js))
-        if renderable:
-            invisible = {}
-            for sp, blk in specs.items():
-                n = len((blk or {}).get("issues", []) or [])
-                if n and sp not in renderable:
-                    invisible[sp] = n
-            if invisible:
-                WARN("compare", "%d item(s) are filed under specialities the Compare tab cannot "
-                                "render, so members never see them: %s. Renderable today: %s. "
-                                "Either widen comptab.js or stop filing there."
-                                % (sum(invisible.values()),
-                                   ", ".join("%s (%d)" % (k, v) for k, v in sorted(invisible.items())),
-                                   ", ".join(sorted(renderable))))
+        if "feedOnly" not in comptab_js:
+            FAIL("compare", "app/comptab.js no longer creates entries for specialities it has no "
+                            "researched supplier set for. That is the 30/07/2026 regression: items "
+                            "stay in the feed and vanish from the page. Look for the merge loop "
+                            "and the feedOnly branch.")
+        if re.search(r"for\s*\(\s*var\s+k\s+in\s+j\.specialities\s*\)\s*\{\s*if\s*\(\s*D\[k\]\s*\)",
+                     comptab_js):
+            FAIL("compare", "app/comptab.js has gone back to `if(D[k])` when merging the feed, "
+                            "which drops every speciality without a baked-in entry.")
+
+    # A speciality that reaches the dropdown needs a name a rep would recognise.
+    # Without one the tab offers "Bloodtx" instead of "Blood and transfusion".
+    for sp, blk in specs.items():
+        n = len((blk or {}).get("issues", []) or [])
+        if not n:
+            continue
+        lab = ((blk or {}).get("label") or "").strip()
+        if not lab or lab.lower() == sp.lower() or lab.lower() == sp.replace("-", " ").lower():
+            WARN("compare", "speciality %r carries %d notice(s) but no proper label (%r), so the "
+                            "Compare tab will name it after its internal id. Labels come from "
+                            "products.json SPECS via fetch_issues.py." % (sp, n, lab))
 
     if total == 0:
         FAIL("compare", "the Compare feed is empty — refusing to publish a blank live-issues panel.")

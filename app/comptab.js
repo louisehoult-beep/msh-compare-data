@@ -3,10 +3,26 @@ var D={"vascular":{"label":"Vascular access","route":[{"name":"NHS Supply Chain 
 var DATA_URL='https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/compare-issues.json';
 try{fetch(DATA_URL,{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
   if(j){if(j.specialities){
-    for(var k in j.specialities){if(D[k]){if(j.specialities[k].issues){D[k].issues=j.specialities[k].issues;}}}
+    /* Merge the live feed. Until 30/07/2026 this line was `if(D[k])`, so any
+       speciality without a hand-researched entry here was silently dropped:
+       14 of 24 items were in the data file and invisible on this page, including
+       every skin-prep notice. A speciality we have notices for is now shown even
+       when the supplier comparison for it has not been built yet — the notices
+       are the perishable, useful half, and dropping them was the bigger loss.
+       Nothing is invented: a speciality with no researched suppliers says so. */
+    for(var k in j.specialities){
+      var f=j.specialities[k]; if(!f){continue;}
+      if(D[k]){ if(f.issues){D[k].issues=f.issues;} if(f.label){D[k].label=f.label;} }
+      else if(f.issues&&f.issues.length){
+        D[k]={label:f.label||k,route:[],routeNote:'',types:{},suppliers:[],
+              issues:f.issues,feedOnly:true};
+      }
+    }
     var st=document.getElementById('cp-stamp');
     if(st){st.textContent='Frameworks and supply notices change \u2014 always open the source link and confirm current status before using anything in a conversation or tender.';}
-    if(document.getElementById('sec-comp')){render();}
+    /* The feed can introduce specialities that were not in the dropdown when the
+       pane was built, so the list is rebuilt before re-rendering. */
+    if(document.getElementById('sec-comp')){fillSpecs();render();}
   }}
 }).catch(function(e){});}catch(e){}
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
@@ -33,12 +49,44 @@ function buildPane(){
   return sec;
 }
 function fill(sel,opts){sel.innerHTML='';opts.forEach(function(o){var op=document.createElement('option');op.value=o[0];op.textContent=o[1];sel.appendChild(op);});}
+/* The speciality list is built from the data, not hard-coded. Ones with a
+   researched supplier set come first, because those give the full comparison;
+   the rest follow, labelled with how many live notices they carry so nobody
+   picks one expecting a supplier table. */
+function fillSpecs(){
+  var sel=document.getElementById('cp-spec');
+  if(!sel){return;}
+  var full=[],feed=[];
+  for(var k in D){
+    var S=D[k],n=(S.issues||[]).length;
+    if(S.suppliers&&S.suppliers.length){full.push([k,S.label]);}
+    else if(n){feed.push([k,S.label+' — '+n+' live notice'+(n===1?'':'s')+', no supplier set yet']);}
+  }
+  full.sort(function(a,b){return a[1].localeCompare(b[1]);});
+  feed.sort(function(a,b){return a[1].localeCompare(b[1]);});
+  var prev=sel.value;
+  fill(sel,[['','Select…']].concat(full,feed));
+  if(prev&&D[prev]){sel.value=prev;}
+}
 function render(){
   var spec=document.getElementById('cp-spec').value;
   if(!spec){return;}
   var S=D[spec];
   var type=document.getElementById('cp-type').value;
   var me=document.getElementById('cp-me').value;
+  /* A speciality we have notices for but no researched framework or supplier set.
+     It says exactly that. No supplier table is drawn, because inventing one to
+     fill the space is how a comparison tool starts lying to a rep in a meeting. */
+  if(S.feedOnly){
+    var fo='<div style="background:#fff;border:1px solid #e3e7ec;border-left:3px solid #a37519;border-radius:0 10px 10px 0;padding:12px 15px;margin:0 0 14px;">';
+    fo+='<div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#a37519;font-weight:700;margin-bottom:6px;">Live notices only &mdash; no supplier comparison yet</div>';
+    fo+='<p style="font-size:13px;margin:0 0 5px;">We are tracking recalls, delistings and supply gaps in <b>'+esc(S.label)+'</b>, but the framework and competitor set for it have not been researched yet, so there is no comparison table below &mdash; only the notices themselves.</p>';
+    fo+='<p style="font-size:12px;color:#5b6675;margin:4px 0 0;">Vascular access and continence and urology are the two with a full supplier comparison. If this speciality is one you sell into, say so and it can be built out.</p></div>';
+    document.getElementById('cp-route').innerHTML=fo;
+    document.getElementById('cp-table').innerHTML='';
+    renderIssues(S);
+    return;
+  }
   var route='<div style="background:#fff;border:1px solid #e3e7ec;border-left:3px solid #a37519;border-radius:0 10px 10px 0;padding:12px 15px;margin:0 0 14px;">';
   route+='<div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#a37519;font-weight:700;margin-bottom:6px;">Route to market &mdash; live framework</div>';
   S.route.forEach(function(r){route+='<p style="font-size:13px;margin:0 0 5px;"><b>'+esc(r.name)+'</b> &middot; '+esc(r.dates)+' &middot; <a href="'+r.url+'" target="_blank" rel="noopener" style="color:#a37519;">framework brief &rarr;</a></p>';});
@@ -66,7 +114,14 @@ function render(){
   tbl+='</tr></thead><tbody>'+rows+'</tbody></table></div>';
   if(shown===0){tbl='<p style="font-size:13px;color:#5b6675;">No verified suppliers recorded for this product type yet.</p>';}
   document.getElementById('cp-table').innerHTML=tbl;
+  renderIssues(S);
+}
+function renderIssues(S){
   var iss='<div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#b3261e;font-weight:700;margin:0 0 8px;">Live issues you can use &mdash; recalls, delistings, supply gaps</div>';
+  if(!(S.issues||[]).length){
+    document.getElementById('cp-issues').innerHTML=iss+'<p style="font-size:13px;color:#5b6675;">No open recalls, delistings or supply gaps recorded for this speciality right now. That is a real answer, not a gap in the data.</p>';
+    return;
+  }
   iss+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;">';
   S.issues.forEach(function(it,i){
     iss+='<div id="cp-iss-'+i+'" style="background:#fff;border:1px solid #e3e7ec;border-top:3px solid #b3261e;border-radius:12px;padding:13px 15px;">';
@@ -88,7 +143,7 @@ function onSpec(){
   for(var k in S.types){t.push([k,S.types[k]]);}
   fill(document.getElementById('cp-type'),t);
   var m=[['','Select your company (optional)']];
-  S.suppliers.forEach(function(s){m.push([s.co,s.co]);});
+  (S.suppliers||[]).forEach(function(s){m.push([s.co,s.co]);});
   m.push(['__other','Not listed / other']);
   fill(document.getElementById('cp-me'),m);
   render();
@@ -126,7 +181,7 @@ function build(){
     var mapSec=document.getElementById('sec-map');
     var pane=buildPane();
     mapSec.parentNode.insertBefore(pane,mapSec.nextSibling);
-    fill(document.getElementById('cp-spec'),[['','Select\u2026'],['vascular',D.vascular.label],['continence',D.continence.label]]);
+    fillSpecs();
     onSpec();
     document.getElementById('cp-spec').addEventListener('change',onSpec);
     document.getElementById('cp-type').addEventListener('change',render);

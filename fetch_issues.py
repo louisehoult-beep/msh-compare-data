@@ -95,6 +95,35 @@ def is_roundup(title):
 # carrying a curated 'use' line is left in place and logged loudly instead.
 SUPPRESS_PATH = pathlib.Path("data/suppressed-notices.json")
 
+# --- human-readable speciality labels, added 30/07/2026 ----------------------
+# Derived from products.json's SPECS, which is the list that fills the Hub's
+# speciality dropdown and is already gated by verify.py. Taking labels from there
+# rather than prettifying the id keeps one source of truth and avoids the Compare
+# tab offering members a speciality called "Bloodtx" instead of "Blood and
+# transfusion". Two ids are local to this feed and not canonical specialities:
+# 'skin-prep' (a keyword set of Lou's, deliberately narrower than 'infection')
+# and 'product-match' (a bucket for notices matched by tracked product, not by
+# speciality at all).
+PRODUCTS_PATH = pathlib.Path("data/products.json")
+LOCAL_LABELS = {"skin-prep": "Skin prep and antisepsis",
+                "product-match": "Matched to a tracked product"}
+
+
+def spec_labels():
+    labels = dict(LOCAL_LABELS)
+    try:
+        for s in json.loads(PRODUCTS_PATH.read_text()).get("SPECS", []):
+            sid, name = s.get("id"), (s.get("name") or s.get("label"))
+            if sid and name and sid not in labels:
+                labels[sid] = name
+    except Exception:
+        pass
+    return labels
+
+
+def label_for(spec, labels):
+    return labels.get(spec) or spec.replace("-", " ").capitalize()
+
 
 def suppressed_urls(log):
     try:
@@ -246,8 +275,15 @@ def main():
     candidates = gov_uk_alerts(log) + nhssc_notices(log)
     ptoks = product_tokens()
     log.append(f"tracked-product tokens: {len(ptoks)}")
+    labels = spec_labels()
     for spec in list(KEYWORDS.keys()) + ["product-match"]:
-        store["specialities"].setdefault(spec, {"label": spec.replace("-", " ").title(), "issues": []})
+        store["specialities"].setdefault(spec, {"label": label_for(spec, labels), "issues": []})
+    # A label is derived, never curated, so it is safe to correct in place. The
+    # Compare tab reads it to name the speciality in its dropdown.
+    for spec, blk in store["specialities"].items():
+        want = label_for(spec, labels)
+        if blk.get("label") != want:
+            blk["label"] = want
 
     # Suppression is applied to what is already stored BEFORE anything is added,
     # so a judgement made yesterday is honoured today without a hand-edit.
@@ -324,7 +360,7 @@ def main():
             via = "canonical"
         if spec:
             store["specialities"].setdefault(
-                spec, {"label": spec.replace("-", " ").title(), "issues": []})
+                spec, {"label": label_for(spec, labels), "issues": []})
             item = {
                 "id": re.sub(r"[^a-z0-9]+", "-", c["url"].lower())[-60:].strip("-"),
                 "d": month_label(c["date"]) if c["date"] else month_label(datetime.date.today().isoformat()),
