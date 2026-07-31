@@ -17,7 +17,7 @@
         '<div style="font-size:11.5px;letter-spacing:2px;font-weight:700;color:'+G+';">SUPPLIER INTELLIGENCE SEARCH</div>'+
         '<p style="margin:5px 0 12px;font-size:13.5px;color:'+DIM+';">Type a supplier or brand — get their frameworks, products, and live alerts/recalls, all in one place. <span id="mssCount"></span></p>'+
         '<input id="mssInput" list="mssList" autocomplete="off" placeholder="e.g. BD, Vygon, Coloplast, Nexiva…" '+
-          'style="width:100%;max-width:520px;padding:11px 16px;border-radius:99px;border:1px solid '+LINE+';font:inherit;font-size:15px;color:'+INK+';outline:none;">'+
+          'style="width:100%;max-width:520px;padding:11px 16px;border-radius:99px;border:1px solid '+LINE+';font:inherit;font-size:15px;color:'+INK+';background:#ffffff;-webkit-text-fill-color:'+INK+';caret-color:'+INK+';outline:none;">'+
         '<datalist id="mssList"></datalist>'+
         '<div id="mssChips" style="margin:10px 0 2px;display:flex;flex-wrap:wrap;gap:6px;"></div>'+
       '</div>'+
