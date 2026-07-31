@@ -214,7 +214,7 @@ def main():
                         nm = s.get("name")
                         if not nm: continue
                         rec = get_or_create(by_name, alias_lut, nm); awid = title[:50] + "|" + adate
-                        if not any(x.get("_id") == awid for x in rec["awards"]):
+                        if not any(isinstance(x, dict) and x.get("_id") == awid for x in rec["awards"]):
                             rec["awards"].append({"_id": awid, "title": title, "value": val,
                                 "buyer": (r.get("buyer", {}) or {}).get("name", ""), "date": adate,
                                 "url": "https://www.contractsfinder.service.gov.uk/", "autoDetected": True}); added_awards += 1
@@ -223,7 +223,7 @@ def main():
         log("awards fetch degraded: %r" % e)
 
     # 4. verified news (>=2 reputable sources), curated first then most-awarded
-    def activity(s): return (max([a.get("date","") for a in s["awards"]] or [""]), len(s["awards"]))
+    def activity(s): return (max([a.get("date","") for a in s["awards"] if isinstance(a, dict)] or [""]), len(s["awards"]))
     order = sorted(by_name.values(), key=lambda s: (0 if s.get("curated") else 1, ), )
     ranked = [s for s in by_name.values() if s.get("curated")] + \
              sorted([s for s in by_name.values() if not s.get("curated")], key=activity, reverse=True)
@@ -254,8 +254,8 @@ def main():
             rec["news"] = merge_news(prev_news.get(nm, []) or rec.get("news", []), [])
 
     for rec in by_name.values():
-        rec["alerts"].sort(key=lambda a: a.get("date", ""), reverse=True)
-        rec["awards"].sort(key=lambda a: a.get("date", ""), reverse=True)
+        rec["alerts"].sort(key=lambda a: a.get("date", "") if isinstance(a, dict) else "", reverse=True)
+        rec["awards"].sort(key=lambda a: a.get("date", "") if isinstance(a, dict) else "", reverse=True)
     out = {"dataAsOf": datetime.date.today().strftime("%d/%m/%Y"),
            "generated": datetime.datetime.utcnow().isoformat() + "Z",
            "note": "Curated core + auto-detected medical award winners (Contracts Finder CPV 33*) + live recalls + news corroborated by >=2 reputable sources. Auto items: verify at source.",
