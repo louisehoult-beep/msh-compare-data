@@ -193,7 +193,7 @@ def main():
             if not co: continue
             rec = get_or_create(by_name, alias_lut, co)
             aid = iss.get("id") or (iss.get("d", "") + "|" + iss.get("p", "")[:40])
-            if not any(a.get("_id") == aid for a in rec["alerts"]):
+            if not any(isinstance(a, dict) and a.get("_id") == aid for a in rec["alerts"]):
                 rec["alerts"].append({"_id": aid, "date": iss.get("d", ""), "title": iss.get("p", ""),
                     "detail": iss.get("s", ""), "use": iss.get("use", ""), "url": iss.get("url", ""),
                     "speciality": label, "autoDetected": iss.get("autoDetected", False)}); added_alerts += 1
