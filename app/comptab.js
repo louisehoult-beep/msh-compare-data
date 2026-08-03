@@ -27,11 +27,8 @@ try{fetch(DATA_URL,{cache:'no-store'}).then(function(r){return r.json();}).then(
 }).catch(function(e){});}catch(e){}
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 function el(tag,attrs,html){var e=document.createElement(tag);if(attrs){for(var k in attrs){e.setAttribute(k,attrs[k]);}}if(html!=null){e.innerHTML=html;}return e;}
-function hideAll(){['sec-map','sec-calc','sec-sustain'].forEach(function(id){var s=document.getElementById(id);if(s){s.hidden=true;}});}
-function offTabs(){document.querySelectorAll('.mst__tab').forEach(function(t){t.classList.remove('mst__tab--on');});}
 function buildPane(){
   var sec=el('section',{id:'sec-comp'});
-  sec.hidden=true;
   var h='';
   h+='<div class="mst__calcintro">';
   h+='<h3 class="mst__ih">What this does</h3>';
@@ -148,64 +145,24 @@ function onSpec(){
   fill(document.getElementById('cp-me'),m);
   render();
 }
-function patchHowto(){
-  var lab=null;
-  document.querySelectorAll('div').forEach(function(d){if(!lab){if(d.children.length===0){if(d.textContent.trim()==='HOW TO USE THIS PAGE'){lab=d;}}}});
-  if(!lab){return;}
-  var card=lab.parentElement;
-  var grid=card.querySelector('div[style*="grid-template-columns"]');
-  if(!grid){return;}
-  if(grid.children.length!==3){return;}
-  var col=el('div',null,'');
-  col.style.cssText='border-left:3px solid #e6e0d4;padding-left:12px;';
-  col.innerHTML='<div style="font-weight:700;font-size:13.5px;color:#1d2733;margin-bottom:4px;">2 &middot; Compare vs competitors</div><p style="font-size:12.5px;color:#75808d;line-height:1.55;margin:0;">See who else is on the live NHS Supply Chain framework for your product type, with links to each manufacturer &mdash; and the current recalls, delistings and supply gaps you can use.</p>';
-  grid.insertBefore(col,grid.children[1]);
-  var titles=grid.querySelectorAll(':scope > div > div');
-  var names=['1 · Stakeholder Mapper','2 · Compare vs competitors','3 · Value Case Calculator','4 · Sustainability Calculator'];
-  for(var i=0;i<titles.length;i++){if(names[i]){titles[i].textContent=names[i];}}
-  var pl=card.querySelectorAll(':scope > p');
-  var last=pl[pl.length-1];
-  if(last){last.innerHTML='<b>Work left to right.</b> Map the people, check the competitive field, build the money case, then add the carbon case. Each tool produces lines you can lift straight into an email, a business case or a tender response.';}
+/* Mounts directly into its own container on the "Know the field & compare"
+   page (#msh-compare-speciality) — it no longer steals a tab out of the
+   Stakeholder Mapper box. Two different things were both called "compare"
+   in two different places on the page; this is now the one home for it. */
+function mount(){
+  var MOUNT=document.getElementById('msh-compare-speciality');
+  if(!MOUNT){return false;}
+  if(document.getElementById('cp-spec')){return true;}
+  var pane=buildPane();
+  MOUNT.appendChild(pane);
+  fillSpecs();
+  onSpec();
+  document.getElementById('cp-spec').addEventListener('change',onSpec);
+  document.getElementById('cp-type').addEventListener('change',render);
+  document.getElementById('cp-me').addEventListener('change',render);
+  return true;
 }
-var wired=false;
-function build(){
-  var tabs=document.querySelector('.mst__tabs');
-  var mapBtn=document.getElementById('tab-map');
-  var calcBtn=document.getElementById('tab-calc');
-  if(!tabs){return false;}
-  if(!mapBtn){return false;}
-  if(!calcBtn){return false;}
-  if(!document.getElementById('tab-comp')){
-    var btn=el('button',{'class':'mst__tab',id:'tab-comp',type:'button'},'Compare vs Competitors');
-    tabs.insertBefore(btn,calcBtn);
-    var mapSec=document.getElementById('sec-map');
-    var pane=buildPane();
-    mapSec.parentNode.insertBefore(pane,mapSec.nextSibling);
-    fillSpecs();
-    onSpec();
-    document.getElementById('cp-spec').addEventListener('change',onSpec);
-    document.getElementById('cp-type').addEventListener('change',render);
-    document.getElementById('cp-me').addEventListener('change',render);
-    btn.addEventListener('click',function(){
-      hideAll();offTabs();
-      btn.classList.add('mst__tab--on');
-      var p=document.getElementById('sec-comp');
-      p.hidden=false;
-    });
-    patchHowto();
-  }
-  ['tab-map','tab-calc','tab-sustain'].forEach(function(id){
-    var t=document.getElementById(id);
-    if(t){if(!t.getAttribute('data-cpw')){t.setAttribute('data-cpw','1');t.addEventListener('click',function(){
-      var p=document.getElementById('sec-comp');
-      if(p){p.hidden=true;}
-      var b=document.getElementById('tab-comp');
-      if(b){b.classList.remove('mst__tab--on');}
-    });}}
-  });
-  return !!document.getElementById('tab-sustain');
-}
-if(document.readyState!=='loading'){build();}else{document.addEventListener('DOMContentLoaded',build);}
+if(document.readyState!=='loading'){mount();}else{document.addEventListener('DOMContentLoaded',mount);}
 var n=0;
-var iv=setInterval(function(){ if(build()){clearInterval(iv);return;} n=n+1; if(n>25){clearInterval(iv);} },400);
+var iv=setInterval(function(){ if(mount()){clearInterval(iv);return;} n=n+1; if(n>25){clearInterval(iv);} },400);
 })();
