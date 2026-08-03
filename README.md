@@ -1,5 +1,18 @@
 # msh-compare-data
 
+> **© Elevate and Thrive Ltd 2026. All rights reserved. Proprietary — not open source.**
+>
+> This repository is public **only** because the Medical Sales Intelligence Hub loads
+> these files directly in subscribers' browsers. That is a technical consequence of how
+> paid content is served, **not** a licence to use it. Copyright and database right are
+> asserted. Extraction of a substantial part, systematic extraction, redistribution,
+> resale, AI/ML training use and competing use are all prohibited.
+>
+> Every file under `data/` carries an ownership notice and an identifying marker in its
+> `_notice` block. See [`LICENSE`](LICENSE) and the
+> [Terms of Use](https://medsalesintelligencehub.co.uk/terms/).
+> Licensing enquiries: contact@elevateandthrive.uk
+
 ## THE ONE RULE THAT OVERRIDES EVERYTHING: `verify.py` MUST PASS
 
 **A push to this repo is a publish.** The Hub fetches these files directly with

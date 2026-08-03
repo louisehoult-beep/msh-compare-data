@@ -1,4 +1,15 @@
 {
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-DF6043FFA",
+  "contact": "contact@elevateandthrive.uk"
+ },
  "_meta": {
   "purpose": "Canonical speciality vocabulary for the Med Sales Tools, plus the mapping that reconciles the three lists that had drifted apart.",
   "problem": "Three vocabularies existed with nothing reconciling them, matched by exact string equality: MST_DATA.SPECS (30, Stakeholder Mapper), prep-config.specialities (8, 'Help me prepare' dropdown), and free-text supplier.specialities (60 distinct strings across 188 suppliers). Consequence: 3 of the 8 dropdown values matched NO supplier at all (Surgery / theatres, Diabetes, Pathology / cold chain), returning zero competitors silently; and 146 of 188 suppliers (78%) were unreachable from any dropdown speciality.",

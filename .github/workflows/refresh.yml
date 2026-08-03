@@ -27,6 +27,13 @@ jobs:
         run: python3 fetch_issues.py
       - name: Rebuild supplier index (curated seed + medical awards + recalls)
         run: python3 build_supplier_index.py
+      # build_supplier_index.py rebuilds its output from scratch, so it drops the
+      # ownership notice every run. This repo is PUBLIC and the Hub's page
+      # watermark never touches these files, so the notice is the only thing on a
+      # copy that says who owns it. Re-stamp before the gate; the gate then
+      # refuses to publish anything unmarked.
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
       # ⚠️ ADDED 26/07/2026. This workflow was the ONE writer of the three that
       # committed to this repo without running the gate first, while
       # weekly-refresh.yml and daily-contacts.yml both did. A push here is a live

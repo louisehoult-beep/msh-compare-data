@@ -276,6 +276,27 @@ def _(tmp):
     return "Compare feed is empty"
 
 
+@case("a data file published with its ownership notice stripped")
+def _(tmp):
+    # The realistic route to this is not sabotage: build_supplier_index.py
+    # rebuilds its output from scratch, so any generator that forgets to
+    # re-stamp ships an unmarked file to a public repo.
+    d = json.load(open("data/products.json"))
+    d.pop("_notice", None)
+    json.dump(d, open("data/products.json", "w"), ensure_ascii=False, indent=1)
+    return "missing its ownership notice"
+
+
+@case("an ownership notice quietly altered")
+def _(tmp):
+    # If the copyright line, the terms link or the marker ref can drift without
+    # the gate noticing, the notice proves nothing about the copy that carries it.
+    d = json.load(open("data/products.json"))
+    d["_notice"]["terms"] = "https://example.com/terms/"
+    json.dump(d, open("data/products.json", "w"), ensure_ascii=False, indent=1)
+    return "drifted"
+
+
 def main():
     # Snapshot every file a case might touch, so the repo is left untouched.
     tmp = tempfile.mkdtemp()

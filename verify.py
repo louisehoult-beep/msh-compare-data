@@ -566,6 +566,46 @@ def check_compare(store, suppress, comptab_js):
     return total
 
 
+# --------------------------------------------------------------------------
+# 7. OWNERSHIP NOTICE
+# --------------------------------------------------------------------------
+def check_notice():
+    """Every data file must carry its ownership notice and its marker.
+
+    These files are served to the Hub from a PUBLIC repo, so the page watermark
+    and the paywall never touch them. The notice is the only thing on a copy
+    that says who owns it, and the ref is the only thing that ties a copy back
+    here. Both are easy to lose by accident: build_supplier_index.py rebuilds
+    its output from scratch every run and drops anything it was not told to
+    write. So the gate checks, rather than trusting the stamper to have run.
+
+    Fix: python3 scripts/stamp_notice.py
+    """
+    try:
+        sys.path.insert(0, "scripts")
+        import stamp_notice
+    except Exception as exc:
+        FAIL("notice", "cannot import scripts/stamp_notice.py (%s), so the ownership "
+                       "notice cannot be checked." % exc)
+        return
+
+    for name in sorted(os.listdir(DATA)):
+        if not name.endswith(".json"):
+            continue
+        doc = load(name)
+        if not isinstance(doc, dict):
+            continue
+        if name not in stamp_notice.REFS:
+            FAIL("notice", "data/%s has no marker ref. Mint one from the private salt in "
+                           "the NDA pack and add it to scripts/stamp_notice.py before "
+                           "publishing this file." % name)
+            continue
+        got = doc.get("_notice")
+        if got != stamp_notice.notice_for(name):
+            FAIL("notice", "data/%s is missing its ownership notice, or it has drifted. "
+                           "Run: python3 scripts/stamp_notice.py" % name)
+
+
 def main():
     offline = "--offline" in sys.argv
     as_json = "--json" in sys.argv
@@ -606,6 +646,7 @@ def main():
     check_compare(load("compare-issues.json"), suppress, comptab_js)
 
     check_shrink()
+    check_notice()
 
     if as_json:
         print(json.dumps({"pass": not fails, "fails": fails, "warns": warns}, indent=1))
