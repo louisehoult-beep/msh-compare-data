@@ -50,6 +50,12 @@ jobs:
           python-version: "3.12"
       - name: Scan Find a Tender for named NHS trust contacts
         run: python scripts/refresh_fts_contacts.py --days ${{ github.event.inputs.days || 4 }}
+      # This repo is PUBLIC and the Hub's page watermark never reaches these
+      # files, so the notice inside them is the only thing on a copy that says
+      # who owns it. Re-stamp before the gate; the gate then refuses anything
+      # unmarked.
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
       - name: Publish gate — nothing commits until this passes
         run: python3 verify.py
       - name: Commit if changed
