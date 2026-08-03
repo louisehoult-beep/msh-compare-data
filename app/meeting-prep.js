@@ -360,9 +360,20 @@
       var nat = (cfg.nationalKeyInfo || []).map(function(n){ return '<strong>' + esc(n.title) + '</strong> — ' + esc(n.detail) + '<br><span style="color:' + GOLD + ';">Use it:</span> ' + esc(n.use); });
       if (nat.length){ h += panel('What’s changed nationally (use these)', li(nat)); }
 
+      /* An alert carrying no title and no product name renders as an empty bullet,
+         which reads as a broken panel rather than as "nothing to report". The old
+         guard only counted alerts, so one text-less entry was enough to print a
+         bare dot. Drop the unrenderable ones, and if none survive, drop the panel
+         — no panel is the honest empty state here, not an empty one. */
       if (!isEarly && co && co.alerts && co.alerts.length){
-        var al = co.alerts.slice(0,4).map(function(a){ return (a.date ? '<span style="color:#6b7684;">' + esc(a.date) + '</span> — ' : '') + esc(a.title || a.p || ''); });
-        h += panel('Your live alerts & recalls', li(al) + '<div style="margin-top:8px;">Know your own position — and watch the ' + link('Live Desk', 675) + ' for competitors’.</div>');
+        var al = co.alerts.slice(0,4).map(function(a){
+          var txt = String(a.title || a.p || '').trim();
+          if (!txt) return '';
+          return (a.date ? '<span style="color:#6b7684;">' + esc(a.date) + '</span> — ' : '') + esc(txt);
+        }).filter(function(s){ return s; });
+        if (al.length){
+          h += panel('Your live alerts & recalls', li(al) + '<div style="margin-top:8px;">Know your own position — and watch the ' + link('Live Desk', 675) + ' for competitors’.</div>');
+        }
       }
 
       if (tr){
