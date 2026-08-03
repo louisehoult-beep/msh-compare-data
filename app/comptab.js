@@ -36,9 +36,9 @@ function buildPane(){
   h+='<p class="mst__ip" id="cp-stamp" style="color:#75808d;">Frameworks and supply notices change &mdash; always open the source link and confirm current status before using anything in a conversation or tender.</p>';
   h+='</div>';
   h+='<div class="mst__controls">';
-  h+='<label class="mst__lab">Speciality<select class="mst__sel" id="cp-spec"></select></label>';
-  h+='<label class="mst__lab">Product type<select class="mst__sel" id="cp-type"></select></label>';
-  h+='<label class="mst__lab">Your company<select class="mst__sel" id="cp-me"></select></label>';
+  h+='<label class="mst__lab">1 &middot; Your company (optional)<select class="mst__sel" id="cp-me"></select></label>';
+  h+='<label class="mst__lab">2 &middot; Speciality<select class="mst__sel" id="cp-spec"></select></label>';
+  h+='<label class="mst__lab">3 &middot; Product type<select class="mst__sel" id="cp-type"></select></label>';
   h+='</div>';
   h+='<div id="cp-route"></div><div id="cp-table"></div><div id="cp-issues"></div>';
   h+='<div class="mst__note">Supplier sets are the key players for each product type, not the full framework award list (the continence framework alone has 57 suppliers). Brands, framework presence and issues verified against the linked sources on 17/07/2026. For anything time-critical, check the NHS Supply Chain <a href="https://www.supplychain.nhs.uk/icn/" target="_blank" rel="noopener">important customer notices</a> and <a href="https://www.gov.uk/drug-device-alerts" target="_blank" rel="noopener">MHRA alerts</a> directly.</div>';
@@ -49,21 +49,48 @@ function fill(sel,opts){sel.innerHTML='';opts.forEach(function(o){var op=documen
 /* The speciality list is built from the data, not hard-coded. Ones with a
    researched supplier set come first, because those give the full comparison;
    the rest follow, labelled with how many live notices they carry so nobody
-   picks one expecting a supplier table. */
-function fillSpecs(){
+   picks one expecting a supplier table. onlyCo (optional) restricts the list
+   to specialities where that company is a listed supplier — the step-1-company
+   filter feeding into step 2. */
+function fillSpecs(onlyCo){
   var sel=document.getElementById('cp-spec');
   if(!sel){return;}
   var full=[],feed=[];
   for(var k in D){
     var S=D[k],n=(S.issues||[]).length;
+    if(onlyCo&&!(S.suppliers||[]).some(function(s){return s.co===onlyCo;})){continue;}
     if(S.suppliers&&S.suppliers.length){full.push([k,S.label]);}
-    else if(n){feed.push([k,S.label+' — '+n+' live notice'+(n===1?'':'s')+', no supplier set yet']);}
+    else if(!onlyCo&&n){feed.push([k,S.label+' — '+n+' live notice'+(n===1?'':'s')+', no supplier set yet']);}
   }
   full.sort(function(a,b){return a[1].localeCompare(b[1]);});
   feed.sort(function(a,b){return a[1].localeCompare(b[1]);});
   var prev=sel.value;
   fill(sel,[['','Select…']].concat(full,feed));
-  if(prev&&D[prev]){sel.value=prev;}
+  if(prev&&Array.prototype.some.call(sel.options,function(o){return o.value===prev;})){sel.value=prev;}
+}
+/* Step 1: every company across every speciality, deduped — populated once at
+   mount, independent of whatever speciality is later chosen. */
+function allCompanies(){
+  var seen={},out=[];
+  for(var k in D){
+    (D[k].suppliers||[]).forEach(function(s){if(!seen[s.co]){seen[s.co]=1;out.push(s.co);}});
+  }
+  out.sort(function(a,b){return a.localeCompare(b);});
+  return out;
+}
+function fillCompanies(){
+  var sel=document.getElementById('cp-me');
+  if(!sel){return;}
+  var prev=sel.value;
+  fill(sel,[['','— all companies —']].concat(allCompanies().map(function(c){return [c,c];})));
+  if(prev){sel.value=prev;}
+}
+/* Step 1 -> 2: picking a company narrows Speciality to the ones that company
+   actually supplies into; clearing it restores the full list. */
+function onCompany(){
+  var co=document.getElementById('cp-me').value;
+  fillSpecs(co||null);
+  onSpec();
 }
 function render(){
   var spec=document.getElementById('cp-spec').value;
@@ -134,15 +161,11 @@ function renderIssues(S){
 }
 function onSpec(){
   var spec=document.getElementById('cp-spec').value;
-  if(!spec){document.getElementById('cp-route').innerHTML='';document.getElementById('cp-table').innerHTML='';document.getElementById('cp-issues').innerHTML='';fill(document.getElementById('cp-type'),[['all','All product types']]);fill(document.getElementById('cp-me'),[['','Select your company (optional)']]);return;}
+  if(!spec){document.getElementById('cp-route').innerHTML='';document.getElementById('cp-table').innerHTML='';document.getElementById('cp-issues').innerHTML='';fill(document.getElementById('cp-type'),[['all','All product types']]);return;}
   var S=D[spec];
   var t=[['all','All product types']];
   for(var k in S.types){t.push([k,S.types[k]]);}
   fill(document.getElementById('cp-type'),t);
-  var m=[['','Select your company (optional)']];
-  (S.suppliers||[]).forEach(function(s){m.push([s.co,s.co]);});
-  m.push(['__other','Not listed / other']);
-  fill(document.getElementById('cp-me'),m);
   render();
 }
 /* Mounts directly into its own container on the "Know the field & compare"
@@ -155,11 +178,12 @@ function mount(){
   if(document.getElementById('cp-spec')){return true;}
   var pane=buildPane();
   MOUNT.appendChild(pane);
+  fillCompanies();
   fillSpecs();
   onSpec();
+  document.getElementById('cp-me').addEventListener('change',onCompany);
   document.getElementById('cp-spec').addEventListener('change',onSpec);
   document.getElementById('cp-type').addEventListener('change',render);
-  document.getElementById('cp-me').addEventListener('change',render);
   return true;
 }
 if(document.readyState!=='loading'){mount();}else{document.addEventListener('DOMContentLoaded',mount);}
