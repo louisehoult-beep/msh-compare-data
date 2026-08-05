@@ -375,12 +375,16 @@ def _(tmp):
     return "not in this speciality's `types` map"
 
 
-@case("a supplier set for a speciality the Hub dropdown does not have")
+@case("a supplier set for a speciality nothing can ever select")
 def _(tmp):
+    # Not simply "absent from products.json SPECS" — `skin-prep` and
+    # `product-match` are both absent and both render every day. The failure
+    # that matters is a set for an id that is in neither SPECS nor the feed, so
+    # no dropdown entry can ever reach it and the research is invisible.
     d = suppliers()
     d["specialities"]["notaspeciality"] = d["specialities"].pop(next(iter(d["specialities"])))
     json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
-    return "not a speciality the Hub's dropdown can select"
+    return "neither in products.json SPECS nor carrying notices"
 
 
 @case("supplier sets shipped without the sourcing rule they were built under")

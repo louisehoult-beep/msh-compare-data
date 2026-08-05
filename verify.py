@@ -708,9 +708,16 @@ def check_suppliers(sup, store):
 
     for sp, blk in specs.items():
         who = "suppliers/%s" % sp
-        if canon and sp not in canon:
-            FAIL("suppliers", "%s is not a speciality the Hub's dropdown can select. Supplier sets "
-                              "must key on products.json SPECS ids." % who)
+        # The real question is whether the Compare tab can show this set, not
+        # whether the id is in the canonical vocabulary. Two ids the tab renders
+        # every day are deliberately NOT in products.json SPECS: `skin-prep`,
+        # one of the original keyword buckets, and `product-match`, which is not
+        # a body system at all. Failing on those would be the gate refusing to
+        # publish a speciality the feed itself uses.
+        if canon and sp not in canon and sp not in feed:
+            FAIL("suppliers", "%s is a speciality the Compare tab cannot show: it is neither in "
+                              "products.json SPECS nor carrying notices in the feed, so nothing "
+                              "would ever select it." % who)
         rows = (blk or {}).get("suppliers") or []
         if not rows:
             FAIL("suppliers", "%s has no suppliers, so it would replace a working notices-only "
