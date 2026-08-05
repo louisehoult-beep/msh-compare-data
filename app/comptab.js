@@ -9,7 +9,41 @@ var DATA_URL='https://raw.githubusercontent.com/louisehoult-beep/msh-compare-dat
    there is nothing here to fall out of step with the sources. */
 var CLUSTERS=[];
 var BYURL={};
-try{fetch(DATA_URL,{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+/* Researched supplier sets used to be hard-coded in D above. There were two of
+   them and eleven specialities carrying notices, so every build-out meant
+   editing the file that also renders the tab. They now live in
+   data/compare-suppliers.json, which verify.py gates: adding a speciality is a
+   data edit. D keeps vascular and continence as a baked fallback so the tab is
+   never empty if the fetch fails; anything in the data file overrides it. */
+var SUPPLIERS_URL='https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/compare-suppliers.json';
+function mergeSuppliers(j){
+  if(!j||!j.specialities){return;}
+  for(var k in j.specialities){
+    var s=j.specialities[k]; if(!s||!(s.suppliers||[]).length){continue;}
+    if(!D[k]){D[k]={label:s.label||k,route:[],routeNote:'',types:{},suppliers:[],issues:[]};}
+    D[k].label=s.label||D[k].label;
+    D[k].route=s.route||[];
+    D[k].routeNote=s.routeNote||'';
+    D[k].types=s.types||{};
+    D[k].suppliers=s.suppliers;
+    /* It now has a supplier table, so it is no longer notices-only. */
+    D[k].feedOnly=false;
+  }
+}
+/* Suppliers are merged BEFORE the issues feed, so that a speciality with a
+   researched supplier set takes the `if(D[k])` branch below and keeps its table,
+   rather than being created fresh as notices-only. Either fetch may fail on its
+   own without taking the other down: no suppliers means the tab falls back to
+   notices-only, which is what it did before this file existed. */
+function loadFeed(){
+  return fetch(SUPPLIERS_URL,{cache:'no-store'})
+    .then(function(r){return r.json();})
+    .then(function(s){mergeSuppliers(s);})
+    .catch(function(){})
+    .then(function(){return fetch(DATA_URL,{cache:'no-store'});})
+    .then(function(r){return r.json();});
+}
+try{loadFeed().then(function(j){
   if(j){if(j.specialities){
     /* Merge the live feed. Until 30/07/2026 this line was `if(D[k])`, so any
        speciality without a hand-researched entry here was silently dropped:

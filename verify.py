@@ -674,6 +674,110 @@ def check_compare(store, suppress, comptab_js):
 
 
 # --------------------------------------------------------------------------
+# 6b. SUPPLIER SETS — the researched half of the Compare tab
+# --------------------------------------------------------------------------
+def check_suppliers(sup, store):
+    """Researched supplier sets moved out of app/comptab.js on 05/08/2026.
+
+    A supplier table is what a rep reads INSTEAD of doing their own research, so
+    it fails in ways the issues feed cannot: a framework that expired last year
+    still reads as current, and a warning chip can silently point at the wrong
+    notice because `iss` indexes the issues array BY POSITION. Both are checked.
+    """
+    if sup is None:
+        WARN("suppliers", "data/compare-suppliers.json is missing — the Compare tab falls back "
+                          "to the two sets baked into app/comptab.js and every other speciality "
+                          "shows notices only.")
+        return
+    specs = sup.get("specialities") or {}
+    if not specs:
+        FAIL("suppliers", "compare-suppliers.json carries no specialities.")
+        return
+    if not (sup.get("sourceRule") or "").strip():
+        FAIL("suppliers", "compare-suppliers.json states no sourceRule. A supplier table is read "
+                          "in place of a rep's own research; the reader must be able to see what "
+                          "it was built from.")
+
+    feed = (store or {}).get("specialities") or {}
+    canon = {}
+    try:
+        canon = {s["id"]: (s.get("label") or "")
+                 for s in (load("products.json") or {}).get("SPECS", [])}
+    except Exception:
+        pass
+
+    for sp, blk in specs.items():
+        who = "suppliers/%s" % sp
+        if canon and sp not in canon:
+            FAIL("suppliers", "%s is not a speciality the Hub's dropdown can select. Supplier sets "
+                              "must key on products.json SPECS ids." % who)
+        rows = (blk or {}).get("suppliers") or []
+        if not rows:
+            FAIL("suppliers", "%s has no suppliers, so it would replace a working notices-only "
+                              "panel with an empty table." % who)
+            continue
+
+        # A route to market with no dates is the claim most likely to go stale
+        # unnoticed — a rep quotes a framework in a tender that ended last year.
+        for r in (blk.get("route") or []):
+            for field in ("name", "dates", "url"):
+                if not (r.get(field) or "").strip():
+                    FAIL("suppliers", "%s: a framework entry is missing %r." % (who, field))
+            u = (r.get("url") or "")
+            if u and not u.startswith("https://"):
+                FAIL("suppliers", "%s: framework source %r is not HTTPS." % (who, u[:60]))
+            # Dates read "DD/MM/YYYY – DD/MM/YYYY"; the end date is the one that bites.
+            ends = re.findall(r"\b(\d{2})/(\d{2})/(\d{4})\b", r.get("dates") or "")
+            if ends:
+                d, m, y = ends[-1]
+                try:
+                    end = datetime.date(int(y), int(m), int(d))
+                    if end < today():
+                        FAIL("suppliers", "%s: the framework it names ended %s. A rep quoting an "
+                                          "expired route to market in a tender conversation is "
+                                          "worse than no tool at all — re-read the contract launch "
+                                          "brief and update it." % (who, end.strftime("%d/%m/%Y")))
+                    elif (end - today()).days <= 90:
+                        WARN("suppliers", "%s: the framework it names ends %s, within 90 days. "
+                                          "Check whether a successor has been awarded."
+                                          % (who, end.strftime("%d/%m/%Y")))
+                except ValueError:
+                    FAIL("suppliers", "%s: framework dates %r are not readable." % (who, r.get("dates")))
+
+        types = (blk.get("types") or {})
+        n_iss = len(((feed.get(sp) or {}).get("issues") or []))
+        seen_co = set()
+        for s in rows:
+            co = (s.get("co") or "").strip()
+            if not co:
+                FAIL("suppliers", "%s: a supplier row has no company name." % who)
+                continue
+            if co in seen_co:
+                FAIL("suppliers", "%s: %r is listed twice." % (who, co))
+            seen_co.add(co)
+            if not (s.get("brands") or "").strip():
+                FAIL("suppliers", "%s: %r names no brands, so the row tells a rep nothing." % (who, co))
+            u = (s.get("url") or "")
+            if not u.startswith("https://"):
+                FAIL("suppliers", "%s: %r has no HTTPS link of its own." % (who, co))
+            for t in (s.get("t") or []):
+                if t not in types:
+                    FAIL("suppliers", "%s: %r covers product type %r, which is not in this "
+                                      "speciality's `types` map, so the dropdown can never show it."
+                                      % (who, co, t))
+            # THE POSITIONAL TRAP. Chips index the issues array; a notice removed
+            # from the middle renumbers everything after it and every chip past
+            # that point starts pointing at somebody else's recall.
+            for i in (s.get("iss") or []):
+                if not isinstance(i, int) or i < 0 or i >= n_iss:
+                    FAIL("suppliers", "%s: %r flags issue index %r, but that speciality carries %d "
+                                      "notice(s). `iss` indexes the issues array BY POSITION — a "
+                                      "notice removed or reordered renumbers every chip after it. "
+                                      "Re-point them in the same commit."
+                                      % (who, co, i, n_iss))
+
+
+# --------------------------------------------------------------------------
 # 7b. SOURCE LINKS — every citation must still open
 # --------------------------------------------------------------------------
 # Added 05/08/2026. That morning three Continence/Urology items pointed at NHS
@@ -829,6 +933,7 @@ def main():
         WARN("compare", "could not read app/comptab.js — cannot check that every filed "
                         "speciality is one the Compare tab can actually render.")
     check_compare(load("compare-issues.json"), suppress, comptab_js)
+    check_suppliers(load("compare-suppliers.json"), load("compare-issues.json"))
     check_source_links(load("compare-issues.json"),
                        offline or "--no-links" in sys.argv)
 

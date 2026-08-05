@@ -336,6 +336,61 @@ def _(tmp):
     return "states no membership rule"
 
 
+# --- researched supplier sets, added 05/08/2026 -----------------------------
+# A supplier table is what a rep reads INSTEAD of doing their own research, so
+# it fails in ways the notices feed cannot.
+
+def suppliers():
+    return json.load(open("data/compare-suppliers.json"))
+
+
+@case("a supplier table quoting a framework that has already expired")
+def _(tmp):
+    # The quiet one. Nothing looks broken; a rep just walks into a tender
+    # citing a route to market that ended.
+    d = suppliers()
+    sp = next(iter(d["specialities"].values()))
+    sp["route"][0]["dates"] = "01/02/2019 – 31/01/2021"
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "framework it names ended"
+
+
+@case("a warning chip pointing past the end of its speciality's notices")
+def _(tmp):
+    # `iss` indexes the issues array BY POSITION, so removing one notice
+    # renumbers every chip after it onto the wrong recall.
+    d = suppliers()
+    sp = next(iter(d["specialities"].values()))
+    sp["suppliers"][0]["iss"] = [99]
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "indexes the issues array BY POSITION"
+
+
+@case("a supplier covering a product type the dropdown cannot offer")
+def _(tmp):
+    d = suppliers()
+    sp = next(iter(d["specialities"].values()))
+    sp["suppliers"][0]["t"] = ["notatype"]
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "not in this speciality's `types` map"
+
+
+@case("a supplier set for a speciality the Hub dropdown does not have")
+def _(tmp):
+    d = suppliers()
+    d["specialities"]["notaspeciality"] = d["specialities"].pop(next(iter(d["specialities"])))
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "not a speciality the Hub's dropdown can select"
+
+
+@case("supplier sets shipped without the sourcing rule they were built under")
+def _(tmp):
+    d = suppliers()
+    d["sourceRule"] = ""
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "states no sourceRule"
+
+
 @case("an empty compare feed")
 def _(tmp):
     d = issues()
@@ -452,10 +507,18 @@ def concurrency_cases():
 
 def main():
     # Snapshot every file a case might touch, so the repo is left untouched.
+    #
+    # This list used to be hand-maintained, and on 05/08/2026 the first new data
+    # file in months (compare-suppliers.json) was not on it. Its cases mutated
+    # the real file, restore() skipped it, and the damage ACCUMULATED across
+    # cases until the gate failed on data nobody had knowingly edited — and
+    # because the file was still untracked, `git checkout` could not undo it
+    # either. So the watch list is now derived: every JSON file in data/ is
+    # snapshotted, whether or not anyone remembered to add it.
     tmp = tempfile.mkdtemp()
-    watched = FILES + ["data/trust-map.json", "data/contacts-optout.json",
-                       "data/products.json", "data/compare-issues.json",
-                       "data/suppressed-notices.json"]
+    watched = FILES + sorted(
+        os.path.join("data", n) for n in os.listdir("data") if n.endswith(".json"))
+    watched = list(dict.fromkeys(watched))          # de-dupe, keep order
     for f in watched:
         if os.path.exists(f):
             shutil.copy(f, os.path.join(tmp, f.replace("/", "_")))
