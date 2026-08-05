@@ -11,7 +11,8 @@ incident, replayed from git history rather than mocked up.
 Exit 0 = the gate holds. Exit 1 = the gate has a hole; do not trust a green
 verify.py until this passes again.
 """
-import json, os, shutil, subprocess, sys, tempfile
+import concurrent.futures as cf
+import json, os, re, shutil, subprocess, sys, tempfile
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 os.chdir(REPO)
@@ -410,6 +411,45 @@ def link_check_cases():
     return failures
 
 
+def concurrency_cases():
+    """The gate must survive being run twice at once.
+
+    On 05/08/2026 the JavaScript check wrote to a hardcoded /tmp/_verify_js.js.
+    Two simultaneous runs overwrote each other's script, and the loser got a
+    SYNTAX ERROR reported against an app/*.js file that parses perfectly. A false
+    FAIL is not a harmless false alarm here: it blocks a push, and the refresh
+    workflows commit unattended, so the data stops moving for a reason that is
+    not real. Concurrent runs are normal — CI, the pre-push hook, two refresh
+    workflows, and more than one Claude session.
+    """
+    failures = 0
+
+    # Guard the specific regression: no shared, predictable temp path.
+    # Comments are stripped first — the fix documents the old path by name, and a
+    # guard that trips on its own explanation is a guard someone deletes.
+    src = "\n".join(l for l in open("verify.py").read().split("\n")
+                    if not l.lstrip().startswith("#"))
+    if re.search(r'["\']/tmp/_?[A-Za-z0-9_]+\.js["\']', src):
+        print("HOLE  the JS check writes to a hardcoded shared temp path again"); failures += 1
+    else:
+        print("ok    the JS check uses a private temp file, not a shared path")
+
+    # And prove it: four gates at once must all agree, with no JS failures.
+    with cf.ThreadPoolExecutor(max_workers=4) as pool:
+        results = list(pool.map(lambda _: gate(), range(4)))
+    codes = {rc for rc, _ in results}
+    js_fail = [out for _, out in results if "does not parse" in out]
+    if js_fail:
+        print("HOLE  concurrent runs produced a bogus JS parse failure:\n%s"
+              % js_fail[0][:400]); failures += 1
+    elif len(codes) != 1:
+        print("HOLE  concurrent runs disagreed on the exit code: %s" % codes); failures += 1
+    else:
+        print("ok    four concurrent gate runs agree, with no false JS failure")
+
+    return failures
+
+
 def main():
     # Snapshot every file a case might touch, so the repo is left untouched.
     tmp = tempfile.mkdtemp()
@@ -450,13 +490,14 @@ def main():
 
     restore()
     failures += link_check_cases()
+    failures += concurrency_cases()
 
     rc, out = gate()
     if rc != 0:
         print("\nWARNING: the repo did not restore cleanly — check git status.")
         failures += 1
     print()
-    print("GATE HOLDS — %d case(s)." % (len(CASES) + 3) if not failures
+    print("GATE HOLDS — %d case(s)." % (len(CASES) + 5) if not failures
           else "GATE HAS %d HOLE(S) — fix verify.py before trusting it." % failures)
     return 1 if failures else 0
 

@@ -52,7 +52,7 @@ Exit codes
     1  FAILED — do not push until every FAIL is resolved
 """
 
-import json, os, re, subprocess, sys, datetime, shutil, time
+import json, os, re, subprocess, sys, datetime, shutil, tempfile, time
 from urllib.request import Request, urlopen
 
 DATA = "data"
@@ -433,9 +433,32 @@ def check_js():
         else:
             script = ("try{new Function(read(%r));print('OK');}"
                       "catch(e){print('ERR '+e);}" % os.path.abspath(path))
-            tmp = "/tmp/_verify_js.js"
-            open(tmp, "w").write(script)
-            r = subprocess.run([JSC, tmp], capture_output=True, text=True, timeout=60)
+            # A PRIVATE temp file, per check, always cleaned up.
+            #
+            # This used to be a hardcoded "/tmp/_verify_js.js". Two runs at the
+            # same moment overwrote each other's script, and whichever process
+            # got there second handed jsc a half-written or foreign file — which
+            # comes back as a SYNTAX ERROR against whatever app/*.js was being
+            # checked at the time. That is a FALSE FAIL, and a false FAIL blocks
+            # a push: the refresh workflows commit unattended, so the data simply
+            # stops moving and the reason on screen is a parse error in a file
+            # that parses perfectly.
+            #
+            # Not theoretical. On 05/08/2026 a clean clone reported
+            # app/supplier-search.js and app/whos-who.js as not parsing, while a
+            # second run seconds later passed; a Claude session was running
+            # verify.py concurrently. Concurrent runs are now the norm here — CI,
+            # the pre-push hook, two refresh workflows, and more than one session.
+            fd, tmp = tempfile.mkstemp(prefix="verify_js_", suffix=".js")
+            try:
+                with os.fdopen(fd, "w") as f:
+                    f.write(script)
+                r = subprocess.run([JSC, tmp], capture_output=True, text=True, timeout=60)
+            finally:
+                try:
+                    os.unlink(tmp)
+                except OSError:
+                    pass
             out = (r.stdout or "").strip()
             ok, err = out.startswith("OK"), out
         if not ok:
