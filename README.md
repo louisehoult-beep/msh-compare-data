@@ -97,6 +97,48 @@ at Teleflex's and Convatec's notices on a paying page. Always re-point `iss`,
 and fix the baked fallback copy of the item too, so no copy of a wrong fact
 survives.
 
+## Dates on the tab: the `dates` field (added 05/08/2026)
+
+Until 05/08/2026 every return deadline and resolution date lived only inside the
+notice's summary prose. A rep scanning the Compare tab could not see that a
+return deadline was two days away - all eight dates on the page had to be dug
+out of body text. Dates are now a field, so the page can show and count down to
+them:
+
+```json
+"dates": [
+  {"kind": "deadline", "on": "2026-08-07", "what": "Rocialle stocked products to be returned by", "note": "use reason code 7"},
+  {"kind": "resolve",  "on": "2026-10-31", "what": "Supply issue anticipated resolved by"}
+]
+```
+
+- `kind` is one of **`deadline`** (the trust must act by this date - counts down,
+  turns red inside 7 days), **`resolve`** (the supplier hopes to be back - amber,
+  never red) or **`resolved`** (already closed - grey). `verify.py` fails on any
+  other value, because an unknown kind would fall through to resolution styling
+  and quietly demote a deadline.
+- `on` is plain ISO `YYYY-MM-DD`. The page does arithmetic on this string.
+- **The date is always printed next to the countdown, never replaced by it.** The
+  countdown is derived; a reader must be able to check it against the notice.
+- A `resolve` date in the past **warns**: either the notice closed (change `kind`
+  to `resolved`) or it slipped and needs re-reading. A `resolved` date in the
+  future **fails**.
+
+## Standing clusters: the `clusters` key (added 05/08/2026)
+
+Some notices are one story wearing several ICN numbers. The chlorhexidine /
+ChloraPrep thread is eight notices across two specialities and owns the two
+nearest deadlines in the whole feed, so splitting it across the speciality
+dropdown buried it. A cluster is pinned **above** the speciality picker and is
+shown whatever the rep has selected.
+
+A cluster holds **no facts of its own** - only `urls` pointing at items already
+in the feed, matched by URL at render time. If an item is removed, its row
+disappears with it, so a cluster cannot drift from its sources. Every cluster
+must carry a `rule` saying what put a notice in it; `verify.py` fails without
+one, fails on a URL that is not in the feed, and fails if the rule quotes a
+count ("eight notices") that no longer matches what is pinned.
+
 ## Sources
 - MHRA medical safety alerts - official GOV.UK search API (FSN round-up detail
   pages are fetched so keyword matching sees the actual notices).
