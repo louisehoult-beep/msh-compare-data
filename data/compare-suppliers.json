@@ -1,0 +1,255 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-D21869855",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "note": "Researched supplier sets for the Compare tab, one per speciality. HUMAN-CURATED — no automation writes this file. Until 05/08/2026 these lived hard-coded inside app/comptab.js, which meant adding a speciality was a code change to a file that also holds the tab's rendering; there were two, and eleven specialities carried notices. Moving them here makes growth a data edit that verify.py can gate. app/comptab.js still holds vascular and continence as a baked fallback so the tab is never empty if this file cannot be fetched; anything here overrides it.",
+ "sourceRule": "Every framework name, its dates and its supplier list come from that framework's own contract launch brief on supplychain.nhs.uk, fetched directly. Brand names come from the NHS Supply Chain online catalogue entry for the supplier's own NPC codes — the procurement record, not the supplier's marketing. Nothing here is inferred from a trade summary or a comparison table.",
+ "verifiedOn": "2026-08-05",
+ "specialities": {
+  "bloodcoll": {
+   "label": "Blood collection / phlebotomy",
+   "route": [
+    {
+     "name": "NHS Supply Chain — Blood Collection Devices (1 lot, 19 suppliers, 9 of them new)",
+     "dates": "13/10/2025 – 12/10/2027 (24-month extension option)",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-collection-devices/"
+    }
+   ],
+   "routeNote": "One lot covering the whole category. It replaced and combined the former Blood Collection Systems and Blood Lancets framework and the Blood Culture Collection Systems framework, so a trust's incumbent may sit on it under a different arrangement than the one they remember. Blood collection is nested under Vascular access in the Hub's speciality list because the same accounts touch both — but the buyer is usually pathology or phlebotomy, not the vascular access team.",
+   "types": {
+    "tube": "Collection tubes & systems",
+    "set": "Winged / safety collection sets",
+    "adapt": "Adaptors & tube holders",
+    "lance": "Lancets & capillary"
+   },
+   "suppliers": [
+    {
+     "co": "Becton Dickinson U.K.",
+     "brands": "BD Vacutainer",
+     "t": [
+      "tube",
+      "set",
+      "adapt"
+     ],
+     "url": "https://www.bd.com/en-uk",
+     "note": "Incumbent across most of the category. KFK036, its multi-sampling adaptor, is on Protect Demand Management — see live issues.",
+     "iss": [
+      0
+     ]
+    },
+    {
+     "co": "Greiner Bio-One",
+     "brands": "Vacuette",
+     "t": [
+      "tube",
+      "set",
+      "adapt"
+     ],
+     "url": "https://www.gbo.com/",
+     "note": "KFK232 Luer multisampling adaptor and the Vacuette Quickshield safety tube holder (450230). Named in ICN 3385 as an alternative to BD's KFK036.",
+     "iss": [
+      0
+     ]
+    },
+    {
+     "co": "Sarstedt",
+     "brands": "S-Monovette",
+     "t": [
+      "tube",
+      "adapt"
+     ],
+     "url": "https://www.sarstedt.com/en/products/diagnostic/s-monovette/",
+     "note": "Not a like-for-like swap: Sarstedt's own page describes S-Monovette drawing by aspiration (\"the plunger rod is gently pulled\") as well as by vacuum, so moving to it changes technique and training, not just a code. Holds four of the seven codes in the adaptor section (KCM096, KCM114, KCM128, FNG85313).",
+     "iss": []
+    },
+    {
+     "co": "Crest Medical",
+     "brands": "SOL-M · SOL-CARE",
+     "t": [
+      "adapt",
+      "set"
+     ],
+     "url": "https://www.crestmedical.co.uk/",
+     "note": "FNG85289 multi-sampling Luer adaptor holder, named in ICN 3385 as an alternative; also the SOL-CARE single-use safety tube holder (BCA019).",
+     "iss": [
+      0
+     ]
+    },
+    {
+     "co": "GBUK",
+     "brands": "Prosum",
+     "t": [
+      "adapt"
+     ],
+     "url": "https://gbukgroup.com/",
+     "note": "KFK978 sampling Luer adaptor, named in ICN 3385 as an alternative, plus the Prosum sterile sampling cap holder (BCH002).",
+     "iss": [
+      0
+     ]
+    },
+    {
+     "co": "Owen Mumford",
+     "brands": "Unistik",
+     "t": [
+      "lance"
+     ],
+     "url": "https://www.owenmumford.com/",
+     "note": "Awarded on the framework; lancets and capillary sampling rather than venous tubes.",
+     "iss": []
+    },
+    {
+     "co": "Nipro Medical Europe",
+     "brands": "Nipro",
+     "t": [
+      "tube",
+      "set"
+     ],
+     "url": "https://www.nipro-group.com/en/products/medical-devices",
+     "note": "One of the nine suppliers new to this framework at the 2025 award.",
+     "iss": []
+    },
+    {
+     "co": "Vygon (UK)",
+     "brands": "Vygon",
+     "t": [
+      "set"
+     ],
+     "url": "https://vygon.co.uk/",
+     "note": "Awarded on the framework; also on both vascular access frameworks, so often already a known name in the account.",
+     "iss": []
+    }
+   ]
+  },
+  "cardiology": {
+   "label": "Cardiology",
+   "route": [
+    {
+     "name": "NHS Supply Chain — Electrodes, Ultrasound Gels, Defibrillation and Related Consumables (9 lots, 37 suppliers). Lot 8 is Defibrillation Electrodes and Pads",
+     "dates": "01/02/2024 – 31/01/2028 (48 months incl. a 24-month extension)",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/"
+    }
+   ],
+   "routeNote": "Nine lots: ultrasound gels, adult ECG electrodes, paediatric/neonatal ECG electrodes, neurology electrodes and needles, pre-wired electrodes, foetal scalp electrodes, abdominal CTG belts, defibrillation electrodes and pads, and related consumables. Defibrillation pads are Lot 8. The set below is the defibrillation and ECG electrode players, not all 37 awarded suppliers.",
+   "types": {
+    "defib": "Defibrillation electrodes & pads",
+    "ecg": "ECG electrodes",
+    "gel": "Ultrasound gels",
+    "ctg": "Foetal / CTG"
+   },
+   "suppliers": [
+    {
+     "co": "Zoll Medical UK",
+     "brands": "OneStep · CPR-D-padz · ProPadz",
+     "t": [
+      "defib"
+     ],
+     "url": "https://www.zoll.com/uk",
+     "note": "Own-brand pads for its own defibrillators: FBH85027 adult and FBH85028 paediatric multifunction electrodes for AED Plus / R Series / X Series, FDJ1736 and FDJ1737 OneStep. The direct alternative wherever a trust runs Zoll and buys third-party pads.",
+     "iss": [
+      0
+     ]
+    },
+    {
+     "co": "Fannin UK",
+     "brands": "Skintact (Leonhard Lang)",
+     "t": [
+      "defib",
+      "ecg"
+     ],
+     "url": "https://www.fannin.eu/",
+     "note": "Distributes Leonhard Lang's Skintact range. FDK317 and FDK049 carry an open field safety notice — see live issues. Not a recall.",
+     "iss": [
+      0
+     ]
+    },
+    {
+     "co": "Stryker UK",
+     "brands": "Lifepak",
+     "t": [
+      "defib"
+     ],
+     "url": "https://www.stryker.com/gb/en/emergency-care.html",
+     "note": "Lifepak edge adult pads (FDJ3862) and defibrillation device batteries. The other large installed base alongside Zoll.",
+     "iss": []
+    },
+    {
+     "co": "ConMed UK",
+     "brands": "PadPro",
+     "t": [
+      "defib",
+      "ecg"
+     ],
+     "url": "https://www.conmed.com/en/",
+     "note": "PadPro adult transparent pads with a Zoll connector (FDJ85057) — a like-for-like route for a Zoll fleet.",
+     "iss": [
+      0
+     ]
+    },
+    {
+     "co": "Surgical Holdings",
+     "brands": "Telic Desfi Dormo",
+     "t": [
+      "defib"
+     ],
+     "url": "https://www.surgicalholdings.co.uk/",
+     "note": "Distributes Telic. The widest connector coverage on the catalogue — separate codes for Zoll-M&B, Schiller, Philips/HP, Physio-Control/Medtronic-Mindray and GE fits, adult and paediatric.",
+     "iss": [
+      0
+     ]
+    },
+    {
+     "co": "Ambu",
+     "brands": "Ambu",
+     "t": [
+      "ecg",
+      "defib"
+     ],
+     "url": "https://www.ambu.co.uk/",
+     "note": "Awarded on the framework; strongest in ECG electrodes.",
+     "iss": []
+    },
+    {
+     "co": "Philips Electronics UK",
+     "brands": "Philips",
+     "t": [
+      "defib",
+      "ecg"
+     ],
+     "url": "https://www.philips.co.uk/healthcare",
+     "note": "Own-brand pads for its own defibrillator estate.",
+     "iss": []
+    },
+    {
+     "co": "NISSHA Medical Technologies",
+     "brands": "Nissha",
+     "t": [
+      "ecg",
+      "defib"
+     ],
+     "url": "https://www.nisshamedical.com/",
+     "note": "Awarded on the framework; contract manufacturer as well as own-brand, so often behind another label.",
+     "iss": []
+    },
+    {
+     "co": "Mindray UK",
+     "brands": "Mindray",
+     "t": [
+      "defib",
+      "ecg"
+     ],
+     "url": "https://www.mindray.com/uk/",
+     "note": "Own-brand consumables for its own monitoring and defibrillator estate.",
+     "iss": []
+    }
+   ]
+  }
+ }
+}
