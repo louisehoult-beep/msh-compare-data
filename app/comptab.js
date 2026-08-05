@@ -274,7 +274,26 @@ function render(){
   }
   var route='<div style="background:#fff;border:1px solid #e3e7ec;border-left:3px solid #a37519;border-radius:0 10px 10px 0;padding:12px 15px;margin:0 0 14px;">';
   route+='<div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#a37519;font-weight:700;margin-bottom:6px;">Route to market &mdash; live framework</div>';
-  S.route.forEach(function(r){route+='<p style="font-size:13px;margin:0 0 5px;"><b>'+esc(r.name)+'</b> &middot; '+esc(r.dates)+' &middot; <a href="'+r.url+'" target="_blank" rel="noopener" style="color:#a37519;">framework brief &rarr;</a></p>';});
+  /* The expiry used to sit inside a prose date range, so a rep could read
+     "03/10/2022 – 30/09/2026" and not register that it runs out in eight weeks.
+     It is now its own line with a countdown, coloured by how close it is: a
+     framework about to end changes what you can say in a tender conversation,
+     and it is the single most perishable fact on this panel. */
+  S.route.forEach(function(r){
+    route+='<p style="font-size:13px;margin:0 0 5px;"><b>'+esc(r.name)+'</b> &middot; '+esc(r.dates)+' &middot; <a href="'+r.url+'" target="_blank" rel="noopener" style="color:#a37519;">framework brief &rarr;</a></p>';
+    var g=dayGap(r.endsOn);
+    if(g===null){return;}
+    var tone=g<0?['#f2f2f2','#dcdcdc','#5b6675']
+            :g<=90?['#fdecea','#f3bdb6','#b3261e']
+            :g<=180?['#fbf3df','#e8d5a8','#7a5b14']
+            :['#eef4ef','#cfe0d4','#2e5d43'];
+    var word=g<0?'EXPIRED '+ukDate(r.endsOn)
+            :'Framework ends '+ukDate(r.endsOn)+' &middot; '+
+              (g<=365?'in '+g+' day'+(g===1?'':'s'):'in '+Math.round(g/30.4)+' months');
+    route+='<div style="display:inline-block;background:'+tone[0]+';border:1px solid '+tone[1]+';color:'+tone[2]+
+           ';border-radius:8px;padding:4px 10px;margin:2px 0 4px;font-size:12px;font-weight:600;">'+word+
+           (g>=0&&g<=180?' &mdash; check for a successor before quoting it':'')+'</div>';
+  });
   route+='<p style="font-size:12px;color:#5b6675;margin:4px 0 0;">'+esc(S.routeNote)+'</p></div>';
   document.getElementById('cp-route').innerHTML=route;
   var rows='';
