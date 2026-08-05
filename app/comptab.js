@@ -221,7 +221,18 @@ function render(){
     var fo='<div style="background:#fff;border:1px solid #e3e7ec;border-left:3px solid #a37519;border-radius:0 10px 10px 0;padding:12px 15px;margin:0 0 14px;">';
     fo+='<div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#a37519;font-weight:700;margin-bottom:6px;">Live notices only &mdash; no supplier comparison yet</div>';
     fo+='<p style="font-size:13px;margin:0 0 5px;">We are tracking recalls, delistings and supply gaps in <b>'+esc(S.label)+'</b>, but the framework and competitor set for it have not been researched yet, so there is no comparison table below &mdash; only the notices themselves.</p>';
-    fo+='<p style="font-size:12px;color:#5b6675;margin:4px 0 0;">Vascular access and continence and urology are the two with a full supplier comparison. If this speciality is one you sell into, say so and it can be built out.</p></div>';
+    /* This sentence used to name the two researched specialities by hand. The
+       moment a third is built out it would have been a lie on a paying page, and
+       the whole direction of travel is more specialities, not fewer — so it is
+       read off the data instead. */
+    var built=[];
+    for(var bk in D){if((D[bk].suppliers||[]).length){built.push(D[bk].label||bk);}}
+    built.sort(function(a,b){return a.localeCompare(b);});
+    var WORD=['no','one','two','three','four','five','six','seven','eight','nine','ten'];
+    var builtTxt=built.length?(built.length===1?built[0]+' is the one speciality with':
+      built.slice(0,-1).join(', ')+' and '+built[built.length-1]+' are the '+
+      (WORD[built.length]||built.length)+' with'):'No speciality yet has';
+    fo+='<p style="font-size:12px;color:#5b6675;margin:4px 0 0;">'+esc(builtTxt)+' a full supplier comparison. If this speciality is one you sell into, say so and it can be built out.</p></div>';
     document.getElementById('cp-route').innerHTML=fo;
     document.getElementById('cp-table').innerHTML='';
     renderIssues(S);
