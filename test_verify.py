@@ -395,6 +395,27 @@ def _(tmp):
     return "states no sourceRule"
 
 
+@case("a framework whose countdown date drifts from its printed date range")
+def _(tmp):
+    # Caught a real typo on 05/08/2026: endsOn said 15/06/2027 while the range
+    # said 19/06/2027. The page counts down to endsOn, so a drifted field means
+    # the tab states an expiry with total confidence that the source contradicts.
+    d = suppliers()
+    sp = next(iter(d["specialities"].values()))
+    sp["route"][0]["endsOn"] = "2099-01-01"
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "in its date range but endsOn is"
+
+
+@case("a framework with no expiry the tab can count down to")
+def _(tmp):
+    d = suppliers()
+    sp = next(iter(d["specialities"].values()))
+    sp["route"][0].pop("endsOn", None)
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "has no endsOn"
+
+
 @case("an empty compare feed")
 def _(tmp):
     d = issues()

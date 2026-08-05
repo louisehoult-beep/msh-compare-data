@@ -733,8 +733,23 @@ def check_suppliers(sup, store):
             u = (r.get("url") or "")
             if u and not u.startswith("https://"):
                 FAIL("suppliers", "%s: framework source %r is not HTTPS." % (who, u[:60]))
-            # Dates read "DD/MM/YYYY – DD/MM/YYYY"; the end date is the one that bites.
+            # The expiry is shown on the tab with a countdown, so it is a real
+            # field, not something re-parsed out of prose at render time. It is
+            # cross-checked against the prose here: if someone updates the date
+            # range and forgets the field, the page counts down to the old one
+            # and says so with total confidence.
             ends = re.findall(r"\b(\d{2})/(\d{2})/(\d{4})\b", r.get("dates") or "")
+            if not (r.get("endsOn") or "").strip():
+                FAIL("suppliers", "%s: framework %r has no endsOn, so the tab cannot show when it "
+                                  "runs out — the most perishable fact on the panel."
+                                  % (who, (r.get("name") or "")[:50]))
+            elif ends:
+                d2, m2, y2 = ends[-1]
+                if r["endsOn"] != "%s-%s-%s" % (y2, m2, d2):
+                    FAIL("suppliers", "%s: framework %r says it ends %s in its date range but "
+                                      "endsOn is %r. The page counts down to endsOn."
+                                      % (who, (r.get("name") or "")[:40],
+                                         "/".join((d2, m2, y2)), r["endsOn"]))
             if ends:
                 d, m, y = ends[-1]
                 try:
