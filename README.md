@@ -67,6 +67,36 @@ a rep" tactical line - is **human-curated intelligence and must never be
 written by automation**. To add or edit a tactical line, edit
 `data/compare-issues.json` here on GitHub and commit.
 
+## Dead source links (rule set by Lou, 05/08/2026)
+
+A source URL that 404s is **member-facing damage**, not cosmetic: a paying
+member clicking through from Med Sales Tools (1109) lands on a not-found page.
+When a link in the feed dies:
+
+1. **Find the current notice URL first.** NHS Supply Chain re-slugs and
+   supersedes notices, so a 404 often has a live successor. Crawl the ICN index
+   (`/product-information/customer-notices/`, ~15 pages) and run NHSSC's own
+   site search. Google's index is stale here and will hand you back the dead
+   URL - check any candidate returns 200 yourself.
+2. **If it is no longer live on NHSSC anywhere, drop the item.** Do not leave a
+   dead link in front of members, and do not keep an item whose only source has
+   gone. Log the removal and the reason under the top-level `removed` key so the
+   store stays auditable rather than just getting shorter.
+3. **Only fall back to another primary source if one genuinely exists.** MHRA
+   (gov.uk) carries field safety notices, so an FSN may survive there - but a
+   *delisting* is a supply-chain matter with no MHRA equivalent. Never
+   substitute trade press for an organisation's own record.
+
+### Deleting a feed item? Re-point `app/comptab.js` in the same commit
+
+`comptab.js` line 15 **replaces** the baked issues array with the feed, and each
+supplier's warning chips (`iss`) index into that array **by position**.
+Appending is safe. **Deleting renumbers everything after it.** On 05/08/2026,
+removing two Continence items would have left Coloplast's `iss:[0,2]` pointing
+at Teleflex's and Convatec's notices on a paying page. Always re-point `iss`,
+and fix the baked fallback copy of the item too, so no copy of a wrong fact
+survives.
+
 ## Sources
 - MHRA medical safety alerts - official GOV.UK search API (FSN round-up detail
   pages are fetched so keyword matching sees the actual notices).
