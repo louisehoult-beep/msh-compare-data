@@ -102,11 +102,20 @@ SUPPRESS_PATH = pathlib.Path("data/suppressed-notices.json")
 # tab offering members a speciality called "Bloodtx" instead of "Blood and
 # transfusion". Two ids are local to this feed and not canonical specialities:
 # 'skin-prep' (a keyword set of Lou's, deliberately narrower than 'infection')
-# and 'product-match' (a bucket for notices matched by tracked product, not by
-# speciality at all).
+# and 'unsorted', which is where a medical notice lands when our vocabulary has
+# no term for it — visible and waiting for a human, rather than discarded.
+#
+# 'product-match' ("Matched to a tracked product") was RETIRED on 05/08/2026 and
+# must not come back. It sorted notices by whether they named a product on the
+# Hub's own seed list, which made an incomplete internal list into an admission
+# test: it caught notices before speciality assignment ran, so four chlorhexidine
+# recalls sat outside Skin prep, and anything we did not happen to track was
+# filed by what we know rather than by what it is. A tracked-product hit is now
+# only a supplier hint. The test for the feed is Lou's: is the product medical in
+# nature and sold into the NHS?
 PRODUCTS_PATH = pathlib.Path("data/products.json")
 LOCAL_LABELS = {"skin-prep": "Skin prep and antisepsis",
-                "product-match": "Matched to a tracked product"}
+                "unsorted": "Not yet sorted by speciality"}
 
 
 def spec_labels():
@@ -188,6 +197,24 @@ PRODUCT_STOP = {"safety", "medical", "surgical", "system", "device", "sterile",
 
 SUP_STOP = {"medical", "healthcare", "health", "group", "limited", "systems",
     "international", "industries", "surgical", "diagnostics", "pharma", "professional"}
+
+# The admission test, set by Lou 05/08/2026: a notice belongs in this feed if its
+# product is MEDICAL IN NATURE AND SOLD INTO THE NHS. NHS Supply Chain buys far
+# more than medical devices, so these are the lines that are genuinely not a
+# medical product, whoever supplies them.
+#
+# Deliberately TIGHT. Everything clinical-adjacent stays: cleaning and
+# disinfection, waste and sharps, textiles and uniforms, patient furniture. A rep
+# sells into infection prevention, so a wipe is in scope; a bottle of still water
+# is not. Widen this only with a real example in front of you — an over-broad
+# term here silently deletes notices, which is the failure this whole change
+# exists to stop.
+NON_MEDICAL = (
+    "cold beverages", "hot beverages", "beverage", "bottled water", "drinking water",
+    "food group", "foodservice", "catering", "confectionery", "biscuits",
+    "stationery", "office supplies", "printer", "toner", "photocopier",
+    "car park", "signage", "furniture removal",
+)
 
 def product_tokens():
     """(product_token, supplier_name, supplier_name_tokens) — a match requires the
@@ -276,7 +303,7 @@ def main():
     ptoks = product_tokens()
     log.append(f"tracked-product tokens: {len(ptoks)}")
     labels = spec_labels()
-    for spec in list(KEYWORDS.keys()) + ["product-match"]:
+    for spec in list(KEYWORDS.keys()) + ["unsorted"]:
         store["specialities"].setdefault(spec, {"label": label_for(spec, labels), "issues": []})
     # A label is derived, never curated, so it is safe to correct in place. The
     # Compare tab reads it to name the speciality in its dropdown.
@@ -295,6 +322,7 @@ def main():
     stored_before = {i.get("url", "").rstrip("/")
                      for b in store["specialities"].values() for i in b.get("issues", [])}
     removed = []
+    skipped_nonmedical = []
     for sp, blk in store["specialities"].items():
         keep = []
         for it in blk.get("issues", []):
@@ -330,26 +358,35 @@ def main():
             # beside ROUNDUP_TITLE: extracting one notice from a round-up is a
             # human judgement, and a match on a word buried in a list is not one.
             continue
+        # NOT MEDICAL. The one real exclusion, and it is the ONLY admission test
+        # (Lou, 05/08/2026): a notice is in if its product is medical in nature
+        # and sold into the NHS. NHS Supply Chain also carries catering, office
+        # and facilities lines — "Hunts Food Group Ltd Cold Beverages Water
+        # Natural Still AAC85005" is a real ICN and is bottled water. Those are
+        # sold into the NHS and are not medical, so they are the only things
+        # dropped here. Keep this list TIGHT: anything clinical-adjacent
+        # (cleaning, disinfection, waste, textiles) stays in, because infection
+        # prevention is a speciality a rep sells into.
+        if any(w in hay_plain for w in NON_MEDICAL):
+            skipped_nonmedical.append(c["title"][:80])
+            continue
+
+        # A tracked-product hit is a SUPPLIER HINT, not a destination.
+        #
+        # Until 05/08/2026 it was a destination: a notice that named a product on
+        # the Hub's own seed list was diverted into a "Matched to a tracked
+        # product" bucket BEFORE speciality assignment ever ran. That is why four
+        # of the feed's chlorhexidine recalls sat outside Skin prep — the bucket
+        # caught them first. Worse, it made the Hub's own product list an
+        # admission test, and that list is nowhere near complete, so it sorted
+        # notices by what we happen to track rather than by what they are.
+        # Now it only prefills `co`, and every notice goes on to be filed by
+        # speciality like any other.
         hitco = ""
         for t, sup, stoks in ptoks:
             if word_hit(t, hay_plain, hay_dehyph) and any(word_hit(st, hay_plain, hay_dehyph) for st in stoks):
                 hitco = sup; break
-        if hitco:
-            item = {
-                "id": re.sub(r"[^a-z0-9]+", "-", c["url"].lower())[-60:].strip("-"),
-                "d": month_label(c["date"]) if c["date"] else month_label(datetime.date.today().isoformat()),
-                "co": hitco, "coAuto": True,
-                "p": c["title"][:160],
-                "s": f"Auto-detected from {c['src']} - names a tracked product. Open the source and verify before use.",
-                "use": "",
-                "url": c["url"],
-                "autoDetected": True,
-                "firstSeen": datetime.date.today().isoformat(),
-            }
-            store["specialities"]["product-match"]["issues"].append(item)
-            existing_urls.add(c["url"].rstrip("/"))
-            added.append(f"product-match [{hitco}]: {c['title'][:80]}")
-            continue
+
         # Original keyword sets first (matched on the full alert text), then the
         # canonical vocabulary as a fallback for the other 30 specialities.
         spec = next((s for s, kws in KEYWORDS.items()
@@ -358,25 +395,36 @@ def main():
         if not spec:
             spec = canonical_speciality(c)
             via = "canonical"
-        if spec:
-            store["specialities"].setdefault(
-                spec, {"label": label_for(spec, labels), "issues": []})
-            item = {
-                "id": re.sub(r"[^a-z0-9]+", "-", c["url"].lower())[-60:].strip("-"),
-                "d": month_label(c["date"]) if c["date"] else month_label(datetime.date.today().isoformat()),
-                "co": "",  # unverified - human fills on review
-                "p": c["title"][:160],
-                "s": f"Auto-detected from {c['src']} - open the source for details and verify before use.",
-                "use": "",  # SACRED field: only ever written by a human
-                "url": c["url"],
-                "autoDetected": True,
-                "firstSeen": datetime.date.today().isoformat(),
-                # The rule this item was filed under, so a reader can judge it.
-                "specVia": via,
-            }
-            store["specialities"][spec]["issues"].append(item)
-            existing_urls.add(c["url"].rstrip("/"))
-            added.append(f"{spec} [{via}]: {c['title'][:80]}")
+        if not spec:
+            # NOTHING MEDICAL IS DROPPED FOR WANT OF A LABEL.
+            # This used to be `if spec:` — no speciality meant the notice was
+            # discarded silently. A bone cement recall, a microscope slide
+            # shortage and a surgeons' glove update were all live on the ICN
+            # index and none reached the feed, because our vocabulary happened
+            # not to have a term for them. Filing beats forgetting: it lands
+            # here, visibly unsorted, and a human moves it.
+            spec, via = "unsorted", "unsorted"
+        store["specialities"].setdefault(
+            spec, {"label": label_for(spec, labels), "issues": []})
+        item = {
+            "id": re.sub(r"[^a-z0-9]+", "-", c["url"].lower())[-60:].strip("-"),
+            "d": month_label(c["date"]) if c["date"] else month_label(datetime.date.today().isoformat()),
+            # A tracked-product hit names the supplier with reasonable
+            # confidence; coAuto says it was machine-filled, not read off the
+            # notice, so a human still checks it.
+            "co": hitco, "coAuto": True if hitco else False,
+            "p": c["title"][:160],
+            "s": f"Auto-detected from {c['src']} - open the source for details and verify before use.",
+            "use": "",  # SACRED field: only ever written by a human
+            "url": c["url"],
+            "autoDetected": True,
+            "firstSeen": datetime.date.today().isoformat(),
+            # The rule this item was filed under, so a reader can judge it.
+            "specVia": via,
+        }
+        store["specialities"][spec]["issues"].append(item)
+        existing_urls.add(c["url"].rstrip("/"))
+        added.append(f"{spec} [{via}]: {c['title'][:80]}")
 
     today = datetime.date.today()
     store["lastChecked"] = today.isoformat()
@@ -389,6 +437,10 @@ def main():
     print(f"added {len(added)} new item(s)")
     for a in added:
         print("  +", a)
+    if skipped_nonmedical:
+        print(f"skipped {len(skipped_nonmedical)} notice(s) as not medical:")
+        for s in skipped_nonmedical:
+            print("  x", s)
     if removed:
         print(f"removed {len(removed)} suppressed item(s)")
         for r in removed:
