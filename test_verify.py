@@ -267,6 +267,74 @@ def _(tmp):
     return "filed twice"
 
 
+# --- dates and pinned clusters, added 05/08/2026 ---------------------------
+# Return and resolution dates moved out of the notice's prose and into a field
+# so the tab can count down to them. That makes them the first thing on the page
+# a rep will act on without opening the source, so each case below is a way the
+# countdown could confidently state something untrue.
+
+@case("a return deadline the page would count down to, in a format it cannot read")
+def _(tmp):
+    d = put_issue(issues(), "skin-prep", p="Return the stock",
+                  url="https://www.supplychain.nhs.uk/icn/return-me/",
+                  dates=[{"kind": "deadline", "on": "14/08/2026", "what": "Return by"}])
+    json.dump(d, open("data/compare-issues.json", "w"))
+    return "not a plain ISO"
+
+
+@case("a date of a kind the tab does not know how to colour")
+def _(tmp):
+    # 'deadline' is red and counts down; 'resolve' never is. An unknown kind
+    # would fall through to the resolution styling, quietly demoting a deadline.
+    d = put_issue(issues(), "skin-prep", p="Something happens",
+                  url="https://www.supplychain.nhs.uk/icn/unknown-kind/",
+                  dates=[{"kind": "return", "on": "2026-08-14", "what": "Return by"}])
+    json.dump(d, open("data/compare-issues.json", "w"))
+    return "unknown kind"
+
+
+@case("a notice marked resolved on a date that has not happened yet")
+def _(tmp):
+    d = put_issue(issues(), "vascular", p="Closed in advance",
+                  url="https://www.supplychain.nhs.uk/icn/resolved-in-future/",
+                  dates=[{"kind": "resolved", "on": "2099-01-01", "what": "Notice marked resolved"}])
+    json.dump(d, open("data/compare-issues.json", "w"))
+    return "a date in the future"
+
+
+@case("a pinned cluster pointing at a notice that is no longer in the feed")
+def _(tmp):
+    # The cluster holds no facts of its own, only pointers, so this is the one
+    # way it can go wrong: a notice is removed and the pinned panel keeps
+    # advertising it.
+    d = issues()
+    d["clusters"] = [{"id": "chlorhexidine", "title": "One running story",
+                      "rule": "Membership rule: every open chlorhexidine notice.",
+                      "urls": ["https://www.supplychain.nhs.uk/icn/deleted-yesterday/"]}]
+    json.dump(d, open("data/compare-issues.json", "w"))
+    return "not in the feed"
+
+
+@case("a pinned cluster whose stated count no longer matches what it pins")
+def _(tmp):
+    d = issues()
+    url = next(i["url"] for b in d["specialities"].values() for i in b["issues"])
+    d["clusters"] = [{"id": "chlorhexidine", "title": "One running story",
+                      "rule": "Membership rule: chlorhexidine notices. Eight notices, 8 notices.",
+                      "urls": [url]}]
+    json.dump(d, open("data/compare-issues.json", "w"))
+    return "in its membership rule but pins"
+
+
+@case("a pinned cluster that never says what put a notice in it")
+def _(tmp):
+    d = issues()
+    url = next(i["url"] for b in d["specialities"].values() for i in b["issues"])
+    d["clusters"] = [{"id": "chlorhexidine", "title": "One running story", "urls": [url]}]
+    json.dump(d, open("data/compare-issues.json", "w"))
+    return "states no membership rule"
+
+
 @case("an empty compare feed")
 def _(tmp):
     d = issues()
@@ -295,6 +363,51 @@ def _(tmp):
     d["_notice"]["terms"] = "https://example.com/terms/"
     json.dump(d, open("data/products.json", "w"), ensure_ascii=False, indent=1)
     return "drifted"
+
+
+def link_check_cases():
+    """The source-link check WARNS rather than fails, so it cannot be driven
+    through gate() like the cases above — a warning still exits 0, by design.
+    Exercised directly instead, with the network injected.
+
+    Three behaviours matter, and the third is the one that keeps the check
+    trustworthy: if NHS Supply Chain is down or throttling, EVERY source under it
+    looks dead at once. A check that cried wolf on that would be muted within a
+    week and would not have caught 05/08/2026 either.
+    """
+    import importlib
+    v = importlib.import_module("verify")
+    dead = "https://www.supplychain.nhs.uk/icn/gone/"
+    store = {"specialities": {"continence": {"label": "Continence / Urology", "issues": [
+        {"p": "A retired notice", "url": dead},
+        {"p": "A live notice", "url": "https://www.supplychain.nhs.uk/icn/alive/"}]}}}
+    results, failures = [], 0
+
+    def run(name, fetch, want_dead_warning, want_control_warning):
+        nonlocal failures
+        v.warns[:] = []
+        v.check_source_links(store, offline=False, fetch=fetch, pause=lambda s: None)
+        text = " ".join(m for _, m in v.warns).lower()
+        got_dead = "gone/" in text
+        # Match the abort message itself, not the phrase "control URL", which
+        # also appears in the normal dead-link summary line.
+        got_control = "could not run the source-link check" in text
+        if got_dead == want_dead_warning and got_control == want_control_warning:
+            print("ok    %s" % name)
+        else:
+            print("HOLE  %s — dead=%s (want %s), control=%s (want %s)"
+                  % (name, got_dead, want_dead_warning, got_control, want_control_warning))
+            failures += 1
+
+    run("a dead source link in the feed",
+        lambda u, timeout=15: 200 if u != dead else 404, True, False)
+    run("every source link live",
+        lambda u, timeout=15: 200, False, False)
+    run("the whole host throttling us — must not cry wolf",
+        lambda u, timeout=15: 503, False, True)
+
+    v.warns[:] = []
+    return failures
 
 
 def main():
@@ -336,12 +449,14 @@ def main():
             print("ok    %s" % name)
 
     restore()
+    failures += link_check_cases()
+
     rc, out = gate()
     if rc != 0:
         print("\nWARNING: the repo did not restore cleanly — check git status.")
         failures += 1
     print()
-    print("GATE HOLDS — %d case(s)." % len(CASES) if not failures
+    print("GATE HOLDS — %d case(s)." % (len(CASES) + 3) if not failures
           else "GATE HAS %d HOLE(S) — fix verify.py before trusting it." % failures)
     return 1 if failures else 0
 

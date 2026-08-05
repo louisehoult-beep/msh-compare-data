@@ -38,10 +38,13 @@ WHAT IT CHECKS
 5. JAVASCRIPT    every app/*.js parses. A syntax error here takes out the whole
                  Med Sales Tools page, not one panel.
 6. SHRINK        datasets may not silently collapse against what is committed.
+7. SOURCE LINKS  every citation in the Compare feed must still open. WARNS, never
+                 fails — see the note above check_source_links for why.
 
 Usage
     python3 verify.py            # full run, including the live privacy check
     python3 verify.py --offline  # skip network checks (still fails on logic)
+    python3 verify.py --no-links # skip only the source-link check
     python3 verify.py --json
 
 Exit codes
@@ -49,7 +52,7 @@ Exit codes
     1  FAILED — do not push until every FAIL is resolved
 """
 
-import json, os, re, subprocess, sys, datetime, shutil
+import json, os, re, subprocess, sys, datetime, shutil, time
 from urllib.request import Request, urlopen
 
 DATA = "data"
@@ -534,6 +537,73 @@ def check_compare(store, suppress, comptab_js):
             if not (it.get("d") or "").strip():
                 WARN("compare", "%s: %r carries no date label." % (sp, title[:60]))
 
+            # Return and resolution dates became a FIELD on 05/08/2026, so the
+            # Compare tab can count down to them instead of burying them in a
+            # paragraph. A countdown is a derived claim: if the field is wrong,
+            # the page tells a rep with total confidence that they have a week
+            # when the stock went back yesterday. So the field is gated.
+            for dt in (it.get("dates") or []):
+                if not isinstance(dt, dict):
+                    FAIL("compare", "%s: %r has a malformed entry in `dates` (%r)."
+                                    % (sp, title[:50], dt))
+                    continue
+                kind = dt.get("kind")
+                if kind not in ("deadline", "resolve", "resolved"):
+                    FAIL("compare", "%s: %r has a date of unknown kind %r. Use 'deadline' (the "
+                                    "trust must act by this date), 'resolve' (the supplier hopes "
+                                    "to be back) or 'resolved' (already closed) — the tab colours "
+                                    "them differently and must not guess."
+                                    % (sp, title[:50], kind))
+                on = as_date(dt.get("on"))
+                if not on or not re.match(r"^\d{4}-\d{2}-\d{2}$", str(dt.get("on") or "")):
+                    FAIL("compare", "%s: %r has a date %r that is not a plain ISO YYYY-MM-DD. "
+                                    "The page does the arithmetic on this string."
+                                    % (sp, title[:50], dt.get("on")))
+                    continue
+                if not (dt.get("what") or "").strip():
+                    WARN("compare", "%s: %r has a %s date with nothing saying what it is, so the "
+                                    "tab will show a bare countdown." % (sp, title[:50], kind))
+                # A resolution date in the past means the notice has either
+                # closed or slipped, and nobody has looked. Publishing "back in
+                # stock 3 weeks ago" next to a live supply gap is worse than
+                # publishing no date at all.
+                if kind == "resolve" and on < today():
+                    WARN("compare", "%s: %r says the supply issue resolves %s, which has passed. "
+                                    "Re-read the notice: either it closed and the kind should be "
+                                    "'resolved', or the date slipped and needs updating."
+                                    % (sp, title[:50], on.isoformat()))
+                if kind == "resolved" and on > today():
+                    FAIL("compare", "%s: %r is marked resolved on %s, a date in the future."
+                                    % (sp, title[:50], on.isoformat()))
+
+    # A cluster pins a group of notices above the speciality picker. It holds no
+    # facts of its own — only pointers — so the one way it can lie is by
+    # pointing at something that is no longer in the feed, or by claiming a
+    # count that no longer matches. Both are checked here rather than trusted.
+    for c in (store.get("clusters") or []):
+        cid = c.get("id") or "?"
+        if not (c.get("title") or "").strip():
+            FAIL("compare", "cluster %r has no title." % cid)
+        if not (c.get("rule") or "").strip():
+            FAIL("compare", "cluster %r states no membership rule. A pinned group that does not "
+                            "say what put a notice in it is a claim a reader cannot judge."
+                            % cid)
+        urls = c.get("urls") or []
+        if not urls:
+            FAIL("compare", "cluster %r pins no notices." % cid)
+        for u in urls:
+            if u.rstrip("/") not in seen_urls:
+                FAIL("compare", "cluster %r pins %r, which is not in the feed. Either the notice "
+                                "was removed and the cluster was not updated, or the URL is "
+                                "mistyped — either way the pinned panel is now wrong."
+                                % (cid, u[:70]))
+        # The rule text quotes a count. If the group grows and the sentence does
+        # not, the page states a number that is verifiably false on its own page.
+        m = re.search(r"\b(\d+)\s+notices\b", c.get("rule") or "")
+        if m and int(m.group(1)) != len(urls):
+            FAIL("compare", "cluster %r says %s notices in its membership rule but pins %d."
+                            % (cid, m.group(1), len(urls)))
+
     # Until 30/07/2026 comptab.js merged the feed with `if(D[k])`, so a speciality
     # without a hand-researched entry was silently dropped and 14 of 24 items were
     # in the data and invisible on the page. It now creates an entry for any
@@ -551,11 +621,25 @@ def check_compare(store, suppress, comptab_js):
 
     # A speciality that reaches the dropdown needs a name a rep would recognise.
     # Without one the tab offers "Bloodtx" instead of "Blood and transfusion".
+    #
+    # products.json SPECS is the authority, so it is asked first. Some real
+    # labels are simply the id capitalised — "cardiology" is "Cardiology",
+    # "respiratory" is "Respiratory" — and the shape test alone cannot tell
+    # those from a missing label. It warned on both, which is the kind of noise
+    # that teaches people to skim the gate's output.
+    canon = {}
+    try:
+        canon = {s["id"]: (s.get("label") or "")
+                 for s in (load("products.json") or {}).get("SPECS", [])}
+    except Exception:
+        pass
     for sp, blk in specs.items():
         n = len((blk or {}).get("issues", []) or [])
         if not n:
             continue
         lab = ((blk or {}).get("label") or "").strip()
+        if lab and canon.get(sp, "").strip() == lab:
+            continue
         if not lab or lab.lower() == sp.lower() or lab.lower() == sp.replace("-", " ").lower():
             WARN("compare", "speciality %r carries %d notice(s) but no proper label (%r), so the "
                             "Compare tab will name it after its internal id. Labels come from "
@@ -564,6 +648,84 @@ def check_compare(store, suppress, comptab_js):
     if total == 0:
         FAIL("compare", "the Compare feed is empty — refusing to publish a blank live-issues panel.")
     return total
+
+
+# --------------------------------------------------------------------------
+# 7b. SOURCE LINKS — every citation must still open
+# --------------------------------------------------------------------------
+# Added 05/08/2026. That morning three Continence/Urology items pointed at NHS
+# Supply Chain notices that had been retired, and paying members clicking through
+# from Med Sales Tools landed on a 404. Nothing in this gate had ever opened a
+# source link, so the only reason it was caught at all was a human reading the
+# dashboard. Every claim in this repo is only as good as the link under it.
+#
+# THIS WARNS AND NEVER FAILS, DELIBERATELY.
+# A hard FAIL would let one transient 503, or one rate-limited host, block a
+# legitimate push — including the daily refresh workflows, which commit
+# unattended. A push blocked by a network blip is a worse outcome than a stale
+# link surviving one more run, because the first one stops the data moving at
+# all. If a link is genuinely dead the warning repeats every run until somebody
+# fixes it; it does not go quiet.
+#
+# THE CONTROL URL IS THE POINT.
+# The other false-alarm mode is the host itself being down or throttling us: then
+# every source under it "fails" at once and the output is noise that trains you
+# to ignore it. So the control is checked first, and if the control cannot be
+# reached the check says so and reports nothing else. This mirrors how the
+# 05/08/2026 incident was actually confirmed — the three dead URLs were
+# re-checked against a control ICN URL that returned 200, which is what proved
+# it was retirement and not rate limiting.
+#
+# The fix when this warns is in README.md: find the notice's current URL, and if
+# it is no longer live on NHSSC anywhere, drop the item and log why.
+CONTROL_URL = "https://www.supplychain.nhs.uk/icn/"
+
+
+def http_status(url, timeout=15):
+    """Status code, or a string describing why there wasn't one."""
+    try:
+        return urlopen(Request(url, headers=UA), timeout=timeout).getcode()
+    except Exception as exc:
+        return getattr(exc, "code", None) or ("%s: %s" % (type(exc).__name__, exc))
+
+
+def check_source_links(store, offline, fetch=http_status, pause=time.sleep):
+    if offline:
+        WARN("links", "skipped the source-link check (--offline). A dead link is member-facing, "
+                      "so do not push on this without running it.")
+        return
+    if not store:
+        return
+
+    control = fetch(CONTROL_URL)
+    if control != 200:
+        WARN("links", "could not run the source-link check: the control URL %s returned %s, so "
+                      "NHS Supply Chain is unreachable or throttling us and every source under it "
+                      "would look dead. Checked nothing. Re-run later." % (CONTROL_URL, control))
+        return
+
+    seen, dead = set(), 0
+    for sp, blk in (store.get("specialities") or {}).items():
+        for it in (blk or {}).get("issues", []) or []:
+            url = (it.get("url") or "").strip()
+            if not url or url in seen:
+                continue
+            seen.add(url)
+            status = fetch(url)
+            if status != 200:
+                # Re-check once before saying anything, the way the incident was
+                # confirmed. One retry, not a loop: this runs on every push.
+                pause(3)
+                status = fetch(url)
+            if status != 200:
+                dead += 1
+                WARN("links", "%s: the source for %r returned %s and members clicking through from "
+                              "Med Sales Tools land on it. Find the notice's current URL; if it is "
+                              "no longer live on NHSSC anywhere, drop the item and log why (see "
+                              "README). %s" % (sp, (it.get("p") or "")[:60], status, url))
+    if dead:
+        WARN("links", "%d of %d source link(s) in the Compare feed did not return 200, checked "
+                      "twice each against a control URL that did." % (dead, len(seen)))
 
 
 # --------------------------------------------------------------------------
@@ -644,6 +806,8 @@ def main():
         WARN("compare", "could not read app/comptab.js — cannot check that every filed "
                         "speciality is one the Compare tab can actually render.")
     check_compare(load("compare-issues.json"), suppress, comptab_js)
+    check_source_links(load("compare-issues.json"),
+                       offline or "--no-links" in sys.argv)
 
     check_shrink()
     check_notice()
