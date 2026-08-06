@@ -19,14 +19,19 @@ var SUPPLIERS_URL='https://raw.githubusercontent.com/louisehoult-beep/msh-compar
 function mergeSuppliers(j){
   if(!j||!j.specialities){return;}
   for(var k in j.specialities){
-    var s=j.specialities[k]; if(!s||!(s.suppliers||[]).length){continue;}
+    var s=j.specialities[k];
+    /* A set counts as researched if it has supplier rows OR a declared
+       reason there is no public competitor list (medicines). Skipping the
+       second case would throw away a fully researched route to market. */
+    if(!s||(!(s.suppliers||[]).length&&!s.noSuppliers)){continue;}
     if(!D[k]){D[k]={label:s.label||k,route:[],routeNote:'',types:{},suppliers:[],issues:[]};}
     D[k].label=s.label||D[k].label;
     D[k].route=s.route||[];
     D[k].routeNote=s.routeNote||'';
     D[k].types=s.types||{};
-    D[k].suppliers=s.suppliers;
-    /* It now has a supplier table, so it is no longer notices-only. */
+    D[k].suppliers=s.suppliers||[];
+    D[k].noSuppliers=s.noSuppliers||'';
+    /* It has researched route-to-market content now, table or not. */
     D[k].feedOnly=false;
   }
 }
@@ -220,7 +225,7 @@ function fillSpecs(onlyCo){
   for(var k in D){
     var S=D[k],n=(S.issues||[]).length;
     if(onlyCo&&!(S.suppliers||[]).some(function(s){return s.co===onlyCo;})){continue;}
-    if(S.suppliers&&S.suppliers.length){full.push([k,S.label]);}
+    if((S.suppliers&&S.suppliers.length)||S.noSuppliers){full.push([k,S.label]);}
     else if(!onlyCo&&n){feed.push([k,S.label+' — '+n+' live notice'+(n===1?'':'s')+', no supplier set yet']);}
   }
   full.sort(function(a,b){return a[1].localeCompare(b[1]);});
@@ -293,7 +298,14 @@ function render(){
   S.route.forEach(function(r){
     route+='<p style="font-size:13px;margin:0 0 5px;"><b>'+esc(r.name)+'</b> &middot; '+esc(r.dates)+' &middot; <a href="'+r.url+'" target="_blank" rel="noopener" style="color:#a37519;">framework brief &rarr;</a></p>';
     var g=dayGap(r.endsOn);
-    if(g===null){return;}
+    if(g===null){
+      if(r.noExpiry){
+        route+='<div style="display:inline-block;background:#eef1f4;border:1px solid #d5dbe2;color:#5b6675;'
+               +'border-radius:8px;padding:4px 10px;margin:2px 0 4px;font-size:12px;">No single expiry &mdash; '
+               +esc(r.noExpiry)+'</div>';
+      }
+      return;
+    }
     var tone=g<0?['#f2f2f2','#dcdcdc','#5b6675']
             :g<=90?['#fdecea','#f3bdb6','#b3261e']
             :g<=180?['#fbf3df','#e8d5a8','#7a5b14']
@@ -328,6 +340,13 @@ function render(){
   ['Company','Key brands','Covers','Framework notes &amp; flags','Link'].forEach(function(c){tbl+='<th style="text-align:left;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#5b6675;padding:10px 14px;border-bottom:1px solid #e3e7ec;">'+c+'</th>';});
   tbl+='</tr></thead><tbody>'+rows+'</tbody></table></div>';
   if(shown===0){tbl='<p style="font-size:13px;color:#5b6675;">No verified suppliers recorded for this product type yet.</p>';}
+  /* Some categories have no PUBLIC competitor set at all — medicines is the one
+     that forced this. Saying so is the useful answer; a table of guesses is not. */
+  if(S.noSuppliers){
+    tbl='<div style="background:#fff;border:1px solid #e3e7ec;border-left:3px solid #39689e;border-radius:0 12px 12px 0;padding:13px 16px;margin:0 0 14px;">'
+      +'<div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#39689e;font-weight:700;margin-bottom:6px;">Why there is no comparison table here</div>'
+      +'<p style="font-size:13px;line-height:1.6;margin:0;">'+esc(S.noSuppliers)+'</p></div>';
+  }
   document.getElementById('cp-table').innerHTML=tbl;
   renderIssues(S);
 }
