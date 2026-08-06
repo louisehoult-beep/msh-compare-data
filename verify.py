@@ -1538,6 +1538,26 @@ def check_search_index(doc):
                        "build_search_index.py reads data/supplier-index.json — check it ran."
              % SEARCH_INDEX)
 
+    # -- size, because every member downloads this ------------------------
+    # The index is fetched into the browser the first time somebody uses the
+    # search box. Nothing else in this repo is shipped to a member that way, so
+    # nothing else has ever needed a size limit. Left unchecked, raising
+    # SECTION_CHARS or MAX_SECTIONS in build_search_index.py would quietly make
+    # the Hub slower for everyone, and the only symptom would be a search box
+    # that feels sluggish — which nobody reports and nobody can attribute.
+    path = os.path.join(DATA, SEARCH_INDEX)
+    if os.path.exists(path):
+        mb = os.path.getsize(path) / (1024.0 * 1024.0)
+        if mb > 4:
+            FAIL("search", "%s is %.1f MB. Every member downloads this on their first "
+                           "search. Tighten SECTION_CHARS or MAX_SECTIONS in "
+                           "build_search_index.py rather than raising this limit."
+                 % (SEARCH_INDEX, mb))
+        elif mb > 2:
+            WARN("search", "%s is %.1f MB, which is large for a file the browser fetches. "
+                           "Worth trimming SECTION_CHARS before it grows further."
+                 % (SEARCH_INDEX, mb))
+
 
 def main():
     offline = "--offline" in sys.argv
