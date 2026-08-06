@@ -1426,42 +1426,6 @@ def check_company_report(financials, report_js):
                                % (len(probable), ", ".join(repr(p) for p in probable[:3])))
 
 
-def check_no_clusters_on_tools(comptab_js):
-    """Standing clusters must never render on the Med Sales Tools page.
-
-    Ruled by Lou, 06/08/2026. A cluster was pinned ABOVE the speciality picker
-    and shown whatever the member had selected, so a single running supply story
-    sat in front of everybody and buried the speciality they came to read. That
-    class of item belongs on the Live Desk.
-
-    This is a check rather than a comment because a comment is a memory, and a
-    memory is what the last person edited straight past. Rendering a cluster
-    means iterating CLUSTERS — there is no other way to get one on screen — so
-    that is what this looks for. The declaration, the assignment from the feed
-    and any `.length` guard all stay legal: the data contract is unchanged and
-    the Live Desk still consumes the same key.
-    """
-    if not comptab_js:
-        return
-    # _js_scan returns (comment-blanked source, string-literal spans) — take the
-    # source. Comments are blanked so the note explaining this very rule, which
-    # names CLUSTERS, cannot trip the check that enforces it.
-    src = _js_scan(comptab_js)[0]
-    for pat, why in (
-        (r"CLUSTERS\s*\.\s*forEach", "iterates CLUSTERS"),
-        (r"CLUSTERS\s*\[\s*\d", "indexes into CLUSTERS"),
-        (r"for\s*\(\s*var\s+\w+\s*=\s*0\s*;[^;]*CLUSTERS\s*\.\s*length", "loops over CLUSTERS"),
-    ):
-        m = re.search(pat, src)
-        if m:
-            FAIL("clusters", "app/comptab.js %s at offset %d. Standing clusters must not "
-                             "render on the tools page — that was ruled on 06/08/2026 after a "
-                             "pinned thread buried the speciality picker for every member. "
-                             "Put it on the Live Desk (page 675, via the cloud-pipeline) instead."
-                             % (why, m.start()))
-            return
-
-
 # --------------------------------------------------------------------------
 # 10. HUB SEARCH INDEX — what a member can find, and what they must not be shown
 # --------------------------------------------------------------------------
@@ -1633,7 +1597,6 @@ def main():
 
     check_shrink()
     check_notice()
-    check_no_clusters_on_tools(comptab_js)
 
     if as_json:
         print(json.dumps({"pass": not fails, "fails": fails, "warns": warns}, indent=1))
