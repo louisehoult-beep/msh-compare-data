@@ -218,6 +218,23 @@ def parse_suppliers(h):
             return out, note, {n: sorted(v) for n, v in lots.items() if v}
 
     if not out:
+        # Single-supplier frameworks are stated in prose. This runs as a FALLBACK
+        # too, not only when there is no count sentence, because some briefs say
+        # "There are 1 suppliers ... :" and then name the one in the sentence.
+        one = re.search(r"(?is)there\s+(?:is|are)\s+(?:only\s+)?(?:one|1)\s+supplier[^:]{0,80}:\s*([^<\n]{3,90})", block)
+        if one:
+            name = clean_supplier(text_of(one.group(1)))
+            if name:
+                return [name], "single-supplier framework, stated in prose on the page", {}
+        # Distinguish the two very different refusals, because they need
+        # different fixes: a page that never publishes its supplier names cannot
+        # be parsed harder, while a page that contradicts its own count is a
+        # page to read by hand.
+        has_any_list = bool(re.search(r"(?is)<ul[^>]*>|<table", block))
+        if not has_any_list:
+            return [], ("the page states its supplier count but publishes no list of names "
+                        "(no list or table in the Suppliers section) — this framework cannot be "
+                        "captured from this source"), {}
         return [], "no supplier list found after the count sentence", {}
     if stated is None:
         return out, "no stated count on the page; %d names parsed (UNVERIFIED COUNT)" % len(out), {}

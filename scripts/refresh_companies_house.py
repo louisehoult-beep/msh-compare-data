@@ -438,6 +438,91 @@ def search_for(supplier, key):
     return None
 
 
+# THE 17 -> 7 PROBLEM, AND WHY MOST VALUES ARE DELIBERATELY LEFT UNPLACED.
+# The API returns Companies House's own seventeen-value accounts enum. What the
+# Hub publishes is a seven-value vocabulary describing the KIND of accounts filed
+# (verify.py's ACCOUNTS_CATEGORIES). Six values mean the same thing in both and
+# are mapped. The rest are audit-exemption and abridgement variants: they say
+# something about the filing REGIME, not about which kind of accounts were filed,
+# and mapping them would be our inference wearing a statutory label. Those stay
+# UNPLACED — accountsCategory null — with the raw value recorded beside them, so
+# nothing is lost and nothing is guessed.
+#
+# The visible consequence, stated because it is a real trade-off and not a bug:
+# a field made up mostly of exemption filers will fall below the field filing
+# profile's half-the-field floor and the panel will refuse. That is the honest
+# outcome until somebody decides, with a stated rule, what those values mean for
+# size. Do NOT widen verify.py's list to make them pass (root rule 13).
+ACCOUNTS_MAP = {
+    "full": "full",
+    "small": "small",
+    "medium": "medium",
+    "group": "group",
+    "dormant": "dormant",
+    "micro-entity": "micro-entity",
+}
+ACCOUNTS_UNPLACED = {
+    "interim", "initial", "total-exemption-full", "total-exemption-small",
+    "partial-exemption", "audit-exemption-subsidiary", "filing-exemption-subsidiary",
+    "no-accounts-type-available", "audited-abridged", "unaudited-abridged",
+}
+
+
+def map_accounts_type(raw):
+    """(publication category or None, note). Never guesses."""
+    if not raw:
+        return None, "no accounts type on the record"
+    if raw in ACCOUNTS_MAP:
+        return ACCOUNTS_MAP[raw], None
+    if raw in ACCOUNTS_UNPLACED:
+        return None, ("Companies House reports %r, an audit-exemption or abridgement variant. "
+                      "It is recorded but deliberately not mapped to a filing category, because "
+                      "that would be an inference about size dressed as a statutory value." % raw)
+    # A value nobody has seen before. Say so loudly rather than dropping it.
+    return None, ("Companies House returned %r, which is not in the seventeen-value enum this "
+                  "script knows. Add it to ACCOUNTS_MAP or ACCOUNTS_UNPLACED in "
+                  "scripts/refresh_companies_house.py and to the table in "
+                  "docs/COMPANY-REPORT-METHOD.md before trusting it." % raw)
+
+
+def officers_for(number, key):
+    """Current officers and dated appointment/resignation events.
+
+    Register facts only. This never says one person replaced another: succession
+    is not on the register, and asserting it is the 24/07/2026 stakeholder-mapper
+    error with different names in it.
+    """
+    data = api_get("/company/" + urllib.parse.quote(number) + "/officers", key)
+    if not data:
+        return None
+    current, changes = [], []
+    for it in (data.get("items") or []):
+        name = (it.get("name") or "").strip()
+        if not name:
+            continue
+        role = (it.get("officer_role") or "").replace("-", " ").title()
+        appointed, resigned = it.get("appointed_on"), it.get("resigned_on")
+        if not resigned:
+            current.append({"name": name, "role": role, "appointed": appointed})
+        if appointed:
+            changes.append({"name": name, "role": role, "event": "appointed", "date": appointed})
+        if resigned:
+            changes.append({"name": name, "role": role, "event": "resigned", "date": resigned})
+    if not current and not changes:
+        return None
+    changes.sort(key=lambda c: c["date"] or "", reverse=True)
+    current.sort(key=lambda c: c["appointed"] or "", reverse=True)
+    return {
+        "readOn": datetime.date.today().isoformat(),
+        "sourceUrl": FIND + number + "/officers",
+        "note": ("Statutory register facts only. Appointments and resignations are listed as "
+                 "dated events; this file never asserts that one person replaced another, "
+                 "because succession is not a register fact."),
+        "current": current,
+        "recentChanges": changes[:12],
+    }
+
+
 def record_for(supplier, number, confirmed_source, key):
     """One entry in `companies`, or None if the number does not resolve."""
     profile = api_get("/company/" + urllib.parse.quote(number), key)
@@ -447,6 +532,7 @@ def record_for(supplier, number, confirmed_source, key):
     accounts = (profile.get("accounts") or {}).get("last_accounts") or {}
     registered = profile.get("company_name") or ""
     status = profile.get("company_status")
+    _cat, _cat_note = map_accounts_type(accounts.get("type"))
 
     # The confidence rule, in one place. See the module docstring.
     if not confirmed_source:
@@ -470,10 +556,12 @@ def record_for(supplier, number, confirmed_source, key):
         "status": status,
         "incorporated": profile.get("date_of_creation"),
         "sic": profile.get("sic_codes") or [],
-        # Verbatim from the API's own enum. Never re-labelled here: mapping a
-        # category onto a size band is Stage 4's job and needs the thresholds
-        # above to do it honestly.
-        "accountsCategory": accounts.get("type"),
+        # The API's own enum, mapped to the publication vocabulary ONLY where the
+        # two mean the same thing; everything else stays unplaced with the raw
+        # value recorded. See ACCOUNTS_MAP.
+        "accountsCategory": _cat,
+        "accountsCategoryRaw": accounts.get("type"),
+        "accountsCategoryNote": _cat_note,
         # made_up_to is deprecated in the spec in favour of period_end_on; take
         # the current field first and fall back so older records still date.
         "accountsMadeUpTo": accounts.get("period_end_on") or accounts.get("made_up_to"),
@@ -483,6 +571,10 @@ def record_for(supplier, number, confirmed_source, key):
         "turnoverGBP": None,
         "employees": None,
         "sourceUrl": FIND + (profile.get("company_number") or number),
+        # Officers are fetched for CONFIRMED matches only. Attaching a board to a
+        # company we are only probably looking at names the wrong people.
+        "officers": (officers_for(profile.get("company_number") or number, key)
+                     if confidence == "confirmed" else None),
     }
 
 
