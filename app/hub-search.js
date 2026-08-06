@@ -322,11 +322,15 @@
         if (r.sec) {
           if (r.sec.a) { href = r.page.u + '#' + r.sec.a; }
           else { href = r.page.u + textFragment(r.sec.h); }
+          /* Show the PAGE path, never `href`. When href carries a text
+           * fragment, printing it puts a line of percent-encoding under every
+           * result ("#:~:text=Evergreen%20Level%201%3A%20pass%20this%20or"),
+           * which reads like a bug. The link still carries the fragment. */
           html += row(href, r.sec.h || r.page.t,
                       r.sec.h && r.sec.h !== r.page.t ? kicker : '',
-                      esc(href));
+                      esc(r.page.u));
         } else {
-          html += row(href, r.page.t, '', esc(href));
+          html += row(href, r.page.t, '', esc(r.page.u));
         }
       }
     }
