@@ -18,7 +18,14 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # 30, not 15. test_verify.py runs the whole gate once per case, so the wall
+    # clock grows with the case count, and on 06/08/2026 it crossed 15 minutes:
+    # runs at 15:55 and 16:14 were CANCELLED on the timeout and reported as
+    # failures. A timeout that fires looks exactly like bad data on the runs
+    # list, and this repo treats a red gate as "members may be seeing something
+    # wrong right now" — so a false red here costs real attention, and it also
+    # blocks the refresh workflows, which run the gate before they commit.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
         with:
