@@ -739,8 +739,20 @@ def check_suppliers(sup, store):
                               "would ever select it." % who)
         rows = (blk or {}).get("suppliers") or []
         if not rows:
-            FAIL("suppliers", "%s has no suppliers, so it would replace a working notices-only "
-                              "panel with an empty table." % who)
+            # A speciality may legitimately have no supplier table. Medicines are
+            # the case that forced this: NHS England's MPSC frameworks publish no
+            # award list and their prices are confidential to authorised NHS
+            # pharmacy staff, so there is no public competitor set to show. The
+            # honest output is to say so — inventing one to fill the space is how
+            # a comparison tool starts lying to a rep in a meeting. But it has to
+            # be a DECLARED absence with a reason a reader can judge, never an
+            # empty array somebody forgot to fill.
+            if (blk or {}).get("noSuppliers", "").strip():
+                continue
+            FAIL("suppliers", "%s has no suppliers and no `noSuppliers` explanation, so it would "
+                              "replace a working notices-only panel with an empty table. If the "
+                              "competitor set genuinely is not public, say so in `noSuppliers`."
+                              % who)
             continue
 
         # A route to market with no dates is the claim most likely to go stale
@@ -759,9 +771,14 @@ def check_suppliers(sup, store):
             # and says so with total confidence.
             ends = re.findall(r"\b(\d{2})/(\d{2})/(\d{4})\b", r.get("dates") or "")
             if not (r.get("endsOn") or "").strip():
-                FAIL("suppliers", "%s: framework %r has no endsOn, so the tab cannot show when it "
-                                  "runs out — the most perishable fact on the panel."
-                                  % (who, (r.get("name") or "")[:50]))
+                # A rolling programme genuinely has no single end date —
+                # NHS England's medicines frameworks are the case. That is
+                # allowed, but only as a DECLARED absence with a reason, so
+                # nobody can quietly ship a route with no expiry at all.
+                if not (r.get("noExpiry") or "").strip():
+                    FAIL("suppliers", "%s: framework %r has no endsOn and no `noExpiry` reason, so "
+                                      "the tab cannot show when it runs out — the most perishable "
+                                      "fact on the panel." % (who, (r.get("name") or "")[:50]))
             elif ends:
                 d2, m2, y2 = ends[-1]
                 if r["endsOn"] != "%s-%s-%s" % (y2, m2, d2):

@@ -434,6 +434,30 @@ def _(tmp):
     return "no longer skips the 'unsorted' holding pen"
 
 
+@case("a speciality with an empty supplier table and no reason given")
+def _(tmp):
+    # Medicines forced a legitimate version of this: NHS England's MPSC
+    # frameworks publish no award list, so there is no public competitor set to
+    # show. That is allowed — but only as a DECLARED absence with a reason a
+    # reader can judge, never an empty array somebody forgot to fill.
+    d = suppliers()
+    k = next(iter(d["specialities"]))
+    d["specialities"][k]["suppliers"] = []
+    d["specialities"][k].pop("noSuppliers", None)
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "no `noSuppliers` explanation"
+
+
+@case("a framework with no expiry and no reason for having none")
+def _(tmp):
+    d = suppliers()
+    k = next(iter(d["specialities"]))
+    d["specialities"][k]["route"][0].pop("endsOn", None)
+    d["specialities"][k]["route"][0].pop("noExpiry", None)
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "no `noExpiry` reason"
+
+
 @case("an empty compare feed")
 def _(tmp):
     d = issues()
