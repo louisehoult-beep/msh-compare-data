@@ -142,7 +142,59 @@ SPEC_TERMS = {
     'digital': r"electronic patient record|\bepr\b|clinical system|\bpacs\b|"
                r"digital health|patient portal|\bnhs app\b|clinical software",
     'dermatology': r"dermatolog|\bskin (care|health|integrity)|phototherap",
+    # The three specialities below are selectable in products.json → SPECS but
+    # had no vocabulary at all until 06/08/2026, so nothing could ever file
+    # under them — a member could pick them and always see an empty sort.
+    #
+    # 'pharma' terms are ported from the Market Intelligence build's cpv_map.py,
+    # where they were validated against the award store first: 15 hits, zero
+    # false fires on awards already tagged as something other than pharma. The
+    # INN stems are WHO International Nonproprietary Name suffixes, assigned by
+    # drug class, so a word ending in one in a procurement title is a medicine:
+    # -mab monoclonal antibody, -nib/-tinib kinase inhibitor, -ciclib, -parib,
+    # -vir antiviral, -cillin/-mycin/-floxacin antibiotics, -prazole, -sartan,
+    # -statin, -gliptin, -glifozin.
+    # Three deliberate narrowings against the cpv_map version, each from a
+    # false fire found by running this vocabulary over the live contact index:
+    #   * bare singular "medicine" is out — "Clinical Laboratory Medicine
+    #     Testing" is a pathology discipline, not a medicines contract. Singular
+    #     fires only in supply wording ("Medicine Supply for …").
+    #   * "antibiotic" does not fire on a coated device — an antibiotic
+    #     impregnated EVD catheter is neurosurgical kit, not a drug.
+    #   * "antimicrobial" is out entirely: it already belongs to 'infection',
+    #     where it means wipes and hand hygiene, and duplicating it here would
+    #     file every antimicrobial cleaning product as a medicine.
+    'pharma': r"\b(medicines\b|medicine (supply|supplies|services?|management|dispens)|"
+              r"(supply|delivery|provision) of medicine|medicinal|pharmaceutical|vaccines?|"
+              r"biosimilars?|antibiotics?(?!\s+(impregnated|coated|eluting|releasing))|"
+              r"chemotherap|cytotoxic|aseptic(ally)? (prepared|compounded)|"
+              r"compounded aseptic|parenteral nutrition|drug tariff|formulary|"
+              r"[a-z]{4,}(mab|nib|tinib|ciclib|parib|vir|cillin|mycin|floxacin|"
+              r"prazole|sartan|statin|gliptin|glifozin|zumab|ximab)\b)",
+    # Stone-management wording only. Plain 'urolog' stays with 'continence'
+    # (the dropdown label is "Continence / Urology"); this set fires on the
+    # procedures and devices specific to endourology.
+    'endourology': r"endourolog|lithotrips|ureteroscop|nephroscop|"
+                   r"(kidney|renal|urinary|ureteric) stone|stone management|"
+                   r"\bpcnl\b|(ureteral|ureteric) stent",
+    # 'ultrasound' also lives inside 'imaging' — deliberately listed under both,
+    # per the ambiguity rule above: an ultrasound notice IS an imaging notice,
+    # and a rep selecting either should see it.
+    'ultrasound': r"ultrasound|ultrasonograph|sonograph|echocardiograph|"
+                  r"\bdoppler\b|transducer probe|ultrasonic (scanner|probe)",
 }
+
+# ---------------------------------------------------------------------------
+# NEGATION GUARD. Without it, "Non-Obstetric Ultrasound" matches 'obstetric'
+# and files under women's health — the opposite of what the title says. The
+# negated word is removed entirely before speciality matching, which is safe:
+# "Non-Obstetric Ultrasound" becomes "Ultrasound" (still imaging, correctly no
+# longer women's health), and "non-invasive ventilation" still matches
+# respiratory on 'ventilat'. First applied as an overlay in the Market
+# Intelligence build (cpv_map.strip_negated), where it corrected 25 awards;
+# moved here 06/08/2026 so every consumer of this vocabulary gets it.
+# ---------------------------------------------------------------------------
+NEGATED = re.compile(r"\bnon[-\s]?([a-z]{4,})", re.I)
 
 # ---------------------------------------------------------------------------
 # CLASS VOCABULARY
@@ -185,7 +237,11 @@ def tag(title):
     t = (title or '').strip()
     if not t:
         return [], 'unclear'
-    specs = sorted(k for k, pat in SPEC_TERMS.items() if re.search(pat, t, re.I))
+    # Speciality matching runs on the negation-stripped title; the clinical /
+    # nonclinical check below keeps the original, because a negated speciality
+    # term ("Non-Obstetric Ultrasound") is still evidence the notice is clinical.
+    ts = NEGATED.sub(' ', t)
+    specs = sorted(k for k, pat in SPEC_TERMS.items() if re.search(pat, ts, re.I))
     if specs:
         return specs, 'clinical'
     if CLINICAL_TERMS.search(t):
