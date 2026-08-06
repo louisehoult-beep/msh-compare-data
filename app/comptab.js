@@ -54,6 +54,17 @@ try{loadFeed().then(function(j){
        Nothing is invented: a speciality with no researched suppliers says so. */
     for(var k in j.specialities){
       var f=j.specialities[k]; if(!f){continue;}
+      /* 'unsorted' is a HOLDING PEN, not a speciality. Nothing medical is
+         dropped for want of a label any more, so anything the vocabulary cannot
+         place lands there for a person to move — but by definition we do not yet
+         know what it is, so it has nothing to tell a member. On 06/08/2026 the
+         first overnight run after that change put 28 items in it, every one a
+         generic medicines recall (Ramipril, Sertraline, Flucloxacillin) or an
+         MHRA monthly roundup, and all 28 were live on the tab with blank
+         tactical lines. Collect them; do not publish them. An item leaves the
+         pen when a human files it under a real speciality. */
+      if(k==='unsorted'){continue;}
+      
       if(D[k]){ if(f.issues){D[k].issues=f.issues;} if(f.label){D[k].label=f.label;} }
       else if(f.issues&&f.issues.length){
         D[k]={label:f.label||k,route:[],routeNote:'',types:{},suppliers:[],

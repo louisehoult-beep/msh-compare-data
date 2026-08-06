@@ -416,6 +416,24 @@ def _(tmp):
     return "has no endsOn"
 
 
+@case("the unsorted holding pen published to members")
+def _(tmp):
+    # 06/08/2026: the first overnight run after the no-drop fallback landed put
+    # 28 items in 'unsorted' — every one a generic medicines recall or an MHRA
+    # monthly roundup — and all 28 were live with blank tactical lines. The tab
+    # skips that pen now; this proves nobody can quietly remove the skip.
+    d = issues()
+    d["specialities"]["unsorted"] = {"label": "Not yet sorted by speciality", "issues": [
+        {"d": "Aug 2026", "co": "", "p": "Class 2 Medicines Recall: Someone, Ramipril 5mg",
+         "s": "x", "use": "", "url": "https://www.gov.uk/drug-device-alerts/unsorted-thing",
+         "autoDetected": True}]}
+    json.dump(d, open("data/compare-issues.json", "w"))
+    js = "app/comptab.js"
+    src = open(js).read()
+    open(js, "w").write(src.replace("if(k==='unsorted'){continue;}", ""))
+    return "no longer skips the 'unsorted' holding pen"
+
+
 @case("an empty compare feed")
 def _(tmp):
     d = issues()
@@ -542,7 +560,11 @@ def main():
     # snapshotted, whether or not anyone remembered to add it.
     tmp = tempfile.mkdtemp()
     watched = FILES + sorted(
-        os.path.join("data", n) for n in os.listdir("data") if n.endswith(".json"))
+        os.path.join("data", n) for n in os.listdir("data") if n.endswith(".json")
+    ) + sorted(
+        # app/*.js too: a case that edits comptab.js used to leave the repo
+        # broken, because only mst-logic.js was named in FILES.
+        os.path.join("app", n) for n in os.listdir("app") if n.endswith(".js"))
     watched = list(dict.fromkeys(watched))          # de-dupe, keep order
     for f in watched:
         if os.path.exists(f):

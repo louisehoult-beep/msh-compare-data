@@ -668,6 +668,25 @@ def check_compare(store, suppress, comptab_js):
                             "Compare tab will name it after its internal id. Labels come from "
                             "products.json SPECS via fetch_issues.py." % (sp, n, lab))
 
+    # 'unsorted' is a holding pen, and the tab must go on skipping it. If that
+    # skip is ever removed, whatever the vocabulary could not place goes live
+    # with a blank tactical line — which is what happened on 06/08/2026, when the
+    # first overnight run after the fallback landed put 28 generic medicines
+    # recalls in front of members.
+    if (specs.get("unsorted") or {}).get("issues") and comptab_js:
+        if "k==='unsorted'" not in comptab_js.replace('"', "'"):
+            FAIL("compare", "data carries %d unsorted notice(s) but app/comptab.js no longer skips "
+                            "the 'unsorted' holding pen, so items nobody has filed yet would "
+                            "publish with blank tactical lines."
+                            % len(specs["unsorted"]["issues"]))
+    if (specs.get("unsorted") or {}).get("issues"):
+        n_un = len(specs["unsorted"]["issues"])
+        if n_un >= 25:
+            WARN("compare", "%d notices are sitting in the unsorted holding pen. They are not "
+                            "published, but nothing is learning from them either — either file "
+                            "them under a speciality or tighten what the fetcher collects."
+                            % n_un)
+
     if total == 0:
         FAIL("compare", "the Compare feed is empty — refusing to publish a blank live-issues panel.")
     return total
