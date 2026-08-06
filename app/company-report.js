@@ -619,7 +619,9 @@
     res.groups.forEach(function (grp) {
       /* The count in the prose comes from the same array rendered beneath it,
          so prose and list cannot drift apart. */
-      var known = grp.others.filter(function (n) { return !!ctx.byName[n]; }).length;
+      var known = grp.others.filter(function (n) {
+        return !!(ctx.byName[n] || (ctx.byKey && ctx.byKey[coKey(n)]));
+      }).length;
       body += '<div style="margin:0 0 12px;border:1px solid ' + LINE + ';border-radius:10px;padding:11px 13px;background:#fff;">' +
         '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';">' + esc(grp.name) + '</div>' +
         '<div style="font-size:12px;color:' + DIM + ';margin:3px 0 8px;">' + grp.others.length +
@@ -629,7 +631,8 @@
         ' &middot; <a href="' + esc(grp.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">brief &#8599;</a></div>' +
         '<div>' + grp.others.map(function (n) {
           var lots = grp.lots && grp.lots[n];
-          return chip(n + (lots && lots.length ? ' &middot; ' + lots.join(', ') : ''), ctx.byName[n] ? 'gold' : '');
+          var hub = ctx.byName[n] || (ctx.byKey && ctx.byKey[coKey(n)]);
+          return chip(n + (lots && lots.length ? ' &middot; ' + lots.join(', ') : ''), hub ? 'gold' : '');
         }).join('') + '</div>' +
         '<div style="font-size:11px;color:' + DIM + ';margin-top:7px;">' + known + ' of these ' + grp.others.length +
         ' have a profile in this Hub (gold); the rest are named on the brief but not yet indexed here.</div>' +
@@ -847,7 +850,8 @@
       var everyone = [sub.name].concat(grp.others);
       var resolved = [], unresolved = [];
       everyone.forEach(function (n) {
-        var r = ctx.byName[n] ? finRecFor(ctx.byName[n], ctx.fin) : null;
+        var rec = ctx.byName[n] || (ctx.byKey ? ctx.byKey[coKey(n)] : null);
+        var r = rec ? finRecFor(rec, ctx.fin) : null;
         if (r && !isProbable(r) && String(r.accountsCategory || '').trim()) {
           resolved.push({ name: n, rec: r });
         } else {
@@ -1337,7 +1341,21 @@
       fin: fin || null,
       cache: cache || null,
       fwDoc: fwDoc || null,
-      fwByKey: fwIndex(fwDoc)
+      fwByKey: fwIndex(fwDoc),
+      /* The briefs print legal names ("B. Braun Medical Limited"); this Hub
+         holds trading names ("B. Braun Medical"). Matching those by exact
+         string made every confirmed company on a framework look unresolved,
+         so the filing profile refused even where the filings were held. */
+      byKey: (function () {
+        var m = {};
+        all.forEach(function (s) {
+          [s.name].concat(s.aliases || []).forEach(function (n) {
+            var k = coKey(n);
+            if (k && !m[k]) { m[k] = s; }
+          });
+        });
+        return m;
+      })()
     };
 
     shell();

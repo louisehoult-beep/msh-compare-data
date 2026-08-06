@@ -262,6 +262,35 @@ def money(number, unit):
     return int(round(value))
 
 
+# The key lives OUTSIDE the synced workspace, the same rule as the marker salt:
+# anything inside OneDrive is disclosed to every session that reads the file, and
+# a key in the repo is a key on GitHub. Environment first (that is how Actions
+# supplies it), then the local file.
+KEY_FILE = "~/.companies-house-key"
+
+
+def load_key():
+    key = os.environ.get(KEY_ENV, "").strip()
+    if key:
+        return key
+    path = os.path.expanduser(KEY_FILE)
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            key = f.read().strip()
+        if key:
+            return key
+    raise SystemExit(
+        "ABORT: no Companies House key, so there is nothing to authenticate with.\n"
+        "  Looked in: $%s, then %s\n"
+        "  1. Sign in at https://developer.company-information.service.gov.uk/\n"
+        "  2. Manage applications -> your application -> add an API key (REST, live)\n"
+        "  3. Save it:  pbpaste > %s && chmod 600 %s\n"
+        "     (in Actions: a repository secret named %s)\n"
+        "  The key is sent as the HTTP Basic USERNAME with a blank password.\n"
+        "  Run with --offline to check the supplier side without a key."
+        % (KEY_ENV, KEY_FILE, KEY_FILE, KEY_FILE, KEY_ENV))
+
+
 def read_thresholds():
     """The current micro/small/medium thresholds, from Companies House guidance.
 
@@ -613,15 +642,7 @@ def main():
                 "name search: %s" % (len(ambiguous), ", ".join(ambiguous)))
         return 0
 
-    key = os.environ.get(KEY_ENV, "").strip()
-    if not key:
-        raise SystemExit(
-            "ABORT: $%s is not set, so there is nothing to authenticate with.\n"
-            "  1. Sign in at https://developer.company-information.service.gov.uk/\n"
-            "  2. Manage applications -> create an application -> add an 'API Key' (REST, live data)\n"
-            "  3. export %s='the key'   (in Actions: repository secret of the same name)\n"
-            "  The key is free. It is sent as the HTTP Basic USERNAME with a blank password.\n"
-            "  Run with --offline to check the supplier side without a key." % (KEY_ENV, KEY_ENV))
+    key = load_key()
 
     thresholds = read_thresholds()
     log("thresholds read from GOV.UK: micro £%s / small £%s / medium £%s turnover, %s"
