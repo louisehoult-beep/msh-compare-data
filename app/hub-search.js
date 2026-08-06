@@ -9,9 +9,12 @@
  * could not do what she wanted, and it structurally could not.
  *
  * V7 searches data/hub-search-index.json, which build_search_index.py rebuilds
- * daily from the Hub's own published pages, section by section. A result points
- * at the SECTION that matched, not just the page, and shows the line it matched
- * on.
+ * daily from the Hub's own published pages, section by section. A result names
+ * the SECTION that matched, not just the page, and links straight to it.
+ *
+ * It does NOT quote the matching line, and must not be made to. The index is
+ * served from a PUBLIC repo, so it carries headings and sorted word bags only —
+ * anything readable in there republishes a paywalled product. Ruled 06/08/2026.
  *
  * WHY THIS FILE LIVES IN THE REPO AND NOT IN THE PAGE
  * --------------------------------------------------
@@ -48,7 +51,11 @@
   var STOP = (' the a an of for in on at to is are am was were do does did how what ' +
               'where which who whom why when i my me we our you your can could should ' +
               'would with and or but if it its this that these those from by as be ' +
-              'about into any all get got need want find show tell explain ').split(' ');
+              'about into any all get got need want find show tell explain ' +
+              // Added 06/08/2026 after live testing: "what does ICB stand for"
+              // ranked Dermatology first, because "stand" was doing real work in
+              // the score. These are the words people wrap a question in.
+              'stand stands mean means meaning called know ').split(' ');
 
   var TASKS = [
     ['Prepare for a meeting', '/medical-sales-hub/med-sales-tools/#tool-prep'],
@@ -86,13 +93,22 @@
     return out.length ? out : parts.filter(Boolean);
   }
 
-  /* Match on WORD START, never raw substring. V5 matched substrings, which made
-   * "what does ICB stand for" hit "Under-STAND-ing TR Reports" — the exact class
-   * of nonsense result this whole rebuild exists to remove. */
+  /* WHOLE WORDS ONLY, with a deliberate singular/plural pair. Nothing looser.
+   *
+   * V5 matched raw substrings, so "what does ICB stand for" hit "Under-STAND-ing
+   * TR Reports". V6 fixed that by matching word STARTS — and word starts are
+   * still too loose: tested live on 06/08/2026, the same query put Dermatology
+   * above the NHS structure map, because "stand" is a prefix of "standard".
+   *
+   * Both haystacks are space-padded at each end, so ' tok ' can only match a
+   * complete word. The one intentional stretch is singular/plural: "reports"
+   * finds "report" and vice versa. */
   function hits(hay, tok) {
-    if (hay.indexOf(' ' + tok) !== -1) { return true; }
-    if (tok.length > 3 && tok.charAt(tok.length - 1) === 's') {
-      if (hay.indexOf(' ' + tok.slice(0, -1)) !== -1) { return true; }
+    if (hay.indexOf(' ' + tok + ' ') !== -1) { return true; }
+    if (tok.length > 3) {
+      if (tok.charAt(tok.length - 1) === 's') {
+        if (hay.indexOf(' ' + tok.slice(0, -1) + ' ') !== -1) { return true; }
+      } else if (hay.indexOf(' ' + tok + 's ') !== -1) { return true; }
     }
     return false;
   }
@@ -103,21 +119,21 @@
     var i, j, p, s;
     for (i = 0; i < doc.pages.length; i++) {
       p = doc.pages[i];
-      p._t = ' ' + String(p.t || '').toLowerCase();
+      p._t = ' ' + String(p.t || '').toLowerCase() + ' ';
       for (j = 0; j < p.sec.length; j++) {
         s = p.sec[j];
-        s._h = ' ' + String(s.h || '').toLowerCase();
+        s._h = ' ' + String(s.h || '').toLowerCase() + ' ';
         /* `w` is a bag of words, not prose: unique, alphabetised, stopwords
          * dropped. The index is served from a public repo, so it deliberately
          * carries nothing that can be read back as the Hub's paid content. That
          * is why there is no snippet under a result — do not add one by putting
          * text back in the index. */
-        s._w = ' ' + String(s.w || '').toLowerCase();
+        s._w = ' ' + String(s.w || '').toLowerCase() + ' ';
       }
     }
     for (i = 0; i < doc.records.length; i++) {
-      doc.records[i]._t = ' ' + String(doc.records[i].t || '').toLowerCase();
-      doc.records[i]._k = ' ' + String(doc.records[i].k || '');
+      doc.records[i]._t = ' ' + String(doc.records[i].t || '').toLowerCase() + ' ';
+      doc.records[i]._k = ' ' + String(doc.records[i].k || '') + ' ';
     }
     return doc;
   }
@@ -144,8 +160,17 @@
         else if (hits(sec._w, tok)) { ss += 6; covered[tok] = 1; }
       }
       if (ss > bestS) { bestS = ss; best = sec; }
-      s += ss;
     }
+
+    /* Score the BEST section, never the sum of all of them.
+     *
+     * Summing rewards size: Clinical Pathways has 60 sections, so on a sum it
+     * out-scored the actual answer on almost anything. Tested live 06/08/2026,
+     * "value based procurement" returned INFECTION PREVENTION above the
+     * Value-Based Procurement page, and "what does ICB stand for" returned WOUND
+     * CARE above "ICB — Integrated Care Board". A member does not want the
+     * biggest page, they want the passage that answers them. */
+    s += bestS;
 
     // Everything the member typed appears somewhere on this page. That is a
     // much stronger signal than a big pile of one repeated word.
