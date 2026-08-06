@@ -12,6 +12,7 @@ Exit 0 = the gate holds. Exit 1 = the gate has a hole; do not trust a green
 verify.py until this passes again.
 """
 import concurrent.futures as cf
+import datetime
 import json, os, re, shutil, subprocess, sys, tempfile
 
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -20,6 +21,12 @@ os.chdir(REPO)
 # The commit that published 145 false job changes to the Hub, 24/07/2026.
 INCIDENT_COMMIT = "dcdd9eb"
 FILES = ["data/people-moves.json", "data/trust-contacts.json", "app/mst-logic.js"]
+
+# Files a case CREATES that the repo does not have yet. restore() takes these
+# away again; everything else it restores by copying the snapshot back. A path
+# only lands here when the case that wrote it found nothing there, so a file
+# another session lands mid-run is never deleted by this.
+CREATED = []
 
 
 def gate():
@@ -488,6 +495,222 @@ def _(tmp):
     return "drifted"
 
 
+# --- the Company Report, added 06/08/2026 ----------------------------------
+# Two of its panels are DERIVED — "also on this framework" is co-listing rather
+# than competition, and the field position band is co-listing x statutory
+# accounts category. docs/COMPANY-REPORT-METHOD.md is the specification; these
+# cases are its invariants, one per case.
+
+@case("a company report turnover of 0 where null means 'not disclosed'")
+def _(tmp):
+    # Driven through gate() rather than in-process, deliberately: this is the
+    # case that proves check_company_report is WIRED INTO main() and not merely
+    # written. The rest are exercised directly, below.
+    p = "data/company-financials.json"
+    if not os.path.exists(p):
+        CREATED.append(p)                    # restore() must take it away again
+    json.dump(cr_financials(turnoverGBP=0), open(p, "w"), ensure_ascii=False, indent=1)
+    # The file also has no marker ref yet, so check_notice fails alongside this
+    # one. The expected phrase below is unique to the check under test.
+    return "parse bug"
+
+
+def cr_today(days=0):
+    return (datetime.date.today() + datetime.timedelta(days=days)).isoformat()
+
+
+def cr_financials(**over):
+    """A financials file that PASSES, so each case can break exactly one thing.
+
+    'GBUK Group' is a real name in data/supplier-seed.json — a company report
+    about a company this repo holds no supplier record for is a report about
+    nobody, and that is one of the cases below.
+    """
+    company = {
+        "companyNumber": "01234567",
+        "registeredName": "GBUK GROUP LIMITED",
+        "matchConfidence": "confirmed",
+        "status": "active",
+        "incorporated": "2000-05-18",
+        "accountsCategory": "full",
+        "accountsMadeUpTo": "2025-03-31",
+        "turnoverGBP": None,
+        "employees": None,
+        "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/01234567",
+    }
+    top = {}
+    for k, v in over.items():
+        if k in ("dataAsOf", "thresholds", "companies", "source"):
+            top[k] = v
+        else:
+            company[k] = v
+    d = {
+        "dataAsOf": cr_today(-30),
+        "source": "Companies House public data API",
+        "thresholds": {
+            "readFrom": "https://www.gov.uk/government/publications/company-size",
+            "readOn": cr_today(-30),
+            "appliesTo": "periods beginning on or after 6 April 2025",
+            "bands": {"micro": {"turnover": 1}, "small": {"turnover": 2},
+                      "medium": {"turnover": 3}},
+        },
+        "companies": {"GBUK Group": company},
+    }
+    d.update(top)
+    return d
+
+
+# A source file that passes every source invariant: no percentage in a share
+# context, no count typed into prose, both evidence floors visible.
+CR_GOOD_JS = """
+/* Field position. No percentage is ever published as market share. */
+function bands(rows){
+  if(rows.length < 2){ return '<p>Fewer than two suppliers on this lot.</p>'; }
+  var known = rows.filter(function(r){ return r.accountsCategory; });
+  if(known.length < rows.length/2){ return '<p>Too few resolved to compare.</p>'; }
+  var h = '<div style="width:100%">';
+  h += '<b>'+rows.length+' suppliers on this lot.</b> ';
+  h += rows.filter(function(r){return r.matchConfidence==='confirmed';}).length+' confirmed.';
+  return h+'</div>';
+}
+"""
+
+CR_CASES = []
+
+
+def cr(name, financials, js, want):
+    CR_CASES.append((name, financials, js, want))
+
+
+cr("a probable name-search match carrying a turnover figure",
+   cr_financials(matchConfidence="probable", turnoverGBP=18000000, accountsCategory=""),
+   "", "PROBABLE match")
+cr("employees of 0, which the page would render as a real figure",
+   cr_financials(employees=0), "", "parse bug")
+cr("an accounts category outside the statutory enum",
+   cr_financials(accountsCategory="small-ish"), "", "not one of the statutory categories")
+cr("a size band label invented ad hoc",
+   cr_financials(band="enormous"), "", "statutory band labels")
+cr("bands assigned with no thresholds block at all",
+   cr_financials(thresholds=None), "", "no `thresholds` block")
+cr("a thresholds block with no date it was read on",
+   cr_financials(thresholds={"readFrom": "https://www.gov.uk/x", "bands": {"micro": {}}}),
+   "", "no usable readOn")
+cr("a thresholds block inventing a fourth statutory band",
+   cr_financials(thresholds={"readFrom": "https://www.gov.uk/x", "readOn": cr_today(-1),
+                             "bands": {"micro": {}, "huge": {}}}), "", "invents band")
+cr("thresholds read on a date that has not happened yet",
+   cr_financials(thresholds={"readFrom": "https://www.gov.uk/x", "readOn": cr_today(400),
+                             "bands": {"micro": {}}}), "", "in the future")
+cr("Companies House read tomorrow — dataAsOf in the future",
+   cr_financials(dataAsOf=cr_today(400)), "", "dataAsOf")
+cr("a company report about a company no supplier record exists for",
+   cr_financials(companies={"Nonesuch Medical Holdings": {
+       "matchConfidence": "confirmed",
+       "registeredName": "NONESUCH MEDICAL HOLDINGS LIMITED",
+       "accountsCategory": "small", "turnoverGBP": None, "employees": None}}),
+   "", "does not resolve to any supplier")
+cr("a turnover figure shown bare, with no made-up-to date",
+   cr_financials(turnoverGBP=18000000, accountsMadeUpTo=""), "", "no accountsMadeUpTo")
+cr("a market share published as a percentage", None,
+   "var h='<b>Market share: '+Math.round(n/t*100)+'%</b>';", "percent sign in a market-share")
+cr("a percentage in the field position panel", None,
+   "h+='<div>Field position: '+p+'% of this market</div>';", "percent sign in a market-share")
+cr("a count typed into the rendered prose", None,
+   "h+='<p>11 suppliers on this lot.</p>';", "count typed into rendered prose")
+cr("a count written out in words in the rendered prose", None,
+   "h+='<p>Three file large-company accounts.</p>';", "count typed into rendered prose")
+cr("probable matches, and a source that never reads matchConfidence",
+   cr_financials(matchConfidence="probable"),
+   "var h='<p>'+rows.length+' on this lot</p>';", "never reads matchConfidence")
+
+# And the other half of the job: the lookalikes it must stay QUIET on. A false
+# FAIL blocks the unattended refresh workflows from committing, and the first
+# false FAIL on an honest empty state is the one that gets the empty state
+# deleted to make a push go through.
+CR_QUIET = [
+    ("a good file and a good source", cr_financials(), CR_GOOD_JS),
+    ("a CSS width of 100% beside a Field position heading", None,
+     "h+='<div>Field position</div><div style=\"width:100%\"></div>';"),
+    ("a Share button on the interview pack, and a modulo", None,
+     "h+='<button>Share</button>';var alt=i%2;h+='<div style=\"margin-left:50%\"></div>';"),
+    ("a comment explaining the rule it must not break", None,
+     "// never render 12% of this market as a market share\nvar h='';"),
+    ("the evidence floor's own honest empty state", None,
+     "if(rows.length<2){return '<p>Fewer than two suppliers on this lot.</p>';}"
+     "\nif(k<rows.length/2){return '';}"),
+    ("an https:// URL in a string, which naive comment-stripping would eat", None,
+     "var u='https://find-and-update.company-information.service.gov.uk/company/1';"
+     "\nif(rows.length<2){return '';}\nif(k<rows.length/2){return '';}"),
+]
+
+
+def company_report_cases():
+    """The Company Report gate, driven directly.
+
+    app/company-report.js belongs to a build in flight and
+    data/company-financials.json does not exist yet. Writing a fixture over
+    either from a test would race that work and could delete it on restore, so
+    the JavaScript is injected instead — check_company_report takes both halves
+    as arguments precisely so it can be driven this way, as link_check_cases
+    does for the source-link check. One case (above) still goes through gate(),
+    to prove the check is wired into main().
+    """
+    import importlib
+    v = importlib.import_module("verify")
+    failures = 0
+
+    for name, financials, js, want in CR_CASES:
+        v.fails[:] = []
+        v.warns[:] = []
+        v.check_company_report(financials, js)
+        text = " ".join(m for _, m in v.fails)
+        if not v.fails:
+            print("HOLE  %s — the gate PASSED this. It should not." % name); failures += 1
+        elif want.lower() not in text.lower():
+            print("WEAK  %s — rejected, but not for the expected reason (%r missing)"
+                  % (name, want)); failures += 1
+        else:
+            print("ok    %s" % name)
+
+    for name, financials, js in CR_QUIET:
+        v.fails[:] = []
+        v.warns[:] = []
+        v.check_company_report(financials, js)
+        if v.fails:
+            print("HOLE  %s — FALSE FAIL: %s"
+                  % (name, " ".join(m for _, m in v.fails)[:220])); failures += 1
+        else:
+            print("ok    %s — no false failure" % name)
+
+    v.fails[:] = []
+    v.warns[:] = []
+    return failures
+
+
+def company_report_noop_case():
+    """A check that nags before its feature exists is a check people mute.
+
+    data/company-financials.json does not exist, so the Company Report gate must
+    be a clean no-op on it — the same way check_shrink says nothing about a path
+    that is not there. It must never FAIL the repo as it stands.
+    """
+    rc, out = gate()
+    if "FAIL  [company-report]" in out or rc != 0:
+        print("HOLE  the Company Report check fails the repo as it stands:\n%s"
+              % "\n".join(l for l in out.split("\n") if "company-report" in l)[:600])
+        return 1
+    if not os.path.exists("data/company-financials.json") and \
+            not os.path.exists("app/company-report.js"):
+        if "company-report" in out:
+            print("HOLE  the Company Report check is not silent while both its files are absent")
+            return 1
+        print("ok    the Company Report check is a clean no-op while its files do not exist")
+    else:
+        print("ok    the Company Report check passes the files that exist today")
+    return 0
+
+
 def link_check_cases():
     """The source-link check WARNS rather than fails, so it cannot be driven
     through gate() like the cases above — a warning still exits 0, by design.
@@ -572,6 +795,99 @@ def concurrency_cases():
     return failures
 
 
+# --------------------------------------------------------------------------
+# HUB SEARCH INDEX
+# --------------------------------------------------------------------------
+# The index is built by a crawl, and a crawl fails quietly. Every case here is a
+# state where data/hub-search-index.json still parses, still looks plausible in
+# a diff, and still breaks search for every member — which is precisely why the
+# gate has to hold them rather than a person spotting them.
+SEARCH_PATH = "data/hub-search-index.json"
+
+
+def search_index(**over):
+    """A minimal but valid index, stamped so only the fault under test fails."""
+    sys.path.insert(0, "scripts")
+    import stamp_notice
+    doc = {
+        "_notice": stamp_notice.notice_for("hub-search-index.json"),
+        "generated": "2026-08-06T20:00:00Z",
+        "dataAsOf": "2026-08-06",
+        "pages": [{
+            "id": 1874, "t": "Value-Based Procurement",
+            "u": "/medical-sales-hub/value-based-procurement/",
+            "sec": [{"h": "THE FIVE VALUE DOMAINS", "a": "vbp-domains",
+                     "x": "Social value, efficiency, patient and staff, supply chain, purpose."}],
+        }],
+        "records": [{"t": "Coloplast", "u": "/medical-sales-hub/suppliers/#q=Coloplast",
+                     "k": "coloplast urology continence", "c": "Supplier"}],
+    }
+    doc.update(over)
+    return doc
+
+
+def write_search(doc):
+    if not os.path.exists(SEARCH_PATH):
+        CREATED.append(SEARCH_PATH)
+    json.dump(doc, open(SEARCH_PATH, "w"), indent=1, ensure_ascii=False)
+
+
+@case("a search index with no pages at all (a crawl that returned nothing)")
+def _(tmp):
+    write_search(search_index(pages=[]))
+    return "no pages"
+
+
+@case("a search index that swallowed the page header, so everything matches everything")
+def _(tmp):
+    doc = search_index()
+    doc["pages"][0]["sec"].append({
+        "h": "NAV", "a": "",
+        "x": "LIVE DESK PATHWAYS REP BRIEFINGS SUPPLIERS FRAMEWORKS TRACKERS THEATRES "
+             "CONFERENCES PODCASTS SALES ICONS CAREERS CLINICAL COURSES REFERENCE",
+    })
+    write_search(doc)
+    return "page header in its text"
+
+
+@case("a search index carrying the Live Desk's hourly rows, stale within the day")
+def _(tmp):
+    doc = search_index()
+    doc["pages"].append({
+        "id": 675, "t": "Medical Sales Intelligence Hub · Live Desk",
+        "u": "/medical-sales-hub/",
+        "sec": [{"h": "MHRA ALERTS & RECALLS", "a": "",
+                 "x": "03 AUG Critical incident stood down - East Kent Hospitals NHS Trust"}],
+    })
+    write_search(doc)
+    return "hourly rows"
+
+
+@case("a search index pointing results off the Hub")
+def _(tmp):
+    doc = search_index()
+    doc["pages"][0]["u"] = "https://example.invalid/somewhere/"
+    write_search(doc)
+    return "absolute or off-site URL"
+
+
+@case("a search index that collapsed to a fraction of the pages it had")
+def _(tmp):
+    # Only meaningful once there is a committed index to compare against.
+    old = subprocess.run(["git", "show", "HEAD:" + SEARCH_PATH],
+                         capture_output=True, text=True)
+    if old.returncode != 0:
+        return None
+    try:
+        prev = json.loads(old.stdout)
+    except ValueError:
+        return None
+    if len(prev.get("pages") or []) < 10:
+        return None
+    write_search(search_index())        # one page, against a committed many
+    return "drops from"
+
+
 def main():
     # Snapshot every file a case might touch, so the repo is left untouched.
     #
@@ -599,6 +915,16 @@ def main():
             src = os.path.join(tmp, f.replace("/", "_"))
             if os.path.exists(src):
                 shutil.copy(src, f)
+        # A case may create a file the repo does not have yet —
+        # data/company-financials.json is one, and writing it is the only way to
+        # prove the Company Report check is wired into main() rather than merely
+        # written. Copying a snapshot back cannot undo a creation, so those are
+        # removed by name. Only paths a case registered, and only when nothing
+        # was snapshotted for them, so a file another session lands mid-run is
+        # never deleted here.
+        for f in CREATED:
+            if not os.path.exists(os.path.join(tmp, f.replace("/", "_"))) and os.path.exists(f):
+                os.remove(f)
 
     # The gate must pass on the real, current data first — otherwise every
     # "caught it" below is meaningless.
@@ -624,6 +950,8 @@ def main():
 
     restore()
     failures += link_check_cases()
+    failures += company_report_cases()
+    failures += company_report_noop_case()
     failures += concurrency_cases()
 
     rc, out = gate()
@@ -631,7 +959,11 @@ def main():
         print("\nWARNING: the repo did not restore cleanly — check git status.")
         failures += 1
     print()
-    print("GATE HOLDS — %d case(s)." % (len(CASES) + 5) if not failures
+    # The tally is itself a count in prose that has to match the rows: 3 link
+    # cases + 2 concurrency cases, 1 Company Report no-op, and the Company
+    # Report cases counted rather than typed.
+    extras = 5 + 1 + len(CR_CASES) + len(CR_QUIET)
+    print("GATE HOLDS — %d case(s)." % (len(CASES) + extras) if not failures
           else "GATE HAS %d HOLE(S) — fix verify.py before trusting it." % failures)
     return 1 if failures else 0
 
