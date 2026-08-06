@@ -817,7 +817,7 @@ def search_index(**over):
             "id": 1874, "t": "Value-Based Procurement",
             "u": "/medical-sales-hub/value-based-procurement/",
             "sec": [{"h": "THE FIVE VALUE DOMAINS", "a": "vbp-domains",
-                     "x": "Social value, efficiency, patient and staff, supply chain, purpose."}],
+                     "w": "chain efficiency patient purpose social staff supply value"}],
         }],
         "records": [{"t": "Coloplast", "u": "/medical-sales-hub/suppliers/#q=Coloplast",
                      "k": "coloplast urology continence", "c": "Supplier"}],
@@ -843,11 +843,11 @@ def _(tmp):
     doc = search_index()
     doc["pages"][0]["sec"].append({
         "h": "NAV", "a": "",
-        "x": "LIVE DESK PATHWAYS REP BRIEFINGS SUPPLIERS FRAMEWORKS TRACKERS THEATRES "
-             "CONFERENCES PODCASTS SALES ICONS CAREERS CLINICAL COURSES REFERENCE",
+        "w": "briefings careers conferences downloads frameworks glossary icons "
+             "pathways podcasts reference theatres trackers",
     })
     write_search(doc)
-    return "page header in its text"
+    return "page header in its words"
 
 
 @case("a search index carrying the Live Desk's hourly rows, stale within the day")
@@ -857,10 +857,30 @@ def _(tmp):
         "id": 675, "t": "Medical Sales Intelligence Hub · Live Desk",
         "u": "/medical-sales-hub/",
         "sec": [{"h": "MHRA ALERTS & RECALLS", "a": "",
-                 "x": "03 AUG Critical incident stood down - East Kent Hospitals NHS Trust"}],
+                 "w": "03 aug critical down east incident kent stood trust"}],
     })
     write_search(doc)
     return "hourly rows"
+
+
+@case("a search index with readable prose put back into a section")
+def _(tmp):
+    # The exact regression the word bag exists to prevent: someone adds a text
+    # field to get the quoted snippet line back, and this PUBLIC file starts
+    # carrying the paid Hub's prose again.
+    doc = search_index()
+    doc["pages"][0]["sec"][0]["x"] = ("Social value, efficiency, patient and staff, supply "
+                                      "chain and purpose are the five value domains.")
+    write_search(doc)
+    return "unexpected field"
+
+
+@case("a search index whose word bag kept its original order, so the prose survives")
+def _(tmp):
+    doc = search_index()
+    doc["pages"][0]["sec"][0]["w"] = "social value efficiency patient staff supply chain purpose"
+    write_search(doc)
+    return "unsorted or duplicated word bag"
 
 
 @case("a search index pointing results off the Hub")

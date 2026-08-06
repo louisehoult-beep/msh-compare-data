@@ -18,12 +18,17 @@ per page. That had three faults that no amount of editing fixes:
      HTML and none of them were searchable anywhere on the Hub.
 
 This script removes all three by building the index from what is actually
-published: it crawls every live Hub page, extracts the real text section by
-section, and merges in the supplier records this repo already holds. The output
-is data/hub-search-index.json, which app/hub-search.js loads in the browser.
+published: it crawls every live Hub page, takes each section's heading, anchor
+and searchable words, and merges in the supplier records this repo already
+holds. The output is data/hub-search-index.json, which app/hub-search.js loads
+in the browser.
 
 Nothing here is AI and nothing here costs anything to run: it is a crawl, a
 strip and a sort. Search happens in the member's browser against a static file.
+
+IT CARRIES NO READABLE HUB TEXT, ON PURPOSE. This repo is public, so anything in
+the index is readable by anyone; a paywalled product's prose does not go in it.
+See the note above MAX_WORDS for what that means and what it costs.
 
 WHAT IS DELIBERATELY THROWN AWAY
 --------------------------------
@@ -88,11 +93,38 @@ BOILERPLATE = (
     "join log in",
 )
 
-# Section text is capped so the index stays small enough to ship to a browser.
-# 900 characters is roughly a long paragraph — enough for a useful snippet and
-# for the words that matter, without shipping the whole Hub to every member.
-SECTION_CHARS = 900
+# THE INDEX CARRIES NO READABLE HUB TEXT. THIS IS THE POINT, NOT A LIMITATION.
+#
+# The browser fetches this file from a PUBLIC repository — that is how the Hub
+# loads it, and it is why anyone can read data/supplier-index.json today. An
+# index holding running prose from every Hub page would therefore put the
+# written content of a PAYWALLED product on GitHub for anyone to download. The
+# Hub is the product; publishing its text to make its search box better is a bad
+# trade, and Lou ruled on it on 06/08/2026.
+#
+# So a section stores its HEADING, its ANCHOR, and a BAG OF WORDS: unique,
+# alphabetised, stopwords dropped. Sorting destroys word order and dropping
+# duplicates destroys frequency, so the prose cannot be reassembled from it,
+# while every word a member might search for is still there to match on.
+#
+# WHAT THIS COSTS: a result cannot quote the line it matched on. It gives you
+# the page and the section, and links straight to it. If that quoted line is
+# ever wanted back, the index has to move behind the login first — never make
+# this file more readable to get it.
+MAX_WORDS = 120
 MAX_SECTIONS = 60
+HEADING_CHARS = 120
+
+# Dropped from the bag: they match everything, so they narrow nothing, and they
+# are the words that would help most in reconstructing a sentence.
+BAG_STOP = set((
+    "the a an of for in on at to is are am was were be been being do does did "
+    "how what where which who whom why when this that these those it its and or "
+    "but if as by from with without into onto over under than then so such not "
+    "no nor can could should would will shall may might must have has had you "
+    "your we our they their he she his her i me my us them there here all any "
+    "each every other more most some very also just only own same too s t"
+).split())
 
 TAG_BLOCKS = ("style", "script", "header", "footer", "nav", "svg", "noscript")
 
@@ -243,8 +275,26 @@ def anchor_for(attrs, preceding):
     return ""
 
 
+def bag(text):
+    """A section's searchable words: unique, alphabetised, stopwords dropped.
+
+    Sorting throws away word order and de-duplication throws away frequency, so
+    what is left matches a query but cannot be read back as the Hub's prose. See
+    the note on MAX_WORDS — this is the whole reason the index is shaped this
+    way, and turning it back into running text would republish a paid product.
+    """
+    words = set()
+    for w in re.split(r"[^a-z0-9]+", text.lower()):
+        if len(w) < 2:
+            continue
+        if w in BAG_STOP:
+            continue
+        words.add(w)
+    return " ".join(sorted(words)[:MAX_WORDS])
+
+
 def sections_of(src, page_title):
-    """Split a page into (heading, anchor, text) in document order."""
+    """Split a page into (heading, anchor, word-bag) in document order."""
     body = strip_furniture(src)
     out = []
     marks = list(HEADING.finditer(body))
@@ -254,7 +304,7 @@ def sections_of(src, page_title):
     # which is a result with nothing in it. 25 characters separates the two.
     lead = clean_text(body[:marks[0].start()] if marks else body)
     if len(lead) >= 25:
-        out.append({"h": page_title, "a": "", "x": lead[:SECTION_CHARS]})
+        out.append({"h": page_title[:HEADING_CHARS], "a": "", "w": bag(lead)})
 
     for i, m in enumerate(marks):
         heading = clean_text(m.group(3))
@@ -263,13 +313,11 @@ def sections_of(src, page_title):
         end = marks[i + 1].start() if i + 1 < len(marks) else len(body)
         text = clean_text(body[m.end():end])
         anchor = anchor_for(m.group(2), body[:m.start()])
-        if not text and not heading:
-            continue
-        out.append({"h": heading, "a": anchor, "x": text[:SECTION_CHARS]})
+        out.append({"h": heading[:HEADING_CHARS], "a": anchor, "w": bag(text)})
 
-    # A section needs a heading someone could read, or enough text to be an
-    # answer. Anything else is a row in the results list that wastes a click.
-    out = [s for s in out if len(s["h"]) >= 3 or len(s["x"]) >= 25]
+    # A section needs a heading someone could read, or enough words to be worth
+    # matching. Anything else is a row in the results list that wastes a click.
+    out = [s for s in out if len(s["h"]) >= 3 or len(s["w"].split()) >= 5]
     return out[:MAX_SECTIONS]
 
 
@@ -336,7 +384,7 @@ def build(pages):
         if not title or not src:
             continue
         secs = sections_of(src, title)
-        words = sum(len(s["x"].split()) for s in secs)
+        words = sum(len(s["w"].split()) for s in secs)
         if words < 5:
             # A page with essentially no text is a shell — a loader, a redirect
             # stub or a page whose content is drawn entirely by script. Indexing
@@ -396,7 +444,7 @@ def main():
     if args.stats:
         print("\nPages by section count:")
         for p in sorted(doc["pages"], key=lambda p: -len(p["sec"]))[:15]:
-            words = sum(len(s["x"].split()) for s in p["sec"])
+            words = sum(len(s["w"].split()) for s in p["sec"])
             print("  %-52s %3d sections %6d words" % (p["t"][:52], len(p["sec"]), words))
 
 
