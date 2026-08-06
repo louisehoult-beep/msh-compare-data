@@ -56,8 +56,10 @@ TERMS = "https://medsalesintelligencehub.co.uk/terms/"
 REFS = {
     "company-financials.json": "ETH-DCC5A9B31",
     "compare-issues.json":     "ETH-D6991A2E7",
+    "frameworks.json":         "ETH-DB4D6B772",
     "compare-suppliers.json":  "ETH-D21869855",
     "contacts-optout.json":    "ETH-D12682420",
+    "frameworks.json":         "ETH-DB4D6B772",
     "hub-search-index.json":   "ETH-D50A4C4E3",
     "nhssc-cache.json":        "ETH-D84BDB325",
     "people-moves.json":       "ETH-D4435AEAF",

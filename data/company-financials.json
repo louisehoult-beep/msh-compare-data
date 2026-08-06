@@ -1,0 +1,241 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-DCC5A9B31",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "dataAsOf": "2026-08-06",
+ "source": "Companies House public register, read page by page at find-and-update.company-information.service.gov.uk on 06/08/2026. MANUAL INTERIM: the Companies House API key is still awaited, so these records were read from the public website by hand, one company at a time, for the example lot only. scripts/refresh_companies_house.py replaces this file wholesale once COMPANIES_HOUSE_KEY exists — nothing here is load-bearing beyond the companies it names.",
+ "coverage": "The suppliers on GBUK Group's two frameworks only (NHS Supply Chain IV Cannula; Needle-free Connection Systems). 8 companies of the 459 in supplier-index.json. Every other supplier is ABSENT, not unresolved — a report for an absent company renders the Stage 3 panel's honest empty state.",
+ "accountsCategoryNote": "accountsCategory here is read from the exact wording of the company's most recent accounts filing on the public register ('Full accounts made up to ...' -> full; 'Group of companies' accounts ...' -> group). The Companies House API returns a 17-value enum instead; mapping that enum to this file's vocabulary is an open design point for refresh_companies_house.py, recorded in docs/COMPANY-REPORT-METHOD.md. Do not widen verify.py's list to make an unmapped value pass.",
+ "thresholds": {
+  "readFrom": "https://www.legislation.gov.uk/uksi/2024/1303/regulation/10/made",
+  "alsoRead": [
+   "https://www.legislation.gov.uk/uksi/2024/1303/regulation/9/made",
+   "https://www.legislation.gov.uk/ukpga/2006/46/section/465",
+   "https://www.gov.uk/annual-accounts/microentities-small-and-dormant-companies"
+  ],
+  "readOn": "2026-08-06",
+  "appliesTo": "in relation to a financial year beginning on or after 6th April 2025 (SI 2024/1303 reg 3, quoted verbatim)",
+  "bands": {
+   "micro": {
+    "turnoverGBP": 1000000,
+    "balanceSheetGBP": 500000,
+    "employees": 10,
+    "verbatim": "Your company will be a micro-entity if it has any 2 of the following: a turnover of £1 million or less, £500,000 or less on its balance sheet, 10 employees or less",
+    "verbatimSource": "https://www.gov.uk/annual-accounts/microentities-small-and-dormant-companies"
+   },
+   "small": {
+    "turnoverGBP": 15000000,
+    "balanceSheetGBP": 7500000,
+    "employees": 50,
+    "verbatim": "Your company will be 'small' if it has any 2 of the following: a turnover of £15 million or less, £7.5 million or less on its balance sheet, 50 employees or less",
+    "verbatimSource": "https://www.gov.uk/annual-accounts/microentities-small-and-dormant-companies"
+   },
+   "medium": {
+    "turnoverGBP": 54000000,
+    "balanceSheetGBP": 27000000,
+    "employees": 250,
+    "verbatim": "Turnover: Not more than £54 million. Balance sheet total: Not more than £27 million. Number of employees: Not more than 250.",
+    "verbatimSource": "https://www.legislation.gov.uk/ukpga/2006/46/section/465 (s465(3) as amended by SI 2024/1303 reg 10: turnover row 'for Not more than £36 million substitute Not more than £54 million'; balance sheet row 'for Not more than £18 million substitute Not more than £27 million')"
+   }
+  }
+ },
+ "companies": {
+  "GBUK Group": {
+   "companyNumber": "09458917",
+   "registeredName": "GBUK GROUP LIMITED",
+   "matchConfidence": "confirmed",
+   "matchedOn": "company number recorded in data/supplier-products.json (verified 20/07/2026 against gbukgroup.com). The NHSSC catalogue lists the trading names GBUK HEALTHCARE and GBUK ENTERAL; both are group companies consolidated in this entity's accounts.",
+   "status": "active",
+   "incorporated": "2015-02-25",
+   "registeredOffice": "Woodland House, Blackwood Hall Business Park, Selby, North Yorkshire, YO8 5DD",
+   "sic": [
+    "70100"
+   ],
+   "accountsCategory": "full",
+   "accountsMadeUpTo": "2025-06-30",
+   "accountsFilingVerbatim": "Full accounts made up to 30 June 2025 (filed 11 Jul 2026); prior year filed as Group of companies' accounts made up to 30 June 2024",
+   "turnoverGBP": null,
+   "turnoverNote": "disclosed in the filed full accounts; not yet extracted from the iXBRL document",
+   "employees": null,
+   "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/09458917",
+   "officers": {
+    "readOn": "2026-08-06",
+    "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/09458917/officers",
+    "note": "Statutory register facts only. Appointments and resignations are listed as dated events; this file never asserts that one person replaced another — succession is not a register fact.",
+    "current": [
+     {
+      "name": "GEERING, Michael John",
+      "role": "Director",
+      "appointed": "2017-09-01"
+     },
+     {
+      "name": "HALL, Mark",
+      "role": "Director",
+      "appointed": "2025-01-24"
+     }
+    ],
+    "recentChanges": [
+     {
+      "name": "COWAN, Joseph David",
+      "role": "Director",
+      "event": "resigned",
+      "date": "2026-02-09"
+     },
+     {
+      "name": "SPILLER, Peter Vincent John",
+      "role": "Director",
+      "event": "resigned",
+      "date": "2025-11-07"
+     },
+     {
+      "name": "HALL, Mark",
+      "role": "Director",
+      "event": "appointed",
+      "date": "2025-01-24"
+     },
+     {
+      "name": "GARBETT, Martin Richard",
+      "role": "Director",
+      "event": "resigned",
+      "date": "2025-01-27"
+     }
+    ]
+   }
+  },
+  "B. Braun Medical": {
+   "companyNumber": "02296559",
+   "registeredName": "B. BRAUN MEDICAL LIMITED",
+   "matchConfidence": "confirmed",
+   "matchedOn": "company number 2296559 published on the company's own legal imprint at bbraun.co.uk (read 06/08/2026), matching the Companies House record at the same Sheffield registered office. NHSSC catalogue legal name: B BRAUN MEDICAL LTD.",
+   "status": "active",
+   "incorporated": "1988-09-14",
+   "registeredOffice": "Brookdale Road, Thorncliffe Park Estate, Chapeltown, Sheffield, S35 2PW",
+   "sic": [
+    "86900"
+   ],
+   "accountsCategory": "full",
+   "accountsMadeUpTo": "2025-12-31",
+   "accountsFilingVerbatim": "Full accounts made up to 31 December 2025 (filed 11 May 2026)",
+   "turnoverGBP": null,
+   "turnoverNote": "disclosed in the filed full accounts; not yet extracted from the iXBRL document",
+   "employees": null,
+   "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/02296559"
+  },
+  "Vygon (UK)": {
+   "companyNumber": "01131530",
+   "registeredName": "VYGON (U.K.) LIMITED",
+   "matchConfidence": "confirmed",
+   "matchedOn": "registration number 01131530 published on the company's own terms page at vygon.co.uk (read 06/08/2026), matching the Companies House record at the same Swindon registered office. NHSSC catalogue legal name: VYGON UK LTD.",
+   "status": "active",
+   "incorporated": "1973-08-28",
+   "registeredOffice": "The Pierre Simonet Building V Park, Gateway North, Latham Road, Swindon, SN25 4DL",
+   "sic": [
+    "46460"
+   ],
+   "accountsCategory": "full",
+   "accountsMadeUpTo": "2025-12-31",
+   "accountsFilingVerbatim": "Full accounts made up to 31 December 2025 (filed 10 Jun 2026)",
+   "turnoverGBP": null,
+   "turnoverNote": "disclosed in the filed full accounts; not yet extracted from the iXBRL document",
+   "employees": null,
+   "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/01131530"
+  },
+  "BD — Becton, Dickinson": {
+   "companyNumber": "00852702",
+   "registeredName": "BECTON, DICKINSON U.K. LIMITED",
+   "matchConfidence": "confirmed",
+   "matchedOn": "NHSSC catalogue lists the framework supplier as BECTON DICKINSON UK LTD with Wokingham depot codes; Companies House holds exactly one active company of that name and town (00852702, Wokingham, incorporated 1965). bd.com refuses automated reads (HTTP 403), so the company's own imprint could not be fetched this run — the catalogue-name-plus-town agreement is the confirmation. A separate entity BECTON DICKINSON (CME) U.K LIMITED also appears in the catalogue for 2 pump lines and is NOT this record.",
+   "status": "active",
+   "incorporated": "1965-06-25",
+   "registeredOffice": "1030 Eskdale Road, Winnersh Triangle, Wokingham, Berkshire, RG41 5TS",
+   "sic": [
+    "32500"
+   ],
+   "accountsCategory": "full",
+   "accountsMadeUpTo": "2025-09-30",
+   "accountsFilingVerbatim": "Full accounts made up to 30 September 2025 (filed 10 Jul 2026)",
+   "turnoverGBP": null,
+   "turnoverNote": "disclosed in the filed full accounts; not yet extracted from the iXBRL document",
+   "employees": null,
+   "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/00852702"
+  },
+  "Terumo UK": {
+   "companyNumber": "04571001",
+   "registeredName": "TERUMO UK LIMITED",
+   "matchConfidence": "confirmed",
+   "matchedOn": "NHSSC catalogue lists the framework supplier as TERUMO UK LTD; Companies House holds exactly one active company of that name (04571001, Camberley). Terumo's own EMEA site carries no UK imprint page that could be fetched this run — the catalogue-name agreement is the confirmation.",
+   "status": "active",
+   "incorporated": "2002-10-23",
+   "registeredOffice": "Building 2 Ground Floor, Meadows Business Park, Blackwater, Camberley, Surrey, GU17 9AB",
+   "sic": [
+    "47789"
+   ],
+   "accountsCategory": "full",
+   "accountsMadeUpTo": "2025-03-31",
+   "accountsFilingVerbatim": "Full accounts made up to 31 March 2025 (filed 17 Apr 2026)",
+   "turnoverGBP": null,
+   "turnoverNote": "disclosed in the filed full accounts; not yet extracted from the iXBRL document",
+   "employees": null,
+   "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/04571001"
+  },
+  "Baxter Healthcare Ltd": {
+   "companyNumber": "00461365",
+   "registeredName": "BAXTER HEALTHCARE LIMITED",
+   "matchConfidence": "confirmed",
+   "matchedOn": "NHSSC catalogue lists the framework supplier as BAXTER HEALTHCARE LIMITED (depot code NEWBURY01); Companies House holds exactly one active company of that exact name (00461365, registered office now Thetford, Norfolk; formerly TRAVENOL LABORATORIES LIMITED to 01/02/1988).",
+   "status": "active",
+   "incorporated": "1948-11-18",
+   "registeredOffice": "Caxton Way, Thetford, Norfolk, IP24 3SE",
+   "sic": [
+    "21100"
+   ],
+   "accountsCategory": "full",
+   "accountsMadeUpTo": "2024-12-31",
+   "accountsFilingVerbatim": "Full accounts made up to 31 December 2024 (filed 04 Oct 2025)",
+   "turnoverGBP": null,
+   "turnoverNote": "disclosed in the filed full accounts; not yet extracted from the iXBRL document",
+   "employees": null,
+   "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/00461365"
+  },
+  "ICU Medical (incl. Smiths Medical)": {
+   "companyNumber": null,
+   "registeredName": "ICU MEDICAL INTERNATIONAL LIMITED",
+   "matchConfidence": "probable",
+   "matchedOn": "NAME SEARCH ONLY, and the group runs at least six active UK companies (Ashford, Kent), so which entity supplies the framework is not established. The likeliest trading company is ICU MEDICAL INTERNATIONAL LIMITED 00362847 (formerly SMITHS MEDICAL INTERNATIONAL LIMITED, formerly PORTEX LIMITED; full accounts made up to 31 December 2024) — but no catalogue entry names an ICU or Smiths legal entity, so this record stays PROBABLE, carries no accounts category, and feeds no size comparison.",
+   "status": "active",
+   "incorporated": "1940-08-16",
+   "registeredOffice": "1500 Eureka Park, Lower Pemberton, Ashford, Kent, TN25 4BF",
+   "sic": [
+    "22290"
+   ],
+   "accountsCategory": null,
+   "accountsMadeUpTo": null,
+   "turnoverGBP": null,
+   "employees": null,
+   "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/00362847"
+  },
+  "Nipro Medical Europe": {
+   "companyNumber": null,
+   "registeredName": null,
+   "matchConfidence": "probable",
+   "matchedOn": "The NHSSC catalogue names this supplier NIPRO EUROPE NV UK — a Belgian NV trading through a UK arm. Its UK branch registrations (BR008139; FC025899, 'Refer To Parent Registry, Belgium') are both CLOSED on the register, and while active UK Nipro companies exist (NIPRO MEDICAL UK LTD 06993337, Southampton; NIPRO LIMITED 03054349; NIPRO DIAGNOSTICS (UK) LIMITED 03936551), none is confirmed as the framework supplier. No UK statutory accounts category can be attached to this supplier — a company that files in Belgium has no Companies House size band, and inventing one from a sister company would attach the wrong company's finances to the name.",
+   "status": null,
+   "incorporated": null,
+   "registeredOffice": null,
+   "sic": [],
+   "accountsCategory": null,
+   "accountsMadeUpTo": null,
+   "turnoverGBP": null,
+   "employees": null,
+   "sourceUrl": "https://find-and-update.company-information.service.gov.uk/search/companies?q=Nipro+Europe"
+  }
+ }
+}
