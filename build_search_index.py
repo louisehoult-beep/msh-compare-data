@@ -139,12 +139,32 @@ GLYPHS = "←→↑↓↗↘↖↙⟶▸▪●■"
 # that looks like Hub content and is not on the Hub any more. So the rotating
 # regions are stripped and only the stable page around them is indexed.
 #
-# <ul class="rows"> is exactly the region publish.py owns; <span class="tick">
-# is one ticker item. Both are matched by class, so a page that does not carry
-# the pipeline pattern is untouched.
+# <ul class="rows"> is exactly the region publish.py owns; the ticker is the
+# other one. Both are matched by class, so a page that does not carry the
+# pipeline pattern is untouched.
+#
+# THESE MUST BE STRIPPED WITH NESTING HONOURED, NOT WITH A NON-GREEDY REGEX.
+# The first version used `<span class="tick">.*?</span>` and looked correct
+# against a hand-written fixture. The real ticker nests:
+#
+#     <span class="tick"><span class="tag t-tender">TENDER</span><a …>…</a></span>
+#
+# so `.*?` stopped at the FIRST </span> — the inner one — and left the headline
+# behind. The gate caught it on the first real crawl (a month token reached the
+# Live Desk's words); a simpler fixture never would have.
 VOLATILE = (
-    r"""<ul\b[^>]*class\s*=\s*["'][^"']*\brows\b[^"']*["'][^>]*>.*?</ul\s*>""",
-    r"""<span\b[^>]*class\s*=\s*["'][^"']*\btick\b[^"']*["'][^>]*>.*?</span\s*>""",
+    ("ul", "rows"),
+    ("span", "tick"),
+    ("div", "ticker"),        # the wrapper, in case an item ever loses its class
+
+    # IN-PAGE DIRECTORIES. The Live Desk carries two grids of links to other Hub
+    # pages — "ON THE DESK" (.eth-index) and "EXPLORE THE HUB" (.explore). They
+    # are navigation that happens to sit in the body rather than the header, and
+    # indexing them gave the Live Desk 120 words made entirely of other pages'
+    # names, so it competed with the very pages it links to. Same reasoning as
+    # stripping <nav>: a list of where to go is not an answer.
+    ("section", "explore"),
+    ("div", "eth-index"),
 )
 
 
@@ -228,6 +248,42 @@ def path_of(page):
         return "/"
 
 
+def strip_element(html, tag, class_word):
+    """Remove every <tag class="… class_word …"> … </tag>, counting nesting.
+
+    A non-greedy regex cannot do this: it closes on the first </tag> it meets,
+    which for a nested element is the WRONG one and leaves the tail behind. That
+    is not hypothetical — see the note above VOLATILE.
+    """
+    opener = re.compile(r"<%s\b[^>]*\bclass\s*=\s*[\"'][^\"']*\b%s[^\"']*[\"'][^>]*>"
+                        % (tag, class_word), re.I)
+    any_open = re.compile(r"<%s\b[^>]*?(?<!/)>" % tag, re.I)
+    closer = re.compile(r"</%s\s*>" % tag, re.I)
+
+    out, pos = [], 0
+    while True:
+        m = opener.search(html, pos)
+        if not m:
+            break
+        depth, i = 1, m.end()
+        while depth > 0:
+            nxt_close = closer.search(html, i)
+            if not nxt_close:
+                i = len(html)          # unbalanced markup: drop to the end
+                break
+            nxt_open = any_open.search(html, i)
+            if nxt_open and nxt_open.start() < nxt_close.start():
+                depth += 1
+                i = nxt_open.end()
+            else:
+                depth -= 1
+                i = nxt_close.end()
+        out.append(html[pos:m.start()])
+        pos = i
+    out.append(html[pos:])
+    return " ".join(out)
+
+
 def strip_furniture(src):
     """Remove everything that is chrome rather than content.
 
@@ -236,8 +292,8 @@ def strip_furniture(src):
     most important step — see the module docstring.
     """
     s = re.sub(r"<!--.*?-->", " ", src, flags=re.S)
-    for pattern in VOLATILE:
-        s = re.sub(pattern, " ", s, flags=re.S | re.I)
+    for tag, cls in VOLATILE:
+        s = strip_element(s, tag, cls)
     for tag in TAG_BLOCKS:
         s = re.sub(r"<%s\b[^>]*>.*?</%s\s*>" % (tag, tag), " ", s, flags=re.S | re.I)
         # Unclosed or self-closing leftovers.
