@@ -75,7 +75,11 @@ KEYWORDS = {
 # one notice from an index is a judgement, not a match. So automation refuses.
 # Plural "Notices" is the discriminator; a single "Field Safety Notice ..." is a
 # real notice about a real product and is still filed normally.
-ROUNDUP_TITLE = re.compile(r"^\s*field safety notices\b", re.I)
+ROUNDUP_TITLE = re.compile(
+    r"^\s*(field safety notices\b"          # gov.uk weekly FSN listing
+    r"|mhra safety roundup\b"                # monthly MHRA digest, same shape
+    r"|drug (safety )?update\b"              # DSU bulletin, several items per issue
+    r")", re.I)
 
 
 def is_roundup(title):
