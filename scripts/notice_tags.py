@@ -90,10 +90,26 @@ SPEC_TERMS = {
     'ophthalmology': r"ophthalm|intraocular|cataract|optometr|\bretina|vitreoretin|slit lamp",
     'ortho': r"orthopaed|orthopedic|arthroplast|\bhip and knee\b|knee replacement|"
              r"hip replacement|trauma implant|spinal implant|casting material|\bplaster of paris\b",
-    'gastro': r"gastroenterolog|\bcolorectal\b|bowel screening|\bhepatolog",
+    # Widened 06/08/2026. The MHRA's Allurion gastric balloon alert (DSI/2026/004)
+    # matched none of the original four terms and landed in 'unsorted', because
+    # every term named the SPECIALITY and none named a thing you can hold. The
+    # additions are all GI procedures or devices. Deliberately NOT added:
+    # 'colonoscop'/'gastroscop', which belong to 'endoscopy' — that set is
+    # scope-led and sorts first anyway, so duplicating them here would only make
+    # the tie-break do the work.
+    'gastro': r"gastroenterolog|\bcolorectal\b|bowel screening|\bhepatolog|"
+              r"gastric balloon|gastrostom|\bpeg tube\b|polypectom|\bercp\b|"
+              r"oesophageal stent|variceal|\bbarrett",
     'renal': r"\brenal\b|dialys|haemofiltrat|nephrolog",
-    'womens': r"maternity|obstetric|gynaecolog|midwif|neonatal screening|contracepti|"
-              r"breast screening|cervical screening",
+    # Widened 06/08/2026, same reason as 'gastro'. Two notices went unsorted on
+    # 05-06/08/2026 that this set should have caught: a Vernacare VAGINAL SPECULUM
+    # supply issue, and a J&J GYNECARE TVT Exact field safety notice — 'gynaecolog'
+    # does not match the US spelling in the brand name 'Gynecare', and no term
+    # covered the instrument itself. Both spellings are now matched.
+    'womens': r"maternity|obstetric|gynaecolog|gynecolog|gynecare|midwif|"
+              r"neonatal screening|contracepti|breast screening|cervical screening|"
+              r"\bvaginal\b|speculum|colposcop|pessar|hysteroscop|\btvt\b|"
+              r"mid-?urethral sling|breast pump",
     'neuro': r"neurosurg|neurolog|neurophysiolog|\beeg\b|spinal cord stimul",
     'anaesthesia': r"anaesthe|airway management|laryngoscop|critical care consumable|"
                    r"\bicu\b consumable|intensive care equipment",
