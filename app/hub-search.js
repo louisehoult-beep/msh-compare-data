@@ -107,7 +107,12 @@
       for (j = 0; j < p.sec.length; j++) {
         s = p.sec[j];
         s._h = ' ' + String(s.h || '').toLowerCase();
-        s._x = ' ' + String(s.x || '').toLowerCase();
+        /* `w` is a bag of words, not prose: unique, alphabetised, stopwords
+         * dropped. The index is served from a public repo, so it deliberately
+         * carries nothing that can be read back as the Hub's paid content. That
+         * is why there is no snippet under a result — do not add one by putting
+         * text back in the index. */
+        s._w = ' ' + String(s.w || '').toLowerCase();
       }
     }
     for (i = 0; i < doc.records.length; i++) {
@@ -128,14 +133,15 @@
     for (j = 0; j < p.sec.length; j++) {
       sec = p.sec[j];
       ss = 0;
-      if (phrase.length > 2) {
-        if (sec._h.indexOf(phrase) !== -1) { ss += 90; }
-        else if (sec._x.indexOf(phrase) !== -1) { ss += 55; }
-      }
+      /* A phrase can only be matched against a heading. The body is a sorted
+       * bag of words, so word order does not survive in it and there is no
+       * phrase left to find — which is exactly the property that stops the
+       * index being readable. */
+      if (phrase.length > 2 && sec._h.indexOf(phrase) !== -1) { ss += 90; }
       for (i = 0; i < toks.length; i++) {
         tok = toks[i];
         if (hits(sec._h, tok)) { ss += 12; covered[tok] = 1; }
-        else if (hits(sec._x, tok)) { ss += 6; covered[tok] = 1; }
+        else if (hits(sec._w, tok)) { ss += 6; covered[tok] = 1; }
       }
       if (ss > bestS) { bestS = ss; best = sec; }
       s += ss;
@@ -169,26 +175,13 @@
     return s;
   }
 
-  function snippet(text, toks) {
-    if (!text) { return ''; }
-    var low = ' ' + text.toLowerCase(), at = -1, i, k;
-    for (i = 0; i < toks.length; i++) {
-      k = low.indexOf(' ' + toks[i]);
-      if (k !== -1) { at = k; break; }
-    }
-    var start = at > 60 ? at - 60 : 0;
-    var cut = text.slice(start, start + 190);
-    if (start > 0) { cut = '…' + cut.replace(/^\S*\s/, ''); }
-    if (start + 190 < text.length) { cut = cut.replace(/\s\S*$/, '') + '…'; }
-
-    var out = esc(cut);
-    for (i = 0; i < toks.length; i++) {
-      if (toks[i].length < 2) { continue; }
-      out = out.replace(new RegExp('(\\b' + toks[i].replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'),
-                        '<b style="color:' + GOLD + ';font-weight:700;">$1</b>');
-    }
-    return out;
-  }
+  /* THERE IS NO SNIPPET FUNCTION, AND THAT IS DELIBERATE.
+   * An earlier build quoted the matching line under each result, which meant the
+   * index had to carry running text from every Hub page — and the index is
+   * served from a PUBLIC repo, so that published the paid product. Lou ruled on
+   * it, 06/08/2026: the index carries headings and bags of words only. A result
+   * gives the section and links straight to it. If the quoted line is ever
+   * wanted back, move the index behind the login first. */
 
   function rank(q) {
     var toks = tokenise(q), phrase = clean(q), out = [], i, r, sc;
@@ -309,9 +302,9 @@
           if (r.sec.a) { href = r.page.u + '#' + r.sec.a; }
           html += row(href, r.sec.h || r.page.t,
                       r.sec.h && r.sec.h !== r.page.t ? kicker : '',
-                      snippet(r.sec.x, toks));
+                      esc(href));
         } else {
-          html += row(href, r.page.t, '', '');
+          html += row(href, r.page.t, '', esc(href));
         }
       }
     }

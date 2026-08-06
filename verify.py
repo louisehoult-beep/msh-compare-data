@@ -1447,15 +1447,28 @@ def check_company_report(financials, report_js):
 # lesson of 24/07/2026: one line would have caught it and nobody had written it.
 SEARCH_INDEX = "hub-search-index.json"
 
-# Adjacent nav labels. This ordering exists in the header and nowhere in prose —
-# no one writes "podcasts sales icons" in a sentence. A single occurrence
-# anywhere in indexed text means the header is being indexed again.
-NAV_PROBES = ("podcasts sales icons", "sales icons careers", "conferences podcasts")
+# A section's words are stored as a BAG: unique, alphabetised, stopwords gone.
+# That is what stops this public file being readable as the Hub's paid content
+# (see the note above MAX_WORDS in build_search_index.py). It also means neither
+# check below can look for a phrase — word order does not survive — so both are
+# written as set tests instead.
 
-# Pages the cloud pipeline rewrites on a schedule faster than this index is
-# rebuilt. Their rotating rows carry an uppercase day-month stamp ("03 AUG").
+# Nav-only labels. Any one of these can appear in real Hub prose; SIX of them in
+# one section cannot, because that is the header listing the whole site. This is
+# the shape the old phrase probe had before the index stopped carrying prose.
+NAV_WORDS = frozenset((
+    "pathways", "briefings", "trackers", "theatres", "conferences", "podcasts",
+    "icons", "careers", "glossary", "downloads", "reference", "frameworks",
+))
+NAV_MIN = 6
+
+# Pages the cloud pipeline rewrites faster than this index is rebuilt. Their
+# rotating rows are date-stamped ("03 AUG"), so a month abbreviation in the bag
+# means a row got indexed. "may" cannot false-positive: it is a stopword and is
+# dropped before the bag is built.
 PIPELINE_PAGES = {675}
-ROW_STAMP = re.compile(r"\b\d{1,2} (?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\b")
+MONTHS = frozenset(("jan", "feb", "mar", "apr", "jun", "jul",
+                    "aug", "sep", "sept", "oct", "nov", "dec"))
 
 
 def check_search_index(doc):
@@ -1501,16 +1514,40 @@ def check_search_index(doc):
             FAIL("search", "%s drops from %d records to %d. Supplier names would stop being "
                            "findable." % (SEARCH_INDEX, oldrec, newrec))
 
+    # -- the index must not be readable as Hub content --------------------
+    # The whole protection is that a section stores a bag of words rather than
+    # prose. If a future edit puts running text back under another key, this
+    # public file starts publishing a paywalled product again.
+    allowed = {"h", "a", "w"}
+    for p in pages:
+        for s in p.get("sec") or []:
+            extra = set(s.keys()) - allowed
+            if extra:
+                FAIL("search", "%s carries unexpected field(s) %s on a section of %r. Sections "
+                               "hold a heading, an anchor and a bag of words and nothing else — "
+                               "this repo is PUBLIC, so anything readable here republishes the "
+                               "Hub. Ruled 06/08/2026."
+                     % (SEARCH_INDEX, sorted(extra), p.get("t")))
+                return
+            words = (s.get("w") or "").split()
+            if words != sorted(set(words)):
+                FAIL("search", "%s has an unsorted or duplicated word bag on %r. Sorting and "
+                               "de-duplication are what stop the prose being reassembled; if "
+                               "the order is meaningful, the text is still in here."
+                     % (SEARCH_INDEX, p.get("t")))
+                return
+
     # -- nav contamination ------------------------------------------------
     for p in pages:
-        blob = " ".join((s.get("h") or "") + " " + (s.get("x") or "") for s in p.get("sec") or [])
-        low = re.sub(r"\s+", " ", blob.lower())
-        for probe in NAV_PROBES:
-            if probe in low:
-                FAIL("search", "%s has the page header in its text (%r found on %r). Every page "
-                               "then matches every query and search returns everything. Fix the "
-                               "strip in build_search_index.py — do not relax this check."
-                               % (SEARCH_INDEX, probe, p.get("t")))
+        for s in p.get("sec") or []:
+            words = set((s.get("w") or "").split())
+            hit = NAV_WORDS & words
+            if len(hit) >= NAV_MIN:
+                FAIL("search", "%s has the page header in its words (%d nav labels in one "
+                               "section of %r: %s). Every page then matches every query and "
+                               "search returns everything, while the page still looks perfect. "
+                               "Fix the strip in build_search_index.py — do not relax this."
+                     % (SEARCH_INDEX, len(hit), p.get("t"), ", ".join(sorted(hit))))
                 return
 
     # -- rotating content that would be stale by the time it is searched ---
@@ -1518,12 +1555,13 @@ def check_search_index(doc):
         if p.get("id") not in PIPELINE_PAGES:
             continue
         for s in p.get("sec") or []:
-            m = ROW_STAMP.search(s.get("x") or "")
-            if m:
-                FAIL("search", "%s indexes the hourly rows on page %r (%r). This index rebuilds "
-                               "daily, so those results point at items already gone from the "
-                               "page. The VOLATILE strip in build_search_index.py has stopped "
-                               "working." % (SEARCH_INDEX, p.get("t"), m.group(0)))
+            hit = MONTHS & set((s.get("w") or "").split())
+            if hit:
+                FAIL("search", "%s indexes the hourly rows on page %r (month %r in the word "
+                               "bag). This index rebuilds daily, so those results point at items "
+                               "already gone from the page. The VOLATILE strip in "
+                               "build_search_index.py has stopped working."
+                     % (SEARCH_INDEX, p.get("t"), sorted(hit)[0]))
                 return
 
     # -- records must land somewhere that resolves ------------------------
