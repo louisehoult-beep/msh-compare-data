@@ -40,6 +40,11 @@ WHAT IT CHECKS
 6. SHRINK        datasets may not silently collapse against what is committed.
 7. SOURCE LINKS  every citation in the Compare feed must still open. WARNS, never
                  fails — see the note above check_source_links for why.
+8. COMPANY REPT  Companies House facts, and the two claims the Company Report
+                 DERIVES. No market share as a percentage, no count typed into
+                 prose, no figure on a probable name match, no band without the
+                 dated threshold it was assigned under, no phantom company.
+                 A no-op until the feature's files exist.
 
 Usage
     python3 verify.py            # full run, including the live privacy check
@@ -953,6 +958,623 @@ def check_notice():
                            "Run: python3 scripts/stamp_notice.py" % name)
 
 
+# --------------------------------------------------------------------------
+# 8. COMPANY REPORT — Companies House facts, and the two claims that are DERIVED
+# --------------------------------------------------------------------------
+# Added 06/08/2026, written against docs/COMPANY-REPORT-METHOD.md and BEFORE the
+# feature ships. Of the panels James Moloney asked for, two are computed rather
+# than read: "also on this framework" (co-listing, which is not competition) and
+# the field-position band (co-listing x statutory accounts category). Root rule
+# 14 governs both — a derived claim carries the rule it was derived under, is
+# tested against an invariant that would fail if the logic broke, and refuses to
+# fire on thin evidence. The method doc is the specification. If the doc and
+# this file disagree, the doc wins and this file is wrong.
+#
+# BOTH INPUTS ARE OPTIONAL, AND ABSENCE IS A NO-OP.
+# Neither data/company-financials.json nor app/company-report.js exists yet.
+# Nothing is being published, so there is nothing to refuse — this behaves like
+# check_shrink does for a missing path. The two halves are checked
+# independently: the source invariants run whenever the JavaScript is there,
+# because a percentage in the source is a percentage whether or not today's data
+# would reach it.
+#
+# WHAT THIS CANNOT ENFORCE, SAID PLAINLY RATHER THAN FAKED:
+#   * The two evidence floors — fewer than two suppliers on the lot, and fewer
+#     than half the field with a resolved accounts category — are runtime
+#     conditions over data the page assembles in the browser. This gate can see
+#     whether a guard of roughly that shape exists in the source (the same
+#     technique as the `feedOnly` guard in check_compare); it cannot prove the
+#     guard fires, and it does not claim to.
+#   * "Every name rendered resolves to a supplier record carrying that
+#     framework" is a render-time fact for the same reason. What IS enforced is
+#     the other end of it: every company in the data must resolve to a supplier
+#     this repo actually holds.
+#   * Whether a probable match is excluded from the size bands. What is
+#     enforced is that it carries no figures, and that the source reads
+#     matchConfidence at all when probable matches are present — code that
+#     never looks at the field cannot be filtering on it.
+
+# The statutory categories, from the method doc's table. Companies House
+# publishes other values; mapping one of them belongs in the refresh script and
+# in that table, NOT in a quietly widened enum here. A band a reader cannot look
+# up is a band nobody can audit.
+ACCOUNTS_CATEGORIES = {
+    "micro-entity", "small", "small-abridged", "medium", "full", "group", "dormant",
+}
+# The three statutory thresholds. There is no fourth: "large" is not a
+# threshold, it is the name for being above the medium one.
+THRESHOLD_BANDS = {"micro", "small", "medium"}
+BAND_LABELS = THRESHOLD_BANDS | {"large"}
+MATCH_CONFIDENCE = {"confirmed", "probable"}
+
+# A share claim, in the words it would actually be written in. Deliberately
+# phrase-based: bare "share" is the Share button on the interview pack, and bare
+# "position" is a CSS property. Both would false-FAIL, and a false FAIL blocks
+# the unattended refresh workflows from committing — see the long note above
+# check_source_links for why that is the worse outcome.
+SHARE_CTX = re.compile(
+    r"market\s*share|share\s*of\s*(?:the\s*)?(?:market|lot|framework|field)|"
+    r"field\s*position|position\s*band|of\s*th(?:is|e)\s*(?:market|lot)|"
+    r"share\s*(?:pc|pct|percent)|(?:pc|pct|percent)\s*of\s*(?:the\s*)?market",
+    re.I)
+
+# CSS lengths that legitimately end in a percent sign. The property name must be
+# followed IMMEDIATELY by its colon, which is what keeps "Position band: 12%"
+# out of the exclusion — hence a list of LENGTH properties, not of CSS
+# properties. The value may contain quotes and plus signs, because in this repo
+# a width is nearly always built by string concatenation.
+CSS_LENGTH = re.compile(
+    r"\b(?:width|height|max-width|min-width|max-height|min-height|top|left|right|"
+    r"bottom|margin(?:-\w+)?|padding(?:-\w+)?|flex|flex-basis|basis|gap|inset|"
+    r"border-radius|radius|translate|translatex|translatey|background-size|"
+    r"background-position|stroke-dashoffset|size)\s*:\s*[^;{}]{0,30}$", re.I)
+
+# A count typed into rendered prose. Same failure class as the cluster `rule`
+# count in check_compare: the sentence and the rows drift apart, and the page
+# states a number that its own table contradicts.
+COUNT_IN_PROSE = re.compile(
+    r"\b(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)\s+"
+    r"(?:suppliers?|companies|competitors?|firms?|manufacturers?|files?|filed)\b", re.I)
+# ...except where the number is the THRESHOLD being refused, not a count of what
+# was rendered. "Only one supplier on this lot" and "fewer than two suppliers on
+# the lot" are the evidence floor's own honest empty states — the exact strings
+# the method doc requires — and a gate that fails on those is a gate that gets
+# the empty state deleted to make a push go through. That is the failure this
+# whole file exists to prevent, pointed the wrong way.
+COUNT_QUALIFIED = re.compile(r"(?:only|than|least|fewer|under|below)\s+$", re.I)
+
+CO_SUFFIX = re.compile(r"\b(?:limited|ltd|plc|llp|llc|inc|incorporated)\b", re.I)
+
+
+def _js_scan(src):
+    """Blank out comments (length preserved) and return the string-literal spans.
+
+    Literal-aware on purpose. A regex that strips `//` comments eats the tail of
+    every "https://..." in the file, and the lines this check reads are exactly
+    the lines that carry URLs. Comments are BLANKED rather than removed so the
+    offsets still point at the real line, and they are excluded from the scan at
+    all because a check that trips on the comment explaining the rule is a check
+    somebody deletes — test_verify.py strips comments before its own temp-path
+    guard for that same reason.
+    """
+    out = list(src)
+    spans = []
+    i, n, quote, start = 0, len(src), None, 0
+    while i < n:
+        c = src[i]
+        if quote:
+            if c == "\\":
+                i += 2
+                continue
+            if c == quote:
+                spans.append((start, i + 1))
+                quote = None
+            i += 1
+            continue
+        if c == "\\":                      # an escape inside a regex literal
+            i += 2
+            continue
+        if c in "\"'`":
+            quote, start = c, i
+            i += 1
+            continue
+        if c == "/" and i + 1 < n and src[i + 1] == "/":
+            while i < n and src[i] != "\n":
+                out[i] = " "
+                i += 1
+            continue
+        if c == "/" and i + 1 < n and src[i + 1] == "*":
+            j = src.find("*/", i + 2)
+            j = n if j < 0 else j + 2
+            for k in range(i, j):
+                if out[k] != "\n":
+                    out[k] = " "
+            i = j
+            continue
+        i += 1
+    return "".join(out), spans
+
+
+def _line_at(src, i):
+    a = src.rfind("\n", 0, i) + 1
+    b = src.find("\n", i)
+    return src[a:(len(src) if b < 0 else b)]
+
+
+def _norm_co(name):
+    """A company name flattened enough that "GBUK GROUP LIMITED" meets "GBUK Group".
+
+    Deliberately shallow. Stripping more — "group", "healthcare", "UK" — would
+    start matching different companies to each other, and medtech is full of
+    similarly-named entities: the seed already records that Abbott Diabetes Care
+    was formerly MediSense (U.K.) Holding Ltd.
+    """
+    s = re.sub(r"[^\w\s&-]", " ", str(name or "").lower())
+    s = CO_SUFFIX.sub(" ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _supplier_universe():
+    """Every supplier name and alias this repo holds, normalised. None if unreadable."""
+    names = set()
+    seen_file = False
+    for fn in ("supplier-seed.json", "supplier-index.json"):
+        doc = load(fn)
+        if not isinstance(doc, dict):
+            continue
+        seen_file = True
+        for s in (doc.get("suppliers") or []):
+            if not isinstance(s, dict):
+                continue
+            for v in [s.get("name")] + list(s.get("aliases") or []):
+                k = _norm_co(v)
+                if k:
+                    names.add(k)
+    return names if seen_file else None
+
+
+def check_company_report(financials, report_js):
+    if financials is None and not (report_js or "").strip():
+        return                              # feature not built yet — nothing to gate
+
+    clean, spans = _js_scan(report_js or "")
+    has_js = bool(clean.strip())
+
+    # ---- source invariants -------------------------------------------------
+    if has_js:
+        # THE PERCENTAGE INVARIANT. Nobody holds market-share data — Drive
+        # DeVilbiss's own commercial director told James Moloney their internal
+        # figure is a guess — so a percentage published as share is an invented
+        # fact, which is the 24/07/2026 class of error with a different label on
+        # it. What may be published is a position band: the count on the lot,
+        # and each supplier's statutory accounts category.
+        offending = []
+        for a, b in spans:
+            for m in re.finditer("%", clean[a:b]):
+                i = a + m.start()
+                if CSS_LENGTH.search(clean[max(0, i - 40):i]):
+                    continue                # width:100%, translate(-50%) and friends
+                line = _line_at(clean, i).strip()
+                if SHARE_CTX.search(line) and line not in offending:
+                    offending.append(line)
+        for line in offending[:5]:
+            FAIL("company-report", "app/company-report.js emits a percent sign in a market-share "
+                                   "context: %r. Market share is published as a POSITION BAND and "
+                                   "never as a percentage — nobody has the underlying data, so a "
+                                   "figure here is invented, not measured. Print the count on the "
+                                   "lot and the statutory accounts categories instead."
+                                   % line[:140])
+        if len(offending) > 5:
+            FAIL("company-report", "...and %d further percent sign(s) in a share context "
+                                   "(suppressed)." % (len(offending) - 5))
+
+        # A share computed but rendered without the sign is the same claim. This
+        # WARNS rather than fails, because the identical arithmetic legitimately
+        # sizes a bar in a counts chart and nothing in the source distinguishes
+        # the two — a FAIL here would block a push over a bar width.
+        for m in re.finditer(r"\*\s*100\b", clean):
+            line = _line_at(clean, m.start()).strip()
+            if SHARE_CTX.search(line) and not CSS_LENGTH.search(clean[max(0, m.start() - 40):m.start()]):
+                WARN("company-report", "app/company-report.js computes a percentage on a line "
+                                       "about market share or field position: %r. If that number "
+                                       "reaches the page it is an invented market share; if it is "
+                                       "only a bar width it is fine. The gate cannot tell them "
+                                       "apart from the source — check it." % line[:140])
+                break
+
+        # THE COUNT INVARIANT. Same failure class as the cluster `rule` count in
+        # check_compare: prose drifted from the data it described. A count in a
+        # rendered string is typed, so it cannot follow the rows.
+        typed = []
+        for a, b in spans:
+            lit = clean[a:b]
+            for m in COUNT_IN_PROSE.finditer(lit):
+                if COUNT_QUALIFIED.search(lit[max(0, m.start() - 16):m.start()]):
+                    continue                # "only one supplier", "fewer than two suppliers"
+                if lit not in typed:
+                    typed.append(lit)
+                break
+        for lit in typed[:5]:
+            FAIL("company-report", "app/company-report.js has a count typed into rendered prose: "
+                                   "%r. The sentence must be built from the rows it describes "
+                                   "(the length of the list you are about to render), or it states "
+                                   "a number the table beneath it contradicts — which is exactly "
+                                   "what the cluster `rule` count check exists to stop."
+                                   % lit[:120])
+        if len(typed) > 5:
+            FAIL("company-report", "...and %d further typed count(s) in rendered prose "
+                                   "(suppressed)." % (len(typed) - 5))
+
+        # The evidence floors, as far as a source read can see them. This
+        # recognises a SHAPE — it does not prove the floor fires. Said here
+        # rather than left implied.
+        if not re.search(r"<\s*2\b|<\s*=\s*1\b", clean):
+            WARN("company-report", "app/company-report.js contains nothing shaped like the "
+                                   "two-supplier evidence floor. One supplier on a framework is a "
+                                   "framework with one supplier, not a competitive field, and the "
+                                   "panel must refuse to render. This gate can only recognise the "
+                                   "shape of that guard in the source; it cannot prove it fires.")
+        # `known/2`, `known*2 < total`, `*0.5` and the word "half" are all the
+        # same guard written four ways. Recognising all four keeps this quiet
+        # once the floor is really there — a warning that fires on correct code
+        # is the noise that teaches people to skim the gate's output. It is also
+        # held back until the accounts categories exist at all: the floor guards
+        # a comparison of resolved categories, and nagging for it while there is
+        # no such data is nagging for something nobody can write yet.
+        if financials is not None and not re.search(
+                r"/\s*2\b|\*\s*2\b|\*\s*0?\.5\b|half", clean, re.I):
+            WARN("company-report", "app/company-report.js contains nothing shaped like the "
+                                   "half-the-field floor. A size comparison built on a third of "
+                                   "the lot is not a size comparison. Same limitation: the gate "
+                                   "sees a shape, not a behaviour.")
+
+    if financials is None:
+        WARN("company-report", "app/company-report.js is present but data/company-financials.json "
+                               "is not, so every company fact and every size band in it is "
+                               "unchecked. The source invariants above ran; nothing else did.")
+        return
+
+    # ---- data ---------------------------------------------------------------
+    if not isinstance(financials, dict):
+        FAIL("company-report", "data/company-financials.json is not a JSON object.")
+        return
+    if not has_js:
+        WARN("company-report", "data/company-financials.json is present but app/company-report.js "
+                               "is not, so the percentage invariant and the typed-count invariant "
+                               "could not be checked at all. They are source checks.")
+
+    companies = financials.get("companies")
+    if not isinstance(companies, dict) or not companies:
+        FAIL("company-report", "data/company-financials.json carries no companies. Refusing to "
+                               "publish a company-facts panel with nothing in it — an honest empty "
+                               "state is the page's job, not an empty data file's.")
+        return
+
+    as_of = as_date(financials.get("dataAsOf"))
+    if not as_of:
+        FAIL("company-report", "data/company-financials.json has no usable dataAsOf (%r). Every "
+                               "figure on this panel is quoted as at a date."
+                               % financials.get("dataAsOf"))
+    elif as_of > today():
+        FAIL("company-report", "data/company-financials.json is stamped dataAsOf %s, a date in the "
+                               "future. Companies House cannot have been read tomorrow." % as_of)
+
+    banded = sorted(n for n, r in companies.items()
+                    if isinstance(r, dict) and str(r.get("accountsCategory") or "").strip())
+    th = financials.get("thresholds")
+    if not isinstance(th, dict) or not th:
+        if banded:
+            FAIL("company-report", "%d company record(s) carry an accountsCategory but the file has "
+                                   "no `thresholds` block. A band assigned without the threshold it "
+                                   "was assigned under is unauditable — and the thresholds changed "
+                                   "for periods beginning on or after 6 April 2025, so which set "
+                                   "was used is the whole question. e.g. %s"
+                                   % (len(banded), ", ".join(banded[:3])))
+    else:
+        read_on = as_date(th.get("readOn"))
+        if not read_on:
+            FAIL("company-report", "the `thresholds` block has no usable readOn (%r). An undated "
+                                   "threshold cannot be checked against the rules in force when "
+                                   "the band was assigned." % th.get("readOn"))
+        elif read_on > today():
+            FAIL("company-report", "the `thresholds` block says it was read on %s, a date in the "
+                                   "future." % read_on)
+        src_url = str(th.get("readFrom") or "").strip()
+        if not src_url:
+            FAIL("company-report", "the `thresholds` block has no readFrom. The statutory figures "
+                                   "are a fact with a shelf life; without the page they were read "
+                                   "from, nobody can re-check them.")
+        elif not src_url.startswith("https://"):
+            FAIL("company-report", "the `thresholds` block cites a non-HTTPS source (%r)."
+                                   % src_url[:70])
+        if not (th.get("appliesTo") or "").strip():
+            WARN("company-report", "the `thresholds` block does not say which accounting periods "
+                                   "it applies to, so a reader cannot tell whether a band was "
+                                   "assigned under the pre- or post-April-2025 figures.")
+        bands = th.get("bands")
+        if not isinstance(bands, dict) or not bands:
+            if banded:
+                FAIL("company-report", "the `thresholds` block carries no band figures, so the page "
+                                       "would print a band with no threshold beside it. The whole "
+                                       "point of the band is that a reader can look the figure up.")
+        else:
+            odd = sorted(set(bands) - THRESHOLD_BANDS)
+            if odd:
+                FAIL("company-report", "the `thresholds` block invents band(s) %s. The statutory "
+                                       "set is %s — 'large' is not a threshold, it is the name for "
+                                       "being above the medium one. A band nobody legislated is a "
+                                       "band we made up."
+                                       % (", ".join(repr(o) for o in odd),
+                                          ", ".join(sorted(THRESHOLD_BANDS))))
+
+    universe = _supplier_universe()
+    if universe is None:
+        WARN("company-report", "could not read supplier-seed.json or supplier-index.json, so the "
+                               "companies in this file were not checked against the suppliers this "
+                               "repo actually holds.")
+
+    probable = []
+    for name in sorted(companies):
+        rec = companies[name]
+        who = "company %r" % name
+        if not isinstance(rec, dict):
+            FAIL("company-report", "%s is not a record." % who)
+            continue
+
+        conf = str(rec.get("matchConfidence") or "").strip().lower()
+        if conf not in MATCH_CONFIDENCE:
+            FAIL("company-report", "%s records matchConfidence %r. It must be one of %s — a third "
+                                   "value slips past a `=== 'probable'` filter and a name-search "
+                                   "match then feeds the size bands, which is how the wrong "
+                                   "company's finances get attached to a named business."
+                                   % (who, rec.get("matchConfidence"),
+                                      ", ".join(sorted(MATCH_CONFIDENCE))))
+        if conf == "probable":
+            probable.append(name)
+
+        # NULL MEANS NOT DISCLOSED, AND 0 DOES NOT.
+        # Small and micro companies are legally permitted to omit the profit and
+        # loss account, and most UK medtech subsidiaries do. The page renders
+        # null as "turnover not disclosed"; a 0 renders as a figure, and tells a
+        # rep a trading company turned over nothing. It is a parse bug.
+        for field in ("turnoverGBP", "employees"):
+            v = rec.get(field)
+            if v is None:
+                continue
+            if isinstance(v, bool) or not isinstance(v, (int, float)):
+                FAIL("company-report", "%s has %s = %r, which is neither a number nor null."
+                                       % (who, field, v))
+            elif v == 0:
+                FAIL("company-report", "%s has %s = 0. In this file null means 'not disclosed' and "
+                                       "the page prints that phrase; 0 prints as a real figure — a "
+                                       "trading company with no turnover, or no staff. It is a "
+                                       "parse bug, not a fact. Use null." % (who, field))
+            elif v < 0:
+                FAIL("company-report", "%s has a negative %s (%r) — the same parse bug as a 0, one "
+                                       "sign further on." % (who, field, v))
+
+        # A name-search match is a guess about identity. It may be shown as a
+        # company fact; it may not carry figures, because a wrong match attaches
+        # the wrong company's finances to a named business.
+        if conf == "probable":
+            for field in ("turnoverGBP", "employees"):
+                if rec.get(field) is not None:
+                    FAIL("company-report", "%s is a PROBABLE match (matched by name search) but "
+                                           "carries %s = %r. A probable match feeds no derived "
+                                           "claim: medtech is full of similarly-named entities and "
+                                           "a wrong match puts another company's finances against "
+                                           "this name. Confirm it by company number or drop the "
+                                           "figure." % (who, field, rec.get(field)))
+            if str(rec.get("accountsCategory") or "").strip():
+                WARN("company-report", "%s is a PROBABLE match and carries an accountsCategory, "
+                                       "which is what the field-position band is built from. Only "
+                                       "confirmed matches may feed the band — check the report "
+                                       "excludes it before this ships." % who)
+
+        cat = str(rec.get("accountsCategory") or "").strip()
+        if cat and cat not in ACCOUNTS_CATEGORIES:
+            FAIL("company-report", "%s has accountsCategory %r, which is not one of the statutory "
+                                   "categories (%s). If Companies House has started returning a "
+                                   "new value, map it in scripts/refresh_companies_house.py and "
+                                   "add it to the table in docs/COMPANY-REPORT-METHOD.md — do not "
+                                   "widen this list to let an unmapped value through."
+                                   % (who, cat, ", ".join(sorted(ACCOUNTS_CATEGORIES))))
+
+        for key in ("band", "sizeBand", "positionBand"):
+            lab = str(rec.get(key) or "").strip().lower()
+            if lab and lab not in BAND_LABELS:
+                FAIL("company-report", "%s carries %s = %r, which is not one of the statutory band "
+                                       "labels (%s). A band computed ad hoc is our estimate wearing "
+                                       "a legal band's clothes."
+                                       % (who, key, rec.get(key), ", ".join(sorted(BAND_LABELS))))
+
+        if rec.get("turnoverGBP") is not None and not str(rec.get("accountsMadeUpTo") or "").strip():
+            FAIL("company-report", "%s discloses a turnover with no accountsMadeUpTo. A turnover "
+                                   "figure is shown WITH the date the accounts were made up to, "
+                                   "never bare — otherwise a 2019 figure reads as this year's."
+                                   % who)
+
+        for field in ("accountsMadeUpTo", "incorporated"):
+            d = rec.get(field)
+            if d in (None, ""):
+                continue
+            when = as_date(d)
+            if not when:
+                FAIL("company-report", "%s has an unreadable %s (%r)." % (who, field, d))
+            elif when > today():
+                FAIL("company-report", "%s has %s = %s, a date in the future." % (who, field, when))
+
+        # PHANTOM COMPANY. Every company on this panel must be one this repo
+        # holds a supplier record for. A name that resolves to nothing is a
+        # company we have invented a report about.
+        if universe:
+            keys = [_norm_co(name), _norm_co(rec.get("registeredName"))]
+            if not any(k and k in universe for k in keys):
+                FAIL("company-report", "%s does not resolve to any supplier in supplier-seed.json "
+                                       "or supplier-index.json (tried %r and %r). A company report "
+                                       "about a company this repo has no record of is a report "
+                                       "about nobody — and the panels around it claim framework "
+                                       "co-listings drawn from those very files."
+                                       % (who, keys[0], keys[1]))
+
+    if probable and has_js and not re.search(r"matchConfidence|probable", clean):
+        FAIL("company-report", "%d record(s) are probable name-search matches, and "
+                               "app/company-report.js never reads matchConfidence or mentions "
+                               "'probable'. Code that never looks at the field cannot be excluding "
+                               "those records from the size bands, so a guess about identity is "
+                               "feeding a derived claim. e.g. %s"
+                               % (len(probable), ", ".join(repr(p) for p in probable[:3])))
+
+
+def check_no_clusters_on_tools(comptab_js):
+    """Standing clusters must never render on the Med Sales Tools page.
+
+    Ruled by Lou, 06/08/2026. A cluster was pinned ABOVE the speciality picker
+    and shown whatever the member had selected, so a single running supply story
+    sat in front of everybody and buried the speciality they came to read. That
+    class of item belongs on the Live Desk.
+
+    This is a check rather than a comment because a comment is a memory, and a
+    memory is what the last person edited straight past. Rendering a cluster
+    means iterating CLUSTERS — there is no other way to get one on screen — so
+    that is what this looks for. The declaration, the assignment from the feed
+    and any `.length` guard all stay legal: the data contract is unchanged and
+    the Live Desk still consumes the same key.
+    """
+    if not comptab_js:
+        return
+    # _js_scan returns (comment-blanked source, string-literal spans) — take the
+    # source. Comments are blanked so the note explaining this very rule, which
+    # names CLUSTERS, cannot trip the check that enforces it.
+    src = _js_scan(comptab_js)[0]
+    for pat, why in (
+        (r"CLUSTERS\s*\.\s*forEach", "iterates CLUSTERS"),
+        (r"CLUSTERS\s*\[\s*\d", "indexes into CLUSTERS"),
+        (r"for\s*\(\s*var\s+\w+\s*=\s*0\s*;[^;]*CLUSTERS\s*\.\s*length", "loops over CLUSTERS"),
+    ):
+        m = re.search(pat, src)
+        if m:
+            FAIL("clusters", "app/comptab.js %s at offset %d. Standing clusters must not "
+                             "render on the tools page — that was ruled on 06/08/2026 after a "
+                             "pinned thread buried the speciality picker for every member. "
+                             "Put it on the Live Desk (page 675, via the cloud-pipeline) instead."
+                             % (why, m.start()))
+            return
+
+
+# --------------------------------------------------------------------------
+# 10. HUB SEARCH INDEX — what a member can find, and what they must not be shown
+# --------------------------------------------------------------------------
+# Added 06/08/2026 with app/hub-search.js, and written against the two ways this
+# index can be wrong in a manner nobody notices from looking at the page.
+#
+#   1. NAV CONTAMINATION. Every Hub page carries the same header listing every
+#      section name. If the strip in build_search_index.py ever stops working,
+#      every page contains every nav word, so every query matches all 65 pages
+#      and search silently reverts to the "returns all random stuff" behaviour
+#      this replaced. The page still looks perfect. Only an invariant catches it.
+#
+#   2. STALE ROTATING CONTENT. The Live Desk's panels are rewritten hourly and
+#      this index rebuilds daily. If the volatile strip fails, search starts
+#      pointing members at headlines that left the Hub hours ago — presented as
+#      Hub content, which is the class of thing root rule 16 exists to stop.
+#
+# Neither is visible in the output unless something checks for it, which is the
+# lesson of 24/07/2026: one line would have caught it and nobody had written it.
+SEARCH_INDEX = "hub-search-index.json"
+
+# Adjacent nav labels. This ordering exists in the header and nowhere in prose —
+# no one writes "podcasts sales icons" in a sentence. A single occurrence
+# anywhere in indexed text means the header is being indexed again.
+NAV_PROBES = ("podcasts sales icons", "sales icons careers", "conferences podcasts")
+
+# Pages the cloud pipeline rewrites on a schedule faster than this index is
+# rebuilt. Their rotating rows carry an uppercase day-month stamp ("03 AUG").
+PIPELINE_PAGES = {675}
+ROW_STAMP = re.compile(r"\b\d{1,2} (?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)\b")
+
+
+def check_search_index(doc):
+    """The Hub's own search index: is it real, is it whole, is it clean?"""
+    if not doc:
+        WARN("search", "data/%s is missing — Hub search on page 675 will fall back to "
+                       "WordPress core search. Run build_search_index.py." % SEARCH_INDEX)
+        return
+
+    pages = doc.get("pages")
+    if not isinstance(pages, list) or not pages:
+        FAIL("search", "data/%s has no pages. Publishing this takes Hub search offline "
+                       "for every member." % SEARCH_INDEX)
+        return
+
+    # -- shape ------------------------------------------------------------
+    for p in pages:
+        if not p.get("t") or not p.get("u"):
+            FAIL("search", "a page in %s has no title or no URL (id %r). A result a member "
+                           "cannot click is worse than no result." % (SEARCH_INDEX, p.get("id")))
+            break
+
+    # -- every link must stay on the Hub ----------------------------------
+    for p in pages:
+        u = str(p.get("u") or "")
+        if not u.startswith("/"):
+            FAIL("search", "%s indexes an absolute or off-site URL (%r). Search results must "
+                           "stay on this site." % (SEARCH_INDEX, u[:80]))
+            break
+
+    # -- shrink guard -----------------------------------------------------
+    # A crawl that half-fails returns a valid, small index. Without this the
+    # repo would happily publish "the Hub has four pages".
+    old = committed("data/" + SEARCH_INDEX)
+    if old and isinstance(old.get("pages"), list):
+        o, n = len(old["pages"]), len(pages)
+        if o and n < o * 0.9:
+            FAIL("search", "%s drops from %d pages to %d (-%.0f%%). Either the crawl failed or "
+                           "pages were deleted; say which in the commit message and override "
+                           "deliberately." % (SEARCH_INDEX, o, n, (1 - n / o) * 100))
+        oldrec, newrec = len(old.get("records") or []), len(doc.get("records") or [])
+        if oldrec and newrec < oldrec * 0.9:
+            FAIL("search", "%s drops from %d records to %d. Supplier names would stop being "
+                           "findable." % (SEARCH_INDEX, oldrec, newrec))
+
+    # -- nav contamination ------------------------------------------------
+    for p in pages:
+        blob = " ".join((s.get("h") or "") + " " + (s.get("x") or "") for s in p.get("sec") or [])
+        low = re.sub(r"\s+", " ", blob.lower())
+        for probe in NAV_PROBES:
+            if probe in low:
+                FAIL("search", "%s has the page header in its text (%r found on %r). Every page "
+                               "then matches every query and search returns everything. Fix the "
+                               "strip in build_search_index.py — do not relax this check."
+                               % (SEARCH_INDEX, probe, p.get("t")))
+                return
+
+    # -- rotating content that would be stale by the time it is searched ---
+    for p in pages:
+        if p.get("id") not in PIPELINE_PAGES:
+            continue
+        for s in p.get("sec") or []:
+            m = ROW_STAMP.search(s.get("x") or "")
+            if m:
+                FAIL("search", "%s indexes the hourly rows on page %r (%r). This index rebuilds "
+                               "daily, so those results point at items already gone from the "
+                               "page. The VOLATILE strip in build_search_index.py has stopped "
+                               "working." % (SEARCH_INDEX, p.get("t"), m.group(0)))
+                return
+
+    # -- records must land somewhere that resolves ------------------------
+    for r in doc.get("records") or []:
+        u = str(r.get("u") or "")
+        if not u.startswith("/medical-sales-hub/"):
+            FAIL("search", "%s has a record pointing off the Hub (%r)." % (SEARCH_INDEX, u[:80]))
+            break
+
+    if not doc.get("records"):
+        WARN("search", "%s carries no dataset records, so supplier names are not findable. "
+                       "build_search_index.py reads data/supplier-index.json — check it ran."
+             % SEARCH_INDEX)
+
+
 def main():
     offline = "--offline" in sys.argv
     as_json = "--json" in sys.argv
@@ -995,8 +1617,23 @@ def main():
     check_source_links(load("compare-issues.json"),
                        offline or "--no-links" in sys.argv)
 
+    # The Company Report. Both halves are optional today — neither file exists —
+    # and both are read the same way the Compare tab's data and source are.
+    report_js = ""
+    report_path = os.path.join("app", "company-report.js")
+    if os.path.exists(report_path):
+        try:
+            report_js = open(report_path).read()
+        except Exception as exc:
+            WARN("company-report", "could not read app/company-report.js (%s) — the percentage "
+                                   "and typed-count invariants were not checked." % exc)
+    check_company_report(load("company-financials.json"), report_js)
+
+    check_search_index(load(SEARCH_INDEX))
+
     check_shrink()
     check_notice()
+    check_no_clusters_on_tools(comptab_js)
 
     if as_json:
         print(json.dumps({"pass": not fails, "fails": fails, "warns": warns}, indent=1))

@@ -24,8 +24,12 @@ That leaves two holes this closes.
    wild decodes back to the file it came from and cannot be forged.
 
    THE SALT IS NOT IN THIS FILE AND MUST NEVER BE. The refs below are hash
-   OUTPUTS, which give nothing away. The salt lives only in the private pack at
-   "02-Elevate-and-Thrive/NDA Pack/marker-entries-guidance.md".
+   OUTPUTS, which give nothing away. The salt lives OUTSIDE the synced workspace,
+   in ~/.eth-marker-salt (chmod 600), or in $ETH_MARKER_SALT — and in the
+   password manager. It was moved there on 06/08/2026: it had been a literal in
+   three files inside OneDrive, so any session that read one of them disclosed
+   it. Mint a new ref with "NDA Pack/decode-marker.py", which now reads it from
+   the same two places.
 
 The notice is deliberately STABLE: no date, no run number, nothing that changes
 between runs. Stamping a fresh timestamp would touch all thirteen files every
@@ -50,9 +54,11 @@ TERMS = "https://medsalesintelligencehub.co.uk/terms/"
 
 # Hash outputs, safe to publish. See the module docstring on the salt.
 REFS = {
+    "company-financials.json": "ETH-DCC5A9B31",
     "compare-issues.json":     "ETH-D6991A2E7",
     "compare-suppliers.json":  "ETH-D21869855",
     "contacts-optout.json":    "ETH-D12682420",
+    "hub-search-index.json":   "ETH-D50A4C4E3",
     "nhssc-cache.json":        "ETH-D84BDB325",
     "people-moves.json":       "ETH-D4435AEAF",
     "prep-config.json":        "ETH-D459CF4F3",

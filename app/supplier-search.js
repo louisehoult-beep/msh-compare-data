@@ -129,6 +129,26 @@
     input.addEventListener('change',function(){show(input.value);});
     input.addEventListener('keydown',function(e){if(e.key==='Enter')show(input.value);});
     chips.addEventListener('click',function(e){var b=e.target.closest('button');if(b){input.value=b.getAttribute('data-q');show(input.value);}});
+
+    // DEEP LINK — added 06/08/2026 for Hub search.
+    // The Hub's search index carries a record per supplier, because these 459
+    // names are loaded from JSON at run time and appear in no page's HTML, so
+    // they were unfindable anywhere on the Hub. Those results link here as
+    // #q=<name>. Without this, the link lands on the page and the member has to
+    // type the name they just searched for a second time.
+    function fromHash(){
+      var h=String(window.location.hash||'');
+      if(h.indexOf('#q=')!==0) return;
+      var q='';
+      try { q=decodeURIComponent(h.slice(3).replace(/\+/g,' ')); } catch(e){ q=h.slice(3); }
+      q=q.trim();
+      if(!q) return;
+      input.value=q;
+      show(q);
+      try { input.scrollIntoView({block:'center'}); } catch(e){}
+    }
+    fromHash();
+    window.addEventListener('hashchange',fromHash);
   }
 
   if(window.MSH_SUPPLIER_INDEX){ run(window.MSH_SUPPLIER_INDEX); return; }
