@@ -183,6 +183,27 @@
    * gives the section and links straight to it. If the quoted line is ever
    * wanted back, move the index behind the login first. */
 
+  /* Deep-link to a section that has no id of its own.
+   *
+   * Only 3 of 772 sections in the live index carry an anchor — Hub panels are
+   * mostly `<div class="panel"><h2>TITLE</h2>` with nothing to link to. Without
+   * this, "links straight to the section" means "lands at the top of the page"
+   * for 769 of them.
+   *
+   * A text fragment (#:~:text=) makes the browser find and scroll to the words
+   * itself, so no id is needed. Chrome, Edge and Safari 16+ support it; anything
+   * else ignores the fragment and lands at the top of the page, which is exactly
+   * where it would have landed anyway. There is no downside case.
+   *
+   * Only the first few words are used: an indexed heading can carry a trailing
+   * source label ("MHRA ALERTS & RECALLS GOV.UK") that is a separate element on
+   * the page, and a fragment spanning both would match nothing. */
+  function textFragment(heading) {
+    var words = String(heading || '').trim().split(/\s+/).slice(0, 6).join(' ');
+    if (words.length < 4) { return ''; }
+    return '#:~:text=' + encodeURIComponent(words);
+  }
+
   function rank(q) {
     var toks = tokenise(q), phrase = clean(q), out = [], i, r, sc;
     if (!toks.length) { return out; }
@@ -300,6 +321,7 @@
         kicker = r.page.t;
         if (r.sec) {
           if (r.sec.a) { href = r.page.u + '#' + r.sec.a; }
+          else { href = r.page.u + textFragment(r.sec.h); }
           html += row(href, r.sec.h || r.page.t,
                       r.sec.h && r.sec.h !== r.page.t ? kicker : '',
                       esc(href));
