@@ -101,8 +101,20 @@ def find_briefs():
     return sorted(urls)
 
 
+# Some briefs decorate each name with its award status. That is a fact about the
+# award round, not part of the company's name, and leaving it in means the name
+# never matches the company on the register.
+AWARD_TAIL = re.compile(
+    r"(?i)\s*[–—-]\s*(new|incumbent|delisted|re-?awarded)"
+    r"(\s+to\s+(the\s+)?(framework|nhs supply chain))?\s*$")
+
+
 def clean_supplier(name):
     s = " ".join(name.split()).strip(" .;·•")
+    prev = None
+    while prev != s:
+        prev = s
+        s = AWARD_TAIL.sub("", s).strip(" .;·•–—-")
     if len(s) < 2 or len(s) > 120:
         return ""
     if not re.search(r"[A-Za-z]{2}", s):
@@ -157,27 +169,37 @@ def parse_suppliers(h):
     # the stated total. Accumulate list by list and stop the moment the running
     # total equals the number the page itself gives; anything after that belongs
     # to a different list (downloads, related links) and must not be swept in.
-    out, seen = [], set()
-    matched = False
-    for chunk in re.findall(r"(?is)<ul[^>]*>(.*?)</ul>", after):
-        raws = re.findall(r"(?is)<li[^>]*>(.*?)</li>", chunk)
-        # A summary list describes the field rather than naming it. Skip it whole
-        # rather than filtering item by item, so a genuine supplier called
-        # something odd is never dropped on a per-item guess.
-        plain = [" ".join(text_of(r).split()) for r in raws]
-        summaryish = sum(1 for p in plain
-                         if re.match(r"(?i)^\d+\s+suppliers?\b", p)
-                         or re.search(r"(?i)suppliers? (?:are|has been|have been|is)\b", p))
-        if plain and summaryish >= max(1, len(plain) // 2):
-            continue
-        for raw in raws:
-            x = clean_supplier(text_of(raw))
-            if x and x.lower() not in seen:
-                seen.add(x.lower())
-                out.append(x)
-        if stated is not None and len(out) == stated:
-            matched = True
-            break
+    def collect(scope):
+        """Names from the supplier lists in `scope`, stopping the moment the
+        running total equals the count the page states."""
+        got, seen_l, hit = [], set(), False
+        for chunk in re.findall(r"(?is)<ul[^>]*>(.*?)</ul>", scope):
+            raws = re.findall(r"(?is)<li[^>]*>(.*?)</li>", chunk)
+            plain = [" ".join(text_of(r).split()) for r in raws]
+            summaryish = sum(1 for x in plain
+                             if re.match(r"(?i)^\d+\s+suppliers?\b", x)
+                             or re.search(r"(?i)suppliers? (?:are|has been|have been|is)\b", x))
+            if plain and summaryish >= max(1, len(plain) // 2):
+                continue
+            for raw in raws:
+                x = clean_supplier(text_of(raw))
+                if x and x.lower() not in seen_l:
+                    seen_l.add(x.lower())
+                    got.append(x)
+            if stated is not None and len(got) == stated:
+                hit = True
+                break
+        return got, hit
+
+    out, matched = collect(after)
+    if stated is not None and not matched and after is not block:
+        # The count sentence is not always ABOVE the lists — on some briefs it
+        # sits below them, so starting after it skipped the first list entirely
+        # (Aids for Daily Living parsed 19 of 31 that way). Retry over the whole
+        # section before giving up.
+        whole, hit = collect(block)
+        if hit:
+            out, matched = whole, True
 
     # A third layout states the field as a TABLE with a Lot column — one row per
     # supplier per lot. Distinct suppliers must still match the page's own count;
