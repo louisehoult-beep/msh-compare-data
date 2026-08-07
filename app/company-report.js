@@ -1060,13 +1060,20 @@
     for (var y = se.axis.from; y <= se.axis.to; y++) years.push('FY' + y);
     var max = 0;
     se.points.forEach(function (p) { if (p.v > max) max = p.v; });
-    var H = 130;
+    /* The column is three stacked things: the value label, the bar, and the year.
+       The bar must therefore be sized against the height left AFTER the two
+       labels, not against the whole row — sizing it against the row pushed the
+       value label off the top of the tallest bar, which is exactly what it was
+       doing before 07/08/2026. */
+    var H = 150;                 // row height
+    var LABELS = 46;             // value label + year label + the gaps between
+    var BAR_MAX = H - LABELS;
     var cols = years.map(function (yr) {
       var p = byYear[yr];
       if (p) {
-        var h = Math.max(8, Math.round(p.v / max * (H - 24)));
+        var h = Math.max(8, Math.round(p.v / max * BAR_MAX));
         return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;min-width:44px;">' +
-          '<div style="font-size:10.5px;font-weight:800;color:' + INK + ';white-space:nowrap;">' + esc(se.currency) + p.v + esc(se.unit) + '</div>' +
+          '<div style="font-size:10.5px;font-weight:800;color:' + INK + ';white-space:nowrap;line-height:1.2;flex:0 0 auto;">' + esc(se.currency) + p.v + esc(se.unit) + '</div>' +
           '<div style="width:70%;height:' + h + 'px;background:linear-gradient(180deg,#D4AF7A,#B8935A);border-radius:4px 4px 0 0;-webkit-print-color-adjust:exact;print-color-adjust:exact;"></div>' +
           '<div style="font-size:9.5px;font-weight:700;color:' + DIM + ';">' + esc(yr) + '</div></div>';
       }
@@ -1077,7 +1084,7 @@
 
     var body = '<div style="background:#fff;border:1px solid ' + LINE + ';border-radius:10px;padding:16px 16px 12px;">' +
       '<div style="font-size:12px;font-weight:700;color:' + INK + ';margin-bottom:10px;">' + esc(se.label) + ' <span style="color:' + DIM + ';font-weight:600;">(' + esc(se.currency) + esc(se.unit) + ')</span></div>' +
-      '<div style="display:flex;align-items:flex-end;gap:6px;height:' + H + 'px;border-bottom:2px solid ' + LINE + ';overflow-x:auto;">' + cols + '</div>' +
+      '<div style="display:flex;align-items:flex-end;gap:6px;height:' + H + 'px;border-bottom:2px solid ' + LINE + ';overflow-x:auto;overflow-y:visible;padding-top:4px;">' + cols + '</div>' +
       '<div style="font-size:10.5px;color:' + DIM + ';margin-top:8px;line-height:1.55;">Solid bars are figures read from ' + esc(se.source) + '. Dashed slots are years not yet extracted — an empty slot is unread, never zero. ' + esc(se.axisNote || '') + (se.pending ? ' ' + esc(se.pending) : '') + '</div>' +
       '</div>';
 
