@@ -684,12 +684,45 @@ def main():
             raise SystemExit("ABORT: resolved %d companies vs %d previously — refusing to shrink "
                              "the report." % (len(companies), was))
 
+    # CARRY FORWARD WHAT THIS SCRIPT DID NOT FETCH.
+    # This builds every record from scratch, so writing straight out silently
+    # DELETED the turnover series, headcounts and their notes that
+    # extract_accounts_figures.py had read from the filed accounts — work that
+    # costs hundreds of document fetches to redo. The two scripts have to
+    # compose: this one owns the profile and the officers, that one owns the
+    # figures, and neither may destroy the other's fields.
+    carried = 0
+    KEEP = ("turnoverGBP", "turnoverSeries", "turnoverNote", "employees", "employeesNote")
+    previous = {}
+    if os.path.exists(out_path):
+        try:
+            with open(out_path, encoding="utf-8") as f:
+                prev_doc = json.load(f)
+            previous = prev_doc.get("companies") or {}
+        except (ValueError, OSError):
+            previous = {}
+    for name, rec in companies.items():
+        old_rec = previous.get(name)
+        if not isinstance(old_rec, dict):
+            continue
+        for k in KEEP:
+            if old_rec.get(k) not in (None, [], "") and rec.get(k) in (None, [], ""):
+                rec[k] = old_rec[k]
+                if k == "turnoverGBP":
+                    carried += 1
+    if carried:
+        log("carried forward turnover for %d company(ies) already read from the filed "
+            "accounts (this script does not fetch figures)" % carried)
+
     out = {
         "dataAsOf": datetime.date.today().isoformat(),
         "source": "Companies House public data API (%s)" % API,
         "thresholds": thresholds,
         "companies": {name: companies[name] for name in sorted(companies, key=str.lower)},
     }
+    for k in ("figuresAsOf", "figuresSource"):
+        if k in (locals().get("prev_doc") or {}):
+            out[k] = prev_doc[k]
     # indent=1, ensure_ascii=False — the house style stamp_notice.py can detect
     # and re-stamp without reformatting the whole file.
     json.dump(out, open(out_path, "w"), ensure_ascii=False, indent=1)
