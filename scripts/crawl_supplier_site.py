@@ -59,6 +59,13 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import urllib.robotparser
+import socket
+
+# Backstop. Every fetch here passes an explicit timeout, but a library that
+# opens its own connection (RobotFileParser did) would otherwise inherit "wait
+# forever" — which is how three crawl runs hung for hours on one unresponsive
+# host with nothing to show for it.
+socket.setdefaulttimeout(25)
 
 OUT = "data/supplier-products.json"
 INDEX = "data/supplier-index.json"
@@ -87,12 +94,41 @@ def get(url, as_json=False, timeout=30):
 
 
 def allowed(domain, path="/"):
+    """Honour robots.txt — and never hang on it.
+
+    RobotFileParser.read() opens its OWN connection with NO timeout. A host that
+    accepts the connection and then goes quiet stalls the entire run, which is
+    exactly what happened three times: 2h25m, 26m and 2h50m, each with nothing
+    captured. The file is fetched here instead, with a timeout, and handed to
+    the parser as text.
+    """
     rp = urllib.robotparser.RobotFileParser()
-    rp.set_url("https://%s/robots.txt" % domain)
     try:
-        rp.read()
+        body, _ = get("https://%s/robots.txt" % domain, timeout=12)
+    except urllib.error.HTTPError as e:
+        # RobotFileParser.read() treats 401 and 403 as DISALLOW ALL, and it is
+        # right to: a site that refuses to show its robots.txt is not inviting a
+        # crawler. Rewriting the fetch lost that rule and briefly had this
+        # trying sites that had said no — GE HealthCare serves 403 here.
+        if e.code in (401, 403):
+            return False
+        return True                     # 404 and friends = nothing to obey
     except Exception:
-        return True                     # no robots.txt served = no prohibition
+        return True                     # unreachable = nothing to obey
+
+    # WHAT CAME BACK MUST ACTUALLY BE A robots.txt.
+    # Sites behind a bot filter answer this path with an HTML block page —
+    # Medtronic returns "Incorrect Browser" — and HTML parses as a robots file
+    # with NO rules, i.e. "crawl anything". That is precisely backwards: a site
+    # serving a block page is refusing. If the response is not plainly a robots
+    # file, treat it as a refusal.
+    head = body.lstrip()[:400].lower()
+    if "<html" in head or "<!doctype" in head:
+        return False
+    if body.strip() and "user-agent" not in body.lower():
+        return False                    # something else entirely; do not assume consent
+
+    rp.parse(body.splitlines())
     return rp.can_fetch(UA_STR, "https://%s%s" % (domain, path))
 
 
