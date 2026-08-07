@@ -247,17 +247,68 @@ def main():
     # splits, it is dropped: the real companies it names are all in the seed, and
     # its alerts re-attach to each of them from the notices on this run, so
     # nothing is lost by letting it go.
+    # The second way a carried-forward record goes stale is subtler and produced
+    # twelve of them: the name RESOLVES now. "Medtronic Limited" was auto-created
+    # on some past run when nothing matched it, and has been copied forward ever
+    # since — beside the seed's own "Medtronic", which it normalises to exactly.
+    # Two records for one company, the auto one holding 20 frameworks and no
+    # products, and alias lookup is first-wins, so which one answers for
+    # "Medtronic" is down to ordering. Same shape as the multi-company record:
+    # a guard added later only governs names arriving after it.
+    #
+    # Its frameworks, alerts and awards are folded into the record it resolves to
+    # before it is dropped, so the merge never loses what the auto record had
+    # found. `news` is not carried: it is re-fetched every run anyway.
     seed_lut = build_alias_lookup(by_name.values())
-    dropped = []
+    dropped, merged = [], []
+
+    def _ident(key, x):
+        # These lists are not uniformly typed: a curated `alerts` entry can be a
+        # plain string of prose while an auto-detected one is a dict with an _id.
+        # Assuming dicts here raised AttributeError on the first real merge.
+        if not isinstance(x, dict):
+            return ("raw", str(x))
+        if key == "frameworks":
+            return ("fw", x.get("name"))
+        if key == "alerts":
+            return ("al", x.get("_id") or x.get("title") or x.get("url"))
+        return ("aw", x.get("title") or x.get("url"))
+
+    def _fold(dst, src):
+        for key in ("frameworks", "alerts", "awards"):
+            have = {_ident(key, x) for x in dst.get(key) or []}
+            for x in src.get(key) or []:
+                k = _ident(key, x)
+                if k not in have:
+                    dst.setdefault(key, []).append(x)
+                    have.add(k)
+        # THE MERGED-AWAY NAME MUST STILL RESOLVE. Dropping the record without
+        # keeping its name as an alias breaks every file that referenced it by
+        # exact spelling — on the first run of this, company-financials.json lost
+        # "QIAGEN LIMITED" and "Stryker UK Limited", and a Compare-tab row lost
+        # its supplier. A merge redirects a name; it does not delete one.
+        seen = {a.strip().lower() for a in dst.get("aliases") or []}
+        for a in [src.get("name")] + list(src.get("aliases") or []):
+            if a and a.strip().lower() not in seen:
+                dst.setdefault("aliases", []).append(a)
+                seen.add(a.strip().lower())
+
     for s in prev.get("suppliers", []):
         prev_news[s["name"]] = s.get("news", [])
         if s.get("autoDetected") and s["name"] not in by_name:
             if split_companies(s["name"], seed_lut):
                 dropped.append(s["name"])
                 continue
+            canonical = seed_lut.get(norm(s["name"])) or seed_lut.get(norm_co(s["name"]))
+            if canonical and canonical in by_name and canonical != s["name"]:
+                _fold(by_name[canonical], s)
+                merged.append("%s -> %s" % (s["name"], canonical))
+                continue
             by_name[s["name"]] = s
     for name in dropped:
         print("dropped carried-forward multi-company record: %s" % name)
+    for m in merged:
+        print("merged carried-forward duplicate: %s" % m)
     alias_lut = build_alias_lookup(by_name.values())
 
     # 2. recalls
