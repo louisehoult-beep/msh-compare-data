@@ -109,7 +109,19 @@ async def worker(browser, batch, results, counter, total):
             for p in sorted(found, key=lambda x: (1 if x['status'] else 0)):
                 if p['npc'] in seen: continue
                 seen.add(p['npc']); keep.append(p)
-            results[job['key']] = {'supplier': job['supplier'], 'query': used_q, 'items': keep[:6]}
+            # NEVER SHRINK AN ENTRY. This sweep is deliberately shallow — six items
+            # per product name across ~900 names. supplier-deep-capture writes
+            # supplier-scoped captures into the same file (hundreds of rows for one
+            # brand term), and truncating those to six here would silently throw the
+            # deep work away every Monday. Same principle as the 0.8x abort below:
+            # a refresh may add, it may not degrade.
+            fresh = {'supplier': job['supplier'], 'query': used_q, 'items': keep[:6]}
+            if prev and len(prev.get('items') or []) > len(fresh['items']):
+                prev_keep = dict(prev)
+                prev_keep['query'] = prev.get('query') or used_q
+                results[job['key']] = prev_keep
+            else:
+                results[job['key']] = fresh
         elif prev:
             results[job['key']] = prev  # keep the verified previous entry
         counter[0] += 1

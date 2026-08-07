@@ -118,6 +118,45 @@ moves, the script aborts rather than carrying a previous value forward.
 absence is stated plainly — *"Files small-company accounts; turnover not disclosed
 (legally permitted)"* — never left blank, and never filled with an estimate.
 
+### Turnover is not extractable for most of this field, and that is a document-format fact
+
+**Surveyed 07/08/2026, every full/group filer in this file (223 companies), by asking the
+Companies House Document API which formats it holds for each company's most recent
+accounts filing:**
+
+| What Companies House holds | Companies | Share |
+|---|---|---|
+| PDF **and** iXBRL (machine-readable) | 41 | 18% |
+| **PDF only** | 179 | 80% |
+| Filing listed, no document served yet | 3 | 1% |
+
+**So an automated turnover figure is available for at most 18% of the field, and a
+ten-year series for fewer still.** The blocker is not the API key and never was — the key
+works, and the API returns no financial figures for anybody (it never has). The blocker is
+that four filers in five submit their accounts as a **PDF with no iXBRL version**, and
+those PDFs are commonly scans rather than text: B. Braun Medical's 2025 filing, checked
+this run, is a 7.9 MB `tiff2pdf` image that yields 184 bytes of text. There is no parse to
+write for a picture of a page.
+
+Consequences, so they are not rediscovered:
+
+- **`turnoverNote` says which format was actually found**, per company, with the date
+  checked. The previous single wording — *"not yet extracted from the iXBRL document"* —
+  was untrue for 179 companies, because for them no iXBRL document exists. It has been
+  replaced, not annotated (root rule 18).
+- **A ten-year `growth.series` cannot be built from Companies House for this field.** Even
+  Medline Industries, one of the 41, has iXBRL for only its three most recent filings; the
+  2021 filing and everything before it is PDF. A series must therefore carry only the
+  points that were genuinely read, each with the filing it came from, and the panel must
+  state how many years it actually has. Padding a series to ten points is inventing data.
+- **Where iXBRL exists, turnover is often not XBRL-tagged either.** Medline's filing tags
+  `ProfitLoss` and `ProfitLossOnOrdinaryActivitiesBeforeTax` but no turnover fact, and
+  carries `ReportIncludesDetailedProfitLossStatement = false`. The figure is nonetheless
+  present in the rendered text of the same document (Turnover £56,273,786 for the year
+  ended 31 December 2024; £48,554,872 comparative). So the extractor must read the
+  document's text, not just its tagged facts — and anything it reads must be tied to the
+  made-up-to date of the filing it came from.
+
 **Matching.** A supplier in our data is matched to a Companies House record by company
 number where one is already recorded, otherwise by name search. A name-search match is
 recorded as `matchConfidence: "probable"` and is **not** used for any derived claim —
