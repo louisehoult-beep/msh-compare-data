@@ -219,6 +219,24 @@ function buildPane(){
   return sec;
 }
 function fill(sel,opts){sel.innerHTML='';opts.forEach(function(o){var op=document.createElement('option');op.value=o[0];op.textContent=o[1];sel.appendChild(op);});}
+/* ONE COMPANY IS ONE ENTRY IN THE PICKER.
+   Until 07/08/2026 step 1 matched on the `co` string exactly, so a firm written
+   more than one way in compare-suppliers.json became that many separate
+   companies, each offering only its own slice. Lou reported it on GBUK, which
+   is written four ways: picking "GBUK Group" offered Vascular access and
+   nothing else, against a firm on 20 NHS Supply Chain frameworks. Nineteen
+   companies were fragmented the same way.
+
+   `ref` on each supplier row is the master record its `co` resolves to, derived
+   in the DATA (see refRule in compare-suppliers.json) rather than guessed here:
+   exact name or exact alias only. Guessing is what put Dentaquip behind a search
+   for KaVo. A row with no `ref` reaches no master record and keeps grouping
+   under its own `co`, exactly as before — an unresolved name stays visible as
+   itself rather than being quietly merged into a neighbour.
+
+   `co` is untouched and is still what the supplier table prints. Several are the
+   procurement record's own wording, and this tab is right to show them. */
+function coKey(s){return (s&&(s.ref||s.co))||'';}
 /* The speciality list is built from the data, not hard-coded. Ones with a
    researched supplier set come first, because those give the full comparison;
    the rest follow, labelled with how many live notices they carry so nobody
@@ -231,7 +249,7 @@ function fillSpecs(onlyCo){
   var full=[],feed=[];
   for(var k in D){
     var S=D[k],n=(S.issues||[]).length;
-    if(onlyCo&&!(S.suppliers||[]).some(function(s){return s.co===onlyCo;})){continue;}
+    if(onlyCo&&!(S.suppliers||[]).some(function(s){return coKey(s)===onlyCo;})){continue;}
     if((S.suppliers&&S.suppliers.length)||S.noSuppliers){full.push([k,S.label]);}
     else if(!onlyCo&&n){feed.push([k,S.label+' — '+n+' live notice'+(n===1?'':'s')+', no supplier set yet']);}
   }
@@ -241,21 +259,32 @@ function fillSpecs(onlyCo){
   fill(sel,[['','Select…']].concat(full,feed));
   if(prev&&Array.prototype.some.call(sel.options,function(o){return o.value===prev;})){sel.value=prev;}
 }
-/* Step 1: every company across every speciality, deduped — populated once at
-   mount, independent of whatever speciality is later chosen. */
+/* Step 1: every company across every speciality, deduped by master record —
+   populated once at mount, independent of whatever speciality is later chosen.
+   Where a firm is listed under more than one spelling, the option says so
+   rather than silently absorbing the others: a rep who picks "GBUK Group" and
+   then reads "GBUK Enteral" in the nutrition table should be able to see why
+   from the picker, not wonder whether the tool has the wrong company. */
 function allCompanies(){
   var seen={},out=[];
   for(var k in D){
-    (D[k].suppliers||[]).forEach(function(s){if(!seen[s.co]){seen[s.co]=1;out.push(s.co);}});
+    (D[k].suppliers||[]).forEach(function(s){
+      var key=coKey(s); if(!key){return;}
+      if(!seen[key]){seen[key]={alt:{}};out.push(key);}
+      if(s.co&&s.co!==key){seen[key].alt[s.co]=1;}
+    });
   }
   out.sort(function(a,b){return a.localeCompare(b);});
-  return out;
+  return out.map(function(key){
+    var alt=Object.keys(seen[key].alt).sort();
+    return [key,alt.length?key+' · also listed as '+alt.join(', '):key];
+  });
 }
 function fillCompanies(){
   var sel=document.getElementById('cp-me');
   if(!sel){return;}
   var prev=sel.value;
-  fill(sel,[['','— all companies —']].concat(allCompanies().map(function(c){return [c,c];})));
+  fill(sel,[['','— all companies —']].concat(allCompanies()));
   if(prev){sel.value=prev;}
 }
 /* Step 1 -> 2: picking a company narrows Speciality to the ones that company
@@ -331,7 +360,11 @@ function render(){
   S.suppliers.forEach(function(s){
     if(type!=='all'){if(s.t.indexOf(type)<0){return;}}
     shown=shown+1;
-    var mine=(s.co===me);
+    /* Same master-record test as the picker. Comparing s.co here would stop
+       marking your own row the moment the speciality lists you under a
+       different spelling from the one in the dropdown — which, for the seven
+       specialities GBUK sells into, is five of them. */
+    var mine=(!!me&&coKey(s)===me);
     var flags='';
     s.iss.forEach(function(i){var it=S.issues[i];if(it){flags+='<a href="#cp-iss-'+i+'" style="display:inline-block;background:#fbf3df;border:1px solid #e8d5a8;color:#7a5b14;font-size:10.5px;font-weight:700;border-radius:99px;padding:1px 8px;margin:2px 4px 0 0;text-decoration:none;">&#9888; '+esc(it.d)+'</a>';}});
     rows+='<tr style="'+(mine?'background:#f3ead2;':'')+'">';
