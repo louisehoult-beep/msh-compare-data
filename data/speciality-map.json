@@ -30,7 +30,8 @@
    "Facilities and Office Solutions"
   ],
   "eClassTopLevel": "eClass top level as read from the live catalogue mega-menu: 21 codes — A Provisions, B Staff Clothing, C Patients Clothing & Footwear, D Pharmaceuticals Blood Products & Medical Gases, E Dressings, F Medical & Surgical Equipment, G Patients Appliances, H Chemicals & Reagents, I Dental & Optical Equipment, J Diagnostic Imaging & Radiotherapy, K Laboratory Equipment & Services, M Hotel Services, P Building & Engineering, R Purchased Healthcare, T Furniture Fittings, U Hardware Crockery, V Bedding Linen & Textiles, W Office Equipment Telecomms Computers & Stationery, X Transportation, Y Recreational Equipment & Souvenirs, Z Staff & Patient Consulting Services & Expenses. There is NO L, N, O, Q or S top level in the live catalogue — an earlier note listed 23 branches including L Fuel Light Power Water and S Gardening & Farming, which do not appear in the live menu.",
-  "specialityCount": 33,
+  "specialityCount": 36,
+  "specialityCountNote": "36 canonical entries, corrected 06/08/2026: the number read 33 while the list held 34, and 'pharma' and 'ultrasound' were added the same day. products.json SPECS also holds 36. The two lists are the same SIZE but not the same SET — SPECS has 'endourology' and this file does not; this file has 'neonatal' and SPECS does not. Counting is not reconciling; see gapsInCanonicalList.",
   "knownDivergence": "FULLY RESOLVED 20/07/2026. Both the architecture problem (MST_DATA in a base64 blob) and the content gap (7 specialities with no products) are fixed. data/products.json now holds all 37 specialities with 217 products, matching this file's 37 exactly. Products for the 7 added specialities (bloodcoll, dermatology, orthotics, waste, mes, estates, food) were authored in the same style as the existing 198, using only existing TPL product types and role keys — no new mst-logic.js code paths needed. dermatology's FW entry is deliberately omitted (its NHSSC/eClass home is still PENDING) and falls back to fwFor()'s generic message rather than a guessed URL. mes and food are the thinnest entries, matching their flagged low relevance to typical Hub members. Verified: 217 P entries validate against real SPECS ids/TPL types/role keys with zero errors; every SPECS id has >=1 product; mst-logic.js executes end-to-end with zero exceptions against the full dataset; live-served copy matches. One real error caught before shipping: the NHSSC slug 'diagnostic-equipment-and-services' 404s — correct is 'diagnostic-equipment'."
  },
  "canonicalSpecialities": [
@@ -246,6 +247,23 @@
    "label": "Neonatal / infant care",
    "nhssc": "No dedicated NHS Supply Chain framework found — neonatal capital equipment (incubators, warmers, phototherapy, dedicated ventilators) appears to be procured via direct trust tender rather than a named category; some consumables (e.g. Draeger Jaundice Meter JM-105, BabyFlow nasal interfaces) do appear as individual NHS Supply Chain SKUs under the supplier name rather than a distinct framework.",
    "eClass": "unverified"
+  },
+  {
+   "id": "pharma",
+   "label": "Pharmacy and medicines",
+   "nhssc": "NOT an NHS Supply Chain category. The six Category Business Units listed on NHS Supply Chain's own categories page (https://www.supplychain.nhs.uk/categories/, read 06/08/2026) are Medical Technology; Medical and Surgical Consumables; Diagnostic Equipment and Services; Rehabilitation and Community; Food; Facilities and Office Solutions — none of them covers pharmacy or medicines. The route by which the NHS does buy its medicines was NOT established this run: do not quote one until it has been read from the buying organisation's own page.",
+   "eClass": "D Pharmaceuticals, Blood Products & Medical Gases — top level only, as recorded in _meta.eClassTopLevel from the live catalogue mega-menu. The level-2 and level-3 branches under D were NOT read this run; do not quote a sub-code.",
+   "addedBecause": "Added 06/08/2026. It has been selectable in products.json SPECS — and so in the Stakeholder Mapper — all along, but was missing here, so Meeting Prep and the Company Report could not reconcile a single supplier against it. Nine supplier records merged from the retired supplier-directory page were left with an empty specialities[] for want of this one label, and every pharma supplier already in the seed had to be filed under a clinical speciality instead.",
+   "stakeholderOverride": "Chief Pharmacist, pharmacy procurement and the regional pharmaceutical procurement specialists — NOT the clinical device buyer, and NOT NHS Supply Chain.",
+   "sellingNote": "A supplier tagged here may be a manufacturer, a specials or licence holder, or a WHOLESALER. All three sell to the same buyer and none of them competes with the others: a wholesaler sells distribution and route to market, not a product portfolio. Read the supplier's own note before treating one as a competitor of another."
+  },
+  {
+   "id": "ultrasound",
+   "label": "Ultrasound",
+   "nhssc": "Diagnostic Equipment and Services — 'Ultrasound Scanners and Associated Options and Related Services', reference 2021/S 000-007768, 1 April 2022 to 31 March 2028 (read from NHS Supply Chain's own contract launch brief, 06/08/2026; 21 named suppliers including GE Healthcare, Mindray UK Limited, Philips Healthcare, Canon Medical Systems Ltd, Siemens Healthcare Limited and FUJIFILM Sonosite Ltd). Separate NHS Supply Chain agreements also exist for 'Non-Imaging Vibration Controlled Ultrasound System', 'Electrodes, Ultrasound Gels, Defibrillation and Related Consumables' and 'Medical Chart Paper and Ultrasound Film'.",
+   "eClass": "UNVERIFIED — the eClass branch for ultrasound systems was not read from the live catalogue this run, and is NOT assumed from Diagnostics and imaging's J Diagnostic Imaging & Radiotherapy. Do not quote a code until one has been read.",
+   "addedBecause": "Added 06/08/2026, for the same reason as 'Pharmacy and medicines': selectable in products.json SPECS, absent here. GE HealthCare, Mindray UK and Philips each sell a full ultrasound range in the UK from their own UK sites and all three are named on the NHSSC ultrasound framework, but the only label open to them here was 'Imaging / capital', which maps to Diagnostics and imaging and buries ultrasound inside CT, MR and X-ray.",
+   "placementNote": "Deliberately given NO 'parent'. Ultrasound sits in the same NHSSC Category Business Unit as the rest of imaging, so 'parent': 'imaging' is tempting — but app/mst-logic.js rolls children up from products.json SPECS[].parent while app/meeting-prep.js and app/company-report.js roll them up from this file, and SPECS carries no parent on 'ultrasound'. Setting it on one side only would make the two tools disagree about what an imaging search returns. Set it in BOTH files or in neither."
   }
  ],
  "supplierSpecialityMap": {
@@ -594,6 +612,12 @@
    ],
    "note": "keep all three — the product reads CT/CTA imaging (imaging), for a neurosciences pathway (neuro), delivered as AI software (digital). Removing any one understates what the product touches.",
    "resolved": "20/07/2026 — best guess per Lou's instruction, not independently re-verified."
+  },
+  "vascular": {
+   "to": [
+    "vascular"
+   ],
+   "note": "The canonical id itself, seen in a supplier speciality list (Cook, 07/08/2026 refresh). Mapped to itself so it resolves rather than counting as unreconciled drift."
   }
  },
  "gapsInCanonicalList": [
@@ -603,6 +627,9 @@
   "Aids for daily living / Technology Enabled Care / wigs / breast prostheses — partially covered by 'Rehabilitation and mobility'; check whether these need splitting out the way orthotics just was.",
   "Closed blood sampling from indwelling lines — genuine white space: no NHSSC framework category and no manufacturer category, exists at product level only (BD VAMP, ICU Medical SafeSet). A product family rather than a speciality, but worth knowing.",
   "'Food and catering services' and 'Facilities, estates and workwear' were added 20/07/2026 for NHSSC completeness, then REMOVED the same day on Lou's instruction — not needed for Hub members. If NHSSC completeness is wanted again later, the six-CBU list in _meta.nhsscCategories still names both categories; the speciality-level detail (eClass codes, framework names) was in the removed entries and is preserved in git history (commit e26f7fe added them, a later commit removed them).",
-  "'Clinical waste and sharps management' and 'Managed equipment services and finance' were added 20/07/2026 for NHSSC completeness, then REMOVED the same day on Lou's instruction (along with Food and Facilities/estates, removed earlier the same day). All four remain in git history (added in commit e26f7fe) if wanted again — waste/mes removed in the commit right after this note was written."
+  "'Clinical waste and sharps management' and 'Managed equipment services and finance' were added 20/07/2026 for NHSSC completeness, then REMOVED the same day on Lou's instruction (along with Food and Facilities/estates, removed earlier the same day). All four remain in git history (added in commit e26f7fe) if wanted again — waste/mes removed in the commit right after this note was written.",
+  "'Pharmacy and medicines' (pharma) and 'Ultrasound' (ultrasound) were ADDED 06/08/2026, closing two of the four mismatches between this list and products.json SPECS. Both had been selectable in the Stakeholder Mapper and reconcilable nowhere else.",
+  "'Endourology and stone management' (endourology) is STILL in products.json SPECS and still not canonical here, so it remains selectable in the Stakeholder Mapper and unreconcilable in Meeting Prep and the Company Report. NOT added 06/08/2026 because supplierSpecialityMap already routes the free-text string 'Endourology' to 'continence' by a documented decision of Lou's (20/07/2026), and adding a canonical entry with the same name would give the same word two destinations. Whoever adds it must retire that map entry in the same edit.",
+  "'Neonatal / infant care' (neonatal) is canonical here but absent from products.json SPECS, so nothing in the Hub can select it — the one remaining mismatch that this file cannot fix on its own. Fixing it means adding the id to SPECS and at least one product group to products.json P, which is a different file with its own owner. scripts/notice_tags.py documents the same gap and deliberately omits the id."
  ]
 }
