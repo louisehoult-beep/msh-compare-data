@@ -1,0 +1,117 @@
+name: Company intelligence (frameworks + Companies House + accounts)
+
+# Keeps the Company Report's sourced layers current, laptop-independent:
+#  - data/frameworks.json          — every NHS Supply Chain framework and the FULL
+#                                    awarded-supplier list on each, read from NHSSC's
+#                                    own contract launch briefs. This is what the
+#                                    report's framework list AND its competitor panels
+#                                    are built from, so a stale copy is a wrong answer
+#                                    with a confident face.
+#  - data/supplier-index.json      — the sourced framework rows backfilled into the
+#    data/supplier-seed.json         arrays every other Hub surface already reads, so
+#                                    the directory, Meeting Prep and the comparison
+#                                    tools cannot disagree with the report.
+#  - data/company-financials.json  — Companies House profile, accounts category and
+#                                    officers for every confirmed supplier, then
+#                                    turnover and headcount read out of the tagged
+#                                    (iXBRL) filed accounts.
+#
+# ⚠️ REQUIRES the repository secret COMPANIES_HOUSE_KEY (REST key, live data, free
+# from developer.company-information.service.gov.uk). WITHOUT IT the Companies House
+# steps are SKIPPED, not failed — the framework capture still runs and still publishes,
+# because it needs no key. The run log says plainly which half ran.
+
+on:
+  schedule:
+    - cron: "10 3 * * 1"     # Mondays 03:10 UTC, before the Monday morning tasks
+  workflow_dispatch: {}
+
+# Same reason as weekly-refresh.yml: every writer in this repo shares one branch, and
+# on 26/07/2026 a 49-minute job lost its push to a writer that landed inside its window.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    # Job level ON PURPOSE. A step's own `env:` block is not in scope for that
+    # step's `if:`, so the skip condition below would have been evaluated against
+    # an empty value and the Companies House steps would have skipped even with
+    # the secret set.
+    env:
+      COMPANIES_HOUSE_KEY: ${{ secrets.COMPANIES_HOUSE_KEY }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      # Needs no API key: NHS Supply Chain publishes the briefs openly.
+      - name: Refresh frameworks from NHS Supply Chain contract launch briefs
+        run: python3 scripts/refresh_frameworks.py
+
+      - name: Backfill sourced frameworks into the index and seed
+        run: python3 scripts/backfill_index_frameworks.py
+
+      - name: Companies House — profiles, accounts categories and officers
+        if: ${{ env.COMPANIES_HOUSE_KEY != '' }}
+        run: python3 scripts/refresh_companies_house.py
+
+      # Turnover and headcount live inside the filed accounts, not on the profile
+      # API. Only the tagged (iXBRL) filings are read; PDF-only filings yield null
+      # and say so, because identifying a turnover line on a PDF by position is a
+      # guess and a wrong turnover against a named company is the 24/07/2026 error.
+      - name: Companies House — turnover and headcount from the filed accounts
+        if: ${{ env.COMPANIES_HOUSE_KEY != '' }}
+        run: python3 scripts/extract_accounts_figures.py --filings 3
+
+      - name: Say so if the Companies House half was skipped
+        if: ${{ env.COMPANIES_HOUSE_KEY == '' }}
+        run: |
+          echo "::warning::COMPANIES_HOUSE_KEY is not set, so company profiles, officers,"
+          echo "::warning::turnover and headcount were NOT refreshed this run. The framework"
+          echo "::warning::capture did run. Add the secret in Settings > Secrets and variables"
+          echo "::warning::> Actions to enable the rest."
+
+      # This repo is PUBLIC and the Hub's page watermark never reaches these files,
+      # so the notice inside them is the only thing on a copy that says who owns it.
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit updates
+        run: |
+          git config user.name "hub-bot"
+          git config user.email "contact@elevateandthrive.uk"
+          git add data/frameworks.json data/company-financials.json \
+                  data/supplier-index.json data/supplier-seed.json
+          git diff --cached --quiet || git commit -m "company intelligence: frameworks + Companies House $(date -u +'%F')"
+          # Same retry-and-re-gate pattern as weekly-refresh.yml. A rebase COMBINES
+          # this run's data with another writer's, and that combination has not been
+          # gated — so the gate runs again. Root rule 13: if the gate fails the data
+          # is wrong, so refuse to push rather than loosening anything.
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first). Rebasing and re-running the gate, attempt $attempt of 5."
+            git pull --rebase --autostash
+            python3 verify.py || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi
