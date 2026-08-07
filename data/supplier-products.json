@@ -14,9 +14,9 @@
   "purpose": "Verified, speciality-tagged full product ranges. Supplements supplier-seed.json; never replaces it.",
   "rule": "A supplier listed here uses this range. A supplier not listed here falls back to the seed's curated product list, which is untagged and therefore shows unfiltered.",
   "seedIsSacred": "supplier-seed.json is declared human-owned and never-overwritten by build_supplier_index.py. Nothing here writes to it.",
-  "built": "2026-07-20",
+  "built": "2026-07-20, extended 07/08/2026",
   "specialityVocabulary": "Canonical ids from speciality-map.json (31 specialities).",
-  "coverage": "1 of 188 suppliers expanded so far. This is the start of the full sweep Lou asked for, not the end of it."
+  "coverage": "4 suppliers expanded, 1271 products in total, as at 07/08/2026. Read from the company's own WordPress product records (richest — real category tree): GBUK Group, Vygon (UK). Read from the company's XML sitemap (names derived from URL slugs, no category, and see each record's captureCaveat): Mindray UK, Steris. This is a running sweep, not a finished one — the master index holds far more suppliers than have a range captured."
  },
  "suppliers": {
   "GBUK Group": {
@@ -3224,49 +3224,51 @@
    "verified": "2026-08-07",
    "source": "www.steris.com XML sitemap, read this run",
    "structureFrom": "sitemap",
+   "landingPagesDropped": 117,
+   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 117 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation.",
    "structure": "Grouped by the company's own URL structure.",
-   "droppedCategoryPages": 36,
+   "droppedCategoryPages": 0,
    "filingRule": "Read from the sitemap, so product NAMES come from URL slugs and the grouping is the company's own URL structure, not a product record. Treat names as the company's own wording tidied for display, and expect no category detail below the top level.",
    "divisions": [
     {
      "name": "Surgical Table Accessories",
-     "products": 245
+     "products": 219
     },
     {
      "name": "Endoscopy Devices",
-     "products": 119
+     "products": 98
     },
     {
      "name": "Sterility Assurance And Monitoring",
-     "products": 57
+     "products": 50
     },
     {
      "name": "Endoscope Reprocessing",
-     "products": 51
+     "products": 45
     },
     {
      "name": "Washing And Decontamination Systems",
-     "products": 39
+     "products": 34
     },
     {
      "name": "Certified Pre Owned",
-     "products": 23
+     "products": 22
     },
     {
      "name": "Endoscopy Equipment",
-     "products": 21
+     "products": 17
     },
     {
      "name": "Surgical Lights And Examination Lights",
-     "products": 21
-    },
-    {
-     "name": "Surgical Instrument Cleaning Chemistries",
-     "products": 20
+     "products": 16
     },
     {
      "name": "Sterile Processing Department Accessories",
      "products": 15
+    },
+    {
+     "name": "Surgical Instrument Cleaning Chemistries",
+     "products": 14
     },
     {
      "name": "Uncategorised",
@@ -3365,11 +3367,6 @@
     },
     {
      "n": "Precision Gi Eus Motorized Biopsy Device",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Endoscopic Ultrasound Procedure Devices",
      "division": "Endoscopy Devices",
      "category": ""
     },
@@ -3479,11 +3476,6 @@
      "category": ""
     },
     {
-     "n": "Automated Endoscope Reprocessors",
-     "division": "Endoscope Reprocessing",
-     "category": ""
-    },
-    {
      "n": "Enspire 3000 Liquid Chemical Sterilant Processing System",
      "division": "Endoscope Reprocessing",
      "category": ""
@@ -3519,17 +3511,7 @@
      "category": ""
     },
     {
-     "n": "Endoscope Inspection",
-     "division": "Endoscope Reprocessing",
-     "category": ""
-    },
-    {
      "n": "Verify Resi Test Cleaning Process Protein Indicator",
-     "division": "Endoscope Reprocessing",
-     "category": ""
-    },
-    {
-     "n": "High Level Disinfectants",
      "division": "Endoscope Reprocessing",
      "category": ""
     },
@@ -3551,11 +3533,6 @@
     {
      "n": "Connectcare Device Instrument",
      "division": "Connectcare",
-     "category": ""
-    },
-    {
-     "n": "Washer Racks And Accessories",
-     "division": "Washing And Decontamination Systems",
      "category": ""
     },
     {
@@ -3604,11 +3581,6 @@
      "category": ""
     },
     {
-     "n": "Table Extensions",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
      "n": "Verify All Clean Test Washer Indicator",
      "division": "Washing And Decontamination Systems",
      "category": ""
@@ -3646,11 +3618,6 @@
     {
      "n": "Sterile Field Support",
      "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Trufreeze Spray Cryotherapy System",
-     "division": "Endoscopy Equipment",
      "category": ""
     },
     {
@@ -3794,23 +3761,8 @@
      "category": ""
     },
     {
-     "n": "Automated Cleaning Chemistries",
-     "division": "Surgical Instrument Cleaning Chemistries",
-     "category": ""
-    },
-    {
      "n": "Dri N Shine Concentrated Drying Agent",
      "division": "Surgical Instrument Cleaning Chemistries",
-     "category": ""
-    },
-    {
-     "n": "Tabletop Pads",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
-     "n": "Birkova Brand Pads",
-     "division": "Surgical Table Accessories",
      "category": ""
     },
     {
@@ -3889,11 +3841,6 @@
      "category": ""
     },
     {
-     "n": "Descalers And Instrument Lubricants",
-     "division": "Surgical Instrument Cleaning Chemistries",
-     "category": ""
-    },
-    {
      "n": "Liquid Descaler Acid Based Scale Remover",
      "division": "Surgical Instrument Cleaning Chemistries",
      "category": ""
@@ -3915,11 +3862,6 @@
     },
     {
      "n": "Prolystica Restore Descaler And Neutralizing Detergent",
-     "division": "Surgical Instrument Cleaning Chemistries",
-     "category": ""
-    },
-    {
-     "n": "Descalers And Instrument Lubricants",
      "division": "Surgical Instrument Cleaning Chemistries",
      "category": ""
     },
@@ -4034,18 +3976,8 @@
      "category": ""
     },
     {
-     "n": "Polypectomy And Tissue Acquisition Devices",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
      "n": "Spm Loaner Solution",
      "division": "Spm",
-     "category": ""
-    },
-    {
-     "n": "Gel Patient Positioners",
-     "division": "Surgical Table Accessories",
      "category": ""
     },
     {
@@ -4055,11 +3987,6 @@
     },
     {
      "n": "Aquashield Water Bottle System",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Biopsy Valves And Irrigation Accessories",
      "division": "Endoscopy Devices",
      "category": ""
     },
@@ -4111,11 +4038,6 @@
     {
      "n": "Revital Ox Enzymatic Sponge",
      "division": "Endoscope Reprocessing",
-     "category": ""
-    },
-    {
-     "n": "Sterilization Tape",
-     "division": "Sterility Assurance And Monitoring",
      "category": ""
     },
     {
@@ -4239,11 +4161,6 @@
      "category": ""
     },
     {
-     "n": "Prolystica Surgical Instrument Cleaning Chemistries",
-     "division": "Surgical Instrument Cleaning Chemistries",
-     "category": ""
-    },
-    {
      "n": "Prolystica 2X Concentrate Cleaning Chemistries",
      "division": "Surgical Instrument Cleaning Chemistries",
      "category": ""
@@ -4255,11 +4172,6 @@
     },
     {
      "n": "Prolystica Hp Instrument Cleaning Chemistries",
-     "division": "Surgical Instrument Cleaning Chemistries",
-     "category": ""
-    },
-    {
-     "n": "Prolystica Ultra Concentrate Cleaning Chemistries",
      "division": "Surgical Instrument Cleaning Chemistries",
      "category": ""
     },
@@ -4381,11 +4293,6 @@
     {
      "n": "Defendo Single Use Valves",
      "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Irrigation Pumps",
-     "division": "Endoscopy Equipment",
      "category": ""
     },
     {
@@ -4539,11 +4446,6 @@
      "category": ""
     },
     {
-     "n": "Certified Pre Owned Surgical Tables",
-     "division": "Certified Pre Owned",
-     "category": ""
-    },
-    {
      "n": "Certified Pre Owned Surgical Table Accessories",
      "division": "Certified Pre Owned",
      "category": ""
@@ -4555,11 +4457,6 @@
     },
     {
      "n": "Schure Spine Frame",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
-     "n": "Spinal Surgery Accessories",
      "division": "Surgical Table Accessories",
      "category": ""
     },
@@ -4585,11 +4482,6 @@
     },
     {
      "n": "Smartband Multi Band Ligation Pack",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Smartband Multi Band Ligation System",
      "division": "Endoscopy Devices",
      "category": ""
     },
@@ -4679,11 +4571,6 @@
      "category": ""
     },
     {
-     "n": "Trendelenburg Position Accessories",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
      "n": "Trenguard Trendelenburg Patient Restraint",
      "division": "Surgical Table Accessories",
      "category": ""
@@ -4706,11 +4593,6 @@
     {
      "n": "Steris 4095 General Surgical Table",
      "division": "Surgical Tables",
-     "category": ""
-    },
-    {
-     "n": "Patient Warming",
-     "division": "Surgical Table Accessories",
      "category": ""
     },
     {
@@ -4764,21 +4646,6 @@
      "category": ""
     },
     {
-     "n": "General Surgery Accessories",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
-     "n": "Anesthesia Accessories",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
-     "n": "Surgical Light Accessories",
-     "division": "Surgical Lights And Examination Lights",
-     "category": ""
-    },
-    {
      "n": "Surgical Light Handles",
      "division": "Surgical Lights And Examination Lights",
      "category": ""
@@ -4795,16 +4662,6 @@
     },
     {
      "n": "Infinity Ercp Sampling Device",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Injection Needles",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Gi Procedure Products",
      "division": "Endoscopy Devices",
      "category": ""
     },
@@ -4859,11 +4716,6 @@
      "category": ""
     },
     {
-     "n": "Manual Cleaning",
-     "division": "Endoscope Reprocessing",
-     "category": ""
-    },
-    {
      "n": "Double Header Combination Cleaning Brush Endoscopy",
      "division": "Endoscope Reprocessing",
      "category": ""
@@ -4901,11 +4753,6 @@
     {
      "n": "Via Sponge",
      "division": "Endoscope Reprocessing",
-     "category": ""
-    },
-    {
-     "n": "Enteroscopy And Capsule Delivery Devices",
-     "division": "Endoscopy Devices",
      "category": ""
     },
     {
@@ -4949,11 +4796,6 @@
      "category": ""
     },
     {
-     "n": "Endoscopic Retrograde Cholangiopancreatography",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
      "n": "Boost Head Positioner",
      "division": "Endoscopy Devices",
      "category": ""
@@ -4984,16 +4826,6 @@
      "category": ""
     },
     {
-     "n": "Foreign Body Management Devices",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Guardus Overtube",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
      "n": "Guardus Overtube Esophageal",
      "division": "Endoscopy Devices",
      "category": ""
@@ -5015,16 +4847,6 @@
     },
     {
      "n": "Talon Grasping Device",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Gi Bleed Management And Irrigation",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Bioshield Biopsy Valves And Irrigation Accessories",
      "division": "Endoscopy Devices",
      "category": ""
     },
@@ -5080,11 +4902,6 @@
     },
     {
      "n": "Roth Net Retriever Mini",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Bite Blocks",
      "division": "Endoscopy Devices",
      "category": ""
     },
@@ -5179,11 +4996,6 @@
      "category": ""
     },
     {
-     "n": "Polypectomy Snares",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
      "n": "Rotator Polypectomy Snare Mini Oval",
      "division": "Endoscopy Devices",
      "category": ""
@@ -5195,11 +5007,6 @@
     },
     {
      "n": "Short Throw Polypectomy Snare Mini Oval",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Polyp Traps",
      "division": "Endoscopy Devices",
      "category": ""
     },
@@ -5239,26 +5046,6 @@
      "category": ""
     },
     {
-     "n": "Roth Net Retrieval Devices",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Roth Net Foreign Body Retrievers",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Roth Net Specialty Retrievers",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Roth Net Tissue Retrievers",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
      "n": "Roth Net Platinum Retriever Polyp",
      "division": "Endoscopy Devices",
      "category": ""
@@ -5270,16 +5057,6 @@
     },
     {
      "n": "Roth Net Retriever Polyp",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Urology Devices",
-     "division": "Endoscopy Devices",
-     "category": ""
-    },
-    {
-     "n": "Urology Cleaning Brushes",
      "division": "Endoscopy Devices",
      "category": ""
     },
@@ -5314,11 +5091,6 @@
      "category": ""
     },
     {
-     "n": "Co2 Insufflation",
-     "division": "Endoscopy Equipment",
-     "category": ""
-    },
-    {
      "n": "Co2Efficient Endoscopic Insufflator",
      "division": "Endoscopy Equipment",
      "category": ""
@@ -5335,11 +5107,6 @@
     },
     {
      "n": "Co2 Tubing Sets",
-     "division": "Endoscopy Equipment",
-     "category": ""
-    },
-    {
-     "n": "Electrosurgical Unit And Equipment",
      "division": "Endoscopy Equipment",
      "category": ""
     },
@@ -5389,18 +5156,8 @@
      "category": ""
     },
     {
-     "n": "Record Keeping And Labeling",
-     "division": "Sterility Assurance And Monitoring",
-     "category": ""
-    },
-    {
      "n": "Hexalux Exam Light",
      "division": "Surgical Lights And Examination Lights",
-     "category": ""
-    },
-    {
-     "n": "Air Removal Test Bowie Dick Test",
-     "division": "Sterility Assurance And Monitoring",
      "category": ""
     },
     {
@@ -5411,21 +5168,6 @@
     {
      "n": "Acu Sinq 2 Chemistry Dosing System",
      "division": "Surgical Instrument Cleaning Chemistries",
-     "category": ""
-    },
-    {
-     "n": "Reusable Test Packs",
-     "division": "Sterility Assurance And Monitoring",
-     "category": ""
-    },
-    {
-     "n": "Biological Indicators",
-     "division": "Sterility Assurance And Monitoring",
-     "category": ""
-    },
-    {
-     "n": "Endoscope Point Of Use Pre Cleaning",
-     "division": "Endoscope Reprocessing",
      "category": ""
     },
     {
@@ -5441,21 +5183,6 @@
     {
      "n": "Reliance Vision Single Chamber Washerdisinfector",
      "division": "Washing And Decontamination Systems",
-     "category": ""
-    },
-    {
-     "n": "Chemical Indicators",
-     "division": "Sterility Assurance And Monitoring",
-     "category": ""
-    },
-    {
-     "n": "Endoscope Drying Storage And Transport",
-     "division": "Endoscope Reprocessing",
-     "category": ""
-    },
-    {
-     "n": "Point Of Use Products",
-     "division": "Surgical Instrument Cleaning Chemistries",
      "category": ""
     },
     {
@@ -5494,11 +5221,6 @@
      "category": ""
     },
     {
-     "n": "Orthopedic Accessories",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
      "n": "Verdoc Sterilization Record Envelopes",
      "division": "Sterility Assurance And Monitoring",
      "category": ""
@@ -5519,11 +5241,6 @@
      "category": ""
     },
     {
-     "n": "Surgical Lights",
-     "division": "Surgical Lights And Examination Lights",
-     "category": ""
-    },
-    {
      "n": "Cycle Log Forms",
      "division": "Sterility Assurance And Monitoring",
      "category": ""
@@ -5531,11 +5248,6 @@
     {
      "n": "Vividimage W High Definition Wall Displays",
      "division": "Surgical Displays And Large Format Displays",
-     "category": ""
-    },
-    {
-     "n": "Head Rests",
-     "division": "Surgical Table Accessories",
      "category": ""
     },
     {
@@ -5556,16 +5268,6 @@
     {
      "n": "Verify Sixcess Challenge Packs",
      "division": "Sterility Assurance And Monitoring",
-     "category": ""
-    },
-    {
-     "n": "Pediatric Accessories",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
-     "n": "Washer Disinfectors",
-     "division": "Washing And Decontamination Systems",
      "category": ""
     },
     {
@@ -5674,11 +5376,6 @@
      "category": ""
     },
     {
-     "n": "Accessory Carts",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
      "n": "Harmony Led385 Exam Light",
      "division": "Surgical Lights And Examination Lights",
      "category": ""
@@ -5729,18 +5426,8 @@
      "category": ""
     },
     {
-     "n": "Bariatric Accessories",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
      "n": "Celerity Steam Incubator",
      "division": "Sterility Assurance And Monitoring",
-     "category": ""
-    },
-    {
-     "n": "Examination Lights",
-     "division": "Surgical Lights And Examination Lights",
      "category": ""
     },
     {
@@ -5751,11 +5438,6 @@
     {
      "n": "Verify Sixcess Flash Indicators",
      "division": "Sterility Assurance And Monitoring",
-     "category": ""
-    },
-    {
-     "n": "Vascular Accessories",
-     "division": "Surgical Table Accessories",
      "category": ""
     },
     {
@@ -5779,11 +5461,6 @@
      "category": ""
     },
     {
-     "n": "X Ray Tops",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
      "n": "Verify Assert Steam Process Challenge Device",
      "division": "Sterility Assurance And Monitoring",
      "category": ""
@@ -5799,18 +5476,8 @@
      "category": ""
     },
     {
-     "n": "Table Operating Controls",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
      "n": "Steris 5085 General Surgical Table",
      "division": "Surgical Tables",
-     "category": ""
-    },
-    {
-     "n": "Clamps And Sockets",
-     "division": "Surgical Table Accessories",
      "category": ""
     },
     {
@@ -5859,11 +5526,6 @@
      "category": ""
     },
     {
-     "n": "Arm Supports",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
      "n": "Harmonyair M Series Surgical Lighting System",
      "division": "Surgical Lights And Examination Lights",
      "category": ""
@@ -5876,11 +5538,6 @@
     {
      "n": "Harmonyair Smoke Evacuation System",
      "division": "Surgical Booms",
-     "category": ""
-    },
-    {
-     "n": "Disposable Surgical Accessories",
-     "division": "Surgical Table Accessories",
      "category": ""
     },
     {
@@ -5939,11 +5596,6 @@
      "category": ""
     },
     {
-     "n": "Ultrasonic Cleaners",
-     "division": "Washing And Decontamination Systems",
-     "category": ""
-    },
-    {
      "n": "Harmony Connectpoint Video Connectivity System",
      "division": "Utility And Video Connectivity Systems",
      "category": ""
@@ -5964,18 +5616,8 @@
      "category": ""
     },
     {
-     "n": "Hospital Cart Washers",
-     "division": "Washing And Decontamination Systems",
-     "category": ""
-    },
-    {
      "n": "Reliance Endoscope Transport System",
      "division": "Endoscope Reprocessing",
-     "category": ""
-    },
-    {
-     "n": "Decontamination Sinks",
-     "division": "Washing And Decontamination Systems",
      "category": ""
     },
     {
@@ -5986,11 +5628,6 @@
     {
      "n": "Verify V24 Challenge Pack",
      "division": "Sterility Assurance And Monitoring",
-     "category": ""
-    },
-    {
-     "n": "Gynecology Urology Surgery Accessories",
-     "division": "Surgical Table Accessories",
      "category": ""
     },
     {
@@ -6014,18 +5651,8 @@
      "category": ""
     },
     {
-     "n": "Body Restraints",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
      "n": "System 1E Liquid Chemical Sterilant Processing System",
      "division": "Endoscope Reprocessing",
-     "category": ""
-    },
-    {
-     "n": "Neurology Surgery Accessories",
-     "division": "Surgical Table Accessories",
      "category": ""
     },
     {
@@ -6036,16 +5663,6 @@
     {
      "n": "Vividimage D Surgical Display",
      "division": "Surgical Displays And Large Format Displays",
-     "category": ""
-    },
-    {
-     "n": "Leg Supports",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
-     "n": "Specialty Lights",
-     "division": "Surgical Lights And Examination Lights",
      "category": ""
     },
     {
@@ -6189,11 +5806,6 @@
      "category": ""
     },
     {
-     "n": "Bariatric Accessories",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
      "n": "Reliance 1227 Cart And Utensil Washerdisinfector",
      "division": "Washing And Decontamination Systems",
      "category": ""
@@ -6284,11 +5896,6 @@
      "category": ""
     },
     {
-     "n": "Specialty Lights",
-     "division": "Surgical Lights And Examination Lights",
-     "category": ""
-    },
-    {
      "n": "Multi Accessory Clamp Pair",
      "division": "Surgical Table Accessories",
      "category": ""
@@ -6359,11 +5966,6 @@
      "category": ""
     },
     {
-     "n": "Reusable Test Packs",
-     "division": "Sterility Assurance And Monitoring",
-     "category": ""
-    },
-    {
      "n": "Surgigraphic 6000 Tabletop Pad",
      "division": "Surgical Table Accessories",
      "category": ""
@@ -6395,11 +5997,6 @@
     },
     {
      "n": "Tlt Tabletop Pads",
-     "division": "Surgical Table Accessories",
-     "category": ""
-    },
-    {
-     "n": "Arm Supports",
      "division": "Surgical Table Accessories",
      "category": ""
     },
@@ -7030,49 +6627,46 @@
    "verified": "2026-08-07",
    "source": "www.mindray.com XML sitemap, read this run",
    "structureFrom": "sitemap",
+   "landingPagesDropped": 30,
+   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 30 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation.",
    "structure": "Grouped by the company's own URL structure.",
-   "droppedCategoryPages": 8,
+   "droppedCategoryPages": 0,
    "filingRule": "Read from the sitemap, so product NAMES come from URL slugs and the grouping is the company's own URL structure, not a product record. Treat names as the company's own wording tidied for display, and expect no category detail below the top level.",
    "divisions": [
     {
      "name": "Ultrasound",
-     "products": 45
+     "products": 36
     },
     {
      "name": "Patient Monitoring",
-     "products": 30
+     "products": 23
     },
     {
      "name": "Anesthesia",
-     "products": 7
-    },
-    {
-     "name": "Anesthesia Machines",
-     "products": 6
+     "products": 5
     },
     {
      "name": "Laboratory Diagnostics",
-     "products": 5
+     "products": 4
+    },
+    {
+     "name": "Anesthesia Machines",
+     "products": 3
     },
     {
      "name": "Ventilator Solutions",
      "products": 3
     },
     {
-     "name": "Uncategorised",
+     "name": "Surgical Tables",
      "products": 1
     },
     {
-     "name": "Surgical Tables",
+     "name": "Uncategorised",
      "products": 1
     }
    ],
    "products": [
-    {
-     "n": "High Acuity",
-     "division": "Patient Monitoring",
-     "category": ""
-    },
     {
      "n": "Benevision N22 N19",
      "division": "Patient Monitoring",
@@ -7094,17 +6688,7 @@
      "category": ""
     },
     {
-     "n": "Mid Low Acuity",
-     "division": "Patient Monitoring",
-     "category": ""
-    },
-    {
      "n": "Epm 12M 10M",
-     "division": "Patient Monitoring",
-     "category": ""
-    },
-    {
-     "n": "Vital Signs Monitors",
      "division": "Patient Monitoring",
      "category": ""
     },
@@ -7129,11 +6713,6 @@
      "category": ""
     },
     {
-     "n": "Telemetry Monitoring",
-     "division": "Patient Monitoring",
-     "category": ""
-    },
-    {
      "n": "Benevision Tm80",
      "division": "Patient Monitoring",
      "category": ""
@@ -7149,11 +6728,6 @@
      "category": ""
     },
     {
-     "n": "Interoperability And Cybersecurity",
-     "division": "Patient Monitoring",
-     "category": ""
-    },
-    {
      "n": "Benelink",
      "division": "Patient Monitoring",
      "category": ""
@@ -7165,11 +6739,6 @@
     },
     {
      "n": "System Management Console",
-     "division": "Patient Monitoring",
-     "category": ""
-    },
-    {
-     "n": "Centralized Monitoring",
      "division": "Patient Monitoring",
      "category": ""
     },
@@ -7204,11 +6773,6 @@
      "category": ""
     },
     {
-     "n": "Patient Monitoring And Anesthesia Machines Outside Of Hospital",
-     "division": "Patient Monitoring",
-     "category": ""
-    },
-    {
      "n": "Benevision Dms Lite",
      "division": "Patient Monitoring",
      "category": ""
@@ -7216,16 +6780,6 @@
     {
      "n": "Transport Monitoring",
      "division": "Patient Monitoring",
-     "category": ""
-    },
-    {
-     "n": "Point Of Care",
-     "division": "Ultrasound",
-     "category": ""
-    },
-    {
-     "n": "Te Series",
-     "division": "Ultrasound",
      "category": ""
     },
     {
@@ -7269,11 +6823,6 @@
      "category": ""
     },
     {
-     "n": "General Imaging",
-     "division": "Ultrasound",
-     "category": ""
-    },
-    {
      "n": "Resona A20",
      "division": "Ultrasound",
      "category": ""
@@ -7285,11 +6834,6 @@
     },
     {
      "n": "Resona I8 Ultrasound",
-     "division": "Ultrasound",
-     "category": ""
-    },
-    {
-     "n": "Private Office",
      "division": "Ultrasound",
      "category": ""
     },
@@ -7369,11 +6913,6 @@
      "category": ""
     },
     {
-     "n": "Womens Health",
-     "division": "Ultrasound",
-     "category": ""
-    },
-    {
      "n": "Imagyn I9",
      "division": "Ultrasound",
      "category": ""
@@ -7389,27 +6928,12 @@
      "category": ""
     },
     {
-     "n": "Liver Care",
-     "division": "Ultrasound",
-     "category": ""
-    },
-    {
      "n": "Hepatus 6",
      "division": "Ultrasound",
      "category": ""
     },
     {
      "n": "Ultrasound Technology",
-     "division": "Ultrasound",
-     "category": ""
-    },
-    {
-     "n": "Portable Ultrasound Machines",
-     "division": "Ultrasound",
-     "category": ""
-    },
-    {
-     "n": "Handheld Ultrasound",
      "division": "Ultrasound",
      "category": ""
     },
@@ -7429,11 +6953,6 @@
      "category": ""
     },
     {
-     "n": "Liver Gi Ultrasound",
-     "division": "Ultrasound",
-     "category": ""
-    },
-    {
      "n": "Hepatus 6 Gastroenterology Ultrasound",
      "division": "Ultrasound",
      "category": ""
@@ -7444,17 +6963,7 @@
      "category": ""
     },
     {
-     "n": "A Series Workstations",
-     "division": "Anesthesia",
-     "category": ""
-    },
-    {
      "n": "A9 A8",
-     "division": "Anesthesia",
-     "category": ""
-    },
-    {
-     "n": "Accessories",
      "division": "Anesthesia",
      "category": ""
     },
@@ -7479,17 +6988,7 @@
      "category": ""
     },
     {
-     "n": "Accessories",
-     "division": "Anesthesia Machines",
-     "category": ""
-    },
-    {
      "n": "Vaporizers",
-     "division": "Anesthesia Machines",
-     "category": ""
-    },
-    {
-     "n": "High Acuity Anesthesia",
      "division": "Anesthesia Machines",
      "category": ""
     },
@@ -7500,11 +6999,6 @@
     },
     {
      "n": "A8 High Acuity Anesthesia Machine",
-     "division": "Anesthesia Machines",
-     "category": ""
-    },
-    {
-     "n": "Mid Low Acuity Anesthesia",
      "division": "Anesthesia Machines",
      "category": ""
     },
@@ -7520,11 +7014,6 @@
     },
     {
      "n": "Bc 3600",
-     "division": "Laboratory Diagnostics",
-     "category": ""
-    },
-    {
-     "n": "5 Part Differential Analyzers",
      "division": "Laboratory Diagnostics",
      "category": ""
     },

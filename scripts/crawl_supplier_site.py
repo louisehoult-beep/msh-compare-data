@@ -226,7 +226,18 @@ def sitemap_products(domain, deadline=None):
     if len(prod) < MIN_PRODUCTS:
         return None, ("the sitemap carries %d product URLs, too few to call a catalogue" % len(prod))
 
-    divisions, plist = {}, []
+    # A LANDING PAGE IS A PREFIX OF OTHER PAGES. This is the structural test, and
+    # it is the one that matters: the old code took the last URL segment as a
+    # product name, so every intermediate CATEGORY page became a product. Steris
+    # published "Specialty", "Returned Equipment" and a whole "Certified Pre
+    # Owned" division that way; Mindray published "High Acuity" and "Mid Low
+    # Acuity", which are the headings ABOVE its monitors, not monitors.
+    #
+    # Nothing here reads the names. If /a/b/ is a strict prefix of /a/b/c/ then
+    # /a/b/ is the page you pass through, not the thing you arrive at. Judging by
+    # name — dropping anything that "looks like a category" — is guesswork that
+    # would take real products with generic names down with it.
+    paths = []
     for u in prod:
         path = urllib.parse.urlparse(u).path.strip("/").split("/")
         try:
@@ -235,7 +246,15 @@ def sitemap_products(domain, deadline=None):
         except StopIteration:
             continue
         rest = path[i + 1:]
-        if not rest:
+        if rest:
+            paths.append(rest)
+    prefixes = {tuple(r[:k]) for r in paths for k in range(1, len(r))}
+
+    divisions, plist = {}, []
+    landing = 0
+    for rest in paths:
+        if tuple(rest) in prefixes:
+            landing += 1
             continue
         name = rest[-1].replace("-", " ").strip().title()
         div = (rest[0].replace("-", " ").strip().title() if len(rest) > 1 else "Uncategorised")
@@ -243,6 +262,9 @@ def sitemap_products(domain, deadline=None):
             continue
         divisions[div] = divisions.get(div, 0) + 1
         plist.append({"n": name, "division": div, "category": ""})
+    if landing:
+        print("      dropped %d category landing page(s) that are a prefix of other product URLs"
+              % landing, flush=True)
 
     # A sitemap lists every page, including the CATEGORY landing pages. Those are
     # not products, and counting them inflates a number the report prints as a
@@ -272,6 +294,16 @@ def sitemap_products(domain, deadline=None):
         "verified": time.strftime("%Y-%m-%d"),
         "source": "%s XML sitemap, read this run" % domain,
         "structureFrom": "sitemap",
+        "landingPagesDropped": landing,
+        "captureCaveat": ("Names are derived from the last segment of each product URL, not read "
+                          "from a product record, so they carry no category and read as title-cased "
+                          "slugs. %d category landing page(s) were dropped by the prefix test — a "
+                          "path that is a strict prefix of other paths is a page you pass through, "
+                          "not a product. A leaf URL that is not a product cannot be detected "
+                          "structurally and a few may remain, so treat this range as the shape of "
+                          "the catalogue rather than an exact product list. A WordPress REST "
+                          "capture (structureFrom: 'wp-rest') does not have this limitation."
+                          % landing),
         "structure": "Grouped by the company's own URL structure.",
         "droppedCategoryPages": dropped,
         "filingRule": ("Read from the sitemap, so product NAMES come from URL slugs and the "
