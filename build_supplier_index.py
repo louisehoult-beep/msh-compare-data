@@ -233,10 +233,31 @@ def main():
         s.setdefault("awards", []); s.setdefault("news", []); s["curated"] = True
         by_name[s["name"]] = json.loads(json.dumps(s))
     prev_news = {}
+    # Carry forward auto-detected records from the last build — but re-test each
+    # one, because this loop is why split_companies() alone was not enough.
+    #
+    # split_companies() was added 06/08/2026 and stops a multi-company field
+    # becoming one supplier. It only governs names arriving THIS run. A record
+    # created before it existed was copied forward here unconditionally, every
+    # run, forever: "B Braun, Baxter, Becton Dickinson UK Ltd, CODAN, Fannin,
+    # GBUK Group Ltd and RPG Medical Ltd" was still a live supplier on 07/08,
+    # and still won the substring search for "Becton Dickinson UK".
+    #
+    # A carried-forward name now has to pass the same test a new one does. If it
+    # splits, it is dropped: the real companies it names are all in the seed, and
+    # its alerts re-attach to each of them from the notices on this run, so
+    # nothing is lost by letting it go.
+    seed_lut = build_alias_lookup(by_name.values())
+    dropped = []
     for s in prev.get("suppliers", []):
         prev_news[s["name"]] = s.get("news", [])
         if s.get("autoDetected") and s["name"] not in by_name:
+            if split_companies(s["name"], seed_lut):
+                dropped.append(s["name"])
+                continue
             by_name[s["name"]] = s
+    for name in dropped:
+        print("dropped carried-forward multi-company record: %s" % name)
     alias_lut = build_alias_lookup(by_name.values())
 
     # 2. recalls

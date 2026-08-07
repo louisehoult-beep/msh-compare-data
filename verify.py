@@ -1190,24 +1190,41 @@ VOCAB_BASELINE = {
     # "Ambu" and "Advanced Medical Solutions" started resolving. Lowering a
     # ratchet after the backlog is worked down is how the ratchet is meant to be
     # maintained — it TIGHTENS the gate. It must never be raised.
-    "compare_unresolved": 71,        # of 196 distinct companies, 06/08/2026
+    # Tightened 71 -> 69 on 07/08/2026: "Becton Dickinson UK" and
+    # "Becton Dickinson UK Ltd" are BD's own name and were added to that
+    # record's aliases. Until then the first of them resolved, wrongly, to the
+    # seven-company record removed the same day.
+    "compare_unresolved": 69,        # of 196 distinct companies, 07/08/2026
     # Companies spelled two ways INSIDE compare-suppliers.json itself
     # ("Vygon (UK)" and "Vygon UK"; "ConvaTec" and "Convatec").
+    #
+    # These 11 no longer fragment the Compare tab's company picker: as of
+    # 07/08/2026 each supplier row also carries `ref`, the master record it
+    # resolves to, and the picker groups on that. This stays a tracked backlog
+    # because the file is still inconsistent with itself and `ref` only masks it
+    # where the name resolves — 69 of 196 still reach no master at all.
     "compare_internal_dupes": 11,
     # products.json SPECS vs speciality-map.json canonicalSpecialities.
-    # Today: endourology, pharma and ultrasound are selectable but not
-    # canonical; neonatal is canonical but nothing can select it.
-    # Tightened 4 -> 2 on 06/08/2026, when `pharma` and `ultrasound` were added to
-    # canonicalSpecialities and the drift genuinely fell. The ratchet only fails on a
-    # RISE, so leaving it at 4 left a hole: an id added to SPECS but not to the
-    # canonical map made 3, which is under 4, and passed. verify.py asks for this
-    # tightening itself in its own WARN. Never raise it back.
-    "spec_vocab_mismatch": 2,
+    #
+    # REACHED 0 on 07/08/2026 and is now a HARD FAIL with no baseline —
+    # `skin-prep` and `neonatal` were added to SPECS, `skin-prep` and
+    # `endourology` to canonicalSpecialities, and both lists hold the same 38
+    # ids. Per the design in docs/ONE-LIST-AUDIT.md section D: when a ratchet
+    # reaches 0, delete its entry so the check can never tolerate drift again.
+    # Adding a speciality to one list only now fails the build outright.
+    #
     # Free-text supplier.specialities strings resolving to no canonical id —
-    # includes junk the auto-build wrote ("Product Match").
-    "supplier_spec_unresolved": 5,
+    # includes junk the auto-build wrote ("Product Match"). 5 -> 4 on
+    # 07/08/2026 when `skin-prep` became canonical.
+    "supplier_spec_unresolved": 4,
     # A supplier record whose name is a list of companies, not a company.
-    "malformed_supplier_names": 1,
+    #
+    # REACHED 0 on 07/08/2026 and is now a HARD FAIL with no baseline. The one
+    # offender was "B Braun, Baxter, Becton Dickinson UK Ltd, CODAN, Fannin,
+    # GBUK Group Ltd and RPG Medical Ltd", deleted from supplier-index.json the
+    # same day. split_companies() stops one being CREATED; the carry-forward
+    # guard in build_supplier_index.py stops this one being resurrected; this
+    # makes a third one impossible to publish by any route.
 }
 
 # A name is a list-of-companies, not a company: two or more commas AND a
@@ -1233,10 +1250,23 @@ def _ratchet(check, key, actual, offenders, what, fix):
 
     Never silent: a standing backlog that stops being mentioned is a backlog
     that stops being worked.
+
+    A key ABSENT from VOCAB_BASELINE is a backlog that has been cleared to zero
+    and graduated to a hard check — the last step of the ratchet, per
+    docs/ONE-LIST-AUDIT.md section D. Baseline 0, so a single offender fails the
+    build. Deleting the entry is what makes that permanent: there is no longer a
+    number anyone can quietly raise.
     """
-    base = VOCAB_BASELINE[key]
+    base = VOCAB_BASELINE.get(key, 0)
+    graduated = key not in VOCAB_BASELINE
     sample = ", ".join(repr(o) for o in sorted(offenders)[:8])
     more = "" if len(offenders) <= 8 else " (+%d more)" % (len(offenders) - 8)
+    if graduated:
+        if actual:
+            FAIL(check, "%s: %d. This reached zero and is now a hard check with no "
+                        "baseline — it must stay at zero. %s Offenders: %s%s"
+                        % (what, actual, fix, sample, more))
+        return
     if actual > base:
         FAIL(check, "%s rose from %d to %d. %s Offenders: %s%s"
                     % (what, base, actual, fix, sample, more))
@@ -1691,6 +1721,51 @@ def check_no_clusters_on_tools(comptab_js):
             return
 
 
+def check_compare_groups_by_ref(comptab_js):
+    """The Compare tab's company picker must group on the master record.
+
+    Lou, 07/08/2026: picking "GBUK Group" offered Vascular access and nothing
+    else, for a company on 20 NHS Supply Chain frameworks. The picker matched
+    `s.co` exactly, so a firm written four ways in compare-suppliers.json became
+    four companies each holding a quarter of its footprint. Nineteen companies
+    were split this way and the tool looked like it was working.
+
+    A comment is a memory and a memory is what the last person edited past, so
+    this is a check. Two things have to hold, and both are cheap to break by
+    accident while editing something else nearby:
+
+      1. coKey() still reads `ref` before falling back to `co`. Drop the `ref`
+         arm and every merge silently reverts.
+      2. Nothing compares `.co` directly against the picker's value again. That
+         is the exact line that caused this, and it read perfectly sensibly.
+
+    Reading `s.co` is still legal and necessary — it is what the table prints,
+    and what allCompanies() lists as the alternative spellings. Only comparing
+    it against the selection is banned.
+    """
+    if not comptab_js:
+        return
+    src = _js_scan(comptab_js)[0]          # comments blanked, so this note is safe
+
+    if not re.search(r"function\s+coKey\s*\([^)]*\)\s*\{[^}]*\.\s*ref\b", src):
+        FAIL("compare-ref", "app/comptab.js has no coKey() resolving `ref` before `co`. "
+                            "Without it the company picker groups on the raw `co` string and "
+                            "one firm becomes as many companies as it has spellings — GBUK "
+                            "showed 1 speciality of 7 on 07/08/2026. See refRule in "
+                            "data/compare-suppliers.json.")
+        return
+
+    # `s.co === me` / `s.co === onlyCo` and the reverse. Comparing the display
+    # string against the picker's value is the bug itself.
+    bad = re.search(r"\.\s*co\s*={2,3}\s*(me|onlyCo)\b|\b(me|onlyCo)\s*={2,3}\s*\w+\s*\.\s*co\b", src)
+    if bad:
+        FAIL("compare-ref", "app/comptab.js compares `.co` against the picker's value at "
+                            "offset %d. Use coKey(), which resolves `ref` first — comparing the "
+                            "display spelling is what made GBUK four separate companies. "
+                            "Printing `.co` in the table is fine; matching on it is not."
+             % bad.start())
+
+
 # --------------------------------------------------------------------------
 # 10. HUB SEARCH INDEX — what a member can find, and what they must not be shown
 # --------------------------------------------------------------------------
@@ -1923,6 +1998,7 @@ def main():
     check_shrink()
     check_notice()
     check_no_clusters_on_tools(comptab_js)
+    check_compare_groups_by_ref(comptab_js)
 
     if as_json:
         print(json.dumps({"pass": not fails, "fails": fails, "warns": warns}, indent=1))

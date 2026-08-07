@@ -528,6 +528,33 @@ def _(tmp):
     return "baked fallback names companies that reach no supplier record"
 
 
+@case("the Compare tab's company picker back to matching on the display spelling")
+def _(tmp):
+    # Lou, 07/08/2026: picking "GBUK Group" offered Vascular access and nothing
+    # else, for a company on 20 NHS Supply Chain frameworks. The picker compared
+    # `s.co` exactly, so a firm spelled four ways in compare-suppliers.json was
+    # four companies each holding a quarter of its footprint. It read perfectly
+    # sensibly, which is why it survived. Nineteen companies were split this way.
+    js = "app/comptab.js"
+    src = open(js).read()
+    if "coKey(s)===onlyCo" not in src:
+        return None
+    open(js, "w").write(src.replace("coKey(s)===onlyCo", "s.co===onlyCo"))
+    return "compares `.co` against the picker"
+
+
+@case("coKey() quietly dropped back to the display spelling")
+def _(tmp):
+    # The other half. Leave every call site alone and take the `ref` arm out of
+    # the one function they all go through, and all 31 merges revert silently.
+    js = "app/comptab.js"
+    src = open(js).read()
+    if "s.ref||s.co" not in src:
+        return None
+    open(js, "w").write(src.replace("(s&&(s.ref||s.co))", "(s&&s.co)"))
+    return "no coKey() resolving `ref` before `co`"
+
+
 @case("a framework whose countdown date drifts from its printed date range")
 def _(tmp):
     # Caught a real typo on 05/08/2026: endsOn said 15/06/2027 while the range
