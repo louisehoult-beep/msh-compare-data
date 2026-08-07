@@ -1002,11 +1002,46 @@
      labelled as unread. An empty slot is "not yet extracted", never zero —
      drawing a zero-height bar for an unread year would publish a figure
      nobody sourced, which is the whole class of error this repo gates. */
-  function growthChart(s) {
+  /* Build a growth series from the FILED ACCOUNTS where one was extracted.
+     This is the sourced route: every point came from a tagged (iXBRL) filing,
+     and carries the period, the tag and the document it was read from. It is
+     preferred over a hand-written deep-dive series because it can be traced. */
+  function filedSeries(s, ctx) {
+    var rec = ctx.fin ? finRecFor(s, ctx.fin) : null;
+    var pts = rec && rec.turnoverSeries;
+    if (!(pts && pts.length)) return null;
+    var years = pts.map(function (p) { return parseInt(String(p.periodEnd).slice(0, 4), 10); });
+    return {
+      label: 'Turnover, from the filed accounts',
+      currency: '£', unit: 'm',
+      axis: { from: Math.min.apply(null, years), to: Math.max.apply(null, years) },
+      axisNote: 'Each bar is the turnover tagged in that year\u2019s filed accounts at Companies House. A year with no bar is a year whose accounts carry no tagged turnover, not a year of no trading.',
+      points: pts.map(function (p) {
+        return { y: 'FY' + String(p.periodEnd).slice(0, 4),
+                 v: Math.round(p.value / 1e6 * 10) / 10,
+                 src: 'filed ' + (p.filedOn || '') };
+      }),
+      source: 'the iXBRL (tagged) accounts filed at Companies House' +
+              (ctx.fin && ctx.fin.figuresAsOf ? ', read ' + ctx.fin.figuresAsOf : '')
+    };
+  }
+
+  function growthChart(s, ctx) {
     var d = deepFor(s);
     var g = d && d.growth;
+    var filed = filedSeries(s, ctx);
+    if (filed) {
+      /* A sourced series wins over a curated one; the curated prose is kept
+         because it explains what the numbers mean. */
+      g = { series: filed, prose: (g && g.prose) || null };
+    }
     if (!(g && g.series && g.series.points && g.series.points.length)) {
-      return sec('Growth', gap('No growth series has been extracted for this company yet. Turnover lives in the filed accounts (Companies House for UK companies, investor filings for listed groups); reading those documents is the extraction step, and it has not run here — which is a coverage gap, not a company that isn’t growing.'));
+      var frec = ctx.fin ? finRecFor(s, ctx.fin) : null;
+      var why = frec && frec.turnoverNote;
+      return sec('Growth', gap(why
+        ? ('No turnover series can be shown for this company: ' + esc(why) +
+           ' Turnover exists only inside the filed accounts, so where the accounts do not disclose it in a readable form there is nothing to chart. That is a fact about the filing, not about the company\u2019s size.')
+        : 'No growth series has been extracted for this company yet. Turnover lives in the filed accounts (Companies House for UK companies, investor filings for listed groups); reading those documents is the extraction step, and it has not run here — a coverage gap, not a company that is not growing.'));
     }
     var se = g.series;
     var byYear = {};
@@ -1168,7 +1203,7 @@
     h += ownershipBlock(sub);
 
     /* -- 2 · Growth, near the top by design ----------------------------- */
-    h += growthChart(sub);
+    h += growthChart(sub, ctx);
 
     /* -- 3 · Specialities / divisions as cards -------------------------- */
     h += divisionCards(sub, ctx);
