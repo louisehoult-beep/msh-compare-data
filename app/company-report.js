@@ -436,6 +436,20 @@
     return out;
   }
 
+  /* An ended framework must not read as a current position. The Compare tab has
+     refused an expired route since 05/08/2026; this panel printed the end date
+     and left the reader to do the arithmetic, which on 07/08/2026 meant
+     Medtronic, Boston Scientific and Abbott all showing a Transcatheter Heart
+     Valve framework that stopped in September 2025 as though it were live.
+     Derived from the date the panel already prints, so it cannot disagree with
+     it. */
+  function fwEnded(ends) {
+    if (!ends) return '';
+    var t = Date.parse(String(ends).trim());
+    if (isNaN(t) || new Date(t) >= new Date()) return '';
+    return ' <span style="background:#f2f2f2;border:1px solid #dcdcdc;color:#5b6675;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:99px;padding:1px 7px;">ENDED</span>';
+  }
+
   function frameworks(s, ctx) {
     var hits = supplierFrameworks(s, ctx);
     var curated = (s.frameworks || []);
@@ -466,7 +480,7 @@
           '<br><span style="font-size:12.5px;color:#37485a;">' +
           (f.category ? esc(f.category) + ' &middot; ' : '') +
           (f.reference ? 'ref ' + esc(f.reference) + ' &middot; ' : '') +
-          (f.starts ? esc(f.starts) : '') + (f.ends ? ' to ' + esc(f.ends) : '') +
+          (f.starts ? esc(f.starts) : '') + (f.ends ? ' to ' + esc(f.ends) : '') + fwEnded(f.ends) +
           (f.supplyRoute ? ' &middot; ' + esc(f.supplyRoute) : '') +
           '</span>' +
           '<br><span style="font-size:12.5px;color:' + DIM + ';">' + f.supplierCount + ' suppliers on this framework' +

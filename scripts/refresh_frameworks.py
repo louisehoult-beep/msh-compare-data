@@ -35,6 +35,7 @@ Run:    python3 scripts/refresh_frameworks.py [--limit N] [--out PATH]
 """
 import argparse
 import html as H
+import datetime
 import json
 import re
 import sys
@@ -320,6 +321,17 @@ def parse_brief(url, h):
     }
 
 
+def _end_date(text):
+    """The framework's end date, or None when the brief does not give a readable one."""
+    t = str(text or "").strip()
+    for fmt in ("%d %B %Y", "%d %b %Y", "%Y-%m-%d"):
+        try:
+            return datetime.datetime.strptime(t, fmt).date()
+        except ValueError:
+            pass
+    return None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0)
@@ -351,6 +363,36 @@ def main():
             print("  ...%d/%d" % (i, len(urls)), file=sys.stderr)
         time.sleep(PAUSE)
 
+    # EXPIRED BRIEFS ARE NOT A ROUTE TO MARKET. NHS Supply Chain leaves a brief
+    # published after its framework ends, so a straight capture of the index
+    # keeps returning them: on 07/08/2026 three were in the file, one 515 days
+    # past its end date, and 24 supplier rows across the seed and the index
+    # showed them under "Frameworks on" with the dates printed and nothing else.
+    # Medtronic, Boston Scientific and Abbott all read as current on a
+    # Transcatheter Heart Valve framework that stopped in September 2025.
+    #
+    # They are moved to `expired` rather than dropped: the brief is real, it was
+    # correctly captured, and knowing a framework has just ended is useful — it
+    # is usually the moment incumbency resets. What it is not is somewhere to
+    # sell today, so it must not sit in the list every consumer reads as live.
+    # A brief with no readable end date STAYS in `frameworks`: refusing on an
+    # unparseable date would silently drop live frameworks.
+    expired = []
+    live = []
+    today = datetime.date.today()
+    for rec in frameworks:
+        end = _end_date(rec.get("ends"))
+        if end and end < today:
+            rec = dict(rec, endedOn=end.isoformat())
+            expired.append(rec)
+        else:
+            live.append(rec)
+    frameworks = live
+    expired.sort(key=lambda r: r["name"].lower())
+    for rec in expired:
+        print("expired, moved out of frameworks: %s (ended %s)" % (rec["name"], rec.get("ends")),
+              file=sys.stderr)
+
     frameworks.sort(key=lambda r: r["name"].lower())
     doc = {
         "dataAsOf": time.strftime("%Y-%m-%d"),
@@ -364,7 +406,13 @@ def main():
         "briefsSeen": len(urls),
         "frameworkCount": len(frameworks),
         "unparsedCount": len(unparsed),
+        "expiredCount": len(expired),
+        "expiredRule": "A brief whose framework has already ended is captured but kept OUT of "
+                       "`frameworks`, because every consumer reads that list as live routes to "
+                       "market. NHS Supply Chain leaves briefs published after they end. A brief "
+                       "with no readable end date stays in `frameworks` rather than being dropped.",
         "frameworks": frameworks,
+        "expired": expired,
         "unparsed": unparsed,
     }
     with open(args.out, "w", encoding="utf-8") as f:

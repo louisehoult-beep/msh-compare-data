@@ -1190,11 +1190,17 @@ VOCAB_BASELINE = {
     # "Ambu" and "Advanced Medical Solutions" started resolving. Lowering a
     # ratchet after the backlog is worked down is how the ratchet is meant to be
     # maintained — it TIGHTENS the gate. It must never be raised.
-    # Tightened 71 -> 69 on 07/08/2026: "Becton Dickinson UK" and
-    # "Becton Dickinson UK Ltd" are BD's own name and were added to that
-    # record's aliases. Until then the first of them resolved, wrongly, to the
-    # seven-company record removed the same day.
-    "compare_unresolved": 69,        # of 196 distinct companies, 07/08/2026
+    # `compare_unresolved` REACHED 0 on 07/08/2026 and is now a HARD FAIL with no
+    # baseline. It began the day at 73. Every distinct company on the Compare tab
+    # now resolves to a supplier record, so a rep who reads a name there and
+    # types it into Supplier Search gets that company — which was the whole point
+    # of docs/ONE-LIST-AUDIT.md. 29 were spelling variants added to an existing
+    # record's aliases (including 8 where the master held the firm under a
+    # different naming style entirely: "KeyMed (Olympus)" against
+    # "Olympus (KeyMed)"), 2 were a duplicate record pair merged (Cook), and 40
+    # were genuinely absent and now have a seed record reconciled from their own
+    # Compare-tab row. Adding a name to the Compare tab that reaches no record
+    # now fails the build outright.
     # Companies spelled two ways INSIDE compare-suppliers.json itself
     # ("Vygon (UK)" and "Vygon UK"; "ConvaTec" and "Convatec").
     #
@@ -1756,6 +1762,48 @@ def check_no_clusters_on_tools(comptab_js):
             return
 
 
+def check_no_expired_frameworks(fwdoc):
+    """data/frameworks.json's `frameworks` list must hold only live routes.
+
+    NHS Supply Chain leaves a contract launch brief published after its
+    framework ends, so a straight capture keeps returning them. On 07/08/2026
+    three sat in the live list — one 515 days past its end date — and every
+    consumer treats that list as current: 24 supplier rows across the seed and
+    the index showed them under "Frameworks on" with the date range printed and
+    no other signal. Medtronic, Boston Scientific and Abbott all read as
+    currently on a Transcatheter Heart Valve framework that stopped in
+    September 2025.
+
+    The Compare tab has refused an expired ROUTE since 05/08/2026. This is the
+    same rule one level down, on the file those routes are drawn from.
+
+    An entry with no readable end date passes. Refusing on an unparseable date
+    would drop live frameworks to satisfy a check, which is backwards.
+    """
+    if not isinstance(fwdoc, dict):
+        return
+    bad = []
+    for f in fwdoc.get("frameworks") or []:
+        if not isinstance(f, dict):
+            continue
+        end = None
+        for fmt in ("%d %B %Y", "%d %b %Y", "%Y-%m-%d"):
+            try:
+                end = datetime.datetime.strptime(str(f.get("ends") or "").strip(), fmt).date()
+                break
+            except ValueError:
+                pass
+        if end and end < today():
+            bad.append("%s (ended %s, %d days ago)"
+                       % (f.get("name"), f.get("ends"), (today() - end).days))
+    if bad:
+        FAIL("frameworks", "%d framework(s) in data/frameworks.json have already ended but are "
+                           "still in the live `frameworks` list, which every consumer reads as "
+                           "current routes to market. Move them to `expired` — "
+                           "scripts/refresh_frameworks.py does this on each run. %s"
+             % (len(bad), "; ".join(bad[:6])))
+
+
 def check_compare_groups_by_ref(comptab_js):
     """The Compare tab's company picker must group on the master record.
 
@@ -2147,6 +2195,7 @@ def main():
     check_notice()
     check_no_clusters_on_tools(comptab_js)
     check_compare_groups_by_ref(comptab_js)
+    check_no_expired_frameworks(load("frameworks.json"))
     check_ref_present(load("compare-suppliers.json"))
     check_curated_test_matches(comptab_js)
 
