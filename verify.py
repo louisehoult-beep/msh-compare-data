@@ -1217,6 +1217,15 @@ VOCAB_BASELINE = {
     # includes junk the auto-build wrote ("Product Match"). 5 -> 4 on
     # 07/08/2026 when `skin-prep` became canonical.
     "supplier_spec_unresolved": 4,
+    # An alias on record A that is, normalised, record B's own NAME. First-wins
+    # alias resolution then hands A every lookup meant for B. Found 07/08/2026:
+    # "Abbott Diagnostics" carried the alias "Abbott Laboratories", so every
+    # reference to Abbott Laboratories Limited — the entity that lists FreeStyle
+    # Libre in the Drug Tariff — resolved to Abbott's diagnostics arm instead.
+    # That one is fixed. Most of the rest are a duplicate auto-detected record
+    # sitting beside its seed original ("Medtronic" and "Medtronic Limited"),
+    # which is a merge job, not a one-line fix.
+    "alias_steals_name": 18,
     # A supplier record whose name is a list of companies, not a company.
     #
     # REACHED 0 on 07/08/2026 and is now a HARD FAIL with no baseline. The one
@@ -1362,6 +1371,28 @@ def check_vocab(sup, products, specmap, index, comptab_js):
     malformed = [s.get("name") for s in ((index or {}).get("suppliers") or [])
                  if isinstance(s.get("name"), str)
                  and s["name"].count(",") >= 2 and LIST_AS_NAME.search(s["name"])]
+    # -- 6. An alias that is really another record's name ---------------------
+    # Alias lookup is first-wins, so this does not just create a duplicate: it
+    # silently redirects every reference to the record that owns the name.
+    steals = []
+    for fn in ("supplier-seed.json", "supplier-index.json"):
+        doc = load(fn)
+        if not isinstance(doc, dict):
+            continue
+        recs = [r for r in (doc.get("suppliers") or []) if isinstance(r, dict) and r.get("name")]
+        own = {}
+        for r in recs:
+            own.setdefault(_norm_co(r["name"]), r["name"])
+        for r in recs:
+            for a in r.get("aliases") or []:
+                k = _norm_co(a)
+                if k in own and own[k] != r["name"]:
+                    steals.append("%s: alias %r is %r's own name" % (r["name"], a, own[k]))
+    _ratchet("vocab", "alias_steals_name", len(steals), steals,
+             "aliases that are another supplier record's own name",
+             "Alias lookup is first-wins, so the wrong record answers for that name. "
+             "Remove the alias, or merge the two records.")
+
     _ratchet("vocab", "malformed_supplier_names", len(malformed), malformed,
              "supplier records whose name is a list of companies rather than a company",
              "build_supplier_index.py lifted a notice's whole supplier field into a "
