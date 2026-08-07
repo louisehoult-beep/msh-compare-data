@@ -121,7 +121,9 @@
         'record. Captured '+esc(rng.verified||(rng.source?'':'—'))+
         (rng.source?' from '+esc(String(rng.source).slice(0,120)):'')+'. '+
         'Useful for knowing what they actually sell; for what the NHS has bought, read the '+
-        'frameworks above.</div>';
+        'frameworks above.'+
+        (rng.captureCaveat?'<br><br><b>How this one was captured:</b> '+esc(rng.captureCaveat):'')+
+        '</div>';
       order.forEach(function(dv){
         var items=byDiv[dv];
         body+='<details style="margin:0 0 6px;border:1px solid '+LINE+';border-radius:8px;background:#fff;">'+
