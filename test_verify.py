@@ -461,7 +461,10 @@ def _(tmp):
         return None
     d["suppliers"] = [s for s in d["suppliers"] if s["name"] != victim["name"]]
     write_sup_index(d)
-    return "rose from"
+    # Was "rose from" while compare_unresolved carried a baseline. It reached 0 on
+    # 07/08/2026 and graduated to a hard check, so the ratchet's rise message is
+    # no longer the one this produces — the zero-tolerance message is.
+    return "must stay at zero"
 
 
 @case("the same company entered twice under two spellings on the Compare tab")
@@ -492,6 +495,19 @@ def _(tmp):
     d["suppliers"][0].setdefault("specialities", []).append("Some Free Text Nobody Mapped")
     write_sup_index(d)
     return "resolving to no canonical speciality"
+
+
+@case("an expired framework left in the live frameworks list")
+def _(tmp):
+    # NHS Supply Chain leaves a brief published after its framework ends, so the
+    # capture keeps returning them. Three were live on 07/08/2026, one 515 days
+    # past its end date, and 24 supplier rows showed them under "Frameworks on".
+    d = json.load(open("data/frameworks.json"))
+    if not (d.get("expired") or []):
+        return None
+    d["frameworks"].append(d["expired"][0])
+    json.dump(d, open("data/frameworks.json", "w"), ensure_ascii=False)
+    return "already ended but are still in the live"
 
 
 @case("an alias that is really another supplier record's own name")

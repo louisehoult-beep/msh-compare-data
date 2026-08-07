@@ -64,14 +64,40 @@
       (s.note?'<p style="margin:4px 0 0;font-size:13.5px;color:#37485a;">'+esc(s.note)+'</p>':'')+'</div></div>';
     if(s.specialities&&s.specialities.length) h+='<div style="margin-top:8px;">'+s.specialities.map(function(x){return '<span style="display:inline-block;background:#f3ead2;color:#7a5b14;border-radius:99px;padding:3px 10px;font-size:11.5px;font-weight:600;margin-right:6px;">'+esc(x)+'</span>';}).join('')+'</div>';
 
-    // frameworks
+    /* FRAMEWORKS — AND A HARD SPLIT BETWEEN LIVE AND ENDED.
+       Until 07/08/2026 every row sat under one heading, "Frameworks on", with
+       its date range printed beside it and nothing else. Twenty-four rows named
+       a framework that had already ended — Medtronic, Boston Scientific and
+       Abbott all showed "Transcatheter Heart Valve … 18 September 2023 to 17
+       September 2025" as a current position, ten months after it stopped. A rep
+       reads a heading, not a date range.
+
+       The end date is parsed from the row's own `dates` string here rather than
+       trusted from a flag, so this holds however the row was written and
+       whichever file it came from. A framework that has ended is real
+       intelligence — it usually means the incumbency has just reset — so it
+       moves to its own heading instead of being deleted. */
+    function fwEnd(f){
+      var m=/(?:to|–|-|—)\s*(\d{1,2}\s+[A-Za-z]+\s+\d{4})\s*$/.exec(String((f&&f.dates)||'').trim());
+      if(!m){return null;}
+      var t=Date.parse(m[1]);
+      return isNaN(t)?null:new Date(t);
+    }
+    function fwRow(f,ended){
+      return '<div style="padding:7px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;'+(ended?'opacity:.75;':'')+'"><b>'+esc(f.name)+'</b>'+
+        (ended?' <span style="background:#f2f2f2;border:1px solid #dcdcdc;color:#5b6675;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:99px;padding:2px 8px;">ENDED</span>':'')+
+        (f.value?' <span style="color:'+GREEN+';font-weight:700;">'+esc(f.value)+'</span>':'')+
+        (f.dates?' <span style="color:'+DIM+';">· '+esc(f.dates)+'</span>':'')+
+        (f.note?'<br><span style="color:#37485a;font-size:12.5px;">'+esc(f.note)+'</span>':'')+'</div>';
+    }
     if(s.frameworks&&s.frameworks.length){
-      h+=sec('Frameworks on', s.frameworks.map(function(f){
-        return '<div style="padding:7px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;"><b>'+esc(f.name)+'</b>'+
-          (f.value?' <span style="color:'+GREEN+';font-weight:700;">'+esc(f.value)+'</span>':'')+
-          (f.dates?' <span style="color:'+DIM+';">· '+esc(f.dates)+'</span>':'')+
-          (f.note?'<br><span style="color:#37485a;font-size:12.5px;">'+esc(f.note)+'</span>':'')+'</div>';
-      }).join(''));
+      var now=new Date(), live=[], gone=[];
+      s.frameworks.forEach(function(f){ var e=fwEnd(f); (e&&e<now?gone:live).push(f); });
+      if(live.length) h+=sec('Frameworks on', live.map(function(f){return fwRow(f,false);}).join(''));
+      else h+=sec('Frameworks on','<div style="font-size:13px;color:'+DIM+';">No live framework indexed'+(gone.length?' — but see below':'')+'.</div>');
+      if(gone.length) h+=sec('Frameworks that have ENDED — do not quote these as current',
+        '<div style="font-size:11.5px;color:'+DIM+';margin:0 0 6px;">Kept because an expired framework is worth knowing about: it usually means the incumbency has just reset. It is not a route to market today.</div>'
+        + gone.map(function(f){return fwRow(f,true);}).join(''));
     } else h+=sec('Frameworks on','<div style="font-size:13px;color:'+DIM+';">No framework indexed yet.</div>');
 
     // products
