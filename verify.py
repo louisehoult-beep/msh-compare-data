@@ -1871,16 +1871,40 @@ def check_curated_test_matches(comptab_js):
     if not comptab_js:
         return
     src = _js_scan(comptab_js)[0]          # comments blanked
-    m = re.search(r"if\s*\(([^)]*?)\)\s*\{[^{}]*auto-detected, verify at source", src)
-    if not m:
-        # The banner text itself is gone, or it is no longer inside a simple
-        # guard. Either way this check can no longer prove anything, and saying
-        # so is better than passing silently.
-        if "auto-detected, verify at source" in src:
-            WARN("curated", "app/comptab.js still prints the auto-detected banner but its guard "
-                            "could not be read, so it was not checked. Look at it by hand.")
+    # Find the banner, then walk BACK to the `if (` that governs it, counting
+    # parentheses. The first version used a regex with `[^)]*?` for the guard and
+    # silently failed the moment the guard contained a nested paren — which is
+    # exactly what the fix introduced: `!((it.use||'').trim())`. It degraded to
+    # the "cannot read it" WARN rather than passing, which is why it was caught,
+    # but a check that cannot read the thing it checks is not a check.
+    at = src.find("auto-detected, verify at source")
+    if at < 0:
+        return                                  # banner gone entirely; nothing to guard
+    head = src[:at]
+    open_at = head.rfind("if")
+    guard = None
+    while open_at >= 0:
+        j = src.find("(", open_at)
+        if j < 0 or j > at:
+            break
+        depth, k = 0, j
+        while k < at:
+            if src[k] == "(":
+                depth += 1
+            elif src[k] == ")":
+                depth -= 1
+                if depth == 0:
+                    break
+            k += 1
+        if depth == 0 and k < at and src[k + 1:at].count("{") >= 1:
+            guard = src[j + 1:k]
+            break
+        open_at = head.rfind("if", 0, open_at)
+    if guard is None:
+        WARN("curated", "app/comptab.js still prints the auto-detected banner but the `if` "
+                        "governing it could not be read, so it was NOT checked. Look at it by "
+                        "hand — this check is not protecting anything until it parses.")
         return
-    guard = m.group(1)
     if "autoDetected" not in guard:
         FAIL("curated", "app/comptab.js prints the auto-detected banner without testing "
                         "`autoDetected` at all: guard is %r." % guard[:90])
