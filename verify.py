@@ -1216,8 +1216,10 @@ VOCAB_BASELINE = {
     # Free-text supplier.specialities strings resolving to no canonical id —
     # includes junk the auto-build wrote ("Product Match"). 5 -> 4 on
     # 07/08/2026 when `skin-prep` became canonical, then 4 -> 3 later the same
-    # day when the Nikkiso merge retired a stray "Renal / dialysis" spelling.
-    "supplier_spec_unresolved": 3,
+    # day when the Nikkiso merge retired a stray "Renal / dialysis" spelling, then
+    # 3 -> 2 when the curly-apostrophe women's label was mapped and five new
+    # records were corrected from "Diabetes" to the canonical "Diabetes / CGM".
+    "supplier_spec_unresolved": 2,
     # `alias_steals_name` REACHED 0 on 07/08/2026 and is now a HARD FAIL with no
     # baseline. An alias on record A that is, normalised, record B's own NAME
     # hands A every lookup meant for B, because alias resolution is first-wins.

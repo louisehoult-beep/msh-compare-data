@@ -4,8 +4,36 @@
    Data: data/supplier-index.json (same repo). */
 (function(){
   var DATA_URL='https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/supplier-index.json';
+  /* THE FULL RANGE, WHERE WE HOLD ONE — and it is a DIFFERENT KIND OF FACT from
+     everything else on this card. `supplier-index.json` products are the ones
+     the procurement record names: framework awards, catalogue lines, recalls.
+     `supplier-products.json` is the company's own website range, captured by
+     scripts/crawl_supplier_site.py. It is much bigger (GBUK 343 against the 45
+     the index knows) and it is how the company organises itself, which is what
+     a rep meets in the room.
+     It is NOT the procurement record and must never be shown as if it were, so
+     it renders in its own section, under the company's own division names, with
+     the capture route stated. Four suppliers have one today. */
+  var RANGE_URL='https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/supplier-products.json';
+  var RANGE={};
   var MOUNT=document.getElementById('msh-supplier-search');
   if(!MOUNT) return;
+  /* Resolve a supplier record to its full range by name or alias, both ways
+     round: the range file carries its own aliases (GBUK's include "GBUK Vascular"
+     and "GBUK Healthcare") and the index record carries 23 more. Matching on the
+     display name alone would find GBUK and miss anything filed under a variant. */
+  function rangeFor(s){
+    if(!s) return null;
+    var keys={}, i;
+    var mine=[s.name].concat(s.aliases||[]);
+    for(i=0;i<mine.length;i++){ if(mine[i]) keys[norm(mine[i])]=1; }
+    for(var k in RANGE){
+      if(keys[norm(k)]) return RANGE[k];
+      var al=RANGE[k].aliases||[];
+      for(i=0;i<al.length;i++){ if(keys[norm(al[i])]) return RANGE[k]; }
+    }
+    return null;
+  }
   var G='#a8842c', INK='#1d2733', DIM='#75808d', LINE='#e6e0d4', RED='#b84a5c', GREEN='#2e7d5b';
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function norm(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();}
@@ -49,6 +77,40 @@
     // products
     if(s.products&&s.products.length){
       h+=sec('Products / brands', s.products.map(function(p){return '<span style="display:inline-block;border:1px solid '+LINE+';border-radius:99px;padding:4px 11px;font-size:12.5px;margin:0 5px 5px 0;color:#37485a;">'+esc(p)+'</span>';}).join(''));
+    }
+
+    /* Full range, by the company's own divisions. Collapsed by default: 733
+       lines unrolled above the alerts would bury them. */
+    var rng=rangeFor(s);
+    if(rng&&(rng.products||[]).length){
+      var byDiv={}, order=[];
+      (rng.products||[]).forEach(function(p){
+        var dv=(p&&p.division)||'Other';
+        if(!byDiv[dv]){byDiv[dv]=[];order.push(dv);}
+        byDiv[dv].push(p);
+      });
+      order.sort(function(a,b){return byDiv[b].length-byDiv[a].length;});
+      var body='<div style="font-size:11.5px;color:'+DIM+';margin:0 0 8px;line-height:1.55;">'+
+        'The company’s own website range, in its own divisions — <b>not</b> the procurement '+
+        'record. Captured '+esc(rng.verified||(rng.source?'':'—'))+
+        (rng.source?' from '+esc(String(rng.source).slice(0,120)):'')+'. '+
+        'Useful for knowing what they actually sell; for what the NHS has bought, read the '+
+        'frameworks above.</div>';
+      order.forEach(function(dv){
+        var items=byDiv[dv];
+        body+='<details style="margin:0 0 6px;border:1px solid '+LINE+';border-radius:8px;background:#fff;">'+
+          '<summary style="cursor:pointer;padding:8px 12px;font-size:13px;font-weight:600;color:'+INK+';">'+
+          esc(dv)+' <span style="color:'+DIM+';font-weight:400;">· '+items.length+'</span></summary>'+
+          '<div style="padding:2px 12px 10px;">'+
+          items.map(function(p){
+            var cat=p&&p.category;
+            return '<span style="display:inline-block;border:1px solid '+LINE+';border-radius:99px;'+
+              'padding:3px 10px;font-size:12px;margin:0 5px 5px 0;color:#37485a;"'+
+              (cat?' title="'+esc(cat)+'"':'')+'>'+esc(p&&p.n)+'</span>';
+          }).join('')+'</div></details>';
+      });
+      h+=sec('Full range — '+(rng.products||[]).length+' products across '+order.length+
+             ' of their own divisions', body);
     }
 
     // awards
@@ -113,13 +175,26 @@
       if(!n) return null;
       var hit=sup.filter(function(s){return norm(s.name)===n||(s.aliases||[]).some(function(a){return norm(a)===n;});})[0];
       if(hit) return hit;
-      // partial: name/alias/product contains
-      return sup.filter(function(s){
+      // partial: name/alias contains
+      var part=sup.filter(function(s){
         if(norm(s.name).indexOf(n)>-1) return true;
         if((s.aliases||[]).some(function(a){return norm(a).indexOf(n)>-1;})) return true;
-        if((s.products||[]).some(function(p){return norm(p).indexOf(n)>-1;})) return true;
         return false;
-      })[0]||null;
+      })[0];
+      if(part) return part;
+      /* Only now fall back to product names, and search the FULL RANGE as well
+         as the index's short list — "Nutrisafe2" is a real Vygon product and
+         used to return nothing because the index knows 8 Vygon products and the
+         company sells 200.
+         Product matching is deliberately LAST. It is the arm that returned
+         Dentaquip for "KaVo", because Dentaquip's product list contains the word
+         — so it must never outrank a company whose own name matches. */
+      var byProd=sup.filter(function(s){
+        if((s.products||[]).some(function(p){return norm(p).indexOf(n)>-1;})) return true;
+        var r=rangeFor(s);
+        return !!(r&&(r.products||[]).some(function(p){return norm(p&&p.n).indexOf(n)>-1;}));
+      })[0];
+      return byProd||null;
     }
     function show(q){
       var s=find(q);
@@ -151,8 +226,19 @@
     window.addEventListener('hashchange',fromHash);
   }
 
-  if(window.MSH_SUPPLIER_INDEX){ run(window.MSH_SUPPLIER_INDEX); return; }
-  fetch(DATA_URL,{cache:'no-store'}).then(function(r){return r.json();}).then(run).catch(function(){
+  /* The range file is a bonus, never a dependency: if it fails the page shows
+     exactly what it showed before it existed. The index is the one that matters,
+     so it keeps its own error state. */
+  function loadRange(){
+    return fetch(RANGE_URL,{cache:'no-store'})
+      .then(function(r){return r.json();})
+      .then(function(j){ RANGE=(j&&j.suppliers)||{}; })
+      .catch(function(){ RANGE={}; });
+  }
+  if(window.MSH_SUPPLIER_INDEX){ var d0=window.MSH_SUPPLIER_INDEX; loadRange().then(function(){run(d0);}); return; }
+  loadRange()
+    .then(function(){return fetch(DATA_URL,{cache:'no-store'});})
+    .then(function(r){return r.json();}).then(run).catch(function(){
     MOUNT.innerHTML='<div style="font-family:Inter,sans-serif;color:'+DIM+';font-size:13px;padding:12px;">Supplier search is loading its data — if this persists, the index feed is temporarily unreachable.</div>';
   });
 })();
