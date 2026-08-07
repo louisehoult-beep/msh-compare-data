@@ -1797,6 +1797,51 @@ def check_compare_groups_by_ref(comptab_js):
              % bad.start())
 
 
+def check_curated_test_matches(comptab_js):
+    """The renderer and the gate must agree on what "curated" means.
+
+    Found live 07/08/2026. `verify.py` judges an item curated with
+    `not autoDetected or use.strip()`. `app/comptab.js` printed its red
+    "NEW — auto-detected, verify at source" banner on `it.autoDetected` ALONE —
+    and that flag records how an item ARRIVED, so it never goes false. The result
+    was 12 curated items on Med Sales Tools telling a paying member not to trust
+    the tactical line written directly beneath them, in the house's own warning
+    colour.
+
+    THE PUBLISH GATE COULD NOT SEE IT, because nothing in it read the renderer.
+    It reported success on the commit that made it worse. That is the actual
+    lesson: a gate over the data alone cannot catch a data/renderer disagreement,
+    and this is the class of bug that produces.
+
+    So this checks the renderer's own test, not the output. The banner must be
+    guarded by BOTH `autoDetected` and an emptiness test on `use`.
+    """
+    if not comptab_js:
+        return
+    src = _js_scan(comptab_js)[0]          # comments blanked
+    m = re.search(r"if\s*\(([^)]*?)\)\s*\{[^{}]*auto-detected, verify at source", src)
+    if not m:
+        # The banner text itself is gone, or it is no longer inside a simple
+        # guard. Either way this check can no longer prove anything, and saying
+        # so is better than passing silently.
+        if "auto-detected, verify at source" in src:
+            WARN("curated", "app/comptab.js still prints the auto-detected banner but its guard "
+                            "could not be read, so it was not checked. Look at it by hand.")
+        return
+    guard = m.group(1)
+    if "autoDetected" not in guard:
+        FAIL("curated", "app/comptab.js prints the auto-detected banner without testing "
+                        "`autoDetected` at all: guard is %r." % guard[:90])
+        return
+    if not re.search(r"!\s*\(?\s*\(?\s*\w*\.?use\b", guard):
+        FAIL("curated", "app/comptab.js prints “NEW — auto-detected, verify at source” on "
+                        "`autoDetected` alone (guard: %r). That flag records how an item "
+                        "ARRIVED and never goes false, so every curated item wears a warning "
+                        "telling the reader not to trust the tactical line beneath it. "
+                        "verify.py treats an item as curated when `use` is non-empty — the "
+                        "renderer must use the same test." % guard[:90])
+
+
 def check_ref_present(sup):
     """A row whose `co` resolves to a master record must carry that `ref`.
 
@@ -2099,6 +2144,7 @@ def main():
     check_no_clusters_on_tools(comptab_js)
     check_compare_groups_by_ref(comptab_js)
     check_ref_present(load("compare-suppliers.json"))
+    check_curated_test_matches(comptab_js)
 
     if as_json:
         print(json.dumps({"pass": not fails, "fails": fails, "warns": warns}, indent=1))
