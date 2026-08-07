@@ -16,6 +16,8 @@
  "briefsSeen": 140,
  "frameworkCount": 122,
  "unparsedCount": 15,
+ "expiredCount": 3,
+ "expiredRule": "A brief whose framework has already ended is captured but kept OUT of `frameworks`, because every consumer reads that list as live routes to market. NHS Supply Chain leaves briefs published after they end. A brief with no readable end date stays in `frameworks` rather than being dropped.",
  "frameworks": [
   {
    "name": "Advanced Wound Care",
@@ -4778,85 +4780,6 @@
    "supplierLots": null
   }
  ],
- "unparsed": [
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-draw-tools-and-accessories/",
-   "name": "Blood Draw Tools and Accessories",
-   "reason": "the page states 37 suppliers but 35 were parsed — refusing rather than publishing a list that does not match the page"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/dental-products-technologies/",
-   "name": "Dental Technologies, Implants and Related Consumables and Services",
-   "reason": "the page states 33 suppliers but 35 were parsed — refusing rather than publishing a list that does not match the page"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fresh-and-food-to-go/",
-   "name": "Fresh and Food To Go Direct Solutions",
-   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/hand-hygiene-active-hand-shield/",
-   "name": "Hand Hygiene Active Hand Shield",
-   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/interventional-cardiology-interventional-radiology-and-interventional-neuroradiology-cardiac-rhythm-management-and-electrophysiology/",
-   "name": "Interventional Cardiology, Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm Management and Electrophysiology",
-   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/maintenance-repair-and-calibration-of-medical-equipment/",
-   "name": "Maintenance, Repair and Calibration of Medical Equipment",
-   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/managed-equipment-and-clinical-service-solutions/",
-   "name": "Managed Equipment and Clinical Service Solutions",
-   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/national-ambulance-uniforms-2/",
-   "name": "National Ambulance Uniforms and General Workwear",
-   "reason": "no supplier list found after the count sentence"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-sterile-single-use-fluid-resistant-surgical-facemasks-type-iir/",
-   "name": "Non-Sterile Single Use Fluid-Resistant Surgical Facemasks (Type IIR)",
-   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-tables/",
-   "name": "Operating and Mobile Interventional Radiology Tables, Related Accessories and Services",
-   "reason": "the page states 12 suppliers but 11 were parsed — refusing rather than publishing a list that does not match the page"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatre-and-outpatient-microscopes-and-associated-accessories/",
-   "name": "Operating (Theatre and Outpatient) Microscopes and Associated Accessories",
-   "reason": "the page states 10 suppliers but 9 were parsed — refusing rather than publishing a list that does not match the page"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/peripheral-iv-site-monitoring-device/",
-   "name": "Peripheral IV Site Monitoring Device",
-   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/single-use-personal-protective-equipment-and-medical-consumables/",
-   "name": "Single Use Personal Protective Equipment and Medical Protective Consumables",
-   "reason": "no supplier list found after the count sentence"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/suction-wound-drainage-autologous-blood-systems/",
-   "name": "Suction, Wound Drainage, Autologous Blood Systems and Related Consumables",
-   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wigs-and-accessories/",
-   "name": "Supply, Repair and Maintenance of Wigs and Accessories",
-   "reason": "the page states 34 suppliers but 30 were parsed — refusing rather than publishing a list that does not match the page"
-  }
- ],
- "expiredCount": 3,
- "expiredRule": "A brief whose framework has already ended is captured but kept OUT of `frameworks`, because every consumer reads that list as live routes to market. NHS Supply Chain leaves briefs published after they end. A brief with no readable end date stays in `frameworks` rather than being dropped.",
  "expired": [
   {
    "name": "Chemical Wound Debridement Acidic Gel",
@@ -4941,6 +4864,83 @@
    "supplierCount": 12,
    "supplierLots": null,
    "endedOn": "2025-09-17"
+  }
+ ],
+ "unparsed": [
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-draw-tools-and-accessories/",
+   "name": "Blood Draw Tools and Accessories",
+   "reason": "the page states 37 suppliers but 35 were parsed — refusing rather than publishing a list that does not match the page"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/dental-products-technologies/",
+   "name": "Dental Technologies, Implants and Related Consumables and Services",
+   "reason": "the page states 33 suppliers but 35 were parsed — refusing rather than publishing a list that does not match the page"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fresh-and-food-to-go/",
+   "name": "Fresh and Food To Go Direct Solutions",
+   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/hand-hygiene-active-hand-shield/",
+   "name": "Hand Hygiene Active Hand Shield",
+   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/interventional-cardiology-interventional-radiology-and-interventional-neuroradiology-cardiac-rhythm-management-and-electrophysiology/",
+   "name": "Interventional Cardiology, Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm Management and Electrophysiology",
+   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/maintenance-repair-and-calibration-of-medical-equipment/",
+   "name": "Maintenance, Repair and Calibration of Medical Equipment",
+   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/managed-equipment-and-clinical-service-solutions/",
+   "name": "Managed Equipment and Clinical Service Solutions",
+   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/national-ambulance-uniforms-2/",
+   "name": "National Ambulance Uniforms and General Workwear",
+   "reason": "no supplier list found after the count sentence"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-sterile-single-use-fluid-resistant-surgical-facemasks-type-iir/",
+   "name": "Non-Sterile Single Use Fluid-Resistant Surgical Facemasks (Type IIR)",
+   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-tables/",
+   "name": "Operating and Mobile Interventional Radiology Tables, Related Accessories and Services",
+   "reason": "the page states 12 suppliers but 11 were parsed — refusing rather than publishing a list that does not match the page"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-theatre-and-outpatient-microscopes-and-associated-accessories/",
+   "name": "Operating (Theatre and Outpatient) Microscopes and Associated Accessories",
+   "reason": "the page states 10 suppliers but 9 were parsed — refusing rather than publishing a list that does not match the page"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/peripheral-iv-site-monitoring-device/",
+   "name": "Peripheral IV Site Monitoring Device",
+   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/single-use-personal-protective-equipment-and-medical-consumables/",
+   "name": "Single Use Personal Protective Equipment and Medical Protective Consumables",
+   "reason": "no supplier list found after the count sentence"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/suction-wound-drainage-autologous-blood-systems/",
+   "name": "Suction, Wound Drainage, Autologous Blood Systems and Related Consumables",
+   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wigs-and-accessories/",
+   "name": "Supply, Repair and Maintenance of Wigs and Accessories",
+   "reason": "the page states 34 suppliers but 30 were parsed — refusing rather than publishing a list that does not match the page"
   }
  ]
 }
