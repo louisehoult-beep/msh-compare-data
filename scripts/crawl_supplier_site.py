@@ -101,7 +101,7 @@ def clean(s):
 
 
 # ---------------------------------------------------------------- route 1
-def wp_products(domain):
+def wp_products(domain, deadline=None):
     base = "https://%s/wp-json/wp/v2" % domain
     types, _ = get(base + "/types", as_json=True)
     ptype = None
@@ -138,6 +138,8 @@ def wp_products(domain):
 
     products, page = [], 1
     while page <= MAX_PAGES:
+        if deadline and time.time() > deadline:
+            break                       # keep what has been read, stop fetching
         try:
             items, _ = get("%s/%s?per_page=100&page=%d&_fields=id,title,%s"
                            % (base, ptype, page, tax or "id"), as_json=True)
@@ -199,10 +201,13 @@ def shape_from_wp(raw, domain):
 
 
 # ---------------------------------------------------------------- route 2
-def sitemap_products(domain):
+def sitemap_products(domain, deadline=None):
     seen, urls = set(), []
     to_read = ["https://%s/sitemap.xml" % domain, "https://%s/sitemap_index.xml" % domain]
     while to_read and len(seen) < 12:
+        if deadline and time.time() > deadline:
+            return None, ("gave up while reading the sitemap — the site answers too slowly to "
+                          "crawl inside its budget")
         u = to_read.pop(0)
         if u in seen:
             continue
@@ -284,18 +289,15 @@ def crawl(domain):
     if not allowed(domain):
         return None, "robots.txt disallows automated reading of this site"
     try:
-        raw, why = wp_products(domain)
+        raw, why = wp_products(domain, deadline=started + SITE_BUDGET_S)
         if raw:
             return shape_from_wp(raw, domain), None
     except urllib.error.HTTPError as e:
         why = "the site's WordPress API returned HTTP %d" % e.code
     except Exception as e:
         why = "the site's WordPress API could not be read (%s)" % str(e)[:60]
-    if time.time() - started > SITE_BUDGET_S:
-        return None, ("gave up after %ds — the site answers too slowly to crawl inside its "
-                      "budget" % SITE_BUDGET_S)
     try:
-        shaped, why2 = sitemap_products(domain)
+        shaped, why2 = sitemap_products(domain, deadline=started + SITE_BUDGET_S)
         if shaped:
             return shaped, None
         return None, "%s; %s" % (why, why2)
