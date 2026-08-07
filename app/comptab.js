@@ -404,7 +404,15 @@ function renderIssues(S){
     iss+=datePills(it,true);
     iss+='<p style="font-size:12.5px;color:#5b6675;line-height:1.55;margin:0 0 6px;">'+esc(it.s)+'</p>';
     if(it.use){iss+='<p style="font-size:12.5px;color:#1c2430;line-height:1.55;margin:0 0 6px;"><b>How to use it:</b> '+esc(it.use)+'</p>';}
-    if(it.autoDetected){iss+='<p style="font-size:11px;color:#b3261e;font-weight:700;letter-spacing:.04em;margin:0 0 6px;">NEW \u2014 auto-detected, verify at source</p>';}
+    /* THE BANNER MEANS "NOBODY HAS READ THIS YET", NOT "THIS ARRIVED BY ROBOT".
+       `autoDetected` records how an item ARRIVED and never goes false, so testing
+       it alone printed "verify at source" above 12 tactical lines a human had
+       written and checked \u2014 the page telling a member not to trust the sales
+       angle directly beneath it. Curation is a non-empty `use`, which is the
+       same test verify.py's check_compare applies (`curated = not autoDetected
+       or use.strip()`); the two must not drift, and check_curated_test_matches()
+       fails the build if they do. */
+    if(it.autoDetected&&!((it.use||'').trim())){iss+='<p style="font-size:11px;color:#b3261e;font-weight:700;letter-spacing:.04em;margin:0 0 6px;">NEW \u2014 auto-detected, verify at source</p>';}
     /* Why an item sits where it does, and what could not be checked, both belong
        on the card. A reclassified notice looks like a mistake to anyone who saw
        it filed elsewhere yesterday, and a gated source looks like thin research

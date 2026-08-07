@@ -544,6 +544,21 @@ def _(tmp):
     return "baked fallback names companies that reach no supplier record"
 
 
+@case("the curated banner back to firing on autoDetected alone")
+def _(tmp):
+    # Live on 07/08/2026: 12 curated items on Med Sales Tools carried
+    # "NEW — auto-detected, verify at source" above a tactical line a human had
+    # written. `autoDetected` records how an item ARRIVED and never goes false.
+    # The publish gate reported success on the commit that made it worse,
+    # because nothing in it read the renderer.
+    js = "app/comptab.js"
+    src = open(js).read()
+    if "it.autoDetected&&!((it.use||'').trim())" not in src:
+        return None
+    open(js, "w").write(src.replace("it.autoDetected&&!((it.use||'').trim())", "it.autoDetected"))
+    return "auto-detected, verify at source"
+
+
 @case("a hand-added supplier row that resolves to a master but carries no ref")
 def _(tmp):
     # Not hypothetical: this happened on 07/08/2026, hours after the fix, while
