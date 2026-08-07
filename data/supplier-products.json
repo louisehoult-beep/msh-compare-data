@@ -16,7 +16,12 @@
   "seedIsSacred": "supplier-seed.json is declared human-owned and never-overwritten by build_supplier_index.py. Nothing here writes to it.",
   "built": "2026-07-20, extended 07/08/2026",
   "specialityVocabulary": "Canonical ids from speciality-map.json (31 specialities).",
-  "coverage": "4 suppliers expanded, 1271 products in total, as at 07/08/2026. Read from the company's own WordPress product records (richest — real category tree): GBUK Group, Vygon (UK). Read from the company's XML sitemap (names derived from URL slugs, no category, and see each record's captureCaveat): Mindray UK, Steris. This is a running sweep, not a finished one — the master index holds far more suppliers than have a range captured."
+  "coverage": "5 suppliers expanded, 1602 products in total, as at 07/08/2026. Read from the company's own product taxonomy (richest — real category tree): GBUK Group, Hospital Services Limited, Vygon (UK). Read from the company's XML sitemap (names derived from URL slugs, no category, and see each record's captureCaveat): Mindray UK, Steris. Three further captures were REFUSED after being read — see refusedOnReading. This is a running sweep, not a finished one.",
+  "refusedOnReading": {
+   "medi UK": "84% of its 173 URLs carried no division segment — caught by the new majority-Uncategorised guard, which did not exist when this was captured.",
+   "Canon Medical Systems": "Read by hand and refused: the 'divisions' are product-line codes (Aice, Alphenix, Ai, 'Mobiles Relocatables 2') rather than a product taxonomy, and entries like 'Experience', 'Deep Learning Reconstruction' and 'Interventional Radiology Oncology' are page titles, not products. No numeric test separates this from Steris or Mindray, which are fine, so this is a human judgement and is recorded as one.",
+   "Terumo UK": "Read by hand and refused: its two main 'divisions' are 'Product Types' and 'Medical Field', which are the site's FACET names rather than divisions, and 'Cardiovascular' is listed as a product. Same judgement as Canon."
+  }
  },
  "suppliers": {
   "GBUK Group": {
@@ -7046,6 +7051,1701 @@
      "n": "Sv70",
      "division": "Ventilator Solutions",
      "category": ""
+    }
+   ]
+  },
+  "Hospital Services Limited": {
+   "domain": "hsl.ie",
+   "verified": "2026-08-07",
+   "source": "hsl.ie product catalogue (WordPress REST API), read this run",
+   "structureFrom": "the company's own product category taxonomy",
+   "structure": "The company's own top-level product categories.",
+   "filingRule": "Grouping MIRRORS the manufacturer's own filing. Where a product sits under a category that reads oddly clinically, that is where the company files it, and a rep searching the company's way will find it there.",
+   "divisions": [
+    {
+     "name": "Brands",
+     "products": 303
+    },
+    {
+     "name": "Healthcare Technologies",
+     "products": 14
+    },
+    {
+     "name": "Ophthalmology",
+     "products": 5
+    },
+    {
+     "name": "Surgical Equipment",
+     "products": 4
+    },
+    {
+     "name": "Xray",
+     "products": 2
+    },
+    {
+     "name": "Ergonomic Furniture",
+     "products": 2
+    },
+    {
+     "name": "Diagnostic Imaging",
+     "products": 1
+    }
+   ],
+   "products": [
+    {
+     "n": "Barco Nio Color 8MP (MDNC‑8132) MKII",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "Barco MXRV‑3100",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "Barco Eonis 24″ (MDRC‑2424)",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "HugeMed Single-use Hysteroscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Barco Eonis 3D (MDRC‑8127)",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "UFSK 500 ECO Treatment Chair",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "F.I.S.O Panvisus Rondo",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "F.I.S.O Sonne Ophthalmic Chair",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "F.I.S.O Liberty Ophthalmic Chair",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Haag – Streit Refractor 900",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Haag-Streit Elara 900",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Eagle Lab® Ophthalmic Cannula Range by Innovia",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Eagle Lab® Ophthalmic Knives & Blades Range from Innovia",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "LAGIS Endoscopic Instruments",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "LAGIS Flow Multi-Functional Electrosurgery System",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "LAGIS Suction-Irrigation System",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "LAGIS Energy Bipolar Forceps",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "LAGIS Wound Retractor",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "LAGIS Path Cap for Wound Retractor",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "LAGIS Path Single Port Access",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "LAGIS TR-TRO Trocar",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Ventilation Tubes and Grommets by DTR Medical",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Crocodile Forceps & Scissors by DTR Medical",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "ELEPHANT-II Flexible Suction Ureteral Access Sheath",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Faxitron® Path Specimen Radiography System",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Hologic Trident® HD Specimen Radiography System",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Hologic Faxitron® Core Specimen Radiography System",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Canon Built-in AEC Assistance",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Canon Intelligent Noise Reduction",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Canon CXDI-Pro",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Canon CXDI-Elite",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "VL3D / VL4D HugeMed Video Laryngoscope – Single Use",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "VL3R/VL4R HugeMed Video Laryngoscope – Reusable",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "VL4REX/VLRDEX HugeMed Video Laryngoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Anterion from Heidelberg Engineering",
+     "division": "Ophthalmology",
+     "category": "Biometry"
+    },
+    {
+     "n": "Spectralis from Heidelberg Engineering",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "HEYEX 2 from Heidelberg Engineering",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Stephanix D²RS – Advanced Digital Radiography & Fluoroscopy System",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Shimadzu VW Detectors",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Oral Rotating Biopsy Punch",
+     "division": "Surgical Equipment",
+     "category": "Biopsy"
+    },
+    {
+     "n": "Plusoptix S12R Mobile Vision Screener",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Plusoptix Vision Screener S20",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Plusoptix A20 Binocular Autorefractor",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Haag Streit METIS 900",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Garment Style Mobile Loop 5 or 10 Arm Apron Rack",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Thyroid Collars",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Surgical Radiation Gloves",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Poncho Style (CP) Lead Apron",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "3/4 Overlap Two Piece CV2 Lead Apron",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Wiley X Tide Protection Glasses",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Radiation Glasses Nike Brazen",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Radiation Glasses Model Q100",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Radiation Glasses Model F10",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Airway Management Workstation",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Single-use Duodenoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Single-use Gastroscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Single use Cholangioscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Single-use Choledochoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Flexible Video Ureterorenoscope – HU30M",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Barco Coronis OneLook (MDMC‑32133)",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "Esaote O Scan SMART",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Esaote G Scan Open",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Esaote S Scan Open",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Esaote Magnifico Open",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Radiforce MX317W",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Nio Color 8MP (MDNC‑8132)",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Radspeed Pro SR5",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "SFX coat style lead apron – full overlap",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "SFX Cap style thyroid collar",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "SFX collapsible mobile leaded barrier",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Barco Eonis Colour 8MP (MDNC‑8132)",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "Keeler Professional Ophthalmoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Keeler PSL Classic Portable Hand Held Slit Lamp",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "PlusoptiX A12R – Binocular autorefractor",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Keeler Specialist Ophthalmoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Eyesi Indirect ROP",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Konica Minolta X-RAY FX",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Shimadzu FW Glass Free Detectors",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "MR Q SLT Laser",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Eyestar 900",
+     "division": "Ophthalmology",
+     "category": "Biometry"
+    },
+    {
+     "n": "Lenstar Myopia",
+     "division": "Ophthalmology",
+     "category": "Biometry"
+    },
+    {
+     "n": "Geister K-Rex Ronguer",
+     "division": "Surgical Equipment",
+     "category": "Cardiac"
+    },
+    {
+     "n": "FEMTO Z8 NEO",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Poly Studio P5",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Poly Studio P15",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Poly Studio R30",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Poly Studio",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Poly Studio X30",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Poly Studio X70",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Poly Studio X52",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Poly Studio room kits for Microsoft Teams Rooms",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Logitech Rally Bar Huddle",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Logitech Rally Bar",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Barco ClickShare C‑10",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "Barco ClickShare C‑5",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "Ergotron CareFit™ Combo System with Worksurface",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Ergotron TRACE™ Monitor Mount (matte black)",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Ergotron NX Monitor Arm (matte black)",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Zebra ZT411 4 inch Industrial Label Printer (ZT400 Series)",
+     "division": "Healthcare Technologies",
+     "category": "Desktop And Trolley-Based Printing"
+    },
+    {
+     "n": "Zebra ZD421 4 inch Desktop Printers",
+     "division": "Healthcare Technologies",
+     "category": "Desktop And Trolley-Based Printing"
+    },
+    {
+     "n": "Zebra ZD620 Performance Desktop Printers",
+     "division": "Healthcare Technologies",
+     "category": "Desktop And Trolley-Based Printing"
+    },
+    {
+     "n": "ThinkSmart Hub 500 for Microsoft Teams",
+     "division": "Healthcare Technologies",
+     "category": "Healthcare Technologies"
+    },
+    {
+     "n": "ThinkSmart Core Full Room Kit MTR",
+     "division": "Healthcare Technologies",
+     "category": "Healthcare Technologies"
+    },
+    {
+     "n": "ThinkSmart One + Controller for Teams",
+     "division": "Healthcare Technologies",
+     "category": "Healthcare Technologies"
+    },
+    {
+     "n": "ThinkSmart Core + Controller Kit MTR",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Single use RhinoLaryngoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Single use HugeMed Bronchoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Flexible Video Ureterorenoscope – HU30S",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Flexible Video Ureterorenoscope – HU30",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Single use Cystoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "maXium® smart C",
+     "division": "Surgical Equipment",
+     "category": "Electrosurgery"
+    },
+    {
+     "n": "maXium®",
+     "division": "Surgical Equipment",
+     "category": "Electrosurgery"
+    },
+    {
+     "n": "Ergotron LX Desk Monitor Arm",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Richard Wolf ENDOCAM Logic 4K",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Stephanix Omniscop Dream S",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Stephanix Omniscop Dream Surgical Carm",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "CROCE-OLMI Grasping Forceps",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Babcock Grasping Forceps",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Endo-Clinch Grasping Forceps",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Atraumatic Flat Grasping Forceps",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Fenestrated Grasping Forceps",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Maryland Dissecting Forceps",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Irrigation Pump",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "AeroDR TX Mobile",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Barco Nio Fusion 12MP MDNC-12130",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "AeroDR 3 1417SL",
+     "division": "Xray",
+     "category": "Detectors / Retrofits"
+    },
+    {
+     "n": "AeroDR 3 HL",
+     "division": "Xray",
+     "category": "Detectors / Retrofits"
+    },
+    {
+     "n": "Cisco Desk",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Room Kit Pro",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Cisco Room Bar",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Cisco Room Kit EQ",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Ergotron WorkFit-T, Sit-Stand Desktop Workstation",
+     "division": "Healthcare Technologies",
+     "category": "Desk Mount"
+    },
+    {
+     "n": "Ergotron CareFit™ Slim Laptop Cart",
+     "division": "Brands",
+     "category": "Ergotron"
+    },
+    {
+     "n": "Ergotron HX Wall Mount Monitor Arm (white)",
+     "division": "Ergonomic Furniture",
+     "category": "Ergonomic Furniture"
+    },
+    {
+     "n": "Ergotron HX Desk Monitor Arm (White or Black)",
+     "division": "Healthcare Technologies",
+     "category": "Desk Mount"
+    },
+    {
+     "n": "Zebra ZD411 Barcode Label Printer",
+     "division": "Healthcare Technologies",
+     "category": "Healthcare Technologies"
+    },
+    {
+     "n": "Zebra Barcode Scanner DS4600 Series for Healthcare",
+     "division": "Healthcare Technologies",
+     "category": "Healthcare Technologies"
+    },
+    {
+     "n": "Ergotron StyleView® Cart with LCD Pivot, LiFe Powered, UK",
+     "division": "Brands",
+     "category": "Ergotron"
+    },
+    {
+     "n": "Ergotron StyleView® Laptop Cart, SV40",
+     "division": "Brands",
+     "category": "Ergotron"
+    },
+    {
+     "n": "Ergotron CareFit™ Slim 2.0 LCD Cart",
+     "division": "Brands",
+     "category": "Ergotron"
+    },
+    {
+     "n": "Ergotron CareFit™ Combo System",
+     "division": "Ergonomic Furniture",
+     "category": "Ergonomic Furniture"
+    },
+    {
+     "n": "Dornier Thulio®",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Codonics Virtua E",
+     "division": "Brands",
+     "category": "Codonics"
+    },
+    {
+     "n": "HP Workstations",
+     "division": "Brands",
+     "category": "HP"
+    },
+    {
+     "n": "Dell Workstations",
+     "division": "Brands",
+     "category": "Dell"
+    },
+    {
+     "n": "Neat Devices",
+     "division": "Healthcare Technologies",
+     "category": "Healthcare Technologies"
+    },
+    {
+     "n": "Poly Meeting Room Solutions",
+     "division": "Healthcare Technologies",
+     "category": "Healthcare Technologies"
+    },
+    {
+     "n": "Cisco Room Kits",
+     "division": "Brands",
+     "category": "Cisco"
+    },
+    {
+     "n": "SHARK",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Radiforce RX560",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Radiforce RX360",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "LG 31″ 12MP IPS Diagnostic Monitor for Mammography",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "LG 21.3″ 3MP IPS Diagnostic Monitor",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "LG 31.5″ 8MP Diagnostic Monitor",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Radiforce RX370",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Radiforce MX216",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "MEDRAD® Centrago CT injector",
+     "division": "Brands",
+     "category": "Bayer Healthcare"
+    },
+    {
+     "n": "medDispense® M series Automated Dispensing Cabinets",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "medDispense® L series Automated Dispensing Cabinets",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Dornier Delta® III Pro",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "MEDRAD® MRXperion MR Injection System",
+     "division": "Brands",
+     "category": "Bayer Healthcare"
+    },
+    {
+     "n": "MEDRAD® Stellant Injectors",
+     "division": "Brands",
+     "category": "Bayer Healthcare"
+    },
+    {
+     "n": "MEDRAD® Mark 7 Arterion",
+     "division": "Brands",
+     "category": "Bayer Healthcare"
+    },
+    {
+     "n": "Horizon DXA Scanner",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Konica AeroDR3 HD2 Detectors",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Hologic 3DQuorum™ Imaging Technology, powered by Genius AI™",
+     "division": "Diagnostic Imaging",
+     "category": "Artificial Intelligence"
+    },
+    {
+     "n": "Brevera Breast Biopsy System",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Hologic 3Dimensions™ Mammography System",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Amadeo M-DR mini",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "MobileDaRt Evolution MX8 Version",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "NRT Intelli-C",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Radspeed Pro Style Edition",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Radspeed Fit Plus Version",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Barco MDPC-8127",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "Barco Coronis Fusion 6MP (MDCC-6530)",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "Industrial And RFID Printing",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Desktop And Trolley-Based Printing",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Portable Printing",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "ZQ600 PLUS HEALTHCARE SERIES MOBILE PRINTER",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Specialist Ergonomic Furniture",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Surface Pro 8",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "DT Research 301Y/MD Rugged 2-IN-1 Medical Tablet",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Intel® NUC Mini PC with 11th Generation Intel® Core™ Processors",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "DT Research 504T/ 507T",
+     "division": "Healthcare Technologies",
+     "category": "All-In-One PC"
+    },
+    {
+     "n": "Medix T24i",
+     "division": "Healthcare Technologies",
+     "category": "All-In-One PC"
+    },
+    {
+     "n": "Digital Signage",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "medDispense® F series Automated Dispensing Cabinets",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Medix M24T",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Touchscreen Ten",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Ergotron HX Desk Monitor Arm with HD Pivot",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Ergotron CareFit™ Enclosure",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Ergotron CareFit™ Pro Electric Lift Cart",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Ergotron StyleView® Sit-Stand Vertical Lift",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Ergotron StyleView® S-Tablet Cart, SV10",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Compact Hysteroscopes",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Fibre Light Cables",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Blue Eye Injectable Liquid",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Curved Scissors",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Endosampler",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Suction Irrigation",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "ERAGONmodular",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "ENDOCAM Logic HD",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Cervical Rotating Biopsy Punch",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "M70W",
+     "division": "Brands",
+     "category": "AVer"
+    },
+    {
+     "n": "M90UHD",
+     "division": "Brands",
+     "category": "AVer"
+    },
+    {
+     "n": "VB130",
+     "division": "Brands",
+     "category": "AVer"
+    },
+    {
+     "n": "PTZ310W",
+     "division": "Brands",
+     "category": "AVer"
+    },
+    {
+     "n": "Barco MXRV‑7100",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "Barco Nio Colour 3MP (MDNC-3521)",
+     "division": "Brands",
+     "category": "Barco"
+    },
+    {
+     "n": "The Kay Picture Test",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Half-Eye Trial Frames",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Eyesi Slit Lamp",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Femto LDV Z8",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Femto LDV Z4",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Lenses",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Test Chart LITE",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Paediatric Screening Test",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Micro PC (CB), 24” Monitor & Test Chart (Full)",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Acuity Master",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Thomson 24” Integra All-in-one & Test Chart LITE",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Thomson 21” Integra All-in-one & Thomson Test Chart (Full)",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Trial Lens Set, Short in Briefcase, Full Aperture",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Trial Lens Set in Domiciliary Kit Case",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Trial Lens Set Complete in Case Reduced Aperture",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Full Aperture Field Test Set (20)",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Dom. Trial Lens Set",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "LogMar Chart",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Human Eye Chart",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Eye Chart",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Catford Drum",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Thomas the Tank Engine Reading Test Type",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Silver Metal Pen Torch with Replaceable Batteries",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Sheridan Gardiner Test Complete",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Sheridan Gardiner Comprehensive Test",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Pair Cross Cylinders +-0.25 and +-0.50 in Case",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Mallet Near Vision Unit",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Jackson Cross Cylinder",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Four Page Washable Reading Test Type",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Cross Cylinder",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Confirmation Test (4 Lenses, 2 Pairs, one +-0.25D, one +-0.50D)",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Confirmation Test (4 Lenses, 2 Pairs, Each +-1.0D)",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Keeler 24 Plate Ishihara Colour Test",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Prismatic Loupe Magnification",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "K-LED II Practice Light System Keeler-Fit",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Hi-Res Loupes 3.0x Magnification",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Spectra Iris Indirect Ophthalmoscope on Keeler Frame",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Vantage Plus LED Indirect Ophthalmoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Vantage Plus LED Digital – Includes Video Capture",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Tonocare",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Specialist Ophthalmoscope and Streak Retinoscope Set",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Specialist Ophthalmoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Professional Streak Retinoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Professional Spot Retinoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Professional Ophthalmoscope and Streak Retinoscope Set",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Professional Ophthalmoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Mini Lithium Charger",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Lithium Double Charger",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Double Lithium Upgrade Kit",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Instruments",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "IM 900",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "IM 600",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Fundus Module 300",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "BX 900 LED",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "BQ 900",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "BP 900",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "BM 900",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "BI 900",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Octopus 900",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Octopus 600",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "EyeSuite Perimetry",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "EyeSuite",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Lenstar 900",
+     "division": "Ophthalmology",
+     "category": "Biometry"
+    },
+    {
+     "n": "EyeSuite IOL",
+     "division": "Ophthalmology",
+     "category": "Biometry"
+    },
+    {
+     "n": "Sterilising Stand",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Wirt Fly Test",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "TNO Stereotest",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Stereograms",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Randot Stereotest",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Random Dot E Stereotest",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Random Dot (Butterfly) Stereotests",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Lang Stereotest",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Frisby Stereotest",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Thumb Bar Readers",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Thomas the Tank Engine Reading Test Type",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Moorfields Bar Reading Book",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Maclure Test Type",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Maclure Bar Reading Test",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Jaeger Reading Test Type",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Synoptophore Slides",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Synoptophore Slide Sets",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Synoptophore Model 2003",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Synoptophore Model 2002",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Synoptophore Model 2001",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Solid Prism Bars",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Schirmer Tear Test",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "RAF Binocular Gauge",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Plastic Prisms",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Plastic Prism Bars",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Maddox Wing Test",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Lang Fixation Cube",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Lang Fixation Bar",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Fresnel Prisms",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Fresnel Confirmation Prism Bars",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Franceschetti Maddox Rod",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Children’s Fixation Bar",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Bangerter Occlusion Foils",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Bagolini Lorgnette",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Romanes Occluder",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Eustace Pinhole Occluder",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Perkins MK3",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Practitioner Chair & Stool – Black Base",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Practitioner Chair & Stool – Aluminium Base",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "City University Colour Vision Test, Edition 3",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Ishihara Colour Charts",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Contact Lens",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Single Panel Test Types",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Mirror",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Hess Screen",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Domiciliary Test Type",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Co-Ordimeter Screen",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Evans UK 4-Sided Test Type",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Bon Optical 3D Rotating Scheimpflug Camera & Topography System",
+     "division": "Brands",
+     "category": "Bon Optical"
+    },
+    {
+     "n": "MEDRAD® Stellant CT Multi Patient Injection Systems",
+     "division": "Brands",
+     "category": "Bayer Healthcare"
+    },
+    {
+     "n": "AccessRX",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Insight Flex Mini C-Arm",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Transport Carts",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Texas Bronchoscope",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "ENDOCAM Logic 4K",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "ENDOCAM Epic 3D",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "Eviva® Breast Biopsy System",
+     "division": "Brands",
+     "category": "Brands"
+    },
+    {
+     "n": "ATEC® Breast Biopsy System for Stereotactic Biopsy",
+     "division": "Brands",
+     "category": "Brands"
     }
    ]
   }
