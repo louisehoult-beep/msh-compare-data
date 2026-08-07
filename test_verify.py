@@ -494,6 +494,22 @@ def _(tmp):
     return "resolving to no canonical speciality"
 
 
+@case("an alias that is really another supplier record's own name")
+def _(tmp):
+    # Alias lookup is first-wins, so this does not create a visible duplicate —
+    # it silently redirects every reference to the record that owns the name.
+    # Found live on 07/08/2026: "Abbott Diagnostics" carried the alias "Abbott
+    # Laboratories", so the entity listing FreeStyle Libre in the Drug Tariff
+    # resolved to Abbott's diagnostics arm instead.
+    d = json.load(open("data/supplier-seed.json"))
+    names = [s["name"] for s in d["suppliers"]]
+    if len(names) < 2:
+        return None
+    d["suppliers"][0].setdefault("aliases", []).append(names[1])
+    json.dump(d, open("data/supplier-seed.json", "w"), ensure_ascii=False)
+    return "another supplier record's own name"
+
+
 @case("a supplier record whose name is a list of companies")
 def _(tmp):
     # Exactly what build_supplier_index.py already did once: it lifted a
