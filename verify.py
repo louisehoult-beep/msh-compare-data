@@ -1210,22 +1210,13 @@ VOCAB_BASELINE = {
     # because the file is still inconsistent with itself and `ref` only masks it
     # where the name resolves — 69 of 196 still reach no master at all.
     "compare_internal_dupes": 11,
-    # products.json SPECS vs speciality-map.json canonicalSpecialities.
-    #
-    # REACHED 0 on 07/08/2026 and is now a HARD FAIL with no baseline —
-    # `skin-prep` and `neonatal` were added to SPECS, `skin-prep` and
-    # `endourology` to canonicalSpecialities, and both lists hold the same 38
-    # ids. Per the design in docs/ONE-LIST-AUDIT.md section D: when a ratchet
-    # reaches 0, delete its entry so the check can never tolerate drift again.
-    # Adding a speciality to one list only now fails the build outright.
-    #
-    # Free-text supplier.specialities strings resolving to no canonical id —
-    # includes junk the auto-build wrote ("Product Match"). 5 -> 4 on
-    # 07/08/2026 when `skin-prep` became canonical, then 4 -> 3 later the same
-    # day when the Nikkiso merge retired a stray "Renal / dialysis" spelling, then
-    # 3 -> 2 when the curly-apostrophe women's label was mapped and five new
-    # records were corrected from "Diabetes" to the canonical "Diabetes / CGM".
-    "supplier_spec_unresolved": 2,
+    # `supplier_spec_unresolved` REACHED 0 on 07/08/2026 and is now a HARD FAIL
+    # with no baseline. It began the day at 5. The last two were "Matched to a
+    # tracked product" — a tag fetch_issues.py retired on 05/08/2026 that stayed
+    # on two carried-forward index records — and System C's "Social care / local
+    # government software", now mapped to `digital`. A supplier tagged with a
+    # string nothing can resolve is unreachable from every speciality filter, so
+    # a new one must fail rather than accumulate.
     # `alias_steals_name` REACHED 0 on 07/08/2026 and is now a HARD FAIL with no
     # baseline. An alias on record A that is, normalised, record B's own NAME
     # hands A every lookup meant for B, because alias resolution is first-wins.
