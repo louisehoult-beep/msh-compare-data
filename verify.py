@@ -1215,17 +1215,19 @@ VOCAB_BASELINE = {
     #
     # Free-text supplier.specialities strings resolving to no canonical id —
     # includes junk the auto-build wrote ("Product Match"). 5 -> 4 on
-    # 07/08/2026 when `skin-prep` became canonical.
-    "supplier_spec_unresolved": 4,
-    # An alias on record A that is, normalised, record B's own NAME. First-wins
-    # alias resolution then hands A every lookup meant for B. Found 07/08/2026:
-    # "Abbott Diagnostics" carried the alias "Abbott Laboratories", so every
-    # reference to Abbott Laboratories Limited — the entity that lists FreeStyle
-    # Libre in the Drug Tariff — resolved to Abbott's diagnostics arm instead.
-    # That one is fixed. Most of the rest are a duplicate auto-detected record
-    # sitting beside its seed original ("Medtronic" and "Medtronic Limited"),
-    # which is a merge job, not a one-line fix.
-    "alias_steals_name": 18,
+    # 07/08/2026 when `skin-prep` became canonical, then 4 -> 3 later the same
+    # day when the Nikkiso merge retired a stray "Renal / dialysis" spelling.
+    "supplier_spec_unresolved": 3,
+    # `alias_steals_name` REACHED 0 on 07/08/2026 and is now a HARD FAIL with no
+    # baseline. An alias on record A that is, normalised, record B's own NAME
+    # hands A every lookup meant for B, because alias resolution is first-wins.
+    # 18 of them: 15 were an auto-detected duplicate carried forward beside its
+    # seed original ("Medtronic Limited" beside "Medtronic"), now merged and
+    # prevented at source in build_supplier_index.py; 2 were duplicate seed
+    # records (Vernacare, Nikkiso), merged with the dropped name kept as an
+    # alias; 1 was "Abbott Diagnostics" holding "Abbott Laboratories", which is
+    # a different company's registered name and sent every FreeStyle Libre
+    # lookup to Abbott's diagnostics arm.
     # A supplier record whose name is a list of companies, not a company.
     #
     # REACHED 0 on 07/08/2026 and is now a HARD FAIL with no baseline. The one
