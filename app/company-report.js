@@ -770,6 +770,16 @@
       } else {
         rows += fact('Turnover', '<span style="color:' + DIM + ';">not disclosed in the filed accounts (legally permitted)</span>');
       }
+
+      /* Headcount is tagged far more often than turnover — small companies must
+         disclose it even when they omit the profit and loss account — so it is
+         frequently the only size figure this report can show at all. */
+      if (rec.employees != null) {
+        rows += fact('Employees', esc(String(rec.employees)) +
+          (rec.employeesNote ? ' <span style="color:' + DIM + ';">· ' + esc(rec.employeesNote) + '</span>' : ''));
+      } else if (rec.employeesNote) {
+        rows += fact('Employees', '<span style="color:' + DIM + ';">' + esc(rec.employeesNote) + '</span>');
+      }
     }
 
     var body = '';
