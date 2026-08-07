@@ -1184,32 +1184,20 @@ def _supplier_universe():
 # It does not merge, rewrite or normalise any data — a mass merge changes what
 # members read and needs Lou's sign-off.
 VOCAB_BASELINE = {
-    # Distinct companies in compare-suppliers.json reaching no supplier record.
-    # 73 on 06/08/2026; lowered to 71 the same day when the supplier-directory
-    # merge added the directory's own spellings to aliases[] in the seed and
-    # "Ambu" and "Advanced Medical Solutions" started resolving. Lowering a
-    # ratchet after the backlog is worked down is how the ratchet is meant to be
-    # maintained — it TIGHTENS the gate. It must never be raised.
-    # `compare_unresolved` REACHED 0 on 07/08/2026 and is now a HARD FAIL with no
-    # baseline. It began the day at 73. Every distinct company on the Compare tab
-    # now resolves to a supplier record, so a rep who reads a name there and
-    # types it into Supplier Search gets that company — which was the whole point
-    # of docs/ONE-LIST-AUDIT.md. 29 were spelling variants added to an existing
-    # record's aliases (including 8 where the master held the firm under a
-    # different naming style entirely: "KeyMed (Olympus)" against
-    # "Olympus (KeyMed)"), 2 were a duplicate record pair merged (Cook), and 40
-    # were genuinely absent and now have a seed record reconciled from their own
-    # Compare-tab row. Adding a name to the Compare tab that reaches no record
-    # now fails the build outright.
-    # Companies spelled two ways INSIDE compare-suppliers.json itself
-    # ("Vygon (UK)" and "Vygon UK"; "ConvaTec" and "Convatec").
+    # `compare_internal_dupes` REACHED 0 on 07/08/2026 and is now a HARD FAIL
+    # with no baseline. Lou's ruling that day: these are one company each and are
+    # to be actioned as one. Two differed only in capitalisation
+    # (ConvaTec/Convatec, ZOLL/Zoll Medical UK); the other nine differed by a
+    # legal suffix or punctuation (Cook (UK) / Cook (UK) Ltd, Penlon / Penlon
+    # Limited). All eleven already resolved to a single master through `ref`, so
+    # nothing about who they are changes — this settles what the TABLE prints.
+    # Where the two spellings were used equally often the master record's own
+    # spelling wins; otherwise the one already dominant in the file does.
     #
-    # These 11 no longer fragment the Compare tab's company picker: as of
-    # 07/08/2026 each supplier row also carries `ref`, the master record it
-    # resolves to, and the picker groups on that. This stays a tracked backlog
-    # because the file is still inconsistent with itself and `ref` only masks it
-    # where the name resolves — 69 of 196 still reach no master at all.
-    "compare_internal_dupes": 11,
+    # docs/ONE-LIST-AUDIT.md step 5 had advised leaving these, on the grounds
+    # that a `co` may be the procurement record's own wording. That was a
+    # reasonable default and it has been overridden by the owner, on the specific
+    # eleven, with the reasoning recorded here.
     # `supplier_spec_unresolved` REACHED 0 on 07/08/2026 and is now a HARD FAIL
     # with no baseline. It began the day at 5. The last two were "Matched to a
     # tracked product" — a tag fetch_issues.py retired on 05/08/2026 that stayed
