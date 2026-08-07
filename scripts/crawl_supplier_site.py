@@ -69,6 +69,11 @@ UA_STR = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 UA = {"User-Agent": UA_STR}
 PAUSE = 0.4
 MAX_PAGES = 40          # 100 products per page
+# A per-site wall clock. On the first wide pass one run reached 2h25m with no
+# way to see which site it was stuck on: sites time out slowly, and a large
+# sitemap paginates for a long time. A crawl that cannot be observed cannot be
+# trusted, so each site now gets a bounded slot and says when it runs out.
+SITE_BUDGET_S = 90
 MIN_PRODUCTS = 8        # below this a "range" is a landing page, not a catalogue
 
 
@@ -275,6 +280,7 @@ def sitemap_products(domain):
 
 
 def crawl(domain):
+    started = time.time()
     if not allowed(domain):
         return None, "robots.txt disallows automated reading of this site"
     try:
@@ -285,6 +291,9 @@ def crawl(domain):
         why = "the site's WordPress API returned HTTP %d" % e.code
     except Exception as e:
         why = "the site's WordPress API could not be read (%s)" % str(e)[:60]
+    if time.time() - started > SITE_BUDGET_S:
+        return None, ("gave up after %ds — the site answers too slowly to crawl inside its "
+                      "budget" % SITE_BUDGET_S)
     try:
         shaped, why2 = sitemap_products(domain)
         if shaped:
@@ -350,12 +359,12 @@ def main():
     done, refused = 0, 0
     for name, domain in targets:
         if not domain:
-            print("  -- %-30s no website recorded for this supplier" % name[:30])
+            print("  -- %-30s no website recorded for this supplier" % name[:30], flush=True)
             refused += 1
             continue
         shaped, why = crawl(domain)
         if not shaped:
-            print("  -- %-30s %s" % (name[:30], (why or "")[:70]))
+            print("  -- %-30s %s" % (name[:30], (why or "")[:70]), flush=True)
             refused += 1
             continue
         existing = doc["suppliers"].get(name) or {}
@@ -367,7 +376,13 @@ def main():
         done += 1
         print("  OK %-30s %d products, %d divisions (%s)"
               % (name[:30], len(shaped["products"]), len(shaped["divisions"]),
-                 shaped["structureFrom"]))
+                 shaped["structureFrom"]), flush=True)
+        # Save after EVERY supplier. The first wide pass wrote only at the end,
+        # so stopping it would have thrown away everything it had read.
+        if not a.dry_run:
+            with open(OUT, "w", encoding="utf-8") as f:
+                json.dump(doc, f, indent=1, ensure_ascii=False)
+                f.write("\n")
 
     if not a.dry_run and done:
         with open(OUT, "w", encoding="utf-8") as f:
