@@ -147,6 +147,61 @@ def build_alias_lookup(suppliers):
             lut[norm(a)] = s["name"]; lut[norm_co(a)] = s["name"]
     return lut
 
+def split_companies(raw_name, alias_lut):
+    """A field naming several manufacturers is not one supplier. Added 06/08/2026.
+
+    MHRA and NHSSC list every affected company in a single field, and taking it
+    whole created supplier records whose NAME was a list — e.g.
+    "B Braun, Baxter, Becton Dickinson UK Ltd, CODAN, Fannin, GBUK Group Ltd and
+    RPG Medical Ltd". That record then WON the substring search for "Becton
+    Dickinson UK" in supplier-search.js and handed a rep a company that does not
+    exist. Silently: no error, just the wrong answer.
+
+    The rule refuses on thin evidence, per root rule 14: a string is split ONLY
+    when every part it splits into already resolves to a supplier we hold. So a
+    genuine name containing "and" survives — "W.L. Gore and Associates (U.K.)
+    Limited" splits to "W.L. Gore" + "Associates (U.K.) Limited", the second
+    resolves to nothing, and the name is left intact, which is correct.
+
+    Returns the list of canonical names, or None to treat raw_name as one company.
+    """
+    # Never split on "&" — it sits INSIDE single names (Johnson & Johnson,
+    # Bausch & Lomb, W.L. Gore & Associates), so splitting there invents companies.
+    parts = [p.strip(" .") for p in re.split(r",|\band\b", raw_name) if p.strip(" .")]
+    if len(parts) < 2:
+        return None
+
+    SUFFIX = re.compile(r"\b(ltd|limited|plc|llp|lp|inc|gmbh|bv|nv|ag|sa|srl|as|oy|ab)\b\.?$", re.I)
+    resolved, companyish = 0, []
+    for p in parts:
+        c = alias_lut.get(norm(p)) or alias_lut.get(norm_co(p))
+        if c:
+            resolved += 1
+            if c not in companyish:
+                companyish.append(c)
+        elif SUFFIX.search(p):
+            # Unresolved but carries a legal suffix, so it IS a company — just one
+            # we do not hold yet. It gets its own record rather than being lost.
+            if p not in companyish:
+                companyish.append(p)
+
+    # Two independent signals, either sufficient. Two or more commas, because no
+    # single company name carries two (the widest here is "BD — Becton, Dickinson",
+    # which has one). Or two or more parts that are demonstrably companies, at
+    # least one of which we already hold — that is evidence, not resemblance.
+    if raw_name.count(",") >= 2 or (len(companyish) >= 2 and resolved >= 1):
+        return companyish if len(companyish) > 1 else None
+    return None
+
+
+def records_for(by_name, alias_lut, raw_name):
+    """Every supplier record a raw name refers to — usually one, sometimes several."""
+    names = split_companies(raw_name, alias_lut)
+    if names:
+        return [by_name[n] for n in names if n in by_name]
+    return [get_or_create(by_name, alias_lut, raw_name)]
+
+
 def get_or_create(by_name, alias_lut, raw_name):
     canonical = alias_lut.get(norm(raw_name)) or alias_lut.get(norm_co(raw_name))
     if canonical and canonical in by_name: return by_name[canonical]
@@ -191,13 +246,15 @@ def main():
         for iss in sp.get("issues", []):
             co = iss.get("co", "")
             if not co: continue
-            rec = get_or_create(by_name, alias_lut, co)
             aid = iss.get("id") or (iss.get("d", "") + "|" + iss.get("p", "")[:40])
-            if not any(isinstance(a, dict) and a.get("_id") == aid for a in rec["alerts"]):
-                rec["alerts"].append({"_id": aid, "date": iss.get("d", ""), "title": iss.get("p", ""),
-                    "detail": iss.get("s", ""), "use": iss.get("use", ""), "url": iss.get("url", ""),
-                    "speciality": label, "autoDetected": iss.get("autoDetected", False)}); added_alerts += 1
-            if label not in rec["specialities"]: rec["specialities"].append(label)
+            # A notice naming several manufacturers attaches to each of them,
+            # rather than inventing one supplier called all of them at once.
+            for rec in records_for(by_name, alias_lut, co):
+                if not any(isinstance(a, dict) and a.get("_id") == aid for a in rec["alerts"]):
+                    rec["alerts"].append({"_id": aid, "date": iss.get("d", ""), "title": iss.get("p", ""),
+                        "detail": iss.get("s", ""), "use": iss.get("use", ""), "url": iss.get("url", ""),
+                        "speciality": label, "autoDetected": iss.get("autoDetected", False)}); added_alerts += 1
+                if label not in rec["specialities"]: rec["specialities"].append(label)
 
     # 3. medical awards (Contracts Finder OCDS, CPV 33*)
     added_awards = scanned = pages = 0; url = CF
