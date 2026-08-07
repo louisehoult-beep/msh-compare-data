@@ -284,11 +284,21 @@ def sitemap_products(domain, deadline=None):
     # information — a flat list of names, not the company's own filing. The
     # report presents divisions as the company's own structure, so publishing a
     # single "Uncategorised" division of 1,300 items would be a false structure.
+    # A MAJORITY UNCATEGORISED IS A FLAT SITEMAP WEARING A TAXONOMY.
+    # This used to refuse only when EVERY item was uncategorised, which let medi
+    # UK through at 84% on 07/08/2026: 173 products, 145 of them in one
+    # "Uncategorised" bucket, published as though the company filed them that
+    # way. One product URL happening to carry a path segment is not a structure.
     real = [d for d in divisions if d != "Uncategorised"]
+    uncat = divisions.get("Uncategorised", 0)
     if not real:
         return None, ("the sitemap's product URLs are flat, so they carry no division structure "
                       "(%d names, all uncategorised) — a product list without the company's own "
                       "grouping is not the range this report shows" % len(plist))
+    if uncat * 2 > len(plist):
+        return None, ("%d of %d product URLs carry no division segment, so the grouping would be "
+                      "mostly one 'Uncategorised' bucket — the report presents divisions as the "
+                      "company's own structure and this is not one" % (uncat, len(plist)))
     return {
         "domain": domain,
         "verified": time.strftime("%Y-%m-%d"),
