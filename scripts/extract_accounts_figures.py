@@ -119,27 +119,39 @@ def api_get(path):
             time.sleep(30)
             return api_get(path)
         return None
+    except Exception:
+        return None
 
 
 def doc_json(url):
     pace()
     try:
         return json.load(urllib.request.urlopen(urllib.request.Request(url, headers=AUTH), timeout=45))
-    except urllib.error.HTTPError:
+    except Exception:
         return None
 
 
-def doc_content(url):
+def doc_content(url, _retry=0):
+    """The document bytes, or None. A network fault on ONE document must never
+    end a run that is walking hundreds of them."""
     pace()
     req = urllib.request.Request(url, headers=dict(AUTH, Accept="application/xhtml+xml"))
     try:
         return _opener.open(req, timeout=90).read()
     except urllib.error.HTTPError as e:
         if e.code in (301, 302, 303, 307):
-            return urllib.request.urlopen(e.reason, timeout=120).read()  # signed: no auth
-        if e.code == 429:
+            try:
+                return urllib.request.urlopen(e.reason, timeout=120).read()  # signed: no auth
+            except Exception:
+                return None
+        if e.code == 429 and _retry < 2:
             time.sleep(30)
-            return doc_content(url)
+            return doc_content(url, _retry + 1)
+        return None
+    except Exception:
+        if _retry < 1:
+            time.sleep(5)
+            return doc_content(url, _retry + 1)
         return None
 
 
