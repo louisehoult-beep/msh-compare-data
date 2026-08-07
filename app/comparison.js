@@ -19,6 +19,11 @@
   var CFG = BASE + 'data/prep-config.json?cb=' + Date.now();
   var SEED = BASE + 'data/supplier-seed.json?cb=' + Date.now();
   var NHSSC = BASE + 'data/nhssc-cache.json?cb=' + Date.now();
+  /* The company's own website range — a different KIND of fact from everything
+     else this tool loads, and kept separate for that reason. See the note where
+     it is folded into PRODUCTS. */
+  var RANGEURL = BASE + 'data/supplier-products.json?cb=' + Date.now();
+  var RANGE = {};
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
@@ -48,8 +53,9 @@
     fetch(IDX).then(function(r){return r.json();}),
     fetch(CFG).then(function(r){return r.json();}),
     fetch(SEED).then(function(r){return r.json();}).catch(function(){return {suppliers:[]};}),
-    fetch(NHSSC).then(function(r){return r.json();}).catch(function(){return {products:{}};})
-  ]).then(function(res){ render(res[0], res[1], res[2], res[3]); })
+    fetch(NHSSC).then(function(r){return r.json();}).catch(function(){return {products:{}};}),
+    fetch(RANGEURL).then(function(r){return r.json();}).catch(function(){return {suppliers:{}};})
+  ]).then(function(res){ RANGE = (res[4] && res[4].suppliers) || {}; render(res[0], res[1], res[2], res[3]); })
     .catch(function(){ MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;">Comparison tool temporarily unavailable — please try again shortly.</div>'; });
 
   function render(index, cfg, seed, nhssc){
@@ -73,13 +79,58 @@
 
     // Flatten to a product index.
     var PRODUCTS = [];
+    var seenProd = {};
     suppliers.forEach(function(s){
       (s.products || []).forEach(function(p){
         var name = typeof p === 'string' ? p : (p && p.name);
         if (!name) return;
+        seenProd[s.name + '|' + nk(name)] = 1;
         PRODUCTS.push({ name: name, code: (p && p.code) || '', supplier: s.name, specs: s.specialities || [], framework: (s.frameworks && s.frameworks[0] && s.frameworks[0].name) || '', fwDates: (s.frameworks && s.frameworks[0] && s.frameworks[0].dates) || '', voice: s.voice, type: typeForProduct(name) });
       });
     });
+
+    /* THE COMPANY'S OWN RANGE, ON TOP OF THE PROCUREMENT RECORD.
+       The lists above are what the procurement record names — framework awards
+       and catalogue lines — and for a big supplier that is a fraction of what
+       they sell: the index knows 45 GBUK products against the 343 on GBUK's own
+       site. A rep whose product was not in that 45 could not pick it, which made
+       the tool look broken for the exact person it is for.
+
+       These are marked `fromRange` and stay marked all the way to the result,
+       because they are a WEAKER fact than a catalogue line. They came off the
+       company's own website, so they prove the company sells it and prove
+       nothing whatever about NHS Supply Chain. The Differential already prints
+       "not stated in the catalogue entry" for anything the catalogue does not
+       cover, so a range product degrades honestly instead of inventing detail.
+
+       Never overrides: a product already known from the procurement record keeps
+       that provenance. */
+    var rangeAdded = 0;
+    (function(){
+      var byKey = {};
+      for (var k in RANGE){
+        var r = RANGE[k];
+        var keys = [k].concat(r.aliases || []);
+        for (var i = 0; i < keys.length; i++){ byKey[nk(keys[i])] = r; }
+      }
+      suppliers.forEach(function(s){
+        var r = byKey[nk(s.name)];
+        if (!r){
+          var al = s.aliases || [];
+          for (var i = 0; i < al.length && !r; i++){ r = byKey[nk(al[i])]; }
+        }
+        if (!r) return;
+        (r.products || []).forEach(function(p){
+          var name = p && p.n;
+          if (!name || seenProd[s.name + '|' + nk(name)]) return;
+          seenProd[s.name + '|' + nk(name)] = 1;
+          rangeAdded++;
+          PRODUCTS.push({ name: name, code: '', supplier: s.name, specs: s.specialities || [],
+            framework: '', fwDates: '', voice: s.voice, type: typeForProduct(name),
+            fromRange: true, division: p.division || '', rangeCategory: p.category || '' });
+        });
+      });
+    })();
     function typeOf(n){ n = (n||'').toLowerCase(); for (var i=0;i<TYPES.length;i++){ if (n.indexOf(TYPES[i]) !== -1) return TYPES[i].trim(); } return ''; }
     // Type from the product name; if the name has no category word, fall back to the
     // real NHS Supply Chain catalogue description (e.g. "Intermittent Catheter…",
@@ -171,8 +222,8 @@
     var askBody = encodeURIComponent('Please add this to the comparison tool:\n\nProduct:\nCompany:\nSpeciality / what it is:\nA link if you have one:\n');
     var cov = el('div', 'font-size:12.5px;line-height:1.6;color:#6b7684;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:9px;padding:9px 13px;margin:0 0 12px;');
     cov.innerHTML = 'These dropdowns cover the <strong>' + PRODUCTS.length.toLocaleString('en-GB') + ' products indexed across ' + Object.keys(SUPOBJ).length + ' tracked suppliers</strong> — not the whole market. '
-      + 'Nothing appears until it has been checked against the live NHS Supply Chain catalogue and the supplier’s own published information, so a product that is missing is '
-      + '<strong>not yet indexed</strong>, not "nothing found". '
+      + (rangeAdded ? '<strong>' + (PRODUCTS.length - rangeAdded).toLocaleString('en-GB') + '</strong> come from the procurement record — framework awards and NHS Supply Chain catalogue lines. The other <strong>' + rangeAdded.toLocaleString('en-GB') + '</strong> come from four suppliers’ own product websites, are marked <em>company’s own range</em> wherever they appear, and prove only that the company sells the item: they say nothing about NHS Supply Chain. ' : '')
+      + 'A product that is missing is <strong>not yet indexed</strong>, not "nothing found". '
       + '<a href="mailto:louisehoult@elevateandthrive.uk?subject=' + askSub + '&body=' + askBody + '" style="color:' + GOLD + ';font-weight:600;">Ask for something to be added &rarr;</a> '
       + '<span style="color:#8a8778;">— usually live within a working day.</span>';
     wrap.appendChild(cov);
@@ -537,6 +588,15 @@
       h += bigImg(d);
       h += '<div style="font-weight:800;font-size:15px;margin-top:9px;line-height:1.35;">' + esc(p.name) + '</div>';
       h += '<div style="font-size:12px;color:#6b7684;margin-top:2px;">' + esc(p.supplier) + '</div>';
+      /* PROVENANCE, ON THE PRODUCT ITSELF. A range product came off the
+         company's own website, not the procurement record, and the coverage note
+         above promises it is marked wherever it appears — so it is marked here,
+         beside the name, not only in the small print. */
+      if (p.fromRange){
+        h += '<div style="margin-top:6px;font-size:11px;color:#6b7684;background:#fff;border:1px dashed ' + LINE + ';border-radius:7px;padding:4px 8px;line-height:1.45;">'
+          + '<b>Company’s own range</b>' + (p.division ? ' &middot; ' + esc(p.division) : '')
+          + '<br>From ' + esc(p.supplier) + '’s own website, not the NHS Supply Chain record. No catalogue line is claimed for it.</div>';
+      }
       if (d && d.items && d.items[0] && d.items[0].desc){
         h += '<div style="font-size:12.5px;color:#45505c;margin-top:6px;line-height:1.5;">' + esc(d.items[0].desc) + '</div>';
       }

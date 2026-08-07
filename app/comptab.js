@@ -23,6 +23,26 @@ var BYURL={};
    data edit. D keeps vascular and continence as a baked fallback so the tab is
    never empty if the fetch fails; anything in the data file overrides it. */
 var SUPPLIERS_URL='https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/compare-suppliers.json';
+/* HOW BIG IS THIS COMPETITOR, REALLY. The table lists the brands that matter in
+   THIS speciality — four for GBUK under vascular — and a rep can read that as
+   the whole company. It is not: GBUK sells 343 products across eight of its own
+   divisions. Where a full range has been captured, the row says so.
+   This is the company's own website range, NOT the procurement record, so it is
+   labelled as that and never merged into the brands column. Non-fatal: no range,
+   no line, and the table is exactly what it was. */
+var RANGE_URL='https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/supplier-products.json';
+var RANGE={};
+function nkey(x){return String(x||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();}
+function rangeFor(row){
+  if(!row){return null;}
+  var want={}; [row.ref,row.co].forEach(function(x){if(x){want[nkey(x)]=1;}});
+  for(var k in RANGE){
+    if(want[nkey(k)]){return RANGE[k];}
+    var al=RANGE[k].aliases||[];
+    for(var i=0;i<al.length;i++){if(want[nkey(al[i])]){return RANGE[k];}}
+  }
+  return null;
+}
 function mergeSuppliers(j){
   if(!j||!j.specialities){return;}
   for(var k in j.specialities){
@@ -48,7 +68,11 @@ function mergeSuppliers(j){
    own without taking the other down: no suppliers means the tab falls back to
    notices-only, which is what it did before this file existed. */
 function loadFeed(){
-  return fetch(SUPPLIERS_URL,{cache:'no-store'})
+  return fetch(RANGE_URL,{cache:'no-store'})
+    .then(function(r){return r.json();})
+    .then(function(j){RANGE=(j&&j.suppliers)||{};})
+    .catch(function(){RANGE={};})
+    .then(function(){return fetch(SUPPLIERS_URL,{cache:'no-store'});})
     .then(function(r){return r.json();})
     .then(function(s){mergeSuppliers(s);})
     .catch(function(){})
@@ -371,7 +395,15 @@ function render(){
     rows+='<td style="padding:10px 14px;border-bottom:1px solid #f0ece3;vertical-align:top;"><b>'+esc(s.co)+'</b>'+(mine?' <span style="font-size:10px;font-weight:700;color:#a37519;">(YOU)</span>':'')+'</td>';
     rows+='<td style="padding:10px 14px;border-bottom:1px solid #f0ece3;vertical-align:top;">'+esc(s.brands)+'</td>';
     rows+='<td style="padding:10px 14px;border-bottom:1px solid #f0ece3;vertical-align:top;font-size:12px;color:#5b6675;">'+s.t.map(function(k){return esc(S.types[k]||k);}).join(', ')+'</td>';
-    rows+='<td style="padding:10px 14px;border-bottom:1px solid #f0ece3;vertical-align:top;font-size:12px;color:#5b6675;">'+esc(s.note)+' '+flags+'</td>';
+    var rg=rangeFor(s);
+    var rgLine='';
+    if(rg&&(rg.products||[]).length){
+      var dv=(rg.divisions||[]).length;
+      rgLine='<div style="margin-top:5px;font-size:11px;color:#5b6675;background:#f7f5ef;border:1px dashed #e3e7ec;border-radius:6px;padding:3px 7px;display:inline-block;">'
+        +'Full range: <b>'+(rg.products||[]).length+'</b> products'+(dv?' across <b>'+dv+'</b> of their own divisions':'')
+        +' &middot; their website, not the NHS Supply Chain record</div>';
+    }
+    rows+='<td style="padding:10px 14px;border-bottom:1px solid #f0ece3;vertical-align:top;font-size:12px;color:#5b6675;">'+esc(s.note)+' '+flags+rgLine+'</td>';
     rows+='<td style="padding:10px 14px;border-bottom:1px solid #f0ece3;vertical-align:top;"><a href="'+s.url+'" target="_blank" rel="noopener" style="color:#a37519;font-weight:600;font-size:12px;">site &rarr;</a></td>';
     rows+='</tr>';
   });

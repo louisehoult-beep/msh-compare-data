@@ -35,6 +35,15 @@
   var IDX = 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/supplier-index.json';
   var G = '#a8842c', INK = '#1d2733', DIM = '#75808d', LINE = '#e6e0d4', SOFT = '#f7f4ee';
   var SHOW = 10;
+  /* THIS TOOL DELIBERATELY DOES NOT READ data/supplier-products.json, and that
+     is not an oversight — every other tool was wired to it on 07/08/2026.
+     This panel ranks suppliers by ONE thing: how many NHS Supply Chain contract
+     launch briefs name them. The range file holds a company's own website
+     catalogue and carries no framework data at all, so folding it in could only
+     change the ranking by something the ranking does not measure. A supplier
+     with 733 products on its own site and two frameworks belongs at two.
+     The honest place for range size is the supplier's own card in Supplier
+     Search and the Company Report, where both are shown side by side. */
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {

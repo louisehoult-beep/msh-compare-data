@@ -635,6 +635,12 @@
     "vascular"
    ],
    "note": "The canonical id itself, seen in a supplier speciality list (Cook, 07/08/2026 refresh). Mapped to itself so it resolves rather than counting as unreconciled drift."
+  },
+  "Women’s health and maternity": {
+   "to": [
+    "womens"
+   ],
+   "note": "The canonical label with a CURLY apostrophe. canonicalSpecialities spells it with a straight one, so this string matched neither the map nor the canonical list and Vernacare was silently dropped from every women's health result. Same trap as 'Women's health / maternity' above, one entry further along: mapping both typographies is cheaper than policing them. Added 07/08/2026."
   }
  },
  "gapsInCanonicalList": [
