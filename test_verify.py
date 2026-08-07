@@ -528,6 +528,24 @@ def _(tmp):
     return "baked fallback names companies that reach no supplier record"
 
 
+@case("a hand-added supplier row that resolves to a master but carries no ref")
+def _(tmp):
+    # Not hypothetical: this happened on 07/08/2026, hours after the fix, while
+    # building the patient-handling set. Eight rows were written by hand without
+    # `ref` and "GBUK Healthcare" split straight back out of GBUK Group. coKey()
+    # falls back to `co`, which is correct for a name that reaches no master and
+    # silent for one that does — so deriving `ref` once is not enough.
+    d, blk, row = first_supplier_row()
+    if row is None or "ref" not in row:
+        return None
+    for b in d["specialities"].values():
+        for r in b.get("suppliers") or []:
+            if r.get("co") == row["co"]:
+                r.pop("ref", None)
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "carry no `ref`"
+
+
 @case("the Compare tab's company picker back to matching on the display spelling")
 def _(tmp):
     # Lou, 07/08/2026: picking "GBUK Group" offered Vascular access and nothing

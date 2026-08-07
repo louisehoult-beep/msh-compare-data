@@ -1766,6 +1766,74 @@ def check_compare_groups_by_ref(comptab_js):
              % bad.start())
 
 
+def check_ref_present(sup):
+    """A row whose `co` resolves to a master record must carry that `ref`.
+
+    coKey() falls back to `co` when `ref` is absent, which is right for the 69
+    names that reach no master — they stay visible as themselves. But it means a
+    MISSING ref is indistinguishable from an unresolvable one at render time,
+    and it fails silently: the row simply becomes its own company in the picker
+    again.
+
+    Caught while building the patient-handling set on 07/08/2026, hours after
+    the fix. Eight rows were hand-written without `ref` and "GBUK Healthcare"
+    split straight back out of GBUK Group into a separate one-speciality entry —
+    the identical bug, reintroduced by the person who had just removed it.
+    Deriving `ref` once is not enough; the invariant has to be enforced, or the
+    next hand-added row does this again.
+    """
+    if not sup:
+        return
+    # Same two files and the same loader as _supplier_universe(), so this check
+    # and the ratchet can never disagree about what the master holds. The seed
+    # is read first and wins ties: it is the human-owned record.
+    universe = {}
+    for fn in ("supplier-seed.json", "supplier-index.json"):
+        doc = load(fn)
+        if not isinstance(doc, dict):
+            continue
+        for s in doc.get("suppliers") or []:
+            if not isinstance(s, dict):
+                continue
+            nm = s.get("name")
+            if not nm:
+                continue
+            for key in [nm] + list(s.get("aliases") or []):
+                k = _norm_co(key)
+                if k and k not in universe:
+                    universe[k] = nm
+    if not universe:
+        WARN("compare-ref", "no supplier record could be read, so no `ref` was checked.")
+        return
+
+    missing, wrong = [], []
+    for sk, blk in ((sup.get("specialities") or {})).items():
+        for row in (blk or {}).get("suppliers") or []:
+            co = (row.get("co") or "").strip()
+            if not co:
+                continue
+            should = universe.get(_norm_co(co))
+            if not should:
+                continue                    # genuinely unresolved — groups as itself, correctly
+            ref = row.get("ref")
+            if ref is None:
+                missing.append("%s: %r -> %r" % (sk, co, should))
+            elif ref != should:
+                wrong.append("%s: %r says ref %r, master is %r" % (sk, co, ref, should))
+
+    if missing:
+        FAIL("compare-ref", "%d Compare-tab supplier row(s) resolve to a master record but carry "
+                            "no `ref`, so the company picker lists each as its own company again — "
+                            "the bug fixed on 07/08/2026. Add `ref` beside `co`. %s%s"
+             % (len(missing), "; ".join(missing[:6]),
+                "" if len(missing) <= 6 else " (+%d more)" % (len(missing) - 6)))
+    if wrong:
+        FAIL("compare-ref", "%d Compare-tab supplier row(s) name a `ref` that is not the master "
+                            "record their `co` resolves to. %s%s"
+             % (len(wrong), "; ".join(wrong[:6]),
+                "" if len(wrong) <= 6 else " (+%d more)" % (len(wrong) - 6)))
+
+
 # --------------------------------------------------------------------------
 # 10. HUB SEARCH INDEX — what a member can find, and what they must not be shown
 # --------------------------------------------------------------------------
@@ -1999,6 +2067,7 @@ def main():
     check_notice()
     check_no_clusters_on_tools(comptab_js)
     check_compare_groups_by_ref(comptab_js)
+    check_ref_present(load("compare-suppliers.json"))
 
     if as_json:
         print(json.dumps({"pass": not fails, "fails": fails, "warns": warns}, indent=1))
