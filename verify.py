@@ -40,7 +40,12 @@ WHAT IT CHECKS
 6. SHRINK        datasets may not silently collapse against what is committed.
 7. SOURCE LINKS  every citation in the Compare feed must still open. WARNS, never
                  fails — see the note above check_source_links for why.
-8. COMPANY REPT  Companies House facts, and the two claims the Company Report
+8. ONE LIST      the Hub is meant to hold one supplier list and one speciality
+                 vocabulary. It holds several, and they disagree. Each drift
+                 count carries a baseline: rising FAILS, falling WARNS, and any
+                 company name NEW in this commit that reaches no supplier
+                 record FAILS by name whatever the totals say.
+9. COMPANY REPT  Companies House facts, and the two claims the Company Report
                  DERIVES. No market share as a percentage, no count typed into
                  prose, no figure on a probable name match, no band without the
                  dated threshold it was assigned under, no phantom company.
@@ -1133,6 +1138,230 @@ def _supplier_universe():
     return names if seen_file else None
 
 
+# --------------------------------------------------------------------------
+# 9. ONE LIST — supplier and speciality vocabulary drift
+# --------------------------------------------------------------------------
+# WHY THIS EXISTS
+# ---------------
+# The Hub is supposed to hold ONE list of suppliers, so that adding a supplier
+# makes it appear everywhere it should. It does not. On 06/08/2026 an audit
+# found the same companies spelled differently in every file that names them:
+# BD alone appears as nine distinct strings across five files — "BD / Bard",
+# "Bard Access Systems / BD", "Becton Dickinson", "Becton Dickinson (BD)",
+# "Becton Dickinson U.K.", "Becton Dickinson UK", "Becton Dickinson UK Ltd" and
+# a corrupt record whose whole name is a sentence listing seven companies —
+# against a master that calls it "BD — Becton, Dickinson".
+#
+# That is not cosmetic. app/supplier-search.js and app/company-report.js fall
+# back to a SUBSTRING match when the exact name misses, and return the FIRST
+# hit. Run every Compare-tab company name through the live find(): 63 return
+# "not yet indexed", and of the 42 that only match on a substring, at least
+# three land on the wrong company — "Becton Dickinson UK" resolves to the
+# corrupt seven-company record, and "KaVo Dental" resolves to Dentaquip Ltd
+# because Dentaquip's product list happens to contain the word KaVo. A rep
+# reads that as a company report about the firm they typed.
+#
+# THE RATCHET
+# -----------
+# 73 of the 196 Compare-tab companies do not resolve today. Failing on that
+# now would block every push, including the two scheduled refreshes, so each
+# counter carries a baseline: the gate FAILS when a number RISES and WARNS
+# when it falls. New drift is blocked from today; the standing backlog is
+# worked down by lowering these numbers, never by raising them (rule 13 — if
+# the gate and the data disagree, the data is wrong).
+#
+# The count is only the backstop. The precise catch is the git diff: any
+# company name that is NEW in this commit and does not resolve fails by name,
+# whatever the totals say. That is what stops the backlog masking a fresh
+# mistake.
+#
+# WHAT THIS DELIBERATELY DOES NOT DO
+# ----------------------------------
+# It does not judge whether a company is real. 38 of the unresolved names are
+# absent from the master entirely (Alpha Laboratories, Bunzl Healthcare,
+# Rocialle, Vitalograph...) and are most likely real suppliers nobody has
+# indexed yet. The gate says "this name reaches no record", never "delete it".
+# It does not merge, rewrite or normalise any data — a mass merge changes what
+# members read and needs Lou's sign-off.
+VOCAB_BASELINE = {
+    # Distinct companies in compare-suppliers.json reaching no supplier record.
+    # 73 on 06/08/2026; lowered to 71 the same day when the supplier-directory
+    # merge added the directory's own spellings to aliases[] in the seed and
+    # "Ambu" and "Advanced Medical Solutions" started resolving. Lowering a
+    # ratchet after the backlog is worked down is how the ratchet is meant to be
+    # maintained — it TIGHTENS the gate. It must never be raised.
+    "compare_unresolved": 71,        # of 196 distinct companies, 06/08/2026
+    # Companies spelled two ways INSIDE compare-suppliers.json itself
+    # ("Vygon (UK)" and "Vygon UK"; "ConvaTec" and "Convatec").
+    "compare_internal_dupes": 11,
+    # products.json SPECS vs speciality-map.json canonicalSpecialities.
+    # Today: endourology, pharma and ultrasound are selectable but not
+    # canonical; neonatal is canonical but nothing can select it.
+    # Tightened 4 -> 2 on 06/08/2026, when `pharma` and `ultrasound` were added to
+    # canonicalSpecialities and the drift genuinely fell. The ratchet only fails on a
+    # RISE, so leaving it at 4 left a hole: an id added to SPECS but not to the
+    # canonical map made 3, which is under 4, and passed. verify.py asks for this
+    # tightening itself in its own WARN. Never raise it back.
+    "spec_vocab_mismatch": 2,
+    # Free-text supplier.specialities strings resolving to no canonical id —
+    # includes junk the auto-build wrote ("Product Match").
+    "supplier_spec_unresolved": 5,
+    # A supplier record whose name is a list of companies, not a company.
+    "malformed_supplier_names": 1,
+}
+
+# A name is a list-of-companies, not a company: two or more commas AND a
+# conjunction. "BD — Becton, Dickinson" and "Cardinal Health U.K. 432 Ltd"
+# both survive this; the seven-company record does not.
+LIST_AS_NAME = re.compile(r"\band\b", re.I)
+
+
+def _compare_companies(sup):
+    """Distinct `co` strings across every speciality's supplier rows, in order."""
+    out, seen = [], set()
+    for blk in ((sup or {}).get("specialities") or {}).values():
+        for row in ((blk or {}).get("suppliers") or []):
+            co = (row or {}).get("co")
+            if isinstance(co, str) and co.strip() and co not in seen:
+                seen.add(co)
+                out.append(co)
+    return out
+
+
+def _ratchet(check, key, actual, offenders, what, fix):
+    """FAIL when a drift count rises above its baseline; WARN when it falls.
+
+    Never silent: a standing backlog that stops being mentioned is a backlog
+    that stops being worked.
+    """
+    base = VOCAB_BASELINE[key]
+    sample = ", ".join(repr(o) for o in sorted(offenders)[:8])
+    more = "" if len(offenders) <= 8 else " (+%d more)" % (len(offenders) - 8)
+    if actual > base:
+        FAIL(check, "%s rose from %d to %d. %s Offenders: %s%s"
+                    % (what, base, actual, fix, sample, more))
+    elif actual < base:
+        WARN(check, "%s is down to %d from a baseline of %d — lower "
+                    "VOCAB_BASELINE[%r] to %d so it cannot drift back."
+                    % (what, actual, base, key, actual))
+    else:
+        WARN(check, "%s: %d, unchanged against the recorded baseline. Standing "
+                    "backlog, not new drift." % (what, actual))
+
+
+def check_vocab(sup, products, specmap, index, comptab_js):
+    """One list, or an honest count of how far from one list this repo is."""
+    if sup is None:
+        return                              # check_suppliers already warns
+
+    universe = _supplier_universe()
+    if universe is None:
+        WARN("vocab", "neither supplier-seed.json nor supplier-index.json could be read, "
+                      "so no supplier name can be reconciled. Nothing checked.")
+        return
+
+    # -- 1. Compare-tab companies that reach no supplier record --------------
+    companies = _compare_companies(sup)
+    unresolved = [c for c in companies if _norm_co(c) not in universe]
+
+    # The precise catch: a name NEW in this commit that resolves to nothing.
+    # Counts can hide this — remove one old offender, add one new one, and the
+    # total is unchanged while a fresh mistake ships.
+    was = committed("data/compare-suppliers.json")
+    if was is not None:
+        before = set(_compare_companies(was))
+        fresh = [c for c in unresolved if c not in before]
+        if fresh:
+            FAIL("vocab", "new supplier name(s) on the Compare tab that reach no record in "
+                          "supplier-seed.json or supplier-index.json: %s. A rep who reads "
+                          "this name on Compare and types it into Supplier Search gets "
+                          "“not yet indexed”, or worse, the first company whose "
+                          "products happen to contain the words. Add the company to the "
+                          "seed, or add this spelling to an existing record's `aliases`."
+                 % ", ".join(repr(c) for c in sorted(fresh)))
+
+    _ratchet("vocab", "compare_unresolved", len(unresolved), unresolved,
+             "Compare-tab companies reaching no supplier record",
+             "Every name here must exist in supplier-seed.json, as a `name` or in `aliases`.")
+
+    # -- 2. The same company spelled two ways in the same file ---------------
+    groups = {}
+    for c in companies:
+        groups.setdefault(_norm_co(c), set()).add(c)
+    dupes = {k: sorted(v) for k, v in groups.items() if len(v) > 1}
+    _ratchet("vocab", "compare_internal_dupes", len(dupes),
+             [" / ".join(v) for v in dupes.values()],
+             "companies spelled more than one way inside compare-suppliers.json",
+             "Pick the master's spelling; the Compare tab lists them as separate companies.")
+
+    # -- 3. The two speciality vocabularies -----------------------------------
+    # A speciality has to be added ONCE. Today it has to be added to
+    # products.json (which fills the dropdown on page 1109 and the Stakeholder
+    # Mapper) AND to speciality-map.json (which Meeting Prep and the Company
+    # Report reconcile supplier records through). Miss either and the
+    # speciality exists in half the Hub.
+    specs = {s.get("id") for s in (products or {}).get("SPECS") or [] if s.get("id")}
+    canon = {s.get("id") for s in (specmap or {}).get("canonicalSpecialities") or []
+             if s.get("id")}
+    if specs and canon:
+        diff = specs ^ canon
+        _ratchet("vocab", "spec_vocab_mismatch", len(diff), sorted(diff),
+                 "speciality ids in products.json SPECS but not speciality-map.json "
+                 "canonicalSpecialities, or the reverse",
+                 "A speciality in only one of the two is selectable in half the tools.")
+
+    # -- 4. Supplier speciality strings that resolve to nothing --------------
+    # supplier.specialities is free text. speciality-map.json exists to
+    # reconcile it. A string in neither the canonical labels nor the map is a
+    # supplier that no speciality filter can reach.
+    if canon:
+        labels = {s.get("label") for s in (specmap or {}).get("canonicalSpecialities") or []}
+        mapped = set((specmap or {}).get("supplierSpecialityMap") or {})
+        strings = set()
+        for s in ((index or {}).get("suppliers") or []):
+            for x in (s.get("specialities") or []):
+                if isinstance(x, str) and x.strip():
+                    strings.add(x)
+        orphan = sorted(x for x in strings if x not in labels and x not in mapped)
+        _ratchet("vocab", "supplier_spec_unresolved", len(orphan), orphan,
+                 "supplier speciality strings resolving to no canonical speciality",
+                 "Add the string to speciality-map.json supplierSpecialityMap, or fix "
+                 "whatever wrote it.")
+
+    # -- 5. A supplier record that is not one supplier -----------------------
+    malformed = [s.get("name") for s in ((index or {}).get("suppliers") or [])
+                 if isinstance(s.get("name"), str)
+                 and s["name"].count(",") >= 2 and LIST_AS_NAME.search(s["name"])]
+    _ratchet("vocab", "malformed_supplier_names", len(malformed), malformed,
+             "supplier records whose name is a list of companies rather than a company",
+             "build_supplier_index.py lifted a notice's whole supplier field into a "
+             "record. Supplier Search will return it to anyone typing any name in it.")
+
+    # -- 6. The baked fallback must reach the master -------------------------
+    # HARD FAIL, no baseline: app/comptab.js carries vascular and continence
+    # inline so the Compare tab is never empty if the fetch fails. It is clean
+    # today and there is no reason it may ever stop being — it is 16 names.
+    m = re.search(r"^var D=(\{.*\});\s*$", comptab_js or "", re.M)
+    if m:
+        try:
+            baked = json.loads(m.group(1))
+        except Exception:
+            WARN("vocab", "app/comptab.js `var D=` is no longer a plain JSON literal, so the "
+                          "baked fallback's company names cannot be reconciled.")
+            baked = None
+        if baked:
+            bad = sorted({row["co"] for blk in baked.values()
+                          for row in (blk.get("suppliers") or [])
+                          if isinstance(row.get("co"), str)
+                          and _norm_co(row["co"]) not in universe})
+            if bad:
+                FAIL("vocab", "app/comptab.js's baked fallback names companies that reach no "
+                              "supplier record: %s. This is what members see when the data "
+                              "fetch fails, so it is the one supplier list with no way to "
+                              "correct it after publication."
+                     % ", ".join(repr(b) for b in bad))
+
+
 def check_company_report(financials, report_js):
     if financials is None and not (report_js or "").strip():
         return                              # feature not built yet — nothing to gate
@@ -1426,6 +1655,42 @@ def check_company_report(financials, report_js):
                                % (len(probable), ", ".join(repr(p) for p in probable[:3])))
 
 
+def check_no_clusters_on_tools(comptab_js):
+    """Standing clusters must never render on the Med Sales Tools page.
+
+    Ruled by Lou, 06/08/2026. A cluster was pinned ABOVE the speciality picker
+    and shown whatever the member had selected, so a single running supply story
+    sat in front of everybody and buried the speciality they came to read. That
+    class of item belongs on the Live Desk.
+
+    This is a check rather than a comment because a comment is a memory, and a
+    memory is what the last person edited straight past. Rendering a cluster
+    means iterating CLUSTERS — there is no other way to get one on screen — so
+    that is what this looks for. The declaration, the assignment from the feed
+    and any `.length` guard all stay legal: the data contract is unchanged and
+    the Live Desk still consumes the same key.
+    """
+    if not comptab_js:
+        return
+    # _js_scan returns (comment-blanked source, string-literal spans) — take the
+    # source. Comments are blanked so the note explaining this very rule, which
+    # names CLUSTERS, cannot trip the check that enforces it.
+    src = _js_scan(comptab_js)[0]
+    for pat, why in (
+        (r"CLUSTERS\s*\.\s*forEach", "iterates CLUSTERS"),
+        (r"CLUSTERS\s*\[\s*\d", "indexes into CLUSTERS"),
+        (r"for\s*\(\s*var\s+\w+\s*=\s*0\s*;[^;]*CLUSTERS\s*\.\s*length", "loops over CLUSTERS"),
+    ):
+        m = re.search(pat, src)
+        if m:
+            FAIL("clusters", "app/comptab.js %s at offset %d. Standing clusters must not "
+                             "render on the tools page — that was ruled on 06/08/2026 after a "
+                             "pinned thread buried the speciality picker for every member. "
+                             "Put it on the Live Desk (page 675, via the cloud-pipeline) instead."
+                             % (why, m.start()))
+            return
+
+
 # --------------------------------------------------------------------------
 # 10. HUB SEARCH INDEX — what a member can find, and what they must not be shown
 # --------------------------------------------------------------------------
@@ -1636,6 +1901,8 @@ def main():
                         "speciality is one the Compare tab can actually render.")
     check_compare(load("compare-issues.json"), suppress, comptab_js)
     check_suppliers(load("compare-suppliers.json"), load("compare-issues.json"))
+    check_vocab(load("compare-suppliers.json"), load("products.json"),
+                load("speciality-map.json"), load("supplier-index.json"), comptab_js)
     check_source_links(load("compare-issues.json"),
                        offline or "--no-links" in sys.argv)
 
@@ -1655,6 +1922,7 @@ def main():
 
     check_shrink()
     check_notice()
+    check_no_clusters_on_tools(comptab_js)
 
     if as_json:
         print(json.dumps({"pass": not fails, "fails": fails, "warns": warns}, indent=1))

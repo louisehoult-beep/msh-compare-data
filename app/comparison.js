@@ -10,6 +10,11 @@
   if (!MOUNT) return;
   var BASE = 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/';
   var GOLD = '#a8842c', OX = '#6B2A34', GRN = '#2E6B3E', INK = '#20303f', LINE = '#e6e2d8', PANEL = '#ffffff', SOFT = '#f7f5ef';
+  /* The two sides, one colour each, used identically in the form and in every
+     panel of the result. Slate rather than red for the competitor: on this tool
+     the rival is a legitimate product, not a threat to be flagged. */
+  var MINE_C = OX, MINE_BG = '#fbf3f4';
+  var THEIR_C = '#2A5A6B', THEIR_BG = '#eff5f7';
   var IDX = BASE + 'data/supplier-index.json?cb=' + Date.now();
   var CFG = BASE + 'data/prep-config.json?cb=' + Date.now();
   var SEED = BASE + 'data/supplier-seed.json?cb=' + Date.now();
@@ -86,10 +91,11 @@
     }
     function kp(prod){ var m = KEYPOINTS[prod.supplier]; if (!m) return ''; var n = prod.name.toLowerCase(); for (var k in m){ if (n.indexOf(k) !== -1) return m[k]; } return ''; }
 
-    var wrap = el('div', 'font-family:Inter,system-ui,sans-serif;color:' + INK + ';');
+    // Outside margin so the tool doesn't run to the edge of the page (Lou, 06/08/2026).
+    var wrap = el('div', 'font-family:Inter,system-ui,sans-serif;color:' + INK + ';padding:0 clamp(10px,3vw,34px);box-sizing:border-box;');
     wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:' + OX + ';', 'NHS Intelligence Hub'));
-    wrap.appendChild(el('div', 'font-size:24px;font-weight:800;margin:2px 0 4px;', 'Product Comparison'));
-    wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:760px;margin-bottom:12px;', 'Pick your <strong>company</strong> and product on the left. On the right, tell us who you’re up against — a specific rival if you know one, or leave it blank and we’ll suggest your closest tracked match. You get a straight <strong>head-to-head</strong>: real NHS Supply Chain codes and images, the actual differences, and how to differentiate.'));
+    wrap.appendChild(el('div', 'font-size:24px;font-weight:800;margin:2px 0 4px;', 'The Differential'));
+    wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:760px;margin-bottom:12px;', 'Pick your <strong>company</strong> and product on the left. On the right, tell us who you’re up against — a specific rival if you know one, or leave it blank and we’ll suggest your closest tracked match. You get the two <strong>side by side</strong>: real NHS Supply Chain images and codes, their catalogue facts lined up, what actually differs, and the questions to ask in the room.'));
 
     // Search flow: 1 Company -> 2 Speciality (from the supplier directory) ->
     // 3 Product type -> 4 product name OR NHSSC code (YOUR product), then a
@@ -106,39 +112,70 @@
       'diabetes': ['glucose','sensor','test strip','lancet','needle','pump'],
       'surgery / theatres': ['suture','stapler','staple','haemostat','sealant','drape','gown','glove','scalpel','blade','forceps','retractor','trocar','clip','clamp','mesh','skin closure','tissue adhesive','electrode','suction','warming','warmer','scope','endoscope']
     };
-    var barHead1 = el('div', 'font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:' + OX + ';margin:0 0 4px;', 'Your product');
-    var bar = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:10px;padding:12px;margin-bottom:10px;');
+    /* THE TWO SIDES, SIDE BY SIDE — in the form as well as the result.
+       Lou, 06/08/2026: the form stacked "your product" above "compare against",
+       so the two things being compared never sat alongside each other until
+       after you pressed Compare. They are now two columns, colour-coded, and
+       THE SAME TWO COLOURS CARRY THROUGH TO EVERY PANEL OF THE RESULT —
+       oxblood is always yours, slate is always theirs. Deliberately not
+       red-vs-green: the competitor is not the villain, and a rep who is shown
+       one is a rep who badmouths one. */
+    var twoCol = el('div', 'display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px;align-items:stretch;');
+
+    var colMine = el('div', 'flex:1 1 300px;min-width:0;background:' + MINE_BG + ';border:1px solid ' + MINE_C + ';border-top:3px solid ' + MINE_C + ';border-radius:10px;padding:12px;');
+    colMine.appendChild(el('div', 'font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:' + MINE_C + ';margin:0 0 9px;', 'Your product'));
+    var bar = el('div', 'display:flex;flex-direction:column;gap:10px;');
     var supNames0 = [], supSeen0 = {};
     PRODUCTS.forEach(function(p){ if (!supSeen0[p.supplier]){ supSeen0[p.supplier] = 1; supNames0.push(p.supplier); } });
     supNames0.sort(function(a,b){ return a.toLowerCase() < b.toLowerCase() ? -1 : 1; });
     var selSup = mkSelect('1 · Company', [''].concat(supNames0));
     var selSpec = mkSelect('2 · Speciality', ['']); selSpec.sel.disabled = true;
     var selType = mkSelect('3 · Product type', ['']); selType.sel.disabled = true;
-    var pbox = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:260px;flex:2;');
+    var pbox = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:0;');
     pbox.appendChild(el('label', 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6b7684;', '4 · Product name or NHSSC code'));
     var inp = el('input', 'padding:10px 12px;border:1px solid ' + LINE + ';border-radius:8px;font-size:14px;background:#fff !important;color:#20303f !important;'); inp.type='text'; inp.setAttribute('list','msh-prod-list'); inp.placeholder='e.g. Pahacel — or a code like ELS924';
     var dl = el('datalist'); dl.id='msh-prod-list';
     pbox.appendChild(inp); pbox.appendChild(dl);
     bar.appendChild(selSup.box); bar.appendChild(selSpec.box); bar.appendChild(selType.box); bar.appendChild(pbox);
-    wrap.appendChild(barHead1);
-    wrap.appendChild(bar);
+    colMine.appendChild(bar);
 
-    // Explicit "compare against" product — the fix for the tool silently
-    // auto-picking a rival with no way to name one. Left blank, it still
-    // falls back to the closest tracked match (see updateSuggestPlaceholder /
-    // runCompare below) so the tool never dead-ends a rep who doesn't know
-    // exactly who they're up against.
-    var barHead2 = el('div', 'font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:' + GRN + ';margin:0 0 4px;', 'Compare against');
-    var bar2 = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:10px;padding:12px;margin-bottom:10px;');
+    /* Explicit "compare against" product — the fix for the tool silently
+       auto-picking a rival with no way to name one. Left blank, it still falls
+       back to the closest tracked match (see updateSuggestPlaceholder /
+       runCompare below) so the tool never dead-ends a rep who doesn't know
+       exactly who they're up against. */
+    var colTheirs = el('div', 'flex:1 1 300px;min-width:0;background:' + THEIR_BG + ';border:1px solid ' + THEIR_C + ';border-top:3px solid ' + THEIR_C + ';border-radius:10px;padding:12px;');
+    colTheirs.appendChild(el('div', 'font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:' + THEIR_C + ';margin:0 0 9px;', 'Their product'));
+    var bar2 = el('div', 'display:flex;flex-direction:column;gap:10px;');
     var selSup2 = mkSelect('Their company (optional)', [''].concat(supNames0));
-    var pbox2 = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:280px;flex:2;');
+    var pbox2 = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:0;');
     pbox2.appendChild(el('label', 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6b7684;', 'Their product name or NHSSC code'));
     var inp2 = el('input', 'padding:10px 12px;border:1px solid ' + LINE + ';border-radius:8px;font-size:14px;background:#fff !important;color:#20303f !important;'); inp2.type='text'; inp2.setAttribute('list','msh-prod-list2'); inp2.placeholder='type a specific rival product or code (optional — we’ll suggest one)';
     var dl2 = el('datalist'); dl2.id='msh-prod-list2';
     pbox2.appendChild(inp2); pbox2.appendChild(dl2);
     bar2.appendChild(selSup2.box); bar2.appendChild(pbox2);
-    wrap.appendChild(barHead2);
-    wrap.appendChild(bar2);
+    bar2.appendChild(el('div', 'font-size:11.5px;color:#5f6b74;line-height:1.5;margin-top:2px;', 'Leave blank and we’ll pick your closest tracked match.'));
+    colTheirs.appendChild(bar2);
+
+    twoCol.appendChild(colMine); twoCol.appendChild(colTheirs);
+    wrap.appendChild(twoCol);
+
+    /* COVERAGE, STATED HONESTLY. Lou asked for a line saying the tool "only
+       compares products on framework". It does not, and saying so would
+       misdescribe it: PRODUCTS is built from each tracked supplier's own indexed
+       range, and the framework shown against a product is merely that supplier's
+       FIRST framework — many entries are on no framework at all, and some tracked
+       suppliers hold none. So this says what is actually true, and offers the same
+       way out: ask, and it gets added. */
+    var askSub = encodeURIComponent('Product request — NHS Intelligence Hub');
+    var askBody = encodeURIComponent('Please add this to the comparison tool:\n\nProduct:\nCompany:\nSpeciality / what it is:\nA link if you have one:\n');
+    var cov = el('div', 'font-size:12.5px;line-height:1.6;color:#6b7684;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:9px;padding:9px 13px;margin:0 0 12px;');
+    cov.innerHTML = 'These dropdowns cover the <strong>' + PRODUCTS.length.toLocaleString('en-GB') + ' products indexed across ' + Object.keys(SUPOBJ).length + ' tracked suppliers</strong> — not the whole market. '
+      + 'Nothing appears until it has been checked against the live NHS Supply Chain catalogue and the supplier’s own published information, so a product that is missing is '
+      + '<strong>not yet indexed</strong>, not "nothing found". '
+      + '<a href="mailto:louisehoult@elevateandthrive.uk?subject=' + askSub + '&body=' + askBody + '" style="color:' + GOLD + ';font-weight:600;">Ask for something to be added &rarr;</a> '
+      + '<span style="color:#8a8778;">— usually live within a working day.</span>';
+    wrap.appendChild(cov);
     function rawTypesFor(sup, spec){
       var allowed = spec ? SPECMAP[spec.toLowerCase()] : null;
       var seenT = {}, out = [];
@@ -207,17 +244,48 @@
         inp2.placeholder = 'type a specific rival product or code (optional — we’ll suggest one)';
       }
     }
+    /* THEIRS = ACTUAL COMPETITORS ONLY. Lou, 06/08/2026: picking a rival company
+       used to list that company's WHOLE range, because a chosen supplier returned
+       early and skipped the device-type test. Comparing a haemostat and selecting
+       Johnson & Johnson offered CARTO 3, VARIPULSE, Impella and Monarch — ablation
+       catheters and a surgical robot. The type test now applies whether or not a
+       supplier has been picked, so the list only ever holds things that could
+       genuinely compete with the product on the left. */
+    function rivalsOf(mine, supFilter){
+      return PRODUCTS.filter(function(p){
+        if (mine && p.supplier === mine.supplier) return false;      // never your own range
+        if (supFilter && p.supplier !== supFilter) return false;
+        if (mine && mine.type && p.type && p.type !== mine.type) return false;
+        if (mine && mine.type && !p.type) return false;              // untyped can't be shown to compete
+        return true;
+      });
+    }
     function refreshList2(){
       dl2.innerHTML = '';
       var mine = resolveMine();
-      var supFilter = selSup2.sel.value;
       var seenO = {};
-      PRODUCTS.filter(function(p){
-        if (supFilter) return p.supplier === supFilter;
-        if (mine && p.supplier === mine.supplier) return false;
-        if (mine && mine.type && p.type && p.type !== mine.type) return false;
-        return true;
-      }).slice(0, 500).forEach(function(p){ var v = p.name + '  ·  ' + p.supplier; if (!seenO[v]){ seenO[v] = 1; var o = el('option'); o.value = v; dl2.appendChild(o); } });
+      rivalsOf(mine, selSup2.sel.value).slice(0, 500).forEach(function(p){
+        var v = p.name + '  ·  ' + p.supplier;
+        if (!seenO[v]){ seenO[v] = 1; var o = el('option'); o.value = v; dl2.appendChild(o); }
+      });
+      refreshRivalCompanies(mine);
+    }
+    /* And the company list on the right is rebuilt from those rivals, so it holds
+       only suppliers that actually offer something comparable — not all 345. */
+    function refreshRivalCompanies(mine){
+      var keep = selSup2.sel.value;
+      var names = {}, out = [];
+      rivalsOf(mine, '').forEach(function(p){ if (!names[p.supplier]){ names[p.supplier] = 1; out.push(p.supplier); } });
+      out.sort(function(a, b){ return a.toLowerCase() < b.toLowerCase() ? -1 : 1; });
+      var lbl = selSup2.box.querySelector('label');
+      if (lbl) lbl.textContent = mine && mine.type
+        ? ('Their company — ' + out.length + ' with a ' + mine.type)
+        : 'Their company (optional)';
+      selSup2.sel.innerHTML = '';
+      var o0 = el('option'); o0.value = ''; o0.textContent = '— any competitor —'; selSup2.sel.appendChild(o0);
+      out.forEach(function(n){ var o = el('option'); o.value = n; o.textContent = n; selSup2.sel.appendChild(o); });
+      // Keep the rep's choice if it still competes; otherwise fall back to "any".
+      selSup2.sel.value = (keep && out.indexOf(keep) !== -1) ? keep : '';
     }
     selSup.sel.addEventListener('change', function(){
       var sup = selSup.sel.value;
@@ -425,6 +493,163 @@
       return '<div style="background:#fff;border:' + bd + ';border-radius:10px;padding:12px 14px;">' + head + table + more + '</div>';
     }
 
+    /* SIDE BY SIDE — yours and theirs, pictured, with their catalogue facts
+       aligned so a rep reads ACROSS a row instead of holding two lists in their
+       head. Added 06/08/2026: the head-to-head table put each product on its own
+       ROW, which is the wrong axis for "what is actually different here", and the
+       image was a 30px thumbnail.
+
+       THE RULE THAT GOVERNS EVERY CELL: these attributes are derived from each
+       product's own NHS Supply Chain catalogue description. An empty cell means
+       THE CATALOGUE ENTRY DID NOT SAY SO — never that the product lacks the
+       feature. Rendering silence as "no" would publish a false claim about
+       somebody else's product on a paying page. It is also the whole reason this
+       tool never reads as an attack: we state what each entry says, and let the
+       difference speak. */
+    var ATTRS = [
+      { k: 'material',   label: 'Material' },
+      { k: 'form',       label: 'Format' },
+      { k: 'reg',        label: 'Regulatory status' },
+      { k: 'latex',      label: 'Latex' },
+      { k: 'silver',     label: 'Antimicrobial element', bool: true },
+      { k: 'bloodctl',   label: 'Blood control',         bool: true },
+      { k: 'needlefree', label: 'Needle-free connector',  bool: true },
+      { k: 'tint',       label: 'Tinted',                 bool: true },
+      { k: 'dehp',       label: 'DEHP present',           bool: true }
+    ];
+    var NOTSTATED = '<span style="color:#8a8778;font-style:italic;">not stated in the catalogue entry</span>';
+
+    function bigImg(d){
+      var it = d && d.items && d.items.filter(function(x){ return x.img; })[0];
+      if (!it) return '<div style="height:150px;display:flex;align-items:center;justify-content:center;background:#faf8f3;border:1px dashed ' + LINE + ';border-radius:8px;color:#8a8778;font-size:12px;text-align:center;padding:0 10px;">No catalogue image held<br>for this line</div>';
+      return '<a href="' + esc(it.img) + '" target="_blank" rel="noopener"><img src="' + esc(it.img) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.innerHTML=\'\'" style="width:100%;height:150px;object-fit:contain;background:#fff;border:1px solid ' + LINE + ';border-radius:8px;"></a>';
+    }
+
+    function sideCol(p, isMine){
+      var d = detailFor(p);
+      var li = liveItem(d);
+      var C = isMine ? MINE_C : THEIR_C;
+      var label = isMine ? 'YOURS' : 'THEIRS';
+      var who = isMine ? esc(p.supplier) : esc(p.supplier);
+      var tag = '<span style="background:' + C + ';color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;border-radius:99px;padding:2px 9px;">' + label + '</span>';
+      var h = '<div style="flex:1 1 240px;min-width:0;background:' + (isMine ? MINE_BG : THEIR_BG) + ';border:1px solid ' + C + ';border-top:3px solid ' + C + ';border-radius:10px;padding:12px;">';
+      h += '<div style="margin-bottom:8px;">' + tag + '</div>';
+      h += bigImg(d);
+      h += '<div style="font-weight:800;font-size:15px;margin-top:9px;line-height:1.35;">' + esc(p.name) + '</div>';
+      h += '<div style="font-size:12px;color:#6b7684;margin-top:2px;">' + esc(p.supplier) + '</div>';
+      if (d && d.items && d.items[0] && d.items[0].desc){
+        h += '<div style="font-size:12.5px;color:#45505c;margin-top:6px;line-height:1.5;">' + esc(d.items[0].desc) + '</div>';
+      }
+      if (li){
+        h += '<div style="margin-top:8px;font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:' + INK + ';">NPC ' + esc(li.npc) + (li.mpc ? '<br><span style="color:#8a8778;">MPC ' + esc(li.mpc) + '</span>' : '') + '</div>';
+        h += '<div style="font-size:11.5px;color:#5a6470;margin-top:4px;">' + (d.items.length) + ' pack variant' + (d.items.length === 1 ? '' : 's') + ' · ' +
+          (d.items.some(function(it){ return it.status; })
+            ? '<span style="color:#a24;font-weight:600;">a pack shows a status change</span>'
+            : '<span style="color:' + GRN + ';">all live</span>') + '</div>';
+        h += '<div style="margin-top:5px;"><a href="' + lookupUrl(p.name) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;font-size:11.5px;">all codes on NHS Supply Chain &#8599;</a></div>';
+      } else {
+        h += '<div style="margin-top:8px;font-size:11.5px;color:#8a8778;">' +
+          (NOTCAT[nk(p.name)] ? 'Not a catalogue line — ' + esc(NOTCAT[nk(p.name)].reason)
+                              : 'No live catalogue detail held for this line yet.') + '</div>';
+      }
+      if (fwFor(p)) h += '<div style="margin-top:7px;font-size:11.5px;color:#5a6470;">On framework: ' + esc(fwFor(p)) + '</div>';
+      return h + '</div>';
+    }
+
+    function sideBySide(mine, theirs, myA, theirA){
+      var h = '<div style="display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 0;">'
+        + sideCol(mine, true) + sideCol(theirs, false) + '</div>';
+
+      // Aligned attribute rows. A row is shown only when at least one side says
+      // something — an all-silent row teaches nothing and pads the page.
+      var rows = '';
+      for (var i = 0; i < ATTRS.length; i++){
+        var a = ATTRS[i];
+        var mv = myA ? myA[a.k] : null, tv = theirA ? theirA[a.k] : null;
+        if (!mv && !tv) continue;
+        var mTxt, tTxt;
+        if (a.bool){
+          mTxt = mv ? 'Stated' : NOTSTATED;
+          tTxt = tv ? 'Stated' : NOTSTATED;
+        } else {
+          mTxt = mv ? esc(mv) : NOTSTATED;
+          tTxt = tv ? esc(tv) : NOTSTATED;
+        }
+        var differs = !!mv && !!tv && mv !== tv;
+        var bg = differs ? 'background:#fbf6ec;' : '';
+        rows += '<tr style="' + bg + 'border-top:1px solid ' + LINE + ';vertical-align:top;">'
+          + '<td style="padding:7px 10px;font-size:12px;color:#6b7684;white-space:nowrap;">' + esc(a.label)
+          + (differs ? ' <span title="These differ" style="color:' + OX + ';font-weight:700;">&#9670;</span>' : '') + '</td>'
+          + '<td style="padding:7px 10px;font-size:12.5px;color:#39424d;' + (differs ? 'font-weight:600;' : '') + '">' + mTxt + '</td>'
+          + '<td style="padding:7px 10px;font-size:12.5px;color:#39424d;' + (differs ? 'font-weight:600;' : '') + '">' + tTxt + '</td></tr>';
+      }
+      if (!rows){
+        h += '<div style="margin-top:10px;font-size:13px;color:#39424d;background:#fff;border:1px solid ' + LINE + ';border-radius:10px;padding:12px 14px;">'
+          + 'Neither catalogue entry states a material, format or regulatory detail we can line up, so there is no spec table to show. '
+          + 'That is a gap in the published descriptions, not a finding about either product — compare on service, training, price and supply instead.</div>';
+        return h;
+      }
+      h += '<div style="overflow-x:auto;margin-top:10px;"><table style="width:100%;border-collapse:collapse;min-width:420px;background:#fff;border:1px solid ' + LINE + ';border-radius:10px;">'
+        + '<thead><tr style="text-align:left;background:' + SOFT + ';">'
+        + '<th style="padding:8px 10px;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:#8a8778;">What</th>'
+        + '<th style="padding:8px 10px;font-size:11.5px;color:#fff;background:' + MINE_C + ';">' + esc(mine.name) + ' <span style="font-weight:400;opacity:.85;">(you)</span></th>'
+        + '<th style="padding:8px 10px;font-size:11.5px;color:#fff;background:' + THEIR_C + ';">' + esc(theirs.name) + '</th></tr></thead><tbody>'
+        + rows + '</tbody></table></div>'
+        + '<div style="font-size:11.5px;color:#8a8778;margin-top:6px;">&#9670; marks a stated difference. Every cell is taken from that product&rsquo;s own NHS Supply Chain '
+        + 'catalogue description &mdash; &ldquo;not stated&rdquo; means the entry is silent, <strong>not</strong> that the product lacks it. '
+        + 'Confirm against the manufacturer&rsquo;s IFU before you quote anything clinically.</div>';
+      return h;
+    }
+
+    /* PROBING QUESTIONS — derived from the differences actually found, not a
+       generic list. This is the coaching half of the tool: the procurement lead
+       Lou spoke to on 06/08/2026 described a rep who knew his product start to
+       finish and asked her not one question, and left with no next step. Each
+       question carries WHY it works, because a question a rep does not
+       understand is a question they will not ask well. */
+    function probingQuestions(mine, theirs, myA, theirA, theirAlerts, theirSuspended){
+      var qs = [];
+      qs.push({ q: 'What are you using for this today, and what made you standardise on it?',
+                why: 'You cannot reframe a decision until you know what drove it. It also tells you whether you are talking to the person who made it.' });
+
+      if (myA && theirA && myA.material && theirA.material && myA.material !== theirA.material){
+        if (/porcine|animal/.test(theirA.material) && /plant|oxidised|chitosan/.test(myA.material)){
+          qs.push({ q: 'How do you currently handle patients who decline an animal-derived product?',
+                    why: 'Opens the difference without naming it as a fault. If they have no process, you have found a real gap rather than won an argument.' });
+        } else {
+          qs.push({ q: 'Does the material make a practical difference to your team in this procedure?',
+                    why: 'Lets them tell you whether the spec difference matters here. Sometimes it does not — better you learn that than pitch into it.' });
+        }
+      }
+      if (myA && theirA && myA.reg && theirA.reg && myA.reg !== theirA.reg){
+        qs.push({ q: 'For this indication, does your policy require a licensed medicine or is a biocide accepted?',
+                  why: 'A policy question, not a product claim. If their policy already answers it, the decision makes itself and you never had to criticise anything.' });
+      }
+      if (myA && theirA && myA.latex && theirA.latex && myA.latex !== theirA.latex){
+        qs.push({ q: 'How does your latex policy apply in this category — for staff as well as patients?',
+                  why: 'Latex policy is usually trust-wide and written down. If it applies here, that is their rule doing the work, not your pitch.' });
+      }
+      if (theirAlerts && theirAlerts.length){
+        qs.push({ q: 'How are you covering the current notice on that line — and what is your fallback if it runs longer?',
+                  why: 'Quote the official alert and stop. A live notice is a supply problem you can help with; treating it as ammunition is how you lose the account.' });
+      }
+      if (theirSuspended){
+        qs.push({ q: 'Has availability on that code been steady for you recently?',
+                  why: 'Lets them raise the supply issue themselves. Far stronger than you announcing it.' });
+      }
+      qs.push({ q: 'If we did nothing differently, what would this cost you over the next year — in money, time or incidents?',
+                why: 'Builds the value case in their numbers, not yours. Everything you put in the Value Case Calculator should come from this answer.' });
+      qs.push({ q: 'Who else would need to be comfortable before this could change?',
+                why: 'Surfaces the stakeholders you have not met. Ask it early — finding out at the end that a committee sign-off exists is how deals stall.' });
+      qs.push({ q: 'What would have to be true for you to trial an alternative?',
+                why: 'Turns a no into a specification. Whatever they say is your actual close.' });
+
+      return '<ol style="margin:6px 0 0;padding-left:20px;">' + qs.map(function(x){
+        return '<li style="margin:0 0 9px;"><strong>' + esc(x.q) + '</strong>'
+          + '<div style="font-size:12.5px;color:#6b7684;margin-top:2px;line-height:1.55;">' + esc(x.why) + '</div></li>';
+      }).join('') + '</ol>';
+    }
+
     function objection(mine, theirs){
       var edge = kp(mine) || (mine.voice && mine.voice.angle) || 'your product’s strength';
       var c = theirs ? theirs.name + ' (' + theirs.supplier + ')' : 'their current product';
@@ -474,10 +699,15 @@
         h += '<div style="font-size:12.5px;color:#8a6d00;background:#fbf3df;border:1px solid #e8d5a8;border-radius:8px;padding:8px 12px;margin:4px 0 8px;">We picked <strong>' + esc(theirs.name) + '</strong> as your closest tracked match. Know exactly who you’re up against? Type their product into &ldquo;Compare against&rdquo; above and press Compare again.</div>';
       }
 
-      // Head-to-head table (primary output — exactly the two products in play)
-      h += '<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13.5px;min-width:680px;background:#fff;border:1px solid ' + LINE + ';border-radius:10px;">'
-        + '<thead><tr style="background:' + OX + ';color:#fff;text-align:left;"><th style="padding:8px 9px;">Product</th><th style="padding:8px 9px;">Supplier</th><th style="padding:8px 9px;">On framework</th><th style="padding:8px 9px;">NHSSC code (live)</th><th style="padding:8px 9px;">Key point</th></tr></thead><tbody>'
-        + row(mine, true) + row(theirs, false) + '</tbody></table></div>';
+      /* THE DIFFERENTIAL — the primary output. Side by side, pictured, with each
+         product's catalogue facts aligned so the difference can be read across a
+         row. This replaced a five-column head-to-head table on 06/08/2026: that
+         table put each product on its own ROW, which is the wrong axis for "what
+         is actually different here", and it showed a 30px thumbnail.
+         attrsOf is a hoisted function declaration, so calling it here is safe. */
+      var myA0 = attrsOf(mine);
+      var theirA0 = attrsOf(theirs);
+      h += sideBySide(mine, theirs, myA0, theirA0);
 
       var dMine = detailFor(mine);
       function attrsOf(p){
@@ -507,8 +737,6 @@
         if (/\bdehp\b/.test(txt)) a.dehp = true;
         return a;
       }
-      var myA0 = attrsOf(mine);
-      var theirA0 = attrsOf(theirs);
       function sameSteps(p){
         var pa = attrsOf(p);
         if (!myA0 || !pa || !myA0.form || !pa.form || myA0.form !== pa.form) return false;
@@ -570,6 +798,7 @@
       }
       h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + OX + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">The differences — and how to differentiate</div><div style="font-size:13.5px;line-height:1.65;color:#39424d;margin-top:6px;">' + diffHtml + '</div></div>';
 
+
       // THE CASE FOR SWITCHING. A trust with a working incumbent needs a REASON to
       // change — find one in the data, take the rep's edge if given, and only then
       // use like-for-like as the closer (low-risk switch). Never lead with "it's
@@ -624,6 +853,19 @@
       reasons.push('<strong>Sustainability (not checked here):</strong> this comparison has not assessed either product’s sustainability — the catalogue doesn’t carry that data. Carbon and social value are scored at tender (Evergreen from Apr 2026), so if you think your product, packaging or logistics might carry a sustainability benefit for the trust, work it up in the Carbon Saving Calculator on this page.');
       reasons.push('<strong>Price check:</strong> framework prices are visible to catalogue account holders — compare unit and whole-life cost there before the meeting; if you win on price, that is the simplest case of all.');
 
+      /* WHAT TO ASK — built from the differences actually found above, so the
+         questions change with the pairing rather than being a stock list. Built
+         HERE, after theirAlerts and dTheirs exist: both are `var`s declared
+         further up this function, so calling it any earlier read them as
+         undefined and silently dropped the alert-derived questions. */
+      var askHtml = '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;">'
+        + '<div style="font-size:15px;font-weight:800;">What to ask them</div>'
+        + '<div style="font-size:12.5px;color:#6b7684;margin-top:3px;line-height:1.55;">Knowing the difference is not the pitch &mdash; asking is. Each one says why it works, so you can adapt it in the room.</div>'
+        + '<div style="font-size:13.5px;line-height:1.6;color:#39424d;margin-top:8px;">'
+        + probingQuestions(mine, theirs, myA0, theirA0, theirAlerts,
+            !!(dTheirs && dTheirs.items && dTheirs.items.some(function(it){ return it.status; })))
+        + '</div></div>';
+
       var caseHtml = '<ul style="margin:2px 0 0;padding-left:18px;">' + reasons.map(function(x){ return '<li style="margin:3px 0;">' + x + '</li>'; }).join('') + '</ul>';
 
       // like-for-like as the CLOSER, never the opener
@@ -640,6 +882,7 @@
       if (fwFor(mine)) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you’re on ' + esc(fwFor(mine)) + ' — ordering is the easy part.</div>';
       else if (dMine) caseHtml += '<div style="margin-top:8px;font-size:13px;color:#5a6470;"><strong>Buying route:</strong> you’re live on the NHS Supply Chain catalogue (codes below) — ordering is the easy part.</div>';
       h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GRN + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">How to use it — the case for switching</div><div style="font-size:14px;line-height:1.65;color:#39424d;margin-top:6px;">' + caseHtml + '</div></div>';
+      h += askHtml;
 
       if (saveAnnual != null){
         var srows = ''

@@ -402,6 +402,132 @@ def _(tmp):
     return "states no sourceRule"
 
 
+# --- ONE LIST: supplier and speciality vocabulary drift, added 06/08/2026 ---
+# The audit that forced these: BD is spelled nine ways across five files, and
+# supplier-search.js falls back to a substring match returning the FIRST hit,
+# so "Becton Dickinson UK" resolves to a corrupt record whose whole name is a
+# list of seven companies. Each case below is a way that gets worse.
+
+def sup_index():
+    return json.load(open("data/supplier-index.json"))
+
+
+def write_sup_index(d):
+    json.dump(d, open("data/supplier-index.json", "w"), ensure_ascii=False)
+
+
+def first_supplier_row():
+    """(doc, speciality block, a copy of its first supplier row)."""
+    d = suppliers()
+    for blk in d["specialities"].values():
+        rows = blk.get("suppliers") or []
+        if rows:
+            return d, blk, json.loads(json.dumps(rows[0]))
+    return None, None, None
+
+
+@case("a NEW Compare-tab company name that reaches no supplier record")
+def _(tmp):
+    # The precise catch. Counts cannot see this — swap one offender for
+    # another and the total is unchanged while a fresh mistake ships.
+    if subprocess.run(["git", "show", "HEAD:data/compare-suppliers.json"],
+                      capture_output=True, text=True).returncode != 0:
+        return None                       # no committed baseline to diff against
+    d, blk, row = first_supplier_row()
+    if row is None:
+        return None
+    row["co"] = "Definitely Not A Real Medtech Company"
+    blk["suppliers"].append(row)
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "new supplier name"
+
+
+@case("a supplier record deleted from the master, orphaning a Compare-tab name")
+def _(tmp):
+    # The ratchet on its own: the name is not new, so only the count moves.
+    # This is the realistic version — a tidy-up of supplier-index.json that
+    # nobody realises the Compare tab was pointing at.
+    d = sup_index()
+    seed_names = {s["name"] for s in json.load(open("data/supplier-seed.json"))["suppliers"]}
+    live = set()
+    for blk in (suppliers().get("specialities") or {}).values():
+        for r in blk.get("suppliers") or []:
+            live.add(r.get("co"))
+    # A record that resolves a Compare-tab name today and is NOT in the seed,
+    # so removing it from the index really does orphan the name.
+    victim = next((s for s in d["suppliers"]
+                   if s["name"] in live and s["name"] not in seed_names), None)
+    if victim is None:
+        return None
+    d["suppliers"] = [s for s in d["suppliers"] if s["name"] != victim["name"]]
+    write_sup_index(d)
+    return "rose from"
+
+
+@case("the same company entered twice under two spellings on the Compare tab")
+def _(tmp):
+    d, blk, row = first_supplier_row()
+    if row is None:
+        return None
+    row["co"] = row["co"] + " Ltd"        # normalises to the same company
+    blk["suppliers"].append(row)
+    json.dump(d, open("data/compare-suppliers.json", "w"), ensure_ascii=False, indent=1)
+    return "spelled more than one way"
+
+
+@case("a speciality added to the dropdown but not to the canonical map")
+def _(tmp):
+    # Adding a speciality has to be ONE edit. Today it is two, and doing only
+    # the first gives a speciality the Mapper offers and Meeting Prep cannot
+    # reconcile any supplier against.
+    d = json.load(open("data/products.json"))
+    d["SPECS"].append({"id": "notaspeciality", "label": "Not A Speciality"})
+    json.dump(d, open("data/products.json", "w"), ensure_ascii=False)
+    return "speciality ids in products.json SPECS but not"
+
+
+@case("a supplier tagged with a speciality string nothing can resolve")
+def _(tmp):
+    d = sup_index()
+    d["suppliers"][0].setdefault("specialities", []).append("Some Free Text Nobody Mapped")
+    write_sup_index(d)
+    return "resolving to no canonical speciality"
+
+
+@case("a supplier record whose name is a list of companies")
+def _(tmp):
+    # Exactly what build_supplier_index.py already did once: it lifted a
+    # notice's whole supplier field in as one record, and Supplier Search now
+    # returns it to anyone typing any of the seven names inside it.
+    d = sup_index()
+    d["suppliers"].append({
+        "name": "Acme Medical Ltd, Beta Health, Gamma Devices and Delta Surgical Ltd",
+        "aliases": ["Acme Medical Ltd, Beta Health, Gamma Devices and Delta Surgical Ltd"],
+        "specialities": ["Wound care"]})
+    write_sup_index(d)
+    return "name is a list of companies"
+
+
+@case("comptab.js's baked fallback naming a company the master does not hold")
+def _(tmp):
+    # No baseline on this one: the fallback is 16 names and it is clean. It is
+    # what members see when the data fetch fails, so it is the one supplier
+    # list with no way to correct it after publication.
+    js = "app/comptab.js"
+    lines = open(js).read().split("\n")
+    m = re.match(r"^var D=(\{.*\});$", lines[1])
+    if not m:
+        return None
+    D = json.loads(m.group(1))
+    for blk in D.values():
+        if blk.get("suppliers"):
+            blk["suppliers"][0]["co"] = "A Company That Is In No Master List"
+            break
+    lines[1] = "var D=" + json.dumps(D, ensure_ascii=False) + ";"
+    open(js, "w").write("\n".join(lines))
+    return "baked fallback names companies that reach no supplier record"
+
+
 @case("a framework whose countdown date drifts from its printed date range")
 def _(tmp):
     # Caught a real typo on 05/08/2026: endsOn said 15/06/2027 while the range
