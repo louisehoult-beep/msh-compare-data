@@ -16,7 +16,7 @@
   "seedIsSacred": "supplier-seed.json is declared human-owned and never-overwritten by build_supplier_index.py. Nothing here writes to it.",
   "built": "2026-07-20, extended 07/08/2026",
   "specialityVocabulary": "Canonical ids from speciality-map.json (31 specialities).",
-  "coverage": "8 suppliers expanded, 2,207 products in total, as at 09/08/2026. Read from the company's own product taxonomy (richest — real category tree): GBUK Group, Hospital Services Limited, Vygon (UK). Read from the company's XML sitemap (names derived from URL slugs, no category, and see each record's captureCaveat): Canon Medical Systems, medi UK, Mindray UK, Steris, Terumo UK. Further captures have been REFUSED after being read — see refusedOnReading. This is a running sweep, not a finished one.",
+  "coverage": "9 suppliers expanded, 2,388 products in total, as at 11/08/2026. Read from the company's own product taxonomy (richest — real category tree): GBUK Group, Hospital Services Limited, Vygon (UK). Read from the company's XML sitemap (names derived from URL slugs, no category, and see each record's captureCaveat): Canon Medical Systems, ICU Medical (incl. Smiths Medical), Mindray UK, Steris, Terumo UK, medi UK. Further captures have been REFUSED after being read — see refusedOnReading. This is a running sweep, not a finished one.",
   "refusedOnReading": {
    "medi UK": "84% of its 173 URLs carried no division segment — caught by the new majority-Uncategorised guard, which did not exist when this was captured.",
    "Canon Medical Systems": "Read by hand and refused: the 'divisions' are product-line codes (Aice, Alphenix, Ai, 'Mobiles Relocatables 2') rather than a product taxonomy, and entries like 'Experience', 'Deep Learning Reconstruction' and 'Interventional Radiology Oncology' are page titles, not products. No numeric test separates this from Steris or Mindray, which are fine, so this is a human judgement and is recorded as one.",
@@ -11893,6 +11893,958 @@
     {
      "n": "Roadsaver Carotid Artery Stent",
      "division": "Product Type",
+     "category": ""
+    }
+   ]
+  },
+  "ICU Medical (incl. Smiths Medical)": {
+   "domain": "www.icumed.com",
+   "verified": "2026-08-11",
+   "source": "www.icumed.com XML sitemap, read this run",
+   "structureFrom": "sitemap",
+   "landingPagesDropped": 76,
+   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 76 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation.",
+   "structure": "Grouped by the company's own URL structure.",
+   "droppedCategoryPages": 1,
+   "filingRule": "Read from the sitemap, so product NAMES come from URL slugs and the grouping is the company's own URL structure, not a product record. Treat names as the company's own wording tidied for display, and expect no category detail below the top level.",
+   "divisions": [
+    {
+     "name": "Infusion Therapy",
+     "products": 84
+    },
+    {
+     "name": "Airway Management",
+     "products": 38
+    },
+    {
+     "name": "Temperature Management",
+     "products": 17
+    },
+    {
+     "name": "Hemodynamic Monitoring",
+     "products": 13
+    },
+    {
+     "name": "Pain Management",
+     "products": 13
+    },
+    {
+     "name": "Pharmacy Preparation",
+     "products": 8
+    },
+    {
+     "name": "Veterinary",
+     "products": 6
+    },
+    {
+     "name": "Renal Care",
+     "products": 2
+    }
+   ],
+   "products": [
+    {
+     "n": "Clave Neutron",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Nanoclave Manifolds And Stopcocks",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Clave Clinically Preferred Needlefree Iv Connector Technology",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Large Bore Extension Set",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Interventional Imaging Accessories",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Standard Angiographic Kits",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Stopcocks",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Flush N Fill Waste Bag Collection",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Connectors",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Injection Sites",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Swabtip Male Luer Disinfecting Cap",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Swabcap Disinfecting Cap For Needlefree Connectors",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Filter Sets",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Large Bore Hi Flo Stopcocks",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Closed System Transfer Devices",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Ultra Small Bore Extension Sets",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Specialty Iv Consumables For Anesthesia",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Iv Consumables For The Nicu And Picu",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Plum 360 Large Volume Infusion Pump",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Designed To Support",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Calmer Environment",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Real World Precision",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "High Acuity",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "New Wave Of Iv Safety",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Plum Dedicated Sets",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Cadd Medication Cassette Reservoirs With Flow Stop Free Flow Protection",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Cadd Administration Sets With Flow Stop Free Flow Protection",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Cadd Extension Sets",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Cadd Administration Sets With Air Eliminating Filter",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Cadd High Volume Administration Sets With Flow Stop Free Flow Protection",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Cadd Solis Vip Ambulatory Home Infusion System",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Cadd Solis Infusion System",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Medfusion 4000 Wireless Syringe Infusion Pump",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Pharmguard Infusion Management System",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Lifeshield Infusion Safety Software",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Icu Medical Mednet Iv Medication Safety Software",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Non Pvc Non Dehp Iv Solution Containers",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Parenteral Nutrition",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Iv Solutions",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Irrigation",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Supercath 5 Safety Iv Catheter",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Protectiv Safety Iv Catheters",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Deltaven Fast Flash Closed System Iv Catheter",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Viavalve Safety Iv Catheter",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Powerwand Midline Catheters",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Powerwand Extended Dwell Catheters",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Vi Bypass Syringe",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Multi Sampling Blood Collection Needles",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Saf T Holder Devices",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Safe T Lance Plus Safety Lancets",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Venipuncture Needle Pro Safety Device",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Neoheel Safety Lancets",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Saf T Wing Blood Collection And Infusion Set",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Pro Vent Plus 1 Ml Syringe Dry Lithium Heparin",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Pro Vent Plus 3 Ml Dry Lithium Low Heparin",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Pulsator Plus Arterial Blood Sampling Kits Dry Lithium Heparin",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Pro Vent Plus 1 Ml Syringe Dry Lithium Low Heparin",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Linedraw Arterial Blood Sampling Kits",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Pro Vent Plus 3 Ml Syringe Dry Lithium Heparin",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Cleo 90 Infusion Set",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Point Lok Needle Protection Device",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Insulin Syringe With Needle Pro Edge Safety Hypodermic Needle",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Hypodermic Needle Pro Edge Safety Device",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Blunt Fill Needle",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Hypodermic Needle Pro Edge Safety Device Fixed Needle Tb Syringe",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Tb Syringes With Needle Pro Edge Hypodermic Needles",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Port Accessories",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Gripper Micro Safety Port Access Needle",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Gripper Port Access Needle",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Gripper Plus Safety Port Access Needle",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Gripper Plus Power Pac Safety Port Access Needle",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Port A Cath Plastic Hub",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Pas Port Elite Peripheral Vascular Access Systems",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Port A Cath Ii Port A Cath Ii Power Implantable Venous Access Systems Dual Ports",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Port A Cath Ii Power Port A Cath Ii Pt Implantable Venous Access Systems",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Port A Cath Port A Cath Power Titanium Implantable Venous Access Systems",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Pas Port T2 Peripheral Vascular Access Systems",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Proport Implantable Venous Access Systems",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Subcutaneous Tunneling Device",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Non Valved Peel Away Introducer Set",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Valved Peel Away Introducer Set",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Long Peripheral Iv Catheters",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Pediatric And Nicu Pivcs",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Infection Resistant Midlines",
+     "division": "Infusion Therapy",
+     "category": ""
+    },
+    {
+     "n": "Closed Enteral Tube Valves",
+     "division": "Pharmacy Preparation",
+     "category": ""
+    },
+    {
+     "n": "Chemoclave Needlefree Closed System Transfer Device Cstd",
+     "division": "Pharmacy Preparation",
+     "category": ""
+    },
+    {
+     "n": "Chemolock Needlefree Closed System Transfer Device Cstd",
+     "division": "Pharmacy Preparation",
+     "category": ""
+    },
+    {
+     "n": "Rio Drug Reconstitution Transfer Device",
+     "division": "Pharmacy Preparation",
+     "category": ""
+    },
+    {
+     "n": "Pharmassist Pro",
+     "division": "Pharmacy Preparation",
+     "category": ""
+    },
+    {
+     "n": "Diana Acs Automated Drug Compounding System",
+     "division": "Pharmacy Preparation",
+     "category": ""
+    },
+    {
+     "n": "Diana Compounding Workflow System",
+     "division": "Pharmacy Preparation",
+     "category": ""
+    },
+    {
+     "n": "Infusion Safety Software",
+     "division": "Pharmacy Preparation",
+     "category": ""
+    },
+    {
+     "n": "Capnocheck Sleep Capnocheck Plus Capnograph Accessories",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Ezpap Airway Therapy System",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Acapella Respiratory Therapy Systems",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Thermovent T Heat And Moisture Exchanger Hme With 15 Mm Female Connector",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Thermovent 600 And 1200 Heat And Moisture Exchangers",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Thermovent T2 Heat And Moisture Exchanger Hme",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Open Suction Catheters",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Suctionpro 72",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Electronic Thermometry",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Fio2 Accessories",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Power Supplies",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Endotracheal Tubes",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Portex Intubation Accessories",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Sacett Suction Above Cuff Endotracheal Tube",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Tracheal Tube Clear Pvc Murphy Eye Oralnasal Profile Soft Seal Low Pressurehigh Volume Cuff",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Disposable Anesthesia Breathing Circuits",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Pediatric Disposable Anesthesia Breathing Circuits",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Portex Bluperc And Blugriggs Percutaneous Dilation Kits",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Portex Bluselect Tracheostomy Tubes",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Mid Range Aire Cuf And Fome Cuf Tracheostomy Tubes With Talk Attachment",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Fome Cuf Neonatal And Pediatric Silicone Tracheostomy Tubes",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Portex Bivona Flextend Tts Neonatal And Pediatric Tracheostomy Tubes",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Mid Range Aire Cuf Adult Tracheostomy Tubes",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Tts Extra Length Fixed Neck Flange Hyperflex Tracheostomy Tubes",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Customization Services",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Cuffed Extra Length Fixed Neck Flange Hyperflex Tracheostomy Tubes",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Adult Mid Range Aire Cuf Adjustable Neck Flange Hyperflex Tracheostomy Tubes",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Uncuffed Adult Tracheostomy Tubes",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Tts Neonatal Tracheostomy Tubes Cuffed Straight And V Neck Flanges",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Aire Cuf Neonatal And Pediatric Tracheostomy Tubes",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Adult Fome Cuf Tracheostomy Tube Kits",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Adult Tts Tracheostomy Tubes",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Bivona Uncuffed Neonatal And Pediatric Tracheostomy Tubes",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Mybivona Customized Tracheostomy Tube Configurator",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Parapac Plus",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "1St Response Pediatric Manual Resuscitators",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "1St Response Infant Manual Resuscitators",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "1St Response Adult Manual Resuscitators",
+     "division": "Airway Management",
+     "category": ""
+    },
+    {
+     "n": "Snuggle Warm Blankets Convective Warming Systems",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Level 1 Convective Warmer Device",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Hotline Disposable Administration Sets",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Hotline 3 Blood And Fluid Warmer",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Disposable Normothermic Iv Accessories",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Level 1 H 1200 Fast Flow Fluid Warmer With Integrated Air Detectorclamp",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Hotline Fluid Warming Accessories",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Disposable Normothermic Iv Administration Sets",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Hotline Blood And Fluid Warmer",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Level 1 Myocardial Temperature Sensor",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Tympanic Temperature Sensor",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Esophageal Stethoscope Temperature Sensor",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Skin Temperature Sensor Adult",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Esophageal Rectaltemp Probes",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "400 Series Cables",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Normoflo Irrigation Fluid Warmer",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Normoflo Irrigation Fluid Warmer Sets And Accessories",
+     "division": "Temperature Management",
+     "category": ""
+    },
+    {
+     "n": "Cardiac Output Sensors",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Transpac Iv Disposable Pressure Transducer",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Logical Pressure Monitoring System Accessories",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Transpac It Integrated Pressure Transducer",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Medex C Fusor Pressure Bag",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Medex Clear Cuff Pressure Bag",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Safeset Blood Sampling System",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Cardioflo Hemodynamic Monitoring Sensor",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Tdq Continuous Cardiac Output Cco Catheter",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Triox Pac",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Standard Pa Monitoring Pulmonary Artery Catheter",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Standard Thermodilution Pulmonary Artery Catheter",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Cogent 2 In 1 Hemodynamic Monitoring System",
+     "division": "Hemodynamic Monitoring",
+     "category": ""
+    },
+    {
+     "n": "Clearguard Hd Antimicrobial Barrier Caps For Hemodialysis Catheters",
+     "division": "Renal Care",
+     "category": ""
+    },
+    {
+     "n": "Tego Needlefree Hemodialysis Connector",
+     "division": "Renal Care",
+     "category": ""
+    },
+    {
+     "n": "Regional Anesthesia",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Diagnostic Procedure Trays",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Nrfit Trays",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Nrfit Packs",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Portex Nrfit Components",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Cadd Pain Management Pumps",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Portex Spinal Trays",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Portex Spinal Needle Sets",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Portex Epidural Catheters",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Duraflex And Duraflex Plus Epidural Catheters",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Epidural Flat Filter With Rotating Collar Luer Lock",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Echoglo Peripheral Nerve Block Kits And Trays Continuous",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Echoglo Peripheral Nerve Block Needle",
+     "division": "Pain Management",
+     "category": ""
+    },
+    {
+     "n": "Infusion Therapy Vascular Access",
+     "division": "Veterinary",
+     "category": ""
+    },
+    {
+     "n": "Temperature Management And Fluid Warming",
+     "division": "Veterinary",
+     "category": ""
+    },
+    {
+     "n": "Wound Management Surgical Drains",
+     "division": "Veterinary",
+     "category": ""
+    },
+    {
+     "n": "Gastroenerology Solutions",
+     "division": "Veterinary",
+     "category": ""
+    },
+    {
+     "n": "Surgivet Advisor Tech Vital Signs Monitor",
+     "division": "Veterinary",
+     "category": ""
+    },
+    {
+     "n": "Surgivet Vitalink Monitors",
+     "division": "Veterinary",
      "category": ""
     }
    ]
