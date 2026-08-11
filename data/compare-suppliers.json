@@ -12,7 +12,7 @@
  },
  "note": "Researched supplier sets for the Compare tab, one per speciality. HUMAN-CURATED — no automation writes this file. Until 05/08/2026 these lived hard-coded inside app/comptab.js, which meant adding a speciality was a code change to a file that also holds the tab's rendering; there were two, and eleven specialities carried notices. Moving them here makes growth a data edit that verify.py can gate. app/comptab.js still holds vascular and continence as a baked fallback so the tab is never empty if this file cannot be fetched; anything here overrides it.",
  "sourceRule": "Every framework name, its dates and its supplier list come from that framework's own contract launch brief on supplychain.nhs.uk, fetched directly. Brand names come from the NHS Supply Chain online catalogue entry for the supplier's own NPC codes — the procurement record, not the supplier's marketing. Nothing here is inferred from a trade summary or a comparison table.",
- "verifiedOn": "2026-08-05",
+ "verifiedOn": "11/08/2026",
  "specialities": {
   "bloodcoll": {
    "label": "Blood collection / phlebotomy",
@@ -403,7 +403,8 @@
      "name": "NHS Supply Chain — Clinical and Sharps Waste Management (7 lots, 14 suppliers)",
      "dates": "01/11/2023 – 31/10/2026",
      "endsOn": "2026-10-31",
-     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/clinical-and-sharps-waste-management/"
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/clinical-and-sharps-waste-management/",
+     "note": "Ends 31/10/2026. Checked against the contract launch brief on 11/08/2026: the brief states a 36-month term with an option to extend for a further 12 months, and NHS Supply Chain has published no successor framework. Treat the end date as the date to ask about, not as a closure — an unexercised extension option is not the same as a re-tender."
     },
     {
      "name": "NHS Supply Chain — Polymer Aprons (8 suppliers), reference 2023/S 000-014652, Medical and Surgical Consumables",
@@ -983,7 +984,8 @@
      "name": "NHS Supply Chain — Infusion Pumps and Administration Sets and Associated Products (4 lots, 27 suppliers). Lot 3 is Gravity Administration Sets, where blood giving sets sit",
      "dates": "03/10/2022 – 30/09/2026",
      "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
-     "endsOn": "2026-09-30"
+     "endsOn": "2026-09-30",
+     "note": "Ends 30/09/2026. Checked against the contract launch brief on 11/08/2026: 48 months including a 24-month extension already taken, and NHS Supply Chain has published no successor framework. Blood giving sets sit in Lot 3, so anyone selling into this lot should be asking now what happens on 1 October."
     }
    ],
    "routeNote": "⚠ This framework expires 30/09/2026, so any tender conversation now is really a conversation about its successor — check the procurement calendar before quoting it. Derived, and stated so you can judge it: all seven manufacturers named in MHRA alert DSI/2026/003 (B Braun, Baxter, Becton Dickinson, CODAN, Fannin, GBUK and RPG Medical) appear on this framework's own award list, which is why it is filed as the route to market for transfusion giving sets. The brief itself does not name blood transfusion sets in a lot.",
