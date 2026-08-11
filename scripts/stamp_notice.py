@@ -60,6 +60,7 @@ REFS = {
     "contacts-optout.json":    "ETH-D12682420",
     "frameworks.json":         "ETH-DB4D6B772",
     "hub-search-index.json":   "ETH-D50A4C4E3",
+    "interview-prep.json":     "ETH-D77050906",
     "nhssc-cache.json":        "ETH-D84BDB325",
     "people-moves.json":       "ETH-D4435AEAF",
     "prep-config.json":        "ETH-D459CF4F3",
