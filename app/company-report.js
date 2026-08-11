@@ -1371,7 +1371,15 @@
       '<div style="font-family:Inter,-apple-system,Segoe UI,sans-serif;margin:0;">' +
         '<div style="padding:2px 0 6px;">' +
           '<div style="font-size:11.5px;letter-spacing:2px;font-weight:700;color:' + G + ';">COMPANY REPORT</div>' +
-          '<p style="margin:5px 0 12px;font-size:13.5px;color:' + DIM + ';line-height:1.6;">Type a company — get who they are, what they sell, the frameworks they hold, live alerts, corroborated press, and who else sits on those frameworks. <span id="mcrCount"></span></p>' +
+          '<p style="margin:5px 0 12px;font-size:13.5px;color:' + DIM + ';line-height:1.6;">Pick a speciality, then a company — get who they are, what they sell, the frameworks they hold, live alerts, corroborated press, and who else sits on those frameworks. <span id="mcrCount"></span></p>' +
+          /* SPECIALITY FIRST (Lou, 11/08/2026). The box used to offer every
+             indexed company at once. Choosing the clinical area first cuts the
+             suggestions to the firms recorded in it — through the canonical
+             speciality map, so this filters on the same reconciled ids the
+             report's own panels use rather than on raw strings that drifted. */
+          '<label style="display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:' + DIM + ';margin:0 0 4px;">1 · Speciality</label>' +
+          '<select id="mcrSpec" style="width:100%;max-width:520px;padding:10px 15px;border-radius:99px;border:1px solid ' + LINE + ';font:inherit;font-size:14px;color:' + INK + ';background:#ffffff;outline:none;margin:0 0 11px;"></select>' +
+          '<label style="display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:' + DIM + ';margin:0 0 4px;">2 · Company <span id="mcrScope" style="font-weight:400;text-transform:none;letter-spacing:0;color:' + DIM + ';"></span></label>' +
           '<input id="mcrInput" list="mcrList" autocomplete="off" placeholder="e.g. GBUK Group, BD, Vygon, Coloplast…" ' +
             'style="width:100%;max-width:520px;padding:11px 16px;border-radius:99px;border:1px solid ' + LINE + ';font:inherit;font-size:15px;color:' + INK + ';background:#ffffff;-webkit-text-fill-color:' + INK + ';caret-color:' + INK + ';outline:none;">' +
           '<datalist id="mcrList"></datalist>' +
@@ -1429,33 +1437,93 @@
         list = document.getElementById('mcrList'),
         result = document.getElementById('mcrResult'),
         chips = document.getElementById('mcrChips'),
-        count = document.getElementById('mcrCount');
+        count = document.getElementById('mcrCount'),
+        specSel = document.getElementById('mcrSpec'),
+        scopeNote = document.getElementById('mcrScope');
 
     count.textContent = all.length + ' companies indexed · data as of ' + (ctx.asOf || 'date not recorded');
-    list.innerHTML = all.map(function (s) { return '<option value="' + esc(s.name) + '">'; }).join('');
 
-    var quick = ['GBUK Group', 'BD — Becton, Dickinson', 'Vygon (UK)', 'Coloplast', 'Convatec'];
-    chips.innerHTML = quick.filter(function (q) { return !!byName[q]; }).map(function (q) {
-      return '<button data-q="' + esc(q) + '" style="cursor:pointer;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:99px;padding:5px 12px;font-size:12px;color:' + INK + ';">' + esc(q.split(' — ')[0]) + '</button>';
-    }).join('');
+    /* Speciality -> companies, built from the companies themselves rather than
+       from the map's full canon, so every option in the picker has at least one
+       company behind it. An option that opens onto an empty list is a bug a
+       member reads as "nobody sells this". */
+    var SPEC_COS = {};
+    all.forEach(function (s) {
+      ctx.spec.ids(s).forEach(function (id) {
+        if (!SPEC_COS[id]) SPEC_COS[id] = [];
+        SPEC_COS[id].push(s);
+      });
+    });
+    var SPEC_IDS = Object.keys(SPEC_COS).sort(function (a, b) {
+      return String(ctx.spec.label(a)).toLowerCase() < String(ctx.spec.label(b)).toLowerCase() ? -1 : 1;
+    });
+    var untagged = all.filter(function (s) { return !ctx.spec.ids(s).length; }).length;
+    specSel.innerHTML = '<option value="">— all specialities (' + all.length + ' companies) —</option>' +
+      SPEC_IDS.map(function (id) {
+        return '<option value="' + esc(id) + '">' + esc(ctx.spec.label(id)) + ' · ' + SPEC_COS[id].length + '</option>';
+      }).join('');
 
-    function find(q) {
-      var n = norm(q);
-      if (!n) return null;
-      var hit = all.filter(function (s) {
+    function pool() {
+      var v = specSel.value;
+      return v && SPEC_COS[v] ? SPEC_COS[v] : all;
+    }
+    function refreshScope() {
+      var p = pool(), v = specSel.value;
+      list.innerHTML = p.map(function (s) { return '<option value="' + esc(s.name) + '">'; }).join('');
+      var quick = v
+        ? p.slice(0, 5).map(function (s) { return s.name; })
+        : ['GBUK Group', 'BD — Becton, Dickinson', 'Vygon (UK)', 'Coloplast', 'Convatec'].filter(function (q) { return !!byName[q]; });
+      chips.innerHTML = quick.map(function (q) {
+        return '<button data-q="' + esc(q) + '" style="cursor:pointer;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:99px;padding:5px 12px;font-size:12px;color:' + INK + ';">' + esc(q.split(' — ')[0]) + '</button>';
+      }).join('');
+      /* Say what the filter is hiding. Companies with no speciality recorded
+         drop out of every scoped list, and that is a gap in our tagging, not
+         evidence they sell nothing — so it is stated rather than swallowed. */
+      scopeNote.textContent = v
+        ? '— ' + p.length + ' in ' + ctx.spec.label(v) + (untagged ? ' · ' + untagged + ' companies have no speciality recorded and are only reachable with the filter cleared' : '')
+        : '';
+    }
+    refreshScope();
+    specSel.addEventListener('change', function () {
+      refreshScope();
+      if (input.value.trim()) show(input.value);
+    });
+
+    function findIn(pool2, n) {
+      var hit = pool2.filter(function (s) {
         return norm(s.name) === n || (s.aliases || []).some(function (a) { return norm(a) === n; });
       })[0];
       if (hit) return hit;
-      return all.filter(function (s) {
+      return pool2.filter(function (s) {
         if (norm(s.name).indexOf(n) > -1) return true;
         if ((s.aliases || []).some(function (a) { return norm(a).indexOf(n) > -1; })) return true;
         if ((s.products || []).some(function (p) { return norm(typeof p === 'string' ? p : (p && p.n)).indexOf(n) > -1; })) return true;
         return false;
       })[0] || null;
     }
+    /* The speciality scopes the SUGGESTIONS, never the answer. A member who
+       types a real company still gets its report, with a line saying it sits
+       outside the speciality on screen — refusing a company we hold a report
+       for, because our own tagging did not reach it, would be the worse
+       failure of the two. */
+    var outOfScope = null;
+    function find(q) {
+      var n = norm(q);
+      outOfScope = null;
+      if (!n) return null;
+      var inScope = findIn(pool(), n);
+      if (inScope) return inScope;
+      var anywhere = specSel.value ? findIn(all, n) : null;
+      if (anywhere) outOfScope = anywhere;
+      return anywhere;
+    }
     function show(q) {
       var s = find(q);
-      result.innerHTML = s ? report(s, ctx) :
+      var flag = (s && outOfScope) ? '<div style="margin:0 0 10px;padding:9px 13px;border-left:3px solid ' + G + ';background:' + SOFT +
+        ';border-radius:0 8px 8px 0;font-size:12.5px;color:' + INK + ';line-height:1.55;"><b>' + esc(s.name) +
+        '</b> is not recorded under ' + esc(ctx.spec.label(specSel.value)) +
+        ', so it is not in the list above. Its report is below in full.</div>' : '';
+      result.innerHTML = s ? (flag + report(s, ctx)) :
         '<div style="padding:14px 4px;font-size:13.5px;color:' + DIM + ';line-height:1.6;">No match for “' + esc(q) +
         '”. Coverage is the tracked-supplier set (' + all.length + ' indexed) — a company that is not here is <b>not yet indexed</b>, not “nothing found”.</div>';
       var pk = document.getElementById('mcrPack');
