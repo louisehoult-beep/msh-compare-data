@@ -1119,11 +1119,18 @@ def _norm_co(name):
     return re.sub(r"\s+", " ", s).strip()
 
 
-def _supplier_universe():
-    """Every supplier name and alias this repo holds, normalised. None if unreadable."""
+SUPPLIER_FILES = ("supplier-seed.json", "supplier-index.json")
+
+
+def _supplier_universe(files=SUPPLIER_FILES):
+    """Every supplier name and alias this repo holds, normalised. None if unreadable.
+
+    `files` narrows it to one source. supplier-index.json is GENERATED — see
+    check_vocab section 1b for why resolving against the seed alone matters.
+    """
     names = set()
     seen_file = False
-    for fn in ("supplier-seed.json", "supplier-index.json"):
+    for fn in files:
         doc = load(fn)
         if not isinstance(doc, dict):
             continue
@@ -1223,6 +1230,21 @@ VOCAB_BASELINE = {
     # same day. split_companies() stops one being CREATED; the carry-forward
     # guard in build_supplier_index.py stops this one being resurrected; this
     # makes a third one impossible to publish by any route.
+
+    # `compare_index_only` — Compare-tab names that resolve through the
+    # GENERATED supplier-index.json but NOT through supplier-seed.json. The
+    # index is rebuilt from the seed nightly, so every one of these is one
+    # rebuild away from resolving nowhere. 'Stryker UK' was the 18th, and it
+    # cost four consecutive nightly failures and four days of stale data on
+    # page 1109 before anyone read the log.
+    #
+    # Baseline 17, NOT 0, and deliberately so: failing on the standing 17 today
+    # would block every push and both scheduled refreshes, which is the one
+    # outcome worse than the drift. The ratchet blocks an 18th from today. Work
+    # the 17 down by adding each spelling to its record's `aliases` in the seed,
+    # lower this number as you go, and delete the entry when it reaches 0 so it
+    # graduates to a hard check and cannot drift back.
+    "compare_index_only": 17,
 }
 
 # A name is a list-of-companies, not a company: two or more commas AND a
@@ -1311,6 +1333,36 @@ def check_vocab(sup, products, specmap, index, comptab_js):
     _ratchet("vocab", "compare_unresolved", len(unresolved), unresolved,
              "Compare-tab companies reaching no supplier record",
              "Every name here must exist in supplier-seed.json, as a `name` or in `aliases`.")
+
+    # -- 1b. Names that resolve ONLY through the GENERATED index -------------
+    # supplier-index.json is rebuilt from supplier-seed.json on every daily
+    # refresh, so a name carried only by the index resolves today and stops
+    # resolving the moment the index is rebuilt.
+    #
+    # This is not hypothetical. 'Stryker UK' lived in the index and not in the
+    # seed. Every push went GREEN, because verify.yml gates the COMMITTED index
+    # and the committed index still held the name. refresh.yml rebuilds the
+    # index BEFORE it gates, so only the nightly job could see the break: it
+    # failed on 08, 09, 10 and 11/08/2026 and the Compare tab served 07/08 data
+    # to paying members for four days while looking current.
+    #
+    # Check 1 above cannot catch this — it resolves against seed AND index, so
+    # it is green until the rebuild. This one names it on the commit that
+    # introduces it, which is the only cheap moment to fix it.
+    seed_only_universe = _supplier_universe(("supplier-seed.json",))
+    if seed_only_universe is None:
+        WARN("vocab", "supplier-seed.json could not be read, so no name could be checked "
+                      "for index-only resolution — the failure mode that froze the "
+                      "Compare tab for four days in August 2026 is unguarded this run.")
+    else:
+        index_only = [c for c in companies
+                      if _norm_co(c) not in seed_only_universe
+                      and _norm_co(c) in universe]
+        _ratchet("vocab", "compare_index_only", len(index_only), index_only,
+                 "Compare-tab companies resolving only through the generated supplier index",
+                 "supplier-index.json is rebuilt from the seed every night, so these "
+                 "resolve now and will not after the next rebuild. Add each spelling to "
+                 "the matching record's `aliases` in supplier-seed.json.")
 
     # -- 2. The same company spelled two ways in the same file ---------------
     groups = {}

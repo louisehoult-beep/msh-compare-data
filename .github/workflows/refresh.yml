@@ -42,8 +42,14 @@ jobs:
       # that let 145 false NHS job changes reach members in July. Root CLAUDE.md
       # rule 13. If this step fails, the data is wrong: fix the data, never loosen
       # the check to make the push go through.
+      # The output is teed so the failure alert below can quote the actual FAIL
+      # line. PIPESTATUS, not the pipeline's exit code: `| tee` would otherwise
+      # report tee's success and let a failed gate through, which is the one
+      # thing this step exists to prevent.
       - name: Publish gate — nothing commits until this passes
-        run: python3 verify.py
+        run: |
+          set -o pipefail
+          python3 verify.py 2>&1 | tee /tmp/gate.log
       - name: Commit if changed
         run: |
           git config user.name "compare-refresh-bot"
@@ -80,9 +86,59 @@ jobs:
               -d "$N new item(s) auto-detected on the Compare tab. Claude will draft the rep lines by 07:10; check them on your dashboard or the Med Sales Tools page." \
               ntfy.sh/eth-hub-lou-4437
           fi
+      # ⚠️ REWRITTEN 11/08/2026. The old version of this step said only "the daily
+      # compare-tab refresh failed" and nothing else. It fired on 08, 09, 10 and
+      # 11/08 with the identical single cause ('Stryker UK' resolving to no
+      # supplier record) and nobody acted, because nothing in the alert said what
+      # had broken or that it had broken before. The Compare tab served 07/08 data
+      # to paying members for four days while looking current.
+      #
+      # A failed refresh publishes nothing wrong — the gate sees to that — so the
+      # damage here is never bad data, it is SILENT STALENESS. That is what this
+      # alert has to convey: what broke, how long the data has been frozen, and
+      # whether this is the first night or the fourth.
       - name: Phone alert on failure (ntfy)
         if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          curl -s -H "Title: Medical Sales Hub - pipeline FAILED" -H "Priority: high" -H "Tags: warning" \
-            -d "The daily compare-tab refresh failed. Check github.com/louisehoult-beep/msh-compare-data/actions" \
-            ntfy.sh/eth-hub-lou-4437
+          API="repos/${GITHUB_REPOSITORY}/actions/workflows/refresh.yml/runs"
+
+          # WHAT broke. The gate's own words, not a paraphrase.
+          REASON=$(grep -E '^FAIL' /tmp/gate.log 2>/dev/null | head -2 | cut -c1-300)
+          if [ -n "$REASON" ]; then
+            # The gate ran and rejected the data. Nothing was committed.
+            STATE="Nothing wrong was published, the gate blocked the commit. The Compare tab and Supplier Search are FROZEN at that date while still looking current to members."
+          else
+            # No FAIL line means the gate never reached a verdict, so do NOT claim
+            # it blocked anything: the fetch, the index rebuild or the push died.
+            # An alert that states the wrong cause is worse than a vague one.
+            REASON="The publish gate produced no FAIL line, so the job died BEFORE or OUTSIDE it (fetch, index rebuild, or push)."
+            STATE="Whether anything committed is unknown from this alert. Check the run log, and check whether the last commit is today's."
+          fi
+
+          # HOW STALE. The last green run is the moment the live data stopped moving.
+          LAST_OK=$(gh api "${API}?status=success&per_page=1" \
+                      --jq '.workflow_runs[0].updated_at // empty' 2>/dev/null || true)
+          [ -z "$LAST_OK" ] && LAST_OK="unknown"
+
+          # IS THIS A PATTERN. One failure is a blip; two in a row is a system
+          # that is down and staying down until someone reads a log.
+          PREV=$(gh api "${API}?status=completed&per_page=1" \
+                   --jq '.workflow_runs[0].conclusion // empty' 2>/dev/null || true)
+          if [ "$PREV" = "failure" ]; then
+            TITLE="Med Sales Hub - refresh FAILED AGAIN, data is STALE"
+            PRIORITY="urgent"
+          else
+            TITLE="Med Sales Hub - refresh FAILED (first night)"
+            PRIORITY="high"
+          fi
+
+          # Built with printf, not a multi-line string literal: every line of a
+          # `run: |` block must stay indented, and an unindented continuation
+          # silently ends the YAML block scalar and breaks the whole workflow.
+          BODY=$(printf '%s\n\nLive data last refreshed: %s\n%s\nRun: github.com/%s/actions/runs/%s\n' \
+                   "$REASON" "$LAST_OK" "$STATE" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID")
+
+          curl -s -H "Title: ${TITLE}" -H "Priority: ${PRIORITY}" -H "Tags: warning" \
+            -d "${BODY}" ntfy.sh/eth-hub-lou-4437
