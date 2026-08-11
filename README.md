@@ -139,6 +139,43 @@ must carry a `rule` saying what put a notice in it; `verify.py` fails without
 one, fails on a URL that is not in the feed, and fails if the rule quotes a
 count ("eight notices") that no longer matches what is pinned.
 
+## Every picker: speciality first, list below it filtered (rule set by Lou, 11/08/2026)
+
+Wherever a member chooses a company, supplier or distributor, **the speciality is
+asked for first and everything below it is cut to that speciality**. A rep arrives
+thinking "continence", not "Coloplast"; asking for the company first makes step one
+a list of 533 firms, nearly all of them selling nowhere near the area being read.
+
+Applied in `app/comptab.js`, `app/comparison.js`, `app/meeting-prep.js`,
+`app/company-report.js`, `app/supplier-search.js` and
+`Product-Build/procurement-view/procurement-view.js`. Anything new matches them.
+
+Five things the ordering alone does not give you, and each one is a way this has
+already gone wrong somewhere:
+
+1. **Match on canonical ids, never on the speciality string.** More than one
+   speciality vocabulary exists here and they have drifted. Matching by name
+   returns an empty list, and an empty list reads as "nobody supplies this" when
+   what happened is that the lookup missed. Reconcile through
+   `data/speciality-map.json`.
+2. **A parent includes its children.** Blood collection sits under vascular
+   access with a different buying centre, so picking the parent must still return
+   child-only suppliers.
+3. **Print what the filter hides.** Suppliers with no speciality recorded drop out
+   of every scoped list. That is a gap in our tagging, not proof they sell
+   nothing, so the count goes on screen.
+4. **The speciality scopes the suggestions, never the answer.** Someone who types
+   a company we hold still gets its record, flagged as not recorded under the
+   speciality on screen. Refusing a report we hold, because our own tagging did
+   not reach it, is the worse failure.
+5. **No dead dropdowns, no stale selections.** A speciality with nothing behind it
+   shows the full list and says why. A company already chosen is kept only if it
+   survives the re-cut - otherwise the table highlights a "(YOU)" row that is not
+   there.
+
+Full version, with the four-point check for a new build:
+`Cowork-OS/02-Elevate-and-Thrive/Process flows for all brands/hub-dropdown-order-and-filter.md`.
+
 ## Sources
 - MHRA medical safety alerts - official GOV.UK search API (FSN round-up detail
   pages are fetched so keyword matching sees the actual notices).
