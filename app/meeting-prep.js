@@ -123,10 +123,63 @@
     var wrap = el('div', 'font-family:Inter,system-ui,sans-serif;color:' + INK + ';');
     wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:' + GOLD + ';', 'NHS Intelligence Hub'));
     wrap.appendChild(el('div', 'font-size:24px;font-weight:800;margin:2px 0 4px;', 'Help me prepare'));
-    wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:660px;margin-bottom:12px;', 'Pick who you are, the speciality, the trust and <strong>who you’re meeting</strong>. You get your competitors and how you stack up, the right angle for that person, the value case, and what to know about the trust — pulled from the whole Hub. Tick “early-stage” if you’re not on a product yet.'));
+    wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:660px;margin-bottom:12px;', 'Pick the speciality, who you are, the trust and <strong>who you’re meeting</strong>. You get your competitors and how you stack up, the right angle for that person, the value case, and what to know about the trust — pulled from the whole Hub. Tick “early-stage” if you’re not on a product yet.'));
 
     var bar = el('div', 'display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:10px;padding:12px;margin-bottom:14px;');
-    var selCo = mkSelect('Your company', [''].concat(curated.map(nm)).concat(rest.length ? ['— other suppliers —'] : []).concat(rest.map(nm)));
+    /* SPECIALITY FIRST, THEN COMPANY (Lou, 11/08/2026). The bar used to open
+       with every tracked supplier and ask for the speciality afterwards. A rep
+       works the other way round, so speciality is asked first and the company
+       list is cut to firms actually reachable from it — through the canonical
+       map and the verified product tags, the same reconciliation the brief
+       itself uses, so a lookup miss cannot masquerade as "nobody sells this". */
+    var selCo = mkSelect('Your company', ['']);
+    function specIdOf(v){
+      if (!v) return '';
+      if (LABEL_TO_ID[v]) return LABEL_TO_ID[v];
+      var viaMap = SMAP && SMAP[v] && SMAP[v].to && SMAP[v].to[0];
+      return viaMap || v;
+    }
+    /* Child specialities roll up into the parent, same rule as fillProducts
+       below: picking Vascular access must not drop a firm that only sells
+       blood collection. */
+    function wantedIds(spec){
+      var want = specIdOf(spec);
+      var kids = CANON ? CANON.filter(function(c){ return c.parent === want; }).map(function(c){ return c.id; }) : [];
+      return [want].concat(kids);
+    }
+    function suppliersIn(spec){
+      if (!spec) return suppliers.slice();
+      var wanted = wantedIds(spec);
+      return suppliers.filter(function(s){
+        return supplierSpecIds(s).some(function(id){ return wanted.indexOf(id) !== -1; });
+      });
+    }
+    function fillCompanies(){
+      var spec = selSp.sel.value;
+      var scoped = suppliersIn(spec);
+      var cur = scoped.filter(function(s){ return s.curated; }).sort(byName).map(nm);
+      var oth = scoped.filter(function(s){ return !s.curated; }).sort(byName).map(nm);
+      var opts = [''].concat(cur)
+        .concat(oth.length && cur.length ? ['— other suppliers —'] : [])
+        .concat(oth);
+      var keep = selCo.sel.value;
+      selCo.sel.innerHTML = '';
+      opts.forEach(function(o){
+        var op = el('option');
+        op.value = (o.indexOf('—') === 0 ? '' : o);
+        op.textContent = o || (scoped.length ? '— choose —' : '— none indexed in this speciality —');
+        if (o.indexOf('—') === 0) op.disabled = true;
+        selCo.sel.appendChild(op);
+      });
+      selCo.sel.value = (keep && cur.concat(oth).indexOf(keep) !== -1) ? keep : '';
+      var lbl = selCo.box.querySelector('label');
+      if (lbl) lbl.textContent = spec
+        ? ('Your company — ' + scoped.length + ' in this speciality')
+        : 'Your company';
+      /* Losing the company must reset what hangs off it, or the product picker
+         keeps offering the old firm's range under a new speciality. */
+      if (keep && selCo.sel.value !== keep) fillProducts();
+    }
     // Product picker. Was missing entirely — product could only reach the brief
     // via hand-off from Product Comparison, so anyone starting here had no way
     // to say what they sell. Repopulates whenever the company changes.
@@ -213,12 +266,14 @@
     var early = el('input'); early.type = 'checkbox';
     earlyWrap.appendChild(early); earlyWrap.appendChild(document.createTextNode('Early-stage (no product yet)'));
     var btn = el('button', 'background:#6B2A34 !important;color:#ffffff !important;border:0;border-radius:8px;padding:12px 24px;font-weight:800;font-size:15px;cursor:pointer;letter-spacing:.3px;box-shadow:0 1px 3px rgba(0,0,0,.15);', 'Prepare me');
-    [selCo.box, selPr.box, selSp.box, selTr.box, selAud.box].forEach(function(b){ bar.appendChild(b); });
-    // Changing speciality must re-scope the product list, not just the brief.
-    selSp.sel.addEventListener('change', fillProducts);
+    [selSp.box, selCo.box, selPr.box, selTr.box, selAud.box].forEach(function(b){ bar.appendChild(b); });
+    // Changing speciality re-scopes the company list first, then the products
+    // that hang off whichever company survives that cut.
+    selSp.sel.addEventListener('change', function(){ fillCompanies(); fillProducts(); });
     var prodHint = el('div', 'font-size:11.5px;color:#8a6d00;margin-top:3px;line-height:1.4;');
     prodHint.id = 'msh-prod-hint';
     selPr.box.appendChild(prodHint);
+    fillCompanies();
     fillProducts();
     var side = el('div', 'display:flex;flex-direction:column;gap:8px;'); side.appendChild(earlyWrap); side.appendChild(btn); bar.appendChild(side);
     wrap.appendChild(bar);
@@ -242,7 +297,16 @@
       var h = (ev && ev.detail) || null;
       if (!h){ try { h = JSON.parse(localStorage.getItem('mshPrepHandoff') || 'null'); } catch(e){} }
       if (!h || !h.company || (Date.now() - (h.ts || 0)) > 600000) return;
+      /* The company arrives from another tool, so it may sit outside whatever
+         speciality is showing. Clear the speciality rather than drop the
+         hand-off — arriving with the wrong company silently unset is worse
+         than arriving unfiltered. */
       var opts = [].slice.call(selCo.sel.options).map(function(o){ return o.value; });
+      if (opts.indexOf(h.company) === -1 && selSp.sel.value){
+        selSp.sel.value = '';
+        fillCompanies();
+        opts = [].slice.call(selCo.sel.options).map(function(o){ return o.value; });
+      }
       if (opts.indexOf(h.company) !== -1) selCo.sel.value = h.company;
       focusProduct = h.product || '';
       focusEdge = h.edge || '';

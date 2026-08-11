@@ -114,7 +114,12 @@ try{loadFeed().then(function(j){
     if(st){st.textContent='Frameworks and supply notices change \u2014 always open the source link and confirm current status before using anything in a conversation or tender.';}
     /* The feed can introduce specialities that were not in the dropdown when the
        pane was built, so the list is rebuilt before re-rendering. */
-    if(document.getElementById('sec-comp')){renderClusters();fillSpecs();render();}
+    if(document.getElementById('sec-comp')){
+      renderClusters();fillSpecs();
+      var cs=document.getElementById('cp-spec');
+      fillCompanies(cs?cs.value:'');
+      render();
+    }
   }}
 }).catch(function(e){});}catch(e){}
 function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
@@ -233,8 +238,15 @@ function buildPane(){
   h+='</div>';
   h+='<div id="cp-clusters"></div>';
   h+='<div class="mst__controls">';
-  h+='<label class="mst__lab">1 &middot; Your company (optional)<select class="mst__sel" id="cp-me"></select></label>';
-  h+='<label class="mst__lab">2 &middot; Speciality<select class="mst__sel" id="cp-spec"></select></label>';
+  /* SPECIALITY FIRST, THEN COMPANY (Lou, 11/08/2026). A rep knows the clinical
+     area before they know which firms sit in it, and the old order asked for the
+     company first — so step 1 was every tracked company on the Hub, nearly all
+     of them selling nowhere near the speciality being read. Step 2 is now scoped
+     by step 1: only companies listed as suppliers in the chosen speciality
+     appear. Until a speciality is picked, step 2 says so rather than offering a
+     list that would be re-cut a moment later. */
+  h+='<label class="mst__lab">1 &middot; Speciality<select class="mst__sel" id="cp-spec"></select></label>';
+  h+='<label class="mst__lab">2 &middot; Your company (optional)<select class="mst__sel" id="cp-me"></select></label>';
   h+='<label class="mst__lab">3 &middot; Product type<select class="mst__sel" id="cp-type"></select></label>';
   h+='</div>';
   h+='<div id="cp-route"></div><div id="cp-table"></div><div id="cp-issues"></div>';
@@ -264,18 +276,16 @@ function coKey(s){return (s&&(s.ref||s.co))||'';}
 /* The speciality list is built from the data, not hard-coded. Ones with a
    researched supplier set come first, because those give the full comparison;
    the rest follow, labelled with how many live notices they carry so nobody
-   picks one expecting a supplier table. onlyCo (optional) restricts the list
-   to specialities where that company is a listed supplier — the step-1-company
-   filter feeding into step 2. */
-function fillSpecs(onlyCo){
+   picks one expecting a supplier table. Speciality is step 1 now, so this list
+   is never cut down by anything else — it is the whole field, every time. */
+function fillSpecs(){
   var sel=document.getElementById('cp-spec');
   if(!sel){return;}
   var full=[],feed=[];
   for(var k in D){
     var S=D[k],n=(S.issues||[]).length;
-    if(onlyCo&&!(S.suppliers||[]).some(function(s){return coKey(s)===onlyCo;})){continue;}
     if((S.suppliers&&S.suppliers.length)||S.noSuppliers){full.push([k,S.label]);}
-    else if(!onlyCo&&n){feed.push([k,S.label+' — '+n+' live notice'+(n===1?'':'s')+', no supplier set yet']);}
+    else if(n){feed.push([k,S.label+' — '+n+' live notice'+(n===1?'':'s')+', no supplier set yet']);}
   }
   full.sort(function(a,b){return a[1].localeCompare(b[1]);});
   feed.sort(function(a,b){return a[1].localeCompare(b[1]);});
@@ -283,15 +293,17 @@ function fillSpecs(onlyCo){
   fill(sel,[['','Select…']].concat(full,feed));
   if(prev&&Array.prototype.some.call(sel.options,function(o){return o.value===prev;})){sel.value=prev;}
 }
-/* Step 1: every company across every speciality, deduped by master record —
-   populated once at mount, independent of whatever speciality is later chosen.
+/* Step 2: the companies listed as suppliers in ONE speciality, deduped by
+   master record. Pass no speciality and it returns the whole field, which is
+   what the picker shows before step 1 has been answered.
    Where a firm is listed under more than one spelling, the option says so
    rather than silently absorbing the others: a rep who picks "GBUK Group" and
    then reads "GBUK Enteral" in the nutrition table should be able to see why
    from the picker, not wonder whether the tool has the wrong company. */
-function allCompanies(){
+function allCompanies(onlySpec){
   var seen={},out=[];
   for(var k in D){
+    if(onlySpec&&k!==onlySpec){continue;}
     (D[k].suppliers||[]).forEach(function(s){
       var key=coKey(s); if(!key){return;}
       if(!seen[key]){seen[key]={alt:{}};out.push(key);}
@@ -304,20 +316,23 @@ function allCompanies(){
     return [key,alt.length?key+' · also listed as '+alt.join(', '):key];
   });
 }
-function fillCompanies(){
+/* Step 1 -> 2. The company list is rebuilt every time the speciality changes,
+   so it only ever holds firms that are actually listed in the speciality on
+   screen. A previous choice is kept when it survives the re-cut and dropped
+   when it does not — silently leaving a company selected that supplies nothing
+   in the new speciality is how the table ends up highlighting a "(YOU)" row
+   that isn't there. */
+function fillCompanies(spec){
   var sel=document.getElementById('cp-me');
   if(!sel){return;}
   var prev=sel.value;
-  fill(sel,[['','— all companies —']].concat(allCompanies()));
-  if(prev){sel.value=prev;}
+  var list=spec?allCompanies(spec):[];
+  var head=spec?('— all companies in this speciality ('+list.length+') —'):'— pick a speciality first —';
+  fill(sel,[['',head]].concat(list));
+  sel.disabled=!spec;
+  sel.value=(prev&&list.some(function(o){return o[0]===prev;}))?prev:'';
 }
-/* Step 1 -> 2: picking a company narrows Speciality to the ones that company
-   actually supplies into; clearing it restores the full list. */
-function onCompany(){
-  var co=document.getElementById('cp-me').value;
-  fillSpecs(co||null);
-  onSpec();
-}
+function onCompany(){ render(); }
 function render(){
   var spec=document.getElementById('cp-spec').value;
   if(!spec){return;}
@@ -458,6 +473,7 @@ function renderIssues(S){
 }
 function onSpec(){
   var spec=document.getElementById('cp-spec').value;
+  fillCompanies(spec);
   if(!spec){document.getElementById('cp-route').innerHTML='';document.getElementById('cp-table').innerHTML='';document.getElementById('cp-issues').innerHTML='';fill(document.getElementById('cp-type'),[['all','All product types']]);return;}
   var S=D[spec];
   var t=[['all','All product types']];
@@ -475,7 +491,6 @@ function mount(){
   if(document.getElementById('cp-spec')){return true;}
   var pane=buildPane();
   MOUNT.appendChild(pane);
-  fillCompanies();
   renderClusters();
   fillSpecs();
   onSpec();

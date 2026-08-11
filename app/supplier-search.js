@@ -16,6 +16,17 @@
      the capture route stated. Four suppliers have one today. */
   var RANGE_URL='https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/supplier-products.json';
   var RANGE={};
+  /* SPECIALITY FIRST (Lou, 11/08/2026). The box used to offer all indexed
+     suppliers at once; a speciality is picked first now and the suggestions are
+     cut to the firms recorded in it. Reconciled through the canonical map, the
+     same route meeting-prep.js and company-report.js take, because the
+     free-text speciality strings on supplier records were never one vocabulary
+     — matching them literally returns an empty list that reads as "nobody
+     sells this" when what really happened is that the lookup missed. Like the
+     range file it is a bonus, never a dependency: if it fails to load, the
+     picker falls back to the raw strings and the page behaves as it did. */
+  var SPEC_URL='https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/speciality-map.json';
+  var SPECMAP=null;
   var MOUNT=document.getElementById('msh-supplier-search');
   if(!MOUNT) return;
   /* Resolve a supplier record to its full range by name or alias, both ways
@@ -43,7 +54,10 @@
     '<div style="font-family:Inter,-apple-system,Segoe UI,sans-serif;margin:0;">'+
       '<div style="padding:2px 0 6px;">'+
         '<div style="font-size:11.5px;letter-spacing:2px;font-weight:700;color:'+G+';">SUPPLIER INTELLIGENCE SEARCH</div>'+
-        '<p style="margin:5px 0 12px;font-size:13.5px;color:'+DIM+';">Type a supplier or brand — get their frameworks, products, and live alerts/recalls, all in one place. <span id="mssCount"></span></p>'+
+        '<p style="margin:5px 0 12px;font-size:13.5px;color:'+DIM+';">Pick a speciality, then a supplier or brand — get their frameworks, products, and live alerts/recalls, all in one place. <span id="mssCount"></span></p>'+
+        '<label style="display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:'+DIM+';margin:0 0 4px;">1 &middot; Speciality</label>'+
+        '<select id="mssSpec" style="width:100%;max-width:520px;padding:10px 15px;border-radius:99px;border:1px solid '+LINE+';font:inherit;font-size:14px;color:'+INK+';background:#ffffff;outline:none;margin:0 0 11px;"></select>'+
+        '<label style="display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:'+DIM+';margin:0 0 4px;">2 &middot; Supplier or distributor <span id="mssScope" style="font-weight:400;text-transform:none;letter-spacing:0;color:'+DIM+';"></span></label>'+
         '<input id="mssInput" list="mssList" autocomplete="off" placeholder="e.g. BD, Vygon, Coloplast, Nexiva…" '+
           'style="width:100%;max-width:520px;padding:11px 16px;border-radius:99px;border:1px solid '+LINE+';font:inherit;font-size:15px;color:'+INK+';background:#ffffff;-webkit-text-fill-color:'+INK+';caret-color:'+INK+';outline:none;">'+
         '<datalist id="mssList"></datalist>'+
@@ -191,20 +205,77 @@
     shell();
     var input=document.getElementById('mssInput'), list=document.getElementById('mssList'),
         result=document.getElementById('mssResult'), chips=document.getElementById('mssChips'),
-        count=document.getElementById('mssCount');
+        count=document.getElementById('mssCount'), specSel=document.getElementById('mssSpec'),
+        scope=document.getElementById('mssScope');
     count.textContent=sup.length+' suppliers indexed · data as of '+(data.dataAsOf||'');
-    list.innerHTML=sup.map(function(s){return '<option value="'+esc(s.name)+'">';}).join('');
-    // quick chips
-    var quick=['BD — Becton, Dickinson','Vygon (UK)','GBUK Group','Coloplast','Abbott Diabetes Care'];
-    chips.innerHTML=quick.filter(function(q){return sup.some(function(s){return s.name===q;});})
-      .map(function(q){return '<button data-q="'+esc(q)+'" style="cursor:pointer;background:#f7f4ee;border:1px solid '+LINE+';border-radius:99px;padding:5px 12px;font-size:12px;color:'+INK+';">'+esc(q.split(' — ')[0])+'</button>';}).join('');
+
+    /* Canonical ids for one supplier, with children rolled into their parent
+       (blood collection sits under vascular access, with a different buying
+       centre) — without the rollup, picking the parent silently misses every
+       child-only supplier. No map loaded means no reconciliation, so it falls
+       back to the supplier's own strings and the picker lists those instead. */
+    var CANON=(SPECMAP&&SPECMAP.canonicalSpecialities)||null;
+    var SMAP=(SPECMAP&&SPECMAP.supplierSpecialityMap)||null;
+    var LABEL_TO_ID={},ID_TO_LABEL={};
+    if(CANON) CANON.forEach(function(c){LABEL_TO_ID[c.label]=c.id;ID_TO_LABEL[c.id]=c.label;});
+    function specKeys(s){
+      var out={};
+      ((s&&s.specialities)||[]).forEach(function(x){
+        if(!x) return;
+        if(!CANON){out[x]=1;return;}
+        var m=SMAP&&SMAP[x];
+        if(m&&m.to) m.to.forEach(function(id){out[id]=1;});
+        else if(LABEL_TO_ID[x]) out[LABEL_TO_ID[x]]=1;
+        else out[x]=1;
+      });
+      if(CANON) CANON.forEach(function(c){if(c.parent&&out[c.parent]) out[c.id]=1;});
+      return Object.keys(out);
+    }
+    function specLabel(k){return ID_TO_LABEL[k]||k;}
+
+    var SPEC_SUP={};
+    sup.forEach(function(s){specKeys(s).forEach(function(k){if(!SPEC_SUP[k])SPEC_SUP[k]=[];SPEC_SUP[k].push(s);});});
+    var SPEC_KEYS=Object.keys(SPEC_SUP).sort(function(a,b){return specLabel(a).toLowerCase()<specLabel(b).toLowerCase()?-1:1;});
+    var untagged=sup.filter(function(s){return !specKeys(s).length;}).length;
+    specSel.innerHTML='<option value="">— all specialities ('+sup.length+' suppliers) —</option>'+
+      SPEC_KEYS.map(function(k){return '<option value="'+esc(k)+'">'+esc(specLabel(k))+' · '+SPEC_SUP[k].length+'</option>';}).join('');
+
+    function pool(){var v=specSel.value;return (v&&SPEC_SUP[v])?SPEC_SUP[v]:sup;}
+    function refreshScope(){
+      var p=pool(),v=specSel.value;
+      list.innerHTML=p.map(function(s){return '<option value="'+esc(s.name)+'">';}).join('');
+      var quick=v?p.slice(0,5).map(function(s){return s.name;})
+        :['BD — Becton, Dickinson','Vygon (UK)','GBUK Group','Coloplast','Abbott Diabetes Care']
+          .filter(function(q){return sup.some(function(s){return s.name===q;});});
+      chips.innerHTML=quick.map(function(q){return '<button data-q="'+esc(q)+'" style="cursor:pointer;background:#f7f4ee;border:1px solid '+LINE+';border-radius:99px;padding:5px 12px;font-size:12px;color:'+INK+';">'+esc(q.split(' — ')[0])+'</button>';}).join('');
+      /* Say what the filter hides. A supplier with no speciality recorded drops
+         out of every scoped list, and that is a gap in our tagging, not proof
+         it sells nothing. */
+      scope.textContent=v?('— '+p.length+' in '+specLabel(v)+(untagged?' · '+untagged+' suppliers have no speciality recorded and are only reachable with the filter cleared':'')):'';
+    }
+    refreshScope();
+    specSel.addEventListener('change',function(){refreshScope();if(input.value.trim())show(input.value);});
+
+    /* The speciality scopes the SUGGESTIONS, never the answer: a member who
+       types a real supplier still gets its card, with a line saying it sits
+       outside the speciality on screen. */
+    var outOfScope=null;
     function find(q){
       var n=norm(q);
+      outOfScope=null;
       if(!n) return null;
-      var hit=sup.filter(function(s){return norm(s.name)===n||(s.aliases||[]).some(function(a){return norm(a)===n;});})[0];
+      var scoped=findIn(pool(),n);
+      if(scoped) return scoped;
+      if(!specSel.value) return null;
+      var any=findIn(sup,n);
+      if(any) outOfScope=any;
+      return any;
+    }
+    function findIn(pl,n){
+      var hit=pl.filter(function(s){return norm(s.name)===n||(s.aliases||[]).some(function(a){return norm(a)===n;});})[0];
       if(hit) return hit;
       // partial: name/alias contains
-      var part=sup.filter(function(s){
+      var part=pl.filter(function(s){
         if(norm(s.name).indexOf(n)>-1) return true;
         if((s.aliases||[]).some(function(a){return norm(a).indexOf(n)>-1;})) return true;
         return false;
@@ -217,7 +288,7 @@
          Product matching is deliberately LAST. It is the arm that returned
          Dentaquip for "KaVo", because Dentaquip's product list contains the word
          — so it must never outrank a company whose own name matches. */
-      var byProd=sup.filter(function(s){
+      var byProd=pl.filter(function(s){
         if((s.products||[]).some(function(p){return norm(p).indexOf(n)>-1;})) return true;
         var r=rangeFor(s);
         return !!(r&&(r.products||[]).some(function(p){return norm(p&&p.n).indexOf(n)>-1;}));
@@ -226,7 +297,8 @@
     }
     function show(q){
       var s=find(q);
-      result.innerHTML = s ? card(s) :
+      var flag=(s&&outOfScope)?'<div style="margin:0 0 10px;padding:9px 13px;border-left:3px solid '+G+';background:#f7f4ee;border-radius:0 8px 8px 0;font-size:12.5px;color:'+INK+';line-height:1.55;"><b>'+esc(s.name)+'</b> is not recorded under '+esc(specLabel(specSel.value))+', so it is not in the list above. Its card is below in full.</div>':'';
+      result.innerHTML = s ? (flag+card(s)) :
         '<div style="padding:14px 4px;font-size:13.5px;color:'+DIM+';">No match for “'+esc(q)+'”. Coverage is the tracked-supplier set ('+sup.length+' indexed) — a supplier not here is <b>not yet indexed</b>, not “nothing found”.</div>';
     }
     input.addEventListener('change',function(){show(input.value);});
@@ -261,7 +333,13 @@
     return fetch(RANGE_URL,{cache:'no-store'})
       .then(function(r){return r.json();})
       .then(function(j){ RANGE=(j&&j.suppliers)||{}; })
-      .catch(function(){ RANGE={}; });
+      .catch(function(){ RANGE={}; })
+      .then(function(){
+        return fetch(SPEC_URL,{cache:'no-store'})
+          .then(function(r){return r.json();})
+          .then(function(j){ SPECMAP=j||null; })
+          .catch(function(){ SPECMAP=null; });
+      });
   }
   if(window.MSH_SUPPLIER_INDEX){ var d0=window.MSH_SUPPLIER_INDEX; loadRange().then(function(){run(d0);}); return; }
   loadRange()

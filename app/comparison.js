@@ -146,10 +146,10 @@
     var wrap = el('div', 'font-family:Inter,system-ui,sans-serif;color:' + INK + ';padding:0 clamp(10px,3vw,34px);box-sizing:border-box;');
     wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:' + OX + ';', 'NHS Intelligence Hub'));
     wrap.appendChild(el('div', 'font-size:24px;font-weight:800;margin:2px 0 4px;', 'The Differential'));
-    wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:760px;margin-bottom:12px;', 'Pick your <strong>company</strong> and product on the left. On the right, tell us who you’re up against — a specific rival if you know one, or leave it blank and we’ll suggest your closest tracked match. You get the two <strong>side by side</strong>: real NHS Supply Chain images and codes, their catalogue facts lined up, what actually differs, and the questions to ask in the room.'));
+    wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:760px;margin-bottom:12px;', 'Pick your <strong>speciality</strong>, then your company and product on the left. On the right, tell us who you’re up against — a specific rival if you know one, or leave it blank and we’ll suggest your closest tracked match. You get the two <strong>side by side</strong>: real NHS Supply Chain images and codes, their catalogue facts lined up, what actually differs, and the questions to ask in the room.'));
 
-    // Search flow: 1 Company -> 2 Speciality (from the supplier directory) ->
-    // 3 Product type -> 4 product name OR NHSSC code (YOUR product), then a
+    // Search flow: 1 Speciality -> 2 Company (only firms indexed in that
+    // speciality) -> 3 Product type -> 4 product name OR NHSSC code (YOUR product), then a
     // second, explicit "Compare against" product -> Compare.
     var SUPOBJ = {}; suppliers.forEach(function(s){ SUPOBJ[s.name] = s; });
     var SPECMAP = {
@@ -178,16 +178,36 @@
     var bar = el('div', 'display:flex;flex-direction:column;gap:10px;');
     var supNames0 = [], supSeen0 = {};
     PRODUCTS.forEach(function(p){ if (!supSeen0[p.supplier]){ supSeen0[p.supplier] = 1; supNames0.push(p.supplier); } });
-    supNames0.sort(function(a,b){ return a.toLowerCase() < b.toLowerCase() ? -1 : 1; });
-    var selSup = mkSelect('1 · Company', [''].concat(supNames0));
-    var selSpec = mkSelect('2 · Speciality', ['']); selSpec.sel.disabled = true;
+    function byLower(a, b){ return a.toLowerCase() < b.toLowerCase() ? -1 : 1; }
+    supNames0.sort(byLower);
+    /* SPECIALITY FIRST, THEN COMPANY (Lou, 11/08/2026). Step 1 used to be a
+       list of every tracked supplier, and the speciality was whatever that one
+       firm happened to sell into. A rep comes at this from the clinical area,
+       so the area is asked for first and the company list is cut to the firms
+       actually indexed in it. Both sides are built from PRODUCTS, so the picker
+       can never offer a speciality/company pair with nothing behind it. */
+    var SPEC_COS = {}, ALLSPECS = [];
+    PRODUCTS.forEach(function(p){
+      (p.specs || []).forEach(function(sp){
+        if (!sp) return;
+        if (!SPEC_COS[sp]){ SPEC_COS[sp] = {}; ALLSPECS.push(sp); }
+        SPEC_COS[sp][p.supplier] = 1;
+      });
+    });
+    ALLSPECS.sort(byLower);
+    function companiesIn(spec){
+      if (!spec || !SPEC_COS[spec]) return supNames0.slice();
+      return Object.keys(SPEC_COS[spec]).sort(byLower);
+    }
+    var selSpec = mkSelect('1 · Speciality', [''].concat(ALLSPECS));
+    var selSup = mkSelect('2 · Company', [''].concat(supNames0));
     var selType = mkSelect('3 · Product type', ['']); selType.sel.disabled = true;
     var pbox = el('div', 'display:flex;flex-direction:column;gap:4px;min-width:0;');
     pbox.appendChild(el('label', 'font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#6b7684;', '4 · Product name or NHSSC code'));
     var inp = el('input', 'padding:10px 12px;border:1px solid ' + LINE + ';border-radius:8px;font-size:14px;background:#fff !important;color:#20303f !important;'); inp.type='text'; inp.setAttribute('list','msh-prod-list'); inp.placeholder='e.g. Pahacel — or a code like ELS924';
     var dl = el('datalist'); dl.id='msh-prod-list';
     pbox.appendChild(inp); pbox.appendChild(dl);
-    bar.appendChild(selSup.box); bar.appendChild(selSpec.box); bar.appendChild(selType.box); bar.appendChild(pbox);
+    bar.appendChild(selSpec.box); bar.appendChild(selSup.box); bar.appendChild(selType.box); bar.appendChild(pbox);
     colMine.appendChild(bar);
 
     /* Explicit "compare against" product — the fix for the tool silently
@@ -227,11 +247,19 @@
       + '<a href="mailto:louisehoult@elevateandthrive.uk?subject=' + askSub + '&body=' + askBody + '" style="color:' + GOLD + ';font-weight:600;">Ask for something to be added &rarr;</a> '
       + '<span style="color:#8a8778;">— usually live within a working day.</span>';
     wrap.appendChild(cov);
+    /* Two speciality filters, and they do different jobs. SPECMAP narrows by
+       DEVICE TYPE and covers nine specialities; inSpec narrows to the products
+       of suppliers indexed in the speciality and covers all of them. With
+       speciality now the first question, the second matters most — without it,
+       picking a speciality outside SPECMAP's nine narrowed nothing at all and
+       the type list still ran to every type on the Hub. */
+    function inSpec(p, spec){ return !spec || (p.specs || []).indexOf(spec) !== -1; }
     function rawTypesFor(sup, spec){
       var allowed = spec ? SPECMAP[spec.toLowerCase()] : null;
       var seenT = {}, out = [];
       PRODUCTS.forEach(function(p){
         if (sup && p.supplier !== sup) return;
+        if (!inSpec(p, spec)) return;
         if (!p.type) return;
         if (allowed && allowed.indexOf(p.type) === -1) return;
         if (!seenT[p.type]){ seenT[p.type] = 1; out.push(p.type); }
@@ -243,6 +271,7 @@
       var allowed = (spec && !typ) ? SPECMAP[spec.toLowerCase()] : null;
       return PRODUCTS.filter(function(p){
         if (sup && p.supplier !== sup) return false;
+        if (!inSpec(p, spec)) return false;
         if (typ && p.type !== typ) return false;
         if (allowed && p.type && allowed.indexOf(p.type) === -1) return false;
         return true;
@@ -338,20 +367,30 @@
       // Keep the rep's choice if it still competes; otherwise fall back to "any".
       selSup2.sel.value = (keep && out.indexOf(keep) !== -1) ? keep : '';
     }
-    selSup.sel.addEventListener('change', function(){
-      var sup = selSup.sel.value;
-      var s = SUPOBJ[sup];
-      fillSel(selSpec.sel, (s && s.specialities || []).slice().sort());
-      selSpec.sel.disabled = !sup;
-      fillSel(selType.sel, rawTypesFor(sup, ''), function(t){ return t.charAt(0).toUpperCase() + t.slice(1); });
-      selType.sel.disabled = !sup;
+    function capType(t){ return t.charAt(0).toUpperCase() + t.slice(1); }
+    /* Step 1 -> 2. The company list is re-cut to the speciality every time, and
+       a company already chosen is kept only if it survives the cut — leaving a
+       firm selected that sells nothing in the new speciality is how the product
+       list silently empties with no reason on screen. */
+    selSpec.sel.addEventListener('change', function(){
+      var spec = selSpec.sel.value, keep = selSup.sel.value;
+      var cos = companiesIn(spec);
+      fillSel(selSup.sel, cos);
+      selSup.sel.value = (keep && cos.indexOf(keep) !== -1) ? keep : '';
+      var lbl = selSup.box.querySelector('label');
+      if (lbl) lbl.textContent = spec ? ('2 · Company — ' + cos.length + ' in this speciality') : '2 · Company';
+      fillSel(selType.sel, rawTypesFor(selSup.sel.value, spec), capType);
+      selType.sel.disabled = false;
       refreshList();
       refreshList2();
       updateSuggestPlaceholder();
     });
-    selSpec.sel.addEventListener('change', function(){
-      fillSel(selType.sel, rawTypesFor(selSup.sel.value, selSpec.sel.value), function(t){ return t.charAt(0).toUpperCase() + t.slice(1); });
+    selSup.sel.addEventListener('change', function(){
+      fillSel(selType.sel, rawTypesFor(selSup.sel.value, selSpec.sel.value), capType);
+      selType.sel.disabled = false;
       refreshList();
+      refreshList2();
+      updateSuggestPlaceholder();
     });
     selType.sel.addEventListener('change', function(){ refreshList(); refreshList2(); updateSuggestPlaceholder(); });
     inp.addEventListener('input', function(){ refreshList2(); updateSuggestPlaceholder(); });
