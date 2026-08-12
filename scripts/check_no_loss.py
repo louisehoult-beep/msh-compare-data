@@ -60,6 +60,34 @@ def core(name):
     return re.sub(r"\s+", " ", x).strip()
 
 
+def heads(name):
+    """The lead brand terms in a name, with the parenthetical detail dropped.
+
+    Product keys carry a descriptor that the pipeline rewrites every few weeks:
+    "AQUACEL (Ag+/Foam/Surgical)" becomes "Aquacel / Aquacel Ag (wound)", and
+    "Sunrise Medical (Quickie)" becomes "Sunrise Medical Ltd" with Quickie kept
+    as an alias. The brand at the front is what identifies the record; the
+    bracket is editorial. So compare on the brand, not the whole string.
+    """
+    out = []
+    for part in re.split(r"[(),/]", name):
+        c = core(part)
+        if c:
+            out.append(c)
+    return out
+
+
+def lead(name):
+    """The single brand term a record is known by, or None if there isn't one.
+
+    Only the first term counts. "HAMILTON-C6 / C3 / T1 (ventilators)" is the
+    HAMILTON-C6 record however the rest of the string is rewritten, and matching
+    on "ventilators" as well would let almost anything look like a survivor.
+    """
+    h = heads(name)
+    return h[0] if h and len(h[0]) >= 4 else None
+
+
 def surviving_forms(records):
     """Every name still findable in a collection: names, aliases, and their cores."""
     forms = set()
@@ -73,7 +101,14 @@ def surviving_forms(records):
             for a in rec.get("aliases") or []:
                 if isinstance(a, str):
                     forms.add(a)
-    return forms | {core(f) for f in forms}
+    # Deliberately NOT the products list: it is free text, and a dealer whose
+    # description mentions "Sunrise Medical" would otherwise mask the deletion
+    # of Sunrise Medical itself. Only a record's own names count as survival.
+    cores = {core(f) for f in forms}
+    brands = set()
+    for f in forms:
+        brands |= set(heads(f))
+    return forms | cores | brands
 
 
 def read(rev, path):
@@ -151,7 +186,9 @@ def compare(base_doc, head_doc):
         gone, renamed = [], []
         (renamed if False else gone)  # keep flake quiet
         for x in missing:
-            (renamed if (x in forms or core(x) in forms) else gone).append(x)
+            hit = (x in forms or core(x) in forms
+                   or (lead(x) is not None and lead(x) in forms))
+            (renamed if hit else gone).append(x)
         if gone or renamed:
             out.append((path, gone, renamed))
     return out
