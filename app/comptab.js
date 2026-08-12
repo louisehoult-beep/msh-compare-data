@@ -51,13 +51,22 @@ function mergeSuppliers(j){
        reason there is no public competitor list (medicines). Skipping the
        second case would throw away a fully researched route to market. */
     if(!s||(!(s.suppliers||[]).length&&!s.noSuppliers)){continue;}
-    if(!D[k]){D[k]={label:s.label||k,route:[],routeNote:'',types:{},suppliers:[],issues:[]};}
+    if(!D[k]){D[k]={label:s.label||k,route:[],routeNote:'',types:{},suppliers:[],dacs:[],dacsNote:'',issues:[]};}
     D[k].label=s.label||D[k].label;
     D[k].route=s.route||[];
     D[k].routeNote=s.routeNote||'';
     D[k].types=s.types||{};
     D[k].suppliers=s.suppliers||[];
     D[k].noSuppliers=s.noSuppliers||'';
+    /* Dispensing Appliance Contractors (DACs) — added 12/08/2026. A DAC is not
+       a competitor on the framework above: it is a separate organisation that
+       dispenses whichever brand a patient is prescribed, against Part IX of
+       the Drug Tariff. Rendered in its own panel, never merged into the
+       manufacturer table, so a rep never reads Bullen or Fittleworth as if
+       they made the product. Only present where `data/compare-suppliers.json`
+       carries one — most specialities have none. */
+    D[k].dacs=s.dacs||[];
+    D[k].dacsNote=s.dacsNote||'';
     /* It has researched route-to-market content now, table or not. */
     D[k].feedOnly=false;
   }
@@ -103,7 +112,7 @@ try{loadFeed().then(function(j){
       
       if(D[k]){ if(f.issues){D[k].issues=f.issues;} if(f.label){D[k].label=f.label;} }
       else if(f.issues&&f.issues.length){
-        D[k]={label:f.label||k,route:[],routeNote:'',types:{},suppliers:[],
+        D[k]={label:f.label||k,route:[],routeNote:'',types:{},suppliers:[],dacs:[],dacsNote:'',
               issues:f.issues,feedOnly:true};
       }
     }
@@ -249,7 +258,7 @@ function buildPane(){
   h+='<label class="mst__lab">2 &middot; Your company (optional)<select class="mst__sel" id="cp-me"></select></label>';
   h+='<label class="mst__lab">3 &middot; Product type<select class="mst__sel" id="cp-type"></select></label>';
   h+='</div>';
-  h+='<div id="cp-route"></div><div id="cp-table"></div><div id="cp-issues"></div>';
+  h+='<div id="cp-route"></div><div id="cp-table"></div><div id="cp-dacs"></div><div id="cp-issues"></div>';
   h+='<div class="mst__note">Supplier sets are the key players for each product type, not the full framework award list (the continence framework alone has 57 suppliers). Brands, framework presence and issues verified against the linked sources on 17/07/2026. For anything time-critical, check the NHS Supply Chain <a href="https://www.supplychain.nhs.uk/icn/" target="_blank" rel="noopener">important customer notices</a> and <a href="https://www.gov.uk/drug-device-alerts" target="_blank" rel="noopener">MHRA alerts</a> directly.</div>';
   sec.innerHTML=h;
   return sec;
@@ -360,6 +369,7 @@ function render(){
     fo+='<p style="font-size:12px;color:#5b6675;margin:4px 0 0;">'+esc(builtTxt)+' a full supplier comparison. If this speciality is one you sell into, say so and it can be built out.</p></div>';
     document.getElementById('cp-route').innerHTML=fo;
     document.getElementById('cp-table').innerHTML='';
+    document.getElementById('cp-dacs').innerHTML='';
     renderIssues(S);
     return;
   }
@@ -435,6 +445,30 @@ function render(){
       +'<p style="font-size:13px;line-height:1.6;margin:0;">'+esc(S.noSuppliers)+'</p></div>';
   }
   document.getElementById('cp-table').innerHTML=tbl;
+  /* DACs — a separate panel, not a row in the table above. A Dispensing
+     Appliance Contractor does not make the product and is not a competitor
+     for the framework, so folding it into the manufacturer table would read
+     as if Bullen or Fittleworth made catheters. Shown only where this
+     speciality's route genuinely runs through one (`S.dacs`), never invented
+     for a speciality where it does not apply. */
+  if((S.dacs||[]).length){
+    var dh='<div style="background:#fff;border:1px solid #e3e7ec;border-left:3px solid #39689e;border-radius:0 10px 10px 0;padding:12px 15px;margin:0 0 14px;">';
+    dh+='<div style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#39689e;font-weight:700;margin-bottom:6px;">Dispensing Appliance Contractors (DACs) in this speciality</div>';
+    if(S.dacsNote) dh+='<p style="font-size:12px;color:#5b6675;margin:0 0 10px;line-height:1.55;">'+esc(S.dacsNote)+'</p>';
+    dh+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">';
+    S.dacs.forEach(function(x){
+      dh+='<div style="border:1px solid #e3e7ec;border-radius:10px;padding:10px 12px;">'
+        +'<div style="font-size:13.5px;font-weight:700;color:#1d2733;">'+esc(x.name)+'</div>'
+        +(x.note?'<p style="font-size:12px;color:#5b6675;margin:4px 0 0;line-height:1.5;">'+esc(x.note)+'</p>':'')
+        +(x.verifiedOn?'<div style="font-size:10.5px;color:#8a93a0;margin:6px 0 0;">Verified from the company’s own site '+esc(x.verifiedOn)+'</div>':'')
+        +(x.url?'<a href="'+esc(x.url)+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:6px;font-size:12px;color:#39689e;font-weight:600;">site &rarr;</a>':'')
+        +'</div>';
+    });
+    dh+='</div></div>';
+    document.getElementById('cp-dacs').innerHTML=dh;
+  } else {
+    document.getElementById('cp-dacs').innerHTML='';
+  }
   renderIssues(S);
 }
 function renderIssues(S){
@@ -474,7 +508,7 @@ function renderIssues(S){
 function onSpec(){
   var spec=document.getElementById('cp-spec').value;
   fillCompanies(spec);
-  if(!spec){document.getElementById('cp-route').innerHTML='';document.getElementById('cp-table').innerHTML='';document.getElementById('cp-issues').innerHTML='';fill(document.getElementById('cp-type'),[['all','All product types']]);return;}
+  if(!spec){document.getElementById('cp-route').innerHTML='';document.getElementById('cp-table').innerHTML='';document.getElementById('cp-dacs').innerHTML='';document.getElementById('cp-issues').innerHTML='';fill(document.getElementById('cp-type'),[['all','All product types']]);return;}
   var S=D[spec];
   var t=[['all','All product types']];
   for(var k in S.types){t.push([k,S.types[k]]);}
