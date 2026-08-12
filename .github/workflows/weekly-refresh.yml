@@ -81,7 +81,11 @@ jobs:
               break
             fi
             echo "push rejected (another writer landed first). Rebasing and re-running the gate, attempt $attempt of 5."
-            git pull --rebase --autostash
+            # -X theirs: during a REBASE ours/theirs are inverted, so this means "this run's
+            # freshly regenerated file wins any conflicting hunk", while the other writer's
+            # non-conflicting changes are kept. Without it a conflict stops the rebase and
+            # the whole run's work is thrown away (11/08/2026, company-intelligence #2).
+            git pull --rebase -X theirs --autostash
             python3 verify.py || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
             sleep 5
           done
