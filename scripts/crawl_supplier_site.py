@@ -61,6 +61,7 @@ Run:  python3 scripts/crawl_supplier_site.py --supplier "Vygon (UK)" --domain vy
 Then: python3 scripts/stamp_notice.py && python3 verify.py
 """
 import argparse
+import datetime as dt
 import html as H
 import json
 import re
@@ -465,10 +466,44 @@ def main():
     ap.add_argument("--auto", action="store_true")
     ap.add_argument("--limit", type=int, default=6)
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--retry-refused", action="store_true",
+                    help="re-attempt suppliers already recorded as refused")
+    ap.add_argument("--refusal-ttl", type=int, default=90,
+                    help="days a recorded refusal suppresses a re-attempt (default 90)")
     a = ap.parse_args()
 
     doc = json.load(open(OUT, encoding="utf-8"))
+    doc.setdefault("refusals", {})
     index = {s["name"]: s for s in json.load(open(INDEX, encoding="utf-8"))["suppliers"]}
+
+    # WHY THIS EXISTS (added 12/08/2026). `--auto` chose its targets from
+    # "on a framework AND not already in doc['suppliers']". A refusal wrote
+    # nothing, so a refused supplier stayed eligible and was ranked first
+    # again on the next run — every scheduled run re-attempted the same
+    # top-ranked refusals and the sweep could never advance past them. That
+    # is why 21 of 548 had a range after five weeks of daily runs.
+    #
+    # A refusal is a READ OUTCOME, not a claim about the company, so it is
+    # recorded beside the ranges rather than inside them. No consumer reads
+    # this key: the member-facing rule is unchanged — a supplier absent from
+    # `suppliers` still falls back to the seed's curated list. It never says
+    # a company has no products; it says this crawler could not read them,
+    # on a date, for a stated reason.
+    cutoff = (dt.date.today() - dt.timedelta(days=a.refusal_ttl)).isoformat()
+
+    def recently_refused(name):
+        r = doc["refusals"].get(name)
+        return bool(r) and r.get("checked", "") >= cutoff
+
+    def record_refusal(name, domain, why):
+        doc["refusals"][name] = {"domain": domain or None,
+                                 "reason": why or "no reason recorded",
+                                 "checked": dt.date.today().isoformat()}
+
+    def save(d):
+        with open(OUT, "w", encoding="utf-8") as f:
+            json.dump(d, f, indent=1, ensure_ascii=False)
+            f.write("\n")
 
     targets = []
     if a.supplier:
@@ -490,6 +525,8 @@ def main():
         for name, rec in index.items():
             k = key(name)
             if k in count and name not in doc["suppliers"]:
+                if not a.retry_refused and recently_refused(name):
+                    continue
                 d = domain_for(rec)
                 if d:
                     ranked.append((count[k], name, d))
@@ -503,13 +540,23 @@ def main():
     for name, domain in targets:
         if not domain:
             print("  -- %-30s no website recorded for this supplier" % name[:30], flush=True)
+            record_refusal(name, None, "no website recorded for this supplier")
             refused += 1
+            if not a.dry_run:
+                save(doc)
             continue
         shaped, why = crawl(domain)
         if not shaped:
             print("  -- %-30s %s" % (name[:30], (why or "")[:70]), flush=True)
+            record_refusal(name, domain, why)
             refused += 1
+            # Saved immediately, for the same reason captures are: a long sweep
+            # gets interrupted, and an unsaved refusal is a target the next run
+            # spends its budget on again.
+            if not a.dry_run:
+                save(doc)
             continue
+        doc["refusals"].pop(name, None)
         existing = doc["suppliers"].get(name) or {}
         # Never overwrite a hand-verified entry's curated fields.
         for k in ("aliases", "companyNo", "notSold", "tubesNote", "domainWarning"):
@@ -523,16 +570,17 @@ def main():
         # Save after EVERY supplier. The first wide pass wrote only at the end,
         # so stopping it would have thrown away everything it had read.
         if not a.dry_run:
-            with open(OUT, "w", encoding="utf-8") as f:
-                json.dump(doc, f, indent=1, ensure_ascii=False)
-                f.write("\n")
+            save(doc)
 
-    if not a.dry_run and done:
-        with open(OUT, "w", encoding="utf-8") as f:
-            json.dump(doc, f, indent=1, ensure_ascii=False)
-            f.write("\n")
-    print("\n%d supplier range(s) captured, %d refused.%s"
-          % (done, refused, "  (dry run: nothing written)" if a.dry_run else ""))
+    # Refusals are saved too, and on the SAME terms as captures. The end-of-run
+    # write used to be `if done`, so a batch that captured nothing wrote
+    # nothing — which is exactly the batch whose refusals need remembering, or
+    # the next run picks the same targets again.
+    if not a.dry_run and (done or refused):
+        save(doc)
+    print("\n%d supplier range(s) captured, %d refused (%d refusals on record).%s"
+          % (done, refused, len(doc["refusals"]),
+             "  (dry run: nothing written)" if a.dry_run else ""))
 
 
 if __name__ == "__main__":

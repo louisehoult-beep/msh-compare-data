@@ -1,0 +1,122 @@
+name: Supplier range capture (own-site product ranges)
+
+# WHY THIS WORKFLOW EXISTS (added 12/08/2026)
+#
+# Tier 3 of the Company Report — the company's OWN full product range, grouped by
+# the company's OWN divisions — is captured by scripts/crawl_supplier_site.py.
+# Until today that script was only ever run by hand inside a session, and it had
+# reached 21 of 548 suppliers in five weeks. Two things caused that:
+#
+#   1. NOTHING SCHEDULED IT. `company-intelligence-capture-process.md` said a
+#      `supplier-deep-capture` task ran daily at 05:50 with 6 suppliers a run.
+#      No such task existed in the scheduler. The commit history shows captures
+#      on 07, 09, 11 and 12 August and none on 08 or 10 — session-driven, not
+#      automatic.
+#   2. THE SWEEP COULD NOT ADVANCE. `--auto` picked targets that were "on a
+#      framework AND not already captured". A refusal wrote nothing, so a
+#      refused supplier stayed eligible and ranked first again next run. Every
+#      run re-attempted the same top refusals — Fannin, GE HealthCare, Medtronic,
+#      B. Braun, Stryker — and never reached supplier seven. Fixed the same day
+#      by recording refusals in supplier-products.json under `refusals`.
+#
+# A crawl is slow in wall-clock and nearly free in CPU: robots.txt, then a
+# WordPress API probe, then a sitemap, each up to 30s against hosts that are
+# often dead. Measured 12/08/2026: ~13-26s per supplier. 350 suppliers is
+# therefore 1.5-2.5 HOURS of mostly waiting, which is why this belongs on a
+# runner and not in an interactive session with a 3-minute shell limit.
+#
+# ⚠️ NEEDS NO SECRET. It reads public company websites only.
+
+on:
+  schedule:
+    - cron: "20 2 * * *"      # daily 02:20 UTC, ahead of refresh.yml at 03:15
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "How many suppliers to attempt this run"
+        required: false
+        default: "200"
+      retry_refused:
+        description: "Re-attempt suppliers already recorded as refused (true/false)"
+        required: false
+        default: "false"
+
+# Same reason as every other writer in this repo: they share one branch, and on
+# 26/07/2026 a 49-minute job lost its push to a writer that landed inside its
+# window. Serialise rather than race.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    # Generous ON PURPOSE. The job is I/O-bound on other people's servers and a
+    # short cap would silently truncate the sweep, which reads as "we captured
+    # everything there was" when it means "we ran out of clock".
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Capture own-site product ranges
+        run: |
+          python3 scripts/crawl_supplier_site.py \
+            --auto \
+            --limit "${{ github.event.inputs.limit || 200 }}" \
+            ${{ github.event.inputs.retry_refused == 'true' && '--retry-refused' || '' }}
+
+      - name: Report coverage
+        run: |
+          python3 - <<'EOF'
+          import json
+          d = json.load(open("data/supplier-products.json"))
+          seed = json.load(open("data/supplier-seed.json"))["suppliers"]
+          ranges, refused = len(d["suppliers"]), len(d.get("refusals", {}))
+          print("ranges captured : %d" % ranges)
+          print("refusals on record: %d" % refused)
+          print("seed suppliers  : %d" % len(seed))
+          print("accounted for   : %d of %d" % (ranges + refused, len(seed)))
+          EOF
+
+      # build_supplier_index.py is NOT run here. This workflow writes one file.
+      # The index rebuild belongs to refresh.yml, 55 minutes later, and running
+      # it twice a night just doubles the chance of a writer collision.
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      # A push to this repo is a live publish to paying members within seconds.
+      # There is no staging step and no review. If this fails, the data is
+      # wrong: fix the data, never loosen the check. Root rule 13.
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "supplier-capture-bot"
+          git config user.email "actions@github.com"
+          git add data
+          git diff --cached --quiet || git commit -m "Supplier range capture $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first). Rebasing and re-running the gate, attempt $attempt of 5."
+            git pull --rebase --autostash
+            python3 verify.py || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi
