@@ -691,16 +691,24 @@ def main():
     # costs hundreds of document fetches to redo. The two scripts have to
     # compose: this one owns the profile and the officers, that one owns the
     # figures, and neither may destroy the other's fields.
+    # READ THE FIGURES FROM THE CANONICAL FILE, NOT FROM --out. This used to read
+    # out_path, so a run to a scratch file — the safe way to inspect a diff before
+    # publishing — carried nothing forward, silently dropping turnover for 18
+    # companies, headcount for 72 and both figuresAsOf and figuresSource. The
+    # output looked complete and was not, and copying it over the live file would
+    # have published the loss. Found 12/08/2026. The figures live in OUT whatever
+    # this run is writing to, so that is where they are read from.
     carried = 0
     KEEP = ("turnoverGBP", "turnoverSeries", "turnoverNote", "employees", "employeesNote")
     previous = {}
-    if os.path.exists(out_path):
+    prev_doc = {}
+    if os.path.exists(OUT):
         try:
-            with open(out_path, encoding="utf-8") as f:
+            with open(OUT, encoding="utf-8") as f:
                 prev_doc = json.load(f)
             previous = prev_doc.get("companies") or {}
         except (ValueError, OSError):
-            previous = {}
+            previous, prev_doc = {}, {}
     for name, rec in companies.items():
         old_rec = previous.get(name)
         if not isinstance(old_rec, dict):
@@ -721,7 +729,7 @@ def main():
         "companies": {name: companies[name] for name in sorted(companies, key=str.lower)},
     }
     for k in ("figuresAsOf", "figuresSource"):
-        if k in (locals().get("prev_doc") or {}):
+        if k in prev_doc:
             out[k] = prev_doc[k]
     # indent=1, ensure_ascii=False — the house style stamp_notice.py can detect
     # and re-stamp without reformatting the whole file.

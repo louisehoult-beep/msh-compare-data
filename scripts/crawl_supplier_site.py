@@ -32,6 +32,17 @@ to everything), or exposes no product structure — the supplier gets NO entry a
 the reason is printed. A half-crawl presented as a range is worse than no range:
 the report states product counts, and an undercount reads as a fact.
 
+BOTH ROUTES ARE HELD TO THE SAME TWO BARS, because both feed the same panel:
+  - a capture whose products land mostly in one "Uncategorised" bucket is
+    REFUSED — the report presents divisions as the company's own structure, and
+    that is not one. Route 1 is not exempt: Unisurge's WordPress taxonomy holds
+    "Uncategorised", "Range" and "Products", which is a flat list wearing a
+    taxonomy (12/08/2026);
+  - counts are de-inflated before they are written. Category landing pages are
+    dropped by the prefix test, and one product is kept per (division, name) —
+    Mölnlycke's sitemap lists its range once per market, 1,662 URLs for 222
+    products.
+
 WHAT IT WILL NOT DO
 -------------------
 - It does not invent divisions. Categories come from the company's own taxonomy
@@ -221,6 +232,30 @@ def shape_from_wp(raw, domain):
         cat = names[0] if names else ""
         divisions[div] = divisions.get(div, 0) + 1
         plist.append({"n": p["n"], "division": div, "category": cat})
+
+    # THE FLATNESS BAR APPLIES TO THIS ROUTE TOO. It used to guard only the
+    # sitemap route, on the assumption that a site exposing a `product` post type
+    # necessarily files its products under a real taxonomy. Unisurge disproved
+    # that on 12/08/2026: its WordPress taxonomy holds three terms —
+    # "Uncategorised" (25), "Range" (16) and "Products" (3) — so a capture would
+    # have published "44 products across 3 divisions: Uncategorised, Products,
+    # Range" as the company's own structure, on a member-facing report, for a
+    # company whose real range is procedure packs by speciality. Reading the term
+    # NAMES to judge them would be guesswork; the same structural test the
+    # sitemap route already uses catches it without any name judgement.
+    real = [d for d in divisions if d != "Uncategorised"]
+    uncat = divisions.get("Uncategorised", 0)
+    if not real:
+        return None, ("the site's product taxonomy put every product in one 'Uncategorised' "
+                      "bucket (%d products), so it carries no division structure — a product "
+                      "list without the company's own grouping is not the range this report "
+                      "shows" % len(plist))
+    if uncat * 2 > len(plist):
+        return None, ("%d of %d products carry no category in the site's own taxonomy, so the "
+                      "grouping would be mostly one 'Uncategorised' bucket — the report presents "
+                      "divisions as the company's own structure and this is not one"
+                      % (uncat, len(plist)))
+
     return {
         "domain": domain,
         "verified": time.strftime("%Y-%m-%d"),
@@ -233,7 +268,7 @@ def shape_from_wp(raw, domain):
         "divisions": [{"name": k, "products": v}
                       for k, v in sorted(divisions.items(), key=lambda kv: -kv[1])],
         "products": plist,
-    }
+    }, None
 
 
 # ---------------------------------------------------------------- route 2
@@ -314,6 +349,31 @@ def sitemap_products(domain, deadline=None):
             del divisions[d]
     dropped = before - len(plist)
 
+    # ONE PRODUCT PER (DIVISION, NAME), BECAUSE A SITEMAP LISTS MARKETS, NOT ONLY
+    # PRODUCTS. Mölnlycke's sitemap carries the same range once per locale:
+    # 1,662 product URLs resolving to 222 distinct names, 'Aperture Drapes'
+    # sixteen times over. The report prints the product count as a fact about the
+    # company's range, so publishing 1,662 would overstate it more than sevenfold
+    # — the same failure as the landing pages that inflated Getinge to 1,333,
+    # arriving by a different road. Counting a genuine same-name pair once is an
+    # undercount of one; counting locales is an overcount of everything.
+    deduped, seen_np = [], set()
+    for p in plist:
+        k = (p["division"], p["n"].lower())
+        if k in seen_np:
+            continue
+        seen_np.add(k)
+        deduped.append(p)
+    duplicate_urls = len(plist) - len(deduped)
+    if duplicate_urls:
+        print("      dropped %d duplicate product URL(s) resolving to a name already captured "
+              "in the same division (locale or market variants)" % duplicate_urls, flush=True)
+        plist = deduped
+        for d in list(divisions):
+            divisions[d] = sum(1 for p in plist if p["division"] == d)
+            if not divisions[d]:
+                del divisions[d]
+
     if len(plist) < MIN_PRODUCTS:
         return None, "sitemap URLs did not resolve into product names"
     # Everything in one bucket means the URL structure carried NO division
@@ -341,6 +401,7 @@ def sitemap_products(domain, deadline=None):
         "source": "%s XML sitemap, read this run" % domain,
         "structureFrom": "sitemap",
         "landingPagesDropped": landing,
+        "duplicateUrlsDropped": duplicate_urls,
         "captureCaveat": ("Names are derived from the last segment of each product URL, not read "
                           "from a product record, so they carry no category and read as title-cased "
                           "slugs. %d category landing page(s) were dropped by the prefix test — a "
@@ -369,7 +430,9 @@ def crawl(domain):
     try:
         raw, why = wp_products(domain, deadline=started + SITE_BUDGET_S)
         if raw:
-            return shape_from_wp(raw, domain), None
+            shaped, why = shape_from_wp(raw, domain)
+            if shaped:
+                return shaped, None
     except urllib.error.HTTPError as e:
         why = "the site's WordPress API returned HTTP %d" % e.code
     except Exception as e:
