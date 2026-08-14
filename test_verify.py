@@ -990,6 +990,215 @@ def company_report_noop_case():
     return 0
 
 
+# ==========================================================================
+# THE AWARD INDEX — a statutory notice attached to a NAMED company
+# ==========================================================================
+# scripts/refresh_awards.py is the first thing in this repo that says "this
+# company won this contract". That is the 24/07/2026 failure with different
+# nouns: the notice names a legal entity, the seed holds a trading name, and a
+# matching layer stands between them. Every case below is a way that layer, or
+# the file it writes, could put a real contract against the wrong real company
+# — or put an absence in front of a member as though it were a fact about the
+# company rather than about our index.
+#
+# Driven directly, like the Company Report cases: the check takes its three
+# inputs as arguments precisely so a test does not have to write over live data
+# to exercise it. The fixtures are hermetic — their own two-company seed — so a
+# seed edit cannot quietly turn a case green.
+
+CA_SEED = {"suppliers": [
+    {"name": "Testco Medical", "aliases": ["Testco Medical", "TESTCO MEDICAL UK LIMITED"]},
+    {"name": "Other Medical", "aliases": ["Other Medical"]},
+]}
+
+
+def ca_today(offset=0):
+    return (datetime.date.today() + datetime.timedelta(days=offset)).isoformat()
+
+
+def ca_row(**over):
+    row = {
+        "noticeSupplierName": "TESTCO MEDICAL UK LIMITED",
+        "title": "Orthopaedic power tools",
+        "buyer": "A Trust",
+        "date": ca_today(-3),
+        "url": "https://www.find-tender.service.gov.uk/Notice/077803-2026",
+        "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+        "source": "Find a Tender",
+        "section": "tender-awards",
+        "cpv": "33100000",
+        "valueAmount": 94491.0,
+        "valueCurrency": "GBP",
+        "periodStart": None,
+        "periodEnd": None,
+        "company": "Testco Medical",
+        "matchedOn": "recorded alias",
+    }
+    row.update(over)
+    return row
+
+
+def ca_doc(rows=None, **over):
+    """A file that passes everything, so each case changes exactly one thing."""
+    import importlib
+    sys.path.insert(0, "scripts")
+    cm = importlib.import_module("company_match")
+    rows = [ca_row()] if rows is None else rows
+    doc = {
+        "dataAsOf": "14/08/2026",
+        "generated": ca_today(-1),
+        "source": "Find a Tender and Contracts Finder award-stage OCDS notices, OGL v3",
+        "sectionRule": "Above threshold is a tender award; below threshold is a contract award.",
+        "filterRule": "Headline CPV division 33, or a device term in the title.",
+        "matchRule": cm.RULE,
+        "coverage": {"complete": True, "window": {"from": ca_today(-8), "to": ca_today()},
+                     "note": "Awards indexed over the windows listed."},
+        "counts": {"companies": 1, "awardRows": len(rows), "unmatched": 0, "ambiguous": 0,
+                   "rowsHeld": len(rows)},
+        "companies": {"Testco Medical": rows},
+        "unmatched": [], "ambiguous": [],
+        "_rows": rows,
+        "windows": [],
+    }
+    doc.update(over)
+    return doc
+
+
+# A source that renders the awards and states the absence honestly.
+CA_GOOD_JS = """
+var AWARDS = BASE + 'data/company-awards.json' + CB;
+function awardSection(title, rows, ctx){
+  if(!rows.length){ return sec(title, gap('Not captured for this company yet. The index '
+    + 'has been walked, and nothing in it names this company.')); }
+  return sec(title, rows.map(awardRow).join(''));
+}
+"""
+
+CA_CASES = []
+
+
+def ca(name, doc, js, want):
+    CA_CASES.append((name, doc, js, want))
+
+
+ca("an award attached to a company no supplier record exists for",
+   ca_doc(**{"companies": {"Nonesuch Surgical": [ca_row(company="Nonesuch Surgical")]}}),
+   "", "does not resolve to any supplier record")
+ca("an award attached to a company the match rule does not reach",
+   ca_doc(**{"companies": {"Other Medical": [ca_row(company="Other Medical")]}}),
+   "", "disagree")
+ca("an award published with no notice link",
+   ca_doc([ca_row(url="")]), "", "carries no notice URL")
+ca("an award with no usable date",
+   ca_doc([ca_row(date="")]), "", "no usable date")
+ca("an award dated after today",
+   ca_doc([ca_row(date=ca_today(30))]), "", "has not happened yet")
+ca("a contract value of 0, which the page would render as a free contract",
+   ca_doc([ca_row(valueAmount=0)]), "", "parse bug")
+ca("a contract value carried as a string",
+   ca_doc([ca_row(valueAmount="94,491")]), "", "not a number")
+ca("a Contracts Finder notice filed as an above-threshold tender award",
+   ca_doc([ca_row(source="Contracts Finder", section="tender-awards")]),
+   "", "the other feed's")
+ca("an award filed under a section that does not exist",
+   ca_doc([ca_row(section="framework-awards")]), "", "not one of")
+ca("a header count that disagrees with the rows beneath it",
+   ca_doc(**{"counts": {"companies": 1, "awardRows": 9, "unmatched": 0, "ambiguous": 0}}),
+   "", "but holds")
+ca("a match rule edited in the file, away from the rule that ran",
+   ca_doc(matchRule="names are matched on a close resemblance"),
+   "", "not the rule")
+ca("a file generated tomorrow",
+   ca_doc(generated=ca_today(5)), "", "has not happened yet")
+ca("an incomplete walk that does not admit it is incomplete",
+   ca_doc(coverage={"complete": False, "window": {}, "note": "Awards indexed."}),
+   "", "does not say so")
+ca("a page telling a member the company has no awards",
+   None,
+   "var A = BASE + 'data/company-awards.json';"
+   "\nh += sec('Tender awards', gap('No awards for this company.'));",
+   "absolute absence")
+
+CA_QUIET = [
+    ("a good file and a good source", ca_doc(), CA_GOOD_JS),
+    # An award naming a company this repo does not hold is the NORMAL case —
+    # most UK medtech suppliers are not Hub seed companies. It belongs in the
+    # quarantine and must not fail anything.
+    ("a supplier the seed does not hold, left quarantined",
+     ca_doc(**{"unmatched": [ca_row(noticeSupplierName="Pfizer Ltd", company=None,
+                                    reason="no Hub company matches")],
+               "counts": {"companies": 1, "awardRows": 1, "unmatched": 1, "ambiguous": 0}}),
+     CA_GOOD_JS),
+    ("the honest empty state, which must never read as an absolute", None, CA_GOOD_JS),
+    # The words "no awards" inside a COMMENT explaining the rule must not trip
+    # it — a check that fails on the comment documenting the rule is a check
+    # somebody deletes the comment to satisfy.
+    ("a comment explaining the absolute-absence rule", None,
+     "var A = BASE + 'data/company-awards.json';"
+     "\n// never say the company has no awards — say the index has not captured any\n"),
+]
+
+
+def company_awards_cases():
+    """The award gate, driven directly."""
+    import importlib
+    v = importlib.import_module("verify")
+    failures = 0
+
+    for name, doc, js, want in CA_CASES:
+        v.fails[:] = []
+        v.warns[:] = []
+        v.check_company_awards(doc, CA_SEED, js)
+        text = " ".join(m for _, m in v.fails)
+        if not v.fails:
+            print("HOLE  %s — the gate PASSED this. It should not." % name); failures += 1
+        elif want.lower() not in text.lower():
+            print("WEAK  %s — rejected, but not for the expected reason (%r missing)"
+                  % (name, want)); failures += 1
+        else:
+            print("ok    %s" % name)
+
+    for name, doc, js in CA_QUIET:
+        v.fails[:] = []
+        v.warns[:] = []
+        v.check_company_awards(doc, CA_SEED, js)
+        if v.fails:
+            print("HOLE  %s — FALSE FAIL: %s"
+                  % (name, " ".join(m for _, m in v.fails)[:220])); failures += 1
+        else:
+            print("ok    %s — no false failure" % name)
+
+    # The stale-quarantine WARNING. A seed that has since gained the alias means
+    # real awards are missing from the page — a coverage miss, not a false
+    # claim, so it must warn and must NOT block the unattended workflows.
+    v.fails[:] = []
+    v.warns[:] = []
+    stale = ca_doc(**{"unmatched": [ca_row(company=None, reason="no Hub company matches")],
+                      "counts": {"companies": 1, "awardRows": 1, "unmatched": 1,
+                                 "ambiguous": 0}})
+    v.check_company_awards(stale, CA_SEED, CA_GOOD_JS)
+    warned = "rematch" in " ".join(m for _, m in v.warns).lower()
+    if v.fails or not warned:
+        print("HOLE  a quarantined award that now resolves is not reported as a stale "
+              "quarantine (fails=%d, warned=%s)" % (len(v.fails), warned)); failures += 1
+    else:
+        print("ok    a quarantined award that now resolves warns, and does not block")
+
+    # And the no-op. A check that nags before its data exists is a check people
+    # mute — the same rule as the Company Report's no-op case.
+    v.fails[:] = []
+    v.warns[:] = []
+    v.check_company_awards(None, CA_SEED, "")
+    if v.fails or v.warns:
+        print("HOLE  the award gate is not silent when neither half exists"); failures += 1
+    else:
+        print("ok    the award gate is a clean no-op while its files do not exist")
+
+    v.fails[:] = []
+    v.warns[:] = []
+    return failures
+
+
 def link_check_cases():
     """The source-link check WARNS rather than fails, so it cannot be driven
     through gate() like the cases above — a warning still exits 0, by design.
@@ -1311,6 +1520,7 @@ def main():
     failures += link_check_cases()
     failures += company_report_cases()
     failures += company_report_noop_case()
+    failures += company_awards_cases()
     failures += concurrency_cases()
 
     rc, out = gate()
@@ -1319,9 +1529,10 @@ def main():
         failures += 1
     print()
     # The tally is itself a count in prose that has to match the rows: 3 link
-    # cases + 2 concurrency cases, 1 Company Report no-op, and the Company
-    # Report cases counted rather than typed.
-    extras = 5 + 1 + len(CR_CASES) + len(CR_QUIET)
+    # cases + 2 concurrency cases, 1 Company Report no-op, plus the award
+    # gate's own stale-quarantine and no-op cases — and every case list
+    # counted rather than typed.
+    extras = 5 + 1 + 2 + len(CR_CASES) + len(CR_QUIET) + len(CA_CASES) + len(CA_QUIET)
     print("GATE HOLDS — %d case(s)." % (len(CASES) + extras) if not failures
           else "GATE HAS %d HOLE(S) — fix verify.py before trusting it." % failures)
     return 1 if failures else 0

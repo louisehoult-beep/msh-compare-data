@@ -254,6 +254,49 @@ blank cell, never an inferred figure.**
 
 ---
 
+## Awards — matching a legal entity to a Hub company (14/08/2026)
+
+`scripts/refresh_awards.py` writes `data/company-awards.json` from the two statutory
+OCDS award feeds. Attaching one of those notices to a named company is the same class
+of claim as a Companies House match, and it is governed the same way.
+
+**The rule is exact-only, and it lives in `scripts/company_match.py`.** A name on a
+notice resolves to a Hub company only where its normalised form is *exactly* a
+normalised form of that company's own name or one of its recorded aliases.
+Normalisation lower-cases, turns `&` into `and`, drops punctuation, and strips
+trailing legal-form words (Ltd, Limited, plc, LLP, Inc, GmbH, BV, A/S, AB, Oy, Pty)
+and trailing territory words (UK, GB, England, Ireland, Europe, EMEA). **Nothing
+else is stripped**: "healthcare", "medical", "group", "holdings" and "international"
+stay, because removing them starts matching genuinely different companies to each
+other — Prism Healthcare and Prism Medical are two businesses.
+
+There is **no fuzzy, substring, initial or edit-distance matching**, and there never
+will be. Those are how homonyms merge, and a merged homonym publishes a false, dated,
+sourced-looking statement about a real business.
+
+**Three outcomes, and only three.** `confirmed` — exactly one company matched, and
+it publishes. `ambiguous` — two or more different companies matched the same name,
+so it identifies none of them. `unmatched` — nothing matched. The last two are
+**quarantined in the file, attached to no company**, and are settled by a human
+adding the alias to that company's record in `data/supplier-seed.json` (never the
+overlay — the nightly rebuild regenerates the index from the seed, so an alias
+written anywhere else is thrown away). Loosening the rule to clear the quarantine is
+not a fix; it is the 24/07/2026 error with a different noun in it.
+
+**`verify.py` re-derives every published match from the same module** and fails the
+push on any disagreement — the same technique `check_tags()` uses for the contact
+index. It also enforces: every company named resolves to a supplier record; every
+award carries its notice link and a date that has happened; a value is a number read
+from the notice or `null`, never `0`; the header counts equal the rows; an incomplete
+feed walk says it is incomplete; and the page may say the awards are **not captured**
+— a statement about this index — but never that a company **has** no awards, which
+is a statement about the company that neither feed supports.
+
+What this cannot enforce, said plainly: whether an alias in the seed is *correct*. If
+somebody records "Acme Surgical" against the wrong Acme, the writer and the gate
+resolve it identically and agree. The defence against that is the alias review queue
+and a human, not a check.
+
 ## Panels, and which stage builds them
 
 | Panel | Source | Derived? | Stage |
@@ -269,6 +312,7 @@ blank cell, never an inferred figure.**
 | Accounts category + turnover where filed | Companies House | No | 3 |
 | Notable people (officers, dated changes) | Companies House officers register | No | 3 |
 | Field filing profile | co-listing × accounts filings | **Yes** | 4 |
+| Tender and contract awards | `company-awards` (OCDS notices) | No | 1 |
 | Interview pack (print/export) | composed of the above | No | 5 |
 
 Stage 5 adds no new claims. It re-presents panels 1–4 for a candidate walking into an

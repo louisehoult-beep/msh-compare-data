@@ -15,6 +15,12 @@ name: Company intelligence (frameworks + Companies House + accounts)
 #                                    officers for every confirmed supplier, then
 #                                    turnover and headcount read out of the tagged
 #                                    (iXBRL) filed accounts.
+#  - data/company-awards.json      — tender and contract awards from the two statutory
+#                                    OCDS feeds, matched to Hub companies under the
+#                                    exact-only rule in scripts/company_match.py. This
+#                                    is the report's sections 13-14; before 14/08/2026
+#                                    they had no data source at all and award data
+#                                    existed only as rows typed onto a WordPress page.
 #
 # ⚠️ REQUIRES the repository secret COMPANIES_HOUSE_KEY (REST key, live data, free
 # from developer.company-information.service.gov.uk). WITHOUT IT the Companies House
@@ -60,6 +66,13 @@ jobs:
       - name: Backfill sourced frameworks into the index and seed
         run: python3 scripts/backfill_index_frameworks.py
 
+      # Needs no API key either: both award feeds are public. 8 days against a
+      # Monday job is a deliberate one-day overlap, so a notice published while
+      # the job is mid-run is picked up the following week rather than lost —
+      # rows de-dup on the notice link plus the supplier named on it.
+      - name: Tender and contract awards, matched to Hub companies
+        run: python3 scripts/refresh_awards.py --days 8
+
       - name: Companies House — profiles, accounts categories and officers
         if: ${{ env.COMPANIES_HOUSE_KEY != '' }}
         run: python3 scripts/refresh_companies_house.py
@@ -93,8 +106,9 @@ jobs:
           git config user.name "hub-bot"
           git config user.email "contact@elevateandthrive.uk"
           git add data/frameworks.json data/company-financials.json \
+                  data/company-awards.json \
                   data/supplier-index.json data/supplier-seed.json
-          git diff --cached --quiet || git commit -m "company intelligence: frameworks + Companies House $(date -u +'%F')"
+          git diff --cached --quiet || git commit -m "company intelligence: frameworks + awards + Companies House $(date -u +'%F')"
           # Same retry-and-re-gate pattern as weekly-refresh.yml. A rebase COMBINES
           # this run's data with another writer's, and that combination has not been
           # gated — so the gate runs again. Root rule 13: if the gate fails the data

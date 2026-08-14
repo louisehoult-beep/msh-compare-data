@@ -50,6 +50,12 @@ WHAT IT CHECKS
                  prose, no figure on a probable name match, no band without the
                  dated threshold it was assigned under, no phantom company.
                  A no-op until the feature's files exist.
+10. AWARDS       every award attached to a named company is re-matched from the
+                 same rule the writer used, carries its notice link and date,
+                 and never a value of 0. The quarantine may hold nothing that
+                 is publishable, the counts must equal the rows, an incomplete
+                 walk must say so, and the page may never say a company HAS no
+                 awards — only that this index has not captured any.
 
 Usage
     python3 verify.py            # full run, including the live privacy check
@@ -1900,6 +1906,214 @@ def check_company_report(financials, report_js):
                                % (len(probable), ", ".join(repr(p) for p in probable[:3])))
 
 
+# --------------------------------------------------------------------------
+# 8b. COMPANY AWARDS — a statutory notice attached to a NAMED company
+# --------------------------------------------------------------------------
+# Added 14/08/2026 with scripts/refresh_awards.py, which is the first thing in
+# this repo to say "this company won this contract". That sentence is the
+# 24/07/2026 failure mode with different nouns in it: the notice names a legal
+# entity ("HILL-ROM LIMITED"), the seed holds a trading name ("Hill-Rom"), and
+# a matching layer stands between them. A wrong match publishes a false, dated,
+# sourced-looking claim about a real business under the Hub's name.
+#
+# So this gate does not take the writer's word for any match. It re-derives
+# every published one from scripts/company_match.py — the SAME module the
+# writer used — and fails on any disagreement. That is the technique
+# check_tags() already uses for the contact index: the two can then only
+# diverge because of a bug, and this is what notices.
+#
+# WHAT THIS CANNOT ENFORCE, SAID PLAINLY:
+#   * Whether the alias in the seed is CORRECT. If somebody records "Acme
+#     Surgical" as an alias of the wrong Acme, both the writer and this gate
+#     resolve it the same way and agree. The defence against that is the alias
+#     review queue and a human, not this file.
+#   * Whether the CPV filter caught every medtech award. Coverage is measured
+#     and declared in the file; it is not provable from here.
+AWARD_SECTIONS = {
+    # section key -> the feed that is allowed to produce it. Find a Tender is
+    # above-threshold, Contracts Finder below. The split is a fact about which
+    # statutory service published the notice, not a judgement.
+    "tender-awards": "Find a Tender",
+    "contract-awards": "Contracts Finder",
+}
+
+# Absolute-absence wording. The report may say an award is NOT CAPTURED — a
+# statement about this index. It may never say the company HAS no awards, which
+# is a statement about the company that neither feed supports: both cover only
+# what was published in the windows walked, and only where the buyer coded it
+# to CPV 33.
+AWARD_ABSOLUTE = re.compile(
+    r"no (?:tender |contract )?awards\b|has not won|never won|holds no (?:tender |contract )?awards",
+    re.I)
+
+
+def check_company_awards(doc, seed, report_js):
+    """data/company-awards.json, and the source that renders it."""
+    if doc is None and not (report_js or "").strip():
+        return                              # feature not built yet — nothing to gate
+
+    if doc is not None:
+        try:
+            sys.path.insert(0, "scripts")
+            import company_match
+        except Exception as exc:
+            FAIL("company-awards", "cannot import scripts/company_match.py (%s), so no "
+                                   "published match can be re-derived and nothing here is "
+                                   "checked. Do not push." % exc)
+            return
+
+        seed_names = {s.get("name") for s in ((seed or {}).get("suppliers") or [])
+                      if s.get("name")}
+        index = company_match.build_index(seed or {"suppliers": []})
+
+        # ---- the rule the file publishes must be the rule that ran ---------
+        # A reader judges a match by the rule printed beside it. If the printed
+        # rule and the code drift apart, every match on the page is being
+        # judged against a rule that did not produce it.
+        if doc.get("matchRule") != company_match.RULE:
+            FAIL("company-awards", "the matchRule printed in data/company-awards.json is not the "
+                                   "rule scripts/company_match.py actually applies. A reader "
+                                   "judges every match by that printed rule. Re-run "
+                                   "scripts/refresh_awards.py rather than editing the string.")
+        for field in ("sectionRule", "filterRule", "source"):
+            if not str(doc.get(field) or "").strip():
+                FAIL("company-awards", "data/company-awards.json carries no %s. Every derived "
+                                       "or filtered claim states the rule it was made under "
+                                       "(root rule 14)." % field)
+
+        # ---- dates ---------------------------------------------------------
+        gen = as_date(doc.get("generated"))
+        if gen and gen > today():
+            FAIL("company-awards", "data/company-awards.json says it was generated on %s, which "
+                                   "has not happened yet." % doc.get("generated"))
+
+        companies = doc.get("companies") or {}
+        rows_seen = 0
+        for company, rows in sorted(companies.items()):
+            # ---- INVARIANT: every company named resolves to a record --------
+            # Same invariant as the Company Report's derived panels. A name the
+            # Hub cannot open a page for is a claim about a company this repo
+            # does not hold.
+            if seed_names and company not in seed_names:
+                FAIL("company-awards", "data/company-awards.json attaches award(s) to %r, which "
+                                       "does not resolve to any supplier record in "
+                                       "data/supplier-seed.json. Every company named on the Hub "
+                                       "must open to a record; a name that does not is a bug, "
+                                       "not a near-miss." % company)
+            for row in (rows or []):
+                rows_seen += 1
+                supplier = row.get("noticeSupplierName") or ""
+
+                # ---- INVARIANT: re-derive the match, independently ----------
+                got, state, _ = company_match.resolve(supplier, index)
+                if state != "confirmed" or got != company:
+                    FAIL("company-awards", "the award notice naming %r is published against %r, "
+                                           "but re-resolving that name against the seed gives "
+                                           "%s (%s). The published file and the matching rule "
+                                           "disagree, so one of them is wrong and a named "
+                                           "company is carrying somebody else's contract. "
+                                           "Re-run: python3 scripts/refresh_awards.py --rematch"
+                                           % (supplier, company,
+                                              repr(got) if got else "no company", state))
+
+                # ---- INVARIANT: a fact whose link cannot be produced is not
+                # published (the page standard, §4).
+                url = str(row.get("url") or "")
+                if not url.startswith("http"):
+                    FAIL("company-awards", "an award published against %r carries no notice URL "
+                                           "(%r). A contract award is a statutory notice; "
+                                           "without the link the reader cannot check it and it "
+                                           "does not publish." % (company, row.get("title")))
+                if not as_date(row.get("date")):
+                    FAIL("company-awards", "an award published against %r carries no usable date "
+                                           "(%r). Every figure and event carries its date."
+                                           % (company, row.get("date")))
+                elif as_date(row.get("date")) > today():
+                    FAIL("company-awards", "an award published against %r is dated %s, which has "
+                                           "not happened yet."
+                                           % (company, row.get("date")))
+
+                # ---- INVARIANT: 0 is a parse bug, never a fact --------------
+                amount = row.get("valueAmount")
+                if amount is not None:
+                    if isinstance(amount, bool) or not isinstance(amount, (int, float)):
+                        FAIL("company-awards", "an award published against %r carries a value "
+                                               "that is not a number (%r). A value is read from "
+                                               "the notice or it is null — never coerced."
+                                               % (company, amount))
+                    elif amount == 0:
+                        FAIL("company-awards", "an award published against %r carries a value of "
+                                               "0. A notice that states no value gives null, "
+                                               "which the page renders as 'value not stated'. "
+                                               "A 0 here is a parse bug, never a free contract."
+                                               % company)
+
+                section = row.get("section")
+                if section not in AWARD_SECTIONS:
+                    FAIL("company-awards", "an award published against %r is filed under section "
+                                           "%r, which is not one of %s."
+                                           % (company, section, sorted(AWARD_SECTIONS)))
+                elif row.get("source") and row["source"] != AWARD_SECTIONS[section]:
+                    FAIL("company-awards", "an award from %r is filed as %r, but that section is "
+                                           "the other feed's. Above-threshold notices are tender "
+                                           "awards and below-threshold ones are contract awards; "
+                                           "the split is the publishing service, not a judgement."
+                                           % (row["source"], section))
+
+        # ---- quarantine ----------------------------------------------------
+        # Nothing in the quarantine may be publishable. If it is, the file is
+        # stale against a seed that has since gained the alias — which is a
+        # coverage miss, not a false claim, so it WARNS.
+        stale = []
+        for row in (doc.get("unmatched") or []) + (doc.get("ambiguous") or []):
+            got, state, _ = company_match.resolve(row.get("noticeSupplierName") or "", index)
+            if state == "confirmed":
+                stale.append((row.get("noticeSupplierName"), got))
+        if stale:
+            WARN("company-awards", "%d quarantined award(s) now resolve to a Hub company (e.g. "
+                                   "%s), so the seed has gained an alias since this file was "
+                                   "written and those awards are missing from the page. Run: "
+                                   "python3 scripts/refresh_awards.py --rematch"
+                                   % (len(stale), ", ".join("%r -> %r" % s for s in stale[:3])))
+
+        # ---- counts must equal the rows (prose-vs-data drift) --------------
+        counts = doc.get("counts") or {}
+        for label, stated, actual in (
+                ("companies", counts.get("companies"), len(companies)),
+                ("awardRows", counts.get("awardRows"), rows_seen),
+                ("unmatched", counts.get("unmatched"), len(doc.get("unmatched") or [])),
+                ("ambiguous", counts.get("ambiguous"), len(doc.get("ambiguous") or []))):
+            if stated is not None and stated != actual:
+                FAIL("company-awards", "data/company-awards.json states %s = %s but holds %d. "
+                                       "The same drift class as a count typed into prose: the "
+                                       "header is read as the summary of the rows."
+                                       % (label, stated, actual))
+
+        # ---- an incomplete walk must SAY it is incomplete -------------------
+        cov = doc.get("coverage") or {}
+        if cov.get("complete") is False and "INCOMPLETE" not in str(cov.get("note") or "").upper():
+            FAIL("company-awards", "the award walk did not cover its window, and coverage.note "
+                                   "does not say so. A short list that reads as complete is how "
+                                   "a member concludes a company holds no awards.")
+
+    # ---- source invariant ---------------------------------------------------
+    clean, spans = _js_scan(report_js or "")
+    if clean.strip() and "company-awards.json" in clean:
+        offending = []
+        for a, b in spans:
+            for m in AWARD_ABSOLUTE.finditer(clean[a:b]):
+                line = _line_at(clean, a + m.start()).strip()
+                if line not in offending:
+                    offending.append(line)
+        for line in offending[:5]:
+            FAIL("company-awards", "app/company-report.js renders an absolute absence of awards: "
+                                   "%r. Both feeds cover only the windows walked, and only where "
+                                   "the buyer coded the notice to CPV 33 — so the page may say "
+                                   "the awards are NOT CAPTURED, which is about this index, and "
+                                   "never that the company has none, which is about the company."
+                                   % line[:140])
+
+
 def check_no_clusters_on_tools(comptab_js):
     """Standing clusters must never render on the Med Sales Tools page.
 
@@ -2387,6 +2601,9 @@ def main():
             WARN("company-report", "could not read app/company-report.js (%s) — the percentage "
                                    "and typed-count invariants were not checked." % exc)
     check_company_report(load("company-financials.json"), report_js)
+    # The award index. Every published match is re-derived from the same module
+    # the writer used, so the file and the rule cannot drift apart unnoticed.
+    check_company_awards(load("company-awards.json"), load("supplier-seed.json"), report_js)
 
     check_search_index(load(SEARCH_INDEX))
 

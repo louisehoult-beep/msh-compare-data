@@ -39,6 +39,10 @@
   var FIN = BASE + 'data/company-financials.json' + CB;
   var NHSSC = BASE + 'data/nhssc-cache.json' + CB;
   var FWDATA = BASE + 'data/frameworks.json' + CB;
+  /* Eighth fetch. Tender and contract awards, matched to Hub companies by
+     scripts/refresh_awards.py. Optional like the six before it: if it does not
+     load, the award panels say so rather than reading as an empty company. */
+  var AWARDS = BASE + 'data/company-awards.json' + CB;
 
   /* Same palette constants as app/supplier-search.js — one house style. */
   var G = '#a8842c', INK = '#1d2733', DIM = '#75808d', LINE = '#e6e0d4',
@@ -1259,6 +1263,102 @@
     return sec('What reps should watch', b);
   }
 
+  /* ---------------------------------------------------------------------
+     ROUTES TO MARKET — tender and contract awards (page standard §13–14),
+     and the honest empty states for §15–16, which have no source at all.
+
+     READ FROM SOURCE, NOT DERIVED. Every row is one supplier named on one
+     statutory award notice, fetched by scripts/refresh_awards.py and matched
+     to this company by scripts/company_match.py under an exact-only rule that
+     verify.py re-derives before anything publishes. Nothing here is inferred
+     from a product range, a speciality or a framework.
+
+     THE EMPTY STATE IS THE POINT. Both feeds carry only what was published in
+     the windows walked, and only where the buyer coded the notice to CPV 33.
+     So an absence is a statement about THIS INDEX and is written as one. The
+     page must never say a company has no awards — that is a claim about the
+     company that neither feed supports, and verify.py fails the push on it.
+     --------------------------------------------------------------------- */
+  /* The feeds are ISO; the Hub writes dates the way its members do. */
+  function uk(iso) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(iso || ''));
+    return m ? m[3] + '/' + m[2] + '/' + m[1] : '';
+  }
+
+  function awardsFor(s, ctx) {
+    var doc = ctx.awards;
+    if (!doc || !doc.companies) return null;
+    return doc.companies[s.name] || [];
+  }
+
+  function awardRow(a) {
+    var value = (typeof a.valueAmount === 'number')
+      ? '<span style="color:' + GREEN + ';font-weight:700;">' +
+        esc((a.valueCurrency === 'GBP' ? '£' : (a.valueCurrency ? a.valueCurrency + ' ' : '')) +
+            Math.round(a.valueAmount).toLocaleString('en-GB')) + '</span>'
+      /* Null is "the notice stated no value". It is never rendered as 0. */
+      : '<span style="color:' + DIM + ';">value not stated on the notice</span>';
+    var ps = uk(a.periodStart), pe = uk(a.periodEnd);
+    /* A notice that gives the same day for both ends states a date, not a
+       term. Printing "06/08/2026 to 06/08/2026" reads as a rendering bug. */
+    var period = (ps && pe) ? ' &middot; ' + (ps === pe ? esc(ps) : esc(ps) + ' to ' + esc(pe)) : '';
+    return '<div style="padding:9px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;line-height:1.55;">' +
+      '<b>' + esc(a.title) + '</b>' +
+      '<br><span style="font-size:12.5px;color:#37485a;">' + esc(a.buyer || 'buyer not named') +
+      ' &middot; ' + esc(uk(a.date) || 'date not stated') + ' &middot; ' + value + period + '</span>' +
+      '<br><span style="font-size:12.5px;color:' + DIM + ';">named on the notice as &ldquo;' +
+      esc(a.noticeSupplierName) + '&rdquo; &middot; ' +
+      '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">' +
+      esc(a.source) + ' notice &#8599;</a>' +
+      (a.hubUrl ? ' &middot; <a href="' + esc(a.hubUrl) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">Award Tracker &#8599;</a>' : '') +
+      '</span></div>';
+  }
+
+  function awardSection(title, rows, ctx, blurb) {
+    if (!ctx.awards) {
+      return sec(title, gap('Not captured for this company yet — the award index has not loaded, so this panel has nothing to report either way.'));
+    }
+    if (!rows.length) {
+      var cov = ctx.awards.coverage || {};
+      var from = (cov.window && cov.window.from) || (ctx.awards.windows && ctx.awards.windows.length ? ctx.awards.windows[0].from : '');
+      return sec(title, gap('Not captured for this company yet. ' + esc(blurb) +
+        ' The index has been walked' + (from ? ' from ' + esc(uk(from) || from) : '') +
+        ', and nothing in it names this company. Both feeds carry only the windows walked, and only notices the buyer classified under CPV division 33 — so this says what the index holds, not what the company has won.'));
+    }
+    return sec(title, '<div style="font-size:12px;color:' + DIM + ';margin:0 0 8px;">' +
+      rows.length + ' award(s) in the index name this company.</div>' +
+      rows.map(awardRow).join(''));
+  }
+
+  function panelAwards(sub, ctx) {
+    var all = awardsFor(sub, ctx) || [];
+    var tender = all.filter(function (a) { return a.section === 'tender-awards'; });
+    var contract = all.filter(function (a) { return a.section === 'contract-awards'; });
+    var h = '';
+
+    if (ctx.awards && all.length) {
+      h += rule('Each award below is a single supplier named on a single statutory award notice, read from ' +
+        esc(ctx.awards.source || 'the award feeds') + '. ' +
+        esc(ctx.awards.sectionRule || '') +
+        '<br><br><b>How this company was identified:</b> ' + esc(ctx.awards.matchRule || '') +
+        (ctx.awards.coverage && ctx.awards.coverage.complete === false
+          ? '<br><br><b>Coverage is incomplete.</b> ' + esc(ctx.awards.coverage.note || '')
+          : ''));
+    }
+
+    h += awardSection('Tender awards', tender, ctx,
+      'Above-threshold procurements are published on Find a Tender.');
+    h += awardSection('Contract awards', contract, ctx,
+      'Below-threshold procurements are published on Contracts Finder.');
+
+    /* §15–16 of the page standard. No source exists for either, and a dropped
+       heading would leave a member unable to tell "we hold nothing" from
+       "there is nothing". So they render, labelled. */
+    h += sec('Non-NHSSC sales and contracts', gap('Not captured for this company yet. Sales made outside NHS Supply Chain and outside the statutory notice thresholds are not published anywhere this Hub can read; there is no feed to capture them from, and nothing here is inferred.'));
+    h += sec('CQC-related contracts', gap('Not captured for this company yet. The Care Quality Commission publishes regulated providers, not their suppliers, so a supply relationship into a regulated care setting cannot be read from it.'));
+    return h;
+  }
+
   function composeSections(sub, ctx) {
     var d = deepFor(sub);
     var h = '';
@@ -1283,6 +1383,7 @@
     /* -- 3 · Specialities / divisions as cards -------------------------- */
     h += divisionCards(sub, ctx);
     h += frameworks(sub, ctx);
+    h += panelAwards(sub, ctx);
     h += repsWatch(sub);
 
     /* -- 4 · Competitors ------------------------------------------------ */
@@ -1434,7 +1535,7 @@
       '</div>';
   }
 
-  function boot(index, seed, specMap, prodFile, fin, cache, fwDoc) {
+  function boot(index, seed, specMap, prodFile, fin, cache, fwDoc, awards) {
     var all = mergeSuppliers(index, seed);
     var byName = {};
     all.forEach(function (s) { byName[s.name] = s; });
@@ -1461,6 +1562,7 @@
       cache: cache || null,
       fwDoc: fwDoc || null,
       fwByKey: fwIndex(fwDoc),
+      awards: awards || null,
       /* The briefs print legal names ("B. Braun Medical Limited"); this Hub
          holds trading names ("B. Braun Medical"). Matching those by exact
          string made every confirmed company on a framework look unresolved,
@@ -1598,7 +1700,8 @@
      copies of the data without touching the network. */
   if (window.MSH_COMPANY_REPORT_DATA) {
     var P = window.MSH_COMPANY_REPORT_DATA;
-    boot(P.index, P.seed, P.specMap, P.products, P.financials, P.nhssc, P.frameworks);
+    boot(P.index, P.seed, P.specMap, P.products, P.financials, P.nhssc, P.frameworks,
+         P.awards);
     return;
   }
 
@@ -1610,8 +1713,9 @@
     fetch(PRODUCTS, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; }),
     fetch(FIN, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; }),
     fetch(NHSSC, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; }),
-    fetch(FWDATA, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; })
-  ]).then(function (res) { boot(res[0], res[1], res[2], res[3], res[4], res[5], res[6]); })
+    fetch(FWDATA, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; }),
+    fetch(AWARDS, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; })
+  ]).then(function (res) { boot(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7]); })
     .catch(function () {
       MOUNT.innerHTML = '<div style="font-family:Inter,-apple-system,Segoe UI,sans-serif;color:' + DIM + ';font-size:13px;padding:12px;">The company report is loading its data — if this persists, the index feed is temporarily unreachable. Nothing is missing from the report; the report has not loaded.</div>';
     });
