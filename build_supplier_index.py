@@ -326,6 +326,14 @@ def main():
                     rec["alerts"].append({"_id": aid, "date": iss.get("d", ""), "title": iss.get("p", ""),
                         "detail": iss.get("s", ""), "use": iss.get("use", ""), "url": iss.get("url", ""),
                         "speciality": label, "autoDetected": iss.get("autoDetected", False)}); added_alerts += 1
+                # The `unsorted` bucket is a holding pen for notices the auto-detector
+                # had no term for. Its label is "Not yet sorted by speciality", which is
+                # a statement about our sorting, not a speciality the company works in.
+                # Attaching it to a supplier says something false about that supplier and
+                # fails the vocab gate, which is exactly what it did to the daily refresh
+                # on 14/08/2026 once an unsorted notice named a real company. The alert
+                # keeps the label — it describes the notice — the supplier does not.
+                if sp_key == "unsorted": continue
                 if label not in rec["specialities"]: rec["specialities"].append(label)
 
     # 3. medical awards (Contracts Finder OCDS, CPV 33*)
