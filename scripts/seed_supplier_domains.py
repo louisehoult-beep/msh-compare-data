@@ -59,6 +59,9 @@ import json
 import re
 import ssl
 import sys
+import threading
+import time
+import urllib.parse
 import urllib.error
 import urllib.request
 
@@ -146,6 +149,104 @@ def candidates(name, aliases, registered):
                     seen.add(d)
                     out.append(d)
     return out
+
+
+# ---------------------------------------------------------------------------
+# CANDIDATE SOURCE 2: search (added 14/08/2026, --search)
+#
+# Guessing "<name>.co.uk / .com / .uk" proved 25 of 252. The misses were mostly
+# not refusals — they were companies whose domain a name guess cannot reach:
+# Accora trades at accora.care, Williams Medical Supplies at wms.co.uk. Neither
+# is derivable from the company name by any rule.
+#
+# THIS CHANGES NOTHING ABOUT THE EVIDENCE BAR. Search finds CANDIDATES; a
+# candidate is still nothing until the live site publishes a registration number
+# matching this supplier's Companies House record. A search engine's first
+# result is an opinion, not proof of ownership, and it is treated as one here.
+# ---------------------------------------------------------------------------
+
+_SEARCH_LOCK = threading.Lock()
+_LAST_SEARCH = [0.0]
+SEARCH_GAP = 1.5          # seconds between searches — be a good citizen, stay unblocked
+
+
+def _polite():
+    with _SEARCH_LOCK:
+        wait = SEARCH_GAP - (time.monotonic() - _LAST_SEARCH[0])
+        if wait > 0:
+            time.sleep(wait)
+        _LAST_SEARCH[0] = time.monotonic()
+
+
+def wikidata_site(name):
+    """Wikidata's 'official website' (P856), where the company has an entry."""
+    q = urllib.parse.quote(name)
+    _, r = fetch("https://www.wikidata.org/w/api.php?action=wbsearchentities"
+                 "&search=%s&language=en&format=json&limit=3" % q)
+    if not r:
+        return []
+    try:
+        ids = [x["id"] for x in json.loads(r).get("search", [])]
+    except (ValueError, KeyError, TypeError):
+        return []
+    out = []
+    for i in ids[:2]:
+        _, d = fetch("https://www.wikidata.org/w/api.php?action=wbgetclaims"
+                     "&entity=%s&property=P856&format=json" % i)
+        if not d:
+            continue
+        try:
+            for c in json.loads(d).get("claims", {}).get("P856", []):
+                u = c["mainsnak"]["datavalue"]["value"]
+                h = re.search(r"https?://([^/]+)", u)
+                if h:
+                    out.append(h.group(1))
+        except (ValueError, KeyError, TypeError):
+            pass
+    return out
+
+
+# A scraped search engine that has started refusing returns an empty result set,
+# not an error. Left unhandled that is the worst possible failure here: every
+# supplier comes back "unproven" and the run looks like an honest negative when
+# nothing was actually looked up. DDG_STATE makes the refusal loud instead.
+DDG_STATE = {"asked": 0, "answered": 0, "blocked": False}
+
+
+def ddg_hosts(name):
+    """Hosts from a DuckDuckGo Lite search. Unreliable by nature — see DDG_STATE."""
+    _polite()
+    _, r = fetch("https://lite.duckduckgo.com/lite/?q=%s"
+                 % urllib.parse.quote('"%s" official website' % name))
+    DDG_STATE["asked"] += 1
+    hits = re.findall(r"uddg=([^&\"']+)", r or "")
+    if hits:
+        DDG_STATE["answered"] += 1
+    elif DDG_STATE["asked"] >= 5 and DDG_STATE["answered"] == 0:
+        DDG_STATE["blocked"] = True
+    return [urllib.parse.unquote(x) for x in hits]
+
+
+def searched_hosts(name, extra=()):
+    """Candidate hosts for this company, best first. CANDIDATES ONLY — the proof
+    bar is unchanged; a search result is an opinion about who owns a domain."""
+    urls = list(extra)                      # supplied by --candidates-file, best evidence first
+    hosts = [h for h in (re.search(r"https?://([^/]+)", u) for u in urls) if h]
+    hosts = [h.group(1) for h in hosts]
+    hosts += wikidata_site(name)            # a real API, licensed for reuse, never blocks
+    if not DDG_STATE["blocked"]:
+        for u in ddg_hosts(name):
+            h = re.search(r"https?://([^/]+)", u)
+            if h:
+                hosts.append(h.group(1))
+    seen, out = set(), []
+    for h in hosts:
+        h = h.lower().lstrip(".")
+        if h in seen or any(b in h for b in NEVER) or "duckduckgo" in h:
+            continue
+        seen.add(h)
+        out.append(h)
+    return out[:6]
 
 
 def fetch(url):
@@ -237,7 +338,16 @@ def prove(name, ch_number, pages, accept_name):
 def try_supplier(rec, ch_number, max_candidates):
     name = rec["name"]
     tried = []
-    for d in candidates(name, rec.get("aliases"), (ch_number or {}).get("registeredName"))[:max_candidates]:
+    guessed = candidates(name, rec.get("aliases"),
+                         (ch_number or {}).get("registeredName"))[:max_candidates]
+    # Guesses first: they cost nothing and catch the easy majority. Search only
+    # for what the guess could not reach, so a full sweep does not hammer a
+    # search engine 250 times for domains it was going to find anyway.
+    plan = [(d, "guess") for d in guessed]
+    if try_supplier.search:
+        supplied = try_supplier.supplied.get(name, [])
+        plan += [(h, "search") for h in searched_hosts(name, supplied) if h not in guessed]
+    for d, how in plan:
         for scheme in ("https://www.", "https://"):
             final, html = fetch(scheme + d)
             if not html:
@@ -258,7 +368,8 @@ def try_supplier(rec, ch_number, max_candidates):
             kind, ev, url = prove(name, (ch_number or {}).get("companyNumber"),
                                   pages, try_supplier.accept_name)
             if kind:
-                return {"name": name, "proof": kind, "domain": re.sub(r"^https?://", "", final).split("/")[0],
+                return {"name": name, "proof": kind, "foundBy": how,
+                        "domain": re.sub(r"^https?://", "", final).split("/")[0],
                         "url": url, "evidence": ev,
                         "companyNumber": (ch_number or {}).get("companyNumber"),
                         "checked": dt.date.today().isoformat()}
@@ -271,6 +382,8 @@ def try_supplier(rec, ch_number, max_candidates):
 
 
 try_supplier.accept_name = False
+try_supplier.search = False
+try_supplier.supplied = {}
 
 
 def domain_for(rec):
@@ -294,10 +407,21 @@ def main():
                     help="candidate domains to try per supplier (default 6)")
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--supplier", help="attempt one named supplier only")
+    ap.add_argument("--search", action="store_true",
+                    help="also take candidate domains from Wikidata and a web search "
+                         "(same proof bar applies — a search result is not evidence)")
+    ap.add_argument("--candidates-file",
+                    help="JSON {supplier name: [candidate urls]} from any search source. "
+                         "Still only candidates — the proof bar is unchanged.")
     ap.add_argument("--fresh", action="store_true",
                     help="ignore the banked report and re-probe every supplier")
     a = ap.parse_args()
     try_supplier.accept_name = a.accept_name
+    try_supplier.search = a.search
+    if a.candidates_file:
+        try_supplier.supplied = json.load(open(a.candidates_file, encoding="utf-8"))
+        try_supplier.search = True
+        print("  candidate urls supplied for %d supplier(s)" % len(try_supplier.supplied))
 
     seed = json.load(open(SEED, encoding="utf-8"))
     fin = json.load(open(FIN, encoding="utf-8"))["companies"]
@@ -368,11 +492,19 @@ def main():
     byreg = [r for r in proven if r["proof"] == "registration"]
     print("\nproven      : %d of %d attempted" % (len(proven), len(results)))
     print("  by registration number : %d" % len(byreg))
+    print("  found by name guess    : %d" % sum(1 for r in proven if r.get("foundBy") == "guess"))
+    print("  found by search        : %d" % sum(1 for r in proven if r.get("foundBy") == "search"))
     print("  by site title          : %d" % (len(proven) - len(byreg)))
     print("unproven    : %d (left alone — they keep their curated list)"
           % (len(results) - len(proven)))
 
     bank()
+    if DDG_STATE["blocked"] or (DDG_STATE["asked"] and not DDG_STATE["answered"]):
+        print("\n  ⚠️  SEARCH WAS UNAVAILABLE: %d search(es) asked, %d answered. DuckDuckGo "
+              "was refusing (anti-bot). The 'unproven' results above are NOT evidence that "
+              "these suppliers have no findable website — most were never looked up. Re-run "
+              "later, or supply candidates with --candidates-file."
+              % (DDG_STATE["asked"], DDG_STATE["answered"]))
     print("evidence report: %s" % REPORT)
 
     if not a.write:
