@@ -534,11 +534,43 @@ def main():
         print("\nreport only — nothing written to the seed. Re-run with --write to seed them.")
         return
 
+    # --accept-name GATES THE WRITE, NOT JUST THE PROBE.
+    # `proven` includes results BANKED BY EARLIER RUNS, replayed from the report.
+    # So without this filter, a later run with --accept-name OFF still seeded
+    # every title proof any previous run had ever banked — the flag silently
+    # stopped meaning anything the moment the report existed.
+    #
+    # Caught 14/08/2026 on a run that would have written 122 of them. The first
+    # in the list was "1 Stop Medical Supplies" -> www.1stop.com, an IT and
+    # networking reseller: scripts/verify_name_proofs.py had already REFUSED that
+    # exact domain, because a title proof is circular (the domain is guessed from
+    # the name, then "confirmed" by a title containing that name). Only 4 of 128
+    # title proofs survived second-sourcing.
+    #
+    # A wrong domain here is not a cosmetic error. crawl_supplier_site.py reads
+    # whatever domain the seed holds and publishes that site's catalogue as this
+    # supplier's product range on a paid page — another company's products under
+    # a named supplier, which is the 24/07/2026 error class exactly.
+    skipped_weak = 0
+    if not a.accept_name:
+        weak = [r for r in proven if r["proof"] != "registration"]
+        skipped_weak = len(weak)
+        proven = [r for r in proven if r["proof"] == "registration"]
+
     by_name = {s["name"]: s for s in seed["suppliers"]}
-    added = 0
+    added = duplicate = 0
     for r in proven:
         rec = by_name.get(r["name"])
         if rec is None:
+            continue
+        # The banked report replays proofs already written by an earlier run, and
+        # this loop used to append regardless — so every --write run added another
+        # "Company website" link to the same 25 suppliers. domain_for() takes the
+        # FIRST link it finds, so the duplicates were invisible in behaviour and
+        # would only ever have shown up as the file growing on each run.
+        if any(isinstance(l, dict) and l.get("label") == "Company website"
+               for l in (rec.get("links") or [])):
+            duplicate += 1
             continue
         rec.setdefault("links", []).append({
             "label": "Company website",
@@ -555,6 +587,11 @@ def main():
     with open(SEED, "w", encoding="utf-8") as f:
         json.dump(seed, f, ensure_ascii=False, separators=(",", ":"))
     print("\nseeded %d website(s) into %s" % (added, SEED))
+    if duplicate:
+        print("  %d supplier(s) already carried a website link and were left alone." % duplicate)
+    if skipped_weak:
+        print("  %d title-only proof(s) NOT written — re-run with --accept-name if you have "
+              "second-sourced them (scripts/verify_name_proofs.py)." % skipped_weak)
     print("next: python3 build_supplier_index.py, then python3 verify.py")
 
 
