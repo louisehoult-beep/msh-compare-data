@@ -72,6 +72,7 @@ REFS = {
     "suppressed-notices.json": "ETH-DB591E91D",
     "trust-contacts.json":     "ETH-D38ACEED2",
     "trust-map.json":          "ETH-D5BBB9C7A",
+    "trust-pressures.json":    "ETH-DAE43C750",
 }
 
 

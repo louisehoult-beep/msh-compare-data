@@ -13,6 +13,15 @@
   var SEED = BASE + 'data/supplier-seed.json?cb=' + Date.now();
   var SPECMAP = BASE + 'data/speciality-map.json?cb=' + Date.now();
   var PRODUCTS = BASE + 'data/supplier-products.json?cb=' + Date.now();
+  /* Every trust in the directory now gets a real profile, not a "no profile
+     yet" note with three search links. Two files already in this repo carry
+     verified, sourced facts for almost all of them and neither was being read:
+     trust-contacts.json (Find a Tender named buyers, refreshed daily) and
+     trust-pressures.json (the publishers' own RTT / CQC / Never Event / ERIC
+     figures). Both are optional — if either fails the tool degrades to what it
+     showed before rather than breaking the brief. */
+  var CONTACTS = BASE + 'data/trust-contacts.json?cb=' + Date.now();
+  var PRESSURES = BASE + 'data/trust-pressures.json?cb=' + Date.now();
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
@@ -30,11 +39,17 @@
     fetch(CFG).then(function(r){return r.json();}),
     fetch(SEED).then(function(r){return r.json();}).catch(function(){return {suppliers:[]};}),
     fetch(SPECMAP).then(function(r){return r.json();}).catch(function(){return null;}),
-    fetch(PRODUCTS).then(function(r){return r.json();}).catch(function(){return null;})
-  ]).then(function(res){ render(res[0], res[1], res[2], res[3], res[4]); })
+    fetch(PRODUCTS).then(function(r){return r.json();}).catch(function(){return null;}),
+    fetch(CONTACTS).then(function(r){return r.json();}).catch(function(){return null;}),
+    fetch(PRESSURES).then(function(r){return r.json();}).catch(function(){return null;})
+  ]).then(function(res){ render(res[0], res[1], res[2], res[3], res[4], res[5], res[6]); })
     .catch(function(){ MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;">Meeting prep is temporarily unavailable — please try again shortly.</div>'; });
 
-  function render(index, cfg, seed, specMap, prodFile){
+  function render(index, cfg, seed, specMap, prodFile, contactFile, pressureFile){
+    var CONTACT_BY_CODE = (contactFile && contactFile.trusts) || {};
+    var CONTACTS_ASOF = (contactFile && contactFile.asOf) || '';
+    var PRESS_BY_CODE = (pressureFile && pressureFile.trusts) || {};
+    var PRESS = pressureFile || null;
     /* Verified full ranges live in supplier-products.json, NOT in the seed —
        supplier-seed.json is declared human-owned and never-overwritten by
        build_supplier_index.py, and Lou's hand-written product names carry
@@ -374,6 +389,141 @@
     function liPeopleUrl(role, trust){ return 'https://www.linkedin.com/search/results/people/?keywords=' + encodeURIComponent('"' + trustShort(trust) + '" ' + roleCore(role)); }
     function liPostsUrl(role, trust){ return 'https://www.linkedin.com/search/results/content/?keywords=' + encodeURIComponent('"' + trustShort(trust) + '" ' + roleCore(role)) + '&sortBy=%22date_posted%22'; }
 
+    function num(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+    function gbp(n){
+      if (n == null || n === 0) return null;
+      if (n >= 1e6) return '£' + (n / 1e6).toFixed(n >= 1e7 ? 0 : 1) + 'm';
+      if (n >= 1e3) return '£' + Math.round(n / 1e3) + 'k';
+      return '£' + num(n);
+    }
+    function srcLink(key, text){
+      var s = PRESS && PRESS.sources && PRESS.sources[key];
+      if (!s) return '';
+      return ' <a href="' + esc(s.url) + '" target="_blank" rel="noopener" style="color:' + GOLD
+        + ';font-size:11px;font-weight:600;">' + esc(text || 'source') + ' &#8599;</a>';
+    }
+
+    /* THE TRUST'S OWN OPERATING PRESSURE — published figures, copied not derived.
+       Every line is the publisher's own number with the period it covers and a
+       link to the publisher. Nothing is ranked, scored or compared against
+       another trust: a rep needs the trust's real position to open a credible
+       conversation, and an invented league position would be exactly the kind
+       of computed claim root rule 14 makes us justify. Trusts the publishers
+       do not cover (community, mental health, ambulance, and any acute the RTT
+       return missed) get no panel at all — an honest empty state. */
+    function pressurePanel(code, sp){
+      var p = code && PRESS_BY_CODE[code];
+      if (!p) return '';
+      var per = (PRESS && PRESS.periods) || {};
+      var rows = [];
+      if (p.wl) rows.push('<strong>' + num(p.wl) + '</strong> people on the waiting list'
+        + (p.pct18 != null ? ', <strong>' + p.pct18 + '%</strong> of them within 18 weeks (the standard is 92%)' : '')
+        + (per.rtt ? ' <span style="color:#8a8778;font-size:11.5px;">RTT ' + esc(per.rtt) + '</span>' : '')
+        + srcLink('rtt', 'NHS England'));
+      if (p.w52) rows.push('<strong>' + num(p.w52) + '</strong> waiting 52+ weeks'
+        + (p.w65 ? ', ' + num(p.w65) + ' over 65 weeks' : '')
+        + (p.w78 ? ', ' + num(p.w78) + ' over 78 weeks' : '')
+        + ' — long waiters are what the executive team is judged on');
+      if (p.med != null) rows.push('Median wait <strong>' + p.med + ' weeks</strong> across all specialities');
+      /* The feed stores the CQC rating as a code — G, RI, O, I. A rep reading
+         "CQC rated RI" has to go and look it up, and the one who guesses will
+         guess wrong in the room. Unknown codes pass through as themselves
+         rather than being mapped to a plausible-looking word. */
+      var CQC = { G: 'Good', RI: 'Requires improvement', O: 'Outstanding', I: 'Inadequate' };
+      if (p.cqc) rows.push('CQC rated <strong>' + esc(CQC[p.cqc] || p.cqc) + '</strong> overall'
+        + (per.cqc ? ' <span style="color:#8a8778;font-size:11.5px;">as at ' + esc(per.cqc) + '</span>' : '')
+        + srcLink('cqc', 'CQC'));
+      if (p.seg) rows.push('NHS Oversight Framework <strong>segment ' + p.seg + '</strong> of 4'
+        + (p.seg >= 3 ? ' — under formal support, so savings and capacity land hard' : '')
+        + srcLink('seg', 'NHS England'));
+      if (p.ne) rows.push('<strong>' + p.ne + '</strong> Never Event' + (p.ne === 1 ? '' : 's')
+        + (per.neverEvents ? ' (' + esc(per.neverEvents) + ')' : '') + srcLink('ne', 'NHS England'));
+      if (p.cdi) rows.push('<strong>' + num(p.cdi) + '</strong> hospital-onset C. difficile cases'
+        + (per.cdiff ? ' (' + esc(per.cdiff) + ')' : '') + srcLink('cdi', 'UKHSA'));
+      if (p.backlogHi) rows.push('<strong>' + gbp(p.backlogHi) + '</strong> of high-risk backlog maintenance'
+        + (p.backlogTot ? ' out of ' + gbp(p.backlogTot) + ' total' : '')
+        + (per.eric ? ' (ERIC ' + esc(per.eric) + ')' : '') + srcLink('eric', 'NHS Digital'));
+      if (!rows.length) return '';
+
+      // Speciality medians. Shown whole so the rep can see where this trust
+      // hurts most, with their own speciality called out when the RTT
+      // treatment function is the one they sell into.
+      var spx = '';
+      if (p.spec && Object.keys(p.spec).length){
+        /* The Hub's canonical speciality list and NHS England's RTT treatment
+           functions are two different vocabularies — "Orthopaedics and trauma"
+           against "Trauma & Orthopaedics", "Continence / Urology" against
+           "Urology". Matching them on substring finds almost nothing, and the
+           rep's own speciality silently never gets called out. So the overlap
+           is written down. Only genuine equivalents are listed: a Hub
+           speciality with no RTT treatment function (vascular access, wound
+           care, infection prevention) is simply absent, because pointing a rep
+           at a neighbouring speciality's waiting time would be inventing a
+           number for them. */
+        var RTT_FOR = {
+          'Orthopaedics and trauma': 'Trauma & Orthopaedics',
+          'Continence / Urology': 'Urology',
+          'Endourology and stone management': 'Urology',
+          'Theatres / surgical': 'General Surgery',
+          'Dermatology and skin health': 'Dermatology',
+          "Women's health and maternity": 'Gynaecology',
+          'Cardiology': 'Cardiology',
+          'ENT': 'ENT (Ear, Nose & Throat)',
+          'Audiology and hearing': 'ENT (Ear, Nose & Throat)',
+          'Ophthalmology': 'Ophthalmology'
+        };
+        var mine = RTT_FOR[sp] || null;
+        var keys = Object.keys(p.spec).sort(function(a, b){ return p.spec[b] - p.spec[a]; });
+        spx = '<div style="margin-top:10px;font-weight:700;">Median wait by speciality (weeks) — longest first:</div>'
+          + '<div style="font-size:13px;line-height:1.8;color:#39424d;margin-top:2px;">'
+          + keys.map(function(k){
+              var hit = mine && k === mine;
+              return '<span style="display:inline-block;background:' + SOFT + ';border:1px solid ' + LINE
+                + ';border-radius:99px;padding:2px 10px;margin:0 6px 4px 0;white-space:nowrap;'
+                + (hit ? 'font-weight:800;color:' + INK + ';border-color:' + GOLD + ';' : '') + '">'
+                + esc(k) + ' <strong>' + p.spec[k] + '</strong>' + (hit ? ' &#9664; yours' : '') + '</span>';
+            }).join('')
+          + '</div>';
+      }
+      return panel('Where the pressure is — their own published figures', li(rows) + spx
+        + '<div style="margin-top:8px;font-size:12px;color:#8a8778;">Each figure is the publisher’s own, copied unchanged and dated above. Nothing here is estimated or ranked. Open the source before you quote it in the room.</div>',
+        '#6B2A34');
+    }
+
+    /* WHO ACTUALLY BUYS HERE — named people, from Find a Tender.
+       Framed exactly as the Stakeholder Mapper frames them: each person was
+       published as the enquiry contact for the notice shown. That is a real,
+       checkable fact and a genuine reason to make contact. It is NOT a job
+       title, a remit or a seniority claim, and this panel must never imply
+       one — the 145-false-job-changes incident is what root rule 13 was
+       written after. */
+    function contactsPanel(code, trName){
+      var list = (code && CONTACT_BY_CODE[code]) || [];
+      if (!list.length) return '';
+      var sorted = list.slice().sort(function(a, b){
+        return String(b.last || '').localeCompare(String(a.last || '')) || (b.n || 0) - (a.n || 0);
+      });
+      var show = sorted.slice(0, 6);
+      var rows = show.map(function(c){
+        var b = '<strong>' + esc(c.name) + '</strong>'
+          + (c.email ? ' — <a href="mailto:' + esc(c.email) + '" style="color:' + GOLD + ';font-weight:600;">' + esc(c.email) + '</a>' : '')
+          + (c.tel ? ' · ' + esc(c.tel) : '')
+          + '<br><span style="color:#6b7684;font-size:12.5px;">Named on “' + esc(c.notice || 'a procurement notice') + '”'
+          + (c.last ? ', most recent ' + esc(c.last) : '')
+          + (c.n > 1 ? ' · ' + c.n + ' notices' : '') + '</span><br>'
+          + liBtn('Find them on LinkedIn', 'https://www.linkedin.com/search/results/people/?keywords='
+              + encodeURIComponent('"' + c.name + '" ' + trustShort(trName)));
+        return b;
+      });
+      return panel('Who to contact — named on this trust’s own tender notices',
+        li(rows)
+        + '<div style="margin-top:8px;font-size:12.5px;color:#39424d;">Each name was published as the enquiry contact for the notice shown — <strong>that notice is your reason to make contact</strong>. It is not a job title, and no seniority should be read into it.</div>'
+        + '<div style="margin-top:6px;font-size:12px;color:#8a8778;">'
+        + (sorted.length > show.length ? num(sorted.length) + ' named contacts on file for this trust — the full list, tagged by what they buy, is in the ' + link('Stakeholder Mapper', 1109) + '. ' : 'Full list and notice tagging in the ' + link('Stakeholder Mapper', 1109) + '. ')
+        + 'Source: Find a Tender, Open Government Licence v3' + (CONTACTS_ASOF ? ', index as at ' + esc(CONTACTS_ASOF) : '') + '.</div>',
+        '#2E6B3E');
+    }
+
     function competitors(co, sp, all){
       var specs = sp ? [sp] : ((co && co.specialities) || []);
       if (!specs.length) return [];
@@ -485,17 +635,33 @@
           body += '<div style="margin-top:10px;font-weight:700;">What they’re saying publicly:</div>' + li(vl);
         }
         h += panel('The trust: ' + esc(tr.name), body);
+        h += pressurePanel(tr.code, sp);
+        h += contactsPanel(tr.code, tr.name);
       } else if (trName && trName !== 'Other / any trust'){
+        /* Every directory trust now gets a real profile built from verified
+           data we already hold: the ODS register for who they are and who
+           commissions them, the publishers' own figures for where they hurt,
+           and Find a Tender for who to write to. What is NOT here is the
+           hand-researched layer — annual-report quotes, procurement team
+           structure, named executives — so the panel says so plainly rather
+           than letting an incomplete profile read as the whole picture. */
         var de = DIRMAP[trName] || {};
         var meta = [];
         if (de.town) meta.push('HQ: ' + esc(de.town) + (de.postcode ? ' (' + esc(de.postcode) + ')' : ''));
         if (de.code) meta.push('ODS code: ' + esc(de.code));
+        if (de.icbName) meta.push('Commissioned by ' + esc(de.icbName) + ' ICB');
+        if (de.region) meta.push(esc(de.region));
+        if (de.kind) meta.push(esc(de.kind));
         h += panel('The trust: ' + esc(trName),
-          (meta.length ? '<span style="color:#6b7684;font-size:12.5px;">' + meta.join(' · ') + ' — NHS ODS register</span><br>' : '')
-          + 'No deep Hub profile yet for this trust — you still get the essentials: pull its latest annual report for strategy and cost pressures, and go straight to the right people:'
+          (meta.length ? '<span style="color:#6b7684;font-size:12.5px;">' + meta.join(' · ') + ' — NHS ODS register' + (de.bc ? ' · buying centre: ' + esc(de.bc) : '') + '</span>' : ''));
+        h += pressurePanel(de.code, sp);
+        h += contactsPanel(de.code, trName);
+        h += panel('What the Hub hasn’t researched here yet',
+          'This trust has no hand-researched profile yet, so there is no annual-report detail, procurement team structure or named executive above — everything shown is straight from the published data. Fill the gap in three clicks:'
           + '<br>' + liBtn('Procurement lead on LinkedIn', liPeopleUrl('Head of Procurement', trName))
           + liBtn('Clinical leads on LinkedIn', liPeopleUrl('Clinical lead', trName))
-          + ' <a href="https://www.google.com/search?q=' + encodeURIComponent('"' + trName + '" annual report') + '" target="_blank" rel="noopener" style="display:inline-block;background:#fff;border:1px solid ' + LINE + ';border-radius:99px;padding:3px 12px;font-size:11.5px;font-weight:700;color:#6B2A34;text-decoration:none;margin:3px 6px 0 0;">Find their annual report &#8599;</a>');
+          + ' <a href="https://www.google.com/search?q=' + encodeURIComponent('"' + trName + '" annual report') + '" target="_blank" rel="noopener" style="display:inline-block;background:#fff;border:1px solid ' + LINE + ';border-radius:99px;padding:3px 12px;font-size:11.5px;font-weight:700;color:#6B2A34;text-decoration:none;margin:3px 6px 0 0;">Find their annual report &#8599;</a>',
+          '#8a8778');
       } else if (trName){
         h += panel('The trust', 'No seeded profile yet — pull the trust’s latest annual report and news for its strategy and cost pressures, identify the procurement lead and a clinical champion, and read their recent public LinkedIn posts before you go in.');
       }

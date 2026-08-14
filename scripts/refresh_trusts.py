@@ -29,8 +29,19 @@ but have no ICB — Wales has no ICBs. Kept, tagged nation 'Wales', icb null.
 """
 import json, re, urllib.request, concurrent.futures, datetime, sys
 
-LIST_URL = ("https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations"
-            "?PrimaryRoleId=RO197&Status=Active&Limit=1000")
+# 3. ONE PRIMARY ROLE IS NOT THE WHOLE SECTOR. RO197 (NHS TRUST) misses every
+#    organisation whose PRIMARY role is RO107 (CARE TRUST), and three of those
+#    are legally-live NHS foundation trusts a rep can absolutely sell into:
+#    Bradford District Care, Sheffield Health Partnership University, and Black
+#    Country Healthcare. Until 14/08/2026 none of the three appeared anywhere —
+#    not in the Meeting Prep directory, not in the Stakeholder Mapper's trust
+#    drill-down — so they read as "does not exist" rather than "not profiled".
+#    Found because the trust-pressures gate flagged a trust carrying published
+#    RTT figures that the trust map had never heard of. If ODS adds another
+#    trust-like primary role, add it here rather than to a second crawl.
+LIST_URLS = [("https://directory.spineservices.nhs.uk/ORD/2-0-0/organisations"
+              "?PrimaryRoleId=%s&Status=Active&Limit=1000") % r
+             for r in ('RO197', 'RO107')]
 CFG_PATH = "data/prep-config.json"
 MAP_PATH = "data/trust-map.json"
 
@@ -145,7 +156,12 @@ def fetch_detail(o):
 
 
 def main():
-    orgs = json.loads(urllib.request.urlopen(LIST_URL, timeout=60).read())['Organisations']
+    orgs, seen = [], set()
+    for url in LIST_URLS:
+        for o in json.loads(urllib.request.urlopen(url, timeout=60).read())['Organisations']:
+            if o['OrgId'] not in seen:
+                seen.add(o['OrgId'])
+                orgs.append(o)
     if len(orgs) < 150:
         raise SystemExit("ABORT: ODS returned %d trusts (expected ~240+) — refusing to shrink." % len(orgs))
     with concurrent.futures.ThreadPoolExecutor(12) as ex:
@@ -177,7 +193,14 @@ def main():
     # ---- data/prep-config.json — Meeting Prep trust directory (unprofiled only) ----
     cfg = json.load(open(CFG_PATH))
     profiled = {t['name'] for t in cfg.get('trusts', [])}
-    cfg['trustDirectory'] = [{k: e[k] for k in ('n', 'code', 'town', 'postcode', 'kind')}
+    # icb/icbName/region ride along in the directory itself. They were derived
+    # here every run and then thrown away, so Meeting Prep had no ICB for an
+    # unprofiled trust and the panel could not say who commissions it. Adding
+    # them to the directory rather than to a second file is deliberate: a key
+    # this generator does not write is a key this generator DESTROYS on its
+    # next run, which is exactly how the supplier index lost its aliases.
+    cfg['trustDirectory'] = [{k: e[k] for k in ('n', 'code', 'town', 'postcode', 'kind',
+                                                'icb', 'icbName', 'region', 'nation', 'bc')}
                              for e in live if e['n'] not in profiled]
     cfg['trustDirectoryAsOf'] = today + ' (NHS ODS register, legally-live trusts only)'
     json.dump(cfg, open(CFG_PATH, 'w'), ensure_ascii=False, indent=1)
