@@ -1,4 +1,4 @@
-/* NHS Intelligence Hub — "Who's who: what we can name, and what you have to earn"
+/* Medical Sales Intelligence Hub — "Who's who: what we can name, and what you have to earn"
    Git-served, same pattern as mst-logic.js / comptab.js. Edit data/whos-who.html
    in this repo, never in wp-admin.
 

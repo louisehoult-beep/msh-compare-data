@@ -1,4 +1,4 @@
-/* NHS Intelligence Hub — Product Comparison tool (PRODUCT-FIRST, with live NHSSC detail).
+/* Medical Sales Intelligence Hub — Product Comparison tool (PRODUCT-FIRST, with live NHSSC detail).
    Enter YOUR product -> it auto-finds competitor products (same device type /
    speciality across other suppliers) -> compares at product level and shows the
    REAL NHS Supply Chain detail ON the page: product image, description, every pack
@@ -144,7 +144,7 @@
 
     // Outside margin so the tool doesn't run to the edge of the page (Lou, 06/08/2026).
     var wrap = el('div', 'font-family:Inter,system-ui,sans-serif;color:' + INK + ';padding:0 clamp(10px,3vw,34px);box-sizing:border-box;');
-    wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:' + OX + ';', 'NHS Intelligence Hub'));
+    wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:' + OX + ';', 'Medical Sales Intelligence Hub'));
     wrap.appendChild(el('div', 'font-size:24px;font-weight:800;margin:2px 0 4px;', 'The Differential'));
     wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:760px;margin-bottom:12px;', 'Pick your <strong>speciality</strong>, then your company and product on the left. On the right, tell us who you’re up against — a specific rival if you know one, or leave it blank and we’ll suggest your closest tracked match. You get the two <strong>side by side</strong>: real NHS Supply Chain images and codes, their catalogue facts lined up, what actually differs, and the questions to ask in the room.'));
 
@@ -238,7 +238,7 @@
        FIRST framework — many entries are on no framework at all, and some tracked
        suppliers hold none. So this says what is actually true, and offers the same
        way out: ask, and it gets added. */
-    var askSub = encodeURIComponent('Product request — NHS Intelligence Hub');
+    var askSub = encodeURIComponent('Product request — Medical Sales Intelligence Hub');
     var askBody = encodeURIComponent('Please add this to the comparison tool:\n\nProduct:\nCompany:\nSpeciality / what it is:\nA link if you have one:\n');
     var cov = el('div', 'font-size:12.5px;line-height:1.6;color:#6b7684;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:9px;padding:9px 13px;margin:0 0 12px;');
     cov.innerHTML = 'These dropdowns cover the <strong>' + PRODUCTS.length.toLocaleString('en-GB') + ' products indexed across ' + Object.keys(SUPOBJ).length + ' tracked suppliers</strong> — not the whole market. '
@@ -477,7 +477,7 @@
     }
     btn.addEventListener('click', function(){ runCompare(); });
 
-    function link(text, id){ return '<a href="https://elevateandthrive.uk/?page_id=' + id + '" style="color:' + GOLD + ';font-weight:600;">' + text + '</a>'; }
+    function link(text, id){ return '<a href="/?page_id=' + id + '" style="color:' + GOLD + ';font-weight:600;">' + text + '</a>'; }
     function lookupUrl(name){ return 'https://pilot.supplychain.nhs.uk/search?query=' + encodeURIComponent(String(name).replace(/\s*\(.*?\)\s*/g,' ').trim()); }
     var GENERIC_WORDS = { 'system':1,'safety':1,'products':1,'medical':1,'range':1,'solution':1,'solutions':1,'products':1,'closed':1,'sterile':1,'single':1,'device':1,'plus':1,'ultra':1,'flex':1,'select':1,'advance':1,'advanced':1 };
     function sigTokens(name){
@@ -763,7 +763,7 @@
     function compare(mine, theirs, angle, edge, typedMine, chosenSupMine, typedTheirs, chosenSupTheirs, autoSuggested){
       if (!mine){
         if (typedMine){
-          var mailSub = encodeURIComponent('Product request — NHS Intelligence Hub');
+          var mailSub = encodeURIComponent('Product request — Medical Sales Intelligence Hub');
           var mailBody = encodeURIComponent('Please add this product to the Product Comparison tool:\n\nProduct: ' + typedMine + '\nCompany: ' + (chosenSupMine || '(not selected)') + '\nAnything else useful (speciality, who sells it, a link):\n');
           return '<div style="background:#fbf3df;border:1px solid #e8d5a8;border-radius:10px;padding:14px 16px;font-size:14px;line-height:1.65;color:#7a5b14;">'
             + '<strong>“' + esc(typedMine) + '” isn’t tracked yet.</strong> Nothing here is guessed — products only appear once they’ve been verified against the live NHS Supply Chain catalogue and the suppliers’ own published information.'
@@ -779,7 +779,7 @@
         var dMineOnly = detailFor(mine);
         var selfCard = dMineOnly ? ('<div style="margin-top:12px;max-width:360px;">' + detailCard(mine, true) + '</div>') : '';
         if (typedTheirs){
-          var mailSub2 = encodeURIComponent('Product request — NHS Intelligence Hub');
+          var mailSub2 = encodeURIComponent('Product request — Medical Sales Intelligence Hub');
           var mailBody2 = encodeURIComponent('Please add this product to the Product Comparison tool, so I can compare it against ' + mine.name + ' (' + mine.supplier + '):\n\nProduct: ' + typedTheirs + '\nCompany: ' + (chosenSupTheirs || '(not selected)') + '\nAnything else useful (speciality, who sells it, a link):\n');
           return '<div style="font-size:13px;color:#6b7684;margin:6px 0 4px;">Your product: <strong>' + esc(mine.name) + '</strong> (' + esc(mine.supplier) + ')</div>'
             + '<div style="background:#fbf3df;border:1px solid #e8d5a8;border-radius:10px;padding:14px 16px;font-size:14px;line-height:1.65;color:#7a5b14;">'

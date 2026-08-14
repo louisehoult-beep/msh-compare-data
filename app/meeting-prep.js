@@ -1,4 +1,4 @@
-/* NHS Intelligence Hub — Meeting Prep + Product Comparison ("Help me prepare")
+/* Medical Sales Intelligence Hub — Meeting Prep + Product Comparison ("Help me prepare")
    Company + speciality + trust + WHO you're meeting -> a tailored brief:
    competitors & how you stack up, the right angle for that audience, the value
    case, frameworks, national context, trust strategy and who to look up.
@@ -136,7 +136,7 @@
     function byName(a,b){ return (a.name||'').toLowerCase() < (b.name||'').toLowerCase() ? -1 : 1; }
 
     var wrap = el('div', 'font-family:Inter,system-ui,sans-serif;color:' + INK + ';');
-    wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:' + GOLD + ';', 'NHS Intelligence Hub'));
+    wrap.appendChild(el('div', 'text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:700;color:' + GOLD + ';', 'Medical Sales Intelligence Hub'));
     wrap.appendChild(el('div', 'font-size:24px;font-weight:800;margin:2px 0 4px;', 'Help me prepare'));
     wrap.appendChild(el('div', 'font-size:14px;line-height:1.6;color:#4a5766;max-width:660px;margin-bottom:12px;', 'Pick the speciality, who you are, the trust and <strong>who you’re meeting</strong>. You get your competitors and how you stack up, the right angle for that person, the value case, and what to know about the trust — pulled from the whole Hub. Tick “early-stage” if you’re not on a product yet.'));
 
@@ -343,7 +343,7 @@
       var pk = window.open('', '_blank');
       if (!pk){ alert('Allow pop-ups to print the pack.'); return; }
       var today = new Date().toLocaleDateString('en-GB');
-      pk.document.write('<!doctype html><html><head><title>Meeting pack — NHS Intelligence Hub</title><style>'
+      pk.document.write('<!doctype html><html><head><title>Meeting pack — Medical Sales Intelligence Hub</title><style>'
         + 'body{font-family:Georgia,"Times New Roman",serif;color:#111;margin:24px;line-height:1.5;}'
         + 'h1{font-size:20px;margin:0 0 2px;} .sub{color:#555;font-size:12px;margin-bottom:18px;}'
         + 'img{max-width:70px;height:auto;} table{border-collapse:collapse;} td,th{border-bottom:1px solid #ccc;padding:4px 8px;font-size:11px;text-align:left;}'
@@ -351,7 +351,7 @@
         + '.pagebreak{page-break-before:always;} div{max-width:100%;}'
         + '@media print{ a[href]:after{content:"";} }'
         + '</style></head><body>'
-        + '<h1>Meeting pack — NHS Intelligence Hub</h1>'
+        + '<h1>Meeting pack — Medical Sales Intelligence Hub</h1>'
         + '<div class="sub">Prepared ' + today + ' · Product information from the suppliers\u2019 own websites and the NHS Supply Chain catalogue · Verify framework/status at source before quoting.</div>'
         + (cmp && cmp.innerHTML ? '<h2 style="font-size:15px;">Product comparison &amp; the case for switching</h2>' + cmp.innerHTML + '<div class="pagebreak"></div>' : '')
         + '<h2 style="font-size:15px;">Meeting brief</h2>' + out.innerHTML
@@ -379,7 +379,7 @@
         + '<div style="font-size:14px;line-height:1.65;color:#39424d;">' + bodyHtml + '</div></div>';
     }
     function li(items){ return '<ul style="margin:4px 0 0;padding-left:18px;">' + items.map(function(i){ return '<li style="margin:3px 0;">' + i + '</li>'; }).join('') + '</ul>'; }
-    function link(text, id){ return '<a href="https://elevateandthrive.uk/?page_id=' + id + '" style="color:' + GOLD + ';font-weight:600;">' + text + '</a>'; }
+    function link(text, id){ return '<a href="/?page_id=' + id + '" style="color:' + GOLD + ';font-weight:600;">' + text + '</a>'; }
     // One-click LinkedIn lookups: the tool builds the exact people-search and
     // recent-posts search and opens them in the rep's own logged-in LinkedIn.
     // (LinkedIn blocks server-side scraping, so deep links are the robust route.)
