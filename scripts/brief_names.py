@@ -28,8 +28,19 @@ DECORATION = [
     re.compile(r"\((?:[^)]*\b(?:new|incumbent|existing|current)\b[^)]*)\)", re.I),
     re.compile(r"[–—-]\s*\(?\s*(?:new|incumbent|existing)\b[^)]*\)?\s*$", re.I),
     re.compile(r"\bnew to (?:the )?framework\b[^,]*", re.I),
+    # "Fresenius Kabi Ltd All Routes", "Pennine Healthcare All Routes" — a lot
+    # descriptor saying the supplier holds every route on the framework, not part
+    # of the company's name. Added 14/08/2026: it was splitting Fresenius Kabi off
+    # from its own record and reporting a company the Hub plainly holds as a gap.
+    # Anchored to the end only, so a company genuinely called "All Routes
+    # Limited" is untouched.
+    re.compile(r"\s+all routes\s*$", re.I),
     re.compile(r"\*+$"),
 ]
+
+# Bracketed disambiguators — "Meditech Systems Ltd (Dorset)" — are deliberately
+# NOT stripped. NHS Supply Chain adds them to tell two same-named suppliers
+# apart, so removing them would merge exactly what the brief was separating.
 
 
 def clean(raw):

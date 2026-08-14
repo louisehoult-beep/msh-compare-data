@@ -3,10 +3,14 @@
 
 Closes the gap reconcile_suppliers.py measures: companies named on an NHS Supply
 Chain framework by that framework's OWN contract launch brief, held in no Hub
-supplier section. Tier 1 (3+ frameworks) is state/backfill-tier1-adjudication.json.
+supplier section. Work is done in tiers by framework count, each with its own
+adjudication file in state/backfill-tier<N>-adjudication.json.
 
-    python3 scripts/backfill_seed_from_frameworks.py            # dry run
-    python3 scripts/backfill_seed_from_frameworks.py --write
+    python3 scripts/backfill_seed_from_frameworks.py --tier=2            # dry run
+    python3 scripts/backfill_seed_from_frameworks.py --tier=2 --write
+
+Re-running is safe: a company already in the seed under its name or any alias is
+skipped, so a tier can be re-applied after the work list is regenerated.
 
 WHAT EACH RECORD ASSERTS, AND WHAT IT DOES NOT
 ----------------------------------------------
@@ -38,7 +42,6 @@ from stamp_notice import detect_style
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data")
-ADJ = os.path.join(ROOT, "state", "backfill-tier1-adjudication.json")
 TODAY = datetime.date.today().isoformat()
 UK_TODAY = datetime.date.today().strftime("%d/%m/%Y")
 
@@ -78,8 +81,9 @@ def specialities_for(fw_names, idx):
     return out, why
 
 
-def main(write=False):
-    adj = load(ADJ)
+def main(write=False, tier="1"):
+    adj = load(os.path.join(ROOT, "state",
+                            f"backfill-tier{tier}-adjudication.json"))
     seed = load(os.path.join(DATA, "supplier-seed.json"))
     fw = load(os.path.join(DATA, "frameworks.json"))
     smap = load(os.path.join(DATA, "speciality-map.json"))
@@ -152,7 +156,7 @@ def main(write=False):
             "verified": TODAY,
             "source": (f"NHS Supply Chain contract launch briefs ({refs}), "
                        f"fetched {UK_TODAY}"),
-            "reconciledFrom": "reconcile_suppliers.py tier-1 backfill, 14/08/2026",
+            "reconciledFrom": f"reconcile_suppliers.py tier-{tier} backfill, {UK_TODAY}",
         }
         if specs:
             rec["_specialitiesEvidence"] = (
@@ -200,15 +204,23 @@ def main(write=False):
         # in this script's own style would reformat 1.8MB and bury the real
         # change, so the file's existing style is detected and reused — the same
         # reason scripts/stamp_notice.py does it.
-        style = detect_style(original, json.loads(original)) or {"indent": 1,
-                                                                 "ensure_ascii": False}
-        with open(path, "w") as fh:
-            json.dump(seed, fh, **style)
-            if original.endswith("\n"):
-                fh.write("\n")
+        style, trailing_newline = detect_style(original, json.loads(original))
+        style = style or {"indent": 1, "ensure_ascii": False}
+        text = json.dumps(seed, **style) + ("\n" if trailing_newline else "")
+
+        # Serialise fully, then write to a temp file and rename. os.replace is
+        # atomic, so a crash mid-write leaves the original seed untouched instead
+        # of truncating 1.8MB of curated records to nothing — which is exactly
+        # what an earlier version of this line did when json.dump raised inside
+        # an already-opened file handle.
+        tmp = path + ".tmp"
+        with open(tmp, "w") as fh:
+            fh.write(text)
+        os.replace(tmp, path)
         print(f"\nwrote supplier-seed.json — {len(seed['suppliers'])} suppliers")
         print("NOT PUSHED. Run verify.py, then the alias registry build, before any push.")
 
 
 if __name__ == "__main__":
-    main("--write" in sys.argv)
+    tier = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--tier=")), "1")
+    main("--write" in sys.argv, tier)
