@@ -1,0 +1,286 @@
+{
+ "_what": "Tier 4: the 41 companies the earlier work lists never showed. Those lists required a supplier to be absent from EVERY Hub supplier section, but the gap that matters, and the one reported all along, is absence from the Supplier Directory — the index a rep actually searches. Schiller, Timesco, Attends, Juzo and 34 others sit in the 704 company axis under a shorter name while the directory holds nothing. reconcile_suppliers.py now generates the work list against the directory, so this can not recur.",
+ "_when": "2026-08-14",
+ "_rule": "Companies House was searched by name for each. A NAME SEARCH IS NOT A CONFIRMATION - per docs/COMPANY-REPORT-METHOD.md a company number is only 'confirmed' via route 1 (an anchored number curated into the record) or route 2 (the number the company publishes on its own site). So no number here is written to `companyNumber`. Where the registered name matches exactly and the company is active, the result is recorded as a CANDIDATE, carrying its own status and date, for confirm_company_numbers.py to prove or discard later. The verified fact in every record created from this file is the framework award, nothing else.",
+ "_verdicts": {
+  "candidate": "Registered name matches the awarded name exactly and the company is active. Recorded as a candidate number, never as a confirmed one.",
+  "probable": "A plausible single match that is not an exact name match. Recorded as a candidate and flagged for route 2.",
+  "unresolved": "No defensible match. Companies House returned nothing close, or several equally plausible companies. No number recorded. This is the correct output, not a failure.",
+  "foreign": "Not a UK-registered company, so no Companies House record is expected to exist. Recorded with no number and a note saying so.",
+  "alias": "Not a separate supplier - another spelling of a company already in this list. Becomes an alias, never its own record.",
+  "excluded": "Not a company name at all - a table header, a website address or an unexpanded abbreviation captured by the frameworks parser. No record is created, and the parser is what should be fixed."
+ },
+ "_howDecided": "UNLIKE TIERS 1 AND 2, THIS TIER WAS NOT ADJUDICATED COMPANY BY COMPANY. 581 individual judgements is not work anybody did, and claiming it would be a lie. Every verdict here comes from a fixed rule set, applied mechanically, and stated here so it can be checked and re-run:\n\n  R1 EXCLUDED    the string is not a company name (table header, URL, bare abbreviation).\n  R2 FOREIGN     a non-UK legal form ends the name (GmbH, A/S, ApS, B.V., S.p.A., Oy, AB and the like) and is not followed by Ltd or Limited. No UK number is attached even where a similarly-named UK company exists, because it is a different legal person. \"Valmy SAS Ltd\" is a UK company and does not trip this.\n  R3 CANDIDATE   exactly ONE Companies House company normalises to the same name AND is active. Normalisation strips case, punctuation, & versus and, and legal or territory suffixes only.\n  R4 UNRESOLVED  exactly one exact match, but it is NOT active. The status is recorded and the name flagged for a human. A company that is not trading must never be published as a live supplier.\n  R5 UNRESOLVED  two or more ACTIVE exact matches. Never resolved by picking the first.\n  R6 UNRESOLVED  no exact match at all.\n  R7 ALIAS       two names on this list resolving to the same registered number are one business; the fuller spelling keeps the record.\n  R8 ALIAS       two names on this list that differ only in spelling or legal form are one supplier, whatever their verdict. R7 alone only deduped records that got a number, so \"Nagor Ltd\" and \"Nagor Limited\" each became a record carrying the other's name as an alias - which verify.py rejects, because alias lookup is first-wins and the wrong record then answers for that name. R8's normalisation is stricter than R3's: case, punctuation and trailing legal form only, so \"Smith Medical Ltd\" and \"Smith Medical Group Ltd\" stay two records.\n\nThe rules are deliberately biased toward UNRESOLVED, which records the framework award and no company number. 218 of 581 landed there. For a long tail full of trading names and one-product suppliers that is the honest output, not a failure to try harder.",
+ "companies": [
+  {
+   "name": "Attends Ltd",
+   "verdict": "candidate",
+   "number": "03718732",
+   "registered": "ATTENDS LIMITED",
+   "status": "active",
+   "incorporated": "1999-02-18"
+  },
+  {
+   "name": "crxcompression.com",
+   "verdict": "excluded",
+   "why": "Not a company name — a table header, a website address or a bare abbreviation captured by the frameworks parser. No record is created; scripts/refresh_frameworks.py is what should stop capturing it."
+  },
+  {
+   "name": "Deltex Medical Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (DELTEX MEDICAL LIMITED 01691369; DELTEX MEDICAL HOLDINGS LIMITED 16819768). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "EDAN Medical (UK) Ltd",
+   "verdict": "candidate",
+   "number": "04315579",
+   "registered": "EDAN MEDICAL (UK) LIMITED",
+   "status": "active",
+   "incorporated": "2001-11-02"
+  },
+  {
+   "name": "Eitan Medical UK Ltd",
+   "verdict": "candidate",
+   "number": "12738832",
+   "registered": "EITAN MEDICAL UK LIMITED",
+   "status": "active",
+   "incorporated": "2020-07-13"
+  },
+  {
+   "name": "Forma-Care (UK) Ltd",
+   "verdict": "candidate",
+   "number": "11786179",
+   "registered": "FORMA-CARE (UK) LTD",
+   "status": "active",
+   "incorporated": "2019-01-24"
+  },
+  {
+   "name": "Fukuda Denshi UK Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. Nearest: FUKUDA DENSHI UK LTD."
+  },
+  {
+   "name": "GE",
+   "verdict": "excluded",
+   "why": "Not a company name — a table header, a website address or a bare abbreviation captured by the frameworks parser. No record is created; scripts/refresh_frameworks.py is what should stop capturing it."
+  },
+  {
+   "name": "Griffiths and Nielsen Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (GRIFFITHS & NIELSEN LIMITED 01201146; GRIFFITHS & NIELSEN HOLDINGS LIMITED 11087295). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "H & R Healthcare Ltd",
+   "verdict": "candidate",
+   "number": "05817827",
+   "registered": "H & R HEALTHCARE LIMITED",
+   "status": "active",
+   "incorporated": "2006-05-16"
+  },
+  {
+   "name": "H&R Healthcare Ltd",
+   "verdict": "alias",
+   "aliasOf": "H & R Healthcare Ltd",
+   "why": "Resolves to the same registered company (05817827) as 'H & R Healthcare Ltd', which the briefs also name. One business, two spellings. Rule R7."
+  },
+  {
+   "name": "Headington Medical Technology Ltd",
+   "verdict": "candidate",
+   "number": "12370316",
+   "registered": "HEADINGTON MEDICAL TECHNOLOGY LTD",
+   "status": "active",
+   "incorporated": "2019-12-18"
+  },
+  {
+   "name": "Hillrom UK",
+   "verdict": "unresolved",
+   "why": "HILLROM EUROPE LTD (SC784839) is an exact name match but its status is 'dissolved', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "i3medical",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. Nearest: I3 MEDICAL LIMITED."
+  },
+  {
+   "name": "implantcast UK",
+   "verdict": "candidate",
+   "number": "08018899",
+   "registered": "IMPLANTCAST UK LIMITED",
+   "status": "active",
+   "incorporated": "2012-04-04"
+  },
+  {
+   "name": "ISOL8 Healthcare Limited",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. Nearest: ISOL8 HEALTHCARE LIMITED."
+  },
+  {
+   "name": "ISOL8 Healthcare Ltd",
+   "verdict": "alias",
+   "aliasOf": "ISOL8 Healthcare Limited",
+   "why": "The same name as 'ISOL8 Healthcare Limited', which the briefs also name, differing only in spelling or legal form. One supplier, not two. Rule R8."
+  },
+  {
+   "name": "Isol8 Healthcare Ltd",
+   "verdict": "alias",
+   "aliasOf": "ISOL8 Healthcare Limited",
+   "why": "The same name as 'ISOL8 Healthcare Limited', which the briefs also name, differing only in spelling or legal form. One supplier, not two. Rule R8."
+  },
+  {
+   "name": "JRI Orthopaedics Ltd",
+   "verdict": "candidate",
+   "number": "00976297",
+   "registered": "JRI ORTHOPAEDICS LIMITED",
+   "status": "active",
+   "incorporated": "1970-04-06"
+  },
+  {
+   "name": "Juzo UK Limited",
+   "verdict": "candidate",
+   "number": "SC169160",
+   "registered": "JUZO UK LIMITED",
+   "status": "active",
+   "incorporated": "1996-10-18"
+  },
+  {
+   "name": "Juzo UK Ltd",
+   "verdict": "alias",
+   "aliasOf": "Juzo UK Limited",
+   "why": "Resolves to the same registered company (SC169160) as 'Juzo UK Limited', which the briefs also name. One business, two spellings. Rule R7."
+  },
+  {
+   "name": "Lifeline 24",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. Nearest: 24/7 LIFELINE GROUP LTD."
+  },
+  {
+   "name": "Link Orthopaedics UK Ltd",
+   "verdict": "candidate",
+   "number": "SC586309",
+   "registered": "LINK ORTHOPAEDICS UK LTD",
+   "status": "active",
+   "incorporated": "2018-01-22"
+  },
+  {
+   "name": "Loewenstein Medical UK Ltd",
+   "verdict": "candidate",
+   "number": "09046662",
+   "registered": "LOEWENSTEIN MEDICAL UK LTD",
+   "status": "active",
+   "incorporated": "2014-05-19"
+  },
+  {
+   "name": "MatOrtho Ltd",
+   "verdict": "unresolved",
+   "why": "More than one active company normalises to this name (MATORTHO LIMITED 07323441; MATORTHO GROUP HOLDINGS LIMITED 13076836; MATORTHO HOLDINGS LIMITED 13141104). Two equally plausible companies is never resolved by picking one."
+  },
+  {
+   "name": "Medical Access Ltd",
+   "verdict": "candidate",
+   "number": "04244397",
+   "registered": "MEDICAL ACCESS LIMITED",
+   "status": "active",
+   "incorporated": "2001-07-02"
+  },
+  {
+   "name": "Micro-Tech (UK) Ltd",
+   "verdict": "unresolved",
+   "why": "No Companies House company matches this name after stripping case, punctuation and legal or territory suffixes. Nearest: MICRO-TECH (U.K.) LTD."
+  },
+  {
+   "name": "Microport Scientific Ltd",
+   "verdict": "candidate",
+   "number": "08641910",
+   "registered": "MICROPORT SCIENTIFIC LIMITED",
+   "status": "active",
+   "incorporated": "2013-08-07"
+  },
+  {
+   "name": "O&M Halyard Uk Limited",
+   "verdict": "candidate",
+   "number": "11111792",
+   "registered": "O&M HALYARD UK LIMITED",
+   "status": "active",
+   "incorporated": "2017-12-14"
+  },
+  {
+   "name": "Ontex Healthcare UK Ltd",
+   "verdict": "candidate",
+   "number": "02274216",
+   "registered": "ONTEX HEALTHCARE UK LIMITED",
+   "status": "active",
+   "incorporated": "1988-07-05"
+  },
+  {
+   "name": "P&S Healthcare Ltd",
+   "verdict": "candidate",
+   "number": "05124930",
+   "registered": "P & S HEALTHCARE LIMITED",
+   "status": "active",
+   "incorporated": "2004-05-11"
+  },
+  {
+   "name": "Permedica UK Limited",
+   "verdict": "candidate",
+   "number": "14736672",
+   "registered": "PERMEDICA UK LIMITED",
+   "status": "active",
+   "incorporated": "2023-03-17"
+  },
+  {
+   "name": "Schiller UK",
+   "verdict": "alias",
+   "aliasOf": "Schiller UK Limited",
+   "why": "Resolves to the same registered company (09953850) as 'Schiller UK Limited', which the briefs also name. One business, two spellings. Rule R7."
+  },
+  {
+   "name": "Schiller UK Limited",
+   "verdict": "candidate",
+   "number": "09953850",
+   "registered": "SCHILLER UK LTD",
+   "status": "active",
+   "incorporated": "2016-01-15"
+  },
+  {
+   "name": "Schiller UK Ltd",
+   "verdict": "alias",
+   "aliasOf": "Schiller UK Limited",
+   "why": "Resolves to the same registered company (09953850) as 'Schiller UK Limited', which the briefs also name. One business, two spellings. Rule R7."
+  },
+  {
+   "name": "Schiller Uk Ltd",
+   "verdict": "alias",
+   "aliasOf": "Schiller UK Limited",
+   "why": "Resolves to the same registered company (09953850) as 'Schiller UK Limited', which the briefs also name. One business, two spellings. Rule R7."
+  },
+  {
+   "name": "Suppliers",
+   "verdict": "excluded",
+   "why": "Not a company name — a table header, a website address or a bare abbreviation captured by the frameworks parser. No record is created; scripts/refresh_frameworks.py is what should stop capturing it."
+  },
+  {
+   "name": "Timesco Healthcare Ltd",
+   "verdict": "candidate",
+   "number": "03346938",
+   "registered": "TIMESCO HEALTHCARE LIMITED",
+   "status": "active",
+   "incorporated": "1997-04-08"
+  },
+  {
+   "name": "UKR",
+   "verdict": "excluded",
+   "why": "Not a company name — a table header, a website address or a bare abbreviation captured by the frameworks parser. No record is created; scripts/refresh_frameworks.py is what should stop capturing it."
+  },
+  {
+   "name": "Vyaire Medical Products Limited",
+   "verdict": "unresolved",
+   "why": "VYAIRE MEDICAL PRODUCTS LIMITED (10187476) is an exact name match but its status is 'liquidation', not active. A company that is not trading must not be recorded as a live supplier, so no number is attached. TRADING STATUS TO CHECK BY HAND."
+  },
+  {
+   "name": "Vyaire Medical Products Ltd",
+   "verdict": "alias",
+   "aliasOf": "Vyaire Medical Products Limited",
+   "why": "The same name as 'Vyaire Medical Products Limited', which the briefs also name, differing only in spelling or legal form. One supplier, not two. Rule R8."
+  }
+ ]
+}

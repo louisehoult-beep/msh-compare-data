@@ -22,104 +22,78 @@
  "matchRule": "A supplier named on an award notice is attached to a Hub company only where the notice's name, normalised, is EXACTLY a normalised form of that company's own name or one of its recorded aliases. Normalisation lower-cases, turns & into and, drops punctuation, and strips trailing legal-form words (Ltd, Limited, plc, LLP, Inc, GmbH, BV, A/S, AB, Oy, Pty) and trailing territory words (UK, GB, England, Ireland, Europe, EMEA). Nothing else is stripped and there is no fuzzy, substring or edit-distance matching. A name matching two different companies, or none, is quarantined unpublished — it is a question for a human, never a best guess.",
  "coverage": {
   "complete": true,
-  "window": {
-   "from": "2026-08-06",
-   "to": "2026-08-14",
-   "days": 8,
-   "run": "2026-08-14"
-  },
+  "window": null,
   "note": "Awards indexed from the two statutory feeds over the windows listed. An absence here is a statement about this index, never about the company.",
   "notes": [
-   "Find a Tender: 84 supplier row(s) from 350 release(s) over 4 page(s)",
-   "Contracts Finder: 26 supplier row(s) from 1100 release(s) over 11 page(s), back to 2026-08-06"
+   "re-matched from stored rows, no fetch"
   ]
  },
  "counts": {
-  "companies": 25,
-  "awardRows": 28,
-  "unmatched": 32,
+  "companies": 28,
+  "awardRows": 31,
+  "unmatched": 29,
   "ambiguous": 0,
   "rowsHeld": 60
  },
  "companies": {
-  "DP Medical Systems": [
+  "Agilent Technologies UK": [
    {
-    "noticeSupplierName": "DP Medical Systems",
-    "title": "ESNEFT3325 Eye Department Procedure Chairs",
-    "buyer": "East Suffolk and North Essex NHS Foundation Trust",
-    "date": "2026-08-14",
-    "url": "https://www.find-tender.service.gov.uk/Notice/077803-2026",
+    "noticeSupplierName": "AGILENT TECHNOLOGIES LDA UK LIMITED",
+    "title": "1260 Affinity 11 HPLC",
+    "buyer": "BATH SPA UNIVERSITY",
+    "date": "2023-12-21",
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/bee2730e-3ec2-48d1-8389-a53732e53039",
     "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Find a Tender",
-    "section": "tender-awards",
+    "source": "Contracts Finder",
+    "section": "contract-awards",
     "cpv": "33100000",
-    "valueAmount": null,
-    "valueCurrency": "",
-    "periodStart": null,
-    "periodEnd": null,
-    "ocid": "ocds-h6vhtk-06e4ec",
-    "company": "DP Medical Systems",
-    "matchedOn": "the notice names \"DP Medical Systems\", which normalises to \"dp medical systems\" — exactly the normalised form of this company's own name or a recorded alias."
+    "valueAmount": 39993.89,
+    "valueCurrency": "GBP",
+    "periodStart": "2023-12-21T00:00:00Z",
+    "periodEnd": "2024-01-20T23:59:59Z",
+    "ocid": "ocds-b5fd17-ad102e0c-3b38-4a31-9026-f874ff3d1bc5",
+    "company": "Agilent Technologies UK",
+    "matchedOn": "the notice names \"AGILENT TECHNOLOGIES LDA UK LIMITED\", which normalises to \"agilent technologies lda\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
-  "Heidelberg Engineering": [
+  "Labcold": [
    {
-    "noticeSupplierName": "Heidelberg Engineering Ltd",
-    "title": "Multimodal Imaging Platform Procurement",
-    "buyer": "University Of Edinburgh",
-    "date": "2026-08-14",
-    "url": "https://www.find-tender.service.gov.uk/Notice/077567-2026",
+    "noticeSupplierName": "Labcold Limited",
+    "title": "Pharmacy Fridges for PMU",
+    "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+    "date": "2026-02-16",
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/291929d9-e67d-4c9a-bab5-880d997995c7",
     "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Find a Tender",
-    "section": "tender-awards",
-    "cpv": "33110000",
-    "valueAmount": null,
-    "valueCurrency": "",
-    "periodStart": null,
-    "periodEnd": null,
-    "ocid": "ocds-h6vhtk-06e459",
-    "company": "Heidelberg Engineering",
-    "matchedOn": "the notice names \"Heidelberg Engineering Ltd\", which normalises to \"heidelberg engineering\" — exactly the normalised form of this company's own name or a recorded alias."
+    "source": "Contracts Finder",
+    "section": "contract-awards",
+    "cpv": "33100000",
+    "valueAmount": 27066,
+    "valueCurrency": "GBP",
+    "periodStart": "2026-04-30T00:00:00+01:00",
+    "periodEnd": "2027-04-29T23:59:59+01:00",
+    "ocid": "ocds-b5fd17-b436b908-a05e-487c-b85e-b87230c970fc",
+    "company": "Labcold",
+    "matchedOn": "the notice names \"Labcold Limited\", which normalises to \"labcold\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
-  "Bayer": [
+  "Storz Medical UK": [
    {
-    "noticeSupplierName": "Bayer Plc",
-    "title": "Contraceptive Medicines",
-    "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland (PSDS)",
-    "date": "2026-08-13",
-    "url": "https://www.find-tender.service.gov.uk/Notice/077388-2026",
+    "noticeSupplierName": "Storz Medical (UK) Limited",
+    "title": "C455465 - Lithotriptor",
+    "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+    "date": "2026-06-23",
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/dfacaaad-080a-459d-b792-9cc5da89c99b",
     "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Find a Tender",
-    "section": "tender-awards",
-    "cpv": "33600000",
-    "valueAmount": null,
-    "valueCurrency": "",
-    "periodStart": null,
-    "periodEnd": null,
-    "ocid": "ocds-h6vhtk-064c91",
-    "company": "Bayer",
-    "matchedOn": "the notice names \"Bayer Plc\", which normalises to \"bayer\" — exactly the normalised form of this company's own name or a recorded alias."
-   }
-  ],
-  "Eckert & Ziegler BEBIG": [
-   {
-    "noticeSupplierName": "Eckert & Ziegler BEBIG Ltd.",
-    "title": "Ru-106 Eye Applicators",
-    "buyer": "NHS Greater Glasgow and Clyde",
-    "date": "2026-08-11",
-    "url": "https://www.find-tender.service.gov.uk/Notice/076375-2026",
-    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Find a Tender",
-    "section": "tender-awards",
-    "cpv": "33151000",
-    "valueAmount": null,
-    "valueCurrency": "",
-    "periodStart": null,
-    "periodEnd": null,
-    "ocid": "ocds-h6vhtk-06e1b8",
-    "company": "Eckert & Ziegler BEBIG",
-    "matchedOn": "the notice names \"Eckert & Ziegler BEBIG Ltd.\", which normalises to \"eckert and ziegler bebig\" — exactly the normalised form of this company's own name or a recorded alias."
+    "source": "Contracts Finder",
+    "section": "contract-awards",
+    "cpv": "33153000",
+    "valueAmount": 290000,
+    "valueCurrency": "GBP",
+    "periodStart": "2026-05-01T00:00:00+01:00",
+    "periodEnd": "2026-05-31T23:59:59+01:00",
+    "ocid": "ocds-b5fd17-0466a824-06b1-444f-9a4b-8f9cc91cdb65",
+    "company": "Storz Medical UK",
+    "matchedOn": "the notice names \"Storz Medical (UK) Limited\", which normalises to \"storz medical\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
   "Stryker": [
@@ -196,44 +170,44 @@
     "matchedOn": "the notice names \"Stryker UK Limited\", which normalises to \"stryker\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
-  "Laborie Medical Technologies UK Ltd": [
+  "Thermo Fisher Scientific UK": [
    {
-    "noticeSupplierName": "Laborie Medical Technologies UK",
-    "title": "ESNEFT3207 Urodynamics",
-    "buyer": "East Suffolk and North Essex NHS Foundation Trust",
-    "date": "2026-08-07",
-    "url": "https://www.find-tender.service.gov.uk/Notice/075431-2026",
+    "noticeSupplierName": "LIFE TECHNOLOGIES LIMITED",
+    "title": "ThermoFisher Workflow Consumables",
+    "buyer": "UK Health Security Agency",
+    "date": "2026-08-05",
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/353b58cd-c52b-461b-b864-81c692a504cf",
     "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Find a Tender",
-    "section": "tender-awards",
-    "cpv": "33100000",
-    "valueAmount": null,
-    "valueCurrency": "",
-    "periodStart": null,
-    "periodEnd": null,
-    "ocid": "ocds-h6vhtk-06df6e",
-    "company": "Laborie Medical Technologies UK Ltd",
-    "matchedOn": "the notice names \"Laborie Medical Technologies UK\", which normalises to \"laborie medical technologies\" — exactly the normalised form of this company's own name or a recorded alias."
+    "source": "Contracts Finder",
+    "section": "contract-awards",
+    "cpv": "33696500",
+    "valueAmount": 100000,
+    "valueCurrency": "GBP",
+    "periodStart": "2026-08-05T00:00:00+01:00",
+    "periodEnd": "2027-08-02T23:59:59+01:00",
+    "ocid": "ocds-b5fd17-e5ffa338-97c0-46b6-a689-f149b1929f0f",
+    "company": "Thermo Fisher Scientific UK",
+    "matchedOn": "the notice names \"LIFE TECHNOLOGIES LIMITED\", which normalises to \"life technologies\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
-  "Hamilton Medical UK": [
+  "Hillrom UK": [
    {
-    "noticeSupplierName": "HAMILTON MEDICAL UK LTD",
-    "title": "Capital Purchase of Hamilton T1 Transport Ventilator",
-    "buyer": "Hywel Dda University Local Health Board",
-    "date": "2026-08-07",
-    "url": "https://www.find-tender.service.gov.uk/Notice/075099-2026",
+    "noticeSupplierName": "Hillrom UK Ltd",
+    "title": "Patient Lifting",
+    "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland)",
+    "date": "2026-08-06",
+    "url": "https://www.find-tender.service.gov.uk/Notice/074950-2026",
     "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
     "source": "Find a Tender",
     "section": "tender-awards",
-    "cpv": "33100000",
+    "cpv": "33192600",
     "valueAmount": null,
     "valueCurrency": "",
     "periodStart": null,
     "periodEnd": null,
-    "ocid": "ocds-h6vhtk-06deab",
-    "company": "Hamilton Medical UK",
-    "matchedOn": "the notice names \"HAMILTON MEDICAL UK LTD\", which normalises to \"hamilton medical\" — exactly the normalised form of this company's own name or a recorded alias."
+    "ocid": "ocds-h6vhtk-0664e2",
+    "company": "Hillrom UK",
+    "matchedOn": "the notice names \"Hillrom UK Ltd\", which normalises to \"hillrom\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
   "Arjo": [
@@ -436,104 +410,24 @@
     "matchedOn": "the notice names \"MIP UK Limited\", which normalises to \"mip\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
-  "Agilent Technologies UK": [
+  "GE HealthCare": [
    {
-    "noticeSupplierName": "AGILENT TECHNOLOGIES LDA UK LIMITED",
-    "title": "1260 Affinity 11 HPLC",
-    "buyer": "BATH SPA UNIVERSITY",
-    "date": "2023-12-21",
-    "url": "https://www.contractsfinder.service.gov.uk/Notice/bee2730e-3ec2-48d1-8389-a53732e53039",
+    "noticeSupplierName": "GE HEALTHCARE LIMITED",
+    "title": "PROJ007278_Replacement of Trans-Rectal Ultrasound Scanner",
+    "buyer": "Nottingham University Hospitals NHS Trust",
+    "date": "2026-08-07",
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/23d3f695-6c1f-4a01-96ed-8950dac40f99",
     "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
     "source": "Contracts Finder",
     "section": "contract-awards",
     "cpv": "33100000",
-    "valueAmount": 39993.89,
+    "valueAmount": 98762.4,
     "valueCurrency": "GBP",
-    "periodStart": "2023-12-21T00:00:00Z",
-    "periodEnd": "2024-01-20T23:59:59Z",
-    "ocid": "ocds-b5fd17-ad102e0c-3b38-4a31-9026-f874ff3d1bc5",
-    "company": "Agilent Technologies UK",
-    "matchedOn": "the notice names \"AGILENT TECHNOLOGIES LDA UK LIMITED\", which normalises to \"agilent technologies lda\" — exactly the normalised form of this company's own name or a recorded alias."
-   }
-  ],
-  "Teleflex Medical UK": [
-   {
-    "noticeSupplierName": "TELEFLEX MEDICAL",
-    "title": "FSH - MIS - Ligation Clip Appliers - Teleflex Medical",
-    "buyer": "UHSussex NHS Foundation Trust",
-    "date": "2026-08-11",
-    "url": "https://www.contractsfinder.service.gov.uk/Notice/879cbae9-9d13-4a60-9212-aed86cc959d0",
-    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Contracts Finder",
-    "section": "contract-awards",
-    "cpv": "33141120",
-    "valueAmount": 152165.56,
-    "valueCurrency": "GBP",
-    "periodStart": "2026-08-10T00:00:00+01:00",
-    "periodEnd": "2030-06-08T23:59:59+01:00",
-    "ocid": "ocds-b5fd17-578edf5f-713e-43d9-9d86-0aca90a31d37",
-    "company": "Teleflex Medical UK",
-    "matchedOn": "the notice names \"TELEFLEX MEDICAL\", which normalises to \"teleflex medical\" — exactly the normalised form of this company's own name or a recorded alias."
-   }
-  ],
-  "Mindray UK": [
-   {
-    "noticeSupplierName": "Mindray (UK) Limited",
-    "title": "Patient Monitoring Mounting Solution",
-    "buyer": "Northumbria Healthcare Facilities Management Limited",
-    "date": "2026-08-12",
-    "url": "https://www.contractsfinder.service.gov.uk/Notice/544069b3-1c26-411e-85cf-ef81d2488bde",
-    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Contracts Finder",
-    "section": "contract-awards",
-    "cpv": "33195000",
-    "valueAmount": 99965,
-    "valueCurrency": "GBP",
-    "periodStart": "2026-08-13T00:00:00+01:00",
-    "periodEnd": "2026-08-31T23:59:59+01:00",
-    "ocid": "ocds-b5fd17-7068a435-07bf-4fde-821e-f1cf39378fd3",
-    "company": "Mindray UK",
-    "matchedOn": "the notice names \"Mindray (UK) Limited\", which normalises to \"mindray\" — exactly the normalised form of this company's own name or a recorded alias."
-   }
-  ],
-  "Labcold": [
-   {
-    "noticeSupplierName": "Labcold Limited",
-    "title": "Pharmacy Fridges for PMU",
-    "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
-    "date": "2026-02-16",
-    "url": "https://www.contractsfinder.service.gov.uk/Notice/291929d9-e67d-4c9a-bab5-880d997995c7",
-    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Contracts Finder",
-    "section": "contract-awards",
-    "cpv": "33100000",
-    "valueAmount": 27066,
-    "valueCurrency": "GBP",
-    "periodStart": "2026-04-30T00:00:00+01:00",
-    "periodEnd": "2027-04-29T23:59:59+01:00",
-    "ocid": "ocds-b5fd17-b436b908-a05e-487c-b85e-b87230c970fc",
-    "company": "Labcold",
-    "matchedOn": "the notice names \"Labcold Limited\", which normalises to \"labcold\" — exactly the normalised form of this company's own name or a recorded alias."
-   }
-  ],
-  "Storz Medical UK": [
-   {
-    "noticeSupplierName": "Storz Medical (UK) Limited",
-    "title": "C455465 - Lithotriptor",
-    "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
-    "date": "2026-06-23",
-    "url": "https://www.contractsfinder.service.gov.uk/Notice/dfacaaad-080a-459d-b792-9cc5da89c99b",
-    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Contracts Finder",
-    "section": "contract-awards",
-    "cpv": "33153000",
-    "valueAmount": 290000,
-    "valueCurrency": "GBP",
-    "periodStart": "2026-05-01T00:00:00+01:00",
-    "periodEnd": "2026-05-31T23:59:59+01:00",
-    "ocid": "ocds-b5fd17-0466a824-06b1-444f-9a4b-8f9cc91cdb65",
-    "company": "Storz Medical UK",
-    "matchedOn": "the notice names \"Storz Medical (UK) Limited\", which normalises to \"storz medical\" — exactly the normalised form of this company's own name or a recorded alias."
+    "periodStart": "2026-08-07T00:00:00+01:00",
+    "periodEnd": "2026-08-08T23:59:59+01:00",
+    "ocid": "ocds-b5fd17-c24a4dc6-bdbc-43bb-915c-ba744ce87437",
+    "company": "GE HealthCare",
+    "matchedOn": "the notice names \"GE HEALTHCARE LIMITED\", which normalises to \"ge healthcare\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
   "Alpha Laboratories": [
@@ -556,81 +450,241 @@
     "matchedOn": "the notice names \"Alpha Laboratories Ltd\", which normalises to \"alpha laboratories\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
-  "Thermo Fisher Scientific UK": [
+  "Hamilton Medical UK": [
    {
-    "noticeSupplierName": "LIFE TECHNOLOGIES LIMITED",
-    "title": "ThermoFisher Workflow Consumables",
-    "buyer": "UK Health Security Agency",
-    "date": "2026-08-05",
-    "url": "https://www.contractsfinder.service.gov.uk/Notice/353b58cd-c52b-461b-b864-81c692a504cf",
+    "noticeSupplierName": "HAMILTON MEDICAL UK LTD",
+    "title": "Capital Purchase of Hamilton T1 Transport Ventilator",
+    "buyer": "Hywel Dda University Local Health Board",
+    "date": "2026-08-07",
+    "url": "https://www.find-tender.service.gov.uk/Notice/075099-2026",
     "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Contracts Finder",
-    "section": "contract-awards",
-    "cpv": "33696500",
-    "valueAmount": 100000,
-    "valueCurrency": "GBP",
-    "periodStart": "2026-08-05T00:00:00+01:00",
-    "periodEnd": "2027-08-02T23:59:59+01:00",
-    "ocid": "ocds-b5fd17-e5ffa338-97c0-46b6-a689-f149b1929f0f",
-    "company": "Thermo Fisher Scientific UK",
-    "matchedOn": "the notice names \"LIFE TECHNOLOGIES LIMITED\", which normalises to \"life technologies\" — exactly the normalised form of this company's own name or a recorded alias."
+    "source": "Find a Tender",
+    "section": "tender-awards",
+    "cpv": "33100000",
+    "valueAmount": null,
+    "valueCurrency": "",
+    "periodStart": null,
+    "periodEnd": null,
+    "ocid": "ocds-h6vhtk-06deab",
+    "company": "Hamilton Medical UK",
+    "matchedOn": "the notice names \"HAMILTON MEDICAL UK LTD\", which normalises to \"hamilton medical\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
-  "GE HealthCare": [
+  "Laborie Medical Technologies UK Ltd": [
    {
-    "noticeSupplierName": "GE HEALTHCARE LIMITED",
-    "title": "PROJ007278_Replacement of Trans-Rectal Ultrasound Scanner",
-    "buyer": "Nottingham University Hospitals NHS Trust",
+    "noticeSupplierName": "Laborie Medical Technologies UK",
+    "title": "ESNEFT3207 Urodynamics",
+    "buyer": "East Suffolk and North Essex NHS Foundation Trust",
     "date": "2026-08-07",
-    "url": "https://www.contractsfinder.service.gov.uk/Notice/23d3f695-6c1f-4a01-96ed-8950dac40f99",
+    "url": "https://www.find-tender.service.gov.uk/Notice/075431-2026",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Find a Tender",
+    "section": "tender-awards",
+    "cpv": "33100000",
+    "valueAmount": null,
+    "valueCurrency": "",
+    "periodStart": null,
+    "periodEnd": null,
+    "ocid": "ocds-h6vhtk-06df6e",
+    "company": "Laborie Medical Technologies UK Ltd",
+    "matchedOn": "the notice names \"Laborie Medical Technologies UK\", which normalises to \"laborie medical technologies\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Teleflex Medical UK": [
+   {
+    "noticeSupplierName": "TELEFLEX MEDICAL",
+    "title": "FSH - MIS - Ligation Clip Appliers - Teleflex Medical",
+    "buyer": "UHSussex NHS Foundation Trust",
+    "date": "2026-08-11",
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/879cbae9-9d13-4a60-9212-aed86cc959d0",
     "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
     "source": "Contracts Finder",
     "section": "contract-awards",
-    "cpv": "33100000",
-    "valueAmount": 98762.4,
+    "cpv": "33141120",
+    "valueAmount": 152165.56,
     "valueCurrency": "GBP",
-    "periodStart": "2026-08-07T00:00:00+01:00",
-    "periodEnd": "2026-08-08T23:59:59+01:00",
-    "ocid": "ocds-b5fd17-c24a4dc6-bdbc-43bb-915c-ba744ce87437",
-    "company": "GE HealthCare",
-    "matchedOn": "the notice names \"GE HEALTHCARE LIMITED\", which normalises to \"ge healthcare\" — exactly the normalised form of this company's own name or a recorded alias."
+    "periodStart": "2026-08-10T00:00:00+01:00",
+    "periodEnd": "2030-06-08T23:59:59+01:00",
+    "ocid": "ocds-b5fd17-578edf5f-713e-43d9-9d86-0aca90a31d37",
+    "company": "Teleflex Medical UK",
+    "matchedOn": "the notice names \"TELEFLEX MEDICAL\", which normalises to \"teleflex medical\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Eckert & Ziegler BEBIG": [
+   {
+    "noticeSupplierName": "Eckert & Ziegler BEBIG Ltd.",
+    "title": "Ru-106 Eye Applicators",
+    "buyer": "NHS Greater Glasgow and Clyde",
+    "date": "2026-08-11",
+    "url": "https://www.find-tender.service.gov.uk/Notice/076375-2026",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Find a Tender",
+    "section": "tender-awards",
+    "cpv": "33151000",
+    "valueAmount": null,
+    "valueCurrency": "",
+    "periodStart": null,
+    "periodEnd": null,
+    "ocid": "ocds-h6vhtk-06e1b8",
+    "company": "Eckert & Ziegler BEBIG",
+    "matchedOn": "the notice names \"Eckert & Ziegler BEBIG Ltd.\", which normalises to \"eckert and ziegler bebig\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Mindray UK": [
+   {
+    "noticeSupplierName": "Mindray (UK) Limited",
+    "title": "Patient Monitoring Mounting Solution",
+    "buyer": "Northumbria Healthcare Facilities Management Limited",
+    "date": "2026-08-12",
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/544069b3-1c26-411e-85cf-ef81d2488bde",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Contracts Finder",
+    "section": "contract-awards",
+    "cpv": "33195000",
+    "valueAmount": 99965,
+    "valueCurrency": "GBP",
+    "periodStart": "2026-08-13T00:00:00+01:00",
+    "periodEnd": "2026-08-31T23:59:59+01:00",
+    "ocid": "ocds-b5fd17-7068a435-07bf-4fde-821e-f1cf39378fd3",
+    "company": "Mindray UK",
+    "matchedOn": "the notice names \"Mindray (UK) Limited\", which normalises to \"mindray\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Bayer": [
+   {
+    "noticeSupplierName": "Bayer Plc",
+    "title": "Contraceptive Medicines",
+    "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland (PSDS)",
+    "date": "2026-08-13",
+    "url": "https://www.find-tender.service.gov.uk/Notice/077388-2026",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Find a Tender",
+    "section": "tender-awards",
+    "cpv": "33600000",
+    "valueAmount": null,
+    "valueCurrency": "",
+    "periodStart": null,
+    "periodEnd": null,
+    "ocid": "ocds-h6vhtk-064c91",
+    "company": "Bayer",
+    "matchedOn": "the notice names \"Bayer Plc\", which normalises to \"bayer\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Heidelberg Engineering": [
+   {
+    "noticeSupplierName": "Heidelberg Engineering Ltd",
+    "title": "Multimodal Imaging Platform Procurement",
+    "buyer": "University Of Edinburgh",
+    "date": "2026-08-14",
+    "url": "https://www.find-tender.service.gov.uk/Notice/077567-2026",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Find a Tender",
+    "section": "tender-awards",
+    "cpv": "33110000",
+    "valueAmount": null,
+    "valueCurrency": "",
+    "periodStart": null,
+    "periodEnd": null,
+    "ocid": "ocds-h6vhtk-06e459",
+    "company": "Heidelberg Engineering",
+    "matchedOn": "the notice names \"Heidelberg Engineering Ltd\", which normalises to \"heidelberg engineering\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Xiel Ltd": [
+   {
+    "noticeSupplierName": "Xiel Limited",
+    "title": "ADVANCED ELECTRON DENSITY PHANTOM",
+    "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+    "date": "2026-08-14",
+    "url": "https://www.find-tender.service.gov.uk/Notice/077634-2026",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Find a Tender",
+    "section": "tender-awards",
+    "cpv": "33150000",
+    "valueAmount": null,
+    "valueCurrency": "",
+    "periodStart": null,
+    "periodEnd": null,
+    "ocid": "ocds-h6vhtk-06e488",
+    "company": "Xiel Ltd",
+    "matchedOn": "the notice names \"Xiel Limited\", which normalises to \"xiel\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Agito Medical A/S": [
+   {
+    "noticeSupplierName": "AGITO Medical",
+    "title": "Relocatable MRI Scanner (staffed)",
+    "buyer": "SOMERSET NHS FOUNDATION TRUST",
+    "date": "2026-08-14",
+    "url": "https://www.find-tender.service.gov.uk/Notice/077795-2026",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Find a Tender",
+    "section": "tender-awards",
+    "cpv": "33113000",
+    "valueAmount": null,
+    "valueCurrency": "",
+    "periodStart": null,
+    "periodEnd": null,
+    "ocid": "ocds-h6vhtk-06e4e5",
+    "company": "Agito Medical A/S",
+    "matchedOn": "the notice names \"AGITO Medical\", which normalises to \"agito medical\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "DP Medical Systems": [
+   {
+    "noticeSupplierName": "DP Medical Systems",
+    "title": "ESNEFT3325 Eye Department Procedure Chairs",
+    "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+    "date": "2026-08-14",
+    "url": "https://www.find-tender.service.gov.uk/Notice/077803-2026",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Find a Tender",
+    "section": "tender-awards",
+    "cpv": "33100000",
+    "valueAmount": null,
+    "valueCurrency": "",
+    "periodStart": null,
+    "periodEnd": null,
+    "ocid": "ocds-h6vhtk-06e4ec",
+    "company": "DP Medical Systems",
+    "matchedOn": "the notice names \"DP Medical Systems\", which normalises to \"dp medical systems\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ]
  },
  "unmatched": [
   {
-   "noticeSupplierName": "AGITO Medical",
-   "title": "Relocatable MRI Scanner (staffed)",
-   "buyer": "SOMERSET NHS FOUNDATION TRUST",
-   "date": "2026-08-14",
-   "url": "https://www.find-tender.service.gov.uk/Notice/077795-2026",
+   "noticeSupplierName": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "title": "Service Maintenance of GE Signa Premier XT MR31 3T MRI Scanner",
+   "buyer": "Hull University Teaching Hospitals NHS Foundation Trust",
+   "date": "2026-08-13",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/af3b54a5-bf2d-438b-8581-a278f02ac3f4",
    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-   "source": "Find a Tender",
-   "section": "tender-awards",
-   "cpv": "33113000",
-   "valueAmount": null,
-   "valueCurrency": "",
-   "periodStart": null,
-   "periodEnd": null,
-   "ocid": "ocds-h6vhtk-06e4e5",
-   "reason": "no Hub company's name or recorded alias normalises to \"agito medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+   "source": "Contracts Finder",
+   "section": "contract-awards",
+   "cpv": "50420000",
+   "valueAmount": 714989.97,
+   "valueCurrency": "GBP",
+   "periodStart": "2026-10-01T00:00:00+01:00",
+   "periodEnd": "2036-09-30T23:59:59+01:00",
+   "ocid": "ocds-b5fd17-9e51eeb0-1389-4995-8de5-5e048996f6ba",
+   "reason": "no Hub company's name or recorded alias normalises to \"nhs supply chain coordination limited nhssc sccl\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
   },
   {
-   "noticeSupplierName": "Xiel Limited",
-   "title": "ADVANCED ELECTRON DENSITY PHANTOM",
-   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
-   "date": "2026-08-14",
-   "url": "https://www.find-tender.service.gov.uk/Notice/077634-2026",
+   "noticeSupplierName": "Foundever Global Services Ltd",
+   "title": "NP86726 - Testing Kits Assembly & Distribution Service",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077212-2026",
    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
    "source": "Find a Tender",
    "section": "tender-awards",
-   "cpv": "33150000",
+   "cpv": "33140000",
    "valueAmount": null,
    "valueCurrency": "",
    "periodStart": null,
    "periodEnd": null,
-   "ocid": "ocds-h6vhtk-06e488",
-   "reason": "no Hub company's name or recorded alias normalises to \"xiel\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+   "ocid": "ocds-h6vhtk-068f03",
+   "reason": "no Hub company's name or recorded alias normalises to \"foundever global services\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
   },
   {
    "noticeSupplierName": "Lupin Healthcare UK Ltd",
@@ -735,40 +789,6 @@
    "reason": "no Hub company's name or recorded alias normalises to \"gedeon richter\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
   },
   {
-   "noticeSupplierName": "Foundever Global Services Ltd",
-   "title": "NP86726 - Testing Kits Assembly & Distribution Service",
-   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
-   "date": "2026-08-13",
-   "url": "https://www.find-tender.service.gov.uk/Notice/077212-2026",
-   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-   "source": "Find a Tender",
-   "section": "tender-awards",
-   "cpv": "33140000",
-   "valueAmount": null,
-   "valueCurrency": "",
-   "periodStart": null,
-   "periodEnd": null,
-   "ocid": "ocds-h6vhtk-068f03",
-   "reason": "no Hub company's name or recorded alias normalises to \"foundever global services\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-  },
-  {
-   "noticeSupplierName": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
-   "title": "Service Maintenance of GE Signa Premier XT MR31 3T MRI Scanner",
-   "buyer": "Hull University Teaching Hospitals NHS Foundation Trust",
-   "date": "2026-08-13",
-   "url": "https://www.contractsfinder.service.gov.uk/Notice/af3b54a5-bf2d-438b-8581-a278f02ac3f4",
-   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-   "source": "Contracts Finder",
-   "section": "contract-awards",
-   "cpv": "50420000",
-   "valueAmount": 714989.97,
-   "valueCurrency": "GBP",
-   "periodStart": "2026-10-01T00:00:00+01:00",
-   "periodEnd": "2036-09-30T23:59:59+01:00",
-   "ocid": "ocds-b5fd17-9e51eeb0-1389-4995-8de5-5e048996f6ba",
-   "reason": "no Hub company's name or recorded alias normalises to \"nhs supply chain coordination limited nhssc sccl\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-  },
-  {
    "noticeSupplierName": "Sisk Healthcare T/A Synapse Medical",
    "title": "SUPPLY OF CONTRAST MEDIA INJECTION CONSUMABLES (SINGLE USE TUBING AND PUMP HOSE FOR MULTIDOSE SYNAPSE MEDICAL INJECTORS) (PRODUCT CODE XD8151 AND XD2040)",
    "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
@@ -803,6 +823,40 @@
    "reason": "no Hub company's name or recorded alias normalises to \"spamedica\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
   },
   {
+   "noticeSupplierName": "Johnson And Johnson Medical Ltd",
+   "title": "Consumable products used in Minimally Invasive Surgery",
+   "buyer": "Nottingham University Hospital NHS Trust",
+   "date": "2026-08-06",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/a726515b-81e2-4696-8413-110c56a8f8e1",
+   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+   "source": "Contracts Finder",
+   "section": "contract-awards",
+   "cpv": "33140000",
+   "valueAmount": 1175352,
+   "valueCurrency": "GBP",
+   "periodStart": "2026-08-10T00:00:00+01:00",
+   "periodEnd": "2027-08-09T23:59:59+01:00",
+   "ocid": "ocds-b5fd17-b9faaf1e-4f43-4e86-bdb8-f771ae74d1a1",
+   "reason": "no Hub company's name or recorded alias normalises to \"johnson and johnson medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "noticeSupplierName": "St Helens Independent Medical Clinic LLP",
+   "title": "Insourced elective theatre capacity",
+   "buyer": "MERSEY AND WEST LANCASHIRE TEACHING HOSPITALS NHS TRUST",
+   "date": "2026-08-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/074925-2026",
+   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+   "source": "Find a Tender",
+   "section": "tender-awards",
+   "cpv": "85000000",
+   "valueAmount": null,
+   "valueCurrency": "",
+   "periodStart": null,
+   "periodEnd": null,
+   "ocid": "ocds-h6vhtk-06de42",
+   "reason": "no Hub company's name or recorded alias normalises to \"st helens independent medical clinic\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
    "noticeSupplierName": "Direct Health Group",
    "title": "Patient Lifting",
    "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland)",
@@ -818,23 +872,6 @@
    "periodEnd": null,
    "ocid": "ocds-h6vhtk-0664e2",
    "reason": "no Hub company's name or recorded alias normalises to \"direct health group\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-  },
-  {
-   "noticeSupplierName": "Hillrom UK Ltd",
-   "title": "Patient Lifting",
-   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland)",
-   "date": "2026-08-06",
-   "url": "https://www.find-tender.service.gov.uk/Notice/074950-2026",
-   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-   "source": "Find a Tender",
-   "section": "tender-awards",
-   "cpv": "33192600",
-   "valueAmount": null,
-   "valueCurrency": "",
-   "periodStart": null,
-   "periodEnd": null,
-   "ocid": "ocds-h6vhtk-0664e2",
-   "reason": "no Hub company's name or recorded alias normalises to \"hillrom\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
   },
   {
    "noticeSupplierName": "Mangar International",
@@ -886,40 +923,6 @@
    "periodEnd": null,
    "ocid": "ocds-h6vhtk-0664e2",
    "reason": "no Hub company's name or recorded alias normalises to \"oxford medical healthcare\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-  },
-  {
-   "noticeSupplierName": "St Helens Independent Medical Clinic LLP",
-   "title": "Insourced elective theatre capacity",
-   "buyer": "MERSEY AND WEST LANCASHIRE TEACHING HOSPITALS NHS TRUST",
-   "date": "2026-08-06",
-   "url": "https://www.find-tender.service.gov.uk/Notice/074925-2026",
-   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-   "source": "Find a Tender",
-   "section": "tender-awards",
-   "cpv": "85000000",
-   "valueAmount": null,
-   "valueCurrency": "",
-   "periodStart": null,
-   "periodEnd": null,
-   "ocid": "ocds-h6vhtk-06de42",
-   "reason": "no Hub company's name or recorded alias normalises to \"st helens independent medical clinic\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-  },
-  {
-   "noticeSupplierName": "Johnson And Johnson Medical Ltd",
-   "title": "Consumable products used in Minimally Invasive Surgery",
-   "buyer": "Nottingham University Hospital NHS Trust",
-   "date": "2026-08-06",
-   "url": "https://www.contractsfinder.service.gov.uk/Notice/a726515b-81e2-4696-8413-110c56a8f8e1",
-   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-   "source": "Contracts Finder",
-   "section": "contract-awards",
-   "cpv": "33140000",
-   "valueAmount": 1175352,
-   "valueCurrency": "GBP",
-   "periodStart": "2026-08-10T00:00:00+01:00",
-   "periodEnd": "2027-08-09T23:59:59+01:00",
-   "ocid": "ocds-b5fd17-b9faaf1e-4f43-4e86-bdb8-f771ae74d1a1",
-   "reason": "no Hub company's name or recorded alias normalises to \"johnson and johnson medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
   },
   {
    "noticeSupplierName": "ALTONA DIAGNOSTICS UK LIMITED",

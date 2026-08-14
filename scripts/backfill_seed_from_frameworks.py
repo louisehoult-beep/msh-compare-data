@@ -105,6 +105,11 @@ def main(write=False, tier="1"):
         name = c["name"]
         if c["verdict"] == "alias":
             continue
+        if c["verdict"] == "excluded":
+            # Not a company name — a table header, a URL, a bare abbreviation.
+            # Creating a record would put "Suppliers" in the Supplier Directory.
+            skipped.append((name, "excluded: not a company name"))
+            continue
         if name.lower() in held:
             skipped.append((name, "already in seed"))
             continue
