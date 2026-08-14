@@ -533,6 +533,19 @@ def main():
         ranked.sort(reverse=True)
         targets = [(n, d) for _, n, d in ranked[:a.limit]]
 
+        # WHY THIS EXISTS (added 14/08/2026). An empty --auto queue is the
+        # SWEEP FINISHING, not a fault: every framework supplier that has a
+        # website recorded in the index has now either been captured or
+        # refused inside the TTL. Exiting non-zero turned that into a red
+        # scheduled run every night. The genuine error — invoked with no
+        # target and no --auto — still exits 1 below.
+        if not targets:
+            print("Nothing due: every framework supplier with a website recorded "
+                  "in the index has been captured or refused within the last "
+                  "%d days. Nothing crawled, nothing written." % a.refusal_ttl,
+                  flush=True)
+            return
+
     if not targets:
         sys.exit("Nothing to crawl. Pass --supplier NAME [--domain host], or --auto.")
 
