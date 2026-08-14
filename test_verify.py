@@ -842,12 +842,73 @@ cr("probable matches, and a source that never reads matchConfidence",
    cr_financials(matchConfidence="probable"),
    "var h='<p>'+rows.length+' on this lot</p>';", "never reads matchConfidence")
 
+# ROUTE 2 — the company number the company publishes on its own site.
+# A confirmation is a claim about a source. These three cases exist because the
+# claim and the source live in two different files: the confidence is written to
+# data/company-financials.json by scripts/refresh_companies_house.py, and the
+# evidence for it to data/supplier-seed.json by scripts/confirm_company_numbers.py.
+# Anything that separates them — the nightly rebuild dropping the field, a hand
+# edit, a restore from an older seed — leaves a record citing a page this repo
+# can no longer produce, which reads on the page as a verified fact.
+cr("a route-2 confirmation whose evidence is not in the seed",
+   cr_financials(matchedOn="company number published on the company's own website, agreeing "
+                           "with the Companies House record — https://example.com/terms, "
+                           "read 2026-08-14"),
+   CR_GOOD_JS, "holds no companyNumberProof")
+cr("a route-2 confirmation attached to a different company's number",
+   cr_financials(companies={"AB Scientific": {
+       "companyNumber": "00000001",
+       "registeredName": "AB SCIENTIFIC LTD",
+       "matchConfidence": "confirmed",
+       "matchedOn": "company number published on the company's own website, agreeing with the "
+                    "Companies House record — https://www.abscientific.com/terms-of-use/, "
+                    "read 2026-08-14",
+       "status": "active",
+       "incorporated": "2014-05-08",
+       "accountsCategory": "full",
+       "accountsMadeUpTo": "2025-03-31",
+       "turnoverGBP": None,
+       "employees": None,
+       "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/00000001",
+   }}),
+   CR_GOOD_JS, "belongs to a different company")
+
 # And the other half of the job: the lookalikes it must stay QUIET on. A false
 # FAIL blocks the unattended refresh workflows from committing, and the first
 # false FAIL on an honest empty state is the one that gets the empty state
 # deleted to make a push go through.
 CR_QUIET = [
     ("a good file and a good source", cr_financials(), CR_GOOD_JS),
+    # The honest version of the two route-2 cases above: AB Scientific really
+    # does publish 09033854 on its own terms page, and the seed really does hold
+    # the proof. If this one ever fails, the check has stopped recognising a
+    # correct confirmation and the fix is the check, not the data.
+    ("a route-2 confirmation that can show its working", {
+        "dataAsOf": cr_today(-30),
+        "source": "Companies House public data API",
+        "thresholds": {
+            "readFrom": "https://www.gov.uk/government/publications/company-size",
+            "readOn": cr_today(-30),
+            "appliesTo": "periods beginning on or after 6 April 2025",
+            "bands": {"micro": {"turnover": 1}, "small": {"turnover": 2},
+                      "medium": {"turnover": 3}},
+        },
+        "companies": {"AB Scientific": {
+            "companyNumber": "09033854",
+            "registeredName": "AB SCIENTIFIC LTD",
+            "matchConfidence": "confirmed",
+            "matchedOn": "company number published on the company's own website, agreeing with "
+                         "the Companies House record — https://www.abscientific.com/terms-of-use/, "
+                         "read 2026-08-14",
+            "status": "active",
+            "incorporated": "2014-05-08",
+            "accountsCategory": "full",
+            "accountsMadeUpTo": "2025-03-31",
+            "turnoverGBP": None,
+            "employees": None,
+            "sourceUrl": "https://find-and-update.company-information.service.gov.uk/company/09033854",
+        }},
+    }, CR_GOOD_JS),
     ("a CSS width of 100% beside a Field position heading", None,
      "h+='<div>Field position</div><div style=\"width:100%\"></div>';"),
     ("a Share button on the interview pack, and a modulo", None,
@@ -1124,6 +1185,66 @@ def _(tmp):
         return None
     write_search(search_index())        # one page, against a committed many
     return "drops from"
+
+
+# --------------------------------------------------------------------------
+# Trust pressures. These figures are copied from NHS England, the CQC and
+# UKHSA and put in front of a rep who will quote them back to the trust that
+# produced them. Every case below is a way that goes wrong quietly: a column
+# that moved, a trust that no longer exists, or a number nobody re-fetched.
+# --------------------------------------------------------------------------
+PRESSURES_PATH = "data/trust-pressures.json"
+
+
+def pressures(**over):
+    d = json.load(open(PRESSURES_PATH))
+    d.update(over)
+    return d
+
+
+def write_pressures(d):
+    json.dump(d, open(PRESSURES_PATH, "w"), ensure_ascii=False, indent=1)
+
+
+@case("a waiting-list percentage above 100, which means the column moved")
+def _(tmp):
+    d = pressures()
+    code = next(iter(d["trusts"]))
+    d["trusts"][code]["pct18"] = 118.4
+    write_pressures(d)
+    return "outside the possible range"
+
+
+@case("a median wait of 900 weeks, copied from the wrong column")
+def _(tmp):
+    d = pressures()
+    code = next(iter(d["trusts"]))
+    d["trusts"][code]["spec"] = {"Trauma & Orthopaedics": 900}
+    write_pressures(d)
+    return "cannot be right"
+
+
+@case("figures filed against a trust that no longer legally exists")
+def _(tmp):
+    d = pressures()
+    d["trusts"]["RVJ"] = {"name": "North Bristol NHS Trust", "wl": 42031}
+    write_pressures(d)
+    return "not in the trust map"
+
+
+@case("published figures nobody has rebuilt for two RTT cycles")
+def _(tmp):
+    old = datetime.date.today() - datetime.timedelta(days=120)
+    write_pressures(pressures(asOf=old.strftime("%d/%m/%Y")))
+    return "monthly return"
+
+
+@case("a trust figure with no period recorded against it")
+def _(tmp):
+    d = pressures()
+    d["periods"] = dict(d.get("periods") or {}, rtt=None)
+    write_pressures(d)
+    return "no period recorded"
 
 
 def main():

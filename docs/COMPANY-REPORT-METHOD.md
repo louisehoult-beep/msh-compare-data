@@ -176,6 +176,24 @@ A bare name-search resemblance is none of these and stays `probable`. Route 3 ex
 because the catalogue names the legal entity actually supplying the framework — it ties
 the entity to the listing, which a name search cannot do.
 
+**Implementation status (14/08/2026).** Route 1 is implemented — the anchored
+"Companies House NNNNNNNN" pattern in `alerts[]`/`note`. **Route 2 is implemented**:
+`scripts/confirm_company_numbers.py` reads the registration proofs already captured in
+`state/domain-seeding-report.json` by the domain sweep and writes them onto the seed
+record as `companyNumberProof` (number, route, source URL, verbatim evidence, date
+read); `scripts/refresh_companies_house.py` reads that field and, where Companies House
+corroborates the registered name and the company is active, records `confirmed` with a
+`matchedOn` that quotes the URL. **Route 3 is specified and not built.**
+
+Where routes 1 and 2 both fire and disagree, the number is discarded and the supplier
+falls through to name search. Two sourced numbers disagreeing is a fact to check by
+hand, not a tie to break in code — the same rule already applied to two anchored numbers.
+
+`verify.py` holds the invariant in both directions: a record claiming route 2 must have
+a matching `companyNumberProof` in the seed carrying the same number, a URL and an
+evidence string; and a malformed proof fails the gate rather than being silently
+ignored. The two files can only be separated by a bug, and the gate is what notices.
+
 **Manual interim (06/08/2026).** The Companies House API key is still awaited, so
 `data/company-financials.json` was first populated by hand from the public register, for
 the suppliers on GBUK Group's two frameworks only. Its `source` and `coverage` fields

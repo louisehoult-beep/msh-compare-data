@@ -117,6 +117,7 @@
       if (sd.products && sd.products.length) s.products = sd.products;
       if (sd.frameworks && sd.frameworks.length) s.frameworks = sd.frameworks;
       if (sd.specialities && sd.specialities.length) s.specialities = sd.specialities;
+      if (sd.repsWatch) s.repsWatch = sd.repsWatch;
     });
     var have = {};
     suppliers.forEach(function (s) { have[s.name] = 1; });
@@ -1215,6 +1216,49 @@
      (with growth near the top), specialities/divisions as cards, competitors
      by speciality, news and people, working-there, and the full listings
      LAST. */
+  /* ROUTE, BUYERS AND STANDING SIGNALS.
+     Carried in from the Client Intelligence Profiles page (WP 1751) when that page
+     was retired on 14/08/2026, so nothing it held was lost with it.
+
+     Curated, not computed, so it prints its provenance rather than a derivation
+     rule. Structural on purpose: how the volume actually reaches the NHS, who
+     signs for it, and the standing signals reps act on. Framework values, renewal
+     dates and live alerts are deliberately NOT restated here — they are read live
+     in the Frameworks and Alerts panels, and a second hand-typed copy of a dated
+     fact is the exact drift the verification standard exists to stop.
+
+     Held for a handful of companies only, so it renders when present and is simply
+     absent otherwise. It gets no empty state on purpose: an empty "what to watch"
+     would read as "there is nothing to watch", which is never true. */
+  function repsWatch(sub) {
+    var rw = sub.repsWatch;
+    if (!rw) return '';
+    var buyers = rw.buyers || [], watch = rw.watch || [];
+    if (!rw.route && !buyers.length && !watch.length) return '';
+
+    var b = '';
+    if (rw.route) {
+      b += '<div style="font-size:13.5px;color:#37485a;line-height:1.6;">' +
+        '<b style="color:' + INK + ';">Route to market.</b> ' + esc(rw.route) + '</div>';
+    }
+    if (buyers.length) {
+      b += '<div style="margin-top:11px;"><div style="font-size:13px;color:' + INK +
+        ';font-weight:700;margin-bottom:6px;">Who signs for it</div>' +
+        buyers.map(function (x) { return chip(x, 'gold'); }).join('') + '</div>';
+    }
+    if (watch.length) {
+      b += '<div style="margin-top:11px;"><div style="font-size:13px;color:' + INK +
+        ';font-weight:700;margin-bottom:6px;">Standing signals reps act on</div>' +
+        '<ul style="margin:0;padding-left:18px;font-size:13.5px;color:#37485a;line-height:1.65;">' +
+        watch.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div>';
+    }
+    if (rw.source) {
+      b += '<div style="margin-top:10px;font-size:12px;color:' + DIM + ';line-height:1.55;">' +
+        esc(rw.source) + '</div>';
+    }
+    return sec('What reps should watch', b);
+  }
+
   function composeSections(sub, ctx) {
     var d = deepFor(sub);
     var h = '';
@@ -1239,6 +1283,7 @@
     /* -- 3 · Specialities / divisions as cards -------------------------- */
     h += divisionCards(sub, ctx);
     h += frameworks(sub, ctx);
+    h += repsWatch(sub);
 
     /* -- 4 · Competitors ------------------------------------------------ */
     h += '<div style="margin:20px 0 0;padding-top:14px;border-top:2px solid ' + LINE + ';">' +

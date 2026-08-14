@@ -26,13 +26,26 @@ under, and refuses to fire on thin evidence)
 ------------------------------------------------------------------------------
 `matchConfidence` is "confirmed" only when ALL FOUR hold:
 
-  1. the company number came from the supplier's OWN recorded text — the
-     anchored "Companies House NNNNNNNN" pattern in alerts[]/note, never a bare
-     8-digit number found lying around in prose;
+  1. the company number came from a SOURCE, by one of the two routes below,
+     never a bare 8-digit number found lying around in prose;
   2. Companies House returns a record for that number;
   3. the registered name corroborates the supplier — at least one significant
      token in common after corporate stopwords are dropped;
   4. the company is `active`.
+
+The two accepted sources for test 1 (routes 1 and 2 of the method doc; route 3,
+the NHSSC legal supplier name, is specified there and not yet implemented):
+
+  ROUTE 1 — the anchored "Companies House NNNNNNNN" pattern in the supplier's
+     own alerts[]/note, curated by hand.
+  ROUTE 2 — `companyNumberProof`, the registration number the company publishes
+     on its OWN site, written by scripts/confirm_company_numbers.py from the
+     evidence in state/domain-seeding-report.json. It carries the source URL and
+     the verbatim matched string, and `matchedOn` quotes the URL.
+
+Where both routes fire and DISAGREE, the number is discarded and the supplier
+falls through to name search — two sourced numbers disagreeing is a fact to
+check by hand, not a tie to break in code. Same rule as two anchored numbers.
 
 Everything else is "probable", and `matchedOn` says which test it failed.
 Name-search matches are ALWAYS "probable", per the method doc.
@@ -416,20 +429,64 @@ def free_text(supplier):
     return " ".join(parts)
 
 
+def website_proof(supplier):
+    """Route 2 — the number published on the company's OWN site, or None.
+
+    Written by scripts/confirm_company_numbers.py from the evidence in
+    state/domain-seeding-report.json. A proof without a URL and a verbatim
+    evidence string is not a proof: it is refused here rather than trusted,
+    because `matchedOn` has to be able to quote a source a reader can open.
+    """
+    proof = supplier.get("companyNumberProof")
+    if not isinstance(proof, dict):
+        return None
+    number = str(proof.get("number") or "").upper()
+    if proof.get("route") != "website-registration" or not VALID_NUMBER.match(number):
+        return None
+    if not proof.get("url") or not proof.get("evidence"):
+        log("  %s: ignoring a companyNumberProof with no url/evidence — unciteable"
+            % supplier["name"])
+        return None
+    return {"number": number, "url": proof["url"], "checkedOn": proof.get("checkedOn")}
+
+
 def recorded_number(supplier):
-    """(number, note) — number is None when there isn't exactly one clean answer."""
+    """(number, note, source) — number is None when there isn't exactly one clean answer.
+
+    `source` is None, "alerts" (route 1) or a route-2 proof dict. It decides the
+    wording of `matchedOn`, never the confidence: the confidence rule lives in
+    record_for() and stays in one place.
+    """
     found, malformed = set(), set()
     for raw in CH_NUMBER.findall(free_text(supplier)):
         candidate = raw.upper()
         (found if VALID_NUMBER.match(candidate) else malformed).add(candidate)
     if malformed:
         log("  %s: ignoring malformed company number(s) %s" % (supplier["name"], sorted(malformed)))
-    if len(found) == 1:
-        return found.pop(), ""
+
+    proof = website_proof(supplier)
+
     if len(found) > 1:
+        # Two anchored numbers is ambiguous whatever the site says: the seed
+        # itself disagrees, and route 2 cannot arbitrate between two claims it
+        # was never shown. Falls through to name search, exactly as before.
         return None, "two or more company numbers recorded (%s) — ambiguous, not guessed" % \
-                     ", ".join(sorted(found))
-    return None, ""
+                     ", ".join(sorted(found)), None
+
+    if found and proof:
+        anchored = next(iter(found))
+        if anchored != proof["number"]:
+            # A sourced number disagreeing with another sourced number is a fact
+            # to check by hand, not a tie to break in code.
+            return None, ("the seed anchors %s but the company's own site publishes %s — two "
+                          "sourced numbers disagree, not guessed" % (anchored, proof["number"])), None
+        return anchored, "", proof
+
+    if proof:
+        return proof["number"], "", proof
+    if found:
+        return found.pop(), "", "alerts"
+    return None, "", None
 
 
 def corroborates(supplier, registered_name):
@@ -574,6 +631,13 @@ def record_for(supplier, number, confirmed_source, key):
         confidence, matched_on = "probable", ("company number recorded in supplier data, but the "
                                               "company is %s, not active — check the supplier now "
                                               "trades through a different entity" % status)
+    elif isinstance(confirmed_source, dict):
+        # Route 2 (docs/COMPANY-REPORT-METHOD.md): the number the company itself
+        # publishes. The URL is quoted so a reader can open the page it came from.
+        confidence, matched_on = "confirmed", (
+            "company number published on the company's own website, agreeing with the "
+            "Companies House record — %s, read %s"
+            % (confirmed_source["url"], confirmed_source.get("checkedOn") or "on an unrecorded date"))
     else:
         confidence, matched_on = "confirmed", "company number recorded in supplier-seed alerts"
 
@@ -625,14 +689,16 @@ def main():
         people = people[:limit]
 
     with_number = [(s, recorded_number(s)) for s in people]
-    have = sum(1 for _, (n, _) in with_number if n)
-    log("%d suppliers | %d carry a recorded company number | %d need a name search"
-        % (len(people), have, len(people) - have))
+    have = sum(1 for _, (n, _, _) in with_number if n)
+    by_site = sum(1 for _, (n, _, src) in with_number if n and isinstance(src, dict))
+    log("%d suppliers | %d carry a recorded company number (%d of them proved on the "
+        "company's own website) | %d need a name search"
+        % (len(people), have, by_site, len(people) - have))
 
     if offline:
         # No network at all, so nothing can be verified, so nothing is written.
         # A file built offline would be a file of unverified claims.
-        ambiguous = [s["name"] for s, (n, why) in with_number if not n and why]
+        ambiguous = [s["name"] for s, (n, why, _) in with_number if not n and why]
         log("--offline: no requests made and no file written.")
         log("a live run would make about %d Companies House requests "
             "(%d profile + %d search-then-profile)"
@@ -652,10 +718,10 @@ def main():
            thresholds["appliesTo"]))
 
     companies, unresolved, downgraded = {}, [], []
-    for i, (supplier, (number, why)) in enumerate(with_number, 1):
+    for i, (supplier, (number, why, source)) in enumerate(with_number, 1):
         if why:
             log("  %s: %s" % (supplier["name"], why))
-        from_record = bool(number)
+        from_record = source if number else None
         if not number:
             number = search_for(supplier, key)
         if not number:

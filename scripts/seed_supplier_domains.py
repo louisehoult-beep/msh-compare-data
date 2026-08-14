@@ -31,6 +31,19 @@ A domain is recorded only on one of two proofs, both taken from the live site:
                 to be evidence (see DISTINCTIVE_MIN and STOP_CORES). This is the
                 weaker proof and is only accepted with --accept-name.
 
+                DO NOT TRUST THIS TIER. Measured 14/08/2026 by
+                scripts/verify_name_proofs.py: of the 128 domains --accept-name
+                recorded, 4 stood up to registration proof, 7 were parked
+                for-sale pages, and the rest could not be second-sourced at all.
+                Every one was also foundBy="guess", which is why it fails — the
+                domain was invented from the name, then "confirmed" by a title
+                echoing that same name. It is circular, and core() stripping
+                trade words makes it worse: "Pentax Medical" -> "pentax" matched
+                a camera store, "Richard Wolf" an Emmy-winning composer, "Saluda
+                Medical" a town in North Carolina. Distinctiveness is tested;
+                industry is not. Treat a name match as a candidate for
+                verify_name_proofs.py, never as a reason to write.
+
 Anything else is REFUSED and written to the report, never to the seed. An
 unproven supplier keeps its curated list. Publishing nothing is the correct
 output when the evidence is thin.
@@ -83,9 +96,19 @@ NEVER = ("linkedin.", "facebook.", "twitter.", "x.com", "instagram.", "youtube."
          "glassdoor.", "yell.com", "endole.", "opencorporates.", "trustpilot.")
 
 # A parked or for-sale domain answers 200 and looks like a website. It is not one.
+#
+# The named parking services were added 14/08/2026 after verify_name_proofs.py
+# found 7 of the 128 --accept-name domains were parked pages that PROVED
+# THEMSELVES: a for-sale page's <title> is the domain being sold, so
+# "biorad.co.uk for sale | Spaceship.com" contains the core name "biorad" and
+# passed the name test. Bio-Rad, Carl Zeiss, ELITech, Flexicare, Genmed, Launch
+# Diagnostics and Pisces Scientific were all recorded on a domain broker's page.
 PARKED = ("domain is for sale", "buy this domain", "this domain may be for sale",
           "parked free", "godaddy.com/domainsearch", "sedoparking", "hugedomains",
-          "under construction", "coming soon</", "namecheap.com/domains")
+          "under construction", "coming soon</", "namecheap.com/domains",
+          "spaceship.com", "aftermarket.com", "domainmarket.com", "buydomainnames",
+          "afternic", "is for sale |", "is available!", "claim your brand",
+          "domain name owner")
 
 # A core name shorter than this proves nothing on its own — "MSL", "AGP", "ABC"
 # match half the web. Registration proof is still accepted for these.

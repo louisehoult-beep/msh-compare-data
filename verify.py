@@ -477,10 +477,102 @@ def check_js():
 
 
 # --------------------------------------------------------------------------
+# 5b. TRUST PRESSURES
+# --------------------------------------------------------------------------
+def check_trust_pressures(doc, trust_codes):
+    """The published figures behind every trust's Meeting Prep profile.
+
+    This file is a COPY of someone else's numbers — NHS England's RTT return,
+    the CQC's ratings, UKHSA's C. difficile counts — put in front of a rep who
+    will quote them to the trust that produced them. Two ways that goes wrong,
+    and both are checked here rather than trusted:
+
+    1. A number that cannot be true. A percentage over 100, a median wait of
+       900 weeks, an oversight segment of 7 — each means the upstream column
+       moved and we copied the wrong one. The rep finds out in the meeting.
+    2. A number with no period on it. "52,000 waiting" is not a fact without
+       the month it describes; RTT is monthly and a figure quoted a year late
+       is simply wrong. So every period must be present and every source must
+       carry a resolvable URL, because root rule 12 says a figure without its
+       source does not get published.
+
+    Codes are checked against the trust map for the same reason the contacts
+    check is: a figure filed against a trust that does not exist is a figure
+    attached to nothing.
+    """
+    if not doc:
+        return                                  # optional file — absence is not a failure
+    trusts = doc.get("trusts") or {}
+    if len(trusts) < 120:
+        FAIL("pressures", "only %d trusts carry published figures (expected ~148). A shrunken "
+                          "snapshot means the upstream fetch failed — rebuild with "
+                          "scripts/build_trust_pressures.py rather than publishing a gap."
+                          % len(trusts))
+
+    for key in ("rtt", "cqc", "neverEvents", "cdiff", "eric"):
+        if not (doc.get("periods") or {}).get(key):
+            FAIL("pressures", "no period recorded for the %s figures. A trust-level number "
+                              "without the period it covers cannot be quoted safely." % key)
+    for name, src in (doc.get("sources") or {}).items():
+        if not str(src.get("url", "")).startswith("http"):
+            FAIL("pressures", "source '%s' has no URL. Every figure a member reads must link "
+                              "to the publisher that issued it." % name)
+
+    # Ranges that would have to be a mis-read column, not a real trust.
+    BOUNDS = {"pct18": (0, 100), "med": (0, 200), "seg": (1, 4),
+              "wl": (0, 5_000_000), "ne": (0, 100), "cdi": (0, 5000)}
+    unknown = []
+    for code, t in trusts.items():
+        if trust_codes and code not in trust_codes:
+            unknown.append(code)
+        for field, (lo, hi) in BOUNDS.items():
+            v = t.get(field)
+            if v is None:
+                continue
+            if not isinstance(v, (int, float)) or v < lo or v > hi:
+                FAIL("pressures", "%s (%s) has %s=%r, outside the possible range %s-%s. The "
+                                  "upstream column has almost certainly moved — do not publish "
+                                  "it." % (t.get("name", code), code, field, v, lo, hi))
+        for sp, wks in (t.get("spec") or {}).items():
+            if not isinstance(wks, (int, float)) or wks < 0 or wks > 200:
+                FAIL("pressures", "%s: median wait for %s is %r weeks, which cannot be right."
+                                  % (t.get("name", code), sp, wks))
+    if unknown:
+        FAIL("pressures", "%d ODS codes carry figures but are not in the trust map (%s). A "
+                          "figure filed against a trust that does not exist is attached to "
+                          "nothing." % (len(unknown), ", ".join(sorted(unknown)[:8])))
+
+    # STALENESS. This file cannot refresh itself in CI — it is built from the
+    # PRIVATE pipeline repo, which this repo's Actions runner has no credential
+    # for — so the only thing standing between a member and a year-old waiting
+    # list is somebody remembering to rebuild it. Make the gate remember
+    # instead: WARN at six weeks (RTT is monthly, so one missed cycle), FAIL at
+    # twelve. Fix: python3 scripts/build_trust_pressures.py
+    try:
+        stamped = datetime.datetime.strptime(doc.get("asOf", ""), "%d/%m/%Y").date()
+        days = (datetime.date.today() - stamped).days
+    except Exception:
+        FAIL("pressures", "no readable asOf date (got %r). Figures with no date on them "
+                          "cannot be published." % doc.get("asOf"))
+        return
+    if days > 84:
+        FAIL("pressures", "the published figures were last rebuilt %d days ago (%s). RTT is a "
+                          "monthly return — this is at least two cycles behind and members "
+                          "would be quoting it as current. Run: python3 "
+                          "scripts/build_trust_pressures.py" % (days, doc.get("asOf")))
+    elif days > 42:
+        WARN("pressures", "the published figures were last rebuilt %d days ago (%s). Rebuild "
+                          "before the next push: python3 scripts/build_trust_pressures.py"
+                          % (days, doc.get("asOf")))
+
+
+# --------------------------------------------------------------------------
 # 6. SHRINK GUARD
 # --------------------------------------------------------------------------
 def check_shrink():
     for path, count in (("data/trust-map.json", lambda d: len(d.get("trusts", []))),
+                        ("data/trust-pressures.json",
+                         lambda d: len(d.get("trusts", {}))),
                         ("data/trust-contacts.json",
                          lambda d: sum(len(v) for v in d.get("trusts", {}).values()))):
         if not os.path.exists(path):
@@ -1119,6 +1211,81 @@ def _norm_co(name):
     return re.sub(r"\s+", " ", s).strip()
 
 
+WEBSITE_ROUTE_PHRASE = "published on the company's own website"
+
+
+def _check_website_proofs(companies):
+    """Route 2 must be able to show its working, or it is not a route.
+
+    A record confirmed by route 2 (docs/COMPANY-REPORT-METHOD.md — the number the
+    company publishes on its own site) claims a source a reader can open. This is
+    the invariant root rule 14 asks for: it fails if the chain from evidence to
+    published confidence ever breaks, in either direction.
+
+      * a record whose `matchedOn` claims route 2 must have a matching
+        `companyNumberProof` in supplier-seed.json, with the SAME number, a URL
+        and a verbatim evidence string;
+      * a seed proof must not be malformed, or refresh_companies_house.py will
+        silently ignore it and the supplier stays probable for no visible reason.
+
+    Without this, a bug that dropped `companyNumberProof` on the seed rewrite —
+    exactly the failure mode the 14/08/2026 commit warns about, where the nightly
+    rebuild destroys index-only edits — would leave records asserting a website
+    source that no longer exists anywhere in the repo.
+    """
+    seed = load("supplier-seed.json")
+    if not isinstance(seed, dict):
+        WARN("company-report", "could not read supplier-seed.json, so website-proved company "
+                               "numbers were not checked against their evidence.")
+        return
+
+    proofs = {}
+    for s in (seed.get("suppliers") or []):
+        if not isinstance(s, dict):
+            continue
+        p = s.get("companyNumberProof")
+        if p is None:
+            continue
+        name = s.get("name")
+        if not isinstance(p, dict):
+            FAIL("company-report", "supplier %r carries a companyNumberProof that is not a "
+                                   "record. It will be ignored, and the supplier will stay "
+                                   "`probable` with nothing on the page saying why." % name)
+            continue
+        number = str(p.get("number") or "").strip().upper()
+        if not re.match(r"^(?:[A-Z]{2}\d{6}|\d{8})$", number):
+            FAIL("company-report", "supplier %r records a companyNumberProof number %r, which is "
+                                   "not a company number (eight digits, or two letters and six)."
+                                   % (name, p.get("number")))
+        if not str(p.get("url") or "").strip() or not str(p.get("evidence") or "").strip():
+            FAIL("company-report", "supplier %r records a companyNumberProof with no %s. Route 2 "
+                                   "confirms a company number by quoting the company's own page — "
+                                   "a proof nobody can open is not a proof, and must not raise a "
+                                   "record to `confirmed`."
+                                   % (name, "url" if not str(p.get("url") or "").strip() else "evidence"))
+        if name:
+            proofs[name] = number
+
+    for name in sorted(companies):
+        rec = companies[name]
+        if not isinstance(rec, dict):
+            continue
+        if WEBSITE_ROUTE_PHRASE not in str(rec.get("matchedOn") or ""):
+            continue
+        if name not in proofs:
+            FAIL("company-report", "company %r is confirmed on the strength of a number published "
+                                   "on its own website, but supplier-seed.json holds no "
+                                   "companyNumberProof for it. The evidence has been lost and the "
+                                   "page is citing a source this repo can no longer produce." % name)
+            continue
+        held = str(rec.get("companyNumber") or "").strip().upper()
+        if held != proofs[name]:
+            FAIL("company-report", "company %r is confirmed by website proof of %s, but the record "
+                                   "carries company number %s. The confirmation belongs to a "
+                                   "different company from the one whose finances are published."
+                                   % (name, proofs[name], held or "(none)"))
+
+
 def _supplier_universe():
     """Every supplier name and alias this repo holds, normalised. None if unreadable."""
     names = set()
@@ -1592,7 +1759,10 @@ def check_company_report(financials, report_js):
                                "companies in this file were not checked against the suppliers this "
                                "repo actually holds.")
 
+    _check_website_proofs(companies)
+
     probable = []
+    probable_with_cat = []
     for name in sorted(companies):
         rec = companies[name]
         who = "company %r" % name
@@ -1645,10 +1815,7 @@ def check_company_report(financials, report_js):
                                            "this name. Confirm it by company number or drop the "
                                            "figure." % (who, field, rec.get(field)))
             if str(rec.get("accountsCategory") or "").strip():
-                WARN("company-report", "%s is a PROBABLE match and carries an accountsCategory, "
-                                       "which is what the field-position band is built from. Only "
-                                       "confirmed matches may feed the band — check the report "
-                                       "excludes it before this ships." % who)
+                probable_with_cat.append(name)
 
         cat = str(rec.get("accountsCategory") or "").strip()
         if cat and cat not in ACCOUNTS_CATEGORIES:
@@ -1695,6 +1862,34 @@ def check_company_report(financials, report_js):
                                        "about nobody — and the panels around it claim framework "
                                        "co-listings drawn from those very files."
                                        % (who, keys[0], keys[1]))
+
+    # THE PROBABLE-MATCH BAND GUARD.
+    # A probable match is a guess about identity, and its accounts category must
+    # not reach the field-position band. This used to warn once per company: 258
+    # identical lines on a 262-warning run, which is how a gate stops being read.
+    # The count is not the question — the guard in the source is. So ask that
+    # once, of the code, and say nothing while the answer is yes.
+    #
+    # Every conditional that admits a record to the band on accountsCategory must
+    # also test matchConfidence, directly or through isProbable(). If one does not,
+    # a name-search guess is sizing a named company against its competitors, so it
+    # fails by line rather than warning by company.
+    if probable_with_cat and has_js:
+        for m in re.finditer(r"accountsCategory", clean):
+            line = _line_at(clean, m.start()).strip()
+            if not re.search(r"\bif\s*\(", line):
+                continue                    # rendering a value, not admitting a record
+            if re.search(r"isProbable|matchConfidence", line):
+                continue                    # guarded
+            FAIL("company-report", "app/company-report.js admits a record to the field-position "
+                                   "band on accountsCategory without testing matchConfidence: %r. "
+                                   "%d of the records carrying an accounts category are PROBABLE "
+                                   "name-search matches, e.g. %s. Medtech is full of similarly "
+                                   "named entities, so an unguarded read puts another company's "
+                                   "filing against this one and sizes it against its competitors "
+                                   "on that basis."
+                                   % (line[:140], len(probable_with_cat),
+                                      ", ".join(repr(p) for p in probable_with_cat[:3])))
 
     if probable and has_js and not re.search(r"matchConfidence|probable", clean):
         FAIL("company-report", "%d record(s) are probable name-search matches, and "
@@ -2161,6 +2356,7 @@ def main():
     check_moves(load("people-moves.json"), trust_codes, blocked,
                 (load("trust-contacts.json") or {}).get("trusts", {}))
     check_privacy(n, retention, offline)
+    check_trust_pressures(load("trust-pressures.json"), trust_codes)
     check_js()
 
     suppress = set()
