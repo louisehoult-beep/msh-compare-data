@@ -1,0 +1,20 @@
+{
+ "_notice": "CANDIDATE domains only, fed to scripts/seed_supplier_domains.py --candidates-file. Nothing here is a finding and nothing here is written to the seed on the strength of being listed. Each one is still probed, and is recorded only if the live site publishes this supplier's Companies House registration number. A wrong entry here costs a wasted HTTP request, not a wrong website on a paid page.",
+ "_why": "The 690 unproven suppliers were never actually looked up. DuckDuckGo refused every query mid-sweep, so the only candidates ever tried were domains guessed from the company name — and 'no candidate domain answered' is a record of what was tried, not evidence that a supplier has no findable website. Bing was tested as a drop-in replacement on 15/08/2026 and is worse than useless: it answers 200 and returns fluent, entirely unrelated results after a handful of queries, so a scripted sweep would read as an honest negative while looking up nothing. Startpage, Ecosia and Brave return JavaScript shells with no result links; Marginalia's index does not cover this population. The route that works is a human-or-assistant search per supplier, banked here.",
+ "_how": "Search the supplier's name plus its trade ('wound care', 'orthopaedic', 'diagnostics') and record the hosts that look like the company's own site, best first. Do not record LinkedIn, Companies House, ZoomInfo, D&B or a trade directory — seed_supplier_domains.py refuses those hosts anyway. Two or three candidates per supplier is plenty. Add entries and re-run; the file is cumulative.",
+ "_run": "python3 scripts/seed_supplier_domains.py --candidates-file state/supplier-domain-candidates.json --retry-unproven --write",
+ "_addedOn": "2026-08-15",
+
+ "2San Global": ["https://2san.com", "https://2sangroup.com"],
+ "3D LifePrints UK Ltd": ["https://www.insightsurgery.com", "https://www.3dlifeprints.com"],
+ "A2B Healthcare": ["https://www.a2bhealthcare.com"],
+ "AFOS": ["https://afosmedical.com", "https://afosgroup.com"],
+ "AOTI": ["https://www.aoti.com"],
+ "Abilia Ltd": ["https://www.abilia.com", "https://www.abilia.se"],
+ "Abiomed Ltd": ["https://www.abiomed.com", "https://www.heartrecovery.com"],
+ "Absorbest AB": ["https://absorbest.co.uk", "https://absorbest.com"],
+ "Accrington Surgical": ["https://www.accringtonsurgical.co.uk"],
+ "Accrington Surgical Inst. Suppliers": ["https://www.accringtonsurgical.co.uk"],
+ "Accrington Surgical Instrument Suppliers Ltd": ["https://www.accringtonsurgical.co.uk"],
+ "Acumed Ltd": ["https://acumed.uk.com"]
+}

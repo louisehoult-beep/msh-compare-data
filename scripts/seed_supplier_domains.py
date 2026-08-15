@@ -44,6 +44,14 @@ A domain is recorded only on one of two proofs, both taken from the live site:
                 industry is not. Treat a name match as a candidate for
                 verify_name_proofs.py, never as a reason to write.
 
+                ADJUDICATED 14/08/2026, ENFORCED 15/08/2026. All 128 were put
+                through verify_name_proofs.py: 4 stood up to registration proof
+                and are now banked as registration proofs; 124 are REFUSED. Those
+                124 names are read from state/name-proof-verification.json before
+                every write and dropped — see refused_name_proofs(). The verdict
+                file is the authority, not the report, so neither --fresh nor
+                --accept-name can re-open a refused domain.
+
 Anything else is REFUSED and written to the report, never to the seed. An
 unproven supplier keeps its curated list. Publishing nothing is the correct
 output when the evidence is thin.
@@ -70,6 +78,7 @@ import gzip
 import io
 import json
 import re
+import socket
 import ssl
 import sys
 import threading
@@ -83,6 +92,7 @@ INDEX = "data/supplier-index.json"
 FW = "data/frameworks.json"
 FIN = "data/company-financials.json"
 REPORT = "state/domain-seeding-report.json"
+VERDICTS = "state/name-proof-verification.json"
 
 UA = ("Mozilla/5.0 (compatible; MedSalesHubBot/1.0; +https://medsalesintelligencehub.co.uk) "
       "supplier range capture")
@@ -128,6 +138,24 @@ SUFFIXES = re.compile(
     r"technology|devices|device|services|service|supplies|scientific|"
     r"diagnostics|pharma|pharmaceuticals|laboratories|labs)\b")
 
+# Pages that carry a company's registration number, likeliest first.
+#
+# WIDENED 15/08/2026, AND THIS WAS THE REAL BOTTLENECK. This script read six
+# paths; scripts/verify_name_proofs.py read eight, and three of the only four
+# title proofs that survived its second-sourcing were proved on
+# /terms-and-conditions — a path this script did not ask for. So a sweep could
+# reach a supplier's genuine website, read six pages that happened not to carry
+# the number, and bank "site read, but it never identifies itself as this
+# company". That reads like a refusal and is not one: it is a record of which
+# pages were looked at.
+#
+# Cost is bounded. These are fetched only for a candidate that already answered,
+# which is roughly one host per supplier, not one per candidate.
+LEGAL_PATHS = ("/contact", "/contact-us", "/terms-and-conditions", "/terms",
+               "/terms-of-use", "/terms-conditions", "/privacy-policy",
+               "/privacy", "/legal", "/legal-information", "/about-us",
+               "/about", "/imprint", "/cookie-policy")
+
 REG_WORDS = re.compile(
     r"(registered\s+(?:in|number|no|office|company)|company\s+(?:number|no|reg)|"
     r"reg(?:istration)?\.?\s*(?:number|no)|companies\s+house|vat\s+(?:number|no))",
@@ -143,6 +171,31 @@ def core(name):
     return re.sub(r"\s+", " ", SUFFIXES.sub(" ", norm(name))).strip()
 
 
+# TLDs worth trying, likeliest first. Widened 15/08/2026: the original five
+# missed a class of real trading domains outright — Accora trades at accora.care,
+# and a supplier on .health or .group is unreachable by a .co.uk/.com guess. The
+# cost of a wider net is a few more HTTP probes; the cost of a wrong hit is zero,
+# because a site that is not this company cannot publish this company's
+# registration number and the proof bar refuses it.
+TLDS = (".co.uk", ".com", ".uk", ".care", ".health", ".group",
+        ".ltd.uk", ".org.uk", ".eu", ".net", ".io", ".co")
+
+
+def initials(base):
+    """WMS from "Williams Medical Supplies".
+
+    An initialism is not derivable from the name by the slug rules, and it is how
+    a whole class of long-named British suppliers actually trade — wms.co.uk was
+    named in this file's own notes as unreachable by guessing. Built from the FULL
+    name, not core(): the trade words SUFFIXES strips are exactly the letters that
+    make the initialism ("Medical", "Supplies" are the M and the S).
+    """
+    parts = [p for p in norm(base).split() if p]
+    if not 2 <= len(parts) <= 5:
+        return ""
+    return "".join(p[0] for p in parts)
+
+
 def slugs(name):
     """Candidate domain labels, most likely first."""
     c = core(name)
@@ -152,25 +205,47 @@ def slugs(name):
         if not base:
             continue
         parts = base.split()
-        for label in ("".join(parts), "-".join(parts), parts[0] if parts else ""):
+        forms = ["".join(parts), "-".join(parts), parts[0] if parts else ""]
+        # First two words joined: "Accrington Surgical Instrument Suppliers" is
+        # not going to be one label, but "accringtonsurgical" might be.
+        if len(parts) > 2:
+            forms.append("".join(parts[:2]))
+        for label in forms:
             if label and 2 < len(label) <= 40 and label not in out:
                 out.append(label)
+    for i in (initials(name), initials(c)):
+        if i and 2 < len(i) <= 6 and i not in out:
+            out.append(i)
     return out
 
 
 def candidates(name, aliases, registered):
-    """Domains worth trying, in order. Generation is cheap; proof is what counts."""
-    seen, out = set(), []
+    """Domains worth trying, in order. Generation is cheap; proof is what counts.
+
+    TLD-MAJOR ORDER, AND IT MATTERS. try_supplier() takes only the first
+    --candidates of this list, so whichever axis is iterated innermost is the one
+    that gets truncated away. Label-major (the original) spent every slot on the
+    first label's TLDs, which with the widened TLDS meant a supplier's initialism
+    was generated and then never tried. Sweeping .co.uk across all labels first,
+    then .com across all labels, reaches wms.co.uk at position 5 instead of 50.
+    """
+    labels, seen_label = [], set()
     names = [name] + [a for a in (aliases or []) if a != name]
     if registered:
         names.append(registered)
     for nm in names:
         for label in slugs(nm):
-            for tld in (".co.uk", ".com", ".uk", ".eu", ".net"):
-                d = label + tld
-                if d not in seen:
-                    seen.add(d)
-                    out.append(d)
+            if label not in seen_label:
+                seen_label.add(label)
+                labels.append(label)
+
+    seen, out = set(), []
+    for tld in TLDS:
+        for label in labels:
+            d = label + tld
+            if d not in seen:
+                seen.add(d)
+                out.append(d)
     return out
 
 
@@ -229,27 +304,25 @@ def wikidata_site(name):
     return out
 
 
-# A scraped search engine that has started refusing returns an empty result set,
-# not an error. Left unhandled that is the worst possible failure here: every
-# supplier comes back "unproven" and the run looks like an honest negative when
-# nothing was actually looked up. DDG_STATE makes the refusal loud instead.
-DDG_STATE = {"asked": 0, "answered": 0, "blocked": False}
-
-
-def ddg_hosts(name):
-    """Hosts from a DuckDuckGo Lite search. Unreliable by nature — see DDG_STATE."""
-    _polite()
-    _, r = fetch("https://lite.duckduckgo.com/lite/?q=%s"
-                 % urllib.parse.quote('"%s" official website' % name))
-    DDG_STATE["asked"] += 1
-    hits = re.findall(r"uddg=([^&\"']+)", r or "")
-    if hits:
-        DDG_STATE["answered"] += 1
-    elif DDG_STATE["asked"] >= 5 and DDG_STATE["answered"] == 0:
-        DDG_STATE["blocked"] = True
-    return [urllib.parse.unquote(x) for x in hits]
-
-
+# NO SCRAPED SEARCH ENGINE. REMOVED 15/08/2026, AND DO NOT PUT ONE BACK.
+#
+# This script used to scrape DuckDuckGo Lite for candidate hosts. It was blocked
+# in practice: the 14/08/2026 sweep asked and got nothing back, so 690 suppliers
+# were banked "unproven" having never actually been looked up — an empty result
+# set reads exactly like an honest negative, which is the most dangerous failure
+# this file can have. Bing, Startpage, Ecosia, Brave and Marginalia were all
+# tested as replacements on 15/08/2026 and none is usable: Bing answers 200 and
+# returns fluent, entirely unrelated results after a handful of queries (worse
+# than a refusal, because it looks like data), Startpage/Ecosia/Brave serve
+# JavaScript shells with no result links, and Marginalia does not index this
+# population.
+#
+# The two candidate sources that remain are honest about what they are:
+#   Wikidata     a real API, licensed for reuse, does not block, limited coverage
+#   --candidates-file  hosts found by a person or an assistant searching properly
+#                      and written down, with the search recorded in the file
+#
+# Neither is evidence. Both feed the same proof bar.
 def searched_hosts(name, extra=()):
     """Candidate hosts for this company, best first. CANDIDATES ONLY — the proof
     bar is unchanged; a search result is an opinion about who owns a domain."""
@@ -257,19 +330,49 @@ def searched_hosts(name, extra=()):
     hosts = [h for h in (re.search(r"https?://([^/]+)", u) for u in urls) if h]
     hosts = [h.group(1) for h in hosts]
     hosts += wikidata_site(name)            # a real API, licensed for reuse, never blocks
-    if not DDG_STATE["blocked"]:
-        for u in ddg_hosts(name):
-            h = re.search(r"https?://([^/]+)", u)
-            if h:
-                hosts.append(h.group(1))
     seen, out = set(), []
     for h in hosts:
         h = h.lower().lstrip(".")
-        if h in seen or any(b in h for b in NEVER) or "duckduckgo" in h:
+        if h in seen or any(b in h for b in NEVER):
             continue
         seen.add(h)
         out.append(h)
     return out[:6]
+
+
+_RESOLVES = {}
+_RESOLVE_LOCK = threading.Lock()
+
+
+def resolves(host):
+    """Does this hostname exist at all? Cached, and never raises.
+
+    WHY, added 15/08/2026. A guessed domain that was never registered costs two
+    full HTTP timeouts, 30 seconds, to discover — and the widened candidate net
+    means most candidates are exactly that. A measured sample of 90 suppliers at
+    24 candidates each was still running after 20 minutes, which puts the full
+    690 at something like eleven hours and makes the sweep unrunnable in
+    practice. A DNS lookup answers the same question in milliseconds.
+
+    This is a speed filter, not an evidence filter: a name that resolves is not
+    a finding, and everything that gets past here still has to publish this
+    supplier's registration number to be written.
+    """
+    with _RESOLVE_LOCK:
+        if host in _RESOLVES:
+            return _RESOLVES[host]
+    try:
+        socket.getaddrinfo(host, None)
+        ok = True
+    except OSError:
+        # Includes NXDOMAIN, no A record, and a resolver that is briefly
+        # unreachable. Treating a transient resolver failure as "does not exist"
+        # only means this candidate is skipped this run, which is the same
+        # outcome as the HTTP fetch failing.
+        ok = False
+    with _RESOLVE_LOCK:
+        _RESOLVES[host] = ok
+    return ok
 
 
 def fetch(url):
@@ -372,6 +475,8 @@ def try_supplier(rec, ch_number, max_candidates):
         plan += [(h, "search") for h in searched_hosts(name, supplied) if h not in guessed]
     for d, how in plan:
         for scheme in ("https://www.", "https://"):
+            if not resolves(scheme.split("//")[1] + d):
+                continue
             final, html = fetch(scheme + d)
             if not html:
                 continue
@@ -381,15 +486,33 @@ def try_supplier(rec, ch_number, max_candidates):
             pages = [(final, html)]
             # Registration numbers live on the legal pages far more often than
             # the homepage, so read those too before deciding.
+            #
+            # PROVE AS WE GO, AND STOP AT THE FIRST HIT. Fetching all fourteen
+            # paths and only then testing them meant every proved supplier still
+            # paid for thirteen more requests it did not need. Most proofs land
+            # on /contact or /terms-and-conditions, so the common case now costs
+            # two or three fetches instead of fifteen.
+            num = (ch_number or {}).get("companyNumber")
+            kind, ev, url = prove(name, num, pages, try_supplier.accept_name)
             base = re.match(r"(https?://[^/]+)", final or "")
-            if base:
-                for path in ("/contact", "/contact-us", "/privacy-policy",
-                             "/terms", "/legal", "/about-us"):
+            if not kind and "parked" in (ev or ""):
+                base = None          # a for-sale page has no legal pages to read
+            if not kind and base:
+                for path in LEGAL_PATHS:
                     u, h = fetch(base.group(1) + path)
-                    if h:
-                        pages.append((u, h))
-            kind, ev, url = prove(name, (ch_number or {}).get("companyNumber"),
-                                  pages, try_supplier.accept_name)
+                    if not h:
+                        continue
+                    pages.append((u, h))
+                    kind, ev, url = prove(name, num, [(u, h)],
+                                          try_supplier.accept_name)
+                    if kind:
+                        break
+                else:
+                    # Nothing proved page by page. Re-test the whole set so the
+                    # refusal reason describes everything that was read, not just
+                    # the last page fetched.
+                    kind, ev, url = prove(name, num, pages,
+                                          try_supplier.accept_name)
             if kind:
                 return {"name": name, "proof": kind, "foundBy": how,
                         "domain": re.sub(r"^https?://", "", final).split("/")[0],
@@ -407,6 +530,33 @@ def try_supplier(rec, ch_number, max_candidates):
 try_supplier.accept_name = False
 try_supplier.search = False
 try_supplier.supplied = {}
+
+
+def refused_name_proofs():
+    """Suppliers whose title proof was second-sourced and REFUSED. Never writable.
+
+    THIS IS A ONE-WAY DOOR AND IT IS DELIBERATE. A refusal here means the live
+    site was read and it does not publish this supplier's registration number —
+    so the only thing ever linking the domain to the company was a title
+    containing a name the domain was guessed from. That is circular, and no
+    later flag should be able to un-refuse it. Re-opening one is a data job:
+    prove the domain by registration number, which moves the verdict to VERIFIED
+    in the file below, and it becomes writable through the registration route
+    like any other proof.
+
+    Keyed off the verdict file rather than the report on purpose. The report is
+    rebuilt by --fresh and every result in it is a fresh probe; the verdicts are
+    an adjudication and outlive any sweep.
+    """
+    try:
+        v = json.load(open(VERDICTS, encoding="utf-8"))["results"]
+    except (OSError, ValueError, KeyError):
+        # Absent verdicts must not read as "nothing is refused" — that is the
+        # permissive failure this gate exists to prevent.
+        print("  ⚠️  %s is missing or unreadable — refusing to write. Restore it "
+              "or re-run scripts/verify_name_proofs.py." % VERDICTS)
+        sys.exit(1)
+    return {r["name"] for r in v if r.get("verdict") == "REFUSED"}
 
 
 def domain_for(rec):
@@ -438,11 +588,20 @@ def main():
                          "Still only candidates — the proof bar is unchanged.")
     ap.add_argument("--fresh", action="store_true",
                     help="ignore the banked report and re-probe every supplier")
+    ap.add_argument("--retry-unproven", action="store_true",
+                    help="re-probe only the suppliers the report has no proof for, "
+                         "keeping proven and REFUSED results banked (use after widening "
+                         "the candidate net or supplying a --candidates-file)")
     a = ap.parse_args()
     try_supplier.accept_name = a.accept_name
     try_supplier.search = a.search
     if a.candidates_file:
-        try_supplier.supplied = json.load(open(a.candidates_file, encoding="utf-8"))
+        # Underscore keys are the file's own notes on where its candidates came
+        # from and how to add more. They are not supplier names, and counting
+        # them would overstate the coverage of a run.
+        try_supplier.supplied = {k: v for k, v
+                                 in json.load(open(a.candidates_file, encoding="utf-8")).items()
+                                 if not k.startswith("_")}
         try_supplier.search = True
         print("  candidate urls supplied for %d supplier(s)" % len(try_supplier.supplied))
 
@@ -477,13 +636,38 @@ def main():
             done = {r["name"]: r for r in json.load(open(REPORT, encoding="utf-8"))["results"]}
         except (OSError, ValueError, KeyError):
             done = {}
+    stale = set()
+    if done and a.retry_unproven:
+        # An unproven result is not a finding, it is the absence of one, and it
+        # is only as good as the candidates that run produced. Once the net is
+        # widened those rows are eligible for re-probing — but a REFUSED row IS a
+        # finding (the site was read and it does not identify itself as this
+        # company), so it stays banked and is not looked at again.
+        stale = {n for n, r in done.items()
+                 if not r.get("proof") and r.get("secondSourced") != "REFUSED"}
+        print("  --retry-unproven: %d unproven result(s) eligible for re-probing, "
+              "%d proven/refused held" % (len(stale), len(done) - len(stale)), flush=True)
     if done:
         before = len(todo)
-        todo = [s for s in todo if s["name"] not in done]
+        todo = [s for s in todo if s["name"] not in done or s["name"] in stale]
         print("  resuming: %d already decided in %s, %d left"
               % (before - len(todo), REPORT, len(todo)), flush=True)
 
+    # BANK EVERYTHING THIS RUN IS NOT RE-PROBING. Carrying only the non-stale
+    # rows here was a bug with teeth: --retry-unproven marks ~690 rows eligible,
+    # but --limit or --supplier narrows todo to a handful, and every eligible row
+    # the run never reached was then written out of the report entirely. The
+    # report is the resume state for a 40-minute sweep, so losing it silently
+    # costs the next run everything it had already decided. Only rows actually
+    # being re-probed are dropped, and they come back as this run's results.
+    # Seeded with EVERY banked row, including the ones about to be re-probed, and
+    # each re-probe replaces its row in place as it lands. A sweep is 40 minutes
+    # of other people's servers and gets interrupted — a laptop sleeps, a run is
+    # killed — and the version that carried only the untouched rows wrote the
+    # not-yet-reached ones out of the report on the way down. Now an interrupted
+    # run costs the results of that run, never the bank.
     results = list(done.values())
+    at = {r["name"]: i for i, r in enumerate(results)}
 
     def bank():
         json.dump({"_notice": "Evidence for every domain written to supplier-seed.json by "
@@ -503,7 +687,11 @@ def main():
                 r = {"name": futs[fut], "proof": None,
                      "reason": "probe failed: %s: %s" % (type(e).__name__, e),
                      "checked": dt.date.today().isoformat()}
-            results.append(r)
+            if r["name"] in at:
+                results[at[r["name"]]] = r
+            else:
+                at[r["name"]] = len(results)
+                results.append(r)
             if i % 10 == 0:
                 bank()
             print("  %s %-38s %s" % ("OK " if r["proof"] else " --", r["name"][:38],
@@ -522,12 +710,18 @@ def main():
           % (len(results) - len(proven)))
 
     bank()
-    if DDG_STATE["blocked"] or (DDG_STATE["asked"] and not DDG_STATE["answered"]):
-        print("\n  ⚠️  SEARCH WAS UNAVAILABLE: %d search(es) asked, %d answered. DuckDuckGo "
-              "was refusing (anti-bot). The 'unproven' results above are NOT evidence that "
-              "these suppliers have no findable website — most were never looked up. Re-run "
-              "later, or supply candidates with --candidates-file."
-              % (DDG_STATE["asked"], DDG_STATE["answered"]))
+    # SAY WHAT WAS NOT LOOKED UP. An unproven supplier with no supplied candidate
+    # was only ever tried on domains guessed from its name, and that is not the
+    # same claim as "this supplier has no findable website". Printing the
+    # distinction is the whole reason the 690 sat unexamined for a day.
+    unguided = [r for r in results
+                if not r["proof"] and r.get("secondSourced") != "REFUSED"
+                and r["name"] not in try_supplier.supplied]
+    if unguided:
+        print("\n  %d unproven supplier(s) had NO supplied candidate and were tried only on "
+              "domains guessed from the name. That is not evidence they have no website. "
+              "Add candidates to a --candidates-file and re-run with --retry-unproven."
+              % len(unguided))
     print("evidence report: %s" % REPORT)
 
     if not a.write:
@@ -551,6 +745,15 @@ def main():
     # whatever domain the seed holds and publishes that site's catalogue as this
     # supplier's product range on a paid page — another company's products under
     # a named supplier, which is the 24/07/2026 error class exactly.
+    # REFUSED IS REFUSED, WHATEVER THE FLAGS SAY. This runs before the
+    # --accept-name filter and applies to every proof kind, so a re-probe under
+    # --fresh that lands on the same guessed domain and "proves" it by title
+    # again is dropped here rather than seeded. 124 names sit behind this.
+    refused = refused_name_proofs()
+    blocked = [r for r in proven if r["name"] in refused and r["proof"] != "registration"]
+    if blocked:
+        proven = [r for r in proven if r not in blocked]
+
     skipped_weak = 0
     if not a.accept_name:
         weak = [r for r in proven if r["proof"] != "registration"]
@@ -587,6 +790,10 @@ def main():
     with open(SEED, "w", encoding="utf-8") as f:
         json.dump(seed, f, ensure_ascii=False, separators=(",", ":"))
     print("\nseeded %d website(s) into %s" % (added, SEED))
+    if blocked:
+        print("  %d title proof(s) BLOCKED — second-sourced and REFUSED in %s. "
+              "Prove them by registration number to re-open them."
+              % (len(blocked), VERDICTS))
     if duplicate:
         print("  %d supplier(s) already carried a website link and were left alone." % duplicate)
     if skipped_weak:
