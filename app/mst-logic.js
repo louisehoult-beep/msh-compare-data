@@ -265,7 +265,22 @@
   }
 
   /* ---- data ------------------------------------------------------------- */
+  /* trust-contacts and people-moves are named personal data. They are members-only,
+     served by the Hub's gated endpoint, and are NOT in the public repo. Everything
+     else still comes from RAW. Without a member session there is no nonce, so the
+     request is never made and the panel shows its empty state. */
+  var GATED = {'trust-contacts.json':'trust-contacts','people-moves.json':'people-moves'};
   function getJSON(file){
+    var gated = GATED[file];
+    if (gated) {
+      var g = window.MSH_GATE;
+      if (!g || !g.nonce) { return Promise.reject(new Error('members only')); }
+      return fetch(g.root + 'data/' + gated, {
+        credentials: 'same-origin',
+        headers: { 'X-WP-Nonce': g.nonce }
+      }).then(function(r){
+        if(!r.ok)throw new Error(r.status);return r.json();});
+    }
     return fetch(RAW+file+'?cb='+Date.now()).then(function(r){
       if(!r.ok)throw new Error(r.status);return r.json();});
   }

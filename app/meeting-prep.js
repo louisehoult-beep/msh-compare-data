@@ -20,7 +20,19 @@
      trust-pressures.json (the publishers' own RTT / CQC / Never Event / ERIC
      figures). Both are optional — if either fails the tool degrades to what it
      showed before rather than breaking the brief. */
-  var CONTACTS = BASE + 'data/trust-contacts.json?cb=' + Date.now();
+  /* Named NHS contacts are members-only and no longer live in the public repo.
+     They come from the Hub's gated endpoint, which needs the REST nonce the
+     MSH Gated Data API snippet puts in the page head for logged-in users.
+     No nonce means no member session, so we ask for nothing and the panel
+     falls back to its honest empty state. */
+  var GATE = (window.MSH_GATE && window.MSH_GATE.nonce) ? window.MSH_GATE : null;
+  function fetchGated(name){
+    if (!GATE) { return Promise.resolve(null); }
+    return fetch(GATE.root + 'data/' + name, {
+      credentials: 'same-origin',
+      headers: { 'X-WP-Nonce': GATE.nonce }
+    }).then(function(r){ return r.ok ? r.json() : null; });
+  }
   var PRESSURES = BASE + 'data/trust-pressures.json?cb=' + Date.now();
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
@@ -40,7 +52,7 @@
     fetch(SEED).then(function(r){return r.json();}).catch(function(){return {suppliers:[]};}),
     fetch(SPECMAP).then(function(r){return r.json();}).catch(function(){return null;}),
     fetch(PRODUCTS).then(function(r){return r.json();}).catch(function(){return null;}),
-    fetch(CONTACTS).then(function(r){return r.json();}).catch(function(){return null;}),
+    fetchGated('trust-contacts').catch(function(){return null;}),
     fetch(PRESSURES).then(function(r){return r.json();}).catch(function(){return null;})
   ]).then(function(res){ render(res[0], res[1], res[2], res[3], res[4], res[5], res[6]); })
     .catch(function(){ MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;">Meeting prep is temporarily unavailable — please try again shortly.</div>'; });
