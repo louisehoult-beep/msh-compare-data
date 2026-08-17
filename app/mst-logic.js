@@ -281,7 +281,9 @@
       }).then(function(r){
         if(!r.ok)throw new Error(r.status);return r.json();});
     }
-    return fetch(RAW+file+'?cb='+Date.now()).then(function(r){
+    // Daily-granularity cache-buster, not per-millisecond — see 17/08/2026 note
+    // in hub-search.js. A unique URL on every request defeats the edge cache.
+    return fetch(RAW+file+'?cb='+new Date().toISOString().slice(0,10)).then(function(r){
       if(!r.ok)throw new Error(r.status);return r.json();});
   }
   function loadTrustData(){

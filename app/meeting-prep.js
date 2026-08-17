@@ -8,11 +8,14 @@
   if (!MOUNT) return;
   var BASE = 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/';
   var GOLD = '#a8842c', INK = '#20303f', LINE = '#e6e2d8', PANEL = '#ffffff', SOFT = '#f7f5ef';
-  var IDX = BASE + 'data/supplier-index.json?cb=' + Date.now();
-  var CFG = BASE + 'data/prep-config.json?cb=' + Date.now();
-  var SEED = BASE + 'data/supplier-seed.json?cb=' + Date.now();
-  var SPECMAP = BASE + 'data/speciality-map.json?cb=' + Date.now();
-  var PRODUCTS = BASE + 'data/supplier-products.json?cb=' + Date.now();
+  // Cache-buster changes once a day (matches the daily pipeline rebuild), not
+  // on every page view — see 17/08/2026 note in hub-search.js.
+  var CB = '?cb=' + new Date().toISOString().slice(0, 10);
+  var IDX = BASE + 'data/supplier-index.json' + CB;
+  var CFG = BASE + 'data/prep-config.json' + CB;
+  var SEED = BASE + 'data/supplier-seed.json' + CB;
+  var SPECMAP = BASE + 'data/speciality-map.json' + CB;
+  var PRODUCTS = BASE + 'data/supplier-products.json' + CB;
   /* Every trust in the directory now gets a real profile, not a "no profile
      yet" note with three search links. Two files already in this repo carry
      verified, sourced facts for almost all of them and neither was being read:
@@ -33,7 +36,7 @@
       headers: { 'X-WP-Nonce': GATE.nonce }
     }).then(function(r){ return r.ok ? r.json() : null; });
   }
-  var PRESSURES = BASE + 'data/trust-pressures.json?cb=' + Date.now();
+  var PRESSURES = BASE + 'data/trust-pressures.json' + CB;
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }

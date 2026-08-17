@@ -146,10 +146,12 @@
   }
 
   MOUNT.innerHTML = '<div style="font-family:Inter,sans-serif;color:' + DIM + ';font-size:13px;">Loading the supplier ranking…</div>';
-  var cb = '?cb=' + Date.now();
+  // Cache-buster changes once a day, not on every page view — see
+  // 17/08/2026 note in hub-search.js.
+  var cb = '?cb=' + new Date().toISOString().slice(0, 10);
   Promise.all([
-    fetch(FW + cb, { cache: 'no-store' }).then(function (r) { return r.json(); }),
-    fetch(IDX + cb, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; })
+    fetch(FW + cb).then(function (r) { return r.json(); }),
+    fetch(IDX + cb).then(function (r) { return r.json(); }).catch(function () { return null; })
   ]).then(function (res) { render(res[0], res[1]); })
     .catch(function () {
       MOUNT.innerHTML = '<div style="font-family:Inter,sans-serif;color:' + DIM + ';font-size:13px;">The supplier ranking is loading its data — if this persists, the feed is temporarily unreachable. Nothing is missing from the ranking; it has not loaded.</div>';

@@ -31,7 +31,11 @@
   if (!MOUNT) return;
 
   var BASE = 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/';
-  var CB = '?cb=' + Date.now();
+  // Cache-buster changes once a day (matches the daily pipeline rebuild), not
+  // on every page view — a per-millisecond buster defeats GitHub's/Fastly's
+  // edge cache on every single request, which turns any GitHub-side hiccup
+  // into a 100% member-facing failure instead of a partial one. 17/08/2026.
+  var CB = '?cb=' + new Date().toISOString().slice(0, 10);
   var IDX = BASE + 'data/supplier-index.json' + CB;
   var SEED = BASE + 'data/supplier-seed.json' + CB;
   var SPECMAP = BASE + 'data/speciality-map.json' + CB;
@@ -1706,15 +1710,17 @@
   }
 
   MOUNT.innerHTML = '<div style="font-family:Inter,-apple-system,Segoe UI,sans-serif;color:' + DIM + ';font-size:13px;padding:12px;">Loading company report…</div>';
+  // cache:'no-store' removed 17/08/2026 — the URLs already carry a daily CB,
+  // so letting the browser reuse a same-day response is a feature, not a bug.
   Promise.all([
-    fetch(IDX, { cache: 'no-store' }).then(function (r) { return r.json(); }),
-    fetch(SEED, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return { suppliers: [] }; }),
-    fetch(SPECMAP, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; }),
-    fetch(PRODUCTS, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; }),
-    fetch(FIN, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; }),
-    fetch(NHSSC, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; }),
-    fetch(FWDATA, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; }),
-    fetch(AWARDS, { cache: 'no-store' }).then(function (r) { return r.json(); }).catch(function () { return null; })
+    fetch(IDX).then(function (r) { return r.json(); }),
+    fetch(SEED).then(function (r) { return r.json(); }).catch(function () { return { suppliers: [] }; }),
+    fetch(SPECMAP).then(function (r) { return r.json(); }).catch(function () { return null; }),
+    fetch(PRODUCTS).then(function (r) { return r.json(); }).catch(function () { return null; }),
+    fetch(FIN).then(function (r) { return r.json(); }).catch(function () { return null; }),
+    fetch(NHSSC).then(function (r) { return r.json(); }).catch(function () { return null; }),
+    fetch(FWDATA).then(function (r) { return r.json(); }).catch(function () { return null; }),
+    fetch(AWARDS).then(function (r) { return r.json(); }).catch(function () { return null; })
   ]).then(function (res) { boot(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7]); })
     .catch(function () {
       MOUNT.innerHTML = '<div style="font-family:Inter,-apple-system,Segoe UI,sans-serif;color:' + DIM + ';font-size:13px;padding:12px;">The company report is loading its data — if this persists, the index feed is temporarily unreachable. Nothing is missing from the report; the report has not loaded.</div>';

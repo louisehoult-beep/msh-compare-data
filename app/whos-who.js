@@ -18,7 +18,9 @@
   function mount(){
     var m = document.getElementById(MOUNT_ID);
     if (!m) return false;
-    fetch(SRC + '?cb=' + Date.now())
+    // Cache-buster changes once a day, not on every page view — see
+    // 17/08/2026 note in hub-search.js.
+    fetch(SRC + '?cb=' + new Date().toISOString().slice(0, 10))
       .then(function(r){ if (!r.ok) throw new Error(r.status); return r.text(); })
       .then(function(html){ m.innerHTML = html; })
       .catch(function(){

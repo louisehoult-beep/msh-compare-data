@@ -15,14 +15,19 @@
      the rival is a legitimate product, not a threat to be flagged. */
   var MINE_C = OX, MINE_BG = '#fbf3f4';
   var THEIR_C = '#2A5A6B', THEIR_BG = '#eff5f7';
-  var IDX = BASE + 'data/supplier-index.json?cb=' + Date.now();
-  var CFG = BASE + 'data/prep-config.json?cb=' + Date.now();
-  var SEED = BASE + 'data/supplier-seed.json?cb=' + Date.now();
-  var NHSSC = BASE + 'data/nhssc-cache.json?cb=' + Date.now();
+  // Cache-buster changes once a day (matches the daily pipeline rebuild), not
+  // on every page view — a per-millisecond buster defeats GitHub's/Fastly's
+  // edge cache on every single request, which turns any GitHub-side hiccup
+  // into a 100% member-facing failure instead of a partial one. 17/08/2026.
+  var CB = '?cb=' + new Date().toISOString().slice(0, 10);
+  var IDX = BASE + 'data/supplier-index.json' + CB;
+  var CFG = BASE + 'data/prep-config.json' + CB;
+  var SEED = BASE + 'data/supplier-seed.json' + CB;
+  var NHSSC = BASE + 'data/nhssc-cache.json' + CB;
   /* The company's own website range — a different KIND of fact from everything
      else this tool loads, and kept separate for that reason. See the note where
      it is folded into PRODUCTS. */
-  var RANGEURL = BASE + 'data/supplier-products.json?cb=' + Date.now();
+  var RANGEURL = BASE + 'data/supplier-products.json' + CB;
   var RANGE = {};
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }

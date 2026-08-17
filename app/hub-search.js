@@ -371,8 +371,16 @@
   function load() {
     if (LOADING || DATA || FAILED) { return; }
     LOADING = true;
-    var url = INDEX_URL + '?cb=' + Date.now();
-    fetch(url, { cache: 'no-store' })
+    // Cache-buster changes once a day (matches the daily pipeline rebuild),
+    // not on every page view. A per-millisecond buster, plus cache:'no-store'
+    // below, forced every single member's request past every cache layer
+    // straight to GitHub's origin — fine normally, but during a GitHub-side
+    // error spike (e.g. the 17/08/2026 raw-content incident) it turns a
+    // partial outage into a 100% search failure for every member. Letting
+    // the edge and browser cache hold a same-day copy means most loads are
+    // shielded from a transient origin problem. 17/08/2026.
+    var url = INDEX_URL + '?cb=' + new Date().toISOString().slice(0, 10);
+    fetch(url)
       .then(function (r) {
         if (!r.ok) { throw new Error('HTTP ' + r.status); }
         return r.json();
