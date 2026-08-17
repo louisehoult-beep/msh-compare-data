@@ -35,14 +35,24 @@ jobs:
           python-version: "3.12"
       - name: Publish gate
         run: python3 verify.py
-      # test_verify.py MOVED to msh-hub-private on 17/08/2026.
-      # Its cases are built around data/trust-contacts.json and
-      # data/people-moves.json, which are named NHS personal data and no
-      # longer live in this public repo. The suite runs there, unchanged and
-      # in full, against the real data. verify.py — the actual publish gate —
-      # still runs here on every push and in the pre-push hook.
-      # OUTSTANDING: build synthetic fixtures so the non-contact cases can run
-      # here too, otherwise this repo's verify.py can drift untested.
+      # test_verify.py is BACK, on synthetic fixtures (17/08/2026).
+      #
+      # It left this repo earlier the same day with data/trust-contacts.json and
+      # data/people-moves.json, which are named NHS personal data and now live
+      # only in msh-hub-private. Every contacts, tags and moves case reads those
+      # files off disk, so without them a third of the suite skipped — and the
+      # public verify.py, which is the gate the Hub's data actually passes
+      # through, ran untested and free to drift from the private copy.
+      #
+      # tests/fixtures/contacts.py now manufactures a shaped stand-in for the
+      # run: invented names, .invalid addresses, real ODS codes. Two cases still
+      # skip HERE and say why in their own output — the replay of the 24/07
+      # incident (its commit was rewritten out by the history purge) and the
+      # retention case (the harvester holding RETENTION_MONTHS is private). Both
+      # run in full in msh-hub-private, and the 24/07 fault is covered here by a
+      # synthetic equivalent rather than left uncovered.
+      - name: Prove the gate still catches the incident it was built for
+        run: python3 test_verify.py
       - name: Phone alert if the live data is bad (ntfy)
         if: failure()
         run: |
