@@ -842,6 +842,12 @@
         return a;
       }
       function sameSteps(p){
+        // "Like-for-like" is only ever true when both products carry the SAME
+        // recognised device-type classification (mine.type / p.type) AND every
+        // catalogue-derived attribute we hold matches. Never claim it on a
+        // fallback name-match pairing (no recognised type) or on partial
+        // attribute overlap — that is "similar", not "the same".
+        if (!mine.type || !p.type || mine.type !== p.type) return false;
         var pa = attrsOf(p);
         if (!myA0 || !pa || !myA0.form || !pa.form || myA0.form !== pa.form) return false;
         // same format = same steps; a KNOWN material difference breaks it
@@ -932,7 +938,10 @@
       if (dTheirs && dTheirs.items.some(function(it){ return it.status; })){
         reasons.push('<strong>Supply reliability:</strong> ' + esc(theirs.name) + ' (' + esc(theirs.supplier) + ') currently shows a suspended or updated pack on the live catalogue. If that is their incumbent, continuity of supply is your opening — a stockout is the one problem procurement cannot ignore.');
       }
-      reasons.push('<strong>Second-source resilience:</strong> NHS value-based procurement scores supply-chain resilience, not just price. A like-for-like second source de-risks a single-supplier category — you are not asking them to drop anyone, just to dual-source sensibly.');
+      // "like-for-like" only when sameSteps(theirs) has confirmed an exact
+      // classification + attribute match; otherwise this is a same-category
+      // second source, not a like-for-like one.
+      reasons.push('<strong>Second-source resilience:</strong> NHS value-based procurement scores supply-chain resilience, not just price. A ' + (sameSteps(theirs) ? 'like-for-like' : 'same-category') + ' second source de-risks a single-supplier category — you are not asking them to drop anyone, just to dual-source sensibly.');
       if (dMine && dTheirs && dMine.items.length > dTheirs.items.length){
         reasons.push('<strong>Range fit:</strong> you list ' + dMine.items.length + ' pack formats against ' + dTheirs.items.length + ' for ' + esc(theirs.name) + ' — match the format conversation to how their theatres actually order.');
       }
@@ -1012,7 +1021,7 @@
           on: true, note:'build the number in the Value Case Calculator — this is the scoring system your case is judged in'},
         {n:'Supply disruption / discontinuation', ev:'When an incumbent discontinued high-usage suture lines, South Yorkshire ICS switched to a framework alternative, saved £553,000, and two more trusts followed — a rival’s supply problem (discontinuation, suspension or recall) is a proven switch trigger.', src:'https://www.supplychain.nhs.uk/news-article/suture-switch-collaboration/',
           on: !!(dTheirs && dTheirs.items.some(function(it){ return it.status; })), note:'their line shows a suspended/updated pack — lead with continuity of supply'},
-        {n:'Supply-chain resilience / dual sourcing', ev:'Resilience is one of the five scored VBP value domains — a like-for-like second source de-risks a single-supplier category.', src:'https://www.nhsconfed.org/publications/supply-chain-resilience',
+        {n:'Supply-chain resilience / dual sourcing', ev:'Resilience is one of the five scored VBP value domains — a second source in the same category de-risks single-supplier reliance.', src:'https://www.nhsconfed.org/publications/supply-chain-resilience',
           on: true, note:'position as sensible dual-sourcing, not a rip-and-replace'},
         {n:'Standardisation / rationalising variation', ev:'Carter found 30,000 suppliers, 20,000 brands and 400,000+ product codes across 22 trusts — consolidation is policy.', src:'https://www.gov.uk/government/news/review-shows-how-nhs-hospitals-can-save-money-and-improve-care',
           on: allComps.length >= 5, note:'a fragmented category — offer to simplify their range'},
@@ -1094,13 +1103,22 @@
       else body = (angle && ANGLE[angle] ? ANGLE[angle] : 'Optional — pick “what matters most” above for a tailored play, including Objection handling (MSTP): Acknowledge &rarr; Reframe &rarr; One more question.') + ' ' + link('Open the Value Case Calculator', 1109) + '.';
       h += '<div style="background:#fff;border:1px solid ' + LINE + ';border-left:3px solid ' + GOLD + ';border-radius:10px;padding:14px 16px;margin:12px 0;"><div style="font-size:15px;font-weight:800;">How you could use this' + (angle ? ' — ' + esc(angle) : ' (optional)') + '</div><div style="font-size:14px;line-height:1.65;color:#39424d;margin-top:4px;">' + body + '</div></div>';
 
-      // AI prompt
-      var prompt = 'Compare ' + mine.name + ' (' + mine.supplier + ') against ' + theirs.name + ' (' + theirs.supplier + ') for an NHS buyer: the key clinical and practical differences, where each wins, and how I sell ' + mine.name + ' against it. Bullet points.';
-      h += '<div style="background:' + SOFT + ';border:1px dashed ' + GOLD + ';border-radius:10px;padding:12px 16px;margin:12px 0;"><div style="font-size:13px;font-weight:700;color:' + INK + ';">Deep product-by-product detail — copy into your AI assistant:</div><div style="font-size:13px;color:#39424d;background:#fff;border:1px solid ' + LINE + ';border-radius:6px;padding:8px 10px;margin-top:6px;font-family:ui-monospace,Menlo,monospace;">' + esc(prompt) + '</div><div style="font-size:12px;color:#8a8778;margin-top:6px;">Once the Hub’s AI integration is live, this answers itself in-tool.</div></div>';
+      // Prompt questions to dig deeper — replaced the "copy into your AI assistant"
+      // prompt on 17/08/2026: an external AI tool asked to fill in what this page
+      // doesn't hold will readily invent clinical/commercial detail about somebody
+      // else's product, on a page that is otherwise sourced line-by-line. These
+      // questions point the rep back at what IS verified — the detail above and
+      // their own product knowledge — rather than out to an unverified source.
+      var qPrompts = [
+        'What is actually different between ' + esc(mine.name) + ' and ' + esc(theirs.name) + ', beyond what is shown above?',
+        'Which of those differences would this particular buyer care about most?',
+        'What do I know from handling or demonstrating either product that the catalogue and website don’t show?'
+      ];
+      h += '<div style="background:' + SOFT + ';border:1px dashed ' + GOLD + ';border-radius:10px;padding:12px 16px;margin:12px 0;"><div style="font-size:13px;font-weight:700;color:' + INK + ';">Before the meeting — questions to work through yourself:</div><ul style="margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.7;color:#39424d;">' + qPrompts.map(function(q){ return '<li>' + q + '</li>'; }).join('') + '</ul></div>';
 
       // Hand-off into "Help me prepare" — carries this product & supplier across.
       h += '<div style="margin:14px 0 6px;"><a href="#msh-meeting-prep" id="msh-handoff" data-supplier="' + esc(mine.supplier) + '" data-product="' + esc(mine.name) + '" style="display:inline-block;background:' + GRN + ';color:#fff;border-radius:8px;padding:11px 20px;font-weight:700;font-size:14px;text-decoration:none;">Take this into &ldquo;Help me prepare&rdquo; &rarr;</a><span style="font-size:12px;color:#8a8778;margin-left:10px;">carries this product into your meeting brief</span></div>';
-      h += '<div style="font-size:12px;color:#8a8778;">Product names are the suppliers’ own; framework is top-level (verify the lot at source); NPC / MPC codes and images are from the public NHS Supply Chain catalogue (prices need login). Nothing is invented.</div>';
+      h += '<div style="font-size:12px;color:#8a8778;">This comparison uses only what is published on the NHS Supply Chain catalogue and on each supplier’s own website — nothing else and nothing invented. Product names are the suppliers’ own; framework is top-level (verify the lot at source); NPC / MPC codes and images are from the public NHS Supply Chain catalogue (prices need login). An empty or “not stated” field means the source is silent, not that the product lacks it.</div>';
       return h;
     }
 
