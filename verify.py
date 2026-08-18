@@ -3250,6 +3250,204 @@ def check_company_press(doc, seed):
                                   % (label, stated, actual))
 
 
+
+
+# --------------------------------------------------------------------------
+# HOSPITAL PRESCRIBING (NHSBSA) — data/hospital-prescribing/ + app/hospital-prescribing.js
+# --------------------------------------------------------------------------
+# Items prescribed by an NHS trust in England and dispensed in a community
+# pharmacy. The layer is optional: no index file means the tool is not built and
+# nothing here fires. Built, it has to be whole, because every failure mode below
+# looks completely normal in a diff of a machine-written file.
+#
+# The tests in test_verify.py drove each of these. They existed before the checks
+# did, which is why the tool sat unpublished: 11 MB of member-facing prescribing
+# data with a gate that could not see it.
+HP_DIR = "data/hospital-prescribing"
+HP_INDEX = os.path.join(HP_DIR, "index.json")
+HP_JS = os.path.join("app", "hospital-prescribing.js")
+
+
+def _hp_months_between(a, b):
+    """Count of YYYYMM steps from a to b. Both are strings."""
+    ya, ma = int(a[:4]), int(a[4:])
+    yb, mb = int(b[:4]), int(b[4:])
+    return (yb - ya) * 12 + (mb - ma)
+
+
+def check_hospital_prescribing(doc):
+    if not doc:
+        return
+
+    # 1. THE MONTHLY SERIES MUST NOT CLOSE UP OVER A MISSING MONTH.
+    # NHSBSA does not publish every month on time. A month it never published is
+    # carried in missingPeriods and rendered as a break in the line. If it is
+    # simply dropped from periods instead, twelve months of trend quietly become
+    # eleven and every rate computed across the gap is wrong, with nothing on the
+    # page saying so.
+    periods = [str(p) for p in (doc.get("periods") or [])]
+    missing = [str(p) for p in (doc.get("missingPeriods") or [])]
+    if not periods:
+        FAIL("hospital-prescribing", "%s publishes no periods at all. An empty series is "
+                                     "not a trend — do not publish the panel." % HP_INDEX)
+    else:
+        bad = [p for p in periods if not re.fullmatch(r"\d{6}", p)]
+        if bad:
+            FAIL("hospital-prescribing", "%s carries malformed period(s) %s — expected YYYYMM."
+                                         % (HP_INDEX, ", ".join(bad[:5])))
+        else:
+            if sorted(periods) != periods:
+                FAIL("hospital-prescribing", "%s lists its periods out of order. The panel trends "
+                                             "them in file order, so the chart would read backwards "
+                                             "over the jump." % HP_INDEX)
+            span = _hp_months_between(periods[0], periods[-1]) + 1
+            if span != len(periods):
+                absent, y, m = [], int(periods[0][:4]), int(periods[0][4:])
+                held = set(periods)
+                for _ in range(span):
+                    stamp = "%04d%02d" % (y, m)
+                    if stamp not in held:
+                        absent.append(stamp)
+                    m += 1
+                    if m == 13:
+                        y, m = y + 1, 1
+                FAIL("hospital-prescribing",
+                     "gap in the monthly series: %s runs %s to %s, which is %d months, but holds "
+                     "only %d. Absent: %s. A month NHSBSA never published keeps its slot and is "
+                     "named in missingPeriods so the line breaks — it is never closed up, because "
+                     "closing it up silently shortens every rate computed across it."
+                     % (HP_INDEX, periods[0], periods[-1], span, len(periods),
+                        ", ".join(absent[:6]) or "none identifiable"))
+            stray = [p for p in missing if p not in set(periods)]
+            if stray:
+                FAIL("hospital-prescribing",
+                     "%s names %s in missingPeriods but does not carry the slot in periods. A "
+                     "missing month is a break in the series, not an absence from it."
+                     % (HP_INDEX, ", ".join(stray[:5])))
+
+    # 2. THE BRAND/GENERIC FLAG MUST AGREE WITH THE SHARD IT SUMMARISES.
+    # BNF product code characters 10-11 are "AA" for the generic. The index's `g`
+    # is a summary of what the chapter shard actually holds. If the two disagree
+    # the panel tells a rep a molecule has no generic competition when the shard
+    # in front of them lists one, which is the wrong way round for a sales call.
+    subs = doc.get("substances") or []
+    mismatched = 0
+    shards = {}
+    for row in subs:
+        code, ch = str(row.get("c") or ""), str(row.get("ch") or "")
+        if not code or not ch:
+            continue
+        if ch not in shards:
+            try:
+                with open(os.path.join(HP_DIR, "ch-%s.json" % ch)) as f:
+                    shards[ch] = json.load(f)
+            except Exception:
+                shards[ch] = None
+        shard = shards[ch]
+        if not shard:
+            continue
+        rec = (shard.get("s") or {}).get(code)
+        if not isinstance(rec, dict):
+            continue
+        prods = rec.get("p")
+        if not isinstance(prods, dict) or not prods:
+            continue
+        has_generic = "AA" in prods
+        if bool(row.get("g")) != has_generic:
+            mismatched += 1
+            if mismatched <= 5:
+                FAIL("hospital-prescribing",
+                     "the brand/generic rule has broken: %s (%s) is flagged g=%s but its chapter "
+                     "%s shard %s a product under BNF segment 'AA'. The flag summarises the shard "
+                     "and cannot disagree with it — a rep would be told a molecule has no generic "
+                     "competition while the shard in front of them lists one."
+                     % (row.get("n") or code, code, bool(row.get("g")), ch,
+                        "does hold" if has_generic else "holds no"))
+    if mismatched > 5:
+        FAIL("hospital-prescribing", "the brand/generic rule has broken on %d further molecules "
+                                     "(only the first 5 are listed)." % (mismatched - 5))
+
+    # 3. THE PUBLISHED EVIDENCE FLOOR MUST BE THE ONE THE BUILDER APPLIED.
+    # Root rule 14: the rule a claim was derived under is published with it. If
+    # the file says the floor is 2 while the builder used 25, the file documents a
+    # rule nothing enforced, and the reader judges the number against the wrong bar.
+    stated = doc.get("minBaselineItems")
+    built = None
+    try:
+        src = open("scripts/refresh_hospital_prescribing.py").read()
+        m = re.search(r"^MIN_BASELINE_ITEMS\s*=\s*(\d+)", src, re.M)
+        built = int(m.group(1)) if m else None
+    except Exception:
+        pass
+    if built is None:
+        WARN("hospital-prescribing", "could not read MIN_BASELINE_ITEMS from "
+                                     "scripts/refresh_hospital_prescribing.py — the published "
+                                     "evidence floor was not checked against the builder.")
+    elif stated != built:
+        FAIL("hospital-prescribing",
+             "%s states an evidence floor of %s items, which is not the rule applied: the "
+             "builder used MIN_BASELINE_ITEMS = %d. Lowering the floor on the published file "
+             "does not lower it in the data — it only misdescribes it."
+             % (HP_INDEX, stated, built))
+
+    # 4. THE PANEL MUST STILL PRINT ITS REFUSAL.
+    # Below the floor the tool prints "too few to trend" and no number. That
+    # refusal IS the honest empty state. Silently swapping it for "n/a" or a
+    # number is how thin evidence starts reading as a finding.
+    if os.path.exists(HP_JS):
+        try:
+            js = open(HP_JS, encoding="utf-8").read()
+        except Exception as exc:
+            WARN("hospital-prescribing", "could not read %s (%s) — the refusal string was "
+                                         "not checked." % (HP_JS, exc))
+        else:
+            if "too few to trend" not in js:
+                FAIL("hospital-prescribing",
+                     "%s no longer prints the refusal 'too few to trend'. Below the evidence "
+                     "floor the panel must refuse in words and print no number." % HP_JS)
+
+    # 5. THE INDEX MUST NOT SILENTLY SHRINK.
+    # A part-completed NHSBSA download parses cleanly and produces a perfectly
+    # valid file holding a fraction of the trusts. Nothing in git treats "this
+    # file lost 170 trusts" as a conflict, so the gate has to.
+    #
+    # The guard is self-contained rather than a comparison against the last
+    # commit, because the first publish of a file has nothing to compare to —
+    # which is exactly when a truncated build is most likely to go out. The
+    # shards are the evidence: every trust code they carry a series for must be
+    # named in the index, or the index is not describing the data beside it.
+    listed = set(doc.get("trusts") or {})
+    referenced = set()
+    for ch, shard in shards.items():
+        if not shard:
+            continue
+        for rec in (shard.get("s") or {}).values():
+            if isinstance(rec, dict) and isinstance(rec.get("t"), dict):
+                referenced.update(rec["t"])
+    if referenced:
+        orphaned = referenced - listed
+        if orphaned:
+            FAIL("hospital-prescribing",
+                 "Refusing a shrunken prescribing index: the chapter shards carry series for %d "
+                 "trusts, but index.json names only %d of them — %d are unlisted (%s%s). A "
+                 "truncated NHSBSA build parses perfectly and reads like a normal refresh, so "
+                 "the shards are the check. Find out what broke; do not publish the short index."
+                 % (len(referenced), len(referenced) - len(orphaned), len(orphaned),
+                    ", ".join(sorted(orphaned)[:5]), " ..." if len(orphaned) > 5 else ""))
+
+    # The relative guard still applies once there is a committed baseline: a drop
+    # that keeps the index and its shards consistent (both truncated together)
+    # would pass the check above and still be wrong.
+    old = committed(HP_INDEX)
+    if old:
+        o, n = len(old.get("trusts") or {}), len(listed)
+        if o and n < o * 0.9:
+            FAIL("hospital-prescribing",
+                 "Refusing a shrunken prescribing index: trusts drop from %d to %d (-%.0f%%). "
+                 "Find out what broke, or override deliberately and say why in the commit."
+                 % (o, n, (1 - n / o) * 100))
+
+
 def main():
     offline = "--offline" in sys.argv
     as_json = "--json" in sys.argv
@@ -3320,6 +3518,10 @@ def main():
     check_company_logos(load("company-logos.json"), report_js)
     # Per-product detail captured from each supplier's own product page.
     check_supplier_product_detail(load("supplier-product-detail.json"), load("supplier-products.json"))
+    # NHSBSA hospital prescribing. Optional like the layers above: no index means
+    # the tool is not built. Built, every check below is one the tests demanded
+    # before the checks existed — which is exactly why it had not shipped.
+    check_hospital_prescribing(load("hospital-prescribing/index.json"))
 
     check_search_index(load(SEARCH_INDEX))
 
