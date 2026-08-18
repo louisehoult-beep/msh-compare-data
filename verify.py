@@ -3448,6 +3448,92 @@ def check_hospital_prescribing(doc):
                  % (o, n, (1 - n / o) * 100))
 
 
+# --------------------------------------------------------------------------
+# THE DIFFERENTIATOR — data/differentiator.json
+# --------------------------------------------------------------------------
+# Product-level comparison, built from the manufacturer's own site AND the NHSSC
+# catalogue. Optional: no file means the layer is not built.
+#
+# The failure this gates is not a wrong number, it is a wrong COMPARISON. Two
+# products put side by side that are not the same kind of thing produce a table
+# where every row reads "n/a", and a member reads that as a product that fails on
+# every measure rather than a product that was never comparable. So the category
+# lock is the check: one category per product, from the vocabulary the Compare
+# tab already gates, and nothing published without it.
+def check_differentiator(doc, vocab):
+    if not doc:
+        return
+
+    legal = set()
+    for s, v in (vocab or {}).get("specialities", {}).items():
+        for t in (v.get("types") or {}):
+            legal.add("%s:%s" % (s, t))
+
+    prods = doc.get("products") or []
+    counts = doc.get("counts") or {}
+
+    # The Frankenstein guard. A counts header from one generation above rows from
+    # another is exactly what a text-merged generated file looks like (14/08).
+    if counts.get("published") is not None and counts["published"] != len(prods):
+        FAIL("differentiator", "data/differentiator.json states published = %s but holds %d "
+                               "product(s). The header and the rows come from different "
+                               "generations — regenerate, do not reconcile by hand."
+                               % (counts["published"], len(prods)))
+
+    uncategorised = [p for p in prods if not p.get("cat")]
+    if uncategorised:
+        FAIL("differentiator", "%d published product(s) carry no category, starting with %s. "
+                               "An uncategorised product is held, never published: it would be "
+                               "comparable against everything."
+                               % (len(uncategorised),
+                                  ", ".join("%s / %s" % (p.get("supplier"), p.get("name"))
+                                            for p in uncategorised[:3])))
+
+    if legal:
+        stray = sorted({p["cat"] for p in prods if p.get("cat") and p["cat"] not in legal})
+        if stray:
+            FAIL("differentiator", "%d product category/ies are not in the gated vocabulary: %s. "
+                                   "A category the Compare tab cannot render is a category no "
+                                   "member can filter to." % (len(stray), ", ".join(stray[:5])))
+
+    sourceless = [p for p in prods if not (p.get("sources") or [])]
+    if sourceless:
+        FAIL("differentiator", "%d published product(s) carry no source at all, starting with "
+                               "%s. Every published fact carries its source — a product with "
+                               "none cannot be checked by the member reading it."
+                               % (len(sourceless),
+                                  ", ".join("%s / %s" % (p.get("supplier"), p.get("name"))
+                                            for p in sourceless[:3])))
+
+    nourl = [p for p in prods
+             if (p.get("sources") or []) and not any(s.get("url") for s in p["sources"])]
+    if nourl:
+        FAIL("differentiator", "%d published product(s) name a source with no URL to reach it, "
+                               "starting with %s." % (len(nourl),
+                               ", ".join("%s / %s" % (p.get("supplier"), p.get("name"))
+                                         for p in nourl[:3])))
+
+    # A category holding one product is not a comparison. It may be published and
+    # read, but it must never be offered as something to compare within, or the
+    # member is invited into a table with a single column.
+    bycat = {}
+    for p in prods:
+        if p.get("cat"):
+            bycat[p["cat"]] = bycat.get(p["cat"], 0) + 1
+    singles = sorted(c for c, n in bycat.items() if n < 2)
+    stated = counts.get("comparableCategories")
+    if stated is not None and stated != len([c for c, n in bycat.items() if n >= 2]):
+        FAIL("differentiator", "data/differentiator.json states %s comparable categories but "
+                               "%d hold two or more products. The count a member is shown must "
+                               "be the count that exists."
+                               % (stated, len([c for c, n in bycat.items() if n >= 2])))
+    if singles:
+        WARN("differentiator", "%d category/ies hold a single product (%s%s) — publishable, but "
+                               "never offer them as a comparison."
+                               % (len(singles), ", ".join(singles[:4]),
+                                  " ..." if len(singles) > 4 else ""))
+
+
 def main():
     offline = "--offline" in sys.argv
     as_json = "--json" in sys.argv
@@ -3522,6 +3608,8 @@ def main():
     # the tool is not built. Built, every check below is one the tests demanded
     # before the checks existed — which is exactly why it had not shipped.
     check_hospital_prescribing(load("hospital-prescribing/index.json"))
+    # The Differentiator. The category lock is the check — see the note above.
+    check_differentiator(load("differentiator.json"), load("compare-suppliers.json"))
 
     check_search_index(load(SEARCH_INDEX))
 

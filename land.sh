@@ -27,21 +27,21 @@ if [ -z "$SUBJECT" ] || [ $# -eq 0 ]; then
   exit 2
 fi
 
-echo "==> 1/6 fetching origin"
+echo "==> 1/7 fetching origin"
 git fetch --quiet origin
 
-echo "==> 2/6 checking nothing else is staged"
+echo "==> 2/7 checking nothing else is staged"
 if ! git diff --cached --quiet; then
   echo "REFUSING: something is already staged. Landing one piece at a time is the" >&2
   echo "whole point of this script. Unstage, then re-run with your paths." >&2
   exit 1
 fi
 
-echo "==> 3/6 staging only the named paths"
+echo "==> 3/7 staging only the named paths"
 git add -- "$@"
 git diff --cached --name-only | sed 's/^/    /'
 
-echo "==> 4/6 record-level no-loss check (working tree vs origin/main)"
+echo "==> 4/7 record-level no-loss check (working tree vs origin/main)"
 python3 scripts/check_no_loss.py || {
   echo "REFUSING: a staged data file loses records against origin/main." >&2
   echo "Diff by record, not by line. A file that quietly lost entries is not a" >&2
@@ -49,24 +49,30 @@ python3 scripts/check_no_loss.py || {
   exit 1
 }
 
-echo "==> 5/6 rebasing onto origin/main, then REGENERATING nothing and re-gating"
-# -X theirs is deliberately NOT used here. On a generated JSON file it keeps the
-# other writer's non-conflicting hunks and produces a file whose counts header
-# and rows come from different generations (14/08 incident). If the rebase
-# conflicts, stop and let a human regenerate.
+echo "==> 5/7 committing this piece"
+# The commit has to come BEFORE the rebase: git refuses to rebase with a staged
+# index, and leaving the work uncommitted through a rebase is how it ends up in
+# a stash nobody comes back to (there was one of those, held since 14/08).
+git commit -q -m "$SUBJECT"
+
+echo "==> 6/7 rebasing onto origin/main"
+# -X theirs is deliberately NOT used. On a generated JSON file it keeps the other
+# writer's non-conflicting hunks and produces a file whose counts header and rows
+# come from different generations (the 14/08 incident). If the rebase conflicts,
+# stop and let a human regenerate on top of origin/main.
 git rebase origin/main || {
   echo "REFUSING: rebase conflicted. Do not resolve a generated JSON file by hand" >&2
-  echo "or with -X theirs. Regenerate it on top of origin/main and re-run." >&2
-  git rebase --abort || true
+  echo "or with -X theirs. Abort, regenerate on top of origin/main, and re-run." >&2
+  echo "Your commit is safe — 'git rebase --abort' leaves it on the branch." >&2
   exit 1
 }
 
-echo "==> 6/6 gate, then push"
+echo "==> 7/7 gate, then push"
 python3 verify.py || {
-  echo "REFUSING: verify.py failed. Root rule 13 — if the gate and the data" >&2
-  echo "disagree, the data is wrong. Never loosen a check to get a push through." >&2
+  echo "REFUSING: verify.py failed after the rebase. Root rule 13 — if the gate" >&2
+  echo "and the data disagree, the data is wrong. Never loosen a check to get a" >&2
+  echo "push through. Your commit is on the branch; fix and re-gate." >&2
   exit 1
 }
-git commit -q -m "$SUBJECT" || echo "    (nothing to commit)"
 git push origin main
 echo "LANDED: $SUBJECT"
