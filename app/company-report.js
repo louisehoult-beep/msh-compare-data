@@ -2145,6 +2145,16 @@
 
     if (window.MSH_COMPANY_REPORT_OPEN) show(window.MSH_COMPANY_REPORT_OPEN);
 
+    /* ?company= deep link, e.g. from the Live Desk's supplier-press panel
+       (SPEC-live-desk-supplier-press-block.md §4). Resolved the same way a
+       typed name is - through find()/show(), which normalises case and
+       punctuation before matching. An unresolved or absent parameter changes
+       nothing: the picker is left exactly as it is with no query string. */
+    try {
+      var qp = new URLSearchParams(window.location.search).get('company');
+      if (qp) { input.value = qp; show(qp); }
+    } catch (e) { /* URLSearchParams unsupported: deep link silently no-ops, picker still works */ }
+
     /* Harness hook, same family as MSH_COMPANY_REPORT_OPEN: lets a test page
        pull the Stage 5 pack HTML for a named company without opening a popup
        window. Carries no data of its own — it is the same buildPack the
