@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Company Report — render harness</title>
+
+<!--
+  MEDICAL SALES INTELLIGENCE HUB — COMPANY REPORT RENDER HARNESS
+  ==============================================================
+  A push to msh-compare-data is a live publish. verify.py checks the DATA.
+  Nothing checked that the RENDERER still worked. This page is that check.
+
+  It loads a candidate build of app/company-report.js (default ../MERGED.js,
+  override with ?src=), renders real companies inside a reproduction of the
+  real WordPress host, and asserts against the resulting DOM.
+
+  WHY THE HOST REPRODUCTION MATTERS
+  ---------------------------------
+  The report mounts inside div.msh on a page whose own token block declares
+  `.msh *{margin:0;padding:0;box-sizing:border-box}`, and whose theme paints
+  every input with a near-black ground at specificity 0,4,1. Both of those
+  have already caused live defects. This harness carries BOTH rules, in a
+  <style> element in the BODY — because head always precedes body in tree
+  order, a body sheet wins every specificity TIE against the sheet the
+  renderer injects into <head>. That is exactly how the live page broke.
+  A harness that puts the reset in <head> passes while the page is broken.
+
+  Offline apart from the data fetch: no CDN, no web font, no third-party
+  script. Data is read from the repo's own data/ directory and falls back to
+  the public raw.githubusercontent copies if those are absent.
+-->
+
+<style id="harness-chrome">
+  /* Harness chrome only. Deliberately kept OUTSIDE .msh so the host reset
+     cannot eat it, and so it can never mask a renderer defect. */
+  html,body{background:#f2eee5;color:#1d2733;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:14px;line-height:1.6;margin:0;padding:0;}
+  #hn-wrap{max-width:1100px;margin:0 auto;padding:22px 18px 40px;}
+  #hn-wrap h1{font-size:20px;margin:0 0 4px;color:#0B1C33;}
+  #hn-meta{font-size:12.5px;color:#75808d;margin:0 0 16px;}
+  #hn-tot{font-weight:700;font-size:15px;margin:14px 0;padding:12px 14px;border-radius:10px;
+    background:#fff;border:1px solid #e6e0d4;}
+  .hn-row{padding:7px 12px;border-radius:8px;margin:0 0 5px;background:#fff;
+    border:1px solid #e6e0d4;font-size:13px;}
+  .hn-pass{border-left:5px solid #2e7d5b;}
+  .hn-fail{border-left:5px solid #b84a5c;background:#fdf4f5;}
+  .hn-skip{border-left:5px solid #c9c2b2;color:#6d6a63;}
+  .hn-tag{display:inline-block;min-width:52px;font-weight:700;letter-spacing:.06em;font-size:11px;}
+  .hn-pass .hn-tag{color:#2e7d5b;} .hn-pass .hn-det{color:#2e7d5b;} .hn-skip .hn-det{color:#8d8677;} .hn-fail .hn-tag{color:#b84a5c;} .hn-skip .hn-tag{color:#8d8677;}
+  .hn-name{font-weight:600;}
+  .hn-why{display:block;color:#75808d;font-size:12px;margin-top:2px;}
+  .hn-det{display:block;color:#b84a5c;font-size:12px;margin-top:3px;}
+  #hn-stage{margin-top:26px;border-top:2px solid #e6e0d4;padding-top:10px;}
+  #hn-stage h2{font-size:14px;color:#75808d;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+
+  /* Wide viewport for the measure check: the live Hub page is full-bleed, so
+     the cap has to be proved against a wide ground, not the browser window. */
+  #mcr-host{width:1600px;}
+
+  /* Probe rule, specificity 0,1,0 — the same weight as `.msh *`. If the body
+     reset below is present and winning on document order, this padding is
+     overridden to 0. That is what the harness self-test asserts. */
+  .hn-probe{padding:11px;}
+</style>
+</head>
+<body>
+
+<div id="hn-wrap">
+  <h1>Company Report — render harness</h1>
+  <p id="hn-meta">Loading…</p>
+  <div id="hn-tot">Running…</div>
+  <div id="hn-list"></div>
+  <!-- Machine-readable sink. window.HARNESS_RESULT is the API; this element
+       carries the same object so a headless `--dump-dom` run can read it
+       without a debugging protocol. -->
+  <pre id="hn-json" style="display:none"></pre>
+</div>
+
+<div id="hn-stage">
+  <h2>Rendered output under test</h2>
+  <!-- The real mount point and the real host wrapper. -->
+  <div id="mcr-host" class="msh">
+    <div class="hn-probe" id="hn-probe"></div>
+    <div id="msh-company-report"></div>
+  </div>
+</div>
+
+<!--
+  THE HOST STYLESHEET, IN THE BODY. Do not move this to <head>.
+  Rule 1 is the WordPress page's own token block. Rule 2 is the theme's form
+  rule, at its real specificity (0,4,1), painting the real near-black ground.
+-->
+<style id="host-page-block">
+  .msh *{margin:0;padding:0;box-sizing:border-box}
+
+  textarea:not(.block-editor-plain-text),
+  input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]){
+    background:#0B1C33;
+    color:#111827;
+    border:1px solid #24344c;
+    border-radius:4px;
+  }
+</style>
+
+<script>
+/* =====================================================================
+   HARNESS RUNTIME
+   ===================================================================== */
+(function () {
+  'use strict';
+
+  var COMPANIES = [
+    { q: 'GBUK Group',                    kind: 'rich' },
+    { q: 'Vygon',                         kind: 'rich' },
+    { q: 'Terumo',                        kind: 'rich' },
+    { q: 'Coloplast',                     kind: 'rich' },
+    /* Two deliberately THIN companies. Most of the indexed set is thin, so the
+       empty states are the common case and are exactly what breaks unnoticed.
+       Both of these score zero on products, frameworks, news, alerts,
+       specialities, links and curated seed content. */
+    { q: 'Endomagnetics Ltd',             kind: 'thin' },
+    { q: 'Ability Matters Group Limited', kind: 'thin' }
+  ];
+
+  var FILES = {
+    index:      'supplier-index.json',
+    seed:       'supplier-seed.json',
+    specMap:    'speciality-map.json',
+    products:   'supplier-products.json',
+    financials: 'company-financials.json',
+    nhssc:      'nhssc-cache.json',
+    frameworks: 'frameworks.json',
+    awards:     'company-awards.json',
+    logos:      'company-logos.json'
+  };
+  var REMOTE = 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/';
+  /* The repo's own data directory, relative to this page. The harness lives at
+     tests/company-report/ and is served from the repo root, so the data it
+     checks against is the data that would actually be published — not a copy
+     that can drift. ?data=<path> overrides it; REMOTE above is the fallback
+     when a file is missing locally, so the harness still runs from a bare
+     checkout. */
+  var DATA_DIR = (function () {
+    try {
+      var q = new URLSearchParams(window.location.search).get('data');
+      if (q) { return q.replace(/\/?$/, '/'); }
+    } catch (e) { /* no URLSearchParams: fall through to the default */ }
+    return '../../data/';
+  })();
+
+  var results = [];
+  var listEl = document.getElementById('hn-list');
+
+  function record(status, name, why, detail) {
+    results.push({ status: status, name: name, why: why, detail: detail || '' });
+    var row = document.createElement('div');
+    row.className = 'hn-row hn-' + status;
+    var tag = document.createElement('span');
+    tag.className = 'hn-tag';
+    tag.textContent = status.toUpperCase();
+    var nm = document.createElement('span');
+    nm.className = 'hn-name';
+    nm.textContent = ' ' + name;
+    var wh = document.createElement('span');
+    wh.className = 'hn-why';
+    wh.textContent = why;
+    row.appendChild(tag); row.appendChild(nm); row.appendChild(wh);
+    if (detail) {
+      var dt = document.createElement('span');
+      dt.className = 'hn-det';
+      dt.textContent = detail;
+      row.appendChild(dt);
+    }
+    listEl.appendChild(row);
+  }
+  function pass(name, why) { record('pass', name, why); }
+  function fail(name, why, detail) { record('fail', name, why, detail); }
+  function skip(name, why, detail) { record('skip', name, why, detail); }
+
+  /* assert(ok, name, why, detail) — one named check, one line of explanation
+     saying what regression it catches. */
+  function check(ok, name, why, detail) {
+    if (ok) { pass(name, why); } else { fail(name, why, detail); }
+  }
+
+  /* ---- colour helpers, for a real contrast ratio ---------------------- */
+  function rgb(str) {
+    var m = String(str).match(/rgba?\(([^)]+)\)/);
+    if (!m) return null;
+    var p = m[1].split(',').map(function (x) { return parseFloat(x); });
+    return { r: p[0], g: p[1], b: p[2], a: p.length > 3 ? p[3] : 1 };
+  }
+  function lum(c) {
+    function ch(v) { v = v / 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }
+    return 0.2126 * ch(c.r) + 0.7152 * ch(c.g) + 0.0722 * ch(c.b);
+  }
+  function contrast(a, b) {
+    var la = lum(a), lb = lum(b);
+    var hi = Math.max(la, lb), lo = Math.min(la, lb);
+    return (hi + 0.05) / (lo + 0.05);
+  }
+  /* An input's own background can be transparent, in which case what the member
+     actually sees is whatever is painted behind it. Walk up until something
+     opaque is found, so the ratio is measured against the real ground. */
+  function effectiveBg(el) {
+    var n = el;
+    while (n && n !== document.documentElement) {
+      var c = rgb(getComputedStyle(n).backgroundColor);
+      if (c && c.a > 0.05) return c;
+      n = n.parentElement;
+    }
+    return { r: 255, g: 255, b: 255, a: 1 };
+  }
+  function px(v) { return parseFloat(v) || 0; }
+
+  /* ---- data loading ---------------------------------------------------- */
+  function loadOne(file) {
+    return fetch(DATA_DIR + file)
+      .then(function (r) { if (!r.ok) throw new Error('local ' + r.status); return r.json(); })
+      .catch(function () {
+        return fetch(REMOTE + file).then(function (r) {
+          if (!r.ok) throw new Error(file + ' HTTP ' + r.status);
+          return r.json();
+        });
+      });
+  }
+  function loadAll() {
+    var keys = Object.keys(FILES);
+    return Promise.all(keys.map(function (k) { return loadOne(FILES[k]); }))
+      .then(function (vals) {
+        var out = {};
+        keys.forEach(function (k, i) { out[k] = vals[i]; });
+        return out;
+      });
+  }
+
+  function srcPath() {
+    var p = null;
+    try { p = new URLSearchParams(window.location.search).get('src'); } catch (e) { p = null; }
+    return p ? p : '../MERGED.js';
+  }
+
+  function loadRenderer(src) {
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = function () { resolve(true); };
+      s.onerror = function () { reject(new Error('could not load renderer at ' + src)); };
+      document.body.appendChild(s);
+    });
+  }
+
+  /* =====================================================================
+     THE CHECKS
+     ===================================================================== */
+
+  /* --- 0. harness self-test ------------------------------------------- */
+  function checkHostReset() {
+    var probe = document.getElementById('hn-probe');
+    var p = px(getComputedStyle(probe).paddingTop);
+    check(p === 0,
+      'harness-reproduces-host-reset',
+      'Proves the harness itself carries the `.msh *{padding:0}` host reset and wins the specificity tie on document order — without this every other style check is meaningless.',
+      'A 0,1,0 probe rule inside .msh still computed padding ' + p + 'px, so the host reset is not in force. The harness is not reproducing the live page.');
+  }
+
+  /* --- render one company --------------------------------------------- */
+  function renderCompany(q) {
+    var input = document.getElementById('mcrInput');
+    if (!input) return null;
+    input.value = q;
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+    return document.getElementById('mcrResult');
+  }
+
+  function cardsIn(root) {
+    return Array.prototype.slice.call(root.querySelectorAll('.mcr-card'));
+  }
+  function titleOf(card) {
+    var t = card.querySelector('.mcr-card-t');
+    return t ? t.textContent.replace(/\s+/g, ' ').trim() : '';
+  }
+
+  /* THE VIEWPORT MUST BE DECLARED, NOT ASSUMED.
+     The renderer ships a phone breakpoint at max-width:640px that respaces
+     .mcr-card from 22px 24px down to 16px. Some embedded browser panes report
+     innerWidth 0 when they are not displayed, which makes EVERY media query
+     match the phone rule — so a padding check that hard-codes 22/24 fails for
+     the wrong reason, and one that hard-codes 16 passes while claiming to have
+     tested the desktop rule. Both are worse than no check. This resolves the
+     breakpoint actually in force with matchMedia, asserts the value that
+     breakpoint is supposed to produce, and prints which one it tested. */
+  function breakpoint() {
+    var iw = window.innerWidth;
+    var phone = window.matchMedia('(max-width:640px)').matches;
+    var label = phone ? 'phone (max-width:640px)' : 'desktop';
+    if (!iw) label += ' — NOTE: this browser reports innerWidth 0, so every media query resolves to the narrowest rule; open the pane or use a real window to exercise the desktop rule';
+    else label += ' — viewport ' + iw + 'px';
+    return { phone: phone, iw: iw, label: label };
+  }
+  var BP = null;
+
+  /* The breakpoint-independent half of the padding check.
+     Computed style can only ever prove the rule that the CURRENT viewport
+     selects. If the harness is running narrow — an embedded pane reporting
+     innerWidth 0 makes every media query match the narrowest rule — then
+     deleting the DESKTOP padding declaration outright changes nothing that
+     getComputedStyle can see, and the check passes on a broken build.
+     So the renderer's own stylesheet is read directly: the base
+     `.mcr .mcr-card` rule, outside any media block, must still declare real
+     padding. Between the two halves, the cascade collision and the deleted
+     declaration are both caught at any window size. */
+  function baseCardPaddingRule() {
+    var found = null;
+    Array.prototype.forEach.call(document.styleSheets, function (sh) {
+      var owner = sh.ownerNode;
+      if (!owner || owner.id !== 'mcr-style') return;
+      var rules;
+      try { rules = sh.cssRules; } catch (e) { return; }
+      if (!rules) return;
+      Array.prototype.forEach.call(rules, function (r) {
+        /* type 1 is a plain style rule, so anything nested in @media is
+           skipped by construction — which is the point. */
+        if (r.type !== 1 || !r.selectorText) return;
+        if (!/(^|,)\s*\.mcr\s+\.mcr-card\s*$/.test(r.selectorText)) return;
+        if (!r.style.paddingTop && !r.style.padding) return;
+        found = {
+          top: parseFloat(r.style.paddingTop) || 0,
+          right: parseFloat(r.style.paddingRight) || 0,
+          bottom: parseFloat(r.style.paddingBottom) || 0,
+          left: parseFloat(r.style.paddingLeft) || 0,
+          text: r.style.padding || (r.style.paddingTop + ' ' + r.style.paddingRight)
+        };
+      });
+    });
+    return found;
+  }
+
+  function checkCardPadding(root, label) {
+    var cards = cardsIn(root);
+    if (!cards.length) {
+      fail('card-padding-nonzero · ' + label,
+        'Card padding must survive the host reset — this is the check that would have caught the live zero-padding defect, where every card rendered with its text hard against the edge.',
+        'No .mcr-card rendered at all for ' + label + '.');
+      return;
+    }
+    /* The value each breakpoint is supposed to produce. Desktop is the
+       live-correct 22px 24px; the phone rule is the renderer's own 16px. */
+    var want = BP.phone ? { t: 16, r: 16, b: 16, l: 16 } : { t: 22, r: 24, b: 22, l: 24 };
+    var collapsed = [], drifted = [];
+    cards.forEach(function (c, i) {
+      var cs = getComputedStyle(c);
+      var t = px(cs.paddingTop), r = px(cs.paddingRight), b = px(cs.paddingBottom), l = px(cs.paddingLeft);
+      var got = t + 'px ' + r + 'px ' + b + 'px ' + l + 'px';
+      var where = 'card ' + (i + 1) + ' "' + titleOf(c) + '" ' + got;
+      /* The regression that actually shipped: the host reset winning the tie
+         and every card computing to zero. Always a failure. */
+      if (t < 8 || b < 8 || l < 8 || r < 8) { collapsed.push(where); return; }
+      /* Still padded, but no longer the value this breakpoint declares — a
+         quieter drift, reported separately so the cause is obvious. */
+      if (t !== want.t || r !== want.r || b !== want.b || l !== want.l) drifted.push(where);
+    });
+    /* Second half: the declaration itself, read from the renderer's sheet. */
+    var baseRule = baseCardPaddingRule();
+    var ruleProblem = '';
+    if (!baseRule) {
+      ruleProblem = 'The renderer stylesheet declares NO padding on the base `.mcr .mcr-card` rule at all, so on a desktop viewport every card takes padding 0 from the host `.msh *` reset.';
+    } else if (baseRule.top !== 22 || baseRule.right !== 24 || baseRule.bottom !== 22 || baseRule.left !== 24) {
+      ruleProblem = 'The base `.mcr .mcr-card` rule declares padding "' + baseRule.text +
+        '", not the live-correct 22px 24px.';
+    }
+
+    check(collapsed.length === 0 && drifted.length === 0 && ruleProblem === '',
+      'card-padding-nonzero · ' + label,
+      'Card padding survives the host reset. Two halves: the computed value at the breakpoint under test [' + BP.label + '], expected ' +
+        want.t + 'px ' + want.r + 'px ' + want.b + 'px ' + want.l +
+        'px; and the base `.mcr .mcr-card` declaration read straight from the renderer stylesheet, which is breakpoint-independent. This is the check that would have caught the live zero-padding defect, where the page reset won the specificity tie and every card rendered with its text hard against the edge.',
+      (collapsed.length ? 'PADDING COLLAPSED: ' + collapsed.slice(0, 4).join(' | ') + '. ' : '') +
+      (drifted.length ? 'PADDING DRIFTED from the ' + (BP.phone ? 'phone' : 'desktop') + ' value: ' + drifted.slice(0, 4).join(' | ') + '. ' : '') +
+      (ruleProblem ? 'DECLARATION: ' + ruleProblem : ''));
+  }
+
+  function checkPickerContrast() {
+    var input = document.getElementById('mcrInput');
+    if (!input) {
+      fail('picker-input-readable',
+        'The company box must be dark ink on a light ground — catches the theme form rule (specificity 0,4,1, near-black ground) painting over the field so a member cannot read what they typed.',
+        'The picker input #mcrInput did not render.');
+      return;
+    }
+    var cs = getComputedStyle(input);
+    var ink = rgb(cs.webkitTextFillColor && cs.webkitTextFillColor !== 'auto' ? cs.webkitTextFillColor : cs.color) || rgb(cs.color);
+    var bg = effectiveBg(input);
+    var ratio = contrast(ink, bg);
+    var bgLum = lum(bg), inkLum = lum(ink);
+    var ok = ratio >= 4.5 && bgLum > 0.5 && inkLum < 0.3;
+    check(ok,
+      'picker-input-readable',
+      'The company box must be dark ink on a light ground at a real contrast ratio — catches the theme form rule (specificity 0,4,1) repainting the field near-black so a member cannot read what they typed.',
+      'ink rgb(' + ink.r + ',' + ink.g + ',' + ink.b + ') on ground rgb(' + bg.r + ',' + bg.g + ',' + bg.b +
+      ') — contrast ' + ratio.toFixed(2) + ':1, ground luminance ' + bgLum.toFixed(3) + ', ink luminance ' + inkLum.toFixed(3) +
+      '. Needs ratio 4.5 or better, a light ground and dark ink.');
+  }
+
+  function checkMeasure(root, label) {
+    var rep = root.querySelector('.mcr-report');
+    if (!rep) {
+      fail('report-capped-to-a-measure · ' + label,
+        'The report must stay at a readable measure — catches the cap being lost, which puts 2,395px of running text across a wide screen on the full-bleed Hub page.',
+        'No .mcr-report element rendered for ' + label + '.');
+      return;
+    }
+    var w = rep.getBoundingClientRect().width;
+    var host = document.getElementById('mcr-host').getBoundingClientRect().width;
+    check(w > 0 && w <= 1400 && w < host - 40,
+      'report-capped-to-a-measure · ' + label,
+      'The report must stay at a readable measure — catches the max-width cap being lost, which puts full-bleed running text across a wide screen. Live-correct is 1180px.',
+      'report width ' + Math.round(w) + 'px inside a ' + Math.round(host) + 'px host.');
+  }
+
+  function checkNoBlankPanel(root, label) {
+    var cards = cardsIn(root);
+    var blanks = [];
+    cards.forEach(function (c, i) {
+      var t = c.querySelector('.mcr-card-t');
+      var clone = c.cloneNode(true);
+      var ct = clone.querySelector('.mcr-card-t');
+      if (ct) ct.parentNode.removeChild(ct);
+      var text = clone.textContent.replace(/\s+/g, ' ').trim();
+      var visual = clone.querySelector('img,svg,table,tr,li,canvas');
+      var populated = text.length >= 12 || !!visual;
+      var honestEmpty = c.classList.contains('mcr-card--empty') && text.length >= 12;
+      if (!(populated || honestEmpty)) {
+        blanks.push('card ' + (i + 1) + ' "' + (t ? t.textContent.trim() : '(no title)') + '" body text "' + text + '"');
+      }
+    });
+    check(cards.length > 0 && blanks.length === 0,
+      'no-silently-blank-panel · ' + label,
+      'Every panel is either populated or drawn in the deliberate empty state with a sentence saying what is missing — catches a panel that renders as a blank box, which a member reads as a page that failed to load.',
+      cards.length === 0 ? 'No panels rendered at all.' : blanks.join(' | '));
+  }
+
+  function checkShapeArtefacts(root, label) {
+    var html = root.innerHTML;
+    var text = root.textContent;
+    var hits = [];
+
+    /* Empty inline elements: the classic symptom of an object arriving without
+       one of its fields — an alert rendered through the {date,title,detail}
+       path with no date prints `<b></b> — <b>Title</b>`.
+       EXEMPTION: an element carrying aria-hidden="true" is decoration the
+       renderer draws in CSS (the collapsible chevron), not a missing field.
+       Decoration declares itself that way, so the exemption cannot be claimed
+       by accident, and a genuinely empty <b> never carries it. */
+    var emptyRe = /<(b|strong|em|i|span)((?:\s[^>]*)?)>\s*<\/\1>/gi;
+    var m1;
+    while ((m1 = emptyRe.exec(html)) !== null) {
+      if (/aria-hidden\s*=\s*["']true["']/i.test(m1[2])) continue;
+      hits.push('empty inline element: ' + m1[0].slice(0, 120));
+      break;
+    }
+    /* A separator left dangling at a container boundary, or doubled with
+       nothing between — the symptom of a field arriving empty next to it.
+       Deliberately NARROW. A separator standing alone between two elements
+       (">&nbsp;·&nbsp;<") is how this renderer joins its link lists and its
+       alert date to its alert title, so flagging that would be noise, and a
+       harness that cries wolf is a harness nobody reads. The empty-inline-
+       element rule above is what catches the missing field itself. */
+    var seps = ['\u2014', '\u00b7', '\u25b8'];
+    seps.forEach(function (s) {
+      var open = new RegExp('<(div|p|li|td|section)(\\s[^>]*)?>\\s*' + s + '\\s');
+      var close = new RegExp('\\s' + s + '\\s*</(div|p|li|td|section)>');
+      var dbl = new RegExp(s + '\\s*(<[^>]+>\\s*)?' + s);
+      if (open.test(html)) hits.push('separator "' + s + '" dangling at the start of a block');
+      if (close.test(html)) hits.push('separator "' + s + '" dangling at the end of a block');
+      if (dbl.test(html)) hits.push('two "' + s + '" separators with nothing between them');
+    });
+    if (/href\s*=\s*["'][^"']*undefined/i.test(html)) hits.push('href containing "undefined"');
+    /* Placeholder values that leaked into copy a member reads. */
+    var leaks = text.match(/\b(undefined|NaN)\b/g);
+    if (leaks) hits.push('rendered text contains ' + leaks.length + ' occurrence(s) of ' + leaks.slice(0, 3).join(', '));
+    if (/(^|[\s>(])null([\s<).,]|$)/.test(text)) hits.push('rendered text contains a bare "null"');
+
+    check(hits.length === 0,
+      'no-shape-mismatch-artefacts · ' + label,
+      'No empty <b>, no dangling separator, no href with "undefined", no literal undefined/null/NaN in the copy — catches a data object arriving in a different shape from the one the renderer expects.',
+      hits.join(' | '));
+  }
+
+  function checkLinks(root, label) {
+    var as = Array.prototype.slice.call(root.querySelectorAll('a'));
+    var bad = [];
+    as.forEach(function (a) {
+      var h = a.getAttribute('href');
+      if (h === null || String(h).trim() === '' || String(h).trim() === '#') {
+        bad.push('empty href on link "' + a.textContent.trim().slice(0, 50) + '"');
+      } else if (/undefined|\[object/i.test(h)) {
+        bad.push('broken href ' + h.slice(0, 90));
+      }
+    });
+    check(bad.length === 0,
+      'links-have-real-hrefs · ' + label,
+      'Every link in the report resolves somewhere — catches a source link built from a missing field, which sends a paying member to a dead URL under our own name.',
+      (as.length === 0 ? 'no links rendered; ' : '') + bad.slice(0, 6).join(' | '));
+  }
+
+  /* --- the printable pack --------------------------------------------- */
+  function packDocFor(q) {
+    if (typeof window.MSH_COMPANY_REPORT_BUILD !== 'function') return { err: 'hook-missing' };
+    var html;
+    try { html = window.MSH_COMPANY_REPORT_BUILD(q); }
+    catch (e) { return { err: 'threw: ' + (e && e.message ? e.message : String(e)) }; }
+    if (!html) return { err: 'returned nothing for "' + q + '"' };
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    return { doc: doc, html: html };
+  }
+
+  function checkPack(root, q, label) {
+    var r = packDocFor(q);
+    if (r.err) {
+      fail('printable-pack-builds · ' + label,
+        'The Stage 5 interview pack must build without throwing — catches a renderer change that leaves the on-page card fine but breaks the document members actually take into a meeting.',
+        r.err === 'hook-missing'
+          ? 'window.MSH_COMPANY_REPORT_BUILD is not defined — the harness hook has been removed from the renderer, so the pack cannot be tested at all.'
+          : 'buildPack ' + r.err);
+      fail('pack-contains-every-panel · ' + label,
+        'The pack must carry every panel the on-page card carries — catches a panel that silently drops out of the printed document.',
+        'Pack did not build.');
+      return null;
+    }
+    pass('printable-pack-builds · ' + label,
+      'The Stage 5 interview pack builds without throwing — catches a renderer change that leaves the on-page card fine but breaks the document members take into a meeting.');
+
+    var pageTitles = cardsIn(root).map(titleOf).filter(function (t) { return t.length > 0; });
+    var packTitles = cardsIn(r.doc).map(titleOf);
+    var missing = pageTitles.filter(function (t) { return packTitles.indexOf(t) === -1; });
+    check(pageTitles.length > 0 && missing.length === 0,
+      'pack-contains-every-panel · ' + label,
+      'The pack carries every panel the on-page card carries, refused panels included — catches a panel silently dropping out of the printed document.',
+      (pageTitles.length === 0 ? 'no panels on the page to compare; ' : '') +
+      'missing from pack: ' + missing.join(' | '));
+    return r;
+  }
+
+  /* --- collapsible sections (new behaviour — SKIP when absent) --------- */
+  function collapsiblesIn(root) {
+    var sel = 'details, [data-mcr-collapse], .mcr-collapse, .mcr-collapsible, .mcr-fold, .mcr-acc, [aria-expanded]';
+    return Array.prototype.slice.call(root.querySelectorAll(sel));
+  }
+  function isOpen(el) {
+    if (el.tagName === 'DETAILS') return el.hasAttribute('open');
+    var ax = el.getAttribute('aria-expanded');
+    if (ax !== null) return ax === 'true';
+    var cl = el.className ? String(el.className) : '';
+    return /(^|[\s-])(is-open|open|expanded)(\s|$)/.test(cl);
+  }
+  function checkCollapsibles(root, packRes, label) {
+    var cols = collapsiblesIn(root);
+    if (!cols.length) {
+      skip('collapsibles-two-open-by-default · ' + label,
+        'When the merged build ships collapsible sections, exactly two must be open on first paint — catches a build where everything is collapsed (report looks empty) or nothing is (the collapse did nothing).',
+        'No collapsible sections in this build — feature absent, check skipped.');
+      skip('pack-includes-collapsed-sections · ' + label,
+        'The printable pack must contain every collapsible section regardless of its open state — catches a pack built from the visible DOM instead of from the composer.',
+        'No collapsible sections in this build — feature absent, check skipped.');
+      return;
+    }
+    var open = cols.filter(isOpen);
+    check(open.length === 2,
+      'collapsibles-two-open-by-default · ' + label,
+      'Exactly two collapsible sections are open on first paint — catches a build where everything is collapsed (the report reads as empty) or nothing is (the collapse did nothing).',
+      cols.length + ' collapsible section(s) found, ' + open.length + ' open: ' +
+      open.map(function (e) { return (e.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40); }).join(' | '));
+
+    if (!packRes || !packRes.html) {
+      fail('pack-includes-collapsed-sections · ' + label,
+        'The printable pack must contain every collapsible section regardless of open state — catches a pack built from the visible DOM instead of from the composer.',
+        'Pack did not build, so the comparison could not run.');
+      return;
+    }
+    var missing = [];
+    cols.forEach(function (el) {
+      var t = (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40);
+      if (t.length < 6) return;
+      if (packRes.doc.body.textContent.replace(/\s+/g, ' ').indexOf(t) === -1) missing.push(t);
+    });
+    check(missing.length === 0,
+      'pack-includes-collapsed-sections · ' + label,
+      'The printable pack contains every collapsible section regardless of open state — catches a pack built from the visible DOM instead of from the composer.',
+      'missing from pack: ' + missing.slice(0, 4).join(' | '));
+  }
+
+  /* =====================================================================
+     RUN
+     ===================================================================== */
+  function finish(note) {
+    var p = 0, f = 0, s = 0, failures = [];
+    results.forEach(function (r) {
+      if (r.status === 'pass') p++;
+      else if (r.status === 'skip') s++;
+      else { f++; failures.push(r.name + ' — ' + (r.detail ? r.detail : r.why)); }
+    });
+    window.HARNESS_RESULT = { pass: p, fail: f, skip: s, failures: failures,
+      breakpoint: BP ? BP.label : 'not resolved', renderer: srcPath() };
+    document.getElementById('hn-json').textContent =
+      'HARNESS_RESULT_JSON:' + JSON.stringify(window.HARNESS_RESULT) + ':END';
+    var tot = document.getElementById('hn-tot');
+    tot.textContent = (f === 0 ? 'ALL CHECKS PASSED' : f + ' CHECK(S) FAILED') +
+      ' — pass ' + p + ', fail ' + f + ', skipped ' + s + (note ? ' · ' + note : '');
+    tot.style.borderLeft = '6px solid ' + (f === 0 ? '#2e7d5b' : '#b84a5c');
+    window.HARNESS_DONE = true;
+  }
+
+  function run() {
+    var src = srcPath();
+    document.getElementById('hn-meta').textContent =
+      'Renderer under test: ' + src + ' · host reset and theme form rule reproduced in the body · ' +
+      new Date().toLocaleString('en-GB');
+
+    checkHostReset();
+
+    loadAll().then(function (data) {
+      window.MSH_COMPANY_REPORT_DATA = data;
+      return loadRenderer(src);
+    }).then(function () {
+      if (!document.getElementById('mcrInput')) {
+        fail('renderer-boots',
+          'The renderer must mount its picker — catches a build that throws on load, which leaves the Hub page showing nothing at all.',
+          'No #mcrInput after loading ' + src + '. Either the file threw, or it no longer honours window.MSH_COMPANY_REPORT_DATA.');
+        finish('renderer did not boot');
+        return;
+      }
+      pass('renderer-boots',
+        'The renderer mounts its picker from preloaded data — catches a build that throws on load and leaves the Hub page blank.');
+
+      BP = breakpoint();
+      record('pass', 'viewport-breakpoint-declared',
+        'States which CSS breakpoint every style assertion below was measured at — a check that silently tests the phone rule while claiming to test the desktop one is worse than no check.',
+        'Measured at: ' + BP.label);
+
+      checkPickerContrast();
+
+      COMPANIES.forEach(function (c) {
+        var label = c.q + (c.kind === 'thin' ? ' [thin]' : '');
+        var root;
+        try { root = renderCompany(c.q); }
+        catch (e) {
+          fail('renders-without-throwing · ' + label,
+            'Rendering a real company must not throw — catches a build that works for the rich companies and dies on the thin ones, which are most of the index.',
+            (e && e.message) ? e.message : String(e));
+          return;
+        }
+        if (!root || !root.querySelector('.mcr-report')) {
+          fail('renders-without-throwing · ' + label,
+            'Rendering a real company must produce a report — catches a build that works for the rich companies and dies on the thin ones, which are most of the index.',
+            'No .mcr-report produced for "' + c.q + '".');
+          return;
+        }
+        pass('renders-without-throwing · ' + label,
+          'Renders a report for this company — catches a build that works on rich companies and dies on thin ones, which are most of the index.');
+
+        checkCardPadding(root, label);
+        checkMeasure(root, label);
+        checkNoBlankPanel(root, label);
+        checkShapeArtefacts(root, label);
+        checkLinks(root, label);
+        var packRes = checkPack(root, c.q, label);
+        checkCollapsibles(root, packRes, label);
+      });
+
+      finish('');
+    }).catch(function (e) {
+      fail('harness-setup',
+        'The harness must be able to load the data and the renderer — a setup failure here means nothing was tested.',
+        (e && e.message) ? e.message : String(e));
+      finish('setup failed');
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+})();
+</script>
+</body>
+</html>
