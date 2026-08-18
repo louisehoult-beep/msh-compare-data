@@ -1,0 +1,466 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-DF33A4F04",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "rule": "A seed speciality label resolves to one or more Compare slugs. Only an exact match after mechanical normalisation is filled in automatically. A compound label is never auto-resolved, and a supplier carrying one is not treated as single-speciality.",
+ "counts": {
+  "labels": 48,
+  "resolved": 42,
+  "resolvedByNormalisation": 29,
+  "resolvedByDecision": 13,
+  "unresolved": 6,
+  "compound": 4
+ },
+ "entries": [
+  {
+   "label": "Patient handling",
+   "suppliers": 19,
+   "slugs": [
+    "handling"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "the gated speciality is 'Patient handling and pressure area care'; this is its opening phrase"
+  },
+  {
+   "label": "Wound care",
+   "suppliers": 9,
+   "slugs": [
+    "wound"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Vascular access",
+   "suppliers": 7,
+   "slugs": [
+    "vascular"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Pathology and laboratory",
+   "suppliers": 6,
+   "slugs": [
+    "pathology"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Continence & urology",
+   "suppliers": 5,
+   "slugs": [
+    "continence"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Rehabilitation and mobility",
+   "suppliers": 5,
+   "slugs": [
+    "rehab"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "the gated speciality is 'Rehabilitation, mobility and daily living'; this is its opening phrase"
+  },
+  {
+   "label": "Anaesthesia and critical care",
+   "suppliers": 4,
+   "slugs": [
+    "anaesthesia"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Respiratory",
+   "suppliers": 4,
+   "slugs": [
+    "respiratory"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Theatres / surgical",
+   "suppliers": 3,
+   "slugs": [
+    "theatres"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Imaging / capital",
+   "suppliers": 3,
+   "slugs": [
+    "imaging"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "'capital' describes how the equipment is bought, not a speciality; the speciality named is imaging"
+  },
+  {
+   "label": "Audiology and hearing",
+   "suppliers": 3,
+   "slugs": [
+    "audiology"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Orthopaedics and trauma",
+   "suppliers": 3,
+   "slugs": [
+    "ortho"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Blood collection / phlebotomy",
+   "suppliers": 2,
+   "slugs": [
+    "bloodcoll"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Neonatal / infant care",
+   "suppliers": 2,
+   "slugs": [
+    "neonatal"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Infection prevention and PPE",
+   "suppliers": 2,
+   "slugs": [
+    "infection"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Respiratory / anaesthesia",
+   "suppliers": 2,
+   "slugs": null,
+   "resolvedBy": null,
+   "compound": true,
+   "candidates": [
+    "anaesthesia",
+    "respiratory"
+   ],
+   "why": "names more than one speciality — a supplier under this label is not a single-speciality supplier and must not be pre-filled from it"
+  },
+  {
+   "label": "Patient monitoring",
+   "suppliers": 2,
+   "slugs": [
+    "monitoring"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Endourology and stone management",
+   "suppliers": 2,
+   "slugs": [
+    "endourology"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Moving and handling",
+   "suppliers": 2,
+   "slugs": [
+    "handling"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "the NHS's usual name for the same speciality, gated as 'Patient handling and pressure area care'"
+  },
+  {
+   "label": "Ostomy and stoma care",
+   "suppliers": 2,
+   "slugs": [
+    "ostomy"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Diagnostics and imaging",
+   "suppliers": 2,
+   "slugs": [
+    "imaging"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Sterile services and decontamination",
+   "suppliers": 2,
+   "slugs": [
+    "ssd"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Endoscopy",
+   "suppliers": 2,
+   "slugs": [
+    "endoscopy"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Ophthalmology",
+   "suppliers": 2,
+   "slugs": [
+    "ophthalmology"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Surgical haemostasis",
+   "suppliers": 1,
+   "slugs": [
+    "theatres"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "haemostasis product is theatre consumable; the Hub files it under 'Theatres / surgical'"
+  },
+  {
+   "label": "Enteral feeding",
+   "suppliers": 1,
+   "slugs": [
+    "nutrition"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "the gated speciality is 'Nutrition and enteral feeding'; this names its second half"
+  },
+  {
+   "label": "Surgical & critical care",
+   "suppliers": 1,
+   "slugs": null,
+   "resolvedBy": null,
+   "compound": false,
+   "candidates": null,
+   "why": "no counterpart in the gated vocabulary — decide the slug, or add the speciality to compare-suppliers.json"
+  },
+  {
+   "label": "Continence",
+   "suppliers": 1,
+   "slugs": [
+    "continence"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Endourology",
+   "suppliers": 1,
+   "slugs": [
+    "endourology"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "ENT / neuro-otology",
+   "suppliers": 1,
+   "slugs": [
+    "ent"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "neuro-otology is an ENT sub-speciality; the Hub has no separate slug for it"
+  },
+  {
+   "label": "Nutrition and enteral feeding",
+   "suppliers": 1,
+   "slugs": [
+    "nutrition"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Decontamination / sterile services",
+   "suppliers": 1,
+   "slugs": [
+    "ssd"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Cardiology",
+   "suppliers": 1,
+   "slugs": [
+    "cardiology"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Oncology / infusion",
+   "suppliers": 1,
+   "slugs": null,
+   "resolvedBy": null,
+   "compound": true,
+   "candidates": [
+    "oncology"
+   ],
+   "why": "names more than one speciality — a supplier under this label is not a single-speciality supplier and must not be pre-filled from it"
+  },
+  {
+   "label": "Theatre / surgical",
+   "suppliers": 1,
+   "slugs": [
+    "theatres"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "the gated label is 'Theatres / surgical'; this differs only in the singular"
+  },
+  {
+   "label": "Infection prevention",
+   "suppliers": 1,
+   "slugs": [
+    "infection"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "the gated speciality is 'Infection prevention and PPE'; this is its opening phrase"
+  },
+  {
+   "label": "Renal and dialysis",
+   "suppliers": 1,
+   "slugs": [
+    "renal"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Oncology / radiotherapy",
+   "suppliers": 1,
+   "slugs": [
+    "oncology"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Neurosciences",
+   "suppliers": 1,
+   "slugs": [
+    "neuro"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "the gated speciality is 'Neurosurgery and neuromodulation'; neurosciences is the broader NHS service name for the same suppliers"
+  },
+  {
+   "label": "Continence / stoma",
+   "suppliers": 1,
+   "slugs": null,
+   "resolvedBy": null,
+   "compound": true,
+   "candidates": [
+    "continence"
+   ],
+   "why": "names more than one speciality — a supplier under this label is not a single-speciality supplier and must not be pre-filled from it"
+  },
+  {
+   "label": "Oncology and infusion",
+   "suppliers": 1,
+   "slugs": null,
+   "resolvedBy": null,
+   "compound": false,
+   "candidates": null,
+   "why": "no counterpart in the gated vocabulary — decide the slug, or add the speciality to compare-suppliers.json"
+  },
+  {
+   "label": "Pathology / haematology",
+   "suppliers": 1,
+   "slugs": [
+    "pathology"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "haematology is a pathology discipline; the Hub has no separate haematology speciality"
+  },
+  {
+   "label": "ENT / audiology",
+   "suppliers": 1,
+   "slugs": null,
+   "resolvedBy": null,
+   "compound": true,
+   "candidates": [
+    "audiology",
+    "ent"
+   ],
+   "why": "names more than one speciality — a supplier under this label is not a single-speciality supplier and must not be pre-filled from it"
+  },
+  {
+   "label": "Women's health and maternity",
+   "suppliers": 1,
+   "slugs": [
+    "womens"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Prosthetics and orthotics",
+   "suppliers": 1,
+   "slugs": [
+    "orthotics"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "the gated speciality is 'Orthotics, podiatry and prosthetics' — the same field, reordered"
+  },
+  {
+   "label": "ENT",
+   "suppliers": 1,
+   "slugs": [
+    "ent"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Women’s health / maternity",
+   "suppliers": 1,
+   "slugs": [
+    "womens"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Pathology / diagnostics",
+   "suppliers": 1,
+   "slugs": [
+    "pathology"
+   ],
+   "resolvedBy": "decision 18/08/2026",
+   "why": "'diagnostics' here qualifies pathology rather than naming imaging — every supplier under this label sells laboratory product"
+  }
+ ]
+}
