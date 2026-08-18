@@ -57,6 +57,14 @@ WHAT IT CHECKS
                  walk must say so, and the page may never say a company HAS no
                  awards — only that this index has not captured any.
 
+11. COMPANY PRESS  every published news story is re-derived from the same
+                 match rule the writer applied, carries two distinct publishers
+                 and working links, states honestly whether each link was
+                 resolved to the publisher or is still a Google News redirect,
+                 and the header counts equal the rows. Every supplier carries the
+                 date it was last checked, so an empty panel reads as empty
+                 rather than broken. A no-op until the file exists.
+
 Usage
     python3 verify.py            # full run, including the live privacy check
     python3 verify.py --offline  # skip network checks (still fails on logic)
@@ -68,7 +76,7 @@ Exit codes
     1  FAILED — do not push until every FAIL is resolved
 """
 
-import json, os, re, subprocess, sys, datetime, shutil, tempfile, time
+import hashlib, json, os, re, subprocess, sys, datetime, shutil, tempfile, time
 from urllib.request import Request, urlopen
 
 DATA = "data"
@@ -2114,6 +2122,85 @@ def check_company_awards(doc, seed, report_js):
                                    % line[:140])
 
 
+# --------------------------------------------------------------------------
+# 11. SUPPLIER PRODUCT DETAIL — per-product pages captured from each
+#     supplier's own website (scripts/crawl_supplier_product_detail.py)
+# --------------------------------------------------------------------------
+def check_supplier_product_detail(doc, rangedoc):
+    """data/supplier-product-detail.json — full spec/feature/image detail
+    captured from each product's OWN page on its supplier's OWN website, plus
+    the changedSince flag The Differential renders as sales intelligence."""
+    if doc is None:
+        return                              # feature not built yet — nothing to gate
+
+    products = doc.get("products") or {}
+    range_suppliers = (rangedoc or {}).get("suppliers") or {}
+
+    for key, row in sorted(products.items()):
+        supplier = row.get("supplier")
+        product = row.get("product")
+        label = "%s / %s" % (supplier or "?", product or "?")
+
+        if not supplier or not product:
+            FAIL("supplier-product-detail", "the entry keyed %r carries no supplier and/or "
+                                            "product name." % key)
+            continue
+
+        url = str(row.get("sourceUrl") or "")
+        if not url.startswith("http"):
+            FAIL("supplier-product-detail", "%s carries no usable sourceUrl (%r). A product-detail "
+                                            "claim without a link to where it came from does not "
+                                            "publish." % (label, row.get("sourceUrl")))
+
+        d = as_date(row.get("capturedDate"))
+        if not d:
+            FAIL("supplier-product-detail", "%s carries no usable capturedDate (%r). Every capture "
+                                            "carries the date it was read." % (label, row.get("capturedDate")))
+        elif d > today():
+            FAIL("supplier-product-detail", "%s is dated %s, which has not happened yet."
+                                            % (label, row.get("capturedDate")))
+        elif (today() - d).days > 400:
+            WARN("supplier-product-detail", "%s was last captured on %s, over a year ago — due a "
+                                            "re-crawl." % (label, row.get("capturedDate")))
+
+        parsed = row.get("parsed")
+        if parsed not in ("structured", "heuristic"):
+            FAIL("supplier-product-detail", "%s carries parsed=%r, not one of 'structured' or "
+                                            "'heuristic'. comparison.js and anyone reviewing this "
+                                            "file needs to know which confidence tier a capture "
+                                            "sits in — that distinction is the whole point of the "
+                                            "field." % (label, parsed))
+
+        # ---- INVARIANT: every named supplier resolves to a known range record
+        if range_suppliers and supplier not in range_suppliers:
+            FAIL("supplier-product-detail", "%s does not resolve to any supplier in "
+                                            "data/supplier-products.json — a product-detail entry "
+                                            "should only exist for a supplier this repo already "
+                                            "holds a range record for." % label)
+
+        # ---- changedSince: a change flag must name a date and name what changed
+        cs = row.get("changedSince")
+        if cs is not None:
+            if not as_date(cs.get("date")):
+                FAIL("supplier-product-detail", "%s carries a changedSince block with no usable "
+                                                "date (%r)." % (label, cs.get("date")))
+            elif as_date(cs.get("date")) > today():
+                FAIL("supplier-product-detail", "%s carries a changedSince date of %s, which has "
+                                                "not happened yet." % (label, cs.get("date")))
+            if not (cs.get("changed") or []):
+                FAIL("supplier-product-detail", "%s carries a changedSince block with an empty "
+                                                "'changed' list. A change flag naming nothing that "
+                                                "changed is noise on a paying page, not a finding."
+                                                % label)
+            bad_fields = [f for f in (cs.get("changed") or [])
+                         if f not in ("description", "features", "image")]
+            if bad_fields:
+                FAIL("supplier-product-detail", "%s carries a changedSince.changed list naming %s, "
+                                                "which %s not a field this capture tracks."
+                                                % (label, bad_fields,
+                                                   "is" if len(bad_fields) == 1 else "are"))
+
+
 def check_no_clusters_on_tools(comptab_js):
     """Standing clusters must never render on the Med Sales Tools page.
 
@@ -2376,6 +2463,266 @@ def check_ref_present(sup):
 
 # --------------------------------------------------------------------------
 # 10. HUB SEARCH INDEX — what a member can find, and what they must not be shown
+
+
+# --------------------------------------------------------------------------
+# 12. COMPANY LOGOS — the brand-mark layer
+# --------------------------------------------------------------------------
+# Added 18/08/2026, with the feature.
+#
+# WHY THIS CHECK EXISTS, IN ONE SENTENCE: the report's previous logo route was a
+# LIVE call to logo.clearbit.com, that host stopped resolving, every report
+# silently fell through to the monogram, and nobody found out for weeks. A
+# dependency nobody can see break is the fault; moving the marks into this repo
+# only helps if something reads them before they publish.
+#
+# So this refuses to publish a logo layer that would be broken on arrival:
+#
+#   PATHS      every recorded file must exist, be non-empty, live under
+#              assets/logos/, and be a .png or .svg. A row pointing at a file
+#              that is not in the commit renders as a broken image on a paid
+#              page, and the row's own presence is what tells the renderer to
+#              try — so a missing file is worse than no row.
+#   BYTES      every file's sha256 must match the one recorded with it. A mark
+#              swapped or truncated after it was checked has not been checked.
+#   ORPHANS    every file under assets/logos/ must be named by a row. Bytes that
+#              ship to members and are never drawn are dead weight in a repo the
+#              page fetches from.
+#   PROVENANCE every row carries the URL it was fetched from and the date. A
+#              mark with no source cannot be defended as the company's own, and
+#              a mark with no date cannot be aged.
+#   NO SERVICE no source may be a favicon SERVICE. Those serve a 16px tab glyph,
+#              and their own grey placeholder arrow where they hold nothing —
+#              which is exactly how 13 of the 15 legacy `image` values came to
+#              point at a mark that is not the company's.
+#   COUNTS     every count in the header must equal the rows it summarises. A
+#              header from one generation with rows from another has caused a
+#              real incident in this repo; it is not a hypothetical.
+#   COLOUR     every published brand colour must be valid hex, and each derived
+#              shade must clear, ON RECOMPUTATION HERE, the floor for the ground
+#              it is painted on. The recorded ratio is re-derived rather than
+#              trusted: a ratio typed next to a colour it does not describe is a
+#              claim the file makes about itself.
+#   RENDERER   the source may not reach for a third-party logo host, and must
+#              still carry its own contrast guard — because the OTHER colour
+#              source, the 95 `brand` records in supplier-seed.json, predates
+#              any contrast rule and is checked nowhere else.
+#
+# A missing file is a NO-OP. The feature is optional and an absent layer means
+# every company draws the monogram, which is a finished design.
+
+LOGO_DIR = os.path.join("assets", "logos")
+LOGO_NAVY = (0x0b, 0x1c, 0x33)      # .mcr-mast ground
+LOGO_IVORY = (0xfd, 0xfc, 0xf9)     # .mcr-report card ground
+LOGO_MIN_NAVY = 3.0                 # WCAG 2.1 1.4.11, non-text
+LOGO_MIN_IVORY = 3.0                # WCAG 2.1 1.4.11, non-text
+LOGO_MIN_WHITE = 4.5                # WCAG 2.1 1.4.3, normal text
+LOGO_SIZE_WARN = 8 * 1024 * 1024    # assets/logos/ total; see the note at the check
+FAVICON_SERVICE_RE = re.compile(
+    r"(?://)(?:icons?\.duckduckgo\.com|www\.google\.com/s2/favicons|"
+    r"favicons?\.[^/]+|t\d\.gstatic\.com/faviconV2)", re.I)
+HEX6 = re.compile(r"^#[0-9a-fA-F]{6}$")
+
+
+def _rel_lum(rgb):
+    def ch(v):
+        v = v / 255.0
+        return v / 12.92 if v <= 0.03928 else ((v + 0.055) / 1.055) ** 2.4
+    r, g, b = (ch(c) for c in rgb)
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
+def _contrast(a, b):
+    la, lb = _rel_lum(a), _rel_lum(b)
+    return (max(la, lb) + 0.05) / (min(la, lb) + 0.05)
+
+
+def _hex_rgb(h):
+    h = str(h or "").lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def check_company_logos(doc, report_js, root="."):
+    if doc is None:
+        return
+    rows = doc.get("logos")
+    refusals = doc.get("refusals")
+    if not isinstance(rows, list) or not isinstance(refusals, list):
+        FAIL("logos", "data/company-logos.json has no `logos` and `refusals` lists. The "
+                      "refusals are half the file: without them an empty layer cannot be "
+                      "told apart from a sweep that never ran.")
+        return
+
+    if not str(doc.get("rule") or "").strip():
+        FAIL("logos", "data/company-logos.json states no rule. Root rule 14 — a reader has "
+                      "to be able to judge how these marks were chosen without re-running "
+                      "the script.")
+
+    seen_name, seen_file, referenced = {}, {}, set()
+    for i, r in enumerate(rows):
+        who = r.get("name") or "row %d" % i
+
+        for field in ("name", "file", "source", "fetched", "sha256"):
+            if not str(r.get(field) or "").strip():
+                FAIL("logos", "%s has no %s. Every mark carries where it came from and when "
+                              "it was read, or it cannot be defended as this company's own."
+                     % (who, field))
+        if not r.get("file") or not r.get("name"):
+            continue
+
+        if r["name"] in seen_name:
+            FAIL("logos", "%s appears twice. Two rows for one company means the renderer "
+                          "draws whichever it saw last, which is not a decision anybody made."
+                 % who)
+        seen_name[r["name"]] = 1
+
+        # PROVENANCE
+        src = str(r.get("source") or "")
+        if src and not src.lower().startswith(("http://", "https://")):
+            FAIL("logos", "%s records its source as %r, which is not a URL." % (who, src[:80]))
+        if FAVICON_SERVICE_RE.search(src):
+            FAIL("logos", "%s was taken from a favicon SERVICE (%s). Those serve a 16px tab "
+                          "glyph, and their own grey placeholder where they hold nothing — "
+                          "which is how 13 legacy `image` values came to point at a mark that "
+                          "is not the company's." % (who, src[:80]))
+        if not as_date(r.get("fetched")):
+            FAIL("logos", "%s has no readable fetch date (%r). A mark with no date cannot be "
+                          "aged." % (who, r.get("fetched")))
+
+        # PATHS
+        path = str(r["file"]).replace("\\", "/")
+        if not path.startswith("assets/logos/") or ".." in path:
+            FAIL("logos", "%s points outside assets/logos/ (%r)." % (who, path))
+            continue
+        if not path.lower().endswith((".png", ".svg")):
+            FAIL("logos", "%s is %r — only .png and .svg are stored." % (who, path))
+            continue
+        if path in seen_file:
+            FAIL("logos", "%s and %s both point at %s. One file cannot be two companies' "
+                          "marks." % (who, seen_file[path], path))
+        seen_file[path] = who
+        referenced.add(os.path.basename(path))
+
+        full = os.path.join(root, path)
+        if not os.path.exists(full):
+            FAIL("logos", "%s records %s, which is not in the repo. The row is what tells the "
+                          "renderer to try, so a missing file is a broken image on a paid "
+                          "page — not a fallback to the monogram." % (who, path))
+            continue
+        blob = open(full, "rb").read()
+        if not blob:
+            FAIL("logos", "%s: %s is empty." % (who, path))
+            continue
+        got = hashlib.sha256(blob).hexdigest()
+        if r.get("sha256") and got != r["sha256"]:
+            FAIL("logos", "%s: %s does not match the sha256 recorded with it. A mark changed "
+                          "after it was checked has not been checked." % (who, path))
+        if r.get("bytes") and int(r["bytes"]) != len(blob):
+            FAIL("logos", "%s: %s is %d bytes, but the file records %s."
+                 % (who, path, len(blob), r["bytes"]))
+
+        # COLOUR
+        b = r.get("brand")
+        if b is None:
+            if not str(r.get("brandRefused") or "").strip():
+                FAIL("logos", "%s carries no brand colour and does not say why. A refusal "
+                              "with no reason is indistinguishable from a step that was "
+                              "skipped." % who)
+            continue
+        for k in ("c1", "c2"):
+            if not HEX6.match(str(b.get(k) or "")):
+                FAIL("logos", "%s brand.%s is %r, not a six-digit hex colour."
+                     % (who, k, b.get(k)))
+        if not str(b.get("source") or "").strip():
+            FAIL("logos", "%s publishes a brand colour with no note saying what it was "
+                          "sampled from and when." % who)
+        navy = b.get("accentOnNavy") or b.get("c1")
+        ivory = b.get("accentOnIvory") or b.get("c2")
+        if not (HEX6.match(str(navy or "")) and HEX6.match(str(ivory or ""))):
+            continue
+        rn = _contrast(_hex_rgb(navy), LOGO_NAVY)
+        ri = _contrast(_hex_rgb(ivory), LOGO_IVORY)
+        rw = _contrast(_hex_rgb(ivory), (255, 255, 255))
+        if rn < LOGO_MIN_NAVY:
+            FAIL("logos", "%s publishes %s on the navy masthead at %.2f:1, below the %.1f:1 "
+                          "floor. An accent nobody can see is worse than the house gold."
+                 % (who, navy, rn, LOGO_MIN_NAVY))
+        if ri < LOGO_MIN_IVORY:
+            FAIL("logos", "%s publishes %s on the ivory card ground at %.2f:1, below the "
+                          "%.1f:1 floor." % (who, ivory, ri, LOGO_MIN_IVORY))
+        if rw < LOGO_MIN_WHITE:
+            FAIL("logos", "%s publishes %s as the shade that carries white text, at %.2f:1, "
+                          "below the %.1f:1 floor." % (who, ivory, rw, LOGO_MIN_WHITE))
+        # The recorded ratios are re-derived, not trusted.
+        for key, want in (("contrastOnNavy", rn), ("contrastOnIvory", ri),
+                          ("contrastWhiteOnC2", rw)):
+            if b.get(key) is None:
+                continue
+            try:
+                if abs(float(b[key]) - want) > 0.05:
+                    FAIL("logos", "%s records %s as %s, but it recomputes to %.2f. A ratio "
+                                  "printed next to a colour it does not describe is a claim "
+                                  "the file makes about itself."
+                         % (who, key, b[key], want))
+            except (TypeError, ValueError):
+                FAIL("logos", "%s records %s as %r, which is not a number."
+                     % (who, key, b[key]))
+
+    for r in refusals:
+        if not str(r.get("name") or "").strip() or not str(r.get("reason") or "").strip():
+            FAIL("logos", "a refusal row has no name or no reason. 'Publishing nothing' is "
+                          "only the correct output when the file says what was not published "
+                          "and why.")
+            break
+
+    # ORPHANS
+    d = os.path.join(root, LOGO_DIR)
+    if os.path.isdir(d):
+        stored = {n for n in os.listdir(d) if not n.startswith(".")}
+        orphans = sorted(stored - referenced)
+        if orphans:
+            FAIL("logos", "%d file(s) in assets/logos/ are named by no row (%s). Bytes that "
+                          "ship to members and are never drawn are dead weight in a repo the "
+                          "page fetches from."
+                 % (len(orphans), ", ".join(orphans[:5])))
+        total = sum(os.path.getsize(os.path.join(d, n)) for n in stored)
+        if total > LOGO_SIZE_WARN:
+            WARN("logos", "assets/logos/ is %.2f MB. The Hub page fetches from this repo, so "
+                          "this is a decision for Lou, not a threshold to raise quietly."
+                 % (total / 1048576.0))
+
+    # COUNTS — the header must equal the rows it summarises.
+    c = doc.get("counts") or {}
+    for key, want, what in (("logos", len(rows), "logo rows"),
+                            ("refusals", len(refusals), "refusal rows"),
+                            ("logosWithBrandColour",
+                             sum(1 for r in rows if r.get("brand")),
+                             "rows carrying a brand colour")):
+        if c.get(key) is not None and int(c[key]) != want:
+            FAIL("logos", "counts.%s says %s, but there are %d %s. A header from one "
+                          "generation with rows from another has already put wrong numbers "
+                          "in front of members here." % (key, c[key], want, what))
+
+    # RENDERER
+    if report_js:
+        for host in ("logo.clearbit.com", "icons.duckduckgo.com", "/s2/favicons?",
+                     "faviconV2"):
+            if host in report_js:
+                FAIL("logos", "app/company-report.js reaches for %s. A logo fetched live "
+                              "from a third party is a dependency nobody is watching on a "
+                              "page members pay for — that is the fault this layer replaced, "
+                              "not one to reintroduce." % host)
+        if "--mcr-accent-ink" not in report_js:
+            FAIL("logos", "app/company-report.js no longer publishes --mcr-accent-ink. One "
+                          "accent cannot serve both the navy masthead and the ivory card "
+                          "ground; collapsing them back to one makes half of every brand "
+                          "colour invisible.")
+        if "function safe(" not in report_js or "0.03928" not in report_js:
+            FAIL("logos", "app/company-report.js has lost its contrast guard. The 95 `brand` "
+                          "records in supplier-seed.json predate any contrast rule and are "
+                          "checked nowhere else — without the guard an unreadable accent "
+                          "reaches the page.")
+
 # --------------------------------------------------------------------------
 # Added 06/08/2026 with app/hub-search.js, and written against the two ways this
 # index can be wrong in a manner nobody notices from looking at the page.
@@ -2545,6 +2892,194 @@ def check_search_index(doc):
                  % (SEARCH_INDEX, mb))
 
 
+PRESS_URL_TYPES = {"publisher", "google-news-redirect"}
+
+
+def check_company_press(doc, seed):
+    """data/company-press.json — the supplier press feature.
+
+    Three separate things can go wrong here and each has cost somebody real
+    money or credibility already, in this repo or one like it.
+
+    1. THE WRONG COMPANY'S STORY. Matching a news item on a company name alone
+       eventually attributes somebody else's news to a Hub supplier. The rule
+       that stops it is scripts/press_match.py, and this gate RE-DERIVES every
+       published item against that module rather than trusting the file. If the
+       file was written under a looser rule — an older script, a hand edit, a
+       merge — the re-derivation disagrees and nothing publishes. Same
+       arrangement as check_company_awards, same reason (root rule 14).
+
+    2. A HEADER FROM ONE GENERATION AND ROWS FROM ANOTHER. That is exactly what
+       -X theirs did to data/company-awards.json on 14/08/2026
+       (NOTE-company-intelligence-rebase-merge-defect-2026-08-14.md). The counts
+       are recomputed here from the rows they claim to summarise.
+
+    3. A LINK THAT WAS NEVER RESOLVED, PRESENTED AS THOUGH IT HAD BEEN. Google
+       News gives a redirect, not the publisher's article. A redirect recorded as
+       urlType "publisher" is a claim the reader cannot check, so the two types
+       are checked against the host they actually point at.
+
+    An empty supplier block is NOT a failure. A supplier with lastChecked and no
+    items has been checked and nothing met the bar — the honest empty state, and
+    the whole reason lastChecked exists.
+    """
+    if doc is None:
+        return                              # feature not built yet — nothing to gate
+
+    try:
+        sys.path.insert(0, "scripts")
+        import press_match
+    except Exception as exc:                                    # noqa: BLE001
+        FAIL("company-press", "cannot import scripts/press_match.py (%s), so no published "
+                              "press item can be re-derived and nothing here is checked. "
+                              "Do not push." % exc)
+        return
+
+    # ---- the rule the file publishes must be the rule that ran --------------
+    if doc.get("matchRule") != press_match.RULE:
+        FAIL("company-press", "the matchRule printed in data/company-press.json is not the rule "
+                              "scripts/press_match.py actually applies. A reader judges every "
+                              "attribution by that printed rule. Re-run "
+                              "scripts/refresh_company_press.py rather than editing the string.")
+    for field in ("source", "corroborationRule", "rotationRule", "linkRule", "emptyStateRule"):
+        if not str(doc.get(field) or "").strip():
+            FAIL("company-press", "data/company-press.json carries no %s. Every derived or "
+                                  "filtered claim states the rule it was made under "
+                                  "(root rule 14)." % field)
+
+    gen = as_date(doc.get("generated"))
+    if gen and gen > today():
+        FAIL("company-press", "data/company-press.json says it was generated on %s, which has "
+                              "not happened yet." % doc.get("generated"))
+
+    # ---- an incomplete rotation must SAY it is incomplete --------------------
+    cov = doc.get("coverage") or {}
+    if cov.get("complete") is False and "INCOMPLETE" not in str(cov.get("note") or "").upper():
+        FAIL("company-press", "the rotation has not reached every supplier yet, and coverage.note "
+                              "does not say so. A partial sweep that reads as complete is how a "
+                              "member concludes a company has had no news.")
+
+    seed_doc = seed or {"suppliers": []}
+    by_name = {s.get("name"): s for s in (seed_doc.get("suppliers") or []) if s.get("name")}
+    universe = press_match.alias_universe(seed_doc)
+
+    suppliers = doc.get("suppliers") or {}
+    items_seen = sources_seen = resolved_seen = redirect_seen = with_items = 0
+
+    for name, rec in sorted(suppliers.items()):
+        # ---- INVARIANT: every company named resolves to a record ------------
+        if by_name and name not in by_name:
+            FAIL("company-press", "data/company-press.json carries press for %r, which does not "
+                                  "resolve to any supplier record in data/supplier-seed.json. "
+                                  "Every company named on the Hub must open to a record." % name)
+            continue
+        supplier = by_name.get(name) or {"name": name}
+
+        checked = as_date((rec or {}).get("lastChecked"))
+        if not checked:
+            FAIL("company-press", "the press block for %r carries no usable lastChecked date. "
+                                  "Without it an empty panel cannot say when it was checked, and "
+                                  "reads as broken rather than as empty." % name)
+        elif checked > today():
+            FAIL("company-press", "the press block for %r says it was checked on %s, which has "
+                                  "not happened yet." % (name, rec.get("lastChecked")))
+
+        rows = (rec or {}).get("items") or []
+        if rows:
+            with_items += 1
+        for row in rows:
+            items_seen += 1
+            head = str(row.get("headline") or "").strip()
+            if not head:
+                FAIL("company-press", "a press item published against %r carries no headline."
+                                      % name)
+
+            if not as_date(row.get("date")):
+                FAIL("company-press", "a press item published against %r carries no usable ISO "
+                                      "date (%r). Every event carries its date."
+                                      % (name, row.get("date")))
+            elif as_date(row.get("date")) > today():
+                FAIL("company-press", "a press item published against %r is dated %s, which has "
+                                      "not happened yet." % (name, row.get("date")))
+
+            # ---- INVARIANT: two DISTINCT publishers, with working links -----
+            srcs = row.get("sources") or []
+            pubs = set()
+            for s in srcs:
+                sources_seen += 1
+                pub = str((s or {}).get("publisher") or "").strip()
+                url = str((s or {}).get("url") or "").strip()
+                kind = (s or {}).get("urlType")
+                if pub:
+                    pubs.add(pub.lower())
+                else:
+                    FAIL("company-press", "a source on %r's item %r carries no publisher name. "
+                                          "The publisher IS the source of the claim; Google News "
+                                          "is only the index." % (name, head[:60]))
+                if not url.startswith("http"):
+                    FAIL("company-press", "a source on %r's item %r carries no usable URL (%r). "
+                                          "A claim whose link cannot be produced does not publish."
+                                          % (name, head[:60], url))
+                if kind not in PRESS_URL_TYPES:
+                    FAIL("company-press", "a source on %r's item %r is filed as urlType %r, which "
+                                          "is not one of %s." % (name, head[:60], kind,
+                                                                 sorted(PRESS_URL_TYPES)))
+                elif kind == "publisher":
+                    resolved_seen += 1
+                    if "news.google.com" in url:
+                        FAIL("company-press", "a source on %r's item %r is recorded as a "
+                                              "publisher link but still points at news.google.com. "
+                                              "An unresolved redirect is marked as one, never "
+                                              "dressed up as the publisher's own article."
+                                              % (name, head[:60]))
+                else:
+                    redirect_seen += 1
+                    if "news.google.com" not in url:
+                        FAIL("company-press", "a source on %r's item %r is recorded as a Google "
+                                              "News redirect but does not point at "
+                                              "news.google.com." % (name, head[:60]))
+            if len(pubs) < 2:
+                FAIL("company-press", "the item %r published against %r is carried by %d distinct "
+                                      "publisher(s); two are required. One outlet repeating a "
+                                      "press release is not corroboration."
+                                      % (head[:60], name, len(pubs)))
+
+            # ---- INVARIANT: re-derive the match, independently --------------
+            lead_pub = (srcs[0] or {}).get("publisher") if srcs else ""
+            ok, why, ev = press_match.assess(supplier, row, publisher=lead_pub,
+                                             universe=universe)
+            if not ok:
+                FAIL("company-press", "the item %r is published against %r, but re-applying the "
+                                      "printed match rule to it fails: %s. The published file and "
+                                      "the rule disagree, so one of them is wrong and a named "
+                                      "company may be carrying somebody else's news. Re-run: "
+                                      "python3 scripts/refresh_company_press.py"
+                                      % (head[:60], name, why))
+            else:
+                claimed = (row.get("match") or {}).get("alias")
+                if claimed and claimed != ev.get("alias"):
+                    FAIL("company-press", "the item %r published against %r records that it "
+                                          "matched on %r, but the rule matches on %r. The "
+                                          "evidence shown to the reader is not the evidence that "
+                                          "was used." % (head[:60], name, claimed, ev.get("alias")))
+
+    # ---- counts must equal the rows (prose-vs-data drift) -------------------
+    counts = doc.get("counts") or {}
+    for label, stated, actual in (
+            ("suppliers", counts.get("suppliers"), len(suppliers)),
+            ("suppliersWithItems", counts.get("suppliersWithItems"), with_items),
+            ("items", counts.get("items"), items_seen),
+            ("sources", counts.get("sources"), sources_seen),
+            ("resolvedLinks", counts.get("resolvedLinks"), resolved_seen),
+            ("redirectLinks", counts.get("redirectLinks"), redirect_seen)):
+        if stated is not None and stated != actual:
+            FAIL("company-press", "data/company-press.json states %s = %s but holds %d. This is "
+                                  "the drift that reached the gate on 14/08/2026: a counts header "
+                                  "from one generation over rows from another. Regenerate the "
+                                  "file; never hand-correct the header."
+                                  % (label, stated, actual))
+
+
 def main():
     offline = "--offline" in sys.argv
     as_json = "--json" in sys.argv
@@ -2604,6 +3139,16 @@ def main():
     # The award index. Every published match is re-derived from the same module
     # the writer used, so the file and the rule cannot drift apart unnoticed.
     check_company_awards(load("company-awards.json"), load("supplier-seed.json"), report_js)
+    # The supplier press index. Every published attribution is re-derived from the
+    # same module the writer used, so a story cannot end up under the wrong
+    # company without the gate saying so.
+    check_company_press(load("company-press.json"), load("supplier-seed.json"))
+    # The brand-mark layer. Optional like the two above: an absent file means
+    # every company draws the monogram, which is a finished design rather than a
+    # gap. Present, it must be whole — see the note above check_company_logos.
+    check_company_logos(load("company-logos.json"), report_js)
+    # Per-product detail captured from each supplier's own product page.
+    check_supplier_product_detail(load("supplier-product-detail.json"), load("supplier-products.json"))
 
     check_search_index(load(SEARCH_INDEX))
 

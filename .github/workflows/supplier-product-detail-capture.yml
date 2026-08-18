@@ -1,0 +1,128 @@
+name: Supplier product-detail capture (own product pages)
+
+# WHY THIS WORKFLOW EXISTS (added 18/08/2026)
+#
+# supplier-capture.yml (crawl_supplier_site.py) captures each supplier's RANGE —
+# what products they sell, grouped by their own divisions. It never opens a
+# single product's own page: no description, no features/benefits, no image,
+# no way to see when a supplier changes a spec or a claim. That is what
+# scripts/crawl_supplier_product_detail.py adds, one product at a time.
+#
+# ⚠️ WHY THIS IS ITS OWN WORKFLOW, ON ITS OWN (SLOWER) CADENCE
+# ---------------------------------------------------------------------------
+# supplier-capture.yml makes ONE cheap read per supplier (a listing page or a
+# sitemap). This makes ONE read per PRODUCT — up to 40 per supplier by
+# default — because the whole point is the individual product page, not the
+# list. Measured 18/08/2026 against real suppliers: politeness pause + fetch
+# is ~0.5-2s per product, so a supplier with 40 products can use most of its
+# 60s per-supplier budget on its own. Running this daily across every
+# supplier the way the range crawl does would mean thousands of product-page
+# fetches a night, most of them re-reading pages that have not changed since
+# yesterday — slow, and disrespectful of other people's servers for no member
+# benefit. A WEEKLY sweep of a rotating SLICE of suppliers (ranked by which
+# suppliers have the least existing detail coverage — see main()'s coverage()
+# sort, the same anti-stall fix supplier-capture.yml needed on 12/08/2026)
+# advances across the whole supplier list over a few weeks without hammering
+# any one site daily. The changedSince flag this script writes is genuinely
+# useful on a slower cadence too: "updated in roughly the last week" is still
+# real sales intelligence, and a false "unchanged" from an unreadable page
+# never happens — an unreadable page is skipped, not asserted unchanged.
+#
+# ⚠️ NEEDS NO SECRET. It reads public supplier websites only.
+
+on:
+  schedule:
+    - cron: "40 2 * * 0"      # weekly, Sunday 02:40 UTC — after the Sunday range
+                               # capture (02:20) and well ahead of refresh.yml (03:15)
+  workflow_dispatch:
+    inputs:
+      supplier_limit:
+        description: "How many suppliers to attempt this run"
+        required: false
+        default: "15"
+      products_limit:
+        description: "Max products per supplier, this run"
+        required: false
+        default: "40"
+
+# Same reason as every other writer in this repo: they share one branch, and a
+# push race silently drops whichever writer's commit did not land first.
+# Serialise rather than race.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    # Generous ON PURPOSE — the job is I/O-bound on other people's servers, and
+    # a short cap would silently truncate the sweep rather than say so.
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Capture per-product detail from suppliers' own product pages
+        run: |
+          python3 scripts/crawl_supplier_product_detail.py \
+            --auto \
+            --limit "${{ github.event.inputs.supplier_limit || 15 }}" \
+            --products-limit "${{ github.event.inputs.products_limit || 40 }}"
+
+      - name: Report coverage
+        run: |
+          python3 - <<'EOF'
+          import json
+          d = json.load(open("data/supplier-product-detail.json"))
+          rng = json.load(open("data/supplier-products.json"))["suppliers"]
+          products = d.get("products", {})
+          changed = sum(1 for p in products.values() if p.get("changedSince"))
+          structured = sum(1 for p in products.values() if p.get("parsed") == "structured")
+          total_range_products = sum(len(s.get("products") or []) for s in rng.values())
+          print("detail entries captured : %d" % len(products))
+          print("  structured (WP/JSON-LD): %d" % structured)
+          print("  heuristic (page text)  : %d" % (len(products) - structured))
+          print("  carrying changedSince  : %d" % changed)
+          print("known range products    : %d" % total_range_products)
+          EOF
+
+      # This workflow writes ONE file. stamp_notice.py re-stamps every data
+      # file, which is harmless and cheap even when nothing else changed.
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      # A push to this repo is a live publish to paying members within seconds.
+      # There is no staging step and no review. If this fails, the data is
+      # wrong: fix the data, never loosen the check. Root rule 13.
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "supplier-product-detail-bot"
+          git config user.email "actions@github.com"
+          git add data
+          git diff --cached --quiet || git commit -m "Supplier product-detail capture $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first). Rebasing and re-running the gate, attempt $attempt of 5."
+            git pull --rebase --autostash
+            python3 verify.py || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi

@@ -29,6 +29,14 @@
      it is folded into PRODUCTS. */
   var RANGEURL = BASE + 'data/supplier-products.json' + CB;
   var RANGE = {};
+  /* Per-PRODUCT detail read from each supplier's OWN product page (not the
+     NHS Supply Chain catalogue, not the range-listing crawl above) — full
+     description, features/benefits, image, and a flag when the supplier has
+     changed the page since the last sweep. A different, additive fact from
+     everything else this tool loads: see PDETAIL and pdetailFor() below for
+     where it is kept clearly separate. */
+  var PDETAILURL = BASE + 'data/supplier-product-detail.json' + CB;
+  var PDETAIL = {};
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
@@ -59,8 +67,9 @@
     fetch(CFG).then(function(r){return r.json();}),
     fetch(SEED).then(function(r){return r.json();}).catch(function(){return {suppliers:[]};}),
     fetch(NHSSC).then(function(r){return r.json();}).catch(function(){return {products:{}};}),
-    fetch(RANGEURL).then(function(r){return r.json();}).catch(function(){return {suppliers:{}};})
-  ]).then(function(res){ RANGE = (res[4] && res[4].suppliers) || {}; render(res[0], res[1], res[2], res[3]); })
+    fetch(RANGEURL).then(function(r){return r.json();}).catch(function(){return {suppliers:{}};}),
+    fetch(PDETAILURL).then(function(r){return r.json();}).catch(function(){return {products:{}};})
+  ]).then(function(res){ RANGE = (res[4] && res[4].suppliers) || {}; PDETAIL = (res[5] && res[5].products) || {}; render(res[0], res[1], res[2], res[3]); })
     .catch(function(){ MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;">Comparison tool temporarily unavailable — please try again shortly.</div>'; });
 
   function render(index, cfg, seed, nhssc){
@@ -81,6 +90,9 @@
     for (var k2 in ncp){ NOTCAT[nk(k2)] = ncp[k2]; }
     function detailFor(prod){ return CACHE[nk(prod.name)] || null; }
     function liveItem(d){ if (!d || !d.items || !d.items.length) return null; for (var i=0;i<d.items.length;i++){ if (!d.items[i].status) return d.items[i]; } return d.items[0]; }
+    // The supplier's OWN product-page detail — keyed exactly as
+    // scripts/crawl_supplier_product_detail.py writes it: "supplier|normalised name".
+    function pdetailFor(prod){ return PDETAIL[prod.supplier + '|' + nk(prod.name)] || null; }
 
     // Flatten to a product index.
     var PRODUCTS = [];
@@ -657,7 +669,41 @@
                               : 'No live catalogue detail held for this line yet.') + '</div>';
       }
       if (fwFor(p)) h += '<div style="margin-top:7px;font-size:11.5px;color:#5a6470;">On framework: ' + esc(fwFor(p)) + '</div>';
+      /* THE SUPPLIER'S OWN PRODUCT PAGE — a third, additive source, distinct
+         from the NHS Supply Chain catalogue detail above and the range
+         listing's fromRange note. Never shown as though it came from the
+         catalogue: its own label, its own URL, its own captured date. An
+         absent entry changes nothing else on the card — this only ever adds. */
+      h += ownPageBlock(p);
       return h + '</div>';
+    }
+
+    function ddmm(s){ var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(s||'')); return m ? (m[3] + '/' + m[2] + '/' + m[1]) : (s || ''); }
+
+    function ownPageBlock(p){
+      var pd = pdetailFor(p);
+      if (!pd) return '';
+      var descShort = pd.description ? (pd.description.length > 320 ? pd.description.slice(0, 320) + '…' : pd.description) : '';
+      var h2 = '<div style="margin-top:8px;padding:8px 10px;background:#fff;border:1px dashed ' + LINE + ';border-radius:7px;">'
+        + '<div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#8a8778;">From ' + esc(p.supplier) + '’s own product page</div>';
+      if (descShort) h2 += '<div style="font-size:12px;color:#39424d;margin-top:4px;line-height:1.5;">' + esc(descShort) + '</div>';
+      if (pd.features && pd.features.length){
+        h2 += '<ul style="margin:5px 0 0;padding-left:16px;font-size:11.5px;color:#45505c;line-height:1.5;">'
+          + pd.features.slice(0, 5).map(function(f){ return '<li>' + esc(f) + '</li>'; }).join('') + '</ul>';
+      }
+      if (pd.image){
+        h2 += '<div style="margin-top:6px;"><img src="' + esc(pd.image) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display=\'none\'" style="max-width:100%;max-height:110px;object-fit:contain;background:#fff;border:1px solid ' + LINE + ';border-radius:6px;"></div>';
+      }
+      h2 += '<div style="margin-top:5px;font-size:10.5px;color:#9a958a;">'
+        + (pd.parsed === 'heuristic' ? 'Read from the page text, not a structured product record — ' : '')
+        + 'captured ' + esc(ddmm(pd.capturedDate)) + ' &middot; <a href="' + esc(pd.sourceUrl) + '" target="_blank" rel="noopener" style="color:' + GOLD + ';font-weight:600;">source &#8599;</a></div>'
+        + '</div>';
+      if (pd.changedSince && pd.changedSince.changed && pd.changedSince.changed.length){
+        h2 += '<div style="margin-top:6px;padding:7px 10px;background:' + SOFT + ';border:1px dashed ' + GOLD + ';border-radius:7px;font-size:11.5px;color:#7a5b14;line-height:1.5;">'
+          + '<b>Updated:</b> ' + esc(p.supplier) + ' changed this page’s ' + esc(pd.changedSince.changed.join(', '))
+          + ' since ' + esc(ddmm(pd.changedSince.date)) + '.</div>';
+      }
+      return h2;
     }
 
     function sideBySide(mine, theirs, myA, theirA){
