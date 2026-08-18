@@ -1,0 +1,35 @@
+{
+  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
+  "lastRun": "2026-08-18",
+  "done": [
+    "365 Healthcare",
+    "3D LifePrints UK Ltd",
+    "3D Metal Printing Ltd",
+    "@SimulationMan Ltd",
+    "A2B Healthcare",
+    "Aayan Medical Imaging Limited",
+    "Abbliss Ltd",
+    "Abbott Diagnostics",
+    "Abilia Ltd",
+    "Abiomed Ltd",
+    "Absorbest AB",
+    "Accel Heal"
+  ],
+  "refusals": [
+    {
+      "name": "365 Healthcare",
+      "reason": "365healthcare.com now 301-redirects to Mediq's UK B2B site, and mediq.co.uk carries 365 Healthcare only as a product brand with no legal entity of its own; its footer names Mediq Healthcare UK Limited. Mediq is the parent, so it must not be recorded as an alias. Companies House holds no active '365 Healthcare' matching the Droitwich supplier. No verifiable extra name form.",
+      "date": "2026-08-18"
+    },
+    {
+      "name": "Aayan Medical Imaging Limited",
+      "reason": "aayanmedical.co.uk is a parked lander, no company site found. Companies House 06547415 gives the registered name AAYAN MEDICAL IMAGING LIMITED, identical to the display name, and no previous names. No extra name form exists to record.",
+      "date": "2026-08-18"
+    },
+    {
+      "name": "Abbott Diagnostics",
+      "reason": "The only real-world form the record's own note points to, 'Abbott Rapid Diagnostics Ltd', is a SEPARATE supplier record in this seed (Abbott Rapid Diagnostics). Recording it here would be an alias that is another record's own name, which verify.py hard-fails and which would hand this record every Abbott Rapid Diagnostics lookup. 'Abbott' alone is a shortening of several Abbott records and is barred by rule 2. Needs Lou's call on whether the two records should be merged.",
+      "date": "2026-08-18"
+    }
+  ]
+}
