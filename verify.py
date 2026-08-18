@@ -811,6 +811,81 @@ def check_compare(store, suppress, comptab_js):
 # --------------------------------------------------------------------------
 # 6b. SUPPLIER SETS — the researched half of the Compare tab
 # --------------------------------------------------------------------------
+
+# A framework entry that asserts a MONEY VALUE or an AWARD DATE is the single
+# most quotable thing on the product: a rep reads "£140m ex VAT" off the tab and
+# says it out loud to a category manager who negotiates that contract for a
+# living. Getting it wrong is not a cosmetic error, it is the rep's credibility.
+#
+# The launch-brief entries are safe: refresh_frameworks.py stamps every one with
+# url + source + capturedOn, so they are re-read and they carry a link a reader
+# can open. The hand-curated entries are not. Nothing revisits them, so a
+# "re-tender, award ~27/07/2026" typed in months ago is still sitting there
+# three weeks after that date with nobody told.
+#
+# check_trust_pressures and check_compare already refuse to publish a figure
+# with no source ("Every claim needs a source a reader can open. No exceptions").
+# This applies the same rule to the seed, where the biggest numbers actually are.
+def check_seed_framework_provenance(seed):
+    suppliers = seed.get("suppliers") if isinstance(seed, dict) else seed
+    if isinstance(suppliers, dict):
+        suppliers = list(suppliers.values())
+    suppliers = suppliers or []
+
+    # An award DATE is a claim with a fuse on it: "award ~27/07/2026" is fine on
+    # the day it is written and misleading the day after, so it needs the same
+    # provenance as a price. Plain "Awarded supplier" / "Awarded on Lot 7" is a
+    # different, non-perishable kind of statement — a record of a past fact, not
+    # a countdown — so only a date sitting next to the word counts here. Without
+    # that qualifier this fired on hundreds of harmless "Awarded supplier" notes
+    # and buried the handful of genuinely stale, undated re-tender claims.
+    award_claim = re.compile(r"(?:award|re-?tender)\D{0,20}\d{1,2}/\d{1,2}/\d{2,4}"
+                              r"|\d{1,2}/\d{1,2}/\d{2,4}\D{0,20}(?:award|re-?tender)", re.I)
+    unsourced_no_value = 0
+
+    for s in suppliers:
+        who = s.get("name") or "(unnamed supplier)"
+        for f in (s.get("frameworks") or []):
+            sourced = bool((f.get("source") or "").strip()
+                           or (f.get("url") or "").strip()
+                           or (f.get("capturedOn") or "").strip())
+            if sourced:
+                u = (f.get("url") or "")
+                if u and not u.startswith("https://"):
+                    FAIL("seed-frameworks",
+                         "%s: framework %r has a non-HTTPS source (%r)."
+                         % (who, str(f.get("name"))[:50], u[:60]))
+                continue
+
+            value = (f.get("value") or "").strip()
+            dates = (f.get("dates") or "").strip()
+            note = (f.get("note") or "").strip()
+            asserts_award = bool(award_claim.search(dates) or award_claim.search(note))
+
+            if value:
+                FAIL("seed-frameworks",
+                     "%s: framework %r states a value of %r with no source, url or capturedOn. "
+                     "A money figure a rep will quote has to link to the page it came from. "
+                     "Add the NHS Supply Chain or Find a Tender URL it was read from, or "
+                     "remove the value and keep the framework name."
+                     % (who, str(f.get("name"))[:50], value[:40]))
+            elif asserts_award:
+                FAIL("seed-frameworks",
+                     "%s: framework %r asserts an award or re-tender (%r) with no source, url or "
+                     "capturedOn. An award date goes stale on a known day and nothing re-reads "
+                     "this entry, so it has to carry the notice it came from."
+                     % (who, str(f.get("name"))[:50], (dates or note)[:60]))
+            else:
+                unsourced_no_value += 1
+
+    # Not a failure, but it should not be invisible either. These are entries
+    # carrying only a framework name, so the harm is much lower, but every one
+    # is a claim nothing in the pipeline will ever re-check.
+    if unsourced_no_value:
+        print("  note: %d seed framework entries carry no provenance but assert no value or "
+              "award date. Lower risk, still unmaintained." % unsourced_no_value)
+
+
 def check_suppliers(sup, store):
     """Researched supplier sets moved out of app/comptab.js on 05/08/2026.
 
@@ -3215,6 +3290,7 @@ def main():
                         "speciality is one the Compare tab can actually render.")
     check_compare(load("compare-issues.json"), suppress, comptab_js)
     check_suppliers(load("compare-suppliers.json"), load("compare-issues.json"))
+    check_seed_framework_provenance(load("supplier-seed.json"))
     check_vocab(load("compare-suppliers.json"), load("products.json"),
                 load("speciality-map.json"), load("supplier-index.json"), comptab_js)
     check_source_links(load("compare-issues.json"),
