@@ -1,0 +1,397 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-D5A18D6E2",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "dataAsOf": "18/08/2026",
+ "generated": "2026-08-18T08:38:43.578068Z",
+ "source": "Google News RSS (https://news.google.com/rss/search), one query per supplier, hl=en-GB&gl=GB. Each story is then attributed to the publishers that carried it, and those publishers are the source of the claim - Google News is the index, never the authority.",
+ "sourceUrls": {
+  "Google News": "https://news.google.com/"
+ },
+ "matchRule": "A news story is attached to a Hub supplier only where ALL FIVE of these hold, and it is dropped outright otherwise. (1) ALIAS: the story text contains one of that supplier's own recorded aliases from supplier-seed.json, matched as a whole word-token sequence after normalisation - never a fuzzy match, never a substring, and never a match on the display name alone. (2) DISTINCTIVENESS: an alias of two or more tokens, or a domain the supplier owns, stands for the supplier on its own, and so does a single word that IS the company's whole name (Coloplast, Convatec, Elekta) provided no other supplier record carries that word. A single-token alias that is a SHORTENING of a longer name does not stand for it, and counts only where it is unique to one supplier across the whole seed, is not a generic trade word, AND the item also carries one of that same supplier's OWN recorded specialities or product names as a whole token sequence. So 'Jeenie' alone never stands for 'Jeenie Solutions': a US translation company of the same name is full of 'patients' and 'healthcare' but carries nothing from Jeenie Solutions' own bariatric patient-handling range. (3) SECTOR: the item itself carries a medical, clinical or NHS-sector term, or one of that supplier's own recorded specialities or product names, which is a more specific clinical term than any general one. (4) RELEVANCE: the item also carries UK or NHS geography, or one of that supplier's own recorded specialities, or is carried by a UK or clinical named outlet. (5) CORROBORATION: at least two DISTINCT reputable publishers carry the same story; PR wires, stock-tip sites and SEO syndication never count towards the two. An item failing any one of the five is not published with a caveat - it is not published.",
+ "corroborationRule": "A story publishes only where at least two DISTINCT publishers carry it and each of those publishers is either a named reputable outlet or a publication whose own name signals a clinical or medical-device title. PR wires, stock-tip sites and SEO syndication never count towards the two, whatever else they look like.",
+ "rotationRule": "Every supplier in supplier-seed.json is queried on a fixed rotation, oldest-checked first, with never-checked suppliers first: those carrying a curated note every 14 days, the remainder every 35 days. The daily query count is derived from those cycles rather than typed, and capped at 90. A supplier checked today sorts to the back of its tier, so the head of the list is never re-queried while others wait.",
+ "linkRule": "Google News RSS returns a news.google.com redirect rather than the publisher's URL. Each is resolved to the publisher's own article and recorded with urlType 'publisher'. Where it cannot be resolved the redirect is kept and recorded with urlType 'google-news-redirect', so a link that has not been resolved is never presented as though it had been.",
+ "emptyStateRule": "A supplier with lastChecked set and no items has been checked and nothing met the bar. That is a statement about this index on that date, never a statement that the company has had no news.",
+ "rotation": {
+  "dailyBudget": 80,
+  "notedQuota": 75,
+  "otherQuota": 5,
+  "notedCycleDays": 14,
+  "otherCycleDays": 35,
+  "dailyCap": 90,
+  "seedSuppliers": 1216,
+  "checkedThisRun": 80
+ },
+ "coverage": {
+  "complete": false,
+  "suppliersNeverChecked": 1136,
+  "note": "INCOMPLETE: 1136 of 1216 suppliers have not been reached yet on the first rotation. An absence here is a statement about this index, never about the company."
+ },
+ "counts": {
+  "suppliers": 80,
+  "suppliersWithItems": 1,
+  "items": 1,
+  "sources": 2,
+  "resolvedLinks": 2,
+  "redirectLinks": 0
+ },
+ "suppliers": {
+  "1 Stop Medical Supplies": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "2San Global": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "365 Healthcare": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "3D LifePrints UK Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "3D Metal Printing Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "@SimulationMan Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "A. Menarini Diagnostics Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "A2B Healthcare": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Aayan Medical Imaging Limited": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "AB Scientific": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Abbliss Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Abbott Diabetes Care": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Abbott Diagnostics": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Abbott Laboratories Limited": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Abbott Medical U.K. Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Abbott Rapid Diagnostics": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Abbott Toxicology": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "AbbVie UK": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Abilia Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Abiomed Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Absorbest AB": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Accel Heal": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Accora": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Accrington Surgical": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Accrington Surgical Inst. Suppliers": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Accrington Surgical Instrument Suppliers Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Acumed Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Acurable Limited": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Adler Ortho UK Limited": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Advanced Global Health": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Advanced Medical Solutions (AMS)": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Advanced Medical Systems Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Advanced Sterilization Products (UK) Limited": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Advanced Therapeutics UK Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Aero Healthcare Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "AESKU.UK": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "AFOS": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "AG Dental Equipment": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "AgaMatrix Europe Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Agfa Healthcare UK Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Agile Medical": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Agilent Technologies UK": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Agito Medical A/S": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Aidapt Bathrooms Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Aidence": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Aidoc Medical Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Air Liquide Healthcare Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Airbon Ltd, trading as Smart Air UK": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "AJ Mobility Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Albert Waeschle Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Alcado Limited": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Algeo": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Alivecor Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Alliance Healthcare": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Alliance Medical": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Almirall UK": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Alpha Laboratories": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Alterior Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Altomed Limited": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "ALXR Limited": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "AM Healthcare Group": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Ambu UK": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "AMG Medtech Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Amoena UK Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Amparo Prosthetics Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "AmRay UK": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Andersen Caledonia Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Anetic Aid Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Anglian Dental": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Anika Therapeutics Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Anita UK Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Anser Medical": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Apacor": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "APC Cardiovascular Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Apollo Healthcare Technologies": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Abena UK Limited": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Accuray UK": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Accurx": {
+   "lastChecked": "2026-08-18",
+   "items": [
+    {
+     "headline": "Accurx to supply AI-scribing tool for large-scale NHS hospital rollout",
+     "date": "2026-03-05",
+     "summary": "Accurx to supply AI-scribing tool for large-scale NHS hospital rollout &nbsp;&nbsp; Home | Digital Health",
+     "sources": [
+      {
+       "publisher": "Home | Digital Health",
+       "url": "https://www.digitalhealth.net/2026/03/accurx-to-supply-ai-scribing-for-large-scale-nhs-hospital-rollout/",
+       "urlType": "publisher",
+       "redirectUrl": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNbHU1MzhwT3dMSzFUelF0RXFBaC1oWDdvMUVmZk5vRWJUQnltWkNDVURjSHZPSmxSb1AtZm5QMzlGT2xOM2s1SzJmSy1iOG1JXzhCZXJVUGxlVmlKRkd3V1YtdzhfSjZfRDZXLWlna3haek9QeHhjbWJwQl95OG9EY29wTEFMQVBzaHBpN3pvYllQSVFPZnV3RDFtQWFtM1pWQWRMU0hhYw?oc=5"
+      },
+      {
+       "publisher": "HTN Health Tech News",
+       "url": "https://htn.co.uk/2025/05/01/accurx-launch-ai-scribing-tool-for-use-across-the-nhs/",
+       "urlType": "publisher",
+       "redirectUrl": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNLUZzZEdfTWZzUHdocHplamdkeW1YVkxSSEx3ck40QTVDNWVOWG1pMDY2T0YxSWctRnhaeFBHMWp2SDEtcnUxQnItdlhsNURraUtfUjY3U2h6V1FIdldXSkp6WVNMMUtXWHl6MkRhdGtTdnA5UFVfajlmYS1PX3JlUmpMOVBzM0kzRHZv?oc=5"
+      }
+     ],
+     "match": {
+      "alias": "accurx",
+      "aliasStrength": "distinctive",
+      "sectorTerm": "nhs",
+      "relevanceTerm": "nhs"
+     },
+     "verified": true,
+     "autoDetected": true
+    }
+   ]
+  },
+  "Acime UK Ltd": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  },
+  "Advanced Bionics": {
+   "lastChecked": "2026-08-18",
+   "items": []
+  }
+ }
+}

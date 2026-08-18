@@ -1,0 +1,142 @@
+name: Company press sweep (verified supplier news)
+
+# WHY THIS WORKFLOW EXISTS (added 18/08/2026)
+#
+# The Company Report's press panel half-existed inside build_supplier_index.py:
+# a Google News query per supplier, kept only where two reputable publishers
+# carried the story. Two things stopped it being a feature anyone could use.
+#
+#   1. NEWS_MAX = 30. Thirty suppliers a run, taken in a STABLE order that put
+#      the curated ones first — and 1,215 of 1,216 suppliers are curated. So the
+#      same top thirty were re-queried every night and supplier 31 onward was
+#      never reached. Measured 18/08/2026: 21 of 1,334 supplier records carried
+#      any news at all, 1.6%.
+#   2. NO FALSE-POSITIVE GUARD. Anything the name query returned was attributed.
+#      "Jeenie Solutions" is a UK bariatric patient-handling supplier; "Jeenie"
+#      is a US translation company whose coverage is full of patients and
+#      healthcare. See scripts/press_match.py.
+#
+# scripts/refresh_company_press.py fixes both. It rotates through EVERY supplier
+# — noted ones every 14 days, the rest every 35, oldest-checked first — at about
+# 80 queries a run, and applies the five-part rule before anything is attributed.
+#
+# ⚠️ NEEDS NO SECRET. It reads a public RSS feed and public article URLs.
+#
+# ⚠️ NOTHING ELSE MAY WRITE data/company-press.json. This is its only writer.
+
+on:
+  schedule:
+    # 01:40 UTC. Deliberately AHEAD of supplier-capture.yml (02:20) and
+    # refresh.yml (03:15) so the three writers queue rather than collide, and so
+    # a press sweep that overruns still lands before the index rebuild reads the
+    # seed.
+    - cron: "40 1 * * *"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Cap suppliers queried this run (0 = the rotation's own budget)"
+        required: false
+        default: "0"
+
+# Same reason as every other writer in this repo: they share one branch, and on
+# 26/07/2026 a 49-minute job lost its push to a writer that landed inside its
+# window. Serialise rather than race.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  press:
+    runs-on: ubuntu-latest
+    # Generous ON PURPOSE: ~80 RSS queries at a 2s pause, plus a link resolution
+    # per published source against Google's own endpoint. It is I/O-bound on
+    # somebody else's servers, and a short cap would truncate the rotation —
+    # which reads as "nothing met the bar" when it means "we ran out of clock".
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Sweep the next slice of the supplier rotation
+        run: |
+          if [ "${{ github.event.inputs.limit || 0 }}" != "0" ]; then
+            python3 scripts/refresh_company_press.py --limit "${{ github.event.inputs.limit }}"
+          else
+            python3 scripts/refresh_company_press.py
+          fi
+
+      - name: Report coverage
+        run: |
+          python3 - <<'EOF'
+          import json
+          d = json.load(open("data/company-press.json"))
+          seed = json.load(open("data/supplier-seed.json"))["suppliers"]
+          c, r = d["counts"], d["rotation"]
+          print("seed suppliers      : %d" % len(seed))
+          print("checked this run    : %d (budget %d)" % (r["checkedThisRun"], r["dailyBudget"]))
+          print("suppliers on record : %d" % c["suppliers"])
+          print("never checked yet   : %d" % d["coverage"]["suppliersNeverChecked"])
+          print("stories published   : %d across %d supplier(s)"
+                % (c["items"], c["suppliersWithItems"]))
+          print("links resolved      : %d of %d (%d still Google News redirects)"
+                % (c["resolvedLinks"], c["sources"], c["redirectLinks"]))
+          EOF
+
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      # A push to this repo is a live publish to paying members within seconds.
+      # There is no staging step and no review. If this fails, the data is
+      # wrong: fix the data, never loosen the check. Root rule 13.
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "company-press-bot"
+          git config user.email "actions@github.com"
+          git add data/company-press.json state/company-press-rotation.json
+          git diff --cached --quiet || git commit -m "Company press sweep $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first), attempt $attempt of 5."
+
+            # ⚠️ DO NOT LET GIT MERGE THIS FILE.
+            # NOTE-company-intelligence-rebase-merge-defect-2026-08-14.md: a text
+            # merge of a generated JSON file produced a counts header from one
+            # generation over rows from another, and only the gate caught it.
+            # data/company-press.json is marked -merge in .gitattributes so git
+            # refuses rather than stitching. The correct resolution is to take
+            # ORIGIN's copy and RE-DERIVE ours into it, supplier block by
+            # supplier block, recomputing the header from the rows.
+            cp data/company-press.json /tmp/ours-company-press.json
+            git fetch origin
+            git checkout --theirs . 2>/dev/null || true
+            git checkout origin/main -- data/company-press.json || true
+            git rebase --abort 2>/dev/null || true
+            git reset --hard origin/main
+            python3 scripts/refresh_company_press.py \
+              --merge /tmp/ours-company-press.json \
+              --out data/company-press.json
+            python3 scripts/stamp_notice.py
+            python3 verify.py || { echo "GATE FAILED after re-merge - refusing to push"; exit 1; }
+            git add data/company-press.json state/company-press-rotation.json
+            git diff --cached --quiet || git commit -m "Company press sweep $(date -u +%F) (re-merged)"
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi

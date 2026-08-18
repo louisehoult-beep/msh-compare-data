@@ -24,6 +24,20 @@ report falls back to the house navy. An honest fallback beats a colour we made
 up, and "this company's colour is grey" is a claim we cannot support from a
 32-pixel favicon.
 
+SUPERSEDED AS THE PREFERRED SOURCE, 18/08/2026 — STILL LIVE FOR THE 95 IT WROTE
+------------------------------------------------------------------------------
+scripts/refresh_logos.py now fetches each company's ACTUAL BRAND MARK from its
+own website, stores it in this repo, and samples the colour from that — a 192px
+mark from the company's own site beats a 128px favicon from a third-party
+service, and it is written under a contrast rule this script never had. The
+Company Report prefers a logo-derived colour over anything this script wrote.
+
+The 95 records here are NOT retired: they cover companies refresh_logos.py could
+not reach, and the renderer keeps using them. But they carry no contrast proof,
+so app/company-report.js re-checks every shade at the point of use and drops any
+that cannot clear its floor. Do not add new colours with this script where
+refresh_logos.py can reach the company.
+
 Run:  python3 scripts/refresh_brand_colours.py [--limit N] [--only NAME]
 Then: python3 scripts/stamp_notice.py && python3 verify.py
 """

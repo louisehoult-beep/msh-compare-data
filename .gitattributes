@@ -1,0 +1,6 @@
+# A generated JSON file must never be text-merged. On 14/08/2026 `-X theirs`
+# stitched a counts header from one generation onto rows from another in
+# data/company-awards.json, and only the publish gate caught it. Marking the
+# file -merge makes git REFUSE rather than stitch; the workflow then re-derives
+# it (scripts/refresh_company_press.py --merge), which is the documented fix.
+data/company-press.json -merge

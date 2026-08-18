@@ -48,6 +48,23 @@
      load, the award panels say so rather than reading as an empty company. */
   var AWARDS = BASE + 'data/company-awards.json' + CB;
 
+  /* Ninth fetch. Brand marks, fetched ONCE at build time from each company's
+     own website by scripts/refresh_logos.py and stored in this repository under
+     assets/logos/. The marks themselves are served from the same host as every
+     other file this page reads.
+
+     THIS REPLACES A LIVE THIRD-PARTY CALL, AND THAT IS THE POINT. The report's
+     only logo route used to be a third-party logo service (Clearbit), called
+     live from this file while a member watched. That host stopped resolving,
+     every report quietly fell through to the monogram, and nobody found out
+     until somebody read the code on 18/08/2026. A mark that is committed here can only break in a
+     commit, and verify.py reads every commit before it publishes.
+
+     Optional, like the seven before it: if the file does not load, every
+     company falls back to the monogram plate, which is a finished design in its
+     own right rather than a hole where a logo should be. */
+  var LOGOS = BASE + 'data/company-logos.json' + CB;
+
   /* Same palette constants as app/supplier-search.js — one house style. */
   var G = '#a8842c', INK = '#1d2733', DIM = '#75808d', LINE = '#e6e0d4',
       RED = '#b84a5c', GREEN = '#2e7d5b', SOFT = '#f7f4ee';
@@ -81,25 +98,214 @@
     return x < y ? -1 : (x > y ? 1 : 0);
   }
 
+  /* ---------------------------------------------------------------------
+     HOUSE STYLESHEET — redesigned 18/08/2026.
+
+     ONE stylesheet, shipped inside this file, used by BOTH the on-page card
+     and the printable pack, so the two surfaces cannot drift apart. It is
+     entirely self-contained: no external stylesheet, no web font, no CDN
+     script — the Hub page must render this with zero third-party requests.
+
+     Every selector is scoped under `.mcr`, so nothing here can reach the rest
+     of the WordPress page, and WordPress's own theme CSS cannot reach in.
+
+     Colours are the brand guide's, verbatim: Midnight Navy #0B1C33 with the
+     signature 135deg navy gradient, Deep Gold #A8842C for labels and rules on
+     light, Light Gold #E0BE8E for gold on navy, the D4AF7A→B8935A button
+     gradient. Gold never carries body copy.
+
+     The company's own colour is TWO custom properties, not one, because this
+     report has two grounds: `--mcr-accent` is the shade painted on the navy
+     masthead, `--mcr-accent-ink` the shade painted on the ivory card ground.
+     Both are derived from the one sampled colour and each is proved against
+     the ground it lands on before it is published — see accentOnNavy() and
+     accentOnIvory() below for why one value could never serve both.
+
+     They carry RULES AND EDGES: the masthead's top edge, the ring around the
+     company's own mark, the bar on each part divider, card and stat-tile top
+     borders, the lede's left edge, a flagged news item. Never body copy, and
+     never a whole banner — the ground stays the house navy gradient, so a
+     company with no colour at all gets a report that reads as the intended
+     design rather than as one missing its branding. The company colour is a
+     guest in a house design.
+     --------------------------------------------------------------------- */
+  var STYLE = [
+    '.mcr{--mcr-navy:#0B1C33;--mcr-ink:#1d2733;--mcr-body:#37485a;--mcr-dim:#75808d;',
+    '--mcr-gold:#a8842c;--mcr-line:#e6e0d4;--mcr-soft:#f7f4ee;',
+    /* Two accents, two grounds — see accentOnNavy()/accentOnIvory(). The
+       defaults here are the brand guide's own gold pairing, so a report that
+       somehow renders before boot() still looks like the house design. */
+    '--mcr-accent:#C49B5C;--mcr-accent-ink:#A8842C;',
+    'font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;',
+    'color:var(--mcr-body);font-size:14px;line-height:1.6;}',
+    '.mcr *{box-sizing:border-box;}',
+    '.mcr p{margin:0 0 10px;}',
+    '.mcr a{color:var(--mcr-gold);font-weight:600;text-decoration:none;}',
+    '.mcr a:hover{text-decoration:underline;}',
+
+    /* --- report shell + masthead ------------------------------------- */
+    '.mcr-report{border:1px solid var(--mcr-line);border-radius:14px;background:#fdfcf9;',
+    'overflow:hidden;box-shadow:0 2px 16px rgba(11,28,51,.07);}',
+    '.mcr-mast{position:relative;padding:26px 26px 20px;',
+    'background:linear-gradient(135deg,#0B1C33 0%,#132B4A 55%,#1B3A5F 100%);',
+    '-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
+    '.mcr-mast:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;',
+    'background:var(--mcr-accent);-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
+    '.mcr-mast-row{display:flex;gap:18px;align-items:center;flex-wrap:wrap;}',
+    /* The plate the company's own mark sits on. The ring is the company's
+       colour on navy — the one place in the report where its colour touches
+       its own mark. A company with no colour gets the house Antique Gold ring,
+       which is what this line was before there were any colours to use. */
+    '.mcr-logo{width:74px;height:74px;flex:0 0 74px;border-radius:14px;background:#fff;overflow:hidden;',
+    'display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,.24);',
+    'border:2px solid var(--mcr-accent);-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
+    '.mcr-kicker{font-size:9.5px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;',
+    'color:#E0BE8E;margin:0 0 7px;}',
+    '.mcr-h1{color:#fff;font-size:27px;font-weight:700;line-height:1.16;letter-spacing:.2px;margin:0;}',
+    '.mcr-tagline{color:rgba(237,231,220,.86);font-size:12.5px;font-weight:600;margin-top:6px;line-height:1.5;}',
+    '.mcr-links{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;}',
+    '.mcr-links a{font-size:11px;font-weight:700;letter-spacing:.4px;padding:8px 15px;border-radius:99px;',
+    'background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.34);color:#fff;white-space:nowrap;}',
+    '.mcr-links a:hover{background:rgba(255,255,255,.24);text-decoration:none;}',
+    '.mcr-mast-meta{margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,.16);',
+    'font-size:11px;line-height:1.75;color:#9FB0C5;}',
+    '.mcr-mast-meta b{color:#DBE3EE;font-weight:600;}',
+
+    /* --- body, parts, cards ------------------------------------------ */
+    '.mcr-body{padding:2px 22px 20px;}',
+    /* Part dividers. The short bar sitting on the divider is the company's
+       colour on light — it repeats the accent four or five times down a long
+       report without ever becoming the report's own colour scheme. */
+    '.mcr-part{position:relative;margin:28px 0 0;padding-top:16px;border-top:2px solid var(--mcr-line);}',
+    '.mcr-part:before{content:"";position:absolute;left:0;top:-2px;width:38px;height:2px;',
+    'background:var(--mcr-accent-ink);-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
+    '.mcr-part-n{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;',
+    'color:var(--mcr-gold);}',
+    '.mcr-part-t{font-size:17px;font-weight:700;color:var(--mcr-navy);line-height:1.3;margin-top:3px;}',
+    '.mcr-part-s{font-size:12.5px;color:var(--mcr-dim);line-height:1.6;margin-top:4px;max-width:66em;}',
+    '.mcr-card{background:#fff;border:1px solid var(--mcr-line);border-radius:12px;',
+    'padding:16px 18px;margin:14px 0 0;box-shadow:0 1px 2px rgba(29,39,51,.05);}',
+    '.mcr-card-t{display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:1.4px;',
+    'text-transform:uppercase;font-weight:700;color:var(--mcr-navy);margin:0 0 12px;}',
+    '.mcr-card-t:before{content:"";flex:0 0 16px;height:2px;background:var(--mcr-gold);',
+    '-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
+    /* The deliberate empty state. Thin data is the normal case here, so a
+       panel with nothing behind it is drawn as a finished, quiet thing —
+       dashed edge, no drop shadow, ivory ground — never as a blank box that
+       reads as a page that failed to load. */
+    '.mcr-card--empty{background:#faf8f3;border-style:dashed;border-color:#ded6c4;box-shadow:none;}',
+    '.mcr-card--empty .mcr-card-t{color:#8d8677;}',
+    '.mcr-card--empty .mcr-card-t:before{background:#cfc6b2;}',
+    '.mcr-note{font-size:12.5px;color:var(--mcr-dim);line-height:1.65;}',
+    '.mcr-good{font-size:12.5px;color:#2e7d5b;line-height:1.65;}',
+    '.mcr-rule{margin:0 0 12px;padding:11px 14px;background:var(--mcr-soft);',
+    'border-left:3px solid var(--mcr-gold);border-radius:0 8px 8px 0;font-size:12px;',
+    'color:#4a5766;line-height:1.62;}',
+    '.mcr-rule-h{display:block;font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;',
+    'font-weight:700;color:var(--mcr-gold);margin-bottom:4px;}',
+
+    /* --- chips, source lines, tables ---------------------------------- */
+    '.mcr-chip{display:inline-block;background:#fff;color:#37485a;border:1px solid var(--mcr-line);',
+    'border-radius:99px;padding:4px 11px;font-size:11.5px;font-weight:600;line-height:1.5;',
+    'margin:0 6px 6px 0;}',
+    '.mcr-chip--gold{background:#f6efdd;border-color:#e7d8b3;color:#7a5b14;}',
+    '.mcr-src{margin-top:10px;padding-top:8px;border-top:1px dotted var(--mcr-line);',
+    'font-size:11.5px;color:var(--mcr-dim);line-height:1.6;}',
+    '.mcr-asof{white-space:nowrap;}',
+    '.mcr-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}',
+    '.mcr-btn{cursor:pointer;background:linear-gradient(180deg,#D4AF7A,#B8935A);color:#0B1C33;',
+    'border:0;border-radius:99px;padding:9px 18px;font-size:12.5px;font-weight:700;letter-spacing:.03em;',
+    '-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
+    '.mcr-btn:hover{background:linear-gradient(180deg,#E0BE8E,#C49B5C);}',
+
+    /* --- the picker --------------------------------------------------- */
+    '.mcr-lab{display:block;font-size:10.5px;font-weight:700;letter-spacing:1.4px;',
+    'text-transform:uppercase;color:var(--mcr-dim);margin:0 0 5px;}',
+    '.mcr-field{width:100%;max-width:520px;padding:11px 16px;border-radius:99px;',
+    'border:1px solid var(--mcr-line);font:inherit;font-size:14.5px;color:var(--mcr-ink);',
+    '-webkit-text-fill-color:var(--mcr-ink);caret-color:var(--mcr-ink);background:#fff;outline:none;}',
+    '.mcr-field:focus{border-color:#C49B5C;box-shadow:0 0 0 3px rgba(196,155,92,.16);}',
+    '.mcr-quick{cursor:pointer;background:#fff;border:1px solid var(--mcr-line);border-radius:99px;',
+    'padding:6px 13px;font-size:12px;font-weight:600;color:var(--mcr-navy);}',
+    '.mcr-quick:hover{background:var(--mcr-soft);border-color:#C49B5C;}',
+
+    /* --- phones ------------------------------------------------------- */
+    '@media (max-width:640px){',
+    '.mcr-body{padding:2px 13px 16px;}',
+    '.mcr-mast{padding:20px 16px 16px;}',
+    '.mcr-mast-row{gap:13px;}',
+    '.mcr-logo{width:54px;height:54px;flex:0 0 54px;border-radius:11px;}',
+    '.mcr-h1{font-size:20.5px;}',
+    '.mcr-links{margin-left:0;width:100%;}',
+    '.mcr-card{padding:14px 14px;border-radius:11px;}',
+    '.mcr-part-t{font-size:15.5px;}',
+    '}',
+
+    /* --- print: the downloadable pack --------------------------------- */
+    '@media print{',
+    '.mcr-report{border:0;box-shadow:none;border-radius:0;}',
+    '.mcr-body{padding:0;}',
+    '.mcr-card{box-shadow:none;break-inside:avoid;page-break-inside:avoid;margin-top:10px;}',
+    '.mcr-part{break-before:auto;break-after:avoid;page-break-after:avoid;}',
+    '.mcr-btn{display:none;}',
+    '.mcr a{text-decoration:none;}',
+    '}'
+  ].join('');
+
+  /* Injected once. A <style> element set through innerHTML is applied by the
+     browser (unlike a <script>), so this needs no DOM plumbing beyond being
+     present — and because it is written by this file rather than stored in the
+     page, WordPress's texturiser and wpautop never see it. */
+  var STYLE_ID = 'mcr-style';
+  function injectStyle() {
+    if (document.getElementById(STYLE_ID)) return;
+    var el = document.createElement('style');
+    el.id = STYLE_ID;
+    el.appendChild(document.createTextNode(STYLE));
+    (document.head || document.documentElement).appendChild(el);
+  }
+
+  /* Every panel on the report is one card: an uppercase title with a short
+     gold rule, then the body. A panel whose whole body is one honest empty
+     note is drawn in the deliberate empty style instead — most companies are
+     thin, so that state is the common one and it must read as finished. */
   function sec(title, html) {
-    return '<div style="margin:16px 0 0;">' +
-      '<div style="font-size:11px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;color:' + DIM + ';margin-bottom:6px;">' + title + '</div>' +
-      html + '</div>';
+    var body = String(html == null ? '' : html);
+    var single = /^\s*<div class="mcr-note"/.test(body) &&
+                 body.indexOf('mcr-note') === body.lastIndexOf('mcr-note');
+    return '<section class="mcr-card' + (single ? ' mcr-card--empty' : '') + '">' +
+      '<div class="mcr-card-t">' + title + '</div>' + body + '</section>';
   }
   /* Every honest empty state goes through here, so they all look the same and
      none of them can be mistaken for a zero finding. */
   function gap(text) {
-    return '<div style="font-size:13px;color:' + DIM + ';line-height:1.55;">' + text + '</div>';
+    return '<div class="mcr-note">' + text + '</div>';
   }
   function good(text) {
-    return '<div style="font-size:13px;color:' + GREEN + ';line-height:1.55;">' + text + '</div>';
+    return '<div class="mcr-good">' + text + '</div>';
   }
   /* The printed derivation. Stage 2 panels are computed claims; this box is
      the reader's means of judging them. It is not decoration — do not drop it
      to save space. */
   function rule(text) {
-    return '<div style="margin:0 0 9px;padding:8px 11px;background:' + SOFT + ';border-left:3px solid ' + G + ';border-radius:0 7px 7px 0;font-size:12px;color:#4a5766;line-height:1.55;">' +
-      '<b style="color:' + G + ';letter-spacing:.06em;">HOW THIS WAS DERIVED</b><br>' + text + '</div>';
+    return '<div class="mcr-rule"><b class="mcr-rule-h">How this was derived</b>' + text + '</div>';
+  }
+  /* One treatment for every "where this came from, and when" line: a dotted
+     rule, then the link and the read date together. A source and its date are
+     one fact, so they are never split across the panel. */
+  function srcLine(html) {
+    return '<div class="mcr-src">' + html + '</div>';
+  }
+  function asOf(text) {
+    return '<span class="mcr-asof">' + text + '</span>';
+  }
+  /* The feeds stamp themselves ISO; the Hub writes dates the way its members
+     do (root rule 1). Display only — an unrecognised string is printed
+     verbatim rather than guessed at, so nothing is ever reformatted into a
+     date it did not state. */
+  function dateUK(v) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(v == null ? '' : v).trim());
+    return m ? (m[3] + '/' + m[2] + '/' + m[1]) : String(v == null ? '' : v);
   }
 
   /* ---------------------------------------------------------------------
@@ -216,11 +422,8 @@
      STAGE 1 — read from source, nothing computed.
      --------------------------------------------------------------------- */
   function chip(text, tone) {
-    var bg = tone === 'gold' ? '#f3ead2' : '#ffffff';
-    var fg = tone === 'gold' ? '#7a5b14' : '#37485a';
-    var bd = tone === 'gold' ? '#f3ead2' : LINE;
-    return '<span style="display:inline-block;background:' + bg + ';color:' + fg + ';border:1px solid ' + bd +
-      ';border-radius:99px;padding:3px 10px;font-size:11.5px;font-weight:600;margin:0 6px 6px 0;">' + esc(text) + '</span>';
+    return '<span class="mcr-chip' + (tone === 'gold' ? ' mcr-chip--gold' : '') + '">' +
+      esc(text) + '</span>';
   }
 
   function identity(s) {
@@ -351,7 +554,7 @@
         return '<div style="margin:0 0 10px;border:1px solid ' + LINE + ';border-radius:8px;background:#fff;overflow:hidden;">' +
           '<div style="padding:7px 10px;background:' + SOFT + ';font-size:12.5px;font-weight:700;color:' + INK + ';border-bottom:1px solid ' + LINE + ';">' +
           esc(fam) + ' <span style="font-weight:400;color:' + DIM + ';">&middot; ' + fams[fam].length + ' line(s)</span></div>' +
-          '<div style="overflow-x:auto;"><table style="border-collapse:collapse;width:100%;min-width:460px;">' +
+          '<div class="mcr-scroll"><table style="border-collapse:collapse;width:100%;min-width:460px;">' +
           '<tr><th style="text-align:left;padding:6px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">CATALOGUE DESCRIPTION</th>' +
           '<th style="text-align:left;padding:6px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">NPC</th>' +
           '<th style="text-align:left;padding:6px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">PACK</th></tr>' +
@@ -470,7 +673,7 @@
     var body = '';
     if (hits.length) {
       body += rule('Every framework below names this company <b>on NHS Supply Chain&rsquo;s own contract launch brief</b> for that framework, the buying organisation&rsquo;s own page, captured ' +
-        esc((ctx.fwDoc && ctx.fwDoc.dataAsOf) || 'date not recorded') + '. Nothing here is inferred from product ranges or specialities. The name in brackets is the exact wording the brief uses, which is often a group company rather than the group.' +
+        esc(dateUK((ctx.fwDoc && ctx.fwDoc.dataAsOf) || 'date not recorded')) + '. Nothing here is inferred from product ranges or specialities. The name in brackets is the exact wording the brief uses, which is often a group company rather than the group.' +
         (ctx.fwDoc && ctx.fwDoc.unparsedCount
           ? ' <b>Coverage:</b> ' + ctx.fwDoc.frameworkCount + ' of ' + (ctx.fwDoc.briefsSeen || 0) +
             ' published briefs parsed; ' + ctx.fwDoc.unparsedCount + ' refused because the supplier list did not match the count the page itself states. A framework in that group cannot appear here even if this company is on it.'
@@ -634,7 +837,7 @@
     }
 
     var body = rule('Every company below is named on the <b>same NHS Supply Chain contract launch brief</b> as ' +
-      esc(sub.name) + ', that framework&rsquo;s own page on NHS Supply Chain, captured <b>' + esc(res.asOf) + '</b>. ' +
+      esc(sub.name) + ', that framework&rsquo;s own page on NHS Supply Chain, captured <b>' + esc(dateUK(res.asOf)) + '</b>. ' +
       'The list is the brief&rsquo;s list in full, minus this company: it is not filtered down to the companies this Hub happens to hold records for, so a name here may have no Hub profile yet. ' +
       'Where the brief breaks the framework into lots, the lot is shown; otherwise the match is at framework level, so check the lot before you use it in a call. ' +
       'Sharing a framework is not the same as competing: a framework can carry companies selling into entirely different clinical niches, and a genuine competitor may be on no framework at all.');
@@ -645,9 +848,9 @@
       var known = grp.others.filter(function (n) {
         return !!(ctx.byName[n] || (ctx.byKey && ctx.byKey[coKey(n)]));
       }).length;
-      body += '<div style="margin:0 0 12px;border:1px solid ' + LINE + ';border-radius:10px;padding:11px 13px;background:#fff;">' +
-        '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';">' + esc(grp.name) + '</div>' +
-        '<div style="font-size:12px;color:' + DIM + ';margin:3px 0 8px;">' + grp.others.length +
+      body += '<div style="margin:0 0 12px;border:1px solid ' + LINE + ';border-radius:10px;padding:12px 14px;background:' + SOFT + ';page-break-inside:avoid;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact;">' +
+        '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + esc(grp.name) + '</div>' +
+        '<div style="font-size:12px;color:' + DIM + ';margin:4px 0 9px;line-height:1.6;">' + grp.others.length +
         ' other supplier(s) on this framework &middot; ' + grp.total + ' in total, including ' + esc(sub.name) + '.' +
         (grp.reference ? ' &middot; ref ' + esc(grp.reference) : '') +
         (grp.ends ? ' &middot; runs to ' + esc(grp.ends) : '') +
@@ -655,7 +858,7 @@
         '<div>' + grp.others.map(function (n) {
           var lots = grp.lots && grp.lots[n];
           var hub = ctx.byName[n] || (ctx.byKey && ctx.byKey[coKey(n)]);
-          return chip(n + (lots && lots.length ? ' &middot; ' + lots.join(', ') : ''), hub ? 'gold' : '');
+          return chip(n + (lots && lots.length ? ' \u00b7 ' + lots.join(', ') : ''), hub ? 'gold' : '');
         }).join('') + '</div>' +
         '<div style="font-size:11px;color:' + DIM + ';margin-top:7px;">' + known + ' of these ' + grp.others.length +
         ' have a profile in this Hub (gold); the rest are named on the brief but not yet indexed here.</div>' +
@@ -776,7 +979,7 @@
     var rows = '';
     if (rec.registeredName) rows += fact('Registered name', '<b>' + esc(rec.registeredName) + '</b>' + (rec.companyNumber ? ' · ' + esc(rec.companyNumber) : ''));
     if (rec.status) rows += fact('Status', esc(rec.status));
-    if (rec.incorporated) rows += fact('Incorporated', esc(rec.incorporated));
+    if (rec.incorporated) rows += fact('Incorporated', esc(dateUK(rec.incorporated)));
     if (rec.registeredOffice) rows += fact('Registered office', esc(rec.registeredOffice));
     if (rec.sic && rec.sic.length) rows += fact('SIC', rec.sic.map(esc).join(', '));
     if (rec.accountsFilingVerbatim) rows += fact('Latest accounts', esc(rec.accountsFilingVerbatim));
@@ -787,7 +990,7 @@
     if (!probable) {
       if (rec.turnoverGBP != null) {
         rows += fact('Turnover', '£' + Number(rec.turnoverGBP).toLocaleString('en-GB') +
-          ' <span style="color:' + DIM + ';">· accounts made up to ' + esc(rec.accountsMadeUpTo || '') + '</span>');
+          ' <span style="color:' + DIM + ';">· accounts made up to ' + esc(dateUK(rec.accountsMadeUpTo || '')) + '</span>');
       } else if (rec.turnoverNote) {
         rows += fact('Turnover', '<span style="color:' + DIM + ';">' + esc(rec.turnoverNote) + '</span>');
       } else {
@@ -815,8 +1018,8 @@
     }
     body += rows ? ('<table style="border-collapse:collapse;">' + rows + '</table>') : gap('The record carries no register facts.');
     if (rec.sourceUrl) {
-      body += '<div style="font-size:11.5px;margin-top:7px;"><a href="' + esc(rec.sourceUrl) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">Companies House record ↗</a>' +
-        ' <span style="color:' + DIM + ';">· read ' + esc(fin.dataAsOf || '') + '</span></div>';
+      body += srcLine('<a href="' + esc(rec.sourceUrl) + '" target="_blank" rel="noopener">Companies House record ↗</a>' +
+        ' &middot; ' + asOf('read ' + esc(dateUK(fin.dataAsOf || ''))));
     }
     return sec(TITLE, body);
   }
@@ -850,8 +1053,8 @@
         }).join('');
     }
     if (off.sourceUrl) {
-      body += '<div style="font-size:11.5px;margin-top:7px;"><a href="' + esc(off.sourceUrl) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">Officers register ↗</a>' +
-        ' <span style="color:' + DIM + ';">· read ' + esc(off.readOn || '') + '</span></div>';
+      body += srcLine('<a href="' + esc(off.sourceUrl) + '" target="_blank" rel="noopener">Officers register ↗</a>' +
+        ' &middot; ' + asOf('read ' + esc(dateUK(off.readOn || ''))));
     }
     return sec(TITLE, body || gap('The officers record is empty.'));
   }
@@ -876,7 +1079,7 @@
       'Suppliers whose identity is only probable, or who file outside the UK, are named as unresolved and feed nothing. ' +
       'The panel refuses any framework where fewer than half the suppliers resolve — a size comparison built on a third of the lot is not a size comparison. ' +
       'No percentage appears here because nobody holds market-share data: what a filing tells you is which statutory regime the company files under (thresholds quoted below), not its share of anything. ' +
-      'Register read ' + esc(ctx.fin.dataAsOf || 'date not recorded') + '; framework data captured ' + esc(ctx.asOf) + '.');
+      'Register read ' + esc(dateUK(ctx.fin.dataAsOf || 'date not recorded')) + '; framework data captured ' + esc(dateUK(ctx.asOf)) + '.');
 
     var rendered = 0;
     coRes.groups.forEach(function (grp) {
@@ -894,8 +1097,8 @@
 
       /* THE HALF-THE-FIELD FLOOR. resolved * 2 < total refuses the panel. */
       if (resolved.length * 2 < everyone.length) {
-        body += '<div style="margin:0 0 12px;border:1px dashed ' + LINE + ';border-radius:10px;padding:11px 13px;background:#fff;">' +
-          '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';">' + esc(grp.name) + '</div>' +
+        body += '<div style="margin:0 0 12px;border:1px dashed #ded6c4;border-radius:10px;padding:12px 14px;background:#faf8f3;page-break-inside:avoid;break-inside:avoid;">' +
+          '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + esc(grp.name) + '</div>' +
           gap('Refused: of the ' + everyone.length + ' suppliers on this framework, only ' + resolved.length +
             ' resolve to a confirmed Companies House record with an accounts filing. That is below half the field, and a size profile of under half a field misleads more than it informs. Unresolved: ' +
             unresolved.map(function (u) { return esc(u.name); }).join(', ') + '. Confirming identities is what fixes this; lowering the bar is not.') +
@@ -913,11 +1116,11 @@
           '</tr>';
       }).join('');
 
-      body += '<div style="margin:0 0 12px;border:1px solid ' + LINE + ';border-radius:10px;padding:11px 13px;background:#fff;">' +
-        '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';">' + esc(grp.name) + '</div>' +
-        '<div style="font-size:12px;color:' + DIM + ';margin:3px 0 8px;">' + everyone.length + ' supplier(s) on this framework · ' +
+      body += '<div style="margin:0 0 12px;border:1px solid ' + LINE + ';border-radius:10px;padding:12px 14px;background:' + SOFT + ';page-break-inside:avoid;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact;">' +
+        '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + esc(grp.name) + '</div>' +
+        '<div style="font-size:12px;color:' + DIM + ';margin:4px 0 9px;line-height:1.6;">' + everyone.length + ' supplier(s) on this framework · ' +
         resolved.length + ' resolved to a confirmed filing · ' + unresolved.length + ' unresolved.</div>' +
-        '<div style="overflow-x:auto;"><table style="border-collapse:collapse;width:100%;min-width:420px;">' +
+        '<div class="mcr-scroll"><table style="border-collapse:collapse;width:100%;min-width:420px;">' +
         '<tr><th style="text-align:left;padding:5px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">SUPPLIER</th>' +
         '<th style="text-align:left;padding:5px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">MOST RECENT ACCOUNTS FILING</th>' +
         '<th style="text-align:left;padding:5px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';"></th></tr>' +
@@ -940,9 +1143,9 @@
       var t = [];
       if (th.bands.small && th.bands.small.verbatim) t.push(esc(th.bands.small.verbatim));
       if (th.bands.medium && th.bands.medium.verbatim) t.push('Medium-sized (Companies Act 2006 s465(3)): ' + esc(th.bands.medium.verbatim));
-      body += '<div style="font-size:11.5px;color:' + DIM + ';line-height:1.6;margin-top:4px;"><b style="color:#4a5766;">Reading the filings.</b> ' +
+      body += srcLine('<b style="color:#4a5766;">Reading the filings.</b> ' +
         'A company entitled to the small-companies or micro-entity regime may file reduced accounts; a FULL filing is the one made when those exemptions are not used. It does not by itself state the company’s size — the disclosed turnover inside the filed document does, and extracting those figures is the next step. Thresholds in force (' + esc(th.appliesTo || '') + '): ' +
-        t.join(' — ') + '</div>';
+        t.join(' — '));
     }
 
     if (!rendered) {
@@ -962,70 +1165,293 @@
      company has no recorded brand colour; gold carries labels and rules,
      never body copy.
      ===================================================================== */
-  var NAVY_GRAD = 'linear-gradient(135deg,#0B1C33 0%,#132B4A 55%,#1B3A5F 100%)';
 
   function deepFor(s) { return s.deepDive || null; }
+
+  /* Brand marks, keyed by company name, filled in by boot() from
+     data/company-logos.json. Empty until then, and empty for good if that file
+     does not load — every company then draws the monogram. */
+  var LOGO = {};
+
+  /* ---------------------------------------------------------------------
+     CONTRAST, IN THE RENDERER AS WELL AS THE WRITER.
+
+     scripts/refresh_logos.py already proves every colour it publishes against
+     the ground it will be painted on, and verify.py re-proves it before a push.
+     This is the third check, and it is here because the OTHER source of brand
+     colours — the 95 `brand` records in supplier-seed.json, sampled from 128px
+     favicons by scripts/refresh_brand_colours.py — predates any contrast rule
+     at all. Rather than rewrite a human-curated file from a script, the rule is
+     applied where the colour is actually used: a shade that cannot clear its
+     floor never reaches the page, whichever file it came from.
+
+     WCAG 2.1 relative luminance, verbatim.
+     --------------------------------------------------------------------- */
+  var NAVY_RGB = [11, 28, 51],        /* #0B1C33, the masthead ground */
+      IVORY_RGB = [253, 252, 249];    /* #fdfcf9, the card ground */
+  var MIN_ON_NAVY = 3.0, MIN_ON_IVORY = 3.0;   /* WCAG 2.1 1.4.11, non-text */
+
+  function rgbOf(hex) {
+    var h = String(hex || '').replace('#', '');
+    if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+    if (!/^[0-9a-fA-F]{6}$/.test(h)) return null;
+    return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+  }
+  function lum(rgb) {
+    var c = rgb.map(function (v) {
+      v = v / 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function ratio(a, b) {
+    var x = lum(a), y = lum(b), hi = Math.max(x, y), lo = Math.min(x, y);
+    return (hi + 0.05) / (lo + 0.05);
+  }
+  /* Returns the hex if it clears `floor` against `ground`, otherwise null. */
+  function safe(hex, ground, floor) {
+    var rgb = rgbOf(hex);
+    if (!rgb) return null;
+    return ratio(rgb, ground) >= floor ? hex : null;
+  }
+  function toHex(rgb) {
+    return '#' + rgb.map(function (v) {
+      return ('0' + Math.max(0, Math.min(255, Math.round(v))).toString(16)).slice(-2);
+    }).join('');
+  }
+  /* DERIVE THE SHADE RATHER THAN GIVE UP ON THE COLOUR.
+
+     data/company-logos.json records both shades already, because the script
+     that samples a mark can compute them once and write them down. The two
+     OLDER colour sources cannot: deepDive.brand is a hand-picked pair and the
+     95 seed records predate the whole idea. For those, refusing a colour that
+     misses its floor would drop the company back to house gold — and it did:
+     GBUK's hand-picked green and Jeenie's blue are both invisible on navy, so
+     both mastheads went gold while the colour sat unused in the data.
+
+     So the same rule refresh_logos.py applies at build time is applied here at
+     render time: move the colour along ONE axis, in fixed steps, until it
+     clears its floor. `dir` is +1 towards white (for the navy ground) or -1
+     towards black (for the ivory ground). The hue never changes, and if no
+     step clears the floor the company gets the house gold — an unreadable
+     accent is still never published. */
+  function derive(hex, ground, floor, dir) {
+    var rgb = rgbOf(hex);
+    if (!rgb) return null;
+    var steps = [0, 0.12, 0.24, 0.36, 0.48, 0.60, 0.72, 0.82];
+    for (var i = 0; i < steps.length; i++) {
+      var f = steps[i];
+      var cand = rgb.map(function (v) {
+        return dir > 0 ? v + (255 - v) * f : v * (1 - f);
+      });
+      if (ratio(cand, ground) >= floor) return toHex(cand);
+    }
+    return null;
+  }
+
   /* Company colour, in order of how well we can stand behind it:
        1. a colour a human checked against the brand (deepDive.brand);
-       2. a colour SAMPLED from the company's own logo, carrying the URL and
-          date it was read from (supplier-seed `brand`, written by
-          scripts/refresh_brand_colours.py);
-       3. the house navy.
-     A monochrome logo yields no sample at all and falls through to 3 rather
-     than publishing "this company's colour is grey", which a 128px favicon
-     cannot support. */
+       2. a colour sampled from the company's OWN BRAND MARK, fetched from its
+          own website and stored in this repo, carrying both derived shades,
+          both contrast ratios and the URL and date it was read from
+          (data/company-logos.json, written by scripts/refresh_logos.py);
+       3. a colour sampled from a 128px favicon, carrying the URL and date
+          (supplier-seed `brand`, written by scripts/refresh_brand_colours.py);
+       4. no colour at all.
+     2 sits above 3 because a 192px brand mark from the company's own site is a
+     better source than a browser-tab glyph, and because only 2 was written
+     under a contrast rule. A monochrome mark yields no sample at all and falls
+     through rather than publishing "this company's colour is grey". */
   function brandOf(s) {
     var d = deepFor(s);
     if (d && d.brand && d.brand.c1 && d.brand.c2) return d.brand;
+    var l = LOGO[s.name];
+    if (l && l.brand && l.brand.c1 && l.brand.c2) return l.brand;
     if (s.brand && s.brand.c1 && s.brand.c2) return s.brand;
     return null;
   }
-  function brandGrad(s) {
+
+  /* THE ACCENT IS TWO VALUES, NOT ONE, BECAUSE THE REPORT HAS TWO GROUNDS.
+
+     It used to be one, and that is why it could only ever be a 5px edge. A
+     single colour cannot be both visible on the navy masthead and visible on
+     the ivory card ground: medtech is full of dark blues, which vanish on navy,
+     and of yellows and oranges, which vanish on ivory. Testing one accent
+     against one ground would have thrown away 22 of the 95 colours already held
+     (Stryker's yellow, Smith+Nephew's orange) or 48 of them (every dark blue),
+     depending which ground you picked.
+
+     So the sampled colour c1 is never painted. Two shades of it are:
+
+       --mcr-accent      on the NAVY masthead. c1 lightened until it clears 3:1.
+       --mcr-accent-ink  on the IVORY card ground. c1 darkened until it clears
+                         3:1 there and 4.5:1 under white text.
+
+     refresh_logos.py computes and records both. A seed colour predating that
+     rule carries neither, so the shade falls back to c1 (for navy) or c2 (for
+     ivory) and is CHECKED here — if it cannot clear its floor, the company gets
+     the house gold on that ground and keeps its own colour on the other.
+
+     HOUSE DEFAULT, AND WHY IT IS GOLD. Antique Gold #C49B5C on navy (6.67:1)
+     and Deep Gold #A8842C on light (3.41:1) are the brand guide's own pairing.
+     A company with no colour gets a report that reads as the intended house
+     design, not as a report missing its branding. */
+  var HOUSE_ON_NAVY = '#C49B5C', HOUSE_ON_IVORY = '#A8842C';
+
+  function accentOnNavy(s) {
     var b = brandOf(s);
-    return b ? ('linear-gradient(120deg,' + b.c1 + ',' + b.c2 + ')') : NAVY_GRAD;
+    if (!b) return HOUSE_ON_NAVY;
+    /* A recorded shade is used as recorded, and still CHECKED — a colour is
+       never trusted just because a file states it. Only where none was
+       recorded is one derived from c1. */
+    return safe(b.accentOnNavy, NAVY_RGB, MIN_ON_NAVY) ||
+           derive(b.c1, NAVY_RGB, MIN_ON_NAVY, +1) || HOUSE_ON_NAVY;
   }
-  function logoImg(s, px) {
-    var d = deepFor(s);
-    var src = (d && d.domain) ? ('https://logo.clearbit.com/' + d.domain) : (s.image || '');
-    var _w = String(s.name || '').replace(/^the\s+/i, '').split(/[\s\-—,\.]+/).filter(Boolean);
-    var inits = esc((/^[A-Za-z0-9]{2,4}$/.test(_w[0] || '') ? _w[0] : _w.slice(0, 2).map(function (w) { return w[0]; }).join('')).toUpperCase());
-    var fb = '<div style="display:none;width:' + px + 'px;height:' + px + 'px;border-radius:12px;background:#efe9db;align-items:center;justify-content:center;font-weight:700;color:' + G + ';font-size:' + Math.round(px / 3.4) + 'px;">' + inits + '</div>';
-    if (!src) {
-      return fb.replace('display:none', 'display:flex');
-    }
-    return '<img src="' + esc(src) + '" alt="" referrerpolicy="no-referrer" loading="lazy" style="max-width:' + (px - 14) + 'px;max-height:' + (px - 14) + 'px;object-fit:contain;" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';">' + fb;
+  function accentOnIvory(s) {
+    var b = brandOf(s);
+    if (!b) return HOUSE_ON_IVORY;
+    return safe(b.accentOnIvory, IVORY_RGB, MIN_ON_IVORY) ||
+           derive(b.c2 || b.c1, IVORY_RGB, MIN_ON_IVORY, -1) || HOUSE_ON_IVORY;
+  }
+  /* Both custom properties in one string, for the report root. */
+  function accentVars(s) {
+    return '--mcr-accent:' + accentOnNavy(s) + ';--mcr-accent-ink:' + accentOnIvory(s) + ';';
   }
 
-  function heroBand(s) {
+  /* The identity tile.
+
+     WHERE THE MARK COMES FROM. The third-party logo service this function used
+     to call, live, while a member watched, no longer resolves. The call could
+     not succeed for any company, every report fell through to the monogram, and
+     nobody found out until somebody read this file on 18/08/2026.
+
+     THE HOST NAMES ARE DELIBERATELY NOT WRITTEN ANYWHERE IN THIS FILE, not even
+     in a comment. verify.py scans the whole source for them as bare strings,
+     which is a blunt check that cannot be argued with — and a check that has to
+     tell a comment from a call is a check with a hole in it. So marks are
+     now fetched ONCE at build time from each company's own website by
+     scripts/refresh_logos.py, stored in this repository under assets/logos/,
+     and served from the same host as every other file this page reads. NO
+     THIRD-PARTY LOGO SERVICE IS CALLED FROM THIS FILE, and none may be added.
+
+     THE MONOGRAM IS NOT AN APOLOGY. Most companies in this index have no
+     findable mark, and that is the normal case rather than the failure case —
+     so the monogram is drawn as a finished thing: a navy plate with the
+     company's initials in Light Gold, which is the house lockup. A member
+     looking at a monogram report should not be able to tell that anything is
+     missing, because nothing is. */
+  function logoImg(s, px) {
+    var _w = String(s.name || '').replace(/^the\s+/i, '').split(/[\s\-—,\.]+/).filter(Boolean);
+    var inits = esc((/^[A-Za-z0-9]{2,4}$/.test(_w[0] || '') ? _w[0] : _w.slice(0, 2).map(function (w) { return w[0]; }).join('')).toUpperCase());
+    var mono = 'width:100%;height:100%;border-radius:inherit;background:linear-gradient(150deg,#14304F,#0B1C33);' +
+      'align-items:center;justify-content:center;font-weight:800;letter-spacing:.5px;color:#E0BE8E;' +
+      'font-size:' + Math.max(12, Math.round(px / (inits.length > 2 ? 4.2 : 3.1))) + 'px;' +
+      '-webkit-print-color-adjust:exact;print-color-adjust:exact;';
+    var fb = '<div style="display:none;' + mono + '">' + inits + '</div>';
+    var swap = "this.style.display='none';this.nextElementSibling.style.display='flex';";
+
+    /* 1. The self-hosted mark. Served from this repo, so it cannot rot without
+          a commit, and it was already proved to clear the size floor when it
+          was fetched. `onerror` still falls to the monogram: a file deleted
+          from the repo must degrade to the house lockup, never to a broken
+          image icon on a paid page. */
+    var l = LOGO[s.name];
+    if (l && l.file) {
+      return '<img src="' + esc(BASE + l.file) + '" alt="" loading="lazy" ' +
+        'style="max-width:' + (px - 14) + 'px;max-height:' + (px - 14) + 'px;object-fit:contain;" ' +
+        'onerror="' + swap + '">' + fb;
+    }
+
+    /* 2. The legacy `image` field. 13 of its 15 values point at a favicon
+          SERVICE — a 16px browser-tab glyph, and where the service holds
+          nothing it serves its own grey placeholder arrow, which reads as a
+          broken report. Those are not migrated and are not drawn: a favicon
+          endpoint is treated as no logo at all. */
+    var favicon = /(?:^|\/\/)(?:icons?\.|[^\/]*\/s2\/favicons)|favicons?\b/i.test(String(s.image || ''));
+    if (!s.image || favicon) {
+      return '<div style="display:flex;' + mono + '">' + inits + '</div>';
+    }
+    return '<img src="' + esc(s.image) + '" alt="" referrerpolicy="no-referrer" loading="lazy" ' +
+      'style="max-width:' + (px - 14) + 'px;max-height:' + (px - 14) + 'px;object-fit:contain;" ' +
+      'onerror="' + swap + '" onload="if(this.naturalWidth&lt;24){' + swap + '}">' + fb;
+  }
+
+  /* The report header. It is a masthead, not a banner: the Hub's own name and
+     the document type first, then the company, then the dates the report was
+     built from. A member printing this and taking it into an interview needs
+     to be able to see, at a glance, what it is and how current it is.
+
+     The ground is ALWAYS the house navy gradient. The company's own colour,
+     where one was sampled, is the 5px edge along the top and nothing else —
+     so the 86% of companies with no sampled colour get the intended design
+     rather than something that reads as a missing asset. */
+  function masthead(s, ctx, stamp) {
     var d = deepFor(s);
-    var links = (d && d.links) || [];
-    return '<div style="background:' + brandGrad(s) + ';border-radius:11px 11px 0 0;padding:30px 26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;-webkit-print-color-adjust:exact;print-color-adjust:exact;">' +
-      '<span style="width:72px;height:72px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(0,0,0,.18);">' + logoImg(s, 72) + '</span>' +
-      '<div style="min-width:220px;"><div style="color:#fff;font-size:25px;font-weight:700;letter-spacing:.3px;line-height:1.2;">' + esc(s.name) + '</div>' +
-      (d && d.tagline ? '<div style="color:rgba(255,255,255,.88);font-size:12.5px;font-weight:600;margin-top:5px;">' + esc(d.tagline) + '</div>' : '') +
+    /* Links come from two places: the deep-dive record (10 suppliers) and the
+       supplier record itself (380 suppliers, 505 links). Only the first was
+       ever rendered, so a company's own website and Companies House entry sat
+       in the data and never reached the page. Merge both, deep dive first,
+       de-duplicated on the URL. */
+    var links = [];
+    var seenLink = {};
+    [].concat((d && d.links) || [], s.links || []).forEach(function (l) {
+      if (!l || !l.url || !l.label) return;
+      var key = String(l.url).replace(/\/+$/, '').toLowerCase();
+      if (seenLink[key]) return;
+      seenLink[key] = 1;
+      links.push(l);
+    });
+    var meta = [];
+    if (stamp) meta.push('Prepared <b>' + esc(stamp) + '</b>');
+    if (ctx && ctx.asOf) meta.push('supplier index as of <b>' + esc(dateUK(ctx.asOf)) + '</b>');
+    if (ctx && ctx.fwDoc && ctx.fwDoc.dataAsOf) meta.push('framework briefs captured <b>' + esc(dateUK(ctx.fwDoc.dataAsOf)) + '</b>');
+    if (ctx && ctx.fin && ctx.fin.dataAsOf) meta.push('Companies House read <b>' + esc(dateUK(ctx.fin.dataAsOf)) + '</b>');
+
+    return '<header class="mcr-mast">' +
+      '<div class="mcr-mast-row">' +
+        '<span class="mcr-logo">' + logoImg(s, 74) + '</span>' +
+        '<div style="min-width:210px;">' +
+          '<div class="mcr-kicker">Medical Sales Intelligence Hub &middot; Company intelligence report</div>' +
+          '<h2 class="mcr-h1">' + esc(s.name) + '</h2>' +
+          (d && d.tagline ? '<div class="mcr-tagline">' + esc(d.tagline) + '</div>' : '') +
+        '</div>' +
+        (links.length ? '<span class="mcr-links">' + links.map(function (l) {
+          return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + '</a>';
+        }).join('') + '</span>' : '') +
       '</div>' +
-      (links.length ? '<span style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;">' + links.map(function (l) {
-        return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener" style="font-size:11px;font-weight:700;letter-spacing:.4px;padding:8px 15px;border-radius:99px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;white-space:nowrap;text-decoration:none;">' + esc(l.label) + '</a>';
-      }).join('') + '</span>' : '') +
+      (meta.length ? '<div class="mcr-mast-meta">' + meta.join(' &middot; ') +
+        '<br>Every derived panel prints the rule it was computed under. Every empty panel says what is missing.</div>' : '') +
+      '</header>';
+  }
+
+  /* A part divider. The report runs long, and an unbroken run of cards gives a
+     reader no way to find their place — so the panels are grouped, and each
+     group says in one line what it is answering. Structure only: no group
+     asserts anything the panels beneath it do not already carry. */
+  function part(n, title, subtitle) {
+    return '<div class="mcr-part">' +
+      '<div class="mcr-part-n">Part ' + esc(n) + '</div>' +
+      '<div class="mcr-part-t">' + title + '</div>' +
+      (subtitle ? '<div class="mcr-part-s">' + subtitle + '</div>' : '') +
       '</div>';
   }
 
   function ledeBox(s) {
     var d = deepFor(s);
     if (!(d && d.lede)) return '';
-    var c1 = (brandOf(s) || {}).c1 || '#0B1C33';
-    return '<div style="font-size:14.5px;line-height:1.7;background:#fff;border:1px solid ' + LINE + ';border-left:4px solid ' + c1 + ';border-radius:10px;padding:18px 22px;margin:16px 0 0;">' + esc(d.lede) + '</div>';
+    return '<div class="mcr-card" style="font-size:15px;line-height:1.72;color:' + INK +
+      ';border-left:4px solid var(--mcr-accent-ink);">' + esc(d.lede) + '</div>';
   }
 
   function statGrid(s) {
     var d = deepFor(s);
     if (!(d && d.stats && d.stats.length)) return '';
-    return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin:14px 0 0;">' +
+    return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin:2px 0 0;">' +
       d.stats.map(function (st) {
-        return '<div style="background:#fff;border:1px solid ' + LINE + ';border-top:3px solid ' + G + ';border-radius:10px;padding:14px 14px;">' +
-          '<div style="font-size:18px;font-weight:800;color:' + INK + ';line-height:1.2;">' + esc(st.v) + '</div>' +
-          '<div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:' + DIM + ';font-weight:700;margin-top:4px;">' + esc(st.l) + '</div>' +
-          (st.n ? '<div style="font-size:10.5px;color:' + DIM + ';margin-top:3px;">' + esc(st.n) + '</div>' : '') +
+        return '<div style="background:' + SOFT + ';border:1px solid ' + LINE + ';border-top:3px solid var(--mcr-accent-ink);border-radius:10px;padding:13px 14px;-webkit-print-color-adjust:exact;print-color-adjust:exact;">' +
+          '<div style="font-size:21px;font-weight:800;color:' + INK + ';line-height:1.15;letter-spacing:-.3px;">' + esc(st.v) + '</div>' +
+          '<div style="font-size:9.5px;text-transform:uppercase;letter-spacing:1.3px;color:' + DIM + ';font-weight:700;margin-top:5px;">' + esc(st.l) + '</div>' +
+          (st.n ? '<div style="font-size:10.5px;color:' + DIM + ';margin-top:4px;line-height:1.5;">' + esc(st.n) + '</div>' : '') +
           '</div>';
       }).join('') + '</div>';
   }
@@ -1105,11 +1531,9 @@
         '<div style="font-size:9.5px;color:#b8b0a0;">' + esc(yr) + '</div></div>';
     }).join('');
 
-    var body = '<div style="background:#fff;border:1px solid ' + LINE + ';border-radius:10px;padding:16px 16px 12px;">' +
-      '<div style="font-size:12px;font-weight:700;color:' + INK + ';margin-bottom:10px;">' + esc(se.label) + ' <span style="color:' + DIM + ';font-weight:600;">(' + esc(se.currency) + esc(se.unit) + ')</span></div>' +
-      '<div style="display:flex;align-items:flex-end;gap:6px;height:' + H + 'px;border-bottom:2px solid ' + LINE + ';overflow-x:auto;overflow-y:visible;padding-top:4px;">' + cols + '</div>' +
-      '<div style="font-size:10.5px;color:' + DIM + ';margin-top:8px;line-height:1.55;">Solid bars are figures read from ' + esc(se.source) + '. Dashed slots are years not yet extracted — an empty slot is unread, never zero. ' + esc(se.axisNote || '') + (se.pending ? ' ' + esc(se.pending) : '') + '</div>' +
-      '</div>';
+    var body = '<div style="font-size:12px;font-weight:700;color:' + INK + ';margin-bottom:12px;">' + esc(se.label) + ' <span style="color:' + DIM + ';font-weight:600;">(' + esc(se.currency) + esc(se.unit) + ')</span></div>' +
+      '<div class="mcr-scroll" style="display:flex;align-items:flex-end;gap:6px;height:' + H + 'px;border-bottom:2px solid ' + LINE + ';overflow-y:visible;padding-top:4px;">' + cols + '</div>' +
+      srcLine('Solid bars are figures read from ' + esc(se.source) + '. Dashed slots are years not yet extracted — an empty slot is unread, never zero. ' + esc(se.axisNote || '') + (se.pending ? ' ' + esc(se.pending) : ''));
 
     if (g.prose && g.prose.length) {
       body += '<div style="font-size:13.5px;line-height:1.7;color:#37485a;margin-top:12px;">' +
@@ -1121,7 +1545,7 @@
   function ownershipBlock(s) {
     var d = deepFor(s);
     if (!(d && d.ownership && d.ownership.length)) return '';
-    return sec('Structure &amp; ownership', '<div style="background:#fff;border:1px solid ' + LINE + ';border-radius:10px;padding:16px 20px;font-size:13.5px;line-height:1.7;color:#37485a;">' +
+    return sec('Structure &amp; ownership', '<div style="font-size:13.5px;line-height:1.72;color:#37485a;">' +
       d.ownership.map(function (p) { return '<p style="margin:0 0 10px;">' + esc(p) + '</p>'; }).join('') + '</div>');
   }
 
@@ -1131,27 +1555,34 @@
      recorded speciality. */
   function divisionCards(s, ctx) {
     var deep = deepRangeFor(s, ctx.prodFile);
-    var grad = brandGrad(s);
+    /* Card headers used to be a solid slab of the company's colour, repeated
+       down the grid. On the 86% with no sampled colour that was a wall of
+       navy; on the rest it swamped the page. The colour is now a 3px top edge
+       and the type sits on white, which reads the same for both. */
+    var TOP = 'border-top:3px solid var(--mcr-accent-ink);';
+    var CARD = 'background:#fff;border:1px solid ' + LINE + ';' + TOP +
+      'border-radius:11px;padding:13px 15px;box-shadow:0 1px 2px rgba(29,39,51,.05);-webkit-print-color-adjust:exact;print-color-adjust:exact;';
+    var GRID = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(212px,1fr));gap:12px;';
     var cards = '';
     if (deep && deep.divisions && deep.divisions.length) {
       cards = deep.divisions.map(function (dv) {
-        return '<div style="background:#fff;border:1px solid ' + LINE + ';border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(29,39,51,.06);">' +
-          '<div style="background:' + grad + ';padding:12px 16px;color:#fff;font-size:13.5px;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact;">' + esc(dv.name) + '</div>' +
-          '<div style="padding:12px 16px;font-size:12.5px;color:' + DIM + ';line-height:1.6;">' + dv.products + ' product(s) in the verified range' +
+        return '<div style="' + CARD + '">' +
+          '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + esc(dv.name) + '</div>' +
+          '<div style="margin-top:7px;font-size:12px;color:' + DIM + ';line-height:1.6;">' + dv.products + ' product(s) in the verified range' +
           (dv.specialities && dv.specialities.length ? '<br>Specialities: ' + dv.specialities.map(esc).join(', ') : '') +
           '</div></div>';
       }).join('');
-      return sec('Divisions &amp; specialities', '<div style="font-size:11.5px;color:' + DIM + ';margin:0 0 10px;">The company’s own division structure, from the full crawl of its site; product counts come from the verified range at the bottom of this report.</div>' +
-        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">' + cards + '</div>');
+      return sec('Divisions &amp; specialities', '<div style="font-size:11.5px;color:' + DIM + ';margin:0 0 11px;line-height:1.6;">The company’s own division structure, from the full crawl of its site; product counts come from the verified range at the bottom of this report.</div>' +
+        '<div style="' + GRID + '">' + cards + '</div>');
     }
     if (s.specialities && s.specialities.length) {
       cards = s.specialities.map(function (sp) {
-        return '<div style="background:#fff;border:1px solid ' + LINE + ';border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(29,39,51,.06);">' +
-          '<div style="background:' + grad + ';padding:12px 16px;color:#fff;font-size:13.5px;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact;">' + esc(sp) + '</div>' +
-          '<div style="padding:10px 16px;font-size:12px;color:' + DIM + ';">Recorded speciality · division-level product counts arrive with the full site crawl.</div>' +
+        return '<div style="' + CARD + '">' +
+          '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + esc(sp) + '</div>' +
+          '<div style="margin-top:7px;font-size:12px;color:' + DIM + ';line-height:1.6;">Recorded speciality · division-level product counts arrive with the full site crawl.</div>' +
           '</div>';
       }).join('');
-      return sec('Divisions &amp; specialities', '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">' + cards + '</div>');
+      return sec('Divisions &amp; specialities', '<div style="' + GRID + '">' + cards + '</div>');
     }
     return sec('Divisions &amp; specialities', gap('No speciality recorded for this company yet.'));
   }
@@ -1176,10 +1607,9 @@
   function deepPress(s) {
     var d = deepFor(s);
     if (!(d && d.press && d.press.length)) return '';
-    var c1 = (brandOf(s) || {}).c1 || G;
     return d.press.map(function (n) {
-      return '<div style="background:#fff;border:1px solid ' + LINE + ';border-radius:10px;padding:13px 17px;margin:0 0 10px;' + (n.flagged ? 'border-left:4px solid ' + c1 + ';' : '') + '">' +
-        '<div style="font-size:10px;font-weight:700;letter-spacing:.6px;color:' + c1 + ';text-transform:uppercase;margin-bottom:4px;">' + esc(n.date) + '</div>' +
+      return '<div style="border-bottom:1px solid #f0ece3;padding:11px 0;' + (n.flagged ? 'border-left:3px solid var(--mcr-accent-ink);padding-left:12px;' : '') + '">' +
+        '<div style="font-size:10px;font-weight:700;letter-spacing:1.2px;color:' + G + ';text-transform:uppercase;margin-bottom:5px;">' + esc(n.date) + '</div>' +
         '<div style="font-size:13px;line-height:1.6;color:#37485a;">' + esc(n.text) + '</div></div>';
     }).join('');
   }
@@ -1370,6 +1800,8 @@
     h += ledeBox(sub);
 
     /* -- 1 · Company information ---------------------------------------- */
+    h += part('1', 'The company',
+      'Who they are, what the public register holds on them, and what the filed accounts show. Everything here is read from a source and linked to it.');
     var info = statGrid(sub);
     if (sub.note) {
       info += '<div style="font-size:13.5px;color:#37485a;line-height:1.6;margin:14px 0 0;">' + esc(sub.note) + '</div>';
@@ -1385,16 +1817,16 @@
     h += growthChart(sub, ctx);
 
     /* -- 3 · Specialities / divisions as cards -------------------------- */
+    h += part('2', 'What they sell, and how it reaches the NHS',
+      'Clinical areas, NHS Supply Chain framework positions read from the buying organisation’s own contract launch briefs, and awards named on statutory notices.');
     h += divisionCards(sub, ctx);
     h += frameworks(sub, ctx);
     h += panelAwards(sub, ctx);
     h += repsWatch(sub);
 
     /* -- 4 · Competitors ------------------------------------------------ */
-    h += '<div style="margin:20px 0 0;padding-top:14px;border-top:2px solid ' + LINE + ';">' +
-      '<div style="font-size:11px;letter-spacing:2px;font-weight:700;color:' + G + ';">DERIVED — READ THE RULE BEFORE YOU QUOTE IT</div>' +
-      '<div style="font-size:12.5px;color:' + DIM + ';margin-top:4px;line-height:1.55;">The panels below are computed by this page, not read from a source. Each prints the rule it was computed under and refuses to render on thin evidence. None of them ranks anyone, and none of them prints a market-share figure — the filing profile shows which statutory regime each confirmed supplier files under, which is the sourceable part of "how big are they".</div>' +
-      '</div>';
+    h += part('3', 'The field around them <span style="font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:' + G + ';vertical-align:3px;">&nbsp;· derived</span>',
+      'The panels in this part are <b>computed by this page</b>, not read from a source. Each prints the rule it was computed under and refuses to render on thin evidence. None ranks anyone, and none prints a market-share figure — the filing profile shows which statutory regime each confirmed supplier files under, which is the sourceable part of “how big are they”. Read the rule before you quote any of it.');
     var co = coListing(sub, ctx);
     h += panelCoListed(sub, ctx, co);
     h += panelSameSpeciality(sub, ctx, co);
@@ -1405,6 +1837,8 @@
     }
 
     /* -- 5 · News, alerts, people --------------------------------------- */
+    h += part('4', 'Signals and people',
+      'Press that clears the two-source bar, current alerts and recalls, the statutory officers register, and what it is like to work there.');
     var newsHtml = deepPress(sub);
     var pr = press(sub);
     h += newsHtml ? sec('In the press', newsHtml) + pr : pr;
@@ -1417,30 +1851,33 @@
     h += workingThere(sub);
 
     /* -- 7 · The listings, deliberately last ---------------------------- */
+    h += part('5', 'The range in full',
+      'The long listing, deliberately last: catalogue-verified lines, items confirmed off catalogue, and the full own-site range where a crawl exists.');
     h += productListing(sub, ctx);
 
     return h;
   }
 
   function report(sub, ctx) {
-    var h = '<div style="border:1px solid ' + LINE + ';border-radius:11px;background:#fdfcf9;overflow:hidden;">';
-    h += heroBand(sub);
-    h += '<div style="padding:6px 18px 16px;">';
+    var h = '<article class="mcr-report" style="' + accentVars(sub) + '">';
+    h += masthead(sub, ctx, null);
+    h += '<div class="mcr-body">';
 
     /* Stage 5 entry point. The pack is the same composer rendered for
        print — it adds no claims, so the button lives on the card. */
-    h += '<div style="display:flex;justify-content:flex-end;margin:10px 0 0;">' +
-      '<button id="mcrPack" style="cursor:pointer;background:linear-gradient(180deg,#D4AF7A,#B8935A);color:#0B1C33;border:0;border-radius:99px;padding:8px 16px;font-size:12.5px;font-weight:700;letter-spacing:.04em;">Download / print this report</button></div>';
+    h += '<div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;margin:14px 0 0;">' +
+      '<span style="font-size:11.5px;color:' + DIM + ';">Take it into the meeting:</span>' +
+      '<button id="mcrPack" class="mcr-btn">Download / print this report</button></div>';
 
     h += composeSections(sub, ctx);
 
-    h += '<div style="margin-top:16px;padding-top:10px;border-top:1px solid ' + LINE + ';font-size:11px;color:' + DIM + ';line-height:1.7;">' +
-      'Related Hub pages: ' +
-      '<a href="/medical-sales-hub/frameworks/" style="color:' + G + ';">Frameworks</a> · ' +
-      '<a href="/medical-sales-hub/awards/" style="color:' + G + ';">Award Tracker</a> · ' +
-      '<a href="/medical-sales-hub/" style="color:' + G + ';">Live Desk (alerts)</a> · ' +
-      '<a href="/medical-sales-hub/news/" style="color:' + G + ';">News</a></div>';
-    h += '</div></div>';
+    h += '<div class="mcr-src" style="margin-top:22px;">' +
+      '<b style="color:' + INK + ';font-weight:700;">Related Hub pages</b><br>' +
+      '<a href="/medical-sales-hub/frameworks/">Frameworks</a> &middot; ' +
+      '<a href="/medical-sales-hub/awards/">Award Tracker</a> &middot; ' +
+      '<a href="/medical-sales-hub/">Live Desk (alerts)</a> &middot; ' +
+      '<a href="/medical-sales-hub/news/">News</a></div>';
+    h += '</div></article>';
     return h;
   }
 
@@ -1486,25 +1923,35 @@
     var stamp = ('0' + today.getDate()).slice(-2) + '/' + ('0' + (today.getMonth() + 1)).slice(-2) + '/' + today.getFullYear();
     var d = deepFor(sub);
     var inner =
-      heroBand(sub) +
-      '<div style="font-size:11px;color:' + DIM + ';margin:10px 0 2px;">MEDICAL SALES INTELLIGENCE HUB · COMPANY INTELLIGENCE REPORT · Prepared ' + stamp +
-        ' · framework data as of ' + esc(ctx.asOf || 'not recorded') +
-        (ctx.fin && ctx.fin.dataAsOf ? ' · Companies House read ' + esc(ctx.fin.dataAsOf) : '') +
-        ' · every derived panel carries the rule it was computed under</div>' +
+      '<article class="mcr-report" style="' + accentVars(sub) + '">' +
+      masthead(sub, ctx, stamp) +
+      '<div class="mcr-body">' +
       composeSections(sub, ctx) +
+      part('6', 'The range by speciality', 'The verified range, split the way the company splits it. Company-level panels above are not re-cut per speciality, because that attribution is not sourced.') +
       sec('The range by speciality', packSpecialitySections(sub, ctx)) +
-      '<div style="margin-top:18px;padding-top:10px;border-top:1px solid ' + LINE + ';font-size:10.5px;color:' + DIM + ';line-height:1.7;">' +
+      '<div class="mcr-src" style="margin-top:22px;">' +
         'Prepared by the Medical Sales Intelligence Hub (medsalesintelligencehub.co.uk) for the member who generated it. ' +
         'Sources are linked panel by panel; derived panels print their derivation. ' +
         (d && d.sources ? 'Deep-dive sources: ' + esc(d.sources) + ' ' : '') +
-        'Company logos are served via Clearbit’s logo service and remain the property of their respective owners, shown for identification only. ' +
-        '© Elevate and Thrive Ltd ' + today.getFullYear() + '. Not for redistribution.</div>';
+        'Company marks shown are the property of their respective owners and appear for identification only. ' +
+        '© Elevate and Thrive Ltd ' + today.getFullYear() + '. Not for redistribution.</div>' +
+      '</div></article>';
 
-    return '<!doctype html><html><head><meta charset="utf-8"><title>' + esc(sub.name) + ' — Company Intelligence Report</title>' +
-      '<style>body{font-family:Inter,-apple-system,Segoe UI,sans-serif;color:' + INK + ';margin:24px auto;max-width:880px;padding:0 18px;background:#f7f4ee;}' +
-      'a{color:' + G + ';}@media print{body{margin:0;max-width:none;background:#fff;}button{display:none;}}' +
-      '*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}</style></head><body>' +
-      '<div style="text-align:right;margin:0 0 10px;"><button onclick="window.print()" style="cursor:pointer;background:linear-gradient(180deg,#D4AF7A,#B8935A);color:#0B1C33;border:0;border-radius:99px;padding:8px 16px;font-size:12.5px;font-weight:700;">Print / save as PDF</button></div>' +
+    /* The pack is the same markup and the same stylesheet as the on-page
+       card — it must be, or the printed document and the page would drift.
+       The page wrapper below is all that differs: a printable measure, a
+       white ground when printing, and the print button that removes itself. */
+    return '<!doctype html><html lang="en-GB"><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<title>' + esc(sub.name) + ' — Company Intelligence Report</title>' +
+      '<style>' + STYLE +
+      'body{margin:26px auto;max-width:900px;padding:0 18px;background:#f2eee5;}' +
+      '@media print{body{margin:0;max-width:none;padding:0;background:#fff;}' +
+      '@page{margin:14mm;}}' +
+      '*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}</style></head>' +
+      '<body class="mcr">' +
+      '<div style="text-align:right;margin:0 0 12px;">' +
+      '<button onclick="window.print()" class="mcr-btn">Print / save as PDF</button></div>' +
       inner + '</body></html>';
   }
 
@@ -1517,29 +1964,38 @@
   }
 
   function shell() {
+    injectStyle();
     MOUNT.innerHTML = '' +
-      '<div style="font-family:Inter,-apple-system,Segoe UI,sans-serif;margin:0;">' +
-        '<div style="padding:2px 0 6px;">' +
-          '<div style="font-size:11.5px;letter-spacing:2px;font-weight:700;color:' + G + ';">COMPANY REPORT</div>' +
-          '<p style="margin:5px 0 12px;font-size:13.5px;color:' + DIM + ';line-height:1.6;">Pick a speciality, then a company — get who they are, what they sell, the frameworks they hold, live alerts, corroborated press, and who else sits on those frameworks. <span id="mcrCount"></span></p>' +
+      '<div class="mcr">' +
+        '<div style="padding:2px 0 8px;">' +
+          '<div style="font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;color:' + G + ';">Company intelligence report</div>' +
+          '<p style="margin:6px 0 14px;font-size:13.5px;color:' + DIM + ';line-height:1.65;max-width:62em;">Pick a speciality, then a company — get who they are, what they sell, the frameworks they hold, live alerts, corroborated press, and who else sits on those frameworks. <span id="mcrCount"></span></p>' +
           /* SPECIALITY FIRST (Lou, 11/08/2026). The box used to offer every
              indexed company at once. Choosing the clinical area first cuts the
              suggestions to the firms recorded in it — through the canonical
              speciality map, so this filters on the same reconciled ids the
              report's own panels use rather than on raw strings that drifted. */
-          '<label style="display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:' + DIM + ';margin:0 0 4px;">1 · Speciality</label>' +
-          '<select id="mcrSpec" style="width:100%;max-width:520px;padding:10px 15px;border-radius:99px;border:1px solid ' + LINE + ';font:inherit;font-size:14px;color:' + INK + ';background:#ffffff;outline:none;margin:0 0 11px;"></select>' +
-          '<label style="display:block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:' + DIM + ';margin:0 0 4px;">2 · Company <span id="mcrScope" style="font-weight:400;text-transform:none;letter-spacing:0;color:' + DIM + ';"></span></label>' +
-          '<input id="mcrInput" list="mcrList" autocomplete="off" placeholder="e.g. GBUK Group, BD, Vygon, Coloplast…" ' +
-            'style="width:100%;max-width:520px;padding:11px 16px;border-radius:99px;border:1px solid ' + LINE + ';font:inherit;font-size:15px;color:' + INK + ';background:#ffffff;-webkit-text-fill-color:' + INK + ';caret-color:' + INK + ';outline:none;">' +
+          '<label class="mcr-lab" for="mcrSpec">1 &middot; Speciality</label>' +
+          '<select id="mcrSpec" class="mcr-field" style="margin:0 0 13px;"></select>' +
+          '<label class="mcr-lab" for="mcrInput">2 &middot; Company <span id="mcrScope" style="font-weight:400;text-transform:none;letter-spacing:0;color:' + DIM + ';"></span></label>' +
+          '<input id="mcrInput" class="mcr-field" list="mcrList" autocomplete="off" placeholder="e.g. GBUK Group, BD, Vygon, Coloplast…">' +
           '<datalist id="mcrList"></datalist>' +
-          '<div id="mcrChips" style="margin:10px 0 2px;display:flex;flex-wrap:wrap;gap:6px;"></div>' +
+          '<div id="mcrChips" style="margin:11px 0 2px;display:flex;flex-wrap:wrap;gap:7px;"></div>' +
         '</div>' +
-        '<div id="mcrResult" style="padding:2px 0 18px;"></div>' +
+        '<div id="mcrResult" style="padding:4px 0 18px;"></div>' +
       '</div>';
   }
 
-  function boot(index, seed, specMap, prodFile, fin, cache, fwDoc, awards) {
+  function boot(index, seed, specMap, prodFile, fin, cache, fwDoc, awards, logoDoc) {
+    /* Brand marks, by company name. Held at module scope rather than passed
+       through ctx because logoImg() and brandOf() are called from the print
+       pack as well as the on-page card, and threading a ninth argument through
+       both would be the kind of change that gets half done. */
+    LOGO = {};
+    ((logoDoc && logoDoc.logos) || []).forEach(function (r) {
+      if (r && r.name && r.file) LOGO[r.name] = r;
+    });
+
     var all = mergeSuppliers(index, seed);
     var byName = {};
     all.forEach(function (s) { byName[s.name] = s; });
@@ -1625,7 +2081,7 @@
         ? p.slice(0, 5).map(function (s) { return s.name; })
         : ['GBUK Group', 'BD — Becton, Dickinson', 'Vygon (UK)', 'Coloplast', 'Convatec'].filter(function (q) { return !!byName[q]; });
       chips.innerHTML = quick.map(function (q) {
-        return '<button data-q="' + esc(q) + '" style="cursor:pointer;background:' + SOFT + ';border:1px solid ' + LINE + ';border-radius:99px;padding:5px 12px;font-size:12px;color:' + INK + ';">' + esc(q.split(' — ')[0]) + '</button>';
+        return '<button class="mcr-quick" data-q="' + esc(q) + '">' + esc(q.split(' — ')[0]) + '</button>';
       }).join('');
       /* Say what the filter is hiding. Companies with no speciality recorded
          drop out of every scoped list, and that is a gap in our tagging, not
@@ -1670,8 +2126,8 @@
     }
     function show(q) {
       var s = find(q);
-      var flag = (s && outOfScope) ? '<div style="margin:0 0 10px;padding:9px 13px;border-left:3px solid ' + G + ';background:' + SOFT +
-        ';border-radius:0 8px 8px 0;font-size:12.5px;color:' + INK + ';line-height:1.55;"><b>' + esc(s.name) +
+      var flag = (s && outOfScope) ? '<div style="margin:0 0 12px;padding:10px 14px;border-left:3px solid ' + G + ';background:' + SOFT +
+        ';border-radius:0 8px 8px 0;font-size:12.5px;color:' + INK + ';line-height:1.6;"><b>' + esc(s.name) +
         '</b> is not recorded under ' + esc(ctx.spec.label(specSel.value)) +
         ', so it is not in the list above. Its report is below in full.</div>' : '';
       result.innerHTML = s ? (flag + report(s, ctx)) :
@@ -1705,11 +2161,14 @@
   if (window.MSH_COMPANY_REPORT_DATA) {
     var P = window.MSH_COMPANY_REPORT_DATA;
     boot(P.index, P.seed, P.specMap, P.products, P.financials, P.nhssc, P.frameworks,
-         P.awards);
+         P.awards, P.logos);
     return;
   }
 
-  MOUNT.innerHTML = '<div style="font-family:Inter,-apple-system,Segoe UI,sans-serif;color:' + DIM + ';font-size:13px;padding:12px;">Loading company report…</div>';
+  injectStyle();
+  MOUNT.innerHTML = '<div class="mcr"><div class="mcr-card mcr-card--empty">' +
+    '<div class="mcr-card-t">Company intelligence report</div>' +
+    '<div class="mcr-note">Loading the index…</div></div></div>';
   // cache:'no-store' removed 17/08/2026 — the URLs already carry a daily CB,
   // so letting the browser reuse a same-day response is a feature, not a bug.
   Promise.all([
@@ -1720,9 +2179,12 @@
     fetch(FIN).then(function (r) { return r.json(); }).catch(function () { return null; }),
     fetch(NHSSC).then(function (r) { return r.json(); }).catch(function () { return null; }),
     fetch(FWDATA).then(function (r) { return r.json(); }).catch(function () { return null; }),
-    fetch(AWARDS).then(function (r) { return r.json(); }).catch(function () { return null; })
-  ]).then(function (res) { boot(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7]); })
+    fetch(AWARDS).then(function (r) { return r.json(); }).catch(function () { return null; }),
+    fetch(LOGOS).then(function (r) { return r.json(); }).catch(function () { return null; })
+  ]).then(function (res) { boot(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8]); })
     .catch(function () {
-      MOUNT.innerHTML = '<div style="font-family:Inter,-apple-system,Segoe UI,sans-serif;color:' + DIM + ';font-size:13px;padding:12px;">The company report is loading its data — if this persists, the index feed is temporarily unreachable. Nothing is missing from the report; the report has not loaded.</div>';
+      MOUNT.innerHTML = '<div class="mcr"><div class="mcr-card mcr-card--empty">' +
+        '<div class="mcr-card-t">Company intelligence report</div>' +
+        '<div class="mcr-note">The company report is loading its data — if this persists, the index feed is temporarily unreachable. Nothing is missing from the report; the report has not loaded.</div></div></div>';
     });
 })();

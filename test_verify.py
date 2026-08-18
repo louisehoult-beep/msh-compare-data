@@ -30,7 +30,7 @@ import atexit
 import concurrent.futures as cf
 import datetime
 import signal
-import json, os, re, shutil, subprocess, sys, tempfile
+import hashlib, json, os, re, shutil, subprocess, sys, tempfile
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 os.chdir(REPO)
@@ -1248,6 +1248,267 @@ CA_QUIET = [
 ]
 
 
+# ---------------------------------------------------------------------------
+# THE SUPPLIER PRESS GATE (data/company-press.json)
+# ---------------------------------------------------------------------------
+# The hazard this feature exists to survive is a live one, checked 18/08/2026:
+# "Jeenie Solutions" is a UK bariatric patient-handling supplier in Wetherby, and
+# "Jeenie" is a US remote-interpreting company whose coverage is full of patients
+# and healthcare. A name match plus a medical corroborator publishes the wrong
+# company's funding round under a Hub supplier's name. So the seed below carries
+# that exact pair of shapes, and the cases drive the real rule.
+CP_SEED = {"suppliers": [
+    {"name": "Jeenie Solutions",
+     "aliases": ["Jeenie Solutions", "Jeenie", "Jeenie Solutions Ltd", "jeenie.uk"],
+     "specialities": ["Patient handling"],
+     "products": ["SHAPE bariatric empathy suit", "Liftie modular flat-lift"]},
+    {"name": "Convatec", "aliases": ["Convatec", "ConvaTec Group plc"],
+     "specialities": ["Wound care", "Stoma care"], "products": []},
+]}
+
+
+def cp_today(offset=0):
+    return (datetime.date.today() + datetime.timedelta(days=offset)).isoformat()
+
+
+def cp_src(**over):
+    d = {"publisher": "MedTech Dive", "urlType": "publisher",
+         "url": "https://www.medtechdive.com/news/convatec-rd/802196/",
+         "redirectUrl": "https://news.google.com/rss/articles/CBMiABC"}
+    d.update(over)
+    return d
+
+
+def cp_item(**over):
+    d = {"headline": "Convatec plans $1B investment in R&D in the US and UK",
+         "date": cp_today(-30),
+         "summary": "Convatec said the UK medtech investment covers wound care sites.",
+         "sources": [cp_src(),
+                     cp_src(publisher="The Times",
+                            url="https://www.thetimes.com/business/article/convatec")],
+         "match": {"alias": "convatec", "aliasStrength": "distinctive",
+                   "sectorTerm": "medtech", "relevanceTerm": "uk"},
+         "verified": True, "autoDetected": True}
+    d.update(over)
+    return d
+
+
+def cp_doc(items=None, **over):
+    """A file that passes everything, so each case changes exactly one thing."""
+    import importlib
+    sys.path.insert(0, "scripts")
+    pm = importlib.import_module("press_match")
+    items = [cp_item()] if items is None else items
+    block = {"Convatec": {"lastChecked": cp_today(), "items": items},
+             "Jeenie Solutions": {"lastChecked": cp_today(), "items": []}}
+    nsrc = sum(len(i.get("sources") or []) for i in items)
+    doc = {
+        "dataAsOf": "18/08/2026",
+        "generated": cp_today(-1),
+        "source": "Google News RSS, one query per supplier, hl=en-GB&gl=GB.",
+        "matchRule": pm.RULE,
+        "corroborationRule": "Two distinct reputable publishers; PR wires never count.",
+        "rotationRule": "Oldest-checked first; noted suppliers every 14 days, the rest every 35.",
+        "linkRule": "Redirects are resolved to the publisher, or kept and marked as redirects.",
+        "emptyStateRule": "lastChecked with no items means checked and nothing met the bar.",
+        "rotation": {"dailyBudget": 80, "notedCycleDays": 14, "otherCycleDays": 35},
+        "coverage": {"complete": True, "suppliersNeverChecked": 0,
+                     "note": "Every supplier has been checked at least once."},
+        "counts": {"suppliers": 2, "suppliersWithItems": 1 if items else 0,
+                   "items": len(items), "sources": nsrc,
+                   "resolvedLinks": sum(1 for i in items for s in (i.get("sources") or [])
+                                        if s.get("urlType") == "publisher"),
+                   "redirectLinks": sum(1 for i in items for s in (i.get("sources") or [])
+                                        if s.get("urlType") != "publisher")},
+        "suppliers": block,
+    }
+    doc.update(over)
+    return doc
+
+
+CP_CASES = []
+
+
+def cp(name, doc, want):
+    CP_CASES.append((name, doc, want))
+
+
+# --- THE INCIDENT THIS WAS BUILT FOR --------------------------------------
+cp("the US translation company's funding round filed under Jeenie Solutions",
+   cp_doc(**{"suppliers": {
+       "Jeenie Solutions": {"lastChecked": cp_today(), "items": [cp_item(
+           headline="Remote Interpreting Platform Jeenie Valued at USD 34m in Series A",
+           summary="Jeenie connects patients with limited English proficiency to healthcare "
+                   "interpreters across the US.",
+           match={"alias": "jeenie", "aliasStrength": "distinctive",
+                  "sectorTerm": "healthcare", "relevanceTerm": "patients"},
+           sources=[cp_src(publisher="Slator", url="https://slator.com/jeenie-series-a/"),
+                    cp_src(publisher="MedCity News",
+                           url="https://medcitynews.com/jeenie-series-a/")])]},
+       "Convatec": {"lastChecked": cp_today(), "items": []}},
+       "counts": {"suppliers": 2, "suppliersWithItems": 1, "items": 1, "sources": 2,
+                  "resolvedLinks": 2, "redirectLinks": 0}}),
+   "re-applying the printed match rule")
+cp("a story matched on a bare surname the seed shares with nothing else, uncorroborated",
+   cp_doc([cp_item(headline="Jeenie named one of the fastest growing US firms",
+                   summary="The healthcare interpreting business ranked on the Inc. 5000 list.",
+                   match={"alias": "jeenie"},
+                   sources=[cp_src(publisher="MedCity News",
+                                   url="https://medcitynews.com/jeenie-inc5000/"),
+                            cp_src(publisher="Fierce Healthcare",
+                                   url="https://fiercehealthcare.com/jeenie")])],
+          **{"suppliers": {"Jeenie Solutions": {"lastChecked": cp_today(), "items": [cp_item(
+                 headline="Jeenie named one of the fastest growing US firms",
+                 summary="The healthcare interpreting business ranked on the Inc. 5000 list.",
+                 match={"alias": "jeenie"},
+                 sources=[cp_src(publisher="MedCity News",
+                                 url="https://medcitynews.com/jeenie-inc5000/"),
+                          cp_src(publisher="Fierce Healthcare",
+                                 url="https://fiercehealthcare.com/jeenie")])]},
+             "Convatec": {"lastChecked": cp_today(), "items": []}},
+             "counts": {"suppliers": 2, "suppliersWithItems": 1, "items": 1, "sources": 2,
+                        "resolvedLinks": 2, "redirectLinks": 0}}),
+   "re-applying the printed match rule")
+
+# --- the corroboration bar -------------------------------------------------
+cp("a story carried by only one publisher",
+   cp_doc([cp_item(sources=[cp_src()])]), "distinct publisher")
+cp("a story whose two sources are the same publisher twice",
+   cp_doc([cp_item(sources=[cp_src(), cp_src(url="https://www.medtechdive.com/news/other/")])]),
+   "distinct publisher")
+
+# --- links -----------------------------------------------------------------
+cp("a source with no URL at all",
+   cp_doc([cp_item(sources=[cp_src(url=""), cp_src(publisher="The Times",
+                                                   url="https://thetimes.com/x")])]),
+   "no usable URL")
+cp("a Google News redirect dressed up as the publisher's own article",
+   cp_doc([cp_item(sources=[cp_src(url="https://news.google.com/rss/articles/CBMiABC"),
+                            cp_src(publisher="The Times", url="https://thetimes.com/x")])]),
+   "still points at news.google.com")
+cp("a source filed under a urlType that does not exist",
+   cp_doc([cp_item(sources=[cp_src(urlType="resolved"),
+                            cp_src(publisher="The Times", url="https://thetimes.com/x")])]),
+   "not one of")
+cp("a source with no publisher name",
+   cp_doc([cp_item(sources=[cp_src(publisher=""),
+                            cp_src(publisher="The Times", url="https://thetimes.com/x"),
+                            cp_src(publisher="Reuters", url="https://reuters.com/x")])]),
+   "no publisher name")
+
+# --- dates and the empty state --------------------------------------------
+cp("a press item with no ISO date",
+   cp_doc([cp_item(date="")]), "no usable ISO date")
+cp("a press item dated in the future",
+   cp_doc([cp_item(date=cp_today(30))]), "has not happened yet")
+cp("a supplier block with no lastChecked, so an empty panel reads as broken",
+   cp_doc(**{"suppliers": {"Convatec": {"items": []},
+                           "Jeenie Solutions": {"lastChecked": cp_today(), "items": []}},
+             "counts": {"suppliers": 2, "suppliersWithItems": 0, "items": 0, "sources": 0,
+                        "resolvedLinks": 0, "redirectLinks": 0}}),
+   "no usable lastChecked")
+cp("a lastChecked stamp in the future",
+   cp_doc(**{"suppliers": {"Convatec": {"lastChecked": cp_today(9), "items": []},
+                           "Jeenie Solutions": {"lastChecked": cp_today(), "items": []}},
+             "counts": {"suppliers": 2, "suppliersWithItems": 0, "items": 0, "sources": 0,
+                        "resolvedLinks": 0, "redirectLinks": 0}}),
+   "has not happened yet")
+cp("a file generated tomorrow", cp_doc(generated=cp_today(5)), "has not happened yet")
+
+# --- the header/rows drift (the 14/08/2026 rebase defect) ------------------
+cp("a counts header from one generation over rows from another",
+   cp_doc(**{"counts": {"suppliers": 2, "suppliersWithItems": 1, "items": 9, "sources": 2,
+                        "resolvedLinks": 2, "redirectLinks": 0}}),
+   "but holds")
+cp("a resolvedLinks count that does not match the links beneath it",
+   cp_doc(**{"counts": {"suppliers": 2, "suppliersWithItems": 1, "items": 1, "sources": 2,
+                        "resolvedLinks": 7, "redirectLinks": 0}}),
+   "but holds")
+
+# --- the printed rule and the honest partial sweep -------------------------
+cp("a match rule edited in the file, away from the rule that ran",
+   cp_doc(matchRule="stories are matched on the company name"), "not the rule")
+cp("a file that publishes no rotation rule at all",
+   cp_doc(rotationRule=""), "carries no rotationRule")
+cp("a partial rotation that does not admit it is partial",
+   cp_doc(coverage={"complete": False, "suppliersNeverChecked": 900,
+                    "note": "Suppliers checked on rotation."}),
+   "does not say so")
+cp("press attached to a company no supplier record exists for",
+   cp_doc(**{"suppliers": {"Nonesuch Surgical": {"lastChecked": cp_today(), "items": []},
+                           "Convatec": {"lastChecked": cp_today(), "items": []},
+                           "Jeenie Solutions": {"lastChecked": cp_today(), "items": []}},
+             "counts": {"suppliers": 3, "suppliersWithItems": 0, "items": 0, "sources": 0,
+                        "resolvedLinks": 0, "redirectLinks": 0}}),
+   "does not resolve to any supplier record")
+cp("evidence shown to the reader that is not the evidence the rule used",
+   cp_doc([cp_item(match={"alias": "convatec group plc"})]),
+   "not the evidence that was used")
+
+CP_QUIET = [
+    ("a good file", cp_doc()),
+    # The honest empty state is the WHOLE POINT of lastChecked. It must never fail.
+    ("a supplier checked with nothing meeting the bar",
+     cp_doc(**{"suppliers": {"Convatec": {"lastChecked": cp_today(), "items": []},
+                             "Jeenie Solutions": {"lastChecked": cp_today(), "items": []}},
+               "counts": {"suppliers": 2, "suppliersWithItems": 0, "items": 0, "sources": 0,
+                          "resolvedLinks": 0, "redirectLinks": 0}})),
+    # A link that would not resolve is KEPT and MARKED. That is the honest state,
+    # not a failure — a gate that failed on it would push somebody to mislabel it.
+    ("an unresolved redirect, correctly marked as one",
+     cp_doc([cp_item(sources=[
+         cp_src(urlType="google-news-redirect",
+                url="https://news.google.com/rss/articles/CBMiABC"),
+         cp_src(publisher="The Times", url="https://thetimes.com/x")])],
+         **{"counts": {"suppliers": 2, "suppliersWithItems": 1, "items": 1, "sources": 2,
+                       "resolvedLinks": 1, "redirectLinks": 1}})),
+    ("a partial rotation that says so",
+     cp_doc(coverage={"complete": False, "suppliersNeverChecked": 900,
+                      "note": "INCOMPLETE: 900 of 1216 suppliers have not been reached yet."})),
+]
+
+
+def company_press_cases():
+    """The press gate, driven directly."""
+    import importlib
+    v = importlib.import_module("verify")
+    failures = 0
+
+    for name, doc, want in CP_CASES:
+        v.fails[:] = []
+        v.warns[:] = []
+        v.check_company_press(doc, CP_SEED)
+        text = " ".join(m for _, m in v.fails)
+        if not v.fails:
+            print("HOLE  %s — the gate PASSED this. It should not." % name); failures += 1
+        elif want.lower() not in text.lower():
+            print("WEAK  %s — rejected, but not for the expected reason (%r missing)"
+                  % (name, want)); failures += 1
+        else:
+            print("ok    %s" % name)
+
+    for name, doc in CP_QUIET:
+        v.fails[:] = []
+        v.warns[:] = []
+        v.check_company_press(doc, CP_SEED)
+        if v.fails:
+            print("HOLE  %s — FALSE FAIL: %s"
+                  % (name, " ".join(m for _, m in v.fails)[:220])); failures += 1
+        else:
+            print("ok    %s — no false failure" % name)
+
+    # The no-op. The feature is optional, so an absent file must gate nothing.
+    v.fails[:] = []
+    v.warns[:] = []
+    v.check_company_press(None, CP_SEED)
+    if v.fails:
+        print("HOLE  an absent company-press.json must gate nothing"); failures += 1
+    else:
+        print("ok    an absent company-press.json gates nothing")
+
+    return failures
+
+
 def company_awards_cases():
     """The award gate, driven directly."""
     import importlib
@@ -1634,6 +1895,235 @@ def _(tmp):
     return "Refusing a shrunken"
 
 
+
+
+# --------------------------------------------------------------------------
+# THE BRAND-MARK LAYER (data/company-logos.json + assets/logos/)
+# --------------------------------------------------------------------------
+# The fault this layer was built to fix was invisible: the report called
+# logo.clearbit.com live, that host stopped resolving, every report fell through
+# to the monogram, and nobody found out for weeks. Moving the marks into the repo
+# only helps if something reads them before they publish — so each case below is
+# a way that layer can be broken while still looking fine in a diff.
+#
+# These drive check_company_logos() directly against a throwaway root, because
+# the check reads real files off disk and the suite must never leave a half-
+# written PNG in assets/logos/ for the next person's verify.py to trip over.
+
+CL_MARK = b"not really a png, but the gate hashes bytes rather than decoding them"
+CL_SHA = hashlib.sha256(CL_MARK).hexdigest()
+
+# A colour that is proven on both grounds: #0858b8 lightened for navy, itself on
+# ivory. Every ratio below is the real recomputed figure, so the good document
+# has to pass unchanged.
+CL_GOOD_BRAND = {
+    "c1": "#0858b8",
+    "c2": "#0858b8",
+    "accentOnNavy": "#266cc1",
+    "accentOnIvory": "#0858b8",
+    "contrastOnNavy": 3.25,
+    "contrastOnIvory": 6.61,
+    "contrastWhiteOnC2": 6.78,
+    "source": "sampled from the pixels of the company's own brand mark at "
+              "https://example.invalid/logo.png on 2026-08-18",
+}
+
+
+def cl_root(tmp, files=(("acme-medical.png", CL_MARK),)):
+    """A throwaway repo root holding assets/logos/."""
+    root = tempfile.mkdtemp(dir=tmp)
+    d = os.path.join(root, "assets", "logos")
+    os.makedirs(d)
+    for name, blob in files:
+        with open(os.path.join(d, name), "wb") as f:
+            f.write(blob)
+    return root
+
+
+def cl_doc(**over):
+    row = {
+        "name": "Acme Medical",
+        "slug": "acme-medical",
+        "file": "assets/logos/acme-medical.png",
+        "source": "https://acme.invalid/apple-touch-icon.png",
+        "sourceWhy": "apple-touch-icon declared by the site",
+        "domain": "acme.invalid",
+        "format": "png",
+        "w": 180, "h": 180,
+        "fetched": "2026-08-18",
+        "sha256": CL_SHA,
+        "bytes": len(CL_MARK),
+        "brand": dict(CL_GOOD_BRAND),
+    }
+    row.update(over.pop("row", {}))
+    doc = {
+        "generated": "2026-08-18",
+        "rule": "Marks are fetched once at build time from the company's own website and "
+                "stored in this repository; nothing is fetched live by the page.",
+        "floorPx": 148,
+        "counts": {"logos": 1, "refusals": 1, "logosWithBrandColour": 1 if row.get("brand") else 0},
+        "logos": [row],
+        "refusals": [{"name": "Beta Devices", "domain": "beta.invalid",
+                      "reason": "site read, but it publishes no mark that clears the 148px floor",
+                      "reasonCode": "no-usable-mark", "checked": "2026-08-18"}],
+    }
+    doc.update(over)
+    return doc
+
+
+CL_CASES = [
+    ("a recorded mark that is not in the repo",
+     lambda t: (cl_doc(row={"file": "assets/logos/missing.png"}), cl_root(t), None),
+     "not in the repo"),
+
+    ("a mark whose bytes changed after it was checked",
+     lambda t: (cl_doc(), cl_root(t, (("acme-medical.png", b"swapped after the check"),)), None),
+     "does not match the sha256"),
+
+    ("a mark taken from a favicon service rather than the company's own site",
+     lambda t: (cl_doc(row={"source": "https://icons.duckduckgo.com/ip3/acme.com.ico"}),
+                cl_root(t), None),
+     "favicon SERVICE"),
+
+    ("a mark with no source URL",
+     lambda t: (cl_doc(row={"source": ""}), cl_root(t), None),
+     "has no source"),
+
+    ("a mark with no fetch date",
+     lambda t: (cl_doc(row={"fetched": ""}), cl_root(t), None),
+     "has no fetched"),
+
+    ("a header count that does not match the rows it summarises",
+     lambda t: (cl_doc(counts={"logos": 214, "refusals": 1, "logosWithBrandColour": 1}),
+                cl_root(t), None),
+     "counts.logos"),
+
+    ("a brand-colour count that does not match the rows carrying one",
+     lambda t: (cl_doc(counts={"logos": 1, "refusals": 1, "logosWithBrandColour": 9}),
+                cl_root(t), None),
+     "logosWithBrandColour"),
+
+    ("an accent published invisible on the ivory card ground",
+     lambda t: (cl_doc(row={"brand": dict(CL_GOOD_BRAND, accentOnIvory="#f8e808",
+                                          contrastOnIvory=None, contrastWhiteOnC2=None)}),
+                cl_root(t), None),
+     "on the ivory card ground"),
+
+    ("an accent published invisible on the navy masthead",
+     lambda t: (cl_doc(row={"brand": dict(CL_GOOD_BRAND, accentOnNavy="#081848",
+                                          contrastOnNavy=None)}),
+                cl_root(t), None),
+     "on the navy masthead"),
+
+    ("a contrast ratio printed next to a colour it does not describe",
+     lambda t: (cl_doc(row={"brand": dict(CL_GOOD_BRAND, contrastOnNavy=9.9)}),
+                cl_root(t), None),
+     "recomputes to"),
+
+    ("a brand colour that is not a hex colour",
+     lambda t: (cl_doc(row={"brand": dict(CL_GOOD_BRAND, c1="navy blue")}), cl_root(t), None),
+     "not a six-digit hex"),
+
+    ("a published colour with nothing saying what it was sampled from",
+     lambda t: (cl_doc(row={"brand": dict(CL_GOOD_BRAND, source="")}), cl_root(t), None),
+     "no note saying what it was sampled from"),
+
+    ("a company with no colour and no reason given",
+     lambda t: (cl_doc(row={"brand": None},
+                       counts={"logos": 1, "refusals": 1, "logosWithBrandColour": 0}),
+                cl_root(t), None),
+     "does not say why"),
+
+    ("bytes shipping to members that no row ever draws",
+     lambda t: (cl_doc(), cl_root(t, (("acme-medical.png", CL_MARK),
+                                      ("orphan.png", b"never drawn"))), None),
+     "named by no row"),
+
+    ("a refusal with no reason",
+     lambda t: (cl_doc(refusals=[{"name": "Beta Devices"}]), cl_root(t), None),
+     "no name or no reason"),
+
+    ("the same company recorded twice",
+     lambda t: (dict(cl_doc(), counts={"logos": 2, "refusals": 1, "logosWithBrandColour": 2},
+                     logos=[cl_doc()["logos"][0], cl_doc()["logos"][0]]), cl_root(t), None),
+     "appears twice"),
+
+    ("a mark stored outside assets/logos/",
+     lambda t: (cl_doc(row={"file": "../../etc/passwd"}), cl_root(t), None),
+     "points outside assets/logos/"),
+
+    ("the layer published with no rule stated",
+     lambda t: (cl_doc(rule=""), cl_root(t), None),
+     "states no rule"),
+
+    ("the renderer reaching for a live third-party logo host again",
+     lambda t: (cl_doc(), cl_root(t),
+                "var U='https://logo.clearbit.com/'+d;function safe(x){}0.03928 --mcr-accent-ink"),
+     "logo.clearbit.com"),
+
+    ("the renderer losing its contrast guard",
+     lambda t: (cl_doc(), cl_root(t), "var x=1; /* --mcr-accent-ink */"),
+     "lost its contrast guard"),
+
+    ("the two accents collapsed back into one",
+     lambda t: (cl_doc(), cl_root(t), "function safe(a){} 0.03928 --mcr-accent:"),
+     "--mcr-accent-ink"),
+]
+
+CL_QUIET = [
+    ("a whole, honest logo layer",
+     lambda t: (cl_doc(), cl_root(t), "function safe(a){} 0.03928 --mcr-accent-ink:red")),
+    ("a company whose mark yielded no colour, with the refusal recorded",
+     lambda t: (cl_doc(row={"brand": None,
+                            "brandRefused": "no saturated colour in the mark — a monochrome "
+                                            "logo yields no brand colour"},
+                       counts={"logos": 1, "refusals": 1, "logosWithBrandColour": 0}),
+                cl_root(t), None)),
+]
+
+
+def company_logos_cases(tmp):
+    """The brand-mark gate, driven directly."""
+    import importlib
+    v = importlib.import_module("verify")
+    failures = 0
+
+    for name, build, want in CL_CASES:
+        doc, root, js = build(tmp)
+        v.fails[:] = []
+        v.warns[:] = []
+        v.check_company_logos(doc, js, root)
+        text = " ".join(m for _, m in v.fails)
+        if not v.fails:
+            print("HOLE  %s — the gate PASSED this. It should not." % name); failures += 1
+        elif want.lower() not in text.lower():
+            print("WEAK  %s — rejected, but not for the expected reason (%r missing)"
+                  % (name, want)); failures += 1
+        else:
+            print("ok    %s" % name)
+
+    for name, build in CL_QUIET:
+        doc, root, js = build(tmp)
+        v.fails[:] = []
+        v.warns[:] = []
+        v.check_company_logos(doc, js, root)
+        if v.fails:
+            print("HOLE  %s — FALSE FAIL: %s"
+                  % (name, " ".join(m for _, m in v.fails)[:220])); failures += 1
+        else:
+            print("ok    %s — no false failure" % name)
+
+    # The no-op. The layer is optional: absent, every company draws the monogram.
+    v.fails[:] = []
+    v.warns[:] = []
+    v.check_company_logos(None, "", tmp)
+    if v.fails:
+        print("HOLE  an absent company-logos.json must gate nothing"); failures += 1
+    else:
+        print("ok    an absent company-logos.json gates nothing")
+
+    return failures
+
 def main():
     # THE CONTACT FIXTURE, first of all.
     #
@@ -1783,6 +2273,8 @@ def _run(tmp):
     failures += company_report_cases()
     failures += company_report_noop_case()
     failures += company_awards_cases()
+    failures += company_press_cases()
+    failures += company_logos_cases(tmp)
     failures += concurrency_cases()
 
     rc, out = gate()
@@ -1794,7 +2286,9 @@ def _run(tmp):
     # cases + 2 concurrency cases, 1 Company Report no-op, plus the award
     # gate's own stale-quarantine and no-op cases — and every case list
     # counted rather than typed.
-    extras = 5 + 1 + 2 + len(CR_CASES) + len(CR_QUIET) + len(CA_CASES) + len(CA_QUIET)
+    extras = (5 + 1 + 2 + len(CR_CASES) + len(CR_QUIET) + len(CA_CASES)
+              + len(CA_QUIET) + len(CP_CASES) + len(CP_QUIET) + 1
+              + len(CL_CASES) + len(CL_QUIET) + 1)
     # Skips are printed in the tally, not just in the rows. A suite that runs 60
     # of 74 cases and says "GATE HOLDS" is telling you less than it sounds like.
     ran = len(CASES) + extras - skipped
