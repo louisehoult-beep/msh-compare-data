@@ -75,13 +75,34 @@ def main():
     # seed record. A supplier whose labels reach two or more specialities is NOT
     # pre-filled: guessing which of them a given product belongs to is precisely the
     # error the category lock exists to prevent.
+    # A supplier is single-speciality when every label it carries admits the SAME
+    # one slug. A resolved label admits exactly its slug; an unresolved compound
+    # label ("ENT / audiology") admits either of its candidates. Oticon carries
+    # "Audiology and hearing" AND "ENT / audiology", and audiology is the only
+    # slug both admit, so Oticon is audiology — without having to claim that
+    # "ENT / audiology" means audiology for every future supplier, which it does
+    # not. The intersection is per supplier and is evidence about that supplier.
+    #
+    # Reviewed 18/08/2026: this is the whole value of the six unresolved compound
+    # labels. It reaches ONE supplier and 70 products. Every other supplier under
+    # those labels sells into several specialities however they are read, so its
+    # products are mapped division by division regardless. The six are correctly
+    # unresolvable and are left that way.
+    cand = {}
+    for e in lmap.get("entries", []):
+        s = set(e["slugs"]) if e.get("slugs") else set(e.get("candidates") or [])
+        if s:
+            cand[e["label"]] = s
+
     sole = {}
     for co in own:
         labs = (seed.get(co) or {}).get("specialities") or []
-        slugs = {label_slug[l] for l in labs if l in label_slug}
-        if len(slugs) == 1 and len(slugs) == len([l for l in labs if l in label_slug]) \
-                and all(l in label_slug for l in labs):
-            sole[co] = slugs.pop()
+        if not labs or not all(l in cand for l in labs):
+            continue
+        inter = set.intersection(*[cand[l] for l in labs])
+        settled = {next(iter(cand[l])) for l in labs if len(cand[l]) == 1}
+        if len(inter) == 1 and len(settled) <= 1:
+            sole[co] = next(iter(inter))
 
     # (supplier, division) -> "speciality:type", the recorded human decision.
     mapped = {(e["supplier"], e["division"]): e["hub"]
@@ -91,8 +112,6 @@ def main():
     legal = {"%s:%s" % (s, t) for s, v in vocab.items()
              for t in (v.get("types") or {})}
 
-    # NHSSC detail, keyed by (supplier, product name). The cache is keyed by the
-    # search term used, and each entry records the Hub supplier it belongs to.
     # THE TWO SOURCES ARE AT DIFFERENT GRANULARITIES, and joining them on an
     # equal product name returns nothing at all. NHS Supply Chain's cache is keyed
     # by the RANGE a rep would search for — "Nutricare", "Leaderflex", "Prolystica"
