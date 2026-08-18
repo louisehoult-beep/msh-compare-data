@@ -22,6 +22,23 @@ CACHE_PATH = "data/nhssc-cache.json"
 CONC = 5
 STOP = {'ltd','limited','group','medical','healthcare','health','uk','plc','corp','company',
         'international','systems','solutions','products','device','devices','stock','edirect'}
+# NHSSC's catalogue holds unrelated business units under the same brand root
+# (e.g. "Bunzl Healthcare" vs "BUNZL CATERING SUPPLIES" — one Bunzl entity,
+# two different lines of goods). Because STOP strips generic words like
+# "healthcare", a supplier name that reduces to just its brand root (e.g.
+# "Bunzl") can wrongly token-match a card from a different business line of
+# the same brand. If a card's supplier name carries one of these category
+# words and that same word does NOT appear anywhere in the job's own
+# declared supplier name/aliases, the card is a different business unit and
+# must never be accepted, no matter how the brand-root tokens overlap.
+OFF_CATEGORY = {'catering','retail','workwear','laundry','print','printing','office',
+                 'stationery','textile','uniform','hospitality','packaging','vending'}
+
+def off_category_mismatch(job_supplier_raw, card_supplier):
+    job_words = set(re.findall(r'[a-z0-9]+', (job_supplier_raw or '').lower()))
+    card_words = set(re.findall(r'[a-z0-9]+', (card_supplier or '').lower()))
+    bad = (card_words & OFF_CATEGORY) - job_words
+    return bool(bad)
 
 EXTRACT_JS = r"""
 () => Array.from(document.querySelectorAll('div.cardWrapper')).map(card => {
@@ -82,8 +99,14 @@ async def worker(browser, batch, results, counter, total):
     except Exception: pass
     for job in batch:
         prev = job.get('prev')
+        # A previously-cached entry only counts as "verified" for self-consistency
+        # if its own supplier name doesn't itself trip the off-category guard —
+        # otherwise a bad match from a past run (e.g. catering goods cached
+        # against a healthcare-only supplier) re-confirms itself forever.
+        prev_is_sound = bool(prev and prev.get('items') and
+                              not off_category_mismatch(job['supplierRaw'], prev['items'][0]['supplier']))
         queries = ([prev['query']] if prev and prev.get('query') else []) + candidates(job['key'])
-        prev_sup_tokens = norm(prev['items'][0]['supplier']) if prev and prev.get('items') else set()
+        prev_sup_tokens = norm(prev['items'][0]['supplier']) if prev_is_sound else set()
         found, used_q = [], ''
         seen_q = set()
         for q in queries:
@@ -101,6 +124,7 @@ async def worker(browser, batch, results, counter, total):
             for c in cards:
                 p = parse_card(c)
                 if not p or not p['npc'] or not name_ok(job['key'], p['name']): continue
+                if off_category_mismatch(job['supplierRaw'], p['supplier']): continue
                 sup_hit = bool(job['supTokens'] & norm(p['supplier'])) or bool(prev_sup_tokens & norm(p['supplier']))
                 if sup_hit: found.append(p)
             if found: used_q = q; break
@@ -116,14 +140,18 @@ async def worker(browser, batch, results, counter, total):
             # deep work away every Monday. Same principle as the 0.8x abort below:
             # a refresh may add, it may not degrade.
             fresh = {'supplier': job['supplier'], 'query': used_q, 'items': keep[:6]}
-            if prev and len(prev.get('items') or []) > len(fresh['items']):
+            if prev_is_sound and len(prev.get('items') or []) > len(fresh['items']):
                 prev_keep = dict(prev)
                 prev_keep['query'] = prev.get('query') or used_q
                 results[job['key']] = prev_keep
             else:
                 results[job['key']] = fresh
-        elif prev:
+        elif prev_is_sound:
             results[job['key']] = prev  # keep the verified previous entry
+        # else: nothing found this run, and the previously-cached entry itself
+        # fails the off-category guard (e.g. it was a wrong-business-line
+        # match). Drop it rather than re-carrying known-bad data forward —
+        # it falls through to notCatalogue in main(), an honest empty state.
         counter[0] += 1
         if counter[0] % 50 == 0:
             print("%d/%d | %d in cache" % (counter[0], total, len(results)), flush=True)
@@ -136,11 +164,13 @@ async def main():
     jobs, seen = [], set()
     for s in seed.get('suppliers', []):
         toks = norm(s.get('name',''), *(s.get('aliases',[]) or []))
+        supplier_raw = ' '.join([s.get('name','')] + (s.get('aliases',[]) or []))
         for p in s.get('products', []):
             n = (p if isinstance(p, str) else p.get('name','')).strip()
             if not n or n.lower() in seen: continue
             seen.add(n.lower())
-            jobs.append({'key': n, 'supplier': s.get('name',''), 'supTokens': toks, 'prev': oldp.get(n)})
+            jobs.append({'key': n, 'supplier': s.get('name',''), 'supplierRaw': supplier_raw,
+                         'supTokens': toks, 'prev': oldp.get(n)})
     print("jobs:", len(jobs), "| previously cached:", len(oldp))
     results, counter = {}, [0]
     shards = [jobs[i::CONC] for i in range(CONC)]
