@@ -71,7 +71,8 @@
     ['Ask for something to be added', '/medical-sales-hub/ask/']
   ];
 
-  var DATA = null, LOADING = false, FAILED = false, input = null, box = null;
+  var DATA = null, LOADING = false, FAILED = false, input = null, box = null,
+      body = null, toggle = null, chev = null;
 
   function esc(x) {
     return String(x)
@@ -264,12 +265,21 @@
              'line-height:1.35;text-decoration:none;font-weight:500;">' + esc(t[0]) + '</a>';
     }).join('');
 
+    /* COLLAPSED BY DEFAULT (18/08/2026). The box, the hint and the twelve task
+     * chips used to occupy the full width of the screen above the first panel,
+     * so a member arriving at the Live Desk scrolled past the search before
+     * reaching a single headline. It now opens on click and shuts again, and
+     * the index is still only fetched on first contact, never on page load. */
     MOUNT.innerHTML =
-      '<div style="display:flex;align-items:center;gap:12px;margin:0 0 14px;">' +
+      '<div id="ethHubToggle" role="button" tabindex="0" aria-expanded="false" aria-controls="ethHubBody" ' +
+      'style="display:flex;align-items:center;gap:12px;cursor:pointer;-webkit-user-select:none;user-select:none;">' +
         '<span style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;' +
         'border-radius:50%;background:' + GOLD + ';color:' + NAVY + ';font-size:21px;font-weight:700;line-height:1;flex:0 0 auto;">?</span>' +
         '<span style="color:#fff;font-size:17px;font-weight:700;">What do you want to do today?</span>' +
+        '<span id="ethHubChev" style="margin-left:auto;color:' + GOLD + ';font-size:12px;font-weight:700;' +
+        'letter-spacing:.12em;white-space:nowrap;">SEARCH +</span>' +
       '</div>' +
+      '<div id="ethHubBody" style="display:none;margin-top:14px;">' +
       '<div style="display:flex;gap:10px;margin:0 0 8px;width:100%;">' +
         '<input id="ethHubInput" type="search" autocomplete="off" aria-label="Search the Hub" ' +
         'placeholder="Search every Hub page — a supplier, a framework, a term, a question" ' +
@@ -284,10 +294,23 @@
       '<p id="ethHubHint" style="margin:0 0 16px;color:' + DIM + ';font-size:12.5px;">' +
       'Searches inside every Hub page, not just the titles. Or jump straight to a task.</p>' +
       '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:9px;width:100%;">' +
-      chips + '</div>';
+      chips + '</div>' +
+      '</div>';
 
     input = document.getElementById('ethHubInput');
     box = document.getElementById('ethHubResults');
+    body = document.getElementById('ethHubBody');
+    toggle = document.getElementById('ethHubToggle');
+    chev = document.getElementById('ethHubChev');
+  }
+
+  function isOpen() { return body.style.display !== 'none'; }
+
+  function setOpen(open) {
+    body.style.display = open ? 'block' : 'none';
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    chev.textContent = open ? 'SEARCH \u2013' : 'SEARCH +';
+    if (open) { load(); input.focus(); }
   }
 
   function row(href, title, kicker, body) {
@@ -418,6 +441,13 @@
     var first = box.querySelector('a[href]');
     if (first && box.style.display !== 'none') { window.location.assign(first.getAttribute('href')); }
   });
+  toggle.addEventListener('click', function () { setOpen(!isOpen()); });
+  toggle.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') { return; }
+    e.preventDefault();
+    setOpen(!isOpen());
+  });
+
   document.getElementById('ethHubGo').addEventListener('click', function () {
     var first = box.querySelector('a[href]');
     if (first && box.style.display !== 'none') { window.location.assign(first.getAttribute('href')); return; }

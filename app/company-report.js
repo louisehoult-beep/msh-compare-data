@@ -65,6 +65,20 @@
      own right rather than a hole where a logo should be. */
   var LOGOS = BASE + 'data/company-logos.json' + CB;
 
+  /* This page's own URL, captured once at load. Every company cross-link is
+     this URL plus ?company=<name> — see coHref() below. Captured rather than
+     hardcoded so the tool keeps cross-linking correctly if the report is ever
+     mounted on a differently-slugged page, and captured HERE, in the host
+     page, because the printable pack is written into an about:blank popup
+     where location carries nothing to build a link from. */
+  var REPORT_URL = (function () {
+    try {
+      var l = window.location;
+      if (l && l.pathname) { return (l.origin ? l.origin : '') + l.pathname; }
+    } catch (e) { /* fall through to the published path */ }
+    return 'https://medsalesintelligencehub.co.uk/medical-sales-hub/company-report/';
+  })();
+
   /* Same palette constants as app/supplier-search.js — one house style. */
   var G = '#a8842c', INK = '#1d2733', DIM = '#75808d', LINE = '#e6e0d4',
       RED = '#b84a5c', GREEN = '#2e7d5b', SOFT = '#f7f4ee';
@@ -99,15 +113,42 @@
   }
 
   /* ---------------------------------------------------------------------
-     HOUSE STYLESHEET — redesigned 18/08/2026.
+     HOUSE STYLESHEET — redesigned 18/08/2026, respaced and de-collided
+     18/08/2026 (pm).
 
      ONE stylesheet, shipped inside this file, used by BOTH the on-page card
      and the printable pack, so the two surfaces cannot drift apart. It is
      entirely self-contained: no external stylesheet, no web font, no CDN
      script — the Hub page must render this with zero third-party requests.
 
-     Every selector is scoped under `.mcr`, so nothing here can reach the rest
-     of the WordPress page, and WordPress's own theme CSS cannot reach in.
+     TWO HOST RULES REACH IN, AND BOTH HAD TO BE BEATEN ON THEIR OWN TERMS.
+     Read this before "tidying" any selector below.
+
+     1. EVERY SELECTOR CARRIES A `.mcr ` PREFIX. The Hub page's own token
+        block declares `.msh *{margin:0;padding:0;box-sizing:border-box}`,
+        and this report mounts inside `div.msh`. A bare `.mcr-card` and
+        `.msh *` are BOTH specificity 0,1,0, so the tie breaks on document
+        order — and this style element is appended to <head> while the page's
+        block sits in the body, so the page won every tie. Measured live on
+        18/08/2026: .mcr-body, .mcr-card and .mcr-part all computed to
+        padding 0, which is why the report's text sat hard against the card
+        edges. The prefix makes each rule 0,2,0 and settles it on
+        specificity rather than on where the <style> happens to land.
+
+     2. THE PICKER FIELDS CARRY !important. The theme's own form rule is
+        `textarea:not(.block-editor-plain-text), input:not([type="submit"])
+        :not([type="checkbox"]):not([type="radio"]):not([type="range"])…`
+        — specificity 0,4,1, which no sane class selector reaches. It paints
+        `--wp--custom--input-background`, a near-black navy, so the company
+        box rendered as dark ink on a dark ground and the member could not
+        read what they had typed. !important is the correct instrument for a
+        rule that specific; do not swap it for more classes.
+
+     THE REPORT IS CAPPED AT A READABLE MEASURE. Uncapped it inherits the
+     full-bleed Hub page — 2,395px of running text on a wide screen. The cap
+     is on .mcr-report only, never on .mcr itself: the printable pack sets
+     its own measure on <body class="mcr">, and a max-width on .mcr would
+     out-specify it.
 
      Colours are the brand guide's, verbatim: Midnight Navy #0B1C33 with the
      signature 135deg navy gradient, Deep Gold #A8842C for labels and rules on
@@ -137,118 +178,204 @@
        somehow renders before boot() still looks like the house design. */
     '--mcr-accent:#C49B5C;--mcr-accent-ink:#A8842C;',
     'font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;',
-    'color:var(--mcr-body);font-size:14px;line-height:1.6;}',
+    'color:var(--mcr-body);font-size:14px;line-height:1.62;}',
     '.mcr *{box-sizing:border-box;}',
-    '.mcr p{margin:0 0 10px;}',
+    '.mcr p{margin:0 0 12px;}',
+    '.mcr p:last-child{margin-bottom:0;}',
     '.mcr a{color:var(--mcr-gold);font-weight:600;text-decoration:none;}',
     '.mcr a:hover{text-decoration:underline;}',
+    /* Cross-link to another company's report. HOUSE GOLD, deliberately, not
+       var(--mcr-accent-ink): the accent is the company's own colour and it
+       carries rules and edges only, never copy — and these links sit inside
+       body copy and table cells. It must not set a weight either, because a
+       name here inherits a weight that already means something (bold marks
+       the company being read in the filing table). Quiet underline, no second
+       colour fighting the prose. */
+    '.mcr .mcr-colink{color:var(--mcr-gold);font-weight:inherit;text-decoration:none;',
+    'border-bottom:1px solid rgba(168,132,44,.42);}',
+    '.mcr .mcr-colink:hover{border-bottom-color:var(--mcr-gold);}',
 
     /* --- report shell + masthead ------------------------------------- */
-    '.mcr-report{border:1px solid var(--mcr-line);border-radius:14px;background:#fdfcf9;',
-    'overflow:hidden;box-shadow:0 2px 16px rgba(11,28,51,.07);}',
-    '.mcr-mast{position:relative;padding:26px 26px 20px;',
+    /* The measure. 1180px is the Hub's own reading width for a document
+       page; wider than this and the framework tables stop scanning. */
+    '.mcr .mcr-report{max-width:1180px;margin:0 auto;border:1px solid var(--mcr-line);',
+    'border-radius:14px;background:#fdfcf9;overflow:hidden;',
+    'box-shadow:0 2px 16px rgba(11,28,51,.07);}',
+    '.mcr .mcr-mast{position:relative;padding:30px 34px 24px;',
     'background:linear-gradient(135deg,#0B1C33 0%,#132B4A 55%,#1B3A5F 100%);',
     '-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
-    '.mcr-mast:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;',
+    '.mcr .mcr-mast:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;',
     'background:var(--mcr-accent);-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
-    '.mcr-mast-row{display:flex;gap:18px;align-items:center;flex-wrap:wrap;}',
+    '.mcr .mcr-mast-row{display:flex;gap:20px;align-items:center;flex-wrap:wrap;}',
     /* The plate the company's own mark sits on. The ring is the company's
        colour on navy — the one place in the report where its colour touches
        its own mark. A company with no colour gets the house Antique Gold ring,
        which is what this line was before there were any colours to use. */
-    '.mcr-logo{width:74px;height:74px;flex:0 0 74px;border-radius:14px;background:#fff;overflow:hidden;',
-    'display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,.24);',
-    'border:2px solid var(--mcr-accent);-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
-    '.mcr-kicker{font-size:9.5px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;',
-    'color:#E0BE8E;margin:0 0 7px;}',
-    '.mcr-h1{color:#fff;font-size:27px;font-weight:700;line-height:1.16;letter-spacing:.2px;margin:0;}',
-    '.mcr-tagline{color:rgba(237,231,220,.86);font-size:12.5px;font-weight:600;margin-top:6px;line-height:1.5;}',
-    '.mcr-links{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;}',
-    '.mcr-links a{font-size:11px;font-weight:700;letter-spacing:.4px;padding:8px 15px;border-radius:99px;',
-    'background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.34);color:#fff;white-space:nowrap;}',
-    '.mcr-links a:hover{background:rgba(255,255,255,.24);text-decoration:none;}',
-    '.mcr-mast-meta{margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,.16);',
-    'font-size:11px;line-height:1.75;color:#9FB0C5;}',
-    '.mcr-mast-meta b{color:#DBE3EE;font-weight:600;}',
+    '.mcr .mcr-logo{width:74px;height:74px;flex:0 0 74px;border-radius:14px;background:#fff;',
+    'overflow:hidden;display:flex;align-items:center;justify-content:center;',
+    'box-shadow:0 3px 12px rgba(0,0,0,.24);border:2px solid var(--mcr-accent);',
+    '-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
+    '.mcr .mcr-kicker{font-size:9.5px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;',
+    'color:#E0BE8E;margin:0 0 8px;}',
+    '.mcr .mcr-h1{color:#fff;font-size:27px;font-weight:700;line-height:1.16;letter-spacing:.2px;margin:0;}',
+    '.mcr .mcr-tagline{color:rgba(237,231,220,.86);font-size:12.5px;font-weight:600;',
+    'margin-top:7px;line-height:1.5;}',
+    '.mcr .mcr-links{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;}',
+    '.mcr .mcr-links a{font-size:11px;font-weight:700;letter-spacing:.4px;padding:8px 15px;',
+    'border-radius:99px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.34);',
+    'color:#fff;white-space:nowrap;}',
+    '.mcr .mcr-links a:hover{background:rgba(255,255,255,.24);text-decoration:none;}',
+    '.mcr .mcr-mast-meta{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.16);',
+    'font-size:11px;line-height:1.8;color:#9FB0C5;}',
+    '.mcr .mcr-mast-meta b{color:#DBE3EE;font-weight:600;}',
 
     /* --- body, parts, cards ------------------------------------------ */
-    '.mcr-body{padding:2px 22px 20px;}',
+    '.mcr .mcr-body{padding:6px 30px 30px;}',
     /* Part dividers. The short bar sitting on the divider is the company's
        colour on light — it repeats the accent four or five times down a long
        report without ever becoming the report's own colour scheme. */
-    '.mcr-part{position:relative;margin:28px 0 0;padding-top:16px;border-top:2px solid var(--mcr-line);}',
-    '.mcr-part:before{content:"";position:absolute;left:0;top:-2px;width:38px;height:2px;',
+    '.mcr .mcr-part{position:relative;margin:34px 0 0;padding-top:20px;',
+    'border-top:2px solid var(--mcr-line);}',
+    '.mcr .mcr-part:before{content:"";position:absolute;left:0;top:-2px;width:38px;height:2px;',
     'background:var(--mcr-accent-ink);-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
-    '.mcr-part-n{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;',
+    '.mcr .mcr-part-n{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;',
     'color:var(--mcr-gold);}',
-    '.mcr-part-t{font-size:17px;font-weight:700;color:var(--mcr-navy);line-height:1.3;margin-top:3px;}',
-    '.mcr-part-s{font-size:12.5px;color:var(--mcr-dim);line-height:1.6;margin-top:4px;max-width:66em;}',
-    '.mcr-card{background:#fff;border:1px solid var(--mcr-line);border-radius:12px;',
-    'padding:16px 18px;margin:14px 0 0;box-shadow:0 1px 2px rgba(29,39,51,.05);}',
-    '.mcr-card-t{display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:1.4px;',
-    'text-transform:uppercase;font-weight:700;color:var(--mcr-navy);margin:0 0 12px;}',
-    '.mcr-card-t:before{content:"";flex:0 0 16px;height:2px;background:var(--mcr-gold);',
+    '.mcr .mcr-part-t{font-size:17px;font-weight:700;color:var(--mcr-navy);line-height:1.3;margin-top:4px;}',
+    '.mcr .mcr-part-s{font-size:12.5px;color:var(--mcr-dim);line-height:1.62;margin-top:6px;max-width:66em;}',
+    '.mcr .mcr-card{background:#fff;border:1px solid var(--mcr-line);border-radius:12px;',
+    'padding:22px 24px;margin:16px 0 0;box-shadow:0 1px 2px rgba(29,39,51,.05);}',
+    '.mcr .mcr-card-t{display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:1.4px;',
+    'text-transform:uppercase;font-weight:700;color:var(--mcr-navy);margin:0 0 14px;}',
+    '.mcr .mcr-card-t:before{content:"";flex:0 0 16px;height:2px;background:var(--mcr-gold);',
     '-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
     /* The deliberate empty state. Thin data is the normal case here, so a
        panel with nothing behind it is drawn as a finished, quiet thing —
        dashed edge, no drop shadow, ivory ground — never as a blank box that
        reads as a page that failed to load. */
-    '.mcr-card--empty{background:#faf8f3;border-style:dashed;border-color:#ded6c4;box-shadow:none;}',
-    '.mcr-card--empty .mcr-card-t{color:#8d8677;}',
-    '.mcr-card--empty .mcr-card-t:before{background:#cfc6b2;}',
-    '.mcr-note{font-size:12.5px;color:var(--mcr-dim);line-height:1.65;}',
-    '.mcr-good{font-size:12.5px;color:#2e7d5b;line-height:1.65;}',
-    '.mcr-rule{margin:0 0 12px;padding:11px 14px;background:var(--mcr-soft);',
+    '.mcr .mcr-card--empty{background:#faf8f3;border-style:dashed;border-color:#ded6c4;box-shadow:none;}',
+    '.mcr .mcr-card--empty .mcr-card-t{color:#8d8677;}',
+    '.mcr .mcr-card--empty .mcr-card-t:before{background:#cfc6b2;}',
+    /* Collapsible panels. A well-covered company runs to twenty-odd panels,
+       which is a very long scroll for a member looking for one of them, so
+       every panel is a native <details>. Native is the whole point: the
+       keyboard behaviour, the screen-reader expanded/collapsed state and
+       the browser's own in-page find are all free and correct, and the page
+       still makes zero third-party requests. The first two panels of a
+       report open on load so it never lands looking empty. */
+    '.mcr details.mcr-card{display:block;}',
+    '.mcr details.mcr-card>summary{cursor:pointer;list-style:none;}',
+    '.mcr details.mcr-card>summary::-webkit-details-marker{display:none;}',
+    '.mcr details.mcr-card>summary::marker{content:"";}',
+    /* Closed, the panel is title only, so the title's 14px bottom margin
+       would leave a dead band inside the card. */
+    '.mcr details.mcr-card:not([open])>summary.mcr-card-t{margin-bottom:0;}',
+    '.mcr details.mcr-card>summary:focus-visible{outline:2px solid var(--mcr-gold);outline-offset:3px;}',
+    /* The chevron is drawn from two borders rather than an image or a font,
+       so it inherits the gold and costs no request. It points down when the
+       panel is shut and up when it is open, which is the affordance that
+       tells a member the title is a control at all. */
+    '.mcr .mcr-card-x{margin-left:auto;flex:0 0 auto;width:8px;height:8px;',
+    'border-right:2px solid var(--mcr-gold);border-bottom:2px solid var(--mcr-gold);',
+    'transform:translateY(-2px) rotate(45deg);transition:transform .18s ease;}',
+    '.mcr details.mcr-card[open]>summary .mcr-card-x{transform:translateY(2px) rotate(-135deg);}',
+    '.mcr .mcr-card--empty .mcr-card-x{border-color:#cfc6b2;}',
+    '.mcr .mcr-note{font-size:12.5px;color:var(--mcr-dim);line-height:1.68;}',
+    '.mcr .mcr-good{font-size:12.5px;color:#2e7d5b;line-height:1.68;}',
+    /* --- alerts & recalls -------------------------------------------- */
+    /* One item, three states. The neutral border is a curated note; the red is
+       a genuine recall; the dashed ivory is an entry with no source link, and
+       it deliberately borrows .mcr-card--empty's language rather than adding a
+       new one, because it means the same thing: honestly incomplete. */
+    '.mcr .mcr-alert{padding:9px 11px;margin:0 0 7px;background:#fff;border-radius:7px;',
+    'border-left:3px solid var(--mcr-line);font-size:13px;color:var(--mcr-body);line-height:1.6;}',
+    '.mcr .mcr-alert--recall{border-left-color:#b84a5c;}',
+    '.mcr .mcr-alert--recall .mcr-alert-d{color:#b84a5c;}',
+    '.mcr .mcr-alert--unsourced{background:#faf8f3;border-left-style:dashed;box-shadow:none;}',
+    '.mcr .mcr-alert-x{color:var(--mcr-body);}',
+    '.mcr .mcr-alert-u{color:var(--mcr-gold);}',
+    '.mcr .mcr-alert .mcr-note{margin-top:4px;}',
+    '.mcr .mcr-rule{margin:0 0 14px;padding:13px 16px;background:var(--mcr-soft);',
     'border-left:3px solid var(--mcr-gold);border-radius:0 8px 8px 0;font-size:12px;',
-    'color:#4a5766;line-height:1.62;}',
-    '.mcr-rule-h{display:block;font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;',
-    'font-weight:700;color:var(--mcr-gold);margin-bottom:4px;}',
+    'color:#4a5766;line-height:1.65;}',
+    '.mcr .mcr-rule-h{display:block;font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;',
+    'font-weight:700;color:var(--mcr-gold);margin-bottom:5px;}',
 
     /* --- chips, source lines, tables ---------------------------------- */
-    '.mcr-chip{display:inline-block;background:#fff;color:#37485a;border:1px solid var(--mcr-line);',
-    'border-radius:99px;padding:4px 11px;font-size:11.5px;font-weight:600;line-height:1.5;',
-    'margin:0 6px 6px 0;}',
-    '.mcr-chip--gold{background:#f6efdd;border-color:#e7d8b3;color:#7a5b14;}',
-    '.mcr-src{margin-top:10px;padding-top:8px;border-top:1px dotted var(--mcr-line);',
-    'font-size:11.5px;color:var(--mcr-dim);line-height:1.6;}',
-    '.mcr-asof{white-space:nowrap;}',
-    '.mcr-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}',
-    '.mcr-btn{cursor:pointer;background:linear-gradient(180deg,#D4AF7A,#B8935A);color:#0B1C33;',
-    'border:0;border-radius:99px;padding:9px 18px;font-size:12.5px;font-weight:700;letter-spacing:.03em;',
+    '.mcr .mcr-chip{display:inline-block;background:#fff;color:#37485a;border:1px solid var(--mcr-line);',
+    'border-radius:99px;padding:5px 12px;font-size:11.5px;font-weight:600;line-height:1.5;',
+    'margin:0 7px 7px 0;}',
+    '.mcr .mcr-chip--gold{background:#f6efdd;border-color:#e7d8b3;color:#7a5b14;}',
+    '.mcr .mcr-src{margin-top:14px;padding-top:10px;border-top:1px dotted var(--mcr-line);',
+    'font-size:11.5px;color:var(--mcr-dim);line-height:1.65;}',
+    '.mcr .mcr-asof{white-space:nowrap;}',
+    /* Wide tables scroll inside their own card rather than widening it. */
+    '.mcr .mcr-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}',
+    '.mcr .mcr-btn{cursor:pointer;background:linear-gradient(180deg,#D4AF7A,#B8935A);color:#0B1C33;',
+    'border:0;border-radius:99px;padding:10px 20px;font-size:12.5px;font-weight:700;letter-spacing:.03em;',
     '-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
-    '.mcr-btn:hover{background:linear-gradient(180deg,#E0BE8E,#C49B5C);}',
+    '.mcr .mcr-btn:hover{background:linear-gradient(180deg,#E0BE8E,#C49B5C);}',
 
     /* --- the picker --------------------------------------------------- */
-    '.mcr-lab{display:block;font-size:10.5px;font-weight:700;letter-spacing:1.4px;',
-    'text-transform:uppercase;color:var(--mcr-dim);margin:0 0 5px;}',
-    '.mcr-field{width:100%;max-width:520px;padding:11px 16px;border-radius:99px;',
-    'border:1px solid var(--mcr-line);font:inherit;font-size:14.5px;color:var(--mcr-ink);',
-    '-webkit-text-fill-color:var(--mcr-ink);caret-color:var(--mcr-ink);background:#fff;outline:none;}',
-    '.mcr-field:focus{border-color:#C49B5C;box-shadow:0 0 0 3px rgba(196,155,92,.16);}',
-    '.mcr-quick{cursor:pointer;background:#fff;border:1px solid var(--mcr-line);border-radius:99px;',
-    'padding:6px 13px;font-size:12px;font-weight:600;color:var(--mcr-navy);}',
-    '.mcr-quick:hover{background:var(--mcr-soft);border-color:#C49B5C;}',
+    /* !important throughout: see note 2 at the top of this stylesheet. The
+       theme's form rule is 0,4,1 and paints a near-black ground. */
+    '.mcr .mcr-lab{display:block;font-size:10.5px;font-weight:700;letter-spacing:1.4px;',
+    'text-transform:uppercase;color:var(--mcr-dim);margin:0 0 7px;}',
+    '.mcr .mcr-field{width:100%;max-width:520px;border-radius:99px;font:inherit;',
+    'padding:12px 18px!important;font-size:14.5px!important;',
+    'background:#fff!important;background-image:none!important;',
+    'color:var(--mcr-ink)!important;-webkit-text-fill-color:var(--mcr-ink)!important;',
+    'caret-color:var(--mcr-ink)!important;border:1px solid var(--mcr-line)!important;',
+    'box-shadow:none;outline:none;appearance:none;-webkit-appearance:none;}',
+    /* The select keeps a chevron, since stripping the native appearance also
+       strips the affordance that says it opens a list. */
+    '.mcr select.mcr-field{padding-right:40px!important;',
+    'background:#fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'8\'%3E%3Cpath d=\'M1 1l5 5 5-5\' fill=\'none\' stroke=\'%2375808d\' stroke-width=\'2\'/%3E%3C/svg%3E") no-repeat right 17px center!important;}',
+    '.mcr .mcr-field::placeholder{color:#9aa3ad;-webkit-text-fill-color:#9aa3ad;opacity:1;}',
+    '.mcr .mcr-field:focus{border-color:#C49B5C!important;box-shadow:0 0 0 3px rgba(196,155,92,.16);}',
+    '.mcr .mcr-quick{cursor:pointer;background:#fff;border:1px solid var(--mcr-line);border-radius:99px;',
+    'padding:7px 14px;font-size:12px;font-weight:600;color:var(--mcr-navy);}',
+    '.mcr .mcr-quick:hover{background:var(--mcr-soft);border-color:#C49B5C;}',
 
     /* --- phones ------------------------------------------------------- */
     '@media (max-width:640px){',
-    '.mcr-body{padding:2px 13px 16px;}',
-    '.mcr-mast{padding:20px 16px 16px;}',
-    '.mcr-mast-row{gap:13px;}',
-    '.mcr-logo{width:54px;height:54px;flex:0 0 54px;border-radius:11px;}',
-    '.mcr-h1{font-size:20.5px;}',
-    '.mcr-links{margin-left:0;width:100%;}',
-    '.mcr-card{padding:14px 14px;border-radius:11px;}',
-    '.mcr-part-t{font-size:15.5px;}',
+    '.mcr .mcr-body{padding:4px 16px 20px;}',
+    '.mcr .mcr-mast{padding:22px 18px 18px;}',
+    '.mcr .mcr-mast-row{gap:14px;}',
+    '.mcr .mcr-logo{width:54px;height:54px;flex:0 0 54px;border-radius:11px;}',
+    '.mcr .mcr-h1{font-size:20.5px;}',
+    '.mcr .mcr-links{margin-left:0;width:100%;}',
+    '.mcr .mcr-card{padding:16px 16px;border-radius:11px;}',
+    '.mcr .mcr-part{margin-top:26px;}',
+    '.mcr .mcr-part-t{font-size:15.5px;}',
     '}',
 
     /* --- print: the downloadable pack --------------------------------- */
     '@media print{',
-    '.mcr-report{border:0;box-shadow:none;border-radius:0;}',
-    '.mcr-body{padding:0;}',
-    '.mcr-card{box-shadow:none;break-inside:avoid;page-break-inside:avoid;margin-top:10px;}',
-    '.mcr-part{break-before:auto;break-after:avoid;page-break-after:avoid;}',
-    '.mcr-btn{display:none;}',
+    '.mcr .mcr-report{border:0;box-shadow:none;border-radius:0;max-width:none;}',
+    '.mcr .mcr-body{padding:0;}',
+    '.mcr .mcr-card{box-shadow:none;break-inside:avoid;page-break-inside:avoid;margin-top:12px;}',
+    /* A shut <details> hides its body from PRINT as well as from the screen,
+       so a collapsed panel would come out of the printer as a heading with
+       nothing under it. The pack build stamps `open` on every panel before it
+       writes the document, which is the mechanism that is relied on; the rules
+       below are the second line, for anyone printing the on-page card straight
+       from the browser rather than through the pack button. Both forms are
+       here because the engines hide the body differently: older ones set
+       display:none on the children, current Chrome hides the ::details-content
+       slot, which only the pseudo-element reaches. Measured in Chrome on
+       18/08/2026: the child rule alone did not reveal a shut panel, the
+       ::details-content rule did. The chevron is dropped in print — on paper
+       there is nothing to click. */
+    '.mcr details.mcr-card::details-content{content-visibility:visible;display:block;block-size:auto;}',
+    '.mcr details.mcr-card>*{display:revert;content-visibility:visible;}',
+    '.mcr details.mcr-card:not([open])>summary.mcr-card-t{margin-bottom:14px;}',
+    '.mcr .mcr-card-x{display:none;}',
+    '.mcr .mcr-part{break-before:auto;break-after:avoid;page-break-after:avoid;}',
+    '.mcr .mcr-btn{display:none;}',
     '.mcr a{text-decoration:none;}',
+    /* On paper a cross-link is a dead link, so it reads as what it is: the
+       company's name in the surrounding text's own weight and colour. */
+    '.mcr .mcr-colink{color:inherit;font-weight:inherit;border-bottom:0;}',
     '}'
   ].join('');
 
@@ -269,12 +396,23 @@
      gold rule, then the body. A panel whose whole body is one honest empty
      note is drawn in the deliberate empty style instead — most companies are
      thin, so that state is the common one and it must read as finished. */
+  /* How many panels a report opens on load. Two is enough to prove the page
+     rendered without burying the rest of it. */
+  var SEC_OPEN = 2;
+  var secCount = 0;
+  /* Called at the top of composeSections, so "the first two" always means the
+     first two panels of the report being built now, however many reports the
+     member has already looked at in this session. */
+  function resetSections() { secCount = 0; }
   function sec(title, html) {
     var body = String(html == null ? '' : html);
     var single = /^\s*<div class="mcr-note"/.test(body) &&
                  body.indexOf('mcr-note') === body.lastIndexOf('mcr-note');
-    return '<section class="mcr-card' + (single ? ' mcr-card--empty' : '') + '">' +
-      '<div class="mcr-card-t">' + title + '</div>' + body + '</section>';
+    var open = secCount < SEC_OPEN ? ' open' : '';
+    secCount += 1;
+    return '<details' + open + ' class="mcr-card' + (single ? ' mcr-card--empty' : '') + '">' +
+      '<summary class="mcr-card-t">' + title + '<span class="mcr-card-x" aria-hidden="true"></span></summary>' +
+      body + '</details>';
   }
   /* Every honest empty state goes through here, so they all look the same and
      none of them can be mistaken for a zero finding. */
@@ -421,9 +559,12 @@
   /* ---------------------------------------------------------------------
      STAGE 1 — read from source, nothing computed.
      --------------------------------------------------------------------- */
-  function chip(text, tone) {
-    return '<span class="mcr-chip' + (tone === 'gold' ? ' mcr-chip--gold' : '') + '">' +
-      esc(text) + '</span>';
+  function chip(text, tone, href) {
+    var cls = 'mcr-chip' + (tone === 'gold' ? ' mcr-chip--gold' : '');
+    if (href) {
+      return '<a class="' + cls + '" href="' + esc(href) + '">' + esc(text) + '</a>';
+    }
+    return '<span class="' + cls + '">' + esc(text) + '</span>';
   }
 
   function identity(s) {
@@ -545,19 +686,38 @@
 
       body += famOrder.map(function (fam) {
         var rows = fams[fam].slice().sort(function (a, b) { return cmpName(a.desc, b.desc); }).map(function (it) {
+          /* NPC -> NHS Supply Chain catalogue entry.
+             RULE: the catalogue item page is https://pilot.supplychain.nhs.uk/product/<NPC>,
+             the NPC used verbatim as the final path segment. Nothing else is derived from
+             the code: the NPC prefix is NOT the eClass code (GCC611 sits under eClass GPC),
+             so category, framework and supplier are never inferred from it here.
+             PROVED 18/08/2026 against the live catalogue, which is browsable without a login.
+             Seven real NPCs taken from the feed the table renders (data/nhssc-cache.json,
+             whose own _meta.source is pilot.supplychain.nhs.uk) were loaded in a browser and
+             the rendered page checked to name that exact product: HHH85203, FCP85802, GCC611,
+             ECA85001, KBD4107, FGE378, GHB12442. Status alone is worthless as proof here —
+             the app is client-rendered and returns HTTP 200 for any string, including the
+             control code ZZZ99999, which renders an empty page with no product on it.
+             Only codes present in the catalogue feed are linked, so no invented code is
+             ever turned into a URL. The code stays visible as the link text, so the
+             printable pack still reads correctly on paper. */
+          var npcUrl = it.npc ? 'https://pilot.supplychain.nhs.uk/product/' + encodeURIComponent(it.npc) : '';
+          var npcCell = npcUrl
+            ? '<a href="' + esc(npcUrl) + '" target="_blank" rel="noopener" title="Open this line in the NHS Supply Chain catalogue" style="color:' + G + ';font-weight:600;">' + esc(it.npc) + '</a>'
+            : esc(it.npc);
           return '<tr>' +
-            '<td style="padding:5px 8px;border-bottom:1px solid #f0ece3;font-size:12.5px;color:#37485a;">' + esc(it.desc) + '</td>' +
-            '<td style="padding:5px 8px;border-bottom:1px solid #f0ece3;font-size:12px;color:' + G + ';font-weight:600;white-space:nowrap;">' + esc(it.npc) + '</td>' +
-            '<td style="padding:5px 8px;border-bottom:1px solid #f0ece3;font-size:12px;color:' + DIM + ';white-space:nowrap;">' + esc(it.pack) + '</td>' +
+            '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12.5px;color:#37485a;">' + esc(it.desc) + '</td>' +
+            '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12px;color:' + G + ';font-weight:600;white-space:nowrap;">' + npcCell + '</td>' +
+            '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12px;color:' + DIM + ';white-space:nowrap;">' + esc(it.pack) + '</td>' +
             '</tr>';
         }).join('');
         return '<div style="margin:0 0 10px;border:1px solid ' + LINE + ';border-radius:8px;background:#fff;overflow:hidden;">' +
           '<div style="padding:7px 10px;background:' + SOFT + ';font-size:12.5px;font-weight:700;color:' + INK + ';border-bottom:1px solid ' + LINE + ';">' +
           esc(fam) + ' <span style="font-weight:400;color:' + DIM + ';">&middot; ' + fams[fam].length + ' line(s)</span></div>' +
           '<div class="mcr-scroll"><table style="border-collapse:collapse;width:100%;min-width:460px;">' +
-          '<tr><th style="text-align:left;padding:6px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">CATALOGUE DESCRIPTION</th>' +
-          '<th style="text-align:left;padding:6px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">NPC</th>' +
-          '<th style="text-align:left;padding:6px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">PACK</th></tr>' +
+          '<tr><th style="text-align:left;padding:9px 14px 9px 0;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">CATALOGUE DESCRIPTION</th>' +
+          '<th style="text-align:left;padding:9px 14px 9px 0;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">NPC</th>' +
+          '<th style="text-align:left;padding:9px 14px 9px 0;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">PACK</th></tr>' +
           rows + '</table></div></div>';
       }).join('');
     }
@@ -655,11 +815,81 @@
      Valve framework that stopped in September 2025 as though it were live.
      Derived from the date the panel already prints, so it cannot disagree with
      it. */
+  /* Framework expiry runway. Audit item 4.1, built 18/08/2026.
+
+     `fwEnded` answered one binary question — has this framework already ended.
+     That is the least useful moment to find out. A rep needs to know that the
+     framework carrying their range ends in six weeks while there is still time
+     to do something about it: on 18/08/2026 four of the 122 live frameworks end
+     within 90 days and 31 within a year, and one of those, Infusion Pumps, has
+     a successor whose go-live is roughly ten months after the incumbent stops.
+
+     THE RULE, printed in the panel so a reader can judge it (root rule 14).
+     The runway is the difference between today and the `ends` date recorded on
+     that framework's own NHS Supply Chain contract launch brief. Nothing else
+     feeds it. It is not a prediction, it says nothing about whether a successor
+     has been awarded, and it must never be read as one — the successor question
+     is answered by the brief, not by arithmetic.
+
+     THE EVIDENCE FLOOR. A date this cannot parse produces NO badge at all. It
+     does not fall back to a guess and it does not silently render a wrong
+     runway, because a confident "ENDS IN 3 WEEKS" computed from a misread date
+     is worse than no badge. Dates are parsed explicitly rather than through
+     Date.parse, whose handling of "31 August 2027" is implementation-defined
+     and differs between engines; all 122 recorded end dates parse under the
+     explicit reader, checked on 18/08/2026. */
+  var FW_MONTHS = {
+    january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+    july: 6, august: 7, september: 8, october: 9, november: 10, december: 11
+  };
+  function fwDate(ends) {
+    if (!ends) return null;
+    var t = String(ends).trim();
+    /* "31 August 2027" and "31 Aug 2027", the shape every brief uses. */
+    var m = t.match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
+    if (m) {
+      var mi = null, key = m[2].toLowerCase();
+      Object.keys(FW_MONTHS).forEach(function (full) {
+        if (full === key || full.slice(0, 3) === key) mi = FW_MONTHS[full];
+      });
+      if (mi === null) return null;
+      return new Date(Number(m[3]), mi, Number(m[1]));
+    }
+    /* ISO, in case a future feed writes it that way. */
+    var iso = t.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (iso) return new Date(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]));
+    return null;
+  }
+  function fwDaysLeft(ends) {
+    var d = fwDate(ends);
+    if (!d) return null;
+    var now = new Date();
+    now = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.round((d - now) / 86400000);
+  }
+  /* One badge, four states. Beyond a year there is no badge: a framework
+     running to 2029 is simply not news, and a badge on every row would make
+     the four that matter invisible. */
   function fwEnded(ends) {
-    if (!ends) return '';
-    var t = Date.parse(String(ends).trim());
-    if (isNaN(t) || new Date(t) >= new Date()) return '';
-    return ' <span style="background:#f2f2f2;border:1px solid #dcdcdc;color:#5b6675;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:99px;padding:1px 7px;">ENDED</span>';
+    var days = fwDaysLeft(ends);
+    if (days === null) return '';
+    var bg, bd, fg, label;
+    if (days < 0) {
+      bg = '#f2f2f2'; bd = '#dcdcdc'; fg = '#5b6675'; label = 'ENDED';
+    } else if (days <= 90) {
+      bg = '#fdecef'; bd = '#f0c4cc'; fg = '#b84a5c';
+      label = days < 14
+        ? 'ENDS IN ' + days + (days === 1 ? ' DAY' : ' DAYS')
+        : 'ENDS IN ' + Math.round(days / 7) + ' WEEKS';
+    } else if (days <= 365) {
+      bg = '#fbf3e2'; bd = '#e7d8b3'; fg = '#7a5b14';
+      label = 'ENDS IN ' + Math.round(days / 30.44) + ' MONTHS';
+    } else {
+      return '';
+    }
+    return ' <span style="background:' + bg + ';border:1px solid ' + bd + ';color:' + fg +
+      ';font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:99px;padding:1px 7px;white-space:nowrap;">' +
+      label + '</span>';
   }
 
   function frameworks(s, ctx) {
@@ -687,7 +917,7 @@
         var myLots = [];
         h.matched.forEach(function (m) { if (lots[m]) { myLots = myLots.concat(lots[m]); } });
         return '<div style="padding:9px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;line-height:1.55;">' +
-          '<b>' + esc(f.name) + '</b>' +
+          '<b>' + fwLinked(f.name, null, 'NHS Supply Chain') + '</b>' +
           ' <span style="color:' + DIM + ';">(as &ldquo;' + h.matched.map(esc).join('&rdquo;, &ldquo;') + '&rdquo;)</span>' +
           '<br><span style="font-size:12.5px;color:#37485a;">' +
           (f.category ? esc(f.category) + ' &middot; ' : '') +
@@ -706,7 +936,7 @@
       body += '<div style="font-size:12.5px;font-weight:700;color:' + INK + ';margin:14px 0 4px;">Also tracked by hand</div>' +
         '<div style="font-size:11.5px;color:' + DIM + ';margin:0 0 6px;">Tender-watch notes: re-tender values, award criteria and award dates, which the launch briefs do not carry. Curated, not read from a brief.</div>' +
         curated.map(function (f) {
-          return '<div style="padding:8px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;line-height:1.55;"><b>' + esc(f.name) + '</b>' +
+          return '<div style="padding:8px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;line-height:1.55;"><b>' + fwLinked(f.name, f.key, '') + '</b>' +
             (f.value ? ' <span style="color:' + GREEN + ';font-weight:700;">' + esc(f.value) + '</span>' : '') +
             (f.dates ? ' <span style="color:' + DIM + ';">&middot; ' + esc(f.dates) + '</span>' : '') +
             (f.note ? '<br><span style="color:#37485a;font-size:12.5px;">' + esc(f.note) + '</span>' : '') + '</div>';
@@ -716,24 +946,30 @@
   }
 
   function alerts(s) {
-    if (!(s.alerts && s.alerts.length)) {
+    var raw = s.alerts || [];
+    if (!raw.length) {
       return sec('Alerts &amp; recalls', good('No current alert indexed for this company.'));
     }
-    return sec('Alerts &amp; recalls', s.alerts.map(function (a) {
-      /* 169 of the indexed alerts are plain strings (a curated research note)
-         rather than the {date,title,detail} object. Rendering a string through
-         the object path prints an empty date and an empty title, so the two
-         shapes are handled separately. */
-      if (typeof a === 'string') {
-        return '<div style="padding:9px 11px;margin:0 0 7px;border-left:3px solid ' + LINE + ';background:#fff;border-radius:7px;font-size:13px;color:#37485a;line-height:1.6;">' + esc(a) + '</div>';
-      }
-      return '<div style="padding:9px 11px;margin:0 0 7px;border-left:3px solid ' + RED + ';background:#fff;border-radius:7px;font-size:13px;line-height:1.55;">' +
-        '<b style="color:' + RED + ';">' + esc(a.date) + '</b> — <b>' + esc(a.title) + '</b>' +
-        '<br><span style="color:#37485a;">' + esc(a.detail) + '</span>' +
-        (a.use ? '<br><span style="color:' + G + ';">▸ ' + esc(a.use) + '</span>' : '') +
-        (a.url ? ' <a href="' + esc(a.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">source ↗</a>' : '') +
-        '</div>';
-    }).join(''));
+    var all = raw.map(alertShape);
+    /* Recalls before curated notes. A recall is a dated safety event a rep may
+       have to answer for on a visit; a note is background. Both filters are
+       stable, so the seed's own order survives inside each group and an entry
+       with no date is never moved relative to its neighbours — no sort on date
+       is attempted, because 170 entries hold no date at all and any date sort
+       would have to invent a position for them. */
+    var ordered = all.filter(function (n) { return n.recall; })
+      .concat(all.filter(function (n) { return !n.recall; }));
+    var unsourced = all.filter(function (n) { return !n.url; }).length;
+    var allQuiet = unsourced === all.length;
+    var body = ordered.map(function (n) { return alertItem(n, allQuiet); }).join('');
+    if (unsourced) {
+      body += gap(allQuiet
+        ? (all.length === 1
+            ? 'This entry carries no source link, so treat it as a prompt to check rather than as a corroborated fact.'
+            : 'None of these ' + all.length + ' entries carries a source link, so treat them as prompts to check rather than as corroborated facts.')
+        : unsourced + ' of these ' + all.length + ' entries carry no source link and are shown on a dashed edge. Treat those as prompts to check rather than as corroborated facts.');
+    }
+    return sec('Alerts &amp; recalls', body);
   }
 
   function press(s) {
@@ -846,10 +1082,10 @@
       /* The count in the prose comes from the same array rendered beneath it,
          so prose and list cannot drift apart. */
       var known = grp.others.filter(function (n) {
-        return !!(ctx.byName[n] || (ctx.byKey && ctx.byKey[coKey(n)]));
+        return !!coResolve(n, ctx);
       }).length;
       body += '<div style="margin:0 0 12px;border:1px solid ' + LINE + ';border-radius:10px;padding:12px 14px;background:' + SOFT + ';page-break-inside:avoid;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact;">' +
-        '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + esc(grp.name) + '</div>' +
+        '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + fwLinked(grp.name, null, 'NHS Supply Chain') + '</div>' +
         '<div style="font-size:12px;color:' + DIM + ';margin:4px 0 9px;line-height:1.6;">' + grp.others.length +
         ' other supplier(s) on this framework &middot; ' + grp.total + ' in total, including ' + esc(sub.name) + '.' +
         (grp.reference ? ' &middot; ref ' + esc(grp.reference) : '') +
@@ -857,8 +1093,13 @@
         ' &middot; <a href="' + esc(grp.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">brief &#8599;</a></div>' +
         '<div>' + grp.others.map(function (n) {
           var lots = grp.lots && grp.lots[n];
-          var hub = ctx.byName[n] || (ctx.byKey && ctx.byKey[coKey(n)]);
-          return chip(n + (lots && lots.length ? ' \u00b7 ' + lots.join(', ') : ''), hub ? 'gold' : '');
+          var hub = coResolve(n, ctx);
+          /* Gold already meant "this Hub holds a profile"; that is now also
+             exactly the set of chips that open one. The brief sometimes names
+             a group's other trading entity, which resolves back to the company
+             being read — no self-link, so that chip stays a plain chip. */
+          var href = (hub && hub.name !== sub.name) ? coHref(hub.name) : '';
+          return chip(n + (lots && lots.length ? ' \u00b7 ' + lots.join(', ') : ''), hub ? 'gold' : '', href);
         }).join('') + '</div>' +
         '<div style="font-size:11px;color:' + DIM + ';margin-top:7px;">' + known + ' of these ' + grp.others.length +
         ' have a profile in this Hub (gold); the rest are named on the brief but not yet indexed here.</div>' +
@@ -929,7 +1170,7 @@
 
     body += shown.map(function (r) {
       return '<div style="padding:8px 0;border-bottom:1px solid #f0ece3;font-size:13px;line-height:1.5;">' +
-        '<b style="color:' + INK + ';">' + esc(r.name) + '</b>' +
+        '<b style="color:' + INK + ';">' + coName(r.name, ctx, sub.name) + '</b>' +
         '<span style="color:' + DIM + ';"> · ' + (r.fwCount ? r.fwCount + ' framework(s) indexed, none shared with ' + esc(sub.name) : 'no framework indexed') + '</span>' +
         '<br>' + r.labels.map(function (l) { return chip(l, 'gold'); }).join('') +
         '</div>';
@@ -958,8 +1199,8 @@
   }
 
   function fact(label, value) {
-    return '<tr><td style="padding:4px 10px 4px 0;font-size:12px;color:' + DIM + ';white-space:nowrap;vertical-align:top;">' + label + '</td>' +
-      '<td style="padding:4px 0;font-size:13px;color:' + INK + ';line-height:1.5;">' + value + '</td></tr>';
+    return '<tr><td style="padding:7px 18px 7px 0;font-size:12px;color:' + DIM + ';white-space:nowrap;vertical-align:top;">' + label + '</td>' +
+      '<td style="padding:7px 0;font-size:13px;color:' + INK + ';line-height:1.5;">' + value + '</td></tr>';
   }
 
   function panelCompanyFacts(s, ctx) {
@@ -971,7 +1212,7 @@
     var rec = finRecFor(s, fin);
     if (!rec) {
       return sec(TITLE, gap('Not yet fetched for this company. The current file is a manual interim covering ' +
-        esc(fin.coverage || 'a small set of companies') +
+        esc(fin.coverage || 'a small set of companies') + '.' +
         ' The full register fetch runs when the Companies House API key arrives — absence here is a coverage gap, not a company without filings.'));
     }
 
@@ -1098,7 +1339,7 @@
       /* THE HALF-THE-FIELD FLOOR. resolved * 2 < total refuses the panel. */
       if (resolved.length * 2 < everyone.length) {
         body += '<div style="margin:0 0 12px;border:1px dashed #ded6c4;border-radius:10px;padding:12px 14px;background:#faf8f3;page-break-inside:avoid;break-inside:avoid;">' +
-          '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + esc(grp.name) + '</div>' +
+          '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + fwLinked(grp.name, null, 'NHS Supply Chain') + '</div>' +
           gap('Refused: of the ' + everyone.length + ' suppliers on this framework, only ' + resolved.length +
             ' resolve to a confirmed Companies House record with an accounts filing. That is below half the field, and a size profile of under half a field misleads more than it informs. Unresolved: ' +
             unresolved.map(function (u) { return esc(u.name); }).join(', ') + '. Confirming identities is what fixes this; lowering the bar is not.') +
@@ -1110,20 +1351,20 @@
       var rows = resolved.map(function (r) {
         var me = r.name === sub.name;
         return '<tr>' +
-          '<td style="padding:5px 8px;border-bottom:1px solid #f0ece3;font-size:12.5px;color:' + INK + ';' + (me ? 'font-weight:700;' : '') + '">' + esc(r.name) + (me ? ' ◂' : '') + '</td>' +
-          '<td style="padding:5px 8px;border-bottom:1px solid #f0ece3;font-size:12.5px;color:#37485a;">' + esc(r.rec.accountsFilingVerbatim || r.rec.accountsCategory) + '</td>' +
-          '<td style="padding:5px 8px;border-bottom:1px solid #f0ece3;font-size:12px;color:' + DIM + ';white-space:nowrap;">' + esc(r.rec.incorporated ? ('inc. ' + r.rec.incorporated.slice(0, 4)) : '') + '</td>' +
+          '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12.5px;color:' + INK + ';' + (me ? 'font-weight:700;' : '') + '">' + coName(r.name, ctx, sub.name) + (me ? ' ◂' : '') + '</td>' +
+          '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12.5px;color:#37485a;">' + esc(r.rec.accountsFilingVerbatim || r.rec.accountsCategory) + '</td>' +
+          '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12px;color:' + DIM + ';white-space:nowrap;">' + esc(r.rec.incorporated ? ('inc. ' + r.rec.incorporated.slice(0, 4)) : '') + '</td>' +
           '</tr>';
       }).join('');
 
       body += '<div style="margin:0 0 12px;border:1px solid ' + LINE + ';border-radius:10px;padding:12px 14px;background:' + SOFT + ';page-break-inside:avoid;break-inside:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact;">' +
-        '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + esc(grp.name) + '</div>' +
+        '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + fwLinked(grp.name, null, 'NHS Supply Chain') + '</div>' +
         '<div style="font-size:12px;color:' + DIM + ';margin:4px 0 9px;line-height:1.6;">' + everyone.length + ' supplier(s) on this framework · ' +
         resolved.length + ' resolved to a confirmed filing · ' + unresolved.length + ' unresolved.</div>' +
         '<div class="mcr-scroll"><table style="border-collapse:collapse;width:100%;min-width:420px;">' +
-        '<tr><th style="text-align:left;padding:5px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">SUPPLIER</th>' +
-        '<th style="text-align:left;padding:5px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">MOST RECENT ACCOUNTS FILING</th>' +
-        '<th style="text-align:left;padding:5px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';"></th></tr>' +
+        '<tr><th style="text-align:left;padding:9px 14px 9px 0;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">SUPPLIER</th>' +
+        '<th style="text-align:left;padding:9px 14px 9px 0;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">MOST RECENT ACCOUNTS FILING</th>' +
+        '<th style="text-align:left;padding:9px 14px 9px 0;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';"></th></tr>' +
         rows + '</table></div>';
 
       if (unresolved.length) {
@@ -1793,7 +2034,156 @@
     return h;
   }
 
+  /* Normalises all three accepted shapes onto one record. Absent keys come
+     back as empty strings, never undefined, so alertItem() tests truthiness
+     and never has to print a placeholder. */
+  function alertShape(a) {
+    var o = (a && typeof a === 'object') ? a : {};
+    if (typeof a === 'string') o = { text: a };
+    var title = String(o.title || '');
+    return {
+      recall: !!title,
+      date: String(o.date || ''),
+      title: title,
+      text: String(o.text || o.detail || ''),
+      use: String(o.use || ''),
+      url: String(o.url || ''),
+      source: String(o.source || '')
+    };
+  }
+
+  /* One drawing for every alert. An entry with no source still renders in
+     full — thin data is the normal case here — but it is drawn in the same
+     visual language the report already uses for honest incompleteness
+     (.mcr-card--empty: dashed edge, ivory ground) and says so in a dim line,
+     so a member can see at a glance what is corroborated. */
+  function alertItem(n, quiet) {
+    var sourced = !!n.url;
+    var cls = 'mcr-alert' + (n.recall ? ' mcr-alert--recall' : '') +
+              (sourced ? '' : ' mcr-alert--unsourced');
+    var head = '';
+    if (n.date) head += '<b class="mcr-alert-d">' + esc(n.date) + '</b>';
+    if (n.title) head += (head ? ' — ' : '') + '<b>' + esc(n.title) + '</b>';
+    var out = '<div class="' + cls + '">';
+    if (head) out += head + (n.text ? '<br>' : '');
+    if (n.text) out += '<span class="mcr-alert-x">' + esc(n.text) + '</span>';
+    if (n.use) out += '<br><span class="mcr-alert-u">▸ ' + esc(n.use) + '</span>';
+    if (sourced) {
+      out += '<br><a href="' + esc(n.url) + '" target="_blank" rel="noopener">' +
+        esc(n.source || 'source') + ' ↗</a>';
+    } else if (n.source) {
+      out += '<div class="mcr-note">Source given as ' + esc(n.source) + '. No link held.</div>';
+    } else if (!quiet) {
+      /* Suppressed when nothing in the panel is sourced: the panel's own line
+         already says it once, and repeating it on every entry would read as a
+         fault rather than as the ordinary state of a thin record. */
+      out += '<div class="mcr-note">No source link held for this entry.</div>';
+    }
+    return out + '</div>';
+  }
+
+  /* ------------------------------------------------------------------
+     LINKING A FRAMEWORK NAME TO THE HUB'S FRAMEWORK HUB.
+
+     ANCHOR PROOF, established 18/08/2026, recorded here so nobody has to
+     re-derive it:
+
+     - The target page is WordPress page 678,
+       /medical-sales-hub/frameworks/ ("Framework Hub"). A logged-out fetch
+       returns HTTP 200 carrying the "This page is for Hub members" gate, so
+       the page exists and is subscriber-gated. It is not empty.
+     - No file in the repo's app/ directory renders that page; its markup is
+       page content, read via the WordPress API for page 678.
+     - Its anchors are assigned at runtime by the page's own inline anchor
+       script (marker comment ETH-ANCHORS-FRAMEWORKS), which walks every h1
+       and h2 and gives it an id from a fixed map: fw-nhssc, fw-sbs, fw-ccs,
+       fw-noecpc, fw-hte, fw-nhssc-categories, fw-sbs-directory, fw-law,
+       fw-start, fw-win, fw-downloads, fw-renewal. Anything unmapped falls
+       back to sec- plus a slug of the heading.
+     - Those headings are BUYING ORGANISATIONS and guidance sections. The page
+       carries no heading, no row and no id for an individual framework: a
+       search of the page content for framework names such as "Advanced Wound
+       Care" finds only running prose, never a target. PER-FRAMEWORK ANCHORS
+       DO NOT EXIST.
+
+     So the deepest honest link is the section for the buying organisation the
+     framework sits under, and a framework whose owning body cannot be named
+     gets the plain page link. Nothing here invents an anchor.
+     ------------------------------------------------------------------ */
+  function fwHref(key, name, org) {
+    var MAP = [
+      ['NHS SUPPLY CHAIN', 'fw-nhssc'],
+      ['SUPPLY CHAIN', 'fw-nhssc'],
+      ['NHS SBS', 'fw-sbs'],
+      ['SHARED BUSINESS SERVICES', 'fw-sbs'],
+      ['CROWN COMMERCIAL', 'fw-ccs'],
+      ['GOVERNMENT COMMERCIAL AGENCY', 'fw-ccs'],
+      ['CCS', 'fw-ccs'],
+      ['NOE CPC', 'fw-noecpc'],
+      ['HEALTHTRUST EUROPE', 'fw-hte'],
+      ['HEALTH TRUST EUROPE', 'fw-hte'],
+      ['HTE', 'fw-hte']
+    ];
+    var PAGE = '/medical-sales-hub/frameworks/';
+    var t = String(name || key || '').toUpperCase();
+    if (!t.replace(/[^A-Z0-9]/g, '')) return null;
+    var hay = (String(org || '').toUpperCase() + ' ' + t);
+    for (var i = 0; i < MAP.length; i++) {
+      if (new RegExp('\\b' + MAP[i][0] + '\\b').test(hay)) return PAGE + '#' + MAP[i][1];
+    }
+    return PAGE;
+  }
+
+  /* The framework name as it should be printed: escaped, and wrapped in an
+     internal link when fwHref gives one. Same tab deliberately, this is a Hub
+     page. Plain text when there is nothing sensible to link to. */
+  function fwLinked(name, key, org) {
+    var txt = esc(name);
+    var href = fwHref(key || null, name, org || '');
+    if (!href) return txt;
+    return '<a href="' + href + '" style="color:inherit;text-decoration:underline;text-decoration-color:' + G + ';text-underline-offset:2px;">' + txt + '</a>';
+  }
+
+  /* ---------------------------------------------------------------------
+     COMPANY CROSS-LINKS. A report names other companies in four places — the
+     framework co-listing, the same-speciality list, the field filing profile
+     and the chips built from them. Each of those names is a company a member
+     may want to read next, and until now they had to scroll back and retype it.
+
+     THE TARGET IS THE `?company=` DEEP LINK HANDLED AT THE BOTTOM OF boot().
+     No second entry point was built for this: the link is the same page with a
+     different query string, so the browser loads the page afresh, boot() runs
+     again, and the name is resolved through find()/show() exactly as a typed
+     name is. Nothing here can reach a company the picker itself could not.
+
+     A NAME THAT DOES NOT RESOLVE IS DELIBERATELY LEFT AS PLAIN TEXT. The
+     contract launch briefs name companies this Hub has never indexed; linking
+     one would open the picker on a dead query, and "No match for …" under a
+     link a member just clicked reads as a broken report rather than as an
+     honestly unindexed company. Plain text is the correct output there.
+     --------------------------------------------------------------------- */
+  function coResolve(name, ctx) {
+    if (!name || !ctx) return null;
+    return ctx.byName[name] || (ctx.byKey ? ctx.byKey[coKey(name)] : null) || null;
+  }
+
+  function coHref(name) {
+    return REPORT_URL + '?company=' + encodeURIComponent(String(name || ''));
+  }
+
+  /* Name as HTML: linked to its own report where the renderer can resolve it,
+     plain text otherwise, and plain text for the company being read — a report
+     that links to itself is a dead loop dressed up as a route out. */
+  function coName(name, ctx, selfName, label) {
+    var text = esc(label == null ? name : label);
+    if (!name || name === selfName) return text;
+    var rec = coResolve(name, ctx);
+    if (!rec || rec.name === selfName) return text;
+    return '<a class="mcr-colink" href="' + esc(coHref(rec.name)) + '">' + text + '</a>';
+  }
+
   function composeSections(sub, ctx) {
+    resetSections();
     var d = deepFor(sub);
     var h = '';
 
@@ -1945,6 +2335,13 @@
         'Company marks shown are the property of their respective owners and appear for identification only. ' +
         '© Elevate and Thrive Ltd ' + today.getFullYear() + '. Not for redistribution.</div>' +
       '</div></article>';
+
+    /* Every panel is stamped open before the pack is written. The pack is a
+       document to be read end to end, on paper or in a PDF, where a collapsed
+       panel is not a tidier page — it is a missing one. The regex only adds
+       the attribute where it is absent, so the two panels that were already
+       open are left alone. */
+    inner = inner.replace(/<details(?! open)/g, '<details open');
 
     /* The pack is the same markup and the same stylesheet as the on-page
        card — it must be, or the printed document and the page would drift.
