@@ -294,23 +294,63 @@ def query_google_news(name):
     return items
 
 
-def cluster(items):
-    """Group items that are the same story, by headline token overlap."""
+def cluster(items, name_toks=None):
+    """Group items that are the SAME STORY, by headline token overlap.
+
+    ⚠️ TWO DEFECTS FIXED HERE ON 18/08/2026. Both made rule 5 CORROBORATION test
+    the same COMPANY rather than the same STORY, which is the opposite of what the
+    rule printed beside the item on the Hub claims. Found by dry-running the Live
+    Desk panel against the published file; 14 of 34 live items were affected.
+
+    1. THE FLOOR WAS SATISFIED BY THE COMPANY'S OWN NAME. The old test was
+       `len(common) >= max(2, ...)`, and every headline about a supplier contains
+       that supplier's name. Any two-token company name — "Smith+Nephew" normalises
+       to {smith, nephew} — supplied both tokens on its own, so two unrelated
+       stories clustered and each corroborated the other. Live example: the
+       headline "Smith+Nephew and Imperial College London launch centre to
+       accelerate innovation in surgical robotics" was published carrying Reuters
+       and MedTech Dive as its corroboration, and both were covering Smith+Nephew
+       BUYING INTEGRITY ORTHOPAEDICS — a different story entirely. A member reading
+       "two independent publishers carried this" was being told something false.
+
+       So the supplier's own name and alias tokens are removed before the overlap
+       is measured. Corroboration now has to come from what the story is ABOUT.
+
+    2. THE CLUSTER GOT LOOSER AS IT GREW. `c["toks"] |= toks` accumulated every
+       absorbed headline's tokens into the set future items were compared against,
+       so a cluster that had swallowed three stories offered a much larger surface
+       for the fourth to match on. Each item is now compared against the cluster's
+       SEED tokens, which do not move.
+
+    Root rule 14: this is a derived claim, so the rule it was derived under is
+    printed beside it and there is now an invariant that fails if the logic breaks
+    (verify.check_company_press, "corroboration satisfied by the company name").
+    """
+    name_toks = name_toks or set()
     clusters = []
     for it in items:
         toks = set(t for t in press_match.norm(it["headline"]).split() if len(t) > 3)
-        if not toks:
+        # The company's own name is not evidence that two stories are the same story.
+        topic = toks - name_toks
+        if not topic:
+            # A headline that is nothing but the company's name carries no topic to
+            # corroborate on. It starts its own cluster and can only ever be joined
+            # by another such headline, which rule 5 will then reject for want of a
+            # second reputable publisher unless they are genuinely the same story.
+            clusters.append({"toks": toks, "topic": topic, "items": [it]})
             continue
         placed = False
         for c in clusters:
-            common = toks & c["toks"]
-            if len(common) >= max(2, int(0.5 * min(len(toks), len(c["toks"])))):
+            if not c["topic"]:
+                continue
+            common = topic & c["topic"]
+            # Compared against the cluster's SEED topic, never an accumulating union.
+            if len(common) >= max(2, int(0.5 * min(len(topic), len(c["topic"])))):
                 c["items"].append(it)
-                c["toks"] |= toks
                 placed = True
                 break
         if not placed:
-            clusters.append({"toks": toks, "items": [it]})
+            clusters.append({"toks": toks, "topic": topic, "items": [it]})
     return clusters
 
 
@@ -338,8 +378,16 @@ def build_items(supplier, raw, cache, resolve=True, rejects=None, universe=None)
             rejects.append({"headline": it["headline"], "publisher": it.get("publisher", ""),
                             "reason": why})
 
+    # Every token in this supplier's own name and alias forms. These are stripped
+    # before two headlines are compared, so corroboration is measured on the story
+    # and never on the company name — see cluster()'s docstring for the live
+    # example that made this necessary.
+    name_toks = set()
+    for form in [supplier.get("name", "")] + list(supplier.get("aliases") or []):
+        name_toks |= set(t for t in press_match.norm(form).split() if len(t) > 3)
+
     out = []
-    for c in cluster(identified):
+    for c in cluster(identified, name_toks=name_toks):
         reps = {}
         for it in c["items"]:
             if reputable(it["publisher"]) and it["publisher"] not in reps:

@@ -1377,6 +1377,37 @@ cp("a story whose two sources are the same publisher twice",
    cp_doc([cp_item(sources=[cp_src(), cp_src(url="https://www.medtechdive.com/news/other/")])]),
    "distinct publisher")
 
+# --- THE SECOND INCIDENT: corroboration about the COMPANY, not the STORY ----
+# 18/08/2026. refresh_company_press.cluster() grouped headlines on token overlap
+# with a floor of two shared words, and a two-token company name supplied both.
+# So two unrelated stories about one company clustered and each corroborated the
+# other. 13 of 34 live items were affected. The live example below is real: the
+# Imperial College robotics centre was published carrying Reuters and MedTech
+# Dive as its corroboration, and both were covering the Integrity Orthopaedics
+# ACQUISITION. The reader was told two publishers carried this story. They had not.
+cp("corroborating links that carry a different story about the same company",
+   cp_doc([cp_item(
+       headline="Smith+Nephew and Imperial College London launch centre for surgical robotics",
+       match={"alias": "convatec", "aliasStrength": "distinctive",
+              "sectorTerm": "surgical", "relevanceTerm": "london"},
+       sources=[
+           cp_src(publisher="BioSpace",
+                  url="https://www.biospace.com/press-releases/convatec-imperial-college-london-launch-centre-surgical-robotics"),
+           cp_src(publisher="MedTech Dive",
+                  url="https://www.medtechdive.com/news/convatec-acquire-integrity-orthopaedics/809570/"),
+           cp_src(publisher="Reuters",
+                  url="https://www.reuters.com/legal/transactional/convatec-buy-integrity-orthopaedics-450-million/")])]),
+   "appear to carry a DIFFERENT story")
+
+cp("a headline that is only the company's own name, presented as corroborated",
+   cp_doc([cp_item(headline="Convatec",
+                   sources=[cp_src(), cp_src(publisher="The Times",
+                                             url="https://www.thetimes.com/business/article/convatec")])]),
+   "fewer than two substantial words")
+
+# The other half of the rule lives in CP_QUIET, below: it must NOT fire on genuine
+# corroboration worded differently, nor on URLs that carry no slug to judge.
+
 # --- links -----------------------------------------------------------------
 cp("a source with no URL at all",
    cp_doc([cp_item(sources=[cp_src(url=""), cp_src(publisher="The Times",
@@ -1447,6 +1478,29 @@ cp("evidence shown to the reader that is not the evidence the rule used",
 
 CP_QUIET = [
     ("a good file", cp_doc()),
+    # The other half of the 18/08/2026 corroboration invariant. Two publishers
+    # WORD the same story differently, and both slugs carry it — this must pass.
+    # The obvious wrong fix for that defect is to demand the slugs match closely,
+    # which would block genuine corroboration; this case is what stops it.
+    ("two publishers wording the SAME story differently",
+     cp_doc([cp_item(
+         headline="Convatec plans $1B investment in R&D in the US and UK",
+         sources=[
+             cp_src(publisher="MedTech Dive",
+                    url="https://www.medtechdive.com/news/convatec-to-invest-1b-global-rd/"),
+             cp_src(publisher="The Times",
+                    url="https://www.thetimes.com/business/article/convatec-investment-rd-uk-sites")])])),
+    # ID-style and section-only URLs carry no headline in the path, so there is
+    # nothing to compare and the check must stay silent rather than guess.
+    # Absence of evidence is not evidence. The live case that forced this:
+    # koreabiomed.com/news/articleView.html?idxno scored five "words" — none of
+    # which say anything about the story.
+    ("sources whose URLs are ID-based, carrying no slug to judge",
+     cp_doc([cp_item(
+         sources=[cp_src(publisher="MedWatch",
+                         url="https://medwatch.com/News/medtech/article18754541.ece"),
+                  cp_src(publisher="Korea Biomedical Review",
+                         url="https://www.koreabiomed.com/news/articleView.html?idxno")])])),
     # The honest empty state is the WHOLE POINT of lastChecked. It must never fail.
     ("a supplier checked with nothing meeting the bar",
      cp_doc(**{"suppliers": {"Convatec": {"lastChecked": cp_today(), "items": []},

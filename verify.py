@@ -2894,6 +2894,21 @@ def check_search_index(doc):
 
 PRESS_URL_TYPES = {"publisher", "google-news-redirect"}
 
+# Words that appear in a news URL's PATH because of how the site is built, not
+# because of what the story says. Stripped before deciding whether a link carries
+# a headline slug worth comparing (see the corroboration invariant in
+# check_company_press). Keep this list to structural words only: every entry here
+# is a word the check can no longer see, so a real headline word added by mistake
+# would quietly weaken it.
+PRESS_URL_BOILERPLATE = {
+    "news", "article", "articles", "articleview", "html", "htm", "php", "aspx",
+    "story", "stories", "view", "index", "idxno", "content", "print", "node",
+    "post", "posts", "page", "pages", "default", "item", "items", "detail",
+    "details", "feature", "featured", "topics", "topic", "section", "sections",
+    "category", "categories", "tag", "tags", "archive", "latest", "breaking",
+    "press", "releases", "release", "media", "read", "show", "full",
+}
+
 
 def check_company_press(doc, seed):
     """data/company-press.json — the supplier press feature.
@@ -3038,6 +3053,86 @@ def check_company_press(doc, seed):
                         FAIL("company-press", "a source on %r's item %r is recorded as a Google "
                                               "News redirect but does not point at "
                                               "news.google.com." % (name, head[:60]))
+
+            # ---- INVARIANT: corroboration is about the STORY, not the COMPANY --
+            # Added 18/08/2026 after the live file published 14 items whose
+            # "two independent publishers" were carrying a DIFFERENT story about
+            # the same company. refresh_company_press.cluster() grouped on headline
+            # token overlap with a floor of two shared words, and a two-token
+            # company name supplied both — so "Smith+Nephew ... launch centre ...
+            # surgical robotics" was corroborated by Reuters and MedTech Dive
+            # reporting Smith+Nephew BUYING Integrity Orthopaedics.
+            #
+            # The gate cannot read the corroborating articles, so it tests the
+            # thing it CAN see: the lead headline must carry at least two
+            # substantial words that are NOT part of the company's own name. A
+            # headline that is only the company name plus filler has no topic for a
+            # second publisher to have corroborated, and the claim cannot be
+            # supported whatever the sources say.
+            #
+            # This is deliberately a check on the PUBLISHED EVIDENCE, not a
+            # re-derivation of the clustering — re-running the clusterer here would
+            # only re-assert the writer's own logic and would have passed the very
+            # file that was wrong. Root rule 14: an invariant that fails if the
+            # logic breaks, not a restatement of it.
+            #
+            # The gate cannot read the corroborating articles. What it CAN read is
+            # each source's own URL: a publisher-resolved link usually carries the
+            # article's headline as its path slug, and that slug is written by the
+            # publisher, not by us. Comparing it against the lead headline is how
+            # this defect was found in the first place. Sources whose URL is
+            # ID-based carry no slug signal and are not assessed — absence of
+            # evidence is not evidence here.
+            if head and len(srcs) >= 2:
+                name_toks = set()
+                for form in [name] + list((supplier or {}).get("aliases") or []):
+                    name_toks |= {t for t in press_match.norm(form).split() if len(t) > 3}
+                topic = {t for t in press_match.norm(head).split() if len(t) > 3} - name_toks
+
+                if len(topic) < 2:
+                    FAIL("company-press",
+                         "the item %r published against %r is presented as corroborated by %d "
+                         "publishers, but its headline carries fewer than two substantial words "
+                         "beyond the company's own name, so there is no story for a second "
+                         "publisher to have corroborated." % (head[:60], name, len(srcs)))
+                else:
+                    agree, assessed, disagree = set(), 0, []
+                    for s in srcs:
+                        if (s or {}).get("urlType") != "publisher":
+                            continue        # a redirect's URL is Google's, not the publisher's
+                        pub = str((s or {}).get("publisher") or "").strip()
+                        # PATH ONLY — the host is the publisher's name, not the story's.
+                        raw_url = str((s or {}).get("url") or "")
+                        path = raw_url.split("//")[-1]
+                        path = path[path.find("/"):] if "/" in path else ""
+                        slug = press_match.norm(re.sub(r"[-/_.?=&]", " ", path))
+                        slug_toks = ({t for t in slug.split() if len(t) > 3}
+                                     - name_toks - PRESS_URL_BOILERPLATE)
+                        if len(slug_toks) < 3:
+                            # An ID-style or section-only URL carries no headline to
+                            # compare. Not assessed, in either direction: absence of
+                            # evidence is not evidence. Live example that forced this
+                            # (18/08/2026): koreabiomed.com/news/articleView.html?idxno
+                            # scored 5 "words" — news, articleview, html, idxno and the
+                            # host — none of which say anything about the story.
+                            continue
+                        assessed += 1
+                        if topic & slug_toks:
+                            agree.add(pub.lower())
+                        else:
+                            disagree.append((pub, str(s.get("url"))[:90]))
+                    # Only judge when there is enough signal to judge on.
+                    if assessed >= 2 and len(agree) < 2 and disagree:
+                        FAIL("company-press",
+                             "the item %r published against %r claims corroboration from %d "
+                             "publishers, but %d of the resolved source links share no word with "
+                             "the headline beyond the company's own name — so they appear to "
+                             "carry a DIFFERENT story about the same company (e.g. %s %s). "
+                             "Corroboration must be about the story, never about the company "
+                             "name. This is the 18/08/2026 defect; do not loosen this check to "
+                             "make a push go through."
+                             % (head[:60], name, len(srcs), len(disagree),
+                                disagree[0][0], disagree[0][1]))
             if len(pubs) < 2:
                 FAIL("company-press", "the item %r published against %r is carried by %d distinct "
                                       "publisher(s); two are required. One outlet repeating a "
