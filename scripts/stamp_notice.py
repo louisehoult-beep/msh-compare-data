@@ -55,6 +55,8 @@ TERMS = "https://medsalesintelligencehub.co.uk/terms/"
 # Hash outputs, safe to publish. See the module docstring on the salt.
 REFS = {
     "company-awards.json":     "ETH-D8F9201A9",
+    "company-press.json":      "ETH-D5A18D6E2",
+    "company-logos.json":      "ETH-D6F85FA5F",
     "company-financials.json": "ETH-DCC5A9B31",
     "compare-issues.json":     "ETH-D6991A2E7",
     "compare-suppliers.json":  "ETH-D21869855",
@@ -68,6 +70,7 @@ REFS = {
     "products.json":           "ETH-D34736E9E",
     "speciality-map.json":     "ETH-DF6043FFA",
     "supplier-index.json":     "ETH-D773506D0",
+    "supplier-product-detail.json": "ETH-D2C42E102",
     "supplier-products.json":  "ETH-D12B91CCA",
     "supplier-seed.json":      "ETH-DBE24A96B",
     "suppressed-notices.json": "ETH-DB591E91D",
