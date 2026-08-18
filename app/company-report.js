@@ -1865,9 +1865,18 @@
 
     /* Stage 5 entry point. The pack is the same composer rendered for
        print — it adds no claims, so the button lives on the card. */
-    h += '<div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;margin:14px 0 0;">' +
+    /* Two entry points, not one. "Take it into the meeting" is the rep already
+       selling for this company; "interviewing here" is the candidate about to be
+       interviewed BY it, which is a different job and was the reason members had
+       to leave the Hub to prepare. The interview link carries the company name in
+       ?company= so Interview Prep opens on the same record this report is showing,
+       rather than making them find it again in a picker. Added 18/08/2026 (Lou). */
+    h += '<div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;margin:14px 0 0;flex-wrap:wrap;">' +
       '<span style="font-size:11.5px;color:' + DIM + ';">Take it into the meeting:</span>' +
-      '<button id="mcrPack" class="mcr-btn">Download / print this report</button></div>';
+      '<button id="mcrPack" class="mcr-btn">Download / print this report</button>' +
+      '<span style="font-size:11.5px;color:' + DIM + ';">Interviewing here:</span>' +
+      '<a class="mcr-btn" style="text-decoration:none;display:inline-block;" href="/medical-sales-hub/interview-prep/?company=' +
+      encodeURIComponent(sub.name || '') + '">Prepare for an interview with ' + esc(sub.name || 'this company') + '</a></div>';
 
     h += composeSections(sub, ctx);
 
