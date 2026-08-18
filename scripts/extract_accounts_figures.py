@@ -214,7 +214,8 @@ def facts(html):
             pass
         if neg:
             val = -val
-        yield name, a.get("contextRef") or a.get("contextref") or "", val, a.get("unitRef") or a.get("unitref") or ""
+        yield (name, a.get("contextRef") or a.get("contextref") or "", val,
+               a.get("unitRef") or a.get("unitref") or "", float(text) if not neg else -float(text))
 
 
 def figures_from(html):
@@ -222,7 +223,10 @@ def figures_from(html):
     ctx = contexts(html)
     umap = units(html)
     out = []
-    for name, cref, val, unit in facts(html):
+    unscaled = {}
+    for name, cref, val, unit, raw in facts(html):
+        unscaled[(name, cref)] = raw
+    for name, cref, val, unit, raw in facts(html):
         c = ctx.get(cref)
         if not c:
             continue
@@ -239,6 +243,26 @@ def figures_from(html):
                 continue
             out.append((end, "turnover", val, name))
         elif name in EMPLOYEE_TAGS:
+            # WHY THIS EXISTS (18/08/2026). A headcount is a count of people. It is
+            # tagged with the "pure" unit and the number printed on the face of the
+            # accounts IS the number of people, so `scale` can only ever be a no-op
+            # or a corruption. One widely used UK accounts-production package emits
+            # scale="-2" on AverageNumberEmployeesDuringPeriod, and applying it
+            # faithfully turned a printed 82 into 0.82, which the writer below then
+            # rounded to 1. That is how Crest Medical Ltd came to publish 1 employee
+            # against £24.3m of turnover and £3.3m of staff costs, and it was
+            # doing the same to Edwards Lifesciences (106), QIAGEN UK (106), Bender
+            # UK (134), DDC Dolphin (110), Oticon (128), Reliance Medical (78),
+            # Gailarde (69) and Anglian Dental (56).
+            #
+            # The rule: a scaled headcount that is not a whole number was not scaled,
+            # it was mangled, so fall back to the figure as printed. This never
+            # invents a number — the unscaled text is what a reader sees on the page.
+            # A filing that legitimately carries scale="0" or no scale is untouched,
+            # which the 20 largest headcounts in this dataset confirm.
+            raw = unscaled.get((name, cref))
+            if raw is not None and abs(val - round(val)) > 1e-9:
+                val = raw
             out.append((end, "employees", val, name))
     return out
 
