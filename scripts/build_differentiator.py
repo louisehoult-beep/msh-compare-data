@@ -75,34 +75,29 @@ def main():
     # seed record. A supplier whose labels reach two or more specialities is NOT
     # pre-filled: guessing which of them a given product belongs to is precisely the
     # error the category lock exists to prevent.
-    # A supplier is single-speciality when every label it carries admits the SAME
-    # one slug. A resolved label admits exactly its slug; an unresolved compound
-    # label ("ENT / audiology") admits either of its candidates. Oticon carries
-    # "Audiology and hearing" AND "ENT / audiology", and audiology is the only
-    # slug both admit, so Oticon is audiology — without having to claim that
-    # "ENT / audiology" means audiology for every future supplier, which it does
-    # not. The intersection is per supplier and is evidence about that supplier.
+    # A SUPPLIER SELLS INTO SEVERAL SPECIALITIES, so its speciality is not a
+    # property a product can inherit. This code used to file every product of a
+    # "single-speciality" supplier to that speciality. Removed 18/08/2026, because
+    # the inference is unsound twice over:
     #
-    # Reviewed 18/08/2026: this is the whole value of the six unresolved compound
-    # labels. It reaches ONE supplier and 70 products. Every other supplier under
-    # those labels sells into several specialities however they are read, so its
-    # products are mapped division by division regardless. The six are correctly
-    # unresolvable and are left that way.
-    cand = {}
-    for e in lmap.get("entries", []):
-        s = set(e["slugs"]) if e.get("slugs") else set(e.get("candidates") or [])
-        if s:
-            cand[e["label"]] = s
-
-    sole = {}
-    for co in own:
-        labs = (seed.get(co) or {}).get("specialities") or []
-        if not labs or not all(l in cand for l in labs):
-            continue
-        inter = set.intersection(*[cand[l] for l in labs])
-        settled = {next(iter(cand[l])) for l in labs if len(cand[l]) == 1}
-        if len(inter) == 1 and len(settled) <= 1:
-            sole[co] = next(iter(inter))
+    #   * 35 of the 44 suppliers it treated as single-speciality carry a
+    #     _specialitiesEvidence caveat on their seed record — the speciality was
+    #     read off a framework listing with no product-level evidence behind it.
+    #     Interweave Textiles and Agile Medical each have 29 divisions filed under
+    #     "Patient handling"; Oticon has 46 under audiology. An incomplete list
+    #     propagated to every product mis-files most of them.
+    #   * even a complete list would not settle it. Convatec genuinely sells into
+    #     continence, wound, vascular and ostomy: the speciality of a Convatec
+    #     product is a fact about the PRODUCT, not about Convatec.
+    #
+    # The division mapping already answers it correctly and uniformly, for
+    # single- and multi-speciality suppliers alike: a division is mapped to one
+    # "speciality:type", and its products take that. Nothing is inherited.
+    #
+    # The relationship runs the other way. A supplier's specialities are DERIVED
+    # from the categories its products are mapped to — product-level evidence,
+    # which is what the seed's framework-derived list is missing. See
+    # scripts/report_supplier_specialities.py.
 
     # (supplier, division) -> "speciality:type", the recorded human decision.
     mapped = {(e["supplier"], e["division"]): e["hub"]
@@ -159,7 +154,7 @@ def main():
             # itself. Where they do AND the manufacturer's own category is one of
             # that speciality's gated types, the pair needs no separate decision:
             # the data already says it. Anything less certain is held.
-            spec = p.get("s") or sole.get(co)
+            spec = p.get("s")
             if not cat and spec and p.get("category"):
                 types = (vocab.get(spec, {}).get("types") or {})
                 want, wantset = norm(p["category"]), tokens(p["category"])
