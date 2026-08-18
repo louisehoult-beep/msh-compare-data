@@ -151,6 +151,51 @@ def _(tmp):
     return "THIN EVIDENCE"
 
 
+
+def seed_clean_plus(extra_framework):
+    """The seed with every unsourced value/award claim stripped, plus ONE bad entry.
+
+    Written this way deliberately. When these cases were added the live seed
+    already held five unsourced money figures, so a case that merely injected a
+    sixth would have "passed" on the pre-existing ones and proved nothing. The
+    clean-then-inject shape means the gate has to reject THIS entry, and the case
+    keeps its meaning after the real data is fixed.
+    """
+    d = json.load(open("data/supplier-seed.json"))
+    suppliers = d.get("suppliers") if isinstance(d, dict) else d
+    if isinstance(suppliers, dict):
+        suppliers = list(suppliers.values())
+    for s in suppliers or []:
+        for f in (s.get("frameworks") or []):
+            if f.get("source") or f.get("url") or f.get("capturedOn"):
+                continue
+            f.pop("value", None)
+            for field in ("dates", "note"):
+                v = f.get(field) or ""
+                if re.search(r"award|re-?tender", v, re.I):
+                    f[field] = ""
+    (suppliers or [{}])[0].setdefault("frameworks", []).append(extra_framework)
+    json.dump(d, open("data/supplier-seed.json", "w"))
+
+
+@case("a framework money value published with no source")
+def _(tmp):
+    # £140m ex VAT sat on the IV Cannula entry for months with no link. A rep
+    # quotes that to a category manager who negotiates the contract for a living.
+    seed_clean_plus({"name": "NHS Supply Chain — Invented Category",
+                     "value": "£140m ex VAT", "dates": "01/04/2027-31/03/2031"})
+    return "no source, url or capturedOn"
+
+
+@case("a framework award date published with no source")
+def _(tmp):
+    # An award date is a claim with a fuse on it: correct when typed, misleading
+    # the day after. Nothing re-reads a curated entry, so it must carry a notice.
+    seed_clean_plus({"name": "NHS Supply Chain — Invented Category",
+                     "dates": "award ~27/07/2026"})
+    return "asserts an award or re-tender"
+
+
 def sourced(count=2, min_n=2):
     """A trust with `count` contacts each seen on at least `min_n` notices.
 
