@@ -42,6 +42,17 @@ jobs:
       # that let 145 false NHS job changes reach members in July. Root CLAUDE.md
       # rule 13. If this step fails, the data is wrong: fix the data, never loosen
       # the check to make the push go through.
+      # The Rep's Briefing's "What moved on the Hub" section (18/08/2026). Written
+      # HERE and not in the pipeline repo because it is computed from THIS repo's
+      # commit history, which only exists on this checkout (fetch-depth: 0). It
+      # compares the last committed week against the data this run just built, so
+      # it must come after the build and BEFORE the gate — a file that reaches a
+      # member-facing email is published output and goes through verify.py like
+      # everything else. Nothing here is a fresh claim: every line is a difference
+      # between two committed states of our own data.
+      - name: Weekly change summary for the Rep's Briefing
+        run: python3 scripts/change_report.py --since 7d --brief state/whats-moved-7d.json > /dev/null
+
       - name: Publish gate — nothing commits until this passes
         run: python3 verify.py
       - name: Commit if changed
