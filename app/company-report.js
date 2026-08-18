@@ -99,15 +99,42 @@
   }
 
   /* ---------------------------------------------------------------------
-     HOUSE STYLESHEET — redesigned 18/08/2026.
+     HOUSE STYLESHEET — redesigned 18/08/2026, respaced and de-collided
+     18/08/2026 (pm).
 
      ONE stylesheet, shipped inside this file, used by BOTH the on-page card
      and the printable pack, so the two surfaces cannot drift apart. It is
      entirely self-contained: no external stylesheet, no web font, no CDN
      script — the Hub page must render this with zero third-party requests.
 
-     Every selector is scoped under `.mcr`, so nothing here can reach the rest
-     of the WordPress page, and WordPress's own theme CSS cannot reach in.
+     TWO HOST RULES REACH IN, AND BOTH HAD TO BE BEATEN ON THEIR OWN TERMS.
+     Read this before "tidying" any selector below.
+
+     1. EVERY SELECTOR CARRIES A `.mcr ` PREFIX. The Hub page's own token
+        block declares `.msh *{margin:0;padding:0;box-sizing:border-box}`,
+        and this report mounts inside `div.msh`. A bare `.mcr-card` and
+        `.msh *` are BOTH specificity 0,1,0, so the tie breaks on document
+        order — and this style element is appended to <head> while the page's
+        block sits in the body, so the page won every tie. Measured live on
+        18/08/2026: .mcr-body, .mcr-card and .mcr-part all computed to
+        padding 0, which is why the report's text sat hard against the card
+        edges. The prefix makes each rule 0,2,0 and settles it on
+        specificity rather than on where the <style> happens to land.
+
+     2. THE PICKER FIELDS CARRY !important. The theme's own form rule is
+        `textarea:not(.block-editor-plain-text), input:not([type="submit"])
+        :not([type="checkbox"]):not([type="radio"]):not([type="range"])…`
+        — specificity 0,4,1, which no sane class selector reaches. It paints
+        `--wp--custom--input-background`, a near-black navy, so the company
+        box rendered as dark ink on a dark ground and the member could not
+        read what they had typed. !important is the correct instrument for a
+        rule that specific; do not swap it for more classes.
+
+     THE REPORT IS CAPPED AT A READABLE MEASURE. Uncapped it inherits the
+     full-bleed Hub page — 2,395px of running text on a wide screen. The cap
+     is on .mcr-report only, never on .mcr itself: the printable pack sets
+     its own measure on <body class="mcr">, and a max-width on .mcr would
+     out-specify it.
 
      Colours are the brand guide's, verbatim: Midnight Navy #0B1C33 with the
      signature 135deg navy gradient, Deep Gold #A8842C for labels and rules on
@@ -137,117 +164,137 @@
        somehow renders before boot() still looks like the house design. */
     '--mcr-accent:#C49B5C;--mcr-accent-ink:#A8842C;',
     'font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;',
-    'color:var(--mcr-body);font-size:14px;line-height:1.6;}',
+    'color:var(--mcr-body);font-size:14px;line-height:1.62;}',
     '.mcr *{box-sizing:border-box;}',
-    '.mcr p{margin:0 0 10px;}',
+    '.mcr p{margin:0 0 12px;}',
+    '.mcr p:last-child{margin-bottom:0;}',
     '.mcr a{color:var(--mcr-gold);font-weight:600;text-decoration:none;}',
     '.mcr a:hover{text-decoration:underline;}',
 
     /* --- report shell + masthead ------------------------------------- */
-    '.mcr-report{border:1px solid var(--mcr-line);border-radius:14px;background:#fdfcf9;',
-    'overflow:hidden;box-shadow:0 2px 16px rgba(11,28,51,.07);}',
-    '.mcr-mast{position:relative;padding:26px 26px 20px;',
+    /* The measure. 1180px is the Hub's own reading width for a document
+       page; wider than this and the framework tables stop scanning. */
+    '.mcr .mcr-report{max-width:1180px;margin:0 auto;border:1px solid var(--mcr-line);',
+    'border-radius:14px;background:#fdfcf9;overflow:hidden;',
+    'box-shadow:0 2px 16px rgba(11,28,51,.07);}',
+    '.mcr .mcr-mast{position:relative;padding:30px 34px 24px;',
     'background:linear-gradient(135deg,#0B1C33 0%,#132B4A 55%,#1B3A5F 100%);',
     '-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
-    '.mcr-mast:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;',
+    '.mcr .mcr-mast:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;',
     'background:var(--mcr-accent);-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
-    '.mcr-mast-row{display:flex;gap:18px;align-items:center;flex-wrap:wrap;}',
+    '.mcr .mcr-mast-row{display:flex;gap:20px;align-items:center;flex-wrap:wrap;}',
     /* The plate the company's own mark sits on. The ring is the company's
        colour on navy — the one place in the report where its colour touches
        its own mark. A company with no colour gets the house Antique Gold ring,
        which is what this line was before there were any colours to use. */
-    '.mcr-logo{width:74px;height:74px;flex:0 0 74px;border-radius:14px;background:#fff;overflow:hidden;',
-    'display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,.24);',
-    'border:2px solid var(--mcr-accent);-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
-    '.mcr-kicker{font-size:9.5px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;',
-    'color:#E0BE8E;margin:0 0 7px;}',
-    '.mcr-h1{color:#fff;font-size:27px;font-weight:700;line-height:1.16;letter-spacing:.2px;margin:0;}',
-    '.mcr-tagline{color:rgba(237,231,220,.86);font-size:12.5px;font-weight:600;margin-top:6px;line-height:1.5;}',
-    '.mcr-links{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;}',
-    '.mcr-links a{font-size:11px;font-weight:700;letter-spacing:.4px;padding:8px 15px;border-radius:99px;',
-    'background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.34);color:#fff;white-space:nowrap;}',
-    '.mcr-links a:hover{background:rgba(255,255,255,.24);text-decoration:none;}',
-    '.mcr-mast-meta{margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,.16);',
-    'font-size:11px;line-height:1.75;color:#9FB0C5;}',
-    '.mcr-mast-meta b{color:#DBE3EE;font-weight:600;}',
+    '.mcr .mcr-logo{width:74px;height:74px;flex:0 0 74px;border-radius:14px;background:#fff;',
+    'overflow:hidden;display:flex;align-items:center;justify-content:center;',
+    'box-shadow:0 3px 12px rgba(0,0,0,.24);border:2px solid var(--mcr-accent);',
+    '-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
+    '.mcr .mcr-kicker{font-size:9.5px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;',
+    'color:#E0BE8E;margin:0 0 8px;}',
+    '.mcr .mcr-h1{color:#fff;font-size:27px;font-weight:700;line-height:1.16;letter-spacing:.2px;margin:0;}',
+    '.mcr .mcr-tagline{color:rgba(237,231,220,.86);font-size:12.5px;font-weight:600;',
+    'margin-top:7px;line-height:1.5;}',
+    '.mcr .mcr-links{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto;}',
+    '.mcr .mcr-links a{font-size:11px;font-weight:700;letter-spacing:.4px;padding:8px 15px;',
+    'border-radius:99px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.34);',
+    'color:#fff;white-space:nowrap;}',
+    '.mcr .mcr-links a:hover{background:rgba(255,255,255,.24);text-decoration:none;}',
+    '.mcr .mcr-mast-meta{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.16);',
+    'font-size:11px;line-height:1.8;color:#9FB0C5;}',
+    '.mcr .mcr-mast-meta b{color:#DBE3EE;font-weight:600;}',
 
     /* --- body, parts, cards ------------------------------------------ */
-    '.mcr-body{padding:2px 22px 20px;}',
+    '.mcr .mcr-body{padding:6px 30px 30px;}',
     /* Part dividers. The short bar sitting on the divider is the company's
        colour on light — it repeats the accent four or five times down a long
        report without ever becoming the report's own colour scheme. */
-    '.mcr-part{position:relative;margin:28px 0 0;padding-top:16px;border-top:2px solid var(--mcr-line);}',
-    '.mcr-part:before{content:"";position:absolute;left:0;top:-2px;width:38px;height:2px;',
+    '.mcr .mcr-part{position:relative;margin:34px 0 0;padding-top:20px;',
+    'border-top:2px solid var(--mcr-line);}',
+    '.mcr .mcr-part:before{content:"";position:absolute;left:0;top:-2px;width:38px;height:2px;',
     'background:var(--mcr-accent-ink);-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
-    '.mcr-part-n{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;',
+    '.mcr .mcr-part-n{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;',
     'color:var(--mcr-gold);}',
-    '.mcr-part-t{font-size:17px;font-weight:700;color:var(--mcr-navy);line-height:1.3;margin-top:3px;}',
-    '.mcr-part-s{font-size:12.5px;color:var(--mcr-dim);line-height:1.6;margin-top:4px;max-width:66em;}',
-    '.mcr-card{background:#fff;border:1px solid var(--mcr-line);border-radius:12px;',
-    'padding:16px 18px;margin:14px 0 0;box-shadow:0 1px 2px rgba(29,39,51,.05);}',
-    '.mcr-card-t{display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:1.4px;',
-    'text-transform:uppercase;font-weight:700;color:var(--mcr-navy);margin:0 0 12px;}',
-    '.mcr-card-t:before{content:"";flex:0 0 16px;height:2px;background:var(--mcr-gold);',
+    '.mcr .mcr-part-t{font-size:17px;font-weight:700;color:var(--mcr-navy);line-height:1.3;margin-top:4px;}',
+    '.mcr .mcr-part-s{font-size:12.5px;color:var(--mcr-dim);line-height:1.62;margin-top:6px;max-width:66em;}',
+    '.mcr .mcr-card{background:#fff;border:1px solid var(--mcr-line);border-radius:12px;',
+    'padding:22px 24px;margin:16px 0 0;box-shadow:0 1px 2px rgba(29,39,51,.05);}',
+    '.mcr .mcr-card-t{display:flex;align-items:center;gap:9px;font-size:11px;letter-spacing:1.4px;',
+    'text-transform:uppercase;font-weight:700;color:var(--mcr-navy);margin:0 0 14px;}',
+    '.mcr .mcr-card-t:before{content:"";flex:0 0 16px;height:2px;background:var(--mcr-gold);',
     '-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
     /* The deliberate empty state. Thin data is the normal case here, so a
        panel with nothing behind it is drawn as a finished, quiet thing —
        dashed edge, no drop shadow, ivory ground — never as a blank box that
        reads as a page that failed to load. */
-    '.mcr-card--empty{background:#faf8f3;border-style:dashed;border-color:#ded6c4;box-shadow:none;}',
-    '.mcr-card--empty .mcr-card-t{color:#8d8677;}',
-    '.mcr-card--empty .mcr-card-t:before{background:#cfc6b2;}',
-    '.mcr-note{font-size:12.5px;color:var(--mcr-dim);line-height:1.65;}',
-    '.mcr-good{font-size:12.5px;color:#2e7d5b;line-height:1.65;}',
-    '.mcr-rule{margin:0 0 12px;padding:11px 14px;background:var(--mcr-soft);',
+    '.mcr .mcr-card--empty{background:#faf8f3;border-style:dashed;border-color:#ded6c4;box-shadow:none;}',
+    '.mcr .mcr-card--empty .mcr-card-t{color:#8d8677;}',
+    '.mcr .mcr-card--empty .mcr-card-t:before{background:#cfc6b2;}',
+    '.mcr .mcr-note{font-size:12.5px;color:var(--mcr-dim);line-height:1.68;}',
+    '.mcr .mcr-good{font-size:12.5px;color:#2e7d5b;line-height:1.68;}',
+    '.mcr .mcr-rule{margin:0 0 14px;padding:13px 16px;background:var(--mcr-soft);',
     'border-left:3px solid var(--mcr-gold);border-radius:0 8px 8px 0;font-size:12px;',
-    'color:#4a5766;line-height:1.62;}',
-    '.mcr-rule-h{display:block;font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;',
-    'font-weight:700;color:var(--mcr-gold);margin-bottom:4px;}',
+    'color:#4a5766;line-height:1.65;}',
+    '.mcr .mcr-rule-h{display:block;font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;',
+    'font-weight:700;color:var(--mcr-gold);margin-bottom:5px;}',
 
     /* --- chips, source lines, tables ---------------------------------- */
-    '.mcr-chip{display:inline-block;background:#fff;color:#37485a;border:1px solid var(--mcr-line);',
-    'border-radius:99px;padding:4px 11px;font-size:11.5px;font-weight:600;line-height:1.5;',
-    'margin:0 6px 6px 0;}',
-    '.mcr-chip--gold{background:#f6efdd;border-color:#e7d8b3;color:#7a5b14;}',
-    '.mcr-src{margin-top:10px;padding-top:8px;border-top:1px dotted var(--mcr-line);',
-    'font-size:11.5px;color:var(--mcr-dim);line-height:1.6;}',
-    '.mcr-asof{white-space:nowrap;}',
-    '.mcr-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}',
-    '.mcr-btn{cursor:pointer;background:linear-gradient(180deg,#D4AF7A,#B8935A);color:#0B1C33;',
-    'border:0;border-radius:99px;padding:9px 18px;font-size:12.5px;font-weight:700;letter-spacing:.03em;',
+    '.mcr .mcr-chip{display:inline-block;background:#fff;color:#37485a;border:1px solid var(--mcr-line);',
+    'border-radius:99px;padding:5px 12px;font-size:11.5px;font-weight:600;line-height:1.5;',
+    'margin:0 7px 7px 0;}',
+    '.mcr .mcr-chip--gold{background:#f6efdd;border-color:#e7d8b3;color:#7a5b14;}',
+    '.mcr .mcr-src{margin-top:14px;padding-top:10px;border-top:1px dotted var(--mcr-line);',
+    'font-size:11.5px;color:var(--mcr-dim);line-height:1.65;}',
+    '.mcr .mcr-asof{white-space:nowrap;}',
+    /* Wide tables scroll inside their own card rather than widening it. */
+    '.mcr .mcr-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}',
+    '.mcr .mcr-btn{cursor:pointer;background:linear-gradient(180deg,#D4AF7A,#B8935A);color:#0B1C33;',
+    'border:0;border-radius:99px;padding:10px 20px;font-size:12.5px;font-weight:700;letter-spacing:.03em;',
     '-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
-    '.mcr-btn:hover{background:linear-gradient(180deg,#E0BE8E,#C49B5C);}',
+    '.mcr .mcr-btn:hover{background:linear-gradient(180deg,#E0BE8E,#C49B5C);}',
 
     /* --- the picker --------------------------------------------------- */
-    '.mcr-lab{display:block;font-size:10.5px;font-weight:700;letter-spacing:1.4px;',
-    'text-transform:uppercase;color:var(--mcr-dim);margin:0 0 5px;}',
-    '.mcr-field{width:100%;max-width:520px;padding:11px 16px;border-radius:99px;',
-    'border:1px solid var(--mcr-line);font:inherit;font-size:14.5px;color:var(--mcr-ink);',
-    '-webkit-text-fill-color:var(--mcr-ink);caret-color:var(--mcr-ink);background:#fff;outline:none;}',
-    '.mcr-field:focus{border-color:#C49B5C;box-shadow:0 0 0 3px rgba(196,155,92,.16);}',
-    '.mcr-quick{cursor:pointer;background:#fff;border:1px solid var(--mcr-line);border-radius:99px;',
-    'padding:6px 13px;font-size:12px;font-weight:600;color:var(--mcr-navy);}',
-    '.mcr-quick:hover{background:var(--mcr-soft);border-color:#C49B5C;}',
+    /* !important throughout: see note 2 at the top of this stylesheet. The
+       theme's form rule is 0,4,1 and paints a near-black ground. */
+    '.mcr .mcr-lab{display:block;font-size:10.5px;font-weight:700;letter-spacing:1.4px;',
+    'text-transform:uppercase;color:var(--mcr-dim);margin:0 0 7px;}',
+    '.mcr .mcr-field{width:100%;max-width:520px;border-radius:99px;font:inherit;',
+    'padding:12px 18px!important;font-size:14.5px!important;',
+    'background:#fff!important;background-image:none!important;',
+    'color:var(--mcr-ink)!important;-webkit-text-fill-color:var(--mcr-ink)!important;',
+    'caret-color:var(--mcr-ink)!important;border:1px solid var(--mcr-line)!important;',
+    'box-shadow:none;outline:none;appearance:none;-webkit-appearance:none;}',
+    /* The select keeps a chevron, since stripping the native appearance also
+       strips the affordance that says it opens a list. */
+    '.mcr select.mcr-field{padding-right:40px!important;',
+    'background:#fff url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'12\' height=\'8\'%3E%3Cpath d=\'M1 1l5 5 5-5\' fill=\'none\' stroke=\'%2375808d\' stroke-width=\'2\'/%3E%3C/svg%3E") no-repeat right 17px center!important;}',
+    '.mcr .mcr-field::placeholder{color:#9aa3ad;-webkit-text-fill-color:#9aa3ad;opacity:1;}',
+    '.mcr .mcr-field:focus{border-color:#C49B5C!important;box-shadow:0 0 0 3px rgba(196,155,92,.16);}',
+    '.mcr .mcr-quick{cursor:pointer;background:#fff;border:1px solid var(--mcr-line);border-radius:99px;',
+    'padding:7px 14px;font-size:12px;font-weight:600;color:var(--mcr-navy);}',
+    '.mcr .mcr-quick:hover{background:var(--mcr-soft);border-color:#C49B5C;}',
 
     /* --- phones ------------------------------------------------------- */
     '@media (max-width:640px){',
-    '.mcr-body{padding:2px 13px 16px;}',
-    '.mcr-mast{padding:20px 16px 16px;}',
-    '.mcr-mast-row{gap:13px;}',
-    '.mcr-logo{width:54px;height:54px;flex:0 0 54px;border-radius:11px;}',
-    '.mcr-h1{font-size:20.5px;}',
-    '.mcr-links{margin-left:0;width:100%;}',
-    '.mcr-card{padding:14px 14px;border-radius:11px;}',
-    '.mcr-part-t{font-size:15.5px;}',
+    '.mcr .mcr-body{padding:4px 16px 20px;}',
+    '.mcr .mcr-mast{padding:22px 18px 18px;}',
+    '.mcr .mcr-mast-row{gap:14px;}',
+    '.mcr .mcr-logo{width:54px;height:54px;flex:0 0 54px;border-radius:11px;}',
+    '.mcr .mcr-h1{font-size:20.5px;}',
+    '.mcr .mcr-links{margin-left:0;width:100%;}',
+    '.mcr .mcr-card{padding:16px 16px;border-radius:11px;}',
+    '.mcr .mcr-part{margin-top:26px;}',
+    '.mcr .mcr-part-t{font-size:15.5px;}',
     '}',
 
     /* --- print: the downloadable pack --------------------------------- */
     '@media print{',
-    '.mcr-report{border:0;box-shadow:none;border-radius:0;}',
-    '.mcr-body{padding:0;}',
-    '.mcr-card{box-shadow:none;break-inside:avoid;page-break-inside:avoid;margin-top:10px;}',
-    '.mcr-part{break-before:auto;break-after:avoid;page-break-after:avoid;}',
-    '.mcr-btn{display:none;}',
+    '.mcr .mcr-report{border:0;box-shadow:none;border-radius:0;max-width:none;}',
+    '.mcr .mcr-body{padding:0;}',
+    '.mcr .mcr-card{box-shadow:none;break-inside:avoid;page-break-inside:avoid;margin-top:12px;}',
+    '.mcr .mcr-part{break-before:auto;break-after:avoid;page-break-after:avoid;}',
+    '.mcr .mcr-btn{display:none;}',
     '.mcr a{text-decoration:none;}',
     '}'
   ].join('');
@@ -546,18 +593,18 @@
       body += famOrder.map(function (fam) {
         var rows = fams[fam].slice().sort(function (a, b) { return cmpName(a.desc, b.desc); }).map(function (it) {
           return '<tr>' +
-            '<td style="padding:5px 8px;border-bottom:1px solid #f0ece3;font-size:12.5px;color:#37485a;">' + esc(it.desc) + '</td>' +
-            '<td style="padding:5px 8px;border-bottom:1px solid #f0ece3;font-size:12px;color:' + G + ';font-weight:600;white-space:nowrap;">' + esc(it.npc) + '</td>' +
-            '<td style="padding:5px 8px;border-bottom:1px solid #f0ece3;font-size:12px;color:' + DIM + ';white-space:nowrap;">' + esc(it.pack) + '</td>' +
+            '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12.5px;color:#37485a;">' + esc(it.desc) + '</td>' +
+            '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12px;color:' + G + ';font-weight:600;white-space:nowrap;">' + esc(it.npc) + '</td>' +
+            '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12px;color:' + DIM + ';white-space:nowrap;">' + esc(it.pack) + '</td>' +
             '</tr>';
         }).join('');
         return '<div style="margin:0 0 10px;border:1px solid ' + LINE + ';border-radius:8px;background:#fff;overflow:hidden;">' +
           '<div style="padding:7px 10px;background:' + SOFT + ';font-size:12.5px;font-weight:700;color:' + INK + ';border-bottom:1px solid ' + LINE + ';">' +
           esc(fam) + ' <span style="font-weight:400;color:' + DIM + ';">&middot; ' + fams[fam].length + ' line(s)</span></div>' +
           '<div class="mcr-scroll"><table style="border-collapse:collapse;width:100%;min-width:460px;">' +
-          '<tr><th style="text-align:left;padding:6px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">CATALOGUE DESCRIPTION</th>' +
-          '<th style="text-align:left;padding:6px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">NPC</th>' +
-          '<th style="text-align:left;padding:6px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">PACK</th></tr>' +
+          '<tr><th style="text-align:left;padding:9px 14px 9px 0;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">CATALOGUE DESCRIPTION</th>' +
+          '<th style="text-align:left;padding:9px 14px 9px 0;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">NPC</th>' +
+          '<th style="text-align:left;padding:9px 14px 9px 0;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">PACK</th></tr>' +
           rows + '</table></div></div>';
       }).join('');
     }
@@ -958,8 +1005,8 @@
   }
 
   function fact(label, value) {
-    return '<tr><td style="padding:4px 10px 4px 0;font-size:12px;color:' + DIM + ';white-space:nowrap;vertical-align:top;">' + label + '</td>' +
-      '<td style="padding:4px 0;font-size:13px;color:' + INK + ';line-height:1.5;">' + value + '</td></tr>';
+    return '<tr><td style="padding:7px 18px 7px 0;font-size:12px;color:' + DIM + ';white-space:nowrap;vertical-align:top;">' + label + '</td>' +
+      '<td style="padding:7px 0;font-size:13px;color:' + INK + ';line-height:1.5;">' + value + '</td></tr>';
   }
 
   function panelCompanyFacts(s, ctx) {
@@ -1110,9 +1157,9 @@
       var rows = resolved.map(function (r) {
         var me = r.name === sub.name;
         return '<tr>' +
-          '<td style="padding:5px 8px;border-bottom:1px solid #f0ece3;font-size:12.5px;color:' + INK + ';' + (me ? 'font-weight:700;' : '') + '">' + esc(r.name) + (me ? ' ◂' : '') + '</td>' +
-          '<td style="padding:5px 8px;border-bottom:1px solid #f0ece3;font-size:12.5px;color:#37485a;">' + esc(r.rec.accountsFilingVerbatim || r.rec.accountsCategory) + '</td>' +
-          '<td style="padding:5px 8px;border-bottom:1px solid #f0ece3;font-size:12px;color:' + DIM + ';white-space:nowrap;">' + esc(r.rec.incorporated ? ('inc. ' + r.rec.incorporated.slice(0, 4)) : '') + '</td>' +
+          '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12.5px;color:' + INK + ';' + (me ? 'font-weight:700;' : '') + '">' + esc(r.name) + (me ? ' ◂' : '') + '</td>' +
+          '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12.5px;color:#37485a;">' + esc(r.rec.accountsFilingVerbatim || r.rec.accountsCategory) + '</td>' +
+          '<td style="padding:9px 14px 9px 0;border-bottom:1px solid #f0ece3;font-size:12px;color:' + DIM + ';white-space:nowrap;">' + esc(r.rec.incorporated ? ('inc. ' + r.rec.incorporated.slice(0, 4)) : '') + '</td>' +
           '</tr>';
       }).join('');
 
@@ -1121,9 +1168,9 @@
         '<div style="font-size:12px;color:' + DIM + ';margin:4px 0 9px;line-height:1.6;">' + everyone.length + ' supplier(s) on this framework · ' +
         resolved.length + ' resolved to a confirmed filing · ' + unresolved.length + ' unresolved.</div>' +
         '<div class="mcr-scroll"><table style="border-collapse:collapse;width:100%;min-width:420px;">' +
-        '<tr><th style="text-align:left;padding:5px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">SUPPLIER</th>' +
-        '<th style="text-align:left;padding:5px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">MOST RECENT ACCOUNTS FILING</th>' +
-        '<th style="text-align:left;padding:5px 8px;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';"></th></tr>' +
+        '<tr><th style="text-align:left;padding:9px 14px 9px 0;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">SUPPLIER</th>' +
+        '<th style="text-align:left;padding:9px 14px 9px 0;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';">MOST RECENT ACCOUNTS FILING</th>' +
+        '<th style="text-align:left;padding:9px 14px 9px 0;font-size:10.5px;letter-spacing:1px;color:' + DIM + ';border-bottom:1px solid ' + LINE + ';"></th></tr>' +
         rows + '</table></div>';
 
       if (unresolved.length) {
