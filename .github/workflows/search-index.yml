@@ -1,0 +1,168 @@
+name: Build Hub search index
+
+# WHY THIS WORKFLOW MOVED HERE (19/08/2026)
+#
+# This job used to live in the medical-sales-hub-pipeline repo. It checked THIS
+# repo out over an SSH deploy key (secret MSH_DATA_DEPLOY_KEY), built the index,
+# and pushed it back. It was put there for one reason only: the crawl needs a
+# WordPress.com token, and the token was a secret in that repo.
+#
+# That arrangement had a fault that could not be fixed from over there. GITHUB
+# CONCURRENCY GROUPS ARE REPOSITORY-SCOPED. A workflow running in the pipeline
+# repo cannot join this repo's `msh-compare-data-writer` group, however it is
+# named, so the search index was the ONE writer to this branch that was never
+# serialised with the other six. It relied on its own 3-attempt retry loop to
+# survive a race it should never have been in. Every other writer here queues.
+#
+# The builder is `build_search_index.py`, and it has always lived in THIS repo,
+# at the root, alongside the gate that clears it. Nothing but the credential was
+# ever on the other side. So the job comes here, joins the group, and the token
+# comes with it as a repository secret.
+#
+# ⚠️ NEEDS ONE SECRET: WPCOM_TOKEN.
+# Every Hub page is restricted by Paid Member Subscriptions, so an anonymous
+# read of the REST API returns the "choose one of the options" wall and not the
+# content. The crawl therefore needs a WordPress.com OAuth token. It is the same
+# token that is held in the pipeline repo as HUBPIPELINE; add it to THIS repo as
+# WPCOM_TOKEN, which is the name the script and its docstring already use. It is
+# a read credential for the Hub, not a write credential for anything. Without it
+# the preflight step below stops the run with that message rather than letting a
+# tokenless crawl produce a thin index and publish it.
+#
+# ⚠️ NO DEPLOY KEY, and none is wanted. The job now runs inside the repo it
+# writes to, so the runner's own GITHUB_TOKEN is the push credential, exactly as
+# it is for the other six writers. MSH_DATA_DEPLOY_KEY is dead once this is
+# proved: see the retirement list in the handover note.
+#
+# Run it by hand with dry_run = true to build and gate WITHOUT committing. The
+# index is uploaded as an artifact either way, including when the gate refuses
+# it, because a gate failure you cannot look at is a gate you end up guessing
+# about.
+#
+# A push to this repo IS a publish, the Hub fetches it directly, so verify.py
+# runs before anything is committed and the commit is refused if the gate fails.
+# Root rule 13.
+
+on:
+  schedule:
+    # 01:40 UTC, the slot this job has always run in. It is clear of
+    # supplier-capture.yml (02:20) and refresh.yml (03:15). It shares the slot
+    # with company-press.yml, which is now harmless rather than a race: both are
+    # in the msh-compare-data-writer group below, so the second one queues
+    # behind the first instead of losing its push to it.
+    - cron: "40 1 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Build and gate only — upload the artifact, commit nothing"
+        type: boolean
+        default: false
+
+# ⚠️ THE WHOLE POINT OF THE MOVE. All seven writers push to this one branch on
+# overlapping schedules. On 26/07/2026 a 49-minute job lost its push to a writer
+# that landed inside its window and three files of computed data were discarded.
+# This group serialises the writers so they queue instead of racing.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0          # verify.py compares against HEAD for its shrink guards
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      # Fail here, loudly, rather than three steps later inside the crawl. A
+      # missing token used to be impossible (the job ran where the token was);
+      # now it is the one thing about this move that can be got wrong, so it is
+      # checked first and the message says exactly what to do.
+      - name: Preflight — the Hub crawl needs a token
+        env:
+          WPCOM_TOKEN: ${{ secrets.WPCOM_TOKEN }}
+        run: |
+          if [ -z "$WPCOM_TOKEN" ]; then
+            echo "No WPCOM_TOKEN secret in this repository."
+            echo "Add it under Settings > Secrets and variables > Actions, named WPCOM_TOKEN."
+            echo "It is the same WordPress.com OAuth token held in the pipeline repo as HUBPIPELINE."
+            echo "Nothing has been built, committed or pushed."
+            exit 1
+          fi
+          echo "token present"
+
+      - name: Crawl the Hub and build the index
+        env:
+          WPCOM_TOKEN: ${{ secrets.WPCOM_TOKEN }}
+        run: python3 build_search_index.py --stats
+
+      # The build writes a fresh file every run, so it drops the ownership
+      # notice every run. Re-stamp BEFORE the gate; the gate then refuses to
+      # publish anything unmarked.
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      # ALWAYS, even when the gate fails. The first real run refused to publish
+      # because a month token reached the Live Desk's words, the artifact had
+      # been skipped, and there was nothing left to inspect. Uploading first
+      # costs nothing and the commit step below still only runs on a green gate.
+      - name: Upload the index for inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hub-search-index
+          path: data/hub-search-index.json
+          retention-days: 14
+
+      # --no-links because this job rebuilds one file and the link checks walk
+      # the whole dataset against live URLs, which is the daily crawl's job and
+      # not this one's. Every other check runs.
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py --no-links
+
+      - name: Commit if changed
+        if: inputs.dry_run != true
+        run: |
+          git config user.name "hub-search-bot"
+          git config user.email "actions@github.com"
+          git add data/hub-search-index.json
+          if git diff --cached --quiet; then
+            echo "index unchanged - nothing to commit, nothing to push"
+            exit 0
+          fi
+          git commit -m "Hub search index $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first). Rebasing and re-running the gate, attempt $attempt of 5."
+            # No -X theirs here, matching supplier-capture.yml and
+            # supplier-product-detail-capture.yml. This job writes ONE file that
+            # nothing else writes, so a conflicting hunk means something has
+            # gone wrong that a merge strategy should not paper over. Let the
+            # rebase stop and fail the run rather than pick a winner silently.
+            git pull --rebase --autostash
+            python3 verify.py --no-links || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi
+
+      - name: Phone alert on failure (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Medical Sales Hub - search index build FAILED" -H "Priority: default" -H "Tags: warning" \
+            -d "The daily Hub search index build failed. Search keeps serving the last good index until this is fixed. github.com/louisehoult-beep/msh-compare-data/actions" \
+            ntfy.sh/eth-hub-lou-4437

@@ -1,0 +1,135 @@
+name: Differentiator rebuild (one product record per source)
+
+# WHY THIS WORKFLOW EXISTS (added 19/08/2026)
+#
+# scripts/build_differentiator.py is a PURE DERIVATION. It reads four files this
+# repo already holds and writes one:
+#
+#   data/supplier-products.json          <- supplier-capture.yml, daily 02:20 UTC
+#   data/supplier-product-detail.json    <- supplier-product-detail-capture.yml,
+#                                           Sundays 02:40 UTC
+#   data/nhssc-cache.json                <- weekly-refresh.yml, Sundays 04:30 UTC
+#   data/differentiator-category-map.json  <- hand-mapped, committed by a person
+#   (plus data/compare-suppliers.json and data/supplier-seed.json for the gated
+#    vocabulary and the supplier records)
+#                                        -> data/differentiator.json
+#
+# Every one of those inputs is rewritten by a nightly or weekly crawl. NOTHING
+# re-ran the derivation. So from the moment the Differentiator publishes rows,
+# data/differentiator.json would have been a photograph of what the crawls held
+# on the day somebody last ran the script by hand, sitting on a live page beside
+# inputs that had moved on underneath it. That is the worst kind of wrong on a
+# paid product: not visibly broken, just quietly out of date, and no one can
+# tell by looking. A derived file with no scheduled deriver is a stale file
+# waiting to happen.
+#
+# ⚠️ WHY 05:00 UTC. It must run AFTER every writer that feeds it, or it derives
+# from yesterday's inputs and the whole point is lost. Latest input writer is
+# weekly-refresh.yml at 04:30 Sundays; the daily ones are 02:20 and 03:15. 05:00
+# clears them all with room for an overrun, and the concurrency group below
+# means an input writer still running at 05:00 makes this job QUEUE rather than
+# read a half-written file.
+#
+# ⚠️ NEEDS NO SECRET AND MAKES NO NETWORK CALL. It reads files in this checkout
+# and writes one file. That is also why it is cheap enough to run every day.
+#
+# ⚠️ NOTHING ELSE MAY WRITE data/differentiator.json. This is its only writer.
+# The category map it reads IS hand-edited, and that is correct: the map is the
+# human judgement, this job is the arithmetic.
+
+on:
+  schedule:
+    - cron: "0 5 * * *"      # daily 05:00 UTC, after every writer that feeds it
+  workflow_dispatch:
+
+# Same reason as every other writer in this repo: they share one branch, and on
+# 26/07/2026 a 49-minute job lost its push to a writer that landed inside its
+# window. Serialise rather than race. It matters more here than anywhere: this
+# job READS four files that other writers in this group rewrite, so queueing
+# also guarantees it never derives from a checkout caught mid-write.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # It is local computation over files already on disk, no network at all.
+    # Measured 19/08/2026: seconds, not minutes. A short cap is right here, and
+    # if it is ever hit something has gone wrong rather than got busy.
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      # Takes no arguments and must be run from the repo root: it reads and
+      # writes plain "data/..." paths.
+      - name: Rebuild the Differentiator from the captured sources
+        run: python3 scripts/build_differentiator.py
+
+      # The build writes a fresh file every run, so it drops the ownership
+      # notice every run. Re-stamp BEFORE the gate; the gate then refuses to
+      # publish anything unmarked.
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      # A push to this repo is a live publish to paying members within seconds.
+      # There is no staging step and no review. verify.py already holds the
+      # Differentiator's own checks (check_differentiator): the counts must
+      # match the rows, every published product must carry a category from the
+      # gated vocabulary, and every named source must carry a URL to reach it.
+      # If this fails, the data is wrong: fix the data, never loosen the check.
+      # Root rule 13.
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "differentiator-bot"
+          git config user.email "actions@github.com"
+          git add data/differentiator.json
+          # A day where no crawl moved anything is a NORMAL day, not a failure.
+          # The notice is deliberately stable (no date, no run number), so an
+          # unchanged rebuild really does produce an identical file. Stop here,
+          # green, rather than committing a no-op every night and burying the
+          # real diffs.
+          if git diff --cached --quiet; then
+            echo "no change to data/differentiator.json - nothing to commit, nothing to push"
+            exit 0
+          fi
+          git commit -m "Differentiator rebuild $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first). Rebasing and re-running the gate, attempt $attempt of 5."
+            # No -X theirs here, matching supplier-capture.yml and
+            # supplier-product-detail-capture.yml. This job writes ONE file that
+            # nothing else writes, so a conflicting hunk means something has
+            # gone wrong that a merge strategy should not paper over. Let the
+            # rebase stop and fail the run rather than pick a winner silently.
+            git pull --rebase --autostash
+            python3 verify.py || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi
+
+      - name: Phone alert on failure (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Medical Sales Hub - Differentiator rebuild FAILED" -H "Priority: default" -H "Tags: warning" \
+            -d "The daily Differentiator rebuild failed. The page keeps serving the last good build until this is fixed. github.com/louisehoult-beep/msh-compare-data/actions" \
+            ntfy.sh/eth-hub-lou-4437
