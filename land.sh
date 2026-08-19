@@ -12,7 +12,14 @@
 #          a stale seed that would have deleted five deep dives on push
 #
 # Usage:
-#   ./land.sh "commit subject" path [path...]
+#   ./land.sh "commit subject" [--allow identity]... path [path...]
+#
+# --allow is passed straight through to check_no_loss.py (step 4) to record a
+# record-collection deletion you have already decided on and checked by hand —
+# e.g. an entry that moved from a "held" summary into the published list this
+# same change produces. It does not weaken the check: check_no_loss.py refuses
+# by default and --allow is its own documented, per-identity opt-in, not a
+# blanket bypass. Repeatable: --allow "X" --allow "Y".
 #
 # It refuses rather than guesses. Every refusal below is a real failure this
 # repo has already had.
@@ -20,8 +27,34 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 SUBJECT="${1:-}"; shift || true
-if [ -z "$SUBJECT" ] || [ $# -eq 0 ]; then
-  echo "usage: ./land.sh \"commit subject\" path [path...]" >&2
+if [ -z "$SUBJECT" ]; then
+  echo "usage: ./land.sh \"commit subject\" [--allow identity]... path [path...]" >&2
+  echo "Name the paths this piece of work owns. Never 'git add -A' in this repo:" >&2
+  echo "another session's half-finished work is very often sitting beside yours." >&2
+  exit 2
+fi
+
+ALLOW=()
+PATHS=()
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --allow)
+      if [ $# -lt 2 ]; then
+        echo "REFUSING: --allow needs a value." >&2
+        exit 2
+      fi
+      ALLOW+=("$2")
+      shift 2
+      ;;
+    *)
+      PATHS+=("$1")
+      shift
+      ;;
+  esac
+done
+
+if [ ${#PATHS[@]} -eq 0 ]; then
+  echo "usage: ./land.sh \"commit subject\" [--allow identity]... path [path...]" >&2
   echo "Name the paths this piece of work owns. Never 'git add -A' in this repo:" >&2
   echo "another session's half-finished work is very often sitting beside yours." >&2
   exit 2
@@ -38,11 +71,15 @@ if ! git diff --cached --quiet; then
 fi
 
 echo "==> 3/7 staging only the named paths"
-git add -- "$@"
+git add -- "${PATHS[@]}"
 git diff --cached --name-only | sed 's/^/    /'
 
 echo "==> 4/7 record-level no-loss check (working tree vs origin/main)"
-python3 scripts/check_no_loss.py || {
+CHECK_ARGS=()
+for a in "${ALLOW[@]:-}"; do
+  [ -n "$a" ] && CHECK_ARGS+=(--allow "$a")
+done
+python3 scripts/check_no_loss.py "${CHECK_ARGS[@]:-}" || {
   echo "REFUSING: a staged data file loses records against origin/main." >&2
   echo "Diff by record, not by line. A file that quietly lost entries is not a" >&2
   echo "conflict to git, and a plain rebase would publish the loss." >&2
