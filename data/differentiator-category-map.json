@@ -35,7 +35,8 @@
    "vinyl": "Vinyl examination",
    "latex": "Latex examination",
    "spec": "Specialised examination",
-   "sharps": "Sharps & clinical waste containers"
+   "sharps": "Sharps & clinical waste containers",
+   "ppe": "General PPE"
   },
   "anaesthesia": {
    "anaes": "Anaesthesia machines",
@@ -115,13 +116,15 @@
    "pivc": "Peripheral IV cannula",
    "picc": "PICC",
    "mid": "Midline",
-   "sec": "Securement & dressings"
+   "sec": "Securement & dressings",
+   "vte": "VTE prevention / IPC devices"
   },
   "continence": {
    "ind": "Indwelling (Foley) catheters",
    "ic": "Intermittent catheters",
    "sh": "Sheaths",
-   "dr": "Drainage bags & valves"
+   "dr": "Drainage bags & valves",
+   "pads": "Pads"
   },
   "imaging": {
    "ct": "CT scanners",
@@ -188,7 +191,8 @@
    "slide": "Slide sheets and transfer boards",
    "cushion": "Pressure-relieving cushions",
    "mattress": "Mattresses, overlays and positioning",
-   "bed": "Beds, cots & profiling frames"
+   "bed": "Beds, cots & profiling frames",
+   "scale": "Patient & bariatric weighing scales"
   },
   "ostomy": {
    "col": "Colostomy bags",
@@ -215,7 +219,8 @@
    "hosiery": "Compression hosiery",
    "paed": "Paediatric / clubfoot",
    "upper": "Upper limb bracing and splints",
-   "prosth": "Prosthetic components"
+   "prosth": "Prosthetic components",
+   "brace": "Knee, calf & general limb supports"
   },
   "rehab": {
    "chair": "Wheelchairs and specialist seating",
@@ -250,10 +255,10 @@
  },
  "counts": {
   "pairs": 1825,
-  "mapped": 1055,
+  "mapped": 1081,
   "notTaxonomy": 42,
   "products": 14722,
-  "productsMapped": 7450
+  "productsMapped": 7501
  },
  "entries": [
   {
@@ -4525,9 +4530,11 @@
     "NEO G CALF/SHIN SPLINT SUPPORT",
     "NEO G PATELLA BAND"
    ],
-   "hub": null,
+   "hub": "orthotics:brace",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examples (NEO G Airflow Calf/Shin Support, NEO G RX Knee Support, NEO G Calf/Shin Splint Support, NEO G Patella Band) are all knee/calf limb supports, matching the new orthotics:brace type",
+   "decidedIn": "Inspire-Community-Trust.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -5281,9 +5288,11 @@
     "Attends Slip Regular 9",
     "Attends Pull-Ons 6"
    ],
-   "hub": null,
+   "hub": "continence:pads",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examples (Attends Slip Air Comfort 9/10, Attends Slip Regular 9, Attends Pull-Ons 6) are all absorbent continence pads, matching the new continence:pads type, despite the misleading 'Patient Wear' division name",
+   "decidedIn": "Interweave-Textiles.json"
   },
   {
    "supplier": "Medi-Plinth Equipment",
@@ -8650,9 +8659,11 @@
     "Spill Kits",
     "Signs First Aid"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examples (Masks, Aprons, Spill Kits, Signs First Aid) are general PPE, matching the new infection:ppe type",
+   "decidedIn": "HC-Innovations.json"
   },
   {
    "supplier": "HC Innovations",
@@ -9405,9 +9416,11 @@
     "Flowtron Dvt",
     "Flowtron Tri Pulse"
    ],
-   "hub": null,
+   "hub": "vascular:vte",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examples (Flowtron Acs900, Flowtron Dvt, Flowtron Tri Pulse) are intermittent pneumatic compression devices for VTE prophylaxis, matching the new vascular:vte type",
+   "decidedIn": "Arjo.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -9563,9 +9576,11 @@
     "Scales2 Jpg",
     "Scales1"
    ],
-   "hub": null,
+   "hub": "handling:scale",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "division name and 300kg SWL rating identify a patient weighing scale, matching the new handling:scale type; the crawl captured only image filenames as examples",
+   "decidedIn": "Direct-Healthcare-Group.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -9577,9 +9592,11 @@
     "M_950_1 Jpg",
     "Independent Scales"
    ],
-   "hub": null,
+   "hub": "handling:scale",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "division name and 1000kg SWL rating identify a bariatric bed weighing scale, matching the new handling:scale type; the crawl captured only image filenames as examples",
+   "decidedIn": "Direct-Healthcare-Group.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -9591,9 +9608,11 @@
     "M_200_2 Jpg",
     "M200"
    ],
-   "hub": null,
+   "hub": "handling:scale",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "division name identifies a patient chair weighing scale, matching the new handling:scale type; the crawl captured only image filenames as examples",
+   "decidedIn": "Direct-Healthcare-Group.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -14406,9 +14425,11 @@
    "examples": [
     "Blue Dot Elastic Wraparound Support Ankle Brace"
    ],
-   "hub": null,
+   "hub": "orthotics:brace",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Blue Dot Elastic Wraparound Support Ankle Brace' is an ankle support brace.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -14430,9 +14451,11 @@
    "examples": [
     "Blue Dot Tennis Elbow Brace With Adjustable Compression Strap"
    ],
-   "hub": null,
+   "hub": "orthotics:brace",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Blue Dot Tennis Elbow Brace With Adjustable Compression Strap' is an elbow support brace.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -14456,9 +14479,11 @@
    "examples": [
     "Blue Dot Hinged Padded Knee Brace With Pull And Press Fastener"
    ],
-   "hub": null,
+   "hub": "orthotics:brace",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Blue Dot Hinged Padded Knee Brace With Pull And Press Fastener' is a knee support brace.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -19356,9 +19381,11 @@
    "examples": [
     "Mckinnon Blue Mob Caps Case 10 X 100"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Mckinnon Blue Mob Caps Case 10 X 100' is disposable PPE headwear.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -19460,9 +19487,11 @@
    "examples": [
     "Primeguard Extra Disposable Chemical Protection Suit Case 10"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Primeguard Extra Disposable Chemical Protection Suit Case 10' is a chemical protection suit, general PPE.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -19472,9 +19501,11 @@
    "examples": [
     "Primeguard Plus Disposable Chemical Protection Suit With Strengthening Patches Case 10"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Primeguard Plus Disposable Chemical Protection Suit With Strengthening Patches Case 10' is a chemical protection suit, general PPE.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -19484,9 +19515,11 @@
    "examples": [
     "Economy Hooded Coverall"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Economy Hooded Coverall' is a disposable protective coverall.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -19828,9 +19861,11 @@
    "examples": [
     "Mckinnon Blue Overshoes"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Mckinnon Blue Overshoes' is disposable PPE footwear.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -19840,9 +19875,11 @@
    "examples": [
     "Blue Antistatic Overshoes Case 2000"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Blue Antistatic Overshoes Case 2000' is disposable PPE footwear.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -19852,9 +19889,11 @@
    "examples": [
     "Blue Antistatic Overshoes Case 1000"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Blue Antistatic Overshoes Case 1000' is disposable PPE footwear.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -19864,9 +19903,11 @@
    "examples": [
     "Mckinnon Medical Blue Mob Caps"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Mckinnon Medical Blue Mob Caps' is disposable PPE headwear.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -20690,9 +20731,11 @@
    "examples": [
     "Purvigor Protective Mask Box 10"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Purvigor Protective Mask Box 10' is a protective mask.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -20702,9 +20745,11 @@
    "examples": [
     "White Plastic Disposable Aprons Pack 2"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'White Plastic Disposable Aprons Pack 2' is a disposable protective apron.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22740,9 +22785,11 @@
    "examples": [
     "Astroplast Disposable Polythene Aprons Pack 6 X 2"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Astroplast Disposable Polythene Aprons Pack 6 X 2' is a disposable protective apron.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24412,9 +24459,11 @@
    "examples": [
     "Primeguard Disposable Armlet Sleeves"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Primeguard Disposable Armlet Sleeves' is disposable PPE arm protection.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24424,9 +24473,11 @@
    "examples": [
     "Primeguard Disposable Armlet Sleeves"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Primeguard Disposable Armlet Sleeves' is disposable PPE arm protection.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24448,9 +24499,11 @@
    "examples": [
     "Primeguard Extra Disposable Overshoes"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Primeguard Extra Disposable Overshoes' is disposable PPE footwear.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24460,9 +24513,11 @@
    "examples": [
     "Primeguard Plus Disposable Overshoes"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Primeguard Plus Disposable Overshoes' is disposable PPE footwear.",
+   "decidedIn": "Crest-Medical-Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -27148,9 +27203,11 @@
    "examples": [
     "MIP Washable Community Bed Pads"
    ],
-   "hub": null,
+   "hub": "continence:pads",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "single example is MIP Washable Community Bed Pads, an absorbent continence pad, matching the new continence:pads type",
+   "decidedIn": "MIP-UK.json"
   },
   {
    "supplier": "MIP UK",
