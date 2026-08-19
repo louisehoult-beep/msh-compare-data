@@ -927,6 +927,109 @@ def _structured_corpus(s):
     return _sp_norm(" ".join(bits))
 
 
+ALERT_KINDS = ("safety", "supply")
+
+
+def _curated_alert(a):
+    """True for a hand-written alert. An issue-derived one carries `_id`."""
+    return not (isinstance(a, dict) and a.get("_id"))
+
+
+def _alert_text(a):
+    if isinstance(a, str):
+        return a
+    return " ".join(x for x in (a.get("title"), a.get("text"), a.get("detail")) if x)
+
+
+def check_curated_alerts_are_typed(index):
+    """A curated alert must say which of the two things it is.
+
+    "Alerts & recalls" was one bucket holding two unlike things: a dated safety
+    or availability event a rep must answer for, and curated background prose
+    about who owns the company. 272 of 383 curated entries were the second kind,
+    so the panel a member reads for safety was mostly corporate history — and a
+    genuine FDA Class I recall sat in the same list as a note about a site move.
+
+    There is no heuristic that separates them reliably: "delisting" is a product
+    leaving a catalogue in one entry and a share listing ending in the next, and
+    a company called Advanced Sterilization Products trips every keyword there
+    is. So the distinction is DECLARED, not guessed. Every curated alert carries
+    `kind`, and background prose has no valid kind — its home is `background[]`,
+    which renders in Part 1 where it belongs.
+
+    This is the check that stops the bucket refilling.
+    """
+    suppliers = (index or {}).get("suppliers") or []
+    if not suppliers:
+        WARN("alert-kind", "could not read supplier-index.json, so curated alert typing was "
+                           "not checked.")
+        return
+    bad = []
+    for s in suppliers:
+        for a in (s.get("alerts") or []):
+            if not _curated_alert(a):
+                continue
+            kind = a.get("kind") if isinstance(a, dict) else None
+            if kind not in ALERT_KINDS:
+                bad.append((s.get("name") or "(unnamed)", _alert_text(a)[:80], kind))
+    for name, text, kind in bad[:5]:
+        FAIL("alert-kind",
+             "%s: a curated alert declares kind=%r. Every hand-written alert must declare "
+             "`kind`: \"safety\" (a recall, field safety notice or regulator action) or "
+             "\"supply\" (a product delisted, suspended, discontinued, end-of-life or "
+             "unavailable). If it is neither — ownership, legal entity, a categorisation "
+             "correction, an acquisition, a re-tagging note — it is BACKGROUND and belongs in "
+             "`background[]`, not in the panel members read for safety. Entry: %r"
+             % (name, kind, text))
+    if len(bad) > 5:
+        FAIL("alert-kind", "...and %d further untyped curated alert(s) (suppressed)."
+                           % (len(bad) - 5))
+
+
+def check_seed_index_alert_parity(seed, index):
+    """The seed and the index must agree about curated alerts.
+
+    THE ASYMMETRY THAT CAUSED THE 19/08/2026 DEFECT. `alerts` is the one field
+    mergeSuppliers() does NOT copy from the seed: the page reads it from the
+    index alone. So editing the seed's alerts changes nothing a member sees, and
+    editing only the index is undone by the next rebuild, which regenerates a
+    curated supplier's record from the seed. Either edit on its own looks like a
+    clean commit and is silently wrong, in opposite directions.
+
+    Requiring the two to agree makes that impossible to ship: a one-sided edit
+    fails here, naming the file that was missed.
+    """
+    seed_suppliers = seed.get("suppliers") if isinstance(seed, dict) else seed
+    if isinstance(seed_suppliers, dict):
+        seed_suppliers = list(seed_suppliers.values())
+    idx_suppliers = (index or {}).get("suppliers") or []
+    if not seed_suppliers or not idx_suppliers:
+        WARN("alert-kind", "could not read both supplier-seed.json and supplier-index.json, so "
+                           "seed/index alert parity was not checked.")
+        return
+
+    idx_by = {s.get("name"): s for s in idx_suppliers}
+    drifted = []
+    for s in seed_suppliers:
+        rec = idx_by.get(s.get("name"))
+        if rec is None:
+            continue                    # seed-only supplier: the index has yet to be rebuilt
+        a = sorted(_sp_norm(_alert_text(x)) for x in (s.get("alerts") or []) if _curated_alert(x))
+        b = sorted(_sp_norm(_alert_text(x)) for x in (rec.get("alerts") or []) if _curated_alert(x))
+        if a != b:
+            drifted.append((s.get("name") or "(unnamed)", len(a), len(b)))
+    for name, ns, ni in drifted[:5]:
+        FAIL("alert-kind",
+             "%s: curated alerts disagree between the seed (%d) and the index (%d). The page "
+             "reads alerts from data/supplier-index.json, and the nightly rebuild regenerates "
+             "the index from data/supplier-seed.json — so an edit to one file alone is either "
+             "invisible to members or silently reverted. Make the same edit in both, in this "
+             "commit." % (name, ns, ni))
+    if len(drifted) > 5:
+        FAIL("alert-kind", "...and %d further supplier(s) whose curated alerts disagree "
+                           "(suppressed)." % (len(drifted) - 5))
+
+
 def check_migrated_prose_not_in_alerts(seed, index):
     """The prose must leave alerts[] when it moves to a structured panel.
 
@@ -3754,6 +3857,9 @@ def main():
     check_seed_people_and_partners(load("supplier-seed.json"))
     check_migrated_prose_not_in_alerts(load("supplier-seed.json"),
                                        load("supplier-index.json"))
+    check_curated_alerts_are_typed(load("supplier-index.json"))
+    check_seed_index_alert_parity(load("supplier-seed.json"),
+                                  load("supplier-index.json"))
     check_vocab(load("compare-suppliers.json"), load("products.json"),
                 load("speciality-map.json"), load("supplier-index.json"), comptab_js)
     check_source_links(load("compare-issues.json"),

@@ -273,6 +273,49 @@ def _(tmp):
     return "STILL in data/supplier-index.json"
 
 
+@case("background prose written straight into the alerts panel")
+def _(tmp):
+    # THE BUCKET REFILLING. Before typing, 272 of 383 curated alerts were
+    # company background, so the panel a member reads for safety was mostly
+    # corporate history. An untyped curated alert is how that came back.
+    idx = json.load(open("data/supplier-index.json"))
+    rec = (idx.get("suppliers") or [{}])[0]
+    rec.setdefault("alerts", []).append(
+        "Owned by a German parent since the 2019 buyout; UK entity confirmed at "
+        "Companies House 01234567, registered office moved to Luton in 2026.")
+    json.dump(idx, open("data/supplier-index.json", "w"))
+    return "must declare `kind`"
+
+
+@case("a curated alert typed with a word that is not a kind")
+def _(tmp):
+    idx = json.load(open("data/supplier-index.json"))
+    rec = (idx.get("suppliers") or [{}])[0]
+    rec.setdefault("alerts", []).append({"kind": "note", "text": "Something happened."})
+    json.dump(idx, open("data/supplier-index.json", "w"))
+    return "must declare `kind`"
+
+
+@case("an alert edited in the seed but not in the index the page reads")
+def _(tmp):
+    # The asymmetry itself: `alerts` is the one field mergeSuppliers() does not
+    # copy from the seed. Editing one file alone is silently wrong in one
+    # direction or the other, and both directions shipped on 19/08/2026.
+    d = json.load(open("data/supplier-seed.json"))
+    suppliers = d.get("suppliers") if isinstance(d, dict) else d
+    if isinstance(suppliers, dict):
+        suppliers = list(suppliers.values())
+    idx = json.load(open("data/supplier-index.json"))
+    names = {s.get("name") for s in idx.get("suppliers", [])}
+    target = next((s for s in suppliers if s.get("name") in names), None)
+    if target is None:
+        return Skip("no supplier appears in both the seed and the index here")
+    target.setdefault("alerts", []).append(
+        {"kind": "supply", "text": "A line was delisted, recorded in the seed only."})
+    json.dump(d, open("data/supplier-seed.json", "w"))
+    return "disagree between the seed"
+
+
 @case("a background entry sourced over plain HTTP")
 def _(tmp):
     seed_supplier_plus(background=[

@@ -2208,6 +2208,14 @@
     var title = String(o.title || '');
     return {
       recall: !!title,
+      /* Curated alerts are typed at the data layer: "safety" (a recall, field
+         safety notice or regulator action) or "supply" (delisted, suspended,
+         discontinued, end-of-life, unavailable). Before that typing existed
+         this panel was one bucket, and 272 of 383 curated entries in it were
+         company background — so a genuine Class I recall sat in the same
+         undifferentiated list as a note about a site move. An issue-derived
+         alert carries no kind and is drawn exactly as it always was. */
+      kind: String(o.kind || ''),
       date: String(o.date || ''),
       title: title,
       text: String(o.text || o.detail || ''),
@@ -2227,6 +2235,17 @@
     var cls = 'mcr-alert' + (n.recall ? ' mcr-alert--recall' : '') +
               (sourced ? '' : ' mcr-alert--unsourced');
     var head = '';
+    /* One word saying which kind of alert this is, so a recall and a delisting
+       are not read as the same thing at a glance. */
+    if (n.kind === 'safety' || n.kind === 'supply') {
+      var safety = n.kind === 'safety';
+      head += '<span style="background:' + (safety ? '#fdecef' : '#f7ecdc') +
+        ';border:1px solid ' + (safety ? '#f0c4cc' : '#e7d8b3') +
+        ';color:' + (safety ? '#b84a5c' : '#7a5b14') +
+        ';font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:99px;' +
+        'padding:1px 7px;white-space:nowrap;margin-right:6px;">' +
+        (safety ? 'SAFETY' : 'SUPPLY') + '</span>';
+    }
     if (n.date) head += '<b class="mcr-alert-d">' + esc(n.date) + '</b>';
     if (n.title) head += (head ? ' — ' : '') + '<b>' + esc(n.title) + '</b>';
     var out = '<div class="' + cls + '">';
