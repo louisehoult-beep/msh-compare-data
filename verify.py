@@ -886,6 +886,92 @@ def check_seed_framework_provenance(seed):
               "award date. Lower risk, still unmaintained." % unsourced_no_value)
 
 
+# --------------------------------------------------------------------------
+# 6c. SEED LEADERSHIP AND PARTNERSHIPS — named people and named counterparties
+# --------------------------------------------------------------------------
+# Added 19/08/2026 alongside the leadership/partnerships panels in
+# app/company-report.js.
+#
+# A NAMED PERSON PLUS AN UNSOURCED CLAIM IS THE 24/07/2026 CLASS OF ERROR.
+# That incident published 145 job changes about named NHS staff, every one
+# false, because a plausible derivation was allowed to stand without evidence a
+# reader could open. Leadership claims are the same shape with different names
+# in them: "ran GBUK's Banana division", "18 years in patient handling" — each
+# is a statement about a real, identifiable person's career, published on a paid
+# product. It carries the URL it was read from or it does not publish.
+#
+# A PARTNERSHIP ROW IS A CLAIM ABOUT TWO COMPANIES AT ONCE, so it needs the same
+# floor, plus a declared confidence. The Arjo/Jeenie arrangement is the case
+# that forced the field: both parties state it, it appears on neither party's
+# own website, and it must never render as a verified commercial agreement just
+# because a link exists. So `confidence` is required and always shown — a row
+# that omits it would default to reading as confirmed, which is the failure.
+def check_seed_people_and_partners(seed):
+    suppliers = seed.get("suppliers") if isinstance(seed, dict) else seed
+    if isinstance(suppliers, dict):
+        suppliers = list(suppliers.values())
+    if not suppliers:
+        WARN("seed-people", "could not read supplier-seed.json, so leadership and partnership "
+                            "provenance was not checked.")
+        return
+
+    for s in suppliers:
+        who = s.get("name") or "(unnamed supplier)"
+
+        lead = s.get("leadership") or {}
+        for p in (lead.get("people") or []):
+            name = (p.get("name") or "").strip()
+            if not name:
+                FAIL("seed-people", "%s: a leadership entry has no person name." % who)
+                continue
+            # `officer: true` asserts a Companies House register fact. The
+            # register states an appointment date for every officer, so an
+            # officer with no date means the register was not actually read.
+            if p.get("officer") and not (p.get("appointed") or "").strip():
+                FAIL("seed-people", "%s: %r is published as a Companies House officer with no "
+                                    "appointed date. Officer status is a register fact and the "
+                                    "register carries the date — read it, or set officer:false "
+                                    "and describe them as an employee."
+                                    % (who, name[:60]))
+            for c in (p.get("claims") or []):
+                text = (c.get("text") or "").strip()
+                if not text:
+                    FAIL("seed-people", "%s: %r carries an empty claim." % (who, name[:60]))
+                    continue
+                u = (c.get("url") or "").strip()
+                if not u:
+                    FAIL("seed-people", "%s: the claim %r about %r has no source URL. This is a "
+                                        "statement about a named, identifiable person on a paid "
+                                        "product — it carries the page it was read from, or it "
+                                        "does not publish. (Root rule 16; the 24/07/2026 class of "
+                                        "error.)" % (who, text[:70], name[:60]))
+                elif not u.startswith("https://"):
+                    FAIL("seed-people", "%s: the claim about %r cites a non-HTTPS source (%r)."
+                                        % (who, name[:60], u[:60]))
+
+        for p in (s.get("partnerships") or []):
+            with_who = (p.get("with") or "").strip()
+            if not with_who:
+                FAIL("seed-people", "%s: a partnership row names no counterparty." % who)
+                continue
+            u = (p.get("url") or "").strip()
+            if not u:
+                FAIL("seed-people", "%s: the partnership with %r has no source URL. A partnership "
+                                    "row is a claim about two companies at once and is read by "
+                                    "reps as a route to market — it carries the page it was read "
+                                    "from, or it does not publish."
+                                    % (who, with_who[:60]))
+            elif not u.startswith("https://"):
+                FAIL("seed-people", "%s: the partnership with %r cites a non-HTTPS source (%r)."
+                                    % (who, with_who[:60], u[:60]))
+            if not (p.get("confidence") or "").strip():
+                FAIL("seed-people", "%s: the partnership with %r declares no `confidence`. Without "
+                                    "it the row renders as a verified commercial agreement, which "
+                                    "is precisely what an uncorroborated arrangement is not. Use "
+                                    "\"confirmed\", or say it is claimed by the parties."
+                                    % (who, with_who[:60]))
+
+
 def check_suppliers(sup, store):
     """Researched supplier sets moved out of app/comptab.js on 05/08/2026.
 
@@ -3575,6 +3661,7 @@ def main():
     check_compare(load("compare-issues.json"), suppress, comptab_js)
     check_suppliers(load("compare-suppliers.json"), load("compare-issues.json"))
     check_seed_framework_provenance(load("supplier-seed.json"))
+    check_seed_people_and_partners(load("supplier-seed.json"))
     check_vocab(load("compare-suppliers.json"), load("products.json"),
                 load("speciality-map.json"), load("supplier-index.json"), comptab_js)
     check_source_links(load("compare-issues.json"),

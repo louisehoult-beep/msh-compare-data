@@ -95,6 +95,22 @@
   }
   function norm(s) { return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
 
+  /* seed.image ("hero image", page standard §2A) is read straight from the
+     seed as an <img src>. Every value recorded so far has been a full
+     external URL (the company's own site, a favicon service), so raw src
+     worked. The first REPO-SERVED hero (an asset committed under assets/
+     and referenced by its repo-relative path) exposed that raw src resolves
+     a relative path against the WordPress page the widget is embedded on,
+     not against this repo — a silent 404, not an error anyone would notice.
+     Every other repo-served asset on this page (LOGO[].file) is already
+     BASE-prefixed; this brings seed.image in line with that instead of
+     inventing a second convention. */
+  function imgSrc(v) {
+    var s = String(v || '');
+    if (!s) return '';
+    return /^https?:\/\//i.test(s) ? s : BASE + s;
+  }
+
   /* Company-name key for matching OUR supplier records against the names NHS
      Supply Chain prints on its own contract launch briefs. The two vocabularies
      were never the same: the briefs say "GBUK Ltd", "GBUK Healthcare",
@@ -470,6 +486,14 @@
       if (sd.frameworks && sd.frameworks.length) s.frameworks = sd.frameworks;
       if (sd.specialities && sd.specialities.length) s.specialities = sd.specialities;
       if (sd.repsWatch) s.repsWatch = sd.repsWatch;
+      /* Leadership and partnerships (19/08/2026) — same rule as every field
+         above: the seed is human-owned, the nightly index rebuild never
+         overwrites it, so the seed's copy wins and is the durable route. An
+         alert-only write (the 692d14a workaround) never reaches this merge
+         and is exactly the trap that migration replaced. */
+      if (sd.leadership) s.leadership = sd.leadership;
+      if (sd.partnerships && sd.partnerships.length) s.partnerships = sd.partnerships;
+      if (sd.frameworkTiming) s.frameworkTiming = sd.frameworkTiming;
     });
     var have = {};
     suppliers.forEach(function (s) { have[s.name] = 1; });
@@ -574,7 +598,7 @@
     var inits = esc((/^[A-Za-z0-9]{2,4}$/.test(_w[0] || '') ? _w[0] : _w.slice(0, 2).map(function (w) { return w[0]; }).join('')).toUpperCase());
     var ph = '<div style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid ' + LINE + ';display:flex;align-items:center;justify-content:center;font-weight:700;color:' + G + ';font-size:16px;">' + inits + '</div>';
     var thumb = s.image
-      ? '<img src="' + esc(s.image) + '" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid ' + LINE + ';" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div style="display:none;width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid ' + LINE + ';align-items:center;justify-content:center;font-weight:700;color:' + G + ';font-size:16px;">' + inits + '</div>'
+      ? '<img src="' + esc(imgSrc(s.image)) + '" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid ' + LINE + ';" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div style="display:none;width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid ' + LINE + ';align-items:center;justify-content:center;font-weight:700;color:' + G + ';font-size:16px;">' + inits + '</div>'
       : ph;
     var h = '<div style="display:flex;gap:13px;align-items:flex-start;">' + thumb + '<div><div style="font-size:21px;font-weight:700;color:' + INK + ';line-height:1.25;">' + esc(s.name) +
       (s.autoDetected ? ' <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#7a5b14;background:#f3e8cf;border-radius:99px;padding:2px 8px;vertical-align:3px;">AUTO — VERIFY AT SOURCE</span>' : '') + '</div>' +
@@ -897,7 +921,25 @@
     var curated = (s.frameworks || []);
 
     if (!hits.length && !curated.length) {
-      return sec('Frameworks', gap('No NHS Supply Chain contract launch brief names this company, and nothing is curated for it. Plenty of ranges are sold direct, off framework, and NHS Supply Chain is only one buying route, so read this as "not named on the briefs captured so far", never as proof they hold no place anywhere.'));
+      var emptyBody = gap('No NHS Supply Chain contract launch brief names this company, and nothing is curated for it. Plenty of ranges are sold direct, off framework, and NHS Supply Chain is only one buying route, so read this as "not named on the briefs captured so far", never as proof they hold no place anywhere.');
+      /* frameworkTiming (19/08/2026) — where a company is on no framework, this
+         names the one it would compete on and says why the timing explains the
+         absence, rather than leaving "not on a framework" to be read as a
+         quality signal. Renders inside this panel, never as a section of its
+         own — it is timing context for the empty state above, not a listing. */
+      var ft = s.frameworkTiming;
+      if (ft && ft.framework) {
+        emptyBody += '<div style="margin-top:12px;padding:10px 12px;border:1px dashed ' + LINE + ';border-radius:7px;font-size:13px;line-height:1.6;color:#37485a;">' +
+          '<b style="color:' + INK + ';">Framework it would compete on:</b> ' + esc(ft.framework) +
+          (ft.reference ? ' <span style="color:' + DIM + ';">(ref ' + esc(ft.reference) + ')</span>' : '') +
+          (ft.term ? '<br>Term: ' + esc(ft.term) : '') +
+          (ft.supplierCount ? ' <span style="color:' + DIM + ';">&middot; ' + esc(String(ft.supplierCount)) + ' suppliers</span>' : '') +
+          (ft.companyIncorporated ? '<br>This company incorporated ' + esc(ft.companyIncorporated) : '') +
+          (ft.note ? '<div style="margin-top:6px;font-size:12px;color:' + DIM + ';">' + esc(ft.note) + '</div>' : '') +
+          (ft.url ? srcLine('<a href="' + esc(ft.url) + '" target="_blank" rel="noopener">' + esc(ft.source || 'contract launch brief') + ' &#8599;</a>') : '') +
+          '</div>';
+      }
+      return sec('Frameworks', emptyBody);
     }
 
     var body = '';
@@ -1300,6 +1342,84 @@
     return sec(TITLE, body || gap('The officers record is empty.'));
   }
 
+  /* ---------------------------------------------------------------------
+     LEADERSHIP. Added 19/08/2026 so the Jeenie founder/prior-experience
+     material (put in alerts[] by mistake in 692d14a, migrated here in the
+     same commit that adds this panel) has structure instead of prose.
+     Renders in Part 1, after Company information.
+
+     Two kinds of fact, kept visibly separate: an OFFICER STATUS line, which
+     is a Companies House register fact (or its absence — a person the
+     register does not carry is an employee, not an officer, and the panel
+     says so rather than leaving that to be inferred); and CLAIMS, each the
+     named person's own published account of their prior experience, each
+     linked to its own source. A claim with no source url does not reach
+     this panel — verify.py refuses to publish one.
+     --------------------------------------------------------------------- */
+  function panelLeadership(s) {
+    var TITLE = 'Leadership';
+    var L = s.leadership;
+    if (!L || !L.people || !L.people.length) {
+      return sec(TITLE, gap('Not captured for this company yet.'));
+    }
+    var body = rule('Officer status — director or sole director, with an appointed date — is read from the <b>Companies House public register</b>. A person this record names who does not appear on that register is stated as an employee, never as an officer. Prior-experience claims are the named person&rsquo;s own published account, each linked to its own source; they are reported as claims, not independently verified beyond that the person made them.');
+    body += L.people.map(function (p) {
+      var badge = p.officer
+        ? '<span style="color:' + GREEN + ';font-weight:700;">Companies House officer</span>' +
+          (p.appointed ? ' <span style="color:' + DIM + ';">&middot; appointed ' + esc(p.appointed) + '</span>' : '')
+        : '<span style="color:' + DIM + ';">Not on the Companies House register &mdash; an employee, not an officer</span>';
+      var claims = (p.claims || []).map(function (c) {
+        return '<div style="padding:6px 0 0;font-size:12.5px;color:#37485a;line-height:1.55;">' + esc(c.text) +
+          (c.url ? ' <a href="' + esc(c.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">' + esc(c.source || 'source') + ' &#8599;</a>' : '') +
+          '</div>';
+      }).join('');
+      var note = p.note ? '<div style="margin-top:6px;font-size:11.5px;color:' + DIM + ';line-height:1.5;">' + esc(p.note) + '</div>' : '';
+      return '<div style="padding:10px 0;border-bottom:1px solid #f0ece3;">' +
+        '<b style="color:' + INK + ';font-size:14px;">' + esc(p.name) + '</b>' +
+        (p.role ? ' <span style="color:' + DIM + ';">&middot; ' + esc(p.role) + '</span>' : '') +
+        '<br>' + badge + claims + note + '</div>';
+    }).join('');
+    if (L.source) {
+      body += srcLine(esc(L.source) + (L.readOn ? ' &middot; ' + asOf('read ' + esc(dateUK(L.readOn))) : ''));
+    }
+    return sec(TITLE, body);
+  }
+
+  /* ---------------------------------------------------------------------
+     PARTNERSHIPS. Added 19/08/2026, same migration as leadership above.
+     Renders in Part 2, before Frameworks.
+
+     `confidence` is a first-class, always-shown state — never inferred from
+     whether a url is present. The Jeenie/Arjo entry is the reason this
+     exists: both parties state the arrangement, it appears on neither of
+     their own websites, and it must never be allowed to read as a verified
+     commercial agreement just because it has a source link. A row with no
+     source url does not reach this panel — verify.py refuses to publish one.
+     --------------------------------------------------------------------- */
+  function panelPartnerships(s) {
+    var TITLE = 'Partnerships';
+    var rows = s.partnerships || [];
+    if (!rows.length) {
+      return sec(TITLE, gap('Not captured for this company yet.'));
+    }
+    var body = rule('Every row is a dated distribution or partnership arrangement, carrying the confidence the arrangement itself supports — <b>confirmed</b> where an independent source or both parties&rsquo; own primary materials state it as a contract, or <b>claimed by the parties, not independently confirmed</b> where it is stated by the parties but not otherwise evidenced. A claimed arrangement is never rendered as a verified commercial agreement.');
+    body += rows.map(function (p) {
+      var confirmed = String(p.confidence || '').toLowerCase() === 'confirmed';
+      var badge = confirmed
+        ? '<span style="background:#eaf6ea;border:1px solid #bfe3bf;color:' + GREEN + ';font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:99px;padding:1px 7px;white-space:nowrap;">CONFIRMED</span>'
+        : '<span style="background:#f7ecdc;border:1px solid #e7d8b3;color:#7a5b14;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:99px;padding:1px 7px;white-space:nowrap;">' + esc(p.confidence || 'CLAIMED BY THE PARTIES, NOT INDEPENDENTLY CONFIRMED') + '</span>';
+      return '<div style="padding:9px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;line-height:1.55;">' +
+        '<b style="color:' + INK + ';">' + esc(p.with) + '</b> ' + badge +
+        (p.date ? ' <span style="color:' + DIM + ';">&middot; ' + esc(p.date) + '</span>' : '') +
+        (p.covers ? '<br><span style="color:#37485a;">' + esc(p.covers) + '</span>' : '') +
+        (p.territory ? ' <span style="color:' + DIM + ';">&middot; ' + esc(p.territory) + '</span>' : '') +
+        (p.note ? '<div style="margin-top:4px;font-size:12px;color:' + DIM + ';">' + esc(p.note) + '</div>' : '') +
+        (p.url ? srcLine('<a href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(p.source || 'source') + ' &#8599;</a>') : '') +
+        '</div>';
+    }).join('');
+    return sec(TITLE, body);
+  }
+
   /* =====================================================================
      STAGE 4 — FIELD FILING PROFILE. DERIVED, and the most restrained panel
      on the page. It answers "how big are the players on this lot" with the
@@ -1612,7 +1732,7 @@
     if (!s.image || favicon) {
       return '<div style="display:flex;' + mono + '">' + inits + '</div>';
     }
-    return '<img src="' + esc(s.image) + '" alt="" referrerpolicy="no-referrer" loading="lazy" ' +
+    return '<img src="' + esc(imgSrc(s.image)) + '" alt="" referrerpolicy="no-referrer" loading="lazy" ' +
       'style="max-width:' + (px - 14) + 'px;max-height:' + (px - 14) + 'px;object-fit:contain;" ' +
       'onerror="' + swap + '" onload="if(this.naturalWidth&lt;24){' + swap + '}">' + fb;
   }
@@ -2200,6 +2320,7 @@
       info += '<div style="font-size:13px;color:#37485a;line-height:1.6;margin:10px 0 0;"><b style="color:' + INK + ';">How they sell' + (sub.voice.angle ? ' — ' + esc(sub.voice.angle) : '') + '.</b> ' + esc(sub.voice.line || '') + '</div>';
     }
     h += sec('Company information', info || gap('Nothing curated for this company yet beyond the panels below.'));
+    h += panelLeadership(sub);
     h += panelCompanyFacts(sub, ctx);
     h += ownershipBlock(sub);
 
@@ -2210,6 +2331,7 @@
     h += part('2', 'What they sell, and how it reaches the NHS',
       'Clinical areas, NHS Supply Chain framework positions read from the buying organisation’s own contract launch briefs, and awards named on statutory notices.');
     h += divisionCards(sub, ctx);
+    h += panelPartnerships(sub);
     h += frameworks(sub, ctx);
     h += panelAwards(sub, ctx);
     h += repsWatch(sub);

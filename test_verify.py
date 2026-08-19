@@ -196,6 +196,67 @@ def _(tmp):
     return "asserts an award or re-tender"
 
 
+def seed_supplier_plus(**fields):
+    """The seed's first supplier, given one deliberately bad leadership/partnership.
+
+    Same shape as seed_clean_plus() above and for the same reason: injected onto
+    a supplier that carries neither field today, so the case proves the gate
+    rejects THIS entry rather than passing on something pre-existing.
+    """
+    d = json.load(open("data/supplier-seed.json"))
+    suppliers = d.get("suppliers") if isinstance(d, dict) else d
+    if isinstance(suppliers, dict):
+        suppliers = list(suppliers.values())
+    (suppliers or [{}])[0].update(fields)
+    json.dump(d, open("data/supplier-seed.json", "w"))
+
+
+@case("a career claim about a named person with no source URL")
+def _(tmp):
+    # The 24/07/2026 class of error with different names in it: a plausible,
+    # unevidenced statement about a real, identifiable person, on a paid product.
+    seed_supplier_plus(leadership={"people": [
+        {"name": "A Named Person", "role": "Founder", "officer": False,
+         "claims": [{"text": "Eighteen years running a rival's patient-handling division."}]}]})
+    return "no source URL"
+
+
+@case("a leadership claim sourced over plain HTTP")
+def _(tmp):
+    seed_supplier_plus(leadership={"people": [
+        {"name": "A Named Person", "role": "Founder", "officer": False,
+         "claims": [{"text": "Ran a rival's division.",
+                     "url": "http://example.invalid/profile"}]}]})
+    return "non-HTTPS source"
+
+
+@case("someone published as a Companies House officer with no appointed date")
+def _(tmp):
+    # officer:true asserts a register fact, and the register states a date for
+    # every officer — so no date means the register was never actually read.
+    seed_supplier_plus(leadership={"people": [
+        {"name": "A Named Person", "role": "Director", "officer": True, "claims": []}]})
+    return "no appointed date"
+
+
+@case("a partnership row with no source URL")
+def _(tmp):
+    seed_supplier_plus(partnerships=[
+        {"with": "A Counterparty Ltd", "covers": "Exclusive UK distribution",
+         "confidence": "confirmed"}])
+    return "has no source URL"
+
+
+@case("a partnership published with no declared confidence")
+def _(tmp):
+    # Without `confidence` the row renders as a verified commercial agreement,
+    # which is exactly what an arrangement claimed only by the parties is not.
+    seed_supplier_plus(partnerships=[
+        {"with": "A Counterparty Ltd", "covers": "Exclusive UK distribution",
+         "url": "https://example.invalid/announcement"}])
+    return "declares no `confidence`"
+
+
 def sourced(count=2, min_n=2):
     """A trust with `count` contacts each seen on at least `min_n` notices.
 
