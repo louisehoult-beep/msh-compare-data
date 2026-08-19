@@ -1,35 +1,163 @@
 {
-  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
-  "lastRun": "2026-08-18",
-  "done": [
-    "365 Healthcare",
-    "3D LifePrints UK Ltd",
-    "3D Metal Printing Ltd",
-    "@SimulationMan Ltd",
-    "A2B Healthcare",
-    "Aayan Medical Imaging Limited",
-    "Abbliss Ltd",
-    "Abbott Diagnostics",
-    "Abilia Ltd",
-    "Abiomed Ltd",
-    "Absorbest AB",
-    "Accel Heal"
-  ],
-  "refusals": [
-    {
-      "name": "365 Healthcare",
-      "reason": "365healthcare.com now 301-redirects to Mediq's UK B2B site, and mediq.co.uk carries 365 Healthcare only as a product brand with no legal entity of its own; its footer names Mediq Healthcare UK Limited. Mediq is the parent, so it must not be recorded as an alias. Companies House holds no active '365 Healthcare' matching the Droitwich supplier. No verifiable extra name form.",
-      "date": "2026-08-18"
-    },
-    {
-      "name": "Aayan Medical Imaging Limited",
-      "reason": "aayanmedical.co.uk is a parked lander, no company site found. Companies House 06547415 gives the registered name AAYAN MEDICAL IMAGING LIMITED, identical to the display name, and no previous names. No extra name form exists to record.",
-      "date": "2026-08-18"
-    },
-    {
-      "name": "Abbott Diagnostics",
-      "reason": "The only real-world form the record's own note points to, 'Abbott Rapid Diagnostics Ltd', is a SEPARATE supplier record in this seed (Abbott Rapid Diagnostics). Recording it here would be an alias that is another record's own name, which verify.py hard-fails and which would hand this record every Abbott Rapid Diagnostics lookup. 'Abbott' alone is a shortening of several Abbott records and is barred by rule 2. Needs Lou's call on whether the two records should be merged.",
-      "date": "2026-08-18"
-    }
-  ]
+ "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
+ "lastRun": "2026-08-19",
+ "done": [
+  "365 Healthcare",
+  "3D LifePrints UK Ltd",
+  "3D Metal Printing Ltd",
+  "@SimulationMan Ltd",
+  "A2B Healthcare",
+  "Aayan Medical Imaging Limited",
+  "Abbliss Ltd",
+  "Abbott Diagnostics",
+  "Abilia Ltd",
+  "Abiomed Ltd",
+  "Absorbest AB",
+  "Accel Heal",
+  "Accora",
+  "Accrington Surgical",
+  "Accrington Surgical Inst. Suppliers",
+  "Accrington Surgical Instrument Suppliers Ltd",
+  "Acumed Ltd",
+  "Adler Ortho UK Limited",
+  "Aero Healthcare Ltd",
+  "AG Dental Equipment",
+  "Agfa Healthcare UK Ltd",
+  "Agito Medical A/S",
+  "Aidapt Bathrooms Ltd",
+  "Aidence"
+ ],
+ "refusals": [
+  {
+   "name": "365 Healthcare",
+   "reason": "365healthcare.com now 301-redirects to Mediq's UK B2B site, and mediq.co.uk carries 365 Healthcare only as a product brand with no legal entity of its own; its footer names Mediq Healthcare UK Limited. Mediq is the parent, so it must not be recorded as an alias. Companies House holds no active '365 Healthcare' matching the Droitwich supplier. No verifiable extra name form.",
+   "date": "2026-08-18"
+  },
+  {
+   "name": "Aayan Medical Imaging Limited",
+   "reason": "aayanmedical.co.uk is a parked lander, no company site found. Companies House 06547415 gives the registered name AAYAN MEDICAL IMAGING LIMITED, identical to the display name, and no previous names. No extra name form exists to record.",
+   "date": "2026-08-18"
+  },
+  {
+   "name": "Abbott Diagnostics",
+   "reason": "The only real-world form the record's own note points to, 'Abbott Rapid Diagnostics Ltd', is a SEPARATE supplier record in this seed (Abbott Rapid Diagnostics). Recording it here would be an alias that is another record's own name, which verify.py hard-fails and which would hand this record every Abbott Rapid Diagnostics lookup. 'Abbott' alone is a shortening of several Abbott records and is barred by rule 2. Needs Lou's call on whether the two records should be merged.",
+   "date": "2026-08-18"
+  },
+  {
+   "name": "Accrington Surgical",
+   "reason": "accringtonsurgical.co.uk is the company's own site and its page title is \"Accrington Surgical Instrument Suppliers LTD\"; its own news page carries \"NHS Supply Chain Surgical Instruments Framework Award\", the same framework this record was created from. So the only real-world longer form of this name is \"Accrington Surgical Instrument Suppliers Ltd\", which is a SEPARATE record's own name in this seed. Recording it here would trip verify.py's alias_steals_name hard fail and hand this record every lookup meant for that one. Companies House holds ACCRINGTON SURGICAL LTD (06046644) but it is DISSOLVED, so it cannot be the current supplier either. Needs Lou's call on merging the three Accrington records. Speciality \"Theatres / surgical\" WAS added, from the company's own product pages.",
+   "date": "2026-08-19"
+  },
+  {
+   "name": "Accrington Surgical Inst. Suppliers",
+   "reason": "Same position as \"Accrington Surgical\". This is NHS Supply Chain's abbreviation of \"Accrington Surgical Instrument Suppliers Ltd\" on the Procedure Packs brief (2023/S 000-031398); the company's own site (accringtonsurgical.co.uk) sells procedure packs and packs and trays, confirming it is the same firm. The expansion is another record's own name, so it cannot be recorded as an alias here. Needs Lou's call on merging the three Accrington records. Speciality \"Theatres / surgical\" WAS added, from the company's own product pages.",
+   "date": "2026-08-19"
+  }
+ ],
+ "sources": {
+  "Accora": {
+   "aliases": [
+    "Accora Limited"
+   ],
+   "verifiedOn": "2026-08-19",
+   "sources": "Companies House 04915604 registered name ACCORA LIMITED (active). Own site accora.care."
+  },
+  "Accrington Surgical Instrument Suppliers Ltd": {
+   "aliases": [
+    "Accrington Surgical Instrument Suppliers Limited"
+   ],
+   "verifiedOn": "2026-08-19",
+   "sources": "Own site accringtonsurgical.co.uk page title \"Accrington Surgical Instrument Suppliers LTD\"; Companies House 05980916 registered name ACCRINGTON SURGICAL INSTRUMENT SUPPLIERS LIMITED (active)."
+  },
+  "Acumed Ltd": {
+   "aliases": [
+    "Acumed"
+   ],
+   "verifiedOn": "2026-08-19",
+   "sources": "Own site acumed.net trades throughout as \"Acumed\" (masthead, About Acumed, product families); footer legal line \"Acumed LLC, a Marmon Medical | Berkshire Hathaway Company\". \"Acumed\" is unique across the seed as a single token."
+  },
+  "Adler Ortho UK Limited": {
+   "aliases": [
+    "Adler Ortho U.K. Limited"
+   ],
+   "verifiedOn": "2026-08-19",
+   "sources": "Companies House 08167771 registered name ADLER ORTHO U.K. LIMITED (active). Own site adlerortho.com states direct commercial operations in the UK. Bare \"Adler Ortho\" NOT added: it is the Italian parent Adler Ortho S.p.A.'s own brand."
+  },
+  "Aero Healthcare Ltd": {
+   "aliases": [
+    "Aero Healthcare"
+   ],
+   "verifiedOn": "2026-08-19",
+   "sources": "Own site aerohealthcare.com masthead and throughout: \"Aero Healthcare\". Companies House 06760143 AERO HEALTHCARE LTD (active), Horsham.",
+   "specialities": [
+    "Wound care",
+    "Infection prevention and PPE"
+   ],
+   "specialitiesSource": "Own site aerohealthcare.com product categories \"Wound Care & First Aid\" and \"Personal Protection - PPE\"."
+  },
+  "AG Dental Equipment": {
+   "aliases": [
+    "AG Dental",
+    "AG Dental (Equipment) Limited"
+   ],
+   "verifiedOn": "2026-08-19",
+   "sources": "Own site agdental.co.uk trades as \"AG Dental Equipment\" and \"AG Dental\"; its contact address (Unit One Northford Close, Shrivenham, Swindon SN6 8HL) matches Companies House 07007257 AG DENTAL (EQUIPMENT) LIMITED (active)."
+  },
+  "Agfa Healthcare UK Ltd": {
+   "aliases": [
+    "Agfa HealthCare UK Limited"
+   ],
+   "verifiedOn": "2026-08-19",
+   "sources": "Companies House 06317215 registered name AGFA HEALTHCARE UK LIMITED (active), 515 Coldhams Lane, Cambridge. Own site agfahealthcare.com. Bare \"AGFA HealthCare\" NOT added: that is the global division above this UK entity.",
+   "specialities": [
+    "Diagnostics and imaging",
+    "Digital and medical IT"
+   ],
+   "specialitiesSource": "Own site agfahealthcare.com Clinical Solutions (Radiology, Cardiology, Digital Pathology, Breast Imaging) and the Enterprise Imaging platform."
+  },
+  "Agito Medical A/S": {
+   "aliases": [
+    "Agito Medical"
+   ],
+   "verifiedOn": "2026-08-19",
+   "sources": "Own site agitomedical.com brands throughout as \"AGITO Medical\" and its own marketing permission line names \"AGITO Medical A/S\".",
+   "specialities": [
+    "Diagnostics and imaging"
+   ],
+   "specialitiesSource": "Own site agitomedical.com: \"Diagnostic Imaging Solutions\" - mobile, relocatable and modular imaging, CT/MRI, cath labs, pre-owned imaging systems and parts."
+  },
+  "Aidapt Bathrooms Ltd": {
+   "aliases": [
+    "Aidapt Bathrooms Limited"
+   ],
+   "verifiedOn": "2026-08-19",
+   "sources": "Own site aidapt.co.uk footer names \"Aidapt Bathrooms Ltd (South Office)\" and gives the head office as Lancots Lane, Sutton Oak, St Helens WA9 3EX, matching Companies House 02464054 AIDAPT BATHROOMS LIMITED (active). Bare \"Aidapt\" NOT added: sister companies Aidapt International Ltd and Aidapt (Wales) Ltd share the brand.",
+   "specialities": [
+    "Rehabilitation and mobility"
+   ],
+   "specialitiesSource": "Own site aidapt.co.uk page title \"Aidapt Mobility Aids & Independent Living Solutions\"."
+  },
+  "Aidence": {
+   "aliases": [
+    "Aidence BV",
+    "Aidence UK Ltd"
+   ],
+   "verifiedOn": "2026-08-19",
+   "sources": "Own site aidence.com now resolves to deephealth.com/aidence, whose product disclaimer reads \"DeepHealth Lung is manufactured as Veye Lung Nodules by Aidence BV for DeepHealth Inc.\" Companies House holds exactly one Aidence company, AIDENCE UK LTD (13057524, active). Parent names DeepHealth and RadNet NOT added."
+  },
+  "Accrington Surgical": {
+   "verifiedOn": "2026-08-19",
+   "specialities": [
+    "Theatres / surgical"
+   ],
+   "specialitiesSource": "Own site accringtonsurgical.co.uk: reusable and single-use theatre-quality surgical instruments and procedure packs."
+  },
+  "Accrington Surgical Inst. Suppliers": {
+   "verifiedOn": "2026-08-19",
+   "specialities": [
+    "Theatres / surgical"
+   ],
+   "specialitiesSource": "Own site accringtonsurgical.co.uk: surgical instruments, packs and trays, procedure packs."
+  }
+ }
 }
