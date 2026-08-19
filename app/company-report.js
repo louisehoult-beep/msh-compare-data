@@ -160,11 +160,17 @@
         read what they had typed. !important is the correct instrument for a
         rule that specific; do not swap it for more classes.
 
-     THE REPORT IS CAPPED AT A READABLE MEASURE. Uncapped it inherits the
-     full-bleed Hub page — 2,395px of running text on a wide screen. The cap
-     is on .mcr-report only, never on .mcr itself: the printable pack sets
-     its own measure on <body class="mcr">, and a max-width on .mcr would
-     out-specify it.
+     THE REPORT'S OUTER CAP IS RESPONSIVE, NOT FLAT — widened 19/08/2026 after
+     Lou flagged the page as "not full width" on her own screen. A flat
+     1180px card centred in a 2,450px window left ~635px of dead space each
+     side; min(1600px,96vw) keeps that gutter to a normal margin on a wide
+     monitor while still capping out well short of full-bleed on anything
+     wider. This cap is on .mcr-report only, never on .mcr itself: the
+     printable pack sets its own measure on <body class="mcr">, and a
+     max-width on .mcr would out-specify it. It was never the fix for
+     unreadable text, either — that job stays with the `max-width:66em` on
+     prose blocks (.mcr-part-s and similar), which is untouched here and is
+     the thing actually protecting line length.
 
      Colours are the brand guide's, verbatim: Midnight Navy #0B1C33 with the
      signature 135deg navy gradient, Deep Gold #A8842C for labels and rules on
@@ -212,9 +218,12 @@
     '.mcr .mcr-colink:hover{border-bottom-color:var(--mcr-gold);}',
 
     /* --- report shell + masthead ------------------------------------- */
-    /* The measure. 1180px is the Hub's own reading width for a document
-       page; wider than this and the framework tables stop scanning. */
-    '.mcr .mcr-report{max-width:1180px;margin:0 auto;border:1px solid var(--mcr-line);',
+    /* The measure. min(1600px,96vw): fills most of a wide monitor while
+       leaving a real margin on anything wider still, and on a normal
+       laptop screen 96vw is already narrower than 1600px so nothing
+       changes there. See the note above the STYLE array for why this
+       isn't a flat number any more. */
+    '.mcr .mcr-report{max-width:min(1600px,96vw);margin:0 auto;border:1px solid var(--mcr-line);',
     'border-radius:14px;background:#fdfcf9;overflow:hidden;',
     'box-shadow:0 2px 16px rgba(11,28,51,.07);}',
     '.mcr .mcr-mast{position:relative;padding:30px 34px 24px;',
@@ -295,6 +304,20 @@
     'transform:translateY(-2px) rotate(45deg);transition:transform .18s ease;}',
     '.mcr details.mcr-card[open]>summary .mcr-card-x{transform:translateY(2px) rotate(-135deg);}',
     '.mcr .mcr-card--empty .mcr-card-x{border-color:#cfc6b2;}',
+    /* CLOSED-PANEL GRID — added 19/08/2026. A well-covered company runs to
+       20-odd panels and only the first two open on load (see the note two
+       screens up), so the rest used to stack one full-width row each —
+       measured on GBUK's report: 23 closed panels, 1,118px wide, 64px tall,
+       holding nothing but a title. groupClosedPanels() (below, in show())
+       wraps each run of consecutive closed <details> in one of these at
+       render time; it never touches the print pack, which forces every
+       panel open before it wraps anything (see buildPack). A panel opened
+       from inside the grid spans the full row via the plain [open] rule
+       below — no :has() needed, since it only has to react to its own
+       state, not a sibling's. */
+    '.mcr .mcr-toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:16px 0 0;}',
+    '.mcr .mcr-toc-grid details.mcr-card{margin:0;padding:14px 16px;}',
+    '.mcr .mcr-toc-grid details.mcr-card[open]{grid-column:1/-1;padding:22px 24px;}',
     '.mcr .mcr-note{font-size:12.5px;color:var(--mcr-dim);line-height:1.68;}',
     '.mcr .mcr-good{font-size:12.5px;color:#2e7d5b;line-height:1.68;}',
     /* --- alerts & recalls -------------------------------------------- */
@@ -315,6 +338,23 @@
     'color:#4a5766;line-height:1.65;}',
     '.mcr .mcr-rule-h{display:block;font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;',
     'font-weight:700;color:var(--mcr-gold);margin-bottom:5px;}',
+
+    /* Company facts, as tiles rather than a single-column table — added
+       19/08/2026. Five or six short facts used to be one per full-width
+       row; a long value (registered office, latest accounts wording) still
+       needs the full row, everything else packs two or three across. The
+       wide/compact split is decided in fact() by the value's own length,
+       not hardcoded per label, so it holds however the register data
+       varies from company to company. */
+    '.mcr .mcr-facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px 18px;}',
+    '.mcr .mcr-fact--wide{grid-column:1/-1;}',
+    '.mcr .mcr-fact-k{font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;font-weight:700;color:var(--mcr-dim);margin-bottom:3px;}',
+    '.mcr .mcr-fact-v{font-size:13px;color:var(--mcr-ink);line-height:1.5;}',
+    /* Frameworks, two columns on a wide card — added 19/08/2026. GBUK's 23
+       rows used one full-width line each for what is a three-line entry;
+       two columns roughly halves the scroll. Each row keeps its own
+       border-bottom, so the grid reads as a table without being one. */
+    '.mcr .mcr-fw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:0 28px;}',
 
     /* --- chips, source lines, tables ---------------------------------- */
     '.mcr .mcr-chip{display:inline-block;background:#fff;color:#37485a;border:1px solid var(--mcr-line);',
@@ -954,7 +994,9 @@
 
       body += '<div style="font-size:12px;color:' + DIM + ';margin:0 0 8px;">' + hits.length + ' framework(s) name this company.</div>';
 
-      body += hits.map(function (h) {
+      /* Two columns on a wide card (mcr-fw-grid, added 19/08/2026) — see the
+         note beside it in STYLE. */
+      body += '<div class="mcr-fw-grid">' + hits.map(function (h) {
         var f = h.fw;
         var lots = (f.supplierLots || {});
         var myLots = [];
@@ -972,18 +1014,18 @@
           (myLots.length ? ' &middot; this company on ' + myLots.map(esc).join(', ') : '') +
           ' &middot; <a href="' + esc(f.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">contract launch brief &#8599;</a></span>' +
           '</div>';
-      }).join('');
+      }).join('') + '</div>';
     }
 
     if (curated.length) {
       body += '<div style="font-size:12.5px;font-weight:700;color:' + INK + ';margin:14px 0 4px;">Also tracked by hand</div>' +
         '<div style="font-size:11.5px;color:' + DIM + ';margin:0 0 6px;">Tender-watch notes: re-tender values, award criteria and award dates, which the launch briefs do not carry. Curated, not read from a brief.</div>' +
-        curated.map(function (f) {
+        '<div class="mcr-fw-grid">' + curated.map(function (f) {
           return '<div style="padding:8px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;line-height:1.55;"><b>' + fwLinked(f.name, f.key, '') + '</b>' +
             (f.value ? ' <span style="color:' + GREEN + ';font-weight:700;">' + esc(f.value) + '</span>' : '') +
             (f.dates ? ' <span style="color:' + DIM + ';">&middot; ' + esc(f.dates) + '</span>' : '') +
             (f.note ? '<br><span style="color:#37485a;font-size:12.5px;">' + esc(f.note) + '</span>' : '') + '</div>';
-        }).join('');
+        }).join('') + '</div>';
     }
     return sec('Frameworks', body);
   }
@@ -1241,9 +1283,17 @@
     return String((rec && rec.matchConfidence) || '').toLowerCase() === 'probable';
   }
 
-  function fact(label, value) {
-    return '<tr><td style="padding:7px 18px 7px 0;font-size:12px;color:' + DIM + ';white-space:nowrap;vertical-align:top;">' + label + '</td>' +
-      '<td style="padding:7px 0;font-size:13px;color:' + INK + ';line-height:1.5;">' + value + '</td></tr>';
+  /* Tile, not a table row (changed 19/08/2026 — see mcr-facts in STYLE). A
+     value over ~34 characters of visible text is judged too long for a
+     compact tile and spans the full row instead; that threshold is on the
+     value's own length so it holds for whichever facts a given company
+     happens to have, rather than a fixed list of "these labels are long". */
+  function fact(label, value, forceWide) {
+    var plain = String(value).replace(/<[^>]+>/g, '');
+    var wide = forceWide || plain.length > 34;
+    return '<div class="mcr-fact' + (wide ? ' mcr-fact--wide' : '') + '">' +
+      '<div class="mcr-fact-k">' + label + '</div>' +
+      '<div class="mcr-fact-v">' + value + '</div></div>';
   }
 
   function panelCompanyFacts(s, ctx) {
@@ -1264,9 +1314,9 @@
     if (rec.registeredName) rows += fact('Registered name', '<b>' + esc(rec.registeredName) + '</b>' + (rec.companyNumber ? ' · ' + esc(rec.companyNumber) : ''));
     if (rec.status) rows += fact('Status', esc(rec.status));
     if (rec.incorporated) rows += fact('Incorporated', esc(dateUK(rec.incorporated)));
-    if (rec.registeredOffice) rows += fact('Registered office', esc(rec.registeredOffice));
+    if (rec.registeredOffice) rows += fact('Registered office', esc(rec.registeredOffice), true);
     if (rec.sic && rec.sic.length) rows += fact('SIC', rec.sic.map(esc).join(', '));
-    if (rec.accountsFilingVerbatim) rows += fact('Latest accounts', esc(rec.accountsFilingVerbatim));
+    if (rec.accountsFilingVerbatim) rows += fact('Latest accounts', esc(rec.accountsFilingVerbatim), true);
 
     /* Turnover has three honest states and they must not blur:
        a figure (with its made-up-to date), disclosed-but-not-extracted, or
@@ -1300,7 +1350,7 @@
     } else if (rec.matchedOn) {
       body += '<div style="font-size:11.5px;color:' + DIM + ';margin:0 0 8px;">Matched on: ' + esc(rec.matchedOn) + '</div>';
     }
-    body += rows ? ('<table style="border-collapse:collapse;">' + rows + '</table>') : gap('The record carries no register facts.');
+    body += rows ? ('<div class="mcr-facts">' + rows + '</div>') : gap('The record carries no register facts.');
     if (rec.sourceUrl) {
       body += srcLine('<a href="' + esc(rec.sourceUrl) + '" target="_blank" rel="noopener">Companies House record ↗</a>' +
         ' &middot; ' + asOf('read ' + esc(dateUK(fin.dataAsOf || ''))));
@@ -2548,6 +2598,42 @@
       inner + '</body></html>';
   }
 
+  /* Packs runs of consecutive closed panels into a .mcr-toc-grid — added
+     19/08/2026, the fix for the 23-closed-panels-in-a-column problem (see
+     the note beside .mcr-toc-grid in STYLE). Runs on the live on-page DOM
+     only, right after result.innerHTML is set in show(); the print pack
+     builds its own HTML from composeSections() and forces every panel
+     open before it does, so it never sees an unopened <details> to group
+     and this function has nothing to do there.
+     A run of exactly one closed panel is left where it is — grouping a
+     single item into its own one-tile "grid" would just add a wrapper div
+     for no visual gain, and it's cheaper to skip than to special-case. */
+  function groupClosedPanels(root) {
+    var body = root.querySelector('.mcr-body');
+    if (!body) return;
+    var kids = Array.prototype.slice.call(body.children);
+    var i = 0;
+    function isClosedPanel(el) {
+      return el.tagName === 'DETAILS' && el.classList.contains('mcr-card') && !el.open;
+    }
+    while (i < kids.length) {
+      if (isClosedPanel(kids[i])) {
+        var run = [kids[i]];
+        var j = i + 1;
+        while (j < kids.length && isClosedPanel(kids[j])) { run.push(kids[j]); j++; }
+        if (run.length > 1) {
+          var grid = document.createElement('div');
+          grid.className = 'mcr-toc-grid';
+          body.insertBefore(grid, run[0]);
+          run.forEach(function (node) { grid.appendChild(node); });
+        }
+        i = j;
+      } else {
+        i++;
+      }
+    }
+  }
+
   function openPack(sub, ctx) {
     var w = window.open('', '_blank');
     if (!w) return; /* popup blocked — the on-page card is the same content */
@@ -2726,6 +2812,7 @@
       result.innerHTML = s ? (flag + report(s, ctx)) :
         '<div style="padding:14px 4px;font-size:13.5px;color:' + DIM + ';line-height:1.6;">No match for “' + esc(q) +
         '”. Coverage is the tracked-supplier set (' + all.length + ' indexed) — a company that is not here is <b>not yet indexed</b>, not “nothing found”.</div>';
+      if (s) groupClosedPanels(result);
       var pk = document.getElementById('mcrPack');
       if (pk && s) pk.addEventListener('click', function () { openPack(s, ctx); });
     }
