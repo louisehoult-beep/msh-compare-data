@@ -2296,7 +2296,8 @@
     "sec": "Securement & dressings",
     "vte": "VTE prevention / IPC devices",
     "cvc": "Central venous catheters",
-    "conn": "IV connectors, extensions & accessories"
+    "conn": "IV connectors, extensions & accessories",
+    "gen": "General-purpose syringes & needles"
    },
    "suppliers": [
     {
@@ -4885,6 +4886,16 @@
      "iss": []
     }
    ]
+  },
+  "training": {
+   "label": "Training & simulation",
+   "route": [],
+   "routeNote": "Not yet researched against NHS Supply Chain framework briefs — added 19/08/2026, agreed with Lou, to cover CPR/resuscitation training manikins found unmapped in the Differentiator worklist (Crest Medical Ltd). Framework route to market not verified; check before quoting one.",
+   "noSuppliers": "NO COMPETITOR SET RESEARCHED YET. Only one supplier (Crest Medical Ltd) is currently evidenced in the catalogue crawl, for CPR/resuscitation training manikins (Practiman/Practibaby range). This speciality was added 19/08/2026 to give those products a category, not from a researched market map — do not present this as a complete competitor list until that work is done.",
+   "types": {
+    "manikin": "CPR / resuscitation training manikins & accessories"
+   },
+   "suppliers": []
   }
  },
  "refRule": "`ref` is the master supplier record this row's `co` resolves to, in supplier-seed.json or supplier-index.json, matched on exact name or exact alias using verify.py's own _norm_co. It exists so the Compare tab's company picker can group the spellings of one firm together: GBUK is written four ways in this file and a member picking one saw only that slice. `co` is unchanged and is still what the table displays — several are the procurement record's own wording and this file is right to show them. A row with no `ref` reached no master record and groups under its own `co`, exactly as before. Nothing here is fuzzy-matched: an unresolved name is left unresolved rather than guessed at. Derived 07/08/2026."
