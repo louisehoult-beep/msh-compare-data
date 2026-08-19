@@ -247,6 +247,40 @@ def _(tmp):
     return "has no source URL"
 
 
+@case("prose migrated to a panel but left behind in the index's alerts")
+def _(tmp):
+    # THE 19/08/2026 ERROR. mergeSuppliers() does not copy `alerts` from the
+    # seed, so removing prose from the SEED's alerts changes nothing a member
+    # sees — the index still serves it, the new panel renders the same fact
+    # beside it, and one fact has two homes on a paid product.
+    PROSE = ("A 2024 incorporation whose leadership is not new to patient handling, which is "
+             "the main reason to read this as an emerging competitor rather than a long-tail SME.")
+    d = json.load(open("data/supplier-seed.json"))
+    suppliers = d.get("suppliers") if isinstance(d, dict) else d
+    if isinstance(suppliers, dict):
+        suppliers = list(suppliers.values())
+    target = (suppliers or [{}])[0]
+    target["background"] = [{"heading": "Leadership", "text": PROSE,
+                             "url": "https://example.invalid/x"}]
+    json.dump(d, open("data/supplier-seed.json", "w"))
+
+    idx = json.load(open("data/supplier-index.json"))
+    rec = next((s for s in idx.get("suppliers", []) if s.get("name") == target.get("name")), None)
+    if rec is None:
+        return Skip("the seed's first supplier has no record in supplier-index.json here")
+    rec.setdefault("alerts", []).append(PROSE)      # the leftover copy
+    json.dump(idx, open("data/supplier-index.json", "w"))
+    return "STILL in data/supplier-index.json"
+
+
+@case("a background entry sourced over plain HTTP")
+def _(tmp):
+    seed_supplier_plus(background=[
+        {"heading": "About", "text": "Founded to do a thing, per its own about page.",
+         "url": "http://example.invalid/about"}])
+    return "non-HTTPS source"
+
+
 @case("a partnership published with no declared confidence")
 def _(tmp):
     # Without `confidence` the row renders as a verified commercial agreement,

@@ -906,6 +906,83 @@ def check_seed_framework_provenance(seed):
 # own website, and it must never render as a verified commercial agreement just
 # because a link exists. So `confidence` is required and always shown — a row
 # that omits it would default to reading as confirmed, which is the failure.
+def _sp_norm(s):
+    return re.sub(r"[^a-z0-9]+", " ", str(s or "").lower()).strip()
+
+
+def _structured_corpus(s):
+    """All prose a supplier carries in the structured background fields."""
+    bits = []
+    for b in (s.get("background") or []):
+        bits.append(b.get("text") or "")
+    lead = s.get("leadership") or {}
+    for p in (lead.get("people") or []):
+        bits.append(p.get("note") or "")
+        for c in (p.get("claims") or []):
+            bits.append(c.get("text") or "")
+    for p in (s.get("partnerships") or []):
+        bits.append(p.get("note") or "")
+    ft = s.get("frameworkTiming") or {}
+    bits.append(ft.get("note") or "")
+    return _sp_norm(" ".join(bits))
+
+
+def check_migrated_prose_not_in_alerts(seed, index):
+    """The prose must leave alerts[] when it moves to a structured panel.
+
+    THIS IS THE 19/08/2026 ERROR, GATED.
+
+    mergeSuppliers() in app/company-report.js does NOT copy `alerts` from the
+    seed — alerts are read from data/supplier-index.json only. So removing a
+    curated entry from the SEED's alerts changes nothing on the page: the prose
+    keeps rendering under "Alerts & recalls" while the new panel renders the
+    same fact beside it. One fact, two homes, on a paid product, which is what
+    root rule 18 exists to stop. It happened between 2b9205a and 692d14a in one
+    direction and again on the migration commit in the other.
+
+    The check is deliberately narrow. Curated prose in alerts[] is normal and
+    widespread across this index, so its mere presence cannot fail. What fails
+    is prose that has ALREADY been given a structured home on the same company
+    and is still sitting in alerts as well — a duplicate, not a judgement call.
+    """
+    seed_suppliers = seed.get("suppliers") if isinstance(seed, dict) else seed
+    if isinstance(seed_suppliers, dict):
+        seed_suppliers = list(seed_suppliers.values())
+    idx_suppliers = (index or {}).get("suppliers") or []
+    if not seed_suppliers or not idx_suppliers:
+        WARN("seed-people", "could not read both supplier-seed.json and supplier-index.json, so "
+                            "the migrated-prose duplication check did not run.")
+        return
+
+    idx_by_name = {s.get("name"): s for s in idx_suppliers}
+    for s in seed_suppliers:
+        corpus = _structured_corpus(s)
+        if len(corpus) < 80:
+            continue                    # nothing migrated on this company
+        rec = idx_by_name.get(s.get("name"))
+        if not rec:
+            continue
+        for a in (rec.get("alerts") or []):
+            # An issue-derived alert carries _id and is written by the refresh,
+            # not by hand. It is never a migration leftover.
+            if isinstance(a, dict) and a.get("_id"):
+                continue
+            text = a if isinstance(a, str) else (a.get("text") or a.get("detail") or "")
+            n = _sp_norm(text)
+            if len(n) < 60:
+                continue
+            # A 60-character run of the alert appearing verbatim in a structured
+            # field is a copy, not a coincidence.
+            if any(n[i:i + 60] in corpus for i in range(0, max(1, len(n) - 60), 20)):
+                FAIL("seed-people",
+                     "%s: prose that already has a structured panel (background, leadership, "
+                     "partnerships or frameworkTiming) is STILL in data/supplier-index.json "
+                     "alerts[]: %r. The page reads alerts from the INDEX, not the seed — "
+                     "removing it from the seed alone changes nothing a member sees, and the "
+                     "fact then renders twice. Delete it from the index in the same commit "
+                     "(root rule 18)." % (s.get("name") or "(unnamed)", text[:90]))
+
+
 def check_seed_people_and_partners(seed):
     suppliers = seed.get("suppliers") if isinstance(seed, dict) else seed
     if isinstance(suppliers, dict):
@@ -917,6 +994,19 @@ def check_seed_people_and_partners(seed):
 
     for s in suppliers:
         who = s.get("name") or "(unnamed supplier)"
+
+        # Background is the one field here that MAY be unsourced: the panel
+        # draws an unsourced entry on a dashed edge and says it is a prompt to
+        # check, which is the honest state for "read off the company's own
+        # about page". What it may not do is carry a broken or insecure link,
+        # or an entry with no text at all.
+        for b in (s.get("background") or []):
+            if not (b.get("text") or "").strip():
+                FAIL("seed-people", "%s: a background entry carries no text." % who)
+            u = (b.get("url") or "").strip()
+            if u and not u.startswith("https://"):
+                FAIL("seed-people", "%s: background entry %r cites a non-HTTPS source (%r)."
+                                    % (who, (b.get("heading") or "")[:40], u[:60]))
 
         lead = s.get("leadership") or {}
         for p in (lead.get("people") or []):
@@ -3662,6 +3752,8 @@ def main():
     check_suppliers(load("compare-suppliers.json"), load("compare-issues.json"))
     check_seed_framework_provenance(load("supplier-seed.json"))
     check_seed_people_and_partners(load("supplier-seed.json"))
+    check_migrated_prose_not_in_alerts(load("supplier-seed.json"),
+                                       load("supplier-index.json"))
     check_vocab(load("compare-suppliers.json"), load("products.json"),
                 load("speciality-map.json"), load("supplier-index.json"), comptab_js)
     check_source_links(load("compare-issues.json"),

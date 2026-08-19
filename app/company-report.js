@@ -494,6 +494,7 @@
       if (sd.leadership) s.leadership = sd.leadership;
       if (sd.partnerships && sd.partnerships.length) s.partnerships = sd.partnerships;
       if (sd.frameworkTiming) s.frameworkTiming = sd.frameworkTiming;
+      if (sd.background && sd.background.length) s.background = sd.background;
     });
     var have = {};
     suppliers.forEach(function (s) { have[s.name] = 1; });
@@ -1340,6 +1341,50 @@
         ' &middot; ' + asOf('read ' + esc(dateUK(off.readOn || ''))));
     }
     return sec(TITLE, body || gap('The officers record is empty.'));
+  }
+
+  /* ---------------------------------------------------------------------
+     COMPANY BACKGROUND. Added 19/08/2026.
+
+     WHY THIS EXISTS. `alerts[]` is one bucket holding two unlike things: a
+     dated MHRA safety event a rep may have to answer for on a visit, and
+     curated background prose about how a company sells. alertShape() sorts
+     recalls above notes, but they still render under one heading — so
+     "Alerts & recalls" was where a company's mission statement, its training
+     framework and its catalogue structure ended up, which reads to a member
+     as though the company has six safety problems. Background belongs in
+     Part 1 with the rest of who they are.
+
+     Each entry keeps its own source and read date. An entry with no source
+     is drawn on the same dashed edge the alerts panel uses for honest
+     incompleteness and says so — thin background is common and must be
+     visibly thin, never quietly dressed as corroborated.
+     --------------------------------------------------------------------- */
+  function panelBackground(s) {
+    var TITLE = 'Company background';
+    var rows = s.background || [];
+    if (!rows.length) {
+      return sec(TITLE, gap('Not captured for this company yet.'));
+    }
+    var unsourced = rows.filter(function (r) { return !r.url; }).length;
+    var body = rows.map(function (r) {
+      var thin = !r.url;
+      return '<div style="padding:10px 12px;margin:0 0 9px;border-radius:7px;' +
+        (thin ? 'border:1px dashed ' + LINE + ';background:' + SOFT + ';' : 'border-bottom:1px solid #f0ece3;border-radius:0;padding:9px 0;') + '">' +
+        (r.heading ? '<div style="font-size:12.5px;font-weight:700;color:' + INK + ';letter-spacing:.02em;margin:0 0 4px;">' + esc(r.heading) + '</div>' : '') +
+        '<div style="font-size:13.5px;color:#37485a;line-height:1.65;">' + esc(r.text) + '</div>' +
+        (r.url
+          ? srcLine('<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.source || 'source') + ' &#8599;</a>' +
+              (r.readOn ? ' &middot; ' + asOf('read ' + esc(dateUK(r.readOn))) : ''))
+          : '<div style="margin-top:5px;font-size:11.5px;color:' + DIM + ';">No source link held for this entry &mdash; treat it as a prompt to check, not as a corroborated fact.</div>') +
+        '</div>';
+    }).join('');
+    if (unsourced) {
+      body += gap(unsourced === rows.length
+        ? 'None of these entries carries a source link, so treat them as prompts to check rather than as corroborated facts.'
+        : unsourced + ' of these ' + rows.length + ' entries carry no source link and are shown on a dashed edge.');
+    }
+    return sec(TITLE, body);
   }
 
   /* ---------------------------------------------------------------------
@@ -2320,6 +2365,7 @@
       info += '<div style="font-size:13px;color:#37485a;line-height:1.6;margin:10px 0 0;"><b style="color:' + INK + ';">How they sell' + (sub.voice.angle ? ' — ' + esc(sub.voice.angle) : '') + '.</b> ' + esc(sub.voice.line || '') + '</div>';
     }
     h += sec('Company information', info || gap('Nothing curated for this company yet beyond the panels below.'));
+    h += panelBackground(sub);
     h += panelLeadership(sub);
     h += panelCompanyFacts(sub, ctx);
     h += ownershipBlock(sub);
