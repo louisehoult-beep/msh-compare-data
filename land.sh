@@ -79,7 +79,7 @@ CHECK_ARGS=()
 for a in "${ALLOW[@]:-}"; do
   [ -n "$a" ] && CHECK_ARGS+=(--allow "$a")
 done
-python3 scripts/check_no_loss.py "${CHECK_ARGS[@]:-}" || {
+python3 scripts/check_no_loss.py "${CHECK_ARGS[@]+"${CHECK_ARGS[@]}"}" || {
   echo "REFUSING: a staged data file loses records against origin/main." >&2
   echo "Diff by record, not by line. A file that quietly lost entries is not a" >&2
   echo "conflict to git, and a plain rebase would publish the loss." >&2
