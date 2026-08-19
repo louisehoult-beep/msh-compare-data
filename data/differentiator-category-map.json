@@ -16,13 +16,16 @@
    "tube": "Collection tubes & systems",
    "set": "Winged / safety collection sets",
    "adapt": "Adaptors & tube holders",
-   "lance": "Lancets & capillary"
+   "lance": "Lancets & capillary",
+   "id": "Patient identification wristbands"
   },
   "cardiology": {
    "defib": "Defibrillation electrodes & pads",
    "ecg": "ECG electrodes",
    "gel": "Ultrasound gels",
-   "ctg": "Foetal / CTG"
+   "ctg": "Foetal / CTG",
+   "equip": "Diagnostic cardiology equipment (ECG/Holter recorders & data management)",
+   "capital": "Defibrillator / AED devices & accessories"
   },
   "skin-prep": {
    "prep": "Pre-operative skin prep",
@@ -42,7 +45,8 @@
    "anaes": "Anaesthesia machines",
    "vent": "Ventilators",
    "neo": "Neonatal",
-   "photo": "Phototherapy"
+   "photo": "Phototherapy",
+   "reg": "Regional anaesthesia & pain management kits"
   },
   "respiratory": {
    "o2": "Oxygen therapy",
@@ -117,30 +121,41 @@
    "picc": "PICC",
    "mid": "Midline",
    "sec": "Securement & dressings",
-   "vte": "VTE prevention / IPC devices"
+   "vte": "VTE prevention / IPC devices",
+   "cvc": "Central venous catheters",
+   "conn": "IV connectors, extensions & accessories"
   },
   "continence": {
    "ind": "Indwelling (Foley) catheters",
    "ic": "Intermittent catheters",
    "sh": "Sheaths",
    "dr": "Drainage bags & valves",
-   "pads": "Pads"
+   "pads": "Pads",
+   "bowel": "Bowel / transanal irrigation"
   },
   "imaging": {
    "ct": "CT scanners",
    "mobile": "Mobile & RT simulation",
-   "serv": "Service & managed equipment"
+   "serv": "Service & managed equipment",
+   "mri": "MRI scanners",
+   "mammo": "Mammography systems",
+   "xray": "Radiography / X-ray systems",
+   "angio": "Angiography / interventional imaging systems"
   },
   "ent": {
    "fibre": "Fibre optic endoscopes",
    "video": "Video endoscopes",
    "intub": "Intubating endoscopes",
-   "proc": "Processors & light sources"
+   "proc": "Processors & light sources",
+   "instr": "ENT surgical instruments & consumables",
+   "stoma": "Laryngectomy & tracheostomy stoma care"
   },
   "audiology": {
    "impl": "Implantable devices",
    "diag": "Diagnostic equipment",
-   "serv": "Services & support"
+   "serv": "Services & support",
+   "hear": "Hearing aids (worn — BTE/ITE/RIC/CIC/CROS)",
+   "acc": "Accessories & connectivity (streamers, remote mics, TV adapters)"
   },
   "dental": {
    "cons": "Dental consumables",
@@ -183,7 +198,8 @@
    "gen": "Generic medicines",
    "brand": "Branded & biosimilar",
    "iv": "IV fluids & aseptic",
-   "serv": "Pharmacy services & equipment"
+   "serv": "Pharmacy services & equipment",
+   "cold": "Cold-chain storage — medical fridges, freezers & vaccine carriers"
   },
   "handling": {
    "hoist": "Hoists and standing aids",
@@ -192,7 +208,8 @@
    "cushion": "Pressure-relieving cushions",
    "mattress": "Mattresses, overlays and positioning",
    "bed": "Beds, cots & profiling frames",
-   "scale": "Patient & bariatric weighing scales"
+   "scale": "Patient & bariatric weighing scales",
+   "furniture": "Examination couches, screens & clinical trolleys"
   },
   "ostomy": {
    "col": "Colostomy bags",
@@ -220,7 +237,8 @@
    "paed": "Paediatric / clubfoot",
    "upper": "Upper limb bracing and splints",
    "prosth": "Prosthetic components",
-   "brace": "Knee, calf & general limb supports"
+   "brace": "Knee, calf & general limb supports",
+   "spine": "Spinal, cervical & trunk orthoses"
   },
   "rehab": {
    "chair": "Wheelchairs and specialist seating",
@@ -228,12 +246,15 @@
    "stand": "Standing and transfer aids",
    "walk": "Walking aids",
    "therapy": "Therapy and exercise equipment",
-   "hygiene": "Personal hygiene"
+   "hygiene": "Personal hygiene",
+   "daily": "Daily living & occupational therapy aids",
+   "access": "Ramps & evacuation aids"
   },
   "oncology": {
    "abl": "Ablation — cryo, RF and pulsed field",
    "stent": "Stents and drainage",
-   "acc": "Procedure consumables"
+   "acc": "Procedure consumables",
+   "radio": "Radiotherapy capital equipment (linacs, gamma knife, brachytherapy afterloaders)"
   },
   "neonatal": {
    "equip": "Neonatal equipment and resuscitation",
@@ -255,10 +276,10 @@
  },
  "counts": {
   "pairs": 1825,
-  "mapped": 1199,
+  "mapped": 1399,
   "notTaxonomy": 42,
   "products": 14722,
-  "productsMapped": 8005
+  "productsMapped": 9154
  },
  "entries": [
   {
@@ -792,9 +813,11 @@
     "Permaramp Adjust Superwide High Rise – With Quickrails",
     "Permaramp Adjust Superwide High Rise"
    ],
-   "hub": null,
+   "hub": "rehab:access",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "access ramps and evacuation chair stands — new type rehab:access added 19/08/2026.",
+   "decidedIn": "Enable Access Ltd - New Vocab.json"
   },
   {
    "supplier": "Arjo",
@@ -839,9 +862,11 @@
     "Rectum",
     "2023 American College Of Veterinary Radiology Acvr Treatment Plan Study"
    ],
-   "hub": null,
+   "hub": "oncology:radio",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "linear-accelerator radiotherapy treatment planning items — new type oncology:radio (radiotherapy capital equipment) added 19/08/2026.",
+   "decidedIn": "Elekta - New Vocab.json"
   },
   {
    "supplier": "Hospital Direct",
@@ -1439,9 +1464,11 @@
     "Axxent Controller",
     "X Ray Source"
    ],
-   "hub": null,
+   "hub": "oncology:radio",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "brachytherapy afterloader/applicator system — oncology:radio.",
+   "decidedIn": "Elekta - New Vocab.json"
   },
   {
    "supplier": "GBUK Group",
@@ -1558,9 +1585,11 @@
     "CMPVC DC Power Lead",
     "CMPVC AC Power Lead"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "medical/laboratory refrigeration, freezer or vaccine-carrier product (or its accessories) — new type pharma:cold added 19/08/2026.",
+   "decidedIn": "Coolmed - New Vocab.json"
   },
   {
    "supplier": "Steris",
@@ -1626,9 +1655,11 @@
     "Shuttleworth Medium Stainless Steel Dressing Trolley – Removable Flat Shelves",
     "Shuttleworth X-Large Stainless Steel Dressing Trolley – Removable Edged-up Shelves"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolleys, examination tables/plinths, chairs/stools, cabinets, stands or screens — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Medi-Plinth Equipment - New Vocab.json"
   },
   {
    "supplier": "Iansyst Ltd",
@@ -1819,9 +1850,11 @@
     "FAST15 ultra-slim 15mm adult hospital wristband",
     "FAST15-LCB low-cost 15mm narrow adult hospital wristband"
    ],
-   "hub": null,
+   "hub": "bloodcoll:id",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "adult/paediatric hospital identification wristbands — new type bloodcoll:id added 19/08/2026 (patient ID is closest to the phlebotomy/admission workflow bloodcoll already covers).",
+   "decidedIn": "Brenmoor Ltd - New Vocab.json"
   },
   {
    "supplier": "Birmingham Optical Group",
@@ -1858,9 +1891,11 @@
     "Trauma Dr Plus Technology",
     "Trauma Dr Plus Workflow"
    ],
-   "hub": null,
+   "hub": "imaging:xray",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Trauma DR Plus general radiography system range — imaging:xray.",
+   "decidedIn": "Canon Medical Systems - New Vocab.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -1875,9 +1910,11 @@
     "Jar Key",
     "Plastic Multi Opener"
    ],
-   "hub": null,
+   "hub": "rehab:daily",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "jar openers, kettle tipper etc — kitchen daily-living aids, new type rehab:daily added 19/08/2026.",
+   "decidedIn": "Inspire Community Trust - New Vocab.json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -1907,9 +1944,11 @@
     "Vantage_Elan_15T_Cg_Headneck",
     "Vantage_Elan_15T_Cg_Spine"
    ],
-   "hub": null,
+   "hub": "imaging:mri",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Vantage Elan MRI scanner range — imaging:mri.",
+   "decidedIn": "Canon Medical Systems - New Vocab.json"
   },
   {
    "supplier": "Canon Medical Systems",
@@ -1980,9 +2019,11 @@
     "Shuttleworth Hinged Writing Board Trolley",
     "Shuttleworth Cylinder Holder"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolleys, examination tables/plinths, chairs/stools, cabinets, stands or screens — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Medi-Plinth Equipment - New Vocab.json"
   },
   {
    "supplier": "Birmingham Optical Group",
@@ -2055,9 +2096,11 @@
     "C Arm Imaging Table",
     "Drop End Bariatric Couch"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolleys, examination tables/plinths, chairs/stools, cabinets, stands or screens — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Medi-Plinth Equipment - New Vocab.json"
   },
   {
    "supplier": "Vygon (UK)",
@@ -2532,9 +2575,11 @@
     "CMRTSG59 Glass Door RTS Cabinet 59L",
     "CMRTSS500 Solid Door RTS Cabinet 500L"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "medical/laboratory refrigeration, freezer or vaccine-carrier product (or its accessories) — new type pharma:cold added 19/08/2026.",
+   "decidedIn": "Coolmed - New Vocab.json"
   },
   {
    "supplier": "Laborie Medical Technologies UK Ltd",
@@ -2567,9 +2612,11 @@
     "Vadsite Stopcock",
     "Vadsite Bag Spike"
    ],
-   "hub": null,
+   "hub": "vascular:conn",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "needle-free connectors, vial adaptors, stopcocks — IV line accessories, new type vascular:conn added 19/08/2026.",
+   "decidedIn": "Vygon (UK) - New Vocab.json"
   },
   {
    "supplier": "Steris",
@@ -2616,9 +2663,11 @@
     "Foam Leg Raiser",
     "Portable Urinal Hanging Holder"
    ],
-   "hub": null,
+   "hub": "rehab:daily",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "leg pillow, reading pillow, leg raiser, urinal holder — positioning/daily-living aids, rehab:daily.",
+   "decidedIn": "Inspire Community Trust - New Vocab.json"
   },
   {
    "supplier": "Kimal PLC",
@@ -2901,9 +2950,11 @@
     "Neonatal Chair",
     "Breeze Elevate Patient Chair"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolleys, examination tables/plinths, chairs/stools, cabinets, stands or screens — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Medi-Plinth Equipment - New Vocab.json"
   },
   {
    "supplier": "Medi-Plinth Equipment",
@@ -2918,9 +2969,11 @@
     "Transportation Castors",
     "Tilting Patient Table"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolleys, examination tables/plinths, chairs/stools, cabinets, stands or screens — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Medi-Plinth Equipment - New Vocab.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -2985,9 +3038,11 @@
     "Forearm Platform/Trough Crutches",
     "S Drive Powerstroll"
    ],
-   "hub": null,
+   "hub": "rehab:walk",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "folding scooter, forearm crutches, powered walking aid — closest existing type is rehab:walk (Walking aids).",
+   "decidedIn": "Inspire Community Trust - New Vocab.json"
   },
   {
    "supplier": "Arjo",
@@ -3089,9 +3144,11 @@
     "SOL-M Blunt Fill Needle",
     "PVC Syringe Driver Extension Line"
    ],
-   "hub": null,
+   "hub": "vascular:conn",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "IV extension lines, plugs/stoppers/bungs, syringe-driver extension line — line accessories, vascular:conn.",
+   "decidedIn": "Vygon (UK) - New Vocab.json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -3200,9 +3257,11 @@
     "In The Ear",
     "More Powerful"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "worn BTE/ITE/RIC/CIC hearing aid models — new type audiology:hear added 19/08/2026 to cover worn hearing aids, distinct from implantable devices.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Hospital Services Limited",
@@ -3237,9 +3296,11 @@
     "Large Procedure Trolley",
     "Carebuddy Trolley"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -3344,9 +3405,11 @@
     "Alphenix Neuro Clinical Gallery",
     "Alphenix Neuro Clinical Gallery"
    ],
-   "hub": null,
+   "hub": "imaging:angio",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Alphenix angiography/interventional imaging systems — new type imaging:angio added 19/08/2026.",
+   "decidedIn": "Canon Medical Systems - New Vocab.json"
   },
   {
    "supplier": "ICU Medical (incl. Smiths Medical)",
@@ -3561,9 +3624,11 @@
     "Manila Single Waiting Room Chair",
     "Kentra Upholstered Single Waiting Room Chair"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolleys, examination tables/plinths, chairs/stools, cabinets, stands or screens — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Medi-Plinth Equipment - New Vocab.json"
   },
   {
    "supplier": "Ultimate Healthcare",
@@ -3799,9 +3864,11 @@
     "Tv Adapter 30",
     "Edumic"
    ],
-   "hub": null,
+   "hub": "audiology:acc",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Connectclip, Oticon Safeline, TV Adapter, Edumic — hearing-aid accessories/connectivity, new type audiology:acc.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -4028,9 +4095,11 @@
     "Desivalve",
     "Multistar Central Venous Catheter"
    ],
-   "hub": null,
+   "hub": "vascular:cvc",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Combcard, Multistar CVC, Desivalve — central venous catheters, new type vascular:cvc added 19/08/2026.",
+   "decidedIn": "Vygon (UK) - New Vocab.json"
   },
   {
    "supplier": "Steris",
@@ -4252,9 +4321,11 @@
     "Instillation",
     "Navina Balloon Catheter"
    ],
-   "hub": null,
+   "hub": "continence:bowel",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Navina Balloon Catheter — transanal/bowel irrigation, new type continence:bowel added 19/08/2026, distinct from existing urinary-only continence types.",
+   "decidedIn": "Wellspect - New Vocab.json"
   },
   {
    "supplier": "Talley",
@@ -4341,9 +4412,11 @@
     "Thudicum Speculum (Metal, No.5)",
     "Thudicum Speculum (Metal, No.4)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -4435,9 +4508,11 @@
     "TubaClean cleaning system",
     "VoiceInject vocal fold injection device"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "ear ventilation tube system, laryngeal injection device — ENT surgical instruments/implants, ent:instr.",
+   "decidedIn": "D.P. Medical Systems Limited - New Vocab.json"
   },
   {
    "supplier": "Lisclare",
@@ -4486,9 +4561,11 @@
     "Paediatric Multi-Purpose Clinic Chairs",
     "Multi-Purpose Clinic Chairs"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -4503,9 +4580,11 @@
     "Storage Shelf",
     "Push Handle"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -4520,9 +4599,11 @@
     "Paediatric Narrow Chart Trolley",
     "Height Adjustable Chart Trolley"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -4537,9 +4618,11 @@
     "Deluxe Comfort Grip Magnifier with 6 LED Lights",
     "LED Clip Light"
    ],
-   "hub": null,
+   "hub": "rehab:daily",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "duster kit, overbed table, magnifier, clip light — general daily-living aids, rehab:daily.",
+   "decidedIn": "Inspire Community Trust - New Vocab.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -4573,9 +4656,11 @@
     "Dressing Stick",
     "Sock Aid Slider"
    ],
-   "hub": null,
+   "hub": "rehab:daily",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "button hook, leg lifter, dressing stick, sock aid — dressing aids, rehab:daily.",
+   "decidedIn": "Inspire Community Trust - New Vocab.json"
   },
   {
    "supplier": "Ultimate Healthcare",
@@ -4730,9 +4815,11 @@
     "Exitmaster Retrofit Head Strap/Leg Strap",
     "Exitmaster Evacuation Information Sign"
    ],
-   "hub": null,
+   "hub": "rehab:access",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "evacuation chairs, transfer boards, retrofit straps — rehab:access.",
+   "decidedIn": "Enable Access Ltd - New Vocab.json"
   },
   {
    "supplier": "GE HealthCare",
@@ -4745,9 +4832,11 @@
     "SEER 12",
     "MAC 3"
    ],
-   "hub": null,
+   "hub": "cardiology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "MUSE NX, SEER Holter recorders, MAC ECG machines — new type cardiology:equip added 19/08/2026.",
+   "decidedIn": "GE HealthCare - New Vocab.json"
   },
   {
    "supplier": "ICU Medical (incl. Smiths Medical)",
@@ -4779,9 +4868,11 @@
     "Overnight Sleeper Chair",
     "Ergo Support Surgeons Stool"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -4942,9 +5033,11 @@
     "Optima Birthing Bed",
     "Neonatal & Maternity Crib"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolleys, examination tables/plinths, chairs/stools, cabinets, stands or screens — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Medi-Plinth Equipment - New Vocab.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -5078,9 +5171,11 @@
     "Gruber Specula (4mm, Metal)",
     "Gruber Specula (3mm, Metal)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -5095,9 +5190,11 @@
     "SpiroTect Baseplate (Clear & Strong, Oval)",
     "SpiroTect Baseplate (Sensitive, Round)"
    ],
-   "hub": null,
+   "hub": "ent:stoma",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "laryngectomy/tracheostomy stoma-care consumable (baseplate, HME filter, protector, cleaning accessory) — new type ent:stoma added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -5112,9 +5209,11 @@
     "Buchanan Lite Protector (Small, Beige)",
     "Buchanan Lite Protectors Small Blue"
    ],
-   "hub": null,
+   "hub": "ent:stoma",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "laryngectomy/tracheostomy stoma-care consumable (baseplate, HME filter, protector, cleaning accessory) — new type ent:stoma added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Intermedical (UK) Ltd",
@@ -5284,9 +5383,11 @@
     "Pull Out Drawer",
     "Wire Basket"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Direct Manufacturing",
@@ -5337,9 +5438,11 @@
     "Rollo Waiting Room Chair- Moulded Plastic Seat & Back",
     "Modular Medical Stools"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolleys, examination tables/plinths, chairs/stools, cabinets, stands or screens — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Medi-Plinth Equipment - New Vocab.json"
   },
   {
    "supplier": "Medi-Plinth Equipment",
@@ -5737,9 +5840,11 @@
     "-86°C Ultra Low Temperature 208L Freezer CMF86V208",
     "CMLFF260 Laboratory Combi Fridge Freezer"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "medical/laboratory refrigeration, freezer or vaccine-carrier product (or its accessories) — new type pharma:cold added 19/08/2026.",
+   "decidedIn": "Coolmed - New Vocab.json"
   },
   {
    "supplier": "GE HealthCare",
@@ -5769,9 +5874,11 @@
     "SIGNA Lift",
     "SIGNA Victor"
    ],
-   "hub": null,
+   "hub": "imaging:mri",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "SIGNA Champion/Evo/Lift/Victor MRI scanners — new type imaging:mri added 19/08/2026.",
+   "decidedIn": "GE HealthCare - New Vocab.json"
   },
   {
    "supplier": "Lisclare",
@@ -5950,9 +6057,11 @@
     "4 Door Storage Locker",
     "3 Door Storage Locker"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -5967,9 +6076,11 @@
     "Narrow Paediatric Resuscitation Trolley",
     "LX Paediatric Resuscitation Trolley"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -6288,9 +6399,11 @@
     "Suction Controller Tip (18G, Pink)",
     "Suction Controller Tip (16G, White)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Intermedical (UK) Ltd",
@@ -6593,9 +6706,11 @@
     "Staff Room Under Counter Larder – CMST100",
     "Staff Room Under Counter Fridge Freezer – CMST125"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "medical/laboratory refrigeration, freezer or vaccine-carrier product (or its accessories) — new type pharma:cold added 19/08/2026.",
+   "decidedIn": "Coolmed - New Vocab.json"
   },
   {
    "supplier": "Coolmed",
@@ -6610,9 +6725,11 @@
     "Glass Door Small Refrigerator CMG59",
     "Solid Door Small Refrigerator CMS59"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "medical/laboratory refrigeration, freezer or vaccine-carrier product (or its accessories) — new type pharma:cold added 19/08/2026.",
+   "decidedIn": "Coolmed - New Vocab.json"
   },
   {
    "supplier": "Biocomposites Ltd",
@@ -6929,9 +7046,11 @@
     "Versa Hd",
     "Leksell Gamma Knife Lightning"
    ],
-   "hub": null,
+   "hub": "oncology:radio",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Gamma Knife / Versa HD linac — oncology:radio.",
+   "decidedIn": "Elekta - New Vocab.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -7226,9 +7345,11 @@
     "Slotted Tongue Plate (3.5″)",
     "Slotted Tongue Plate (3.0″)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -7243,9 +7364,11 @@
     "Phoniq Digiclose Comfort HME Filter beige",
     "Phoniq Digiclose Active HME Filter clear"
    ],
-   "hub": null,
+   "hub": "ent:stoma",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "laryngectomy/tracheostomy stoma-care consumable (baseplate, HME filter, protector, cleaning accessory) — new type ent:stoma added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Medstrom",
@@ -7492,9 +7615,11 @@
     "Permaramp Quickrails No-Tool Kit",
     "Permaramp Entry Flap Accessory"
    ],
-   "hub": null,
+   "hub": "rehab:access",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Permaramp ramp system and accessories — rehab:access.",
+   "decidedIn": "Enable Access Ltd - New Vocab.json"
   },
   {
    "supplier": "DDC Dolphin Limited",
@@ -7556,9 +7681,11 @@
     "Rapido cannula bend",
     "Rapido handpiece"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "ENT surgical laser and cannulae/handpiece — ent:instr.",
+   "decidedIn": "D.P. Medical Systems Limited - New Vocab.json"
   },
   {
    "supplier": "GE HealthCare",
@@ -7571,9 +7698,11 @@
     "Pristina Duo",
     "Pristina Serena"
    ],
-   "hub": null,
+   "hub": "imaging:mammo",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Pristina Bright/Dueta/Duo/Serena mammography systems — new type imaging:mammo.",
+   "decidedIn": "GE HealthCare - New Vocab.json"
   },
   {
    "supplier": "Lisclare",
@@ -7677,9 +7806,11 @@
     "Three Section Couches",
     "Bariatric Couches"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -7694,9 +7825,11 @@
     "Sterile Storage Carts",
     "Surgical Steps"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -7711,9 +7844,11 @@
     "Stainless Steel Soiled Linen Trolley",
     "Ward Linen Trolley"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Direct Manufacturing",
@@ -7762,9 +7897,11 @@
     "Sandpiper Steve Men’s Extra-Wide Slipper with Classic Style",
     "LADIES BOOTIE – BETSY BLUE / BURGENDY"
    ],
-   "hub": null,
+   "hub": "rehab:daily",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "extra-wide adaptive slippers — daily-living footwear, rehab:daily.",
+   "decidedIn": "Inspire Community Trust - New Vocab.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -7798,9 +7935,11 @@
     "Wheelchair Mac with Sleeves",
     "Wheelchair Poncho"
    ],
-   "hub": null,
+   "hub": "rehab:daily",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "wheelchair cosy/mac/poncho — closest existing fit is daily-living accessories, rehab:daily.",
+   "decidedIn": "Inspire Community Trust - New Vocab.json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -7853,9 +7992,11 @@
     "Shuttleworth Ambulance Controlled Drug Cabinet Inner",
     "Shuttleworth Patient Drug Cabinets- Wall-Mountable, Secure Storage"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolleys, examination tables/plinths, chairs/stools, cabinets, stands or screens — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Medi-Plinth Equipment - New Vocab.json"
   },
   {
    "supplier": "OSKA Care",
@@ -8433,9 +8574,11 @@
     "Crocodile Forceps (7mm Jaw)",
     "Crocodile Forceps (3mm Jaw)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -8450,9 +8593,11 @@
     "Tumarkin Specula Size 2 (4mm, Polymer)",
     "Tumarkin Specula Size 1 (3mm, Polymer)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -8467,9 +8612,11 @@
     "Zoellner Suction Tube (30 Deg, No Control Hole)",
     "Zoellner Suction Tube (30 Deg, No Control Hole) Non-Sterile"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -8484,9 +8631,11 @@
     "Phoniq Secure Baseplate Round",
     "Phoniq Secure Baseplate Oval"
    ],
-   "hub": null,
+   "hub": "ent:stoma",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "laryngectomy/tracheostomy stoma-care consumable (baseplate, HME filter, protector, cleaning accessory) — new type ent:stoma added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Intermedical (UK) Ltd",
@@ -8759,9 +8908,11 @@
     "Rigid Spinal Orthosis",
     "Semi Rigid Spinal Brace"
    ],
-   "hub": null,
+   "hub": "orthotics:spine",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "elasticated/fabric/rigid/semi-rigid spinal supports — new type orthotics:spine added 19/08/2026.",
+   "decidedIn": "AM Healthcare Group - New Vocab.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -8966,9 +9117,11 @@
     "Solid Door Large Refrigerator CMS300",
     "Glass Door Large Refrigerator CMG300"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "medical/laboratory refrigeration, freezer or vaccine-carrier product (or its accessories) — new type pharma:cold added 19/08/2026.",
+   "decidedIn": "Coolmed - New Vocab.json"
   },
   {
    "supplier": "D.P. Medical Systems Limited",
@@ -9011,9 +9164,11 @@
     "ENT Sterile single-use instruments",
     "Digital otoscope"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "micro-suction units, otoscope, ENT sterile single-use instruments — ent:instr.",
+   "decidedIn": "D.P. Medical Systems Limited - New Vocab.json"
   },
   {
    "supplier": "Drive DeVilbiss Healthcare UK",
@@ -9141,9 +9296,11 @@
     "Definium XR",
     "Definium Pace"
    ],
-   "hub": null,
+   "hub": "imaging:xray",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Definium 656/Tempo/XR/Pace radiography systems — new type imaging:xray.",
+   "decidedIn": "GE HealthCare - New Vocab.json"
   },
   {
    "supplier": "GE HealthCare",
@@ -9265,9 +9422,11 @@
     "Radrex Benefits",
     "Radrex Technology"
    ],
-   "hub": null,
+   "hub": "imaging:xray",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Radrex X-ray system range — imaging:xray.",
+   "decidedIn": "Canon Medical Systems - New Vocab.json"
   },
   {
    "supplier": "Canon Medical Systems",
@@ -9313,9 +9472,11 @@
     "Stainless Steel Dressing / Instrument Trolleys",
     "Instrument Trolley with Drawers"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Direct Manufacturing",
@@ -9366,9 +9527,11 @@
     "Lightweight Suitcase Ramp – 910 mm (3 ft)",
     "Lightweight Suitcase Ramp – 610 mm (2 ft)"
    ],
-   "hub": null,
+   "hub": "rehab:access",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "lightweight suitcase ramps — rehab:access.",
+   "decidedIn": "Inspire Community Trust - New Vocab.json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -10084,9 +10247,11 @@
     "Jobson Horne Probe (140mm, Metal)",
     "Jobson Horne Probe (polymer)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -10100,9 +10265,11 @@
     "Lacks Tongue Depressor (Adult, 22mm)",
     "Lacks Tongue Depressor (Child, 13mm)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -10116,9 +10283,11 @@
     "Stapes Hook (Angled)",
     "Stapes Hook (Curved)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -10132,9 +10301,11 @@
     "Shea Specula (5mm, Polymer)",
     "Shea Specula (4mm, Polymer)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -10148,9 +10319,11 @@
     "Long Suction Tube (3 X 350mm, 9FG)",
     "Long Suction Tube (3 X 250mm, 9FG)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -10164,9 +10337,11 @@
     "Frazier Suction Tube (2 X 100mm, 6FG)",
     "Frazier Suction Tube (3 x 140mm, 9FG)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Medstrom",
@@ -10561,9 +10736,11 @@
     "Solid Double Door Large Refrigerator CMS500",
     "Laboratory Fridge Solid Door CMLFR145"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "medical/laboratory refrigeration, freezer or vaccine-carrier product (or its accessories) — new type pharma:cold added 19/08/2026.",
+   "decidedIn": "Coolmed - New Vocab.json"
   },
   {
    "supplier": "Birmingham Optical Group",
@@ -10845,9 +11022,11 @@
     "Gynaecology couches (Promotal)",
     "General examination furniture (Medifa)"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "ENT treatment units/chairs, gynaecology couches, general examination furniture — new type handling:furniture.",
+   "decidedIn": "D.P. Medical Systems Limited - New Vocab.json"
   },
   {
    "supplier": "Labcold",
@@ -10963,9 +11142,11 @@
     "Interventional Neurology",
     "Interventional Radiology Oncology"
    ],
-   "hub": null,
+   "hub": "imaging:angio",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Alphenix interventional neurology/radiology-oncology angiography systems — imaging:angio.",
+   "decidedIn": "Canon Medical Systems - New Vocab.json"
   },
   {
    "supplier": "Canon Medical Systems",
@@ -11006,9 +11187,11 @@
     "Burgess Emergency Stretcher Trolley",
     "Heavy Duty Medical Device Stand"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -11021,9 +11204,11 @@
     "Sterile Supplies Trolleys – Stainless Steel",
     "Sterile Supplies Trolleys – Aluminium"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -11036,9 +11221,11 @@
     "Overchair Table",
     "Bedside Cabinets"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -11051,9 +11238,11 @@
     "LX Difficult Airway Trolley",
     "Narrow Difficult Airway Trolley"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -11066,9 +11255,11 @@
     "Privacy Screens – Solid",
     "Privacy Screens – Vinyl"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Direct Manufacturing",
@@ -11113,9 +11304,11 @@
     "Canterbury Darkwood Multi Table",
     "Economy Over Bed Table"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "multi table, over-bed table — clinical/domestic furniture, handling:furniture.",
+   "decidedIn": "Inspire Community Trust - New Vocab.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -11162,9 +11355,11 @@
     "Blue Badge Protector",
     "Blue Badge Holders"
    ],
-   "hub": null,
+   "hub": "rehab:daily",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Blue Badge protectors/holders — daily-living accessory, rehab:daily.",
+   "decidedIn": "Inspire Community Trust - New Vocab.json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -11394,9 +11589,11 @@
     "Leksell Vantage Stereotactic System",
     "Trust Vantage"
    ],
-   "hub": null,
+   "hub": "oncology:radio",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Leksell stereotactic frame system used with Elekta radiotherapy/radiosurgery equipment — oncology:radio.",
+   "decidedIn": "Elekta - New Vocab.json"
   },
   {
    "supplier": "Sysmex UK",
@@ -12091,9 +12288,11 @@
     "Davis Boyle Mouth Gag (Adult)",
     "Davis Boyle Mouth Gag (Child)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -12106,9 +12305,11 @@
     "Biopsy Forceps (3mm x 2mm Cup Jaw, 85mm)",
     "Biopsy Forceps (2mm x 1mm Cup Jaw, 85mm)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -12121,9 +12322,11 @@
     "St Barts Metal Wax hook Sterile",
     "St Barts Wax Hook (polymer)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -12136,9 +12339,11 @@
     "Spirotect Protector Navy Large",
     "Spirotect Protector Navy Small"
    ],
-   "hub": null,
+   "hub": "ent:stoma",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "laryngectomy/tracheostomy stoma-care consumable (baseplate, HME filter, protector, cleaning accessory) — new type ent:stoma added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -12151,9 +12356,11 @@
     "Spirotect Baseplate Adhesive Remover Wipes",
     "Spirotect Baseplate Barrier Wipes"
    ],
-   "hub": null,
+   "hub": "ent:stoma",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "laryngectomy/tracheostomy stoma-care consumable (baseplate, HME filter, protector, cleaning accessory) — new type ent:stoma added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -12166,9 +12373,11 @@
     "Heine Specula (4mm, Polymer)",
     "Heine Specula (2.5mmm, Polymer)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -12181,9 +12390,11 @@
     "Welch-Allyn Specula (4.25mm, Polymer)",
     "Welch-Allyn Specula (2.75mm, Polymer)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -12196,9 +12407,11 @@
     "Zoellner Fine End (18 SWG) (P20-200)",
     "Zoellner Fine End (18 SWG) Non-Sterile (N20-200)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -12211,9 +12424,11 @@
     "Laryngofoam Filter Beige Large",
     "Laryngofoam Filter Beige Small"
    ],
-   "hub": null,
+   "hub": "ent:stoma",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "laryngectomy/tracheostomy stoma-care consumable (baseplate, HME filter, protector, cleaning accessory) — new type ent:stoma added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -12226,9 +12441,11 @@
     "Buchanan L Trach Protector Small",
     "Buchanan L Trach Protector Large"
    ],
-   "hub": null,
+   "hub": "ent:stoma",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "laryngectomy/tracheostomy stoma-care consumable (baseplate, HME filter, protector, cleaning accessory) — new type ent:stoma added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -12444,9 +12661,11 @@
     "Soft Cervical Collar",
     "Rigid Cervical Collar"
    ],
-   "hub": null,
+   "hub": "orthotics:spine",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "soft/rigid cervical collars — orthotics:spine.",
+   "decidedIn": "AM Healthcare Group - New Vocab.json"
   },
   {
    "supplier": "AM Healthcare Group",
@@ -12675,9 +12894,11 @@
     "INFAFAST 20mm clasp-fastening infant hospital wristband",
     "INFAFAST-LCB low-cost 20mm clasp-fastening infant hospital wristband"
    ],
-   "hub": null,
+   "hub": "bloodcoll:id",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "infant hospital identification wristbands, clasp-fastening variants — bloodcoll:id.",
+   "decidedIn": "Brenmoor Ltd - New Vocab.json"
   },
   {
    "supplier": "Birmingham Optical Group",
@@ -12919,9 +13140,11 @@
    "examples": [
     "Ultimax I Advanced Applications"
    ],
-   "hub": null,
+   "hub": "imaging:xray",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Ultimax i fluoroscopy/radiography system — imaging:xray.",
+   "decidedIn": "Canon Medical Systems - New Vocab.json"
   },
   {
    "supplier": "Canon Medical Systems",
@@ -13975,9 +14198,11 @@
    "examples": [
     "Semiautomatic Defibrillator Value Package Including Lockable Cabinet"
    ],
-   "hub": null,
+   "hub": "cardiology:capital",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "AED/defibrillator unit, spare battery or demo card — capital equipment newly added as cardiology:capital 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -13987,9 +14212,11 @@
    "examples": [
     "Fullyautomatic Defibrillator Package Including Wall Bracket"
    ],
-   "hub": null,
+   "hub": "cardiology:capital",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "AED/defibrillator unit, spare battery or demo card — capital equipment newly added as cardiology:capital 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -14735,9 +14962,11 @@
    "examples": [
     "Smarty Saver Semiautomatic Defibrillator"
    ],
-   "hub": null,
+   "hub": "cardiology:capital",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "AED/defibrillator unit, spare battery or demo card — capital equipment newly added as cardiology:capital 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -17433,9 +17662,11 @@
    "examples": [
     "Lifeline High Capacity Seven Year Battery"
    ],
-   "hub": null,
+   "hub": "cardiology:capital",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "AED/defibrillator unit, spare battery or demo card — capital equipment newly added as cardiology:capital 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -17501,9 +17732,11 @@
    "examples": [
     "Lifeline Standard Five Year Battery"
    ],
-   "hub": null,
+   "hub": "cardiology:capital",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "AED/defibrillator unit, spare battery or demo card — capital equipment newly added as cardiology:capital 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21647,9 +21880,11 @@
    "examples": [
     "Smarty Saver Cd"
    ],
-   "hub": null,
+   "hub": "cardiology:capital",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "AED/defibrillator unit, spare battery or demo card — capital equipment newly added as cardiology:capital 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21875,9 +22110,11 @@
    "examples": [
     "Sidhil Howarth White Trolley 1"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21887,9 +22124,11 @@
    "examples": [
     "Sidhil Howarth White Trolley 4"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21899,9 +22138,11 @@
    "examples": [
     "Sidhil Howarth Wide Deep Tray"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21911,9 +22152,11 @@
    "examples": [
     "Changing Trolley Including Nylon Bag"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21923,9 +22166,11 @@
    "examples": [
     "Sidhil Howarth Overbed Table Easi Riser With Standard Base"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21935,9 +22180,11 @@
    "examples": [
     "Sidhil Howarth Easi Riser Overbed Table Tiliting Top With Wheelchair Base"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22459,9 +22706,11 @@
    "examples": [
     "Sidhil Doherty Winchester Fixed Height Couch"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22499,9 +22748,11 @@
    "examples": [
     "Three Section Plinth"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22511,9 +22762,11 @@
    "examples": [
     "White Screen Frame Including Four Green Curtains"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22523,9 +22776,11 @@
    "examples": [
     "White Screen Frame Including Four White Curtains"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22535,9 +22790,11 @@
    "examples": [
     "White Screen Frame Including Four White Panels"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22547,9 +22804,11 @@
    "examples": [
     "White Screen Frame Including Four Grey Panels"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22559,9 +22818,11 @@
    "examples": [
     "Screen Frame With Wheels"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22571,9 +22832,11 @@
    "examples": [
     "Green Plastic Screen Curtains"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22583,9 +22846,11 @@
    "examples": [
     "White Plastic Screen Curtains"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22595,9 +22860,11 @@
    "examples": [
     "White Screen Panels"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -23015,9 +23282,11 @@
    "examples": [
     "Treatment Couch Including Couch Roll Holder"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -23027,9 +23296,11 @@
    "examples": [
     "Couch Step"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -23039,9 +23310,11 @@
    "examples": [
     "Stainless Steel Medical Screens Including Removable Curtains Each"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -23413,9 +23686,11 @@
    "examples": [
     "Lifeline View Demo Card"
    ],
-   "hub": null,
+   "hub": "cardiology:capital",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "AED/defibrillator unit, spare battery or demo card — capital equipment newly added as cardiology:capital 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -23965,9 +24240,11 @@
    "examples": [
     "Black Portable Couch"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examination couch, screen, trolley or overbed table — clinical furniture newly added as handling:furniture 19/08/2026.",
+   "decidedIn": "Crest Medical Ltd - New Vocab.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24917,9 +25194,11 @@
    "examples": [
     "ABS Top Bedside Cabinet"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -24945,9 +25224,11 @@
    "examples": [
     "Spirit Tech Chair"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -24959,9 +25240,11 @@
    "examples": [
     "Sepsis Trolley"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Agile Medical",
@@ -24973,9 +25256,11 @@
    "examples": [
     "Infection Control Trolley"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolley, chair, stand, cabinet or screen; homogeneous within this division — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Agile Medical - New Vocab.json"
   },
   {
    "supplier": "Direct Manufacturing",
@@ -25061,9 +25346,11 @@
    "examples": [
     "AstroLite Scooter"
    ],
-   "hub": null,
+   "hub": "rehab:walk",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "AstroLite Scooter — same family as the Mobility division, rehab:walk.",
+   "decidedIn": "Inspire Community Trust - New Vocab.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -25075,9 +25362,11 @@
    "examples": [
     "Chelsfield Height Adjustable Chair"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "height-adjustable chair — furniture, handling:furniture.",
+   "decidedIn": "Inspire Community Trust - New Vocab.json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -25169,9 +25458,11 @@
    "examples": [
     "C Arm Imaging Table, Mark 2"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolleys, examination tables/plinths, chairs/stools, cabinets, stands or screens — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Medi-Plinth Equipment - New Vocab.json"
   },
   {
    "supplier": "Medi-Plinth Equipment",
@@ -25183,9 +25474,11 @@
    "examples": [
     "Shuttleworth Drip Stands – Flat Packable"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolleys, examination tables/plinths, chairs/stools, cabinets, stands or screens — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Medi-Plinth Equipment - New Vocab.json"
   },
   {
    "supplier": "Medi-Plinth Equipment",
@@ -25213,9 +25506,11 @@
    "examples": [
     "Shuttleworth Ward Screens"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "clinical/ward furniture — trolleys, examination tables/plinths, chairs/stools, cabinets, stands or screens — new type handling:furniture added 19/08/2026.",
+   "decidedIn": "Medi-Plinth Equipment - New Vocab.json"
   },
   {
    "supplier": "Renray Healthcare",
@@ -25467,9 +25762,11 @@
    "examples": [
     "Oticon Opn Bte Plus Power"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25479,9 +25776,11 @@
    "examples": [
     "Oticon Opn S Minirite"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25491,9 +25790,11 @@
    "examples": [
     "Oticon Opn S Minirite R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25503,9 +25804,11 @@
    "examples": [
     "Oticon Opn S Bte Plus Power"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25515,9 +25818,11 @@
    "examples": [
     "Oticon Opn Play Minirite"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25527,9 +25832,11 @@
    "examples": [
     "Oticon Opn Play Minirite T"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25539,9 +25846,11 @@
    "examples": [
     "Oticon Opn Play Minirite R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25551,9 +25860,11 @@
    "examples": [
     "Oticon Opn Play Bte Plus Power"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25563,9 +25874,11 @@
    "examples": [
     "Oticon Xceed Bte Super Power"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25575,9 +25888,11 @@
    "examples": [
     "Oticon Xceed Bte Ultra Power"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25587,9 +25902,11 @@
    "examples": [
     "Oticon Xceed Play Bte Super Power"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25599,9 +25916,11 @@
    "examples": [
     "Oticon Xceed Play Bte Ultra Power"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25611,9 +25930,11 @@
    "examples": [
     "Oticon Opn Minirite"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25623,9 +25944,11 @@
    "examples": [
     "Oticon More8482 Minirite R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25635,9 +25958,11 @@
    "examples": [
     "Oticon More8482 Minirite T"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25647,9 +25972,11 @@
    "examples": [
     "Oticon Cros Px Minirite R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25659,9 +25986,11 @@
    "examples": [
     "Oticon More Minibte R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25671,9 +26000,11 @@
    "examples": [
     "Oticon More Minibte T"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25683,9 +26014,11 @@
    "examples": [
     "Oticon Zircon Minibte R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25695,9 +26028,11 @@
    "examples": [
     "Oticon Zircon Minibte T"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25707,9 +26042,11 @@
    "examples": [
     "Oticon Zircon Minirite T"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25719,9 +26056,11 @@
    "examples": [
     "Oticon Zircon Minirite R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25731,9 +26070,11 @@
    "examples": [
     "Oticon Play Px Minibte R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25743,9 +26084,11 @@
    "examples": [
     "Oticon Play Px Minibte T"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25755,9 +26098,11 @@
    "examples": [
     "Oticon Play Px Minirite T"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25767,9 +26112,11 @@
    "examples": [
     "Oticon Play Px Minirite R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25779,9 +26126,11 @@
    "examples": [
     "Oticon Cros Minirite T"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25791,9 +26140,11 @@
    "examples": [
     "Oticon Own Completely In The Canal Cic"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25803,9 +26154,11 @@
    "examples": [
     "Oticon Own Invisible In The Canal Iic"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25815,9 +26168,11 @@
    "examples": [
     "Oticon Own In The Canal Itc"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25827,9 +26182,11 @@
    "examples": [
     "Oticon Own In The Ear Half Shell Ite Hs"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25839,9 +26196,11 @@
    "examples": [
     "Oticon Own In The Ear Full Shell Ite Fs"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25851,9 +26210,11 @@
    "examples": [
     "Oticon Real Minirite T"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25863,9 +26224,11 @@
    "examples": [
     "Oticon Real Minibte R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25875,9 +26238,11 @@
    "examples": [
     "Oticon Real Minibte T"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25887,9 +26252,11 @@
    "examples": [
     "Oticon Real Minirite R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25899,9 +26266,11 @@
    "examples": [
     "Oticon Intent Minirite"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25911,9 +26280,11 @@
    "examples": [
     "Oticon Own Si Invisible In The Canal Iic"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25923,9 +26294,11 @@
    "examples": [
     "Oticon Own Si Completely In The Canal Cic"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25935,9 +26308,11 @@
    "examples": [
     "Oticon Zeal Nxtcic R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25947,9 +26322,11 @@
    "examples": [
     "Oticon Intent Minibte R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25959,9 +26336,11 @@
    "examples": [
     "Oticon Play Si Minirite"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -25971,9 +26350,11 @@
    "examples": [
     "Oticon Play Si Minibte R"
    ],
-   "hub": null,
+   "hub": "audiology:hear",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "individual Oticon hearing-aid model (per-model division), same as the Hearing Aids bucket — audiology:hear.",
+   "decidedIn": "Oticon - New Vocab.json"
   },
   {
    "supplier": "Oticon",
@@ -26495,9 +26876,11 @@
    "examples": [
     "Negus Pusher (200mm)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26509,9 +26892,11 @@
    "examples": [
     "Denis Browne Tonsil Forceps (200mm)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26537,9 +26922,11 @@
    "examples": [
     "Tilley Forceps (140mm)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26551,9 +26938,11 @@
    "examples": [
     "Formby Scoop & Hook (Metal)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26565,9 +26954,11 @@
    "examples": [
     "Cl-Ear Olive Oil Spray (10ml)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26579,9 +26970,11 @@
    "examples": [
     "DISP MICRO SCISSOR 5mm Jaw Sterile"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26593,9 +26986,11 @@
    "examples": [
     "Henckel forceps oval cup jaw (80mm)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26607,9 +27002,11 @@
    "examples": [
     "Rosen Hook"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26621,9 +27018,11 @@
    "examples": [
     "Magill Suction Tube (3 X 110mm, 9FG)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26635,9 +27034,11 @@
    "examples": [
     "Belucci Suction Tube (2 X 110mm, 6FG)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26663,9 +27064,11 @@
    "examples": [
     "Buchanan Showershield Waterproof Cover"
    ],
-   "hub": null,
+   "hub": "ent:stoma",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "laryngectomy/tracheostomy stoma-care consumable (baseplate, HME filter, protector, cleaning accessory) — new type ent:stoma added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26677,9 +27080,11 @@
    "examples": [
     "Pope Ear Wick Sponge"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26691,9 +27096,11 @@
    "examples": [
     "Suction Tubing (6mm X 3m)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26705,9 +27112,11 @@
    "examples": [
     "Voiceline Voice Prosthesis Cleaning Brush"
    ],
-   "hub": null,
+   "hub": "ent:stoma",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "laryngectomy/tracheostomy stoma-care consumable (baseplate, HME filter, protector, cleaning accessory) — new type ent:stoma added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -26719,9 +27128,11 @@
    "examples": [
     "LION Headlight V2 Plus"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "reusable/disposable ENT theatre instrument (specula, forceps, suction tube, hook, probe) — new type ent:instr added 19/08/2026.",
+   "decidedIn": "Sheffmed Limited - New Vocab.json"
   },
   {
    "supplier": "Intermedical (UK) Ltd",
@@ -27137,9 +27548,11 @@
    "examples": [
     "Portable Vaccine Carrier – CMPVC12"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "medical/laboratory refrigeration, freezer or vaccine-carrier product (or its accessories) — new type pharma:cold added 19/08/2026.",
+   "decidedIn": "Coolmed - New Vocab.json"
   },
   {
    "supplier": "Brenmoor Ltd",
@@ -27273,9 +27686,11 @@
    "examples": [
     "Tropocells PRP system"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Tropocells PRP system used in ENT procedures — ent:instr.",
+   "decidedIn": "D.P. Medical Systems Limited - New Vocab.json"
   },
   {
    "supplier": "D.P. Medical Systems Limited",
@@ -27285,9 +27700,11 @@
    "examples": [
     "APrevent VOIS vocal implant system"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "APrevent VOIS vocal fold implant system — ENT surgical implant, ent:instr.",
+   "decidedIn": "D.P. Medical Systems Limited - New Vocab.json"
   },
   {
    "supplier": "D.P. Medical Systems Limited",
@@ -27297,9 +27714,11 @@
    "examples": [
     "Trachealator airway dilation balloon"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Trachealator airway dilation balloon — ENT surgical device, ent:instr.",
+   "decidedIn": "D.P. Medical Systems Limited - New Vocab.json"
   },
   {
    "supplier": "D.P. Medical Systems Limited",
@@ -27321,9 +27740,11 @@
    "examples": [
     "Chitogel hydrogel"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "anti-adhesion hydrogel used in ENT/sinus surgery — ENT surgical consumable, ent:instr.",
+   "decidedIn": "D.P. Medical Systems Limited - New Vocab.json"
   },
   {
    "supplier": "D.P. Medical Systems Limited",
