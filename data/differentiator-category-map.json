@@ -280,10 +280,10 @@
  },
  "counts": {
   "pairs": 1825,
-  "mapped": 1429,
+  "mapped": 1548,
   "notTaxonomy": 42,
   "products": 14722,
-  "productsMapped": 9184
+  "productsMapped": 9804
  },
  "entries": [
   {
@@ -851,7 +851,6 @@
     "Clave Clinically Preferred Needlefree Iv Connector Technology",
     "Large Bore Extension Set"
    ],
-   "hub": null,
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
   },
@@ -1083,9 +1082,11 @@
     "Endotracheal Tubes",
     "Vide Chest Drains"
    ],
-   "hub": null,
+   "hub": "respiratory:resp",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "categories are Airway Management / Anaesthesia / Airways & Respiratory and the examples are intubation kit - Callisto+ laryngoscope sets, Sirus XL laryngoscope set with XLED handle, and Endotracheal Tubes - i.e. airway therapy devices and circuits, matching the precedent already set for ICU Medical's Airway Management division. (Vide Chest Drains is the one outlier example in a 60-product filing whose stated categories are all airway.)",
+   "decidedIn": "Timesco Healthcare Ltd - Phase D.json"
   },
   {
    "supplier": "Veni Vidi Medical Limited",
@@ -1212,9 +1213,11 @@
     "Height Adjustable Laptop Mount",
     "Cutan Foam Sanitiser Holder"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "every example is a fitting for a clinical trolley — POUDS wall bracket, Sharpsmart mounting bracket, height-adjustable laptop mount, Cutan foam sanitiser holder — i.e. clinical trolley/furniture components, consistent with this supplier's other trolley divisions already mapped to handling:furniture",
+   "decidedIn": "Agile Medical - Phase D.json"
   },
   {
    "supplier": "Convatec",
@@ -1572,9 +1575,11 @@
     "C18509 Hz Spec Sheet For Sales Meeting_Print Indd",
     "Dyna Form Air Pro Plus Alternating Cushion 3"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the row's own examples are the Static Air Hz product images plus 'C18509 Hz Spec Sheet' - Dyna Form is the mattress-replacement brand and Static Air Hz is a static-air mattress system; the stray 'Air Pro Plus Alternating Cushion 3' image is a crawler artefact, not the product of this URL segment",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Coolmed",
@@ -2244,9 +2249,11 @@
     "Coverslipping",
     "Coverglass"
    ],
-   "hub": null,
+   "hub": "pathology:histo",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "judged from the row's own examples rather than the division name: Microscope Slides, Coverglass, Coverslipping and Consumables are histology and cellular slide-preparation products, the same class as this supplier's Cytology division (Cytospin, Coverslipping, Coverglass) already mapped pathology:histo",
+   "decidedIn": "Epredia - Phase D.json"
   },
   {
    "supplier": "Epredia",
@@ -2633,9 +2640,11 @@
     "Trufreeze Spray Cryotherapy System",
     "Gastrointestinal Endoscopy"
    ],
-   "hub": null,
+   "hub": "gastro:energy",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the Gi2000 Electrosurgery Unit is a GI endoscopic energy generator and the Trufreeze Spray Cryotherapy System (with its Trufreeze Facility Finder) is a GI ablation platform, so the whole division is energy and ablation for gastrointestinal endoscopy, not endoscope capital or decontamination",
+   "decidedIn": "Steris - Phase D.json"
   },
   {
    "supplier": "Steris",
@@ -2867,9 +2876,11 @@
     "Airsense 11 Elite",
     "Airsense 11 CPAP"
    ],
-   "hub": null,
+   "hub": "respiratory:resp",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Healthcare professional' is a channel label, so judged on products: AirCurve 11 ST and ST-A (bilevel), Airsense 11 Elite and Airsense 11 CPAP are positive-airway-pressure therapy devices - respiratory therapy & circuits, consistent with every other ResMed PAP division already mapped. 'Home sleep testing solutions' is the single diagnostic outlier.",
+   "decidedIn": "ResMed - Phase D.json"
   },
   {
    "supplier": "Medstrom",
@@ -3167,9 +3178,11 @@
     "Polyester Cellular Falls Risk Lap Blanket",
     "Polyester Cellular Falls Risk Single Bed Blanket"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "every example is a falls-identification textile — Polyester Cellular Falls Risk Lap Blanket and Falls Risk Single Bed Blanket are hospital blankets, and the Fall Prevention Kit and Fall Prevention Slipper Socks are the sock/blanket textiles from the same range; homogeneous hospital linen",
+   "decidedIn": "Interweave Textiles - Phase D.json"
   },
   {
    "supplier": "Love Medical",
@@ -3246,9 +3259,11 @@
     "Dopplex® EZ8 XS High Sensitivity 8MHz Widebeam Probe",
     "Dopplex® VP10 XS High Sensitivity 10MHz Probe"
    ],
-   "hub": null,
+   "hub": "ultrasound:hand",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "14 of the 15 products are the Dopplex handheld doppler family - D900, SD2, DMX Digital and the Ability Automatic ABI system - plus their EZ8/VP4-VP10 XS probes, the ABI and ATP kits and the Vascular Reporter / DR4 record software that accompany them; handheld doppler devices are handheld ultrasound devices. The one outlier, LymphAssist Professional, is an IPC pump the supplier files elsewhere under Vascular Treatment (already mapped wound:comp)",
+   "decidedIn": "Huntleigh - Phase D.json"
   },
   {
    "supplier": "Oticon",
@@ -3319,9 +3334,11 @@
     "Double Procedure Trolley – Under Worktop",
     "Narrow Paediatric Trolley"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the product examples are trolleys, not theatre capital plant — Narrow Procedure Trolley Under Worktop, Double Procedure Trolley Under Worktop, Narrow Paediatric Trolley; theatres:capital covers tables, lights and OR integration, which none of these are",
+   "decidedIn": "Agile Medical - Phase D.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -3443,9 +3460,11 @@
     "Nrfit Trays",
     "Nrfit Packs"
    ],
-   "hub": null,
+   "hub": "anaesthesia:reg",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examples are Regional Anesthesia, Nrfit Trays and Nrfit Packs - NRFit is the ISO 80369-6 neuraxial connector standard, so these are regional anaesthesia / pain management procedure kits; Diagnostic Procedure Trays are the same tray format for neuraxial procedures.",
+   "decidedIn": "ICU Medical (incl. Smiths Medical) - Phase D.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -3477,9 +3496,11 @@
     "C5D76C88 C089 4C45 B1B1 389B7D909087",
     "Gentle Cath Air For Men"
    ],
-   "hub": null,
+   "hub": "continence:ic",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the only real product example is Gentle Cath Air For Men, a hydrophilic intermittent self-catheter (the other three examples are a nav label and two image UUIDs); ConvaTec's continence line is the GentleCath intermittent range, and the supplier's Gentlecath Products division is already mapped to continence:ic",
+   "decidedIn": "Convatec - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -3645,9 +3666,11 @@
     "Lifting Pole",
     "Grab Rails"
    ],
-   "hub": null,
+   "hub": "handling:bed",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own page sitemap lists all twelve products in this division: the Cura II, Cura II Supreme, Cura II Extra High, Cura Community and Soprano profiling beds, plus side rails, extending side rails, side rail bumpers, lifting pole, grab rails, mattress squab and crash mat - a profiling bed range with its bed-mounted accessories",
+   "decidedIn": "Ultimate Healthcare - Phase D.json"
   },
   {
    "supplier": "Kimal PLC",
@@ -4015,9 +4038,11 @@
     "NIDEK LEXCE Plus Patternless Edger",
     "NIDEK LED-1 Lens Edger Deodoriser"
    ],
-   "hub": null,
+   "hub": "ophthalmology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "all 11 products are NIDEK optical-lab machines - ICE-2 and ICE-1500 blockers, ME-1 / LEXCE Plus / SE-9090 edgers, LT-980 and LT-1200 tracers, LFU-220 filtration unit - i.e. capital equipment sold into ophthalmic/optical practices, matching 'Capital equipment & imaging'; homogeneous, no consumable or lens product in the row",
+   "decidedIn": "Birmingham Optical Group - Phase D.json"
   },
   {
    "supplier": "GE HealthCare",
@@ -4203,9 +4228,11 @@
     "Controlled Drug Cabinets",
     "Self Administration Cabinets"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examples are ward furniture items — Carebuddy Companion Bed, HYGI Portable Washbasin, Controlled Drug Cabinets, Self Administration Cabinets — cabinets, washbasin and a companion bed, all fixed/mobile clinical furniture",
+   "decidedIn": "Agile Medical - Phase D.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -4946,9 +4973,11 @@
     "Children’s Hospital Operation Gown",
     "Printed Baby Hospital Gown"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Coloured Cellular Polyester Baby Blanket, Flannelette Baby Wrap, Children's Hospital Operation Gown and Printed Baby Hospital Gown are all hospital blankets, wraps and patient gowns, which is exactly 'Bedding, gowns & hospital linen'",
+   "decidedIn": "Interweave Textiles - Phase D.json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -4963,9 +4992,11 @@
     "Seclusion Trousers",
     "Seclusion Gown"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Seclusion Shorts, Tunic, Trousers and Gown are anti-ligature patient garments issued by the ward, not staff clinical workwear, so they sit with hospital gowns and linen rather than with scrubs",
+   "decidedIn": "Interweave Textiles - Phase D.json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -5071,9 +5102,11 @@
     "G2 Web_900Px_900Px_03",
     "G2 Web_900Px_900Px_04"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the eight 'products' are image files for one product; DHG's product page for this URL is 'G-2 Tilt-in-Space Specialist Seat', a dynamic tilt-in-space chair, matching wheelchairs and specialist seating",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "CliniMed",
@@ -5139,9 +5172,11 @@
     "G2 Web_900Px_900Px_03",
     "G2 Web_900Px_900Px_04"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the eight 'products' are image files of one product; this URL segment is the G-2 Tilt-in-Space Specialist Seat, a dynamic tilt-in-space chair, matching wheelchairs and specialist seating",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "ResMed",
@@ -5406,9 +5441,11 @@
     "Anti Vandal Foam Crumb Pillow",
     "Anti Vandal Memory Foam Pillow"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "all seven examples are pillows (Anti Vandal Super Soft, Secure Super Soft, Anti Vandal Foam Crumb, Anti Vandal Memory Foam, plus the waterproof and secure memory foam pillows on the supplier's own product sitemap) - bedding, matching the Interweave pillows and pillowcases already mapped workwear:linen",
+   "decidedIn": "Direct Manufacturing - Phase D.json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -5629,9 +5666,11 @@
     "Proaxis50_35Rl_1 Jpg",
     "Proaxis50_35Rl_2 Jpeg"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division IS the product (this supplier's rows are sitemap URL segments and the listed 'products' are only its image files); DHG's own product pages title the whole Pro Axis range 'Pro Axis Bariatric Riser Recliner' at the same seat widths and safe working loads, so this is specialist seating, consistent with the Wendover/Chatsworth riser recliners already mapped rehab:chair",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "CliniMed",
@@ -5663,9 +5702,11 @@
     "Dyna Form Jupiter4",
     "Dyna Form Jupiter3"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the four 'products' are image files of one product; Jupiter is a Dyna Form mattress-replacement model, sitting with Mercury, Saturn and Maximus in the same planet-named mattress family",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -5695,9 +5736,11 @@
     "Dyna Tek Superior 2",
     "Dyna Tek Superior 3"
    ],
-   "hub": null,
+   "hub": "handling:cushion",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the seven 'products' are image files of one product; Dyna Tek is the pressure-cushion brand (Dyna Tek Pad Cushion, Gel Cushion and Intelligent Air Cushion are all mapped handling:cushion) and Superior is a cushion model in it",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -5761,9 +5804,11 @@
     "Proaxis50_35Rl_1 Jpg",
     "Proaxis50_35Rl_2 Jpeg"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the 'Proaxis50_35Rl' images are of one product; the Pro Axis range is a bariatric riser recliner sold at these seat widths and safe working loads, so specialist seating, consistent with the Wendover/Chatsworth riser recliners already mapped rehab:chair",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "It’s Interventional Limited",
@@ -6136,9 +6181,11 @@
     "Mirage Bath Sheet",
     "Mirage Face Cloth"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Single Bed Quilted Fitted Waterproof Mattress Protector, Mirage Bath Sheet and Mirage Face Cloth are hospital bedding and towels, and the Fully Soluble Laundry Bag is the linen-handling consumable sold with them; consistent with the Phase C decision that put Interweave's Mirage towel range in workwear:linen",
+   "decidedIn": "Interweave Textiles - Phase D.json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -6155,9 +6202,11 @@
     "White Bath Mat",
     "White Bath Sheet"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "categories are Kitchen Linen, Contract White Towels and Hospital Towels and every example (Oven Cloth, Premium Kitchen Towel, White Bath Mat, White Bath Sheet) is a woven towel or cloth — homogeneous linen",
+   "decidedIn": "Interweave Textiles - Phase D.json"
   },
   {
    "supplier": "HoverTech International",
@@ -6461,9 +6510,11 @@
     "Neon3_Folder_Dt_Engl_R1 Ansicht1",
     "Neon3_Brochure"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page titles Neon3 a 'Superior Spine System' - a posterior spinal fixation implant system",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "It’s Interventional Limited",
@@ -7067,9 +7118,11 @@
     "Dynaform Mercury Fire Evac E1357237602987",
     "Untitled 1"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the images are of the Dyna-Form Mercury Fire Evac, a foam pressure-care hospital bed mattress with evacuation straps built into the mattress; it is a mattress first, so it sits with mattresses/overlays alongside the rest of the Dyna Form Mercury range rather than with evacuation aids",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -7116,9 +7169,11 @@
     "Proaxis35Rm_2 Jpg",
     "Proaxis35Rm_3 Jpg"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division IS the product (this supplier's rows are sitemap URL segments and the listed 'products' are only its image files); DHG's own product pages title the whole Pro Axis range 'Pro Axis Bariatric Riser Recliner' at the same seat widths and safe working loads, so this is specialist seating, consistent with the Wendover/Chatsworth riser recliners already mapped rehab:chair",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -7131,9 +7186,11 @@
     "Proaxis50_35Rs_2 Jpg",
     "Proaxis50_35Rs_3 Jpg"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division IS the product (this supplier's rows are sitemap URL segments and the listed 'products' are only its image files); DHG's own product pages title the whole Pro Axis range 'Pro Axis Bariatric Riser Recliner' at the same seat widths and safe working loads, so this is specialist seating, consistent with the Wendover/Chatsworth riser recliners already mapped rehab:chair",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -7146,9 +7203,11 @@
     "Proaxis22_19R_2 Jpg",
     "Proaxis22_19R_3 Jpg"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division IS the product (this supplier's rows are sitemap URL segments and the listed 'products' are only its image files); DHG's own product pages title the whole Pro Axis range 'Pro Axis Bariatric Riser Recliner' at the same seat widths and safe working loads, so this is specialist seating, consistent with the Wendover/Chatsworth riser recliners already mapped rehab:chair",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -7161,9 +7220,11 @@
     "Proaxis22_19R_2 1 Jpg",
     "Proaxis22_19R_3 1 Jpg"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division IS the product (this supplier's rows are sitemap URL segments and the listed 'products' are only its image files); DHG's own product pages title the whole Pro Axis range 'Pro Axis Bariatric Riser Recliner' at the same seat widths and safe working loads, so this is specialist seating, consistent with the Wendover/Chatsworth riser recliners already mapped rehab:chair",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -7193,9 +7254,11 @@
     "Encora 02",
     "Encora 03"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the five 'products' are image files for one product; DHG's product page is 'Encora Tilt-in-Space Specialist Seating' - a tilt-in-space, back-recline specialist chair (Kirton Encora user manual), matching specialist seating",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -7208,9 +7271,11 @@
     "Dynaform Mercury Fire Evac E1357237602987",
     "Untitled 1"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the images are of the Dyna Form Mercury Fire Evac, a foam pressure-care bed mattress with evacuation straps built into it; it is a mattress first, so it sits with the rest of the Dyna Form Mercury mattress range rather than with evacuation aids",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -7223,9 +7288,11 @@
     "Dynaform Maximus1",
     "Dynaform Maximus"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the five 'products' are image files of one product; Maximus is a Dyna Form mattress-replacement model",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -7255,9 +7322,11 @@
     "Proaxis35Rm_2 Jpg",
     "Proaxis35Rm_3 Jpg"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the 'Proaxis35Rm' images are of one product in the Pro Axis bariatric riser recliner range - specialist seating",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -7270,9 +7339,11 @@
     "Proaxis50_35Rs_2 Jpg",
     "Proaxis50_35Rs_3 Jpg"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the 'Proaxis50_35Rs' images are of one product in the Pro Axis bariatric riser recliner range - specialist seating",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -7285,9 +7356,11 @@
     "Proaxis22_19R_2 Jpg",
     "Proaxis22_19R_3 Jpg"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the 'Proaxis22_19R' images are of one product in the Pro Axis riser recliner range at 120-140kg user weight - specialist seating",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -7300,9 +7373,11 @@
     "Proaxis22_19R_2 1 Jpg",
     "Proaxis22_19R_3 1 Jpg"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the 'Proaxis22_19R' images are of one product in the Pro Axis riser recliner range at 120-140kg user weight - specialist seating",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -7332,9 +7407,11 @@
     "Encora 02",
     "Encora 03"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the five 'Encora' images are of one product, the Encora tilt-in-space specialist seating chair (back recline, tilt-in-space), matching specialist seating",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -7404,9 +7481,11 @@
     "Intraspine2",
     "Eit_Sliderimage"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page describes IntraSPINE as a soft dynamic interlaminar distraction device with 'more anterior implant positioning' - a spinal implant",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -7867,9 +7946,11 @@
     "Care Direct High Density Fall Mat",
     "Secure Mattress – Castellated Modular Cut"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "three of the four examples are mattresses - the Waterproof Memory Foam Coolmax Mattress, the Secure Mattress Castellated Modular Cut, and DMC01A, whose product page states 'Firmness: Memory Foam' with custom width/length/depth, i.e. a made-to-size foam mattress; consistent with this supplier's other sector divisions ('Sector', 'Acute Hospitals') already mapped handling:mattress. The fourth example, a fall mat, has no vocabulary type and is the one item in this row not covered.",
+   "decidedIn": "Direct Manufacturing - Phase D.json"
   },
   {
    "supplier": "Felgains",
@@ -8066,9 +8147,11 @@
     "Neria",
     "Baf67Bb8 6217 4D6A 9Fbc F6D96F4318E7"
    ],
-   "hub": null,
+   "hub": "bloodtx:pump",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "all three named examples are Neria, Neria Guard and Neria Multi — pump-dedicated subcutaneous infusion sets, homogeneous within the division",
+   "decidedIn": "Convatec - Phase D.json"
   },
   {
    "supplier": "Sysmex UK",
@@ -8353,9 +8436,11 @@
     "Dynaform Owl1",
     "Dynaform Owl"
    ],
-   "hub": null,
+   "hub": "handling:cushion",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the four 'products' are image files of one product; Owl is a cushion model under the Dyna Tek pressure-cushion brand",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -8671,9 +8756,11 @@
     "Ucentum_Slider",
     "Ucentum_Sliderimage"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page titles uCentum a 'Comprehensive Posterior System' of polyaxial, monoaxial and pre-fixation screws and crosslinks for posterior stabilisation of the thoracic and lumbar spine - spinal implants",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -8686,9 +8773,11 @@
     "Add2",
     "Add_Sliderimage"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page titles ADD an 'Anterior Distraction Device', an expandable vertebral body replacement implant",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -9153,9 +9242,11 @@
     "KernelMed handheld video colposcope",
     "MediScan Compact HD"
    ],
-   "hub": null,
+   "hub": "womens:gyn",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "all four examples are examination-imaging devices used in forensic/sexual-assault examination clinics — KernelMed handheld video colposcope, KAPS Vico HD video camera, and the MediScan / MediScan Compact HD capture-and-archive systems that drive them; a video colposcope is a gynaecological examination device, consistent with this supplier's Gynaecology division already mapped to womens:gyn",
+   "decidedIn": "D.P. Medical Systems Limited - Phase D.json"
   },
   {
    "supplier": "D.P. Medical Systems Limited",
@@ -9961,9 +10052,11 @@
     "Dynaform Saturn",
     "Dynaform Saturn 2"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the three 'products' are image files of one product; Saturn follows the Dyna Form planet-named mattress family (Mercury, Jupiter, Maximus), all mattress replacements",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -9975,9 +10068,11 @@
     "Dyna Tek Posture Visco 2",
     "Posture Visco"
    ],
-   "hub": null,
+   "hub": "handling:cushion",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the three 'products' are image files of one product; Posture Visco is a visco-elastic seat cushion under the Dyna Tek cushion brand",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -9989,9 +10084,11 @@
     "Dyna Tek Profile1",
     "Dyna Tek Profile Copy"
    ],
-   "hub": null,
+   "hub": "handling:cushion",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the three 'products' are image files of one product; Profile is a cushion model under the Dyna Tek cushion brand",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -10375,9 +10472,11 @@
     "Softguard Thumbnail",
     "Softguard"
    ],
-   "hub": null,
+   "hub": "oncology:acc",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page titles Gangi-SoftGuard a 'Coaxial Needle', a coaxial biopsy needle with spring-loaded blunt-tip stylet for soft tissue biopsy - a procedure consumable of the same interventional oncology range as this supplier's Dophi and Amica ablation systems already mapped oncology:abl",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -10818,9 +10917,11 @@
     "Instrument Parts for ICP-MS",
     "EPA 200.8 Water Analyzer"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examples are an ICP-MS analyser platform and its hardware — EPA 200.8 Water Analyzer, Instrument Parts for ICP-MS, ICP-MS Control Pack — analyser equipment, matching the precedent set for Molecular Spectroscopy and Cell Analysis",
+   "decidedIn": "Agilent Technologies UK - Phase D.json"
   },
   {
    "supplier": "Agilent Technologies UK",
@@ -10832,9 +10933,11 @@
     "1290 Multicolumn Thermostat",
     "DAD/MWD Supplies for HPLC"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examples are HPLC instrument hardware and its instrument-management software — 1290 Multicolumn Thermostat (an LC stack module), DAD/MWD Supplies for HPLC (detector hardware), Lab Advisor Software (instrument diagnostics) — an instrument platform, as with Molecular Spectroscopy",
+   "decidedIn": "Agilent Technologies UK - Phase D.json"
   },
   {
    "supplier": "Agilent Technologies UK",
@@ -10894,9 +10997,11 @@
     "Graphite Ferrules for GC",
     "Dimpled Liners for GC"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "two of the three examples are classic GC consumables (Graphite Ferrules for GC, Dimpled Liners for GC) and the third is an inlet/detector part; this sits with the supplier's GC Columns division already mapped to pathology:consum",
+   "decidedIn": "Agilent Technologies UK - Phase D.json"
   },
   {
    "supplier": "Agilent Technologies UK",
@@ -10924,9 +11029,11 @@
     "Bioanalyzer High Sensitivity DNA Analysis Kit",
     "Bioanalyzer High Sensitivity Protein Analysis Kit"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the products are reagent kits — Bioanalyzer High Sensitivity DNA Analysis Kit and High Sensitivity Protein Analysis Kit — with the Fragment Analyzer Software being the run software for them; kits are laboratory consumables, as with the Real-Time PCR division",
+   "decidedIn": "Agilent Technologies UK - Phase D.json"
   },
   {
    "supplier": "Agilent Technologies UK",
@@ -10970,9 +11077,11 @@
     "AdvanceBio Glycan Mapping",
     "Charge Variant Analysis"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "all three examples are column-based chemistries — Glycan Analysis Columns, AdvanceBio Glycan Mapping, Charge Variant Analysis — i.e. HPLC columns and their application chemistries, laboratory consumables",
+   "decidedIn": "Agilent Technologies UK - Phase D.json"
   },
   {
    "supplier": "Agilent Technologies UK",
@@ -10984,9 +11093,11 @@
     "Magnis SureSelect XT HS2 DNA Reagent Kit",
     "NGS Data Analysis & Interpretation"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the products are library-preparation reagent kits — SureSelectXT RNA Direct Library Preparation Kit, Magnis SureSelect XT HS2 DNA Reagent Kit — laboratory consumables; the third example is the analysis service that accompanies them",
+   "decidedIn": "Agilent Technologies UK - Phase D.json"
   },
   {
    "supplier": "Agilent Technologies UK",
@@ -11012,9 +11123,11 @@
     "EPA/States Standards",
     "Amino & Nitro Aromatics Standards"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "all three examples are analytical reference standards (Food & Beverages Standards, EPA/States Standards, Amino & Nitro Aromatics Standards) — reagents consumed in laboratory analysis",
+   "decidedIn": "Agilent Technologies UK - Phase D.json"
   },
   {
    "supplier": "D.P. Medical Systems Limited",
@@ -11118,9 +11231,11 @@
     "AeroDR 3 1417SL",
     "AeroDR 3 HL"
    ],
-   "hub": null,
+   "hub": "imaging:xray",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "both products (AeroDR 3 1417SL, AeroDR 3 HL) are Konica Minolta AeroDR flat-panel digital radiography detectors, filed by the supplier under 'Detectors / Retrofits' - radiography/X-ray system hardware",
+   "decidedIn": "Hospital Services Limited - Phase D.json"
   },
   {
    "supplier": "Hospital Services Limited",
@@ -11411,9 +11526,11 @@
     "Interfaith Hospital Gown Head Scarf",
     "Interfaith Hospital Gown Face Cover"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division name is a dispatch/stock bucket, but both products in it (Interfaith Hospital Gown Head Scarf and Interfaith Hospital Gown Face Cover) are components of the same interfaith patient gown, i.e. hospital gown textiles",
+   "decidedIn": "Interweave Textiles - Phase D.json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -11636,9 +11753,11 @@
     "Proaxis50_35Rl_1 1 Jpg",
     "Proaxis50_35Rl_Main 2"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division IS the product (this supplier's rows are sitemap URL segments and the listed 'products' are only its image files); DHG's own product pages title the whole Pro Axis range 'Pro Axis Bariatric Riser Recliner' at the same seat widths and safe working loads, so this is specialist seating, consistent with the Wendover/Chatsworth riser recliners already mapped rehab:chair",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -11784,9 +11903,11 @@
     "Handicare_2395_2_Besk Jpg",
     "Handicare_2395_2_Besk"
    ],
-   "hub": null,
+   "hub": "rehab:stand",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the Handicare_2395 images are of the ReTurn7600 (SWL 205kg), a sit-to-stand transfer and repositioning platform with rising ladder and lower-leg supports - a standing and transfer aid",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -11857,9 +11978,11 @@
     "Stirling Main",
     "Stirling Main Copy"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the two 'products' are image files for one product; DHG's product page is 'Stirling Specialist Seat', an armchair on castors with seat ramp, back recline and lateral support - specialist seating",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -11964,9 +12087,11 @@
     "Proaxis50_35Rl_1 1 Jpg",
     "Proaxis50_35Rl_Main 2"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the 'Proaxis50_35Rl' images are of one product in the Pro Axis bariatric riser recliner range - specialist seating",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -12112,9 +12237,11 @@
     "Handicare_2395_2_Besk Jpg",
     "Handicare_2395_2_Besk"
    ],
-   "hub": null,
+   "hub": "rehab:stand",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the Handicare_2395 images are of the ReTurn 7600 (SWL 205kg), a sit-to-stand transfer and repositioning platform with rising ladder and lower-leg supports - a standing and transfer aid",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -12170,9 +12297,11 @@
     "Proformance 300X294 2",
     "Proformance 300X294 1"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the two 'Proformance 300X294' images are of the ProFormance cover fabric used on the Dyna Form mattress range - a mattress cover technology, consistent with Dyna Form Vapour Flow already mapped handling:mattress",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -12183,9 +12312,11 @@
     "Stirling Main",
     "Stirling Main Copy"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the two 'Stirling Main' images are of one product, the Stirling Specialist Seat - an armchair on castors with seat ramp and back recline, consistent with the Wendover and Chatsworth riser recliners already mapped rehab:chair",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -12460,9 +12591,11 @@
     "Tezo_Folder_Dt_Engl_R1",
     "Tezo_Brochure"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page describes Tezo as a titanium interbody cage family for thoracic to lumbosacral interbody fusion - spinal implants",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -12473,9 +12606,11 @@
     "Pezo_Folder_Dt_Engl",
     "Pezo_Brochure"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page titles Pezo a 'PEEK cage family' - interbody fusion cage implants",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -12486,9 +12621,11 @@
     "Cerv X_Folder_Dt_Engl",
     "Cerv X_Brochure"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page titles Cerv-x a 'Cervical Cage' with a serrated surface for intervertebral anchorage - a spinal implant",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -12499,9 +12636,11 @@
     "Cosmicmia_Folder_Dt_Engl",
     "Cosmicmia_Brochure"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page describes CosmicMIA as a posterior system for dynamic stabilisation of the thoracic and lumbar spine using screw-based dynamic technology - spinal implants",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -12512,9 +12651,11 @@
     "Goldengate_F_Dt_Engl_Rev0",
     "Goldengate_Brochure"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page titles Golden Gate an 'Anterior plate system' implanted with bone graft or cage after prefixation of the C-plate - a spinal implant",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -12525,9 +12666,11 @@
     "Mambo_F_Dt_Engl_Rev02 1_090909",
     "Mambo_Brochure"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page titles Mambo a 'Modular cervical plate system' with adjustable plate lengths - a spinal implant",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -12538,9 +12681,11 @@
     "Osmium_ Folder_Rev01",
     "Osmium_Brochure"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page titles Osmium an 'Anterior cervical plate system' with expandable osmium screws - a spinal implant",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -12551,9 +12696,11 @@
     "Addplus_F_Dt_Engl_Rev02 3_031208",
     "Addplus_Brochure"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page describes ADDplus as an expandable vertebral body replacement combined with an anterior plate for the anterior cervicothoracic spine - a spinal implant",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -12564,9 +12711,11 @@
     "Obeliscpro_F_Dt_Engl_Rev01",
     "Obelisc_Brochure"
    ],
-   "hub": null,
+   "hub": "ortho:implant",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page titles ObeliscPRO a 'Thoracolumbar vertebral body replacement' with distraction and end pieces - a spinal implant",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -12577,9 +12726,11 @@
     "Morrison_Brochure",
     "29235 R01 Morrison Product Sheet"
    ],
-   "hub": null,
+   "hub": "oncology:acc",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own product page titles Morrison a 'Steerable needle' for active guidance around objects within the body under live image guidance - an image-guided procedure consumable, sitting with the Gangi coaxial biopsy needle and this supplier's ablation range",
+   "decidedIn": "Macromed UK Ltd - Phase D.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -12697,9 +12848,11 @@
     "Precivia® Device",
     "Precivia® Pack"
    ],
-   "hub": null,
+   "hub": "ophthalmology:cons",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the two products are 'Precivia® Device' and 'Precivia® Pack' - a single-use ophthalmic procedure device supplied with its procedure pack, which is surgical consumables & packs. Not an IOL, not capital equipment, and not glaucoma drug delivery.",
+   "decidedIn": "Veni Vidi Medical Limited - Phase D.json"
   },
   {
    "supplier": "Veni Vidi Medical Limited",
@@ -12883,9 +13036,11 @@
     "Sluice Room",
     "Cams"
    ],
-   "hub": null,
+   "hub": "ssd:cssd",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "both examples are accessory lines for the supplier's sluice-room decontamination equipment - 'Sluice Room' accessories and 'Cams' (macerator cam spares) - so they belong with the Panamatic bedpan washer disinfectors and Pulpmatic macerators already mapped ssd:cssd",
+   "decidedIn": "DDC Dolphin Limited - Phase D.json"
   },
   {
    "supplier": "Brenmoor Ltd",
@@ -12943,9 +13098,11 @@
     "6475 Triple Quadrupole LC-MS",
     "LC-MS Supplies & Accessories"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the lead example is the 6475 Triple Quadrupole LC-MS, an analyser, with LC-MS Supplies & Accessories being its instrument hardware — an analyser platform",
+   "decidedIn": "Agilent Technologies UK - Phase D.json"
   },
   {
    "supplier": "Agilent Technologies UK",
@@ -12971,9 +13128,11 @@
     "Dissolution Baskets",
     "Dissolution Vials, Tubes & Trays"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "both examples are labware consumed in dissolution runs — Dissolution Baskets and Dissolution Vials, Tubes & Trays — laboratory consumables, not the dissolution apparatus itself",
+   "decidedIn": "Agilent Technologies UK - Phase D.json"
   },
   {
    "supplier": "Agilent Technologies UK",
@@ -13068,9 +13227,11 @@
    "examples": [
     "Nurse Swivel Desk Documentation Station"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single product, Nurse Swivel Desk Documentation Station, is fixed clinical ward furniture, which the handling:furniture type covers alongside examination couches, screens and clinical trolleys",
+   "decidedIn": "Steris - Phase D.json"
   },
   {
    "supplier": "Steris",
@@ -13132,9 +13293,11 @@
    "examples": [
     "Hologic 3DQuorum™ Imaging Technology, powered by Genius AI™"
    ],
-   "hub": null,
+   "hub": "imaging:mammo",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single product, Hologic 3DQuorum Imaging Technology powered by Genius AI, is a licensed imaging option that runs on Hologic 3D mammography systems and is only sold with them, so it belongs with mammography systems rather than with general imaging service",
+   "decidedIn": "Hospital Services Limited - Phase D.json"
   },
   {
    "supplier": "Canon Medical Systems",
@@ -14478,9 +14641,11 @@
    "examples": [
     "Blue Dot 5Cm X 5M Pink Kinesiology Sports Tape"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier files this product under its own 'Wound Care > Tapes' category, the same category as the Blue Dot microporous, zinc oxide, fabric and detectable tapes already mapped wound:fa",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -17444,9 +17609,11 @@
    "examples": [
     "Blue Dot Disposable White Pen Torch"
    ],
-   "hub": null,
+   "hub": "monitoring:gen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier files the Blue Dot Disposable White Pen Torch under its own 'Medical Consumables > Diagnostic Devices' category - the same category as the Blue Dot digital thermometer and A&D BP monitor already mapped monitoring:gen; a general non-specialist clinical diagnostic device",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -19016,9 +19183,11 @@
    "examples": [
     "Heat And Warming Spray 125Ml"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier files Heat and Warming Spray 125Ml under its own 'Hot and Cold Therapy > Heat and Freeze Sprays' category, the same category as the 150Ml Freeze and Cool Spray already mapped wound:fa",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -19362,9 +19531,11 @@
    "examples": [
     "Blue Dot 5Cm X 5M Blue Kinesiology Sports Tape"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier files this product under its own 'Wound Care > Tapes' category, the same category as the Blue Dot microporous, zinc oxide, fabric and detectable tapes already mapped wound:fa",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -19918,9 +20089,11 @@
    "examples": [
     "Economy Disposable Boxer Shorts"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Economy Disposable Boxer Shorts are a disposable patient garment; the supplier files them under Medical Consumables, not continence, so they are patient disposables of the gown/linen class",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -19930,9 +20103,11 @@
    "examples": [
     "Economy Disposable Briefs"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Economy Disposable Briefs are a disposable patient garment; the supplier files them under 'Medical Consumables > Miscellaneous Consumables', not under any continence category, so they are patient disposables of the gown/linen class rather than incontinence pads",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -20586,9 +20761,11 @@
    "examples": [
     "Wallace Cameron Winter Car Kit"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier files the Wallace Cameron Winter Car Kit under its own 'First Aid Kits > Motoring First Aid Kits' category, alongside the Blue Dot and Wallace Cameron motorist first aid kits already mapped wound:fa",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -20738,9 +20915,11 @@
    "examples": [
     "Empty Green Bag With Pouches"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier files 'Empty Green Bag With Pouches' under its own 'First Aid Kits > Empty First Aid Kits' category, alongside the empty first aid pouches already mapped wound:fa",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -20750,9 +20929,11 @@
    "examples": [
     "Black Wall Bracket"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier files 'Black Wall Bracket' under its own 'First Aid Kits > Empty First Aid Kits' category - a wall bracket for a first aid kit or cabinet, not an AED bracket",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21698,9 +21879,11 @@
    "examples": [
     "Blue Dot Revive Aid And Keyring Pouch"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Blue Dot Revive Aid And Keyring Pouch is a CPR face shield in a keyring pouch, the same product as the Blue Dot Resuscitation Face Shield And Keyring Pouch already mapped wound:fa",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21794,9 +21977,11 @@
    "examples": [
     "Wallace Cameron Ultra Soft Pocket Tissues"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Wallace Cameron Ultra Soft Pocket Tissues are a paper hygiene consumable, matching the same type as the Pristine Hygiene Roll already mapped facilities:washroom",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -23142,9 +23327,11 @@
    "examples": [
     "Fragrancefree Baby Wipes Pack 72"
    ],
-   "hub": null,
+   "hub": "rehab:hygiene",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier files Fragrance-free Baby Wipes under its own 'Medical Consumables > Wipes' category; these are non-antimicrobial personal cleansing wipes, so personal hygiene rather than antimicrobial skin prep or saline first aid wipes",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -23540,9 +23727,11 @@
    "examples": [
     "Mckinnon Medical Premium Soft Dry Wipes 100"
    ],
-   "hub": null,
+   "hub": "rehab:hygiene",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier files McKinnon Medical Premium Soft Dry Wipes under its own 'Medical Consumables > Wipes' category; dry patient-care wipes are personal hygiene consumables, not antimicrobial or saline wipes",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24070,9 +24259,11 @@
    "examples": [
     "Red Polythene Soluble Laundry Bags 711Mm X 762Mm Pack 200"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Red Polythene Soluble Laundry Bags are water-soluble bags for handling soiled and infected linen - waste and laundry management, matching the fragranced nappy bags already mapped facilities:washroom",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24138,9 +24329,11 @@
    "examples": [
     "Dr Berrehail Medium Orthopaedic Vest"
    ],
-   "hub": null,
+   "hub": "orthotics:spine",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "'Dr Berrehail Medium Orthopaedic Vest' is a sized orthopaedic trunk support garment, matching the elasticated and fabric spinal supports already mapped orthotics:spine",
+   "decidedIn": "Crest Medical Ltd - Phase D.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -25336,9 +25529,11 @@
    "examples": [
     "Anti-Vandal Seclusion Chair with Arm Rests"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the sole example, Anti-Vandal Seclusion Chair with Arm Rests, is specialist seating for a secure mental health environment, matching the Integrity High/Low Back Chairs already mapped rehab:chair",
+   "decidedIn": "Direct Manufacturing - Phase D.json"
   },
   {
    "supplier": "Direct Manufacturing",
@@ -25674,9 +25869,11 @@
    "examples": [
     "Biohazard All In One Spill Pack"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single product, Biohazard All In One Spill Pack, is a body-fluid spill kit — absorbent granules and chlorine disinfectant for decontaminating an environmental spill — matching the Phase C decisions that put this supplier's Sochlor chlorine disinfectant products in facilities:clean",
+   "decidedIn": "GV Health - Phase D.json"
   },
   {
    "supplier": "GV Health",
@@ -25686,9 +25883,11 @@
    "examples": [
     "Chemical Spill Kit"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single product, Chemical Spill Kit, is an environmental spill clean-up consumable, same reasoning as the biohazard spill pack and the Sochlor range",
+   "decidedIn": "GV Health - Phase D.json"
   },
   {
    "supplier": "GV Health",
@@ -25712,9 +25911,11 @@
    "examples": [
     "Large Grey Printed Confidential Waste"
    ],
-   "hub": null,
+   "hub": "infection:sharps",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Large Grey Printed Confidential Waste is a sack from the same NHS colour-coded waste sack range as this supplier's already-mapped Orange, Yellow, Cytotoxic, Clear, Black, Tiger Stripe and Coloured bag divisions, all of which sit in infection:sharps",
+   "decidedIn": "GV Health - Phase D.json"
   },
   {
    "supplier": "GV Health",
@@ -26496,9 +26697,11 @@
    "examples": [
     "20 75 Jpg"
    ],
-   "hub": null,
+   "hub": "handling:hoist",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the UltraTwist plate is an accessory of the Liko UltraTwin overhead lift system, giving 360-degree rotation under the two lift motors at 500kg SWL; it only functions as part of a ceiling hoist, so it belongs with hoists, consistent with the Liko Ultra Twin Gantry Hoist already mapped handling:hoist",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -26508,9 +26711,11 @@
    "examples": [
     "Bure Double 2 0 1 1024X1024"
    ],
-   "hub": null,
+   "hub": "rehab:walk",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single 'product' is an image file; the division is the product and it is Bure Double 2.0, a four-wheel walker/rollator with twin electric drives for height and width adjustment (150kg user weight) - a walking aid",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -26520,9 +26725,11 @@
    "examples": [
     "Bure Rise Go Db 1024X1024"
    ],
-   "hub": null,
+   "hub": "rehab:walk",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single 'product' is an image file; the division is the product and it is Bure Rise & Go DB, a height-adjustable walking frame with a rise-assist function, per DHG's own IFU 926 for this product - a walking aid",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -26532,9 +26739,11 @@
    "examples": [
     "Mover Aqua 2 1024X1024"
    ],
-   "hub": null,
+   "hub": "rehab:stand",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Mover Aqua is DHG's manual transfer platform / stander on castors for short indoor transfers, matching standing and transfer aids",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -26544,9 +26753,11 @@
    "examples": [
     "Bure Standard 2 1000X1000"
    ],
-   "hub": null,
+   "hub": "rehab:walk",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single 'product' is an image file; the division is the product and it is the standard model of the Bure height-adjustable walking frame range - a walking aid",
+   "decidedIn": "Direct Healthcare Group - Phase D.json"
   },
   {
    "supplier": "CliniMed",
@@ -26654,9 +26865,11 @@
    "examples": [
     "Bure Double 2 0 1 1024X1024"
    ],
-   "hub": null,
+   "hub": "rehab:walk",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single 'Bure Double 2 0 1024X1024' image is the product; Bure Double 2.0 is a four-wheel walking frame with twin electric drives for height and width adjustment - a walking aid",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -26666,9 +26879,11 @@
    "examples": [
     "Bure Rise Go Db 1024X1024"
    ],
-   "hub": null,
+   "hub": "rehab:walk",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single image is the product; Bure Rise & Go DB is a height-adjustable walking frame with a rise-assist function - a walking aid",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -26678,9 +26893,11 @@
    "examples": [
     "Mover Aqua 2 1024X1024"
    ],
-   "hub": null,
+   "hub": "rehab:stand",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single 'Mover Aqua 2' image is the product; Mover Aqua is a manual transfer platform / stander on castors for short indoor and bathroom transfers, matching standing and transfer aids",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "Talley",
@@ -26690,9 +26907,11 @@
    "examples": [
     "Bure Standard 2 1000X1000"
    ],
-   "hub": null,
+   "hub": "rehab:walk",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single 'Bure Standard 2 1000X1000' image is the product; this is the standard model of the Bure height-adjustable walking frame range - a walking aid",
+   "decidedIn": "Talley - Phase D.json"
   },
   {
    "supplier": "ResMed",
@@ -26896,9 +27115,11 @@
    "examples": [
     "3T – Digital Compliance"
    ],
-   "hub": null,
+   "hub": "ssd:serv",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single product, 3T Digital Compliance, is Tristel's platform for logging high-level disinfection cycles and holding the decontamination audit/validation record and staff training evidence, i.e. decontamination service and validation rather than a chemical or a device",
+   "decidedIn": "Tristel Solutions Limited - Phase D.json"
   },
   {
    "supplier": "Tristel Solutions Limited",
@@ -26972,9 +27193,11 @@
    "examples": [
     "Ointment Applicator"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single Ointment Applicator sits in Sheffmed's reusable/single-use ENT instrument catalogue alongside Jobson Horne probes, wax hooks and specula, all of which are already mapped to ent:instr; it is an aural/nasal ointment applicator instrument, not a pharmacy item",
+   "decidedIn": "Sheffmed Limited - Phase D.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -27114,9 +27337,11 @@
    "examples": [
     "Variable Cannula (Black)"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Variable Cannula (Black) follows the same colour/gauge naming as this supplier's already-mapped '2 Piece Suction' division (Suction Controller Tip 22G Black, 20G Yellow, 18G Pink), so it is an ENT variable-suction cannula; black is not a colour in the standard IV cannula gauge code, which rules out a peripheral IV cannula reading",
+   "decidedIn": "Sheffmed Limited - Phase D.json"
   },
   {
    "supplier": "Sheffmed Limited",
@@ -27502,9 +27727,11 @@
    "examples": [
     "Safe Transport Set"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the sole example, 'Safe Transport Set', is a viral specimen transport set (swab and transport medium) - a laboratory specimen collection consumable",
+   "decidedIn": "OncoSem UK Limited - Phase D.json"
   },
   {
    "supplier": "OncoSem UK Limited",
@@ -27516,9 +27743,11 @@
    "examples": [
     "Sampling Cabinet"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the sole example, 'Sampling Cabinet', is a biosafety specimen sampling cabinet - laboratory capital equipment, not a consumable",
+   "decidedIn": "OncoSem UK Limited - Phase D.json"
   },
   {
    "supplier": "MEDACX Limited",
@@ -27598,9 +27827,11 @@
    "examples": [
     "Stainless Steel"
    ],
-   "hub": null,
+   "hub": "ssd:serv",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the sole example, 'Stainless Steel', is the stainless steel sluice room fit-out line; this division is a decontamination-facility service offering rather than a product, matching service and validation",
+   "decidedIn": "DDC Dolphin Limited - Phase D.json"
   },
   {
    "supplier": "Coolmed",
@@ -27792,9 +28023,11 @@
    "examples": [
     "DIFRA"
    ],
-   "hub": null,
+   "hub": "audiology:diag",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single example, DIFRA, is the audiometric diagnostic equipment range (audiometers/tympanometry) that this supplier distributes; the supplier's ENT treatment units and chairs are filed separately under its Furniture division, so this row is the diagnostic equipment line",
+   "decidedIn": "D.P. Medical Systems Limited - Phase D.json"
   },
   {
    "supplier": "D.P. Medical Systems Limited",
@@ -27832,9 +28065,11 @@
    "examples": [
     "Automatic Can Opener"
    ],
-   "hub": null,
+   "hub": "rehab:daily",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single product, Automatic Can Opener, is a kitchen daily-living aid, matching 'Daily living & occupational therapy aids'",
+   "decidedIn": "Drive DeVilbiss Healthcare UK - Phase D.json"
   },
   {
    "supplier": "Labcold",
@@ -27844,9 +28079,11 @@
    "examples": [
     "Ward Refrigerators (66L wall-mounted and 340L free-standing)"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the single example is 'Ward Refrigerators (66L wall-mounted and 340L free-standing)' - medicine fridges for ward drug storage, an exact match for cold-chain storage (medical fridges, freezers & vaccine carriers).",
+   "decidedIn": "Labcold - Phase D.json"
   },
   {
    "supplier": "Labcold",
