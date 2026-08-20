@@ -421,10 +421,21 @@ def suppliers():
 
 
 def free_text(supplier):
-    """Everything a curator might have typed a company number into."""
+    """Everything a curator might have typed a company number into.
+
+    `background` is read as well as `alerts` and `note`. On 20/08/2026 commit
+    121ed36 moved 281 background notes out of alerts[] across 252 companies, so
+    that Alerts & recalls held alerts again. The curator-typed company numbers
+    moved with them, and 204 companies confirmed by route 1 silently dropped to
+    "probable" on the next refresh — 36 of them still carrying a figure carried
+    forward from the previous run, which is what failed the gate. The evidence
+    never went anywhere; only the field it sits in changed.
+    """
     parts = []
     for alert in supplier.get("alerts", []) or []:
         parts.append(alert if isinstance(alert, str) else json.dumps(alert))
+    for note in supplier.get("background", []) or []:
+        parts.append(note if isinstance(note, str) else json.dumps(note))
     parts.append(supplier.get("note") or "")
     return " ".join(parts)
 
@@ -639,7 +650,8 @@ def record_for(supplier, number, confirmed_source, key):
             "Companies House record — %s, read %s"
             % (confirmed_source["url"], confirmed_source.get("checkedOn") or "on an unrecorded date"))
     else:
-        confidence, matched_on = "confirmed", "company number recorded in supplier-seed alerts"
+        confidence, matched_on = "confirmed", ("company number recorded by a curator in the supplier's own "
+                                                "seed record (alerts, background or note)")
 
     return {
         "companyNumber": profile.get("company_number") or number,
