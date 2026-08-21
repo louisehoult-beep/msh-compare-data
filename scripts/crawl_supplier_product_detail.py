@@ -186,16 +186,35 @@ def extract_list_items(html_frag):
     return out
 
 
-def find_product_url(domain, name, deadline):
-    """Locate this product's own URL from the site's XML sitemap, by matching
-    the product name against the URL's last path segment. Same discovery
-    surface as crawl_supplier_site.py's sitemap route, but this keeps the
-    full URL (that route discards it after deriving a name)."""
+_SITEMAP_CACHE = {}
+
+def _sitemap_urls(domain, deadline):
+    """Read the site's sitemap ONCE per domain and remember the URL list.
+
+    WHY (added 21/08/2026): find_product_url() rebuilt the entire sitemap for
+    EVERY product. On a site with a large sitemap index the per-product budget
+    expired mid-build every single time, so the run reported "gave up reading
+    the sitemap inside the time budget" for all of that supplier's products and
+    captured nothing at all, while still making hundreds of requests against
+    that site. Two shards of the 21/08 sweep sat at zero captures for this
+    reason. One build per domain, reused for every product, is both far faster
+    and far politer to the site being read."""
+    if domain in _SITEMAP_CACHE:
+        return _SITEMAP_CACHE[domain]
+    cachefile = "sitemap-cache/%s.json" % re.sub(r"[^a-z0-9.-]", "_", domain.lower())
+    if os.path.exists(cachefile):
+        try:
+            urls = json.load(open(cachefile, encoding="utf-8"))
+            _SITEMAP_CACHE[domain] = urls
+            return urls
+        except Exception:
+            pass
     seen, urls = set(), []
     to_read = ["https://%s/sitemap.xml" % domain, "https://%s/sitemap_index.xml" % domain]
-    while to_read and len(seen) < 12:
-        if deadline and time.time() > deadline:
-            return None, "gave up reading the sitemap inside the time budget"
+    build_deadline = time.time() + 240   # generous, but ONCE per domain
+    while to_read and len(seen) < 60:
+        if time.time() > build_deadline:
+            break
         u = to_read.pop(0)
         if u in seen:
             continue
@@ -206,9 +225,25 @@ def find_product_url(domain, name, deadline):
             continue
         locs = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", body)
         if "<sitemapindex" in body[:400].lower():
-            to_read.extend([l for l in locs if "product" in l.lower() or "sitemap" in l.lower()][:8])
+            to_read.extend([l for l in locs
+                            if "product" in l.lower() or "sitemap" in l.lower()][:40])
             continue
         urls.extend(locs)
+    _SITEMAP_CACHE[domain] = urls
+    try:
+        os.makedirs("sitemap-cache", exist_ok=True)
+        json.dump(urls, open(cachefile, "w", encoding="utf-8"))
+    except Exception:
+        pass
+    return urls
+
+
+def find_product_url(domain, name, deadline):
+    """Locate this product's own URL from the site's XML sitemap, by matching
+    the product name against the URL's last path segment. Same discovery
+    surface as crawl_supplier_site.py's sitemap route, but this keeps the
+    full URL (that route discards it after deriving a name)."""
+    urls = _sitemap_urls(domain, deadline)
 
     prod = [u for u in urls if re.search(r"/(product|products|our-products|range|ranges)/", u, re.I)]
     if not prod:
@@ -388,10 +423,17 @@ def main():
     products_store = outdoc["products"]
 
     def save():
+        # ATOMIC (added 21/08/2026). save() runs after every product, so a
+        # process killed mid-dump left a truncated, unparseable JSON file and
+        # lost the whole run's captures. Write to a temp file and rename: the
+        # real file is then always either the previous complete version or the
+        # new complete version, never half of one.
         outdoc["generated"] = time.strftime("%Y-%m-%d")
-        with open(OUT, "w", encoding="utf-8") as f:
+        tmp = OUT + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
             json.dump(outdoc, f, indent=1, ensure_ascii=False)
             f.write("\n")
+        os.replace(tmp, OUT)
 
     if a.supplier:
         targets = [(a.supplier, a.domain or (suppliers_range.get(a.supplier) or {}).get("domain"))]
