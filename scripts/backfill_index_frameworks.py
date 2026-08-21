@@ -66,6 +66,38 @@ def co_key(s):
     return re.sub(r"\s+", " ", k).strip()
 
 
+def norm_name(s):
+    """Whitespace/case-normalised only — deliberately NOT co_key(). Used to test
+    exact identity against a genuinely ambiguous key (see ambiguous_keys below),
+    where stripping the legal-form suffix is exactly what created the ambiguity."""
+    return re.sub(r"\s+", " ", str(s or "").lower()).strip()
+
+
+def ambiguous_keys_for(doc):
+    """co_key values shared by two or more DIFFERENTLY-NAMED Hub suppliers in
+    this doc.
+
+    Added 21/08/2026 alongside the CO_SUFFIX fix (^o66): stripping only
+    legal-form words still leaves a handful of genuine cases — "Cardiac
+    Services" / "Cardiac Services UK Ltd" — where NHS Supply Chain's own
+    briefs distinguish two real, differently-numbered companies (confirmed at
+    Companies House) using nothing but the legal-form suffix the key strips.
+    Grouping by key would hand each supplier's frameworks to the other. For
+    any key on this list, a brief only counts as a hit if its verbatim
+    supplier string is an EXACT name/alias match for that supplier — the same
+    no-fuzzy-matching discipline scripts/company_match.py uses — instead of
+    the looser key-sharing match every other supplier gets.
+    See Data-Verification/framework-key-collision-fix-2026-08-21.md.
+    """
+    name_keys = {}
+    for s in (doc.get("suppliers") or []):
+        for n in [s.get("name")] + list(s.get("aliases") or []):
+            k = co_key(n)
+            if k:
+                name_keys.setdefault(k, set()).add(s.get("name"))
+    return {k for k, names in name_keys.items() if len(names) > 1}
+
+
 def load(path):
     with open(path, encoding="utf-8") as f:
         return json.load(f)
@@ -98,14 +130,20 @@ def main():
                         (SEED, {"separators": (",", ":"), "ensure_ascii": False})):
         doc = load(path)
         touched = added = refreshed = 0
+        ambiguous_keys = ambiguous_keys_for(doc)
 
         for s in (doc.get("suppliers") or []):
             keys = {co_key(n) for n in [s.get("name")] + list(s.get("aliases") or [])}
             keys.discard("")
+            own_names = {norm_name(n) for n in [s.get("name")] + list(s.get("aliases") or []) if n}
             hits = []
             seen_urls = set()
             for k in keys:
                 for f, matched in by_key.get(k, []):
+                    if k in ambiguous_keys and norm_name(matched) not in own_names:
+                        # Shared key, no exact name/alias match — this hit belongs
+                        # to the other supplier sharing the key, not this one.
+                        continue
                     if f["url"] in seen_urls:
                         continue
                     seen_urls.add(f["url"])
