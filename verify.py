@@ -3813,6 +3813,189 @@ def check_differentiator(doc, vocab):
                                   " ..." if len(singles) > 4 else ""))
 
 
+
+def check_awareness(doc):
+    """The hand-maintained half of the calendar. Every other calendar stream is derived
+    from a store that already has its own gate; this one is typed by a person, so this
+    is where the source discipline has to be enforced.
+
+    Written 21/08/2026 with the calendar. The failure it exists to stop is the one root
+    rule 12 was written after: an awareness date carried forward from a previous edition,
+    or lifted off an aggregator, quietly going stale and telling a member to plan a
+    campaign around a week that moved."""
+    if doc is None:
+        return  # The calendar is not built. An absent file is not a failure.
+
+    days = doc.get("days")
+    if days is None:
+        FAIL("awareness", "awareness-days.json has no `days` list.")
+        return
+    if doc.get("unverified") is None:
+        FAIL("awareness", "awareness-days.json has no `unverified` list. A gap that is "
+                          "not recorded is a gap that gets silently filled later.")
+
+    seen = set()
+    for e in days:
+        eid = e.get("id") or "(no id)"
+        if eid in seen:
+            FAIL("awareness", "%s: duplicate id." % eid)
+        seen.add(eid)
+
+        # Attribution. Nothing publishes without an owner and that owner's own page.
+        for field in ("name", "owner", "source", "verified", "dateRule", "repAction"):
+            if not e.get(field):
+                FAIL("awareness", "%s: missing `%s`. Every published entry names the body "
+                                  "that owns the date, the page it was read from, when it "
+                                  "was read, and what a rep should do about it." % (eid, field))
+        src = e.get("source") or ""
+        if src:
+            if not src.startswith("http"):
+                FAIL("awareness", "%s: `source` is not a URL." % eid)
+
+        rule = e.get("dateRule")
+        if rule == "fixed":
+            if not e.get("month"):
+                FAIL("awareness", "%s: dateRule 'fixed' needs `month` and `day`." % eid)
+            if not e.get("day"):
+                FAIL("awareness", "%s: dateRule 'fixed' needs `month` and `day`." % eid)
+        elif rule == "computed":
+            for field in ("rule", "month", "weekday", "ordinal"):
+                if not e.get(field):
+                    FAIL("awareness", "%s: dateRule 'computed' needs `%s`. A moving date is "
+                                      "projected ONLY from the rule its owner publishes, "
+                                      "never from last year's date." % (eid, field))
+        elif rule == "announced":
+            occ = e.get("occurrences") or []
+            if not occ:
+                FAIL("awareness", "%s: dateRule 'announced' with no occurrences. It should "
+                                  "be in `unverified`, not published with no date." % eid)
+            newest = ""
+            for o in occ:
+                start = (o.get("start") or "")
+                if not re.match(r"^\d{4}-\d{2}-\d{2}$", start):
+                    FAIL("awareness", "%s: occurrence start '%s' is not an ISO date."
+                                      % (eid, start))
+                if start > newest:
+                    newest = start
+            # The annual-review teeth. An announced date the owner has not restated is
+            # the exact thing that goes stale, so an entry whose newest stated occurrence
+            # has passed must be re-read, not left sitting there looking current.
+            if newest:
+                if newest < datetime.date.today().isoformat():
+                    FAIL("awareness", "%s: the newest occurrence its owner has stated (%s) is "
+                                      "in the past. Re-read %s and add the new dates, or move "
+                                      "the entry to `unverified`."
+                                      % (eid, newest, e.get("source")))
+        else:
+            FAIL("awareness", "%s: unknown dateRule '%s'. Must be fixed, computed or "
+                              "announced." % (eid, rule))
+
+    for u in (doc.get("unverified") or []):
+        if not u.get("reason"):
+            FAIL("awareness", "%s: recorded as unverified with no reason. The reason is the "
+                              "whole point of the list." % (u.get("id") or "(no id)"))
+        if u.get("id") in seen:
+            FAIL("awareness", "%s: is in BOTH `days` and `unverified`." % u.get("id"))
+
+
+def check_calendar(doc, specmap_unused=None):
+    """The built calendar. Derived from stores that each have their own gate, so this
+    checks the JOIN rather than re-deriving the data: that every row can be attributed,
+    that no row asserts a date it cannot source, and above all that no row carries a Hub
+    link the calendar invented.
+
+    A dead link on a members' page is worse than no link, and it is the failure this
+    build already hit once: pages-map.json calls a speciality `therapies-physio-and-ot`
+    but that page was renamed and lives at /patient-handling/, so a URL built from the
+    slug 404'd. The builder now resolves permalinks from the live site; this check makes
+    sure nobody quietly reintroduces the shortcut."""
+    if doc is None:
+        return
+
+    entries = doc.get("entries")
+    if entries is None:
+        FAIL("calendar", "hub-calendar.json has no `entries` list.")
+        return
+
+    meta = doc.get("_meta") or {}
+    if not meta.get("derivationRule"):
+        FAIL("calendar", "hub-calendar.json states no derivation rule. Every derived "
+                         "dataset carries the rule it was derived under (root rule 14).")
+    if not meta.get("dataAsOf"):
+        FAIL("calendar", "hub-calendar.json carries no dataAsOf stamp.")
+
+    allowed = set(meta.get("types") or [])
+    known_specs = {s.get("slug") for s in (doc.get("specialities") or [])}
+    spec_urls = {s.get("url") for s in (doc.get("specialities") or [])}
+    today = datetime.date.today().isoformat()
+    seen = set()
+
+    for e in entries:
+        eid = e.get("id") or "(no id)"
+        if eid in seen:
+            FAIL("calendar", "%s: duplicate entry id." % eid)
+        seen.add(eid)
+
+        if e.get("type") not in allowed:
+            FAIL("calendar", "%s: type '%s' is not one the file declares."
+                             % (eid, e.get("type")))
+        if not e.get("title"):
+            FAIL("calendar", "%s: no title." % eid)
+        if not e.get("rule"):
+            FAIL("calendar", "%s: no `rule`. A member has to be able to judge how a row "
+                             "was arrived at." % eid)
+
+        date = e.get("date") or ""
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", date):
+            FAIL("calendar", "%s: date '%s' is not an ISO date." % (eid, date))
+            continue
+        end = e.get("endDate")
+        if end:
+            if end < date:
+                FAIL("calendar", "%s: endDate %s is before date %s." % (eid, end, date))
+        # A past date is dropped, not shown as expired. The single exception is a
+        # framework end inside the recent-past window, and it must be flagged as past.
+        if date < today:
+            if e.get("type") != "framework-end":
+                FAIL("calendar", "%s: date %s is in the past. Only a recently expired "
+                                 "framework may appear, and only flagged as past."
+                                 % (eid, date))
+            elif not e.get("past"):
+                FAIL("calendar", "%s: past date %s not flagged `past`." % (eid, date))
+
+        for slug in (e.get("specialities") or []):
+            if slug not in known_specs:
+                FAIL("calendar", "%s: speciality '%s' is not in the file's own speciality "
+                                 "list, so the page link cannot be trusted." % (eid, slug))
+
+        links = e.get("links") or []
+        if not links:
+            FAIL("calendar", "%s: no links at all. Every row reaches either the Hub page "
+                             "that explains it or the source it came from." % eid)
+        for l in links:
+            if not l.get("url"):
+                FAIL("calendar", "%s: a link with no url." % eid)
+                continue
+            if not l.get("label"):
+                FAIL("calendar", "%s: a link with no label." % eid)
+            if l.get("kind") == "hub":
+                url = l["url"]
+                if not url.startswith("https://medsalesintelligencehub.co.uk/"):
+                    FAIL("calendar", "%s: hub link '%s' is not on the Hub." % (eid, url))
+                    continue
+                # The anti-guessing invariant. A hub link is either a resolved
+                # speciality permalink or one of the declared anchor pages. A URL
+                # assembled from a slug is exactly what 404'd before.
+                if url not in spec_urls:
+                    if "/medical-sales-hub/" not in url:
+                        FAIL("calendar", "%s: hub link '%s' is neither a resolved "
+                                         "speciality permalink nor a Hub page." % (eid, url))
+
+    if doc.get("awarenessGaps") is None:
+        FAIL("calendar", "hub-calendar.json carries no awarenessGaps list. The gaps are "
+                         "published deliberately so a member can see what is missing.")
+
+
 def main():
     offline = "--offline" in sys.argv
     as_json = "--json" in sys.argv
@@ -3895,6 +4078,12 @@ def main():
     check_hospital_prescribing(load("hospital-prescribing/index.json"))
     # The Differentiator. The category lock is the check — see the note above.
     check_differentiator(load("differentiator.json"), load("compare-suppliers.json"))
+
+    # The Calendar. Two checks: the hand-typed awareness input, where the source
+    # discipline has to be enforced, and the built join, where the risk is an
+    # invented Hub link.
+    check_awareness(load("awareness-days.json"))
+    check_calendar(load("hub-calendar.json"))
 
     check_search_index(load(SEARCH_INDEX))
 

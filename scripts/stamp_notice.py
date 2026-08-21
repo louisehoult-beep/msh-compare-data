@@ -54,6 +54,7 @@ TERMS = "https://medsalesintelligencehub.co.uk/terms/"
 
 # Hash outputs, safe to publish. See the module docstring on the salt.
 REFS = {
+    "awareness-days.json":              "ETH-D230F035D",
     "company-awards.json":     "ETH-D8F9201A9",
     "company-press.json":      "ETH-D5A18D6E2",
     "company-logos.json":      "ETH-D6F85FA5F",
@@ -64,6 +65,7 @@ REFS = {
     "differentiator-category-map.json": "ETH-D01E00B2A",
     "differentiator.json":          "ETH-D29A49944",
     "frameworks.json":         "ETH-DB4D6B772",
+    "hub-calendar.json":                "ETH-DB8887BA0",
     "hub-search-index.json":   "ETH-D50A4C4E3",
     "interview-prep.json":     "ETH-D77050906",
     "nhssc-cache.json":        "ETH-D84BDB325",

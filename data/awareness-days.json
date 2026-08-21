@@ -1,0 +1,369 @@
+{
+  "_notice": {
+    "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+    "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+    "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+    "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+    "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+    "terms": "https://medsalesintelligencehub.co.uk/terms/",
+    "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+    "ref": "ETH-D230F035D",
+    "contact": "contact@elevateandthrive.uk"
+  },
+  "_meta": {
+    "purpose": "Clinical awareness days, weeks and months, as a SELLING calendar. Each entry names the date, the body that owns it, the Hub speciality page it maps to, and one line on what a rep should actually do about it.",
+    "whyItExists": "An awareness day is a budget and attention window inside a trust. IPC teams audit in World Hand Hygiene Day week; the sepsis lead runs education in September. That is when a clinical contact is most receptive and most likely to have a small budget signed off.",
+    "sourceRule": "Every entry is verified against the OWNING BODY'S OWN PAGE, not an aggregator, a listicle or last year's edition of this file. 'source' is that page. 'verified' is the date it was read. Nothing is carried forward unread.",
+    "dateRuleValues": {
+      "fixed": "The owner states a calendar date that does not move (e.g. 5 May). Projectable to any year from 'month' and 'day'.",
+      "computed": "The owner states a RULE, not a date (e.g. 'the second Thursday of October'). Projectable only from the rule in 'rule', which must be quoted from the owner's page. Never from last year's date plus 365.",
+      "announced": "The owner announces the dates each year and publishes no rule. NOT projectable. Only the occurrences explicitly stated by the owner appear, and the calendar shows nothing for a year the owner has not yet announced."
+    },
+    "evidenceFloor": "An entry with no owner page, or whose owner page is stale and states only a past year's date, is NOT published. It is recorded in 'unverified' with the reason, so a gap stays visible rather than being silently dropped. Publishing nothing is the correct output when the evidence is thin (root CLAUDE.md rule 14).",
+    "annualReview": "Every 'announced' entry expires. refresh_calendar.py refuses to emit an announced occurrence for a year the owner has not stated, and verify.py fails if an entry's newest announced occurrence is in the past and no re-verification has happened.",
+    "lastFullReview": "2026-08-21"
+  },
+  "days": [
+    {
+      "id": "world-cancer-day",
+      "name": "World Cancer Day",
+      "owner": "Union for International Cancer Control (UICC)",
+      "source": "https://www.uicc.org/what-we-do/convening/world-cancer-day",
+      "sourceQuote": "The day is led by UICC and was established in the year 2000.",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 2,
+      "day": 4,
+      "specialities": [
+        "oncology-and-sact",
+        "radiology-and-imaging",
+        "pathology-and-laboratory-medicine"
+      ],
+      "repAction": "Cancer services and the cancer alliance are visible this week. Earlier-diagnosis messaging fits diagnostics and imaging; SACT delivery products are a separate conversation with pharmacy."
+    },
+    {
+      "id": "world-hearing-day",
+      "name": "World Hearing Day",
+      "owner": "World Health Organization",
+      "source": "https://www.who.int/campaigns/world-hearing-day",
+      "sourceQuote": "3 March is World Hearing Day",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 3,
+      "day": 3,
+      "specialities": [
+        "audiology-and-hearing"
+      ],
+      "repAction": "Audiology services run screening and ear-care promotion this week. A good week to offer education stands and hearing-screening consumables rather than a capital conversation."
+    },
+    {
+      "id": "nutrition-and-hydration-week",
+      "name": "Nutrition and Hydration Week",
+      "owner": "Nutrition and Hydration Week",
+      "source": "https://nutritionandhydrationweek.co.uk/",
+      "sourceQuote": "Nutrition & Hydration Week 15th - 21st March 2027",
+      "verified": "2026-08-21",
+      "dateRule": "announced",
+      "occurrences": [
+        {
+          "year": 2027,
+          "start": "2027-03-15",
+          "end": "2027-03-21"
+        }
+      ],
+      "specialities": [
+        "nutrition-and-dietetics",
+        "frailty-and-older-people"
+      ],
+      "repAction": "Dietetics and the nutrition steering group run ward-level audits. Oral nutritional supplements, enteral feeding and hydration aids all fit. Care homes engage with this one heavily."
+    },
+    {
+      "id": "world-health-day",
+      "name": "World Health Day",
+      "owner": "World Health Organization",
+      "source": "https://www.who.int/campaigns/world-health-day",
+      "sourceQuote": "The date of 7 April marks the anniversary of the founding of WHO in 1948.",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 4,
+      "day": 7,
+      "specialities": [],
+      "repAction": "Trust-wide, not speciality-specific. Useful as a communications hook rather than a buying window."
+    },
+    {
+      "id": "world-hand-hygiene-day",
+      "name": "World Hand Hygiene Day",
+      "owner": "World Health Organization",
+      "source": "https://www.who.int/campaigns/world-hand-hygiene-day",
+      "sourceQuote": "5 May is World Hand Hygiene Day",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 5,
+      "day": 5,
+      "specialities": [
+        "infection-prevention-and-control",
+        "vascular-access-and-iv-therapy"
+      ],
+      "repAction": "The single strongest IPC window of the year. IPC teams run audits and campaigns and often hold a small discretionary budget for hand hygiene, PPE and IPC consumables. Approach the IPC lead four to six weeks out, not on the day."
+    },
+    {
+      "id": "world-no-tobacco-day",
+      "name": "World No Tobacco Day",
+      "owner": "World Health Organization",
+      "source": "https://www.who.int/campaigns/world-no-tobacco-day",
+      "sourceQuote": "31 May is World No Tobacco Day",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 5,
+      "day": 31,
+      "specialities": [
+        "respiratory"
+      ],
+      "repAction": "Pairs with the trust's tobacco dependence treatment service under the Long Term Plan. Relevant if you sell respiratory diagnostics or cessation support products."
+    },
+    {
+      "id": "world-blood-donor-day",
+      "name": "World Blood Donor Day",
+      "owner": "World Health Organization",
+      "source": "https://www.who.int/campaigns/world-blood-donor-day",
+      "sourceQuote": "14 June is World Blood Donor Day",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 6,
+      "day": 14,
+      "specialities": [
+        "haematology-and-patient-blood-management"
+      ],
+      "repAction": "Transfusion and patient blood management teams are visible this week. A hook for blood collection, transfusion safety and PBM conversations."
+    },
+    {
+      "id": "world-sepsis-day",
+      "name": "World Sepsis Day",
+      "owner": "Global Sepsis Alliance",
+      "source": "https://www.worldsepsisday.org/",
+      "sourceQuote": "13 September",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 9,
+      "day": 13,
+      "specialities": [
+        "sepsis-and-the-deteriorating-patient",
+        "critical-care"
+      ],
+      "repAction": "The sepsis lead is running education and is easier to reach than at any other point in the year. Blood culture, lactate, escalation and deteriorating-patient monitoring all have a natural opening. The Hub's Sepsis and the Deteriorating Patient page is the brief to read first."
+    },
+    {
+      "id": "world-patient-safety-day",
+      "name": "World Patient Safety Day",
+      "owner": "World Health Organization",
+      "source": "https://www.who.int/campaigns/world-patient-safety-day",
+      "sourceQuote": "17 September is World Patient Safety Day",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 9,
+      "day": 17,
+      "specialities": [
+        "critical-care",
+        "sepsis-and-the-deteriorating-patient",
+        "pharmacy-and-medicines"
+      ],
+      "repAction": "Owned by the trust's patient safety specialist and the PSIRF lead. Anything that reduces a never event or a medication error has a hearing this week."
+    },
+    {
+      "id": "organ-donation-week",
+      "name": "Organ Donation Week",
+      "owner": "NHS Blood and Transplant",
+      "source": "https://www.organdonation.nhs.uk/get-involved/organ-donation-campaigns/organ-donation-week/",
+      "sourceQuote": "Monday 21 to Sunday 27 September",
+      "verified": "2026-08-21",
+      "dateRule": "announced",
+      "occurrences": [
+        {
+          "year": 2026,
+          "start": "2026-09-21",
+          "end": "2026-09-27"
+        }
+      ],
+      "specialities": [
+        "renal",
+        "critical-care"
+      ],
+      "repAction": "Run by NHSBT, not the trust. Relevant to critical care and renal teams. A relationship and profile week rather than a buying window."
+    },
+    {
+      "id": "world-heart-day",
+      "name": "World Heart Day",
+      "owner": "World Heart Federation",
+      "source": "https://world-heart-federation.org/world-heart-day/",
+      "sourceQuote": "Each year on World Heart Day (29 September)",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 9,
+      "day": 29,
+      "specialities": [
+        "cardiology-and-cardiac-surgery",
+        "vascular-surgery-and-pad"
+      ],
+      "repAction": "Cardiology runs public-facing screening and BP checks. Diagnostics, monitoring and cardiac rehab products fit the week; implants do not."
+    },
+    {
+      "id": "world-sight-day",
+      "name": "World Sight Day",
+      "owner": "International Agency for the Prevention of Blindness (IAPB)",
+      "source": "https://www.iapb.world/world_sight_day",
+      "sourceQuote": "Every October, on the second Thursday, World Sight Day casts a spotlight on the importance of eye care.",
+      "verified": "2026-08-21",
+      "dateRule": "computed",
+      "rule": "second Thursday of October",
+      "month": 10,
+      "weekday": "Thursday",
+      "ordinal": 2,
+      "specialities": [
+        "ophthalmology"
+      ],
+      "repAction": "Ophthalmology and community optometry run screening pushes. Ties to the elective recovery backlog in cataract, which is where the money actually is."
+    },
+    {
+      "id": "world-mental-health-day",
+      "name": "World Mental Health Day",
+      "owner": "World Health Organization",
+      "source": "https://www.who.int/campaigns/world-mental-health-day",
+      "sourceQuote": "10 October is World Mental Health Day",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 10,
+      "day": 10,
+      "specialities": [
+        "mental-health"
+      ],
+      "repAction": "Mental health trusts and staff wellbeing leads both mark it. Ligature-safe fittings, seclusion and observation technology and staff safety products all have a hook."
+    },
+    {
+      "id": "world-thrombosis-day",
+      "name": "World Thrombosis Day",
+      "owner": "International Society on Thrombosis and Haemostasis (ISTH)",
+      "source": "https://www.worldthrombosisday.org/",
+      "sourceQuote": "October 13",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 10,
+      "day": 13,
+      "specialities": [
+        "haematology-and-patient-blood-management",
+        "vascular-surgery-and-pad",
+        "orthopaedics-and-trauma"
+      ],
+      "repAction": "VTE prevention is a contractual requirement for trusts, so this one has teeth. Anti-embolism stockings, IPC devices and VTE risk assessment tools all sit here."
+    },
+    {
+      "id": "restart-a-heart-day",
+      "name": "Restart a Heart Day",
+      "owner": "Resuscitation Council UK",
+      "source": "https://www.resus.org.uk/get-involved/restart-heart-day",
+      "sourceQuote": "You can expect to see Restart a Heart events happening throughout October, and on Restart a Heart day on 16 October.",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 10,
+      "day": 16,
+      "specialities": [
+        "emergency-and-urgent-care",
+        "cardiology-and-cardiac-surgery"
+      ],
+      "repAction": "Resus officers and ambulance trusts run mass CPR training. Defibrillators, training manikins and resus consumables are actively being demonstrated. One of the few awareness days with a genuine equipment budget attached."
+    },
+    {
+      "id": "world-diabetes-day",
+      "name": "World Diabetes Day",
+      "owner": "International Diabetes Federation",
+      "source": "https://worlddiabetesday.org/",
+      "sourceQuote": "The campaign focus for 14 November is early diagnosis and risk reduction",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 11,
+      "day": 14,
+      "specialities": [
+        "diabetes-and-endocrinology",
+        "tissue-viability-and-wound-care",
+        "obesity-and-weight-management"
+      ],
+      "repAction": "The diabetes specialist nurse team runs screening and foot-check campaigns. Note the wound care overlap: diabetic foot ulceration is where the spend is, and it is bought through Tissue Viability, not Diabetes."
+    },
+    {
+      "id": "world-amr-awareness-week",
+      "name": "World AMR Awareness Week",
+      "owner": "World Health Organization",
+      "source": "https://www.who.int/campaigns/world-amr-awareness-week",
+      "sourceQuote": "18 to 24 November is World AMR Awareness Week",
+      "verified": "2026-08-21",
+      "dateRule": "fixed",
+      "month": 11,
+      "day": 18,
+      "endMonth": 11,
+      "endDay": 24,
+      "specialities": [
+        "infection-prevention-and-control",
+        "pharmacy-and-medicines",
+        "pathology-and-laboratory-medicine"
+      ],
+      "repAction": "Antimicrobial stewardship pharmacists and the microbiology lead run this jointly. Rapid diagnostics that shorten time to targeted therapy are the strongest pitch of the week."
+    }
+  ],
+  "unverified": [
+    {
+      "id": "world-copd-day",
+      "name": "World COPD Day",
+      "owner": "Global Initiative for Chronic Obstructive Lung Disease (GOLD)",
+      "source": "https://goldcopd.org/world-copd-day/",
+      "checked": "2026-08-21",
+      "reason": "The owner's page states a past year's date ('World COPD Day takes place on November 19th', 2025) and does not state the rule that sets the date. The date is widely reported as the third Wednesday of November, but GOLD's own page does not say so, and deriving it from one past date would be inference. Re-read GOLD's page once it carries the current year."
+    },
+    {
+      "id": "world-asthma-day",
+      "name": "World Asthma Day",
+      "owner": "Global Initiative for Asthma (GINA)",
+      "source": "https://ginasthma.org/world-asthma-day/",
+      "checked": "2026-08-21",
+      "reason": "GINA's page is stale: the only date it states is 'May 3, 2022'. World Asthma Day moves (first Tuesday of May is the commonly reported rule) but GINA's own page does not state the rule, so no date can be published from this source."
+    },
+    {
+      "id": "world-kidney-day",
+      "name": "World Kidney Day",
+      "owner": "International Society of Nephrology / World Kidney Day",
+      "source": "https://www.worldkidneyday.org/",
+      "checked": "2026-08-21",
+      "reason": "The owner's site blocks automated reading of the campaign page and the readable pages carry blog dates only, not the campaign date. Commonly reported as the second Thursday of March; not stated on any owner page that could be read. Needs a manual read."
+    },
+    {
+      "id": "stop-the-pressure-day",
+      "name": "Stop the Pressure Day",
+      "owner": "European Pressure Ulcer Advisory Panel (EPUAP); NHS England runs the UK Stop the Pressure week",
+      "source": "https://www.epuap.org/stop-pressure-injury-day/",
+      "checked": "2026-08-21",
+      "reason": "EPUAP's own page returns 404. Every readable statement of the date is a trust or ICB page repeating it, not the owner. Widely reported as the third Thursday of November, with NHS England running a Stop the Pressure week around it, but neither EPUAP nor NHS England states it on a page that could be read. Highest-value missing entry for Tissue Viability and Wound Care; chase manually."
+    },
+    {
+      "id": "stoptober",
+      "name": "Stoptober",
+      "owner": "Office for Health Improvement and Disparities / DHSC",
+      "source": null,
+      "checked": "2026-08-21",
+      "reason": "No owner page located stating the campaign dates for the current year. Runs through October, but the owner's own statement of dates has not been read."
+    },
+    {
+      "id": "world-continence-week",
+      "name": "World Continence Week",
+      "owner": "International Continence Society",
+      "source": "https://www.ics.org/calendar/421",
+      "checked": "2026-08-21",
+      "reason": "The ICS's own calendar page for World Continence Week is stale: the only dates it states are '22-28th June' for 2015. Secondary sources report the third Monday of June and give 15-21 June 2026, but no owner page states the rule or the current dates. Needs the current ICS or WFIPP campaign URL."
+    },
+    {
+      "id": "world-obesity-day",
+      "name": "World Obesity Day",
+      "owner": "World Obesity Federation",
+      "source": "https://www.worldobesityday.org/about",
+      "checked": "2026-08-21",
+      "reason": "The owner's page states only a date that has already passed ('World Obesity Day 2026 takes place on 4 March') and does not state whether the date is fixed or how it is set. Publishing it would put a past date on a forward calendar, so it is held until the owner states the next one. Widely reported as 4 March annually."
+    }
+  ]
+}
