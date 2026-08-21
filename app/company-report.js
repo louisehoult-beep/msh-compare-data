@@ -65,6 +65,17 @@
      own right rather than a hole where a logo should be. */
   var LOGOS = BASE + 'data/company-logos.json' + CB;
 
+  /* Tenth fetch, added 21/08/2026. The Compare/Differentiator product feed —
+     the same gated, categorised product data the Compare Your Product tool
+     reads. This is what makes a TRUE product-level competitor list possible:
+     each row already carries a comparison-locked category (`cat`) and a
+     source URL on the supplier's own site, so two products can only be put
+     side by side where their `cat` is identical — never a speciality guess.
+     Optional like the four before it: if it does not load, the new
+     "Also selling in this category" block says so and the rest of the
+     report is unaffected. */
+  var DIFF = BASE + 'data/differentiator.json' + CB;
+
   /* This page's own URL, captured once at load. Every company cross-link is
      this URL plus ?company=<name> — see coHref() below. Captured rather than
      hardcoded so the tool keeps cross-linking correctly if the report is ever
@@ -694,6 +705,107 @@
     return out;
   }
 
+  var MAX_DIFF_COMPETITORS = 24;
+
+  /* Competitors, by product — added 21/08/2026, replacing "Same speciality,
+     no shared framework" (Lou's call, same day). That panel matched on a
+     speciality TAG; this matches on the Compare/Differentiator feed's own
+     gated, comparison-locked `cat` — the identical rule the Compare Your
+     Product tool uses to decide two products can be shown side by side.
+     Same source, same rule, no new claim invented for this page.
+
+     Unlike every other competitor panel on this report, THIS ONE LINKS OUT
+     TO THE COMPETITOR'S OWN WEBSITE, not to their Hub report — Lou's
+     explicit instruction (21/08/2026): "the company list and the product
+     name". The link target is the exact source URL the differentiator
+     record was read from (data/differentiator.json `sources[].url`), never
+     a guessed or constructed URL, per root rule 16 — a fact whose link
+     cannot be produced is not published, so a row with no source URL and
+     no domain is dropped rather than shown unlinked. */
+  function productCompetitorsBlock(s, ctx) {
+    var D = ctx.diff;
+    if (!D || !D.bySupplierKey) {
+      return gap('Not built for this view — the Compare/Differentiator product feed was unreachable.');
+    }
+    var mine = D.bySupplierKey[coKey(s.name)] || [];
+    if (!mine.length) {
+      (s.aliases || []).forEach(function (a) {
+        var k = coKey(a);
+        if (k && D.bySupplierKey[k]) mine = mine.concat(D.bySupplierKey[k]);
+      });
+    }
+    if (!mine.length) {
+      return gap('Not captured for this company yet — no product on the Compare/Differentiator feed carries a gated category for ' + esc(s.name) + '.');
+    }
+
+    var myCats = {}, catOrder = [];
+    mine.forEach(function (p) {
+      if (!myCats[p.cat]) { myCats[p.cat] = 1; catOrder.push(p.cat); }
+    });
+
+    var body = '', anyShown = 0;
+    catOrder.sort(cmpName).forEach(function (cat) {
+      var field = (D.byCat[cat] || []).filter(function (p) { return coKey(p.supplier) !== coKey(s.name); });
+      if (!field.length) return;
+
+      /* Group the competing field by company, so one competitor with three
+         products in this category is one row, not three. */
+      var byCo = {}, coOrder = [];
+      field.forEach(function (p) {
+        var k = coKey(p.supplier);
+        if (!byCo[k]) { byCo[k] = { supplier: p.supplier, domain: p.domain, products: [], url: '' }; coOrder.push(k); }
+        byCo[k].products.push(p.name);
+        if (!byCo[k].url) {
+          var src = (p.sources || [])[0];
+          byCo[k].url = (src && src.url) || (p.domain ? 'https://' + p.domain : '');
+        }
+      });
+      /* A row that can carry no link at all — no source URL and no domain
+         — is dropped, not shown as plain text: this panel's entire point is
+         the outbound link, so a name with nowhere to send a rep is not the
+         claim this panel makes. */
+      var rows = coOrder.map(function (k) { return byCo[k]; }).filter(function (c) { return !!c.url; });
+      if (!rows.length) return;
+      rows.sort(function (a, b) { return cmpName(a.supplier, b.supplier); });
+      anyShown++;
+
+      var myNames = mine.filter(function (p) { return p.cat === cat; }).map(function (p) { return p.name; });
+      var shown = rows.slice(0, MAX_DIFF_COMPETITORS);
+
+      body += '<div style="margin:0 0 12px;border:1px solid ' + LINE + ';border-radius:10px;padding:12px 14px;background:' + SOFT + ';page-break-inside:avoid;break-inside:avoid;">' +
+        '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + esc(catLabel(cat)) + '</div>' +
+        '<div style="font-size:12px;color:' + DIM + ';margin:4px 0 9px;line-height:1.6;">' + esc(s.name) + '&rsquo;s own product(s) here: ' + myNames.map(esc).join(', ') +
+        ' &middot; ' + rows.length + ' other supplier(s) with a product in this same category' +
+        (rows.length > shown.length ? (', showing the first ' + shown.length + ' alphabetically') : '') + '.</div>' +
+        shown.map(function (c) {
+          return '<div style="padding:6px 0;border-bottom:1px solid #f0ece3;font-size:13px;line-height:1.5;">' +
+            '<a href="' + esc(c.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:700;">' + esc(c.supplier) + ' &#8599;</a>' +
+            '<br><span style="color:' + DIM + ';font-size:12px;">' + c.products.slice(0, 6).map(esc).join(', ') +
+            (c.products.length > 6 ? ' &middot; +' + (c.products.length - 6) + ' more' : '') + '</span>' +
+            '</div>';
+        }).join('') +
+        '</div>';
+    });
+
+    if (!anyShown) {
+      return gap(esc(s.name) + '&rsquo;s own category/categories on the Compare feed carry no other supplier with a linkable product yet.');
+    }
+    return rule('Every company below has at least one product recorded in the <b>same comparison-locked category</b> as ' + esc(s.name) + ' on the Compare/Differentiator feed — the identical rule the Compare Your Product tool uses, never a speciality guess. Each name links to the exact page its product was read from, or the company&rsquo;s own site where no product-page URL was recorded. A category with no other linkable supplier is not shown.') + body;
+  }
+
+  /* differentiator.json's `cat` is a machine key ("continence:ic"), never
+     shown verbatim. The human label lives in
+     data/differentiator-category-map.json, a fetch this page does not make
+     (it would be an eleventh network call for one heading string) — so this
+     is a readable rendering of the key itself, not a looked-up label. Not a
+     fabricated name: every word in it comes from the key this row was
+     actually filed under. */
+  function catLabel(cat) {
+    return String(cat || '').split(':').map(function (part) {
+      return part.replace(/[-_]/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+    }).join(' – ');
+  }
+
   function deepRangeFor(s, prodFile) {
     var P = (prodFile && prodFile.suppliers) || null;
     if (!P) return null;
@@ -810,6 +922,17 @@
     if (s.products && s.products.length) {
       body += '<div style="font-size:12.5px;font-weight:700;color:' + INK + ';margin:12px 0 4px;">Headline products (curated)</div>' +
         s.products.map(function (p) { return chip(typeof p === 'string' ? p : (p && p.n) || '', ''); }).join('');
+    }
+
+    /* Competitors, by product — added 21/08/2026 (Lou's call), replacing
+       "Same speciality, no shared framework". Deliberately last inside this
+       section. Gated on `body` already being non-empty: a company with no
+       product presence recorded anywhere gets the single "No product or
+       brand indexed" refusal below, not that message plus a second, equally
+       empty "not captured" for competitors it cannot possibly have found. */
+    if (body) {
+      body += '<div style="font-size:12.5px;font-weight:700;color:' + INK + ';margin:16px 0 4px;">Also selling in this category</div>' +
+        productCompetitorsBlock(s, ctx);
     }
 
     if (!body) {
@@ -1555,7 +1678,7 @@
       if (resolved.length * 2 < everyone.length) {
         body += '<div style="margin:0 0 12px;border:1px dashed #ded6c4;border-radius:10px;padding:12px 14px;background:#faf8f3;page-break-inside:avoid;break-inside:avoid;">' +
           '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + fwLinked(grp.name, null, 'NHS Supply Chain') + '</div>' +
-          gap('Refused: of the ' + everyone.length + ' suppliers on this framework, only ' + resolved.length +
+          gap('Not shown: of the ' + everyone.length + ' suppliers on this framework, only ' + resolved.length +
             ' resolve to a confirmed Companies House record with an accounts filing. That is below half the field, and a size profile of under half a field misleads more than it informs. Unresolved: ' +
             unresolved.map(function (u) { return esc(u.name); }).join(', ') + '. Confirming identities is what fixes this; lowering the bar is not.') +
           '</div>';
@@ -2456,7 +2579,6 @@
       'The panels in this part are <b>computed by this page</b>, not read from a source. Each prints the rule it was computed under and refuses to render on thin evidence. None ranks anyone, and none prints a market-share figure — the filing profile shows which statutory regime each confirmed supplier files under, which is the sourceable part of “how big are they”. Read the rule before you quote any of it.');
     var co = coListing(sub, ctx);
     h += panelCoListed(sub, ctx, co);
-    h += panelSameSpeciality(sub, ctx, co);
     h += panelFieldProfile(sub, ctx, co);
     if (d && d.marketPosition && d.marketPosition.length) {
       h += sec('Market position', '<div style="font-size:13.5px;line-height:1.7;color:#37485a;">' +
@@ -2665,7 +2787,30 @@
       '</div>';
   }
 
-  function boot(index, seed, specMap, prodFile, fin, cache, fwDoc, awards, logoDoc) {
+  /* Differentiator/Compare feed, indexed two ways — added 21/08/2026.
+     byCat: category -> every published product in it, across every supplier.
+     bySupplierKey: coKey(supplier name) -> that supplier's own published
+     products. Both come from the same array, so a company's own products and
+     the competing products in the same category can never disagree about
+     what "in this category" means. Unpublished rows (data/differentiator.json
+     .held — no gated category, or no source) are not in `products` at all,
+     so nothing here needs to re-check the gate; it was already applied when
+     the file was written. */
+  function diffIndex(diffDoc) {
+    var byCat = {}, bySupplierKey = {};
+    ((diffDoc && diffDoc.products) || []).forEach(function (p) {
+      if (!p || !p.cat || !p.supplier) return;
+      if (!byCat[p.cat]) byCat[p.cat] = [];
+      byCat[p.cat].push(p);
+      var k = coKey(p.supplier);
+      if (!k) return;
+      if (!bySupplierKey[k]) bySupplierKey[k] = [];
+      bySupplierKey[k].push(p);
+    });
+    return { byCat: byCat, bySupplierKey: bySupplierKey };
+  }
+
+  function boot(index, seed, specMap, prodFile, fin, cache, fwDoc, awards, logoDoc, diffDoc) {
     /* Brand marks, by company name. Held at module scope rather than passed
        through ctx because logoImg() and brandOf() are called from the print
        pack as well as the on-page card, and threading a ninth argument through
@@ -2702,6 +2847,8 @@
       fwDoc: fwDoc || null,
       fwByKey: fwIndex(fwDoc),
       awards: awards || null,
+      diffDoc: diffDoc || null,
+      diff: diffIndex(diffDoc),
       /* The briefs print legal names ("B. Braun Medical Limited"); this Hub
          holds trading names ("B. Braun Medical"). Matching those by exact
          string made every confirmed company on a framework look unresolved,
@@ -2851,7 +2998,7 @@
   if (window.MSH_COMPANY_REPORT_DATA) {
     var P = window.MSH_COMPANY_REPORT_DATA;
     boot(P.index, P.seed, P.specMap, P.products, P.financials, P.nhssc, P.frameworks,
-         P.awards, P.logos);
+         P.awards, P.logos, P.differentiator);
     return;
   }
 
@@ -2870,8 +3017,9 @@
     fetch(NHSSC).then(function (r) { return r.json(); }).catch(function () { return null; }),
     fetch(FWDATA).then(function (r) { return r.json(); }).catch(function () { return null; }),
     fetch(AWARDS).then(function (r) { return r.json(); }).catch(function () { return null; }),
-    fetch(LOGOS).then(function (r) { return r.json(); }).catch(function () { return null; })
-  ]).then(function (res) { boot(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8]); })
+    fetch(LOGOS).then(function (r) { return r.json(); }).catch(function () { return null; }),
+    fetch(DIFF).then(function (r) { return r.json(); }).catch(function () { return null; })
+  ]).then(function (res) { boot(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9]); })
     .catch(function () {
       MOUNT.innerHTML = '<div class="mcr"><div class="mcr-card mcr-card--empty">' +
         '<div class="mcr-card-t">Company intelligence report</div>' +
