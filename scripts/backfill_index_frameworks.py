@@ -41,9 +41,23 @@ SEED = "data/supplier-seed.json"
 FW = "data/frameworks.json"
 
 CO_SUFFIX = re.compile(
-    r"\b(ltd|limited|plc|llp|inc|corp|corporation|co|company|group|holdings|international|"
-    r"uk|u k|gb|healthcare|health care|health|medical|medica|med|products|solutions|systems|"
-    r"technologies|technology|devices|device)\b")
+    r"\b(ltd|limited|plc|llp|inc|corp|corporation|co|company|holdings|international|"
+    r"uk|u k|gb)\b")
+# Fixed 21/08/2026 (OUTSTANDING ^o66): the old pattern also stripped industry
+# words — "medical", "medica", "health", "healthcare", "systems", "solutions",
+# "technologies", "devices", "group", "products". In this sector those words
+# ARE the distinguishing part of a name once "Ltd"/legal-form is removed, so
+# stripping them collapsed unrelated companies onto one key: "Advanced Medical
+# Solutions Ltd", "Advanced Medical Systems Ltd" and "Medica Advanced
+# Technologies Ltd" — three separate companies — all reduced to "advanced",
+# so every framework brief-matched to any one of them got attached to all
+# three. Confirmed by key-collision count: the old pattern collapsed 23
+# suppliers into 11 shared-key groups; this pattern collapses 8 suppliers
+# into 4, and the survivors are genuine trading-name cases (e.g. "Cardiac
+# Services" / "Cardiac Services UK Ltd") that need a human/Companies House
+# call, not an algorithmic one — see Data-Verification/framework-key-collision-fix-2026-08-21.md.
+# Only true legal-form suffixes are stripped now; matching is otherwise on
+# the full name, same discipline as scripts/company_match.py.
 
 
 def co_key(s):
