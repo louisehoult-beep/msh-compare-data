@@ -4004,16 +4004,14 @@ def main():
     optout = load("contacts-optout.json") or {}
     blocked = {n.strip().lower() for n in optout.get("names", []) if n.strip()}
 
-    # Retention is read from the code, so the gate checks what actually runs.
+    # RETENTION_MONTHS moved to msh-hub-private on 17/08/2026 along with the
+    # harvester itself (commit d5ba46e) — it lives at
+    # scripts/refresh_fts_contacts.py there, currently 24, matching the
+    # published privacy notice. This repo only ever sees synthetic contact
+    # data (see contacts-optout.json / the _synthetic marker in
+    # trust-contacts.json), so retention enforcement is meaningless here and
+    # is the private repo's own verify.py's job, not this one's.
     retention = None
-    try:
-        src = open("scripts/refresh_fts_contacts.py").read()
-        m = re.search(r"^RETENTION_MONTHS\s*=\s*(\d+)", src, re.M)
-        retention = int(m.group(1)) if m else None
-    except Exception:
-        pass
-    if retention is None:
-        WARN("contacts", "could not read RETENTION_MONTHS from the harvester.")
 
     trust_codes = check_trust_map(load("trust-map.json"))
     n = check_contacts(load("trust-contacts.json"), trust_codes, blocked, retention) or 0
