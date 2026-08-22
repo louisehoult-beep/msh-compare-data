@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-08-21",
+ "lastRun": "2026-08-22",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -49,7 +49,15 @@
   "Apos Medical UK Ltd",
   "Apple Star Corp Limited",
   "APR Medtech Limited",
-  "Aptvision Limited"
+  "Aptvision Limited",
+  "AQLANE Medical BV",
+  "Architectural Wallsz (International) Limited",
+  "Arcomedical Infusion Ltd",
+  "Arden Orthotics Ltd",
+  "Argon Medical Devices UK Ltd",
+  "Arrow County Supplies",
+  "Arthrex",
+  "Arthro Dynamik Ltd"
  ],
  "refusals": [
   {
@@ -86,6 +94,26 @@
    "name": "Alliance Healthcare",
    "reason": "alliance-healthcare.co.uk now 301-redirects to cencora.com/global-reach/europe/united-kingdom, where Alliance Healthcare is described as Cencora's 'legacy brand'. Cencora is the parent, so it must not be recorded as an alias, and no Cencora page names the UK legal entity (its /legal, /terms-of-use and /privacy-policy paths all 404). Companies House holds two distinct active candidates: ALLIANCE HEALTHCARE (DISTRIBUTION) LIMITED (03446039, Cox Lane, Chessington) and ALLIANCE HEALTHCARE LIMITED (04033239, Chippenham, previously ALLIANCE PHARMA LIMITED), the second of which is a different company altogether. With no company-owned source to pick between them, no alias was recorded.",
    "date": "2026-08-20"
+  },
+  {
+   "name": "Aquilant Critical Care",
+   "reason": "Aquilant's own domains are dead: aquilant.co.uk and aquilant.com do not resolve, and aquilantendoscopy.com now 301-redirects to healthcare21.eu (checked 22/08/2026). Companies House holds no company of this name; the only active entity is AQUILANT LIMITED (02090807, Basingstoke), which is the legal entity behind BOTH this record and \"Aquilant Ltd Bd Bas Critical\" — recording \"Aquilant Limited\" here would hand this record every lookup meant for the other. Healthcare 21 Group and Uniphar are parents, barred. Single token \"Aquilant\" is a shortening and is carried by two seed records. Needs Lou's call on whether the two Aquilant records should be merged.",
+   "date": "2026-08-22"
+  },
+  {
+   "name": "Aquilant Ltd Bd Bas Critical",
+   "reason": "The display name is an NHS Supply Chain internal supplier string, not a real-world name form. Same position as \"Aquilant Critical Care\": no live company website (aquilant.co.uk / aquilant.com dead 22/08/2026), and the only active register entry is AQUILANT LIMITED (02090807), the shared legal entity of both records, so \"Aquilant Ltd\"/\"Aquilant Limited\" cannot be given to one without stealing the other's lookups. Parents (Healthcare 21 Group, Uniphar) barred. Needs Lou's call on merging the two Aquilant records.",
+   "date": "2026-08-22"
+  },
+  {
+   "name": "Artivion UK Ltd",
+   "reason": "Companies House 03837138 ARTIVION UK LTD (active) carries the previous name CRYOLIFE EUROPA LTD. — so this record and \"Artivion UK Ltd (CryoLife Europa, Ltd)\" are the SAME legal entity held twice in the seed. Every real name form (\"Artivion UK Limited\", \"CryoLife Europa Ltd\") therefore belongs to both records equally, and giving it to one hands it every lookup meant for the other. Single token \"Artivion\" is carried by two seed records and is barred anyway as a shortening. Speciality \"Cardiology\" WAS added from artivion.com. The duplicate needs Lou's merge decision.",
+   "date": "2026-08-22"
+  },
+  {
+   "name": "Artivion UK Ltd (CryoLife Europa, Ltd)",
+   "reason": "Same entity as the \"Artivion UK Ltd\" record — Companies House 03837138, previous name CRYOLIFE EUROPA LTD. No name form can be given to this record without stealing it from the other, and \"Artivion UK Ltd\" is the other record's own name, which verify.py hard-fails. Speciality \"Cardiology\" WAS added from artivion.com. Needs Lou's merge decision.",
+   "date": "2026-08-22"
   }
  ],
  "sources": {
@@ -192,6 +220,92 @@
     "Theatres / surgical"
    ],
    "specialitiesSource": "Own site accringtonsurgical.co.uk: surgical instruments, packs and trays, procedure packs."
+  },
+  "AQLANE Medical BV": {
+   "aliases": [
+    "AQLANE Medical",
+    "AQLANE Medical B.V.",
+    "aqlanemedical.com"
+   ],
+   "verifiedOn": "2026-08-22",
+   "sources": "Own site aqlanemedical.com — masthead \"AQLANE Medical™\", footer \"©Aqlane medical™\"; its own /disclaimer/ page gives the legal entity \"AQLANE Medical B.V.\", Sprendlingenstraat 50, 5061 KN Oisterwijk, Netherlands. Domain aqlanemedical.com is the company's own site. Product name Urolon NOT added as an alias (a product, not a name form)."
+  },
+  "Architectural Wallsz (International) Limited": {
+   "aliases": [
+    "Architectural Wallsz",
+    "Architectural Wallsz International Ltd",
+    "Architectural Wallsz Ltd",
+    "Architectural Wallsz (North West) Limited",
+    "awallsz.co.uk"
+   ],
+   "verifiedOn": "2026-08-22",
+   "sources": "Own site awallsz.co.uk — page title \"Architectural Wallsz Healthcare & Education Environments\", footer address line \"Architectural Wallsz International Ltd. Unit 2 Buntsford Business Centre, Buntsford Drive, Bromsgrove, Worcestershire. B60 3FR\" and copyright line \"© 2026 Architectural Wallsz Ltd\". Companies House 08943815 ARCHITECTURAL WALLSZ (INTERNATIONAL) LIMITED (active), previous name ARCHITECTURAL WALLSZ (NORTH WEST) LIMITED. The separate ARCHITECTURAL WALLSZ LIMITED (08819884) and (NORTHERN) companies are all dissolved and are not seed records."
+  },
+  "Arcomedical Infusion Ltd": {
+   "aliases": [
+    "Arcomedical Infusion Limited"
+   ],
+   "verifiedOn": "2026-08-22",
+   "sources": "Companies House 02723545 registered name ARCOMEDICAL INFUSION LIMITED (active), Unit B Beacon Business Park, Weston Road, Stafford ST18 0WL. No company website found: arcomedical.co.uk does not resolve and arcomedical.com is an unrelated German patient-services firm (checked 22/08/2026), so nothing from that site was used. Swiss principal Arcomed AG NOT added — supplier/parent name, barred. Single token \"Arcomedical\" NOT added — a shortening, not the whole canonical name."
+  },
+  "Arden Orthotics Ltd": {
+   "aliases": [
+    "Arden Orthotics",
+    "Arden Orthotics Limited",
+    "ardenorthotics.co.uk"
+   ],
+   "verifiedOn": "2026-08-22",
+   "sources": "Own site ardenorthotics.co.uk — footer \"© Copyright Arden Orthotics 2026\", masthead \"Orthopaedic footwear & bespoke shoes\", contact info@ardenorthotics.co.uk. Companies House 03365493 registered name ARDEN ORTHOTICS LIMITED (active), Sparkhill, Birmingham."
+  },
+  "Argon Medical Devices UK Ltd": {
+   "aliases": [
+    "Argon Medical Devices",
+    "Argon Medical",
+    "argonmedical.com"
+   ],
+   "verifiedOn": "2026-08-22",
+   "sources": "Own site argonmedical.com — masthead/title \"Argon Medical Devices | Interventional Medical Devices | Argon Medical\", About page and news items throughout use \"Argon Medical\" and \"Argon Medical Devices\". Companies House 03543457 ARGON MEDICAL DEVICES UK LTD (active), Castle Donington; previous name MANA-TECH LIMITED (to 05/03/2020) NOT added — no press currency. Both added forms are two tokens or more. The seed holds no separate Argon parent record, so no parent/subsidiary double-count arises."
+  },
+  "Arrow County Supplies": {
+   "aliases": [
+    "Arrow County Supplies Limited"
+   ],
+   "verifiedOn": "2026-08-22",
+   "sources": "Companies House 06355141 registered name ARROW COUNTY SUPPLIES LIMITED (active). The company's own site arrowcounty.com served a bot-challenge page on 22/08/2026 and was not read, so nothing was taken from it — no \"Arrow County\" short form and no domain alias recorded."
+  },
+  "Arthrex": {
+   "aliases": [
+    "Arthrex UK",
+    "Arthrex Ltd",
+    "Arthrex Limited",
+    "arthrex.co.uk"
+   ],
+   "verifiedOn": "2026-08-22",
+   "sources": "Own site arthrex.co.uk — title \"Your Specialist for Medical Technology | Arthrex UK\", body \"Welcome to Arthrex UK\", contact block \"Arthrex Ltd, Medical Education Centre, Innovation Point, Solihull B90 8AG\" and \"Unit 1 Bessemer Park, Shepcote Lane, Sheffield S9 1DZ\". Companies House 03199094 ARTHREX LIMITED (active), Bessemer Park Sheffield — the same number already on this record. Site copyright holder \"Arthrex GmbH\" NOT added — parent, barred."
+  },
+  "Arthro Dynamik Ltd": {
+   "aliases": [
+    "Arthro Dynamik",
+    "arthrodynamik.com"
+   ],
+   "verifiedOn": "2026-08-22",
+   "sources": "Own site arthrodynamik.com — masthead \"We are Arthro Dynamik\", About text \"Arthro Dynamik Ltd was founded in 2009 in Yorkshire, United Kingdom\", footer \"© 2026 Arthro Dynamik Ltd\". Companies House 08479540 ARTHRO DYNAMIK LTD (active), Wetherby. \"Arthro Dynamik Limited\" NOT added — the register holds LTD, not LIMITED, and no source shows that spelling."
+  },
+  "Artivion UK Ltd": {
+   "aliases": [],
+   "specialities": [
+    "Cardiology"
+   ],
+   "verifiedOn": "2026-08-22",
+   "sources": "Speciality only. Own site artivion.com states the clinical scope plainly: \"cardiac and vascular surgeons' most difficult challenges in treating patients with diseases of the aorta\". No alias added — see refusal."
+  },
+  "Artivion UK Ltd (CryoLife Europa, Ltd)": {
+   "aliases": [],
+   "specialities": [
+    "Cardiology"
+   ],
+   "verifiedOn": "2026-08-22",
+   "sources": "Speciality only. Own site artivion.com states the clinical scope plainly: \"cardiac and vascular surgeons' most difficult challenges in treating patients with diseases of the aorta\". No alias added — see refusal."
   }
  }
 }
