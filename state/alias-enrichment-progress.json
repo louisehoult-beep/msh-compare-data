@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-08-22",
+ "lastRun": "2026-08-23",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -57,7 +57,19 @@
   "Argon Medical Devices UK Ltd",
   "Arrow County Supplies",
   "Arthrex",
-  "Arthro Dynamik Ltd"
+  "Arthro Dynamik Ltd",
+  "Aspire Pharma",
+  "Associated Optical Products",
+  "Assut UK LTD",
+  "Astric Medical Ltd",
+  "Athrodax Healthcare International Ltd",
+  "Atom Medical Corporation UK ltd",
+  "Atos Medical (UK)",
+  "Attends Ltd",
+  "Audit Data",
+  "Avidity Science Limited",
+  "B.N.O.S Meditech Ltd",
+  "Babease Limited"
  ],
  "refusals": [
   {
@@ -114,6 +126,11 @@
    "name": "Artivion UK Ltd (CryoLife Europa, Ltd)",
    "reason": "Same entity as the \"Artivion UK Ltd\" record — Companies House 03837138, previous name CRYOLIFE EUROPA LTD. No name form can be given to this record without stealing it from the other, and \"Artivion UK Ltd\" is the other record's own name, which verify.py hard-fails. Speciality \"Cardiology\" WAS added from artivion.com. Needs Lou's merge decision.",
    "date": "2026-08-22"
+  },
+  {
+   "name": "Babease Limited",
+   "reason": "Companies House holds BABEASE LIMITED 07473497, DISSOLVED on 01/11/2023, and a separate BABEASE FOODS LIMITED 12320133, in liquidation; neither is a live trading entity and there is no evidence in either record showing which one NHS Supply Chain named on the Infant Feeding and Accessories brief. babease.co.uk returns HTTP 500 and babease.com does not respond, so there is no company site to read a name form from. Recording \"Babease Foods Limited\" would be recording a different legal entity's name on an unverified assumption. No verifiable extra name form. NOTE FOR REVIEW: the brand ceased trading, so this record may be a dead supplier sitting on a live framework panel.",
+   "date": "2026-08-23"
   }
  ],
  "sources": {
@@ -306,6 +323,99 @@
    ],
    "verifiedOn": "2026-08-22",
    "sources": "Speciality only. Own site artivion.com states the clinical scope plainly: \"cardiac and vascular surgeons' most difficult challenges in treating patients with diseases of the aorta\". No alias added — see refusal."
+  },
+  "Aspire Pharma": {
+   "aliases": [
+    "Aspire Pharma Limited"
+   ],
+   "verifiedOn": "2026-08-23",
+   "sources": "Own site aspirepharma.com (aspirepharma.co.uk redirects there) masthead and About page trade as \"Aspire Pharma\"; \"Aspire Pharma was established in 2009\". Companies House 06828501 ASPIRE PHARMA LIMITED (active), Godalming, Surrey. \"Aspire\" alone NOT added: a common word and a shortening, barred by rule 2.",
+   "specialities": [
+    "Cardiology",
+    "Dermatology / skin",
+    "Ophthalmology",
+    "Respiratory",
+    "Continence & urology"
+   ],
+   "specialitiesSource": "Own site aspirepharma.com/product-innovation/portfolio/ lists its therapy areas: Anti-Infectives, Cardiology, Central Nervous System, Dermatology, Gynaecology, Metabolism & Endocrinology, Oncology, Ophthalmology, Respiratory, Urology. Only the five with a clean equivalent in the seed's existing vocabulary are recorded; Anti-Infectives, CNS, Gynaecology, Metabolism & Endocrinology and Oncology have no clean equivalent and no new string was invented."
+  },
+  "Associated Optical Products": {
+   "aliases": [
+    "Associated Optical"
+   ],
+   "verifiedOn": "2026-08-23",
+   "sources": "Own site associatedoptical.co.uk About page trades throughout as \"Associated Optical\" (\"Associated Optical is a UK-based optical distribution and brand partner\"); footer legal line \"(c) 2025, Associated Optical Products\". Companies House holds no company registered as \"Associated Optical\" (quoted search returned no results), so no registered-name form was added."
+  },
+  "Assut UK LTD": {
+   "aliases": [
+    "Assut UK Limited"
+   ],
+   "verifiedOn": "2026-08-23",
+   "sources": "Companies House 05338676 ASSUT UK LIMITED (active), Shelley, Huddersfield - the only Assut UK company on the register. No own website found for the UK entity. \"Assut Europe\" NOT added: assuteurope.com is the Italian company Assut Europe (Magliano dei Marsi, founded 1991), a separate name that must not be recorded here."
+  },
+  "Astric Medical Ltd": {
+   "aliases": [
+    "Astric Medical Limited",
+    "Astric Medical"
+   ],
+   "verifiedOn": "2026-08-23",
+   "sources": "Own site astricmedical.com masthead \"ASTRIC MEDICAL\", page title \"Astric Medical Home\", footer \"Copyright (c) 2016 Astric Medical LTD.\". Companies House 07184648 ASTRIC MEDICAL LIMITED (active), Worthing."
+  },
+  "Athrodax Healthcare International Ltd": {
+   "aliases": [
+    "Athrodax Healthcare International Limited",
+    "Athrodax Healthcare"
+   ],
+   "verifiedOn": "2026-08-23",
+   "sources": "Own site athrodax.co.uk page title \"Athrodax Healthcare - Where experience makes a difference\", About menu \"About Athrodax\". Companies House 01501798 ATHRODAX HEALTHCARE INTERNATIONAL LIMITED (active), Hawthorn Business Park, Drybrook, Gloucestershire - the address the site gives. Previous name ATHRODAX SURGICAL LIMITED (to 1991) NOT added: not in use on the company's own site."
+  },
+  "Atom Medical Corporation UK ltd": {
+   "aliases": [
+    "Atom Medical Corporation UK Limited",
+    "Atom Medical Corporation UK"
+   ],
+   "verifiedOn": "2026-08-23",
+   "sources": "Companies House 12413115 ATOM MEDICAL CORPORATION UK LIMITED (active), Hednesford, Cannock. atommedical.co.uk serves only a parked lander, so no own-site form could be read. \"Atom Medical\" NOT added: that is the Japanese parent Atom Medical Corporation's own brand, and a parent's name must never be recorded as a subsidiary's alias."
+  },
+  "Atos Medical (UK)": {
+   "aliases": [
+    "Atos Medical UK Limited",
+    "Atos Medical UK"
+   ],
+   "verifiedOn": "2026-08-23",
+   "sources": "Companies House 04206141 ATOS MEDICAL UK LIMITED (active), Cartwright House, Riverside Business Park, Nottingham. Own site atosmedical.co.uk. \"Atos Medical\" alone NOT added: it is the group brand and the site states the business is \"part of the Coloplast Group\", so it is a parent-level name. \"Atos\" alone is barred by rule 2 and collides with the unrelated IT company Atos Limited (03290446)."
+  },
+  "Attends Ltd": {
+   "aliases": [
+    "Attends Limited",
+    "Attends UK LTD"
+   ],
+   "verifiedOn": "2026-08-23",
+   "sources": "Companies House 03718732 ATTENDS LIMITED (active), 10 Mariner Court, Durkar, Wakefield. \"Attends UK LTD\" is the wording of NHS Supply Chain's own contract launch brief for Textiles and Associated Products, already recorded in this record's frameworks array. Own site attends.co.uk, footer \"(c) 2026 Attends\". \"Attends\" alone NOT added: an ordinary English verb. \"Attends Healthcare Limited\" (06302122, same registered address) NOT added: a separate legal entity."
+  },
+  "Audit Data": {
+   "aliases": [
+    "Auditdata",
+    "Auditdata Limited"
+   ],
+   "verifiedOn": "2026-08-23",
+   "sources": "Own site auditdata.com - footer \"(c)Auditdata 2026. All rights reserved.\", products \"Auditdata Manage\" and \"Auditdata Academy\", UK number +44 (0) 333 444 4212. Companies House 05895080 AUDITDATA LIMITED (active), Staines-upon-Thames. The single token \"Auditdata\" is the domain the supplier owns and is unique across the seed, so it satisfies rule 2."
+  },
+  "Avidity Science Limited": {
+   "aliases": [
+    "Avidity Science"
+   ],
+   "verifiedOn": "2026-08-23",
+   "sources": "Own site avidityscience.com UK store, title \"Avidity Science - EMEA | Laboratory Equipment & Supplies\". Companies House 03482000 AVIDITY SCIENCE LIMITED (active), Drakes Drive, Long Crendon, Aylesbury. Previous name TRIPLE RED LIMITED (to 2018) NOT added: not in use on the company's own site."
+  },
+  "B.N.O.S Meditech Ltd": {
+   "aliases": [
+    "B.N.O.S. Meditech Limited",
+    "BNOS Meditech Ltd",
+    "BNOS Meditech"
+   ],
+   "verifiedOn": "2026-08-23",
+   "sources": "Own site meditech.uk.com page title \"B.N.O.S. Meditech Ltd | Medical Gas Equipment Manufacturer\", masthead \"BNOS MEDITECH LTD\". Companies House 02368331 B.N.O.S. MEDITECH LIMITED (active), Unit 9 Fifth Avenue, Bluebridge Industrial Estate, Halstead, Essex - the address on the site. \"Meditech\" alone NOT added: it collides with the large US EHR company MEDITECH."
   }
  }
 }
