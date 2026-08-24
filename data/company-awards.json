@@ -22,16 +22,10 @@
  "matchRule": "A supplier named on an award notice is attached to a Hub company only where the notice's name, normalised, is EXACTLY a normalised form of that company's own name or one of its recorded aliases. Normalisation lower-cases, turns & into and, drops punctuation, and strips trailing legal-form words (Ltd, Limited, plc, LLP, Inc, GmbH, BV, A/S, AB, Oy, Pty) and trailing territory words (UK, GB, England, Ireland, Europe, EMEA). Nothing else is stripped and there is no fuzzy, substring or edit-distance matching. A name matching two different companies, or none, is quarantined unpublished — it is a question for a human, never a best guess.",
  "coverage": {
   "complete": true,
-  "window": {
-   "from": "2026-08-16",
-   "to": "2026-08-24",
-   "days": 8,
-   "run": "2026-08-24"
-  },
+  "window": null,
   "note": "Awards indexed from the two statutory feeds over the windows listed. An absence here is a statement about this index, never about the company.",
   "notes": [
-   "Find a Tender: 5 supplier row(s) from 217 release(s) over 3 page(s)",
-   "Contracts Finder: 13 supplier row(s) from 800 release(s) over 8 page(s), back to 2026-08-16"
+   "re-matched from stored rows, no fetch"
   ]
  },
  "counts": {
