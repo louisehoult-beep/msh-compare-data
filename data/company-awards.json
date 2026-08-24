@@ -10,8 +10,8 @@
   "ref": "ETH-D8F9201A9",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "21/08/2026",
- "generated": "2026-08-21",
+ "dataAsOf": "24/08/2026",
+ "generated": "2026-08-24",
  "source": "Find a Tender and Contracts Finder award-stage OCDS notices, Open Government Licence v3",
  "sourceUrls": {
   "Find a Tender": "https://www.find-tender.service.gov.uk/",
@@ -22,18 +22,24 @@
  "matchRule": "A supplier named on an award notice is attached to a Hub company only where the notice's name, normalised, is EXACTLY a normalised form of that company's own name or one of its recorded aliases. Normalisation lower-cases, turns & into and, drops punctuation, and strips trailing legal-form words (Ltd, Limited, plc, LLP, Inc, GmbH, BV, A/S, AB, Oy, Pty) and trailing territory words (UK, GB, England, Ireland, Europe, EMEA). Nothing else is stripped and there is no fuzzy, substring or edit-distance matching. A name matching two different companies, or none, is quarantined unpublished — it is a question for a human, never a best guess.",
  "coverage": {
   "complete": true,
-  "window": null,
+  "window": {
+   "from": "2026-08-16",
+   "to": "2026-08-24",
+   "days": 8,
+   "run": "2026-08-24"
+  },
   "note": "Awards indexed from the two statutory feeds over the windows listed. An absence here is a statement about this index, never about the company.",
   "notes": [
-   "re-matched from stored rows, no fetch"
+   "Find a Tender: 5 supplier row(s) from 217 release(s) over 3 page(s)",
+   "Contracts Finder: 13 supplier row(s) from 800 release(s) over 8 page(s), back to 2026-08-16"
   ]
  },
  "counts": {
-  "companies": 34,
-  "awardRows": 38,
-  "unmatched": 36,
+  "companies": 35,
+  "awardRows": 39,
+  "unmatched": 38,
   "ambiguous": 0,
-  "rowsHeld": 74
+  "rowsHeld": 77
  },
  "companies": {
   "Agilent Technologies UK": [
@@ -787,6 +793,26 @@
     "company": "Optimum Medical",
     "matchedOn": "the notice names \"Optimum Medical Solutions Limited\", which normalises to \"optimum medical solutions\" — exactly the normalised form of this company's own name or a recorded alias."
    }
+  ],
+  "Wolf Laboratories": [
+   {
+    "noticeSupplierName": "WOLF LABORATORIES LIMITED",
+    "title": "9 x MSC Class II's",
+    "buyer": "UK Health Security Agency",
+    "date": "2026-08-20",
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/a3c5ee22-a6bb-430f-a677-1be184c037f4",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Contracts Finder",
+    "section": "contract-awards",
+    "cpv": "33192350",
+    "valueAmount": 109374.56,
+    "valueCurrency": "GBP",
+    "periodStart": "2026-08-20T00:00:00+01:00",
+    "periodEnd": "2027-03-31T23:59:59+01:00",
+    "ocid": "ocds-b5fd17-5bb7e54c-be26-4843-8544-444cac48782d",
+    "company": "Wolf Laboratories",
+    "matchedOn": "the notice names \"WOLF LABORATORIES LIMITED\", which normalises to \"wolf laboratories\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
   ]
  },
  "unmatched": [
@@ -1063,6 +1089,23 @@
    "reason": "no Hub company's name or recorded alias normalises to \"spamedica\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
   },
   {
+   "noticeSupplierName": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "title": "WSFT - EBME - Flexible Endoscopes",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "date": "2026-08-07",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/45e56b3c-64b3-4741-bb5e-bef0ee34715b",
+   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+   "source": "Contracts Finder",
+   "section": "contract-awards",
+   "cpv": "33168100",
+   "valueAmount": 17460,
+   "valueCurrency": "GBP",
+   "periodStart": "2026-10-01T00:00:00+01:00",
+   "periodEnd": "2027-09-30T23:59:59+01:00",
+   "ocid": "ocds-b5fd17-f72fc8b6-142e-4f13-9ff5-258e8bd0af86",
+   "reason": "no Hub company's name or recorded alias normalises to \"nhs supply chain coordination limited nhssc sccl\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
    "noticeSupplierName": "Johnson And Johnson Medical Ltd",
    "title": "Consumable products used in Minimally Invasive Surgery",
    "buyer": "Nottingham University Hospital NHS Trust",
@@ -1299,6 +1342,23 @@
    "periodEnd": "2026-12-31T23:59:59Z",
    "ocid": "ocds-b5fd17-306c3275-3205-47a0-af0a-92a1f8503e43",
    "reason": "no Hub company's name or recorded alias normalises to \"senator international\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "noticeSupplierName": "Kiely Bros Ltd",
+   "title": "CPU 8566 -  Middleton Boulevard Surface Dressing Works",
+   "buyer": "Nottingham City Council",
+   "date": "2026-07-10",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/711ea6f4-45a7-40ec-85c3-37861d345a81",
+   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+   "source": "Contracts Finder",
+   "section": "contract-awards",
+   "cpv": "45000000",
+   "valueAmount": 373363.34,
+   "valueCurrency": "GBP",
+   "periodStart": "2026-07-13T00:00:00+01:00",
+   "periodEnd": "2027-01-13T23:59:59Z",
+   "ocid": "ocds-b5fd17-e1b63dee-fb33-4779-80d2-2906b2148941",
+   "reason": "no Hub company's name or recorded alias normalises to \"kiely bros\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
   },
   {
    "noticeSupplierName": "Wemh Group LTD",
@@ -1548,6 +1608,22 @@
    "periodStart": "2026-07-17T00:00:00+01:00",
    "periodEnd": "2026-10-17T23:59:59+01:00",
    "ocid": "ocds-b5fd17-a20026ce-be61-49ed-9355-abbb2a0d0e22"
+  },
+  {
+   "noticeSupplierName": "Kiely Bros Ltd",
+   "title": "CPU 8566 -  Middleton Boulevard Surface Dressing Works",
+   "buyer": "Nottingham City Council",
+   "date": "2026-07-10",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/711ea6f4-45a7-40ec-85c3-37861d345a81",
+   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+   "source": "Contracts Finder",
+   "section": "contract-awards",
+   "cpv": "45000000",
+   "valueAmount": 373363.34,
+   "valueCurrency": "GBP",
+   "periodStart": "2026-07-13T00:00:00+01:00",
+   "periodEnd": "2027-01-13T23:59:59Z",
+   "ocid": "ocds-b5fd17-e1b63dee-fb33-4779-80d2-2906b2148941"
   },
   {
    "noticeSupplierName": "SENATOR INTERNATIONAL LIMITED",
@@ -2044,6 +2120,22 @@
    "periodStart": "2026-08-07T00:00:00+01:00",
    "periodEnd": "2027-08-07T23:59:59+01:00",
    "ocid": "ocds-b5fd17-2057233e-12b2-44df-b6f6-e5dcab8b8377"
+  },
+  {
+   "noticeSupplierName": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "title": "WSFT - EBME - Flexible Endoscopes",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "date": "2026-08-07",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/45e56b3c-64b3-4741-bb5e-bef0ee34715b",
+   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+   "source": "Contracts Finder",
+   "section": "contract-awards",
+   "cpv": "33168100",
+   "valueAmount": 17460,
+   "valueCurrency": "GBP",
+   "periodStart": "2026-10-01T00:00:00+01:00",
+   "periodEnd": "2027-09-30T23:59:59+01:00",
+   "ocid": "ocds-b5fd17-f72fc8b6-142e-4f13-9ff5-258e8bd0af86"
   },
   {
    "noticeSupplierName": "PRO-LAB DIAGNOSTICS LIMITED",
@@ -2574,6 +2666,22 @@
    "ocid": "ocds-b5fd17-3c6275b8-654b-4f59-9ed4-fa98517719fe"
   },
   {
+   "noticeSupplierName": "WOLF LABORATORIES LIMITED",
+   "title": "9 x MSC Class II's",
+   "buyer": "UK Health Security Agency",
+   "date": "2026-08-20",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/a3c5ee22-a6bb-430f-a677-1be184c037f4",
+   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+   "source": "Contracts Finder",
+   "section": "contract-awards",
+   "cpv": "33192350",
+   "valueAmount": 109374.56,
+   "valueCurrency": "GBP",
+   "periodStart": "2026-08-20T00:00:00+01:00",
+   "periodEnd": "2027-03-31T23:59:59+01:00",
+   "ocid": "ocds-b5fd17-5bb7e54c-be26-4843-8544-444cac48782d"
+  },
+  {
    "noticeSupplierName": "AMERCARE LIMITED",
    "title": "BCU-DCO-63450 Purchase of Positive Pressure Laminar Flow Isolators for Pharmacy, Ysbyty Gwynedd",
    "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
@@ -2620,6 +2728,12 @@
    "to": "2026-08-20",
    "days": 8,
    "run": "2026-08-20"
+  },
+  {
+   "from": "2026-08-16",
+   "to": "2026-08-24",
+   "days": 8,
+   "run": "2026-08-24"
   }
  ]
 }
