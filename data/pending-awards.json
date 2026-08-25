@@ -17,7 +17,7 @@
  "matchRule": "A supplier named on an award notice is attached to a Hub company only where the notice's name, normalised, is EXACTLY a normalised form of that company's own name or one of its recorded aliases. Normalisation lower-cases, turns & into and, drops punctuation, and strips trailing legal-form words (Ltd, Limited, plc, LLP, Inc, GmbH, BV, A/S, AB, Oy, Pty) and trailing territory words (UK, GB, England, Ireland, Europe, EMEA). Nothing else is stripped and there is no fuzzy, substring or edit-distance matching. A name matching two different companies, or none, is quarantined unpublished — it is a question for a human, never a best guess.",
  "discovery": {
   "ok": true,
-  "note": "search discovery walked 11 page(s)/1018 release(s) over 30 days, found 0 framework-agreement award(s) from this buyer",
+  "note": "search discovery walked 3 page(s)/273 release(s) over 10 days, found 0 framework-agreement award(s) from this buyer",
   "knownOcids": [
    "ocds-h6vhtk-054eab"
   ],
@@ -26,7 +26,7 @@
  "counts": {
   "pending": 1,
   "superseded": 0,
-  "companies": 15
+  "companies": 21
  },
  "awards": [
   {
@@ -64,6 +64,7 @@
     "Vygon (UK) Ltd"
    ],
    "companies": [
+    "Airglove Medical Ltd",
     "B. Braun Medical",
     "Balmung Medical Handel GmbH",
     "Crest Medical Ltd",
@@ -72,15 +73,21 @@
     "GBUK Group",
     "Greiner Bio-One Ltd",
     "ICU Medical (incl. Smiths Medical)",
+    "ITL Australia Pty Ltd",
     "Infutech Ltd",
+    "Javelo Health Limited",
     "Mediq Healthcare UK Ltd",
     "Nipro Medical Europe",
     "OscarTech UK",
     "Prosum Medical Ltd",
+    "Reflex Medical Limited",
+    "SOL-MILLENNIUM UK",
     "Terumo UK",
+    "Unomedical Ltd",
     "Vygon (UK)"
    ],
    "matchedAs": {
+    "Airglove Medical Ltd": "Airglove Medical Ltd",
     "B. Braun Medical": "B. Braun Medical Limited",
     "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
     "Crest Medical Ltd": "Crest Medical Ltd",
@@ -89,45 +96,110 @@
     "GBUK Group": "GBUK Ltd",
     "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
     "Infutech Ltd": "Infutech Ltd",
+    "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+    "Javelo Health Limited": "Javelo Health Limited",
     "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
     "Nipro Medical Europe": "Nipro Medical UK Ltd",
     "OscarTech UK": "OscarTech UK Ltd",
     "Prosum Medical Ltd": "Prosum Medical Ltd",
+    "Reflex Medical Limited": "Reflex Medical Limited",
     "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+    "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
     "Terumo UK": "Terumo UK Ltd",
+    "Unomedical Ltd": "Unomedical Ltd",
     "Vygon (UK)": "Vygon (UK) Ltd"
    },
-   "unmatchedSuppliers": [
-    {
-     "name": "Airglove Medical Ltd",
-     "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-    },
-    {
-     "name": "ITL Australia Pty Ltd",
-     "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-    },
-    {
-     "name": "Javelo Health Limited",
-     "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-    },
-    {
-     "name": "Reflex Medical Limited",
-     "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-    },
-    {
-     "name": "SOL-MILLENNIUM UK",
-     "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-    },
-    {
-     "name": "Unomedical Ltd",
-     "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-    }
-   ],
+   "unmatchedSuppliers": [],
    "ambiguousSuppliers": []
   }
  ],
  "superseded": [],
  "companies": {
+  "Airglove Medical Ltd": [
+   {
+    "title": "Intravenous Cannula and Associated Products",
+    "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+    "reference": "078334-2026",
+    "url": "https://www.find-tender.service.gov.uk/Notice/078334-2026",
+    "ocid": "ocds-h6vhtk-054eab",
+    "publishedDate": "2026-08-18",
+    "awardDate": "2026-07-06",
+    "contractStart": "2027-04-01",
+    "contractEnd": "2029-03-31",
+    "contractExtendedEnd": "2031-03-31",
+    "noticeSuppliers": [
+     "Airglove Medical Ltd",
+     "B. Braun Medical Limited",
+     "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd",
+     "Critical Healthcare Ltd",
+     "Fannin UK Limited",
+     "GBUK Ltd",
+     "Greiner Bio-One Ltd",
+     "Infutech Ltd",
+     "ITL Australia Pty Ltd",
+     "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd",
+     "Nipro Medical UK Ltd",
+     "OscarTech UK Ltd",
+     "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK",
+     "Terumo UK Ltd",
+     "Unomedical Ltd",
+     "Vygon (UK) Ltd"
+    ],
+    "companies": [
+     "Airglove Medical Ltd",
+     "B. Braun Medical",
+     "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd",
+     "Critical Healthcare",
+     "Fannin (UK) Limited",
+     "GBUK Group",
+     "Greiner Bio-One Ltd",
+     "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
+     "Infutech Ltd",
+     "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd",
+     "Nipro Medical Europe",
+     "OscarTech UK",
+     "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
+     "Terumo UK",
+     "Unomedical Ltd",
+     "Vygon (UK)"
+    ],
+    "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
+     "B. Braun Medical": "B. Braun Medical Limited",
+     "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd": "Crest Medical Ltd",
+     "Critical Healthcare": "Critical Healthcare Ltd",
+     "Fannin (UK) Limited": "Fannin UK Limited",
+     "GBUK Group": "GBUK Ltd",
+     "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
+     "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
+     "Nipro Medical Europe": "Nipro Medical UK Ltd",
+     "OscarTech UK": "OscarTech UK Ltd",
+     "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
+     "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
+     "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
+     "Vygon (UK)": "Vygon (UK) Ltd"
+    },
+    "unmatchedSuppliers": [],
+    "ambiguousSuppliers": []
+   }
+  ],
   "B. Braun Medical": [
    {
     "title": "Intravenous Cannula and Associated Products",
@@ -164,6 +236,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -172,15 +245,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -189,40 +268,20 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
-    ],
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -262,6 +321,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -270,15 +330,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -287,40 +353,20 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
-    ],
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -360,6 +406,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -368,15 +415,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -385,40 +438,20 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
-    ],
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -458,6 +491,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -466,15 +500,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -483,40 +523,20 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
-    ],
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -556,6 +576,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -564,15 +585,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -581,40 +608,20 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
-    ],
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -654,6 +661,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -662,15 +670,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -679,40 +693,20 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
-    ],
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -752,6 +746,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -760,15 +755,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -777,40 +778,20 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
-    ],
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -850,6 +831,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -858,15 +840,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -875,40 +863,105 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
+    "unmatchedSuppliers": [],
+    "ambiguousSuppliers": []
+   }
+  ],
+  "ITL Australia Pty Ltd": [
+   {
+    "title": "Intravenous Cannula and Associated Products",
+    "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+    "reference": "078334-2026",
+    "url": "https://www.find-tender.service.gov.uk/Notice/078334-2026",
+    "ocid": "ocds-h6vhtk-054eab",
+    "publishedDate": "2026-08-18",
+    "awardDate": "2026-07-06",
+    "contractStart": "2027-04-01",
+    "contractEnd": "2029-03-31",
+    "contractExtendedEnd": "2031-03-31",
+    "noticeSuppliers": [
+     "Airglove Medical Ltd",
+     "B. Braun Medical Limited",
+     "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd",
+     "Critical Healthcare Ltd",
+     "Fannin UK Limited",
+     "GBUK Ltd",
+     "Greiner Bio-One Ltd",
+     "Infutech Ltd",
+     "ITL Australia Pty Ltd",
+     "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd",
+     "Nipro Medical UK Ltd",
+     "OscarTech UK Ltd",
+     "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK",
+     "Terumo UK Ltd",
+     "Unomedical Ltd",
+     "Vygon (UK) Ltd"
     ],
+    "companies": [
+     "Airglove Medical Ltd",
+     "B. Braun Medical",
+     "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd",
+     "Critical Healthcare",
+     "Fannin (UK) Limited",
+     "GBUK Group",
+     "Greiner Bio-One Ltd",
+     "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
+     "Infutech Ltd",
+     "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd",
+     "Nipro Medical Europe",
+     "OscarTech UK",
+     "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
+     "Terumo UK",
+     "Unomedical Ltd",
+     "Vygon (UK)"
+    ],
+    "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
+     "B. Braun Medical": "B. Braun Medical Limited",
+     "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd": "Crest Medical Ltd",
+     "Critical Healthcare": "Critical Healthcare Ltd",
+     "Fannin (UK) Limited": "Fannin UK Limited",
+     "GBUK Group": "GBUK Ltd",
+     "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
+     "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
+     "Nipro Medical Europe": "Nipro Medical UK Ltd",
+     "OscarTech UK": "OscarTech UK Ltd",
+     "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
+     "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
+     "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
+     "Vygon (UK)": "Vygon (UK) Ltd"
+    },
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -948,6 +1001,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -956,15 +1010,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -973,40 +1033,105 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
+    "unmatchedSuppliers": [],
+    "ambiguousSuppliers": []
+   }
+  ],
+  "Javelo Health Limited": [
+   {
+    "title": "Intravenous Cannula and Associated Products",
+    "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+    "reference": "078334-2026",
+    "url": "https://www.find-tender.service.gov.uk/Notice/078334-2026",
+    "ocid": "ocds-h6vhtk-054eab",
+    "publishedDate": "2026-08-18",
+    "awardDate": "2026-07-06",
+    "contractStart": "2027-04-01",
+    "contractEnd": "2029-03-31",
+    "contractExtendedEnd": "2031-03-31",
+    "noticeSuppliers": [
+     "Airglove Medical Ltd",
+     "B. Braun Medical Limited",
+     "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd",
+     "Critical Healthcare Ltd",
+     "Fannin UK Limited",
+     "GBUK Ltd",
+     "Greiner Bio-One Ltd",
+     "Infutech Ltd",
+     "ITL Australia Pty Ltd",
+     "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd",
+     "Nipro Medical UK Ltd",
+     "OscarTech UK Ltd",
+     "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK",
+     "Terumo UK Ltd",
+     "Unomedical Ltd",
+     "Vygon (UK) Ltd"
     ],
+    "companies": [
+     "Airglove Medical Ltd",
+     "B. Braun Medical",
+     "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd",
+     "Critical Healthcare",
+     "Fannin (UK) Limited",
+     "GBUK Group",
+     "Greiner Bio-One Ltd",
+     "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
+     "Infutech Ltd",
+     "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd",
+     "Nipro Medical Europe",
+     "OscarTech UK",
+     "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
+     "Terumo UK",
+     "Unomedical Ltd",
+     "Vygon (UK)"
+    ],
+    "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
+     "B. Braun Medical": "B. Braun Medical Limited",
+     "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd": "Crest Medical Ltd",
+     "Critical Healthcare": "Critical Healthcare Ltd",
+     "Fannin (UK) Limited": "Fannin UK Limited",
+     "GBUK Group": "GBUK Ltd",
+     "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
+     "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
+     "Nipro Medical Europe": "Nipro Medical UK Ltd",
+     "OscarTech UK": "OscarTech UK Ltd",
+     "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
+     "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
+     "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
+     "Vygon (UK)": "Vygon (UK) Ltd"
+    },
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -1046,6 +1171,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -1054,15 +1180,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -1071,40 +1203,20 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
-    ],
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -1144,6 +1256,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -1152,15 +1265,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -1169,40 +1288,20 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
-    ],
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -1242,6 +1341,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -1250,15 +1350,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -1267,40 +1373,20 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
-    ],
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -1340,6 +1426,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -1348,15 +1435,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -1365,40 +1458,190 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
+    "unmatchedSuppliers": [],
+    "ambiguousSuppliers": []
+   }
+  ],
+  "Reflex Medical Limited": [
+   {
+    "title": "Intravenous Cannula and Associated Products",
+    "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+    "reference": "078334-2026",
+    "url": "https://www.find-tender.service.gov.uk/Notice/078334-2026",
+    "ocid": "ocds-h6vhtk-054eab",
+    "publishedDate": "2026-08-18",
+    "awardDate": "2026-07-06",
+    "contractStart": "2027-04-01",
+    "contractEnd": "2029-03-31",
+    "contractExtendedEnd": "2031-03-31",
+    "noticeSuppliers": [
+     "Airglove Medical Ltd",
+     "B. Braun Medical Limited",
+     "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd",
+     "Critical Healthcare Ltd",
+     "Fannin UK Limited",
+     "GBUK Ltd",
+     "Greiner Bio-One Ltd",
+     "Infutech Ltd",
+     "ITL Australia Pty Ltd",
+     "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd",
+     "Nipro Medical UK Ltd",
+     "OscarTech UK Ltd",
+     "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK",
+     "Terumo UK Ltd",
+     "Unomedical Ltd",
+     "Vygon (UK) Ltd"
     ],
+    "companies": [
+     "Airglove Medical Ltd",
+     "B. Braun Medical",
+     "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd",
+     "Critical Healthcare",
+     "Fannin (UK) Limited",
+     "GBUK Group",
+     "Greiner Bio-One Ltd",
+     "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
+     "Infutech Ltd",
+     "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd",
+     "Nipro Medical Europe",
+     "OscarTech UK",
+     "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
+     "Terumo UK",
+     "Unomedical Ltd",
+     "Vygon (UK)"
+    ],
+    "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
+     "B. Braun Medical": "B. Braun Medical Limited",
+     "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd": "Crest Medical Ltd",
+     "Critical Healthcare": "Critical Healthcare Ltd",
+     "Fannin (UK) Limited": "Fannin UK Limited",
+     "GBUK Group": "GBUK Ltd",
+     "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
+     "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
+     "Nipro Medical Europe": "Nipro Medical UK Ltd",
+     "OscarTech UK": "OscarTech UK Ltd",
+     "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
+     "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
+     "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
+     "Vygon (UK)": "Vygon (UK) Ltd"
+    },
+    "unmatchedSuppliers": [],
+    "ambiguousSuppliers": []
+   }
+  ],
+  "SOL-MILLENNIUM UK": [
+   {
+    "title": "Intravenous Cannula and Associated Products",
+    "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+    "reference": "078334-2026",
+    "url": "https://www.find-tender.service.gov.uk/Notice/078334-2026",
+    "ocid": "ocds-h6vhtk-054eab",
+    "publishedDate": "2026-08-18",
+    "awardDate": "2026-07-06",
+    "contractStart": "2027-04-01",
+    "contractEnd": "2029-03-31",
+    "contractExtendedEnd": "2031-03-31",
+    "noticeSuppliers": [
+     "Airglove Medical Ltd",
+     "B. Braun Medical Limited",
+     "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd",
+     "Critical Healthcare Ltd",
+     "Fannin UK Limited",
+     "GBUK Ltd",
+     "Greiner Bio-One Ltd",
+     "Infutech Ltd",
+     "ITL Australia Pty Ltd",
+     "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd",
+     "Nipro Medical UK Ltd",
+     "OscarTech UK Ltd",
+     "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK",
+     "Terumo UK Ltd",
+     "Unomedical Ltd",
+     "Vygon (UK) Ltd"
+    ],
+    "companies": [
+     "Airglove Medical Ltd",
+     "B. Braun Medical",
+     "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd",
+     "Critical Healthcare",
+     "Fannin (UK) Limited",
+     "GBUK Group",
+     "Greiner Bio-One Ltd",
+     "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
+     "Infutech Ltd",
+     "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd",
+     "Nipro Medical Europe",
+     "OscarTech UK",
+     "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
+     "Terumo UK",
+     "Unomedical Ltd",
+     "Vygon (UK)"
+    ],
+    "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
+     "B. Braun Medical": "B. Braun Medical Limited",
+     "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd": "Crest Medical Ltd",
+     "Critical Healthcare": "Critical Healthcare Ltd",
+     "Fannin (UK) Limited": "Fannin UK Limited",
+     "GBUK Group": "GBUK Ltd",
+     "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
+     "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
+     "Nipro Medical Europe": "Nipro Medical UK Ltd",
+     "OscarTech UK": "OscarTech UK Ltd",
+     "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
+     "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
+     "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
+     "Vygon (UK)": "Vygon (UK) Ltd"
+    },
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -1438,6 +1681,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -1446,15 +1690,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -1463,40 +1713,105 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
+    "unmatchedSuppliers": [],
+    "ambiguousSuppliers": []
+   }
+  ],
+  "Unomedical Ltd": [
+   {
+    "title": "Intravenous Cannula and Associated Products",
+    "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+    "reference": "078334-2026",
+    "url": "https://www.find-tender.service.gov.uk/Notice/078334-2026",
+    "ocid": "ocds-h6vhtk-054eab",
+    "publishedDate": "2026-08-18",
+    "awardDate": "2026-07-06",
+    "contractStart": "2027-04-01",
+    "contractEnd": "2029-03-31",
+    "contractExtendedEnd": "2031-03-31",
+    "noticeSuppliers": [
+     "Airglove Medical Ltd",
+     "B. Braun Medical Limited",
+     "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd",
+     "Critical Healthcare Ltd",
+     "Fannin UK Limited",
+     "GBUK Ltd",
+     "Greiner Bio-One Ltd",
+     "Infutech Ltd",
+     "ITL Australia Pty Ltd",
+     "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd",
+     "Nipro Medical UK Ltd",
+     "OscarTech UK Ltd",
+     "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK",
+     "Terumo UK Ltd",
+     "Unomedical Ltd",
+     "Vygon (UK) Ltd"
     ],
+    "companies": [
+     "Airglove Medical Ltd",
+     "B. Braun Medical",
+     "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd",
+     "Critical Healthcare",
+     "Fannin (UK) Limited",
+     "GBUK Group",
+     "Greiner Bio-One Ltd",
+     "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
+     "Infutech Ltd",
+     "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd",
+     "Nipro Medical Europe",
+     "OscarTech UK",
+     "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
+     "Terumo UK",
+     "Unomedical Ltd",
+     "Vygon (UK)"
+    ],
+    "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
+     "B. Braun Medical": "B. Braun Medical Limited",
+     "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
+     "Crest Medical Ltd": "Crest Medical Ltd",
+     "Critical Healthcare": "Critical Healthcare Ltd",
+     "Fannin (UK) Limited": "Fannin UK Limited",
+     "GBUK Group": "GBUK Ltd",
+     "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
+     "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
+     "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
+     "Nipro Medical Europe": "Nipro Medical UK Ltd",
+     "OscarTech UK": "OscarTech UK Ltd",
+     "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
+     "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
+     "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
+     "Vygon (UK)": "Vygon (UK) Ltd"
+    },
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ],
@@ -1536,6 +1851,7 @@
      "Vygon (UK) Ltd"
     ],
     "companies": [
+     "Airglove Medical Ltd",
      "B. Braun Medical",
      "Balmung Medical Handel GmbH",
      "Crest Medical Ltd",
@@ -1544,15 +1860,21 @@
      "GBUK Group",
      "Greiner Bio-One Ltd",
      "ICU Medical (incl. Smiths Medical)",
+     "ITL Australia Pty Ltd",
      "Infutech Ltd",
+     "Javelo Health Limited",
      "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe",
      "OscarTech UK",
      "Prosum Medical Ltd",
+     "Reflex Medical Limited",
+     "SOL-MILLENNIUM UK",
      "Terumo UK",
+     "Unomedical Ltd",
      "Vygon (UK)"
     ],
     "matchedAs": {
+     "Airglove Medical Ltd": "Airglove Medical Ltd",
      "B. Braun Medical": "B. Braun Medical Limited",
      "Balmung Medical Handel GmbH": "Balmung Medical Handel GmbH",
      "Crest Medical Ltd": "Crest Medical Ltd",
@@ -1561,40 +1883,20 @@
      "GBUK Group": "GBUK Ltd",
      "Greiner Bio-One Ltd": "Greiner Bio-One Ltd",
      "Infutech Ltd": "Infutech Ltd",
+     "ITL Australia Pty Ltd": "ITL Australia Pty Ltd",
+     "Javelo Health Limited": "Javelo Health Limited",
      "Mediq Healthcare UK Ltd": "Mediq Healthcare UK Ltd",
      "Nipro Medical Europe": "Nipro Medical UK Ltd",
      "OscarTech UK": "OscarTech UK Ltd",
      "Prosum Medical Ltd": "Prosum Medical Ltd",
+     "Reflex Medical Limited": "Reflex Medical Limited",
      "ICU Medical (incl. Smiths Medical)": "Smiths Medical International Ltd",
+     "SOL-MILLENNIUM UK": "SOL-MILLENNIUM UK",
      "Terumo UK": "Terumo UK Ltd",
+     "Unomedical Ltd": "Unomedical Ltd",
      "Vygon (UK)": "Vygon (UK) Ltd"
     },
-    "unmatchedSuppliers": [
-     {
-      "name": "Airglove Medical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"airglove medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "ITL Australia Pty Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"itl australia\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Javelo Health Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"javelo health\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Reflex Medical Limited",
-      "reason": "no Hub company's name or recorded alias normalises to \"reflex medical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "SOL-MILLENNIUM UK",
-      "reason": "no Hub company's name or recorded alias normalises to \"sol millennium\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     },
-     {
-      "name": "Unomedical Ltd",
-      "reason": "no Hub company's name or recorded alias normalises to \"unomedical\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-     }
-    ],
+    "unmatchedSuppliers": [],
     "ambiguousSuppliers": []
    }
   ]
