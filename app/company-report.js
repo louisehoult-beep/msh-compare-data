@@ -917,12 +917,32 @@
     }
 
     if (deep && deep.divisions && deep.divisions.length) {
-      body += '<div style="font-size:12.5px;font-weight:700;color:' + INK + ';margin:12px 0 4px;">Full verified range, by the company’s own divisions</div>' +
+      // Product NAMES, not just division counts. Until 25/08/2026 this block
+      // printed "Uncategorised · 1925 product(s)" and nothing else — a true
+      // count with no product a rep could actually read. Lou's instruction,
+      // 25/08/2026: when there is no company-filed category to group by,
+      // show the products themselves rather than a bare number. Applies to
+      // every division, not only the flat/`hasDivisions:false` case, because
+      // a named division with an unlisted 300 products is the same gap in
+      // miniature.
+      var byDiv = {};
+      (deep.products || []).forEach(function (p) {
+        (byDiv[p.division] = byDiv[p.division] || []).push(p.n);
+      });
+      var flatRange = deep.hasDivisions === false;
+      body += '<div style="font-size:12.5px;font-weight:700;color:' + INK + ';margin:12px 0 4px;">' +
+        (flatRange ? 'Full verified range — no company-filed category' : 'Full verified range, by the company’s own divisions') +
+        '</div>' +
         (deep.filingRule ? '<div style="font-size:11.5px;color:' + DIM + ';margin:0 0 6px;">' + esc(deep.filingRule) + '</div>' : '') +
         deep.divisions.map(function (d) {
-          return '<div style="padding:6px 0;border-bottom:1px solid #f0ece3;font-size:13px;"><b style="color:' + INK + ';">' + esc(d.name) + '</b>' +
+          var names = (byDiv[d.name] || []).slice().sort(function (a, b) { return a.localeCompare(b); });
+          var label = (flatRange && d.name === 'Uncategorised') ? 'All products' : d.name;
+          return '<div style="padding:6px 0;border-bottom:1px solid #f0ece3;font-size:13px;"><b style="color:' + INK + ';">' + esc(label) + '</b>' +
             ' <span style="color:' + DIM + ';">· ' + d.products + ' product(s)' +
-            (d.specialities && d.specialities.length ? ' · ' + d.specialities.map(esc).join(', ') : '') + '</span></div>';
+            (d.specialities && d.specialities.length ? ' · ' + d.specialities.map(esc).join(', ') : '') + '</span>' +
+            (names.length ? '<div class="mcr-scroll" style="max-height:190px;overflow-y:auto;margin:6px 0 2px;padding:8px 10px;border:1px solid ' + LINE + ';border-radius:6px;background:#fff;font-size:12px;color:' + DIM + ';line-height:1.7;">' +
+              names.map(esc).join(' &middot; ') + '</div>' : '') +
+            '</div>';
         }).join('') +
         (deep.notSold ? '<div style="font-size:11.5px;color:#8a4a58;margin:6px 0 0;"><b>Verified absences:</b> ' + esc(deep.notSold) + '</div>' : '');
     }
