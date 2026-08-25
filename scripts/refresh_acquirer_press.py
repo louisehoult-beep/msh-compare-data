@@ -61,6 +61,13 @@ Hub relevance. Verify the investegate ticker resolves (HTTP 200, a real
 per-company RNS listing, not a search/404 page) before adding it; the script
 WARNs and skips any ticker that doesn't resolve rather than failing the whole run.
 
+If the acquirer IS ITSELF a Hub supplier (Convatec and Smith & Nephew both are,
+added 25/08/2026), set `selfSupplierName` to that supplier's exact name in
+supplier-seed.json. Without it, the acquirer's own results/trading statements
+match against its own supplier record every time — proven live on Smith &
+Nephew's own half-year report before the field was added — which is noise,
+not a signal that a company acquired itself.
+
 Usage
     python3 scripts/refresh_acquirer_press.py
     python3 scripts/refresh_acquirer_press.py --only "Halma plc"
@@ -116,6 +123,28 @@ TRACKED_ACQUIRERS = [
         "ticker": "HLMA",
         "why": ("Owns Altomed Limited (Hub supplier, Complete Ophthalmology Solutions 3), "
                 "via its Healthcare Sector company MST. Confirmed 25/08/2026."),
+    },
+    {
+        "name": "Convatec Group plc",
+        "ticker": "CTEC",
+        "selfSupplierName": "Convatec",
+        "why": ("Convatec is itself a Hub supplier (alias \"Convatec\"). Tracking the group's "
+                "own RNS catches a bolt-on trading under a DIFFERENT name before it would ever "
+                "surface under \"Convatec\" on the existing Google News feed. Ticker verified "
+                "against a real per-company RNS listing on investegate.co.uk, 25/08/2026. "
+                "selfSupplierName stops the group's own results mentioning its own name from "
+                "being logged as a match against itself."),
+    },
+    {
+        "name": "Smith & Nephew plc",
+        "ticker": "SN.",
+        "selfSupplierName": "Smith+Nephew",
+        "why": ("Smith+Nephew is itself a Hub supplier (aliases \"Smith & Nephew\", "
+                "\"Smith & Nephew Healthcare Ltd\"). Same reasoning as Convatec above: catches "
+                "a bolt-on under a different name early. Ticker (note the trailing full stop, "
+                "part of the LSE ticker itself) verified against a real per-company RNS "
+                "listing on investegate.co.uk, 25/08/2026. Confirmed live 25/08/2026: without "
+                "selfSupplierName its own half-year report matched itself as noise."),
     },
     # Add the next one only after verifying it owns a Hub supplier by hand —
     # see the module docstring.
@@ -228,6 +257,12 @@ def sweep_acquirer(entry, seed, universe, state, only_all=False):
         item = {"headline": category, "summary": body}
         hit_any = False
         for s in seed.get("suppliers") or []:
+            if s.get("name") == entry.get("selfSupplierName"):
+                # This tracked acquirer IS this Hub supplier — its own results/
+                # trading statements mention its own name constantly, which is
+                # not a signal that it acquired itself. Real acquisitions of a
+                # DIFFERENT company still surface via that company's own alias.
+                continue
             alias = press_match.identify(s, item, universe)
             if not alias:
                 continue

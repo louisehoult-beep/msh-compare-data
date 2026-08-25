@@ -88,21 +88,39 @@
    "url": "https://www.investegate.co.uk/announcement/rns/halma--hlma/trading-update-/8440180",
    "excerpt": " Fundraise Welcome Articles About Contact Us Help Home Companies Advanced search Archive UK Short Positions Meetings UK Newswire New Login Register Trading Update Halma PLC 26 September 2024 Halma plc Trading update Halma, the global group of life-saving technology companies focused on growing a safer, cleaner and healthier future for everyone, every day, today releases its scheduled trading update ahead of its half year end on 30 September 2024. Further progress in the first half; unchanged gui",
    "foundOn": "2026-08-25"
+  },
+  {
+   "acquirer": "Smith & Nephew plc",
+   "date": "2026-08-04",
+   "category": "half-year report",
+   "url": "https://www.investegate.co.uk/announcement/rns/smith-nephew--sn./half-year-report/9702432",
+   "excerpt": " Fundraise Welcome Articles About Contact Us Help Home Companies Advanced search Archive UK Short Positions Meetings UK Newswire New Login Register Half-Year Report Summary by AI BETA Close X Smith & Nephew reported strong first-half profit growth, with trading profit up 8.1% to $566 million and adjusted earnings per share (EPSA) increasing 11.0% to 47.7¢, despite softer revenue growth of 2.3% underlying for the first half, reaching $3,097 million. The company has revised its full-year revenue g",
+   "foundOn": "2026-08-25"
   }
  ],
  "dataAsOf": "25/08/2026",
- "generated": "2026-08-25T14:43:39.464232Z",
+ "generated": "2026-08-25T14:54:54.566276Z",
  "source": "Investegate.co.uk (public RNS aggregator, no login), one company listing page per tracked acquirer, categories: acquisition, annual financial report, final results, full year results, half-year report, interim results, preliminary results, trading statement, trading update.",
  "howToUse": "Every row here is a CANDIDATE, not a published fact. A match under 'matches' means press_match.identify() found one of a Hub supplier's own recorded aliases inside an acquisition-flavoured RNS announcement from a tracked listed acquirer. Read the excerpt and the source URL, then, if it holds up, add it BY HAND to that supplier's `news` array in data/supplier-seed.json in the shape app/company-report.js actually renders: {\"headline\",\"date\",\"sources\":[{\"publisher\",\"url\"}, ...]} with at least two distinct sources, or the Press panel holds it back. Rows under 'unmatched' are acquisitions by a tracked group that named no company currently in the seed — possibly a company that should be added.",
  "counts": {
   "matches": 0,
-  "unmatched": 11
+  "unmatched": 12
  },
  "trackedAcquirers": [
   {
    "name": "Halma plc",
    "ticker": "HLMA",
    "why": "Owns Altomed Limited (Hub supplier, Complete Ophthalmology Solutions 3), via its Healthcare Sector company MST. Confirmed 25/08/2026."
+  },
+  {
+   "name": "Convatec Group plc",
+   "ticker": "CTEC",
+   "why": "Convatec is itself a Hub supplier (alias \"Convatec\"). Tracking the group's own RNS catches a bolt-on trading under a DIFFERENT name before it would ever surface under \"Convatec\" on the existing Google News feed. Ticker verified against a real per-company RNS listing on investegate.co.uk, 25/08/2026. selfSupplierName stops the group's own results mentioning its own name from being logged as a match against itself."
+  },
+  {
+   "name": "Smith & Nephew plc",
+   "ticker": "SN.",
+   "why": "Smith+Nephew is itself a Hub supplier (aliases \"Smith & Nephew\", \"Smith & Nephew Healthcare Ltd\"). Same reasoning as Convatec above: catches a bolt-on under a different name early. Ticker (note the trailing full stop, part of the LSE ticker itself) verified against a real per-company RNS listing on investegate.co.uk, 25/08/2026. Confirmed live 25/08/2026: without selfSupplierName its own half-year report matched itself as noise."
   }
  ]
 }
