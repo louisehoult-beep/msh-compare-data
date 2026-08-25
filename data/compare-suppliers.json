@@ -4797,12 +4797,14 @@
      "note": "Ends 31/08/2026. Check for a successor before quoting it."
     }
    ],
-   "routeNote": "Both frameworks are real and both are live; between them they name 74 suppliers. What does not exist is a product comparison, and inventing one here would be the tool lying to a rep.",
+   "routeNote": "Both frameworks are real and both are live; between them they name 74 suppliers. What does not exist is a product comparison, and inventing one here would be the tool lying to a rep. `tec` and `aac` types added 25/08/2026 on Lou's decision for Possum Ltd's telecare/AAC/environmental-control range, found in the crawl with nowhere to go. Both are within the scope this speciality's own second cited framework already names — Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices — so no new route citation was needed.",
    "noSuppliers": "NO CATALOGUE-VERIFIED COMPETITOR SET IS POSSIBLE FOR SOFTWARE, and that is a fact about how it is bought rather than a gap in this repo. Every other table on this tab is built from NHS Supply Chain catalogue lines with NPC codes; software and managed services are bought Direct, produce no catalogue line, and have no comparable unit — a per-seat licence, a per-study fee and a capital deployment are not the same thing and cannot sit in one price column. The two frameworks above ARE the route to market and both name their suppliers on the brief, so open them. What a rep needs here is the business case and the information-governance answer, not a features grid: procurement is not the decision-maker for clinical software, the CCIO and the trust's digital board usually are.",
    "types": {
     "sw": "Clinical and departmental software systems (imaging, oncology, laboratory and asset-tracking)",
     "hw": "Clinical IT hardware (workstations, label printers, scanners, room systems)",
-    "periph": "Infection-control input devices (sealed and washable keyboards and mice)"
+    "periph": "Infection-control input devices (sealed and washable keyboards and mice)",
+    "tec": "Technology-enabled care & telecare (falls, wander, nurse call, environmental sensors, lone-worker alerts)",
+    "aac": "Augmentative and alternative communication aids & environmental control (access switches, eye gaze, communication devices)"
    },
    "suppliers": []
   },
@@ -4826,11 +4828,12 @@
      "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/"
     }
    ],
-   "routeNote": "Added 19/08/2026 as a new speciality — not a Hub clinical body-system category, but a real, separately-bought product line that turned up in the crawl with nowhere to go. This is estates/facilities buying (chemicals, tools, washroom and paper hygiene, waste management), sold to a trust's facilities or housekeeping lead rather than a clinical account. HC Innovations and Serchem Limited are the two suppliers this repo can evidence line by line; Crest Medical Ltd is also named on the framework's award list but its own crawled catalogue only surfaced wound-care and first-aid divisions, not cleaning products, so it is not listed below on that evidence.",
+   "routeNote": "Added 19/08/2026 as a new speciality — not a Hub clinical body-system category, but a real, separately-bought product line that turned up in the crawl with nowhere to go. This is estates/facilities buying (chemicals, tools, washroom and paper hygiene, waste management), sold to a trust's facilities or housekeeping lead rather than a clinical account. HC Innovations and Serchem Limited are the two suppliers this repo can evidence line by line; Crest Medical Ltd is also named on the framework's award list but its own crawled catalogue only surfaced wound-care and first-aid divisions, not cleaning products, so it is not listed below on that evidence. Signage type added 25/08/2026 on Lou's decision for Crest Medical's H&S signage/poster/board range, found in the crawl with nowhere to go. No dedicated NHS Supply Chain framework has been identified for signage specifically; it is filed here as the nearest real facilities/estates buying line, not asserted as covered by the cleaning-supplies framework above. Flag for a dedicated route if one is confirmed.",
    "types": {
     "clean": "Cleaning chemicals & consumables",
     "tools": "Cleaning tools, equipment & machines",
-    "washroom": "Washroom, paper hygiene & waste management"
+    "washroom": "Washroom, paper hygiene & waste management",
+    "signage": "Health & safety signage & workplace notices"
    },
    "suppliers": [
     {
@@ -4905,6 +4908,16 @@
     "manikin": "CPR / resuscitation training manikins & accessories"
    },
    "suppliers": []
+  },
+  "vascsurg": {
+   "label": "Vascular surgery & peripheral intervention",
+   "route": [],
+   "routeNote": "New speciality added 25/08/2026 on Lou's decision (\"venous stents likely vascular surgery\") to separate peripheral vascular intervention devices (stents, thrombectomy, embolisation) from `vascular`, which is scoped to vascular ACCESS (cannulae, PICCs, CVCs) under its own IV Cannula and Central Venous Catheter frameworks and is not the right home for a stent. The likely route is NHS Supply Chain's \"Interventional Cardiology, Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm Management and Electrophysiology\" framework (27/02/2023-26/02/2027, 67 suppliers) — confirmed real and live, but its public contract-launch-brief page does not itself list peripheral/venous stents by name, so that coverage is NOT asserted as fact here. Needs a check against NHS Supply Chain's product matrix before a route citation is added. Only one type populated so far, for the products this repo has actually evidenced.",
+   "types": {
+    "stent": "Peripheral vascular stents & stent grafts"
+   },
+   "suppliers": [],
+   "noSuppliers": "No supplier table yet. This speciality exists to hold Macromed UK Ltd's venous stent products for the Differentiator only; a researched competitor set has not been built."
   }
  },
  "refRule": "`ref` is the master supplier record this row's `co` resolves to, in supplier-seed.json or supplier-index.json, matched on exact name or exact alias using verify.py's own _norm_co. It exists so the Compare tab's company picker can group the spellings of one firm together: GBUK is written four ways in this file and a member picking one saw only that slice. `co` is unchanged and is still what the table displays — several are the procurement record's own wording and this file is right to show them. A row with no `ref` reached no master record and groups under its own `co`, exactly as before. Nothing here is fuzzy-matched: an unresolved name is left unresolved rather than guessed at. Derived 07/08/2026."

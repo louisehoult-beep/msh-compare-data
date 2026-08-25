@@ -83,7 +83,8 @@
    "electro": "Electrosurgery consumables",
    "warm": "Patient warming & temperature",
    "theatre": "General theatre consumables",
-   "capital": "Capital equipment (tables, lights & OR integration)"
+   "capital": "Capital equipment (tables, lights & OR integration)",
+   "perfusion": "Cardiopulmonary bypass and perfusion (oxygenators, circuits, centrifugal pumps, beating-heart stabilisation)"
   },
   "pathology": {
    "consum": "Laboratory consumables",
@@ -239,7 +240,8 @@
    "upper": "Upper limb bracing and splints",
    "prosth": "Prosthetic components",
    "brace": "Knee, calf & general limb supports",
-   "spine": "Spinal, cervical & trunk orthoses"
+   "spine": "Spinal, cervical & trunk orthoses",
+   "materials": "Orthotic fabrication materials and componentry (EVA and CAD/CAM stock, coverings, alloy bar and tubing, fixings, pads)"
   },
   "rehab": {
    "chair": "Wheelchairs and specialist seating",
@@ -249,7 +251,8 @@
    "therapy": "Therapy and exercise equipment",
    "hygiene": "Personal hygiene",
    "daily": "Daily living & occupational therapy aids",
-   "access": "Ramps & evacuation aids"
+   "access": "Ramps & evacuation aids",
+   "comms": "Augmentative and alternative communication (speech-generating devices, eye gaze, switches, access and AAC software)"
   },
   "oncology": {
    "abl": "Ablation — cryo, RF and pulsed field",
@@ -263,12 +266,21 @@
    "milk": "Infant formula",
    "resp": "Neonatal respiratory"
   },
-  "digital": {},
-  "dermatology": {},
+  "digital": {
+   "sw": "Clinical and departmental software systems (imaging, oncology, laboratory and asset-tracking)",
+   "hw": "Clinical IT hardware (workstations, label printers, scanners, room systems)",
+   "periph": "Infection-control input devices (sealed and washable keyboards and mice)",
+   "tec": "Technology-enabled care & telecare (falls, wander, nurse call, environmental sensors, lone-worker alerts)",
+   "aac": "Augmentative and alternative communication aids & environmental control (access switches, eye gaze, communication devices)"
+  },
+  "dermatology": {
+   "energy": "Energy-based dermatology and aesthetic devices (laser, shockwave and phototherapy platforms)"
+  },
   "facilities": {
    "clean": "Cleaning chemicals & consumables",
    "tools": "Cleaning tools, equipment & machines",
-   "washroom": "Washroom, paper hygiene & waste management"
+   "washroom": "Washroom, paper hygiene & waste management",
+   "signage": "Health & safety signage & workplace notices"
   },
   "workwear": {
    "scrubs": "Scrubs & clinical workwear",
@@ -276,14 +288,17 @@
   },
   "training": {
    "manikin": "CPR / resuscitation training manikins & accessories"
+  },
+  "vascsurg": {
+   "stent": "Peripheral vascular stents & stent grafts"
   }
  },
  "counts": {
   "pairs": 1825,
-  "mapped": 1577,
+  "mapped": 1685,
   "notTaxonomy": 42,
   "products": 14722,
-  "productsMapped": 10166
+  "productsMapped": 11282
  },
  "entries": [
   {
@@ -357,9 +372,11 @@
     "CLEARANCE Robooter E60 Powerchair (Ex Demo, Grade B)",
     "Rehasense Eco Travel Wheelchair Handbike"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "all four example products (Robooter Powerchair, powerchair accessories, mobility scooter, wheelchair power assist) are wheelchairs/powerchairs; matching wheelchairs and specialist seating per Lou's steer that this range is moving & handling equipment",
+   "decidedIn": "Felgains.json"
   },
   {
    "supplier": "Renray Healthcare",
@@ -545,9 +562,11 @@
     "RAYMEX® Lift – Now Available to Order",
     "PatientFlow Gynaecology Hospital Stretcher"
    ],
-   "hub": null,
+   "hub": "handling:bed",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "three of four named products (X-Ray protective curtain for an operating table, pillow for patient stretchers, a gynaecology hospital stretcher) are stretcher/table range items, matching beds, cots & profiling frames per Lou's steer on this supplier",
+   "decidedIn": "Felgains.json"
   },
   {
    "supplier": "HC Innovations",
@@ -789,9 +808,11 @@
     "Invacare Accent",
     "Medley Ergo"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "division is named Pressure Care, the NHS term for pressure-relieving mattresses and overlays, and two of four named products (Invacare Accent, Medley Ergo) are mattress range items, matching mattresses, overlays and positioning",
+   "decidedIn": "OSKA Care.json"
   },
   {
    "supplier": "Enable Access Ltd",
@@ -892,9 +913,11 @@
     "Ergotrics – Morpheroll",
     "Acute Brochure"
    ],
-   "hub": null,
+   "hub": "handling:slide",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "three named products are the Ergotrics range (Morphecover, DuoRoll, Morpheroll), which are patient turning/slide-sheet systems, matching slide sheets and transfer boards",
+   "decidedIn": "Hospital Direct.json"
   },
   {
    "supplier": "Puretone",
@@ -1021,9 +1044,11 @@
     "HD Deluxe Comfort Leg Support",
     "HD Deluxe 30 Degree Pressure Wedge"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "three named products (Comfort Support Pillow, Comfort Leg Support, 30 Degree Pressure Wedge) are positioning aids, matching mattresses, overlays and positioning",
+   "decidedIn": "Hospital Direct.json"
   },
   {
    "supplier": "HC Innovations",
@@ -1320,9 +1345,11 @@
     "Sit-Stand Calf Strap",
     "Arnold 150 Hoist Scale PW600"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Medi-Plinth's core range is examination couches/plinths and these (examination lights, a couch strap) are accessories for that range, matching examination couches, screens & clinical trolleys",
+   "decidedIn": "Medi-Plinth Equipment.json"
   },
   {
    "supplier": "Serchem Limited",
@@ -3016,9 +3043,11 @@
     "Pillow Switch",
     "Plate Switch"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Xiel Ltd",
@@ -3156,9 +3185,11 @@
     "Vibbyoak 2747U 02",
     "Vibbyoak Black Blurred"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Vygon (UK)",
@@ -3387,9 +3418,11 @@
     "Wagner_170519_1727_0112",
     "Info Pager"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Intus Healthcare",
@@ -3564,9 +3597,11 @@
     "Red With Cutout Name",
     "White Name"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -3579,9 +3614,11 @@
     "Grid Pad 13 Grid Explorer Render 3",
     "Grid Pad 13 Grid Explorer Render 4"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Vygon (UK)",
@@ -3961,9 +3998,11 @@
     "Tabtime Setting Time",
     "Tabtime"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "OncoSem UK Limited",
@@ -4481,9 +4520,11 @@
     "Wall Family All",
     "Wall Family Pull"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -4496,9 +4537,11 @@
     "Freedomctransparent",
     "Freedomc"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Love Medical",
@@ -5349,9 +5392,11 @@
     "Smartsole Flyer V14",
     "Smartsole Globe"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -5364,9 +5409,11 @@
     "Epicare Free Sensor Image",
     "Epicare Free Website1"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -5379,9 +5426,11 @@
     "Wagner_170519_1727_0025",
     "Sensormate Carpetmat"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Labcold",
@@ -5867,9 +5916,11 @@
     "Quha_Zono_With_Clip_1 1024X503Web",
     "04 3000X3000 1024X1024"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -5882,9 +5933,11 @@
     "Qwayo 2 Featured",
     "Qwayo 2 Product Image 2"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "DDC Dolphin Limited",
@@ -6596,9 +6649,11 @@
     "Hc1823 Bed Interface Left View",
     "Hc1823 Example"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -6611,9 +6666,11 @@
     "Endless Doors",
     "D8Did Flatlay3"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -6626,9 +6683,11 @@
     "Lig 3",
     "Cap 2"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -6641,9 +6700,11 @@
     "831",
     "1348"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -6656,9 +6717,11 @@
     "Smile Fall 3",
     "Smile Fall 2"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -6671,9 +6734,11 @@
     "Combi 1 Featured",
     "Combi 1 Product Image 2"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -6686,9 +6751,11 @@
     "Combi 4 Featured",
     "Combi 4 Product Image 2"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "OncoSem UK Limited",
@@ -7595,9 +7662,11 @@
     "Freeway Product Image 4",
     "Freeway Product Image 3"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -7610,9 +7679,11 @@
     "Possum Mounts 3",
     "Possum Mounts 4"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -7625,9 +7696,11 @@
     "Primo Pro Cable",
     "Primo Pro Telephone Screen"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Love Medical",
@@ -8876,9 +8949,11 @@
     "Blueflow_Broschuere_180912_Es 002",
     "Blueflow 2"
    ],
-   "hub": null,
+   "hub": "vascsurg:stent",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Blueflow and Microstent are named venous/peripheral vascular stent products, matching peripheral vascular stents & stent grafts; other Macromed peripheral-intervention divisions (thrombectomy, plug, ablation fibre, sheath) are different device classes and left unmapped pending a wider vocabulary decision",
+   "decidedIn": "Macromed UK Ltd.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -9055,9 +9130,11 @@
     "Ir Hc603C Socket",
     "Wagner_170519_1727_0187"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -9070,9 +9147,11 @@
     "Novo Website",
     "Wagner_170519_1727_0057"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are AAC communication aids, access switches or environmental control systems, matching augmentative and alternative communication aids & environmental control, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -9085,9 +9164,11 @@
     "Neo Mobile Care Phone 2Button",
     "M Care App Screen Shot 3"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "OncoSem UK Limited",
@@ -9317,9 +9398,11 @@
     "P Pod",
     "Custom Home Chair Seating System"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "division is named Specialist Seating and the named seating product (Custom Home Chair Seating System) matches wheelchairs and specialist seating; per Lou's steer this is moving & handling territory",
+   "decidedIn": "Drive DeVilbiss Healthcare UK.json"
   },
   {
    "supplier": "Drive DeVilbiss Healthcare UK",
@@ -10577,9 +10660,11 @@
     "Mms_Brochure",
     "Background Removed Micro Stent"
    ],
-   "hub": null,
+   "hub": "vascsurg:stent",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Blueflow and Microstent are named venous/peripheral vascular stent products, matching peripheral vascular stents & stent grafts; other Macromed peripheral-intervention divisions (thrombectomy, plug, ablation fibre, sheath) are different device classes and left unmapped pending a wider vocabulary decision",
+   "decidedIn": "Macromed UK Ltd.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -10683,9 +10768,11 @@
     "Door Lock Rf Switch 2",
     "Door Lock Rf Switch Website"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -10697,9 +10784,11 @@
     "Wagner_170519_1727_0038",
     "Wagner_170519_1727_0042"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -10711,9 +10800,11 @@
     "Paper Thin Tyvek Bed Occupancy Kit",
     "Wagner_170519_1727_0015"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -10725,9 +10816,11 @@
     "Vibby Oak Pendantsmall",
     "Vibby Oak Fall Detector 2"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -10739,9 +10832,11 @@
     "Possum Butterfly Full Colour1",
     "Intelligent Property Exit Solution With Infopager2 Small"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -10753,9 +10848,11 @@
     "Possum 39",
     "Bed Priv"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -10767,9 +10864,11 @@
     "Repoii Image 2",
     "Possum New Repoii Flyer 05 06 2020"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "OncoSem UK Limited",
@@ -11457,9 +11556,11 @@
     "Care Direct Standard Fall Mat",
     "Care Direct Folding Fall Mat"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products (Standard/Folding Fall Mat) are positioning/cushioning floor surfaces, the nearest existing type to a fall mat, per Lou's steer on this range",
+   "decidedIn": "Direct Manufacturing.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -12931,9 +13032,11 @@
     "Take Along Tracker 2",
     "Take Along Tracker Uk Hand 2"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -12944,9 +13047,11 @@
     "Smoke Detector Wireless",
     "Smoke New Rz Copy"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -12957,9 +13062,11 @@
     "Vibrating Pillow Pad 1",
     "Vibrating Pillow Pad 1 2"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -12970,9 +13077,11 @@
     "Water Alarm",
     "Nedis Neat Enabled Flood Detector V1 0 Dated 17_01_2023"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "MatOrtho Ltd",
@@ -14588,9 +14697,11 @@
    "examples": [
     "First Aid For Eyes Poster"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -14600,9 +14711,11 @@
    "examples": [
     "Selfadhesive Emergency Eye Wash Safety Sign"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -18292,9 +18405,11 @@
    "examples": [
     "Computer Operators Poster"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -18304,9 +18419,11 @@
    "examples": [
     "Office Safety Poster 59Cm X 42Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21066,9 +21183,11 @@
    "examples": [
     "Electric Shock Poster"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21078,9 +21197,11 @@
    "examples": [
     "Burns First Aid Poster"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21090,9 +21211,11 @@
    "examples": [
     "Chemical Spills Poster"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21102,9 +21225,11 @@
    "examples": [
     "Entrance Sign 30Cm X 10Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21114,9 +21239,11 @@
    "examples": [
     "Automated Dialling Fire Action Sign 20Cm X 15Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21126,9 +21253,11 @@
    "examples": [
     "Fire Exit Ahead Sign 30Cm X 10Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -21138,9 +21267,11 @@
    "examples": [
     "Aed Defibrillator 3D Sign 15Cm X 20Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22494,9 +22625,11 @@
    "examples": [
     "Fire Alarm Call Point Symbol 8Cm X 8Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22506,9 +22639,11 @@
    "examples": [
     "Fire Action Manual Dial Without Lift 20Cm X 15Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22518,9 +22653,11 @@
    "examples": [
     "Assembly Point Eec 60Cm X 45Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22530,9 +22667,11 @@
    "examples": [
     "No Smoking Beyond This Point 30Cm X 10Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22542,9 +22681,11 @@
    "examples": [
     "No Admittance To Unauthorised Personnel 30Cm X 10Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22554,9 +22695,11 @@
    "examples": [
     "No Pedestrians 30Cm X 10Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22566,9 +22709,11 @@
    "examples": [
     "Danger Beware Of Vehicles 60Cm X 20Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22578,9 +22723,11 @@
    "examples": [
     "Danger Deep Water 60Cm X 20Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22590,9 +22737,11 @@
    "examples": [
     "Caution Mind The Step 30Cm X 10Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22602,9 +22751,11 @@
    "examples": [
     "Danger Quarry Workings Keep Out 60Cm X 45Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22614,9 +22765,11 @@
    "examples": [
     "Protective Garments Must Be Worn 60Cm X 20Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22626,9 +22779,11 @@
    "examples": [
     "First Aid In The Event Of Accident 30Cm X 25Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22638,9 +22793,11 @@
    "examples": [
     "Warning Fragile Roof Crawling Boards Or Ladders Must Be Used 60Cm X 20Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22650,9 +22807,11 @@
    "examples": [
     "Danger Keep Out 60Cm X 20Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22662,9 +22821,11 @@
    "examples": [
     "Caution Uneven Surface 60Cm X 45Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22674,9 +22835,11 @@
    "examples": [
     "Fire Action Sign Hotel 20Cm X 20Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22686,9 +22849,11 @@
    "examples": [
     "Eec Fire Action 20Cm X 15Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22698,9 +22863,11 @@
    "examples": [
     "Push Emergency Escape Sign 75Mm X 20Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22710,9 +22877,11 @@
    "examples": [
     "Exit Sign 20Cm X 20Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22722,9 +22891,11 @@
    "examples": [
     "No Entry Sign 30Cm X 10Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22734,9 +22905,11 @@
    "examples": [
     "No Exit Sign 30Cm X 10Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22746,9 +22919,11 @@
    "examples": [
     "Danger Electricity Sign 20Cm X 15Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22758,9 +22933,11 @@
    "examples": [
     "Danger Explosive Material 20Cm X 15Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22770,9 +22947,11 @@
    "examples": [
     "First Aiders Are Adaptasign 215Cm X 31Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -22782,9 +22961,11 @@
    "examples": [
     "Fire Exit Keep Clear Labels"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -23522,9 +23703,11 @@
    "examples": [
     "How To Use A Defibrillator Laminated Poster 420Mm X 297Mm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -23548,9 +23731,11 @@
    "examples": [
     "Resuscitation Poster"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -23560,9 +23745,11 @@
    "examples": [
     "First Aid Sign 25Cm X 30Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24580,9 +24767,11 @@
    "examples": [
     "Stress Management Poster"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24606,9 +24795,11 @@
    "examples": [
     "Danger Deep Excavations 30Cm X 10Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24618,9 +24809,11 @@
    "examples": [
     "First Aid Safety Sign 30Cm X 25Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24630,9 +24823,11 @@
    "examples": [
     "Emergency Eye Wash Safety Sign 30Cm X 25Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24642,9 +24837,11 @@
    "examples": [
     "Aed Emergency Defibrillator Safety Sign 25Cm X 30Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24654,9 +24851,11 @@
    "examples": [
     "Assembly Point Right Sign 45Cm X 15Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24666,9 +24865,11 @@
    "examples": [
     "Caution Mind Your Head Sign 20Cm X 15Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24678,9 +24879,11 @@
    "examples": [
     "Selfadhesive Masks Symbol Safety Sign"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24704,9 +24907,11 @@
    "examples": [
     "Social Distancing Floor Graphic 40Cm"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24730,9 +24935,11 @@
    "examples": [
     "Large First Aid Board"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24742,9 +24949,11 @@
    "examples": [
     "Medium First Aid Board"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24754,9 +24963,11 @@
    "examples": [
     "Small First Aid Board"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24766,9 +24977,11 @@
    "examples": [
     "Premium Health And Safety Board"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -24778,9 +24991,11 @@
    "examples": [
     "Standard Health And Safety Board"
    ],
-   "hub": null,
+   "hub": "facilities:signage",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product is a health & safety sign, poster, board or notice (fire, first aid, chemical, PPE, evacuation), matching health & safety signage & workplace notices; the 5 non-signage outliers in this supplier's worklist (tongue depressors, vomit bowls, insect spray, wall thermometer, a test SKU) are left unmapped rather than forced in here",
+   "decidedIn": "Crest Medical Ltd.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -25634,9 +25849,11 @@
    "examples": [
     "Anti Vandal Safe Bed Surround"
    ],
-   "hub": null,
+   "hub": "handling:bed",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named product (Anti Vandal Safe Bed Surround) is a bed accessory, matching beds, cots & profiling frames",
+   "decidedIn": "Direct Manufacturing.json"
   },
   {
    "supplier": "Direct Manufacturing",
@@ -27682,9 +27899,11 @@
    "examples": [
     "Smile Pendant"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -27694,9 +27913,11 @@
    "examples": [
     "Repo Website 2"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -27706,9 +27927,11 @@
    "examples": [
     "Door Alarm Website"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -27718,9 +27941,11 @@
    "examples": [
     "Nursecall Logger Website"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -27730,9 +27955,11 @@
    "examples": [
     "Gas Detector 2"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -27742,9 +27969,11 @@
    "examples": [
     "Epicare Mobile Website"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -27754,9 +27983,11 @@
    "examples": [
     "Companion Mini Connect Product Image Transparent"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named products are telecare monitoring/alerting devices (fall, wander, epilepsy, occupancy, door/smoke/gas/water sensors, nurse call, lone-worker alarms) matching technology-enabled care & telecare, within the scope of this speciality's own cited Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices framework",
+   "decidedIn": "Possum Ltd.json"
   },
   {
    "supplier": "OncoSem UK Limited",
