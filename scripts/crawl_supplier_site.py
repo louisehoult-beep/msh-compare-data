@@ -244,28 +244,37 @@ def shape_from_wp(raw, domain):
     # company whose real range is procedure packs by speciality. Reading the term
     # NAMES to judge them would be guesswork; the same structural test the
     # sitemap route already uses catches it without any name judgement.
+    # Lou's call, 25/08/2026: a flat/near-flat taxonomy no longer refuses the
+    # capture outright — it publishes the list with `hasDivisions: False` and
+    # says so, rather than withholding a real product list over grouping.
     real = [d for d in divisions if d != "Uncategorised"]
     uncat = divisions.get("Uncategorised", 0)
-    if not real:
-        return None, ("the site's product taxonomy put every product in one 'Uncategorised' "
-                      "bucket (%d products), so it carries no division structure — a product "
-                      "list without the company's own grouping is not the range this report "
-                      "shows" % len(plist))
-    if uncat * 2 > len(plist):
-        return None, ("%d of %d products carry no category in the site's own taxonomy, so the "
-                      "grouping would be mostly one 'Uncategorised' bucket — the report presents "
-                      "divisions as the company's own structure and this is not one"
-                      % (uncat, len(plist)))
+    has_divisions = bool(real) and uncat * 2 <= len(plist)
+    flat_note = (
+        "" if has_divisions else
+        ("the site's product taxonomy put every product in one 'Uncategorised' bucket, so it "
+         "carries no division structure — shown as one unsorted list, not the company's own "
+         "filed grouping" if not real else
+         "%d of %d products carry no category in the site's own taxonomy, so most of the range "
+         "sits in one unsorted 'Uncategorised' list rather than the company's own grouping"
+         % (uncat, len(plist)))
+    )
 
     return {
         "domain": domain,
         "verified": time.strftime("%Y-%m-%d"),
         "source": ("%s product catalogue (WordPress REST API), read this run" % domain),
         "structureFrom": "the company's own product category taxonomy",
-        "structure": "The company's own top-level product categories.",
-        "filingRule": ("Grouping MIRRORS the manufacturer's own filing. Where a product sits "
+        "hasDivisions": has_divisions,
+        "structure": "The company's own top-level product categories." if has_divisions else
+                     "No usable category structure in the site's own taxonomy — listed as one flat range.",
+        "filingRule": (("Grouping MIRRORS the manufacturer's own filing. Where a product sits "
                        "under a category that reads oddly clinically, that is where the company "
-                       "files it, and a rep searching the company's way will find it there."),
+                       "files it, and a rep searching the company's way will find it there.")
+                       if has_divisions else
+                       ("Read from the site's own product records, so names are exact. " + flat_note +
+                        " — every item is listed by name below rather than grouped, because a "
+                        "fabricated grouping would misrepresent the company's own filing.")),
         "divisions": [{"name": k, "products": v}
                       for k, v in sorted(divisions.items(), key=lambda kv: -kv[1])],
         "products": plist,
@@ -288,7 +297,17 @@ def sitemap_products(domain, deadline=None):
             body, _ = get(u)
         except Exception:
             continue
-        locs = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", body)
+        # Locs come either bare (<loc>url</loc>) or CDATA-wrapped
+        # (<loc><![CDATA[url]]></loc>) — All in One SEO (Altomed and others)
+        # uses the CDATA form, which the bare-URL regex silently matched zero
+        # times, so the whole sitemap read looked empty. Extract the raw loc
+        # body first, then unwrap CDATA if present.
+        raw_locs = re.findall(r"<loc>(.*?)</loc>", body, re.S)
+        locs = []
+        for raw in raw_locs:
+            raw = raw.strip()
+            m = re.match(r"<!\[CDATA\[(.*?)\]\]>", raw, re.S)
+            locs.append(m.group(1).strip() if m else raw)
         if "<sitemapindex" in body[:400].lower():
             to_read.extend([l for l in locs if "product" in l.lower() or "sitemap" in l.lower()][:8])
             continue
@@ -377,30 +396,31 @@ def sitemap_products(domain, deadline=None):
 
     if len(plist) < MIN_PRODUCTS:
         return None, "sitemap URLs did not resolve into product names"
-    # Everything in one bucket means the URL structure carried NO division
-    # information — a flat list of names, not the company's own filing. The
-    # report presents divisions as the company's own structure, so publishing a
-    # single "Uncategorised" division of 1,300 items would be a false structure.
-    # A MAJORITY UNCATEGORISED IS A FLAT SITEMAP WEARING A TAXONOMY.
-    # This used to refuse only when EVERY item was uncategorised, which let medi
-    # UK through at 84% on 07/08/2026: 173 products, 145 of them in one
-    # "Uncategorised" bucket, published as though the company filed them that
-    # way. One product URL happening to carry a path segment is not a structure.
+    # A flat URL structure (no path segment above the leaf) carries no division
+    # information. Lou's call, 25/08/2026: publish the list anyway rather than
+    # refuse it outright — a rep can use a flat product list; they cannot use a
+    # refusal. The report must still never CLAIM a division structure that
+    # isn't there, so `hasDivisions` records whether "Uncategorised" is a real
+    # grouping-not-found state, and captureCaveat/filingRule say so in words.
+    # This REPLACES the two refusals that used to fire here (all-uncategorised,
+    # and majority-uncategorised — the medi UK case, 07/08/2026, is now handled
+    # by labelling the bucket honestly instead of hiding it).
     real = [d for d in divisions if d != "Uncategorised"]
     uncat = divisions.get("Uncategorised", 0)
-    if not real:
-        return None, ("the sitemap's product URLs are flat, so they carry no division structure "
-                      "(%d names, all uncategorised) — a product list without the company's own "
-                      "grouping is not the range this report shows" % len(plist))
-    if uncat * 2 > len(plist):
-        return None, ("%d of %d product URLs carry no division segment, so the grouping would be "
-                      "mostly one 'Uncategorised' bucket — the report presents divisions as the "
-                      "company's own structure and this is not one" % (uncat, len(plist)))
+    has_divisions = bool(real) and uncat * 2 <= len(plist)
+    flat_note = (
+        "" if has_divisions else
+        ("the sitemap's product URLs are flat, so they carry no division structure — shown as "
+         "one unsorted list, not the company's own filed grouping" if not real else
+         "%d of %d product URLs carry no division segment, so most of the range sits in one "
+         "unsorted 'Uncategorised' list rather than the company's own grouping" % (uncat, len(plist)))
+    )
     return {
         "domain": domain,
         "verified": time.strftime("%Y-%m-%d"),
         "source": "%s XML sitemap, read this run" % domain,
         "structureFrom": "sitemap",
+        "hasDivisions": has_divisions,
         "landingPagesDropped": landing,
         "duplicateUrlsDropped": duplicate_urls,
         "captureCaveat": ("Names are derived from the last segment of each product URL, not read "
@@ -411,13 +431,17 @@ def sitemap_products(domain, deadline=None):
                           "structurally and a few may remain, so treat this range as the shape of "
                           "the catalogue rather than an exact product list. A WordPress REST "
                           "capture (structureFrom: 'wp-rest') does not have this limitation."
-                          % landing),
-        "structure": "Grouped by the company's own URL structure.",
+                          % landing) + (" " + flat_note + "." if flat_note else ""),
+        "structure": "Grouped by the company's own URL structure." if has_divisions else
+                     "No division structure found in the URLs — listed as one flat range.",
         "droppedCategoryPages": dropped,
-        "filingRule": ("Read from the sitemap, so product NAMES come from URL slugs and the "
+        "filingRule": (("Read from the sitemap, so product NAMES come from URL slugs and the "
                        "grouping is the company's own URL structure, not a product record. "
                        "Treat names as the company's own wording tidied for display, and expect "
-                       "no category detail below the top level."),
+                       "no category detail below the top level.") if has_divisions else
+                       ("Read from the sitemap, so product NAMES come from URL slugs. " + flat_note +
+                        " — every item is listed by name below rather than grouped, because a "
+                        "flat list is honest and a fabricated grouping would not be.")),
         "divisions": [{"name": k, "products": v}
                       for k, v in sorted(divisions.items(), key=lambda kv: -kv[1])],
         "products": plist,
