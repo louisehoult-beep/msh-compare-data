@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-08-23",
+ "lastRun": "2026-08-25",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -69,7 +69,19 @@
   "Audit Data",
   "Avidity Science Limited",
   "B.N.O.S Meditech Ltd",
-  "Babease Limited"
+  "Babease Limited",
+  "Balmung Medical Handel GmbH",
+  "Bar Code Data Ltd",
+  "Bates Office Services Ltd",
+  "BDSI Ltd",
+  "Beagle Orthopaedic Ltd",
+  "Beaver Visitec International",
+  "Becton Dickinson Uk Ltd Ed Wokingham",
+  "Becton Dickinson Uk Ltd Stock Oxford",
+  "Bender UK Ltd",
+  "Benefoot UK Ltd trading as BeneCare Medical",
+  "Benmor Medical",
+  "Berry BPI Recycled Products"
  ],
  "refusals": [
   {
@@ -131,6 +143,16 @@
    "name": "Babease Limited",
    "reason": "Companies House holds BABEASE LIMITED 07473497, DISSOLVED on 01/11/2023, and a separate BABEASE FOODS LIMITED 12320133, in liquidation; neither is a live trading entity and there is no evidence in either record showing which one NHS Supply Chain named on the Infant Feeding and Accessories brief. babease.co.uk returns HTTP 500 and babease.com does not respond, so there is no company site to read a name form from. Recording \"Babease Foods Limited\" would be recording a different legal entity's name on an unverified assumption. No verifiable extra name form. NOTE FOR REVIEW: the brand ceased trading, so this record may be a dead supplier sitting on a live framework panel.",
    "date": "2026-08-23"
+  },
+  {
+   "name": "Becton Dickinson Uk Ltd Ed Wokingham",
+   "reason": "This is an NHS Supply Chain account-name variant of Becton Dickinson, which already has its own seed record (\"BD \\u2014 Becton, Dickinson\"). That record already holds every real-world BD name form as aliases, including \"Becton Dickinson UK Ltd\" and \"becton dickinson\". Alias lookup is first-wins, so adding any BD name form here would either hard-fail verify.py's alias_steals_name check or publish BD's press under a depot-code record. The right fix is a merge decision for Lou, not an alias. No alias added.",
+   "date": "2026-08-25"
+  },
+  {
+   "name": "Becton Dickinson Uk Ltd Stock Oxford",
+   "reason": "Same as the Ed Wokingham record: an NHS Supply Chain account-name variant of the existing \"BD \\u2014 Becton, Dickinson\" seed record, which already carries the real BD name forms. Adding BD forms here would mis-attribute BD press to a depot-code record. Merge decision required, not an alias. No alias added.",
+   "date": "2026-08-25"
   }
  ],
  "sources": {
