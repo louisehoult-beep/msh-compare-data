@@ -1,443 +1,551 @@
 {
- "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-08-25",
- "done": [
-  "365 Healthcare",
-  "3D LifePrints UK Ltd",
-  "3D Metal Printing Ltd",
-  "@SimulationMan Ltd",
-  "A2B Healthcare",
-  "Aayan Medical Imaging Limited",
-  "Abbliss Ltd",
-  "Abbott Diagnostics",
-  "Abilia Ltd",
-  "Abiomed Ltd",
-  "Absorbest AB",
-  "Accel Heal",
-  "Accora",
-  "Accrington Surgical",
-  "Accrington Surgical Inst. Suppliers",
-  "Accrington Surgical Instrument Suppliers Ltd",
-  "Acumed Ltd",
-  "Adler Ortho UK Limited",
-  "Aero Healthcare Ltd",
-  "AG Dental Equipment",
-  "Agfa Healthcare UK Ltd",
-  "Agito Medical A/S",
-  "Aidapt Bathrooms Ltd",
-  "Aidence",
-  "Aidoc Medical Ltd",
-  "Airbon Ltd, trading as Smart Air UK",
-  "AJ Mobility Ltd",
-  "Albert Waeschle Ltd",
-  "Alcado Limited",
-  "Alivecor Ltd",
-  "Alliance Healthcare",
-  "Alliance Medical",
-  "Altomed Limited",
-  "ALXR Limited",
-  "AMG Medtech Ltd",
-  "Amoena UK Ltd",
-  "Amparo Prosthetics Ltd",
-  "AmRay UK",
-  "Anetic Aid Ltd",
-  "Anglian Dental",
-  "Anika Therapeutics Ltd",
-  "Anita UK Ltd",
-  "Anser Medical",
-  "APC Cardiovascular Ltd",
-  "Apos Medical UK Ltd",
-  "Apple Star Corp Limited",
-  "APR Medtech Limited",
-  "Aptvision Limited",
-  "AQLANE Medical BV",
-  "Architectural Wallsz (International) Limited",
-  "Arcomedical Infusion Ltd",
-  "Arden Orthotics Ltd",
-  "Argon Medical Devices UK Ltd",
-  "Arrow County Supplies",
-  "Arthrex",
-  "Arthro Dynamik Ltd",
-  "Aspire Pharma",
-  "Associated Optical Products",
-  "Assut UK LTD",
-  "Astric Medical Ltd",
-  "Athrodax Healthcare International Ltd",
-  "Atom Medical Corporation UK ltd",
-  "Atos Medical (UK)",
-  "Attends Ltd",
-  "Audit Data",
-  "Avidity Science Limited",
-  "B.N.O.S Meditech Ltd",
-  "Babease Limited",
-  "Balmung Medical Handel GmbH",
-  "Bar Code Data Ltd",
-  "Bates Office Services Ltd",
-  "BDSI Ltd",
-  "Beagle Orthopaedic Ltd",
-  "Beaver Visitec International",
-  "Becton Dickinson Uk Ltd Ed Wokingham",
-  "Becton Dickinson Uk Ltd Stock Oxford",
-  "Bender UK Ltd",
-  "Benefoot UK Ltd trading as BeneCare Medical",
-  "Benmor Medical",
-  "Berry BPI Recycled Products"
- ],
- "refusals": [
-  {
-   "name": "365 Healthcare",
-   "reason": "365healthcare.com now 301-redirects to Mediq's UK B2B site, and mediq.co.uk carries 365 Healthcare only as a product brand with no legal entity of its own; its footer names Mediq Healthcare UK Limited. Mediq is the parent, so it must not be recorded as an alias. Companies House holds no active '365 Healthcare' matching the Droitwich supplier. No verifiable extra name form.",
-   "date": "2026-08-18"
-  },
-  {
-   "name": "Aayan Medical Imaging Limited",
-   "reason": "aayanmedical.co.uk is a parked lander, no company site found. Companies House 06547415 gives the registered name AAYAN MEDICAL IMAGING LIMITED, identical to the display name, and no previous names. No extra name form exists to record.",
-   "date": "2026-08-18"
-  },
-  {
-   "name": "Abbott Diagnostics",
-   "reason": "The only real-world form the record's own note points to, 'Abbott Rapid Diagnostics Ltd', is a SEPARATE supplier record in this seed (Abbott Rapid Diagnostics). Recording it here would be an alias that is another record's own name, which verify.py hard-fails and which would hand this record every Abbott Rapid Diagnostics lookup. 'Abbott' alone is a shortening of several Abbott records and is barred by rule 2. Needs Lou's call on whether the two records should be merged.",
-   "date": "2026-08-18"
-  },
-  {
-   "name": "Accrington Surgical",
-   "reason": "accringtonsurgical.co.uk is the company's own site and its page title is \"Accrington Surgical Instrument Suppliers LTD\"; its own news page carries \"NHS Supply Chain Surgical Instruments Framework Award\", the same framework this record was created from. So the only real-world longer form of this name is \"Accrington Surgical Instrument Suppliers Ltd\", which is a SEPARATE record's own name in this seed. Recording it here would trip verify.py's alias_steals_name hard fail and hand this record every lookup meant for that one. Companies House holds ACCRINGTON SURGICAL LTD (06046644) but it is DISSOLVED, so it cannot be the current supplier either. Needs Lou's call on merging the three Accrington records. Speciality \"Theatres / surgical\" WAS added, from the company's own product pages.",
-   "date": "2026-08-19"
-  },
-  {
-   "name": "Accrington Surgical Inst. Suppliers",
-   "reason": "Same position as \"Accrington Surgical\". This is NHS Supply Chain's abbreviation of \"Accrington Surgical Instrument Suppliers Ltd\" on the Procedure Packs brief (2023/S 000-031398); the company's own site (accringtonsurgical.co.uk) sells procedure packs and packs and trays, confirming it is the same firm. The expansion is another record's own name, so it cannot be recorded as an alias here. Needs Lou's call on merging the three Accrington records. Speciality \"Theatres / surgical\" WAS added, from the company's own product pages.",
-   "date": "2026-08-19"
-  },
-  {
-   "name": "Alcado Limited",
-   "reason": "No company website found for Alcado. Companies House holds one candidate, ALCADO LIMITED (07446966), but its registered office is a company-formation agent's address (Dalton House, 60 Windsor Avenue, London SW19 2RR, shared with unrelated companies) and nothing on that record ties it to infant feeding or to the NHS Supply Chain Infant Feeding and Accessories framework this supplier was created from. Its registered name is identical to the display name in any case, so it would add no new form. Recording a single-token 'Alcado' off an unconfirmed Companies House match would be a guess, so nothing was added.",
-   "date": "2026-08-20"
-  },
-  {
-   "name": "Alliance Healthcare",
-   "reason": "alliance-healthcare.co.uk now 301-redirects to cencora.com/global-reach/europe/united-kingdom, where Alliance Healthcare is described as Cencora's 'legacy brand'. Cencora is the parent, so it must not be recorded as an alias, and no Cencora page names the UK legal entity (its /legal, /terms-of-use and /privacy-policy paths all 404). Companies House holds two distinct active candidates: ALLIANCE HEALTHCARE (DISTRIBUTION) LIMITED (03446039, Cox Lane, Chessington) and ALLIANCE HEALTHCARE LIMITED (04033239, Chippenham, previously ALLIANCE PHARMA LIMITED), the second of which is a different company altogether. With no company-owned source to pick between them, no alias was recorded.",
-   "date": "2026-08-20"
-  },
-  {
-   "name": "Aquilant Critical Care",
-   "reason": "Aquilant's own domains are dead: aquilant.co.uk and aquilant.com do not resolve, and aquilantendoscopy.com now 301-redirects to healthcare21.eu (checked 22/08/2026). Companies House holds no company of this name; the only active entity is AQUILANT LIMITED (02090807, Basingstoke), which is the legal entity behind BOTH this record and \"Aquilant Ltd Bd Bas Critical\" — recording \"Aquilant Limited\" here would hand this record every lookup meant for the other. Healthcare 21 Group and Uniphar are parents, barred. Single token \"Aquilant\" is a shortening and is carried by two seed records. Needs Lou's call on whether the two Aquilant records should be merged.",
-   "date": "2026-08-22"
-  },
-  {
-   "name": "Aquilant Ltd Bd Bas Critical",
-   "reason": "The display name is an NHS Supply Chain internal supplier string, not a real-world name form. Same position as \"Aquilant Critical Care\": no live company website (aquilant.co.uk / aquilant.com dead 22/08/2026), and the only active register entry is AQUILANT LIMITED (02090807), the shared legal entity of both records, so \"Aquilant Ltd\"/\"Aquilant Limited\" cannot be given to one without stealing the other's lookups. Parents (Healthcare 21 Group, Uniphar) barred. Needs Lou's call on merging the two Aquilant records.",
-   "date": "2026-08-22"
-  },
-  {
-   "name": "Artivion UK Ltd",
-   "reason": "Companies House 03837138 ARTIVION UK LTD (active) carries the previous name CRYOLIFE EUROPA LTD. — so this record and \"Artivion UK Ltd (CryoLife Europa, Ltd)\" are the SAME legal entity held twice in the seed. Every real name form (\"Artivion UK Limited\", \"CryoLife Europa Ltd\") therefore belongs to both records equally, and giving it to one hands it every lookup meant for the other. Single token \"Artivion\" is carried by two seed records and is barred anyway as a shortening. Speciality \"Cardiology\" WAS added from artivion.com. The duplicate needs Lou's merge decision.",
-   "date": "2026-08-22"
-  },
-  {
-   "name": "Artivion UK Ltd (CryoLife Europa, Ltd)",
-   "reason": "Same entity as the \"Artivion UK Ltd\" record — Companies House 03837138, previous name CRYOLIFE EUROPA LTD. No name form can be given to this record without stealing it from the other, and \"Artivion UK Ltd\" is the other record's own name, which verify.py hard-fails. Speciality \"Cardiology\" WAS added from artivion.com. Needs Lou's merge decision.",
-   "date": "2026-08-22"
-  },
-  {
-   "name": "Babease Limited",
-   "reason": "Companies House holds BABEASE LIMITED 07473497, DISSOLVED on 01/11/2023, and a separate BABEASE FOODS LIMITED 12320133, in liquidation; neither is a live trading entity and there is no evidence in either record showing which one NHS Supply Chain named on the Infant Feeding and Accessories brief. babease.co.uk returns HTTP 500 and babease.com does not respond, so there is no company site to read a name form from. Recording \"Babease Foods Limited\" would be recording a different legal entity's name on an unverified assumption. No verifiable extra name form. NOTE FOR REVIEW: the brand ceased trading, so this record may be a dead supplier sitting on a live framework panel.",
-   "date": "2026-08-23"
-  },
-  {
-   "name": "Becton Dickinson Uk Ltd Ed Wokingham",
-   "reason": "This is an NHS Supply Chain account-name variant of Becton Dickinson, which already has its own seed record (\"BD \\u2014 Becton, Dickinson\"). That record already holds every real-world BD name form as aliases, including \"Becton Dickinson UK Ltd\" and \"becton dickinson\". Alias lookup is first-wins, so adding any BD name form here would either hard-fail verify.py's alias_steals_name check or publish BD's press under a depot-code record. The right fix is a merge decision for Lou, not an alias. No alias added.",
-   "date": "2026-08-25"
-  },
-  {
-   "name": "Becton Dickinson Uk Ltd Stock Oxford",
-   "reason": "Same as the Ed Wokingham record: an NHS Supply Chain account-name variant of the existing \"BD \\u2014 Becton, Dickinson\" seed record, which already carries the real BD name forms. Adding BD forms here would mis-attribute BD press to a depot-code record. Merge decision required, not an alias. No alias added.",
-   "date": "2026-08-25"
+  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
+  "lastRun": "2026-08-25",
+  "done": [
+    "365 Healthcare",
+    "3D LifePrints UK Ltd",
+    "3D Metal Printing Ltd",
+    "@SimulationMan Ltd",
+    "A2B Healthcare",
+    "Aayan Medical Imaging Limited",
+    "Abbliss Ltd",
+    "Abbott Diagnostics",
+    "Abilia Ltd",
+    "Abiomed Ltd",
+    "Absorbest AB",
+    "Accel Heal",
+    "Accora",
+    "Accrington Surgical",
+    "Accrington Surgical Inst. Suppliers",
+    "Accrington Surgical Instrument Suppliers Ltd",
+    "Acumed Ltd",
+    "Adler Ortho UK Limited",
+    "Aero Healthcare Ltd",
+    "AG Dental Equipment",
+    "Agfa Healthcare UK Ltd",
+    "Agito Medical A/S",
+    "Aidapt Bathrooms Ltd",
+    "Aidence",
+    "Aidoc Medical Ltd",
+    "Airbon Ltd, trading as Smart Air UK",
+    "AJ Mobility Ltd",
+    "Albert Waeschle Ltd",
+    "Alcado Limited",
+    "Alivecor Ltd",
+    "Alliance Healthcare",
+    "Alliance Medical",
+    "Altomed Limited",
+    "ALXR Limited",
+    "AMG Medtech Ltd",
+    "Amoena UK Ltd",
+    "Amparo Prosthetics Ltd",
+    "AmRay UK",
+    "Anetic Aid Ltd",
+    "Anglian Dental",
+    "Anika Therapeutics Ltd",
+    "Anita UK Ltd",
+    "Anser Medical",
+    "APC Cardiovascular Ltd",
+    "Apos Medical UK Ltd",
+    "Apple Star Corp Limited",
+    "APR Medtech Limited",
+    "Aptvision Limited",
+    "AQLANE Medical BV",
+    "Architectural Wallsz (International) Limited",
+    "Arcomedical Infusion Ltd",
+    "Arden Orthotics Ltd",
+    "Argon Medical Devices UK Ltd",
+    "Arrow County Supplies",
+    "Arthrex",
+    "Arthro Dynamik Ltd",
+    "Aspire Pharma",
+    "Associated Optical Products",
+    "Assut UK LTD",
+    "Astric Medical Ltd",
+    "Athrodax Healthcare International Ltd",
+    "Atom Medical Corporation UK ltd",
+    "Atos Medical (UK)",
+    "Attends Ltd",
+    "Audit Data",
+    "Avidity Science Limited",
+    "B.N.O.S Meditech Ltd",
+    "Babease Limited",
+    "Balmung Medical Handel GmbH",
+    "Bar Code Data Ltd",
+    "Bates Office Services Ltd",
+    "BDSI Ltd",
+    "Beagle Orthopaedic Ltd",
+    "Beaver Visitec International",
+    "Becton Dickinson Uk Ltd Ed Wokingham",
+    "Becton Dickinson Uk Ltd Stock Oxford",
+    "Bender UK Ltd",
+    "Benefoot UK Ltd trading as BeneCare Medical",
+    "Benmor Medical",
+    "Berry BPI Recycled Products",
+    "Biocomposites Ltd",
+    "Biedermann Motech International LTD",
+    "Biotechnics Ltd",
+    "Biotronik",
+    "Biomet 3i UK, Ltd (ZimVie)",
+    "Bioventus Cooperatief U.A",
+    "Birmingham Optical Group",
+    "Birmingham Orthotic Services",
+    "BK Medical UK",
+    "BMS Critical Care Ltd",
+    "Bidfood Direct",
+    "Bioguard Hygiene Solutions"
+  ],
+  "refusals": [
+    {
+      "name": "365 Healthcare",
+      "reason": "365healthcare.com now 301-redirects to Mediq's UK B2B site, and mediq.co.uk carries 365 Healthcare only as a product brand with no legal entity of its own; its footer names Mediq Healthcare UK Limited. Mediq is the parent, so it must not be recorded as an alias. Companies House holds no active '365 Healthcare' matching the Droitwich supplier. No verifiable extra name form.",
+      "date": "2026-08-18"
+    },
+    {
+      "name": "Aayan Medical Imaging Limited",
+      "reason": "aayanmedical.co.uk is a parked lander, no company site found. Companies House 06547415 gives the registered name AAYAN MEDICAL IMAGING LIMITED, identical to the display name, and no previous names. No extra name form exists to record.",
+      "date": "2026-08-18"
+    },
+    {
+      "name": "Abbott Diagnostics",
+      "reason": "The only real-world form the record's own note points to, 'Abbott Rapid Diagnostics Ltd', is a SEPARATE supplier record in this seed (Abbott Rapid Diagnostics). Recording it here would be an alias that is another record's own name, which verify.py hard-fails and which would hand this record every Abbott Rapid Diagnostics lookup. 'Abbott' alone is a shortening of several Abbott records and is barred by rule 2. Needs Lou's call on whether the two records should be merged.",
+      "date": "2026-08-18"
+    },
+    {
+      "name": "Accrington Surgical",
+      "reason": "accringtonsurgical.co.uk is the company's own site and its page title is \"Accrington Surgical Instrument Suppliers LTD\"; its own news page carries \"NHS Supply Chain Surgical Instruments Framework Award\", the same framework this record was created from. So the only real-world longer form of this name is \"Accrington Surgical Instrument Suppliers Ltd\", which is a SEPARATE record's own name in this seed. Recording it here would trip verify.py's alias_steals_name hard fail and hand this record every lookup meant for that one. Companies House holds ACCRINGTON SURGICAL LTD (06046644) but it is DISSOLVED, so it cannot be the current supplier either. Needs Lou's call on merging the three Accrington records. Speciality \"Theatres / surgical\" WAS added, from the company's own product pages.",
+      "date": "2026-08-19"
+    },
+    {
+      "name": "Accrington Surgical Inst. Suppliers",
+      "reason": "Same position as \"Accrington Surgical\". This is NHS Supply Chain's abbreviation of \"Accrington Surgical Instrument Suppliers Ltd\" on the Procedure Packs brief (2023/S 000-031398); the company's own site (accringtonsurgical.co.uk) sells procedure packs and packs and trays, confirming it is the same firm. The expansion is another record's own name, so it cannot be recorded as an alias here. Needs Lou's call on merging the three Accrington records. Speciality \"Theatres / surgical\" WAS added, from the company's own product pages.",
+      "date": "2026-08-19"
+    },
+    {
+      "name": "Alcado Limited",
+      "reason": "No company website found for Alcado. Companies House holds one candidate, ALCADO LIMITED (07446966), but its registered office is a company-formation agent's address (Dalton House, 60 Windsor Avenue, London SW19 2RR, shared with unrelated companies) and nothing on that record ties it to infant feeding or to the NHS Supply Chain Infant Feeding and Accessories framework this supplier was created from. Its registered name is identical to the display name in any case, so it would add no new form. Recording a single-token 'Alcado' off an unconfirmed Companies House match would be a guess, so nothing was added.",
+      "date": "2026-08-20"
+    },
+    {
+      "name": "Alliance Healthcare",
+      "reason": "alliance-healthcare.co.uk now 301-redirects to cencora.com/global-reach/europe/united-kingdom, where Alliance Healthcare is described as Cencora's 'legacy brand'. Cencora is the parent, so it must not be recorded as an alias, and no Cencora page names the UK legal entity (its /legal, /terms-of-use and /privacy-policy paths all 404). Companies House holds two distinct active candidates: ALLIANCE HEALTHCARE (DISTRIBUTION) LIMITED (03446039, Cox Lane, Chessington) and ALLIANCE HEALTHCARE LIMITED (04033239, Chippenham, previously ALLIANCE PHARMA LIMITED), the second of which is a different company altogether. With no company-owned source to pick between them, no alias was recorded.",
+      "date": "2026-08-20"
+    },
+    {
+      "name": "Aquilant Critical Care",
+      "reason": "Aquilant's own domains are dead: aquilant.co.uk and aquilant.com do not resolve, and aquilantendoscopy.com now 301-redirects to healthcare21.eu (checked 22/08/2026). Companies House holds no company of this name; the only active entity is AQUILANT LIMITED (02090807, Basingstoke), which is the legal entity behind BOTH this record and \"Aquilant Ltd Bd Bas Critical\" — recording \"Aquilant Limited\" here would hand this record every lookup meant for the other. Healthcare 21 Group and Uniphar are parents, barred. Single token \"Aquilant\" is a shortening and is carried by two seed records. Needs Lou's call on whether the two Aquilant records should be merged.",
+      "date": "2026-08-22"
+    },
+    {
+      "name": "Aquilant Ltd Bd Bas Critical",
+      "reason": "The display name is an NHS Supply Chain internal supplier string, not a real-world name form. Same position as \"Aquilant Critical Care\": no live company website (aquilant.co.uk / aquilant.com dead 22/08/2026), and the only active register entry is AQUILANT LIMITED (02090807), the shared legal entity of both records, so \"Aquilant Ltd\"/\"Aquilant Limited\" cannot be given to one without stealing the other's lookups. Parents (Healthcare 21 Group, Uniphar) barred. Needs Lou's call on merging the two Aquilant records.",
+      "date": "2026-08-22"
+    },
+    {
+      "name": "Artivion UK Ltd",
+      "reason": "Companies House 03837138 ARTIVION UK LTD (active) carries the previous name CRYOLIFE EUROPA LTD. — so this record and \"Artivion UK Ltd (CryoLife Europa, Ltd)\" are the SAME legal entity held twice in the seed. Every real name form (\"Artivion UK Limited\", \"CryoLife Europa Ltd\") therefore belongs to both records equally, and giving it to one hands it every lookup meant for the other. Single token \"Artivion\" is carried by two seed records and is barred anyway as a shortening. Speciality \"Cardiology\" WAS added from artivion.com. The duplicate needs Lou's merge decision.",
+      "date": "2026-08-22"
+    },
+    {
+      "name": "Artivion UK Ltd (CryoLife Europa, Ltd)",
+      "reason": "Same entity as the \"Artivion UK Ltd\" record — Companies House 03837138, previous name CRYOLIFE EUROPA LTD. No name form can be given to this record without stealing it from the other, and \"Artivion UK Ltd\" is the other record's own name, which verify.py hard-fails. Speciality \"Cardiology\" WAS added from artivion.com. Needs Lou's merge decision.",
+      "date": "2026-08-22"
+    },
+    {
+      "name": "Babease Limited",
+      "reason": "Companies House holds BABEASE LIMITED 07473497, DISSOLVED on 01/11/2023, and a separate BABEASE FOODS LIMITED 12320133, in liquidation; neither is a live trading entity and there is no evidence in either record showing which one NHS Supply Chain named on the Infant Feeding and Accessories brief. babease.co.uk returns HTTP 500 and babease.com does not respond, so there is no company site to read a name form from. Recording \"Babease Foods Limited\" would be recording a different legal entity's name on an unverified assumption. No verifiable extra name form. NOTE FOR REVIEW: the brand ceased trading, so this record may be a dead supplier sitting on a live framework panel.",
+      "date": "2026-08-23"
+    },
+    {
+      "name": "Becton Dickinson Uk Ltd Ed Wokingham",
+      "reason": "This is an NHS Supply Chain account-name variant of Becton Dickinson, which already has its own seed record (\"BD \\u2014 Becton, Dickinson\"). That record already holds every real-world BD name form as aliases, including \"Becton Dickinson UK Ltd\" and \"becton dickinson\". Alias lookup is first-wins, so adding any BD name form here would either hard-fail verify.py's alias_steals_name check or publish BD's press under a depot-code record. The right fix is a merge decision for Lou, not an alias. No alias added.",
+      "date": "2026-08-25"
+    },
+    {
+      "name": "Becton Dickinson Uk Ltd Stock Oxford",
+      "reason": "Same as the Ed Wokingham record: an NHS Supply Chain account-name variant of the existing \"BD \\u2014 Becton, Dickinson\" seed record, which already carries the real BD name forms. Adding BD forms here would mis-attribute BD press to a depot-code record. Merge decision required, not an alias. No alias added.",
+      "date": "2026-08-25"
+    },
+    {
+      "name": "Bidfood Direct",
+      "date": "2026-08-25",
+      "reason": "No verifiable name form beyond the display name. www.bidfooddirect.co.uk is a login-gated ordering portal whose only legal line is \"Copyright © 2026 Bidfood. All rights reserved.\"; Companies House holds BIDFOOD LIMITED (00549410), BIDFOOD FOODSERVICE LIMITED (03694611) and BIDFOOD ONE LIMITED (02931605, dissolved) but no company named Bidfood Direct. The only additional form available is the parent brand \"Bidfood\", which the parent/subsidiary rule forbids. Specialities left empty: the framework is Multi Temperature Distribution (food), which has no speciality in this seed's vocabulary."
+    },
+    {
+      "name": "Bioguard Hygiene Solutions",
+      "date": "2026-08-25",
+      "reason": "Could not reach the company's own site: bioguardhygiene.co.uk resolves to 103.212.121.237 but both https and http time out / refuse the connection from this session, so no page was actually seen. Companies House: the only exact-name record, BIOGUARD HYGIENE SOLUTIONS LIMITED 04709907, was DISSOLVED on 20 June 2023, and this seed record's own companyNumberNote already rules it out as the trading entity; no other active Bioguard company can be tied to this supplier on evidence. No alias and no speciality recorded."
+    }
+  ],
+  "sources": {
+    "Accora": {
+      "aliases": [
+        "Accora Limited"
+      ],
+      "verifiedOn": "2026-08-19",
+      "sources": "Companies House 04915604 registered name ACCORA LIMITED (active). Own site accora.care."
+    },
+    "Accrington Surgical Instrument Suppliers Ltd": {
+      "aliases": [
+        "Accrington Surgical Instrument Suppliers Limited"
+      ],
+      "verifiedOn": "2026-08-19",
+      "sources": "Own site accringtonsurgical.co.uk page title \"Accrington Surgical Instrument Suppliers LTD\"; Companies House 05980916 registered name ACCRINGTON SURGICAL INSTRUMENT SUPPLIERS LIMITED (active)."
+    },
+    "Acumed Ltd": {
+      "aliases": [
+        "Acumed"
+      ],
+      "verifiedOn": "2026-08-19",
+      "sources": "Own site acumed.net trades throughout as \"Acumed\" (masthead, About Acumed, product families); footer legal line \"Acumed LLC, a Marmon Medical | Berkshire Hathaway Company\". \"Acumed\" is unique across the seed as a single token."
+    },
+    "Adler Ortho UK Limited": {
+      "aliases": [
+        "Adler Ortho U.K. Limited"
+      ],
+      "verifiedOn": "2026-08-19",
+      "sources": "Companies House 08167771 registered name ADLER ORTHO U.K. LIMITED (active). Own site adlerortho.com states direct commercial operations in the UK. Bare \"Adler Ortho\" NOT added: it is the Italian parent Adler Ortho S.p.A.'s own brand."
+    },
+    "Aero Healthcare Ltd": {
+      "aliases": [
+        "Aero Healthcare"
+      ],
+      "verifiedOn": "2026-08-19",
+      "sources": "Own site aerohealthcare.com masthead and throughout: \"Aero Healthcare\". Companies House 06760143 AERO HEALTHCARE LTD (active), Horsham.",
+      "specialities": [
+        "Wound care",
+        "Infection prevention and PPE"
+      ],
+      "specialitiesSource": "Own site aerohealthcare.com product categories \"Wound Care & First Aid\" and \"Personal Protection - PPE\"."
+    },
+    "AG Dental Equipment": {
+      "aliases": [
+        "AG Dental",
+        "AG Dental (Equipment) Limited"
+      ],
+      "verifiedOn": "2026-08-19",
+      "sources": "Own site agdental.co.uk trades as \"AG Dental Equipment\" and \"AG Dental\"; its contact address (Unit One Northford Close, Shrivenham, Swindon SN6 8HL) matches Companies House 07007257 AG DENTAL (EQUIPMENT) LIMITED (active)."
+    },
+    "Agfa Healthcare UK Ltd": {
+      "aliases": [
+        "Agfa HealthCare UK Limited"
+      ],
+      "verifiedOn": "2026-08-19",
+      "sources": "Companies House 06317215 registered name AGFA HEALTHCARE UK LIMITED (active), 515 Coldhams Lane, Cambridge. Own site agfahealthcare.com. Bare \"AGFA HealthCare\" NOT added: that is the global division above this UK entity.",
+      "specialities": [
+        "Diagnostics and imaging",
+        "Digital and medical IT"
+      ],
+      "specialitiesSource": "Own site agfahealthcare.com Clinical Solutions (Radiology, Cardiology, Digital Pathology, Breast Imaging) and the Enterprise Imaging platform."
+    },
+    "Agito Medical A/S": {
+      "aliases": [
+        "Agito Medical"
+      ],
+      "verifiedOn": "2026-08-19",
+      "sources": "Own site agitomedical.com brands throughout as \"AGITO Medical\" and its own marketing permission line names \"AGITO Medical A/S\".",
+      "specialities": [
+        "Diagnostics and imaging"
+      ],
+      "specialitiesSource": "Own site agitomedical.com: \"Diagnostic Imaging Solutions\" - mobile, relocatable and modular imaging, CT/MRI, cath labs, pre-owned imaging systems and parts."
+    },
+    "Aidapt Bathrooms Ltd": {
+      "aliases": [
+        "Aidapt Bathrooms Limited"
+      ],
+      "verifiedOn": "2026-08-19",
+      "sources": "Own site aidapt.co.uk footer names \"Aidapt Bathrooms Ltd (South Office)\" and gives the head office as Lancots Lane, Sutton Oak, St Helens WA9 3EX, matching Companies House 02464054 AIDAPT BATHROOMS LIMITED (active). Bare \"Aidapt\" NOT added: sister companies Aidapt International Ltd and Aidapt (Wales) Ltd share the brand.",
+      "specialities": [
+        "Rehabilitation and mobility"
+      ],
+      "specialitiesSource": "Own site aidapt.co.uk page title \"Aidapt Mobility Aids & Independent Living Solutions\"."
+    },
+    "Aidence": {
+      "aliases": [
+        "Aidence BV",
+        "Aidence UK Ltd"
+      ],
+      "verifiedOn": "2026-08-19",
+      "sources": "Own site aidence.com now resolves to deephealth.com/aidence, whose product disclaimer reads \"DeepHealth Lung is manufactured as Veye Lung Nodules by Aidence BV for DeepHealth Inc.\" Companies House holds exactly one Aidence company, AIDENCE UK LTD (13057524, active). Parent names DeepHealth and RadNet NOT added."
+    },
+    "Accrington Surgical": {
+      "verifiedOn": "2026-08-19",
+      "specialities": [
+        "Theatres / surgical"
+      ],
+      "specialitiesSource": "Own site accringtonsurgical.co.uk: reusable and single-use theatre-quality surgical instruments and procedure packs."
+    },
+    "Accrington Surgical Inst. Suppliers": {
+      "verifiedOn": "2026-08-19",
+      "specialities": [
+        "Theatres / surgical"
+      ],
+      "specialitiesSource": "Own site accringtonsurgical.co.uk: surgical instruments, packs and trays, procedure packs."
+    },
+    "AQLANE Medical BV": {
+      "aliases": [
+        "AQLANE Medical",
+        "AQLANE Medical B.V.",
+        "aqlanemedical.com"
+      ],
+      "verifiedOn": "2026-08-22",
+      "sources": "Own site aqlanemedical.com — masthead \"AQLANE Medical™\", footer \"©Aqlane medical™\"; its own /disclaimer/ page gives the legal entity \"AQLANE Medical B.V.\", Sprendlingenstraat 50, 5061 KN Oisterwijk, Netherlands. Domain aqlanemedical.com is the company's own site. Product name Urolon NOT added as an alias (a product, not a name form)."
+    },
+    "Architectural Wallsz (International) Limited": {
+      "aliases": [
+        "Architectural Wallsz",
+        "Architectural Wallsz International Ltd",
+        "Architectural Wallsz Ltd",
+        "Architectural Wallsz (North West) Limited",
+        "awallsz.co.uk"
+      ],
+      "verifiedOn": "2026-08-22",
+      "sources": "Own site awallsz.co.uk — page title \"Architectural Wallsz Healthcare & Education Environments\", footer address line \"Architectural Wallsz International Ltd. Unit 2 Buntsford Business Centre, Buntsford Drive, Bromsgrove, Worcestershire. B60 3FR\" and copyright line \"© 2026 Architectural Wallsz Ltd\". Companies House 08943815 ARCHITECTURAL WALLSZ (INTERNATIONAL) LIMITED (active), previous name ARCHITECTURAL WALLSZ (NORTH WEST) LIMITED. The separate ARCHITECTURAL WALLSZ LIMITED (08819884) and (NORTHERN) companies are all dissolved and are not seed records."
+    },
+    "Arcomedical Infusion Ltd": {
+      "aliases": [
+        "Arcomedical Infusion Limited"
+      ],
+      "verifiedOn": "2026-08-22",
+      "sources": "Companies House 02723545 registered name ARCOMEDICAL INFUSION LIMITED (active), Unit B Beacon Business Park, Weston Road, Stafford ST18 0WL. No company website found: arcomedical.co.uk does not resolve and arcomedical.com is an unrelated German patient-services firm (checked 22/08/2026), so nothing from that site was used. Swiss principal Arcomed AG NOT added — supplier/parent name, barred. Single token \"Arcomedical\" NOT added — a shortening, not the whole canonical name."
+    },
+    "Arden Orthotics Ltd": {
+      "aliases": [
+        "Arden Orthotics",
+        "Arden Orthotics Limited",
+        "ardenorthotics.co.uk"
+      ],
+      "verifiedOn": "2026-08-22",
+      "sources": "Own site ardenorthotics.co.uk — footer \"© Copyright Arden Orthotics 2026\", masthead \"Orthopaedic footwear & bespoke shoes\", contact info@ardenorthotics.co.uk. Companies House 03365493 registered name ARDEN ORTHOTICS LIMITED (active), Sparkhill, Birmingham."
+    },
+    "Argon Medical Devices UK Ltd": {
+      "aliases": [
+        "Argon Medical Devices",
+        "Argon Medical",
+        "argonmedical.com"
+      ],
+      "verifiedOn": "2026-08-22",
+      "sources": "Own site argonmedical.com — masthead/title \"Argon Medical Devices | Interventional Medical Devices | Argon Medical\", About page and news items throughout use \"Argon Medical\" and \"Argon Medical Devices\". Companies House 03543457 ARGON MEDICAL DEVICES UK LTD (active), Castle Donington; previous name MANA-TECH LIMITED (to 05/03/2020) NOT added — no press currency. Both added forms are two tokens or more. The seed holds no separate Argon parent record, so no parent/subsidiary double-count arises."
+    },
+    "Arrow County Supplies": {
+      "aliases": [
+        "Arrow County Supplies Limited"
+      ],
+      "verifiedOn": "2026-08-22",
+      "sources": "Companies House 06355141 registered name ARROW COUNTY SUPPLIES LIMITED (active). The company's own site arrowcounty.com served a bot-challenge page on 22/08/2026 and was not read, so nothing was taken from it — no \"Arrow County\" short form and no domain alias recorded."
+    },
+    "Arthrex": {
+      "aliases": [
+        "Arthrex UK",
+        "Arthrex Ltd",
+        "Arthrex Limited",
+        "arthrex.co.uk"
+      ],
+      "verifiedOn": "2026-08-22",
+      "sources": "Own site arthrex.co.uk — title \"Your Specialist for Medical Technology | Arthrex UK\", body \"Welcome to Arthrex UK\", contact block \"Arthrex Ltd, Medical Education Centre, Innovation Point, Solihull B90 8AG\" and \"Unit 1 Bessemer Park, Shepcote Lane, Sheffield S9 1DZ\". Companies House 03199094 ARTHREX LIMITED (active), Bessemer Park Sheffield — the same number already on this record. Site copyright holder \"Arthrex GmbH\" NOT added — parent, barred."
+    },
+    "Arthro Dynamik Ltd": {
+      "aliases": [
+        "Arthro Dynamik",
+        "arthrodynamik.com"
+      ],
+      "verifiedOn": "2026-08-22",
+      "sources": "Own site arthrodynamik.com — masthead \"We are Arthro Dynamik\", About text \"Arthro Dynamik Ltd was founded in 2009 in Yorkshire, United Kingdom\", footer \"© 2026 Arthro Dynamik Ltd\". Companies House 08479540 ARTHRO DYNAMIK LTD (active), Wetherby. \"Arthro Dynamik Limited\" NOT added — the register holds LTD, not LIMITED, and no source shows that spelling."
+    },
+    "Artivion UK Ltd": {
+      "aliases": [],
+      "specialities": [
+        "Cardiology"
+      ],
+      "verifiedOn": "2026-08-22",
+      "sources": "Speciality only. Own site artivion.com states the clinical scope plainly: \"cardiac and vascular surgeons' most difficult challenges in treating patients with diseases of the aorta\". No alias added — see refusal."
+    },
+    "Artivion UK Ltd (CryoLife Europa, Ltd)": {
+      "aliases": [],
+      "specialities": [
+        "Cardiology"
+      ],
+      "verifiedOn": "2026-08-22",
+      "sources": "Speciality only. Own site artivion.com states the clinical scope plainly: \"cardiac and vascular surgeons' most difficult challenges in treating patients with diseases of the aorta\". No alias added — see refusal."
+    },
+    "Aspire Pharma": {
+      "aliases": [
+        "Aspire Pharma Limited"
+      ],
+      "verifiedOn": "2026-08-23",
+      "sources": "Own site aspirepharma.com (aspirepharma.co.uk redirects there) masthead and About page trade as \"Aspire Pharma\"; \"Aspire Pharma was established in 2009\". Companies House 06828501 ASPIRE PHARMA LIMITED (active), Godalming, Surrey. \"Aspire\" alone NOT added: a common word and a shortening, barred by rule 2.",
+      "specialities": [
+        "Cardiology",
+        "Dermatology / skin",
+        "Ophthalmology",
+        "Respiratory",
+        "Continence & urology"
+      ],
+      "specialitiesSource": "Own site aspirepharma.com/product-innovation/portfolio/ lists its therapy areas: Anti-Infectives, Cardiology, Central Nervous System, Dermatology, Gynaecology, Metabolism & Endocrinology, Oncology, Ophthalmology, Respiratory, Urology. Only the five with a clean equivalent in the seed's existing vocabulary are recorded; Anti-Infectives, CNS, Gynaecology, Metabolism & Endocrinology and Oncology have no clean equivalent and no new string was invented."
+    },
+    "Associated Optical Products": {
+      "aliases": [
+        "Associated Optical"
+      ],
+      "verifiedOn": "2026-08-23",
+      "sources": "Own site associatedoptical.co.uk About page trades throughout as \"Associated Optical\" (\"Associated Optical is a UK-based optical distribution and brand partner\"); footer legal line \"(c) 2025, Associated Optical Products\". Companies House holds no company registered as \"Associated Optical\" (quoted search returned no results), so no registered-name form was added."
+    },
+    "Assut UK LTD": {
+      "aliases": [
+        "Assut UK Limited"
+      ],
+      "verifiedOn": "2026-08-23",
+      "sources": "Companies House 05338676 ASSUT UK LIMITED (active), Shelley, Huddersfield - the only Assut UK company on the register. No own website found for the UK entity. \"Assut Europe\" NOT added: assuteurope.com is the Italian company Assut Europe (Magliano dei Marsi, founded 1991), a separate name that must not be recorded here."
+    },
+    "Astric Medical Ltd": {
+      "aliases": [
+        "Astric Medical Limited",
+        "Astric Medical"
+      ],
+      "verifiedOn": "2026-08-23",
+      "sources": "Own site astricmedical.com masthead \"ASTRIC MEDICAL\", page title \"Astric Medical Home\", footer \"Copyright (c) 2016 Astric Medical LTD.\". Companies House 07184648 ASTRIC MEDICAL LIMITED (active), Worthing."
+    },
+    "Athrodax Healthcare International Ltd": {
+      "aliases": [
+        "Athrodax Healthcare International Limited",
+        "Athrodax Healthcare"
+      ],
+      "verifiedOn": "2026-08-23",
+      "sources": "Own site athrodax.co.uk page title \"Athrodax Healthcare - Where experience makes a difference\", About menu \"About Athrodax\". Companies House 01501798 ATHRODAX HEALTHCARE INTERNATIONAL LIMITED (active), Hawthorn Business Park, Drybrook, Gloucestershire - the address the site gives. Previous name ATHRODAX SURGICAL LIMITED (to 1991) NOT added: not in use on the company's own site."
+    },
+    "Atom Medical Corporation UK ltd": {
+      "aliases": [
+        "Atom Medical Corporation UK Limited",
+        "Atom Medical Corporation UK"
+      ],
+      "verifiedOn": "2026-08-23",
+      "sources": "Companies House 12413115 ATOM MEDICAL CORPORATION UK LIMITED (active), Hednesford, Cannock. atommedical.co.uk serves only a parked lander, so no own-site form could be read. \"Atom Medical\" NOT added: that is the Japanese parent Atom Medical Corporation's own brand, and a parent's name must never be recorded as a subsidiary's alias."
+    },
+    "Atos Medical (UK)": {
+      "aliases": [
+        "Atos Medical UK Limited",
+        "Atos Medical UK"
+      ],
+      "verifiedOn": "2026-08-23",
+      "sources": "Companies House 04206141 ATOS MEDICAL UK LIMITED (active), Cartwright House, Riverside Business Park, Nottingham. Own site atosmedical.co.uk. \"Atos Medical\" alone NOT added: it is the group brand and the site states the business is \"part of the Coloplast Group\", so it is a parent-level name. \"Atos\" alone is barred by rule 2 and collides with the unrelated IT company Atos Limited (03290446)."
+    },
+    "Attends Ltd": {
+      "aliases": [
+        "Attends Limited",
+        "Attends UK LTD"
+      ],
+      "verifiedOn": "2026-08-23",
+      "sources": "Companies House 03718732 ATTENDS LIMITED (active), 10 Mariner Court, Durkar, Wakefield. \"Attends UK LTD\" is the wording of NHS Supply Chain's own contract launch brief for Textiles and Associated Products, already recorded in this record's frameworks array. Own site attends.co.uk, footer \"(c) 2026 Attends\". \"Attends\" alone NOT added: an ordinary English verb. \"Attends Healthcare Limited\" (06302122, same registered address) NOT added: a separate legal entity."
+    },
+    "Audit Data": {
+      "aliases": [
+        "Auditdata",
+        "Auditdata Limited"
+      ],
+      "verifiedOn": "2026-08-23",
+      "sources": "Own site auditdata.com - footer \"(c)Auditdata 2026. All rights reserved.\", products \"Auditdata Manage\" and \"Auditdata Academy\", UK number +44 (0) 333 444 4212. Companies House 05895080 AUDITDATA LIMITED (active), Staines-upon-Thames. The single token \"Auditdata\" is the domain the supplier owns and is unique across the seed, so it satisfies rule 2."
+    },
+    "Avidity Science Limited": {
+      "aliases": [
+        "Avidity Science"
+      ],
+      "verifiedOn": "2026-08-23",
+      "sources": "Own site avidityscience.com UK store, title \"Avidity Science - EMEA | Laboratory Equipment & Supplies\". Companies House 03482000 AVIDITY SCIENCE LIMITED (active), Drakes Drive, Long Crendon, Aylesbury. Previous name TRIPLE RED LIMITED (to 2018) NOT added: not in use on the company's own site."
+    },
+    "B.N.O.S Meditech Ltd": {
+      "aliases": [
+        "B.N.O.S. Meditech Limited",
+        "BNOS Meditech Ltd",
+        "BNOS Meditech"
+      ],
+      "verifiedOn": "2026-08-23",
+      "sources": "Own site meditech.uk.com page title \"B.N.O.S. Meditech Ltd | Medical Gas Equipment Manufacturer\", masthead \"BNOS MEDITECH LTD\". Companies House 02368331 B.N.O.S. MEDITECH LIMITED (active), Unit 9 Fifth Avenue, Bluebridge Industrial Estate, Halstead, Essex - the address on the site. \"Meditech\" alone NOT added: it collides with the large US EHR company MEDITECH."
+    },
+    "Biocomposites Ltd": {
+      "aliases": [
+        "Biocomposites Limited",
+        "biocomposites.com"
+      ],
+      "verifiedOn": "2026-08-25",
+      "sources": "Own site biocomposites.com/legal-notices/ states \"Registered in England and Wales. Number: 03291943\"; Companies House 03291943 registered name BIOCOMPOSITES LIMITED (active, Keele Science Park). Single token \"Biocomposites\" deliberately NOT added: it is a generic materials-science word and would match biocomposite-implant coverage from other firms."
+    },
+    "Biedermann Motech International LTD": {
+      "aliases": [
+        "Biedermann Motech International Limited"
+      ],
+      "verifiedOn": "2026-08-25",
+      "sources": "Group's own site biedermann.com contacts block lists \"Biedermann Motech International Limited, Lincoln House, Lincoln Way, Sherburn in Elmet, Leeds LS25 6AX, Great Britain\"; Companies House 09466785 registered name BIEDERMANN MOTECH INTERNATIONAL LIMITED (active, SIC 32500). Bare \"Biedermann Motech\" NOT added: the same page shows it is also the stem of the German parent (Biedermann Motech GmbH & Co. KG) and of Swiss and US siblings, so it would attach group press to the UK entity."
+    },
+    "Biotechnics Ltd": {
+      "aliases": [
+        "Bio Technics Ltd",
+        "Bio Technics Limited",
+        "Endurocide",
+        "endurocide.com"
+      ],
+      "specialities": [
+        "Infection prevention"
+      ],
+      "verifiedOn": "2026-08-25",
+      "sources": "Own site endurocide.com footer reads \"Copyright 2026 Endurocide, a trademarked division of Bio Technics Ltd\", Gourdon, Aberdeenshire DD10 0NH, and states the range as antimicrobial hospital curtains, hand sanitisers and surface disinfectants for healthcare. Companies House name search returns exactly one company: BIO TECHNICS LIMITED 03008596 (active). \"Endurocide\" recorded as a single token because it is a coined trademark carried by no other seed record (alias_universe count 0 before this edit) and press_match holds single tokens as WEAK, firing only where the item also carries this supplier's own speciality."
+    },
+    "Biotronik": {
+      "aliases": [
+        "Biotronik U.K. Limited",
+        "biotronik.com"
+      ],
+      "verifiedOn": "2026-08-25",
+      "sources": "Companies House 01442431 registered name BIOTRONIK U.K. LIMITED (active, Biotronik House, Avonbury Business Park, Bicester OX26 2UA); own site biotronik.com/en-gb masthead and footer. The German group entities on biotronik.com/en-gb/imprint (BIOTRONIK SE & Co. KG, BIOTRONIK MT SE) NOT added: parent names."
+    },
+    "Biomet 3i UK, Ltd (ZimVie)": {
+      "aliases": [
+        "ZimVie UK Limited",
+        "Biomet 3i UK Limited"
+      ],
+      "verifiedOn": "2026-08-25",
+      "sources": "Companies House 03230910: current registered name ZIMVIE UK LIMITED (active, One Glass Wharf, Bristol BS2 0ZX), previous company names BIOMET 3I UK LIMITED (28 Feb 2007 - 28 Mar 2025) and IMPLANT INNOVATIONS UK LIMITED (1996-2007). Same legal entity renamed, so both current and immediate previous name recorded. Pre-2007 names and the shelf name QUAYSHELFCO 568 LIMITED not recorded. Bare \"ZimVie\" NOT added: it is the parent group's name and would attach ZimVie Inc corporate press to the UK entity."
+    },
+    "Bioventus Cooperatief U.A": {
+      "aliases": [
+        "Bioventus Coöperatief U.A."
+      ],
+      "verifiedOn": "2026-08-25",
+      "sources": "Own site bioventus.com/contact-us/ lists the Netherlands international headquarters as \"Bioventus Coöperatief U.A., Taurusavenue 31, 2132 LS Hoofddorp, The Netherlands\" - the same legal entity as this record, spelled with the diaeresis. Bare \"Bioventus\" NOT added (a shortening of this record's canonical name); BIOVENTUS UK LIMITED 08369233 and Bioventus LLC NOT added (separate sibling entities); bioventus.com NOT added (group domain shared with the US parent)."
+    },
+    "Birmingham Optical Group": {
+      "aliases": [
+        "Birmingham Optical",
+        "Birmingham Optical Group Limited",
+        "birminghamoptical.co.uk"
+      ],
+      "verifiedOn": "2026-08-25",
+      "sources": "Own site birminghamoptical.co.uk/terms-conditions/ company details block: \"Birmingham Optical Unit 4, Gravelly Industrial Park Tyburn Road Birmingham B24 8HZ ... Company registration number: 1038848\", and the site trades as \"Birmingham Optical\" throughout. Companies House 01038848 registered name BIRMINGHAM OPTICAL GROUP LIMITED (active, Unit 4 Gravelly Industrial Estate, Birmingham B24 8HZ) - address and number both match."
+    },
+    "Birmingham Orthotic Services": {
+      "aliases": [
+        "Birmingham Orthotics",
+        "Birmingham Orthotic Services Ltd",
+        "birminghamorthotics.co.uk"
+      ],
+      "verifiedOn": "2026-08-25",
+      "sources": "Own site birminghamorthotics.co.uk: masthead \"Birmingham Orthotics\", footer \"BIRMINGHAM ORTHOTIC SERVICES\" and \"Copyright © Birmingham Orthotic Services\", email enquiries@birminghamorthotics.co.uk. Companies House: BIRMINGHAM ORTHOTIC SERVICES LTD 12086348 is the only active company of that name (A10 Link One Trading Estate, George Henry Road, Tipton DY4 7BU)."
+    },
+    "BK Medical UK": {
+      "aliases": [
+        "BK Medical UK Limited",
+        "BK Ultrasound Limited",
+        "Analogic Ultrasound UK Limited"
+      ],
+      "verifiedOn": "2026-08-25",
+      "sources": "Companies House 09159710 registered name BK MEDICAL UK LIMITED, DISSOLVED 4 July 2026 (12 Wellington Place, Leeds LS1 4AP), previous company names BK ULTRASOUND LIMITED (05 Jul 2016 - 17 Dec 2018) and ANALOGIC ULTRASOUND UK LIMITED (04 Aug 2014 - 05 Jul 2016). All three are registered names of the same legal entity, so archive press under any of them belongs to this record. The record already states the entity is dissolved and must not be approached as live."
+    },
+    "BMS Critical Care Ltd": {
+      "aliases": [
+        "B M S Critical Care Limited",
+        "bmscriticalcare.com"
+      ],
+      "verifiedOn": "2026-08-25",
+      "sources": "Own site bmscriticalcare.com/contact/ gives \"BMS Critical Care, Unit B, Hurstwood Court, Mercer Way, Blackburn, Lancashire, BB1 2QU\" and a range of infusion lines, extension lines, stopcocks and IV sets matching this record's three NHS Supply Chain frameworks. Companies House 01820888 registered name B M S CRITICAL CARE LIMITED (active) at Unit B Hurstwood Court, Mercer Way, Shadsworth Business Park, Blackburn BB1 2QU - the same address, so the spaced registered name is recorded as an alias. \"BMS Critical Care Limited\" unspaced NOT added: not seen verbatim on any source."
+    }
   }
- ],
- "sources": {
-  "Accora": {
-   "aliases": [
-    "Accora Limited"
-   ],
-   "verifiedOn": "2026-08-19",
-   "sources": "Companies House 04915604 registered name ACCORA LIMITED (active). Own site accora.care."
-  },
-  "Accrington Surgical Instrument Suppliers Ltd": {
-   "aliases": [
-    "Accrington Surgical Instrument Suppliers Limited"
-   ],
-   "verifiedOn": "2026-08-19",
-   "sources": "Own site accringtonsurgical.co.uk page title \"Accrington Surgical Instrument Suppliers LTD\"; Companies House 05980916 registered name ACCRINGTON SURGICAL INSTRUMENT SUPPLIERS LIMITED (active)."
-  },
-  "Acumed Ltd": {
-   "aliases": [
-    "Acumed"
-   ],
-   "verifiedOn": "2026-08-19",
-   "sources": "Own site acumed.net trades throughout as \"Acumed\" (masthead, About Acumed, product families); footer legal line \"Acumed LLC, a Marmon Medical | Berkshire Hathaway Company\". \"Acumed\" is unique across the seed as a single token."
-  },
-  "Adler Ortho UK Limited": {
-   "aliases": [
-    "Adler Ortho U.K. Limited"
-   ],
-   "verifiedOn": "2026-08-19",
-   "sources": "Companies House 08167771 registered name ADLER ORTHO U.K. LIMITED (active). Own site adlerortho.com states direct commercial operations in the UK. Bare \"Adler Ortho\" NOT added: it is the Italian parent Adler Ortho S.p.A.'s own brand."
-  },
-  "Aero Healthcare Ltd": {
-   "aliases": [
-    "Aero Healthcare"
-   ],
-   "verifiedOn": "2026-08-19",
-   "sources": "Own site aerohealthcare.com masthead and throughout: \"Aero Healthcare\". Companies House 06760143 AERO HEALTHCARE LTD (active), Horsham.",
-   "specialities": [
-    "Wound care",
-    "Infection prevention and PPE"
-   ],
-   "specialitiesSource": "Own site aerohealthcare.com product categories \"Wound Care & First Aid\" and \"Personal Protection - PPE\"."
-  },
-  "AG Dental Equipment": {
-   "aliases": [
-    "AG Dental",
-    "AG Dental (Equipment) Limited"
-   ],
-   "verifiedOn": "2026-08-19",
-   "sources": "Own site agdental.co.uk trades as \"AG Dental Equipment\" and \"AG Dental\"; its contact address (Unit One Northford Close, Shrivenham, Swindon SN6 8HL) matches Companies House 07007257 AG DENTAL (EQUIPMENT) LIMITED (active)."
-  },
-  "Agfa Healthcare UK Ltd": {
-   "aliases": [
-    "Agfa HealthCare UK Limited"
-   ],
-   "verifiedOn": "2026-08-19",
-   "sources": "Companies House 06317215 registered name AGFA HEALTHCARE UK LIMITED (active), 515 Coldhams Lane, Cambridge. Own site agfahealthcare.com. Bare \"AGFA HealthCare\" NOT added: that is the global division above this UK entity.",
-   "specialities": [
-    "Diagnostics and imaging",
-    "Digital and medical IT"
-   ],
-   "specialitiesSource": "Own site agfahealthcare.com Clinical Solutions (Radiology, Cardiology, Digital Pathology, Breast Imaging) and the Enterprise Imaging platform."
-  },
-  "Agito Medical A/S": {
-   "aliases": [
-    "Agito Medical"
-   ],
-   "verifiedOn": "2026-08-19",
-   "sources": "Own site agitomedical.com brands throughout as \"AGITO Medical\" and its own marketing permission line names \"AGITO Medical A/S\".",
-   "specialities": [
-    "Diagnostics and imaging"
-   ],
-   "specialitiesSource": "Own site agitomedical.com: \"Diagnostic Imaging Solutions\" - mobile, relocatable and modular imaging, CT/MRI, cath labs, pre-owned imaging systems and parts."
-  },
-  "Aidapt Bathrooms Ltd": {
-   "aliases": [
-    "Aidapt Bathrooms Limited"
-   ],
-   "verifiedOn": "2026-08-19",
-   "sources": "Own site aidapt.co.uk footer names \"Aidapt Bathrooms Ltd (South Office)\" and gives the head office as Lancots Lane, Sutton Oak, St Helens WA9 3EX, matching Companies House 02464054 AIDAPT BATHROOMS LIMITED (active). Bare \"Aidapt\" NOT added: sister companies Aidapt International Ltd and Aidapt (Wales) Ltd share the brand.",
-   "specialities": [
-    "Rehabilitation and mobility"
-   ],
-   "specialitiesSource": "Own site aidapt.co.uk page title \"Aidapt Mobility Aids & Independent Living Solutions\"."
-  },
-  "Aidence": {
-   "aliases": [
-    "Aidence BV",
-    "Aidence UK Ltd"
-   ],
-   "verifiedOn": "2026-08-19",
-   "sources": "Own site aidence.com now resolves to deephealth.com/aidence, whose product disclaimer reads \"DeepHealth Lung is manufactured as Veye Lung Nodules by Aidence BV for DeepHealth Inc.\" Companies House holds exactly one Aidence company, AIDENCE UK LTD (13057524, active). Parent names DeepHealth and RadNet NOT added."
-  },
-  "Accrington Surgical": {
-   "verifiedOn": "2026-08-19",
-   "specialities": [
-    "Theatres / surgical"
-   ],
-   "specialitiesSource": "Own site accringtonsurgical.co.uk: reusable and single-use theatre-quality surgical instruments and procedure packs."
-  },
-  "Accrington Surgical Inst. Suppliers": {
-   "verifiedOn": "2026-08-19",
-   "specialities": [
-    "Theatres / surgical"
-   ],
-   "specialitiesSource": "Own site accringtonsurgical.co.uk: surgical instruments, packs and trays, procedure packs."
-  },
-  "AQLANE Medical BV": {
-   "aliases": [
-    "AQLANE Medical",
-    "AQLANE Medical B.V.",
-    "aqlanemedical.com"
-   ],
-   "verifiedOn": "2026-08-22",
-   "sources": "Own site aqlanemedical.com — masthead \"AQLANE Medical™\", footer \"©Aqlane medical™\"; its own /disclaimer/ page gives the legal entity \"AQLANE Medical B.V.\", Sprendlingenstraat 50, 5061 KN Oisterwijk, Netherlands. Domain aqlanemedical.com is the company's own site. Product name Urolon NOT added as an alias (a product, not a name form)."
-  },
-  "Architectural Wallsz (International) Limited": {
-   "aliases": [
-    "Architectural Wallsz",
-    "Architectural Wallsz International Ltd",
-    "Architectural Wallsz Ltd",
-    "Architectural Wallsz (North West) Limited",
-    "awallsz.co.uk"
-   ],
-   "verifiedOn": "2026-08-22",
-   "sources": "Own site awallsz.co.uk — page title \"Architectural Wallsz Healthcare & Education Environments\", footer address line \"Architectural Wallsz International Ltd. Unit 2 Buntsford Business Centre, Buntsford Drive, Bromsgrove, Worcestershire. B60 3FR\" and copyright line \"© 2026 Architectural Wallsz Ltd\". Companies House 08943815 ARCHITECTURAL WALLSZ (INTERNATIONAL) LIMITED (active), previous name ARCHITECTURAL WALLSZ (NORTH WEST) LIMITED. The separate ARCHITECTURAL WALLSZ LIMITED (08819884) and (NORTHERN) companies are all dissolved and are not seed records."
-  },
-  "Arcomedical Infusion Ltd": {
-   "aliases": [
-    "Arcomedical Infusion Limited"
-   ],
-   "verifiedOn": "2026-08-22",
-   "sources": "Companies House 02723545 registered name ARCOMEDICAL INFUSION LIMITED (active), Unit B Beacon Business Park, Weston Road, Stafford ST18 0WL. No company website found: arcomedical.co.uk does not resolve and arcomedical.com is an unrelated German patient-services firm (checked 22/08/2026), so nothing from that site was used. Swiss principal Arcomed AG NOT added — supplier/parent name, barred. Single token \"Arcomedical\" NOT added — a shortening, not the whole canonical name."
-  },
-  "Arden Orthotics Ltd": {
-   "aliases": [
-    "Arden Orthotics",
-    "Arden Orthotics Limited",
-    "ardenorthotics.co.uk"
-   ],
-   "verifiedOn": "2026-08-22",
-   "sources": "Own site ardenorthotics.co.uk — footer \"© Copyright Arden Orthotics 2026\", masthead \"Orthopaedic footwear & bespoke shoes\", contact info@ardenorthotics.co.uk. Companies House 03365493 registered name ARDEN ORTHOTICS LIMITED (active), Sparkhill, Birmingham."
-  },
-  "Argon Medical Devices UK Ltd": {
-   "aliases": [
-    "Argon Medical Devices",
-    "Argon Medical",
-    "argonmedical.com"
-   ],
-   "verifiedOn": "2026-08-22",
-   "sources": "Own site argonmedical.com — masthead/title \"Argon Medical Devices | Interventional Medical Devices | Argon Medical\", About page and news items throughout use \"Argon Medical\" and \"Argon Medical Devices\". Companies House 03543457 ARGON MEDICAL DEVICES UK LTD (active), Castle Donington; previous name MANA-TECH LIMITED (to 05/03/2020) NOT added — no press currency. Both added forms are two tokens or more. The seed holds no separate Argon parent record, so no parent/subsidiary double-count arises."
-  },
-  "Arrow County Supplies": {
-   "aliases": [
-    "Arrow County Supplies Limited"
-   ],
-   "verifiedOn": "2026-08-22",
-   "sources": "Companies House 06355141 registered name ARROW COUNTY SUPPLIES LIMITED (active). The company's own site arrowcounty.com served a bot-challenge page on 22/08/2026 and was not read, so nothing was taken from it — no \"Arrow County\" short form and no domain alias recorded."
-  },
-  "Arthrex": {
-   "aliases": [
-    "Arthrex UK",
-    "Arthrex Ltd",
-    "Arthrex Limited",
-    "arthrex.co.uk"
-   ],
-   "verifiedOn": "2026-08-22",
-   "sources": "Own site arthrex.co.uk — title \"Your Specialist for Medical Technology | Arthrex UK\", body \"Welcome to Arthrex UK\", contact block \"Arthrex Ltd, Medical Education Centre, Innovation Point, Solihull B90 8AG\" and \"Unit 1 Bessemer Park, Shepcote Lane, Sheffield S9 1DZ\". Companies House 03199094 ARTHREX LIMITED (active), Bessemer Park Sheffield — the same number already on this record. Site copyright holder \"Arthrex GmbH\" NOT added — parent, barred."
-  },
-  "Arthro Dynamik Ltd": {
-   "aliases": [
-    "Arthro Dynamik",
-    "arthrodynamik.com"
-   ],
-   "verifiedOn": "2026-08-22",
-   "sources": "Own site arthrodynamik.com — masthead \"We are Arthro Dynamik\", About text \"Arthro Dynamik Ltd was founded in 2009 in Yorkshire, United Kingdom\", footer \"© 2026 Arthro Dynamik Ltd\". Companies House 08479540 ARTHRO DYNAMIK LTD (active), Wetherby. \"Arthro Dynamik Limited\" NOT added — the register holds LTD, not LIMITED, and no source shows that spelling."
-  },
-  "Artivion UK Ltd": {
-   "aliases": [],
-   "specialities": [
-    "Cardiology"
-   ],
-   "verifiedOn": "2026-08-22",
-   "sources": "Speciality only. Own site artivion.com states the clinical scope plainly: \"cardiac and vascular surgeons' most difficult challenges in treating patients with diseases of the aorta\". No alias added — see refusal."
-  },
-  "Artivion UK Ltd (CryoLife Europa, Ltd)": {
-   "aliases": [],
-   "specialities": [
-    "Cardiology"
-   ],
-   "verifiedOn": "2026-08-22",
-   "sources": "Speciality only. Own site artivion.com states the clinical scope plainly: \"cardiac and vascular surgeons' most difficult challenges in treating patients with diseases of the aorta\". No alias added — see refusal."
-  },
-  "Aspire Pharma": {
-   "aliases": [
-    "Aspire Pharma Limited"
-   ],
-   "verifiedOn": "2026-08-23",
-   "sources": "Own site aspirepharma.com (aspirepharma.co.uk redirects there) masthead and About page trade as \"Aspire Pharma\"; \"Aspire Pharma was established in 2009\". Companies House 06828501 ASPIRE PHARMA LIMITED (active), Godalming, Surrey. \"Aspire\" alone NOT added: a common word and a shortening, barred by rule 2.",
-   "specialities": [
-    "Cardiology",
-    "Dermatology / skin",
-    "Ophthalmology",
-    "Respiratory",
-    "Continence & urology"
-   ],
-   "specialitiesSource": "Own site aspirepharma.com/product-innovation/portfolio/ lists its therapy areas: Anti-Infectives, Cardiology, Central Nervous System, Dermatology, Gynaecology, Metabolism & Endocrinology, Oncology, Ophthalmology, Respiratory, Urology. Only the five with a clean equivalent in the seed's existing vocabulary are recorded; Anti-Infectives, CNS, Gynaecology, Metabolism & Endocrinology and Oncology have no clean equivalent and no new string was invented."
-  },
-  "Associated Optical Products": {
-   "aliases": [
-    "Associated Optical"
-   ],
-   "verifiedOn": "2026-08-23",
-   "sources": "Own site associatedoptical.co.uk About page trades throughout as \"Associated Optical\" (\"Associated Optical is a UK-based optical distribution and brand partner\"); footer legal line \"(c) 2025, Associated Optical Products\". Companies House holds no company registered as \"Associated Optical\" (quoted search returned no results), so no registered-name form was added."
-  },
-  "Assut UK LTD": {
-   "aliases": [
-    "Assut UK Limited"
-   ],
-   "verifiedOn": "2026-08-23",
-   "sources": "Companies House 05338676 ASSUT UK LIMITED (active), Shelley, Huddersfield - the only Assut UK company on the register. No own website found for the UK entity. \"Assut Europe\" NOT added: assuteurope.com is the Italian company Assut Europe (Magliano dei Marsi, founded 1991), a separate name that must not be recorded here."
-  },
-  "Astric Medical Ltd": {
-   "aliases": [
-    "Astric Medical Limited",
-    "Astric Medical"
-   ],
-   "verifiedOn": "2026-08-23",
-   "sources": "Own site astricmedical.com masthead \"ASTRIC MEDICAL\", page title \"Astric Medical Home\", footer \"Copyright (c) 2016 Astric Medical LTD.\". Companies House 07184648 ASTRIC MEDICAL LIMITED (active), Worthing."
-  },
-  "Athrodax Healthcare International Ltd": {
-   "aliases": [
-    "Athrodax Healthcare International Limited",
-    "Athrodax Healthcare"
-   ],
-   "verifiedOn": "2026-08-23",
-   "sources": "Own site athrodax.co.uk page title \"Athrodax Healthcare - Where experience makes a difference\", About menu \"About Athrodax\". Companies House 01501798 ATHRODAX HEALTHCARE INTERNATIONAL LIMITED (active), Hawthorn Business Park, Drybrook, Gloucestershire - the address the site gives. Previous name ATHRODAX SURGICAL LIMITED (to 1991) NOT added: not in use on the company's own site."
-  },
-  "Atom Medical Corporation UK ltd": {
-   "aliases": [
-    "Atom Medical Corporation UK Limited",
-    "Atom Medical Corporation UK"
-   ],
-   "verifiedOn": "2026-08-23",
-   "sources": "Companies House 12413115 ATOM MEDICAL CORPORATION UK LIMITED (active), Hednesford, Cannock. atommedical.co.uk serves only a parked lander, so no own-site form could be read. \"Atom Medical\" NOT added: that is the Japanese parent Atom Medical Corporation's own brand, and a parent's name must never be recorded as a subsidiary's alias."
-  },
-  "Atos Medical (UK)": {
-   "aliases": [
-    "Atos Medical UK Limited",
-    "Atos Medical UK"
-   ],
-   "verifiedOn": "2026-08-23",
-   "sources": "Companies House 04206141 ATOS MEDICAL UK LIMITED (active), Cartwright House, Riverside Business Park, Nottingham. Own site atosmedical.co.uk. \"Atos Medical\" alone NOT added: it is the group brand and the site states the business is \"part of the Coloplast Group\", so it is a parent-level name. \"Atos\" alone is barred by rule 2 and collides with the unrelated IT company Atos Limited (03290446)."
-  },
-  "Attends Ltd": {
-   "aliases": [
-    "Attends Limited",
-    "Attends UK LTD"
-   ],
-   "verifiedOn": "2026-08-23",
-   "sources": "Companies House 03718732 ATTENDS LIMITED (active), 10 Mariner Court, Durkar, Wakefield. \"Attends UK LTD\" is the wording of NHS Supply Chain's own contract launch brief for Textiles and Associated Products, already recorded in this record's frameworks array. Own site attends.co.uk, footer \"(c) 2026 Attends\". \"Attends\" alone NOT added: an ordinary English verb. \"Attends Healthcare Limited\" (06302122, same registered address) NOT added: a separate legal entity."
-  },
-  "Audit Data": {
-   "aliases": [
-    "Auditdata",
-    "Auditdata Limited"
-   ],
-   "verifiedOn": "2026-08-23",
-   "sources": "Own site auditdata.com - footer \"(c)Auditdata 2026. All rights reserved.\", products \"Auditdata Manage\" and \"Auditdata Academy\", UK number +44 (0) 333 444 4212. Companies House 05895080 AUDITDATA LIMITED (active), Staines-upon-Thames. The single token \"Auditdata\" is the domain the supplier owns and is unique across the seed, so it satisfies rule 2."
-  },
-  "Avidity Science Limited": {
-   "aliases": [
-    "Avidity Science"
-   ],
-   "verifiedOn": "2026-08-23",
-   "sources": "Own site avidityscience.com UK store, title \"Avidity Science - EMEA | Laboratory Equipment & Supplies\". Companies House 03482000 AVIDITY SCIENCE LIMITED (active), Drakes Drive, Long Crendon, Aylesbury. Previous name TRIPLE RED LIMITED (to 2018) NOT added: not in use on the company's own site."
-  },
-  "B.N.O.S Meditech Ltd": {
-   "aliases": [
-    "B.N.O.S. Meditech Limited",
-    "BNOS Meditech Ltd",
-    "BNOS Meditech"
-   ],
-   "verifiedOn": "2026-08-23",
-   "sources": "Own site meditech.uk.com page title \"B.N.O.S. Meditech Ltd | Medical Gas Equipment Manufacturer\", masthead \"BNOS MEDITECH LTD\". Companies House 02368331 B.N.O.S. MEDITECH LIMITED (active), Unit 9 Fifth Avenue, Bluebridge Industrial Estate, Halstead, Essex - the address on the site. \"Meditech\" alone NOT added: it collides with the large US EHR company MEDITECH."
-  }
- }
 }
