@@ -886,6 +886,91 @@ def check_seed_framework_provenance(seed):
               "award date. Lower risk, still unmaintained." % unsourced_no_value)
 
 
+def check_seed_product_categories(seed):
+    """`productCategories` (added 25/08/2026 by scripts/backfill_product_categories.py)
+    holds framework CATEGORY labels — "Diagnostic Equipment and Services" — not
+    product names, and it must stay legible as a different kind of fact to
+    `products`, which is reserved for genuine branded/model-level names.
+
+    Checked here:
+    - every entry names a category and cites a source
+    - the cited frameworkRef actually exists in THAT supplier's own
+      `frameworks[]` — a category cannot be sourced to a framework the
+      supplier isn't even on
+    - `productCategories` and `products` never collide: no string appears in
+      both, which would be the first sign of the two fields being conflated
+      instead of kept separate
+    """
+    suppliers = seed.get("suppliers") if isinstance(seed, dict) else seed
+    if isinstance(suppliers, dict):
+        suppliers = list(suppliers.values())
+    suppliers = suppliers or []
+
+    checked = 0
+    for s in suppliers:
+        pcs = s.get("productCategories")
+        if not pcs:
+            continue
+        who = s.get("name") or "(unnamed supplier)"
+        checked += 1
+
+        own_refs = {fw.get("reference") for fw in (s.get("frameworks") or [])
+                    if isinstance(fw, dict) and fw.get("reference")}
+        products = set()
+        for p in (s.get("products") or []):
+            products.add(p if isinstance(p, str) else (p.get("name") if isinstance(p, dict) else None))
+        products.discard(None)
+
+        seen_categories = set()
+        for row in pcs:
+            if not isinstance(row, dict):
+                FAIL("seed-product-categories", "%s: productCategories entry is not an object "
+                                                 "(%r) — every entry must carry `category` and "
+                                                 "`source`." % (who, row))
+                continue
+            cat = (row.get("category") or "").strip()
+            if not cat:
+                FAIL("seed-product-categories", "%s: a productCategories entry has no category." % who)
+            if cat in seen_categories:
+                FAIL("seed-product-categories", "%s: category %r appears more than once in "
+                                                 "productCategories — should be deduped per "
+                                                 "supplier." % (who, cat))
+            seen_categories.add(cat)
+
+            src = row.get("source")
+            if not isinstance(src, dict) or not (src.get("frameworkRef") or src.get("frameworkName")):
+                FAIL("seed-product-categories", "%s: productCategories entry %r has no source "
+                                                 "(frameworkRef/frameworkName) — a derived category "
+                                                 "must say which framework it came from."
+                                                 % (who, cat[:50]))
+                continue
+            ref = src.get("frameworkRef")
+            if ref and own_refs and ref not in own_refs:
+                FAIL("seed-product-categories", "%s: productCategories entry %r cites framework "
+                                                 "reference %r, which is not in this supplier's own "
+                                                 "frameworks[] — a category cannot be sourced to a "
+                                                 "framework the supplier isn't recorded as being on."
+                                                 % (who, cat[:50], ref))
+
+            # The conflation guard: a framework CATEGORY label must never also
+            # be sitting in `products` as if it were a product name.
+            if cat and cat in products:
+                FAIL("seed-product-categories", "%s: %r appears in both `products` and "
+                                                 "`productCategories` — these are different kinds "
+                                                 "of fact (branded product vs. framework category) "
+                                                 "and must never be conflated." % (who, cat[:60]))
+
+    if checked:
+        print("  note: %d supplier(s) carry productCategories, checked for provenance and no "
+              "overlap with `products`." % checked)
+    # Follow-up, not a gate failure: this repo has no page renderer to check.
+    # Whatever WordPress/app code reads supplier-seed.json for the Hub pages
+    # must label a `productCategories` chip distinctly from `products` (e.g.
+    # "Framework category" vs "Products") rather than merging the two arrays
+    # into one undifferentiated list — that check has to happen where the
+    # renderer actually lives, which is outside this repo/session.
+
+
 # --------------------------------------------------------------------------
 # 6c. SEED LEADERSHIP AND PARTNERSHIPS — named people and named counterparties
 # --------------------------------------------------------------------------
@@ -4150,6 +4235,7 @@ def main():
     check_compare(load("compare-issues.json"), suppress, comptab_js)
     check_suppliers(load("compare-suppliers.json"), load("compare-issues.json"))
     check_seed_framework_provenance(load("supplier-seed.json"))
+    check_seed_product_categories(load("supplier-seed.json"))
     check_seed_people_and_partners(load("supplier-seed.json"))
     check_migrated_prose_not_in_alerts(load("supplier-seed.json"),
                                        load("supplier-index.json"))
