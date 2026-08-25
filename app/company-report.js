@@ -838,7 +838,7 @@
       bits.push(Object.keys(_n).length + ' catalogue-verified line(s)');
     }
     if (cr.notCat.length) bits.push(cr.notCat.length + ' item(s) confirmed off-catalogue');
-    if (deep) bits.push((deep.products || []).length + ' product(s) from a full crawl of the company’s own site' + (deep.verified ? ' (verified ' + esc(deep.verified) + ')' : ''));
+    if (deep) bits.push((deep.products || []).length + ' product(s) verified against the company’s own website' + (deep.verified ? ' (verified ' + esc(deep.verified) + ')' : ''));
     if (bits.length) {
       body += '<div style="font-size:12px;color:' + DIM + ';margin:0 0 8px;">' + bits.join(' · ') + '.</div>';
     }
@@ -969,7 +969,7 @@
 
     /* The honest partial: headline chips alone are NOT a product listing. */
     if (!cr.items.length && !deep) {
-      body += '<div style="font-size:11.5px;color:' + DIM + ';margin-top:8px;">The full listing for this company has not been captured yet: no catalogue match has been run and no site crawl exists. What is above is the curated headline set, not the range.</div>';
+      body += '<div style="font-size:11.5px;color:' + DIM + ';margin-top:8px;">The full listing for this company has not been captured yet: no catalogue match has been run and the company’s own website has not been verified. What is above is the curated headline set, not the range.</div>';
     }
     return sec('Products', body);
   }
@@ -2228,14 +2228,15 @@
           (dv.specialities && dv.specialities.length ? '<br>Specialities: ' + dv.specialities.map(esc).join(', ') : '') +
           '</div></div>';
       }).join('');
-      return sec('Divisions &amp; specialities', '<div style="font-size:11.5px;color:' + DIM + ';margin:0 0 11px;line-height:1.6;">The company’s own division structure, from the full crawl of its site; product counts come from the verified range at the bottom of this report.</div>' +
+      return sec('Divisions &amp; specialities', '<div style="font-size:11.5px;color:' + DIM + ';margin:0 0 11px;line-height:1.6;">The company’s own division structure, verified against the company’s own website' +
+        (deep.verified ? ' on ' + esc(deep.verified) : '') + '; product counts come from the verified range at the bottom of this report.</div>' +
         '<div style="' + GRID + '">' + cards + '</div>');
     }
     if (s.specialities && s.specialities.length) {
       cards = s.specialities.map(function (sp) {
         return '<div style="' + CARD + '">' +
           '<div style="font-size:13.5px;font-weight:700;color:' + INK + ';line-height:1.35;">' + esc(sp) + '</div>' +
-          '<div style="margin-top:7px;font-size:12px;color:' + DIM + ';line-height:1.6;">Recorded speciality · division-level product counts arrive with the full site crawl.</div>' +
+          '<div style="margin-top:7px;font-size:12px;color:' + DIM + ';line-height:1.6;">Recorded speciality · division-level product counts arrive once the company’s own website is verified.</div>' +
           '</div>';
       }).join('');
       return sec('Divisions &amp; specialities', '<div style="' + GRID + '">' + cards + '</div>');
@@ -2679,7 +2680,7 @@
 
     /* -- 7 · The listings, deliberately last ---------------------------- */
     h += part('5', 'The range in full',
-      'The long listing, deliberately last: catalogue-verified lines, items confirmed off catalogue, and the full own-site range where a crawl exists.');
+      'The long listing, deliberately last: catalogue-verified lines, items confirmed off catalogue, and the full own-site range where the company’s own website has been verified.');
     h += productListing(sub, ctx);
 
     return h;
@@ -2731,7 +2732,7 @@
   function packSpecialitySections(sub, ctx) {
     var deep = deepRangeFor(sub, ctx.prodFile);
     if (!(deep && deep.divisions && deep.divisions.length)) {
-      return '<div style="font-size:12px;color:' + DIM + ';line-height:1.6;">Per-speciality sections need the full site crawl for this company, which has not run yet — the range above is the curated and catalogue-verified view. The crawl is the same mechanism that built the GBUK tree and runs supplier by supplier.</div>';
+      return '<div style="font-size:12px;color:' + DIM + ';line-height:1.6;">Per-speciality sections need this company’s own website to be verified, which has not happened yet — the range above is the curated and catalogue-verified view. This is the same verification that built the GBUK tree and runs supplier by supplier.</div>';
     }
     var prods = deep.products || [];
     return deep.divisions.map(function (d) {
