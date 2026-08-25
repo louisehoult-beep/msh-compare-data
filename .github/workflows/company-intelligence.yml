@@ -21,6 +21,16 @@ name: Company intelligence (frameworks + Companies House + accounts)
 #                                    is the report's sections 13-14; before 14/08/2026
 #                                    they had no data source at all and award data
 #                                    existed only as rows typed onto a WordPress page.
+#  - data/pending-awards.json      — NHS Supply Chain framework awards that are public
+#                                    on Find a Tender but not yet on NHSSC's own contract
+#                                    launch brief, so data/frameworks.json has nothing
+#                                    for them yet. Retired automatically, by name AND
+#                                    start date, the run after NHSSC's own brief lands —
+#                                    see scripts/refresh_pending_awards.py. Added
+#                                    25/08/2026 after Lou flagged the Intravenous
+#                                    Cannula and Associated Products award (starts
+#                                    01/04/2027) missing from Mediq Healthcare UK's
+#                                    Company Report despite being on Live Desk.
 #
 # ⚠️ REQUIRES the repository secret COMPANIES_HOUSE_KEY (REST key, live data, free
 # from developer.company-information.service.gov.uk). WITHOUT IT the Companies House
@@ -66,6 +76,12 @@ jobs:
       - name: Backfill sourced frameworks into the index and seed
         run: python3 scripts/backfill_index_frameworks.py
 
+      # MUST run after the frameworks refresh above: it checks pending awards
+      # against the FRESH data/frameworks.json to retire anything NHSSC has
+      # now published its own brief for, in the same run that captured it.
+      - name: Pending NHS Supply Chain framework awards, not yet on NHSSC's own brief
+        run: python3 scripts/refresh_pending_awards.py
+
       # Needs no API key either: both award feeds are public. 8 days against a
       # Monday job is a deliberate one-day overlap, so a notice published while
       # the job is mid-run is picked up the following week rather than lost —
@@ -106,7 +122,7 @@ jobs:
           git config user.name "hub-bot"
           git config user.email "contact@elevateandthrive.uk"
           git add data/frameworks.json data/company-financials.json \
-                  data/company-awards.json \
+                  data/company-awards.json data/pending-awards.json \
                   data/supplier-index.json data/supplier-seed.json
           git diff --cached --quiet || git commit -m "company intelligence: frameworks + awards + Companies House $(date -u +'%F')"
           # Same retry-and-re-gate pattern as weekly-refresh.yml. A rebase COMBINES

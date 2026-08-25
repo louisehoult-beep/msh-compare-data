@@ -48,6 +48,14 @@
      load, the award panels say so rather than reading as an empty company. */
   var AWARDS = BASE + 'data/company-awards.json' + CB;
 
+  /* Eleventh fetch, added 25/08/2026. NHS Supply Chain framework awards that
+     are public on Find a Tender but not yet on NHSSC's own contract launch
+     brief — see scripts/refresh_pending_awards.py. Optional like the awards
+     feed above: if it does not load, the pending-award panel simply does not
+     render (it already renders nothing when a company has none), never a
+     claim that no award exists. */
+  var PENDING = BASE + 'data/pending-awards.json' + CB;
+
   /* Ninth fetch. Brand marks, fetched ONCE at build time from each company's
      own website by scripts/refresh_logos.py and stored in this repository under
      assets/logos/. The marks themselves are served from the same host as every
@@ -1151,6 +1159,55 @@
         }).join('') + '</div>';
     }
     return sec('Frameworks', body);
+  }
+
+  /* ---------------------------------------------------------------------
+     PENDING FRAMEWORK AWARDS — read from Find a Tender, NOT from NHS Supply
+     Chain's own brief (data/pending-awards.json, scripts/refresh_pending_
+     awards.py). Deliberately a SEPARATE panel from Frameworks above: an award
+     notice is public months before NHSSC publishes its own brief for it, and
+     the Frameworks panel's evidence floor is right to wait for that brief —
+     so this panel exists to say "awarded, not yet on NHSSC's own page" rather
+     than either overstating the Frameworks panel's source or leaving members
+     unable to see a real, sourced award. It renders ONLY while both are true;
+     the moment NHSSC's own brief lands this panel retires itself on the next
+     data refresh, and the Frameworks panel above is what to trust from then.
+     Added 25/08/2026 after Lou flagged the Intravenous Cannula and Associated
+     Products award (starts 01/04/2027) missing from Mediq Healthcare UK's
+     report despite being live on the Hub's Live Desk.
+     --------------------------------------------------------------------- */
+  function pendingAwardsFor(s, ctx) {
+    var doc = ctx.pending;
+    if (!doc || !doc.companies) return [];
+    return doc.companies[s.name] || [];
+  }
+
+  function pendingAwardRow(a, sub) {
+    var cs = uk(a.contractStart), ce = uk(a.contractEnd), cx = uk(a.contractExtendedEnd);
+    var term = cs ? ('starts ' + esc(cs) + (ce ? ' to ' + esc(ce) : '') +
+      (cx && cx !== ce ? ' (extension option to ' + esc(cx) + ')' : '')) : '';
+    var matchedAs = (a.matchedAs && a.matchedAs[sub.name]) || '';
+    return '<div style="padding:9px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;line-height:1.55;">' +
+      '<b>' + esc(a.title) + '</b> ' +
+      '<span style="background:#fbf3e2;border:1px solid #e7d8b3;color:#7a5b14;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:99px;padding:1px 7px;white-space:nowrap;">AWARDED &middot; NOT YET ON NHSSC&rsquo;S OWN BRIEF</span>' +
+      '<br><span style="font-size:12.5px;color:#37485a;">' + esc(a.buyer || 'buyer not named') +
+      (term ? ' &middot; ' + term : '') +
+      (a.awardDate ? ' &middot; awarded ' + esc(uk(a.awardDate)) : '') + '</span>' +
+      (matchedAs ? '<br><span style="font-size:12.5px;color:' + DIM + ';">named on the notice as &ldquo;' + esc(matchedAs) + '&rdquo;</span>' : '') +
+      '<br><span style="font-size:12.5px;color:' + DIM + ';">' +
+      (a.noticeSuppliers ? a.noticeSuppliers.length + ' supplier(s) named on the award notice' : '') +
+      ' &middot; <a href="' + esc(a.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">Find a Tender notice &#8599;</a></span>' +
+      '</div>';
+  }
+
+  function pendingFrameworkAwards(sub, ctx) {
+    var rows = pendingAwardsFor(sub, ctx);
+    if (!ctx.pending || !rows.length) return '';
+    var body = rule('This company is named on an NHS Supply Chain framework award notice on Find a Tender, but NHS Supply Chain has not yet published its OWN contract launch brief for it — so it cannot appear in the Frameworks panel above, which is deliberately scoped to that brief alone (root rule 16). ' +
+      esc(ctx.pending.rule || '') +
+      '<br><br><b>How this company was identified:</b> ' + esc(ctx.pending.matchRule || ''));
+    body += rows.map(function (a) { return pendingAwardRow(a, sub); }).join('');
+    return sec('Pending framework award' + (rows.length > 1 ? 's' : ''), body);
   }
 
   function alerts(s) {
@@ -2571,6 +2628,7 @@
     h += divisionCards(sub, ctx);
     h += panelPartnerships(sub);
     h += frameworks(sub, ctx);
+    h += pendingFrameworkAwards(sub, ctx);
     h += panelAwards(sub, ctx);
     h += repsWatch(sub);
 
@@ -2810,7 +2868,7 @@
     return { byCat: byCat, bySupplierKey: bySupplierKey };
   }
 
-  function boot(index, seed, specMap, prodFile, fin, cache, fwDoc, awards, logoDoc, diffDoc) {
+  function boot(index, seed, specMap, prodFile, fin, cache, fwDoc, awards, logoDoc, diffDoc, pendingDoc) {
     /* Brand marks, by company name. Held at module scope rather than passed
        through ctx because logoImg() and brandOf() are called from the print
        pack as well as the on-page card, and threading a ninth argument through
@@ -2847,6 +2905,7 @@
       fwDoc: fwDoc || null,
       fwByKey: fwIndex(fwDoc),
       awards: awards || null,
+      pending: pendingDoc || null,
       diffDoc: diffDoc || null,
       diff: diffIndex(diffDoc),
       /* The briefs print legal names ("B. Braun Medical Limited"); this Hub
@@ -2998,7 +3057,7 @@
   if (window.MSH_COMPANY_REPORT_DATA) {
     var P = window.MSH_COMPANY_REPORT_DATA;
     boot(P.index, P.seed, P.specMap, P.products, P.financials, P.nhssc, P.frameworks,
-         P.awards, P.logos, P.differentiator);
+         P.awards, P.logos, P.differentiator, P.pending);
     return;
   }
 
@@ -3018,8 +3077,9 @@
     fetch(FWDATA).then(function (r) { return r.json(); }).catch(function () { return null; }),
     fetch(AWARDS).then(function (r) { return r.json(); }).catch(function () { return null; }),
     fetch(LOGOS).then(function (r) { return r.json(); }).catch(function () { return null; }),
-    fetch(DIFF).then(function (r) { return r.json(); }).catch(function () { return null; })
-  ]).then(function (res) { boot(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9]); })
+    fetch(DIFF).then(function (r) { return r.json(); }).catch(function () { return null; }),
+    fetch(PENDING).then(function (r) { return r.json(); }).catch(function () { return null; })
+  ]).then(function (res) { boot(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9], res[10]); })
     .catch(function () {
       MOUNT.innerHTML = '<div class="mcr"><div class="mcr-card mcr-card--empty">' +
         '<div class="mcr-card-t">Company intelligence report</div>' +

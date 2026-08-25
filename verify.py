@@ -2476,6 +2476,121 @@ def check_company_awards(doc, seed, report_js):
                                    % line[:140])
 
 
+def check_pending_awards(doc, seed, fw_doc, report_js):
+    """data/pending-awards.json — NHS Supply Chain framework awards public on
+    Find a Tender but not yet on NHSSC's own contract launch brief. Every
+    published match AND every published supersede decision is re-derived from
+    scripts/refresh_pending_awards.py, the same module the writer used, so
+    neither can drift from the file without the gate saying so."""
+    if doc is None and not (report_js or "").strip():
+        return                              # feature not built yet — nothing to gate
+
+    if doc is not None:
+        try:
+            sys.path.insert(0, "scripts")
+            import company_match
+            import refresh_pending_awards as rpa
+        except Exception as exc:
+            FAIL("pending-awards", "cannot import scripts/refresh_pending_awards.py or "
+                                   "scripts/company_match.py (%s), so no published match or "
+                                   "supersede decision can be re-derived. Do not push." % exc)
+            return
+
+        seed_names = {s.get("name") for s in ((seed or {}).get("suppliers") or [])
+                      if s.get("name")}
+        index = company_match.build_index(seed or {"suppliers": []})
+        confirmed_by_title = rpa.confirmed_frameworks_by_title(fw_doc or {"frameworks": []})
+
+        if doc.get("matchRule") != company_match.RULE:
+            FAIL("pending-awards", "the matchRule printed in data/pending-awards.json is not "
+                                   "the rule scripts/company_match.py actually applies. Re-run "
+                                   "scripts/refresh_pending_awards.py rather than editing the "
+                                   "string.")
+
+        awards = doc.get("awards") or []
+        by_company_stated = doc.get("companies") or {}
+        derived_by_company = {}
+
+        for award in awards:
+            title = award.get("title") or ""
+            ocid = award.get("ocid") or ""
+
+            # ---- INVARIANT: nothing published here may already be confirmed.
+            # This is the whole point of the file — a stale entry here is a
+            # member being shown "not yet live" for a framework that already
+            # is, which is a worse error than the gap this file exists to fix.
+            if rpa.superseded_by(title, award.get("contractStart"), confirmed_by_title):
+                FAIL("pending-awards", "%r (ocid %s) is published as a PENDING award, but "
+                                       "re-deriving the supersede check against the current "
+                                       "data/frameworks.json shows NHS Supply Chain has now "
+                                       "published its own brief for this same framework "
+                                       "generation. Re-run: "
+                                       "python3 scripts/refresh_pending_awards.py"
+                                       % (title, ocid))
+
+            url = str(award.get("url") or "")
+            if not url.startswith("http"):
+                FAIL("pending-awards", "the pending award %r carries no notice URL. A pending "
+                                       "award is a statutory notice; without the link the "
+                                       "reader cannot check it and it does not publish." % title)
+
+            for field in ("reference", "buyer", "contractStart"):
+                if not str(award.get(field) or "").strip():
+                    FAIL("pending-awards", "the pending award %r carries no %s." % (title, field))
+
+            # ---- INVARIANT: re-derive every published company match ---------
+            matched_as = award.get("matchedAs") or {}
+            for company in award.get("companies") or []:
+                if seed_names and company not in seed_names:
+                    FAIL("pending-awards", "the pending award %r names %r, which does not "
+                                           "resolve to any supplier record in "
+                                           "data/supplier-seed.json." % (title, company))
+                notice_name = matched_as.get(company)
+                if not notice_name:
+                    FAIL("pending-awards", "the pending award %r attaches %r with no matchedAs "
+                                           "entry — the page cannot show which name on the "
+                                           "notice this company was identified by." % (title, company))
+                    continue
+                got, state, _ = company_match.resolve(notice_name, index)
+                if state != "confirmed" or got != company:
+                    FAIL("pending-awards", "the pending award %r naming %r is published against "
+                                           "%r, but re-resolving that name against the seed "
+                                           "gives %s (%s). Re-run: "
+                                           "python3 scripts/refresh_pending_awards.py"
+                                           % (title, notice_name, company,
+                                              repr(got) if got else "no company", state))
+                derived_by_company.setdefault(company, []).append(title)
+
+        # ---- the published by-company index must match what was derived ----
+        stated_pairs = set()
+        for company, rows in by_company_stated.items():
+            for row in (rows or []):
+                stated_pairs.add((company, row.get("title")))
+        derived_pairs = set()
+        for company, titles in derived_by_company.items():
+            for t in titles:
+                derived_pairs.add((company, t))
+        if stated_pairs != derived_pairs:
+            missing = derived_pairs - stated_pairs
+            extra = stated_pairs - derived_pairs
+            FAIL("pending-awards", "data/pending-awards.json's `companies` index does not match "
+                                   "its own `awards` list — missing %s, extra %s. Re-run: "
+                                   "python3 scripts/refresh_pending_awards.py"
+                                   % (sorted(missing)[:3], sorted(extra)[:3]))
+
+        counts = doc.get("counts") or {}
+        if counts.get("pending") is not None and counts["pending"] != len(awards):
+            FAIL("pending-awards", "data/pending-awards.json states counts.pending = %s but "
+                                   "holds %d." % (counts.get("pending"), len(awards)))
+
+    # ---- source invariant: the panel must exist if the data does -----------
+    clean, spans = _js_scan(report_js or "")
+    if doc and (doc.get("awards")) and clean.strip() and "pending-awards.json" not in clean:
+        FAIL("pending-awards", "data/pending-awards.json holds pending award(s) but "
+                               "app/company-report.js does not reference the file — the panel "
+                               "cannot be rendering.")
+
+
 # --------------------------------------------------------------------------
 # 11. SUPPLIER PRODUCT DETAIL — per-product pages captured from each
 #     supplier's own website (scripts/crawl_supplier_product_detail.py)
@@ -4060,6 +4175,11 @@ def main():
     # The award index. Every published match is re-derived from the same module
     # the writer used, so the file and the rule cannot drift apart unnoticed.
     check_company_awards(load("company-awards.json"), load("supplier-seed.json"), report_js)
+    # NHS Supply Chain framework awards public on Find a Tender but not yet on
+    # NHSSC's own contract launch brief. Every match AND every supersede
+    # decision is re-derived from the same module the writer used.
+    check_pending_awards(load("pending-awards.json"), load("supplier-seed.json"),
+                         load("frameworks.json"), report_js)
     # The supplier press index. Every published attribution is re-derived from the
     # same module the writer used, so a story cannot end up under the wrong
     # company without the gate saying so.
