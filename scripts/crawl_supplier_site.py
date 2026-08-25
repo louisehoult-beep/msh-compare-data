@@ -62,6 +62,7 @@ Then: python3 scripts/stamp_notice.py && python3 verify.py
 """
 import argparse
 import datetime as dt
+import difflib
 import html as H
 import json
 import re
@@ -130,15 +131,32 @@ def allowed(domain, path="/"):
 
     # WHAT CAME BACK MUST ACTUALLY BE A robots.txt.
     # Sites behind a bot filter answer this path with an HTML block page —
-    # Medtronic returns "Incorrect Browser" — and HTML parses as a robots file
-    # with NO rules, i.e. "crawl anything". That is precisely backwards: a site
-    # serving a block page is refusing. If the response is not plainly a robots
-    # file, treat it as a refusal.
+    # Medtronic used to return "Incorrect Browser" — and HTML parses as a
+    # robots file with NO rules, i.e. "crawl anything". That is precisely
+    # backwards: a site serving a block page is refusing. If the response is
+    # not plainly a robots file, treat it as a refusal — UNLESS it turns out
+    # to be case 2 below.
     head = body.lstrip()[:400].lower()
-    if "<html" in head or "<!doctype" in head:
-        return False
-    if body.strip() and "user-agent" not in body.lower():
-        return False                    # something else entirely; do not assume consent
+    looks_like_html = "<html" in head or "<!doctype" in head
+    if looks_like_html or (body.strip() and "user-agent" not in body.lower()):
+        # SECOND CASE, found 22/08/2026 (OUTSTANDING ^o99): a single-page-app
+        # site answers EVERY unknown path with its own homepage HTML and
+        # HTTP 200, including /robots.txt. There is no robots file and
+        # nothing has refused anything — Mediq Healthcare UK is the worked
+        # example, on both www.mediq.co.uk and mediq.co.uk. The block-page
+        # rule above cannot tell the two cases apart from the /robots.txt
+        # response alone, so when the response looks like HTML, compare it
+        # against the site's own homepage: near-identical means "this is
+        # just the homepage, there is no robots.txt", not a refusal.
+        # Different means it is a genuine block page and the refusal stands.
+        try:
+            home, _ = get("https://%s/" % domain, timeout=12)
+        except Exception:
+            return False                # can't confirm which case; stay cautious
+        ratio = difflib.SequenceMatcher(None, body, home).ratio()
+        if ratio >= 0.99:
+            return True                 # SPA fallback homepage, not a refusal
+        return False                    # genuinely different HTML: a block page
 
     rp.parse(body.splitlines())
     return rp.can_fetch(UA_STR, "https://%s%s" % (domain, path))
