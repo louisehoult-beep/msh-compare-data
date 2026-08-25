@@ -549,6 +549,7 @@
       if (sd.deepDive) s.deepDive = sd.deepDive;
       if (sd.brand) s.brand = sd.brand;
       if (sd.products && sd.products.length) s.products = sd.products;
+      if (sd.productCategories && sd.productCategories.length) s.productCategories = sd.productCategories;
       if (sd.frameworks && sd.frameworks.length) s.frameworks = sd.frameworks;
       if (sd.specialities && sd.specialities.length) s.specialities = sd.specialities;
       if (sd.repsWatch) s.repsWatch = sd.repsWatch;
