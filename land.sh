@@ -60,8 +60,92 @@ if [ ${#PATHS[@]} -eq 0 ]; then
   exit 2
 fi
 
+# ---------------------------------------------------------------- the tree lock
+#
+# ADDED 25/08/2026. Everything above assumes one writer at a time on this laptop,
+# and nothing was enforcing it. This working tree lives on OneDrive and is shared
+# by every scheduled task and every interactive session, so two of them routinely
+# overlap. On 25/08 a session read a clean tree, and forty seconds later found
+# `.git/index.lock` held by another routine mid-run, then two files staged that it
+# had never touched. That is not a rare race — it is the normal state of a shared
+# tree with no lock.
+#
+# `flock` is util-linux and does not exist on macOS, so this is a portable mkdir
+# lock: mkdir is atomic on POSIX, and the PID inside lets a genuinely dead lock be
+# cleared without a human guessing.
+LOCK_DIR="$(git rev-parse --git-dir)/land.lock"
+LOCK_WAIT_SECONDS="${LAND_LOCK_WAIT:-600}"
+
+LOCK_HELD=0
+
+acquire_lock() {
+  local waited=0
+  while ! mkdir "$LOCK_DIR" 2>/dev/null; do
+    local holder
+    holder="$(cat "$LOCK_DIR/pid" 2>/dev/null || echo "")"
+    if [ -n "$holder" ] && ! kill -0 "$holder" 2>/dev/null; then
+      echo "clearing a stale lock left by pid $holder (no such process)" >&2
+      rm -rf "$LOCK_DIR"
+      continue
+    fi
+    if [ "$waited" -eq 0 ]; then
+      echo "==> waiting for the tree lock (held by pid ${holder:-unknown})."
+      echo "    Another session or scheduled task is landing. This waits rather than"
+      echo "    interleaving with it, which is how half-staged trees happen."
+    fi
+    if [ "$waited" -ge "$LOCK_WAIT_SECONDS" ]; then
+      echo "REFUSING: the tree lock was still held after ${LOCK_WAIT_SECONDS}s (pid ${holder:-unknown})." >&2
+      echo "Nothing has been staged or committed. Check what that process is doing." >&2
+      exit 1
+    fi
+    sleep 5
+    waited=$((waited + 5))
+  done
+  echo "$$" > "$LOCK_DIR/pid"
+  LOCK_HELD=1
+  [ "$waited" -gt 0 ] && echo "==> tree lock acquired after ${waited}s"
+  return 0
+}
+
+# Only ever release a lock THIS process acquired. Releasing unconditionally would
+# mean a run that timed out waiting deleted the holder's lock on its way out and
+# let the next writer barge in — the exact interleaving the lock exists to stop.
+release_lock() { [ "$LOCK_HELD" = "1" ] && rm -rf "$LOCK_DIR"; }
+trap release_lock EXIT INT TERM
+
+acquire_lock
+
 echo "==> 1/7 fetching origin"
 git fetch --quiet origin
+
+# ------------------------------------------------- somebody else's unpushed work
+#
+# ADDED 25/08/2026. This script ends in `git push origin main`, which pushes the
+# whole BRANCH, not just the commit it made. So any commit already sitting
+# unpushed goes out with yours — and a push here IS a publish (root rule 13).
+#
+# On 25/08 two such commits were sitting in the tree: a supplier duplicate merge
+# committed by hand three days earlier, and an alias-enrichment batch that had
+# committed and then failed to push because the publish gate was jammed. Both
+# were fine, and both were published by a run that was not looking for them.
+# Next time they might not be fine, so they get named and acknowledged instead.
+PENDING="$(git rev-list --count origin/main..HEAD)"
+if [ "$PENDING" -gt 0 ] && [ "${WITH_PENDING:-0}" != "1" ]; then
+  echo "" >&2
+  echo "REFUSING: $PENDING commit(s) are already sitting here unpushed, and a push" >&2
+  echo "publishes the whole branch — so they would go live with your work:" >&2
+  echo "" >&2
+  git --no-pager log --oneline origin/main..HEAD | sed 's/^/    /' >&2
+  echo "" >&2
+  echo "Read them. If they are meant to publish, re-run with WITH_PENDING=1:" >&2
+  echo "    WITH_PENDING=1 ./land.sh \"$SUBJECT\" ..." >&2
+  echo "If they are not, resolve them first. Nothing has been staged." >&2
+  exit 1
+fi
+if [ "$PENDING" -gt 0 ]; then
+  echo "==> publishing $PENDING pre-existing commit(s) alongside this one (WITH_PENDING=1):"
+  git --no-pager log --oneline origin/main..HEAD | sed 's/^/    /'
+fi
 
 echo "==> 2/7 checking nothing else is staged"
 if ! git diff --cached --quiet; then

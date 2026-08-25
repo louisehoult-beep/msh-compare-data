@@ -1,0 +1,107 @@
+name: Prune the Hub calendar (drop rows that aged into the past)
+
+# WHY THIS WORKFLOW EXISTS (added 25/08/2026)
+#
+# data/hub-calendar.json is a derived file of dated rows, and verify.py refuses
+# to publish a row whose date has gone past. verify.py is the gate EVERY writer
+# in this repo runs before it commits. So one row ageing out does not degrade the
+# calendar — it takes the whole repo's publishing down.
+#
+# That happened on 25/08/2026. fw-framework-start-disposable-and-washable-
+# continence-care fell one day into the past and all five overnight workflows
+# failed on it: search index (02:43), press sweep (02:43), range capture (03:14),
+# daily refresh (04:02), Differentiator (05:27). Two finished commits sat unpushed
+# behind the jam — a 7-pair supplier duplicate merge and an alias-enrichment batch
+# that committed and then could not push. Members kept seeing the last good data,
+# so nothing looked broken from outside while the pipeline was dark for a day.
+#
+# The calendar is BUILT by calendar_build.py in the cloud-pipeline repo, which
+# already omits past rows. Nothing ever ran it on a schedule. It was built once
+# (23e955d, data as of 21/08) and left to go stale on a timer, so the outage was
+# scheduled from the day it landed. The next one was due 27/08, when
+# ev-bapen-scotland-2026 aged out, then 02/09, 05/09, 09/09.
+#
+# WHY PRUNE HERE RATHER THAN BUILD HERE. Running the real builder in this repo
+# would mean checking out the pipeline repo for calendar_build.py and its
+# events/tender/deadline inputs — a cross-repo publisher wired into a lane where
+# eight workflows already serialise on one concurrency group. Pruning needs
+# nothing but the file itself and applies the SAME rules the builder applies
+# (proved by test_prune_calendar.py, and checked against the real 25/08 file:
+# the pruner's output matched the builder's exactly, 315 rows, id for id).
+#
+# Pruning keeps the gate green. It does not ADD new rows — only the builder does
+# that — so the calendar still needs a periodic rebuild to stay rich. That is an
+# enrichment job, not an outage, and it is recorded in the process doc.
+#
+# ⚠️ NEEDS NO SECRET. It reads and writes one file already in this repo.
+
+on:
+  schedule:
+    # 01:50 UTC daily — 30 minutes ahead of supplier-capture.yml at 02:20, which
+    # is the earliest daily writer. The calendar must be clean before anything
+    # else reaches the gate, or they all fail on it exactly as they did on 25/08.
+    - cron: "50 1 * * *"
+  workflow_dispatch:
+
+concurrency:
+  # The same group every other writer uses. This is a writer; it must queue
+  # behind them, never race them.
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Prove the pruner still does what it was built for
+        # The pruner deletes member-facing rows. It gets held to the same
+        # standard as the gate it protects, and it runs BEFORE it is trusted.
+        run: python3 test_prune_calendar.py
+
+      - name: Prune rows that have aged into the past
+        run: python3 scripts/prune_calendar.py
+
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "calendar-prune-bot"
+          git config user.email "actions@github.com"
+          git add data/hub-calendar.json
+          git diff --cached --quiet && { echo "calendar already current — nothing to commit"; exit 0; }
+          git commit -m "Prune the Hub calendar $(date -u +%F)"
+          # Same retry-and-re-gate pattern as refresh.yml: a bare push silently
+          # throws work away when another writer lands first, and a rebase makes
+          # a combination that has not been gated yet.
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first). Rebasing and re-running the gate, attempt $attempt of 5."
+            git pull --rebase -X theirs --autostash
+            python3 verify.py || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi
+
+      - name: Phone alert on failure (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Medical Sales Hub - calendar prune FAILED" -H "Priority: high" -H "Tags: warning" \
+            -d "The Hub calendar prune failed. If a row has aged past, EVERY workflow in msh-compare-data will fail its gate until this is fixed. github.com/louisehoult-beep/msh-compare-data/actions" \
+            ntfy.sh/eth-hub-lou-4437
