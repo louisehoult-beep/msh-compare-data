@@ -380,6 +380,13 @@
     'border-radius:99px;padding:5px 12px;font-size:11.5px;font-weight:600;line-height:1.5;',
     'margin:0 7px 7px 0;}',
     '.mcr .mcr-chip--gold{background:#f6efdd;border-color:#e7d8b3;color:#7a5b14;}',
+    /* Framework-category chips — deliberately NOT the plain white product-chip
+       style or the gold speciality style, so a reader can never mistake an
+       NHS Supply Chain framework category label for a curated branded product
+       name. Dashed border marks it as a derived/sourced tag, not a fact typed
+       in by hand; SOFT/DIM are the same house tones used for provenance text
+       elsewhere on this page (mcr-src). */
+    '.mcr .mcr-chip--muted{background:' + SOFT + ';border-style:dashed;border-color:' + LINE + ';color:' + DIM + ';}',
     '.mcr .mcr-src{margin-top:14px;padding-top:10px;border-top:1px dotted var(--mcr-line);',
     'font-size:11.5px;color:var(--mcr-dim);line-height:1.65;}',
     '.mcr .mcr-asof{white-space:nowrap;}',
@@ -643,12 +650,13 @@
   /* ---------------------------------------------------------------------
      STAGE 1 — read from source, nothing computed.
      --------------------------------------------------------------------- */
-  function chip(text, tone, href) {
-    var cls = 'mcr-chip' + (tone === 'gold' ? ' mcr-chip--gold' : '');
+  function chip(text, tone, href, title) {
+    var cls = 'mcr-chip' + (tone === 'gold' ? ' mcr-chip--gold' : '') + (tone === 'muted' ? ' mcr-chip--muted' : '');
+    var titleAttr = title ? ' title="' + esc(title) + '"' : '';
     if (href) {
-      return '<a class="' + cls + '" href="' + esc(href) + '">' + esc(text) + '</a>';
+      return '<a class="' + cls + '" href="' + esc(href) + '"' + titleAttr + '>' + esc(text) + '</a>';
     }
-    return '<span class="' + cls + '">' + esc(text) + '</span>';
+    return '<span class="' + cls + '"' + titleAttr + '>' + esc(text) + '</span>';
   }
 
   function identity(s) {
@@ -950,6 +958,31 @@
     if (s.products && s.products.length) {
       body += '<div style="font-size:12.5px;font-weight:700;color:' + INK + ';margin:12px 0 4px;">Headline products (curated)</div>' +
         s.products.map(function (p) { return chip(typeof p === 'string' ? p : (p && p.n) || '', ''); }).join('');
+    }
+
+    /* Framework category labels — added 25/08/2026, backfilled by
+       scripts/backfill_product_categories.py onto 772 suppliers. This is a
+       DIFFERENT kind of fact from `products` above: `products` is a curated,
+       branded/model-level product name; `productCategories` is an NHS Supply
+       Chain framework CATEGORY label a supplier was sourced against, not a
+       product or brand name. Kept in its own labelled block with its own
+       chip style (dashed, muted — see .mcr-chip--muted) so the two can never
+       be read as one list, per root rule 14 (derived claims need a stated
+       rule and can't masquerade as a directly-sourced fact). Each chip's
+       title carries the framework it was captured from and the date, the
+       same provenance pattern used for the NPC catalogue link above. */
+    if (s.productCategories && s.productCategories.length) {
+      body += '<div style="font-size:12.5px;font-weight:700;color:' + INK + ';margin:12px 0 4px;">NHS Supply Chain framework categories</div>' +
+        '<div style="font-size:11.5px;color:' + DIM + ';margin:0 0 6px;">Category labels this supplier was sourced against on an NHS Supply Chain framework — not curated product names, and not the same claim as the headline products above. Hover a chip for its source framework and capture date.</div>' +
+        s.productCategories.map(function (pc) {
+          var cat = (pc && pc.category) || '';
+          var src = (pc && pc.source) || {};
+          var titleBits = [];
+          if (src.frameworkName) titleBits.push(src.frameworkName);
+          if (src.frameworkRef) titleBits.push('ref ' + src.frameworkRef);
+          if (src.capturedOn) titleBits.push('captured ' + src.capturedOn);
+          return chip(cat, 'muted', null, titleBits.join(' — '));
+        }).join('');
     }
 
     /* Competitors, by product — added 21/08/2026 (Lou's call), replacing
