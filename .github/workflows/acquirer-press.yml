@@ -1,0 +1,119 @@
+name: Acquirer press sweep (LSE RNS — listed parents of Hub suppliers)
+
+# WHY THIS WORKFLOW EXISTS (added 25/08/2026)
+#
+# scripts/refresh_company_press.py finds news by querying each Hub SUPPLIER's
+# own name. It cannot find an acquisition OF that supplier by a listed group,
+# because the story is filed under the ACQUIRER's name, not the target's, and
+# small bolt-ons rarely get trade-press coverage under the target's name at all.
+#
+# Proven gap, 25/08/2026: Altomed Limited (Hub supplier, Complete Ophthalmology
+# Solutions 3) was bought by Halma plc for £29m in Feb 2026. Six months later
+# data/company-press.json still held nothing for it, and Halma's own RNS
+# filings never name Altomed at all — the deal only surfaces in independent
+# trade press (Proactive Investors), findable only by watching the ACQUIRER.
+#
+# scripts/refresh_acquirer_press.py reads each tracked listed acquirer's public
+# RNS history from investegate.co.uk (no login) and tests the text against
+# every Hub supplier's own recorded aliases, using the same identity rule
+# (scripts/press_match.py) refresh_company_press.py uses. See that script's
+# module docstring for the full design and how to add another acquirer.
+#
+# ⚠️ WRITES ONLY state/pending-acquirer-matches.json and
+# state/acquirer-press-rotation.json — a REVIEW QUEUE, never data/. Nothing
+# here publishes automatically; a person copies a confirmed match into the
+# relevant supplier's `news` array in data/supplier-seed.json by hand. See
+# Process flows for all brands/hub-acquirer-news-sourcing.md.
+#
+# ⚠️ NEEDS NO SECRET. It reads public RNS listings and public article text.
+
+on:
+  schedule:
+    # 01:10 UTC — ahead of company-press.yml (01:40), supplier-capture.yml
+    # (02:20) and refresh.yml (03:15), same reasoning as those workflows:
+    # queue rather than collide. This workflow only ever touches state/, so
+    # it cannot conflict with a data/ writer, but keeping it in the same
+    # queue order keeps the whole run's logs easy to read in sequence.
+    - cron: "10 1 * * *"
+  workflow_dispatch:
+    inputs:
+      only:
+        description: "Comma-separated acquirer name(s) to sweep (blank = all tracked)"
+        required: false
+        default: ""
+
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  acquirer-press:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Sweep tracked acquirers' RNS history
+        run: |
+          if [ -n "${{ github.event.inputs.only }}" ]; then
+            python3 scripts/refresh_acquirer_press.py --only "${{ github.event.inputs.only }}"
+          else
+            python3 scripts/refresh_acquirer_press.py
+          fi
+
+      - name: Report what's pending review
+        run: |
+          python3 - <<'EOF'
+          import json
+          d = json.load(open("state/pending-acquirer-matches.json"))
+          c = d["counts"]
+          print("tracked acquirers   : %d" % len(d["trackedAcquirers"]))
+          print("supplier matches    : %d (pending human review before publish)" % c["matches"])
+          print("unmatched deals     : %d (named no current Hub supplier)" % c["unmatched"])
+          EOF
+
+      # This writes only state/, never data/ — no publish gate applies (nothing
+      # here reaches a member), but verify.py still runs so a malformed write
+      # is caught here rather than surprising the next data/ writer that reads
+      # this file. Root rule 13's "verify before push" spirit, not its letter.
+      - name: Sanity check — nothing else in the repo broke
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "acquirer-press-bot"
+          git config user.email "actions@github.com"
+          git add state/pending-acquirer-matches.json state/acquirer-press-rotation.json
+          git diff --cached --quiet || git commit -m "Acquirer press sweep $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first), attempt $attempt of 5."
+            git fetch origin
+            git reset --hard origin/main
+            if [ -n "${{ github.event.inputs.only }}" ]; then
+              python3 scripts/refresh_acquirer_press.py --only "${{ github.event.inputs.only }}"
+            else
+              python3 scripts/refresh_acquirer_press.py
+            fi
+            python3 verify.py || { echo "GATE FAILED after re-run — refusing to push"; exit 1; }
+            git add state/pending-acquirer-matches.json state/acquirer-press-rotation.json
+            git diff --cached --quiet || git commit -m "Acquirer press sweep $(date -u +%F) (re-run)"
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi
