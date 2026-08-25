@@ -12,12 +12,22 @@ Differentiator built on either source alone is either unbuyable or undifferen-
 tiated, so a product record here holds both, each with its own URL and the date
 it was read, and neither is allowed to stand in for the other.
 
-CATEGORY LOCK. Every published product carries exactly one `cat`, of the form
-"<speciality>:<type>", from the vocabulary in data/compare-suppliers.json that
-verify.py already gates. The comparison UI may only ever put two products side
-by side when their `cat` is identical. That is not a UI nicety: comparing a
+CATEGORY LOCK. Every published PRODUCT ROW carries exactly one `cat`, of the
+form "<speciality>:<type>", from the vocabulary in data/compare-suppliers.json
+that verify.py already gates. The comparison UI may only ever put two products
+side by side when their `cat` is identical. That is not a UI nicety: comparing a
 midline against a drainage bag produces a table where every row is "n/a", which
 reads to a member as a product that fails on every measure.
+
+MULTI-CATEGORY DIVISIONS (Lou's rule, 25/08/2026). A (supplier, division) pair's
+recorded `hub` in differentiator-category-map.json can be a LIST of categories,
+not just one, when the division's own evidence genuinely names products from
+several — see that file's "rule" and data/differentiator-map-parts/README.md.
+The lock above still holds per ROW: a division mapped to N categories publishes
+its products N times, once per category, each row still locked to exactly one
+`cat`. This is not "pick one" relaxed into "guess several" — an ambiguous
+division with no supporting evidence for any of its plausible categories is
+still held, exactly as before.
 
 A product whose category is not known is HELD, not guessed — it goes to
 `held`, is counted, and appears nowhere in the comparison. Root rule 14: an
@@ -193,10 +203,9 @@ def main():
                                 "url": "https://my.supplychain.nhs.uk/catalogue/search/0?query=%s"
                                        % (it["npc"] or "")})
 
-            row = {
+            base_row = {
                 "supplier": co, "name": name, "domain": domain,
                 "division": div, "mfrCategory": p.get("category"),
-                "cat": cat,
                 "detail": ({"description": d.get("description"),
                             "features": d.get("features"),
                             "image": d.get("image")} if d else None),
@@ -210,17 +219,26 @@ def main():
                              "why": "no recorded category mapping for this "
                                     "supplier's own division"})
                 continue
-            if cat not in legal:
+            # A division's own evidence can genuinely name products from several
+            # categories at once (Lou's rule, 25/08/2026) — `hub` is then a LIST
+            # rather than one "speciality:type". Nothing is guessed here: the same
+            # physical product is published once per listed category, so it shows
+            # up in every comparison it belongs in, still locked to exactly one
+            # category PER ROW (see the module docstring's CATEGORY LOCK).
+            cats = cat if isinstance(cat, list) else [cat]
+            bad = [c for c in cats if c not in legal]
+            if bad:
                 held.append({"supplier": co, "name": name, "division": div,
                              "why": "mapping names a category that is not in the "
-                                    "gated vocabulary: %s" % cat})
+                                    "gated vocabulary: %s" % ", ".join(bad)})
                 continue
             if not sources:
                 held.append({"supplier": co, "name": name, "division": div,
                              "why": "no source carries this product — neither the "
                                     "manufacturer's own page nor NHSSC"})
                 continue
-            products.append(row)
+            for c in cats:
+                products.append(dict(base_row, cat=c))
 
     bycat = collections.Counter(r["cat"] for r in products)
     comparable = {c: n for c, n in bycat.items() if n >= 2}

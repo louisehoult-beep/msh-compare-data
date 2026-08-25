@@ -21,6 +21,29 @@ nothing and the merge will say so. `hub` is `<speciality>:<type>` from the
 vocabulary printed at the top of the map file. `why` is required: a mapping is a
 judgement, and it publishes with its reason.
 
+**A division that spans several categories goes in ALL of them (Lou's rule,
+25/08/2026) — do not pick one.** `hub` can be a list instead of a single string:
+
+```json
+{"supplier": "Vygon (UK)",
+ "decisions": [
+   {"division": "Vascular Access Devices",
+    "hub": ["vascular:picc", "vascular:cvc", "vascular:sec"],
+    "why": "the division's own categories name PICC lines, tunnelled catheters/
+            ports and dressings/fixation as separate lines within it"}
+ ]}
+```
+
+`build_differentiator.py` then publishes the division's products once per listed
+category, so it shows up in every comparison it genuinely belongs in — still
+locked to one category per published row, never a product compared against the
+wrong thing. This replaces "pick the dominant type or leave it unmapped" for a
+division whose own evidence supports more than one category — it does **not**
+mean map every ambiguous division to everything plausible. A division whose
+evidence doesn't clearly support any category is still left unmapped, exactly as
+before; a list is for a division that has done the reading and genuinely spans
+several, not a hedge for one that hasn't been read closely enough to tell.
+
 Then, once, by one person:
 
 ```bash

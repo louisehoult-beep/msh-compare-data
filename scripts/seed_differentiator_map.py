@@ -89,7 +89,13 @@ def main():
                 "gates. A pair with no mapping publishes nothing: an uncategorised "
                 "product is held out of the Differentiator, never guessed into a "
                 "category, because a product compared against the wrong category is "
-                "worse than a product missing from the table.",
+                "worse than a product missing from the table. LOU'S RULE, 25/08/2026: "
+                "`hub` may be a LIST of categories instead of one, when the division's "
+                "OWN evidence genuinely names products from several at once — do not "
+                "pick a single category for a division that spans more than one, put "
+                "it in all of them. This is still not licence to guess: a division "
+                "with no clear evidence for any category is still left unmapped. See "
+                "data/differentiator-map-parts/README.md.",
         "vocabulary": {s: (v.get("types") or {}) for s, v in vocab.items()},
         "counts": {
             "pairs": len(entries),

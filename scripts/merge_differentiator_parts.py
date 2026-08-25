@@ -20,9 +20,26 @@ So no agent touches the map. Each writes ONE FILE PER SUPPLIER:
 Disjoint by construction — two agents working different suppliers cannot write
 the same file — so the merge is a fold, never a three-way diff.
 
+MULTI-CATEGORY DIVISIONS (Lou's rule, 25/08/2026): do not pick one category for a
+division whose products genuinely span several. `hub` may be a LIST of
+"speciality:type" strings instead of one:
+
+    {"division": "Vascular Access Devices",
+     "hub": ["vascular:picc", "vascular:cvc", "vascular:sec"],
+     "why": "..."}
+
+build_differentiator.py then publishes the division's products once per listed
+category, so the division shows up in every comparison it genuinely belongs in.
+This is still not a licence to guess: a list is for a division whose OWN evidence
+(categories/examples) names products in each of those categories, not a hedge for
+"I couldn't decide." If the division's evidence does not clearly support a
+category, leave it unmapped exactly as before — this rule replaces "pick one or
+leave it," not "always map something."
+
 This script refuses rather than guesses:
-  * a `hub` outside the gated vocabulary
-  * two parts disagreeing about the same (supplier, division)
+  * any `hub` (in a list or on its own) outside the gated vocabulary
+  * two parts disagreeing about the same (supplier, division) — including a
+    single-category decision disagreeing with a multi-category one
   * a decision with no `why` — a mapping is a judgement and has to carry its reason
   * a supplier or division that is not in the worklist (a typo silently maps nothing)
 
@@ -57,20 +74,28 @@ def main():
                 problems.append("%s: (%s, %s) is not a pair in the worklist — check the "
                                 "exact spelling, a typo maps nothing" % (path, co, div))
                 continue
-            if hub not in legal:
-                problems.append("%s: (%s, %s) -> '%s' is not in the gated vocabulary"
-                                % (path, co, div, hub))
+            hub_list = hub if isinstance(hub, list) else [hub]
+            if not hub_list or any(h not in legal for h in hub_list):
+                bad = [h for h in hub_list if h not in legal]
+                problems.append("%s: (%s, %s) -> %r is not in the gated vocabulary"
+                                % (path, co, div, bad or hub))
+                continue
+            if len(set(hub_list)) != len(hub_list):
+                problems.append("%s: (%s, %s) lists the same category twice: %r"
+                                % (path, co, div, hub_list))
                 continue
             if len(why) < 15:
                 problems.append("%s: (%s, %s) carries no reason. A mapping is a judgement "
                                 "and publishes with its reason." % (path, co, div))
                 continue
-            if key in seen and seen[key][0] != hub:
-                problems.append("%s: (%s, %s) -> '%s' contradicts '%s' decided in another "
+            stored = hub_list[0] if len(hub_list) == 1 else hub_list
+            if key in seen and sorted(seen[key][0] if isinstance(seen[key][0], list)
+                                       else [seen[key][0]]) != sorted(hub_list):
+                problems.append("%s: (%s, %s) -> %r contradicts %r decided in another "
                                 "part. Two agents disagree — this needs a human."
-                                % (path, co, div, hub, seen[key][0]))
+                                % (path, co, div, stored, seen[key][0]))
                 continue
-            seen[key] = (hub, why, os.path.basename(path))
+            seen[key] = (stored, why, os.path.basename(path))
 
     for p in problems:
         print("REFUSED  " + p)

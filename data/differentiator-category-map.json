@@ -10,7 +10,7 @@
   "ref": "ETH-D01E00B2A",
   "contact": "contact@elevateandthrive.uk"
  },
- "rule": "A product's Hub category comes from its manufacturer's own filing, mapped once per (supplier, division) and recorded here with that filing as the evidence. `hub` is \"<speciality>:<type>\" using the vocabulary in data/compare-suppliers.json, which verify.py already gates. A pair with no mapping publishes nothing: an uncategorised product is held out of the Differentiator, never guessed into a category, because a product compared against the wrong category is worse than a product missing from the table.",
+ "rule": "A product's Hub category comes from its manufacturer's own filing, mapped once per (supplier, division) and recorded here with that filing as the evidence. `hub` is \"<speciality>:<type>\" using the vocabulary in data/compare-suppliers.json, which verify.py already gates. A pair with no mapping publishes nothing: an uncategorised product is held out of the Differentiator, never guessed into a category, because a product compared against the wrong category is worse than a product missing from the table. LOU'S RULE, 25/08/2026: `hub` may be a LIST of categories instead of one, when the division's OWN evidence genuinely names products from several at once — do not pick a single category for a division that spans more than one, put it in all of them. This is still not licence to guess: a division with no clear evidence for any category is still left unmapped. See data/differentiator-map-parts/README.md.",
  "vocabulary": {
   "bloodcoll": {
    "tube": "Collection tubes & systems",
@@ -309,10 +309,10 @@
  },
  "counts": {
   "pairs": 1825,
-  "mapped": 1710,
+  "mapped": 1736,
   "notTaxonomy": 42,
   "products": 14722,
-  "productsMapped": 11455
+  "productsMapped": 12018
  },
  "entries": [
   {
@@ -745,9 +745,15 @@
     "Bio-Cuff Reusable",
     "Bio-Cuff Single Patient Use"
    ],
-   "hub": null,
+   "hub": [
+    "wound:deb",
+    "vascular:gen",
+    "monitoring:gen"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — Irrigation Tubing Set (debridement & irrigation), Speciality Luer Needle (general-purpose syringes & needles) and Bio-Cuff BP cuffs (non-specialist monitoring) are three distinct named product types",
+   "decidedIn": "GBUK Group.json"
   },
   {
    "supplier": "Timesco Healthcare Ltd",
@@ -1038,9 +1044,14 @@
     "Chair Scale",
     "Personal Floor Scale with Height Rod"
    ],
-   "hub": null,
+   "hub": [
+    "handling:scale",
+    "handling:furniture"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — Chair Scale and Personal Floor Scale (patient & bariatric weighing scales) sit alongside Trauma Trolley and MTC Double Cabinet Trolley (clinical trolleys)",
+   "decidedIn": "Agile Medical.json"
   },
   {
    "supplier": "Hospital Direct",
@@ -1240,9 +1251,14 @@
     "Universal Nibbler Scissors 12cm Serrated Blade",
     "Synthetic Shears 24cm Serrated Blade Tungsten Carbide"
    ],
-   "hub": null,
+   "hub": [
+    "theatres:theatre",
+    "ortho:trauma"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — three named products are general surgical scissors/shears (general theatre consumables); the Wolff Plaster Breaker is a cast-removal instrument (trauma & fixation)",
+   "decidedIn": "Timesco Healthcare Ltd.json"
   },
   {
    "supplier": "Agile Medical",
@@ -1428,9 +1444,14 @@
     "Te X Portable Ultrasound Machine",
     "Te Air Handheld Ultrasound With Wireless Ultrasound Transducer"
    ],
-   "hub": null,
+   "hub": [
+    "ultrasound:port",
+    "ultrasound:hand"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — TE X is a named portable/trolley system and TE Air is a named handheld device, both in the same division",
+   "decidedIn": "Mindray UK.json"
   },
   {
    "supplier": "Inspire Community Trust",
@@ -1545,9 +1566,14 @@
     "Access Devices",
     "Blood Collection Holder"
    ],
-   "hub": null,
+   "hub": [
+    "vascular:gen",
+    "bloodcoll:adapt"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — Arterial Blood Gas Sampling Syringe and Arterial Cannula (general-purpose syringes & needles) sit alongside Blood Collection Holder (adaptors & tube holders), a different speciality entirely",
+   "decidedIn": "GBUK Group.json"
   },
   {
    "supplier": "MAG Orthotics Limited",
@@ -1790,9 +1816,15 @@
     "Activelife One Piece Drainable Pouch",
     "E735C52A F61E 4E5A 93C8 3Ad2C21277F7"
    ],
-   "hub": null,
+   "hub": [
+    "ostomy:uro",
+    "ostomy:ileo",
+    "ostomy:acc"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — the Activelife Urostomy Pouch (urostomy bags), the Activelife Drainable Pouch (ileostomy and drainable bags) and the division's own 'Accessories' category are three distinct ostomy types",
+   "decidedIn": "Convatec.json"
   },
   {
    "supplier": "GBUK Group",
@@ -1846,9 +1878,14 @@
     "Microsite® 2Fr introducer kit",
     "Neohelp™"
    ],
-   "hub": null,
+   "hub": [
+    "neonatal:feed",
+    "neonatal:equip"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — the Nutrisafe2 nasogastric feeding tube (enteral and infant feeding) sits alongside the umbilical catheter, introducer kit and heat-loss-prevention device (neonatal equipment and resuscitation)",
+   "decidedIn": "Vygon (UK).json"
   },
   {
    "supplier": "GBUK Group",
@@ -1933,9 +1970,14 @@
     "Braun Biolight S12 Patient Monitor",
     "Sonomed Escalon PacScan Plus"
    ],
-   "hub": null,
+   "hub": [
+    "ophthalmology:equip",
+    "monitoring:gen"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — three named diagnostic/imaging devices (capital equipment & imaging) sit alongside a Braun Biolight S12 Patient Monitor, a general vital-signs monitor (non-specialist monitoring), not an ophthalmology-specific device",
+   "decidedIn": "Birmingham Optical Group.json"
   },
   {
    "supplier": "Canon Medical Systems",
@@ -1986,9 +2028,14 @@
     "Cotton Rich Flat Sheet Double Bed",
     "Scrub Caps"
    ],
-   "hub": null,
+   "hub": [
+    "workwear:linen",
+    "workwear:scrubs"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — the patient gowns and flat sheet (bedding, gowns & hospital linen) sit alongside scrub caps (scrubs & clinical workwear)",
+   "decidedIn": "Interweave Textiles.json"
   },
   {
    "supplier": "Canon Medical Systems",
@@ -2565,9 +2612,14 @@
     "TIVA Sets",
     "NRFit™ Epidural Mini-kits"
    ],
-   "hub": null,
+   "hub": [
+    "vascular:conn",
+    "anaesthesia:reg"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — the TIVA administration sets (IV connectors, extensions & accessories) sit alongside the NRFit Epidural Mini-kits (regional anaesthesia & pain management kits)",
+   "decidedIn": "Vygon (UK).json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -3461,9 +3513,11 @@
     "Blood Glucose Test Strips (Pack of 50)",
     "Advanced Blood Glucose Monitor Test Strips (Pack of 50)"
    ],
-   "hub": null,
+   "hub": "diabetes:strip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "two of four named products are blood glucose test strips, matching blood glucose and ketone test strips; the nasal/sinus products in the same division have no Hub category and are not forced in",
+   "decidedIn": "Intus Healthcare.json"
   },
   {
    "supplier": "GBUK Group",
@@ -3903,9 +3957,14 @@
     "LifeBubble® Umbilical Catheter Securement System",
     "BoogieBaby™ Nasal & Oral Aspirators"
    ],
-   "hub": null,
+   "hub": [
+    "womens:mat",
+    "neonatal:equip"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — the JADA System, a postpartum haemorrhage device (maternity & obstetrics), sits alongside the LifeBubble umbilical catheter securement system and BoogieBaby aspirators (neonatal equipment)",
+   "decidedIn": "Laborie Medical Technologies UK Ltd.json"
   },
   {
    "supplier": "Lisclare",
@@ -4576,9 +4635,11 @@
     "ECG Electrodes Exercise",
     "ECG Electrodes Resting"
    ],
-   "hub": null,
+   "hub": "cardiology:ecg",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "two of four named products are literally 'ECG Electrodes Exercise/Resting', matching ECG electrodes; the exercise-test headgear/mask in the same division have no Hub category and are not forced in",
+   "decidedIn": "Love Medical.json"
   },
   {
    "supplier": "Liberator Ltd",
@@ -6091,9 +6152,14 @@
     "General",
     "Genesis Sterilization Containers"
    ],
-   "hub": null,
+   "hub": [
+    "theatres:theatre",
+    "ssd:cssd"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — Instrapac sterile single-use instruments (general theatre consumables) sit alongside Genesis Sterilization Containers (central decontamination)",
+   "decidedIn": "Steris.json"
   },
   {
    "supplier": "Steris",
@@ -6268,9 +6334,14 @@
     "Hospital Pyjama Trousers",
     "Hospital Pyjama Jacket"
    ],
-   "hub": null,
+   "hub": [
+    "continence:pads",
+    "workwear:linen"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — the Attends Cover-Dri underpad (pads) sits alongside hospital pyjama trousers/jacket (bedding, gowns & hospital linen)",
+   "decidedIn": "Interweave Textiles.json"
   },
   {
    "supplier": "Interweave Textiles",
@@ -7763,9 +7834,11 @@
     "Ergoselect 600 Recumbent",
     "SP-20"
    ],
-   "hub": null,
+   "hub": "monitoring:gen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "two of four named products (MiniPulse MP1R, MiniPulse MP1) are pulse oximeters, matching non-specialist monitoring; the ergometers/spirometer in the same division have no Hub category and are not forced in",
+   "decidedIn": "Love Medical.json"
   },
   {
    "supplier": "Liberator Ltd",
@@ -7970,9 +8043,14 @@
     "CareTip™ Compact",
     "GBUK Silicone Male External Catheter"
    ],
-   "hub": null,
+   "hub": [
+    "continence:ic",
+    "continence:sh"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — the CareTip range (intermittent catheters) and the GBUK Silicone Male External Catheter (a sheath, not an indwelling/intermittent catheter) are two distinct continence types",
+   "decidedIn": "GBUK Group.json"
   },
   {
    "supplier": "Hospital Services Limited",
@@ -7989,9 +8067,11 @@
     "maXium® smart C",
     "maXium®"
    ],
-   "hub": null,
+   "hub": "theatres:electro",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "two of four named products (maXium smart C, maXium) are electrosurgery generators, matching electrosurgery consumables/equipment; the biopsy punch and rongeur in the same division have no Hub category and are not forced in",
+   "decidedIn": "Hospital Services Limited.json"
   },
   {
    "supplier": "Mölnlycke",
@@ -9060,9 +9140,14 @@
     "Linen Care",
     "Hangers"
    ],
-   "hub": null,
+   "hub": [
+    "facilities:tools",
+    "facilities:clean"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — Laundry Equipment (cleaning tools, equipment & machines) sits alongside Detergents (cleaning chemicals & consumables); Linen Care and Hangers have no category to hold them and are not forced in",
+   "decidedIn": "HC Innovations.json"
   },
   {
    "supplier": "HC Innovations",
@@ -9075,9 +9160,15 @@
     "Compostable Liners",
     "Dosing Units"
    ],
-   "hub": null,
+   "hub": [
+    "facilities:clean",
+    "facilities:washroom",
+    "facilities:tools"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — Sustainable Chemicals (cleaning chemicals), Recycled Paper Products and Compostable Liners (washroom, paper hygiene & waste management) and Dosing Units (cleaning tools & equipment) are three distinct facilities types",
+   "decidedIn": "HC Innovations.json"
   },
   {
    "supplier": "HC Innovations",
@@ -9447,9 +9538,15 @@
     "Solite Pro",
     "Hybrid Power Cushion"
    ],
-   "hub": null,
+   "hub": [
+    "rehab:chair",
+    "respiratory:resp",
+    "handling:cushion"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — Nevada Dual Motor Rise Recliner and Solite Pro (wheelchairs and specialist seating) sit alongside a Vacuaide portable suction unit (respiratory therapy & circuits) and a Hybrid Power Cushion (pressure-relieving cushions)",
+   "decidedIn": "Drive DeVilbiss Healthcare UK.json"
   },
   {
    "supplier": "Drive DeVilbiss Healthcare UK",
@@ -10164,9 +10261,14 @@
     "CliniSure® Urinary Sheath",
     "Curan® Advantage Hydrophilic Catheter"
    ],
-   "hub": null,
+   "hub": [
+    "continence:ic",
+    "continence:sh"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — the Curan catheter range (intermittent catheters) sits alongside the CliniSure Urinary Sheath (sheaths), and the division's own name says both",
+   "decidedIn": "CliniMed.json"
   },
   {
    "supplier": "CliniMed",
@@ -10712,9 +10814,11 @@
     "Magnetos Info",
     "Screenshot 6"
    ],
-   "hub": null,
+   "hub": "ortho:cement",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Magnetos is a bone-graft-substitute putty, the closest existing type (bone cement and preparation) for an orthopaedic biomaterial with no dedicated type",
+   "decidedIn": "Macromed UK Ltd.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -10792,9 +10896,14 @@
     "RIBOFAST",
     "CF X-LINKER ®"
    ],
-   "hub": null,
+   "hub": [
+    "ophthalmology:cons",
+    "ophthalmology:equip"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — RIBOCROSS/RIBOFAST corneal cross-linking solutions (surgical consumables & packs) sit alongside the CF X-LINKER device (capital equipment)",
+   "decidedIn": "Veni Vidi Medical Limited.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -27839,9 +27948,11 @@
    "examples": [
     "Osmycin"
    ],
-   "hub": null,
+   "hub": "ortho:cement",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "an antibiotic-loaded bone allograft is the same class of orthopaedic biomaterial as Magnetos, the closest existing type being bone cement and preparation",
+   "decidedIn": "Macromed UK Ltd.json"
   },
   {
    "supplier": "Macromed UK Ltd",
@@ -27851,9 +27962,11 @@
    "examples": [
     "Magnetos_Granules_Product Highres 1 1024X576 Png"
    ],
-   "hub": null,
+   "hub": "ortho:cement",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the granule form of the same Magnetos bone-graft-substitute product mapped under Magnetos Putty",
+   "decidedIn": "Macromed UK Ltd.json"
   },
   {
    "supplier": "It’s Interventional Limited",
