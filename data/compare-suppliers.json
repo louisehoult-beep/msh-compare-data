@@ -4929,6 +4929,37 @@
    },
    "suppliers": [],
    "noSuppliers": "No researched supplier table yet. This speciality currently holds Differentiator-mapped products from Macromed UK Ltd, It's Interventional Ltd and Kimal PLC only — not a full competitor set for the framework's 68 suppliers."
+  },
+  "veterinary": {
+   "label": "Veterinary products",
+   "route": [],
+   "routeNote": "New speciality added 25/08/2026 on Lou's decision, to hold its own section rather than being excluded. NOT an NHS Supply Chain category — veterinary practices buy outside the NHS framework system entirely, so no route is cited or pending; there is genuinely none to find. Holds animal-health products that turned up in the Differentiator crawl (ICU Medical/Smiths Medical, Medi-Plinth Equipment, Storz Medical UK) with nowhere else to go.",
+   "types": {
+    "consum": "Veterinary consumables (infusion, wound management, fluid warming)",
+    "equip": "Veterinary equipment & furniture (tables, therapy devices)"
+   },
+   "noSuppliers": "No researched supplier table. This speciality exists to hold the veterinary-only products this repo has crawled from otherwise-human-healthcare suppliers, not a competitor set for the veterinary market.",
+   "suppliers": []
+  },
+  "it": {
+   "label": "IT & computer equipment",
+   "route": [],
+   "routeNote": "New speciality added 25/08/2026 on Lou's decision, to hold its own section rather than being excluded. NOT an NHS Supply Chain category. Iansyst Ltd's laptops are sold via Disabled Students' Allowance (DSA), a higher-education funding route, not NHS procurement; Hospital Services Ltd's Ergotron mounts are general clinical-IT hardware sold outside any NHS SC framework this repo has found. No route is pending verification — for DSA specifically, none exists to find.",
+   "types": {
+    "hw": "Computer hardware (laptops, desktops, monitors, mounting & carts)"
+   },
+   "noSuppliers": "No researched supplier table. Holds Iansyst Ltd's DSA laptop range and Hospital Services Ltd's IT mounting hardware, not a competitor set for IT equipment.",
+   "suppliers": []
+  },
+  "marketing": {
+   "label": "Marketing & campaign content",
+   "route": [],
+   "routeNote": "New speciality added 25/08/2026 on Lou's decision, to hold its own section rather than being excluded. This is NOT a product category — it holds crawler hits that are brochures, campaign pages, feature-marketing copy or case studies rather than an actual product (e.g. Sysmex's 'Pinktober' awareness page, Elekta's 'See What's Possible' tagline, Mölnlycke's brochure-download links). No NHS Supply Chain route applies or is sought; nothing here is bought.",
+   "types": {
+    "content": "Marketing collateral, brochures & campaign pages"
+   },
+   "noSuppliers": "No supplier table — by definition nothing published under this type is a comparable product.",
+   "suppliers": []
   }
  },
  "refRule": "`ref` is the master supplier record this row's `co` resolves to, in supplier-seed.json or supplier-index.json, matched on exact name or exact alias using verify.py's own _norm_co. It exists so the Compare tab's company picker can group the spellings of one firm together: GBUK is written four ways in this file and a member picking one saw only that slice. `co` is unchanged and is still what the table displays — several are the procurement record's own wording and this file is right to show them. A row with no `ref` reached no master record and groups under its own `co`, exactly as before. Nothing here is fuzzy-matched: an unresolved name is left unresolved rather than guessed at. Derived 07/08/2026."
