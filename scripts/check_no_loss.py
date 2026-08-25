@@ -35,7 +35,18 @@ import subprocess
 import sys
 
 # Keys that hold housekeeping rather than records, and would only add noise.
-SKIP_KEYS = {"_notice", "_meta", "meta", "thresholds"}
+SKIP_KEYS = {"_notice", "_meta", "meta", "thresholds",
+             # data/differentiator.json only. build_differentiator.py documents both as
+             # capped/re-ranked PREVIEWS, re-derived whole on every build, never the
+             # authoritative record: `"held": held[:2000]` (first 2000 in supplier-dict
+             # iteration order) and `"heldTopDivisions": hcount.most_common(40)` (today's
+             # top 40 by size). The real held total lives in counts.held and is unaffected;
+             # promoting even a handful of divisions reshuffles who is in this window,
+             # which reads as hundreds of names "lost" with nothing actually deleted.
+             # Confirmed 25/08/2026 after a differentiator-category-map.json update
+             # flagged 706 held + 12 heldTopDivisions as lost with the published `products`
+             # collection — the one this check exists to protect — showing no loss at all.
+             "held", "heldTopDivisions"}
 
 # Tried in order to identify a record inside a list.
 ID_KEYS = ("name", "id", "slug", "title", "trust", "code", "company",

@@ -4911,13 +4911,24 @@
   },
   "vascsurg": {
    "label": "Vascular surgery & peripheral intervention",
-   "route": [],
-   "routeNote": "New speciality added 25/08/2026 on Lou's decision (\"venous stents likely vascular surgery\") to separate peripheral vascular intervention devices (stents, thrombectomy, embolisation) from `vascular`, which is scoped to vascular ACCESS (cannulae, PICCs, CVCs) under its own IV Cannula and Central Venous Catheter frameworks and is not the right home for a stent. The likely route is NHS Supply Chain's \"Interventional Cardiology, Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm Management and Electrophysiology\" framework (27/02/2023-26/02/2027, 67 suppliers) — confirmed real and live, but its public contract-launch-brief page does not itself list peripheral/venous stents by name, so that coverage is NOT asserted as fact here. Needs a check against NHS Supply Chain's product matrix before a route citation is added. Only one type populated so far, for the products this repo has actually evidenced.",
+   "route": [
+    {
+     "name": "NHS Supply Chain — Interventional Cardiology, Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm Management and Electrophysiology, Lot 1 (Interventional Cardiology and Radiology) and Lot 2 (Interventional Neuroradiology)",
+     "dates": "27/02/2023 – 26/02/2027",
+     "endsOn": "2027-02-26",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/interventional-cardiology-interventional-radiology-and-interventional-neuroradiology-cardiac-rhythm-management-and-electrophysiology/"
+    }
+   ],
+   "routeNote": "Confirmed 25/08/2026 against the framework's own Product Matrix (Excel, dated 12/02/2026, linked from the contract-launch-brief page above): Macromed UK Limited is an awarded supplier on Lot 1 (Interventional Cardiology and Radiology) and on NO other lot, which matches its whole crawled catalogue (venous stents, thrombectomy, occlusion plugs, endovascular ablation, delivery sheaths) — there is no other lot it could be selling this range under. It's Interventional Ltd is awarded on Lot 1 AND Lot 2 (Interventional Neuroradiology), matching its stroke-thrombectomy product. Kimal PLC is on Lot 1. The matrix is a supplier-by-lot grid, not itemised by device sub-type, so this confirms the route at company level, not that Lot 1's own paperwork names \"stent\" or \"thrombectomy\" verbatim. Not asserted for any supplier not checked against this matrix.",
    "types": {
-    "stent": "Peripheral vascular stents & stent grafts"
+    "stent": "Peripheral vascular stents & stent grafts",
+    "thrombectomy": "Mechanical thrombectomy & aspiration systems",
+    "occl": "Vascular occlusion plugs & closure devices",
+    "abl": "Endovascular ablation (laser & radiofrequency)",
+    "access": "Vascular access sheaths, catheters & delivery systems"
    },
    "suppliers": [],
-   "noSuppliers": "No supplier table yet. This speciality exists to hold Macromed UK Ltd's venous stent products for the Differentiator only; a researched competitor set has not been built."
+   "noSuppliers": "No researched supplier table yet. This speciality currently holds Differentiator-mapped products from Macromed UK Ltd, It's Interventional Ltd and Kimal PLC only — not a full competitor set for the framework's 68 suppliers."
   }
  },
  "refRule": "`ref` is the master supplier record this row's `co` resolves to, in supplier-seed.json or supplier-index.json, matched on exact name or exact alias using verify.py's own _norm_co. It exists so the Compare tab's company picker can group the spellings of one firm together: GBUK is written four ways in this file and a member picking one saw only that slice. `co` is unchanged and is still what the table displays — several are the procurement record's own wording and this file is right to show them. A row with no `ref` reached no master record and groups under its own `co`, exactly as before. Nothing here is fuzzy-matched: an unresolved name is left unresolved rather than guessed at. Derived 07/08/2026."
