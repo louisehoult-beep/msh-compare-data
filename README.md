@@ -67,6 +67,22 @@ a rep" tactical line - is **human-curated intelligence and must never be
 written by automation**. To add or edit a tactical line, edit
 `data/compare-issues.json` here on GitHub and commit.
 
+### Exception: a confirmed 100% wrong claim gets fixed, not just flagged
+(Rule set by Lou, 26/08/2026, after the NGPod case below.) Append-only exists
+to stop automation second-guessing a *judgement call* - which angle to give a
+rep, which alternative to mention. It does not protect a plain factual error
+once one is proven. Automation may correct an existing curated item's `s`,
+`use` or `dates` only when the old claim is verifiably wrong against the
+notice's own primary source (not inferred, not "looks stale"), the fix is a
+single individually-verified item - never folded into a bulk `autoDetected`
+batch - and the commit message states what was wrong, what source proved it,
+and what changed. If the correct fact is itself unclear, or fixing it would
+change Lou's tactical recommendation rather than just the fact, that is a
+decision, not a correction - raise it instead of guessing. Full method and
+the first case (an NGPod pH device recall superseding an old "resolves
+01/09/2026" supply-issue line): `Process flows for all brands/
+msh-compare-data-correcting-confirmed-false-curated-items.md` in Cowork-OS.
+
 ## Dead source links (rule set by Lou, 05/08/2026)
 
 A source URL that 404s is **member-facing damage**, not cosmetic: a paying
