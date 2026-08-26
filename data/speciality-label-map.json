@@ -12,9 +12,9 @@
  },
  "rule": "A seed speciality label resolves to one or more Compare slugs. Only an exact match after mechanical normalisation is filled in automatically. A compound label is never auto-resolved, and a supplier carrying one is not treated as single-speciality.",
  "counts": {
-  "labels": 76,
-  "resolved": 64,
-  "resolvedByNormalisation": 49,
+  "labels": 77,
+  "resolved": 65,
+  "resolvedByNormalisation": 50,
   "resolvedByDecision": 15,
   "unresolved": 12,
   "compound": 8
@@ -49,9 +49,18 @@
   },
   {
    "label": "Pathology and laboratory",
-   "suppliers": 16,
+   "suppliers": 17,
    "slugs": [
     "pathology"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Respiratory",
+   "suppliers": 16,
+   "slugs": [
+    "respiratory"
    ],
    "resolvedBy": "normalised",
    "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
@@ -61,6 +70,15 @@
    "suppliers": 14,
    "slugs": [
     "monitoring"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Anaesthesia and critical care",
+   "suppliers": 13,
+   "slugs": [
+    "anaesthesia"
    ],
    "resolvedBy": "normalised",
    "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
@@ -79,24 +97,6 @@
    "suppliers": 12,
    "slugs": [
     "theatres"
-   ],
-   "resolvedBy": "normalised",
-   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
-  },
-  {
-   "label": "Respiratory",
-   "suppliers": 12,
-   "slugs": [
-    "respiratory"
-   ],
-   "resolvedBy": "normalised",
-   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
-  },
-  {
-   "label": "Anaesthesia and critical care",
-   "suppliers": 11,
-   "slugs": [
-    "anaesthesia"
    ],
    "resolvedBy": "normalised",
    "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
@@ -192,6 +192,15 @@
    "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
   },
   {
+   "label": "Cardiology",
+   "suppliers": 5,
+   "slugs": [
+    "cardiology"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
    "label": "Ostomy and stoma care",
    "suppliers": 5,
    "slugs": [
@@ -258,15 +267,6 @@
    "why": "names more than one speciality — a supplier under this label is not a single-speciality supplier and must not be pre-filled from it"
   },
   {
-   "label": "Cardiology",
-   "suppliers": 4,
-   "slugs": [
-    "cardiology"
-   ],
-   "resolvedBy": "normalised",
-   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
-  },
-  {
    "label": "Theatre / surgical",
    "suppliers": 4,
    "slugs": [
@@ -298,6 +298,15 @@
    "suppliers": 4,
    "slugs": [
     "endoscopy"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
+   "label": "Oncology and radiotherapy",
+   "suppliers": 3,
+   "slugs": [
+    "oncology"
    ],
    "resolvedBy": "normalised",
    "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
@@ -375,10 +384,10 @@
    "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
   },
   {
-   "label": "Oncology and radiotherapy",
-   "suppliers": 2,
+   "label": "ENT",
+   "suppliers": 3,
    "slugs": [
-    "oncology"
+    "ent"
    ],
    "resolvedBy": "normalised",
    "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
@@ -420,6 +429,15 @@
    "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
   },
   {
+   "label": "Continence / Urology",
+   "suppliers": 2,
+   "slugs": [
+    "continence"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
+  },
+  {
    "label": "Women’s health and maternity",
    "suppliers": 2,
    "slugs": [
@@ -447,15 +465,6 @@
    "why": "no counterpart in the gated vocabulary — decide the slug, or add the speciality to compare-suppliers.json"
   },
   {
-   "label": "ENT",
-   "suppliers": 2,
-   "slugs": [
-    "ent"
-   ],
-   "resolvedBy": "normalised",
-   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
-  },
-  {
    "label": "Women’s health / maternity",
    "suppliers": 2,
    "slugs": [
@@ -474,6 +483,15 @@
     "diabetes"
    ],
    "why": "names more than one speciality — a supplier under this label is not a single-speciality supplier and must not be pre-filled from it"
+  },
+  {
+   "label": "Diabetes",
+   "suppliers": 2,
+   "slugs": [
+    "diabetes"
+   ],
+   "resolvedBy": "normalised",
+   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
   },
   {
    "label": "Digital and medical IT",
@@ -581,15 +599,6 @@
    "suppliers": 1,
    "slugs": [
     "handling"
-   ],
-   "resolvedBy": "normalised",
-   "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
-  },
-  {
-   "label": "Continence / Urology",
-   "suppliers": 1,
-   "slugs": [
-    "continence"
    ],
    "resolvedBy": "normalised",
    "why": "identical to the gated label once case, punctuation and '&'/'and' are normalised"
