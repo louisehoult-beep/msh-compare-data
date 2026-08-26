@@ -56,6 +56,7 @@ TERMS = "https://medsalesintelligencehub.co.uk/terms/"
 REFS = {
     "awareness-days.json":              "ETH-D230F035D",
     "open-tenders.json":        "ETH-DCEFAF9C5",
+    "mhra-alerts.json":         "ETH-D9D253BB8",
     "company-awards.json":     "ETH-D8F9201A9",
     "company-press.json":      "ETH-D5A18D6E2",
     "company-logos.json":      "ETH-D6F85FA5F",
