@@ -81,6 +81,36 @@
     var have = {}; suppliers.forEach(function(s){ have[s.name] = 1; });
     ((seed && seed.suppliers) || []).forEach(function(s){ if (!have[s.name]){ s.curated = true; suppliers.push(s); } });
 
+    /* SPECIALITY LABEL CANONICALISATION — Patient Handling only (26/08/2026).
+       `s.specialities` is raw free text, written by whoever curated that one
+       supplier record, and it has never been reconciled against a single
+       vocabulary here (unlike comptab.js and supplier-search.js, which both
+       resolve through compare-suppliers.json's canonical id first). Found live
+       today: Patient Handling alone is split across three separate strings —
+       "Moving and handling" (5 companies), "Patient handling" (53 companies —
+       the 53-supplier framework roster, not a real per-product count), and
+       "Patient handling and pressure area care" (1 company) — each a dead end
+       on its own, with no way for a rep to know which of the three is "right".
+       Folding all three into the one label the rest of the Hub already uses
+       (compare-suppliers.json's `label`) fixes this speciality without
+       touching how any of the other 45 are read. This is a targeted patch, not
+       the general fix: the same fragmentation is very likely live for other
+       specialities too (anything curated under more than one spelling) and
+       needs the proper fix — resolving every supplier's raw text through
+       data/speciality-map.json, the way comptab.js and supplier-search.js
+       already do — as its own piece of work, not a side effect of this one. */
+    var SPEC_CANON = { 'moving and handling': 'Patient handling and pressure area care',
+                        'patient handling': 'Patient handling and pressure area care' };
+    suppliers.forEach(function(s){
+      if (!s.specialities || !s.specialities.length) return;
+      var seenC = {}, out = [];
+      s.specialities.forEach(function(sp){
+        var canon = SPEC_CANON[String(sp || '').toLowerCase()] || sp;
+        if (!seenC[canon]){ seenC[canon] = 1; out.push(canon); }
+      });
+      s.specialities = out;
+    });
+
     // Live NHSSC detail cache, keyed by normalised product name.
     var CACHE = {}; var cp = (nhssc && nhssc.products) || {};
     for (var k in cp){ CACHE[nk(k)] = cp[k]; }
@@ -180,6 +210,11 @@
       'diabetes': ['glucose','sensor','test strip','lancet','needle','pump'],
       'surgery / theatres': ['suture','stapler','staple','haemostat','sealant','drape','gown','glove','scalpel','blade','forceps','retractor','trocar','clip','clamp','mesh','skin closure','tissue adhesive','electrode','suction','warming','warmer','scope','endoscope']
     };
+    // The canonicalisation above (SPEC_CANON) folds Patient Handling's three raw
+    // labels into "Patient handling and pressure area care" — SPECMAP's key has
+    // to match that exact string lower-cased, so the type-narrowing above still
+    // fires for it, same list as the short 'patient handling' key.
+    SPECMAP['patient handling and pressure area care'] = SPECMAP['patient handling'];
     /* THE TWO SIDES, SIDE BY SIDE — in the form as well as the result.
        Lou, 06/08/2026: the form stacked "your product" above "compare against",
        so the two things being compared never sat alongside each other until
