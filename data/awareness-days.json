@@ -306,6 +306,23 @@
         "pathology-and-laboratory-medicine"
       ],
       "repAction": "Antimicrobial stewardship pharmacists and the microbiology lead run this jointly. Rapid diagnostics that shorten time to targeted therapy are the strongest pitch of the week."
+    },
+    {
+      "id": "stop-the-pressure-day",
+      "name": "Stop the Pressure Day",
+      "owner": "European Pressure Ulcer Advisory Panel (EPUAP)",
+      "source": "https://epuap.org/stop-pressure-ulcers/",
+      "sourceQuote": "Every year, the EPUAP holds the Stop Pressure Ulcer Day on every third Thursday in November. The next Stop Pressure Ulcer Day will be held on 19 November 2026.",
+      "verified": "2026-08-26",
+      "dateRule": "computed",
+      "rule": "third Thursday of November",
+      "month": 11,
+      "weekday": "Thursday",
+      "ordinal": 3,
+      "specialities": [
+        "tissue-viability-and-wound-care"
+      ],
+      "repAction": "Tissue viability teams run pressure-ulcer prevention audits and education around this week. A good window for prevention-focused consumables (dressings, repositioning aids, mattress overlays) rather than a capital conversation."
     }
   ],
   "unverified": [
@@ -334,14 +351,6 @@
       "reason": "The owner's site blocks automated reading of the campaign page and the readable pages carry blog dates only, not the campaign date. Commonly reported as the second Thursday of March; not stated on any owner page that could be read. Needs a manual read."
     },
     {
-      "id": "stop-the-pressure-day",
-      "name": "Stop the Pressure Day",
-      "owner": "European Pressure Ulcer Advisory Panel (EPUAP); NHS England runs the UK Stop the Pressure week",
-      "source": "https://www.epuap.org/stop-pressure-injury-day/",
-      "checked": "2026-08-21",
-      "reason": "EPUAP's own page returns 404. Every readable statement of the date is a trust or ICB page repeating it, not the owner. Widely reported as the third Thursday of November, with NHS England running a Stop the Pressure week around it, but neither EPUAP nor NHS England states it on a page that could be read. Highest-value missing entry for Tissue Viability and Wound Care; chase manually."
-    },
-    {
       "id": "stoptober",
       "name": "Stoptober",
       "owner": "Office for Health Improvement and Disparities / DHSC",
@@ -350,20 +359,20 @@
       "reason": "No owner page located stating the campaign dates for the current year. Runs through October, but the owner's own statement of dates has not been read."
     },
     {
-      "id": "world-continence-week",
-      "name": "World Continence Week",
-      "owner": "International Continence Society",
-      "source": "https://www.ics.org/calendar/421",
-      "checked": "2026-08-21",
-      "reason": "The ICS's own calendar page for World Continence Week is stale: the only dates it states are '22-28th June' for 2015. Secondary sources report the third Monday of June and give 15-21 June 2026, but no owner page states the rule or the current dates. Needs the current ICS or WFIPP campaign URL."
-    },
-    {
       "id": "world-obesity-day",
       "name": "World Obesity Day",
       "owner": "World Obesity Federation",
       "source": "https://www.worldobesityday.org/about",
       "checked": "2026-08-21",
       "reason": "The owner's page states only a date that has already passed ('World Obesity Day 2026 takes place on 4 March') and does not state whether the date is fixed or how it is set. Publishing it would put a past date on a forward calendar, so it is held until the owner states the next one. Widely reported as 4 March annually."
+    },
+    {
+      "id": "world-continence-week",
+      "name": "World Continence Week",
+      "owner": "World Federation for Incontinence and Pelvic Problems (WFIPP); endorsed by the International Continence Society (ICS)",
+      "source": "https://wfipp.org/event/world-continence-week-2026/",
+      "checked": "2026-08-26",
+      "reason": "Owner corrected from ICS to WFIPP (WFIPP devises and runs it; ICS only endorses) and WFIPP's own page confirmed as accurate: '15-21 June 2026'. But that date is now in the past and WFIPP has not yet published 2027 dates, so it cannot be published as a forward-looking entry (verify.py's annualReview check correctly refuses a stale announced occurrence). Re-check https://wfipp.org/event/ nearer June 2027 for the announced date."
     }
   ]
 }
