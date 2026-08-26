@@ -82118,144 +82118,38 @@
    "filingRule": "Representative capture, not exhaustive: 52 products sampled/derived across 4 divisions out of a true total of 247 read from the source's own listing/sitemap count. Names and divisions are the company's own wording, tidied for display."
   },
   "Advanced Medical Solutions (AMS)": {
-   "domain": "www.admedsol.com",
-   "verified": "2026-08-20",
-   "source": "www.admedsol.com XML sitemap, read this run",
-   "structureFrom": "sitemap",
-   "landingPagesDropped": 6,
-   "duplicateUrlsDropped": 0,
-   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 6 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation.",
-   "structure": "Grouped by the company's own URL structure.",
-   "droppedCategoryPages": 0,
-   "filingRule": "Read from the sitemap, so product NAMES come from URL slugs and the grouping is the company's own URL structure, not a product record. Treat names as the company's own wording tidied for display, and expect no category detail below the top level.",
+   "domain": "admedsol.com",
+   "verified": "2026-08-26",
+   "source": "admedsol.com product catalogue (WordPress REST API), read this run",
+   "structureFrom": "the company's own product category taxonomy",
+   "hasDivisions": false,
+   "structure": "No usable category structure in the site's own taxonomy — listed as one flat range.",
+   "filingRule": "Read from the site's own product records, so names are exact. the site's product taxonomy put every product in one 'Uncategorised' bucket, so it carries no division structure — shown as one unsorted list, not the company's own filed grouping — every item is listed by name below rather than grouped, because a fabricated grouping would misrepresent the company's own filing.",
    "divisions": [
     {
-     "name": "Woundcare",
-     "products": 14
-    },
-    {
-     "name": "Surgical",
-     "products": 11
-    },
-    {
      "name": "Uncategorised",
-     "products": 1
+     "products": 38
     }
    ],
    "products": [
     {
-     "n": "Traditional Topical Skin Adhesives",
-     "division": "Surgical",
+     "n": "Other Devices",
+     "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Surgical Sealants",
-     "division": "Surgical",
+     "n": "Laparoscopic Instruments",
+     "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Microbial Sealants",
-     "division": "Surgical",
+     "n": "Vascular Temporary Occlusion (VTO)",
+     "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Large Incision Adhesives",
-     "division": "Surgical",
-     "category": ""
-    },
-    {
-     "n": "Resorbable Fixation Systems",
-     "division": "Surgical",
-     "category": ""
-    },
-    {
-     "n": "Regenerative Collagens",
-     "division": "Surgical",
-     "category": ""
-    },
-    {
-     "n": "Haemostats",
-     "division": "Surgical",
-     "category": ""
-    },
-    {
-     "n": "Bone Substitutes",
-     "division": "Surgical",
-     "category": ""
-    },
-    {
-     "n": "Alginates",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "Silver Hydrogel",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "Silver High Performance Dressing",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "Silver Alginates",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "Phmb Foam",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "Moisture Wicking Fabric Tri Go",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "Hydrogel",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "Debridement",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "Silicone Foam",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "Silicone Lite Foam",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "Silicone Wound Contact Layer",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "High Performance Dressing",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "Silver Post Operative Dressing",
-     "division": "Woundcare",
-     "category": ""
-    },
-    {
-     "n": "Antibiotic Regenerative Collagens",
-     "division": "Surgical",
-     "category": ""
-    },
-    {
-     "n": "Surgical Supplies",
-     "division": "Woundcare",
+     "n": "Clips",
+     "division": "Uncategorised",
      "category": ""
     },
     {
@@ -82264,13 +82158,168 @@
      "category": ""
     },
     {
-     "n": "Internal Adhesives",
-     "division": "Surgical",
+     "n": "Woundcare",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Surgical",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Silver Hydrogel",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Moisture Wicking Fabric with Tri-Go™",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Silver Alginates",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Silver High Performance Dressing",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Alginates",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Silver Post Operative Dressing",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "PHMB Foam",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Infection Control",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "High Performance Dressing",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Silicone Wound Contact Layer",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Silicone Lite Foam",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Silicone Foam",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Exudate Management",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Debridement",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Hydrogel",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Other Ranges",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Surgical Supplies",
+     "division": "Uncategorised",
      "category": ""
     },
     {
      "n": "Sutures",
-     "division": "Surgical",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Sutures, Clips & VTO",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Resorbable Fixation Systems",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Bone Substitutes",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Haemostats",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Antibiotic Collagens",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Regenerative Collagens",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Biosurgical Solutions",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Microbial Sealants",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Surgical Sealants",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Internal Adhesives",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Adhesives & Sealants",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Large Incision Adhesives",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Traditional Topical Skin Adhesives",
+     "division": "Uncategorised",
      "category": ""
     }
    ]
@@ -151968,9 +152017,9 @@
    ]
   },
   "Joint Operations": {
-   "domain": "www.jointoperations.co.uk",
-   "verified": "2026-08-25",
-   "source": "www.jointoperations.co.uk product catalogue (WordPress REST API), read this run",
+   "domain": "jointoperations.co.uk",
+   "verified": "2026-08-26",
+   "source": "jointoperations.co.uk product catalogue (WordPress REST API), read this run",
    "structureFrom": "the company's own product category taxonomy",
    "hasDivisions": false,
    "structure": "No usable category structure in the site's own taxonomy — listed as one flat range.",
@@ -200580,12 +200629,12 @@
   },
   "Frontier Therapeutics": {
    "domain": "frontier-group.co.uk",
-   "verified": "2026-08-25",
+   "verified": "2026-08-26",
    "source": "frontier-group.co.uk XML sitemap, read this run",
    "structureFrom": "sitemap",
    "hasDivisions": false,
    "landingPagesDropped": 0,
-   "duplicateUrlsDropped": 0,
+   "duplicateUrlsDropped": 21,
    "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 0 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping.",
    "structure": "No division structure found in the URLs — listed as one flat range.",
    "droppedCategoryPages": 0,
@@ -200593,7 +200642,7 @@
    "divisions": [
     {
      "name": "Uncategorised",
-     "products": 34
+     "products": 35
     }
    ],
    "products": [
@@ -200628,6 +200677,86 @@
      "category": ""
     },
     {
+     "n": "Double Mattress Overlay",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Flex",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Foot Protector Plus",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Foot Protector",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Mattress Cushion Refresh Cover",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Mattress Overlay Cushion",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Mattress Overlay",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Paediatric Mattress Overlay",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Prone Kit",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Repose Blue Mattress Overlay Cover",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Repose Cushion Cover",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Repose Sole Protector",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Toto Cradle",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Toto",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Trolley Companion",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Wedge",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
      "n": "Dermisplus Gel Pads",
      "division": "Uncategorised",
      "category": ""
@@ -200653,67 +200782,12 @@
      "category": ""
     },
     {
-     "n": "Double Mattress Overlay",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Flex",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Foot Protector",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Foot Protector Plus",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Lite Cushion",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Mattress Cushion Refresh Cover",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Mattress Overlay",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Mattress Overlay Cushion",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Paediatric Mattress Overlay",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Prone Kit",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Repose Ambulance Companion",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Repose Blue Mattress Overlay Cover",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Repose Cushion Cover",
      "division": "Uncategorised",
      "category": ""
     },
@@ -200728,22 +200802,7 @@
      "category": ""
     },
     {
-     "n": "Toto",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Toto Cradle",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Toto Xl Automated Lateral Turning System",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Trolley Companion",
      "division": "Uncategorised",
      "category": ""
     },
@@ -200759,11 +200818,6 @@
     },
     {
      "n": "Ultracore Repose Lite Inside",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Wedge",
      "division": "Uncategorised",
      "category": ""
     }
@@ -308120,9 +308174,9 @@
    "checked": "2026-08-25"
   },
   "B. Braun Medical": {
-   "domain": "www.bbraun.co.uk",
-   "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "domain": "bbraun.co.uk",
+   "reason": "the site's WordPress API could not be read (<urlopen error [Errno 8] nodename nor servname provided, or ); the sitemap carries 0 product URLs, too few to call a catalogue",
+   "checked": "2026-08-26"
   },
   "Valley Northern Ltd": {
    "domain": "www.valleynorthern.com",
@@ -308135,14 +308189,14 @@
    "checked": "2026-08-25"
   },
   "Reliance Medical": {
-   "domain": "www.reliancemedical.co.uk",
+   "domain": "reliancemedical.co.uk",
    "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "Vernacare": {
-   "domain": "www.vernacare.com",
-   "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "domain": "vernacare.com",
+   "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue",
+   "checked": "2026-08-26"
   },
   "MedScience Distribution Ltd": {
    "domain": "medscienceuk.com",
@@ -308155,9 +308209,9 @@
    "checked": "2026-08-25"
   },
   "Rocialle Healthcare": {
-   "domain": "www.rociallehealthcare.com",
-   "reason": "only 0 product records on the site's API — that is a landing page, not a catalogue; the sitemap carries 7 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "domain": "rociallehealthcare.com",
+   "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 product URLs, too few to call a catalogue",
+   "checked": "2026-08-26"
   },
   "Draeger Medical UK": {
    "domain": "www.draeger.com",
@@ -308175,9 +308229,9 @@
    "checked": "2026-08-25"
   },
   "Mediq Healthcare UK Ltd": {
-   "domain": "www.mediq.co.uk",
+   "domain": "mediq.co.uk",
    "reason": "robots.txt disallows automated reading of this site",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "Medical Imaging Systems (MIS Healthcare)": {
    "domain": "www.mishealthcare.co.uk",
@@ -308205,9 +308259,9 @@
    "checked": "2026-08-13"
   },
   "Coloplast": {
-   "domain": "products.coloplast.co.uk",
-   "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "domain": "coloplast.co.uk",
+   "reason": "the site's WordPress API could not be read (<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate ); the sitemap carries 0 product URLs, too few to call a catalogue",
+   "checked": "2026-08-26"
   },
   "Baxter Healthcare Ltd": {
    "domain": "www.baxterhealthcare.co.uk",
@@ -308215,9 +308269,9 @@
    "checked": "2026-08-25"
   },
   "Smith+Nephew": {
-   "domain": "www.smith-nephew.com",
+   "domain": "smith-nephew.com",
    "reason": "robots.txt disallows automated reading of this site",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "RPG Medical Limited": {
    "domain": "rpgmedical.co.uk",
@@ -308235,9 +308289,9 @@
    "checked": "2026-08-25"
   },
   "Urgo Medical": {
-   "domain": "www.urgomedical.com",
+   "domain": "urgomedical.com",
    "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "Spirit Healthcare Ltd": {
    "domain": "spirit-healthcare.co.uk",
@@ -308295,9 +308349,9 @@
    "checked": "2026-08-25"
   },
   "Clinisupplies": {
-   "domain": "www.clinisupplies.co.uk",
+   "domain": "clinisupplies.co.uk",
    "reason": "robots.txt disallows automated reading of this site",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "CJ Medical": {
    "domain": "cjmedical.com",
@@ -308430,9 +308484,9 @@
    "checked": "2026-08-25"
   },
   "Medicareplus": {
-   "domain": "www.medicareplus.co.uk",
+   "domain": "medicareplus.co.uk",
    "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "Medicare Colgate Ltd (Sterifeed)": {
    "domain": "www.sterifeed.com",
@@ -308482,7 +308536,7 @@
   "Flen Health UK Ltd": {
    "domain": "flenhealth.com",
    "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "Evolan Pharma": {
    "domain": "www.evolan.se",
@@ -308530,9 +308584,9 @@
    "checked": "2026-08-25"
   },
   "Schulke & Mayr UK Ltd": {
-   "domain": "www.schuelke.com",
+   "domain": "schuelke.com",
    "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "Peacocks Medical Group": {
    "domain": "www.peacocks.net",
@@ -308545,14 +308599,14 @@
    "checked": "2026-08-25"
   },
   "Steroplast Healthcare Ltd": {
-   "domain": "www.steroplast.co.uk",
+   "domain": "steroplast.co.uk",
    "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "Gentell UK Ltd": {
-   "domain": "www.gentell.co.uk",
+   "domain": "gentell.co.uk",
    "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "The Barcode Warehouse Limited": {
    "domain": "www.thebarcodewarehouse.co.uk",
@@ -308611,8 +308665,8 @@
   },
   "Willingsford Limited": {
    "domain": "willingsford.com",
-   "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue",
+   "checked": "2026-08-26"
   },
   "TidalSense": {
    "domain": "tidalsense.com",
@@ -308810,9 +308864,9 @@
    "checked": "2026-08-25"
   },
   "Medline Industries": {
-   "domain": "www.medline.eu",
+   "domain": "medline.eu",
    "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "A. Menarini Diagnostics Ltd": {
    "domain": "www.glucomen.co.uk",
@@ -308870,9 +308924,9 @@
    "checked": "2026-08-20"
   },
   "BD — Becton, Dickinson": {
-   "domain": "www.bd.com",
+   "domain": "bd.com",
    "reason": "robots.txt disallows automated reading of this site",
-   "checked": "2026-08-20"
+   "checked": "2026-08-26"
   },
   "Beiersdorf UK Ltd": {
    "domain": "www.beiersdorf.co.uk",
@@ -308937,7 +308991,7 @@
   "Essity UK Limited (formerly BSN Medical Ltd)": {
    "domain": "medical.essity.co.uk",
    "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-20"
+   "checked": "2026-08-26"
   },
   "Galderma (UK) Ltd": {
    "domain": "www.galderma.com",
@@ -308980,9 +309034,9 @@
    "checked": "2026-08-20"
   },
   "L&R Medical / Activa (Lohmann & Rauscher)": {
-   "domain": "www.lohmann-rauscher.com",
+   "domain": "lohmann-rauscher.com",
    "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-20"
+   "checked": "2026-08-26"
   },
   "LEO Pharma UK": {
    "domain": "www.leo-pharma.co.uk",
@@ -309010,9 +309064,9 @@
    "checked": "2026-08-20"
   },
   "Paul Hartmann (HARTMANN)": {
-   "domain": "www.hartmann.info",
+   "domain": "hartmann.info",
    "reason": "robots.txt disallows automated reading of this site",
-   "checked": "2026-08-20"
+   "checked": "2026-08-26"
   },
   "Shenzhen Sisensing Co., Ltd": {
    "domain": "www.sibionics.com",
@@ -309035,9 +309089,9 @@
    "checked": "2026-08-20"
   },
   "Solventum (3M Health Care)": {
-   "domain": "www.solventum.com",
+   "domain": "solventum.com",
    "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-20"
+   "checked": "2026-08-26"
   },
   "Terumo Aortic": {
    "domain": "www.terumo.com",
@@ -309060,9 +309114,9 @@
    "checked": "2026-08-20"
   },
   "OscarTech UK": {
-   "domain": "www.oscartech-uk.com",
+   "domain": "oscartech-uk.com",
    "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "GenX MediCare Ltd": {
    "domain": "genxmedicare.com",
@@ -309122,12 +309176,12 @@
   "Richardson Healthcare": {
    "domain": "directmedimaging.com",
    "reason": "the site's WordPress API returned HTTP 401; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "GS Medical Healthcare Ltd": {
    "domain": "gsmedical.ie",
    "reason": "robots.txt disallows automated reading of this site",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "ALXR Limited": {
    "domain": "alxr.co",
@@ -309227,7 +309281,7 @@
   "Iskus Health UK Limited": {
    "domain": "fannin.eu",
    "reason": "the site's WordPress API could not be read (<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate ); the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "Intersurgical": {
    "domain": "www.intersurgical.co.uk",
@@ -309237,7 +309291,7 @@
   "Global Health and Safety Ltd": {
    "domain": "globalhealth.co.uk",
    "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "Etac Ltd": {
    "domain": "www.etac.com",
@@ -309302,7 +309356,7 @@
   "Raise Healthcare Pvt Ltd": {
    "domain": "raisehealthcare.co.uk",
    "reason": "robots.txt disallows automated reading of this site",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "Prospect Diagnostics Ltd": {
    "domain": "www.prospectdiagnostics.co.uk",
@@ -309617,7 +309671,7 @@
   "Ennogen Healthcare": {
    "domain": "ennogen.com",
    "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "Eckert & Ziegler BEBIG": {
    "domain": "ezag.com",
@@ -309717,7 +309771,7 @@
   "Absorbest AB": {
    "domain": "absorbest.com",
    "reason": "the site's WordPress API exposes no product post type; the sitemap carries 6 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "Abiomed Ltd": {
    "domain": "heartrecovery.com",
@@ -309732,7 +309786,7 @@
   "AOTI": {
    "domain": "aotinc.net",
    "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-25"
+   "checked": "2026-08-26"
   },
   "3D LifePrints UK Ltd": {
    "domain": "insightsurgery.com",
@@ -309743,6 +309797,16 @@
    "domain": "www.2san.com",
    "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 product URLs, too few to call a catalogue",
    "checked": "2026-08-25"
+  },
+  "CD Medical Ltd": {
+   "domain": "cdmedical.co.uk",
+   "reason": "the site's WordPress API could not be read (<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate ); the sitemap carries 0 product URLs, too few to call a catalogue",
+   "checked": "2026-08-26"
+  },
+  "medi UK": {
+   "domain": "mediuk.co.uk",
+   "reason": "the site's WordPress API could not be read (<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate ); the sitemap carries 0 product URLs, too few to call a catalogue",
+   "checked": "2026-08-26"
   }
  }
 }

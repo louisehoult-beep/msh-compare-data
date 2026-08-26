@@ -300,7 +300,23 @@ def shape_from_wp(raw, domain):
 
 
 # ---------------------------------------------------------------- route 2
-def sitemap_products(domain, deadline=None):
+# Path segments that mark a URL as a product page. The default list is the
+# generic one; a supplier whose site files by CLINICAL AREA instead is given its
+# own segment explicitly via --product-path, never by widening this list.
+#
+# WHY IT IS NOT WIDENED GLOBALLY (26/08/2026). Coloplast files wound products
+# under /wound/, B. Braun under its own therapy paths, Mölnlycke under
+# /wound-care/. None contain the word "product", so all three were refused with
+# "the sitemap carries 0 product URLs" — read as three sites with no readable
+# catalogue when in fact each publishes a full one. But matching ANY path
+# segment is not the fix: a sitemap's other segments are news, events, support
+# and careers, and sweeping those in would publish press releases as products.
+# So the operator names the segment, having looked at that company's sitemap,
+# and the capture records which segment it was told to read.
+PRODUCT_PATHS = ("product", "products", "our-products", "range", "ranges")
+
+
+def sitemap_products(domain, deadline=None, product_paths=None):
     seen, urls = set(), []
     to_read = ["https://%s/sitemap.xml" % domain, "https://%s/sitemap_index.xml" % domain]
     while to_read and len(seen) < 12:
@@ -331,9 +347,12 @@ def sitemap_products(domain, deadline=None):
             continue
         urls.extend(locs)
 
-    prod = [u for u in urls if re.search(r"/(product|products|our-products|range|ranges)/", u, re.I)]
+    segs = tuple(product_paths) if product_paths else PRODUCT_PATHS
+    pat = r"/(%s)/" % "|".join(re.escape(x) for x in segs)
+    prod = [u for u in urls if re.search(pat, u, re.I)]
     if len(prod) < MIN_PRODUCTS:
-        return None, ("the sitemap carries %d product URLs, too few to call a catalogue" % len(prod))
+        return None, ("the sitemap carries %d URLs under %s, too few to call a catalogue"
+                      % (len(prod), "/" + "/, /".join(segs) + "/"))
 
     # A LANDING PAGE IS A PREFIX OF OTHER PAGES. This is the structural test, and
     # it is the one that matters: the old code took the last URL segment as a
@@ -351,7 +370,7 @@ def sitemap_products(domain, deadline=None):
         path = urllib.parse.urlparse(u).path.strip("/").split("/")
         try:
             i = next(n for n, seg in enumerate(path)
-                     if re.fullmatch(r"(?i)product|products|our-products|range|ranges", seg))
+                     if any(seg.lower() == x.lower() for x in segs))
         except StopIteration:
             continue
         rest = path[i + 1:]
@@ -466,8 +485,47 @@ def sitemap_products(domain, deadline=None):
     }, None
 
 
+def reachable_host(domain):
+    """Return whichever of `domain` / `www.domain` actually answers, or None.
+
+    WHY THIS EXISTS (26/08/2026). The wound care sweep refused Coloplast, CD
+    Medical, Iskus/Fannin and B. Braun with "[SSL: CERTIFICATE_VERIFY_FAILED]"
+    and "nodename nor servname provided" — read at first glance as four sites
+    blocking automated reads. They are not. All four serve their certificate on
+    the `www.` host only: the bare apex either resolves to nothing or presents a
+    certificate that does not cover it. `https://www.coloplast.co.uk/` returns
+    200 to the very same urllib call that fails on `https://coloplast.co.uk/`.
+
+    Seeded domains are recorded bare, so every such supplier was being written
+    off on a host-selection artefact rather than anything the site does. That is
+    the same failure mode as reading a blocked tool as a blocked site
+    ([[nice-blocks-webfetch-not-curl]]): the honest answer needs both hosts
+    tried before "refused" is recorded.
+
+    This changes no evidence bar. It selects the host to ask; what counts as a
+    readable product range afterwards is untouched.
+    """
+    d = domain[4:] if domain.startswith("www.") else domain
+    for host in (d, "www." + d):
+        try:
+            get("https://%s/" % host, timeout=12)
+            return host
+        except urllib.error.HTTPError:
+            # An HTTP status means the host resolved and served TLS. That is
+            # reachable; whether this particular path 404s is not the question.
+            return host
+        except Exception:
+            continue
+    return None
+
+
 def crawl(domain):
     started = time.time()
+    host = reachable_host(domain)
+    if not host:
+        return None, ("neither %s nor www.%s answered — the domain does not resolve or "
+                      "serves no usable certificate" % (domain, domain))
+    domain = host
     if not allowed(domain):
         return None, "robots.txt disallows automated reading of this site"
     try:
@@ -481,7 +539,8 @@ def crawl(domain):
     except Exception as e:
         why = "the site's WordPress API could not be read (%s)" % str(e)[:60]
     try:
-        shaped, why2 = sitemap_products(domain, deadline=started + SITE_BUDGET_S)
+        shaped, why2 = sitemap_products(domain, deadline=started + SITE_BUDGET_S,
+                                        product_paths=crawl.product_paths)
         if shaped:
             return shaped, None
         return None, "%s; %s" % (why, why2)
@@ -501,6 +560,10 @@ def domain_for(rec):
     return (m.group(1) or m.group(2)) if m else None
 
 
+# Default: the generic PRODUCT_PATHS. main() overrides from --product-path.
+crawl.product_paths = None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--supplier")
@@ -508,11 +571,17 @@ def main():
     ap.add_argument("--auto", action="store_true")
     ap.add_argument("--limit", type=int, default=6)
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--product-path", action="append", default=[],
+                    help="a URL path segment this company files products under, e.g. "
+                         "--product-path wound. Use ONLY after looking at that site's "
+                         "sitemap and confirming the segment holds products and not "
+                         "news or support pages. Repeatable.")
     ap.add_argument("--retry-refused", action="store_true",
                     help="re-attempt suppliers already recorded as refused")
     ap.add_argument("--refusal-ttl", type=int, default=90,
                     help="days a recorded refusal suppresses a re-attempt (default 90)")
     a = ap.parse_args()
+    crawl.product_paths = a.product_path or None
 
     doc = json.load(open(OUT, encoding="utf-8"))
     doc.setdefault("refusals", {})

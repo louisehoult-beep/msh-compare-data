@@ -240,6 +240,142 @@ def main():
             for c in cats:
                 products.append(dict(base_row, cat=c))
 
+    # ------------------------------------------------------------------
+    # NHSSC-ONLY ROWS (added 26/08/2026, the Differentiator framework sweep).
+    #
+    # WHY THIS EXISTS. The loop above only ever creates a row from `own` — a
+    # supplier's OWN-SITE crawl. A large medtech manufacturer routinely runs a
+    # JS-rendered catalogue on a separate host, files by clinical area or
+    # audience, or disallows crawling outright (root cause written up in
+    # FINDINGS-2026-08-26-wound-care-pilot.md): Coloplast, Smith+Nephew,
+    # Mölnlycke, Hartmann and B. Braun all sit in the NHSSC cache with real
+    # items and were publishing ZERO products, because nothing ever iterated
+    # the cache on its own. Fixing the crawler cannot reach these suppliers;
+    # the fix is to stop requiring a crawl before an NHSSC item can publish.
+    #
+    # THE EVIDENCE THIS IS BUILT ON, and why it is not a guess. Every
+    # speciality in compare-suppliers.json carries a human-curated
+    # `suppliers[]` list, each entry with a `t` field — the type(s) that
+    # supplier is confirmed to sell in that speciality, sourced (per that
+    # file's own `sourceRule`) to the supplier's actual framework award, not a
+    # trade summary. Two disjoint cases, and only these two publish:
+    #
+    #   1. THE SUPPLIER HAS EXACTLY ONE CURATED TYPE IN THIS SPECIALITY.
+    #      Every NHSSC item under that supplier that has not already been
+    #      published via the own-crawl path takes that type. There is nothing
+    #      to disambiguate — Coloplast's `t` for wound is `['adv']` alone, so
+    #      every uncrawled Coloplast wound item is an advanced dressing by the
+    #      curated record, not by inference from the item's own text.
+    #   2. THE SUPPLIER HAS SEVERAL CURATED TYPES. The item is assigned one
+    #      only when the type's own label (e.g. "Compression") appears as a
+    #      whole word in the NHSSC item's own description. A multi-type
+    #      supplier's item that matches none of its types, or matches more
+    #      than one, is HELD with the reason recorded — never guessed. This
+    #      mirrors the existing single-division-category match a few lines
+    #      above; it does not introduce a new invented keyword list.
+    #
+    # A supplier already producing a published row for that exact (supplier,
+    # NHSSC name) pair via the own-crawl path is skipped here — this only
+    # fills the gap the crawl cannot reach, never duplicates it.
+    already_published_keys = {(norm(r["supplier"]), norm(r["name"])) for r in products}
+
+    # Which specialities each supplier is curated into, across the WHOLE
+    # vocabulary — needed before any per-item decision, because it is what
+    # decides whether "one curated type" is actually unambiguous.
+    sup_specs = collections.defaultdict(set)
+    for spec_key, spec_v in vocab.items():
+        for sup in (spec_v.get("suppliers") or []):
+            ref = norm(sup.get("ref") or sup.get("co") or "")
+            if ref:
+                sup_specs[ref].add(spec_key)
+
+    def label_tokens(label):
+        return tokens(label)
+
+    nhssc_added, nhssc_held = 0, 0
+    for term, rec in (nhssc.get("products") or {}).items():
+        co = rec.get("supplier")
+        if not co:
+            continue
+        for it in rec.get("items") or []:
+            name = it.get("name") or term
+            k = (norm(co), norm(name))
+            if k in already_published_keys:
+                continue
+            already_published_keys.add(k)  # one row per (supplier, NHSSC name)
+
+            desc_tok = tokens((it.get("desc") or "") + " " + name)
+            # A supplier curated into ONLY ONE speciality has no other business
+            # line an item could belong to instead, so its single curated type
+            # (if it has one) is unambiguous without reading the item's text at
+            # all — Convatec's sole curated speciality is wound, sole type
+            # "adv", so every Convatec item not already published is an
+            # advanced dressing by the curated record.
+            #
+            # A supplier curated into SEVERAL specialities cannot use that
+            # shortcut even where one of those specialities is itself
+            # single-type: Coloplast is single-type ('adv') in wound AND
+            # single-type ('stent') in oncology, so "single type in this
+            # speciality" said nothing about which speciality a given item was
+            # even in. Found live 26/08/2026: every one of Coloplast's 96 items
+            # matched BOTH, because the shortcut checked type-uniqueness within
+            # a speciality, never speciality-uniqueness across the supplier's
+            # whole curated list. Multi-speciality suppliers are therefore
+            # decided ONLY by the label-text match below — narrower, but never
+            # wrong the way the bare shortcut was.
+            single_speciality = len(sup_specs.get(norm(co), set())) == 1
+            candidates = []  # (cat, why)
+            for spec_key, spec_v in vocab.items():
+                for sup in (spec_v.get("suppliers") or []):
+                    if norm(sup.get("ref") or sup.get("co") or "") != norm(co):
+                        continue
+                    tlist = [t for t in (sup.get("t") or []) if t in (spec_v.get("types") or {})]
+                    if not tlist:
+                        continue
+                    if single_speciality and len(tlist) == 1:
+                        candidates.append(("%s:%s" % (spec_key, tlist[0]),
+                                           "supplier's only curated speciality and only curated type"))
+                        continue
+                    for tkey in tlist:
+                        label = (spec_v["types"].get(tkey) or "")
+                        ltok = label_tokens(label)
+                        if ltok and ltok <= desc_tok:
+                            candidates.append(("%s:%s" % (spec_key, tkey),
+                                               "NHSSC description matches curated type label %r" % label))
+
+            uniq = sorted(set(c for c, _ in candidates))
+            if len(uniq) != 1:
+                nhssc_held += 1
+                held.append({"supplier": co, "name": name, "division": "(NHS Supply Chain only)",
+                            "why": ("no curated type for this supplier in any speciality"
+                                    if not candidates else
+                                    "ambiguous — matches %d curated types (%s), never guessed"
+                                    % (len(uniq), ", ".join(uniq)))})
+                continue
+            cat = uniq[0]
+            if cat not in legal:
+                nhssc_held += 1
+                held.append({"supplier": co, "name": name, "division": "(NHS Supply Chain only)",
+                            "why": "curated type resolves to a category not in the gated vocabulary: %s" % cat})
+                continue
+            nhssc_added += 1
+            products.append({
+                "supplier": co, "name": name, "domain": (seed.get(co) or {}).get("domain"),
+                "division": "(NHS Supply Chain only)", "mfrCategory": None, "detail": None,
+                "nhssc": [{"npc": it.get("npc"), "mpc": it.get("mpc"), "desc": it.get("desc"),
+                          "pack": it.get("pack"), "status": it.get("status"),
+                          "nhsscName": it.get("name"), "nhsscSupplier": it.get("supplier"),
+                          "term": term}],
+                "nhsscRange": None,
+                "sources": [{"kind": "nhssc", "npc": it.get("npc"), "owner": "NHS Supply Chain",
+                            "url": "https://my.supplychain.nhs.uk/catalogue/search/0?query=%s"
+                                   % (it.get("npc") or "")}],
+                "cat": cat,
+            })
+    print("  NHSSC-only rows: %d published from curated supplier/type evidence, %d held (no or ambiguous curated type)"
+          % (nhssc_added, nhssc_held))
+    # ------------------------------------------------------------------
+
     bycat = collections.Counter(r["cat"] for r in products)
     comparable = {c: n for c, n in bycat.items() if n >= 2}
 
