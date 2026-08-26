@@ -309,10 +309,10 @@
  },
  "counts": {
   "pairs": 1825,
-  "mapped": 1753,
+  "mapped": 1756,
   "notTaxonomy": 42,
   "products": 14722,
-  "productsMapped": 12135
+  "productsMapped": 12258
  },
  "entries": [
   {
@@ -963,9 +963,11 @@
     "Ultrasonic Cleaner III",
     "Detax Luxaprint 3D Shell – Beige (1000g)"
    ],
-   "hub": null,
+   "hub": "audiology:lab",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "all named categories (Luxaprint Shellac/3D Shell/3D Mould, Detax Softwear, Printers, Scanners, PRO PLAS, Freeprint Shell/Mould, Pico PLAS) are 3D-printing systems, resins and mould-design software for manufacturing custom hearing-aid earmoulds/shells — a coherent single product class; new type added under audiology 26/08/2026 on Lou's decision, since none of the existing types (impl/diag/serv/hear/acc) cover lab/manufacturing equipment",
+   "decidedIn": "Puretone.json"
   },
   {
    "supplier": "GBUK Group",
@@ -2253,9 +2255,14 @@
     "Femoral Introducer Kits",
     "Hegenberger Retractor"
    ],
-   "hub": null,
+   "hub": [
+    "vascsurg:access",
+    "womens:mat"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lou's rule 25/08/2026: division's own evidence spans two categories. Radial Compression Band, Transradial Introducer Kits and Femoral Introducer Kits are arterial-access sheaths and post-procedure haemostasis devices for interventional cardiology/radiology, matching vascular access sheaths/delivery systems under vascsurg (Kimal is already a confirmed awarded supplier on the relevant NHS SC Lot 1 framework — see vascsurg routeNote). The Hegenberger Retractor is confirmed via Kimal's own 'Maternity by Kimal' site (kimal.com/en/product/hegenberger-retractor/) as a postpartum vaginal-wall retractor for suturing after childbirth, matching Maternity & obstetrics — not a general surgical retractor as the name might suggest. Verified 26/08/2026 by web search against Kimal's own product pages.",
+   "decidedIn": "Kimal PLC.json"
   },
   {
    "supplier": "Ultimate Healthcare",
@@ -2884,9 +2891,11 @@
     "THERMARMOUR Emergency Blanket 1.5m x 2m",
     "Clinell Universal Wipes (Pack of 200 Wipes)"
    ],
-   "hub": null,
+   "hub": "theatres:warm",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "verified 26/08/2026 against Interweave's own site (interweavetextiles.com/products/amb-sup/): the division is patient warming/thermal management for pre-hospital and emergency use — THERMARMOUR passive thermal blankets, ponchos and hypothermia evacuation bags, the same product class as the existing theatres:warm type (patient warming & temperature), just used in ambulance/pre-hospital settings rather than the OR. Clinell Universal Wipes, the fourth named example, is a minor accessory item within an otherwise warming-focused division",
+   "decidedIn": "Interweave Textiles - Phase E.json"
   },
   {
    "supplier": "Medstrom",
