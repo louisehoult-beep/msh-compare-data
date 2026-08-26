@@ -308,8 +308,8 @@
   }
  },
  "counts": {
-  "pairs": 1825,
-  "mapped": 1756,
+  "pairs": 1826,
+  "mapped": 1757,
   "notTaxonomy": 42,
   "products": 14722,
   "productsMapped": 12258
@@ -1036,24 +1036,41 @@
   {
    "supplier": "Agile Medical",
    "division": "All Departments",
-   "products": 69,
+   "products": 64,
    "categories": [
     "All Departments"
    ],
    "examples": [
     "Trauma Trolley",
     "MTC Double Cabinet Trolley",
-    "Chair Scale",
-    "Personal Floor Scale with Height Rod"
+    "Workbenches",
+    "Clean Linen Distribution Trolleys"
    ],
-   "hub": [
-    "handling:scale",
-    "handling:furniture"
-   ],
+   "hub": "handling:furniture",
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
-   "why": "Lou's rule 25/08/2026: the division's own evidence names products from more than one category, so it goes in all of them rather than picking one — Chair Scale and Personal Floor Scale (patient & bariatric weighing scales) sit alongside Trauma Trolley and MTC Double Cabinet Trolley (clinical trolleys)",
-   "decidedIn": "Agile Medical.json"
+   "why": "Split 26/08/2026 from a combined All Departments mapping that had listed both handling:scale and handling:furniture: the division genuinely mixes weighing scales with clinical trolleys and furniture, and the previous list-hub mapping published every trolley/accessory row under weighing scales too. The 5 named weighing-scale products now file separately under their own division (see the \"All Departments — Weighing Scales\" entry); everything left here is trolleys, workbenches, trays and other clinical furniture/accessories.",
+   "decidedIn": "Agile Medical - Scale Split 20260826.json"
+  },
+  {
+   "supplier": "Agile Medical",
+   "division": "All Departments — Weighing Scales",
+   "products": 5,
+   "categories": [
+    "All Departments — Weighing Scales"
+   ],
+   "examples": [
+    "Baby Scale",
+    "Chair Scale",
+    "Compact Personal Floor Scale",
+    "Personal Floor Scale",
+    "Personal Floor Scale with Height Rod"
+   ],
+   "hub": "handling:scale",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Split out 26/08/2026 from the All Departments division, which mixed weighing scales with unrelated clinical trolleys and furniture under one combined mapping (see that entry's note). These 5 products are genuinely weighing scales — Chair Scale, Personal Floor Scale (3 variants) and Baby Scale — named as such on the supplier's own site.",
+   "decidedIn": "Agile Medical - Scale Split 20260826.json"
   },
   {
    "supplier": "Hospital Direct",

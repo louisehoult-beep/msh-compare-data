@@ -279,16 +279,6 @@ def main():
     # fills the gap the crawl cannot reach, never duplicates it.
     already_published_keys = {(norm(r["supplier"]), norm(r["name"])) for r in products}
 
-    # Which specialities each supplier is curated into, across the WHOLE
-    # vocabulary — needed before any per-item decision, because it is what
-    # decides whether "one curated type" is actually unambiguous.
-    sup_specs = collections.defaultdict(set)
-    for spec_key, spec_v in vocab.items():
-        for sup in (spec_v.get("suppliers") or []):
-            ref = norm(sup.get("ref") or sup.get("co") or "")
-            if ref:
-                sup_specs[ref].add(spec_key)
-
     def label_tokens(label):
         return tokens(label)
 
@@ -312,18 +302,29 @@ def main():
             # "adv", so every Convatec item not already published is an
             # advanced dressing by the curated record.
             #
-            # A supplier curated into SEVERAL specialities cannot use that
-            # shortcut even where one of those specialities is itself
-            # single-type: Coloplast is single-type ('adv') in wound AND
-            # single-type ('stent') in oncology, so "single type in this
+            # A supplier curated into SEVERAL specialities cannot use a
+            # name-only shortcut even where one of those specialities is
+            # itself single-type: Coloplast is single-type ('adv') in wound
+            # AND single-type ('stent') in oncology, so "single type in this
             # speciality" said nothing about which speciality a given item was
             # even in. Found live 26/08/2026: every one of Coloplast's 96 items
-            # matched BOTH, because the shortcut checked type-uniqueness within
-            # a speciality, never speciality-uniqueness across the supplier's
-            # whole curated list. Multi-speciality suppliers are therefore
-            # decided ONLY by the label-text match below — narrower, but never
-            # wrong the way the bare shortcut was.
-            single_speciality = len(sup_specs.get(norm(co), set())) == 1
+            # matched BOTH, because a shortcut then in place checked
+            # type-uniqueness within a speciality, never speciality-uniqueness
+            # across the supplier's whole curated list.
+            #
+            # The single-speciality shortcut removed same day (also 26/08/2026,
+            # same sweep): a supplier's curated `t` records what it sells IN
+            # THAT SPECIALITY, not what every NHSSC catalogue line bearing its
+            # name actually is — Direct Healthcare Group's sole handling type
+            # is 'mattress', but an uncrawled item under its name can be an
+            # InFix orthopaedic locking screw or a CARTO 3 EP mapping-system
+            # part, neither remotely a mattress, because NHS Supply Chain
+            # catalogue search groups adjacent/unrelated lines under the same
+            # brand term. Trusting supplier-name-plus-single-type alone
+            # published both as "mattresses" on the live Hub. Every supplier
+            # now goes through the same label-text match as the multi-
+            # speciality case below — narrower, but never wrong the way the
+            # bare shortcut was in either direction.
             candidates = []  # (cat, why)
             for spec_key, spec_v in vocab.items():
                 for sup in (spec_v.get("suppliers") or []):
@@ -331,10 +332,6 @@ def main():
                         continue
                     tlist = [t for t in (sup.get("t") or []) if t in (spec_v.get("types") or {})]
                     if not tlist:
-                        continue
-                    if single_speciality and len(tlist) == 1:
-                        candidates.append(("%s:%s" % (spec_key, tlist[0]),
-                                           "supplier's only curated speciality and only curated type"))
                         continue
                     for tkey in tlist:
                         label = (spec_v["types"].get(tkey) or "")
