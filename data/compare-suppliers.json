@@ -438,7 +438,8 @@
         "latex": "Latex examination",
         "spec": "Specialised examination",
         "sharps": "Sharps & clinical waste containers",
-        "ppe": "General PPE"
+        "ppe": "General PPE",
+        "air": "Air/water purification & UVC disinfection"
       },
       "suppliers": [
         {
@@ -739,7 +740,8 @@
         "o2": "Oxygen therapy",
         "aero": "Aerosol therapy",
         "resp": "Respiratory therapy & circuits",
-        "diag": "Diagnostics & spirometry"
+        "diag": "Diagnostics & spirometry",
+        "snore": "Anti-snoring devices (mandibular advancement, nasal dilators — distinct from CPAP/respiratory support)"
       },
       "suppliers": [
         {
@@ -1440,7 +1442,8 @@
         "warm": "Patient warming & temperature",
         "theatre": "General theatre consumables",
         "capital": "Capital equipment (tables, lights & OR integration)",
-        "perfusion": "Cardiopulmonary bypass and perfusion (oxygenators, circuits, centrifugal pumps, beating-heart stabilisation)"
+        "perfusion": "Cardiopulmonary bypass and perfusion (oxygenators, circuits, centrifugal pumps, beating-heart stabilisation)",
+        "drain": "Chest/thoracic drainage systems (trocars, drainage valves, digital suction)"
       },
       "suppliers": [
         {
@@ -3552,7 +3555,8 @@
         "stone": "Stone retrieval & access",
         "stent": "Ureteric stents & drainage",
         "laser": "Laser & energy",
-        "litho": "Lithotripter systems"
+        "litho": "Lithotripter systems",
+        "urodyn": "Urodynamics systems & uroflowmetry"
       },
       "suppliers": [
         {
@@ -4306,7 +4310,8 @@
         "scs": "Spinal cord stimulation",
         "dbs": "Deep brain stimulation",
         "sns": "Sacral nerve stimulation",
-        "pns": "Peripheral / other nerve stimulation"
+        "pns": "Peripheral / other nerve stimulation",
+        "shockwave": "Non-invasive neuromodulation & extracorporeal shockwave therapy — distinct from implantable devices (scs/dbs/sns/pns)"
       },
       "suppliers": [
         {
@@ -5227,6 +5232,29 @@
           "brands": "Weck · Pilling"
         }
       ]
+    },
+    "nuclear": {
+      "label": "Nuclear medicine & radiation safety",
+      "route": [
+        {
+          "name": "NHS PiP / NOE CPC — Radiopharmaceuticals and Associated Consumables",
+          "dates": "Live as of 26/08/2026 — specific contract dates not read this session",
+          "url": "https://www.commercialsolutions-sec.nhs.uk/frameworks/nhs-pip-radiopharmaceuticals-and-associated-consumables"
+        },
+        {
+          "name": "NHS Supply Chain — Nuclear Medicine Imaging and Associated Options and Related Services",
+          "dates": "Live as of 26/08/2026 — specific contract dates not read this session",
+          "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/nuclear-medicine-imaging-and-associated-options-and-related-services/"
+        }
+      ],
+      "routeNote": "New speciality added 26/08/2026 on Lou's decision, to hold radiopharmacy/isotope, personnel-dosimetry and gamma-detection-probe products found homeless in the Differentiator crawl (Xiel Ltd, Steris, It's Interventional Ltd). Framework EXISTENCE confirmed 26/08/2026 by web search against the two live pages cited above — both are real, current NHS Supply Chain / NHS PiP routes for radiopharmaceuticals and nuclear medicine imaging. Supplier-level award status (whether Xiel Ltd specifically is a named awarded supplier on either) was NOT checked against a Product Matrix this session — do not quote Xiel as an awarded supplier without that check, following the method used for vascsurg. No NHS Supply Chain route was found for personnel/environmental radiation dosimetry (Steris) or for intraoperative gamma-detection probes (It's Interventional) specifically — not asserted, not pending, genuinely not found this session.",
+      "types": {
+        "radpharm": "Radiopharmaceuticals, isotopes & generators",
+        "dosim": "Personnel & environmental radiation dosimetry",
+        "probe": "Intraoperative gamma detection probes"
+      },
+      "noSuppliers": "No researched supplier table. Holds nuclear-medicine and radiation-safety products found homeless in the Differentiator crawl, not a competitor set for the nuclear medicine market.",
+      "suppliers": []
     }
   },
   "refRule": "`ref` is the master supplier record this row's `co` resolves to, in supplier-seed.json or supplier-index.json, matched on exact name or exact alias using verify.py's own _norm_co. It exists so the Compare tab's company picker can group the spellings of one firm together: GBUK is written four ways in this file and a member picking one saw only that slice. `co` is unchanged and is still what the table displays — several are the procurement record's own wording and this file is right to show them. A row with no `ref` reached no master record and groups under its own `co`, exactly as before. Nothing here is fuzzy-matched: an unresolved name is left unresolved rather than guessed at. Derived 07/08/2026."

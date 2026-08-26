@@ -309,10 +309,10 @@
  },
  "counts": {
   "pairs": 1825,
-  "mapped": 1736,
+  "mapped": 1753,
   "notTaxonomy": 42,
   "products": 14722,
-  "productsMapped": 12018
+  "productsMapped": 12135
  },
  "entries": [
   {
@@ -1429,9 +1429,11 @@
     "NIDEK Breath Shield for OPD II",
     "NIDEK Breath Shield for AR / ARK"
    ],
-   "hub": null,
+   "hub": "ophthalmology:cons",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "despite the generic 'sale' division name, all four named examples are breath shields — consumable accessories for NIDEK tonometers/autorefractors — matching ophthalmology surgical/clinical consumables",
+   "decidedIn": "Birmingham Optical Group.json"
   },
   {
    "supplier": "Mindray UK",
@@ -2711,9 +2713,11 @@
     "Optilume® Urethral Drug Coated Balloon",
     "Uroflowmeters & Accessories"
    ],
-   "hub": null,
+   "hub": "endourology:urodyn",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examples (NXT Family of Urodynamics Systems, Uroflowmeters & Accessories) are urodynamics diagnostic equipment; new type added under endourology 26/08/2026 on Lou's decision, since the existing endourology types (stone/stent/laser/litho) are all kidney-stone focused. The two Optilume BPH products in the same division are catheter/balloon devices for BPH treatment, not urodynamics testing — left out of this mapping, no clear existing type fits them",
+   "decidedIn": "Laborie Medical Technologies UK Ltd.json"
   },
   {
    "supplier": "Vygon (UK)",
@@ -4155,9 +4159,11 @@
     "CPAP Tape",
     "Anti Snoring Nasal Dilator"
    ],
-   "hub": null,
+   "hub": "respiratory:snore",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "own category is literally 'Anti Snoring Devices' and all four examples (PosiForm belt, mandibular advancement device, CPAP tape, nasal dilator) are anti-snoring products, distinct from CPAP/respiratory support — new type added 26/08/2026 on Lou's decision",
+   "decidedIn": "Intus Healthcare.json"
   },
   {
    "supplier": "Birmingham Optical Group",
@@ -4245,9 +4251,11 @@
     "Eckert and Ziegler Modular Lab Standard",
     "Eckert and Ziegler Modular Lab PharmTracer"
    ],
-   "hub": null,
+   "hub": "nuclear:radpharm",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "own category is literally 'Nuclear Medicine' and all four examples (isotope fill-eases, radiopharmaceutical elution/lab systems) are radiopharmacy equipment; new speciality added 26/08/2026 on Lou's decision",
+   "decidedIn": "Xiel Ltd.json"
   },
   {
    "supplier": "Vygon (UK)",
@@ -6137,9 +6145,11 @@
     "Thoracic Trocar Drain",
     "Thoracic Chest Drainage Valve"
    ],
-   "hub": null,
+   "hub": "theatres:drain",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "two of four named products (Thoracic Trocar Drain, Thoracic Chest Drainage Valve) are chest/thoracic drainage devices, a new type added 26/08/2026 on Lou's decision; the Paediatric Catheter and Disposable Valve Catheter in the same division are consistent with Vygon's known paediatric thoracic-drainage catheter sets, not a separate product line, so the whole division reads as one clinical use — chest drainage",
+   "decidedIn": "Vygon (UK).json"
   },
   {
    "supplier": "Steris",
@@ -7834,11 +7844,14 @@
     "Ergoselect 600 Recumbent",
     "SP-20"
    ],
-   "hub": "monitoring:gen",
+   "hub": [
+    "monitoring:gen",
+    "respiratory:diag"
+   ],
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
-   "why": "two of four named products (MiniPulse MP1R, MiniPulse MP1) are pulse oximeters, matching non-specialist monitoring; the ergometers/spirometer in the same division have no Hub category and are not forced in",
-   "decidedIn": "Love Medical.json"
+   "why": "two of four named products (MiniPulse MP1R, MiniPulse MP1) are pulse oximeters, matching non-specialist monitoring; the other two (Ergoselect 600 Recumbent, SP-20) are CPET ergometer/spirometry equipment, matching respiratory:diag — the same type this supplier's other CPET divisions (Pre-Operative Assessment, Prehabilitation Rehabilitation, Private Clinics) already use. Corrected 26/08/2026: originally left out as 'no Hub category', but the category exists and is already in use elsewhere in this same supplier's mappings",
+   "decidedIn": "Love Medical.json (corrected manually, outside merge — division was already mapped so the merge tool skips it)"
   },
   {
    "supplier": "Liberator Ltd",
@@ -8531,9 +8544,11 @@
     "Empathysuit41 Jpg",
     "Empathysuit31"
    ],
-   "hub": null,
+   "hub": "training:manikin",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examples (Empathysuit product images) are bariatric empathy training suits worn by staff for training purposes, not a patient product — matches the existing training simulation-equipment type",
+   "decidedIn": "Direct Healthcare Group.json"
   },
   {
    "supplier": "Direct Healthcare Group",
@@ -8752,9 +8767,11 @@
     "Empathysuit41 Jpg",
     "Empathysuit31"
    ],
-   "hub": null,
+   "hub": "training:manikin",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "same examples (Empathysuit product images) as Direct Healthcare Group's identical division name — bariatric empathy training suits worn by staff for training purposes, matching the existing training simulation-equipment type",
+   "decidedIn": "Talley.json"
   },
   {
    "supplier": "Talley",
@@ -13176,9 +13193,11 @@
     "Daily contact lenses",
     "Monthly contact lenses"
    ],
-   "hub": null,
+   "hub": "ophthalmology:cons",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "own category is literally 'Contact Lenses' and both examples (daily/monthly contact lenses) are consumable ophthalmic optical products",
+   "decidedIn": "Veni Vidi Medical Limited.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -13331,9 +13350,11 @@
     "Water Trap",
     "Uvmatic Uv Air Purifiers"
    ],
-   "hub": null,
+   "hub": "infection:air",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examples (Water Trap, Uvmatic Uv Air Purifiers) are air/water UVC purification products; new type added under infection 26/08/2026 on Lou's decision",
+   "decidedIn": "DDC Dolphin Limited.json"
   },
   {
    "supplier": "DDC Dolphin Limited",
@@ -13344,9 +13365,11 @@
     "Uvmatic Airsafe",
     "Uvc Multitower Room Disinfector"
    ],
-   "hub": null,
+   "hub": "infection:air",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "examples (Uvmatic Airsafe, Uvc Multitower Room Disinfector) are UVC air disinfection products, same product class as the 'Uvc' division",
+   "decidedIn": "DDC Dolphin Limited.json"
   },
   {
    "supplier": "DDC Dolphin Limited",
@@ -13578,9 +13601,11 @@
    "examples": [
     "Chemexpress Personnel Monitoring System"
    ],
-   "hub": null,
+   "hub": "nuclear:dosim",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "sole example, Chemexpress Personnel Monitoring System, is a radiation dosimetry product (staff/environmental radiation monitoring), not patient monitoring; new type added under the new nuclear speciality 26/08/2026 on Lou's decision",
+   "decidedIn": "Steris.json"
   },
   {
    "supplier": "Mindray UK",
@@ -26364,9 +26389,11 @@
    "examples": [
     "Soluble Strip Red Laundry Bag Large"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "sole example, Soluble Strip Red Laundry Bag Large, is a hospital laundry/linen-handling product, matching the existing workwear linen type (bedding, gowns & hospital linen)",
+   "decidedIn": "GV Health.json"
   },
   {
    "supplier": "GV Health",
@@ -27874,9 +27901,11 @@
    "examples": [
     "Rensair Air Purifier"
    ],
-   "hub": null,
+   "hub": "infection:air",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "own category is literally 'Infection Control' and sole example, Rensair Air Purifier, is an air-disinfection product — same product class as DDC Dolphin's UVC air purifiers, mapped to the same new infection:air type added 26/08/2026 on Lou's decision",
+   "decidedIn": "Intermedical (UK) Ltd.json"
   },
   {
    "supplier": "Intermedical (UK) Ltd",
@@ -27978,9 +28007,11 @@
    "examples": [
     "Neoprobe® Gamma Detection System"
    ],
-   "hub": null,
+   "hub": "nuclear:probe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "sole example, Neoprobe Gamma Detection System, is an intraoperative gamma-detection probe for radioguided surgery; new type added under the new nuclear speciality 26/08/2026 on Lou's decision",
+   "decidedIn": "It's Interventional Limited.json"
   },
   {
    "supplier": "It’s Interventional Limited",
@@ -28062,9 +28093,11 @@
    "examples": [
     "Kitaro® DryLab & WetLab Kit"
    ],
-   "hub": null,
+   "hub": "training:manikin",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "sole example, Kitaro DryLab & WetLab Kit, is a cataract-surgery wet-lab training/simulation kit for surgeons, not a patient-implantable product — matches the existing training simulation-equipment type, same class as the bariatric empathy training suits",
+   "decidedIn": "Veni Vidi Medical Limited.json"
   },
   {
    "supplier": "Possum Ltd",
@@ -28656,9 +28689,11 @@
    "examples": [
     "Neurolith (TPS)"
    ],
-   "hub": null,
+   "hub": "neuro:shockwave",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "sole example, Neurolith (TPS), is Storz Medical's non-invasive extracorporeal shockwave neuromodulation device — new type added under neuro 26/08/2026 on Lou's decision, distinct from the existing implantable-device types (scs/dbs/sns/pns)",
+   "decidedIn": "Storz Medical UK.json"
   },
   {
    "supplier": "Storz Medical UK",
@@ -28668,9 +28703,11 @@
    "examples": [
     "Modulith SLC"
    ],
-   "hub": null,
+   "hub": "neuro:shockwave",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "sole example, Modulith SLC, is Storz Medical's extracorporeal shockwave system (also used for cardiac shockwave therapy) — same underlying shockwave technology as the Neurology division, mapped to the same new type per Lou's decision to bundle neuromodulation/shockwave devices together",
+   "decidedIn": "Storz Medical UK.json"
   }
  ]
 }
