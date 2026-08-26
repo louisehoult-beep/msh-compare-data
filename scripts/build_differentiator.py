@@ -159,7 +159,20 @@ def main():
             if not name:
                 continue
             div = p.get("division") or ""
-            cat = mapped.get((co, div))
+            # Falls back to a (supplier, PRODUCT NAME) match when there's no
+            # division match. Needed for DHG/Talley (26/08/2026, Patient Handling
+            # pre-review fix): their curated 168 (supplier, division) entries were
+            # decided when the crawler mis-read attachment-sitemap pages as
+            # sub-products, so `division` held what is actually the real product's
+            # own name (e.g. "Dyna Form Static Air Hz"). Re-crawling against the
+            # real products-sitemap.xml fixed the product list (389 real products
+            # instead of 408 mostly-junk rows) but flattened it — there is no
+            # division left, one product per row — so the curated decisions would
+            # otherwise all miss. The curated string still equals the product's
+            # own name in the fixed data, so this fallback recovers every one of
+            # them without re-curating, and is a no-op for every supplier where
+            # the two happen not to coincide.
+            cat = mapped.get((co, div)) or mapped.get((co, name))
             # GBUK-style records already assert the speciality on the product
             # itself. Where they do AND the manufacturer's own category is one of
             # that speciality's gated types, the pair needs no separate decision:

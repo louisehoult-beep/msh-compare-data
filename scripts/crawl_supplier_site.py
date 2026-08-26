@@ -343,7 +343,28 @@ def sitemap_products(domain, deadline=None, product_paths=None):
             m = re.match(r"<!\[CDATA\[(.*?)\]\]>", raw, re.S)
             locs.append(m.group(1).strip() if m else raw)
         if "<sitemapindex" in body[:400].lower():
-            to_read.extend([l for l in locs if "product" in l.lower() or "sitemap" in l.lower()][:8])
+            # BUG FIXED 26/08/2026: "sitemap" is a substring of every sub-sitemap
+            # URL (they all end "...-sitemap.xml"), so the old filter was a
+            # no-op — it kept document order and just took the first 8 entries.
+            # For Direct Healthcare Group that meant post-sitemap, page-sitemap
+            # and attachment-sitemap pages, never reaching the real
+            # products-sitemap.xml at all. Worse: WordPress media attachments
+            # get URLs nested under their parent product's own path
+            # (/products/<product>/<image-slug>/), which the path-segment match
+            # below cannot tell apart from a real product page — so reading an
+            # attachment sitemap by mistake doesn't just miss products, it
+            # publishes gallery images and spec-sheet PDFs AS products (84 real
+            # ranges inflated to 408 rows, caught in the Patient Handling
+            # pre-review sweep). Attachment/media/download/event/category/tag/
+            # author sitemaps are excluded outright, never just deprioritised;
+            # sub-sitemaps whose own name says "product" are read first.
+            EXCLUDE_SITEMAP_HINTS = ("attachment", "media", "author", "category",
+                                      "tag", "download", "event", "swatch",
+                                      "distributor", "bitforms", "home-slider")
+            candidates = [l for l in locs if "sitemap" in l.lower()
+                          and not any(h in l.lower() for h in EXCLUDE_SITEMAP_HINTS)]
+            candidates.sort(key=lambda l: 0 if "product" in l.lower() else 1)
+            to_read.extend(candidates[:8])
             continue
         urls.extend(locs)
 
@@ -365,7 +386,7 @@ def sitemap_products(domain, deadline=None, product_paths=None):
     # /a/b/ is the page you pass through, not the thing you arrive at. Judging by
     # name — dropping anything that "looks like a category" — is guesswork that
     # would take real products with generic names down with it.
-    paths = []
+    paths, has_root = [], False
     for u in prod:
         path = urllib.parse.urlparse(u).path.strip("/").split("/")
         try:
@@ -375,7 +396,31 @@ def sitemap_products(domain, deadline=None, product_paths=None):
             continue
         rest = path[i + 1:]
         if rest:
-            paths.append(rest)
+            paths.append((path[:i], rest))
+            if not path[:i]:
+                has_root = True
+
+    # A MULTI-MARKET SITE PUBLISHES THE SAME CATALOGUE ONCE PER LOCALE, NESTED
+    # UNDER A COUNTRY/LANGUAGE PREFIX BEFORE THE PRODUCT SEGMENT — Direct
+    # Healthcare Group's /da/products/…, /fi/products/…, /sv/products/… sit
+    # alongside its plain /products/… range and carry DIFFERENT (translated)
+    # slugs, so the existing same-name dedup below cannot catch them: 823 URLs
+    # collapsed to 647 "products" that were still 260-odd real ranges' worth of
+    # foreign-locale duplicates (26/08/2026, Patient Handling pre-review sweep).
+    # Only fires when a root, unprefixed catalogue is actually confirmed to
+    # exist for this site — sites that nest EVERYTHING under one locale
+    # (e.g. always /uk/products/…) never trip `has_root` and fall through to
+    # the unchanged behaviour below.
+    dropped_locale = 0
+    if has_root:
+        kept = [(pre, rest) for pre, rest in paths if not pre]
+        dropped_locale = len(paths) - len(kept)
+        paths = kept
+    paths = [rest for _, rest in paths]
+    if dropped_locale:
+        print("      dropped %d locale-prefixed duplicate URL(s) — a plain, unprefixed "
+              "catalogue exists for this site so the country/language-prefixed copies "
+              "are not counted as extra products" % dropped_locale, flush=True)
     prefixes = {tuple(r[:k]) for r in paths for k in range(1, len(r))}
 
     divisions, plist = {}, []
