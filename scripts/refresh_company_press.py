@@ -99,6 +99,32 @@ STATE = REPO / "state" / "company-press-rotation.json"
 PRESS_CYCLE_NOTED_DAYS = 14
 PRESS_CYCLE_OTHER_DAYS = 35
 PRESS_DAILY_CAP = 90          # hard ceiling on queries per run, whatever the maths says
+
+# --- priority handoff from the Live Desk (27/08/2026) ----------------------
+# The rotation is fair but slow: 1,181 suppliers at ~79 a day is a 14-day cycle
+# for a noted supplier. On 27/08/2026 Boston Scientific's last check was 18/08,
+# its cyberattack broke on the 26th, and its next turn was ~01/09 — so the
+# SUPPLIER PRESS panel could not have carried the company's biggest news of the
+# year. Reordering the rotation itself was considered and rejected: it just
+# trades one company's freshness for another's.
+#
+# Instead the Live Desk, which already identifies suppliers in the news in order
+# to rank them, writes the names to a file in its own repo and this run FETCHES
+# it. One-way, unprivileged, no tokens, no cross-repo write — the mirror image of
+# the pipeline fetching company-press.json from here.
+#
+# IT CHANGES QUERY ORDER AND NOTHING ELSE. A name here is queried sooner; it is
+# not published sooner and it is not published more easily. The five-part match
+# rule, the two-publisher corroboration rule and verify.py are all downstream of
+# this and all still have to be satisfied.
+#
+# IT FAILS OPEN. Missing file, network error, bad JSON, stale timestamp, a name
+# not in the seed — any of these and the run proceeds on the normal rotation.
+# This must never be able to stop a refresh.
+PRIORITY_URL = ("https://raw.githubusercontent.com/louisehoult-beep/"
+                "medical-sales-hub-pipeline/main/state/supplier-press-priority.json")
+PRIORITY_MAX_AGE_DAYS = 3     # older than this and the Live Desk has stopped writing it
+PRIORITY_MAX_NAMES = 20       # a day's budget at most; past this it is not a rotation
 QUERY_PAUSE = 2.0             # seconds between Google News queries
 RESOLVE_PAUSE = 0.8           # seconds between link resolutions
 
@@ -453,14 +479,51 @@ def due(suppliers, stamps, quota):
     return ordered[:quota]
 
 
-def plan(suppliers, stamps):
+def priority_names(fetcher=None, today=None):
+    """Supplier names the Live Desk flagged, or [] for any reason at all.
+
+    Every failure path returns [] deliberately — see PRIORITY_URL above. This is
+    an optimisation, never a dependency.
+    """
+    try:
+        raw = (fetcher or fetch)(PRIORITY_URL, timeout=20)
+        doc = json.loads(raw.decode("utf-8") if isinstance(raw, bytes) else raw)
+        gen = str(doc.get("generatedAt") or "")[:10]
+        age = (datetime.date.fromisoformat(today or today_iso())
+               - datetime.date.fromisoformat(gen)).days
+        if age < 0 or age > PRIORITY_MAX_AGE_DAYS:
+            return []
+        names = [n for n in (doc.get("suppliers") or []) if isinstance(n, str) and n.strip()]
+        return names[:PRIORITY_MAX_NAMES]
+    except Exception:
+        return []
+
+
+def plan(suppliers, stamps, priority=None):
+    """Front-load flagged suppliers, then fill the rest by normal rotation.
+
+    A flagged name still has to BE in the seed — an unknown name is ignored, not
+    queried — and flagged suppliers come out of the same daily budget rather than
+    being added on top, so the politeness cap on Google News is unchanged.
+    """
     noted, other = tiers(suppliers)
     q_noted = math.ceil(len(noted) / PRESS_CYCLE_NOTED_DAYS) if noted else 0
     q_other = math.ceil(len(other) / PRESS_CYCLE_OTHER_DAYS) if other else 0
     if q_noted + q_other > PRESS_DAILY_CAP:              # trim the longer cycle first
         q_other = max(0, PRESS_DAILY_CAP - q_noted)
         q_noted = min(q_noted, PRESS_DAILY_CAP)
-    return due(noted, stamps, q_noted) + due(other, stamps, q_other), q_noted, q_other
+    picked = due(noted, stamps, q_noted) + due(other, stamps, q_other)
+    if not priority:
+        return picked, q_noted, q_other
+    by_name = {s["name"]: s for s in suppliers}
+    front = [by_name[n] for n in priority if n in by_name]
+    if not front:
+        return picked, q_noted, q_other
+    front_names = {s["name"] for s in front}
+    # Out of the same budget, not on top of it: drop the equivalent number from
+    # the TAIL of the rotation pick, which is the least overdue end of it.
+    rest = [s for s in picked if s["name"] not in front_names]
+    return (front + rest)[:len(picked)], q_noted, q_other
 
 
 # ---------------------------------------------------------------------------
@@ -583,6 +646,9 @@ def main():
                          "ignoring PRESS_DAILY_CAP. For a manual full sweep only - the "
                          "GitHub Actions cron never passes this, so the 80/day politeness "
                          "cap still governs every scheduled run.")
+    ap.add_argument("--no-priority", action="store_true",
+                    help="ignore the Live Desk priority handoff and use the plain "
+                         "rotation. For reproducing a run exactly.")
     ap.add_argument("--dry-run", action="store_true", help="report, write nothing")
     ap.add_argument("--no-resolve", action="store_true", help="skip Google link resolution")
     ap.add_argument("--out", default=str(OUT))
@@ -617,7 +683,13 @@ def main():
         q_noted, q_other = len(noted), len(other)
         log("--all: ignoring PRESS_DAILY_CAP, querying the full seed this run")
     else:
-        batch, q_noted, q_other = plan(suppliers, stamps)
+        # --only and --all deliberately bypass this: both are explicit manual
+        # instructions and a hint from another repo must not second-guess them.
+        prio = [] if args.no_priority else priority_names()
+        if prio:
+            log("Live Desk flagged %d supplier(s) for an early check: %s"
+                % (len(prio), ", ".join(prio)))
+        batch, q_noted, q_other = plan(suppliers, stamps, priority=prio)
     if args.limit:
         batch = batch[:args.limit]
 
