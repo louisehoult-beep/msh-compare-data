@@ -1573,6 +1573,36 @@ cp("a story whose two sources are the same publisher twice",
    cp_doc([cp_item(sources=[cp_src(), cp_src(url="https://www.medtechdive.com/news/other/")])]),
    "distinct publisher")
 
+# --- THE THIRD INCIDENT: rule 5 counted, but never re-derived --------------
+# 27/08/2026. Until this date the gate could only COUNT the publishers on an
+# item. Rule 5 is not "two publishers" — it is two DISTINCT REPUTABLE
+# publishers, and PR wires, stock-tip sites and SEO syndication never count.
+# That half of the rule lived only in the writer, so the gate had no way to see
+# it. Both cases below are taken from what was live on the day:
+#
+#   * CMR Surgical's 510(k) clearance published with 'Yahoo Finance UK' as its
+#     LEAD source. The writer only PREFERRED a countable lead; where no
+#     countable item also passed rules 3 and 4, a wire led the story.
+#   * Boston Scientific's cyberattack published against four sources of which
+#     one satisfied rule 5 — the other three were security trade press that the
+#     REPUTABLE list did not yet name. That one was fixed by widening the list
+#     on evidence, not by loosening the bar; this case guards the bar itself.
+cp("a wire published as one of an item's sources",
+   cp_doc([cp_item(sources=[cp_src(),
+                            cp_src(publisher="Yahoo Finance UK",
+                                   url="https://uk.finance.yahoo.com/news/convatec-rd/")])]),
+   "never count towards corroboration")
+cp("a wire published as the item's LEAD source",
+   cp_doc([cp_item(sources=[cp_src(publisher="GlobeNewswire",
+                                   url="https://www.globenewswire.com/news/convatec-rd/"),
+                            cp_src()])]),
+   "never count towards corroboration")
+cp("two distinct publishers, but only one of them is a publisher rule 5 counts",
+   cp_doc([cp_item(sources=[cp_src(),
+                            cp_src(publisher="Limerick Post",
+                                   url="https://www.limerickpost.ie/convatec-rd/")])]),
+   "rule 5 counts")
+
 # --- THE SECOND INCIDENT: corroboration about the COMPANY, not the STORY ----
 # 18/08/2026. refresh_company_press.cluster() grouped headlines on token overlap
 # with a floor of two shared words, and a two-token company name supplied both.

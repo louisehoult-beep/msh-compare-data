@@ -3746,6 +3746,45 @@ def check_company_press(doc, seed):
                                               "News redirect but does not point at "
                                               "news.google.com." % (name, head[:60]))
 
+            # ---- INVARIANT: rule 5 re-derived, not just counted ------------
+            # Added 27/08/2026. Until today this gate could only COUNT the
+            # publishers on an item. Rule 5 does not say "two publishers" — it
+            # says two DISTINCT REPUTABLE publishers, and that PR wires,
+            # stock-tip sites and SEO syndication never count towards the two.
+            # That half of the rule lived only in the writer, so a wire carried
+            # as one of the two would have published and this gate would have
+            # said nothing. The vocabulary now lives in press_match beside rules
+            # 1 to 4, and is re-derived here from the publisher names the file
+            # itself carries — the same arrangement, and the same reason, as the
+            # re-derivation of the match rule above.
+            #
+            # A wire is not merely uncounted here, it is REFUSED. An item whose
+            # sources include one is an item written under a looser rule than the
+            # one printed beside it, and the honest response to that is to
+            # publish nothing (root rule 14), not to quietly drop the offending
+            # source and keep the story.
+            wires = sorted({str((s or {}).get("publisher") or "").strip()
+                            for s in srcs
+                            if press_match.wire((s or {}).get("publisher"))})
+            if wires:
+                FAIL("company-press", "the item %r published against %r cites %s as a source. "
+                                      "Rule 5 says PR wires, stock-tip sites and SEO syndication "
+                                      "never count towards corroboration, so this item was "
+                                      "written under a looser rule than the one printed beside "
+                                      "it. Re-run scripts/refresh_company_press.py."
+                     % (head[:60], name, ", ".join(repr(w) for w in wires)))
+            counted = {str((s or {}).get("publisher") or "").strip().lower()
+                       for s in srcs
+                       if press_match.reputable((s or {}).get("publisher"))}
+            if len(counted) < 2:
+                FAIL("company-press", "the item %r published against %r is presented as "
+                                      "corroborated, but only %d of its sources is a publisher "
+                                      "rule 5 counts (%s). Two distinct reputable publishers are "
+                                      "required, and an item short of them is not published with "
+                                      "a caveat."
+                     % (head[:60], name, len(counted),
+                        ", ".join(sorted(str((s or {}).get("publisher") or "?") for s in srcs))))
+
             # ---- INVARIANT: corroboration is about the STORY, not the COMPANY --
             # Added 18/08/2026 after the live file published 14 items whose
             # "two independent publishers" were carrying a DIFFERENT story about

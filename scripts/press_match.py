@@ -143,6 +143,115 @@ MED_TITLE_KEYWORDS = [
 ]
 
 
+# ---------------------------------------------------------------------------
+# (5) CORROBORATION — who counts as a publisher
+# ---------------------------------------------------------------------------
+# MOVED HERE 27/08/2026. These three things — the named-outlet list, the
+# medical-masthead keywords and the wire/stock-tip denylist — used to live in
+# scripts/refresh_company_press.py, which meant the WRITER owned rule 5 and the
+# GATE could not see it. verify.py re-derives rules 1 to 4 from this module and
+# could only count sources for rule 5; it had no way to notice a PR wire
+# published as one of the two. Rule 5 now lives beside the other four, where
+# both sides read the same definition and neither can drift.
+#
+# REPUTABLE is an ALLOWLIST OF MASTHEADS, matched as a lowercase substring of the
+# publisher name Google News reports. Adding a name here makes stories publish
+# that did not before, so a name earns its place by being a real trade, clinical
+# or national title — never because a panel looked thin. The evidence for any
+# addition comes from scripts/audit_press_publishers.py, which reports which
+# publishers were actually turned away and on which stories.
+REPUTABLE = [
+    "bbc", "reuters", "financial times", "ft.com", "the guardian", "the times", "telegraph",
+    "sky news", "the independent", "bloomberg", "associated press", "ap news", "the economist",
+    "med-technews", "med-tech innovation", "medtech dive", "medtechdive", "massdevice", "fierce",
+    "medical product outsourcing", "medical plastics news", "md+di", "mddi", "device talks",
+    "devicetalks", "ns medical devices", "medtech insight", "medtech world",
+    "medtech intelligence", "drug delivery business", "medical design",
+    "medical device developments", "european medical device", "biospace", "medcity",
+    "clinical services journal", "hospital healthcare", "national health executive",
+    "healthcare today", "health tech world", "pharmaphorum", "pharmatimes",
+    "the pharma letter", "pharmafile", "pharmaceutical journal", "digital health",
+    "building better healthcare", "health service journal", "hsj", "nursing times",
+    "nursing standard", "independent nurse", "british journal of nursing", "gp online",
+    "pulse today", "the bmj", "bmj", "lancet", "nature", "npj", "jama", "plos", "cochrane",
+    "biomed central", "bmc", "journal of wound care", "journal of vascular access",
+    "infection prevention", "open access government", "health europa", "omnia health",
+    "healthcare in europe", "hospital times", "medwatch", "medtech europe",
+    "investors in healthcare",
+
+    # --- added 27/08/2026, from scripts/audit_press_publishers.py over 90
+    # suppliers (227 distinct publishers seen, 168 uncounted). The audit's own
+    # finding was that widening barely moves the panel: exactly THREE stories in
+    # that sample were one counted publisher short, and only one of them named an
+    # outlet worth adding. SUPPLIER PRESS is thin because the UK medical-device
+    # trade press does not write about most of these 1,179 suppliers, not because
+    # this list was too short. Everything below is here because it is a real
+    # trade or clinical title that appeared in the sample, and for no other
+    # reason. Local papers, US regional TV, university press offices and market-
+    # research shops appeared far more often and are deliberately still out.
+    "pmlive", "hme news", "thiis", "auntminnie", "imaging technology news",
+    "ophthalmology times", "selectscience", "technology networks", "hit consultant",
+    "et healthworld", "clinical lab products", "medical device network",
+
+    # --- the cyberattack gap, same date and the reason the audit was run.
+    # When a medtech company's biggest story of the year is a cyberattack, the
+    # outlets that report it first and best are the security trade press, and NOT
+    # ONE of them was countable: Boston Scientific's 26/08/2026 outage published
+    # against four sources of which only MedCity News satisfied rule 5. These are
+    # named individually and there is no "cyber" keyword route, deliberately —
+    # a keyword would admit every security VENDOR's blog, which is marketing
+    # about an incident rather than a second newsroom having checked it.
+    "cybersecurity dive", "bleepingcomputer", "bleeping computer", "sc media",
+    "the record from recorded future", "infosecurity magazine", "techcrunch",
+    "industrial cyber", "industrialcyber",
+]
+
+# A publisher whose own masthead signals a clinical or medical-device title
+# counts even when it is not named above — the same keywords rule 3 uses. This is
+# what lets a genuine specialist title corroborate without every masthead in the
+# sector being typed out.
+PUBLISHER_MED_KEYWORDS = [
+    "medical", "clinical", "medtech", "med-tech", "medicine", "hospital", "nursing", "nurse",
+    "surgery", "surgical", "pharma", "device", "diagnostic", "therapy", "therapeutic",
+    "healthcare", "health tech", "journal of", "bmj", "lancet", "biomed", "cardiolog",
+    "oncolog", "radiolog", "wound", "vascular", "nhs",
+]
+
+# DENYLIST, and it wins outright. A wire carries a company's own words; a
+# stock-tip site rewrites whatever the wire said. Neither is a second publisher
+# having checked the story, which is the only thing rule 5 is asking about. An
+# entry here is excluded even if it also matches REPUTABLE or the keywords above.
+PRWIRE = [
+    "globenewswire", "prnewswire", "pr newswire", "businesswire", "business wire", "einnews",
+    "openpr", "yahoo finance", "simply wall", "simplywall", "marketbeat", "stocktitan", "zacks",
+    "insider monkey", "defense world", "investing.com", "tipranks", "gurufocus", "benzinga",
+    "seeking alpha", "accesswire", "newsfilecorp", "healthline", "verywell", "patch.com",
+    "medianews", "stocktwits", "fool.com", "motley fool", "barchart", "nasdaq.com",
+    "stockstory", "directorstalk", "citybiz", "quiverquant", "investorplace",
+]
+
+
+def reputable(pub):
+    """True where this publisher may count towards rule 5's two.
+
+    Order matters and is the whole point: the denylist is tested FIRST, so a wire
+    with a medical-sounding name ("PR Newswire — Health") can never be admitted by
+    the keyword route.
+    """
+    p = (pub or "").lower()
+    if not p or any(x in p for x in PRWIRE):
+        return False
+    if any(x in p for x in REPUTABLE):
+        return True
+    return any(x in p for x in PUBLISHER_MED_KEYWORDS)
+
+
+def wire(pub):
+    """True where this publisher is a wire, stock-tip site or SEO syndication."""
+    p = (pub or "").lower()
+    return bool(p) and any(x in p for x in PRWIRE)
+
+
 # Aliases that are real but must never be matched on their own: too generic, or
 # a word that means something else outside this repo. A single token here is
 # rejected even when it IS the whole canonical name.

@@ -147,40 +147,17 @@ BROWSER_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.3
               "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 RSS_UA = "Mozilla/5.0 (msh-compare-data; company-press; contact@elevateandthrive.uk)"
 
-# --- corroboration (rule 5). Lifted unchanged from build_supplier_index.py so
-# the two agree on what a reputable publisher is.
-REPUTABLE = [
-    "bbc", "reuters", "financial times", "ft.com", "the guardian", "the times", "telegraph",
-    "sky news", "the independent", "bloomberg", "associated press", "ap news", "the economist",
-    "med-technews", "med-tech innovation", "medtech dive", "medtechdive", "massdevice", "fierce",
-    "medical product outsourcing", "medical plastics news", "md+di", "mddi", "device talks",
-    "devicetalks", "ns medical devices", "medtech insight", "medtech world",
-    "medtech intelligence", "drug delivery business", "medical design",
-    "medical device developments", "european medical device", "biospace", "medcity",
-    "clinical services journal", "hospital healthcare", "national health executive",
-    "healthcare today", "health tech world", "pharmaphorum", "pharmatimes",
-    "the pharma letter", "pharmafile", "pharmaceutical journal", "digital health",
-    "building better healthcare", "health service journal", "hsj", "nursing times",
-    "nursing standard", "independent nurse", "british journal of nursing", "gp online",
-    "pulse today", "the bmj", "bmj", "lancet", "nature", "npj", "jama", "plos", "cochrane",
-    "biomed central", "bmc", "journal of wound care", "journal of vascular access",
-    "infection prevention", "open access government", "health europa", "omnia health",
-    "healthcare in europe", "hospital times", "medwatch", "medtech europe",
-    "investors in healthcare",
-]
-MED_KEYWORDS = [
-    "medical", "clinical", "medtech", "med-tech", "medicine", "hospital", "nursing", "nurse",
-    "surgery", "surgical", "pharma", "device", "diagnostic", "therapy", "therapeutic",
-    "healthcare", "health tech", "journal of", "bmj", "lancet", "biomed", "cardiolog",
-    "oncolog", "radiolog", "wound", "vascular", "nhs",
-]
-PRWIRE = [
-    "globenewswire", "prnewswire", "pr newswire", "businesswire", "business wire", "einnews",
-    "openpr", "yahoo finance", "simply wall", "marketbeat", "stocktitan", "zacks",
-    "insider monkey", "defense world", "investing.com", "tipranks", "gurufocus", "benzinga",
-    "seeking alpha", "accesswire", "newsfilecorp", "healthline", "verywell", "patch.com",
-    "medianews", "stocktwits", "fool.com", "barchart", "nasdaq.com",
-]
+# --- corroboration (rule 5) -----------------------------------------------
+# The vocabulary MOVED to scripts/press_match.py on 27/08/2026 and is re-exported
+# here so existing callers keep working. It used to live in this file, which made
+# the writer the only owner of rule 5: verify.py re-derives rules 1 to 4 from
+# press_match and could only COUNT sources for rule 5, so a PR wire published as
+# one of the two would not have been caught by the gate. One definition, read by
+# both sides, is the same arrangement rules 1 to 4 already had.
+REPUTABLE = press_match.REPUTABLE
+MED_KEYWORDS = press_match.PUBLISHER_MED_KEYWORDS
+PRWIRE = press_match.PRWIRE
+reputable = press_match.reputable
 
 CORROBORATION_RULE = (
     "A story publishes only where at least two DISTINCT publishers carry it and each of those "
@@ -235,15 +212,6 @@ def parse_rss_date(s):
         except Exception:
             pass
     return ""
-
-
-def reputable(pub):
-    p = (pub or "").lower()
-    if not p or any(x in p for x in PRWIRE):
-        return False
-    if any(x in p for x in REPUTABLE):
-        return True
-    return any(x in p for x in MED_KEYWORDS)
 
 
 # ---------------------------------------------------------------------------
@@ -445,10 +413,25 @@ def build_items(supplier, raw, cache, resolve=True, rejects=None, universe=None)
                             "publisher": ", ".join(sorted({i["publisher"] for i in c["items"]})),
                             "reason": reason})
             continue
-        # Prefer a lead that is itself one of the corroborating reputable outlets,
-        # then the most recent. The lead is what the page shows and what the gate
-        # re-derives, so it has to be an item that passes on its own text.
-        leads.sort(key=lambda x: (x["publisher"] in reps, x.get("date", "")), reverse=True)
+        # The lead must ITSELF be a publisher rule 5 counts, not merely preferred
+        # to be one. This used to sort countable leads to the front and take the
+        # first, which silently allowed a wire to lead where no countable item
+        # also passed rules 3 and 4 — and the lead is the headline the page
+        # shows and the first source it lists. Found live on 27/08/2026: CMR
+        # Surgical's 510(k) clearance published with 'Yahoo Finance UK' as its
+        # lead source, which is a company's own words presented to a member as
+        # one of the sources of a corroborated claim. Preferring was never
+        # enough; if no countable publisher carries a story in a form that
+        # passes rules 3 and 4, the honest output is to publish nothing.
+        leads = [it for it in leads if reputable(it["publisher"])]
+        if not leads:
+            rejects.append({"headline": best["headline"],
+                            "publisher": ", ".join(sorted({i["publisher"] for i in c["items"]})),
+                            "reason": ("rule 5 LEAD: the story clears the sector and relevance "
+                                       "tests only on an item from a publisher rule 5 does not "
+                                       "count, so there is no item to lead on")})
+            continue
+        leads.sort(key=lambda x: x.get("date", ""), reverse=True)
         lead = leads[0]
         srcs = [lead] + [s for s in sorted(reps.values(), key=lambda x: x.get("date", ""),
                                            reverse=True) if s is not lead]
