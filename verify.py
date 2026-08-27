@@ -1814,6 +1814,68 @@ def _check_website_proofs(companies):
                                    % (name, proofs[name], held or "(none)"))
 
 
+
+def _check_candidate_wording(companies):
+    """A seed record must not still call a number unverified after it was confirmed.
+
+    `companyNumberCandidate` is written by backfill_seed_from_frameworks.py when a
+    number is first found by NAME SEARCH, and its `matchedOn` says so in terms:
+    "NOT verified against a number published by the company". That sentence is true
+    on the day it is written. It stops being true the moment
+    confirm_company_numbers.py and refresh_companies_house.py raise the company to
+    `matchConfidence: "confirmed"` in data/company-financials.json — and nothing was
+    updating the seed block when that happened, so 54 records were still calling a
+    confirmed number unverified on 27/08/2026. Lou read that as "probably wrong",
+    which is exactly the wrong impression: the number had been proved off the
+    company's own website.
+
+    This is the same class of failure as `_check_website_proofs` above and is held
+    the same way: the two files may only be separated by a bug, and the gate is what
+    notices. Root rule 18 — a superseded statement is corrected, never left standing.
+
+    HARD CHECK, no baseline. It was cleared to zero on 27/08/2026.
+
+    Note it deliberately does NOT touch the 804 records that are genuinely still
+    `probable`. Their wording is correct and is the honest empty state the Company
+    Report renders as "IDENTITY NOT CONFIRMED".
+    """
+    seed = load("supplier-seed.json")
+    if not isinstance(seed, dict):
+        return                              # _check_website_proofs already warned
+
+    stale, disagree = [], []
+    for s in (seed.get("suppliers") or []):
+        if not isinstance(s, dict):
+            continue
+        cand = s.get("companyNumberCandidate")
+        if not isinstance(cand, dict):
+            continue
+        rec = companies.get(s.get("name")) or {}
+        if str(rec.get("matchConfidence") or "").lower() != "confirmed":
+            continue
+        held = str(cand.get("number") or "").strip().upper()
+        conf = str(rec.get("companyNumber") or "").strip().upper()
+        if held and conf and held != conf:
+            disagree.append("%s: seed candidate %s, confirmed %s" % (s.get("name"), held, conf))
+            continue
+        if "NOT verified" in str(cand.get("matchedOn") or ""):
+            stale.append(s.get("name"))
+
+    _ratchet("company-report", "candidate_says_unverified_after_confirmation",
+             len(stale), stale,
+             "seed records still calling a CONFIRMED company number unverified",
+             "Rewrite that record's companyNumberCandidate.matchedOn to say how the number "
+             "was confirmed, and set confidence to 'confirmed'. The wording reads as "
+             "'probably wrong' to anyone who opens the file.")
+
+    for d in disagree:
+        FAIL("company-report", "a seed companyNumberCandidate names a different company number "
+                               "from the one the Company Report publishes as confirmed (%s). Two "
+                               "sourced numbers disagreeing is a fact to check by hand, never a "
+                               "tie for code to break." % d)
+
+
+
 def _supplier_universe():
     """Every supplier name and alias this repo holds, normalised. None if unreadable."""
     names = set()
@@ -2288,6 +2350,7 @@ def check_company_report(financials, report_js):
                                "repo actually holds.")
 
     _check_website_proofs(companies)
+    _check_candidate_wording(companies)
 
     probable = []
     probable_with_cat = []
