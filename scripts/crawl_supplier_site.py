@@ -166,6 +166,214 @@ def clean(s):
     return " ".join(H.unescape(re.sub(r"<[^>]+>", " ", str(s or ""))).split())
 
 
+
+# ---------------------------------------------------------------- route 0
+# SHOPIFY, added 27/08/2026.
+#
+# WHY THIS ROUTE HAD TO EXIST. Every Shopify storefront serves its products at
+# a FLAT `/products/<handle>` URL — the platform has no per-category product
+# path, by design. Route 2 reads a division out of the URL path segment above
+# the leaf, so on a Shopify site there is never one to read and EVERY product
+# lands in "Uncategorised". That is not a finding about the supplier's filing;
+# it is this crawler reading the wrong place. Eleven suppliers in the held list
+# were Shopify — Farla Medical (6,992), Scala Surgical (6,726), Appleton Woods
+# (5,616), Nine Group, Trulife, Bailey Instruments, MedScience, Blink Medical,
+# Gailarde, Empire Medical and Unigloves — 22,364 products filed as
+# "Uncategorised" by a platform quirk, with the real filing sitting in public
+# JSON the crawler never asked for.
+#
+# WHERE THE REAL FILING LIVES. Shopify publishes two of them, without auth:
+#   * `product_type` on each product record in /products.json — a single free
+#     text field the merchant fills in, and
+#   * COLLECTIONS (/collections.json, /collections/<handle>/products.json) —
+#     the browse structure a customer actually navigates.
+# Neither is reliably the better one, so the route MEASURES which is, per site,
+# under a stated rule rather than a per-site override (root rule 14).
+#
+# THE RULE, and why each half of it is there:
+#   `product_type` is used only when it is stated for >= 80% of the catalogue
+#   AND its single commonest value covers <= 50% of it. The first half rejects
+#   a field the merchant never filled in (Appleton Woods: stated on 11%). The
+#   second rejects one filled in with a CLASS rather than a division (Scala
+#   Surgical: 100% stated, but 89% of the range is the single word "Surgical
+#   Instrument", which groups nothing). Farla Medical passes both — 100%
+#   stated, commonest value 4% — and its 636 values are real categories
+#   ("Medical Trolleys", "Consulting Rooms", "Continence Care").
+#   Otherwise collection membership is used.
+#
+# A BRAND IS NOT A CATEGORY, and it is separated on evidence, not on its name.
+# Farla files 910 collections, a large share of them one per manufacturer it
+# resells (3M, A&D Medical, Behrens). Reading the titles to guess which are
+# brands is the guesswork this crawler refuses everywhere else, so instead a
+# collection is judged a brand collection when >= 90% of its products share one
+# `vendor` AND the collection title matches that vendor. That is the site's own
+# data answering the question.
+#
+# WHICH COLLECTION WINS when a product sits in several: the SMALLEST. A product
+# in both "Sale" and "Artery Forceps" is an artery forceps that happens to be
+# discounted, and the smaller collection is the more specific claim. This also
+# keeps merchandising mega-collections ("All Products", "Clearance") from
+# swallowing a range whose real filing is right beside them.
+#
+# It does not publish a partial catalogue. A sweep that runs out of budget
+# mid-way REFUSES, because the report prints the product count as a fact about
+# the company's range and a truncated sweep reads as an undercount, not as a
+# missing crawl.
+SHOPIFY_BUDGET_S = 1200     # a 500-collection sweep is ~500 requests at PAUSE
+
+# product_type is trusted as the division only if it is filled in this widely...
+SHOPIFY_TYPE_MIN_STATED = 0.80
+# ...and does not collapse the whole range into one value.
+SHOPIFY_TYPE_MAX_TOPSHARE = 0.50
+# ...and does not simply restate the product name. Trulife fills product_type in
+# on 96% of its range with 413 distinct values across 491 products — a field
+# that names almost every item individually groups nothing, which is the same
+# failure as Scala's single value at the other extreme (27/08/2026).
+SHOPIFY_TYPE_MAX_DISTINCT_RATIO = 0.50
+# A collection whose products are this dominated by one vendor, and named for
+# that vendor, is a brand shelf rather than a category.
+SHOPIFY_BRAND_VENDOR_SHARE = 0.90
+
+
+def _norm_brand(s):
+    return re.sub(r"[^a-z0-9]", "", str(s or "").lower())
+
+
+def _shopify_paged(domain, path, key, deadline=None, cap=200):
+    """Walk Shopify's ?page= pagination to the end, or say it could not."""
+    out, page = [], 1
+    while page <= cap:
+        if deadline and time.time() > deadline:
+            raise RuntimeError("budget exhausted after %d page(s) of %s" % (page - 1, path))
+        j, _ = get("https://%s%s%spage=%d&limit=250"
+                   % (domain, path, "&" if "?" in path else "?", page), as_json=True)
+        chunk = j.get(key) or []
+        out += chunk
+        if len(chunk) < 250:
+            break
+        page += 1
+    return out
+
+
+def shopify_products(domain, deadline=None):
+    """Read a Shopify storefront's own product records and its own filing."""
+    try:
+        probe, _ = get("https://%s/collections.json?limit=1" % domain, as_json=True)
+    except Exception as e:
+        return None, "not a readable Shopify storefront (%s)" % str(e)[:50]
+    if "collections" not in probe:
+        return None, "not a Shopify storefront"
+
+    prods = _shopify_paged(domain, "/products.json", "products", deadline=deadline)
+    if len(prods) < MIN_PRODUCTS:
+        return None, ("the Shopify storefront returned %d product(s), too few to be a "
+                      "catalogue" % len(prods))
+
+    # ---- which of the two filings does this site actually keep? -------------
+    types = [clean(p.get("product_type")) for p in prods]
+    stated = [t for t in types if t]
+    share_stated = len(stated) / float(len(prods))
+    topshare = 0.0
+    if stated:
+        topshare = max(stated.count(t) for t in set(stated)) / float(len(prods))
+    distinct_ratio = len(set(stated)) / float(len(prods)) if stated else 1.0
+    use_type = (share_stated >= SHOPIFY_TYPE_MIN_STATED
+                and topshare <= SHOPIFY_TYPE_MAX_TOPSHARE
+                and distinct_ratio <= SHOPIFY_TYPE_MAX_DISTINCT_RATIO)
+    print("      shopify: %d products, product_type stated on %.0f%%, commonest value "
+          "%.0f%% of range, %.0f%% distinct -> division from %s"
+          % (len(prods), 100 * share_stated, 100 * topshare, 100 * distinct_ratio,
+             "product_type" if use_type else "collections"), flush=True)
+
+    divisions, plist = {}, []
+    brand_shelves = 0
+    if use_type:
+        source_note = "the company's own product_type on each product record"
+        for p in prods:
+            name = clean(p.get("title"))
+            div = clean(p.get("product_type")) or "Uncategorised"
+            if not name or len(name) < 3:
+                continue
+            divisions[div] = divisions.get(div, 0) + 1
+            plist.append({"n": name, "division": div, "category": ""})
+    else:
+        source_note = "the company's own collections (its published browse structure)"
+        cols = _shopify_paged(domain, "/collections.json", "collections", deadline=deadline)
+        vendor_of = {p.get("id"): clean(p.get("vendor")) for p in prods}
+        # collection handle -> set of product ids, minus the brand shelves
+        member = {}
+        for c in cols:
+            h, title = c.get("handle"), clean(c.get("title"))
+            if not h or not title:
+                continue
+            try:
+                cp = _shopify_paged(domain, "/collections/%s/products.json" % h,
+                                    "products", deadline=deadline)
+            except urllib.error.HTTPError:
+                continue        # a collection listed but not served is not a division
+            ids = [p.get("id") for p in cp]
+            if not ids:
+                continue
+            vend = [vendor_of.get(i, "") for i in ids]
+            named = [v for v in vend if v]
+            if named:
+                top = max(set(named), key=named.count)
+                if (named.count(top) / float(len(ids)) >= SHOPIFY_BRAND_VENDOR_SHARE
+                        and _norm_brand(top) and _norm_brand(top) == _norm_brand(title)):
+                    brand_shelves += 1
+                    continue
+            member[title] = ids
+        if brand_shelves:
+            print("      dropped %d collection(s) that are a manufacturer's brand shelf, not a "
+                  "category — the collection is named for the vendor that supplies >=%d%% of it"
+                  % (brand_shelves, int(100 * SHOPIFY_BRAND_VENDOR_SHARE)), flush=True)
+        # smallest collection wins: the more specific claim about the product
+        best = {}
+        for title, ids in sorted(member.items(), key=lambda kv: -len(kv[1])):
+            for i in ids:
+                best[i] = title
+        for p in prods:
+            name = clean(p.get("title"))
+            if not name or len(name) < 3:
+                continue
+            div = best.get(p.get("id")) or "Uncategorised"
+            divisions[div] = divisions.get(div, 0) + 1
+            plist.append({"n": name, "division": div, "category": ""})
+
+    if not plist:
+        return None, "the Shopify storefront exposed no readable product records"
+
+    real = [d for d in divisions if d != "Uncategorised"]
+    uncat = divisions.get("Uncategorised", 0)
+    has_divisions = bool(real) and uncat * 2 <= len(plist)
+    flat_note = ("" if has_divisions else
+                 "%d of %d products carry neither a product_type nor a category collection on "
+                 "the company's own storefront, so most of the range sits in one unsorted "
+                 "'Uncategorised' list rather than the company's own grouping"
+                 % (uncat, len(plist)))
+    return {
+        "domain": domain,
+        "verified": time.strftime("%Y-%m-%d"),
+        "source": "%s Shopify storefront product records, read this run" % domain,
+        "structureFrom": source_note,
+        "hasDivisions": has_divisions,
+        "structure": "The company's own product filing, as published on its storefront."
+                     if has_divisions else
+                     "No usable grouping on the storefront — listed as one flat range.",
+        "filingRule": (("Grouping MIRRORS the manufacturer's own filing, read from %s. Where a "
+                        "product sits under a heading that reads oddly clinically, that is where "
+                        "the company files it, and a rep searching the company's way will find it "
+                        "there." % source_note)
+                       if has_divisions else
+                       ("Read from the storefront's own product records, so names are exact. "
+                        + flat_note + " — every item is listed by name below rather than grouped, "
+                        "because a fabricated grouping would misrepresent the company's own "
+                        "filing.")),
+        "divisions": [{"name": k, "products": v}
+                      for k, v in sorted(divisions.items(), key=lambda kv: -kv[1])],
+        "products": plist,
+    }, None
+
 # ---------------------------------------------------------------- route 1
 def wp_products(domain, deadline=None):
     base = "https://%s/wp-json/wp/v2" % domain
@@ -240,14 +448,82 @@ def top_level(cid, cats):
     return cid
 
 
+# WordPress's own default term. It is not a category name a company chose — it
+# is the platform's word for "none was set" — so where a product carries it
+# ALONGSIDE a real one, the real one is the company's filing.
+WP_DEFAULT_TERMS = ("uncategorised", "uncategorized")
+
+
 def shape_from_wp(raw, domain):
     cats, products = raw["cats"], raw["products"]
+
+    # WHICH ROOT WINS WHEN A PRODUCT SITS UNDER SEVERAL (fixed 27/08/2026).
+    # This used to be `roots[0]` — whichever term WordPress happened to return
+    # first, which is an ordering accident, not a filing decision. Three sites
+    # published a meaningless division that way, because each keeps a
+    # CROSS-CUTTING root beside its real product tree and every product is in
+    # both: Renray Healthcare files 321 products under "Sectors" (Care Home,
+    # Hospital, Community — the market it sells to, not what the thing is)
+    # while its real roots Furniture, Seating, Beds and Pressure Area Care sat
+    # unused; Hospital Services Limited published 303 under "Brands" (Canon,
+    # Barco, Bayer) over its real Ophthalmology, Xray and Surgical Equipment
+    # roots; Inspiration Healthcare published 132 under "Products".
+    #
+    # THE RULE: the root that covers the SMALLEST share of the catalogue wins.
+    # A cross-cutting axis is by definition one nearly every product carries,
+    # so it discriminates nothing; the root that applies to fewer products is
+    # the more specific claim about this one. This is the same principle the
+    # Shopify route applies to overlapping collections, and it reads no term
+    # names to reach it — "Sectors" loses to "Seating" on coverage, not on
+    # anybody's opinion of the two words.
+    # A ROOT THAT HOLDS THE WHOLE CATALOGUE IS A CONTAINER, NOT A DIVISION.
+    # Inspiration Healthcare files its entire range under one root term called
+    # "Products", whose two children are "Acute Care" (66) and "Infusion
+    # therapies" (43) — the real divisions, one level down. Publishing
+    # "Products" as the company's structure states nothing; it is the same
+    # failure as "Sectors", reached by a different route, so it is answered by
+    # the same test — a level that separates nothing is not a level. Where such
+    # a root exists its children are promoted and the walk repeats, so a site
+    # nested two containers deep resolves too.
+    for _ in range(4):
+        cov = {}
+        for p in products:
+            for r in {top_level(c, cats) for c in p["cats"] if top_level(c, cats) in cats}:
+                cov[r] = cov.get(r, 0) + 1
+        # ONLY when it is the sole root in the catalogue. An earlier version
+        # fired on any root covering >=95%, which was wrong in both directions:
+        # it promoted Renray's "Sectors" children (so a wing-back chair filed as
+        # "Hospital" instead of "Seating") and HSL's "Brands" children (so every
+        # division became a manufacturer name), while still missing Inspiration
+        # at 94.96%. Where a site has other roots, the coverage rule below
+        # already picks the right one and this must not interfere; the container
+        # case is specifically a tree with NOTHING to choose between.
+        swollen = ([r for r in cov if any(c["parent"] == r for c in cats.values())]
+                   if len(cov) == 1 else [])
+        if not swollen:
+            break
+        for r in swollen:
+            print("      '%s' is the only root in the catalogue and holds all %d products — a "
+                  "container, not a division; its sub-categories are used instead"
+                  % (cats[r]["name"], cov[r]), flush=True)
+            for c in cats.values():
+                if c["parent"] == r:
+                    c["parent"] = 0
+
+    cover = {}
+    for p in products:
+        for r in {top_level(c, cats) for c in p["cats"] if top_level(c, cats) in cats}:
+            cover[r] = cover.get(r, 0) + 1
+
     divisions, plist = {}, []
     for p in products:
         names = [cats[c]["name"] for c in p["cats"] if c in cats]
-        roots = [cats[top_level(c, cats)]["name"] for c in p["cats"]
-                 if top_level(c, cats) in cats]
-        div = roots[0] if roots else "Uncategorised"
+        rids = list({top_level(c, cats) for c in p["cats"] if top_level(c, cats) in cats})
+        real = [r for r in rids if cats[r]["name"].strip().lower() not in WP_DEFAULT_TERMS]
+        if real:
+            rids = real
+        rid = min(rids, key=lambda r: (cover.get(r, 0), cats[r]["name"])) if rids else None
+        div = cats[rid]["name"] if rid else "Uncategorised"
         cat = names[0] if names else ""
         divisions[div] = divisions.get(div, 0) + 1
         plist.append({"n": p["n"], "division": div, "category": cat})
@@ -582,6 +858,21 @@ def crawl(domain):
     domain = host
     if not allowed(domain):
         return None, "robots.txt disallows automated reading of this site"
+    # Route 0 first, and on its own budget. Detection is definitive — a site
+    # either serves /collections.json as Shopify JSON or it does not — so this
+    # costs one request on every non-Shopify site and never guesses. It runs
+    # BEFORE the WordPress and sitemap routes because on a Shopify site both of
+    # those "succeed" while filing the entire range as Uncategorised, which is
+    # the failure this route exists to end (27/08/2026).
+    shop_why = None
+    try:
+        shaped, shop_why = shopify_products(domain, deadline=started + SHOPIFY_BUDGET_S)
+        if shaped:
+            return shaped, None
+    except urllib.error.HTTPError as e:
+        shop_why = "the Shopify storefront returned HTTP %d" % e.code
+    except Exception as e:
+        shop_why = "the Shopify storefront could not be read (%s)" % str(e)[:60]
     try:
         raw, why = wp_products(domain, deadline=started + SITE_BUDGET_S)
         if raw:
