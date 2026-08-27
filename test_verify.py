@@ -239,6 +239,19 @@ def _(tmp):
     return "no appointed date"
 
 
+@case("a supplier link that answers 200 and still shows an error page")
+def _(tmp):
+    # THE 27/08/2026 ERROR, and the reason it survived so long: 191 records
+    # linked members to my.supplychain.nhs.uk/catalogue/search/0?query=<name>,
+    # which redirects to /catalogue/Error/Http404. The status check asks for a
+    # code and gets 200, so a soft 404 is invisible to it. The shape has to be
+    # banned by name.
+    seed_supplier_plus(links=[
+        {"label": "NHS Supply Chain catalogue",
+         "url": "https://my.supplychain.nhs.uk/catalogue/search/0?query=Example"}])
+    return "known to be dead"
+
+
 @case("a partnership row with no source URL")
 def _(tmp):
     seed_supplier_plus(partnerships=[

@@ -1071,6 +1071,57 @@ def check_curated_alerts_are_typed(index):
                            % (len(bad) - 5))
 
 
+def check_seed_links(seed):
+    """A member-facing link that returns 200 and still shows an error page.
+
+    Added 27/08/2026. 191 supplier records carried
+    `https://my.supplychain.nhs.uk/catalogue/search/0?query=<name>` as their
+    "NHS Supply Chain catalogue" link. Every one of them was dead: the stray
+    `/0` segment redirects to `/catalogue/Error/Http404`. The correct path is
+    `/catalogue/search?query=<name>`, which renders "Search products - NHS
+    Supply Chain Online Catalogue".
+
+    check_source_links() could never have caught this, and that is the point
+    worth remembering. It asks for an HTTP status, and the dead URL answers
+    200 — the 404 is a redirect to an error PAGE, not an error CODE. A soft
+    404 is invisible to a status check, so the shape is banned by name here
+    instead. When a link is found dead by hand, ban the shape; do not assume
+    the status check will pick up the next one.
+    """
+    suppliers = seed.get("suppliers") if isinstance(seed, dict) else seed
+    if isinstance(suppliers, dict):
+        suppliers = list(suppliers.values())
+    suppliers = suppliers or []
+
+    # Shapes proven dead by hand, with the date and the replacement. A URL is
+    # only ever added here after somebody has opened both and seen the
+    # difference — never on suspicion.
+    DEAD = [
+        ("my.supplychain.nhs.uk/catalogue/search/0?",
+         "redirects to /catalogue/Error/Http404 (checked by hand 27/08/2026). "
+         "Drop the '/0': my.supplychain.nhs.uk/catalogue/search?query=<name>"),
+    ]
+
+    bad = []
+    for s in suppliers:
+        who = s.get("name") or "(unnamed supplier)"
+        for l in (s.get("links") or []):
+            u = (l.get("url") or "") if isinstance(l, dict) else ""
+            for shape, why in DEAD:
+                if shape in u:
+                    bad.append((who, l.get("label") if isinstance(l, dict) else None, u, why))
+
+    for who, label, u, why in bad[:5]:
+        FAIL("seed-links",
+             "%s: the %r link points at a URL known to be dead — %s. Members click this from "
+             "the Company Report and land on an error page, and the source-link check cannot "
+             "see it because the dead URL answers HTTP 200. URL: %s"
+             % (who, label or "(unlabelled)", why, u))
+    if len(bad) > 5:
+        FAIL("seed-links", "...and %d further supplier record(s) carrying the same dead link "
+                           "shape (suppressed)." % (len(bad) - 5))
+
+
 def check_seed_index_alert_parity(seed, index):
     """The seed and the index must agree about curated alerts.
 
@@ -4237,6 +4288,7 @@ def main():
     check_seed_framework_provenance(load("supplier-seed.json"))
     check_seed_product_categories(load("supplier-seed.json"))
     check_seed_people_and_partners(load("supplier-seed.json"))
+    check_seed_links(load("supplier-seed.json"))
     check_migrated_prose_not_in_alerts(load("supplier-seed.json"),
                                        load("supplier-index.json"))
     check_curated_alerts_are_typed(load("supplier-index.json"))
