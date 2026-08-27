@@ -49,6 +49,12 @@ ALLOWED_CATEGORIES = {
     "wound-care-npwt-device",
     "wound-care-compression-bandage",
     "wound-care-barrier-product",
+    # Added 27/08/2026, widening the sweep across the six registered suppliers. Each
+    # exists because a real product in a wound-care range is NOT a dressing and filing
+    # it as one would be the same silent mis-filing the NPC-prefix ban exists to stop:
+    "wound-care-assessment-device",   # e.g. Advancis Wound Probe — a measuring device
+    "wound-care-fixation-tape",       # e.g. Advancis Siltape — a fixation tape
+    "wound-care-topical-gel",         # e.g. Activon Tube — honey in a tube, a filler
 }
 
 # The single most important sentence in the layer. Matched on its load-bearing
