@@ -741,6 +741,108 @@
       return h2;
     }
 
+    /* SUPPLIER-PAGE SPECIFICATIONS — a SECOND table, under the catalogue one,
+       sourced only from each product's own manufacturer page (the `specs` block
+       on supplier-product-detail.json). Kept deliberately separate from the
+       catalogue-attribute table above it: that one is derived from NHS Supply
+       Chain's description, this one is the supplier's own words. Same honest
+       empty-state discipline, different wording, so a reader never confuses
+       "the catalogue was silent" with "the supplier's own page didn't say".
+       Design: 04-WOUND-CARE-SPEC-SCHEMA.md section 5. Gate: test_product_specs.py. */
+    var SPEC_FIELDS = [
+      { k: 'sizesAvailable',    label: 'Sizes available' },
+      { k: 'wearTime',          label: 'Wear time' },
+      { k: 'exudateLevel',      label: 'Exudate level' },
+      { k: 'packSize',          label: 'Pack size' },
+      { k: 'material',          label: 'Material' },
+      { k: 'waterproof',        label: 'Waterproof / showerproof' },
+      { k: 'sterility',         label: 'Sterility' },
+      { k: 'clinicalClaims',    label: 'Clinical claims', list: true },
+      { k: 'latexFree',         label: 'Latex-free' },
+      { k: 'antimicrobial',     label: 'Antimicrobial' },
+      { k: 'contraindications', label: 'Contraindications' }
+    ];
+
+    var SPECGAP = '<span style="font-size:11px;color:#8a8778;">*info not found</span>';
+
+    function specsOf(p){
+      var pd = pdetailFor(p);
+      return (pd && pd.specs) ? pd.specs : null;
+    }
+
+    /* A value counts as stated only if it actually says something. null, '' and
+       [] are all honest gaps and render as *info not found — never as a dash the
+       reader might read as "no, it doesn't have that". */
+    function specStated(v){
+      if (v === null || v === undefined) return false;
+      if (Object.prototype.toString.call(v) === '[object Array]') return v.length > 0;
+      return String(v).trim() !== '';
+    }
+
+    function specCell(v, isList){
+      if (!specStated(v)) return SPECGAP;
+      if (isList || Object.prototype.toString.call(v) === '[object Array]'){
+        var arr = [].concat(v);
+        /* Each claim on its own line — merging them into one paragraph would
+           blur which claim is which, and these are the sentences a rep repeats. */
+        return '<ul style="margin:0;padding-left:15px;line-height:1.5;">'
+          + arr.map(function(c){ return '<li>' + esc(c) + '</li>'; }).join('') + '</ul>';
+      }
+      return esc(v);
+    }
+
+    /* Capture date + source link, once per product column — the same attribution
+       pattern ownPageBlock() already uses, in the place readers expect it. Every
+       spec in a column comes from that one page, read on that one date. */
+    function specSourceLine(p){
+      var pd = pdetailFor(p);
+      if (!pd) return '';
+      return '<div style="font-weight:400;font-size:10px;opacity:.9;margin-top:2px;">captured '
+        + esc(ddmm(pd.capturedDate)) + ' &middot; <a href="' + esc(pd.sourceUrl)
+        + '" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">source &#8599;</a></div>';
+    }
+
+    function specsBlock(mine, theirs){
+      var ms = specsOf(mine), ts = specsOf(theirs);
+      if (!ms && !ts) return '';               // neither page swept — add nothing
+
+      var rows = '', shown = 0;
+      for (var i = 0; i < SPEC_FIELDS.length; i++){
+        var f = SPEC_FIELDS[i];
+        var mv = ms ? ms[f.k] : null, tv = ts ? ts[f.k] : null;
+        /* Same "don't pad the page" rule the catalogue table follows: a row where
+           neither supplier says anything teaches nothing. */
+        if (!specStated(mv) && !specStated(tv)) continue;
+        shown++;
+        rows += '<tr style="border-top:1px solid ' + LINE + ';vertical-align:top;">'
+          + '<td style="padding:7px 10px;font-size:12px;color:#6b7684;white-space:nowrap;">' + esc(f.label) + '</td>'
+          + '<td style="padding:7px 10px;font-size:12.5px;color:#39424d;">' + specCell(mv, f.list) + '</td>'
+          + '<td style="padding:7px 10px;font-size:12.5px;color:#39424d;">' + specCell(tv, f.list) + '</td></tr>';
+      }
+      if (!shown) return '';
+
+      /* THE STANDING ATTRIBUTION PARAGRAPH — printed once, above the table, never
+         per cell. Mandatory: test_product_specs.py fails the build without it.
+         This is what stops a member reading supplier marketing copy as a
+         head-to-head test result. */
+      var standing = '<div style="margin-top:14px;padding:10px 12px;background:' + SOFT + ';border:1px dashed ' + GOLD + ';border-radius:8px;font-size:12px;color:#5a4a20;line-height:1.55;">'
+        + 'These are <strong>manufacturer claims shown side by side, not a like-for-like test.</strong> '
+        + 'Absorbency, wear time and clinical claims are each supplier&rsquo;s own wording, captured from their own product page '
+        + 'on the date shown &mdash; test methods differ between suppliers and these figures are '
+        + '<strong>not independently verified</strong>. Confirm against the manufacturer&rsquo;s IFU before quoting anything clinically.</div>';
+
+      return standing
+        + '<div style="overflow-x:auto;margin-top:8px;"><table style="width:100%;border-collapse:collapse;min-width:420px;background:#fff;border:1px solid ' + LINE + ';border-radius:10px;">'
+        + '<thead><tr style="text-align:left;background:' + SOFT + ';">'
+        + '<th style="padding:8px 10px;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:#8a8778;">From the supplier&rsquo;s own page</th>'
+        + '<th style="padding:8px 10px;font-size:11.5px;color:#fff;background:' + MINE_C + ';">' + esc(mine.name) + ' <span style="font-weight:400;opacity:.85;">(you)</span>' + specSourceLine(mine) + '</th>'
+        + '<th style="padding:8px 10px;font-size:11.5px;color:#fff;background:' + THEIR_C + ';">' + esc(theirs.name) + specSourceLine(theirs) + '</th></tr></thead><tbody>'
+        + rows + '</tbody></table></div>'
+        + '<div style="font-size:11.5px;color:#8a8778;margin-top:6px;">'
+        + '<em>*info not found</em> means that supplier&rsquo;s own product page does not state it &mdash; '
+        + '<strong>not</strong> that the product lacks it, and not the same gap as &ldquo;not stated in the catalogue entry&rdquo; above.</div>';
+    }
+
     function sideBySide(mine, theirs, myA, theirA){
       var h = '<div style="display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 0;">'
         + sideCol(mine, true) + sideCol(theirs, false) + '</div>';
@@ -772,7 +874,7 @@
         h += '<div style="margin-top:10px;font-size:13px;color:#39424d;background:#fff;border:1px solid ' + LINE + ';border-radius:10px;padding:12px 14px;">'
           + 'Neither catalogue entry states a material, format or regulatory detail we can line up, so there is no spec table to show. '
           + 'That is a gap in the published descriptions, not a finding about either product — compare on service, training, price and supply instead.</div>';
-        return h;
+        return h + specsBlock(mine, theirs);
       }
       h += '<div style="overflow-x:auto;margin-top:10px;"><table style="width:100%;border-collapse:collapse;min-width:420px;background:#fff;border:1px solid ' + LINE + ';border-radius:10px;">'
         + '<thead><tr style="text-align:left;background:' + SOFT + ';">'
@@ -783,7 +885,7 @@
         + '<div style="font-size:11.5px;color:#8a8778;margin-top:6px;">&#9670; marks a stated difference. Every cell is taken from that product&rsquo;s own NHS Supply Chain '
         + 'catalogue description &mdash; &ldquo;not stated&rdquo; means the entry is silent, <strong>not</strong> that the product lacks it. '
         + 'Confirm against the manufacturer&rsquo;s IFU before you quote anything clinically.</div>';
-      return h;
+      return h + specsBlock(mine, theirs);
     }
 
     /* PROBING QUESTIONS — derived from the differences actually found, not a
