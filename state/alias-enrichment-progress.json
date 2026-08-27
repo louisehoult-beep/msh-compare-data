@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-08-26",
+ "lastRun": "2026-08-27",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -105,7 +105,16 @@
   "Bridea Medical B.V",
   "Bridgehead Software",
   "Braun and Company Limited",
-  "Bray Group Ltd (Bray Healthcare)"
+  "Bray Group Ltd (Bray Healthcare)",
+  "Brighthedge Ltd T/A Summit Medical and Scientific",
+  "British Heart Foundation",
+  "Broomwell Healthwatch",
+  "Bullen Healthcare",
+  "Butterfly Network",
+  "BVM Medical Ltd",
+  "C&P Medical Trading Ltd",
+  "C&S Footwear Adaptions Ltd",
+  "Cairn Technology Limited"
  ],
  "refusals": [
   {
@@ -197,6 +206,21 @@
    "name": "Bray Group Ltd (Bray Healthcare)",
    "date": "2026-08-26",
    "reason": "Duplicate of the seed's own \"Bray Group Limited\" record, not a separate company: Companies House 01396401 BRAY GROUP LIMITED (active, 1-5 Regal Way, Faringdon) is the only Bray Group in this trade, and its previous name is BRAY HEALTH & LEISURE LIMITED. This record's display name is NHS Supply Chain's own account-name variant, taken verbatim from its Obstetrics and Vinyl Pessaries contract launch brief. Enriching both records would attach one company's press to two Hub supplier records and double-count it in any competitor set (E&T rule 8). The name forms were added to \"Bray Group Limited\" instead. A merge decision is required here, not an alias."
+  },
+  {
+   "name": "Bunzl Healthcare",
+   "reason": "Bunzl plc divested its entire UK healthcare division to Mediq, completed December 2022 (Bunzl's own newsroom announcement and Mediq's own acquisition announcement, mediq.com/news/mediq-aquisition-in-the-uk). The legal entity behind this name is Bunzl Retail & Healthcare Supplies Limited, which is ALREADY recorded as an alias of a different record in this seed, Mediq Healthcare UK Ltd. Recording it here would give two Hub supplier records the same name form and publish one company's story twice. Bare \"Bunzl\" is the listed parent plc, not this supplier, and is barred as a single-token shortening in any case. NHS Supply Chain still names \"Bunzl Healthcare\" on its Extension Sets and Lines contract launch brief, so the record is not wrong - but it is the Mediq record's predecessor and needs Lou's call on whether the two should be merged.",
+   "date": "2026-08-27"
+  },
+  {
+   "name": "BXT Accelyon Ltd",
+   "reason": "This seed holds TWO records for the same company - \"BXT Accelyon Ltd\" and \"BXTAccelyon\" - created from two different NHS Supply Chain spellings (Brachytherapy Seeds 2021/S 000-007768 and Syringes, Needles and Associated Products 2026/S 000-002484). Companies House 08252168 is BXTACCELYON LIMITED (active, previously ACCELYON LIMITED) and the company's own site is bxta.com, whose masthead and footer read \"BXTA\" (\"© BXTA 2026\"), address The Coach House, Grenville Court, Britwell Road, Burnham SL1 8DF. Every verified name form therefore belongs to BOTH records equally, and adding one to either would arbitrarily hand that record the firm's whole press feed while the other stays empty - or, if added to both, publish each story twice under two supplier names. Same position as the three Accrington records: needs Lou's call on merging before any alias is safe to record. \"BXTA\" is in any case a single-token acronym and would need to be unique across the seed to count.",
+   "date": "2026-08-27"
+  },
+  {
+   "name": "BXTAccelyon",
+   "reason": "Duplicate of \"BXT Accelyon Ltd\" - see that refusal. Companies House 08252168 BXTACCELYON LIMITED (active, previously ACCELYON LIMITED); own site bxta.com trading as \"BXTA\". No alias can be recorded on either record until Lou decides whether the two are merged.",
+   "date": "2026-08-27"
   }
  ],
  "sources": {
@@ -669,6 +693,88 @@
    ],
    "verifiedOn": "2026-08-26",
    "sources": "Own site bridgeheadsoftware.com, title \"BridgeHead Software - Healthcare Data Management\", footer \"© Copyright 2025 BridgeHead Software Ltd\"; Companies House 02962777 registered name BRIDGEHEAD SOFTWARE LIMITED (active, Dorset House, Regent Park, Leatherhead), previous name BRIDGEHEAD ASSOCIATES LIMITED. Bare \"BridgeHead\" NOT added: it is a shortening and an ordinary English word. Specialities already populated, so untouched."
+  },
+  "Brighthedge Ltd T/A Summit Medical and Scientific": {
+   "aliases": [
+    "Brighthedge Ltd",
+    "Brighthedge Limited",
+    "Summit Medical and Scientific",
+    "summitmedsci.co.uk"
+   ],
+   "verifiedOn": "2026-08-27",
+   "sources": "Own site summitmedsci.co.uk/contact/ footer legal line \"© 2026 Brighthedge Ltd T/A Summit Medical and Scientific\", \"Registered in England No: 03051047\", Unit 4 Bank Court, Weldon Road, Loughborough, Leicestershire LE11 5RF. Companies House 03051047 registered name BRIGHTHEDGE LIMITED (active), same registered address. Bare \"Summit Medical\" deliberately NOT added: a separate record, Summit Medical UK, is a different company. Specialities already populated, so untouched."
+  },
+  "British Heart Foundation": {
+   "aliases": [
+    "bhf.org.uk"
+   ],
+   "verifiedOn": "2026-08-27",
+   "sources": "Own site bhf.org.uk terms and conditions and site footer: \"British Heart Foundation is a registered charity in England and Wales (225971), Scotland (SC039426) and the Isle of Man (1295). A company limited by guarantee, registered in England and Wales (699547)\", registered office Greater London House, 180 Hampstead Road, London NW1 7AW. Companies House 00699547 registered name BRITISH HEART FOUNDATION (active, company limited by guarantee), no previous names, so the registered name is identical to the display name and adds nothing. Only the domain the charity owns is recordable. \"BHF\" deliberately NOT added: a single-token initialism is a shortening, not the whole canonical name, and is barred by rule 2."
+  },
+  "Broomwell Healthwatch": {
+   "aliases": [
+    "Broomwell Healthwatch Limited",
+    "broomwellhealthwatch.com"
+   ],
+   "verifiedOn": "2026-08-27",
+   "sources": "Own site broomwellhealthwatch.com: masthead \"Broomwell Healthwatch\", address 4 Minshull St, Manchester M1 3DZ, and the service list states 24/7/365 consultant-led ECG analysis - 12 lead ECG, Holter monitor, event recorder, ECG@HOME 24-hour to 14-day monitoring, services to hospitals, and \"Virtual Wards / Nursing Teams - remote patient monitoring services\". Companies House 05203203 registered name BROOMWELL HEALTHWATCH LIMITED (active), registered office 3rd Floor Barlow House, 4 Minshull Street, Manchester M1 3DZ - the same address as the company's own site. BROOMWELL HEALTHWATCH RESOURCES LIMITED (04356141) is a separate legal entity and was NOT added.",
+   "specialities": [
+    "Cardiology",
+    "Virtual wards / RPM"
+   ]
+  },
+  "Bullen Healthcare": {
+   "aliases": [
+    "The Bullen Healthcare Group Limited",
+    "bullens.com"
+   ],
+   "verifiedOn": "2026-08-27",
+   "sources": "Own site bullens.com: masthead and footer \"Bullen Healthcare © 2026\", contact page address Glacier Building, Brunswick Business Park, Harrington Rd, Liverpool L3 4BH, and the site describes the firm as \"the largest independent stoma and urology delivery company (DAC) in the UK\". Companies House 03137456 registered name THE BULLEN HEALTHCARE GROUP LIMITED (active), registered office Units 17-20 Harrington Road, Brunswick Business Park, Liverpool L3 4BH - the same road and business park as the trading address. BULLEN INTERNATIONAL HEALTHCARE LIMITED (03137463) is a separate legal entity and was NOT added. Specialities already populated, so untouched."
+  },
+  "Butterfly Network": {
+   "aliases": [
+    "Butterfly Network Limited",
+    "Butterfly Network, Inc.",
+    "butterflynetwork.com"
+   ],
+   "verifiedOn": "2026-08-27",
+   "sources": "Own site butterflynetwork.com: footer copyright line \"Butterfly Network, inc\", product range the iQ3 and iQ+ handheld Ultrasound-on-Chip probes and the iQ+ Bladder scanner. Companies House 11990443 registered name BUTTERFLY NETWORK LIMITED (active), registered office 5 New Street Square, London EC4A 3TW. The previous name BUTTERFLY NETWORKS LIMITED was in force for four days (10-14 May 2019) and was deliberately NOT added: it is a filing correction, not a real-world name form. Specialities already populated, so untouched."
+  },
+  "BVM Medical Ltd": {
+   "aliases": [
+    "BVM Medical Limited",
+    "bvmmedical.com"
+   ],
+   "verifiedOn": "2026-08-27",
+   "sources": "Own site bvmmedical.com footer legal line \"BVM Medical Limited\", \"Company Number: 2403695\"; the site states the range as clinical devices for interventional radiologists, cardiologists and cardiovascular surgeons. Companies House 02403695 registered name BVM MEDICAL LIMITED (active), registered office B V M House, Trinity Lane, Hinckley, Leicestershire LE10 0BL. NUMED EUROPE LIMITED (03012751), previously BVM MEDICAL (EUROPE) LIMITED, is a separate entity and dissolved 26 May 2026, so it was NOT added. Specialities already populated, so untouched."
+  },
+  "C&P Medical Trading Ltd": {
+   "aliases": [
+    "C & P Medical Trading Limited"
+   ],
+   "verifiedOn": "2026-08-27",
+   "sources": "Companies House 03613589 registered name C & P MEDICAL TRADING LIMITED (active), registered office Mediq House, Arundel Avenue, Castle Donington, Derby DE74 2HJ, nature of business wholesale of pharmaceutical goods - the spaced-ampersand \"Limited\" form normalises differently from this record's \"Ltd\" display name, so it is a name form the press match can use. The former own site c-pmedical.com now 301-redirects to Mediq's medbis.mediq.co.uk, so the business trades under its parent. Mediq Healthcare UK Ltd is a separate record in this seed and its names were deliberately NOT added: a parent is never an alias of its subsidiary. No domain recorded for the same reason. Specialities already populated, so untouched."
+  },
+  "C&S Footwear Adaptions Ltd": {
+   "aliases": [
+    "C & S Footwear Adaptions Limited",
+    "C & S Footwear",
+    "candsfootwear.co.uk"
+   ],
+   "verifiedOn": "2026-08-27",
+   "sources": "Own site candsfootwear.co.uk/About-Us: footer legal line \"C & S Footwear Adaptions Ltd © 2026\", and the body text uses the shorter trading form \"C & S Footwear\"; the site states the work as repairs and adaptations of orthopaedic and patients' own footwear and the manufacture of moulded and non-moulded insoles. Companies House 04438620 registered name C & S FOOTWEAR ADAPTIONS LIMITED (active), registered office Unit 24 Station Lane Industrial Estate, Old Whittington, Chesterfield S41 9QX. The site's own \"C & S Footwear Adaptions Ltd\" normalises identically to this record's display name and so was not recorded as a separate alias. Specialities already populated, so untouched."
+  },
+  "Cairn Technology Limited": {
+   "aliases": [
+    "Cairn Technology Ltd",
+    "cairntechnology.com"
+   ],
+   "verifiedOn": "2026-08-27",
+   "sources": "Own site cairntechnology.com: masthead and footer \"Cairn Technology LTD\", address G4 Business Centre, 19-21 Carlisle Street East, Sheffield S4 7QN, and the site describes the firm as \"a specialist supplier to the UK medical sector\". Companies House 03715724 registered name CAIRN TECHNOLOGY LIMITED (active), same Sheffield registered office. The previous name CLEVERQUEST LIMITED was in force for four weeks before trading began (18 February to 16 March 1999) and was deliberately NOT added.",
+   "specialities": [
+    "Infection prevention",
+    "Theatres / surgical"
+   ]
   }
  }
 }
