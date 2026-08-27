@@ -433,6 +433,15 @@ def sitemap_products(domain, deadline=None, product_paths=None):
         div = (rest[0].replace("-", " ").strip().title() if len(rest) > 1 else "Uncategorised")
         if not name or len(name) < 3:
             continue
+        # A "browse everything" landing page (/products/all/, /products/all-products/)
+        # sits at the SAME path depth as real products, so the prefix test above
+        # cannot catch it — nothing else is nested under it. Found on Welland
+        # Medical's site (26/08/2026) alongside the sitemap-selection bug fix.
+        # Deliberately just these two generic phrases, never a wider word list —
+        # a real product legitimately named "Urostomy" or similar single-word
+        # clinical term must never be silently dropped on a guess.
+        if name.lower() in ("all", "all products"):
+            continue
         divisions[div] = divisions.get(div, 0) + 1
         plist.append({"n": name, "division": div, "category": ""})
     if landing:
