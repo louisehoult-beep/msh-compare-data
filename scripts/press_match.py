@@ -398,3 +398,73 @@ def identify(supplier, item, universe=None):
             if _contains_phrase(toks, term):
                 return cand
     return None
+
+
+# ---------------------------------------------------------------------------
+# MATCH ALIASES FOR THE LIVE DESK CARVE-OUT (27/08/2026)
+# ---------------------------------------------------------------------------
+# The pipeline's rank.py decides whether a headline names a verified Hub
+# supplier. It built its pattern from the KEYS of company-press.json — canonical
+# names only — and never looked at aliases at all. So "Fifth Baxter particulate
+# recall since July in the US" did not match "Baxter Healthcare Ltd", scored 5
+# instead of 11, and fell off the Industry Wire the moment two other supplier
+# stories were correctly boosted. Its own comment read "Longest first so 'Baxter
+# Healthcare Ltd' wins over 'Baxter'", so the short form was expected to be
+# there. It never was.
+#
+# These functions publish the aliases that are SAFE to match on, so the consumer
+# never has to guess and can never widen the rule on its own.
+#
+# WHY TWO LISTS. 316 single-token aliases are >= 4 characters, and 29 of them are
+# also ordinary English words — amity, bard, cook, flow, merit, nestle, span,
+# ultimate ... and baxter. A dictionary denylist is therefore useless here: it
+# would drop the exact case this was written to fix.
+#
+# Capitalisation is what actually separates them. "Fifth Baxter particulate
+# recall" is the company; "trusts cook meals" is not. So a single-token alias is
+# published for CASE-SENSITIVE matching only, in the casing its own supplier's
+# canonical name uses, and only when the token genuinely appears in that name —
+# so the capitalisation is evidence from the seed, never invented here.
+#
+# Multi-token aliases are specific enough on their own and stay case-insensitive.
+#
+# EVERY GATE MUST HOLD. Unambiguous across the whole seed (alias_universe), at
+# least MIN_MATCH_ALIAS characters, and present in the canonical name. A name
+# that fails any gate is simply not published — the consumer then behaves exactly
+# as it did before, which is the same evidence floor the carve-out itself uses.
+MIN_MATCH_ALIAS = 4
+
+
+def _cased_token(token, name):
+    """The token as `name` capitalises it, or None if `name` does not contain it.
+
+    Evidence, not invention: the casing comes from the seed's own canonical name.
+    """
+    for word in re.findall(r"[\w&'-]+", name or ""):
+        if norm(word) == token:
+            return word
+    return None
+
+
+def match_aliases(supplier, universe):
+    """{"caseInsensitive": [...], "caseSensitive": [...]} for one supplier.
+
+    caseSensitive entries are single words that are only safely a company name
+    when capitalised. caseInsensitive entries are two words or more.
+    """
+    name = supplier.get("name") or ""
+    insensitive, sensitive = [], []
+    for alias in ([name] + list(supplier.get("aliases") or [])):
+        n = norm(alias)
+        if not n or len(n) < MIN_MATCH_ALIAS:
+            continue
+        if len(n.split()) > 1:
+            if alias.strip() and alias.strip() not in insensitive:
+                insensitive.append(alias.strip())
+            continue
+        if universe.get(n, 0) != 1:      # the same word on two suppliers proves nothing
+            continue
+        cased = _cased_token(n, name)
+        if cased and cased not in sensitive:
+            sensitive.append(cased)
+    return {"caseInsensitive": insensitive, "caseSensitive": sensitive}

@@ -760,6 +760,24 @@ def main():
             log("      DROPPED %-38s [%s] %s" % (r["headline"][:38], r["publisher"][:22],
                                                  r["reason"][:90]))
 
+    # Publish the aliases the Live Desk carve-out may match on, for EVERY
+    # supplier in the block rather than only the ones queried this run — the
+    # consumer needs the whole list on the first run, not over a 14-day cycle.
+    # See press_match.match_aliases for the four gates and why capitalisation is
+    # the discriminator. A supplier the seed no longer carries keeps whatever it
+    # had; it is not our business to strip it here.
+    by_name = {s["name"]: s for s in suppliers}
+    aliased = 0
+    for name, rec in block.items():
+        src = by_name.get(name)
+        if not src:
+            continue
+        al = press_match.match_aliases(src, universe)
+        if al["caseInsensitive"] or al["caseSensitive"]:
+            rec["matchAliases"] = al
+            aliased += 1
+    log("published match aliases for %d of %d supplier(s)" % (aliased, len(block)))
+
     never = max(0, len(suppliers) - len(block))
     doc = assemble(block, len(suppliers), checked, q_noted, q_other, never)
 
