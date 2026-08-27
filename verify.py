@@ -1121,6 +1121,30 @@ def check_seed_links(seed):
         FAIL("seed-links", "...and %d further supplier record(s) carrying the same dead link "
                            "shape (suppressed)." % (len(bad) - 5))
 
+    # The seed was only where the shape was FOUND. Read on 27/08/2026 it was also
+    # in differentiator.json (287), interview-prep.json (174), supplier-index.json
+    # and four deepDive blocks — and hardcoded twice in the script that rebuilds
+    # the Differential every night, so fixing the data alone would have let it
+    # regenerate by morning. A banned URL has to be banned everywhere it can be
+    # written, generator included, or the ban only holds until the next rebuild.
+    ALSO = ["data/differentiator.json", "data/interview-prep.json",
+            "data/supplier-index.json", "data/compare-suppliers.json",
+            "scripts/build_differentiator.py", "scripts/build_interview_prep.py",
+            "build_supplier_index.py"]
+    for rel in ALSO:
+        try:
+            with open(rel, encoding="utf-8") as fh:
+                raw = fh.read()
+        except (IOError, OSError):
+            continue
+        for shape, why in DEAD:
+            n = raw.count(shape)
+            if n:
+                FAIL("seed-links",
+                     "%s carries the dead link shape %d time(s) — %s. Fix the file AND whatever "
+                     "generates it; a data-only fix regenerates broken on the next run."
+                     % (rel, n, why))
+
 
 def check_seed_index_alert_parity(seed, index):
     """The seed and the index must agree about curated alerts.

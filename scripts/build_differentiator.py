@@ -213,7 +213,7 @@ def main():
             for it in n_items:
                 sources.append({"kind": "nhssc", "npc": it["npc"],
                                 "owner": "NHS Supply Chain",
-                                "url": "https://my.supplychain.nhs.uk/catalogue/search/0?query=%s"
+                                "url": "https://my.supplychain.nhs.uk/catalogue/search?query=%s"
                                        % (it["npc"] or "")})
 
             base_row = {
@@ -378,7 +378,7 @@ def main():
                           "term": term}],
                 "nhsscRange": None,
                 "sources": [{"kind": "nhssc", "npc": it.get("npc"), "owner": "NHS Supply Chain",
-                            "url": "https://my.supplychain.nhs.uk/catalogue/search/0?query=%s"
+                            "url": "https://my.supplychain.nhs.uk/catalogue/search?query=%s"
                                    % (it.get("npc") or "")}],
                 "cat": cat,
             })
