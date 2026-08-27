@@ -109,20 +109,32 @@ PRESS_DAILY_CAP = 90          # hard ceiling on queries per run, whatever the ma
 # trades one company's freshness for another's.
 #
 # Instead the Live Desk, which already identifies suppliers in the news in order
-# to rank them, writes the names to a file in its own repo and this run FETCHES
-# it. One-way, unprivileged, no tokens, no cross-repo write — the mirror image of
-# the pipeline fetching company-press.json from here.
+# to rank them, writes the names to a file and DELIVERS it into this repo at
+# state/supplier-press-priority.json. This run reads that local file.
+#
+# ⚠️ IT USED TO FETCH THE FILE OVER AN UNAUTHENTICATED RAW-CONTENT URL FROM THE
+# PIPELINE REPO. That never worked once, and could not have: that repo is
+# PRIVATE, so an unauthenticated raw fetch returns 404. Because every failure
+# path here returns [], the 404 was indistinguishable from "no supplier had news
+# today" and the feature looked healthy while doing nothing. Proved on
+# 27/08/2026: the Live Desk flagged Boston Scientific at 16:38 and the 17:56
+# sweep never queried it. DO NOT reintroduce a cross-repo fetch of a private
+# repo. See 02-Elevate-and-Thrive/Hub/news-capture-lag-review-2026-08-27.md.
+#
+# The delivery runs in the pipeline (priority-handoff.yml) on the SSH deploy key
+# that already writes here, shortly before this sweep's 01:40 cron.
 #
 # IT CHANGES QUERY ORDER AND NOTHING ELSE. A name here is queried sooner; it is
 # not published sooner and it is not published more easily. The five-part match
 # rule, the two-publisher corroboration rule and verify.py are all downstream of
 # this and all still have to be satisfied.
 #
-# IT FAILS OPEN. Missing file, network error, bad JSON, stale timestamp, a name
-# not in the seed — any of these and the run proceeds on the normal rotation.
-# This must never be able to stop a refresh.
-PRIORITY_URL = ("https://raw.githubusercontent.com/louisehoult-beep/"
-                "medical-sales-hub-pipeline/main/state/supplier-press-priority.json")
+# IT FAILS OPEN, BUT IT NO LONGER FAILS SILENTLY. Missing file, bad JSON, stale
+# timestamp, a name not in the seed — any of these and the run proceeds on the
+# normal rotation, but it SAYS which happened. That distinction is the whole
+# lesson of the 404 above: "nothing flagged" and "could not read it" must never
+# look the same in the log again.
+PRIORITY_PATH = REPO / "state" / "supplier-press-priority.json"
 PRIORITY_MAX_AGE_DAYS = 3     # older than this and the Live Desk has stopped writing it
 PRIORITY_MAX_NAMES = 20       # a day's budget at most; past this it is not a rotation
 QUERY_PAUSE = 2.0             # seconds between Google News queries
@@ -479,24 +491,48 @@ def due(suppliers, stamps, quota):
     return ordered[:quota]
 
 
-def priority_names(fetcher=None, today=None):
+def read_priority_file(reader=None):
+    """Raw text of the handoff file, or None if it is not readable."""
+    try:
+        if reader is not None:
+            return reader()
+        return PRIORITY_PATH.read_text(encoding="utf-8")
+    except OSError:
+        return None
+
+
+def priority_names(reader=None, today=None):
     """Supplier names the Live Desk flagged, or [] for any reason at all.
 
-    Every failure path returns [] deliberately — see PRIORITY_URL above. This is
-    an optimisation, never a dependency.
+    Every path returns [] on failure deliberately — see PRIORITY_PATH above; this
+    is an optimisation, never a dependency. Unlike the version this replaced, it
+    LOGS which path it took, so a delivery that has stopped arriving cannot go on
+    looking like a quiet day.
     """
+    raw = read_priority_file(reader)
+    if raw is None:
+        log("PRIORITY HANDOFF NOT DELIVERED — no %s. Normal rotation. "
+            "If this persists, priority-handoff.yml in the pipeline has stopped."
+            % PRIORITY_PATH.name)
+        return []
     try:
-        raw = (fetcher or fetch)(PRIORITY_URL, timeout=20)
         doc = json.loads(raw.decode("utf-8") if isinstance(raw, bytes) else raw)
         gen = str(doc.get("generatedAt") or "")[:10]
         age = (datetime.date.fromisoformat(today or today_iso())
                - datetime.date.fromisoformat(gen)).days
-        if age < 0 or age > PRIORITY_MAX_AGE_DAYS:
-            return []
-        names = [n for n in (doc.get("suppliers") or []) if isinstance(n, str) and n.strip()]
-        return names[:PRIORITY_MAX_NAMES]
-    except Exception:
+    except Exception as exc:
+        log("PRIORITY HANDOFF UNREADABLE (%s: %s) — normal rotation."
+            % (type(exc).__name__, exc))
         return []
+    if age < 0 or age > PRIORITY_MAX_AGE_DAYS:
+        log("PRIORITY HANDOFF STALE (generated %s, %d day(s) old, max %d) — "
+            "normal rotation." % (gen, age, PRIORITY_MAX_AGE_DAYS))
+        return []
+    names = [n for n in (doc.get("suppliers") or []) if isinstance(n, str) and n.strip()]
+    if not names:
+        log("priority handoff delivered %s, no suppliers flagged — normal rotation." % gen)
+        return []
+    return names[:PRIORITY_MAX_NAMES]
 
 
 def plan(suppliers, stamps, priority=None):

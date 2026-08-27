@@ -19,7 +19,13 @@ import refresh_company_press as r
 
 
 def feed(payload):
-    return lambda *a, **k: json.dumps(payload).encode("utf-8")
+    """A delivered handoff file with this content."""
+    return lambda: json.dumps(payload)
+
+
+def absent():
+    """No file delivered — what a stopped delivery looks like."""
+    return None
 
 
 SUPPLIERS = [{"name": "Boston Scientific", "note": "x"},
@@ -34,38 +40,41 @@ class ItFailsOpen(unittest.TestCase):
     """Every one of these must yield [] and let the run continue. This is an
     optimisation, never a dependency."""
 
-    def test_network_error(self):
-        def boom(*a, **k):
-            raise OSError("unreachable")
-        self.assertEqual([], r.priority_names(fetcher=boom))
+    def test_the_file_is_not_there(self):
+        self.assertEqual([], r.priority_names(reader=absent))
+
+    def test_reader_raises(self):
+        def boom():
+            raise OSError("unreadable")
+        self.assertEqual([], r.priority_names(reader=boom))
 
     def test_not_json(self):
-        self.assertEqual([], r.priority_names(fetcher=lambda *a, **k: b"<html>"))
+        self.assertEqual([], r.priority_names(reader=lambda: "<html>"))
 
     def test_no_timestamp(self):
         self.assertEqual([], r.priority_names(
-            fetcher=feed({"suppliers": ["Boston Scientific"]})))
+            reader=feed({"suppliers": ["Boston Scientific"]})))
 
     def test_a_stale_file_is_ignored(self):
         """If the Live Desk stops writing it, yesterday's names must not be
         re-queried forever."""
         self.assertEqual([], r.priority_names(
-            fetcher=feed({"generatedAt": "2020-01-01",
+            reader=feed({"generatedAt": "2020-01-01",
                           "suppliers": ["Boston Scientific"]})))
 
     def test_a_future_dated_file_is_ignored(self):
         self.assertEqual([], r.priority_names(
-            fetcher=feed({"generatedAt": "2099-01-01",
+            reader=feed({"generatedAt": "2099-01-01",
                           "suppliers": ["Boston Scientific"]})))
 
     def test_junk_entries_are_dropped_not_queried(self):
         out = r.priority_names(
-            fetcher=feed({"generatedAt": r.today_iso(),
+            reader=feed({"generatedAt": r.today_iso(),
                           "suppliers": ["Boston Scientific", "", None, 7, {"a": 1}]}))
         self.assertEqual(["Boston Scientific"], out)
 
     def test_the_list_is_capped(self):
-        out = r.priority_names(fetcher=feed(
+        out = r.priority_names(reader=feed(
             {"generatedAt": r.today_iso(),
              "suppliers": ["S%d" % i for i in range(500)]}))
         self.assertLessEqual(len(out), r.PRIORITY_MAX_NAMES)
@@ -100,6 +109,51 @@ class ItChangesOrderAndNothingElse(unittest.TestCase):
         out, _, _ = r.plan(SUPPLIERS, STAMPS, priority=["Zeta Ltd"])
         names = [s["name"] for s in out]
         self.assertEqual(len(names), len(set(names)))
+
+
+class ItMustNotFailSilently(unittest.TestCase):
+    """The 404 of 27/08/2026 (see PRIORITY_PATH) was invisible because a failure
+    and a quiet day produced identical output. These tests exist so that a
+    delivery which has stopped arriving is always distinguishable in the log."""
+
+    def _log(self, **kw):
+        out = []
+        real, r.log = r.log, out.append
+        try:
+            r.priority_names(**kw)
+        finally:
+            r.log = real
+        return " | ".join(out)
+
+    def test_a_missing_file_says_so_loudly(self):
+        self.assertIn("NOT DELIVERED", self._log(reader=absent))
+
+    def test_unreadable_says_so_loudly(self):
+        self.assertIn("UNREADABLE", self._log(reader=lambda: "<html>"))
+
+    def test_stale_says_so_loudly(self):
+        msg = self._log(reader=feed({"generatedAt": "2020-01-01",
+                                     "suppliers": ["Boston Scientific"]}))
+        self.assertIn("STALE", msg)
+
+    def test_a_genuinely_quiet_day_is_not_shouted_about(self):
+        msg = self._log(reader=feed({"generatedAt": r.today_iso(), "suppliers": []}))
+        self.assertIn("no suppliers flagged", msg)
+        for alarm in ("NOT DELIVERED", "UNREADABLE", "STALE"):
+            self.assertNotIn(alarm, msg)
+
+    def test_the_three_failures_are_distinguishable_from_each_other(self):
+        seen = {self._log(reader=absent),
+                self._log(reader=lambda: "<html>"),
+                self._log(reader=feed({"generatedAt": "2020-01-01",
+                                       "suppliers": ["X"]}))}
+        self.assertEqual(3, len(seen))
+
+    def test_it_never_fetches_over_the_network(self):
+        """The bug was a cross-repo fetch of a PRIVATE repo. There must be no
+        URL left to regress to."""
+        src = open(r.__file__.replace(".pyc", ".py")).read()
+        self.assertNotIn("raw.githubusercontent.com", src)
 
 
 if __name__ == "__main__":
