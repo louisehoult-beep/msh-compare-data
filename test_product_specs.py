@@ -55,6 +55,8 @@ ALLOWED_CATEGORIES = {
     "wound-care-assessment-device",   # e.g. Advancis Wound Probe — a measuring device
     "wound-care-fixation-tape",       # e.g. Advancis Siltape — a fixation tape
     "wound-care-topical-gel",         # e.g. Activon Tube — honey in a tube, a filler
+    "wound-care-debridement-pad",     # e.g. L&R Debrisoft — a debridement tool
+    "wound-care-retention-bandage",   # e.g. L&R ActiFast, explicitly NOT compression
 }
 
 # The single most important sentence in the layer. Matched on its load-bearing
