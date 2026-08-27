@@ -718,6 +718,48 @@
         "theatres"
       ],
       "note": "Added 25/08/2026 — same pattern as 'Theatre / surgical', 'Surgical robotics' etc, all -> theatres. One supplier (Healthcare 25 Ltd) was unresolved (verify.py vocab check)."
+    },
+    "Diabetes": {
+      "to": [
+        "diabetes"
+      ],
+      "note": "Added 27/08/2026. Introduced into supplier-seed.json by commits d273bfc and b853707 on 26/08/2026 and mapped to nothing, which made verify.py's vocab check fail and blocked every refresh.yml run from that evening onward. Mapped to the single canonical speciality the label already names; nothing is widened, so no supplier is claimed into a category its own label did not already assert. 20 suppliers, including Abbott Diabetes Care and A. Menarini Diagnostics."
+    },
+    "Digital health and clinical software": {
+      "to": [
+        "digital"
+      ],
+      "note": "Added 27/08/2026. Introduced into supplier-seed.json by commits d273bfc and b853707 on 26/08/2026 and mapped to nothing, which made verify.py's vocab check fail and blocked every refresh.yml run from that evening onward. Mapped to the single canonical speciality the label already names; nothing is widened, so no supplier is claimed into a category its own label did not already assert. 5 suppliers."
+    },
+    "Neonatal and infant care": {
+      "to": [
+        "neonatal"
+      ],
+      "note": "Added 27/08/2026. Introduced into supplier-seed.json by commits d273bfc and b853707 on 26/08/2026 and mapped to nothing, which made verify.py's vocab check fail and blocked every refresh.yml run from that evening onward. Mapped to the single canonical speciality the label already names; nothing is widened, so no supplier is claimed into a category its own label did not already assert. 1 supplier (Kendal Nutricare)."
+    },
+    "Orthotics, podiatry and prosthetics": {
+      "to": [
+        "orthotics"
+      ],
+      "note": "Added 27/08/2026. Introduced into supplier-seed.json by commits d273bfc and b853707 on 26/08/2026 and mapped to nothing, which made verify.py's vocab check fail and blocked every refresh.yml run from that evening onward. Mapped to the single canonical speciality the label already names; nothing is widened, so no supplier is claimed into a category its own label did not already assert. 2 suppliers."
+    },
+    "Rehabilitation, mobility and daily living": {
+      "to": [
+        "rehab"
+      ],
+      "note": "Added 27/08/2026. Introduced into supplier-seed.json by commits d273bfc and b853707 on 26/08/2026 and mapped to nothing, which made verify.py's vocab check fail and blocked every refresh.yml run from that evening onward. Mapped to the single canonical speciality the label already names; nothing is widened, so no supplier is claimed into a category its own label did not already assert. 5 suppliers."
+    },
+    "Oncology and radiotherapy": {
+      "to": [
+        "oncology"
+      ],
+      "note": "Added 27/08/2026. Introduced into supplier-seed.json by commits d273bfc and b853707 on 26/08/2026 and mapped to nothing, which made verify.py's vocab check fail and blocked every refresh.yml run from that evening onward. Mapped to the single canonical speciality the label already names; nothing is widened, so no supplier is claimed into a category its own label did not already assert. 4 suppliers. DELIBERATELY NARROW: radiotherapy is dropped rather than mapped to `nuclear`, because that would put three of these four into a speciality none of them claims. BD, ICU Medical and Vygon already carry 'Oncology / infusion' separately, so for them this maps to a category they are already in; OncoSem UK Limited carries this label alone and oncology is its right home. Widen it only with evidence."
+    },
+    "Patient handling and pressure area care": {
+      "to": [
+        "handling"
+      ],
+      "note": "Added 27/08/2026. Introduced into supplier-seed.json by commits d273bfc and b853707 on 26/08/2026 and mapped to nothing, which made verify.py's vocab check fail and blocked every refresh.yml run from that evening onward. Mapped to the single canonical speciality the label already names; nothing is widened, so no supplier is claimed into a category its own label did not already assert. 1 supplier (Crest Medical Ltd). DELIBERATELY NARROW: 'pressure area care' is not mapped to `wound`, because Crest Medical already carries 'Wound care' as a separate speciality, so mapping it here would assert nothing new and would set a precedent for splitting a compound label into a claim."
     }
   },
   "gapsInCanonicalList": [
