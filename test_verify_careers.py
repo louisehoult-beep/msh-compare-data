@@ -26,8 +26,8 @@ def run(doc):
 
 
 def wrap(rows, **over):
-    doc = {"generatedOn": "2026-08-28", "rule": "r", "ukRule": "u", "roleFlagRule": "f",
-           "counts": {}, "suppliers": rows}
+    doc = {"generatedOn": "2026-08-28", "rule": "r", "scope": "uk", "ukRule": "u",
+           "roleFlagRule": "f", "counts": {}, "suppliers": rows}
     doc.update(over)
     return doc
 
@@ -50,13 +50,14 @@ def must_pass(label, doc):
 
 
 GOOD = {
-    "name": "Accora", "domain": "accora.care",
-    "careersUrl": "https://accora.care/careers", "countMethod": "ats",
-    "atsAccount": "accora", "roleCount": 3, "rolesRetrieved": 3, "complete": True,
-    "ukRoles": 2, "rolesWithoutLocation": 1, "commercialRoles": 1, "clinicalRoles": 0,
-    "roles": [{"title": "Territory Manager", "location": "Leeds", "uk": True},
-              {"title": "Design Engineer", "location": "Cambridge", "uk": True},
-              {"title": "Buyer", "location": "", "uk": None}],
+    "name": "Stryker", "domain": "www.stryker.com",
+    "careersUrl": "https://careers.stryker.com/", "countMethod": "ats",
+    "atsAccount": "stryker", "ukCountFrom": "source",
+    "ukRoleCount": 2, "rolesRetrieved": 2, "complete": True,
+    "totalRolesAllLocations": 1187, "rolesUnplaceable": 0,
+    "commercialRoles": 1, "clinicalRoles": 0,
+    "roles": [{"title": "Sales Representative", "location": "Leeds, United Kingdom", "uk": True},
+              {"title": "Senior Supply Planner", "location": "Belfast, United Kingdom", "uk": True}],
 }
 
 
@@ -66,7 +67,7 @@ def variant(**over):
     return r
 
 
-must_pass("a complete, well-evidenced row passes", wrap([variant()]))
+must_pass("a complete, well-evidenced UK row passes", wrap([variant()]))
 
 # 1. THE ACUMED / MARMON FAILURE. Acumed's own careers page hands off to Workday
 #    tenant `marmon` — its parent conglomerate — returning 40 US roles. Published
@@ -74,11 +75,7 @@ must_pass("a complete, well-evidenced row passes", wrap([variant()]))
 must_fail("a parent group's ATS account is rejected",
           wrap([variant(name="Acumed Ltd", domain="www.acumed.net",
                         careersUrl="https://www.acumed.net/careers/",
-                        atsAccount="marmon", roleCount=40, rolesRetrieved=40,
-                        roles=[{"title": "Machine Operator", "location": "Boyne City, MI",
-                                "uk": False}] * 40,
-                        ukRoles=0, rolesWithoutLocation=0,
-                        commercialRoles=0, clinicalRoles=0)]),
+                        atsAccount="marmon")]),
           "does not carry this company's own identity")
 
 must_fail("an ATS count with no account recorded is rejected",
@@ -87,35 +84,57 @@ must_fail("an ATS count with no account recorded is rejected",
 # 2. THE STRYKER FAILURE. Workday states its real total on page 1 and 0 after it,
 #    so the loop halted at 40 and 1,184 roles were counted as 40.
 must_fail("retrieving more than the stated total is rejected",
-          wrap([variant(roleCount=40, rolesRetrieved=300)]),
-          "retrieved 300 roles but states a total of 40")
+          wrap([variant(ukRoleCount=2, rolesRetrieved=30)]),
+          "retrieved 30 roles but states a UK total of 2")
 
 must_fail("claiming completeness on a truncated fetch is rejected",
-          wrap([variant(roleCount=1184, rolesRetrieved=500, complete=True)]),
-          "marked complete but retrieved 500 of 1184")
+          wrap([variant(ukRoleCount=30, rolesRetrieved=2, complete=True)]),
+          "marked complete but retrieved 2 of 30")
 
 must_fail("not saying how many were retrieved is rejected",
           wrap([variant(rolesRetrieved=None)]), "does not state how many roles were retrieved")
 
-# 3. NO PARTIAL BREAKDOWN. A breakdown over the first 500 of 1,184 sits beside a
-#    full total and reads as the whole list.
+# 3. NO PARTIAL BREAKDOWN.
 must_fail("a breakdown on an incomplete fetch is rejected",
-          wrap([variant(roleCount=1184, rolesRetrieved=500, complete=False,
-                        breakdownWithheld="withheld", roles=[])]),
+          wrap([variant(ukRoleCount=30, rolesRetrieved=2, complete=False,
+                        breakdownWithheld="withheld")]),
           "partial breakdown beside a full total")
 
 must_pass("an incomplete fetch that withholds its breakdown passes",
           wrap([{"name": "Stryker", "domain": "www.stryker.com",
                  "careersUrl": "https://careers.stryker.com/", "countMethod": "ats",
-                 "atsAccount": "stryker", "roleCount": 1184, "rolesRetrieved": 500,
-                 "complete": False, "breakdownWithheld": "cap reached",
-                 "roles": [{"title": "Assembler", "location": "Irvine, CA", "uk": False}]}]))
+                 "atsAccount": "stryker", "ukCountFrom": "source",
+                 "ukRoleCount": 30, "rolesRetrieved": 1, "complete": False,
+                 "breakdownWithheld": "cap reached",
+                 "roles": [{"title": "Sales Rep", "location": "Leeds", "uk": True}]}]))
 
 # 4. A COUNT WITHOUT A RECORD SOURCE IS AN ESTIMATE.
 must_fail("a pattern-counted layout is rejected",
           wrap([variant(countMethod="html")]), "pattern-counted")
 
-# 5. AN EMPTY STATE MUST SAY WHY. Silence reads as broken, not as empty.
+# 5. A UK COUNT MUST SAY WHERE IT CAME FROM. A figure the source filtered and one
+#    derived from location strings are not the same claim.
+must_fail("a UK count with no stated origin is rejected",
+          wrap([variant(ukCountFrom=None)]), "must say whether the source filtered it")
+
+# 6. THE FILE SAYS UK, SO EVERY ROLE IN IT MUST BE A UK ROLE. This is how a
+#    worldwide board quietly becomes a UK count.
+must_fail("a non-UK role in a UK-only file is rejected",
+          wrap([variant(roles=[{"title": "Machine Operator",
+                                "location": "Boyne City, MI", "uk": False},
+                               {"title": "Sales Rep", "location": "Leeds", "uk": True}])]),
+          "held in a UK-only file")
+
+must_fail("an unplaceable role counted as UK is rejected",
+          wrap([variant(roles=[{"title": "Buyer", "location": "", "uk": None},
+                               {"title": "Sales Rep", "location": "Leeds", "uk": True}])]),
+          "held in a UK-only file")
+
+# 7. A UK FIGURE LARGER THAN THE WORLDWIDE ONE IS IMPOSSIBLE.
+must_fail("more UK roles than worldwide roles is rejected",
+          wrap([variant(totalRolesAllLocations=1)]), "only 1 worldwide")
+
+# 8. AN EMPTY STATE MUST SAY WHY. Silence reads as broken, not as empty.
 must_fail("no count and no reason is rejected",
           wrap([{"name": "Alpha Laboratories", "domain": "www.alphalabs.co.uk",
                  "careersUrl": "https://www.alphalabs.co.uk/company/jobs"}]),
@@ -126,24 +145,23 @@ must_pass("a refusal with a reason passes",
                  "careersUrl": "https://www.alphalabs.co.uk/company/jobs",
                  "refused": "the page publishes no role records"}]))
 
-# 6. THE HEADER MUST AGREE WITH THE ROWS — the company-awards defect, replayed.
+must_pass("an honest zero passes",
+          wrap([variant(ukRoleCount=0, rolesRetrieved=0, roles=[],
+                        commercialRoles=0, clinicalRoles=0)]))
+
+# 9. THE HEADER MUST AGREE WITH THE ROWS — the company-awards defect, replayed.
 must_fail("a header count that disagrees with the rows is rejected",
-          wrap([variant()], counts={"roles": 99}), "counts.roles states 99")
+          wrap([variant()], counts={"ukRoles": 99}), "counts.ukRoles states 99")
 
-# 7. THE FILE MUST CARRY THE RULE IT WAS DERIVED UNDER (root rule 14).
-must_fail("a file with no stated rule is rejected",
-          {"generatedOn": "2026-08-28", "ukRule": "u", "roleFlagRule": "f",
+# 10. THE FILE MUST CARRY THE RULE IT WAS DERIVED UNDER (root rule 14), and
+#     `scope` above all: a reader who takes these for worldwide roles has been
+#     misled by the file, not by any one number in it.
+must_fail("a file with no stated scope is rejected",
+          {"generatedOn": "2026-08-28", "rule": "r", "ukRule": "u", "roleFlagRule": "f",
            "suppliers": [variant()]},
-          "states no rule")
+          "states no scope")
 
-# 8. UK IS TRUE, FALSE OR UNKNOWN — never inferred from the company's country.
-must_fail("an invented UK flag is rejected",
-          wrap([variant(roles=[{"title": "Buyer", "location": "", "uk": "probably"}],
-                        roleCount=1, rolesRetrieved=1, ukRoles=0,
-                        rolesWithoutLocation=1, commercialRoles=0, clinicalRoles=0)]),
-          "must stay unknown")
-
-# 9. A NO-OP UNTIL THE FILE EXISTS.
+# 11. A NO-OP UNTIL THE FILE EXISTS.
 must_pass("an absent file is a no-op, not a failure", None)
 
 print()

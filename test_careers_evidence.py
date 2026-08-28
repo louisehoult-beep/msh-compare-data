@@ -92,18 +92,35 @@ check("a clinical title flags clinical", nurse["clinical"], True)
 check("'v1' is rejected as a tenant token", "v1" in rc.BAD_TOKENS, True)
 check("'api' is rejected as a tenant token", "api" in rc.BAD_TOKENS, True)
 
-# 7. A PAGINATED SOURCE MUST NOT BE COUNTED BY WHERE THE LOOP STOPPED.
+# 7. UK FILTERING HAPPENS AT THE SOURCE WHERE THE SOURCE CAN DO IT. Workday's
+#    first response carries a Location_Country facet with a per-country count and
+#    id. The id is DISCOVERED, never guessed — Workday's ids are per-tenant, so a
+#    hardcoded one would silently filter by the wrong country on every site but
+#    the one it was copied from.
+check("'United Kingdom' is recognised as the UK country facet",
+      bool(rc.UK_COUNTRY_RE.match("United Kingdom")), True)
+check("the match is anchored, so a longer name does not slip through",
+      bool(rc.UK_COUNTRY_RE.match("United Kingdom Overseas")), False)
+check("another country is not the UK", bool(rc.UK_COUNTRY_RE.match("Ireland")), False)
+
+# 8. A PAGINATED SOURCE MUST NOT BE COUNTED BY WHERE THE LOOP STOPPED.
 #    Workday reports the real total on page 1 and 0 on every page after it.
 #    Re-reading it each page made the loop halt at 40, so Stryker — 1,184 open
 #    roles — was counted as 40. Wrong by a factor of thirty, and it survived a
 #    whole finished run, because 40 looks like a plausible number for a company.
 #    Live, so it fails if Workday changes shape under us.
 if os.environ.get("CAREERS_LIVE_TESTS"):
-    wroles, stated = rc._workday("https://stryker.wd1.myworkdayjobs.com/StrykerCareers")
-    check("a paginated source reports its OWN total, not where the loop stopped",
-          stated > 500, True)
-    check("the fetch stops at the cap", len(wroles) <= rc.WORKDAY_CAP, True)
-    check("an incomplete fetch is visibly incomplete", len(wroles) < stated, True)
+    f = rc._workday("https://stryker.wd1.myworkdayjobs.com/StrykerCareers")
+    check("the source did the UK filtering itself", f["serverFilteredUK"], True)
+    check("the UK total is the source's own", f["ukTotal"] == len(f["roles"]), True)
+    check("the worldwide total is kept as context, not as the count",
+          f["totalAllLocations"] > f["ukTotal"], True)
+    # The whole point of filtering at the source: 1,187 roles worldwide, ~30 in
+    # the UK, so the fetch cap stops mattering and the count is complete.
+    check("filtering at source brings the fetch inside the cap",
+          len(f["roles"]) < rc.WORKDAY_CAP, True)
+    check("every role returned is placed in the UK",
+          all(r["uk"] is True for r in f["roles"]), True)
 else:
     print("skip  live Workday pagination test (set CAREERS_LIVE_TESTS=1 to run)")
 

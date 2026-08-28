@@ -151,6 +151,12 @@ UK_RE = re.compile(
 # the honest answer for an unrecognised place is "unknown", not "not UK". A
 # trailing two-letter US or Canadian state code IS recognisable, so it is named
 # here rather than left to fall through into the unknown bucket.
+# How a country facet spells the UK. Anchored: "United Kingdom" must be the
+# whole descriptor, so this never matches a region that merely contains it.
+UK_COUNTRY_RE = re.compile(
+    r"^(united kingdom|uk|great britain|"
+    r"united kingdom of great britain and northern ireland)$", re.I)
+
 US_STATE_RE = re.compile(
     r",\s*(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|"
     r"MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|"
@@ -409,6 +415,18 @@ def _workday(url):
         https://<tenant>.wd3.myworkdayjobs.com/en-US/<site>
     and the API sits at
         https://<tenant>.wd3.myworkdayjobs.com/wday/cxs/<tenant>/<site>/jobs
+
+    UK ROLES ARE FILTERED AT THE SOURCE, NOT HERE. The first response carries a
+    `Location_Country` facet listing every country the company is hiring in, each
+    with its own count and id. Re-querying with the United Kingdom id returns the
+    company's own UK roles and its own UK total — which is both more accurate
+    than reading location strings, and far cheaper: Stryker posts 1,187 roles
+    worldwide and 30 in the UK, so this fetches 30 instead of 1,187 and the fetch
+    cap stops mattering.
+
+    The facet id is DISCOVERED from the response, never guessed. Workday's ids
+    are per-tenant, so a hardcoded one would silently filter by the wrong country
+    on every site but the one it was copied from.
     """
     m = re.match(r"https?://([a-z0-9-]+)\.(wd\d+)\.myworkdayjobs\.com/"
                  r"(?:[a-z]{2}-[A-Za-z]{2,4}/)?([A-Za-z0-9_-]+)", url, re.I)
@@ -417,34 +435,87 @@ def _workday(url):
     tenant, wd, site = m.group(1), m.group(2), m.group(3)
     api = "https://%s.%s.myworkdayjobs.com/wday/cxs/%s/%s/jobs" % (tenant, wd, tenant, site)
     base = "https://%s.%s.myworkdayjobs.com/%s" % (tenant, wd, site)
-    out, offset, stated = [], 0, None
-    while True:
-        payload = json.dumps({"appliedFacets": {}, "limit": 20,
+
+    def page(offset, facets):
+        payload = json.dumps({"appliedFacets": facets, "limit": 20,
                               "offset": offset, "searchText": ""}).encode()
         req = urllib.request.Request(
             api, data=payload,
-            headers=dict(UA, **{"Content-Type": "application/json", "Accept": "application/json"}))
+            headers=dict(UA, **{"Content-Type": "application/json",
+                                "Accept": "application/json"}))
         time.sleep(PAUSE)
-        doc = json.loads(urllib.request.urlopen(req, timeout=25).read().decode("utf-8", "replace"))
-        page = doc.get("jobPostings") or []
-        # TAKE `total` FROM THE FIRST PAGE ONLY. Workday reports the real total on
-        # page 1 and then `0` on every page after it. Re-reading it each time made
-        # the loop stop at offset 40 — so Stryker, which has 1,184 open roles,
-        # was counted as 40. Wrong by a factor of thirty, on a paid page, and it
-        # got as far as a finished run before the round number gave it away
-        # (28/08/2026). A count that stops early looks exactly like a small
-        # company, which is why this must never be inferred from the loop.
-        if stated is None and isinstance(doc.get("total"), int) and doc["total"] > 0:
-            stated = doc["total"]
-        for j in page:
+        return json.loads(urllib.request.urlopen(req, timeout=25).read().decode("utf-8", "replace"))
+
+    first = page(0, {})
+    total_all = first.get("total") if isinstance(first.get("total"), int) else None
+
+    uk_id = None
+    for f in (first.get("facets") or []):
+        if f.get("facetParameter") != "Location_Country":
+            continue
+        for v in (f.get("values") or []):
+            if UK_COUNTRY_RE.match(str(v.get("descriptor") or "").strip()):
+                uk_id = v.get("id")
+                uk_total = v.get("count")
+                break
+        # The facet exists and names no UK entry: this company is hiring, and
+        # not here. That is a real, complete answer — an honest zero, not a gap.
+        if uk_id is None:
+            return {"roles": [], "ukTotal": 0, "serverFilteredUK": True,
+                    "totalAllLocations": total_all}
+        break
+
+    if uk_id is None:
+        # No country facet at all. Fall back to reading everything and placing
+        # roles from their location strings, which the fetch cap still bounds.
+        out, offset, stated = [], 0, total_all
+        doc = first
+        while True:
+            rows = doc.get("jobPostings") or []
+            for j in rows:
+                path = j.get("externalPath") or ""
+                out.append(role(j.get("title"), j.get("locationsText"),
+                                base + path if path.startswith("/") else None,
+                                j.get("startDate")))
+            offset += 20
+            if not rows or (stated is not None and len(out) >= stated) or len(out) >= WORKDAY_CAP:
+                break
+            doc = page(offset, {})
+        return {"roles": out, "ukTotal": None, "serverFilteredUK": False,
+                "totalAllLocations": stated if stated is not None else len(out)}
+
+    facets = {"Location_Country": [uk_id]}
+    out, offset, doc = [], 0, page(0, facets)
+    # WHAT COMES BACK THROUGH THE COUNTRY FILTER IS PLACED BY THE COMPANY, and
+    # that beats reading its location string. Workday writes multi-site postings
+    # as "4 Locations", which no string matcher can place — but the company's own
+    # UK facet returned it, so at least one of those sites is here. Marking these
+    # uk=True is the source's judgement, not ours. (It means "open to UK
+    # applicants", not "UK only" — a role may also be posted elsewhere.)
+    if isinstance(doc.get("total"), int):
+        uk_total = doc["total"]
+    while True:
+        rows = doc.get("jobPostings") or []
+        for j in rows:
             path = j.get("externalPath") or ""
-            out.append(role(j.get("title"), j.get("locationsText"),
-                            base + path if path.startswith("/") else None,
-                            j.get("startDate")))
+            r = role(j.get("title"), j.get("locationsText"),
+                     base + path if path.startswith("/") else None,
+                     j.get("startDate"))
+            if r:
+                r["uk"] = True
+                out.append(r)
         offset += 20
-        if not page or (stated is not None and len(out) >= stated) or len(out) >= WORKDAY_CAP:
+        if not rows or len(out) >= uk_total or len(out) >= WORKDAY_CAP:
             break
-    return out, (stated if stated is not None else len(out))
+        doc = page(offset, facets)
+    return {"roles": out, "ukTotal": uk_total, "serverFilteredUK": True,
+            "totalAllLocations": total_all}
+
+
+
+# Path segments and API version markers that are never an ATS account name.
+BAD_TOKENS = {"v0", "v1", "v2", "v3", "api", "embed", "job_board", "jobs",
+              "careers", "www", "assets", "static", "board", "boards"}
 
 
 
@@ -648,24 +719,26 @@ def read_roles(careers_url, deadline, ident, _depth=0):
             return None, None, name, "%s detected but the site budget ran out before reading it" % name, None
         try:
             got = reader(token)
-            # A reader returns either a plain list (it fetched everything) or a
-            # (roles, statedTotal) pair, where the source states a total larger
-            # than what was fetched.
-            if isinstance(got, tuple):
-                raw, stated_total = got
+            # Readers return either a plain list — they fetched the whole board,
+            # so UK roles must be picked out of it here — or a dict, where the
+            # source itself did the UK filtering and states its own UK total.
+            if isinstance(got, dict):
+                fetched = dict(got)
             else:
-                raw, stated_total = got, None
-            roles = [r for r in raw if r]
-            if stated_total is None:
-                stated_total = len(roles)
+                fetched = {"roles": got, "ukTotal": None,
+                           "serverFilteredUK": False, "totalAllLocations": None}
+            fetched["roles"] = [r for r in (fetched.get("roles") or []) if r]
         except Exception as e:
             return None, None, name, ("%s detected (account %s) but its public API did not "
                                       "answer (%s)" % (name, token, type(e).__name__)), None
-        return (roles, stated_total, ident_token), "ats", name, None, final
+        fetched["atsAccount"] = ident_token
+        return fetched, "ats", name, None, final
 
     roles = jsonld_roles(body, final)
     if roles:
-        return (roles, len(roles), None), "jsonld", None, None, final
+        return {"roles": roles, "ukTotal": None, "serverFilteredUK": False,
+                "totalAllLocations": len(roles), "atsAccount": None}, \
+            "jsonld", None, None, final
 
     for name, rx in ATS_DETECT_ONLY:
         if rx.search(body):
@@ -759,50 +832,80 @@ def run_one(name, domain, prev):
     if result is None:
         row["refused"] = note
         return row
-    roles, stated_total, ats_account = result
-    if ats_account:
-        # Record the account the count was taken from, beside the count. A reader
-        # (and verify.py) must be able to re-run the parent-group guard without
-        # re-fetching the site — the Acumed/Marmon failure is invisible from the
-        # numbers alone.
-        row["atsAccount"] = ats_account
 
-    seen = prev.get(name) if prev else None
-    for r in roles:
-        if seen is not None:
-            r["new"] = role_key(r) not in seen
-    roles.sort(key=lambda r: (not r.get("new"), r["title"].lower()))
-
-    row["roleCount"] = stated_total
+    if result.get("atsAccount"):
+        # The account the count was taken from, recorded beside the count. A
+        # reader (and verify.py) must be able to re-run the parent-group guard
+        # without re-fetching the site — the Acumed/Marmon failure is invisible
+        # from the numbers alone.
+        row["atsAccount"] = result["atsAccount"]
     row["countMethod"] = method
     if src and src.rstrip("/") != url.rstrip("/"):
         row["rolesUrl"] = src
+    if result.get("totalAllLocations") is not None:
+        # Context only, and always the source's own figure. Never the headline:
+        # Stryker's 1,187 worldwide roles tell a UK rep nothing.
+        row["totalRolesAllLocations"] = result["totalAllLocations"]
 
-    # THE BREAKDOWN IS ONLY STATED OVER A COMPLETE LIST. Where the source states
-    # more roles than were retrieved, roleCount stands — it is the company's own
-    # figure — but UK, commercial and clinical are omitted entirely rather than
-    # computed over the first 300 of 1,184 and presented as if they were the lot.
-    # A partial breakdown beside a full total is a wrong number wearing a right
-    # one, and there is no honest way to caveat it into being true.
-    row["rolesRetrieved"] = len(roles)
-    row["complete"] = len(roles) >= stated_total
+    if result.get("serverFilteredUK"):
+        # BEST CASE: the source filtered by its own country facet, so this is the
+        # company's own UK count, not ours derived from location strings. There
+        # is nothing to be unplaceable — every role came back already placed.
+        uk_roles = result["roles"]
+        uk_total = result["ukTotal"]
+        row["ukCountFrom"] = "source"
+        row["rolesUnplaceable"] = 0
+    else:
+        # The whole board came back and UK roles are picked out of it here. Roles
+        # the company published with NO location are counted separately and
+        # EXCLUDED — they might be UK and might not, and quietly folding them
+        # either way invents a number. The count of them is published so a reader
+        # can see how much doubt sits beside the figure.
+        all_roles = result["roles"]
+        board_total = result.get("totalAllLocations")
+        if board_total is None:
+            board_total = len(all_roles)
+        # A TRUNCATED BOARD CANNOT YIELD A UK COUNT. Picking UK roles out of the
+        # first 500 of 800 gives a floor, not a count, and a floor published as a
+        # count is the Stryker failure again in a new place: it would read as "8
+        # UK roles" when the true figure is unknown and larger. There is no
+        # honest number here, so none is stated.
+        if len(all_roles) < board_total:
+            row["refused"] = (
+                "the source publishes no country filter, and only %d of its %d roles "
+                "were retrieved before the fetch cap. UK roles picked out of a partial "
+                "board would be a floor, not a count, so none is stated. The page is "
+                "linked." % (len(all_roles), board_total))
+            return row
+        uk_roles = [r for r in all_roles if r["uk"] is True]
+        uk_total = len(uk_roles)
+        row["ukCountFrom"] = "location strings published by the company"
+        row["rolesUnplaceable"] = sum(1 for r in all_roles if r["uk"] is None)
+
+    seen = prev.get(name) if prev else None
+    for r in uk_roles:
+        if seen is not None:
+            r["new"] = role_key(r) not in seen
+    uk_roles.sort(key=lambda r: (not r.get("new"), r["title"].lower()))
+
+    row["ukRoleCount"] = uk_total
+    row["rolesRetrieved"] = len(uk_roles)
+    row["complete"] = len(uk_roles) >= uk_total
+
     if not row["complete"]:
         row["breakdownWithheld"] = (
-            "The source states %d roles; %d were retrieved before the fetch cap. "
-            "UK, commercial and clinical counts are not stated, because they would "
-            "be computed over part of the list and read as all of it."
-            % (stated_total, len(roles)))
-        row["roles"] = roles[:40]
+            "The source states %d UK roles; %d were retrieved before the fetch cap. "
+            "Commercial and clinical counts are not stated, because they would be "
+            "computed over part of the list and read as all of it."
+            % (uk_total, len(uk_roles)))
+        row["roles"] = uk_roles[:40]
         return row
 
-    located = [r for r in roles if r["uk"] is not None]
-    row["ukRoles"] = sum(1 for r in located if r["uk"])
-    row["rolesWithoutLocation"] = len(roles) - len(located)
-    row["commercialRoles"] = sum(1 for r in roles if r["commercial"])
-    row["clinicalRoles"] = sum(1 for r in roles if r["clinical"])
+    row["commercialRoles"] = sum(1 for r in uk_roles if r["commercial"])
+    row["clinicalRoles"] = sum(1 for r in uk_roles if r["clinical"])
     if seen is not None:
-        row["newRoles"] = sum(1 for r in roles if r.get("new"))
-    row["roles"] = roles
+        row["newRoles"] = sum(1 for r in uk_roles if r.get("new"))
+    row["roles"] = uk_roles
     return row
 
 
@@ -868,12 +971,13 @@ def main():
             print("      refused: %s" % row["refused"])
         else:
             if row.get("complete"):
-                print("      %d role(s) via %s, %d UK, %d commercial, %d clinical  %s"
-                      % (row["roleCount"], row["countMethod"], row["ukRoles"],
-                         row["commercialRoles"], row["clinicalRoles"], row["careersUrl"]))
+                print("      %d UK role(s) via %s, %d commercial, %d clinical  %s"
+                      % (row["ukRoleCount"], row["countMethod"], row["commercialRoles"],
+                         row["clinicalRoles"], row["careersUrl"]))
             else:
-                print("      %d role(s) stated via %s (%d retrieved; breakdown withheld)  %s"
-                      % (row["roleCount"], row["countMethod"], row["rolesRetrieved"],
+                print("      %d UK role(s) stated via %s (%d retrieved; breakdown "
+                      "withheld)  %s"
+                      % (row["ukRoleCount"], row["countMethod"], row["rolesRetrieved"],
                          row["careersUrl"]))
         out.append(row)
 
@@ -890,7 +994,7 @@ def main():
     # Keyed on the count being PRESENT, not on the absence of a refusal: a merged
     # row from an older run may carry neither, and summing roleCount over it would
     # crash the run that was meant to be routine.
-    counted = [r for r in out if r.get("roleCount") is not None]
+    counted = [r for r in out if r.get("ukRoleCount") is not None]
     report = {
         "_notice": "Working report for scripts/refresh_supplier_careers.py. "
                    "No consumer reads this file.",
@@ -902,6 +1006,14 @@ def main():
                 "applicant tracking system's public API, or schema.org JobPosting "
                 "structured data. Layouts are never pattern-counted. Everything else "
                 "is refused, with the reason kept.",
+        "scope": "UK ROLES ONLY. Where the source can filter by its own country "
+                 "facet, ukRoleCount is the company's own UK total and ukCountFrom "
+                 "says 'source'. Otherwise the whole board is read and UK roles are "
+                 "picked out from the locations the company published; roles it "
+                 "published with NO location are EXCLUDED and counted in "
+                 "rolesUnplaceable, because folding them in either direction would "
+                 "invent a number. totalRolesAllLocations, where present, is the "
+                 "source's own worldwide figure — context, never the headline.",
         "roleFlagRule": "commercial/clinical are matched from the job title against a "
                         "fixed vocabulary in the script. A filing aid, not a claim "
                         "about the role.",
@@ -914,9 +1026,9 @@ def main():
             "withCareersPage": sum(1 for r in out if r.get("careersUrl")),
             "withRoleCount": len(counted),
             "refused": sum(1 for r in out if r.get("refused")),
-            "roles": sum(r["roleCount"] for r in counted),
+            "ukRoles": sum(r["ukRoleCount"] for r in counted),
             "completeBreakdowns": sum(1 for r in counted if r.get("complete")),
-            "ukRoles": sum(r.get("ukRoles", 0) for r in counted),
+            "rolesUnplaceable": sum(r.get("rolesUnplaceable", 0) for r in counted),
         },
         "suppliers": out,
     }
@@ -930,9 +1042,10 @@ def main():
     # the UK figure is 0 because every countable supplier exceeded the fetch cap
     # and had its breakdown withheld. Say how many breakdowns there actually are,
     # or the summary line invents a conclusion the data does not support.
-    print("%d roles across %d supplier(s); %d of those have a full breakdown, "
-          "covering %d UK role(s). Report: %s"
-          % (c["roles"], c["withRoleCount"], c["completeBreakdowns"], c["ukRoles"], REPORT))
+    print("%d UK role(s) across %d supplier(s); %d of those have a full breakdown. "
+          "%d role(s) could not be placed and are excluded. Report: %s"
+          % (c["ukRoles"], c["withRoleCount"], c["completeBreakdowns"],
+             c["rolesUnplaceable"], REPORT))
 
     if a.write:
         pub = {k: v for k, v in report.items() if k != "_notice"}

@@ -27,8 +27,8 @@ def main():
     out = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_OUT
     c = d["counts"]
     sup = d["suppliers"]
-    counted = [r for r in sup if not r.get("refused")]
-    counted.sort(key=lambda r: -r["roleCount"])
+    counted = [r for r in sup if r.get("ukRoleCount") is not None]
+    counted.sort(key=lambda r: -r["ukRoleCount"])
     linked = [r for r in sup if r.get("careersUrl") and r.get("refused")]
     nothing = [r for r in sup if not r.get("careersUrl")]
 
@@ -68,48 +68,59 @@ footer{{margin-top:56px;padding-top:20px;border-top:1px solid #E2DCD2;font-size:
 </style></head><body>
 <header><div class="wrap">
 <p class="kicker">Medical Sales Intelligence Hub &middot; working report</p>
-<h1>Supplier hiring signal</h1>
-<p>Read from each company&rsquo;s own careers page &mdash; not LinkedIn. Generated {e(d['generatedOn'])}.
+<h1>UK hiring signal</h1>
+<p><strong>UK roles only.</strong> Read from each company&rsquo;s own careers page &mdash; not LinkedIn. Generated {e(d['generatedOn'])}.
 This is a working report: nothing here is published, and the refusals matter as much as the results.</p>
 <div class="stats">
 <div class="stat"><b>{c['checked']}</b><span>Suppliers checked</span></div>
 <div class="stat"><b>{c['withCareersPage']}</b><span>Careers pages found</span></div>
 <div class="stat"><b>{c['withRoleCount']}</b><span>Countable as records</span></div>
 <div class="stat"><b>{c.get('completeBreakdowns', 0)}</b><span>Full breakdown</span></div>
-<div class="stat"><b>{c['roles']}</b><span>Roles</span></div>
 <div class="stat"><b>{c['ukRoles']}</b><span>UK roles</span></div>
+<div class="stat"><b>{c.get('rolesUnplaceable', 0)}</b><span>Not placeable</span></div>
 </div></div></header><div class="wrap">""")
 
     A(f'<div class="rule"><b>The rule this was built under.</b> {e(d["rule"])}</div>')
+    if d.get("scope"):
+        A(f'<div class="rule"><b>Scope.</b> {e(d["scope"])}</div>')
     A(f'<div class="rule">{e(d["ukRule"])}</div>')
     A(f'<div class="rule">{e(d["roleFlagRule"])}</div>')
 
-    A("<h2>Countable — roles read as records</h2>")
-    A('<p class="note">Every row here was read from an applicant tracking system\'s own API '
-      'or from schema.org JobPosting data. The count is the company\'s own count.</p>')
+    A("<h2>Countable — UK roles read as records</h2>")
+    A('<p class="note">Every row was read from an applicant tracking system\'s own API or '
+      'from schema.org JobPosting data. Where "placed by" says <em>the company</em>, the '
+      'source filtered to the UK itself using its own country facet &mdash; the strongest '
+      'form of this. Where it says <em>published locations</em>, the whole board was read '
+      'and UK roles picked out; roles the company published with no location at all are '
+      'excluded and counted separately, never folded in either direction.</p>')
     if counted:
-        A('<div class="scroll"><table><tr><th>Supplier</th><th>Roles</th><th>UK</th>'
-          '<th>No location</th><th>Commercial</th><th>Clinical</th><th>New</th><th>Read from</th></tr>')
+        A('<div class="scroll"><table><tr><th>Supplier</th><th>UK roles</th>'
+          '<th>Commercial</th><th>Clinical</th><th>New</th><th>Worldwide</th>'
+          '<th>Placed by</th><th>Read from</th></tr>')
         for r in counted:
             u = r.get("rolesUrl") or r["careersUrl"]
             if r.get("complete"):
                 cells = ("<td class='num'>%d</td><td class='num'>%d</td>"
-                         "<td class='num'>%d</td><td class='num'>%d</td><td class='num'>%s</td>"
-                         % (r["ukRoles"], r["rolesWithoutLocation"], r["commercialRoles"],
-                            r["clinicalRoles"], r.get("newRoles", "—")))
+                         "<td class='num'>%s</td>"
+                         % (r.get("commercialRoles", 0), r.get("clinicalRoles", 0),
+                            r.get("newRoles", "—")))
             else:
                 # Withheld, and it must LOOK withheld. A dash in a numeric column
                 # reads as zero at a glance, which is the wrong number again.
-                cells = ("<td colspan='5' class='why'>breakdown withheld &mdash; %d of %d "
-                         "retrieved</td>" % (r["rolesRetrieved"], r["roleCount"]))
+                cells = ("<td colspan='3' class='why'>breakdown withheld &mdash; %d of %d "
+                         "retrieved</td>" % (r.get("rolesRetrieved", 0), r["ukRoleCount"]))
+            src = "the company" if r.get("ukCountFrom") == "source" else "published locations"
+            allloc = r.get("totalRolesAllLocations")
             A("<tr><td><strong>%s</strong><br><a href='%s'>%s</a></td>"
               "<td class='num'><strong>%d</strong></td>%s"
+              "<td class='num'>%s</td><td>%s</td>"
               "<td><span class='tag'>%s</span>%s</td></tr>"
-              % (e(r["name"]), e(u), e(u[:56] + "…"), r["roleCount"], cells,
+              % (e(r["name"]), e(u), e(u[:50] + "…"), r["ukRoleCount"], cells,
+                 (allloc if isinstance(allloc, int) else "—"), e(src),
                  e(r["countMethod"]), e(r.get("ats") or "")))
         A("</table></div>")
         for r in counted:
-            head = ("%s &mdash; %d role(s)" % (e(r["name"]), r["roleCount"]))
+            head = ("%s &mdash; %d UK role(s)" % (e(r["name"]), r["ukRoleCount"]))
             if not r.get("complete"):
                 head += (" &mdash; showing %d, breakdown withheld" % len(r["roles"]))
             A("<details><summary>%s</summary><ul class='roles'>" % head)
@@ -118,7 +129,7 @@ This is a working report: nothing here is published, and the refusals matter as 
                                (["new"] if x.get("new") else []) +
                                (["commercial"] if x["commercial"] else []) +
                                (["clinical"] if x["clinical"] else []) +
-                               (["UK"] if x["uk"] else []))
+                               ([] if x["uk"] else ["not placed"]))
                 A("<li>%s %s<span style='color:#7C8899'> &mdash; %s</span></li>"
                   % (tags, e(x["title"]), e(x["location"] or "no location published")))
             A("</ul></details>")
