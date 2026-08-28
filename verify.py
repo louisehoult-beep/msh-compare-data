@@ -2950,6 +2950,42 @@ def check_supplier_product_detail(doc, rangedoc):
                                                    "is" if len(bad_fields) == 1 else "are"))
 
 
+# --------------------------------------------------------------------------
+# 11b. WIX-SOURCED RANGES MUST NEVER CARRY AN INVENTED DIVISION
+# --------------------------------------------------------------------------
+def check_wix_crawl_divisions(sup):
+    """scripts/crawl_supplier_site.py's Wix route (route 3, added 28/08/2026)
+    exists precisely because Wix's JSON-LD Product block carries no
+    category/division field this repo has ever found — checked live against
+    several Jeenie Solutions product pages, 27-28/08/2026 (see
+    02-Elevate-and-Thrive/Hub/Architecture/DIFFERENTIATOR-CRAWLER-ROUTES.md).
+    So a Wix-sourced range must always say `hasDivisions: false` and file
+    every product under the flat "Uncategorised" bucket.
+
+    Root rule 14's invariant: a division on a Wix-sourced product is not
+    evidence, it is a bug — either this crawler started inventing one, or a
+    hand-edit slipped a curated division onto a record whose own site has
+    nothing to back it. Either way it must never publish silently."""
+    if not sup:
+        return
+    for name, rec in (sup.get("suppliers") or {}).items():
+        structure_from = str(rec.get("structureFrom") or "")
+        if "wix" not in structure_from.lower():
+            continue
+        if rec.get("hasDivisions"):
+            FAIL("supplier-products", "%s is Wix-sourced (structureFrom=%r) but hasDivisions is "
+                                      "true. Wix's own JSON-LD carries no category field on this "
+                                      "supplier's product pages — a division here was invented, "
+                                      "not read." % (name, structure_from))
+        bad = sorted({p.get("division") or "Uncategorised" for p in (rec.get("products") or [])
+                     if (p.get("division") or "Uncategorised") != "Uncategorised"})
+        if bad:
+            FAIL("supplier-products", "%s is Wix-sourced but %d product(s) carry a division "
+                                      "other than 'Uncategorised' (%s). Wix's JSON-LD has no "
+                                      "category field to read one from."
+                                      % (name, len(bad), ", ".join(bad[:5])))
+
+
 def check_no_clusters_on_tools(comptab_js):
     """Standing clusters must never render on the Med Sales Tools page.
 
@@ -4514,6 +4550,9 @@ def main():
     # a product range at all — see the note above check_supplier_ranges.
     check_supplier_ranges(load("supplier-products.json"))
     check_supplier_product_detail(load("supplier-product-detail.json"), load("supplier-products.json"))
+    # A Wix-sourced range must never invent a division its own JSON-LD doesn't
+    # carry — see the note above check_wix_crawl_divisions.
+    check_wix_crawl_divisions(load("supplier-products.json"))
     # NHSBSA hospital prescribing. Optional like the layers above: no index means
     # the tool is not built. Built, every check below is one the tests demanded
     # before the checks existed — which is exactly why it had not shipped.

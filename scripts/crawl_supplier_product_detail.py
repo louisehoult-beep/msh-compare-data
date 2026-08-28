@@ -84,6 +84,14 @@ RANGE = "data/supplier-products.json"
 SITE_BUDGET_S = 60          # per SUPPLIER (not per product) — several products share one budget
 PRODUCT_BUDGET_S = 15       # per product lookup, inside the site budget
 MAX_PRODUCTS_PER_SUPPLIER = 40
+# The Shopify bulk route (route 0, added 28/08/2026) answers an entire
+# supplier's range from a handful of paged /products.json requests rather
+# than one request per product, so it gets its OWN, much larger budget —
+# SITE_BUDGET_S=60s exists to bound N per-product lookups and is far too
+# short for a 250-per-page walk of an 8,000+ product catalogue (Farla Medical:
+# ~34 pages). Matches crawl_supplier_site.py's own SHOPIFY_BUDGET_S order of
+# magnitude for the same reason.
+SHOPIFY_BUDGET_S = 900
 
 
 def nk(s):
@@ -176,6 +184,92 @@ def wp_single_product(domain, name, id_index):
     }, None
 
 
+# ---------------------------------------------------------------- route 0 (Shopify, bulk)
+# ADDED 28/08/2026, per Lou's decision the same day. WHY THIS EXISTS: the 12
+# Shopify suppliers already identified by crawl_supplier_site.py's own Shopify
+# route (Farla Medical, Scala Surgical, Appleton Woods, Nine Group
+# International, Trulife, MedScience Distribution, Bailey Instruments, Blink
+# Medical, Gailarde, Unigloves UK, Empire Medical UK, Advancis Medical —
+# 23,792 products between them) sat almost entirely in the HELD bucket because
+# routes A/B above are written per-product: one WordPress-listing check plus
+# one sitemap-and-page fetch per product, which is the right shape for a site
+# that has no other way to expose product detail, but is 20,000+ HTTP
+# round-trips for suppliers that in fact publish it far more cheaply.
+#
+# A Shopify storefront serves its ENTIRE catalogue's own description, images
+# and variant detail from `/products.json?page=N&limit=250` — a handful of
+# paged requests per supplier, not one request per product. Confirmed live
+# 28/08/2026 against farlamedicalhealthcare.com, scalasurgical.co.uk and
+# appletonwoods.co.uk: every record carries `body_html` (the description),
+# `images` (product photos), `vendor` and `variants[].sku`. This route reads
+# that bulk feed ONCE per Shopify supplier and answers every product in the
+# range from the single pull, rather than calling the per-product routes 40 or
+# 400 times over. This is what turns ~20,000 held Shopify products into
+# published ones — bulk beats N page-fetches, and route A/B would have taken
+# weeks of per-supplier budget slices to reach the same coverage one page at a
+# time.
+#
+# Detection reuses crawl_supplier_site.py's own probe (`/collections.json?
+# limit=1`, checking `"collections" in probe`) rather than trusting the
+# `source` label already recorded in data/supplier-products.json for these
+# suppliers — a platform migration would silently stale that label, and the
+# probe costs one request. main() below probes before choosing a route.
+def shopify_probe(domain):
+    """True if `domain` is a live, readable Shopify storefront right now."""
+    try:
+        probe, _ = base.get("https://%s/collections.json?limit=1" % domain, as_json=True)
+    except Exception:
+        return False
+    return isinstance(probe, dict) and "collections" in probe
+
+
+def shopify_product_details(domain, deadline):
+    """Bulk-pull EVERY product this Shopify storefront serves, in one paged
+    walk of /products.json, and return them keyed by normalised title so the
+    caller can match against data/supplier-products.json's own product names
+    (case/whitespace-insensitively, via nk()) without a second request per
+    product. Raises on a hard failure (caller decides how to report it);
+    returns {} if the storefront answered but carried no usable records."""
+    prods = base._shopify_paged(domain, "/products.json", "products", deadline=deadline)
+    out = {}
+    for p in prods:
+        title = base.clean(p.get("title"))
+        if not title:
+            continue
+        handle = p.get("handle")
+        url = "https://%s/products/%s" % (domain, handle) if handle else "https://%s/" % domain
+        desc = base.clean(p.get("body_html") or "")
+
+        variants = p.get("variants") or []
+        features = []
+        if len(variants) > 1:
+            for v in variants:
+                if not isinstance(v, dict):
+                    continue
+                vt = base.clean(v.get("title"))
+                if not vt or vt.lower() == "default title":
+                    continue
+                sku = base.clean(v.get("sku"))
+                features.append("%s (SKU %s)" % (vt, sku) if sku else vt)
+
+        images = p.get("images") or []
+        image = None
+        if images and isinstance(images[0], dict):
+            image = images[0].get("src") or None
+
+        entry = {
+            "sourceUrl": url,
+            "parsed": "structured",
+            "description": desc[:2000],
+            "features": features[:20],
+            "image": image,
+        }
+        key = nk(title)
+        if key and key not in out:      # first record wins on a duplicate title
+            out[key] = entry
+    return out
+
+
 # ---------------------------------------------------------------- route B
 def extract_list_items(html_frag):
     out = []
@@ -242,10 +336,18 @@ def find_product_url(domain, name, deadline):
     """Locate this product's own URL from the site's XML sitemap, by matching
     the product name against the URL's last path segment. Same discovery
     surface as crawl_supplier_site.py's sitemap route, but this keeps the
-    full URL (that route discards it after deriving a name)."""
+    full URL (that route discards it after deriving a name).
+
+    `product-page` is added here, and ONLY here — never to
+    crawl_supplier_site.py's global PRODUCT_PATHS — because that is the flat
+    path every Wix product sits at (see this repo's route-3 Wix comment
+    block). Route B below (page_product_detail -> extract_jsonld_product)
+    already reads a Wix product's JSON-LD generically once it has the URL;
+    the one thing missing was finding that URL at all."""
     urls = _sitemap_urls(domain, deadline)
 
-    prod = [u for u in urls if re.search(r"/(product|products|our-products|range|ranges)/", u, re.I)]
+    prod = [u for u in urls
+           if re.search(r"/(product|products|our-products|range|ranges|product-page)/", u, re.I)]
     if not prod:
         return None, "the sitemap carries no product URLs to match against"
 
@@ -401,6 +503,40 @@ def capture_one(domain, name, id_index, deadline):
     return None, "; ".join(reasons)
 
 
+def record_capture(products_store, supplier, name, entry):
+    """Shared by every route (A, B and the Shopify bulk route): builds the
+    stored entry, diffs it against whatever this product held last time, and
+    writes it into products_store under the same key format everyone uses.
+    Kept as one function so the changedSince diffing logic can't drift between
+    routes — extracted 28/08/2026 when the Shopify bulk route needed the exact
+    same behaviour as the existing per-product loop."""
+    key = supplier + "|" + nk(name)
+    new_entry = {
+        "supplier": supplier,
+        "product": name,
+        "sourceUrl": entry["sourceUrl"],
+        "capturedDate": time.strftime("%Y-%m-%d"),
+        "parsed": entry["parsed"],
+        "description": entry.get("description") or "",
+        "features": entry.get("features") or [],
+        "image": entry.get("image") or None,
+    }
+
+    old = products_store.get(key)
+    is_change = False
+    if old:
+        diffs = [f for f in ("description", "features", "image")
+                if json.dumps(new_entry.get(f), sort_keys=True) != json.dumps(old.get(f), sort_keys=True)]
+        if diffs:
+            new_entry["changedSince"] = {"date": old.get("capturedDate"), "changed": diffs}
+            is_change = True
+        elif old.get("changedSince"):
+            new_entry["changedSince"] = old["changedSince"]
+
+    products_store[key] = new_entry
+    return is_change
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--supplier")
@@ -484,6 +620,58 @@ def main():
                   % (supplier, domain), flush=True)
             continue
 
+        # ---- route 0: Shopify bulk pull, one crawl for the WHOLE supplier ----
+        # Probed rather than trusted from data/supplier-products.json's cached
+        # "source" label, per the same reasoning as crawl_supplier_site.py's
+        # own Shopify route: a platform migration would silently stale a
+        # cached label, and the probe is one cheap request.
+        is_shopify = False
+        try:
+            is_shopify = shopify_probe(domain)
+        except Exception:
+            is_shopify = False
+
+        if is_shopify:
+            shopify_deadline = started + SHOPIFY_BUDGET_S
+            print("== %s (%s) — Shopify storefront, %d product(s) to match against ONE bulk pull"
+                  % (supplier, domain, len(products)), flush=True)
+            try:
+                bulk = shopify_product_details(domain, shopify_deadline)
+            except Exception as e:
+                print("   -- bulk Shopify pull failed (%s) — supplier skipped entirely"
+                      % str(e)[:100], flush=True)
+                continue
+            if not bulk:
+                print("   -- Shopify storefront answered but exposed no usable product "
+                      "records — supplier skipped entirely", flush=True)
+                continue
+            print("      pulled %d product record(s) from the storefront's own /products.json"
+                  % len(bulk), flush=True)
+
+            for p in products:
+                name = p.get("n")
+                if not name:
+                    continue
+                entry = bulk.get(nk(name))
+                if not entry:
+                    print("   -- %-40s skipped: not in this supplier's Shopify bulk pull "
+                          "(name doesn't match any product title)" % name[:40], flush=True)
+                    skipped += 1
+                    continue
+                is_change = record_capture(products_store, supplier, name, entry)
+                captured += 1
+                if is_change:
+                    changed += 1
+                tag = "CHANGED" if is_change else "OK"
+                print("   %-7s %-40s %s (%s)" % (tag, name[:40], entry["sourceUrl"], entry["parsed"]),
+                      flush=True)
+                if not a.dry_run:
+                    save()
+
+            if not a.dry_run:
+                save()
+            continue    # next supplier — route A/B below is not used for Shopify
+
         try:
             ptype = wp_ptype(domain)
         except Exception:
@@ -506,7 +694,6 @@ def main():
             if time.time() > deadline:
                 print("   -- (site time budget spent — remaining products skipped this run)", flush=True)
                 break
-            key = supplier + "|" + nk(name)
             pdeadline = min(deadline, time.time() + PRODUCT_BUDGET_S)
             entry, why = capture_one(domain, name, id_index, pdeadline)
             if not entry:
@@ -514,31 +701,10 @@ def main():
                 skipped += 1
                 continue
 
-            new_entry = {
-                "supplier": supplier,
-                "product": name,
-                "sourceUrl": entry["sourceUrl"],
-                "capturedDate": time.strftime("%Y-%m-%d"),
-                "parsed": entry["parsed"],
-                "description": entry.get("description") or "",
-                "features": entry.get("features") or [],
-                "image": entry.get("image") or None,
-            }
-
-            old = products_store.get(key)
-            is_change = False
-            if old:
-                diffs = [f for f in ("description", "features", "image")
-                        if json.dumps(new_entry.get(f), sort_keys=True) != json.dumps(old.get(f), sort_keys=True)]
-                if diffs:
-                    new_entry["changedSince"] = {"date": old.get("capturedDate"), "changed": diffs}
-                    changed += 1
-                    is_change = True
-                elif old.get("changedSince"):
-                    new_entry["changedSince"] = old["changedSince"]
-
-            products_store[key] = new_entry
+            is_change = record_capture(products_store, supplier, name, entry)
             captured += 1
+            if is_change:
+                changed += 1
             tag = "CHANGED" if is_change else "OK"
             print("   %-7s %-40s %s (%s)" % (tag, name[:40], entry["sourceUrl"], entry["parsed"]), flush=True)
 

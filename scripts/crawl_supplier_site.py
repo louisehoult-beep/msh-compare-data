@@ -874,6 +874,169 @@ def sitemap_products(domain, deadline=None, product_paths=None):
     }, None
 
 
+# ---------------------------------------------------------------- route 3
+# WIX, added 28/08/2026 — see 02-Elevate-and-Thrive/Hub/Architecture/
+# DIFFERENTIATOR-CRAWLER-ROUTES.md, "Gap found 27/08/2026 — there is no Wix
+# route, and it is why Jeenie publishes nothing".
+#
+# WHY THIS ROUTE HAD TO EXIST. Every Wix store serves its products at a FLAT
+# `/product-page/<handle>` URL — like Shopify, the platform has no
+# per-category product path. Route 2 (sitemap) derives a division from the
+# URL path segment above the leaf, so on Wix there is never one to read, and
+# this is structurally the SAME bug as Bug 1 (Shopify) above: even adding
+# `product-page` to PRODUCT_PATHS would only file every product under
+# "Uncategorised" and hold it forever, not recover a division. Jeenie
+# Solutions' own products sitemap already carries 32 real product URLs; they
+# were being refused as "too few to call a catalogue" purely because none of
+# them matched the generic path-segment list — a platform gap, not a thin
+# site.
+#
+# DETECTION IS DEFINITIVE, exactly like route 0's Shopify probe. A Wix site
+# stamps its OWN `/sitemap.xml` (never `/sitemap_index.xml` — Wix answers
+# that with HTTP 400, confirmed live 27/08/2026) with `generatedBy="WIX"` and
+# indexes a `*-products-sitemap.xml` sub-sitemap whenever Wix Stores is
+# switched on. Both signals are read off the SAME one request, so a
+# non-Wix site pays exactly one extra request to be told no, and this route
+# never guesses.
+#
+# WHAT IT READS, AND WHY IT IS ONE REQUEST PER PRODUCT. There is no bulk
+# product endpoint on Wix — Shopify's `/products.json` returns the whole
+# catalogue in one call; Wix has nothing equivalent. Each product's own name,
+# SKU, brand and description come from fetching ITS OWN page and reading its
+# JSON-LD `Product` block — verified live on
+# https://www.jeenie.uk/product-page/bed-pull, 27/08/2026 (name, sku, brand,
+# description all present). That is genuinely 32 requests for Jeenie's range,
+# not one.
+#
+# DIVISION: CHECKED, NOT GUESSED. Wix's JSON-LD Product block was read on
+# five live Jeenie product pages, 27-28/08/2026 (Bed Pull, Evacone, Limb
+# Support, Jeenie1/Jeenie4 SPU Slide Sheet, Oxford Quickfit Deluxe Poly
+# Padded Legs). NONE of the five carried a `category` or `additionalProperty`
+# field — only @context/@type/name/description/sku/brand/image/offers.
+# Jeenie's real 12 categories (read off `store-categories-sitemap.xml`:
+# acute-products, seating, evacuation, training-aids, empathy-suits, slings,
+# community-products, air-products, moving-and-handling, bariatric-equipment,
+# plus "all"/"featured" shelves) are JS-rendered pages with no server-side
+# membership list a plain fetch can read. There is genuinely no division to
+# read here, so — the same rule the Shopify and sitemap routes already apply
+# to a flat range — this route does not invent one. Every product is filed
+# under one flat "Uncategorised" list, `hasDivisions` is False, and
+# `filingRule` says why. Matching each product's description text against
+# the Hub vocabulary (the smaller, reusable option the architecture doc
+# records — build_differentiator.py already applies the same rule to NHSSC
+# rows) is a mapping-stage decision, not something this crawler manufactures.
+WIX_BUDGET_S = 900     # no bulk endpoint — one request per product page
+
+
+def _wix_jsonld_product(html_doc):
+    """The same JSON-LD `Product` extraction
+    scripts/crawl_supplier_product_detail.py's extract_jsonld_product() does,
+    replicated rather than imported: that module imports THIS one
+    (`import crawl_supplier_site as base`), so importing it back here would
+    be circular. Kept to the same regex/parsing approach deliberately —
+    diverging would mean two crawlers reading the same JSON-LD differently."""
+    for m in re.finditer(
+            r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+            html_doc, re.I | re.S):
+        raw = m.group(1).strip()
+        try:
+            data = json.loads(raw)
+        except Exception:
+            continue
+        blocks = data if isinstance(data, list) else [data]
+        expanded = []
+        for b in blocks:
+            if isinstance(b, dict) and isinstance(b.get("@graph"), list):
+                expanded.extend(b["@graph"])
+            else:
+                expanded.append(b)
+        for b in expanded:
+            if not isinstance(b, dict):
+                continue
+            t = b.get("@type")
+            if t == "Product" or (isinstance(t, list) and "Product" in t):
+                return b
+    return None
+
+
+def wix_products(domain, deadline=None):
+    """Read a Wix storefront's products sitemap, then each product's own
+    JSON-LD `Product` block. See the route-3 comment block above."""
+    try:
+        body, _ = get("https://%s/sitemap.xml" % domain, timeout=15)
+    except Exception as e:
+        return None, "no readable /sitemap.xml (%s)" % str(e)[:50]
+    if not re.search(r'generatedby\s*=\s*["\']wix["\']', body[:2000], re.I):
+        return None, "not a Wix storefront (sitemap.xml carries no Wix marker)"
+
+    locs = re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", body)
+    prod_sitemaps = [l for l in locs if re.search(r"-products-sitemap\.xml", l, re.I)]
+    if not prod_sitemaps:
+        return None, "a Wix storefront, but its sitemap.xml lists no products sitemap"
+
+    urls = []
+    for sm in prod_sitemaps[:4]:
+        try:
+            sbody, _ = get(sm, timeout=15)
+        except Exception:
+            continue
+        urls.extend(u for u in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", sbody)
+                    if "/product-page/" in u.lower())
+    urls = sorted(set(urls))
+    if len(urls) < MIN_PRODUCTS:
+        return None, ("the Wix products sitemap carries %d product URL(s), too few to call a "
+                      "catalogue" % len(urls))
+
+    plist, unreadable = [], 0
+    for i, u in enumerate(urls):
+        if deadline and time.time() > deadline:
+            return None, ("ran out of budget after reading %d of %d Wix product page(s) — Wix "
+                          "has no bulk product endpoint, so this is one request per product, and "
+                          "a partial sweep is refused rather than published as an undercount"
+                          % (i, len(urls)))
+        try:
+            phtml, _ = get(u, timeout=20)
+        except Exception:
+            unreadable += 1
+            continue
+        ld = _wix_jsonld_product(phtml)
+        name = clean((ld or {}).get("name"))
+        if not name or len(name) < 3:
+            unreadable += 1
+            continue
+        plist.append({"n": name, "division": "Uncategorised", "category": ""})
+
+    if len(plist) < MIN_PRODUCTS:
+        return None, ("only %d of %d Wix product page(s) carried a readable JSON-LD Product "
+                      "name, too few to call a catalogue" % (len(plist), len(urls)))
+    if unreadable:
+        print("      wix: %d of %d product page(s) carried no readable JSON-LD Product block, "
+              "skipped" % (unreadable, len(urls)), flush=True)
+
+    return {
+        "domain": domain,
+        "verified": time.strftime("%Y-%m-%d"),
+        "source": "%s Wix storefront, each product page's own JSON-LD, read this run" % domain,
+        "structureFrom": "Wix product pages' own JSON-LD Product blocks (no bulk endpoint, one "
+                         "request per product)",
+        "hasDivisions": False,
+        "structure": "No usable grouping — Wix's JSON-LD Product block carries no category or "
+                     "additionalProperty field on any product checked, and the site's real "
+                     "categories are JS-rendered pages with no server-side membership list a "
+                     "plain fetch can read. Listed as one flat range.",
+        "filingRule": ("Read from each product's own JSON-LD record on its Wix product page, so "
+                      "names, SKUs and descriptions are exact. Wix's Product schema carries no "
+                      "division field on this site — checked against several live product pages, "
+                      "not assumed — so every item is listed by name below rather than grouped, "
+                      "because a fabricated grouping would misrepresent the company's own filing. "
+                      "A future mapping pass may still assign a Hub category per product from its "
+                      "description text (the same rule build_differentiator.py already applies to "
+                      "NHS Supply Chain rows); this crawl does not attempt that."),
+        "divisions": [{"name": "Uncategorised", "products": len(plist)}],
+        "products": plist,
+    }, None
+
+
 def reachable_host(domain):
     """Return whichever of `domain` / `www.domain` actually answers, or None.
 
@@ -947,11 +1110,27 @@ def crawl(domain):
                                         product_paths=crawl.product_paths)
         if shaped:
             return shaped, None
-        return None, "%s; %s" % (why, why2)
     except urllib.error.HTTPError as e:
-        return None, "%s; the sitemap returned HTTP %d" % (why, e.code)
+        why2 = "the sitemap returned HTTP %d" % e.code
     except Exception as e:
-        return None, "%s; the sitemap could not be read (%s)" % (why, str(e)[:50])
+        why2 = "the sitemap could not be read (%s)" % str(e)[:50]
+
+    # Route 3 — WIX (28/08/2026), tried only once routes 0-2 have all
+    # failed. Detection is one definitive request — /sitemap.xml either
+    # stamps generatedBy="WIX" and indexes a *-products-sitemap.xml, or it
+    # does not — so a non-Wix site pays exactly one extra request to be told
+    # no. See the route-3 comment block above wix_products() for why this
+    # cannot simply be folded into route 2's PRODUCT_PATHS.
+    try:
+        shaped, why3 = wix_products(domain, deadline=started + WIX_BUDGET_S)
+        if shaped:
+            return shaped, None
+    except urllib.error.HTTPError as e:
+        why3 = "the Wix products sitemap returned HTTP %d" % e.code
+    except Exception as e:
+        why3 = "the Wix storefront could not be read (%s)" % str(e)[:60]
+
+    return None, "%s; %s; %s" % (why, why2, why3)
 
 
 def domain_for(rec):

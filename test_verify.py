@@ -1038,6 +1038,50 @@ def _(tmp):
     return "parse bug"
 
 
+@case("a Wix-sourced supplier record claiming hasDivisions=true")
+def _(tmp):
+    # scripts/crawl_supplier_site.py's Wix route (route 3, added 28/08/2026)
+    # exists because Wix's own JSON-LD Product block carries no
+    # category/division field on any product this repo has checked — a
+    # Wix-sourced range must always be flat. This plants a record that claims
+    # otherwise, on a synthetic supplier so it proves nothing about the real
+    # data.
+    d = json.load(open("data/supplier-products.json"))
+    d.setdefault("suppliers", {})["__Test Wix Fixture Supplier__"] = {
+        "domain": "example-test-wix-fixture.invalid",
+        "verified": "2026-08-28",
+        "source": "test fixture, not a real crawl",
+        "structureFrom": "Wix product pages' own JSON-LD Product blocks (no bulk endpoint, "
+                         "one request per product)",
+        "hasDivisions": True,
+        "structure": "test fixture",
+        "filingRule": "test fixture",
+        "divisions": [{"name": "Seating", "products": 1}],
+        "products": [{"n": "Test Fixture Product", "division": "Seating", "category": ""}],
+    }
+    json.dump(d, open("data/supplier-products.json", "w"))
+    return "invented, not read"
+
+
+@case("a Wix-sourced product carrying a division other than Uncategorised")
+def _(tmp):
+    d = json.load(open("data/supplier-products.json"))
+    d.setdefault("suppliers", {})["__Test Wix Fixture Supplier 2__"] = {
+        "domain": "example-test-wix-fixture-2.invalid",
+        "verified": "2026-08-28",
+        "source": "test fixture, not a real crawl",
+        "structureFrom": "Wix product pages' own JSON-LD Product blocks (no bulk endpoint, "
+                         "one request per product)",
+        "hasDivisions": False,
+        "structure": "test fixture",
+        "filingRule": "test fixture",
+        "divisions": [{"name": "Uncategorised", "products": 1}, {"name": "Seating", "products": 1}],
+        "products": [{"n": "Test Fixture Product", "division": "Seating", "category": ""}],
+    }
+    json.dump(d, open("data/supplier-products.json", "w"))
+    return "no category field to read one from"
+
+
 def cr_today(days=0):
     return (datetime.date.today() + datetime.timedelta(days=days)).isoformat()
 
