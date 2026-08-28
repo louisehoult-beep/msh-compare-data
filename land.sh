@@ -73,7 +73,13 @@ fi
 # `flock` is util-linux and does not exist on macOS, so this is a portable mkdir
 # lock: mkdir is atomic on POSIX, and the PID inside lets a genuinely dead lock be
 # cleared without a human guessing.
-LOCK_DIR="$(git rev-parse --git-dir)/land.lock"
+# --git-common-dir, NOT --git-dir. Since 28/08/2026 sessions work in their own
+# worktrees (wt.sh), and in a worktree --git-dir is that worktree's private
+# .git/worktrees/<name> directory. Using it would give every worktree its own
+# lock, i.e. no lock at all, and the failure would be silent: each run would take
+# its own lock happily and land straight into the race this exists to stop.
+# --git-common-dir is the one shared .git behind every worktree.
+LOCK_DIR="$(git rev-parse --git-common-dir)/land.lock"
 LOCK_WAIT_SECONDS="${LAND_LOCK_WAIT:-600}"
 
 LOCK_HELD=0
@@ -195,5 +201,8 @@ python3 verify.py || {
   echo "push through. Your commit is on the branch; fix and re-gate." >&2
   exit 1
 }
-git push origin main
+# HEAD:main, not main. In a worktree HEAD is the per-session branch wt/<name>, and
+# `git push origin main` would push the stale local main instead of the work just
+# rebased and gated here. In the shared tree HEAD *is* main, so this is identical.
+git push origin HEAD:main
 echo "LANDED: $SUBJECT"
