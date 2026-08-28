@@ -96,6 +96,70 @@ MAX_PAGES = 40          # 100 products per page
 SITE_BUDGET_S = 90
 MIN_PRODUCTS = 8        # below this a "range" is a landing page, not a catalogue
 
+# A WordPress post type whose rest_base merely CONTAINS "product" is not
+# necessarily a catalogue. Nevro's site exposes `product-manuals` and
+# `l-product-manuals` (Product Manuals / Legacy Product Manuals) and no product
+# post type at all; the old substring test matched the first of those and wrote
+# 483 "products" that were warranties, clinician programmer manuals, patient
+# information leaflets and MRI guidelines (checked against
+# https://www.nevro.com/wp-json/wp/v2/types, 28/08/2026). A document library
+# read as a range is worse than no range: the report states product counts, and
+# a count of manuals reads as a count of products.
+#
+# The rule: an EXACT `product`/`products` type is taken as the catalogue. A
+# loose match is taken only if neither its key nor its rest_base carries a word
+# that marks a document library. Nothing is guessed from the records themselves.
+DOC_LIBRARY_WORDS = (
+    "manual", "document", "literature", "ifu", "instruction", "brochure",
+    "download", "leaflet", "guide", "warrant", "datasheet", "data-sheet",
+    "spec-sheet", "specsheet", "resource", "support", "faq", "video",
+    "case-stud", "casestud", "white-paper", "whitepaper", "training",
+    "certificat", "msds", "sds", "recall", "notice", "review", "testimonial",
+    # Not documents, but the same failure: a product-named post type that holds
+    # something other than the product range. Each was found live on a supplier
+    # site already captured by this crawler (28/08/2026).
+    "feature",      # agfa_product_feature "Product Features" — Agfa published
+                    # 41 of these as its range: "Cloud Native Architecture",
+                    # "Interoperability-Based APIs", "RUBEE(R) Inside"
+    "jp_pay",       # Jetpack "Pay with PayPal" buttons — present on 5 sites
+    "tab",          # neve_product_tabs, a theme's product-tab content
+    "widget", "block-", "addon", "add-on", "attribute", "variation",
+)
+
+
+def pick_product_type(types):
+    """Choose the WordPress post type that is the company's product catalogue.
+
+    Returns (rest_base, taxonomies, None) on success, or (None, None, reason)
+    where reason says which of the two ways it failed, because "no product post
+    type" and "only a document library" are different findings and the refusal
+    record should not blur them.
+    """
+    loose = None
+    rejected = []
+    for key, val in (types or {}).items():
+        val = val or {}
+        base = val.get("rest_base") or key
+        taxes = val.get("taxonomies") or []
+        if key.lower() in ("product", "products") or base.lower() in ("product", "products"):
+            return base, taxes, None
+        if "product" not in base.lower() and "product" not in key.lower():
+            continue
+        haystack = ("%s %s %s" % (key, base, val.get("name") or "")).lower()
+        if any(w in haystack for w in DOC_LIBRARY_WORDS):
+            rejected.append(base)
+            continue
+        if loose is None:
+            loose = (base, taxes)
+    if loose:
+        return loose[0], loose[1], None
+    if rejected:
+        return None, None, ("the site's WordPress API exposes no product catalogue \u2014 its only "
+                            "product-named post types are document libraries (%s), which hold "
+                            "manuals and leaflets, not a product range"
+                            % ", ".join(sorted(set(rejected))))
+    return None, None, "the site's WordPress API exposes no product post type"
+
 
 def get(url, as_json=False, timeout=30):
     time.sleep(PAUSE)
@@ -378,14 +442,9 @@ def shopify_products(domain, deadline=None):
 def wp_products(domain, deadline=None):
     base = "https://%s/wp-json/wp/v2" % domain
     types, _ = get(base + "/types", as_json=True)
-    ptype = None
-    for key, val in types.items():
-        if key.lower() in ("product", "products") or "product" in (val.get("rest_base") or ""):
-            ptype = val.get("rest_base") or key
-            taxes = val.get("taxonomies") or []
-            break
+    ptype, taxes, why = pick_product_type(types)
     if not ptype:
-        return None, "the site's WordPress API exposes no product post type"
+        return None, why
 
     tax = None
     for t in taxes:

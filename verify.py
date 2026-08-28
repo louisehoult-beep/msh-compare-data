@@ -2815,6 +2815,63 @@ def check_pending_awards(doc, seed, fw_doc, report_js):
 
 
 # --------------------------------------------------------------------------
+# 10b. SUPPLIER RANGES — is the captured range actually a product range?
+# --------------------------------------------------------------------------
+# WHY THIS EXISTS (28/08/2026). crawl_supplier_site.py chose a WordPress post
+# type by asking whether its rest_base CONTAINED the word "product". Nevro's
+# site exposes no product post type at all, only `product-manuals` and
+# `l-product-manuals`, so 483 warranties, clinician programmer manuals, patient
+# information leaflets and MRI guidelines published on Nevro's company report as
+# its product range. Agfa's `agfa_product_feature` type did the same with 41
+# feature descriptions. Both were live on a member-facing report.
+#
+# The crawler now refuses those post types. This is the invariant that would
+# fail if that guard were ever loosened or routed around: a range is a range,
+# and a range made mostly of document titles is a document library.
+#
+# THE RULE, stated so a reader can judge it: a capture fails when MORE THAN A
+# QUARTER of its product names are document titles. It is a share test, not a
+# name ban, because a supplier may legitimately list the odd manual beside its
+# range — Coolmed lists 9 in 89 (10%), Farla 15 in 8,267. Nevro's capture was
+# 294 of 483 (61%). Nothing between 10% and 61% exists in the file today, so
+# the threshold sits in a real gap rather than on a guess.
+#
+# This share test catches the document-library case only. Agfa's feature
+# descriptions are not document titles, so nothing here would have caught them;
+# that class is stopped at source by pick_product_type() in
+# scripts/crawl_supplier_site.py, which is where the deny list lives.
+DOC_TITLE_RE = re.compile(
+    r"\b(limited warranty|warranty|instructions for use|user manual|"
+    r"clinician programmer manual|physician implant manual|patient manual|"
+    r"application manual|patient information leaflet|mri guidelines|"
+    r"information for prescribers|declaration of conformity|safety notice)\b",
+    re.I)
+DOC_TITLE_SHARE = 0.25
+
+
+def check_supplier_ranges(doc):
+    """data/supplier-products.json — each supplier's OWN full range, as read
+    from the company's own site. The company report renders this as the
+    company's product range, so it has to be one."""
+    if doc is None:
+        return
+    for name, rec in sorted((doc.get("suppliers") or {}).items()):
+        prods = rec.get("products") or []
+        if len(prods) < 8:
+            continue                     # too small to judge a share on
+        docs = [p.get("n") or "" for p in prods if DOC_TITLE_RE.search(p.get("n") or "")]
+        share = len(docs) / float(len(prods))
+        if share > DOC_TITLE_SHARE:
+            FAIL("supplier-products",
+                 "%s's captured range is %d document titles in %d records (%.0f%%) — that is a "
+                 "document library read as a product range, not a range. Examples: %s. The "
+                 "capture should be refused and recorded in 'refusals' with the reason, not "
+                 "published on the company report."
+                 % (name, len(docs), len(prods), share * 100,
+                    "; ".join(docs[:3])))
+
+
+# --------------------------------------------------------------------------
 # 11. SUPPLIER PRODUCT DETAIL — per-product pages captured from each
 #     supplier's own website (scripts/crawl_supplier_product_detail.py)
 # --------------------------------------------------------------------------
@@ -4453,6 +4510,9 @@ def main():
     # gap. Present, it must be whole — see the note above check_company_logos.
     check_company_logos(load("company-logos.json"), report_js)
     # Per-product detail captured from each supplier's own product page.
+    # Each supplier's own full range. The check is whether what was captured is
+    # a product range at all — see the note above check_supplier_ranges.
+    check_supplier_ranges(load("supplier-products.json"))
     check_supplier_product_detail(load("supplier-product-detail.json"), load("supplier-products.json"))
     # NHSBSA hospital prescribing. Optional like the layers above: no index means
     # the tool is not built. Built, every check below is one the tests demanded
