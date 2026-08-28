@@ -1,0 +1,118 @@
+name: Supplier careers (hiring signal)
+
+# Reads each supplier's OWN careers page and records what it publishes there —
+# the careers URL always, the open-role count only where the roles came back as
+# discrete records (an applicant tracking system's public API, or schema.org
+# JobPosting data). Layouts are never pattern-counted.
+#
+# WHY THIS EXISTS AND NOT A LINKEDIN FEED. The signal wanted here is hiring, and
+# LinkedIn's company /insights/ tab shows exactly that. It is unusable: LinkedIn
+# answers automated fetches with HTTP 999, the tab is a paid Sales Navigator
+# feature, republishing their licensed data inside a paid subscription product
+# breaches their User Agreement, and a paywalled panel is not a source a member
+# can follow, so it fails root rules 12 and 16. The company's own careers page
+# carries the same signal with none of those problems.
+# Full write-up: "Process flows for all brands/supplier-careers-hiring-signal.md".
+#
+# WHY IT ROTATES. A full sweep of all 483 suppliers with a website takes about
+# four hours. Nothing scheduled should hold a runner open that long, so each run
+# takes the 90 least-recently-checked suppliers and MERGES them into the existing
+# rows. The whole list cycles in about six weeks, and every row carries its own
+# checkedOn date so a reader can see how stale it is.
+
+on:
+  schedule:
+    - cron: "40 3 * * 2"     # Tuesdays 03:40 UTC
+  workflow_dispatch:
+    inputs:
+      rotate:
+        description: "How many suppliers to check this run"
+        default: "90"
+
+# Every writer to this repo shares one group so they queue instead of racing.
+# Without it a long job loses a push it had already done the work for — that
+# cost the weekly refresh 49 minutes of computed data on 26/07/2026.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  careers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      # The evidence floor, before anything is fetched. These are the three
+      # failures from the build on 28/08/2026 — a parent group's ATS counted as
+      # the subsidiary's, a paginated total read from the wrong page, a breakdown
+      # computed over a partial list — each of which produced a finished run with
+      # a believable number. If any of them can happen again, this run must not
+      # start.
+      - name: Evidence-floor tests
+        run: |
+          python3 test_careers_evidence.py
+          python3 test_verify_careers.py
+
+      - name: Read careers pages (rotating slice)
+        run: python3 scripts/refresh_supplier_careers.py --rotate "${{ github.event.inputs.rotate || 90 }}" --write
+
+      # This repo is PUBLIC and the Hub's page watermark never reaches these
+      # files, so the notice inside them is the only thing on a copy that says
+      # who owns it.
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "hub-bot"
+          git config user.email "contact@elevateandthrive.uk"
+          # Stage by path. A bare `git add -a` in this shared checkout sweeps up
+          # whatever another session left uncommitted — that is how the Delta
+          # Surgical record was destroyed on 26/08/2026.
+          git add data/supplier-careers.json
+          git diff --cached --quiet && { echo "nothing changed"; exit 0; }
+          git commit -m "supplier careers: rotating refresh $(date -u +'%F')"
+
+          # KEEP OUR OWN GENERATED FILE ACROSS A REBASE.
+          #
+          # The other refresh workflows here rebase with `-X theirs` and then
+          # re-run the gate. That is not safe for a generated JSON file, and it
+          # already bit: `-X theirs` resolves CONFLICTING hunks in this run's
+          # favour but KEEPS the other writer's non-conflicting hunks, which on a
+          # large generated file stitches one generation's header onto another
+          # generation's rows. The company-intelligence workflow produced exactly
+          # that on 14/08/2026 — counts that disagreed with the rows they were
+          # meant to summarise — and the gate caught it, correctly, after 40
+          # minutes of wasted work.
+          #
+          # This file is written whole by this run and by nothing else, so the
+          # right resolution is not a merge at all: keep OUR copy verbatim, then
+          # re-run the gate over the combined tree.
+          cp data/supplier-careers.json /tmp/ours.json
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then echo "pushed on attempt $attempt"; pushed=1; break; fi
+            echo "push rejected (another writer landed first) — attempt $attempt of 5"
+            git pull --rebase --autostash || true
+            cp /tmp/ours.json data/supplier-careers.json
+            git add data/supplier-careers.json
+            git diff --cached --quiet || git commit --amend --no-edit
+            python3 verify.py || { echo "GATE FAILED after rebase — refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts — failing loudly rather than dropping the work"
+            exit 1
+          fi

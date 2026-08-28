@@ -4466,6 +4466,146 @@ def check_calendar(doc, specmap_unused=None):
                          "published deliberately so a member can see what is missing.")
 
 
+# --------------------------------------------------------------------------
+# 24. SUPPLIER CAREERS — the hiring signal
+#
+# Every check here exists because the thing it tests ALREADY WENT WRONG on
+# 28/08/2026, during the build, and in each case the run finished cleanly and
+# produced a believable number. That is the whole argument for this gate: none
+# of the three would have been caught by asking whether the script worked. Only
+# by asking whether the number could be true.
+# --------------------------------------------------------------------------
+CAREERS_NOISE = {"ltd", "limited", "plc", "llp", "inc", "corp", "corporation",
+                 "company", "group", "holdings", "uk", "gb", "united", "kingdom",
+                 "europe", "european", "international", "global", "medical",
+                 "medic", "medics", "healthcare", "health", "care", "surgical",
+                 "the", "and", "solutions", "systems", "services", "products",
+                 "supplies", "technologies", "technology", "science", "sciences",
+                 "diagnostics", "pharma", "pharmaceuticals", "labs", "laboratories"}
+
+
+def _careers_cores(name, domain):
+    words = re.split(r"[^a-z0-9]+", (name or "").lower())
+    core = {w for w in words if len(w) >= 4 and w not in CAREERS_NOISE}
+    host = re.sub(r"^www\.", "", (domain or "").lower())
+    host = re.sub(r"\.(co\.uk|org\.uk|com|net|co|uk|eu|care|health|io|de|nl)$", "", host)
+    for w in re.split(r"[^a-z0-9]+", host):
+        if len(w) >= 4 and w not in CAREERS_NOISE:
+            core.add(w)
+    return core
+
+
+def check_supplier_careers(doc):
+    """A no-op until data/supplier-careers.json exists."""
+    if not doc:
+        return
+    C = "supplier-careers"
+    rows = doc.get("suppliers")
+    if not isinstance(rows, list):
+        FAIL(C, "data/supplier-careers.json holds no suppliers list.")
+        return
+
+    # The file must carry the rule it was derived under (root rule 14). Without
+    # it a reader cannot judge what the numbers mean, and "343 roles" reads the
+    # same whether it was counted or estimated.
+    for key in ("rule", "ukRule", "roleFlagRule", "generatedOn"):
+        if not str(doc.get(key) or "").strip():
+            FAIL(C, "the file states no %s. A derived claim must carry the rule "
+                    "it was derived under." % key)
+
+    counted = [r for r in rows if r.get("roleCount") is not None]
+    stated = doc.get("counts") or {}
+    for key, actual in (("withCareersPage", sum(1 for r in rows if r.get("careersUrl"))),
+                        ("withRoleCount", len(counted)),
+                        ("roles", sum(r.get("roleCount") or 0 for r in counted))):
+        if key in stated and stated[key] != actual:
+            FAIL(C, "counts.%s states %s but the rows hold %s."
+                    % (key, stated[key], actual))
+
+    for r in rows:
+        who = r.get("name") or "(unnamed)"
+
+        url = r.get("careersUrl")
+        if url and not str(url).startswith("https://"):
+            FAIL(C, "%s: careersUrl is not an absolute https URL (%r)." % (who, url))
+        if not url and r.get("roleCount") is not None:
+            FAIL(C, "%s: states a role count with no careers page to attribute it to." % who)
+
+        n = r.get("roleCount")
+        if n is None:
+            if not str(r.get("refused") or "").strip():
+                FAIL(C, "%s: no role count and no reason. An empty state must say "
+                        "why it is empty, or it reads as broken." % who)
+            continue
+
+        # (a) A COUNT WITHOUT A METHOD IS AN ESTIMATE. Only a record source counts.
+        if r.get("countMethod") not in ("ats", "jsonld"):
+            FAIL(C, "%s: states %s roles by method %r. Only 'ats' and 'jsonld' read "
+                    "roles as discrete records; anything else is a layout being "
+                    "pattern-counted." % (who, n, r.get("countMethod")))
+
+        # (b) THE ACUMED/MARMON FAILURE. Acumed's own careers page hands off to
+        #     Workday tenant `marmon`, its parent conglomerate, returning 40 US
+        #     roles. The count is only this company's where the account carries
+        #     this company's identity, and the account must be recorded so this
+        #     can be re-checked without re-fetching the site.
+        if r.get("countMethod") == "ats":
+            acct = re.sub(r"[^a-z0-9]", "", str(r.get("atsAccount") or "").lower())
+            if not acct:
+                FAIL(C, "%s: an ATS count with no atsAccount recorded. The "
+                        "parent-group guard cannot be re-checked." % who)
+            elif acct in CAREERS_NOISE or not any(
+                    c in acct for c in _careers_cores(r.get("name"), r.get("domain"))):
+                FAIL(C, "%s: counts %s roles from account %r, which does not carry "
+                        "this company's own identity — a parent or group careers "
+                        "site. Its roles are not this company's."
+                        % (who, n, r.get("atsAccount")))
+
+        # (c) THE STRYKER FAILURE. Workday reports its real total on page 1 and 0
+        #     after it, so the loop stopped at 40 and 1,184 roles were published
+        #     as 40. Retrieved can never exceed the stated total, and a run that
+        #     claims completeness must actually hold every row.
+        got, held = r.get("rolesRetrieved"), len(r.get("roles") or [])
+        if got is None:
+            FAIL(C, "%s: does not state how many roles were retrieved, so a "
+                    "truncated fetch is indistinguishable from a small company." % who)
+        elif got > n:
+            FAIL(C, "%s: retrieved %s roles but states a total of %s." % (who, got, n))
+
+        if r.get("complete"):
+            if got != n:
+                FAIL(C, "%s: marked complete but retrieved %s of %s." % (who, got, n))
+            if held != n:
+                FAIL(C, "%s: marked complete, states %s roles, holds %s." % (who, n, held))
+        else:
+            # (d) NO PARTIAL BREAKDOWN. A breakdown over the first 500 of 1,184
+            #     sits beside a full total and reads as the whole list.
+            for f in ("ukRoles", "commercialRoles", "clinicalRoles", "rolesWithoutLocation"):
+                if f in r:
+                    FAIL(C, "%s: incomplete fetch (%s of %s) but states %s. A partial "
+                            "breakdown beside a full total is a wrong number wearing "
+                            "a right one." % (who, got, n, f))
+            if not str(r.get("breakdownWithheld") or "").strip():
+                FAIL(C, "%s: incomplete fetch with no breakdownWithheld note." % who)
+
+        # (e) THE BREAKDOWN MUST FIT INSIDE THE COUNT.
+        if r.get("complete"):
+            uk, noloc = r.get("ukRoles", 0), r.get("rolesWithoutLocation", 0)
+            if uk + noloc > n:
+                FAIL(C, "%s: %s UK plus %s without a location exceeds %s roles."
+                        % (who, uk, noloc, n))
+            for f in ("commercialRoles", "clinicalRoles"):
+                if r.get(f, 0) > n:
+                    FAIL(C, "%s: %s is %s, more than the %s roles held."
+                            % (who, f, r.get(f), n))
+
+        # (f) UK IS TRUE, FALSE OR UNKNOWN — never inferred.
+        for x in (r.get("roles") or []):
+            if x.get("uk") not in (True, False, None):
+                FAIL(C, "%s: role %r carries uk=%r. A location the company did not "
+                        "publish must stay unknown." % (who, x.get("title"), x.get("uk")))
+
+
 def main():
     offline = "--offline" in sys.argv
     as_json = "--json" in sys.argv
@@ -4565,6 +4705,11 @@ def main():
     # invented Hub link.
     check_awareness(load("awareness-days.json"))
     check_calendar(load("hub-calendar.json"))
+    # Supplier hiring signal, read from each company's own careers page. Optional
+    # like the layers above — no file means it is not built. Built, every check
+    # is one that ALREADY FAILED during the build on 28/08/2026, each time in a
+    # run that finished cleanly with a believable number.
+    check_supplier_careers(load("supplier-careers.json"))
 
     check_search_index(load(SEARCH_INDEX))
 
