@@ -295,11 +295,37 @@ def main():
     def label_tokens(label):
         return tokens(label)
 
+    # THE (supplier, term) MAP — added 28/08/2026, data/nhssc-category-map.json.
+    #
+    # Until this existed, an NHSSC row could only publish when the catalogue's
+    # own description text happened to literally contain the words of a curated
+    # type label (the `candidates` logic further down). That gate is narrow by
+    # design, and it left 976 rows held against 81 published — including most of
+    # the 101 awarded suppliers this repo cannot crawl at all, whose catalogue
+    # lines are the ONLY permitted route to them.
+    #
+    # A recorded human/agent decision, carrying its own `why`, outranks the text
+    # heuristic — same precedence the division map already has over inference on
+    # the own-site side. The heuristic stays as the fallback for pairs nobody has
+    # judged yet, so this is purely additive: nothing that published before stops
+    # publishing. A mapped category still has to be in the gated vocabulary; an
+    # unmapped pair is still held, never guessed.
+    nhssc_map = {}
+    for e in (load("data/nhssc-category-map.json").get("entries") or []
+              if os.path.exists("data/nhssc-category-map.json") else []):
+        hub = e.get("hub")
+        if not hub or not e.get("supplier") or not e.get("term"):
+            continue
+        nhssc_map[(norm(e["supplier"]), norm(e["term"]))] = (
+            hub if isinstance(hub, list) else [hub])
+
     nhssc_added, nhssc_held = 0, 0
+    nhssc_from_map = 0
     for term, rec in (nhssc.get("products") or {}).items():
         co = rec.get("supplier")
         if not co:
             continue
+        mapped_cats = nhssc_map.get((norm(co), norm(term)))
         for it in rec.get("items") or []:
             name = it.get("name") or term
             k = (norm(co), norm(name))
@@ -338,6 +364,46 @@ def main():
             # now goes through the same label-text match as the multi-
             # speciality case below — narrower, but never wrong the way the
             # bare shortcut was in either direction.
+            # A RECORDED DECISION OUTRANKS THE TEXT HEURISTIC. If this
+            # (supplier, term) pair carries a mapping in
+            # data/nhssc-category-map.json, that mapping was made by reading the
+            # catalogue's own item descriptions and carries its own `why`. It is
+            # evidence, where the block below is inference, so it wins — exactly
+            # as the division map outranks inference on the own-site side.
+            # Illegal categories are dropped rather than trusted, so a typo in
+            # the map cannot publish a category the Compare tab cannot render.
+            if mapped_cats:
+                good = [c for c in mapped_cats if c in legal]
+                if good:
+                    for cat in good:
+                        nhssc_added += 1
+                        nhssc_from_map += 1
+                        products.append({
+                            "supplier": co, "name": name,
+                            "domain": (seed.get(co) or {}).get("domain"),
+                            "division": "(NHS Supply Chain only)", "mfrCategory": None,
+                            "detail": None,
+                            "nhssc": [{"npc": it.get("npc"), "mpc": it.get("mpc"),
+                                       "desc": it.get("desc"), "pack": it.get("pack"),
+                                       "status": it.get("status"),
+                                       "nhsscName": it.get("name"),
+                                       "nhsscSupplier": it.get("supplier"),
+                                       "term": term}],
+                            "nhsscRange": None,
+                            "sources": [{"kind": "nhssc", "npc": it.get("npc"),
+                                         "owner": "NHS Supply Chain",
+                                         "url": "https://my.supplychain.nhs.uk/catalogue/"
+                                                "search?query=%s" % (it.get("npc") or "")}],
+                            "cat": cat,
+                        })
+                    continue
+                nhssc_held += 1
+                held.append({"supplier": co, "name": name,
+                             "division": "(NHS Supply Chain only)",
+                             "why": "the recorded NHSSC map entry names %s, which is not in "
+                                    "the gated vocabulary" % ", ".join(mapped_cats)})
+                continue
+
             candidates = []  # (cat, why)
             for spec_key, spec_v in vocab.items():
                 for sup in (spec_v.get("suppliers") or []):
@@ -384,6 +450,7 @@ def main():
             })
     print("  NHSSC-only rows: %d published from curated supplier/type evidence, %d held (no or ambiguous curated type)"
           % (nhssc_added, nhssc_held))
+    print("    of those, %d published from the recorded (supplier, term) map" % nhssc_from_map)
     # ------------------------------------------------------------------
 
     bycat = collections.Counter(r["cat"] for r in products)
