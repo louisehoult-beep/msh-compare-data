@@ -82,6 +82,7 @@ REFS = {
     "products.json":           "ETH-D34736E9E",
     "speciality-label-map.json":        "ETH-DF33A4F04",
     "speciality-map.json":     "ETH-DF6043FFA",
+    "supplier-careers.json":       "ETH-D503B3895",
     "supplier-index.json":     "ETH-D773506D0",
     "supplier-product-detail.json": "ETH-D2C42E102",
     "supplier-products.json":  "ETH-D12B91CCA",
