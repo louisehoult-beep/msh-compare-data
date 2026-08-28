@@ -192,7 +192,13 @@ def main():
 
     # ---- data/prep-config.json — Meeting Prep trust directory (unprofiled only) ----
     cfg = json.load(open(CFG_PATH))
-    profiled = {t['name'] for t in cfg.get('trusts', [])}
+    # Match on ODS code, not name. Name matching silently failed on
+    # 'The Newcastle Upon Tyne Hospitals NHS Foundation Trust' (ODS) versus
+    # '...upon Tyne...' (the trust's own spelling, used in its profile), so a
+    # fully profiled trust kept reappearing in the unprofiled directory and
+    # Meeting Prep showed it as having no Hub profile. The code is the identity;
+    # the display name is not, and it drifts.
+    profiled = {t['code'] for t in cfg.get('trusts', [])}
     # icb/icbName/region ride along in the directory itself. They were derived
     # here every run and then thrown away, so Meeting Prep had no ICB for an
     # unprofiled trust and the panel could not say who commissions it. Adding
@@ -201,7 +207,7 @@ def main():
     # next run, which is exactly how the supplier index lost its aliases.
     cfg['trustDirectory'] = [{k: e[k] for k in ('n', 'code', 'town', 'postcode', 'kind',
                                                 'icb', 'icbName', 'region', 'nation', 'bc')}
-                             for e in live if e['n'] not in profiled]
+                             for e in live if e['code'] not in profiled]
     cfg['trustDirectoryAsOf'] = today + ' (NHS ODS register, legally-live trusts only)'
     json.dump(cfg, open(CFG_PATH, 'w'), ensure_ascii=False, indent=1)
 
