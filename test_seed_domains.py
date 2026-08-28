@@ -97,8 +97,161 @@ untouched = [{"name": "Some Supplier Never Adjudicated", "proof": "name",
 kept, blocked = gate(untouched, refused_names)
 check("the gate touches only adjudicated names", len(kept) == 1 and not blocked)
 
+print("self-declared-foreign tier (added 28/08/2026)")
+# A foreign supplier's own site, stating its own country's registration number.
+# No UK company number exists for it (ch_number=None), so REGISTRATION can never
+# fire — this is exactly the population ch-number-is-ideal-not-mandatory-for-
+# supplier-data describes.
+foreign_html = ("<title>Absorbest AB</title><body>Absorbest AB is registered "
+                "in Sweden. Org.nr 556677-8899. Contact us.</body>")
+kind, ev, url = seeder.prove("Absorbest AB", None, [("https://absorbest.com", foreign_html)],
+                              accept_name=False, allow_foreign=True)
+check("a foreign registration number is proven as self-declared-foreign",
+      kind == "self-declared-foreign", "got %r" % (kind,))
+check("the evidence records it as self-declared, not cross-checked",
+      "self-declared" in (ev or "") and "not cross-checked" in (ev or ""))
+
+# The same page, but allow_foreign is OFF (the flag's default). No proof at all —
+# the route must not fire silently just because the page qualifies.
+kind2, _, _ = seeder.prove("Absorbest AB", None, [("https://absorbest.com", foreign_html)],
+                            accept_name=False, allow_foreign=False)
+check("self-declared-foreign never fires without --allow-foreign", kind2 is None)
+
+# THE LEAK THIS MUST NOT ALLOW: a supplier that DOES have a UK Companies House
+# number must never be proved on the weaker self-declared route, even if its
+# site happens to carry foreign-shaped registration wording (e.g. a UK company
+# quoting an EU VAT number) and allow_foreign is on. ch_number truthy must gate
+# self-declared-foreign off entirely, whatever the page says.
+uk_with_foreign_wording = ("<title>Acme Medical Ltd</title><body>Acme Medical Ltd. "
+                            "VAT number DE123456789. Registered in England, company "
+                            "number 01234567.</body>")
+kind3, ev3, _ = seeder.prove("Acme Medical Ltd", "01234567",
+                              [("https://acmemedical.co.uk", uk_with_foreign_wording)],
+                              accept_name=False, allow_foreign=True)
+check("a UK-numbered supplier proves on registration, never self-declared-foreign",
+      kind3 == "registration", "got %r" % (kind3,))
+
+# A UK supplier whose site does NOT carry its own number is refused, not routed
+# to the weaker tier as a fallback — allow_foreign only ever applies when there
+# is no UK number to check against in the first place, not when the check fails.
+uk_no_number = "<title>Acme Medical Ltd</title><body>Acme Medical Ltd. Contact us.</body>"
+kind4, _, _ = seeder.prove("Acme Medical Ltd", "01234567",
+                            [("https://acmemedical.co.uk", uk_no_number)],
+                            accept_name=False, allow_foreign=True)
+check("a UK-numbered supplier that never states its number is refused, not "
+      "downgraded to self-declared-foreign", kind4 is None)
+
+# THE OTHER LEAK: a UK company with NO matched CH record at all (a data gap in
+# company-financials.json, not evidence of being foreign) states plain UK-style
+# registration wording. FOREIGN_REG_WORDS deliberately overlaps with that
+# wording, so without UK_MARKERS this would be wrongly recorded as "overseas
+# company" — an invented fact, not an honestly weaker one.
+uk_no_ch_match = ("<title>BVM Medical Ltd</title><body>BVM Medical Ltd is "
+                   "Registered in England and Wales. Company number 07654321. "
+                   "Registered office: 1 Trade Park, Leeds.</body>")
+kind5, _, _ = seeder.prove("BVM Medical Ltd", None,
+                            [("https://bvmmedical.co.uk", uk_no_ch_match)],
+                            accept_name=False, allow_foreign=True)
+check("a UK company with no matched CH record is never labelled overseas",
+      kind5 is None, "got %r" % (kind5,))
+
+# THE THIRD LEAK: self-declared-foreign has nothing to cross-check its number
+# against (unlike "registration"), so a wrongly-guessed domain landing on some
+# OTHER real company's site would otherwise "prove" on that unrelated site's own
+# number. Found 28/08/2026 on a live run: "AMG Medtech Ltd" and "APR Medtech
+# Limited" both guessed to aml.co.uk and both banked the same evidence, because
+# nothing checked that either name actually appeared on that page.
+unrelated_site = ("<title>Acme Laminates Ltd</title><body>Acme Laminates Ltd. "
+                   "Registered in Ireland. CRO number 123456. Contact us.</body>")
+kind6, _, _ = seeder.prove("AMG Medtech Ltd", None,
+                            [("https://aml.co.uk", unrelated_site)],
+                            accept_name=False, allow_foreign=True)
+check("a real foreign proof on a site that never names the supplier is refused",
+      kind6 is None, "got %r" % (kind6,))
+
+# The positive case, same shape, but the site DOES name the supplier this time.
+named_foreign_site = ("<title>AMG Medtech Ltd</title><body>AMG Medtech Ltd. "
+                       "Registered in Ireland. CRO number 123456. Contact us.</body>")
+kind7, ev7, _ = seeder.prove("AMG Medtech Ltd", None,
+                              [("https://amgmedtech.ie", named_foreign_site)],
+                              accept_name=False, allow_foreign=True)
+check("the same evidence proves once the site actually names the supplier",
+      kind7 == "self-declared-foreign", "got %r" % (kind7,))
+
+# HTML-entity regression: "&amp;" must decode to "&" so UK_MARKERS can still
+# catch "England &amp; Wales" as rendered by a real browser/site.
+entity_encoded_uk = ("<title>Associated Optical Products</title><body>"
+                      "Associated Optical Products. Registered No.84121 "
+                      "England &amp; Wales.</body>")
+kind8, _, _ = seeder.prove("Associated Optical Products", None,
+                            [("https://www.associated.co.uk", entity_encoded_uk)],
+                            accept_name=False, allow_foreign=True)
+check("an HTML-entity-encoded UK marker (&amp;) still blocks the foreign route",
+      kind8 is None, "got %r" % (kind8,))
+
+# THE FOURTH LEAK: a UK footer that gives an address and a number but never
+# says "England"/"Companies House" by name — found 28/08/2026 on "Bidfood
+# Direct", a real UK company with no matched CH record, wrongly proved
+# self-declared-foreign because nothing in its footer used the exact UK
+# wording UK_MARKERS looked for.
+uk_postcode_only = ("<title>Bidfood Direct</title><body>Bidfood Direct. "
+                     "Company No. 239718, 814 Leigh Road, Slough, SL1 4AB.</body>")
+kind9, _, _ = seeder.prove("Bidfood Direct", None,
+                            [("https://www.bidfood.co.uk", uk_postcode_only)],
+                            accept_name=False, allow_foreign=True)
+check("a UK postcode next to the number blocks the foreign route even with no "
+      "explicit jurisdiction wording", kind9 is None, "got %r" % (kind9,))
+
+# THE FIFTH LEAK: the domain's own TLD is UK, independent of what the footer
+# says at all — the strongest, simplest signal available and it should refuse
+# on its own.
+uk_tld_no_markers = ("<title>Msoft eSolutions</title><body>Msoft eSolutions. "
+                      "Company Registration Number: 3472193.</body>")
+kind10, _, _ = seeder.prove("Msoft eSolutions", None,
+                             [("https://msoft.co.uk", uk_tld_no_markers)],
+                             accept_name=False, allow_foreign=True)
+check("a .co.uk domain is refused for the foreign route regardless of wording",
+      kind10 is None, "got %r" % (kind10,))
+
+# A genuinely foreign domain must still pass — the new guards must not have
+# widened into refusing everything.
+genuinely_foreign = ("<title>Cortrium ApS</title><body>Cortrium ApS is "
+                      "registered in Denmark. Company registration number "
+                      "36445335, Copenhagen.</body>")
+kind11, _, _ = seeder.prove("Cortrium ApS", None,
+                             [("https://cortrium.com", genuinely_foreign)],
+                             accept_name=False, allow_foreign=True)
+check("a genuinely foreign .com domain still proves", kind11 == "self-declared-foreign",
+      "got %r" % (kind11,))
+
+print("write-gate: self-declared-foreign is STRONG, not the weak/title tier")
+STRONG = ("registration", "self-declared-foreign")
+proven = [
+    {"name": "Absorbest AB", "proof": "self-declared-foreign", "domain": "absorbest.com"},
+    {"name": "1 Stop Medical Supplies", "proof": "name", "domain": "www.1stop.com"},
+]
+# Mirrors main()'s `if not a.accept_name: proven = [r for r in proven if
+# r["proof"] in STRONG]` — kept as a literal copy of the rule, same discipline
+# as gate() above, so this cannot drift into testing something else.
+kept_strong = [r for r in proven if r["proof"] in STRONG]
+check("self-declared-foreign survives the --accept-name gate (accept_name OFF)",
+      any(r["proof"] == "self-declared-foreign" for r in kept_strong))
+check("a title proof still does NOT survive the same gate",
+      not any(r["proof"] == "name" for r in kept_strong))
+
+# refused_name_proofs() blocking must exempt self-declared-foreign the same way
+# it already exempts registration — a name that happens to appear in the
+# REFUSED title-proof list must not block an unrelated, independently-earned
+# self-declared-foreign proof for that same name.
+refused_names_test = {"Absorbest AB"}
+blocked_test = [r for r in [{"name": "Absorbest AB", "proof": "self-declared-foreign"}]
+                if r["name"] in refused_names_test and r["proof"] not in STRONG]
+check("self-declared-foreign is not blocked by the refused-title-proof gate",
+      not blocked_test)
+
 print()
 if failures:
     print("FAILED: %d check(s) — %s" % (len(failures), ", ".join(failures)))
     sys.exit(1)
 print("gate holds — no refused title proof can reach data/supplier-seed.json")
+print("self-declared-foreign tier holds — cannot leak into the registration tier")

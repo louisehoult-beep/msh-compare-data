@@ -60,11 +60,24 @@ Evidence is recorded beside every domain it writes — the proof kind, the strin
 that matched, the URL it was read from and the date — so a reader can judge it
 later without re-running anything.
 
+A THIRD PROOF, ADDED 28/08/2026 — SELF-DECLARED-FOREIGN. A missing UK Companies
+House number must never block pulling a supplier's website (root rule, see the
+memory ch-number-is-ideal-not-mandatory-for-supplier-data) — it only means
+REGISTRATION is impossible by construction, because there is nothing in
+company-financials.json to cross-check against. --allow-foreign tries a
+distinctly weaker route for exactly that population: the site states ITS OWN
+country's registration or VAT number beside registration wording. Same
+evidence SHAPE as REGISTRATION, but self-declared, not independently verified
+— recorded as proof kind "self-declared-foreign" and NEVER merged into the
+"registration" tier. It only ever runs for a supplier with no UK CH number at
+all; a supplier that has one is always proved or refused on that number.
+
 USAGE
   python3 scripts/seed_supplier_domains.py                 # report only, writes nothing
   python3 scripts/seed_supplier_domains.py --limit 25      # try 25 suppliers
   python3 scripts/seed_supplier_domains.py --write         # merge proven domains into the seed
   python3 scripts/seed_supplier_domains.py --accept-name --write
+  python3 scripts/seed_supplier_domains.py --allow-foreign --retry-unproven --write
 
 Writes data/supplier-seed.json (the curated, human-owned file — the index rebuild
 copies seed records wholesale, so a domain put here survives; one put straight
@@ -75,6 +88,7 @@ import argparse
 import concurrent.futures as cf
 import datetime as dt
 import gzip
+import html as html_entities
 import io
 import json
 import re
@@ -161,6 +175,74 @@ REG_WORDS = re.compile(
     r"reg(?:istration)?\.?\s*(?:number|no)|companies\s+house|vat\s+(?:number|no))",
     re.I)
 
+# SELF-DECLARED-FOREIGN — added 28/08/2026, see the memory
+# ch-number-is-ideal-not-mandatory-for-supplier-data and root rule 14. A missing
+# UK Companies House number must never block pulling a supplier's website — it
+# just means the strong REGISTRATION cross-check (above) is impossible by
+# construction for a company with no UK number. This is a SEPARATE, weaker proof
+# for exactly that population: the site publishes ITS OWN country's company or
+# VAT registration number beside registration wording. Same shape as REGISTRATION
+# — a live site stating a real-looking registration number, not a name echo — but
+# there is no company-financials.json entry to cross-check the number against, so
+# it is self-declared, not independently verified. NEVER merged into the
+# "registration" / confirmed tier: recorded as proof kind "self-declared-foreign"
+# and gated so it is only ever tried when this supplier has no CH number on
+# record at all (see prove()). Follows the confirmed/probable split already used
+# for company numbers (company-number-confidence-two-files) rather than
+# inventing a new shape.
+FOREIGN_REG_WORDS = re.compile(
+    r"(registered\s+(?:in|number|no|office|company)|company\s+(?:number|no|reg)|"
+    r"reg(?:istration)?\.?\s*(?:number|no)|commercial\s+register|trade\s+register|"
+    r"handelsregister|handelsregisternummer|kvk[\s.-]*(?:number|no|nummer)?|"
+    r"siren|siret|organisation\s*(?:number|no|nr)|org\.?\s*(?:number|no|nr)|"
+    r"chamber\s+of\s+commerce|vat\s+(?:number|no)|"
+    r"ust[\s.-]?idnr|umsatzsteuer|btw[\s.-]?nummer)",
+    re.I)
+
+# A registration/VAT-number-shaped token: mostly letters and digits, at least one
+# digit, plausible length. This is deliberately loose — it is not being
+# cross-checked against anything, so precision comes from FOREIGN_REG_WORDS
+# proximity and human review of the recorded evidence string, not from the token
+# shape alone.
+FOREIGN_NUM_TOKEN = re.compile(r"\b[A-Z]{0,3}[0-9][0-9A-Z .\-/]{3,19}[0-9A-Z]\b")
+
+# THE GUARD THAT MATTERS MOST FOR THIS TIER. FOREIGN_REG_WORDS above deliberately
+# overlaps with the exact wording a UK site uses ("registered in", "company
+# number") — that overlap is needed to catch UK-style phrasing on an EU site
+# that also states its own home-country number. But it means a UK company that
+# simply has no matched Companies House record in company-financials.json (a
+# data gap, not evidence of being foreign) can state "Registered in England,
+# company number 07654321" and match every check above. Recording that as
+# "self-declared-foreign ... overseas company" would be an invented fact — the
+# opposite of what this tier exists to do. If any of these UK markers appear
+# near the match, refuse the foreign route entirely: this population needs a
+# UK company-number match in company-financials.json, not this tier.
+UK_MARKERS = re.compile(
+    r"(companies\s+house|england\s*(?:and|&)\s*wales|registered\s+in\s+england|"
+    r"registered\s+in\s+scotland|registered\s+in\s+wales|"
+    r"registered\s+in\s+northern\s+ireland|united\s+kingdom|"
+    r"registered\s+office.{0,40}\b(?:england|scotland|wales|uk)\b|"
+    # A UK postcode next to the number is as strong a marker as the word
+    # "England" — a footer that reads "Company No. 239718, 814 Leigh Road,
+    # Slough, SL1 4AB" never says "England" or "Companies House" anywhere near
+    # it, and would otherwise slip straight past the wording-only markers
+    # above. Found 28/08/2026 on "Bidfood Direct": a real UK company (a
+    # data gap in company-financials.json, not evidence of being foreign).
+    r"\b[A-Z]{1,2}[0-9][A-Z0-9]?\s?[0-9][A-Z]{2}\b)", re.I)
+
+# A UK top-level domain is, on its own, as strong a signal as any wording
+# marker: a company trading on .uk/.co.uk/.org.uk is UK-based for the purposes
+# of this proof, whatever its footer says or omits. Checked against the URL
+# the page was actually read from, not the guessed candidate, so a redirect
+# still gets caught.
+UK_TLD = re.compile(r"\.(?:uk)$", re.I)
+
+# Extra TLDs worth trying only when a supplier has no UK Companies House number,
+# i.e. it may genuinely be a foreign entity trading under its own country's
+# domain. Kept separate from TLDS so a UK sweep never pays for these probes.
+TLDS_FOREIGN = (".de", ".nl", ".fr", ".se", ".dk", ".no", ".fi", ".be", ".ch",
+                ".at", ".es", ".it", ".ie", ".us")
+
 
 def norm(s):
     return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9]+", " ", str(s).lower())).strip()
@@ -219,7 +301,7 @@ def slugs(name):
     return out
 
 
-def candidates(name, aliases, registered):
+def candidates(name, aliases, registered, extra_tlds=()):
     """Domains worth trying, in order. Generation is cheap; proof is what counts.
 
     TLD-MAJOR ORDER, AND IT MATTERS. try_supplier() takes only the first
@@ -228,6 +310,10 @@ def candidates(name, aliases, registered):
     first label's TLDs, which with the widened TLDS meant a supplier's initialism
     was generated and then never tried. Sweeping .co.uk across all labels first,
     then .com across all labels, reaches wms.co.uk at position 5 instead of 50.
+
+    extra_tlds appends further TLDs to try (e.g. TLDS_FOREIGN) — kept a separate
+    parameter rather than folded into TLDS so ordinary UK sweeps never pay for
+    probes to .de/.se/etc unless the caller explicitly asks for them.
     """
     labels, seen_label = [], set()
     names = [name] + [a for a in (aliases or []) if a != name]
@@ -240,7 +326,7 @@ def candidates(name, aliases, registered):
                 labels.append(label)
 
     seen, out = set(), []
-    for tld in TLDS:
+    for tld in TLDS + tuple(extra_tlds):
         for label in labels:
             d = label + tld
             if d not in seen:
@@ -406,6 +492,14 @@ def fetch(url):
 def text_of(html):
     t = re.sub(r"(?is)<(script|style|noscript)[^>]*>.*?</\1>", " ", html or "")
     t = re.sub(r"(?s)<[^>]+>", " ", t)
+    # DECODE HTML ENTITIES. Found 28/08/2026: a UK site rendering "England &amp;
+    # Wales" left the literal string "&amp;" in the text, which UK_MARKERS'
+    # `england\s*(?:and|&)\s*wales` cannot match — so a UK company with no
+    # matched CH record ("Associated Optical Products", Registered No. 84121,
+    # England &amp; Wales) slipped past the guard and was nearly recorded as
+    # self-declared-foreign. Decoding here fixes every downstream text match
+    # (REG_WORDS, UK_MARKERS, title matching), not just this one case.
+    t = html_entities.unescape(t)
     return re.sub(r"\s+", " ", t)
 
 
@@ -429,8 +523,23 @@ def number_forms(ch_number):
     return [f for f in forms if len(f) >= 6]
 
 
-def prove(name, ch_number, pages, accept_name):
-    """Return (proof_kind, evidence, url) or (None, why_refused, None)."""
+def prove(name, ch_number, pages, accept_name, allow_foreign=False):
+    """Return (proof_kind, evidence, url) or (None, why_refused, None).
+
+    Proof kinds, strongest first:
+      registration          UK number, cross-checked against ch_number (from
+                             company-financials.json).
+      self-declared-foreign the site states ITS OWN country's registration/VAT
+                             number beside registration wording, but ch_number
+                             is falsy — this supplier has no UK CH number to
+                             cross-check against at all, so the number is
+                             self-declared, not independently verified. Only
+                             tried when allow_foreign is set AND ch_number is
+                             falsy: a supplier that DOES have a UK number must
+                             be proved (or refused) on that number, never on
+                             this weaker route.
+      name                   weak, --accept-name only, see the module docstring.
+    """
     c = core(name)
     for url, html in pages:
         if not html:
@@ -440,7 +549,7 @@ def prove(name, ch_number, pages, accept_name):
         if any(p in low for p in PARKED):
             return None, "candidate answered but is a parked or for-sale domain", None
 
-        # REGISTRATION — the strong proof.
+        # REGISTRATION — the strong proof, UK-cross-checked.
         for form in number_forms(ch_number):
             for m in re.finditer(re.escape(form), body, re.I):
                 window = body[max(0, m.start() - 160):m.end() + 160]
@@ -448,6 +557,44 @@ def prove(name, ch_number, pages, accept_name):
                     return ("registration",
                             "site states registration number %s (%s)" % (
                                 form, re.sub(r"\s+", " ", window.strip())[:180]),
+                            url)
+
+        # SELF-DECLARED-FOREIGN — only reachable when this supplier has no UK CH
+        # number at all (ch_number falsy). A UK-numbered supplier can never fall
+        # through to this branch, however weak its registration match above.
+        #
+        # NAME MUST ALSO APPEAR ON THE SITE, AND THIS IS NOT OPTIONAL. Unlike
+        # REGISTRATION, which cross-checks a SPECIFIC number against
+        # company-financials.json, this tier has nothing to cross-check the
+        # number against — so without the supplier's own name appearing
+        # somewhere on the page, a wrongly-guessed domain that happens to land
+        # on some unrelated company's real site would still "prove" on the
+        # strength of THAT company's own registration number, which identifies
+        # nobody the seed cares about. Found 28/08/2026: "AMG Medtech Ltd" and
+        # "APR Medtech Limited" both guessed to aml.co.uk and both would have
+        # been recorded on that one unrelated site's number without this check
+        # — the exact four-Abbott-entities danger this file opens with.
+        host = re.sub(r"^https?://", "", url or "").split("/")[0]
+        if allow_foreign and not ch_number and not UK_TLD.search(host) \
+                and c and len(c) >= DISTINCTIVE_MIN \
+                and c not in STOP_CORES \
+                and c.replace(" ", "") in norm(body).replace(" ", ""):
+            for m in FOREIGN_REG_WORDS.finditer(body):
+                window = body[m.start():m.end() + 140]
+                context = body[max(0, m.start() - 200):m.end() + 200]
+                if UK_MARKERS.search(context):
+                    # This reads as a UK company with no matched CH record, not
+                    # a foreign one — see the UK_MARKERS docstring. Do not treat
+                    # it as evidence either way; keep scanning other matches.
+                    continue
+                tail = window[len(m.group(0)):]
+                num = FOREIGN_NUM_TOKEN.search(tail)
+                if num:
+                    return ("self-declared-foreign",
+                            "site names the supplier and states an overseas "
+                            "registration/VAT number, self-declared and not "
+                            "cross-checked against any UK record (%s)" %
+                            re.sub(r"\s+", " ", window.strip())[:180],
                             url)
 
     if accept_name and c and len(c) >= DISTINCTIVE_MIN and c not in STOP_CORES:
@@ -464,8 +611,11 @@ def prove(name, ch_number, pages, accept_name):
 def try_supplier(rec, ch_number, max_candidates):
     name = rec["name"]
     tried = []
+    num = (ch_number or {}).get("companyNumber")
+    extra_tlds = TLDS_FOREIGN if (try_supplier.allow_foreign and not num) else ()
     guessed = candidates(name, rec.get("aliases"),
-                         (ch_number or {}).get("registeredName"))[:max_candidates]
+                         (ch_number or {}).get("registeredName"),
+                         extra_tlds=extra_tlds)[:max_candidates]
     # Guesses first: they cost nothing and catch the easy majority. Search only
     # for what the guess could not reach, so a full sweep does not hammer a
     # search engine 250 times for domains it was going to find anyway.
@@ -492,8 +642,8 @@ def try_supplier(rec, ch_number, max_candidates):
             # paid for thirteen more requests it did not need. Most proofs land
             # on /contact or /terms-and-conditions, so the common case now costs
             # two or three fetches instead of fifteen.
-            num = (ch_number or {}).get("companyNumber")
-            kind, ev, url = prove(name, num, pages, try_supplier.accept_name)
+            kind, ev, url = prove(name, num, pages, try_supplier.accept_name,
+                                  try_supplier.allow_foreign)
             base = re.match(r"(https?://[^/]+)", final or "")
             if not kind and "parked" in (ev or ""):
                 base = None          # a for-sale page has no legal pages to read
@@ -504,7 +654,8 @@ def try_supplier(rec, ch_number, max_candidates):
                         continue
                     pages.append((u, h))
                     kind, ev, url = prove(name, num, [(u, h)],
-                                          try_supplier.accept_name)
+                                          try_supplier.accept_name,
+                                          try_supplier.allow_foreign)
                     if kind:
                         break
                 else:
@@ -512,12 +663,13 @@ def try_supplier(rec, ch_number, max_candidates):
                     # refusal reason describes everything that was read, not just
                     # the last page fetched.
                     kind, ev, url = prove(name, num, pages,
-                                          try_supplier.accept_name)
+                                          try_supplier.accept_name,
+                                          try_supplier.allow_foreign)
             if kind:
                 return {"name": name, "proof": kind, "foundBy": how,
                         "domain": re.sub(r"^https?://", "", final).split("/")[0],
                         "url": url, "evidence": ev,
-                        "companyNumber": (ch_number or {}).get("companyNumber"),
+                        "companyNumber": num,
                         "checked": dt.date.today().isoformat()}
             tried.append((d, ev))
             break
@@ -530,6 +682,7 @@ def try_supplier(rec, ch_number, max_candidates):
 try_supplier.accept_name = False
 try_supplier.search = False
 try_supplier.supplied = {}
+try_supplier.allow_foreign = False
 
 
 def refused_name_proofs():
@@ -592,9 +745,17 @@ def main():
                     help="re-probe only the suppliers the report has no proof for, "
                          "keeping proven and REFUSED results banked (use after widening "
                          "the candidate net or supplying a --candidates-file)")
+    ap.add_argument("--allow-foreign", action="store_true",
+                    help="for suppliers with NO UK Companies House number on record, "
+                         "also try foreign TLDs and accept a self-declared overseas "
+                         "registration/VAT number as proof (kind 'self-declared-foreign' "
+                         "— never cross-checked, never merged into the 'registration' "
+                         "tier). Has no effect on any supplier that DOES have a UK "
+                         "number — those are still proved or refused on that number.")
     a = ap.parse_args()
     try_supplier.accept_name = a.accept_name
     try_supplier.search = a.search
+    try_supplier.allow_foreign = a.allow_foreign
     if a.candidates_file:
         # Underscore keys are the file's own notes on where its candidates came
         # from and how to add more. They are not supplier names, and counting
@@ -701,11 +862,14 @@ def main():
 
     proven = [r for r in results if r["proof"]]
     byreg = [r for r in proven if r["proof"] == "registration"]
+    byforeign = [r for r in proven if r["proof"] == "self-declared-foreign"]
     print("\nproven      : %d of %d attempted" % (len(proven), len(results)))
-    print("  by registration number : %d" % len(byreg))
-    print("  found by name guess    : %d" % sum(1 for r in proven if r.get("foundBy") == "guess"))
-    print("  found by search        : %d" % sum(1 for r in proven if r.get("foundBy") == "search"))
-    print("  by site title          : %d" % (len(proven) - len(byreg)))
+    print("  by registration number      : %d" % len(byreg))
+    print("  self-declared foreign number: %d (not cross-checked — see process doc)"
+          % len(byforeign))
+    print("  found by name guess         : %d" % sum(1 for r in proven if r.get("foundBy") == "guess"))
+    print("  found by search             : %d" % sum(1 for r in proven if r.get("foundBy") == "search"))
+    print("  by site title                : %d" % (len(proven) - len(byreg) - len(byforeign)))
     print("unproven    : %d (left alone — they keep their curated list)"
           % (len(results) - len(proven)))
 
@@ -750,15 +914,22 @@ def main():
     # --fresh that lands on the same guessed domain and "proves" it by title
     # again is dropped here rather than seeded. 124 names sit behind this.
     refused = refused_name_proofs()
-    blocked = [r for r in proven if r["name"] in refused and r["proof"] != "registration"]
+    STRONG = ("registration", "self-declared-foreign")
+    blocked = [r for r in proven if r["name"] in refused and r["proof"] not in STRONG]
     if blocked:
         proven = [r for r in proven if r not in blocked]
 
+    # STRONG proofs (registration, self-declared-foreign) always write.
+    # self-declared-foreign is NOT the weak/circular title tier --accept-name
+    # gates below — it requires an actual registration/VAT number on the live
+    # site, the same shape of evidence as "registration", just unable to be
+    # cross-checked against a UK record. Gating it behind --accept-name would
+    # wrongly lump it in with the discredited name-in-title route.
     skipped_weak = 0
     if not a.accept_name:
-        weak = [r for r in proven if r["proof"] != "registration"]
+        weak = [r for r in proven if r["proof"] not in STRONG]
         skipped_weak = len(weak)
-        proven = [r for r in proven if r["proof"] == "registration"]
+        proven = [r for r in proven if r["proof"] in STRONG]
 
     by_name = {s["name"]: s for s in seed["suppliers"]}
     added = duplicate = 0
@@ -775,12 +946,26 @@ def main():
                for l in (rec.get("links") or [])):
             duplicate += 1
             continue
+        if r["proof"] == "registration":
+            source = "Proved %s by registration number on %s: %s" % (
+                r["domain"], r["checked"], r["evidence"])
+        elif r["proof"] == "self-declared-foreign":
+            # HONEST CONFIDENCE, NOT FALSE PARITY. This wording is deliberately
+            # different from the "registration" wording above — the Hub must
+            # never present this the same as a UK-cross-checked proof. See
+            # ch-number-is-ideal-not-mandatory-for-supplier-data.
+            source = ("Identified from the supplier's own site; no UK Companies "
+                      "House record to cross-check (overseas company). Site "
+                      "states its own registration/VAT number as of %s: %s" % (
+                          r["checked"], r["evidence"]))
+        else:
+            source = "Proved %s by site title on %s: %s" % (
+                r["domain"], r["checked"], r["evidence"])
         rec.setdefault("links", []).append({
             "label": "Company website",
             "url": "https://" + r["domain"],
-            "source": "Proved %s by %s on %s: %s" % (
-                r["domain"], "registration number" if r["proof"] == "registration"
-                else "site title", r["checked"], r["evidence"])})
+            "route": r["proof"],
+            "source": source})
         added += 1
     # MATCH THE FILE'S OWN FORMAT. supplier-seed.json is stored minified on a
     # single line with no trailing newline. Writing it back pretty-printed is a
