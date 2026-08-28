@@ -30,6 +30,7 @@
 #   ./wt.sh <name>            create or re-enter a worktree, print its path
 #   ./wt.sh --list            every worktree, with its state
 #   ./wt.sh --remove <name>   remove one (refuses if it holds work)
+#   ./wt.sh --for-task <name> unattended: clean checkout at origin/main, or exit 3
 #
 #   Typical session:
 #       cd "$(./wt.sh trust-profiles-batch-8)"
@@ -85,6 +86,67 @@ if [ "${1:-}" = "--remove" ]; then
   git worktree remove "$WT"
   [ -n "$BRANCH" ] && [ "$BRANCH" != "HEAD" ] && git branch -D "$BRANCH" >/dev/null 2>&1 || true
   echo "removed $NAME"
+  exit 0
+fi
+
+# ------------------------------------------------------------------ --for-task
+#
+# Unattended entry point. A scheduled task must never have to judge whose work is
+# in the tree — that judgement is what destroyed the Delta Surgical record on
+# 26/08/2026, and an unattended run has nobody to ask. So this either hands back a
+# clean checkout at origin/main, or it refuses and says why. It never discards.
+#
+#   WT="$(./wt.sh --for-task supplier-deep-capture)" || { report FAILED; exit; }
+#
+# Exit 0 = $WT is yours, clean, current. Exit 3 = last run left work behind; the
+# task should report FAILED with the message and stop, so a human can look.
+if [ "${1:-}" = "--for-task" ]; then
+  NAME="${2:-}"; [ -n "$NAME" ] || usage
+  WT="$ROOT/$NAME"
+
+  if [ ! -d "$WT" ]; then
+    mkdir -p "$ROOT"
+    git fetch --quiet origin
+    BRANCH="wt/$NAME"
+    if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
+      git worktree add "$WT" "$BRANCH" >&2
+    else
+      git worktree add -b "$BRANCH" "$WT" origin/main >&2
+    fi
+  fi
+
+  git -C "$WT" fetch --quiet origin
+
+  # Same definition of "destroyable work" the Stop guard uses: any tracked change,
+  # plus untracked files under data/ or app/ that are not dated backups.
+  LEFTOVER="$(git -C "$WT" status --porcelain | awk '
+    substr($0,1,2) == "??" {
+      p = substr($0,4)
+      if (tolower(p) ~ /backup/) next
+      if (p !~ /^(data|app)\//) next
+      print "    untracked  " p; next
+    }
+    { print "    " substr($0,1,2) " " substr($0,4) }')"
+  if [ -n "$LEFTOVER" ]; then
+    echo "REFUSING: $NAME still holds work from a previous run:" >&2
+    echo "$LEFTOVER" >&2
+    echo "Land it or revert it by hand. This run must not start on top of it, and" >&2
+    echo "must not discard it — that is how the Delta Surgical record was lost." >&2
+    exit 3
+  fi
+
+  AHEAD="$(git -C "$WT" rev-list --count origin/main..HEAD 2>/dev/null || echo 0)"
+  if [ "$AHEAD" != "0" ]; then
+    echo "REFUSING: $NAME holds $AHEAD commit(s) that never reached origin:" >&2
+    git -C "$WT" --no-pager log --oneline origin/main..HEAD | sed 's/^/    /' >&2
+    echo "A previous run committed and failed to push. Read them, then land or drop" >&2
+    echo "them by hand before this task runs again." >&2
+    exit 3
+  fi
+
+  # Proven clean and nothing unpushed, so this discards nothing.
+  git -C "$WT" reset --quiet --hard origin/main
+  echo "$WT"
   exit 0
 fi
 
