@@ -133,13 +133,31 @@ async def worker(browser, batch, results, counter, total):
             for p in sorted(found, key=lambda x: (1 if x['status'] else 0)):
                 if p['npc'] in seen: continue
                 seen.add(p['npc']); keep.append(p)
-            # NEVER SHRINK AN ENTRY. This sweep is deliberately shallow — six items
-            # per product name across ~900 names. supplier-deep-capture writes
-            # supplier-scoped captures into the same file (hundreds of rows for one
-            # brand term), and truncating those to six here would silently throw the
-            # deep work away every Monday. Same principle as the 0.8x abort below:
-            # a refresh may add, it may not degrade.
-            fresh = {'supplier': job['supplier'], 'query': used_q, 'items': keep[:6]}
+            # NEVER SHRINK AN ENTRY. supplier-deep-capture writes supplier-scoped
+            # captures into the same file (hundreds of rows for one brand term),
+            # and truncating those here would silently throw the deep work away
+            # every Monday. Same principle as the 0.8x abort below: a refresh may
+            # add, it may not degrade.
+            #
+            # CAP RAISED 6 -> 60, 28/08/2026. The cap truncates cards ALREADY
+            # scraped from the one search-results page this job loads, so raising
+            # it costs no extra request and no extra runtime — it only stops us
+            # discarding catalogue lines we had already fetched and verified.
+            #
+            # THE EVIDENCE THE CAP WAS BINDING, measured on the cache before the
+            # change: 824 terms held 4,991 items, and **504 of those 824 terms
+            # (61%) sat at exactly 6**. A real catalogue distribution tails off
+            # smoothly; a spike of 504 terms landing on precisely the cap value
+            # is the signature of truncation, not of the catalogue running out.
+            # (The two entries at 134 and 1,062 items are supplier-deep-capture's
+            # supplier-scoped writes, which the never-shrink guard below keeps.)
+            # The NHS Supply Chain catalogue is the buyer's own authoritative
+            # list and the only route this repo has to the manufacturers whose
+            # own sites forbid crawling (Coloplast, Smith+Nephew, B.Braun,
+            # Hartmann and 97 others), so discarding their lines was the single
+            # biggest self-inflicted coverage gap in the Differentiator.
+            NHSSC_ITEM_CAP = 60
+            fresh = {'supplier': job['supplier'], 'query': used_q, 'items': keep[:NHSSC_ITEM_CAP]}
             if prev_is_sound and len(prev.get('items') or []) > len(fresh['items']):
                 prev_keep = dict(prev)
                 prev_keep['query'] = prev.get('query') or used_q
