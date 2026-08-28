@@ -4,3 +4,9 @@
 # file -merge makes git REFUSE rather than stitch; the workflow then re-derives
 # it (scripts/refresh_company_press.py --merge), which is the documented fix.
 data/company-press.json -merge
+
+# Same reasoning, added 28/08/2026 with the MHRA alerts refresh workflow.
+# refresh_mhra_alerts.py rebuilds this file additively against origin's latest
+# copy on a push conflict (git fetch + reset --hard + rerun) rather than ever
+# text-merging it — -merge makes that the only path git will allow.
+data/mhra-alerts.json -merge

@@ -1,0 +1,107 @@
+name: MHRA alerts refresh (Regulatory Desk, page 3483)
+
+# WHY THIS WORKFLOW EXISTS (added 28/08/2026)
+#
+# scripts/refresh_mhra_alerts.py and data/mhra-alerts.json were added 26/08/2026
+# for the MHRA Regulatory Desk (WP page 3483, medsalesintelligencehub.co.uk), and
+# the page itself already fetches this file live client-side:
+#   https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/mhra-alerts.json
+# But nothing ever ran the script on a schedule — it was a one-off manual commit.
+# The page promises members "Refreshed daily straight from MHRA's own gov.uk
+# feed"; this workflow is what makes that true. Found and fixed as part of the
+# 28/08/2026 Hub gap audit (see hub-gap-audit.md, "MHRA Regulatory Desk (3483)
+# has no builder in cloud-pipeline/").
+#
+# NOTE: no page-rebuild step is needed here. Unlike most other Hub pages, 3483
+# reads data/mhra-alerts.json directly via its own inline <script> at page-load
+# time (fetch() against the raw GitHub URL above) — the WP page itself was
+# already built that way on 26/08/2026. Committing the refreshed JSON to main
+# IS the publish; there is no separate page-builder/publish_*.py step to run.
+#
+# scripts/refresh_mhra_alerts.py is idempotent and additive: it fetches MHRA's
+# public feed fresh every run and merges by URL into the existing `_rows`, so a
+# rerun against origin's latest file after a push conflict reproduces the same
+# result — no --merge/re-derive flag needed (contrast company-press.yml, whose
+# generated file needs a real re-derive on conflict).
+#
+# ⚠️ NEEDS NO SECRET. It reads MHRA's public gov.uk API only.
+#
+# ⚠️ NOTHING ELSE MAY WRITE data/mhra-alerts.json. This is its only writer.
+
+on:
+  schedule:
+    # 02:50 UTC daily — ahead of company-press (01:40, different file) and clear
+    # of supplier-capture (02:20) and refresh.yml (03:15), so this queues rather
+    # than collides with them under the shared concurrency group below.
+    - cron: "50 2 * * *"
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Lookback window in days (default 8; use e.g. 30 to catch up after an outage)"
+        required: false
+        default: "8"
+
+# Same reason as every other writer in this repo: they share one branch, and a
+# push landing mid-window elsewhere has previously cost a writer its work.
+# Serialise rather than race.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  mhra-alerts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Refresh MHRA device-relevant alerts
+        run: python3 scripts/refresh_mhra_alerts.py --days "${{ github.event.inputs.days || 8 }}"
+
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      # A push to this repo is a live publish to paying members within seconds.
+      # There is no staging step and no review. If this fails, the data is
+      # wrong: fix the data, never loosen the check. Root rule 13.
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "mhra-alerts-bot"
+          git config user.email "actions@github.com"
+          git add data/mhra-alerts.json
+          git diff --cached --quiet || git commit -m "MHRA alerts refresh $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first), attempt $attempt of 5."
+            # Idempotent/additive by construction (see note above): re-fetch MHRA's
+            # feed fresh against origin's latest file rather than trying to text-merge
+            # the generated JSON.
+            git fetch origin
+            git reset --hard origin/main
+            python3 scripts/refresh_mhra_alerts.py --days "${{ github.event.inputs.days || 8 }}"
+            python3 scripts/stamp_notice.py
+            python3 verify.py || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
+            git add data/mhra-alerts.json
+            git diff --cached --quiet || git commit -m "MHRA alerts refresh $(date -u +%F) (retry)"
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi
