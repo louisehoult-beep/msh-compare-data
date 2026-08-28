@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-08-27",
+ "lastRun": "2026-08-28",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -114,7 +114,19 @@
   "BVM Medical Ltd",
   "C&P Medical Trading Ltd",
   "C&S Footwear Adaptions Ltd",
-  "Cairn Technology Limited"
+  "Cairn Technology Limited",
+  "Cambridge Heartwear",
+  "Cambridge Sensors Ltd",
+  "Canonbury Products Limited",
+  "Cardiac Services",
+  "Cardiac Services UK Ltd",
+  "CardioScan Ltd",
+  "Carl Zeiss Ltd",
+  "Carleton Medical",
+  "Carrow Medical Limited",
+  "Cavagna Group UK",
+  "Ccmed Ltd",
+  "Ceannaire Medical"
  ],
  "refusals": [
   {
@@ -221,6 +233,26 @@
    "name": "BXTAccelyon",
    "reason": "Duplicate of \"BXT Accelyon Ltd\" - see that refusal. Companies House 08252168 BXTACCELYON LIMITED (active, previously ACCELYON LIMITED); own site bxta.com trading as \"BXTA\". No alias can be recorded on either record until Lou decides whether the two are merged.",
    "date": "2026-08-27"
+  },
+  {
+   "name": "Cambridge Sensors Ltd",
+   "reason": "Companies House 02668392 CAMBRIDGE SENSORS LTD (active, 9 Cardinal Park, Godmanchester, Huntingdon) gives a registered name identical to the display name, so it yields no new form. Its only previous name is ENVIRONMENTAL SENSORS LIMITED (1991-1997), a dead non-medical form that would match environmental-sensor coverage and was not recorded. The company's own sites (microdot.biz, microdotcs.com) are bot-gated and returned no readable content in this session, so no masthead or footer form could be seen. \"Cambridge Sensors\" alone is a two-token form already equal to the display name minus the suffix, and \"CSL\" was seen only on third-party directories, never on a company source. Nothing verifiable to add.",
+   "date": "2026-08-28"
+  },
+  {
+   "name": "Cardiac Services",
+   "reason": "This seed holds FIVE records for one entity family: \"Cardiac Services\", \"Cardiac Services UK Ltd\", \"SISK Healthcare (UK) Ltd trading as Cardiac Services\", \"Uniphar Medtech UK Limited T/A Cardiac Services\" and \"Uniphar Medtech T/A Synapse Medical\". Companies House NI018037 shows one legal person behind them: BUSINESS AND SCIENTIFIC SERVICES LIMITED (1984-94) then CARDIAC SERVICES LIMITED (1994-2010) then SISK HEALTHCARE (UK) LIMITED (2010-23) then UNIPHAR MEDTECH UK LIMITED, all at 6 Wildflower Way, Belfast BT12 6TA — the address on cardiac-services.com. So the only real extra forms, \"Cardiac Services Limited\" and \"Uniphar Medtech UK Limited\", are the territory of two OTHER records in this seed; recording them here would hand this record their lookups and double-count one competitor. The company's own site footer reads only \"© 2018. Cardiac Services\", adding nothing. Needs Lou's call on merging the cluster.",
+   "date": "2026-08-28"
+  },
+  {
+   "name": "Cardiac Services UK Ltd",
+   "reason": "Same position as \"Cardiac Services\", and the stronger duplicate of the two. No company is registered at Companies House as CARDIAC SERVICES UK LIMITED or CARDIAC SERVICES (UK) LTD — this is NHS Supply Chain's own rendering of the Belfast firm now trading as Uniphar Medtech UK Limited (NI018037). Its frameworks (Medical Chart Paper and Ultrasound Film, Maternity/Obstetrics/Gynaecology, Airway Management) match cardiac-services.com's stated range of cardiographs, fetal monitoring and resuscitation. Every extra form available is another record's own name, so nothing could be recorded. Needs Lou's call on merging the five-record cluster.",
+   "date": "2026-08-28"
+  },
+  {
+   "name": "CardioScan Ltd",
+   "reason": "Alias refused; speciality \"Cardiology\" WAS added. Companies House 11746846 CARDIOSCAN LTD (active, 54 Portland Place, London) is identical to the display name and has no previous names, so it yields no new form. The global site cardioscan.co footers the AUSTRALIAN parent \"CardioScan Services Pty Ltd\", which is barred as a parent name. Single-token \"CardioScan\" is a shortening, not the whole canonical name, and it is ambiguous in any case: Numed sells a \"CardioScan 11\" Holter software product under that word, so matching on it would publish another firm's coverage here.",
+   "date": "2026-08-28"
   }
  ],
  "sources": {
@@ -775,6 +807,68 @@
     "Infection prevention",
     "Theatres / surgical"
    ]
+  },
+  "Cambridge Heartwear": {
+   "aliases": [
+    "Cambridge Heartwear Limited"
+   ],
+   "verifiedOn": "2026-08-28",
+   "sources": "Companies House 09370927 registered name CAMBRIDGE HEARTWEAR LIMITED (active, Cambridge Science Park). Own site camheartwear.com masthead \"Cambridge Heartwear\", footer \"© 2026 Cambridge Heartwear\". Speciality \"Cardiology\" added from the same site's own description of HeartSense as a medical-grade ECG wearable. The Companies House PREVIOUS name CAMBRIDGE HEARTWARE LIMITED (2014-2017) was NOT added: it is a dead spelling that would collide with the unrelated US cardiac firm HeartWare."
+  },
+  "Canonbury Products Limited": {
+   "aliases": [
+    "Canonbury Products Ltd"
+   ],
+   "verifiedOn": "2026-08-28",
+   "sources": "Own site canonbury.com footer legal line \"© 2026 Canonbury Products Ltd. All Rights Reserved\" (read in the browser pane; the site is Cloudflare-gated to plain fetches). Companies House 01703228 CANONBURY PRODUCTS LIMITED (active). Bare \"Canonbury\" NOT added: it is a shortening, and a London district. \"Canonbury Healthcare\" appears only on third-party event listings, never on the company's own site, so it was not recorded."
+  },
+  "Carl Zeiss Ltd": {
+   "aliases": [
+    "Carl Zeiss Limited"
+   ],
+   "verifiedOn": "2026-08-28",
+   "sources": "ZEISS-owned micro-shop.zeiss.com/en/uk/shop/imprint gives the legal entity as \"Carl Zeiss Limited\", company number 542141, ZEISS House, 1030 Cambourne Business Park — the same number and address as zeiss.co.uk/corporate/legal-information/publisher.html, which prints \"Carl Zeiss Ltd.\". Companies House 00542141 CARL ZEISS LTD (active). \"ZEISS\" alone NOT added (single-token brand shared with Carl Zeiss Meditec AG and the wider group); the 1954-1995 previous name CARL ZEISS (OBERKOCHEN) LIMITED not added as a dead form."
+  },
+  "Carleton Medical": {
+   "aliases": [
+    "Carleton Medical Ltd"
+   ],
+   "verifiedOn": "2026-08-28",
+   "sources": "Own site carletonmedical.co.uk masthead \"CARLETON MEDICAL LTD\" and footer \"Copyright Carleton Medical Ltd. 2023\"; site address Unit 15 Greenwich Road, Maesglas Industrial Estate, Newport NP20 2NN. Speciality \"Theatres / surgical\" from the same site (\"a leading supplier of surgical lasers to the NHS and private health sector\"). \"Carleton Medical Limited\" from Companies House 06614929 was NOT added: that record's registered office is in Chesham, Buckinghamshire, shared with Carleton Optical, and the Newport site publishes no company number, so the tie is unproven."
+  },
+  "Carrow Medical Limited": {
+   "aliases": [
+    "Carrow Medical Ltd"
+   ],
+   "verifiedOn": "2026-08-28",
+   "sources": "Own site carrowmedical.com — footer legal \"Carrow Medical Limited\" (= display name) and address block \"Carrow Medical Ltd, Southolme, Trinity St, Gainsborough DN21 2EQ\", which is the new form recorded. Companies House 07374783 CARROW MEDICAL LIMITED (active, Gainsborough), same town. Specialities \"Neurosciences\" and \"Orthopaedics / spine\" from the site's own Neurosurgery, Spine Surgery and Orthopaedic Surgery sections."
+  },
+  "Cavagna Group UK": {
+   "aliases": [
+    "Cavagna Group UK Limited"
+   ],
+   "verifiedOn": "2026-08-28",
+   "sources": "Companies House 03400444 registered name CAVAGNA GROUP UK LIMITED (active). Own site cavagna.co.uk masthead \"Cavagna Group UK\", address 24 Longmoor Lane, Breaston, Derbyshire DE72 3BB. Specialities left EMPTY on purpose: the group's own page for the UK subsidiary (cavagnagroup.com/global-platform/cavagna-group-uk) describes it solely as serving \"the UK LPG industry\" and states no clinical scope, so nothing was assigned despite the NHS Supply Chain sleep-therapy framework. Previous names GAVCO 121 LIMITED and CAVAGNA GAS ENGINEERING LIMITED (both 1997-99) not added as dead forms."
+  },
+  "Ccmed Ltd": {
+   "aliases": [
+    "CCMed Limited",
+    "CCMed UK"
+   ],
+   "verifiedOn": "2026-08-28",
+   "sources": "Companies House 04028039 registered name CCMED LIMITED (active, 18 Hyde Gardens, Eastbourne). Own site ccmed.co.uk/about uses \"CCMed Ltd\" and \"CCMed UK\" (\"CCMed UK has been supplying the MoD, NHS and Private Hospitals for over 50 years\"), trading address 6F Southbourne Business Park, Eastbourne. The constituent names the About page lists — Childerhouse Medical, Chambers Medical Care, AS Pharma — were NOT added: Childerhouse Medical Limited (06546134) is a separate active company at the same Eastbourne address, so recording it here would attach another legal entity's coverage to this record."
+  },
+  "Ceannaire Medical": {
+   "aliases": [
+    "Ceannaire Medical Ltd"
+   ],
+   "verifiedOn": "2026-08-28",
+   "sources": "Own site ceannairemedical.com/about-us-1 footer legal line \"Ceannaire Medical Ltd\"; registered address Unit 1, Riverdale House, 11 Riverdale Park, Straboe, Buncrana, Co. Donegal, F93 WK10. Irish company, so no Companies House record applies."
+  },
+  "CardioScan Ltd": {
+   "aliases": [],
+   "verifiedOn": "2026-08-28",
+   "sources": "Speciality only. Own site cardioscan.co/uk/services states the UK range as Holter monitoring, 12-lead ECG reporting and 24-hour ABPM, so \"Cardiology\" was added. No alias added — see refusal."
   }
  }
 }
