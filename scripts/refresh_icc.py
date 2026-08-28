@@ -60,12 +60,28 @@ ICC_URL = "https://www.supplychain.nhs.uk/savings/information-for-clinical-choic
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(REPO, "data")
 
-# The source documents are kept outside the git repo: they are ~20MB of PDFs and
-# the repo is fetched by the live Hub tools on every page load.
-LIBRARY = os.path.expanduser(
+# The source documents are kept OUTSIDE the git repo: they are ~26MB of PDFs and
+# this repo is fetched by the live Hub tools. On Lou's machine they land in the
+# ICC library on OneDrive so we hold the evidence permanently. On a CI runner
+# that path does not exist, so they go to a scratch directory, are parsed, and
+# are discarded with the runner. Either way the committed output is the JSON.
+_ONEDRIVE_LIBRARY = os.path.expanduser(
     "~/Library/CloudStorage/OneDrive-Personal/Cowork-OS/"
     "02-Elevate-and-Thrive/Hub/ICC-Library"
 )
+
+
+def _library_path() -> str:
+    override = os.environ.get("ICC_LIBRARY")
+    if override:
+        return os.path.expanduser(override)
+    if os.path.isdir(os.path.dirname(_ONEDRIVE_LIBRARY)):
+        return _ONEDRIVE_LIBRARY
+    import tempfile
+    return os.path.join(tempfile.gettempdir(), "icc-library")
+
+
+LIBRARY = _library_path()
 
 UA = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "

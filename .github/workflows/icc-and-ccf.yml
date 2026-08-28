@@ -1,0 +1,113 @@
+name: ICC product matrices and CCF reference (monthly)
+
+# WHY THIS WORKFLOW EXISTS (added 28/08/2026)
+#
+# Two slow-moving reference sources, refreshed monthly because neither changes
+# often enough to justify a daily job.
+#
+# 1. INFORMATION FOR CLINICAL CHOICE (ICC) — NHS Supply Chain's Clinical
+#    Collaboration Teams publish, free and without login, specification-level
+#    comparison material for clinically similar products. This is the same grain
+#    as the Hub's Differentiator, authored by the NHS, and every product row
+#    carries an NPC code so it joins to nhssc-cache.json without name matching.
+#
+#    ⚠️ Only documents LINKED from the ICC page are taken. The Azure blob
+#    container does not permit listing (verified 28/08/2026) and unlinked
+#    filenames are never guessed. As at 28/08/2026 exactly ONE full Product
+#    Matrix was public (Adult ECG Electrodes, 167 products); the other 74
+#    documents are narrative support documents, not grids. Matrices generally
+#    sit behind authentication.supplychain.nhs.uk. The counts are reported every
+#    run, so a jump or a drop is visible rather than silent — if the matrix count
+#    rises, that is a genuinely good event worth acting on.
+#
+#    The ~26MB of source PDFs are NOT committed. On Lou's machine they land in
+#    the ICC library on OneDrive; on this runner they go to a scratch directory
+#    and are discarded. Only the parsed JSON is committed.
+#
+# 2. CCF REFERENCE — the 18 accredited NHS framework hosting organisations, plus
+#    NHS England's published supplier-engagement position. There is no public
+#    national register of frameworks with their awarded suppliers, but the host
+#    list answers "who runs this framework", which is the question behind most
+#    framework confusion.
+#
+#    ⚠️ The CCF step FAILS DELIBERATELY if the host count moves off 18. A changed
+#    accredited-host list is a real event that needs a human look, not a silent
+#    overwrite of a list the Hub presents as complete. When that happens, read
+#    the page, update KNOWN_HOSTS and EXPECTED_HOST_COUNT in the script, and
+#    re-run. Do not reach for --allow-count-change to make the job go green.
+#
+# ⚠️ NEEDS NO SECRET. Both sources are public.
+# ⚠️ NOTHING ELSE MAY WRITE data/icc-catalogue.json, data/icc-matrices.json or
+#    data/ccf-reference.json. This is their only writer.
+
+on:
+  schedule:
+    # 04:20 UTC on the 3rd of each month — clear of the 12th monthly job and of
+    # both new daily jobs (01:10 Atamis, 06:10 framework awards).
+    - cron: "20 4 3 * *"
+  workflow_dispatch:
+
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  icc-and-ccf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Pull the ICC documents and parse the product matrices
+        env:
+          ICC_LIBRARY: ${{ runner.temp }}/icc-library
+        run: python3 scripts/refresh_icc.py
+
+      - name: Refresh the CCF accredited framework host list
+        run: python3 scripts/refresh_ccf_reference.py
+
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      # A push to this repo is a live publish to paying members within seconds.
+      # If this fails, the data is wrong: fix the data, never loosen the check.
+      # Root rule 13.
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "icc-ccf-bot"
+          git config user.email "actions@github.com"
+          git add data/icc-catalogue.json data/icc-matrices.json data/ccf-reference.json
+          git diff --cached --quiet || git commit -m "ICC matrices and CCF reference $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first), attempt $attempt of 3."
+            git fetch origin
+            git reset --hard origin/main
+            ICC_LIBRARY="${{ runner.temp }}/icc-library" python3 scripts/refresh_icc.py
+            python3 scripts/refresh_ccf_reference.py
+            python3 scripts/stamp_notice.py
+            python3 verify.py || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
+            git add data/icc-catalogue.json data/icc-matrices.json data/ccf-reference.json
+            git diff --cached --quiet || git commit -m "ICC matrices and CCF reference $(date -u +%F) (retry)"
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 3 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi

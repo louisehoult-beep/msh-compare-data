@@ -1,0 +1,106 @@
+name: Find a Tender framework awards (daily)
+
+# WHY THIS WORKFLOW EXISTS (added 28/08/2026)
+#
+# Find a Tender publishes every above-threshold UK procurement notice as OCDS 1.1
+# JSON at an open, unauthenticated endpoint. Under the Procurement Act 2023
+# (mandatory for procurements commencing on or after 24/02/2025) that carries
+# three things the Hub could not previously assemble:
+#
+#   * the full NAMED SUPPLIER LIST on a framework award, each with a Companies
+#     House number and/or a PPON, so entity resolution is a code join rather than
+#     fuzzy name matching
+#   * contracts[].period.endDate        when the contract actually ends
+#   * contracts[].period.maxExtentDate  how far it could be extended
+#
+# This is the backbone for "who is on this framework and when does it expire".
+# It also routes around blocked operator websites: HealthTrust Europe returns 403
+# to automated fetches, but its framework awards are fully readable here.
+#
+# ⚠️ THE HEALTH-RELEVANCE RULE IS STATED IN THE OUTPUT FILE (root rule 14). Bare
+# "Trust" is deliberately not a match, because academy trusts and housing trusts
+# would flood the feed. Do not loosen it to raise the count.
+#
+# ⚠️ EVIDENCE CEILING. A supplier named on a framework award is evidence they CAN
+# supply through that framework. It is NOT evidence of uptake, volume or market
+# share at any trust. Nothing built on this file may make a share claim.
+#
+# ⚠️ NEEDS NO SECRET. The read API is open; the API key in vendor guidance is for
+# PUBLISHING notices, not reading them.
+# ⚠️ NOTHING ELSE MAY WRITE data/framework-awards.json. This is its only writer.
+#
+# The API rate-limits with HTTP 429 under sustained paging; the script backs off
+# and retries rather than dropping the window.
+
+on:
+  schedule:
+    # 06:10 UTC daily — after the 05:00 search-index/company-intelligence cluster
+    # and well clear of Atamis at 01:10, so the two new jobs never queue together.
+    - cron: "10 6 * * *"
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Lookback window in days (default 3; use e.g. 60 to backfill after an outage)"
+        required: false
+        default: "3"
+
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  framework-awards:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Pull health-relevant awards from Find a Tender
+        run: python3 scripts/refresh_framework_awards.py --days "${{ github.event.inputs.days || 3 }}"
+
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      # A push to this repo is a live publish to paying members within seconds.
+      # If this fails, the data is wrong: fix the data, never loosen the check.
+      # Root rule 13.
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "framework-awards-bot"
+          git config user.email "actions@github.com"
+          git add data/framework-awards.json
+          git diff --cached --quiet || git commit -m "Framework awards $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first), attempt $attempt of 3."
+            # The script merges by OCID against whatever store is on disk, so
+            # re-running against origin's latest reproduces the same result.
+            git fetch origin
+            git reset --hard origin/main
+            python3 scripts/refresh_framework_awards.py --days "${{ github.event.inputs.days || 3 }}"
+            python3 scripts/stamp_notice.py
+            python3 verify.py || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
+            git add data/framework-awards.json
+            git diff --cached --quiet || git commit -m "Framework awards $(date -u +%F) (retry)"
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 3 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi

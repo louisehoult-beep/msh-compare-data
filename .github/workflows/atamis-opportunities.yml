@@ -1,0 +1,101 @@
+name: Atamis Health Family opportunities (daily, one request)
+
+# WHY THIS WORKFLOW EXISTS (added 28/08/2026)
+#
+# Atamis is the NHS's single eCommercial system. Its public opportunity search
+# exposes an undocumented CSV endpoint that returns the WHOLE result set in one
+# response, so this job makes exactly ONE HTTP request per day.
+#
+# ⚠️ ONE REQUEST PER DAY IS A DELIBERATE ACCESS DECISION, NOT A PERFORMANCE
+# CHOICE. The search site's robots.txt is `Disallow: /` for every agent except
+# Googlebot, while the Atamis Terms of Use §6.1 grant OGL reproduction of public
+# website content and §10.1.1 prohibits only crawling that "impairs or disrupts
+# the Facilities". Those point in opposite directions. Lou's decision on
+# 28/08/2026 was to proceed at one request per day: a single CSV pull replaces
+# ~514 page fetches and cannot plausibly burden the service. DO NOT increase the
+# frequency, and do not add a second caller. If the position is revisited, this
+# workflow and scripts/refresh_atamis.py are the only things to turn off.
+#
+# WHAT THIS SOURCE IS FOR: Atamis carries market engagement notices, expressions
+# of interest and framework FURTHER COMPETITIONS, which are not notifiable under
+# the Procurement Act 2023 and so need never appear on Find a Tender at all. For
+# a rep already on a framework, a mini-competition is the most actionable signal
+# there is. For above-threshold notices, Find a Tender is richer and is handled
+# by framework-awards.yml instead.
+#
+# WHAT IT DOES NOT CARRY: no supplier name, no contract value, no CPV code, no
+# contract end date. Those fields exist in Atamis but sit behind supplier login.
+# Contract end dates come from Find a Tender: data/framework-awards.json.
+#
+# ⚠️ NEEDS NO SECRET. Public endpoint only.
+# ⚠️ NOTHING ELSE MAY WRITE data/atamis-opportunities.json. This is its only writer.
+
+on:
+  schedule:
+    # 01:10 UTC daily — the earliest slot in this repo, clear of company-press
+    # (01:40), supplier-capture (02:20), mhra-alerts (02:50) and refresh (03:15).
+    - cron: "10 1 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  atamis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Pull the Atamis opportunity archive (one request)
+        run: python3 scripts/refresh_atamis.py
+
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      # A push to this repo is a live publish to paying members within seconds.
+      # If this fails, the data is wrong: fix the data, never loosen the check.
+      # Root rule 13.
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "atamis-bot"
+          git config user.email "actions@github.com"
+          git add data/atamis-opportunities.json
+          git diff --cached --quiet || git commit -m "Atamis opportunities $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first), attempt $attempt of 3."
+            # The script merges by Contract Ref against whatever store is on disk,
+            # so re-running against origin's latest reproduces the same result.
+            # NOTE: this re-fetch is the one case where a second request in a day
+            # is acceptable, because the first one's work would otherwise be lost.
+            git fetch origin
+            git reset --hard origin/main
+            python3 scripts/refresh_atamis.py
+            python3 scripts/stamp_notice.py
+            python3 verify.py || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
+            git add data/atamis-opportunities.json
+            git diff --cached --quiet || git commit -m "Atamis opportunities $(date -u +%F) (retry)"
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 3 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi
