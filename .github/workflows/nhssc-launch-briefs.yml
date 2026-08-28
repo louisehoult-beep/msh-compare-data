@@ -1,0 +1,116 @@
+name: NHS Supply Chain launch briefs (weekly)
+
+# WHY THIS WORKFLOW EXISTS (added 28/08/2026)
+#
+# NHS Supply Chain publishes a launch brief for every framework it awards, in
+# plain public HTML with no login. Each carries the framework reference, dates,
+# the full named supplier list, and -- the reason this source earns its place --
+# THE SUPPLIERS BEING DELISTED AT FRAMEWORK START, with the reason and product
+# count.
+#
+# Framework MEMBERSHIP is available from several places (Find a Tender award
+# notices, NHS SBS, the host's own site). A supplier being REMOVED is published
+# almost nowhere else, and it is the most actionable fact a rep can have: it
+# names a competitor who has just lost their route to market in that category,
+# and often says where the volume went instead.
+#
+# ⚠️ THE STATED-COUNT INVARIANT IS THE POINT, DO NOT WEAKEN IT. Every brief states
+# its own supplier count in prose AND lists the suppliers. Only briefs where the
+# two agree are published; the rest are excluded and listed in the output with a
+# reason. At the 28/08/2026 baseline that is 104 of 140 briefs. The 36 exclusions
+# are not a bug to be papered over: NHS Supply Chain writes these by hand and some
+# genuinely state a count that does not match the list beneath it. Publishing a
+# supplier list we cannot verify against the page's own number would put a wrong
+# competitor set in front of a paying member.
+#
+# ⚠️ TWO SEPARATE GUARDS, AND THEY DO DIFFERENT JOBS:
+#     MIN_CLEAN_SHARE (0.60) catches a total break, e.g. the site redesigns.
+#     MAX_CLEAN_DROP  (0.15) compares against the PREVIOUS run's clean count and
+#                     is the real regression detector.
+# If either fires, the script writes nothing. Find out what changed. Do not raise
+# the published count by relaxing the invariant.
+#
+# ⚠️ WHAT THIS DATA DOES NOT PROVE. A supplier on a framework CAN supply through
+# it; that is not evidence of uptake, volume or market share at any trust. A
+# delisting means the supplier is off THIS framework from its start date. It does
+# not mean the company is in difficulty and it does not mean any given trust has
+# stopped buying from them. Report what the brief says and no more.
+#
+# ⚠️ NEEDS NO SECRET. Public HTML only. The Product Matrix and Framework Matrix
+# spreadsheets linked from each brief are behind authentication.supplychain.nhs.uk
+# and are deliberately NOT fetched.
+#
+# ⚠️ NOTHING ELSE MAY WRITE data/nhssc-launch-briefs.json. This is its only writer.
+#
+# Weekly rather than daily: frameworks are awarded on a cadence of weeks to months,
+# and a full run reads ~140 pages. There is no value in doing that every day.
+
+on:
+  schedule:
+    # 03:50 UTC on Wednesdays — its own slot, clear of the Monday (03:10) and
+    # Tuesday (03:40) weekly jobs and of every daily writer.
+    - cron: "50 3 * * 3"
+  workflow_dispatch:
+
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  launch-briefs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Read the launch briefs
+        run: python3 scripts/refresh_nhssc_launch_briefs.py
+
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      # A push to this repo is a live publish to paying members within seconds.
+      # If this fails, the data is wrong: fix the data, never loosen the check.
+      # Root rule 13.
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "launch-briefs-bot"
+          git config user.email "actions@github.com"
+          git add data/nhssc-launch-briefs.json
+          git diff --cached --quiet || git commit -m "NHSSC launch briefs $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first), attempt $attempt of 3."
+            # The script rebuilds from the live site every run, so re-running
+            # against origin's latest reproduces the same result. Note the
+            # previous-run comparison re-reads the file after the reset, which is
+            # what we want: it should compare against what is actually published.
+            git fetch origin
+            git reset --hard origin/main
+            python3 scripts/refresh_nhssc_launch_briefs.py
+            python3 scripts/stamp_notice.py
+            python3 verify.py || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
+            git add data/nhssc-launch-briefs.json
+            git diff --cached --quiet || git commit -m "NHSSC launch briefs $(date -u +%F) (retry)"
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 3 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi

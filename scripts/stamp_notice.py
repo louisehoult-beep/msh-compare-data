@@ -75,6 +75,7 @@ REFS = {
     "hub-calendar.json":                "ETH-DB8887BA0",
     "hub-search-index.json":   "ETH-D50A4C4E3",
     "interview-prep.json":     "ETH-D77050906",
+    "nhssc-launch-briefs.json":    "ETH-DFB1984CE",
     "nhssc-cache.json":        "ETH-D84BDB325",
     "pending-awards.json":     "ETH-DAFC37C6D",
     "people-moves.json":       "ETH-D4435AEAF",
