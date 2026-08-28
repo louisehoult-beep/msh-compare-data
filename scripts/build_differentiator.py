@@ -110,8 +110,13 @@ def main():
     # scripts/report_supplier_specialities.py.
 
     # (supplier, division) -> "speciality:type", the recorded human decision.
+    # kind="nhssc-term" entries live in this same file but are keyed on a
+    # catalogue search term, not a division, and are read separately further
+    # down. Excluded here explicitly rather than relying on their division
+    # being null to keep them from matching.
     mapped = {(e["supplier"], e["division"]): e["hub"]
-              for e in cmap.get("entries", []) if e.get("hub")}
+              for e in cmap.get("entries", [])
+              if e.get("hub") and e.get("kind") != "nhssc-term"}
 
     # Every legal category, so a mapping cannot invent one.
     legal = {"%s:%s" % (s, t) for s, v in vocab.items()
@@ -310,9 +315,17 @@ def main():
     # judged yet, so this is purely additive: nothing that published before stops
     # publishing. A mapped category still has to be in the gated vocabulary; an
     # unmapped pair is still held, never guessed.
+    # These live in differentiator-category-map.json alongside the division
+    # entries, tagged kind="nhssc-term", rather than in a file of their own.
+    # They are the same decision against the same gated vocabulary, differing
+    # only in what identifies the row — a catalogue search term instead of a
+    # heading on the supplier's website. Keeping them here means they sit under
+    # that file's existing traceability marker rather than needing one of their
+    # own, and there is one map to read rather than two to keep in step.
     nhssc_map = {}
-    for e in (load("data/nhssc-category-map.json").get("entries") or []
-              if os.path.exists("data/nhssc-category-map.json") else []):
+    for e in cmap.get("entries", []):
+        if e.get("kind") != "nhssc-term":
+            continue
         hub = e.get("hub")
         if not hub or not e.get("supplier") or not e.get("term"):
             continue
