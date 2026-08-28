@@ -139,7 +139,7 @@
       'Find a molecule or brand</label>' +
       '<input id="msh-hp-q" type="search" autocomplete="off" placeholder="e.g. Aripiprazole, Epilim, methylphenidate" ' +
       'style="width:100%;max-width:460px;padding:9px 12px;border:1px solid ' + LINE +
-      ';border-radius:4px;font:15px Georgia,serif;color:' + INK + '">' +
+      ';border-radius:4px;font:15px Georgia,serif;color:' + INK + ';background:#fff">' +
       '<div id="msh-hp-sug"></div></div>' +
       '<div id="msh-hp-out"></div>' +
       '<div style="margin-top:22px;padding-top:12px;border-top:1px solid ' + LINE +
