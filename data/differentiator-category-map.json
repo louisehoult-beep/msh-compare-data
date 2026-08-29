@@ -331,10 +331,10 @@
  },
  "counts": {
   "pairs": 3762,
-  "mapped": 2381,
+  "mapped": 3480,
   "notTaxonomy": 125,
   "products": 60393,
-  "productsMapped": 34812
+  "productsMapped": 47117
  },
  "entries": [
   {
@@ -7425,9 +7425,11 @@
     "Romachair Wheelchair | Det. Arm",
     "Romachair Wheelchair | Mediatric Straight"
    ],
-   "hub": null,
+   "hub": "rehab:chair",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Despite the division name, all four examples are Romachair wheelchairs, matching \"Wheelchairs and specialist seating\".",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -8374,9 +8376,11 @@
     "Powerheart G5 Defibrillator | Adult Pads with CPR Device",
     "Indoor White AED Cabinet Unlocked with Alarm"
    ],
-   "hub": null,
+   "hub": "cardiology:capital",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "AED cabinets and a Powerheart G5 defibrillator directly match \"Defibrillator / AED devices & accessories\".",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -8389,9 +8393,11 @@
     "Cutan Lotion Cartridge | 1L | Pack of 6",
     "Cutan Lotion Tube | 150ml | Pack of 12"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Cutan lotion/foam hand wash cartridges are washroom hand-hygiene consumables rather than a clinical skin-prep or PPE product.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -8404,9 +8410,11 @@
     "EXS Condoms | Mixed Flavours | Pack of 144",
     "EXS Condoms | Snug Fit | Pack of 144"
    ],
-   "hub": null,
+   "hub": "womens:sex",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lubricating jelly sachets and condoms match \"Sexual health & contraception\".",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -8623,9 +8631,11 @@
     "Instramed Adult Two Ways Mouthpieces | Pack of 200",
     "Instramed Adult One Way Mouthpieces | Pack of 200"
    ],
-   "hub": null,
+   "hub": "respiratory:diag",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "One-way and two-way spirometry mouthpieces match \"Diagnostics & spirometry\".",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -8638,9 +8648,14 @@
     "Creative SpO2 Sensor for PC-60NW/PC-60E | Y Type with Velcro Wrap | Neonate/Infant Foot | 0.5m Cable",
     "Nonin 9843 Pulse Oximeter And Co2 Detector, No Alarms"
    ],
-   "hub": null,
+   "hub": [
+    "monitoring:gen",
+    "monitoring:sens"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples show both handheld/fingertip pulse oximeter devices (non-specialist monitoring) and a dedicated SpO2 sensor probe.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -8946,9 +8961,11 @@
     "Ladies Healthcare Tunic | Round Collar | Green White Stripe/White Trim",
     "Ladies Healthcare Tunic | Round Collar | Grey White Stripe/White Trim"
    ],
-   "hub": null,
+   "hub": "workwear:scrubs",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Healthcare tunics are clinical workwear, matching \"Scrubs & clinical workwear\".",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -8961,9 +8978,11 @@
     "Invamed Super Rts | 10cm",
     "Invamed Super Rts | 5cm"
    ],
-   "hub": null,
+   "hub": "rehab:bath",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "A toilet aid and raised toilet seats (Invamed Super RTS) match \"Bathing and toileting aids\".",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -8991,9 +9010,11 @@
     "Slatted Bath Seat | 15cm",
     "Heavy Duty Bath Board | Wall Mounted"
    ],
-   "hub": null,
+   "hub": "rehab:bath",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Bath boards and a bath seat directly match \"Bathing and toileting aids\".",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -9006,9 +9027,11 @@
     "seca 535 Wireless Spot Check Vital Signs Monitor - NIBP / Pulse / SpO2, G3 Tympanic Temp",
     "seca mVSA 535 EMR-validated Spot-check Vital Signs Monitor"
    ],
-   "hub": null,
+   "hub": "monitoring:gen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Two seca spot-check vital signs monitors anchor this division to non-specialist patient monitoring devices.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -9021,9 +9044,11 @@
     "Sunflower NOMAD Medicine Cabinet | 45 Cassettes",
     "Sunflower NOMAD Medicine Cabinet | 48 Cassettes"
    ],
-   "hub": null,
+   "hub": "pharma:serv",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Sunflower NOMAD medicine cabinets are pharmacy dispensing/cassette storage equipment, matching \"Pharmacy services & equipment\".",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Pennamed Limited",
@@ -9374,9 +9399,11 @@
     "Nilaqua Biodegradable Surface & Hand Wipes – Refills | Pack of 500 Wipes",
     "Clinell Universal Sanitising Wipes Refill | Pack of 225"
    ],
-   "hub": null,
+   "hub": "skin-prep:wipe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Clinical disinfectant and sanitising wipes (Uniwipe, Nilaqua, Clinell) match \"Antimicrobial wipes & cleansing\".",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -9389,9 +9416,14 @@
     "Rectal Catheter | 4.5Fr | Non-Sterile | 15 Tests",
     "CardioChek Cholesterol & HDL Test Strips | Pack of 25"
    ],
-   "hub": null,
+   "hub": [
+    "pathology:consum",
+    "pathology:poct"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "A urine specimen container is a laboratory consumable while the CardioChek cholesterol/glucose test strips are point-of-care testing products.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Empire Medical UK Ltd",
@@ -9693,9 +9725,11 @@
     "Wood Alertamat | Farmhouse Oak | Quantec System",
     "Wood Alertamat | Farmhouse Oak | Medicare MTM6001 nc System"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "The \"Alertamat\" variants are named by nurse-call system compatibility (Quantec, Medicare MTM6001nc), indicating a sensor/alarm accessory wired into telecare call systems rather than furniture.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -9723,9 +9757,11 @@
     "Silicone 2-way Foley Catheter Exchange Kit | 16Fr | Open Tip with Guidewire",
     "Silicone 2-way Foley Catheter Exchange Kit | 14Fr | Open Tip with Guidewire"
    ],
-   "hub": null,
+   "hub": "continence:ind",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Silicone 2-way Foley catheter exchange kits match \"Indwelling (Foley) catheters\".",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -9753,9 +9789,11 @@
     "Microplast Blue Detectable Plasters | Pack of 100 Assorted",
     "Compeed Corn Medium Plasters | 1.75 x 6.0cm | Pack of 10"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Strapping tape, washproof plasters and corn plasters match \"First Aid\".",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -10050,9 +10088,11 @@
     "Pelican Pump Dispenser | Single",
     "Gojo 800 Series Bag-In-Box Dispenser | Single"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Gel holders and soap/foam dispensers are washroom hygiene hardware, matching \"Washroom, paper hygiene & waste management\".",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -10065,9 +10105,11 @@
     "Eclipse PY Socket Mop | Single",
     "Freedom Yarn Socket Mop | Single"
    ],
-   "hub": null,
+   "hub": "facilities:tools",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are socket mop heads for cleaning, matching cleaning tools & equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -10080,9 +10122,11 @@
     "Lec Countertop Fridge | 82L | Glass Door",
     "Lec Pharmacy Plus Upright Refrigerator| 158L | Bluetooth Enabled | Solid Door"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are pharmacy-grade fridges and gel packs, matching cold-chain medical fridge/freezer storage.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -10095,9 +10139,11 @@
     "HEINE XHL 3.5v Xenon Halogen Bulb",
     "HEINE 2.5v Xenon Halogen Bulb for Mini F.O. 2000, K100 Conventional, Beta100 & Alpha F.O. Ophthalmoscopes"
    ],
-   "hub": null,
+   "hub": "ophthalmology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are replacement bulbs and batteries for HEINE ophthalmoscopes, accessories to that capital diagnostic equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -10110,9 +10156,11 @@
     "Plinth Couch Cover with Breathing Hole | Light Blue",
     "Plinth Couch Cover with Breathing Hole | Green"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are covers for examination plinths/couches, matching examination couch furniture.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Gailarde Ltd",
@@ -10495,9 +10543,11 @@
     "Pedal Bin | Pastic | 60L | Yellow",
     "Pedal Bin | Pastic | 45L | Yellow"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are general pedal/waste bins, matching washroom and waste management equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -10510,9 +10560,11 @@
     "2G Guardian Generic Disposable Speculums | 4mm | Pack of 500",
     "Keeler Otoscope Disposable Speculum | Pack of 100"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are ear specula and otoscope light modules, matching ENT instruments & consumables.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Scala Surgical Ltd",
@@ -10781,9 +10833,11 @@
     "Super Professional W6 | Floral Disinfectant | 5L",
     "Super Professional W5 | Pine Disinfectant | 5L"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are surface disinfectants and sanitisers, matching cleaning chemicals & consumables.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -10796,9 +10850,11 @@
     "ImperialSpec Cusco Vaginal Speculum with Smoke Extractor | Pack of 25",
     "MediScope Anoscope with Light | Pack of 25"
    ],
-   "hub": null,
+   "hub": "womens:gyn",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are predominantly vaginal specula, matching gynaecology & examination.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -10811,9 +10867,11 @@
     "Accoson AccoView 300 LED Ophthalmoscope | Hard Pouch",
     "Welch Allyn Reusable Ear Speculums | Set of 4"
    ],
-   "hub": null,
+   "hub": "ophthalmology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are LED ophthalmoscope devices, matching ophthalmology capital equipment & imaging.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -10826,9 +10884,11 @@
     "BD Venflon Peripheral I.V. Cannula with Injection Valve | Orange x 14GA, 2.0 x 45mm, 270ml/min | Pack of 50",
     "Terumo Surflo Winged IV Cannula | Orange | 25G x 19mm | Pack of 50"
    ],
-   "hub": null,
+   "hub": "vascular:pivc",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are winged and peripheral IV cannulae, an exact match for peripheral IV cannula.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11235,9 +11295,11 @@
     "Rocialle Single-Use Implant Removal Kit",
     "Instramed IUCD Pack No. 9"
    ],
-   "hub": null,
+   "hub": "womens:sex",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are IUD/IUCD fitting kits and contraceptive implant removal kits, matching sexual health & contraception.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11265,9 +11327,11 @@
     "First Aid Kit in Standard Box | Medium | BS8599-1 Compliant",
     "Blue Dot Catering First Aid Kit BS 8599-1 (2019) | Medium | Single"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are BS8599-1 compliant first aid kits, an exact match for First Aid.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11280,9 +11344,11 @@
     "Rail Mount System | Brackets and Sliding Clamp | 50cm Long",
     "Rail Mount System | Brackets and Sliding Clamp | 100cm Long"
    ],
-   "hub": null,
+   "hub": "theatres:capital",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are mounts, trolleys and lens accessories for examination/procedure lights, matching capital equipment (tables, lights & OR integration).",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11295,9 +11361,11 @@
     "Covidien Probe Covers for Genius 2 & 3 | Pack of 96",
     "AliveCor KardiaMobile"
    ],
-   "hub": null,
+   "hub": "cardiology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are predominantly ECG machines and patient monitoring cabling, matching diagnostic cardiology equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11310,9 +11378,11 @@
     "seca Alligator Clips | 4mm | Pack of 10",
     "seca 409 Back Pack | Black | Large | Single"
    ],
-   "hub": null,
+   "hub": "handling:scale",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are carry cases, backpacks and clips for named seca weighing scales, matching patient & bariatric weighing scales.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11700,9 +11770,11 @@
     "Ladies Healthcare Dress | Round Collar | Green White Stripe/White Trim",
     "Ladies Healthcare Dress | Round Collar | Blue White Stripe/White Trim"
    ],
-   "hub": null,
+   "hub": "workwear:scrubs",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are ladies healthcare dresses, matching scrubs & clinical workwear.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11715,9 +11787,11 @@
     "Mens Healthcare Tunic | White/Navy Trim",
     "Mens Healthcare Tunic | Navy/White Trim"
    ],
-   "hub": null,
+   "hub": "workwear:scrubs",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are men's healthcare tunics, matching scrubs & clinical workwear.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11730,9 +11804,11 @@
     "Sack Holder Bin 90L | Yellow Lid | Waste For Incineration",
     "Sack Holder Bin 90L | White Lid | General Use"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are waste sack holders/bins, matching washroom and waste management.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11745,9 +11821,11 @@
     "Lucy Brush & Holder | Single",
     "Lavatory Brush | Single"
    ],
-   "hub": null,
+   "hub": "facilities:tools",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are wire brushes and toilet/lavatory brushes, matching cleaning tools & equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11760,9 +11838,11 @@
     "X-Fold Aluminium Rollator",
     "Torro Rollator"
    ],
-   "hub": null,
+   "hub": "rehab:walk",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are rollator walking frames, an exact match for walking aids.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11775,9 +11855,11 @@
     "Bivona Neonatal Tracheostomy Tubes Flextend Straight Flange | Single",
     "BLUselect Tracheostomy Tube | 9.0 | Replacement Inner Cannula | Fenestrated | Pack of 2"
    ],
-   "hub": null,
+   "hub": "ent:stoma",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are tracheostomy tubes for adult and neonatal use, matching laryngectomy & tracheostomy stoma care.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11790,9 +11872,11 @@
     "Cutan Restore Dispenser | 1L | Single",
     "Cutan Lotion PURE / FOAM Hand Wash Dispenser | 1L | Single"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are hand wash and lotion dispensers, matching washroom & paper hygiene.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -11820,9 +11904,11 @@
     "Lightweight Microfibre Cloth | Pack of 10",
     "Heavyweight Microfibre Cloth | Pack of 10"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are dish cloths and microfibre cleaning cloths, matching cleaning chemicals & consumables.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -12181,9 +12267,11 @@
     "BioHygiene Toilet Cleaner (Dosing Pouch) | 1.5L | Single",
     "BioHygiene Complete Washroom (Dosing Pouch) | 1.5L | Single"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are disinfectant tablets and washroom hygiene chemicals, an exact match for cleaning chemicals & consumables.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -12196,9 +12284,11 @@
     "Aluminium Tri Walker with Bag, Basket and Tray | Red | Pack of 2",
     "Aluminium Tri Walker with Bag, Basket and Tray | Blue | Pack of 2"
    ],
-   "hub": null,
+   "hub": "rehab:walk",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Steel and aluminium tri-walkers with bag/basket/tray are wheeled walking frames, i.e. walking aids.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -12256,9 +12346,11 @@
     "Economy Plastic Pedal Bin | 30L | White",
     "Economy Plastic Pedal Bin | 15L | White"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Pedal bins are washroom waste-management equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -12271,9 +12363,11 @@
     "MediProbe Ultrasound Probe Covers | 35 x 195mm | Pack of 100",
     "MediProbe Ultrasound Probe Covers | 28 x 200mm | Pack of 100"
    ],
-   "hub": null,
+   "hub": "ultrasound:trans",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Most examples are ultrasound probe covers, a transducer accessory, though one thermometer probe cover doesn't fit any gated code.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -12286,9 +12380,11 @@
     "Vaccine Bag & All Accessories | 20L Complete Set",
     "Vaccine Bag & All Accessories | 10L Complete Set"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Vaccine carrier bags and gel packs are cold-chain storage/transport equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Unigloves (UK)",
@@ -12701,9 +12797,11 @@
     "Adjustable Arm/Leg Rest",
     "Sunflower Hydraulic Adjustment Fixed Seat Chair | Gas Assisted Head Section & Split Foot Section"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Phlebotomy and reclining exam chairs are clinical furniture akin to examination couches.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -12716,9 +12814,11 @@
     "Chef Works Premium Woven Bib Apron | Black and White | Single",
     "Universal Mediguard Apron | Green | Pack of 25"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "PE and Mediguard disposable aprons are general clinical PPE.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -12731,9 +12831,11 @@
     "Casa Elite Bariatric Bed | Uncovered Ends | Standard | eech + 4 Side Rails",
     "Casa Elite Bariatric Bed | Uncovered Ends | Standard | Beech"
    ],
-   "hub": null,
+   "hub": "handling:bed",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Casa Elite Bariatric Beds are profiling beds with side rails.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -12746,9 +12848,11 @@
     "5 Section Physio Plinth Hydraulic (Inc PR01)",
     "5 Section Physio Plinth Electric (Inc PR01)"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Tilt tables and physio plinths are examination/treatment couches.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -12761,9 +12865,11 @@
     "Safety Peripheral Intravenous Cannula | Non-winged Yellow 24G x 19mm | Techrilon PUR Radiopaque | Pack of 200",
     "Safety Peripheral Intravenous Cannula | Non-winged Blue 22G x 32mm | Techrilon PUR Radiopaque | Pack of 200"
    ],
-   "hub": null,
+   "hub": "vascular:pivc",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Safety peripheral intravenous cannulas are peripheral IV cannulae.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -13294,9 +13400,11 @@
     "Toffeln AktivKlog | White",
     "Toffeln AktivKlog | Navy"
    ],
-   "hub": null,
+   "hub": "workwear:scrubs",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Toffeln clogs are clinical workwear footwear.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -13309,9 +13417,11 @@
     "Sirius Interfold Hand Towels | 2-Ply | White | 225mm x 190mm | Case of 3200 Sheets",
     "Sirius Interfold Hand Towels | 1-Ply | White | 210mm x 245mm | Case of 3600 Sheets"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Z-fold and C-fold hand towels are washroom paper hygiene products.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -13324,9 +13434,14 @@
     "Perching Stool Tubular Arms, Padded Back & Pu Seat",
     "Perching Stool Tubular Arms Only Pu Seat"
    ],
-   "hub": null,
+   "hub": [
+    "handling:furniture",
+    "rehab:stand"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "The division mixes a clinical examination stool (furniture) with several perching stools, which are standing/transfer support aids.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -13339,9 +13454,11 @@
     "Eazy Up Standaid",
     "Carry 185 Classic Electric Spreading Legs"
    ],
-   "hub": null,
+   "hub": "handling:hoist",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Manual and electric spreader-leg hoists are patient hoists and standing aids.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -13354,9 +13471,11 @@
     "Normasol Sachets | 25ml | Pack of 25",
     "Universal Cotton Applicators Double Ended | 75mm | Pack of 200"
    ],
-   "hub": null,
+   "hub": "wound:deb",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Sterile saline sprays, cotton wool and Normasol sachets are wound irrigation/cleansing products.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -13369,9 +13488,11 @@
     "Surgical Gown | Standard / Large | Single",
     "Surgical Gown | Small / Medium | Pack of 28"
    ],
-   "hub": null,
+   "hub": "theatres:theatre",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Sized disposable surgical gowns and a patient sarong are general theatre/procedure consumables.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -13384,9 +13505,11 @@
     "Attends Slip Classic 10 | Medium | Pack of 15",
     "Attends Pull-Ons 8 Large | Pack of 16"
    ],
-   "hub": null,
+   "hub": "continence:pads",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Attends slips and pull-ons are continence pads.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -13787,9 +13910,11 @@
     "Super Professional C19/C13 | Oven & Hob Cleaner",
     "Super Professional C16 | Degreasing Powder | 10kg"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Degreasers and oven/hob cleaners are cleaning chemicals.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -13847,9 +13972,11 @@
     "Paramed's Tactical Rescue Backpack | Green",
     "Paramed's Tactical Rescue Backpack | Royal Blue"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Oxygen cylinder bags and tactical rescue backpacks are first-aid/emergency-response carry equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -13862,9 +13989,11 @@
     "seca 287 Wireless Ultrasonic Measuring Station for Height & Weight with Voice Guidance",
     "seca 285 Wireless Class III Measuring Station"
    ],
-   "hub": null,
+   "hub": "handling:scale",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Seca telescopic measuring rods and wireless height/weight measuring stations are patient weighing/measuring scale equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -14493,9 +14622,11 @@
     "Super Professional W12/W14 | Toilet Cleaner",
     "Super Professional W9 | Heavy Duty Toilet Descaler | 750ml"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Washroom and toilet cleaners/descalers are cleaning chemicals.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -14508,9 +14639,11 @@
     "Vital Fresh | Laundry Powder | Aloe Vera | Non-Bio | 10kg",
     "Vital Fresh | Laundry Powder | Lemon Fresh | Bio | 10kg"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Laundry capsules and powder are cleaning chemical consumables.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -14523,9 +14656,11 @@
     "Step-On Pedal Bin | 30L",
     "All Plastic Fire Retardant Sack Holder | 45L"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are pedal bins, sack holders and flame-retardant waste bins, which fall under general waste management rather than any clinical-specific container.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -14538,9 +14673,11 @@
     "SleepKnit Semi-Fitted Top Sheet | Polycotton | Double Bed | White",
     "Ultraknit Smart Fitted Bottom Sheet | FR Polyester | Double Bed| Cream | Pack of 20"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are fitted and top bed sheets for hospital beds, matching bedding/hospital linen.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -14553,9 +14690,11 @@
     "Dulas Freestanding Pharmacy Fridge | 700L | Solid Door",
     "Dulas Freestanding Pharmacy Fridge | 1400L | Glass Door"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are freestanding pharmacy and laboratory fridges, i.e. cold-chain medical storage.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -14568,9 +14707,11 @@
     "Crystalbrite Non Bio Laundry Detergent | 10L | Single",
     "Crystalbrite Premium | 10L | Single"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are fabric conditioners and laundry detergents, i.e. cleaning chemicals.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -14598,9 +14739,11 @@
     "MediTape Transparent Medical Tape | 2.5cm x 10m | Pack of 12 Pieces",
     "Steroflex Stretch Fabric Plasters | 7.5cm x 5cm | Pack of 50"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are medical tape and stretch fabric plasters, basic first-aid consumables.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -14658,9 +14801,11 @@
     "Instramed Lid Lesion Biopsy Pack",
     "Instramed National Catheterisation Pack"
    ],
-   "hub": null,
+   "hub": "skin-prep:pack",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are minor surgery, catheterisation and biopsy procedure packs, matching procedure & cannulation packs.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Gemini Surgical UK",
@@ -15445,9 +15590,11 @@
     "Super Professional C3 | Cabinet Glasswash | 5L",
     "Super Professional H15 | Concentrated Citra Cleanse | 5L"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are scrubber-dryer detergent, descaler and glasswash, all cleaning chemicals.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -15460,9 +15607,11 @@
     "Drug & Medicine Cabinet | Light Unit Only",
     "Drug & Medicine Cabinet | 600 x 300 x 900mm"
    ],
-   "hub": null,
+   "hub": "pharma:serv",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are controlled drug cabinets and medicine trolleys, matching pharmacy services & equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -15475,9 +15624,11 @@
     "Wet Sensor | Bed Alertamat | Wireless c/w Transmitter",
     "Floor+ Alertamat | Wireless c/w Transmitter"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are hip protectors and wireless bed/floor sensor alert mats, i.e. falls-detection telecare devices.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -15490,9 +15641,11 @@
     "Amplivox Otowave Probe Tip Type 1 | Clear",
     "Amplivox Otowave Eartips | 11mm | Pack of 10"
    ],
-   "hub": null,
+   "hub": "audiology:diag",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are screening audiometers and probe tips/eartips, matching audiology diagnostic equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -15505,9 +15658,11 @@
     "BoSo Profitest Aneroid BPM | Red/Black",
     "BoSo Clinicus Aneroid BPM"
    ],
-   "hub": null,
+   "hub": "monitoring:gen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are aneroid blood pressure monitors, i.e. non-specialist patient monitoring devices.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -15520,9 +15675,11 @@
     "ECG Paper for the CT8000i Range | Z-Fold | Pack of 5",
     "seca CT Cardiopad / Cardiopad Mini Paper | Single"
    ],
-   "hub": null,
+   "hub": "cardiology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are recording paper for named ECG/cardiopad recorder models, an accessory to diagnostic cardiology equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -15550,9 +15707,11 @@
     "Tempmate-M1 USB Data Logger with probe",
     "Tempmate-M1 USB Data Logger"
    ],
-   "hub": null,
+   "hub": "monitoring:sens",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are USB temperature data loggers and sensors, matching sensors & probes.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -15580,9 +15739,11 @@
     "Instramed Drug Tariff Dressing Pack | Non Woven Swabs | Spec 35",
     "Instramed Drug Tariff Dressing Pack | Woven Swabs | Spec 10"
    ],
-   "hub": null,
+   "hub": "skin-prep:pack",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are community and drug-tariff dressing packs of swabs, matching procedure packs.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Healthium Medtech UK",
@@ -16616,9 +16777,11 @@
     "Gripper™ Huber Needles without Y-site | Pack of 12",
     "OPTIVA™ I.V. Catheter with Injection Valve | Pack of 50"
    ],
-   "hub": null,
+   "hub": "vascular:pivc",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples include closed-system and injection-valve IV catheters that are peripheral IV cannulas, though the division also mixes in port-access Huber needles with no matching category.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -16631,9 +16794,11 @@
     "Tubular Slide Sheet Maxi Re-Usable | 200 x 140cm",
     "Tubular Slide Sheet Extra Long Re-Usable | 200 x 71cm"
    ],
-   "hub": null,
+   "hub": "handling:slide",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are tubular slide sheets in various sizes, matching slide sheets and transfer boards.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -16661,9 +16826,11 @@
     "Wipe Clean Duvet | 4.5 tog | Single Bed",
     "Wipe Clean Duvet | 10.5 tog | Single Bed"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are wipe-clean duvets for hospital beds, matching hospital linen/bedding.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -16706,9 +16873,11 @@
     "CXI Support Catheter | 4 Fr x 150cm | Single",
     "CXI Support Catheter | 2.3 Fr x 150cm | Single"
    ],
-   "hub": null,
+   "hub": "continence:ind",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Despite the division name, examples are Foley indwelling catheters and support catheters, not urinalysis test products.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -16736,9 +16905,11 @@
     "Self Seal Pouches | Sterilising | Size 133 x 254mm | Pack of 200 Pieces",
     "Tristel Duo ULT Foam | 250ml"
    ],
-   "hub": null,
+   "hub": "ssd:cssd",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are sterilising pouches and disinfectant foam, decontamination consumables for central sterile services.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -16751,9 +16922,11 @@
     "Economy Green Pads | 23 x 15cm | Pack of 10",
     "KleenMe Sponge Scourers with Finger Grip | Pack of 10"
    ],
-   "hub": null,
+   "hub": "facilities:tools",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are stainless steel and sponge scourers/pads, matching cleaning tools & equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -16766,9 +16939,11 @@
     "Mercury Spills Kit",
     "Chemical Spill Kits"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are urine/vomit, chemical and mercury spill clean-up kits, which are facility decontamination consumables rather than any clinical-procedure category.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Empire Medical UK Ltd",
@@ -17696,9 +17871,11 @@
     "Unisex Tabard | Navy",
     "Unisex Tabard | Royal Blue"
    ],
-   "hub": null,
+   "hub": "workwear:scrubs",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "All examples are unisex tabards in various colours, a protective clinical workwear garment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -17711,9 +17888,11 @@
     "Plinth Model 93G Gynaecology Chair",
     "Plinth Model 93P Gynae / Practice Couch | Hydraulic Version"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are physical examination couches and chairs (Sunflower, Plinth models) built for gynae exams, matching the examination-couch furniture category.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -17726,9 +17905,11 @@
     "Wireless Deluxe 90 Floorgard c/w Wireless Companion Monitor - Standalone",
     "Wired Standard Floorgard c/w Wired Companion Monitor - Standalone 3m lead"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Wireless Floorgard alarm systems are fall-detection telecare devices for care settings.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -17741,9 +17922,11 @@
     "Alerta Detect Motion Sensor | Quantec System",
     "Alerta Detect Motion Sensor | for Medicare HTM6001 nc System"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Alerta Detect motion sensors are technology-enabled care sensors for monitoring movement/falls.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -17756,9 +17939,11 @@
     "Domus Bariatric Auto System | 120cm",
     "U Core Foam Bariatric Mattress | 2 Way Turn"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are bariatric mattresses and mattress systems, a positioning/mattress product.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -17771,9 +17956,11 @@
     "Duvet Protector | Single Bed",
     "Pillow Protector"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Pillow, mattress and duvet protectors are bedding/linen items for clinical and care settings.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -17786,9 +17973,11 @@
     "MediCurettes Ring Curettes | 3mm | Pack of 10",
     "Kai Disposable Dermal Curettes | 7mm | Pack of 20"
    ],
-   "hub": null,
+   "hub": "wound:deb",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Ring curettes and disposable dermal curettes are debridement instruments.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -17801,9 +17990,14 @@
     "Polycal Liquid Neutral | 200ml",
     "Suresign Professional D-Dimer Control Kit"
    ],
-   "hub": null,
+   "hub": [
+    "pathology:poct",
+    "nutrition:feeds"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Despite the division name, the examples show point-of-care D-Dimer/CRP test kits alongside a nutritional glucose-polymer supplement (Polycal), two distinct unrelated product types.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Blink Medical Limited",
@@ -18909,9 +19103,11 @@
     "Super Professional F3 | Floor Gel | 5L",
     "Super Professional F2 | Wet Look Floor Polish | 5L"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are floor cleaner, maintainer, gel and polish products, i.e. cleaning chemicals.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -18924,9 +19120,11 @@
     "Plinth Model 93B Phlebotomy Chair | Hydraulic Version",
     "Plinth Model 93B Phlebotomy Chair | Electric"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are physical phlebotomy chairs (Sunflower Fusion, Plinth models), a clinical furniture item.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -18939,9 +19137,11 @@
     "Wireless Bedgard c/w Wireless Companion Monitor - Standalone",
     "Wireless Bed/Seatgard Set c/w Wireless Companion Monitor - Standalone"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Wireless Bedgard/Seatgard alarm systems are telecare fall-detection devices.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -18999,9 +19199,11 @@
     "SleepKnit Pillowcase | Polycotton | Envelope End | loose not Bagged | White | Single",
     "Pillowcase | Single | Flame Retardant Polyester | Pale Blue | Single"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are flame-retardant polyester and polycotton pillowcases, hospital linen items.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -19014,9 +19216,11 @@
     "Fire Retardant Bin | Hands Free | 70L",
     "Fire Retardant Bin | Solid Body | 70L"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are waste bins including fire-retardant hands-free bins, matching washroom/waste management.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -19029,9 +19233,11 @@
     "Scoop Stretcher",
     "EXL Scoop Biosafe Speedclip Straps | Set of 3"
    ],
-   "hub": null,
+   "hub": "rehab:access",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Basket and scoop stretchers with straps are patient rescue/evacuation equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -19044,9 +19250,11 @@
     "Select Mini Jumbo WC Tissue Dispenser | White",
     "Select Centrefeed Wiper Paper Towel Dispenser | White"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are toilet/urinal refill bottles and tissue/paper towel dispensers, washroom hygiene products.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -19059,9 +19267,11 @@
     "Sheet Towel | 420gsm | Luxury Knitted Towel | Single",
     "Face Towel | 420gsm | Luxury Knitted Towel"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Face, hand and sheet towels are hospital/care-setting linen items.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -19074,9 +19284,11 @@
     "Gardiner Brown Tuning Fork | 4096Hz",
     "Gardiner Brown Tuning Fork | 1024Hz"
    ],
-   "hub": null,
+   "hub": "audiology:diag",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Gardiner Brown tuning forks are classic diagnostic instruments used for hearing (Rinne/Weber) screening.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -19089,9 +19301,11 @@
     "Defibtech Lifeline Adult Training Pad Package 1 Set Pads Only",
     "Schiller FRED PA-1 AED Pads | Adult pre-connected with RFID Tag"
    ],
-   "hub": null,
+   "hub": "cardiology:defib",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Defibtech and Schiller AED pads are defibrillation electrodes/pads.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Empire Medical UK Ltd",
@@ -20275,9 +20489,11 @@
     "Examination / Treatment Couch | Two Section | Variable Height",
     "Plinth Model 503 3 Section Examination Couch | Hydraulic"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are examination/treatment couches (Sunflower, Plinth models), matching the examination-couch furniture category directly.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -20290,9 +20506,11 @@
     "Sensator Vinyl Powder-Free Disposable Gloves | Blue | Case of 10 (100 Pieces / Pack)",
     "Sensator Vinyl Powder-Free Disposable Gloves | Clear | Pack of 100 Pieces"
    ],
-   "hub": null,
+   "hub": "infection:vinyl",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are vinyl powder-free disposable examination gloves.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -20305,9 +20523,11 @@
     "Cartridge Valve for Control Valve",
     "Bezel for LIMPET Model"
    ],
-   "hub": null,
+   "hub": "monitoring:gen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are spare parts (tubing connector, spring, valve, bezel) for a blood-pressure-monitor (LIMPET) model, a non-specialist monitoring device.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -20320,9 +20540,11 @@
     "Wooden Extended Length 2 Bar Side Rail for Casa/Bradshaw Beds | Walnut (x4 required)",
     "Wooden Extended Side Rail Kit | Light Oak including Finger Kits"
    ],
-   "hub": null,
+   "hub": "handling:bed",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Wooden side rails are bed safety accessories for profiling care beds.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -20335,9 +20557,11 @@
     "Ultraknit Duvet Cover | FR Polyester | Envelope End | Single Bed | Pink | Single",
     "Ultraknit Duvet Cover | FR Polyester | Envelope End | Single Bed | Peach | Single"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Ultraknit flame-retardant duvet covers are hospital/care bedding linen.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -20350,9 +20574,11 @@
     "Safeware Mob Caps | Non-Sterile | Blue | Pack of 100",
     "Surgical Type IIR Facemask | Blue | Pack of 50"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Beard snoods, oversleeves, mob caps and surgical facemasks are general PPE items.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -20365,9 +20591,11 @@
     "Airpure Air Freshener | Freshmatic Refill Room Spray | Berry | 250ml",
     "Airpure Air Freshener | Freshmatic Refill Room Spray | Linen | 250ml"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Airoma/Airpure air freshener refills are facility cleaning consumables with no more specific taxonomy match.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -20395,9 +20623,14 @@
     "BCI-compatible SpO2 Wrap Sensor: Adult to Neonatal (cable length: 90cm)",
     "BCI-compatible Paediatric Sp02 Short Clip Finger Sensor"
    ],
-   "hub": null,
+   "hub": [
+    "monitoring:gen",
+    "monitoring:sens"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples mix a finger pulse oximeter device (non-specialist patient monitoring) with SpO2 wrap/clip sensor probes (sensors & probes), two distinct product types.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -20410,9 +20643,11 @@
     "3M Red Dot Resting Electrodes | Solid Gel | Adult | 2.03 x 3.04cm | Pack of 100",
     "Skintact Easi-Tabs ECG Electrodes | 26 x 24mm | Box of 500"
    ],
-   "hub": null,
+   "hub": "cardiology:ecg",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "All examples are disposable ECG monitoring/resting electrodes.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -20425,9 +20660,11 @@
     "seca 376 Wireless Class III Baby Scale",
     "seca 384 Class (III) Approved Portable Electronic Baby and Toddler Scales"
    ],
-   "hub": null,
+   "hub": "handling:scale",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are infant/toddler weighing scales and measuring boards, a form of patient weighing scale.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -20440,9 +20677,11 @@
     "Tork Mild Foam Soap 1L | Pack of 6 (2500 Doses)",
     "Tork Premium Foam Soap | 80ml"
    ],
-   "hub": null,
+   "hub": "facilities:washroom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are Purell/Tork/Soft Care hand rub and foam soap, washroom hand-hygiene dispensable products rather than clinical skin prep.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -20470,9 +20709,11 @@
     "Instramed Podiatry Assistants Pack | Straight Barrel Spring",
     "Instramed Podiatry Basic Pack | Curved Cantilever"
    ],
-   "hub": null,
+   "hub": "skin-prep:pack",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are pre-assembled instrument/procedure packs for podiatry debridement and assisting.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -20485,9 +20726,11 @@
     "Tena Fix | Medium",
     "Tena Fix | XLarge"
    ],
-   "hub": null,
+   "hub": "continence:pads",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are Tena incontinence pants and pads.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Blink Medical Limited",
@@ -22399,9 +22642,11 @@
     "Wireless Seatgard c/w Wireless Companion Monitor - Standalone",
     "Wired Seatgard c/w Wired Companion Monitor - Standalone"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Seatgard wired/wireless seat alarm systems are falls-prevention technology-enabled care devices.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22414,9 +22659,14 @@
     "Romachair Wheelchair | Det. Arm",
     "Alerta Aqua Shower Commode Chair | Self-Propelled | 4 Braked Wheels"
    ],
-   "hub": null,
+   "hub": [
+    "rehab:bath",
+    "rehab:chair"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples show both shower commode chairs (bathing/toileting aids) and standard wheelchairs (specialist seating), two distinct product types.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22444,9 +22694,11 @@
     "Aquasonic® 100 Ultrasound Transmission Gel | Sterile | 20g | Pack of 48 Pouches",
     "Aquasonic® 100 Ultrasound Transmission Gel | 250ML | Pack of 12"
    ],
-   "hub": null,
+   "hub": "cardiology:gel",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "All examples are ultrasound transmission gel.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22459,9 +22711,11 @@
     "Dulas Under Counter Pharmacy Fridge | 145L | Glass Door",
     "Dulas Under Counter Pharmacy Fridge | 145L | Solid Door"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are laboratory and pharmacy medical fridges, cold-chain storage equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22474,9 +22728,14 @@
     "Leg Lifter | Pack of 12",
     "Leg Lifter: Double Handle Stirrup Style"
    ],
-   "hub": null,
+   "hub": [
+    "handling:sling",
+    "rehab:daily"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples mix patient-handling slings with leg lifters, a daily-living transfer aid, two distinct product types.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22489,9 +22748,11 @@
     "Domus 1 Bubble Mattress",
     "Permapad Overlay"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "All examples are pressure-care mattress systems and overlays.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22504,9 +22765,11 @@
     "MRSA Resistant Bed Rail Protector | Full Length Velcro Fastening | 200 x 87cm | Single Pair",
     "MRSA Resistant Bed Rail Protector | Standard Length Velcro Fastening | 137 x 87cm | Single Pair"
    ],
-   "hub": null,
+   "hub": "handling:bed",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are bed side-rail protector pads, an accessory to profiling beds.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22519,9 +22782,11 @@
     "Combi Medi-Cart | 12 Trays | 4 Boxes High x 3 Columns",
     "4 Tier Medi-Cart with 24 Trays with garment rail | 6 Boxes high x 4 columns"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are Medi-Cart medication/garment trolleys, general clinical trolleys.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22534,9 +22799,11 @@
     "Controlled Drug Destruction Kit | 250ml",
     "Controlled Drug Recording Book"
    ],
-   "hub": null,
+   "hub": "pharma:serv",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are infusion labels, pill cutters and controlled drug recording/destruction kit, pharmacy round equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22549,9 +22816,11 @@
     "Instramed Acute Wound Care Pack | Medium Gloves",
     "Instramed Acute Wound Care Pack | Small Gloves"
    ],
-   "hub": null,
+   "hub": "skin-prep:pack",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are pre-assembled procedure packs (IUD pack, acute wound care packs with gloves) rather than dressings themselves.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22564,9 +22833,11 @@
     "Duster Sleeve Synthetic | Red | 80cm | Single",
     "V Sweeper Synthetic Sleeve | Red | Single"
    ],
-   "hub": null,
+   "hub": "facilities:tools",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are sweepers and duster sleeves, cleaning tools and equipment.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22579,9 +22850,11 @@
     "Standard Drop Arm Mobile Commode",
     "Midi Slipper Pan | Pulp | Pack of 100"
    ],
-   "hub": null,
+   "hub": "rehab:bath",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are bedpans, commodes and slipper pans, toileting aids.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22594,9 +22867,11 @@
     "BioHygiene Odour Stopper & Stain Spotter | 750ml | Single",
     "BioHygiene All Purpose Sanitiser Concentrate Unfragranced | 1L | Single"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are furniture polish and sanitiser cleaning chemicals.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22609,9 +22884,11 @@
     "Instramed Silver Probe with Eye | 13cm | Single",
     "Instramed Medical Wound Probe | 125mm | Pack of 100"
    ],
-   "hub": null,
+   "hub": "theatres:theatre",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are general surgical instruments (retractors, skin hooks, probes) used across theatre procedures.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22624,9 +22901,11 @@
     "Instramed 1st Trimester Tray with Straight Forceps",
     "Instramed 1st Trimester Tray with Curved Forceps"
    ],
-   "hub": null,
+   "hub": "womens:mat",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are maternity/obstetric procedure packs and trays (egg recovery, maternity pack, trimester trays).",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22639,9 +22918,11 @@
     "Burns Gel Sachet | 3.5g | Single",
     "Emergency Space Blanket | Single"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are burn treatment gels and an emergency space blanket, first-aid/emergency products.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -22669,9 +22950,11 @@
     "Instramed Dressing Scissors | Sharp/Blunt | 13cm | Plastic Handle | Single",
     "Instramed Dressing Scissors | Blunt/Blunt | 13cm | Single"
    ],
-   "hub": null,
+   "hub": "theatres:theatre",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Dressing scissors are general clinical/surgical instruments best covered by general theatre consumables.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Blink Medical Limited",
@@ -24639,9 +24922,11 @@
     "5 Panel Ward Screen, Solid Panels | White",
     "4 Panel Ward Screen, Solid Panels | White"
    ],
-   "hub": null,
+   "hub": "handling:furniture",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are ward screens and panel frames, matching examination screens.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -24654,9 +24939,11 @@
     "First Aid Rucksack | Green | Empty Bag | Single",
     "Oxygen Therapy Emergency Bag | Red"
    ],
-   "hub": null,
+   "hub": "wound:fa",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are first aid bags/rucksacks and an oxygen emergency bag, first-aid kit carriers.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -24669,9 +24956,11 @@
     "ProSpec Disposable Hegar Dilators | Pack of 10",
     "Pelispec Disposable Dilator | Size 5/6"
    ],
-   "hub": null,
+   "hub": "womens:gyn",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are Hegar and cervical dilators used in gynaecological examination/procedures.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -24684,9 +24973,11 @@
     "Ayres Spatula Type F | Pack of 100",
     "Essentials Flexible Slotted Spatula | 35cm"
    ],
-   "hub": null,
+   "hub": "womens:gyn",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Most examples are Ayres cervical smear spatulas used in gynaecological examination.",
+   "decidedIn": "Farla Medical - Weekend Sprint.json"
   },
   {
    "supplier": "Farla Medical",
@@ -76281,6 +76572,383 @@
    "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
    "why": "Only example is a handpiece lubricant/spray cap accessory — chairs, handpieces & lab.",
    "decidedIn": "NHSSC map sprint 28/08/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "BD — Becton, Dickinson",
+   "term": "Alaris PCA module",
+   "division": null,
+   "products": 33,
+   "categories": [],
+   "examples": [
+    "Administration set Alaris VP Volumetric pump Pumped Sets with 1.2 micon in line filter",
+    "Alaris PK pump Nexus Syringe pumps",
+    "Extension set Alaris CC pump infusion set with in-line pressure monitoring",
+    "Administration set Alaris GP Volumetric pump Primary set v/u 15 micron filter Roll/C Alaris safety clamp L/260cm P/24ml 3mm id L/F",
+    "Administration set Alaris VP Volumetric pump Primary set v/u 15um filter roll/c alaris safety clamp l/300cm p/27ml 3mm id dehp-free pvc",
+    "Administration set Alaris VP Volumetric pump Blood set unvented 200m filter roll/c alaris safety clamp l/300cm p/29ml 3mm id dehp-free pvc",
+    "Administration set Ivac Signature Edition pump ALARIS SE Straight blood set 200um prim vol 26ml 275cm",
+    "Administration set Alaris GP Volumetric pump Primary set v/u 15 micron filter Roll/C Alaris safety clamp 1 x SmartSite Y-port L/255cm P/24ml 3mm id L/F"
+   ],
+   "hub": "bloodtx:pump",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Examples are Alaris volumetric/syringe pump administration and primary sets, several explicitly described as blood sets, matching the Blood and transfusion / Pump-dedicated sets code.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "BD — Becton, Dickinson",
+   "term": "Alaris Guardrails safety software",
+   "division": null,
+   "products": 33,
+   "categories": [],
+   "examples": [
+    "Administration set Alaris VP Volumetric pump Pumped Sets with 1.2 micon in line filter",
+    "Alaris PK pump Nexus Syringe pumps",
+    "Extension set Alaris CC pump infusion set with in-line pressure monitoring",
+    "Administration set Alaris GP Volumetric pump Primary set v/u 15 micron filter Roll/C Alaris safety clamp L/260cm P/24ml 3mm id L/F",
+    "Administration set Alaris VP Volumetric pump Primary set v/u 15um filter roll/c alaris safety clamp l/300cm p/27ml 3mm id dehp-free pvc",
+    "Administration set Alaris VP Volumetric pump Blood set unvented 200m filter roll/c alaris safety clamp l/300cm p/29ml 3mm id dehp-free pvc",
+    "Administration set Ivac Signature Edition pump ALARIS SE Straight blood set 200um prim vol 26ml 275cm",
+    "Administration set Alaris GP Volumetric pump Primary set v/u 15 micron filter Roll/C Alaris safety clamp 1 x SmartSite Y-port L/255cm P/24ml 3mm id L/F"
+   ],
+   "hub": "bloodtx:pump",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Identical examples to the Alaris PCA row show pump-dedicated administration and blood sets for the Alaris platform, not software, so they are categorised the same way based on what the items actually are.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "BD — Becton, Dickinson",
+   "term": "PureWick female external catheter",
+   "division": null,
+   "products": 5,
+   "categories": [],
+   "examples": [
+    "Female external continence device Suction Assisted Absorbant Female External Catheter Up to 12 Hours",
+    "Female external continence device Accessory replacement kit including cannister and tubing for use with FKW769 Non-sterile",
+    "Female external continence device Suction Assisted Absorbant Female Anatomy External Catheter - Flexible Up to 12 Hours",
+    "Male external continence device Suction Assisted Male Anatomy External Catheter Up to 24 Hours NON RETURNABLE",
+    "Female external continence device Portable suction unit for external catheter"
+   ],
+   "hub": "continence:urinal",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Examples describe non-invasive suction-based male and female external continence/collection devices, which best matches the External urinals & toileting aids code rather than adhesive sheath catheters.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "BD — Becton, Dickinson",
+   "term": "CapSure / OptiFix / SorbaFix mesh fixation systems",
+   "division": null,
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Fixation Device Non Absorbable 30 Tacks",
+    "Fixation Device Non Absorbable 15 Tacks"
+   ],
+   "hub": "mis:instruments",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Examples are non-absorbable tack fixation devices used to secure hernia mesh, which are MIS (laparoscopic) instruments and consumables.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "CliniMed",
+   "term": "Appeel (adhesive remover) / LBF Sterile (barrier film)",
+   "division": null,
+   "products": 7,
+   "categories": [],
+   "examples": [
+    "Adhesive Remover Spray 50ml No sting",
+    "Adhesive Remover Wipes Sting free",
+    "Adhesive Remover Spray 50ml No sting",
+    "Adhesive Remover Sterile Sterile wipe no sting",
+    "Adhesive Remover Sterile 5ml liquid sachets sterile no sting",
+    "Adhesive Remover Sterile Foam applicator 1ml",
+    "Adhesive Remover Sterile Spray 100ml sterile"
+   ],
+   "hub": "ostomy:acc",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Examples are adhesive remover sprays, wipes and sachets used to safely remove stoma/dressing adhesives from skin, matching Ostomy and stoma care / Accessories, seals and skin care.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "GBUK Group",
+   "term": "Bio-Cuff (BP)",
+   "division": null,
+   "products": 36,
+   "categories": [],
+   "examples": [
+    "Blood pressure cuff multi patient use Thigh 38-50cm Dual Hose Mated Subminiature Connectors",
+    "Blood pressure cuff multi patient use Small Adult 17-25cm Dual Hose Screw Connectors",
+    "Blood pressure cuff multi patient use Child 12-19cm Dual Hose Bayonet Connectors",
+    "Blood pressure cuff single patient multi use Large Adult 31-40cm Dual Hose Bayonet Connectors",
+    "Blood pressure cuff single patient multi use Thigh 38-50cm Dual Hose Bayonet Connectors",
+    "Blood pressure cuff multi patient use Large Adult 31-40cm Single Hose Metal Bayonet",
+    "Blood pressure cuff single patient multi use Small Adult 17-25cm Single Hose Bayonet Connector",
+    "Blood pressure cuff multi patient use Child 12-19cm Dual Hose Mated Subminiature Connectors"
+   ],
+   "hub": "monitoring:sens",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Examples are blood pressure cuffs of varying sizes and connector types, which are patient-monitoring sensor accessories used with vital-signs monitors.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Precisis",
+   "term": "EASEE (epicranial, under-scalp neurostimulation implant for drug-resistant focal epilepsy)",
+   "division": null,
+   "products": 5,
+   "categories": [],
+   "examples": [
+    "Deep Brain Stimulation Patient Programmer Access Remote Control 93.00 x 57.00 x 22.00 mm",
+    "Deep Brain Stimulation Physician Programmer Set programming tablet PC 272.9 x 182.3 x 7.9 18.7mm",
+    "Deep Brain Stimulation Electrodes System Implantable 727.00 x 54.50 x 3.00 mm",
+    "Deep Brain Stimulation Physician Programmer Connect programming wand 93.00 x 57.00 x 22.00 mm",
+    "Deep Brain Stimulation Implantable Pulse Generator System 60.00 x 50.50 x 12.95 mm"
+   ],
+   "hub": "neuro:dbs",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The catalogue's own item descriptions label every component (implantable pulse generator, electrode system, patient/physician programmers) explicitly as Deep Brain Stimulation devices, matching neuro:dbs directly even though the product is clinically an epicranial stimulator.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "B. Braun Medical",
+   "term": "Infusomat Space",
+   "division": null,
+   "products": 29,
+   "categories": [],
+   "examples": [
+    "Administration sets for Infusomat Space volumetric pump ProSet Cyto-Set Mix secondary line Spin Luer Lock connector with Tritan Port and 0.2micron filter Neutrapur PVC-free",
+    "Administration sets for Infusomat Space volumetric pump Type Transfusion 200um filter 250/145cm Spin Lock Prime Stop PVC (DEHP-free)",
+    "Administration sets for Infusomat Space volumetric pump Safeset PVC (DEHP-free) extralong airstop and primestop 15micron filter 300/200cm priming volume 20ml 96h accuracy",
+    "Administration sets for Infusomat Space volumetric pump Basic PVC (DEHP-free) 15micron filter 250/145cm priming volume 16ml 96h accuracy",
+    "Administration sets for Infusomat Space volumetric pump Basic Neutrapur (PVC-free) low sorption 15micron filter 250/145cm priming volume 16ml 96h accuracy",
+    "Administration sets for Infusomat Space volumetric pump Cyto-set secondary line neutrapur (PVC-free) low sorption with 0.2micron inline filter without drip chamberhalkey roberts clamp primestop cap 32cm priming volume 5ml",
+    "Administration sets for Infusomat Space volumetric pump Basic PVC (DEHP-free) eurofix injection port 15micron filter1 x injection port 270/165cm priming volume 18ml 96h accuracy",
+    "Administration sets for Infusomat Space volumetric pump Safeset neutrapur (PVC-free) low sorption airstop and primestop 15micron filter 250/145cm priming volume 16ml 96h accuracy"
+   ],
+   "hub": "bloodtx:pump",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Examples are administration/giving sets explicitly built for the Infusomat Space volumetric infusion pump, matching the 'Pump-dedicated sets' category.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "B. Braun Medical",
+   "term": "Softalind Pure / ViscoRub / 999 (alcohol hand rub)",
+   "division": null,
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Cleanser alcohol hand rub Liquid bottle 500ml wall mountable with integral pump",
+    "Cleanser alcohol hand rub Liquid bottle 1000ml"
+   ],
+   "hub": "skin-prep:wipe",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Examples are alcohol-based hand rub cleansers, an antimicrobial cleansing product fitting the skin prep and antisepsis wipes & cleansing category.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Vygon (UK)",
+   "term": "Leadercath (arterial)",
+   "division": null,
+   "products": 12,
+   "categories": [],
+   "examples": [
+    "Catheter arterial pack single lumen seldinger technique red hub Pack contains leadercath code 0115.09 2.5ml luer slip syringe 5ml luer slip syringe hypodermic needle 25g 5 x swabs iv3000 dressing 10 x 12 fenestrated drape 45 x 70",
+    "Catheter arterial pack single lumen seldinger technique red hub Pack contains Leadercath code 0115.09 2.5ml luer slip syringe 5ml luer slip syringe safety hypodermic needle 25g 5 x swabs IV3000 dressing 10 x 12 fenestrated drape 50 x 100 outer wrap zip lock bag",
+    "Catheter arterial pack single lumen seldinger technique red hub Pack contains Leadercath code 0115.09 2.5ml luer slip syringe 5ml luer slip syringe safety hypodermic needle 25g 5 x swabs Tegaderm dressing 10 x 12 fenestrated drape 50 x 100 outer wrap zip lock bag",
+    "Central Venous Catheter Single Lumen 16g x 15cm 17g x 70mm needle",
+    "Arterial Line 18g x 18cm",
+    "Arterial Line 16g x 18cm",
+    "Central Venous Catheter Single Lumen 16g x 20cm 16g x 70mm needle",
+    "Arterial Line 20g x 6cm"
+   ],
+   "hub": "vascular:cvc",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Examples include single-lumen central venous catheters and arterial line catheter packs, best matched to the central venous catheters vascular access category as the closest available fit for these insertion-kit vascular devices.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Getinge",
+   "term": "Flow-i / Flow-c (anaesthesia)",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Endoscope storage bags and liners Red opaque self adhesive bag for the transportation of contaminated endoscopes for use with ED Flow machine"
+   ],
+   "hub": "ssd:endo",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The single example describes a self-adhesive transport bag for contaminated endoscopes, matching the endoscopy decontamination category rather than the anaesthesia-machine term it was filed under.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Advanced Medical Solutions (AMS)",
+   "term": "INTEGUSEAL (pre-incision microbial sealant)",
+   "division": null,
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Tissue Adhesives N-Butle cyanoacrylate based Microbial Sealent 2.7ml 25x25cm",
+    "Tissue Adhesives N-Butle cyanoacrylate based Microbial Sealent 5.4ml 50x25cm"
+   ],
+   "hub": "skin-prep:prep",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Examples describe a cyanoacrylate-based pre-incision microbial skin sealant applied as part of preoperative skin preparation, which fits the pre-operative skin prep category.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Accora",
+   "term": "Allevia Comfort / Classic / Harmony / Prima (static foam mattresses — company-site only)",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Cushion Hybrid including mains powered pump 46 x 43 SWL 160kg"
+   ],
+   "hub": "handling:cushion",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The single example is a hybrid pump-assisted pressure cushion, not a mattress as the term suggests, so it is classified per the actual item description as a pressure-relieving cushion.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Accora",
+   "term": "Allevia Duo / Duo Plus / Sense (hybrid & dynamic air mattresses — company-site only)",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Cushion Hybrid including mains powered pump 46 x 43 SWL 160kg"
+   ],
+   "hub": "handling:cushion",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "The single example (identical to the sibling row) describes a hybrid pump-assisted cushion rather than a mattress, so it is classified as a pressure-relieving cushion based on the actual description.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Essity UK Limited (formerly BSN Medical Ltd)",
+   "term": "TENA SmartCare Change Indicator (wetness-sensor pad-change alert system) / TENA SmartCare Identifi (formerly 'TENA Identifi', short-term digital continence assessment tool — both company-site confirmed, not on NHS Supply Chain catalogue, likely service/technology contracts)",
+   "division": null,
+   "products": 35,
+   "categories": [],
+   "examples": [
+    "All-in-one pads absorbency band D15 2XS 40-60cm (Textile Back Sheet)",
+    "Wet Wipe Plastic Free Wet Wipes 12x48",
+    "Barrier Cream 150g tube water repellent perfume free suitable for incontinence",
+    "Wash Mitt Dry glove with dispenser box",
+    "Wash Mitt Wet Glove",
+    "Skin cleanser 150ml wash cream No rinse",
+    "Body Wash 500ml bottle rinse free cream",
+    "Fixation Pants for use with Pads with Legs Medium 70-90cm Basic"
+   ],
+   "hub": [
+    "continence:pads",
+    "rehab:hygiene"
+   ],
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Examples split between incontinence pads/fixation pants (continence:pads) and personal hygiene/skin-care items — wash mitts, skin cleanser, body wash, barrier cream (rehab:hygiene).",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Essity UK Limited (formerly BSN Medical Ltd)",
+   "term": "TENA Wash Cream & skincare range (NHS-Supply-Chain-confirmed)",
+   "division": null,
+   "products": 35,
+   "categories": [],
+   "examples": [
+    "All-in-one pads absorbency band D15 2XS 40-60cm (Textile Back Sheet)",
+    "Wet Wipe Plastic Free Wet Wipes 12x48",
+    "Barrier Cream 150g tube water repellent perfume free suitable for incontinence",
+    "Wash Mitt Dry glove with dispenser box",
+    "Wash Mitt Wet Glove",
+    "Skin cleanser 150ml wash cream No rinse",
+    "Body Wash 500ml bottle rinse free cream",
+    "Fixation Pants for use with Pads with Legs Medium 70-90cm Basic"
+   ],
+   "hub": [
+    "continence:pads",
+    "rehab:hygiene"
+   ],
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Identical example set to the SmartCare row: incontinence pads/pants fit continence:pads, and the wash creams/mitts/body wash fit personal hygiene (rehab:hygiene).",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Essity UK Limited (formerly BSN Medical Ltd)",
+   "term": "Leukoplast",
+   "division": null,
+   "products": 20,
+   "categories": [],
+   "examples": [
+    "Tape medical adhesive zinc oxide 1.25cm x 5m",
+    "Tape medical adhesive zinc oxide 2.5cm x 5m",
+    "Tape medical adhesive zinc oxide 1.25cm x 9.2m",
+    "Tape medical adhesive zinc oxide 5cm x 9.2m",
+    "Tape medical adhesive zinc oxide 5cm x 4.5m Beige",
+    "Tape medical adhesive zinc oxide 1.25cm x 5m Waterproof",
+    "Tape medical adhesive zinc oxide 5cm x 9.2m",
+    "Tape medical adhesive zinc oxide 1.25cm x 9.2m"
+   ],
+   "hub": "wound:fa",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Examples are zinc-oxide medical adhesive strapping tape, a generic first-aid/wound-closure tape rather than a wound dressing or vascular securement product, best matching wound care's First Aid subtype.",
+   "decidedIn": "weekend sprint 2026-08-29"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Mediq Healthcare UK Ltd",
+   "term": "365 Healthcare procedure packs (epidural, catheterisation, IV cannulation, eye-care)",
+   "division": null,
+   "products": 34,
+   "categories": [],
+   "examples": [
+    "Pack sterile Aminocentesis pack - latex free x2 60ml gallipot5x 10 x10 swabs1x 40 towel60 sterile field kidney dish 10 large woven balls fenestrated drape NON RETURNABLE",
+    "Gown Warm Up Long sleeve warming jacket large NEW",
+    "Procedure Pack Woundcare Bespoke for South East Coast Ambulance",
+    "Gown Patient Ward Blue Large Rear Fastening with Adjustable Hook and Loop",
+    "Pack procedure renal dressing 1 x polythene gallipot clear graduated 60ml 5 x non woven 4 ply swabs 7.5 x 7.5cm white 2 x paper (hand) dressing towels 2 ply 43 x 38cm 1 x sterile sheet water repellent/absorbent 50 x 50cm",
+    "Epidural pack 1 x 3 part tray 1 x blue forceps 1 x 10 x 10cm 12 ply xrd swabs (tied 5s) total 5 swabs white1 x 90 x 90cm drape with 10cm fenestration & adhesive edge 1 x tissue backed sterile field 90 x 90cm",
+    "Community Woundcare Pack (Medium) Tray Pair Medium Nitrile Gloves - cuffed White Waste Bag Towel White Plastic Apron 15x10x10cm 4Ply Swabs Measuring Tape with Pain Guide 50x50cm Tissue Backed Drape 45x45cm Tissue Backed Sterile Field (4x20 Packs per Sealed Bag)",
+    "Drape General Adhesive Edged Drape 90cm x 90cm"
+   ],
+   "hub": [
+    "skin-prep:pack",
+    "workwear:linen"
+   ],
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py; decision made on the catalogue's own item descriptions above",
+   "why": "Examples are dominated by sterile procedure/cannulation packs (amniocentesis, epidural, renal dressing, woundcare packs — skin-prep:pack) alongside separate patient/warming gowns that fit hospital textiles (workwear:linen).",
+   "decidedIn": "weekend sprint 2026-08-29"
   }
  ],
  "kinds": {
