@@ -2870,6 +2870,47 @@ def check_supplier_ranges(doc):
                  % (name, len(docs), len(prods), share * 100,
                     "; ".join(docs[:3])))
 
+    check_second_catalogues(doc)
+
+
+# A SITE THAT FILES ITS RANGE ACROSS TWO CATALOGUES (29/08/2026).
+# The crawler reads one WordPress post type per site. Where a company keeps two
+# genuine product catalogues, reading one publishes a PARTIAL range as the whole
+# — Joint Operations' report carried 46 of its 155 products for that reason.
+# scripts/crawl_supplier_site.py names those sites in SECOND_CATALOGUE, on
+# evidence read live from each, and records the types it actually read on the
+# capture as `postTypes`.
+#
+# THE INVARIANT: a capture for a site named there must show every one of those
+# types in its own `postTypes`. This is what fails if the merge silently stops
+# working — a refactor that drops the second read, a crawl by an older copy of
+# the script, or a hand edit — none of which changes the product count in a way
+# a human would notice on a 155-item list.
+SECOND_CATALOGUE_SITES = {
+    "jointoperations.co.uk": ("product", "product-recovery"),
+}
+
+
+def check_second_catalogues(doc):
+    if doc is None:
+        return
+    for name, rec in sorted((doc.get("suppliers") or {}).items()):
+        domain = (rec.get("domain") or "").lower()
+        want = SECOND_CATALOGUE_SITES.get(domain)
+        if not want:
+            continue
+        got = rec.get("postTypes") or []
+        missing = [t for t in want if t not in got]
+        if missing:
+            FAIL("supplier-products",
+                 "%s (%s) files its range across %d product post types (%s) and this capture "
+                 "read %s. A partial range published as the whole range states a product count "
+                 "that is not the company's. Re-crawl the supplier with the current "
+                 "scripts/crawl_supplier_site.py, which reads every type named in its "
+                 "SECOND_CATALOGUE registry."
+                 % (name, domain, len(want), ", ".join(want),
+                    ("only " + ", ".join(got)) if got else "no post type at all"))
+
 
 # --------------------------------------------------------------------------
 # 11. SUPPLIER PRODUCT DETAIL — per-product pages captured from each

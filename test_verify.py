@@ -1082,6 +1082,30 @@ def _(tmp):
     return "no category field to read one from"
 
 
+@case("a two-catalogue site whose capture dropped back to one post type")
+def _(tmp):
+    # 28/08/2026: Joint Operations' company report carried 46 of its 155
+    # products. The site files its range across two genuine WordPress
+    # catalogues — `product` ("Surgical Products", 109) and `product-recovery`
+    # ("Recovery Products", 46) — and the crawler reads one post type per site,
+    # so the report stated a partial range as the whole. Fixed 29/08/2026 by
+    # naming the site in SECOND_CATALOGUE and reading both.
+    #
+    # This is the failure that would NOT look like a failure: the range is a
+    # long flat list of plausible product names either way, so nothing on the
+    # page says a third of it is missing. Only `postTypes` records what was
+    # actually read, and only this check reads it. Strip it and the gate must
+    # refuse the file.
+    d = json.load(open("data/supplier-products.json"))
+    rec = (d.get("suppliers") or {}).get("Joint Operations")
+    if not rec:
+        return None                      # supplier not in the file — nothing to test
+    rec["postTypes"] = ["product"]
+    rec["products"] = rec["products"][:109]
+    json.dump(d, open("data/supplier-products.json", "w"))
+    return "files its range across 2 product post types"
+
+
 def cr_today(days=0):
     return (datetime.date.today() + datetime.timedelta(days=days)).isoformat()
 

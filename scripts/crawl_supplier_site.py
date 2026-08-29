@@ -127,6 +127,68 @@ DOC_LIBRARY_WORDS = (
 )
 
 
+# ---------------------------------------------------------------------------
+# A SITE WITH TWO GENUINE CATALOGUES (29/08/2026)
+#
+# The crawler reads ONE post type per site. Where a company files its range
+# across two real catalogues, whichever one is picked, the report states a
+# partial range as the whole — a count that reads as a fact. Joint Operations
+# was doing exactly that: `product` ("Surgical Products", 109 records) and
+# `product-recovery` ("Recovery Products", 46) are both genuine catalogues, and
+# the report carried 46 of 155.
+#
+# THE RULE: a second post type is merged ONLY where it is named here, and it is
+# named here only on evidence read live from that site — its own type registry
+# calls it a product type, it holds a catalogue's worth of records, and its
+# titles do NOT overlap the primary type's. A wider deny/allow list is not a
+# safe substitute: of the 72 WordPress-route suppliers, 9 expose more than one
+# product-named type and on 8 of them the second is a platform artefact
+# (Jetpack payment buttons, theme tabs, feature blurbs), which is why
+# DOC_LIBRARY_WORDS exists at all.
+#
+# CHECKED LIVE 29/08/2026 against each site's /wp-json/wp/v2/types and the
+# x-wp-total of each type:
+#
+#   jointoperations.co.uk   product 109 + product-recovery 46 = 155.
+#                           0 of 46 recovery titles appear in the surgical
+#                           range (compared on normalised titles). Two ranges,
+#                           no double count — MERGED.
+#
+#   www.benmormedical.co.uk product 68 + rentalproduct 46. NOT MERGED, and the
+#                           near case is recorded here so the next pass does not
+#                           re-open it: 28 of the 45 distinct `rentalproduct`
+#                           titles are already in `product` ("Bariatric
+#                           Community Bed", "Freeway Commode", "Flojac"...).
+#                           That type is a RENTAL OFFER of goods the catalogue
+#                           already lists, not a second catalogue. Merging it
+#                           would publish 28 products twice and overstate the
+#                           range by 60%.
+#
+# An entry here is a claim about one company's site. It is not carried forward
+# unchecked: `postTypes` on the capture records which types were actually read,
+# and verify.py fails the file if a merged site's capture drops back to one.
+SECOND_CATALOGUE = {
+    "jointoperations.co.uk": ("product-recovery",),
+}
+
+
+def extra_product_types(domain, types, primary):
+    """Evidenced second catalogues for this domain, as declared in SECOND_CATALOGUE.
+
+    Only types the site's OWN registry still exposes are returned, so a company
+    that retires a post type stops being merged rather than failing the run.
+    """
+    want = SECOND_CATALOGUE.get((domain or "").lower(), ())
+    out = []
+    for key, val in (types or {}).items():
+        base = (val or {}).get("rest_base") or key
+        if base == primary:
+            continue
+        if base in want or key in want:
+            out.append((base, (val or {}).get("taxonomies") or []))
+    return out
+
+
 def pick_product_type(types):
     """Choose the WordPress post type that is the company's product catalogue.
 
@@ -439,13 +501,14 @@ def shopify_products(domain, deadline=None):
     }, None
 
 # ---------------------------------------------------------------- route 1
-def wp_products(domain, deadline=None):
-    base = "https://%s/wp-json/wp/v2" % domain
-    types, _ = get(base + "/types", as_json=True)
-    ptype, taxes, why = pick_product_type(types)
-    if not ptype:
-        return None, why
+def _wp_read_type(base, ptype, taxes, deadline=None):
+    """Read one post type: its own category taxonomy, then its records.
 
+    Category ids are namespaced by post type. Two post types on the same site
+    carry two SEPARATE taxonomies (Joint Operations: `surgical` and `recovery`),
+    and their term ids start at 1 in both — merging them on the raw id would
+    file a surgical product under a recovery division.
+    """
     tax = None
     for t in taxes:
         if "cat" in t.lower():
@@ -463,8 +526,10 @@ def wp_products(domain, deadline=None):
             if not items:
                 break
             for c in items:
-                cats[c["id"]] = {"name": clean(c.get("name")), "parent": c.get("parent") or 0,
-                                 "count": c.get("count") or 0}
+                cats["%s:%s" % (ptype, c["id"])] = {
+                    "name": clean(c.get("name")),
+                    "parent": ("%s:%s" % (ptype, c["parent"])) if c.get("parent") else 0,
+                    "count": c.get("count") or 0}
             if len(items) < 100:
                 break
             page += 1
@@ -486,16 +551,41 @@ def wp_products(domain, deadline=None):
             name = clean((p.get("title") or {}).get("rendered"))
             if not name:
                 continue
-            ids = p.get(tax) or [] if tax else []
+            ids = ["%s:%s" % (ptype, i) for i in (p.get(tax) or [])] if tax else []
             products.append({"n": name, "cats": ids})
         if len(items) < 100:
             break
         page += 1
+    return products, cats
+
+
+def wp_products(domain, deadline=None):
+    base = "https://%s/wp-json/wp/v2" % domain
+    types, _ = get(base + "/types", as_json=True)
+    ptype, taxes, why = pick_product_type(types)
+    if not ptype:
+        return None, why
+
+    products, cats = _wp_read_type(base, ptype, taxes, deadline=deadline)
+    read = [ptype]
+
+    # A SECOND GENUINE CATALOGUE, only where this domain is named in
+    # SECOND_CATALOGUE on evidence read from that site. Nothing is inferred
+    # from the type names here.
+    for xtype, xtaxes in extra_product_types(domain, types, ptype):
+        if deadline and time.time() > deadline:
+            break
+        xprod, xcats = _wp_read_type(base, xtype, xtaxes, deadline=deadline)
+        if not xprod:
+            continue
+        products += xprod
+        cats.update(xcats)
+        read.append(xtype)
 
     if len(products) < MIN_PRODUCTS:
         return None, ("only %d product records on the site's API — that is a landing page, not a "
                       "catalogue" % len(products))
-    return {"products": products, "cats": cats}, None
+    return {"products": products, "cats": cats, "postTypes": read}, None
 
 
 def top_level(cid, cats):
@@ -515,6 +605,7 @@ WP_DEFAULT_TERMS = ("uncategorised", "uncategorized")
 
 def shape_from_wp(raw, domain):
     cats, products = raw["cats"], raw["products"]
+    post_types = raw.get("postTypes") or []
 
     # WHICH ROOT WINS WHEN A PRODUCT SITS UNDER SEVERAL (fixed 27/08/2026).
     # This used to be `roots[0]` — whichever term WordPress happened to return
@@ -616,7 +707,12 @@ def shape_from_wp(raw, domain):
     return {
         "domain": domain,
         "verified": time.strftime("%Y-%m-%d"),
-        "source": ("%s product catalogue (WordPress REST API), read this run" % domain),
+        "source": (("%s product catalogue (WordPress REST API), read this run" % domain)
+                   if len(post_types) < 2 else
+                   ("%s product catalogue (WordPress REST API), read this run \u2014 the site files "
+                    "its range across %d separate catalogues (%s) and all were read"
+                    % (domain, len(post_types), ", ".join(post_types)))),
+        "postTypes": post_types,
         "structureFrom": "the company's own product category taxonomy",
         "hasDivisions": has_divisions,
         "structure": "The company's own top-level product categories." if has_divisions else
