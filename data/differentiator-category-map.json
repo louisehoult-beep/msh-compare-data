@@ -331,10 +331,10 @@
  },
  "counts": {
   "pairs": 3762,
-  "mapped": 4102,
+  "mapped": 4129,
   "notTaxonomy": 125,
   "products": 60393,
-  "productsMapped": 50871
+  "productsMapped": 50975
  },
  "entries": [
   {
@@ -12360,9 +12360,14 @@
     "Lap Belt | Extra Wide",
     "Walking Frame Net Bag"
    ],
-   "hub": null,
+   "hub": [
+    "rehab:chair",
+    "rehab:walk"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples mix wheelchair accessories (mobility bag, extra-wide lap belt) with walking-aid accessories (cane tips, walking frame net bag), so the division genuinely spans both categories.",
+   "decidedIn": "Farla-Medical--sprint-B.json"
   },
   {
    "supplier": "Farla Medical",
@@ -13324,9 +13329,11 @@
     "Milestones In Dialysis",
     "Thank You Virtual Tour"
    ],
-   "hub": null,
+   "hub": "renal:hd",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples reference \"High Volume Hdf\" (haemodiafiltration) and \"Milestones In Dialysis\", confirming this is haemodialysis equipment.",
+   "decidedIn": "Fresenius-Medical-Care-UK--sprint.json"
   },
   {
    "supplier": "Abilia Ltd",
@@ -14200,9 +14207,11 @@
     "Cfx Craniomaxillofacial Fixation System",
     "Mfx Mandibular Fixation System"
    ],
-   "hub": null,
+   "hub": "ortho:trauma",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples list named fixation systems (\"Cfx Craniomaxillofacial Fixation System\", \"Mfx Mandibular Fixation System\", \"Quickfix Mmf\") which are trauma/fracture fixation hardware.",
+   "decidedIn": "Acumed-Ltd--sprint.json"
   },
   {
    "supplier": "Vygon (UK)",
@@ -24286,9 +24295,11 @@
     "Quality Manager",
     "Security"
    ],
-   "hub": null,
+   "hub": "digital:sw",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples (Data Insights And Remote Support, Quality Manager, Accreditation) describe laboratory/POCT data-management and quality-management software, matching digital:sw's clinical/laboratory software systems.",
+   "decidedIn": "Radiometer-UK--sprint.json"
   },
   {
    "supplier": "HC21 (UK) Ltd",
@@ -25462,9 +25473,11 @@
     "Nilaqua Skin Cleansing Foam 200ml | Aerosol Free",
     "Nilaqua Skin Cleansing Foam | Antimicrobial | 200ml"
    ],
-   "hub": null,
+   "hub": "skin-prep:wipe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Vernacare and Nilaqua skin cleansing foams (one explicitly labelled antimicrobial) are no-rinse patient cleansing products, matching the antimicrobial wipes & cleansing category.",
+   "decidedIn": "Farla-Medical--sprint-A.json"
   },
   {
    "supplier": "Farla Medical",
@@ -25492,9 +25505,11 @@
     "Instramed Suture Pack",
     "Instramed National Suture Removal Pack"
    ],
-   "hub": null,
+   "hub": "skin-prep:pack",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Rocialle and Instramed suture and suture-removal packs are procedure packs used for suturing, matching Procedure & cannulation packs.",
+   "decidedIn": "Farla-Medical--sprint-A.json"
   },
   {
    "supplier": "Farla Medical",
@@ -25588,9 +25603,11 @@
     "Plinth Model 502T Traction Table | Electric",
     "Plinth Model 502 Changing Table | Electric Version"
    ],
-   "hub": null,
+   "hub": "rehab:therapy",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Three of four examples are Plinth traction tables, physiotherapy treatment/exercise equipment.",
+   "decidedIn": "Farla-Medical--sprint-B.json"
   },
   {
    "supplier": "Farla Medical",
@@ -26095,9 +26112,11 @@
     "Content Management",
     "Hd Visualization"
    ],
-   "hub": null,
+   "hub": "mis:instruments",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples 4K/HD Visualization and Veqtron ICG are laparoscopic camera and ICG-fluorescence visualisation systems used in minimally invasive surgery.",
+   "decidedIn": "Conmed-UK-Ltd--sprint.json"
   },
   {
    "supplier": "GBUK Group",
@@ -28309,9 +28328,11 @@
     "Polythene Disposable Gloves | Medium | Pack of 100 Pieces",
     "Polythene Disposable Gloves | Large | Pack of 100 Pieces"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are generic polythene/non-sterile disposable gloves rather than nitrile/vinyl/latex exam-grade gloves, best captured as general PPE.",
+   "decidedIn": "Farla-Medical--sprint-B.json"
   },
   {
    "supplier": "Farla Medical",
@@ -28324,9 +28345,11 @@
     "KleenMe Steel Wool Soap Filled Pads | Pack of 10",
     "MediSpray 70% Alcohol Disinfectant Hard Surface Spray | 750ml"
    ],
-   "hub": null,
+   "hub": "skin-prep:disinfect",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Hypaclean alcohol hand gel and HiBi Clean Up hand disinfectant pump are medicinal skin disinfectants applied to the hands.",
+   "decidedIn": "Farla-Medical--sprint-A.json"
   },
   {
    "supplier": "Farla Medical",
@@ -28339,9 +28362,11 @@
     "BioHygiene Ecological Rinse Aid | 20L | Single",
     "BioHygiene Ecological Rinse Aid | 5L | Single"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are dishwasher rinse aid products (Greyland, BioHygiene), a cleaning chemical.",
+   "decidedIn": "Farla-Medical--sprint-B.json"
   },
   {
    "supplier": "Farla Medical",
@@ -28369,9 +28394,11 @@
     "BioHygiene Eco Washing Up Liquid | 1L | Single",
     "Mr Kleen Washing Up Liquid | 5L"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are washing-up liquid cleaning products (Greyland, BioHygiene, Mr Kleen).",
+   "decidedIn": "Farla-Medical--sprint-B.json"
   },
   {
    "supplier": "Farla Medical",
@@ -28557,9 +28584,11 @@
     "KleenMe Rubber Gloves | Single",
     "Rubber Gloves | Black | Heavy Duty Gauntlet | Single"
    ],
-   "hub": null,
+   "hub": "infection:ppe",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are safety goggles and heavy-duty rubber gloves used as general protective equipment, not clinical exam gloves.",
+   "decidedIn": "Farla-Medical--sprint-B.json"
   },
   {
    "supplier": "Farla Medical",
@@ -28830,9 +28859,11 @@
     "Nilaqua Towel Off Shampoo | 500ml",
     "Nilaqua Towel Off Shampoo | 200ml"
    ],
-   "hub": null,
+   "hub": "rehab:hygiene",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are patient shampoo caps and rinse-free/towel-off shampoo, i.e. personal hygiene products.",
+   "decidedIn": "Farla-Medical--sprint-B.json"
   },
   {
    "supplier": "Farla Medical",
@@ -30900,9 +30931,11 @@
     "Self Fill",
     "Aspirating"
    ],
-   "hub": null,
+   "hub": "pathology:poct",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples Safe Clinitubes, Self Fill and Aspirating are blood gas sampling syringes/capillaries used with point-of-care blood gas analysers.",
+   "decidedIn": "Radiometer-UK--sprint.json"
   },
   {
    "supplier": "HC21 (UK) Ltd",
@@ -31785,9 +31818,11 @@
     "Clearview Prone Headrest",
     "ARDS Prone Positioning System ELP200"
    ],
-   "hub": null,
+   "hub": "handling:mattress",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples ('Clearview Prone Headrest', 'ARDS Prone Positioning System ELP200') describe a prone-positioning support system for ventilated patients, matching mattresses/overlays/positioning equipment.",
+   "decidedIn": "Trulife-Limited--sprint.json"
   },
   {
    "supplier": "Trulife Limited",
@@ -32341,9 +32376,11 @@
     "Finish Dishwasher Salt | 2kg | Single",
     "Finish Dishwasher Salt | 5Kg"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are dishwasher salt cleaning consumables (Finish brand).",
+   "decidedIn": "Farla-Medical--sprint-B.json"
   },
   {
    "supplier": "Farla Medical",
@@ -35303,9 +35340,11 @@
     "Ecmo Therapy Critical Care",
     "Novalung"
    ],
-   "hub": null,
+   "hub": "theatres:perfusion",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples name \"Ecmo Therapy Critical Care\" and \"Novalung\", an ECMO/extracorporeal life-support platform built on oxygenator and centrifugal-pump technology matching cardiopulmonary bypass and perfusion.",
+   "decidedIn": "Fresenius-Medical-Care-UK--sprint.json"
   },
   {
    "supplier": "Bausch & Lomb UK",
@@ -35536,9 +35575,11 @@
     "ez-Track1 & ez-Tracker",
     "i-Tracker"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples ez-Track1, ez-Tracker and i-Tracker are automated lab tracker/analyser instruments in the same autoimmune/biologics diagnostics instrument family as this supplier's other lab equipment (BlueDiver, i-Track 10).",
+   "decidedIn": "MedScience-Distribution--sprint.json"
   },
   {
    "supplier": "MedScience Distribution",
@@ -35549,9 +35590,11 @@
     "BlueDiver ||",
     "BlueDiver l"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples BlueDiver II/I are laboratory indirect-immunofluorescence processing instruments for autoimmune serology testing, i.e. lab analyser equipment.",
+   "decidedIn": "MedScience-Distribution--sprint.json"
   },
   {
    "supplier": "Trulife Limited",
@@ -36835,9 +36878,11 @@
     "Volkman Curette",
     "Formby Cerumen Scoop and Hook"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples include 'Formby Cerumen Scoop and Hook', a cerumen (ear wax) removal instrument, alongside a Volkman Curette, identifying this as ENT surgical instrumentation.",
+   "decidedIn": "Blink-Medical-Limited--sprint.json"
   },
   {
    "supplier": "Blink Medical Limited",
@@ -42473,9 +42518,11 @@
    "examples": [
     "Tongue Depressors Box 100"
    ],
-   "hub": null,
+   "hub": "ent:instr",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Example Tongue Depressors Box 100 is a basic ENT/throat examination consumable.",
+   "decidedIn": "Crest-Medical-Ltd--sprint.json"
   },
   {
    "supplier": "Crest Medical Ltd",
@@ -53295,9 +53342,11 @@
    "examples": [
     "Closed Camera Cover, Sleeve, Spring Loaded"
    ],
-   "hub": null,
+   "hub": "theatres:theatre",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Example 'Closed Camera Cover, Sleeve, Spring Loaded' is a sterile equipment/camera drape used to maintain a sterile field around surgical equipment, a general theatre consumable.",
+   "decidedIn": "Paramount-Medical-Solutions-Ltd--sprint.json"
   },
   {
    "supplier": "Kimberly Clark",
@@ -54971,9 +55020,11 @@
    "examples": [
     "i-Track 10"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Example i-Track 10 is an automated laboratory ELISA-processing instrument, i.e. lab analyser equipment.",
+   "decidedIn": "MedScience-Distribution--sprint.json"
   },
   {
    "supplier": "MedScience Distribution",
@@ -54983,9 +55034,11 @@
    "examples": [
     "LISA TRACKER"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Example LISA TRACKER is an ELISA immunoassay kit for monitoring biologic drug levels, i.e. a laboratory reagent consumable rather than the instrument that runs it.",
+   "decidedIn": "MedScience-Distribution--sprint.json"
   },
   {
    "supplier": "MedScience Distribution",
@@ -56843,9 +56896,11 @@
    "examples": [
     "Resuscitator Manual Bag Valve Mask | 1000ml | Size: 5 | Adult | Single"
    ],
-   "hub": null,
+   "hub": "respiratory:resp",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Sole example is a manual bag-valve-mask resuscitator, a respiratory therapy/circuit device.",
+   "decidedIn": "Farla-Medical--sprint-B.json"
   },
   {
    "supplier": "Farla Medical",
@@ -56935,9 +56990,11 @@
    "examples": [
     "Intersurgical Resuscitation Mask Inc. Hard Case"
    ],
-   "hub": null,
+   "hub": "respiratory:resp",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "The Intersurgical resuscitation mask is a manual-ventilation airway device from a respiratory-equipment manufacturer, matching respiratory therapy & circuits.",
+   "decidedIn": "Farla-Medical--sprint-A.json"
   },
   {
    "supplier": "Farla Medical",
@@ -57235,9 +57292,11 @@
    "examples": [
     "The Bag II Disposable Resuscitator with Adult Mask #5"
    ],
-   "hub": null,
+   "hub": "respiratory:resp",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Sole example is a disposable resuscitator with adult mask, a manual respiratory support device, not a defibrillator despite the division name.",
+   "decidedIn": "Farla-Medical--sprint-B.json"
   },
   {
    "supplier": "Farla Medical",
@@ -57441,9 +57500,11 @@
    "examples": [
     "Ambu SPUR II Mask | Adult"
    ],
-   "hub": null,
+   "hub": "respiratory:resp",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Sole example is an Ambu SPUR II resuscitator mask, a manual respiratory support accessory.",
+   "decidedIn": "Farla-Medical--sprint-B.json"
   },
   {
    "supplier": "Farla Medical",
@@ -57667,9 +57728,11 @@
    "examples": [
     "seca 212 Measuring Tape for Head Circumference of Babies & Toddlers | Pack of 15"
    ],
-   "hub": null,
+   "hub": "neonatal:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Sole example is a seca head-circumference measuring tape for babies/toddlers, neonatal measurement equipment.",
+   "decidedIn": "Farla-Medical--sprint-B.json"
   },
   {
    "supplier": "Farla Medical",
@@ -58003,9 +58066,11 @@
    "examples": [
     "Mr Kleen Washing Up Liquid | 1L"
    ],
-   "hub": null,
+   "hub": "facilities:clean",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Mr Kleen Washing Up Liquid is a cleaning chemical/consumable.",
+   "decidedIn": "Farla-Medical--sprint-A.json"
   },
   {
    "supplier": "Farla Medical",
