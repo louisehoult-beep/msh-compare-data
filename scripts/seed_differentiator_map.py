@@ -40,6 +40,31 @@ NOT_TAXONOMY = {
 
 
 def main():
+    # REFUSAL ADDED 29/08/2026. This script rebuilds the pair list from
+    # supplier-products.json alone, which predates the NHS Supply Chain route.
+    # Every kind="nhssc-term" entry, and every division belonging to a supplier
+    # reached only through the NHSSC catalogue, has no record in that file — so
+    # regenerating the list DELETES them. Run unguarded on 29/08 it dropped 982
+    # mapped pairs covering 10,850 products, including Coloplast, BD, B. Braun,
+    # Smith+Nephew, Medtronic, Boston Scientific and Stryker: exactly the
+    # un-crawlable majors the NHSSC route exists to reach.
+    #
+    # A note in the README is a memory; this is a check. It refuses rather than
+    # warns, because the loss is silent and a later push publishes it.
+    if os.path.exists(MAP):
+        _m = json.load(open(MAP))
+        _nhssc = [e for e in _m.get("entries", []) if e.get("kind") == "nhssc-term"]
+        if _nhssc and os.environ.get("SEED_ALLOW_NHSSC_LOSS") != "1":
+            print("REFUSING: %d nhssc-term entries in %s would be destroyed."
+                  % (len(_nhssc), MAP), file=sys.stderr)
+            print("This seeder regenerates the pair list from supplier-products.json,",
+                  file=sys.stderr)
+            print("which holds no NHSSC-sourced supplier. Union new pairs onto the",
+                  file=sys.stderr)
+            print("existing map instead. See data/differentiator-map-parts/README.md.",
+                  file=sys.stderr)
+            return 1
+
     sup = json.load(open("data/supplier-products.json"))["suppliers"]
     vocab = json.load(open("data/compare-suppliers.json"))["specialities"]
 
@@ -115,4 +140,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main() or 0)

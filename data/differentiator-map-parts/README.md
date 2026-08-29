@@ -52,3 +52,30 @@ python3 scripts/merge_differentiator_parts.py --apply  # fold them in
 python3 scripts/build_differentiator.py
 ./land.sh "Differentiator: category mappings for <batch>" data/differentiator-category-map.json data/differentiator.json data/differentiator-map-parts
 ```
+
+## Two traps, both found on 29/08/2026
+
+**1. Reverting a mapping in the map alone does not stick.** The 14:00 run
+reverted four thin-evidence mappings by editing
+`../differentiator-category-map.json` directly, but left the part files that
+proposed them in place. `merge_differentiator_parts.py` only ever fills a `hub`
+that is currently null — so the very next merge re-applied all four, silently.
+The 20:00 run caught it and deleted the offending decisions from
+`Corin--agent-batch6.json` and `Heidelberg-Engineering--agent-batch6.json`.
+
+**A revert is only done when the decision is removed from the part file that
+proposed it.** Fix the part file first, then the map. If you revert in the map
+only, you have scheduled the same wrong mapping to publish on the next run.
+
+**2. `scripts/seed_differentiator_map.py` must NOT be re-run.** It rebuilds the
+pair list from `data/supplier-products.json` alone, which predates the NHSSC
+route. Every `kind: "nhssc-term"` entry — and every division belonging to a
+supplier reached only through the NHS Supply Chain catalogue — has no record
+there at all. Re-running it on 29/08 dropped 982 mapped pairs covering 10,850
+products, including Coloplast, BD, B. Braun, Smith+Nephew, Medtronic, Boston
+Scientific and Stryker: precisely the un-crawlable majors the whole NHSSC route
+exists to reach. It was backed out and not published.
+
+Adding new divisions from a fresh crawl needs a seeder that unions the new pairs
+onto the existing map instead of regenerating the list. Until that exists, new
+divisions are picked up by hand from the unmapped query in the sprint task.
