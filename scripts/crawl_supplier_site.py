@@ -1133,6 +1133,124 @@ def wix_products(domain, deadline=None):
     }, None
 
 
+# ---------------------------------------------------------------- route 4
+# WOOCOMMERCE STORE API, added 29/08/2026 (weekend sprint, Step 4 priority 1).
+#
+# WHY THIS ROUTE HAD TO EXIST. Route 1 asks `/wp-json/wp/v2/types` for a
+# product-shaped post type, then reads it via the generic WordPress REST API.
+# WooCommerce does not always register `product` there — many stores ship it
+# with the default WP REST product endpoint disabled or non-public, which
+# route 1 correctly reads as "no usable type" and refuses, and route 2
+# (sitemap) then also fails wherever the site's sitemap is JS-rendered or
+# omits a product sitemap. 28/08/2026 found this is a crawler gap, not a
+# supplier refusal: `/wp-json/wc/store/v1/products` is WooCommerce's OWN
+# storefront API, served publicly by default (it powers the site's own cart/
+# checkout blocks), and it answers on sites route 1 could not reach at all.
+# Verified reachable on 8 previously-refused suppliers, 6 of them returning
+# real product categories usable as divisions: harvesthealthcare.co.uk,
+# andrac.com, surtex-instruments.com, careflex.co.uk, silvalea.com,
+# kinetikwellbeing.com, gammacore.co.uk, cdmedical.co.uk.
+#
+# WHAT IT RETURNS. Each product record carries its own `categories` — a list
+# of `{id, name, slug, link}`, already the company's own filing, no taxonomy
+# walk needed the way route 1 needs one. A product can carry more than one;
+# the SMALLEST category (by catalogue coverage) wins, the same rule route 0
+# applies to overlapping Shopify collections and route 1 applies to competing
+# WordPress taxonomy roots — the category that covers fewer products is the
+# more specific claim about this one.
+#
+# Detection is one definitive request, same principle as route 0: a genuine
+# WooCommerce Store API returns a JSON list of product objects (even an empty
+# store returns `[]`); anything else — 404, HTML, a REST-disabled response —
+# is read as "not this route" and costs exactly one wasted request on every
+# site that isn't WooCommerce-with-a-public-Store-API.
+WC_STORE_BUDGET_S = 600
+
+
+def _wc_store_paged(domain, deadline=None, cap=MAX_PAGES):
+    """Walk the WooCommerce Store API's ?page= pagination to the end."""
+    out, page = [], 1
+    while page <= cap:
+        if deadline and time.time() > deadline:
+            raise RuntimeError("budget exhausted after %d page(s)" % (page - 1))
+        items, _ = get("https://%s/wp-json/wc/store/v1/products?per_page=100&page=%d"
+                       % (domain, page), as_json=True)
+        if not isinstance(items, list):
+            raise RuntimeError("Store API returned a non-list response")
+        out += items
+        if len(items) < 100:
+            break
+        page += 1
+    return out
+
+
+def wc_store_products(domain, deadline=None):
+    """Read a WooCommerce Store API's own product records and their own
+    filed categories. See the route-4 comment block above."""
+    try:
+        prods = _wc_store_paged(domain, deadline=deadline)
+    except urllib.error.HTTPError as e:
+        return None, "the WooCommerce Store API returned HTTP %d" % e.code
+    except Exception as e:
+        return None, "not a readable WooCommerce Store API (%s)" % str(e)[:60]
+
+    if len(prods) < MIN_PRODUCTS:
+        return None, ("the WooCommerce Store API returned %d product(s), too few to be a "
+                      "catalogue" % len(prods))
+
+    # Coverage of each category across the whole range, so the smallest (most
+    # specific) one can win when a product carries several.
+    cov = {}
+    for p in prods:
+        for c in (p.get("categories") or []):
+            name = clean(c.get("name"))
+            if name:
+                cov[name] = cov.get(name, 0) + 1
+
+    divisions, plist = {}, []
+    for p in prods:
+        name = clean(p.get("name"))
+        if not name or len(name) < 3:
+            continue
+        cats = [clean(c.get("name")) for c in (p.get("categories") or []) if clean(c.get("name"))]
+        div = min(cats, key=lambda c: (cov.get(c, 0), c)) if cats else "Uncategorised"
+        divisions[div] = divisions.get(div, 0) + 1
+        plist.append({"n": name, "division": div, "category": cats[0] if cats else ""})
+
+    if not plist:
+        return None, "the WooCommerce Store API exposed no readable product records"
+
+    real = [d for d in divisions if d != "Uncategorised"]
+    uncat = divisions.get("Uncategorised", 0)
+    has_divisions = bool(real) and uncat * 2 <= len(plist)
+    flat_note = ("" if has_divisions else
+                 "%d of %d products carry no category on the store's own Store API, so most of "
+                 "the range sits in one unsorted 'Uncategorised' list rather than the company's "
+                 "own grouping" % (uncat, len(plist)))
+    return {
+        "domain": domain,
+        "verified": time.strftime("%Y-%m-%d"),
+        "source": "%s WooCommerce Store API product records, read this run" % domain,
+        "structureFrom": "the company's own WooCommerce product categories (Store API)",
+        "hasDivisions": has_divisions,
+        "structure": "The company's own product categories, as published on its own store." if
+                     has_divisions else
+                     "No usable grouping on the Store API — listed as one flat range.",
+        "filingRule": (("Grouping MIRRORS the manufacturer's own filing, read from the company's "
+                        "own WooCommerce Store API. Where a product sits under a category that "
+                        "reads oddly clinically, that is where the company files it, and a rep "
+                        "searching the company's way will find it there.")
+                       if has_divisions else
+                       ("Read from the Store API's own product records, so names are exact. "
+                        + flat_note + " — every item is listed by name below rather than grouped, "
+                        "because a fabricated grouping would misrepresent the company's own "
+                        "filing.")),
+        "divisions": [{"name": k, "products": v}
+                      for k, v in sorted(divisions.items(), key=lambda kv: -kv[1])],
+        "products": plist,
+    }, None
+
+
 def reachable_host(domain):
     """Return whichever of `domain` / `www.domain` actually answers, or None.
 
@@ -1201,6 +1319,27 @@ def crawl(domain):
         why = "the site's WordPress API returned HTTP %d" % e.code
     except Exception as e:
         why = "the site's WordPress API could not be read (%s)" % str(e)[:60]
+
+    # Route 4 — WOOCOMMERCE STORE API (29/08/2026), tried here rather than
+    # after the sitemap route. A WordPress site that failed route 1 may still
+    # be a WooCommerce store with its default product REST type disabled but
+    # its own Store API public, and the Store API's real product categories
+    # are a better filing than the generic sitemap route ever recovers — the
+    # sitemap route has no category signal at all, so it always "succeeds"
+    # flat. Tried here so a genuine WooCommerce store gets its own divisions
+    # instead of silently falling through to an Uncategorised sitemap listing
+    # that never gets revisited once route 2 has "succeeded". See the route-4
+    # comment block above wc_store_products() for why this is a distinct
+    # route rather than folded into route 1.
+    try:
+        shaped, why4 = wc_store_products(domain, deadline=started + WC_STORE_BUDGET_S)
+        if shaped:
+            return shaped, None
+    except urllib.error.HTTPError as e:
+        why4 = "the WooCommerce Store API returned HTTP %d" % e.code
+    except Exception as e:
+        why4 = "the WooCommerce Store API could not be read (%s)" % str(e)[:60]
+
     try:
         shaped, why2 = sitemap_products(domain, deadline=started + SITE_BUDGET_S,
                                         product_paths=crawl.product_paths)
@@ -1211,7 +1350,7 @@ def crawl(domain):
     except Exception as e:
         why2 = "the sitemap could not be read (%s)" % str(e)[:50]
 
-    # Route 3 — WIX (28/08/2026), tried only once routes 0-2 have all
+    # Route 3 — WIX (28/08/2026), tried only once routes 0-2 and 4 have all
     # failed. Detection is one definitive request — /sitemap.xml either
     # stamps generatedBy="WIX" and indexes a *-products-sitemap.xml, or it
     # does not — so a non-Wix site pays exactly one extra request to be told
@@ -1226,7 +1365,7 @@ def crawl(domain):
     except Exception as e:
         why3 = "the Wix storefront could not be read (%s)" % str(e)[:60]
 
-    return None, "%s; %s; %s" % (why, why2, why3)
+    return None, "%s; %s; %s; %s" % (why, why4, why2, why3)
 
 
 def domain_for(rec):
