@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-08-28",
+ "lastRun": "2026-08-29",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -126,7 +126,19 @@
   "Carrow Medical Limited",
   "Cavagna Group UK",
   "Ccmed Ltd",
-  "Ceannaire Medical"
+  "Ceannaire Medical",
+  "Cefndy Healthcare",
+  "Celtic SMR Ltd",
+  "Cenobiologics Ltd",
+  "Central Management Catalogue Agency UK Ltd T/A CMCA(UK)",
+  "Cepheid",
+  "Chalice Medical Ltd",
+  "Chaneco",
+  "Charter Kontron Limited",
+  "Chemence Medical",
+  "Chemical Intelligence Limited",
+  "CHG Meridian UK Limited",
+  "Chiltern Invadex (UK) Limited"
  ],
  "refusals": [
   {
@@ -253,6 +265,16 @@
    "name": "CardioScan Ltd",
    "reason": "Alias refused; speciality \"Cardiology\" WAS added. Companies House 11746846 CARDIOSCAN LTD (active, 54 Portland Place, London) is identical to the display name and has no previous names, so it yields no new form. The global site cardioscan.co footers the AUSTRALIAN parent \"CardioScan Services Pty Ltd\", which is barred as a parent name. Single-token \"CardioScan\" is a shortening, not the whole canonical name, and it is ambiguous in any case: Numed sells a \"CardioScan 11\" Holter software product under that word, so matching on it would publish another firm's coverage here.",
    "date": "2026-08-28"
+  },
+  {
+   "name": "Cenobiologics Ltd",
+   "reason": "The company's own website returns HTTP 202 with an empty body on both https://cenobiologics.com and https://www.cenobiologics.co.uk (bot wall), so no masthead, About page or footer legal line could be read. The Companies House public register holds CENOBIOLOGICS LTD (07528157, Milton Keynes), whose registered name normalises identically to the display name, so it yields no new form. \"Cenobiologics\" on its own is a shortening of the canonical name, not the whole of it, so rule 2 rules it out. No alias added.",
+   "date": "2026-08-29"
+  },
+  {
+   "name": "Chemence Medical",
+   "reason": "Entity is unresolved, so no name form can be attributed. The record's display name is \"Chemence Medical\"; chemencemedical.com is \"Chemence Medical, Inc.\", headquartered in metropolitan Atlanta, GA (its own About page). The NHS Supply Chain Wound Closure framework record already in this record names the supplier as \"Chemence Ltd\", and the Companies House public register holds CHEMENCE LIMITED (01746313, London) with no UK company named Chemence Medical. Chemence Limited is the group parent whose own site (chemence.com) also covers consumer super glue, industrial adhesives, graphics and cosmetics, so adding it as an alias of this record would attach the parent's non-medical coverage to a Hub supplier - the exact case rule 4 forbids. Which entity this record IS must be settled before any alias is added.",
+   "date": "2026-08-29"
   }
  ],
  "sources": {
@@ -869,6 +891,144 @@
    "aliases": [],
    "verifiedOn": "2026-08-28",
    "sources": "Speciality only. Own site cardioscan.co/uk/services states the UK range as Holter monitoring, 12-lead ECG reporting and 24-hour ABPM, so \"Cardiology\" was added. No alias added — see refusal."
+  }
+ },
+ "evidence": {
+  "Cefndy Healthcare": {
+   "date": "2026-08-29",
+   "aliasesAdded": [
+    "cefndy.com"
+   ],
+   "specialitiesAdded": [
+    "Rehabilitation and mobility",
+    "Patient handling"
+   ],
+   "sources": [
+    "https://www.cefndy.com/ (home, title and og:site_name \"Cefndy Healthcare\", product categories)",
+    "https://www.cefndy.com/about-us/ (About Us: \"manufacture and supply of Aids to Daily Living\"; part of Denbighshire County Council)"
+   ],
+   "note": "No second trading form found: the masthead, the product pages and the About Us page all use \"Cefndy Healthcare\". The historic name \"Cefndy Enterprises\" (1976, Clwyd County Council) is on the About Us page but is not a name the company trades under now, so it was not added. Companies House holds no company of this name (it is a council service), so no registered or previous name was available. Only the domain the company owns was added."
+  },
+  "Celtic SMR Ltd": {
+   "date": "2026-08-29",
+   "aliasesAdded": [
+    "Celtic SMR",
+    "Celtic SMR Limited",
+    "celticsmr.co.uk"
+   ],
+   "specialitiesAdded": [],
+   "sources": [
+    "https://www.celticsmr.co.uk/ (masthead and og:site_name \"Celtic SMR\")",
+    "https://www.celticsmr.co.uk/about-us/ (\"The dedicated sales and technical teams at Celtic SMR\")",
+    "Companies House public register: CELTIC SMR LIMITED, 01795571, Haverfordwest"
+   ],
+   "note": "\"CelticSMR\" (one word) also appears in page titles but is a single token that is not the whole canonical name, so it was not added."
+  },
+  "Central Management Catalogue Agency UK Ltd T/A CMCA(UK)": {
+   "date": "2026-08-29",
+   "aliasesAdded": [
+    "CMCA(UK)",
+    "cmcauk.co.uk"
+   ],
+   "specialitiesAdded": [],
+   "sources": [
+    "https://www.cmcauk.co.uk/ (og:site_name \"CMCA(UK)\"; site navigation \"About CMCA(UK)\"; page title \"...| CMCA\")"
+   ],
+   "note": "\"CMCA\" on its own was NOT added: a single token that is a shortening of the canonical name. \"CMCA(UK)\" normalises to the two-token sequence \"cmca uk\", which the display name does not contain as a contiguous sequence, so this is the form that adds recall."
+  },
+  "Cepheid": {
+   "date": "2026-08-29",
+   "aliasesAdded": [
+    "Cepheid UK Limited",
+    "cepheid.com"
+   ],
+   "specialitiesAdded": [],
+   "sources": [
+    "Companies House public register: CEPHEID UK LIMITED, 04422108, Blythe Valley Business Park, Solihull, incorporated 22 April 2002",
+    "https://www.cepheid.com/en-GB.html (the company's own UK site)"
+   ],
+   "note": "The display name \"Cepheid\" is itself the company's whole trading name, so it already stands on its own under rule 2; the UK registered entity name and the owned domain were added as verified forms."
+  },
+  "Chalice Medical Ltd": {
+   "date": "2026-08-29",
+   "aliasesAdded": [
+    "Chalice Medical",
+    "Chalice Medical Limited",
+    "chalicemedical.com"
+   ],
+   "specialitiesAdded": [
+    "Theatres / surgical",
+    "Anaesthesia and critical care"
+   ],
+   "sources": [
+    "https://www.chalicemedical.com/ (masthead and footer \"Chalice Medical Ltd.\"; address Manton Wood Enterprise Park, Worksop S80 2RS)",
+    "https://www.chalicemedical.com/profile/ (\"Chalice Medical is a UK-based medical device manufacturer...extra-corporeal bypass surgery\")",
+    "Companies House public register: CHALICE MEDICAL LIMITED, 03625972, Units 1-2 Manton Wood Enterprise Park, Worksop S80 2RS (same address as the website)"
+   ]
+  },
+  "Chaneco": {
+   "date": "2026-08-29",
+   "aliasesAdded": [
+    "Chaneco Limited",
+    "chaneco.co.uk"
+   ],
+   "specialitiesAdded": [],
+   "sources": [
+    "https://www.chaneco.co.uk/ (own site, og:site_name \"Chaneco\"; \"Orthopaedic footwear manufacturer and supplier of Orthotic products\")",
+    "Companies House public register: CHANECO LIMITED, 11511502, Brackmills, Northampton"
+   ]
+  },
+  "Charter Kontron Limited": {
+   "date": "2026-08-29",
+   "aliasesAdded": [
+    "Charter Kontron",
+    "charter-kontron.com"
+   ],
+   "specialitiesAdded": [],
+   "sources": [
+    "https://charter-kontron.com/ (own site, page title \"Charter Kontron | Your Trusted Partner\")",
+    "Companies House public register: CHARTER-KONTRON LIMITED, 03698371, Linford Wood, Milton Keynes"
+   ],
+   "note": "The Companies House registered form \"CHARTER-KONTRON LIMITED\" normalises identically to the display name and so was not added separately. \"Charter Kontron\" without the legal suffix is the form the company uses on its own masthead and is the one that adds recall."
+  },
+  "Chemical Intelligence Limited": {
+   "date": "2026-08-29",
+   "aliasesAdded": [
+    "Chemical Intelligence",
+    "c-i.co.uk"
+   ],
+   "specialitiesAdded": [],
+   "sources": [
+    "https://c-i.co.uk/ (own site: page title and og:site_name \"Chemical Intelligence\"; footer legal line \"(c) Chemical Intelligence Limited, 2022\")"
+   ]
+  },
+  "CHG Meridian UK Limited": {
+   "date": "2026-08-29",
+   "aliasesAdded": [
+    "CHG-MERIDIAN",
+    "chg-meridian.co.uk"
+   ],
+   "specialitiesAdded": [],
+   "sources": [
+    "https://www.chg-meridian.co.uk (redirects to the company's own UK site https://www.chg-meridian.com/gb-en/; page title \"Asset Lifecycle Experts | CHG-MERIDIAN\")",
+    "Companies House public register: CHG-MERIDIAN UK LIMITED, 01276016, 65 High Street, Egham (previous name CHG-MERIDIAN COMPUTER LEASING UK LIMITED)"
+   ],
+   "note": "\"CHG-MERIDIAN\" normalises to the two-token sequence \"chg meridian\", which the display name does not contain contiguously, so it is the form that adds recall. The registered name normalises identically to the display name and the previous name is longer than a form already covered, so neither was added. Specialities left EMPTY: this is a technology-finance and asset-lifecycle business named on NHS Supply Chain's Finance Solutions framework, and its own site states no clinical scope."
+  },
+  "Chiltern Invadex (UK) Limited": {
+   "date": "2026-08-29",
+   "aliasesAdded": [
+    "Chiltern Invadex",
+    "chilterninvadex.co.uk"
+   ],
+   "specialitiesAdded": [
+    "Patient handling",
+    "Rehabilitation and mobility"
+   ],
+   "sources": [
+    "https://www.chilterninvadex.co.uk/ (masthead \"Chiltern Invadex\", contact sales@chilterninvadex.co.uk, product ranges as quoted)",
+    "Companies House public register: CHILTERN INVADEX (UK) LIMITED, 04704248, Lancots Lane, Sutton, St. Helens"
+   ]
   }
  }
 }
