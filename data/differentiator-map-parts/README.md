@@ -76,6 +76,27 @@ products, including Coloplast, BD, B. Braun, Smith+Nephew, Medtronic, Boston
 Scientific and Stryker: precisely the un-crawlable majors the whole NHSSC route
 exists to reach. It was backed out and not published.
 
-Adding new divisions from a fresh crawl needs a seeder that unions the new pairs
-onto the existing map instead of regenerating the list. Until that exists, new
-divisions are picked up by hand from the unmapped query in the sprint task.
+Adding new divisions from a fresh crawl unions the new pairs onto the existing
+map instead of regenerating the list. **That seeder now exists:**
+
+```bash
+python3 scripts/union_differentiator_pairs.py            # report only
+python3 scripts/union_differentiator_pairs.py --apply     # append the new pairs
+```
+
+Built 30/08/2026, after the 20:00 sprint run found **428 (supplier, division)
+pairs holding 11,030 products that were in `supplier-products.json` but had no
+entry in the map at all** — invisible to every "how many are unmapped?" query,
+because those queries count map entries and these had none. They arrived with
+the WooCommerce Store API route (Surtex alone: 204 pairs) and the nightly cloud
+captures, and `merge_differentiator_parts.py` refuses any decision for a pair
+that is not already in the worklist, so there was no route for them into the
+map.
+
+It is append-only by construction and asserts it rather than trusting it: every
+existing entry is carried through object-for-object, a pair already in the map is
+never touched even if the fresh crawl now sees different products under it, and
+the run refuses to write if it would add a duplicate pair. An entry's identity is
+`(supplier, division)` for a division row and `(supplier, term)` for an
+`nhssc-term` row — keying both on division collapses every one of a supplier's
+NHSSC terms onto `(supplier, None)`.
