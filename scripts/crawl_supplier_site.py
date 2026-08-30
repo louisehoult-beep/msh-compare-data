@@ -501,6 +501,52 @@ def shopify_products(domain, deadline=None):
     }, None
 
 # ---------------------------------------------------------------- route 1
+# WHICH TAXONOMIES ARE THE COMPANY'S OWN FILING
+#
+# Until 30/08/2026 this was one test: the taxonomy's slug must contain the
+# string "cat". That is a guess about a name, not anything the site declares,
+# and it is wrong wherever a company named its own shelves. Joint Operations
+# registers `surgical` (104 terms) and `recovery` (22) and BOTH were skipped,
+# so its report asserted "no usable category structure in the site's own
+# taxonomy" for a company that files its range in detail.
+#
+# THE RULE, and why it is shaped this way:
+#   1. If the post type registers a taxonomy whose slug contains "cat", that
+#      is still the only one read. This is deliberate and NOT a tidy-up left
+#      undone: `product_cat` is WooCommerce's own category taxonomy, and every
+#      supplier currently publishing a division structure is on it. Keeping
+#      this branch first means the change CANNOT move a report that already
+#      has structure — the blast radius is exactly the sites publishing none.
+#   2. Only where the type registers NO "cat" taxonomy does it fall back to
+#      what the type does register, minus WordPress's own `post_tag` (a tag
+#      cloud is not a filing structure). Hierarchical taxonomies are preferred
+#      because that is the site declaring "this one nests"; where a type
+#      registers none that nest, its flat taxonomies are read instead, since a
+#      9-term "Product Centres" is still the company's own grouping.
+#
+# Several taxonomies may be returned. That is safe because `shape_from_wp`
+# already resolves competing roots on coverage — the root covering the SMALLEST
+# share of the catalogue wins, as the more specific claim — the same rule the
+# Shopify and WooCommerce Store routes apply. No term name is read to decide.
+TAX_NOT_A_DIVISION = ("post_tag",)
+
+
+def pick_taxonomies(base, ptype, taxes):
+    """Return the taxonomies to read as this post type's own filing. See above."""
+    usable = [t for t in (taxes or []) if t not in TAX_NOT_A_DIVISION]
+    cat_named = [t for t in usable if "cat" in t.lower()]
+    if cat_named:
+        return cat_named[:1]
+    if not usable:
+        return []
+    try:
+        reg, _ = get(base + "/taxonomies", as_json=True)
+    except Exception:
+        reg = {}
+    hier = [t for t in usable if ((reg or {}).get(t) or {}).get("hierarchical")]
+    return hier or usable
+
+
 def _wp_read_type(base, ptype, taxes, deadline=None):
     """Read one post type: its own category taxonomy, then its records.
 
@@ -509,14 +555,10 @@ def _wp_read_type(base, ptype, taxes, deadline=None):
     and their term ids start at 1 in both — merging them on the raw id would
     file a surgical product under a recovery division.
     """
-    tax = None
-    for t in taxes:
-        if "cat" in t.lower():
-            tax = t
-            break
+    read_taxes = pick_taxonomies(base, ptype, taxes)
 
     cats = {}
-    if tax:
+    for tax in read_taxes:
         page = 1
         while page <= 10:
             try:
@@ -526,9 +568,9 @@ def _wp_read_type(base, ptype, taxes, deadline=None):
             if not items:
                 break
             for c in items:
-                cats["%s:%s" % (ptype, c["id"])] = {
+                cats["%s:%s:%s" % (ptype, tax, c["id"])] = {
                     "name": clean(c.get("name")),
-                    "parent": ("%s:%s" % (ptype, c["parent"])) if c.get("parent") else 0,
+                    "parent": ("%s:%s:%s" % (ptype, tax, c["parent"])) if c.get("parent") else 0,
                     "count": c.get("count") or 0}
             if len(items) < 100:
                 break
@@ -540,7 +582,7 @@ def _wp_read_type(base, ptype, taxes, deadline=None):
             break                       # keep what has been read, stop fetching
         try:
             items, _ = get("%s/%s?per_page=100&page=%d&_fields=id,title,%s"
-                           % (base, ptype, page, tax or "id"), as_json=True)
+                           % (base, ptype, page, ",".join(read_taxes) or "id"), as_json=True)
         except urllib.error.HTTPError as e:
             if e.code == 400:
                 break                   # past the last page
@@ -551,7 +593,7 @@ def _wp_read_type(base, ptype, taxes, deadline=None):
             name = clean((p.get("title") or {}).get("rendered"))
             if not name:
                 continue
-            ids = ["%s:%s" % (ptype, i) for i in (p.get(tax) or [])] if tax else []
+            ids = ["%s:%s:%s" % (ptype, t, i) for t in read_taxes for i in (p.get(t) or [])]
             products.append({"n": name, "cats": ids})
         if len(items) < 100:
             break

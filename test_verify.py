@@ -1082,6 +1082,33 @@ def _(tmp):
     return "no category field to read one from"
 
 
+@case("a supplier whose own-named product taxonomy was skipped, publishing it flat")
+def _(tmp):
+    # 30/08/2026: the crawler chose a post type's category taxonomy by testing
+    # whether its slug contained "cat". Six suppliers name their own product
+    # taxonomy something else — Joint Operations `surgical` (104 terms) and
+    # `recovery` (22), Urathon `range`, AMS `product_centres`, Optelec
+    # `opt_productgroup_tax`, LEEC `products_product_type` — so every one was
+    # skipped and every one published "No usable category structure in the
+    # site's own taxonomy", which was false about the company.
+    #
+    # This is the failure that would NOT look like a failure. The product list
+    # is complete and correct either way, a flat range is a plausible thing for
+    # a company to have, and nothing on the page says the grouping was lost
+    # rather than absent — no count test and no name test can see it. Only the
+    # published division structure can. Flatten it and the gate must refuse.
+    d = json.load(open("data/supplier-products.json"))
+    rec = (d.get("suppliers") or {}).get("Joint Operations")
+    if not rec:
+        return None                      # supplier not in the file — nothing to test
+    rec["hasDivisions"] = False
+    rec["divisions"] = [{"name": "Uncategorised", "products": len(rec.get("products") or [])}]
+    for pr in rec.get("products") or []:
+        pr["division"] = "Uncategorised"
+    json.dump(d, open("data/supplier-products.json", "w"))
+    return "files its range under a product taxonomy of its own naming"
+
+
 @case("a two-catalogue site whose capture dropped back to one post type")
 def _(tmp):
     # 28/08/2026: Joint Operations' company report carried 46 of its 155

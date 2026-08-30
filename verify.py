@@ -2871,6 +2871,7 @@ def check_supplier_ranges(doc):
                     "; ".join(docs[:3])))
 
     check_second_catalogues(doc)
+    check_named_taxonomy_structure(doc)
 
 
 # A SITE THAT FILES ITS RANGE ACROSS TWO CATALOGUES (29/08/2026).
@@ -2889,6 +2890,63 @@ def check_supplier_ranges(doc):
 SECOND_CATALOGUE_SITES = {
     "jointoperations.co.uk": ("product", "product-recovery"),
 }
+
+
+# A COMPANY THAT NAMED ITS OWN SHELVES STILL HAS SHELVES.
+#
+# Until 30/08/2026 the crawler chose a post type's category taxonomy by one
+# test: the slug had to contain "cat". Six suppliers register a product
+# taxonomy under a name they chose themselves — `surgical`, `range`,
+# `product_centres`, `opt_productgroup_tax` — so all six were skipped, and all
+# six published "No usable category structure in the site's own taxonomy",
+# which was false about the company.
+#
+# This is the failure that does not look like a failure. A flat range is a
+# plausible thing for a company to have, the product list is complete and
+# correct, and nothing on the page says the grouping was lost rather than
+# absent. No count test and no name test can see it. Only the published
+# division structure can, so that is what is gated: each of these six is
+# recorded with the number of real divisions read live from its own site on
+# 30/08/2026, and a capture that drops back to flat FAILS. A regression in the
+# picker, a crawl by an older copy of the script, or a hand edit is caught the
+# moment it lands.
+#
+# The floor is deliberately the count read on the day, not a round number
+# below it: these are stable published taxonomies, and a site that genuinely
+# reorganises should re-state its floor as a decision, not slip under one.
+# Counts are REAL divisions — "Uncategorised" excluded, the same way the check
+# below counts them — read live from each site on 30/08/2026.
+NAMED_TAXONOMY_SITES = {
+    "admedsol.com": 8,              # `product_centres`
+    "jointoperations.co.uk": 9,     # `surgical` + `recovery`
+    "www.sychem.co.uk": 26,         # `product_type` + 6 more
+    "www.urathon.com": 5,           # `range`
+    "www.leec.co.uk": 10,           # `products_product_type` + `products_sectors`
+    "us.optelec.com": 5,            # `opt_productgroup_tax`
+}
+
+
+def check_named_taxonomy_structure(doc):
+    """Suppliers whose own product taxonomy is not called "cat" anything. See above."""
+    if doc is None:
+        return
+    for name, rec in sorted((doc.get("suppliers") or {}).items()):
+        domain = (rec.get("domain") or "").lower()
+        want = NAMED_TAXONOMY_SITES.get(domain)
+        if not want:
+            continue
+        divs = [d for d in (rec.get("divisions") or [])
+                if str(d.get("name", "")).strip().lower() not in ("uncategorised", "uncategorized")]
+        if not rec.get("hasDivisions") or len(divs) < want:
+            FAIL("supplier-products",
+                 "%s (%s) files its range under a product taxonomy of its own naming, and read "
+                 "live on 30/08/2026 that taxonomy published %d divisions. This capture carries "
+                 "%d and hasDivisions=%r. Publishing it flat asserts \"no usable category "
+                 "structure in the site's own taxonomy\" about a company that files its range in "
+                 "detail. Re-crawl with the current scripts/crawl_supplier_site.py, whose "
+                 "pick_taxonomies() reads what the post type actually registers rather than "
+                 "matching the string \"cat\"."
+                 % (name, domain, want, len(divs), rec.get("hasDivisions")))
 
 
 def check_second_catalogues(doc):
