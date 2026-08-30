@@ -331,10 +331,10 @@
  },
  "counts": {
   "pairs": 3762,
-  "mapped": 4129,
+  "mapped": 4163,
   "notTaxonomy": 125,
   "products": 60393,
-  "productsMapped": 50975
+  "productsMapped": 51882
  },
  "entries": [
   {
@@ -457,9 +457,11 @@
     "Rneasy Dsp Midi Kit",
     "Pyromark Q24 Mdx"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are laboratory extraction kits and blood collection tubes (Paxgene ccfDNA tube, RNeasy kits), matching laboratory consumables.",
+   "decidedIn": "QIAGEN-UK--sprint-0830.json"
   },
   {
    "supplier": "Nevro Medical Limited",
@@ -1393,9 +1395,15 @@
     "Alerta Stationary Shower Chair | Adjustable Height",
     "Alerta Stand 200 Powerlifter"
    ],
-   "hub": null,
+   "hub": [
+    "rehab:walk",
+    "rehab:bath",
+    "rehab:stand"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples name a three-wheel walker (rehab:walk), a stationary shower chair (rehab:bath) and a Powerlifter standing aid (rehab:stand) — three distinct home-care equipment types each with direct evidence.",
+   "decidedIn": "Farla-Medical--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -1986,9 +1994,14 @@
     "Wooden Tongue Depressor",
     "Wira-Flexi"
    ],
-   "hub": null,
+   "hub": [
+    "monitoring:gen",
+    "respiratory:resp"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Categories and examples split cleanly: pulse oximeter, Dopplers, BP monitors and diagnostic sets are non-specialist monitoring, while Laryngeal Masks and the Airway Products categories are respiratory therapy and circuits.",
+   "decidedIn": "Timesco-Healthcare-Ltd--sprint-0830.json"
   },
   {
    "supplier": "Millbrook Healthcare",
@@ -9419,9 +9432,11 @@
     "LCSU 4 RTCA Complete Unit (UK) | 800ml",
     "LCSU 4 RTCA Complete Unit | 800ml"
    ],
-   "hub": null,
+   "hub": "respiratory:resp",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "All four examples (VacPlus, VacMaxi, two LCSU 4 models) are portable/mobile medical suction units for airway clearance, consistently fitting respiratory therapy equipment.",
+   "decidedIn": "Farla-Medical--sprint-0830.json"
   },
   {
    "supplier": "Farla Medical",
@@ -15640,9 +15655,11 @@
     "Renu Multiplus  Multi Purpose",
     "Renu Mps  Multi Purpose"
    ],
-   "hub": null,
+   "hub": "ophthalmology:optom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are contact-lens multi-purpose solutions (Biotrue, Renu ranges), an optometry dispensing consumable sold alongside lenses.",
+   "decidedIn": "Bausch-Lomb-UK--sprint-0830.json"
   },
   {
    "supplier": "Abilia Ltd",
@@ -17951,9 +17968,11 @@
     "Biotrue Oneday Spherical",
     "Bausch And Lomb Ultra Spherical"
    ],
-   "hub": null,
+   "hub": "ophthalmology:optom",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples are named contact lens products (Biotrue Oneday, Ultra Spherical), directly matching optometry dispensing consumables.",
+   "decidedIn": "Bausch-Lomb-UK--sprint-0830.json"
   },
   {
    "supplier": "Bausch & Lomb UK",
@@ -21336,9 +21355,11 @@
     "M210 Printer Kit UK, Brady",
     "BMP 71 UK Quick Charger"
    ],
-   "hub": null,
+   "hub": "digital:hw",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "All examples (Brady M210, BMP71 printer kits) are label printers, which digital:hw explicitly names as clinical IT hardware.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Acumed Ltd",
@@ -31954,9 +31975,11 @@
     "ASpeed-3 3A Professional Aspirator Single Pump | 1000ml Bottle",
     "ASpeed-3 3A Professional Aspirator Double Pump | 1000ml Bottle"
    ],
-   "hub": null,
+   "hub": "respiratory:resp",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "All three examples (Mini ASpeed Battery Evo, ASpeed-3 Single/Double Pump) are portable medical suction aspirator units, which are respiratory therapy devices.",
+   "decidedIn": "Farla-Medical--sprint-0830.json"
   },
   {
    "supplier": "Farla Medical",
@@ -32964,9 +32987,11 @@
     "Inoculation needle, TSC",
     "INOCULATION NEEDLES VIOLET"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Two of three examples are explicit lab inoculation needles (TSC, VIOLET) for microbiology work, not clinical vascular access.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -33048,9 +33073,11 @@
     "1.7 x magnifier for CC-200",
     "Colony Counter, CC-200, Cole Parmer"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Cole Parmer CC-200 colony counter is standard microbiology-lab analytical equipment for counting bacterial colonies.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Acumed Ltd",
@@ -35113,9 +35140,11 @@
     "Nd__Neodrape No Opening",
     "Nd Fs__Neodrape Fenestrated"
    ],
-   "hub": null,
+   "hub": "theatres:theatre",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Both named products, Neodrape No Opening and Neodrape Fenestrated, are surgical drapes, a standard general theatre consumable.",
+   "decidedIn": "Kimberly-Clark--sprint-0830.json"
   },
   {
    "supplier": "Kimberly Clark",
@@ -35401,9 +35430,11 @@
     "Nexus - BoneScalpel",
     "Nexus - Sonastar"
    ],
-   "hub": null,
+   "hub": "mis:energy",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Examples (Nexus BoneScalpel, Nexus Sonastar) are ultrasonic surgical devices, i.e. advanced energy-based surgical equipment.",
+   "decidedIn": "MedScience-Distribution--sprint-0830.json"
   },
   {
    "supplier": "MedScience Distribution",
@@ -37158,9 +37189,11 @@
     "NCS21 Supplement (50x) w/o Vitamin A, Serum-free, 10 ml, Capricorn",
     "Fetal Bovine Serum, EU Compliant, South American Source , 500 mL"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Fetal Bovine Serum and NCS21 Supplement are lab reagents used in cell culture, matching laboratory consumables.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -37171,9 +37204,11 @@
     "Performance Laboratory Freezer with Drawers, Liebherr",
     "Upright -30°C, 818L Biomedical freezer, microprocessor control system, Haier"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Liebherr and Haier biomedical freezers with drawers are medical-grade cold storage devices for lab and clinical samples.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -37210,9 +37245,11 @@
     "appCertiFi Mixes",
     "dNTP Mix 10 mM each, Appleton"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "appCertiFi Mixes and dNTP Mix are molecular biology PCR reagents, a standard laboratory consumable.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -37340,9 +37377,11 @@
     "appMARKER Protein Ladder",
     "appMARKER Plus Protein Ladder"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "appMARKER protein ladders are molecular biology assay consumables used in electrophoresis workflows.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -37368,9 +37407,11 @@
     "Manual Centrifuge, 4-place swing-out rotor, 50°, with buckets, Hettich",
     "Manual Centrifuge, 4-place swing-out rotor, 90°, with buckets, Hettich"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Hettich swing-out rotor centrifuges are standard laboratory sample-preparation equipment.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -37394,9 +37435,11 @@
     "appGLOW Safe Stain",
     "Molecular Biology Grade Agarose, Appleton"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Molecular Biology Grade Agarose and appGLOW Safe Stain are gel electrophoresis lab consumables.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -37407,9 +37450,11 @@
     "Transport Medium: Mix of HBSS, HI FBS, Amphotericin B and Gentamicin Sulfate, 500ml, Corning",
     "Transport Medium: Mix of HBSS, HI FBS, Amphotericin B and Gentamicin Sulfate, 100ml, Corning"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "HBSS/FBS/antibiotic transport medium mixes are cell and specimen transport reagents, a lab consumable.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -37420,9 +37465,11 @@
     "Corning® Collagen I, Bovine, 30mg",
     "Corning® BioCoat™ Poly-D-Lysine, 20mg"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Corning Collagen I and Poly-D-Lysine are cell culture coating reagents, standard lab consumables.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -56586,9 +56633,11 @@
    "examples": [
     "DryQuest Incontinence Wet Wipes | Small | Pack of 30 Wipes"
    ],
-   "hub": null,
+   "hub": "rehab:hygiene",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Example is DryQuest Incontinence Wet Wipes, a personal hygiene product for incontinence care, matching rehab:hygiene directly.",
+   "decidedIn": "Farla-Medical--sprint-0830.json"
   },
   {
    "supplier": "Farla Medical",
@@ -59260,9 +59309,11 @@
    "examples": [
     "0.1ml Low Profile qPCR 96 well plate (BioRad CFX, MiraDX)"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "The qPCR 96-well plate example is a molecular diagnostics labware consumable.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -59272,9 +59323,11 @@
    "examples": [
     "Corning® Matrigel®"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Corning Matrigel is a cell culture extracellular matrix reagent, a laboratory consumable.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -59332,9 +59385,11 @@
    "examples": [
     "Biomedical Chest Freezer, -60C Haier"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Haier -60C biomedical chest freezer is medical-grade cold-chain storage equipment.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -59344,9 +59399,11 @@
    "examples": [
     "Plain swab, Sterilin"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Sterilin plain swab is a basic microbiology specimen-collection consumable, matching laboratory consumables.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -59430,9 +59487,11 @@
    "examples": [
     "Immersion oil, Zeiss"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Zeiss immersion oil is a microscopy consumable used with oil-immersion lab objectives.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -59456,9 +59515,11 @@
    "examples": [
     "Haier -40°C Biomedical Freezers with Microprocessor Control & Rapid Cooling"
    ],
-   "hub": null,
+   "hub": "pharma:cold",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Haier -40C biomedical freezers with rapid cooling are medical-grade cold-chain storage equipment.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -59468,9 +59529,11 @@
    "examples": [
     "3D Cell Culture Scaffolds"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "3D Cell Culture Scaffolds are consumable cell culture matrices used in laboratory work.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -59554,9 +59617,11 @@
    "examples": [
     "Blotting membrane, Nylon, 0.2um, 240mm x 3m roll"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Nylon blotting membrane rolls are molecular biology Western blot laboratory consumables.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -59590,9 +59655,11 @@
    "examples": [
     "Haemocytometers, Hawksley"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Example is a Hawksley haemocytometer, a standard laboratory cell-counting consumable.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -59628,9 +59695,11 @@
    "examples": [
     "TILT GL 56 self-adhesive identification label for screw cap, 40 mm diameter polyester, Duran"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Example is a self-adhesive screw-cap identification label for lab bottles (Duran), a laboratory consumable.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -59640,9 +59709,11 @@
    "examples": [
     "Complete system for Mini Vertical Electrophoresis"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Example is a complete mini vertical electrophoresis system, laboratory analytical equipment used for protein/gel electrophoresis.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -59652,9 +59723,11 @@
    "examples": [
     "Syringeless filter, PTFE, 0.45µm, 5ml, non-sterile, Whatman"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Example is a Whatman PTFE syringeless filter, a standard laboratory filtration consumable.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -59664,9 +59737,11 @@
    "examples": [
     "Microfunnel, CN, pore size 0.2um, 100ml"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Example is a CN microfunnel for laboratory filtration, a laboratory consumable.",
+   "decidedIn": "Appleton-Woods--sprint-0830.json"
   },
   {
    "supplier": "Appleton Woods",
