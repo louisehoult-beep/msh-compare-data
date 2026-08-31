@@ -189,6 +189,16 @@ Where routes 1 and 2 both fire and disagree, the number is discarded and the sup
 falls through to name search. Two sourced numbers disagreeing is a fact to check by
 hand, not a tie to break in code — the same rule already applied to two anchored numbers.
 
+**Route 1 finding more than one anchored number is not automatically a route 1/2
+disagreement.** A supplier's `note`/`background` can legitimately anchor several
+companies' numbers in the same prose — its parent, a related-but-separate trading
+entity — without the record itself being ambiguous about which one it is (Mediq
+Healthcare UK Ltd's background discusses its own number alongside its parent's and a
+sister company's). Where route 2 has fired, it is only discarded by a SINGLE anchored
+number that names a different one; several anchors that don't include a single clean
+disagreement do not overrule a sourced website proof. Found 31/08/2026 after this
+silently demoted a `confirmed` company to a name-search `probable` on every refresh.
+
 `verify.py` holds the invariant in both directions: a record claiming route 2 must have
 a matching `companyNumberProof` in the seed carrying the same number, a URL and an
 evidence string; and a malformed proof fails the gate rather than being silently

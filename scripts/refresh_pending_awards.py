@@ -250,7 +250,16 @@ def superseded_by(title, contract_start_iso, confirmed_by_title):
 
 def extract(rel):
     """One release -> one pending-award record, or None if it carries nothing
-    usable (no title, no suppliers)."""
+    usable (no title, no suppliers, no contract start).
+
+    verify.py's pending-awards check hard-requires reference/buyer/contractStart
+    on every published record — a rule this function did not enforce, so a
+    genuinely early-stage award notice (suppliers named, contract period not
+    yet published) got written here and failed the gate every run. Found
+    31/08/2026 (Minimally Invasive Surgery, awardDate set, contractStart not
+    yet on the notice). Root rule 14: publishing nothing is the correct output
+    for a record this incomplete — it reappears once Find a Tender publishes
+    the contract period."""
     tender = rel.get("tender") or {}
     title = (tender.get("title") or "").strip()
     if not title:
@@ -272,6 +281,11 @@ def extract(rel):
                 seen.add(nm.lower())
                 suppliers.append(nm)
     if not suppliers:
+        return None
+    if not (buyer and contract_start):
+        # buyer and contractStart are two of the three fields verify.py
+        # hard-requires (reference is always the release id). Refuse to write
+        # a record the gate will reject anyway.
         return None
     rid = rel.get("id", "")
     return {
@@ -410,6 +424,10 @@ def main(argv=None):
             records.append(rec)
             print("  + %s: %r, %d supplier(s)" % (ocid, rec["title"], len(rec["noticeSuppliers"])),
                   flush=True)
+        else:
+            title = ((rel.get("tender") or {}).get("title") or "").strip()
+            print("  - %s: %r not publishable yet (no title, no suppliers, or no buyer/"
+                  "contractStart on the notice)" % (ocid, title), flush=True)
 
     doc = assemble(records, seed, fw_doc, disc_note, disc_ok)
     print("pending %d, superseded %d (now on NHSSC's own brief), %d Hub compan(y/ies) named"

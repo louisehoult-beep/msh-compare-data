@@ -477,24 +477,34 @@ def recorded_number(supplier):
 
     proof = website_proof(supplier)
 
+    # A route-2 proof is the strongest evidence this script sees — a number
+    # the company publishes on its OWN site. It is only overruled by a SINGLE
+    # anchored number that names a different one (a genuine disagreement to
+    # check by hand). It is not overruled by prose that merely happens to
+    # mention several company numbers, which is a real shape for a supplier
+    # with a rich background note: Mediq Healthcare UK Ltd's note discusses its
+    # own number alongside its parent's (12477997) and a related but separate
+    # trading company's (05817827), and treating that as "the seed disagreeing
+    # with itself" discarded a sourced website proof every single run. Found
+    # 31/08/2026 after it kept the same supplier flipping to a name-search
+    # "probable" match on every Company intelligence refresh.
+    if proof:
+        if len(found) == 1:
+            anchored = next(iter(found))
+            if anchored != proof["number"]:
+                # A sourced number disagreeing with another sourced number is a
+                # fact to check by hand, not a tie to break in code.
+                return None, ("the seed anchors %s but the company's own site publishes %s — "
+                              "two sourced numbers disagree, not guessed"
+                              % (anchored, proof["number"])), None
+        return proof["number"], "", proof
+
     if len(found) > 1:
-        # Two anchored numbers is ambiguous whatever the site says: the seed
-        # itself disagrees, and route 2 cannot arbitrate between two claims it
-        # was never shown. Falls through to name search, exactly as before.
+        # Two anchored numbers with no route-2 proof to arbitrate is genuinely
+        # ambiguous. Falls through to name search, exactly as before.
         return None, "two or more company numbers recorded (%s) — ambiguous, not guessed" % \
                      ", ".join(sorted(found)), None
 
-    if found and proof:
-        anchored = next(iter(found))
-        if anchored != proof["number"]:
-            # A sourced number disagreeing with another sourced number is a fact
-            # to check by hand, not a tie to break in code.
-            return None, ("the seed anchors %s but the company's own site publishes %s — two "
-                          "sourced numbers disagree, not guessed" % (anchored, proof["number"])), None
-        return anchored, "", proof
-
-    if proof:
-        return proof["number"], "", proof
     if found:
         return found.pop(), "", "alerts"
     return None, "", None
@@ -790,6 +800,16 @@ def main():
     for name, rec in companies.items():
         old_rec = previous.get(name)
         if not isinstance(old_rec, dict):
+            continue
+        # A "probable" record may not carry a derived figure (verify.py's own
+        # rule, root rule 14) — so this run demoting a company off "confirmed"
+        # must not let a stale confirmed-only figure ride along regardless.
+        # Found 31/08/2026: NGPod Global Ltd went into liquidation, this run
+        # correctly demoted it to "probable" (status check in record_for()),
+        # and this loop then re-attached last run's employees:17 anyway,
+        # because it only checks whether the NEW record is currently empty,
+        # never whether it is still allowed to carry the figure at all.
+        if rec.get("matchConfidence") != "confirmed":
             continue
         for k in KEEP:
             if old_rec.get(k) not in (None, [], "") and rec.get(k) in (None, [], ""):
