@@ -330,11 +330,11 @@
   }
  },
  "counts": {
-  "pairs": 5172,
-  "mapped": 4377,
+  "pairs": 5174,
+  "mapped": 4379,
   "notTaxonomy": 151,
-  "products": 82033,
-  "productsMapped": 56058
+  "products": 82082,
+  "productsMapped": 56068
  },
  "entries": [
   {
@@ -82787,9 +82787,11 @@
     "Ventilated Necropsy Table",
     "Perfusion Table"
    ],
-   "hub": null,
+   "hub": "pathology:histo",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division name is a misnomer on AFOS's own site and the decision is taken from the item descriptions, not the term: rotating dissection table, down draught anatomy trolley, ventilated necropsy table and perfusion table are ventilated dissection benching, the same class as LEEC's 'Ventilated Downdraught Dissecting Bench' and 'Accessibility Anatomy Table' already published under pathology:histo",
+   "decidedIn": "AFOS--sprint-0831-0800.json"
   },
   {
    "supplier": "AFOS",
@@ -82804,9 +82806,11 @@
     "Formalin Dispensing System – FDS",
     "Ventilated Grossing Station"
    ],
-   "hub": null,
+   "hub": "pathology:histo",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the row's own examples are histology bench equipment - ventilated grossing station, ventilated staining table, ventilated specimen store and a formalin dispensing system. This is the same product class already published under pathology:histo from LEEC ('Grossing Station Nova', 'Ventilated Specimen Bench'), so AFOS lands against its actual competitor rather than a new category",
+   "decidedIn": "AFOS--sprint-0831-0800.json"
   },
   {
    "supplier": "Surtex Instruments Ltd",
@@ -86034,6 +86038,42 @@
    ],
    "examples": [
     "Microportagujas (Cabeza de Diamante)"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Surtex Instruments Ltd",
+   "division": "Stomach, Intestine & Rectum",
+   "products": 26,
+   "categories": [
+    "Haemostats & Clamps",
+    "General Surgery Instruments"
+   ],
+   "examples": [
+    "Denis-Browne Retractor",
+    "O’Sullivan-O’Connor Self Retaining Retractor",
+    "Golligher Self Retaining Retractor",
+    "Balfour-Baby Self Retaining Retractor"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Surtex Instruments Ltd",
+   "division": "Gynecology & Obstetrics",
+   "products": 23,
+   "categories": [
+    "Gynecology & Obstetrics",
+    "Dressing & Sponge Forceps"
+   ],
+   "examples": [
+    "Berkeley-Bonney Hysterectomy Forcep",
+    "Wertheim Hysterectomy Forcep",
+    "Wertheim-Cullen Vaginal Clamp",
+    "Wertheim Atrauma Vaginal Clamp"
    ],
    "hub": null,
    "notTaxonomy": false,
