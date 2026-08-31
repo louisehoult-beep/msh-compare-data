@@ -576,17 +576,37 @@ def _wp_read_type(base, ptype, taxes, deadline=None):
                 break
             page += 1
 
-    products, page = [], 1
+    # THE SITE'S OWN DECLARED TOTAL, read from the first page's `X-WP-Total`
+    # header. Without it a capped read is INVISIBLE: the run stops at MAX_PAGES
+    # and hands back its slice with nothing to say it is a slice, and every
+    # figure computed downstream — the product count, the division breakdown,
+    # the flat-or-not verdict — is then computed from an arbitrary fraction and
+    # published as if it described the whole company. Emmat Medical is how this
+    # surfaced (30-31/08/2026): 4,000 read of 23,877 the site itself declares,
+    # and because WordPress orders `date desc` by default the slice was its
+    # newest block, which happens to be the uncategorised one — so the report
+    # asserted "No usable category structure in the site's own taxonomy" about a
+    # company publishing 82 non-empty terms of its own.
+    declared, products, page, capped = None, [], 1, False
     while page <= MAX_PAGES:
         if deadline and time.time() > deadline:
-            break                       # keep what has been read, stop fetching
+            capped = True               # keep what has been read, stop fetching
+            break
         try:
-            items, _ = get("%s/%s?per_page=100&page=%d&_fields=id,title,%s"
-                           % (base, ptype, page, ",".join(read_taxes) or "id"), as_json=True)
+            items, hdrs = get("%s/%s?per_page=100&page=%d&_fields=id,title,%s"
+                              % (base, ptype, page, ",".join(read_taxes) or "id"), as_json=True)
         except urllib.error.HTTPError as e:
             if e.code == 400:
                 break                   # past the last page
             raise
+        if declared is None:
+            for k, v in (hdrs or {}).items():
+                if k.lower() == "x-wp-total":
+                    try:
+                        declared = int(v)
+                    except (TypeError, ValueError):
+                        declared = None
+                    break
         if not items:
             break
         for p in items:
@@ -598,7 +618,9 @@ def _wp_read_type(base, ptype, taxes, deadline=None):
         if len(items) < 100:
             break
         page += 1
-    return products, cats
+    else:
+        capped = True                   # fell out of the loop still on full pages
+    return products, cats, {"declared": declared, "capped": capped}
 
 
 def wp_products(domain, deadline=None):
@@ -608,8 +630,10 @@ def wp_products(domain, deadline=None):
     if not ptype:
         return None, why
 
-    products, cats = _wp_read_type(base, ptype, taxes, deadline=deadline)
+    products, cats, meta = _wp_read_type(base, ptype, taxes, deadline=deadline)
     read = [ptype]
+    declared = meta["declared"] if meta["declared"] is not None else None
+    capped = meta["capped"]
 
     # A SECOND GENUINE CATALOGUE, only where this domain is named in
     # SECOND_CATALOGUE on evidence read from that site. Nothing is inferred
@@ -617,17 +641,25 @@ def wp_products(domain, deadline=None):
     for xtype, xtaxes in extra_product_types(domain, types, ptype):
         if deadline and time.time() > deadline:
             break
-        xprod, xcats = _wp_read_type(base, xtype, xtaxes, deadline=deadline)
+        xprod, xcats, xmeta = _wp_read_type(base, xtype, xtaxes, deadline=deadline)
         if not xprod:
             continue
         products += xprod
         cats.update(xcats)
         read.append(xtype)
+        if xmeta["declared"] is not None:
+            declared = (declared or 0) + xmeta["declared"]
+        capped = capped or xmeta["capped"]
 
     if len(products) < MIN_PRODUCTS:
         return None, ("only %d product records on the site's API — that is a landing page, not a "
                       "catalogue" % len(products))
-    return {"products": products, "cats": cats, "postTypes": read}, None
+    # A read is PARTIAL when the site's own declared total exceeds what came
+    # back, or when the page cap / time budget cut the walk short. Either way
+    # the slice cannot support a claim about the whole range.
+    partial = bool(capped) or (declared is not None and declared > len(products))
+    return {"products": products, "cats": cats, "postTypes": read,
+            "declaredTotal": declared, "partialRead": partial}, None
 
 
 def top_level(cid, cats):
@@ -736,8 +768,30 @@ def shape_from_wp(raw, domain):
     real = [d for d in divisions if d != "Uncategorised"]
     uncat = divisions.get("Uncategorised", 0)
     has_divisions = bool(real) and uncat * 2 <= len(plist)
+
+    # A PARTIAL READ CANNOT SUPPORT A VERDICT ABOUT THE WHOLE RANGE.
+    # `hasDivisions` above is a judgement on the proportion of the catalogue
+    # sitting in "Uncategorised" — a ratio computed over `plist`. Where `plist`
+    # is a slice rather than the catalogue, that ratio describes the slice and
+    # nothing else, and the sentence it produces is a claim about the company.
+    # So a capped read never publishes the flat verdict: it says what it read,
+    # what the site declares, and that the rest was not seen. Publishing the
+    # partial state honestly is the correct output here (root rule 14) — an
+    # asserted "no structure" that happens to be false is not.
+    partial = bool(raw.get("partialRead"))
+    declared = raw.get("declaredTotal")
+    short_by = (declared - len(plist)) if (declared and declared > len(plist)) else 0
+    partial_note = ""
+    if partial:
+        partial_note = (
+            ("Only %d of the %d products the site's own API declares were read, so this is part "
+             "of the range, not all of it, and no claim is made about how the unread %d are "
+             "filed." % (len(plist), declared, short_by)) if short_by else
+            ("The read stopped at this run's page limit before the catalogue ended, so this is "
+             "part of the range, not all of it."))
+
     flat_note = (
-        "" if has_divisions else
+        "" if has_divisions or partial else
         ("the site's product taxonomy put every product in one 'Uncategorised' bucket, so it "
          "carries no division structure — shown as one unsorted list, not the company's own "
          "filed grouping" if not real else
@@ -757,15 +811,26 @@ def shape_from_wp(raw, domain):
         "postTypes": post_types,
         "structureFrom": "the company's own product category taxonomy",
         "hasDivisions": has_divisions,
-        "structure": "The company's own top-level product categories." if has_divisions else
-                     "No usable category structure in the site's own taxonomy — listed as one flat range.",
+        "partialRead": partial,
+        "siteDeclaredProducts": declared,
+        "structure": ("The company's own top-level product categories." if has_divisions else
+                      ("The company's own top-level product categories, for the part of the range "
+                       "that was read." if partial else
+                       "No usable category structure in the site's own taxonomy — listed as one "
+                       "flat range.")),
         "filingRule": (("Grouping MIRRORS the manufacturer's own filing. Where a product sits "
                        "under a category that reads oddly clinically, that is where the company "
-                       "files it, and a rep searching the company's way will find it there.")
+                       "files it, and a rep searching the company's way will find it there. "
+                       + partial_note).strip()
                        if has_divisions else
-                       ("Read from the site's own product records, so names are exact. " + flat_note +
-                        " — every item is listed by name below rather than grouped, because a "
-                        "fabricated grouping would misrepresent the company's own filing.")),
+                       (("Read from the site's own product records, so names are exact. "
+                         + partial_note +
+                         " The grouping shown covers only what was read, and this report makes no "
+                         "claim that the company's range is unstructured.").strip()
+                        if partial else
+                        ("Read from the site's own product records, so names are exact. " + flat_note +
+                         " — every item is listed by name below rather than grouped, because a "
+                         "fabricated grouping would misrepresent the company's own filing."))),
         "divisions": [{"name": k, "products": v}
                       for k, v in sorted(divisions.items(), key=lambda kv: -kv[1])],
         "products": plist,

@@ -2949,6 +2949,81 @@ def check_named_taxonomy_structure(doc):
                  % (name, domain, want, len(divs), rec.get("hasDivisions")))
 
 
+# A SLICE IS NOT A RANGE.
+#
+# The WordPress route stops at MAX_PAGES (40 x 100 = 4,000 products) or at the
+# per-site time budget, and until 31/08/2026 it stopped SILENTLY: the run handed
+# back its slice with nothing recording that it was one. Everything computed
+# downstream then described a fraction of the catalogue while reading as a
+# statement about the company — the product count, the division breakdown, and
+# worst of all the flat-or-not verdict, which is a ratio of "Uncategorised" to
+# the rest.
+#
+# Emmat Medical is how it surfaced. 4,000 read of the 23,877 its own API
+# declares, and because the WordPress default order is `date desc` the slice was
+# the site's newest block, which happens to be the one carrying no terms. So
+# 3,824 of the 4,000 read landed in "Uncategorised" and the report published
+# "No usable category structure in the site's own taxonomy" about a company
+# publishing 82 non-empty terms of its own. Both halves were false: the count
+# and the verdict.
+#
+# The gate is on the two things a partial read must never do — assert the flat
+# verdict, and omit that it was partial. Measured live 31/08/2026 across all 80
+# WordPress-route suppliers: 3 are short of their site's declared total. Inspire
+# Community Trust (248 of 254) is deliberately NOT registered here — 6 short is
+# untitled or draft records, not a truncated walk, and gating on noise trains
+# people to loosen gates.
+CAPPED_CATALOGUE_SITES = {
+    "emmat.co.uk": 23877,               # read cap: 4,000 of 23,877
+    "surtex-instruments.com": 4938,     # time budget: ~3,100 of 4,938
+}
+
+FLAT_RANGE_CLAIM = "No usable category structure"
+
+
+def check_partial_reads(doc):
+    """A capture that read part of a catalogue must say so, and must not judge it."""
+    if doc is None:
+        return
+    for name, rec in sorted((doc.get("suppliers") or {}).items()):
+        domain = (rec.get("domain") or "").lower()
+        n = len(rec.get("products") or [])
+        declared = rec.get("siteDeclaredProducts")
+        partial = bool(rec.get("partialRead"))
+
+        # 1. Registered sites publish more than one walk can read, so their
+        #    capture is partial by construction and must be marked as such.
+        floor = CAPPED_CATALOGUE_SITES.get(domain)
+        if floor and not partial:
+            FAIL("supplier-products",
+                 "%s (%s) publishes %d products on its own API and this capture holds %d, but "
+                 "partialRead is %r. An unmarked slice is published as the company's whole "
+                 "range: the product count is wrong and every proportion drawn from it — the "
+                 "division split, the flat-or-not verdict — describes the slice, not the "
+                 "company. Re-crawl with the current scripts/crawl_supplier_site.py, which "
+                 "reads X-WP-Total and records what it did not reach."
+                 % (name, domain, floor, n, rec.get("partialRead")))
+
+        # 2. No partial read may assert that the company has no structure. The
+        #    verdict is a ratio over what was read; over a slice it states
+        #    nothing about the company, and it reads as though it did.
+        if partial and FLAT_RANGE_CLAIM in (rec.get("structure") or ""):
+            FAIL("supplier-products",
+                 "%s (%s) was read in part (%d product(s)%s) yet publishes \"%s...\". That "
+                 "sentence is a claim about how the COMPANY files its range, reached from a "
+                 "fraction of it. A partial read may show what it read; it may not conclude "
+                 "the rest is unfiled."
+                 % (name, domain, n,
+                    (" of %d declared" % declared) if declared else "", FLAT_RANGE_CLAIM))
+
+        # 3. A partial read must carry the evidence for the claim it is making.
+        if partial and not str(rec.get("filingRule") or "").strip():
+            FAIL("supplier-products",
+                 "%s (%s) is marked partialRead but carries no filingRule saying so, so nothing "
+                 "on the member-facing report distinguishes a slice from a full range."
+                 % (name, domain))
+
+
 def check_second_catalogues(doc):
     if doc is None:
         return
@@ -4810,6 +4885,7 @@ def main():
     # Each supplier's own full range. The check is whether what was captured is
     # a product range at all — see the note above check_supplier_ranges.
     check_supplier_ranges(load("supplier-products.json"))
+    check_partial_reads(load("supplier-products.json"))
     check_supplier_product_detail(load("supplier-product-detail.json"), load("supplier-products.json"))
     # A Wix-sourced range must never invent a division its own JSON-LD doesn't
     # carry — see the note above check_wix_crawl_divisions.

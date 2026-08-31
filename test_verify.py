@@ -1109,6 +1109,47 @@ def _(tmp):
     return "files its range under a product taxonomy of its own naming"
 
 
+@case("a truncated catalogue republished as the company's whole range")
+def _(tmp):
+    # 31/08/2026: the WordPress route stops at MAX_PAGES (4,000 products) or at
+    # the per-site time budget, and it used to stop silently. Emmat Medical read
+    # 4,000 of the 23,877 its own API declares. Because WordPress orders
+    # `date desc`, that slice was the site's newest block — the one carrying no
+    # terms — so 3,824 of 4,000 landed in "Uncategorised" and the report said
+    # "No usable category structure in the site's own taxonomy" about a company
+    # publishing 82 non-empty terms of its own.
+    #
+    # Strip the partial marker and the record becomes exactly what shipped
+    # before the fix: a slice presented as the range. The gate must refuse it.
+    d = json.load(open("data/supplier-products.json"))
+    rec = (d.get("suppliers") or {}).get("Emmat Medical Ltd")
+    if not rec:
+        return None                      # supplier not in the file — nothing to test
+    rec["partialRead"] = False
+    json.dump(d, open("data/supplier-products.json", "w"))
+    return "publishes 23877 products on its own API"
+
+
+@case("a partial read that still concludes the company files nothing")
+def _(tmp):
+    # The second half of the same fault, and the one that reaches a member as a
+    # false statement rather than a wrong number. `hasDivisions` is a ratio of
+    # "Uncategorised" to the rest; over a slice it describes the slice. Keep the
+    # partial marker honest but let the flat VERDICT through, and the gate must
+    # still refuse — a partial read may show what it read, it may not conclude
+    # the rest is unfiled.
+    d = json.load(open("data/supplier-products.json"))
+    sup = d.get("suppliers") or {}
+    rec = sup.get("Emmat Medical Ltd") or sup.get("Surtex Instruments Ltd")
+    if not rec:
+        return None
+    rec["partialRead"] = True
+    rec["structure"] = ("No usable category structure in the site's own taxonomy — listed as "
+                        "one flat range.")
+    json.dump(d, open("data/supplier-products.json", "w"))
+    return "may not conclude the rest is unfiled"
+
+
 @case("a two-catalogue site whose capture dropped back to one post type")
 def _(tmp):
     # 28/08/2026: Joint Operations' company report carried 46 of its 155
