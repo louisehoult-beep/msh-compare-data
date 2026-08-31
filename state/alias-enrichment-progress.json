@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-08-30",
+ "lastRun": "2026-09-01",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -82,30 +82,30 @@
   "Benefoot UK Ltd trading as BeneCare Medical",
   "Benmor Medical",
   "Berry BPI Recycled Products",
-  "Biocomposites Ltd",
+  "Bidfood Direct",
   "Biedermann Motech International LTD",
+  "Biocomposites Ltd",
+  "Bioguard Hygiene Solutions",
+  "Biomet 3i UK, Ltd (ZimVie)",
   "Biotechnics Ltd",
   "Biotronik",
-  "Biomet 3i UK, Ltd (ZimVie)",
   "Bioventus Cooperatief U.A",
   "Birmingham Optical Group",
   "Birmingham Orthotic Services",
   "BK Medical UK",
   "BMS Critical Care Ltd",
-  "Bidfood Direct",
-  "Bioguard Hygiene Solutions",
   "BNP Paribas Leasing Solutions Limited",
   "Bodywise (UK) Ltd",
   "Bracco UK Limited",
   "Brainlab Ltd",
   "Brandon Medical Company Ltd",
+  "Braun and Company Limited",
   "Bray Group Limited",
+  "Bray Group Ltd (Bray Healthcare)",
   "Breas Medical Ltd",
   "Brenmoor Ltd",
   "Bridea Medical B.V",
   "Bridgehead Software",
-  "Braun and Company Limited",
-  "Bray Group Ltd (Bray Healthcare)",
   "Brighthedge Ltd T/A Summit Medical and Scientific",
   "British Heart Foundation",
   "Broomwell Healthwatch",
@@ -150,7 +150,19 @@
   "Clinisupplies",
   "Clinisys Solutions Limited",
   "Cod Beck Blenders",
-  "Coloplast"
+  "Coloplast",
+  "Compleo Health Limited",
+  "Consolor Ltd",
+  "Continuum Scotland Ltd",
+  "Contura Orthopaedics Ltd",
+  "Corcym UK (Holding) Ltd",
+  "Cordis",
+  "CorMed-DX",
+  "Cortrium ApS",
+  "Cosium Healthcare",
+  "Craven & Co",
+  "Credenhill",
+  "Creo Medical Limited"
  ],
  "refusals": [
   {
@@ -287,6 +299,16 @@
    "name": "Chemence Medical",
    "reason": "Entity is unresolved, so no name form can be attributed. The record's display name is \"Chemence Medical\"; chemencemedical.com is \"Chemence Medical, Inc.\", headquartered in metropolitan Atlanta, GA (its own About page). The NHS Supply Chain Wound Closure framework record already in this record names the supplier as \"Chemence Ltd\", and the Companies House public register holds CHEMENCE LIMITED (01746313, London) with no UK company named Chemence Medical. Chemence Limited is the group parent whose own site (chemence.com) also covers consumer super glue, industrial adhesives, graphics and cosmetics, so adding it as an alias of this record would attach the parent's non-medical coverage to a Hub supplier - the exact case rule 4 forbids. Which entity this record IS must be settled before any alias is added.",
    "date": "2026-08-29"
+  },
+  {
+   "name": "Continuum Scotland Ltd",
+   "reason": "No name form could be attributed. The company's own website could not be found: continuumscotland.com, continuum-scotland.co.uk and continuum.scot do not resolve (checked 01/09/2026), and a search returned only register-scraper listings, no company site. NHS Supply Chain's own Medical Hollowware contract launch brief (2024/S 000-014263, read 01/09/2026) names the supplier as \"Continuum Scotland Ltd\", which is byte-identical to the display name and so yields nothing new. The Companies House candidate already in the record, SC177228 CONTINUUM (SCOTLAND) LIMITED, is a name-search match the record itself marks as unverified; it sits at a registered-office agent address in Edinburgh under SIC 74909 (other professional, scientific and technical activities), which is not corroboration of a hollowware supplier, so its registered form was not adopted. Single-token \"Continuum\" is a generic word and is ruled out by rule 2. Speciality untouched: the array was already populated.",
+   "date": "2026-09-01"
+  },
+  {
+   "name": "Cosium Healthcare",
+   "reason": "Entity is unresolved, so no name form can be attributed. NHS Supply Chain's own Audiological Diagnostics Implantable Devices and Services brief (2023/S 000-007624, read 01/09/2026) lists the supplier as \"Cosium Healthcare – new\", identical to the display name. No site at cosiumhealthcare.com or cosiumhealthcare.co.uk resolves (checked 01/09/2026). cosium.com is a French group selling CosiumOptic and CosiumAudio practice-management software, trading everywhere as \"Cosium\" and listing a UK office in Telford; Companies House holds COSIUM UK LIMITED (11159879, 15 Bridge Road, Wellington, Telford), which the record already records as a near-miss, not a match. The Telford coincidence is inference, not a source stating that Cosium Healthcare is that company, so neither \"Cosium UK Limited\" nor the domain cosium.com was added. Which entity this record IS must be settled before any alias goes in. Speciality untouched: the array was already populated.",
+   "date": "2026-09-01"
   }
  ],
  "sources": {
@@ -1007,6 +1029,103 @@
    ],
    "verifiedOn": "2026-08-30",
    "sources": "https://www.coloplast.co.uk/ — footer legal line \"Coloplast Ltd., Nene Hall, Peterborough Business Park, Peterborough PE2 6FX, United Kingdom\" (read 30/08/2026) | Companies House 01094405 — registered name COLOPLAST LIMITED, active, incorporated 05/02/1973, Nene Hall Lynchwood Park, Peterborough Business Park PE2 6FX; previously COLOPLAST UK MEDICAL SUPPLIES LIMITED 1973–1978 (read 30/08/2026)"
+  },
+  "Compleo Health Limited": {
+   "aliases": [
+    "Compleo Health",
+    "Compleo Health UK Limited",
+    "compleohealth.com"
+   ],
+   "verifiedOn": "2026-09-01",
+   "sources": "Own site https://www.compleohealth.com/ (read 01/09/2026) — page <title> and og:title \"Compleo Health - Advanced Diagnostic Imaging Solutions\", og:site_name/meta description \"Compleo Health delivers next-generation MRI/CT imaging solutions for NHS Trusts and private patients\", canonical og:url https://compleohealth.com. The body is client-rendered so only the head could be read. | Companies House 13226032 — registered name COMPLEO HEALTH LIMITED, active, incorporated 25/02/2021, Part 6th Floor The Lexicon, Mount Street, Manchester; previous company name COMPLEO HEALTH UK LIMITED (read 01/09/2026). Speciality \"Diagnostics and imaging\" taken from the company's own og:title and meta description, not from the framework.",
+   "specialitiesAdded": [
+    "Diagnostics and imaging"
+   ]
+  },
+  "Consolor Ltd": {
+   "aliases": [
+    "Consolor Limited",
+    "Consolor",
+    "consolor.co.uk"
+   ],
+   "verifiedOn": "2026-09-01",
+   "sources": "Own site https://consolor.co.uk/ (read 01/09/2026) — og:site_name \"Consolor | Specialists in Seating and Mobility for Disabled People\", masthead and product pages trade throughout as \"Consolor\", footer legal line \"Limited Company Registration Number: 5811150\", meta description \"Consolor provides posture, seating and mobility assessment services to NHS wheelchair services and private clients across the UK\". | Companies House 05811150 — registered name CONSOLOR LIMITED, active, incorporated 09/05/2006, no previous names (read 01/09/2026); the number on the site agrees with the register, so the entity is proved. Single token \"Consolor\" added on the Acumed precedent: it is the whole trading name on the company's own site and is unique across the seed. Speciality \"Rehabilitation and mobility\" from the company's own product range (manual and powered wheelchairs, specialist seating, buggies) and its own meta description.",
+   "specialitiesAdded": [
+    "Rehabilitation and mobility"
+   ]
+  },
+  "Contura Orthopaedics Ltd": {
+   "aliases": [
+    "Contura Orthopaedics",
+    "Contura Orthopaedics Limited"
+   ],
+   "verifiedOn": "2026-09-01",
+   "sources": "Group site https://contura.com/category/orthopaedics/ (read 01/09/2026) — its own news item \"Contura Orthopaedics Ltd joins the International Cartilage Regeneration & Joint Preservation Society as its newest industry partner\". Product site https://arthrosamid.com/ (read 01/09/2026) — \"Contura Orthopaedics — Redefining Joint Care with Unparalleled Innovation\". | Companies House 13119470 — registered name CONTURA ORTHOPAEDICS LIMITED, active, incorporated 07/01/2021, 14 Took's Court, London, no previous names (read 01/09/2026). Single token \"Contura\" NOT added: contura.com is the group (\"Contura | Hydrogels for life\", © Contura International Ltd, covering orthopaedics, urinary incontinence and veterinary), so it is a parent's name, and Companies House also holds CONTURA STOVES (UK) LIMITED and CONTURA ANIMAL HEALTH HOLDINGS LIMITED, which makes the bare word ambiguous."
+  },
+  "Corcym UK (Holding) Ltd": {
+   "aliases": [
+    "Corcym UK (Holding) Limited",
+    "Corcym",
+    "corcym.com"
+   ],
+   "verifiedOn": "2026-09-01",
+   "sources": "Own site https://www.corcym.com/ (read 01/09/2026) — page title \"Corcym – Leading Innovations in Cardiac Surgery Devices\", body \"Corcym is a global medical device company focused on the structural heart area\" and \"Our expertise in the development of heart valve prostheses and repair devices\", masthead and body trade throughout as CORCYM, footer \"© 2024 Corcym Group. All rights reserved.\" | Companies House 13139307 — registered name CORCYM UK (HOLDING) LIMITED, active, incorporated 18/01/2021, no previous names (read 01/09/2026). \"Corcym Group\" NOT added — it names the group, not this entity. Speciality \"Cardiology\" follows the seed's own precedent for surgical heart-valve suppliers: Artivion UK Ltd carries exactly [\"Cardiology\"]; the vocabulary holds no cardiac-surgery term and none was invented.",
+   "specialitiesAdded": [
+    "Cardiology"
+   ]
+  },
+  "Cordis": {
+   "aliases": [
+    "Cordis Medical UK Limited",
+    "cordis.com"
+   ],
+   "verifiedOn": "2026-09-01",
+   "sources": "Own site https://cordis.com/emea/home (read 01/09/2026) — \"Cordis | Home\", body \"Cordis is making a difference. We impact millions of lives, in more than 60 countries\", footer \"© 2026 Cordis.\"; the root https://cordis.com/ meta description \"Cordis is a global leader in delivering innovative, differentiated cardiovascular and endovascular devices.\" The site carries no legal entity line, so the UK entity comes from the record's own existing proof (NHS Supply Chain catalogue legal name CORDIS MEDICAL UK LIMITED, confirmed 07/08/2026) cross-checked against Companies House 13333625 — registered name CORDIS MEDICAL UK LIMITED, active, incorporated 14/04/2021, Chadwick House, Birchwood Park, Warrington, no previous names (read 01/09/2026). The Cordis Selution UK entities (FC042905/BR028024, FC042931/BR028050) were NOT added — they are separate legal persons."
+  },
+  "CorMed-DX": {
+   "aliases": [
+    "CorMed-DX Ltd",
+    "cormed-dx.com"
+   ],
+   "verifiedOn": "2026-09-01",
+   "sources": "Own site https://cormed-dx.com/ (read 01/09/2026) — page title \"CorMed-DX - Connected technology for the Emergency Services\", body \"CorMed-DX are exclusively representing ACETECH in the UK market\", footer legal line \"Copyright © 2026 CorMed-DX LTD\". | Companies House 14129431 — registered name CORMED-DX LTD, active, incorporated 24/05/2022, Office 8 The Turbine, Coach Close, Shireoaks, Worksop, no previous names (read 01/09/2026); the register agrees with the site's own footer. No speciality added: the company's own site states its scope as connected technology and software for the emergency services and names no clinical area, so nothing in the seed's speciality vocabulary is plainly evidenced. The record's External Defibrillation Devices framework award is not by itself a statement of clinical scope."
+  },
+  "Cortrium ApS": {
+   "aliases": [
+    "Cortrium",
+    "cortrium.com"
+   ],
+   "verifiedOn": "2026-09-01",
+   "sources": "Own site https://cortrium.com/ (read 01/09/2026) — page title \"Cortrium\", masthead and body trade throughout as \"Cortrium\", body \"Your partner in long-term ECG monitoring\", \"Cortrium is ECG made easy\", \"All detected arrhythmias are verified by our cardiology specialists\", \"our goal is to support healthcare professionals to provide the right treatment to heart patients\", products the C3w monitor and Cortrium Apex software. Single token \"Cortrium\" is the whole trading name on the company's own site and is unique across the seed. No Companies House record is expected (ApS is a Danish legal form) and the record already says so. Specialities from the company's own wording: \"Cardiology\" from \"cardiology specialists\" and \"heart patients\", \"Patient monitoring\" from \"long-term ECG monitoring\" and the C3w monitor itself.",
+   "specialitiesAdded": [
+    "Cardiology",
+    "Patient monitoring"
+   ]
+  },
+  "Craven & Co": {
+   "aliases": [
+    "Craven & Co Ltd",
+    "Craven & Co. Limited",
+    "craven-solutions.com"
+   ],
+   "verifiedOn": "2026-09-01",
+   "sources": "Own site https://www.craven-solutions.com/ and /about-us/ (read 01/09/2026) — og:site_name and footer \"© 2026 Copyright Craven & Co LTD\", About Us body \"Craven & Co Ltd offers high quality British-made storage and handling solutions\", footer address \"Craven & Co, Craven House, Manse Lane, Knaresborough, North Yorkshire, HG5 8ET\", sectors listed include Healthcare and Mortuary. | Companies House 03909505 — registered name CRAVEN & CO. LIMITED, active, incorporated 19/01/2000, Manse Lane, Knaresborough, matching the site's own address, no previous names (read 01/09/2026). Single token \"Craven\" NOT added — it is a shortening and ambiguous (Craven District, Craven Dunnill, and cravenandco.com is an unrelated US event production agency, checked 01/09/2026). Specialities untouched: the array was already populated."
+  },
+  "Credenhill": {
+   "aliases": [
+    "Credenhill Limited",
+    "credenhill.co.uk"
+   ],
+   "verifiedOn": "2026-09-01",
+   "sources": "Own site https://www.credenhill.co.uk/ , /contact-us/ and /conditions-of-sale/ (read 01/09/2026) — contact page \"Credenhill Limited, Unit 5, Solomon Road, Heritage House, Cossall Industrial Estate, Ilkeston, DE7 5UD ... Registered in England No: 547046\"; conditions of sale \"'the Company' shall mean CREDENHILL LIMITED\"; home page \"Credenhill is the leading specialist distributor of compression hosiery ... supplying hospitals and pharmacies across the UK\". | Companies House 00547046 — registered name CREDENHILL LIMITED, active, incorporated 01/04/1955, Unit 5 Soloman Road, Cossall Industrial Estate, Ilkeston, no previous names (read 01/09/2026); the number published on the company's own site agrees with the register, so the entity is proved. \"Daylong\" NOT added: the privacy policy calls it \"our trading entity\", but as a single token it is a brand shortening and is ambiguous against the Daylong sun-protection range."
+  },
+  "Creo Medical Limited": {
+   "aliases": [
+    "Creo Medical",
+    "creomedical.com"
+   ],
+   "verifiedOn": "2026-09-01",
+   "sources": "Own site https://www.creomedical.com/ (read 01/09/2026) — page title \"Home | Creo Medical\", masthead and navigation trade throughout as \"Creo Medical\" (\"At Creo Medical, we are dedicated to improving patient outcomes by applying Advanced Energy to the emerging field of surgical endoscopy\"). | Companies House 04658880 — registered name CREO MEDICAL LIMITED, active, incorporated 06/02/2003, Creo House, Beaufort Park, Chepstow; previous name MICROONCOLOGY LTD, which the company does not trade under now, so it was not added (read 01/09/2026). \"Creo Medical Group plc\" (10371794) NOT added — it is the listed parent. \"Creo Medical UK Ltd\" NOT added either: Companies House SC128038 CREO MEDICAL UK LIMITED is a SEPARATE legal person in Inverness, previously ALBYN MEDICAL LIMITED, so attaching its name to this record would conflate two entities even though the NHS Supply Chain Airway Management brief names the supplier that way. The two-token \"Creo Medical\" covers the group's press coverage without asserting either entity."
   }
  },
  "evidence": {
