@@ -13,22 +13,118 @@
  "source": "Find a Tender Service (OCDS 1.1)",
  "source_url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages",
  "licence": "Open Government Licence",
- "generated": "2026-08-30T11:52:21+00:00",
+ "generated": "2026-08-31T14:22:50+00:00",
  "window_last_run": {
-  "from": "2026-08-27",
-  "to": "2026-08-30"
+  "from": "2026-08-28",
+  "to": "2026-08-31"
  },
  "health_relevance_rule": "Kept if the buyer name matches NHS / Integrated Care Board / Health Board, or any CPV code begins 33 (medical equipment and pharmaceuticals) or 851 (health services). Bare 'Trust' is not a match (academy and housing trusts would flood the feed). CPV 852 (veterinary) and 853 (social work) excluded.",
  "evidence_caveat": "A supplier named on a framework award is evidence they CAN supply through that framework. It is NOT evidence of uptake, volume or market share at any trust. Do not convert these records into share-of-market claims.",
  "counts": {
-  "awards": 984,
+  "awards": 987,
   "framework_awards": 77,
-  "with_named_suppliers": 677,
-  "with_contract_end_date": 323,
+  "with_named_suppliers": 679,
+  "with_contract_end_date": 324,
   "with_max_extent_date": 48,
-  "distinct_buyers": 354
+  "distinct_buyers": 356
  },
  "awards": [
+  {
+   "ocid": "ocds-h6vhtk-06ef10",
+   "notice_id": "082409-2026",
+   "tag": [
+    "tender"
+   ],
+   "published": "2026-08-31",
+   "title": "ALEXANDRA House Lift Refurbishment",
+   "buyer": {
+    "name": "South London and Maudsley NHS Foundation Trust",
+    "ppon": "PVHW-2176-TRVQ"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "45453100"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082409-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06ef0e",
+   "notice_id": "082407-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-08-31",
+   "title": "ICCA Service Contract",
+   "buyer": {
+    "name": "NHS Grampian",
+    "identifier": "GB-FTS-4312"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Philips Electronics UK Limited",
+     "identifier": "GB-FTS-186254"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-08-26",
+     "value": 274235.6,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "50421000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082407-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06c6fa",
+   "notice_id": "082404-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-08-31",
+   "title": "ROBOTIC ULTRASOUND TRANSDUCER",
+   "buyer": {
+    "name": "Swansea Bay University Health Board (SBUHB)",
+    "ppon": "PQDY-1678-DHXN"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "GE HEALTHCARE LTD",
+     "ppon": "PDGZ-2726-PLDM"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-07-10",
+     "end": "2027-07-08",
+     "max_extent": null,
+     "signed": "2026-07-10",
+     "value": 28252.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "33000000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082404-2026"
+  },
   {
    "ocid": "ocds-h6vhtk-06709b",
    "notice_id": "082375-2026",
