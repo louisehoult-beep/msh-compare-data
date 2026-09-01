@@ -171,14 +171,28 @@ VOLATILE = (
 # --------------------------------------------------------------------------
 # Fetching
 # --------------------------------------------------------------------------
-def api_get(url, token, timeout=45):
+def api_get(url, token, timeout=45, tries=3):
+    """Retries a transient WP.com 5xx (same pattern as scripts/refresh_frameworks.py).
+
+    This build failed outright on a bare HTTP 500 five times between 28/08 and
+    01/09/2026 with no retry at all — a single blip from WordPress.com's own
+    API killed the whole run and left search on the last good index (harmless,
+    but avoidable) instead of the day's real content changes.
+    """
     req = urllib.request.Request(url, headers={
         "Authorization": "Bearer " + token,
         "Accept": "application/json",
         "User-Agent": "msh-search-index/1.0",
     })
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.loads(r.read().decode("utf-8", "replace"))
+    for attempt in range(tries):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return json.loads(r.read().decode("utf-8", "replace"))
+        except urllib.error.HTTPError as e:
+            if e.code >= 500 and attempt < tries - 1:
+                time.sleep(5 * (attempt + 1))
+                continue
+            raise
 
 
 def fetch_pages(token):
