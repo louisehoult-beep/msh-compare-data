@@ -28,7 +28,8 @@
 #
 # USAGE
 #   ./wt.sh <name>            create or re-enter a worktree, print its path
-#   ./wt.sh --list            every worktree, with its state
+#   ./wt.sh <name> --force    re-enter even if another live session/task owns it
+#   ./wt.sh --list            every worktree, with its state and its owner
 #   ./wt.sh --remove <name>   remove one (refuses if it holds work)
 #   ./wt.sh --for-task <name> unattended: clean checkout at origin/main, or exit 3
 #
@@ -40,16 +41,105 @@
 #   land.sh works unchanged inside a worktree: it takes the tree lock in the shared
 #   .git so it still serialises against every other worktree, and it pushes HEAD to
 #   main rather than the local branch.
+#
+# OWNERSHIP STAMP — added 01/09/2026, after ^o159
+#   A named worktree is reusable by design ("come back to your own work"), and
+#   `--for-task <name>` always resolves to the same `$ROOT/<name>` an interactive
+#   session would get from `./wt.sh <name>`. Nothing stopped an interactive session
+#   picking the exact name a scheduled task uses and landing in its tree while the
+#   task was still running in it — which happened to the differentiator weekend
+#   sprint on 31/08/2026: an interactive session rebuilt on top of the task's
+#   in-flight edit and both wrote `differentiator.json` within the same 3 minutes.
+#
+#   Every successful hand-back of a worktree path now writes `.wt-owner.json`
+#   inside it (untracked — see .gitignore) recording who holds it: session id,
+#   pid, kind (interactive/task), host, timestamp. Every entry checks it first:
+#     - stamp absent, or its pid is dead        -> free; take it, restamp
+#     - stamp's session id matches this session -> it is yours; restamp
+#     - stamp's pid is alive, different session -> REFUSE (exit 3 for --for-task,
+#       exit 1 for interactive) and print who holds it, so the collision is a
+#       loud refusal instead of a silent double-write
+#   `--force` overrides the interactive refusal for the rare case you are certain
+#   the other process is actually dead and the stamp just outlived it (e.g. the
+#   machine was put to sleep mid-run). There is no `--force` for `--for-task`:
+#   an unattended run has nobody to judge that call, so it always just refuses.
 set -euo pipefail
 cd "$(dirname "$0")"
 
 ROOT="${MSH_WORKTREE_ROOT:-$HOME/msh-worktrees}"
 
 usage() {
-  echo "usage: ./wt.sh <name> | --list | --remove <name>" >&2
+  echo "usage: ./wt.sh <name> [--force] | --list | --remove <name>" >&2
   echo "  <name>: letters, digits, dot, dash, underscore. Name it after the work," >&2
   echo "          not after yourself — 'atamis-refresh', not 'session3'." >&2
   exit 2
+}
+
+# Who is running this invocation. Claude Code sets these for the life of the
+# session (stable across every Bash call in it), unattended task runs get the
+# same env since a scheduled task is itself a Claude session. Falls back to the
+# raw shell pid so the check still degrades to "is *a* process alive" outside
+# Claude Code rather than silently doing nothing.
+THIS_SESSION="${CLAUDE_CODE_SESSION_ID:-${CLAUDE_CODE_HOST_SESSION_ID:-}}"
+THIS_PID="${CLAUDE_PID:-$$}"
+[ -n "$THIS_SESSION" ] || THIS_SESSION="pid-$THIS_PID"
+
+# stamp_owner WT KIND NAME — record that THIS_SESSION/THIS_PID now holds WT.
+# Untracked file; a `git reset --hard` on WT does not touch it.
+stamp_owner() {
+  python3 -c '
+import json, os, socket, sys, time
+wt, kind, name, sid, pid = sys.argv[1:6]
+json.dump({
+    "worktree": name, "kind": kind, "session_id": sid, "pid": int(pid),
+    "host": socket.gethostname(), "started_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+}, open(os.path.join(wt, ".wt-owner.json"), "w"))
+' "$1" "$2" "$3" "$THIS_SESSION" "$THIS_PID"
+}
+
+# describe_owner WT — one-line summary of the stamp in WT, or "(no stamp)".
+describe_owner() {
+  [ -f "$1/.wt-owner.json" ] || { echo "(no stamp)"; return 0; }
+  python3 -c '
+import json, sys
+try:
+    d = json.load(open(sys.argv[1] + "/.wt-owner.json"))
+except Exception:
+    print("(unreadable stamp)"); sys.exit(0)
+print("%s  session=%s  pid=%s  host=%s  since=%s" % (
+    d.get("kind","?"), d.get("session_id","?"), d.get("pid","?"),
+    d.get("host","?"), d.get("started_at","?")))
+' "$1"
+}
+
+# owner_pid_alive WT — 0 if WT has a stamp AND that pid is still running.
+owner_pid_alive() {
+  [ -f "$1/.wt-owner.json" ] || return 1
+  pid="$(python3 -c 'import json,sys
+try: print(json.load(open(sys.argv[1]+"/.wt-owner.json")).get("pid",""))
+except Exception: print("")' "$1")"
+  [ -n "$pid" ] || return 1
+  ps -p "$pid" >/dev/null 2>&1
+}
+
+# owner_session WT — the session id in WT's stamp, or empty.
+owner_session() {
+  [ -f "$1/.wt-owner.json" ] || { echo ""; return 0; }
+  python3 -c 'import json,sys
+try: print(json.load(open(sys.argv[1]+"/.wt-owner.json")).get("session_id",""))
+except Exception: print("")' "$1"
+}
+
+# check_owner WT — 0 if WT is free to take (no stamp, stale stamp, or already
+# ours), 1 if a different, live session/task holds it. Never destructive by
+# itself; callers decide what "1" means for them.
+check_owner() {
+  local wt="$1" sid
+  [ -f "$wt/.wt-owner.json" ] || return 0
+  sid="$(owner_session "$wt")"
+  [ "$sid" = "$THIS_SESSION" ] && return 0
+  owner_pid_alive "$wt" || { echo "note: previous owner's process is gone; taking over" >&2; return 0; }
+  return 1
 }
 
 # --------------------------------------------------------------------- --list
@@ -59,7 +149,11 @@ if [ "${1:-}" = "--list" ]; then
     dirty="$(git -C "$w" status --porcelain 2>/dev/null | grep -vc 'backup' || true)"
     ahead="$(git -C "$w" rev-list --count origin/main..HEAD 2>/dev/null || echo '?')"
     head="$(git -C "$w" log --oneline -1 2>/dev/null || echo '(no commit)')"
-    printf '%s\n    unpushed: %s   uncommitted files: %s\n    %s\n' "$w" "$ahead" "$dirty" "$head"
+    owner="$(describe_owner "$w")"
+    live="free"
+    owner_pid_alive "$w" && live="LIVE"
+    printf '%s\n    unpushed: %s   uncommitted files: %s   owner: [%s] %s\n    %s\n' \
+      "$w" "$ahead" "$dirty" "$live" "$owner" "$head"
   done
   exit 0
 fi
@@ -69,6 +163,13 @@ if [ "${1:-}" = "--remove" ]; then
   NAME="${2:-}"; [ -n "$NAME" ] || usage
   WT="$ROOT/$NAME"
   [ -d "$WT" ] || { echo "no such worktree: $WT" >&2; exit 1; }
+  if ! check_owner "$WT"; then
+    echo "REFUSING: $NAME is currently held by a live session/task:" >&2
+    echo "    $(describe_owner "$WT")" >&2
+    echo "Removing it out from under a running process is how work gets lost. Wait" >&2
+    echo "for it to finish, or confirm it is actually dead before removing." >&2
+    exit 1
+  fi
   # Refuse to bin work. Both halves matter: uncommitted files vanish with the
   # directory, and a commit that never reached origin vanishes with the branch.
   if [ -n "$(git -C "$WT" status --porcelain --untracked-files=no)" ]; then
@@ -115,6 +216,16 @@ if [ "${1:-}" = "--for-task" ]; then
     fi
   fi
 
+  # An unattended run has nobody to ask, so this never overrides a live owner —
+  # it refuses exactly like the leftover-work and unpushed-commit checks below.
+  if ! check_owner "$WT"; then
+    echo "REFUSING: $NAME is currently held by a live session/task:" >&2
+    echo "    $(describe_owner "$WT")" >&2
+    echo "This run must not start on top of another live writer. Report FAILED and" >&2
+    echo "stop; a human should confirm the other run is actually finished." >&2
+    exit 3
+  fi
+
   git -C "$WT" fetch --quiet origin
 
   # Same definition of "destroyable work" the Stop guard uses: any tracked change,
@@ -146,6 +257,7 @@ if [ "${1:-}" = "--for-task" ]; then
 
   # Proven clean and nothing unpushed, so this discards nothing.
   git -C "$WT" reset --quiet --hard origin/main
+  stamp_owner "$WT" "task" "$NAME"
   echo "$WT"
   exit 0
 fi
@@ -158,6 +270,8 @@ case "$NAME" in
   *[!A-Za-z0-9._-]*)
     echo "REFUSING: '$NAME' has characters that will break paths." >&2; usage ;;
 esac
+FORCE=0
+[ "${2:-}" = "--force" ] && FORCE=1
 
 WT="$ROOT/$NAME"
 
@@ -165,6 +279,21 @@ WT="$ROOT/$NAME"
 # own work, so say what state it is in rather than treating it as an error.
 if [ -d "$WT" ]; then
   echo "reusing existing worktree" >&2
+  if ! check_owner "$WT"; then
+    if [ "$FORCE" = "1" ]; then
+      echo "note: --force given; taking over from the live owner below:" >&2
+      echo "    $(describe_owner "$WT")" >&2
+    else
+      echo "" >&2
+      echo "REFUSING: $NAME is currently held by a different live session/task:" >&2
+      echo "    $(describe_owner "$WT")" >&2
+      echo "Two writers in one worktree is exactly what wt.sh exists to prevent." >&2
+      echo "Wait for it, pick a different name for your own work, or re-run with" >&2
+      echo "--force if you are certain that run is actually dead." >&2
+      exit 1
+    fi
+  fi
+  stamp_owner "$WT" "interactive" "$NAME"
   git -C "$WT" fetch --quiet origin || true
   AHEAD="$(git -C "$WT" rev-list --count origin/main..HEAD 2>/dev/null || echo '?')"
   BEHIND="$(git -C "$WT" rev-list --count HEAD..origin/main 2>/dev/null || echo '?')"
@@ -186,6 +315,7 @@ if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
 else
   git worktree add -b "$BRANCH" "$WT" origin/main >&2
 fi
+stamp_owner "$WT" "interactive" "$NAME"
 
 echo "" >&2
 echo "worktree ready — this checkout is yours alone:" >&2
