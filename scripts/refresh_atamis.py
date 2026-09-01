@@ -70,6 +70,7 @@ CSV_URL = (
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(REPO, "data")
 OUT = os.path.join(DATA, "atamis-opportunities.json")
+OUT_LIVE = os.path.join(DATA, "atamis-opportunities-live.json")
 
 UA = "Elevate-and-Thrive-Hub/1.0 (Medical Sales Intelligence Hub; contact@elevateandthrive.uk)"
 
@@ -321,10 +322,55 @@ def main() -> int:
             % (len(opps), len(new_refs), gone))
         log("  pre-market %d | further competition %d"
             % (len(pre_market), len(further)))
+        log("  live subset would hold %d (deadline on or after %s)"
+            % (len([o for o in live if (o.get("deadline") or "") >= today]), today))
         return 0
 
     with open(OUT, "w") as fh:
         json.dump(out, fh, indent=1, ensure_ascii=False)
+
+    # The full store is the archive: every opportunity ever seen, delisted ones
+    # kept and marked. It is ~4MB and grows, so a member page must never fetch
+    # it client-side. This is the subset a page may read: still listed, and the
+    # response deadline has not passed. `time_remaining` is deliberately dropped
+    # — it was computed at fetch time and is stale by the time anyone reads it,
+    # so the page works it out from `deadline` instead.
+    keep = ("ref", "name", "authority", "description", "category",
+            "procurement_route", "opens", "deadline", "labels", "url",
+            "first_seen")
+    open_opps = [o for o in live if (o.get("deadline") or "") >= today]
+    slim = [{k: o[k] for k in keep if o.get(k)} for o in open_opps]
+
+    live_out = {
+        "source": out["source"],
+        "source_url": out["source_url"],
+        "generated": out["generated"],
+        "subset_rule": (
+            "Still listed on the Atamis search AND response deadline on or after "
+            "%s (the day this ran). Derived from data/atamis-opportunities.json, "
+            "which stays the full archive. `time_remaining` is not carried: it "
+            "goes stale, so compute it from `deadline` at render time."
+            % today
+        ),
+        "field_caveat": out["field_caveat"],
+        "classification_rule": out["classification_rule"],
+        "counts": {
+            "open_opportunities": len(slim),
+            "held_in_full_archive": len(opps),
+            "pre_market_engagement": len(
+                [o for o in open_opps
+                 if "pre_market_engagement" in (o.get("labels") or [])]),
+            "framework_further_competition": len(
+                [o for o in open_opps
+                 if "framework_further_competition" in (o.get("labels") or [])]),
+            "distinct_authorities": len(
+                {o.get("authority") for o in open_opps if o.get("authority")}),
+        },
+        "opportunities": slim,
+    }
+
+    with open(OUT_LIVE, "w") as fh:
+        json.dump(live_out, fh, indent=1, ensure_ascii=False)
 
     log("")
     log("  store now %d opportunities (%d live, %d new this run, %d newly delisted)"
@@ -332,7 +378,8 @@ def main() -> int:
     log("  pre-market engagement %d | framework further competition %d"
         % (len(pre_market), len(further)))
     log("  distinct authorities: %d" % out["counts"]["distinct_authorities"])
-    log("  wrote data/atamis-opportunities.json")
+    log("  wrote data/atamis-opportunities.json (%d, full archive)" % len(opps))
+    log("  wrote data/atamis-opportunities-live.json (%d still open)" % len(slim))
     return 0
 
 

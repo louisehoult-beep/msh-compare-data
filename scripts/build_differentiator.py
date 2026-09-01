@@ -466,6 +466,63 @@ def main():
     print("    of those, %d published from the recorded (supplier, term) map" % nhssc_from_map)
     # ------------------------------------------------------------------
 
+    # ------------------------------------------------------------------
+    # ICC JOIN — added 31/08/2026. NHS Supply Chain's Clinical Collaboration
+    # Teams publish "Information for Clinical Choice" spec matrices, authored
+    # with NHS clinical stakeholders. Where one covers a product we already
+    # publish, that product gets an NHS-authored specification citation rather
+    # than only the manufacturer's own copy.
+    #
+    # This is a CODE join on NPC, never a name match: both sides carry the NHS
+    # Supply Chain product code, so a match is exact or it does not happen.
+    #
+    # ⚠️ CEILING, stated because the count looks disappointing and should:
+    # NHS Supply Chain publishes ONE product matrix (Adult ECG Electrodes,
+    # 108 NPCs). The other 74 ICC documents are support documents with no
+    # product table to join to. So this pass can only ever reach ECG
+    # electrodes until NHSSC publishes more matrices. It is wired up now so
+    # that when they do, the coverage follows without another build change.
+    icc_doc = load("data/icc-matrices.json")
+    icc_by_npc = {}
+    for _cat, _mx in (icc_doc.get("matrices") or {}).items():
+        for _row in (_mx.get("products") or []):
+            _npc = str(_row.get("NPC") or "").strip().upper()
+            if not _npc:
+                continue
+            icc_by_npc.setdefault(_npc, {
+                "category": _mx.get("category") or _cat,
+                "issued": _mx.get("issued"),
+                "sourceUrl": _mx.get("source_url"),
+                "spec": {k: v for k, v in _row.items()
+                         if k not in ("Supplier", "Brand", "MPC", "NPC",
+                                      "Description") and str(v or "").strip()},
+            })
+
+    icc_matched = 0
+    for r in products:
+        seen = []
+        for it in (r.get("nhssc") or []):
+            npc = str(it.get("npc") or "").strip().upper()
+            hit = icc_by_npc.get(npc)
+            if hit and npc not in [x["npc"] for x in seen]:
+                seen.append(dict(hit, npc=npc))
+        if not seen:
+            continue
+        icc_matched += 1
+        r["icc"] = seen
+        for h in seen:
+            r["sources"].append({
+                "kind": "icc",
+                "npc": h["npc"],
+                "owner": "NHS Supply Chain Clinical Collaboration Teams",
+                "url": h["sourceUrl"],
+            })
+    print("  ICC join: %d published product(s) carry an NHS-authored spec "
+          "matrix (%d NPCs available across %d matrix/matrices)"
+          % (icc_matched, len(icc_by_npc),
+             len(icc_doc.get("matrices") or {})))
+    # ------------------------------------------------------------------
+
     bycat = collections.Counter(r["cat"] for r in products)
     comparable = {c: n for c, n in bycat.items() if n >= 2}
 
@@ -481,6 +538,12 @@ def main():
                             "scripts/crawl_supplier_product_detail.py",
             "nhssc": "NHS Supply Chain public catalogue, cached by "
                      "scripts/refresh_nhssc_cache.py",
+            "icc": "NHS Supply Chain 'Information for Clinical Choice' product "
+                   "matrices, authored by their Clinical Collaboration Teams "
+                   "with NHS clinical stakeholders, captured by "
+                   "scripts/refresh_icc.py. Joined on the NPC code only. "
+                   "NHSSC publishes one such matrix today, so coverage is "
+                   "limited to that category by the source, not by this join.",
         },
         "counts": {
             "published": len(products),
@@ -493,6 +556,7 @@ def main():
                                     if r["detail"] and not r["nhssc"]),
             "nhsscOnly": sum(1 for r in products
                              if r["nhssc"] and not r["detail"]),
+            "withIccSpecMatrix": icc_matched,
         },
         "byCategory": dict(sorted(bycat.items())),
         "products": products,
