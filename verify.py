@@ -3238,6 +3238,112 @@ def check_no_expired_frameworks(fwdoc):
              % (len(bad), "; ".join(bad[:6])))
 
 
+def check_no_delisted_as_a_route(briefs, fwdoc, seed, index):
+    """Nobody may be shown as ON a framework their own launch brief delisted them from.
+
+    NHS Supply Chain's contract launch briefs name the awarded suppliers and,
+    immediately beneath them, the suppliers being DELISTED at the framework's
+    start. The two lists are adjacent prose under hand-written headings, so a
+    capture that does not recognise a heading reads straight through the join
+    and files the delisted names as awarded.
+
+    That is exactly what happened, and it reached paying members. On 31/08/2026
+    the Hub presented Motiva Implants UK Limited and Nagor Limited as on
+    Surgical Implants for Men's and Women's Health, Euro Packaging and Fannin as
+    on Surgical Gloves, and Athrodax, Avicenna, Empire Medical, One Surgical and
+    Total Ortho LLP as on Total Orthopaedic Solutions 3 -- every one of them
+    named on that framework's own brief as delisted from it. Motiva's whole Hub
+    record was the one framework it had lost.
+
+    A rep quoting a delisted competitor as an incumbent is the worst answer this
+    dataset can give: it is confidently wrong, it is checkable in thirty seconds
+    against a public page, and it is the exact fact the Hub charges for. So this
+    is a hard gate, not a warning.
+
+    Matching is EXACT on the name the brief prints, normalised only for case,
+    punctuation and legal form, against the supplier's own name and recorded
+    aliases. Anything looser removes correct rows: a loose matcher proposed
+    dropping "Olympus (KeyMed)" against the brief's "Olympus KeyMed" and
+    "Unisurge" against "Unisurge International Ltd".
+
+    A supplier whose own name is ALSO on the awarded list is skipped: the brief
+    is naming a different entity that happens to be a recorded alias of the same
+    group (AM Healthcare Group holds Wheelchairs while its Opcare arm is
+    delisted from it). That needs a human call about which entity the row is
+    about, and this check must not silently make it.
+    """
+    if not isinstance(briefs, dict):
+        return
+
+    def nm(name):
+        t = re.sub(r"\(.*?\)", " ", (name or "").lower())
+        t = re.sub(r"[^a-z0-9 ]", " ", t)
+        t = re.sub(r"\s+", " ", t).strip()
+        w = t.split()
+        while w and w[-1] in ("ltd", "limited", "plc", "llp", "inc", "corp",
+                              "corporation", "co", "company", "holdings",
+                              "uk", "gb"):
+            w.pop()
+        return " ".join(w) or t
+
+    by_url = {}
+    for b in briefs.get("briefs") or []:
+        if not isinstance(b, dict) or not b.get("delisted_suppliers"):
+            continue
+        by_url[str(b.get("url") or "").rstrip("/")] = (
+            {nm(d.get("name")) for d in b["delisted_suppliers"]},
+            {nm(x) for x in b.get("suppliers") or []},
+            b.get("framework"))
+
+    if not by_url:
+        return
+
+    bad = []
+    for label, doc in (("data/frameworks.json", fwdoc),
+                       ("data/supplier-seed.json", seed),
+                       ("data/supplier-index.json", index)):
+        if not isinstance(doc, dict):
+            continue
+        if label == "data/frameworks.json":
+            for f in (doc.get("frameworks") or []) + (doc.get("expired") or []):
+                if not isinstance(f, dict):
+                    continue
+                hit = by_url.get(str(f.get("url") or "").rstrip("/"))
+                if not hit:
+                    continue
+                delisted, _awarded, _fw = hit
+                for sup in f.get("suppliers") or []:
+                    if nm(sup) in delisted:
+                        bad.append("%s: %s listed as ON %s"
+                                   % (label, sup, f.get("name")))
+            continue
+        for sup in doc.get("suppliers") or []:
+            if not isinstance(sup, dict):
+                continue
+            names = {nm(sup.get("name"))} | {nm(a) for a in sup.get("aliases") or []}
+            names.discard("")
+            for f in sup.get("frameworks") or []:
+                if not isinstance(f, dict):
+                    continue
+                hit = by_url.get(str(f.get("url") or "").rstrip("/"))
+                if not hit:
+                    continue
+                delisted, awarded, fwname = hit
+                if names & awarded:
+                    continue
+                if names & delisted:
+                    bad.append("%s: %s shown as ON %s"
+                               % (label, sup.get("name"), fwname))
+
+    if bad:
+        FAIL("delisting", "%d row(s) present a supplier as being ON a framework that "
+                          "framework's own NHS Supply Chain launch brief names them as "
+                          "DELISTED from. A member reading this would brief a competitor "
+                          "as an incumbent. Remove the framework row and record it under "
+                          "`delistedFrom` instead. %s"
+             % (len(bad), "; ".join(bad[:8])))
+
+
 def check_compare_groups_by_ref(comptab_js):
     """The Compare tab's company picker must group on the master record.
 
@@ -4949,6 +5055,10 @@ def main():
     check_no_clusters_on_tools(comptab_js)
     check_compare_groups_by_ref(comptab_js)
     check_no_expired_frameworks(load("frameworks.json"))
+    check_no_delisted_as_a_route(load("nhssc-launch-briefs.json"),
+                                 load("frameworks.json"),
+                                 load("supplier-seed.json"),
+                                 load("supplier-index.json"))
     check_ref_present(load("compare-suppliers.json"))
     check_curated_test_matches(comptab_js)
 

@@ -12,23 +12,25 @@
  },
  "source": "NHS Supply Chain contract launch briefs",
  "source_url": "https://www.supplychain.nhs.uk/product-information/contract-launch-briefs/",
- "generated": "2026-08-28T20:01:43+00:00",
- "parsing_rule": "Awarded suppliers are read from the region after 'on this framework - they are:'; delisted suppliers from the region after 'being delisted at the start of the framework agreement'. In the delisted region a line is a supplier name only if it is under 80 characters and does not end in a full stop; anything else is attached to the preceding supplier as its note.",
- "invariant": "Each brief states its own supplier count in prose and also lists the suppliers. Only briefs where the two agree are published. Briefs that disagree are excluded and counted below. If fewer than 75%% of briefs agree the script writes nothing at all.",
+ "generated": "2026-09-01T14:01:01+00:00",
+ "parsing_rule": "Awarded suppliers are read from the region after 'on this framework - they are:', ending at the next section heading or the next delisting anchor. A delisting anchor is the bare heading 'Delisted suppliers', or any line that mentions both suppliers and delisting AND ends in a colon -- the briefs are hand-written and announce a delisting in at least ten different sentences, while every line that merely mentions delisting in passing ends in a full stop. In a delisted region a line is a supplier name only if it is under 80 characters and does not end in a full stop; anything else is attached to the preceding supplier as its note. Where the names run inline in the sentence rather than beneath it, or where the brief gives a delisted count but no names, the count is published and the names are withheld.",
+ "invariant": "THREE checks, and a brief must pass all of them to be published. (1) Each brief states its own supplier count in prose and also lists the suppliers; only briefs where the two agree are published. (2) Where a brief states how many suppliers it is delisting, that number must match the delisted names read beneath it, or the names are withheld and only the count is published. (3) No supplier may appear on both the awarded and the delisted list of the same brief; a brief that says both about the same company is withheld entirely, because one of the two claims is wrong and there is no honest way to tell which. Briefs that fail are excluded and counted below. If fewer than 60% of briefs pass check (1) the script writes nothing at all.",
  "evidence_caveat": "A supplier on a framework CAN supply through it; that is not evidence of uptake, volume or market share at any trust. A delisting means the supplier is off THIS framework from its start date. It does not mean the company is in difficulty and it does not mean any given trust has stopped buying from them. Report what the brief says and no more.",
  "not_fetched": "The Product Matrix and Framework Matrix spreadsheets linked from each brief are behind authentication.supplychain.nhs.uk and are not taken.",
  "counts": {
-  "briefs_published": 104,
-  "briefs_excluded_failed_invariant": 36,
+  "briefs_published": 110,
+  "briefs_excluded_failed_invariant": 30,
   "briefs_unreachable": 0,
-  "frameworks_with_delistings": 29,
-  "distinct_awarded_suppliers": 1540,
-  "distinct_delisted_suppliers": 212,
-  "briefs_with_expiry_date": 104,
-  "frameworks_live": 101,
+  "frameworks_with_delistings": 38,
+  "briefs_withholding_delisted_names": 4,
+  "delisted_suppliers_known_but_unnamed": 17,
+  "distinct_awarded_suppliers": 1678,
+  "distinct_delisted_suppliers": 260,
+  "briefs_with_expiry_date": 110,
+  "frameworks_live": 107,
   "frameworks_expired": 2,
   "frameworks_not_yet_started": 1,
-  "briefs_naming_which_suppliers_are_new": 0
+  "briefs_naming_which_suppliers_are_new": 1
  },
  "excluded": [
   {
@@ -40,20 +42,8 @@
    "reason": "page states 37 suppliers, parsed 36"
   },
   {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ophthalmology-solutions/",
-   "reason": "page states 53 suppliers, parsed 59"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/decontamination-capital-equipment-endoscopy-and-sterile-services-and-related-accessories/",
-   "reason": "page states 20 suppliers, parsed 24"
-  },
-  {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/delivered-ready-prepared-meals/",
    "reason": "page states 29 suppliers, parsed 28"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/dental-products-technologies/",
-   "reason": "page states 33 suppliers, parsed 36"
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
@@ -62,10 +52,6 @@
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
    "reason": "page states 58 suppliers, parsed 57"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/enteral-feeding-bile-bags-and-associated-products/",
-   "reason": "page states 19 suppliers, parsed 23"
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/environmental-decontamination/",
@@ -105,7 +91,7 @@
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
-   "reason": "page states 54 suppliers, parsed 59"
+   "reason": "page states 54 suppliers, parsed 53"
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-pulp-products-macerators-for-pulping-patient-waste-pump-stations/",
@@ -118,10 +104,6 @@
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/operating-tables/",
    "reason": "page states 12 suppliers, parsed 11"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/orthoses-podiatry-and-immobilisation/",
-   "reason": "page states 63 suppliers, parsed 79"
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/patient-temperature-management/",
@@ -157,15 +139,11 @@
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-instruments/",
-   "reason": "page states 50 suppliers, parsed 53"
-  },
-  {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
-   "reason": "page states 21 suppliers, parsed 25"
+   "reason": "the brief contradicts itself: 3 supplier(s) appear on BOTH its awarded and its delisted list (gbuk ltd, henry schein uk holdings limited, surtex instruments ltd). Either the awarded region has run past an unrecognised delisting anchor, or the page names the same firm as awarded on some lots and delisted on others. Neither claim is safe to publish, so the brief is withheld."
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
-   "reason": "page states 47 suppliers, parsed 46"
+   "reason": "page states 47 suppliers, parsed 45"
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/technology-enabled-care-electronic-assistive-technology-and-lone-worker-devices/",
@@ -312,6 +290,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 56,
    "supplier_count": 56,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 11
   },
   {
@@ -390,6 +370,8 @@
    "term_months": 48,
    "stated_supplier_count": 54,
    "supplier_count": 54,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -458,6 +440,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 27,
    "supplier_count": 27,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 3
   },
   {
@@ -544,6 +528,8 @@
    "extension": "option to extend for an additional 12 months",
    "stated_supplier_count": 25,
    "supplier_count": 25,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 7
   },
   {
@@ -594,6 +580,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 14,
    "supplier_count": 14,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 2
   },
   {
@@ -633,6 +621,8 @@
    "term_months": 48,
    "stated_supplier_count": 15,
    "supplier_count": 15,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -673,6 +663,8 @@
    "term_months": 48,
    "stated_supplier_count": 16,
    "supplier_count": 16,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -798,6 +790,8 @@
    "extension": "option to extend for 24 months",
    "stated_supplier_count": 44,
    "supplier_count": 44,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 11
   },
   {
@@ -833,6 +827,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 11,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -893,6 +889,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 19,
    "supplier_count": 19,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 3
   },
   {
@@ -923,6 +921,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 6,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -949,6 +949,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 2,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -1100,6 +1102,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 25,
    "supplier_count": 25,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 20
   },
   {
@@ -1177,6 +1181,8 @@
    "term_months": 48,
    "stated_supplier_count": 17,
    "supplier_count": 17,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 7
   },
   {
@@ -1236,6 +1242,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 18,
    "supplier_count": 18,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 3
   },
   {
@@ -1261,6 +1269,8 @@
    "term_months": 35,
    "stated_supplier_count": null,
    "supplier_count": 1,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -1387,6 +1397,8 @@
    "extension": "option to extend for 24 months",
    "stated_supplier_count": 60,
    "supplier_count": 60,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 8
   },
   {
@@ -1424,7 +1436,120 @@
    "delisted_product_count": null,
    "stated_supplier_count": 14,
    "supplier_count": 14,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ophthalmology-solutions/",
+   "slug": "ophthalmology-solutions",
+   "framework": "Complete Ophthalmology Solutions 3",
+   "type": "New Contract",
+   "category": "Medical Technology",
+   "reference": "2024/S 000-033370",
+   "supply_route": "Direct, Stocked, eDirect",
+   "start": "2025-11-03",
+   "expiry": "2027-11-02",
+   "suppliers": [
+    "Accrington Surgical Instrument Suppliers Ltd",
+    "Albert Waeschle Ltd",
+    "Alcon Eye Care UK Ltd",
+    "Altomed Limited",
+    "Andersen Caledonia",
+    "Associated Optical Products",
+    "Bausch & Lomb U.K. Ltd.",
+    "Beaver Visitec International Sales Ltd",
+    "Birmingham Optical Group",
+    "Blink Medical Ltd",
+    "BVM MEDICAL LTD",
+    "Carl Zeiss Ltd",
+    "Clonallon Laboratories",
+    "Core Surgical Limited",
+    "D.O.R.C. Limited",
+    "Daybreak Medical Ltd",
+    "DTR Medical Ltd",
+    "Duckworth & Kent Ltd",
+    "EziDrops Ltd",
+    "Glaukos UK Ltd",
+    "Grafton Optical Company Limited",
+    "Hanson Instruments Ltd",
+    "Heidelberg Engineering Limited",
+    "Innovant Healthcare Limited",
+    "Instinctive Limited",
+    "Johnson and Johnson Surgical Vision",
+    "Joint Operations (UK) Ltd",
+    "KCI Medical Limited",
+    "Leica Microsystems (UK) Limited",
+    "Lenstec (Barbados) Inc",
+    "Litechnica Ltd",
+    "Mainline Instruments Ltd",
+    "MedScience Distribution Ltd",
+    "Meticuly INNOVATIONS Ltd",
+    "Molnlycke Health Care Ltd",
+    "Optelec UK",
+    "Optos Plc",
+    "OscarTech UK Ltd",
+    "OSI INC. Ltd",
+    "Rayner Intraocular Lenses",
+    "RB Medical Engineering Ltd",
+    "Rudolf Riester GmbH",
+    "Scope Ophthalmics",
+    "Sense Medical Limited",
+    "Sight Sciences UK Ltd",
+    "Surgitrac Instruments UK Limited",
+    "Topcon Great Britain Medical Limited",
+    "Uniphar Medtech T/A Synapse Medical",
+    "Unisurge International Ltd",
+    "Veni Vidi Medical Limited",
+    "Vernacare International Ltd",
+    "Vision Matrix",
+    "Vision Pharmaceuticals Ltd T/A Spectrum."
+   ],
+   "delisted_suppliers": [
+    {
+     "name": "Carleton Optical Equipment Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Haag-Streit UK Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Keeler Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Kestrel Ophthalmics Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "M.I.S.S Ophthalmics Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Oculus Instruments Ltd.",
+     "reason": null,
+     "note": null
+    }
+   ],
+   "parse_ok": true,
+   "parse_note": null,
+   "expired": false,
+   "status": "live",
+   "new_supplier_count": 21,
+   "delisted_product_count": 4753,
+   "term_months": 24,
+   "extension": "option to extend for an additional 24 months",
+   "stated_supplier_count": 53,
+   "supplier_count": 53,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
+   "delisted_supplier_count": 6
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/contrast-injectors-consumables-and-associated-options-and-related-services/",
@@ -1453,6 +1578,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 5,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -1485,6 +1612,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 8,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -1550,7 +1679,151 @@
    "term_months": 48,
    "stated_supplier_count": 10,
    "supplier_count": 10,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 6
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/decontamination-capital-equipment-endoscopy-and-sterile-services-and-related-accessories/",
+   "slug": "decontamination-capital-equipment-endoscopy-and-sterile-services-and-related-accessories",
+   "framework": "Decontamination Capital Equipment, Associated Accessories and Services",
+   "type": "New Contract",
+   "category": "Diagnostic Equipment and Services",
+   "reference": "2024/S 000-017758",
+   "supply_route": "Direct",
+   "start": "2025-02-19",
+   "expiry": "2027-02-18",
+   "suppliers": [
+    "Advanced Sterilization Products (UK) Limited",
+    "Avidity Science Limited",
+    "BMM Weston Limited",
+    "Dekomed Limited",
+    "Ecolab Limited- New",
+    "Envirogen Water Technologies Limited",
+    "ESTS (GB) Limited- New",
+    "Getinge Limited",
+    "Hospital Services Limited- New",
+    "IM Med Limited",
+    "Keymed (Medical & Industrial Equipment) Limited",
+    "LTE Scientific Limited",
+    "Lubron Uk Limited",
+    "MMM Medical Equipment UK Limited",
+    "Peacocks (Surgical and Medical Equipment) Limited",
+    "Steris Solutions Limited",
+    "Sychem Limited- New",
+    "Tristel Solutions Limited",
+    "VWS (UK) Limited",
+    "Wassenburg Limited"
+   ],
+   "delisted_suppliers": [
+    {
+     "name": "Whitewater",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "OSKA Care",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Partners for Endoscopy",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Suez",
+     "reason": null,
+     "note": null
+    }
+   ],
+   "parse_ok": true,
+   "parse_note": null,
+   "expired": false,
+   "status": "live",
+   "new_supplier_count": null,
+   "delisted_product_count": null,
+   "term_months": 24,
+   "extension": "option to extend for an additional 24 months",
+   "stated_supplier_count": 20,
+   "supplier_count": 20,
+   "stated_delisted_supplier_count": 4,
+   "delisted_parse_ok": true,
+   "delisted_supplier_count": 4
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/dental-products-technologies/",
+   "slug": "dental-products-technologies",
+   "framework": "Dental Technologies, Implants and Related Consumables and Services",
+   "type": "Contract Extension",
+   "category": "Diagnostic Equipment and Services",
+   "reference": "2023/S 000-008274",
+   "supply_route": "Direct, eDirect",
+   "start": "2024-01-05",
+   "expiry": "2028-01-04",
+   "suppliers": [
+    "AG Dental Equipment",
+    "Alterior Ltd T/A Hulbert Imaging",
+    "Anglian Dental",
+    "BDSI Ltd",
+    "Carestream Dental Ltd",
+    "Clark Dental Equipment",
+    "DB Dental Equipment Limited",
+    "DB Orthodontics",
+    "DD Products and Services",
+    "Dentaquip Ltd T/A DMI",
+    "Dentsply IH Ltd",
+    "Duncan Technical Services",
+    "Eclipse Dental Equipment",
+    "FUJIFILM UK Ltd",
+    "Henry Schein UK Holdings",
+    "KaVo Dental Ltd",
+    "Kerr UK",
+    "McKillop Dental Equipment",
+    "Probo Medical",
+    "Nobel Biocare UK Ltd",
+    "Oral Care Innovations",
+    "RIS Products",
+    "RPA Dental Equipment",
+    "RPA Dental Equipment",
+    "Sirona Dental Systems",
+    "Surgical Instruments",
+    "Swift Dental Laboratories",
+    "The Dental Imaging Company",
+    "The Orthodontic Company",
+    "Vernacare",
+    "Wolverson X ray Ltd",
+    "Wright Health Group",
+    "Xograph Healthcare Ltd."
+   ],
+   "delisted_suppliers": [
+    {
+     "name": "Hospital Services",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Straumann",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Wyvern.",
+     "reason": null,
+     "note": "See our Downloads ▼ section for the full list of delisted lines and details of alternative products."
+    }
+   ],
+   "parse_ok": true,
+   "parse_note": null,
+   "expired": false,
+   "status": "live",
+   "new_supplier_count": null,
+   "delisted_product_count": null,
+   "stated_supplier_count": 33,
+   "supplier_count": 33,
+   "stated_delisted_supplier_count": 3,
+   "delisted_parse_ok": true,
+   "delisted_supplier_count": 3
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/digital-diagnostic-solutions/",
@@ -1800,6 +2073,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 54,
    "supplier_count": 54,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 34
   },
   {
@@ -1837,6 +2112,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 12,
    "supplier_count": 12,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -1867,6 +2144,8 @@
    "delisted_product_count": null,
    "stated_supplier_count": null,
    "supplier_count": 7,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -1925,7 +2204,76 @@
    "extension": "option to extend for an additional 12 months",
    "stated_supplier_count": 33,
    "supplier_count": 33,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/enteral-feeding-bile-bags-and-associated-products/",
+   "slug": "enteral-feeding-bile-bags-and-associated-products",
+   "framework": "Enteral Feeding, Bile Bags and Associated Products",
+   "type": "New Contract",
+   "category": "Medical and Surgical Consumables",
+   "reference": "2025/S 000-028317",
+   "supply_route": "Stocked, eDirect",
+   "start": "2025-09-05",
+   "expiry": "2027-07-13",
+   "suppliers": [
+    "suppliers on this framework, of which",
+    "Abbott Laboratories Limited",
+    "Avanos Medical UK Limited",
+    "Cardinal Health UK 432 Limited",
+    "Crest Medical Ltd",
+    "Fresenius Kabi",
+    "GBUK Enteral Ltd",
+    "GenX Medicare",
+    "Helapet Ltd",
+    "Ivor Shaw Ltd (t/a Pennine Healthcare)",
+    "Kebomed UK Ltd",
+    "Kendal Nutricare",
+    "Medicina Limited",
+    "Mediq Healthcare UK Ltd",
+    "NGPod Global Ltd",
+    "Nutricia Ltd",
+    "Richardson Healthcare Ltd",
+    "Valley Northern Ltd",
+    "Vygon (UK) Ltd."
+   ],
+   "delisted_suppliers": [
+    {
+     "name": "Anaiah Healthcare",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Capatex Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Firmly Medical Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Westbourne Medical Limited.",
+     "reason": null,
+     "note": null
+    }
+   ],
+   "parse_ok": true,
+   "parse_note": null,
+   "expired": false,
+   "status": "live",
+   "new_supplier_count": 3,
+   "delisted_product_count": 297,
+   "term_months": 22,
+   "extension": "option to extend for an additional 24 months",
+   "stated_supplier_count": 19,
+   "supplier_count": 19,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
+   "delisted_supplier_count": 4
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/examination-gloves/",
@@ -1978,6 +2326,8 @@
    "term_months": 41,
    "stated_supplier_count": null,
    "supplier_count": 29,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2012,6 +2362,9 @@
    "delisted_product_count": null,
    "stated_supplier_count": null,
    "supplier_count": 11,
+   "stated_delisted_supplier_count": 5,
+   "delisted_parse_ok": false,
+   "delisted_parse_note": "page states 5 delisted supplier(s), read 0 by name -- names withheld",
    "delisted_supplier_count": 0
   },
   {
@@ -2057,6 +2410,8 @@
    "term_months": 48,
    "stated_supplier_count": null,
    "supplier_count": 21,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2065,50 +2420,65 @@
    "framework": "Finance Solutions",
    "type": "New Contract",
    "category": "Diagnostic Equipment and Services",
-   "reference": null,
+   "reference": "2026/S 000-022383",
    "supply_route": "Direct",
-   "start": "2022-09-05",
-   "expiry": "2026-09-04",
+   "start": "2026-09-05",
+   "expiry": "2028-09-04",
    "suppliers": [
-    "Incumbent",
-    "BNP Paribas Leasing Solutions Limited",
-    "X",
     "CHG Meridian UK Limited",
-    "X",
-    "Dawsongroup Finance Limited",
-    "X",
-    "X",
     "De Lage Landen Leasing Limited",
-    "X",
-    "GE Capital Equipment Finance",
-    "X",
+    "GE Capital Equipment Finance Limited",
     "Room Twelve Limited",
-    "X",
-    "X",
-    "Shawbrook Bank Limited",
-    "X",
     "Siemens Financial Services",
-    "X",
-    "Societe Generale Equipment Finance Limited",
-    "X",
     "Solutions Asset Finance Limited",
-    "X",
     "TP Leasing Limited",
-    "X",
-    "Triple Point Lease Partners",
-    "X"
+    "Triple Point Lease Partners.",
+    "GENMED.ME LIMITED",
+    "Medecon Healthcare UK Ltd",
+    "Philips Electronics UK Limited",
+    "Surgical Instruments Group Holdings Ltd."
    ],
-   "delisted_suppliers": [],
+   "delisted_suppliers": [
+    {
+     "name": "BPCE Equipment Solutions UK Limited.",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "BNP Paribas Leasing Solutions Limited",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Dawsongroup Finance Limited",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Shawbrook Bank Limited.",
+     "reason": null,
+     "note": null
+    }
+   ],
    "parse_ok": true,
-   "parse_note": "no stated supplier count on the page",
+   "parse_note": null,
    "expired": false,
-   "status": "live",
-   "new_supplier_count": null,
+   "status": "not_yet_started",
+   "new_supplier_count": 4,
    "delisted_product_count": null,
-   "term_months": 48,
-   "stated_supplier_count": null,
-   "supplier_count": 27,
-   "delisted_supplier_count": 0
+   "term_months": 24,
+   "extension": "option to extend for an additional 24 months",
+   "stated_supplier_count": 12,
+   "supplier_count": 12,
+   "new_suppliers": [
+    "GENMED.ME LIMITED",
+    "Medecon Healthcare UK Ltd",
+    "Philips Electronics UK Limited",
+    "Surgical Instruments Group Holdings Ltd."
+   ],
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
+   "delisted_supplier_count": 4
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
@@ -2137,6 +2507,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 5,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2172,6 +2544,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 11,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2228,6 +2602,8 @@
    "extension": "option to extend for a further 12 months",
    "stated_supplier_count": 31,
    "supplier_count": 31,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2349,6 +2725,8 @@
    "extension": "option to extend for additional months",
    "stated_supplier_count": 97,
    "supplier_count": 97,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2413,6 +2791,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 28,
    "supplier_count": 28,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 2
   },
   {
@@ -2438,6 +2818,8 @@
    "term_months": 17,
    "stated_supplier_count": null,
    "supplier_count": 1,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2482,6 +2864,8 @@
    "delisted_product_count": null,
    "stated_supplier_count": 21,
    "supplier_count": 21,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2524,6 +2908,8 @@
    "term_months": 48,
    "stated_supplier_count": 18,
    "supplier_count": 18,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2575,6 +2961,8 @@
    "term_months": 48,
    "stated_supplier_count": null,
    "supplier_count": 27,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2618,6 +3006,8 @@
    "delisted_product_count": null,
    "stated_supplier_count": 20,
    "supplier_count": 20,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2666,6 +3056,8 @@
    "extension": "option to extend for an additional 30 months",
    "stated_supplier_count": 12,
    "supplier_count": 12,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 2
   },
   {
@@ -2693,6 +3085,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 3,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2724,6 +3118,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 7,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2764,6 +3160,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 16,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2790,6 +3188,8 @@
    "extension": "option to extend for an additional 12 months",
    "stated_supplier_count": null,
    "supplier_count": 1,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2821,6 +3221,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 7,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2850,6 +3252,8 @@
    "term_months": 48,
    "stated_supplier_count": null,
    "supplier_count": 5,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2926,6 +3330,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 51,
    "supplier_count": 51,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -2958,6 +3364,8 @@
    "term_months": 48,
    "stated_supplier_count": null,
    "supplier_count": 8,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3074,6 +3482,8 @@
    "extension": "option to extend for up to an additional 24 months",
    "stated_supplier_count": 60,
    "supplier_count": 60,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 6
   },
   {
@@ -3108,6 +3518,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 10,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3146,6 +3558,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 14,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3171,6 +3585,8 @@
    "term_months": 48,
    "stated_supplier_count": null,
    "supplier_count": 1,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3222,6 +3638,8 @@
    "term_months": 24,
    "stated_supplier_count": 27,
    "supplier_count": 27,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3248,6 +3666,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 2,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3310,6 +3730,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 16,
    "supplier_count": 16,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 4
   },
   {
@@ -3340,6 +3762,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 6,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3387,6 +3811,8 @@
    "term_months": 48,
    "stated_supplier_count": 23,
    "supplier_count": 23,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3413,6 +3839,8 @@
    "term_months": 60,
    "stated_supplier_count": null,
    "supplier_count": 2,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3512,6 +3940,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 28,
    "supplier_count": 28,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 9
   },
   {
@@ -3538,6 +3968,8 @@
    "extension": "option to extend for an additional 12 months",
    "stated_supplier_count": null,
    "supplier_count": 1,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3571,6 +4003,8 @@
    "delisted_product_count": null,
    "stated_supplier_count": null,
    "supplier_count": 10,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3599,6 +4033,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 4,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3627,6 +4063,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": null,
    "supplier_count": 3,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3716,6 +4154,8 @@
    "extension": "option to extend for an additional 12 months",
    "stated_supplier_count": 28,
    "supplier_count": 28,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 7
   },
   {
@@ -3761,6 +4201,8 @@
    "extension": "none",
    "stated_supplier_count": 14,
    "supplier_count": 14,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 1
   },
   {
@@ -3828,7 +4270,180 @@
    "term_months": 48,
    "stated_supplier_count": 43,
    "supplier_count": 43,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/orthoses-podiatry-and-immobilisation/",
+   "slug": "orthoses-podiatry-and-immobilisation",
+   "framework": "Orthotics, Podiatry and Immobilisation",
+   "type": "New Contract",
+   "category": "Rehabilitation and Community",
+   "reference": "2024/S 000-019205",
+   "supply_route": "Direct, Stocked, eDirect",
+   "start": "2025-03-03",
+   "expiry": "2027-03-02",
+   "suppliers": [
+    "Algeo Ltd",
+    "Allard Support UK Limited",
+    "AM Healthcare Group – New",
+    "Ambu Limited",
+    "Apos Medical UK Ltd – New",
+    "Arden Orthotics Ltd",
+    "Bailey Instruments Ltd",
+    "Beagle Orthopaedic Ltd",
+    "Benefoot UK Ltd trading as BeneCare Medical",
+    "Bespoke Prosthetics & Orthotics Ltd – New",
+    "Birmingham Orthotic Services – New",
+    "Blatchford Limited",
+    "C&P Medical Trading Ltd – New",
+    "C&S Footwear Adaptions Ltd – New",
+    "Canonbury Products Limited",
+    "Cardiac Services",
+    "Chaneco",
+    "C-Pro Direct Ltd – New",
+    "Crest Medical Ltd",
+    "Critical Healthcare Ltd – New",
+    "CUXSON GERRARD & COMPANY LIMITED",
+    "Dacey LTD",
+    "Daylong Direct – New",
+    "Dynamic Metrics Ltd – New",
+    "Enovis UK",
+    "Essity T/A BSN Medical Ltd",
+    "Eureka Physiocare Ltd",
+    "Podopro UK Ltd – New",
+    "Fenton Pharmaceuticals Limited",
+    "Firefly Orthoses NI Limited – New",
+    "Footlabs Ltd",
+    "Hugh Steeper Limited – New",
+    "Huntleigh Healthcare – New",
+    "Joint Operations (UK) Ltd",
+    "KCI Medical Limited",
+    "Ken Hall Ltd",
+    "Kettering Surgical Appliances – New",
+    "L&R Medical UK Ltd",
+    "MAG Orthotics Limited",
+    "Medalin Limited",
+    "Medezine Ltd",
+    "Medfac UK Ltd – New",
+    "medi UK Ltd",
+    "Ossur UK Limited",
+    "Peacocks Medical Group",
+    "Performance Health International Limited",
+    "Piedro Ltd – New",
+    "Praxis Medical Ltd",
+    "Prestige Health Footwear Ltd – New",
+    "Prestige Healthcare (London) Ltd",
+    "Promedics Orthopaedic Ltd",
+    "Purple Surgical UK Limited – New",
+    "Reed Medical Ltd – New",
+    "Repton Medical Ltd – New",
+    "Steroplast Healthcare Ltd – New",
+    "Talarmade Limited",
+    "TayCare Medical Ltd",
+    "Thesis Technology Products Ltd",
+    "Thuasne UK Ltd",
+    "Trulife Limited",
+    "V-M Orthotics Ltd",
+    "Walters Medical Ltd",
+    "Win Health Medical Ltd"
+   ],
+   "delisted_suppliers": [
+    {
+     "name": "TLB Medical Supplies Ltd.",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Bolton Bros",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Buchanan Orthotics Ltd.",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Discovery Orthotics",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Formthotics UK",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Head2Toe",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "IMS Euro Ltd.",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Lakeland",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Lantor (UK) Ltd.",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "LBG Medical Ltd.",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "RSScan Lab Ltd.",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Safeguard Medical Technologies Ltd.",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Sallis Healthcare Ltd.",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Sevilla Components",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Sidas",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Syringa",
+     "reason": null,
+     "note": null
+    }
+   ],
+   "parse_ok": true,
+   "parse_note": null,
+   "expired": false,
+   "status": "live",
+   "new_supplier_count": null,
+   "delisted_product_count": null,
+   "term_months": 24,
+   "extension": "option to extend for an additional 24 months",
+   "stated_supplier_count": 63,
+   "supplier_count": 63,
+   "stated_delisted_supplier_count": 16,
+   "delisted_parse_ok": true,
+   "delisted_supplier_count": 16
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/paper-hygiene-products/",
@@ -3869,6 +4484,8 @@
    "term_months": 48,
    "stated_supplier_count": 17,
    "supplier_count": 17,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3928,6 +4545,8 @@
    "term_months": 48,
    "stated_supplier_count": 35,
    "supplier_count": 35,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -3968,6 +4587,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 9,
    "supplier_count": 9,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 1
   },
   {
@@ -3994,6 +4615,8 @@
    "extension": "option to extend for three years",
    "stated_supplier_count": null,
    "supplier_count": 1,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4040,6 +4663,9 @@
    "term_months": 48,
    "stated_supplier_count": 22,
    "supplier_count": 22,
+   "stated_delisted_supplier_count": 4,
+   "delisted_parse_ok": false,
+   "delisted_parse_note": "page states 4 delisted supplier(s), read 0 by name -- names withheld",
    "delisted_supplier_count": 0
   },
   {
@@ -4075,6 +4701,9 @@
    "term_months": 48,
    "stated_supplier_count": null,
    "supplier_count": 11,
+   "stated_delisted_supplier_count": 1,
+   "delisted_parse_ok": false,
+   "delisted_parse_note": "page states 1 delisted supplier(s), read 0 by name -- names withheld",
    "delisted_supplier_count": 0
   },
   {
@@ -4101,13 +4730,15 @@
    "parse_ok": true,
    "parse_note": "no stated supplier count on the page",
    "expired": false,
-   "status": "not_yet_started",
+   "status": "live",
    "new_supplier_count": null,
    "delisted_product_count": null,
    "term_months": 24,
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": null,
    "supplier_count": 8,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4161,6 +4792,9 @@
    "term_months": 48,
    "stated_supplier_count": 29,
    "supplier_count": 29,
+   "stated_delisted_supplier_count": 7,
+   "delisted_parse_ok": false,
+   "delisted_parse_note": "page states 7 delisted supplier(s), read 0 by name -- names withheld",
    "delisted_supplier_count": 0
   },
   {
@@ -4198,6 +4832,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 12,
    "supplier_count": 12,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4248,6 +4884,8 @@
    "term_months": 48,
    "stated_supplier_count": 26,
    "supplier_count": 26,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4285,6 +4923,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 13,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4314,6 +4954,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 5,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4351,6 +4993,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 13,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4400,6 +5044,8 @@
    "term_months": 48,
    "stated_supplier_count": 25,
    "supplier_count": 25,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4461,6 +5107,8 @@
    "term_months": 59,
    "stated_supplier_count": 37,
    "supplier_count": 37,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4490,6 +5138,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": null,
    "supplier_count": 4,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4519,6 +5169,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": null,
    "supplier_count": 4,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4561,6 +5213,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 18,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4597,6 +5251,8 @@
    "term_months": 48,
    "stated_supplier_count": null,
    "supplier_count": 12,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4644,6 +5300,8 @@
    "term_months": 34,
    "stated_supplier_count": null,
    "supplier_count": 23,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4729,6 +5387,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 29,
    "supplier_count": 29,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 6
   },
   {
@@ -4758,6 +5418,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 5,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4795,6 +5457,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 13,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -4856,6 +5520,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 10,
    "supplier_count": 10,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 5
   },
   {
@@ -4938,6 +5604,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 41,
    "supplier_count": 41,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 3
   },
   {
@@ -4961,7 +5629,23 @@
     "Polyco Healthline",
     "Semperit Investment."
    ],
-   "delisted_suppliers": [],
+   "delisted_suppliers": [
+    {
+     "name": "Euro Packaging Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Fannin Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Omnimedical Ltd.",
+     "reason": null,
+     "note": null
+    }
+   ],
    "parse_ok": true,
    "parse_note": "no stated supplier count on the page",
    "expired": false,
@@ -4971,7 +5655,9 @@
    "term_months": 41,
    "stated_supplier_count": null,
    "supplier_count": 9,
-   "delisted_supplier_count": 0
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
+   "delisted_supplier_count": 3
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-implants-for-mens-and-womens-health/",
@@ -5018,7 +5704,78 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": null,
    "supplier_count": 6,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 3
+  },
+  {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
+   "slug": "surgical-mesh",
+   "framework": "Surgical Mesh",
+   "type": "New Contract",
+   "category": "Medical and Surgical Consumables",
+   "reference": "2024/S 000-021744",
+   "supply_route": "Stocked, eDirect",
+   "start": "2025-07-07",
+   "expiry": "2027-07-06",
+   "suppliers": [
+    "Advanced Medical Solutions Ltd",
+    "Aquilant Limited",
+    "Assut UK LTD",
+    "B. Braun Medical Limited",
+    "Becton Dickinson U.K, Limited",
+    "Boston Scientific Ltd",
+    "Carrow Medical Limited",
+    "Elemental Healthcare Ltd",
+    "Eurosurgical",
+    "HC21 (UK) Ltd",
+    "Ideal Medical Solutions",
+    "Johnson & Johnson Medical Ltd",
+    "JUNE Medical",
+    "Lawmed Ltd",
+    "Medtronic Limited",
+    "pfm medical UK Ltd",
+    "Q Medical Technologies Ltd",
+    "Raise Healthcare Pvt Ltd",
+    "Sela Medical UK LTD",
+    "TELA Bio Ltd",
+    "W.L. Gore & Associates (UK) Ltd."
+   ],
+   "delisted_suppliers": [
+    {
+     "name": "H&R Healthcare Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Inomed Health Limited",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Pierson Surgical Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "ProSys International Ltd.",
+     "reason": null,
+     "note": null
+    }
+   ],
+   "parse_ok": true,
+   "parse_note": null,
+   "expired": false,
+   "status": "live",
+   "new_supplier_count": 2,
+   "delisted_product_count": null,
+   "term_months": 24,
+   "extension": "option to extend for an additional 24 months",
+   "stated_supplier_count": 21,
+   "supplier_count": 21,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
+   "delisted_supplier_count": 4
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-navigation-systems-with-associated-options-and-related-services/",
@@ -5048,6 +5805,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 6,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -5157,6 +5916,8 @@
    "term_months": 48,
    "stated_supplier_count": 34,
    "supplier_count": 34,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 10
   },
   {
@@ -5269,14 +6030,35 @@
     "TRB Chemedica (UK) Ltd",
     "United Orthopaedic Corporation UK Limited",
     "Venturis Medical Ltd",
-    "Zimmer Biomet Limited",
-    "Athrodax Healthcare International Ltd",
-    "Avicenna Surgical Ltd",
-    "Empire Medical UK",
-    "One Surgical Ltd",
-    "Total Ortho LLP"
+    "Zimmer Biomet Limited"
    ],
-   "delisted_suppliers": [],
+   "delisted_suppliers": [
+    {
+     "name": "Athrodax Healthcare International Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Avicenna Surgical Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Empire Medical UK",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "One Surgical Ltd",
+     "reason": null,
+     "note": null
+    },
+    {
+     "name": "Total Ortho LLP",
+     "reason": null,
+     "note": null
+    }
+   ],
    "parse_ok": true,
    "parse_note": "no stated supplier count on the page",
    "expired": false,
@@ -5286,8 +6068,10 @@
    "term_months": 48,
    "extension": "none",
    "stated_supplier_count": null,
-   "supplier_count": 105,
-   "delisted_supplier_count": 0
+   "supplier_count": 100,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
+   "delisted_supplier_count": 5
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-patient-assessment-device-solutions/",
@@ -5503,6 +6287,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 40,
    "supplier_count": 40,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 30
   },
   {
@@ -5535,6 +6321,8 @@
    "term_months": 48,
    "stated_supplier_count": null,
    "supplier_count": 8,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -5580,6 +6368,8 @@
    "term_months": 72,
    "stated_supplier_count": null,
    "supplier_count": 21,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -5662,6 +6452,8 @@
    "extension": "option to extend for a further 12 months",
    "stated_supplier_count": 57,
    "supplier_count": 57,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -5709,6 +6501,8 @@
    "term_months": 48,
    "stated_supplier_count": 23,
    "supplier_count": 23,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 0
   },
   {
@@ -5796,6 +6590,8 @@
    "extension": "option to extend for an additional 24 months",
    "stated_supplier_count": 31,
    "supplier_count": 31,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 6
   },
   {
@@ -5845,6 +6641,8 @@
    "extension": "option to extend for an additional 12 months",
    "stated_supplier_count": 13,
    "supplier_count": 13,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 2
   },
   {
@@ -5940,6 +6738,8 @@
    "extension": "none",
    "stated_supplier_count": 39,
    "supplier_count": 39,
+   "stated_delisted_supplier_count": null,
+   "delisted_parse_ok": true,
    "delisted_supplier_count": 6
   }
  ]

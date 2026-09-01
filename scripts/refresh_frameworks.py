@@ -289,6 +289,55 @@ def _labelled(text, label):
     return val[:120] or None
 
 
+DELIST_SOURCE = "data/nhssc-launch-briefs.json"
+
+
+def _norm_co(name):
+    """Company name reduced for comparison: case, punctuation and legal form."""
+    s = re.sub(r"\(.*?\)", " ", (name or "").lower())
+    s = re.sub(r"[^a-z0-9 ]", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    words = s.split()
+    while words and words[-1] in (
+            "ltd", "limited", "plc", "llp", "inc", "corp", "corporation",
+            "co", "company", "holdings", "uk", "gb"):
+        words.pop()
+    return " ".join(words) or s
+
+
+def subtract_delisted(records):
+    """Remove delisted suppliers from each framework's awarded list, in place."""
+    try:
+        with open(DELIST_SOURCE) as fh:
+            briefs = json.load(fh).get("briefs", [])
+    except (OSError, ValueError):
+        print("WARNING: %s unreadable — delisted suppliers NOT subtracted. "
+              "The framework lists may name a supplier who has lost the "
+              "framework." % DELIST_SOURCE, file=sys.stderr)
+        return
+
+    by_url = {}
+    for b in briefs:
+        names = [d["name"] for d in b.get("delisted_suppliers", [])]
+        if names:
+            by_url[b["url"].rstrip("/")] = names
+
+    for rec in records:
+        names = by_url.get((rec.get("url") or "").rstrip("/"))
+        if not names:
+            continue
+        drop = {_norm_co(n) for n in names}
+        kept = [s for s in rec["suppliers"] if _norm_co(s) not in drop]
+        removed = [s for s in rec["suppliers"] if _norm_co(s) in drop]
+        if removed:
+            print("delisted, removed from %s: %s"
+                  % (rec["name"], ", ".join(removed)), file=sys.stderr)
+        rec["suppliers"] = kept
+        rec["supplierCount"] = len(kept)
+        rec["delisted"] = names
+        rec["delistedSource"] = DELIST_SOURCE
+
+
 def parse_brief(url, h):
     text = " ".join(text_of(h).split())
     title = ""
@@ -392,6 +441,32 @@ def main():
     for rec in expired:
         print("expired, moved out of frameworks: %s (ended %s)" % (rec["name"], rec.get("ends")),
               file=sys.stderr)
+
+    # DELISTED SUPPLIERS ARE NOT ON THE FRAMEWORK.
+    # ---------------------------------------------
+    # This script reads a brief's supplier list and, until 31/08/2026, stopped
+    # there. A brief also names the suppliers being DELISTED at the framework's
+    # start, immediately below the awarded list and often under a heading this
+    # parser does not recognise, so those names were captured as awarded. From
+    # here they were written into supplier-seed.json and supplier-index.json by
+    # backfill_index_frameworks.py and rendered under "Frameworks on" — a
+    # competitor who has lost their route to market, presented to a paying
+    # member as a live one. Motiva Implants and Nagor on Surgical Implants for
+    # Men's and Women's Health, Euro Packaging and Fannin on Surgical Gloves,
+    # and five orthopaedic suppliers on Total Orthopaedic Solutions 3 all
+    # reached the Hub this way.
+    #
+    # The split is NOT re-derived here. data/nhssc-launch-briefs.json already
+    # reads it from the same pages behind three invariants (stated awarded
+    # count, stated delisted count, and no supplier on both lists), and one fact
+    # gets one home. This step subtracts what that file records as delisted for
+    # the SAME brief URL, and keeps the names in `delisted` so the framework
+    # record still says who went.
+    #
+    # A brief that file withheld leaves the supplier list untouched: it is not
+    # evidence that nobody was delisted, only that nobody could be named safely.
+    subtract_delisted(frameworks)
+    subtract_delisted(expired)
 
     frameworks.sort(key=lambda r: r["name"].lower())
     doc = {

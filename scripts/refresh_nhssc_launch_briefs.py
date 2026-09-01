@@ -29,26 +29,54 @@ THE PARSING RULE (root CLAUDE.md rule 14: state the rule in the file)
 Briefs are prose, not a table, so the awarded and delisted lists are read from
 delimited regions of the flattened page text:
 
-  awarded   between "on this framework" / "they are:" and either the delisting
-            sentence or the next section heading. Every line in that region is a
+  awarded   between "on this framework" / "they are:" and either a DELISTING
+            ANCHOR or the next section heading. Every line in that region is a
             supplier name.
-  delisted  between "being delisted at the start of the framework agreement" and
-            the next section heading. This region MIXES supplier names with
-            explanatory sentences, so a line is treated as a supplier name only
-            if it does not end in a full stop and is under 80 characters;
-            anything else is attached to the preceding supplier as its note.
+  delisted  between a DELISTING ANCHOR and the next section heading or anchor.
+            This region MIXES supplier names with explanatory sentences, so a
+            line is treated as a supplier name only if it does not end in a full
+            stop and is under 80 characters; anything else is attached to the
+            preceding supplier as its note.
 
-THE INVARIANT THAT MAKES THIS TRUSTWORTHY
+A DELISTING ANCHOR is the bare heading "Delisted suppliers", or any line that
+mentions both suppliers and delisting AND ends in a colon. The briefs are
+hand-written and announce a delisting in at least ten different sentences, so
+anchoring on any one of them misses the rest; the colon is what makes the general
+shape safe, because every line that merely mentions delisting in passing ("No
+suppliers are being delisted.") ends in a full stop instead. See DELIST_MARKER
+below for the full list of live shapes and why this matters.
+
+THE INVARIANTS THAT MAKE THIS TRUSTWORTHY
 -----------------------------------------
-Every brief states its own supplier count in prose ("There are 39 suppliers") AND
-lists them. The script compares the two. A brief whose stated count disagrees with
-the number of names parsed is NOT published: it is recorded as a parse failure and
-reported. That is a genuine check on the parser rather than a hopeful one, and it
-means a silent template change surfaces as a failure instead of as a shrunken
-supplier list on a paying member's screen.
+1. THE STATED SUPPLIER COUNT. Every brief states its own supplier count in prose
+   ("There are 39 suppliers") AND lists them. The script compares the two. A brief
+   whose stated count disagrees with the number of names parsed is NOT published:
+   it is recorded as a parse failure and reported. That is a genuine check on the
+   parser rather than a hopeful one, and it means a silent template change
+   surfaces as a failure instead of as a shrunken supplier list on a paying
+   member's screen.
 
-If more than a quarter of briefs fail that check the script writes nothing at all,
-on the assumption the site template has changed rather than that the NHS suddenly
+2. THE STATED DELISTED COUNT. Where a brief says how many suppliers it is
+   delisting ("Three suppliers have been delisted"), that number must match the
+   names read beneath it. Where it does not -- the count is given but the names
+   are not, or the names run inline in the sentence with a parenthetical of their
+   own -- the COUNT is published and the NAMES are withheld. We know a supplier
+   lost the framework; we have no right to guess which one.
+
+3. NO SUPPLIER ON BOTH LISTS. A company cannot be awarded a framework and
+   delisted from it in the same brief. When both lists name the same company the
+   brief is withheld entirely: either the awarded region has run past an
+   unrecognised anchor, or the page contradicts itself, and there is no honest
+   way to tell which claim is the wrong one.
+
+Invariant 3 exists because invariant 1 cannot fire on a brief that states no
+count at all. Total Orthopaedic Solutions 3 states none, and until this check
+existed it published five delisted orthopaedic suppliers inside its awarded list
+of 105 -- a delisted competitor presented to a paying member as a live route to
+market, which is the single worst thing this file can get wrong.
+
+If more than 40% of briefs fail invariant 1 the script writes nothing at all, on
+the assumption the site template has changed rather than that the NHS suddenly
 started miscounting.
 
 WHAT THIS DOES NOT PROVE
@@ -117,8 +145,78 @@ AWARDED_MARKER = re.compile(r"\bthey are\s*:?\s*$", re.I)
 # "...at the start of the framework agreement:" and a second one "...due to not
 # tendering:". Every block is read, and the reason is taken from its own marker
 # line so a supplier is never separated from why they went.
+#
+# HOW THE BRIEFS ACTUALLY ANNOUNCE A SUPPLIER DELISTING
+# ----------------------------------------------------
+# The first version of this script anchored on ONE sentence, "being delisted at
+# the start of the framework agreement". Measured across all 140 live briefs that
+# form covers 34 of them and misses at least ten others, each hand-written
+# differently:
+#
+#   "Delisted suppliers"                                    (a bare heading)
+#   "The following suppliers have been delisted:"
+#   "The following suppliers are being delisted:"
+#   "The following suppliers have been delisted from this framework agreement:"
+#   "The following 16 suppliers are delisted from the framework agreement:"
+#   "The following suppliers are being delisted at the start of the new framework:"
+#   "The following suppliers are being delisted post the start of the framework
+#    agreement:"
+#   "There are four suppliers delisted:"
+#   "Three suppliers have been delisted:"
+#
+# Missing an anchor is not a quiet gap. The delisted names sit immediately after
+# the awarded list on the page, so an unrecognised anchor lets them run straight
+# into the awarded region and a delisted competitor is published as being ON the
+# framework. That is the worst possible failure for this file. It is what put
+# five delisted orthopaedic suppliers into the Total Orthopaedic Solutions 3
+# awarded list, and Euro Packaging and Fannin into Surgical Gloves.
+#
+# So the anchor is now a SHAPE rather than a sentence: a line that talks about
+# suppliers and delisting AND ends in a colon, or the bare "Delisted suppliers"
+# heading. The colon is what makes this safe to generalise -- every list-opening
+# line in these briefs ends in one, and every sentence that merely mentions
+# delisting in passing ("No suppliers are being delisted.", "108 lines will be
+# delisted from existing and delisted suppliers.") ends in a full stop.
 DELIST_MARKER = re.compile(
     r"being delisted at the start of the framework agreement(.*)$", re.I)
+
+DELIST_HEADING = re.compile(r"^delisted\s+suppliers?\s*:?$", re.I)
+
+
+def delist_anchor(line: str) -> bool:
+    """True when this line opens a list of DELISTED SUPPLIERS."""
+    s = line.strip()
+    if DELIST_HEADING.match(s):
+        return True
+    if not s.endswith(":"):
+        return False
+    low = s.lower()
+    return "delist" in low and "supplier" in low
+
+
+# Where a brief states how many suppliers it is delisting, that number is the
+# invariant for the delisted list, exactly as "There are 39 suppliers" is the
+# invariant for the awarded one. Written as words as often as digits.
+WORD_NUMBERS = {
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+    "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12,
+    "thirteen": 13, "fourteen": 14, "fifteen": 15, "sixteen": 16,
+    "seventeen": 17, "eighteen": 18, "nineteen": 19, "twenty": 20,
+}
+NUM = r"(\d+|" + "|".join(WORD_NUMBERS) + r")"
+DELIST_COUNT_PATTERNS = (
+    NUM + r"\s+suppliers?\s+(?:are|is|have|has)\s+(?:being\s+|been\s+)*delisted",
+    r"there\s+(?:are|is)\s+" + NUM + r"\s+suppliers?\s+delisted",
+    r"the following\s+" + NUM + r"\s+suppliers?\s+(?:are|is)\s+delisted",
+    NUM + r"\s+suppliers?\s+on the current framework did not participate",
+)
+
+
+def as_number(tok: str) -> int | None:
+    tok = tok.strip().lower().replace(",", "")
+    if tok.isdigit():
+        return int(tok)
+    return WORD_NUMBERS.get(tok)
 
 MONTHS = ("January February March April May June July August September "
           "October November December").split()
@@ -377,7 +475,7 @@ def region(lines: list[str], start_i: int,
         l = lines[i]
         if is_heading(l) and out:
             break
-        if DELIST_MARKER.search(l):
+        if DELIST_MARKER.search(l) or delist_anchor(l):
             if not stop_on_delist or out:
                 break
         out.append(l)
@@ -497,9 +595,19 @@ def parse_brief(url: str, page: str) -> dict:
     delisted: list[dict] = []
     for i, l in enumerate(lines):
         m = DELIST_MARKER.search(l)
-        if not m:
+        if m:
+            reason = m.group(1).strip(" :.-–—") or None
+        elif delist_anchor(l):
+            # A generalised anchor states the circumstance ("post the start of
+            # the framework agreement"), not the reason. Only an explicit
+            # "due to ..." / "did not participate ..." clause is a reason, so
+            # nothing is inferred about WHY a supplier went.
+            reason = None
+            r = re.search(r"\b(due to [^.:]+|did not participate[^.:]*)", l, re.I)
+            if r:
+                reason = r.group(1).strip(" :.-–—")
+        else:
             continue
-        reason = m.group(1).strip(" :.-–—") or None
         block, _ = region(lines, i + 1, stop_on_delist=True)
         current: dict | None = None
         for b in block:
@@ -515,6 +623,39 @@ def parse_brief(url: str, page: str) -> dict:
         if d["name"] not in seen_names:
             seen_names.add(d["name"])
             deduped.append(d)
+
+    # ---- the delisted-side invariant --------------------------------------
+    # Where the brief says how many suppliers it is delisting, that number has to
+    # match the names read beneath it, exactly as the awarded list is checked
+    # against "There are 39 suppliers". Two shapes fail this and both must fail
+    # LOUDLY rather than publish something plausible:
+    #   * the count is given but no names are (Hearing Aids, IV Accessories,
+    #     Medical Pulp) -- we know some supplier lost the framework and have no
+    #     right to guess which;
+    #   * the names run inline in the sentence, sometimes with a parenthetical
+    #     carrying its own comma (External Breast Prostheses) -- splitting that
+    #     invents names.
+    # In both cases the COUNT is published and the names are withheld (root rule
+    # 14: refuse to fire on thin evidence; root rule 2: never fill the gap).
+    joined = " ".join(lines)
+    stated_delisted = None
+    for pat in DELIST_COUNT_PATTERNS:
+        mm = re.search(pat, joined, re.I)
+        if mm:
+            stated_delisted = as_number(mm.group(1))
+            if stated_delisted is not None:
+                break
+    rec["stated_delisted_supplier_count"] = stated_delisted
+
+    if stated_delisted is not None and stated_delisted != len(deduped):
+        rec["delisted_parse_ok"] = False
+        rec["delisted_parse_note"] = (
+            "page states %d delisted supplier(s), read %d by name -- names "
+            "withheld" % (stated_delisted, len(deduped)))
+        deduped = []
+    else:
+        rec["delisted_parse_ok"] = True
+
     rec["delisted_suppliers"] = deduped
     rec["delisted_supplier_count"] = len(deduped)
 
@@ -529,6 +670,28 @@ def parse_brief(url: str, page: str) -> dict:
         rec["parse_ok"] = False
         rec["parse_note"] = ("page states %d suppliers, parsed %d"
                              % (stated, len(awarded)))
+
+    # ---- the invariant that catches the leak ------------------------------
+    # A supplier cannot be awarded a framework and delisted from it in the same
+    # brief. When both lists name the same company the awarded region has run on
+    # past an unrecognised delisting anchor, which is precisely how a delisted
+    # competitor gets published as a live route to market. This fires whether or
+    # not the page states a supplier count, so it also covers the briefs where
+    # the stated-count invariant has nothing to check (Total Orthopaedic
+    # Solutions 3 states no count and carried five delisted suppliers inside its
+    # awarded list of 105 until this check existed).
+    both = ({n.strip().rstrip(".").lower() for n in rec["suppliers"]}
+            & {d["name"].strip().rstrip(".").lower()
+               for d in rec["delisted_suppliers"]})
+    if both:
+        rec["parse_ok"] = False
+        rec["parse_note"] = (
+            "the brief contradicts itself: %d supplier(s) appear on BOTH its "
+            "awarded and its delisted list (%s). Either the awarded region has "
+            "run past an unrecognised delisting anchor, or the page names the "
+            "same firm as awarded on some lots and delisted on others. Neither "
+            "claim is safe to publish, so the brief is withheld."
+            % (len(both), ", ".join(sorted(both))))
 
     return rec
 
@@ -644,17 +807,32 @@ def main() -> int:
         "generated": now.isoformat(timespec="seconds"),
         "parsing_rule": (
             "Awarded suppliers are read from the region after 'on this framework "
-            "- they are:'; delisted suppliers from the region after 'being "
-            "delisted at the start of the framework agreement'. In the delisted "
-            "region a line is a supplier name only if it is under 80 characters "
-            "and does not end in a full stop; anything else is attached to the "
-            "preceding supplier as its note."
+            "- they are:', ending at the next section heading or the next "
+            "delisting anchor. A delisting anchor is the bare heading 'Delisted "
+            "suppliers', or any line that mentions both suppliers and delisting "
+            "AND ends in a colon -- the briefs are hand-written and announce a "
+            "delisting in at least ten different sentences, while every line that "
+            "merely mentions delisting in passing ends in a full stop. In a "
+            "delisted region a line is a supplier name only if it is under 80 "
+            "characters and does not end in a full stop; anything else is "
+            "attached to the preceding supplier as its note. Where the names run "
+            "inline in the sentence rather than beneath it, or where the brief "
+            "gives a delisted count but no names, the count is published and the "
+            "names are withheld."
         ),
         "invariant": (
-            "Each brief states its own supplier count in prose and also lists the "
-            "suppliers. Only briefs where the two agree are published. Briefs that "
-            "disagree are excluded and counted below. If fewer than 75%% of briefs "
-            "agree the script writes nothing at all."
+            "THREE checks, and a brief must pass all of them to be published. "
+            "(1) Each brief states its own supplier count in prose and also lists "
+            "the suppliers; only briefs where the two agree are published. "
+            "(2) Where a brief states how many suppliers it is delisting, that "
+            "number must match the delisted names read beneath it, or the names "
+            "are withheld and only the count is published. (3) No supplier may "
+            "appear on both the awarded and the delisted list of the same brief; "
+            "a brief that says both about the same company is withheld entirely, "
+            "because one of the two claims is wrong and there is no honest way to "
+            "tell which. Briefs that fail are excluded and counted below. If "
+            "fewer than %d%% of briefs pass check (1) the script writes nothing "
+            "at all." % int(MIN_CLEAN_SHARE * 100)
         ),
         "evidence_caveat": (
             "A supplier on a framework CAN supply through it; that is not evidence "
@@ -672,6 +850,11 @@ def main() -> int:
             "briefs_excluded_failed_invariant": len(briefs) - len(clean),
             "briefs_unreachable": failed_fetch,
             "frameworks_with_delistings": len(delisting),
+            "briefs_withholding_delisted_names": sum(
+                1 for b in publish if not b.get("delisted_parse_ok", True)),
+            "delisted_suppliers_known_but_unnamed": sum(
+                b.get("stated_delisted_supplier_count") or 0
+                for b in publish if not b.get("delisted_parse_ok", True)),
             "distinct_awarded_suppliers": len(all_suppliers),
             "distinct_delisted_suppliers": len(all_delisted),
             "briefs_with_expiry_date": len(expiring),

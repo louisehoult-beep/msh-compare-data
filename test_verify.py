@@ -196,6 +196,37 @@ def _(tmp):
     return "asserts an award or re-tender"
 
 
+@case("a supplier shown as ON a framework their own brief delisted them from")
+def _(tmp):
+    # The state the Hub was actually in on 31/08/2026. NHS Supply Chain's launch
+    # briefs print the delisted suppliers immediately beneath the awarded ones,
+    # under hand-written headings; an unrecognised heading let the capture read
+    # straight through the join. Motiva Implants and Nagor were published as on
+    # Surgical Implants for Men's and Women's Health, Euro Packaging and Fannin
+    # on Surgical Gloves, Athrodax and four others on Total Orthopaedic
+    # Solutions 3 — every one of them named on that framework's own brief as
+    # delisted from it. A rep would have briefed a competitor as an incumbent.
+    #
+    # The case puts one of those rows back, reconstructed from the supplier's own
+    # `delistedFrom` record, so it stays meaningful after the data is corrected.
+    d = json.load(open("data/supplier-seed.json"))
+    for sup in d.get("suppliers") or []:
+        dl = (sup.get("delistedFrom") or [None])[0]
+        if not dl:
+            continue
+        sup.setdefault("frameworks", []).append({
+            "name": dl["name"], "url": dl["url"],
+            "reference": dl.get("reference"), "category": dl.get("category"),
+            "source": "nhssc-brief", "capturedOn": dl.get("capturedOn"),
+            "note": "Named on NHS Supply Chain's own contract launch brief.",
+        })
+        json.dump(d, open("data/supplier-seed.json", "w"),
+                  separators=(",", ":"), ensure_ascii=False)
+        return "DELISTED from"
+    return Skip("no supplier in the seed carries a delistedFrom record to rebuild "
+                "the row from; the gate is exercised in msh-hub-private")
+
+
 def seed_supplier_plus(**fields):
     """The seed's first supplier, given one deliberately bad leadership/partnership.
 

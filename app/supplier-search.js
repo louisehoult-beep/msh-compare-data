@@ -114,6 +114,29 @@
         + gone.map(function(f){return fwRow(f,true);}).join(''));
     } else h+=sec('Frameworks on','<div style="font-size:13px;color:'+DIM+';">No framework indexed yet.</div>');
 
+    /* DELISTED FROM. A supplier NHS Supply Chain's own launch brief names among
+       the firms being delisted at a framework's start. Until 31/08/2026 these
+       rows sat under "Frameworks on" like any other, because the brief prints
+       the delisted names directly beneath the awarded ones and the capture read
+       straight through the join: Motiva Implants and Nagor showed a live
+       Surgical Implants position they had lost, and Motiva showed nothing else.
+       A competitor who has just lost their route to market is worth more to a
+       rep than one who holds it, so this is its own section rather than a
+       deletion — but it must never read as a route to market. */
+    if(s.delistedFrom&&s.delistedFrom.length){
+      h+=sec('DELISTED from — no longer a route to market',
+        '<div style="font-size:11.5px;color:'+DIM+';margin:0 0 6px;">NHS Supply Chain\'s own contract launch brief names this company among the suppliers being delisted at the start of these frameworks. That means they are off the framework from its start date. It is not evidence the company is in difficulty, and it does not mean any given trust has stopped buying from them.</div>'
+        + s.delistedFrom.map(function(f){
+            return '<div style="padding:7px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;">'+
+              '<b>'+esc(f.name)+'</b> <span style="background:#fdeaea;border:1px solid #f0c4c4;color:#8a2b2b;font-size:10px;font-weight:700;letter-spacing:.06em;border-radius:99px;padding:2px 8px;">DELISTED</span>'+
+              (f.from?' <span style="color:'+DIM+';">· from '+esc(f.from)+'</span>':'')+
+              (f.reason?'<br><span style="color:#37485a;font-size:12.5px;">'+esc(f.reason)+'</span>':'')+
+              (f.delistedAs&&f.delistedAs!==s.name?'<br><span style="color:'+DIM+';font-size:12px;">named on the brief as \u201c'+esc(f.delistedAs)+'\u201d</span>':'')+
+              (f.url?'<br><a href="'+esc(f.url)+'" style="color:'+G+';font-size:12px;">the launch brief</a>':'')+
+              '</div>';
+          }).join(''));
+    }
+
     // products
     if(s.products&&s.products.length){
       h+=sec('Products / brands', s.products.map(function(p){return '<span style="display:inline-block;border:1px solid '+LINE+';border-radius:99px;padding:4px 11px;font-size:12.5px;margin:0 5px 5px 0;color:#37485a;">'+esc(p)+'</span>';}).join(''));
