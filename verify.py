@@ -4392,6 +4392,40 @@ def check_differentiator(doc, vocab):
         for t in (v.get("types") or {}):
             legal.add("%s:%s" % (s, t))
 
+    # THE STALE VOCABULARY COPY. Added 31/08/2026.
+    # differentiator-category-map.json carries its own `vocabulary` block, and it
+    # is what every mapping agent is handed as the list of legal codes. It is a
+    # COPY of the gated vocabulary in compare-suppliers.json, written once by the
+    # seeder, and nothing was keeping the two in step. Measured on 31/08 it was
+    # missing three types that had been added to the gated set since —
+    # ophthalmology:optom, continence:urinal and handling:assess — so agents had
+    # been holding rows for want of a code that existed. A held row looks like an
+    # honest "no category fits", which is exactly why this went unnoticed: the
+    # failure is silent and it looks like diligence.
+    try:
+        cmap = load("differentiator-category-map.json") or {}
+    except Exception:
+        cmap = {}
+    copy = cmap.get("vocabulary")
+    if copy:
+        copied = set()
+        for s2, ts in copy.items():
+            for t2 in (ts or {}):
+                copied.add("%s:%s" % (s2, t2))
+        missing = sorted(legal - copied)
+        extra = sorted(copied - legal)
+        if missing:
+            FAIL("differentiator", "differentiator-category-map.json's `vocabulary` copy is missing "
+                                   "%d code(s) that ARE in the gated vocabulary: %s. Agents judge "
+                                   "against that copy, so every one of these is a code they cannot "
+                                   "use and will hold rows for. Re-sync it from compare-suppliers.json."
+                                   % (len(missing), ", ".join(missing[:8])))
+        if extra:
+            FAIL("differentiator", "differentiator-category-map.json's `vocabulary` copy offers %d "
+                                   "code(s) the gated vocabulary does not have: %s. Agents would map "
+                                   "rows to codes that can never publish."
+                                   % (len(extra), ", ".join(extra[:8])))
+
     prods = doc.get("products") or []
     counts = doc.get("counts") or {}
 
