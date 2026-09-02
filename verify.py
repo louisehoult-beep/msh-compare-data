@@ -76,7 +76,7 @@ Exit codes
     1  FAILED — do not push until every FAIL is resolved
 """
 
-import hashlib, json, os, re, subprocess, sys, datetime, shutil, tempfile, time
+import glob, hashlib, json, os, re, subprocess, sys, datetime, shutil, tempfile, time
 from urllib.request import Request, urlopen
 
 DATA = "data"
@@ -4942,6 +4942,218 @@ def check_supplier_careers(doc):
                         % (who, x.get("title"), x.get("uk")))
 
 
+# --------------------------------------------------------------------------
+# ABSOLUTISING LANGUAGE — the paraphrase-drift check
+#
+# Added 02/09/2026. DHSC's value based procurement guidance says whole life
+# cost "should have a maximum weighting of 40%" and that a framework provider
+# which deviates must present its rationale. That reached members as
+# "whole-life cost is CAPPED at 40%" in three places, and as "the MANDATORY 60%
+# VBP value weighting" in a fourth. Nobody decided to overstate it. It drifted,
+# one retelling at a time, and each retelling was made by someone who had read
+# a true thing.
+#
+# The 31/08/2026 NBE patch gap analysis caught the wording and wrote that it
+# must not be copied into live reference material. It was already in live
+# reference material. Writing an error down does not remove it, which is why
+# this is a check and not a note.
+#
+# Deliberately narrow: an absolutising word AND a percentage AND a
+# scoring/weighting context in the same sentence. Companies House PSC prose
+# ("the only active PSC ... more than 25%") is full of absolutes about
+# percentages and is quoted fact, so the scoring context is what keeps this
+# gate honest. Broadening it without the context term produces 15 hits, 14 of
+# them shareholdings.
+# --------------------------------------------------------------------------
+ABSOLUTE = re.compile(
+    r"\b(capped|caps? at|capped at|hard limit|ceiling|cannot exceed|"
+    r"must not exceed|fixed at|mandatory|guaranteed)\b", re.I)
+SCORING = re.compile(
+    r"\b(weighting|weighted|scor(?:e|es|ed|ing)|tender|evaluation|"
+    r"award criteria|value domain|social value|whole[- ]life cost|"
+    r"VBP|value[- ]based procurement)\b", re.I)
+PERCENT = re.compile(r"\d{1,3}\s?%")
+
+# Phrases the sources themselves use absolutely. DHSC does say social value
+# "must be allocated" a minimum 10%, so an absolute there is faithful.
+ABSOLUTE_OK = (
+    "social value must be at least 10%",
+    "10% of which must be allocated",
+)
+
+
+def check_absolutising_language(files):
+    """Fail when published prose states a scoring threshold more absolutely
+    than the guidance behind it does."""
+    for path in files:
+        try:
+            text = open(path, encoding="utf-8", errors="replace").read()
+        except Exception:
+            continue
+        for m in re.finditer(r"[^.!?\n]{0,300}[.!?]", text):
+            s = m.group(0)
+            if not (ABSOLUTE.search(s) and SCORING.search(s) and PERCENT.search(s)):
+                continue
+            if any(ok.lower() in s.lower() for ok in ABSOLUTE_OK):
+                continue
+            word = ABSOLUTE.search(s).group(0)
+            FAIL("language",
+                 "%s states a scoring threshold absolutely (\"%s\"): %s "
+                 "— check the source's own wording before publishing this. A "
+                 "guidance that says \"should\" is not a cap, and a member who "
+                 "quotes it as one in a tender meeting gets corrected in public."
+                 % (path, word, s.strip()[:180]))
+
+
+# --------------------------------------------------------------------------
+# FRAMEWORK EXPIRY vs THE PROCUREMENT CALENDAR — the cross-source check
+#
+# Added 02/09/2026. frameworks.json publishes Technology Enabled Care
+# (2021/S 000-031857) as ending 31 August 2027, read from its launch brief.
+# NHS Supply Chain's own procurement calendar gives that category's successor a
+# contract go-live of 01/09/2026. Both are NHS Supply Chain's own pages; the
+# brief was edited 24/08/2026 and the calendar updated 27/07/2026, so neither
+# is obviously stale. The Hub had read one and published it as settled fact.
+#
+# Across the rest of the calendar the pattern is consistent: a successor goes
+# live the day after the incumbent expires (Aids for Daily Living expires
+# 31/10/2027, successor go-live 01/11/2027). So a go-live that lands BEFORE the
+# incumbent's stated expiry is a contradiction, not a schedule.
+#
+# Absent evidence warns; an actual contradiction fails. A missing cache must
+# never be able to block a push, and a real disagreement must never be able to
+# pass one.
+# --------------------------------------------------------------------------
+# A successor may go live a day or two before the incumbent expires; that is a
+# deliberate handover overlap. Anything more than a month apart is not.
+HANDOVER_DAYS = 31
+
+
+def _cal_key(name):
+    return re.sub(r"[^a-z0-9]+", "", (name or "").lower())
+
+
+def check_framework_calendar_agreement(frameworks, calendar):
+    if not frameworks or not frameworks.get("frameworks"):
+        return
+    if not calendar or not calendar.get("rows"):
+        WARN("fwcal",
+             "data/nhssc-procurement-calendar.json is missing, so no framework "
+             "expiry could be cross-checked against NHS Supply Chain's own "
+             "procurement calendar. Run scripts/refresh_nhssc_procurement_calendar.py.")
+        return
+
+    gen = as_date((calendar.get("generated") or "")[:10])
+    if gen and (today() - gen).days > 45:
+        WARN("fwcal", "the cached procurement calendar was fetched %s, more than "
+                      "45 days ago. Re-run the refresh script." % gen.isoformat())
+
+    reviewed = set((load("framework-date-conflicts.json") or {}).get("frameworks", {}))
+
+    cal = {}
+    for r in calendar["rows"]:
+        cal[_cal_key(r.get("framework"))] = r
+
+    for fw in frameworks["frameworks"]:
+        row = cal.get(_cal_key(fw.get("name")))
+        if not row:
+            continue
+        ends = as_date(_uk_or_long_date(fw.get("ends")))
+        golive = as_date(_uk_or_long_date(row.get("contractGoLive")))
+        if not ends or not golive:
+            continue
+        # NHS Supply Chain routinely brings a successor live a day or two before
+        # the incumbent expires — Catering ends 22/07/2029 against a go-live of
+        # 21/07/2029, Textiles 19/04/2030 against 18/04/2030. That is a handover,
+        # not a contradiction. A go-live that lands MONTHS before the stated
+        # expiry cannot be one, and those are the rows worth stopping a push for.
+        if golive <= ends and (ends - golive).days > HANDOVER_DAYS:
+            if fw.get("name") in reviewed:
+                WARN("fwcal",
+                     "%s is a known, reviewed date conflict (brief says %s, calendar "
+                     "says %s). Its expiry must not be published until the owner's "
+                     "pages agree." % (fw.get("name"), fw.get("ends"),
+                                       row.get("contractGoLive")))
+                continue
+            FAIL("fwcal",
+                 "%s: the launch brief says the framework ends %s, but NHS Supply "
+                 "Chain's own procurement calendar gives its successor a contract "
+                 "go-live of %s. One of the two is wrong and the Hub is publishing "
+                 "one of them as settled. Do not guess which — publish the "
+                 "framework without an expiry until the owner's pages agree."
+                 % (fw.get("name"), fw.get("ends"), row.get("contractGoLive")))
+
+
+def _uk_or_long_date(s):
+    """'8 June 2027', '01/11/2027' and '2027-06-08' all mean a date here."""
+    if not s:
+        return None
+    s = str(s).strip()
+    m = re.match(r"^(\d{1,2})/(\d{1,2})/(\d{4})$", s)
+    if m:
+        return "%s-%02d-%02d" % (m.group(3), int(m.group(2)), int(m.group(1)))
+    m = re.match(r"^(\d{4})-(\d{2})-(\d{2})", s)
+    if m:
+        return m.group(0)
+    m = re.match(r"^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$", s)
+    if m:
+        months = {mn.lower(): i for i, mn in enumerate(
+            ["January", "February", "March", "April", "May", "June", "July",
+             "August", "September", "October", "November", "December"], 1)}
+        mo = months.get(m.group(2).lower())
+        if mo:
+            return "%s-%02d-%02d" % (m.group(3), mo, int(m.group(1)))
+    return None
+
+
+# --------------------------------------------------------------------------
+# FIND A TENDER NOTICE VERSIONS — the superseded-citation check
+#
+# Added 02/09/2026. The NBE card cited Find a Tender notice 2026/S 000-010151
+# for the SBS10525 bid deadline of 27 March 2026. That notice says 13 March.
+# The deadline had been extended on 03/03/2026 by notice 2026/S 000-018890, and
+# Find a Tender labels 010151 "This is an old version of this notice." Pairing a
+# notice number with a deadline that notice does not contain is the kind of
+# error a procurement-literate member finds in thirty seconds.
+#
+# OCIDs are version-independent, so anything the Hub cites by OCID is already
+# safe. This gate covers the other case: a bare notice identifier published
+# alongside a date, with no OCID next to it to resolve it.
+# --------------------------------------------------------------------------
+FTS_NOTICE = re.compile(r"\b(20\d\d/S \d{3}-\d{6})\b")
+# Only a notice cited AS THE AUTHORITY FOR A DEADLINE is at risk here. A
+# framework reference sitting in a provenance note ("added 12/08/2026 from the
+# contract launch brief for X (2023/S 000-028831)") is not a deadline claim and
+# must not fire this gate — an earlier draft of it did, 2,339 times.
+DEADLINE = re.compile(
+    r"\b(clos(?:e|es|ed|ing)|deadline|submission date|bids? (?:due|close)|"
+    r"tender period)\b", re.I)
+
+
+def check_notice_citations(files):
+    """A bare Find a Tender notice number published next to a date, with no OCID
+    beside it, cannot be checked for supersession by anyone reading it."""
+    for path in files:
+        try:
+            text = open(path, encoding="utf-8", errors="replace").read()
+        except Exception:
+            continue
+        for m in re.finditer(r"[^.!?\n]{0,300}[.!?]", text):
+            s = m.group(0)
+            hit = FTS_NOTICE.search(s)
+            if not hit or not DEADLINE.search(s):
+                continue
+            if "ocds-" in s:
+                continue
+            FAIL("notice",
+                 "%s cites Find a Tender notice %s next to a date with no OCID "
+                 "beside it: %s — Find a Tender supersedes notices and marks the "
+                 "old one, so a bare identifier cannot be checked. Cite the OCID, "
+                 "which is version-independent, or confirm this release is the "
+                 "latest and say so."
+                 % (path, hit.group(1), s.strip()[:170]))
+
+
 def main():
     offline = "--offline" in sys.argv
     as_json = "--json" in sys.argv
@@ -5061,6 +5273,20 @@ def main():
                                  load("supplier-index.json"))
     check_ref_present(load("compare-suppliers.json"))
     check_curated_test_matches(comptab_js)
+
+    # Added 02/09/2026 after the NBE leave-behind review. Each of these three
+    # caught a real error that was already live or already in a draft going to
+    # print, and each replaces a rule that had been written down and then not
+    # followed.
+    prose = sorted(glob.glob(os.path.join("app", "*.js"))) + [
+        os.path.join(DATA, n) for n in
+        ("prep-config.json", "compare-issues.json", "supplier-seed.json",
+         "supplier-index.json", "interview-prep.json")
+        if os.path.exists(os.path.join(DATA, n))]
+    check_absolutising_language(prose)
+    check_notice_citations(prose)
+    check_framework_calendar_agreement(load("frameworks.json"),
+                                       load("nhssc-procurement-calendar.json"))
 
     if as_json:
         print(json.dumps({"pass": not fails, "fails": fails, "warns": warns}, indent=1))

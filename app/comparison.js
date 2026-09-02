@@ -1210,7 +1210,7 @@
           on: allComps.length >= 5, note:'a fragmented category — offer to simplify their range'},
         {n:'Clinical evaluation & clinician acceptance', ev:'Switches stick when clinicians co-own the evaluation; resistance breeds workarounds (published NHS evidence).', src:'https://pmc.ncbi.nlm.nih.gov/articles/PMC8512597/',
           on: sameSteps(theirs), note:'true like-for-like = a light evaluation — design it WITH their clinical lead'},
-        {n:'Training & implementation support (scored)', ev:'Ease of use, training and implementation support are explicitly scored inside the mandatory 60% VBP value weighting.', src:'https://www.gov.uk/government/publications/value-based-procurement-for-medical-technology',
+        {n:'Training & implementation support (scored)', ev:'Ease of use, training and implementation support are explicitly scored inside the VBP value domains, which carry a minimum 60% combined weighting.', src:'https://www.gov.uk/government/publications/value-based-procurement-for-medical-technology',
           on: (sameSteps(theirs) || /train|support|implement|educat/i.test(edge||'')), note:'same-steps switch or a training offer — either scores here'},
         {n:'Safety alerts & regulation', ev:'MHRA alerts and regulation force substitutions (e.g. the 2013 Sharps Regulations drove NHS-wide device switches).', src: (theirAlerts.length && theirAlerts[0].url) ? theirAlerts[0].url : 'https://www.hse.gov.uk/pubns/hsis7.htm',
           on: theirAlerts.length > 0, note: theirAlerts.length ? ('a live MHRA action touches ' + theirs.name + ' — this is your strongest driver right now') : 'watch the Live Desk — if an alert touches the incumbent, this becomes your strongest driver overnight'},

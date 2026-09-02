@@ -2571,6 +2571,155 @@ def company_logos_cases(tmp):
 
     return failures
 
+# --------------------------------------------------------------------------
+# THE THREE GATES ADDED 02/09/2026, after the NBE leave-behind verification
+# pass found five errors in a card that was one approval away from a printer,
+# and one of the five already live on the Hub.
+#
+# Each case below is a real error, replayed. Not an invented one.
+# --------------------------------------------------------------------------
+
+@case("'whole-life cost is CAPPED at 40%' — the real wording that reached members")
+def _(tmp):
+    # DHSC says whole life cost "should have a maximum weighting of 40%" and
+    # that a framework provider which deviates must present its rationale.
+    # "Capped" asserts a ceiling the guidance does not set. This exact sentence
+    # was live in app/comparison.js and data/prep-config.json until 02/09/2026,
+    # and had been flagged as unpublishable on 31/08/2026 without being removed.
+    s = open("app/comparison.js").read()
+    s = s.replace("Value-based procurement scoring",
+                  "Value-based procurement scoring: whole-life cost is capped at 40% "
+                  "of the tender score.", 1)
+    open("app/comparison.js", "w").write(s)
+    return "states a scoring threshold absolutely"
+
+
+@case("'the MANDATORY 60% value weighting' — the same drift, different word")
+def _(tmp):
+    # Caught by this gate on the day it was written, in a place the human sweep
+    # had missed. DHSC says the five domains "should have a minimum sum
+    # weighting of 60%".
+    s = open("app/comparison.js").read()
+    s = s.replace("Value-based procurement scoring",
+                  "Value-based procurement scoring, inside the mandatory 60% VBP "
+                  "value weighting.", 1)
+    open("app/comparison.js", "w").write(s)
+    return "states a scoring threshold absolutely"
+
+
+@case("a Companies House shareholding is not a scoring threshold (must NOT fire)")
+def _(tmp):
+    # The first draft of this gate fired on PSC prose — "the only active PSC,
+    # holding more than 25% but not more than 50%" — fifteen times, fourteen of
+    # them shareholdings quoted verbatim from the register. A gate that cries
+    # wolf on quoted fact gets switched off. So this case proves the SCORING
+    # context term is load-bearing: absolutes plus percentages alone must pass.
+    #
+    # Expressed as a HOLE-check in reverse: the case deliberately also breaks
+    # something the gate must catch, so a gate that has stopped working fails
+    # here too rather than passing for the wrong reason.
+    s = open("app/comparison.js").read()
+    s = s.replace("Value-based procurement scoring",
+                  "The only active PSC is notified as holding more than 25% but not "
+                  "more than 50% of the shares, and the parent has guaranteed the "
+                  "liabilities. Separately: whole-life cost is capped at 40% of the "
+                  "tender score.", 1)
+    open("app/comparison.js", "w").write(s)
+    return "capped"
+
+
+@case("framework expiry contradicted by NHS Supply Chain's own procurement calendar")
+def _(tmp):
+    # The Technology Enabled Care case. The launch brief said the framework runs
+    # to 31/08/2027; the calendar gave its successor a go-live of 01/09/2026.
+    # Both NHS Supply Chain's, both edited within six weeks. The Hub had read one
+    # and published it as settled fact.
+    import json as _json
+    fw = _json.load(open("data/frameworks.json"))
+    cal = _json.load(open("data/nhssc-procurement-calendar.json"))
+    fw["frameworks"].append({
+        "name": "Verify Self Test Framework",
+        "url": "https://example.invalid/",
+        "reference": "2099/S 000-000000",
+        "supplyRoute": "Direct",
+        "starts": "1 January 2024",
+        "ends": "31 December 2030",
+        "suppliers": [],
+    })
+    cal["rows"].append({
+        "framework": "Verify Self Test Framework",
+        "category": "Rehabilitation and Community",
+        "plannedPublication": "Published",
+        "contractGoLive": "01/01/2027",
+    })
+    _json.dump(fw, open("data/frameworks.json", "w"), indent=1)
+    _json.dump(cal, open("data/nhssc-procurement-calendar.json", "w"), indent=1)
+    return "procurement calendar gives its successor"
+
+
+@case("a one-day handover is not a contradiction (must NOT fire)")
+def _(tmp):
+    # NHS Supply Chain routinely brings a successor live a day before the
+    # incumbent expires — Catering 22/07/2029 against 21/07/2029, Textiles
+    # 19/04/2030 against 18/04/2030. Twelve rows fired before the materiality
+    # threshold existed, seven of them handovers. Same reverse-HOLE shape as the
+    # PSC case: the handover must pass, and the real conflict beside it must not.
+    import json as _json
+    fw = _json.load(open("data/frameworks.json"))
+    cal = _json.load(open("data/nhssc-procurement-calendar.json"))
+    fw["frameworks"] += [
+        {"name": "Verify Handover Framework", "url": "https://example.invalid/",
+         "reference": "2099/S 000-000001", "supplyRoute": "Direct",
+         "starts": "1 January 2024", "ends": "22 July 2029", "suppliers": []},
+        {"name": "Verify Real Conflict Framework", "url": "https://example.invalid/",
+         "reference": "2099/S 000-000002", "supplyRoute": "Direct",
+         "starts": "1 January 2024", "ends": "31 December 2030", "suppliers": []},
+    ]
+    cal["rows"] += [
+        {"framework": "Verify Handover Framework", "category": "x",
+         "plannedPublication": "Published", "contractGoLive": "21/07/2029"},
+        {"framework": "Verify Real Conflict Framework", "category": "x",
+         "plannedPublication": "Published", "contractGoLive": "01/01/2027"},
+    ]
+    _json.dump(fw, open("data/frameworks.json", "w"), indent=1)
+    _json.dump(cal, open("data/nhssc-procurement-calendar.json", "w"), indent=1)
+    return "Verify Real Conflict Framework"
+
+
+@case("a superseded Find a Tender notice cited as the authority for a deadline")
+def _(tmp):
+    # The card cited notice 2026/S 000-010151 for a bid deadline of 27 March
+    # 2026. That notice says 13 March; the deadline was extended on 03/03/2026
+    # by notice 2026/S 000-018890, and Find a Tender labels 010151 "This is an
+    # old version of this notice." OCIDs are version-independent, so citing one
+    # is safe; a bare notice number next to a deadline is not.
+    import json as _json
+    d = _json.load(open("data/prep-config.json"))
+    d["_verify_self_test"] = ("Bidding closed 27 March 2026 under Find a Tender "
+                              "notice 2026/S 000-010151.")
+    _json.dump(d, open("data/prep-config.json", "w"), indent=1)
+    return "with no OCID beside it"
+
+
+@case("a framework reference in a provenance note is not a deadline claim (must NOT fire)")
+def _(tmp):
+    # The first draft of the notice gate fired 2,339 times, almost all of them
+    # on provenance notes of the form "added 12/08/2026 from the contract launch
+    # brief for X (2023/S 000-028831), fetched 12/08/2026". Those are references,
+    # not deadline claims, and a gate with 2,339 false positives is a gate nobody
+    # reads. Reverse-HOLE again: the provenance note must pass, the deadline
+    # citation beside it must not.
+    import json as _json
+    d = _json.load(open("data/prep-config.json"))
+    d["_verify_self_test_provenance"] = (
+        "Added 12/08/2026 from NHS Supply Chain's own contract launch brief for "
+        "Laboratory Diagnostics (2023/S 000-028831), fetched 12/08/2026.")
+    d["_verify_self_test_deadline"] = ("The tender period closed on 27 March 2026, "
+                                       "see notice 2026/S 000-010151.")
+    _json.dump(d, open("data/prep-config.json", "w"), indent=1)
+    return "2026/S 000-010151"
+
+
 def main():
     # THE CONTACT FIXTURE, first of all.
     #

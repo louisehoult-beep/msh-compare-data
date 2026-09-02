@@ -93,6 +93,8 @@ REFS = {
     "trust-contacts.json":     "ETH-D38ACEED2",
     "trust-map.json":          "ETH-D5BBB9C7A",
     "trust-pressures.json":    "ETH-DAE43C750",
+    "nhssc-procurement-calendar.json": "ETH-DBC575194",
+    "framework-date-conflicts.json":   "ETH-D2368919F",
 }
 
 

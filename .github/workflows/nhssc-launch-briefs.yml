@@ -42,6 +42,17 @@ name: NHS Supply Chain launch briefs (weekly)
 #
 # ⚠️ NOTHING ELSE MAY WRITE data/nhssc-launch-briefs.json. This is its only writer.
 #
+# IT ALSO CACHES THE PROCUREMENT CALENDAR (added 02/09/2026). Same site, same
+# cadence, and the two are only useful together. A launch brief says when a
+# framework ENDS; the calendar says when its successor GOES LIVE. On 02/09/2026
+# the Hub was publishing Technology Enabled Care as running to 31/08/2027 from
+# its brief, while the calendar gave the successor a go-live of 01/09/2026 --
+# a contradiction between two NHS Supply Chain pages that the Hub had resolved
+# by reading only one of them. verify.py's fwcal gate now cross-checks the pair,
+# which it can only do if both are cached in the same run.
+#
+# ⚠️ NOTHING ELSE MAY WRITE data/nhssc-procurement-calendar.json either.
+#
 # Weekly rather than daily: frameworks are awarded on a cadence of weeks to months,
 # and a full run reads ~140 pages. There is no value in doing that every day.
 
@@ -74,6 +85,9 @@ jobs:
       - name: Read the launch briefs
         run: python3 scripts/refresh_nhssc_launch_briefs.py
 
+      - name: Cache the procurement calendar
+        run: python3 scripts/refresh_nhssc_procurement_calendar.py
+
       - name: Re-stamp the ownership notice and data markers
         run: python3 scripts/stamp_notice.py
 
@@ -87,8 +101,8 @@ jobs:
         run: |
           git config user.name "launch-briefs-bot"
           git config user.email "actions@github.com"
-          git add data/nhssc-launch-briefs.json
-          git diff --cached --quiet || git commit -m "NHSSC launch briefs $(date -u +%F)"
+          git add data/nhssc-launch-briefs.json data/nhssc-procurement-calendar.json
+          git diff --cached --quiet || git commit -m "NHSSC launch briefs + procurement calendar $(date -u +%F)"
           pushed=0
           for attempt in 1 2 3; do
             if git push; then
@@ -104,10 +118,11 @@ jobs:
             git fetch origin
             git reset --hard origin/main
             python3 scripts/refresh_nhssc_launch_briefs.py
+            python3 scripts/refresh_nhssc_procurement_calendar.py
             python3 scripts/stamp_notice.py
             python3 verify.py || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
-            git add data/nhssc-launch-briefs.json
-            git diff --cached --quiet || git commit -m "NHSSC launch briefs $(date -u +%F) (retry)"
+            git add data/nhssc-launch-briefs.json data/nhssc-procurement-calendar.json
+            git diff --cached --quiet || git commit -m "NHSSC launch briefs + procurement calendar $(date -u +%F) (retry)"
             sleep 5
           done
           if [ "$pushed" -ne 1 ]; then

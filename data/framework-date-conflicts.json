@@ -1,0 +1,45 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-D2368919F",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "note": "Frameworks where NHS Supply Chain's own two published sources disagree about when the framework ends. Reviewed by a human and recorded here so verify.py warns rather than blocking every push, while any NEW conflict still fails the gate. Being in this file is not a resolution: the Hub must not publish an expiry date for anything listed here until the owner's pages agree. Opened 02/09/2026 after the NBE leave-behind verification pass.",
+ "rule": "A framework is listed here only when the launch brief's expiry and the procurement calendar's contract go-live are more than 31 days apart in the wrong direction. A go-live a day or two before expiry is a deliberate handover and is not a conflict.",
+ "reviewedOn": "2026-09-02",
+ "sources": {
+  "launchBriefs": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/",
+  "procurementCalendar": "https://www.supplychain.nhs.uk/savings/procurement-calendar/"
+ },
+ "frameworks": {
+  "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices": {
+   "briefSaysEnds": "31 August 2027",
+   "calendarSaysGoLive": "01/09/2026",
+   "note": "The one that started this. Brief edited 24/08/2026, calendar updated 27/07/2026, so neither is obviously stale. The brief also lists 18 suppliers while stating two of them have left."
+  },
+  "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions": {
+   "briefSaysEnds": "26 July 2028",
+   "calendarSaysGoLive": "27/07/2026",
+   "note": "Same day and month, two years apart. Reads like the calendar carrying the CURRENT contract's go-live rather than a successor's, but that is a guess and guesses are what this file exists to stop."
+  },
+  "Finance Solutions": {
+   "briefSaysEnds": "4 September 2028",
+   "calendarSaysGoLive": "07/09/2026"
+  },
+  "Polymer Products": {
+   "briefSaysEnds": "10 August 2027",
+   "calendarSaysGoLive": "31/10/2026"
+  },
+  "Pressure Infusers and Associated Products": {
+   "briefSaysEnds": "31 August 2028",
+   "calendarSaysGoLive": "01/09/2026",
+   "note": "Exactly two years apart, same pattern as Cardiac and Pulmonary."
+  }
+ }
+}
