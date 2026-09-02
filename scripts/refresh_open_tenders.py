@@ -98,7 +98,15 @@ CF_MAX_PAGES = 40
 PAGE_SLEEP = 1.0
 MAX_WAIT = 600
 
-OPEN_STATUSES = {"active", "planning"}
+# Both statutory feeds report a pipeline/PIN notice as tender.status "planned",
+# NOT "planning" (verified live against both APIs 02/09/2026: FTS stages=planning
+# returned 94/100 releases as "planned", CF stages=planning returned 100/100).
+# "planning" is kept in the set because it is what the OCDS spec's own stage is
+# called and a feed could legitimately emit it. Anything matched here is
+# NORMALISED to "planning" on the way out (see row_from_release) so the Hub page
+# keeps one canonical value to filter and count on.
+OPEN_STATUSES = {"active", "planning", "planned"}
+PLANNING_STATUSES = {"planning", "planned"}
 
 CPV_MEDICAL_PREFIX = "33"
 
@@ -228,12 +236,19 @@ def row_from_release(rel, source, today_iso):
     rid = rel.get("id", "")
     url = (FTS_NOTICE.format(rid) if source == "Find a Tender"
            else (CF_NOTICE.format(cf_guid(rid)) if cf_guid(rid) else ""))
-    stage = "preliminary market engagement / planning" if status == "planning" \
-        else "open tender"
+    raw_status = status
+    if status in PLANNING_STATUSES:
+        # Canonical value for everything downstream — the Hub page counts and
+        # filters on "planning". rawStatus keeps what the feed actually said.
+        status = "planning"
+        stage = "preliminary market engagement / planning"
+    else:
+        stage = "open tender"
     return {
         "title": title,
         "buyer": buyer,
         "status": status,
+        "rawStatus": raw_status,
         "stage": stage,
         "date": (rel.get("date") or "")[:10],
         "closingDate": end_date,
@@ -248,10 +263,23 @@ def row_from_release(rel, source, today_iso):
     }
 
 
-def fetch_fts(days, today_iso, max_pages=MAX_PAGES):
+def fetch_fts(days, today_iso, max_pages=MAX_PAGES, stage="tender"):
+    """One pass over ONE OCDS stage.
+
+    Called once per stage (see fetch_fts_all). The two statutory feeds disagree
+    about how to ask for more than one stage in a single call, and BOTH failure
+    modes are silent — verified live 02/09/2026:
+      * Find a Tender: "stages=planning,tender" returns 0 releases (HTTP 200,
+        empty). Only repeated params work.
+      * Contracts Finder: repeated params make the LAST one win, dropping the
+        other stage entirely; only the comma form mixes them.
+    Rather than depend on either quirk, each stage gets its own pass and the
+    results are merged and de-duplicated. Slower, impossible to get silently
+    wrong.
+    """
     now = dt.datetime.now(dt.timezone.utc)
     qs = urllib.parse.urlencode({
-        "stages": "tender", "limit": 100,
+        "stages": stage, "limit": 100,
         "updatedFrom": (now - dt.timedelta(days=days)).strftime("%Y-%m-%dT00:00:00"),
         "updatedTo": now.strftime("%Y-%m-%dT23:59:59")})
     url = "%s?%s" % (FTS_API, qs)
@@ -270,17 +298,18 @@ def fetch_fts(days, today_iso, max_pages=MAX_PAGES):
             time.sleep(PAGE_SLEEP)
     if url and pages >= max_pages:
         complete = False
-    note = ("Find a Tender: %d open notice(s) from %d release(s) over %d page(s)"
-            % (len(rows), scanned, pages))
+    note = ("Find a Tender (%s stage): %d open notice(s) from %d release(s) over "
+            "%d page(s)" % (stage, len(rows), scanned, pages))
     if not complete:
         note += (" — ⚠️ STOPPED AT THE %d-PAGE GUARD before the window was exhausted, "
                  "so this window was NOT fully walked and notices are missing." % max_pages)
     return rows, note, complete
 
 
-def fetch_cf(days, today_iso, max_pages=CF_MAX_PAGES):
+def fetch_cf(days, today_iso, max_pages=CF_MAX_PAGES, stage="tender"):
+    """One pass over ONE OCDS stage — see fetch_fts's docstring for why."""
     cutoff = (dt.date.today() - dt.timedelta(days=days)).isoformat()
-    url = "%s?size=100&stages=tender" % CF_API
+    url = "%s?size=100&stages=%s" % (CF_API, stage)
     rows, pages, scanned, reached = [], 0, 0, False
     while url and pages < max_pages:
         data = get(url)
@@ -303,8 +332,8 @@ def fetch_cf(days, today_iso, max_pages=CF_MAX_PAGES):
         url = (data.get("links") or {}).get("next")
         if url:
             time.sleep(PAGE_SLEEP)
-    note = ("Contracts Finder: %d open notice(s) from %d release(s) over %d page(s), "
-            "back to %s" % (len(rows), scanned, pages, cutoff))
+    note = ("Contracts Finder (%s stage): %d open notice(s) from %d release(s) over "
+            "%d page(s), back to %s" % (stage, len(rows), scanned, pages, cutoff))
     if not reached:
         note += (" — ⚠️ STOPPED AT THE %d-PAGE GUARD before reaching the cutoff, so "
                  "this window was NOT fully walked and notices are missing." % max_pages)
@@ -420,13 +449,46 @@ def main(argv=None):
     window = {"from": (today - dt.timedelta(days=args.days)).isoformat(),
               "to": today_iso, "days": args.days, "run": today_iso}
 
-    fts_rows, fts_note, fts_ok = fetch_fts(args.days, today_iso)
-    print(" ", fts_note, flush=True)
-    cf_rows, cf_note, cf_ok = fetch_cf(args.days, today_iso)
-    print(" ", cf_note, flush=True)
+    # BOTH stages, one pass each, per feed. "tender" = open for bids now;
+    # "planning" = Procurement Act pipeline / PIN / preliminary market engagement,
+    # published ahead of the formal tender. Before 02/09/2026 only the tender
+    # stage was ever requested, so the pipeline half of this page's own stated
+    # scope was silently empty — the "Pipeline / PIN notices" tile read 0 not
+    # because the market was quiet but because nothing ever asked for them.
+    all_rows, notes, ok = [], [], True
+    for stage in ("tender", "planning"):
+        rows, note, good = fetch_fts(args.days, today_iso, stage=stage)
+        all_rows += rows
+        notes.append(note)
+        ok = ok and good
+        print(" ", note, flush=True)
+        rows, note, good = fetch_cf(args.days, today_iso, stage=stage)
+        all_rows += rows
+        notes.append(note)
+        ok = ok and good
+        print(" ", note, flush=True)
 
-    doc = assemble(fts_rows + cf_rows, existing, window,
-                   [fts_note, cf_note], fts_ok and cf_ok, today)
+    # De-duplicate: a notice can legitimately surface under more than one stage
+    # pass (CF's comma behaviour mixes stages, and a release that moved from
+    # planning to tender inside the window appears in both). Keep the first,
+    # preferring the open-tender row since that is the more actionable state.
+    seen, deduped = set(), []
+    for r in all_rows:
+        key = r.get("ocid") or r.get("url") or (r.get("title"), r.get("buyer"))
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(r)
+    dropped = len(all_rows) - len(deduped)
+    if dropped:
+        notes.append("De-duplicated %d notice(s) seen under more than one stage." % dropped)
+        print("  de-duplicated %d cross-stage duplicate(s)" % dropped, flush=True)
+
+    n_planning = sum(1 for r in deduped if r.get("status") == "planning")
+    notes.append("Stage split: %d open tender(s), %d pipeline/PIN notice(s)."
+                 % (len(deduped) - n_planning, n_planning))
+
+    doc = assemble(deduped, existing, window, notes, ok, today)
 
     print("\n%d open notice(s) held across %d speciality bucket(s)."
           % (doc["counts"]["openNotices"], len(doc["counts"]["bySpeciality"])))

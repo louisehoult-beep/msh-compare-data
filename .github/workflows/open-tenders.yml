@@ -1,0 +1,92 @@
+name: Open tenders and pipeline notices (daily)
+
+# WHY THIS WORKFLOW EXISTS (added 02/09/2026)
+#
+# scripts/refresh_open_tenders.py existed and worked, but was wired into NO workflow
+# at all — it had only ever been run by hand. data/open-tenders.json was therefore
+# 7 days stale (dataAsOf 26/08/2026, found 02/09/2026) while the Hub's Tenders
+# Tracker page (3198) told members the panel was "Refreshed daily". The page was
+# telling the truth about intent and a lie about fact. This job makes it true.
+#
+# The same run also fixes the pipeline half of the panel. Before 02/09/2026 both
+# fetchers asked their feed for the OCDS "tender" stage only, so Procurement Act
+# pipeline / PIN / preliminary market engagement notices — the ones published ahead
+# of the formal tender, i.e. the ones with the most selling runway in them — were
+# never fetched. The page's "Pipeline / PIN notices" tile read 0 because nothing
+# asked, not because the market was quiet.
+#
+# ⚠️ EACH STAGE GETS ITS OWN PASS. The two feeds disagree, silently, about how to
+# request more than one stage in one call (verified live 02/09/2026):
+#   * Find a Tender: "stages=planning,tender" returns HTTP 200 with ZERO releases.
+#     Only repeated params work.
+#   * Contracts Finder: repeated params make the last one win, dropping the other
+#     stage; only the comma form mixes them.
+# The script therefore runs one pass per stage and de-duplicates, rather than
+# relying on either quirk. Do not "tidy" it back into a single call.
+
+on:
+  schedule:
+    # 06:25 UTC daily — between framework-awards (06:10) and drug-tariff (06:40).
+    - cron: "25 6 * * *"
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Lookback window in days (default 8; use e.g. 45 to backfill after an outage)"
+        required: false
+        default: "8"
+
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  open-tenders:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Refresh open tenders and pipeline notices
+        run: python3 scripts/refresh_open_tenders.py --days "${{ github.event.inputs.days || 8 }}"
+
+      - name: Re-stamp the ownership notice and data markers
+        run: python3 scripts/stamp_notice.py
+
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "open-tenders-bot"
+          git config user.email "actions@github.com"
+          git add data/open-tenders.json
+          git diff --cached --quiet || git commit -m "Open tenders and pipeline notices $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first), attempt $attempt of 3."
+            git fetch origin
+            git reset --hard origin/main
+            python3 scripts/refresh_open_tenders.py --days "${{ github.event.inputs.days || 8 }}"
+            python3 scripts/stamp_notice.py
+            python3 verify.py || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
+            git add data/open-tenders.json
+            git diff --cached --quiet || git commit -m "Open tenders and pipeline notices $(date -u +%F) (retry)"
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 3 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi

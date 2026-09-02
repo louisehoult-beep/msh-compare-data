@@ -62,6 +62,7 @@ REFS = {
     "icc-catalogue.json":          "ETH-DEE6CE6C8",
     "icc-matrices.json":           "ETH-D1989FDFE",
     "open-tenders.json":        "ETH-DCEFAF9C5",
+    "drug-tariff-part-ix.json": "ETH-D090550F8",
     "mhra-alerts.json":         "ETH-D9D253BB8",
     "company-awards.json":     "ETH-D8F9201A9",
     "company-press.json":      "ETH-D5A18D6E2",
