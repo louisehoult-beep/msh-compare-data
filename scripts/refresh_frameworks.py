@@ -290,6 +290,7 @@ def _labelled(text, label):
 
 
 DELIST_SOURCE = "data/nhssc-launch-briefs.json"
+CONFLICTS_SOURCE = "data/framework-date-conflicts.json"
 
 
 def _norm_co(name):
@@ -303,6 +304,34 @@ def _norm_co(name):
             "co", "company", "holdings", "uk", "gb"):
         words.pop()
     return " ".join(words) or s
+
+
+def suppress_contested_dates(records):
+    """A CONTESTED EXPIRY IS NOT A CONFIRMED ONE. verify.py's fwcal gate (added
+    02/09/2026) can only WARN when a framework in CONFLICTS_SOURCE keeps
+    shipping the disputed date from its brief — the file it reads still had it,
+    so the Hub kept publishing an expiry NHS Supply Chain's own two sources
+    disagree about. This is the actual fix: strip `ends` here, in the builder,
+    so the contested date never reaches frameworks.json in the first place.
+    Everything else about the record — suppliers, reference, url — is left
+    untouched; only the date the two sources dispute is withheld. Records are
+    matched by name against CONFLICTS_SOURCE and stay in `frameworks` (they are
+    live routes to market, not expired ones); a human review moves an entry
+    out of that file once the owner's own pages agree.
+    """
+    try:
+        with open(CONFLICTS_SOURCE) as fh:
+            conflicts = set(json.load(fh).get("frameworks", {}))
+    except (OSError, json.JSONDecodeError):
+        return 0
+    n = 0
+    for rec in records:
+        if rec.get("name") in conflicts and rec.get("ends"):
+            print("date contested, expiry suppressed: %s (was %s)"
+                  % (rec["name"], rec["ends"]), file=sys.stderr)
+            rec["ends"] = None
+            n += 1
+    return n
 
 
 def subtract_delisted(records):
@@ -468,6 +497,11 @@ def main():
     subtract_delisted(frameworks)
     subtract_delisted(expired)
 
+    # CONTESTED EXPIRY DATES ARE NOT PUBLISHED. See suppress_contested_dates()
+    # for why. Only `frameworks` (live routes to market) needs this — `expired`
+    # records are already out of every consumer's live view.
+    dateContested = suppress_contested_dates(frameworks)
+
     frameworks.sort(key=lambda r: r["name"].lower())
     doc = {
         "dataAsOf": time.strftime("%Y-%m-%d"),
@@ -486,6 +520,14 @@ def main():
                        "`frameworks`, because every consumer reads that list as live routes to "
                        "market. NHS Supply Chain leaves briefs published after they end. A brief "
                        "with no readable end date stays in `frameworks` rather than being dropped.",
+        "dateContestedCount": dateContested,
+        "dateContestedRule": "A framework named in data/framework-date-conflicts.json has its "
+                             "`ends` date withheld (null) rather than published, because NHS "
+                             "Supply Chain's own two sources — the launch brief and the "
+                             "procurement calendar — disagree about when it ends by more than "
+                             "the deliberate-handover window. The framework itself stays live "
+                             "here; only the disputed date is suppressed, until a human review "
+                             "confirms the owner's own pages agree.",
         "frameworks": frameworks,
         "expired": expired,
         "unparsed": unparsed,
