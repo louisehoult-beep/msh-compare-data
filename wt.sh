@@ -66,7 +66,25 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
+# ROOT MISMATCH — added 02/09/2026, after the supplier-deep-capture run
+#   ROOT is $HOME/msh-worktrees for a normal session. A run whose $HOME is not the
+#   one that created the worktrees resolves ROOT to a directory that does not exist,
+#   so `[ ! -d "$WT" ]` is true, `git worktree add` runs anyway, and git dies with
+#   "fatal: 'wt/<name>' is already checked out at ...". That is exit 128, not exit 3,
+#   and it reads like leftover work when in fact the tree is clean and untouched.
+#   The supplier-deep-capture run on 02/09/2026 was reported FAILED on that basis.
+#   MSH_WORKTREE_ROOT overrides ROOT; the two checks in --for-task below turn the
+#   remaining mismatches into a stated exit 3 instead of a misleading git fatal.
 ROOT="${MSH_WORKTREE_ROOT:-$HOME/msh-worktrees}"
+
+# registered_worktree BRANCH — where git already holds a worktree for BRANCH, or
+# empty. Read from the shared .git, so it is true regardless of what ROOT resolves to.
+# No early `exit` in the awk: under `set -o pipefail` that closes the pipe on git
+# and the whole function returns 141.
+registered_worktree() {
+  git worktree list --porcelain | awk -v b="branch refs/heads/$1" '
+    /^worktree /{w=substr($0,10)} $0 == b && !f {print w; f=1}'
+}
 
 usage() {
   echo "usage: ./wt.sh <name> [--force] | --list | --remove <name>" >&2
@@ -205,6 +223,21 @@ if [ "${1:-}" = "--for-task" ]; then
   NAME="${2:-}"; [ -n "$NAME" ] || usage
   WT="$ROOT/$NAME"
 
+  # If git already holds this branch's worktree somewhere other than $WT, ROOT is
+  # wrong for this environment. A second one is impossible, and calling it leftover
+  # work would be a lie about a tree nobody has touched. Say what it actually is.
+  REG="$(registered_worktree "wt/$NAME")"
+  if [ -n "$REG" ] && [ "$REG" != "$WT" ]; then
+    echo "REFUSING: wt/$NAME is already checked out at" >&2
+    echo "    $REG" >&2
+    echo "but this environment resolves the worktree root to" >&2
+    echo "    $ROOT" >&2
+    echo "Nothing is wrong with that tree and it holds no lost work — this run just" >&2
+    echo "cannot see it under that name. Set MSH_WORKTREE_ROOT to the directory" >&2
+    echo "containing the path above, or run where it resolves, then try again." >&2
+    exit 3
+  fi
+
   if [ ! -d "$WT" ]; then
     mkdir -p "$ROOT"
     git fetch --quiet origin
@@ -214,6 +247,17 @@ if [ "${1:-}" = "--for-task" ]; then
     else
       git worktree add -b "$BRANCH" "$WT" origin/main >&2
     fi
+  fi
+
+  # A worktree records an absolute gitdir. If this environment cannot resolve that
+  # path the checkout cannot be driven from here at all, and every git call below
+  # would fail one at a time in the middle of a run. Fail once, up front, clearly.
+  if ! git -C "$WT" rev-parse --git-dir >/dev/null 2>&1; then
+    echo "REFUSING: $WT exists but its gitdir is unreachable from this environment:" >&2
+    sed 's/^/    /' "$WT/.git" >&2 2>/dev/null || true
+    echo "The checkout is intact and holds no lost work; it simply cannot be driven" >&2
+    echo "from here. Run this task where that path resolves." >&2
+    exit 3
   fi
 
   # An unattended run has nobody to ask, so this never overrides a live owner —
