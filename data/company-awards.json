@@ -10,8 +10,8 @@
   "ref": "ETH-D8F9201A9",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "31/08/2026",
- "generated": "2026-08-31",
+ "dataAsOf": "02/09/2026",
+ "generated": "2026-09-02",
  "source": "Find a Tender and Contracts Finder award-stage OCDS notices, Open Government Licence v3",
  "sourceUrls": {
   "Find a Tender": "https://www.find-tender.service.gov.uk/",
@@ -22,22 +22,16 @@
  "matchRule": "A supplier named on an award notice is attached to a Hub company only where the notice's name, normalised, is EXACTLY a normalised form of that company's own name or one of its recorded aliases. Normalisation lower-cases, turns & into and, drops punctuation, and strips trailing legal-form words (Ltd, Limited, plc, LLP, Inc, GmbH, BV, A/S, AB, Oy, Pty) and trailing territory words (UK, GB, England, Ireland, Europe, EMEA). Nothing else is stripped and there is no fuzzy, substring or edit-distance matching. A name matching two different companies, or none, is quarantined unpublished — it is a question for a human, never a best guess.",
  "coverage": {
   "complete": true,
-  "window": {
-   "from": "2026-08-23",
-   "to": "2026-08-31",
-   "days": 8,
-   "run": "2026-08-31"
-  },
+  "window": null,
   "note": "Awards indexed from the two statutory feeds over the windows listed. An absence here is a statement about this index, never about the company.",
   "notes": [
-   "Find a Tender: 3 supplier row(s) from 238 release(s) over 3 page(s)",
-   "Contracts Finder: 5 supplier row(s) from 700 release(s) over 7 page(s), back to 2026-08-23"
+   "re-matched from stored rows, no fetch"
   ]
  },
  "counts": {
-  "companies": 41,
-  "awardRows": 45,
-  "unmatched": 40,
+  "companies": 40,
+  "awardRows": 44,
+  "unmatched": 41,
   "ambiguous": 0,
   "rowsHeld": 85
  },
@@ -176,6 +170,46 @@
     "matchedOn": "the notice names \"Stryker UK Limited\", which normalises to \"stryker\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
+  "QIAGEN UK": [
+   {
+    "noticeSupplierName": "QIAGEN LTD",
+    "title": "Supply of Digital PCR including Consumables and Maintenance",
+    "buyer": "NHS Blood and Transplant",
+    "date": "2026-07-23",
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/bc6ddd74-de91-424b-99f7-0fa4b728ef6e",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Contracts Finder",
+    "section": "contract-awards",
+    "cpv": "33100000",
+    "valueAmount": 1267857,
+    "valueCurrency": "GBP",
+    "periodStart": "2026-08-01T00:00:00+01:00",
+    "periodEnd": "2030-07-31T23:59:59+01:00",
+    "ocid": "ocds-b5fd17-7b8e343c-035c-4319-bf59-a805e84f5d87",
+    "company": "QIAGEN UK",
+    "matchedOn": "the notice names \"QIAGEN LTD\", which normalises to \"qiagen\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
+  "Optima Medical Ltd": [
+   {
+    "noticeSupplierName": "Optima Medical Limited",
+    "title": "PAM 7036/27 - RFL - MEMG CAPITAL - 2 X Desktop Keypoint.NET Focus Systems, Windows 10 LTSC",
+    "buyer": "Royal Free London NHS Foundation Trust",
+    "date": "2026-08-01",
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/4683253b-9dee-4d02-b341-6cc55654881e",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Contracts Finder",
+    "section": "contract-awards",
+    "cpv": "33195000",
+    "valueAmount": 46644.6,
+    "valueCurrency": "GBP",
+    "periodStart": "2026-08-17T00:00:00+01:00",
+    "periodEnd": "2026-08-17T23:59:59+01:00",
+    "ocid": "ocds-b5fd17-ce95b1ba-dc21-4ef8-a157-60a41c4f827c",
+    "company": "Optima Medical Ltd",
+    "matchedOn": "the notice names \"Optima Medical Limited\", which normalises to \"optima medical\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
   "Thermo Fisher Scientific UK": [
    {
     "noticeSupplierName": "LIFE TECHNOLOGIES LIMITED",
@@ -194,26 +228,6 @@
     "ocid": "ocds-b5fd17-e5ffa338-97c0-46b6-a689-f149b1929f0f",
     "company": "Thermo Fisher Scientific UK",
     "matchedOn": "the notice names \"LIFE TECHNOLOGIES LIMITED\", which normalises to \"life technologies\" — exactly the normalised form of this company's own name or a recorded alias."
-   }
-  ],
-  "Hillrom UK": [
-   {
-    "noticeSupplierName": "Hillrom UK Ltd",
-    "title": "Patient Lifting",
-    "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland)",
-    "date": "2026-08-06",
-    "url": "https://www.find-tender.service.gov.uk/Notice/074950-2026",
-    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Find a Tender",
-    "section": "tender-awards",
-    "cpv": "33192600",
-    "valueAmount": null,
-    "valueCurrency": "",
-    "periodStart": null,
-    "periodEnd": null,
-    "ocid": "ocds-h6vhtk-0664e2",
-    "company": "Hillrom UK",
-    "matchedOn": "the notice names \"Hillrom UK Ltd\", which normalises to \"hillrom\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
   "Arjo": [
@@ -614,6 +628,26 @@
     "matchedOn": "the notice names \"Essity UK Limited\", which normalises to \"essity\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
+  "Vygon (UK)": [
+   {
+    "noticeSupplierName": "VYGON UK",
+    "title": "HRI - PROCEDURE PACKS CVC AND ARTERIAL",
+    "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
+    "date": "2026-08-12",
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/aa245832-a758-4e8b-8ea7-e10554b1e1b8",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Contracts Finder",
+    "section": "contract-awards",
+    "cpv": "33140000",
+    "valueAmount": 51407.96,
+    "valueCurrency": "GBP",
+    "periodStart": "2026-08-13T00:00:00+01:00",
+    "periodEnd": "2027-03-31T23:59:59+01:00",
+    "ocid": "ocds-b5fd17-4b6e4a3a-1632-488e-855c-5d526c09794a",
+    "company": "Vygon (UK)",
+    "matchedOn": "the notice names \"VYGON UK\", which normalises to \"vygon\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
   "Bayer": [
    {
     "noticeSupplierName": "Bayer Plc",
@@ -734,6 +768,26 @@
     "matchedOn": "the notice names \"Kimal plc\", which normalises to \"kimal\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
+  "AB Scientific": [
+   {
+    "noticeSupplierName": "Ab Scientific Ltd",
+    "title": "AB Scientific Consumables Contract",
+    "buyer": "UK Health Security Agency",
+    "date": "2026-08-18",
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/0c585a4c-2b88-449f-b38b-d5e850aec7f0",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Contracts Finder",
+    "section": "contract-awards",
+    "cpv": "33696500",
+    "valueAmount": 50000,
+    "valueCurrency": "GBP",
+    "periodStart": "2026-08-18T00:00:00+01:00",
+    "periodEnd": "2027-08-17T23:59:59+01:00",
+    "ocid": "ocds-b5fd17-2a917551-a33e-4aee-a912-7ef888c4cb76",
+    "company": "AB Scientific",
+    "matchedOn": "the notice names \"Ab Scientific Ltd\", which normalises to \"ab scientific\" — exactly the normalised form of this company's own name or a recorded alias."
+   }
+  ],
   "LivaNova UK Limited": [
    {
     "noticeSupplierName": "Livanova UK Limited",
@@ -814,26 +868,6 @@
     "matchedOn": "the notice names \"WOLF LABORATORIES LIMITED\", which normalises to \"wolf laboratories\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
-  "Mölnlycke": [
-   {
-    "noticeSupplierName": "Molnlycke Health Care",
-    "title": "Custom Theatre and Procedure Packs",
-    "buyer": "NHS Lanarkshire",
-    "date": "2026-08-27",
-    "url": "https://www.find-tender.service.gov.uk/Notice/081865-2026",
-    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Find a Tender",
-    "section": "tender-awards",
-    "cpv": "33140000",
-    "valueAmount": null,
-    "valueCurrency": "",
-    "periodStart": null,
-    "periodEnd": null,
-    "ocid": "ocds-h6vhtk-05a1e0",
-    "company": "Mölnlycke",
-    "matchedOn": "the notice names \"Molnlycke Health Care\", which normalises to \"molnlycke health care\" — exactly the normalised form of this company's own name or a recorded alias."
-   }
-  ],
   "Mast Group": [
    {
     "noticeSupplierName": "Mast Group Ltd",
@@ -854,84 +888,24 @@
     "matchedOn": "the notice names \"Mast Group Ltd\", which normalises to \"mast group\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ],
-  "Vygon (UK)": [
+  "Mölnlycke": [
    {
-    "noticeSupplierName": "VYGON UK",
-    "title": "HRI - PROCEDURE PACKS CVC AND ARTERIAL",
-    "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
-    "date": "2026-08-12",
-    "url": "https://www.contractsfinder.service.gov.uk/Notice/aa245832-a758-4e8b-8ea7-e10554b1e1b8",
+    "noticeSupplierName": "Molnlycke Health Care",
+    "title": "Custom Theatre and Procedure Packs",
+    "buyer": "NHS Lanarkshire",
+    "date": "2026-08-27",
+    "url": "https://www.find-tender.service.gov.uk/Notice/081865-2026",
     "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Contracts Finder",
-    "section": "contract-awards",
+    "source": "Find a Tender",
+    "section": "tender-awards",
     "cpv": "33140000",
-    "valueAmount": 51407.96,
-    "valueCurrency": "GBP",
-    "periodStart": "2026-08-13T00:00:00+01:00",
-    "periodEnd": "2027-03-31T23:59:59+01:00",
-    "ocid": "ocds-b5fd17-4b6e4a3a-1632-488e-855c-5d526c09794a",
-    "company": "Vygon (UK)",
-    "matchedOn": "the notice names \"VYGON UK\", which normalises to \"vygon\" — exactly the normalised form of this company's own name or a recorded alias."
-   }
-  ],
-  "QIAGEN UK": [
-   {
-    "noticeSupplierName": "QIAGEN LTD",
-    "title": "Supply of Digital PCR including Consumables and Maintenance",
-    "buyer": "NHS Blood and Transplant",
-    "date": "2026-07-23",
-    "url": "https://www.contractsfinder.service.gov.uk/Notice/bc6ddd74-de91-424b-99f7-0fa4b728ef6e",
-    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Contracts Finder",
-    "section": "contract-awards",
-    "cpv": "33100000",
-    "valueAmount": 1267857,
-    "valueCurrency": "GBP",
-    "periodStart": "2026-08-01T00:00:00+01:00",
-    "periodEnd": "2030-07-31T23:59:59+01:00",
-    "ocid": "ocds-b5fd17-7b8e343c-035c-4319-bf59-a805e84f5d87",
-    "company": "QIAGEN UK",
-    "matchedOn": "the notice names \"QIAGEN LTD\", which normalises to \"qiagen\" — exactly the normalised form of this company's own name or a recorded alias."
-   }
-  ],
-  "Optima Medical Ltd": [
-   {
-    "noticeSupplierName": "Optima Medical Limited",
-    "title": "PAM 7036/27 - RFL - MEMG CAPITAL - 2 X Desktop Keypoint.NET Focus Systems, Windows 10 LTSC",
-    "buyer": "Royal Free London NHS Foundation Trust",
-    "date": "2026-08-01",
-    "url": "https://www.contractsfinder.service.gov.uk/Notice/4683253b-9dee-4d02-b341-6cc55654881e",
-    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Contracts Finder",
-    "section": "contract-awards",
-    "cpv": "33195000",
-    "valueAmount": 46644.6,
-    "valueCurrency": "GBP",
-    "periodStart": "2026-08-17T00:00:00+01:00",
-    "periodEnd": "2026-08-17T23:59:59+01:00",
-    "ocid": "ocds-b5fd17-ce95b1ba-dc21-4ef8-a157-60a41c4f827c",
-    "company": "Optima Medical Ltd",
-    "matchedOn": "the notice names \"Optima Medical Limited\", which normalises to \"optima medical\" — exactly the normalised form of this company's own name or a recorded alias."
-   }
-  ],
-  "AB Scientific": [
-   {
-    "noticeSupplierName": "Ab Scientific Ltd",
-    "title": "AB Scientific Consumables Contract",
-    "buyer": "UK Health Security Agency",
-    "date": "2026-08-18",
-    "url": "https://www.contractsfinder.service.gov.uk/Notice/0c585a4c-2b88-449f-b38b-d5e850aec7f0",
-    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-    "source": "Contracts Finder",
-    "section": "contract-awards",
-    "cpv": "33696500",
-    "valueAmount": 50000,
-    "valueCurrency": "GBP",
-    "periodStart": "2026-08-18T00:00:00+01:00",
-    "periodEnd": "2027-08-17T23:59:59+01:00",
-    "ocid": "ocds-b5fd17-2a917551-a33e-4aee-a912-7ef888c4cb76",
-    "company": "AB Scientific",
-    "matchedOn": "the notice names \"Ab Scientific Ltd\", which normalises to \"ab scientific\" — exactly the normalised form of this company's own name or a recorded alias."
+    "valueAmount": null,
+    "valueCurrency": "",
+    "periodStart": null,
+    "periodEnd": null,
+    "ocid": "ocds-h6vhtk-05a1e0",
+    "company": "Mölnlycke",
+    "matchedOn": "the notice names \"Molnlycke Health Care\", which normalises to \"molnlycke health care\" — exactly the normalised form of this company's own name or a recorded alias."
    }
   ]
  },
@@ -1292,6 +1266,23 @@
    "periodEnd": null,
    "ocid": "ocds-h6vhtk-0664e2",
    "reason": "no Hub company's name or recorded alias normalises to \"direct health group\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
+  },
+  {
+   "noticeSupplierName": "Hillrom UK Ltd",
+   "title": "Patient Lifting",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland)",
+   "date": "2026-08-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/074950-2026",
+   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+   "source": "Find a Tender",
+   "section": "tender-awards",
+   "cpv": "33192600",
+   "valueAmount": null,
+   "valueCurrency": "",
+   "periodStart": null,
+   "periodEnd": null,
+   "ocid": "ocds-h6vhtk-0664e2",
+   "reason": "no Hub company's name or recorded alias normalises to \"hillrom\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
   },
   {
    "noticeSupplierName": "Mangar International",
