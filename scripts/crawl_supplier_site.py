@@ -854,6 +854,52 @@ def shape_from_wp(raw, domain):
 PRODUCT_PATHS = ("product", "products", "our-products", "range", "ranges")
 
 
+# A PRODUCT PAGE'S OWN SUB-PAGES ARE NOT PRODUCTS (02/09/2026).
+#
+# W.L. Gore & Associates has 30 open division/pair rows stuck unresolved in
+# the differentiator map, 27 of them 60%+ page titles read as if they were
+# product names — "Specifications", "MRI Safety", "Physician Resources". Gore
+# is not WordPress (its site runs Drupal 10, checked live against its own
+# response headers, 02/09/2026) so it is read by this sitemap route, not
+# route 1, and the mechanism is route 2's own leaf-name rule, not a bad guess
+# by anyone: goremedical.com/sitemaps/sitemap_emea/sitemap.xml files every
+# real product at /products/<product>/ and beside it a FIXED set of child
+# pages — /products/excluder-iliac-branch/mri-safety,
+# .../specifications, .../physician-resources, .../clinical-data,
+# .../case-studies, .../safety-notices, .../value-summary,
+# .../urgent-safety-notifications. The landing-page prefix test above
+# correctly drops the product's own /products/<product>/ page (it IS a
+# strict prefix of its children) but each of those children is a LEAF
+# nothing is nested under, so it reads as its own product, filed under the
+# real product as its "division".
+#
+# CHECKED LIVE, 02/09/2026, against goremedical.com's EMEA and default
+# sitemaps: the same handful of words recur under most of Gore's 37 real
+# products (specifications 32-36 times, physician-resources 28-29,
+# mri-safety 13-17, value-summary 13, clinical-data 7-11, safety-notices
+# 2-5, case-studies 3-4, urgent-safety-notifications 1-2), while none of
+# Gore's real products (Excluder, Propaten, Viabahn, Viatorr, Suture...) use
+# any of these words as their own name. That recurrence — the same exact
+# word, under many different top-level product paths, never itself a
+# product — is the same signature DOC_LIBRARY_WORDS catches on WordPress
+# post types, so it is filtered the same way: an exact word list, evidenced
+# live, not a guess at what "looks like" furniture.
+#
+# The rule is general, not Gore-specific: it applies to any sitemap-route
+# supplier whose sitemap files these same platform-standard sub-page slugs
+# beside its products — Drupal, and any other CMS that uses this
+# specifications/resources/safety-notice pattern, would hit the identical
+# failure. It only ever matches the LEAF segment (the last path component of
+# a URL), never a division name derived from an earlier segment, so a real
+# product's own division is never touched by this list — only a URL whose
+# own last segment IS one of these exact words is dropped.
+PRODUCT_SUBPAGE_WORDS = {
+    "specifications", "physician-resources", "mri-safety", "clinical-data",
+    "case-studies", "case-study", "safety-notices", "safety-notice",
+    "urgent-safety-notifications", "value-summary",
+}
+
+
 def sitemap_products(domain, deadline=None, product_paths=None):
     seen, urls = set(), []
     to_read = ["https://%s/sitemap.xml" % domain, "https://%s/sitemap_index.xml" % domain]
@@ -961,16 +1007,110 @@ def sitemap_products(domain, deadline=None, product_paths=None):
               "are not counted as extra products" % dropped_locale, flush=True)
     prefixes = {tuple(r[:k]) for r in paths for k in range(1, len(r))}
 
+    def is_furniture_tail(r):
+        # Checked against `r[1:]` (everything after the product's own slug),
+        # not just the leaf: Gore nests individual case-study write-ups a
+        # level BELOW the case-studies hub itself —
+        # /products/vbx/case-studies/severe-claudication — so the hub segment
+        # ("case-studies") is dropped by the prefix test below (it IS a
+        # strict prefix of that page), but the write-up's own leaf
+        # ("severe-claudication") is not one of PRODUCT_SUBPAGE_WORDS and
+        # would otherwise survive as "Severe Claudication", filed under
+        # division "Vbx" — still furniture, just one level deeper. Anything
+        # descending through one of these words, at any depth, is part of
+        # that furniture page's own content, not a product. A bare top-level
+        # hub (goremedical.com also publishes /products/case-studies and
+        # /products/mri-safety as pages in their own right, with nothing
+        # nested under them for the prefix test to catch) is checked by
+        # falling back to the whole of `r` when there is only one segment.
+        tail = r[1:] if len(r) > 1 else r
+        return any(seg.lower() in PRODUCT_SUBPAGE_WORDS for seg in tail)
+
+    # A LANDING PAGE WHOSE CHILDREN ARE MOSTLY FURNITURE IS A PRODUCT, NOT A
+    # CATEGORY (02/09/2026). The prefix test above assumes a top-level page
+    # with children is a category page a real product sits under — true for
+    # Steris ("Specialty") and Mindray ("High Acuity"), false for Gore: each
+    # of its 37 real products publishes its OWN bare landing page
+    # (/products/excluder, /products/propaten, /products/viabahn...) and that
+    # page's children are, for most products, ONLY the shared specifications/
+    # mri-safety/physician-resources/etc. template pages just filtered above.
+    # Left as written, the prefix test drops the product's own name as a
+    # "category" while its furniture children are separately dropped too —
+    # so the product itself never appears anywhere, which is a worse outcome
+    # than the bug this guard exists to fix.
+    #
+    # THE THRESHOLD IS A MAJORITY, NOT "EVERY CHILD", because a genuine Gore
+    # product page often carries one or two ADDITIONAL marketing sub-pages
+    # beside the template ones — /products/conformable-tag-active-control/
+    # tevar-25-years, /products/excluder-iliac-branch/always-preservation-
+    # method. Checked live, 02/09/2026: a "some furniture, some not" landing
+    # page on goremedical.com is still always a single product's own page,
+    # never a genuine category over several distinct products (Gore's real
+    # products are never nested — every one of the 37 sits at the top level).
+    # So once a page is judged a product on majority-furniture evidence,
+    # EVERY descendant is content about that one product, not a product in
+    # its own right, and is dropped along with the confirmed furniture —
+    # otherwise "Tevar 25 Years" and "Always Preservation Method" would keep
+    # publishing as if they were GORE devices next to real competitor stents,
+    # which is the same failure this guard exists to fix, one level down.
+    children_by_prefix = {}
+    for r in paths:
+        for k in range(1, len(r)):
+            children_by_prefix.setdefault(tuple(r[:k]), []).append(r)
+
+    promoted_roots = {}
+    for r in paths:
+        if len(r) != 1 or is_furniture_tail(r):
+            continue
+        root = tuple(r)
+        kids = children_by_prefix.get(root, [])
+        if not kids:
+            continue
+        furniture_kids = sum(1 for k in kids if is_furniture_tail(k))
+        if furniture_kids * 2 >= len(kids):
+            promoted_roots[root] = True
+
     divisions, plist = {}, []
     landing = 0
+    furniture = 0
+    promoted_count = 0
+    promoted_names = set()
     for rest in paths:
-        if tuple(rest) in prefixes:
-            landing += 1
+        trest = tuple(rest)
+        promoted = trest in promoted_roots
+        if len(rest) > 1 and (rest[0],) in promoted_roots:
+            # Content of an already-promoted product page (a confirmed
+            # furniture leaf, or one of its extra marketing sub-pages) —
+            # either way, not a product of its own.
+            furniture += 1
+            continue
+        if trest in prefixes:
+            if not promoted:
+                landing += 1
+                continue
+        elif is_furniture_tail(rest):
+            furniture += 1
             continue
         name = rest[-1].replace("-", " ").strip().title()
-        div = (rest[0].replace("-", " ").strip().title() if len(rest) > 1 else "Uncategorised")
         if not name or len(name) < 3:
             continue
+        # A PROMOTED PRODUCT IS ITS OWN DIVISION, NOT "UNCATEGORISED". It was
+        # promoted because it is a distinct product FAMILY that this site
+        # only distinguishes by its own name (Excluder, Propaten, Viabahn —
+        # a vascular graft, a heparin-bonded graft and a stent-graft are not
+        # interchangeable, so the Differentiator still needs to map each on
+        # its own). Filing all of them under one shared "Uncategorised" bucket
+        # would force one Hub category onto every product in it — trading the
+        # furniture-as-product bug for a differently-shaped burial, which is
+        # exactly what this fix must not do. A genuinely flat product (no
+        # children at all, never a landing/promotion candidate) keeps the
+        # existing "Uncategorised" behaviour unchanged — there is nothing
+        # here to say it is its own family rather than one of many.
+        div = (name if promoted else
+               rest[0].replace("-", " ").strip().title() if len(rest) > 1 else "Uncategorised")
+        if promoted:
+            promoted_count += 1
+            promoted_names.add(name.lower())
         # A "browse everything" landing page (/products/all/, /products/all-products/)
         # sits at the SAME path depth as real products, so the prefix test above
         # cannot catch it — nothing else is nested under it. Found on Welland
@@ -985,11 +1125,24 @@ def sitemap_products(domain, deadline=None, product_paths=None):
     if landing:
         print("      dropped %d category landing page(s) that are a prefix of other product URLs"
               % landing, flush=True)
+    if furniture:
+        print("      dropped %d product sub-page(s) (specifications/physician-resources/"
+              "mri-safety/clinical-data/case-studies/safety-notices/value-summary/"
+              "urgent-safety-notifications) — a shared template page beside a product, not a "
+              "product itself" % furniture, flush=True)
+    if promoted_count:
+        print("      restored %d product page(s) that the prefix test would otherwise have "
+              "dropped as a category — every child nested under them was one of the furniture "
+              "sub-pages above, so the page itself is the product, filed as its own division"
+              % promoted_count, flush=True)
 
     # A sitemap lists every page, including the CATEGORY landing pages. Those are
     # not products, and counting them inflates a number the report prints as a
-    # fact. Drop any entry whose name is just a division name.
-    divnames = {d.lower() for d in divisions}
+    # fact. Drop any entry whose name is just a division name — EXCEPT a
+    # promoted product, whose name and division are deliberately the same
+    # value (02/09/2026, see above): that one is the product this rule exists
+    # to keep, not the category-page noise it exists to drop.
+    divnames = {d.lower() for d in divisions} - promoted_names
     before = len(plist)
     plist = [p for p in plist if p["n"].lower() not in divnames]
     for d in list(divisions):
@@ -1051,16 +1204,24 @@ def sitemap_products(domain, deadline=None, product_paths=None):
         "structureFrom": "sitemap",
         "hasDivisions": has_divisions,
         "landingPagesDropped": landing,
+        "furniturePagesDropped": furniture,
         "duplicateUrlsDropped": duplicate_urls,
         "captureCaveat": ("Names are derived from the last segment of each product URL, not read "
                           "from a product record, so they carry no category and read as title-cased "
                           "slugs. %d category landing page(s) were dropped by the prefix test — a "
                           "path that is a strict prefix of other paths is a page you pass through, "
-                          "not a product. A leaf URL that is not a product cannot be detected "
+                          "not a product."
+                          % landing
+                          + ((" %d shared template sub-page(s) (specifications, physician-resources, "
+                              "mri-safety, clinical-data, case-studies, safety-notices, "
+                              "value-summary, urgent-safety-notifications) were dropped — the same "
+                              "word recurring beside many different products, not a product name."
+                              % furniture) if furniture else "")
+                          + " A leaf URL that is not a product cannot be detected "
                           "structurally and a few may remain, so treat this range as the shape of "
                           "the catalogue rather than an exact product list. A WordPress REST "
                           "capture (structureFrom: 'wp-rest') does not have this limitation."
-                          % landing) + (" " + flat_note + "." if flat_note else ""),
+                          + (" " + flat_note + "." if flat_note else "")),
         "structure": "Grouped by the company's own URL structure." if has_divisions else
                      "No division structure found in the URLs — listed as one flat range.",
         "droppedCategoryPages": dropped,
