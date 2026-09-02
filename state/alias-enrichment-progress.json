@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-01",
+ "lastRun": "2026-09-02",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -162,7 +162,19 @@
   "Cosium Healthcare",
   "Craven & Co",
   "Credenhill",
-  "Creo Medical Limited"
+  "Creo Medical Limited",
+  "Cuxson Gerrard & Company Limited",
+  "D S Medical",
+  "D.O.R.C.",
+  "Dacey LTD",
+  "Dakota Integrated Solutions Limited",
+  "Danone Nutricia Early Life Nutrition",
+  "Daro Group Limited",
+  "Datesand Group",
+  "Dawsongroup Finance Limited",
+  "Daybreak Medical Ltd",
+  "Daylong Direct",
+  "DB Dental Equipment Ltd"
  ],
  "refusals": [
   {
@@ -309,6 +321,26 @@
    "name": "Cosium Healthcare",
    "reason": "Entity is unresolved, so no name form can be attributed. NHS Supply Chain's own Audiological Diagnostics Implantable Devices and Services brief (2023/S 000-007624, read 01/09/2026) lists the supplier as \"Cosium Healthcare – new\", identical to the display name. No site at cosiumhealthcare.com or cosiumhealthcare.co.uk resolves (checked 01/09/2026). cosium.com is a French group selling CosiumOptic and CosiumAudio practice-management software, trading everywhere as \"Cosium\" and listing a UK office in Telford; Companies House holds COSIUM UK LIMITED (11159879, 15 Bridge Road, Wellington, Telford), which the record already records as a near-miss, not a match. The Telford coincidence is inference, not a source stating that Cosium Healthcare is that company, so neither \"Cosium UK Limited\" nor the domain cosium.com was added. Which entity this record IS must be settled before any alias goes in. Speciality untouched: the array was already populated.",
    "date": "2026-09-01"
+  },
+  {
+   "name": "D S Medical",
+   "date": "2026-09-02",
+   "reason": "No name form could be attributed and the entity is unresolved. NHS Supply Chain's own Syringes, Needles and Associated Products contract launch brief (2026/S 000-002484, read 02/09/2026) renders the supplier as \"D S Medical\", byte-identical to the display name, so it yields nothing new. No website could be found for a supplier of that name. The Companies House public register holds four active companies whose names normalise near it (DS MEDICAL SERVICES LIMITED 10899702 and DS MEDICAL SOLUTIONS LIMITED 10899775, both Wetherby; DS MEDICAL SUPPLIES LTD 14527323, Coventry; DS MEDICAL LTD SC825940, Kilmarnock) and none is corroborated by any source as the syringes and needles supplier on this framework, so none of their registered forms was adopted. Speciality left empty: no company site states a scope."
+  },
+  {
+   "name": "Danone Nutricia Early Life Nutrition",
+   "date": "2026-09-02",
+   "reason": "Alias refused because every available form belongs to another record in this seed. The record's own link, www.nutricia.co.uk, footers \"Nutricia Limited is a company registered in England and Wales with company number 00275552\" (read 02/09/2026) - which is the SAME entity already held here as the separate record \"Nutricia Ltd\", whose aliases are already \"Nutricia\" and \"Danone Nutricia\". Adding either form here would attach one company's coverage to two Hub supplier records and double-count a competitor set (E&T rule 8). \"Danone\" alone is the parent group and is barred. This is a duplicate-record cluster, not an alias gap: it needs Lou's call on merging \"Danone Nutricia Early Life Nutrition\" into \"Nutricia Ltd\". Speciality untouched: already populated."
+  },
+  {
+   "name": "Daylong Direct",
+   "date": "2026-09-02",
+   "reason": "Domain alias daylongdirect.co.uk WAS added; the entity name was refused. The company's own footer states \"Daylong Direct is the trading name for Credenhill Limited\" (daylongdirect.co.uk, read 02/09/2026), and Credenhill is already a separate record in this seed, so adding \"Credenhill Limited\" here would file one company's press under two supplier records. Single-token \"Daylong\" is a shortening of the display name, not the whole of it, and is also the name of Credenhill's consumer shop at daylong.co.uk, so it was not added. Speciality untouched: already populated."
+  },
+  {
+   "name": "DB Dental Equipment Ltd",
+   "date": "2026-09-02",
+   "reason": "Domain alias dbdental.co.uk WAS added; the trading form \"DB Dental\" was refused. The company's own site footers \"(c) DB Dental Equipment LTD\" (dbdental.co.uk, read 02/09/2026), which normalises identically to the display name, and brands itself \"DB Dental\" in body text. \"DB Dental\" is two tokens and so would pass rule 2 automatically, but it is not unique to this company: the Companies House public register holds DB DENTAL GROUP LIMITED (10670493, Birmingham), a separate dental business, and DB Dental is also a large dental practice group in Western Australia. With this record's speciality \"Dental and maxillofacial\" and its recorded products satisfying rules 3 and 4 on any dental story, that alias would publish another firm's coverage here - the Jeenie failure in a two-token disguise. The Companies House candidate D B DENTAL EQUIPMENT LIMITED (03862649, Brighouse) matches the site's Brighouse-area phone number but is not confirmed in the record, so its spaced registered form was not adopted either."
   }
  ],
  "sources": {
