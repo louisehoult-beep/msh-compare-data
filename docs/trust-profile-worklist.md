@@ -1,13 +1,13 @@
 # Trust profile worklist — every trust still without a layer-2 profile
 
-**Canonical copy as of 02/09/2026 (batch twelve).** This file now lives in the
+**Canonical copy as of 03/09/2026 (batch thirteen).** This file now lives in the
 `msh-compare-data` repo, not OneDrive, so both local sessions and the cloud batch routine
 read and write the same file. The old OneDrive copy at
 `02-Elevate-and-Thrive/Hub/trust-profile-worklist.md` carries a pointer to here and must
 not be edited — two copies of live batch state is how a batch re-does work or a hint gets
 overwritten. Update this file, not that one.
 
-Last updated 02/09/2026, after batch twelve. **84 trusts remain**; 120 now carry a full
+Last updated 03/09/2026, after batch thirteen. **74 trusts remain**; 130 now carry a full
 layer-2 profile (Velindre excluded separately).
 Ordering rule: acute trusts by waiting-list size, then community/MH/ambulance by speciality
 hits. See `../Process flows for all brands/meeting-prep-trust-profiles.md` for why the
@@ -157,6 +157,61 @@ shares a Chief Medical Officer and a Director of Informatics with Stockport and 
 parallel EPR procurement (Altera) alongside it, worth testing further if Stockport is
 profiled.
 
+**Batch thirteen (03/09/2026) closed 10 of 10**: The Robert Jones and Agnes Hunt Orthopaedic
+Hospital (RL1), Sussex Community (RDR), The Royal Orthopaedic Hospital (RRJ), Isle of Wight
+(R1F), The Walton Centre (RET), Gateshead Health (RR7), Liverpool Women's (REP), Sheffield
+Children's (RCU), Midlands Partnership University (RRE), Royal National Orthopaedic Hospital
+(RAN). Royal Free (RAL) skipped again, still Cloudflare-blocked, per the standing flag below.
+Of 41 unique source/linkedin URLs cited across the batch, 38 verified 200 on the orchestrator's
+own sweep; 3 LinkedIn profile URLs (Angela Mulholland-Wells at RL1, Doris Olulode at RAN,
+Siobhan Melia at RDR) consistently returned LinkedIn's bot-block (999) on repeated curl retries
+with full browser headers, on a `uk.linkedin.com` subdomain retry, and via a live Browser-pane
+check that redirected to LinkedIn's generic sign-up wall rather than the named profile — a
+different and less conclusive signal than the "confirmed live via a real browser" pattern from
+batches five and twelve, so all three were dropped from the published entries rather than kept
+on trust; two other LinkedIn URLs in the same batch (Mike Jennings at RDR, Matthew Hartland at
+RRJ) verified cleanly at 200 and were kept. One name-spelling slip caught and fixed before
+merge, the same recurring class of error as batches nine and twelve: an agent wrote "The Robert
+Jones And Agnes Hunt..." (capital And); the ODS/trustDirectory name spells it lowercase "and".
+A more substantive fix: the orchestrator's own trust-specific hint to the RDR agent wrongly
+asserted that a community trust's layer-1 `wl` figure might describe a single service line
+rather than the whole trust; `trust-pressures.json`'s own `fieldMeanings` block defines `wl` as
+"total incomplete RTT pathways (the waiting list)" for every trust, community or acute, so this
+was wrong and the agent's resulting context paragraph incorrectly told readers not to treat
+RDR's 13,214 waiting list as trust-wide. Corrected before merge: RDR's context now states the
+trust-wide RTT position directly (13,214 total, 56.8% within 18 weeks, 15.3-week median) and
+uses the trust's own 2025/26 annual report to explain why it is effectively an MSK number in
+practice (almost 80% of patients waiting, and the majority of 52-week-plus waits, referred to
+Sussex MSK Health) rather than pretending the trust-wide figure does not exist. **Lesson: a
+hint written into the dispatch prompt is exactly as capable of publishing a wrong fact as a
+hint an agent invents on its own** — check it against the schema's own field definitions before
+handing it to an agent, not just against another trust's profile. Isle of Wight (R1F) confirmed
+it is no longer the fully-integrated acute/community/mental-health/ambulance trust the layer-1
+directory implies: community, mental health and learning disability services transferred to
+Hampshire and Isle of Wight Healthcare NHS FT on 01/05/2024, and its own procurement is hosted
+by Portsmouth Hospitals University NHS Trust within a wider IWT/Portsmouth NHS Group. The
+Walton Centre (RET) confirmed, refined and extended the Health Procurement Liverpool finding
+from Alder Hey's side in batch twelve: HPL covers clinical AND business/corporate spend, not
+clinical-only, and Cheshire and Wirral Partnership NHS FT joined HPL in 2025, widening it
+beyond the four trusts named in batch twelve's table. Liverpool Women's (REP) tested and
+refuted the same HPL hint on its own side: its group arrangement is the separate NHS University
+Hospitals of Liverpool Group (with Liverpool University Hospitals, formed 01/11/2026), not HPL,
+and its own site (`liverpoolwomens.nhs.uk`, now 301-redirecting into `uhliverpool.nhs.uk`) is
+genuinely Cloudflare-blocked, the same total-block pattern as batch five's Liverpool University
+Hospitals finding — leadership was sourced from sister-trust Liverpool Heart and Chest's board
+page instead. Sheffield Children's (RCU) confirmed it is hosted, not peer-linked, by Sheffield
+Teaching Hospitals' own procurement department, per a direct quote on STH's own site. Royal
+Orthopaedic Hospital (RRJ) found a genuine discrepancy rather than smoothing it over: Birmingham
+Community Healthcare's own procurement page places RRJ inside the BSOL Procurement Collaborative
+hosted by University Hospitals Birmingham, but RRJ's own 2024/25 annual report shows its own
+CFO holding Board-level accountability for procurement and never mentions the collaborative,
+so both are recorded, flagged as unresolved, rather than one silently overwriting the other.
+Gateshead (RR7) refuted the orchestrator's North East collaborative-procurement hint outright
+(own in-house procurement plus a wholly-owned subsidiary, QE Facilities Ltd) but surfaced an
+unhinted finding instead: a shared chair (Sir Paul Ennals) across Gateshead, Newcastle upon
+Tyne Hospitals and Northumbria Healthcare since May 2025, plus a joint bowel-screening service
+with South Tyneside and Sunderland — governance and clinical links, not a buying one.
+
 ⚠️ **Royal Free London (RAL) is blocked and needs a human.** It is behind Cloudflare and
 refuses all automated fetching, including `curl` with a browser User-Agent. Its annual
 report PDF has to be saved by hand from a real browser before the profile can be researched.
@@ -183,9 +238,11 @@ profiled partner before researching these, and be precise about which facts are 
 | Barnsley Hospital (RFF, profiled batch twelve) | The Rotherham NHS Foundation Trust (RFR, profiled batch eleven) | Shared Chief Executive, CFO and Deputy Chief Executive, confirmed from both sides. Buying is NOT shared: Rotherham runs its own Intend portal, Barnsley routes procurement through its own wholly-owned subsidiary, Barnsley Facilities Services (~£50m/year), confirmed on BFS's own site. Same lesson twice now: shared leadership does not mean shared buying, but the mechanism differs even between the two linked trusts. |
 | George Eliot (RLT, profiled batch twelve) | Wye Valley (RLQ, profiled batch eleven), Worcestershire Acute (RWP), South Warwickshire (RJC) | Foundation Group under one Group Chief Executive (Glen Burley) and one Chair. George Eliot's own evidence shows the shared executive link (CFO) is specifically with South Warwickshire, not pooled across all four trusts, and moved to a joint Executive Team and joint statutory Board with South Warwickshire Oct 2025-Apr 2026. Day-to-day clinical supply chain buying is still NOT established as joint for any pairing in this group. |
 | Dorset County Hospital (RBD, profiled batch twelve) | Dorset HealthCare (not yet profiled) | Federated model since 2022-24: shared CEO, Chair, CFO and Chief People Officer, confirmed on Dorset County's own site. Procurement is NOT shared: Dorset County runs its own Procurement & Logistics department (~£45m non-pay spend via Atamis) and Dorset HealthCare keeps a separate procurement page/portal. Third confirmed instance of shared leadership without shared buying, after Rotherham/Barnsley. |
-| Alder Hey Children's (RBS, profiled batch twelve) | The Walton Centre (RET, not yet profiled), Clatterbridge Cancer Centre (REN, not yet profiled), Liverpool Heart and Chest (RBQ, not yet profiled) | Health Procurement Liverpool, hosted at The Walton Centre, runs Alder Hey's clinical procurement fully outsourced. Established from Alder Hey's own FOI disclosure log (batch twelve). Whether HPL also covers non-clinical/corporate procurement is not established. Worth confirming from The Walton Centre's own side when it is profiled. |
+| Alder Hey Children's (RBS, profiled batch twelve) | The Walton Centre (RET, profiled batch thirteen), Clatterbridge Cancer Centre (REN, not yet profiled), Liverpool Heart and Chest (RBQ, not yet profiled) | Health Procurement Liverpool (HPL), hosted at The Walton Centre. **Confirmed and widened from Walton's own side in batch thirteen**: Walton's own 2025/26 annual report states it "established Health Procurement Liverpool (HPL) three years ago", and covers both clinical AND business/corporate spend, not clinical-only as the batch-twelve framing (from Alder Hey's side) implied. Cheshire and Wirral Partnership NHS FT also joined HPL in 2025, so it now covers more organisations than the four named in the original batch-twelve finding. |
 | Airedale (RCF, profiled batch twelve) | Bradford District Care (TAD, not yet profiled) | Airedale hosts a shared procurement function, AGH Solutions Ltd, also covering Bradford District Care and ILS LLP, per Airedale's own "Doing business with us" page (batch twelve). Governance detail on the Bradford District Care/ILS LLP side is not yet established; confirm when Bradford District Care is profiled. |
 | Tameside and Glossop (RMP, profiled batch twelve) | Stockport (not yet on this list) | Shares a Chief Medical Officer (Dilraj Sandher) and a Director of Informatics (Peter Nuttall) with Stockport, and is running a parallel/coordinated EPR procurement (Altera, March 2026) alongside Stockport. Procurement itself is not established as joint; Tameside appears to run its own function (own Head of Procurement contact, own tender notices) but no dedicated procurement page was found to confirm it independently. |
+| Sheffield Children's (RCU, profiled batch thirteen) | Sheffield Teaching Hospitals (not yet profiled) | Sheffield Children's is HOSTED, not a peer partner: Sheffield Teaching Hospitals' own site states in its own words "Our Procurement Department manages procurement and logistics for both our own hospitals and services, as well as for Sheffield Children's NHS Foundation Trust." Confirmed from the host's own side, batch thirteen. |
+| Clatterbridge Cancer Centre (REN), Liverpool Heart and Chest (RBQ) | Liverpool Women's (REP, profiled batch thirteen) | Liverpool Women's is NOT in the Health Procurement Liverpool group above; its own group arrangement is the separate NHS University Hospitals of Liverpool Group (UHLG), formed 1 November 2024 with Liverpool University Hospitals, confirmed via NHS Cheshire and Merseyside's own announcement. Walton Centre is named in UHLG/LAASP integration plans but on a later 2026/27 date, so the two Liverpool group structures (HPL and UHLG) are still distinct as of this batch, not yet merged. Liverpool Women's own site now redirects entirely into `uhliverpool.nhs.uk`, which is genuinely Cloudflare-blocked, the same total-block pattern as batch five. |
 
 ## Known fetching obstacles
 
@@ -197,40 +254,39 @@ profiled partner before researching these, and be precise about which facts are 
   not cite one as a `source` URL that will be checked.
 - **Scanned-image PDFs that will not extract:** Royal Wolverhampton's 2025/26 financial
   statement pages. Fall back to the prior year and say which year the figure is.
+- **LinkedIn's own bot-block (HTTP 999):** seen in batch thirteen on three profile URLs,
+  consistent across plain curl, curl with full browser headers, and a `uk.linkedin.com`
+  subdomain retry. Unlike the Cloudflare/Akamai/Imperva blocks above, a live Browser-pane
+  check of one of these did NOT confirm the named profile — it redirected to LinkedIn's
+  generic sign-up wall with no name-identifying content, a materially weaker signal than
+  the "confirmed live via a real browser" outcome batches five and twelve got on trust-site
+  blocks. Treat a 999 that a real-browser check cannot positively confirm as genuinely
+  unverifiable and drop the link, rather than assuming it is the same class of false-negative
+  as a Cloudflare-blocked NHS domain.
 
-## Acute and specialist trusts — 29 remaining, by waiting list
+## Acute and specialist trusts — 19 remaining, by waiting list
 
 | # | Trust | ODS | Waiting list | Seg | Spec hits |
 |---|---|---|---|---|---|
 | 1 | Royal Free London NHS Foundation Trust | RAL | 139,476 | 3 | 0 |
-| 2 | The Robert Jones and Agnes Hunt Orthopaedic Hospital NHS Foundation Trust | RL1 | 13,426 | 1 | 1 |
-| 3 | Sussex Community NHS Foundation Trust | RDR | 13,214 | — | 0 |
-| 4 | The Royal Orthopaedic Hospital NHS Foundation Trust | RRJ | 13,205 | 1 | 1 |
-| 5 | Isle of Wight NHS Trust | R1F | 12,768 | 3 | 0 |
-| 6 | The Walton Centre NHS Foundation Trust | RET | 11,785 | 1 | 1 |
-| 7 | Gateshead Health NHS Foundation Trust | RR7 | 11,492 | 3 | 1 |
-| 8 | Liverpool Women's NHS Foundation Trust | REP | 11,439 | 3 | 1 |
-| 9 | Sheffield Children's NHS Foundation Trust | RCU | 11,355 | 3 | 1 |
-| 10 | Midlands Partnership University NHS Foundation Trust | RRE | 10,290 | — | 0 |
-| 11 | Royal National Orthopaedic Hospital NHS Trust | RAN | 8,790 | 1 | 2 |
-| 12 | Great Ormond Street Hospital For Children NHS Foundation Trust | RP4 | 8,368 | 3 | 0 |
-| 13 | Shropshire Community Health NHS Trust | R1D | 7,971 | — | 2 |
-| 14 | Royal Papworth Hospital NHS Foundation Trust | RGM | 5,670 | 1 | 0 |
-| 15 | Liverpool Heart and Chest Hospital NHS Foundation Trust | RBQ | 4,971 | 1 | 1 |
-| 16 | South West Yorkshire Partnership Teaching NHS Foundation Trust | RXG | 4,584 | — | 0 |
-| 17 | Lancashire & South Cumbria NHS Foundation Trust | RW5 | 4,222 | — | 2 |
-| 18 | Kent Community Health NHS Foundation Trust | RYY | 4,203 | — | 2 |
-| 19 | The Christie NHS Foundation Trust | RBV | 3,056 | 1 | 0 |
-| 20 | The Royal Marsden NHS Foundation Trust | RPY | 1,874 | 1 | 0 |
-| 21 | Cornwall Partnership NHS Foundation Trust | RJ8 | 735 | — | 0 |
-| 22 | The Clatterbridge Cancer Centre NHS Foundation Trust | REN | 712 | 1 | 1 |
-| 23 | Bradford District Care NHS Foundation Trust | TAD | 607 | — | 0 |
-| 24 | Oxleas NHS Foundation Trust | RPG | 166 | — | 1 |
-| 25 | Cumbria, Northumberland, Tyne and Wear NHS Foundation Trust | RX4 | 153 | — | 0 |
-| 26 | Berkshire Healthcare NHS Foundation Trust | RWX | 102 | — | 2 |
-| 27 | Cambridgeshire and Peterborough NHS Foundation Trust | RT1 | 84 | — | 1 |
-| 28 | Herefordshire and Worcestershire Health and Care NHS Trust | R1A | 31 | — | 0 |
-| 29 | Lincolnshire Partnership NHS Foundation Trust | RP7 | 10 | — | 1 |
+| 2 | Great Ormond Street Hospital For Children NHS Foundation Trust | RP4 | 8,368 | 3 | 0 |
+| 3 | Shropshire Community Health NHS Trust | R1D | 7,971 | — | 2 |
+| 4 | Royal Papworth Hospital NHS Foundation Trust | RGM | 5,670 | 1 | 0 |
+| 5 | Liverpool Heart and Chest Hospital NHS Foundation Trust | RBQ | 4,971 | 1 | 1 |
+| 6 | South West Yorkshire Partnership Teaching NHS Foundation Trust | RXG | 4,584 | — | 0 |
+| 7 | Lancashire & South Cumbria NHS Foundation Trust | RW5 | 4,222 | — | 2 |
+| 8 | Kent Community Health NHS Foundation Trust | RYY | 4,203 | — | 2 |
+| 9 | The Christie NHS Foundation Trust | RBV | 3,056 | 1 | 0 |
+| 10 | The Royal Marsden NHS Foundation Trust | RPY | 1,874 | 1 | 0 |
+| 11 | Cornwall Partnership NHS Foundation Trust | RJ8 | 735 | — | 0 |
+| 12 | The Clatterbridge Cancer Centre NHS Foundation Trust | REN | 712 | 1 | 1 |
+| 13 | Bradford District Care NHS Foundation Trust | TAD | 607 | — | 0 |
+| 14 | Oxleas NHS Foundation Trust | RPG | 166 | — | 1 |
+| 15 | Cumbria, Northumberland, Tyne and Wear NHS Foundation Trust | RX4 | 153 | — | 0 |
+| 16 | Berkshire Healthcare NHS Foundation Trust | RWX | 102 | — | 2 |
+| 17 | Cambridgeshire and Peterborough NHS Foundation Trust | RT1 | 84 | — | 1 |
+| 18 | Herefordshire and Worcestershire Health and Care NHS Trust | R1A | 31 | — | 0 |
+| 19 | Lincolnshire Partnership NHS Foundation Trust | RP7 | 10 | — | 1 |
 
 ## Community, mental health and ambulance trusts — 55 remaining
 
