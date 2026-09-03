@@ -1,13 +1,32 @@
 # Trust profile worklist — every trust still without a layer-2 profile
 
-**Canonical copy as of 03/09/2026 (batch fourteen, second run).** This file now lives in the
+**Canonical copy as of 03/09/2026 (batch fifteen).** This file now lives in the
 `msh-compare-data` repo, not OneDrive, so both local sessions and the cloud batch routine
 read and write the same file. The old OneDrive copy at
 `02-Elevate-and-Thrive/Hub/trust-profile-worklist.md` carries a pointer to here and must
 not be edited — two copies of live batch state is how a batch re-does work or a hint gets
 overwritten. Update this file, not that one.
 
-Last updated 03/09/2026, after batch fourteen's SECOND run. **63 trusts remain**; 141 now
+**Batch fifteen (03/09/2026, `35b1d0a`, local commit — not yet pushed) closed 10 of 10**:
+Bradford District Care, Oxleas, Cumbria/Northumberland/Tyne and Wear, Berkshire Healthcare,
+Cambridgeshire and Peterborough, Herefordshire and Worcestershire, Lincolnshire Partnership,
+Nottinghamshire Healthcare, East of England Ambulance, London Ambulance. All 49
+source/reportFact/people URLs HTTP-checked 200. Royal Free (RAL) skipped again, still
+Cloudflare-blocked — see the standing flag below. Structural findings worth carrying
+forward: Oxleas buys through SmartTogether (hosted by Guy's and St Thomas', spanning 5
+south London trusts) and is separately the Lead Provider for the Adult Secure Provider
+Collaborative; CNTW's procurement sits inside its wholly-owned NTW Solutions Ltd
+subsidiary; Berkshire Healthcare hosts the 7-county South East Pharmacy Procurement
+Service; Lincolnshire Partnership has no in-house procurement at all, delivered by ULTH.
+⚠️ **Bradford District Care's own profile found a Chair-in-Common with Airedale
+(substantive Chair, from 1/3/2026) — it did NOT independently confirm the AGH Solutions
+shared-procurement link this worklist's own table (below, "Airedale hosts a shared
+procurement function...") asserts.** Not a contradiction necessarily — a shared chair and
+a shared procurement subsidiary can coexist — but the AGH Solutions claim wasn't
+re-verified this batch and needs checking against Bradford District Care's own site before
+being repeated as fact.
+
+Last updated 03/09/2026, after batch fifteen. **53 trusts remain**; 151 now
 carry a full layer-2 profile (Velindre excluded separately).
 Ordering rule: acute trusts by waiting-list size, then community/MH/ambulance by speciality
 hits. See `../Process flows for all brands/meeting-prep-trust-profiles.md` for why the
@@ -372,80 +391,70 @@ profiled partner before researching these, and be precise about which facts are 
   unverifiable and drop the link, rather than assuming it is the same class of false-negative
   as a Cloudflare-blocked NHS domain.
 
-## Acute and specialist trusts — 8 remaining, by waiting list
+## Acute and specialist trusts — 1 remaining, by waiting list
 
 | # | Trust | ODS | Waiting list | Seg | Spec hits |
 |---|---|---|---|---|---|
 | 1 | Royal Free London NHS Foundation Trust | RAL | 139,476 | 3 | 0 |
-| 2 | Bradford District Care NHS Foundation Trust | TAD | 607 | — | 0 |
-| 3 | Oxleas NHS Foundation Trust | RPG | 166 | — | 1 |
-| 4 | Cumbria, Northumberland, Tyne and Wear NHS Foundation Trust | RX4 | 153 | — | 0 |
-| 5 | Berkshire Healthcare NHS Foundation Trust | RWX | 102 | — | 2 |
-| 6 | Cambridgeshire and Peterborough NHS Foundation Trust | RT1 | 84 | — | 1 |
-| 7 | Herefordshire and Worcestershire Health and Care NHS Trust | R1A | 31 | — | 0 |
-| 8 | Lincolnshire Partnership NHS Foundation Trust | RP7 | 10 | — | 1 |
 
-## Community, mental health and ambulance trusts — 55 remaining
+## Community, mental health and ambulance trusts — 52 remaining
 
 No RTT return and no acute oversight segment, so layer 1 is thinner by design.
 
 | # | Trust | ODS | Spec hits | Named contacts |
 |---|---|---|---|---|
-| 1 | Nottinghamshire Healthcare NHS Foundation Trust | RHA | 3 | 13 |
-| 2 | East of England Ambulance Service NHS Trust | RYC | 3 | 5 |
-| 3 | London Ambulance Service NHS Trust | RRU | 3 | 5 |
-| 4 | Dorset Healthcare University NHS Foundation Trust | RDY | 2 | 11 |
-| 5 | Northamptonshire Healthcare NHS Foundation Trust | RP1 | 2 | 8 |
-| 6 | South Western Ambulance Service NHS Foundation Trust | RYF | 2 | 6 |
-| 7 | Torbay and South Devon NHS Foundation Trust | RA9 | 2 | 3 |
-| 8 | South East Coast Ambulance Service NHS Foundation Trust | RYD | 2 | 3 |
-| 9 | South Central Ambulance Service NHS Foundation Trust | RYE | 2 | 1 |
-| 10 | Gloucestershire Health and Care NHS Foundation Trust | RTQ | 1 | 14 |
-| 11 | West London NHS Trust | RKL | 1 | 14 |
-| 12 | North East London NHS Foundation Trust | RAT | 1 | 12 |
-| 13 | Public Health Wales NHS Trust | RYT | 1 | 12 |
-| 14 | East London NHS Foundation Trust | RWK | 1 | 9 |
-| 15 | Sussex Partnership NHS Foundation Trust | RX2 | 1 | 9 |
-| 16 | North London NHS Foundation Trust | G6V2S | 1 | 8 |
-| 17 | Derbyshire Healthcare NHS Foundation Trust | RXM | 1 | 7 |
-| 18 | Mersey Care NHS Foundation Trust | RW4 | 1 | 6 |
-| 19 | Central and North West London NHS Foundation Trust | RV3 | 1 | 5 |
-| 20 | Essex Partnership University NHS Foundation Trust | R1L | 1 | 5 |
-| 21 | Greater Manchester Mental Health NHS Foundation Trust | RXV | 1 | 4 |
-| 22 | Yorkshire Ambulance Service NHS Trust | RX8 | 1 | 4 |
-| 23 | Leicestershire Partnership NHS Trust | RT5 | 1 | 2 |
-| 24 | Avon and Wiltshire Mental Health Partnership NHS Trust | RVN | 1 | 2 |
-| 25 | Kent and Medway Mental Health NHS Trust | RXY | 1 | 2 |
-| 26 | Leeds and York Partnership NHS Foundation Trust | RGD | 0 | 15 |
-| 27 | Hertfordshire Partnership University NHS Foundation Trust | RWR | 0 | 9 |
-| 28 | Norfolk and Suffolk NHS Foundation Trust | RMY | 0 | 8 |
-| 29 | Welsh Ambulance Services NHS Trust | RT4 | 0 | 8 |
-| 30 | South London and Maudsley NHS Foundation Trust | RV5 | 0 | 7 |
-| 31 | Surrey and Borders Partnership NHS Foundation Trust | RXX | 0 | 7 |
-| 32 | Central London Community Healthcare NHS Trust | RYX | 0 | 7 |
-| 33 | Lincolnshire Community Health Services NHS Trust | RY5 | 0 | 7 |
-| 34 | Cheshire and Wirral Partnership NHS Foundation Trust | RXA | 0 | 5 |
-| 35 | Humber Teaching NHS Foundation Trust | RV9 | 0 | 5 |
-| 36 | North Staffordshire Combined Healthcare NHS Trust | RLY | 0 | 4 |
-| 37 | Tees, Esk and Wear Valleys NHS Foundation Trust | RX3 | 0 | 4 |
-| 38 | Pennine Care NHS Foundation Trust | RT2 | 0 | 3 |
-| 39 | Birmingham and Solihull Mental Health NHS Foundation Trust | RXT | 0 | 3 |
-| 40 | Derbyshire Community Health Services NHS Foundation Trust | RY8 | 0 | 3 |
-| 41 | East Midlands Ambulance Service NHS Trust | RX9 | 0 | 3 |
-| 42 | Hertfordshire Community NHS Trust | RY4 | 0 | 3 |
-| 43 | North West Ambulance Service NHS Trust | RX7 | 0 | 3 |
-| 44 | West Midlands Ambulance Service University NHS Foundation Trust | RYA | 0 | 3 |
-| 45 | Devon Partnership NHS Trust | RWV | 0 | 2 |
-| 46 | Rotherham Doncaster and South Humber NHS Foundation Trust | RXE | 0 | 2 |
-| 47 | East of England Community Health and Care NHS Trust | RY3 | 0 | 2 |
-| 48 | Leeds Community Healthcare NHS Trust | RY6 | 0 | 2 |
-| 49 | North East Ambulance Service NHS Foundation Trust | RX6 | 0 | 1 |
-| 50 | South West London and St George's Mental Health NHS Trust | RQY | 0 | 1 |
-| 51 | Wirral Community Health and Care NHS Foundation Trust | RY7 | 0 | 1 |
-| 52 | Black Country Healthcare NHS Foundation Trust | TAJ | 0 | 0 |
-| 53 | Coventry and Warwickshire Partnership NHS Trust | RYG | 0 | 0 |
-| 54 | Sheffield Health Partnership University NHS Foundation Trust | TAH | 0 | 0 |
-| 55 | The Online NHS Trust | K0N6A | 0 | 0 |
+| 1 | Dorset Healthcare University NHS Foundation Trust | RDY | 2 | 11 |
+| 2 | Northamptonshire Healthcare NHS Foundation Trust | RP1 | 2 | 8 |
+| 3 | South Western Ambulance Service NHS Foundation Trust | RYF | 2 | 6 |
+| 4 | Torbay and South Devon NHS Foundation Trust | RA9 | 2 | 3 |
+| 5 | South East Coast Ambulance Service NHS Foundation Trust | RYD | 2 | 3 |
+| 6 | South Central Ambulance Service NHS Foundation Trust | RYE | 2 | 1 |
+| 7 | Gloucestershire Health and Care NHS Foundation Trust | RTQ | 1 | 14 |
+| 8 | West London NHS Trust | RKL | 1 | 14 |
+| 9 | North East London NHS Foundation Trust | RAT | 1 | 12 |
+| 10 | Public Health Wales NHS Trust | RYT | 1 | 12 |
+| 11 | East London NHS Foundation Trust | RWK | 1 | 9 |
+| 12 | Sussex Partnership NHS Foundation Trust | RX2 | 1 | 9 |
+| 13 | North London NHS Foundation Trust | G6V2S | 1 | 8 |
+| 14 | Derbyshire Healthcare NHS Foundation Trust | RXM | 1 | 7 |
+| 15 | Mersey Care NHS Foundation Trust | RW4 | 1 | 6 |
+| 16 | Central and North West London NHS Foundation Trust | RV3 | 1 | 5 |
+| 17 | Essex Partnership University NHS Foundation Trust | R1L | 1 | 5 |
+| 18 | Greater Manchester Mental Health NHS Foundation Trust | RXV | 1 | 4 |
+| 19 | Yorkshire Ambulance Service NHS Trust | RX8 | 1 | 4 |
+| 20 | Leicestershire Partnership NHS Trust | RT5 | 1 | 2 |
+| 21 | Avon and Wiltshire Mental Health Partnership NHS Trust | RVN | 1 | 2 |
+| 22 | Kent and Medway Mental Health NHS Trust | RXY | 1 | 2 |
+| 23 | Leeds and York Partnership NHS Foundation Trust | RGD | 0 | 15 |
+| 24 | Hertfordshire Partnership University NHS Foundation Trust | RWR | 0 | 9 |
+| 25 | Norfolk and Suffolk NHS Foundation Trust | RMY | 0 | 8 |
+| 26 | Welsh Ambulance Services NHS Trust | RT4 | 0 | 8 |
+| 27 | South London and Maudsley NHS Foundation Trust | RV5 | 0 | 7 |
+| 28 | Surrey and Borders Partnership NHS Foundation Trust | RXX | 0 | 7 |
+| 29 | Central London Community Healthcare NHS Trust | RYX | 0 | 7 |
+| 30 | Lincolnshire Community Health Services NHS Trust | RY5 | 0 | 7 |
+| 31 | Cheshire and Wirral Partnership NHS Foundation Trust | RXA | 0 | 5 |
+| 32 | Humber Teaching NHS Foundation Trust | RV9 | 0 | 5 |
+| 33 | North Staffordshire Combined Healthcare NHS Trust | RLY | 0 | 4 |
+| 34 | Tees, Esk and Wear Valleys NHS Foundation Trust | RX3 | 0 | 4 |
+| 35 | Pennine Care NHS Foundation Trust | RT2 | 0 | 3 |
+| 36 | Birmingham and Solihull Mental Health NHS Foundation Trust | RXT | 0 | 3 |
+| 37 | Derbyshire Community Health Services NHS Foundation Trust | RY8 | 0 | 3 |
+| 38 | East Midlands Ambulance Service NHS Trust | RX9 | 0 | 3 |
+| 39 | Hertfordshire Community NHS Trust | RY4 | 0 | 3 |
+| 40 | North West Ambulance Service NHS Trust | RX7 | 0 | 3 |
+| 41 | West Midlands Ambulance Service University NHS Foundation Trust | RYA | 0 | 3 |
+| 42 | Devon Partnership NHS Trust | RWV | 0 | 2 |
+| 43 | Rotherham Doncaster and South Humber NHS Foundation Trust | RXE | 0 | 2 |
+| 44 | East of England Community Health and Care NHS Trust | RY3 | 0 | 2 |
+| 45 | Leeds Community Healthcare NHS Trust | RY6 | 0 | 2 |
+| 46 | North East Ambulance Service NHS Foundation Trust | RX6 | 0 | 1 |
+| 47 | South West London and St George's Mental Health NHS Trust | RQY | 0 | 1 |
+| 48 | Wirral Community Health and Care NHS Foundation Trust | RY7 | 0 | 1 |
+| 49 | Black Country Healthcare NHS Foundation Trust | TAJ | 0 | 0 |
+| 50 | Coventry and Warwickshire Partnership NHS Trust | RYG | 0 | 0 |
+| 51 | Sheffield Health Partnership University NHS Foundation Trust | TAH | 0 | 0 |
+| 52 | The Online NHS Trust | K0N6A | 0 | 0 |
 
 ## Velindre NHS Trust (RQF) — still excluded
 
