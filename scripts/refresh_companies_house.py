@@ -24,14 +24,21 @@ that is the whole reason the method doc exists.
 THE MATCH RULE (root rule 14 — a derived claim carries the rule it was made
 under, and refuses to fire on thin evidence)
 ------------------------------------------------------------------------------
-`matchConfidence` is "confirmed" only when ALL FOUR hold:
+There are three tiers, ordered `probable` < `corroborated` < `confirmed`, and
+FIVE tests decide which one a record gets. `matchConfidence` is "confirmed"
+only when ALL FIVE hold:
 
   1. the company number came from a SOURCE, by one of the two routes below,
      never a bare 8-digit number found lying around in prose;
   2. Companies House returns a record for that number;
-  3. the registered name corroborates the supplier — at least one significant
-     token in common after corporate stopwords are dropped;
-  4. the company is `active`.
+  3. the registered name corroborates the supplier — either an EXACT match
+     after stripping case, punctuation and trailing legal/territory words
+     (identity()), or at least one significant token in common after
+     corporate stopwords are dropped (tokens());
+  4. the company is `active`;
+  5. the company's incorporation date is not later than the earliest
+     framework year the seed record carries — a company cannot have won a
+     framework before it existed.
 
 The two accepted sources for test 1 (routes 1 and 2 of the method doc; route 3,
 the NHSSC legal supplier name, is specified there and not yet implemented):
@@ -46,6 +53,21 @@ the NHSSC legal supplier name, is specified there and not yet implemented):
 Where both routes fire and DISAGREE, the number is discarded and the supplier
 falls through to name search — two sourced numbers disagreeing is a fact to
 check by hand, not a tie to break in code. Same rule as two anchored numbers.
+
+`corroborates()` (test 3) can return three things, not two: True (the names
+agree), False (a genuine CONTRADICTION — the names disagree, e.g. Air Liquide
+Healthcare Ltd vs Tandem Diabetes UK Limited), or None (the test could not
+decide — both sides tokenise to the empty set, e.g. 'BES Healthcare' vs 'BES
+HEALTHCARE LTD'). A contradiction can never be rescued by corroborating
+evidence and stays `probable`. An undecidable test earns `corroborated`
+— never `confirmed` — ONLY when tests 1, 2, 4 and 5 all still hold AND at
+least one independent corroborator from docs/COMPANY-REPORT-METHOD.md's list
+holds too (the number published on the company's own site, or a
+`previous_company_names` entry on that same number equal to the supplier's
+name or a recorded alias). A Companies House NAME SEARCH, an aggregator, a
+shared corporate group, or a shared address on the MASS_REGISTRATION denylist
+are never sufficient. `corroborated` never feeds a derived claim — same bar as
+`probable` — and officers are fetched for `confirmed` matches only.
 
 Everything else is "probable", and `matchedOn` says which test it failed.
 Name-search matches are ALWAYS "probable", per the method doc.
@@ -594,11 +616,95 @@ def recorded_number(supplier):
     return None, "", None
 
 
+# Registered-office addresses used by formation agents and virtual-office
+# providers. A shared address here is not evidence of anything: hundreds of
+# unrelated companies sit at each. Grows as they are found.
+MASS_REGISTRATION = {
+    "ec1v 2nx",      # 128 City Road, London
+    "wc2h 9jq",      # 71-75 Shelton Street, Covent Garden
+    "e14 5nr",       # 40 Bank Street, Canary Wharf
+    "wc1x 8qt",      # 253 Gray's Inn Road, London
+}
+
+LEGAL_TAIL = re.compile(
+    r"[\s.,&]*\b(ltd|limited|plc|llp|inc|gmbh|bv|a/s|ab|oy|pty|uk|gb|"
+    r"england|ireland|europe|emea)\b[\s.,]*$", re.I)
+
+
+def identity(name):
+    """A name reduced to comparable form for an EXACT-match test.
+
+    Case, punctuation and trailing legal/territory words go. Brackets DO NOT:
+    a bracket disambiguates, and NORTHWOOD (ABERDEEN) LIMITED is a letting
+    agent in York, not the Hub's Northwood. Stripping it would pass a wrong
+    company. Same for EXACTECH (UK) 2 LIMITED.
+    """
+    s = (name or "").lower().replace("&", "and")
+    for _ in range(4):                       # 'X UK Ltd' -> 'X UK' -> 'X'
+        s2 = LEGAL_TAIL.sub(" ", s).strip()
+        if s2 == s:
+            break
+        s = s2
+    return re.sub(r"[^a-z0-9]", "", s)
+
+
 def corroborates(supplier, registered_name):
-    """Does the registered name look like this supplier at all?"""
+    """Does the registered name look like this supplier at all?
+
+    Returns True (corroborated), False (CONTRADICTED — the names disagree) or
+    None (the test could not decide). The three are not interchangeable: a
+    contradiction is evidence of a wrong company and must never be rescued by
+    corroborating evidence, whereas an undecidable test is simply silent.
+
+    Fixed 03/09/2026. tokens() keeps words of 4+ characters and drops the
+    domain stopwords, so 'BES Healthcare' and 'BES HEALTHCARE LTD' both
+    tokenise to the empty set and the old test returned False on an EXACT
+    match — and 'Talarmade Limited' vs 'TALAR-MADE LIMITED' returned a
+    CONTRADICTION over one hyphen. 15 suppliers were stuck on that.
+    """
+    forms = {identity(n) for n in
+             [supplier["name"]] + list(supplier.get("aliases") or []) if n}
+    if identity(registered_name) in forms:
+        return True                      # exact match — the strongest form
     ours = tokens(supplier["name"], *(supplier.get("aliases") or []))
     theirs = tokens(registered_name or "")
-    return bool(ours & theirs)
+    if not ours or not theirs:
+        return None                      # nothing to compare; not a verdict
+    return True if (ours & theirs) else False
+
+
+def earliest_framework_year(supplier):
+    years = []
+    for fw in supplier.get("frameworks") or []:
+        years += [int(y) for y in
+                  re.findall(r"\b((?:19|20)\d{2})\b", str(fw.get("dates") or ""))]
+    return min(years) if years else None
+
+
+def independent_corroborator(supplier, profile, confirmed_source):
+    """One item from the accepted list, or None. See COMPANY-REPORT-METHOD.md.
+
+    Never a Companies House NAME SEARCH, never an aggregator, never a shared
+    group, never a shared address on the mass-registration denylist, and never
+    the mere absence of a contradiction.
+    """
+    # (a) the number the company publishes on its own site (route 2)
+    if isinstance(confirmed_source, dict) and confirmed_source.get("url"):
+        return ("the company publishes this registration number on its own "
+                "website — %s, read %s"
+                % (confirmed_source["url"],
+                   confirmed_source.get("checkedOn") or "on an unrecorded date"))
+    # (c) a previous name on THIS number equal to our name or a recorded alias
+    forms = {identity(n) for n in
+             [supplier["name"]] + list(supplier.get("aliases") or []) if n}
+    for prev in (profile.get("previous_company_names") or []):
+        if identity(prev.get("name")) in forms:
+            return ("Companies House records '%s' as a previous name of this "
+                    "same company number" % prev.get("name"))
+    # (b) VAT and (d) buyer-named entity are specified in the method doc and
+    # are NOT implemented here. An unimplemented route returns nothing; it
+    # never falls back to a weaker one.
+    return None
 
 
 def search_for(supplier, key):
@@ -723,12 +829,14 @@ def record_for(supplier, number, confirmed_source, key):
     accounts = (profile.get("accounts") or {}).get("last_accounts") or {}
     registered = profile.get("company_name") or ""
     status = profile.get("company_status")
+    verdict = corroborates(supplier, registered)
+    corroborator = None
     _cat, _cat_note = map_accounts_type(accounts.get("type"))
 
     # The confidence rule, in one place. See the module docstring.
     if not confirmed_source:
         confidence, matched_on = "probable", "name search on Companies House — NOT verified against a recorded number"
-    elif not corroborates(supplier, registered):
+    elif verdict is False:
         confidence, matched_on = "probable", ("company number recorded in supplier data, but the "
                                               "registered name %r does not corroborate the supplier "
                                               "name — check by hand" % registered)
@@ -736,6 +844,28 @@ def record_for(supplier, number, confirmed_source, key):
         confidence, matched_on = "probable", ("company number recorded in supplier data, but the "
                                               "company is %s, not active — check the supplier now "
                                               "trades through a different entity" % status)
+    elif (earliest_framework_year(supplier) and profile.get("date_of_creation")
+          and int(profile["date_of_creation"][:4]) > earliest_framework_year(supplier)):
+        # A company cannot have held a framework before it existed. This test
+        # lived only in match_check.py, AFTER publication. It belongs here.
+        confidence, matched_on = "probable", (
+            "company %s was incorporated %s, after the %d framework this supplier "
+            "is recorded as holding — it cannot be that company"
+            % (registered, profile["date_of_creation"], earliest_framework_year(supplier)))
+    elif verdict is None:
+        # The name test could not decide. A SOURCED, active, date-plausible
+        # number plus ONE independent corroborator earns the middle tier —
+        # never `confirmed`, and never a derived claim.
+        corroborator = independent_corroborator(supplier, profile, confirmed_source)
+        if not corroborator:
+            confidence, matched_on = "probable", (
+                "company number recorded in supplier data, but the registered name "
+                "%r shares no comparable word with the supplier name and no "
+                "independent corroboration was found — check by hand" % registered)
+        else:
+            confidence, matched_on = "corroborated", (
+                "registered name does not corroborate on the name; attached because "
+                + corroborator)
     elif isinstance(confirmed_source, dict):
         # Route 2 (docs/COMPANY-REPORT-METHOD.md): the number the company itself
         # publishes. The URL is quoted so a reader can open the page it came from.
@@ -752,6 +882,9 @@ def record_for(supplier, number, confirmed_source, key):
         "registeredName": registered,
         "matchConfidence": confidence,
         "matchedOn": matched_on,
+        # Rendered above the figures at the `corroborated` tier so a reader can
+        # judge the attachment. Root rule 14.
+        "corroboratedBy": corroborator,
         "status": status,
         "incorporated": profile.get("date_of_creation"),
         # Cessation date and the register's own previous-name history. Both are
@@ -779,8 +912,9 @@ def record_for(supplier, number, confirmed_source, key):
         "turnoverGBP": None,
         "employees": None,
         "sourceUrl": FIND + (profile.get("company_number") or number),
-        # Officers are fetched for CONFIRMED matches only. Attaching a board to a
-        # company we are only probably looking at names the wrong people.
+        # Officers are fetched for CONFIRMED matches only — never at the
+        # `corroborated` tier. Naming a board on a match we have not confirmed
+        # is the 24/07/2026 false-job-changes failure.
         "officers": (officers_for(profile.get("company_number") or number, key)
                      if confidence == "confirmed" else None),
     }
