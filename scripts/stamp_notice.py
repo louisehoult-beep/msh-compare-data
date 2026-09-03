@@ -66,6 +66,7 @@ REFS = {
     "drug-tariff-part-ix.json": "ETH-D090550F8",
     "mhra-alerts.json":         "ETH-D9D253BB8",
     "company-awards.json":     "ETH-D8F9201A9",
+    "coverage-ledger.json":             "ETH-D1122007A",
     "company-press.json":      "ETH-D5A18D6E2",
     "company-logos.json":      "ETH-D6F85FA5F",
     "company-financials.json": "ETH-DCC5A9B31",
