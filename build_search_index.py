@@ -165,6 +165,21 @@ VOLATILE = (
     # stripping <nav>: a list of where to go is not an answer.
     ("section", "explore"),
     ("div", "eth-index"),
+
+    # THE FEATURE STORY CARD (.bsxc). Added 03/09/2026, after this build failed
+    # on four consecutive daily runs from 01/09 with month 'aug' in the word bag.
+    # The Live Desk carries a hand-curated in-depth card on one running story
+    # (the Boston Scientific cyberattack, from 27/08/2026). It sits OUTSIDE the
+    # .msh wrappers and is not a <ul class="rows">, so nothing above caught it,
+    # and its "Where it stands" timeline table indexed the incident's own dates
+    # ("Incident identified 25 Aug", "Disclosed 26 Aug").
+    #
+    # It belongs here for the same reason as the rows: the card is REPLACED when
+    # the next story comes along, so anything indexed from it points at content
+    # that will be gone, and it produced a search result headed "Where it
+    # stands" — a heading that answers no query on its own. The story is still
+    # fully readable on the page; it is just not a search record.
+    ("div", "bsxc"),
 )
 
 
