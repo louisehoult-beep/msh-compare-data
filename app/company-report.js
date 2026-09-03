@@ -1557,7 +1557,31 @@
 
     var probable = isProbable(rec);
     var rows = '';
-    if (rec.registeredName) rows += fact('Registered name', '<b>' + esc(rec.registeredName) + '</b>' + (rec.companyNumber ? ' · ' + esc(rec.companyNumber) : ''));
+    if (rec.registeredName) {
+      /* The register's own previous-name history, bracketed after the current
+         name so a member searching an old name recognises the company. Added
+         03/09/2026 at Lou's request: Healthcare 25 Ltd's registered previous
+         name is GEMINI SURGICAL UK LTD, and a rep who knows the old name found
+         nothing.
+
+         WORDING MATTERS. Companies House records a change of registered NAME on
+         one company number. That is all it records. It does NOT tell you the
+         business was not sold, split or bought — so this says "formerly
+         registered as", never "formerly known as" or "was". The Gemini Surgical
+         rename-versus-sale question is still open and this line must not
+         pre-empt it. */
+      var former = '';
+      if (rec.previousNames && rec.previousNames.length) {
+        former = ' <span style="color:' + DIM + ';font-weight:400;">(formerly registered as ' +
+          rec.previousNames.slice(0, 3).map(function (p) {
+            return esc(p.name) + (p.to ? ' until ' + esc(dateUK(p.to)) : '');
+          }).join('; ') +
+          (rec.previousNames.length > 3 ? '; and ' + (rec.previousNames.length - 3) + ' earlier' : '') +
+          ')</span>';
+      }
+      rows += fact('Registered name', '<b>' + esc(rec.registeredName) + '</b>' +
+        (rec.companyNumber ? ' &middot; ' + esc(rec.companyNumber) : '') + former, true);
+    }
     if (rec.status) rows += fact('Status', esc(rec.status));
     if (rec.incorporated) rows += fact('Incorporated', esc(dateUK(rec.incorporated)));
     if (rec.registeredOffice) rows += fact('Registered office', esc(rec.registeredOffice), true);

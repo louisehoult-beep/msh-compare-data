@@ -754,6 +754,15 @@ def record_for(supplier, number, confirmed_source, key):
         "matchedOn": matched_on,
         "status": status,
         "incorporated": profile.get("date_of_creation"),
+        # Cessation date and the register's own previous-name history. Both are
+        # register FACTS about one number, so they are the strongest evidence
+        # this file carries. dissolvedOn lets a checker ask the only question
+        # that separates a wrong match from a real one: was this company already
+        # dead when the framework it supposedly holds was awarded?
+        "dissolvedOn": profile.get("date_of_cessation"),
+        "previousNames": [
+            {"name": p.get("name"), "from": p.get("effective_from"), "to": p.get("ceased_on")}
+            for p in (profile.get("previous_company_names") or [])],
         "sic": profile.get("sic_codes") or [],
         # The API's own enum, mapped to the publication vocabulary ONLY where the
         # two mean the same thing; everything else stays unplaced with the raw

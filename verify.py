@@ -1753,6 +1753,89 @@ def _norm_co(name):
 WEBSITE_ROUTE_PHRASE = "published on the company's own website"
 
 
+def _seed_by_name():
+    """Seed suppliers keyed by their exact `name`. Empty dict if unreadable."""
+    doc = load("supplier-seed.json")
+    if not isinstance(doc, dict):
+        return {}
+    return {sup.get("name"): sup for sup in (doc.get("suppliers") or [])
+            if isinstance(sup, dict) and sup.get("name")}
+
+
+DEAD_STATUSES = {"dissolved", "closed", "converted-closed", "removed",
+                 "liquidation", "administration", "receivership",
+                 "insolvency-proceedings"}
+# "active" is live. "open" is the normal live state of a BR/FC overseas UK
+# establishment and "registered" of an OE overseas entity — neither is dead.
+
+
+def _check_dead_company_matches(companies, seed_by_name):
+    """A company cannot hold a framework awarded after it ceased to exist.
+
+    WHY THIS IS A PUBLISH GATE AND NOT A REPORT. On 03/09/2026 three suppliers
+    were showing members a struck-off company as their identity — HC21 (UK) Ltd
+    as MISS TINA'S HC21 LTD, a takeaway dissolved in 2018; Gemini Surgical as a
+    company dissolved in 2017; Semperit as a shell struck off in 2025. None was
+    caught by match_check.py, which had no dissolved check, and match_check.py
+    is a report somebody has to remember to run. `^o238`. A report nobody runs
+    is how this sat there for a fortnight, so the check lives here too, where
+    nothing can ship past it.
+
+    WHY IT DOES NOT SIMPLY FAIL ON "dissolved". A supplier genuinely can be
+    dissolved and saying so is correct — Emmat Medical (03621176, dissolved
+    07/07/2026, `^o204`) and BK Medical UK are real examples, and a supplier
+    going under is intelligence a member wants, not something to hide. Failing
+    all of them would make a gate people route around. What is never possible is
+    a company holding a framework awarded after it died.
+
+    The test is deliberately the mirror of the incorporation test: check 5 in
+    match_check.py catches a company born too late, this catches one that died
+    too early. Both compare against the framework year the seed itself asserts,
+    so the data is checked against the data, not against a hunch.
+    """
+    for name in sorted(companies):
+        rec = companies[name]
+        if not isinstance(rec, dict) or not rec.get("companyNumber"):
+            continue
+        status = str(rec.get("status") or "").lower()
+        if status not in DEAD_STATUSES:
+            continue
+        supplier = seed_by_name.get(name)
+        if not supplier:
+            continue
+        years = []
+        for fw in supplier.get("frameworks") or []:
+            years += [int(y) for y in
+                      re.findall(r"\b((?:19|20)\d{2})\b", str(fw.get("dates") or ""))]
+        if not years:
+            continue
+        earliest = min(years)
+        ceased = str(rec.get("dissolvedOn") or "")[:4]
+        if not ceased.isdigit():
+            # Dead but with no cessation date recorded — liquidation and
+            # administration have none until they finish. Not publishable as a
+            # fault, but a member is being shown a company in trouble, so say so.
+            WARN("company-report", "%s is matched to %s (%s), which is %s on the register. "
+                                   "Not a fault, but check the supplier still trades through "
+                                   "that entity."
+                 % (name, rec.get("registeredName"), rec.get("companyNumber"), status))
+            continue
+        if int(ceased) < earliest:
+            FAIL("company-report", "%s is matched to %s (%s), %s on %s — but this supplier is "
+                                   "recorded as holding a framework starting %d, after that "
+                                   "company ceased to exist. It cannot be the holder. Clear the "
+                                   "number or record the right one; never publish an identity "
+                                   "the register contradicts."
+                 % (name, rec.get("registeredName"), rec.get("companyNumber"),
+                    status, rec.get("dissolvedOn"), earliest))
+        else:
+            WARN("company-report", "%s is matched to %s (%s), %s on %s. That is after its "
+                                   "earliest framework (%d), so it is plausible and is reported "
+                                   "to members as real intelligence rather than hidden."
+                 % (name, rec.get("registeredName"), rec.get("companyNumber"),
+                    status, rec.get("dissolvedOn"), earliest))
+
+
 def _check_website_proofs(companies):
     """Route 2 must be able to show its working, or it is not a route.
 
@@ -2362,6 +2445,7 @@ def check_company_report(financials, report_js):
 
     _check_website_proofs(companies)
     _check_candidate_wording(companies)
+    _check_dead_company_matches(companies, _seed_by_name())
 
     probable = []
     probable_with_cat = []
