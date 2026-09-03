@@ -204,6 +204,77 @@ a matching `companyNumberProof` in the seed carrying the same number, a URL and 
 evidence string; and a malformed proof fails the gate rather than being silently
 ignored. The two files can only be separated by a bug, and the gate is what notices.
 
+### The `corroborated` tier (03/09/2026)
+
+Added per the Identity Decision Pack
+(`02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-03.md`, §5)
+after 25 sourced-but-unconfirmed records turned out to split into three genuinely
+different situations: 15 were an exact name match defeated by a stopword-and-length bug
+in the token test (Change A, below); 3 were a real contradiction (a sourced number
+pointing at a different, wrong company); 6 were the right company but not `active`; and
+1 — AM Healthcare Group — was the right company, sourced, active, but with a registered
+name (ABILITY MATTERS GROUP LIMITED) sharing no distinguishing word with the supplier's
+trading name at all. That last case is what `corroborated` exists for.
+
+**Change A — `corroborates()` stopped returning a bare bool.** It now returns `True`
+(corroborated), `False` (a genuine CONTRADICTION — the names disagree), or `None` (the
+test could not decide because one or both sides tokenise to the empty set). Before
+testing tokens it first checks for an EXACT match via `identity()` — lower-cased,
+`&`/`and` collapsed, non-alphanumeric characters removed, trailing legal/territory words
+stripped (`ltd limited plc llp inc gmbh bv a/s ab oy pty uk gb england ireland europe
+emea`). **Brackets are never stripped** — a bracket disambiguates, and NORTHWOOD
+(ABERDEEN) LIMITED is a letting agent in York, not the Hub's Northwood; the same shape
+protects EXACTECH (UK) 2 LIMITED. `identity()` fixed 15 of the 25 stuck records outright
+(e.g. `BES Healthcare` vs `BES HEALTHCARE LTD`, both of which tokenise to the empty set
+under the old 4+-character/stopword test) and turned one active CONTRADICTION into a
+confirmed match: `Talarmade Limited` vs `TALAR-MADE LIMITED` used to fail as a
+contradiction over a single hyphen, the worst outcome the old test could produce on an
+identical company.
+
+**A new incorporation-date test.** A company cannot have held a framework before it was
+incorporated. This lived only in `match_check.py`, checked *after* publication; it is now
+test 5 in `record_for()` itself, so a wrong match with an impossible date is refused
+before it is ever written, not caught afterwards by a separate script.
+
+**Change B — the `corroborated` tier itself.** Fires only when the sourced number is
+`active`, the incorporation-date test passes, AND `corroborates()` returned `None` (not
+`False` — a contradiction can never be rescued) AND at least one **independent
+corroborator** holds:
+
+| Corroborator | Why it is independent of the Companies House name lookup |
+|---|---|
+| **(a) Own-site number.** The number the company publishes on its own website — `companyNumberProof`'s URL, the same route-2 evidence a `confirmed` match uses | The company asserting its own identity, not a copy of the register |
+| **(b) VAT match.** A VAT number published on the company's own site, resolved through HMRC's public *Check a UK VAT number* API to the same registered name | A second statutory register. **Not implemented** — `independent_corroborator()` returns nothing for this route rather than falling back to a weaker one |
+| **(c) Register-recorded previous name.** A name in `previous_company_names` **on that same number** equals the supplier's name or a recorded alias | One number, one legal person — a register fact, not a name search |
+| **(d) Buyer-named entity.** The registered name, or a previous name, appears verbatim as a supplier on an NHS Supply Chain contract launch brief or a Find a Tender award notice **for a framework this seed record itself holds**, and the supplier's own name does not appear separately on that same notice | The buyer's own contracting record. **Not implemented** for the same reason as (b) |
+
+**Never sufficient, alone or in combination:** a Companies House name-search hit however
+exact; an aggregator (Endole, Company Check, OpenCorporates, Kompass, Crunchbase,
+companiesintheuk) — a copy of the register, HUB-VERIFICATION-STANDARD.md §6; a shared
+corporate group, brand or parent; a shared registered office on the `MASS_REGISTRATION`
+denylist (128 City Road EC1V 2NX, 71-75 Shelton Street WC2H 9JQ, 40 Bank Street E14 5NR,
+253 Gray's Inn Road WC1X 8QT, and any address the denylist grows to include); or the mere
+absence of a contradicting fact.
+
+**What `corroborated` may and may not do.** It renders the register facts (registered
+name, number, status, incorporated, previous names) with a labelled basis line **above**
+them, naming the one corroborator and its source, so a reader can judge the attachment
+before reading it as fact — root rule 14. It carries **no** `turnoverGBP`, `employees` or
+`officers`, and feeds **no** derived claim: the field-position bands, the field filing
+profile and any "the only supplier" style statement read `confirmed` records only, the
+same bar a `probable` record is held to. Officers are fetched for `confirmed` matches
+only — naming a board on a match that is not confirmed by name is the 24/07/2026
+false-job-changes failure with a different label on it.
+
+**The five invariant tests (T1-T5)** live in `test_company_tiers.py` and must never let
+`corroborated` be reached by a negated comparison against `probable` (`!= "probable"`
+where the code means `=== "confirmed"`), let a genuine name contradiction reach
+`corroborated`, let string identity alone confirm a wrong-dated or wrong-SIC company, let
+a bracket get stripped, or let a shared mass-registration address stand in for
+corroboration. `match_check.py`'s own five checks are proven, in the same file, to still
+fail on a fixture reproducing each of them — the tier must not quietly satisfy a check it
+should fail.
+
 **Manual interim (06/08/2026).** The Companies House API key is still awaited, so
 `data/company-financials.json` was first populated by hand from the public register, for
 the suppliers on GBUK Group's two frameworks only. Its `source` and `coverage` fields
