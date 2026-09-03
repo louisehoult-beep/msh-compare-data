@@ -182,9 +182,62 @@
     // Type from the product name; if the name has no category word, fall back to the
     // real NHS Supply Chain catalogue description (e.g. "Intermittent Catheter…",
     // "IV Cannula…") so cached products still match like-for-like.
+    /* Generic-name overrides — a name-typed word on the left is replaced by
+       the word on the right ONLY when the live NHSSC catalogue description
+       contains that right-hand word literally. Each pair below was checked
+       individually against the full cache (824 products), because the
+       obvious blanket fix — trust the description over the name for every
+       product — was tried first and mis-typed ~170 unrelated products (a
+       static foam mattress became "pump", a GI sealant became "cannula")
+       from stray words elsewhere in longer description text. Every pair here
+       is a genuine same-speciality mix-up (both words sit in the same
+       SPECMAP list, so a rep narrowing "3 · Product type" to one word loses
+       products correctly filed under the other) and was hand-checked against
+       real examples before being added:
+         catheter  -> cannula     BD/Terumo name plain cannulas "...Catheter"
+                                   (Nexiva, Cathena, Surflo) but NHSSC files
+                                   them as "Safety Integrated Cannula...".
+         wound     -> dressing    Family-level names like "ActivHeal (wound)"
+                                   vs. NHSSC's specific "Foam dressing...".
+         foam      -> dressing    Same pattern, foam-specific families.
+         stoma     -> ostomy      "...Ileostomy Pouch..." contains "ostomy".
+         iol       -> intraocular NHSSC always spells out "Intraocular lens".
+         sealant   -> haemostat   NHSSC's own "Haemostat Sealant/Product".
+       Checked and REJECTED as a straight pair-and-scan: picc -> cannula.
+       "Nutriline" and "Premicath" (both PICC lines) matched "cannula" from a
+       stray mention elsewhere in NHSSC's fuller text. The catheter -> cannula
+       override below caught the SAME trap on a product not literally named
+       "picc": "neonatal/paediatric catheters" is a central-venous PICC line
+       whose own description says so explicitly ("PICC Line for Premature
+       Babies...", "Catheter central venous peripherally inserted...") and
+       ALSO happens to mention "cannula" describing a component (the
+       introducer sheath). So the override below additionally excludes any
+       product whose description mentions "picc" or "central venous" —
+       cheap insurance against exactly this failure mode recurring under a
+       generic name. Re-checked against the full cache with that exclusion in
+       place: all 6 pairs below still fire on the same verified examples,
+       and "neonatal/paediatric catheters" no longer misfires. Fixed
+       02/09/2026. */
+    var GENERIC_TYPE_OVERRIDE = { catheter: 'cannula', wound: 'dressing', foam: 'dressing', stoma: 'ostomy', iol: 'intraocular', sealant: 'haemostat' };
+    // Central-line language that disqualifies an otherwise-matching "cannula"
+    // override — see the note above (neonatal/paediatric catheters).
+    var CANNULA_DISQUALIFIERS = ['picc', 'central venous', 'central line'];
     function typeForProduct(name){
       var t = typeOf(name);
-      if (!t){ var d = CACHE[nk(name)]; if (d && d.items){ for (var i = 0; i < d.items.length && !t; i++){ t = typeOf(d.items[i].desc || ''); } } }
+      var override = GENERIC_TYPE_OVERRIDE[t];
+      if (override){
+        var d = CACHE[nk(name)];
+        if (d && d.items){
+          var allDesc = '';
+          for (var i = 0; i < d.items.length; i++){ allDesc += ' ' + (d.items[i].desc || '').toLowerCase(); }
+          var disqualified = false;
+          if (override === 'cannula'){
+            for (var q = 0; q < CANNULA_DISQUALIFIERS.length; q++){ if (allDesc.indexOf(CANNULA_DISQUALIFIERS[q]) !== -1){ disqualified = true; break; } }
+          }
+          if (!disqualified && allDesc.indexOf(override) !== -1) return override;
+        }
+      }
+      if (!t){ var d2 = CACHE[nk(name)]; if (d2 && d2.items){ for (var j = 0; j < d2.items.length && !t; j++){ t = typeOf(d2.items[j].desc || ''); } } }
       return t;
     }
     function kp(prod){ var m = KEYPOINTS[prod.supplier]; if (!m) return ''; var n = prod.name.toLowerCase(); for (var k in m){ if (n.indexOf(k) !== -1) return m[k]; } return ''; }
@@ -440,6 +493,7 @@
     selSup.sel.addEventListener('change', function(){
       fillSel(selType.sel, rawTypesFor(selSup.sel.value, selSpec.sel.value), capType);
       selType.sel.disabled = false;
+      inp.value = '';
       refreshList();
       refreshList2();
       updateSuggestPlaceholder();
