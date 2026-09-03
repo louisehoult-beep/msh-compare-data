@@ -1,14 +1,14 @@
 # Trust profile worklist — every trust still without a layer-2 profile
 
-**Canonical copy as of 03/09/2026 (batch thirteen).** This file now lives in the
+**Canonical copy as of 03/09/2026 (batch fourteen, second run).** This file now lives in the
 `msh-compare-data` repo, not OneDrive, so both local sessions and the cloud batch routine
 read and write the same file. The old OneDrive copy at
 `02-Elevate-and-Thrive/Hub/trust-profile-worklist.md` carries a pointer to here and must
 not be edited — two copies of live batch state is how a batch re-does work or a hint gets
 overwritten. Update this file, not that one.
 
-Last updated 03/09/2026, after batch fourteen. **73 trusts remain**; 131 now carry a full
-layer-2 profile (Velindre excluded separately).
+Last updated 03/09/2026, after batch fourteen's SECOND run. **63 trusts remain**; 141 now
+carry a full layer-2 profile (Velindre excluded separately).
 Ordering rule: acute trusts by waiting-list size, then community/MH/ambulance by speciality
 hits. See `../Process flows for all brands/meeting-prep-trust-profiles.md` for why the
 speciality-title rule was retired after batch two, and for the per-trust runbook.
@@ -248,9 +248,71 @@ same bar as any other batch's and was merged on its own. Two structural findings
 Royal Marsden buys for itself (no host/hosted group relationship found) and runs its own
 wholly-owned commercial subsidiary, RM Medicines Limited; and RM Partners, which it hosts, is a
 clinical pathway alliance, not a procurement structure, so it should not be read as one.
-**Before running batch fifteen, check this environment's network/egress policy** to confirm
-general web access and NHS trust domains are permitted; if the same block recurs, expect the
-same outcome (a batch that mostly returns to the queue) rather than treating it as a one-off.
+**Egress was checked before the re-run below and was fine on this machine**, so the block was
+specific to that cloud session's organisation policy, not to the trusts or this repo. Keep the
+check as a standing first step for any batch: it costs one `curl` against a neutral control
+domain plus a trust domain, and it tells you in seconds whether a batch is worth dispatching.
+
+**Batch fourteen, second run (03/09/2026), closed 10 of 10.** Re-ran the nine trusts the blocked
+cloud session had returned to the queue, plus Clatterbridge (REN) to make ten: Great Ormond Street
+(RP4), Shropshire Community Health (R1D), Royal Papworth (RGM), Liverpool Heart and Chest (RBQ),
+South West Yorkshire Partnership (RXG), Lancashire & South Cumbria (RW5), Kent Community Health
+(RYY), The Christie (RBV), Cornwall Partnership (RJ8), Clatterbridge (REN). Royal Free (RAL) skipped
+again. Egress was confirmed working first (`example.com` plus four trust domains all 200), which is
+why this run behaved normally where the previous one could not. **All 26 distinct source URLs
+checked 200**, layer-1 cross-checks clean on all ten, and no LinkedIn URL was cited anywhere in the
+batch: LinkedIn's HTTP 999 bot-block is unchanged, so `linkedin` was left empty by instruction
+rather than each agent rediscovering it.
+
+Structural findings worth carrying forward, several of which close questions left open by earlier
+batches:
+
+- **Health Procurement Liverpool is now confirmed from BOTH remaining members' own sides**, not
+  just from The Walton Centre's. Liverpool Heart and Chest's own Freedom of Information response
+  (ref FOI202526/021, published on `lhch.nhs.uk`) states its scheme of delegation delegates
+  procurement and financial approval to Health Procurement Liverpool and that "the staff in these
+  terms are hosted by the Walton Centre", with IT procurement staff hosted by Alder Hey instead.
+  Clatterbridge's own procurement page states its procurement service is provided by Health
+  Procurement Liverpool at The Walton Centre. The IT-at-Alder-Hey split is new and was not visible
+  from Walton's side. **For a rep, both trusts are the wrong door for a procurement decision.**
+- **Clatterbridge is NOT yet in the NHS University Hospitals of Liverpool Group (UHLG)**, expected
+  2027/28 per its own page and Cheshire and Merseyside ICB's own site. HPL and UHLG remain distinct
+  structures and must not be conflated, which is the same warning batch thirteen recorded.
+- **Lancashire & South Cumbria (RW5) IS a One LSC partner and has transferred procurement staff
+  into it** ("we are a One LSC partner... the Trust transferred seven members of staff from the
+  Trust's procurement team", its own 2024/25 annual report), so the mental health trust is inside
+  the collaboration, not just the acutes. But its own annual report does NOT name a host, so the
+  "hosted by East Lancashire" reading still rests only on the other trusts' documents. Recorded as
+  partly confirmed rather than resolved.
+- **Shropshire Community buys through a consortium, not for itself**: "All consumable goods and most
+  contracts are purchased through Shropshire Healthcare Procurement Service (SHPS), a consortium of
+  Shropshire healthcare providers, hosted by the Shrewsbury and Telford Hospitals NHS Trust" (its own
+  2024/25 annual report). Estates maintenance sits with Midlands Partnership NHS Foundation Trust.
+- **Royal Papworth buys for itself.** Campus co-location with Cambridge University Hospitals on the
+  Cambridge Biomedical Campus, and genuine joint clinical work including a shared electronic patient
+  record procurement, did NOT turn out to be shared buying. This is the co-location version of the
+  recurring "shared leadership does not mean shared buying" lesson, and the hint was tested rather
+  than assumed.
+- **Cornwall Partnership runs its own procurement governance** (its own Standing Financial
+  Instructions and Scheme of Delegation, re-approved 2026/27 by its own Board) despite extensive
+  shared senior leadership with Royal Cornwall Hospitals. Fourth confirmed instance of shared
+  leadership without shared buying.
+- **Great Ormond Street buys largely for itself but is a member of the NHS London Procurement
+  Partnership**, confirmed on LPP's own member list rather than GOSH's site, and its board approved
+  a "hybrid procurement operating model" during 2025/26 alongside a review of rising procurement
+  waivers. **Kent Community Health** and **The Christie** both run their own in-house functions,
+  The Christie publishing a live procurement pipeline and a contracts-over-£25k register.
+
+**Clatterbridge's own domain is a genuine 403 block to automated clients**, confirmed on the
+homepage, board and procurement pages with a full browser header set, not just plain curl. Its
+`/application/files/` document path is NOT behind the block, so the annual report PDF was fetched
+live at 200; the two remaining page-level sources are Wayback Machine captures of the trust's own
+pages, each individually confirmed 200 this session. Add it to the obstacles table below. Note the
+archive.org rate limit: three archive URLs returned **429** on the first concurrent sweep and 200
+on a serial retry with backoff. **A 429 from archive.org is rate limiting, not a dead link**, and
+must be retried serially before a source is dropped, exactly like the Cloudflare/Akamai
+false-negatives. One fact originally cited to an archived page was moved onto the live annual report
+PDF instead, which states it directly, so the profile leans on the archive less than it did.
 
 ⚠️ **Royal Free London (RAL) is blocked and needs a human.** It is behind Cloudflare and
 refuses all automated fetching, including `curl` with a browser User-Agent. Its annual
@@ -287,6 +349,12 @@ profiled partner before researching these, and be precise about which facts are 
 ## Known fetching obstacles
 
 - **Cloudflare, total block:** Royal Free London. Needs a human with a browser.
+- **403 to everything, including a full browser header set:** `clatterbridgecc.nhs.uk` rendered
+  pages (homepage, board, procurement). Its `/application/files/` document path is NOT blocked,
+  so annual reports and board packs are still fetchable live. Page-level facts need a Wayback
+  capture of the trust's own page.
+- **archive.org HTTP 429:** rate limiting, NOT a dead link. Seen when a batch sweep checks several
+  Wayback URLs concurrently. Retry serially with 25 to 45 seconds of backoff before dropping one.
 - **Akamai, 403 to plain curl:** `royaldevon.nhs.uk`. Works with a full browser header set
   (User-Agent plus Accept, Accept-Language, Sec-Fetch-*). Links are live, not dead.
 - **403 to WebFetch but fine via curl:** `uhcw.nhs.uk`.
@@ -304,28 +372,18 @@ profiled partner before researching these, and be precise about which facts are 
   unverifiable and drop the link, rather than assuming it is the same class of false-negative
   as a Cloudflare-blocked NHS domain.
 
-## Acute and specialist trusts — 18 remaining, by waiting list
+## Acute and specialist trusts — 8 remaining, by waiting list
 
 | # | Trust | ODS | Waiting list | Seg | Spec hits |
 |---|---|---|---|---|---|
 | 1 | Royal Free London NHS Foundation Trust | RAL | 139,476 | 3 | 0 |
-| 2 | Great Ormond Street Hospital For Children NHS Foundation Trust | RP4 | 8,368 | 3 | 0 |
-| 3 | Shropshire Community Health NHS Trust | R1D | 7,971 | — | 2 |
-| 4 | Royal Papworth Hospital NHS Foundation Trust | RGM | 5,670 | 1 | 0 |
-| 5 | Liverpool Heart and Chest Hospital NHS Foundation Trust | RBQ | 4,971 | 1 | 1 |
-| 6 | South West Yorkshire Partnership Teaching NHS Foundation Trust | RXG | 4,584 | — | 0 |
-| 7 | Lancashire & South Cumbria NHS Foundation Trust | RW5 | 4,222 | — | 2 |
-| 8 | Kent Community Health NHS Foundation Trust | RYY | 4,203 | — | 2 |
-| 9 | The Christie NHS Foundation Trust | RBV | 3,056 | 1 | 0 |
-| 10 | Cornwall Partnership NHS Foundation Trust | RJ8 | 735 | — | 0 |
-| 11 | The Clatterbridge Cancer Centre NHS Foundation Trust | REN | 712 | 1 | 1 |
-| 12 | Bradford District Care NHS Foundation Trust | TAD | 607 | — | 0 |
-| 13 | Oxleas NHS Foundation Trust | RPG | 166 | — | 1 |
-| 14 | Cumbria, Northumberland, Tyne and Wear NHS Foundation Trust | RX4 | 153 | — | 0 |
-| 15 | Berkshire Healthcare NHS Foundation Trust | RWX | 102 | — | 2 |
-| 16 | Cambridgeshire and Peterborough NHS Foundation Trust | RT1 | 84 | — | 1 |
-| 17 | Herefordshire and Worcestershire Health and Care NHS Trust | R1A | 31 | — | 0 |
-| 18 | Lincolnshire Partnership NHS Foundation Trust | RP7 | 10 | — | 1 |
+| 2 | Bradford District Care NHS Foundation Trust | TAD | 607 | — | 0 |
+| 3 | Oxleas NHS Foundation Trust | RPG | 166 | — | 1 |
+| 4 | Cumbria, Northumberland, Tyne and Wear NHS Foundation Trust | RX4 | 153 | — | 0 |
+| 5 | Berkshire Healthcare NHS Foundation Trust | RWX | 102 | — | 2 |
+| 6 | Cambridgeshire and Peterborough NHS Foundation Trust | RT1 | 84 | — | 1 |
+| 7 | Herefordshire and Worcestershire Health and Care NHS Trust | R1A | 31 | — | 0 |
+| 8 | Lincolnshire Partnership NHS Foundation Trust | RP7 | 10 | — | 1 |
 
 ## Community, mental health and ambulance trusts — 55 remaining
 
