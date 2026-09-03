@@ -14,12 +14,12 @@ synonym for out of scope: decide each one deliberately.
 |---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 24 | 19.7% | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 17 | 16.8% | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 14 | 22.2% | STARTED |
-| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 5 | 8.3% | STARTED |
-| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 11 | 19.0% | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 13 | 20.6% | STARTED |
+| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 6 | 10.0% | STARTED |
+| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 12 | 20.7% | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 6 | 10.5% | STARTED |
 | Urology and Bowel Management | continence | 57 | 17 | 29.8% | STARTED |
-| Advanced Wound Care | wound | 56 | 17 | 30.4% | STARTED |
+| Advanced Wound Care | wound | 56 | 16 | 28.6% | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 3 | 5.6% | STARTED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 10 | 18.9% | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | STARTED |
@@ -32,7 +32,7 @@ synonym for out of scope: decide each one deliberately.
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 8 | 25.8% | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | STARTED |
-| General Wound Care | wound | 28 | 11 | 39.3% | STARTED |
+| General Wound Care | wound | 28 | 10 | 35.7% | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 4 | 14.8% | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 5 | 20.0% | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | STARTED |
