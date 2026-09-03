@@ -1516,6 +1516,18 @@
   function isProbable(rec) {
     return String((rec && rec.matchConfidence) || '').toLowerCase() === 'probable';
   }
+  /* Three tiers, not two: probable < corroborated < confirmed. Figures and
+     the confirmed-only field filing profile read matchConfidence by NAME,
+     always === 'confirmed' — never a negated comparison against 'probable'.
+     A `!isProbable(rec)` test reads true for 'corroborated' too, which is
+     exactly how a new tier would silently become 'confirmed' by accident.
+     Added 03/09/2026 alongside the 'corroborated' tier. See test T1. */
+  function isConfirmed(rec) {
+    return String((rec && rec.matchConfidence) || '').toLowerCase() === 'confirmed';
+  }
+  function isCorroborated(rec) {
+    return String((rec && rec.matchConfidence) || '').toLowerCase() === 'corroborated';
+  }
 
   /* Tile, not a table row (changed 19/08/2026 — see mcr-facts in STYLE). A
      value over ~34 characters of visible text is judged too long for a
@@ -1556,6 +1568,8 @@
     }
 
     var probable = isProbable(rec);
+    var confirmed = isConfirmed(rec);
+    var corroborated = isCorroborated(rec);
     var rows = '';
     if (rec.registeredName) {
       /* The register's own previous-name history, bracketed after the current
@@ -1590,8 +1604,10 @@
 
     /* Turnover has three honest states and they must not blur:
        a figure (with its made-up-to date), disclosed-but-not-extracted, or
-       not disclosed at all (legally permitted below the small thresholds). */
-    if (!probable) {
+       not disclosed at all (legally permitted below the small thresholds).
+       Gated on `confirmed` BY NAME, never `!probable` — a corroborated match
+       is not confirmed by name and must carry no figure either. See test T1. */
+    if (confirmed) {
       if (rec.turnoverGBP != null) {
         rows += fact('Turnover', '£' + Number(rec.turnoverGBP).toLocaleString('en-GB') +
           ' <span style="color:' + DIM + ';">· accounts made up to ' + esc(dateUK(rec.accountsMadeUpTo || '')) + '</span>');
@@ -1617,6 +1633,20 @@
       body += '<div style="margin:0 0 9px;padding:8px 11px;background:#f7ecdc;border-left:3px solid #b98a2e;border-radius:0 7px 7px 0;font-size:12px;color:#6b5518;line-height:1.55;">' +
         '<b>IDENTITY NOT CONFIRMED.</b> This is a probable match only — ' + esc(rec.matchedOn || 'matched by name search') +
         ' Register facts are shown for orientation; no figure is carried and this company is excluded from the field filing profile below.</div>';
+    } else if (corroborated) {
+      /* The labelled basis line, ABOVE the register facts, per root rule 14 —
+         a reader must be able to judge the attachment before reading it as
+         fact. Never a footnote. `corroboratedBy` is written by
+         scripts/refresh_companies_house.py's independent_corroborator() and
+         names the ONE independent source that earned this tier (never a
+         Companies House name search, an aggregator, a shared group, or a
+         shared mass-registration address). */
+      body += '<div style="margin:0 0 9px;padding:8px 11px;background:#f2ede0;border-left:3px solid #8a6d3b;border-radius:0 7px 7px 0;font-size:12px;color:#4d3f24;line-height:1.55;">' +
+        '<b>CORROBORATED MATCH &mdash; NOT CONFIRMED BY NAME.</b> These Companies House records are shown for ' +
+        esc(rec.registeredName || 'this company') + (rec.companyNumber ? ' (' + esc(rec.companyNumber) + ')' : '') +
+        '. The registered name and this supplier’s trading name share no distinguishing word, so the match is not confirmed on the name. ' +
+        'It is attached because ' + esc(rec.corroboratedBy || 'a curator recorded an independent corroborator') + '. ' +
+        'Register facts are Companies House’s; the attachment to this supplier is ours. No figure is carried and this company is excluded from the field filing profile below.</div>';
     } else if (rec.matchedOn) {
       body += '<div style="font-size:11.5px;color:' + DIM + ';margin:0 0 8px;">Matched on: ' + esc(rec.matchedOn) + '</div>';
     }
@@ -1814,7 +1844,10 @@
       everyone.forEach(function (n) {
         var rec = ctx.byName[n] || (ctx.byKey ? ctx.byKey[coKey(n)] : null);
         var r = rec ? finRecFor(rec, ctx.fin) : null;
-        if (r && !isProbable(r) && String(r.accountsCategory || '').trim()) {
+        /* Gated on `confirmed` BY NAME, never `!isProbable` — a corroborated
+           match must not enter the confirmed-only field filing profile
+           either. See test T1. */
+        if (r && isConfirmed(r) && String(r.accountsCategory || '').trim()) {
           resolved.push({ name: n, rec: r });
         } else {
           unresolved.push({ name: n, rec: r });
@@ -1855,7 +1888,7 @@
       if (unresolved.length) {
         body += '<div style="font-size:12px;color:' + DIM + ';margin-top:7px;">Unresolved, feeding nothing: ' +
           unresolved.map(function (u) {
-            var why = u.rec ? (isProbable(u.rec) ? 'identity not confirmed' : 'no accounts filing recorded') : 'no Companies House record fetched';
+            var why = u.rec ? (!isConfirmed(u.rec) ? 'identity not confirmed' : 'no accounts filing recorded') : 'no Companies House record fetched';
             return '<b>' + esc(u.name) + '</b> (' + why + ')';
           }).join(' · ') + '.</div>';
       }
