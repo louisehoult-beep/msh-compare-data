@@ -73,16 +73,60 @@ fi
 # `flock` is util-linux and does not exist on macOS, so this is a portable mkdir
 # lock: mkdir is atomic on POSIX, and the PID inside lets a genuinely dead lock be
 # cleared without a human guessing.
-# --git-common-dir, NOT --git-dir. Since 28/08/2026 sessions work in their own
-# worktrees (wt.sh), and in a worktree --git-dir is that worktree's private
-# .git/worktrees/<name> directory. Using it would give every worktree its own
-# lock, i.e. no lock at all, and the failure would be silent: each run would take
-# its own lock happily and land straight into the race this exists to stop.
-# --git-common-dir is the one shared .git behind every worktree.
+# --git-common-dir, NOT --git-dir, so this still works from a legacy worktree
+# left over from wt.sh (retired 03/09/2026) as well as the shared checkout —
+# --git-dir inside a worktree is that worktree's private .git/worktrees/<name>,
+# which would give every worktree its own lock, i.e. no lock at all.
 LOCK_DIR="$(git rev-parse --git-common-dir)/land.lock"
 LOCK_WAIT_SECONDS="${LAND_LOCK_WAIT:-600}"
 
 LOCK_HELD=0
+
+# ------------------------------------------------------------- the session claim
+#
+# ADDED 03/09/2026, when per-session worktrees (wt.sh) were retired in favour of
+# everyone editing the shared checkout again, guarded by session-lock.sh instead
+# of separate directories. That claim is held for a whole editing session, not
+# just the few minutes this script runs for, so it is a different lock
+# (session.lock) to the one above (land.lock). This only checks it: land.sh does
+# not claim or release it — see session-lock.sh's own header for why. A session
+# that never claimed at all (a quick automated run with no extended edit phase)
+# is unaffected; this only stops landing OVER a *different* live session's claim.
+SESSION_LOCK_DIR="$(git rev-parse --git-common-dir)/session.lock"
+THIS_SESSION="${CLAUDE_CODE_SESSION_ID:-${CLAUDE_CODE_HOST_SESSION_ID:-}}"
+[ -n "$THIS_SESSION" ] || THIS_SESSION="pid-${CLAUDE_PID:-$$}"
+
+check_session_claim() {
+  [ -d "$SESSION_LOCK_DIR" ] || return 0
+  local stamp="$SESSION_LOCK_DIR/owner.json"
+  [ -f "$stamp" ] || return 0
+  local holder_session holder_pid
+  holder_session="$(python3 -c 'import json,sys
+try: print(json.load(open(sys.argv[1])).get("session_id",""))
+except Exception: print("")' "$stamp" 2>/dev/null || echo "")"
+  [ "$holder_session" = "$THIS_SESSION" ] && return 0
+  holder_pid="$(python3 -c 'import json,sys
+try: print(json.load(open(sys.argv[1])).get("pid",""))
+except Exception: print("")' "$stamp" 2>/dev/null || echo "")"
+  if [ -n "$holder_pid" ] && ! ps -p "$holder_pid" >/dev/null 2>&1; then
+    return 0
+  fi
+  echo "REFUSING: a different live session holds the editing claim on this tree:" >&2
+  python3 -c '
+import json, sys
+try:
+    d = json.load(open(sys.argv[1]))
+    print("    %s  session=%s  pid=%s  host=%s  since=%s" % (
+        d.get("name","?"), d.get("session_id","?"), d.get("pid","?"),
+        d.get("host","?"), d.get("started_at","?")))
+except Exception:
+    print("    (unreadable stamp)")
+' "$stamp" >&2
+  echo "Landing over someone else's in-progress edit is how work gets lost. Wait" >&2
+  echo "for their claim to release, or confirm with them first." >&2
+  exit 1
+}
+check_session_claim
 
 acquire_lock() {
   local waited=0

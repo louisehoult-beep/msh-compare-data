@@ -1,5 +1,25 @@
 #!/usr/bin/env bash
-# wt.sh — give this session its own working tree.
+# wt.sh — RETIRED 03/09/2026. Do not create new worktrees with this.
+#
+# Lou asked to stop using per-session worktrees: this cleanup found six of them
+# sitting abandoned days after the work in them had landed, because nobody ran
+# `./wt.sh --remove` when they were done — an abandoned worktree is exactly the
+# kind of loose end this file's original header (below) tried to design around,
+# and it still happened anyway. Editing now happens back in the shared checkout,
+# guarded by `./session-lock.sh` instead of a separate directory per session —
+# see its header and
+# `Process flows for all brands/_superseded/msh-compare-data-per-session-worktrees-superseded-2026-09-03.md`
+# for the incidents both approaches exist to stop, and why a lock replaces the
+# directory rather than removing the protection outright.
+#
+# What still works here: `--list` and `--remove`, for tearing down any worktree
+# still left over from before 03/09/2026 (there may be more you haven't found
+# yet — check `git worktree list`). Creating a new one (`./wt.sh <name>` or
+# `./wt.sh --for-task <name>`) now refuses. If you are reading this because you
+# think you need a worktree again, you almost certainly need
+# `./session-lock.sh claim <name>` instead.
+#
+# ORIGINAL HEADER (28/08/2026-03/09/2026), kept for the incident history:
 #
 # WHY THIS EXISTS
 #   Until 28/08/2026 every session and every scheduled task edited ONE checkout of
@@ -69,9 +89,10 @@ cd "$(dirname "$0")"
 ROOT="${MSH_WORKTREE_ROOT:-$HOME/msh-worktrees}"
 
 usage() {
-  echo "usage: ./wt.sh <name> [--force] | --list | --remove <name>" >&2
-  echo "  <name>: letters, digits, dot, dash, underscore. Name it after the work," >&2
-  echo "          not after yourself — 'atamis-refresh', not 'session3'." >&2
+  echo "usage: ./wt.sh --list | --remove <name> | <name> [--force]" >&2
+  echo "  RETIRED 03/09/2026 — only for tearing down worktrees left over from" >&2
+  echo "  before that date, or re-entering one still not landed. Creating a new" >&2
+  echo "  one now refuses. Use ./session-lock.sh instead." >&2
   exit 2
 }
 
@@ -206,14 +227,13 @@ if [ "${1:-}" = "--for-task" ]; then
   WT="$ROOT/$NAME"
 
   if [ ! -d "$WT" ]; then
-    mkdir -p "$ROOT"
-    git fetch --quiet origin
-    BRANCH="wt/$NAME"
-    if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
-      git worktree add "$WT" "$BRANCH" >&2
-    else
-      git worktree add -b "$BRANCH" "$WT" origin/main >&2
-    fi
+    echo "REFUSING: worktrees are retired (03/09/2026) — no new one will be created." >&2
+    echo "Use the shared checkout, guarded by session-lock.sh, instead:" >&2
+    echo "    ./session-lock.sh claim \"$NAME\"" >&2
+    echo "    ...work in this checkout..." >&2
+    echo "    ./land.sh \"subject\" path [path...]" >&2
+    echo "    ./session-lock.sh release" >&2
+    exit 3
   fi
 
   # An unattended run has nobody to ask, so this never overrides a live owner —
@@ -303,25 +323,10 @@ if [ -d "$WT" ]; then
   exit 0
 fi
 
-mkdir -p "$ROOT"
-git fetch --quiet origin
-
-# Branch per worktree. Two worktrees cannot check out the same branch, and a
-# detached HEAD loses the work if the directory is removed without looking — a
-# named branch means `git branch` still shows it and --remove can refuse.
-BRANCH="wt/$NAME"
-if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
-  git worktree add "$WT" "$BRANCH" >&2
-else
-  git worktree add -b "$BRANCH" "$WT" origin/main >&2
-fi
-stamp_owner "$WT" "interactive" "$NAME"
-
-echo "" >&2
-echo "worktree ready — this checkout is yours alone:" >&2
-echo "    cd $WT" >&2
-echo "" >&2
-echo "Land your work from inside it, naming only your own paths:" >&2
+echo "REFUSING: worktrees are retired (03/09/2026) — no new one will be created." >&2
+echo "Use the shared checkout, guarded by session-lock.sh, instead:" >&2
+echo "    ./session-lock.sh claim \"$NAME\"" >&2
+echo "    ...work in this checkout..." >&2
 echo "    ./land.sh \"subject\" path [path...]" >&2
-echo "" >&2
-echo "$WT"
+echo "    ./session-lock.sh release" >&2
+exit 3
