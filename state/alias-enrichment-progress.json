@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-02",
+ "lastRun": "2026-09-03",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -36,6 +36,7 @@
   "Alliance Medical",
   "Altomed Limited",
   "ALXR Limited",
+  "Amercare Limited",
   "AMG Medtech Ltd",
   "Amoena UK Ltd",
   "Amparo Prosthetics Ltd",
@@ -67,6 +68,7 @@
   "Atos Medical (UK)",
   "Attends Ltd",
   "Audit Data",
+  "Avicenna Surgical Limited",
   "Avidity Science Limited",
   "B.N.O.S Meditech Ltd",
   "Babease Limited",
@@ -186,7 +188,17 @@
   "DH2 Solutions Ltd",
   "Digostics",
   "Dot Medical Limited",
-  "Dpek Healthcare Ltd"
+  "Dpek Healthcare Ltd",
+  "Duckworth & Kent Ltd",
+  "E&E MEDICAL SUPPLIES LIMITED",
+  "Eakin Surgical Limited",
+  "Echosens",
+  "Eclipse Dental Equipment",
+  "Edge Medical Ltd",
+  "Eitan Medical UK Ltd",
+  "eKare",
+  "Electro Spyres Healthcare Limited",
+  "Endosoft Limited"
  ],
  "refusals": [
   {
@@ -358,6 +370,16 @@
    "name": "De Lage Landen Leasing Limited",
    "date": "2026-09-02",
    "reason": "No usable name form, because every form the company itself publishes is either the display name or its Dutch parent's. The UK entity's own privacy statement at www.dllgroup.com/gb/en-gb/privacy-statement (read 02/09/2026) states \"De Lage Landen Leasing Limited (“DLL”) is accountable and responsible for the transparent and lawful processing of your personal data\" and \"Our contact information is: De Lage Landen Leasing Limited, Address: 2nd Floor, Building 1, Marlins Meadow, Croxley Park, Watford WD18 8YA ... Company Registration number: 02380043\" - which corroborates the record's candidate number against Companies House 02380043 (DE LAGE LANDEN LEASING LIMITED, active, same Watford address) but is byte-identical to the display name, so it yields nothing new. The same page continues \"We are a wholly owned subsidiary of De Lage Landen International B.V.\", so \"De Lage Landen\" on its own is the parent group's name and is barred as a parent form. \"DLL\" is a three-letter acronym, below this repo's four-character alias floor, and is the whole group's global brand rather than this UK entity's. The site dllgroup.com is the group's domain, not this subsidiary's own, so matching on it would file the Dutch parent's coverage under a UK Hub supplier. The only previous name on the register, DE LAGE LANDEN FINANCIAL SERVICES LIMITED (ceased 18/01/1993), is a dead form and was not recorded. Speciality left empty: the site states an equipment-finance scope across twelve industries, not a clinical one."
+  },
+  {
+   "name": "Eclipse Dental Equipment",
+   "reason": "No alias attributable. This record's name comes from NHS Supply Chain's Supplier and Product Matrix as \"Eclipse Dental Equipment\", which is not the published name of any single company. Two distinct UK companies trade as Eclipse Dental - Eclipse Dental Engineering Ltd (eclipse-dental.com, 45 Laker Road, Rochester, Kent ME1 3QX, Companies House 12402632) and Eclipse Dental Laboratory Ltd (eclipsedentallab.co.uk) - and neither states the NHS Supply Chain Dental Technologies framework (2023/S 000-008274) on its own site, read 03/09/2026. \"Eclipse Dental\" as an alias would therefore be an ambiguous token shared by two real companies. Publishing nothing is the correct output (root rule 14).",
+   "date": "2026-09-03"
+  },
+  {
+   "name": "Electro Spyres Healthcare Limited",
+   "reason": "Could not verify from a nameable source. The company's own site electrospyres.com returns HTTP 403 with a JavaScript challenge to every fetch method tried (curl with browser headers, HTTP/1.1 with a cookie jar, and WebFetch), so no masthead, About page or footer legal line could be read. NHS Supply Chain's Electrodes, Ultrasound Gels, Defibrillation and Related Consumables brief (2023/S 000-030987) publishes only \"Electro Spyres Healthcare Limited\", the form already recorded. Companies House name search was unavailable this session (no COMPANIES_HOUSE_KEY set), so the registered name and any previous names could not be read. A blocked fetch is not evidence of absence - eligible again after 90 days.",
+   "date": "2026-09-03"
   }
  ],
  "sources": {
