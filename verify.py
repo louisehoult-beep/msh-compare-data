@@ -1641,7 +1641,9 @@ ACCOUNTS_CATEGORIES = {
 # threshold, it is the name for being above the medium one.
 THRESHOLD_BANDS = {"micro", "small", "medium"}
 BAND_LABELS = THRESHOLD_BANDS | {"large"}
-MATCH_CONFIDENCE = {"confirmed", "probable"}
+MATCH_CONFIDENCE = {"confirmed", "probable", "corroborated"}
+# Ordering only, for readability in messages below - not a comparison table.
+MATCH_CONFIDENCE_ORDER = ["probable", "corroborated", "confirmed"]
 
 # A share claim, in the words it would actually be written in. Deliberately
 # phrase-based: bare "share" is the Share button on the interview pack, and bare
@@ -2449,6 +2451,8 @@ def check_company_report(financials, report_js):
 
     probable = []
     probable_with_cat = []
+    corroborated = []
+    corroborated_with_cat = []
     for name in sorted(companies):
         rec = companies[name]
         who = "company %r" % name
@@ -2466,6 +2470,31 @@ def check_company_report(financials, report_js):
                                       ", ".join(sorted(MATCH_CONFIDENCE))))
         if conf == "probable":
             probable.append(name)
+        if conf == "corroborated":
+            corroborated.append(name)
+
+        # OFFICERS ARE A CONFIRMED-ONLY FACT. Naming a board on a match that is
+        # only probable or only corroborated is the 24/07/2026 false-job-changes
+        # failure with a different label on it — see test T1.
+        if conf != "confirmed" and rec.get("officers") is not None:
+            FAIL("company-report", "%s has matchConfidence %r but carries an officers block. "
+                                   "Officers are fetched for CONFIRMED matches only — naming a "
+                                   "board on a match that is not confirmed by name attaches real "
+                                   "people to the wrong company." % (who, conf))
+
+        # CORROBORATEDBY IS THE CORROBORATED TIER'S OWN EVIDENCE FIELD. It must
+        # be present (and non-empty) exactly when the tier is 'corroborated',
+        # never as decoration on a probable or confirmed record.
+        cb = rec.get("corroboratedBy")
+        if conf == "corroborated" and not (isinstance(cb, str) and cb.strip()):
+            FAIL("company-report", "%s has matchConfidence 'corroborated' but no corroboratedBy "
+                                   "— root rule 14 requires the ONE independent corroborator to be "
+                                   "named so a reader can judge the attachment before reading it "
+                                   "as fact." % who)
+        elif conf != "corroborated" and cb not in (None, ""):
+            FAIL("company-report", "%s has matchConfidence %r but carries a corroboratedBy value "
+                                   "(%r). That field belongs to the corroborated tier only."
+                                   % (who, conf, cb))
 
         # NULL MEANS NOT DISCLOSED, AND 0 DOES NOT.
         # Small and micro companies are legally permitted to omit the profit and
@@ -2488,20 +2517,24 @@ def check_company_report(financials, report_js):
                 FAIL("company-report", "%s has a negative %s (%r) — the same parse bug as a 0, one "
                                        "sign further on." % (who, field, v))
 
-        # A name-search match is a guess about identity. It may be shown as a
-        # company fact; it may not carry figures, because a wrong match attaches
-        # the wrong company's finances to a named business.
-        if conf == "probable":
+        # A name-search match is a guess about identity, and a corroborated match
+        # is sourced but not confirmed BY NAME — neither may carry figures. A
+        # wrong or unconfirmed match attaches the wrong company's finances to a
+        # named business, which is the whole failure class this file guards.
+        if conf in ("probable", "corroborated"):
             for field in ("turnoverGBP", "employees"):
                 if rec.get(field) is not None:
-                    FAIL("company-report", "%s is a PROBABLE match (matched by name search) but "
-                                           "carries %s = %r. A probable match feeds no derived "
-                                           "claim: medtech is full of similarly-named entities and "
-                                           "a wrong match puts another company's finances against "
-                                           "this name. Confirm it by company number or drop the "
-                                           "figure." % (who, field, rec.get(field)))
+                    FAIL("company-report", "%s is a %s match but carries %s = %r. Only a CONFIRMED "
+                                           "match feeds a derived claim: medtech is full of "
+                                           "similarly-named entities and a wrong or unconfirmed "
+                                           "match puts another company's finances against this "
+                                           "name. Confirm it by company number or drop the figure."
+                                           % (who, conf.upper(), field, rec.get(field)))
             if str(rec.get("accountsCategory") or "").strip():
-                probable_with_cat.append(name)
+                if conf == "probable":
+                    probable_with_cat.append(name)
+                else:
+                    corroborated_with_cat.append(name)
 
         cat = str(rec.get("accountsCategory") or "").strip()
         if cat and cat not in ACCOUNTS_CATEGORIES:
@@ -2557,25 +2590,28 @@ def check_company_report(financials, report_js):
     # once, of the code, and say nothing while the answer is yes.
     #
     # Every conditional that admits a record to the band on accountsCategory must
-    # also test matchConfidence, directly or through isProbable(). If one does not,
-    # a name-search guess is sizing a named company against its competitors, so it
-    # fails by line rather than warning by company.
-    if probable_with_cat and has_js:
+    # also test matchConfidence, directly or through isConfirmed()/isProbable().
+    # If one does not, a name-search guess (or an unconfirmed corroborated
+    # match) is sizing a named company against its competitors, so it fails by
+    # line rather than warning by company. isConfirmed/isCorroborated were
+    # added 03/09/2026 with the corroborated tier — see test T1.
+    unconfirmed_with_cat = probable_with_cat + corroborated_with_cat
+    if unconfirmed_with_cat and has_js:
         for m in re.finditer(r"accountsCategory", clean):
             line = _line_at(clean, m.start()).strip()
             if not re.search(r"\bif\s*\(", line):
                 continue                    # rendering a value, not admitting a record
-            if re.search(r"isProbable|matchConfidence", line):
+            if re.search(r"isProbable|isConfirmed|isCorroborated|matchConfidence", line):
                 continue                    # guarded
             FAIL("company-report", "app/company-report.js admits a record to the field-position "
                                    "band on accountsCategory without testing matchConfidence: %r. "
-                                   "%d of the records carrying an accounts category are PROBABLE "
-                                   "name-search matches, e.g. %s. Medtech is full of similarly "
-                                   "named entities, so an unguarded read puts another company's "
-                                   "filing against this one and sizes it against its competitors "
-                                   "on that basis."
-                                   % (line[:140], len(probable_with_cat),
-                                      ", ".join(repr(p) for p in probable_with_cat[:3])))
+                                   "%d of the records carrying an accounts category are NOT "
+                                   "confirmed matches (probable or corroborated), e.g. %s. Medtech "
+                                   "is full of similarly named entities, so an unguarded read puts "
+                                   "another company's filing against this one and sizes it against "
+                                   "its competitors on that basis."
+                                   % (line[:140], len(unconfirmed_with_cat),
+                                      ", ".join(repr(p) for p in unconfirmed_with_cat[:3])))
 
     if probable and has_js and not re.search(r"matchConfidence|probable", clean):
         FAIL("company-report", "%d record(s) are probable name-search matches, and "
@@ -2584,6 +2620,42 @@ def check_company_report(financials, report_js):
                                "those records from the size bands, so a guess about identity is "
                                "feeding a derived claim. e.g. %s"
                                % (len(probable), ", ".join(repr(p) for p in probable[:3])))
+
+    if corroborated and has_js and not re.search(r"matchConfidence|corroborated", clean, re.I):
+        FAIL("company-report", "%d record(s) are corroborated (sourced, active, but not confirmed "
+                               "by name) matches, and app/company-report.js never reads "
+                               "matchConfidence or mentions 'corroborated'. Code that never looks "
+                               "at the field cannot be excluding those records from the size bands "
+                               "or rendering their labelled basis line. e.g. %s"
+                               % (len(corroborated), ", ".join(repr(p) for p in corroborated[:3])))
+
+    # THE NEGATED-COMPARISON TRAP (test T1). `!isProbable(rec)` / `matchConfidence
+    # !== 'probable'` reads TRUE for 'corroborated' too — that is exactly how a
+    # new tier silently becomes 'confirmed' by accident, and it is what actually
+    # happened here until 03/09/2026 (panelCompanyFacts gated turnover/employees
+    # on `!probable`). A confirmed-only gate must always read `=== 'confirmed'`
+    # / `isConfirmed()`, never a negation of 'probable'. Checked across the
+    # files that implement the tier, not just company-report.js, because the
+    # writer (refresh_companies_house.py) carries the same risk in Python form.
+    if has_js:
+        for m in re.finditer(r"""!==?\s*['"]probable['"]|!\s*isProbable\s*\(""", clean):
+            FAIL("company-report", "app/company-report.js tests %r — a negated comparison "
+                                   "against 'probable'. This reads true for 'corroborated' too, "
+                                   "which is how a new tier silently becomes 'confirmed'. Use "
+                                   "isConfirmed(rec) / matchConfidence === 'confirmed' instead."
+                                   % _line_at(clean, m.start()).strip()[:140])
+    for path in ("scripts/refresh_companies_house.py",):
+        try:
+            with open(path, encoding="utf-8") as f:
+                py_src = f.read()
+        except OSError:
+            continue
+        for m in re.finditer(r"""!=\s*["']probable["']""", py_src):
+            line_no = py_src.count("\n", 0, m.start()) + 1
+            FAIL("company-report", "%s:%d tests a negated comparison against 'probable' (%r). "
+                                   "This reads true for 'corroborated' too — use "
+                                   "`confidence == \"confirmed\"` instead." % (path, line_no,
+                                   py_src.splitlines()[line_no - 1].strip()[:140]))
 
 
 # --------------------------------------------------------------------------
