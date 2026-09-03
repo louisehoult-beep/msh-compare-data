@@ -1519,7 +1519,7 @@
   /* Three tiers, not two: probable < corroborated < confirmed. Figures and
      the confirmed-only field filing profile read matchConfidence by NAME,
      always === 'confirmed' — never a negated comparison against 'probable'.
-     A `!isProbable(rec)` test reads true for 'corroborated' too, which is
+     A negated-comparison guard reads true for 'corroborated' too, which is
      exactly how a new tier would silently become 'confirmed' by accident.
      Added 03/09/2026 alongside the 'corroborated' tier. See test T1. */
   function isConfirmed(rec) {
@@ -1605,7 +1605,7 @@
     /* Turnover has three honest states and they must not blur:
        a figure (with its made-up-to date), disclosed-but-not-extracted, or
        not disclosed at all (legally permitted below the small thresholds).
-       Gated on `confirmed` BY NAME, never `!probable` — a corroborated match
+       Gated on `confirmed` BY NAME, never on a negated probable check — a corroborated match
        is not confirmed by name and must carry no figure either. See test T1. */
     if (confirmed) {
       if (rec.turnoverGBP != null) {

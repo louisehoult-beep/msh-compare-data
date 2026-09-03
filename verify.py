@@ -2638,7 +2638,7 @@ def check_company_report(financials, report_js):
     # files that implement the tier, not just company-report.js, because the
     # writer (refresh_companies_house.py) carries the same risk in Python form.
     if has_js:
-        for m in re.finditer(r"""!==?\s*['"]probable['"]|!\s*isProbable\s*\(""", clean):
+        for m in re.finditer(r"""!==?\s*['"]probable['"]|!\s*isProbable\s*\(|!\s*probable\b""", clean):
             FAIL("company-report", "app/company-report.js tests %r — a negated comparison "
                                    "against 'probable'. This reads true for 'corroborated' too, "
                                    "which is how a new tier silently becomes 'confirmed'. Use "

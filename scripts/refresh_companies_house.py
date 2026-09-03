@@ -84,7 +84,7 @@ Before any route runs, a supplier may carry a curator's decision:
 This exists because 35 suppliers were matched to the wrong company and
 published to members: a dissolved takeaway, a Paris railway branch, a Richmond
 advertising agency. `app/company-report.js` renders the registered name and
-number BEFORE its `!probable` gate, so the caveat withheld the figures and not
+number BEFORE its probable-only gate, so the caveat withheld the figures and not
 the identity. Clearing the data alone was not enough — this script rebuilds the
 file nightly, so the next name search re-made the same wrong match. See ^o96.
 
