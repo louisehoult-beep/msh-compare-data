@@ -7,7 +7,7 @@ read and write the same file. The old OneDrive copy at
 not be edited — two copies of live batch state is how a batch re-does work or a hint gets
 overwritten. Update this file, not that one.
 
-Last updated 03/09/2026, after batch thirteen. **74 trusts remain**; 130 now carry a full
+Last updated 03/09/2026, after batch fourteen. **73 trusts remain**; 131 now carry a full
 layer-2 profile (Velindre excluded separately).
 Ordering rule: acute trusts by waiting-list size, then community/MH/ambulance by speciality
 hits. See `../Process flows for all brands/meeting-prep-trust-profiles.md` for why the
@@ -212,6 +212,46 @@ unhinted finding instead: a shared chair (Sir Paul Ennals) across Gateshead, New
 Tyne Hospitals and Northumbria Healthcare since May 2025, plus a joint bowel-screening service
 with South Tyneside and Sunderland — governance and clinical links, not a buying one.
 
+**Batch fourteen (03/09/2026) closed 1 of 10, the smallest close on record, because of an
+infrastructure failure, not a research one.** The ten trusts taken off the top of the acute
+table (in order, after skipping RAL again) were Great Ormond Street (RP4), Shropshire
+Community Health (R1D), Royal Papworth (RGM), Liverpool Heart and Chest (RBQ), South West
+Yorkshire Partnership (RXG), Lancashire & South Cumbria (RW5), Kent Community Health (RYY),
+The Christie (RBV), The Royal Marsden (RPY) and Cornwall Partnership (RJ8). Layer-1 extraction
+worked normally for all ten (it reads local repo data, no network needed); the research step
+did not. This cloud session's outbound network access was blocked by an organisation-level
+egress policy for the whole batch, confirmed session-wide rather than trust-specific: the
+agent proxy returned a 403 "policy denial" on every CONNECT attempt, including to neutral
+control domains with no NHS connection at all (`example.com`, Wikipedia, Google), not just to
+the ten trusts' own sites. This is a different failure class from the Cloudflare/Akamai
+per-domain blocks logged below (Royal Free, `uhliverpool.nhs.uk`) and from LinkedIn's bot-block:
+those are one domain refusing one client; this was every domain refusing this session.
+Nine of the ten research agents correctly could not do primary-source research under that
+block. Two (RW5, Lancashire & South Cumbria; RJ8, Cornwall Partnership) wrote no profile file
+at all rather than publish anything built from a search-engine summary, the most defensible
+response given "publishing nothing beats publishing thin evidence." The other seven (RP4,
+R1D, RGM, RBQ, RXG, RYY, RBV) fell back to WebSearch (the only fetch tool still working) to
+synthesise facts, disclosed that plainly inside each profile's own `structure` field, and in
+RBQ's case additionally left `reportFacts`/`people` empty rather than assert anything from a
+snippet. That disclosure is exactly right, but a WebSearch summary is explicitly not a valid
+source under HUB-VERIFICATION-STANDARD rule 9 ("a web-search summary is a pointer to a source,
+never the source itself") even when the cited URL happens to still resolve, so none of those
+seven were merged; all seven stay in the queue, unchanged, for a batch run once egress is
+confirmed working, and their draft JSON is kept in `tmp/trust-batch/` (gitignored) rather than
+discarded, so the research is not lost. The tenth, Royal Marsden (RPY), is the one genuine
+exception: its main domain (`royalmarsden.nhs.uk`) was blocked identically to the others, but
+the trust hosts its Annual Report and Board papers as PDFs on its own S3 asset bucket
+(`rm-live-drupal-files.s3.eu-west-2.amazonaws.com`), which the egress policy did not catch, so
+the agent fetched and read those PDFs directly rather than searching for them. All three
+distinct source URLs independently re-checked 200 by the orchestrator. That profile met the
+same bar as any other batch's and was merged on its own. Two structural findings worth keeping:
+Royal Marsden buys for itself (no host/hosted group relationship found) and runs its own
+wholly-owned commercial subsidiary, RM Medicines Limited; and RM Partners, which it hosts, is a
+clinical pathway alliance, not a procurement structure, so it should not be read as one.
+**Before running batch fifteen, check this environment's network/egress policy** to confirm
+general web access and NHS trust domains are permitted; if the same block recurs, expect the
+same outcome (a batch that mostly returns to the queue) rather than treating it as a one-off.
+
 ⚠️ **Royal Free London (RAL) is blocked and needs a human.** It is behind Cloudflare and
 refuses all automated fetching, including `curl` with a browser User-Agent. Its annual
 report PDF has to be saved by hand from a real browser before the profile can be researched.
@@ -264,7 +304,7 @@ profiled partner before researching these, and be precise about which facts are 
   unverifiable and drop the link, rather than assuming it is the same class of false-negative
   as a Cloudflare-blocked NHS domain.
 
-## Acute and specialist trusts — 19 remaining, by waiting list
+## Acute and specialist trusts — 18 remaining, by waiting list
 
 | # | Trust | ODS | Waiting list | Seg | Spec hits |
 |---|---|---|---|---|---|
@@ -277,16 +317,15 @@ profiled partner before researching these, and be precise about which facts are 
 | 7 | Lancashire & South Cumbria NHS Foundation Trust | RW5 | 4,222 | — | 2 |
 | 8 | Kent Community Health NHS Foundation Trust | RYY | 4,203 | — | 2 |
 | 9 | The Christie NHS Foundation Trust | RBV | 3,056 | 1 | 0 |
-| 10 | The Royal Marsden NHS Foundation Trust | RPY | 1,874 | 1 | 0 |
-| 11 | Cornwall Partnership NHS Foundation Trust | RJ8 | 735 | — | 0 |
-| 12 | The Clatterbridge Cancer Centre NHS Foundation Trust | REN | 712 | 1 | 1 |
-| 13 | Bradford District Care NHS Foundation Trust | TAD | 607 | — | 0 |
-| 14 | Oxleas NHS Foundation Trust | RPG | 166 | — | 1 |
-| 15 | Cumbria, Northumberland, Tyne and Wear NHS Foundation Trust | RX4 | 153 | — | 0 |
-| 16 | Berkshire Healthcare NHS Foundation Trust | RWX | 102 | — | 2 |
-| 17 | Cambridgeshire and Peterborough NHS Foundation Trust | RT1 | 84 | — | 1 |
-| 18 | Herefordshire and Worcestershire Health and Care NHS Trust | R1A | 31 | — | 0 |
-| 19 | Lincolnshire Partnership NHS Foundation Trust | RP7 | 10 | — | 1 |
+| 10 | Cornwall Partnership NHS Foundation Trust | RJ8 | 735 | — | 0 |
+| 11 | The Clatterbridge Cancer Centre NHS Foundation Trust | REN | 712 | 1 | 1 |
+| 12 | Bradford District Care NHS Foundation Trust | TAD | 607 | — | 0 |
+| 13 | Oxleas NHS Foundation Trust | RPG | 166 | — | 1 |
+| 14 | Cumbria, Northumberland, Tyne and Wear NHS Foundation Trust | RX4 | 153 | — | 0 |
+| 15 | Berkshire Healthcare NHS Foundation Trust | RWX | 102 | — | 2 |
+| 16 | Cambridgeshire and Peterborough NHS Foundation Trust | RT1 | 84 | — | 1 |
+| 17 | Herefordshire and Worcestershire Health and Care NHS Trust | R1A | 31 | — | 0 |
+| 18 | Lincolnshire Partnership NHS Foundation Trust | RP7 | 10 | — | 1 |
 
 ## Community, mental health and ambulance trusts — 55 remaining
 
