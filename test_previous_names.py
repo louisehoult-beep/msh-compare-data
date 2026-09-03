@@ -23,7 +23,9 @@ import sys
 import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..", "..", "company-aliases")))
+# Moved into msh-compare-data itself 03/09/2026 (was a sibling Hub/company-aliases/);
+# this file is at <repo root>, so company-aliases is just "./company-aliases".
+sys.path.insert(0, os.path.abspath(os.path.join(HERE, "company-aliases")))
 from company_alias import norm_stripped  # noqa: E402
 
 SEED = json.load(open(os.path.join(HERE, "data", "supplier-seed.json")))["suppliers"]

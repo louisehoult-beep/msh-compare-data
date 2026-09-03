@@ -38,8 +38,9 @@ Writes: data/differentiator.json
 """
 import json, os, re, sys, collections
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "..",
-                                "..", "company-aliases"))
+# Moved into msh-compare-data itself 03/09/2026 (was a sibling Hub/company-aliases/);
+# this file is at <repo>/scripts, so company-aliases is just "../company-aliases".
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "company-aliases"))
 
 OUT = "data/differentiator.json"
 

@@ -1,0 +1,205 @@
+{
+  "_notice": "HAND-MAINTAINED. This is the ONLY alias file anyone edits by hand for Hub-wide name checking. It is merged with the aliases already recorded in msh-compare-data/data/supplier-seed.json to produce company-alias-registry.json, which is GENERATED - never edit the registry.",
+  "_rules": [
+    "Every entry needs canonical, variants, reason, evidence and addedOn. company_alias.py build EXITS 1 if any of those are missing - that is the evidence floor, not a formality.",
+    "evidence must be a URL you have actually opened, or the words 'seed:<supplier name>' when the fact is already recorded in supplier-seed.json.",
+    "Never add a variant on a hunch that two names look like the same company. Medtech is full of near-identical names (Pentax Medical UK Ltd is not Pentax UK Ltd). If you cannot evidence it, leave it unresolved - an unresolved name is a question, a wrong merge is a published error.",
+    "A pure legal-suffix or punctuation variant (Ltd / Limited / plc / & vs and / (UK)) does NOT need an entry here - the resolver strips those mechanically. Only add entries for things normalisation cannot reach: renames, acquisitions, trading names, brand-vs-entity, and genuinely different wordings.",
+    "If the company IS a Hub supplier, the better fix is to add the alias to its record in supplier-seed.json (see [[supplier-index-aliases-must-live-in-seed]]) so the compare tab gets it too. Use this overlay for companies not in the seed, or when the seed cannot be edited right now."
+  ],
+  "entries": [
+    {
+      "canonical": "Johnson & Johnson MedTech",
+      "variants": [
+        "Johnson & Johnson Medical Limited",
+        "Johnson And Johnson Medical Ltd",
+        "Ethicon",
+        "Ethicon Limited",
+        "Ethicon Ltd"
+      ],
+      "reason": "Same registered company. Companies House SC132162 is JOHNSON & JOHNSON MEDICAL LIMITED, which the Hub carries as 'Johnson & Johnson MedTech' (its confirmed company number). Its recorded previous names are JOHNSON AND JOHNSON MEDICAL LIMITED (2004) and ETHICON LIMITED (1991-2004), so all of these are one legal entity, not a group relationship. Ethicon was not previously findable anywhere in the Hub.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/company/SC132162",
+      "addedOn": "14/08/2026"
+    },
+    {
+      "canonical": "Karl Storz UK",
+      "variants": [
+        "Karl Storz Endoscopy (UK) Limited",
+        "Karl Storz Endoscopy UK Ltd"
+      ],
+      "reason": "Same registered company. Companies House SC151965 is KARL STORZ ENDOSCOPY (UK) LIMITED, Dundee - the registered name of the entity the Hub carries as 'Karl Storz UK'.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/company/SC151965",
+      "addedOn": "14/08/2026"
+    },
+    {
+      "canonical": "Drive DeVilbiss Healthcare UK",
+      "variants": [
+        "Drive Devilbiss Health Care",
+        "Drive DeVilbiss Sidhil Limited",
+        "Sidhil",
+        "Sidhil Limited",
+        "Sidhil Care Limited"
+      ],
+      "reason": "Same registered company. Companies House 00495946 is DRIVE DEVILBISS SIDHIL LIMITED, Halifax - the number the Hub already holds for this supplier. Its recorded previous names are SIDHIL LIMITED (2000-2017), SIDHIL CARE LIMITED (1995-2000) and SIDDALL & HILTON (HOSPITAL FURNITURE) LIMITED. The Hub record already reads 'incl. Sidhil' but carried no alias for Sidhil on its own, so a Sidhil bed on a framework did not find it. 'Drive Devilbiss Health Care' is the same name with 'Health Care' spaced, which normalisation alone does not reach.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/company/00495946",
+      "addedOn": "14/08/2026"
+    },
+    {
+      "canonical": "Charles S. Bullen Stomacare Limited",
+      "variants": [
+        "Charles S Bullen Stomacare Ltd",
+        "Charles S. Bullen Stomacare Ltd"
+      ],
+      "reason": "Same registered company, punctuation-only variant in the period after the middle initial. Companies House 03137450 is CHARLES S. BULLEN STOMACARE LIMITED, Liverpool, Active. Only one company by this name exists at Companies House — confirmed no second registration without the period. Found 17/08/2026 during the Wound Care market-intelligence proof of concept, where both spellings appeared as separate supplier names in NHSBSA Drug Tariff Part IX.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/company/03137450",
+      "addedOn": "17/08/2026"
+    },
+    {
+      "canonical": "Clinisupplies",
+      "variants": [
+        "Great Bear Healthcare Limited",
+        "Great Bear Healthcare Ltd"
+      ],
+      "reason": "Same registered company, renamed twice. Companies House 02503030 (incorporated 17/05/1990, Watford) is CLINISUPPLIES GB LIMITED, and its recorded previous names are SIGMA HEALTHCARE LIMITED and GREAT BEAR HEALTHCARE LIMITED. Commercially this matters: NHSBSA Prescription Cost Analysis carries Great Bear at £8.07m in FY2024/25 and nothing from March 2025, with Clinisupplies GB Ltd appearing at £10.99m in FY2025/26. Left unresolved, Clinisupplies' community continence share reads 6.8%; resolved it is 9.9%. NOTE: only the Great Bear name is mapped here. 'Sigma Healthcare Limited' is deliberately NOT a variant - see the distinct rule added the same day, two different companies have held that name.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/search/companies?q=Sigma+Healthcare+Limited",
+      "addedOn": "18/08/2026"
+    },
+    {
+      "canonical": "Smith+Nephew",
+      "variants": [
+        "Smith & Nephew Healthcare Ltd",
+        "Smith & Nephew Healthcare Limited"
+      ],
+      "reason": "Same registered company. Companies House 00156031 (incorporated 13/06/1919, Hull) is SMITH & NEPHEW HEALTHCARE LIMITED, which is the entity the Hub already carries as 'Smith+Nephew' - the overlay's existing distinct rule for TJ SMITH & NEPHEW LTD states that number explicitly. This adds the spelled-out trading name that SCCL writes, which was resolving to nothing.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/search/companies?q=Smith+%26+Nephew+Healthcare",
+      "addedOn": "18/08/2026"
+    },
+    {
+      "canonical": "Wellspect",
+      "variants": [
+        "Wellspect HealthCare",
+        "Wellspect Healthcare Ltd"
+      ],
+      "reason": "Brand-vs-entity spacing only. The company trades as Wellspect HealthCare and the Hub record is 'Wellspect'. Normalisation cannot reach it because 'HealthCare' is not a legal suffix. NHSBSA PCA writes 'Wellspect HealthCare', which is 10.7% of the community continence market and was resolving to nothing.",
+      "evidence": "https://www.wellspect.co.uk/",
+      "addedOn": "18/08/2026"
+    },
+    {
+      "canonical": "Attends Ltd",
+      "variants": [
+        "Attends Limited (HDS)"
+      ],
+      "reason": "SCCL publishes one row per supplier ACCOUNT, not per company, and appends the supply route. HDS is NHS Supply Chain's Home Delivery Service, referred to as such on its own contract launch briefs ('HDS Account Support Manager'). The bare name 'Attends Limited' already resolves; only the HDS-routed account did not. Attends Ltd is a named supplier on the framework at the evidence URL.",
+      "evidence": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+      "addedOn": "18/08/2026"
+    },
+    {
+      "canonical": "iMEDicare Ltd",
+      "variants": [
+        "iMEDicare Ltd (HDS)",
+        "IMEDICARE LTD (HDS)"
+      ],
+      "reason": "Same as Attends: an SCCL Home Delivery Service account row for a company whose bare name already resolves. iMEDicare Ltd is a named supplier on the framework at the evidence URL.",
+      "evidence": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+      "addedOn": "18/08/2026"
+    },
+    {
+      "canonical": "Convatec",
+      "variants": [
+        "Convatec Ltd All Routes"
+      ],
+      "reason": "'ALL ROUTES' is an SCCL supply-route marker, not part of a company name - it denotes a supplier transacting on stock, eDirect and home delivery together. Convatec Ltd is a named supplier on the Urology and Bowel Management framework.",
+      "evidence": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+      "addedOn": "18/08/2026"
+    },
+    {
+      "canonical": "Paul Hartmann (HARTMANN)",
+      "variants": [
+        "Paul Hartmann Ltd",
+        "Paul Hartmann Limited"
+      ],
+      "reason": "The Hub record carries the brand in parentheses, which normalisation cannot strip. NHS Supply Chain names the awarded supplier plainly as 'Paul Hartmann Ltd' on the new Disposable and Washable Continence Care framework.",
+      "evidence": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+      "addedOn": "18/08/2026"
+    }
+  ],
+  "_distinct_rules": [
+    "Pairs somebody has checked and found to be DIFFERENT companies. Recording one stops the suggestion machinery offering the same pair again at every sweep - it is a settled decision, not a suppression.",
+    "Same evidence floor as everything else. 'They have different company numbers' is only evidence if you looked the numbers up."
+  ],
+  "distinct": [
+    {
+      "a": "TJ SMITH & NEPHEW LTD",
+      "b": "Smith+Nephew",
+      "reason": "Three separate registered companies. T.J.SMITH AND NEPHEW,LIMITED is 00093994 (Hull). SMITH & NEPHEW PLC is 00324357 (Watford). The Hub's 'Smith+Nephew' record is SMITH & NEPHEW HEALTHCARE LIMITED, 00156031 (confirmed). NOTE: company-financials.json currently matches 'TJ SMITH & NEPHEW LTD' to 00324357, which is the plc, not T.J. Smith and Nephew - a wrong match flagged 14/08/2026.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/company/00093994",
+      "addedOn": "14/08/2026"
+    },
+    {
+      "a": "B BRAUN STERILOG LIMITED",
+      "b": "B. Braun Medical",
+      "reason": "Different registered companies in the same group. B BRAUN STERILOG LIMITED is 01472814 (Sheffield), a sterilisation services business. The Hub's 'B. Braun Medical' is 02296559 (confirmed). TRAP: 01472814's own previous names include B. BRAUN MEDICAL LIMITED (1980-1998) and B. BRAUN HEALTHCARE LIMITED (1998-2005), so a document dated before 1998 naming 'B. Braun Medical Limited' may mean 01472814, not today's 02296559.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/company/01472814",
+      "addedOn": "14/08/2026"
+    },
+    {
+      "a": "FUJIFILM SONOSITE LTD",
+      "b": "Fujifilm Healthcare UK",
+      "reason": "Different registered companies in the same group. FUJIFILM SONOSITE LTD is 04104159 (Bedford), previously SONOSITE LTD. until 2012 - point-of-care ultrasound. The Hub's 'Fujifilm Healthcare UK' is 03218117 (confirmed). Folding one into the other would misattribute framework awards between two businesses that both sell to the NHS.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/company/04104159",
+      "addedOn": "14/08/2026"
+    },
+    {
+      "a": "Genmed Enterprises International Ltd",
+      "b": "Genmed",
+      "reason": "Different registered companies. GENMED ENTERPRISES INTERNATIONAL LTD is 12992754 (Cardiff, incorporated 2020, SIC 32500 medical devices). The Hub's 'Genmed' record comes from an NHS Supply Chain framework brief naming 'Genmed Ltd' and its own note says the UK entity is NOT verified. SEPARATE DEFECT flagged 14/08/2026: company-financials.json matches 'Genmed' to 05563089 GENMED CAPITAL MANAGEMENT LIMITED, SIC 64999 financial intermediation, Hounslow - a finance company, not a pathology supplier.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/company/12992754",
+      "addedOn": "14/08/2026"
+    },
+    {
+      "a": "Philips Electronics UK Limited",
+      "b": "Philips",
+      "reason": "Different registered companies in the same group. PHILIPS ELECTRONICS UK LIMITED is 00446897; the Hub's 'Philips' record is matched to PHILIPS LIMITED 02876979. Both numbers are recorded in company-financials.json, so they are tracked as two entities and must not be merged into one supplier record.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/company/00446897",
+      "addedOn": "14/08/2026"
+    },
+    {
+      "a": "Diagnostic Imaging Limited",
+      "b": "Medical Imaging Systems (MIS Healthcare)",
+      "reason": "Different registered companies. DIAGNOSTIC IMAGING LIMITED is 04103114; the Hub's 'Medical Imaging Systems (MIS Healthcare)' is 03472964. No relationship established - the names simply share the words 'imaging' and 'limited'.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/company/04103114",
+      "addedOn": "14/08/2026"
+    },
+    {
+      "a": "Novus Med Ltd",
+      "b": "MED-EL",
+      "reason": "Unrelated companies. NOVUS MED LTD is 10242963. MED-EL is a cochlear implant manufacturer. The two were only ever suggested to each other because both names contain the token 'med'.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/company/10242963",
+      "addedOn": "14/08/2026"
+    },
+    {
+      "a": "Sigma Healthcare Limited",
+      "b": "Clinisupplies",
+      "reason": "NOT safe to alias, even though Companies House 02503030 (now CLINISUPPLIES GB LIMITED) does record SIGMA HEALTHCARE LIMITED as a previous name. A second company also held that exact name: 06655860, now SPECIAL CONCEPT DEVELOPMENT (UK) LIMITED, likewise carries SIGMA HEALTHCARE LIMITED as a matching previous name, and SIGMA HEALTHCARE LTD 07777916 is a third live company. 'Sigma Healthcare Limited' is therefore a homonym and mapping it would publish a false statement about a real company. Only GREAT BEAR HEALTHCARE LIMITED, which is unique to 02503030, is aliased to Clinisupplies.",
+      "evidence": "https://find-and-update.company-information.service.gov.uk/search/companies?q=Sigma+Healthcare+Limited",
+      "addedOn": "18/08/2026"
+    }
+  ],
+  "_ambiguous_rules": [
+    "Two DIFFERENT real companies can genuinely share a name. Those are declared here so the resolver keeps returning AMBIGUOUS for them instead of quietly picking one - and so that a NEW, accidental collision still fails the build.",
+    "Declaring an ambiguity is not a way to silence the gate. It means: someone checked Companies House, found two real companies, and wrote down which is which. Same evidence floor as an alias entry.",
+    "An AMBIGUOUS name never publishes as-is. Use the distinguishing name (the full registered name, or name plus company number)."
+  ],
+  "ambiguous": [
+    {
+      "name": "GS Medical",
+      "between": [
+        "GBUK Group",
+        "GS Medical Healthcare Ltd"
+      ],
+      "reason": "Two separate companies at Companies House. GS MEDICAL HEALTHCARE LTD (10425778) is registered at Woodland House, Blackwood Hall Business Park, Selby - the same registered office as GBUK GROUP LIMITED (09458917) - and is the part that sits inside GBUK, now its Wound Management division. GS MEDICAL LIMITED (NI659208) is a separate company at 6 Old Mill, Dunadry, Antrim, Northern Ireland, and is not part of GBUK. The seed deliberately carries the alias on both records and says they must NOT be reconciled.",
+      "evidence": "seed:GS Medical Healthcare Ltd",
+      "addedOn": "14/08/2026"
+    }
+  ]
+}
