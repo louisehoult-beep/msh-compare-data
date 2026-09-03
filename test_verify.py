@@ -33,10 +33,42 @@ import signal
 import hashlib, json, os, re, shutil, subprocess, sys, tempfile
 
 REPO = os.path.dirname(os.path.abspath(__file__))
-os.chdir(REPO)
+
+# ---------------------------------------------------------------------------
+# THE SUITE NEVER WRITES TO THE REAL data/ DIRECTORY.
+#
+# Every case below deliberately breaks a data file to prove the gate catches it,
+# and this used to happen in the repo itself, with a snapshot copied back
+# afterwards. That made two concurrent runs able to restore each other's
+# snapshot over live Hub data — and the Hub is what paying members see. It was
+# not theoretical: one such clobber was caught and put back on the morning of
+# 02/09/2026. Restoring correctly is not a fix, because the window is open for
+# as long as the run lasts and nothing serialises two runs.
+#
+# So the run works on its own private COPY of the repo and points verify.py at
+# it with --root. Concurrency stops mattering: two runs share nothing, and the
+# real data/ is never opened for writing at all. The copy is whole rather than a
+# list of directories on purpose — this file has been bitten twice by a
+# hand-maintained watch list that missed a new path (compare-suppliers.json on
+# 05/08/2026, data/hospital-prescribing/ on 15/08/2026), and "copy everything"
+# cannot develop that gap.
+#
+# .git is NOT copied: it is by far the largest thing here, nothing under test
+# reads it, and the two cases that need `git show` run it against the real repo
+# with cwd=REPO, which is where the committed baseline actually lives.
+# ---------------------------------------------------------------------------
+WORK = os.path.join(tempfile.mkdtemp(prefix="test_verify_"), "repo")
+shutil.copytree(REPO, WORK,
+                ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"))
+os.chdir(WORK)
 
 sys.path.insert(0, os.path.join(REPO, "tests", "fixtures"))
 import contacts as fixture_contacts        # noqa: E402  (needs the path above)
+
+# The fixture writes its synthetic contact files by absolute path, so it needs
+# telling too — otherwise it stays the one thing in the run still writing to the
+# live repo.
+fixture_contacts.set_root(WORK)
 
 
 def retention_months():
@@ -72,7 +104,10 @@ CREATED = []
 
 def gate():
     """Run verify.py offline. Returns (exit_code, output)."""
-    r = subprocess.run([sys.executable, "verify.py", "--offline"],
+    # The real verify.py (from REPO, so the suite always tests the gate as
+    # shipped) pointed with --root at this run's private copy.
+    r = subprocess.run([sys.executable, os.path.join(REPO, "verify.py"),
+                        "--offline", "--root", WORK],
                        capture_output=True, text=True, timeout=300)
     return r.returncode, r.stdout + r.stderr
 
@@ -116,6 +151,7 @@ def case(name):
 @case("the 145 false job changes that went live (replayed from git)")
 def _(tmp):
     out = subprocess.run(["git", "show", "%s:data/people-moves.json" % INCIDENT_COMMIT],
+                         cwd=REPO,
                          capture_output=True, text=True)
     if out.returncode != 0:
         # The history was REWRITTEN on 17/08/2026 to purge the two contact files,
@@ -766,7 +802,7 @@ def first_supplier_row():
 def _(tmp):
     # The precise catch. Counts cannot see this — swap one offender for
     # another and the total is unchanged while a fresh mistake ships.
-    if subprocess.run(["git", "show", "HEAD:data/compare-suppliers.json"],
+    if subprocess.run(["git", "show", "HEAD:data/compare-suppliers.json"], cwd=REPO,
                       capture_output=True, text=True).returncode != 0:
         return None                       # no committed baseline to diff against
     d, blk, row = first_supplier_row()
@@ -2199,7 +2235,7 @@ def _(tmp):
 @case("a search index that collapsed to a fraction of the pages it had")
 def _(tmp):
     # Only meaningful once there is a committed index to compare against.
-    old = subprocess.run(["git", "show", "HEAD:" + SEARCH_PATH],
+    old = subprocess.run(["git", "show", "HEAD:" + SEARCH_PATH], cwd=REPO,
                          capture_output=True, text=True)
     if old.returncode != 0:
         return None
@@ -2753,7 +2789,8 @@ def main():
 
 # CLEAN UP EVEN WHEN THE RUN IS KILLED.
 #
-# Every case mutates a real file and restore() puts it back. That only happened at
+# Every case mutates a file IN THIS RUN'S COPY and restore() puts it back. That
+# only happened at
 # the end of a completed run, so a Ctrl-C, a CI timeout (this suite runs ~120
 # gates and the workflow allows 30 minutes) or a killed shell left the repo
 # holding a deliberately broken data file — and, once the fixture existed, two
@@ -2795,7 +2832,10 @@ def _install_cleanup():
 
 
 def _run(tmp):
-    # Snapshot every file a case might touch, so the repo is left untouched.
+    # Snapshot every file a case might touch, so each case starts from clean data.
+    # This resets the COPY between cases (see WORK at the top of the file); the real
+    # repo is not in play here at all, which is why two concurrent runs can no longer
+    # restore over each other.
     #
     # This list used to be hand-maintained, and on 05/08/2026 the first new data
     # file in months (compare-suppliers.json) was not on it. Its cases mutated
@@ -2836,8 +2876,9 @@ def _run(tmp):
             if not os.path.exists(os.path.join(tmp, f.replace("/", "_"))) and os.path.exists(f):
                 os.remove(f)
 
-    # From here on the repo is mutable, so make the undo unconditional: a kill
-    # between two cases must not leave a deliberately broken file behind.
+    # From here on the COPY is mutable, so make the undo unconditional: a kill
+    # between two cases must not leave a deliberately broken file behind for the
+    # cases that follow it in this same run.
     _register_cleanup(restore)
 
     # The gate must pass on the real, current data first — otherwise every
@@ -2875,7 +2916,8 @@ def _run(tmp):
 
     rc, out = gate()
     if rc != 0:
-        print("\nWARNING: the repo did not restore cleanly — check git status.")
+        print("\nWARNING: the working copy did not restore cleanly between cases —\n"
+              "         the fault is in this suite, not in the repo, which was never written to.")
         failures += 1
     print()
     # The tally is itself a count in prose that has to match the rows: 3 link

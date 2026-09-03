@@ -42,6 +42,20 @@ import os
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+def set_root(path):
+    """Point the fixture at `path` instead of the real repo.
+
+    test_verify.py runs against a per-run COPY of the repo so it never writes to
+    the live data/ directory (see its header, 03/09/2026). The fixture writes
+    two synthetic contact files, and it wrote them by absolute path into the
+    real repo — so it was the one part of the run still touching live data.
+    Everything below reads this global at call time, so redirecting it here is
+    enough; the copy carries data/ and scripts/, which is all the fixture reads.
+    """
+    global REPO
+    REPO = os.path.abspath(path)
 CONTACTS = os.path.join("data", "trust-contacts.json")
 MOVES = os.path.join("data", "people-moves.json")
 

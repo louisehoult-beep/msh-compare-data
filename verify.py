@@ -110,10 +110,21 @@ def load(name):
         return json.load(f)
 
 
+# This file's own directory: ALWAYS the real repo, whatever --root says. Used
+# for the two things that are properties of the repository rather than of the
+# data being checked — `git show` below, and the scripts/ import path.
+REPO_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
 def committed(path):
     """The version of a file currently on main, for shrink comparison."""
     try:
-        out = subprocess.run(["git", "show", "HEAD:" + path],
+        # cwd=REPO_DIR, not the process cwd: under --root the cwd is a COPY of
+        # the data with no .git in it, and a bare `git show` there would fail
+        # and be swallowed by the except below — silently turning every shrink
+        # comparison into "no previous version", i.e. a check that always
+        # passes. The version on main is a fact about the repo either way.
+        out = subprocess.run(["git", "show", "HEAD:" + path], cwd=REPO_DIR,
                              capture_output=True, text=True, timeout=30)
         return json.loads(out.stdout) if out.returncode == 0 else None
     except Exception:
@@ -5157,7 +5168,25 @@ def check_notice_citations(files):
 def main():
     offline = "--offline" in sys.argv
     as_json = "--json" in sys.argv
-    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+    # --root DIR runs every check against a COPY of the repo's files instead of
+    # the repo itself. Added 03/09/2026 so test_verify.py can break fixtures
+    # deliberately without ever writing to the live data/ directory: two test
+    # runs at once used to be able to restore each other's snapshot over real
+    # Hub data, and the Hub is what paying members see (one such clobber was
+    # caught and put back on the morning of 02/09/2026).
+    #
+    # Every real run — CI, hooks/pre-push, a session landing work — passes no
+    # --root and gets exactly the previous behaviour: this file's own directory.
+    root = REPO_DIR
+    if "--root" in sys.argv:
+        i = sys.argv.index("--root")
+        if i + 1 >= len(sys.argv):
+            sys.exit("--root needs a directory")
+        root = os.path.abspath(sys.argv[i + 1])
+        if not os.path.isdir(root):
+            sys.exit("--root: no such directory: %s" % root)
+    os.chdir(root)
 
     optout = load("contacts-optout.json") or {}
     blocked = {n.strip().lower() for n in optout.get("names", []) if n.strip()}
