@@ -61,6 +61,7 @@ REFS = {
     "framework-awards.json":       "ETH-D423207D9",
     "icc-catalogue.json":          "ETH-DEE6CE6C8",
     "icc-matrices.json":           "ETH-D1989FDFE",
+    "company-match-overrides.json":     "ETH-DFD14F6D7",
     "open-tenders.json":        "ETH-DCEFAF9C5",
     "drug-tariff-part-ix.json": "ETH-D090550F8",
     "mhra-alerts.json":         "ETH-D9D253BB8",

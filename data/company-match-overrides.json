@@ -1,0 +1,424 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-DFD14F6D7",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "generated": "2026-09-03",
+ "purpose": "Curated, evidenced overrides for scripts/refresh_companies_house.py. This answers ^o96: without it, a match cleared by hand is silently re-made by the next nightly name search and the correction undoes itself overnight.",
+ "rule": "An `exclude` entry means: NEVER attach this company number to this supplier, by any route — anchored number, website proof, or name search. The supplier falls through to the honest empty state, which is the correct output for thin evidence (root rule 14).\nA `correct` entry records a number a curator established against TWO INDEPENDENT SOURCES, listed in `correctSources`. It is treated as route 1 (curator-recorded). It is never a name-search result and must never be added from one.\nCompanies House aggregators (Endole, Company Check, OpenCorporates, Kompass, D&B) are NOT an independent second source: they are copies of the register, so they restate source 1 (HUB-VERIFICATION-STANDARD.md §6). Same corporate group is not the same company. Two companies sharing a name is not evidence; two sharing a number is.",
+ "decidedOn": "2026-09-03",
+ "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-03.md",
+ "overrides": {
+  "AbbVie UK": {
+   "exclude": [
+    "08048542"
+   ],
+   "excludedName": "ABBVIE UK HOLDCO LIMITED",
+   "reason": "ABBVIE UK HOLDCO LIMITED is a holding company (SIC 64209), not the trading entity that supplies the NHS.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/08048542",
+   "decidedOn": "2026-09-03"
+  },
+  "Air Liquide Healthcare Ltd": {
+   "exclude": [
+    "16278190"
+   ],
+   "excludedName": "TANDEM DIABETES UK LIMITED",
+   "reason": "TANDEM DIABETES UK LIMITED is a different company, incorporated 2025-02-26 at a company-secretarial address — after the 2022 framework this supplier is recorded as holding.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16278190",
+   "decidedOn": "2026-09-03"
+  },
+  "Ansell": {
+   "exclude": [
+    "12714380"
+   ],
+   "excludedName": "ANSELL ALLOYS LIMITED",
+   "reason": "ANSELL ALLOYS LIMITED is a motor vehicle repair business (SIC 45200) in Hertfordshire. An unrelated namesake.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/12714380",
+   "decidedOn": "2026-09-03"
+  },
+  "Biotechnics Ltd": {
+   "exclude": [
+    "17278339"
+   ],
+   "excludedName": "ECO BIOTECHNICS LIMITED",
+   "reason": "ECO BIOTECHNICS LIMITED was incorporated 2026-06-17, after the 2023 framework.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/17278339",
+   "decidedOn": "2026-09-03"
+  },
+  "Ceannaire Medical": {
+   "exclude": [
+    "NI743089"
+   ],
+   "excludedName": "CEANNAIRE MEDICAL NI LIMITED",
+   "reason": "CEANNAIRE MEDICAL NI LIMITED was incorporated 2026-08-18, after the 2025 framework. It may be a successor entity, but that is an inference, not a register fact.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/NI743089",
+   "decidedOn": "2026-09-03"
+  },
+  "Clinical Design Technologies": {
+   "exclude": [
+    "17153624"
+   ],
+   "excludedName": "CLINICAL DESIGN TECHNOLOGIES GROUP LTD",
+   "reason": "CLINICAL DESIGN TECHNOLOGIES GROUP LTD was incorporated 2026-04-13 (previously SEQUOIADX LTD), after the 2024 framework.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/17153624",
+   "decidedOn": "2026-09-03"
+  },
+  "CooperSurgical": {
+   "exclude": [
+    "09877160"
+   ],
+   "excludedName": "COOPERSURGICAL HOLDINGS LIMITED",
+   "reason": "COOPERSURGICAL HOLDINGS LIMITED is a holding company (SIC 64209), not the trading entity.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/09877160",
+   "decidedOn": "2026-09-03"
+  },
+  "Direct Healthcare Group": {
+   "exclude": [
+    "00520386"
+   ],
+   "excludedName": "TALLEY GROUP LIMITED",
+   "reason": "TALLEY GROUP LIMITED is a different registered company. Direct Healthcare Group Limited is 05252571; Talley Group Limited is 00520386. They are in one group after acquisition and Talley's registered office has moved to DHG's Caerphilly address, which is what produced the collision — but same group is not the same company. 05252571 is deliberately NOT set here: only one source (the register) establishes it, and Lou's rule requires two.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/00520386",
+   "decidedOn": "2026-09-03"
+  },
+  "DrDoctor": {
+   "exclude": [
+    "08149394"
+   ],
+   "excludedName": "ICNH LTD",
+   "reason": "ICNH LTD, registered at 128 City Road EC1V 2NX, a mass-registration address. No relationship to DrDoctor established.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/08149394",
+   "decidedOn": "2026-09-03"
+  },
+  "Exactech": {
+   "exclude": [
+    "16540209"
+   ],
+   "excludedName": "EXACTECH (UK) 2 LIMITED",
+   "reason": "EXACTECH (UK) 2 LIMITED was incorporated 2025-06-25, after the 2024 framework. The seed already records that EXACTECH (UK) LIMITED now files as ADVITA ORTHO UK LIMITED; this is a third entity.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16540209",
+   "decidedOn": "2026-09-03"
+  },
+  "Farla Medical": {
+   "exclude": [
+    "15029070"
+   ],
+   "excludedName": "FARLA MEDICAL E-COMMERCE LIMITED",
+   "reason": "FARLA MEDICAL E-COMMERCE LIMITED was incorporated 2023-07-26, after the 2021 framework.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/15029070",
+   "decidedOn": "2026-09-03"
+  },
+  "FormAL Group Ltd": {
+   "exclude": [
+    "16963839"
+   ],
+   "excludedName": "FORMAL GROUP HOLDINGS LTD",
+   "reason": "FORMAL GROUP HOLDINGS LTD was incorporated 2026-01-14 at 71-75 Shelton Street, a mass-registration address.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16963839",
+   "decidedOn": "2026-09-03"
+  },
+  "Genmed": {
+   "exclude": [
+    "05563089"
+   ],
+   "excludedName": "GENMED CAPITAL MANAGEMENT LIMITED",
+   "reason": "GENMED CAPITAL MANAGEMENT LIMITED is a financial intermediation business (SIC 64999) in Hounslow. Which company the Hub's Genmed actually is has NOT been established and must not be guessed.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/05563089",
+   "decidedOn": "2026-09-03"
+  },
+  "Healthcare Supply Solutions Limited": {
+   "exclude": [
+    "17381240"
+   ],
+   "excludedName": "ELITE HEALTHCARE SUPPLY GROUP LTD",
+   "reason": "ELITE HEALTHCARE SUPPLY GROUP LTD was incorporated 2026-08-04 at 40 Bank Street, after the 2022 framework.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/17381240",
+   "decidedOn": "2026-09-03"
+  },
+  "Hitachi Medical Systems UK Ltd": {
+   "exclude": [
+    "FC041492"
+   ],
+   "excludedName": "HITACHI RAIL SYSTEMS FRANCE UK BRANCH",
+   "reason": "HITACHI RAIL SYSTEMS FRANCE UK BRANCH is a railway business registered in Paris.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/FC041492",
+   "decidedOn": "2026-09-03"
+  },
+  "Johnson & Johnson": {
+   "exclude": [
+    "17250654"
+   ],
+   "excludedName": "JOHNSON & JOHNSON DEVELOPMENTS LTD",
+   "reason": "JOHNSON & JOHNSON DEVELOPMENTS LTD is a construction company (SIC 41100) incorporated 2026-05-29 in Market Drayton. Unconnected to the medtech group.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/17250654",
+   "decidedOn": "2026-09-03"
+  },
+  "Lifeline 24": {
+   "exclude": [
+    "16148714"
+   ],
+   "excludedName": "ACCESS TO CARE AND EDUCATION INTERNATIONAL LIFELINE (ACEIL) LTD.",
+   "reason": "ACCESS TO CARE AND EDUCATION INTERNATIONAL LIFELINE (ACEIL) LTD. is a company limited by guarantee incorporated 2024-12-23, previously MOTHERS OF HIND LTD.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16148714",
+   "decidedOn": "2026-09-03"
+  },
+  "Lowenstein Medical UK Ltd": {
+   "exclude": [
+    "16473087"
+   ],
+   "excludedName": "LOWENSTEIN GROUP LIMITED",
+   "reason": "LOWENSTEIN GROUP LIMITED is a property business (SIC 68100/68320) incorporated 2025-05-25.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16473087",
+   "decidedOn": "2026-09-03"
+  },
+  "MC Tissue": {
+   "exclude": [
+    "16313653"
+   ],
+   "excludedName": "MC TISSUE UK LIMITED",
+   "reason": "MC TISSUE UK LIMITED was incorporated 2025-03-13, after the 2024 framework. The registered name is string-identical to the supplier name and it is still the wrong company — which is why string identity alone may never confirm a match.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16313653",
+   "decidedOn": "2026-09-03"
+  },
+  "Metsa": {
+   "exclude": [
+    "17185037"
+   ],
+   "excludedName": "METSA LTD",
+   "reason": "METSA LTD was incorporated 2026-04-27, after the 2024 framework.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/17185037",
+   "decidedOn": "2026-09-03"
+  },
+  "Newell Brands": {
+   "exclude": [
+    "FC042432"
+   ],
+   "excludedName": "NEWELL BRANDS DISTRIBUTION LLC",
+   "reason": "NEWELL BRANDS DISTRIBUTION LLC is a US LLC registered 2025-03-18, after the 2024 framework.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/FC042432",
+   "decidedOn": "2026-09-03"
+  },
+  "Northwood": {
+   "exclude": [
+    "06613523"
+   ],
+   "excludedName": "NORTHWOOD (ABERDEEN) LIMITED",
+   "reason": "NORTHWOOD (ABERDEEN) LIMITED is a letting agent (SIC 68209/68310/68320). The bracket is disambiguating and must never be stripped.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/06613523",
+   "decidedOn": "2026-09-03"
+  },
+  "Opal Health": {
+   "exclude": [
+    "17243635"
+   ],
+   "excludedName": "OPAL HEALTH LTD",
+   "reason": "OPAL HEALTH LTD was incorporated 2026-05-26 at 71-75 Shelton Street, after the 2025 framework.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/17243635",
+   "decidedOn": "2026-09-03"
+  },
+  "Pentax Medical": {
+   "exclude": [
+    "16914265"
+   ],
+   "excludedName": "PENTAX LTD",
+   "reason": "PENTAX LTD is an advertising and photography business (SIC 73110/74201) in Richmond, incorporated 2025-12-16. The registry README already warns that 'Pentax Medical UK Limited' is not 'Pentax UK Limited'.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16914265",
+   "decidedOn": "2026-09-03"
+  },
+  "Sivantos Limited": {
+   "exclude": [
+    "15772027"
+   ],
+   "excludedName": "SIVANTOS PTE LTD",
+   "reason": "SIVANTOS PTE LTD is a mail-order business (SIC 47910) DISSOLVED on 2025-11-25. Not the hearing-instrument company.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/15772027",
+   "decidedOn": "2026-09-03"
+  },
+  "Solventum (3M Health Care)": {
+   "exclude": [
+    "NI738203"
+   ],
+   "excludedName": "SOLVENTUM IRELAND LIMITED",
+   "reason": "SOLVENTUM IRELAND LIMITED was incorporated 2026-02-24 in Belfast, after the 2021 framework.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/NI738203",
+   "decidedOn": "2026-09-03"
+  },
+  "Sonic Labs": {
+   "exclude": [
+    "16902515"
+   ],
+   "excludedName": "PARALLEL SONIC LABS LIMITED",
+   "reason": "PARALLEL SONIC LABS LIMITED is a sound-recording reproduction business (SIC 18201).",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16902515",
+   "decidedOn": "2026-09-03"
+  },
+  "Southgate Group Ltd": {
+   "exclude": [
+    "16176074"
+   ],
+   "excludedName": "SOUTHGATE GROUP LIMITED",
+   "reason": "SOUTHGATE GROUP LIMITED is a holding company (SIC 64209) incorporated 2025-01-10, after the 2023 framework.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16176074",
+   "decidedOn": "2026-09-03"
+  },
+  "Symbios": {
+   "exclude": [
+    "16260231"
+   ],
+   "excludedName": "SYMBIOS CAPITAL LTD",
+   "reason": "SYMBIOS CAPITAL LTD is a management consultancy (SIC 70221/70229).",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16260231",
+   "decidedOn": "2026-09-03"
+  },
+  "TJ SMITH & NEPHEW LTD": {
+   "exclude": [
+    "00324357"
+   ],
+   "excludedName": "SMITH & NEPHEW PLC",
+   "reason": "SMITH & NEPHEW PLC is already settled as a DIFFERENT company from this record in alias-overlay.json. T.J.SMITH AND NEPHEW,LIMITED is 00093994; that number is deliberately NOT set here because only one source establishes it.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/00324357",
+   "decidedOn": "2026-09-03"
+  },
+  "Tamaki Group": {
+   "exclude": [
+    "15411109"
+   ],
+   "excludedName": "TAMAKI LTD",
+   "reason": "TAMAKI LTD is a takeaway food business (SIC 56102) incorporated 2024-01-15, after the 2023 framework.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/15411109",
+   "decidedOn": "2026-09-03"
+  },
+  "Total Mobile": {
+   "exclude": [
+    "16868791"
+   ],
+   "excludedName": "TOTAL MOBILE MECHANICS LTD",
+   "reason": "TOTAL MOBILE MECHANICS LTD is a vehicle repair business (SIC 45200) incorporated 2025-11-21, after the 2022 framework.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16868791",
+   "decidedOn": "2026-09-03"
+  },
+  "United Imaging Health Ltd": {
+   "exclude": [
+    "17236952"
+   ],
+   "excludedName": "UNITED IMAGING HEALTHCARE GB LIMITED",
+   "reason": "UNITED IMAGING HEALTHCARE GB LIMITED was incorporated 2026-05-22 at a serviced office, after the 2025 framework.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/17236952",
+   "decidedOn": "2026-09-03"
+  },
+  "VWR International (Avantor)": {
+   "exclude": [
+    "13043279"
+   ],
+   "excludedName": "AVANTOR HOLDINGS LIMITED",
+   "reason": "AVANTOR HOLDINGS LIMITED is a holding company (SIC 64209), not the trading entity.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/13043279",
+   "decidedOn": "2026-09-03"
+  },
+  "Viewray,Inc": {
+   "exclude": [
+    "16356950"
+   ],
+   "excludedName": "VIEWRAY SYSTEMS UK PVT LTD",
+   "reason": "VIEWRAY SYSTEMS UK PVT LTD was incorporated 2025-04-01, after the 2022 framework. ViewRay Inc. filed for Chapter 11 in 2023; this is a different entity.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16356950",
+   "decidedOn": "2026-09-03"
+  },
+  "Numed Healthcare": {
+   "exclude": [
+    "15982458"
+   ],
+   "excludedName": "NUMED HEALTHCARE LIMITED",
+   "reason": "The previously matched company NUMED HEALTHCARE LIMITED (15982458) is the wrong company. 01302868 is established against two independent sources, listed in correctSources.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/15982458",
+   "correct": "01302868",
+   "correctSources": [
+    "https://find-and-update.company-information.service.gov.uk/company/01302868 — NUMED HOLDINGS LIMITED, active, incorporated 1977-03-16, Alliance House, Roman Ridge Road, Sheffield S9 1GB",
+    "https://www.numed.co.uk/ — the company's own footer publishes 'Numed Holdings Ltd', company registration 01302868, at the same address",
+    "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/ — NHS Supply Chain names the supplier 'Numed Holdings Ltd (T/A Numed Healthcare)'"
+   ],
+   "decidedOn": "2026-09-03"
+  },
+  "TFX Group Ltd, trading as Teleflex Medical": {
+   "exclude": [
+    "FC038449"
+   ],
+   "excludedName": "TELEFLEX GLOBAL SERVICES LLC",
+   "reason": "The previously matched company TELEFLEX GLOBAL SERVICES LLC (FC038449) is the wrong company. 02884361 is established against two independent sources, listed in correctSources.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/FC038449",
+   "correct": "02884361",
+   "correctSources": [
+    "https://find-and-update.company-information.service.gov.uk/company/02884361 — TFX GROUP LIMITED, active, incorporated 1993-12-24, Amersham HP6 5BX; the only active TFX Group on the register",
+    "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/ — NHS Supply Chain names 'TFX Group Ltd, trading as Teleflex Medical'",
+    "https://find-and-update.company-information.service.gov.uk/company/BR023544 — the Teleflex group's UK establishment is registered at Amersham HP6 5BX, TFX Group Limited's own registered office"
+   ],
+   "decidedOn": "2026-09-03"
+  },
+  "Teleflex Medical UK": {
+   "exclude": [
+    "FC038449"
+   ],
+   "excludedName": "TELEFLEX GLOBAL SERVICES LLC",
+   "reason": "The previously matched company TELEFLEX GLOBAL SERVICES LLC (FC038449) is the wrong company. 02884361 is established against two independent sources, listed in correctSources.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/FC038449",
+   "correct": "02884361",
+   "correctSources": [
+    "https://find-and-update.company-information.service.gov.uk/company/02884361 — TFX GROUP LIMITED, active, incorporated 1993-12-24, Amersham HP6 5BX",
+    "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/perfusion/ — NHS Supply Chain names 'TFX Group Ltd T/A Teleflex Medical'",
+    "https://find-and-update.company-information.service.gov.uk/company/BR023544 — the Teleflex group's UK establishment shares TFX Group Limited's registered office"
+   ],
+   "decidedOn": "2026-09-03"
+  },
+  "BXT Accelyon Ltd": {
+   "exclude": [
+    "16755439"
+   ],
+   "excludedName": "ACCELYON LTD",
+   "reason": "The previously matched company ACCELYON LTD (16755439) is the wrong company. 08252168 is established against two independent sources, listed in correctSources.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/16755439",
+   "correct": "08252168",
+   "correctSources": [
+    "https://find-and-update.company-information.service.gov.uk/company/08252168 — BXTACCELYON LIMITED, active, incorporated 2012-10-15, previously ACCELYON LIMITED",
+    "https://www.bxta.com/contact/ — the company's own contact page gives 'BXTAccelyon Limited, The Coach House, Grenville Court, Britwell Road, Burnham SL1 8DF', the identical registered name and registered office"
+   ],
+   "decidedOn": "2026-09-03"
+  },
+  "Numed Holdings Ltd (T/A Numed Healthcare)": {
+   "exclude": [
+    "15982458"
+   ],
+   "excludedName": "NUMED HEALTHCARE LIMITED",
+   "reason": "The previously matched company NUMED HEALTHCARE LIMITED (15982458) is the wrong company. 01302868 is established against two independent sources, listed in correctSources.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/15982458",
+   "correct": "01302868",
+   "correctSources": [
+    "https://find-and-update.company-information.service.gov.uk/company/01302868 — NUMED HOLDINGS LIMITED, active, incorporated 1977-03-16, Alliance House, Roman Ridge Road, Sheffield S9 1GB",
+    "https://www.numed.co.uk/ — the company's own footer publishes 'Numed Holdings Ltd', company registration 01302868, at the same address",
+    "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/ — NHS Supply Chain names the supplier 'Numed Holdings Ltd (T/A Numed Healthcare)'"
+   ],
+   "decidedOn": "2026-09-03"
+  },
+  "HC21 (UK) Ltd": {
+   "exclude": [
+    "10939295"
+   ],
+   "excludedName": "MISS TINA'S HC21 LTD",
+   "reason": "The previously matched company MISS TINA'S HC21 LTD (10939295) is the wrong company. 05020682 is established against two independent sources, listed in correctSources.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/10939295",
+   "correct": "05020682",
+   "correctSources": [
+    "https://find-and-update.company-information.service.gov.uk/company/05020682 — HEALTHCARE 21 (UK) LIMITED, ACTIVE, incorporated 2004-01-20, SIC 46460 wholesale of pharmaceutical goods, Unit B1-B2 Bond Close, Kingsland Business Park, Basingstoke RG24 8PZ; the only active Healthcare 21 trading company on the register",
+    "https://www.abhi.org.uk/membership/company/10874/healthcare-21-uk-ltd — the Association of British HealthTech Industries member directory lists Healthcare 21 UK Ltd at 'Unit B1-B2 Bond Close, Kingsland Business Park, Basingstoke, Hampshire, RG24 8PZ', character-identical to the registered office",
+    "NHS Supply Chain's own contract launch briefs name this one supplier both as 'HC21 (UK) Ltd' and as 'Healthcare 21 UK Ltd' / 'Healthcare 21 Uk Ltd', joining the abbreviation to the registered name on the buyer's own record"
+   ],
+   "decidedOn": "2026-09-03"
+  }
+ }
+}

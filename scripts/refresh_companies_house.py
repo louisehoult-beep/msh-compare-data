@@ -50,6 +50,22 @@ check by hand, not a tie to break in code. Same rule as two anchored numbers.
 Everything else is "probable", and `matchedOn` says which test it failed.
 Name-search matches are ALWAYS "probable", per the method doc.
 
+CURATED OVERRIDES (data/company-match-overrides.json), added 03/09/2026
+----------------------------------------------------------------------
+Before any route runs, a supplier may carry a curator's decision:
+
+  `exclude` — never attach this number to this supplier, by ANY route. The
+     supplier falls through to cleared_record(), the honest empty state.
+  `correct` — a number established against TWO INDEPENDENT SOURCES, cited in
+     `correctSources`. Treated as route 1. Refused if the sources are missing.
+
+This exists because 35 suppliers were matched to the wrong company and
+published to members: a dissolved takeaway, a Paris railway branch, a Richmond
+advertising agency. `app/company-report.js` renders the registered name and
+number BEFORE its `!probable` gate, so the caveat withheld the figures and not
+the identity. Clearing the data alone was not enough — this script rebuilds the
+file nightly, so the next name search re-made the same wrong match. See ^o96.
+
 **A "probable" record must never feed a derived claim.** It is written so the
 page can show company facts with the caveat, and so a human can check it. Stage
 4's field-position bands read confirmed records only.
@@ -138,6 +154,7 @@ KEY_ENV = "COMPANIES_HOUSE_KEY"
 SEED = "data/supplier-seed.json"
 INDEX = "data/supplier-index.json"
 OUT = "data/company-financials.json"
+OVERRIDES = "data/company-match-overrides.json"
 
 # The human-readable guidance page (this is what goes in the file, because it is
 # what a member or Lou would open) and its Content API rendering, which is the
@@ -461,6 +478,73 @@ def website_proof(supplier):
     return {"number": number, "url": proof["url"], "checkedOn": proof.get("checkedOn")}
 
 
+def load_overrides():
+    """Curated per-supplier match overrides, or an empty map. Answers ^o96.
+
+    WHY THIS EXISTS. Until 03/09/2026 a wrong match found by hand could only be
+    fixed by editing data/company-financials.json — and this script rebuilds
+    that file from scratch every night, so the next name search re-made exactly
+    the same wrong match and the correction silently undid itself. ^o96 has said
+    "code fix is yours or it recurs" since 22/08/2026; this is that fix.
+
+    `exclude` is checked against the number from EVERY route, name search
+    included, because name search is where almost all of the wrong matches came
+    from: a supplier matched to a dissolved takeaway, a Paris railway branch, a
+    Richmond advertising agency and thirty-two others, all published to members
+    behind a caveat that discharged nothing.
+
+    `correct` is a number a curator established against two independent sources,
+    recorded with those sources in `correctSources`. It is route 1 — the same
+    standing as a number anchored in the supplier's own note — never a name
+    search, and the file's own `rule` says so.
+    """
+    doc = load(OVERRIDES, {})
+    return (doc or {}).get("overrides") or {}
+
+
+def override_for(supplier, overrides):
+    """(excluded_numbers, corrected_number) for one supplier."""
+    entry = overrides.get(supplier["name"]) or {}
+    excluded = {str(n).upper() for n in (entry.get("exclude") or [])}
+    correct = str(entry.get("correct") or "").upper() or None
+    if correct and not VALID_NUMBER.match(correct):
+        log("  %s: ignoring a malformed `correct` number %r in %s"
+            % (supplier["name"], entry.get("correct"), OVERRIDES))
+        correct = None
+    if correct and not entry.get("correctSources"):
+        # Two independent sources are the bar Lou set on 03/09/2026. A corrected
+        # number that does not cite them is not usable: refuse it rather than
+        # publish an unciteable identity, exactly as website_proof() refuses a
+        # proof with no URL.
+        log("  %s: ignoring a `correct` number with no correctSources — uncitable"
+            % supplier["name"])
+        correct = None
+    return excluded, correct
+
+
+def cleared_record(decided_on=None):
+    """The honest empty state: a record that carries no company at all.
+
+    Every register-derived field is null, so the report renders nothing rather
+    than something wrong. `matchConfidence` stays "probable" so that no
+    downstream stage — none of which may read a probable record for a derived
+    claim — can mistake an empty record for a usable one.
+    """
+    return {
+        "companyNumber": None, "registeredName": None,
+        "matchConfidence": "probable",
+        "matchedOn": ("no company is attached to this supplier. The previous match was cleared on %s "
+                      "as the wrong company — see %s for the evidence. Nothing is asserted here until "
+                      "a match is confirmed against two independent sources."
+                      % (decided_on or "03/09/2026", OVERRIDES)),
+        "status": None, "incorporated": None, "sic": None,
+        "accountsCategory": None, "accountsCategoryRaw": None,
+        "accountsCategoryNote": None, "accountsMadeUpTo": None,
+        "turnoverGBP": None, "employees": None,
+        "sourceUrl": None, "officers": None,
+    }
+
+
 def recorded_number(supplier):
     """(number, note, source) — number is None when there isn't exactly one clean answer.
 
@@ -739,15 +823,46 @@ def main():
            "{:,}".format(thresholds["bands"]["medium"]["turnoverGBP"]),
            thresholds["appliesTo"]))
 
+    overrides = load_overrides()
+    if overrides:
+        log("%d curated match override(s) loaded from %s" % (len(overrides), OVERRIDES))
+    override_hits = []
+
     companies, unresolved, downgraded = {}, [], []
     for i, (supplier, (number, why, source)) in enumerate(with_number, 1):
         if why:
             log("  %s: %s" % (supplier["name"], why))
+        excluded, corrected = override_for(supplier, overrides)
         from_record = source if number else None
-        if not number:
-            number = search_for(supplier, key)
+
+        # A curator-recorded number outranks everything this script can find on
+        # its own: it was established against two independent sources, which no
+        # automated route here can do.
+        if corrected:
+            number, from_record = corrected, "alerts"
+            override_hits.append("%s: using curated %s" % (supplier["name"], corrected))
+        else:
+            if number and str(number).upper() in excluded:
+                override_hits.append("%s: refusing recorded %s (excluded)" % (supplier["name"], number))
+                number, from_record = None, None
+            if not number:
+                number = search_for(supplier, key)
+            # Checked AFTER the search too — name search is where nearly every
+            # excluded match came from in the first place.
+            if number and str(number).upper() in excluded:
+                override_hits.append("%s: refusing name-search %s (excluded)" % (supplier["name"], number))
+                number = None
+
         if not number:
             unresolved.append(supplier["name"])
+            if excluded:
+                # An EXCLUDED supplier is not the same as one nothing was found
+                # for. Write the cleared state explicitly rather than dropping
+                # the record: absence renders as "not yet fetched", which is a
+                # different and untrue statement, and a record that vanishes
+                # cannot be seen to be deliberately empty.
+                companies[supplier["name"]] = cleared_record(
+                    (overrides.get(supplier["name"]) or {}).get("decidedOn"))
             continue
         entry = record_for(supplier, number, from_record, key)
         if not entry:
@@ -759,6 +874,20 @@ def main():
                                                  entry["matchedOn"]))
         if i % 50 == 0:
             log("%d/%d | %d resolved" % (i, len(with_number), len(companies)))
+
+    if override_hits:
+        log("%d curated override(s) applied:" % len(override_hits))
+        for line in override_hits:
+            log("  %s" % line)
+
+    # A stale override is a quiet liability: it reads as a live decision but
+    # guards nothing, and the next person to look assumes the supplier is still
+    # protected. Report it; never delete it automatically, because the entry is
+    # a curator's evidenced decision and only a curator retires it.
+    unused = sorted(set(overrides) - {s["name"] for s in people})
+    if unused:
+        log("%d override(s) name a supplier not in the seed — stale, review %s: %s"
+            % (len(unused), OVERRIDES, ", ".join(unused)))
 
     if not companies:
         raise SystemExit("ABORT: nothing resolved. Refusing to write an empty report.")

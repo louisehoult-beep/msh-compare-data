@@ -1543,6 +1543,18 @@
         ' The full register fetch runs when the Companies House API key arrives — absence here is a coverage gap, not a company without filings.'));
     }
 
+    /* A record with no company number carries no identity at all — the match
+       was cleared by hand as the wrong company (data/company-match-overrides.json).
+       Return the empty state BEFORE the caveat box, which would otherwise say
+       "register facts are shown for orientation" directly above "the record
+       carries no register facts". Added 03/09/2026 with the 35 identity clears:
+       the identity rows below render unconditionally, so until those records
+       were cleared a wrong company name and number published to members while
+       only the figures were withheld. */
+    if (!rec.companyNumber && !rec.registeredName) {
+      return sec(TITLE, gap('No company is attached to this supplier. A previous match was cleared as the wrong company, and nothing is shown here until a match is confirmed against two independent sources. This is a deliberate blank, not a coverage gap.'));
+    }
+
     var probable = isProbable(rec);
     var rows = '';
     if (rec.registeredName) rows += fact('Registered name', '<b>' + esc(rec.registeredName) + '</b>' + (rec.companyNumber ? ' · ' + esc(rec.companyNumber) : ''));
