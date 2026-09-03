@@ -114,6 +114,17 @@
     // Live NHSSC detail cache, keyed by normalised product name.
     var CACHE = {}; var cp = (nhssc && nhssc.products) || {};
     for (var k in cp){ CACHE[nk(k)] = cp[k]; }
+    // Hoisted early (bug fix 03/09/2026): typeForProduct() is called below, in the
+    // PRODUCTS-building loop, before program order reaches the GENERIC_TYPE_OVERRIDE /
+    // CANNULA_DISQUALIFIERS var statements further down next to typeForProduct's own
+    // definition. var hoisting only hoists the declaration, not the assignment, so
+    // typeForProduct saw GENERIC_TYPE_OVERRIDE as undefined on every real page load and
+    // threw reading its [t] lookup, which the outer Promise.all().catch() turned into
+    // "Comparison tool temporarily unavailable" for every member, every time. Assigning
+    // here, before first use, and leaving the later statements as harmless re-assigns
+    // next to the documentation they belong with.
+    var GENERIC_TYPE_OVERRIDE = { catheter: 'cannula', wound: 'dressing', foam: 'dressing', stoma: 'ostomy', iol: 'intraocular', sealant: 'haemostat' };
+    var CANNULA_DISQUALIFIERS = ['picc', 'central venous', 'central line'];
     // Products verified as NOT catalogue lines (capital equipment, software,
     // medicines-route etc.) — shown honestly instead of a dead-end lookup link.
     var NOTCAT = {}; var ncp = (nhssc && nhssc.notCatalogue) || {};
