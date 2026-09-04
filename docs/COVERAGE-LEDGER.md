@@ -20,10 +20,10 @@ synonym for out of scope: decide each one deliberately.
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 6 | 10.5% | STARTED |
 | Urology and Bowel Management | continence | 57 | 17 | 29.8% | STARTED |
 | Advanced Wound Care | wound | 56 | 16 | 28.6% | STARTED |
-| Digital Diagnostic Solutions | digital | 54 | 3 | 5.6% | STARTED |
+| Digital Diagnostic Solutions | digital | 54 | 4 | 7.4% | STARTED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 10 | 18.9% | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | STARTED |
-| Surgical Instruments | surgical | 50 | 7 | 14.0% | STARTED |
+| Surgical Instruments | surgical | 50 | 8 | 16.0% | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 6 | 14.0% | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 6 | 16.2% | STARTED |
 | Respiratory Solutions | respiratory | 37 | 11 | 29.7% | STARTED |
