@@ -37,7 +37,7 @@ synonym for out of scope: decide each one deliberately.
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 5 | 20.0% | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | STARTED |
-| Physiotherapy and Occupational Therapy | rehab | 22 | 2 | 9.1% | STARTED |
+| Physiotherapy and Occupational Therapy | rehab | 22 | 4 | 18.2% | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 3 | 14.3% | STARTED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 6 | 30.0% | STARTED |
