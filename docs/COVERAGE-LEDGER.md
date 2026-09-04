@@ -52,7 +52,7 @@ synonym for out of scope: decide each one deliberately.
 | Clinical and Sharps Waste Management | infection | 14 | 2 | 14.3% | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 2 | 15.4% | STARTED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | STARTED |
-| Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 1 | 8.3% | STARTED |
+| Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 2 | 16.7% | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 1 | 12.5% | STARTED |

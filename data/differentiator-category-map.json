@@ -238,7 +238,9 @@
    "cgm": "Continuous and flash glucose sensors",
    "strip": "Blood glucose and ketone test strips",
    "lancet": "Lancets",
-   "pen": "Insulin pen needles"
+   "pen": "Insulin pen needles",
+   "pump": "Insulin pumps and controllers",
+   "pumpset": "Pump infusion sets, reservoirs and inserters"
   },
   "neuro": {
    "scs": "Spinal cord stimulation",
@@ -356,10 +358,10 @@
  },
  "counts": {
   "pairs": 5353,
-  "mapped": 4701,
+  "mapped": 4702,
   "notTaxonomy": 161,
   "products": 86665,
-  "productsMapped": 60350
+  "productsMapped": 60360
  },
  "entries": [
   {
@@ -89085,9 +89087,11 @@
     "Myorbit Inserter",
     "Mypump Reservoir"
    ],
-   "hub": null,
+   "hub": "diabetes:pumpset",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Every product actually captured in this division is a pump consumable or accessory: Myinset, Myinserter, Myorbit, Myorbit Infusion Sets, Myorbit Inserter, Mypump Reservoir, Ypsopump Carrying Systems, Ypsopump Ancillaries And Accessories. The three Ypsopump items sit UNDER /infusion-systems/ypsopump-insulin-pump/ as sub-pages (an explorer tool and its landing page); the pump's own product page was dropped by the crawler's category-landing-page prefix test, so no pump product record was captured here. Mapped to pumpset only. diabetes:pump stays empty until a real pump product page is captured — an honest empty category, not a reason to file consumables under it. Both types were added to the gated vocabulary on 04/09/2026 on Lou's ruling (OUTSTANDING ^o272); bloodtx:pump was rejected as the home for these because it is IV infusion therapy, a different clinical use and a different framework.",
+   "decidedIn": "mylife-Diabetes-Care--pump-vocabulary.json"
   },
   {
    "supplier": "Promedics Orthopaedics Ltd",
