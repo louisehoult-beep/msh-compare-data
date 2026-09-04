@@ -3142,7 +3142,7 @@ def check_named_taxonomy_structure(doc):
 # people to loosen gates.
 CAPPED_CATALOGUE_SITES = {
     "emmat.co.uk": 23877,               # read cap: 4,000 of 23,877
-    "surtex-instruments.com": 4938,     # time budget: ~3,100 of 4,938
+    "surtex-instruments.com": 4938,     # page cap (MAX_PAGES=40x100): 4,000 of 4,938 (re-crawled 03/09/2026 with a larger per-run time budget; was ~3,100, time-budget-limited)
 }
 
 FLAT_RANGE_CLAIM = "No usable category structure"

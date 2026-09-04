@@ -95,6 +95,7 @@ MAX_PAGES = 40          # 100 products per page
 # trusted, so each site now gets a bounded slot and says when it runs out.
 SITE_BUDGET_S = 90
 MIN_PRODUCTS = 8        # below this a "range" is a landing page, not a catalogue
+NUMERIC_SLUG_BUDGET_S = 300   # its own budget: one extra GET per product page
 
 # A WordPress post type whose rest_base merely CONTAINS "product" is not
 # necessarily a catalogue. Nevro's site exposes `product-manuals` and
@@ -900,6 +901,118 @@ PRODUCT_SUBPAGE_WORDS = {
 }
 
 
+def _page_title(body):
+    """Real product name from a numeric-slug page's own record — schema.org
+    markup first, then a bare <h1>, then <title> (stripped of a trailing
+    " . Company Name Ltd" tail, which only the <title> element carries)."""
+    m = re.search(r'itemprop=["\']name["\'][^>]*>(.*?)<', body, re.S)
+    if m:
+        t = clean(m.group(1))
+        if t:
+            return t
+    m = re.search(r"<h1[^>]*>(.*?)</h1>", body, re.S)
+    if m:
+        t = clean(m.group(1))
+        if t:
+            return t
+    m = re.search(r"<title>(.*?)</title>", body, re.S)
+    if not m:
+        return None
+    t = clean(m.group(1))
+    # "Surgical Scalpel Blade No. 9. Swann-Morton Ltd" -> the part before the
+    # last ". Capitalised Words" tail, which is the site's own name, not the
+    # product's.
+    t = re.sub(r"\.\s*[A-Z][\w&-]*(?:\s+[A-Z][\w&-]*){0,3}\s*\.?$", "", t).strip()
+    return t or None
+
+
+def _breadcrumb_division(body):
+    """The site's own filing for this one product — the first breadcrumb
+    entry after the generic root(s) ("Home", "Products", the domain name).
+    Reads any nav/ul/ol/div carrying "breadcrumb" in its id or class, not a
+    literal id="breadcrumbs" — so this is not tied to Swann Morton's own
+    markup, only to the breadcrumb convention it happens to use."""
+    m = re.search(
+        r'<(nav|ul|ol|div)[^>]*(?:id|class)=["\'][^"\']*breadcrumb[^"\']*["\'][^>]*>(.*?)</\1>',
+        body, re.S | re.I)
+    if not m:
+        return None
+    crumbs = [clean(c) for c in re.findall(r"<a[^>]*>(.*?)</a>", m.group(2), re.S)]
+    crumbs = [c for c in crumbs if c and c.lower() not in ("home", "products", "product")]
+    return crumbs[0] if crumbs else None
+
+
+def numeric_slug_products(domain, prod_urls):
+    """Read a real name and a real division from each product's OWN page,
+    for a sitemap-route site whose product URLs are bare numeric ids (see the
+    comment in `sitemap_products` above this call). One extra GET per URL —
+    bounded by NUMERIC_SLUG_BUDGET_S, its own budget, not the caller's — with
+    a 20s per-page timeout so one slow page cannot eat the whole run.
+
+    A page that cannot be read keeps its own numeric-id fallback rather than
+    being silently dropped, so the count matches the sitemap's own total; how
+    many needed the fallback is reported in `captureCaveat` rather than
+    hidden."""
+    started = time.time()
+    deadline = started + NUMERIC_SLUG_BUDGET_S
+    rows, unread = [], 0
+    for u in prod_urls:
+        if time.time() > deadline:
+            return None, "ran out of budget reading each product's own page"
+        try:
+            body, _ = get(u, timeout=20)
+        except Exception:
+            body, name = None, None
+        else:
+            name = _page_title(body)
+        division = _breadcrumb_division(body) if (name and body) else None
+        if not name:
+            leaf = urllib.parse.urlparse(u).path.rstrip("/").rsplit("/", 1)[-1]
+            name = re.sub(r"\.[a-zA-Z0-9]{1,5}$", "", leaf)
+            unread += 1
+        rows.append({"n": name, "division": division or "Uncategorised", "category": ""})
+
+    if len(rows) < MIN_PRODUCTS:
+        return None, "too few product pages answered to call a catalogue"
+
+    divisions = {}
+    for r in rows:
+        divisions[r["division"]] = divisions.get(r["division"], 0) + 1
+    real = [d for d in divisions if d != "Uncategorised"]
+    uncat = divisions.get("Uncategorised", 0)
+    has_divisions = bool(real) and uncat * 2 <= len(rows)
+    caveat = ("Names and divisions are read from each product's own page — schema.org "
+              "product markup for the name, the page's own breadcrumb trail for the "
+              "division — because the site's product URLs are bare numeric ids "
+              "(e.g. /product/15.php) that carry neither. %d of %d page(s) could not be "
+              "read and fall back to their numeric id." % (unread, len(rows)))
+    return {
+        "domain": domain,
+        "verified": time.strftime("%Y-%m-%d"),
+        "source": "%s, each product's own page read this run" % domain,
+        "structureFrom": "sitemap products, each page's own name and breadcrumb division "
+                          "(numeric-slug fallback)",
+        "hasDivisions": has_divisions,
+        "landingPagesDropped": 0,
+        "furniturePagesDropped": 0,
+        "duplicateUrlsDropped": 0,
+        "droppedCategoryPages": 0,
+        "captureCaveat": caveat,
+        "structure": ("The company's own division for each product, read from its own "
+                      "breadcrumb trail." if has_divisions else
+                      "No usable breadcrumb division on this site — listed as one flat range."),
+        "filingRule": ("Grouping MIRRORS the manufacturer's own filing, read from each "
+                       "product's own breadcrumb trail because the site's URLs carry no "
+                       "division segment of their own." if has_divisions else
+                       caveat + " Every item is listed by name below rather than grouped, "
+                       "because a fabricated grouping would misrepresent the company's own "
+                       "filing."),
+        "divisions": [{"name": k, "products": v}
+                      for k, v in sorted(divisions.items(), key=lambda kv: -kv[1])],
+        "products": rows,
+    }, None
+
+
 def sitemap_products(domain, deadline=None, product_paths=None):
     seen, urls = set(), []
     to_read = ["https://%s/sitemap.xml" % domain, "https://%s/sitemap_index.xml" % domain]
@@ -958,6 +1071,43 @@ def sitemap_products(domain, deadline=None, product_paths=None):
     if len(prod) < MIN_PRODUCTS:
         return None, ("the sitemap carries %d URLs under %s, too few to call a catalogue"
                       % (len(prod), "/" + "/, /".join(segs) + "/"))
+
+    # A PURELY NUMERIC LEAF SLUG CARRIES NO NAME AND NO DIVISION (03/09/2026).
+    # Every route above assumes the URL itself says something — a descriptive
+    # slug for the name, a path segment for the division. Some legacy
+    # database-driven sites (Swann Morton: /product/15.php, /product/185.php —
+    # a numeric row id, nothing else) break that assumption outright: reading
+    # the leaf segment the normal way produced "15.Php", "17.Php", "185.Php" —
+    # a page-number fragment dressed as a product name, not a data-quality
+    # problem in what was captured but a wrong-element problem in WHERE it was
+    # read from (crawl_supplier_site.py's own `seed_differentiator_map.py`
+    # docstring calls this out explicitly: a flat "Uncategorised" pair is a
+    # crawler question, not a mapping one).
+    #
+    # Checked live against swann-morton.co.uk, 03/09/2026: every product page
+    # publishes its real name in schema.org markup
+    # (<h1><span itemprop="name">…) and its own division as the first
+    # non-root entry of a breadcrumb trail — both confirmed identical in shape
+    # across five sampled ids spanning the id range (14, 101, 139, 176, 185).
+    # That is real, page-owned data, better than anything a URL could ever
+    # carry — not a guess dressed as one.
+    #
+    # Only fires when at least 80% of the matched product leaf slugs are pure
+    # digits (a URL that happens to end in one digit, e.g. "-2", is not this
+    # failure) — so a normal descriptive-slug site is never sent through the
+    # slower per-page read.
+    def _leaf_stem(u):
+        leaf = urllib.parse.urlparse(u).path.rstrip("/").rsplit("/", 1)[-1]
+        return re.sub(r"\.[a-zA-Z0-9]{1,5}$", "", leaf)
+
+    numeric_leaves = sum(1 for u in prod if re.match(r"^\d+$", _leaf_stem(u)))
+    if prod and numeric_leaves * 5 >= len(prod) * 4:
+        enriched, read_err = numeric_slug_products(domain, prod)
+        if enriched is not None:
+            return enriched, None
+        # Enrichment itself failed (site stopped answering) — fall through to
+        # the normal path-based read below rather than refusing outright; a
+        # flat, honestly-labelled range beats nothing.
 
     # A LANDING PAGE IS A PREFIX OF OTHER PAGES. This is the structural test, and
     # it is the one that matters: the old code took the last URL segment as a
