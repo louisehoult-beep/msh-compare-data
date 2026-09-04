@@ -64,6 +64,7 @@ REFS = {
     "company-match-overrides.json":     "ETH-DFD14F6D7",
     "open-tenders.json":        "ETH-DCEFAF9C5",
     "drug-tariff-part-ix.json": "ETH-D090550F8",
+    "tender-history.json":      "ETH-D12B82708",
     "mhra-alerts.json":         "ETH-D9D253BB8",
     "company-awards.json":     "ETH-D8F9201A9",
     "coverage-ledger.json":             "ETH-D1122007A",
