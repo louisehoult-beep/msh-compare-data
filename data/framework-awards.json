@@ -13,22 +13,1317 @@
  "source": "Find a Tender Service (OCDS 1.1)",
  "source_url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages",
  "licence": "Open Government Licence",
- "generated": "2026-09-03T11:09:49+00:00",
+ "generated": "2026-09-04T11:14:46+00:00",
  "window_last_run": {
-  "from": "2026-08-31",
-  "to": "2026-09-03"
+  "from": "2026-09-01",
+  "to": "2026-09-04"
  },
  "health_relevance_rule": "Kept if the buyer name matches NHS / Integrated Care Board / Health Board, or any CPV code begins 33 (medical equipment and pharmaceuticals) or 851 (health services). Bare 'Trust' is not a match (academy and housing trusts would flood the feed). CPV 852 (veterinary) and 853 (social work) excluded.",
  "evidence_caveat": "A supplier named on a framework award is evidence they CAN supply through that framework. It is NOT evidence of uptake, volume or market share at any trust. Do not convert these records into share-of-market claims.",
  "counts": {
-  "awards": 1147,
-  "framework_awards": 86,
-  "with_named_suppliers": 809,
-  "with_contract_end_date": 411,
-  "with_max_extent_date": 67,
-  "distinct_buyers": 383
+  "awards": 1208,
+  "framework_awards": 90,
+  "with_named_suppliers": 858,
+  "with_contract_end_date": 434,
+  "with_max_extent_date": 71,
+  "distinct_buyers": 392
  },
  "awards": [
+  {
+   "ocid": "ocds-h6vhtk-066414",
+   "notice_id": "083801-2026",
+   "tag": [
+    "tenderUpdate"
+   ],
+   "published": "2026-09-04",
+   "title": "Technology Enabled Care",
+   "buyer": {
+    "name": "Norfolk County Council",
+    "ppon": "PDYH-3246-XWTR"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "33000000",
+    "85000000"
+   ],
+   "matched_by": "cpv_33_medical",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083801-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06cd4e",
+   "notice_id": "083692-2026",
+   "tag": [
+    "tenderUpdate"
+   ],
+   "published": "2026-09-04",
+   "title": "The Provision of Lancashire and South Cumbria Adult Teledermatology Service",
+   "buyer": {
+    "name": "NHS Lancashire and South Cumbria Integrated Care Board",
+    "identifier": "GB-NHS-QE1"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "85100000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083692-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-05959d",
+   "notice_id": "083803-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Framework for Non-Healthcare Substance Use Services",
+   "buyer": {
+    "name": "London Borough of Hackney",
+    "ppon": "PRZC-5592-DDDV"
+   },
+   "is_framework": true,
+   "suppliers": [
+    {
+     "name": "ADFAM NATIONAL",
+     "companies_house": "03328628"
+    },
+    {
+     "name": "ST GILES TRUST",
+     "companies_house": "02175146"
+    },
+    {
+     "name": "TURNING POINT (SERVICES) LIMITED",
+     "companies_house": "02166697"
+    }
+   ],
+   "supplier_count": 3,
+   "contracts": [
+    {
+     "start": "2026-07-21",
+     "end": "2028-03-31",
+     "max_extent": "2030-03-31",
+     "signed": "2026-07-21",
+     "value": 1040000,
+     "currency": "GBP"
+    },
+    {
+     "start": "2026-05-19",
+     "end": "2028-03-31",
+     "max_extent": "2030-03-31",
+     "signed": "2026-05-19",
+     "value": 910000,
+     "currency": "GBP"
+    },
+    {
+     "start": "2026-04-23",
+     "end": "2028-03-31",
+     "max_extent": "2030-03-31",
+     "signed": "2026-04-23",
+     "value": 485000,
+     "currency": "GBP"
+    },
+    {
+     "start": "2026-04-23",
+     "end": "2028-03-31",
+     "max_extent": "2030-03-31",
+     "signed": "2026-04-23",
+     "value": 485000,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "33000000",
+    "79611000",
+    "85300000"
+   ],
+   "matched_by": "cpv_33_medical",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083803-2026",
+   "framework": {
+    "method": "withAndWithoutReopeningCompetition",
+    "type": "closed",
+    "open_scheme": true,
+    "scheme_end": "2030-03-31"
+   }
+  },
+  {
+   "ocid": "ocds-h6vhtk-05d7ab",
+   "notice_id": "083796-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "UKHSA Diagnostics & Research Open Framework",
+   "buyer": {
+    "name": "Secretary of State for Health and Social Care acting as part of the Crown through UK Health Security Agency",
+    "ppon": "PBMQ-7576-DVGW"
+   },
+   "is_framework": true,
+   "suppliers": [
+    {
+     "name": "20/30 Labs",
+     "ppon": "PQNX-9288-CCWJ"
+    },
+    {
+     "name": "2BScientific Limited",
+     "ppon": "PZVY-2132-JHZV"
+    },
+    {
+     "name": "A.Menarini Diagnostics Ltd",
+     "ppon": "PQGR-5449-DBWT"
+    },
+    {
+     "name": "Abbott Laboratories Limited",
+     "ppon": "PMDD-3581-DNZY"
+    },
+    {
+     "name": "Abbott Rapid Diagnostics Limited",
+     "ppon": "PZJQ-2654-CJDN"
+    },
+    {
+     "name": "AB Scientific Limited",
+     "ppon": "PRZV-1967-QPWV"
+    },
+    {
+     "name": "Agena Bioscience GmbH",
+     "ppon": "PZRB-3687-YPMR"
+    },
+    {
+     "name": "Agilent Technologies LDA UK Ltd",
+     "ppon": "PCQP-6172-GDRX"
+    },
+    {
+     "name": "Alpha Laboratories Ltd",
+     "ppon": "PJHL-7748-MGYH"
+    },
+    {
+     "name": "Altona Diagnostics UK Ltd.",
+     "ppon": "PVBT-5658-YYLH"
+    },
+    {
+     "name": "ARGENTA INNOVATIVE LABS LTD",
+     "ppon": "PVNM-6373-JDCD"
+    },
+    {
+     "name": "Aspect Scientific Ltd.",
+     "ppon": "PYMY-5262-PYQY"
+    },
+    {
+     "name": "BECKMAN COULTER UNITED KINGDOM LIMITED",
+     "ppon": "PNMP-6938-NQRL"
+    },
+    {
+     "name": "Becton, Dickinson U.K. Limited",
+     "ppon": "PHZZ-3496-WYWM"
+    },
+    {
+     "name": "BioConnections Ltd",
+     "ppon": "PXHN-2277-ZBHH"
+    },
+    {
+     "name": "BIO - DIAGNOSTICS LIMITED",
+     "ppon": "PTDP-5669-RPBH"
+    },
+    {
+     "name": "Biomerieux UK Limited",
+     "ppon": "PNBQ-5352-PZLX"
+    },
+    {
+     "name": "Bio-Rad Laboratories Limited",
+     "ppon": "PWVN-1823-NTCN"
+    },
+    {
+     "name": "Bruker UK Limited",
+     "ppon": "PDGH-5627-XXXQ"
+    },
+    {
+     "name": "Cambridge Bioscience",
+     "ppon": "PQYB-6944-HDYM"
+    },
+    {
+     "name": "Camlab Limited",
+     "ppon": "PJXC-6129-JLWW"
+    },
+    {
+     "name": "Cepheid",
+     "ppon": "PTXD-3325-QHRW"
+    },
+    {
+     "name": "Cerescom Limited",
+     "ppon": "PHMY-8617-XBJP"
+    },
+    {
+     "name": "Chirus Limited",
+     "ppon": "PGTC-2137-GWTL"
+    },
+    {
+     "name": "Connect2pharma Ltd",
+     "ppon": "PYJM-6146-MNBL"
+    },
+    {
+     "name": "Contained Air Solutions",
+     "ppon": "PQNX-4524-XWXW"
+    },
+    {
+     "name": "CROWTHORNE HI-TEC SERVICES LIMITED",
+     "ppon": "PDND-1322-NPGZ"
+    },
+    {
+     "name": "Diagnostics for the Real World Europe Limited",
+     "ppon": "PXYN-4176-VDZJ"
+    },
+    {
+     "name": "DiaSorin Ltd",
+     "ppon": "PQNL-3674-NNQY"
+    },
+    {
+     "name": "Don Whitley Scientific Ltd",
+     "ppon": "PCZX-2365-XRRZ"
+    },
+    {
+     "name": "E&O Laboratories Ltd",
+     "ppon": "PVXM-8562-YPWZ"
+    },
+    {
+     "name": "ELITech UK LTD",
+     "ppon": "PGLD-9665-YGJT"
+    },
+    {
+     "name": "Enigma Healthcare",
+     "ppon": "PWVJ-4867-DGJT"
+    },
+    {
+     "name": "Eurobio Scientific UK Ltd",
+     "ppon": "PNCH-5749-HPMX"
+    },
+    {
+     "name": "EUROIMMUN UK Ltd",
+     "ppon": "PVDQ-8135-ZWTT"
+    },
+    {
+     "name": "Greiner Bio-One Ltd",
+     "ppon": "PPDT-1811-GDNP"
+    },
+    {
+     "name": "Grifols UK Ltd.",
+     "ppon": "PDCT-8339-LZJG"
+    },
+    {
+     "name": "Hologic LTD",
+     "ppon": "PZBR-3269-JJND"
+    },
+    {
+     "name": "Home Health UK Ltd",
+     "ppon": "PGTX-7223-QZRV"
+    },
+    {
+     "name": "Hygeia Digital Healthcare Limited",
+     "ppon": "PDWY-1453-DLXP"
+    },
+    {
+     "name": "Illumina Cambridge Ltd",
+     "ppon": "PJYV-5767-DHDP"
+    },
+    {
+     "name": "Kore Technology",
+     "ppon": "PWGV-6283-MNXL"
+    },
+    {
+     "name": "Launch Diagnostics Ltd",
+     "ppon": "PWXJ-9391-PRWN"
+    },
+    {
+     "name": "Life Technologies Limited",
+     "ppon": "PNBB-8555-WJLQ"
+    },
+    {
+     "name": "Mast Group Ltd",
+     "ppon": "PDJD-3659-MXLG"
+    },
+    {
+     "name": "Medical Wire & Equipment Co (Bath) Ltd",
+     "ppon": "PVYY-8964-XCLX"
+    },
+    {
+     "name": "MedScience previously known as Pharmed UK",
+     "ppon": "PMPD-2476-DDQG"
+    },
+    {
+     "name": "Mettler Toledo Ltd",
+     "ppon": "PPGW-8915-NBGV"
+    },
+    {
+     "name": "Microbial Genomics Ltd (Trading as MicrobesNG)",
+     "ppon": "PMRY-1224-CWGG"
+    },
+    {
+     "name": "North England Laboratory Supplies",
+     "ppon": "PBVB-1382-JJZL"
+    },
+    {
+     "name": "Ortho Clinical Diagnostics",
+     "ppon": "PGMP-7671-RGXV"
+    },
+    {
+     "name": "Oxford Biosystems Ltd",
+     "ppon": "PPWX-5163-QXYZ"
+    },
+    {
+     "name": "Preventx Limited",
+     "ppon": "PLCN-3361-NJCD"
+    },
+    {
+     "name": "Pro-Lab Diagnostics",
+     "ppon": "PDDD-3565-BTZH"
+    },
+    {
+     "name": "Promega UK Ltd",
+     "ppon": "PXJY-2454-CZWD"
+    },
+    {
+     "name": "QIAGEN LTD",
+     "ppon": "PBVC-2777-GXZD"
+    },
+    {
+     "name": "R-Biopharm Rhone Ltd",
+     "ppon": "PHLN-4748-CDLR"
+    },
+    {
+     "name": "REAL Digital International Ltd",
+     "ppon": "PRHW-6698-CMCJ"
+    },
+    {
+     "name": "Revvity (UK) Limited",
+     "ppon": "PQWR-2744-NHDX"
+    },
+    {
+     "name": "Roche Diagnostics Limited",
+     "ppon": "PQLB-3489-HLNY"
+    },
+    {
+     "name": "Sarstedt Ltd",
+     "ppon": "PHHL-7384-BYND"
+    },
+    {
+     "name": "Scientific Laboratory Supplies Ltd",
+     "ppon": "PTYH-6768-JVZP"
+    },
+    {
+     "name": "Sebia UK",
+     "ppon": "PHGH-2298-BBWM"
+    },
+    {
+     "name": "Serosep UK",
+     "ppon": "PRBT-4334-NXMP"
+    },
+    {
+     "name": "Shimadzu UK Ltd",
+     "ppon": "PHMJ-4643-ZWBH"
+    },
+    {
+     "name": "Siemens Healthcare Diagnostics Limited",
+     "ppon": "PLMC-6337-BHDM"
+    },
+    {
+     "name": "Source Bio International Ltd",
+     "ppon": "PDTH-8893-GTCW"
+    },
+    {
+     "name": "SpeeDx Ltd",
+     "ppon": "PLQB-9995-NRPY"
+    },
+    {
+     "name": "Sterilab Services",
+     "ppon": "PHTW-6119-ZWRN"
+    },
+    {
+     "name": "SureScreen Diagnostics Ltd",
+     "ppon": "PLTM-6213-LMVW"
+    },
+    {
+     "name": "Sussex Biologicals Limited",
+     "ppon": "PLTV-9494-JGNJ"
+    },
+    {
+     "name": "Sysmex UK Ltd",
+     "ppon": "PVLG-2171-HRJQ"
+    },
+    {
+     "name": "Takara Bio Europe SAS",
+     "ppon": "PTDG-9618-PZXM"
+    },
+    {
+     "name": "Tanner Pharma",
+     "ppon": "PJJJ-6481-XZJL"
+    },
+    {
+     "name": "Tecan UK",
+     "ppon": "PBYZ-2364-XBRT"
+    },
+    {
+     "name": "Technopath Distribution",
+     "ppon": "PYBC-6237-DXNL"
+    },
+    {
+     "name": "The Binding Site Group Limited",
+     "ppon": "PCHR-7855-YRJX"
+    },
+    {
+     "name": "Thermo Fisher Diagnostics Ltd",
+     "ppon": "PMCY-6157-TYDD"
+    },
+    {
+     "name": "Una Health Ltd",
+     "ppon": "PXCM-8593-XDLV"
+    },
+    {
+     "name": "VH Bio Ltd",
+     "ppon": "PYCR-3696-LBBM"
+    },
+    {
+     "name": "VWR International Ltd",
+     "ppon": "PGZX-9276-ZYJP"
+    },
+    {
+     "name": "Be Scientific Limited",
+     "ppon": "PVHX-9411-QCJQ"
+    },
+    {
+     "name": "BioGene Limited",
+     "ppon": "PDYY-4136-PYHH"
+    },
+    {
+     "name": "Bio Molecular Systems Ltd",
+     "ppon": "PWVG-4525-NYXD"
+    },
+    {
+     "name": "EUROFINS GENOMICS UK LIMITED",
+     "ppon": "PBHC-9469-NGRH"
+    },
+    {
+     "name": "Fisher Scientific UK LTD",
+     "ppon": "PZVH-7765-WYMH"
+    },
+    {
+     "name": "IDT",
+     "ppon": "PNTZ-9346-TLNH"
+    },
+    {
+     "name": "New England Biolabs (UK) Ltd",
+     "ppon": "PNJB-5677-LNNZ"
+    },
+    {
+     "name": "Oxford Nanopore Technologies Ltd",
+     "ppon": "PNQY-3648-RQHN"
+    },
+    {
+     "name": "PCR Biosystems Ltd",
+     "ppon": "PCMR-7285-NHVQ"
+    },
+    {
+     "name": "QCMD",
+     "ppon": "PVBB-1293-PHCG"
+    },
+    {
+     "name": "Queen Mary University of London",
+     "ppon": "PZRH-9379-HRWX"
+    },
+    {
+     "name": "SPTLabtech",
+     "ppon": "PMBD-8859-HNHH"
+    }
+   ],
+   "supplier_count": 93,
+   "contracts": [],
+   "cpv": [
+    "33100000",
+    "33124000",
+    "33600000",
+    "38430000",
+    "38431000",
+    "38433100",
+    "38434000",
+    "38434500",
+    "38434510",
+    "38434520",
+    "38434540",
+    "38434550",
+    "38434570",
+    "38434580",
+    "38436100",
+    "38950000",
+    "50400000",
+    "50410000",
+    "50411000",
+    "50412000",
+    "50413000",
+    "50430000",
+    "50433000",
+    "71900000",
+    "73111000"
+   ],
+   "matched_by": "cpv_33_medical",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083796-2026",
+   "framework": {
+    "method": null,
+    "type": null,
+    "open_scheme": true,
+    "scheme_end": null
+   }
+  },
+  {
+   "ocid": "ocds-h6vhtk-06ba3d",
+   "notice_id": "083792-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Cycle Courier Service For Dental",
+   "buyer": {
+    "name": "KENT COMMUNITY HEALTH NHS FOUNDATION TRUST",
+    "ppon": "PHVC-1716-LBDJ"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "G-Fert LTD",
+     "companies_house": "15288146"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [],
+   "cpv": [
+    "85130000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083792-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f203",
+   "notice_id": "083789-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "NHSWYICB - Here for You Wakefield",
+   "buyer": {
+    "name": "NHS West Yorkshire Integrated Care Board",
+    "identifier": "GB-FTS-178294"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Touchstone - Leeds",
+     "identifier": "GB-FTS-186376"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-09-02",
+     "value": 4850580.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85100000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083789-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f200",
+   "notice_id": "083784-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Multi-disciplinary design fees",
+   "buyer": {
+    "name": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+    "identifier": "GB-NHS-RGT"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "LSI ARCHITECTS (DESIGN) LIMITED",
+     "companies_house": "08842621"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-09-04",
+     "end": "2027-09-03",
+     "max_extent": null,
+     "signed": "2026-09-01",
+     "value": 89950.72,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "79400000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083784-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1fa",
+   "notice_id": "083778-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "BINDER CB170 CO₂ incubators,",
+   "buyer": {
+    "name": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+    "identifier": "GB-NHS-RGT"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "LABCOLD LIMITED",
+     "companies_house": "00271055"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-09-04",
+     "end": "2026-12-03",
+     "max_extent": null,
+     "signed": "2026-09-02",
+     "value": 34946.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "33152000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083778-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1e8",
+   "notice_id": "083753-2026",
+   "tag": [
+    "tender"
+   ],
+   "published": "2026-09-04",
+   "title": "Planned and Preventative Maintenance of CCTV, Door Access and Control Systems and Intruder Alarms",
+   "buyer": {
+    "name": "Aneurin Bevan University Health Board",
+    "ppon": "PVLN-4733-WJBQ"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "35121700",
+    "35125300",
+    "42961100",
+    "45312200",
+    "50343000",
+    "50610000",
+    "79711000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083753-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-050087",
+   "notice_id": "083746-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "GGC0904 Professional Services - Estates Minor Works",
+   "buyer": {
+    "name": "NHS Greater Glasgow and Clyde",
+    "identifier": "GB-FTS-3524"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "71242000",
+    "71314000",
+    "71314100",
+    "71314200",
+    "71314300",
+    "71321300",
+    "71334000",
+    "71530000",
+    "71541000",
+    "79412000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083746-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1e3",
+   "notice_id": "083743-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "he Referapatient pPlatform is a web-based regional referral management system",
+   "buyer": {
+    "name": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+    "identifier": "GB-NHS-RGT"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "BLOOMSBURY HEALTH LIMITED",
+     "companies_house": "08298089"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-09-04",
+     "end": "2027-09-03",
+     "max_extent": null,
+     "signed": "2026-09-03",
+     "value": 12816.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "72000000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083743-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1e0",
+   "notice_id": "083740-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Comprehensive Service & Maintenance",
+   "buyer": {
+    "name": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+    "identifier": "GB-NHS-RGT"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "IMPACT MEDICAL LIMITED",
+     "companies_house": "04172089"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-09-04",
+     "end": "2027-09-03",
+     "max_extent": null,
+     "signed": "2026-09-03",
+     "value": 28750,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "50000000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083740-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-05e5c7",
+   "notice_id": "083732-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Maintenance of Water Treatment Systems including Supply and Delivery of Salt relating to a range of Hospital Equip including Decontamination and Renal Equipment, Chemical and Microbiological Water Testing and Provision of Associated Testing Consumables",
+   "buyer": {
+    "name": "Belfast Health & Social Care Trust",
+    "ppon": "PLQJ-5727-JCLR"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "CHEMICAL TREATMENT SERVICES (IRELAND) LIMITED",
+     "companies_house": "NI017799"
+    },
+    {
+     "name": "Veolia Water Technologies",
+     "ppon": "PPXG-2114-XCQQ"
+    },
+    {
+     "name": "THEATRE AND ENDOSCOPY SERVICE TECHNICIANS LIMITED",
+     "companies_house": "06044244"
+    }
+   ],
+   "supplier_count": 3,
+   "contracts": [],
+   "cpv": [
+    "15872400",
+    "24000000",
+    "33698100",
+    "39137000",
+    "41000000",
+    "50000000"
+   ],
+   "matched_by": "cpv_33_medical",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083732-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-034719",
+   "notice_id": "083724-2026",
+   "tag": [
+    "awardUpdate",
+    "contractUpdate"
+   ],
+   "published": "2026-09-04",
+   "title": "National Framework Agreement for Teleradiology, Telepathology and Telemedicine Services",
+   "buyer": {
+    "name": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
+    "identifier": "GB-NHS-PGCG-2135-TXWL"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Awarded suppliers are stated in original F03 notice 2022/S 000-027423",
+     "companies_house": "0"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2022-09-15",
+     "value": 100000000,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85100000",
+    "85150000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083724-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1d6",
+   "notice_id": "083719-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Drug and alcohol treatment and recovery improvement",
+   "buyer": {
+    "name": "London Borough of Hammersmith and Fulham",
+    "identifier": "GB-FTS-182332"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Central & Northwest London NHS",
+     "identifier": "GB-FTS-186374"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-04-01",
+     "value": 160000.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85100000"
+   ],
+   "matched_by": "cpv_851_health_services",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083719-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1d3",
+   "notice_id": "083716-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Drug and Alcohol Treatment, Recovery and Improvement",
+   "buyer": {
+    "name": "London Borough of Hammersmith and Fulham",
+    "identifier": "GB-FTS-182332"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Turning Point",
+     "identifier": "GB-FTS-186373"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-04-01",
+     "value": 803450.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85100000"
+   ],
+   "matched_by": "cpv_851_health_services",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083716-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1d2",
+   "notice_id": "083715-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Residential detoxifiction & rehabilitation service for residents",
+   "buyer": {
+    "name": "London Borough of Hammersmith and Fulham",
+    "identifier": "GB-FTS-182332"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Cocoon Support Ltd, Trefoil House, Red Lion Lane Hemel Hempstead Hertfordshire",
+     "identifier": "GB-FTS-186372"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-04-01",
+     "value": 60000.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85144000"
+   ],
+   "matched_by": "cpv_851_health_services",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083715-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1d1",
+   "notice_id": "083713-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Residential detoxification rehabilitation service for residents",
+   "buyer": {
+    "name": "London Borough of Hammersmith and Fulham",
+    "identifier": "GB-FTS-182332"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "ANA Treatment Centres, Fleming House, Waterworks Road Farlington, Portsmouth, Hants",
+     "identifier": "GB-FTS-186370"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-04-01",
+     "value": 50000.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85144000"
+   ],
+   "matched_by": "cpv_851_health_services",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083713-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1d0",
+   "notice_id": "083712-2026",
+   "tag": [
+    "planning"
+   ],
+   "published": "2026-09-04",
+   "title": "NHS Regional & Local Insight",
+   "buyer": {
+    "name": "NHS England",
+    "ppon": "PDPT-3135-BWWY"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "72230000",
+    "72267000",
+    "72313000",
+    "79310000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083712-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1cf",
+   "notice_id": "083711-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Residential rehabilitation detoxification service",
+   "buyer": {
+    "name": "London Borough of Hammersmith and Fulham",
+    "identifier": "GB-FTS-182332"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Kairos Community Trust",
+     "identifier": "GB-FTS-186369"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-04-01",
+     "value": 30000.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85144000"
+   ],
+   "matched_by": "cpv_851_health_services",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083711-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1ce",
+   "notice_id": "083709-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Residential detoxificaton & Rehabilitation service for residents",
+   "buyer": {
+    "name": "London Borough of Hammersmith and Fulham",
+    "identifier": "GB-FTS-182332"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "The Nelson Trust",
+     "identifier": "GB-FTS-186368"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-03-19",
+     "value": 60000.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85144000"
+   ],
+   "matched_by": "cpv_851_health_services",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083709-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1cd",
+   "notice_id": "083708-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Residential detoxificaton & rehabilitation service for residents",
+   "buyer": {
+    "name": "London Borough of Hammersmith and Fulham",
+    "identifier": "GB-FTS-182332"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Phoenix House",
+     "identifier": "GB-FTS-186367"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-04-01",
+     "value": 50000.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85144000"
+   ],
+   "matched_by": "cpv_851_health_services",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083708-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1cc",
+   "notice_id": "083707-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Residential detoxificaton & rehabilitation service for residents",
+   "buyer": {
+    "name": "London Borough of Hammersmith and Fulham",
+    "identifier": "GB-FTS-182332"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Sanctury Banbury Ltd",
+     "identifier": "GB-FTS-186365"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-04-01",
+     "value": 80000.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85144000"
+   ],
+   "matched_by": "cpv_851_health_services",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083707-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1ca",
+   "notice_id": "083705-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Residential detoxificaton & rehabilitation service for residents",
+   "buyer": {
+    "name": "London Borough of Hammersmith and Fulham",
+    "identifier": "GB-FTS-182332"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Gladstone Rehab Clinic",
+     "identifier": "GB-FTS-186363"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-03-19",
+     "value": 66000.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85144000"
+   ],
+   "matched_by": "cpv_851_health_services",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083705-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1c7",
+   "notice_id": "083702-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-04",
+   "title": "Agency Social Workers",
+   "buyer": {
+    "name": "North East London NHS Foundation Trust",
+    "identifier": "GB-NHS-RAT"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "LEADERS IN CARE RECRUITMENT LIMITED",
+     "companies_house": "10977964"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-09-03",
+     "end": "2026-11-02",
+     "max_extent": null,
+     "signed": "2026-09-03",
+     "value": 13500,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85310000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083702-2026"
+  },
   {
    "ocid": "ocds-h6vhtk-06c613",
    "notice_id": "083370-2026",
@@ -483,12 +1778,12 @@
   },
   {
    "ocid": "ocds-h6vhtk-06f0d7",
-   "notice_id": "083275-2026",
+   "notice_id": "083473-2026",
    "tag": [
     "planning"
    ],
    "published": "2026-09-03",
-   "title": "715926485-UK1",
+   "title": "715926485 - Defence Healthy Child Program",
    "buyer": {
     "name": "Ministry of Defence",
     "ppon": "PHVX-4316-ZVGZ"
@@ -502,7 +1797,7 @@
     "85323000"
    ],
    "matched_by": "cpv_851_health_services",
-   "url": "https://www.find-tender.service.gov.uk/Notice/083275-2026"
+   "url": "https://www.find-tender.service.gov.uk/Notice/083473-2026"
   },
   {
    "ocid": "ocds-h6vhtk-06f0d5",
@@ -614,6 +1909,1445 @@
    ],
    "matched_by": "buyer_name",
    "url": "https://www.find-tender.service.gov.uk/Notice/083254-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f0a6",
+   "notice_id": "083539-2026",
+   "tag": [
+    "tenderUpdate"
+   ],
+   "published": "2026-09-03",
+   "title": "Occupational Health, Employee Assistance Programme and Associated Services",
+   "buyer": {
+    "name": "Skills Development Scotland Ltd",
+    "identifier": "GB-FTS-134601"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "85147000"
+   ],
+   "matched_by": "cpv_851_health_services",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083539-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-067c1b",
+   "notice_id": "083588-2026",
+   "tag": [
+    "tenderUpdate"
+   ],
+   "published": "2026-09-03",
+   "title": "Outsourced ICT Infrastructure Management and associated Services",
+   "buyer": {
+    "name": "Worcestershire Acute Hospitals NHS Trust",
+    "ppon": "PPWB-7691-MHZW"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "30000000",
+    "48800000",
+    "72000000",
+    "72100000",
+    "72200000",
+    "72222300",
+    "72253100",
+    "72253200",
+    "72300000",
+    "72317000",
+    "72322000",
+    "72500000",
+    "72510000",
+    "72600000",
+    "72700000",
+    "72800000",
+    "79400000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083588-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06841b",
+   "notice_id": "083399-2026",
+   "tag": [
+    "awardUpdate",
+    "contractUpdate"
+   ],
+   "published": "2026-09-03",
+   "title": "Provision of  a Cardiology Insourced Service (Echocardiograms) for Aneurin Bevan UHB",
+   "buyer": {
+    "name": "Aneurin Bevan University Health Board",
+    "identifier": "GB-FTS-186187"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Health Now Limited",
+     "identifier": "GB-FTS-86710"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-08-27",
+     "value": 1464183,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85100000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083399-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-059c19",
+   "notice_id": "083468-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "National Framework Agreement for the provision of Mental Health and Wellbeing Services",
+   "buyer": {
+    "name": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
+    "companies_house": "RJR"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Mind Balance Center Ltd",
+     "companies_house": "16622568"
+    },
+    {
+     "name": "OASIS HOMECARE LIMITED",
+     "companies_house": "15482425"
+    }
+   ],
+   "supplier_count": 2,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-09-02"
+    },
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-09-02"
+    }
+   ],
+   "cpv": [
+    "85100000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083468-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1bb",
+   "notice_id": "083679-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "PSR Direct Award C - QbTest ADHD Management System",
+   "buyer": {
+    "name": "KENT COMMUNITY HEALTH NHS FOUNDATION TRUST",
+    "identifier": "GB-FTS-141065"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Qbtech Limited",
+     "companies_house": "7344738"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-09-03",
+     "value": 173750.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "48100000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083679-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-066b74",
+   "notice_id": "083668-2026",
+   "tag": [
+    "planning"
+   ],
+   "published": "2026-09-03",
+   "title": "Hepatitis C Medicines ",
+   "buyer": {
+    "name": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+    "identifier": "GB-NHS-RQF"
+   },
+   "is_framework": true,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "33600000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083668-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-05a585",
+   "notice_id": "083646-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Provision of Falls Prevention, Rehabilitation and Recovery Services",
+   "buyer": {
+    "name": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
+    "identifier": "GB-NHS-RJR"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "HOMELINK HEALTHCARE LIMITED",
+     "companies_house": "09767951"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-09-03"
+    }
+   ],
+   "cpv": [
+    "85000000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083646-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1a5",
+   "notice_id": "083643-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "WSFT - Capital Projects - CCTV Drainage Survey for New Hospital Development",
+   "buyer": {
+    "name": "West Suffolk NHS Foundation Trust",
+    "ppon": "PZXH-6286-HYJQ"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Anglian Drainage Ltd",
+     "companies_house": "11380754"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-05-19",
+     "end": "2026-05-20",
+     "max_extent": null,
+     "signed": "2026-05-19",
+     "value": 18151.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "71335000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083643-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f149",
+   "notice_id": "083615-2026",
+   "tag": [
+    "awardUpdate",
+    "contractUpdate"
+   ],
+   "published": "2026-09-03",
+   "title": "Level 4 Escalation Support",
+   "buyer": {
+    "name": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+    "identifier": "GB-FTS-109"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "GRANT THORNTON",
+     "identifier": "GB-FTS-10875"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-04-14",
+     "end": "2027-03-31",
+     "max_extent": null,
+     "signed": "2026-09-03",
+     "value": 825000,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "72221000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083615-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f1a1",
+   "notice_id": "083613-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "All-age Early Intervention and Prevention Service for Eating Disorders",
+   "buyer": {
+    "name": "NHS DERBY AND DERBYSHIRE INTEGRATED CARE BOARD",
+    "identifier": "GB-FTS-175806"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "First Steps ED",
+     "identifier": "GB-FTS-186361"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-08-17",
+     "value": 540863,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85100000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083613-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06af70",
+   "notice_id": "083612-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "North Cumbria Acute Respiratory Infection Services",
+   "buyer": {
+    "name": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+    "identifier": "GB-NHS-QHM"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Primary Care Collaborative North Cumbria Limited",
+     "companies_house": "16034899"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-09-02",
+     "value": 318492,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85140000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083612-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f19d",
+   "notice_id": "083607-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Replacement of Orthoptic diagnostic and therapeutic device",
+   "buyer": {
+    "name": "KCH Interventional Facilities Management LLP",
+    "ppon": "PDWQ-2826-VTWP"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Grafton Optical Limited",
+     "companies_house": "00527806"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-08-19",
+     "end": "2027-08-18",
+     "max_extent": null,
+     "signed": "2026-08-19",
+     "value": 48003.6,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "33122000"
+   ],
+   "matched_by": "cpv_33_medical",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083607-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f199",
+   "notice_id": "083600-2026",
+   "tag": [
+    "tender"
+   ],
+   "published": "2026-09-03",
+   "title": "NHS South Yorkshire ICB Rotherham Severe Mental Illness(SMI) Living Well Service",
+   "buyer": {
+    "name": "NHS South Yorkshire Integrated Care Board",
+    "ppon": "PPTG-3156-TGWG"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "85312310"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083600-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f194",
+   "notice_id": "083594-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Grounds Maintenance Tractor and Accessories",
+   "buyer": {
+    "name": "West Suffolk NHS Foundation Trust",
+    "ppon": "PZXH-6286-HYJQ"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Hunt Forest Group Limited",
+     "companies_house": "11523682"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-04-22",
+     "end": "2027-04-21",
+     "max_extent": null,
+     "signed": "2026-04-17",
+     "value": 18000.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "16700000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083594-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f192",
+   "notice_id": "083592-2026",
+   "tag": [
+    "tender"
+   ],
+   "published": "2026-09-03",
+   "title": "Research and Creative Development and Delivery for Behaviour Change Stop Smoking Campaign in Greater Manchester",
+   "buyer": {
+    "name": "NHS Greater Manchester Integrated Care Board",
+    "ppon": "PTZW-1182-CBJJ"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "79341400"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083592-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f190",
+   "notice_id": "083587-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Provision of Medicine Supply",
+   "buyer": {
+    "name": "NORTHAMPTONSHIRE HEALTHCARE NHS FOUNDATION TRUST",
+    "identifier": "GB-FTS-158460"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Bestway National Chemists Limited",
+     "companies_house": "09225457"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2025-11-19",
+     "value": 300000,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85149000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083587-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f18a",
+   "notice_id": "083580-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Provision of Software for Drug Dispensing Services",
+   "buyer": {
+    "name": "NORTHAMPTONSHIRE HEALTHCARE NHS FOUNDATION TRUST",
+    "identifier": "GB-FTS-158460"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Medilogic UK LTD",
+     "companies_house": "05416181"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2025-11-19",
+     "value": 6000,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85100000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083580-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f187",
+   "notice_id": "083576-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Provision of Medicine Supply",
+   "buyer": {
+    "name": "NORTHAMPTONSHIRE HEALTHCARE NHS FOUNDATION TRUST",
+    "identifier": "GB-FTS-158460"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Bestway National Chemists Limited (Well Pharmacy)",
+     "companies_house": "9225457"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-01-21",
+     "value": 170000,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85100000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083576-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f181",
+   "notice_id": "083569-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Provision of GP Services",
+   "buyer": {
+    "name": "NORTHAMPTONSHIRE HEALTHCARE NHS FOUNDATION TRUST",
+    "identifier": "GB-FTS-158460"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Doctor PA LTD",
+     "companies_house": "09356355"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-01-21",
+     "value": 634000,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85100000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083569-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f17f",
+   "notice_id": "083567-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Provision of Sexual Health Service",
+   "buyer": {
+    "name": "NORTHAMPTONSHIRE HEALTHCARE NHS FOUNDATION TRUST",
+    "identifier": "GB-FTS-158460"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "LINCOLNSHIRE COMMUNITY HEALTH SERVICES NHS TRUST",
+     "identifier": "GB-FTS-186359"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": null,
+     "end": null,
+     "max_extent": null,
+     "signed": "2026-01-21",
+     "value": 80000,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85100000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083567-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-05ab4d",
+   "notice_id": "083562-2026",
+   "tag": [
+    "planningUpdate"
+   ],
+   "published": "2026-09-03",
+   "title": "Public Sector Construction Works 2",
+   "buyer": {
+    "name": "NHS Shared Business Services Limited",
+    "companies_house": "05280446"
+   },
+   "is_framework": true,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "45000000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083562-2026",
+   "framework": {
+    "method": "withAndWithoutReopeningCompetition",
+    "type": "open",
+    "open_scheme": null,
+    "scheme_end": null
+   }
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f17c",
+   "notice_id": "083561-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Purchase of 5 Anaesthetic Machines",
+   "buyer": {
+    "name": "KCH Interventional Facilities Management LLP",
+    "ppon": "PDWQ-2826-VTWP"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Draeger Medical UK Limited",
+     "companies_house": "04310199"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [],
+   "cpv": [
+    "33172100"
+   ],
+   "matched_by": "cpv_33_medical",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083561-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06c795",
+   "notice_id": "083538-2026",
+   "tag": [
+    "tender"
+   ],
+   "published": "2026-09-03",
+   "title": "UHB Managed Digital Content Service",
+   "buyer": {
+    "name": "University Hospitals Birmingham NHS Foundation Trust",
+    "ppon": "PWVL-6877-BXXV"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "79340000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083538-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f165",
+   "notice_id": "083537-2026",
+   "tag": [
+    "planningUpdate"
+   ],
+   "published": "2026-09-03",
+   "title": "Integrated Core Systems (ICS)",
+   "buyer": {
+    "name": "North West Ambulance Service NHS Trust",
+    "ppon": "PGTN-2617-YXZW"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "48000000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083537-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f168",
+   "notice_id": "083521-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "GMTS General Management education offer - Rosalind Franklin CMI",
+   "buyer": {
+    "name": "NHS England",
+    "ppon": "PDPT-3135-BWWY"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "TQ Education and Training Limited",
+     "ppon": "PNZT-7718-BXLY"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2027-09-01",
+     "end": "2029-08-31",
+     "max_extent": null,
+     "signed": "2026-08-28",
+     "value": 375000.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "80000000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083521-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-0564de",
+   "notice_id": "083515-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "North Central London ICB Mental Health Employment Support (Individual Placement & Support, Information Advice and Guidance, and Employment Advisers in NHS Talking Therapies)",
+   "buyer": {
+    "name": "NHS NORTH CENTRAL LONDON INTEGRATED CARE BOARD",
+    "identifier": "GB-NHS-QMJ"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "HESTIA HOUSING AND SUPPORT",
+     "companies_house": "02020165"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-04-01",
+     "end": "2029-03-31",
+     "max_extent": "2031-03-31",
+     "signed": "2026-04-01",
+     "value": 16244473,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "79600000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083515-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f15f",
+   "notice_id": "083506-2026",
+   "tag": [
+    "planning"
+   ],
+   "published": "2026-09-03",
+   "title": "Minimally Invasive Surgery",
+   "buyer": {
+    "name": "SUPPLY CHAIN COORDINATION LIMITED",
+    "ppon": "PLLH-1887-BMRL"
+   },
+   "is_framework": true,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "33100000",
+    "33112200",
+    "33140000",
+    "33141120",
+    "33141122",
+    "33141126",
+    "33161000",
+    "33162000",
+    "33168000",
+    "33168100",
+    "33169000",
+    "33169200",
+    "33184100",
+    "33641200",
+    "50400000",
+    "50420000",
+    "85121300"
+   ],
+   "matched_by": "cpv_33_medical",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083506-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f15d",
+   "notice_id": "083502-2026",
+   "tag": [
+    "tender"
+   ],
+   "published": "2026-09-03",
+   "title": "AHP Education Pathway Development Small and Vulnerable Professions",
+   "buyer": {
+    "name": "NHS England",
+    "ppon": "PDPT-3135-BWWY"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "80000000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083502-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f15b",
+   "notice_id": "083496-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Flu Vaccine Vouchers",
+   "buyer": {
+    "name": "The Pensions Regulator",
+    "ppon": "PCMB-7693-JMNG"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Optima Health UK Ltd",
+     "ppon": "PXGJ-9894-GVNQ"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-09-01",
+     "end": "2027-03-31",
+     "max_extent": "2029-03-31",
+     "signed": "2026-08-28",
+     "value": 15000,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85140000"
+   ],
+   "matched_by": "cpv_851_health_services",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083496-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f15a",
+   "notice_id": "083494-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Apollo System",
+   "buyer": {
+    "name": "Gloucestershire Health and Care NHS Foundation Trust",
+    "ppon": "PBGV-6466-NHDM"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Southern Scientific Limited",
+     "companies_house": "01800317"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-08-20",
+     "end": "2029-08-19",
+     "max_extent": null,
+     "signed": "2026-08-19",
+     "value": 10620.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "50421000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083494-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f159",
+   "notice_id": "083492-2026",
+   "tag": [
+    "tender"
+   ],
+   "published": "2026-09-03",
+   "title": "Trace, Evaluate and Reinforce (TracER)",
+   "buyer": {
+    "name": "Department for Transport",
+    "ppon": "PLTC-5358-LTWZ"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "09000000",
+    "14000000",
+    "15000000",
+    "18000000",
+    "19000000",
+    "22000000",
+    "24000000",
+    "31000000",
+    "33000000",
+    "34000000",
+    "35000000",
+    "38000000",
+    "42000000",
+    "43000000",
+    "50000000",
+    "60000000",
+    "65000000",
+    "71000000",
+    "73000000",
+    "75000000",
+    "76000000",
+    "77000000",
+    "79000000",
+    "90000000"
+   ],
+   "matched_by": "cpv_33_medical",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083492-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f147",
+   "notice_id": "083467-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "HCT - Howard Court, building 1A and 1B passenger lift replacement stages",
+   "buyer": {
+    "name": "Hertfordshire Community NHS Trust",
+    "ppon": "PTTC-1488-WBVZ"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "ILECS Limited",
+     "ppon": "PWWR-9642-WDCW"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-08-17",
+     "end": "2027-03-31",
+     "max_extent": null,
+     "signed": "2026-08-10",
+     "value": 15000.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "50750000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083467-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f143",
+   "notice_id": "083460-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Purchase of Multi-flow Regulators",
+   "buyer": {
+    "name": "Leeds Teaching Hospitals NHS Trust",
+    "ppon": "PNQG-8433-QXBP"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "OXYLITRE LIMITED",
+     "ppon": "PZPL-9768-VDCY"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-09-01",
+     "end": "2026-09-04",
+     "max_extent": null,
+     "signed": "2026-07-03",
+     "value": 11114.41,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "24111500"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083460-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f13f",
+   "notice_id": "083452-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "COSHH Workplace Gas Monitoring Services",
+   "buyer": {
+    "name": "Worcestershire Acute Hospitals NHS Trust",
+    "ppon": "PPWB-7691-MHZW"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Cairn Technology Ltd",
+     "companies_house": "03715724"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-09-01",
+     "end": "2028-08-31",
+     "max_extent": null,
+     "signed": "2026-09-01",
+     "value": 23990.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "71317200",
+    "90731500"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083452-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f13d",
+   "notice_id": "083450-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Modern Equivalent Asset Turnaround support",
+   "buyer": {
+    "name": "YORK AND SCARBOROUGH TEACHING HOSPITALS NHS FOUNDATION TRUST",
+    "identifier": "GB-NHS-RCB"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "HUNTER HEALTHCARE RESOURCING LIMITED",
+     "companies_house": "07600695"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-09-07",
+     "end": "2027-06-30",
+     "max_extent": null,
+     "signed": "2026-09-03",
+     "value": 257143,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "66171000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083450-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f138",
+   "notice_id": "083442-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "UKRI-6136 MRC 6MLC Dual-Energy X-ray Absorptiometry (DEXA) System",
+   "buyer": {
+    "name": "UK Research & Innovation (UKRI)",
+    "ppon": "PDQJ-7126-JDHG"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "RPS SERVICE LTD",
+     "ppon": "PNJX-3572-WBWJ"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-09-04",
+     "end": "2027-03-12",
+     "max_extent": null,
+     "signed": "2026-09-03",
+     "value": 78500.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "33111000"
+   ],
+   "matched_by": "cpv_33_medical",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083442-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f133",
+   "notice_id": "083435-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "CSOC Secure File Transfer Platform",
+   "buyer": {
+    "name": "NHS England",
+    "ppon": "PDPT-3135-BWWY"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Hexiosec Ltd",
+     "companies_house": "11223788"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-07-13",
+     "end": "2027-07-12",
+     "max_extent": null,
+     "signed": "2026-07-09",
+     "value": 20810.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "48000000",
+    "72000000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083435-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06ce77",
+   "notice_id": "083433-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Support services for the EPR - Sunrise 22.1",
+   "buyer": {
+    "name": "LIVERPOOL HEART AND CHEST HOSPITAL NHS FOUNDATION TRUST",
+    "identifier": "GB-NHS-RBQ"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "ALTERA HEALTHCARE (IT) UK LTD",
+     "companies_house": "07584643"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-08-08",
+     "end": "2029-08-07",
+     "max_extent": "2031-08-07",
+     "signed": "2026-08-07",
+     "value": 984366.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "72600000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083433-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f128",
+   "notice_id": "083417-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Fire Door Survey",
+   "buyer": {
+    "name": "The Christie NHS Foundation Trust",
+    "ppon": "PTTQ-9511-YPYH"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "TURNER & TOWNSEND PROJECT MANAGEMENT LIMITED",
+     "companies_house": "02165592"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-08-31",
+     "end": "2026-11-20",
+     "max_extent": null,
+     "signed": "2026-08-28",
+     "value": 93280.0,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "79311000",
+    "79311200"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083417-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f120",
+   "notice_id": "083407-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "Supply of Radiation Gloves",
+   "buyer": {
+    "name": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
+    "identifier": "GB-NHS-RWA"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "PROTECX MEDICAL LTD",
+     "companies_house": "04223007"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-09-01",
+     "end": "2027-08-31",
+     "max_extent": null,
+     "signed": "2026-08-26",
+     "value": 43255.2,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "35113400"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083407-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f11b",
+   "notice_id": "083394-2026",
+   "tag": [
+    "planning"
+   ],
+   "published": "2026-09-03",
+   "title": "Aids and Adaptations",
+   "buyer": {
+    "name": "Westminster City Council",
+    "ppon": "PJVD-6261-BPPJ"
+   },
+   "is_framework": false,
+   "suppliers": [],
+   "supplier_count": 0,
+   "contracts": [],
+   "cpv": [
+    "33196200",
+    "42416300",
+    "44115600",
+    "44115800",
+    "45000000",
+    "45211310",
+    "45262700",
+    "45262800",
+    "45300000",
+    "45332400",
+    "45400000",
+    "45421100",
+    "50700000",
+    "71630000"
+   ],
+   "matched_by": "cpv_33_medical",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083394-2026"
+  },
+  {
+   "ocid": "ocds-h6vhtk-06f117",
+   "notice_id": "083386-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-03",
+   "title": "MEH - PRIMA Subretinal Photovoltaic Implant System",
+   "buyer": {
+    "name": "Moorfields Eye Hospital NHS Foundation Trust",
+    "ppon": "PTPP-1281-DTGJ"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "La Science SAS",
+     "ppon": "PZMD-8638-RDPT"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [],
+   "cpv": [
+    "33190000"
+   ],
+   "matched_by": "buyer_name",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083386-2026"
   },
   {
    "ocid": "ocds-h6vhtk-06d162",
@@ -1581,39 +4315,6 @@
    ],
    "matched_by": "buyer_name",
    "url": "https://www.find-tender.service.gov.uk/Notice/083200-2026"
-  },
-  {
-   "ocid": "ocds-h6vhtk-06f0a6",
-   "notice_id": "083193-2026",
-   "tag": [
-    "tender"
-   ],
-   "published": "2026-09-02",
-   "title": "Occupational Health, Employee Assistance Programme and Associated Services",
-   "buyer": {
-    "name": "Skills Development Scotland Ltd",
-    "identifier": "GB-FTS-134601"
-   },
-   "is_framework": true,
-   "suppliers": [],
-   "supplier_count": 0,
-   "contracts": [],
-   "cpv": [
-    "33196200",
-    "72212190",
-    "85140000",
-    "85147000",
-    "85312300",
-    "85312320"
-   ],
-   "matched_by": "cpv_851_health_services",
-   "url": "https://www.find-tender.service.gov.uk/Notice/083193-2026",
-   "framework": {
-    "method": null,
-    "type": null,
-    "open_scheme": null,
-    "scheme_end": null
-   }
   },
   {
    "ocid": "ocds-h6vhtk-068c51",
@@ -7939,44 +10640,6 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/082244-2026"
   },
   {
-   "ocid": "ocds-h6vhtk-067c1b",
-   "notice_id": "082243-2026",
-   "tag": [
-    "tender"
-   ],
-   "published": "2026-08-28",
-   "title": "Outsourced ICT Infrastructure Management and associated Services",
-   "buyer": {
-    "name": "Worcestershire Acute Hospitals NHS Trust",
-    "ppon": "PPWB-7691-MHZW"
-   },
-   "is_framework": false,
-   "suppliers": [],
-   "supplier_count": 0,
-   "contracts": [],
-   "cpv": [
-    "30000000",
-    "48800000",
-    "72000000",
-    "72100000",
-    "72200000",
-    "72222300",
-    "72253100",
-    "72253200",
-    "72300000",
-    "72317000",
-    "72322000",
-    "72500000",
-    "72510000",
-    "72600000",
-    "72700000",
-    "72800000",
-    "79400000"
-   ],
-   "matched_by": "buyer_name",
-   "url": "https://www.find-tender.service.gov.uk/Notice/082243-2026"
-  },
-  {
    "ocid": "ocds-h6vhtk-06eeb3",
    "notice_id": "082242-2026",
    "tag": [
@@ -9499,43 +12162,6 @@
    ],
    "matched_by": "buyer_name",
    "url": "https://www.find-tender.service.gov.uk/Notice/081925-2026"
-  },
-  {
-   "ocid": "ocds-h6vhtk-06841b",
-   "notice_id": "081919-2026",
-   "tag": [
-    "award",
-    "contract"
-   ],
-   "published": "2026-08-27",
-   "title": "Provision of  a Cardiology Insourced Service (Echocardiograms) for Aneurin Bevan UHB",
-   "buyer": {
-    "name": "Aneurin Bevan University Health Board",
-    "identifier": "GB-FTS-186187"
-   },
-   "is_framework": false,
-   "suppliers": [
-    {
-     "name": "Health Now Limited",
-     "identifier": "GB-FTS-86710"
-    }
-   ],
-   "supplier_count": 1,
-   "contracts": [
-    {
-     "start": null,
-     "end": null,
-     "max_extent": null,
-     "signed": "2026-05-01",
-     "value": 1464183,
-     "currency": "GBP"
-    }
-   ],
-   "cpv": [
-    "85100000"
-   ],
-   "matched_by": "buyer_name",
-   "url": "https://www.find-tender.service.gov.uk/Notice/081919-2026"
   },
   {
    "ocid": "ocds-h6vhtk-06edc0",
@@ -29466,29 +32092,6 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/077834-2026"
   },
   {
-   "ocid": "ocds-h6vhtk-066414",
-   "notice_id": "077825-2026",
-   "tag": [
-    "tender"
-   ],
-   "published": "2026-08-14",
-   "title": "Technology Enabled Care",
-   "buyer": {
-    "name": "Norfolk County Council",
-    "ppon": "PDYH-3246-XWTR"
-   },
-   "is_framework": false,
-   "suppliers": [],
-   "supplier_count": 0,
-   "contracts": [],
-   "cpv": [
-    "33000000",
-    "85000000"
-   ],
-   "matched_by": "cpv_33_medical",
-   "url": "https://www.find-tender.service.gov.uk/Notice/077825-2026"
-  },
-  {
    "ocid": "ocds-h6vhtk-06e4f8",
    "notice_id": "077818-2026",
    "tag": [
@@ -31029,28 +33632,6 @@
    ],
    "matched_by": "buyer_name",
    "url": "https://www.find-tender.service.gov.uk/Notice/077454-2026"
-  },
-  {
-   "ocid": "ocds-h6vhtk-06cd4e",
-   "notice_id": "077453-2026",
-   "tag": [
-    "tenderUpdate"
-   ],
-   "published": "2026-08-14",
-   "title": "The Provision of Lancashire and South Cumbria Adult Teledermatology Service",
-   "buyer": {
-    "name": "NHS Lancashire and South Cumbria Integrated Care Board",
-    "identifier": "GB-NHS-QE1"
-   },
-   "is_framework": false,
-   "suppliers": [],
-   "supplier_count": 0,
-   "contracts": [],
-   "cpv": [
-    "85100000"
-   ],
-   "matched_by": "buyer_name",
-   "url": "https://www.find-tender.service.gov.uk/Notice/077453-2026"
   },
   {
    "ocid": "ocds-h6vhtk-06e3eb",
@@ -37819,28 +40400,6 @@
    ],
    "matched_by": "buyer_name",
    "url": "https://www.find-tender.service.gov.uk/Notice/075888-2026"
-  },
-  {
-   "ocid": "ocds-h6vhtk-059c19",
-   "notice_id": "075887-2026",
-   "tag": [
-    "tenderUpdate"
-   ],
-   "published": "2026-08-10",
-   "title": "National Framework Agreement for the provision of Mental Health and Wellbeing Services (Framework Re-opening)",
-   "buyer": {
-    "name": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
-    "identifier": "GB-NHS-RJR"
-   },
-   "is_framework": false,
-   "suppliers": [],
-   "supplier_count": 0,
-   "contracts": [],
-   "cpv": [
-    "85100000"
-   ],
-   "matched_by": "buyer_name",
-   "url": "https://www.find-tender.service.gov.uk/Notice/075887-2026"
   },
   {
    "ocid": "ocds-h6vhtk-06cf88",
