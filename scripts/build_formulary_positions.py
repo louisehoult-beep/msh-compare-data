@@ -38,7 +38,20 @@ THE VERIFICATION RULE (root rule 14 — state the rule in the file)
       - "Publisher abolished"   the body named on the document ceased to exist
                                 on 01/04/2026 (ICB mergers phase 1). Sourced to
                                 NHS England Digital's ODS change summary, not
-                                inferred from a redirect.
+                                inferred from a redirect. THE FLAG FOLLOWS THE
+                                PUBLISHER PRINTED ON THE DOCUMENT, NOT THE
+                                GEOGRAPHY. An ICB named as publisher and listed
+                                in the ODS abolition table sets the flag. An
+                                Area Prescribing Committee, an Integrated Care
+                                System partnership or a named acute trust does
+                                NOT, because those bodies were not abolished —
+                                a note on the row records the ICB change
+                                instead. This is why the Sussex APC and the
+                                Cambridgeshire and Peterborough ICS-and-trust
+                                formulary rows are not flagged while the
+                                Hertfordshire and West Essex, Norfolk and
+                                Waveney and Suffolk and North East Essex rows
+                                are.
       - "Past review date"      the document PRINTS a review date and that date
                                 is in the past today.
       - "Expired"               the publisher itself says the document has
@@ -76,6 +89,12 @@ from datetime import date
 OUT = pathlib.Path("data/formulary-positions.json")
 
 VERIFIED = "2026-09-04"
+
+# A bare "Mozilla/5.0" is rejected by some NHS site firewalls (the West
+# Yorkshire APC PDF answers 403 to it and 200 to a browser), so link checks
+# send a full browser string. A false 403 is as damaging as a missed 404.
+BROWSER_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+              "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36")
 
 # The 01/04/2026 ICB reconfiguration. Source, quoted in the page copy:
 # https://digital.nhs.uk/services/organisation-data-service/upcoming-code-changes/icb-mergers-2026-change-summary
@@ -124,6 +143,8 @@ RECORDS = [
         reviewDate="",
         devices="Low-cost formulary choices: FreeStyle Libre 2 Plus, Dexcom One+, CareSens Air. High-cost: FreeStyle Libre 3 Plus, Dexcom G7, Dexcom G6, Medtronic 3 & 4.",
         url="https://www.hweclinicalguidance.nhs.uk/clinical-policies/continuous-glucose-monitoring-adults-policy/",
+        abolished=True,
+        abolitionNote="NHS Hertfordshire and West Essex ICB was abolished on 01/04/2026 into NHS Central East ICB. The site carrying this position statement says so itself: \u201cThe last day of operation for Hertfordshire and West Essex ICB was 31 March 2026. The information on this website has not been updated since 31 March 2026.\u201d The guidance is therefore frozen, not maintained.",
     ),
     dict(
         body="Gloucestershire",
@@ -256,6 +277,8 @@ RECORDS = [
         reviewDate="",
         devices="",
         url="https://www.ipswichandeastsuffolkformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=6&SubSectionRef=06.01.06&SubSectionID=A100",
+        abolished=True,
+        abolitionNote="NHS Suffolk and North East Essex ICB was abolished on 01/04/2026 (ODS change summary). The three foundation-trust partners named on this joint formulary continue to exist.",
     ),
     dict(
         body="Suffolk & North East Essex",
@@ -266,6 +289,8 @@ RECORDS = [
         reviewDate="",
         devices="",
         url="https://suffolkandnortheastessex.icb.nhs.uk/wp-content/uploads/2024/09/SNEE-Home-glucose-monitoring-Final-V2-2024-1.pdf",
+        abolished=True,
+        abolitionNote="Published by the Integrated Medicines Optimisation Committee of NHS Suffolk and North East Essex ICB, abolished on 01/04/2026 (ODS change summary).",
     ),
     dict(
         body="Norfolk & Waveney",
@@ -276,6 +301,8 @@ RECORDS = [
         reviewDate="",
         devices="FreeStyle Libre 2 Plus and FreeStyle Libre 3 Plus switch pathways published.",
         url="https://www.nhsnorfolkandwaveneyicbformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=6&SubSectionRef=06.01.06&SubSectionID=B100",
+        abolished=True,
+        abolitionNote="NHS Norfolk and Waveney ICB was abolished on 01/04/2026 (ODS change summary). The joint ICB-and-trust formulary is still published under the abolished ICB's name.",
     ),
     dict(
         body="Cheshire & Merseyside",
@@ -373,7 +400,7 @@ RECORDS = [
         level="ICS + trusts (joint formulary)",
         publisher="Cambridgeshire and Peterborough Integrated Care System with Cambridge University Hospitals NHS Foundation Trust, North West Anglia NHS Foundation Trust, Royal Papworth Hospital NHS Foundation Trust and Cambridgeshire and Peterborough NHS Foundation Trust",
         doc="Cambridgeshire and Peterborough Joint Formulary",
-        statusNote="Live joint ICS-and-trust formulary. The CGM entry itself was not located at a stable direct URL on this run, so this row links the formulary root rather than a page we have not opened.",
+        statusNote="Live joint ICS-and-trust formulary. The CGM entry itself was not located at a stable direct URL on this run, so this row links the formulary root rather than a page we have not opened. Note the commissioner has changed: NHS Cambridgeshire and Peterborough ICB was abolished on 01/04/2026 and its functions passed to NHS Central East ICB, alongside Bedfordshire, Luton and Milton Keynes and Hertfordshire and West Essex. The formulary itself is published by the ICS with four foundation trusts, which is why this row is not flagged as an abolished publisher.",
         reviewDate="",
         devices="",
         url="https://www.cambridgeshireandpeterboroughformulary.nhs.uk/",
@@ -399,6 +426,96 @@ RECORDS = [
         devices="",
         url="",
         unverified=True,
+    ),
+    dict(
+        body="Staffordshire & Stoke-on-Trent",
+        level="ICB — Quality and Safety Committee",
+        publisher="NHS Staffordshire and Stoke-on-Trent ICB Quality and Safety Committee",
+        doc="Flash Glucose Monitoring and Dexcom One Commissioning Policy",
+        statusNote="Version 3, ratified by the ICB Quality and Safety Committee on 11 August 2023 and issued the same day; first issued 25 April 2019. The document prints its review date as \u201cThree years from issue date unless significant changes are required\u201d, which is 11/08/2026.",
+        reviewDate="11/08/2026",
+        devices="FreeStyle Libre 2 \u2014 isCGM via the reader, rtCGM via the LibreLink app from July 2023. Dexcom ONE \u2014 rtCGM, same criteria as flash but usable from age 2. Specialist initiation, then primary care continues prescribing beyond the provider's 6-month review. Eligibility is type 1 needing intensive monitoring more than 8 times a day, any diabetes on haemodialysis and insulin, cystic-fibrosis-related diabetes on insulin, and pregnancy in type 1.",
+        url="https://staffsstoke.icb.nhs.uk/your-nhs-integrated-care-board/our-publications/governance-handbook/all-policies/commissioning/flash-glucose-and-dexcom-one-commissoning-policy-v3-aug-2023/?layout=file",
+    ),
+    dict(
+        body="Birmingham & Solihull",
+        level="ICB \u2014 Integrated Medicines Optimisation Committee (via DMMAG)",
+        publisher="Diabetes Medicines Management Advisory Group (DMMAG) on behalf of the Birmingham and Solihull (BSol) Integrated Medicines Optimisation Committee",
+        doc="BSol CGM Device Comparison Table",
+        statusNote="Version 1.2, publication date July 2024. The document prints \u201cReview date: 2 years or sooner if needed\u201d, which is July 2026. Prices are quoted from the Drug Tariff, May 2024.",
+        reviewDate="July 2026",
+        devices="Four devices, all \u201cfirst line option in line with ICB policy\u201d: FreeStyle Libre 2 (age 4+, \u00a3912.50/yr), FreeStyle Libre 2 Plus (age 2+, \u00a3912.50/yr), Dexcom ONE (age 2+, \u00a3913.50/yr including 4 transmitters) and Dexcom ONE+ (age 2+, \u00a3911.42/yr). The table records FreeStyle Libre 2 and Dexcom ONE as being discontinued within 12 months, with clinicians to upgrade patients to the Plus and ONE+ versions on repeat prescription.",
+        url="https://www.birminghamandsurroundsformulary.nhs.uk/docs/files/CGM%20Device%20Comparison%20Table%20July%202024.pdf",
+    ),
+    dict(
+        body="Black Country",
+        level="ICB formulary",
+        publisher="NHS Black Country ICB \u2014 Black Country Formulary, chapter 06.01.06",
+        doc="Black Country Formulary 06.01.06 \u2014 Diagnostic and monitoring agents for diabetes mellitus",
+        statusNote="Live formulary entry. CGM is Formulary for eligible type 1 patients and for type 2 in line with RMOC criteria, referencing the NHS England national funding arrangements for relevant diabetes patients.",
+        reviewDate="",
+        devices="CareSens Air, Dexcom ONE and Dexcom ONE+, FreeStyle Libre 2 and FreeStyle Libre 2 Plus \u2014 all Formulary. The chapter carries two supply warnings in the publisher's own words: Dexcom ONE \u201cwill be removed from the drug tariff as of 31st March 2026\u201d with patients to transition to ONE+ before the end of December 2025 and new prescriptions to be ONE+, and \u201cFreestyle Libre 2 will be discontinued by August 2025\u201d.",
+        url="https://www.blackcountryformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=6&SubSectionRef=06.01.06&SubSectionID=A100",
+    ),
+    dict(
+        body="Leicester, Leicestershire & Rutland",
+        level="Area Prescribing Committee",
+        publisher="Leicester, Leicestershire and Rutland Area Prescribing Committee (LLR APC) Medicines Formulary",
+        doc="LLR APC Formulary 06.01.06 \u2014 Blood glucose monitoring",
+        statusNote="Live formulary entry. Both devices are approved \u201cwhere a patient meets the criteria detailed in the LLR APC position statement\u201d. The chapter is explicitly closed: \u201cNo other CGM sensors currently approved for use in Leicestershire.\u201d",
+        reviewDate="",
+        devices="FreeStyle Libre 2 Plus and Dexcom ONE+ only. This is one of the most restrictive CGM formularies captured here \u2014 no other sensor is approved.",
+        url="https://www.leicestershireformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=6&SubSectionRef=06.01.06&SubSectionID=B100",
+    ),
+    dict(
+        body="Devon",
+        level="ICB formulary \u2014 published on two place-based sites",
+        publisher="Devon Formulary and Referral Website (NHS Devon), North & East and South & West",
+        doc="Devon Formulary 6.1.7 \u2014 Continuous Glucose Monitors (CGM)",
+        statusNote="Page last updated 18 October 2024. The page states of itself: \u201cThis page is currently under review.\u201d The North & East and South & West sites publish the same CGM chapter, so this is one Devon position, not two \u2014 recorded as one row rather than inflating the count.",
+        reviewDate="",
+        devices="Dexcom ONE+ (rtCGM, age 2+, 10-day sensor, \u00a324.97 per sensor, \u00a3911.41 a year) and FreeStyle Libre 2 Plus (age 2+, 15-day sensor, \u00a337.50 per sensor, \u00a3912.50 a year; isCGM with the reader, rtCGM with the LibreLink app, and rtCGM via the Omnipod 5 app when used as part of a hybrid closed loop with the Omnipod 5 pump). Both amber \u2014 specialist teams usually initiate, but initiation by confident primary care clinicians is accepted. Routinely commissioned for all type 1 and insulin-treated type 3c, and for type 2 meeting the local commissioning policy.",
+        url="https://northeast.devonformularyguidance.nhs.uk/formulary/chapters/6-endocrine/6-1-drugs-used-in-diabetes/6-1-7-continuous-glucose-monitors-cgm",
+    ),
+    dict(
+        body="Dorset",
+        level="ICB formulary + Diabetes Clinical Network",
+        publisher="NHS Dorset \u2014 Dorset Formulary, chapter 06.01.06 Continuous Glucose Monitoring",
+        doc="Dorset Formulary 06.01.06 \u2014 Continuous Glucose Monitoring (isCGM & rtCGM)",
+        statusNote="Live formulary entry carrying a \u201cCommissioning statement on the use of prescribable continuous glucose monitoring (CGM) sensors April 2026\u201d. ACCESS IS NARROWING: the chapter states that \u201cthe Diabetes Clinical Network has now approved an updated version of the NHS Dorset policy which will reduce access to CGM in type 2 diabetes\u201d, with SystmOne searches issued so PCNs can identify people prescribed CGM outside commissioning guidance. NHS Dorset audits new requests and asks practices to decline recommendations that fall outside the statement.",
+        reviewDate="",
+        devices="Formulary: FreeStyle Libre 2 Plus, Dexcom ONE+ and GlucoRx Aidex. FreeStyle Libre 3 Plus is Formulary for HYBRID CLOSED LOOP ONLY, age 2 and over, and only for use with the mylife Loop AID system. Primary care must code which specialist initiated the request and the qualifying diagnosis at first prescription.",
+        url="https://www.dorsetformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=6&SubSectionRef=06.01.06&SubSectionID=A100",
+    ),
+    dict(
+        body="Herefordshire & Worcestershire",
+        level="ICB formulary + four commissioning policies",
+        publisher="NHS Herefordshire and Worcestershire — Herefordshire & Worcestershire Formulary, chapter 06.01.06",
+        doc="Herefordshire & Worcestershire Formulary 06.01.06 — Diagnostic and monitoring agents for diabetes mellitus",
+        statusNote="Live formulary entry. Unusually, the position is split across FOUR separate commissioning policies rather than one: real-time CGM in adults, intermittently scanned (flash) CGM in adults, CGM during pregnancy for people with insulin-treated diabetes, and CGM in children and young people. Every device is traffic-lighted RESTRICTED, and each carries all four policies.",
+        reviewDate="",
+        devices="Dexcom ONE (being replaced by ONE Plus), Dexcom ONE Plus, FreeStyle Libre 2 (being replaced by 2 Plus), FreeStyle Libre 2 Plus, FreeStyle Libre 3 and FreeStyle Libre 3 Plus — all Restricted. Both FreeStyle Libre 3 products are restricted to people living with type 1 diabetes only. The formulary records FreeStyle Libre 3 as discontinued in December 2025.",
+        url="https://www.hereworcsformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=6&SubSectionRef=06.01.06&SubSectionID=A100",
+    ),
+    dict(
+        body="Shropshire, Telford & Wrekin",
+        level="ICB commissioning policy \u2014 written with named trusts",
+        publisher="NHS Shropshire, Telford and Wrekin \u2014 Medicines Management Team, Delivery and Transformation",
+        doc="Commissioning Policy: Continuous Glucose Monitoring for adults with insulin-treated diabetes (including pregnancy)",
+        statusNote="Version 1, approval date 08/01/2024, review date printed on the document as 08/01/2026. Authored by Claire Hand, Lead Medicines Optimisation Pharmacy Technician. Consulted with diabetes consultants and lead diabetes nurses at Shrewsbury and Telford Hospitals, the adult diabetes lead at Shropshire Community Health Trust, and the STW Diabetes Clinical Advisory Group \u2014 so the named trusts are on the face of the policy, not just the ICB.",
+        reviewDate="08/01/2026",
+        devices="Prescribable CGM \u2014 FreeStyle Libre 2 (isCGM with the reader, rtCGM with a smartphone) and Dexcom ONE (rtCGM) \u2014 can be initiated in any care setting. Specialist CGM such as Dexcom G6 and the Guardian 4 sensor sits outside that route. All individuals with type 1 are eligible; type 2 must meet stated criteria. Where several formulary devices meet the person's needs, the lowest-cost one is offered; use is reviewed every 6 months where possible.",
+        url="https://www.shropshiretelfordandwrekin.nhs.uk/wp-content/uploads/20240129-CGM-for-Adults-with-insulin-treated-diabetes-including-pregnancy.pdf",
+    ),
+    dict(
+        body="Somerset",
+        level="ICB formulary \u2014 service delivered by a named trust",
+        publisher="NHS Somerset \u2014 Somerset Joint Formulary, chapter 06.01.06 Continuous glucose monitoring",
+        doc="Somerset Formulary 06.01.06 \u2014 Continuous glucose monitoring (CGM)",
+        statusNote="Live formulary entry. CGM is \u201cusually managed via SFT Diabetes Intermediate Care\u201d \u2014 Somerset NHS Foundation Trust, named on the formulary as the delivering service. Approved for all type 1 and type 2 patients on multiple daily insulin injections meeting stated criteria: recurrent or severe hypoglycaemia, impaired hypoglycaemia awareness, a condition or disability preventing capillary monitoring, needing to self-measure at least 8 times a day, or insulin-treated type 2 who would otherwise need a care worker to monitor.",
+        reviewDate="",
+        devices="Nine rtCGM sensors on formulary \u2014 the widest CGM formulary captured here: FreeStyle Libre 2 Plus (15-day), FreeStyle Libre 3 Plus (15-day), Dexcom ONE+ (10-day), GlucoRx Aidex (15-day), Accu-Chek SmartGuide (14-day), ALLY (15-day), CareSens Air (15-day), Glucomen iCan (15-day) and Sibionics GS3-R (14-day). FreeStyle Libre 2 is listed Non Formulary, marked discontinued.",
+        url="https://www.somersetformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=6&SubSectionRef=06.01.06&SubSectionID=E100",
     ),
 ]
 
@@ -451,6 +568,12 @@ def build():
     for r in RECORDS:
         r = dict(r)
         r["status"] = derive_status(r)
+        # An abolition note is appended to the row's own wording rather than
+        # replacing it: the document still says what it says, and the reader
+        # needs both facts.
+        if r.get("abolitionNote"):
+            r["statusNote"] = (r.get("statusNote", "").rstrip()
+                               + " " + r["abolitionNote"]).strip()
         r["verified"] = VERIFIED
         rows.append([r.get(k, "") for k in SCHEMA])
 
@@ -499,7 +622,7 @@ def check_links():
         if not url:
             print("SKIP (no url, status Not verified)  %s" % r["body"])
             continue
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        req = urllib.request.Request(url, headers={"User-Agent": BROWSER_UA})
         try:
             with urllib.request.urlopen(req, timeout=40) as resp:
                 code = resp.getcode()
