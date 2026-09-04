@@ -235,9 +235,12 @@ reverted by the next weekly refresh, because a generated file always wins.
 
 Draft each trust as its own JSON file, merge, then gate. **A push to this repo
 is a live publish** (root rule 13), so `verify.py` must exit 0 first, and the
-`pre-push` hook runs it again. If another session is working in the shared
-checkout — common — do not rebase there: `git rebase` refuses on a dirty tree,
-and stashing another session's in-flight files risks losing them. Use a
-throwaway worktree off `origin/main` instead, cherry-pick the batch commit into
-it, gate, push, remove the worktree. Expect the first push to be rejected if a
-peer pushes mid-operation; re-fetch, replay, re-gate, push again. Never force.
+`pre-push` hook runs it again. **Never use a worktree** — Lou retired them
+03/09/2026 after finding several abandoned. Claim the shared checkout with
+`./session-lock.sh claim "<what you're doing>"` before editing, work in the
+checkout directly, and release with `./session-lock.sh release` when done; if
+the lock is held, wait or ask, don't work around it. `land.sh` itself also
+refuses to land over a different live session's claim. Expect the first push
+to be rejected if a peer pushes mid-operation; re-fetch, replay, re-gate, push
+again. Never force. Full method: `msh-compare-data-session-lock.md` in this
+folder.
