@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-03",
+ "lastRun": "2026-09-04",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -198,7 +198,19 @@
   "Eitan Medical UK Ltd",
   "eKare",
   "Electro Spyres Healthcare Limited",
-  "Endosoft Limited"
+  "Endosoft Limited",
+  "Econix Limited",
+  "Ennogen Healthcare",
+  "EOS Imaging",
+  "Epredia",
+  "Esaote",
+  "Espere Healthcare Ltd",
+  "Evolan Pharma",
+  "British Bins Ltd",
+  "Enteral Access Technologies Ltd (previously named on the framework as Nasogastric Feeding Solutions Ltd",
+  "Espère Healthcare Ltd",
+  "Euro Packaging Ltd",
+  "Eurospine"
  ],
  "refusals": [
   {
@@ -380,6 +392,31 @@
    "name": "Electro Spyres Healthcare Limited",
    "reason": "Could not verify from a nameable source. The company's own site electrospyres.com returns HTTP 403 with a JavaScript challenge to every fetch method tried (curl with browser headers, HTTP/1.1 with a cookie jar, and WebFetch), so no masthead, About page or footer legal line could be read. NHS Supply Chain's Electrodes, Ultrasound Gels, Defibrillation and Related Consumables brief (2023/S 000-030987) publishes only \"Electro Spyres Healthcare Limited\", the form already recorded. Companies House name search was unavailable this session (no COMPANIES_HOUSE_KEY set), so the registered name and any previous names could not be read. A blocked fetch is not evidence of absence - eligible again after 90 days.",
    "date": "2026-09-03"
+  },
+  {
+   "name": "British Bins Ltd",
+   "reason": "No company website found. Companies House holds no 'British Bins Ltd'; the nearest, BRITISHBINS LTD (03613534, London SE26), is a differently-spelled entity with no evidence linking it to clinical waste or the framework.",
+   "date": "2026-09-04"
+  },
+  {
+   "name": "Enteral Access Technologies Ltd (previously named on the framework as Nasogastric Feeding Solutions Ltd",
+   "reason": "Malformed duplicate: this record's name is a truncated sentence with an unclosed bracket, and the company already has a proper record, 'Enteral Access Technologies Ltd' (aliases EAT, DoubleCHEK, NASOGASTRIC FEEDING SOLUTIONS LTD). Any correct alias here would be that record's own name, which verify.py fails as alias_steals_name. Needs a merge decision, not an alias.",
+   "date": "2026-09-04"
+  },
+  {
+   "name": "Espère Healthcare Ltd",
+   "reason": "Duplicate of 'Espere Healthcare Ltd' under an accented spelling taken from the Advanced Wound Care brief. Companies House holds one entity only (05032968, ESPERE HEALTHCARE LIMITED 2004-2025, now BAP MEDICAL UK LIMITED), unaccented. The correct alias is the other record's own name, which verify.py fails as alias_steals_name. Needs a merge decision.",
+   "date": "2026-09-04"
+  },
+  {
+   "name": "Euro Packaging Ltd",
+   "reason": "Ambiguous. Companies House holds EURO PACKAGING LIMITED (01328600, dissolved 22/11/2012, so it cannot be the company delisted in 2022) and EURO PACKAGING UK LIMITED (07012425, Birmingham), a different name. No company website found and no evidence ties either to the Surgical Gloves framework delisting. 'Euro Packaging' is a generic trade name.",
+   "date": "2026-09-04"
+  },
+  {
+   "name": "Eurospine",
+   "reason": "eurospine.com carries no legal entity name anywhere (footer is 'Copyright (c) Eurospine 2022' only) and is French-language throughout, so no name form is verifiable. The name is also shared with EUROSPINE, the Spine Society of Europe (eurospine.org), which generates most press carrying the word - the exact ambiguity rule 2 exists to stop. Adding the domain would assert an entity match to the NHS Supply Chain supplier that could not be confirmed.",
+   "date": "2026-09-04"
   }
  ],
  "sources": {
