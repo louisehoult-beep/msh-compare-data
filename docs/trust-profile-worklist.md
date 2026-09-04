@@ -1,11 +1,60 @@
 # Trust profile worklist — every trust still without a layer-2 profile
 
-**Canonical copy as of 04/09/2026 (batch nineteen).** This file now lives in the
+**Canonical copy as of 04/09/2026 (batch twenty).** This file now lives in the
 `msh-compare-data` repo, not OneDrive, so both local sessions and the cloud batch routine
 read and write the same file. The old OneDrive copy at
 `02-Elevate-and-Thrive/Hub/trust-profile-worklist.md` carries a pointer to here and must
 not be edited — two copies of live batch state is how a batch re-does work or a hint gets
 overwritten. Update this file, not that one.
+
+**Batch twenty (04/09/2026) closed 10 of 10 — this worklist is now complete except Royal
+Free.** Rotherham Doncaster and South Humber (RXE), East of England Community Health and
+Care (RY3), Leeds Community Healthcare (RY6), North East Ambulance (RX6), South West
+London and St George's Mental Health (RQY), Wirral Community Health and Care (RY7), Black
+Country Healthcare (TAJ), Coventry and Warwickshire Partnership (RYG), Sheffield Health
+Partnership University (TAH), and The Online NHS Trust (K0N6A). Run out of hours,
+unattended, the fifth and final batch of this run (sixteen to twenty). All 35 unique
+source/report URLs checked 200 on the first gate pass.
+
+**The Online NHS Trust (K0N6A) was checked before profiling, not assumed research-ready**:
+ODS confirms it as a genuinely Active, newly-established national digital-first trust
+(legal date 1 June 2026), with a named Chair and Chief Executive and a public plan for up
+to 8.5 million virtual appointments in its first three years, but it has not gone
+clinically live and publishes no procurement or hosting arrangement yet. Profiled with that
+stated plainly rather than either excluded like Public Health Wales/Velindre or written up
+as if it were operational.
+
+**Leeds Community Healthcare (RY6) confirms the same 1 April 2027 integration date RGD
+gave in batch eighteen, but corrects the framing**: RY6's own site never calls this an
+"acquisition" — it consistently uses "Trust Integration Programme" and, once, "the merger",
+describing it as uniting to form a new organisation. Read both entries together, not RGD's
+"acquisition" word alone.
+
+**Sheffield Health Partnership University (TAH) confirmed a rename**: the trust was
+Sheffield Health and Social Care NHS FT until 25/09/2025.
+
+Two more mergers surfaced, independent of any earlier hint: **Wirral Community Health and
+Care (RY7) is merging with Wirral University Teaching Hospital (WUTH), targeting
+April–June 2027**, with a joint Group Board already running since April 2026. **East of
+England Community Health and Care (RY3) only formed 1 April 2026**, from Norfolk Community
+Health and Care absorbing Central Cambridgeshire Community Services, and had no annual
+report of its own yet at profiling time; reportFacts are drawn from the predecessor's
+Quality Account with that provenance stated.
+
+Last updated 04/09/2026, after batch twenty. **1 trust remains: Royal Free London (RAL),
+Cloudflare-blocked, needs its annual report PDF saved by hand before it can be researched**
+(see the standing flag below). Velindre and the two Welsh exclusions (Public Health Wales,
+Welsh Ambulance Services) stay excluded pending a Welsh template. **201 trusts now carry a
+full layer-2 profile.**
+
+⚠️ **`trustDirectory` in `data/prep-config.json` is not a reliable count of what's left to
+profile** — it still lists 34 codes as of this batch, including many trusts profiled in
+batches three to fifteen (Berkshire Healthcare, Bradford District Care, Homerton, Sheffield
+Children's and others). `refresh_trusts.py` rebuilds this list from scratch weekly in CI
+(see `meeting-prep-trust-profiles.md`); it has not run recently enough to drop those
+already-profiled codes. This worklist's own numbered tables are the accurate record of
+what remains, not a `trustDirectory` count — don't use one to check the other without
+running the refresh first.
 
 **Batch nineteen (04/09/2026) closed 10 of 10.** North Staffordshire Combined Healthcare
 (RLY), Tees Esk and Wear Valleys (RX3), Pennine Care (RT2), Birmingham and Solihull Mental
@@ -45,12 +94,6 @@ finding and partly doesn't**: no shared leadership (matches), but the £375,000 
 recharge to HPFT that RWR's own report implied does NOT appear in RY4's own related-party
 note, only in a UK Government Contracts Finder notice with HPFT as buyer, an independent
 third source rather than either trust's own account confirming the other's.
-
-Last updated 04/09/2026, after batch nineteen. **11 trusts remain** (1 acute, 10
-community/MH/ambulance); **191 now carry a full layer-2 profile** (Velindre and the two
-Welsh exclusions still excluded separately). This worklist is close enough to done that
-finishing it in one more batch of ten (all but Royal Free) is realistic next time it's
-picked up.
 
 **Batch eighteen (04/09/2026) closed 10 of 10.** Kent and Medway Mental Health (RXY,
 renamed 13/10/2025 from Kent and Medway NHS and Social Care Partnership Trust), Leeds and
@@ -586,28 +629,9 @@ profiled partner before researching these, and be precise about which facts are 
 |---|---|---|---|---|---|
 | 1 | Royal Free London NHS Foundation Trust | RAL | 139,476 | 3 | 0 |
 
-## Community, mental health and ambulance trusts — 10 remaining
+## Community, mental health and ambulance trusts — 0 remaining
 
-No RTT return and no acute oversight segment, so layer 1 is thinner by design.
-
-| # | Trust | ODS | Spec hits | Named contacts |
-|---|---|---|---|---|
-| 1 | Rotherham Doncaster and South Humber NHS Foundation Trust | RXE | 0 | 2 |
-| 2 | East of England Community Health and Care NHS Trust | RY3 | 0 | 2 |
-| 3 | Leeds Community Healthcare NHS Trust | RY6 | 0 | 2 |
-| 4 | North East Ambulance Service NHS Foundation Trust | RX6 | 0 | 1 |
-| 5 | South West London and St George's Mental Health NHS Trust | RQY | 0 | 1 |
-| 6 | Wirral Community Health and Care NHS Foundation Trust | RY7 | 0 | 1 |
-| 7 | Black Country Healthcare NHS Foundation Trust | TAJ | 0 | 0 |
-| 8 | Coventry and Warwickshire Partnership NHS Trust | RYG | 0 | 0 |
-| 9 | Sheffield Health Partnership University NHS Foundation Trust | TAH | 0 | 0 |
-| 10 | The Online NHS Trust | K0N6A | 0 | 0 |
-
-**Leeds Community Healthcare (#3, RY6) has a ready-made hint for whenever it's picked
-up**: Leeds and York Partnership (RGD, profiled batch eighteen) is integrating with it by
-acquisition, targeting 1 April 2027, per RGD's own leadership blog — test whether RY6's own
-site confirms the same date and describes the same acquisition, not just a looser
-partnership.
+All ten profiled in batch twenty (04/09/2026). Nothing left in this category.
 
 ## Welsh trusts — excluded, need their own template
 
