@@ -7,6 +7,20 @@ read and write the same file. The old OneDrive copy at
 not be edited — two copies of live batch state is how a batch re-does work or a hint gets
 overwritten. Update this file, not that one.
 
+**Royal Free London (RAL) profiled 04/09/2026 — the worklist is now COMPLETE.** The last
+of 202 trusts, and the only one the automated pipeline could never do. `royalfree.nhs.uk`
+returns HTTP 403 to every automated fetch, so its board page has never been readable from
+a session. Lou downloaded the trust's own **Annual Report and Accounts 2025/26** by hand on
+04/09/2026 and the whole profile was built from that single primary source: twelve board
+members and six report facts, every URL checked 200 on the first gate pass.
+
+**Read the RAL board list as the position as at 31 March 2026, not a live board-page
+read.** It comes from the annual report's governance section, so it is accurate to the
+reporting year end and will not pick up a leaver or a new appointment made since. That is
+a weaker currency guarantee than every other profile in this file, which were read from
+live board pages, and it is the standing limitation on RAL rather than a one-off caveat —
+see "Known fetching obstacles" below.
+
 **Batch twenty (04/09/2026) closed 10 of 10 — this worklist is now complete except Royal
 Free.** Rotherham Doncaster and South Humber (RXE), East of England Community Health and
 Care (RY3), Leeds Community Healthcare (RY6), North East Ambulance (RX6), South West
@@ -41,20 +55,20 @@ Health and Care absorbing Central Cambridgeshire Community Services, and had no 
 report of its own yet at profiling time; reportFacts are drawn from the predecessor's
 Quality Account with that provenance stated.
 
-Last updated 04/09/2026, after batch twenty. **1 trust remains: Royal Free London (RAL),
-Cloudflare-blocked, needs its annual report PDF saved by hand before it can be researched**
-(see the standing flag below). Velindre and the two Welsh exclusions (Public Health Wales,
-Welsh Ambulance Services) stay excluded pending a Welsh template. **201 trusts now carry a
-full layer-2 profile.**
+Last updated 04/09/2026, after Royal Free London (RAL) landed. **0 trusts remain — this
+worklist is COMPLETE.** Velindre and the two Welsh exclusions (Public Health Wales, Welsh
+Ambulance Services) stay excluded pending a Welsh template. **202 trusts now carry a full
+layer-2 profile.** Keeping them current is now `nhs-trust-profile-refresh`'s job, not this
+worklist's.
 
 ⚠️ **`trustDirectory` in `data/prep-config.json` is not a reliable count of what's left to
-profile** — it still lists 34 codes as of this batch, including many trusts profiled in
-batches three to fifteen (Berkshire Healthcare, Bradford District Care, Homerton, Sheffield
-Children's and others). `refresh_trusts.py` rebuilds this list from scratch weekly in CI
-(see `meeting-prep-trust-profiles.md`); it has not run recently enough to drop those
-already-profiled codes. This worklist's own numbered tables are the accurate record of
-what remains, not a `trustDirectory` count — don't use one to check the other without
-running the refresh first.
+profile** — it still lists 33 codes after Royal Free landed, including many trusts profiled
+in batches three to fifteen (Berkshire Healthcare, Bradford District Care, Homerton,
+Sheffield Children's and others). `refresh_trusts.py` rebuilds this list from scratch weekly
+in CI (see `meeting-prep-trust-profiles.md`); it has not run recently enough to drop those
+already-profiled codes. **All 202 trusts are profiled, so those 33 remaining codes are stale
+entries, not work** — the correct figure is `trusts`, which now reads 202. Don't use a
+`trustDirectory` count as evidence anything is left to do without running the refresh first.
 
 **Batch nineteen (04/09/2026) closed 10 of 10.** North Staffordshire Combined Healthcare
 (RLY), Tees Esk and Wear Valleys (RX3), Pennine Care (RT2), Birmingham and Solihull Mental
@@ -556,10 +570,10 @@ must be retried serially before a source is dropped, exactly like the Cloudflare
 false-negatives. One fact originally cited to an archived page was moved onto the live annual report
 PDF instead, which states it directly, so the profile leans on the archive less than it did.
 
-⚠️ **Royal Free London (RAL) is blocked and needs a human.** It is behind Cloudflare and
-refuses all automated fetching, including `curl` with a browser User-Agent. Its annual
-report PDF has to be saved by hand from a real browser before the profile can be researched.
-It stays at the top of the acute list until that happens; do not keep re-attempting it.
+✅ **Royal Free London (RAL) was profiled on 04/09/2026 and is no longer outstanding.** The
+403 block on `royalfree.nhs.uk` is unchanged and permanent as far as any session is
+concerned; the profile was built from the annual report PDF Lou saved by hand. Any future
+refresh of RAL needs the same hand-download — see "Known fetching obstacles" below.
 
 ## Known group and collaborative links inside this list
 
@@ -573,7 +587,7 @@ profiled partner before researching these, and be precise about which facts are 
 | Walsall Healthcare (RBK) | Royal Wolverhampton (RL4) | Wolverhampton and Walsall Group, shared executive. Procurement sits ABOVE the group with NMBC, hosted by University Hospitals of North Midlands (RJE, already profiled), covering six organisations. North Staffordshire Combined Healthcare (RLY, profiled batch nineteen) is confirmed as a seventh member, from Royal Wolverhampton's own June 2025 procurement policy, not from RLY's own site. |
 | Torbay and South Devon (RA9), Devon Partnership (RWV), Livewell South West | Royal Devon (RH8), University Hospitals Plymouth (RK9) | Devon Procurement Service, formed December 2025, five organisations, all non-pay spend. Plymouth appears to be the host (44 WTE procurement staff transferred in March 2025), not just a member. |
 | Barnsley Hospital (RFF) | The Rotherham NHS Foundation Trust (RFR, profiled batch eleven) | Joint Chief Executive, Chief Financial Officer and Deputy Chief Executive shared across both trusts. Rotherham still runs its OWN trust-level procurement on its own Intend portal, so shared leadership does NOT mean shared buying. Read Rotherham's entry before profiling Barnsley. |
-| Royal Free London (RAL, Cloudflare-blocked) , Moorfields (RP6), North Middlesex (RAP) | Whittington Health (RKE, profiled batch eleven) | Whittington HOSTS the Partners Procurement Service, buying for itself, Moorfields, North Middlesex and Royal Free. This is the procurement route into RAL even though RAL's own site cannot be read. Established from Whittington's own documents, batch eleven. |
+| Royal Free London (RAL, profiled 04/09/2026), Moorfields (RP6), North Middlesex (RAP) | Whittington Health (RKE, profiled batch eleven) | Whittington HOSTS the Partners Procurement Service, buying for itself, Moorfields, North Middlesex and Royal Free. Established from Whittington's own documents, batch eleven, and still the procurement route into RAL — RAL's own site remains unfetchable, so this stays the corroborating source for its buying route. Note RAL now runs North Middlesex too: James Rimmer is interim chief executive for North Middlesex University Hospital and community services on the Royal Free group board. |
 | Remaining North East London trusts | Barts Health (RF4, profiled), Homerton (RQX, profiled batch eleven) | North East London Procurement Partnership, hosted by Barts Health, live from 01/01/2026. Homerton buys through it rather than solely on its own account. Expect the same route for other NEL trusts, but verify per trust. |
 | George Eliot (RLT) | Wye Valley (RLQ, profiled batch eleven), Worcestershire Acute (RWP), South Warwickshire (RJC) | Foundation Group under one Group Chief Executive (Glen Burley) and one Chair across all four trusts. At least one procurement decision (external audit) is run jointly. Day-to-day clinical supply chain buying is NOT established, so test it rather than assume. |
 | Northampton General (RNS) | Kettering General (RNQ, profiled batch eleven) | University Hospitals of Northamptonshire group board and shared executive; further joint Chief Executive/Chair link to Leicester (RK5). Kettering is under NHS England Enforcement Undertakings since October 2023, so approvals run above trust level. |
@@ -594,7 +608,14 @@ profiled partner before researching these, and be precise about which facts are 
 
 ## Known fetching obstacles
 
-- **Cloudflare, total block:** Royal Free London. Needs a human with a browser.
+- **403 to every automated fetch, permanently:** `royalfree.nhs.uk` (Royal Free London,
+  RAL). Refuses plain `curl`, `curl` with a full browser header set, WebFetch and the agent
+  proxy alike — there is no header combination that gets through, and no partial path (unlike
+  Clatterbridge below) that stays open. **Its profile can therefore only ever be built or
+  refreshed from a document downloaded by hand in a real browser.** That is how the 04/09/2026
+  profile was produced, from the trust's own Annual Report and Accounts 2025/26, and it is why
+  RAL's board list is the position as at 31 March 2026 rather than a live read. Do not queue
+  RAL for an unattended refresh that assumes it can fetch the board page.
 - **403 to everything, including a full browser header set:** `clatterbridgecc.nhs.uk` rendered
   pages (homepage, board, procurement). Its `/application/files/` document path is NOT blocked,
   so annual reports and board packs are still fetchable live. Page-level facts need a Wayback
@@ -623,11 +644,10 @@ profiled partner before researching these, and be precise about which facts are 
   unverifiable and drop the link, rather than assuming it is the same class of false-negative
   as a Cloudflare-blocked NHS domain.
 
-## Acute and specialist trusts — 1 remaining, by waiting list
+## Acute and specialist trusts — 0 remaining
 
-| # | Trust | ODS | Waiting list | Seg | Spec hits |
-|---|---|---|---|---|---|
-| 1 | Royal Free London NHS Foundation Trust | RAL | 139,476 | 3 | 0 |
+Royal Free London (RAL) was the last one, profiled 04/09/2026. Nothing left in this
+category.
 
 ## Community, mental health and ambulance trusts — 0 remaining
 
