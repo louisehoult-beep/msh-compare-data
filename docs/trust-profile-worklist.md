@@ -1,11 +1,62 @@
 # Trust profile worklist — every trust still without a layer-2 profile
 
-**Canonical copy as of 04/09/2026 (batch seventeen).** This file now lives in the
+**Canonical copy as of 04/09/2026 (batch eighteen).** This file now lives in the
 `msh-compare-data` repo, not OneDrive, so both local sessions and the cloud batch routine
 read and write the same file. The old OneDrive copy at
 `02-Elevate-and-Thrive/Hub/trust-profile-worklist.md` carries a pointer to here and must
 not be edited — two copies of live batch state is how a batch re-does work or a hint gets
 overwritten. Update this file, not that one.
+
+**Batch eighteen (04/09/2026) closed 10 of 10.** Kent and Medway Mental Health (RXY,
+renamed 13/10/2025 from Kent and Medway NHS and Social Care Partnership Trust), Leeds and
+York Partnership (RGD), Hertfordshire Partnership University (RWR), Norfolk and Suffolk
+(RMY), South London and Maudsley (RV5), Surrey and Borders Partnership (RXX), Central
+London Community Healthcare (RYX), Lincolnshire Community Health Services (RY5), Cheshire
+and Wirral Partnership (RXA), Humber Teaching (RV9). Run out of hours, unattended, same run
+as batches sixteen and seventeen. 28 unique source/report URLs checked; 24 returned 200,
+4 (all `hpft.nhs.uk`, RWR's own site) returned 403 to the gate's own HTTP check but were
+individually confirmed live via WebFetch before merge, same Akamai-class false-negative
+pattern as Royal Devon in batch four. One profile (RMY) had em-dashes throughout and was
+corrected before merge; one LinkedIn URL (RGD, kept on a single browser-check confidence
+the gate itself could not reproduce) was dropped, same standard as batch seventeen.
+
+**Central London Community Healthcare (RYX), the host's own side, fully confirms the NWL
+Procurement Service finding RKL and RV3 made in batches sixteen and seventeen** — nine
+named partner organisations (CLCH, CNWL, Chelsea and Westminster, Hillingdon Hospitals,
+Imperial College Healthcare, London North West University Healthcare, NWL ICB, Royal
+Marsden, West London NHS Trust), launched 1 September 2022, governed by a board of partner
+CFOs. This closes the "not yet confirmed on the host's own side" caveat both earlier
+entries carried.
+
+**A genuine discrepancy, recorded rather than smoothed over: Cheshire and Wirral
+Partnership (RXA) does NOT confirm the Health Procurement Liverpool membership Walton
+Centre's own annual report asserted for it in batch thirteen.** RXA's own site and annual
+report make no mention of HPL, and HPL's own "who we work with" page names only four equal
+partners (Alder Hey, Clatterbridge, Liverpool Heart and Chest, Walton Centre) — CWP is not
+among them. Both sides are now profiled and disagree; treat the batch-thirteen claim as
+unconfirmed on CWP's own account until CWP's side says otherwise, don't repeat it as
+settled.
+
+Two further cross-trust threads worth carrying forward: **Lincolnshire Community Health
+Services (RY5) runs its own procurement**, named a Trust Head of Procurement, unlike
+Lincolnshire Partnership (mental health, no in-house procurement, delivered by ULTH,
+established batch fifteen) — the two Lincolnshire trusts share a Group Board with ULTH
+since 1 April 2024, but that is governance, not shared buying. **Leeds and York
+Partnership (RGD) is integrating by acquisition with Leeds Community Healthcare NHS Trust
+(RY6, still on this worklist)**, targeting 1 April 2027, confirmed via the trust's own
+leadership blog — worth a specific hint when RY6 comes up.
+
+One leadership-move finding, not a structural one: **South London and Maudsley's (RV5) new
+CEO Paul Calaminus is the same person North East London NHS Foundation Trust's (RAT,
+profiled batch sixteen) 2025/26 annual report still named as CEO** — RAT's own live board
+page had already shown him gone (Jan Ditheridge interim, Edwin Ndlovu MBE announced as
+permanent successor). Both facts are independently sourced and correct for their own
+trust's current state; recorded here only as a cross-reference, not a correction to either
+entry.
+
+Last updated 04/09/2026, after batch eighteen. **21 trusts remain** (1 acute, 20
+community/MH/ambulance); **181 now carry a full layer-2 profile** (Velindre and the two
+Welsh exclusions still excluded separately).
 
 **Batch seventeen (04/09/2026) closed 10 of 10.** Sussex Partnership (RX2), North London
 NHS Foundation Trust (G6V2S), Derbyshire Healthcare (RXM), Mersey Care (RW4), Central and
@@ -40,10 +91,6 @@ North London NHS Foundation Trust (G6V2S) confirmed its full merger history dire
 its own site rather than a secondary source: formed 1 November 2024 from Barnet, Enfield
 and Haringey Mental Health NHS Trust plus Camden and Islington NHS Foundation Trust, then
 acquired The Tavistock and Portman NHS Foundation Trust on 1 April 2026.
-
-Last updated 04/09/2026, after batch seventeen. **31 trusts remain** (1 acute, 30
-community/MH/ambulance); **171 now carry a full layer-2 profile** (Velindre and the two
-Welsh exclusions still excluded separately).
 
 **Batch sixteen (04/09/2026) closed 10 of 10 — the first batch of community, mental
 health and ambulance trusts.** Dorset HealthCare University (RDY), Northamptonshire
@@ -473,6 +520,11 @@ profiled partner before researching these, and be precise about which facts are 
 - **Akamai, 403 to plain curl:** `royaldevon.nhs.uk`. Works with a full browser header set
   (User-Agent plus Accept, Accept-Language, Sec-Fetch-*). Links are live, not dead.
 - **403 to WebFetch but fine via curl:** `uhcw.nhs.uk`.
+- **403 to plain curl AND to full-browser-header curl/urllib, but fine via WebFetch:**
+  `hpft.nhs.uk`, found batch eighteen — the reverse of the Royal Devon pattern above. Four
+  URLs on this domain all confirmed genuinely live via WebFetch before merge; the automated
+  gate check will keep failing them, so verify manually rather than treating the gate's
+  result as final for this domain specifically.
 - **403 to curl:** Find a Tender notice pages. Usable as evidence read another way, but do
   not cite one as a `source` URL that will be checked.
 - **Scanned-image PDFs that will not extract:** Royal Wolverhampton's 2025/26 financial
@@ -493,42 +545,32 @@ profiled partner before researching these, and be precise about which facts are 
 |---|---|---|---|---|---|
 | 1 | Royal Free London NHS Foundation Trust | RAL | 139,476 | 3 | 0 |
 
-## Community, mental health and ambulance trusts — 30 remaining
+## Community, mental health and ambulance trusts — 20 remaining
 
 No RTT return and no acute oversight segment, so layer 1 is thinner by design.
 
 | # | Trust | ODS | Spec hits | Named contacts |
 |---|---|---|---|---|
-| 1 | Kent and Medway Mental Health NHS Trust | RXY | 1 | 2 |
-| 2 | Leeds and York Partnership NHS Foundation Trust | RGD | 0 | 15 |
-| 3 | Hertfordshire Partnership University NHS Foundation Trust | RWR | 0 | 9 |
-| 4 | Norfolk and Suffolk NHS Foundation Trust | RMY | 0 | 8 |
-| 5 | South London and Maudsley NHS Foundation Trust | RV5 | 0 | 7 |
-| 6 | Surrey and Borders Partnership NHS Foundation Trust | RXX | 0 | 7 |
-| 7 | Central London Community Healthcare NHS Trust | RYX | 0 | 7 |
-| 8 | Lincolnshire Community Health Services NHS Trust | RY5 | 0 | 7 |
-| 9 | Cheshire and Wirral Partnership NHS Foundation Trust | RXA | 0 | 5 |
-| 10 | Humber Teaching NHS Foundation Trust | RV9 | 0 | 5 |
-| 11 | North Staffordshire Combined Healthcare NHS Trust | RLY | 0 | 4 |
-| 12 | Tees, Esk and Wear Valleys NHS Foundation Trust | RX3 | 0 | 4 |
-| 13 | Pennine Care NHS Foundation Trust | RT2 | 0 | 3 |
-| 14 | Birmingham and Solihull Mental Health NHS Foundation Trust | RXT | 0 | 3 |
-| 15 | Derbyshire Community Health Services NHS Foundation Trust | RY8 | 0 | 3 |
-| 16 | East Midlands Ambulance Service NHS Trust | RX9 | 0 | 3 |
-| 17 | Hertfordshire Community NHS Trust | RY4 | 0 | 3 |
-| 18 | North West Ambulance Service NHS Trust | RX7 | 0 | 3 |
-| 19 | West Midlands Ambulance Service University NHS Foundation Trust | RYA | 0 | 3 |
-| 20 | Devon Partnership NHS Trust | RWV | 0 | 2 |
-| 21 | Rotherham Doncaster and South Humber NHS Foundation Trust | RXE | 0 | 2 |
-| 22 | East of England Community Health and Care NHS Trust | RY3 | 0 | 2 |
-| 23 | Leeds Community Healthcare NHS Trust | RY6 | 0 | 2 |
-| 24 | North East Ambulance Service NHS Foundation Trust | RX6 | 0 | 1 |
-| 25 | South West London and St George's Mental Health NHS Trust | RQY | 0 | 1 |
-| 26 | Wirral Community Health and Care NHS Foundation Trust | RY7 | 0 | 1 |
-| 27 | Black Country Healthcare NHS Foundation Trust | TAJ | 0 | 0 |
-| 28 | Coventry and Warwickshire Partnership NHS Trust | RYG | 0 | 0 |
-| 29 | Sheffield Health Partnership University NHS Foundation Trust | TAH | 0 | 0 |
-| 30 | The Online NHS Trust | K0N6A | 0 | 0 |
+| 1 | North Staffordshire Combined Healthcare NHS Trust | RLY | 0 | 4 |
+| 2 | Tees, Esk and Wear Valleys NHS Foundation Trust | RX3 | 0 | 4 |
+| 3 | Pennine Care NHS Foundation Trust | RT2 | 0 | 3 |
+| 4 | Birmingham and Solihull Mental Health NHS Foundation Trust | RXT | 0 | 3 |
+| 5 | Derbyshire Community Health Services NHS Foundation Trust | RY8 | 0 | 3 |
+| 6 | East Midlands Ambulance Service NHS Trust | RX9 | 0 | 3 |
+| 7 | Hertfordshire Community NHS Trust | RY4 | 0 | 3 |
+| 8 | North West Ambulance Service NHS Trust | RX7 | 0 | 3 |
+| 9 | West Midlands Ambulance Service University NHS Foundation Trust | RYA | 0 | 3 |
+| 10 | Devon Partnership NHS Trust | RWV | 0 | 2 |
+| 11 | Rotherham Doncaster and South Humber NHS Foundation Trust | RXE | 0 | 2 |
+| 12 | East of England Community Health and Care NHS Trust | RY3 | 0 | 2 |
+| 13 | Leeds Community Healthcare NHS Trust | RY6 | 0 | 2 |
+| 14 | North East Ambulance Service NHS Foundation Trust | RX6 | 0 | 1 |
+| 15 | South West London and St George's Mental Health NHS Trust | RQY | 0 | 1 |
+| 16 | Wirral Community Health and Care NHS Foundation Trust | RY7 | 0 | 1 |
+| 17 | Black Country Healthcare NHS Foundation Trust | TAJ | 0 | 0 |
+| 18 | Coventry and Warwickshire Partnership NHS Trust | RYG | 0 | 0 |
+| 19 | Sheffield Health Partnership University NHS Foundation Trust | TAH | 0 | 0 |
+| 20 | The Online NHS Trust | K0N6A | 0 | 0 |
 
 ## Welsh trusts — excluded, need their own template
 
