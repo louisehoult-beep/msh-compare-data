@@ -1,11 +1,56 @@
 # Trust profile worklist — every trust still without a layer-2 profile
 
-**Canonical copy as of 04/09/2026 (batch eighteen).** This file now lives in the
+**Canonical copy as of 04/09/2026 (batch nineteen).** This file now lives in the
 `msh-compare-data` repo, not OneDrive, so both local sessions and the cloud batch routine
 read and write the same file. The old OneDrive copy at
 `02-Elevate-and-Thrive/Hub/trust-profile-worklist.md` carries a pointer to here and must
 not be edited — two copies of live batch state is how a batch re-does work or a hint gets
 overwritten. Update this file, not that one.
+
+**Batch nineteen (04/09/2026) closed 10 of 10.** North Staffordshire Combined Healthcare
+(RLY), Tees Esk and Wear Valleys (RX3), Pennine Care (RT2), Birmingham and Solihull Mental
+Health (RXT), Derbyshire Community Health Services (RY8), East Midlands Ambulance (RX9),
+Hertfordshire Community (RY4), North West Ambulance (RX7), West Midlands Ambulance
+University (RYA), Devon Partnership (RWV). Run out of hours, unattended, same run as
+batches sixteen to eighteen. All 42 unique source/report URLs checked 200 on the first
+gate pass, no fixes needed.
+
+**The Devon Procurement Service (hosted by University Hospitals Plymouth, established
+December 2025) is now confirmed from all five of its named members' own or a partner's
+side.** Devon Partnership (RWV) confirms membership, but only via Plymouth's own site —
+RWV's own 2025/26 annual report, published after the service's own start date, does not
+mention it at all, the same "confirmed by the host, silent on the member's own account"
+pattern already seen for Torbay (RA9, batch sixteen). The five: Royal Devon (RH8),
+University Hospitals Plymouth (RK9, host), Torbay and South Devon (RA9), Devon Partnership
+(RWV), Livewell South West (not yet profiled).
+
+**North Staffordshire Combined Healthcare (RLY) confirms the NMBC group procurement
+structure from a third trust's own side** — Royal Wolverhampton's own June 2025
+procurement policy names RLY as a member, matching the existing Walsall/NMBC/UHNM
+group-link entry below; add RLY to that entry.
+
+Two BSOL Procurement Collaborative signals this batch, both partial rather than settled:
+**Birmingham and Solihull Mental Health (RXT)** is named by Birmingham Community
+Healthcare's own procurement page as one of five organisations the collaborative serves,
+but RXT's own "Suppliers Information" page doesn't mention it at all, so the confirmation
+is one-sided the same way Royal Orthopaedic's (RRJ, batch thirteen) was contested. Neither
+Birmingham trust profiled so far confirms this cleanly from its own account; treat as an
+open question, not a settled fact, until a Birmingham trust's own site states it directly.
+
+One hint tested and refuted, not confirmed: **Derbyshire Community Health Services (RY8)
+has no leadership or procurement link to Derbyshire Healthcare (RXM, batch seventeen)** —
+the only shared thread is a joint charitable trust administering charitable funds for both,
+governance only. **Hertfordshire Community (RY4) partly confirms RWR's batch-eighteen
+finding and partly doesn't**: no shared leadership (matches), but the £375,000 estates
+recharge to HPFT that RWR's own report implied does NOT appear in RY4's own related-party
+note, only in a UK Government Contracts Finder notice with HPFT as buyer, an independent
+third source rather than either trust's own account confirming the other's.
+
+Last updated 04/09/2026, after batch nineteen. **11 trusts remain** (1 acute, 10
+community/MH/ambulance); **191 now carry a full layer-2 profile** (Velindre and the two
+Welsh exclusions still excluded separately). This worklist is close enough to done that
+finishing it in one more batch of ten (all but Royal Free) is realistic next time it's
+picked up.
 
 **Batch eighteen (04/09/2026) closed 10 of 10.** Kent and Medway Mental Health (RXY,
 renamed 13/10/2025 from Kent and Medway NHS and Social Care Partnership Trust), Leeds and
@@ -53,10 +98,6 @@ page had already shown him gone (Jan Ditheridge interim, Edwin Ndlovu MBE announ
 permanent successor). Both facts are independently sourced and correct for their own
 trust's current state; recorded here only as a cross-reference, not a correction to either
 entry.
-
-Last updated 04/09/2026, after batch eighteen. **21 trusts remain** (1 acute, 20
-community/MH/ambulance); **181 now carry a full layer-2 profile** (Velindre and the two
-Welsh exclusions still excluded separately).
 
 **Batch seventeen (04/09/2026) closed 10 of 10.** Sussex Partnership (RX2), North London
 NHS Foundation Trust (G6V2S), Derbyshire Healthcare (RXM), Mersey Care (RW4), Central and
@@ -486,7 +527,7 @@ profiled partner before researching these, and be precise about which facts are 
 | Still on this list | Linked to (already profiled) | Nature of the link |
 |---|---|---|
 | James Paget (RGP), QEH King's Lynn (RCX) | Norfolk and Norwich (RM1) | Norfolk and Waveney University Hospitals Group, one chair and one chief executive across all three boards, governing via a General Purpose Joint Committee. **Not a host model:** QEH's own 2025/26 annual report never calls NNUH the host, and Group executive costs are split equally 33.3% each (established batch eleven, 02/09/2026). RAAC sits at RGP and RCX, not at NNUH. |
-| Walsall Healthcare (RBK) | Royal Wolverhampton (RL4) | Wolverhampton and Walsall Group, shared executive. Procurement sits ABOVE the group with NMBC, hosted by University Hospitals of North Midlands (RJE, already profiled), covering six organisations. |
+| Walsall Healthcare (RBK) | Royal Wolverhampton (RL4) | Wolverhampton and Walsall Group, shared executive. Procurement sits ABOVE the group with NMBC, hosted by University Hospitals of North Midlands (RJE, already profiled), covering six organisations. North Staffordshire Combined Healthcare (RLY, profiled batch nineteen) is confirmed as a seventh member, from Royal Wolverhampton's own June 2025 procurement policy, not from RLY's own site. |
 | Torbay and South Devon (RA9), Devon Partnership (RWV), Livewell South West | Royal Devon (RH8), University Hospitals Plymouth (RK9) | Devon Procurement Service, formed December 2025, five organisations, all non-pay spend. Plymouth appears to be the host (44 WTE procurement staff transferred in March 2025), not just a member. |
 | Barnsley Hospital (RFF) | The Rotherham NHS Foundation Trust (RFR, profiled batch eleven) | Joint Chief Executive, Chief Financial Officer and Deputy Chief Executive shared across both trusts. Rotherham still runs its OWN trust-level procurement on its own Intend portal, so shared leadership does NOT mean shared buying. Read Rotherham's entry before profiling Barnsley. |
 | Royal Free London (RAL, Cloudflare-blocked) , Moorfields (RP6), North Middlesex (RAP) | Whittington Health (RKE, profiled batch eleven) | Whittington HOSTS the Partners Procurement Service, buying for itself, Moorfields, North Middlesex and Royal Free. This is the procurement route into RAL even though RAL's own site cannot be read. Established from Whittington's own documents, batch eleven. |
@@ -545,32 +586,28 @@ profiled partner before researching these, and be precise about which facts are 
 |---|---|---|---|---|---|
 | 1 | Royal Free London NHS Foundation Trust | RAL | 139,476 | 3 | 0 |
 
-## Community, mental health and ambulance trusts — 20 remaining
+## Community, mental health and ambulance trusts — 10 remaining
 
 No RTT return and no acute oversight segment, so layer 1 is thinner by design.
 
 | # | Trust | ODS | Spec hits | Named contacts |
 |---|---|---|---|---|
-| 1 | North Staffordshire Combined Healthcare NHS Trust | RLY | 0 | 4 |
-| 2 | Tees, Esk and Wear Valleys NHS Foundation Trust | RX3 | 0 | 4 |
-| 3 | Pennine Care NHS Foundation Trust | RT2 | 0 | 3 |
-| 4 | Birmingham and Solihull Mental Health NHS Foundation Trust | RXT | 0 | 3 |
-| 5 | Derbyshire Community Health Services NHS Foundation Trust | RY8 | 0 | 3 |
-| 6 | East Midlands Ambulance Service NHS Trust | RX9 | 0 | 3 |
-| 7 | Hertfordshire Community NHS Trust | RY4 | 0 | 3 |
-| 8 | North West Ambulance Service NHS Trust | RX7 | 0 | 3 |
-| 9 | West Midlands Ambulance Service University NHS Foundation Trust | RYA | 0 | 3 |
-| 10 | Devon Partnership NHS Trust | RWV | 0 | 2 |
-| 11 | Rotherham Doncaster and South Humber NHS Foundation Trust | RXE | 0 | 2 |
-| 12 | East of England Community Health and Care NHS Trust | RY3 | 0 | 2 |
-| 13 | Leeds Community Healthcare NHS Trust | RY6 | 0 | 2 |
-| 14 | North East Ambulance Service NHS Foundation Trust | RX6 | 0 | 1 |
-| 15 | South West London and St George's Mental Health NHS Trust | RQY | 0 | 1 |
-| 16 | Wirral Community Health and Care NHS Foundation Trust | RY7 | 0 | 1 |
-| 17 | Black Country Healthcare NHS Foundation Trust | TAJ | 0 | 0 |
-| 18 | Coventry and Warwickshire Partnership NHS Trust | RYG | 0 | 0 |
-| 19 | Sheffield Health Partnership University NHS Foundation Trust | TAH | 0 | 0 |
-| 20 | The Online NHS Trust | K0N6A | 0 | 0 |
+| 1 | Rotherham Doncaster and South Humber NHS Foundation Trust | RXE | 0 | 2 |
+| 2 | East of England Community Health and Care NHS Trust | RY3 | 0 | 2 |
+| 3 | Leeds Community Healthcare NHS Trust | RY6 | 0 | 2 |
+| 4 | North East Ambulance Service NHS Foundation Trust | RX6 | 0 | 1 |
+| 5 | South West London and St George's Mental Health NHS Trust | RQY | 0 | 1 |
+| 6 | Wirral Community Health and Care NHS Foundation Trust | RY7 | 0 | 1 |
+| 7 | Black Country Healthcare NHS Foundation Trust | TAJ | 0 | 0 |
+| 8 | Coventry and Warwickshire Partnership NHS Trust | RYG | 0 | 0 |
+| 9 | Sheffield Health Partnership University NHS Foundation Trust | TAH | 0 | 0 |
+| 10 | The Online NHS Trust | K0N6A | 0 | 0 |
+
+**Leeds Community Healthcare (#3, RY6) has a ready-made hint for whenever it's picked
+up**: Leeds and York Partnership (RGD, profiled batch eighteen) is integrating with it by
+acquisition, targeting 1 April 2027, per RGD's own leadership blog — test whether RY6's own
+site confirms the same date and describes the same acquisition, not just a looser
+partnership.
 
 ## Welsh trusts — excluded, need their own template
 
