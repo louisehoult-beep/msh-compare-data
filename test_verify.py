@@ -820,15 +820,33 @@ def _(tmp):
     # This is the realistic version — a tidy-up of supplier-index.json that
     # nobody realises the Compare tab was pointing at.
     d = sup_index()
-    seed_names = {s["name"] for s in json.load(open("data/supplier-seed.json"))["suppliers"]}
+    # The seed resolves a name by its `name` OR any of its `aliases`, and it
+    # compares them normalised — verify._supplier_universe() unions seed and
+    # index that way. Matching on the seed's bare `name` fields only, as this
+    # case did until 04/09/2026, picks victims the seed still resolves through
+    # an alias: on that date 6 of the 15 candidates were such false victims,
+    # and next() landed on the first, "Bunzl Healthcare", which the seed carries
+    # as an alias of "Mediq Healthcare UK Ltd". Deleting it orphaned nothing,
+    # the gate correctly passed, and the case reported a HOLE that was its own.
+    # Every Verify run was red for it. Use the gate's own normaliser so the test
+    # and the gate agree on what "resolves" means.
+    import verify as _v
+    seed_universe = set()
+    for s in json.load(open("data/supplier-seed.json"))["suppliers"]:
+        for v in [s.get("name")] + list(s.get("aliases") or []):
+            k = _v._norm_co(v)
+            if k:
+                seed_universe.add(k)
     live = set()
     for blk in (suppliers().get("specialities") or {}).values():
         for r in blk.get("suppliers") or []:
             live.add(r.get("co"))
-    # A record that resolves a Compare-tab name today and is NOT in the seed,
-    # so removing it from the index really does orphan the name.
+    # A record that resolves a Compare-tab name today and that the seed cannot
+    # resolve by name or alias, so removing it from the index really does
+    # orphan the name.
     victim = next((s for s in d["suppliers"]
-                   if s["name"] in live and s["name"] not in seed_names), None)
+                   if s["name"] in live
+                   and _v._norm_co(s["name"]) not in seed_universe), None)
     if victim is None:
         return None
     d["suppliers"] = [s for s in d["suppliers"] if s["name"] != victim["name"]]
