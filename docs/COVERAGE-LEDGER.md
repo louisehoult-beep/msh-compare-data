@@ -49,7 +49,7 @@ synonym for out of scope: decide each one deliberately.
 | Patient Temperature Management | theatres | 18 | 6 | 33.3% | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 2 | 11.1% | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | STARTED |
-| Clinical and Sharps Waste Management | infection | 14 | 1 | 7.1% | STARTED |
+| Clinical and Sharps Waste Management | infection | 14 | 2 | 14.3% | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 1 | 7.7% | STARTED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 3 | 23.1% | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 1 | 8.3% | STARTED |
