@@ -8,6 +8,31 @@ name: Verify (publish gate)
 # because nothing checked derived data before it went out. verify.py is that
 # check. If this workflow is red, what is on the Hub right now is suspect —
 # fix it or revert, do not merge past it.
+#
+# TWO JOBS, NOT TWO STEPS (04/09/2026)
+#   They were one job. verify.py takes about four minutes; test_verify.py runs
+#   the whole gate once per case and takes roughly six times that, so the pair
+#   crossed 15 minutes on 06/08/2026 and 30 minutes on 04/09/2026, and on both
+#   dates the runs were CANCELLED on the timeout.
+#
+#   Sharing a job made that worse than slow. The steps run in order, so a
+#   self-test that overran killed the job AFTER verify.py had already passed —
+#   and the failure alert says "members may be seeing bad data right now". Every
+#   cancelled run on 04/09 fired that alarm about data the gate had just
+#   cleared. It also blocks the refresh workflows, which run the gate before
+#   they commit, so the data stops moving for a reason that is not real.
+#
+#   Split, they run in parallel and say different things:
+#     gate      — is the data going to members sound? Four minutes. This is the
+#                 one that means "members may be seeing bad data".
+#     self-test — can the gate still catch what it was built to catch? Slow, and
+#                 a real failure here means the gate is untrustworthy, not that
+#                 the live data is bad.
+#
+#   The self-test's 45 minutes is headroom over the ~26 it needed on 04/09, not
+#   a target. It grows with the case count. When it next crowds the limit, the
+#   fix is to run the cases in parallel — they each work in their own temp copy
+#   of the repo — not to keep raising this number.
 
 on:
   push:
@@ -16,16 +41,10 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  verify:
+  gate:
+    name: Publish gate (live data)
     runs-on: ubuntu-latest
-    # 30, not 15. test_verify.py runs the whole gate once per case, so the wall
-    # clock grows with the case count, and on 06/08/2026 it crossed 15 minutes:
-    # runs at 15:55 and 16:14 were CANCELLED on the timeout and reported as
-    # failures. A timeout that fires looks exactly like bad data on the runs
-    # list, and this repo treats a red gate as "members may be seeing something
-    # wrong right now" — so a false red here costs real attention, and it also
-    # blocks the refresh workflows, which run the gate before they commit.
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
         with:
@@ -35,6 +54,24 @@ jobs:
           python-version: "3.12"
       - name: Publish gate
         run: python3 verify.py
+      - name: Phone alert if the live data is bad (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Medical Sales Hub - LIVE DATA FAILED VERIFY" -H "Priority: high" -H "Tags: rotating_light" \
+            -d "msh-compare-data failed its publish gate. The Hub serves this repo directly, so members may be seeing bad data right now. github.com/louisehoult-beep/msh-compare-data/actions" \
+            ntfy.sh/eth-hub-lou-4437
+
+  selftest:
+    name: Gate self-test (does the gate still catch things?)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
       # test_verify.py is BACK, on synthetic fixtures (17/08/2026).
       #
       # It left this repo earlier the same day with data/trust-contacts.json and
@@ -53,9 +90,9 @@ jobs:
       # synthetic equivalent rather than left uncovered.
       - name: Prove the gate still catches the incident it was built for
         run: python3 test_verify.py
-      - name: Phone alert if the live data is bad (ntfy)
+      - name: Phone alert if the gate itself is untrustworthy (ntfy)
         if: failure()
         run: |
-          curl -s -H "Title: Medical Sales Hub - LIVE DATA FAILED VERIFY" -H "Priority: high" -H "Tags: rotating_light" \
-            -d "msh-compare-data failed its publish gate. The Hub serves this repo directly, so members may be seeing bad data right now. github.com/louisehoult-beep/msh-compare-data/actions" \
+          curl -s -H "Title: Medical Sales Hub - GATE SELF-TEST FAILED" -H "Priority: high" -H "Tags: warning" \
+            -d "msh-compare-data's gate self-test failed or timed out. This does NOT mean the live data is bad - the publish gate reports separately. It means verify.py may no longer catch what it was built to catch. github.com/louisehoult-beep/msh-compare-data/actions" \
             ntfy.sh/eth-hub-lou-4437
