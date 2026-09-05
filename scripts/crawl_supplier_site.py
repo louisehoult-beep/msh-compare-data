@@ -95,7 +95,19 @@ MAX_PAGES = 40          # 100 products per page
 # trusted, so each site now gets a bounded slot and says when it runs out.
 SITE_BUDGET_S = 90
 MIN_PRODUCTS = 8        # below this a "range" is a landing page, not a catalogue
-NUMERIC_SLUG_BUDGET_S = 300   # its own budget: one extra GET per product page
+# its own budget: one extra GET per product page. Raised 05/09/2026, first
+# from 300 to 600 and then to 1200, when this route was generalised beyond
+# numeric-id sites (a few dozen products each) to flat-descriptive-slug sites
+# with a full-size catalogue — Direct Healthcare Group's 389 products timed
+# out TWO live runs in a row (609.6s against a 600s budget, then 1209.2s
+# against a 1200s budget — real network time on a live site varies run to
+# run and 389 pages at ~3s/page has no comfortable margin under either).
+# 1200s matches SHOPIFY_BUDGET_S, the other route that reads a large
+# catalogue one page at a time; it is not raised further because
+# numeric_slug_products no longer needs to fit the WHOLE catalogue inside it
+# to be useful — running out partway through is now an honest partial read
+# (see that function's own comment), not a discarded run.
+NUMERIC_SLUG_BUDGET_S = 1200
 
 # A WordPress post type whose rest_base merely CONTAINS "product" is not
 # necessarily a catalogue. Nevro's site exposes `product-manuals` and
@@ -900,6 +912,21 @@ PRODUCT_SUBPAGE_WORDS = {
     "urgent-safety-notifications", "value-summary",
 }
 
+# A LITERAL "category" OR "catalog" PATH SEGMENT IS THE PLATFORM'S OWN FILING
+# WORD, NOT A DIVISION (05/09/2026) — see the comment where this is used, in
+# sitemap_products's division-naming step. Only these two exact, evidenced
+# words:
+# - nutricia.co.uk publishes real ranges at
+#   /hcp/products/category/<range>/<product>/, and reading the leading
+#   segment unstripped took the literal word "category" as the division for
+#   every one of them.
+# - elekta.com publishes its spare-parts/accessories range at
+#   /products/catalog/<division>/<product>/ — two real divisions,
+#   stereotactic-neurosurgery and gamma-knife-radiosurgery — beside its main
+#   product tree (which is unaffected: Elekta's real products sit at
+#   /products/<division>/<product>/ with no "catalog" segment at all).
+CONTAINER_PATH_WORDS = ("category", "catalog")
+
 
 def _page_title(body):
     """Real product name from a numeric-slug page's own record — schema.org
@@ -926,51 +953,115 @@ def _page_title(body):
     return t or None
 
 
-def _breadcrumb_division(body):
+def _breadcrumb_division(body, domain=None):
     """The site's own filing for this one product — the first breadcrumb
     entry after the generic root(s) ("Home", "Products", the domain name).
     Reads any nav/ul/ol/div carrying "breadcrumb" in its id or class, not a
     literal id="breadcrumbs" — so this is not tied to Swann Morton's own
-    markup, only to the breadcrumb convention it happens to use."""
+    markup, only to the breadcrumb convention it happens to use.
+
+    THE HOME CRUMB IS DROPPED BY WHERE IT LINKS, NOT BY ITS WORDING
+    (05/09/2026). Swann Morton and Gore's home crumb reads "Home"; Direct
+    Healthcare Group's reads "DHG" — its own brand initials, not the word
+    "Home" — and a fixed word list can never anticipate every company's own
+    short name for its own front page. Checked live, 05/09/2026:
+    directhealthcaregroup.com/products/dyna-form-mercury-advance/ breadcrumbs
+    "DHG > Pressure Care > Dyna-Form(R) Mercury Advance", where "DHG" links
+    to https://www.directhealthcaregroup.com (the bare site root) and
+    "Pressure Care" links to /product-type/pressure-care/, a real division.
+    Reading crumbs[0] unfiltered against only the word list took "DHG" as the
+    division for the entire range. A crumb whose href resolves to the site's
+    own root, once scheme/"www."/trailing slash are stripped, is the home
+    link whatever text it carries, and is dropped alongside the existing
+    word list (kept as a cheaper second check, and for a home crumb that is
+    not itself a link)."""
     m = re.search(
         r'<(nav|ul|ol|div)[^>]*(?:id|class)=["\'][^"\']*breadcrumb[^"\']*["\'][^>]*>(.*?)</\1>',
         body, re.S | re.I)
     if not m:
         return None
-    crumbs = [clean(c) for c in re.findall(r"<a[^>]*>(.*?)</a>", m.group(2), re.S)]
-    crumbs = [c for c in crumbs if c and c.lower() not in ("home", "products", "product")]
+    root_host = None
+    if domain:
+        root_host = (domain[4:] if domain.startswith("www.") else domain).lower()
+    crumbs = []
+    for href, text in re.findall(r'<a[^>]*\bhref=["\']([^"\']*)["\'][^>]*>(.*?)</a>',
+                                  m.group(2), re.S):
+        t = clean(text)
+        if not t:
+            continue
+        h = href.strip()
+        h_host = re.sub(r"^https?://(www\.)?", "", h, flags=re.I).rstrip("/").lower()
+        is_root_link = h in ("/", "") or (root_host and h_host == root_host)
+        if is_root_link or t.lower() in ("home", "products", "product"):
+            continue
+        crumbs.append(t)
     return crumbs[0] if crumbs else None
 
 
-def numeric_slug_products(domain, prod_urls):
+def numeric_slug_products(domain, prod_urls, reason=None, fallback_label=None):
     """Read a real name and a real division from each product's OWN page,
-    for a sitemap-route site whose product URLs are bare numeric ids (see the
-    comment in `sitemap_products` above this call). One extra GET per URL —
-    bounded by NUMERIC_SLUG_BUDGET_S, its own budget, not the caller's — with
-    a 20s per-page timeout so one slow page cannot eat the whole run.
+    for a sitemap-route site whose product URLs carry no division of their
+    own (see the comment in `sitemap_products` above each call site). One
+    extra GET per URL — bounded by NUMERIC_SLUG_BUDGET_S, its own budget, not
+    the caller's — with a 20s per-page timeout so one slow page cannot eat
+    the whole run.
 
-    A page that cannot be read keeps its own numeric-id fallback rather than
+    A page that cannot be read keeps its own URL-slug fallback rather than
     being silently dropped, so the count matches the sitemap's own total; how
     many needed the fallback is reported in `captureCaveat` rather than
-    hidden."""
+    hidden.
+
+    `reason` and `fallback_label` describe, in the caveat text, WHY a
+    per-page read was needed and what an unread page falls back to. They
+    default to the original case this function was written for — bare
+    numeric ids (Gore, Swann Morton) — so that call site is unchanged. A
+    second reason (05/09/2026) is a URL that carries a real, descriptive slug
+    but still no division segment at all (Direct Healthcare Group, Talley —
+    see the comment above the call site in `sitemap_products`).
+
+    RUNNING OUT OF BUDGET PARTWAY THROUGH IS A PARTIAL READ, NOT A REFUSAL
+    (05/09/2026). The first version discarded everything and refused outright
+    when the deadline was hit mid-loop — on Direct Healthcare Group's 389
+    products that meant two live runs of ~20 minutes each threw away real
+    data because the very last few pages did not answer in time (1209.2s
+    against a 1200s budget the second time). A URL this function has not yet
+    reached keeps its OWN existing sitemap-derived fallback (its URL slug,
+    Uncategorised) exactly as an unread PAGE already does two lines below —
+    the same honest degradation, just for more of the range at once — and
+    the caveat says how many, the same `partialRead` flag the WordPress REST
+    route above already uses for the same situation (a page cap or time
+    budget cutting a walk short)."""
+    reason = reason or ("the site's product URLs are bare numeric ids (e.g. "
+                         "/product/15.php) that carry neither")
+    fallback_label = fallback_label or "numeric id"
     started = time.time()
     deadline = started + NUMERIC_SLUG_BUDGET_S
-    rows, unread = [], 0
+    rows, unread, out_of_budget = [], 0, 0
     for u in prod_urls:
         if time.time() > deadline:
-            return None, "ran out of budget reading each product's own page"
+            out_of_budget = len(prod_urls) - len(rows)
+            break
         try:
             body, _ = get(u, timeout=20)
         except Exception:
             body, name = None, None
         else:
             name = _page_title(body)
-        division = _breadcrumb_division(body) if (name and body) else None
+        division = _breadcrumb_division(body, domain) if (name and body) else None
         if not name:
             leaf = urllib.parse.urlparse(u).path.rstrip("/").rsplit("/", 1)[-1]
             name = re.sub(r"\.[a-zA-Z0-9]{1,5}$", "", leaf)
             unread += 1
         rows.append({"n": name, "division": division or "Uncategorised", "category": ""})
+
+    # Any URL never reached keeps its own slug as a fallback row too, exactly
+    # like a page that answered but carried no name — so a partial read still
+    # returns one row per product the sitemap declared, never a short count.
+    for u in prod_urls[len(rows):]:
+        leaf = urllib.parse.urlparse(u).path.rstrip("/").rsplit("/", 1)[-1]
+        name = re.sub(r"\.[a-zA-Z0-9]{1,5}$", "", leaf)
+        unread += 1
+        rows.append({"n": name, "division": "Uncategorised", "category": ""})
 
     if len(rows) < MIN_PRODUCTS:
         return None, "too few product pages answered to call a catalogue"
@@ -983,15 +1074,20 @@ def numeric_slug_products(domain, prod_urls):
     has_divisions = bool(real) and uncat * 2 <= len(rows)
     caveat = ("Names and divisions are read from each product's own page — schema.org "
               "product markup for the name, the page's own breadcrumb trail for the "
-              "division — because the site's product URLs are bare numeric ids "
-              "(e.g. /product/15.php) that carry neither. %d of %d page(s) could not be "
-              "read and fall back to their numeric id." % (unread, len(rows)))
+              "division — because %s. %d of %d page(s) could not be "
+              "read and fall back to their %s." % (reason, unread, len(rows), fallback_label))
+    if out_of_budget:
+        caveat += (" %d of those %d ran out of the %ds per-page-read budget before being "
+                   "reached at all, not because the page itself failed — the same shape "
+                   "of range would keep reading further given more time."
+                   % (out_of_budget, unread, NUMERIC_SLUG_BUDGET_S))
     return {
         "domain": domain,
         "verified": time.strftime("%Y-%m-%d"),
         "source": "%s, each product's own page read this run" % domain,
         "structureFrom": "sitemap products, each page's own name and breadcrumb division "
-                          "(numeric-slug fallback)",
+                          "(per-page fallback)",
+        "partialRead": bool(out_of_budget),
         "hasDivisions": has_divisions,
         "landingPagesDropped": 0,
         "furniturePagesDropped": 0,
@@ -1068,6 +1164,30 @@ def sitemap_products(domain, deadline=None, product_paths=None):
     segs = tuple(product_paths) if product_paths else PRODUCT_PATHS
     pat = r"/(%s)/" % "|".join(re.escape(x) for x in segs)
     prod = [u for u in urls if re.search(pat, u, re.I)]
+
+    # THE SAME URL CAN BE LISTED MORE THAN ONCE IN THE SITEMAP ITSELF
+    # (05/09/2026). Not a locale variant — the literal, identical URL
+    # repeated. Confirmed live on directhealthcaregroup.com: its five
+    # products-sitemap*.xml files matched 4,051 raw <loc> entries against
+    # PRODUCT_PATHS but only 823 of those are distinct URLs. Deduped here,
+    # before EVERYTHING below — the numeric-id check just below this reads
+    # `prod` directly, and the per-page enrichment routes both pay one live
+    # GET per entry, so an un-deduped list does not just miscount, it
+    # refetches the same page repeatedly: a live run against the raw list
+    # produced 3,616 rows for a 389-product site. Deduping by the exact URL
+    # string, in the order first seen, is always safe — two different
+    # products never share one URL — so this is a pure fix, not a judgement
+    # call the way the locale-prefix and same-name dedups below are.
+    seen_prod, deduped_prod = set(), []
+    for u in prod:
+        if u not in seen_prod:
+            seen_prod.add(u)
+            deduped_prod.append(u)
+    if len(deduped_prod) < len(prod):
+        print("      dropped %d exact-duplicate sitemap <loc> entr(ies) for a URL already seen"
+              % (len(prod) - len(deduped_prod)), flush=True)
+        prod = deduped_prod
+
     if len(prod) < MIN_PRODUCTS:
         return None, ("the sitemap carries %d URLs under %s, too few to call a catalogue"
                       % (len(prod), "/" + "/, /".join(segs) + "/"))
@@ -1130,7 +1250,7 @@ def sitemap_products(domain, deadline=None, product_paths=None):
             continue
         rest = path[i + 1:]
         if rest:
-            paths.append((path[:i], rest))
+            paths.append((path[:i], rest, u))
             if not path[:i]:
                 has_root = True
 
@@ -1147,14 +1267,64 @@ def sitemap_products(domain, deadline=None, product_paths=None):
     # the unchanged behaviour below.
     dropped_locale = 0
     if has_root:
-        kept = [(pre, rest) for pre, rest in paths if not pre]
+        kept = [(pre, rest, u) for pre, rest, u in paths if not pre]
         dropped_locale = len(paths) - len(kept)
         paths = kept
-    paths = [rest for _, rest in paths]
     if dropped_locale:
         print("      dropped %d locale-prefixed duplicate URL(s) — a plain, unprefixed "
               "catalogue exists for this site so the country/language-prefixed copies "
               "are not counted as extra products" % dropped_locale, flush=True)
+
+    # A COMPLETELY FLAT PRODUCT PATH CARRIES NO DIVISION SEGMENT EITHER, EVEN
+    # WHEN THE SLUG IS DESCRIPTIVE (05/09/2026). The numeric-id case above is
+    # one instance of a wider problem: this route can only ever read a
+    # division from a path segment BETWEEN the product-path token and the
+    # leaf, and some sites never publish one — every product sits directly at
+    # /<product-path>/<slug>/, with nothing there to read, however much of
+    # the sitemap is read. Confirmed live, 05/09/2026: Direct Healthcare
+    # Group (389 products, all of the form /products/<slug>/ once the
+    # locale-prefixed copies above are dropped) — and Talley, which sells
+    # under the same site (see the domain note on Talley's record in
+    # data/supplier-seed.json: Talley Group's own site is a lapsed domain
+    # parked by its registrar, and Companies House shows it is 75%+-owned,
+    # via a chain of two holding companies, by Direct Healthcare Group's
+    # ultimate parent). Neither has a "products" post type in WP REST
+    # (checked live: /wp-json/wp/v2/types lists none) and neither exposes a
+    # WooCommerce Store API (route 4 above returns HTTP 404), so route 1 and
+    # route 4 never have anything to read. But each product's OWN page
+    # carries a real breadcrumb trail — confirmed on
+    # directhealthcaregroup.com/products/dyna-form-mercury-advance/: "DHG >
+    # Pressure Care > Dyna-Form(R) Mercury Advance" — so the identical
+    # per-page read used for numeric ids above applies unchanged; only the
+    # reason for needing it differs.
+    #
+    # Only fires when EVERY matched, locale-deduped product URL is flat, no
+    # exceptions — deliberately stricter than the numeric check's 80%
+    # threshold above, because a site that mixes flat product pages with
+    # deeper category/landing pages under the same product-path prefix is a
+    # different, messier shape this rule must not touch. Confirmed live on
+    # medi UK (www.mediuk.co.uk): real product pages sit flat at
+    # /products/genumedi/, but marketing/landing pages for the same "products"
+    # path segment nest several levels deep (/products/vascular/upper-limb/
+    # hand/, /products/highlights/painful-elbow/) — exactly the landing-page
+    # shape the prefix/furniture logic two blocks below exists to tell apart
+    # from a real product, which a per-page fetch alone cannot do. Left alone
+    # for a future session with time to look at medi UK's structure properly,
+    # rather than guessed at here.
+    flat_urls = [u for _, rest, u in paths if len(rest) == 1]
+    if paths and len(flat_urls) == len(paths):
+        enriched, read_err = numeric_slug_products(
+            domain, flat_urls,
+            reason="the product URLs carry no path segment between the product-path "
+                   "segment and the product's own slug for this route to read a "
+                   "division from",
+            fallback_label="URL slug")
+        if enriched is not None:
+            return enriched, None
+        # Enrichment itself failed (site stopped answering) — fall through to
+        # the normal path-based read below rather than refusing outright.
+
+    paths = [rest for _, rest, u in paths]
     prefixes = {tuple(r[:k]) for r in paths for k in range(1, len(r))}
 
     def is_furniture_tail(r):
@@ -1256,8 +1426,28 @@ def sitemap_products(domain, deadline=None, product_paths=None):
         # children at all, never a landing/promotion candidate) keeps the
         # existing "Uncategorised" behaviour unchanged — there is nothing
         # here to say it is its own family rather than one of many.
+        #
+        # A LITERAL "category" SEGMENT IS THE PLATFORM'S WORD FOR "A DIVISION
+        # SITS BELOW HERE", NOT A DIVISION ITSELF (05/09/2026). Confirmed live
+        # on nutricia.co.uk: every product under a real range publishes at
+        # /hcp/products/category/<range>/<product>/ — e.g.
+        # .../category/adult-oral-range/fortijuce/, .../category/pku-range/
+        # pku-lophlex-select/ — thirteen real, named ranges (Fortisip, PKU
+        # range, Neocate, Nutrini…). Reading rest[0] the normal way took the
+        # literal word "category" itself as the division for all 59 of them,
+        # the same shape of error as publishing WordPress's own default
+        # "Uncategorised" term or Wix's "Featured" shelf as if the company had
+        # chosen it — the platform's own filing word, not the company's. Only
+        # this one exact, evidenced word is stripped, and only when something
+        # real remains beneath it; a product sitting directly at
+        # .../category/<name>/ with nothing under it still correctly falls
+        # back to "Uncategorised" two lines below, because there is no real
+        # division segment left to read once the container word is gone.
+        core = rest
+        if len(core) > 1 and core[0].lower() in CONTAINER_PATH_WORDS:
+            core = core[1:]
         div = (name if promoted else
-               rest[0].replace("-", " ").strip().title() if len(rest) > 1 else "Uncategorised")
+               core[0].replace("-", " ").strip().title() if len(core) > 1 else "Uncategorised")
         if promoted:
             promoted_count += 1
             promoted_names.add(name.lower())

@@ -51144,251 +51144,289 @@
   },
   "Direct Healthcare Group": {
    "domain": "directhealthcaregroup.com",
-   "verified": "2026-08-26",
-   "source": "directhealthcaregroup.com XML sitemap, read this run",
-   "structureFrom": "sitemap",
-   "hasDivisions": false,
+   "verified": "2026-09-05",
+   "source": "directhealthcaregroup.com, each product's own page read this run",
+   "structureFrom": "sitemap products, each page's own name and breadcrumb division (per-page fallback)",
+   "partialRead": false,
+   "hasDivisions": true,
    "landingPagesDropped": 0,
-   "duplicateUrlsDropped": 3227,
-   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 0 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping.",
-   "structure": "No division structure found in the URLs — listed as one flat range.",
+   "furniturePagesDropped": 0,
+   "duplicateUrlsDropped": 0,
    "droppedCategoryPages": 0,
-   "filingRule": "Read from the sitemap, so product NAMES come from URL slugs. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping — every item is listed by name below rather than grouped, because a flat list is honest and a fabricated grouping would not be.",
+   "captureCaveat": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 389 page(s) could not be read and fall back to their URL slug.",
+   "structure": "The company's own division for each product, read from its own breadcrumb trail.",
+   "filingRule": "Grouping MIRRORS the manufacturer's own filing, read from each product's own breadcrumb trail because the site's URLs carry no division segment of their own.",
    "divisions": [
     {
+     "name": "Safe Moving & Handling",
+     "products": 121
+    },
+    {
      "name": "Uncategorised",
-     "products": 389
+     "products": 85
+    },
+    {
+     "name": "Bathroom Safety Solutions",
+     "products": 79
+    },
+    {
+     "name": "Rental & Service Solutions",
+     "products": 41
+    },
+    {
+     "name": "Pressure Care",
+     "products": 31
+    },
+    {
+     "name": "Stairlifts",
+     "products": 15
+    },
+    {
+     "name": "Specialist Seating",
+     "products": 9
+    },
+    {
+     "name": "GATE Product EN",
+     "products": 4
+    },
+    {
+     "name": "Discontinued Products",
+     "products": 3
+    },
+    {
+     "name": "Negative Pressure Wound Therapy",
+     "products": 1
     }
    ],
    "products": [
     {
-     "n": "Dyna Tek Intelligent Air Cushion",
+     "n": "Dyna-Tek® Intelligent Air Cushion",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Advance",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Positioning Products",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Static Air",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Advance Bari",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Mercury Advance",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Advance Trolley",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Jupiter",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Community",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Saturn",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Safety 7",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Fire Evac",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Overlay Trolley Mattress",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mattress Overlay",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Advance Alternating Cushion",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Wedge",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Gel Cushion",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Posture Visco",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Flex® Cushion",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Owl",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Superior",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Pad Cushion",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Profile",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Maximus",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Air Pro-Plus",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Advance Bari WA",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Dyna Form Mercury Advance",
-     "division": "Uncategorised",
+     "n": "Dyna-Form® Mercury Advance Bari WA (380kg Weight Limit)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Dyna Tek Positioning Products",
-     "division": "Uncategorised",
+     "n": "Dyna-Form® Maximus (413kg Weight Limit)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Dyna Form Static Air Hz",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Advance Bari",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Mercury Advance Smartcare",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Advance Trolley",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Jupiter",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Community",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Saturn",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Safety 7",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Fire Evac",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Trolley Mattress",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mattress Overlay",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Advance Alternating Cushion",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Wedge",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Gel Cushion",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Posture Visco",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Flex Cushion",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Owl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Superior",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Pad Cushion",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Profile",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Maximus",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Air Pro Plus",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Advance Bari Wa",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Advance Bari Wa 380Kg Weight Limit",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Maximus 413Kg Weight Limit",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Low Air Loss 453Kg Weight Limit",
-     "division": "Uncategorised",
+     "n": "Dyna-Form® Low Air Loss (453kg Weight Limit)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
      "n": "Bariatric Training Suit",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Pro-Formance Fabric",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Static Bedside Chair (318kg)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Chatsworth Advance® Riser Recliner",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Dyna Form Pro Formance Fabric",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Static Bedside Chair 318Kg",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Chatsworth Advance Riser Recliner",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Wendover Advance Riser Recliner",
+     "n": "Wendover Advance® Riser Recliner",
      "division": "Uncategorised",
      "category": ""
     },
     {
      "n": "Transflo Cushion",
-     "division": "Uncategorised",
+     "division": "Pressure Care",
      "category": ""
     },
     {
      "n": "Duo Range",
-     "division": "Uncategorised",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
-     "n": "G 2",
-     "division": "Uncategorised",
+     "n": "G-2",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
-     "n": "Florien Elite En",
-     "division": "Uncategorised",
+     "n": "Florien Elite",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
      "n": "Florien Fife",
-     "division": "Uncategorised",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
-     "n": "Florien Ii",
-     "division": "Uncategorised",
+     "n": "Florien II",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
      "n": "Encora",
-     "division": "Uncategorised",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
      "n": "Omega",
-     "division": "Uncategorised",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
      "n": "Stirling",
-     "division": "Uncategorised",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
      "n": "Duo Mini",
-     "division": "Uncategorised",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
-     "n": "Dyna Form Vapour Flow",
-     "division": "Uncategorised",
+     "n": "Dyna-Form® Vapour Flow",
+     "division": "Pressure Care",
      "category": ""
     },
     {
@@ -51397,12 +51435,12 @@
      "category": ""
     },
     {
-     "n": "Bure Rise Go Db",
+     "n": "Bure Rise & Go DB",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Bure Double 2 0",
+     "n": "Bure Double 2.0",
      "division": "Uncategorised",
      "category": ""
     },
@@ -51412,523 +51450,523 @@
      "category": ""
     },
     {
-     "n": "Easyglide Oval Mini",
-     "division": "Uncategorised",
+     "n": "EasyGlide, oval (mini)",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Easyglide Oval",
-     "division": "Uncategorised",
+     "n": "EasyGlide, oval",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Rollerslide",
-     "division": "Uncategorised",
+     "n": "RollerSlide",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Disposable Cover Easyslide",
-     "division": "Uncategorised",
+     "n": "Disposable cover, EasySlide",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Wallrack",
-     "division": "Uncategorised",
+     "n": "WallRack",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Movemaster",
-     "division": "Uncategorised",
+     "n": "MoveMaster",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Easyslide 190 X 60",
-     "division": "Uncategorised",
+     "n": "EasySlide, 190 x 60",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Readyslide",
-     "division": "Uncategorised",
+     "n": "ReadySlide",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Handicare Vermeer",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
      "n": "Handicare 2000",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
      "n": "Handicare Rembrandt",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Wendylean",
-     "division": "Uncategorised",
+     "n": "WendyLean",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Turntablesoft",
-     "division": "Uncategorised",
+     "n": "TurnTableSoft",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Readygrip",
-     "division": "Uncategorised",
+     "n": "ReadyGrip",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Fleximove Mini",
-     "division": "Uncategorised",
+     "n": "FlexiMove (mini)",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Easybelt",
-     "division": "Uncategorised",
+     "n": "EasyBelt",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Walkingbelt",
-     "division": "Uncategorised",
+     "n": "WalkingBelt",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Flexibelt",
-     "division": "Uncategorised",
+     "n": "FlexiBelt",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Readybelt",
-     "division": "Uncategorised",
+     "n": "ReadyBelt",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Footstool",
-     "division": "Uncategorised",
+     "n": "FootStool",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Stretchersling",
-     "division": "Uncategorised",
+     "n": "StretcherSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Turningsling",
-     "division": "Uncategorised",
+     "n": "TurningSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Standingvest",
-     "division": "Uncategorised",
+     "n": "StandingVest",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Barivest",
-     "division": "Uncategorised",
+     "n": "BariVest",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Limbsling",
-     "division": "Uncategorised",
+     "n": "LimbSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Headsupport",
-     "division": "Uncategorised",
+     "n": "HeadSupport",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Softlegsupport",
-     "division": "Uncategorised",
+     "n": "SoftLegSupport",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Standupsling Padding Art No 45273306",
-     "division": "Uncategorised",
+     "n": "StandUpSling Padding Art. No. 45273306",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Slingbarwrap Minilift",
-     "division": "Uncategorised",
+     "n": "SlingBarWrap MiniLift",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Parking Placard",
-     "division": "Uncategorised",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Stretcherbar",
-     "division": "Uncategorised",
+     "n": "StretcherBar",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Scales",
-     "division": "Uncategorised",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Sling Bar Rfl X4",
-     "division": "Uncategorised",
+     "n": "Sling bar RFL X4",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Handicare Simplicity Plus",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Handicare 1000 Xxl",
-     "division": "Uncategorised",
+     "n": "Handicare 1000 XXL",
+     "division": "Stairlifts",
      "category": ""
     },
     {
      "n": "Handicare 1000",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Photosurvey By Handicare",
-     "division": "Uncategorised",
+     "n": "PhotoSurvey by Handicare",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "User Assessment",
-     "division": "Uncategorised",
+     "n": "User assessment",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Hinged Track",
-     "division": "Uncategorised",
+     "n": "Hinged track",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Body Harness",
-     "division": "Uncategorised",
+     "n": "Body harness",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Swivel Function",
-     "division": "Uncategorised",
+     "n": "Swivel function",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Slide Track",
-     "division": "Uncategorised",
+     "n": "Slide track",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Toilet Raiser With Armrests And Lid",
-     "division": "Uncategorised",
+     "n": "Toilet raiser with armrests and lid",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Armrests With Floor Support",
-     "division": "Uncategorised",
+     "n": "Armrests with floor support",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Bench Soft Seat",
-     "division": "Uncategorised",
+     "n": "Shower bench soft seat",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Chair Textile Seat Mobile",
-     "division": "Uncategorised",
+     "n": "Shower chair textile seat, mobile",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Swimming Pool Hoist Chair",
-     "division": "Uncategorised",
+     "n": "Swimming pool hoist chair",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Combi Self Propelled",
-     "division": "Uncategorised",
+     "n": "Combi, self-propelled",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Chair Textile Seat Self Propelled",
-     "division": "Uncategorised",
+     "n": "Shower chair textile seat, self-propelled",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Tilting Commode Shower Chair",
-     "division": "Uncategorised",
+     "n": "Tilting commode/shower chair",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Trolleys",
-     "division": "Uncategorised",
+     "n": "Shower trolleys",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Swimming Pool Shower Trolley",
-     "division": "Uncategorised",
+     "n": "Swimming pool shower trolley",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Rotating Bathtub Bar",
-     "division": "Uncategorised",
+     "n": "Rotating bathtub bar",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Grab Rail",
-     "division": "Uncategorised",
+     "n": "Grab rail",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Washbasin Adjustment System",
-     "division": "Uncategorised",
+     "n": "Washbasin adjustment system",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Curtain Rail",
-     "division": "Uncategorised",
+     "n": "Shower curtain rail",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Toothbrush Holder",
-     "division": "Uncategorised",
+     "n": "Toothbrush holder",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
      "n": "Shelf",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Tilting mirror",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Robe hooks",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Toilet roll holder",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Spare toilet roll holder",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Swinging support",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Ceiling support",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Backing plate rectangular",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Backing plates set",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Wall mounting sets",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Ceiling mounting set",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Sliding cover, RollerSlide",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Rising ladder, ReTurn",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "New “hugging” versions of our classic belts",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Tilting Mirror",
-     "division": "Uncategorised",
+     "n": "Software for diagnostics",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Robe Hooks",
-     "division": "Uncategorised",
+     "n": "Floor support installation set",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Toilet Roll Holder",
-     "division": "Uncategorised",
+     "n": "Backrest, for shower stools with arm supports",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Spare Toilet Roll Holder",
-     "division": "Uncategorised",
+     "n": "Headrest, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Swinging Support",
-     "division": "Uncategorised",
+     "n": "Armrest lock, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Ceiling Support",
-     "division": "Uncategorised",
+     "n": "Lateral trunk support, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Backing Plate Rectangular",
-     "division": "Uncategorised",
+     "n": "Front cross bar, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Backing Plates Set",
-     "division": "Uncategorised",
+     "n": "Seat with forward tilt, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Wall Mounting Sets",
-     "division": "Uncategorised",
+     "n": "Transport seat cover, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Ceiling Mounting Set",
-     "division": "Uncategorised",
+     "n": "Leg support, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Sliding Cover Rollerslide",
-     "division": "Uncategorised",
+     "n": "Footrests, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Rising Ladder Return",
-     "division": "Uncategorised",
+     "n": "Heel and calf strap, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "New Hugging Versions Of Our Classic Belts",
-     "division": "Uncategorised",
+     "n": "Comm/shower chair soft seat, mobile",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Software For Diagnostics",
-     "division": "Uncategorised",
+     "n": "Comm/shower chair soft seat, self-propelled",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Floor Support Installation Set",
-     "division": "Uncategorised",
+     "n": "HygieneHBSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Backrest For Shower Stools With Arm Supports",
-     "division": "Uncategorised",
+     "n": "EasyGlide",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Headrest Combi",
-     "division": "Uncategorised",
+     "n": "LowBackSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Armrest Lock Combi",
-     "division": "Uncategorised",
+     "n": "HygieneLBSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Lateral Trunk Support Combi",
-     "division": "Uncategorised",
+     "n": "WalkingVest",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Front Cross Bar Combi",
-     "division": "Uncategorised",
+     "n": "Shower stretchers",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Seat With Forward Tilt Combi",
-     "division": "Uncategorised",
+     "n": "9V battery and cable",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Transport Seat Cover Combi",
-     "division": "Uncategorised",
+     "n": "BariBar",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Leg Support Combi",
-     "division": "Uncategorised",
+     "n": "BariBarWrap",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Footrests Combi",
-     "division": "Uncategorised",
+     "n": "AmpHBSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Heel And Calf Strap Combi",
-     "division": "Uncategorised",
+     "n": "LoopTag",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Comm Shower Chair Soft Seat Mobile",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Comm Shower Chair Soft Seat Self Propelled",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Hygienehbsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Easyglide",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Lowbacksling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Hygienelbsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Walkingvest",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Shower Stretchers",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "9V Battery And Cable",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Baribar",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Baribarwrap",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Amphbsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Looptag",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Lift Strap Extension",
-     "division": "Uncategorised",
+     "n": "Lift strap extension",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Endcover Carina",
-     "division": "Uncategorised",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Riseporto 300 450",
-     "division": "Uncategorised",
+     "n": "RisePorto 300/450",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Side Fences For Trolleys",
-     "division": "Uncategorised",
+     "n": "Side fences for trolleys",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
      "n": "Hinged Arm Support",
-     "division": "Uncategorised",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
      "n": "Handicare Van Gogh",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
      "n": "Handicare Simplicity",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Folding Function",
-     "division": "Uncategorised",
+     "n": "Folding function",
+     "division": "Stairlifts",
      "category": ""
     },
     {
@@ -51937,877 +51975,877 @@
      "category": ""
     },
     {
-     "n": "Soft Toilet Seats And Inserts Replacements",
-     "division": "Uncategorised",
+     "n": "Soft toilet seats and inserts, replacements",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Amputee Support Combi",
-     "division": "Uncategorised",
+     "n": "Amputee support, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Hip Belt Combi",
-     "division": "Uncategorised",
+     "n": "Hip belt, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Flexible Supply And Drain Set",
-     "division": "Uncategorised",
+     "n": "Flexible supply and drain set",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Backing Plate Round",
-     "division": "Uncategorised",
+     "n": "Backing plate round",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Toilet Brush And Holder",
-     "division": "Uncategorised",
+     "n": "Toilet brush and holder",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Soap Dish",
-     "division": "Uncategorised",
+     "n": "Soap dish",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Head Holder",
-     "division": "Uncategorised",
+     "n": "Shower head holder",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
      "n": "Bathboard",
-     "division": "Uncategorised",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Heavy Duty Commode Shower Chair",
-     "division": "Uncategorised",
+     "n": "Heavy Duty commode/shower chair",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Toilet Raiser With Lid",
-     "division": "Uncategorised",
+     "n": "Toilet raiser with lid",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
      "n": "Backpack",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "PositioningBelt",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "LowBackSling. Art. No. 40252002/3/4/6/7/8/9",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "TurnTable 38 cm",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Protective cover, EasySlide Art. No. 2052",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "EasyRoll Pillow Case",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Hand control HB33-6",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "HygieneSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "OxygenTankHolder",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Lower part for TopSheet",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "BackBoardStraps",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "SlingBarWrap",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "StrapsPadding",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "AdjustmentLoop",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "SitWalk",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "TurnSafe2",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "PositioningCover",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "OneWaySlide",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "FootStoolCover",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Positioningbelt",
+     "n": "Bed table",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Lowbacksling Art No 40252002 3 4 6 7 8 9",
+     "n": "Side fences",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Turntable 38 Cm",
+     "n": "Locking strap, EasySlide",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Protective Cover Easyslide Art No 2052",
+     "n": "Height adjustment systems for shower seats",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Easyroll Pillow Case",
+     "n": "Shower seats",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Hand Control Hb33 6",
+     "n": "Click-On frames",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Hygienesling",
+     "n": "Floor supports for shower seats",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Oxygentankholder",
-     "division": "Uncategorised",
+     "n": "Fero Obesitas Bedside Mobile Chair (318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Lower Part For Topsheet",
-     "division": "Uncategorised",
+     "n": "ReTurn7600",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Backboardstraps",
-     "division": "Uncategorised",
+     "n": "ReTurn 7600 (205kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Slingbarwrap",
-     "division": "Uncategorised",
+     "n": "Stair newel grab rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Strapspadding",
-     "division": "Uncategorised",
+     "n": "Door frame grab rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Adjustmentloop",
-     "division": "Uncategorised",
+     "n": "Ergogrip straight grab rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Sitwalk",
-     "division": "Uncategorised",
+     "n": "Ergogrip 90° grab rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Turnsafe2",
-     "division": "Uncategorised",
+     "n": "Ergogrip corner and combination grab rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Positioningcover",
-     "division": "Uncategorised",
+     "n": "ErgoGrip 45° grab rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Onewayslide",
-     "division": "Uncategorised",
+     "n": "Front support bar",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Footstoolcover",
-     "division": "Uncategorised",
+     "n": "Soft armrest",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Bed Table",
-     "division": "Uncategorised",
+     "n": "Floor support for arm support",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Side Fences",
-     "division": "Uncategorised",
+     "n": "Floor console for arm support",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Locking Strap Easyslide",
-     "division": "Uncategorised",
+     "n": "Height adjustment system for arm supports",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Height Adjustment Systems For Shower Seats",
-     "division": "Uncategorised",
+     "n": "Adjustable clamp levers",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Seats",
-     "division": "Uncategorised",
+     "n": "Cover sets",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Click On Frames",
-     "division": "Uncategorised",
+     "n": "Fixed arm supports",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Floor Supports For Shower Seats",
-     "division": "Uncategorised",
+     "n": "Commode/shower chair soft seat",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Fero Obesitas Bedside Mobile Chair 318Kg",
-     "division": "Uncategorised",
+     "n": "Washbasin rail",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Return7600",
-     "division": "Uncategorised",
+     "n": "Towel rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Return 7600 205Kg Swl",
-     "division": "Uncategorised",
+     "n": "Toilet roll holder single-hand",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Stair Newel Grab Rails",
-     "division": "Uncategorised",
+     "n": "Handle for tilting mirror",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Door Frame Grab Rails",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ergogrip Straight Grab Rails",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ergogrip 90 Grab Rails",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ergogrip Corner And Combination Grab Rails",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ergogrip 45 Grab Rails",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Front Support Bar",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Soft Armrest",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Floor Support For Arm Support",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Floor Console For Arm Support",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Height Adjustment System For Arm Supports",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Adjustable Clamp Levers",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Cover Sets",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Fixed Arm Supports",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Commode Shower Chair Soft Seat",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Washbasin Rail",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Towel Rails",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Toilet Roll Holder Single Hand",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Handle For Tilting Mirror",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Insulation Sets",
-     "division": "Uncategorised",
+     "n": "Insulation sets",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
      "n": "Foldable Toilet Frame",
+     "division": "Discontinued Products",
+     "category": ""
+    },
+    {
+     "n": "Fold toiletframe w Backsupport",
+     "division": "Discontinued Products",
+     "category": ""
+    },
+    {
+     "n": "AmbulationArm, Art. No. 80100010",
+     "division": "Discontinued Products",
+     "category": ""
+    },
+    {
+     "n": "Soft shower seats",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Fold Toiletframe W Backsupport",
+     "n": "Short shower seats",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Ambulationarm Art No 80100010",
+     "n": "EASY SoftBack",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Soft Shower Seats",
-     "division": "Uncategorised",
+     "n": "MilkyWay",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Short Shower Seats",
-     "division": "Uncategorised",
+     "n": "EasySlide, disposable",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Easy Softback",
-     "division": "Uncategorised",
+     "n": "ShellHBSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Milkyway",
-     "division": "Uncategorised",
+     "n": "Pro Axis 50 34″ R (318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Easyslide Disposable",
-     "division": "Uncategorised",
+     "n": "Pro Axis 50 31″ R (318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Shellhbsling",
-     "division": "Uncategorised",
+     "n": "Pro Axis 40 28″ R (318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Pro Axis 50 34 R 318Kg",
-     "division": "Uncategorised",
+     "n": "Pro Axis 40 25″ R (318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Pro Axis 50 31 R 318Kg",
-     "division": "Uncategorised",
+     "n": "Pro Axis 22″ R (120/140kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Pro Axis 40 28 R 318Kg",
-     "division": "Uncategorised",
+     "n": "Pro Axis 19″ R (120/140kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Pro Axis 40 25 R 318Kg",
-     "division": "Uncategorised",
+     "n": "Hi-Lo Tilt-In Space Bariatric Day Chair (300kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Pro Axis 22 R 120 140Kg",
-     "division": "Uncategorised",
+     "n": "HeelStrap",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Pro Axis 19 R 120 140Kg",
-     "division": "Uncategorised",
+     "n": "Padding for leg support",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Hi Lo Tilt In Space Bariatric Day Chair 300Kg Swl",
-     "division": "Uncategorised",
+     "n": "Bag, ReTurn",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Heelstrap",
-     "division": "Uncategorised",
+     "n": "QuickMove",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Padding For Leg Support",
-     "division": "Uncategorised",
+     "n": "BackSupport",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Bag Return",
-     "division": "Uncategorised",
+     "n": "SupportStraps",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Quickmove",
-     "division": "Uncategorised",
+     "n": "CalfStrap",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Backsupport",
-     "division": "Uncategorised",
+     "n": "MiniLift160",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Supportstraps",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Calfstrap",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Minilift160",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Readylett",
-     "division": "Uncategorised",
+     "n": "ReadyLett",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Helena",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "RiseBasic 300M/440M",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Eva600EE",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Ergonomic shower seats",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Risebasic 300M 440M",
+     "n": "PantLock",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "BasicSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "FlexiGrip",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Vega505EE",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ReTurnBelt",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "QuickTrolley, RiseAtlas",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "AutoSlide",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ReTurn7400",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "AntiSlip mat",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Eva450EE",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Castor gantry",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "SafeHandlingSheet",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "TopSheet",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ThoraxSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "SlingBar",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Disposable cover, RollerSlide",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Cover to charger, RiseAtlas",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "HighBackSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "FlexibleSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ReTurn7500i",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "AmpSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "FlexibleSling, undivided",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ClassicHBSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Carina350EM/EE",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "EasyRoll 4way Sliding Drawsheet",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Mattress cover",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "EasyRoll Sliding Sheet Elastic",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Eva600Ee",
+     "n": "Tergo®Glide",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Ergonomic Shower Seats",
+     "n": "BariSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Bedpan and bucket, stainless steel",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Shower stools with arm supports",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Mattress cover, TurnSheet",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Bucket with lid, Combi",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Quattro® Plus",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Pantlock",
+     "n": "SlingBarSpreader M",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ClassicSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "QuickLink®",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Basicsling",
-     "division": "Uncategorised",
+     "n": "RiseAtlas 450",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Flexigrip",
-     "division": "Uncategorised",
+     "n": "RiseAtlas 625",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Vega505Ee",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Returnbelt",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Quicktrolley Riseatlas",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Autoslide",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Return7400",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Antislip Mat",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Eva450Ee",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Castor Gantry",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Safehandlingsheet",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Topsheet",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Thoraxsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Slingbar",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Disposable Cover Rollerslide",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Cover To Charger Riseatlas",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Highbacksling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Flexiblesling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Return7500I",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ampsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Flexiblesling Undivided",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Classichbsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Carina350Em Ee",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Easyroll 4Way Sliding Drawsheet",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Mattress Cover",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Easyroll Sliding Sheet Elastic",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Tergoglide",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Barisling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Bedpan And Bucket Stainless Steel",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Shower Stools With Arm Supports",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Mattress Cover Turnsheet",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Bucket With Lid Combi",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Quattro Plus",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Slingbarspreader M",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Classicsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Quicklink",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Riseatlas 450",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Riseatlas 625",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Minilift160Classic",
-     "division": "Uncategorised",
+     "n": "MiniLift160 Classic",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Bure S Stand Tall Walker",
-     "division": "Uncategorised",
+     "division": "GATE Product EN",
      "category": ""
     },
     {
      "n": "Mover Plus",
+     "division": "GATE Product EN",
+     "category": ""
+    },
+    {
+     "n": "LiftSeat",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ReadySheet",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Protective cover, EasySlide",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "EasyGlide, extra long",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Liftseat",
+     "n": "EasyRoll Sliding sheet White/blue striped",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Readysheet",
+     "n": "EasySlide",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Protective Cover Easyslide",
+     "n": "Combi, attendant operated",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "TurnSheet",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Easyglide Extra Long",
+     "n": "Side support",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Easyroll Sliding Sheet White Blue Striped",
+     "n": "Plattor av plast tillbehör till HigbackSling / nacke",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Easyslide",
+     "n": "Combi, tilt",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Underbensstöd",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Combi Attendant Operated",
+     "n": "Hälband till ståplatta",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Turnsheet",
+     "n": "Droppställning inkl. hållare",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Side Support",
+     "n": "Hjul med broms",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Plattor Av Plast Tillbehor Till Higbacksling Nacke",
+     "n": "SYRGASHÅLLARE / OXYGEN TUBEHOLDER inkl. fäste",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Combi Tilt",
+     "n": "Manuell brukarbroms 2-hands, handbroms",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Underbensstod",
+     "n": "WendyLett2Way",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Manuell 2 hands broms passar DB 2.0",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Halband Till Staplatta",
+     "n": "WendyLett4Way",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Uppresningssele MULTI med fästband",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Droppstallning Inkl Hallare",
+     "n": "VENDLET V5S Speed Adjust",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Hjul Med Broms",
+     "n": "Quattro® Acute",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Tubhallare Inkl Faste",
+     "n": "LEJRELET Tube 250",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Manuell Brukarbroms 2 Hands Handbroms",
+     "n": "LEJRELET Wedge",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Wendylett2Way",
+     "n": "LEJRELET Pad High",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Manuell 2 Hands Broms Passar Db 2 0",
+     "n": "LERJRELET Set Without Tubes",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Wendylett4Way",
+     "n": "LEJRELET Set with Tube 125",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Uppresningssele Multi Med Fastband",
+     "n": "LEJRELET Set with Tube 250",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Vendlet V5S Speed Adjust",
+     "n": "LEJRELET Tube 125",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Quattro Acute",
+     "n": "LEJRELET Pad Low",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Lejrelet Tube 250",
+     "n": "LEJRELET Oval",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Lejrelet Wedge",
+     "n": "FlexiMove",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "VENDLET V5S+ (Bari)",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Lejrelet Pad High",
+     "n": "VENDLET Standard",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Lerjrelet Set Without Tubes",
+     "n": "VENDLET V5S",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Lejrelet Set With Tube 125",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Lejrelet Set With Tube 250",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Lejrelet Tube 125",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Lejrelet Pad Low",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Lejrelet Oval",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Fleximove",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Vendlet Bari",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Vendlet Standard",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Vendtlet V5S",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Bure Xl Stand Tall Walker",
-     "division": "Uncategorised",
+     "n": "Bure XL Stand Tall Walker",
+     "division": "GATE Product EN",
      "category": ""
     },
     {
      "n": "Bure Space Stand Tall Walker",
+     "division": "GATE Product EN",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Power-Turn Elite Lateral Rotation Mattress (453kg Weight Limit)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Carital® Optima",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Dyna Form Power Turn Elite Lateral Rotation Mattress 453Kg Weight Limit",
-     "division": "Uncategorised",
+     "n": "Extension strap, FlexiGrip",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Carital Optima",
-     "division": "Uncategorised",
+     "n": "Olympia Bariatric Expandable Bed (500kg SWL)",
+     "division": "Pressure Care",
      "category": ""
     },
     {
-     "n": "Extension Strap Flexigrip",
-     "division": "Uncategorised",
+     "n": "Dyna-Tek® Heel Boot & Heel Pad",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Olympia Bariatric Expandable Bed 500Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Heel Boot Heel Pad",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Vendlet V5S",
+     "n": "VENDLET V5S",
      "division": "Uncategorised",
      "category": ""
     },
@@ -52817,27 +52855,27 @@
      "category": ""
     },
     {
-     "n": "Positioningsling",
+     "n": "PositioningSling",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Dyna Form Smartresponse",
+     "n": "Dyna-Form®",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Venturi Compact",
+     "n": "VENTURI® Compact",
+     "division": "Negative Pressure Wound Therapy",
+     "category": ""
+    },
+    {
+     "n": "Raizer II",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Raizer Ii Falls Management",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Vendlet Slide Sheet",
+     "n": "VENDLET Slide Sheet",
      "division": "Uncategorised",
      "category": ""
     },
@@ -52852,63 +52890,63 @@
      "category": ""
     },
     {
-     "n": "Hulppootset Voor Verkorte En Zachte Douchezitting",
+     "n": "Hulppootset voor verkorte- en zachte douchezitting",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Regia Gardo",
+     "n": "Regia Gardo – sängen med optimalt allroundskydd",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Aurum Bariatric Bed",
+     "n": "Aurum®+ Bariatric Bed",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Integrity L Cushion",
+     "n": "Integrity® L Cushion",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Integrity H Cushion",
+     "n": "Integrity® H Cushion",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Integrity V Cushion",
+     "n": "Integrity® V Cushion",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Integrity E Cushion",
+     "n": "Integrity® E Cushion",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Integrity M Cushion",
+     "n": "Integrity® M Cushion",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Raizer Servicing",
+     "n": "Raizer II ProServe – Manufacturer Servicing",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Xxl Xpress Bariatric Care Bed 270Kg Swl",
-     "division": "Uncategorised",
+     "n": "XXL Xpress Bariatric Care Bed (270kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Aerys Hi Lo Community Bed 230Kg Swl",
-     "division": "Uncategorised",
+     "n": "Aerys Hi-Lo Community Bed (230kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Olympia Hi Lo Acute Care Bed 230Kg Swl",
-     "division": "Uncategorised",
+     "n": "Olympia Hi-Lo Acute Care Bed (230kg SWL)",
+     "division": "Pressure Care",
      "category": ""
     },
     {
@@ -52917,43 +52955,43 @@
      "category": ""
     },
     {
-     "n": "S Capepod",
+     "n": "S-CAPEPOD",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Freeway T100 Bariatric Shower Chair 350Kg",
-     "division": "Uncategorised",
+     "n": "Freeway T100 Bariatric Shower Chair (350kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Commode Shower Chair Xxl Wheeled 325Kg",
-     "division": "Uncategorised",
+     "n": "Commode / Shower Chair: XXL Wheeled (325kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Commode Shower Chair Xxl Wheeler 325Kg",
-     "division": "Uncategorised",
+     "n": "Commode / Shower Chair: XXL Wheeler (325kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Commode Shower Chair X399 250Kg",
-     "division": "Uncategorised",
+     "n": "Commode / Shower Chair: X399 (250kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Commode Shower Chair X499 250Kg",
-     "division": "Uncategorised",
+     "n": "Commode / Shower Chair: X499 (250kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Commode Shower Chair Nightingales 318Kg",
-     "division": "Uncategorised",
+     "n": "Commode / Shower Chair: Nightingales (318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Commode Zenith 381Kg",
-     "division": "Uncategorised",
+     "n": "Commode Zenith (SWL 381kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
@@ -52967,63 +53005,63 @@
      "category": ""
     },
     {
-     "n": "Liko Ultra Twin Gantry Hoist 400Kg Swl",
+     "n": "Liko Ultra Twin Gantry Hoist (400kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Liko Viking XL Mobile Hoist (300kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Liko Ultra Twist Plate (500kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Liko Ultra Lift Pants (500kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Liko Repositioning Sheet (500kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Mobile Flex 2 Post Gantry Hoist (275kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Atlas 250 Mobile Lift (250kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Titan 250 Bariatric Stand Aid (250kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "M200 Chair Scales (300kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Ramped Foldaway Scale System (300kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Bariatric 3-Section Couch",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Liko Viking Xl Mobile Hoist 300Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Liko Ultra Twist Plate 500Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Liko Ultra Lift Pants 500Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Liko Repositioning Sheet 500Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Mobile Flex 2 Post Gantry Hoist 275Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Atlas 250 Mobile Lift 250Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Titan 250 Bariatric Stand Aid 250Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "M200 Chair Scales 300Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ramped Foldaway Scale System 300Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Bariatric 3 Section Couch",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Independent Bed Scale System 1000Kg Swl",
-     "division": "Uncategorised",
+     "n": "Independent Bed Scale System (1000kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
@@ -53037,17 +53075,17 @@
      "category": ""
     },
     {
-     "n": "Height Adjustable Walking Aid 318Kg Swl",
-     "division": "Uncategorised",
+     "n": "Height Adjustable Walking Aid (318kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Stand Tall Xxl Walking Aid 325Kg Swl",
-     "division": "Uncategorised",
+     "n": "Stand Tall XXL Walking Aid (325kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Tilt In Space Wheelchair",
+     "n": "Tilt-in-Space Wheelchair",
      "division": "Uncategorised",
      "category": ""
     },
@@ -53062,13 +53100,13 @@
      "category": ""
     },
     {
-     "n": "Eclipse Wheelchair 125 318Kg",
-     "division": "Uncategorised",
+     "n": "Eclipse Wheelchair (125 – 318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
      "n": "Raising Aid",
-     "division": "Uncategorised",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
@@ -53077,8 +53115,8 @@
      "category": ""
     },
     {
-     "n": "Versatech 1100 Ultra Low Bariatric Bed",
-     "division": "Uncategorised",
+     "n": "VersaTech 1100 Ultra Low Bariatric Bed",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
@@ -53087,13 +53125,13 @@
      "category": ""
     },
     {
-     "n": "Wendylett",
-     "division": "Uncategorised",
+     "n": "WendyLett",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Shower Chair Textile Seat",
-     "division": "Uncategorised",
+     "n": "Shower chair textile seat",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
@@ -53102,7 +53140,7 @@
      "category": ""
     },
     {
-     "n": "Quattro Plus Nexus",
+     "n": "Quattro® Plus Nexus",
      "division": "Uncategorised",
      "category": ""
     }
@@ -53528,251 +53566,289 @@
   },
   "Talley": {
    "domain": "directhealthcaregroup.com",
-   "verified": "2026-08-26",
-   "source": "directhealthcaregroup.com XML sitemap, read this run",
-   "structureFrom": "sitemap",
-   "hasDivisions": false,
+   "verified": "2026-09-05",
+   "source": "directhealthcaregroup.com, each product's own page read this run",
+   "structureFrom": "sitemap products, each page's own name and breadcrumb division (per-page fallback)",
+   "partialRead": false,
+   "hasDivisions": true,
    "landingPagesDropped": 0,
-   "duplicateUrlsDropped": 3227,
-   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 0 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping.",
-   "structure": "No division structure found in the URLs — listed as one flat range.",
+   "furniturePagesDropped": 0,
+   "duplicateUrlsDropped": 0,
    "droppedCategoryPages": 0,
-   "filingRule": "Read from the sitemap, so product NAMES come from URL slugs. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping — every item is listed by name below rather than grouped, because a flat list is honest and a fabricated grouping would not be.",
+   "captureCaveat": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 389 page(s) could not be read and fall back to their URL slug.",
+   "structure": "The company's own division for each product, read from its own breadcrumb trail.",
+   "filingRule": "Grouping MIRRORS the manufacturer's own filing, read from each product's own breadcrumb trail because the site's URLs carry no division segment of their own.",
    "divisions": [
     {
+     "name": "Safe Moving & Handling",
+     "products": 121
+    },
+    {
      "name": "Uncategorised",
-     "products": 389
+     "products": 85
+    },
+    {
+     "name": "Bathroom Safety Solutions",
+     "products": 79
+    },
+    {
+     "name": "Rental & Service Solutions",
+     "products": 41
+    },
+    {
+     "name": "Pressure Care",
+     "products": 31
+    },
+    {
+     "name": "Stairlifts",
+     "products": 15
+    },
+    {
+     "name": "Specialist Seating",
+     "products": 9
+    },
+    {
+     "name": "GATE Product EN",
+     "products": 4
+    },
+    {
+     "name": "Discontinued Products",
+     "products": 3
+    },
+    {
+     "name": "Negative Pressure Wound Therapy",
+     "products": 1
     }
    ],
    "products": [
     {
-     "n": "Dyna Tek Intelligent Air Cushion",
+     "n": "Dyna-Tek® Intelligent Air Cushion",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Advance",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Positioning Products",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Static Air",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Advance Bari",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Mercury Advance",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Advance Trolley",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Jupiter",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Community",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Saturn",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Safety 7",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Fire Evac",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Overlay Trolley Mattress",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mattress Overlay",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Advance Alternating Cushion",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Wedge",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Gel Cushion",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Posture Visco",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Flex® Cushion",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Owl",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Superior",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Pad Cushion",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Tek® Profile",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Maximus",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Air Pro-Plus",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Mercury Advance Bari WA",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Dyna Form Mercury Advance",
-     "division": "Uncategorised",
+     "n": "Dyna-Form® Mercury Advance Bari WA (380kg Weight Limit)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Dyna Tek Positioning Products",
-     "division": "Uncategorised",
+     "n": "Dyna-Form® Maximus (413kg Weight Limit)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Dyna Form Static Air Hz",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Advance Bari",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Mercury Advance Smartcare",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Advance Trolley",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Jupiter",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Community",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Saturn",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Safety 7",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Fire Evac",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Trolley Mattress",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mattress Overlay",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Advance Alternating Cushion",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Wedge",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Gel Cushion",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Posture Visco",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Flex Cushion",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Owl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Superior",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Pad Cushion",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Profile",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Maximus",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Air Pro Plus",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Advance Bari Wa",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Mercury Advance Bari Wa 380Kg Weight Limit",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Maximus 413Kg Weight Limit",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Form Low Air Loss 453Kg Weight Limit",
-     "division": "Uncategorised",
+     "n": "Dyna-Form® Low Air Loss (453kg Weight Limit)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
      "n": "Bariatric Training Suit",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Pro-Formance Fabric",
+     "division": "Pressure Care",
+     "category": ""
+    },
+    {
+     "n": "Static Bedside Chair (318kg)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Chatsworth Advance® Riser Recliner",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Dyna Form Pro Formance Fabric",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Static Bedside Chair 318Kg",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Chatsworth Advance Riser Recliner",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Wendover Advance Riser Recliner",
+     "n": "Wendover Advance® Riser Recliner",
      "division": "Uncategorised",
      "category": ""
     },
     {
      "n": "Transflo Cushion",
-     "division": "Uncategorised",
+     "division": "Pressure Care",
      "category": ""
     },
     {
      "n": "Duo Range",
-     "division": "Uncategorised",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
-     "n": "G 2",
-     "division": "Uncategorised",
+     "n": "G-2",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
-     "n": "Florien Elite En",
-     "division": "Uncategorised",
+     "n": "Florien Elite",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
      "n": "Florien Fife",
-     "division": "Uncategorised",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
-     "n": "Florien Ii",
-     "division": "Uncategorised",
+     "n": "Florien II",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
      "n": "Encora",
-     "division": "Uncategorised",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
      "n": "Omega",
-     "division": "Uncategorised",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
      "n": "Stirling",
-     "division": "Uncategorised",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
      "n": "Duo Mini",
-     "division": "Uncategorised",
+     "division": "Specialist Seating",
      "category": ""
     },
     {
-     "n": "Dyna Form Vapour Flow",
-     "division": "Uncategorised",
+     "n": "Dyna-Form® Vapour Flow",
+     "division": "Pressure Care",
      "category": ""
     },
     {
@@ -53781,12 +53857,12 @@
      "category": ""
     },
     {
-     "n": "Bure Rise Go Db",
+     "n": "Bure Rise & Go DB",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Bure Double 2 0",
+     "n": "Bure Double 2.0",
      "division": "Uncategorised",
      "category": ""
     },
@@ -53796,523 +53872,523 @@
      "category": ""
     },
     {
-     "n": "Easyglide Oval Mini",
-     "division": "Uncategorised",
+     "n": "EasyGlide, oval (mini)",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Easyglide Oval",
-     "division": "Uncategorised",
+     "n": "EasyGlide, oval",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Rollerslide",
-     "division": "Uncategorised",
+     "n": "RollerSlide",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Disposable Cover Easyslide",
-     "division": "Uncategorised",
+     "n": "Disposable cover, EasySlide",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Wallrack",
-     "division": "Uncategorised",
+     "n": "WallRack",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Movemaster",
-     "division": "Uncategorised",
+     "n": "MoveMaster",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Easyslide 190 X 60",
-     "division": "Uncategorised",
+     "n": "EasySlide, 190 x 60",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Readyslide",
-     "division": "Uncategorised",
+     "n": "ReadySlide",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Handicare Vermeer",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
      "n": "Handicare 2000",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
      "n": "Handicare Rembrandt",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Wendylean",
-     "division": "Uncategorised",
+     "n": "WendyLean",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Turntablesoft",
-     "division": "Uncategorised",
+     "n": "TurnTableSoft",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Readygrip",
-     "division": "Uncategorised",
+     "n": "ReadyGrip",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Fleximove Mini",
-     "division": "Uncategorised",
+     "n": "FlexiMove (mini)",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Easybelt",
-     "division": "Uncategorised",
+     "n": "EasyBelt",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Walkingbelt",
-     "division": "Uncategorised",
+     "n": "WalkingBelt",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Flexibelt",
-     "division": "Uncategorised",
+     "n": "FlexiBelt",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Readybelt",
-     "division": "Uncategorised",
+     "n": "ReadyBelt",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Footstool",
-     "division": "Uncategorised",
+     "n": "FootStool",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Stretchersling",
-     "division": "Uncategorised",
+     "n": "StretcherSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Turningsling",
-     "division": "Uncategorised",
+     "n": "TurningSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Standingvest",
-     "division": "Uncategorised",
+     "n": "StandingVest",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Barivest",
-     "division": "Uncategorised",
+     "n": "BariVest",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Limbsling",
-     "division": "Uncategorised",
+     "n": "LimbSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Headsupport",
-     "division": "Uncategorised",
+     "n": "HeadSupport",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Softlegsupport",
-     "division": "Uncategorised",
+     "n": "SoftLegSupport",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Standupsling Padding Art No 45273306",
-     "division": "Uncategorised",
+     "n": "StandUpSling Padding Art. No. 45273306",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Slingbarwrap Minilift",
-     "division": "Uncategorised",
+     "n": "SlingBarWrap MiniLift",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Parking Placard",
-     "division": "Uncategorised",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Stretcherbar",
-     "division": "Uncategorised",
+     "n": "StretcherBar",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Scales",
-     "division": "Uncategorised",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Sling Bar Rfl X4",
-     "division": "Uncategorised",
+     "n": "Sling bar RFL X4",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Handicare Simplicity Plus",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Handicare 1000 Xxl",
-     "division": "Uncategorised",
+     "n": "Handicare 1000 XXL",
+     "division": "Stairlifts",
      "category": ""
     },
     {
      "n": "Handicare 1000",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Photosurvey By Handicare",
-     "division": "Uncategorised",
+     "n": "PhotoSurvey by Handicare",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "User Assessment",
-     "division": "Uncategorised",
+     "n": "User assessment",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Hinged Track",
-     "division": "Uncategorised",
+     "n": "Hinged track",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Body Harness",
-     "division": "Uncategorised",
+     "n": "Body harness",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Swivel Function",
-     "division": "Uncategorised",
+     "n": "Swivel function",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Slide Track",
-     "division": "Uncategorised",
+     "n": "Slide track",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Toilet Raiser With Armrests And Lid",
-     "division": "Uncategorised",
+     "n": "Toilet raiser with armrests and lid",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Armrests With Floor Support",
-     "division": "Uncategorised",
+     "n": "Armrests with floor support",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Bench Soft Seat",
-     "division": "Uncategorised",
+     "n": "Shower bench soft seat",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Chair Textile Seat Mobile",
-     "division": "Uncategorised",
+     "n": "Shower chair textile seat, mobile",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Swimming Pool Hoist Chair",
-     "division": "Uncategorised",
+     "n": "Swimming pool hoist chair",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Combi Self Propelled",
-     "division": "Uncategorised",
+     "n": "Combi, self-propelled",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Chair Textile Seat Self Propelled",
-     "division": "Uncategorised",
+     "n": "Shower chair textile seat, self-propelled",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Tilting Commode Shower Chair",
-     "division": "Uncategorised",
+     "n": "Tilting commode/shower chair",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Trolleys",
-     "division": "Uncategorised",
+     "n": "Shower trolleys",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Swimming Pool Shower Trolley",
-     "division": "Uncategorised",
+     "n": "Swimming pool shower trolley",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Rotating Bathtub Bar",
-     "division": "Uncategorised",
+     "n": "Rotating bathtub bar",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Grab Rail",
-     "division": "Uncategorised",
+     "n": "Grab rail",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Washbasin Adjustment System",
-     "division": "Uncategorised",
+     "n": "Washbasin adjustment system",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Curtain Rail",
-     "division": "Uncategorised",
+     "n": "Shower curtain rail",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Toothbrush Holder",
-     "division": "Uncategorised",
+     "n": "Toothbrush holder",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
      "n": "Shelf",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Tilting mirror",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Robe hooks",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Toilet roll holder",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Spare toilet roll holder",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Swinging support",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Ceiling support",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Backing plate rectangular",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Backing plates set",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Wall mounting sets",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Ceiling mounting set",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Sliding cover, RollerSlide",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Rising ladder, ReTurn",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "New “hugging” versions of our classic belts",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Tilting Mirror",
-     "division": "Uncategorised",
+     "n": "Software for diagnostics",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Robe Hooks",
-     "division": "Uncategorised",
+     "n": "Floor support installation set",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Toilet Roll Holder",
-     "division": "Uncategorised",
+     "n": "Backrest, for shower stools with arm supports",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Spare Toilet Roll Holder",
-     "division": "Uncategorised",
+     "n": "Headrest, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Swinging Support",
-     "division": "Uncategorised",
+     "n": "Armrest lock, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Ceiling Support",
-     "division": "Uncategorised",
+     "n": "Lateral trunk support, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Backing Plate Rectangular",
-     "division": "Uncategorised",
+     "n": "Front cross bar, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Backing Plates Set",
-     "division": "Uncategorised",
+     "n": "Seat with forward tilt, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Wall Mounting Sets",
-     "division": "Uncategorised",
+     "n": "Transport seat cover, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Ceiling Mounting Set",
-     "division": "Uncategorised",
+     "n": "Leg support, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Sliding Cover Rollerslide",
-     "division": "Uncategorised",
+     "n": "Footrests, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Rising Ladder Return",
-     "division": "Uncategorised",
+     "n": "Heel and calf strap, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "New Hugging Versions Of Our Classic Belts",
-     "division": "Uncategorised",
+     "n": "Comm/shower chair soft seat, mobile",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Software For Diagnostics",
-     "division": "Uncategorised",
+     "n": "Comm/shower chair soft seat, self-propelled",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Floor Support Installation Set",
-     "division": "Uncategorised",
+     "n": "HygieneHBSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Backrest For Shower Stools With Arm Supports",
-     "division": "Uncategorised",
+     "n": "EasyGlide",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Headrest Combi",
-     "division": "Uncategorised",
+     "n": "LowBackSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Armrest Lock Combi",
-     "division": "Uncategorised",
+     "n": "HygieneLBSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Lateral Trunk Support Combi",
-     "division": "Uncategorised",
+     "n": "WalkingVest",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Front Cross Bar Combi",
-     "division": "Uncategorised",
+     "n": "Shower stretchers",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Seat With Forward Tilt Combi",
-     "division": "Uncategorised",
+     "n": "9V battery and cable",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Transport Seat Cover Combi",
-     "division": "Uncategorised",
+     "n": "BariBar",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Leg Support Combi",
-     "division": "Uncategorised",
+     "n": "BariBarWrap",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Footrests Combi",
-     "division": "Uncategorised",
+     "n": "AmpHBSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Heel And Calf Strap Combi",
-     "division": "Uncategorised",
+     "n": "LoopTag",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Comm Shower Chair Soft Seat Mobile",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Comm Shower Chair Soft Seat Self Propelled",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Hygienehbsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Easyglide",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Lowbacksling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Hygienelbsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Walkingvest",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Shower Stretchers",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "9V Battery And Cable",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Baribar",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Baribarwrap",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Amphbsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Looptag",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Lift Strap Extension",
-     "division": "Uncategorised",
+     "n": "Lift strap extension",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Endcover Carina",
-     "division": "Uncategorised",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Riseporto 300 450",
-     "division": "Uncategorised",
+     "n": "RisePorto 300/450",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Side Fences For Trolleys",
-     "division": "Uncategorised",
+     "n": "Side fences for trolleys",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
      "n": "Hinged Arm Support",
-     "division": "Uncategorised",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
      "n": "Handicare Van Gogh",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
      "n": "Handicare Simplicity",
-     "division": "Uncategorised",
+     "division": "Stairlifts",
      "category": ""
     },
     {
-     "n": "Folding Function",
-     "division": "Uncategorised",
+     "n": "Folding function",
+     "division": "Stairlifts",
      "category": ""
     },
     {
@@ -54321,877 +54397,877 @@
      "category": ""
     },
     {
-     "n": "Soft Toilet Seats And Inserts Replacements",
-     "division": "Uncategorised",
+     "n": "Soft toilet seats and inserts, replacements",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Amputee Support Combi",
-     "division": "Uncategorised",
+     "n": "Amputee support, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Hip Belt Combi",
-     "division": "Uncategorised",
+     "n": "Hip belt, Combi",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Flexible Supply And Drain Set",
-     "division": "Uncategorised",
+     "n": "Flexible supply and drain set",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Backing Plate Round",
-     "division": "Uncategorised",
+     "n": "Backing plate round",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Toilet Brush And Holder",
-     "division": "Uncategorised",
+     "n": "Toilet brush and holder",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Soap Dish",
-     "division": "Uncategorised",
+     "n": "Soap dish",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Head Holder",
-     "division": "Uncategorised",
+     "n": "Shower head holder",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
      "n": "Bathboard",
-     "division": "Uncategorised",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Heavy Duty Commode Shower Chair",
-     "division": "Uncategorised",
+     "n": "Heavy Duty commode/shower chair",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Toilet Raiser With Lid",
-     "division": "Uncategorised",
+     "n": "Toilet raiser with lid",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
      "n": "Backpack",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "PositioningBelt",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "LowBackSling. Art. No. 40252002/3/4/6/7/8/9",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "TurnTable 38 cm",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Protective cover, EasySlide Art. No. 2052",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "EasyRoll Pillow Case",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Hand control HB33-6",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "HygieneSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "OxygenTankHolder",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Lower part for TopSheet",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "BackBoardStraps",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "SlingBarWrap",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "StrapsPadding",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "AdjustmentLoop",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "SitWalk",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "TurnSafe2",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "PositioningCover",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "OneWaySlide",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "FootStoolCover",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Positioningbelt",
+     "n": "Bed table",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Lowbacksling Art No 40252002 3 4 6 7 8 9",
+     "n": "Side fences",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Turntable 38 Cm",
+     "n": "Locking strap, EasySlide",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Protective Cover Easyslide Art No 2052",
+     "n": "Height adjustment systems for shower seats",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Easyroll Pillow Case",
+     "n": "Shower seats",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Hand Control Hb33 6",
+     "n": "Click-On frames",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Hygienesling",
+     "n": "Floor supports for shower seats",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Oxygentankholder",
-     "division": "Uncategorised",
+     "n": "Fero Obesitas Bedside Mobile Chair (318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Lower Part For Topsheet",
-     "division": "Uncategorised",
+     "n": "ReTurn7600",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Backboardstraps",
-     "division": "Uncategorised",
+     "n": "ReTurn 7600 (205kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Slingbarwrap",
-     "division": "Uncategorised",
+     "n": "Stair newel grab rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Strapspadding",
-     "division": "Uncategorised",
+     "n": "Door frame grab rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Adjustmentloop",
-     "division": "Uncategorised",
+     "n": "Ergogrip straight grab rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Sitwalk",
-     "division": "Uncategorised",
+     "n": "Ergogrip 90° grab rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Turnsafe2",
-     "division": "Uncategorised",
+     "n": "Ergogrip corner and combination grab rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Positioningcover",
-     "division": "Uncategorised",
+     "n": "ErgoGrip 45° grab rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Onewayslide",
-     "division": "Uncategorised",
+     "n": "Front support bar",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Footstoolcover",
-     "division": "Uncategorised",
+     "n": "Soft armrest",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Bed Table",
-     "division": "Uncategorised",
+     "n": "Floor support for arm support",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Side Fences",
-     "division": "Uncategorised",
+     "n": "Floor console for arm support",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Locking Strap Easyslide",
-     "division": "Uncategorised",
+     "n": "Height adjustment system for arm supports",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Height Adjustment Systems For Shower Seats",
-     "division": "Uncategorised",
+     "n": "Adjustable clamp levers",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Shower Seats",
-     "division": "Uncategorised",
+     "n": "Cover sets",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Click On Frames",
-     "division": "Uncategorised",
+     "n": "Fixed arm supports",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Floor Supports For Shower Seats",
-     "division": "Uncategorised",
+     "n": "Commode/shower chair soft seat",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Fero Obesitas Bedside Mobile Chair 318Kg",
-     "division": "Uncategorised",
+     "n": "Washbasin rail",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Return7600",
-     "division": "Uncategorised",
+     "n": "Towel rails",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Return 7600 205Kg Swl",
-     "division": "Uncategorised",
+     "n": "Toilet roll holder single-hand",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Stair Newel Grab Rails",
-     "division": "Uncategorised",
+     "n": "Handle for tilting mirror",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
-     "n": "Door Frame Grab Rails",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ergogrip Straight Grab Rails",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ergogrip 90 Grab Rails",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ergogrip Corner And Combination Grab Rails",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ergogrip 45 Grab Rails",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Front Support Bar",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Soft Armrest",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Floor Support For Arm Support",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Floor Console For Arm Support",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Height Adjustment System For Arm Supports",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Adjustable Clamp Levers",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Cover Sets",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Fixed Arm Supports",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Commode Shower Chair Soft Seat",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Washbasin Rail",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Towel Rails",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Toilet Roll Holder Single Hand",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Handle For Tilting Mirror",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Insulation Sets",
-     "division": "Uncategorised",
+     "n": "Insulation sets",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
      "n": "Foldable Toilet Frame",
+     "division": "Discontinued Products",
+     "category": ""
+    },
+    {
+     "n": "Fold toiletframe w Backsupport",
+     "division": "Discontinued Products",
+     "category": ""
+    },
+    {
+     "n": "AmbulationArm, Art. No. 80100010",
+     "division": "Discontinued Products",
+     "category": ""
+    },
+    {
+     "n": "Soft shower seats",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Fold Toiletframe W Backsupport",
+     "n": "Short shower seats",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Ambulationarm Art No 80100010",
+     "n": "EASY SoftBack",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Soft Shower Seats",
-     "division": "Uncategorised",
+     "n": "MilkyWay",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Short Shower Seats",
-     "division": "Uncategorised",
+     "n": "EasySlide, disposable",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Easy Softback",
-     "division": "Uncategorised",
+     "n": "ShellHBSling",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Milkyway",
-     "division": "Uncategorised",
+     "n": "Pro Axis 50 34″ R (318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Easyslide Disposable",
-     "division": "Uncategorised",
+     "n": "Pro Axis 50 31″ R (318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Shellhbsling",
-     "division": "Uncategorised",
+     "n": "Pro Axis 40 28″ R (318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Pro Axis 50 34 R 318Kg",
-     "division": "Uncategorised",
+     "n": "Pro Axis 40 25″ R (318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Pro Axis 50 31 R 318Kg",
-     "division": "Uncategorised",
+     "n": "Pro Axis 22″ R (120/140kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Pro Axis 40 28 R 318Kg",
-     "division": "Uncategorised",
+     "n": "Pro Axis 19″ R (120/140kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Pro Axis 40 25 R 318Kg",
-     "division": "Uncategorised",
+     "n": "Hi-Lo Tilt-In Space Bariatric Day Chair (300kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Pro Axis 22 R 120 140Kg",
-     "division": "Uncategorised",
+     "n": "HeelStrap",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Pro Axis 19 R 120 140Kg",
-     "division": "Uncategorised",
+     "n": "Padding for leg support",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Hi Lo Tilt In Space Bariatric Day Chair 300Kg Swl",
-     "division": "Uncategorised",
+     "n": "Bag, ReTurn",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Heelstrap",
-     "division": "Uncategorised",
+     "n": "QuickMove",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Padding For Leg Support",
-     "division": "Uncategorised",
+     "n": "BackSupport",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Bag Return",
-     "division": "Uncategorised",
+     "n": "SupportStraps",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Quickmove",
-     "division": "Uncategorised",
+     "n": "CalfStrap",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Backsupport",
-     "division": "Uncategorised",
+     "n": "MiniLift160",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Supportstraps",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Calfstrap",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Minilift160",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Readylett",
-     "division": "Uncategorised",
+     "n": "ReadyLett",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Helena",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "RiseBasic 300M/440M",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Eva600EE",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Ergonomic shower seats",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Risebasic 300M 440M",
+     "n": "PantLock",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "BasicSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "FlexiGrip",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Vega505EE",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ReTurnBelt",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "QuickTrolley, RiseAtlas",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "AutoSlide",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ReTurn7400",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "AntiSlip mat",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Eva450EE",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Castor gantry",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "SafeHandlingSheet",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "TopSheet",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ThoraxSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "SlingBar",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Disposable cover, RollerSlide",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Cover to charger, RiseAtlas",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "HighBackSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "FlexibleSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ReTurn7500i",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "AmpSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "FlexibleSling, undivided",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ClassicHBSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Carina350EM/EE",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "EasyRoll 4way Sliding Drawsheet",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Mattress cover",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "EasyRoll Sliding Sheet Elastic",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Eva600Ee",
+     "n": "Tergo®Glide",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Ergonomic Shower Seats",
+     "n": "BariSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Bedpan and bucket, stainless steel",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Shower stools with arm supports",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Mattress cover, TurnSheet",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Bucket with lid, Combi",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Quattro® Plus",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Pantlock",
+     "n": "SlingBarSpreader M",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ClassicSling",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "QuickLink®",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Basicsling",
-     "division": "Uncategorised",
+     "n": "RiseAtlas 450",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Flexigrip",
-     "division": "Uncategorised",
+     "n": "RiseAtlas 625",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Vega505Ee",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Returnbelt",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Quicktrolley Riseatlas",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Autoslide",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Return7400",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Antislip Mat",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Eva450Ee",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Castor Gantry",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Safehandlingsheet",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Topsheet",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Thoraxsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Slingbar",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Disposable Cover Rollerslide",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Cover To Charger Riseatlas",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Highbacksling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Flexiblesling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Return7500I",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ampsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Flexiblesling Undivided",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Classichbsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Carina350Em Ee",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Easyroll 4Way Sliding Drawsheet",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Mattress Cover",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Easyroll Sliding Sheet Elastic",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Tergoglide",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Barisling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Bedpan And Bucket Stainless Steel",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Shower Stools With Arm Supports",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Mattress Cover Turnsheet",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Bucket With Lid Combi",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Quattro Plus",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Slingbarspreader M",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Classicsling",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Quicklink",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Riseatlas 450",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Riseatlas 625",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Minilift160Classic",
-     "division": "Uncategorised",
+     "n": "MiniLift160 Classic",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
      "n": "Bure S Stand Tall Walker",
-     "division": "Uncategorised",
+     "division": "GATE Product EN",
      "category": ""
     },
     {
      "n": "Mover Plus",
+     "division": "GATE Product EN",
+     "category": ""
+    },
+    {
+     "n": "LiftSeat",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "ReadySheet",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Protective cover, EasySlide",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "EasyGlide, extra long",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Liftseat",
+     "n": "EasyRoll Sliding sheet White/blue striped",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Readysheet",
+     "n": "EasySlide",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Protective Cover Easyslide",
+     "n": "Combi, attendant operated",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "TurnSheet",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Easyglide Extra Long",
+     "n": "Side support",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Easyroll Sliding Sheet White Blue Striped",
+     "n": "Plattor av plast tillbehör till HigbackSling / nacke",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Easyslide",
+     "n": "Combi, tilt",
+     "division": "Bathroom Safety Solutions",
+     "category": ""
+    },
+    {
+     "n": "Underbensstöd",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Combi Attendant Operated",
+     "n": "Hälband till ståplatta",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Turnsheet",
+     "n": "Droppställning inkl. hållare",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Side Support",
+     "n": "Hjul med broms",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Plattor Av Plast Tillbehor Till Higbacksling Nacke",
+     "n": "SYRGASHÅLLARE / OXYGEN TUBEHOLDER inkl. fäste",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Combi Tilt",
+     "n": "Manuell brukarbroms 2-hands, handbroms",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Underbensstod",
+     "n": "WendyLett2Way",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Manuell 2 hands broms passar DB 2.0",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Halband Till Staplatta",
+     "n": "WendyLett4Way",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "Uppresningssele MULTI med fästband",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Droppstallning Inkl Hallare",
+     "n": "VENDLET V5S Speed Adjust",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Hjul Med Broms",
+     "n": "Quattro® Acute",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Tubhallare Inkl Faste",
+     "n": "LEJRELET Tube 250",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Manuell Brukarbroms 2 Hands Handbroms",
+     "n": "LEJRELET Wedge",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Wendylett2Way",
+     "n": "LEJRELET Pad High",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Manuell 2 Hands Broms Passar Db 2 0",
+     "n": "LERJRELET Set Without Tubes",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Wendylett4Way",
+     "n": "LEJRELET Set with Tube 125",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Uppresningssele Multi Med Fastband",
+     "n": "LEJRELET Set with Tube 250",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Vendlet V5S Speed Adjust",
+     "n": "LEJRELET Tube 125",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Quattro Acute",
+     "n": "LEJRELET Pad Low",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Lejrelet Tube 250",
+     "n": "LEJRELET Oval",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Lejrelet Wedge",
+     "n": "FlexiMove",
+     "division": "Safe Moving & Handling",
+     "category": ""
+    },
+    {
+     "n": "VENDLET V5S+ (Bari)",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Lejrelet Pad High",
+     "n": "VENDLET Standard",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Lerjrelet Set Without Tubes",
+     "n": "VENDLET V5S",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Lejrelet Set With Tube 125",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Lejrelet Set With Tube 250",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Lejrelet Tube 125",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Lejrelet Pad Low",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Lejrelet Oval",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Fleximove",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Vendlet Bari",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Vendlet Standard",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Vendtlet V5S",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Bure Xl Stand Tall Walker",
-     "division": "Uncategorised",
+     "n": "Bure XL Stand Tall Walker",
+     "division": "GATE Product EN",
      "category": ""
     },
     {
      "n": "Bure Space Stand Tall Walker",
+     "division": "GATE Product EN",
+     "category": ""
+    },
+    {
+     "n": "Dyna-Form® Power-Turn Elite Lateral Rotation Mattress (453kg Weight Limit)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Carital® Optima",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Dyna Form Power Turn Elite Lateral Rotation Mattress 453Kg Weight Limit",
-     "division": "Uncategorised",
+     "n": "Extension strap, FlexiGrip",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Carital Optima",
-     "division": "Uncategorised",
+     "n": "Olympia Bariatric Expandable Bed (500kg SWL)",
+     "division": "Pressure Care",
      "category": ""
     },
     {
-     "n": "Extension Strap Flexigrip",
-     "division": "Uncategorised",
+     "n": "Dyna-Tek® Heel Boot & Heel Pad",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Olympia Bariatric Expandable Bed 500Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dyna Tek Heel Boot Heel Pad",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Vendlet V5S",
+     "n": "VENDLET V5S",
      "division": "Uncategorised",
      "category": ""
     },
@@ -55201,27 +55277,27 @@
      "category": ""
     },
     {
-     "n": "Positioningsling",
+     "n": "PositioningSling",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Dyna Form Smartresponse",
+     "n": "Dyna-Form®",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Venturi Compact",
+     "n": "VENTURI® Compact",
+     "division": "Negative Pressure Wound Therapy",
+     "category": ""
+    },
+    {
+     "n": "Raizer II",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Raizer Ii Falls Management",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Vendlet Slide Sheet",
+     "n": "VENDLET Slide Sheet",
      "division": "Uncategorised",
      "category": ""
     },
@@ -55236,63 +55312,63 @@
      "category": ""
     },
     {
-     "n": "Hulppootset Voor Verkorte En Zachte Douchezitting",
+     "n": "Hulppootset voor verkorte- en zachte douchezitting",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Regia Gardo",
+     "n": "Regia Gardo – sängen med optimalt allroundskydd",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Aurum Bariatric Bed",
+     "n": "Aurum®+ Bariatric Bed",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Integrity L Cushion",
+     "n": "Integrity® L Cushion",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Integrity H Cushion",
+     "n": "Integrity® H Cushion",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Integrity V Cushion",
+     "n": "Integrity® V Cushion",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Integrity E Cushion",
+     "n": "Integrity® E Cushion",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Integrity M Cushion",
+     "n": "Integrity® M Cushion",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Raizer Servicing",
+     "n": "Raizer II ProServe – Manufacturer Servicing",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Xxl Xpress Bariatric Care Bed 270Kg Swl",
-     "division": "Uncategorised",
+     "n": "XXL Xpress Bariatric Care Bed (270kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Aerys Hi Lo Community Bed 230Kg Swl",
-     "division": "Uncategorised",
+     "n": "Aerys Hi-Lo Community Bed (230kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Olympia Hi Lo Acute Care Bed 230Kg Swl",
-     "division": "Uncategorised",
+     "n": "Olympia Hi-Lo Acute Care Bed (230kg SWL)",
+     "division": "Pressure Care",
      "category": ""
     },
     {
@@ -55301,43 +55377,43 @@
      "category": ""
     },
     {
-     "n": "S Capepod",
+     "n": "S-CAPEPOD",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Freeway T100 Bariatric Shower Chair 350Kg",
-     "division": "Uncategorised",
+     "n": "Freeway T100 Bariatric Shower Chair (350kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Commode Shower Chair Xxl Wheeled 325Kg",
-     "division": "Uncategorised",
+     "n": "Commode / Shower Chair: XXL Wheeled (325kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Commode Shower Chair Xxl Wheeler 325Kg",
-     "division": "Uncategorised",
+     "n": "Commode / Shower Chair: XXL Wheeler (325kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Commode Shower Chair X399 250Kg",
-     "division": "Uncategorised",
+     "n": "Commode / Shower Chair: X399 (250kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Commode Shower Chair X499 250Kg",
-     "division": "Uncategorised",
+     "n": "Commode / Shower Chair: X499 (250kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Commode Shower Chair Nightingales 318Kg",
-     "division": "Uncategorised",
+     "n": "Commode / Shower Chair: Nightingales (318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Commode Zenith 381Kg",
-     "division": "Uncategorised",
+     "n": "Commode Zenith (SWL 381kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
@@ -55351,63 +55427,63 @@
      "category": ""
     },
     {
-     "n": "Liko Ultra Twin Gantry Hoist 400Kg Swl",
+     "n": "Liko Ultra Twin Gantry Hoist (400kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Liko Viking XL Mobile Hoist (300kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Liko Ultra Twist Plate (500kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Liko Ultra Lift Pants (500kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Liko Repositioning Sheet (500kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Mobile Flex 2 Post Gantry Hoist (275kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Atlas 250 Mobile Lift (250kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Titan 250 Bariatric Stand Aid (250kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "M200 Chair Scales (300kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Ramped Foldaway Scale System (300kg SWL)",
+     "division": "Rental & Service Solutions",
+     "category": ""
+    },
+    {
+     "n": "Bariatric 3-Section Couch",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Liko Viking Xl Mobile Hoist 300Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Liko Ultra Twist Plate 500Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Liko Ultra Lift Pants 500Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Liko Repositioning Sheet 500Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Mobile Flex 2 Post Gantry Hoist 275Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Atlas 250 Mobile Lift 250Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Titan 250 Bariatric Stand Aid 250Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "M200 Chair Scales 300Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ramped Foldaway Scale System 300Kg Swl",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Bariatric 3 Section Couch",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Independent Bed Scale System 1000Kg Swl",
-     "division": "Uncategorised",
+     "n": "Independent Bed Scale System (1000kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
@@ -55421,17 +55497,17 @@
      "category": ""
     },
     {
-     "n": "Height Adjustable Walking Aid 318Kg Swl",
-     "division": "Uncategorised",
+     "n": "Height Adjustable Walking Aid (318kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Stand Tall Xxl Walking Aid 325Kg Swl",
-     "division": "Uncategorised",
+     "n": "Stand Tall XXL Walking Aid (325kg SWL)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
-     "n": "Tilt In Space Wheelchair",
+     "n": "Tilt-in-Space Wheelchair",
      "division": "Uncategorised",
      "category": ""
     },
@@ -55446,13 +55522,13 @@
      "category": ""
     },
     {
-     "n": "Eclipse Wheelchair 125 318Kg",
-     "division": "Uncategorised",
+     "n": "Eclipse Wheelchair (125 – 318kg)",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
      "n": "Raising Aid",
-     "division": "Uncategorised",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
@@ -55461,8 +55537,8 @@
      "category": ""
     },
     {
-     "n": "Versatech 1100 Ultra Low Bariatric Bed",
-     "division": "Uncategorised",
+     "n": "VersaTech 1100 Ultra Low Bariatric Bed",
+     "division": "Rental & Service Solutions",
      "category": ""
     },
     {
@@ -55471,13 +55547,13 @@
      "category": ""
     },
     {
-     "n": "Wendylett",
-     "division": "Uncategorised",
+     "n": "WendyLett",
+     "division": "Safe Moving & Handling",
      "category": ""
     },
     {
-     "n": "Shower Chair Textile Seat",
-     "division": "Uncategorised",
+     "n": "Shower chair textile seat",
+     "division": "Bathroom Safety Solutions",
      "category": ""
     },
     {
@@ -55486,7 +55562,7 @@
      "category": ""
     },
     {
-     "n": "Quattro Plus Nexus",
+     "n": "Quattro® Plus Nexus",
      "division": "Uncategorised",
      "category": ""
     }
@@ -258218,321 +258294,346 @@
    ]
   },
   "Nutricia Ltd": {
-   "domain": "www.nutricia.co.uk",
-   "verified": "2026-08-25",
-   "source": "www.nutricia.co.uk XML sitemap, read this run",
+   "domain": "nutricia.co.uk",
+   "verified": "2026-09-05",
+   "source": "nutricia.co.uk XML sitemap, read this run",
    "structureFrom": "sitemap",
    "hasDivisions": false,
    "landingPagesDropped": 6,
+   "furniturePagesDropped": 0,
    "duplicateUrlsDropped": 5,
-   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 6 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation. 245 of 304 product URLs carry no division segment, so most of the range sits in one unsorted 'Uncategorised' list rather than the company's own grouping.",
+   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 6 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation. 250 of 303 product URLs carry no division segment, so most of the range sits in one unsorted 'Uncategorised' list rather than the company's own grouping.",
    "structure": "No division structure found in the URLs — listed as one flat range.",
    "droppedCategoryPages": 0,
-   "filingRule": "Read from the sitemap, so product NAMES come from URL slugs. 245 of 304 product URLs carry no division segment, so most of the range sits in one unsorted 'Uncategorised' list rather than the company's own grouping — every item is listed by name below rather than grouped, because a flat list is honest and a fabricated grouping would not be.",
+   "filingRule": "Read from the sitemap, so product NAMES come from URL slugs. 250 of 303 product URLs carry no division segment, so most of the range sits in one unsorted 'Uncategorised' list rather than the company's own grouping — every item is listed by name below rather than grouped, because a flat list is honest and a fabricated grouping would not be.",
    "divisions": [
     {
      "name": "Uncategorised",
-     "products": 245
+     "products": 250
     },
     {
-     "name": "Category",
-     "products": 59
+     "name": "Flocare Range",
+     "products": 19
+    },
+    {
+     "name": "Pku Range",
+     "products": 12
+    },
+    {
+     "name": "Adult Oral Range",
+     "products": 7
+    },
+    {
+     "name": "Nutrison Range",
+     "products": 6
+    },
+    {
+     "name": "Neocate",
+     "products": 4
+    },
+    {
+     "name": "Aptamil Pepti",
+     "products": 3
+    },
+    {
+     "name": "Nutilis Range",
+     "products": 2
     }
    ],
    "products": [
     {
      "n": "Bengmark Naso Intestinal Tubes",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare 2 Pack Connector",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Bolus Adaptor",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Bolus Set",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Bolus Set Hanger",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Button Extension Set",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Container",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Extension Set",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Infinity Bag",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Infinity Giving Sets",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Infinity Go Bag",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Infinity Iii Go Frame",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Infinity Iii Pump",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Infinity Ii Pump",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Infinity Z Stand",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Flocare Universal Adaptor",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Gastrostomy Button",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Nasogastric Enteral Feeding Tubes",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Replacement Balloon Gastrostomy Tubes",
-     "division": "Category",
+     "division": "Flocare Range",
      "category": ""
     },
     {
      "n": "Neocate Junior Amino Acid Based Formula",
-     "division": "Category",
+     "division": "Neocate",
      "category": ""
     },
     {
      "n": "Neocate Lcp Formula",
-     "division": "Category",
+     "division": "Neocate",
      "category": ""
     },
     {
      "n": "Neocate Spoon A Helpful Alternative To Dairy Foods",
-     "division": "Category",
+     "division": "Neocate",
      "category": ""
     },
     {
      "n": "Neocate Syneo With Pre And Probiotics",
-     "division": "Category",
+     "division": "Neocate",
      "category": ""
     },
     {
      "n": "Aptamil Pepti 1 Formula",
-     "division": "Category",
+     "division": "Aptamil Pepti",
      "category": ""
     },
     {
      "n": "Aptamil Pepti 2 Formula",
-     "division": "Category",
+     "division": "Aptamil Pepti",
      "category": ""
     },
     {
      "n": "Aptamil Pepti Syneo",
-     "division": "Category",
+     "division": "Aptamil Pepti",
      "category": ""
     },
     {
      "n": "Fortini Range",
-     "division": "Category",
+     "division": "Uncategorised",
      "category": ""
     },
     {
      "n": "Ketogenic Range",
-     "division": "Category",
+     "division": "Uncategorised",
      "category": ""
     },
     {
      "n": "Infatrini Range",
-     "division": "Category",
+     "division": "Uncategorised",
      "category": ""
     },
     {
      "n": "Nutilis Pre Thickened",
-     "division": "Category",
+     "division": "Nutilis Range",
      "category": ""
     },
     {
      "n": "Nutilis Clear",
-     "division": "Category",
+     "division": "Nutilis Range",
      "category": ""
     },
     {
      "n": "Nutrison Protein Shot",
-     "division": "Category",
+     "division": "Nutrison Range",
      "category": ""
     },
     {
      "n": "Nutrison Plantbased 2 Kcal Hp Multi Fibre",
-     "division": "Category",
+     "division": "Nutrison Range",
      "category": ""
     },
     {
      "n": "Nutrison High Protein Range",
-     "division": "Category",
+     "division": "Nutrison Range",
      "category": ""
     },
     {
      "n": "Nutrison Diason Energy Hp",
-     "division": "Category",
+     "division": "Nutrison Range",
      "category": ""
     },
     {
      "n": "Nutrison Bolus Energy Hp",
-     "division": "Category",
+     "division": "Nutrison Range",
      "category": ""
     },
     {
      "n": "Nutrison Peptisorb Plus Hehp",
-     "division": "Category",
+     "division": "Nutrison Range",
      "category": ""
     },
     {
      "n": "Anamix First Spoon",
-     "division": "Category",
+     "division": "Pku Range",
      "category": ""
     },
     {
      "n": "Gmpro Range",
-     "division": "Category",
+     "division": "Pku Range",
      "category": ""
     },
     {
      "n": "Lophlex Range",
-     "division": "Category",
+     "division": "Pku Range",
      "category": ""
     },
     {
      "n": "Anamix Infant Range",
-     "division": "Category",
+     "division": "Pku Range",
      "category": ""
     },
     {
      "n": "Anamix Junior Product Range",
-     "division": "Category",
+     "division": "Pku Range",
      "category": ""
     },
     {
      "n": "Loprofin Range",
-     "division": "Category",
+     "division": "Pku Range",
      "category": ""
     },
     {
      "n": "Pku Anamix Product Range",
-     "division": "Category",
+     "division": "Pku Range",
      "category": ""
     },
     {
      "n": "Pku Gmpro Mix In",
-     "division": "Category",
+     "division": "Pku Range",
      "category": ""
     },
     {
      "n": "Pku Gmpro Ultra Powder",
-     "division": "Category",
+     "division": "Pku Range",
      "category": ""
     },
     {
      "n": "Pku Lophlex Select",
-     "division": "Category",
+     "division": "Pku Range",
      "category": ""
     },
     {
      "n": "Tyr Gmpro Mix In",
-     "division": "Category",
+     "division": "Pku Range",
      "category": ""
     },
     {
      "n": "Pku Anamix Junior Lq",
-     "division": "Category",
+     "division": "Pku Range",
      "category": ""
     },
     {
      "n": "Fortisip Compact Protein",
-     "division": "Category",
+     "division": "Adult Oral Range",
      "category": ""
     },
     {
      "n": "Fortisip Plantbased 2Kcal",
-     "division": "Category",
+     "division": "Adult Oral Range",
      "category": ""
     },
     {
      "n": "Fortisip Compact",
-     "division": "Category",
+     "division": "Adult Oral Range",
      "category": ""
     },
     {
      "n": "Fortisip Compact Range",
-     "division": "Category",
+     "division": "Adult Oral Range",
      "category": ""
     },
     {
      "n": "Fortisip Compact Fibre",
-     "division": "Category",
+     "division": "Adult Oral Range",
      "category": ""
     },
     {
      "n": "Peptisip Energy Hp",
-     "division": "Category",
+     "division": "Adult Oral Range",
      "category": ""
     },
     {
      "n": "Fortijuce",
-     "division": "Category",
+     "division": "Adult Oral Range",
      "category": ""
     },
     {
      "n": "Cow And Gate Range",
-     "division": "Category",
+     "division": "Uncategorised",
      "category": ""
     },
     {
      "n": "Nutriprem Range",
-     "division": "Category",
+     "division": "Uncategorised",
      "category": ""
     },
     {
      "n": "Nutrini Range",
-     "division": "Category",
+     "division": "Uncategorised",
      "category": ""
     },
     {
@@ -258546,17 +258647,7 @@
      "category": ""
     },
     {
-     "n": "Nutrison Diason Energy Hp",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Locasol",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Fortisip Bottle",
      "division": "Uncategorised",
      "category": ""
     },
@@ -258582,11 +258673,6 @@
     },
     {
      "n": "Complete Amino Acid Mix",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Milupa Lp Drink",
      "division": "Uncategorised",
      "category": ""
     },
@@ -258637,11 +258723,6 @@
     },
     {
      "n": "Nutilis Complete Drink Level 3",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Souvenaid",
      "division": "Uncategorised",
      "category": ""
     },
@@ -258712,6 +258793,176 @@
     },
     {
      "n": "Sno Pro",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison Protein Plus Energy",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison Protein Shot",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Tyr Anamix Infant",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Mma Pa Anamix Junior",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Pku Anamix Infant",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Aptamil Growing Up Milk With Pronutra 2 3 Years Powder",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Aptamil Follow On Milk With Pronutra Liquid",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Aptamil Comfort",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Aptamil Anti Reflux",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison Bolus Energy Hp",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Fortisip Plantbased 2Kcal",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Fortijuce",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Fortisip Compact Fibre",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Fortisip Plantbased 1 5Kcal",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Fortisip Compact",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Forticreme Complete",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Fortisip 2Kcal",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Fortisip Bottle",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Msud Lophlex Lq 20",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Pku Lophlex Sensation 20",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Ga1 Maxamum",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Xlys Try Glutaridon",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Milupa Lp Drink",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Pku Lophlex Select 20",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Souvenaid",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutilis Fruit Level 4",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Calogen Flavoured",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Calogen Neutral",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison Energy Multi Fibre",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison 1200 Complete Multi Fibre",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison Energy",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison Multi Fibre",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison Energy Multi Fibre Vanilla",
      "division": "Uncategorised",
      "category": ""
     },
@@ -258836,11 +259087,6 @@
      "category": ""
     },
     {
-     "n": "Ga1 Maxamum",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Scandishake Mix",
      "division": "Uncategorised",
      "category": ""
@@ -258882,11 +259128,6 @@
     },
     {
      "n": "Ga1 Anamix Infant",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Fortisip 2Kcal",
      "division": "Uncategorised",
      "category": ""
     },
@@ -258942,11 +259183,6 @@
     },
     {
      "n": "Cow Gate Nutriprem 2 Post Discharge Powder",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Cow Gate Nutriprem Human Milk Fortifier",
      "division": "Uncategorised",
      "category": ""
     },
@@ -259106,11 +259342,6 @@
      "category": ""
     },
     {
-     "n": "Nutilis Fruit Level 4",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Neocate Spoon",
      "division": "Uncategorised",
      "category": ""
@@ -259246,11 +259477,6 @@
      "category": ""
     },
     {
-     "n": "Msud Lophlex Lq 20",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Msud Maxamum",
      "division": "Uncategorised",
      "category": ""
@@ -259286,16 +259512,6 @@
      "category": ""
     },
     {
-     "n": "Calogen Flavoured",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Calogen Neutral",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Nutrini Peptisorb",
      "division": "Uncategorised",
      "category": ""
@@ -259306,17 +259522,7 @@
      "category": ""
     },
     {
-     "n": "Nutrison",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Fortini Compact Multi Fibre",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Nutrison 1200 Complete Multi Fibre",
      "division": "Uncategorised",
      "category": ""
     },
@@ -259331,27 +259537,7 @@
      "category": ""
     },
     {
-     "n": "Nutrison Energy Multi Fibre",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Nutrison Energy Multi Fibre Vanilla",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Nutrison Energy",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Nutrison Low Sodium",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Nutrison Multi Fibre",
      "division": "Uncategorised",
      "category": ""
     },
@@ -259372,11 +259558,6 @@
     },
     {
      "n": "Xphen Tyr Tyrosidon",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Xlys Try Glutaridon",
      "division": "Uncategorised",
      "category": ""
     },
@@ -259441,11 +259622,6 @@
      "category": ""
     },
     {
-     "n": "Pku Lophlex Sensation 20",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Pku Maxamum",
      "division": "Uncategorised",
      "category": ""
@@ -259471,22 +259647,7 @@
      "category": ""
     },
     {
-     "n": "Nutrison Peptisorb",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Nutrison Plantbased 2Kcal Hp Multifibre",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Nutrison Peptisorb Plus Hehp",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Nutrison Plantbased Soya",
      "division": "Uncategorised",
      "category": ""
     },
@@ -259507,11 +259668,6 @@
     },
     {
      "n": "Pku Lophlex Lq 10",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Nutrison Soya Multi Fibre",
      "division": "Uncategorised",
      "category": ""
     },
@@ -259576,11 +259732,6 @@
      "category": ""
     },
     {
-     "n": "Pku Lophlex Select 20",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Phlexy 10 Drink Mix",
      "division": "Uncategorised",
      "category": ""
@@ -259621,92 +259772,37 @@
      "category": ""
     },
     {
-     "n": "Nutrison Protein Plus Energy",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
      "n": "Nutrison Protein Plus Multi Fibre",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Nutrison Protein Shot",
+     "n": "Nutrison Soya Multi Fibre",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison Diason Energy Hp",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison Peptisorb Plus Hehp",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison Plantbased Soya",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nutrison Peptisorb",
      "division": "Uncategorised",
      "category": ""
     },
     {
      "n": "Nutrison Sterile Water",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Tyr Anamix Infant",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Mma Pa Anamix Junior",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Pku Anamix Infant",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Aptamil Growing Up Milk With Pronutra 2 3 Years Powder",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Aptamil Follow On Milk With Pronutra Liquid",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Aptamil Comfort",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Aptamil Anti Reflux",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Nutrison Bolus Energy Hp",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Fortisip Plantbased 2Kcal",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Fortijuce",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Fortisip Compact Fibre",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Fortisip Plantbased 1 5Kcal",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Fortisip Compact",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Forticreme Complete",
      "division": "Uncategorised",
      "category": ""
     },
