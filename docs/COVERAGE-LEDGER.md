@@ -47,7 +47,7 @@ synonym for out of scope: decide each one deliberately.
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 3 | 16.7% | STARTED |
 | Patient Temperature Management | theatres | 18 | 6 | 33.3% | STARTED |
-| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 2 | 11.1% | STARTED |
+| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 4 | 22.2% | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 2 | 14.3% | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 2 | 15.4% | STARTED |
