@@ -332,6 +332,11 @@ def _sitemap_urls(domain, deadline):
     return urls
 
 
+# Default: the generic product path segments. main() overrides from
+# --product-path for a single run.
+product_paths = None
+
+
 def find_product_url(domain, name, deadline):
     """Locate this product's own URL from the site's XML sitemap, by matching
     the product name against the URL's last path segment. Same discovery
@@ -343,11 +348,22 @@ def find_product_url(domain, name, deadline):
     path every Wix product sits at (see this repo's route-3 Wix comment
     block). Route B below (page_product_detail -> extract_jsonld_product)
     already reads a Wix product's JSON-LD generically once it has the URL;
-    the one thing missing was finding that URL at all."""
+    the one thing missing was finding that URL at all.
+
+    --product-path (added 05/09/2026) widens this list for ONE run, exactly as
+    crawl_supplier_site.py's flag of the same name does, and for the same
+    reason: a supplier whose range was captured under an operator-named segment
+    (HD Clinical files its whole range under /solutions/) had no product URL
+    this function could ever match, so every one of its products was held out
+    of the Differentiator for "no source carries this product" however
+    completely the range itself had been read. The default list is unchanged,
+    so no other supplier's capture moves."""
     urls = _sitemap_urls(domain, deadline)
 
-    prod = [u for u in urls
-           if re.search(r"/(product|products|our-products|range|ranges|product-page)/", u, re.I)]
+    segs = tuple(product_paths) if product_paths else \
+        ("product", "products", "our-products", "range", "ranges", "product-page")
+    pattern = r"/(%s)/" % "|".join(re.escape(x) for x in segs)
+    prod = [u for u in urls if re.search(pattern, u, re.I)]
     if not prod:
         return None, "the sitemap carries no product URLs to match against"
 
@@ -546,7 +562,16 @@ def main():
     ap.add_argument("--products-limit", type=int, default=MAX_PRODUCTS_PER_SUPPLIER,
                     help="max products per supplier, per run")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--product-path", action="append", default=[],
+                    help="a URL path segment this company files products under, e.g. "
+                         "--product-path solutions. Use ONLY after looking at that "
+                         "site's sitemap and confirming the segment holds products "
+                         "and not news or support pages. Repeatable. Mirrors the flag "
+                         "of the same name on crawl_supplier_site.py.")
     a = ap.parse_args()
+
+    global product_paths
+    product_paths = a.product_path or None
 
     rangedoc = json.load(open(RANGE, encoding="utf-8"))
     suppliers_range = rangedoc.get("suppliers", {})
