@@ -321674,17 +321674,19 @@
    ]
   },
   "Healthcare 25 Ltd": {
-   "domain": "www.healthcare25.co.uk",
-   "verified": "2026-08-26",
-   "source": "www.healthcare25.co.uk XML sitemap, read this run",
-   "structureFrom": "sitemap",
+   "domain": "healthcare25.co.uk",
+   "verified": "2026-09-05",
+   "source": "healthcare25.co.uk, each product's own page read this run",
+   "structureFrom": "sitemap products, each page's own name and breadcrumb division (per-page fallback)",
+   "partialRead": false,
    "hasDivisions": false,
    "landingPagesDropped": 0,
+   "furniturePagesDropped": 0,
    "duplicateUrlsDropped": 0,
-   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 0 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping.",
-   "structure": "No division structure found in the URLs — listed as one flat range.",
    "droppedCategoryPages": 0,
-   "filingRule": "Read from the sitemap, so product NAMES come from URL slugs. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping — every item is listed by name below rather than grouped, because a flat list is honest and a fabricated grouping would not be.",
+   "captureCaveat": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 12 page(s) could not be read and fall back to their URL slug.",
+   "structure": "No usable breadcrumb division on this site — listed as one flat range.",
+   "filingRule": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 12 page(s) could not be read and fall back to their URL slug. Every item is listed by name below rather than grouped, because a fabricated grouping would misrepresent the company's own filing.",
    "divisions": [
     {
      "name": "Uncategorised",
@@ -321713,7 +321715,7 @@
      "category": ""
     },
     {
-     "n": "Ppe",
+     "n": "PPE",
      "division": "Uncategorised",
      "category": ""
     },
@@ -321728,22 +321730,17 @@
      "category": ""
     },
     {
-     "n": "Head Neck Surgery",
+     "n": "Head & Neck Surgery",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Plastic Cosmetic Surgery",
+     "n": "ENT",
      "division": "Uncategorised",
      "category": ""
     },
     {
-     "n": "Ent",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Womens Health",
+     "n": "Women’s Health",
      "division": "Uncategorised",
      "category": ""
     },
@@ -321751,16 +321748,22 @@
      "n": "General Surgery",
      "division": "Uncategorised",
      "category": ""
+    },
+    {
+     "n": "Plastic & Cosmetic Surgery",
+     "division": "Uncategorised",
+     "category": ""
     }
    ]
   },
   "Conmed UK Ltd": {
    "domain": "conmed.com",
-   "verified": "2026-08-27",
+   "verified": "2026-09-05",
    "source": "conmed.com XML sitemap, read this run",
    "structureFrom": "sitemap",
    "hasDivisions": true,
    "landingPagesDropped": 116,
+   "furniturePagesDropped": 0,
    "duplicateUrlsDropped": 386,
    "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 116 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation.",
    "structure": "Grouped by the company's own URL structure.",
@@ -380912,7 +380915,7 @@
   },
   "BioSpectrum Ltd": {
    "domain": "bio-spectrum.co.uk",
-   "verified": "2026-09-04",
+   "verified": "2026-09-05",
    "source": "bio-spectrum.co.uk product catalogue (WordPress REST API), read this run",
    "postTypes": [
     "products-custom"
@@ -381041,7 +381044,7 @@
   },
   "Avicenna Surgical Limited": {
    "domain": "avicennasurgical.co.uk",
-   "verified": "2026-09-04",
+   "verified": "2026-09-05",
    "source": "avicennasurgical.co.uk product catalogue (WordPress REST API), read this run",
    "postTypes": [
     "product"
@@ -396893,8 +396896,8 @@
   },
   "CJ Medical": {
    "domain": "cjmedical.com",
-   "reason": "the site's WordPress API returned HTTP 429; the WooCommerce Store API returned HTTP 429; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 429: Too Many Requests)",
-   "checked": "2026-08-31"
+   "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
+   "checked": "2026-09-05"
   },
   "Algeo": {
    "domain": "algeos.com",
@@ -398414,7 +398417,7 @@
   "June Medical Ltd": {
    "domain": "junemedical.com",
    "reason": "robots.txt disallows automated reading of this site",
-   "checked": "2026-09-04"
+   "checked": "2026-09-05"
   },
   "Surgical Instrument Group Holdings Ltd": {
    "domain": "sighltd.com",
