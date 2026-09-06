@@ -18,10 +18,21 @@ STARTED (partial coverage); the rest are not started.**
 1. Run `python3 scripts/build_coverage_ledger.py` to regenerate `data/coverage-ledger.json`
    and `docs/COVERAGE-LEDGER.md` fresh.
 2. Read `docs/COVERAGE-LEDGER.md`. Pick the framework with the **lowest coverage % that is
-   STARTED** (not zero awarded suppliers, not already DONE). If everything is DONE, or every
-   remaining framework is NOT_STARTED for a structural reason (UNMAPPED — no Hub speciality
-   claims it as a buying route — or every awarded supplier forbids crawling), stop and report
-   that rather than picking one.
+   STARTED AND HAS A NON-ZERO `Left` COLUMN** (not zero awarded suppliers, not already DONE).
+   `Left` is the ledger's count of work genuinely still available — unresolved names + held
+   suppliers + crawlable suppliers + suppliers needing a website. The ledger's tail also
+   prints "Lowest-coverage STARTED frameworks that still have work left", which is exactly
+   this pick, already made. If everything is DONE, or every remaining framework is NOT_STARTED
+   for a structural reason (UNMAPPED — no Hub speciality claims it as a buying route — or
+   every awarded supplier forbids crawling), stop and report that rather than picking one.
+
+   **A LOW COVERAGE % IS NOT EVIDENCE OF NEGLECT.** Added 06/09/2026 after a run picked
+   Digital Diagnostic Solutions on 11.1% and re-crawled 34 suppliers that had all been read
+   and refused the day before. Read the `Refused` column with the coverage: those suppliers
+   were answered, and re-crawling them DELETES the recorded reason, because
+   crawl_supplier_site.py only applies its refusal TTL on the `--auto` path and not to an
+   explicitly named `--supplier` (OUTSTANDING ^o312). The lowest-coverage framework is
+   frequently the most finished one — there is simply no permitted route to the rest of it.
 3. For that framework, read `data/coverage-ledger.json`'s entry for it: it names every
    awarded supplier and which state each is in (published / held / uncrawled / unresolved /
    not-in-index).
@@ -37,6 +48,12 @@ STARTED (partial coverage); the rest are not started.**
      framework award) if you can confirm identity from a primary source; no company number
      unless it comes from a recorded source (rule 11). If identity itself can't be confirmed,
      leave it and note it.
+   - **NEVER re-crawl a supplier listed in the framework's `refusedSuppliers`.** That
+     supplier was read on the recorded date and refused for the recorded reason; a re-crawl
+     silently overwrites that judgement with whatever the site returns today, which is how
+     three considered refusals (Clinisys, Hermes Medical Solutions, Magentus) were destroyed
+     on 06/09/2026 and had to be reverted. If you genuinely believe a refusal is stale, say so
+     in your report and leave it — do not overturn it in passing.
    - **Suppliers in the seed but never crawled**, or with **HELD (uncategorised) products.**
      Run `scripts/crawl_supplier_site.py --supplier "<name>" --domain <domain>` (find the
      domain in `data/supplier-seed.json`) to get their product range, then check whether
