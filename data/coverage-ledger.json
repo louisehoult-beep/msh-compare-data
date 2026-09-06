@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 502,
-  "inScopeSuppliersNeedingCrawl": 524,
-  "inScopeSuppliersNeedingDomain": 460,
-  "suppliersRefused": 228,
+  "inScopeSuppliersNeedingCrawl": 520,
+  "inScopeSuppliersNeedingDomain": 456,
+  "suppliersRefused": 232,
   "blockedFrameworks": 0
  },
  "unresolvedSupplierNames": [
@@ -9945,19 +9945,7 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Polyco",
-     "domain": null
-    },
-    {
-     "supplier": "Opalion",
-     "domain": null
-    },
-    {
      "supplier": "Polystar",
-     "domain": null
-    },
-    {
-     "supplier": "PFF Plastics",
      "domain": null
     },
     {
@@ -9967,21 +9955,38 @@
     {
      "supplier": "GB UK Ltd",
      "domain": "gbukgroup.com"
-    },
-    {
-     "supplier": "Southgate Group Ltd",
-     "domain": null
     }
    ],
    "domainsMissing": [
-    "Opalion",
-    "PFF Plastics",
-    "Polyco",
     "Polystar",
-    "Southgate Group Ltd",
     "Vector Consumer"
    ],
-   "refusedSuppliers": [],
+   "refusedSuppliers": [
+    {
+     "supplier": "Polyco",
+     "domain": "polycohealthline.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-06"
+    },
+    {
+     "supplier": "Opalion",
+     "domain": "opalion.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-06"
+    },
+    {
+     "supplier": "PFF Plastics",
+     "domain": "pff.uk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-06"
+    },
+    {
+     "supplier": "Southgate Group Ltd",
+     "domain": "southgateglobal.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-06"
+    }
+   ],
    "route": "NHSSC framework",
    "catsInScope": [
     "infection:ppe",
@@ -9991,7 +9996,7 @@
     "unresolvedNames": 0,
     "heldNeedingCategory": 0,
     "crawlable": 1,
-    "needDomain": 6
+    "needDomain": 2
    },
    "published": [
     "GV Health"
@@ -9999,17 +10004,18 @@
    "publishedElsewhere": [],
    "heldOnly": [],
    "notCrawled": [
+    "Polystar",
+    "Vector Consumer",
+    "GB UK Ltd"
+   ],
+   "refused": [
     "Polyco",
     "Opalion",
-    "Polystar",
     "PFF Plastics",
-    "Vector Consumer",
-    "GB UK Ltd",
     "Southgate Group Ltd"
    ],
-   "refused": [],
    "unknown": [],
-   "actionableTotal": 7,
+   "actionableTotal": 3,
    "blockedReason": null
   },
   {
