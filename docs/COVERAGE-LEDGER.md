@@ -25,11 +25,11 @@ low coverage there means exhausted, not neglected.
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 24 | 19.7% | 74 | 17 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 18 | 17.8% | 62 | 17 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 13 | 20.6% | 30 | 14 | STARTED |
-| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 8 | 13.3% | 34 | 8 | STARTED |
+| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 8 | 13.3% | 35 | 7 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 13 | 22.4% | 26 | 9 | STARTED |
-| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 9 | 15.8% | 20 | 12 | STARTED |
-| Urology and Bowel Management | continence | 57 | 17 | 29.8% | 13 | 10 | STARTED |
-| Advanced Wound Care | wound | 56 | 16 | 28.6% | 13 | 19 | STARTED |
+| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 9 | 15.8% | 21 | 11 | STARTED |
+| Urology and Bowel Management | continence | 57 | 17 | 29.8% | 14 | 9 | STARTED |
+| Advanced Wound Care | wound | 56 | 16 | 28.6% | 14 | 18 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 6 | 11.1% | 1 | 36 | STARTED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 10 | 18.9% | 25 | 11 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 8 | 12 | STARTED |
@@ -38,7 +38,7 @@ low coverage there means exhausted, not neglected.
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 6 | 16.2% | 10 | 14 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 11 | 29.7% | 10 | 7 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 7 | 20.0% | 16 | 9 | STARTED |
-| Electrosurgical Consumables and Related Accessories | theatres | 33 | 8 | 24.2% | 12 | 8 | STARTED |
+| Electrosurgical Consumables and Related Accessories | theatres | 33 | 8 | 24.2% | 13 | 7 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 13 | 4 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 8 | 25.8% | 12 | 7 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 8 | 6 | STARTED |
@@ -98,7 +98,7 @@ low coverage there means exhausted, not neglected.
 | Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories | — | 13 | 0 | 0.0% | 10 | 0 | UNMAPPED |
 | Static X-Ray and Associated Options and Related Services | — | 13 | 0 | 0.0% | 2 | 7 | UNMAPPED |
 | Wipes for Surface Cleaning and Disinfection | — | 13 | 0 | 0.0% | 5 | 2 | UNMAPPED |
-| Disposable and Washable Continence Care | — | 12 | 0 | 0.0% | 4 | 4 | UNMAPPED |
+| Disposable and Washable Continence Care | — | 12 | 0 | 0.0% | 5 | 3 | UNMAPPED |
 | Finance Solutions | — | 12 | 0 | 0.0% | 9 | 2 | UNMAPPED |
 | Bladder Scanners and Associated Options and Related Services | — | 11 | 0 | 0.0% | 5 | 4 | UNMAPPED |
 | Fluoroscopy and Associated Options and Related Services | — | 11 | 0 | 0.0% | 2 | 5 | UNMAPPED |

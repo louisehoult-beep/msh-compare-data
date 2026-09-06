@@ -114,11 +114,27 @@ def main():
         published[key].add(p.get("cat"))
         pubcount[key] += 1
 
+    # HELD: crawled, but no recorded category mapping, so nothing publishes.
+    # Read from differentiator.json's `heldBySupplier`, which is complete.
+    # Until 06/09/2026 this read `heldTopDivisions` — the 40 biggest (supplier,
+    # division) pairs, written for a reader and never a complete list. Every
+    # supplier whose whole held range was smaller than the 40th pair therefore
+    # fell through to `notCrawled` and was queued as fresh crawl work it had
+    # already had: Purple Surgical (76 products) and BioSpectrum Ltd (19) were
+    # both re-crawled on 06/09/2026 for that reason alone, and both returned
+    # exactly what was already on record. heldTopDivisions is still read as a
+    # fallback so an older differentiator.json does not break this script.
     heldcount = collections.Counter()
-    for h in diff.get("heldTopDivisions", []):
-        st, canon, _ = CA.resolve(h.get("supplier", ""), reg)
-        key = canon if st == "RESOLVED" else h.get("supplier", "")
-        heldcount[key] += h.get("products", 0)
+    by_supplier = diff.get("heldBySupplier")
+    if by_supplier:
+        for rawname, n in by_supplier.items():
+            st, canon, _ = CA.resolve(rawname, reg)
+            heldcount[canon if st == "RESOLVED" else rawname] += n
+    else:
+        for h in diff.get("heldTopDivisions", []):
+            st, canon, _ = CA.resolve(h.get("supplier", ""), reg)
+            key = canon if st == "RESOLVED" else h.get("supplier", "")
+            heldcount[key] += h.get("products", 0)
 
     # supplier -> its own website domain, read from supplier-seed.json links[].
     # A "Website"-labelled link wins; otherwise the first link that is not a
@@ -196,9 +212,20 @@ def main():
                       "DONE" if total and done == total else
                       "STARTED" if done else "NOT STARTED"),
             "speciality": specKeys,
+            # A supplier with a recorded crawl refusal NEVER appears here, even
+            # when it also has held products from an earlier capture. Added
+            # 06/09/2026 with the heldBySupplier fix above: that fix correctly
+            # moved CD Medical Ltd and Healthcare 25 Ltd out of `refused` and
+            # into `heldOnly` (they do have crawled products, held for want of a
+            # category), and heldOnly is what this worklist is built from — which
+            # would have queued two answered suppliers for exactly the re-crawl
+            # that destroyed three considered refusals on 06/09/2026. Their held
+            # products still need a mapping decision; that is a decision, not a
+            # crawl, and it is counted in `actionable.heldNeedingCategory`.
             "crawlWorklist": [
                 {"supplier": n, "domain": domains.get(n)}
-                for n in buckets["heldOnly"] + buckets["notCrawled"]],
+                for n in buckets["heldOnly"] + buckets["notCrawled"]
+                if n not in refusals],
             "domainsMissing": sorted(
                 n for n in buckets["heldOnly"] + buckets["notCrawled"]
                 if not domains.get(n)),

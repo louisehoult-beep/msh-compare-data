@@ -527,6 +527,11 @@ def main():
     bycat = collections.Counter(r["cat"] for r in products)
     comparable = {c: n for c, n in bycat.items() if n >= 2}
 
+    # See heldBySupplier below: the complete per-supplier held count.
+    held_by_supplier = collections.Counter()
+    for (co, _div), n in hcount.items():
+        held_by_supplier[co] += n
+
     doc = {
         "_notice": "GENERATED. Do not edit by hand — run "
                    "scripts/build_differentiator.py.",
@@ -564,6 +569,16 @@ def main():
         "held": held[:2000],
         "heldTopDivisions": [{"supplier": c, "division": d, "products": n}
                              for (c, d), n in hcount.most_common(40)],
+        # COMPLETE held count per supplier, added 06/09/2026. heldTopDivisions is
+        # the 40 biggest (supplier, division) pairs, written for a reader; it was
+        # never a complete list, and scripts/build_coverage_ledger.py was reading
+        # it as one. A supplier whose whole crawled range is held but too small
+        # for the top 40 — Purple Surgical (76), BioSpectrum Ltd (19) — therefore
+        # read as never crawled, and the coverage ledger queued it as fresh
+        # crawl work. Two suppliers were re-crawled on 06/09/2026 for that reason
+        # alone. This field is what the ledger joins on: every supplier with at
+        # least one held product, and how many.
+        "heldBySupplier": dict(sorted(held_by_supplier.items())),
     }
     json.dump(doc, open(OUT, "w"), ensure_ascii=False, separators=(",", ":"))
     c = doc["counts"]
