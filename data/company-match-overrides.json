@@ -464,6 +464,15 @@
    "reason": "SSUR LTD 15323015 is a struck-off shell at the COMPANIES HOUSE DEFAULT ADDRESS in Cardiff, dissolved 08/07/2025. It was matched only because the name search dropped the umlaut from Össur. The real entity is almost certainly OSSUR UK LIMITED 02559193 (active, incorporated 16/11/1990, Stockport SK1 2AE), but that rests on Companies House alone — the only other sources found were aggregators, which are copies of the register and so are not independent. One source is not enough to assert an identity, so this is cleared rather than corrected. Found 03/09/2026 by the new dead-company check, which is what it was built for.",
    "evidence": "https://find-and-update.company-information.service.gov.uk/company/15323015",
    "decidedOn": "2026-09-03"
+  },
+  "Ocura Healthcare Furniture": {
+   "exclude": [
+    "10548718"
+   ],
+   "excludedName": "OCURA HEALTHCARE FURNITURE LIMITED",
+   "reason": "OCURA HEALTHCARE FURNITURE LIMITED (10548718) is a dormant company -- SIC 99999, filing dormant accounts, most recently made up to 31 January 2026 -- and is NOT the trading supplier published on the Compare by Speciality tab. It is a near-exact namesake of the Compare-tab spelling and it is ACTIVE on the register, so this script's prefer-an-active-company guard does not exclude it and a name search would attach it. The trading entity is very likely Ocura Healthcare Ltd (08824057, formerly Beaver Healthcare Ltd), whose exact name appears as data controller in the privacy policy at ocura.co.uk -- but ocura.co.uk prints no registration number anywhere and the postal address its privacy policy quotes does not match that register entry, so the identity is NOT proved and no `correct` number is recorded here. The honest empty state is the right output until somebody proves it (root rule 14).",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/10548718",
+   "decidedOn": "2026-09-06"
   }
  }
 }
