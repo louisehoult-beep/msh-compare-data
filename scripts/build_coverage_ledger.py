@@ -16,6 +16,22 @@ names its own award-winning suppliers. For each framework it answers:
   * which of those have any product published in the Differentiator
   * which have products HELD (crawled, uncategorised, invisible)
   * which have nothing crawled at all
+  * which were ATTEMPTED AND REFUSED, with the recorded reason and date
+
+REFUSALS ARE NOT WORK (added 06/09/2026). A supplier whose site was read and
+found uncrawlable — robots.txt forbids it, the site publishes no product API, or
+the only thing its catalogue exposes would misrepresent the company's range — is
+recorded in data/supplier-products.json's `refusals` with a reason and a date.
+Until this change the ledger counted those suppliers as "not crawled", so the
+lowest-coverage framework it named was usually one that had already been worked
+to exhaustion. Worse, the resulting crawl worklist drove re-crawls that
+OVERWROTE those recorded refusals, because crawl_supplier_site.py only applies
+its refusal TTL on the --auto path and not to an explicitly named --supplier.
+That is how a batch run on 06/09/2026 destroyed three considered refusal
+records (Clinisys, Hermes Medical Solutions, Magentus) and had to revert.
+So: a refused supplier is reported in its own bucket, is excluded from
+crawlWorklist and domainsMissing, and does not count towards `actionable`.
+A framework with no actionable suppliers left carries a blockedReason.
 
 A framework is DONE only when every awarded supplier is published with a
 category. Anything else is named, counted and left as work — never rounded up.
@@ -70,6 +86,12 @@ def main():
     diff = load("differentiator.json")
     seed = load("supplier-seed.json")
     vocab = load("compare-suppliers.json")["specialities"]
+    # Recorded crawl refusals, keyed on the crawler's own supplier name. Resolved
+    # through the alias registry like every other join here, never fuzzy-matched.
+    refusals = {}
+    for rawname, rec in (load("supplier-products.json").get("refusals") or {}).items():
+        st, canon, _ = CA.resolve(rawname, reg)
+        refusals[canon if st == "RESOLVED" else rawname] = rec
 
     # framework URL -> Hub speciality key. compare-suppliers.json already records
     # each speciality's buying route, so the framework a speciality is bought on
@@ -137,7 +159,7 @@ def main():
         inScopeFw = nhsscCat in IN_SCOPE
         specKeys = fwSpec.get((f.get("url") or "").rstrip("/"), [])
         buckets = {"published": [], "publishedElsewhere": [], "heldOnly": [],
-                   "notCrawled": [], "unknown": []}
+                   "notCrawled": [], "refused": [], "unknown": []}
         for name in sups:
             st, canon, _ = CA.resolve(name, reg)
             if st != "RESOLVED":
@@ -152,8 +174,8 @@ def main():
                 buckets["publishedElsewhere"].append(canon)
             elif heldcount.get(canon):
                 buckets["heldOnly"].append(canon)
-            elif canon in known:
-                buckets["notCrawled"].append(canon)
+            elif canon in refusals:
+                buckets["refused"].append(canon)
             else:
                 buckets["notCrawled"].append(canon)
         total = len(sups)
@@ -180,12 +202,41 @@ def main():
             "domainsMissing": sorted(
                 n for n in buckets["heldOnly"] + buckets["notCrawled"]
                 if not domains.get(n)),
+            # Attempted, read, and found uncrawlable — the reason and the date are
+            # the crawler's own record. Reported so a reader can see the framework
+            # was worked, not neglected; never re-queued as if it were fresh work.
+            "refusedSuppliers": [
+                {"supplier": n,
+                 "domain": refusals[n].get("domain"),
+                 "reason": refusals[n].get("reason"),
+                 "checked": refusals[n].get("checked")}
+                for n in buckets["refused"]],
             "route": "NHSSC framework" if specKeys else "no Hub speciality mapped to this framework",
             "catsInScope": sorted({c for s in buckets["published"]
                                    for c in published[s]
                                    if c and c.split(":")[0] in specKeys}),
+            # What is genuinely left to do on this framework, split by the kind of
+            # work it is. A refused supplier appears in none of these: it has been
+            # read and answered, and re-queueing it is how recorded judgements get
+            # overwritten. Zero across all four is the honest "nothing left by a
+            # permitted route", which is not the same as DONE.
+            "actionable": {
+                "unresolvedNames": len(buckets["unknown"]),
+                "heldNeedingCategory": len(buckets["heldOnly"]),
+                "crawlable": sum(1 for n in buckets["notCrawled"] if domains.get(n)),
+                "needDomain": sum(1 for n in buckets["notCrawled"] if not domains.get(n)),
+            },
             **buckets,
         })
+        a = rows[-1]["actionable"]
+        left = sum(a.values())
+        rows[-1]["actionableTotal"] = left
+        rows[-1]["blockedReason"] = None if left or rows[-1]["state"] in (
+            "DONE", "OUT OF SCOPE", "UNMAPPED") else (
+            "every awarded supplier not yet published has been read and refused "
+            "(%d recorded refusal(s)) — no permitted route left to the rest of "
+            "this framework, so its coverage cannot rise without a new route"
+            % len(buckets["refused"]))
 
     ORDER = {"STARTED": 0, "NOT STARTED": 1, "UNMAPPED": 2, "DONE": 3,
              "OUT OF SCOPE": 4}
@@ -214,6 +265,10 @@ def main():
                 for w in r["crawlWorklist"]}),
             "inScopeSuppliersNeedingDomain": len({
                 n for r in rows if r["inScope"] for n in r["domainsMissing"]}),
+            "suppliersRefused": len({
+                w["supplier"] for r in rows if r["inScope"]
+                for w in r["refusedSuppliers"]}),
+            "blockedFrameworks": sum(1 for r in rows if r["blockedReason"]),
         },
         "unresolvedSupplierNames": unresolved.most_common(),
         "frameworks": rows,
@@ -230,22 +285,43 @@ def main():
           "UNMAPPED means no Hub speciality records this framework as its buying",
           "route, so coverage cannot be measured against it yet. It is not a",
           "synonym for out of scope: decide each one deliberately.", "",
-          "| Framework | Speciality | Awarded | Published | Coverage | State |",
-          "|---|---|---|---|---|---|"]
+          "**Left** is the work genuinely still available on a framework: unresolved",
+          "supplier names + suppliers held uncategorised + suppliers crawlable +",
+          "suppliers needing a website. **Refused** suppliers were read and found",
+          "uncrawlable (robots.txt, no product API, or a catalogue that would",
+          "misrepresent the range), with the reason and date recorded in",
+          "`data/supplier-products.json`; they are not counted as work and must not",
+          "be re-crawled from this table, or the recorded judgement is overwritten.",
+          f"**{c['blockedFrameworks']} framework(s) have nothing left by a permitted route** —",
+          "low coverage there means exhausted, not neglected.", "",
+          "| Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |",
+          "|---|---|---|---|---|---|---|---|"]
     for r in rows:
-        md.append("| %s | %s | %d | %d | %.1f%% | %s |" % (
+        md.append("| %s | %s | %d | %d | %.1f%% | %d | %d | %s |" % (
             r["framework"], ", ".join(r["speciality"]) or "—",
             r["suppliersAwarded"], r["suppliersPublished"],
-            r["coverage"], r["state"]))
+            r["coverage"], r["actionableTotal"], len(r["refusedSuppliers"]),
+            r["state"] + (" · BLOCKED" if r["blockedReason"] else "")))
     with open(os.path.join(REPO, "docs", "COVERAGE-LEDGER.md"), "w") as f:
         f.write("\n".join(md) + "\n")
 
     print(json.dumps(c, indent=1))
     print("\nTop 12 by size:")
     for r in [x for x in rows if x["inScope"]][:14]:
-        print("  %-52s %-14s %3d awarded %3d pub  %s" % (
+        print("  %-52s %-14s %3d awarded %3d pub %3d left  %s" % (
             (r["framework"] or "")[:52], (",".join(r["speciality"]) or "-")[:14],
-            r["suppliersAwarded"], r["suppliersPublished"], r["state"]))
+            r["suppliersAwarded"], r["suppliersPublished"],
+            r["actionableTotal"], r["state"]))
+
+    live = [x for x in rows if x["state"] == "STARTED" and x["actionableTotal"]]
+    live.sort(key=lambda x: (x["coverage"], -x["suppliersAwarded"]))
+    print("\nLowest-coverage STARTED frameworks that still have work left:")
+    for r in live[:8]:
+        a = r["actionable"]
+        print("  %5.1f%%  %3d left (%d unresolved, %d held, %d crawlable, %d need domain)  %s"
+              % (r["coverage"], r["actionableTotal"], a["unresolvedNames"],
+                 a["heldNeedingCategory"], a["crawlable"], a["needDomain"],
+                 (r["framework"] or "")[:52]))
 
 
 if __name__ == "__main__":
