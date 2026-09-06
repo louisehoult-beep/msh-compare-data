@@ -928,10 +928,39 @@ PRODUCT_SUBPAGE_WORDS = {
 CONTAINER_PATH_WORDS = ("category", "catalog")
 
 
+# A BREADCRUMB TRAIL IS NOT ALWAYS LABELLED "BREADCRUMB" (06/09/2026). The
+# original pattern found the trail by the word "breadcrumb" in the container's
+# id or class, which is the commonest convention but not the standard one.
+# Confirmed live on mishealthcare.co.uk/products/bodytom, 06/09/2026: the trail
+# is a <ol itemscope itemtype="https://schema.org/BreadcrumbList"
+# class="flex flex-wrap gap-2"> — a Tailwind class list carrying no such word,
+# and no id at all — so it was invisible to that pattern and MIS Healthcare's
+# whole 105-product range read as one flat "Uncategorised" division when its
+# own pages file every product under Imaging, Ultrasound, PACS or Veterinary.
+# schema.org/BreadcrumbList is the declared standard for exactly this markup,
+# so matching it is a second reading of the same convention, not a site-specific
+# rule.
+_BREADCRUMB_CONTAINER = (
+    r'<(nav|ul|ol|div)[^>]*(?:(?:id|class)=["\'][^"\']*breadcrumb[^"\']*["\']'
+    r'|itemtype=["\'][^"\']*schema\.org/BreadcrumbList[^"\']*["\'])[^>]*>(.*?)</\1>')
+
+
 def _page_title(body):
     """Real product name from a numeric-slug page's own record — schema.org
     markup first, then a bare <h1>, then <title> (stripped of a trailing
-    " . Company Name Ltd" tail, which only the <title> element carries)."""
+    " . Company Name Ltd" tail, which only the <title> element carries).
+
+    THE BREADCRUMB IS READ FIRST AND MUST NOT BE READ AS THE NAME (06/09/2026).
+    A schema.org BreadcrumbList marks each crumb up as itemprop="name" — the
+    same attribute a schema.org Product uses for its own name — and the trail
+    sits ABOVE the product in the document, so an unfiltered search for the
+    first itemprop="name" returns the trail's home crumb. On MIS Healthcare
+    that made every one of 105 products read "Home"; the correct name sat in
+    the page's <h1> two elements further down. The trail is removed before the
+    name is looked for, rather than the name pattern being narrowed, because
+    the crumb and the product are genuinely indistinguishable by attribute
+    alone — only by which element encloses them."""
+    body = re.sub(_BREADCRUMB_CONTAINER, "", body, flags=re.S | re.I)
     m = re.search(r'itemprop=["\']name["\'][^>]*>(.*?)<', body, re.S)
     if m:
         t = clean(m.group(1))
@@ -975,9 +1004,7 @@ def _breadcrumb_division(body, domain=None):
     link whatever text it carries, and is dropped alongside the existing
     word list (kept as a cheaper second check, and for a home crumb that is
     not itself a link)."""
-    m = re.search(
-        r'<(nav|ul|ol|div)[^>]*(?:id|class)=["\'][^"\']*breadcrumb[^"\']*["\'][^>]*>(.*?)</\1>',
-        body, re.S | re.I)
+    m = re.search(_BREADCRUMB_CONTAINER, body, re.S | re.I)
     if not m:
         return None
     root_host = None

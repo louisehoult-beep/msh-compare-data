@@ -356803,541 +356803,560 @@
   },
   "Medical Imaging Systems (MIS Healthcare)": {
    "domain": "mishealthcare.co.uk",
-   "verified": "2026-08-29",
-   "source": "mishealthcare.co.uk XML sitemap, read this run",
-   "structureFrom": "sitemap",
-   "hasDivisions": false,
+   "verified": "2026-09-06",
+   "source": "mishealthcare.co.uk, each product's own page read this run",
+   "structureFrom": "sitemap products, each page's own name and breadcrumb division (per-page fallback)",
+   "partialRead": false,
+   "hasDivisions": true,
    "landingPagesDropped": 0,
+   "furniturePagesDropped": 0,
    "duplicateUrlsDropped": 0,
-   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 0 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping.",
-   "structure": "No division structure found in the URLs — listed as one flat range.",
    "droppedCategoryPages": 0,
-   "filingRule": "Read from the sitemap, so product NAMES come from URL slugs. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping — every item is listed by name below rather than grouped, because a flat list is honest and a fabricated grouping would not be.",
+   "captureCaveat": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 105 page(s) could not be read and fall back to their URL slug.",
+   "structure": "The company's own division for each product, read from its own breadcrumb trail.",
+   "filingRule": "Grouping MIRRORS the manufacturer's own filing, read from each product's own breadcrumb trail because the site's URLs carry no division segment of their own.",
    "divisions": [
     {
-     "name": "Uncategorised",
-     "products": 104
+     "name": "Imaging",
+     "products": 55
+    },
+    {
+     "name": "Ultrasound",
+     "products": 24
+    },
+    {
+     "name": "Veterinary",
+     "products": 14
+    },
+    {
+     "name": "PACS",
+     "products": 12
     }
    ],
    "products": [
     {
-     "n": "Upmr 790",
-     "division": "Uncategorised",
+     "n": "uPMR® 790",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Extron 5 7 Veterinary",
-     "division": "Uncategorised",
+     "n": "EXTRON 5 & 7 - Veterinary",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "Extron 5 7",
-     "division": "Uncategorised",
+     "n": "EXTRON 5 & 7",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Paediatrics",
-     "division": "Uncategorised",
+     "n": "Paediatrics Ultrasound Systems",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "V5 Poc",
-     "division": "Uncategorised",
+     "n": "V5 - POC",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "Hm70 Evo Poc",
-     "division": "Uncategorised",
+     "n": "HM70 Evo - POC",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "Hm70 Evo General Imaging",
-     "division": "Uncategorised",
+     "n": "HM70 Evo - General Imaging",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "V4 General Imaging",
-     "division": "Uncategorised",
+     "n": "V4 - General Imaging",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "V5 General Imaging",
-     "division": "Uncategorised",
+     "n": "V5 - General Imaging",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "V6 One General Imaging",
-     "division": "Uncategorised",
+     "n": "V6 One - General Imaging",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "V7 One General Imaging",
-     "division": "Uncategorised",
+     "n": "V7 One - General Imaging",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "V4   Equine",
-     "division": "Uncategorised",
+     "n": "V4 - Equine",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "V8 One Small Animal 2",
-     "division": "Uncategorised",
+     "n": "Small Animal",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "Cv One Cardiovascular",
-     "division": "Uncategorised",
+     "n": "cV ONE Ultrasound Systems",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "V8 General Imaging",
-     "division": "Uncategorised",
+     "n": "V8 One - General Imaging",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "V8 Womens Health",
-     "division": "Uncategorised",
+     "n": "V8 One - Womens Health",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "Tims Review",
-     "division": "Uncategorised",
+     "n": "TIMS Review",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Tims Surgical Imaging",
-     "division": "Uncategorised",
+     "n": "GI",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Mbs",
-     "division": "Uncategorised",
+     "n": "TIMS Surgical Imaging",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Fees",
-     "division": "Uncategorised",
+     "n": "MBS",
+     "division": "Imaging",
+     "category": ""
+    },
+    {
+     "n": "FEES",
+     "division": "Imaging",
      "category": ""
     },
     {
      "n": "Epic Lumens",
-     "division": "Uncategorised",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Ent",
-     "division": "Uncategorised",
+     "n": "ENT",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Novamg Pro 2",
-     "division": "Uncategorised",
+     "n": "NovaMG Pro",
+     "division": "PACS",
      "category": ""
     },
     {
-     "n": "Uexplorer",
-     "division": "Uncategorised",
+     "n": "uEXPLORER",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Rayscan %Ce%B1 2",
-     "division": "Uncategorised",
+     "n": "Rayscan α",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Rayscan %Ce%B1",
-     "division": "Uncategorised",
+     "n": "Rayscan α+",
+     "division": "Imaging",
      "category": ""
     },
     {
      "n": "Rioscan",
-     "division": "Uncategorised",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Dexxum T Half Body Dxa",
-     "division": "Uncategorised",
+     "n": "Dexxum T Half Body DXA",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Dexum T Quantum",
-     "division": "Uncategorised",
+     "n": "DEXUM T Quantum",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Excellus Dxa",
-     "division": "Uncategorised",
+     "n": "Excellus DXA",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Primus Whole Body Dxa",
-     "division": "Uncategorised",
+     "n": "Primus Whole Body DXA",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Tims Medical Video Platform Mvp",
-     "division": "Uncategorised",
+     "n": "TIMS Medical Video Platform (MVP)",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Mri Sonic Shot 7",
-     "division": "Uncategorised",
+     "n": "MRI Sonic Shot 7",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Press Duo",
-     "division": "Uncategorised",
+     "n": "Press Duo Elite",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Ct Dual Shot Alpha 7",
-     "division": "Uncategorised",
+     "n": "CT Dual Shot Alpha 7",
+     "division": "Imaging",
      "category": ""
     },
     {
      "n": "Smart Shot Alpha",
-     "division": "Uncategorised",
+     "division": "Imaging",
      "category": ""
     },
     {
      "n": "Vimap 1020A",
-     "division": "Uncategorised",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Corelite",
-     "division": "Uncategorised",
+     "n": "CoreLite™",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Solas Or",
-     "division": "Uncategorised",
+     "n": "Solas OR",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Three Palm Software",
-     "division": "Uncategorised",
+     "n": "WorkstationOne",
+     "division": "Imaging",
      "category": ""
     },
     {
      "n": "Shimadzu Trinias",
-     "division": "Uncategorised",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Sonialvision G4",
-     "division": "Uncategorised",
+     "n": "SONIALVISION G4",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Umi Panvivo Ex Es",
-     "division": "Uncategorised",
+     "n": "uMI Panvivo EX/ES",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Umi Panvivo",
-     "division": "Uncategorised",
+     "n": "uMI Panvivo",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Umi Panorama Gs",
-     "division": "Uncategorised",
+     "n": "uMI Panorama GS",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Umi Panorama",
-     "division": "Uncategorised",
+     "n": "uMI Panorama",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Umi 550",
-     "division": "Uncategorised",
+     "n": "uMI 550",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Umr 680",
-     "division": "Uncategorised",
+     "n": "uMR® 680",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Umr 780",
-     "division": "Uncategorised",
+     "n": "uMR 780",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Umr Ultra",
-     "division": "Uncategorised",
+     "n": "uMR Ultra",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Umr Omega",
-     "division": "Uncategorised",
+     "n": "uMR Omega",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Umr Jupiter 5 0T",
-     "division": "Uncategorised",
+     "n": "uMR Jupiter 5.0T",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Bodytom",
-     "division": "Uncategorised",
+     "n": "BodyTom®",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Ceretom",
-     "division": "Uncategorised",
+     "n": "CereTom®",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Omnitom",
-     "division": "Uncategorised",
+     "n": "OmniTom®",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Uct 868",
-     "division": "Uncategorised",
+     "n": "uCT 868",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Uct 780",
-     "division": "Uncategorised",
+     "n": "uCT 780",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Uct 820",
-     "division": "Uncategorised",
+     "n": "uCT 820",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Uct 960",
-     "division": "Uncategorised",
+     "n": "uCT 960+",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Gf85",
-     "division": "Uncategorised",
+     "n": "GF85",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Gr40 Retro Fit",
-     "division": "Uncategorised",
+     "n": "GR40 Retro-Fit",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Gm85 Elite",
-     "division": "Uncategorised",
+     "n": "GM85 Elite",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Iq 4Cloud",
-     "division": "Uncategorised",
+     "n": "iQ-4CLOUD",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "X Ray Tube Stands",
-     "division": "Uncategorised",
+     "n": "X-Ray Tube Stands",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "Vettom 32",
-     "division": "Uncategorised",
+     "n": "VetTom 32",
+     "division": "Veterinary",
      "category": ""
     },
     {
      "n": "Riosensor",
-     "division": "Uncategorised",
+     "division": "Imaging",
      "category": ""
     },
     {
      "n": "Flexavision",
-     "division": "Uncategorised",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "Umr 580",
-     "division": "Uncategorised",
+     "n": "uMR® 580",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "Umr 670",
-     "division": "Uncategorised",
+     "n": "uMR® 670",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Vettom 8 16",
-     "division": "Uncategorised",
+     "n": "VetTom 8/ 16",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "Uct Orion Elite",
-     "division": "Uncategorised",
+     "n": "uCT Orion Elite",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Uct Orion Extra",
-     "division": "Uncategorised",
+     "n": "uCT Orion Extra",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Uct 550",
-     "division": "Uncategorised",
+     "n": "uCT 550",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Gr40Cw",
-     "division": "Uncategorised",
+     "n": "GR40CW",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "Gxr S Series",
-     "division": "Uncategorised",
+     "n": "GXR-S Series",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "Gxr Sd Series",
-     "division": "Uncategorised",
+     "n": "GXR-SD Series",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "Vxr E Ec Series",
-     "division": "Uncategorised",
+     "n": "VXR-E/EC Series",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "Gm85 Fit",
-     "division": "Uncategorised",
+     "n": "GM85 FIT",
+     "division": "Imaging",
      "category": ""
     },
     {
-     "n": "Jade",
-     "division": "Uncategorised",
+     "n": "JADE",
+     "division": "Veterinary",
      "category": ""
     },
     {
-     "n": "Evo Q10 New",
-     "division": "Uncategorised",
+     "n": "EVO Q10 (NEW)",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "Rs80 Evo",
-     "division": "Uncategorised",
+     "n": "RS80 EVO",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "Rs85 Prestige",
-     "division": "Uncategorised",
+     "n": "RS85 Prestige",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "R20",
-     "division": "Uncategorised",
+     "n": "R20 - General Imaging",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "Hm70 Evo Womens Health",
-     "division": "Uncategorised",
+     "n": "HM70 EVO - Womens Health",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "Hera W9",
-     "division": "Uncategorised",
+     "n": "HERA W9",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "Hera W10",
-     "division": "Uncategorised",
+     "n": "HERA W10",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "Hera W10 Elite",
-     "division": "Uncategorised",
+     "n": "HERA W10 Elite",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "Hera Z20",
-     "division": "Uncategorised",
+     "n": "HERA Z20",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "V4 Womens Health",
-     "division": "Uncategorised",
+     "n": "V4 - Womens Health",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "V5 Womens Health",
-     "division": "Uncategorised",
+     "n": "V5 - Womens Health",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "V6 One Womens Health",
-     "division": "Uncategorised",
+     "n": "V6 One - Womens Health",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "V7 One Womens Health",
-     "division": "Uncategorised",
+     "n": "V7 One - Womens Health",
+     "division": "Ultrasound",
      "category": ""
     },
     {
-     "n": "Dicomextreme",
-     "division": "Uncategorised",
+     "n": "DICOMeXtreme®",
+     "division": "PACS",
      "category": ""
     },
     {
-     "n": "Vnahealth",
-     "division": "Uncategorised",
+     "n": "VNAHealth®",
+     "division": "PACS",
      "category": ""
     },
     {
-     "n": "Dosemonitor",
-     "division": "Uncategorised",
+     "n": "DoseMonitor®",
+     "division": "PACS",
      "category": ""
     },
     {
-     "n": "Pacshealth",
-     "division": "Uncategorised",
+     "n": "PACSHealth®",
+     "division": "PACS",
      "category": ""
     },
     {
-     "n": "Mis Cloud",
-     "division": "Uncategorised",
+     "n": "MIS Cloud",
+     "division": "PACS",
      "category": ""
     },
     {
-     "n": "Snapview",
-     "division": "Uncategorised",
+     "n": "SnapView",
+     "division": "PACS",
      "category": ""
     },
     {
-     "n": "Mobilerad",
-     "division": "Uncategorised",
+     "n": "MobileRAD",
+     "division": "PACS",
      "category": ""
     },
     {
-     "n": "Cryptochart",
-     "division": "Uncategorised",
+     "n": "CryptoChart",
+     "division": "PACS",
      "category": ""
     },
     {
-     "n": "Novaris",
-     "division": "Uncategorised",
+     "n": "NovaRIS",
+     "division": "PACS",
      "category": ""
     },
     {
-     "n": "Novacardio",
-     "division": "Uncategorised",
+     "n": "NovaCardio",
+     "division": "PACS",
      "category": ""
     },
     {
-     "n": "Novapacs Ei",
-     "division": "Uncategorised",
+     "n": "NovaPACS EI",
+     "division": "PACS",
      "category": ""
     },
     {
-     "n": "Gc85A Vision",
-     "division": "Uncategorised",
+     "n": "GC85A Vision+",
+     "division": "Imaging",
      "category": ""
     }
    ]

@@ -562,6 +562,21 @@ def main():
     ap.add_argument("--products-limit", type=int, default=MAX_PRODUCTS_PER_SUPPLIER,
                     help="max products per supplier, per run")
     ap.add_argument("--dry-run", action="store_true")
+    # A SUPPLIER WITH MORE PRODUCTS THAN 60 SECONDS BUYS HAS AN UNREACHABLE TAIL
+    # (06/09/2026). The per-supplier loop below always starts at the first
+    # product in the range and stops when SITE_BUDGET_S is spent, so a supplier
+    # whose range is longer than that budget reaches the same prefix every run,
+    # for ever: three consecutive runs against Medical Imaging Systems (MIS
+    # Healthcare) each captured the identical first 36 of its 105 products, and
+    # its whole PACS division — the part the Digital Diagnostic Solutions
+    # framework actually needs — sits at the end of the range and could never be
+    # read. The default is UNCHANGED, so the nightly --auto sweep behaves exactly
+    # as before and no site is read harder without someone asking for it; this
+    # flag is for an operator working one named supplier deliberately.
+    ap.add_argument("--site-budget", type=int, default=SITE_BUDGET_S,
+                    help="seconds of per-SUPPLIER budget (default %d). Raise it only "
+                         "for a named --supplier whose range is longer than the "
+                         "default budget can reach." % SITE_BUDGET_S)
     ap.add_argument("--product-path", action="append", default=[],
                     help="a URL path segment this company files products under, e.g. "
                          "--product-path solutions. Use ONLY after looking at that "
@@ -639,7 +654,7 @@ def main():
             continue
 
         started = time.time()
-        deadline = started + SITE_BUDGET_S
+        deadline = started + a.site_budget
         if not base.allowed(domain):
             print("== %s (%s): robots.txt disallows automated reading — skipped entirely"
                   % (supplier, domain), flush=True)
