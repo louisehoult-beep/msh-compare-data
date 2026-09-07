@@ -56,6 +56,12 @@
      rest of the tool is untouched. */
   var ICCURL = BASE + 'data/icc-matrices.json' + CB;
   var ICC = {};
+  /* One record per product, gathering EVERY source the Hub holds about it, with
+     the source named against every value. Built by build_product_dossiers.py.
+     Wound care is the speciality built so far; a product outside it simply has
+     no dossier and the block does not render. */
+  var DOSSIERURL = BASE + 'data/product-dossiers-wound.json' + CB;
+  var DOSSIERS = {};
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
@@ -99,11 +105,13 @@
     // TYPES/GENERIC_TYPE_OVERRIDE/CANNULA_DISQUALIFIERS fallbacks above stand —
     // the tool degrades to the last-known-good taxonomy rather than dying.
     fetch(PTYPESURL).then(function(r){return r.json();}).catch(function(){return null;}),
-    fetch(ICCURL).then(function(r){return r.json();}).catch(function(){return {matrices:{}};})
+    fetch(ICCURL).then(function(r){return r.json();}).catch(function(){return {matrices:{}};}),
+    fetch(DOSSIERURL).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};})
   ]).then(function(res){
     RANGE = (res[4] && res[4].suppliers) || {};
     PDETAIL = (res[5] && res[5].products) || {};
     ICC = (res[7] && res[7].matrices) || {};
+    ((res[8] && res[8].dossiers) || []).forEach(function(d){ DOSSIERS[d.key] = d; });
     var PT = res[6];
     if (PT && Array.isArray(PT.types) && PT.types.length) TYPES = PT.types;
     if (PT && PT.generic_type_override) GENERIC_TYPE_OVERRIDE = PT.generic_type_override;
@@ -1194,6 +1202,141 @@
         + '" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">source &#8599;</a></div>';
     }
 
+
+    /* ================================================================
+       EVERY SOURCE WE HOLD — the multi-source dossier for one product.
+
+       Built by scripts/build_product_dossiers.py. One record per product,
+       gathering every file the Hub holds that says anything about it, with
+       the source named against every single value.
+
+       THE SOURCES ARE SHOWN TOGETHER, NOT MERGED. Where the manufacturer's
+       page says "up to 7 days" and NHS Supply Chain's clinical matrix says
+       "-", both are printed with their own attribution. Picking a winner
+       would invent a fact neither source states, and the disagreement is
+       precisely what a rep needs to see before quoting a number to a
+       clinician.
+
+       SCOPE IS NOT DECORATION. A value marked "range" was measured by NHS
+       Supply Chain on a NAMED VARIANT in this product's range, not on this
+       product. It is shown because it is the best evidence available for
+       that range, and it is labelled every single time so it can never be
+       read as this product's own figure.
+       ================================================================ */
+    var DOSSIER_KIND = {
+      independent:  { label: 'NHS-authored',  c: '#2E6B3E', bg: '#eef5f0',
+                      note: 'NHS Supply Chain measured every supplier in the category the same way. The only like-for-like source here.' },
+      catalogue:    { label: 'NHS catalogue', c: '#2A5A6B', bg: '#eff5f7',
+                      note: 'What NHS Supply Chain lists and how it is packed — a fact about the listing, not a measurement.' },
+      tariff:       { label: 'Drug Tariff',   c: '#6B4A2A', bg: '#f6f1ea',
+                      note: 'NHSBSA Part IX — what is reimbursable in primary care and at what price.' },
+      manufacturer: { label: 'Manufacturer',  c: '#6B2A34', bg: '#fbf3f4',
+                      note: 'The supplier’s own words about its own product. Not independently verified.' },
+      regulatory:   { label: 'MHRA',          c: '#7a5b14', bg: '#f7f5ef',
+                      note: 'MHRA field safety notices and alerts.' }
+    };
+
+    function dossierFor(p){
+      return DOSSIERS[p.supplier + '|' + nk(p.name)] || null;
+    }
+
+    function kindOf(dos, sid){
+      var s = dos.sources[sid];
+      return (s && DOSSIER_KIND[s.kind]) ? s.kind : 'manufacturer';
+    }
+
+    function sourceBadge(dos, sid, scope){
+      var s = dos.sources[sid] || {};
+      var k = DOSSIER_KIND[kindOf(dos, sid)];
+      var name = s.name || sid;
+      var extra = s.detail ? ' &middot; ' + esc(s.detail) : '';
+      var when = s.issued || s.specsCaptured || s.captured || s.asOf;
+      var badge = '<span style="display:inline-block;padding:1px 6px;border-radius:4px;'
+        + 'font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;'
+        + 'color:#fff;background:' + k.c + ';">' + k.label + '</span>';
+      /* Said every time, not once at the top: a reader scanning one row must
+         not have to remember a legend to know what they are looking at. */
+      var range = scope === 'family'
+        ? ' <span style="color:#8a6d00;font-weight:700;">range, not this exact product</span>'
+        : '';
+      return '<div style="font-size:10.5px;color:#8a8778;margin-top:2px;">' + badge + ' '
+        + esc(name) + extra + (when ? ' &middot; ' + esc(ddmm(when)) : '') + range
+        + (s.url ? ' &middot; <a href="' + esc(s.url) + '" target="_blank" rel="noopener" '
+            + 'style="color:' + GOLD + ';font-weight:600;">source &#8599;</a>' : '')
+        + '</div>';
+    }
+
+    function dossierBlock(p){
+      var dos = dossierFor(p);
+      if (!dos) return '';
+      var fields = dos.fields || {};
+      var names = [];
+      for (var f in fields){ if (Object.prototype.hasOwnProperty.call(fields, f)) names.push(f); }
+      if (!names.length) return '';
+
+      var kinds = {};
+      for (var sid in dos.sources){
+        if (Object.prototype.hasOwnProperty.call(dos.sources, sid)) kinds[kindOf(dos, sid)] = 1;
+      }
+      var kindList = [];
+      for (var k in kinds){ if (Object.prototype.hasOwnProperty.call(kinds, k)) kindList.push(k); }
+
+      var rows = '';
+      for (var i = 0; i < names.length; i++){
+        var field = names[i], obs = fields[field];
+        var vals = '';
+        for (var j = 0; j < obs.length; j++){
+          var ob = obs[j];
+          vals += '<div style="' + (j ? 'margin-top:9px;padding-top:9px;border-top:1px dotted ' + LINE + ';' : '') + '">'
+            + '<div style="font-size:12.5px;color:#39424d;line-height:1.5;">' + esc(ob.value) + '</div>'
+            + (ob.variant ? '<div style="font-size:10.5px;color:#6b7684;margin-top:1px;">measured on: '
+                + esc(ob.variant) + (ob.npc ? ' &middot; ' + esc(ob.npc) : '') + '</div>' : '')
+            + sourceBadge(dos, ob.source, ob.scope) + '</div>';
+        }
+        /* Two sources answering the same field is worth flagging even when they
+           agree — "both said it" is stronger evidence than "one said it". */
+        var multi = obs.length > 1;
+        rows += '<tr style="border-top:1px solid ' + LINE + ';vertical-align:top;'
+          + (multi ? 'background:#fcfaf5;' : '') + '">'
+          + '<th scope="row" style="padding:8px 10px;font-size:12px;color:#6b7684;text-align:left;'
+          + 'font-weight:600;width:220px;">' + esc(field)
+          + (multi ? '<div style="font-size:10px;color:#a8842c;font-weight:700;margin-top:2px;">'
+              + obs.length + ' sources</div>' : '') + '</th>'
+          + '<td style="padding:8px 10px;">' + vals + '</td></tr>';
+      }
+
+      var legend = '';
+      for (var n = 0; n < kindList.length; n++){
+        var kk = DOSSIER_KIND[kindList[n]];
+        legend += '<div style="margin-top:4px;"><span style="display:inline-block;padding:1px 6px;'
+          + 'border-radius:4px;font-size:9.5px;font-weight:800;text-transform:uppercase;'
+          + 'letter-spacing:.4px;color:#fff;background:' + kk.c + ';">' + kk.label + '</span> '
+          + '<span style="font-size:11.5px;color:#5a4a20;">' + kk.note + '</span></div>';
+      }
+
+      var codes = (dos.npc && dos.npc.length)
+        ? '<div style="font-size:11.5px;color:#6b7684;margin-top:4px;">NHS Supply Chain codes on this record: '
+          + dos.npc.slice(0, 12).map(esc).join(', ')
+          + (dos.npc.length > 12 ? ' and ' + (dos.npc.length - 12) + ' more' : '') + '</div>'
+        : '';
+
+      return '<details style="margin-top:14px;border:1px solid ' + LINE + ';border-radius:10px;background:#fff;">'
+        + '<summary style="padding:10px 12px;cursor:pointer;font-size:12.5px;font-weight:700;color:' + INK + ';">'
+        + 'Every source we hold on ' + esc(dos.name)
+        + ' <span style="font-weight:400;color:#8a8778;">&mdash; ' + kindList.length
+        + (kindList.length === 1 ? ' kind of source, ' : ' kinds of source, ')
+        + names.length + ' fields</span></summary>'
+        + '<div style="padding:0 12px 12px;">'
+        + '<div style="padding:10px 12px;background:' + SOFT + ';border:1px dashed ' + GOLD
+        + ';border-radius:8px;margin-bottom:10px;">'
+        + '<div style="font-size:12px;color:#5a4a20;line-height:1.55;">'
+        + '<strong>These sources are shown side by side, never merged.</strong> Where two disagree, '
+        + 'both are printed with their own attribution &mdash; the disagreement is the intelligence. '
+        + 'Anything marked <em>range, not this exact product</em> was measured on a named variant in '
+        + 'this range, not on this product.</div>' + legend + codes + '</div>'
+        + '<table style="width:100%;border-collapse:collapse;">' + rows + '</table></div></details>';
+    }
+
     function specsBlock(mine, theirs){
       var ms = specsOf(mine), ts = specsOf(theirs);
       if (!ms && !ts) return '';               // neither page swept — add nothing
@@ -1266,7 +1409,7 @@
         h += '<div style="margin-top:10px;font-size:13px;color:#39424d;background:#fff;border:1px solid ' + LINE + ';border-radius:10px;padding:12px 14px;">'
           + 'Neither catalogue entry states a material, format or regulatory detail we can line up, so there is no spec table to show. '
           + 'That is a gap in the published descriptions, not a finding about either product — compare on service, training, price and supply instead.</div>';
-        return h + specsBlock(mine, theirs);
+        return h + specsBlock(mine, theirs) + dossierBlock(mine) + dossierBlock(theirs);
       }
       h += '<div style="overflow-x:auto;margin-top:10px;"><table style="width:100%;border-collapse:collapse;min-width:420px;background:#fff;border:1px solid ' + LINE + ';border-radius:10px;">'
         + '<thead><tr style="text-align:left;background:' + SOFT + ';">'
@@ -1277,7 +1420,7 @@
         + '<div style="font-size:11.5px;color:#8a8778;margin-top:6px;">&#9670; marks a stated difference. Every cell is taken from that product&rsquo;s own NHS Supply Chain '
         + 'catalogue description &mdash; &ldquo;not stated&rdquo; means the entry is silent, <strong>not</strong> that the product lacks it. '
         + 'Confirm against the manufacturer&rsquo;s IFU before you quote anything clinically.</div>';
-      return h + specsBlock(mine, theirs);
+      return h + specsBlock(mine, theirs) + dossierBlock(mine) + dossierBlock(theirs);
     }
 
     /* PROBING QUESTIONS — derived from the differences actually found, not a
