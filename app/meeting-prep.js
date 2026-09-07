@@ -41,6 +41,25 @@
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
 
+  /* How old is this profile? verifiedAt is written by the trust-profile refresh
+     task each time it re-checks a trust against that trust's own board pages and
+     current annual report. It is an ISO date; the Hub shows UK format. */
+  function ukDate(iso){
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || ''));
+    return m ? (m[3] + '/' + m[2] + '/' + m[1]) : null;
+  }
+  function verifiedLine(tr){
+    var d = ukDate(tr && tr.verifiedAt);
+    if (d){
+      return 'Re-verified on <strong>' + esc(d) + '</strong> against this trust&#8217;s own board pages and current annual report. '
+        + 'People and procurement structure are re-checked on a rolling cycle, so treat anything named here as correct as at that date.';
+    }
+    /* No stamp yet. Say so: a profile with no date is not the same as a fresh
+       one, and a rep about to use a named contact needs to know which it is. */
+    return 'This profile has <strong>not yet been re-verified</strong> since it was first researched, so the people named in it '
+      + 'may have moved on. It is queued for the rolling re-verification cycle, not skipped. Confirm any named contact before you use it.';
+  }
+
   var AUD = {
     'Procurement / finance': { key:'finance', line:'Lead with money and value: what it saves now, the whole-life cost, and the capacity it frees. Tie it to the trust’s own cost and strategy priorities (from their annual report), and frame it as value-based procurement — save AND deliver value.' },
     'Clinical manager': { key:'manager', line:'Answer the rollout questions before they’re asked: how training is delivered, how you’d implement without disruption, change-management support, and the evidence it works at scale.' },
@@ -649,6 +668,15 @@
           });
           body += '<div style="margin-top:10px;font-weight:700;">What they’re saying publicly:</div>' + li(vl);
         }
+        /* FRESHNESS STAMP. A profile names real people in real posts, and a
+           board changes without telling us. The refresh cycle re-checks a batch
+           of twelve against the trust's own board pages and annual report and
+           writes verifiedAt, but until 07/09/2026 nothing rendered it, so a rep
+           had no way to tell a profile checked this week from one built in
+           August and never looked at again. An unstamped profile says so
+           plainly rather than staying silent, because silence reads as current. */
+        body += '<div style="margin-top:12px;padding-top:8px;border-top:1px solid ' + LINE
+          + ';font-size:11.5px;color:#6b7684;line-height:1.55;">' + verifiedLine(tr) + '</div>';
         h += panel('The trust: ' + esc(tr.name), body);
         h += pressurePanel(tr.code, sp);
         h += contactsPanel(tr.code, tr.name);
