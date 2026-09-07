@@ -113,11 +113,45 @@ def main():
     # (supplier, division) -> "speciality:type", the recorded human decision.
     # kind="nhssc-term" entries live in this same file but are keyed on a
     # catalogue search term, not a division, and are read separately further
-    # down. Excluded here explicitly rather than relying on their division
-    # being null to keep them from matching.
+    # down. kind="product-override" entries are excluded here too — they get
+    # their own tier, `product_override`, below. Excluded here explicitly
+    # rather than relying on their division being null to keep them from
+    # matching.
     mapped = {(e["supplier"], e["division"]): e["hub"]
               for e in cmap.get("entries", [])
-              if e.get("hub") and e.get("kind") != "nhssc-term"}
+              if e.get("hub") and e.get("kind") not in ("nhssc-term", "product-override")}
+
+    # kind="product-override" — added 07/09/2026. A genuinely new tier, keyed
+    # ONLY from entries that opt into it, so it can never collide with the
+    # (supplier, division) map above.
+    #
+    # The existing (supplier, PRODUCT NAME) fallback a few lines below (`or
+    # mapped.get((co, name))`) was built for DHG/Talley, where the crawler had
+    # flattened divisions into product names — `div == name` for every one of
+    # their products, so the fallback and the division match could never
+    # disagree about which category to use. It does NOT work as a true
+    # override sitting on top of an EXISTING division match: Python's `or`
+    # short-circuits, so once `mapped.get((co, div))` returns a truthy
+    # category, `mapped.get((co, name))` is never even evaluated. Found
+    # 07/09/2026: ICU Medical's 6 arterial-blood-gas products needed exactly
+    # this — one category for 6 named products inside an 82-product division
+    # that is correctly mapped to a different category for everything else —
+    # and the fallback silently did nothing, because the division match won
+    # first every time.
+    #
+    # Reordering the existing fallback ahead of the division match was ruled
+    # out: a collision check run 07/09/2026 found hundreds of existing
+    # (supplier, division) entries where the division string happens to also
+    # equal a real product name for a DIFFERENT product under that supplier.
+    # Making the name-fallback win globally risks silently reclassifying an
+    # unknown number of products that were never reviewed as overrides.
+    #
+    # So this tier is additive and opt-in only: nothing populates it except an
+    # entry explicitly tagged kind="product-override", and it is always
+    # checked first, ahead of both the division match and the old fallback.
+    product_override = {(e["supplier"], e["division"]): e["hub"]
+                         for e in cmap.get("entries", [])
+                         if e.get("kind") == "product-override" and e.get("hub")}
 
     # Every legal category, so a mapping cannot invent one.
     legal = {"%s:%s" % (s, t) for s, v in vocab.items()
@@ -178,7 +212,8 @@ def main():
             # own name in the fixed data, so this fallback recovers every one of
             # them without re-curating, and is a no-op for every supplier where
             # the two happen not to coincide.
-            cat = mapped.get((co, div)) or mapped.get((co, name))
+            cat = (product_override.get((co, name)) or
+                   mapped.get((co, div)) or mapped.get((co, name)))
             # GBUK-style records already assert the speciality on the product
             # itself. Where they do AND the manufacturer's own category is one of
             # that speciality's gated types, the pair needs no separate decision:
