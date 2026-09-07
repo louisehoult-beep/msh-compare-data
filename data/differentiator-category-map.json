@@ -91362,7 +91362,7 @@
   {
    "kind": "nhssc-term",
    "supplier": "Boston Scientific",
-   "term": "Promus Premier BTK / Express SD / Wallstent-Uni (peripheral bare-metal stents)",
+   "term": "Promus Premier BTK (peripheral bare-metal stents)",
    "division": null,
    "products": 13,
    "categories": [],
@@ -91380,7 +91380,59 @@
    "notTaxonomy": false,
    "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FRM/FRK, all item descriptions 'Stent - Peripheral - Bare Metal (Self Expanding) (IR)'; itself NHS Supply Chain public catalogue data",
    "why": "All 13 lines are bare-metal peripheral stents (self-expanding or below-the-knee) under one consistent eclass/description -- same clinical category as the existing Boston Scientific Eluvia/Ranger entry already mapped to vascsurg:stent.",
-   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
+   "_splitFrom": "Promus Premier BTK / Express SD / Wallstent-Uni (peripheral bare-metal stents)",
+   "_splitNote": "Split from the combined term 'Promus Premier BTK / Express SD / Wallstent-Uni (peripheral bare-metal stents)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "Express SD (peripheral bare-metal stents)",
+   "division": null,
+   "products": 13,
+   "categories": [],
+   "examples": [
+    "Stent - Peripheral - Bare Metal Self Expanding (IR) 2767MRFwalluni 5 x 55mm x 75cm (Wallstent-Uni)",
+    "Stent - Peripheral - Bare Metal (IR) 4337MRFmodel-vascular sm - pmtd 7.0x19x90cm (Express SD)",
+    "Stent - Peripheral - Bare Metal (IR) 4237MRFmodel-vascular sm - 6.0x14x90 cm (Express SD)",
+    "Stent - Peripheral - Bare Metal (IR) 49721MRF mr 3.50 x 28 (Promus Premier BTK)",
+    "Stent - Peripheral - Bare Metal (IR) 79721MRF mr 4.00 x 28 (Promus Premier BTK)",
+    "Stent - Peripheral - Bare Metal (IR) 29721MRF mr 3.00 x 38 (Promus Premier BTK)",
+    "Stent - Peripheral - Bare Metal (IR) 88721MRF mr 2.50 x 28 (Promus Premier BTK)",
+    "Stent - Peripheral - Bare Metal (IR) 65511MRF mr 4.00 x 38 (Promus Premier BTK)"
+   ],
+   "hub": "vascsurg:stent",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FRM/FRK, all item descriptions 'Stent - Peripheral - Bare Metal (Self Expanding) (IR)'; itself NHS Supply Chain public catalogue data",
+   "why": "All 13 lines are bare-metal peripheral stents (self-expanding or below-the-knee) under one consistent eclass/description -- same clinical category as the existing Boston Scientific Eluvia/Ranger entry already mapped to vascsurg:stent.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
+   "_splitFrom": "Promus Premier BTK / Express SD / Wallstent-Uni (peripheral bare-metal stents)",
+   "_splitNote": "Split from the combined term 'Promus Premier BTK / Express SD / Wallstent-Uni (peripheral bare-metal stents)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "Wallstent-Uni (peripheral bare-metal stents)",
+   "division": null,
+   "products": 13,
+   "categories": [],
+   "examples": [
+    "Stent - Peripheral - Bare Metal Self Expanding (IR) 2767MRFwalluni 5 x 55mm x 75cm (Wallstent-Uni)",
+    "Stent - Peripheral - Bare Metal (IR) 4337MRFmodel-vascular sm - pmtd 7.0x19x90cm (Express SD)",
+    "Stent - Peripheral - Bare Metal (IR) 4237MRFmodel-vascular sm - 6.0x14x90 cm (Express SD)",
+    "Stent - Peripheral - Bare Metal (IR) 49721MRF mr 3.50 x 28 (Promus Premier BTK)",
+    "Stent - Peripheral - Bare Metal (IR) 79721MRF mr 4.00 x 28 (Promus Premier BTK)",
+    "Stent - Peripheral - Bare Metal (IR) 29721MRF mr 3.00 x 38 (Promus Premier BTK)",
+    "Stent - Peripheral - Bare Metal (IR) 88721MRF mr 2.50 x 28 (Promus Premier BTK)",
+    "Stent - Peripheral - Bare Metal (IR) 65511MRF mr 4.00 x 38 (Promus Premier BTK)"
+   ],
+   "hub": "vascsurg:stent",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FRM/FRK, all item descriptions 'Stent - Peripheral - Bare Metal (Self Expanding) (IR)'; itself NHS Supply Chain public catalogue data",
+   "why": "All 13 lines are bare-metal peripheral stents (self-expanding or below-the-knee) under one consistent eclass/description -- same clinical category as the existing Boston Scientific Eluvia/Ranger entry already mapped to vascsurg:stent.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
+   "_splitFrom": "Promus Premier BTK / Express SD / Wallstent-Uni (peripheral bare-metal stents)",
+   "_splitNote": "Split from the combined term 'Promus Premier BTK / Express SD / Wallstent-Uni (peripheral bare-metal stents)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
   },
   {
    "kind": "nhssc-term",
@@ -91509,7 +91561,7 @@
   {
    "kind": "nhssc-term",
    "supplier": "Boston Scientific",
-   "term": "Advanix / Naviflex (plastic pancreatic & biliary stents)",
+   "term": "Advanix (plastic pancreatic & biliary stents)",
    "division": null,
    "products": 2,
    "categories": [],
@@ -91521,7 +91573,28 @@
    "notTaxonomy": false,
    "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FRS, item descriptions 'Plastic Stents - Pancreatic/Biliary'; itself NHS Supply Chain public catalogue data",
    "why": "Both lines are plastic pancreatic/biliary stents -- direct match to the existing gastro:stent precedent (HC21's biliary/enteral/oesophageal stents) and consistent with Boston Scientific's own AXIOS entry already mapped to gastro:stent.",
-   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
+   "_splitFrom": "Advanix / Naviflex (plastic pancreatic & biliary stents)",
+   "_splitNote": "Split from the combined term 'Advanix / Naviflex (plastic pancreatic & biliary stents)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "Naviflex (plastic pancreatic & biliary stents)",
+   "division": null,
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Plastic Stents - Pancreatic advanix panc strt 3frx2cm",
+    "Plastic Stents - Biliary preloaded 7fr naviflex panc rx"
+   ],
+   "hub": "gastro:stent",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FRS, item descriptions 'Plastic Stents - Pancreatic/Biliary'; itself NHS Supply Chain public catalogue data",
+   "why": "Both lines are plastic pancreatic/biliary stents -- direct match to the existing gastro:stent precedent (HC21's biliary/enteral/oesophageal stents) and consistent with Boston Scientific's own AXIOS entry already mapped to gastro:stent.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
+   "_splitFrom": "Advanix / Naviflex (plastic pancreatic & biliary stents)",
+   "_splitNote": "Split from the combined term 'Advanix / Naviflex (plastic pancreatic & biliary stents)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
   },
   {
    "kind": "nhssc-term",
@@ -91616,7 +91689,7 @@
   {
    "kind": "nhssc-term",
    "supplier": "Johnson & Johnson MedTech",
-   "term": "Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)",
+   "term": "Prolene (Ethicon non-absorbable sutures)",
    "division": null,
    "products": 11,
    "categories": [],
@@ -91634,7 +91707,84 @@
    "notTaxonomy": false,
    "evidence": "NPC descriptions read directly from the live NHS Supply Chain suspension feed (cloud-pipeline/sdt-suspensions.json, NPCs incl. FVT885/FVT002/FVT860/FVR151/FVS068 (Prolene), FVR611/FVQ3919/FVS037/FVR063 (Silk/Mersilk), FVS183 (Ethibond Excel), FVS626/FVS118 (Ethilon)) — the existing 'Vicryl / Prolene / Monocryl (Ethicon sutures)' term in nhssc-cache.json is cached with absorbable Vicryl items only; none of these non-absorbable brands or NPCs appear in it, so this is a genuinely separate, uncached family.",
    "why": "Examples are non-absorbable Ethicon sutures (monofilament Prolene/Ethilon, braided Mersilk, coated braided Ethibond Excel) — same reasoning as the existing absorbable-Vicryl entry: no dedicated suture category exists in the vocabulary, so general theatre consumables (theatres:theatre) is the closest fit.",
-   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
+   "_splitFrom": "Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)",
+   "_splitNote": "Split from the combined term 'Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Johnson & Johnson MedTech",
+   "term": "Mersilk (Ethicon non-absorbable sutures)",
+   "division": null,
+   "products": 11,
+   "categories": [],
+   "examples": [
+    "Suture non absorbable W8571 90cm prolene non-absorbable monofilament blue 2/0 55mm straight conventional cutting needle",
+    "Suture non absorbable W791 100cm mersilk non-absorbable coated braided black 2/0 90mm 3/8 circle conventional cutting needle",
+    "Suture non absorbable W883 45cm ethibond excel non-absorbable coated braided white 5/0 8mm 1/2 circle spatula double needle",
+    "Suture non absorbable W1756 30cm ethilon non-absorbable monofilament black 10/0 5.5mm 1/2 circle spatula advanced micro-point double needle",
+    "Suture non absorbable W8840 90cm prolene non-absorbable monofilament blue 4/0 20mm 1/2 circle cc double needle",
+    "Suture non absorbable W2502T 45cm mersilk non-absorbable coated braided black 3/0 16mm 3/8 circle conventional cutting prime needle",
+    "Suture non absorbable W2870 13cm ethilon non-absorbable monofilament black 10/0 3.8mm 3/8 circle taper point needle",
+    "Suture non absorbable W505 4 x 45cm mersilk non-absorbable coated braided 1 ivory 3 black 4/0 16mm 3/8 circle conventional cutting needle"
+   ],
+   "hub": "theatres:theatre",
+   "notTaxonomy": false,
+   "evidence": "NPC descriptions read directly from the live NHS Supply Chain suspension feed (cloud-pipeline/sdt-suspensions.json, NPCs incl. FVT885/FVT002/FVT860/FVR151/FVS068 (Prolene), FVR611/FVQ3919/FVS037/FVR063 (Silk/Mersilk), FVS183 (Ethibond Excel), FVS626/FVS118 (Ethilon)) — the existing 'Vicryl / Prolene / Monocryl (Ethicon sutures)' term in nhssc-cache.json is cached with absorbable Vicryl items only; none of these non-absorbable brands or NPCs appear in it, so this is a genuinely separate, uncached family.",
+   "why": "Examples are non-absorbable Ethicon sutures (monofilament Prolene/Ethilon, braided Mersilk, coated braided Ethibond Excel) — same reasoning as the existing absorbable-Vicryl entry: no dedicated suture category exists in the vocabulary, so general theatre consumables (theatres:theatre) is the closest fit.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
+   "_splitFrom": "Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)",
+   "_splitNote": "Split from the combined term 'Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Johnson & Johnson MedTech",
+   "term": "Ethibond Excel (Ethicon non-absorbable sutures)",
+   "division": null,
+   "products": 11,
+   "categories": [],
+   "examples": [
+    "Suture non absorbable W8571 90cm prolene non-absorbable monofilament blue 2/0 55mm straight conventional cutting needle",
+    "Suture non absorbable W791 100cm mersilk non-absorbable coated braided black 2/0 90mm 3/8 circle conventional cutting needle",
+    "Suture non absorbable W883 45cm ethibond excel non-absorbable coated braided white 5/0 8mm 1/2 circle spatula double needle",
+    "Suture non absorbable W1756 30cm ethilon non-absorbable monofilament black 10/0 5.5mm 1/2 circle spatula advanced micro-point double needle",
+    "Suture non absorbable W8840 90cm prolene non-absorbable monofilament blue 4/0 20mm 1/2 circle cc double needle",
+    "Suture non absorbable W2502T 45cm mersilk non-absorbable coated braided black 3/0 16mm 3/8 circle conventional cutting prime needle",
+    "Suture non absorbable W2870 13cm ethilon non-absorbable monofilament black 10/0 3.8mm 3/8 circle taper point needle",
+    "Suture non absorbable W505 4 x 45cm mersilk non-absorbable coated braided 1 ivory 3 black 4/0 16mm 3/8 circle conventional cutting needle"
+   ],
+   "hub": "theatres:theatre",
+   "notTaxonomy": false,
+   "evidence": "NPC descriptions read directly from the live NHS Supply Chain suspension feed (cloud-pipeline/sdt-suspensions.json, NPCs incl. FVT885/FVT002/FVT860/FVR151/FVS068 (Prolene), FVR611/FVQ3919/FVS037/FVR063 (Silk/Mersilk), FVS183 (Ethibond Excel), FVS626/FVS118 (Ethilon)) — the existing 'Vicryl / Prolene / Monocryl (Ethicon sutures)' term in nhssc-cache.json is cached with absorbable Vicryl items only; none of these non-absorbable brands or NPCs appear in it, so this is a genuinely separate, uncached family.",
+   "why": "Examples are non-absorbable Ethicon sutures (monofilament Prolene/Ethilon, braided Mersilk, coated braided Ethibond Excel) — same reasoning as the existing absorbable-Vicryl entry: no dedicated suture category exists in the vocabulary, so general theatre consumables (theatres:theatre) is the closest fit.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
+   "_splitFrom": "Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)",
+   "_splitNote": "Split from the combined term 'Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Johnson & Johnson MedTech",
+   "term": "Ethilon (Ethicon non-absorbable sutures)",
+   "division": null,
+   "products": 11,
+   "categories": [],
+   "examples": [
+    "Suture non absorbable W8571 90cm prolene non-absorbable monofilament blue 2/0 55mm straight conventional cutting needle",
+    "Suture non absorbable W791 100cm mersilk non-absorbable coated braided black 2/0 90mm 3/8 circle conventional cutting needle",
+    "Suture non absorbable W883 45cm ethibond excel non-absorbable coated braided white 5/0 8mm 1/2 circle spatula double needle",
+    "Suture non absorbable W1756 30cm ethilon non-absorbable monofilament black 10/0 5.5mm 1/2 circle spatula advanced micro-point double needle",
+    "Suture non absorbable W8840 90cm prolene non-absorbable monofilament blue 4/0 20mm 1/2 circle cc double needle",
+    "Suture non absorbable W2502T 45cm mersilk non-absorbable coated braided black 3/0 16mm 3/8 circle conventional cutting prime needle",
+    "Suture non absorbable W2870 13cm ethilon non-absorbable monofilament black 10/0 3.8mm 3/8 circle taper point needle",
+    "Suture non absorbable W505 4 x 45cm mersilk non-absorbable coated braided 1 ivory 3 black 4/0 16mm 3/8 circle conventional cutting needle"
+   ],
+   "hub": "theatres:theatre",
+   "notTaxonomy": false,
+   "evidence": "NPC descriptions read directly from the live NHS Supply Chain suspension feed (cloud-pipeline/sdt-suspensions.json, NPCs incl. FVT885/FVT002/FVT860/FVR151/FVS068 (Prolene), FVR611/FVQ3919/FVS037/FVR063 (Silk/Mersilk), FVS183 (Ethibond Excel), FVS626/FVS118 (Ethilon)) — the existing 'Vicryl / Prolene / Monocryl (Ethicon sutures)' term in nhssc-cache.json is cached with absorbable Vicryl items only; none of these non-absorbable brands or NPCs appear in it, so this is a genuinely separate, uncached family.",
+   "why": "Examples are non-absorbable Ethicon sutures (monofilament Prolene/Ethilon, braided Mersilk, coated braided Ethibond Excel) — same reasoning as the existing absorbable-Vicryl entry: no dedicated suture category exists in the vocabulary, so general theatre consumables (theatres:theatre) is the closest fit.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026; brand-split 07/09/2026 (under-capture fix)",
+   "_splitFrom": "Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)",
+   "_splitNote": "Split from the combined term 'Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)' on 07/09/2026 after the manual weekly-refresh run confirmed under-capture: refresh_nhssc_cache.py's candidate search only ever tried the first brand in the slash-separated label, so the other brands never got their own catalogue query. One seed term per brand, same hub category as the original decision."
   },
   {
    "kind": "product-override",
