@@ -1,0 +1,1428 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-D2AE91809",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "_meta": {
+  "what": "Per-line product categories, for suspended NHS Supply Chain lines whose eClass code was too broad to map safely.",
+  "why": "A whole-eClass refusal is coarse. FRP for example is mostly NeuWave microwave TUMOUR ablation but also carries cardiac EP RF-ablation catheters, so the code could not be mapped without risking a tumour probe being offered as an alternative to a cardiac catheter. Deciding line by line keeps the unambiguous ones and still refuses the rest.",
+  "generated": "07/09/2026",
+  "rule": "One line, one decision, taken from that line's own NHS Supply Chain description. Every category is validated against the gated vocabulary in differentiator-category-map.json. A line whose description does not clearly belong to one category is REFUSED and listed below, never forced into the nearest bucket — publishing nothing is the correct output when the evidence is thin.",
+  "precedence": "These win over data/eclass-category-map.json for the NPCs named here, because they are the more specific judgement.",
+  "categorised": 146,
+  "refused": 76
+ },
+ "lines": {
+  "EDB118": {
+   "cat": "wound:comp",
+   "confidence": "medium",
+   "eclass": "EDB",
+   "desc": "Bandage conforming type 1 dressing retention 15cm x 4m knitted",
+   "reasoning": "Conforming/retention bandage (type 1), same retention-bandage family as observed wound:comp products (e.g. Sterocrepe crepe bandages)."
+  },
+  "EGT537": {
+   "cat": "wound:comp",
+   "confidence": "medium",
+   "eclass": "EGT",
+   "desc": "Bandage elastic net retention 25m roll Size 2 - childs hand",
+   "reasoning": "Surgifix elastic net retention bandage; same retention-bandage family as wound:comp (crepe/net retention bandaging)."
+  },
+  "EGT539": {
+   "cat": "wound:comp",
+   "confidence": "medium",
+   "eclass": "EGT",
+   "desc": "Bandage elastic net retention 25m roll Size 3 - childs limb adult hand",
+   "reasoning": "Surgifix elastic net retention bandage; same retention-bandage family as wound:comp (crepe/net retention bandaging)."
+  },
+  "EGT543": {
+   "cat": "wound:comp",
+   "confidence": "medium",
+   "eclass": "EGT",
+   "desc": "Bandage elastic net retention 25m roll Size 5 - adult limb",
+   "reasoning": "Surgifix elastic net retention bandage; same retention-bandage family as wound:comp (crepe/net retention bandaging)."
+  },
+  "EGT547": {
+   "cat": "wound:comp",
+   "confidence": "medium",
+   "eclass": "EGT",
+   "desc": "Bandage elastic net retention 25m roll Size 6 - small pelvis and chest",
+   "reasoning": "Surgifix elastic net retention bandage; same retention-bandage family as wound:comp (crepe/net retention bandaging)."
+  },
+  "EGT549": {
+   "cat": "wound:comp",
+   "confidence": "medium",
+   "eclass": "EGT",
+   "desc": "Bandage elastic net retention 25m roll Size 7 - medium pelvis and chest",
+   "reasoning": "Surgifix elastic net retention bandage; same retention-bandage family as wound:comp (crepe/net retention bandaging)."
+  },
+  "EKJ004": {
+   "cat": "wound:adv",
+   "confidence": "medium",
+   "eclass": "EKJ",
+   "desc": "Bandage non medicated non adherent complete with tubular bandage Small fingertip toe",
+   "reasoning": "Adaptic non-adherent digit/toe wound contact dressing; matches wound:adv wound-contact-layer products."
+  },
+  "ELW85037": {
+   "cat": "nutrition:dev",
+   "confidence": "high",
+   "eclass": "ELW",
+   "desc": "Securement device Small securement device for Nasogastric Tubes",
+   "reasoning": "Explicitly \"securement device for Nasogastric Tubes\" — enteral tube accessory, not a wound dressing."
+  },
+  "ELW85093": {
+   "cat": "nutrition:dev",
+   "confidence": "medium",
+   "eclass": "ELW",
+   "desc": "Dressing IV vapour-permeable adhesive film sterile Large securement device for Nasogastric Tubes",
+   "reasoning": "Description names \"Large securement device for Nasogastric Tubes\" (same 3M NG-securement family as ELW85037, despite confusing \"Dressing IV\" wording carried over in the NHS SC text)."
+  },
+  "ENI185": {
+   "cat": "wound:adv",
+   "confidence": "medium",
+   "eclass": "ENI",
+   "desc": "Swab gauze type 13 light BP non sterile 10cm x 10cm 16ply",
+   "reasoning": "Bulk non-sterile BP gauze swab (10x10cm) — matches the general-purpose/plain gauze swab products filed under wound:adv."
+  },
+  "ENI85060": {
+   "cat": "wound:fa",
+   "confidence": "medium",
+   "eclass": "ENI",
+   "desc": "Swab gauze BP in 5s sterile 5cm x 5cm 12ply",
+   "reasoning": "Sterile 5cm x 5cm pack-of-5 gauze swab — matches the exact \"Sterile Gauze Swabs 5cm x 5cm Pack 5\" pattern filed under wound:fa."
+  },
+  "EVS763": {
+   "cat": "skin-prep:pack",
+   "confidence": "high",
+   "eclass": "EVS",
+   "desc": "Peripheral IV Access Pack with Single Lumen 1 x 45 x 45cm Drape 1 x 45 x 45cm Sterile Field 1 x Tourniquet 4 x 7.5 x 7.5cm Swabs 1 x Yellow Bag 1 x IV Dressing 1 x Insertion Label 1 x SL Extension Set",
+   "reasoning": "Peripheral IV cannulation/access procedure pack — matches observed \"IV Cannulation Pack\" / \"Cannulation Procedure Packs\" under skin-prep:pack."
+  },
+  "EVS85364": {
+   "cat": "skin-prep:pack",
+   "confidence": "medium",
+   "eclass": "EVS",
+   "desc": "IV Cannulation Pack Bespoke for Epsom and St Helier Hospital",
+   "reasoning": "Named \"IV Cannulation Pack\" (bespoke contents list for one hospital) — same skin-prep:pack cannulation-pack family; bespoke naming is a procurement contract label, not a different product type."
+  },
+  "EVS86715": {
+   "cat": "theatres:theatre",
+   "confidence": "high",
+   "eclass": "EVS",
+   "desc": "Gallipot Pack 60ml Single Wrap",
+   "reasoning": "Gallipot pack — matches observed Gallipot products (theatres:theatre)."
+  },
+  "EVX617": {
+   "cat": "skin-prep:pack",
+   "confidence": "medium",
+   "eclass": "EVX",
+   "desc": "Woundcare Pack 1x60ml gallipot 1xpair nitrile gloves medium 5x7.5x7.5cm 4 ply swabs 1xhand towel 43x38cm 1x50x50cm tissue backed drape 1x2 part tray 1xwhite bag 45x29cm 1xpaper measuring tape 1x50x50cm tissue backed sterile field",
+   "reasoning": "Multi-item wound-care procedure pack (gallipot+gloves+swabs+drape+tray) — matches the general procedure-pack family under skin-prep:pack."
+  },
+  "FAG3600": {
+   "cat": "respiratory:aero",
+   "confidence": "high",
+   "eclass": "FDK",
+   "desc": "Fast nebuliser Misty small volume nebulizer pediatric mask and 7ft/2.1M O2 tubing 50/cs NON RETURNABLE",
+   "reasoning": "Paediatric small-volume nebuliser."
+  },
+  "FAG4289": {
+   "cat": "anaesthesia:anaes",
+   "confidence": "high",
+   "eclass": "FBU",
+   "desc": "Facemask anaesthetic QuadraLite anaesthetic face mask size 4 large adult green seal 22F (replaces traditional mask size 5-6)",
+   "reasoning": "Intersurgical anaesthetic face mask."
+  },
+  "FAL15595": {
+   "cat": "ssd:endo",
+   "confidence": "medium",
+   "eclass": "FBE",
+   "desc": "Endoscope storage bags and liners XL Endo Seal Bag",
+   "reasoning": "Endoscope storage bag/liner — endoscope handling/decontamination-adjacent product, closest fit ssd:endo."
+  },
+  "FAL17783": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Ureteral stent 5604522 class dbl pig st 4.5fr 22cm",
+   "reasoning": "Ureteral stent (double-pigtail / quadracoil) — urological, not peripheral vascular."
+  },
+  "FAL17785": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Ureteral stent 5604526 class dbl pig st 4.5fr 26cm",
+   "reasoning": "Ureteral stent (double-pigtail / quadracoil) — urological, not peripheral vascular."
+  },
+  "FAL17897": {
+   "cat": "endourology:stone",
+   "confidence": "medium",
+   "eclass": "FBE",
+   "desc": "Accessories 2.2 fr 4 wire nitinol no tip basket",
+   "reasoning": "Ultra-Catch nitinol stone-retrieval basket — ureteroscopy stone-management accessory."
+  },
+  "FAL17961": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Ureteral stent 5001945 quadracoil stent 4.5fr",
+   "reasoning": "Ureteral stent (double-pigtail / quadracoil) — urological, not peripheral vascular."
+  },
+  "FAL3465": {
+   "cat": "endourology:stone",
+   "confidence": "medium",
+   "eclass": "FBE",
+   "desc": "Guide Wires G 240 2545s long 0 025 straight single use sterile 4500mm",
+   "reasoning": "Visiglide urology guidewire, same family as FAL3800."
+  },
+  "FAL3800": {
+   "cat": "endourology:stone",
+   "confidence": "medium",
+   "eclass": "FBE",
+   "desc": "Guide Wires G-240-3527a short 0.035 angled 0.035 guidewire angled tip",
+   "reasoning": "Visiglide urology guidewire — matches guidewire products (Nano Glide, PTFE, Striped Cobra) filed under endourology:stone."
+  },
+  "FAL7635": {
+   "cat": "endourology:stone",
+   "confidence": "medium",
+   "eclass": "FXD",
+   "desc": "Ureteral dilation Uromax ultra high pressure ureteral balloon catheter kit 4mm x 4cm with hydro plus coating",
+   "reasoning": "Uromax ureteral dilation balloon, same family."
+  },
+  "FAL7636": {
+   "cat": "endourology:stone",
+   "confidence": "medium",
+   "eclass": "FXD",
+   "desc": "Ureteral dilation Uromax ultra high pressure ureteral balloon catheter kit 5mm x 4cm with hydro plus coating",
+   "reasoning": "Uromax ureteral dilation balloon, same family."
+  },
+  "FAL7637": {
+   "cat": "endourology:stone",
+   "confidence": "medium",
+   "eclass": "FXD",
+   "desc": "Ureteral dilation Uromax ultra high pressure ureteral balloon catheter kit 6mm x 4cm with hydro plus coating",
+   "reasoning": "Uromax ureteral dilation balloon catheter kit — ureteroscopy/stone-management accessory family."
+  },
+  "FAL7642": {
+   "cat": "endourology:stone",
+   "confidence": "medium",
+   "eclass": "FXD",
+   "desc": "Ureteral dilation Uromax ultra high pressure ureteral balloon catheter kit 5mm x 6cm with hydro plus coating",
+   "reasoning": "Uromax ureteral dilation balloon, same family."
+  },
+  "FBE12632": {
+   "cat": "gastro:haem",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Haemostasis - Probes - Heat Cd b610la 10fr bipolar probe haemostasis probe with a coaxial connector and flushing port 10fr compatible with 3.7mm channel 3500mm working length",
+   "reasoning": "Named \"Haemostasis - Probes\" bipolar haemostasis probe — matches gastro:haem (endoscopic haemostasis) products."
+  },
+  "FBE19849": {
+   "cat": "endoscopy:uro",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Instruments Oes pro inner sheath for continuous flow",
+   "reasoning": "Olympus OES Pro inner sheath for continuous-flow cystoscope."
+  },
+  "FBE19864": {
+   "cat": "endoscopy:uro",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Instruments Oes pro 22.5fr cystoscope sheath",
+   "reasoning": "Olympus OES Pro cystoscope sheath — urological endoscope component."
+  },
+  "FBE19890": {
+   "cat": "endoscopy:uro",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Instruments Oes pro albarran bridge one way",
+   "reasoning": "Olympus OES Pro Albarran bridge — cystoscope accessory."
+  },
+  "FBE21157": {
+   "cat": "endoscopy:uro",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Instruments Oes pro 21fr obturator for a20913a",
+   "reasoning": "Olympus OES Pro 21fr obturator — cystoscope accessory."
+  },
+  "FBE21158": {
+   "cat": "endoscopy:uro",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Instruments Oes pro 22.5fr obturator for a20934a",
+   "reasoning": "Olympus OES Pro cystoscope obturator."
+  },
+  "FBE21342": {
+   "cat": "endoscopy:uro",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Instruments Oes pro 24fr visual obturator",
+   "reasoning": "Olympus OES Pro visual obturator — cystoscope component, same family as FBE19864."
+  },
+  "FBE21464": {
+   "cat": "endoscopy:uro",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Instruments A20976a oes pro bridge one way",
+   "reasoning": "Olympus OES Pro one-way bridge — cystoscope accessory, same family."
+  },
+  "FBE86468": {
+   "cat": "endoscopy:uro",
+   "confidence": "medium",
+   "eclass": "FBE",
+   "desc": "Curette 22fr bipolar electrode bipolarcuttingloop2guiderods22fr sterileforsingleuse",
+   "reasoning": "Karl Storz 22fr bipolar cutting loop/curette — TURP resectoscope electrode used in urological endoscopy."
+  },
+  "FBE87428": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Ureteral Stent With Guidewire Percuflex 7fx28cm w 038in stfptfe",
+   "reasoning": "Ureteral stent (Percuflex) with guidewire."
+  },
+  "FBE87436": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Ureteral Stent With Guidewire Polaris ultra 6fx30cm 035in df sensor",
+   "reasoning": "Ureteral stent (Polaris ultra)."
+  },
+  "FBE87443": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Ureteral Stent With Guidewire Polaris loop 8fx24cm 035cm sensor",
+   "reasoning": "Ureteral stent (Polaris loop) with guidewire."
+  },
+  "FBE87496": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Ureteral Stent With Guidewire Polaris ultra 6fx26cm 038in df sensor",
+   "reasoning": "Ureteral stent (Polaris ultra) with guidewire."
+  },
+  "FBE87534": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Ureteral Stent With Guidewire Polaris ultra 7fx24cm 035in sptfe",
+   "reasoning": "Ureteral stent (Polaris ultra)."
+  },
+  "FBE87550": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Ureteral Stent With Guidewire Polaris ultra 5fx16cm 035in zip",
+   "reasoning": "Ureteral stent (Polaris ultra zip)."
+  },
+  "FBE87620": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FBE",
+   "desc": "Ureteral Stent Without Guidewire Polaris loop 5fx14cm w o wire",
+   "reasoning": "Ureteral stent (Polaris loop) — explicit \"Ureteral Stent\" description."
+  },
+  "FBF2761": {
+   "cat": "surgical:curette",
+   "confidence": "high",
+   "eclass": "FKF",
+   "desc": "Dermatoscope Accessories Curette Disposable Sterile 7mm",
+   "reasoning": "Disposable sterile curette — exact word match to surgical:curette."
+  },
+  "FBU87488": {
+   "cat": "endourology:stent",
+   "confidence": "high",
+   "eclass": "FBU",
+   "desc": "Specialised Stent E uro pc 6f 70 urological endoprosthesis set ptfe guidewire & connector open tip",
+   "reasoning": "Urosoft urological endoprosthesis (ureteral) stent set."
+  },
+  "FBU91378": {
+   "cat": "endourology:litho",
+   "confidence": "high",
+   "eclass": "FBU",
+   "desc": "Monitors Stonesmart connect console eu",
+   "reasoning": "StoneSmart lithotripsy console — matches endourology:litho."
+  },
+  "FCB117568": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FCB",
+   "desc": "Microwave Generators Ac upgrade united states",
+   "reasoning": "NeuWave microwave-ablation generator upgrade — tumour ablation capital equipment."
+  },
+  "FCB117569": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FCB",
+   "desc": "Microwave Ablation Probe Pr 15cm sp 15ga",
+   "reasoning": "NeuWave microwave ablation probe — tumour ablation."
+  },
+  "FCB16755": {
+   "cat": "cardiology:capital",
+   "confidence": "medium",
+   "eclass": "FCB",
+   "desc": "CRM Remote Monitoring - Cellular MyCareLink Relay Monitor",
+   "reasoning": "MyCareLink Relay cardiac remote-monitoring device — cardiac rhythm management capital equipment."
+  },
+  "FCB18874": {
+   "cat": "skin-prep:pack",
+   "confidence": "high",
+   "eclass": "FCB",
+   "desc": "Podiatry Sterile Single Use Single Double Wrapped Assistants Emery Pack Curved Roller Spring Nail Cutter",
+   "reasoning": "Podiatry procedure pack (Surgopack) — matches observed \"Instramed Podiatry ... Pack\" products under skin-prep:pack."
+  },
+  "FCP164": {
+   "cat": "neuro:scs",
+   "confidence": "high",
+   "eclass": "FCP",
+   "desc": "Spinal Cord Stimulation Leads 16 2 tails 50cm",
+   "reasoning": "Infinion spinal cord stimulation lead."
+  },
+  "FCP639": {
+   "cat": "neuro:scs",
+   "confidence": "high",
+   "eclass": "FCP",
+   "desc": "Spinal Cord Stimulation Leads Linear Enhanced Steering Kit 30cm",
+   "reasoning": "Precision spinal cord stimulation lead."
+  },
+  "FCP835": {
+   "cat": "neuro:scs",
+   "confidence": "high",
+   "eclass": "FCP",
+   "desc": "Spinal Cord Stimulation Patient Programmer Ipod Touch Mobile Device Charger",
+   "reasoning": "Abbott spinal cord stimulation patient programmer."
+  },
+  "FCP85121": {
+   "cat": "neuro:dbs",
+   "confidence": "high",
+   "eclass": "FCP",
+   "desc": "Deep Brain Stimulation Patient Programmer Remote Control Kit",
+   "reasoning": "Vercise deep brain stimulation patient programmer."
+  },
+  "FCP85815": {
+   "cat": "neuro:dbs",
+   "confidence": "high",
+   "eclass": "FCP",
+   "desc": "Deep Brain Stimulation Tunnelling Tool 35 cm Long Tunneling",
+   "reasoning": "Vercise deep brain stimulation tunnelling tool."
+  },
+  "FCP87363": {
+   "cat": "neuro:dbs",
+   "confidence": "high",
+   "eclass": "FCP",
+   "desc": "Deep Brain Stimulation Lead Kit Vercise Cartesia HX Directional 30cm",
+   "reasoning": "Vercise Cartesia HX deep brain stimulation lead kit."
+  },
+  "FDA85093": {
+   "cat": "ent:intub",
+   "confidence": "medium",
+   "eclass": "FDA",
+   "desc": "Bougie 15FR 700mm Solid Introducer Curved Coude Tip",
+   "reasoning": "Airway introducer bougie — intubation aid."
+  },
+  "FDC243": {
+   "cat": "anaesthesia:anaes",
+   "confidence": "high",
+   "eclass": "FDA",
+   "desc": "Bag rebreathing anaesthesia latex free 2 litre 22mm ID connection NON-RETURNABLE",
+   "reasoning": "Anaesthesia rebreathing bag."
+  },
+  "FDC695": {
+   "cat": "ent:intub",
+   "confidence": "medium",
+   "eclass": "FDA",
+   "desc": "Bougie Adult Coude tip",
+   "reasoning": "Adult coude-tip bougie — intubation aid."
+  },
+  "FDE1480": {
+   "cat": "neonatal:resp",
+   "confidence": "high",
+   "eclass": "FDK",
+   "desc": "Breathing Circuit 1m single limb for Resuscitaire with integrated adjustable PEEP PVC free single patient use",
+   "reasoning": "Breathing circuit for Resuscitaire — neonatal resuscitation device."
+  },
+  "FDH864": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Tube suction connecting non-conductive PVC Flexi Rib VC 7mm x 2.7m F/F/M",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "FDK85397": {
+   "cat": "respiratory:aero",
+   "confidence": "high",
+   "eclass": "FDK",
+   "desc": "Nebuliser Misty Max 10 SVN W/7FT CR RESIT OXYGEN TBG 50/CS NON RETURNABLE",
+   "reasoning": "Misty Max 10 small-volume nebuliser."
+  },
+  "FDR686": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Suction Device Yankauer Link Mini Fine Tip 12fg 270mm",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "FFL191": {
+   "cat": "skin-prep:prep",
+   "confidence": "high",
+   "eclass": "FCH",
+   "desc": "Surgical skin clipper blades Single use blades for fixed head clipper system",
+   "reasoning": "Surgical skin clipper blades — pre-op hair-removal skin prep, matches skin-prep:prep razors/clippers."
+  },
+  "FIB2170": {
+   "cat": "ortho:implant",
+   "confidence": "high",
+   "eclass": "FQZ",
+   "desc": "Arthroscopy accessories Round Delta Tapered Peek Interference Screw 9Mm X 35Mm",
+   "reasoning": "Arthrex tapered PEEK interference screw, same family as FCB/FIC screws."
+  },
+  "FIC1921": {
+   "cat": "ortho:implant",
+   "confidence": "high",
+   "eclass": "FCB",
+   "desc": "Fixation devices sutures screws and instruments Round delta biocomp ifs 8x28",
+   "reasoning": "Arthrex round delta biocomposite interference screw."
+  },
+  "FIC1944": {
+   "cat": "ortho:implant",
+   "confidence": "high",
+   "eclass": "FCB",
+   "desc": "Fixation devices sutures screws and instruments Delta bc ifs 11x35",
+   "reasoning": "Arthrex delta BC interference screw."
+  },
+  "FIC25041": {
+   "cat": "ortho:implant",
+   "confidence": "high",
+   "eclass": "FCB",
+   "desc": "Fixation devices sutures screws and instruments Round delta tapered peek interference screw with disposable sheath 8 mm x 28 mm",
+   "reasoning": "Arthrex tapered PEEK interference screw with disposable sheath."
+  },
+  "FIC25044": {
+   "cat": "ortho:implant",
+   "confidence": "high",
+   "eclass": "FCB",
+   "desc": "Fixation devices sutures screws and instruments Round delta tapered peek interference screw 11 mm x 28 mm",
+   "reasoning": "Arthrex tapered PEEK interference screw, 11x28mm."
+  },
+  "FIC25045": {
+   "cat": "ortho:implant",
+   "confidence": "high",
+   "eclass": "FCB",
+   "desc": "Fixation devices sutures screws and instruments Round delta tapered peek interference screw 12 mm x 28 mm",
+   "reasoning": "Arthrex tapered PEEK interference screw — orthopaedic fixation implant."
+  },
+  "FJT39024": {
+   "cat": "ortho:trauma",
+   "confidence": "high",
+   "eclass": "FQZ",
+   "desc": "K Wire Sterile K Wires Single Ended Trocar Flat 150mmx1.8mm",
+   "reasoning": "Sterile K-wire — orthopaedic trauma fixation wire."
+  },
+  "FJT39025": {
+   "cat": "ortho:trauma",
+   "confidence": "high",
+   "eclass": "FQZ",
+   "desc": "K Wire Sterile K Wires Single Ended Trocar Flat 150mmx2.0mm",
+   "reasoning": "Sterile K-wire, same family as FJT39024."
+  },
+  "FKD2942": {
+   "cat": "theatres:drain",
+   "confidence": "medium",
+   "eclass": "FVI",
+   "desc": "Catheter - Drainage (IR) us 8.3/28",
+   "reasoning": "IR percutaneous drainage catheter — matches SKATER-type drainage catheters under theatres:drain."
+  },
+  "FKK169": {
+   "cat": "respiratory:diag",
+   "confidence": "high",
+   "eclass": "FDR",
+   "desc": "Nasal cannula With CO2 Sampling Adult 3.0m",
+   "reasoning": "CO2-sampling nasal cannula — capnography diagnostic device."
+  },
+  "FKW1615": {
+   "cat": "cardiology:equip",
+   "confidence": "medium",
+   "eclass": "FCB",
+   "desc": "Catheter 5161WKF attain command",
+   "reasoning": "Medtronic Attain Command CRT lead-delivery catheter — cardiology consumable/accessory."
+  },
+  "FMA1493": {
+   "cat": "neuro:sns",
+   "confidence": "high",
+   "eclass": "FCP",
+   "desc": "Sacral Nerve Stimulation Recharger System adhesive carriers",
+   "reasoning": "Axonics sacral nerve stimulation recharger accessory."
+  },
+  "FRE10771": {
+   "cat": "vascsurg:occl",
+   "confidence": "high",
+   "eclass": "FRE",
+   "desc": "Balloon - Peripheral Occlusion (IR) 18 90cm",
+   "reasoning": "Peripheral occlusion balloon (Rubicon-18), 90cm — same family as FRE10773."
+  },
+  "FRE10773": {
+   "cat": "vascsurg:occl",
+   "confidence": "high",
+   "eclass": "FRE",
+   "desc": "Balloon - Peripheral Occlusion (IR) 18 150cm",
+   "reasoning": "Peripheral occlusion balloon (Rubicon-18) — explicit \"Occlusion\" device, matches vascsurg:occl."
+  },
+  "FRM11556": {
+   "cat": "vascsurg:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Stent - Peripheral - Bare Metal (IR) 65511MRF mr 4.00 x 38",
+   "reasoning": "Promus Premier BTK peripheral bare-metal stent."
+  },
+  "FRM12788": {
+   "cat": "vascsurg:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Stent - Peripheral - Bare Metal (IR) 88721MRF mr 2.50 x 28",
+   "reasoning": "Promus Premier BTK peripheral bare-metal stent."
+  },
+  "FRM12790": {
+   "cat": "vascsurg:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Stent - Peripheral - Bare Metal (IR) mr 3.00 x 20",
+   "reasoning": "Promus Premier BTK peripheral bare-metal stent."
+  },
+  "FRM12791": {
+   "cat": "vascsurg:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Stent - Peripheral - Bare Metal (IR) 19721MRF mr 3.00 x 28",
+   "reasoning": "Promus Premier BTK peripheral bare-metal stent."
+  },
+  "FRM12792": {
+   "cat": "vascsurg:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Stent - Peripheral - Bare Metal (IR) 29721MRF mr 3.00 x 38",
+   "reasoning": "Promus Premier BTK peripheral bare-metal stent."
+  },
+  "FRM12793": {
+   "cat": "vascsurg:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Stent - Peripheral - Bare Metal (IR) 39721MRF mr 3.50 x 20",
+   "reasoning": "Promus Premier BTK peripheral bare-metal stent."
+  },
+  "FRM12794": {
+   "cat": "vascsurg:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Stent - Peripheral - Bare Metal (IR) 49721MRF mr 3.50 x 28",
+   "reasoning": "Promus Premier BTK peripheral bare-metal stent."
+  },
+  "FRM12795": {
+   "cat": "vascsurg:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Stent - Peripheral - Bare Metal (IR) 59721MRF mr 3.50 x 38",
+   "reasoning": "Promus Premier BTK peripheral bare-metal stent."
+  },
+  "FRM12796": {
+   "cat": "vascsurg:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Stent - Peripheral - Bare Metal (IR) mr 4.00 x 20",
+   "reasoning": "Promus Premier BTK peripheral bare-metal stent."
+  },
+  "FRM12797": {
+   "cat": "vascsurg:stent",
+   "confidence": "high",
+   "eclass": "FRK",
+   "desc": "Stent - Peripheral - Bare Metal (IR) 79721MRF mr 4.00 x 28",
+   "reasoning": "Promus Premier BTK peripheral bare-metal stent."
+  },
+  "FRP2030": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Associated Consumables CT bed rail mount Siemens",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2044": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Associated Consumables CT bed rail mount Toshiba",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2047": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Associated Consumables CT bed rail mount Philips",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2048": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Generators NW ablation sys config 06",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2059": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Associated Consumables surgical PDM mount kit",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2444": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Probe PR XT 15cm 15GA",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2445": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Probe SR 25cm 13GA",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2446": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Probe PR 20cm 17GA",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2447": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Probe LK 15cm 17GA",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2448": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Probe LK 20cm 17GA",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2449": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Probe LK XT 15cm 15GA",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2450": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Probe LN 20cm 17GA",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2451": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Probe PR 15cm 17GA",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2452": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Probe LN 15cm 17GA",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2454": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Probe LK XT 20cm 15GA",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2456": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "Microwave Ablation Probe PR XT 20cm 15GA",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FRP2483": {
+   "cat": "oncology:abl",
+   "confidence": "high",
+   "eclass": "FRP",
+   "desc": "RadioFrequency Straight Electrode standard 5 0 13 25",
+   "reasoning": "NeuWave (or LeVeen) microwave/RF tumour-ablation probe, generator or accessory."
+  },
+  "FSB658": {
+   "cat": "theatres:warm",
+   "confidence": "high",
+   "eclass": "FDB",
+   "desc": "Blood and fluid warming High flow disposable set for Ranger blood and fluid warmer",
+   "reasoning": "Ranger blood/fluid warmer disposable set — matches theatres:warm (patient/fluid warming)."
+  },
+  "FSM7308": {
+   "cat": "ent:intub",
+   "confidence": "high",
+   "eclass": "FDA",
+   "desc": "Endotracheal Tube Visionary Single Use Preformed Oral South High-Volume Low-Pressure Cuff with Murphy Eye 8mm id",
+   "reasoning": "Preformed oral endotracheal tube."
+  },
+  "FSQ3739": {
+   "cat": "vascular:picc",
+   "confidence": "high",
+   "eclass": "FVI",
+   "desc": "PICC Line Double Lumen 5F x 55cm silver impregnated antimicrobial CT compatible 5ml per second with 67cm nitinol guidewire",
+   "reasoning": "Silver-impregnated PICC line."
+  },
+  "FSQ419": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Catheter closed suction system wet pack Adult 12fg 54cm double swivel elbow NON RETURNABLE",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "FSQ467": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Catheter closed suction system wet pack 72 hour Adult 12fg 30.5cm tracheostomy double swivel elbow NON RETURNABLE",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "FSQ475": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Catheter closed suction system 72 hour Adult 12fg 54cm standard double swivel elbow NON RETURNABLE",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "FSQ85282": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Catheter Open Suction Clear Y Type 50cm 12Fr Two side eyes CM Graduations Vacuum control with Clear Observation port 50cm",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "FSQ85283": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Catheter Open Suction Clear Y Type 50cm 08Fr Two side eyes CM Graduations Vacuum control with Clear Observation port 50cm",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "FSQ85284": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Catheter Open Suction Clear Y Type 50cm 10Fr Two side eyes CM Graduations Vacuum control with Clear Observation port 50cm",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "FSQ85285": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Catheter Open Suction Clear Y Type 50cm 06Fr Two side eyes CM Graduations Vacuum control with Clear Observation port 50cm",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "FSQ85287": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Catheter Open Suction VC Dk Green size indicator 14ch x 60cm Two side eyes",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "FSU175": {
+   "cat": "vascular:cvc",
+   "confidence": "high",
+   "eclass": "FVB",
+   "desc": "Long term silicone cuffed catheter triple lumen needle introducer J Seldinger wire tunnelling rod combined peelable sheath 12.5fg catheter",
+   "reasoning": "Lifecath long-term tunnelled silicone cuffed central venous catheter."
+  },
+  "FSU458": {
+   "cat": "vascular:picc",
+   "confidence": "high",
+   "eclass": "FVB",
+   "desc": "PICC Line Double Lumen 5Fr x 55cm PUR tapered x-ray opaque and MST kit including nitinol guidewire CT injectable",
+   "reasoning": "PICC line (single/double/triple lumen)."
+  },
+  "FSU85000": {
+   "cat": "neonatal:equip",
+   "confidence": "medium",
+   "eclass": "FVB",
+   "desc": "Catheter placement pack neonatal long line Catheter placement pack neonatal long line",
+   "reasoning": "Neonatal long-line catheter placement pack — explicitly \"neonatal long line\"."
+  },
+  "FSW067": {
+   "cat": "ent:fibre",
+   "confidence": "medium",
+   "eclass": "FDA",
+   "desc": "Connector swivel for fibreoptic bronchoscope sterile pvc Fibreoptic bronchoscope connector with 15mm connector",
+   "reasoning": "Fibreoptic-bronchoscope swivel connector — matches ent:fibre (fibrescope) family."
+  },
+  "FTE1085": {
+   "cat": "infection:nitrile",
+   "confidence": "high",
+   "eclass": "FTE",
+   "desc": "Examination Gloves Nitrile Accelerator Free Powder Free Non Sterile Size large - 6 newton",
+   "reasoning": "Nitrile accelerator-free examination gloves."
+  },
+  "FTE1164": {
+   "cat": "infection:nitrile",
+   "confidence": "high",
+   "eclass": "FTE",
+   "desc": "Examination Gloves Nitrile Non Sterile Powder Free Singles Medium Blue",
+   "reasoning": "Nitrile examination gloves."
+  },
+  "FTE1165": {
+   "cat": "infection:nitrile",
+   "confidence": "high",
+   "eclass": "FTE",
+   "desc": "Examination Gloves Nitrile Non Sterile Powder Free Singles Large",
+   "reasoning": "Nitrile examination gloves."
+  },
+  "FTE85095": {
+   "cat": "infection:vinyl",
+   "confidence": "high",
+   "eclass": "FTE",
+   "desc": "Examination Gloves Vinyl Non Sterile BlueGen PF Powder Free Blue Medium",
+   "reasoning": "Vinyl examination gloves."
+  },
+  "FTE85413": {
+   "cat": "infection:nitrile",
+   "confidence": "high",
+   "eclass": "FTE",
+   "desc": "Examination Gloves Nitrile Powder Free Accelerator Free Non Sterile 6N Advanced Allergy Prevention Blue Large",
+   "reasoning": "Nitrile accelerator-free examination gloves."
+  },
+  "FTE86205": {
+   "cat": "infection:nitrile",
+   "confidence": "high",
+   "eclass": "FTE",
+   "desc": "Examination Gloves Nitrile Non Sterile Powder Free 6N Blue Small",
+   "reasoning": "Nitrile examination gloves."
+  },
+  "FTE86337": {
+   "cat": "infection:vinyl",
+   "confidence": "high",
+   "eclass": "FTE",
+   "desc": "Examination Gloves Vinyl Non Sterile Size Medium",
+   "reasoning": "Vinyl examination gloves."
+  },
+  "FTR2567": {
+   "cat": "anaesthesia:reg",
+   "confidence": "high",
+   "eclass": "FNX",
+   "desc": "NRFit Blunt Drawing Up Needle 19G x 38mm with 5 micron filter",
+   "reasoning": "B.Braun NRFit blunt drawing-up needle — NRFit is specifically the regional/neuraxial anaesthesia connector standard."
+  },
+  "FTR3039": {
+   "cat": "vascular:sec",
+   "confidence": "high",
+   "eclass": "FVB",
+   "desc": "Safety Needle Vascular Access 20G x 17mm Huber Type without Y Site",
+   "reasoning": "Huber safety needle — matches observed Huber-needle products under vascular:sec."
+  },
+  "FVB85043": {
+   "cat": "vascular:picc",
+   "confidence": "high",
+   "eclass": "FVB",
+   "desc": "PICC Line Triple Lumen 6Fr NURSING 45cm Guidewire",
+   "reasoning": "PICC line (single/double/triple lumen)."
+  },
+  "FVB85044": {
+   "cat": "vascular:picc",
+   "confidence": "high",
+   "eclass": "FVB",
+   "desc": "PICC Line Double Lumen 5F 2L NURSING 45cm Guidewire",
+   "reasoning": "PICC line (single/double/triple lumen)."
+  },
+  "FVB85045": {
+   "cat": "vascular:picc",
+   "confidence": "high",
+   "eclass": "FVB",
+   "desc": "PICC Line Double Lumen 5F 2L BASIC 70cm Guidewire",
+   "reasoning": "PICC line (single/double/triple lumen)."
+  },
+  "FVB85046": {
+   "cat": "vascular:picc",
+   "confidence": "high",
+   "eclass": "FVB",
+   "desc": "PICC Line Single Lumen 4F 1L NURSING 45cm Guidewire",
+   "reasoning": "PICC line (single/double/triple lumen)."
+  },
+  "FVB85047": {
+   "cat": "vascular:picc",
+   "confidence": "high",
+   "eclass": "FVB",
+   "desc": "PICC Line Single Lumen 4F 1L IR130cm Guidewire",
+   "reasoning": "PICC line (single/double/triple lumen)."
+  },
+  "FVB85048": {
+   "cat": "vascular:picc",
+   "confidence": "high",
+   "eclass": "FVB",
+   "desc": "PICC Line Single Lumen 4F 1L BASIC 70cm Guidewire",
+   "reasoning": "PICC line (single/double/triple lumen)."
+  },
+  "FVB85051": {
+   "cat": "vascular:picc",
+   "confidence": "high",
+   "eclass": "FVB",
+   "desc": "PICC Line Double Lumen 4F 2L NURSING 45cm Guidewire",
+   "reasoning": "PICC line (single/double/triple lumen)."
+  },
+  "FVI3499": {
+   "cat": "cardiology:equip",
+   "confidence": "medium",
+   "eclass": "FVI",
+   "desc": "Catheter - Guiding (IC) model-6f tig5",
+   "reasoning": "Coronary guiding catheter, same family as FVI3503."
+  },
+  "FVI3503": {
+   "cat": "cardiology:equip",
+   "confidence": "medium",
+   "eclass": "FVI",
+   "desc": "Catheter - Guiding (IC) model-6f rbr3 sh (side holes)",
+   "reasoning": "Coronary guiding catheter (interventional cardiology) — nearest matching cardiology category."
+  },
+  "FWM3368": {
+   "cat": "nutrition:dev",
+   "confidence": "high",
+   "eclass": "GPC",
+   "desc": "Enteral Feeding Device Accessory 14fg 3.0cm ACE Stopper Individually Blister Packaged Sterile with AceLock Dressing",
+   "reasoning": "Enteral feeding device accessory (ACE stopper) — matches nutrition:dev."
+  },
+  "FWP084": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Tube Yankauer suction Maxi with vacuum control for large fluid volumes",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "FWP413": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Suction handle Tube Yankauer Suction Regular Capacity Rigid No Vacuum Control",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "FWP437": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "eclass": "FPA",
+   "desc": "Tube suction connecting non-conductive PVC 5mm x 3mt FF with short blue connector",
+   "reasoning": "Tracheal/airway suction catheter or Yankauer suction device/tubing — matches respiratory:resp suction-catheter products."
+  },
+  "GDB093": {
+   "cat": "ostomy:acc",
+   "confidence": "medium",
+   "eclass": "GPC",
+   "desc": "Wound Manager Small 45x30mm with bung closure",
+   "reasoning": "Eakin Wound Manager — fistula/wound-exudate management pouch, ostomy-accessory family."
+  },
+  "VEP85117": {
+   "cat": "skin-prep:wipe",
+   "confidence": "medium",
+   "eclass": "VEP",
+   "desc": "Wipe combined 2 in 1 plastic free 45gsm 200mm x 180mm 140 wipes per flow wrap intended for the cleaning and disinfection of non-invasive medical devices / surfaces / equipment Class IIa medical device and PT2 & PT4 case of 6 flow wraps biocide",
+   "reasoning": "Clinell combined equipment/surface disinfectant wipe — matches Clinell products observed under skin-prep:wipe."
+  },
+  "VJT516": {
+   "cat": "skin-prep:prep",
+   "confidence": "high",
+   "eclass": "VEP",
+   "desc": "Wipe disinfectant moist 70% alcohol 2% chlorhexidine gluconate 18gsm 150mm x 133mm box of 100 individual sachets class IIa medical device",
+   "reasoning": "Prevantics 2% CHG skin antiseptic wipe — matches observed Prevantics product under skin-prep:prep."
+  }
+ },
+ "refused": {
+  "ELW286": {
+   "eclass": "ELW",
+   "desc": "Dressing vapour-permeable adhesive film 5cm x 10m roll",
+   "reason": "Generic vapour-permeable adhesive film roll (Hypafix) with no clinical indication stated — genuinely ambiguous between wound:adv (film dressing) and wound:iv (IV-site dressing), which is exactly the split the code was refused over; wrong either way risks a clinically mismatched substitute."
+  },
+  "ELW287": {
+   "eclass": "ELW",
+   "desc": "Dressing vapour-permeable adhesive film 10cm x 10m roll",
+   "reason": "Same generic Hypafix film roll ambiguity as ELW286 (different roll width only)."
+  },
+  "ENN032": {
+   "eclass": "ENN",
+   "desc": "Tissue gauze and cotton pad sterile 45cm x 45cm BP Single wrapped",
+   "reason": "Gamgee tissue/cotton pad (45x45cm) has no directly comparable product in the data — cotton wool and gauze swabs split inconsistently across wound:adv/wound:fa/wound:deb and none matches this large absorbent surgical pad format."
+  },
+  "FBE19751": {
+   "eclass": "FBE",
+   "desc": "Associated equipment Light guide cable medium",
+   "reason": "Generic \"Associated equipment\" light guide cable with no scope-type stated — could serve any endoscope tower (uro/gastro/ENT), too vague to place safely."
+  },
+  "FBE19752": {
+   "eclass": "FBE",
+   "desc": "Associated equipment Light guide cable small 2.8mm diameter plug type",
+   "reason": "Same generic light-guide-cable ambiguity as FBE19751 (different diameter/plug only)."
+  },
+  "FBE21184": {
+   "eclass": "FBE",
+   "desc": "Associated equipment Laser guide tube",
+   "reason": "\"Laser guide tube\" with no procedure/laser system stated — could be endourology, ENT or general surgical laser; too vague to place safely."
+  },
+  "FAL21459": {
+   "eclass": "FBE",
+   "desc": "Scope Accessories - Distal Caps/Hood maj-2315",
+   "reason": "Olympus generic scope distal cap/hood accessory with no scope type stated — used across multiple endoscope families, cannot be safely narrowed to one category."
+  },
+  "FBE88099": {
+   "eclass": "FBE",
+   "desc": "Tubing - Accessories Maj 1606 inst ch adaptor pk 10",
+   "reason": "Olympus instrument-channel adaptor with no scope type stated — generic accessory used across endoscope families."
+  },
+  "FBE20795": {
+   "eclass": "FBE",
+   "desc": "Associated equipment Surgmaster 4m hf cable",
+   "reason": "Surgmaster HF generator cable is a generic electrosurgery accessory, not tied to one clinical category."
+  },
+  "FAL13822": {
+   "eclass": "FBE",
+   "desc": "Sphincterotome KD-VC431Q-0730",
+   "reason": "Olympus KD-VC431Q sphincterotome (ERCP cutting device) has no precise vocabulary match — closest (gastro:snare) is a stretch from an already-thin category."
+  },
+  "FAL17823": {
+   "eclass": "FBE",
+   "desc": "Accessories bps-a biopsy port seal - pk5",
+   "reason": "Biopsy port seal is a generic endoscope-tower consumable with no scope type stated."
+  },
+  "FBU85227": {
+   "eclass": "FBU",
+   "desc": "Cryotherapy Console and Components CRBS FOOT SWITCH",
+   "reason": "Boston Scientific cryoablation console foot switch — cardiac cryoablation accessory with no matching vocabulary cat (nearest, cardiology:equip, is populated with unrelated ECG/paper/warranty items)."
+  },
+  "FBU86512": {
+   "eclass": "FBU",
+   "desc": "Cable - 3D Mapping System ECG BAMP 6 METERS",
+   "reason": "3D cardiac mapping system cable — EP-lab capital accessory with no matching vocabulary cat."
+  },
+  "FBU930": {
+   "eclass": "FBU",
+   "desc": "Pulse Field Ablation System and Components FARASTAR Generator",
+   "reason": "Farapulse pulsed-field ablation generator — cardiac EP capital equipment with no matching vocabulary cat."
+  },
+  "FBU86506": {
+   "eclass": "FBU",
+   "desc": "Electrophysiology Recording System and Components CRBS DIAPHRAGM MOVEMENT SENSOR",
+   "reason": "Cardiac EP diaphragm-movement sensor — no matching vocabulary cat."
+  },
+  "FBU85215": {
+   "eclass": "FBU",
+   "desc": "Cryotherapy Console and Components CRBS TEMP SENSOR CABLE",
+   "reason": "Cryoablation temperature-sensor cable — no matching vocabulary cat."
+  },
+  "FCB9745": {
+   "eclass": "FCB",
+   "desc": "Accessories Zimmer dermatome blades 10",
+   "reason": "Zimmer dermatome blades have no matching vocabulary category (dermatology:energy is for energy-based devices, not blades)."
+  },
+  "FIC25062": {
+   "eclass": "FCB",
+   "desc": "Fixation devices sutures screws and instruments Multifire scorpion needle",
+   "reason": "Arthrex Multifire Scorpion suture-passer needle — arthroscopic instrument, not an implant; no precise vocabulary fit."
+  },
+  "FCB13384": {
+   "eclass": "FCB",
+   "desc": "Coil - Non-Detachable (IR) 11mm/17mm complex helical-18 (bx/5)",
+   "reason": "IR embolization coil — no matching vocabulary category (nearest categories are unrelated)."
+  },
+  "FCB13376": {
+   "eclass": "FCB",
+   "desc": "Coil - Non-Detachable (IR) 2mm/5mm (bx/1)",
+   "reason": "IR embolization coil, same gap as FCB13384."
+  },
+  "FIC54753": {
+   "eclass": "FCB",
+   "desc": "Associated Product Tendon Separator horizontal parallel cutting height 2 mm sterile for use with Handle 28185 MH",
+   "reason": "Tendon separator/knife accessory blade for a named handle (28185 MH) — a specific arthroscopic-instrument accessory with no matching vocabulary category."
+  },
+  "FIC54755": {
+   "eclass": "FCB",
+   "desc": "Associated Product Tendon Separatorhorizontal parallel cutting height 5 mm for use with Handle 28185 MH sterile",
+   "reason": "Tendon separator/knife accessory blade for a named handle (28185 MH) — a specific arthroscopic-instrument accessory with no matching vocabulary category."
+  },
+  "FIC54756": {
+   "eclass": "FCB",
+   "desc": "Associated Product Tendon Knifevertical parallel cutting width 10 mm height 4 mm for use with Handle 28185 MH sterile",
+   "reason": "Tendon separator/knife accessory blade for a named handle (28185 MH) — a specific arthroscopic-instrument accessory with no matching vocabulary category."
+  },
+  "FIC54760": {
+   "eclass": "FCB",
+   "desc": "Associated Product Tendon Knifevertical parallel cutting width 10 mm height 6 mm for use with Handle 28185 MH sterile",
+   "reason": "Tendon separator/knife accessory blade for a named handle (28185 MH) — a specific arthroscopic-instrument accessory with no matching vocabulary category."
+  },
+  "FIC54754": {
+   "eclass": "FCB",
+   "desc": "Associated Product Tendon Separator horizontal parallel cutting height 3 mm sterile for use with Handle 28185 MH",
+   "reason": "Tendon separator/knife accessory blade for a named handle (28185 MH) — a specific arthroscopic-instrument accessory with no matching vocabulary category."
+  },
+  "FIC54759": {
+   "eclass": "FCB",
+   "desc": "Associated Product Tendon Knifevertical parallel cutting width 9 mm height 6 mm for use with Handle 28185 MH sterile",
+   "reason": "Tendon separator/knife accessory blade for a named handle (28185 MH) — a specific arthroscopic-instrument accessory with no matching vocabulary category."
+  },
+  "FDC576": {
+   "eclass": "FDA",
+   "desc": "Connector double swivel 360 degree rotation disposable sterile 15mm male and female fittings",
+   "reason": "Generic double-swivel breathing-circuit connector, not tied to a stated device or clinical use."
+  },
+  "FDB85363": {
+   "eclass": "FDB",
+   "desc": "Patient Warming Accessory The Pink Pad  Advanced Trendelenburg Postioning System - Biodegradable",
+   "reason": "Named \"Patient Warming Accessory\" but is actually a Trendelenburg anti-slide positioning pad, not a warmer — the description is internally inconsistent between theatres:warm and theatres:theatre."
+  },
+  "FBF2733": {
+   "eclass": "FKF",
+   "desc": "Dermatoscope Accessories Biopsy Punch Disposable Sterile 8mm",
+   "reason": "Dermatoscope biopsy punch — no dedicated biopsy-punch category exists in the vocabulary."
+  },
+  "FBF2730": {
+   "eclass": "FKF",
+   "desc": "Dermatoscope Accessories Biopsy Punch Disposable Sterile 4mm",
+   "reason": "Dermatoscope biopsy punch, same gap as FBF2733."
+  },
+  "FWC077": {
+   "eclass": "FMB",
+   "desc": "Blood Gas Syringe without Needle Line draw Dry Heparin 23.5 IU/mL 3ml Luer Slip Syringe with Filter pro",
+   "reason": "Arterial blood-gas sampling syringe (Portex) — not represented anywhere in the product data and no vocabulary subcategory matches (bloodcoll:* covers venous collection, not arterial blood gas sampling); forcing it into an adjacent category risks a wrong clinical substitute."
+  },
+  "KFK951": {
+   "eclass": "FMB",
+   "desc": "Blood Gas Syringe Safety Pro-vent dry heparin 23.5 iu/ml 3ml luer lock syringe 22g x 1.0 needle-pro edge safety device with filter pro",
+   "reason": "Arterial blood-gas sampling syringe (Portex) — not represented anywhere in the product data and no vocabulary subcategory matches (bloodcoll:* covers venous collection, not arterial blood gas sampling); forcing it into an adjacent category risks a wrong clinical substitute."
+  },
+  "KFK965": {
+   "eclass": "FMB",
+   "desc": "Blood Gas Syringe Safety Arterial Blood Sampling Kit 3mL Luer Lock 1inch (0.6mm x 25mm) needle 23.5 IU/mL dry lithium balanced heparin with Filter-Pro air bubble removal device",
+   "reason": "Arterial blood-gas sampling syringe (Portex) — not represented anywhere in the product data and no vocabulary subcategory matches (bloodcoll:* covers venous collection, not arterial blood gas sampling); forcing it into an adjacent category risks a wrong clinical substitute."
+  },
+  "KFK967": {
+   "eclass": "FMB",
+   "desc": "Blood Gas Syringe Safety Arterial Blood Sampling Kit 3mL Luer Slip 1inch (0.6mm x 25mm) needle 23.5 IU/mL dry lithium balanced heparin with Filter-Pro air bubble removal device",
+   "reason": "Arterial blood-gas sampling syringe (Portex) — not represented anywhere in the product data and no vocabulary subcategory matches (bloodcoll:* covers venous collection, not arterial blood gas sampling); forcing it into an adjacent category risks a wrong clinical substitute."
+  },
+  "FWC118": {
+   "eclass": "FMB",
+   "desc": "Blood Gas Syringe Safety Pro Vent Dry Heparin 23.5 IU/mL 3ml Luer Slip Syringe 23g x 1.0 Needle pro with Filter pro",
+   "reason": "Arterial blood-gas sampling syringe (Portex) — not represented anywhere in the product data and no vocabulary subcategory matches (bloodcoll:* covers venous collection, not arterial blood gas sampling); forcing it into an adjacent category risks a wrong clinical substitute."
+  },
+  "FWC004": {
+   "eclass": "FMB",
+   "desc": "Blood Gas Syringe without Needle Line draw dry Heparin 23.5 IU/mL 1ml Luer Slip Syringe with Filter pro",
+   "reason": "Arterial blood-gas sampling syringe (Portex) — not represented anywhere in the product data and no vocabulary subcategory matches (bloodcoll:* covers venous collection, not arterial blood gas sampling); forcing it into an adjacent category risks a wrong clinical substitute."
+  },
+  "FWC024": {
+   "eclass": "FMB",
+   "desc": "Blood Gas Syringe Safety Pro Vent Dry Heparin 23.5 IU/mL 3ml Luer Slip Syringe 22g x 1.0 Needle pro with Filter pro NON RETURNABLE",
+   "reason": "Arterial blood-gas sampling syringe (Portex) — not represented anywhere in the product data and no vocabulary subcategory matches (bloodcoll:* covers venous collection, not arterial blood gas sampling); forcing it into an adjacent category risks a wrong clinical substitute."
+  },
+  "FWC415": {
+   "eclass": "FMC",
+   "desc": "Blood Gas Syringe Safety Pro Vent Dry Heparin 23.5 iu/ml 3ml Luer Slip Syringe 23g x 1.0 Needle pro edge safety device with filter pro",
+   "reason": "Arterial blood-gas sampling syringe (Portex) — not represented anywhere in the product data and no vocabulary subcategory matches (bloodcoll:* covers venous collection, not arterial blood gas sampling); forcing it into an adjacent category risks a wrong clinical substitute."
+  },
+  "FWC416": {
+   "eclass": "FMC",
+   "desc": "Blood Gas Syringe Safety Pulsator Dry Heparin 23.5 iu/ml 3ml Luer Lock Syringe 23g x 1.0 Needle pro edge safety device with filter pro",
+   "reason": "Arterial blood-gas sampling syringe (Portex) — not represented anywhere in the product data and no vocabulary subcategory matches (bloodcoll:* covers venous collection, not arterial blood gas sampling); forcing it into an adjacent category risks a wrong clinical substitute."
+  },
+  "FWC412": {
+   "eclass": "FMC",
+   "desc": "Blood Gas Syringe Safety Pro Vent Dry Heparin 23.5 iu/ml 1ml Luer Slip Syringe 25g x 5/8 Needle pro edge safety device with filter pro",
+   "reason": "Arterial blood-gas sampling syringe (Portex) — not represented anywhere in the product data and no vocabulary subcategory matches (bloodcoll:* covers venous collection, not arterial blood gas sampling); forcing it into an adjacent category risks a wrong clinical substitute."
+  },
+  "FWC411": {
+   "eclass": "FMC",
+   "desc": "Blood Gas Syringe Safety Pro Vent Dry Heparin 23.5 iu/ml 3ml Luer Lock Syringe 23g x 1.0 Needle pro edge safety device with filter pro heparin",
+   "reason": "Arterial blood-gas sampling syringe (Portex) — not represented anywhere in the product data and no vocabulary subcategory matches (bloodcoll:* covers venous collection, not arterial blood gas sampling); forcing it into an adjacent category risks a wrong clinical substitute."
+  },
+  "FWC413": {
+   "eclass": "FMC",
+   "desc": "Blood Gas Syringe Safety Pro Vent Dry Heparin 23.5 iu/ml 1ml Luer Slip Syringe 23g x 1.0 Needle pro edge safety device with filter pro",
+   "reason": "Arterial blood-gas sampling syringe (Portex) — not represented anywhere in the product data and no vocabulary subcategory matches (bloodcoll:* covers venous collection, not arterial blood gas sampling); forcing it into an adjacent category risks a wrong clinical substitute."
+  },
+  "FRE764": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA Large Vessel (IR) /18-6/5.8/75",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE92151": {
+   "eclass": "FRE",
+   "desc": "Balloon - Peripheral Drug Coated (IR) OTW 9.0MM X 40MM 80CM",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE050": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA Standard (IR) f/g - sterling - mr - 6.0 x 10/80 (4f)",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE192": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA Standard (IR) f/g 7.0 x 40/80 (4f)",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE699": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA Large Vessel (IR) /12-4/5.8/75",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE735": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA Large Vessel (IR) /16-6/5.8/75",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE90869": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA High Pressure (IR) Athletis 8.0mm X 100mm X 50cm",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE734": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA Large Vessel (IR) /16-4/5.8/120",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FCB13477": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA Standard (IR) Mustang 10.0x30 40cm",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE4534": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA Standard (IR) sterling sl mr 2.5 x 80 x 150",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE4544": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA Standard (IR) sterling sl mr 3.5 x 100 x 150",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRD1612": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA Standard (IR) Mustang 5.0 x180 75cm",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE136": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA Standard (IR) f/g 10.0 x 40/80 (5f)",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE4597": {
+   "eclass": "FRE",
+   "desc": "Balloon - PTA Standard (IR) 4 x 80 x 150",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE4968": {
+   "eclass": "FRE",
+   "desc": "Balloon - Coronary Workhorse - Non-Compliant/Semi Compliant (IC) mr 8mm x 4.50mm",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE92102": {
+   "eclass": "FRE",
+   "desc": "Balloon - Peripheral Drug Coated (IR) OTW 5MM X 300MM 130CM",
+   "reason": "PTA/angioplasty balloon (peripheral or coronary) — not represented anywhere in the product data and no vocabulary subcategory covers angioplasty balloons; forcing it into an occlusion or vascular-general category would offer the wrong device."
+  },
+  "FRE87696": {
+   "eclass": "FRE",
+   "desc": "Inflation Device (IC) 30 atm inflator w gauge and 3 way stopcock",
+   "reason": "Generic inflation device/gauge accessory used with any angioplasty balloon — not tied to one clinical category."
+  },
+  "FRP785": {
+   "eclass": "FRP",
+   "desc": "EP Catheter - RF Ablation Standard 587PRF 7/110/2.5/7-4 quad std",
+   "reason": "Cardiac EP RF-ablation catheter (Blazer/Intella) — the genuine cardiac exception this code was refused over; no vocabulary category matches cardiac EP ablation catheters, so it is refused rather than folded into oncology:abl or a loosely-fitting cardiology:equip."
+  },
+  "FRP789": {
+   "eclass": "FRP",
+   "desc": "EP Catheter - RF Ablation Standard 987PRF 7/110/2.5/7-4 quad n4",
+   "reason": "Cardiac EP RF-ablation catheter (Blazer/Intella) — the genuine cardiac exception this code was refused over; no vocabulary category matches cardiac EP ablation catheters, so it is refused rather than folded into oncology:abl or a loosely-fitting cardiology:equip."
+  },
+  "FRP871": {
+   "eclass": "FRP",
+   "desc": "EP Catheter - RF Irrigated/Cooled 178PRFopen irrigated 7.5 110 2.5 quad assy",
+   "reason": "Cardiac EP RF-ablation catheter (Blazer/Intella) — the genuine cardiac exception this code was refused over; no vocabulary category matches cardiac EP ablation catheters, so it is refused rather than folded into oncology:abl or a loosely-fitting cardiology:equip."
+  },
+  "FRP583": {
+   "eclass": "FRP",
+   "desc": "EP Catheter - RF Ablation Standard 385PRFintellatip mifi xp 7/110/2.5/8-8 std ous",
+   "reason": "Cardiac EP RF-ablation catheter (Blazer/Intella) — the genuine cardiac exception this code was refused over; no vocabulary category matches cardiac EP ablation catheters, so it is refused rather than folded into oncology:abl or a loosely-fitting cardiology:equip."
+  },
+  "FRP870": {
+   "eclass": "FRP",
+   "desc": "EP Catheter - RF Irrigated/Cooled 078PRFopen irrigated 7.5 110 2.5 quad lgr",
+   "reason": "Cardiac EP RF-ablation catheter (Blazer/Intella) — the genuine cardiac exception this code was refused over; no vocabulary category matches cardiac EP ablation catheters, so it is refused rather than folded into oncology:abl or a loosely-fitting cardiology:equip."
+  },
+  "FRW85021": {
+   "eclass": "FRW",
+   "desc": "Embolics - Spheres (IR) DRUG ELUTING 300-500 MICRON",
+   "reason": "IR embolic drug-eluting spheres — no matching vocabulary category (same gap as the embolization coils)."
+  },
+  "FTK648": {
+   "eclass": "FUF",
+   "desc": "Bladder Irrigation Set Y-type 2x non-vented spikes 2x Roberts clamp chamber with bubble trapper roller clamp Roberts clamp catheter adapter silicone tube and cap 238cm",
+   "reason": "Baxter Uromatic bladder irrigation set — no matching vocabulary category (continence subcats do not cover irrigation sets)."
+  },
+  "FVI1509": {
+   "eclass": "FVI",
+   "desc": "Catheter - Peripheral Diagnostic (IR) Selective radiology 4f 65cm length shepherd hook 1.0 modified ns performa 035",
+   "reason": "IR selective diagnostic angiography catheter — no vocabulary subcategory matches diagnostic angiographic catheters."
+  },
+  "FVI4136": {
+   "eclass": "FVI",
+   "desc": "EP Catheter - Diagnostic Fixed 6314IVF 5f -115cm jos -4e -2mm",
+   "reason": "Cardiac EP diagnostic catheter (Viking) — same gap as the FRP cardiac EP catheters."
+  },
+  "FKD1200": {
+   "eclass": "FVI",
+   "desc": "Balloon - PTA 0.014 (IR) 2.5mm x 150mm x 150cm mr",
+   "reason": "PTA angioplasty balloon (0.014 platform) — same gap as the FRE PTA balloons."
+  },
+  "FKD3482": {
+   "eclass": "FVI",
+   "desc": "EP Catheter - Diagnostic Fixed 2843DKF st 6f -110cms -jos -4e -2mm",
+   "reason": "Cardiac EP diagnostic catheter (Viking), same gap as FVI4136."
+  },
+  "FRE12181": {
+   "eclass": "FXD",
+   "desc": "Balloon - Peripheral Drug Coated (IR) dcb 7x150mm 150cm",
+   "reason": "Peripheral drug-coated PTA balloon — same gap as the FRE PTA balloons."
+  },
+  "FRE12165": {
+   "eclass": "FXD",
+   "desc": "Balloon - Peripheral Drug Coated (IR) dcb 4x200mm 150cm",
+   "reason": "Peripheral drug-coated PTA balloon, same gap."
+  },
+  "FBE23665": {
+   "eclass": "FXD",
+   "desc": "Balloon - Sphincteroplasty Cre rx biliary 18-20 mm 5.5 cm",
+   "reason": "Biliary sphincteroplasty dilation balloon (ERCP) — no matching gastro subcategory."
+  },
+  "FBE23658": {
+   "eclass": "FXD",
+   "desc": "Balloon - Sphincteroplasty Cre rx biliary 10-12 mm 3.0 cm",
+   "reason": "Biliary sphincteroplasty dilation balloon, same gap."
+  },
+  "FRE12183": {
+   "eclass": "FXD",
+   "desc": "Balloon - Peripheral Drug Coated (IR) dcb 7x200mm 150cm",
+   "reason": "Peripheral drug-coated PTA balloon, same gap."
+  },
+  "FBE23657": {
+   "eclass": "FXD",
+   "desc": "Balloon - Sphincteroplasty Cre rx biliary 12-15 mm 5.5 cm",
+   "reason": "Biliary sphincteroplasty dilation balloon, same gap."
+  }
+ }
+}

@@ -105,6 +105,7 @@ REFS = {
     # product-type taxonomy. Minted with `stamp_notice.py --mint`.
     "npc-eclass.json":                 "ETH-D0981028F",
     "product-types.json":              "ETH-DFC98A3A8",
+    "npc-category-overrides.json":     "ETH-D2AE91809",
 }
 
 
