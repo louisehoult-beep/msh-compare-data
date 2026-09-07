@@ -45,7 +45,10 @@
     "minTotalNpcs": 2,
     "minObservations": 3
    }
-  }
+  },
+  "inferredCount": 83,
+  "inferredRule": "Entries under `inferred` were proposed by reading the NHS Supply Chain descriptions of the suspended lines filed under each eClass code, not observed from paired (eClass, cat) data as `mappings` were. They are kept separate so the two kinds of evidence are never mixed, and an observed mapping always wins. Every category was validated against the gated vocabulary before being written.",
+  "inferredAddedOn": "07/09/2026"
  },
  "mappings": {
   "AZC": {
@@ -1814,6 +1817,1130 @@
    "runnerUp": null,
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "handling:slide"
+  }
+ },
+ "inferred": {
+  "AZB": {
+   "cat": "nutrition:feeds",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Nutritional supplement Savoury Chicken 7 x 57g",
+    "Nutritional supplement Strawberry Shake 7 x 57g"
+   ],
+   "reasoning": "Two AYMES nutritional supplement drinks (savoury/sweet flavours); same product family as AZC (already mapped nutrition:feeds).",
+   "addedOn": "07/09/2026"
+  },
+  "BWC": {
+   "cat": "theatres:theatre",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 5,
+   "examples": [
+    "Cap theatre non woven tie back disposable CAP TIES ON THE BACK VISCOSE WAVY LONG HAIR BLUE NON RETURNABLE",
+    "Theatre Cap Bouffant Blue (Mob Cap)",
+    "Theatre Cap Bouffant Green (Mob Cap)",
+    "Theatre Cap Tie Back Blue Basics Non woven 25gsm White",
+    "Theatre Cap Bouffant Green Single use"
+   ],
+   "reasoning": "All five suspended lines are disposable theatre caps (bouffant/tie-back); confirmed by an npc observation of the same eClass mapped to theatres:theatre.",
+   "addedOn": "07/09/2026"
+  },
+  "BWH": {
+   "cat": "theatres:theatre",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Overshoes theatre Impervious Shoe Cover - Polythene one-size"
+   ],
+   "reasoning": "Single line is a theatre overshoe (impervious shoe cover), the same disposable theatre-wear family as BWC (caps, mapped theatres:theatre).",
+   "addedOn": "07/09/2026"
+  },
+  "BWO": {
+   "cat": "theatres:theatre",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 16,
+   "examples": [
+    "Non Sterile Isolation Gown L impervious blue",
+    "Non Sterile Isolation Gown XL impervious blue",
+    "Non Sterile Isolation Gown XL blue",
+    "Non Sterile Isolation Gown L blue",
+    "Surgical gown Sterile Zonal Reinforced Large Extra Long Arthroscopy"
+   ],
+   "reasoning": "All 16 lines are isolation/surgical gowns (sterile and non-sterile); grouped with theatre apparel (caps/gowns) as theatres:theatre, consistent with BWC.",
+   "addedOn": "07/09/2026"
+  },
+  "BWZ": {
+   "cat": "theatres:theatre",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Drape General Adhesive DRAPE ESSENTIAL SHEET W/ADHESIVE 196X150CM"
+   ],
+   "reasoning": "Single line is a general adhesive surgical drape, a core theatre consumable.",
+   "addedOn": "07/09/2026"
+  },
+  "DUA": {
+   "cat": "renal:pd",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 9,
+   "examples": [
+    "Fluids Balance 1.5%Gl 1.25Ca 5L LC3",
+    "Fluids CAPD 19 2.3%Gl 1.25Ca 5L LC2",
+    "Fluids CAPD 17 1.5%Gl 1.25Ca 2L LC2",
+    "Fluids Balance 4.25%Gl 1.25Ca 2L LC3",
+    "Fluids CAPD 19 2L LC2"
+   ],
+   "reasoning": "All nine lines are peritoneal dialysis fluids (CAPD/Balance fluid bags); npc observation for this eClass confirms renal:pd.",
+   "addedOn": "07/09/2026"
+  },
+  "EAZ": {
+   "cat": "ortho:trauma",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Undercast Padding Natural- Non-Sterile- 10cm x 2.75m",
+    "Undercast Padding Natural- Non-Sterile- 20cm x 2.75m"
+   ],
+   "reasoning": "Undercast padding used beneath plaster casts for fracture management, same clinical use as EAF (already mapped ortho:trauma).",
+   "addedOn": "07/09/2026"
+  },
+  "ECA": {
+   "cat": "wound:comp",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 3,
+   "examples": [
+    "Bandage light support type 2 without fastening 5cm x 4.5m Cotton",
+    "Bandage light support type 2 with fastening (Crepe) 10cm x 4.5m Sterile",
+    "Bandage compression 4 layer kit component - Type 2 Light support (Layer 2) 10cm x 4.5m latex free"
+   ],
+   "reasoning": "All three lines are compression bandages (type 2 light support, 4-layer kit component); npc observation confirms wound:comp.",
+   "addedOn": "07/09/2026"
+  },
+  "EGB": {
+   "cat": "vascular:vte",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 7,
+   "examples": [
+    "Anti-embolism stocking Thigh length Long Small Open toe C",
+    "Anti-embolism stocking Below knee Long Small Open toe B-",
+    "Anti-embolism stocking Below knee Regular Medium Open toe C-",
+    "Anti-embolism stocking Below knee Regular Small Open toe A-",
+    "Anti-embolism stocking Below knee Regular Large Open toe E-"
+   ],
+   "reasoning": "All seven suspended lines are 'Anti-embolism stocking' (TED hose) for VTE prophylaxis, not general compression hosiery; vascular:vte is the clinically precise fit even though the eClass's broader npc history also carries some general orthotics:hosiery products.",
+   "addedOn": "07/09/2026"
+  },
+  "EGJ": {
+   "cat": "ortho:trauma",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 3,
+   "examples": [
+    "Undercast Padding Synthetic- Non-Sterile- 5cm X 2.7m",
+    "Undercast Padding Synthetic- Non-Sterile- 20cm X 2.7m",
+    "Undercast Padding Synthetic- Non-Sterile- 10cm x 2.7m"
+   ],
+   "reasoning": "Synthetic undercast padding, same use as EAZ — casting material for fracture management.",
+   "addedOn": "07/09/2026"
+  },
+  "EHC": {
+   "cat": "wound:fa",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Tape medical adhesive plastic impermeable 7.5cm x 5m Transparant Latex free"
+   ],
+   "reasoning": "Medical adhesive fixation tape (plastic impermeable), same product type as EHO (mapped wound:fa on direct observation).",
+   "addedOn": "07/09/2026"
+  },
+  "EHO": {
+   "cat": "wound:fa",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Tape medical adhesive zinc oxide 2.5cm x 10m white Latex free"
+   ],
+   "reasoning": "Zinc-oxide medical adhesive tape; npc observations for this exact eClass confirm wound:fa (Leukoplast).",
+   "addedOn": "07/09/2026"
+  },
+  "EIR": {
+   "cat": "wound:fa",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Wound Closure Strip 6mm x 75mm 6 per pouch"
+   ],
+   "reasoning": "Wound closure strips (Steri-strip type) are adhesive wound-closure/fixation products, same family as EHO/EHC.",
+   "addedOn": "07/09/2026"
+  },
+  "EMA": {
+   "cat": "wound:adv",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Non-adhesive super absorbent dressing Sterile 5cm x 5cm"
+   ],
+   "reasoning": "Non-adhesive super-absorbent sterile dressing (Kerramax Care) is an advanced wound dressing product.",
+   "addedOn": "07/09/2026"
+  },
+  "ERF": {
+   "cat": "ortho:trauma",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 4,
+   "examples": [
+    "Temporary Footwear Post-op post-trauma Shoe XX-Large Universal Side Mens UK Shoe Sizes 8.5 to 10.5 Womens UK Shoe Sizes 8 to 10.5",
+    "Temporary Footwear Post-op post-trauma Shoe Large Universal Side Mens UK Shoe Sizes 6 to 7 Womens UK Shoe Sizes 6 to 6.5",
+    "Temporary Footwear Post-op post-trauma Shoe Medium Universal Side Mens UK Shoe Sizes 4.5 to 5.5 Womens UK Shoe Sizes 4 to 5",
+    "Temporary Footwear Post-op post-trauma Shoe Small Universal Side Mens UK Shoe Sizes 3 to 4 Womens UK Shoe Sizes 2.5 to 3.5"
+   ],
+   "reasoning": "Temporary post-op/post-trauma footwear (surgical shoes) used in orthopaedic trauma/fracture recovery, all four sizes of one Procare product line.",
+   "addedOn": "07/09/2026"
+  },
+  "ESB": {
+   "cat": "ortho:trauma",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Skin Traction Kits Adhesive - Adult"
+   ],
+   "reasoning": "Adhesive skin traction kit, an orthopaedic trauma treatment consumable.",
+   "addedOn": "07/09/2026"
+  },
+  "ESC": {
+   "cat": "ortho:trauma",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Skin Traction Kits Non adhesive - Child",
+    "Skin Traction Kits Non Adhesive - Adult"
+   ],
+   "reasoning": "Non-adhesive skin traction kits (adult and child), same clinical use as ESB.",
+   "addedOn": "07/09/2026"
+  },
+  "ETC": {
+   "cat": "ssd:cssd",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Sterilisation Reel Flat reel 150mm x 200 m"
+   ],
+   "reasoning": "Sterilisation reel for packaging instruments before autoclaving — a CSSD (sterile services) consumable.",
+   "addedOn": "07/09/2026"
+  },
+  "EVH": {
+   "cat": "theatres:theatre",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Dressing towel 2 ply sterile 43 x 50cm single wrap",
+    "Dressing sheet water repellent sterile 50 x 50cm crepe sheet single wrap in peel pouch"
+   ],
+   "reasoning": "Sterile dressing towels/sheets used to build up the sterile field in theatre.",
+   "addedOn": "07/09/2026"
+  },
+  "FAL": {
+   "cat": "endoscopy:access",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Scope Accessories  - Accessories POLYPROPYLENE SUTURE"
+   ],
+   "reasoning": "Single suspended line (polypropylene suture scope accessory) is an exact description match to an npc observation of this same eClass already tagged endoscopy:access.",
+   "addedOn": "07/09/2026"
+  },
+  "FAM": {
+   "cat": "nutrition:dev",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 51,
+   "examples": [
+    "Feeding Tube Gastrojejunal 18fg 30cm ENFit Compatible",
+    "Feeding Tube Gastrojejunal 14fg low profile 2.0cm stoma length 45cm jejunal length ENFit",
+    "Feeding Tube Gastrojejunal 16fg low profile 2.0cm stoma length 22cm jejunal length ENFit",
+    "Feeding Tube Gastrojejunal 14fg low profile 1.7cm stoma length 30cm jejunal length ENFit",
+    "Feeding Tube Gastrojejunal 18fg low profile 4.0cm stoma length 45cm jejunal length ENFit"
+   ],
+   "reasoning": "All 51 suspended lines are MIC-KEY gastrojejunal feeding tubes — a large, completely consistent enteral feeding device family.",
+   "addedOn": "07/09/2026"
+  },
+  "FAR": {
+   "cat": "nutrition:dev",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Feeding Tube Gastrostomy Balloon Retained 12fg ENFit connector including balloon syringe and lubricant"
+   ],
+   "reasoning": "Single line is a balloon-retained gastrostomy feeding tube, same family as FAM/FAT.",
+   "addedOn": "07/09/2026"
+  },
+  "FAT": {
+   "cat": "nutrition:dev",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Feeding Tube Nasojejunal 12fg 152cm polyurethane radiopaque regular centimeter markings unweighted 300cm 0.035 teflon coated flexible guidewire in dis"
+   ],
+   "reasoning": "Nasojejunal feeding tube; npc observation for this exact eClass confirms nutrition:dev with the identical product description.",
+   "addedOn": "07/09/2026"
+  },
+  "FBH": {
+   "cat": "cardiology:ecg",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Automated Defibrillation Lifepak defibrillation/pacing electrode paediatric quik-combo redipak defibrillation/pacing electrode for use with Lifepak 20"
+   ],
+   "reasoning": "Paediatric defibrillation/pacing electrode; npc observations for this eClass are mostly filed under cardiology:ecg (electrode consumables), which is the Hub's established treatment of this defib-electrode product family even though a minority point to cardiology:defib.",
+   "addedOn": "07/09/2026"
+  },
+  "FBX": {
+   "cat": "ortho:equip",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 47,
+   "examples": [
+    "Saw Blades Other (specify in description) Osc/Sag Blade 0.40mmThick 9.5mmWide 31.0mmLong 0.60mmCut",
+    "SPT Burr Straight 13.0mm diam 2.0 mm",
+    "Saw Blades Other (specify in description) Recip Blade 1.25mmThick 89mmLong 1.7mmCut",
+    "Saw Blades Other (specify in description) Osc/Sag Blade 0.40mmThick 13.4mmWide 41mmLong 0.60mmCut",
+    "SPT Burr legend 7cm 3mm ball diamond"
+   ],
+   "reasoning": "All 47 lines are orthopaedic power-tool consumables (saw blades, burrs, drills) used with bone-cutting equipment — a large, tightly consistent set.",
+   "addedOn": "07/09/2026"
+  },
+  "FCN": {
+   "cat": "theatres:electro",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Standard blade electrode disposable Insulated EDGE Coated 2.75inch"
+   ],
+   "reasoning": "Disposable insulated electrosurgical blade electrode; npc observation for this eClass confirms theatres:electro with a comparable electrosurgical product.",
+   "addedOn": "07/09/2026"
+  },
+  "FDJ": {
+   "cat": "anaesthesia:vent",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Breathing system Sentri Surgical EcoLite adult mask filter and tube 2.1m",
+    "Catheter mount Flexible double swivel catheter mount 22F flip top cap with 7.6mm port 22M/15F 170mm"
+   ],
+   "reasoning": "Both lines are anaesthesia breathing-circuit components (mask/filter/tube set and a catheter mount) used on ventilator/breathing circuits.",
+   "addedOn": "07/09/2026"
+  },
+  "FDQ": {
+   "cat": "respiratory:o2",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Facemask adult high-concentration non-rebreather 3-in-1 with safety vent 2.1m (7) o2 tubing NON RETURNABLE"
+   ],
+   "reasoning": "Adult non-rebreather oxygen mask with oxygen tubing — an oxygen therapy consumable.",
+   "addedOn": "07/09/2026"
+  },
+  "FDU": {
+   "cat": "respiratory:diag",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Spirometer volume incentive 2500ml without one-way valve 12/cs12/cs NON RETURNABLE"
+   ],
+   "reasoning": "Incentive spirometer (volume type) is a respiratory diagnostic/measurement device.",
+   "addedOn": "07/09/2026"
+  },
+  "FEC": {
+   "cat": "ent:intub",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 8,
+   "examples": [
+    "Endotracheal Tube Standard Cuffed without murphy eye Oral/nasal long term profile cuff magill plain tip sterile blue line x-ray opaque siliconised PVC",
+    "Endotracheal Tube Standard cuffed with murphy eye Portex clear low pressure cuff i.d 7.5mm",
+    "Endotracheal Tube Standard Uncuffed without murphy eye Sterile blue line siliconised x-ray opaque non-toxic PVC ETT with holder 6.5mm id",
+    "Endotracheal Tube Reinforced with murphy eye Clear PVC oral/nasal sterile 8mm id ETT",
+    "Endotracheal Tube Standard uncuffed with murphy eye Oral/nasal radio opaque blue line sterile siliconised PVC ETT 3mm id"
+   ],
+   "reasoning": "All eight lines are endotracheal tubes (cuffed/uncuffed, standard/reinforced) — a consistent intubation-device set.",
+   "addedOn": "07/09/2026"
+  },
+  "FED": {
+   "cat": "ent:stoma",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 12,
+   "examples": [
+    "Tracheostomy Tube with Adjustable Flange Uniperc for difficult airways with soft seal cuff id 9.0mm",
+    "Percutaneous Set BLUperc Dilation Procedural Kit with Single Stage Dilator and 8.0 mm BLUselect trach tube",
+    "Tracheostomy Tube with Adjustable Flange For difficult airways uncuffed id 7.0mm",
+    "Inner Cannula for Tracheostomy Tube Non-Fenestrated BLUselect 7.5 REPLACEMENT NON-FEN 2/PKG",
+    "Tracheostomy Tube with Adjustable Flange For difficult airways uncuffed id 8.0mm"
+   ],
+   "reasoning": "All 12 lines are tracheostomy tubes and percutaneous tracheostomy dilation kits; npc observation confirms ent:stoma.",
+   "addedOn": "07/09/2026"
+  },
+  "FEE": {
+   "cat": "ent:stoma",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 7,
+   "examples": [
+    "Tracheostomy Filter HME Trachphone non returnable",
+    "Tracheostomy Percutaneous Set UniPerc difficult airway percutaneuos dilation tracheostomy kits tube 7.0mm",
+    "Inner Cannula for Tracheostomy Tube Replacement id 8.0mm",
+    "Inner Cannula for Tracheostomy Tube Replacement id 9.0mm NON RETURNABLE",
+    "Inner Cannula for Tracheostomy Tube Replacement id 7.0mm"
+   ],
+   "reasoning": "All seven lines are tracheostomy accessories (HME filter, percutaneous sets, inner cannulae) — same stoma-care family as FED.",
+   "addedOn": "07/09/2026"
+  },
+  "FFH": {
+   "cat": "anaesthesia:vent",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Breathing Circuit Manual Ventilation Tube for ABS with Bag Arm 0.9m Limb Includes 2 Liter Latex Free Manual Bag NON RETURABLE"
+   ],
+   "reasoning": "Manual ventilation breathing-circuit tube with bag arm; npc observation for a comparable Hamilton ventilator breathing circuit supports anaesthesia:vent.",
+   "addedOn": "07/09/2026"
+  },
+  "FFR": {
+   "cat": "respiratory:resp",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Heat moisture exchanger mechanical filter without sampling port Edith Flex NON RETURNABLE",
+    "Heat moisture exchange Electrostatic filter with luer lock port and fixed elbow - adult 22m/15f connection greater than 9999% efficiency"
+   ],
+   "reasoning": "Both lines are heat-moisture-exchanger (HME) breathing filters; npc observation for this eClass is an exact match to respiratory:resp.",
+   "addedOn": "07/09/2026"
+  },
+  "FJF": {
+   "cat": "monitoring:gen",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Sphygmomanometer Digital ProBP blood pressure device NON RETURNABLE"
+   ],
+   "reasoning": "Digital sphygmomanometer (blood pressure measurement device) — a general patient-monitoring device, consistent with FJH (blood pressure cuffs, monitoring:gen).",
+   "addedOn": "07/09/2026"
+  },
+  "FJH": {
+   "cat": "monitoring:gen",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 39,
+   "examples": [
+    "Blood pressure cuff multi patient use Infant one tube orange bayonet fitting with connector that conforms to ISO 803695",
+    "Blood pressure cuff single patient multi use Small Adult 17-25cm Dual Hose Dinaclick Connector",
+    "Blood pressure cuff multi patient use Child 15-21Cm No Hose No Connector NON RETURNABLE",
+    "Blood pressure cuff single patient multi use Thigh dinaclick 38-50cm compatible with dinaclick air hose 2058203 2058205 2087391 with connector that co",
+    "Blood pressure cuff multi patient use Long adult one tube navy bayonet fitting 23-33cm with connector that conforms to ISO 803695"
+   ],
+   "reasoning": "All 39 lines are blood pressure cuffs across brands/sizes; npc observations for this eClass are strongest for monitoring:gen.",
+   "addedOn": "07/09/2026"
+  },
+  "FJQ": {
+   "cat": "monitoring:gen",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Thermometer Phase Change Single Use Clinical for Oral and Axillary only"
+   ],
+   "reasoning": "Single-use phase-change clinical thermometer — a general patient-monitoring consumable.",
+   "addedOn": "07/09/2026"
+  },
+  "FKG": {
+   "cat": "nutrition:dev",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Enteral Feeding Device Accessory 20fg dilator for use with 16fg MIC G - 16fg MIC key - 18fg MIC key SF (Introducer Kit)",
+    "Enteral Feeding Device Accessory 20fg dilator for use with 16fg MIC transgastric jejunal feeding tube and MIC key transgastric jejunal feeding tube (I"
+   ],
+   "reasoning": "Enteral feeding device dilator accessories for MIC/MIC-KEY tubes — same feeding-device family as FAM/FAR.",
+   "addedOn": "07/09/2026"
+  },
+  "FKK": {
+   "cat": "ent:intub",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 7,
+   "examples": [
+    "Laryngeal Mask Airway air-Q SP3G Disposable Silicone w Gastric Access size 4",
+    "Laryngoscope Blade and Handle Combi Set with Batteries Disposable Metal Max+Combi meLED Set Adult Mac 5",
+    "Laryngoscope Blade and Handle Combi Set with Batteries Disposable Metal Max+Combi meLED Set Adult Mac 3",
+    "Laryngeal Mask Airway Air-Q SP3G Disposable Silicone w Gastric Access size 0 NON RETURNABLE",
+    "Laryngeal Mask Airway air-Q SP3G Disposable Silicone w Gastric Access size 5"
+   ],
+   "reasoning": "All seven lines are airway-management devices — laryngeal mask airways and laryngoscope blade/handle sets — which are intubation devices (ent:intub), not endoscopy instruments despite the auto-candidate; observations for this eClass are split between endoscopy:endo and ent:intub, and the product descriptions clearly favour intubation.",
+   "addedOn": "07/09/2026"
+  },
+  "FKL": {
+   "cat": "ent:intub",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 4,
+   "examples": [
+    "Laryngoscope Blade and Handle Combi Set with Batteries Disposable Lever-tip size 3 conventional me LED",
+    "Laryngoscope Blade Single Use Mac 3 green system/fibre-optic lever-tip NON RETURNABLE",
+    "Laryngoscope Blade and Handle Combi Set with Batteries Disposable Lever-tip size 4 conventional me LED",
+    "Laryngoscope Blade Single Use Fibre Optic Mac 4 Metal Max 90 Lever-Tip NON RETURNABLE"
+   ],
+   "reasoning": "All four lines are single-use laryngoscope blades/handles — consistent intubation devices, same family as FKK.",
+   "addedOn": "07/09/2026"
+  },
+  "FMG": {
+   "cat": "nutrition:dev",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Oral Tip Syringe 2.5ml purple - single use - unwinged - individually wrapped sterile - centered",
+    "Oral Tip Syringe 2.5ml purple - low dose - single use - unwinged - individually wrapped sterile - centered - ENFit connection"
+   ],
+   "reasoning": "Oral-tip dosing syringes used for enteral/oral medication and feed administration; npc observation for this eClass supports nutrition:dev.",
+   "addedOn": "07/09/2026"
+  },
+  "FMI": {
+   "cat": "nutrition:dev",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Enteral Feeding Syringe 2.5ml purple - low dose - single use - winged - individually wrapped sterile - centered - ENFit connection"
+   ],
+   "reasoning": "Enteral feeding syringe; npc observations for this eClass split between nutrition:dev and nutrition:sets, both enteral-feeding-adjacent — following the established nutrition:dev pattern used for FAE/FAN/FAS.",
+   "addedOn": "07/09/2026"
+  },
+  "FMK": {
+   "cat": "vascular:gen",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 4,
+   "examples": [
+    "Hypodermic Syringe 5ml Luer Lock 3 Piece Concentric Clear Sterile",
+    "Hypodermic Syringe 3ml Luer Lock 3 Piece Concentric Clear Sterile",
+    "Hypodermic Syringe 3ml Luer Lock 3 Piece Concentric Clear Sterile",
+    "Hypodermic Syringe 10ml Luer Lock 3 Piece Concentric Clear Sterile"
+   ],
+   "reasoning": "All four lines are general hypodermic syringes (3/5/10ml Luer lock); npc observations for this eClass confirm vascular:gen, matching the established pattern for general syringes/needles.",
+   "addedOn": "07/09/2026"
+  },
+  "FNK": {
+   "cat": "vascular:gen",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Safety Needle Vascular Access 22G x 15mm Huber Type with 25cm by 0.9mm Bore Polyurethane Extension and Clamp for Sitimplant"
+   ],
+   "reasoning": "Huber-type safety needle for implanted port (Sitimplant) vascular access; same general vascular-access-device family as FNL (mapped vascular:gen).",
+   "addedOn": "07/09/2026"
+  },
+  "FNL": {
+   "cat": "vascular:gen",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Safety Hypodermic Needle 22G Black x 38mm (1.5 inch)"
+   ],
+   "reasoning": "Safety hypodermic needle; npc observation for this eClass confirms vascular:gen with a directly comparable needle product.",
+   "addedOn": "07/09/2026"
+  },
+  "FNS": {
+   "cat": "anaesthesia:reg",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 10,
+   "examples": [
+    "NRFit Spinal Needle 27G x 119mm (4.6875 inch) Pencil Point Sterile",
+    "Spinal Needle Luer 18G Pink x 152mm (6 inch) Quincke Long Length Intradiscal therapy Sterile",
+    "NRFit Spinal Needle 25G x 102mm (4 inch) Pencil Point Sterile",
+    "NRFit Spinal Needle 22G x 127mm (5 inch) Quincke tip Sterile",
+    "NRFit Spinal Needle 25G x 119mm (4.685 inch) Quincke tip Sterile"
+   ],
+   "reasoning": "All ten lines are spinal needles (NRFit, various gauges) for regional/spinal anaesthesia; npc observation confirms anaesthesia:reg.",
+   "addedOn": "07/09/2026"
+  },
+  "FNY": {
+   "cat": "vascular:conn",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 4,
+   "examples": [
+    "Needlefree extension set Bi-fuse extension set minibore tubing 2 maxzero connectors 2 check valves 2 slide clamps spin male luer lock.18 cm",
+    "Needlefree extension set 7 inch Non DEHP Minibore Extension Set with MicroClave",
+    "Needlefree connector / valve Neutron connector",
+    "Needlefree extension set Y connector 3 way 2 x SmartSite valves F/luer 3 x S/C 0.2micron (+ve) filter L/22cm P/0.9ml Amber"
+   ],
+   "reasoning": "All four lines are needle-free IV extension sets/connectors/valves; npc observations for this eClass are strongest for vascular:conn.",
+   "addedOn": "07/09/2026"
+  },
+  "FPH": {
+   "cat": "womens:gyn",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 7,
+   "examples": [
+    "Vacuum assisted device With traction force indicator",
+    "Amniocentesis needle 21g With 15.1cm needle guide 18g For choroionic villus sampling - 20cm sampling needle  echogenic tip and marker",
+    "Vaginal Speculum Cusco Small Single use Plastic Nut and runner Unbreakable Sterile 100mm x 32mm",
+    "Vaginal Speculum Cusco Extra Small Single use Plastic Nut and runner Unbreakable Sterile 87mm x 20mm",
+    "Vaginal Speculum Cusco single use plastic nut and runner unbreakable sterile medium long blade 140mm x 35mm"
+   ],
+   "reasoning": "All seven lines are obstetric/gynaecological instruments (vacuum-assisted delivery device, amniocentesis needle, vaginal specula); npc observation confirms womens:gyn as the umbrella fit.",
+   "addedOn": "07/09/2026"
+  },
+  "FPK": {
+   "cat": "theatres:drain",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Gravity/passive (Robinson-type) complete system 20fg drain with 350ml bag"
+   ],
+   "reasoning": "Robinson-type gravity drainage bag system — a surgical/wound drainage consumable.",
+   "addedOn": "07/09/2026"
+  },
+  "FQD": {
+   "cat": "cardiology:equip",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 3,
+   "examples": [
+    "Other Accessories Mineral oil",
+    "Other Accessories 7211EQF acc intrdcr valv 5pac fr11",
+    "Other Accessories 2211EQF acc intrdcr valv 5pac fr8"
+   ],
+   "reasoning": "Boston Scientific cardiac-device accessories (introducer valve, mineral oil for lead insertion); npc observation for this eClass supports cardiology:equip.",
+   "addedOn": "07/09/2026"
+  },
+  "FQE": {
+   "cat": "cardiology:equip",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Catheter 1531EQF attain command"
+   ],
+   "reasoning": "Attain Command catheter is a Medtronic cardiac resynchronisation therapy lead-delivery catheter — a cardiac implant accessory.",
+   "addedOn": "07/09/2026"
+  },
+  "FQH": {
+   "cat": "audiology:acc",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 3,
+   "examples": [
+    "Audio Implants Accessories and Consumables M T-Mic large",
+    "Audio Implants Accessories and Consumables M T-Mic small",
+    "Audio Implants Accessories and Consumables M T-Mic medium"
+   ],
+   "reasoning": "All three lines are T-Mic microphone accessories/consumables for a cochlear implant sound processor — external accessories rather than the implant itself, so audiology:acc fits better than the auto-candidate audiology:impl; observations for this eClass are evenly split between the two.",
+   "addedOn": "07/09/2026"
+  },
+  "FRN": {
+   "cat": "vascsurg:occl",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Coil - Detachable (IR) f-idc vortx diamond 2/3mm x 2.3cm",
+    "Coil - Non-Detachable (IR) 2mm/5mm (bx/5)"
+   ],
+   "reasoning": "Detachable and non-detachable embolisation coils (interventional radiology) are vessel-occlusion devices.",
+   "addedOn": "07/09/2026"
+  },
+  "FRS": {
+   "cat": "gastro:stent",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 5,
+   "examples": [
+    "Stents - Specialist - EUS eus ce 8mmx8mm",
+    "Stents - Specialist - EUS eus ce 6mmx8mm",
+    "Plastic Stents - Pancreatic advanix panc strt 3frx2cm",
+    "Stents - Specialist - EUS CE 20mmx10mm",
+    "Plastic Stents - Biliary preloaded 7fr naviflex panc rx"
+   ],
+   "reasoning": "All five lines are biliary/pancreatic EUS and plastic stents; npc observation confirms gastro:stent.",
+   "addedOn": "07/09/2026"
+  },
+  "FRZ": {
+   "cat": "cardiology:equip",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Pacemaker Lead Fineline II Sterox EZ Silicone Straight Active 58cm",
+    "Other Accessories Mineral Oil"
+   ],
+   "reasoning": "Pacemaker lead (Fineline II) plus a generic accessory for the same device family; npc observation confirms cardiology:equip.",
+   "addedOn": "07/09/2026"
+  },
+  "FSG": {
+   "cat": "mis:trocar",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Trocar Endo close"
+   ],
+   "reasoning": "Single line is an 'Endo Close' trocar-site fascial closure device — the vocabulary's explicit mis:trocar subtype is a closer fit than the auto-candidate mis:clips.",
+   "addedOn": "07/09/2026"
+  },
+  "FSH": {
+   "cat": "mis:energy",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 4,
+   "examples": [
+    "Energy accessories TB-0520FCS Handpiece Front-actulated 5mm wide 20mm length",
+    "Energy accessories tb 0545fcs thunderbeat",
+    "Energy accessories 5mm x 35cm Front Acuated Grip Advanced Energy Handpiece",
+    "Hook Endo Hiq+ a6282 hf electrode hook"
+   ],
+   "reasoning": "All four suspended lines are energy-device handpiece/electrode accessories (Thunderbeat ultrasonic/bipolar energy platform) — the actual product descriptions are unambiguously energy devices, not staplers, even though this eClass's broader npc history leans toward mis:staple.",
+   "addedOn": "07/09/2026"
+  },
+  "FTC": {
+   "cat": "infection:vinyl",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 5,
+   "examples": [
+    "Examination Gloves Vinyl Pigmentised Powder Free Non Sterile Singles Large",
+    "Examination Gloves Vinyl Powder Free Non Sterile Singles Large",
+    "Examination Gloves Vinyl Pigmentised Powder Free Non Sterile Singles Small",
+    "Examination Gloves Vinyl Pigmentised Powder Free Non Sterile Singles Extra Large",
+    "Examination Gloves Vinyl Pigmentised Powder Free Non Sterile Singles Medium"
+   ],
+   "reasoning": "All five lines are vinyl examination gloves (Unicare); npc observation confirms infection:vinyl.",
+   "addedOn": "07/09/2026"
+  },
+  "FVC": {
+   "cat": "womens:pelv",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Pessary Ring Flexible Vinyl 71mm Long term See IFU"
+   ],
+   "reasoning": "Vaginal pessary ring for pelvic organ prolapse — the vocabulary's pelvic-floor subtype (womens:pelv) is more precise than general gynae.",
+   "addedOn": "07/09/2026"
+  },
+  "FVD": {
+   "cat": "vascular:cvc",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Central Venous Catheter Accessory Introducer 9F x 3.9mm catheter introducer with haemostatic valve"
+   ],
+   "reasoning": "Central venous catheter introducer accessory — unambiguous CVC-family consumable.",
+   "addedOn": "07/09/2026"
+  },
+  "FVN": {
+   "cat": "vascular:pivc",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 7,
+   "examples": [
+    "Safety Cannulation Pack Pink 20G Introcan safety 3 aseptic technique cannulation pack sepp 1633",
+    "Safety Cannulation Pack Blue 22G Leicester",
+    "Peripheral Intravenous Cannula Non-winged Yellow 24G x 19mm Paediatric PUR",
+    "Safety Cannulation Pack Pink 20G straight with wings and double needlefree ANTT Pack",
+    "Peripheral Intravenous Cannula Non-winged Pink 20G x 32mm FEP"
+   ],
+   "reasoning": "All seven lines are peripheral IV cannulae or cannulation packs; npc observations for this eClass are strongest for vascular:pivc.",
+   "addedOn": "07/09/2026"
+  },
+  "FWA": {
+   "cat": "renal:hd",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "High Flux Dialysers Heparin grafted membrane 2.2m2 surface area",
+    "High Flux Dialysers Heparin grafted membrane 1.6m2 surface area"
+   ],
+   "reasoning": "Both lines are high-flux haemodialysers; npc observation confirms renal:hd.",
+   "addedOn": "07/09/2026"
+  },
+  "FWC": {
+   "cat": "renal:hd",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Acid Concentrates RENALYTE A231 6LSTACK"
+   ],
+   "reasoning": "Fresenius Renalyte acid concentrate — a haemodialysis consumable, same family as FWG.",
+   "addedOn": "07/09/2026"
+  },
+  "FWF": {
+   "cat": "renal:water",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Associated Products SALT TABLETS 10KG BAG AXAL"
+   ],
+   "reasoning": "Salt tablets used to regenerate the water-softener in a dialysis water-treatment system — this is a water-treatment consumable (renal:water), not a dialyser/HD consumable, despite the auto-candidate renal:hd.",
+   "addedOn": "07/09/2026"
+  },
+  "FWG": {
+   "cat": "renal:hd",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Acid Concentrates A333 renalyte acid concentrate x 6ltr 35 dilution",
+    "Acid Concentrates A453 renalyte acid concentrate x 6ltr 35 dilution"
+   ],
+   "reasoning": "Both lines are Fresenius Renalyte acid concentrate for haemodialysis, same as FWC.",
+   "addedOn": "07/09/2026"
+  },
+  "FXK": {
+   "cat": "theatres:theatre",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 18,
+   "examples": [
+    "Suture absorbable W9762 45cm vicryl absorbable coated braided undyed 4/0 11mm 3/8 circle spatula double needle",
+    "Suture absorbable W9467 90cm vicryl absorbable coated braided violet 0 40mm 1/2 circle tapercut needle",
+    "Suture non absorbable W791 100cm mersilk non-absorbable coated braided black 2/0 90mm 3/8 circle conventional cutting needle",
+    "Suture non absorbable W883 45cm ethibond excel non-absorbable coated braided white 5/0 8mm 1/2 circle spatula double needle",
+    "Suture non absorbable W8840 90cm prolene non-absorbable monofilament blue 4/0 20mm 1/2 circle cc double needle"
+   ],
+   "reasoning": "All 18 lines are surgical sutures (absorbable and non-absorbable, multiple brands); npc observation confirms theatres:theatre as the Hub's general theatre-consumable catch-all for sutures.",
+   "addedOn": "07/09/2026"
+  },
+  "FXT": {
+   "cat": "mis:staple",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Stapler skin disposable single patient use 35/wide",
+    "Stapler Linear Reload Linear Cutter 55mm for NTLC55"
+   ],
+   "reasoning": "Both lines are surgical staplers (skin stapler and a laparoscopic linear-cutter reload) — mis:staple is the literal fit over the auto-candidate mis:clips.",
+   "addedOn": "07/09/2026"
+  },
+  "FXU": {
+   "cat": "respiratory:diag",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Peak Flow Meter mouthpiece Adult single patient expiratory 1 way valve cardboard/plastic mouthpiece BOX OF 200 NOT INDIVIDUALLY WRAPPED non returnable"
+   ],
+   "reasoning": "Peak flow meter mouthpiece is a respiratory diagnostic accessory, not an aerosol-therapy item despite the auto-candidate respiratory:aero.",
+   "addedOn": "07/09/2026"
+  },
+  "GFA": {
+   "cat": "audiology:acc",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 6,
+   "examples": [
+    "Hearing Aid Accessory Battery door Nathos Nova M-M Sand Beige",
+    "Hearing Aid Accessory Battery door Bolero M-M Sand Beige",
+    "Hearing Aid Accessory Plug-in cable 312 0.5m/L",
+    "Hearing Aid Accessory Hook HE11 680 Transparent",
+    "Hearing Aid Accessory Plug-in cable 312 0.5m/R"
+   ],
+   "reasoning": "All 6 suspended lines are Phonak hearing-aid spare/accessory parts (battery doors, plug-in cables, hooks) — this is accessories & connectivity, not the diagnostic-equipment candidate the auto-mapper suggested from only 2 thin observations.",
+   "addedOn": "07/09/2026"
+  },
+  "GFB": {
+   "cat": "audiology:acc",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 2,
+   "examples": [
+    "Hearing Aid Accessories Battery Door Sky V-RIC Beige",
+    "Hearing Aid Accessories Tamperproof battery door velvet black"
+   ],
+   "reasoning": "Both suspended lines are Phonak hearing-aid battery doors — spare accessory parts, matching the npc-eclass observations for this code (mostly audiology:acc entries: hooks, wireless CROS, ear tips).",
+   "addedOn": "07/09/2026"
+  },
+  "GFC": {
+   "cat": "audiology:hear",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 8,
+   "examples": [
+    "Hearing Aid Paediatric Sky M70-SP Majesty Purple",
+    "Hearing Aid Paediatric Sky M70-SP Sand Beige",
+    "Hearing Aid Paediatric Sky M70-M Champagne",
+    "Hearing Aid Paediatric Sky M70-PR Blue Ocean"
+   ],
+   "reasoning": "All 8 lines are complete paediatric Phonak Sky hearing aids (worn BTE devices in different power/colour variants), not accessories — this is the worn-hearing-aid category, distinct from GFA/GFB's accessory parts under the same itemclass.",
+   "addedOn": "07/09/2026"
+  },
+  "GFE": {
+   "cat": "audiology:diag",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Auditory Brain Response Electrodes Ambu EL"
+   ],
+   "reasoning": "Single-line evidence: an electrode consumable used specifically for auditory brainstem response (ABR) testing, a diagnostic audiology procedure — closest fit is diagnostic equipment/consumables, no diabetes/general-electrode category exists in the vocabulary that fits better.",
+   "addedOn": "07/09/2026"
+  },
+  "GLB": {
+   "cat": "orthotics:spine",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Abdominal Binder Hernia Support Universal Rib Belt - 20cm - Female"
+   ],
+   "reasoning": "Single-line evidence, no npc observations: an abdominal/rib binder is a trunk support, which fits 'Spinal, cervical & trunk orthoses' (orthotics:spine) more precisely than the general limb-support orthotics:brace category.",
+   "addedOn": "07/09/2026"
+  },
+  "GMB": {
+   "cat": "orthotics:upper",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 4,
+   "examples": [
+    "Supports for wrist hand and digits Procool Wrist/Thumb Support - Large Right",
+    "Thumb Spica Procool Wrist/Thumb Support - Large Left",
+    "Thumb Spica Procool Wrist/Thumb Support - Medium Right",
+    "Thumb Spica Procool Wrist/Thumb Support - XLarge Left"
+   ],
+   "reasoning": "All 4 suspended lines are wrist/thumb splints (thumb spica), which is upper-limb bracing (orthotics:upper) — overriding the auto-mapper's weak-evidence candidate of orthotics:brace (knee/calf/general limb), which does not fit a wrist/thumb product.",
+   "addedOn": "07/09/2026"
+  },
+  "IVA": {
+   "cat": "ophthalmology:cons",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Knife - keratome 3.2MM Sb S"
+   ],
+   "reasoning": "Single-line evidence, but the supplier is Alcon Eye Care and a keratome is a disposable blade used specifically to create corneal incisions in cataract/ophthalmic surgery — a surgical consumable specific to ophthalmology, not a general surgical knife.",
+   "addedOn": "07/09/2026"
+  },
+  "KBC": {
+   "cat": "pathology:consum",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Specimen Container 30ml Polypropylene Red Screw Cap Aseptic Printed Label"
+   ],
+   "reasoning": "A Sterilin specimen container is a laboratory consumable; both npc-eclass observations for this code (specimen collection kit, PCR tube strips) also land on pathology:consum.",
+   "addedOn": "07/09/2026"
+  },
+  "KBD": {
+   "cat": "bloodcoll:tube",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 7,
+   "examples": [
+    "Venous Tube Serum Gel PREMIUM 3.5ml 13 x 75mm Gold screw cap Gold ring Sterile",
+    "Venous Tube Serum Vacuette 4ml Serum Gel 13 x 75mm White Yellow Screw Cap",
+    "Venous Tube sodium citrate for coagulation Plastic 3ml blue 66 x 11mm screw cap",
+    "Venous Tube Serum Vacuette 5ml Serum Gel 13 x 100mm Red Yellow Screw Cap",
+    "Venous Tube Serum Vacuette 5ml Serum Gel 13 x 100mm Gold Gold Screw Cap"
+   ],
+   "reasoning": "6 of the 7 suspended lines are venous blood collection tubes (Vacuette/S-Monovette), a clean fit for bloodcoll:tube; the one outlier (a Copan transport swab) is a minority case not reflected in the category assignment.",
+   "addedOn": "07/09/2026"
+  },
+  "KCA": {
+   "cat": "diabetes:strip",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Blood Glucose Test Strips For use with Nexus and Go Meter"
+   ],
+   "reasoning": "The single suspended line under this code is explicitly a blood glucose test strip (GlucoRx) — a direct match to diabetes:strip, even though the eClass code's wider npc observations span broader POCT/pathology use.",
+   "addedOn": "07/09/2026"
+  },
+  "KFF": {
+   "cat": "bloodcoll:set",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Blood Collection Set Safety with Holder 21G green needle 18cm tube with safety lock luer adaptor"
+   ],
+   "reasoning": "A Vacutainer winged/butterfly safety collection set with needle, holder and luer adaptor is a textbook match for bloodcoll:set ('Winged / safety collection sets'), overriding the weak-evidence candidate of bloodcoll:tube (this product is a needle/holder set, not a tube).",
+   "addedOn": "07/09/2026"
+  },
+  "MTF": {
+   "cat": "rehab:hygiene",
+   "confidence": "medium",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Skin cleanser 1 Litre pump dispenser wash cream No rinse"
+   ],
+   "reasoning": "Single-line evidence, no npc observations: a TENA no-rinse wash cream is a personal hygiene product for patient care, fitting rehab:hygiene.",
+   "addedOn": "07/09/2026"
+  },
+  "VEB": {
+   "cat": "theatres:theatre",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 14,
+   "examples": [
+    "Ultrasound probe cover 13 x 244cm sterile",
+    "Drape incise Impregnated incise film 40x40cm iodine adh 34x40cm",
+    "Drape Table / Trolley 100 x 140cm trolley cover reinforced area 100 x 66cm",
+    "Light Handle Cover 150 x 100mm standard handle single pack",
+    "Banded Bag / Bonnet Shaped banded bag 91 x 76cm"
+   ],
+   "reasoning": "All 14 suspended lines are theatre drapes, incise films, probe covers, light-handle covers and fluid collection pouches — general theatre consumables (theatres:theatre); the auto-mapper's candidate (womens:mat) rested on a single outlier observation (one maternity drape) that does not represent this code's real product mix.",
+   "addedOn": "07/09/2026"
+  },
+  "VLB": {
+   "cat": "theatres:theatre",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 4,
+   "examples": [
+    "Drape Isolation 328 x 252 incise area 70 x 32 fluid collection pouch with exit port2 x instrument pouches2 x tube and cord organisers",
+    "Drape Bag / Pouch Instrument pouch long 24 x 46 2 adhesive strips3 compartment",
+    "Drape General Adhesive Absorbent side drape with tape 102x102cm",
+    "Drape General Adhesive Head drape 180x250cm"
+   ],
+   "reasoning": "All 4 lines are surgical isolation/side/head drapes and instrument pouches — general theatre consumables, same category as VEB with no conflicting evidence (no npc observations exist for this code).",
+   "addedOn": "07/09/2026"
+  },
+  "VTU": {
+   "cat": "handling:slide",
+   "confidence": "high",
+   "source": "inferred",
+   "basis": "NHS Supply Chain descriptions of the suspended lines under this code",
+   "suspendedLines": 1,
+   "examples": [
+    "Slide Sheet Flat Single Patient Use With handles 100cm x 100cm"
+   ],
+   "reasoning": "A single-patient-use slide sheet with handles is a direct match to handling:slide; the 2 npc-eclass observations for this code (tubular slide sheets) confirm the same category.",
+   "addedOn": "07/09/2026"
   }
  }
 }
