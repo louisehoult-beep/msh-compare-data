@@ -17,7 +17,7 @@ uncrawlable (robots.txt, no product API, or a catalogue that would
 misrepresent the range), with the reason and date recorded in
 `data/supplier-products.json`; they are not counted as work and must not
 be re-crawled from this table, or the recorded judgement is overwritten.
-**2 framework(s) have nothing left by a permitted route** —
+**3 framework(s) have nothing left by a permitted route** —
 low coverage there means exhausted, not neglected.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
@@ -66,7 +66,7 @@ low coverage there means exhausted, not neglected.
 | Prosthetic Components and Associated Products | orthotics | 12 | 2 | 16.7% | 7 | 3 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 5 | 0 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 1 | 12.5% | 0 | 3 | STARTED · BLOCKED |
-| Polymer Aprons | infection | 8 | 1 | 12.5% | 2 | 5 | STARTED |
+| Polymer Aprons | infection | 8 | 1 | 12.5% | 0 | 7 | STARTED · BLOCKED |
 | Polymer Products | infection | 5 | 2 | 40.0% | 3 | 0 | STARTED |
 | Brachytherapy Seeds and Associated Accessories | oncology | 2 | 1 | 50.0% | 1 | 0 | STARTED |
 | Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services | ent | 7 | 0 | 0.0% | 3 | 3 | NOT STARTED |
@@ -107,7 +107,7 @@ low coverage there means exhausted, not neglected.
 | External Breast Prosthesis and Chest Support | — | 9 | 0 | 0.0% | 3 | 4 | UNMAPPED |
 | Perfusion Devices, Consumables and Associated Equipment | — | 9 | 0 | 0.0% | 3 | 1 | UNMAPPED |
 | Medical Hollowware | — | 8 | 0 | 0.0% | 4 | 2 | UNMAPPED |
-| Pressure Infusers and Associated Products | — | 8 | 0 | 0.0% | 5 | 1 | UNMAPPED |
+| Pressure Infusers and Associated Products | — | 8 | 0 | 0.0% | 4 | 2 | UNMAPPED |
 | Tray Wrap and Sterilisation Equipment | — | 8 | 0 | 0.0% | 5 | 0 | UNMAPPED |
 | Magnetic Resonance Imaging Scanners and Associated Option and Related Services | — | 7 | 0 | 0.0% | 0 | 3 | UNMAPPED |
 | Mammography Imaging Systems and Associated Options and Related Services | — | 7 | 0 | 0.0% | 1 | 3 | UNMAPPED |
