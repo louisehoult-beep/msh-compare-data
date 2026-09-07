@@ -70,6 +70,7 @@ REFS = {
     "coverage-ledger.json":             "ETH-D1122007A",
     "company-press.json":      "ETH-D5A18D6E2",
     "company-logos.json":      "ETH-D6F85FA5F",
+    "eclass-category-map.json":         "ETH-D248D746A",
     "company-financials.json": "ETH-DCC5A9B31",
     "compare-issues.json":     "ETH-D6991A2E7",
     "compare-suppliers.json":  "ETH-D21869855",
@@ -100,6 +101,10 @@ REFS = {
     "trust-pressures.json":    "ETH-DAE43C750",
     "nhssc-procurement-calendar.json": "ETH-DBC575194",
     "framework-date-conflicts.json":   "ETH-D2368919F",
+    # Added 07/09/2026 with the eClass -> category bridge and the single
+    # product-type taxonomy. Minted with `stamp_notice.py --mint`.
+    "npc-eclass.json":                 "ETH-D0981028F",
+    "product-types.json":              "ETH-DFC98A3A8",
 }
 
 
@@ -236,5 +241,47 @@ def main():
     return 1 if skipped else 0
 
 
+def mint(filenames):
+    """Print the marker ref for one or more NEW data files, to be pasted into REFS.
+
+    ADDED 07/09/2026. Until now there was no supported way to bring a new
+    data/*.json file into this scheme: `check_notice()` in verify.py fails the
+    publish for any unreferenced file, REFS holds only hash OUTPUTS, and the
+    minting scheme lived solely in "NDA Pack/decode-marker.py" as a side effect
+    of the DECODE path. So adding a data file meant either hand-porting the
+    hash scheme into a throwaway script or reading the salt inline — and a
+    session that reads the salt has disclosed it, which is exactly what moving
+    it out of the workspace on 06/08/2026 was meant to stop.
+
+    This reads the salt the same way decode-marker.py does, uses it, and prints
+    ONLY the hash output. The salt itself is never printed, logged or returned.
+    Same scheme, same "d" kind as every existing data ref, so refs minted here
+    decode with the existing tool and nothing about the format changes.
+    """
+    import hashlib
+    import os
+    salt = os.environ.get("ETH_MARKER_SALT")
+    if salt:
+        salt = salt.strip()
+    else:
+        f = pathlib.Path(os.path.expanduser("~/.eth-marker-salt"))
+        if not f.is_file():
+            print("No salt. Set ETH_MARKER_SALT, or restore ~/.eth-marker-salt from "
+                  "the password manager. Without it a ref cannot be minted.")
+            return 1
+        salt = f.read_text().strip()
+    for name in filenames:
+        name = pathlib.Path(name).name
+        ref = "ETH-D" + hashlib.sha256((salt + "d" + name).encode()).hexdigest()[:8].upper()
+        print('    "%s": "%s",' % (name, ref))
+    print("\nPaste the line(s) above into REFS in this file, then run "
+          "`python3 scripts/stamp_notice.py` to stamp, and `python3 verify.py`.")
+    return 0
+
+
 if __name__ == "__main__":
+    # `--mint FILE...` prints refs for new data files; everything else is the
+    # existing stamp/check behaviour, untouched.
+    if len(sys.argv) > 2 and sys.argv[1] == "--mint":
+        sys.exit(mint(sys.argv[2:]))
     sys.exit(main())

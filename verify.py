@@ -615,6 +615,101 @@ def check_shrink():
 
 
 # --------------------------------------------------------------------------
+# 6b. PRODUCT TYPES — data/product-types.json is the ONE product-type taxonomy
+# --------------------------------------------------------------------------
+# Added 07/09/2026 (Stage 4 of the data-architecture build). The taxonomy that
+# decides whether two products are "the same kind of thing" — used both by
+# cloud-pipeline/sdt_match.py's Supply Disruption Tracker alternatives (Python)
+# and by app/comparison.js's Compare tool (browser, served straight to members)
+# — was implemented TWICE and had silently drifted: sdt_match.py was rewritten
+# 04/09/2026 (167 entries, +20 categories: theatre caps, PPE, continence,
+# nutrition), but comparison.js still carried its own literal copy of the
+# PRE-rewrite 147-entry list, word for word. A member comparing two continence
+# or theatre-cap products on the live Compare tool got no match where the
+# Tracker would — live functional drift with no gate to catch it.
+#
+# data/product-types.json is now the single source of truth both sides read.
+# This check enforces two things: the file itself never silently shrinks
+# against what is committed (the exact failure mode above), and comparison.js
+# is still actually FETCHING it rather than reverting to its own separately-
+# maintained literal — which is how the original drift happened in the first
+# place. A baked-in fallback literal is fine (it is what keeps the tool alive
+# if the fetch itself fails) but it must stay byte-for-byte in step with the
+# authoritative file; if it has drifted, someone is hand-maintaining it again
+# instead of editing data/product-types.json, and that is the bug recurring.
+def check_product_types(pt):
+    if not pt:
+        FAIL("product-types", "data/product-types.json is missing. comparison.js's fetch of it "
+                              "has nothing to load and falls back to its own baked-in TYPES "
+                              "literal — the exact drift this file exists to close.")
+        return
+    types = pt.get("types")
+    if not isinstance(types, list) or not types:
+        FAIL("product-types", "data/product-types.json has no non-empty `types` array.")
+        types = []
+    else:
+        if len(set(types)) != len(types):
+            dupes = sorted({t for t in types if types.count(t) > 1})
+            FAIL("product-types", "data/product-types.json's `types` carries duplicate entries: "
+                                  "%s" % ", ".join(dupes[:8]))
+    if not isinstance(pt.get("generic_type_override"), dict) or not pt.get("generic_type_override"):
+        FAIL("product-types", "data/product-types.json has no non-empty `generic_type_override` map "
+                              "— sdt_match.py's GENERIC_TYPE_OVERRIDE has no single source without it.")
+    if not isinstance(pt.get("cannula_disqualifiers"), list) or not pt.get("cannula_disqualifiers"):
+        FAIL("product-types", "data/product-types.json has no non-empty `cannula_disqualifiers` list.")
+    if not isinstance(pt.get("_meta"), dict) or not pt["_meta"].get("warning"):
+        FAIL("product-types", "data/product-types.json has no `_meta.warning` — this file changes "
+                              "live member-facing matching on both the Tracker and the Compare "
+                              "tool the moment it's edited, and that has to be stated inline, not "
+                              "remembered.")
+
+    old = committed("data/product-types.json")
+    if old and types:
+        old_types = set(old.get("types") or [])
+        lost = old_types - set(types)
+        if lost:
+            FAIL("product-types", "data/product-types.json lost %d entries versus the committed "
+                                  "version: %s. Removing a product type silently loses matches "
+                                  "members were getting before — say why in the commit message "
+                                  "or restore them." % (len(lost), ", ".join(sorted(lost)[:10])))
+
+    try:
+        js_src = open(os.path.join("app", "comparison.js")).read()
+    except Exception as exc:
+        FAIL("product-types", "could not read app/comparison.js (%s) — cannot check it still "
+                              "fetches data/product-types.json instead of carrying its own copy "
+                              "of the taxonomy." % exc)
+        return
+    src = _js_scan(js_src)[0]
+    if "data/product-types.json" not in src:
+        FAIL("product-types", "app/comparison.js no longer fetches data/product-types.json. The "
+                              "tool is back to a hardcoded, separately-maintained TYPES list with "
+                              "no way to stay in step with cloud-pipeline/sdt_match.py — this is "
+                              "the exact drift data/product-types.json was built to close.")
+        return
+    # The baked-in fallback is expected (it is what keeps the tool alive if the
+    # fetch fails) — but if it has drifted from the authoritative file, someone
+    # is maintaining a separate copy of the taxonomy by hand again.
+    m = re.search(r"var\s+TYPES\s*=\s*\[(.*?)\]\s*;", src)
+    if m and types:
+        js_types = re.findall(r"'((?:[^'\\]|\\.)*)'", m.group(1))
+        if js_types and set(js_types) != set(types):
+            missing = set(types) - set(js_types)
+            extra = set(js_types) - set(types)
+            detail = []
+            if missing:
+                detail.append("missing from the JS fallback: %s" % ", ".join(sorted(missing)[:8]))
+            if extra:
+                detail.append("only in the JS fallback, not in the authoritative file: %s"
+                              % ", ".join(sorted(extra)[:8]))
+            FAIL("product-types", "app/comparison.js's baked-in TYPES fallback has drifted from "
+                                  "data/product-types.json (%s). Edit data/product-types.json and "
+                                  "keep the JS fallback literal a straight copy of its `types` "
+                                  "array — do not maintain the fallback separately."
+                                  % "; ".join(detail))
+
+
+# --------------------------------------------------------------------------
 # 7. COMPARE FEED — the Compare tab's live issues
 # --------------------------------------------------------------------------
 # Added 30/07/2026. Until today this gate did not look at compare-issues.json at
@@ -5364,6 +5459,7 @@ def main():
     check_privacy(n, retention, offline)
     check_trust_pressures(load("trust-pressures.json"), trust_codes)
     check_js()
+    check_product_types(load("product-types.json"))
 
     suppress = set()
     sup = load("suppressed-notices.json") or {}

@@ -37,9 +37,26 @@ name: Differentiator rebuild (one product record per source)
 # The category map it reads IS hand-edited, and that is correct: the map is the
 # human judgement, this job is the arithmetic.
 
+# ⚠️ WHY THREE TIMES A DAY, ADDED 07/09/2026. The Supply Disruption Tracker
+# (page 3641) republishes at 06:00, 12:00 and 18:00 UTC via cloud-pipeline's
+# refresh-sdt.yml, and it derives its alternatives from data/differentiator.json.
+# Running this once a day meant two of those three publishes read a file that
+# was already up to 12 hours old, and the page presented itself as refreshed
+# three times daily regardless. The 05:00 run is unchanged and still the one
+# that clears every crawl; 11:00 and 17:00 are added purely so each Tracker
+# publish reads a Differentiator derived from the same day's inputs.
+#
+# This does NOT make anything crawl more often. The source crawls keep their own
+# cadence (supplier-capture daily 02:20, supplier-product-detail Sundays 02:40,
+# nhssc-cache Sundays 04:30) — crawling 157 supplier websites three times a day
+# would be a politeness problem for near-zero new data, since their catalogues
+# change weekly at most. What changes here is only how often the DERIVATION runs
+# over whatever those crawls last produced, which costs seconds and hits nobody.
 on:
   schedule:
     - cron: "0 5 * * *"      # daily 05:00 UTC, after every writer that feeds it
+    - cron: "0 11 * * *"     # ahead of the 12:00 UTC Supply Disruption Tracker publish
+    - cron: "0 17 * * *"     # ahead of the 18:00 UTC Supply Disruption Tracker publish
   workflow_dispatch:
 
 # Same reason as every other writer in this repo: they share one branch, and on

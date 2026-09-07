@@ -37,12 +37,30 @@
      where it is kept clearly separate. */
   var PDETAILURL = BASE + 'data/supplier-product-detail.json' + CB;
   var PDETAIL = {};
+  /* data/product-types.json — the single source of truth for the product-type
+     taxonomy, shared with cloud-pipeline/sdt_match.py (Python, Supply Disruption
+     Tracker matching). Until 07/09/2026 this tool carried its own literal copy,
+     which was never updated when sdt_match.py was rewritten on 04/09/2026 (20
+     categories added — theatre caps, PPE, continence, nutrition — see that
+     file's history), so a member comparing e.g. two continence products here
+     got no match where the Tracker would. Fetched at runtime like every other
+     data file below; TYPES/GENERIC_TYPE_OVERRIDE/CANNULA_DISQUALIFIERS keep a
+     baked-in fallback (the values below, correct as of 07/09/2026) so the tool
+     still works — on the last-known-good taxonomy — if the fetch fails. */
+  var PTYPESURL = BASE + 'data/product-types.json' + CB;
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
   function nk(s){ return String(s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
 
-  var TYPES = ['antisepsis','antiseptic','chlorhexidine','skin prep','skin disinfect','disinfectant','applicator','swabstick','swab','tourniquet','blood culture','cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','tape','plaster','npwt','negative pressure','wound','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','tracheostomy','tracheal','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','lancet','connector','stopcock','extension set','giving set','iv set','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct scan','x-ray','mammography','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','warming','securement','ostomy','urostomy','stoma','nephrostomy','foley','feeding','enteral','feeding tube','peg tube','slide sheet','glucose','sensor','test strip','electrode','scalpel','blade','forceps','retractor','trocar','clip','clamp','specimen','drainage','chest drain','suction','mask','circuit','cpap','oxygen','nebuliser','filter','lubricant'];
+  // Baked-in fallback only — overwritten from data/product-types.json once that
+  // fetch resolves (see the Promise.all below). Keep this in step with the JSON
+  // file's own `types` array; verify.py's check_product_types() fails the
+  // publish if this literal is ever restored as the tool's SOLE source again.
+  var TYPES = ['antisepsis','antiseptic','chlorhexidine','skin prep','skin disinfect','disinfectant','applicator','swabstick','swab','tourniquet','blood culture','cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','tape','plaster','npwt','negative pressure','wound','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','tracheostomy','tracheal','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','lancet','connector','stopcock','extension set','giving set','iv set','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct scan','x-ray','mammography','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','warming','securement','ostomy','urostomy','stoma','nephrostomy','foley','feeding','enteral','feeding tube','peg tube','slide sheet','glucose','sensor','test strip','electrode','scalpel','blade','forceps','retractor','trocar','clip','clamp','specimen','drainage','chest drain','suction','mask','circuit','cpap','oxygen','nebuliser','filter','lubricant','bouffant','theatre cap','cap theatre','surgical cap','shoe cover','overshoe','coverall','apron','visor','face shield','respirator','scrub','incontinence pad','underpad','commode','bedpan','urinal','nutritional supplement','enteral feed','oral nutrition'];
+  // Also baked-in fallbacks for the same reason — see PTYPESURL note above.
+  var GENERIC_TYPE_OVERRIDE = { catheter: 'cannula', wound: 'dressing', foam: 'dressing', stoma: 'ostomy', iol: 'intraocular', sealant: 'haemostat' };
+  var CANNULA_DISQUALIFIERS = ['picc', 'central venous', 'central line'];
   var KEYPOINTS = {
     'BD — Becton, Dickinson': { 'nexiva': 'Closed IV system — fewer blood exposures/disconnections vs an open cannula', 'chloraprep': 'Licensed medicinal product (UK marketing authorisation) — 2% CHG / 70% IPA sterile applicator, indicated for skin disinfection before invasive procedures' },
     'GAMA Healthcare': { 'hexi-prep': 'Licensed medicine (PL 40867/0002) — sterile 2% CHG / 70% IPA pad; its indication covers invasive procedures NOT requiring a clean-air environment (vascular access focus, per GAMA\u2019s prescribing information)' },
@@ -68,8 +86,20 @@
     fetch(SEED).then(function(r){return r.json();}).catch(function(){return {suppliers:[]};}),
     fetch(NHSSC).then(function(r){return r.json();}).catch(function(){return {products:{}};}),
     fetch(RANGEURL).then(function(r){return r.json();}).catch(function(){return {suppliers:{}};}),
-    fetch(PDETAILURL).then(function(r){return r.json();}).catch(function(){return {products:{}};})
-  ]).then(function(res){ RANGE = (res[4] && res[4].suppliers) || {}; PDETAIL = (res[5] && res[5].products) || {}; render(res[0], res[1], res[2], res[3]); })
+    fetch(PDETAILURL).then(function(r){return r.json();}).catch(function(){return {products:{}};}),
+    // On any failure (network, 404, bad JSON) this resolves null and the baked-in
+    // TYPES/GENERIC_TYPE_OVERRIDE/CANNULA_DISQUALIFIERS fallbacks above stand —
+    // the tool degrades to the last-known-good taxonomy rather than dying.
+    fetch(PTYPESURL).then(function(r){return r.json();}).catch(function(){return null;})
+  ]).then(function(res){
+    RANGE = (res[4] && res[4].suppliers) || {};
+    PDETAIL = (res[5] && res[5].products) || {};
+    var PT = res[6];
+    if (PT && Array.isArray(PT.types) && PT.types.length) TYPES = PT.types;
+    if (PT && PT.generic_type_override) GENERIC_TYPE_OVERRIDE = PT.generic_type_override;
+    if (PT && Array.isArray(PT.cannula_disqualifiers) && PT.cannula_disqualifiers.length) CANNULA_DISQUALIFIERS = PT.cannula_disqualifiers;
+    render(res[0], res[1], res[2], res[3]);
+  })
     .catch(function(){ MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;">Comparison tool temporarily unavailable — please try again shortly.</div>'; });
 
   function render(index, cfg, seed, nhssc){
@@ -228,11 +258,9 @@
        generic name. Re-checked against the full cache with that exclusion in
        place: all 6 pairs below still fire on the same verified examples,
        and "neonatal/paediatric catheters" no longer misfires. Fixed
-       02/09/2026. */
-    var GENERIC_TYPE_OVERRIDE = { catheter: 'cannula', wound: 'dressing', foam: 'dressing', stoma: 'ostomy', iol: 'intraocular', sealant: 'haemostat' };
-    // Central-line language that disqualifies an otherwise-matching "cannula"
-    // override — see the note above (neonatal/paediatric catheters).
-    var CANNULA_DISQUALIFIERS = ['picc', 'central venous', 'central line'];
+       02/09/2026. GENERIC_TYPE_OVERRIDE and CANNULA_DISQUALIFIERS moved to
+       module scope 07/09/2026 so data/product-types.json can override them
+       once fetched — see PTYPESURL above. */
     function typeForProduct(name){
       var t = typeOf(name);
       var override = GENERIC_TYPE_OVERRIDE[t];

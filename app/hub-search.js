@@ -4,7 +4,7 @@
  * ---------------------------------
  * V6 ranked 47 Hub pages typed by hand into WordPress, matching on a title and
  * a line of synonyms. It could not see inside a page, could not see a page
- * nobody had remembered to add, and could not see the 459 suppliers that the
+ * nobody had remembered to add, and could not see the 1,304 suppliers (as at 07/09/2026) that the
  * Suppliers page loads from JSON at run time. Lou's report was that it still
  * could not do what she wanted, and it structurally could not.
  *
@@ -192,7 +192,7 @@
       if (hits(r._t, toks[i])) { s += 22; named = true; }
       else if (hits(r._k, toks[i])) { s += 7; }
     }
-    /* A supplier record is 459 rows of names, aliases, specialities and
+    /* A supplier record is one of 1,304 records (as at 07/09/2026) with names, aliases, specialities and
      * framework titles. One incidental keyword hit — "tender close april 2026"
      * brushing against a framework name — is not a reason to put a company in
      * front of a member who asked about a deadline. Either the query touched

@@ -699,7 +699,7 @@
                (supplier-products.json — GBUK so far), grouped by the
                company's own divisions;
        plus the curated headline products from the index, which for most of
-       the 459 suppliers is currently ALL we hold — and the panel says so
+       the 1,304 suppliers (as at 07/09/2026) is currently ALL we hold — and the panel says so
        rather than letting five chips read as a complete range.
      --------------------------------------------------------------------- */
   function cacheRowsFor(s, cache) {
@@ -1326,7 +1326,7 @@
      ===================================================================== */
 
   /* Frameworks the subject holds, keyed on a normalised name. Framework names
-     are recorded free-text across 459 supplier records, so an exact-string key
+     are recorded free-text across 1,304 supplier records (as at 07/09/2026), so an exact-string key
      would split "NHS Supply Chain — IV Cannula" from the same framework typed
      with a hyphen and quietly halve every co-listing. */
   function fwList(s) {
