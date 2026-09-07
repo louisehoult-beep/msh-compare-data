@@ -17,7 +17,8 @@
    "set": "Winged / safety collection sets",
    "adapt": "Adaptors & tube holders",
    "lance": "Lancets & capillary",
-   "id": "Patient identification wristbands"
+   "id": "Patient identification wristbands",
+   "abg": "Arterial blood gas sampling"
   },
   "cardiology": {
    "defib": "Defibrillation electrodes & pads",
@@ -91357,6 +91358,373 @@
    "hub": null,
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "Promus Premier BTK / Express SD / Wallstent-Uni (peripheral bare-metal stents)",
+   "division": null,
+   "products": 13,
+   "categories": [],
+   "examples": [
+    "Stent - Peripheral - Bare Metal Self Expanding (IR) 2767MRFwalluni 5 x 55mm x 75cm (Wallstent-Uni)",
+    "Stent - Peripheral - Bare Metal (IR) 4337MRFmodel-vascular sm - pmtd 7.0x19x90cm (Express SD)",
+    "Stent - Peripheral - Bare Metal (IR) 4237MRFmodel-vascular sm - 6.0x14x90 cm (Express SD)",
+    "Stent - Peripheral - Bare Metal (IR) 49721MRF mr 3.50 x 28 (Promus Premier BTK)",
+    "Stent - Peripheral - Bare Metal (IR) 79721MRF mr 4.00 x 28 (Promus Premier BTK)",
+    "Stent - Peripheral - Bare Metal (IR) 29721MRF mr 3.00 x 38 (Promus Premier BTK)",
+    "Stent - Peripheral - Bare Metal (IR) 88721MRF mr 2.50 x 28 (Promus Premier BTK)",
+    "Stent - Peripheral - Bare Metal (IR) 65511MRF mr 4.00 x 38 (Promus Premier BTK)"
+   ],
+   "hub": "vascsurg:stent",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FRM/FRK, all item descriptions 'Stent - Peripheral - Bare Metal (Self Expanding) (IR)'; itself NHS Supply Chain public catalogue data",
+   "why": "All 13 lines are bare-metal peripheral stents (self-expanding or below-the-knee) under one consistent eclass/description -- same clinical category as the existing Boston Scientific Eluvia/Ranger entry already mapped to vascsurg:stent.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "Victory / Fathom / Starter / Savion / Amplatz / Zipwire (peripheral IR guidewires)",
+   "division": null,
+   "products": 11,
+   "categories": [],
+   "examples": [
+    "Guidewire - Speciality (IR) 7382DRF - 195 cm 12g 1-pack (Victory 18)",
+    "Guidewire - Speciality (IR) 5382DRF - 300 cm 25g 1-pack (Victory 14)",
+    "Guidewire - Speciality (IR) fathom-14 - angled tip - 300cm x 10cm (Fathom 14)",
+    "Guidewire - Diagnostic (IR) star/sfc/028/40/str/ptfe/3/10 box10 (Starter)",
+    "Guidewire - Peripheral Interventional (IR) SAVION DLVR 300 CM STR",
+    "Guidewire - Speciality (IR) gss 038/150 angled (bx5) (Zipwire)",
+    "Access products Amplatz super stiff ptfe coated .038 145cm 3mm j tip bx5"
+   ],
+   "hub": "vascsurg:access",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FRD, item descriptions 'Guidewire - Speciality/Diagnostic/Peripheral Interventional (IR)' or 'Access products' (Amplatz); itself NHS Supply Chain public catalogue data",
+   "why": "All lines are peripheral (IR-labelled) guidewires -- matches the existing precedent set by multiple vascsurg:access entries for other suppliers (e.g. Argon Medical's 'WORKER Amplatz Guidewires ... vascular access guide wires', Terumo's Radifocus hydrophilic guidewires). One coronary (IC-labelled) guidewire line, 'Guidewire - Workhorse (IC) 150cm - extension | stretch', was deliberately excluded -- coronary guidewires are a cardiology device, not vascular surgery/peripheral, and mixing it in would misfile it (see refused list).",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "Super Sheath (peripheral guiding sheaths)",
+   "division": null,
+   "products": 10,
+   "categories": [],
+   "examples": [
+    "Sheath - Peripheral Guiding (IR) 11 fr x 11 cm n/g",
+    "Sheath - Peripheral Guiding (IR) sheath - 7 fr x 11 cm n/g",
+    "Sheath - Peripheral Guiding (IR) sheath - 4 fr x 11 cm .035 gw",
+    "Sheath - Peripheral Guiding (IR) sheath - 9 fr x 11 cm .035 gw",
+    "Sheath - Peripheral Guiding (IR) sheath - 8 fr x 11 cm .035 gw",
+    "Sheath - Peripheral Guiding (IR) 10 fr x 11 cm .035 gw",
+    "Sheath - Peripheral Guiding (IR) sheath - 9 fr x 25 cm n/g",
+    "Sheath - Peripheral Guiding (IR) 14 fr x 11 cm n/g"
+   ],
+   "hub": "vascsurg:access",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FRH, all item descriptions 'Sheath - Peripheral Guiding (IR)'; itself NHS Supply Chain public catalogue data",
+   "why": "Peripheral vascular introducer/guiding sheaths, French-size and length variants of one product -- direct match to vascsurg:access precedent (Terumo, Merit Medical and Cook Medical entries for introducer/access sheaths).",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "Sheath Safe (hemostatic peel-away introducers)",
+   "division": null,
+   "products": 8,
+   "categories": [],
+   "examples": [
+    "Sheath Safe Hemostatic Introducer 10 French 13cm (Peel Away)",
+    "Sheath Safe Hemostatic Introducer LONG 9 French 23cm (Peel Away)",
+    "Sheath Safe Hemostatic Introducer 10.5 French 13cm (Peel Away)",
+    "Sheath Safe Hemostatic Introducer 9 French 13cm (Peel Away)",
+    "Sheath Safe Hemostatic Introducer 9.5 French 13cm (Peel Away)",
+    "Sheath Safe Hemostatic Introducer LONG 6 French 23cm (Peel Away)",
+    "Sheath Safe Hemostatic Introducer LONG 10 French 23cm (Peel Away)",
+    "Sheath Safe Hemostatic Introducer LONG 7 French 23cm (Peel Away)"
+   ],
+   "hub": "vascsurg:access",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FRH, all item descriptions 'Sheath Safe Hemostatic Introducer ... (Peel Away)'; itself NHS Supply Chain public catalogue data",
+   "why": "Peel-away hemostatic introducer sheaths, size/length variants of one product line -- same functional category (vascular access sheaths) as the Super Sheath entry above; kept as a separate term because it is a distinct catalogue-branded product, not a duplicate.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "Percuflex / Polaris / TRIA FIRM (ureteral stents)",
+   "division": null,
+   "products": 13,
+   "categories": [],
+   "examples": [
+    "Ureteral Stent - With Guidewire Kit percuflex plus 4.8fr x 12 zipwire .035 ss",
+    "Ureteral Stent Without Guidewire Polaris loop 5fx14cm w o wire",
+    "Ureteral Stent With Guidewire Polaris ultra 6fx26cm 038in df sensor",
+    "Ureteral Stent With Guidewire Percuflex 7fx28cm w 038in stfptfe",
+    "Ureteral Stent With Guidewire Polaris ultra 5fx16cm 035in zip",
+    "Ureteral Stent - with Guidewire TRIA FIRM 6X20 SH W SEN .035",
+    "Ureteral Stent With Guidewire Polaris loop 8fx24cm 035cm sensor",
+    "Ureteral Stent - Steerable Perc Plus 7Fr X 22Cm"
+   ],
+   "hub": "endourology:stent",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FBE/FRL/FUQ, all item descriptions 'Ureteral Stent ...'; itself NHS Supply Chain public catalogue data",
+   "why": "All 13 lines are ureteral stents (with or without pre-loaded guidewire) -- direct match to the existing endourology:stent precedent used for HC21, Coloplast and Cook Medical ureteral/urethral stents.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "StoneSmart (laser lithotripsy console)",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Monitors Stonesmart connect console eu"
+   ],
+   "hub": "endourology:litho",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json row, supplier BOSTON SCIENTIFIC LTD, eclass FBU, item description 'Monitors Stonesmart connect console eu'; itself NHS Supply Chain public catalogue data",
+   "why": "StoneSmart is Boston Scientific's laser lithotripsy console -- same functional category (lithotripsy) as the existing Storz Medical Modulith entry mapped to endourology:litho, though a different modality (intracorporeal laser vs extracorporeal shockwave).",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "CRBS cryoablation console accessories",
+   "division": null,
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Cryotherapy Console and Components CRBS FOOT SWITCH",
+    "Cryotherapy Console and Components CRBS TEMP SENSOR CABLE"
+   ],
+   "hub": "oncology:abl",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FBU, item descriptions 'Cryotherapy Console and Components ...'; itself NHS Supply Chain public catalogue data",
+   "why": "Console accessories (foot switch, temperature sensor cable) for the same cryoablation system already recognised in the existing 'ICEfx / VISUAL ICE (cryoablation)' entry mapped to oncology:abl. A third CRBS-branded line, 'Electrophysiology Recording System and Components CRBS DIAPHRAGM MOVEMENT SENSOR', was deliberately excluded -- its own description names it an EP recording system, not a cryotherapy component (see refused list).",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "Advanix / Naviflex (plastic pancreatic & biliary stents)",
+   "division": null,
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Plastic Stents - Pancreatic advanix panc strt 3frx2cm",
+    "Plastic Stents - Biliary preloaded 7fr naviflex panc rx"
+   ],
+   "hub": "gastro:stent",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FRS, item descriptions 'Plastic Stents - Pancreatic/Biliary'; itself NHS Supply Chain public catalogue data",
+   "why": "Both lines are plastic pancreatic/biliary stents -- direct match to the existing gastro:stent precedent (HC21's biliary/enteral/oesophageal stents) and consistent with Boston Scientific's own AXIOS entry already mapped to gastro:stent.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "Captivator EMR (endoscopic resection snares)",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Snare - Specialist Captivator EMR Standard Scope Box 1"
+   ],
+   "hub": "endoscopy:access",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json row, supplier BOSTON SCIENTIFIC LTD, eclass FCC, item description 'Snare - Specialist Captivator EMR Standard Scope Box 1'; itself NHS Supply Chain public catalogue data",
+   "why": "An endoscopic mucosal resection snare -- same 'access & retrieval devices' category already used for Boston Scientific's own SpyGlass retrieval snares/baskets, mapped to endoscopy:access.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "Excelon (EBUS transbronchial needles)",
+   "division": null,
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Needles - Endobronchial Ultrasound (EBUS) Tban 19g 15mm 130cm",
+    "Needles - Endobronchial Ultrasound (EBUS) Tban 20g 15mm 130cm"
+   ],
+   "hub": "respiratory:diag",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json rows, supplier BOSTON SCIENTIFIC LTD, eclass FCC, item descriptions 'Needles - Endobronchial Ultrasound (EBUS)'; itself NHS Supply Chain public catalogue data",
+   "why": "EBUS-TBNA needles are a respiratory diagnostic device (endobronchial ultrasound-guided sampling) -- closest gated fit is respiratory:diag, the code already used for other lung-function/diagnostic devices. LEAST CONFIDENT CALL IN THIS SET: respiratory:diag's existing entries are all spirometry/CPET/breath-monitoring equipment, not bronchoscopic biopsy needles, so this is a same-speciality but not identically-precedented fit -- worth a second opinion before seeding.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Boston Scientific",
+   "term": "LeVeen (RF ablation electrode)",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "RadioFrequency Straight Electrode standard 5 0 13 25"
+   ],
+   "hub": "oncology:abl",
+   "notTaxonomy": false,
+   "evidence": "cloud-pipeline/sdt-suspensions.json row, supplier BOSTON SCIENTIFIC LTD, eclass FRP, item description 'RadioFrequency Straight Electrode standard 5 0 13 25' branded HCTED LEVEEN; itself NHS Supply Chain public catalogue data",
+   "why": "LeVeen is a radiofrequency tumour-ablation electrode -- same oncology:abl category already used for Kimberly-Clark's RF ablation cannulas and probes, and for Boston Scientific's own ICEfx/VISUAL ICE cryoablation entry (different modality, same procedure class: percutaneous tumour ablation).",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Avanos Medical UK Limited",
+   "term": "Trach Care (closed suction catheter system)",
+   "division": null,
+   "products": 3,
+   "categories": [],
+   "examples": [
+    "Catheter closed suction system wet pack 72 hour Adult 12fg 30.5cm tracheostomy double swivel elbow NON RETURNABLE",
+    "Catheter closed suction system 72 hour Adult 12fg 54cm standard double swivel elbow NON RETURNABLE",
+    "Catheter closed suction system wet pack Adult 12fg 54cm double swivel elbow NON RETURNABLE"
+   ],
+   "hub": "respiratory:resp",
+   "notTaxonomy": false,
+   "evidence": "NPC descriptions read directly from the live NHS Supply Chain suspension feed (cloud-pipeline/sdt-suspensions.json, NPCs FSQ467/FSQ475/FSQ419) — this search term is not yet present in the cached nhssc-cache.json index, so no independent catalogue cross-check beyond the suspension feed's own descriptions was possible.",
+   "why": "Examples are closed-suction tracheal catheter systems used in-line with a ventilator/tracheostomy circuit for airway suctioning — respiratory therapy & circuits, not stoma care (which covers the tracheostomy tube/stoma itself, e.g. the existing Farla/TFX ent:stoma entries).",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Johnson & Johnson MedTech",
+   "term": "NeuWave (microwave ablation system — probes, generators & associated consumables)",
+   "division": null,
+   "products": 18,
+   "categories": [],
+   "examples": [
+    "Microwave Ablation Probe PR 20cm 17GA",
+    "Microwave Ablation Probe LK XT 15cm 15GA",
+    "Microwave Ablation Probe SR 25cm 13GA",
+    "Microwave Generators Ac upgrade united states",
+    "Microwave Generators NW ablation sys config 06",
+    "Microwave Ablation Associated Consumables CT bed rail mount Siemens",
+    "Microwave Ablation Associated Consumables CT bed rail mount Philips",
+    "Microwave Ablation Associated Consumables surgical PDM mount kit"
+   ],
+   "hub": "oncology:abl",
+   "notTaxonomy": false,
+   "evidence": "NPC descriptions read directly from the live NHS Supply Chain suspension feed (cloud-pipeline/sdt-suspensions.json, NPCs incl. FRP2444-2456, FRP2030/2044/2047/2048/2059, FCB117568/117569) — this search term is not yet present in the cached nhssc-cache.json index, so no independent catalogue cross-check beyond the suspension feed's own descriptions was possible.",
+   "why": "Examples are NeuWave microwave ablation probes, generators and procedure-mount consumables for percutaneous tumour ablation (liver/kidney/lung) — oncology:abl already holds the equivalent-modality precedent Medtronic Emprint (HP) Ablation System, described identically as 'microwave ablation, liver/kidney/lung tumours' in that entry.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Johnson & Johnson MedTech",
+   "term": "Prolene / Mersilk / Ethibond Excel / Ethilon (Ethicon non-absorbable sutures)",
+   "division": null,
+   "products": 11,
+   "categories": [],
+   "examples": [
+    "Suture non absorbable W8571 90cm prolene non-absorbable monofilament blue 2/0 55mm straight conventional cutting needle",
+    "Suture non absorbable W791 100cm mersilk non-absorbable coated braided black 2/0 90mm 3/8 circle conventional cutting needle",
+    "Suture non absorbable W883 45cm ethibond excel non-absorbable coated braided white 5/0 8mm 1/2 circle spatula double needle",
+    "Suture non absorbable W1756 30cm ethilon non-absorbable monofilament black 10/0 5.5mm 1/2 circle spatula advanced micro-point double needle",
+    "Suture non absorbable W8840 90cm prolene non-absorbable monofilament blue 4/0 20mm 1/2 circle cc double needle",
+    "Suture non absorbable W2502T 45cm mersilk non-absorbable coated braided black 3/0 16mm 3/8 circle conventional cutting prime needle",
+    "Suture non absorbable W2870 13cm ethilon non-absorbable monofilament black 10/0 3.8mm 3/8 circle taper point needle",
+    "Suture non absorbable W505 4 x 45cm mersilk non-absorbable coated braided 1 ivory 3 black 4/0 16mm 3/8 circle conventional cutting needle"
+   ],
+   "hub": "theatres:theatre",
+   "notTaxonomy": false,
+   "evidence": "NPC descriptions read directly from the live NHS Supply Chain suspension feed (cloud-pipeline/sdt-suspensions.json, NPCs incl. FVT885/FVT002/FVT860/FVR151/FVS068 (Prolene), FVR611/FVQ3919/FVS037/FVR063 (Silk/Mersilk), FVS183 (Ethibond Excel), FVS626/FVS118 (Ethilon)) — the existing 'Vicryl / Prolene / Monocryl (Ethicon sutures)' term in nhssc-cache.json is cached with absorbable Vicryl items only; none of these non-absorbable brands or NPCs appear in it, so this is a genuinely separate, uncached family.",
+   "why": "Examples are non-absorbable Ethicon sutures (monofilament Prolene/Ethilon, braided Mersilk, coated braided Ethibond Excel) — same reasoning as the existing absorbable-Vicryl entry: no dedicated suture category exists in the vocabulary, so general theatre consumables (theatres:theatre) is the closest fit.",
+   "decidedIn": "nhssc-term batch, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "product-exact-name",
+   "supplier": "ICU Medical (incl. Smiths Medical)",
+   "division": "Pro Vent Plus 1 Ml Syringe Dry Lithium Heparin",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Pro Vent Plus 1 Ml Syringe Dry Lithium Heparin"
+   ],
+   "hub": "bloodcoll:abg",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; this product was found 07/09/2026 filed under the Infusion Therapy division (mapped to vascular:conn), which is right for the division's other 76 products but wrong for this one",
+   "why": "Arterial blood-gas sampling kit, not an IV connector. The Infusion Therapy division mapping is correct for the rest of the division; this product needed its own decision, which build_differentiator.py's existing (supplier, product name) fallback already supports.",
+   "decidedIn": "bloodcoll:abg addition, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "product-exact-name",
+   "supplier": "ICU Medical (incl. Smiths Medical)",
+   "division": "Pro Vent Plus 3 Ml Dry Lithium Low Heparin",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Pro Vent Plus 3 Ml Dry Lithium Low Heparin"
+   ],
+   "hub": "bloodcoll:abg",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; this product was found 07/09/2026 filed under the Infusion Therapy division (mapped to vascular:conn), which is right for the division's other 76 products but wrong for this one",
+   "why": "Arterial blood-gas sampling kit, not an IV connector. The Infusion Therapy division mapping is correct for the rest of the division; this product needed its own decision, which build_differentiator.py's existing (supplier, product name) fallback already supports.",
+   "decidedIn": "bloodcoll:abg addition, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "product-exact-name",
+   "supplier": "ICU Medical (incl. Smiths Medical)",
+   "division": "Pulsator Plus Arterial Blood Sampling Kits Dry Lithium Heparin",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Pulsator Plus Arterial Blood Sampling Kits Dry Lithium Heparin"
+   ],
+   "hub": "bloodcoll:abg",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; this product was found 07/09/2026 filed under the Infusion Therapy division (mapped to vascular:conn), which is right for the division's other 76 products but wrong for this one",
+   "why": "Arterial blood-gas sampling kit, not an IV connector. The Infusion Therapy division mapping is correct for the rest of the division; this product needed its own decision, which build_differentiator.py's existing (supplier, product name) fallback already supports.",
+   "decidedIn": "bloodcoll:abg addition, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "product-exact-name",
+   "supplier": "ICU Medical (incl. Smiths Medical)",
+   "division": "Pro Vent Plus 1 Ml Syringe Dry Lithium Low Heparin",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Pro Vent Plus 1 Ml Syringe Dry Lithium Low Heparin"
+   ],
+   "hub": "bloodcoll:abg",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; this product was found 07/09/2026 filed under the Infusion Therapy division (mapped to vascular:conn), which is right for the division's other 76 products but wrong for this one",
+   "why": "Arterial blood-gas sampling kit, not an IV connector. The Infusion Therapy division mapping is correct for the rest of the division; this product needed its own decision, which build_differentiator.py's existing (supplier, product name) fallback already supports.",
+   "decidedIn": "bloodcoll:abg addition, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "product-exact-name",
+   "supplier": "ICU Medical (incl. Smiths Medical)",
+   "division": "Linedraw Arterial Blood Sampling Kits",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Linedraw Arterial Blood Sampling Kits"
+   ],
+   "hub": "bloodcoll:abg",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; this product was found 07/09/2026 filed under the Infusion Therapy division (mapped to vascular:conn), which is right for the division's other 76 products but wrong for this one",
+   "why": "Arterial blood-gas sampling kit, not an IV connector. The Infusion Therapy division mapping is correct for the rest of the division; this product needed its own decision, which build_differentiator.py's existing (supplier, product name) fallback already supports.",
+   "decidedIn": "bloodcoll:abg addition, accepted by Lou 07/09/2026"
+  },
+  {
+   "kind": "product-exact-name",
+   "supplier": "ICU Medical (incl. Smiths Medical)",
+   "division": "Pro Vent Plus 3 Ml Syringe Dry Lithium Heparin",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Pro Vent Plus 3 Ml Syringe Dry Lithium Heparin"
+   ],
+   "hub": "bloodcoll:abg",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; this product was found 07/09/2026 filed under the Infusion Therapy division (mapped to vascular:conn), which is right for the division's other 76 products but wrong for this one",
+   "why": "Arterial blood-gas sampling kit, not an IV connector. The Infusion Therapy division mapping is correct for the rest of the division; this product needed its own decision, which build_differentiator.py's existing (supplier, product name) fallback already supports.",
+   "decidedIn": "bloodcoll:abg addition, accepted by Lou 07/09/2026"
   }
  ],
  "kinds": {
