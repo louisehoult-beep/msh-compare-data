@@ -1,0 +1,2078 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "tissue-viability-and-wound-care",
+ "label": "Tissue Viability and Wound Care",
+ "defined": true,
+ "generated": "2026-09-07",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-07T12:26:14+00:00",
+  "openTenders": "07/09/2026",
+  "drugTariff": "2026-09-07"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(wound|dressing|npwt|negative[- ]pressure|pressure area care)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(wound|woundcare|dressing|dressings|npwt|negative[- ]pressure wound|tissue viability|pressure ulcer|pressure sore|pressure relieving|pressure area care|debridement|larval therapy|compression (?:bandag|hosiery|garment|therapy|stocking)|lymphoedema|bandag(?:e|ing)|skin integrity|wound closure|suture|leg ulcer|diabetic foot|venous ulcer|honey dressing|silver dressing|foam dressing|hydrocolloid|alginate)\\b/i and does not match /\\b(seed viability|eye tissue|corneal|toilet tissue|paper hygiene|facial tissue|chest compression|test rig|laminar flow|pressure infus|blood pressure|pressure washer|tissue culture|breast tissue|soft tissue (?:sarcoma|imaging))\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 3314111 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, summarised. Prices are the reimbursement price at publication, not necessarily today's."
+ },
+ "counts": {
+  "frameworks": 5,
+  "suppliers": 140,
+  "suppliersUnresolved": 8,
+  "awardsShown": 29,
+  "awardsMatched": 29,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Advanced Wound Care",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+   "reference": "2024/S 000-029271",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 September 2025",
+   "ends": "31 August 2027",
+   "supplierCount": 56,
+   "supplierSource": "count verified against the page's own stated total (56)",
+   "suppliers": [
+    "Absorbest AB",
+    "Advanced Medical Solutions Ltd",
+    "AOTI LTD",
+    "B. Braun Medical Limited",
+    "Becton Dickinson U.K. Limited",
+    "Brightwake Limited (trading as Advancis Medical)",
+    "CD Medical Limited",
+    "Clarity Pharma",
+    "ClearHeal LTD",
+    "CliniMed Ltd",
+    "Clinisupplies Limited",
+    "Coloplast Ltd",
+    "ConvaTec Limited",
+    "Creed Medical Ltd",
+    "Crest Medical Ltd",
+    "Dot Medical Limited",
+    "Ennogen Healthcare Ltd",
+    "Espère Healthcare Ltd",
+    "Essity T/A BSN Medical Ltd",
+    "Eurosurgical",
+    "Firstkind Ltd",
+    "Flen Health UK Ltd",
+    "Frontier Therapeutics Limited",
+    "GBUK Ltd",
+    "Gentell UK Ltd",
+    "Global Health and Safety Ltd",
+    "Griffiths and Nielsen Ltd",
+    "GS Medical Healthcare",
+    "HARTMANN",
+    "Ideal Medical Solutions",
+    "IMS Euro Ltd",
+    "Integra LifeSciences",
+    "Iskus Health UK Limited",
+    "Joint Operations (UK) Ltd",
+    "KCI Medical Limited",
+    "L&R Medical UK Ltd",
+    "medi UK Ltd",
+    "Medicareplus International Limited",
+    "Mediq Healthcare UK Ltd",
+    "Medline Industries Ltd",
+    "Molnlycke Health Care Ltd",
+    "OscarTech UK Ltd",
+    "Oswell Penda Pharmaceutical Ltd",
+    "Phoenix Medical Ltd",
+    "Raise Healthcare Pvt Ltd",
+    "Reliance Medical Ltd",
+    "Richardson Healthcare Ltd",
+    "Rocialle Healthcare Ltd",
+    "Schulke & Mayr UK Ltd",
+    "Smith & Nephew",
+    "Steroplast Healthcare Ltd",
+    "Trion Pharma",
+    "Unisurge International Ltd",
+    "URGO LIMITED",
+    "Vernacare International Ltd",
+    "Willingsford Limited"
+   ],
+   "delisted": [
+    "Ego Pharmaceuticals",
+    "Farla Medical Healthcare Limited",
+    "Mayors Pharma",
+    "Edge Medical Ltd",
+    "Safeguard Medical Technologies.",
+    "CF Pharma Ltd",
+    "Inotec AMD Ltd",
+    "Meditrade UK Ltd",
+    "Woundchek Laboratories",
+    "AAH Pharaceuticals",
+    "Hospital Services Ltd"
+   ]
+  },
+  {
+   "name": "General Wound Care",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/general-wound-care/",
+   "reference": "2025/S 000-028909",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "24 June 2026",
+   "ends": "23 June 2028",
+   "supplierCount": 28,
+   "supplierSource": "count verified against the page's own stated total (28)",
+   "suppliers": [
+    "Clinisupplies Limited",
+    "Crest Medical Ltd",
+    "Cuxson Gerrard & Company Limited",
+    "Essity UK Ltd",
+    "Evolan Pharma",
+    "Fenton Pharmaceuticals Limited",
+    "GBUK Ltd",
+    "Gentell UK",
+    "Global Health and Safety Ltd",
+    "Paul Hartmann Ltd",
+    "IMS Euro Ltd",
+    "Fannin UK Ltd",
+    "L&R Medical UK Ltd",
+    "Mediq Healthcare UK Ltd",
+    "Meditrade UK Ltd",
+    "Mediworld Ltd",
+    "MedScience Distribution Ltd",
+    "Molnlycke Health Care Ltd",
+    "Polyco Healthline Limited",
+    "Reliance Medical Ltd",
+    "Rocialle Healthcare Ltd",
+    "Sai Medical Solutions Ltd",
+    "SP Services (UK) Ltd",
+    "Steroplast Healthcare Ltd",
+    "Trion Pharma Limited",
+    "Unisurge International Ltd",
+    "Urgo Limited",
+    "Vernacare International Ltd"
+   ],
+   "delisted": [
+    "Safeguard Medical Technologies Ltd",
+    "GS Medical Healthcare Ltd."
+   ]
+  },
+  {
+   "name": "Negative Pressure Wound Therapy",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/negative-pressure-wound-therapy/",
+   "reference": "2020/S 141-348143",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "29 March 2021",
+   "ends": "28 March 2027",
+   "supplierCount": 6,
+   "supplierSource": "no stated count on the page; 6 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "ConvaTec Ltd",
+    "H & R Healthcare Ltd",
+    "KCI Medical Ltd",
+    "Molnlycke Healthcare",
+    "Smith & Nephew",
+    "Talley Group"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Pressure Area Care and Patient Handling",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+   "reference": "2025/S 000-086469",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "9 March 2026",
+   "ends": "8 March 2028",
+   "supplierCount": 53,
+   "supplierSource": "count verified against the page's own stated total (53)",
+   "suppliers": [
+    "Algeo Ltd",
+    "Accora Ltd",
+    "Agile Medical Ltd",
+    "AHT Apollo Healthcare Technologies Ltd",
+    "ARJO UK Ltd",
+    "BES Healthcare Ltd",
+    "Central Medical Supplies Ltd (CMS)",
+    "CJ Medical Ltd",
+    "Croyde Medical Ltd",
+    "Delta Surgical Ltd",
+    "Direct Healthcare Group",
+    "Direct Manufacturing Limited",
+    "Drive Devilbiss Healthcare Ltd",
+    "Etac Limited",
+    "Fannin UK Ltd*",
+    "Felgains",
+    "Frontier Therapeutics",
+    "GBUK Healthcare",
+    "Harvest Healthcare",
+    "HCE UK (Health-Care Equipment & Supplies) Ltd",
+    "Hillrom UK",
+    "Hospital Direct",
+    "Howard Wright Europe Ltd",
+    "Inspire Community Trust",
+    "Interweave Textiles",
+    "Invacare UK Ltd",
+    "IQ Medical Limited",
+    "Linet UK",
+    "Lisclare Ltd",
+    "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
+    "Mediplinth Equipment Ltd",
+    "Medline Industries Ltd",
+    "Medserve (Southwest) Ltd",
+    "Medstrom Ltd",
+    "MIP UK Ltd",
+    "Molnlycke Health Care Ltd",
+    "Montcalm International Ltd",
+    "OSKA Care Ltd",
+    "Peacocks Medical Group Ltd",
+    "Performance Health",
+    "Prism UK Medical Limited",
+    "Promedics Orthopaedic Ltd",
+    "ProSys International Ltd",
+    "Renray Healthcare Ltd",
+    "Select Health Care (UK) Ltd",
+    "Silvalea Ltd (Savaria, trading as Silvalea Ltd)",
+    "STERIS Solutions Limited",
+    "Stryker UK Ltd",
+    "TALARMADE LTD",
+    "Ultimate Healthcare Ltd (Millbrook, trading as Ultimate)",
+    "V.Guldmann A/S",
+    "Wealden Rehab Ltd",
+    "Winncare PAC Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Wound Closure",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wound-closure/",
+   "reference": "2025/S 000-001071",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "19 January 2026",
+   "ends": "18 January 2030",
+   "supplierCount": 39,
+   "supplierSource": "count verified against the page's own stated total (39)",
+   "suppliers": [
+    "Advanced Medical Solutions Ltd",
+    "Anser Medical Ltd",
+    "Aquilant Ltd",
+    "Artivion UK Ltd",
+    "Assut UK Ltd",
+    "B Braun Medical Ltd",
+    "Baxter Healthcare Ltd",
+    "BSN Medical Ltd",
+    "Chemence Ltd",
+    "Crest Medical Ltd",
+    "Critical Healthcare Ltd",
+    "Delta Surgical Ltd",
+    "Gentell UK Ltd",
+    "GS Medical Healthcare Ltd (novating to GBUK Ltd)",
+    "Healthium Medtech UK Ltd",
+    "Ideal Medical Solutions Ltd",
+    "Johnson & Johnson Medical Ltd",
+    "KCI Medical Ltd",
+    "Kebomed UK Ltd",
+    "Lenience UK Ltd",
+    "Mediq Healthcare UK Ltd",
+    "Medline Industries Ltd",
+    "Medtronic Ltd",
+    "Meril UK Ltd",
+    "OscarTech UK Ltd",
+    "P3 Medical Ltd",
+    "Pearsalls Ltd",
+    "R&D Surgical Ltd",
+    "Reflex Medical Ltd",
+    "Reliance Medical Ltd",
+    "Richardson Healthcare Ltd",
+    "SAI Medical Solutions Ltd",
+    "Sela Medical UK Ltd",
+    "Stryker UK Ltd",
+    "TFX Group Ltd",
+    "T.J Smith & Nephew Ltd",
+    "Uniplex UK Ltd",
+    "Vascutek Ltd",
+    "Winners First Trading Ltd"
+   ],
+   "delisted": [
+    "Becton Dickinson UK Ltd",
+    "Creed Medical Ltd",
+    "Q-Surgical Ltd",
+    "Prosys International Ltd",
+    "Pierson Surgical Ltd",
+    "Unisurge International Ltd"
+   ]
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Mölnlycke",
+   "resolved": true,
+   "variants": [
+    "Molnlycke Health Care Ltd",
+    "Molnlycke Healthcare"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care",
+    "Negative Pressure Wound Therapy",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Essity UK Limited",
+   "resolved": true,
+   "variants": [
+    "BSN Medical Ltd",
+    "Essity T/A BSN Medical Ltd",
+    "Essity UK Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK Healthcare",
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Gentell UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Gentell UK",
+    "Gentell UK Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "Pressure Area Care and Patient Handling",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Solventum (3M Health Care)",
+   "resolved": true,
+   "variants": [
+    "KCI Medical Limited",
+    "KCI Medical Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "Negative Pressure Wound Therapy",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Advanced Medical Solutions (AMS)",
+   "resolved": true,
+   "variants": [
+    "Advanced Medical Solutions Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B Braun Medical Ltd",
+    "B. Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Clinisupplies",
+   "resolved": true,
+   "variants": [
+    "Clinisupplies Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Convatec",
+   "resolved": true,
+   "variants": [
+    "ConvaTec Limited",
+    "ConvaTec Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "Negative Pressure Wound Therapy"
+   ]
+  },
+  {
+   "name": "Delta Surgical",
+   "resolved": true,
+   "variants": [
+    "Delta Surgical Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Ltd",
+    "Fannin UK Ltd*"
+   ],
+   "frameworks": [
+    "General Wound Care",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Frontier Therapeutics",
+   "resolved": true,
+   "variants": [
+    "Frontier Therapeutics",
+    "Frontier Therapeutics Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Global Health and Safety Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Ideal Medical Solutions",
+   "resolved": true,
+   "variants": [
+    "Ideal Medical Solutions",
+    "Ideal Medical Solutions Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "IMS Euro Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "L&R Medical / Activa (Lohmann & Rauscher)",
+   "resolved": true,
+   "variants": [
+    "L&R Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "OscarTech UK",
+   "resolved": true,
+   "variants": [
+    "OscarTech UK Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Paul Hartmann (HARTMANN)",
+   "resolved": true,
+   "variants": [
+    "HARTMANN",
+    "Paul Hartmann Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Richardson Healthcare",
+   "resolved": true,
+   "variants": [
+    "Richardson Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Rocialle Healthcare",
+   "resolved": true,
+   "variants": [
+    "Rocialle Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "SAI Medical Solutions Ltd",
+   "resolved": true,
+   "variants": [
+    "SAI Medical Solutions Ltd",
+    "Sai Medical Solutions Ltd"
+   ],
+   "frameworks": [
+    "General Wound Care",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Smith+Nephew",
+   "resolved": true,
+   "variants": [
+    "Smith & Nephew"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "Negative Pressure Wound Therapy"
+   ]
+  },
+  {
+   "name": "Steroplast Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Stryker",
+   "resolved": true,
+   "variants": [
+    "Stryker UK Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling",
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Trion Pharma Limited",
+   "resolved": true,
+   "variants": [
+    "Trion Pharma",
+    "Trion Pharma Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Unisurge International Limited",
+   "resolved": true,
+   "variants": [
+    "Unisurge International Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Urgo Medical",
+   "resolved": true,
+   "variants": [
+    "URGO LIMITED",
+    "Urgo Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Vernacare",
+   "resolved": true,
+   "variants": [
+    "Vernacare International Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care",
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Absorbest AB",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Accora",
+   "resolved": true,
+   "variants": [
+    "Accora Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Agile Medical",
+   "resolved": true,
+   "variants": [
+    "Agile Medical Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Algeo",
+   "resolved": true,
+   "variants": [
+    "Algeo Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Anser Medical",
+   "resolved": true,
+   "variants": [
+    "Anser Medical Ltd"
+   ],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "AOTI",
+   "resolved": true,
+   "variants": [
+    "AOTI LTD"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Apollo Healthcare Technologies",
+   "resolved": true,
+   "variants": [
+    "AHT Apollo Healthcare Technologies Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [
+    "Aquilant Ltd"
+   ],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Arjo",
+   "resolved": true,
+   "variants": [
+    "ARJO UK Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Artivion UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Assut UK LTD",
+   "resolved": true,
+   "variants": [
+    "Assut UK Ltd"
+   ],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Baxter / Hillrom",
+   "resolved": true,
+   "variants": [
+    "Hillrom UK"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Baxter Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton Dickinson U.K. Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "BES Healthcare",
+   "resolved": true,
+   "variants": [
+    "BES Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Brightwake Limited (trading as Advancis Medical)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "CD Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "CD Medical Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Central Medical Supplies",
+   "resolved": true,
+   "variants": [
+    "Central Medical Supplies Ltd (CMS)"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Chemence Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "CJ Medical",
+   "resolved": true,
+   "variants": [
+    "CJ Medical Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Clarity Pharma",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "ClearHeal LTD",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "CliniMed",
+   "resolved": true,
+   "variants": [
+    "CliniMed Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Coloplast",
+   "resolved": true,
+   "variants": [
+    "Coloplast Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Creed Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Critical Healthcare",
+   "resolved": true,
+   "variants": [
+    "Critical Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Croyde Medical",
+   "resolved": true,
+   "variants": [
+    "Croyde Medical Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Cuxson Gerrard & Company Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Direct Healthcare Group",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Direct Manufacturing",
+   "resolved": true,
+   "variants": [
+    "Direct Manufacturing Limited"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Dot Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Drive DeVilbiss Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "Drive Devilbiss Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Ennogen Healthcare",
+   "resolved": true,
+   "variants": [
+    "Ennogen Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Espère Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Etac Ltd",
+   "resolved": true,
+   "variants": [
+    "Etac Limited"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Eurosurgical Ltd",
+   "resolved": true,
+   "variants": [
+    "Eurosurgical"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Evolan Pharma",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Felgains",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Fenton Pharmaceuticals Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Firstkind Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Flen Health UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Griffiths and Nielsen Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "GS Medical Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "GS Medical Healthcare"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "GS Medical Healthcare Ltd (novating to GBUK Ltd)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Guldmann",
+   "resolved": true,
+   "variants": [
+    "V.Guldmann A/S"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "H & R Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Negative Pressure Wound Therapy"
+   ]
+  },
+  {
+   "name": "Harvest Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "HCE UK (Health-Care Equipment & Supplies) Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Healthium Medtech UK",
+   "resolved": true,
+   "variants": [
+    "Healthium Medtech UK Ltd"
+   ],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Hospital Direct",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Howard Wright Europe",
+   "resolved": true,
+   "variants": [
+    "Howard Wright Europe Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Inspire Community Trust",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Integra LifeSciences (Integra Neurosciences)",
+   "resolved": true,
+   "variants": [
+    "Integra LifeSciences"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Interweave Textiles",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Invacare UK",
+   "resolved": true,
+   "variants": [
+    "Invacare UK Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "iQ Medical",
+   "resolved": true,
+   "variants": [
+    "IQ Medical Limited"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Iskus Health UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Johnson & Johnson MedTech",
+   "resolved": true,
+   "variants": [
+    "Johnson & Johnson Medical Ltd"
+   ],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Joint Operations",
+   "resolved": true,
+   "variants": [
+    "Joint Operations (UK) Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Kebomed UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Lenience UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "LINET UK",
+   "resolved": true,
+   "variants": [
+    "Linet UK"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Lisclare",
+   "resolved": true,
+   "variants": [
+    "Lisclare Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "medi UK",
+   "resolved": true,
+   "variants": [
+    "medi UK Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Medi-Plinth Equipment",
+   "resolved": true,
+   "variants": [
+    "Mediplinth Equipment Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Medicareplus",
+   "resolved": true,
+   "variants": [
+    "Medicareplus International Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Meditrade UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Mediworld Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "MedScience Distribution",
+   "resolved": true,
+   "variants": [
+    "MedScience Distribution Ltd"
+   ],
+   "frameworks": [
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Medserve (South West)",
+   "resolved": true,
+   "variants": [
+    "Medserve (Southwest) Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Medstrom",
+   "resolved": true,
+   "variants": [
+    "Medstrom Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Ltd"
+   ],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Meril UK Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "MIP UK",
+   "resolved": true,
+   "variants": [
+    "MIP UK Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Montcalm International",
+   "resolved": true,
+   "variants": [
+    "Montcalm International Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "OSKA Care",
+   "resolved": true,
+   "variants": [
+    "OSKA Care Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Oswell Penda",
+   "resolved": true,
+   "variants": [
+    "Oswell Penda Pharmaceutical Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "P3 Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Peacocks Medical Group",
+   "resolved": true,
+   "variants": [
+    "Peacocks Medical Group Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Pearsalls Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Performance Health International Limited",
+   "resolved": true,
+   "variants": [
+    "Performance Health"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Phoenix Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Polyco Healthline Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Prism Medical UK",
+   "resolved": true,
+   "variants": [
+    "Prism UK Medical Limited"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Promedics Orthopaedics Ltd",
+   "resolved": true,
+   "variants": [
+    "Promedics Orthopaedic Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "ProSys International Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "R&D Surgical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Raise Healthcare Pvt Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Reflex Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Reflex Medical Ltd"
+   ],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Renray Healthcare",
+   "resolved": true,
+   "variants": [
+    "Renray Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Schulke & Mayr UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Sela Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Select Health Care (UK)",
+   "resolved": true,
+   "variants": [
+    "Select Health Care (UK) Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Silvalea",
+   "resolved": true,
+   "variants": [
+    "Silvalea Ltd (Savaria, trading as Silvalea Ltd)"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "SP Services (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "General Wound Care"
+   ]
+  },
+  {
+   "name": "Steris",
+   "resolved": true,
+   "variants": [
+    "STERIS Solutions Limited"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "T.J Smith & Nephew Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Talarmade Limited",
+   "resolved": true,
+   "variants": [
+    "TALARMADE LTD"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Talley",
+   "resolved": true,
+   "variants": [
+    "Talley Group"
+   ],
+   "frameworks": [
+    "Negative Pressure Wound Therapy"
+   ]
+  },
+  {
+   "name": "Terumo Aortic",
+   "resolved": true,
+   "variants": [
+    "Vascutek Ltd"
+   ],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "TFX Group Ltd"
+   ],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Ultimate Healthcare Ltd (Millbrook, trading as Ultimate)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Uniplex",
+   "resolved": true,
+   "variants": [
+    "Uniplex UK Ltd"
+   ],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  },
+  {
+   "name": "Wealden Rehab",
+   "resolved": true,
+   "variants": [
+    "Wealden Rehab Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Willingsford Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Winncare UK",
+   "resolved": true,
+   "variants": [
+    "Winncare PAC Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Winners First Trading Limited",
+   "resolved": true,
+   "variants": [
+    "Winners First Trading Ltd"
+   ],
+   "frameworks": [
+    "Wound Closure"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Negative Pressure Wound Therapy",
+   "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+   "supplier": "CONVATEC LIMITED, CREED MEDICAL LTD T/A Creed Health, KCI MEDICAL LIMITED, MOLNLYCKE HEALTH CARE LIMITED, OSCARTECH UK LTD, T.J.SMITH AND NEPHEW,LIMITED",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084307-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000",
+    "33141114",
+    "42122410"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Woundcare Dressing Packs",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "Mediq Healthcare UK Ltd",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082644-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33141116"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Tissue Viability Course Fees",
+   "buyer": "KENT COMMUNITY HEALTH NHS FOUNDATION TRUST",
+   "supplier": "Birmingham City University",
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079124-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "80000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Lymphoedema Service – CAN",
+   "buyer": "NHS SURREY AND SUSSEX INTEGRATED CARE BOARD",
+   "supplier": "Pioneer Wound Healing Centres CIC",
+   "date": "2026-08-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/073748-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Dressings",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scot",
+   "supplier": "Crest Medical Ltd, Essity UK Ltd, GBUK Healthcare Ltd, Johnson & Johnson Medical",
+   "date": "2026-07-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/061766-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "C432811 - BTH25-245 - Negative Pressure Wound Therapy",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-05-07",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/782b8399-e1a5-490e-b041-1aacc13ed4fa",
+   "value": 230295,
+   "periodEnd": "2029-02-28",
+   "source": "tender-history"
+  },
+  {
+   "title": "Medical Affixation Dressings for Pandemic Preparedness 25/26",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown throug",
+   "supplier": "Mediq Healthcare UK Limited",
+   "date": "2026-01-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001804-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Pressure Area Care and Patient Handling",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "A.Algeo Limited, Accora Limited, Agile Medical Ltd, Apollo Healthcare Technologi",
+   "date": "2025-12-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086469-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Wound Closure",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "MEDTRONIC LIMITED, ADVANCED MEDICAL SYSTEMS LTD., Anser Medical Ltd, Aquilant Li",
+   "date": "2025-10-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/065219-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Medical Affixation Dressings for Pandemic Preparedness 24/25",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown throug",
+   "supplier": "Mediq Healthcare UK Limited",
+   "date": "2025-10-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/064140-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Suction Consumables, Wound Drainage, Autologous Blood Systems and Related Accessories",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Cardinal Health U.K. 432 Limited, Flexicare Medical Ltd, GBUK Ltd, Intersurgical",
+   "date": "2025-06-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/030577-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Wound Retractors/Protectors",
+   "buyer": "Regional Business Services Organisation Procurement and Logistics Service",
+   "supplier": "APPLIED MEDICAL UK LIMITED, Uniphar Medtech Ltd t/a M.E.D. Surgical",
+   "date": "2025-05-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027709-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "LSL/MED/0171 - Supply of Negative Pressure Wound Devices (NPWT) - VTN",
+   "buyer": "Leidos Supply",
+   "supplier": "KCI Medical Limited T/A Solventum",
+   "date": "2024-09-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/030240-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Specialist Wound Therapies (4907549)",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "CREED MEDICAL LTD, KCI Medical Ltd, T.J.SMITH NEPHEW LIMITED",
+   "date": "2024-07-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023773-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Wound Management Products",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "EDGE MEDICAL LTD, LR Medical UK Ltd, Healthcare 21 NI, FLEN HEALTH UK LTD, 3M Un",
+   "date": "2024-07-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/022850-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Dressings",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Reliance Medical Ltd, IMS Euro Ltd, Gentell UK Limited",
+   "date": "2024-05-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016258-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Wearable Dressing Retention System",
+   "buyer": "NHS Supply Chain",
+   "supplier": "Credenhill Limited",
+   "date": "2023-10-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/029118-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "LYMPHOEDEMA & COMPRESSION PRODUCTS",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "",
+   "date": "2023-04-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011926-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Wound Closure Products",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Advanced Medical Solutions, B. Braun Medical Limited, Johnson & Johnson Medical ",
+   "date": "2023-04-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011125-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Nimbus Pressure Relieving System Spare Parts [4237773]",
+   "buyer": "Business Services Organisation, Procurement and Logistics Service",
+   "supplier": "Arjo UK Ltd",
+   "date": "2022-12-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/034157-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Chemical Wound Debridement Gel",
+   "buyer": "NHS Supply Chain",
+   "supplier": "Edge Medical Ltd",
+   "date": "2022-08-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/022484-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Surgical Dressings and Miscellaneous Products",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "LYNCH MEDICAL SUPPLIES LMS LIMITED, RICHARDSON HEALTHCARE LIMITED, Healthcare 21",
+   "date": "2022-05-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/013402-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Pressure Relieving Redistribution Products & Associated Service Provision",
+   "buyer": "NHS Lanarkshire",
+   "supplier": "Drive DeVilbiss Sidhil Ltd",
+   "date": "2022-02-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004506-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Wound Management Products",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "KCI Medical",
+   "date": "2022-01-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002497-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Wound Closure Products",
+   "buyer": "National Procurement",
+   "supplier": "Advanced Medical Solutions, B. Braun Medical Limited, Johnson and Johnson, Medtr",
+   "date": "2021-11-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/029263-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Dressings",
+   "buyer": "National Procurement",
+   "supplier": "365 Healthcare, Aero Healthcare UK, 3M United Kingdom Plc, Activa Healthcare Ltd",
+   "date": "2021-11-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/029264-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Powered Wound Lavage Systems",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "SISK HEALTHCARE t/a Tekno Surgical",
+   "date": "2021-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/020034-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Wound Closure Products",
+   "buyer": "Collaborative Procurement Partnership LLP (CPP LLP) acting on behalf of Supply C",
+   "supplier": "3M United Kingdom PLC, Advanced Medical Solutions PLC, Anser Medical Ltd, Aquila",
+   "date": "2021-06-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/013272-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Dressings (Adhesives) & Surgical Tapes",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Crest Medical Ltd.",
+   "date": "2021-01-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000944-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": {
+  "parts": [
+   "IXA"
+  ],
+  "effectiveMonth": "2026-09",
+  "dataAsOf": "2026-09-07",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
+  "lineCount": 56833,
+  "supplierCount": 393,
+  "topSuppliers": [
+   {
+    "name": "Juzo UK Ltd",
+    "lines": 22410
+   },
+   {
+    "name": "Sigvaris Britain Ltd",
+    "lines": 8913
+   },
+   {
+    "name": "Haddenham Healthcare Ltd",
+    "lines": 4796
+   },
+   {
+    "name": "Essity UK Ltd",
+    "lines": 4302
+   },
+   {
+    "name": "Medi UK Ltd",
+    "lines": 1680
+   },
+   {
+    "name": "Gardamed Ltd",
+    "lines": 1476
+   },
+   {
+    "name": "Thuasne UK Ltd",
+    "lines": 1360
+   },
+   {
+    "name": "Altimed Ltd",
+    "lines": 1328
+   },
+   {
+    "name": "Credenhill Ltd",
+    "lines": 921
+   },
+   {
+    "name": "Dermacea Ltd",
+    "lines": 807
+   },
+   {
+    "name": "Calzificio Pinelli Srl",
+    "lines": 415
+   },
+   {
+    "name": "L&R Medical UK Ltd",
+    "lines": 289
+   },
+   {
+    "name": "Coloplast Ltd",
+    "lines": 275
+   },
+   {
+    "name": "Smith & Nephew Healthcare Ltd",
+    "lines": 268
+   },
+   {
+    "name": "Severn Healthcare Technologies Ltd",
+    "lines": 226
+   },
+   {
+    "name": "Mediq Healthcare UK Ltd",
+    "lines": 225
+   },
+   {
+    "name": "Molnlycke Health Care Ltd",
+    "lines": 216
+   },
+   {
+    "name": "Lohmann & Rauscher",
+    "lines": 213
+   },
+   {
+    "name": "Fannin (UK) Ltd",
+    "lines": 212
+   },
+   {
+    "name": "Teleflex",
+    "lines": 211
+   }
+  ],
+  "priceMin": 3.0,
+  "priceMax": 46900.0
+ }
+}
