@@ -29,9 +29,16 @@ true one.
 
 THE VERIFICATION RULE (root rule 14 — state the rule in the file)
 -----------------------------------------------------------------
-1. Every row's `url` was fetched on the `verified` date and returned HTTP 200.
-   No row carries a URL that was pattern-matched, inferred from a sibling
-   document, or taken from a search-result summary. Re-check with --check-links.
+1. Every row's `url` was fetched on THAT ROW'S OWN `verified` date and returned
+   HTTP 200. No row carries a URL that was pattern-matched, inferred from a
+   sibling document, or taken from a search-result summary. Re-check with
+   --check-links.
+   `verified` is per row, not per run, and that matters: where a re-check is
+   blocked (an IP-level captcha, a WAF), the row KEEPS THE DATE IT WAS LAST
+   ACTUALLY OPENED ON via `verifiedOn=`, rather than inheriting today's. Two rows
+   sit like that on 07/09/2026 — NTAG and GMMMG, both answering HTTP 202 with a
+   SiteGround sgcaptcha challenge on every route tried. A block is not a 404: the
+   row is neither dropped nor re-stamped, and the reason is written beside it.
 2. `doc`, `publisher`, `statusNote`, `reviewDate` and `devices` are transcribed
    from the document itself, not from search snippets or trade coverage.
 3. `status` is DERIVED, and this is the only derived field. The rule, in full:
@@ -63,10 +70,14 @@ THE VERIFICATION RULE (root rule 14 — state the rule in the file)
    A row is never promoted to "Current" because it looks recent.
 4. Where a source could not be verified, the row says "Not verified" and carries
    NO position, NO devices and NO review date. Publishing nothing is the correct
-   output on thin evidence (root rule 14). NHS Essex ICB is the live example:
-   the Mid and South Essex SRP 037 URL the old table pointed at now 404s because
-   the ICB was abolished, and essex.icb.nhs.uk is behind a Cloudflare challenge
-   that this run could not pass. So it says so.
+   output on thin evidence (root rule 14). Four bodies sit there today, each for
+   a DIFFERENT reason, and the reason is the useful part: NHS Essex ICB has not
+   republished a CGM position since the merger (the site is reachable, the policy
+   is not there); Derbyshire publishes only on a host whose TLS certificate
+   expired on 09/07/2026 and which returns 403; Cornwall and the Isles of Scilly
+   sits behind a bot challenge with no device-level document on any reachable
+   host. Corrected 07/09/2026 — this paragraph previously said Essex was behind a
+   Cloudflare challenge, which stopped being true.
 
 WHAT IS DELIBERATELY NOT HERE
 -----------------------------
@@ -88,7 +99,7 @@ from datetime import date
 
 OUT = pathlib.Path("data/formulary-positions.json")
 
-VERIFIED = "2026-09-04"
+VERIFIED = "2026-09-07"
 
 # A bare "Mozilla/5.0" is rejected by some NHS site firewalls (the West
 # Yorkshire APC PDF answers 403 to it and 200 to a browser), so link checks
@@ -227,6 +238,13 @@ RECORDS = [
         reviewDate="",
         devices="NTAG recommends FreeStyle Libre 2, FreeStyle Libre 2 Plus, Dexcom ONE+ and Dexcom One.",
         url="https://ntag.nhs.uk/wp-content/uploads/2024/07/NTAG-CGM-position-statement-review-May-2024-approved-v1.1.pdf",
+        # Re-verification blocked 07/09/2026: ntag.nhs.uk answered HTTP 202 with a SiteGround
+        # sgcaptcha IP challenge on every route tried (the checker, a full browser-header
+        # curl, and WebFetch) — an access block on this address, not a 404 and not
+        # evidence the document has gone. The row is left exactly as verified on
+        # 04/09/2026 and keeps that date rather than today's. Re-test by hand before
+        # ever changing it.
+        verifiedOn="2026-09-04",
     ),
     dict(
         body="North East & North Cumbria",
@@ -384,6 +402,13 @@ RECORDS = [
         reviewDate="",
         devices="",
         url="https://gmmmg.nhs.uk/continuous-glucose-monitoring-cgm-guidance/",
+        # Re-verification blocked 07/09/2026: gmmmg.nhs.uk answered HTTP 202 with a SiteGround
+        # sgcaptcha IP challenge on every route tried (the checker, a full browser-header
+        # curl, and WebFetch) — an access block on this address, not a 404 and not
+        # evidence the document has gone. The row is left exactly as verified on
+        # 04/09/2026 and keeps that date rather than today's. Re-test by hand before
+        # ever changing it.
+        verifiedOn="2026-09-04",
     ),
     dict(
         body="Lancashire & South Cumbria",
@@ -421,10 +446,57 @@ RECORDS = [
         level="ICB",
         publisher="NHS Essex ICB (created 01/04/2026 — NHS Mid and South Essex ICB abolished)",
         doc="SRP 037 Continuous Glucose Monitoring",
-        statusNote="NOT VERIFIED on 04/09/2026. The Mid and South Essex URL this Hub previously cited now returns HTTP 404, and essex.icb.nhs.uk is behind a bot challenge this run could not pass. No position, device list or date is published here until the policy is opened on the new ICB's own site.",
+        statusNote="NOT VERIFIED on 07/09/2026, and the reason has changed since 04/09. essex.icb.nhs.uk is no longer behind a bot challenge — it returns HTTP 200, and www.midandsouthessex.ics.nhs.uk now redirects to it. The problem is that the new ICB has not republished a CGM position: the old SRP 037 URL 404s at the redirected address, the site search for “continuous glucose monitoring” returns only a patient-information Diabetes page, and the Publications index carries no CGM, diabetes, formulary or prescribing entry at all. So this is an absence of a published policy, not an access failure. No position, device list or date until one is published.",
         reviewDate="",
         devices="",
         url="",
+        unverified=True,
+    ),
+    dict(
+        body="Derbyshire",
+        level="ICB \u2014 Derbyshire Medicines Management",
+        publisher="NHS Derby and Derbyshire ICB \u2014 Derbyshire Medicines Management",
+        doc="Continuous Glucose Monitoring Policy / Diabetes glucose monitoring interim position statement",
+        statusNote=(
+            "NOT VERIFIED on 07/09/2026. Derbyshire publishes its CGM policy and its "
+            "diabetes glucose monitoring interim position statement only on "
+            "derbyshiremedicinesmanagement.nhs.uk, and that site cannot be opened: its "
+            "TLS certificate EXPIRED on 09/07/2026 (notAfter 9 July 2026, checked "
+            "against the live server today), and even ignoring the certificate the site "
+            "answers HTTP 403. \u26a0 Do not send that link to a customer \u2014 it will show "
+            "them a browser security warning. Both documents are named and linked from "
+            "the ICB's own FOI 1696 response, which is why we know they exist; that "
+            "response also records that hybrid closed loop is commissioned in secondary "
+            "care by Chesterfield Royal Hospital NHS Foundation Trust and University "
+            "Hospitals of Derby and Burton NHS Foundation Trust, not by the ICB. No "
+            "position, device list or date until the documents can be opened."
+        ),
+        reviewDate="",
+        devices="",
+        url="",
+        unverified=True,
+    ),
+    dict(
+        body="Cornwall & the Isles of Scilly",
+        level="ICB \u2014 medicines management team, approved at area prescribing committee",
+        publisher="NHS Cornwall and Isles of Scilly ICB",
+        doc="Cornwall formulary \u2014 CGM entry",
+        statusNote=(
+            "NOT VERIFIED on 07/09/2026. No device-level Cornwall document could be "
+            "opened. cios.icb.nhs.uk answers every automated request with a bot "
+            "challenge (HTTP 202, 169-byte body), and no CGM formulary entry or "
+            "commissioning policy was found on any reachable host. What IS sourced: the "
+            "ICB's own April 2025 disclosure log, response FOI102290 of 9 April 2025, "
+            "confirms the formulary is held by the ICB medicines management team "
+            "(ciosicb.prescribing@nhs.net), is \u201cupdated on an ongoing basis\u201d with review "
+            "dates printed on each factsheet rather than centrally, and that new "
+            "formulary requests are approved at the area prescribing committee. That "
+            "tells a rep who owns the decision; it does not tell them which devices are "
+            "listed, so no devices are published here."
+        ),
+        reviewDate="",
+        devices="",
+        url="https://docs.cios.icb.nhs.uk/GET/d10369633",
         unverified=True,
     ),
     dict(
@@ -517,6 +589,40 @@ RECORDS = [
         devices="Nine rtCGM sensors on formulary \u2014 the widest CGM formulary captured here: FreeStyle Libre 2 Plus (15-day), FreeStyle Libre 3 Plus (15-day), Dexcom ONE+ (10-day), GlucoRx Aidex (15-day), Accu-Chek SmartGuide (14-day), ALLY (15-day), CareSens Air (15-day), Glucomen iCan (15-day) and Sibionics GS3-R (14-day). FreeStyle Libre 2 is listed Non Formulary, marked discontinued.",
         url="https://www.somersetformulary.nhs.uk/chaptersSubDetails.asp?FormularySectionID=6&SubSectionRef=06.01.06&SubSectionID=E100",
     ),
+    dict(
+        body="Bath & North East Somerset, Swindon & Wiltshire",
+        level="ICB + trusts (joint formulary), policy set by the BSW Area Prescribing Committee",
+        publisher=(
+            "BSW Formulary \u2014 NHS Bath and North East Somerset, Swindon and Wiltshire ICB "
+            "with Royal United Hospitals Bath NHS Foundation Trust, Great Western "
+            "Hospitals NHS Foundation Trust and Salisbury NHS Foundation Trust"
+        ),
+        doc="BSWICB-CP052 CGM sensor policy, alongside BSW Formulary chapter 06.01.06",
+        statusNote=(
+            "Version 007, agreed at the BSW Area Prescribing Committee in April 2026, "
+            "review date printed on the policy as November 2027. The policy splits the "
+            "formulary by traffic light and the split is the commercially useful part: "
+            "three sensors are GREEN \u2014 initiation by, or after advice and guidance from, "
+            "a diabetes specialist \u2014 while FreeStyle Libre 3 Plus is RED, prescribed and "
+            "supplied by acute trusts only, and only inside a hybrid closed loop plan. "
+            "Where several formulary devices meet the person's needs the lowest-cost one "
+            "is offered, and continuation requires 70% wear time and 70% data capture."
+        ),
+        reviewDate="November 2027",
+        devices=(
+            "GREEN, prescribable after specialist advice: Dexcom ONE+ (10-day, aged 2 and "
+            "over), FreeStyle Libre 2 Plus (15-day, aged 2 and over) and Accu-Chek "
+            "SmartGuide (14-day, adults 18 and over, where its predictive features are "
+            "clinically necessary \u2014 the formulary names care-home residents and frequent "
+            "nocturnal hypos). RED, acute trusts only and hybrid closed loop only: "
+            "FreeStyle Libre 3 Plus, and only with the mylife Loop AID system. Non "
+            "formulary, all marked discontinued by the manufacturer: Dexcom ONE (March "
+            "2026), FreeStyle Libre 2 (August 2025), FreeStyle Libre 3 (September 2025). "
+            "GlucoMen Day is existing patients only; GlucoRx AiDEX is non formulary and "
+            "the formulary flags it is not DVLA-approved for treatment decisions."
+        ),
+        url="https://bswtogether.org.uk/medicines/wp-content/uploads/sites/3/2026/05/BSW-rtCGM-commissioning-statement-May-2026-1.pdf",
+    ),
 ]
 
 
@@ -574,7 +680,10 @@ def build():
         if r.get("abolitionNote"):
             r["statusNote"] = (r.get("statusNote", "").rstrip()
                                + " " + r["abolitionNote"]).strip()
-        r["verified"] = VERIFIED
+        # A row that could NOT be re-opened on this run keeps the date it WAS last
+        # opened on. Stamping today's date on a row we did not fetch today would be
+        # exactly the unverified-carried-forward failure this file exists to prevent.
+        r["verified"] = r.get("verifiedOn") or VERIFIED
         rows.append([r.get(k, "") for k in SCHEMA])
 
     bodies = sorted({r[0] for r in rows})
@@ -583,7 +692,10 @@ def build():
         "therapyArea": "Diabetes technology — continuous glucose monitoring (CGM) and hybrid closed loop (HCL)",
         "icbMergerSource": ICB_MERGER_SOURCE,
         "method": (
-            "Every row's source URL was opened and returned HTTP 200 on dataAsOf. Titles, "
+            "Every row's source URL was opened and returned HTTP 200 on that row's own "
+            "'verified' date, which is usually but not always dataAsOf: where a re-check "
+            "was blocked by an access challenge rather than a 404, the row keeps the date "
+            "it was last genuinely opened on instead of inheriting today's. Titles, "
             "publishers, versions, approval wording, review dates and device names are "
             "transcribed from the document itself, never from a search summary or trade "
             "coverage. 'level' records the level the source actually publishes at — an Area "
