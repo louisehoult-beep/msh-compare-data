@@ -12,8 +12,17 @@ Two document types sit on that page:
   Product Matrix (.xlsx)  a populated grid: supplier, brand, MPC, NPC and one
                           column per specification attribute. This is the same
                           grain as the Hub's Differentiator, authored by the NHS.
-  Support Document (.pdf) narrative describing the features a clinician should
-                          weigh in that category. Not a grid.
+  Support Document (.pdf) narrative on the features a clinician should weigh in
+                          that category - AND, in 67 of the 74 documents, a full
+                          product grid of exactly the same kind, drawn into the
+                          PDF rather than published as a spreadsheet. Those are
+                          parsed too, by scripts/icc_pdf_matrix.py.
+
+CORRECTED 07/09/2026. This script was written on 28/08/2026 believing the support
+documents were narrative only and that just one machine-readable grid existed. That
+was wrong, and it cost the Hub 1,450 independently authored product rows across 67
+clinical categories - the only like-for-like, multi-supplier specification data the
+Hub has that is not a manufacturer describing its own product.
 
 This script downloads every publicly linked document to the ICC library on
 OneDrive (so we hold the source evidence), then writes two structured files:
@@ -31,10 +40,10 @@ returns 404 ResourceNotFound), and we do not guess at unlinked filenames. If a
 Product Matrix is not linked publicly, we do not have it, and the Hub must not
 imply otherwise.
 
-Only one full Product Matrix was publicly linked as at 28/08/2026 (Adult ECG
-Electrodes). That is not a bug in this script. Matrices generally sit behind
-authentication.supplychain.nhs.uk. The count is reported on every run so a drop
-or a jump is visible rather than silent.
+Only one full Product Matrix .xlsx is publicly linked (Adult ECG Electrodes);
+the rest sit behind authentication.supplychain.nhs.uk. The grids inside the
+support-document PDFs are public, and are where the other 67 categories come
+from. Both counts are reported on every run so a drop or a jump is visible.
 
 Usage:
     python3 scripts/refresh_icc.py            # download new/changed, rebuild JSON
@@ -54,6 +63,8 @@ import time
 import urllib.error
 import urllib.request
 import zipfile
+
+import icc_pdf_matrix
 
 ICC_URL = "https://www.supplychain.nhs.uk/savings/information-for-clinical-choice/"
 
@@ -139,6 +150,50 @@ def parse_issue_date(filename: str) -> str | None:
         return dt.date(int(year), month_num, int(day) if day else 1).isoformat()
     except ValueError:
         return None
+
+
+BLOB_BASE = "https://azuksappnpdsa01.blob.core.windows.net/datashare/"
+
+
+def still_served(url: str) -> bool:
+    """
+    Is NHS Supply Chain still serving this document at its own URL?
+
+    A HEAD request, because the question is only whether the file is still
+    published - not what is in it, which we already hold. A document the ICC
+    index no longer links but the blob store still serves is unlinked; one that
+    404s has actually been taken down and must not be published by the Hub.
+    """
+    req = urllib.request.Request(url, method="HEAD", headers={"User-Agent": UA})
+    try:
+        with urllib.request.urlopen(req, timeout=45) as r:
+            return 200 <= r.status < 300
+    except (urllib.error.URLError, TimeoutError, OSError):
+        return False
+
+
+def label_from_filename(filename: str) -> str:
+    """
+    Recover a category label from an ICC filename, for documents the page no
+    longer carries a label for. The filenames are consistently shaped:
+
+      ICC-NP-Foam-Dressings-Support-Document-4-October-2022-T3.pdf
+        -> Foam Dressings
+
+    The house prefixes, the document-type words and the trailing issue date and
+    revision tag are stripped; whatever is left is the category as NHS Supply
+    Chain themselves wrote it.
+    """
+    stem = os.path.splitext(filename)[0]
+    stem = DATE_RE.sub("", stem)
+    stem = re.sub(r"^ICC-(NP-)?", "", stem, flags=re.I)
+    stem = re.sub(
+        r"-?(ICC-NP|Support[-\s]Document|Support[-\s]Doc|Product[-\s]Matrix)-?",
+        "-", stem, flags=re.I,
+    )
+    stem = re.sub(r"-(T\d+|RC|MS|MSC|MSRC|[0-9a-f]{8,})$", "", stem, flags=re.I)
+    stem = re.sub(r"[-_]+", " ", stem).strip(" -")
+    return re.sub(r"\s+", " ", stem).strip() or os.path.splitext(filename)[0]
 
 
 def doc_type(filename: str) -> str:
@@ -346,6 +401,12 @@ def pdf_text(path: str, limit: int = 6000) -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
+    ap.add_argument("--no-unlinked", action="store_true",
+                    help="Ignore held documents the ICC page no longer links, "
+                         "even where NHS Supply Chain still serves them.")
+    ap.add_argument("--no-support-matrices", action="store_true",
+                    help="Publish the .xlsx matrices only, skipping the grids "
+                         "drawn inside the support-document PDFs.")
     ap.add_argument("--no-fetch", action="store_true",
                     help="rebuild JSON from the local library without downloading")
     args = ap.parse_args()
@@ -378,11 +439,48 @@ def main() -> int:
 
     log("  %d documents linked on the page" % len(entries))
 
+    # DOCUMENTS WE HOLD THAT THE PAGE NO LONGER LINKS.
+    #
+    # NHS Supply Chain rotates its ICC index: 15 documents we already hold were
+    # linked on 28/08/2026 and are not linked on 07/09/2026, including EVERY
+    # wound care category (Foam Dressings, Gelling Fibres, NPWT, and the three
+    # Wound Contact documents). Dropping them silently would have left the Hub's
+    # differential with no wound care in it at all.
+    #
+    # Unlinked is NOT withdrawn, and the difference is checkable rather than
+    # assumed: each file is HEAD-requested at its own blob URL, and only the ones
+    # NHS Supply Chain is still serving are kept. A file that has actually been
+    # taken down 404s and is dropped. The ones kept are marked
+    # listing_status "unlinked" with the date last confirmed served, so the tool
+    # can say so rather than presenting them as current index material.
+    #
+    # This does not weaken the script's "never guess a filename" rule. Nothing is
+    # guessed: these are files already downloaded from the ICC page, re-checked
+    # at the URL they came from.
+    unlinked_entries = []
+    if not args.no_unlinked:
+        linked_names = {u.rsplit("/", 1)[-1] for u in seen}
+        for filename in sorted(os.listdir(LIBRARY)):
+            if doc_type(filename) is None or filename in linked_names:
+                continue
+            url = BLOB_BASE + filename
+            if not still_served(url):
+                log("  DELISTED and no longer served, dropped: %s" % filename)
+                continue
+            label = label_from_filename(filename)
+            unlinked_entries.append((url, label))
+        if unlinked_entries:
+            log("  %d held document(s) no longer linked but still served"
+                % len(unlinked_entries))
+
     catalogue = []
     matrices = {}
     downloaded = skipped = failed = 0
+    grid_failures: list[str] = []
+    support_parse_warned = False
 
-    for url, label in sorted(entries, key=lambda e: e[1].lower()):
+    unlinked_urls = {u for u, _l in unlinked_entries}
+    for url, label in sorted(entries + unlinked_entries, key=lambda e: e[1].lower()):
         filename = url.rsplit("/", 1)[-1]
         dest = os.path.join(LIBRARY, filename)
         kind = doc_type(filename)
@@ -411,6 +509,7 @@ def main() -> int:
             "filename": filename,
             "source_url": url,
             "issued": parse_issue_date(filename),
+            "listing_status": "unlinked" if url in unlinked_urls else "linked",
             "bytes": len(raw),
             "sha256": hashlib.sha256(raw).hexdigest()[:16],
         }
@@ -424,6 +523,7 @@ def main() -> int:
                     "category": label,
                     "source_url": url,
                     "issued": entry["issued"],
+                    "listing_status": entry["listing_status"],
                     **parsed,
                 }
                 log("  MATRIX  %-42s %3d products, %2d columns"
@@ -432,6 +532,37 @@ def main() -> int:
             summary = pdf_text(dest, limit=4000)
             entry["summary"] = summary
             entry["has_text"] = bool(summary)
+
+            # A support document is not only narrative: 67 of the 74 carry a
+            # drawn product grid. Parsing it is what gives the Hub a real
+            # multi-product differential outside wound care.
+            if not args.no_support_matrices:
+                try:
+                    grid = icc_pdf_matrix.parse_support_matrix(dest, label)
+                except RuntimeError as exc:
+                    if not support_parse_warned:
+                        log("  SUPPORT-DOC GRIDS SKIPPED: %s" % exc)
+                        support_parse_warned = True
+                    grid = None
+                except Exception as exc:              # noqa: BLE001
+                    log("    grid parse failed: %s (%s)" % (filename, exc))
+                    grid_failures.append(filename)
+                    grid = None
+                if grid:
+                    entry["product_count"] = len(grid["products"])
+                    entry["spec_columns"] = len(grid["columns"])
+                    entry["has_grid"] = True
+                    matrices[label] = {
+                        "category": label,
+                        "source_url": url,
+                        "issued": entry["issued"],
+                        "listing_status": entry["listing_status"],
+                        **grid,
+                    }
+                    log("  GRID    %-42s %3d products, %2d columns"
+                        % (label[:42], len(grid["products"]), len(grid["columns"])))
+                else:
+                    entry["has_grid"] = False
 
         catalogue.append(entry)
 
@@ -449,13 +580,19 @@ def main() -> int:
         "note": (
             "Only documents linked from the ICC page are held. The blob container "
             "does not permit listing, and unlinked filenames are never guessed. "
-            "Product Matrices are the populated comparison grids; Support Documents "
-            "are narrative descriptions of the features clinicians weigh, not grids."
+            "Product Matrices are the populated comparison grids published as "
+            "spreadsheets. Support Documents carry the narrative AND, in most "
+            "cases, the same grid drawn into the PDF; has_grid says which."
         ),
         "counts": {
             "documents": len(catalogue),
+            "linked": sum(1 for e in catalogue if e["listing_status"] == "linked"),
+            "unlinked_still_served": sum(
+                1 for e in catalogue if e["listing_status"] == "unlinked"),
             "product_matrices": n_matrix,
             "support_documents": n_support,
+            "support_documents_with_grid": sum(
+                1 for e in catalogue if e.get("has_grid")),
         },
         "documents": catalogue,
     }
@@ -471,6 +608,7 @@ def main() -> int:
             "available through NHS Supply Chain, not evidence of uptake at any trust."
         ),
         "matrix_count": len(matrices),
+        "product_count": sum(len(m["products"]) for m in matrices.values()),
         "matrices": matrices,
     }
 
@@ -485,6 +623,9 @@ def main() -> int:
     log("  catalogue: %d documents (%d matrices, %d support docs)"
         % (len(catalogue), n_matrix, n_support))
     log("  matrices:  %d products across %d categories" % (total_products, len(matrices)))
+    if grid_failures:
+        log("  NOTE: %d support-document grid(s) failed to parse: %s"
+            % (len(grid_failures), ", ".join(grid_failures[:5])))
     log("  wrote data/icc-catalogue.json and data/icc-matrices.json")
 
     if failed:
