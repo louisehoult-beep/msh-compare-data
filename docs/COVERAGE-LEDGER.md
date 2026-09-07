@@ -22,7 +22,7 @@ low coverage there means exhausted, not neglected.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
-| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 24 | 19.7% | 74 | 17 | STARTED |
+| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 24 | 19.7% | 72 | 19 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 18 | 17.8% | 62 | 17 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 14 | 22.2% | 30 | 13 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 8 | 13.3% | 35 | 7 | STARTED |
@@ -67,7 +67,7 @@ low coverage there means exhausted, not neglected.
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 5 | 0 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 1 | 12.5% | 0 | 3 | STARTED · BLOCKED |
 | Polymer Aprons | infection | 8 | 1 | 12.5% | 2 | 5 | STARTED |
-| Polymer Products | infection | 5 | 1 | 20.0% | 4 | 0 | STARTED |
+| Polymer Products | infection | 5 | 2 | 40.0% | 3 | 0 | STARTED |
 | Brachytherapy Seeds and Associated Accessories | oncology | 2 | 1 | 50.0% | 1 | 0 | STARTED |
 | Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services | ent | 7 | 0 | 0.0% | 3 | 3 | NOT STARTED |
 | Contrast Injectors, Consumables and Associated Options and Related Services | imaging | 5 | 0 | 0.0% | 3 | 1 | NOT STARTED |

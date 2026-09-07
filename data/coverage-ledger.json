@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-02",
-  "differentiator.json published": 31681,
-  "differentiator.json held": 46808
+  "differentiator.json published": 31689,
+  "differentiator.json held": 47190
  },
  "counts": {
   "frameworks": 121,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 502,
-  "inScopeSuppliersNeedingCrawl": 518,
+  "inScopeSuppliersNeedingCrawl": 515,
   "inScopeSuppliersNeedingDomain": 455,
-  "suppliersRefused": 232,
+  "suppliersRefused": 234,
   "blockedFrameworks": 2
  },
  "unresolvedSupplierNames": [
@@ -2130,10 +2130,6 @@
      "domain": null
     },
     {
-     "supplier": "CellPath",
-     "domain": "cellpath.com"
-    },
-    {
      "supplier": "Chirus",
      "domain": null
     },
@@ -2330,10 +2326,6 @@
      "domain": null
     },
     {
-     "supplier": "Syringa UK",
-     "domain": "syringa-uk.co.uk"
-    },
-    {
      "supplier": "Thriva",
      "domain": null
     },
@@ -2445,6 +2437,12 @@
      "checked": "2026-08-25"
     },
     {
+     "supplier": "CellPath",
+     "domain": "www.cellpath.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-07"
+    },
+    {
      "supplier": "Critical Healthcare",
      "domain": "www.criticalhealthcare.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -2511,6 +2509,12 @@
      "checked": "2026-08-31"
     },
     {
+     "supplier": "Syringa UK",
+     "domain": "www.syringa-uk.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-07"
+    },
+    {
      "supplier": "Valley Northern Ltd",
      "domain": "valleynorthern.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -2533,7 +2537,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "heldNeedingCategory": 8,
-    "crawlable": 4,
+    "crawlable": 2,
     "needDomain": 62
    },
    "published": [
@@ -2592,7 +2596,6 @@
     "BHR Pharmaceuticals",
     "Bio-Packaging",
     "Bruker UK",
-    "CellPath",
     "Chirus",
     "Clinical Design Technologies",
     "Craven & Co",
@@ -2642,7 +2645,6 @@
     "Sebia UK",
     "Serosep UK",
     "Solmedia Laboratory Supplies",
-    "Syringa UK",
     "Thriva",
     "Twist Bioscience",
     "Una Health",
@@ -2654,6 +2656,7 @@
     "AB Scientific",
     "Andrac Ltd",
     "Bio-Rad Laboratories UK",
+    "CellPath",
     "Critical Healthcare",
     "Don Whitley Scientific",
     "EUROIMMUN UK",
@@ -2665,11 +2668,12 @@
     "OscarTech UK",
     "Randox Laboratories",
     "Sakura Finetek UK",
+    "Syringa UK",
     "Valley Northern Ltd",
     "Williams Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 74,
+   "actionableTotal": 72,
    "blockedReason": null
   },
   {
@@ -6212,6 +6216,10 @@
      "domain": "marshallproducts.co.uk"
     },
     {
+     "supplier": "Numed Healthcare",
+     "domain": "numed.co.uk"
+    },
+    {
      "supplier": "Proact Medical Ltd",
      "domain": "proactmedical.co.uk"
     },
@@ -6226,10 +6234,6 @@
     {
      "supplier": "Gce Group Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Numed Healthcare",
-     "domain": "numed.co.uk"
     },
     {
      "supplier": "Philips Respironics",
@@ -6300,8 +6304,8 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "heldNeedingCategory": 3,
-    "crawlable": 1,
+    "heldNeedingCategory": 4,
+    "crawlable": 0,
     "needDomain": 5
    },
    "published": [
@@ -6331,13 +6335,13 @@
    "heldOnly": [
     "Henleys Medical Supplies Limited",
     "Marshall Products",
+    "Numed Healthcare",
     "Proact Medical Ltd"
    ],
    "notCrawled": [
     "Aquilant Critical Care",
     "B.N.O.S Meditech Ltd",
     "Gce Group Ltd",
-    "Numed Healthcare",
     "Philips Respironics",
     "Syringa Wholesale Distributor"
    ],
@@ -9973,8 +9977,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": null,
    "suppliersAwarded": 5,
-   "suppliersPublished": 1,
-   "coverage": 20.0,
+   "suppliersPublished": 2,
+   "coverage": 40.0,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9983,10 +9987,6 @@
     "infection"
    ],
    "crawlWorklist": [
-    {
-     "supplier": "Polystar Plastics Ltd",
-     "domain": "polystar.co.uk"
-    },
     {
      "supplier": "Berry BPI Recycled Products",
      "domain": null
@@ -10013,17 +10013,16 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "crawlable": 0,
     "needDomain": 3
    },
    "published": [
-    "GV Health"
-   ],
-   "publishedElsewhere": [],
-   "heldOnly": [
+    "GV Health",
     "Polystar Plastics Ltd"
    ],
+   "publishedElsewhere": [],
+   "heldOnly": [],
    "notCrawled": [
     "Berry BPI Recycled Products",
     "Praxis Medical Ltd",
@@ -10031,7 +10030,7 @@
    ],
    "refused": [],
    "unknown": [],
-   "actionableTotal": 4,
+   "actionableTotal": 3,
    "blockedReason": null
   },
   {
@@ -11760,6 +11759,10 @@
    "speciality": [],
    "crawlWorklist": [
     {
+     "supplier": "Numed Healthcare",
+     "domain": "numed.co.uk"
+    },
+    {
      "supplier": "Seca Ltd",
      "domain": "seca.com"
     },
@@ -11794,10 +11797,6 @@
     {
      "supplier": "Medical Graphics UK Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Numed Healthcare",
-     "domain": "numed.co.uk"
     }
    ],
    "domainsMissing": [
@@ -11870,8 +11869,8 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 1,
-    "heldNeedingCategory": 1,
-    "crawlable": 1,
+    "heldNeedingCategory": 2,
+    "crawlable": 0,
     "needDomain": 8
    },
    "published": [],
@@ -11883,6 +11882,7 @@
     "Baxter / Hillrom"
    ],
    "heldOnly": [
+    "Numed Healthcare",
     "Seca Ltd"
    ],
    "notCrawled": [
@@ -11893,8 +11893,7 @@
     "iRhythm Technologies Ltd",
     "Jaeger Medical UK Limited",
     "LifeSignals Europe Limited",
-    "Medical Graphics UK Ltd",
-    "Numed Healthcare"
+    "Medical Graphics UK Ltd"
    ],
    "refused": [
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
