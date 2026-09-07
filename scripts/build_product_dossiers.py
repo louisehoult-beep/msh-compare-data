@@ -487,6 +487,66 @@ class Builder:
                       scope=scope, variant=label)
             self.stats["tariff_rows"] += 1
 
+    def add_regulatory(self):
+        """MHRA field safety notices and alerts (`^o371`).
+
+        The join is deliberately stricter than the other sources. An alert's
+        `company` field is only ever resolved from the alert's own free text
+        (refresh_mhra_alerts.py), so a company match alone says "MHRA named
+        this company somewhere in this notice" — it does NOT say the notice is
+        about the dossier's specific product. Most alerts are about one named
+        device, and attaching a company-wide notice to every product that
+        company makes would overstate what MHRA actually said for the ones the
+        notice never mentions.
+
+        So an alert attaches to a dossier only when BOTH hold:
+          (a) the alert's resolved company matches the dossier's supplier
+              (through the same alias registry as every other source here);
+          (b) a significant word of the dossier's own product name appears in
+              the alert's title or description — i.e. MHRA's own text names
+              this product, not just this company.
+        An alert that clears (a) but not (b) is left unattached rather than
+        guessed onto every product of that supplier. Root rule 14: publishing
+        nothing is the right output on thin evidence, here per-product.
+        """
+        store = load("mhra-alerts.json", {"alerts": []})
+        sid_base = "mhra"
+        # Group dossiers by resolved supplier once, rather than re-resolving
+        # every alert's company against every dossier.
+        by_supplier = collections.defaultdict(list)
+        for d in self.by_key.values():
+            by_supplier[d.supplier].append(d)
+
+        for n, alert in enumerate(store.get("alerts") or []):
+            raw_company = alert.get("company")
+            if not raw_company:
+                continue
+            company, _state = self.resolve_supplier(raw_company)
+            candidates = by_supplier.get(company)
+            if not candidates:
+                continue
+            hay = ((alert.get("title") or "") + " " + (alert.get("description") or "")).lower()
+            hay_words = set(re.findall(r"[a-z0-9]{4,}", hay))
+            sid = "%s-%d" % (sid_base, n)
+            block = {
+                "id": sid,
+                "kind": "regulatory",
+                "name": "MHRA",
+                "detail": alert.get("alertType"),
+                "url": alert.get("url"),
+                "issued": alert.get("issuedDate"),
+                "authority": "MHRA field safety notice or alert.",
+            }
+            for d in candidates:
+                name_words = set(re.findall(r"[a-z0-9]{4,}", nk(d.name)))
+                if not (name_words & hay_words):
+                    continue
+                d.add_source(sid, block)
+                d.observe(sid, "MHRA alert", alert.get("title"))
+                if alert.get("play"):
+                    d.observe(sid, "MHRA alert — what to do", alert.get("play"))
+                self.stats["regulatory_rows"] += 1
+
     def link_families(self):
         """Cross-attach ICC measurements across a brand family, clearly marked.
 
@@ -530,6 +590,7 @@ class Builder:
         self.add_manufacturer()
         self.add_catalogue()      # attaches to NPCs the ICC pass established
         self.add_tariff()
+        self.add_regulatory()
         self.link_families()
         return self
 
