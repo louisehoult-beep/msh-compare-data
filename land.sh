@@ -77,7 +77,13 @@ fi
 # left over from wt.sh (retired 03/09/2026) as well as the shared checkout —
 # --git-dir inside a worktree is that worktree's private .git/worktrees/<name>,
 # which would give every worktree its own lock, i.e. no lock at all.
-LOCK_DIR="$(git rev-parse --git-common-dir)/land.lock"
+# Outside the OneDrive-synced tree for the same reason session-lock.sh is: on
+# 05/09/2026 a run had to clear two stale git locks by hand because OneDrive
+# refused the delete. Same root, same repo key, so both locks travel together.
+LAND_LOCK_ROOT="${MSH_LOCK_ROOT:-$HOME/.claude/msh-locks}"
+LAND_REPO_KEY="$(git rev-parse --show-toplevel | shasum | awk '{print $1}' | cut -c1-12)"
+mkdir -p "$LAND_LOCK_ROOT/$LAND_REPO_KEY"
+LOCK_DIR="$LAND_LOCK_ROOT/$LAND_REPO_KEY/land.lock"
 LOCK_WAIT_SECONDS="${LAND_LOCK_WAIT:-600}"
 
 LOCK_HELD=0
@@ -92,14 +98,27 @@ LOCK_HELD=0
 # not claim or release it — see session-lock.sh's own header for why. A session
 # that never claimed at all (a quick automated run with no extended edit phase)
 # is unaffected; this only stops landing OVER a *different* live session's claim.
-SESSION_LOCK_DIR="$(git rev-parse --git-common-dir)/session.lock"
+# Asked of session-lock.sh rather than recomputed, so the two cannot drift.
+SESSION_LOCK_DIR="$(./session-lock.sh lock-path)"
 THIS_SESSION="${CLAUDE_CODE_SESSION_ID:-${CLAUDE_CODE_HOST_SESSION_ID:-}}"
 [ -n "$THIS_SESSION" ] || THIS_SESSION="pid-${CLAUDE_PID:-$$}"
 
 check_session_claim() {
-  [ -d "$SESSION_LOCK_DIR" ] || return 0
+  # CHANGED 07/09/2026: a held claim is now REQUIRED, not merely respected.
+  # Until today this only refused to land over a DIFFERENT session's claim, so a
+  # task that never claimed at all could still land — and three of the six local
+  # tasks writing this repo had no claim step in their spec. Enforcing it here
+  # makes claiming a property of the tool instead of something each task has to
+  # remember. CI is unaffected: the GitHub Actions workflows commit and push
+  # directly and never call this script.
+  if [ ! -d "$SESSION_LOCK_DIR" ] || [ ! -f "$SESSION_LOCK_DIR/owner.json" ]; then
+    echo "REFUSING: you have not claimed this tree." >&2
+    echo "  ./session-lock.sh claim \"name-of-the-work\"" >&2
+    echo "Claim it, re-run your gate, then land. The claim is what stops another" >&2
+    echo "session overwriting your edits while you are still making them." >&2
+    exit 1
+  fi
   local stamp="$SESSION_LOCK_DIR/owner.json"
-  [ -f "$stamp" ] || return 0
   local holder_session holder_pid
   holder_session="$(python3 -c 'import json,sys
 try: print(json.load(open(sys.argv[1])).get("session_id",""))
@@ -109,7 +128,15 @@ except Exception: print("")' "$stamp" 2>/dev/null || echo "")"
 try: print(json.load(open(sys.argv[1])).get("pid",""))
 except Exception: print("")' "$stamp" 2>/dev/null || echo "")"
   if [ -n "$holder_pid" ] && ! ps -p "$holder_pid" >/dev/null 2>&1; then
-    return 0
+    # A dead session's claim used to be waved through, which since the check
+    # above became mandatory would be a hole straight back to landing unclaimed.
+    # Take it over properly instead, so the tree always has exactly one owner.
+    echo "REFUSING: the claim on this tree belongs to a session that has died," >&2
+    echo "and it is not yours:" >&2
+    echo "    $(cat "$stamp" 2>/dev/null || echo "(unreadable stamp)")" >&2
+    echo "  ./session-lock.sh claim \"name-of-the-work\"" >&2
+    echo "clears a dead holder by itself. Claim it, re-run your gate, then land." >&2
+    exit 1
   fi
   echo "REFUSING: a different live session holds the editing claim on this tree:" >&2
   python3 -c '

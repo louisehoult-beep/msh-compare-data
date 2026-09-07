@@ -48,8 +48,24 @@ usage() {
   exit 2
 }
 
-LOCK_DIR="$(git rev-parse --git-common-dir)/session.lock"
+# ------------------------------------------------------- where the lock lives
+# NOT inside .git. This checkout sits on OneDrive, and OneDrive denies the delete
+# on a directory it is syncing. On 06/09/2026 a supplier-deep-capture run hit
+# "OS-level permission denial on every delete attempt" clearing a stale lock and
+# made no changes at all; 05/09/2026 had to clear two stale git locks and a stale
+# session lock by hand (^o317). A lock that cannot be released is worse than no
+# lock. So it lives outside the synced tree, keyed by the repo it guards so two
+# checkouts never share one. MSH_LOCK_ROOT overrides it for a test.
+LOCK_ROOT="${MSH_LOCK_ROOT:-$HOME/.claude/msh-locks}"
+REPO_KEY="$(git rev-parse --show-toplevel | shasum | awk '{print $1}' | cut -c1-12)"
+LOCK_DIR="$LOCK_ROOT/$REPO_KEY/session.lock"
 STAMP="$LOCK_DIR/owner.json"
+
+# Only meaningful for a few hours after 07/09/2026: a session that claimed under
+# the old in-.git location before this change is invisible to the new path, and
+# taking the tree from underneath it is the exact failure this lock exists to
+# stop. Checked on claim, never written to.
+LEGACY_LOCK_DIR="$(git rev-parse --git-common-dir)/session.lock"
 
 THIS_SESSION="${CLAUDE_CODE_SESSION_ID:-${CLAUDE_CODE_HOST_SESSION_ID:-}}"
 THIS_PID="${CLAUDE_PID:-$$}"
@@ -68,8 +84,15 @@ except Exception:
 }
 
 holder_pid_alive() {
+  # A lock directory with no stamp yet is a claim in flight: the claimer has done
+  # its atomic mkdir but has not written owner.json. Absence of proof is not proof
+  # of staleness, so report ALIVE and leave it alone — clearing it here would
+  # reintroduce, in a smaller window, the very overwrite this lock prevents. A
+  # genuinely corrupt stampless lock therefore needs --force, which is correct.
+  [ -f "$STAMP" ] || return 0
   local pid; pid="$(read_field pid)"
-  [ -n "$pid" ] && ps -p "$pid" >/dev/null 2>&1
+  [ -n "$pid" ] || return 0
+  ps -p "$pid" >/dev/null 2>&1
 }
 
 describe_holder() {
@@ -88,7 +111,9 @@ print("%s  session=%s  pid=%s  host=%s  since=%s" % (
 }
 
 write_stamp() {
-  mkdir -p "$LOCK_DIR"
+  # Does NOT create $LOCK_DIR — the caller has already created it with a bare
+  # mkdir, which is the atomic test-and-set. Creating it here too would make that
+  # guarantee meaningless.
   python3 -c '
 import json, socket, sys, time
 name, sid, pid = sys.argv[1:4]
@@ -102,6 +127,13 @@ json.dump({
 case "${1:-}" in
   status)
     describe_holder
+    exit 0
+    ;;
+
+  lock-path)
+    # Single source of truth for where the claim lives. land.sh asks for it
+    # rather than recomputing the path, so the two can never drift apart.
+    echo "$LOCK_DIR"
     exit 0
     ;;
 
@@ -132,8 +164,36 @@ case "${1:-}" in
     done
     WAIT_SECONDS="${SESSION_LOCK_WAIT:-600}"
 
+    if [ -d "$LEGACY_LOCK_DIR" ] && [ -f "$LEGACY_LOCK_DIR/owner.json" ]; then
+      LEGACY_SESSION="$(python3 -c 'import json,sys
+try: print(json.load(open(sys.argv[1])).get("session_id",""))
+except Exception: print("")' "$LEGACY_LOCK_DIR/owner.json" 2>/dev/null || echo "")"
+      LEGACY_PID="$(python3 -c 'import json,sys
+try: print(json.load(open(sys.argv[1])).get("pid",""))
+except Exception: print("")' "$LEGACY_LOCK_DIR/owner.json" 2>/dev/null || echo "")"
+      # A legacy lock held by THIS session is the migration case: the session
+      # claimed under the old path, then this very change moved the path. It is
+      # our own claim, so it blocks nothing.
+      [ "$LEGACY_SESSION" = "$THIS_SESSION" ] && LEGACY_PID=""
+      if [ -n "$LEGACY_PID" ] && ps -p "$LEGACY_PID" >/dev/null 2>&1; then
+        echo "REFUSING: a live session holds the OLD in-.git claim (pre-07/09/2026)." >&2
+        echo "  $LEGACY_LOCK_DIR (pid $LEGACY_PID)" >&2
+        echo "Wait for it to finish, then claim again. Do not delete that lock by hand" >&2
+        echo "while its process is alive." >&2
+        exit 1
+      fi
+    fi
+
+    mkdir -p "$(dirname "$LOCK_DIR")"
+
     waited=0
-    while [ -d "$LOCK_DIR" ]; do
+    # `mkdir` WITHOUT -p is the whole mutual exclusion: it fails if the directory
+    # already exists, so exactly one caller can win. The previous `mkdir -p` in
+    # write_stamp always succeeded, which meant two sessions could both fall
+    # through this loop and both stamp the lock — the second silently erasing the
+    # first's claim (06/09/2026, ^o317). land.sh's own land.lock always used this
+    # pattern; this is session.lock catching up.
+    while ! mkdir "$LOCK_DIR" 2>/dev/null; do
       HOLDER_SESSION="$(read_field session_id)"
       if [ "$HOLDER_SESSION" = "$THIS_SESSION" ]; then
         echo "already held by this session:"
@@ -144,13 +204,13 @@ case "${1:-}" in
         echo "note: previous holder's process is gone; clearing stale lock:" >&2
         describe_holder >&2
         rm -rf "$LOCK_DIR"
-        break
+        continue
       fi
       if [ "$FORCE" = "1" ]; then
         echo "note: --force given; taking over from the live holder below:" >&2
         describe_holder >&2
         rm -rf "$LOCK_DIR"
-        break
+        continue
       fi
       if [ "$WAIT" != "1" ]; then
         echo "REFUSING: the tree is claimed by a live session:" >&2
