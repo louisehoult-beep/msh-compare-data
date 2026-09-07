@@ -745,7 +745,7 @@
         ? '<div style="margin-top:10px;padding:9px 11px;background:' + SOFT + ';border:1px dashed '
           + GOLD + ';border-radius:8px;font-size:12px;color:#7a5b14;line-height:1.5;">'
           + '<strong>These products sit in different sub-categories of this document</strong> ('
-          + esc(Object.keys(subs).join(' &middot; ')) + '). NHS Supply Chain groups them separately '
+          + Object.keys(subs).map(esc).join(' &middot; ') + '). NHS Supply Chain groups them separately '
           + 'because they are not measured on quite the same basis. Read across with that in mind.</div>'
         : '';
 
