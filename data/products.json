@@ -2160,5 +2160,795 @@
     "cap": "Business case / HTA with throughput and uptime modelling; managed-service options",
     "mh": "Manual-handling risk-assessment evidence: measured reduction in handling force or in the number of handlers required, staff injury and sickness-absence data, plus the training and competence package. Single-patient-use versus reusable is an infection-prevention and laundering argument, not a price one",
     "mhcap": "Business case carrying safe working load, the LOLER thorough-examination interval and servicing profile, staff injury and sickness data, and total cost of ownership including slings, consumables and training"
+  },
+  "EVIDENCE_BAND": {
+    "continence": "continence-bladder-bowel",
+    "vascular": "vascular-access-iv",
+    "wound": "wound-care",
+    "diabetes": "diabetes-endocrinology",
+    "endoscopy": "colorectal-gi-endoscopy",
+    "respiratory": "respiratory",
+    "handling": "patient-handling",
+    "ent": "ent-head-neck",
+    "ophthalmology": "ophthalmology",
+    "gastro": "colorectal-gi-endoscopy",
+    "renal": "renal",
+    "womens": "gynaecology-womens-health",
+    "imaging": "radiology-imaging",
+    "oncology": "oncology-sact",
+    "ostomy": "continence-bladder-bowel",
+    "nutrition": "nutrition-dietetics",
+    "audiology": "audiology-hearing",
+    "infection": "infection-prevention-control",
+    "rehab": "rehab-prosthetics-orthotics",
+    "bloodtx": "haematology-pbm",
+    "digital": "digital-medical-it",
+    "dermatology": "dermatology",
+    "orthotics": "rehab-prosthetics-orthotics",
+    "ultrasound": "radiology-imaging",
+    "pharma": "pharmacy-medicines",
+    "skin-prep": "infection-prevention-control",
+    "neonatal": "maternity-neonatal"
+  },
+  "EVIDENCE_HIGHLIGHTS": {
+    "wound-care": {
+      "progress_slug": "tissue-viability-and-wound-care",
+      "band_title": "Tissue Viability and Wound Care",
+      "area": "NHS Burden & Economics",
+      "rows": [
+        {
+          "ref": "Guest, Fuller & Vowden, BMJ Open 2020",
+          "kind": "Cohort study (~3,000 patients, THIN database)",
+          "finding": "NHS managed an estimated 3.8 million people with a wound in 2017/18, at an annual cost of approximately £8.3bn — 81% of it incurred in the community. Chronic wounds healed at 49% versus 89% for acute wounds; wounds with definite/suspected infection healed at 45% versus 59% for those without.",
+          "implication": "Unhealed and infected wounds cost dramatically more to manage than healed ones — the commercial case for anything that speeds healing or reduces infection has to be made in community nursing time, not just product price.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/33371051/",
+          "source_label": "PubMed ↗"
+        },
+        {
+          "ref": "Guest et al, International Wound Journal 2017",
+          "kind": "Retrospective cohort (~2,000 patients, THIN database, 2012/13 data)",
+          "finding": "Wounds that healed within the study year cost the NHS an estimated £2.1bn to manage; the 39% that did not heal within the year cost £3.2bn — an unhealed wound cost around 135% more than a healed one.",
+          "implication": "The cost gap between healed and unhealed wounds is the clearest financial argument for anything that reduces time-to-healing, whatever the unit price of the dressing.",
+          "url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/iwj.12603",
+          "source_label": "Wiley ↗"
+        }
+      ]
+    },
+    "oncology-sact": {
+      "progress_slug": "oncology-and-sact",
+      "band_title": "Oncology and SACT",
+      "area": "National Standards, Strategy & Access",
+      "rows": [
+        {
+          "ref": "NICE NG12 — Suspected cancer: recognition and referral",
+          "kind": "NICE guideline. Published 23/06/2015, last updated 15/04/2026",
+          "finding": "Covers identifying children, young people and adults with symptoms that could be caused by cancer, the appropriate investigations in primary care, and selection of people to refer for a specialist opinion. Recommendations are organised both by cancer site and by symptom.",
+          "implication": "NG12 sets who enters the urgent suspected-cancer pathway at all, so it is the denominator under every downstream diagnostic and treatment volume forecast. The April 2026 update is recent enough that referral criteria carried over from older sales material may now be wrong.",
+          "url": "https://www.nice.org.uk/guidance/ng12",
+          "source_label": "nice.org.uk/guidance/ng12 ↗"
+        },
+        {
+          "ref": "NHS England — Changes to cancer waiting times standards from 1 October 2023",
+          "kind": "National operational standard. Published 17/08/2023",
+          "finding": "Consolidated ten cancer waiting-time standards into three: the 28-day Faster Diagnosis Standard, one headline 62-day referral-to-treatment standard, and one headline 31-day decision-to-treat-to-treatment standard.",
+          "implication": "These three standards are the currency NHS oncology and diagnostic managers are performance-managed against. Any pitch should be framed against 28-day, 31-day or 62-day performance specifically, not against \"waiting lists\" in general.",
+          "url": "https://www.england.nhs.uk/long-read/changes-to-cancer-waiting-times-standards-from-1-october-2023/",
+          "source_label": "NHS England ↗"
+        }
+      ]
+    },
+    "renal": {
+      "progress_slug": "renal",
+      "band_title": "Renal",
+      "area": "CKD Detection, Staging & Slowing Progression",
+      "rows": [
+        {
+          "ref": "NICE NG203 — Chronic kidney disease: assessment and management",
+          "kind": "NICE guideline. Published 25/08/2021, last updated 24/11/2021, last reviewed 19/08/2025",
+          "finding": "Directs testing with eGFR (creatinine, CKD-EPI equation) plus urine albumin-to-creatinine ratio — ACR specifically, not protein:creatinine ratio, for sensitivity to low-level proteinuria. Testing is offered to adults with any of nine named risk factors, including diabetes, hypertension, previous acute kidney injury, cardiovascular disease and gout. A confirmed ACR of 3 mg/mmol or more is \"clinically important proteinuria\". Referral thresholds include a 5-year risk of needing renal replacement therapy above 5% on the 4-variable Kidney Failure Risk Equation, or ACR of 70 mg/mmol or more.",
+          "implication": "NG203 defines the addressable market for ACR testing, point-of-care urinalysis and CKD risk-stratification software in England. Its nine-item risk-factor list is effectively a case-finding specification. The buyer is rarely the nephrologist: it is the integrated care board (ICB) medicines optimisation or cardiovascular prevention lead, the primary care network clinical director, and the pathology network manager who controls test volume.",
+          "url": "https://www.nice.org.uk/guidance/ng203",
+          "source_label": "nice.org.uk/guidance/ng203 ↗"
+        },
+        {
+          "ref": "NICE TA1075 — Dapagliflozin for treating chronic kidney disease",
+          "kind": "NICE technology appraisal guidance. Published 02/07/2025. Replaces TA775",
+          "finding": "Recommends dapagliflozin as an add-on to optimised standard care including the highest tolerated licensed dose of an ACE inhibitor or angiotensin-2 receptor blocker, where eGFR is 20 to under 45 ml/min/1.73m², or 45 to 90 with either an ACR of 22.6 mg/mmol or more, or type 2 diabetes. Where dapagliflozin and empagliflozin are both suitable, NICE directs that the least expensive be used, accounting for administration costs, dose, price per dose and commercial arrangements. Must be funded in the NHS in England within 30 days of final publication.",
+          "implication": "The July 2025 widening is itself the sales event: any formulary entry or pathway document written against TA775 is now out of date, which is a legitimate reason to reopen a closed conversation. But the least-expensive direction means this cannot be won on clinical differentiation — it goes to Area Prescribing Committees and ICB medicines optimisation on net acquisition cost and commercial arrangement.",
+          "url": "https://www.nice.org.uk/guidance/ta1075",
+          "source_label": "nice.org.uk/guidance/ta1075 ↗"
+        }
+      ]
+    },
+    "diabetes-endocrinology": {
+      "progress_slug": "diabetes-and-endocrinology",
+      "band_title": "Diabetes and Endocrinology",
+      "area": "Type 2 Diabetes: Drug Therapy and Cardiorenal Protection",
+      "rows": [
+        {
+          "ref": "NICE NG28 — Type 2 diabetes in adults: management",
+          "kind": "NICE guideline. Published 02/12/2015, last updated 18/02/2026. Recommendations carrying the new evidence review are marked [2026]",
+          "finding": "The 2026 rewrite makes SGLT2 inhibition universal rather than risk-triggered. Recommendation 1.13.1: for adults \"with no relevant comorbidity\", offer \"modified-release metformin, and an SGLT-2 inhibitor\". The same pairing is the offer for heart failure (1.14.1), obesity (1.17.1) and estimated glomerular filtration rate (eGFR) above 30 (1.18.1). For atherosclerotic cardiovascular disease, 1.15.1 names a molecule and a dose: \"subcutaneous semaglutide (Ozempic), up to 1 mg once a week, for its cardiovascular, renal and glycaemic benefits\". NICE's own numbers: 123 per 1,000 non-users had a three-point major adverse cardiovascular event over three years against 107–115 per 1,000 on an SGLT2 inhibitor; 54 per 1,000 against 26–40 per 1,000 for heart-failure hospitalisation.",
+          "implication": "The biggest formulary event in the category since 2022. Integrated care board (ICB) medicines optimisation teams and Area Prescribing Committees must now rewrite local type 2 pathways, and NICE itself flags this \"will increase prescribing costs\". Because NICE names dapagliflozin's generic price fall as the reason it \"support[s] its use while it is the least expensive\", the fight inside the class is now price, not access. The sales trigger is any ICB or Area Prescribing Committee whose formulary still gates an SGLT2 inhibitor behind a cardiovascular-risk threshold. Note NICE specifies modified-release metformin throughout.",
+          "url": "https://www.nice.org.uk/guidance/ng28",
+          "source_label": "nice.org.uk/guidance/ng28 ↗"
+        },
+        {
+          "ref": "NICE TA924 — Tirzepatide for treating type 2 diabetes",
+          "kind": "NICE technology appraisal guidance. Published 25/10/2023, last updated 01/09/2025 (the 2025 change added the commercial arrangement and updated prices)",
+          "finding": "Recommended alongside diet and exercise \"only if\" triple therapy with metformin and two other oral antidiabetic drugs is ineffective, not tolerated or contraindicated, and body mass index (BMI) is 35 kg/m² or more with specific psychological or other medical problems associated with obesity, or BMI is under 35 kg/m² and insulin would have significant occupational implications or weight loss would benefit other significant obesity-related complications. Thresholds drop by around 2.5 kg/m² for people from South Asian, Chinese, other Asian, Middle Eastern, Black African or African-Caribbean family backgrounds. Recommended only under the confidential commercial arrangement.",
+          "implication": "TA924 carries the statutory technology appraisal funding requirement; NG28 does not. That makes the appraisal, not the guideline, the lever for access, with the ICB accountable. But NG28 (February 2026) now positions tirzepatide much earlier, as an add-on in early-onset type 2 diabetes, so there is live tension between appraisal and guideline that Area Prescribing Committees have to resolve locally — expect formulary applications and shared-care protocol work through 2026. The confidential commercial arrangement means list price is not the negotiating position.",
+          "url": "https://www.nice.org.uk/guidance/ta924/chapter/1-Recommendations",
+          "source_label": "nice.org.uk/guidance/ta924 ↗"
+        }
+      ]
+    },
+    "respiratory": {
+      "progress_slug": "respiratory",
+      "band_title": "Respiratory",
+      "area": "COPD: Diagnosis, Inhaled Therapy and the New Biologics",
+      "rows": [
+        {
+          "ref": "NICE TA1142 — Dupilumab for maintenance treatment of uncontrolled COPD with raised blood eosinophils",
+          "kind": "NICE technology appraisal. Published 26/03/2026. Carries a confidential commercial arrangement",
+          "finding": "Recommendation 1.1: dupilumab is an add-on maintenance option for uncontrolled COPD with raised blood eosinophils in adults who are having \"triple therapy including an inhaled corticosteroid, a long-acting beta2-agonist (LABA) and a long-acting muscarinic antagonist (LAMA), or double therapy including a LABA and a LAMA if inhaled corticosteroids are not appropriate.\" NICE defines both terms explicitly: uncontrolled COPD is \"1 or more severe exacerbations or 2 or more moderate exacerbations in the previous 12 months\", and raised blood eosinophils is \"a blood eosinophil count of 0.3 x 109 cells per litre or more (300 cells per microlitre or more)\". Recommendation 1.2 sets the stopping rule at 12 months: stop if severe exacerbations are higher than the preceding 12 months, or the same while moderate exacerbations are higher.",
+          "implication": "The decision sits with a specialist respiratory service, with the ICB medicines optimisation team handling the commercial arrangement. The genuine, checkable differentiator against mepolizumab is the second limb: dupilumab has a double-therapy (LABA+LAMA) route where inhaled corticosteroids are not appropriate; mepolizumab does not. That matters for the patient who cannot tolerate an inhaled corticosteroid or who has had recurrent pneumonia on one. The sales trigger is any trust or ICB writing its first COPD biologic pathway — most are doing exactly that now.",
+          "url": "https://www.nice.org.uk/guidance/ta1142/chapter/1-Recommendations",
+          "source_label": "nice.org.uk/guidance/ta1142 ↗"
+        },
+        {
+          "ref": "NICE TA1166 — Mepolizumab for maintenance treatment of uncontrolled COPD with raised blood eosinophils",
+          "kind": "NICE technology appraisal. Published 17/06/2026. Carries a confidential commercial arrangement",
+          "finding": "Recommendation 1.1: mepolizumab is an add-on maintenance option for uncontrolled COPD with raised blood eosinophils in adults, \"if: they are having triple therapy including an inhaled corticosteroid (ICS), a long-acting beta-2-agonist (LABA) and a long-acting muscarinic antagonist (LAMA)\". The definitions match TA1142 exactly — uncontrolled COPD is \"1 or more severe exacerbations or 2 or more moderate exacerbations in the previous 12 months\", raised eosinophils is \"0.3 x 109 cells per litre or more (300 cells per microlitre or more)\" — and so does the 12-month stopping rule in recommendation 1.2.",
+          "implication": "Same buyer as dupilumab: the specialist respiratory service plus ICB medicines optimisation. Because the biomarker threshold is identical to the cell, the eosinophil count is not a differentiator between these two products — the prior inhaled therapy requirement is. Anyone selling in this class should know which of the two their customer's protocol can reach for a patient not on an inhaled corticosteroid. Do not build a pitch on the 300 cells per microlitre figure alone; your competitor shares it exactly.",
+          "url": "https://www.nice.org.uk/guidance/ta1166/chapter/1-Recommendations",
+          "source_label": "nice.org.uk/guidance/ta1166 ↗"
+        }
+      ]
+    },
+    "interventional-radiology": {
+      "progress_slug": "interventional-radiology",
+      "band_title": "Interventional Radiology",
+      "area": "Service Provision, the 24/7 Problem and the Data Blind Spot",
+      "rows": [
+        {
+          "ref": "RCR — Clinical Radiology Workforce Census 2025",
+          "kind": "National annual workforce census, 18th edition. 100% completion across UK radiology departments. Published June 2026; chapter 4 is devoted entirely to interventional radiology",
+          "finding": "The UK has 800 whole-time-equivalent (WTE) substantive IR consultants, rising to 862 with locums, and 12.4 IR consultants per million population — ranging from 18.5 in London to 3.1 in the North of Scotland. There is a 27% consultant shortfall, equal to 318 WTE (England 27%, Northern Ireland 34%, Scotland 27%, Wales 22%; North of Scotland 62%, North East England 39%). On provision, the census states: \"87% of trusts/health boards are operating an interventional radiology service of some description. However, only 51% of these operate their service on a 24/7 basis. Moreover, only 42% have an on-call rota with the minimum 1:6 frequency.\" Among small acute hospitals, 75% have an IR service but only 6% run it 24/7. By the RCR's own composite definition, 20% of UK IR services are \"inadequately provisioned\". 21% of IR consultants are forecast to retire by 2030 and 40% by 2035. Clinical Directors report IR procedures delayed or cancelled (86%), delayed discharges (83%), patients' conditions deteriorating (77%) and an inability to maintain 24/7 cover (62%).",
+          "implication": "This is the business-case document for the whole speciality, and the numbers are granular enough to name a region. Buyer: the IR clinical lead or Radiology Clinical Director writes the case; the Head of Imaging or Divisional Manager owns the budget; the integrated care board (ICB) owns network configuration. The genuinely useful move is geographic: a trust in the North East or North of Scotland has a published, Royal-College-sourced shortfall figure it can quote in its own business case, and handing a customer their own regional number is worth more than a national one. Do not claim any product closes a workforce gap — this evidences a staffing and organisation problem, not a procurement one. Whole-speciality context worth knowing: radiology as a whole has a 32% consultant shortfall and spent £362 million on outsourcing, insourcing and locums in 2025, more than twice the 2021 figure.",
+          "url": "https://www.rcr.ac.uk/media/n1fjvrv4/rcr-2025-clinical-radiology-workforce-census-report.pdf",
+          "source_label": "rcr.ac.uk census 2025 (PDF) ↗"
+        },
+        {
+          "ref": "BSIR — Provision of Interventional Radiology Services (POIRS), Third edition",
+          "kind": "British Society of Interventional Radiology national service-provision standard. Published October 2023. Specialty-society consensus, 32 pages",
+          "finding": "The operative UK standard for how an IR service should be built. On rotas: \"For reasons of patient and staff safety, the minimum on-call rota that IRs should be required to work is a one in six rota\", rising to \"a minimum rota should be 1 in 8 interventional radiologists\" for larger trusts, major trauma services and specialist aortic work. On networks: \"The hub should employ a minimum number of IR Consultants (at least six) and always have consultant presence on site in normal working hours… The hub must provide a 24/7 out-of-hours on-call rota for haemorrhage and sepsis control… and robust agreed pathways to allow transfer of patients from across the network.\" Critically for anyone selling across a network, it requires that \"these across-site OOH relationships are detailed with service level agreements (SLAs) to provide funding for capital costs, recurring costs for equipment, staffing and disposable items\". It judges current arrangements insufficient: \"network cover, while effective in some regions, fails to provide optimal OOH IR cover in many other locations\". It also states that \"the optimal standard of care is the provision of a radiology day case unit in each hospital\".",
+          "implication": "The SLA wording is the most commercially useful sentence in UK IR: a national standard explicitly saying cross-site out-of-hours arrangements should be funded through a service level agreement covering equipment and disposable items. That is a legitimate, quotable route into a consumables conversation at a spoke site that currently has none. The radiology day case unit recommendation is the sanctioned hook for ambulatory-pathway propositions. Buyer: IR clinical lead builds it, imaging management funds it, the ICB signs the network SLA. Do not present any of this as mandatory, contractual or NHS England policy — it is a professional society standard. Note the version trap: the RCR's own publications library still lists the 2019 second edition, RCR/BSIR joint-badged, with a stated next review date of 2026 and no supersession notice, while BSIR has published this third edition. Both statements were verified on their owning bodies' own pages; neither body explains the discrepancy. Cite the 2023 third edition as the most recent and say the RCR still lists the second.",
+          "url": "https://www.bsir.org/media/resources/BSIR_2023_IRProvisions_32ppA4_Oct23_2.pdf",
+          "source_label": "bsir.org POIRS 2023 (PDF) ↗"
+        }
+      ]
+    },
+    "plastics-burns-reconstruction": {
+      "progress_slug": "plastics-burns-and-reconstruction",
+      "band_title": "Plastics, Burns and Reconstruction",
+      "area": "Burn Care: National Standards, Referral Thresholds and Resuscitation",
+      "rows": [
+        {
+          "ref": "British Burn Association — National Standards for the Provision of Adult and Paediatric Burn Care",
+          "kind": "National service standard. Cover page reads 2nd Edition, June 2023, (Revised October 2024), To be reviewed in 2028. Final version 9.3, developed by the Burn Standards Review Group and ratified at the 2023 BBA Annual Conference. Downloaded and read in full on 05/09/2026",
+          "finding": "The operative standard for the whole speciality, and the BBA states its force plainly: \"It is the opinion of the British Burn Association that all specialised Burn Care Services must be compliant with all of the 'essential' burn care standards. Where a service is not compliant, the service and/or the NHS England commissioners must have an action plan in place.\" Services are stratified into Centres, Units and Facilities \"according to the complexity of case mix treated\". Standard B.05 makes the tiering operational: \"Burn Centres provide burn-specific, Consultant led care 24 hours a day, 7 days per week. Burn Units provide burn-specific, Consultant led care 5 days per week, during the working day (Monday to Friday).\" Minimum activity is an essential standard: adult Burn Centres manage at least 100 acute burn patients (new referrals) annually, of whom at least 30 need unit-level and at least 10 centre-level care (F.04.A); children's Burn Centres the same with at least six at centre level (F.05.A); Burn Facilities at least 100 a year averaged over three years (F.04.C). D.07.A, also essential: \"The Burn Care Service utilises a network approved tele-referral system.\"",
+          "implication": "Buyer: the burn service and its Operational Delivery Network, with NHS England's Trauma Programme of Care commissioning behind them. The essential standards are the compliance floor a service is assessed against, and self-assessment runs at least biennially — so anything that generates the evidence a named standard demands (tele-referral audit under D.07, activity and outcome monitoring under F.04.D and F.04.E) is selling into a real, dated governance cycle rather than a preference. A rep cannot say a product is \"BBA-approved\" or \"meets the BBA standard\": the standards set service requirements, name no products and confer no endorsement.",
+          "url": "https://www.britishburnassociation.org/standards/",
+          "source_label": "britishburnassociation.org standards ↗"
+        },
+        {
+          "ref": "National Network for Burn Care — National Burn Care Referral Guidance",
+          "kind": "National referral and triage guidance, Version 1, approved February 2012, NHS Specialised Services. Fourteen years old and never revised. Still hosted as current by the BBA and still the document NHS England commissions to",
+          "finding": "These are the numbers an emergency department, ambulance service or GP is actually working to. The stated minimum referral threshold: \"All burns ≥2% TBSA in children or ≥3% in adults / All full thickness burns / All circumferential burns / Any burn not healed in 2 weeks / Any burn with suspicion of non-accidental injury should be referred to a Burn Unit/Centre for expert assessment within 24 hours.\" Tier thresholds by total burn surface area — adults: Facility ≥3% and under 10%; Unit ≥10% and under 40% (or ≥10% and under 25% with inhalation injury); Centre ≥40% (or ≥25% with inhalation injury). Children: Facility ≥2% and under 5%; Unit ≥5% and under 30% (or ≥5% and under 15% if under one year); Centre ≥30% (or ≥15% if under one year). A child is defined as under 16. Burns to hands, feet, face, perineum or genitalia, and any chemical, electrical, friction or cold injury, prompt discussion rather than automatic referral. \"All burns that are not blanching should be referred to a specialised burn service.\" Deviation is permitted only if agreed at consultant level, recorded in the notes and formally audited.",
+          "implication": "Anything that reduces avoidable transfer, or supports confident local management just below a threshold — tele-referral, burn-depth assessment, imaging — maps onto a named national criterion, which is a far stronger opening than a general efficiency claim. A rep can quote these thresholds as current national referral guidance. A rep cannot present them as evidence-based, recently reviewed, or UK-wide.",
+          "url": "https://www.britishburnassociation.org/national-burn-care-referral-guidance/",
+          "source_label": "BBA referral guidance 2012 ↗"
+        }
+      ]
+    },
+    "obesity-weight-management": {
+      "progress_slug": "obesity-and-weight-management",
+      "band_title": "Obesity and Weight Management",
+      "area": "Classification, Measurement and the NHS Weight Management Pathway",
+      "rows": [
+        {
+          "ref": "NICE NG246 — Overweight and obesity management",
+          "kind": "NICE guideline. Published 14 January 2025, last updated 8 January 2026, minor changes March 2026. ISBN 978-1-4731-8095-6. England and Wales. Overview, Identifying and assessing, Medicines and surgery, Digital technologies, Terms used, Discussing results and referral and Update information chapters all fetched and read in full on 05/09/2026",
+          "finding": "This one guideline replaced seven. Its Update information chapter says so verbatim: \"January 2025: This guideline updates and replaces NICE's guidelines on: Preventing excess weight gain (NG7…), Obesity: identification, assessment and management (CG189…), Weight management: lifestyle services for overweight or obese adults (PH53…), Weight management: lifestyle services for overweight or obese children and young people (PH47…), BMI: preventing ill health and premature death in Black, Asian and other minority ethnic groups (PH46…), Obesity: working with local communities (PH42…), Obesity prevention (CG43…)\". Adult classification, recommendation 1.9.10 [2022]: healthy weight 18.5 to 24.9; overweight 25 to 29.9; obesity class 1 30 to 34.9; class 2 35 to 39.9; class 3 40 or more. Ethnicity-adjusted thresholds, 1.9.11 [2022] — for people with a South Asian, Chinese, other Asian, Middle Eastern, Black African or African-Caribbean background: \"overweight: BMI 23 kg/m2 to 27.4 kg/m2… obesity: BMI 27.5 kg/m2 or above\", with classes 2 and 3 \"usually identified by reducing the thresholds… by 2.5 kg/m2\". Waist-to-height ratio, 1.9.14 [2022]: 0.4 to 0.49 healthy, 0.5 to 0.59 increased, 0.6 or more high — and 1.9.8 requires it to be measured as well as BMI in every adult with a BMI below 35. 1.9.15 gives the patient-facing version: keep your waist to \"less than half their height\". 1.9.9 is a hard prohibition: \"Do not use bioimpedance as a substitute for BMI as a measure of general adiposity in adults.\"",
+          "implication": "Buyer: ICB long-term-conditions and medicines-optimisation leads, PCNs, specialist weight management service leads. A rep can cite recommendation numbers — 1.9.11 for ethnicity-adjusted thresholds, 1.9.14 for the ratio bands — and can say that measuring waist circumference in anyone with a BMI under 35 is a live NICE recommendation, which is a real hook for any measurement, coding or health-check product. A rep cannot say waist-to-height ratio replaces BMI (NG246 says \"as well as\"), cannot apply the ratio bands above BMI 35, cannot present the class 2/3 ethnic adjustment as evidence-based, and cannot sell bioimpedance as a BMI substitute in adults — NICE prohibits it by name.",
+          "url": "https://www.nice.org.uk/guidance/ng246",
+          "source_label": "NICE NG246 ↗"
+        },
+        {
+          "ref": "The seven retired NICE obesity guidelines — CG189, PH46, NG7, PH53, PH47, PH42, CG43",
+          "kind": "Verified negative. Each page fetched individually on 05/09/2026; every one returns HTTP 200 and displays a normal header with a publication and \"last updated\" date",
+          "finding": "Every one of these still serves a page that looks live, and none of them is. CG189's page reads \"This guideline has been updated and replaced by NICE guideline NG246\" while its header still says \"Published: 27 November 2014 / Last updated: 26 July 2023\". PH46 is a two-hop trap: its notice points readers to CG189 — which is itself withdrawn. So anyone following NICE's own supersession notice one step lands on another dead guideline. The ethnicity-adjusted BMI content that used to be PH46 now lives at NG246 recommendations 1.8.1 to 1.8.3 and 1.9.11. NG7, PH53 and CG43 each carry the same \"updated and replaced by NICE guideline NG246\" notice. Separately, NG246's Update information records that in March 2026 NICE \"removed or replaced references to some Public Health England documents that have been withdrawn\".",
+          "implication": "This is the cheapest credibility win available in this speciality, and the cheapest own goal. Quoting \"CG189 recommendation 1.2.7\" to an ICB pharmacist in 2026 is quoting a withdrawn document, and it takes them thirty seconds to check. Sweep every deck, leave-piece and training module for CG189, PH46, PH53 and NG7 and re-point them at NG246 with the new numbering. Where a competitor's material still cites the old codes, that is a legitimate and checkable difference to raise — on the citation, not on the science.",
+          "url": "https://www.nice.org.uk/guidance/cg189",
+          "source_label": "CG189 notice ↗"
+        }
+      ]
+    },
+    "paediatrics": {
+      "progress_slug": "paediatrics",
+      "band_title": "Paediatrics",
+      "area": "The Deteriorating Child: Fever, Sepsis and Early Warning",
+      "rows": [
+        {
+          "ref": "NICE NG254, Suspected sepsis in under 16s: recognition, diagnosis and early management",
+          "kind": "NICE guideline, published 19/11/2025, amended January 2026",
+          "finding": "The standalone children’s sepsis guideline. Risk is graded from history, examination and age-banded criteria across three separate tables — under 5s, 5 to 11, and 12 to 15 — each with high risk and moderate-to-high risk criteria; a child meeting none is low risk. Where any high risk criterion is met, a broad-spectrum antimicrobial is given \"without delay (within 1 hour of identifying that they meet any high risk criteria)\", with ceftriaxone 80 mg/kg once daily, maximum 4 g at any age, for community-acquired sepsis in under-16s other than newborns. A consultant is alerted to attend in person if there is no response within 1 hour of any intervention.",
+          "implication": "Any screening tool, e-observation build or training pack still labelled \"NG51\" needs relabelling to NG254 — but not re-engineering, because the underlying criteria have not changed. The three age bands mean three chart designs, not one.",
+          "url": "https://www.nice.org.uk/guidance/ng254",
+          "source_label": "NICE ↗"
+        },
+        {
+          "ref": "NICE NG51, Suspected sepsis — RETIRED",
+          "kind": "Replaced guideline; page still returns HTTP 200",
+          "finding": "The NG51 page is live, carries a normal header (\"Published: 13 July 2016, Last updated: 19 March 2024\") and has no chapter links at all. Its entire body text reads: \"This guideline has been updated and replaced by NICE’s guidelines on suspected sepsis in people aged 16 or over (NG253), suspected sepsis in under 16s (NG254) and suspected sepsis in pregnant or recently pregnant people (NG255).\" One guideline became three on 19/11/2025.",
+          "implication": "This is the single most likely error in any paediatric sepsis material in circulation right now. Check your own decks before a customer does. NG143 and NG9 both had their cross-references swept to NG254 in November 2025, so NICE’s own estate is consistent even though the old number still resolves.",
+          "url": "https://www.nice.org.uk/guidance/ng51",
+          "source_label": "NICE ↗"
+        }
+      ]
+    },
+    "dermatology": {
+      "progress_slug": "dermatology",
+      "band_title": "Dermatology",
+      "area": "Psoriasis: Assessment, Phototherapy and Systemic Therapy",
+      "rows": [
+        {
+          "ref": "NICE CG153, Psoriasis: assessment and management",
+          "kind": "NICE clinical guideline, published 24/10/2012, last substantive revision 01/09/2017",
+          "finding": "Still the current national guideline, covering principles of care, assessment and referral, topical treatment, phototherapy and systemic treatment. Reading the Update information chapter rather than the header tells the real story: the last substantive revision was September 2017, and everything since sits under \"Minor updates since publication\" — December 2025, July 2025 and March 2025 all added or aligned links to technology appraisals, and NICE says the [2025] tags \"clarify how to use medicines recommended in NICE technology appraisal guidance\". Key content: 1.5.2.1 offers conventional systemics where topicals have failed and there is significant impact, plus one of more than 10% body surface area or PASI over 10, localised disease with functional impairment or high distress, or phototherapy that failed, cannot be used, or led to rapid relapse (defined as more than 50% of baseline severity within 3 months). 1.5.2.2 makes methotrexate the first-choice conventional systemic. 1.2.2.1 requires annual psoriatic arthritis assessment for any type of psoriasis. 1.2.3.1 requires a cardiovascular risk assessment at presentation in severe disease.",
+          "implication": "This is the document a dermatology buyer will hold you to, and its topical section is openly frozen on pricing grounds — a genuine, citable gap if you sell topicals, and a fair one to raise because NICE raised it first.",
+          "url": "https://www.nice.org.uk/guidance/cg153/chapter/Update-information",
+          "source_label": "NICE ↗"
+        },
+        {
+          "ref": "NICE CG153, section 1.4 — phototherapy",
+          "kind": "Guideline recommendations, all tagged [2012]",
+          "finding": "There is no standalone NICE guidance on phototherapy for skin disease; it lives inside CG153 as section 1.4, \"Phototherapy (broad- or narrowband UVB light and PUVA)\". Two recommendations carry real operational weight. 1.4.2.4: offer lifetime skin cancer surveillance to people treated with PUVA who have had more than 150 PUVA treatments or developed skin cancer. 1.4.2.5: \"Ensure that a permanent record of the person’s cumulative number of UV treatments is kept (for example, in a national record).\" Higher-risk groups named for skin cancer counselling include people with lighter skin types 1 or 2 on the Fitzpatrick scale, those likely to need ciclosporin or long-term methotrexate, and young people.",
+          "implication": "The cumulative-dose record is a requirement, not a nice-to-have, and it is the clearest functional specification NICE gives for phototherapy software or a cabinet’s logging capability. If a unit cannot produce a lifetime UV count per patient, it is not meeting 1.4.2.5.",
+          "url": "https://www.nice.org.uk/guidance/cg153/chapter/Recommendations",
+          "source_label": "NICE ↗"
+        }
+      ]
+    },
+    "palliative-eol": {
+      "progress_slug": "palliative-and-end-of-life-care",
+      "band_title": "Palliative and End-of-Life Care",
+      "area": "National Guidance, Service Standards and the Statutory Duty",
+      "rows": [
+        {
+          "ref": "NHS England, Strategic commissioning of hospice services and update on the Modern Service Framework for Palliative Care and End-of-Life Care",
+          "kind": "Letter to all ICB chief operating officers and directors of strategy, publication reference PRN02498, 15/06/2026 — the newest document in this area",
+          "finding": "Signed by Dr Amanda Doyle OBE MRCGP, National Director for Primary Care and Community Services. Three things in it change the ground under every other document on this page. One: \"We will refresh the statutory guidance and service specifications later this year\" — so the September 2022 statutory guidance below is explicitly time-limited. Two: \"We look forward to publishing the Modern Service Framework for Palliative Care and End-of-Life Care in the autumn\", following a written ministerial statement published on Thursday 4 June 2026. Three, and the one with a date attached: ICBs are asked to \"move to sustainable contracting of adult and children and young people’s hospice services\", because \"Many hospices receive funding through grants. This is not sustainable.\" The letter states this \"will involve the move away from short-term grant funding for adult hospice services from 2027/28\". Two immediate actions are set: an integrated needs assessment covering people of all ages with palliative and end-of-life care needs, and the move to contracted hospice provision with \"equity as a core objective\".",
+          "implication": "This is the single most commercially useful document in the speciality right now, and it is under three months old. Grant-funded hospice income becoming contracted income from 2027/28 changes who signs, what evidence they need, and what a procurement looks like. Anyone quoting the 2022 statutory guidance as the settled position is about to be out of date — and saying so first is worth more than knowing the old document by heart.",
+          "url": "https://www.england.nhs.uk/long-read/strategic-commissioning-hospice-services-update-modern-service-framework-palliative-care-end-of-life-care/",
+          "source_label": "NHS England ↗"
+        },
+        {
+          "ref": "National Health Service Act 2006, section 3(1)(h), as substituted by the Health and Care Act 2022, section 21",
+          "kind": "Primary legislation. In force 01/07/2022 by S.I. 2022/734 reg. 2(a) — the same day ICBs replaced CCGs",
+          "finding": "The first time palliative care has ever been named in the NHS commissioning duty. The statutory wording, read on legislation.gov.uk rather than paraphrased: an integrated care board \"must arrange for the provision of the following to such extent as it considers necessary to meet the reasonable requirements of the people for whom it has responsibility— … (h) such other services or facilities for palliative care as the board considers are appropriate as part of the health service\". Section 21 was not in force at Royal Assent; commencement was by statutory instrument on 01/07/2022.",
+          "implication": "Cite it precisely — \"section 3(1)(h) of the NHS Act 2006, inserted by section 21 of the Health and Care Act 2022, in force 1 July 2022\" — and cite it honestly. A commissioner who knows the Act knows about the discretion clause, and a rep who claims it mandates provision loses the room. The leverage is that the board must be able to show it considered the question at all.",
+          "url": "https://www.legislation.gov.uk/ukpga/2022/31/section/21",
+          "source_label": "legislation.gov.uk ↗"
+        }
+      ]
+    },
+    "mental-health": {
+      "progress_slug": "mental-health",
+      "band_title": "Mental Health",
+      "area": "The Law, the System and the Money",
+      "rows": [
+        {
+          "ref": "Mental Health Act 2025",
+          "kind": "UK Public General Act, 2025 c. 33. Royal Assent 18 December 2025. Long title: \"An Act to make provision to amend the Mental Health Act 1983 in relation to mentally disordered persons; and for connected purposes\"",
+          "finding": "The first substantial reform of the Mental Health Act 1983 in a generation, and it is on the statute book. Its 57 sections and schedules cover, by their own headings: principles to inform decisions; application of the 1983 Act to autism and learning disability (s.3–4); grounds for detention and community treatment orders (s.5–7); appropriate medical treatment: therapeutic benefit (s.8); treatment decisions, second opinions and electro-convulsive therapy (s.11–20); care and treatment plans (s.21); the nominated person, replacing the nearest relative (s.24–28); detention periods (s.29); independent mental health advocates (s.40); advance choice documents (s.44); after-care (s.45–46); removal of police stations and prisons as places of safety (s.48); and extension of the Human Rights Act 1998 to certain private care providers (s.51).",
+          "implication": "Know the citation exactly — \"the Mental Health Act 2025, chapter 33, Royal Assent 18 December 2025\" — and then know the next row, because that is where most people get it wrong. The sections with product consequences are s.21 (care and treatment plans), s.44 (advance choice documents) and s.48 (places of safety).",
+          "url": "https://www.legislation.gov.uk/ukpga/2025/33/contents",
+          "source_label": "legislation.gov.uk ↗"
+        },
+        {
+          "ref": "Mental Health Act 2025, section 56 (Commencement)",
+          "kind": "Primary legislation, read verbatim on legislation.gov.uk. s.56 itself in force at Royal Assent, per s.56(2)",
+          "finding": "The section that decides whether any of the reform is actually happening yet, quoted directly. s.56(1): \"Sections 30(2), 32, 35, 36(1) and (3)(b), 38 and 39 come into force at the end of the period of two months beginning with the day on which this Act is passed\" — that is, 18 February 2026, and those are tribunal-reference and prisoner-transfer provisions, not the headline reforms. s.56(2): sections 53 to 55, section 56 and section 57 come into force on the day the Act is passed. s.56(3): \"Except as mentioned in subsections (1) and (2), this Act comes into force on such day as the Secretary of State may by regulations appoint.\" s.56(5): \"Different days may be appointed under subsection (3) for different purposes.\"",
+          "implication": "This is the sentence that separates a rep who has read the Act from one who has read a headline about it. Nothing about the nominated person, the autism and learning disability detention grounds, care and treatment plans or places of safety takes effect until regulations say so. Any proposition sold on \"the new Act requires you to…\" is, today, wrong.",
+          "url": "https://www.legislation.gov.uk/ukpga/2025/33/section/56",
+          "source_label": "legislation.gov.uk ↗"
+        }
+      ]
+    },
+    "emergency-urgent-care": {
+      "progress_slug": "emergency-and-urgent-care",
+      "band_title": "Emergency and Urgent Care",
+      "area": "Flow, Crowding and Corridor Care",
+      "rows": [
+        {
+          "ref": "NICE NG94 — and the verified negative underneath it",
+          "kind": "NICE guideline, Emergency and acute medical care in over 16s: service delivery and organisation. Published 28 March 2018. Update information chapter read in full 05/09/2026",
+          "finding": "NG94 is current and has never been substantively updated: the Update information chapter contains one entry in eight years — \"February 2019: A minor wording change was made to recommendation 1.2.2 to clarify which admission settings it applies to.\" Its entire crowding-relevant content is recommendation 1.3.1, which asks providers to \"monitor total acute hospital bed occupancy, capacity, flow and outcomes in real time, taking account of changes in a 24-hour period and the occupancy levels and needs of specific wards and units\" and to \"plan capacity to minimise the risks associated with occupancy rates exceeding 90%\". 1.3.2 adds that systems should develop and evaluate integrated care pathways.",
+          "implication": "Recommendation 1.3.1 is the single most useful sentence in UK guidance for anyone selling real-time capacity visibility, bed management or patient-flow software: a named NICE recommendation to monitor occupancy, capacity and flow in real time against a 90% threshold, which does not depend on any performance target surviving. The flip side is equally usable: do not pitch a corridor-care or handover product as \"NICE-recommended\", because a clinical buyer will ask which recommendation and there isn't one.",
+          "url": "https://www.nice.org.uk/guidance/ng94",
+          "source_label": "NICE NG94 ↗"
+        },
+        {
+          "ref": "⚠ The four-hour target has changed, and the annual planning cycle it lived in has gone",
+          "kind": "NHS England, Medium Term Planning Framework — delivering change together 2026/27 to 2028/29. Published 27 October 2025. Success-measure table in section 3.2 read verbatim 05/09/2026",
+          "finding": "The annual \"priorities and operational planning guidance\" cycle has been replaced by a rolling medium-term framework; NHS England's own planning page on 05/09/2026 still links only to the 2025/26 guidance, and there is no separate 2026/27 priorities document. The operative figures now sit in the framework's success-measure table. 4-hour A&E performance: \"Every trust to maintain or improve to 82% by March 2027\", rising to \"a national target of 85% as the average for the year\" by 2028/29. Category 2 ambulance response: \"Improve upon 2025/26 standard to reach an average response time of 25 minutes\", and by 2028/29 an 18-minute average with 90% of calls within 40 minutes. NHS England's own framing, verbatim: \"It has been over 5 years since the 18-minute response to Category 2 ambulance calls standard was met and over a decade since the service delivered the standard for 95% of patients waiting 4 hours or less… During that time, in parts of the NHS, we have normalised asking our staff to deliver sub-optimal care.\"",
+          "implication": "The gap between 95% and 82% is the commercial space, and March 2027 is a named, board-visible, nationally monitored date to sell against. Reps still quoting the 2025/26 figure of 78% are a year out of date. The \"normalised sub-optimal care\" sentence is NHS England's own and is worth quoting back in a business case — it is far stronger coming from the commissioner than from a supplier.",
+          "url": "https://www.england.nhs.uk/long-read/medium-term-planning-framework-delivering-change-together-2026-27-to-2028-29/",
+          "source_label": "NHS England MTPF ↗"
+        }
+      ]
+    },
+    "frailty-older-people": {
+      "progress_slug": "frailty-and-older-people",
+      "band_title": "Frailty and Older People",
+      "area": "Identification, Measurement and the National Picture",
+      "rows": [
+        {
+          "ref": "National Audit Office, Primary and community healthcare support for people living with frailty, HC 1518, 5 December 2025",
+          "kind": "Value-for-money audit of DHSC and NHS England (Comptroller and Auditor General)",
+          "finding": "As at March 2025 GPs had diagnosed approximately 1.06 million people with moderate frailty and a further 450,000 with severe frailty — 1.51 million in total. In 2024-25 GPs assessed 1.9 million patients for frailty, 17% of all registered patients aged 65 or over. People living with severe frailty are nearly six times more likely to be admitted to hospital than people who are not frail.",
+          "implication": "The single most authoritative UK frailty document published in the last two years, and the one an ICB medical director is most likely to have read. Quote it rather than a journal paper when sizing the problem.",
+          "url": "https://www.nao.org.uk/reports/primary-and-community-healthcare-support-for-people-living-with-frailty/",
+          "source_label": "NAO ↗"
+        },
+        {
+          "ref": "National Audit Office, HC 1518, 2025 — GP contract compliance for severe frailty",
+          "kind": "Audit analysis of NHS England GP core contract data, 2024-25",
+          "finding": "226,000 patients were diagnosed with severe frailty in 2024-25. Of those, only 16% (37,000) had a medication review, 18% (41,000) had a falls risk assessment and 29% (66,000) consented to an enriched summary care record — each against a GP contract requirement that applies to 100% of them. The NAO records that NHS England has set no performance targets for this support and does not use the data it holds to monitor compliance.",
+          "implication": "The clearest quantified care gap anywhere in this speciality, and it sits precisely where falls products, medicines-review services and digital care-record suppliers sell. An 82% falls-assessment shortfall in a contractually required activity is a commissioner problem before it is a product pitch.",
+          "url": "https://www.nao.org.uk/wp-content/uploads/2025/12/Primary-and-community-healthcare-support-for-people-living-with-frailty.pdf",
+          "source_label": "NAO (PDF) ↗"
+        }
+      ]
+    },
+    "sepsis-deteriorating-patient": {
+      "progress_slug": "sepsis-and-the-deteriorating-patient",
+      "band_title": "Sepsis and the Deteriorating Patient",
+      "area": "National Guidance, NEWS2 and Risk Stratification",
+      "rows": [
+        {
+          "ref": "NICE NG51, ‘Suspected sepsis: recognition, diagnosis and early management’. Published 13 July 2016, last updated 19 March 2024. Superseded 19 November 2025.",
+          "kind": "Withdrawn NICE guideline — verified 06/09/2026 by enumerating all 2,068 published NICE guidance items plus 199 quality standards: NG51 does not appear in either list.",
+          "finding": "Stop citing NG51. It has been replaced. The page at nice.org.uk/guidance/ng51 now contains one sentence of substance: \"This guideline has been updated and replaced by NICE's guidelines on suspected sepsis in people aged 16 or over (NG253), suspected sepsis in under 16s (NG254) and suspected sepsis in pregnant or recently pregnant people (NG255).\" There are no recommendations on the page at all.",
+          "implication": "This is the single cheapest credibility win in the speciality. Every slide deck, objection-handler and clinical claim in your organisation that says \"NICE NG51\" is out of date. Check yours before a customer does. The replacement number depends on the population: NG253 for adults, NG254 for under-16s, NG255 for pregnancy.",
+          "url": "https://www.nice.org.uk/guidance/ng51",
+          "source_label": "NICE NG51 ↗"
+        },
+        {
+          "ref": "NICE NG253, ‘Suspected sepsis in people aged 16 or over: recognition, assessment and early management’. Published 19 November 2025; amended January 2026. ISBN 978-1-4731-7301-9.",
+          "kind": "NICE guideline, England. The only one of the three 2025 sepsis guidelines that carries a new evidence review.",
+          "finding": "The current adult sepsis guideline. Its 2025 evidence reviews covered rapid antigen and PCR testing, indicators of organ hypoperfusion, intravenous fluid therapy, vasopressors and risk factors — recommendations from those reviews are tagged [2025]. Risk is graded by NEWS2 in acute hospital settings, acute mental health settings and ambulances (recommendation 1.6.1): a score of 7 or more is high risk, 5 or 6 moderate, 1 to 4 low and 0 very low, with a single parameter scoring 3 points triggering a high-priority review by a clinician at FY2 level or above. The January 2026 amendment changed ‘learning difficulties’ to ‘learning disabilities’ throughout.",
+          "implication": "This is the document to quote, by recommendation number, for anything sold into adult sepsis recognition in England. Learn the four NEWS2 bands and the FY2 threshold — they are the language the ward and the emergency department actually use, and they now have NICE's authority behind them, which they did not under NG51's own risk tables.",
+          "url": "https://www.nice.org.uk/guidance/ng253",
+          "source_label": "NICE NG253 ↗"
+        }
+      ]
+    },
+    "digital-medical-it": {
+      "progress_slug": "digital-and-medical-it",
+      "band_title": "Digital and Medical IT",
+      "area": "Regulation, Assurance and the Route to Market",
+      "rows": [
+        {
+          "ref": "Medicines and Healthcare products Regulatory Agency, ‘Ambient voice technology-enabled products’. Published 29 July 2026.",
+          "kind": "Regulator guidance on device qualification and classification. Developed with NHS England, clinicians and patient safety advocates. Applies to Great Britain (England, Wales and Scotland) only.",
+          "finding": "The single most important document published in this speciality this year, and it is five weeks old. It settles the question every ambient voice technology (AVT) vendor and every trust has been arguing about: when is an AI scribe a medical device? MHRA’s answer is that qualification turns on intended purpose, not on the technology. Products \"solely intended to transcribe and summarise clinical conversations, draft correspondence or suggest clinical codes for review by a clinician\" are not medical devices under UK MDR 2002. Products \"intended to support diagnosis, treatment and automated clinical actions\" are, and must comply in full. The guidance is explicit that context does not qualify a product: \"Use in a medical environment or context alone does not qualify a product as a medical device.\" It also names the generative-AI problem directly — \"hallucination is a well-known behaviour of GenAI with potentially broad impact in AVT products\" — and warns that adding features can change the answer: \"When the product’s intended purpose has changed, it may require assessment or reassessment as a medical device.\" It also names the trap that will catch suppliers: intended purpose is set by \"the claims in its instructions for use, labelling, and the manufacturer’s promotional materials\". Where an AVT product does qualify, MHRA indicates it is typically Class IIa where it provides direct diagnostic information and otherwise Class I.",
+          "implication": "This is the clearest commercial line in the whole speciality. A transcription-and-summarisation scribe can be sold into the NHS in Great Britain without UKCA marking; the moment a supplier adds a feature that suggests a diagnosis, recommends a treatment or triggers an automated clinical action, the same product becomes a regulated medical device and the sale stops until it is certified. Any rep whose roadmap includes “we’re adding clinical decision support next year’’ needs to know that roadmap changes the regulatory status of the product they are selling today. Expect procurement to ask for the intended-purpose statement in writing. And note the sharpest practical consequence of all: because intended purpose is read from promotional materials, a rep’s own slide deck can push an unregulated scribe into Class IIa. Marketing copy in this category is a regulatory document.",
+          "url": "https://www.gov.uk/government/publications/ambient-voice-technology-enabled-products/ambient-voice-technology-enabled-products",
+          "source_label": "MHRA ↗"
+        },
+        {
+          "ref": "NHS England, ‘Medical device regulation for ambient voice technology products’. Published 29 July 2026, addressed to trust and integrated care board chief executives, chief information officers, chief nursing information officers and chief clinical information officers.",
+          "kind": "National system letter to NHS boards, issued the same day as the MHRA guidance above.",
+          "finding": "The buyer-side half of the same announcement, and it tells you exactly what procurement will now ask for. It confirms the MHRA position, then sets six board-level assurance expectations: users \"remain responsible for reviewing, validating and approving any information generated by AVT before it is relied upon for patient care\"; organisations must understand the intended purpose of what they have bought; and there must be \"processes… in place to review any change in functionality that may alter the regulatory status of a product\". On procurement specifically, contracts must give \"appropriate rights to monitor and address performance, audit compliance, manage changes in functionality and address emerging risks throughout the contract term, including at AI model update milestones\". It sets a hard integration requirement: \"Regardless of their regulatory status, NHS organisations should procure AVT products that can be interfaced into the organisation’s electronic patient record (either natively or through full integration)\". National adoption support \"will begin with outpatient settings\", and NHS England will establish an AVT Centre of Excellence with exemplar trusts.",
+          "implication": "Two concrete sales consequences. First, electronic patient record integration is now a stated national procurement expectation for every AVT product, device or not — a standalone scribe that cannot write into the EPR is selling against a written national position. Second, the AI model update clause is new and will appear in contracts: suppliers should expect to be asked to notify and be audited at model-update milestones, which is a materially different commitment from a conventional software release cycle. Lead with outpatients, because that is where the national support money and attention start.",
+          "url": "https://www.england.nhs.uk/long-read/medical-device-regulation-for-ambient-voice-technology-products/",
+          "source_label": "NHS England ↗"
+        }
+      ]
+    },
+    "primary-care": {
+      "progress_slug": "primary-care-and-general-practice",
+      "band_title": "Primary Care and General Practice",
+      "area": "Contract, Funding and the Neighbourhood Model",
+      "rows": [
+        {
+          "ref": "NHS England — Changes to the GP Contract in 2026/27 (published 24/02/2026)",
+          "kind": "National contract document",
+          "finding": "The GP contract investment for 2026/27 increases by £485 million, taking total combined contract value to £13,863 million (a 3.6% cash increase, 1.4% real terms growth against the GDP deflator). QOF gains an additional 18 points worth about £25 million, including new obesity-related indicators.",
+          "implication": "Sets the fixed national envelope practices and PCNs have to spend from in 2026/27. A supplier's pitch has to fit inside this already-committed budget; the standard objection will be that there is no discretionary spend left once core and QOF funding is allocated.",
+          "url": "https://www.england.nhs.uk/long-read/changes-to-the-gp-contract-in-2026-27/",
+          "source_label": "NHS England ↗"
+        },
+        {
+          "ref": "NHS England — Changes to the GP Contract in 2025/26 (published 28/02/2025, updated 11/03/2025)",
+          "kind": "National contract document",
+          "finding": "32 QOF indicators that had been income-protected in 2024/25 were permanently retired, representing 212 points worth about £298 million. Of these, 71 points (about £100 million) were removed outright and 141 points (about £198 million) were redistributed across nine new cardiovascular disease prevention indicators. Combined core contract and Network Contract DES investment rose by £889 million to £13,176 million.",
+          "implication": "The QOF income-protection cliff-edge removed guaranteed income for many activities and concentrated new funded activity in cardiovascular disease prevention. A supplier with a CVD case-finding or detection product has a live funded hook; anything outside the nine CVD indicators lost its QOF-linked business case.",
+          "url": "https://www.england.nhs.uk/long-read/changes-to-the-gp-contract-in-2025-26/",
+          "source_label": "NHS England ↗"
+        }
+      ]
+    },
+    "audiology-hearing": {
+      "progress_slug": "audiology-and-hearing",
+      "band_title": "Audiology and Hearing",
+      "area": "Assessment, Referral and Earwax",
+      "rows": [
+        {
+          "ref": "NICE — Hearing loss in adults: assessment and management, NICE guideline NG98, published 21/06/2018, last updated 02/10/2023",
+          "kind": "NICE guideline",
+          "finding": "The referral clock is written into recommendation 1.1.2. If hearing loss \"developed suddenly (over a period of 3 days or less) within the past 30 days, refer immediately (to be seen within 24 hours) to an ear, nose and throat service or an emergency department\"; if it developed suddenly more than 30 days ago, or \"worsened rapidly (over a period of 4 to 90 days)\", refer urgently (to be seen within 2 weeks). 1.1.3 requires immediate 24-hour referral for \"acquired unilateral hearing loss and altered sensation or facial droop on the same side\". The vestibular schwannoma trigger is 1.3.2: consider MRI of the internal auditory meati where there is \"an asymmetry on pure tone audiometry of 15 dB or more at any 2 adjacent test frequencies, using test frequencies of 0.5, 1, 2, 4 and 8 kHz\". 1.5.1 fixes the minimum assessment content: full history, hearing and communication needs, psychosocial difficulties, expectations, a self-report instrument \"such as the Glasgow Hearing Aid Benefit Profile or the Client-Orientated Scale of Improvement\", otoscopy, pure tone audiometry and tympanometry if indicated.",
+          "implication": "The 15 dB across 2 adjacent frequencies rule is a hard, quotable device specification: an audiometer or screening product sold into England must produce thresholds at 0.5, 1, 2, 4 and 8 kHz or it cannot operate the MRI referral rule at all. Recommendation 1.5.1 is effectively a minimum kit list per assessment room — otoscope, pure tone audiometer, tympanometer. The three referral tiers in 1.1.2 are the numbers a triage or teleaudiology product has to be able to evidence against.",
+          "url": "https://www.nice.org.uk/guidance/ng98/chapter/Recommendations",
+          "source_label": "NICE NG98 ↗"
+        },
+        {
+          "ref": "NICE — Hearing loss in adults, quality standard QS185, published 10/07/2019",
+          "kind": "NICE quality standard",
+          "finding": "Six statements turn NG98 into commissioning metrics. Statement 1: \"Adults with earwax that is contributing to hearing loss or other symptoms, or preventing ear examination or ear canal impressions being taken, have earwax removed in primary care or community ear care services.\" Statement 2: sudden onset hearing loss not explained by external or middle ear causes is \"referred for immediate or urgent specialist medical care\". Statement 4: adults presenting for the first time with hearing difficulties not caused by impacted earwax or acute infection \"have an audiological assessment\". Statement 5: adults whose hearing loss affects their ability to communicate and hear \"are offered hearing aids\". Statement 6: \"Adults with hearing aids have a follow-up audiology appointment 6 to 12 weeks after the hearing aids are fitted.\" The standard is \"endorsed by NHS England as required by the Health and Social Care Act (2012)\".",
+          "implication": "Statement 6 is the most useful single sentence in UK audiology commercially: it creates a NICE-endorsed, six-to-twelve-week touchpoint on every hearing aid fitted in England. Anything that services that appointment — remote fine-tuning, verification equipment, patient-reported outcome capture, data logging — sells against a named quality statement rather than a general efficiency argument. Statement 1 is the standing case for irrigation and microsuction equipment in primary and community care.",
+          "url": "https://www.nice.org.uk/guidance/qs185/chapter/Quality-statements",
+          "source_label": "NICE QS185 ↗"
+        }
+      ]
+    },
+    "pharmacy-medicines": {
+      "progress_slug": "pharmacy-and-medicines",
+      "band_title": "Pharmacy and Medicines",
+      "area": "Medicines Optimisation, Polypharmacy and Deprescribing",
+      "rows": [
+        {
+          "ref": "NICE. Medicines optimisation: the safe and effective use of medicines to enable the best possible outcomes. NICE guideline NG5. Published 04/03/2015; last surveillance review March 2019 (no change to recommendations).",
+          "kind": "NICE guideline",
+          "finding": "Recommendation 1.4.1: “Consider carrying out a structured medication review for some groups of people when a clear purpose for the review has been identified,” naming polypharmacy, chronic/long-term conditions and older people. Recommendation 1.1.8 tells organisations to “consider applying the principles of the PINCER intervention” — IT support, educational outreach, multidisciplinary working, dedicated pharmacist support, an agreed action plan and regular feedback — to reduce medicines-related patient safety incidents. Recommendation 1.1.9 says to “consider using a screening tool — for example, the STOPP/START tool in older people” to identify potential incidents.",
+          "implication": "This is the anchor guideline NHS England itself cites when specifying structured medication review in the PCN contract, and it names PINCER and STOPP/START by name — so any pharmacist-support, decision-support or screening tool pitched into general practice should explicitly map onto recs 1.1.8, 1.1.9 and 1.4.1. Do not present it as recently refreshed; its evidence base is a decade old and its own surveillance record shows no update since 2019.",
+          "url": "https://www.nice.org.uk/guidance/ng5/chapter/Recommendations",
+          "source_label": "NICE NG5 ↗"
+        },
+        {
+          "ref": "NICE. Medicines optimisation. NICE quality standard QS120, Statement 6: Structured medication review. Published/last reviewed 24/03/2016.",
+          "kind": "NICE quality standard",
+          "finding": "Quality statement: “Local healthcare providers identify people taking medicines who would benefit from a structured medication review.” The rationale states a structured medication review with a clear purpose “can identify medicines that could be stopped or need a dosage change, or new medicines that are needed” and “can lead to a reduction in adverse events.” The quality measures ask providers to evidence both arrangements to identify eligible patients and arrangements to offer them a review.",
+          "implication": "Commissioners and providers use this quality statement as the formal basis for specifying SMR delivery locally, so it is useful shorthand in a commissioning conversation — but because it asserts a benefit (“reduction in adverse events”) without a quantified source, a rep should not repeat that phrase as if it were a measured trial result.",
+          "url": "https://www.nice.org.uk/guidance/qs120/chapter/quality-statement-6-structured-medication-review",
+          "source_label": "NICE QS120 ↗"
+        }
+      ]
+    },
+    "radiology-imaging": {
+      "progress_slug": "radiology-and-imaging",
+      "band_title": "Radiology and Imaging",
+      "area": "Capacity, Workforce and Community Diagnostic Centres",
+      "rows": [
+        {
+          "ref": "NHS England, ‘NHS Diagnostic Waiting Times and Activity Data, June 2026 Monthly Report’, version 1.0, first published 13/08/2026; Accredited Official Statistics (next publication 10/09/2026)",
+          "kind": "NHS England Accredited Official Statistics",
+          "finding": "The latest published month. 448,500 patients were waiting six weeks or more for one of the 15 key diagnostic tests at the end of June 2026 — 23.3% of all those waiting. The operational standard is that fewer than 1% should wait six weeks or more, and the report states flatly: \"The 1% operational standard was last met in November 2013.\" The NHS Standard Contract 2025/26 seeks progress towards an interim threshold of at most 5%. The waiting list stood at 1,924,600 (up 191,500 on June 2025) against 2,654,700 tests performed in the month (up 137,000). Median wait 2.9 weeks. By modality, percentage waiting 6+ weeks, June 2025 to June 2026: MRI 15.6% to 22.3% (up 6.7 percentage points); CT 10.9% to 9.9% (down 1.0); non-obstetric ultrasound 18.7% to 19.9%; DEXA 12.8% to 16.5%. Every commissioner and all seven NHS England regions failed the standard, with regional performance ranging from 13.3% (North West) to 31.1% (East of England).",
+          "implication": "The MRI deterioration is the story worth carrying into a meeting: MRI six-week breaches rose from 15.6% to 22.3% in twelve months while CT improved slightly. That makes MRI, not CT, the binding constraint in English diagnostics today, and points capacity, scheduling and reporting conversations at MRI specifically. A standard unmet since 2013 also disposes of any \"we are nearly there\" objection.",
+          "url": "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2026/08/DWTA-June-2026-Report_P1BDL.pdf",
+          "source_label": "DM01 Jun 2026 ↗"
+        },
+        {
+          "ref": "Professor Sir Mike Richards, ‘Diagnostics: Recovery and Renewal — Report of the Independent Review of Diagnostic Services for NHS England’, NHS England publication approval reference PAR242, report dated October 2020, published 27/11/2020",
+          "kind": "Independent commissioned review",
+          "finding": "The document every NHS diagnostics business case still cites, with 24 recommendations. Recommendation 4: \"Community diagnostic hubs should be rapidly established to provide Covid‑19 minimal, highly productive elective diagnostic centres…\" Recommendation 8: \"CT scanning capacity should be expanded by 100% over the next five years to meet increasing demand and to match other developed countries\", with each acute site with an emergency department having access to a minimum of two CT scanners. Recommendation 9: all \"imaging equipment older than 10 years should be replaced\". Recommendation 12: \"an additional 2,000 radiologists and 4,000 radiographers\". On international standing: \"England lags far behind the OECD averages for scanners (CT, MRI and PET‑CT) per million population, ranking lowest among 23 countries for CT scanner provision.\" Its Table A2.1 sets out a five-year equipment requirement including 777 additional plus 256 replacement CT scanners and 273 plus 193 MRI.",
+          "implication": "Quoting recommendation numbers back to a trust is speaking the language its own business case is written in. Recommendation 9 is the single most useful line for a replacement-cycle conversation — equipment bought around 2015 or 2016 is now formally outside the policy the trust itself cites. Table A2.1 gives modality-level framing for territory planning, provided it is presented as a 2020 estimate rather than a current requirement.",
+          "url": "https://www.england.nhs.uk/wp-content/uploads/2020/11/diagnostics-recovery-and-renewal-independent-review-of-diagnostic-services-for-nhs-england-2.pdf",
+          "source_label": "Richards 2020 ↗"
+        }
+      ]
+    },
+    "infection-prevention-control": {
+      "progress_slug": "infection-prevention-and-control",
+      "band_title": "Infection Prevention and Control",
+      "area": "The Statutory Framework, National Guidance and What the Surveillance Actually Shows",
+      "rows": [
+        {
+          "ref": "DHSC — The Health and Social Care Act 2008: code of practice on the prevention and control of infections and related guidance (refreshed 13/12/2022)",
+          "kind": "Statutory code of practice",
+          "finding": "Sets out, under the Health and Social Care Act 2008, the framework CQC uses to judge registered providers’ infection prevention and control (including cleanliness). Part 2 lists 10 criteria: 1 systems to manage/monitor IPC; 2 clean, appropriate managed-premises environment; 3 appropriate antimicrobial use and stewardship; 4 information on infections for service users/visitors; 5 prompt identification/treatment of those with or at risk of infection; 6 care worker awareness of IPC responsibilities; 7 adequate isolation facilities; 8 access to laboratory support; 9 policies for individual care; 10 staff health, wellbeing and occupational health management. Refreshed 13/12/2022 to reflect the 01/07/2022 NHS structural changes.",
+          "implication": "Useful for framing IPC governance conversations with trust boards and infection control leads — the 10 criteria map to what CQC inspectors look for. Never claim a product is \"required by the Hygiene Code\": the compliance route is the provider’s choice and no specific product is named.",
+          "url": "https://www.gov.uk/government/publications/the-health-and-social-care-act-2008-code-of-practice-on-the-prevention-and-control-of-infections-and-related-guidance/health-and-social-care-act-2008-code-of-practice-on-the-prevention-and-control-of-infections-and-related-guidance",
+          "source_label": "gov.uk ↗"
+        },
+        {
+          "ref": "NHS England — National infection prevention and control manual (NIPCM) for England, v2.12 (first published 14/04/2022, updated 24/07/2025)",
+          "kind": "Mandatory national guidance manual",
+          "finding": "First published 14/04/2022. NHS England states it \"should be adopted as mandatory guidance in NHS settings, and in other settings where NHS services are delivered\", with its principles \"also be applied across all care settings\". Chapter 1 sets out Standard Infection Control Precautions (SICPs) for universal use; Chapter 2 sets out Transmission Based Precautions (TBPs), needed \"when caring for patients with known or suspected infection or colonisation\", categorised by transmission route. Current accessible version 2.12, updated 24/07/2025; the NHS England publication page was itself last updated 18/06/2026.",
+          "implication": "The primary practical reference an IPC lead or procurement team will cite when specifying products — ask which SICP or TBP chapter a product supports. A claim of \"NIPCM compliance\" must state the version, since it is revised roughly annually (v2.12 as of 24/07/2025).",
+          "url": "https://www.england.nhs.uk/publication/national-infection-prevention-and-control/",
+          "source_label": "NHS England ↗"
+        }
+      ]
+    },
+    "patient-handling": {
+      "progress_slug": "patient-handling",
+      "band_title": "Patient Moving and Handling",
+      "area": "The Statutory Framework: What the Law Actually Requires",
+      "rows": [
+        {
+          "ref": "Manual Handling Operations Regulations 1992 (SI 1992/2793), regulation 4",
+          "kind": "Statutory instrument · Great Britain (E+W+S)",
+          "finding": "The whole legal hierarchy, verbatim. Regulation 4(1): each employer shall \"(a) so far as is reasonably practicable, avoid the need for his employees to undertake any manual handling operations at work which involve a risk of their being injured; or (b) where it is not reasonably practicable to avoid the need… (i) make a suitable and sufficient assessment of all such manual handling operations… (ii) take appropriate steps to reduce the risk of injury… to the lowest level reasonably practicable, and (iii) take appropriate steps to provide… general indications and, where it is reasonably practicable to do so, precise information on (aa) the weight of each load, and (bb) the heaviest side of any load whose centre of gravity is not positioned centrally.\" Regulation 4(2) requires the assessment to be reviewed where there is reason to suspect it is no longer valid or the operations have significantly changed.",
+          "implication": "A claim that a product \"meets MHOR\" or \"makes you MHOR compliant\" is meaningless, because MHOR imposes duties on the employer's assessment process rather than specifications on equipment. The legitimate pitch is regulation 4(1)(b)(ii) — equipment as the step that reduces residual risk to the lowest level reasonably practicable. It is not a substitute for the 4(1)(b)(i) assessment, and saying otherwise is a claim a trust health and safety lead will pick apart.",
+          "url": "https://www.legislation.gov.uk/uksi/1992/2793/regulation/4",
+          "source_label": "Legislation ↗"
+        },
+        {
+          "ref": "Health and Safety (Miscellaneous Amendments) Regulations 2002 (SI 2002/2174), regulation 4 — inserting MHOR regulation 4(3)",
+          "kind": "Amending statutory instrument · in force 17/09/2002",
+          "finding": "The individual-worker factors are a separately dated legal addition, in force from 17/09/2002, giving effect to Annex II of EU Directive 90/269/EEC. Regulation 4(3) requires regard in particular to: \"(a) the physical suitability of the employee to carry out the operations; (b) the clothing, footwear or other personal effects he is wearing; (c) his knowledge and training; (d) the results of any relevant risk assessment carried out pursuant to regulation 3 of the Management of Health and Safety at Work Regulations 1999; (e) whether the employee is within a group of employees identified by that assessment as being especially at risk; and (f) the results of any health surveillance…\"",
+          "implication": "This is the clause that makes a generic, one-size ward risk assessment non-compliant, and it is the strongest legal footing for anything sold on individual assessment, competence records or health surveillance rather than on hardware. It is also the reason \"we trained everyone once\" is not a defence: 4(3)(c) makes knowledge and training a live factor in every assessment, not a completed task.",
+          "url": "https://www.legislation.gov.uk/uksi/2002/2174/made",
+          "source_label": "Legislation ↗"
+        }
+      ]
+    },
+    "vascular-access-iv": {
+      "progress_slug": "vascular-access-and-iv-therapy",
+      "band_title": "Vascular Access and IV Therapy",
+      "area": "National Guidance, Standards and the UK Framework",
+      "rows": [
+        {
+          "ref": "NICE CG139 — Healthcare-associated infections: prevention and control in primary and community care (2012, last updated February 2017)",
+          "kind": "National guideline",
+          "finding": "Section 1.4 is the national baseline for vascular access device practice: decontaminate the insertion site with chlorhexidine gluconate in 70% alcohol before inserting a peripheral device or a peripherally inserted central catheter (1.4.3.1); cover with a sterile transparent semipermeable membrane dressing (1.4.3.2); change the central venous access device dressing every 7 days (1.4.3.4); leave the peripheral cannula dressing in situ for the life of the cannula (1.4.3.5); decontaminate the injection port or catheter hub before and after every access (1.4.4.1). It also rules things out: in-line filters \"should not be used routinely for infection prevention\" (1.4.4.2), antibiotic lock solutions \"should not be used routinely\" (1.4.4.3), and administration sets in continuous use \"need not be replaced more frequently than at 72-hour intervals\" (1.4.4.12), with blood component sets changed every 12 hours (1.4.4.13).",
+          "implication": "It gives a hard, citable national line on dressings, hub decontamination and set-change intervals for community and primary care accounts — but quoting it at an acute trust is out of scope, and the explicit \"not routinely\" wording means in-line filters and antibiotic locks cannot be sold on CG139.",
+          "url": "https://www.nice.org.uk/guidance/cg139",
+          "source_label": "NICE ↗"
+        },
+        {
+          "ref": "NICE QS61 — Infection prevention and control, Quality statement 5: Vascular access devices (2014, last reviewed April 2014)",
+          "kind": "Quality standard",
+          "finding": "Statement 5 reads: \"People who need a vascular access device have their risk of infection minimised by the completion of specified procedures necessary for the safe insertion and maintenance of the device and its removal as soon as it is no longer needed.\" The rationale states that vascular access devices are one of the main causes of healthcare-associated infections and that bloodstream infections associated with central venous device insertion are a major cause of morbidity. It sets a structure measure (a written protocol), a process measure (proportion of patients for whom all specified procedures were completed) and an outcome measure (incidence of vascular access device-related bloodstream infection).",
+          "implication": "Useful as the board-level hook, because it frames vascular access infection as a measured quality priority the provider is accountable for — but with no national data source behind the outcome measure, the commercial conversation is about helping a trust evidence its own audit, not about hitting a published benchmark.",
+          "url": "https://www.nice.org.uk/guidance/qs61/chapter/quality-statement-5-vascular-access-devices",
+          "source_label": "NICE ↗"
+        }
+      ]
+    },
+    "nutrition-dietetics": {
+      "progress_slug": "nutrition-and-dietetics",
+      "band_title": "Nutrition and Dietetics",
+      "area": "National Guidance and the Statutory Framework",
+      "rows": [
+        {
+          "ref": "NICE. Surveillance proposal consultation document, March 2017 — CG32 nutrition support for adults, 2017 surveillance review.",
+          "kind": "NICE surveillance review · 78 pages · 20 March 2017",
+          "finding": "NICE's own surveillance document records that the 2-year, 5-year and 8-year reviews of CG32 each concluded \"no update\". The 2017 review searched randomised trials and systematic reviews published between 23 September 2013 and 18 October 2016, found 80 relevant studies, added 7 more from the original committee and 132 from earlier surveillance, and considered 219 studies in total. Its stated decision, verbatim: \"After considering all the evidence and views of topic experts, we propose to not update this guideline, and place the guideline on the static list.\" The reason given: \"No evidence was identified that would impact on the current guidance and no major ongoing studies or research have been identified as due to be published in the near future (that is, within the next 3 to 5 years).\"",
+          "implication": "Stop waiting for a NICE refresh to create a selling window in adult nutrition support. There will not be one. Every NICE-anchored argument in this speciality has to be built on 2006 text, and any competitor claiming their product is aligned to \"current NICE thinking\" is aligned to a guideline NICE has formally proposed to stop reviewing.",
+          "url": "https://www.nice.org.uk/guidance/cg32/documents/surveillance-review-proposal",
+          "source_label": "NICE ↗"
+        },
+        {
+          "ref": "NICE. CG32 \"Nutrition support for adults: oral nutrition support, enteral tube feeding and parenteral nutrition\". Published 22 February 2006, last updated 4 August 2017.",
+          "kind": "NICE clinical guideline · CG32 · clinical content unchanged since 2006",
+          "finding": "The guideline's own Update information section reads, in full: \"August 2017: Links were updated in recommendations 1.3.4 and 1.8.15. Recommendation 1.7.17 was updated and links added to National Patient Safety Agency documents.\" Nothing clinical changed. The overview page states \"Next review: This guideline will be reviewed if there is new evidence that is likely to change the recommendations.\" The screening requirements are unchanged from 2006: 1.2.2 \"All hospital inpatients on admission and all outpatients at their first clinic appointment should be screened. Screening should be repeated weekly for inpatients\"; 1.2.4 care home residents on admission and when there is clinical concern; 1.2.5 on initial registration at general practice.",
+          "implication": "CG32's screening cadence — every inpatient on admission, then weekly — is the single most useful sentence in the guideline for anyone selling screening equipment, scales, height measures or the software that records the result. It is a standing requirement on every acute trust in England and Wales, and it is auditable.",
+          "url": "https://www.nice.org.uk/guidance/cg32/chapter/Update-information",
+          "source_label": "NICE CG32 ↗"
+        }
+      ]
+    },
+    "continence-bladder-bowel": {
+      "progress_slug": "continence-bladder-and-bowel",
+      "band_title": "Continence, Bladder and Bowel",
+      "area": "National Guidance and the Statutory Framework",
+      "rows": [
+        {
+          "ref": "NICE. NG123 \"Urinary incontinence and pelvic organ prolapse in women: management\". Published 2 April 2019, last updated 24 June 2019.",
+          "kind": "NICE guideline · NG123 · published 2019",
+          "finding": "Recommendation 1.4.4: \"Offer a trial of supervised pelvic floor muscle training of at least 3 months' duration as first-line treatment to women with stress or mixed urinary incontinence.\" Recommendation 1.4.5 specifies programmes should comprise at least 8 contractions performed 3 times a day.",
+          "implication": "Any product or service positioned to shorten, replace or substitute the mandated 3-month supervised PFMT trial is competing directly against a named NICE first-line recommendation, not merely against local convention.",
+          "url": "https://www.nice.org.uk/guidance/ng123/chapter/Recommendations",
+          "source_label": "NICE NG123 ↗"
+        },
+        {
+          "ref": "NICE. CG97 \"Lower urinary tract symptoms in men: management\". Published 23 May 2010, last updated 3 June 2015.",
+          "kind": "NICE guideline · CG97 · queued for update",
+          "finding": "The guideline's own update page states: \"In August 2024, we checked the evidence and plan on updating this guideline\" (last reviewed 19 December 2024). It was last substantively amended in 2015; a 2024 change added links to relevant technology appraisal guidance in the drug treatment section only.",
+          "implication": "This guideline is live but due for revision. Any sales argument built on CG97 should flag it as under active review rather than settled, and the consultation is worth monitoring: a men's LUTS refresh would be the first in over a decade.",
+          "url": "https://www.nice.org.uk/guidance/cg97",
+          "source_label": "NICE CG97 ↗"
+        }
+      ]
+    },
+    "rehab-prosthetics-orthotics": {
+      "progress_slug": "rehabilitation-prosthetics-and-orthotics",
+      "band_title": "Rehabilitation, Prosthetics and Orthotics",
+      "area": "National Guidance and Standards for Rehabilitation",
+      "rows": [
+        {
+          "ref": "NICE NG211 — Rehabilitation after traumatic injury (published 18 January 2022)",
+          "kind": "NICE guideline",
+          "finding": "NG211 covers assessment, goal-setting, rehabilitation plans and commissioning after any injury needing hospital admission. Recommendation 1.1.2 says rehabilitation needs should be assessed from admission, involving a rehabilitation specialist alongside acute care teams. Recommendation 1.4.1 says the rehabilitation plan (which may be in the form of a rehabilitation prescription) must include the person's goals, a suggested therapy programme, referral details and a named rehabilitation coordinator or key worker.",
+          "implication": "NG211 is the citable national standard behind any structured rehabilitation-plan or assessment product sold into trauma units; its commissioning section (1.10) gives a direct hook for conversations with ICBs organising trauma rehab pathways.",
+          "url": "https://www.nice.org.uk/guidance/ng211/chapter/Recommendations",
+          "source_label": "NICE ↗"
+        },
+        {
+          "ref": "NICE NG236 — Stroke rehabilitation in adults (published 18 October 2023)",
+          "kind": "NICE guideline",
+          "finding": "Recommendation 1.2.16 [2023]: \"Offer needs-based rehabilitation to people after stroke. This should be for at least 3 hours a day, on at least 5 days of the week, and cover a range of multidisciplinary therapy including physiotherapy, occupational therapy and speech and language therapy.\" Recommendation 1.2.17 sets a fallback of a minimum 5 days a week of therapy where 3 hours a day is not wanted or possible.",
+          "implication": "This is a precise, quotable intensity target NHS stroke services are measured against. It is a strong opening line for any product or service that helps trusts close the gap between recommended and actually-delivered therapy hours (workforce, digital or equipment-based).",
+          "url": "https://www.nice.org.uk/guidance/ng236/chapter/Recommendations",
+          "source_label": "NICE ↗"
+        }
+      ]
+    },
+    "pain-management": {
+      "progress_slug": "pain-management",
+      "band_title": "Pain Management",
+      "area": "National guidance and the NG193 reset",
+      "rows": [
+        {
+          "ref": "NICE NG193, Chronic pain (primary and secondary) in over 16s — recommendations 1.2.10 and 1.2.11",
+          "kind": "NICE guideline · published 07/04/2021, never updated",
+          "finding": "The document that reset UK pain prescribing. 1.2.10: \"Do not initiate any of the following medicines to manage chronic primary pain in people aged 16 years and over\" — and the list runs to ten categories: antiepileptic drugs including gabapentinoids (unless in a trial for complex regional pain syndrome), antipsychotic drugs, benzodiazepines, corticosteroid trigger point injections, ketamine, local anaesthetics topical or intravenous, local anaesthetic/corticosteroid combination trigger point injections, non-steroidal anti-inflammatory drugs, opioids and paracetamol. For people already taking them, 1.2.11 requires the prescriber to \"explain the lack of evidence for these medicines for chronic primary pain\" and either agree a plan to continue safely where there is benefit at a safe dose, or \"encourage and support them to reduce and stop the medicine if possible\".",
+          "implication": "This is the single most quoted document in UK pain and the most often misquoted. Quote the recommendation number and the words \"chronic primary pain\" every time, because a customer who checks will find the scope limit immediately. Its commercial effect is real but indirect: it removes ten drug and injection categories from a defined population and names exercise, psychological therapy and capped-cost acupuncture as what replaces them.",
+          "url": "https://www.nice.org.uk/guidance/ng193/chapter/Recommendations",
+          "source_label": "NICE NG193 ↗"
+        },
+        {
+          "ref": "NICE NG193 — what actually changed between the August 2020 draft and the April 2021 guideline",
+          "kind": "Primary-source comparison of NICE's own draft and final text",
+          "finding": "The published guideline is materially softer than the draft the press reported. On existing patients, the draft said simply \"explain the risks of continuing\"; the final 1.2.11 replaced that with shared decision making including \"agree a shared plan for continuing safely if they report benefit at a safe dose and few harms\". On injections, the draft listed a blanket \"corticosteroids\"; the final narrowed it to corticosteroid trigger point injections and local anaesthetic/corticosteroid combination trigger point injections only. Both changes moved in the same direction, towards not disturbing stable treatment and towards a narrower procedural restriction.",
+          "implication": "The widely repeated line that \"NICE told patients on opioids to come off them\" describes the draft, not the guidance. If a customer raises the NG193 backlash, the accurate answer is that NICE consulted, and moved. Knowing that distinguishes a rep who has read the guidance from one who has read the coverage.",
+          "url": "https://www.nice.org.uk/guidance/ng193/history",
+          "source_label": "NICE history ↗"
+        }
+      ]
+    },
+    "haematology-pbm": {
+      "progress_slug": "haematology-and-patient-blood-management",
+      "band_title": "Haematology and Patient Blood Management",
+      "area": "National Guidance, Regulation and Haemovigilance",
+      "rows": [
+        {
+          "ref": "NICE NG24 Blood transfusion — the February 2026 tranexamic acid rewrite",
+          "kind": "NICE guideline NG24 · published 18/11/2015, last updated 26/02/2026 · LIVE (full chapter and recommendation navigation present, no replacement notice)",
+          "finding": "NG24 is live, not retired. Its chapter list resolves to 14 chapters and every recommendation carries a date tag. In February 2026 NICE reviewed the evidence and replaced the tranexamic acid section outright. New recommendation 1.3.1 [2026]: \"Offer tranexamic acid to adults having surgery in an operating theatre if: there is any risk of bleeding and the procedure will breach the skin or mucous membranes.\" 1.3.2 [2026] extends this to surgery outside theatre (interventional radiology, A&E) where more than 500 ml blood loss is expected. 1.3.3 [2026] specifies dosing: \"administer it just before the start of surgery. Typically give 1 g by slow intravenous injection.\" Children aged 1 to 15 get \"consider\" recommendations (1.3.5–1.3.7) at 15 mg per kg, maximum 1 g. New safety recommendation 1.3.9 [2026] requires measures to prevent accidental intrathecal or epidural administration. By contrast the red cell threshold recommendations are all still tagged [2015]: 1.5.2 restrictive threshold of 70 g/litre with a 70 to 90 g/litre target; 1.5.3 an 80 g/litre threshold and 80 to 100 g/litre target for acute coronary syndrome; 1.6.1 single-unit transfusion for adults not actively bleeding. Iron is also unchanged [2015]: 1.2.1 offer oral iron before and after surgery in iron-deficiency anaemia, 1.2.2 consider intravenous iron where oral iron cannot be tolerated, absorbed or adhered to, where functional iron deficiency is diagnosed, or where the interval to surgery is too short for oral iron to work.",
+          "implication": "This is the single most sellable change in UK transfusion guidance in a decade, and it landed after most sales collateral was written. The trigger for tranexamic acid has moved from an expected-blood-loss test to \"any risk of bleeding\" in essentially every theatre case that breaches skin or mucous membrane — a very large expansion of the addressable population, with an explicit 1 g IV dose and an explicit wrong-route safety requirement that creates a real opening for ready-to-administer presentations, labelling and administration-safety products. Anyone still pitching the old moderate-blood-loss framing is quoting withdrawn wording. Equally, do not oversell: iron and threshold practice has not moved, so an intravenous iron or blood-management pitch cannot claim a 2026 NICE change.",
+          "url": "https://www.nice.org.uk/guidance/ng24",
+          "source_label": "NICE ↗"
+        },
+        {
+          "ref": "NICE QS138 Blood transfusion quality standard",
+          "kind": "NICE quality standard QS138 · published 15/12/2016, last updated 26/02/2026 · LIVE (four quality statements, each with its own chapter)",
+          "finding": "QS138 is live and contains exactly four quality statements: 1 iron supplementation, 2 tranexamic acid for adults having surgery in an operating theatre, 3 reassessment after red blood cell transfusions, and 4 patient information. On 26/02/2026 NICE amended the population in statement 2 to align with the NG24 update. Statement 2 now reads: \"Adults who are having surgery in an operating theatre where there is any risk of bleeding and the procedure will breach the skin or mucous membrane receive tranexamic acid.\" Its stated rationale is that tranexamic acid \"can reduce the need for blood transfusion in adults having surgery\" and \"may also reduce the length of hospital stays and the cost to the NHS\". The named data source is the NHS Blood and Transplant national comparative audit of QS138, which the page says \"currently audits the proportion of adults having surgery with expected moderate blood loss and is being updated to reflect the updated measure\". The standard is endorsed by NHS England as required by the Health and Social Care Act 2012, and supported by NHS Blood and Transplant, the Royal College of Physicians and the UK Transfusion Laboratory Collaborative.",
+          "implication": "QS138 is what commissioners and audit teams actually measure against, so statement 2 is the lever that converts the NG24 change into procurement pressure. The admission that the national audit still measures the old \"expected moderate blood loss\" population means there is a measurement gap right now: trusts will be judged against a standard whose audit tool lags it. That is a legitimate, evidenced conversation opener with transfusion practitioners and theatre leads, and it dates the opportunity — the gap closes when the October 2026 QS138 audit runs.",
+          "url": "https://www.nice.org.uk/guidance/qs138",
+          "source_label": "NICE ↗"
+        }
+      ]
+    },
+    "maternity-neonatal": {
+      "progress_slug": "maternity-and-neonatal",
+      "band_title": "Maternity and Neonatal",
+      "area": "National Guidance, the Safety Reviews and the 2026 Reset",
+      "rows": [
+        {
+          "ref": "NICE NG235 — Intrapartum care",
+          "kind": "NICE guideline · published 29/09/2023 · replaces CG190 (2014)",
+          "finding": "NG235 covers care of women (and pregnant trans and non-binary people) and their babies during labour and immediately after birth, for term pregnancies (37–42 weeks). It updates and replaces the 2014 guideline CG190, helping women make informed choices about place of birth and labour care, and aims to reduce unwarranted variation in practice.",
+          "implication": "NG235 is the current authoritative benchmark for intrapartum care — any product, training or briefing aimed at NHS maternity services should reference it explicitly and by number.",
+          "url": "https://www.nice.org.uk/guidance/ng235",
+          "source_label": "NICE ↗"
+        },
+        {
+          "ref": "NICE NG201 — Antenatal care",
+          "kind": "NICE guideline · published 19/08/2021 · updates CG62 (2008)",
+          "finding": "NG201 covers the routine antenatal care pregnant women and their babies should receive, including that a first (booking) appointment with a midwife should take place by 10+0 weeks of pregnancy. It updates and replaces the 2008 guideline CG62 and should be read alongside NG137, NG207, NG192 and NG235.",
+          "implication": "Still the current national standard for routine antenatal pathway design, so remains the correct reference point for any commissioning or training conversation about the antenatal pathway.",
+          "url": "https://www.nice.org.uk/guidance/ng201",
+          "source_label": "NICE ↗"
+        }
+      ]
+    },
+    "gynaecology-womens-health": {
+      "progress_slug": "gynaecology-and-womens-health",
+      "band_title": "Gynaecology and Women's Health",
+      "area": "National Guidance and the 2026 Reset",
+      "rows": [
+        {
+          "ref": "DHSC, The Renewed Women's Health Strategy for England (CP 1558, ISBN 978-1-5286-6262-8, 90 pages, published 15 April 2026); and Women's Health Strategy for England (CP 736, 2022) — withdrawn 20 May 2026",
+          "kind": "National policy — strategy replaced, both pages read live",
+          "finding": "The 2022 Women's Health Strategy for England now loads with \"[Withdrawn]\" in the page title and the line \"This publication was withdrawn on 20 May 2026. The renewed Women's Health Strategy for England was published on 15 April 2026.\" The renewed strategy is a 90-page DHSC command paper, and GOV.UK's own description reads: \"The renewed strategy is aligned with the 10 Year Health Plan for England and sets out how women will have voice, choice and power in their health and healthcare.\"",
+          "implication": "Every deck, bid and pathway document citing the 2022 Women's Health Strategy is quoting withdrawn policy, and has been since 20 May 2026. This is the highest-value single correction in the speciality because that strategy has been the standard opening slide for women's health business cases for four years. Two practical consequences: check any live bid before it goes out, and re-anchor the argument on the renewed strategy's alignment to the 10 Year Health Plan, which is where the money and the accountability now sit.",
+          "url": "https://www.gov.uk/government/publications/renewed-womens-health-strategy-for-england",
+          "source_label": "GOV.UK ↗"
+        },
+        {
+          "ref": "NHS England, Referral to Treatment Waiting Times statistical press notice, June 2026 (published 13/08/2026) — Table 1, RTT pathways by treatment function",
+          "kind": "Official statistics — figures read from the PDF and ranked by our own arithmetic",
+          "finding": "The Gynaecology Service treatment function held 575,870 incomplete RTT pathways at the end of June 2026, with 61.0% within 18 weeks against the NHS Constitution's 92% standard. Our own arithmetic on the same table puts that in context: gynaecology is the 4th largest waiting list of the 18 named clinical specialties (behind trauma and orthopaedics 829,590, ophthalmology 620,922 and ear nose and throat 594,546), the 5th worst on 18-week performance, and 8.1% of England's entire 7,147,562 incomplete pathways. Of gynaecology's completed pathways that month, 84.5% were non-admitted (92,071) against 15.5% admitted (16,892).",
+          "implication": "The 84.5% non-admitted split is the commercially important number, and it is the one nobody quotes. Gynaecology's bottleneck is overwhelmingly outpatient and diagnostic, not theatre — so a pitch built on operating-list throughput is aimed at 15.5% of the activity. The arguments that fit the actual constraint are one-stop and see-and-treat clinics, outpatient hysteroscopy, direct-access ultrasound and anything that resolves a woman in a single visit. Combined with the 61.0% performance and a 92% standard, gynaecology is a specialty under real, measurable, board-level pressure, which is the condition in which capacity propositions get heard.",
+          "url": "https://www.england.nhs.uk/statistics/wp-content/uploads/sites/2/2026/08/Jun26-RTT-statistical-press-notice-PDF-579K-6jPlxd.pdf",
+          "source_label": "NHS England ↗"
+        }
+      ]
+    },
+    "ent-head-neck": {
+      "progress_slug": "ent-and-head-and-neck",
+      "band_title": "ENT and Head and Neck",
+      "area": "Otology, Otitis Media and Ear Surgery",
+      "rows": [
+        {
+          "ref": "National Institute for Health and Care Excellence. Otitis media with effusion in under 12s. NICE guideline NG233, Rationale and impact section. Published 30 August 2023.",
+          "kind": "NICE guideline (committee rationale and health economic model)",
+          "finding": "NICE does not recommend grommet insertion for children whose glue ear has not caused hearing loss, stating there is no urgent need for surgery regardless of whether the effusion is persistent or transient. It describes the evidence that early grommets improve final hearing thresholds in the short term as very low quality. It recommends considering a single intraoperative application of ciprofloxacin drops (moderate-quality evidence of reduced otorrhoea at 6 weeks; low-quality for reduced tube blockage) but specifically does not recommend postoperative ciprofloxacin drops or injected ciprofloxacin, and advises keeping the ear dry for 2 weeks. The guideline’s own economic evaluation compared no intervention, hearing aids, grommets alone and grommets with adenoidectomy, and found grommets generally more cost effective than no intervention but with cost-effectiveness comparable to hearing aids and to grommets plus adenoidectomy.",
+          "implication": "If you sell ventilation tubes, hearing devices or otic drops, this is the document the commissioner will quote back. It kills any pitch built on hearing benefit in children without documented hearing loss, and it creates a defined, narrow, NICE-backed opening for a single intraoperative dose of ciprofloxacin drops while closing the far larger postoperative repeat-dosing market. The economic finding that grommets are no better value than hearing aids is the argument a hearing-device supplier should be making and a tube supplier should be ready for.",
+          "url": "https://www.nice.org.uk/guidance/ng233/chapter/Rationale-and-impact",
+          "source_label": "NICE ↗"
+        },
+        {
+          "ref": "MacKeith S, Mulvaney CA, Galbraith K, Webster KE, Connolly R, Paing A, Marom T, Daniel M, Venekamp RP, Rovers MM, Schilder AG. Ventilation tubes (grommets) for otitis media with effusion (OME) in children. Cochrane Database of Systematic Reviews 2023, Issue 11, CD015215.pub2. Published 15 November 2023.",
+          "kind": "Cochrane systematic review of randomised controlled trials",
+          "finding": "19 RCTs, 2,888 children. Compared with watchful waiting, early grommets made little to no difference to the proportion of children whose hearing had returned to normal after 8 to 10 years (93% with grommets versus 95% without; RR 0.98, 95% CI 0.94 to 1.03; 1 study, 391 participants; very low-certainty evidence), and little to no difference to persistent glue ear after 18 months to 6 years (15% versus 12%). Against no treatment, the odds ratio for return to normal hearing at 12 months was 1.13 (95% CI 0.46 to 2.74; 54% versus 51%), but grommets did reduce persistent effusion at six months (20.4% versus 68.0%; RR 0.30, 95% CI 0.14 to 0.65; low-certainty evidence). Persistent perforation was reported as 1.26% in one study of 635 ears.",
+          "implication": "Do not lead with long-term hearing outcomes in a children’s glue-ear conversation; a well-read ENT surgeon or commissioner will produce this review. The defensible claim is short-to-medium-term clearance of effusion, not durable hearing gain. It also explains why the market for long-acting or T-tubes is evidentially wide open - the review says explicitly that specific data on long-acting tubes is limited, which is an argument for a well-designed post-market study rather than a claim.",
+          "url": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD015215.pub2/full",
+          "source_label": "Cochrane ↗"
+        }
+      ]
+    },
+    "ophthalmology": {
+      "progress_slug": "ophthalmology",
+      "band_title": "Ophthalmology",
+      "area": "The National Guidance Map and the Capacity Picture",
+      "rows": [
+        {
+          "ref": "National Institute for Health and Care Excellence. Glaucoma: diagnosis and management. NICE guideline NG81. Published 01/11/2017; last updated 26/01/2022; last reviewed 26/03/2025.",
+          "kind": "NICE guideline (NG)",
+          "finding": "NG81 makes 360-degree selective laser trabeculoplasty (SLT), not eye drops, the first-line offer. Recommendation 1.4.4: \"Offer 360° selective laser trabeculoplasty (SLT) to people with newly diagnosed OHT with IOP of 24 mmHg or more (excluding cases associated with pigment dispersion syndrome) if they are at risk of visual impairment within their lifetime\"; recommendation 1.4.17 does the same for \"newly diagnosed COAG that is not advanced\". A generic prostaglandin analogue is the fallback under 1.4.6 and 1.4.19, offered only if the person declines SLT, SLT is unsuitable, they are waiting for SLT and need interim treatment, or SLT alone has not lowered IOP enough. Recommendations 1.4.5 and 1.4.18 both allow a second 360-degree SLT where the first has worn off. NG81 \"updates and replaces NICE guideline CG85 (April 2009)\". The 26/03/2025 entry added links to relevant technology appraisals and NICE states this \"is not a change in practice\".",
+          "implication": "Your glaucoma conversation is a capacity conversation, not an efficacy one. Every unit is expected to offer 360-degree SLT at diagnosis and most cannot deliver it at the volume NG81 implies — that is the gap to sell into, whether you carry lasers, consumables, clinic-throughput technology or a diagnostic pathway that identifies SLT candidates earlier. If you sell branded IOP-lowering drops, quote 1.4.19 back to yourself before the call: NICE names a generic PGA, so your case has to be built on the named exception routes, not on first-line displacement.",
+          "url": "https://www.nice.org.uk/guidance/ng81",
+          "source_label": "NICE ↗"
+        },
+        {
+          "ref": "National Institute for Health and Care Excellence. Cataracts in adults: management. NICE guideline NG77. Published 26/10/2017; last reviewed 20/05/2025 (surveillance decision).",
+          "kind": "NICE guideline (NG)",
+          "finding": "Recommendation 1.2.2 is a single sentence and reps get tested on it: \"Do not restrict access to cataract surgery on the basis of visual acuity.\" Recommendation 1.4.2 is equally blunt: \"Do not offer multifocal intraocular lenses for people having cataract surgery.\" On biometry, 1.3.1 requires optical biometry for axial length, with ultrasound (1.3.2) only where optical is not possible or inaccurate; 1.3.5 specifies the intraocular lens (IOL) power formula by axial length — Haigis or Hoffer Q below 22.00 mm, Barrett Universal II between 22.00 and 26.00 mm \"if it is installed on the biometry device and does not need the results to be transcribed by hand\" and SRK/T if not, and Haigis or SRK/T above 26.00 mm. Critically, at the 20/05/2025 surveillance review NICE said it \"reviewed this guideline and plan to update recommendations on intraocular lens selection\" while explicitly declining to update biometry formulas, surgical timing and technique, bilateral simultaneous cataract surgery and toric lenses. Recommendations 1.4.1 and 1.4.4 currently read only: \"the recommendations around lens design and material have been removed to allow for further consideration.\"",
+          "implication": "Two live commercial openings. First, 1.2.2 is the sentence to put in front of a commissioner running a visual-acuity referral threshold — that policy is non-compliant with NICE, and it is the argument that unlocks volume for anyone selling into a cataract pathway. Second, the IOL selection section is the one part of UK cataract guidance actively in play; if you sell premium, toric or extended-depth-of-focus lenses, your evidence dossier should be aimed at that update, and you must not let a field team read the blanked recommendations as a green light for multifocal.",
+          "url": "https://www.nice.org.uk/guidance/ng77",
+          "source_label": "NICE ↗"
+        }
+      ]
+    },
+    "colorectal-gi-endoscopy": {
+      "progress_slug": "colorectal-gi-and-endoscopy",
+      "band_title": "Colorectal, GI and Endoscopy",
+      "area": "National guidance, screening and the bowel cancer pathway",
+      "rows": [
+        {
+          "ref": "National Institute for Health and Care Excellence (NICE). Suspected cancer: recognition and referral. NICE guideline NG12. Published 23/06/2015; last updated 15/04/2026.",
+          "kind": "NICE guideline",
+          "finding": "Section 1.3 sets the lower gastrointestinal referral pathway, and it is now FIT-led rather than symptom-led. Recommendation 1.3.1 [2023]: 'Offer quantitative faecal immunochemical testing (FIT) using HM-JACKarc or OC-Sensor to guide referral for suspected colorectal cancer in adults' — with an abdominal mass, a change in bowel habit, iron-deficiency anaemia, aged 40 and over with unexplained weight loss and abdominal pain, aged under 50 with rectal bleeding plus abdominal pain or weight loss, aged 50 and over with unexplained rectal bleeding, abdominal pain or weight loss, or aged 60 and over with anaemia even without iron deficiency. Recommendation 1.3.2 [2023]: 'Refer adults using a suspected cancer pathway referral for colorectal cancer if they have a FIT result of at least 10 micrograms of haemoglobin per gram of faeces.' Recommendation 1.3.5 keeps direct referral for a rectal mass without FIT.",
+          "implication": "This is the most useful single page in the NHS for anyone selling faecal immunochemical testing: NICE names only HM-JACKarc and OC-Sensor by brand. Any other FIT platform is selling into a pathway where NICE has not named it, so the buyer needs a local validation case rather than a guideline citation. For endoscopy suppliers, 10 µg Hb/g is the volume driver — it sets how many symptomatic patients reach a scope. Expect procurement conversations framed around FIT-negative safety netting (1.3.3) and sample-return rates (1.3.4), not test accuracy alone. Note also that NICE guideline NG151 covers management of diagnosed colorectal cancer, not referral; do not cite it for pathway questions.",
+          "url": "https://www.nice.org.uk/guidance/ng12/chapter/recommendations-organised-by-site-of-cancer#lower-gastrointestinal-tract-cancers",
+          "source_label": "NICE ↗"
+        },
+        {
+          "ref": "National Institute for Health and Care Excellence (NICE). Quantitative faecal immunochemical testing to guide colorectal cancer pathway referral in primary care. HealthTech guidance HTG690 (formerly Diagnostics guidance DG56). Published 24/08/2023; last reviewed 24/08/2023.",
+          "kind": "HealthTech guidance",
+          "finding": "This is the source document behind the FIT referral threshold, and its guidance number has changed. Recommendation 1.1 recommends quantitative FIT using HM-JACKarc or OC-Sensor to guide referral, and adds that 'FIT should be offered even if the person has previously had a negative FIT result through the NHS bowel cancer screening programme'. Recommendation 1.2 sets referral at 'a FIT result of at least 10 micrograms of haemoglobin per gram of faeces'. NICE states the guidance 'replaces NICE's diagnostics guidance on quantitative faecal immunochemical tests to guide referral for colorectal cancer in primary care (DG30)' and partially updates NG12. Recommendation 1.6 places six further tests — FOB Gold, IDK Hemoglobin ELISA, IDK Hemoglobin/Haptoglobin Complex ELISA, IDK TurbiFIT, NS-Prime and QuikRead go iFOBT — in a research-only category.",
+          "implication": "DG30 is dead and DG56 is a retired number. Anyone quoting either in a tender response, a clinical education pack or a value dossier is quoting a superseded reference, and an NHS procurement lead will notice. Cite HTG690. Commercially, the six tests parked in recommendation 1.6 are the live opening — NICE has not rejected them, it has said the accuracy estimates are too uncertain, which is an evidence-generation brief rather than a closed door. If you sell one of them, the route into an NHS pathway is a local accuracy study, not a guideline citation.",
+          "url": "https://www.nice.org.uk/guidance/htg690/chapter/1-Recommendations",
+          "source_label": "NICE ↗"
+        }
+      ]
+    }
   }
 }

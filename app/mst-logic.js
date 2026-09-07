@@ -1,6 +1,7 @@
 
 (function(){
   var D=window.MST_DATA,SPECS=D.SPECS,P=D.P,FW=D.FW,PRIORITY=D.PRIORITY,EVID=D.EVID;
+  var EVIDENCE_BAND=D.EVIDENCE_BAND||{},EVLIB=D.EVIDENCE_HIGHLIGHTS||{};
   var $=function(id){return document.getElementById(id);};
   var ICON={
     coins:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><ellipse cx="9" cy="7" rx="6" ry="3"/><path d="M3 7v5c0 1.7 2.7 3 6 3"/><ellipse cx="15" cy="14" rx="6" ry="3"/><path d="M9 14v3c0 1.7 2.7 3 6 3s6-1.3 6-3v-6"/></svg>',
@@ -51,7 +52,29 @@
   var BUYING_CENTRE_NOTE='Meets as a Board in Common with Derby and Derbyshire, Lincolnshire and Nottingham and Nottinghamshire ICBs — three legal entities, one shared executive team. Work them as one account, not three.';
 
   function fwFor(p){return FW[p.s]||{fam:'NHS Supply Chain framework',cat:'https://www.supplychain.nhs.uk/'};}
-  function renderIntel(p,s){var fw=fwFor(p);var ev=EVID[p.t]||EVID.con;var pri=PRIORITY[p.s]||'NHS productivity & GIRFT';var h='';h+='<div class="mst__chip"><h4>Route to market &middot; framework</h4><p>'+fw.fam+'.</p><p class="mst__chiplink"><a href="'+fw.cat+'" target="_blank" rel="noopener">NHS Supply Chain category</a> &middot; <a href="/medical-sales-hub/frameworks/">Frameworks hub (live)</a> &middot; new tech: <a href="https://innovation.nhs.uk/" target="_blank" rel="noopener">NHS Innovation Service</a> &rarr; Supply Chain URN &rarr; Innovation DPS</p></div>';h+='<div class="mst__chip"><h4>Evidence to lead with</h4><p>'+ev+'.</p><p class="mst__chiplink"><a href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener">NICE guidance</a> &middot; <a href="https://gettingitrightfirsttime.co.uk/" target="_blank" rel="noopener">GIRFT</a></p></div>';h+='<div class="mst__chip"><h4>National priority hook</h4><p>'+pri+'.</p></div>';$('m-intel').innerHTML=h;}
+  /* Evidence chip: real, verified citations from the Clinical Evidence Library
+     (page 3791) where the speciality has a built band; falls back to the
+     original generic evidence sentence for every speciality that doesn't. */
+  function evidenceChip(p){
+    var bandId=EVIDENCE_BAND[p.s];var lib=bandId?EVLIB[bandId]:null;
+    if(!lib||!lib.rows||!lib.rows.length){
+      var ev=EVID[p.t]||EVID.con;
+      return '<div class="mst__chip"><h4>Evidence to lead with</h4><p>'+ev+'.</p><p class="mst__chiplink"><a href="https://www.nice.org.uk/guidance" target="_blank" rel="noopener">NICE guidance</a> &middot; <a href="https://gettingitrightfirsttime.co.uk/" target="_blank" rel="noopener">GIRFT</a></p></div>';
+    }
+    var libUrl='https://medsalesintelligencehub.co.uk/medical-sales-hub/clinical-evidence-library/#'+bandId;
+    var c='<div class="mst__chip"><h4 class="mst__evhead">Evidence to lead with &middot; '+lib.band_title+'</h4>';
+    lib.rows.slice(0,2).forEach(function(row,i){
+      c+='<div class="mst__evcite mst__ev--'+(i%2===0?'a':'b')+'">'
+        +'<span class="mst__evref">'+row.ref+'</span>'+(row.kind?'<span class="mst__evkind">'+row.kind+'</span>':'')
+        +'<p class="mst__evfind">'+row.finding+'</p>'
+        +(row.implication?'<div class="mst__evimpl"><b>Use it for:</b> '+row.implication+'</div>':'')
+        +(row.url?'<a class="mst__evsrc" href="'+row.url+'" target="_blank" rel="noopener">'+(row.source_label||'Source')+' &#8599;</a>':'')
+        +'</div>';
+    });
+    c+='<a class="mst__evmore" href="'+libUrl+'" target="_blank" rel="noopener">See the full evidence library &rarr;</a></div>';
+    return c;
+  }
+  function renderIntel(p,s){var fw=fwFor(p);var pri=PRIORITY[p.s]||'NHS productivity & GIRFT';var h='';h+='<div class="mst__chip"><h4>Route to market &middot; framework</h4><p>'+fw.fam+'.</p><p class="mst__chiplink"><a href="'+fw.cat+'" target="_blank" rel="noopener">NHS Supply Chain category</a> &middot; <a href="/medical-sales-hub/frameworks/">Frameworks hub (live)</a> &middot; new tech: <a href="https://innovation.nhs.uk/" target="_blank" rel="noopener">NHS Innovation Service</a> &rarr; Supply Chain URN &rarr; Innovation DPS</p></div>';h+=evidenceChip(p);h+='<div class="mst__chip"><h4>National priority hook</h4><p>'+pri+'.</p></div>';$('m-intel').innerHTML=h;}
   /* Patient handling runs a different route to every other speciality, and running the
      generic six-step cycle on it is what made the category read wrong to reviewers.
      The order below is the one used in practice: the manual handling lead is approached
@@ -260,6 +283,23 @@
     +'.mst__capi:focus{outline:2px solid rgba(107,42,52,.35);outline-offset:-1px}'
     +'.mst__chipt i{font-style:normal;font-weight:400;font-size:11px;color:var(--muted)}'
     +'.mst__chipt--on i{color:#2E6B3E;font-weight:700}'
+    /* Evidence-library citations -- brand accent pass (oxblood/blush), 07/09/2026:
+       citations alternate gold/oxblood left border (odd=gold, even=oxblood),
+       the "use it for" line sits on a blush fill, per 00-Resources/brand-guide.md */
+    +'.mst__evhead{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 8px}'
+    +'.mst__evcite{border-top:1px solid var(--line);padding-top:9px;margin-top:9px;padding-left:10px}'
+    +'.mst__evcite:first-of-type{border-top:none;padding-top:0;margin-top:0}'
+    +'.mst__ev--a{border-left:3px solid #A8842C}'
+    +'.mst__ev--b{border-left:3px solid #6B2A34}'
+    +'.mst__evref{font-weight:700;font-size:12.5px;color:var(--ink)}'
+    +'.mst__evkind{color:var(--muted);font-size:11px;margin-left:5px}'
+    +'.mst__evfind{font-size:12.5px;line-height:1.5;color:var(--ink);margin:4px 0}'
+    +'.mst__evimpl{font-size:12px;line-height:1.5;background:#F3E4E1;border:1px solid #e3c3bd;border-radius:6px;padding:6px 9px;margin-top:4px;color:#7A4A44}'
+    +'.mst__evimpl b{color:#6B2A34}'
+    +'.mst__evsrc{display:inline-block;margin-top:5px;font-size:11px;font-weight:700;color:var(--gold);text-decoration:none}'
+    +'.mst__evsrc:hover{text-decoration:underline}'
+    +'.mst__evmore{display:block;text-align:right;font-size:11.5px;font-weight:700;color:var(--ink);text-decoration:none;margin-top:10px;padding-top:8px;border-top:1px dashed rgba(0,0,0,.14)}'
+    +'.mst__evmore:hover{text-decoration:underline}'
     +'@media(max-width:640px){.mst__ctbl{font-size:11.5px}}';
     document.head.appendChild(st);
   }
