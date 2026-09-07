@@ -34,7 +34,7 @@ low coverage there means exhausted, not neglected.
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 10 | 18.9% | 25 | 11 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 8 | 12 | STARTED |
 | Surgical Instruments | surgical | 50 | 8 | 16.0% | 18 | 12 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 6 | 14.0% | 21 | 6 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 6 | 14.0% | 20 | 7 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 6 | 16.2% | 9 | 15 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 11 | 29.7% | 10 | 7 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 7 | 20.0% | 16 | 9 | STARTED |
@@ -47,11 +47,11 @@ low coverage there means exhausted, not neglected.
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 5 | 20.0% | 13 | 5 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | 10 | 5 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 3 | 7 | STARTED |
-| Physiotherapy and Occupational Therapy | rehab | 22 | 4 | 18.2% | 7 | 6 | STARTED |
+| Physiotherapy and Occupational Therapy | rehab | 22 | 5 | 22.7% | 7 | 6 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 5 | 3 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 3 | 14.3% | 6 | 7 | STARTED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 6 | 30.0% | 8 | 4 | STARTED |
-| Blood Collection Devices | bloodcoll | 19 | 5 | 26.3% | 2 | 5 | STARTED |
+| Blood Collection Devices | bloodcoll | 19 | 6 | 31.6% | 2 | 5 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 10 | 52.6% | 3 | 3 | STARTED |
 | Examination Gloves | infection | 19 | 4 | 21.1% | 11 | 2 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 5 | 3 | STARTED |
