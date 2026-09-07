@@ -55,6 +55,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import hashlib
+import html as html_entities   # NOT `html`: main() binds that name to the fetched page
 import json
 import os
 import re
@@ -426,6 +427,10 @@ def main() -> int:
     entries = []
     for url, label in PUB_BOX_RE.findall(html):
         label = re.sub(r"<[^>]+>", "", label).strip()
+        # The ICC page writes its labels with HTML entities ("Blood Collection
+        # &#8211; Heel Lancets"). Unescaped, the entity is published as literal
+        # text in a category name a member reads and searches on.
+        label = html_entities.unescape(label)
         label = re.sub(r"\s+", " ", label)
         if url in seen:
             continue

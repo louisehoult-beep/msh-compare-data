@@ -48,6 +48,14 @@
      baked-in fallback (the values below, correct as of 07/09/2026) so the tool
      still works — on the last-known-good taxonomy — if the fetch fails. */
   var PTYPESURL = BASE + 'data/product-types.json' + CB;
+  /* NHS Supply Chain's Information for Clinical Choice grids — the ONLY
+     like-for-like, multi-supplier specification data the Hub holds that is not
+     a manufacturer describing its own product. Drives the Full differential
+     panel; see differentialPanel() for why it is kept separate from everything
+     else on this page. Fails soft: if the fetch dies the panel says so and the
+     rest of the tool is untouched. */
+  var ICCURL = BASE + 'data/icc-matrices.json' + CB;
+  var ICC = {};
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
@@ -90,10 +98,12 @@
     // On any failure (network, 404, bad JSON) this resolves null and the baked-in
     // TYPES/GENERIC_TYPE_OVERRIDE/CANNULA_DISQUALIFIERS fallbacks above stand —
     // the tool degrades to the last-known-good taxonomy rather than dying.
-    fetch(PTYPESURL).then(function(r){return r.json();}).catch(function(){return null;})
+    fetch(PTYPESURL).then(function(r){return r.json();}).catch(function(){return null;}),
+    fetch(ICCURL).then(function(r){return r.json();}).catch(function(){return {matrices:{}};})
   ]).then(function(res){
     RANGE = (res[4] && res[4].suppliers) || {};
     PDETAIL = (res[5] && res[5].products) || {};
+    ICC = (res[7] && res[7].matrices) || {};
     var PT = res[6];
     if (PT && Array.isArray(PT.types) && PT.types.length) TYPES = PT.types;
     if (PT && PT.generic_type_override) GENERIC_TYPE_OVERRIDE = PT.generic_type_override;
@@ -583,7 +593,288 @@
       box.appendChild(sel); return { box: box, sel: sel };
     }
 
+
+    /* ================================================================
+       FULL DIFFERENTIAL — up to 10 products side by side, on NHS-authored
+       specifications rather than manufacturer marketing copy.
+
+       WHERE THE DATA COMES FROM, AND WHY IT IS A DIFFERENT KIND OF FACT
+       ----------------------------------------------------------------
+       Everything else this tool shows about a product is either the NHS
+       Supply Chain catalogue description or the supplier's own words about
+       its own product. This panel is neither. NHS Supply Chain's Clinical
+       Collaboration Teams publish "Information for Clinical Choice" grids:
+       one clinical category, every supplier on the catalogue in it, and the
+       same specification measured the same way down every column - fluid
+       handling in g/10cm2, wear time in days, latex-free yes or no. They are
+       authored with NHS clinical stakeholders, for clinicians choosing
+       between products. That is the only genuinely like-for-like comparison
+       data the Hub has, which is why this panel exists and why it is kept
+       visually distinct from the pairwise tool above it.
+
+       THE CATEGORY LOCK IS NOT A UI CONVENIENCE, IT IS THE RULE
+       --------------------------------------------------------
+       A specification only means anything against the same specification.
+       "Absorbency 4.43" is comparable with another foam dressing's absorbency
+       and meaningless against a suction catheter's. So products are chosen
+       WITHIN one ICC category, never across two, exactly as the Differentiator
+       feed's own rule requires. Mixing sub-categories inside a category is
+       allowed but called out, because "Bordered" and "Non-Bordered Lite" are
+       not quite the same test either.
+
+       EMPTY CELLS ARE NOT ZEROS
+       -------------------------
+       A blank in an ICC grid means that document did not state it for that
+       product. It is not a "no", not a zero, and not a worse score. It renders
+       as an explicit gap, and a row where nothing is stated for any chosen
+       product is dropped rather than padding the table with silence.
+       ================================================================ */
+    var ICC_MAX = 10;
+
+    /* Identity columns are the product's name badge, not specifications, so
+       they are rendered in the column header rather than repeated as rows. */
+    var ICC_IDENTITY = ['Supplier', 'Brand', 'NPC', 'MPC'];
+    var ICC_INTERNAL = ['_sub_category', '_source_page', '_source_document'];
+
+    function iccCategories(){
+      var out = [];
+      for (var name in ICC){
+        if (!Object.prototype.hasOwnProperty.call(ICC, name)) continue;
+        var m = ICC[name];
+        if (m && m.products && m.products.length > 1) out.push(m);
+      }
+      /* A category holding one product cannot be a comparison, so it is never
+         offered - the same rule verify.py applies to the Differentiator. */
+      out.sort(function(a, b){ return a.category.toLowerCase() < b.category.toLowerCase() ? -1 : 1; });
+      return out;
+    }
+
+    function iccLabel(p){
+      var brand = p.Brand || p.Description || p.NPC;
+      var sup = p.Supplier ? ' · ' + p.Supplier : '';
+      return brand + sup + (p.NPC ? '  (' + p.NPC + ')' : '');
+    }
+
+    function iccStated(v){ return v != null && String(v).trim() !== ''; }
+
+    /* The document's own dash. ICC grids print "-" where the team looked and
+       found the attribute did not apply; that is the document saying something,
+       and it is not the same fact as a cell it never filled in. Both are shown,
+       differently, rather than flattened into one. */
+    function iccCell(v){
+      if (!iccStated(v)) return '<span style="font-size:11px;color:#8a8778;">not stated</span>';
+      if (String(v).trim() === '-') return '<span style="font-size:12px;color:#6b7684;" title="The document prints a dash here">&ndash;</span>';
+      return esc(v);
+    }
+
+    function iccSourceNote(m){
+      var issued = m.issued ? ddmm(m.issued) : 'undated';
+      var note = 'NHS Supply Chain, Information for Clinical Choice &mdash; <strong>'
+        + esc(m.category) + '</strong>, issued ' + esc(issued) + '. '
+        + 'Authored by their Clinical Collaboration Teams with NHS clinical stakeholders.';
+      if (m.listing_status === 'unlinked'){
+        /* Said plainly rather than hidden: NHS Supply Chain has taken this
+           document off its index page but is still serving the file itself.
+           A rep quoting a 2022 absorbency figure needs to know that. */
+        note += '<br><strong>NHS Supply Chain no longer lists this document</strong> on its '
+          + 'Information for Clinical Choice index, though it still publishes the file itself. '
+          + 'Treat the figures as correct <em>as issued</em>, and confirm against the '
+          + 'manufacturer&rsquo;s current IFU before quoting anything clinically.';
+      }
+      return note + ' <a href="' + esc(m.source_url) + '" target="_blank" rel="noopener" '
+        + 'style="color:' + GOLD + ';font-weight:600;">Open the source document &#8599;</a>';
+    }
+
+    function iccTable(m, chosen){
+      if (chosen.length < 2){
+        return '<div style="padding:14px;border:1px dashed ' + LINE + ';border-radius:10px;'
+          + 'font-size:13px;color:#6b7684;">Choose at least two products to compare.</div>';
+      }
+
+      var cols = (m.columns || []).filter(function(c){
+        return ICC_IDENTITY.indexOf(c) === -1 && ICC_INTERNAL.indexOf(c) === -1;
+      });
+
+      var rows = '', shown = 0;
+      for (var i = 0; i < cols.length; i++){
+        var key = cols[i];
+        var vals = chosen.map(function(p){ return p[key]; });
+        /* Don't pad the page: a row no chosen product says anything about
+           teaches nothing. Same rule the catalogue table above already uses. */
+        if (!vals.some(iccStated)) continue;
+        shown++;
+
+        /* Highlight only where the products genuinely differ on a stated
+           value. A row where two are silent is not a difference. */
+        var stated = vals.filter(iccStated).map(function(v){ return String(v).trim(); });
+        var differs = stated.length > 1 && stated.some(function(v){ return v !== stated[0]; });
+
+        rows += '<tr style="border-top:1px solid ' + LINE + ';vertical-align:top;'
+          + (differs ? 'background:#fbf6ec;' : '') + '">'
+          + '<th scope="row" style="padding:7px 10px;font-size:12px;color:#6b7684;text-align:left;'
+          + 'font-weight:600;position:sticky;left:0;background:' + (differs ? '#fbf6ec' : '#fff') + ';">'
+          + esc(key) + '</th>';
+        for (var c = 0; c < vals.length; c++){
+          rows += '<td style="padding:7px 10px;font-size:12.5px;color:#39424d;min-width:150px;">'
+            + iccCell(vals[c]) + '</td>';
+        }
+        rows += '</tr>';
+      }
+
+      if (!shown){
+        return '<div style="padding:14px;border:1px dashed ' + LINE + ';border-radius:10px;'
+          + 'font-size:13px;color:#6b7684;">This document states no specification for the '
+          + 'products chosen. Nothing is shown rather than an empty grid.</div>';
+      }
+
+      var head = '<th style="padding:8px 10px;font-size:10.5px;text-transform:uppercase;'
+        + 'letter-spacing:.5px;color:#8a8778;text-align:left;position:sticky;left:0;background:'
+        + SOFT + ';">Specification</th>';
+      for (var j = 0; j < chosen.length; j++){
+        var p = chosen[j];
+        head += '<th style="padding:8px 10px;font-size:11.5px;color:#fff;background:'
+          + (j === 0 ? MINE_C : THEIR_C) + ';text-align:left;min-width:150px;">'
+          + esc(p.Brand || p.Description || p.NPC)
+          + '<div style="font-weight:400;font-size:10px;opacity:.9;margin-top:2px;">'
+          + esc(p.Supplier || '') + (p.NPC ? ' &middot; ' + esc(p.NPC) : '') + '</div></th>';
+      }
+
+      var subs = {}; chosen.forEach(function(p){ if (p._sub_category) subs[p._sub_category] = 1; });
+      var mixed = Object.keys(subs).length > 1;
+      var warn = mixed
+        ? '<div style="margin-top:10px;padding:9px 11px;background:' + SOFT + ';border:1px dashed '
+          + GOLD + ';border-radius:8px;font-size:12px;color:#7a5b14;line-height:1.5;">'
+          + '<strong>These products sit in different sub-categories of this document</strong> ('
+          + esc(Object.keys(subs).join(' &middot; ')) + '). NHS Supply Chain groups them separately '
+          + 'because they are not measured on quite the same basis. Read across with that in mind.</div>'
+        : '';
+
+      return warn
+        + '<div style="overflow-x:auto;margin-top:10px;-webkit-overflow-scrolling:touch;">'
+        + '<table style="border-collapse:collapse;background:#fff;border:1px solid ' + LINE + ';'
+        + 'border-radius:10px;min-width:100%;">'
+        + '<thead><tr style="text-align:left;background:' + SOFT + ';">' + head + '</tr></thead>'
+        + '<tbody>' + rows + '</tbody></table></div>'
+        + '<div style="font-size:11.5px;color:#8a8778;margin-top:6px;line-height:1.5;">'
+        + 'Shaded rows are where the chosen products actually differ on a stated value. '
+        + '<em>not stated</em> means this document does not give that specification for that '
+        + 'product &mdash; <strong>not</strong> that the product lacks it. A dash is the '
+        + 'document&rsquo;s own dash.</div>';
+    }
+
+    function differentialPanel(){
+      var cats = iccCategories();
+      var panel = el('div', 'margin-top:26px;padding-top:20px;border-top:2px solid ' + LINE + ';');
+      panel.id = 'msh-differential';
+
+      panel.appendChild(el('div',
+        'font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:'
+        + GOLD + ';margin:0 0 6px;', 'Full differential'));
+      panel.appendChild(el('div',
+        'font-size:13.5px;color:#39424d;line-height:1.6;margin:0 0 12px;max-width:70ch;',
+        'Put up to ' + ICC_MAX + ' products side by side on <strong>NHS-authored specifications</strong> '
+        + '&mdash; not manufacturer marketing. Pick a clinical category, then add the products you '
+        + 'want to see against each other. ' + cats.length + ' categories available.'));
+
+      if (!cats.length){
+        panel.appendChild(el('div', 'font-size:13px;color:#6b7684;',
+          'The Information for Clinical Choice feed was unreachable, so nothing is shown here.'));
+        return panel;
+      }
+
+      var controls = el('div', 'display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:12px;');
+      var catSel = mkSelect('Clinical category', cats.map(function(m){
+        return m.category + '  (' + m.products.length + ' products)';
+      }));
+      controls.appendChild(catSel.box);
+      panel.appendChild(controls);
+
+      var picker = el('div', 'display:flex;flex-direction:column;gap:8px;margin-bottom:10px;');
+      panel.appendChild(picker);
+
+      var addBtn = el('button',
+        'padding:8px 14px;border:1px solid ' + GOLD + ';background:#fff;color:#7a5b14;'
+        + 'border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;', '+ Add another product');
+      var addWrap = el('div', 'display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px;');
+      addWrap.appendChild(addBtn);
+      var countNote = el('span', 'font-size:12px;color:#8a8778;');
+      addWrap.appendChild(countNote);
+      panel.appendChild(addWrap);
+
+      var tableBox = el('div');
+      panel.appendChild(tableBox);
+      var srcBox = el('div', 'margin-top:10px;padding:10px 12px;background:' + SOFT + ';border:1px dashed '
+        + GOLD + ';border-radius:8px;font-size:12px;color:#5a4a20;line-height:1.55;');
+      panel.appendChild(srcBox);
+
+      var slots = [];
+
+      function currentMatrix(){ return cats[catSel.sel.selectedIndex] || cats[0]; }
+
+      function chosenProducts(){
+        var m = currentMatrix(), out = [];
+        slots.forEach(function(sel){
+          var i = parseInt(sel.value, 10);
+          if (i >= 0 && m.products[i]) out.push(m.products[i]);
+        });
+        return out;
+      }
+
+      function draw(){
+        var m = currentMatrix();
+        tableBox.innerHTML = iccTable(m, chosenProducts());
+        srcBox.innerHTML = iccSourceNote(m);
+        countNote.textContent = slots.length + ' of ' + ICC_MAX + ' products';
+        addBtn.style.display = slots.length >= ICC_MAX ? 'none' : '';
+      }
+
+      function addSlot(preselect){
+        if (slots.length >= ICC_MAX) return;
+        var m = currentMatrix();
+        var rowEl = el('div', 'display:flex;gap:8px;align-items:center;');
+        var sel = el('select',
+          'flex:1 1 320px;min-width:0;padding:9px 10px;border:1px solid ' + LINE
+          + ';border-radius:8px;font-size:13.5px;background:#ffffff !important;color:#20303f !important;');
+
+        var none = el('option'); none.value = '-1'; none.textContent = '— choose a product —';
+        sel.appendChild(none);
+        m.products.forEach(function(p, i){
+          var op = el('option'); op.value = String(i); op.textContent = iccLabel(p); sel.appendChild(op);
+        });
+        if (preselect != null && m.products[preselect]) sel.value = String(preselect);
+
+        var del = el('button',
+          'padding:8px 11px;border:1px solid ' + LINE + ';background:#fff;color:#6b7684;'
+          + 'border-radius:8px;font-size:13px;cursor:pointer;', 'Remove');
+        del.setAttribute('aria-label', 'Remove this product from the comparison');
+
+        del.addEventListener('click', function(){
+          var at = slots.indexOf(sel);
+          if (at !== -1) slots.splice(at, 1);
+          picker.removeChild(rowEl);
+          draw();
+        });
+        sel.addEventListener('change', draw);
+
+        rowEl.appendChild(sel); rowEl.appendChild(del);
+        picker.appendChild(rowEl);
+        slots.push(sel);
+      }
+
+      function resetSlots(){
+        picker.innerHTML = ''; slots = [];
+        addSlot(0); addSlot(1);
+        draw();
+      }
+
+      catSel.sel.addEventListener('change', resetSlots);
+      addBtn.addEventListener('click', function(){ addSlot(null); draw(); });
+      resetSlots();
+      return panel;
+    }
+
     var out = el('div', 'margin-top:6px;'); out.id='msh-compare-out'; wrap.appendChild(out);
+    wrap.appendChild(differentialPanel());
     MOUNT.innerHTML = ''; MOUNT.appendChild(wrap);
 
     function runCompare(theirsOverride){
@@ -890,8 +1181,16 @@
     function specSourceLine(p){
       var pd = pdetailFor(p);
       if (!pd) return '';
+      /* The specs carry their own capture date and URL where the record has
+         been re-crawled since they were read. A later crawl that collected the
+         description but never looked at these fields must not lend them its
+         date - the figures below were measured on the day the spec sweep read
+         that page, and that is the day shown. */
+      var sp = pd.specs || {};
+      var when = sp._capturedDate || pd.capturedDate;
+      var where = sp._sourceUrl || pd.sourceUrl;
       return '<div style="font-weight:400;font-size:10px;opacity:.9;margin-top:2px;">captured '
-        + esc(ddmm(pd.capturedDate)) + ' &middot; <a href="' + esc(pd.sourceUrl)
+        + esc(ddmm(when)) + ' &middot; <a href="' + esc(where)
         + '" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">source &#8599;</a></div>';
     }
 

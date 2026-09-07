@@ -11,14 +11,23 @@ name: ICC product matrices and CCF reference (monthly)
 #    as the Hub's Differentiator, authored by the NHS, and every product row
 #    carries an NPC code so it joins to nhssc-cache.json without name matching.
 #
-#    ⚠️ Only documents LINKED from the ICC page are taken. The Azure blob
-#    container does not permit listing (verified 28/08/2026) and unlinked
-#    filenames are never guessed. As at 28/08/2026 exactly ONE full Product
-#    Matrix was public (Adult ECG Electrodes, 167 products); the other 74
-#    documents are narrative support documents, not grids. Matrices generally
-#    sit behind authentication.supplychain.nhs.uk. The counts are reported every
-#    run, so a jump or a drop is visible rather than silent — if the matrix count
-#    rises, that is a genuinely good event worth acting on.
+#    ⚠️ CORRECTED 07/09/2026. This block used to say the support documents are
+#    "narrative support documents, not grids". They are not: 67 of the 74 carry
+#    a full product grid drawn into the PDF, and they are now parsed
+#    (scripts/icc_pdf_matrix.py), giving 68 categories and ~1,617 product rows
+#    instead of 1 category and 167.
+#
+#    ⚠️ Documents linked from the ICC page are taken, and so are documents we
+#    already hold that the page has SINCE STOPPED linking — but only where a
+#    HEAD request proves NHS Supply Chain still serves the file at its own URL.
+#    Unlinked is not withdrawn, and the difference is checked, never assumed.
+#    This is what keeps wound care in the data: all six wound care documents
+#    were delisted between 28/08 and 07/09/2026 and all six still serve. A file
+#    that 404s is dropped. Filenames are still never guessed — every one of
+#    these came off the ICC page originally.
+#
+#    The counts are reported every run, so a jump or a drop is visible rather
+#    than silent.
 #
 #    The ~26MB of source PDFs are NOT committed. On Lou's machine they land in
 #    the ICC library on OneDrive; on this runner they go to a scratch directory
@@ -66,10 +75,22 @@ jobs:
         with:
           python-version: "3.12"
 
+      # pdfplumber is needed to read the grids drawn inside the support-document
+      # PDFs. Without it refresh_icc.py still publishes the .xlsx matrix and says
+      # loudly that it skipped the rest; verify.py then fails on the dataset
+      # shrinking, so a missing dependency cannot quietly cost 67 categories.
+      - name: Install the PDF grid parser
+        run: pip install --quiet pdfplumber
+
       - name: Pull the ICC documents and parse the product matrices
         env:
           ICC_LIBRARY: ${{ runner.temp }}/icc-library
         run: python3 scripts/refresh_icc.py
+
+      # The parser's own invariant gate: row separation, the rule-coverage floor,
+      # symbol-font mapping, no-NPC-no-publish, and attribution on every matrix.
+      - name: ICC grid invariants — nothing publishes if the parser regressed
+        run: python3 test_icc_matrix.py
 
       - name: Refresh the CCF accredited framework host list
         run: python3 scripts/refresh_ccf_reference.py
