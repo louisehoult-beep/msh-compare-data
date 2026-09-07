@@ -66,7 +66,7 @@ low coverage there means exhausted, not neglected.
 | Prosthetic Components and Associated Products | orthotics | 12 | 2 | 16.7% | 7 | 3 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 5 | 0 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 1 | 12.5% | 1 | 3 | STARTED |
-| Polymer Aprons | infection | 8 | 1 | 12.5% | 3 | 4 | STARTED |
+| Polymer Aprons | infection | 8 | 1 | 12.5% | 2 | 5 | STARTED |
 | Polymer Products | infection | 5 | 1 | 20.0% | 4 | 0 | STARTED |
 | Brachytherapy Seeds and Associated Accessories | oncology | 2 | 1 | 50.0% | 1 | 0 | STARTED |
 | Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services | ent | 7 | 0 | 0.0% | 3 | 3 | NOT STARTED |
