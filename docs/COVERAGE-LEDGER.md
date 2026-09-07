@@ -23,19 +23,19 @@ low coverage there means exhausted, not neglected.
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 24 | 19.7% | 72 | 19 | STARTED |
-| Total Orthopaedic Solutions 3 | ortho | 101 | 18 | 17.8% | 62 | 17 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 14 | 22.2% | 30 | 13 | STARTED |
-| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 8 | 13.3% | 35 | 7 | STARTED |
+| Total Orthopaedic Solutions 3 | ortho | 101 | 18 | 17.8% | 61 | 18 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 14 | 22.2% | 29 | 13 | STARTED |
+| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 9 | 15.0% | 33 | 8 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 13 | 22.4% | 26 | 9 | STARTED |
-| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 9 | 15.8% | 21 | 11 | STARTED |
+| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 9 | 15.8% | 20 | 11 | STARTED |
 | Urology and Bowel Management | continence | 57 | 18 | 31.6% | 14 | 8 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 14 | 17 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 7 | 13.0% | 0 | 36 | STARTED · BLOCKED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 10 | 18.9% | 25 | 11 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 8 | 12 | STARTED |
-| Surgical Instruments | surgical | 50 | 8 | 16.0% | 19 | 11 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 6 | 14.0% | 22 | 5 | STARTED |
-| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 6 | 16.2% | 10 | 14 | STARTED |
+| Surgical Instruments | surgical | 50 | 8 | 16.0% | 18 | 12 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 6 | 14.0% | 21 | 6 | STARTED |
+| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 6 | 16.2% | 9 | 15 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 11 | 29.7% | 10 | 7 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 7 | 20.0% | 16 | 9 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 8 | 24.2% | 13 | 7 | STARTED |

@@ -358,10 +358,10 @@
  },
  "counts": {
   "pairs": 5474,
-  "mapped": 4737,
+  "mapped": 4742,
   "notTaxonomy": 163,
   "products": 87871,
-  "productsMapped": 60559
+  "productsMapped": 60615
  },
  "entries": [
   {
@@ -90485,9 +90485,15 @@
     "Elite Dilating Trocar",
     "Elite Optical Balloon Trocars"
    ],
-   "hub": null,
+   "hub": [
+    "mis:trocar",
+    "mis:instruments",
+    "mis:clips"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division's own 31 products, read from the company's own product category taxonomy by scripts/crawl_supplier_site.py and each confirmed against its own product page by scripts/crawl_supplier_product_detail.py on 07/09/2026, genuinely name three of the vocabulary's types at once (Lou's rule, 25/08/2026). TROCARS: Elite Optical Trocars, Elite AutoShield Trocar, Elite Dilating Trocar, Elite Optical Balloon Trocars, Essential Optical Trocars, Elite Universal Cannula. CLIPS AND CLIP APPLIERS: Elite Lock Polymer Ligating Clips & Appliers, Elite Polymer Ligating Clip Remover, Open Clip Appliers, The Ultimate 10mm Single Use Clip Applier. MIS INSTRUMENTS, DEVICES AND CONSUMABLES: the remainder - Elite / Essential / Essential Plus laparoscopic instrument ranges, bipolar instruments and cutting forceps, 5mm monopolar electrodes and instrument cables, suction/irrigation sets and dual chamber irrigation pump, Veress needles, aspiration needle, 5mm blunt tip dissector, insufflation filter and tubing sets, and the three tissue retrieval pouch lines. NOT mapped to mis:staple: the only stapling items filed here are the Essential Skin Stapler and Essential Staple Remover, which are skin closure rather than MIS stapling devices, and the company files its own MIS staplers in two separate divisions of its own",
+   "decidedIn": "Purple Surgical--framework-coverage-mis-0907.json"
   },
   {
    "supplier": "Purple Surgical",
@@ -90502,9 +90508,14 @@
     "Tube Organiser",
     "Instrument Pouch"
    ],
-   "hub": null,
+   "hub": [
+    "theatres:theatre",
+    "theatres:electro"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the company files these twelve as general operating theatre items rather than under any of its laparoscopy divisions, and the division's own products span two of the vocabulary's types (Lou's rule, 25/08/2026). ELECTROSURGERY CONSUMABLES: Electrosurgical Pencils and Electrode Tip Cleaner. GENERAL THEATRE CONSUMABLES: Fog Free Solution, Smoke Filter, Tube Organiser, Instrument Pouch, Camera Sleeve, Light Handle Covers, Skin Marker Pens, Swab Counting Bags, Vessel Loops, Adult and Child Slings. Deliberately NOT mapped into mis:* even though the fog free solution, smoke filter and camera sleeve are used in laparoscopy: the company's own filing puts them in a general theatre division, and the map follows the manufacturer's filing rather than re-classifying it",
+   "decidedIn": "Purple Surgical--framework-coverage-mis-0907.json"
   },
   {
    "supplier": "Purple Surgical",
@@ -90556,9 +90567,11 @@
     "Ultimate Circular Stapler with Dual Safety & Tilt Top Anvil",
     "Ultimate Reloadable Linear Stapler with Indicator"
    ],
-   "hub": null,
+   "hub": "mis:staple",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "all six products the company files in this division are surgical stapling devices and nothing else - Ultimate Haemorrhoidal Circular Stapler with Dual Safety & Transparent Cartridge, Ultimate Circular Stapler with Dual Safety, Ultimate Circular Stapler with Dual Safety & Tilt Top Anvil, Ultimate Reloadable Linear Stapler with Indicator, Ultimate Reloadable Linear Cutter Stapler and Ultimate Endoscopic Linear Cutter Stapler with Universal Handle; read from the company's own product category taxonomy by scripts/crawl_supplier_site.py on 07/09/2026",
+   "decidedIn": "Purple Surgical--framework-coverage-mis-0907.json"
   },
   {
    "supplier": "Purple Surgical",
@@ -90573,9 +90586,11 @@
     "Elite Endoscopic Linear Cutter Variable Height Reloads",
     "Bluesail+ Disposable Linear Cutter Stapler II and Reloads"
    ],
-   "hub": null,
+   "hub": "mis:staple",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "all six products the company files in this division are surgical stapling devices and their reloads - Bluesail+ Endoscopic Linear Cutter Stapler, Elite Endoscopic Linear Cutter Articulating Reloads, Elite Endoscopic Linear Cutter Variable Height Reloads, Bluesail+ Disposable Linear Cutter Stapler II and Reloads, Bluesail+ Disposable Linear Cutter Stapler and Reloads, Bluesail+ Disposable Linear Stapler and Cartridge; read from the company's own product category taxonomy by scripts/crawl_supplier_site.py on 07/09/2026",
+   "decidedIn": "Purple Surgical--framework-coverage-mis-0907.json"
   },
   {
    "supplier": "Purple Surgical",
@@ -90587,9 +90602,11 @@
    "examples": [
     "Laparoscopic Kits"
    ],
-   "hub": null,
+   "hub": "mis:kits",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division is the company's own filing for its laparoscopic procedure kits and carries the single product Laparoscopic Kits, which is what the vocabulary's mis:kits (MIS procedure kits) names; read from the company's own product category taxonomy by scripts/crawl_supplier_site.py and confirmed against its own product page https://www.purplesurgical.com/product/laparoscopic-kits/ on 07/09/2026",
+   "decidedIn": "Purple Surgical--framework-coverage-mis-0907.json"
   },
   {
    "supplier": "Bodywise (UK) Ltd",
