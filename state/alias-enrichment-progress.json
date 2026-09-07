@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-06",
+ "lastRun": "2026-09-07",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -234,7 +234,19 @@
   "Global Health and Safety Ltd",
   "G S Medical",
   "GB UK Ltd",
-  "Gce Group Ltd"
+  "Gce Group Ltd",
+  "Applied Medical UK Ltd",
+  "Bariatric Solutions International",
+  "Fairmont Medical Products Limited",
+  "Genmed Enterprises Ltd",
+  "Global Life Sciences Solutions Operations UK Ltd",
+  "Grafton Optical Company Limited",
+  "Greenbone Spa",
+  "Griffiths and Neilson Ltd",
+  "Grosvenor Contracts London Ltd",
+  "GTA (UK) Ltd",
+  "Guerbet Laboratories Limited",
+  "Guymark"
  ],
  "refusals": [
   {
@@ -471,6 +483,21 @@
    "name": "Gce Group Ltd",
    "reason": "No UK name form could be verified from a nameable source. The company's own site could not be made to yield one: gcegroup.com and uk.gcegroup.com both 301-redirect to gascontrol.com, read 06/09/2026, which is a global site whose only legal line is \"Copyright (c) 2026 GCE. All rights reserved.\" - no UK entity, no registration number, no registered office. Companies House, read 06/09/2026, holds no active entity that is provably this supplier: GCE GROUP LTD (12622389, London SE12) was dissolved 02/11/2021, before this record's Respiratory Solutions framework period, GCE GAS CONTROL SYSTEMS LIMITED (01192732) was dissolved 31/03/2020, GCE LIMITED (10792933, Bournemouth) was dissolved 02/12/2025, and GCE LTD (17010274) was incorporated 03/02/2026 at a London service address, after the framework began on 01/08/2022. The group's medical brands \"GCE Healthcare\" and \"GCE Medical\" belong to the multinational parent (part of ESAB since 2018) and were excluded under rule 4. The bare token \"GCE\" is in any case ambiguous - it is a common abbreviation and the register carries many unrelated GCE companies - so it is exactly the single-token case rule 2 exists to stop.",
    "date": "2026-09-06"
+  },
+  {
+   "name": "Bariatric Solutions International",
+   "reason": "The company's own website could not be read: bariatric-solutions.com serves a \"Robot Challenge Screen\" bot-detection wall under /.well-known/sgcaptcha/ to both a plain fetch (HTTP 202, meta-refresh to the challenge) and a real rendered browser, read 07/09/2026, and the challenge was not bypassed. bariatricsolutions.com and bariatric-solutions.ch do not resolve. Companies House, read 07/09/2026, holds BARIATRIC SOLUTIONS UK LIMITED (14890948, active, incorporated 24/05/2023, Innovation Centre, Gallows Hill, Warwick CV34 6UW) - a separately named UK entity that would be the subsidiary of a differently named record, so rule 4 keeps it off this one, and it is in any case not provably the same business as \"Bariatric Solutions International\". NHS Supply Chain's own Minimally Invasive Surgery brief (2026/S 000-061906) was re-read live on 07/09/2026 and writes the supplier as exactly \"Bariatric Solutions International\", confirming only the display name already held. No name form was seen on a source that could be named.",
+   "date": "2026-09-07"
+  },
+  {
+   "name": "Genmed Enterprises Ltd",
+   "reason": "No verifiable name form. No company website resolves: genmedenterprises.com, genmedenterprises.co.uk and genmed.uk do not resolve, genmed.co.uk serves a \"GENMED.CO.UK - For Sale\" domain-parking page, and genmedgroup.co.uk redirects to generalandmedical.com, a private health insurer that is a different business - all read 07/09/2026. Companies House, read 07/09/2026, holds TWO active companies at one address that both fit and neither of which is named \"Genmed Enterprises Ltd\": GENMED ENTERPRISES UK LTD (10715490, incorporated 07/04/2017, SIC 32500 manufacture of medical and dental instruments) and GENMED ENTERPRISES INTERNATIONAL LTD (12992754, incorporated 03/11/2020, SIC 32500 and 47749), both at Fountain House, Fountain Lane, St. Mellons, Cardiff CF3 0FB - so a name form taken from either could be the wrong sibling. Separately, the seed already holds a distinct \"Genmed\" record (aliases \"Genmed\", \"Genmed Ltd\", Laboratory Diagnostics framework), so the short forms are owned by another record and adding one here would split lookups, alias resolution being first-wins. NHS Supply Chain's own Minimally Invasive Surgery brief was re-read live on 07/09/2026 and writes exactly \"Genmed Enterprises Ltd\", confirming only the display name already held.",
+   "date": "2026-09-07"
+  },
+  {
+   "name": "Griffiths and Neilson Ltd",
+   "reason": "Duplicate record - needs a merge decision, not aliases. The seed already holds \"Griffiths and Nielsen Ltd\" (aliases \"Griffiths and Nielsen Ltd\", \"GRIFFITHS & NIELSEN PLASTICS LIMITED\"; Advanced Wound Care and Vascular Therapy frameworks). Companies House, read 07/09/2026, holds GRIFFITHS & NIELSEN LIMITED (01201146, active, incorporated 21/02/1975, previous name GRIFFITHS & NIELSEN PLASTICS LIMITED, Maydwell Avenue, Off Stane Street, Slinfold, Horsham, West Sussex RH13 0GN) and no company at all spelled \"Neilson\" in this line of business, so the \"Neilson\" spelling in NHS Supply Chain's Syringes, Needles and Associated Products brief is the odd one out rather than a second company. No website resolves for either spelling (griffithsandnielsen.co.uk, griffiths-nielsen.co.uk, gniplastics.co.uk, griffithsandneilson.co.uk all fail), so nothing could be cited from the company itself. Every name form this record could take is already owned by the existing record. NOTE FOR LOU, not an alias matter: the Syringes, Needles and Associated Products brief (2026/S 000-002484), re-read live 07/09/2026, lists \"Griffiths and Neilson Ltd\" among the suppliers BEING DELISTED at the start of the framework agreement, not among the 53 suppliers on it - the seed record currently carries it as a framework supplier.",
+   "date": "2026-09-07"
   }
  ],
  "sources": {
