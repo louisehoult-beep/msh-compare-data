@@ -46,9 +46,8 @@
     "minObservations": 3
    }
   },
-  "inferredCount": 83,
-  "inferredRule": "Entries under `inferred` were proposed by reading the NHS Supply Chain descriptions of the suspended lines filed under each eClass code, not observed from paired (eClass, cat) data as `mappings` were. They are kept separate so the two kinds of evidence are never mixed, and an observed mapping always wins. Every category was validated against the gated vocabulary before being written.",
-  "inferredAddedOn": "07/09/2026"
+  "inferredCarriedOver": 83,
+  "inferredNote": "Carried across from the previous build. This script does not produce or recompute the inferred layer — see scripts/apply_eclass_proposals.py."
  },
  "mappings": {
   "AZC": {
@@ -164,15 +163,12 @@
    "itemclass": "23- Rehabilitation and Community",
    "suspendedLines": 3,
    "evidence": {
-    "strongNpcs": 16,
+    "strongNpcs": 21,
     "weakNpcs": 0,
-    "distinctNpcs": 16,
-    "supportShare": 0.762,
+    "distinctNpcs": 21,
+    "supportShare": 1.0,
     "totalObservations": 21,
-    "runnerUp": {
-     "cat": "marketing:content",
-     "support": 10
-    }
+    "runnerUp": null
    }
   },
   "ELA": {
@@ -181,15 +177,12 @@
    "itemclass": "23- Rehabilitation and Community",
    "suspendedLines": 3,
    "evidence": {
-    "strongNpcs": 58,
-    "weakNpcs": 5,
-    "distinctNpcs": 63,
-    "supportShare": 0.742,
+    "strongNpcs": 73,
+    "weakNpcs": 17,
+    "distinctNpcs": 90,
+    "supportShare": 1.0,
     "totalObservations": 90,
-    "runnerUp": {
-     "cat": "marketing:content",
-     "support": 42
-    }
+    "runnerUp": null
    }
   },
   "ELY": {

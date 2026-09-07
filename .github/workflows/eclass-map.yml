@@ -1,0 +1,139 @@
+name: eClass to category map refresh
+
+# WHY THIS WORKFLOW EXISTS (added 07/09/2026)
+#
+# The Supply Disruption Tracker (page 3641) can only offer alternatives for a
+# suspended NHS Supply Chain line once that line has a product category, and it
+# gets one from data/eclass-category-map.json. That map is DERIVED — built by
+# scripts/build_eclass_map.py from the (eClass, cat) observations in
+# data/npc-eclass.json, which scripts/resolve_npc_eclass.py gathers by resolving
+# every NPC that already carries a category to its eClass.
+#
+# Both files were built by hand on 07/09/2026 and NOTHING re-ran them. That is
+# the same failure differentiator.yml was created to stop, and it bites harder
+# here because of what feeds it:
+#
+#   - The Tracker refreshes THREE TIMES A DAY with whatever NHS Supply Chain has
+#     newly suspended. New suspensions arrive carrying eClass codes we may never
+#     have seen.
+#   - The Differentiator rebuilds daily and gains newly categorised products,
+#     each of which may carry NPCs that would teach the map a new code.
+#
+# So without this job the map is a photograph of 07/09/2026: fresh suspensions
+# keep arriving, the evidence behind the map keeps growing, and neither changes
+# anything. Coverage silently DECAYS — every new eClass code shows a member an
+# empty alternatives list, and nothing looks broken. Measured on the day it was
+# built the map reached 905 of 973 suspended lines; left alone that number only
+# falls.
+#
+# ⚠️ WHY WEEKLY, AND WHY IT IS CHEAP. resolve_npc_eclass.py CACHES: it resolves
+# only NPCs not already in data/npc-eclass.json. Measured 07/09/2026 immediately
+# after the initial build, a rerun had just 9 NPCs left to resolve, not 1,432.
+# So the steady-state cost is a handful of requests to NHS Supply Chain's own
+# backend API, not a re-fetch. Weekly matches the pace at which the evidence
+# actually grows (the Differentiator's categorised set), rather than the pace at
+# which the Tracker publishes.
+#
+# ⚠️ WHY 06:00 SUNDAY. It must run AFTER the writers that feed it: supplier
+# crawls (02:20 daily, 02:40 Sundays), nhssc-cache (04:30 Sundays) and the
+# Differentiator itself (05:00). 06:00 clears them all, and the shared
+# concurrency group below makes it QUEUE rather than read a half-written file.
+#
+# ⚠️ WHAT THIS JOB DOES NOT TOUCH. data/npc-category-overrides.json holds
+# per-line decisions taken by reading individual product descriptions. Those are
+# human/curated judgements, not arithmetic, so nothing here regenerates them —
+# same principle as the hand-mapped differentiator-category-map.json. This job
+# is the arithmetic; the overrides are the judgement.
+
+on:
+  schedule:
+    - cron: "0 6 * * 0"      # Sundays 06:00 UTC, after every writer that feeds it
+  workflow_dispatch:
+
+# Same reason as every other writer in this repo: they share one branch. This
+# job READS differentiator.json and nhssc-cache.json, which other writers in
+# this group rewrite, so queueing also guarantees it never derives from a
+# checkout caught mid-write.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # The resolve step makes a small number of external calls; the build step is
+    # pure local arithmetic. A generous cap in case a cold cache ever has to
+    # resolve the full set again (~1,400 requests at a pool of 6, about 2-3
+    # minutes when it happened on 07/09/2026).
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      # Incremental by design: resolves only NPCs not already cached, so this is
+      # a handful of requests in the steady state. Stdlib only, no browser.
+      - name: Gather any new (eClass, category) observations
+        run: python3 scripts/resolve_npc_eclass.py
+
+      # Pure derivation over the file above. Its thresholds are deliberately
+      # conservative and are stated inside the output file — do not loosen them
+      # to raise coverage (root rule 14).
+      - name: Rebuild the eClass -> category map
+        run: python3 scripts/build_eclass_map.py
+
+      # Both outputs are data/*.json and must carry the ownership marker before
+      # the gate will pass.
+      - name: Re-stamp the ownership notice
+        run: python3 scripts/stamp_notice.py
+
+      # A push to this repo is a live publish to paying members within seconds.
+      # If this fails, the data is wrong: fix the data, never loosen the check.
+      # Root rule 13.
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "eclass-map-bot"
+          git config user.email "actions@github.com"
+          git add data/npc-eclass.json data/eclass-category-map.json
+          # A week where no new categorised NPC appeared is a NORMAL week. Stop
+          # here, green, rather than committing a no-op and burying real diffs.
+          if git diff --cached --quiet; then
+            echo "no new eClass evidence this week - nothing to commit"
+            exit 0
+          fi
+          git commit -m "eClass map refresh $(date -u +%F)"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (another writer landed first). Rebasing and re-running the gate, attempt $attempt of 5."
+            # No -X theirs: this job writes two files nothing else writes, so a
+            # conflicting hunk means something has gone wrong that a merge
+            # strategy should not paper over.
+            git pull --rebase --autostash
+            python3 verify.py || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            sleep 5
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "could not push after 5 attempts - failing loudly rather than dropping the work"
+            exit 1
+          fi
+
+      - name: Phone alert on failure (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Medical Sales Hub - eClass map refresh FAILED" -H "Priority: default" -H "Tags: warning" \
+            -d "The weekly eClass->category map refresh failed. The Supply Disruption Tracker keeps using the last good map, but new eClass codes will show no alternatives until this is fixed. github.com/louisehoult-beep/msh-compare-data/actions" \
+            ntfy.sh/eth-hub-lou-4437

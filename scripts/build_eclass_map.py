@@ -366,6 +366,43 @@ def build(report_only=False):
         "unmapped": dict(sorted(unmapped.items())),
     }
 
+    # ⚠️ PRESERVE THE INFERRED BLOCK. Added 07/09/2026 after this script,
+    # re-run to prove the new weekly workflow, silently destroyed it.
+    #
+    # `mappings` above are OBSERVED — learned from real (eClass, cat) pairs seen
+    # on the same NPC, and this script owns them completely, so rebuilding them
+    # from scratch every run is correct. `inferred` is a DIFFERENT layer that
+    # this script does not produce and cannot recompute: 83 codes proposed by
+    # reading the NHS Supply Chain descriptions of the suspended lines under
+    # each code, applied through scripts/apply_eclass_proposals.py.
+    #
+    # Writing `doc` wholesale dropped that block. Measured: the Supply
+    # Disruption Tracker fell from 905 of 973 suspended lines carrying
+    # alternatives to roughly 505, with nothing failing and nothing to see —
+    # the map would simply have been quietly smaller every Sunday.
+    #
+    # So the inferred layer is carried across untouched. It is not merged into
+    # `mappings`: the two kinds of evidence stay separate so a reader can always
+    # tell which is which, and sdt_match.py loads observed first precisely so an
+    # observation beats an inference for the same code.
+    try:
+        if os.path.exists(OUT):
+            with open(OUT, encoding="utf-8") as f:
+                previous = json.load(f)
+            carried = previous.get("inferred")
+            if carried:
+                doc["inferred"] = carried
+                doc["_meta"]["inferredCarriedOver"] = len(carried)
+                doc["_meta"]["inferredNote"] = (
+                    "Carried across from the previous build. This script does not "
+                    "produce or recompute the inferred layer — see "
+                    "scripts/apply_eclass_proposals.py.")
+    except Exception as e:  # noqa: BLE001
+        raise SystemExit(
+            "ABORT: could not read the existing map to carry its `inferred` block "
+            "across (%s). Refusing to overwrite it with an observed-only file, "
+            "which would silently cut the Tracker's coverage." % e)
+
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(doc, f, ensure_ascii=False, indent=1)
         f.write("\n")
