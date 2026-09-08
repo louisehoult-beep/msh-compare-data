@@ -22,6 +22,7 @@ VASCULAR = "vascular-surgery-and-pad"
 CONTINENCE = "continence-bladder-and-bowel"
 THEATRES = "theatres-and-surgical"
 ORTHO = "orthopaedics-and-trauma"
+PLASTICS = "plastics-burns-and-reconstruction"
 fails = []
 
 
@@ -760,6 +761,139 @@ for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
 check("licence notice carried", bool(o.get("_notice", {}).get("owner")))
 okb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", ORTHO + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % okb, okb < 200)
+
+
+print("\n\n=== PLASTICS, BURNS AND RECONSTRUCTION (page 2841) ===")
+print("Rebuilding the plastics slice from live data...")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), PLASTICS],
+               check=True, capture_output=True)
+p = load_panel(PLASTICS)
+prx = B.compile_rule(B.SPECIALITY_RULES[PLASTICS])
+
+print("\nFALSE POSITIVES — the two rows the natural include really did let through")
+ptitles = " || ".join((a.get("title") or "") for a in p["awards"]).lower()
+# "Weishaupt Burners at Ysbyty Cwm Rhondda and Royal Glamorgan Hospital" is boiler
+# plant, caught by burn\w*. "External Breast Prosthesis" is the post-mastectomy
+# appliance, a Rehabilitation and Community route, caught by breast prosthes\w*.
+for bad in ["weishaupt", "burner"]:
+    check("excluded: %s" % bad, bad not in ptitles)
+check("excluded: external breast prosthesis",
+      "external breast prosthes" not in ptitles)
+check("the estates burner row cannot match",
+      not B.match_title(prx, "Weishaupt Burners at Ysbyty Cwm Rhondda and Royal Glamorgan Hospital"))
+for ext in ["External Breast Prosthesis [4233683]", "External Breast Prosthesis"]:
+    check("the external appliance cannot match: %s" % ext[:40],
+          not B.match_title(prx, ext))
+
+print("\nTERMS DELIBERATELY NOT CLAIMED — each would have pulled another page's work")
+# Every string here is a real title from this data that a wider pattern would have
+# admitted. bare "plastic" is the material; bare "skin" is infection prevention,
+# pharmacy and cancer triage; bare "graft" is vascular; bare "laser" is ENT, urology
+# and the laboratory; bare "breast" is imaging and oncology; dermatology is its own
+# page; cranioplasty and cleft are declined as ambiguous on the title (rule 14).
+for other in [
+        "Motorized Patient Couch and Plastic Composite Outer Covers for a new MRI Scanner Design",
+        "Skin Cleansing and Disinfection",
+        "ENT, Ophthalmology & Skin Medicines/Medical Devices",
+        "NHS Essex Integrated Care Board (ICB) Urgent Skin Cancer Dermoscopy Triage service",
+        "Procurement of Jotec E-Vita Open Neo Stent Graft, AMDS Dissection Stent",
+        "Vascular Grafts [2989252]",
+        "ESNEFT2730 Purchase of ENT Laser",
+        "POS Broomfield - Candela - laser GMAX PRO - 4 yrs maintenance",
+        "Philips Epiq Elite Diagnostic Ultrasound for Breast Clinic CHH",
+        "Insourcing of Breast Radiology Services",
+        "Provision of Oncotype DX Breast Recurrence ScoreTM Assay",
+        "Community Dermatology Service",
+        "Supply of dermatoscopes & image transfer system",
+        "Provision of Cranioplasties",
+        "Cleft Registry and Audit Network (CRANE)",
+        "ESNEFT3116 Purchase of Oscar Pro System"]:
+    check("stays out: %s" % other[:52], not B.match_title(prx, other))
+
+print("\nTRUE POSITIVES — awards that must be on this patch")
+for good in ["cryoskin", "novosorb", "burns unit", "breast implants",
+             "surgically implanted breast prostheses", "temporising matrix"]:
+    check("present: %s" % good, good in ptitles)
+check("every award shown is one the matcher still admits",
+      all(B.match_title(prx, a["title"]) for a in p["awards"]))
+check("the whole matched set is published, nothing silently capped",
+      p["counts"]["awardsShown"] == p["counts"]["awardsMatched"])
+# Three Find a Tender notices published the same day, three different notice ids.
+# They are three awards, not one row de-duplicated badly.
+cryo = [a for a in p["awards"] if "cryoskin" in (a["title"] or "").lower()]
+check("the three Cryoskin awards are three distinct notices",
+      len(set(a["url"] for a in cryo)) == len(cryo) == 3)
+
+print("\nFRAMEWORKS")
+pnames = [f["name"] for f in p["frameworks"]]
+check("framework present: Advanced Wound Care", "Advanced Wound Care" in pnames)
+check("exactly the one framework this patch carries", len(pnames) == 1,
+      "got %d: %s" % (len(pnames), pnames))
+# Each carries a word from this patch's vocabulary and belongs somewhere else.
+for other in ["Reusable Plastic Medical Hollowware",
+              "Skin Cleansing, Disinfection and Hygiene",
+              "External Breast Prosthesis and Chest Support",
+              "General Wound Care",
+              "Negative Pressure Wound Therapy"]:
+    check("another speciality's framework stays out: %s" % other, other not in pnames)
+check("every framework carries an end date", all(f.get("ends") for f in p["frameworks"]))
+check("every framework carries its NHSSC url", all(f.get("url") for f in p["frameworks"]))
+
+print("\nSUPPLIERS")
+psup = p["suppliers"]
+praw = sum(len(f["suppliers"]) for f in p["frameworks"])
+check("suppliers are drawn from the framework, not empty", len(psup) > 40)
+check("no supplier listed twice", len(psup) == len(set(s["name"] for s in psup)))
+check("every supplier names at least one framework", all(s["frameworks"] for s in psup))
+check("every named framework is this speciality's",
+      all(set(s["frameworks"]) <= set(pnames) for s in psup))
+check("an unresolved name is flagged, never silently merged",
+      all(("resolved" in s) for s in psup))
+check("the supplier count matches the framework page's own stated total",
+      len(psup) == praw == 56, "got %d resolved from %d raw" % (len(psup), praw))
+
+print("\nNO DRUG TARIFF, SAID HONESTLY (rule 14)")
+# Silicone scar products do sit in Part IXA, but IXA is the dressings and hosiery
+# part and the builder can only filter by part. Publishing it here would put the
+# wound care summary under a plastics heading.
+check("no tariff panel is published for this patch", p.get("drugTariff") is None)
+check("the tariff rule says why rather than going quiet",
+      "No Drug Tariff part applies" in (p.get("rules") or {}).get("drugTariff", ""))
+
+print("\nNO CPV CLAIMED, SAID HONESTLY")
+# The only matching notices carrying a CPV code are the three Cryoskin awards and all
+# three carry 33140000, medical consumables. Generic to the point of meaningless.
+check("no CPV family is claimed for this patch",
+      not B.SPECIALITY_RULES[PLASTICS].get("cpv"))
+check("the awards rule says no CPV corroborates rather than going quiet",
+      "No CPV family corroborates" in (p.get("rules") or {}).get("awards", ""))
+check("no award claims CPV corroboration",
+      not any(a.get("cpvCorroborates") for a in p["awards"]))
+
+print("\nTHE COVERAGE LIMIT IS PUBLISHED, NOT HIDDEN (rule 14)")
+# Without this, 56 Advanced Wound Care suppliers read as a burns supplier list.
+# NHS Supply Chain publishes no lot-by-lot breakdown, so they are not one.
+for k in ("frameworks", "suppliers"):
+    check("coverage limit stated on the %s rule" % k,
+          "COVERAGE LIMIT" in (p.get("rules") or {}).get(k, ""))
+check("the missing lot breakdown is named",
+      "lot-by-lot" in (p.get("rules") or {}).get("suppliers", ""))
+check("the routes with no framework at all are named as uncounted",
+      "Blood and Transplant" in (p.get("rules") or {}).get("suppliers", ""))
+
+print("\nAN EMPTY PANEL IS AN HONEST ANSWER, NOT A REASON TO WIDEN (rule 14)")
+check("no open tender on this patch today, and none invented",
+      p["openTenders"] == [])
+check("the open-tender rule says an empty list means none open",
+      "empty list means" in (p.get("rules") or {}).get("openTenders", ""))
+
+print("\nTHE RULE TRAVELS WITH THE DATA (rule 14a)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((p.get("rules") or {}).get(k)))
+check("licence notice carried", bool(p.get("_notice", {}).get("owner")))
+pkb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", PLASTICS + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % pkb, pkb < 200)
+
 
 
 print()

@@ -1,0 +1,760 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "plastics-burns-and-reconstruction",
+ "label": "Plastics, Burns and Reconstruction",
+ "defined": true,
+ "generated": "2026-09-08",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-07T12:26:14+00:00",
+  "openTenders": "07/09/2026",
+  "drugTariff": "2026-09-07"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\badvanced wound care\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Half this speciality has no national framework at all. Skin substitutes and advanced wound biologics are bought locally on a high-cost item business case, and dermal allografts come direct from NHS Blood and Transplant Tissue and Eye Services, neither of which has an NHS Supply Chain framework page, so neither appears below. The one framework that does carry this patch, Advanced Wound Care, names 56 suppliers across 18 lots and publishes NO lot-by-lot breakdown, so the supplier list below is the whole framework's membership and not a Burns and Scar Management supplier list: most of those 56 are on other, general wound care lots. Being named on the framework is not evidence of burns volume, and being absent from it is not evidence of absence from this market.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Half this speciality has no national framework at all. Skin substitutes and advanced wound biologics are bought locally on a high-cost item business case, and dermal allografts come direct from NHS Blood and Transplant Tissue and Eye Services, neither of which has an NHS Supply Chain framework page, so neither appears below. The one framework that does carry this patch, Advanced Wound Care, names 56 suppliers across 18 lots and publishes NO lot-by-lot breakdown, so the supplier list below is the whole framework's membership and not a Burns and Scar Management supplier list: most of those 56 are on other, general wound care lots. Being named on the framework is not evidence of burns volume, and being absent from it is not evidence of absence from this market.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(burn\\w*|scar\\w*|keloid|contracture release|pressure garment\\w*|silicone gel sheet\\w*|plastic surger\\w*|reconstructive surger\\w*|breast reconstruction|free flap|flap reconstruction|microsurger\\w*|breast implant\\w*|breast prosthes\\w*|skin substitut\\w*|skin graft\\w*|split[- ]thickness|dermatome|skin mesher|cultured epithelial|epidermal graft\\w*|dermal (?:matrix|template|substitute|regenerat\\w*|allograft|graft|scaffold)|acellular dermal|human dermis|cryopreserved skin|cryoskin|temporis\\w* matrix|temporiz\\w* matrix|novosorb)\\b/i and does not match /\\b(burner\\w*|external breast prosthes\\w*)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 1,
+  "suppliers": 56,
+  "suppliersUnresolved": 1,
+  "awardsShown": 10,
+  "awardsMatched": 10,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Advanced Wound Care",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/advanced-wound-care/",
+   "reference": "2024/S 000-029271",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 September 2025",
+   "ends": "31 August 2027",
+   "supplierCount": 56,
+   "supplierSource": "count verified against the page's own stated total (56)",
+   "suppliers": [
+    "Absorbest AB",
+    "Advanced Medical Solutions Ltd",
+    "AOTI LTD",
+    "B. Braun Medical Limited",
+    "Becton Dickinson U.K. Limited",
+    "Brightwake Limited (trading as Advancis Medical)",
+    "CD Medical Limited",
+    "Clarity Pharma",
+    "ClearHeal LTD",
+    "CliniMed Ltd",
+    "Clinisupplies Limited",
+    "Coloplast Ltd",
+    "ConvaTec Limited",
+    "Creed Medical Ltd",
+    "Crest Medical Ltd",
+    "Dot Medical Limited",
+    "Ennogen Healthcare Ltd",
+    "Espère Healthcare Ltd",
+    "Essity T/A BSN Medical Ltd",
+    "Eurosurgical",
+    "Firstkind Ltd",
+    "Flen Health UK Ltd",
+    "Frontier Therapeutics Limited",
+    "GBUK Ltd",
+    "Gentell UK Ltd",
+    "Global Health and Safety Ltd",
+    "Griffiths and Nielsen Ltd",
+    "GS Medical Healthcare",
+    "HARTMANN",
+    "Ideal Medical Solutions",
+    "IMS Euro Ltd",
+    "Integra LifeSciences",
+    "Iskus Health UK Limited",
+    "Joint Operations (UK) Ltd",
+    "KCI Medical Limited",
+    "L&R Medical UK Ltd",
+    "medi UK Ltd",
+    "Medicareplus International Limited",
+    "Mediq Healthcare UK Ltd",
+    "Medline Industries Ltd",
+    "Molnlycke Health Care Ltd",
+    "OscarTech UK Ltd",
+    "Oswell Penda Pharmaceutical Ltd",
+    "Phoenix Medical Ltd",
+    "Raise Healthcare Pvt Ltd",
+    "Reliance Medical Ltd",
+    "Richardson Healthcare Ltd",
+    "Rocialle Healthcare Ltd",
+    "Schulke & Mayr UK Ltd",
+    "Smith & Nephew",
+    "Steroplast Healthcare Ltd",
+    "Trion Pharma",
+    "Unisurge International Ltd",
+    "URGO LIMITED",
+    "Vernacare International Ltd",
+    "Willingsford Limited"
+   ],
+   "delisted": [
+    "Ego Pharmaceuticals",
+    "Farla Medical Healthcare Limited",
+    "Mayors Pharma",
+    "Edge Medical Ltd",
+    "Safeguard Medical Technologies.",
+    "CF Pharma Ltd",
+    "Inotec AMD Ltd",
+    "Meditrade UK Ltd",
+    "Woundchek Laboratories",
+    "AAH Pharaceuticals",
+    "Hospital Services Ltd"
+   ]
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Absorbest AB",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Advanced Medical Solutions (AMS)",
+   "resolved": true,
+   "variants": [
+    "Advanced Medical Solutions Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "AOTI",
+   "resolved": true,
+   "variants": [
+    "AOTI LTD"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B. Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton Dickinson U.K. Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Brightwake Limited (trading as Advancis Medical)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "CD Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "CD Medical Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Clarity Pharma",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "ClearHeal LTD",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "CliniMed",
+   "resolved": true,
+   "variants": [
+    "CliniMed Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Clinisupplies",
+   "resolved": true,
+   "variants": [
+    "Clinisupplies Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Coloplast",
+   "resolved": true,
+   "variants": [
+    "Coloplast Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Convatec",
+   "resolved": true,
+   "variants": [
+    "ConvaTec Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Creed Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Dot Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Ennogen Healthcare",
+   "resolved": true,
+   "variants": [
+    "Ennogen Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Espère Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Essity UK Limited",
+   "resolved": true,
+   "variants": [
+    "Essity T/A BSN Medical Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Eurosurgical Ltd",
+   "resolved": true,
+   "variants": [
+    "Eurosurgical"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Firstkind Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Flen Health UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Frontier Therapeutics",
+   "resolved": true,
+   "variants": [
+    "Frontier Therapeutics Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Gentell UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Global Health and Safety Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Griffiths and Nielsen Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "GS Medical Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "GS Medical Healthcare"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Ideal Medical Solutions",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "IMS Euro Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Integra LifeSciences (Integra Neurosciences)",
+   "resolved": true,
+   "variants": [
+    "Integra LifeSciences"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Iskus Health UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Joint Operations",
+   "resolved": true,
+   "variants": [
+    "Joint Operations (UK) Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "L&R Medical / Activa (Lohmann & Rauscher)",
+   "resolved": true,
+   "variants": [
+    "L&R Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "medi UK",
+   "resolved": true,
+   "variants": [
+    "medi UK Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Medicareplus",
+   "resolved": true,
+   "variants": [
+    "Medicareplus International Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Mölnlycke",
+   "resolved": true,
+   "variants": [
+    "Molnlycke Health Care Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "OscarTech UK",
+   "resolved": true,
+   "variants": [
+    "OscarTech UK Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Oswell Penda",
+   "resolved": true,
+   "variants": [
+    "Oswell Penda Pharmaceutical Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Paul Hartmann (HARTMANN)",
+   "resolved": true,
+   "variants": [
+    "HARTMANN"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Phoenix Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Raise Healthcare Pvt Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Richardson Healthcare",
+   "resolved": true,
+   "variants": [
+    "Richardson Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Rocialle Healthcare",
+   "resolved": true,
+   "variants": [
+    "Rocialle Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Schulke & Mayr UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Smith+Nephew",
+   "resolved": true,
+   "variants": [
+    "Smith & Nephew"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Solventum (3M Health Care)",
+   "resolved": true,
+   "variants": [
+    "KCI Medical Limited"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Steroplast Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Trion Pharma Limited",
+   "resolved": true,
+   "variants": [
+    "Trion Pharma"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Unisurge International Limited",
+   "resolved": true,
+   "variants": [
+    "Unisurge International Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Urgo Medical",
+   "resolved": true,
+   "variants": [
+    "URGO LIMITED"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Vernacare",
+   "resolved": true,
+   "variants": [
+    "Vernacare International Ltd"
+   ],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  },
+  {
+   "name": "Willingsford Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Advanced Wound Care"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Cryopreserved Skin - Cryoskin",
+   "buyer": "Swansea Bay University Health Board",
+   "supplier": "HOSPITAL INNOVATIONS LIMITED",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083159-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Cryopreserved Skin - Cryoskin",
+   "buyer": "Swansea Bay University Health Board",
+   "supplier": "HOSPITAL INNOVATIONS LIMITED",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083158-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Cryopreserved Skin - Cryoskin",
+   "buyer": "Swansea Bay University Health Board",
+   "supplier": "HOSPITAL INNOVATIONS LIMITED",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083154-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Contract for UltraPulse Alpha Laser for Burns Unit with Point of Sale Maintenance",
+   "buyer": "The Newcastle Upon Tyne Hospitals NHS Foundation Trust",
+   "supplier": "Lumenis Be (UK) Limited",
+   "date": "2024-12-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/040629-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Novosorb BTM (Biodegradable Temporising Matrix). Size 10x10cm, 10X20cm, 20x40cm Supplier",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Medana Healthcare",
+   "date": "2024-06-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/017100-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Novosorb BTM (Biodegradable Temporising Matrix).  Size 10x10cm, 10X20cm, 20x40cm Supplier",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Medana Healthcare",
+   "date": "2024-04-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/013946-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Novosorb Biodegradable Temporizing Matrix (BTM)",
+   "buyer": "The Newcastle Upon Tyne Hospitals NHS Foundation Trust",
+   "supplier": "Movianto UK Limited",
+   "date": "2024-04-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/012982-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Novosorb Biodegradable Temporizing Matrix (BTM)",
+   "buyer": "The Newcastle Upon Tyne Hospitals NHS Foundation Trust",
+   "supplier": "Movianto UK Limited",
+   "date": "2024-02-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005028-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "HEY/18/161 BREAST IMPLANTS",
+   "buyer": "Hull University Teaching Hospitals NHS Trust",
+   "supplier": "Johnson and Johnson Medical Ltd, Nagor Ltd, Q Medical Technologies Ltd",
+   "date": "2022-09-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/026811-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "CLI-OJEU-45806 SURGICALLY IMPLANTED BREAST PROSTHESES",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Nagor Ltd, Motiva Implants Uk Ltd, JOHNSON & JOHNSON MEDICAL LTD",
+   "date": "2022-03-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/006276-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}

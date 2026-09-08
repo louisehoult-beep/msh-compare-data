@@ -630,6 +630,145 @@ SPECIALITY_RULES = {
             "of it, and none is claimed here."
         ),
     },
+    # PAGE 2841. Scope, in the page's own words: "Reconstruction, burns care and the
+    # advanced wound biologics and skin substitute range." The page's own Buying route
+    # names one national route and says outright that the second half of the patch has
+    # none: "NHS Supply Chain Advanced Wound Care (Lot 11, Burns and Scar Management);
+    # NHS Blood and Transplant Tissue and Eye Services for dermal allografts; no
+    # dedicated national lot exists for skin substitutes". This rule is written to that
+    # scope and no wider.
+    "plastics-burns-and-reconstruction": {
+        "label": "Plastics, Burns and Reconstruction",
+        # ONE framework, the one the page names. Advanced Wound Care is SHARED with
+        # tissue viability and wound care, which matches it on "wound" — that sharing is
+        # correct and deliberate, the same way Pressure Area Care is shared between wound
+        # care and patient handling: Lot 11 Burns and Scar Management really does sit
+        # inside the wound care framework. Three other frameworks in frameworks.json
+        # carry a word from this patch's vocabulary and every one was read and left out:
+        #   Reusable Plastic Medical Hollowware -> polymer bowls and jugs. The word
+        #       plastic here is the material, not the speciality. This is the single
+        #       clearest reason no pattern on this patch may use bare "plastic".
+        #   Skin Cleansing, Disinfection and Hygiene -> infection prevention, a
+        #       Medical and Surgical Consumables route, not reconstruction.
+        #   External Breast Prosthesis and Chest Support -> the post-mastectomy
+        #       external appliance, which is the Rehabilitation, Prosthetics and
+        #       Orthotics patch, as the orthopaedics rule above already records.
+        #       Implant-based breast RECONSTRUCTION is this patch; an external
+        #       prosthesis is not, and the exclusion below keeps them apart.
+        "frameworks": r"\badvanced wound care\b",
+        # NOT INCLUDED, deliberately. Each was run over all 1,972 rows of
+        # tender-history.json and all 1,294 of framework-awards.json and read:
+        #   bare "plastic"   -> "Motorized Patient Couch and Plastic Composite Outer
+        #                       Covers for a new MRI Scanner Design". The material.
+        #                       "plastic surger" is used instead and finds nothing in
+        #                       this data, which is the honest answer.
+        #   bare "skin"      -> "Skin Cleansing and Disinfection", "ENT, Ophthalmology
+        #                       & Skin Medicines/Medical Devices" twice, and "Urgent
+        #                       Skin Cancer Dermoscopy Triage service". Infection
+        #                       prevention, pharmacy and cancer triage. The specific
+        #                       skin terms below reach every true row without it.
+        #   bare "graft"     -> "ON-X Ascending Aortic Prosthesis with Valsalva Graft",
+        #                       "Jotec E-Vita Open Neo Stent Graft" and "Vascular
+        #                       Grafts". All vascular surgery. "skin graft", "dermal
+        #                       graft" and "epidermal graft" are used instead.
+        #   bare "laser"     -> seventeen rows and one is this patch. The other sixteen
+        #                       are ENT, urology holmium, ophthalmic SLT, cardiac lead
+        #                       extraction, MRI-guided ablation and laboratory laser
+        #                       capture microdissection. The one true row, a burns unit
+        #                       CO2 laser, carries the word Burns and matches on that.
+        #                       Two further Lumenis and Candela laser maintenance rows
+        #                       are very probably plastics — one is at Broomfield, home
+        #                       of the St Andrew's Centre for Plastic Surgery and Burns
+        #                       — but nothing in either TITLE says so, and inferring the
+        #                       speciality from the buyer's name is exactly the derived
+        #                       claim rule 14 forbids. They stay out.
+        #   bare "matrix"    -> its only four hits here are the Novosorb dermal
+        #                       templates, which are true, but the word alone would
+        #                       admit anything from a software matrix to a bone matrix
+        #                       in the next refresh. "temporising matrix", "dermal
+        #                       matrix" and the brand name carry it instead.
+        #   bare "breast"    -> twelve rows and ten are breast IMAGING, screening and
+        #                       oncology: an Epiq Elite ultrasound, a biopsy needle,
+        #                       Oncotype DX, mobile screening trailer maintenance,
+        #                       insourced breast radiology three times. Only the two
+        #                       implant rows below are reconstruction.
+        #   "cranioplast"    -> "Provision of Cranioplasties" is real cranial vault
+        #                       reconstruction, but in the NHS it is overwhelmingly a
+        #                       neurosurgical procedure after decompressive craniectomy,
+        #                       and the title cannot tell you whether this contract sits
+        #                       with neurosurgery or craniofacial. Ambiguous on its face,
+        #                       so it is declined rather than guessed (rule 14).
+        #   "cleft"          -> "Cleft Registry and Audit Network (CRANE)" and
+        #                       "Paediatric Videoflouroscopy Service for CLEFT patients".
+        #                       Cleft surgery is within this speciality, but a national
+        #                       clinical audit registry and a speech-and-radiology
+        #                       diagnostic service are neither a buying route nor
+        #                       elective plastics capacity. Nothing here would tell a rep
+        #                       anything true about their patch, so both stay out.
+        #   "dermato"        -> nine rows, every one dermatology: teledermatology,
+        #                       community dermatology services and dermatoscopes. That is
+        #                       the dermatology page. Note "dermatome", the skin-graft
+        #                       harvesting instrument, IS claimed below and cannot
+        #                       collide with it: \bdermatome\b matches neither
+        #                       "dermatology" nor "dermatoscopes".
+        "include": (
+            r"\b(burn\w*|"
+            r"scar\w*|keloid|contracture release|"
+            r"pressure garment\w*|silicone gel sheet\w*|"
+            r"plastic surger\w*|reconstructive surger\w*|breast reconstruction|"
+            r"free flap|flap reconstruction|microsurger\w*|"
+            r"breast implant\w*|breast prosthes\w*|"
+            r"skin substitut\w*|skin graft\w*|split[- ]thickness|dermatome|skin mesher|"
+            r"cultured epithelial|epidermal graft\w*|"
+            r"dermal (?:matrix|template|substitute|regenerat\w*|allograft|graft|scaffold)|"
+            r"acellular dermal|human dermis|"
+            r"cryopreserved skin|cryoskin|"
+            r"temporis\w* matrix|temporiz\w* matrix|novosorb)\b"
+        ),
+        # Two patterns. Both matched a real row, were read, and were rejected:
+        #   burner              -> "Weishaupt Burners at Ysbyty Cwm Rhondda and Royal
+        #                          Glamorgan Hospital", Cwm Taf Morgannwg UHB. Boiler
+        #                          burners. An estates plant contract caught by the
+        #                          natural "burn\w*" form of the include, and the whole
+        #                          reason that form needs a guard.
+        #   external breast
+        #   prosthesis          -> "External Breast Prosthesis [4233683]" (Procurement
+        #                          and Logistics Service) and "External Breast
+        #                          Prosthesis" (Business Services Organisation). The
+        #                          post-mastectomy external appliance, a Rehabilitation
+        #                          and Community route. It is not reconstruction, and it
+        #                          must not sit beside the two real implant-based
+        #                          reconstruction rows as if it were the same market.
+        # RESIDUAL RISK, STATED: "burn\w*" would also match a place name such as
+        # Burnley. No such title exists anywhere in this data today, so no pattern is
+        # invented for it — but if one appears in a refresh, it belongs here.
+        "exclude": r"\b(burner\w*|external breast prosthes\w*)\b",
+        # NO CPV LIST. The only matching notices that carry a CPV code at all are the
+        # three Cryoskin awards, and all three carry 33140000, medical consumables — the
+        # same generic family the continence rule refused. A prefix here would
+        # corroborate everything and therefore nothing, so none is claimed.
+        # NO DRUG TARIFF PART. Part IX reimburses dressings and elastic hosiery (IXA),
+        # incontinence (IXB), stoma (IXC) and elastic hosiery (IXR). Silicone scar
+        # products genuinely do sit inside Part IXA — GIRFT flagged their primary-care
+        # availability as a procurement gap — but IXA is 56,833 lines and the builder
+        # can only filter by part, not by product. Claiming IXA here would publish the
+        # wound care patch's dressings-and-hosiery summary under a plastics heading and
+        # tell a rep nothing true. The panel carries no tariff rather than reaching.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Half this speciality has no "
+            "national framework at all. Skin substitutes and advanced wound biologics "
+            "are bought locally on a high-cost item business case, and dermal "
+            "allografts come direct from NHS Blood and Transplant Tissue and Eye "
+            "Services, neither of which has an NHS Supply Chain framework page, so "
+            "neither appears below. The one framework that does carry this patch, "
+            "Advanced Wound Care, names 56 suppliers across 18 lots and publishes NO "
+            "lot-by-lot breakdown, so the supplier list below is the whole framework's "
+            "membership and not a Burns and Scar Management supplier list: most of "
+            "those 56 are on other, general wound care lots. Being named on the "
+            "framework is not evidence of burns volume, and being absent from it is "
+            "not evidence of absence from this market."
+        ),
+    },
 }
 
 
