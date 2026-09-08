@@ -3,7 +3,7 @@
 sign-off): the Boston Scientific / Avanos / J&J nhssc-term proposals, and the
 bloodcoll:abg vocabulary code.
 
-    ./session-lock.sh claim "apply-nhssc-terms-and-abg-code"
+    ./begin.sh "apply-nhssc-terms-and-abg-code"            # gives you a clone, cd into it
     python3 scripts/apply_nhssc_terms_and_abg.py           # dry run
     python3 scripts/apply_nhssc_terms_and_abg.py --write
     python3 scripts/build_differentiator.py

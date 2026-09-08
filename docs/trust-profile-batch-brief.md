@@ -80,11 +80,9 @@ python3 verify.py     # must exit 0 - a push to this repo is a live publish
 ```
 
 Verify per trust as it's written, not just at the end — cheaper to re-task while still
-fresh. A local session lands with `./land.sh "subject" data/prep-config.json` from its own
-`./wt.sh <name>` worktree (never the shared checkout). A cloud routine works from its own
-isolated clone, so it commits and pushes directly — but still: fetch, rebase onto
-`origin/main`, re-run `verify.py`, THEN push, and if the push is rejected by a concurrent
-writer, fetch/rebase/re-gate/push again. Never force.
+fresh. A session lands with `./land.sh "subject" data/prep-config.json` from its own throwaway
+clone (`./begin.sh <name>` — never edit the shared checkout). land.sh itself does the
+fetch/rebase/re-gate/push-with-retry on a rejected push. Never force.
 
 After publishing, update `docs/trust-profile-worklist.md` in the same pass: remove the
 completed rows, renumber the remaining table, correct the header counts, add a batch-log

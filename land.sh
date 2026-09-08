@@ -3,15 +3,25 @@
 #
 # A push to main IS a publish (root rule 13): the Hub fetches these files
 # directly and members see whatever lands within seconds. This script is the
-# only route a session should use, because every incident this repo has had
-# came from several writers sharing one working tree on main:
+# only route a session should use.
 #
+# REWRITTEN 08/09/2026: paired with begin.sh, which gives you a private
+# throwaway clone instead of everyone editing one shared OneDrive checkout.
+# That retires the session-claim and tree-lock machinery below (session-lock.sh,
+# the land.lock mkdir-lock) — there is no longer a shared working tree for two
+# writers to collide inside, so nothing to claim and nothing to wait on. The
+# ONE remaining contention point is the push itself, and git already makes that
+# atomic and safe: a `git push` that isn't a fast-forward is simply refused, so
+# this can never silently overwrite someone else's landed work the way the
+# pre-08/09 incidents did. It just fetches, rebases, and retries.
+#
+# Everything else here is unchanged and still exists because of a real incident:
 #   12/08  a 28-minute company-intelligence run thrown away on a lost race
 #   14/08  a rebase text-merged a generated JSON file into a Frankenstein
 #   18/08  four unrelated pieces of work stuck in one dirty tree, one of them
 #          a stale seed that would have deleted five deep dives on push
 #
-# Usage:
+# Usage (run from inside a clone begin.sh gave you):
 #   ./land.sh "commit subject" [--allow identity]... path [path...]
 #
 # --allow is passed straight through to check_no_loss.py (step 4) to record a
@@ -25,12 +35,13 @@
 # repo has already had.
 set -euo pipefail
 cd "$(dirname "$0")"
+CLONE_ROOT="$(pwd)"
 
 SUBJECT="${1:-}"; shift || true
 if [ -z "$SUBJECT" ]; then
   echo "usage: ./land.sh \"commit subject\" [--allow identity]... path [path...]" >&2
-  echo "Name the paths this piece of work owns. Never 'git add -A' in this repo:" >&2
-  echo "another session's half-finished work is very often sitting beside yours." >&2
+  echo "Name the paths this piece of work owns. Never 'git add -A' — a clone from" >&2
+  echo "begin.sh should only ever have your own edits in it, but name paths anyway." >&2
   exit 2
 fi
 
@@ -55,157 +66,20 @@ done
 
 if [ ${#PATHS[@]} -eq 0 ]; then
   echo "usage: ./land.sh \"commit subject\" [--allow identity]... path [path...]" >&2
-  echo "Name the paths this piece of work owns. Never 'git add -A' in this repo:" >&2
-  echo "another session's half-finished work is very often sitting beside yours." >&2
   exit 2
 fi
-
-# ---------------------------------------------------------------- the tree lock
-#
-# ADDED 25/08/2026. Everything above assumes one writer at a time on this laptop,
-# and nothing was enforcing it. This working tree lives on OneDrive and is shared
-# by every scheduled task and every interactive session, so two of them routinely
-# overlap. On 25/08 a session read a clean tree, and forty seconds later found
-# `.git/index.lock` held by another routine mid-run, then two files staged that it
-# had never touched. That is not a rare race — it is the normal state of a shared
-# tree with no lock.
-#
-# `flock` is util-linux and does not exist on macOS, so this is a portable mkdir
-# lock: mkdir is atomic on POSIX, and the PID inside lets a genuinely dead lock be
-# cleared without a human guessing.
-# --git-common-dir, NOT --git-dir, so this still works from a legacy worktree
-# left over from wt.sh (retired 03/09/2026) as well as the shared checkout —
-# --git-dir inside a worktree is that worktree's private .git/worktrees/<name>,
-# which would give every worktree its own lock, i.e. no lock at all.
-# Outside the OneDrive-synced tree for the same reason session-lock.sh is: on
-# 05/09/2026 a run had to clear two stale git locks by hand because OneDrive
-# refused the delete. Same root, same repo key, so both locks travel together.
-LAND_LOCK_ROOT="${MSH_LOCK_ROOT:-$HOME/.claude/msh-locks}"
-LAND_REPO_KEY="$(git rev-parse --show-toplevel | shasum | awk '{print $1}' | cut -c1-12)"
-mkdir -p "$LAND_LOCK_ROOT/$LAND_REPO_KEY"
-LOCK_DIR="$LAND_LOCK_ROOT/$LAND_REPO_KEY/land.lock"
-LOCK_WAIT_SECONDS="${LAND_LOCK_WAIT:-600}"
-
-LOCK_HELD=0
-
-# ------------------------------------------------------------- the session claim
-#
-# ADDED 03/09/2026, when per-session worktrees (wt.sh) were retired in favour of
-# everyone editing the shared checkout again, guarded by session-lock.sh instead
-# of separate directories. That claim is held for a whole editing session, not
-# just the few minutes this script runs for, so it is a different lock
-# (session.lock) to the one above (land.lock). This only checks it: land.sh does
-# not claim or release it — see session-lock.sh's own header for why. A session
-# that never claimed at all (a quick automated run with no extended edit phase)
-# is unaffected; this only stops landing OVER a *different* live session's claim.
-# Asked of session-lock.sh rather than recomputed, so the two cannot drift.
-SESSION_LOCK_DIR="$(./session-lock.sh lock-path)"
-THIS_SESSION="${CLAUDE_CODE_SESSION_ID:-${CLAUDE_CODE_HOST_SESSION_ID:-}}"
-[ -n "$THIS_SESSION" ] || THIS_SESSION="pid-${CLAUDE_PID:-$$}"
-
-check_session_claim() {
-  # CHANGED 07/09/2026: a held claim is now REQUIRED, not merely respected.
-  # Until today this only refused to land over a DIFFERENT session's claim, so a
-  # task that never claimed at all could still land — and three of the six local
-  # tasks writing this repo had no claim step in their spec. Enforcing it here
-  # makes claiming a property of the tool instead of something each task has to
-  # remember. CI is unaffected: the GitHub Actions workflows commit and push
-  # directly and never call this script.
-  if [ ! -d "$SESSION_LOCK_DIR" ] || [ ! -f "$SESSION_LOCK_DIR/owner.json" ]; then
-    echo "REFUSING: you have not claimed this tree." >&2
-    echo "  ./session-lock.sh claim \"name-of-the-work\"" >&2
-    echo "Claim it, re-run your gate, then land. The claim is what stops another" >&2
-    echo "session overwriting your edits while you are still making them." >&2
-    exit 1
-  fi
-  local stamp="$SESSION_LOCK_DIR/owner.json"
-  local holder_session holder_pid
-  holder_session="$(python3 -c 'import json,sys
-try: print(json.load(open(sys.argv[1])).get("session_id",""))
-except Exception: print("")' "$stamp" 2>/dev/null || echo "")"
-  [ "$holder_session" = "$THIS_SESSION" ] && return 0
-  holder_pid="$(python3 -c 'import json,sys
-try: print(json.load(open(sys.argv[1])).get("pid",""))
-except Exception: print("")' "$stamp" 2>/dev/null || echo "")"
-  if [ -n "$holder_pid" ] && ! ps -p "$holder_pid" >/dev/null 2>&1; then
-    # A dead session's claim used to be waved through, which since the check
-    # above became mandatory would be a hole straight back to landing unclaimed.
-    # Take it over properly instead, so the tree always has exactly one owner.
-    echo "REFUSING: the claim on this tree belongs to a session that has died," >&2
-    echo "and it is not yours:" >&2
-    echo "    $(cat "$stamp" 2>/dev/null || echo "(unreadable stamp)")" >&2
-    echo "  ./session-lock.sh claim \"name-of-the-work\"" >&2
-    echo "clears a dead holder by itself. Claim it, re-run your gate, then land." >&2
-    exit 1
-  fi
-  echo "REFUSING: a different live session holds the editing claim on this tree:" >&2
-  python3 -c '
-import json, sys
-try:
-    d = json.load(open(sys.argv[1]))
-    print("    %s  session=%s  pid=%s  host=%s  since=%s" % (
-        d.get("name","?"), d.get("session_id","?"), d.get("pid","?"),
-        d.get("host","?"), d.get("started_at","?")))
-except Exception:
-    print("    (unreadable stamp)")
-' "$stamp" >&2
-  echo "Landing over someone else's in-progress edit is how work gets lost. Wait" >&2
-  echo "for their claim to release, or confirm with them first." >&2
-  exit 1
-}
-check_session_claim
-
-acquire_lock() {
-  local waited=0
-  while ! mkdir "$LOCK_DIR" 2>/dev/null; do
-    local holder
-    holder="$(cat "$LOCK_DIR/pid" 2>/dev/null || echo "")"
-    if [ -n "$holder" ] && ! kill -0 "$holder" 2>/dev/null; then
-      echo "clearing a stale lock left by pid $holder (no such process)" >&2
-      rm -rf "$LOCK_DIR"
-      continue
-    fi
-    if [ "$waited" -eq 0 ]; then
-      echo "==> waiting for the tree lock (held by pid ${holder:-unknown})."
-      echo "    Another session or scheduled task is landing. This waits rather than"
-      echo "    interleaving with it, which is how half-staged trees happen."
-    fi
-    if [ "$waited" -ge "$LOCK_WAIT_SECONDS" ]; then
-      echo "REFUSING: the tree lock was still held after ${LOCK_WAIT_SECONDS}s (pid ${holder:-unknown})." >&2
-      echo "Nothing has been staged or committed. Check what that process is doing." >&2
-      exit 1
-    fi
-    sleep 5
-    waited=$((waited + 5))
-  done
-  echo "$$" > "$LOCK_DIR/pid"
-  LOCK_HELD=1
-  [ "$waited" -gt 0 ] && echo "==> tree lock acquired after ${waited}s"
-  return 0
-}
-
-# Only ever release a lock THIS process acquired. Releasing unconditionally would
-# mean a run that timed out waiting deleted the holder's lock on its way out and
-# let the next writer barge in — the exact interleaving the lock exists to stop.
-release_lock() { [ "$LOCK_HELD" = "1" ] && rm -rf "$LOCK_DIR"; }
-trap release_lock EXIT INT TERM
-
-acquire_lock
 
 echo "==> 1/7 fetching origin"
 git fetch --quiet origin
 
 # ------------------------------------------------- somebody else's unpushed work
 #
-# ADDED 25/08/2026. This script ends in `git push origin main`, which pushes the
-# whole BRANCH, not just the commit it made. So any commit already sitting
-# unpushed goes out with yours — and a push here IS a publish (root rule 13).
-#
-# On 25/08 two such commits were sitting in the tree: a supplier duplicate merge
-# committed by hand three days earlier, and an alias-enrichment batch that had
-# committed and then failed to push because the publish gate was jammed. Both
-# were fine, and both were published by a run that was not looking for them.
-# Next time they might not be fine, so they get named and acknowledged instead.
+# A clone from begin.sh starts clean, so this should never fire in normal use —
+# kept as a defensive check in case land.sh is ever run somewhere that already
+# had commits sitting on it (e.g. a manual clone, or a retry after a partial
+# run). `git push` pushes the whole branch, not just the commit made here, and a
+# push here IS a publish (root rule 13), so anything already sitting unpushed
+# would go out with it unnoticed otherwise.
 PENDING="$(git rev-list --count origin/main..HEAD)"
 if [ "$PENDING" -gt 0 ] && [ "${WITH_PENDING:-0}" != "1" ]; then
   echo "" >&2
@@ -253,27 +127,66 @@ echo "==> 5/7 committing this piece"
 # a stash nobody comes back to (there was one of those, held since 14/08).
 git commit -q -m "$SUBJECT"
 
-echo "==> 6/7 rebasing onto origin/main"
-# -X theirs is deliberately NOT used. On a generated JSON file it keeps the other
-# writer's non-conflicting hunks and produces a file whose counts header and rows
-# come from different generations (the 14/08 incident). If the rebase conflicts,
-# stop and let a human regenerate on top of origin/main.
-git rebase origin/main || {
-  echo "REFUSING: rebase conflicted. Do not resolve a generated JSON file by hand" >&2
-  echo "or with -X theirs. Abort, regenerate on top of origin/main, and re-run." >&2
-  echo "Your commit is safe — 'git rebase --abort' leaves it on the branch." >&2
-  exit 1
-}
+# --------------------------------------------------- rebase + push, with retry
+#
+# ADDED 08/09/2026, replacing the tree-lock. With everyone in their own clone,
+# the only race left is two clones pushing at nearly the same moment. git
+# already refuses a non-fast-forward push outright — it can never silently
+# overwrite the other side, which is the actual guarantee the old lock was
+# standing in for. So on a rejection this just re-fetches, re-rebases, re-gates
+# and retries, a handful of times, rather than making every writer queue for a
+# lock up front on the assumption a collision might happen.
+ATTEMPTS="${LAND_PUSH_ATTEMPTS:-5}"
+i=1
+while :; do
+  echo "==> 6/7 rebasing onto origin/main (attempt $i/$ATTEMPTS)"
+  # -X theirs is deliberately NOT used. On a generated JSON file it keeps the
+  # other writer's non-conflicting hunks and produces a file whose counts header
+  # and rows come from different generations (the 14/08 incident). If the
+  # rebase conflicts, stop and let a human regenerate on top of origin/main —
+  # this is a real content clash, not a race, and retrying blind would be wrong.
+  if ! git rebase origin/main; then
+    echo "REFUSING: rebase conflicted. Do not resolve a generated JSON file by hand" >&2
+    echo "or with -X theirs. Abort, regenerate on top of origin/main, and re-run." >&2
+    echo "Your commit is safe — 'git rebase --abort' leaves it on the branch." >&2
+    exit 1
+  fi
 
-echo "==> 7/7 gate, then push"
-python3 verify.py || {
-  echo "REFUSING: verify.py failed after the rebase. Root rule 13 — if the gate" >&2
-  echo "and the data disagree, the data is wrong. Never loosen a check to get a" >&2
-  echo "push through. Your commit is on the branch; fix and re-gate." >&2
-  exit 1
-}
-# HEAD:main, not main. In a worktree HEAD is the per-session branch wt/<name>, and
-# `git push origin main` would push the stale local main instead of the work just
-# rebased and gated here. In the shared tree HEAD *is* main, so this is identical.
-git push origin HEAD:main
+  echo "==> 7/7 gate, then push"
+  python3 verify.py || {
+    echo "REFUSING: verify.py failed after the rebase. Root rule 13 — if the gate" >&2
+    echo "and the data disagree, the data is wrong. Never loosen a check to get a" >&2
+    echo "push through. Your commit is on the branch; fix and re-gate." >&2
+    exit 1
+  }
+
+  if git push origin HEAD:main 2>/tmp/land-push-err.$$; then
+    rm -f /tmp/land-push-err.$$
+    break
+  fi
+  PUSH_ERR="$(cat /tmp/land-push-err.$$ 2>/dev/null || true)"
+  rm -f /tmp/land-push-err.$$
+  if [ "$i" -ge "$ATTEMPTS" ]; then
+    echo "REFUSING: push still rejected after $ATTEMPTS attempts:" >&2
+    echo "$PUSH_ERR" | sed 's/^/    /' >&2
+    echo "Your commit is safe on this branch. Something is landing very fast right" >&2
+    echo "now, or the remote genuinely refused it — check by hand." >&2
+    exit 1
+  fi
+  echo "==> push rejected (someone else landed first) — re-fetching and retrying"
+  git fetch --quiet origin
+  i=$((i + 1))
+done
 echo "LANDED: $SUBJECT"
+
+# ------------------------------------------------------------------ self-clean
+# Only ever remove a clone begin.sh actually made, under its own directory —
+# never the shared OneDrive checkout, and never anything land.sh is run from
+# outside that convention.
+case "$CLONE_ROOT" in
+  "$HOME"/.claude/msh-work/*)
+    cd /tmp
+    rm -rf "$CLONE_ROOT"
+    echo "==> clone cleaned up ($CLONE_ROOT)"
+    ;;
+esac

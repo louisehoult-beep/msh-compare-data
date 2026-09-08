@@ -235,12 +235,10 @@ reverted by the next weekly refresh, because a generated file always wins.
 
 Draft each trust as its own JSON file, merge, then gate. **A push to this repo
 is a live publish** (root rule 13), so `verify.py` must exit 0 first, and the
-`pre-push` hook runs it again. **Never use a worktree** — Lou retired them
-03/09/2026 after finding several abandoned. Claim the shared checkout with
-`./session-lock.sh claim "<what you're doing>"` before editing, work in the
-checkout directly, and release with `./session-lock.sh release` when done; if
-the lock is held, wait or ask, don't work around it. `land.sh` itself also
-refuses to land over a different live session's claim. Expect the first push
-to be rejected if a peer pushes mid-operation; re-fetch, replay, re-gate, push
-again. Never force. Full method: `msh-compare-data-session-lock.md` in this
-folder.
+`pre-push` hook runs it again. Start with `./begin.sh "<what you're doing>"` — it
+hands you your own throwaway clone in under a second, so there is no shared
+checkout to claim, wait for, or work around. `cd` there, edit, then
+`./land.sh "subject" path [path...]`, which gates, commits, rebases onto
+`origin/main`, pushes (retrying itself if a peer pushed first), and deletes the
+clone once it has landed. Never force. Full method:
+`Process flows for all brands/msh-compare-data-throwaway-clones.md` in Cowork-OS.

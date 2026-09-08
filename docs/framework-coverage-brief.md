@@ -87,11 +87,11 @@ STARTED (partial coverage); the rest are not started.**
 - **A slice is not a range.** If a crawl hits a page cap or time budget, say so plainly
   (supplier, how much of the declared total was read) rather than letting it read as complete.
 - **Gate before publish.** Run `python3 verify.py` and it must exit 0 before you commit.
-- **Claim the session lock before editing, release it after landing.** From the repo root:
-  `./session-lock.sh claim "framework-coverage-<short-name>"` before you touch any file,
-  `./session-lock.sh release` after you land. If it's held by someone else, wait — do not
-  force it (`--wait` waits up to 10 minutes by default).
-- **Land with `./land.sh "subject" <paths>`**, naming only the files you actually changed.
+- **Start with `./begin.sh "framework-coverage-<short-name>"`**, which hands you your own
+  throwaway clone (prints its path) — edit there, never in the shared checkout.
+- **Land with `./land.sh "subject" <paths>`** from inside that clone, naming only the files
+  you actually changed. It gates, commits, rebases and pushes for you, retrying on its own
+  if a peer landed first, and deletes the clone once it has landed.
   If it reports a rejected push, follow its own recovery instructions (fetch, rebase, re-gate,
   push again) — never force push, never hand-resolve a generated JSON file's conflict by hand.
 - **Do not touch other suppliers' or frameworks' data** beyond the one framework you picked

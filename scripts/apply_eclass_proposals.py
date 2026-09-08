@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Apply two queued changes to the category data. Written 07/09/2026 while the
-shared checkout was locked by another session; safe to run once it is free.
+"""Apply two queued changes to the category data. Written 07/09/2026.
 
-    ./session-lock.sh claim "apply-eclass-proposals"
+    ./begin.sh "apply-eclass-proposals"                   # gives you a clone, cd into it
     python3 scripts/apply_eclass_proposals.py            # dry run, prints only
     python3 scripts/apply_eclass_proposals.py --write
     python3 scripts/stamp_notice.py
