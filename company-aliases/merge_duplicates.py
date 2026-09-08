@@ -409,7 +409,11 @@ MERGES_APPLIED_2026_08_25C = [
      "Lou's explicit instruction, 25/08/2026."),
 ]
 
-MERGES = [
+# ALREADY APPLIED (confirmed live in the seed - "Kimal PLC Stock" now resolves as
+# an alias of "Kimal PLC" in company-alias-registry.json - 08/09/2026, moved here
+# from MERGES where it was left behind after being applied, the same stale-entry
+# trap the 21/08 Mediq/Bunzl fold and the 25/08 BD fold both hit).
+MERGES_APPLIED_2026_08_27 = [
     ("Kimal PLC", ["Kimal PLC Stock"], "00827857",
      "One company, a depot/stock qualifier appended to the name - the same shape as the "
      "already-applied BD Wokingham/Oxford and Mediq 'Ex Bunzl Hea' folds. 'Kimal PLC "
@@ -423,6 +427,8 @@ MERGES = [
      "which stays a separate, held record - a different business, not a channel variant. "
      "Lou approved merging both this and the (already-applied) Mediq pair on 18/08/2026."),
 ]
+
+MERGES = []
 
 # Same company number, deliberately NOT merged. Each needs a decision that is
 # Lou's or the data owner's, not a script's.
@@ -699,7 +705,7 @@ def main(argv):
             + MERGES_APPLIED_2026_08_21 + MERGES_APPLIED_2026_08_21B
             + MERGES_APPLIED_2026_08_21C + MERGES_APPLIED_2026_08_24
             + MERGES_APPLIED_2026_08_25 + MERGES_APPLIED_2026_08_25B
-            + MERGES_APPLIED_2026_08_25C):
+            + MERGES_APPLIED_2026_08_25C + MERGES_APPLIED_2026_08_27):
         keep = by_name.get(keep_name)
         if keep is None:
             undone.append("%s: survivor missing" % keep_name)
