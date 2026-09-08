@@ -1,0 +1,468 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "interventional-radiology",
+ "label": "Interventional Radiology",
+ "defined": true,
+ "generated": "2026-09-08",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-08T11:13:54+00:00",
+  "openTenders": "08/09/2026",
+  "drugTariff": "2026-09-08"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(angiography|contrast injectors)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. The framework this speciality actually buys on is not counted below. NHS Supply Chain's Interventional Cardiology, Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm Management and Electrophysiology agreement (2021/S 000-017565), whose Lot 1 carries 52 of its 67 suppliers, publishes a supplier count on its brief but no list of names, so the Hub's framework dataset records it as unparsed and its suppliers cannot be named here. Operating and Mobile Interventional Radiology Tables is missing for the same kind of reason: its brief states 12 suppliers and only 11 could be read, and a list that does not match the page is not published. Two further routes have no NHS Supply Chain framework page at all: Syringes, Needles and Associated Products (2026/S 000-002484), which took this patch's 182 biopsy product codes on 1 July 2026, and Scotland's NP68424, which has 18 lots and 27 suppliers of its own. What follows is therefore the contrast and angio-suite end of this speciality, which is what the framework record holds, plus the award trail for the rest. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from this market. The page's Buying route section sets out all four routes with their expiry dates.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. The framework this speciality actually buys on is not counted below. NHS Supply Chain's Interventional Cardiology, Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm Management and Electrophysiology agreement (2021/S 000-017565), whose Lot 1 carries 52 of its 67 suppliers, publishes a supplier count on its brief but no list of names, so the Hub's framework dataset records it as unparsed and its suppliers cannot be named here. Operating and Mobile Interventional Radiology Tables is missing for the same kind of reason: its brief states 12 suppliers and only 11 could be read, and a list that does not match the page is not published. Two further routes have no NHS Supply Chain framework page at all: Syringes, Needles and Associated Products (2026/S 000-002484), which took this patch's 182 biopsy product codes on 1 July 2026, and Scotland's NP68424, which has 18 lots and 27 suppliers of its own. What follows is therefore the contrast and angio-suite end of this speciality, which is what the framework record holds, plus the award trail for the rest. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from this market. The page's Buying route section sets out all four routes with their expiry dates.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(interventional|embolis\\w*|emboliz\\w*|embolic\\w*|chemoembol\\w*|radioembol\\w*|angioplast\\w*|atherectom\\w*|thrombectom\\w*|thrombolys\\w*|contrast|lipiodol|percutaneous|nephrostom\\w*|endovascular|tumour ablation|tumor ablation|microwave ablation|cryoablat\\w*|image[- ]?guided|ct[- ]guided|ultrasound[- ]guided|needles including biopsy|uterine artery|prostate artery|genicular artery|vena cava filter|hybrid theatre)\\b/i and does not match /\\b(anti[- ]?embol\\w*|implantable cardiac|cath ?lab|heart pump\\w*)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33696800 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 2,
+  "suppliers": 19,
+  "suppliersUnresolved": 2,
+  "awardsShown": 20,
+  "awardsMatched": 20,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/angiography-hybrid-theatres-capital-equipment/",
+   "reference": "2025/S 000-077456",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "9 December 2025",
+   "ends": "8 December 2027",
+   "supplierCount": 14,
+   "supplierSource": "count verified against the page's own stated total (14)",
+   "suppliers": [
+    "Agito Medical A/S",
+    "AmRay UK",
+    "APC Cardiovascular Ltd",
+    "Canon Medical Systems",
+    "Compleo Health Limited",
+    "GE Medical Systems Ltd",
+    "Genmed.Me Ltd",
+    "InHealth Ltd",
+    "Medtronic Limited",
+    "Philips Electronics UK Limited",
+    "Regent’s Park Healthcare",
+    "Siemens Healthcare Limited",
+    "United Imaging Health Ltd",
+    "WSR Medical Solutions Ltd"
+   ],
+   "delisted": [
+    "Althea UK & Ireland Ltd",
+    "Medecon Healthcare UK Ltd"
+   ]
+  },
+  {
+   "name": "Contrast Injectors, Consumables and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/contrast-injectors-consumables-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 5,
+   "supplierSource": "no stated count on the page; 5 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Bayer Public Limited Company",
+    "Bracco UK Limited",
+    "Guerbet Laboratories Limited",
+    "Medical Imaging Systems Limited (MIS Healthcare)",
+    "Synapse Medical"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Agito Medical A/S",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "AmRay UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "APC Cardiovascular Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Bayer",
+   "resolved": true,
+   "variants": [
+    "Bayer Public Limited Company"
+   ],
+   "frameworks": [
+    "Contrast Injectors, Consumables and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Bracco UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Contrast Injectors, Consumables and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Canon Medical Systems",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Compleo Health Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "GE HealthCare",
+   "resolved": true,
+   "variants": [
+    "GE Medical Systems Ltd"
+   ],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Genmed.Me Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Guerbet Laboratories Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Contrast Injectors, Consumables and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "InHealth Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Medical Imaging Systems (MIS Healthcare)",
+   "resolved": true,
+   "variants": [
+    "Medical Imaging Systems Limited (MIS Healthcare)"
+   ],
+   "frameworks": [
+    "Contrast Injectors, Consumables and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited"
+   ],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Philips",
+   "resolved": true,
+   "variants": [
+    "Philips Electronics UK Limited"
+   ],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Regent’s Park Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Siemens Healthineers",
+   "resolved": true,
+   "variants": [
+    "Siemens Healthcare Limited"
+   ],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "resolved": true,
+   "variants": [
+    "Synapse Medical"
+   ],
+   "frameworks": [
+    "Contrast Injectors, Consumables and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "United Imaging Health Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "WSR Medical Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Contrast Media including Injectors and Associated Products",
+   "buyer": "NHS Shared Business Services Limited",
+   "supplier": null,
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078401-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33696800"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "SUPPLY OF CONTRAST MEDIA INJECTION CONSUMABLES (SINGLE USE TUBING AND PUMP HOSE FOR MULTIDOSE SYNAPSE MEDICAL INJECTORS)",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Sisk Healthcare T/A Synapse Medical",
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076922-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Interventional Radiology Products [ 5328098 ]",
+   "buyer": "Regional Business Services Organisation Procurement and Logistics Service",
+   "supplier": "ROCKET MEDICAL PLC, Stryker UK Ltd, Acandis GmbH, MERIT MEDICAL UK LIMITED, It's",
+   "date": "2025-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/060548-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Interventional Neuro Radiology and Thrombectomy Consumables",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Abbott Medical U.K. Ltd, Acandis GmbH, Cordis Medical UK Limited, Microvention U",
+   "date": "2025-07-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/043625-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Syringes, Needles including Biopsy and Associated Products",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "",
+   "date": "2025-06-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/031260-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP68424 Interventional Radiology",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Becton Dickinson U.K. Limited, COOK (UK) LTD, GTA Medical Limited, INOMED HEALTH",
+   "date": "2025-02-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/007421-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "CT guidance technology for percutaneous instrument insertion and ablation volume validation.",
+   "buyer": "Sheffield Teaching Hospitals NHS Foundation Trust",
+   "supplier": "CASCINATION AG",
+   "date": "2025-02-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004739-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Operating and Mobile Interventional Radiology Tables, Related Accessories and Services",
+   "buyer": "NHS Supply Chain Operated by Supply Chain Coordination Ltd (SCCL)",
+   "supplier": "A.C. Cossor & Son (Surgical) Limited, Bender UK Limited, Brandon Medical Company",
+   "date": "2024-10-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/035291-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Contrast Media Agents",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Bracco UK Ltd, GE Healthcare LTD, Lamepro",
+   "date": "2024-06-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/019609-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Framework for the Supply of X-Ray Contrast Media and Barium Products",
+   "buyer": "UNIVERSITY HOSPITALS OF DERBY & BURTON NHS FOUNDATION TRUST",
+   "supplier": "Bayer Plc",
+   "date": "2023-12-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/036646-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Contrast Media",
+   "buyer": "Velindre NHS Trust, NHS Shared Services Partnership — Procurement Services (on b",
+   "supplier": "Bayer Plc",
+   "date": "2023-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028591-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP35418 Contrast Media Agents",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Guerbet Laboratories Ltd, Bracco UK Ltd",
+   "date": "2023-06-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016382-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "CLI-OJEU-46286 Interventional Cardiology, Radiology, Endoscopy and Surgical Urology Consumables",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Acrostak-UK Ltd, APC Cardiovascular Ltd, Aquilant Ltd, B. Braun Medical Limited,",
+   "date": "2022-12-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/035111-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "INTERVENTIONAL CARDIOLOGY, INTERVENTIONAL RADIOLOGY AND INTERVENTIONAL NEURORADIOLOGY, CARDIAC RHYTHM MANAGEMENT AND ELE",
+   "buyer": "NHS Supply Chain Operated by Health Solutions Team Limited acting as agent of Su",
+   "supplier": "Abbott Medical U.K.Ltd, Acrostak-UK Ltd, Anser Medical Ltd, APC Cardiovascular L",
+   "date": "2022-11-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/033148-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Procurement of LIPIODOL ULTRA FLUID 211273 1 x 10mL Vial Pack from Guerbet Ltd",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Guerbet UK",
+   "date": "2022-06-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016342-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Contrast Media and Barium Products",
+   "buyer": "East Of England NHS Collaborative Hub c/o West Suffolk NHS Foundation Trust",
+   "supplier": "Bayer PLC",
+   "date": "2021-11-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027617-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Framework for the Provision of X-Ray Contrast and Scan Media",
+   "buyer": "NHS London Procurement Partnership (Hosted by Guy's and St Thomas' NHS FT)",
+   "supplier": "Bayer Ltd",
+   "date": "2021-11-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027440-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Interventional Radiology Products",
+   "buyer": "Business Services Organisation, Procurement and Logistics Service, on behalf of ",
+   "supplier": "Selamedical",
+   "date": "2021-09-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023193-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "INR and Thrombectomy Consumables",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Johnson and Johnson, Microvention UK, Neurologic Europe, Penumbra Interventional",
+   "date": "2021-04-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/008710-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "HEY/17/062 CONTRAST MEDIA",
+   "buyer": "Hull University Teaching Hospitals NHS Trust",
+   "supplier": "Bracco UK, GE Medical Systems Limited",
+   "date": "2021-01-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001712-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}

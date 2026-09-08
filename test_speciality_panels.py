@@ -24,6 +24,7 @@ THEATRES = "theatres-and-surgical"
 ORTHO = "orthopaedics-and-trauma"
 PLASTICS = "plastics-burns-and-reconstruction"
 FRAILTY = "frailty-and-older-people"
+IR = "interventional-radiology"
 fails = []
 
 
@@ -1054,6 +1055,160 @@ for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
 check("licence notice carried", bool(fr.get("_notice", {}).get("owner")))
 fkb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", FRAILTY + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % fkb, fkb < 200)
+
+
+print("\n" + "=" * 72)
+print("INTERVENTIONAL RADIOLOGY (page 2842)")
+print("=" * 72)
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), IR],
+               check=True, capture_output=True)
+ir = load_panel(IR)
+irx = B.compile_rule(B.SPECIALITY_RULES[IR])
+irtitles = " || ".join((a.get("title") or "") for a in ir["awards"]).lower()
+
+print("\nFALSE POSITIVES — every one matched a real row and was wrong")
+# "Anti-Embolism Stockings" is the one that matters most: the natural "embolis\w*"
+# form of the include matches the word EMBOLISM, and VTE prophylaxis stockings are
+# the opposite of this speciality's business. Without the guard, NHS Wales'
+# compression stocking contract arrives on the IR page.
+for other in [
+        "Anti-Embolism Stockings",
+        "Interventional Implantable Cardiac Devices and Accessories 5643930",
+        "Interventional and Diagnostic Cardiac Cath Lab Consumables [3935547]",
+        "Percutaneous Catheter Delivered Heart Pumps",
+]:
+    check("excluded: %s" % other[:52], not B.match_title(irx, other))
+    check("absent from the panel: %s" % other[:52], other.lower() not in irtitles)
+
+# Terms deliberately not claimed, each tried and read. If a future edit widens the
+# include to any of them, these fail before the panel ships.
+for other in [
+        "Breast Biopsy Needle NPM",
+        "National Framework Agreement for Transperineal Prostate Biopsy System",
+        "Endometrial Ablation Devices and Uterine Tissue Removal Systems",
+        "Prostatic Ablation Devices",
+        "Oncology Ablation Consumables",
+        "Cath Labs and Cardiology Stents",
+        "Memokath stents for BCH Urology service",
+        "Purchase of Fluoroscopy Equipment",
+        "Suction Consumables, Wound Drainage, Autologous Blood Systems and Related Accessories",
+        "4183924 External Ventricular Drainage (EVD)",
+        "WSFT - Capital Projects - CCTV Drainage Survey for New Hospital Development",
+        "Update of ONYX imaging platform and existing hardware for Public Health Wales",
+        "Purchase of replacement coil for Logiq E10S",
+        "Auto-injectors for PET-CT Service",
+        "Contract for the supply of Duodote autoinjectors",
+]:
+    check("not claimed: %s" % other[:52], not B.match_title(irx, other))
+
+print("\nTRUE POSITIVES — awards that must be on this patch")
+for good in ["interventional radiology products",
+             "np68424 interventional radiology",
+             "contrast media",
+             "lipiodol",
+             "percutaneous instrument insertion"]:
+    check("present: %s" % good, good in irtitles)
+# The headline framework award and the July 2026 biopsy move, both named on the
+# page's own Buying route section.
+check("the NHS Supply Chain IC/IR/INR framework award is on the panel",
+      "interventional neuroradiology" in irtitles)
+check("the framework the biopsy codes moved to on 01/07/2026 is on the panel",
+      "needles including biopsy" in irtitles)
+
+print("\nSCOPE DECISION, TESTED SO IT CANNOT DRIFT SILENTLY")
+# INR is admitted because the page publishes it (a section headed "Thrombectomy and
+# thrombolysis — peripheral and neurovascular", and Lot 2 with its 16 suppliers).
+# The exclusion list must never grow a neuroradiology pattern: NHS Supply Chain's
+# own framework title carries the word NEURORADIOLOGY, so excluding it would drop
+# this patch's headline framework award — the same trap the vascular rule records.
+check("the two Scottish INR awards are admitted",
+      "inr and thrombectomy consumables" in irtitles
+      and "interventional neuro radiology and thrombectomy" in irtitles)
+check("no neuroradiology exclusion, which would drop the headline framework",
+      "neuroradiolog" not in B.SPECIALITY_RULES[IR]["exclude"].lower())
+
+print("\nFRAMEWORKS")
+irnames = [f["name"] for f in ir["frameworks"]]
+check("exactly the two parsable frameworks on this patch", len(irnames) == 2,
+      "got %r" % irnames)
+for want in ["Contrast Injectors, Consumables and Associated Options and Related Services",
+             "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"]:
+    check("framework present: %s" % want[:48], want in irnames)
+# Reference 2021/S 000-007768 is shared by eleven imaging briefs. Only the contrast
+# injectors one is this speciality; the other ten are Radiology and Imaging's.
+for other in ["CT Scanners and Associated Options and Related Services",
+              "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
+              "Fluoroscopy and Associated Options and Related Services",
+              "Mammography Imaging Systems and Associated Options and Related Services",
+              "Ultrasound Scanners and Associated Options and Related Services",
+              "Nuclear Medicine Imaging and Associated Options and Related Services",
+              "Static X-Ray and Associated Options and Related Services",
+              "Mobile X-Ray Systems and Associated Option and Related Services",
+              "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"]:
+    check("not claimed from a shared reference: %s" % other[:44], other not in irnames)
+check("every framework carries an end date",
+      all(f.get("ends") for f in ir["frameworks"]))
+
+print("\nSUPPLIERS ARE READ OFF THE FRAMEWORK, NEVER GUESSED")
+irsup = ir["suppliers"]
+irnamed = {s["name"] for s in irsup}
+check("every named supplier is on one of this speciality's frameworks",
+      all(set(s["frameworks"]) <= set(irnames) for s in irsup))
+# The page names the five contrast injector suppliers off the National Product
+# Matrix dated 10 March 2026. All five must be here, under whatever name the alias
+# registry resolves them to.
+allnames = " || ".join(irnamed | {v for s in irsup for v in s["variants"]}).lower()
+for want in ["bayer", "bracco", "guerbet", "mis healthcare", "synapse medical"]:
+    check("contrast injector supplier present: %s" % want, want in allnames)
+check("an unresolved name is flagged, never silently merged",
+      all(("resolved" in s) for s in irsup))
+check("no supplier appears twice under two spellings",
+      len(irnamed) == len(irsup))
+
+print("\nCPV CORROBORATES, IT NEVER ADMITS")
+# 33696800 is X-ray contrast media and is the one code in this data specific to
+# this patch. 33110000 (imaging equipment) and 33140000 (medical consumables) sit
+# on the other matching notice and corroborate everything, so neither is claimed.
+check("the narrow contrast-media code is the one claimed",
+      B.SPECIALITY_RULES[IR].get("cpv") == ("33696800",))
+for generic in ("33110000", "33140000"):
+    check("the catch-all %s is not claimed" % generic,
+          generic not in (B.SPECIALITY_RULES[IR].get("cpv") or ()))
+check("no award reached the panel on CPV alone",
+      all(B.match_title(irx, a["title"]) for a in ir["awards"] if a.get("cpvCorroborates")))
+
+print("\nNO DRUG TARIFF, SAID HONESTLY (rule 14)")
+# Part IX reimburses dressings and hosiery, incontinence and stoma appliances.
+# Nothing an IR suite buys is listed there and the page claims no tariff presence.
+check("no tariff panel is published for this patch", ir.get("drugTariff") is None)
+check("the tariff rule says why rather than going quiet",
+      "No Drug Tariff part applies" in (ir.get("rules") or {}).get("drugTariff", ""))
+
+print("\nTHE COVERAGE LIMIT IS PUBLISHED, NOT HIDDEN (rule 14)")
+# This speciality's own framework is in frameworks.json's `unparsed` list, so its
+# 67 suppliers cannot be counted. A panel that showed 19 suppliers without saying
+# so would read as the IR supplier market, which it is not.
+for k in ("frameworks", "suppliers"):
+    check("coverage limit stated on the %s rule" % k,
+          "COVERAGE LIMIT" in (ir.get("rules") or {}).get(k, ""))
+irfw = (ir.get("rules") or {}).get("frameworks", "")
+check("the unparsable headline framework is named",
+      "2021/S 000-017565" in irfw)
+check("the two routes with no NHS Supply Chain page are named",
+      "2026/S 000-002484" in irfw and "NP68424" in irfw)
+
+print("\nAN EMPTY PANEL IS AN HONEST ANSWER, NOT A REASON TO WIDEN (rule 14)")
+check("no open tender on this patch today, and none invented",
+      ir["openTenders"] == [])
+check("the open-tender rule says an empty list means none open",
+      "empty list means" in (ir.get("rules") or {}).get("openTenders", ""))
+
+print("\nTHE RULE TRAVELS WITH THE DATA (rule 14a)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((ir.get("rules") or {}).get(k)))
+check("licence notice carried", bool(ir.get("_notice", {}).get("owner")))
+irkb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", IR + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % irkb, irkb < 200)
 
 
 print()

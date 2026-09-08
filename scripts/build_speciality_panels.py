@@ -918,6 +918,202 @@ SPECIALITY_RULES = {
             "absence from this market."
         ),
     },
+    # PAGE 2842. Scope, in the page's own words: "The IR suite: embolisation,
+    # endovascular work, tumour ablation, image-guided biopsy and drainage, and the
+    # contrast media and injector range." The page publishes its four buying routes
+    # explicitly, every one read at source on 08/09/2026, and this rule is written to
+    # them and no wider.
+    "interventional-radiology": {
+        "label": "Interventional Radiology",
+        # TWO frameworks, and the reason there are only two is the whole story of this
+        # patch. The framework this speciality actually buys on — NHS Supply Chain
+        # 2021/S 000-017565, Interventional Cardiology, Interventional Radiology and
+        # Interventional Neuroradiology, Cardiac Rhythm Management and Electrophysiology
+        # — IS in frameworks.json, but in its `unparsed` list, not its `frameworks`
+        # list, with the recorded reason "the page states its supplier count but
+        # publishes no list of names". build_frameworks reads only the parsed list, so
+        # its 67 suppliers cannot be counted here. The same is true of "Operating and
+        # Mobile Interventional Radiology Tables", refused because the brief states 12
+        # suppliers and only 11 could be parsed. Neither is silently dropped: both are
+        # named in the coverage note below.
+        #
+        #   Contrast Injectors, Consumables and Associated Options and Related Services
+        #     (2021/S 000-007768, to 31 March 2028) is buying route 2 on the page, and
+        #     its five parsed suppliers — Bayer, Bracco, Guerbet, MIS Healthcare and
+        #     Synapse Medical — are exactly the five the page names off the National
+        #     Product Matrix dated 10 March 2026. That agreement is corroborated, not
+        #     assumed.
+        #   Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and
+        #     Services (2025/S 000-077456) is the angio suite capital route, which is
+        #     the room this speciality works in. It is SHARED with the vascular surgery
+        #     and PAD page, which claims it too; that sharing is deliberate and correct,
+        #     the same way Pressure Area Care is shared between wound care and patient
+        #     handling. A hybrid theatre really is bought by both.
+        #
+        # NOT MATCHED, deliberately, and every one was read. Reference 2021/S 000-007768
+        # is carried by ELEVEN separate NHS Supply Chain briefs — CT, MRI, ultrasound,
+        # mammography, nuclear medicine, fluoroscopy, static and mobile X-ray among them
+        # — and the page says so in terms: "The reference identifies a category, not an
+        # agreement." Only the contrast injectors brief is this speciality's. The other
+        # ten are the Radiology and Imaging page's, and matching on the shared reference
+        # or on the word "imaging" would republish that page's whole supplier list under
+        # an IR heading. Fluoroscopy is left out for the same reason: it is the general
+        # screening-room route, not the IR suite. Endoscopy, Endourology and Oncology
+        # Ablation Consumables is the endoscopy page's; its ablation is endoscopic, not
+        # percutaneous.
+        "frameworks": r"\b(angiography|contrast injectors)\b",
+        # DERIVED, not guessed. Every pattern below was run over all 1,972 rows of
+        # tender-history.json and all 1,342 of framework-awards.json — 3,314 titles —
+        # and every hit was read one by one before this list was fixed.
+        #
+        # NOT INCLUDED, deliberately, and each was tried and read:
+        #   bare "ablation"  -> ten rows and at most one is this speciality. The other
+        #                       nine are endoscopic oncology ablation (twice), prostatic
+        #                       ablation, uterine and endometrial ablation (twice),
+        #                       spinal-cord-stimulator radiofrequency ablation, a bare
+        #                       "RFA Ablation" that could be cardiac or hepatic, an
+        #                       MRI-guided laser ablation system, and a radiofrequency
+        #                       ablation device with no speciality in the title. Gynae,
+        #                       urology, endoscopy and pain. The qualified forms below
+        #                       (tumour, microwave, cryo) are used instead and the one
+        #                       true row, Sheffield's CT-guided percutaneous instrument
+        #                       insertion, reaches the panel on "percutaneous".
+        #   bare "biopsy"    -> six rows and five are breast or prostate: a breast biopsy
+        #                       needle, a vacuum-assisted biopsy purchase, two Mammotome
+        #                       Revolve vacuum biopsy consumable contracts and a
+        #                       transperineal prostate biopsy system. The sixth is the
+        #                       NHS Supply Chain framework this patch's biopsy codes
+        #                       moved to on 01/07/2026, and it is matched by its own
+        #                       distinctive name instead (see "needles including biopsy"
+        #                       below). "biopsy needle" was tried too and buys nothing:
+        #                       its only hit is the breast one.
+        #   bare "drainage"  -> five rows, none of them this speciality: suction and
+        #                       wound drainage, urinary catheters and drainage bags
+        #                       twice, external ventricular drainage (neurosurgery) and
+        #                       a CCTV drainage survey for a hospital building site.
+        #                       "nephrostom" and "percutaneous" carry the real ground.
+        #   bare "stent",
+        #   "balloon"        -> nine stent rows and every one is coronary, urology or
+        #                       aortic-cardiac: PCI balloons and stents, Cath Labs and
+        #                       Cardiology Stents three times, cardiology drug-eluting
+        #                       stents, Memokath urology stents twice, an Exstent
+        #                       external aortic root support and a Jotec stent graft.
+        #                       "balloon" alone matches nothing at all. The vascular
+        #                       surgery rule refused both terms for the same reason.
+        #   bare "angiograph"-> matches no award title in this data at all, and would in
+        #                       a future refresh admit CT and MR angiography, which are
+        #                       diagnostic imaging and the Radiology and Imaging page's.
+        #                       The framework pattern above still reaches the angio suite
+        #                       capital route by name, which is the honest way to it.
+        #   bare "injector"  -> ten rows and six are not this patch: PET-CT
+        #                       auto-injectors, a PET dose dispenser, Duodote nerve-agent
+        #                       autoinjectors, and adrenaline auto-injectors for schools.
+        #                       "contrast" reaches every genuine contrast-injector row
+        #                       without it.
+        #   bare "onyx"      -> Onyx is a Medtronic liquid embolic and would look like a
+        #                       free true positive. Its only hit here is "Update of ONYX
+        #                       imaging platform and existing hardware for Public Health
+        #                       Wales", a software contract. Declined (rule 14).
+        #   bare "coil"      -> its only hit is "Purchase of replacement coil for Logiq
+        #                       E10S", an ultrasound probe coil. "embolisation coil"
+        #                       would be safe and finds nothing, so nothing is claimed.
+        #   "fluoroscop"     -> five rows, all diagnostic imaging capital and enabling
+        #                       works (a fluoroscopy unit, a fluoroscopy suite, hybrid
+        #                       room X-ray and fluoroscopy twice, an Isle of Wight
+        #                       purchase). The Radiology and Imaging page's ground.
+        #
+        # SCOPE DECISION, STATED SO IT CAN BE JUDGED: interventional neuroradiology IS
+        # admitted here. The page carries a section headed "Thrombectomy and thrombolysis
+        # — peripheral and neurovascular", names Lot 2 Interventional Neuroradiology and
+        # its 16 suppliers, and says outright that "selling into INR is a different
+        # account". It is adjacent, the page publishes it, and NHS Supply Chain buys it
+        # on the same framework, so the two Scottish INR rows below belong on this panel.
+        # A reader who disagrees can see the rule and discount them.
+        #
+        # ONE ADMITTED ROW A READER SHOULD SEE THE REASONING ON: "CLI-OJEU-46286
+        # Interventional Cardiology, Radiology, Endoscopy and Surgical Urology
+        # Consumables", NHS Wales Shared Services. It is a mixed basket and three of its
+        # four named specialities are other pages'. It is kept, unlike the mixed pharmacy
+        # baskets the theatres and orthopaedics rules reject, because the basket is the
+        # SAME product class — interventional consumables — and interventional radiology
+        # is named in it as a buying category in its own right. It is a route this patch
+        # is genuinely bought on, and it is not implant spend for this speciality alone.
+        #
+        # TERMS THAT FIND NOTHING TODAY AND ARE KEPT ANYWAY: embolisation, angioplasty,
+        # atherectomy, thrombolysis, nephrostomy, endovascular, tumour/microwave/cryo
+        # ablation, image-guided, uterine/prostate/genicular artery, vena cava filter.
+        # None of them can mean anything but this speciality, so they cost nothing and
+        # will catch the next refresh. Not one row on the panel today reaches it through
+        # them, and that is stated rather than left to look like coverage.
+        "include": (
+            r"\b(interventional|"
+            r"embolis\w*|emboliz\w*|embolic\w*|chemoembol\w*|radioembol\w*|"
+            r"angioplast\w*|atherectom\w*|thrombectom\w*|thrombolys\w*|"
+            r"contrast|lipiodol|percutaneous|nephrostom\w*|endovascular|"
+            r"tumour ablation|tumor ablation|microwave ablation|cryoablat\w*|"
+            r"image[- ]?guided|ct[- ]guided|ultrasound[- ]guided|"
+            r"needles including biopsy|"
+            r"uterine artery|prostate artery|genicular artery|"
+            r"vena cava filter|hybrid theatre)\b"
+        ),
+        # Four patterns. Every one matched a real row, was read, and was rejected:
+        #   anti-embolism    -> "Anti-Embolism Stockings", NHS Wales Shared Services.
+        #                       Graduated compression stockings for VTE prophylaxis,
+        #                       caught by the natural "embolis\w*" form on the word
+        #                       EMBOLISM. Preventing an embolism is the opposite of
+        #                       causing one on purpose, which is what this speciality
+        #                       does, and "anti-embolic stockings" is the other common
+        #                       spelling, so the guard covers both. This is the single
+        #                       reason the embolisation terms need one at all.
+        #   implantable
+        #   cardiac          -> "Interventional Implantable Cardiac Devices and
+        #                       Accessories 5643930", Regional Business Services
+        #                       Organisation. Pacemakers and ICDs. Cardiac rhythm
+        #                       management shares the NHS Supply Chain framework with
+        #                       this patch and is not this patch.
+        #   cath lab         -> "Interventional and Diagnostic Cardiac Cath Lab
+        #                       Consumables [3935547]", Procurement and Logistics
+        #                       Service. Interventional cardiology.
+        #   heart pump       -> "Percutaneous Catheter Delivered Heart Pumps", NHS
+        #                       Golden Jubilee, twice. Impella-class mechanical
+        #                       circulatory support, caught on "percutaneous". Cardiac
+        #                       critical care, not interventional radiology.
+        "exclude": r"\b(anti[- ]?embol\w*|implantable cardiac|cath ?lab|heart pump\w*)\b",
+        # ONE CPV family, and it is the only one in this data specific to this patch:
+        # 33696800, X-ray contrast media, carried by "Contrast Media including Injectors
+        # and Associated Products". The only other matching notice that carries CPV at
+        # all carries 33110000 (imaging equipment) and 33140000 (medical consumables),
+        # which corroborate everything and therefore nothing, so neither is claimed.
+        # Corroboration only: the title still has to match.
+        "cpv": ("33696800",),
+        # NO DRUG TARIFF PART. Part IX reimburses dressings and elastic hosiery (IXA),
+        # incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery
+        # (IXR), all community prescription routes. Nothing an interventional radiology
+        # suite buys — endografts, embolics, ablation kit, biopsy and drainage sets,
+        # contrast media or injectors — is listed there, and the page claims no tariff
+        # presence. The panel carries none rather than reaching for the nearest part.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. The framework this speciality "
+            "actually buys on is not counted below. NHS Supply Chain's Interventional "
+            "Cardiology, Interventional Radiology and Interventional Neuroradiology, "
+            "Cardiac Rhythm Management and Electrophysiology agreement (2021/S "
+            "000-017565), whose Lot 1 carries 52 of its 67 suppliers, publishes a "
+            "supplier count on its brief but no list of names, so the Hub's framework "
+            "dataset records it as unparsed and its suppliers cannot be named here. "
+            "Operating and Mobile Interventional Radiology Tables is missing for the "
+            "same kind of reason: its brief states 12 suppliers and only 11 could be "
+            "read, and a list that does not match the page is not published. Two "
+            "further routes have no NHS Supply Chain framework page at all: Syringes, "
+            "Needles and Associated Products (2026/S 000-002484), which took this "
+            "patch's 182 biopsy product codes on 1 July 2026, and Scotland's NP68424, "
+            "which has 18 lots and 27 suppliers of its own. What follows is therefore "
+            "the contrast and angio-suite end of this speciality, which is what the "
+            "framework record holds, plus the award trail for the rest. Being named on "
+            "a framework is not evidence of volume, and being absent from one is not "
+            "evidence of absence from this market. The page's Buying route section "
+            "sets out all four routes with their expiry dates."
+        ),
+    },
 }
 
 
