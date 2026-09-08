@@ -80,4 +80,14 @@ git -C "$MIRROR" fetch --quiet origin main:main
 mkdir -p "$WORK_ROOT"
 DEST="$WORK_ROOT/${SAFE_LABEL}-$(date +%Y%m%d-%H%M%S)-$$"
 git clone --quiet --local --shared "$MIRROR" "$DEST" -b main
+
+# CRITICAL: `git clone <local-path> <dest>` always points the clone's "origin"
+# at the local path it was cloned FROM — here, the local mirror — never at the
+# mirror's own origin. Left uncorrected, land.sh's "git push origin HEAD:main"
+# would push to the local mirror and report LANDED without ever reaching
+# GitHub: a silent no-op that never publishes, discovered 08/09/2026 testing
+# the very first real land through this script. Every clone's origin must
+# point at the real remote, not at the mirror it was cloned from.
+git -C "$DEST" remote set-url origin "$ORIGIN_URL"
+
 echo "$DEST"
