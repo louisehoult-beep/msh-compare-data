@@ -143,9 +143,18 @@ def wp_product_id_index(domain, ptype, deadline=None):
     return idx
 
 
-def wp_single_product(domain, name, id_index):
+def wp_single_product(domain, name, id_index, ptype="product"):
     """Fetch the ONE matching product record (by id, from the pre-built title
-    index) with embedded media. Returns (record-dict, None) or (None, why)."""
+    index) with embedded media. Returns (record-dict, None) or (None, why).
+
+    `ptype` is the rest_base wp_ptype() discovered and wp_product_id_index()
+    already listed against. It used to be hardcoded to "product" here while the
+    listing used the discovered one, so every site whose product post type is
+    named anything else answered HTTP 404 to the single-record fetch and the
+    whole supplier fell through to the sitemap route. Found 08/09/2026 on
+    BioSpectrum Ltd, whose type is "products-custom": all 19 products skipped
+    with "the site's WordPress API returned HTTP 404", so none of its mapped
+    products could publish for want of a source."""
     if id_index is None:
         return None, "the site's WordPress product listing could not be read"
     target = base.clean(name).lower()
@@ -153,7 +162,7 @@ def wp_single_product(domain, name, id_index):
     if not pid:
         return None, "no product titled exactly %r in the site's own WordPress product listing" % name
 
-    url = "https://%s/wp-json/wp/v2/product/%d?_embed=1" % (domain, pid)
+    url = "https://%s/wp-json/wp/v2/%s/%d?_embed=1" % (domain, ptype, pid)
     try:
         chosen, _ = base.get(url, as_json=True, timeout=20)
     except urllib.error.HTTPError as e:
@@ -489,12 +498,12 @@ def page_product_detail(url):
     }, None
 
 
-def capture_one(domain, name, id_index, deadline):
+def capture_one(domain, name, id_index, deadline, ptype="product"):
     """Try route A, then route B. Returns (entry-fields dict, None) or (None, why)."""
     reasons = []
     if id_index is not None:
         try:
-            rec, why = wp_single_product(domain, name, id_index)
+            rec, why = wp_single_product(domain, name, id_index, ptype)
         except Exception as e:
             rec, why = None, "WordPress single-product fetch failed (%s)" % str(e)[:70]
         if rec:
@@ -755,7 +764,7 @@ def main():
                 print("   -- (site time budget spent — remaining products skipped this run)", flush=True)
                 break
             pdeadline = min(deadline, time.time() + PRODUCT_BUDGET_S)
-            entry, why = capture_one(domain, name, id_index, pdeadline)
+            entry, why = capture_one(domain, name, id_index, pdeadline, ptype or "product")
             if not entry:
                 print("   -- %-40s skipped: %s" % (name[:40], (why or "")[:100]), flush=True)
                 skipped += 1

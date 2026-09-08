@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-02",
-  "differentiator.json published": 31825,
-  "differentiator.json held": 47195
+  "differentiator.json published": 32915,
+  "differentiator.json held": 47697
  },
  "counts": {
   "frameworks": 121,
@@ -25,10 +25,10 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 462,
-  "inScopeSuppliersNeedingCrawl": 537,
-  "inScopeSuppliersNeedingDomain": 477,
-  "suppliersRefused": 238,
-  "blockedFrameworks": 3
+  "inScopeSuppliersNeedingCrawl": 521,
+  "inScopeSuppliersNeedingDomain": 476,
+  "suppliersRefused": 239,
+  "blockedFrameworks": 4
  },
  "unresolvedSupplierNames": [
   [
@@ -1887,8 +1887,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "11 March 2028",
    "suppliersAwarded": 122,
-   "suppliersPublished": 24,
-   "coverage": 19.7,
+   "suppliersPublished": 29,
+   "coverage": 23.8,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -1898,32 +1898,12 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "AFOS",
-     "domain": "afosmedical.com"
-    },
-    {
      "supplier": "Agilent Technologies UK",
      "domain": null
     },
     {
-     "supplier": "Beckman Coulter",
-     "domain": "beckmancoulter.com"
-    },
-    {
-     "supplier": "LEEC",
-     "domain": "leec.co.uk"
-    },
-    {
      "supplier": "LTE Scientific Limited",
      "domain": "lte-scientific.co.uk"
-    },
-    {
-     "supplier": "Mast Group",
-     "domain": "mast-group.com"
-    },
-    {
-     "supplier": "Radiometer UK",
-     "domain": "radiometer.co.uk"
     },
     {
      "supplier": "Sychem",
@@ -2376,15 +2356,17 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "heldNeedingCategory": 8,
+    "heldNeedingCategory": 3,
     "crawlable": 2,
     "needDomain": 62
    },
    "published": [
     "Abbott Diagnostics",
+    "AFOS",
     "Alpha Laboratories",
     "Apacor",
     "Appleton Woods",
+    "Beckman Coulter",
     "BD \u2014 Becton, Dickinson",
     "bioM\u00e9rieux UK",
     "Cepheid",
@@ -2392,10 +2374,13 @@
     "Thermo Fisher Scientific UK",
     "Hologic UK",
     "Illumina UK",
+    "LEEC",
     "Leica Microsystems (UK)",
     "Thermo Fisher Scientific UK",
+    "Mast Group",
     "MedScience Distribution",
     "QIAGEN UK",
+    "Radiometer UK",
     "Roche Diagnostics UK",
     "Sarstedt Ltd",
     "Siemens Healthineers",
@@ -2416,13 +2401,8 @@
     "Pasante Healthcare"
    ],
    "heldOnly": [
-    "AFOS",
     "Agilent Technologies UK",
-    "Beckman Coulter",
-    "LEEC",
     "LTE Scientific Limited",
-    "Mast Group",
-    "Radiometer UK",
     "Sychem"
    ],
    "notCrawled": [
@@ -2513,7 +2493,7 @@
     "Williams Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 72,
+   "actionableTotal": 67,
    "blockedReason": null
   },
   {
@@ -2522,8 +2502,8 @@
    "category": "Medical Technology",
    "ends": "30 January 2028",
    "suppliersAwarded": 101,
-   "suppliersPublished": 18,
-   "coverage": 17.8,
+   "suppliersPublished": 20,
+   "coverage": 19.8,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -2532,10 +2512,6 @@
     "ortho"
    ],
    "crawlWorklist": [
-    {
-     "supplier": "Acumed Ltd",
-     "domain": "acumed.net"
-    },
     {
      "supplier": "Anetic Aid Ltd",
      "domain": "aneticaid.com"
@@ -2595,10 +2571,6 @@
     {
      "supplier": "Exactech",
      "domain": null
-    },
-    {
-     "supplier": "FH Ortho Ltd",
-     "domain": "fhortho.com"
     },
     {
      "supplier": "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
@@ -2897,7 +2869,7 @@
      "supplier": "Karl Storz UK",
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05"
+     "checked": "2026-09-08"
     },
     {
      "supplier": "Link Orthopaedics UK Ltd",
@@ -2933,17 +2905,19 @@
    ],
    "actionable": {
     "unresolvedNames": 4,
-    "heldNeedingCategory": 5,
-    "crawlable": 1,
+    "heldNeedingCategory": 4,
+    "crawlable": 0,
     "needDomain": 51
    },
    "published": [
+    "Acumed Ltd",
     "Anika Therapeutics Ltd",
     "Arthrex",
     "B. Braun Medical",
     "Biocomposites Ltd",
     "Conmed UK Ltd",
     "Corin",
+    "FH Ortho Ltd",
     "Heraeus Medical UK",
     "Joint Operations",
     "Judd Medical Ltd",
@@ -2964,7 +2938,6 @@
     "Sectra Limited"
    ],
    "heldOnly": [
-    "Acumed Ltd",
     "Anetic Aid Ltd",
     "Lindare Medical Ltd",
     "Macromed UK Ltd",
@@ -2982,7 +2955,6 @@
     "Eakin Surgical Limited",
     "Edge Medical Ltd",
     "Exactech",
-    "FH Ortho Ltd",
     "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
     "Greenbone Spa",
     "Hospital Innovations",
@@ -3050,7 +3022,7 @@
     "NuVasive UK Ltd",
     "Ortho Solutions UK Ltd"
    ],
-   "actionableTotal": 61,
+   "actionableTotal": 59,
    "blockedReason": null
   },
   {
@@ -3059,8 +3031,8 @@
    "category": "Rehabilitation and Community",
    "ends": "2 March 2027",
    "suppliersAwarded": 63,
-   "suppliersPublished": 14,
-   "coverage": 22.2,
+   "suppliersPublished": 15,
+   "coverage": 23.8,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3072,10 +3044,6 @@
     {
      "supplier": "Footlabs Ltd",
      "domain": "footlabs.co.uk"
-    },
-    {
-     "supplier": "Kettering Surgical Appliances",
-     "domain": "ketteringsurgical.co.uk"
     },
     {
      "supplier": "Medalin Limited",
@@ -3292,7 +3260,7 @@
    ],
    "actionable": {
     "unresolvedNames": 3,
-    "heldNeedingCategory": 4,
+    "heldNeedingCategory": 3,
     "crawlable": 1,
     "needDomain": 21
    },
@@ -3305,6 +3273,7 @@
     "Crest Medical Ltd",
     "DJO UK Ltd (Enovis)",
     "Essity UK Limited",
+    "Kettering Surgical Appliances",
     "MAG Orthotics Limited",
     "medi UK",
     "Performance Health International Limited",
@@ -3323,7 +3292,6 @@
    ],
    "heldOnly": [
     "Footlabs Ltd",
-    "Kettering Surgical Appliances",
     "Medalin Limited",
     "Promedics Orthopaedics Ltd"
    ],
@@ -3371,7 +3339,7 @@
     "Reed Medical Ltd",
     "Thesis Technology Products Ltd"
    ],
-   "actionableTotal": 29,
+   "actionableTotal": 28,
    "blockedReason": null
   },
   {
@@ -3380,8 +3348,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "9 August 2028",
    "suppliersAwarded": 60,
-   "suppliersPublished": 9,
-   "coverage": 15.0,
+   "suppliersPublished": 11,
+   "coverage": 18.3,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3391,20 +3359,12 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "BioSpectrum Ltd",
-     "domain": "bio-spectrum.co.uk"
-    },
-    {
      "supplier": "Bolton Surgical Limited",
      "domain": "boltons.co.uk"
     },
     {
      "supplier": "Ideal Medical Solutions",
      "domain": "ideal-ms.com"
-    },
-    {
-     "supplier": "Reflex Medical Limited",
-     "domain": "reflexmedical.co.uk"
     },
     {
      "supplier": "Starkstrom Limited",
@@ -3553,7 +3513,7 @@
      "supplier": "CJ Medical",
      "domain": "cjmedical.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
-     "checked": "2026-09-06"
+     "checked": "2026-09-08"
     },
     {
      "supplier": "Elemental Healthcare Ltd",
@@ -3583,7 +3543,7 @@
      "supplier": "Karl Storz UK",
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05"
+     "checked": "2026-09-08"
     },
     {
      "supplier": "Surgical Instruments (dental)",
@@ -3602,6 +3562,7 @@
    "catsInScope": [
     "mis:clips",
     "mis:energy",
+    "mis:gynae",
     "mis:instruments",
     "mis:kits",
     "mis:staple",
@@ -3609,13 +3570,15 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "heldNeedingCategory": 6,
+    "heldNeedingCategory": 4,
     "crawlable": 0,
     "needDomain": 27
    },
    "published": [
     "Avicenna Surgical Limited",
+    "BioSpectrum Ltd",
     "Conmed UK Ltd",
+    "HC21 (UK) Ltd",
     "Healthium Medtech UK",
     "Johnson & Johnson MedTech",
     "Olympus (KeyMed)",
@@ -3628,20 +3591,18 @@
     "Advanced Medical Solutions (AMS)",
     "B. Braun Medical",
     "Fannin (UK) Limited",
-    "HC21 (UK) Ltd",
     "Hologic UK",
     "Kebomed UK Ltd",
     "Medline Industries",
     "M\u00f6lnlycke",
+    "Reflex Medical Limited",
     "Stryker",
     "W.L. Gore & Associates"
    ],
    "heldOnly": [
-    "BioSpectrum Ltd",
     "Bolton Surgical Limited",
     "Healthcare 25 Ltd",
     "Ideal Medical Solutions",
-    "Reflex Medical Limited",
     "Starkstrom Limited"
    ],
    "notCrawled": [
@@ -3684,7 +3645,7 @@
     "Unisurge International Limited"
    ],
    "unknown": [],
-   "actionableTotal": 33,
+   "actionableTotal": 31,
    "blockedReason": null
   },
   {
@@ -3693,8 +3654,8 @@
    "category": "Medical Technology",
    "ends": "30 September 2027",
    "suppliersAwarded": 58,
-   "suppliersPublished": 13,
-   "coverage": 22.4,
+   "suppliersPublished": 15,
+   "coverage": 25.9,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3706,10 +3667,6 @@
     "oncology"
    ],
    "crawlWorklist": [
-    {
-     "supplier": "BioSpectrum Ltd",
-     "domain": "bio-spectrum.co.uk"
-    },
     {
      "supplier": "Macromed UK Ltd",
      "domain": "macromed.co.uk"
@@ -3838,7 +3795,7 @@
      "supplier": "CJ Medical",
      "domain": "cjmedical.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
-     "checked": "2026-09-06"
+     "checked": "2026-09-08"
     },
     {
      "supplier": "GenX MediCare Ltd",
@@ -3856,7 +3813,7 @@
      "supplier": "Karl Storz UK",
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05"
+     "checked": "2026-09-08"
     },
     {
      "supplier": "Leib Medical Ltd",
@@ -3891,6 +3848,7 @@
     "endourology:stent",
     "endourology:stone",
     "endourology:urodyn",
+    "gastro:diag",
     "gastro:energy",
     "gastro:snare",
     "gastro:stent",
@@ -3900,13 +3858,15 @@
    ],
    "actionable": {
     "unresolvedNames": 2,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 1,
     "crawlable": 0,
     "needDomain": 22
    },
    "published": [
     "Ambu UK",
+    "Argon Medical Devices UK Ltd",
     "BD \u2014 Becton, Dickinson",
+    "BioSpectrum Ltd",
     "Boston Scientific",
     "Coloplast",
     "Conmed UK Ltd",
@@ -3921,7 +3881,6 @@
    ],
    "publishedElsewhere": [
     "Advanced Medical Systems Ltd",
-    "Argon Medical Devices UK Ltd",
     "Fannin (UK) Limited",
     "Johnson & Johnson MedTech",
     "Kebomed UK Ltd",
@@ -3932,7 +3891,6 @@
     "Uniplex"
    ],
    "heldOnly": [
-    "BioSpectrum Ltd",
     "Macromed UK Ltd"
    ],
    "notCrawled": [
@@ -3974,7 +3932,7 @@
     "Omnimed Limited",
     "Varian Medical Systems"
    ],
-   "actionableTotal": 26,
+   "actionableTotal": 25,
    "blockedReason": null
   },
   {
@@ -3983,8 +3941,8 @@
    "category": "Rehabilitation and Community",
    "ends": "30 June 2027",
    "suppliersAwarded": 57,
-   "suppliersPublished": 9,
-   "coverage": 15.8,
+   "suppliersPublished": 10,
+   "coverage": 17.5,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -4162,6 +4120,7 @@
     "needDomain": 15
    },
    "published": [
+    "Argon Medical Devices UK Ltd",
     "Bodywise (UK) Ltd",
     "Pelvic Relief",
     "Farla Medical",
@@ -4173,7 +4132,6 @@
     "Trion Pharma Limited"
    ],
    "publishedElsewhere": [
-    "Argon Medical Devices UK Ltd",
     "B. Braun Medical",
     "Crest Medical Ltd",
     "GBUK Group",
@@ -4890,7 +4848,7 @@
      "supplier": "Karl Storz UK",
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05"
+     "checked": "2026-09-08"
     },
     {
      "supplier": "Lucida Medical Ltd",
@@ -5365,7 +5323,7 @@
      "supplier": "CJ Medical",
      "domain": "cjmedical.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
-     "checked": "2026-09-06"
+     "checked": "2026-09-08"
     },
     {
      "supplier": "Delta Surgical",
@@ -5523,10 +5481,6 @@
     "surgical"
    ],
    "crawlWorklist": [
-    {
-     "supplier": "BioSpectrum Ltd",
-     "domain": "bio-spectrum.co.uk"
-    },
     {
      "supplier": "Bolton Surgical Limited",
      "domain": "boltons.co.uk"
@@ -5703,7 +5657,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 2,
     "crawlable": 1,
     "needDomain": 14
    },
@@ -5720,6 +5674,7 @@
    "publishedElsewhere": [
     "Avicenna Surgical Limited",
     "B. Braun Medical",
+    "BioSpectrum Ltd",
     "Fannin (UK) Limited",
     "Farla Medical",
     "GBUK Group",
@@ -5732,7 +5687,6 @@
     "Vernacare"
    ],
    "heldOnly": [
-    "BioSpectrum Ltd",
     "Bolton Surgical Limited",
     "Surtex Instruments Ltd"
    ],
@@ -5768,7 +5722,7 @@
     "Valley Northern Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 18,
+   "actionableTotal": 17,
    "blockedReason": null
   },
   {
@@ -5777,8 +5731,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "11 April 2028",
    "suppliersAwarded": 43,
-   "suppliersPublished": 6,
-   "coverage": 14.0,
+   "suppliersPublished": 7,
+   "coverage": 16.3,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -5904,7 +5858,7 @@
      "supplier": "Karl Storz UK",
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05"
+     "checked": "2026-09-08"
     },
     {
      "supplier": "OscarTech UK",
@@ -5940,6 +5894,7 @@
     "needDomain": 15
    },
    "published": [
+    "Conmed UK Ltd",
     "Getinge",
     "Hospital Services Limited",
     "Johnson & Johnson MedTech",
@@ -5952,7 +5907,6 @@
     "Arjo",
     "Boston Scientific",
     "Coloplast",
-    "Conmed UK Ltd",
     "Cook Medical",
     "Draeger Medical UK",
     "Felgains",
@@ -6015,10 +5969,6 @@
     {
      "supplier": "Henleys Medical Supplies Limited",
      "domain": "henleysmed.com"
-    },
-    {
-     "supplier": "Reflex Medical Limited",
-     "domain": "reflexmedical.co.uk"
     },
     {
      "supplier": "Electro Spyres Healthcare Limited",
@@ -6145,7 +6095,7 @@
    ],
    "actionable": {
     "unresolvedNames": 3,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 1,
     "crawlable": 0,
     "needDomain": 4
    },
@@ -6163,12 +6113,12 @@
     "Mindray UK",
     "Optimum Medical",
     "Philips",
+    "Reflex Medical Limited",
     "Reliance Medical",
     "Rocket Medical"
    ],
    "heldOnly": [
-    "Henleys Medical Supplies Limited",
-    "Reflex Medical Limited"
+    "Henleys Medical Supplies Limited"
    ],
    "notCrawled": [
     "Electro Spyres Healthcare Limited",
@@ -6198,7 +6148,7 @@
     "Medevolve Limited",
     "Salter Labs UK T/A Airlife"
    ],
-   "actionableTotal": 9,
+   "actionableTotal": 8,
    "blockedReason": null
   },
   {
@@ -6207,8 +6157,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "15 June 2027",
    "suppliersAwarded": 37,
-   "suppliersPublished": 11,
-   "coverage": 29.7,
+   "suppliersPublished": 12,
+   "coverage": 32.4,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -6228,10 +6178,6 @@
     {
      "supplier": "Numed Healthcare",
      "domain": "numed.co.uk"
-    },
-    {
-     "supplier": "Proact Medical Ltd",
-     "domain": "proactmedical.co.uk"
     },
     {
      "supplier": "Aquilant Critical Care",
@@ -6314,7 +6260,7 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "heldNeedingCategory": 4,
+    "heldNeedingCategory": 3,
     "crawlable": 0,
     "needDomain": 5
    },
@@ -6322,6 +6268,7 @@
     "Ambu UK",
     "Armstrong Medical (Eakin Respiratory)",
     "Fisher & Paykel Healthcare",
+    "HC21 (UK) Ltd",
     "Intermedical (UK) Ltd",
     "Intersurgical",
     "Meditech Systems Ltd (Dorset)",
@@ -6335,18 +6282,17 @@
     "Draeger Medical UK",
     "Fannin (UK) Limited",
     "Hamilton Medical UK",
-    "HC21 (UK) Ltd",
     "Inspiration Healthcare",
     "Mediq Healthcare UK Ltd",
     "Ivor Shaw Ltd",
+    "Proact Medical Ltd",
     "ProSys International Ltd",
     "TFX Group Ltd (Teleflex Medical)"
    ],
    "heldOnly": [
     "Henleys Medical Supplies Limited",
     "Marshall Products",
-    "Numed Healthcare",
-    "Proact Medical Ltd"
+    "Numed Healthcare"
    ],
    "notCrawled": [
     "Aquilant Critical Care",
@@ -6367,7 +6313,7 @@
    "unknown": [
     "Salter Labs Uk T/A Airlife"
    ],
-   "actionableTotal": 10,
+   "actionableTotal": 9,
    "blockedReason": null
   },
   {
@@ -6567,8 +6513,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "19 October 2028",
    "suppliersAwarded": 33,
-   "suppliersPublished": 8,
-   "coverage": 24.2,
+   "suppliersPublished": 9,
+   "coverage": 27.3,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -6612,16 +6558,11 @@
     {
      "supplier": "Sterimed Medical Implants UK Ltd",
      "domain": null
-    },
-    {
-     "supplier": "P.W.Coole & Son Limited T/A Surgical Holdings",
-     "domain": null
     }
    ],
    "domainsMissing": [
     "Erbe Medical UK Ltd",
     "J & M Medical",
-    "P.W.Coole & Son Limited T/A Surgical Holdings",
     "RB Medical Engineering Ltd",
     "SRA Developments",
     "Sela Medical UK Ltd",
@@ -6659,6 +6600,12 @@
      "checked": "2026-09-05"
     },
     {
+     "supplier": "P.W.Coole & Son Limited T/A Surgical Holdings",
+     "domain": "surgicalholdings.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-08"
+    },
+    {
      "supplier": "Toffeln Ltd",
      "domain": "www.toffeln.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -6685,9 +6632,10 @@
     "unresolvedNames": 2,
     "heldNeedingCategory": 4,
     "crawlable": 0,
-    "needDomain": 7
+    "needDomain": 6
    },
    "published": [
+    "Conmed UK Ltd",
     "Empire Medical UK Ltd",
     "Johnson & Johnson MedTech",
     "Judd Medical Ltd",
@@ -6698,7 +6646,6 @@
     "Timesco Healthcare Ltd"
    ],
    "publishedElsewhere": [
-    "Conmed UK Ltd",
     "Fannin (UK) Limited",
     "Olympus (KeyMed)",
     "Medline Industries",
@@ -6716,8 +6663,7 @@
     "RB Medical Engineering Ltd",
     "Sela Medical UK Ltd",
     "SRA Developments",
-    "Sterimed Medical Implants UK Ltd",
-    "P.W.Coole & Son Limited T/A Surgical Holdings"
+    "Sterimed Medical Implants UK Ltd"
    ],
    "refused": [
     "Critical Healthcare",
@@ -6725,6 +6671,7 @@
     "Elemental Healthcare Ltd",
     "Eurosurgical Ltd",
     "OscarTech UK",
+    "P.W.Coole & Son Limited T/A Surgical Holdings",
     "Toffeln Ltd",
     "Unisurge International Limited"
    ],
@@ -6732,7 +6679,7 @@
     "KCI Medical Limited (Solventum)",
     "Surgica Limited"
    ],
-   "actionableTotal": 13,
+   "actionableTotal": 12,
    "blockedReason": null
   },
   {
@@ -7500,8 +7447,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "28 February 2029",
    "suppliersAwarded": 25,
-   "suppliersPublished": 5,
-   "coverage": 20.0,
+   "suppliersPublished": 6,
+   "coverage": 24.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -7534,10 +7481,6 @@
     {
      "supplier": "Loewenstein Medical UK Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Mediprema",
-     "domain": "mediprema.com"
     },
     {
      "supplier": "Mieka Ltd",
@@ -7601,6 +7544,7 @@
    "route": "NHSSC framework",
    "catsInScope": [
     "anaesthesia:anaes",
+    "anaesthesia:photo",
     "anaesthesia:vent",
     "neonatal:equip",
     "neonatal:resp"
@@ -7608,7 +7552,7 @@
    "actionable": {
     "unresolvedNames": 2,
     "heldNeedingCategory": 2,
-    "crawlable": 1,
+    "crawlable": 0,
     "needDomain": 8
    },
    "published": [
@@ -7616,6 +7560,7 @@
     "Hamilton Medical UK",
     "Inspiration Healthcare",
     "MEDACX Limited",
+    "Mediprema",
     "Mindray UK"
    ],
    "publishedElsewhere": [
@@ -7631,7 +7576,6 @@
     "Atom Medical Corporation UK ltd",
     "Charter Kontron Limited",
     "Loewenstein Medical UK Ltd",
-    "Mediprema",
     "Mieka Ltd",
     "mOm Incubators Ltd",
     "Penlon",
@@ -7648,7 +7592,7 @@
     "Nihon Kohden UK Ltd",
     "Scott Medical Ltd"
    ],
-   "actionableTotal": 13,
+   "actionableTotal": 12,
    "blockedReason": null
   },
   {
@@ -8179,10 +8123,6 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "BioSpectrum Ltd",
-     "domain": "bio-spectrum.co.uk"
-    },
-    {
      "supplier": "MIS Healthcare",
      "domain": "mishealthcare.co.uk"
     },
@@ -8262,7 +8202,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 1,
     "crawlable": 0,
     "needDomain": 4
    },
@@ -8272,6 +8212,7 @@
     "Orca Medical Ltd"
    ],
    "publishedElsewhere": [
+    "BioSpectrum Ltd",
     "Celtic SMR Ltd",
     "Hologic UK",
     "Philips",
@@ -8279,7 +8220,6 @@
     "Siemens Healthineers"
    ],
    "heldOnly": [
-    "BioSpectrum Ltd",
     "MIS Healthcare"
    ],
    "notCrawled": [
@@ -8298,7 +8238,7 @@
     "Vertec Scientific"
    ],
    "unknown": [],
-   "actionableTotal": 6,
+   "actionableTotal": 5,
    "blockedReason": null
   },
   {
@@ -8445,16 +8385,7 @@
    "speciality": [
     "bloodcoll"
    ],
-   "crawlWorklist": [
-    {
-     "supplier": "Radiometer UK",
-     "domain": "radiometer.co.uk"
-    },
-    {
-     "supplier": "Reflex Medical Limited",
-     "domain": "reflexmedical.co.uk"
-    }
-   ],
+   "crawlWorklist": [],
    "domainsMissing": [],
    "refusedSuppliers": [
     {
@@ -8498,7 +8429,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 0,
     "crawlable": 0,
     "needDomain": 0
    },
@@ -8514,14 +8445,13 @@
     "Crest Medical Ltd",
     "ISOL8 Healthcare Limited",
     "Nipro Medical Europe",
+    "Radiometer UK",
+    "Reflex Medical Limited",
     "Reliance Medical",
     "Siemens Healthineers",
     "Vygon (UK)"
    ],
-   "heldOnly": [
-    "Radiometer UK",
-    "Reflex Medical Limited"
-   ],
+   "heldOnly": [],
    "notCrawled": [],
    "refused": [
     "Balmung Medical Handel GmbH",
@@ -8531,8 +8461,8 @@
     "RPG Medical Limited"
    ],
    "unknown": [],
-   "actionableTotal": 2,
-   "blockedReason": null
+   "actionableTotal": 0,
+   "blockedReason": "every awarded supplier not yet published has been read and refused (5 recorded refusal(s)) \u2014 no permitted route left to the rest of this framework, so its coverage cannot rise without a new route"
   },
   {
    "framework": "Enteral Feeding, Bile Bags and Associated Products",
@@ -8756,10 +8686,6 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Reflex Medical Limited",
-     "domain": "reflexmedical.co.uk"
-    },
-    {
      "supplier": "Aquilant Limited",
      "domain": null
     },
@@ -8813,7 +8739,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "crawlable": 0,
     "needDomain": 4
    },
@@ -8829,11 +8755,10 @@
    "publishedElsewhere": [
     "Fannin (UK) Limited",
     "Johnson & Johnson MedTech",
+    "Reflex Medical Limited",
     "Timesco Healthcare Ltd"
    ],
-   "heldOnly": [
-    "Reflex Medical Limited"
-   ],
+   "heldOnly": [],
    "notCrawled": [
     "Aquilant Limited",
     "Headington Medical Technology Ltd",
@@ -8846,7 +8771,7 @@
     "Unisurge International Limited"
    ],
    "unknown": [],
-   "actionableTotal": 5,
+   "actionableTotal": 4,
    "blockedReason": null
   },
   {
@@ -8974,8 +8899,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "19 June 2027",
    "suppliersAwarded": 18,
-   "suppliersPublished": 6,
-   "coverage": 33.3,
+   "suppliersPublished": 7,
+   "coverage": 38.9,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -8984,10 +8909,6 @@
     "theatres"
    ],
    "crawlWorklist": [
-    {
-     "supplier": "Proact Medical Ltd",
-     "domain": "proactmedical.co.uk"
-    },
     {
      "supplier": "Aquilant Limited",
      "domain": null
@@ -9031,7 +8952,7 @@
    ],
    "actionable": {
     "unresolvedNames": 2,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "crawlable": 0,
     "needDomain": 2
    },
@@ -9041,7 +8962,8 @@
     "ICU Medical (incl. Smiths Medical)",
     "Crest Medical Ltd",
     "M\u00f6lnlycke",
-    "Steris"
+    "Steris",
+    "Proact Medical Ltd"
    ],
    "publishedElsewhere": [
     "BD \u2014 Becton, Dickinson",
@@ -9049,9 +8971,7 @@
     "Draeger Medical UK",
     "Reliance Medical"
    ],
-   "heldOnly": [
-    "Proact Medical Ltd"
-   ],
+   "heldOnly": [],
    "notCrawled": [
     "Aquilant Limited",
     "Vyaire Medical Products Limited"
@@ -9065,7 +8985,7 @@
     "KCI Medical Ltd (previously 3M United Kingdom PLC)",
     "Novus Medical Ltd"
    ],
-   "actionableTotal": 5,
+   "actionableTotal": 4,
    "blockedReason": null
   },
   {
@@ -9074,8 +8994,8 @@
    "category": "Rehabilitation and Community",
    "ends": null,
    "suppliersAwarded": 18,
-   "suppliersPublished": 4,
-   "coverage": 22.2,
+   "suppliersPublished": 5,
+   "coverage": 27.8,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9168,13 +9088,13 @@
    },
    "published": [
     "Abilia Ltd",
+    "Liberator Ltd",
     "Possum Ltd",
     "Sensory Guru Ltd",
     "Skyguard Ltd T/A Peoplesafe"
    ],
    "publishedElsewhere": [
-    "Iansyst Ltd",
-    "Liberator Ltd"
+    "Iansyst Ltd"
    ],
    "heldOnly": [],
    "notCrawled": [
@@ -9602,10 +9522,6 @@
     {
      "supplier": "Advanced Therapeutics UK Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Urathon Europe Ltd",
-     "domain": "urathon.com"
     }
    ],
    "domainsMissing": [
@@ -9657,7 +9573,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "heldNeedingCategory": 0,
-    "crawlable": 1,
+    "crawlable": 0,
     "needDomain": 1
    },
    "published": [
@@ -9666,12 +9582,12 @@
    ],
    "publishedElsewhere": [
     "Abbott Laboratories Limited",
-    "Medtronic"
+    "Medtronic",
+    "Urathon Europe Ltd"
    ],
    "heldOnly": [],
    "notCrawled": [
-    "Advanced Therapeutics UK Ltd",
-    "Urathon Europe Ltd"
+    "Advanced Therapeutics UK Ltd"
    ],
    "refused": [
     "Air Liquide Healthcare Ltd",
@@ -9682,7 +9598,7 @@
     "Novo Nordisk Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 2,
+   "actionableTotal": 1,
    "blockedReason": null
   },
   {
@@ -10173,7 +10089,7 @@
      "supplier": "Karl Storz UK",
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05"
+     "checked": "2026-09-08"
     },
     {
      "supplier": "LiteOptics",
@@ -10530,10 +10446,6 @@
      "domain": "medasil.com"
     },
     {
-     "supplier": "Proact Medical Ltd",
-     "domain": "proactmedical.co.uk"
-    },
-    {
      "supplier": "Aquilant Critical Care",
      "domain": null
     },
@@ -10556,10 +10468,6 @@
     {
      "supplier": "Penlon",
      "domain": null
-    },
-    {
-     "supplier": "Pentland Medical Ltd",
-     "domain": "pentlandmedical.co.uk"
     },
     {
      "supplier": "Sai Quality Fruits And Veg Limited",
@@ -10655,7 +10563,7 @@
      "supplier": "Karl Storz UK",
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05"
+     "checked": "2026-09-08"
     },
     {
      "supplier": "OscarTech UK",
@@ -10680,8 +10588,8 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 1,
-    "heldNeedingCategory": 5,
-    "crawlable": 1,
+    "heldNeedingCategory": 4,
+    "crawlable": 0,
     "needDomain": 10
    },
    "published": [],
@@ -10702,6 +10610,8 @@
     "Medline Industries",
     "MedScience Distribution",
     "P3 Medical Ltd",
+    "Pentland Medical Ltd",
+    "Proact Medical Ltd",
     "ProSys International Ltd",
     "Rudolf Riester GmbH",
     "Sheffmed Limited",
@@ -10714,8 +10624,7 @@
     "Atos Medical (UK)",
     "Henleys Medical Supplies Limited",
     "Marshall Products",
-    "Medasil Surgical Ltd",
-    "Proact Medical Ltd"
+    "Medasil Surgical Ltd"
    ],
    "notCrawled": [
     "Aquilant Critical Care",
@@ -10724,7 +10633,6 @@
     "Hamilton Sales And Service UK Ltd",
     "Medecon Healthcare UK",
     "Penlon",
-    "Pentland Medical Ltd",
     "Sai Quality Fruits And Veg Limited",
     "Vyaire Medical Products Limited",
     "William Davies Care Limited",
@@ -10749,7 +10657,7 @@
    "unknown": [
     "Verathon Medical"
    ],
-   "actionableTotal": 17,
+   "actionableTotal": 15,
    "blockedReason": null
   },
   {
@@ -10769,14 +10677,6 @@
     {
      "supplier": "Henleys Medical Supplies Limited",
      "domain": "henleysmed.com"
-    },
-    {
-     "supplier": "Reflex Medical Limited",
-     "domain": "reflexmedical.co.uk"
-    },
-    {
-     "supplier": "Orion Medical Supplies",
-     "domain": "orionmedical.co.uk"
     },
     {
      "supplier": "Aquilant Limited",
@@ -10918,7 +10818,7 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 1,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 1,
     "crawlable": 0,
     "needDomain": 13
    },
@@ -10940,6 +10840,7 @@
     "Nipro Medical Europe",
     "Optimum Medical",
     "Owen Mumford",
+    "Reflex Medical Limited",
     "Reliance Medical",
     "Rocket Medical",
     "Terumo UK",
@@ -10947,12 +10848,11 @@
     "Trion Pharma Limited",
     "Vygon (UK)",
     "Blink Medical Limited",
-    "ICU Medical (incl. Smiths Medical)"
+    "ICU Medical (incl. Smiths Medical)",
+    "Orion Medical Supplies"
    ],
    "heldOnly": [
-    "Henleys Medical Supplies Limited",
-    "Reflex Medical Limited",
-    "Orion Medical Supplies"
+    "Henleys Medical Supplies Limited"
    ],
    "notCrawled": [
     "Aquilant Limited",
@@ -10985,7 +10885,7 @@
    "unknown": [
     "Apollo Medical Technologies Ltd"
    ],
-   "actionableTotal": 17,
+   "actionableTotal": 15,
    "blockedReason": null
   },
   {
@@ -11005,14 +10905,6 @@
     {
      "supplier": "Henleys Medical Supplies Limited",
      "domain": "henleysmed.com"
-    },
-    {
-     "supplier": "Proact Medical Ltd",
-     "domain": "proactmedical.co.uk"
-    },
-    {
-     "supplier": "Reflex Medical Limited",
-     "domain": "reflexmedical.co.uk"
     },
     {
      "supplier": "Seca Ltd",
@@ -11133,7 +11025,7 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 1,
-    "heldNeedingCategory": 4,
+    "heldNeedingCategory": 2,
     "crawlable": 0,
     "needDomain": 8
    },
@@ -11150,6 +11042,8 @@
     "NISSHA Medical Technologies",
     "P3 Medical Ltd",
     "Philips",
+    "Proact Medical Ltd",
+    "Reflex Medical Limited",
     "Reliance Medical",
     "Rudolf Riester GmbH",
     "Timesco Healthcare Ltd",
@@ -11158,8 +11052,6 @@
    ],
    "heldOnly": [
     "Henleys Medical Supplies Limited",
-    "Proact Medical Ltd",
-    "Reflex Medical Limited",
     "Seca Ltd"
    ],
    "notCrawled": [
@@ -11188,7 +11080,7 @@
    "unknown": [
     "KCI Medical Ltd (3M)"
    ],
-   "actionableTotal": 13,
+   "actionableTotal": 11,
    "blockedReason": null
   },
   {
@@ -11212,10 +11104,6 @@
     {
      "supplier": "Ideal Medical Solutions",
      "domain": "ideal-ms.com"
-    },
-    {
-     "supplier": "Reflex Medical Limited",
-     "domain": "reflexmedical.co.uk"
     },
     {
      "supplier": "Aquilant Limited",
@@ -11319,7 +11207,7 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 4,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 2,
     "crawlable": 0,
     "needDomain": 9
    },
@@ -11336,6 +11224,7 @@
     "Medline Industries",
     "Medtronic",
     "P3 Medical Ltd",
+    "Reflex Medical Limited",
     "Reliance Medical",
     "Stryker",
     "TFX Group Ltd (Teleflex Medical)",
@@ -11343,8 +11232,7 @@
    ],
    "heldOnly": [
     "Anser Medical",
-    "Ideal Medical Solutions",
-    "Reflex Medical Limited"
+    "Ideal Medical Solutions"
    ],
    "notCrawled": [
     "Aquilant Limited",
@@ -11373,7 +11261,7 @@
     "Meril UK Ltd",
     "T.J Smith & Nephew Ltd"
    ],
-   "actionableTotal": 16,
+   "actionableTotal": 15,
    "blockedReason": null
   },
   {
@@ -11548,14 +11436,6 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "Radiometer UK",
-     "domain": "radiometer.co.uk"
-    },
-    {
-     "supplier": "Reflex Medical Limited",
-     "domain": "reflexmedical.co.uk"
-    },
-    {
      "supplier": "Sefam Medical Ltd",
      "domain": "sefam.co.uk"
     },
@@ -11651,7 +11531,7 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 1,
-    "heldNeedingCategory": 4,
+    "heldNeedingCategory": 2,
     "crawlable": 0,
     "needDomain": 11
    },
@@ -11664,11 +11544,11 @@
     "Intersurgical",
     "Intus Healthcare",
     "Medicina Limited",
+    "Radiometer UK",
+    "Reflex Medical Limited",
     "ResMed"
    ],
    "heldOnly": [
-    "Radiometer UK",
-    "Reflex Medical Limited",
     "Sefam Medical Ltd",
     "Stowood Scientific Instruments"
    ],
@@ -11694,7 +11574,7 @@
    "unknown": [
     "Nihon Kohden UK Ltd"
    ],
-   "actionableTotal": 16,
+   "actionableTotal": 14,
    "blockedReason": null
   },
   {
@@ -11714,14 +11594,6 @@
     {
      "supplier": "Henleys Medical Supplies Limited",
      "domain": "henleysmed.com"
-    },
-    {
-     "supplier": "Proact Medical Ltd",
-     "domain": "proactmedical.co.uk"
-    },
-    {
-     "supplier": "Radiometer UK",
-     "domain": "radiometer.co.uk"
     },
     {
      "supplier": "Kinetic Medical Devices Ltd",
@@ -11775,7 +11647,7 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 2,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 1,
     "crawlable": 0,
     "needDomain": 5
    },
@@ -11790,15 +11662,15 @@
     "Mindray UK",
     "Orca Medical Ltd",
     "Philips",
+    "Proact Medical Ltd",
+    "Radiometer UK",
     "Rudolf Riester GmbH",
     "Stryker",
     "Timesco Healthcare Ltd",
     "Vygon (UK)"
    ],
    "heldOnly": [
-    "Henleys Medical Supplies Limited",
-    "Proact Medical Ltd",
-    "Radiometer UK"
+    "Henleys Medical Supplies Limited"
    ],
    "notCrawled": [
     "Kinetic Medical Devices Ltd",
@@ -11816,7 +11688,7 @@
     "Ortus Technology Ltd (New)",
     "Reflex Medical Ltd (New)"
    ],
-   "actionableTotal": 10,
+   "actionableTotal": 8,
    "blockedReason": null
   },
   {
@@ -12860,7 +12732,7 @@
      "supplier": "Karl Storz UK",
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05"
+     "checked": "2026-09-08"
     },
     {
      "supplier": "LiteOptics",
@@ -13667,10 +13539,6 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "BioSpectrum Ltd",
-     "domain": "bio-spectrum.co.uk"
-    },
-    {
      "supplier": "De Smit Medical Systems Limited",
      "domain": null
     },
@@ -13713,18 +13581,17 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 2,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "crawlable": 0,
     "needDomain": 2
    },
    "published": [],
    "publishedElsewhere": [
     "BD \u2014 Becton, Dickinson",
+    "BioSpectrum Ltd",
     "Win Health Medical Ltd"
    ],
-   "heldOnly": [
-    "BioSpectrum Ltd"
-   ],
+   "heldOnly": [],
    "notCrawled": [
     "De Smit Medical Systems Limited",
     "Source Medical"
@@ -13739,7 +13606,7 @@
     "Creo Medical UK Ltd (previously known as Albyn Medical Ltd)",
     "Verathon Medical"
    ],
-   "actionableTotal": 5,
+   "actionableTotal": 4,
    "blockedReason": null
   },
   {
@@ -14237,14 +14104,6 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "Proact Medical Ltd",
-     "domain": "proactmedical.co.uk"
-    },
-    {
-     "supplier": "Reflex Medical Limited",
-     "domain": "reflexmedical.co.uk"
-    },
-    {
      "supplier": "Salter Labs UK Ltd",
      "domain": null
     },
@@ -14275,19 +14134,18 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 0,
     "crawlable": 0,
     "needDomain": 2
    },
    "published": [],
    "publishedElsewhere": [
     "Fannin (UK) Limited",
-    "Merit Medical UK Ltd"
-   ],
-   "heldOnly": [
+    "Merit Medical UK Ltd",
     "Proact Medical Ltd",
     "Reflex Medical Limited"
    ],
+   "heldOnly": [],
    "notCrawled": [
     "Salter Labs UK Ltd",
     "TerraMed Limited"
@@ -14297,7 +14155,7 @@
     "Sharon Services (UK) Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 4,
+   "actionableTotal": 2,
    "blockedReason": null
   },
   {
@@ -14860,7 +14718,7 @@
      "supplier": "Karl Storz UK",
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05"
+     "checked": "2026-09-08"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
@@ -14928,7 +14786,7 @@
      "supplier": "Karl Storz UK",
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05"
+     "checked": "2026-09-08"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
