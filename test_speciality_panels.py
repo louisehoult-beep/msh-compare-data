@@ -23,6 +23,7 @@ CONTINENCE = "continence-bladder-and-bowel"
 THEATRES = "theatres-and-surgical"
 ORTHO = "orthopaedics-and-trauma"
 PLASTICS = "plastics-burns-and-reconstruction"
+FRAILTY = "frailty-and-older-people"
 fails = []
 
 
@@ -894,6 +895,165 @@ check("licence notice carried", bool(p.get("_notice", {}).get("owner")))
 pkb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", PLASTICS + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % pkb, pkb < 200)
 
+
+
+print("\n" + "=" * 72)
+print("FRAILTY AND OLDER PEOPLE (page 2915)")
+print("=" * 72)
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), FRAILTY],
+               check=True, capture_output=True)
+fr = load_panel(FRAILTY)
+frx = B.compile_rule(B.SPECIALITY_RULES[FRAILTY])
+ftitles = " || ".join((a.get("title") or "") for a in fr["awards"]).lower()
+
+print("\nFALSE POSITIVES — every one matched a real row and was wrong")
+# "aging" inside "imaging" is the single most dangerous pattern on this patch:
+# thirty rows in this data would arrive on the frailty page as scanners. The rule
+# uses neither "aging" nor "ageing".
+for other in [
+        "ESNEFT3075 Purchase of Neonatal Imaging System",
+        "Magnetic Resonance Imaging System Replacement",
+        "Static Medical Imaging Equipment",
+        "Hyperspectral Imaging Equipment",
+        "Night Vision Imaging System (NVIS) Replacement Programme",
+        "Multimodal Imaging Platform Procurement",
+        # bare "older people": nought out of two. Mental health workforce education,
+        # and a housing association's own furniture supply.
+        "Adult and Older People (AOP) mental health and Psychological Therapies for "
+        "Severe Mental Health Problems (PTSMHP) education programmes RFI",
+        "Supply and delivery of Older People Furniture and associated Services",
+        # bare "rehabilitation": nineteen rows, not one of them this speciality.
+        "Residential detoxification and rehabilitation service for residents",
+        "Brain Injury Rehabilitation Service.",
+        "Neurological Rehabilitation Service",
+        "Provision of Residential Rehabilitation Services for Border Force",
+        "Prosthetics and Orthotics Rehabilitation Service",
+        # the palliative page's rows, not this one's. One is a children's service.
+        "Palliative and End of Life Care and Community Services",
+        "West Yorkshire CYP Palliative and End of Life Care Out of Hours Service "
+        "- 24/7 Advice and Call-Out Support",
+        "National Audit of Care at the End of Life (NACEL)",
+        # "dementia" is core vocabulary and stays in; this is the one row it got
+        # wrong, and "ligature" is the whole exclusion list.
+        "Consultancy Services for IP&C, Ligature and Dementia issues at Angelton "
+        "Clinic & Ysbyty Cwm Cynon",
+        # declined as ambiguous on the title (rule 14), not excluded by accident.
+        "Ardwyn - Supported Living",
+        "SOL30141 SOL Extra Care Solihull Retirement Village",
+        "HMP Wandsworth- Domiciliary Care",
+        # "Healthcare at Home" is a homecare medicines route, not this patch. The
+        # include's "hospital at home" must not reach it.
+        "Immunoglobulin -Healthcare at Home",
+        "Ustekinumab (Stelara) Healthcare at Home",
+        # \bcare technology\b must not match "Healthcare Technology" — the word
+        # boundary is the entire reason that pattern is safe to carry.
+        "YPO - 001284 Community & Healthcare Technology Equipment & Associated Services",
+        # \bcare homes?\b must not match "healthcare home"-shaped titles either.
+        "Healthcare Homes Group supplies"]:
+    check("stays out: %s" % other[:52], not B.match_title(frx, other))
+
+print("\nTRUE POSITIVES — awards that must be on this patch")
+for good in ["telecare", "community equipment", "care home", "intermediate care",
+             "virtual ward", "technology enabled care", "falls prevention",
+             "independent living", "digital care alarms", "nursing care beds"]:
+    check("present: %s" % good, good in ftitles)
+check("every award shown is one the matcher still admits",
+      all(B.match_title(frx, a["title"]) for a in fr["awards"]))
+check("the whole matched set is published, nothing silently capped",
+      fr["counts"]["awardsShown"] == fr["counts"]["awardsMatched"])
+# The community half of this pathway is bought by councils, not trusts. If that
+# ever stops being true of the awards list, the filter has drifted.
+councils = [a for a in fr["awards"]
+            if "council" in (a.get("buyer") or "").lower()
+            or "borough" in (a.get("buyer") or "").lower()]
+check("the local-authority route dominates the awards, as the page says it does",
+      len(councils) >= 15, "got %d of %d" % (len(councils), len(fr["awards"])))
+
+print("\nTHE CLINICAL VOCABULARY IS ABSENT FROM THE DATA, AND SAID SO")
+# Zero rows in 3,314 contain any of these. They stay in the include because each
+# can only mean this speciality, but not one row reaches the panel through them.
+# If one ever does, that is a genuine new notice, not a leak.
+for word in ["frailty", "geriatric", "delirium", "reablement",
+             "urgent community response", "discharge to assess"]:
+    check("nothing published on '%s' today" % word, word not in ftitles)
+check("the include still carries the speciality's own vocabulary",
+      all(w in B.SPECIALITY_RULES[FRAILTY]["include"]
+          for w in ["frailty", "geriatric", "delirium", "reablement"]))
+
+print("\nFRAMEWORKS")
+fnames = [f["name"] for f in fr["frameworks"]]
+check("framework present: Technology Enabled Care",
+      any(n.startswith("Technology Enabled Care") for n in fnames))
+check("exactly the one framework this patch carries", len(fnames) == 1,
+      "got %d: %s" % (len(fnames), fnames))
+# All three carry this population's equipment and all three are the Patient Moving
+# and Handling page's. Claiming them would republish that page's supplier list.
+for other in ["Aids for Daily Living", "Pressure Area Care and Patient Handling",
+              "Wheelchairs, Specialist Seating and Related Services",
+              "Physiotherapy and Occupational Therapy",
+              "Disposable and Washable Continence Care"]:
+    check("another speciality's framework stays out: %s" % other, other not in fnames)
+check("every framework carries its NHSSC url", all(f.get("url") for f in fr["frameworks"]))
+
+print("\nSUPPLIERS")
+fsup = fr["suppliers"]
+fraw = sum(len(f["suppliers"]) for f in fr["frameworks"])
+check("suppliers are drawn from the framework, not empty", len(fsup) > 0)
+check("no supplier listed twice", len(fsup) == len(set(s["name"] for s in fsup)))
+check("every supplier names at least one framework", all(s["frameworks"] for s in fsup))
+check("every named framework is this speciality's",
+      all(set(s["frameworks"]) <= set(fnames) for s in fsup))
+check("an unresolved name is flagged, never silently merged",
+      all(("resolved" in s) for s in fsup))
+check("the supplier count matches the framework page's own stated total",
+      len(fsup) == fraw == 18, "got %d resolved from %d raw" % (len(fsup), fraw))
+
+print("\nCPV CORROBORATES, IT NEVER ADMITS")
+# 85144100 is residential nursing care and is the one code here specific to this
+# patch. 85323000, community health services, sits on the two intermediate care
+# rows and would look like the obvious key — until you read the other forty
+# notices carrying it: CAMHS tier 4 beds, suicide prevention, smoking cessation,
+# dental services in Gwent, a drug test on arrest scheme.
+check("the narrow residential-care code is the one claimed",
+      B.SPECIALITY_RULES[FRAILTY].get("cpv") == ("85144100",))
+check("the community-health catch-all is not claimed",
+      "85323000" not in (B.SPECIALITY_RULES[FRAILTY].get("cpv") or ()))
+check("corroboration is recorded where the feed carries the code",
+      any(a.get("cpvCorroborates") for a in fr["awards"]))
+check("no award reached the panel on CPV alone",
+      all(B.match_title(frx, a["title"]) for a in fr["awards"] if a.get("cpvCorroborates")))
+
+print("\nNO DRUG TARIFF, SAID HONESTLY (rule 14)")
+# Older people are the largest users of Parts IXA and IXB, but the tariff has no
+# frailty part and the builder filters by part, not product. Claiming IXB would
+# publish the continence page's summary under a frailty heading.
+check("no tariff panel is published for this patch", fr.get("drugTariff") is None)
+check("the tariff rule says why rather than going quiet",
+      "No Drug Tariff part applies" in (fr.get("rules") or {}).get("drugTariff", ""))
+
+print("\nTHE COVERAGE LIMIT IS PUBLISHED, NOT HIDDEN (rule 14)")
+# One framework out of 121 is not this speciality's buying route, and 18 telecare
+# suppliers are not the frailty market. Both have to say so on the page.
+for k in ("frameworks", "suppliers"):
+    check("coverage limit stated on the %s rule" % k,
+          "COVERAGE LIMIT" in (fr.get("rules") or {}).get(k, ""))
+check("the absence of any frailty framework is named",
+      "no framework for frailty" in (fr.get("rules") or {}).get("frameworks", "").lower())
+check("the sibling page carrying the equipment is named",
+      "Patient Moving and Handling" in (fr.get("rules") or {}).get("suppliers", ""))
+
+print("\nAN EMPTY PANEL IS AN HONEST ANSWER, NOT A REASON TO WIDEN (rule 14)")
+check("no open tender on this patch today, and none invented",
+      fr["openTenders"] == [])
+check("the open-tender rule says an empty list means none open",
+      "empty list means" in (fr.get("rules") or {}).get("openTenders", ""))
+
+print("\nTHE RULE TRAVELS WITH THE DATA (rule 14a)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((fr.get("rules") or {}).get(k)))
+check("licence notice carried", bool(fr.get("_notice", {}).get("owner")))
+fkb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", FRAILTY + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % fkb, fkb < 200)
 
 
 print()

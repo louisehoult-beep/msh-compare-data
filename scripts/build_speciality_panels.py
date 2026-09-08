@@ -769,6 +769,154 @@ SPECIALITY_RULES = {
             "not evidence of absence from this market."
         ),
     },
+    # PAGE 2915. Frailty and older people. The scope the page itself publishes is the
+    # pathway: identification (eFI, HFRS, Clinical Frailty Scale), Comprehensive
+    # Geriatric Assessment, the acute frailty front door, and then everything after it
+    # leaves hospital — urgent community response, virtual wards, intermediate care,
+    # Enhanced Health in Care Homes and falls (NICE NG249). The money on this patch is
+    # in that community half, and the buyers are councils and ICBs, not trusts.
+    "frailty-and-older-people": {
+        "label": "Frailty and Older People",
+        # ONE framework, and it is the only one of the 121 in frameworks.json named for
+        # anything on this patch. There is no NHS Supply Chain framework called frailty,
+        # older people, geriatric medicine or falls; that absence is stated in the
+        # coverage note rather than papered over by claiming a neighbour's framework.
+        # Technology Enabled Care is genuinely THIS speciality's route and no other page
+        # claims it: the Patient Moving and Handling rule above deliberately left it out
+        # ("it is telecare and lone worker devices, not patient handling"), which is
+        # right from that page's side and is exactly why it belongs here.
+        # NOT CLAIMED, deliberately — Aids for Daily Living, Pressure Area Care and
+        # Patient Handling, and Wheelchairs, Specialist Seating and Related Services all
+        # carry equipment this population uses, and all three are the Patient Moving and
+        # Handling page's declared frameworks. Claiming them here would republish that
+        # page's whole supplier list under a frailty heading and tell a rep nothing they
+        # could not already see. The coverage note points at them instead.
+        "frameworks": r"\btechnology enabled care\b",
+        # DERIVED, not guessed. Every pattern below was run over all 1,972 rows of
+        # tender-history.json and all 1,342 of framework-awards.json and every hit read.
+        #
+        # WHAT IS NOT HERE, AND WHY. The clinical vocabulary of this speciality is
+        # almost entirely absent from UK contract titles. Zero rows in 3,314 contain
+        # "frail", "geriatr", "CGA", "delirium", "reablement", "urgent community",
+        # "discharge to assess", "Rockwood", "polypharmac" or "4AT". Those terms are
+        # kept in the include because each one can only mean this speciality, so they
+        # cost nothing and will catch a future notice — but they find NOTHING today and
+        # not one row below reaches this panel through them. What actually exists on
+        # this patch is the community buying route: telecare, community equipment
+        # services, care homes and intermediate care beds.
+        #
+        # REJECTED PATTERNS, each run and read:
+        #   bare "aging"      -> thirty false positives, every one of them "imaging":
+        #                        MRI, CT, mammography, endoscopic, in-vivo, hyperspectral,
+        #                        night vision. The single most dangerous pattern on this
+        #                        patch. "ageing" is not used either: it matches nothing
+        #                        at all here, so it buys nothing and only risks the typo.
+        #   "older people"    -> the page's own name, and it matched twice and was wrong
+        #                        twice: "Adult and Older People (AOP) mental health and
+        #                        Psychological Therapies for Severe Mental Health
+        #                        Problems education programmes" (NHS England — mental
+        #                        health workforce education) and "Supply and delivery of
+        #                        Older People Furniture and associated Services"
+        #                        (Sanctuary Housing Group — a housing association buying
+        #                        furniture for its own schemes, the same kind of row the
+        #                        Patient Moving and Handling rule rejected in Choice
+        #                        Housing's adaptations). Nought out of two. Admitting it
+        #                        would need an exclusion on "furniture", which would in
+        #                        turn drop a genuine care home furniture contract the
+        #                        next time one appears. It stays out (rule 14).
+        #   bare "rehabilitation" -> nineteen rows and not one is this speciality: eight
+        #                        residential drug and alcohol detoxification contracts at
+        #                        Hammersmith and Fulham, brain injury and neuro-rehab,
+        #                        Border Force, the Ministry of Defence, mental health
+        #                        rehab, a Scottish Ambulance Service referral system.
+        #                        Frailty rehabilitation is real but nothing in this data
+        #                        says so on the face of a title.
+        #   "palliative", "end of life", "hospice" -> four rows, all genuine, and all of
+        #                        them belong to the palliative-and-end-of-life-care page,
+        #                        which is a separate speciality with its own page. One of
+        #                        the four is a children's service. Not claimed here.
+        #   bare "respite"    -> its one hit, "Residential, respite and nursing care
+        #                        beds", is genuine and is admitted below on "nursing care
+        #                        beds" instead. "Respite" alone would equally admit
+        #                        children's and learning disability respite, which are
+        #                        other people's patches.
+        #   "supported living"-> "Ardwyn - Supported Living" (Aneurin Bevan UHB). Supported
+        #                        living is as often learning disability or mental health
+        #                        as it is older people, and the title does not say which.
+        #                        Ambiguous on its face, so declined rather than guessed.
+        #   "extra care"      -> "SOL30141 SOL Extra Care Solihull Retirement Village", a
+        #                        council building a retirement village. Construction, not
+        #                        a route anything is sold into clinically.
+        #   "domiciliary"     -> "HMP Wandsworth - Domiciliary Care". A prison.
+        #   "care at home"    -> four rows, all "Healthcare at Home": immunoglobulin,
+        #                        ixekizumab, nusinersen and ustekinumab homecare
+        #                        medicines. A pharmacy route, not this speciality. Note
+        #                        "hospital at home" below cannot collide with it.
+        #   "healthcare technology" -> "YPO - 001284 Community & Healthcare Technology
+        #                        Equipment & Associated Services" is probably partly this
+        #                        patch, but the title covers anything a council might buy.
+        #                        \bcare technology\b is used instead and cannot match
+        #                        "Healthcare Technology" (no word boundary before "care"),
+        #                        which is the whole reason the boundary is written that way.
+        "include": (
+            r"\b(frailty|frail elderly|elderly|geriatric|comprehensive geriatric|"
+            r"delirium|dementia|"
+            r"telecare|technology enabled care|electronic assistive technology|"
+            r"care alarms?|care technology|"
+            r"community equipment|social care equipment|independent living|"
+            r"intermediate care|virtual ward|hospital at home|urgent community response|"
+            r"reablement|discharge to assess|admission avoidance|"
+            r"care homes?|nursing care beds?|"
+            r"falls (?:prevention|management|risk|service|pathway|response))\b"
+        ),
+        # ONE pattern, because on this include exactly one row matched and was wrong:
+        #   ligature -> "Consultancy Services for IP&C, Ligature and Dementia issues at
+        #               Angelton Clinic & Ysbyty Cwm Cynon" (Cwm Taf Morgannwg UHB).
+        #               Caught by "dementia". Angelton Clinic is a mental health unit and
+        #               the contract is an estates and infection prevention consultancy
+        #               about ligature risk; dementia is one line of its brief. It is not
+        #               a frailty buying route, and the other two "ligature" rows in this
+        #               data (ligature reduction works at Wrexham Maelor, anti-ligature
+        #               bedroom doors) confirm the word is mental health estates work.
+        #               Dementia itself stays in the include: it is core vocabulary here
+        #               and this is the only wrong row it has ever produced.
+        # A short exclusion list is the honest outcome of a narrow include, not a sign
+        # the derivation was skipped: 31 of the 32 rows this rule admits were read and
+        # are this speciality.
+        "exclude": r"\b(ligature)\b",
+        # 85144100 is "Residential nursing care services" and it is the one CPV code in
+        # this data specific to this patch — the six notices carrying it are all
+        # older people's residential and nursing care. It corroborates two of the rows
+        # below and admits nothing on its own.
+        # NOT CLAIMED: 85323000, community health services, which sits on both
+        # "Step Up/Step Down Intermediate Care Bed Provision" and "Plymouth Home-Based
+        # Intermediate Care" and would look like the obvious key — until you read the
+        # other forty notices carrying it: CAMHS tier 4 beds, suicide prevention,
+        # smoking cessation, general dental services in Gwent, multilingual counselling,
+        # a drug test on arrest scheme. It corroborates everything and therefore nothing.
+        "cpv": ("85144100",),
+        # NO DRUG TARIFF PART. Part IX reimburses dressings and elastic hosiery (IXA),
+        # incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery
+        # (IXR). Older people are the largest users of Parts IXA and IXB by some
+        # distance, but the tariff has no frailty part and the builder can only filter
+        # by part, not by product: claiming IXB here would publish the continence page's
+        # whole incontinence summary under a frailty heading. No part is claimed.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. NHS Supply Chain has no framework "
+            "for frailty, older people, geriatric medicine or falls, so the single "
+            "framework below is not this speciality's buying route — it is the only part "
+            "of it NHS Supply Chain runs. Most of this patch is bought by local "
+            "authorities and integrated care boards through community equipment services, "
+            "telecare contracts and care home frameworks, which is what the awards list "
+            "shows and why almost every buyer there is a council. The equipment itself "
+            "(hoists, profiling beds, pressure redistribution, wheelchairs, daily living "
+            "aids) is bought through Aids for Daily Living, Pressure Area Care and Patient "
+            "Handling, and Wheelchairs, Specialist Seating and Related Services: those are "
+            "published on the Patient Moving and Handling page and are deliberately not "
+            "repeated here. Being absent from the supplier list below is not evidence of "
+            "absence from this market."
+        ),
+    },
 }
 
 
