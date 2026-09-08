@@ -583,7 +583,20 @@ def main():
                          "site's sitemap and confirming the segment holds products "
                          "and not news or support pages. Repeatable. Mirrors the flag "
                          "of the same name on crawl_supplier_site.py.")
+    ap.add_argument("--out", default=OUT,
+                    help="output file (default %s). Point separate parallel "
+                         "workers at separate --out files to crawl concurrently "
+                         "without racing each other on the same file — two "
+                         "processes both loading+saving the SAME file can silently "
+                         "drop each other's captures. Merge the shard files back "
+                         "into the canonical one afterwards." % OUT)
+    ap.add_argument("--coverage-from", default=None,
+                    help="read coverage ranking (for --auto's least-covered-first "
+                         "ordering) from THIS file instead of --out — use when "
+                         "--out is a fresh empty shard file but you still want "
+                         "auto mode to rank against the real, current coverage.")
     a = ap.parse_args()
+    out_path = a.out
 
     global product_paths
     product_paths = a.product_path or None
@@ -591,8 +604,15 @@ def main():
     rangedoc = json.load(open(RANGE, encoding="utf-8"))
     suppliers_range = rangedoc.get("suppliers", {})
 
-    if os.path.exists(OUT):
-        outdoc = json.load(open(OUT, encoding="utf-8"))
+    coverage_path = a.coverage_from or out_path
+    if os.path.exists(coverage_path):
+        coverage_doc = json.load(open(coverage_path, encoding="utf-8"))
+    else:
+        coverage_doc = {"products": {}}
+    coverage_store = coverage_doc.get("products", {})
+
+    if os.path.exists(out_path):
+        outdoc = json.load(open(out_path, encoding="utf-8"))
     else:
         outdoc = {"generated": time.strftime("%Y-%m-%d"), "products": {}}
     outdoc.setdefault("products", {})
@@ -605,11 +625,11 @@ def main():
         # real file is then always either the previous complete version or the
         # new complete version, never half of one.
         outdoc["generated"] = time.strftime("%Y-%m-%d")
-        tmp = OUT + ".tmp"
+        tmp = out_path + ".tmp"
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump(outdoc, f, indent=1, ensure_ascii=False)
             f.write("\n")
-        os.replace(tmp, OUT)
+        os.replace(tmp, out_path)
 
     if a.supplier:
         targets = [(a.supplier, a.domain or (suppliers_range.get(a.supplier) or {}).get("domain"))]
@@ -625,7 +645,7 @@ def main():
             prods = suppliers_range[name].get("products") or []
             if not prods:
                 return (1.0, "9999-99-99")
-            have = [products_store.get(name + "|" + nk(p.get("n")))
+            have = [coverage_store.get(name + "|" + nk(p.get("n")))
                    for p in prods if p.get("n")]
             have = [h for h in have if h]
             ratio = len(have) / max(len(prods), 1)
