@@ -469,8 +469,18 @@ SPECIALITY_RULES = {
         #                          "Purchase of Electrosurgical Devices (Cut and
         #                          Coagulation, Uterine Ablation)" is a true row and
         #                          excluding on the single word would have dropped it.
+        #   asbestos            -> "WHHT - Emergency DCU Supply and Plant Room Asbestos
+        #                          Decontamination Services", West Hertfordshire
+        #                          Teaching Hospitals. Asbestos removal from a plant
+        #                          room, caught on "decontaminat\w*". It arrived in the
+        #                          award feed on 08/09/2026 and was spotted before it
+        #                          reached a member. Estates work, like the water
+        #                          treatment row above, and the same reason bare
+        #                          "decontamination" is never used on the framework
+        #                          pattern. It is the only row in this data carrying the
+        #                          word, and asbestos can never mean sterile services.
         "exclude": (
-            r"\b(lectures? theatre|road re-?surfac\w*|water treatment|"
+            r"\b(lectures? theatre|road re-?surfac\w*|water treatment|asbestos|"
             r"positive airway pressure|cpap|medicines|coagulation products)\b"
         ),
         # Seven CPV families that really are this patch, read off the notices that

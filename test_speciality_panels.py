@@ -488,6 +488,12 @@ must_not_match = [
     "Sterile Collection Trays (4918803)",
     # A stationery order must never be able to reach a member on "stapler".
     "Supply of Office Stationery including Staplers and Hole Punches",
+    # Added 09/09/2026. The overnight feed brought this in and it matched on
+    # "decontaminat\\w*". It is asbestos removal from a plant room at West
+    # Hertfordshire — estates work, like the water treatment row, and the same reason
+    # bare "decontamination" is never used on the framework pattern. It was caught
+    # before it reached a member. This case exists so it cannot come back.
+    "WHHT - Emergency DCU Supply and Plant Room Asbestos Decontamination Services",
 ]
 for t in must_not_match:
     check("never admitted: %s" % t[:60], not B.match_title(hrx, t), "matched and should not")
