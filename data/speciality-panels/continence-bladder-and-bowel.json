@@ -1,0 +1,963 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "continence-bladder-and-bowel",
+ "label": "Continence, Bladder and Bowel",
+ "defined": true,
+ "generated": "2026-09-08",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-07T12:26:14+00:00",
+  "openTenders": "07/09/2026",
+  "drugTariff": "2026-09-07"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(continence|urology and bowel)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This is a framework membership list, not a market share and not the whole buying picture. The larger part of this patch is bought in the community on prescription, through NHSBSA Drug Tariff Part IX and the dispensing appliance contractors, a route with no NHS Supply Chain framework page at all; the Drug Tariff summary is where that route appears, and the page's Market intelligence section sizes the two populations separately. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This is a framework membership list, not a market share and not the whole buying picture. The larger part of this patch is bought in the community on prescription, through NHSBSA Drug Tariff Part IX and the dispensing appliance contractors, a route with no NHS Supply Chain framework page at all; the Drug Tariff summary is where that route appears, and the page's Market intelligence section sizes the two populations separately. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(continence|incontinen\\w*|urinary catheters?|urethral catheters?|indwelling catheters?|intermittent catheters?|foley|suprapubic|catheterisation|catheterization|urinary drainage|drainage bags?|leg bags?|night bags?|catheter valves?|catheter maintenance|urine meters?|urine collection|urine bags?|penile sheaths?|urinary sheaths?|uridome|stomas?|ostomy|colostomy|ileostomy|urostomy|bowel management|bowel care|faecal management|fecal management|anal irrigation|trans[- ]?anal irrigation|rectal irrigation|bladder washout|bladder irrigation|pelvic floor|continence pads?|absorbent pads?|pads and garments|commodes?|enuresis|nocturia)\\b/i and does not match /\\b(blood collection|catheterisation lab|surgical mesh)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "NHSBSA Drug Tariff Part IXB/IXC/IXB & IXC for the stated effective month, summarised. Prices are the reimbursement price at publication, not necessarily today's."
+ },
+ "counts": {
+  "frameworks": 2,
+  "suppliers": 63,
+  "suppliersUnresolved": 2,
+  "awardsShown": 14,
+  "awardsMatched": 14,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Disposable and Washable Continence Care",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+   "reference": "2026/S 000-031173",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "24 August 2026",
+   "ends": "23 August 2028",
+   "supplierCount": 12,
+   "supplierSource": "count verified against the page's own stated total (12)",
+   "suppliers": [
+    "Abena UK Ltd",
+    "Attends Ltd",
+    "Essity UK Ltd",
+    "Forma-Care (UK) Ltd",
+    "GBUK Ltd",
+    "Healthcare 25 Ltd",
+    "iMEDicare Ltd",
+    "Meditrade UK Ltd",
+    "Ontex Healthcare UK Ltd",
+    "Paul Hartmann Ltd",
+    "P&S Healthcare Ltd",
+    "Sharon Services (UK) Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Urology and Bowel Management",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+   "reference": "2023/S 000-011173",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "21 February 2024",
+   "ends": "20 February 2027",
+   "supplierCount": 57,
+   "supplierSource": "count verified against the page's own stated total (57)",
+   "suppliers": [
+    "Abena UK Limited",
+    "AQLANE Medical BV",
+    "Ardo Medical Ltd",
+    "Astric Medical Ltd",
+    "B Braun Medical Ltd",
+    "Baxter Healthcare Limited",
+    "Beambridge Medical Ltd",
+    "Becton Dickinson UK Ltd Woking",
+    "C&P Medical Trading Ltd",
+    "CD Medical Ltd",
+    "Class Medical Ltd",
+    "CliniMed Ltd",
+    "Clinisupplies GB Limited",
+    "Clinisupplies Ltd",
+    "CODAN Limited",
+    "Coloplast Limited",
+    "Convatec Ltd",
+    "Creo Medical UK Ltd",
+    "E&E MEDICAL SUPPLIES LIMITED",
+    "Essity UK TENA Heath & Medical",
+    "Fairmont Medical Products Limited",
+    "Fannin UK Ltd",
+    "Flexicare Medical Ltd",
+    "Fresenius Kabi Ltd",
+    "GBUK Healthcare",
+    "GenX MediCare Ltd",
+    "Hollister Ltd",
+    "iMEDicare Ltd",
+    "KCI Medical Limited (3m)",
+    "Key Health Solutions",
+    "Laborie Medical Technologies UK Ltd",
+    "LINC Medical Systems Ltd",
+    "Medicina Limited",
+    "Mediplus Ltd",
+    "Mediq Healthcare",
+    "Medline Industries Ltd",
+    "Oakmed Ltd",
+    "Optimum Medical Solutions Ltd",
+    "Paramount Medical Solutions Ltd",
+    "Peak Medical Ltd",
+    "Pelican Healthcare Limited",
+    "Pennine Healthcare",
+    "ProSys International Ltd",
+    "RB Medical",
+    "Redland embh Group Limited",
+    "Rhodes Pharma Ltd",
+    "Rocialle Healthcare Limited",
+    "Salts Healthcare (Ostomy)",
+    "Sharon services (UK) Ltd",
+    "Smith & Nephew Healthcare Ltd",
+    "Teleflex Medical UK",
+    "Trion Pharma Limited",
+    "UNOQUIP GMBH",
+    "Venture Healthcare Ltd",
+    "Vernacare International Limited",
+    "Wellspect Limited",
+    "Sinapi Biomedical UK"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Abena UK Limited",
+   "resolved": true,
+   "variants": [
+    "Abena UK Limited",
+    "Abena UK Ltd"
+   ],
+   "frameworks": [
+    "Disposable and Washable Continence Care",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Essity UK Limited",
+   "resolved": true,
+   "variants": [
+    "Essity UK Ltd",
+    "Essity UK TENA Heath & Medical"
+   ],
+   "frameworks": [
+    "Disposable and Washable Continence Care",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK Healthcare",
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Disposable and Washable Continence Care",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "iMEDicare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Disposable and Washable Continence Care",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Sharon Services (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Sharon Services (UK) Ltd",
+    "Sharon services (UK) Ltd"
+   ],
+   "frameworks": [
+    "Disposable and Washable Continence Care",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "AQLANE Medical BV",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Ardo medical Limited",
+   "resolved": true,
+   "variants": [
+    "Ardo Medical Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Astric Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Attends Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Disposable and Washable Continence Care"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B Braun Medical Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Baxter Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "Baxter Healthcare Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton Dickinson UK Ltd Woking"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Beambridge Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "C&P Medical Trading Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "CD Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Class Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "CliniMed",
+   "resolved": true,
+   "variants": [
+    "CliniMed Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Clinisupplies",
+   "resolved": true,
+   "variants": [
+    "Clinisupplies GB Limited",
+    "Clinisupplies Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "CODAN Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Coloplast",
+   "resolved": true,
+   "variants": [
+    "Coloplast Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Convatec",
+   "resolved": true,
+   "variants": [
+    "Convatec Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Creo Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Creo Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "E&E MEDICAL SUPPLIES LIMITED",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Eakin Ostomy (Pelican Healthcare)",
+   "resolved": true,
+   "variants": [
+    "Pelican Healthcare Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Fairmont Medical Products Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Flexicare Medical",
+   "resolved": true,
+   "variants": [
+    "Flexicare Medical Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Forma-Care (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Disposable and Washable Continence Care"
+   ]
+  },
+  {
+   "name": "Fresenius Kabi Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Healthcare 25 Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Disposable and Washable Continence Care"
+   ]
+  },
+  {
+   "name": "Hollister",
+   "resolved": true,
+   "variants": [
+    "Hollister Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Ivor Shaw Ltd",
+   "resolved": true,
+   "variants": [
+    "Pennine Healthcare"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "KCI Medical Limited (3m)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Key Health Solutions",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Laborie Medical Technologies UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "LINC Medical",
+   "resolved": true,
+   "variants": [
+    "LINC Medical Systems Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Medicina Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Mediplus Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Mediq Healthcare"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Meditrade UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Disposable and Washable Continence Care"
+   ]
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Ontex Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Disposable and Washable Continence Care"
+   ]
+  },
+  {
+   "name": "Optimum Medical",
+   "resolved": true,
+   "variants": [
+    "Optimum Medical Solutions Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "P&S Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Disposable and Washable Continence Care"
+   ]
+  },
+  {
+   "name": "Paramount Medical Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Paul Hartmann (HARTMANN)",
+   "resolved": true,
+   "variants": [
+    "Paul Hartmann Ltd"
+   ],
+   "frameworks": [
+    "Disposable and Washable Continence Care"
+   ]
+  },
+  {
+   "name": "Peak Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "ProSys International Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "RB Medical Engineering Ltd",
+   "resolved": true,
+   "variants": [
+    "RB Medical"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Redland embh Group Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Rhodes Pharma Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Rocialle Healthcare",
+   "resolved": true,
+   "variants": [
+    "Rocialle Healthcare Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Salts Healthcare (Ostomy)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Sinapi Biomedical UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Smith+Nephew",
+   "resolved": true,
+   "variants": [
+    "Smith & Nephew Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "Teleflex Medical UK"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Trion Pharma Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "UNOQUIP GMBH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Unora Healthcare Ltd (formerly Oakmed Ltd)",
+   "resolved": true,
+   "variants": [
+    "Oakmed Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Venture Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Vernacare",
+   "resolved": true,
+   "variants": [
+    "Vernacare International Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Wellspect",
+   "resolved": true,
+   "variants": [
+    "Wellspect Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Continence Home Delivery - Brent CLCH",
+   "buyer": "Central London Community Healthcare NHS Trust",
+   "supplier": "Ontex Healthcare UK Limited",
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080837-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "National Framework Agreement for the Provision of Prescription Hub Services (Stoma and/or Catheter)",
+   "buyer": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
+   "supplier": "Optimum Medical Solutions Limited",
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078412-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Continence Goods and Services 2024",
+   "buyer": "HealthTrust Europe LLP (HTE) acting on behalf of Mid and South Essex NHS Foundat",
+   "supplier": "Abena UK Limited, Critical Healthcare Ltd, iMEDicare Ltd, Medline Industries Lim",
+   "date": "2025-03-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/010389-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Stoma Acute Patient",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Alliance Pharmaceuticals, B. Braun Medical Limited, Bullen Healthcare, Clinimed ",
+   "date": "2025-02-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004180-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Indwelling Urinary Catheters & Drainage Bags",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "iMEDicare Ltd, Mediplus Ltd",
+   "date": "2024-04-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011410-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP57122 Supply and Delivery of Continence Products",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Ontex Healthcare UK Ltd",
+   "date": "2024-02-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004147-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Faecal Management System",
+   "buyer": "BSO Procurement and Logistics Service",
+   "supplier": "CONVATEC LTD",
+   "date": "2024-01-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/003181-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Invitation to Tender for the Supply of Urine Meters",
+   "buyer": "NHS Wales Shares Services Procurement",
+   "supplier": "Clinisupplies Ltd",
+   "date": "2023-08-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023268-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Stoma Acute Patient",
+   "buyer": "National Services Scotland, National Procurement",
+   "supplier": "Clinimed Limited, Coloplast Ltd, ConvaTec Ltd, Hollister Ltd, Peak Medical Ltd, ",
+   "date": "2022-12-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/034511-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Urinary Catheters & Drainage Bags",
+   "buyer": "National Services Scotland, National Procurement",
+   "supplier": "Coloplast Ltd, Mediplus Ltd, LINC Medical, Bard Limited, Teleflex, Clinisupplies",
+   "date": "2022-08-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/022482-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Continence Pads & Garments",
+   "buyer": "National Procurement",
+   "supplier": "Paul Hartmann Ltd, SCA Hygiene, Ontex Healthcare UK Ltd",
+   "date": "2022-03-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/006731-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Faecal Management Systems",
+   "buyer": "NHS Wales Shared Services Partnership",
+   "supplier": "ConvaTec Limited",
+   "date": "2022-01-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000030-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Framework for beds, mattresses and wheelchairs both services and products, continence home delivery services plus manage",
+   "buyer": "NHS Shared Business Services Ltd (NHS SBS)",
+   "supplier": "accora",
+   "date": "2021-12-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/032107-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Bulk Delivery of Continence Products for Community Services",
+   "buyer": "University Hospitals of North Midlands NHS Trust",
+   "supplier": "Ontex Healthcare UK Limited",
+   "date": "2021-09-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023059-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": {
+  "parts": [
+   "IXB",
+   "IXC",
+   "IXB & IXC"
+  ],
+  "effectiveMonth": "2026-09",
+  "dataAsOf": "2026-09-07",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
+  "lineCount": 9466,
+  "supplierCount": 98,
+  "topSuppliers": [
+   {
+    "name": "Coloplast Ltd",
+    "lines": 1019
+   },
+   {
+    "name": "AMI Medical Ltd",
+    "lines": 798
+   },
+   {
+    "name": "Marlen Healthcare Ltd",
+    "lines": 612
+   },
+   {
+    "name": "Nu-Hope Laboratories Inc",
+    "lines": 612
+   },
+   {
+    "name": "CUI International",
+    "lines": 564
+   },
+   {
+    "name": "Salts Healthcare",
+    "lines": 543
+   },
+   {
+    "name": "Dansac Ltd",
+    "lines": 531
+   },
+   {
+    "name": "Hollister Ltd",
+    "lines": 512
+   },
+   {
+    "name": "ConvaTec Ltd",
+    "lines": 488
+   },
+   {
+    "name": "Pelican Healthcare Ltd",
+    "lines": 485
+   },
+   {
+    "name": "Unora Healthcare Ltd",
+    "lines": 485
+   },
+   {
+    "name": "Welland Medical Ltd",
+    "lines": 354
+   },
+   {
+    "name": "Jade-Euro-Med",
+    "lines": 334
+   },
+   {
+    "name": "Kavendor Ltd",
+    "lines": 331
+   },
+   {
+    "name": "Vanilla Blush Medical Ltd",
+    "lines": 203
+   },
+   {
+    "name": "B.Braun Medical Ltd",
+    "lines": 154
+   },
+   {
+    "name": "Charles S Bullen Stomacare Ltd",
+    "lines": 138
+   },
+   {
+    "name": "S.G.& P.Payne Ltd",
+    "lines": 136
+   },
+   {
+    "name": "Peak Medical Ltd",
+    "lines": 98
+   },
+   {
+    "name": "Manfred Sauer UK Ltd",
+    "lines": 97
+   }
+  ],
+  "priceMin": 94.0,
+  "priceMax": 20021.0
+ }
+}

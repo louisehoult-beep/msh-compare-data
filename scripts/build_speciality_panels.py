@@ -229,6 +229,113 @@ SPECIALITY_RULES = {
             "the whole buying picture. The page's Deep dive covers the IC/IR route."
         ),
     },
+    # PAGE 2910. Scope, in the page's own words: "Community and acute continence
+    # services, catheters and containment products." Products and services, not
+    # diagnostics and not surgery: bladder scanning and urodynamics belong to the
+    # assessment end of the patch and are deliberately left out below, as is the
+    # surgical treatment of stress incontinence, which theatres and gynaecology own.
+    "continence-bladder-and-bowel": {
+        "label": "Continence, Bladder and Bowel",
+        # Exactly the two national frameworks the page's own Buying route and
+        # framework calendar name, both read at NHS Supply Chain on 18 Aug 2026:
+        #   Disposable and Washable Continence Care (2026/S 000-031173) — the
+        #     containment route, 12 suppliers, live from 24 Aug 2026 to 23 Aug 2028.
+        #   Urology and Bowel Management (2023/S 000-011173) — catheters, sheaths
+        #     and drainage bags, 57 suppliers, expiring 20 Feb 2027.
+        # "Bladder Scanners and Associated Options and Related Services" is NOT
+        # matched: it is a Diagnostic Equipment CBU capital route, and adding it
+        # would contradict the page's sourced statement that two national frameworks
+        # carry this patch. "Endoscopy, Endourology and Oncology Ablation
+        # Consumables", "Male Intra-Urethral Catheter with Magnet Control" and
+        # "Central Venous Catheters and Associated Products" are likewise other
+        # pages' frameworks — colorectal and endoscopy, urology, and IV therapy.
+        "frameworks": r"\b(continence|urology and bowel)\b",
+        # NOT INCLUDED, deliberately, and each one was tried:
+        #   bare "catheter"  -> cardiac ablation, central venous, renal fistula and
+        #                       HRIM manometry catheters. Qualified below instead.
+        #   bare "urology"   -> "Urology Consumables", "Urology Robot", "Surgical
+        #                       Urology Consumables", "Endourology Disposable
+        #                       Products", "Urology Cystoscopy Surveillance Service".
+        #                       All the urology page's, none of them continence.
+        #   bare "urinary"   -> "Antibiotic & Genito Urinary Medicines", three times.
+        #                       That is the pharmacy patch.
+        #   bare "bowel"     -> "NHSS Bowel Screening Test Kits and Analysers", "NHS
+        #                       Scotland Bowel Screening FIT Kits" and "Insourcing of
+        #                       Bowel Screening and General Endoscopy Services".
+        #                       Bowel cancer screening, not bowel management.
+        #   bare "faecal"    -> "Faecal Immunochemical Testing (FIT) ... bowel cancer".
+        #                       Same screening pathway. "faecal management" is used.
+        #   bare "pad"       -> "GP13A.UK. Grid Pad 13A", an AAC communication device.
+        #   bare "absorbent" -> "Absorbents", NHS Wales, CPV 33000000 and no other
+        #                       detail. Could be continence absorbents or spillage
+        #                       absorbents and the title cannot tell you which, so
+        #                       the panel declines it rather than guessing (rule 14).
+        #   bare "irrigation"-> "IV Fluids & Irrigation Solutions". Qualified below.
+        #   bare "toilet"    -> "Paper Hygiene and Toilet Tissue", and "Dress
+        #                       Toileting Slings" on a hoist contract.
+        #   bladder scanning
+        #   and urodynamics  -> real, and real bladder work: "Bladder Scanners",
+        #                       "Bladder Scanner Purchase", "CUBESCAN BIOCON-700-S
+        #                       BLADDER SCANNER" and "ESNEFT3207 Urodynamics". They
+        #                       are diagnostic equipment, and this page's stated
+        #                       scope is continence services, catheters and
+        #                       containment. Left out so the panel matches the page.
+        "include": (
+            r"\b(continence|incontinen\w*|"
+            r"urinary catheters?|urethral catheters?|indwelling catheters?|"
+            r"intermittent catheters?|foley|suprapubic|catheterisation|catheterization|"
+            r"urinary drainage|drainage bags?|leg bags?|night bags?|"
+            r"catheter valves?|catheter maintenance|"
+            r"urine meters?|urine collection|urine bags?|"
+            r"penile sheaths?|urinary sheaths?|uridome|"
+            r"stomas?|ostomy|colostomy|ileostomy|urostomy|"
+            r"bowel management|bowel care|faecal management|fecal management|"
+            r"anal irrigation|trans[- ]?anal irrigation|rectal irrigation|"
+            r"bladder washout|bladder irrigation|"
+            r"pelvic floor|continence pads?|absorbent pads?|pads and garments|"
+            r"commodes?|enuresis|nocturia)\b"
+        ),
+        # Three patterns, each put here because a real row matched `include`, was
+        # read, and was rejected:
+        #   blood collection    -> "Evacuated Blood Collection Systems and Urine
+        #                          Collection Systems", BSO Procurement and Logistics
+        #                          Service. Pathology specimen tubes, matched on
+        #                          "urine collection". Lot 7 of Urology and Bowel
+        #                          Management really is Urine Collection Devices, so
+        #                          the term stays and the pathology pairing goes.
+        #   catheterisation lab -> "Managed Service for Catheterisation Lab, Cardio
+        #                          Thoracic Centre and Vascular", Mid and South Essex.
+        #                          A cardiac cath lab, matched on "catheterisation".
+        #   surgical mesh       -> "Tower 2 - Surgical Mesh, Fixation Devices, Stress
+        #                          Incontinence and Bulking Agents", CPP acting for
+        #                          NHS Supply Chain. Twenty-odd theatre suppliers on a
+        #                          surgical mesh tower. Surgical treatment of stress
+        #                          urinary incontinence is the theatres and
+        #                          gynaecology patch, not community and acute
+        #                          continence services.
+        "exclude": r"\b(blood collection|catheterisation lab|surgical mesh)\b",
+        # NO CPV LIST. The only two matching notices in the award feed that carry CPV
+        # codes at all carry 33140000, medical consumables, and 85100000, health
+        # services. Neither is specific to this patch, so nothing is claimed rather
+        # than listing a family that corroborates everything and therefore nothing.
+        # Part IXB is incontinence appliances and Part IXC stoma appliances — the
+        # community prescription route that is the larger half of this patch. The
+        # third value is not a typo: NHSBSA lists six Manfred Sauer lines under the
+        # literal part "IXB & IXC", and matching is on the exact part string, so
+        # leaving it out would silently drop them.
+        "tariffParts": ("IXB", "IXC", "IXB & IXC"),
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This is a framework "
+            "membership list, not a market share and not the whole buying picture. "
+            "The larger part of this patch is bought in the community on "
+            "prescription, through NHSBSA Drug Tariff Part IX and the dispensing "
+            "appliance contractors, a route with no NHS Supply Chain framework page "
+            "at all; the Drug Tariff summary is where that route appears, and the "
+            "page's Market intelligence section sizes the two populations "
+            "separately. Being named on a framework is not evidence of volume, and "
+            "being absent from one is not evidence of absence from the market."
+        ),
+    },
 }
 
 
