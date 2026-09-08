@@ -10,3 +10,9 @@ data/company-press.json -merge
 # copy on a push conflict (git fetch + reset --hard + rerun) rather than ever
 # text-merging it — -merge makes that the only path git will allow.
 data/mhra-alerts.json -merge
+
+# Same reasoning, added 08/09/2026 with the private provider moves tracker
+# (page 1666, Hub build 3/3). refresh_private_provider_moves.py rebuilds this
+# file additively against origin's latest copy on a push conflict, same as
+# mhra-alerts.json above.
+data/private-provider-moves.json -merge
