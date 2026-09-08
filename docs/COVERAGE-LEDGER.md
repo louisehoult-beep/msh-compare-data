@@ -34,7 +34,7 @@ low coverage there means exhausted, not neglected.
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 10 | 18.9% | 25 | 11 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 8 | 12 | STARTED |
 | Surgical Instruments | surgical | 50 | 8 | 16.0% | 18 | 12 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 6 | 14.0% | 20 | 7 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 6 | 14.0% | 19 | 7 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 6 | 16.2% | 9 | 15 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 11 | 29.7% | 10 | 7 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 7 | 20.0% | 16 | 9 | STARTED |
@@ -45,7 +45,7 @@ low coverage there means exhausted, not neglected.
 | General Wound Care | wound | 28 | 11 | 39.3% | 5 | 9 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 4 | 14.8% | 8 | 5 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 5 | 20.0% | 13 | 5 | STARTED |
-| Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | 10 | 5 | STARTED |
+| Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | 9 | 5 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 3 | 7 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 5 | 22.7% | 7 | 6 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 5 | 3 | STARTED |
@@ -125,7 +125,7 @@ low coverage there means exhausted, not neglected.
 | Obstetrics and Vinyl Pessaries | — | 3 | 0 | 0.0% | 2 | 0 | UNMAPPED |
 | Fresh Food DPS | — | 97 | 0 | 0.0% | 97 | 0 | OUT OF SCOPE |
 | Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 7 | 11.7% | 46 | 6 | OUT OF SCOPE |
-| Medical Healthcare Furniture | — | 51 | 0 | 0.0% | 36 | 5 | OUT OF SCOPE |
+| Medical Healthcare Furniture | — | 51 | 0 | 0.0% | 35 | 5 | OUT OF SCOPE |
 | Beverages, Confectionary and Snacks | — | 44 | 0 | 0.0% | 42 | 2 | OUT OF SCOPE |
 | Textiles and Associated Products | workwear | 34 | 2 | 5.9% | 24 | 5 | OUT OF SCOPE |
 | Food Vending Solutions | — | 31 | 0 | 0.0% | 30 | 1 | OUT OF SCOPE |
