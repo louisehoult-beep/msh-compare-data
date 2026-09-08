@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-07",
+ "lastRun": "2026-09-08",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -46,9 +46,11 @@
   "Anika Therapeutics Ltd",
   "Anita UK Ltd",
   "Anser Medical",
+  "AOTI",
   "APC Cardiovascular Ltd",
   "Apos Medical UK Ltd",
   "Apple Star Corp Limited",
+  "Applied Medical UK Ltd",
   "APR Medtech Limited",
   "Aptvision Limited",
   "AQLANE Medical BV",
@@ -74,6 +76,7 @@
   "Babease Limited",
   "Balmung Medical Handel GmbH",
   "Bar Code Data Ltd",
+  "Bariatric Solutions International",
   "Bates Office Services Ltd",
   "BDSI Ltd",
   "Beagle Orthopaedic Ltd",
@@ -109,6 +112,7 @@
   "Bridea Medical B.V",
   "Bridgehead Software",
   "Brighthedge Ltd T/A Summit Medical and Scientific",
+  "British Bins Ltd",
   "British Heart Foundation",
   "Broomwell Healthwatch",
   "Bullen Healthcare",
@@ -194,51 +198,47 @@
   "Eakin Surgical Limited",
   "Echosens",
   "Eclipse Dental Equipment",
+  "Econix Limited",
   "Edge Medical Ltd",
   "Eitan Medical UK Ltd",
   "eKare",
   "Electro Spyres Healthcare Limited",
   "Endosoft Limited",
-  "Econix Limited",
   "Ennogen Healthcare",
+  "Enteral Access Technologies Ltd (previously named on the framework as Nasogastric Feeding Solutions Ltd",
   "EOS Imaging",
   "Epredia",
   "Esaote",
   "Espere Healthcare Ltd",
-  "Evolan Pharma",
-  "British Bins Ltd",
-  "Enteral Access Technologies Ltd (previously named on the framework as Nasogastric Feeding Solutions Ltd",
   "Espère Healthcare Ltd",
   "Euro Packaging Ltd",
   "Eurospine",
+  "Evolan Pharma",
   "ExpHand Prosthetics Ltd",
+  "EyeTech International Ltd",
   "EziDrops Ltd",
+  "Fairmont Medical Products Limited",
   "FH Ortho Ltd",
+  "Firstkind Ltd",
   "Fisher & Paykel Healthcare",
   "Fleischhacker GmbH & Co. KG",
   "Forma-Care (UK) Ltd",
+  "FormAL Group Ltd",
   "Freelance Surgical Limited",
   "Fukuda Denshi UK Ltd",
   "Full Support Healthcare Ltd",
-  "EyeTech International Ltd",
-  "Firstkind Ltd",
-  "FormAL Group Ltd",
-  "AOTI",
   "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
+  "G S Medical",
   "Gailarde Ltd",
   "GAP Medical Solutions Ltd",
   "Gardamed",
-  "GDP Compliance Ltd",
-  "Genetic Signatures",
-  "Gentell UK Ltd",
-  "Global Health and Safety Ltd",
-  "G S Medical",
   "GB UK Ltd",
   "Gce Group Ltd",
-  "Applied Medical UK Ltd",
-  "Bariatric Solutions International",
-  "Fairmont Medical Products Limited",
+  "GDP Compliance Ltd",
+  "Genetic Signatures",
   "Genmed Enterprises Ltd",
+  "Gentell UK Ltd",
+  "Global Health and Safety Ltd",
   "Global Life Sciences Solutions Operations UK Ltd",
   "Grafton Optical Company Limited",
   "Greenbone Spa",
@@ -246,7 +246,19 @@
   "Grosvenor Contracts London Ltd",
   "GTA (UK) Ltd",
   "Guerbet Laboratories Limited",
-  "Guymark"
+  "Guymark",
+  "GV Health",
+  "H4 Medical Ltd",
+  "Haddenham Healthcare",
+  "Hamilton Medical UK",
+  "Hanson Instruments Ltd",
+  "Harris-Jones Medical Ltd",
+  "Harrison-AI Medical UK Ltd",
+  "HD Clinical Ltd",
+  "Headington Medical Technology Ltd",
+  "Healogics",
+  "Healthcare Supply Solutions Limited",
+  "Healthy.io"
  ],
  "refusals": [
   {
@@ -498,6 +510,16 @@
    "name": "Griffiths and Neilson Ltd",
    "reason": "Duplicate record - needs a merge decision, not aliases. The seed already holds \"Griffiths and Nielsen Ltd\" (aliases \"Griffiths and Nielsen Ltd\", \"GRIFFITHS & NIELSEN PLASTICS LIMITED\"; Advanced Wound Care and Vascular Therapy frameworks). Companies House, read 07/09/2026, holds GRIFFITHS & NIELSEN LIMITED (01201146, active, incorporated 21/02/1975, previous name GRIFFITHS & NIELSEN PLASTICS LIMITED, Maydwell Avenue, Off Stane Street, Slinfold, Horsham, West Sussex RH13 0GN) and no company at all spelled \"Neilson\" in this line of business, so the \"Neilson\" spelling in NHS Supply Chain's Syringes, Needles and Associated Products brief is the odd one out rather than a second company. No website resolves for either spelling (griffithsandnielsen.co.uk, griffiths-nielsen.co.uk, gniplastics.co.uk, griffithsandneilson.co.uk all fail), so nothing could be cited from the company itself. Every name form this record could take is already owned by the existing record. NOTE FOR LOU, not an alias matter: the Syringes, Needles and Associated Products brief (2026/S 000-002484), re-read live 07/09/2026, lists \"Griffiths and Neilson Ltd\" among the suppliers BEING DELISTED at the start of the framework agreement, not among the 53 suppliers on it - the seed record currently carries it as a framework supplier.",
    "date": "2026-09-07"
+  },
+  {
+   "name": "Harrison-AI Medical UK Ltd",
+   "date": "2026-09-08",
+   "reason": "Verified, but no additional usable name form exists. The company's own privacy notice on harrison.ai, read 08/09/2026, lists the group's legal entities and gives the UK one as exactly \"Harrison-AI Medical UK Ltd\" (Company no: 12804340) - which is this record's display name and is already in its alias list, in both cases. Every other name on that page belongs to a different legal entity in the same group (Harrison-AI Pty Ltd and Harrison-AI Medical Pty Ltd in Australia, Harrison-AI Medical Inc and Harrison.AI Services, Inc in the US, Harrison-AI Medical B.V in the Netherlands, Harrison-AI Medical Company Limited in Vietnam, Harrison-AI Medical India Private Limited), and a parent's or sibling's name is not an alias of this one. The domain harrison.ai belongs to the Australian parent, not to the UK entity, so it was not added either. NOTE for a later run: company number 12804340 is now published on the group's own website against the UK entity's name, which is the confirmation this record's candidate number was waiting for."
+  },
+  {
+   "name": "Healthcare Supply Solutions Limited",
+   "date": "2026-09-08",
+   "reason": "No verifiable name form. No company website could be found: healthcaresupplysolutions.co.uk resolves but serves only a \"Launching Soon\" placeholder carrying no company name, registration number or address (read 08/09/2026); healthcaresupplysolutions.com and hss-healthcare.co.uk do not resolve. Companies House holds no company of this name - the record's own companyNumberNote already records that finding from 14/08/2026, and nothing has changed. The only source that names this supplier is NHS Supply Chain's own contract launch brief for 2021/S 000-007768, which writes it as exactly \"Healthcare Supply Solutions Limited\", the form the record already holds. Its specialities array is empty and was LEFT empty: no source states its clinical scope, and the two frameworks it sits on (Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices; Radiotherapy Treatment Systems) are a framework award, not a statement of scope by the company."
   }
  ],
  "sources": {
@@ -1949,6 +1971,110 @@
    ],
    "specialities": [],
    "evidence": "The company's own website globalhealth.co.uk, read 06/09/2026 (the record's own Website link). Its copyright line reads \"Copyright (c) 2026 Global Health and Safety Limited\", giving both the registered-name form and proof the domain is the company's own. The site describes a \"UK manufacturer of healthcare products\" across woundcare dressings, compression and vascular therapy, and infection control, consistent with the record's existing Wound care speciality, which was therefore left untouched. The suffix-stripped form \"Global Health and Safety\" was deliberately NOT added: although it is multi-token, it is an ordinary English collocation that appears in unrelated public-health coverage, and it would clear the sector and relevance tests on stories about other organisations. The product brands \"British Mask\" and \"Faceguard\" are product names, not name forms, and do not affect the match rule."
+  },
+  {
+   "name": "GV Health",
+   "date": "2026-09-08",
+   "aliases": [
+    "GV Health Ltd",
+    "GV Health Limited",
+    "gvhealth.com"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website gvhealth.com, read 08/09/2026. The privacy policy states \"The website is owned and operated by GV Health Ltd\" and \"We are registered in England and Wales under registration number 2794881, and our registered office is at 2 Arlington Court, Whittle Way, Arlington Business Park, Stevenage, Hertfordshire, SG1 2FS\"; the terms of use state \"The Site is owned and operated by GV Health Limited\" and \"all GV Health logos and banners are trademarks or registered trademarks of GV Health Limited\"; the site-wide footer reads \"Copyright (c) 2026 GV Health Ltd.\" Specialities were already populated (Infection prevention and PPE; Facilities, cleaning & estates; Pathology and laboratory; Workwear, scrubs & hospital textiles) and were left untouched. The product brands on the site (SoChlor, Polycare, Life Protected Cleaner) are product names, not company name forms, so none was added as an alias. NOTE for a later run: registration number 2794881 is published on the company's own site and this record still carries no company number."
+  },
+  {
+   "name": "H4 Medical Ltd",
+   "date": "2026-09-08",
+   "aliases": [
+    "H4 Medical Limited",
+    "H4 Medical",
+    "h4medical.co.uk"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website h4medical.co.uk, read 08/09/2026. The home page states \"H4 Medical Limited is a family run business with the MISSION to offer high quality medical products and equipment for use in the sterile service department, endoscopy and operating theatres\", uses \"H4 Medical\" throughout the running text, and carries a customer testimonial naming \"H4 Medical Ltd\". Companies House, read 08/09/2026, holds H4 MEDICAL LIMITED (07142354, active, incorporated 02/02/2010) - the record's existing candidate number, still not proved against a number published by the company, so it was left as a candidate. \"H4 Medical\" was checked for ambiguity before being added: every search hit for the phrase is this one Manchester/Swinton company (site, LinkedIn, Clinical Services Journal supplier listing, all carrying the same telephone number +44 (0)161 743 9772). Speciality Endoscopy was already recorded and was left untouched."
+  },
+  {
+   "name": "HD Clinical Ltd",
+   "date": "2026-09-08",
+   "aliases": [
+    "HD Clinical",
+    "HD-Clinical Ltd",
+    "Nexus / HDC",
+    "nexus-hdc.com"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website nexus-hdc.com, read 08/09/2026 (the record's own Website link, already proved by registration number). The site-wide footer reads \"(c) 2026 HD Clinical, all rights reserved | Nexus / HDC is the trading name of HD Clinical Ltd\" and \"Registered in England & Wales Company number 05436117\"; the trademark line reads \"Solus(R), EcgLink(R), PacePort(R), and ImagePort(R) are registered trademarks of HD-Clinical Ltd\"; the page title is \"Connecting Clinical Care - Nexus / HDC\". \"HDC\" alone was NOT added: a single token that is a shortening of the name is exactly what rule 2 of press_match.py refuses. Speciality Digital and medical IT was already recorded and was left untouched."
+  },
+  {
+   "name": "Haddenham Healthcare",
+   "date": "2026-09-08",
+   "aliases": [
+    "Haddenham Healthcare Ltd",
+    "hadhealth.com"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website hadhealth.com, read 08/09/2026. The privacy policy reads \"Haddenham Healthcare Ltd's registered office is at 30 Upper High Street, Thame, Oxfordshire, OX9 3EZ and we are a company registered in England and Wales under company number 3591270\", and the footer About us line reads \"Haddenham Healthcare specialise in the treatment of lymphoedema, chronic oedema and wound care\". Two forms seen on the site were deliberately NOT added: \"Haddenham\" alone is a Buckinghamshire village name and a single-token shortening, and \"Haddenham UK\" (used in a site notice) normalises to the same token sequence as \"Haddenham, UK\" in ordinary prose, so it would match stories about the village. Speciality Wound care was already recorded and was left untouched. NOTE for a later run: company number 3591270 is published on the company's own site and this record still carries no company number."
+  },
+  {
+   "name": "Hamilton Medical UK",
+   "date": "2026-09-08",
+   "aliases": [
+    "Hamilton Medical UK Ltd",
+    "Hamilton Medical Limited"
+   ],
+   "specialities": [],
+   "evidence": "Companies House record for 06836131, read 08/09/2026: registered name HAMILTON MEDICAL UK LTD, active, incorporated 04/03/2009, registered office Unit J6 Fulford Drive, Minworth, Sutton Coldfield B76 1DJ, and previous company name HAMILTON MEDICAL LIMITED (04/03/2009 to 04/10/2019) - a former name of this same legal entity, which is why it was added. \"Hamilton Medical\" on its own was NOT added: that is the group brand of the Swiss parent (hamilton-medical.com, read 08/09/2026, masthead \"Hamilton Medical - Intelligent Ventilation since 1983\"), and adding a parent's name to a subsidiary's record is the double-count this task forbids. Specialities were already populated and were left untouched."
+  },
+  {
+   "name": "Hanson Instruments Ltd",
+   "date": "2026-09-08",
+   "aliases": [
+    "Hanson Instruments Limited",
+    "Hanson Instruments",
+    "hansoninstruments.co.uk"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website hansoninstruments.co.uk, read 08/09/2026 (the record's own Website link, already proved by registration number). The terms page reads \"'Supplier': Hanson Instruments Limited (registered in England and Wales with company number 04645761)\"; the About Us page reads \"We are Hanson Instruments Ltd\" and \"Hanson Instruments are the exclusive distributor of CSO products in the UK\"; the site-wide contact footer reads \"Hanson Instruments Ltd, 44 Washford Industrial Estate, Heming Road, Redditch, Worcestershire B98 0DP\". \"Hanson Medical\" WAS seen on this same site (page title \"About Us | Hanson Medical\" and the Norlase distribution announcement) but was deliberately NOT added: two other medical companies trade under that exact name - Hanson Medical Inc. (hansonmedical.com, silicone implants for cosmetic and reconstructive surgery) and Hanson Medical Systems, Inc. (US surgical instrument distributor) - so the two-token form would publish another company's story under this supplier's name. Speciality Ophthalmology was already recorded and was left untouched."
+  },
+  {
+   "name": "Harris-Jones Medical Ltd",
+   "date": "2026-09-08",
+   "aliases": [
+    "Harris-Jones Medical Limited",
+    "Harris-Jones Medical",
+    "hjmedical.co.uk"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website hjmedical.co.uk, read 08/09/2026. The home page reads \"Harris-Jones Medical is a women's health company based in the UK, specialising in the supply of minimally invasive gynaecology products\" and carries the legal line \"Harris-Jones Medical Limited: Company registration number 9241417\", which agrees with the Companies House record for 09241417 (HARRIS-JONES MEDICAL LIMITED, active, incorporated 30/09/2014), read the same day. \"Gynevision\" appeared in a search snippet as a trading name but is NOT on the company's own site, so it was not added. Speciality Minimally invasive surgery was already recorded and was left untouched. NOTE for a later run: this record's company number is still marked candidate, but the number is now published on the company's own website and agrees with the register - confirm_company_numbers.py should be able to promote it."
+  },
+  {
+   "name": "Headington Medical Technology Ltd",
+   "date": "2026-09-08",
+   "aliases": [
+    "headingtonmedical.co.uk"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website headingtonmedical.co.uk, read 08/09/2026, found by domain probe after search returned nothing. It reads \"Welcome to Headington Medical Technology Ltd! ... Headington Medical Technology Ltd is an Oxford-based medical device distributor and marketing start-up/SME company\" and gives its address as \"34 Reliance Way, Cowley, Oxford OX4 2FU\" - the same address as the Companies House registered office for HEADINGTON MEDICAL TECHNOLOGY LTD (12370316, active, incorporated 18/12/2019), read the same day, which ties the domain to the company. The site uses no name form other than the full registered name, which the record already holds, so the domain is the only alias that could be added. \"Headington\" alone was NOT added: it is an Oxford suburb. Speciality Vascular access was already recorded and was left untouched."
+  },
+  {
+   "name": "Healogics",
+   "date": "2026-09-08",
+   "aliases": [
+    "Healogics, LLC",
+    "healogics.com"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website healogics.com, read 08/09/2026 (the record's own Website link). The site-wide footer reads \"(c) 2026 Healogics, LLC\" and the masthead line reads \"Healogics is the expert in wound healing\"; the About Us page describes it as \"the nation's leading provider of advanced wound care and hyperbaric oxygen therapy\" (United States). Speciality Wound care was already recorded and was left untouched. The record's UNVERIFIED note about wound healing centres was not touched - this run verified name forms only."
+  },
+  {
+   "name": "Healthy.io",
+   "date": "2026-09-08",
+   "aliases": [
+    "Healthy.io Ltd"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website healthy.io, read 08/09/2026 (the record's own Website link). The terms of use read \"the Website ... is owned, operated and managed by Healthy.io Ltd\" and the privacy policy footer reads \"Healthy.io Ltd.\" The privacy policy also names \"Healthy.io UK Ltd\" as the company's UK Representative; that is a separate legal entity from the one this record names, so it was NOT added - a subsidiary's name is not an alias of its parent. Product brands on the site (Minuteful Kidney, Minuteful for Wound, Minuteful UTI, Minuteful 10) are product names, not company name forms, so none was added. Specialities Digital and medical IT and Wound care were already recorded and were left untouched."
   }
  ]
 }
