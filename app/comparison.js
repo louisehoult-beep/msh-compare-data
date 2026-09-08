@@ -675,6 +675,20 @@
       return esc(v);
     }
 
+    /* Live NHSSC pack/price detail for an ICC-sourced product, joined by its
+       own NPC code — added 08/09/2026 (^o366) once seed_nhssc_from_icc_npc.js
+       started widening the cache. Namespaced "NPC:<code>" so it can never
+       collide with the name-keyed entries refresh_nhssc_cache.py writes; a
+       code the cache does not (yet) hold returns nothing rather than a dead
+       link, exactly like the rest of this file's honest-empty-state rule. */
+    function iccLiveLink(npc){
+      if (!npc) return '';
+      var d = cp['NPC:' + npc];
+      if (!d || !d.items || !d.items.length) return '';
+      return '<a href="' + lookupUrl(npc) + '" target="_blank" rel="noopener" '
+        + 'style="color:inherit;text-decoration:underline;">live NHSSC listing &#8599;</a>';
+    }
+
     function iccSourceNote(m){
       var issued = m.issued ? ddmm(m.issued) : 'undated';
       var note = 'NHS Supply Chain, Information for Clinical Choice &mdash; <strong>'
@@ -744,7 +758,8 @@
           + (j === 0 ? MINE_C : THEIR_C) + ';text-align:left;min-width:150px;">'
           + esc(p.Brand || p.Description || p.NPC)
           + '<div style="font-weight:400;font-size:10px;opacity:.9;margin-top:2px;">'
-          + esc(p.Supplier || '') + (p.NPC ? ' &middot; ' + esc(p.NPC) : '') + '</div></th>';
+          + esc(p.Supplier || '') + (p.NPC ? ' &middot; ' + esc(p.NPC) : '')
+          + (p.NPC && iccLiveLink(p.NPC) ? ' &middot; ' + iccLiveLink(p.NPC) : '') + '</div></th>';
       }
 
       var subs = {}; chosen.forEach(function(p){ if (p._sub_category) subs[p._sub_category] = 1; });
