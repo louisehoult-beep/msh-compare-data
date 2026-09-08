@@ -336,6 +336,170 @@ SPECIALITY_RULES = {
             "being absent from one is not evidence of absence from the market."
         ),
     },
+    # PAGE 2798. Scope, in the page's own words: "Everything every surgical speciality
+    # shares: anaesthesia and perioperative, sterile services and decontamination,
+    # surgical closure, energy devices, robotics and theatre equipment." Cross-cutting
+    # by design, so overlap with a surgical speciality page is expected and correct:
+    # Wound Closure is shared with tissue viability, the orthopaedic robot rows are
+    # shared with orthopaedics, exactly as Pressure Area Care is shared between wound
+    # care and patient handling.
+    "theatres-and-surgical": {
+        "label": "Theatres and Surgical",
+        # Thirteen NHSSC frameworks, matched on the distinctive words of each name
+        # rather than on a broad word, because the broad words are where this patch
+        # goes wrong. Five that DO carry a theatre-sounding word are left out on
+        # purpose, and each was checked:
+        #   Angiography, Hybrid Theatres, Capital Equipment  -> the angio suite route,
+        #       already the vascular surgery page's framework. Not matched on
+        #       "operating theatres", so it does not leak in.
+        #   Environmental Decontamination (Facilities CBU)   -> building and room
+        #       decontamination, an estates route, not sterile services. This is why
+        #       the pattern is "instrument decontamination" and "decontamination
+        #       capital", never bare "decontamination".
+        #   Examination Gloves                               -> ward and clinic gloves.
+        #       Only Surgical Gloves is this patch, so the pattern says surgical.
+        #   Surgical Mesh, Surgical Navigation Systems, Surgical Implants for Men's
+        #       and Women's Health                           -> single-speciality
+        #       implants and capital (hernia and gynaecology mesh, orthopaedic and
+        #       spinal navigation, urology and gynaecology implants). The page's own
+        #       tagline and Market intelligence name neither, so the pattern is the
+        #       exact names "surgical gloves" and "surgical instruments", never bare
+        #       "surgical".
+        #   Flexible, Rigid and ENT Endoscopes, and Endoscopy, Endourology and
+        #       Oncology Ablation Consumables                -> the endoscopy and ENT
+        #       pages' own frameworks.
+        "frameworks": (
+            r"\b(airway management|anaesthesia machines|decontamination capital|"
+            r"instrument decontamination|electrosurgical|minimally invasive surgery|"
+            r"operating theatres|procedure packs|robotic medical equipment|"
+            r"surgical gloves|surgical instruments|tray wrap|wound closure)\b"
+        ),
+        # NOT INCLUDED, deliberately, and every one of these was run over all 1,972
+        # rows of tender-history.json and read before it was dropped:
+        #   bare "sterile"   -> "Aseptically Manipulated or Terminally Sterile
+        #                       Medicinal Products" twice, "Sterile Nitrogen Vials"
+        #                       twice, "Sterile Milk Bottles", "Sterile Nitrile
+        #                       Examination Gloves", "Non-Sterile Type IIR Facemasks",
+        #                       "Non Sterile AGP Disposable Gowns" twice, "Sterile
+        #                       Boot Swab Kits" for the Animal and Plant Health
+        #                       Agency, and "Sterile Closed Tracheal Suction Systems",
+        #                       which is ventilated-patient critical care. Pharmacy
+        #                       aseptics, PPE, neonatal feeding and farm biosecurity.
+        #                       "sterile services" and "sterilis/steriliz" are used
+        #                       instead and every one of those falls away.
+        #   bare "autoclave" -> eight hits and seven are laboratory autoclaves: a
+        #                       University of Leeds rotating autoclave, three
+        #                       University of Hertfordshire ones, a University of
+        #                       Glasgow CL3 containment autoclave, a University of
+        #                       Warwick replacement, a Pirbright Institute service and
+        #                       a UKRI steam generator, plus one NHS microbiology
+        #                       autoclave. A laboratory autoclave and a sterile
+        #                       services one cannot be told apart on the title, so the
+        #                       term is dropped whole. It costs one true row, an SSD
+        #                       autoclave cooling water chiller, and that is the right
+        #                       trade (rule 14).
+        #   bare "insufflat" -> its only hit was "Bracco Protocol CO2 insufflators
+        #                       maintenance", a radiology CO2 injector. Laparoscopic
+        #                       insufflators are CO2 insufflators too, so no exclusion
+        #                       could separate them. "laparoscop" and "minimally
+        #                       invasive" carry that ground instead.
+        #   "laminar flow"   -> both hits were "Positive Pressure Laminar Flow
+        #                       Isolators for Pharmacy". Pharmacy aseptic isolators,
+        #                       the same false positive the wound care rule excludes.
+        #   bare "stapler"   -> qualified below to surgical, skin, linear, circular
+        #                       and stapling device, so a stationery order can never
+        #                       reach a member. Both real rows still match.
+        #   "energy device"  -> dropped as a term of its own. Advanced energy reaches
+        #                       the panel through "electrosurg", "diatherm" and
+        #                       "minimally invasive", which is how the real rows are
+        #                       actually titled.
+        "include": (
+            r"\b(theatres?|operating table|anaesthe\w*|anesthe\w*|airway|"
+            r"laryngoscop\w*|laryngeal mask|endotracheal|tracheal tube|"
+            r"breathing (?:system|circuit)|catheter mount|"
+            r"sterile services|sterilis\w*|steriliz\w*|decontaminat\w*|"
+            r"washer disinfector|tray wrap|"
+            r"surgical instrument\w*|instrument set\w*|scalpel|diatherm\w*|"
+            r"electrosurg\w*|suture\w*|wound closure|"
+            r"surgical stapler\w*|skin stapler\w*|linear stapler\w*|"
+            r"circular stapler\w*|stapling device\w*|"
+            r"tissue adhesive|skin adhesive|haemostat\w*|hemostat\w*|"
+            r"procedure pack\w*|surgical drape\w*|surgical gown\w*|surgical glove\w*|"
+            r"scrub suit\w*|laparoscop\w*|minimally invasive|trocar\w*|"
+            r"robotic surger\w*|surgical robot\w*|perioperative|peri-operative|"
+            r"smoke evacuat\w*|surgical light\w*)\b"
+        ),
+        # Seven patterns. Every one matched a real row, was read, and was rejected:
+        #   lecture theatre     -> "DN720 Roofing Works: The Lectures Theatre at
+        #                          Willerby Hill", Humber Teaching NHS FT. Roofing on
+        #                          a lecture theatre, CPV 44112500. A building, not an
+        #                          operating theatre.
+        #   road re-surface     -> "Blue Light road Re-Surface Block 35 Beevers
+        #                          Theatres SJUH", Leeds Teaching Hospitals. Road
+        #                          resurfacing outside a block that happens to be
+        #                          named Beevers Theatres, CPV 79311300.
+        #   water treatment     -> "Maintenance of Water Treatment Systems including
+        #                          Supply and Delivery of Salt relating to a range of
+        #                          Hospital Equip including Decontamination and Renal
+        #                          Equipment", Belfast HSC Trust. Filed under salt,
+        #                          chemicals and water softeners. An estates water
+        #                          contract that happens to serve decontamination
+        #                          plant, not a sterile services purchase.
+        #   positive airway
+        #   pressure, cpap      -> "Preliminary Market Engagement for Consumables for
+        #                          Continuous Positive Airway Pressure (CPAP) and
+        #                          Adaptive Support Ventilation", BSO. Respiratory and
+        #                          critical care, matched on the word airway inside
+        #                          the phrase. Bare "airway" is kept because it is the
+        #                          honest term for this patch's own framework; these
+        #                          two take the phrase back out.
+        #   medicines           -> "NP40925 Analgesics, Anaesthetics, Musculoskeletal
+        #                          and Joint Disease Medicines", NHS National Services
+        #                          Scotland. A mixed pharmacy basket in which
+        #                          anaesthetics is one category of four. Narrow
+        #                          anaesthetic-agent contracts such as "Anaesthetic
+        #                          Gases (Sevoflurane and Isoflurane)" and "Inhalation
+        #                          Anaesthetics and Vaporisers" carry no such word and
+        #                          stay, which is correct: they are anaesthesia.
+        #   coagulation
+        #   products            -> "NP646 Haemostatic and Coagulation Products", an
+        #                          open notice. Haematology and coagulation, matched
+        #                          on "haemostat". The exclusion is deliberately the
+        #                          pair of words and not bare "coagulation", because
+        #                          "Purchase of Electrosurgical Devices (Cut and
+        #                          Coagulation, Uterine Ablation)" is a true row and
+        #                          excluding on the single word would have dropped it.
+        "exclude": (
+            r"\b(lectures? theatre|road re-?surfac\w*|water treatment|"
+            r"positive airway pressure|cpap|medicines|coagulation products)\b"
+        ),
+        # Seven CPV families that really are this patch, read off the notices that
+        # matched: 33161 electrosurgical units, 33162 operating theatre devices and
+        # instruments, 33169 surgical instruments, 33171 anaesthesia and resuscitation
+        # instruments, 33172 anaesthesia and resuscitation devices, 33191 sterilising
+        # and disinfecting devices, and 3314112 sutures, clips and ligatures.
+        # Corroboration only, recorded against the row so a reader can see the
+        # classification the buyer agreed. The title still has to match.
+        "cpv": ("33161", "33162", "33169", "33171", "33172", "33191", "3314112"),
+        # NO DRUG TARIFF PART. Part IX reimburses dressings and elastic hosiery (IXA),
+        # incontinence (IXB), stoma (IXC) and elastic hosiery (IXR), all community
+        # prescription routes. Nothing bought for an operating theatre is listed
+        # there, so the panel carries no tariff rather than reaching for the nearest
+        # part.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This patch has no single "
+            "framework and no single market-share figure: spend sits across at least "
+            "thirteen separate NHS Supply Chain frameworks, each a different product "
+            "category with its own buying cycle, and none publishes a unit share "
+            "breakdown. Being named on a framework is not evidence of volume, and "
+            "being absent from one is not evidence of absence from the market. NHS "
+            "Supply Chain is also only one route here: the award record below shows "
+            "theatre consumables bought through NHS Wales Shared Services, National "
+            "Procurement in Scotland, HealthTrust Europe, the Collaborative "
+            "Procurement Partnership and trusts' own direct awards, none of which "
+            "appears in the framework list above."
+        ),
+    },
 }
 
 

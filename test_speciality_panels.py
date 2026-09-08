@@ -20,6 +20,7 @@ WOUND = "tissue-viability-and-wound-care"
 HANDLING = "therapies-physio-and-ot"
 VASCULAR = "vascular-surgery-and-pad"
 CONTINENCE = "continence-bladder-and-bowel"
+THEATRES = "theatres-and-surgical"
 fails = []
 
 
@@ -430,6 +431,171 @@ for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
 check("licence notice carried", bool(c.get("_notice", {}).get("owner")))
 ckb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", CONTINENCE + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % ckb, ckb < 200)
+
+
+# ---------------------------------------------------------------------------
+print("\n\n=== THEATRES AND SURGICAL (page 2798) ===")
+print("Rebuilding the theatres slice from live data...")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), THEATRES],
+               check=True, capture_output=True)
+h = load_panel(THEATRES)
+hrx = B.compile_rule(B.SPECIALITY_RULES[THEATRES])
+
+print("\nFALSE POSITIVES — every one matched a draft rule and was read and rejected")
+must_not_match = [
+    # "theatre" the building, not the operating theatre.
+    "HFT-26-27 DN720 Roofing Works: The Lectures Theatre at Willerby Hill",
+    "Blue Light road Re-Surface Block 35 Beevers Theatres SJUH",
+    # An estates water and salt contract that happens to serve decontamination plant.
+    "Maintenance of Water Treatment Systems including Supply and Delivery of Salt "
+    "relating to a range of Hospital Equip including Decontamination and Renal "
+    "Equipment, Chemical and Microbiological Water Testing and Provision of "
+    "Associated Testing Consumables",
+    # Respiratory and critical care, matched on the word airway inside the phrase.
+    "Preliminary Market Engagement for Consumables for Continuous Positive Airway "
+    "Pressure (CPAP) and Adaptive Support Ventilation",
+    # A mixed pharmacy basket in which anaesthetics is one category of four.
+    "NP40925 Analgesics, Anaesthetics, Musculoskeletal & Joint Disease Medicines",
+    # Haematology, matched on "haemostat".
+    "NP646 Haemostatic & Coagulation Products",
+    # Pharmacy aseptic isolators, the same false positive wound care excludes.
+    "BCU-DCO-63450 Purchase of Positive Pressure Laminar Flow Isolators for Pharmacy, "
+    "Ysbyty Gwynedd",
+    # Laboratory autoclaves. Seven of the eight "autoclave" hits were these, which is
+    # why the term is not in the include list at all.
+    "202223 1605 - RCE Rotating Autoclave",
+    "PURCH2250 Provision of Contract Agreement for the CL3 Compliant Double Ended "
+    "Autoclave and Associated Parts",
+    "Microbiology Autoclave Replacement",
+    "Site Autoclave Service and Validation",
+    "UKRI-6261 Self-Steam Generating Autoclave",
+    # A radiology CO2 injector, which is why bare "insufflat" is not in the include.
+    "Southend & Broomfield -Bracco -Protocol CO2 insufflators maintenance 5 years",
+    # Everything bare "sterile" dragged in: pharmacy aseptics, PPE, neonatal feeding,
+    # farm biosecurity, pathology and ventilated-patient critical care.
+    "Aseptically Manipulated or Terminally Sterile Medicinal Products",
+    "Sterile Nitrile Examination Gloves",
+    "Sterile Milk Bottles [ 4692898 ]",
+    "The Supply of Sterile Boot Swab Kits to the Animal and Plant Health Agency",
+    "Non-Sterile Single Use Type IIR Facemasks without Anti-Fog Strip",
+    "NSSCOVID-19 -281 Non Sterile AGP Disposable Gowns",
+    "Sterile Closed Tracheal Suction Systems (3225312)",
+    "Radiopharmaceutical Products, Generators and Sterile Nitrogen Vials",
+    "Sterile Collection Trays (4918803)",
+    # A stationery order must never be able to reach a member on "stapler".
+    "Supply of Office Stationery including Staplers and Hole Punches",
+]
+for t in must_not_match:
+    check("never admitted: %s" % t[:60], not B.match_title(hrx, t), "matched and should not")
+
+print("\nTRUE POSITIVES — the exclusions must not take these with them")
+must_match = [
+    # The coagulation exclusion is the pair of words on purpose: excluding the single
+    # word would have dropped this genuine electrosurgery award.
+    "Purchase of Electrosurgical Devices (Cut & Coagulation, Uterine Ablation)",
+    # The medicines exclusion must not reach a narrow anaesthetic-agent contract.
+    "Anaesthetic Gases (Sevoflurane & Isoflurane)",
+    "NHS National Framework Agreement for the supply of Inhalation Anaesthetics and Vaporisers",
+    # Bare "airway" still has to work; only the CPAP phrase is taken back out.
+    "Airway Management",
+    "Surgical Staplers, Cutters & Clip Appliers and consumables",
+    "Minimally Invasive - Energy and Stapling Devices",
+    "Sterile Services Equipment for Somerset NHS Foundation Trust",
+    "Sterilisation Tray Liners and Sterilisation Paper.",
+    "Tray Wrap & Sterilisation Products",
+    "Wound Closure Products",
+    "Surgical Sutures",
+    "Hire of Mobile EDU Decontamination Unit",
+]
+for t in must_match:
+    check("admitted: %s" % t[:60], B.match_title(hrx, t), "did not match and should")
+
+print("\nAND THE SAME, ON TODAY'S PUBLISHED SLICE")
+htitles = " || ".join((a.get("title") or "") for a in h["awards"]).lower()
+for bad in ["lectures theatre", "roofing", "re-surface", "water treatment", "cpap",
+            "positive airway pressure", "musculoskeletal", "coagulation products",
+            "autoclave", "laminar flow", "insufflator", "examination gloves",
+            "milk bottles", "boot swab", "radiopharmaceutical"]:
+    check("excluded: %s" % bad, bad not in htitles)
+for good in ["minimally invasive surgery", "anaesthetic machines", "airway management",
+             "procedure packs", "surgical gloves", "washer disinfector",
+             "video laryngoscope", "diathermy", "surgical robot", "operating table",
+             "decontamination unit"]:
+    check("present: %s" % good, good in htitles)
+check("every award shown is one the matcher still admits",
+      all(B.match_title(hrx, a["title"]) for a in h["awards"]))
+
+print("\nFRAMEWORKS")
+hnames = [f["name"] for f in h["frameworks"]]
+for want in ["Airway Management Products and Associated Equipment",
+             "Electrosurgical Consumables and Related Accessories",
+             "Instrument Decontamination and Accessories",
+             "Minimally Invasive Surgery, Related Equipment and Accessories",
+             "Operating Theatres Equipment and Related Accessories and Services",
+             "Procedure Packs", "Robotic Medical Equipment and Associated Accessories",
+             "Surgical Gloves", "Surgical Instruments",
+             "Tray Wrap and Sterilisation Equipment", "Wound Closure"]:
+    check("framework present: %s" % want, want in hnames)
+check("exactly the thirteen frameworks this patch carries", len(hnames) == 13,
+      "got %d: %s" % (len(hnames), hnames))
+# Each of these carries a theatre-sounding word and belongs somewhere else: the
+# vascular page, estates, the ward, single-speciality implants and capital, and the
+# endoscopy and respiratory pages.
+for other in ["Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+              "Environmental Decontamination",
+              "Examination Gloves",
+              "Surgical Mesh",
+              "Surgical Navigation Systems with Associated Options and Related Services",
+              "Flexible Endoscopes and Associated Options and Related Services",
+              "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+              "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"]:
+    check("another speciality's framework stays out: %s" % other, other not in hnames)
+check("no Men's and Women's Health implants framework crept in",
+      not any(n.startswith("Surgical Implants for Men") for n in hnames))
+check("every framework carries an end date", all(f.get("ends") for f in h["frameworks"]))
+check("every framework carries its NHSSC url", all(f.get("url") for f in h["frameworks"]))
+
+print("\nSUPPLIERS")
+hsup = h["suppliers"]
+raw = sum(len(f["suppliers"]) for f in h["frameworks"])
+check("suppliers are drawn from the frameworks, not empty", len(hsup) > 200)
+check("alias merge actually reduced the raw NHSSC list", len(hsup) < raw,
+      "got %d, expected fewer than the %d raw framework-page names" % (len(hsup), raw))
+check("no supplier listed twice", len(hsup) == len(set(s["name"] for s in hsup)))
+check("every supplier names at least one framework", all(s["frameworks"] for s in hsup))
+check("every named framework is one of this speciality's",
+      all(set(s["frameworks"]) <= set(hnames) for s in hsup))
+check("an unresolved name is flagged, never silently merged",
+      all(("resolved" in s) for s in hsup))
+
+print("\nNO DRUG TARIFF, SAID HONESTLY (rule 14)")
+check("no tariff panel is published for this patch", h.get("drugTariff") is None)
+check("the tariff rule says why rather than going quiet",
+      "No Drug Tariff part applies" in (h.get("rules") or {}).get("drugTariff", ""))
+
+print("\nCPV CORROBORATES, IT NEVER ADMITS")
+check("the awards rule names the CPV families claimed",
+      "33162" in (h.get("rules") or {}).get("awards", ""))
+check("at least one award records CPV corroboration",
+      any(a.get("cpvCorroborates") for a in h["awards"]))
+# The guard that matters: a CPV hit alone must not be able to publish a row.
+check("a theatre CPV code cannot admit a title that does not match",
+      not B.match_title(hrx, "Newborn Transport Harnesses for London Ambulance"))
+
+print("\nTHE COVERAGE LIMIT IS PUBLISHED, NOT HIDDEN (rule 14)")
+# Without this, thirteen framework names read as the theatres market. They are not.
+for k in ("frameworks", "suppliers"):
+    check("coverage limit stated on the %s rule" % k,
+          "COVERAGE LIMIT" in (h.get("rules") or {}).get(k, ""))
+check("the other buying routes are named as uncounted",
+      "HealthTrust Europe" in (h.get("rules") or {}).get("suppliers", ""))
+
+print("\nTHE RULE TRAVELS WITH THE DATA (rule 14a)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((h.get("rules") or {}).get(k)))
+check("licence notice carried", bool(h.get("_notice", {}).get("owner")))
+hkb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", THEATRES + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % hkb, hkb < 200)
 
 
 print()
