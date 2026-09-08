@@ -21,6 +21,7 @@ HANDLING = "therapies-physio-and-ot"
 VASCULAR = "vascular-surgery-and-pad"
 CONTINENCE = "continence-bladder-and-bowel"
 THEATRES = "theatres-and-surgical"
+ORTHO = "orthopaedics-and-trauma"
 fails = []
 
 
@@ -596,6 +597,169 @@ for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
 check("licence notice carried", bool(h.get("_notice", {}).get("owner")))
 hkb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", THEATRES + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % hkb, hkb < 200)
+
+
+# ---------------------------------------------------------------------------
+print("\n\n=== ORTHOPAEDICS AND TRAUMA (page 2799) ===")
+print("Rebuilding the orthopaedics slice from live data...")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), ORTHO],
+               check=True, capture_output=True)
+o = load_panel(ORTHO)
+orx = B.compile_rule(B.SPECIALITY_RULES[ORTHO])
+
+print("\nFALSE POSITIVES — every one matched a draft rule and was read and rejected")
+o_must_not_match = [
+    # A mixed pharmacy basket caught on the word musculoskeletal. Theatres and
+    # Surgical excludes the same notice for the same reason.
+    "NP40925 Analgesics, Anaesthetics, Musculoskeletal & Joint Disease Medicines",
+    # Chronic pain neuromodulation, not spinal surgery.
+    "Neuromodulation/Spinal Cord Stimulators, Intrathecal Drug Pumps, "
+    "Radiofrequency Ablation and Associated Products",
+    # Spinal and epidural anaesthesia needles. The word spinal here is the
+    # anaesthetic route, not the spine.
+    "Spinal, Epidural and Associated Products",
+    # Psychological trauma, in an NHS England research notice. The single reason
+    # bare "trauma" needs a guard at all.
+    "Impact of HPV self-testing- insights & good practice in FGM, sexual abuse&trauma",
+    # A referral IT platform for a gene therapy. Neurology, and software.
+    "Referapatient for zolgensma for spinal muscular atrophy",
+    # Audiology. This is why bare "bone" is not in the include list.
+    "Bone Conduction",
+    # Cardiac, matched only because it carries the word prosthesis.
+    "Procurement of ONX Mechanical Aoritic/Mitral Valve, ON-X Ascending Aortic "
+    "Prosthesis with Valsalva Graft",
+    "External Breast Prosthesis [4233683]",
+    "CLI-OJEU-45806 SURGICALLY IMPLANTED BREAST PROSTHESES",
+    # Limb prosthetics and orthotics: the Rehabilitation, Prosthetics and Orthotics
+    # patch, not this one.
+    "Supply of Prosthetics",
+    "Prosthetic Components and Associated Products",
+    "Orthotics Service and Products Provision",
+    "ORTHOTIC PRODUCTS AND SERVICES (INCLUDING PROSTHETIC SERVICES) (SBS10247)",
+    "Orthoses Products and Provision of Orthotic Service",
+    "Podiatry Orthoses Consumables [5820615]",
+    "Custom Made Podiatry Orthoses for the South Eastern Health and Social Care "
+    "Trust (SEHSCT)",
+    # The one arguable row that dropping "podiatr" whole costs. Podiatric surgery is
+    # its own profession and its own framework lot.
+    "ESNEFT2762 Purchase of Power Tools for Podiatric Surgery",
+]
+for t in o_must_not_match:
+    check("never admitted: %s" % t[:60], not B.match_title(orx, t), "matched and should not")
+
+print("\nTRUE POSITIVES — the exclusions must not take these with them")
+o_must_match = [
+    # The successor to the framework this whole page turns on.
+    "Total Orthopaedic Solutions 4",
+    "Total Orthopaedic Solutions 3 (TOS3) (FaT)",
+    "KGH Lot 1.5 Trauma Implants Medartis",
+    # The FGM and sexual abuse exclusion must not reach a genuine trauma implant row.
+    "UHN Lot 1.5 Trauma Implants Orthopaedics EU Ltd",
+    "All Wales Orthopaedic, Trauma and Joint Replacement Framework",
+    # The epidural and spinal cord stimulator exclusions must not reach real spine.
+    "Bridging Contract - Replacement of Spinal Implants and Consumables",
+    "Purchase of Orthopaedic Spinal & Scoliosis Implants & Consumables",
+    "ESNEFT2394 Purchase of Spinal Navigation System",
+    "Internal/External fixation",
+    "TOS3 lot 1.8 Cement",
+    "NHSSC - TOS3 1.8a Bone Prep Award",
+    "Cardiff and Vale Knee Contract",
+    "Needle Arthroscopy with Disposable Instruments",
+    "Orthopaedic Surgical Robotic System (Hip Application)",
+    "Purchase of Orthopaedic Hip & Knee Implants & Consumables",
+    "Foot & Ankle Implants",
+]
+for t in o_must_match:
+    check("admitted: %s" % t[:60], B.match_title(orx, t), "did not match and should")
+
+print("\nAND THE SAME, ON TODAY'S PUBLISHED SLICE")
+otitles = " || ".join((a.get("title") or "") for a in o["awards"]).lower()
+for bad in ["orthotic", "orthoses", "podiatr", "prosthes", "epidural", "spinal cord",
+            "medicines", "sexual abuse", "zolgensma", "bone conduction",
+            "neuromodulation", "breast"]:
+    check("excluded: %s" % bad, bad not in otitles)
+for good in ["orthopaedic power tools", "trauma implants", "spinal implants",
+             "arthroscopy", "knee", "bone prep", "total orthopaedic solutions 4",
+             "internal/external fixation", "tourniquet"]:
+    check("present: %s" % good, good in otitles)
+check("every award shown is one the matcher still admits",
+      all(B.match_title(orx, a["title"]) for a in o["awards"]))
+
+print("\nFRAMEWORKS")
+onames = [f["name"] for f in o["frameworks"]]
+for want in ["Total Orthopaedic Solutions 3",
+             "Surgical Navigation Systems with Associated Options and Related Services"]:
+    check("framework present: %s" % want, want in onames)
+check("exactly the two frameworks this patch carries", len(onames) == 2,
+      "got %d: %s" % (len(onames), onames))
+# Each of these carries an orthopaedic-sounding word and belongs somewhere else.
+for other in [
+        # Soft-tissue and urology robotics. Not one orthopaedic robot vendor is on it,
+        # so it stays with Theatres and Surgical.
+        "Robotic Medical Equipment and Associated Accessories",
+        # The Rehabilitation, Prosthetics and Orthotics patch.
+        "Orthotics, Podiatry and Immobilisation",
+        "Prosthetic Components and Associated Products",
+        "External Breast Prosthesis and Chest Support",
+        # DXA scanning: diagnostic imaging and bone health, not orthopaedic surgery.
+        "Bone Densitometers, Associated Options and Related Services",
+        # Matched a draft pattern only on the word implantable.
+        "Audiological Diagnostics Implantable Devices and Services"]:
+    check("another speciality's framework stays out: %s" % other, other not in onames)
+check("no Men's and Women's Health implants framework crept in",
+      not any(n.startswith("Surgical Implants for Men") for n in onames))
+check("every framework carries an end date", all(f.get("ends") for f in o["frameworks"]))
+check("every framework carries its NHSSC url", all(f.get("url") for f in o["frameworks"]))
+
+print("\nSUPPLIERS")
+osup = o["suppliers"]
+oraw = sum(len(f["suppliers"]) for f in o["frameworks"])
+check("suppliers are drawn from the frameworks, not empty", len(osup) > 90)
+check("alias merge actually reduced the raw NHSSC list", len(osup) < oraw,
+      "got %d, expected fewer than the %d raw framework-page names" % (len(osup), oraw))
+check("no supplier listed twice", len(osup) == len(set(s["name"] for s in osup)))
+check("every supplier names at least one framework", all(s["frameworks"] for s in osup))
+check("every named framework is one of this speciality's",
+      all(set(s["frameworks"]) <= set(onames) for s in osup))
+check("an unresolved name is flagged, never silently merged",
+      all(("resolved" in s) for s in osup))
+
+print("\nNO DRUG TARIFF, SAID HONESTLY (rule 14)")
+check("no tariff panel is published for this patch", o.get("drugTariff") is None)
+check("the tariff rule says why rather than going quiet",
+      "No Drug Tariff part applies" in (o.get("rules") or {}).get("drugTariff", ""))
+
+print("\nCPV CORROBORATES, IT NEVER ADMITS")
+check("the awards rule names the CPV families claimed",
+      "33183" in (o.get("rules") or {}).get("awards", ""))
+check("at least one award records CPV corroboration",
+      any(a.get("cpvCorroborates") for a in o["awards"]))
+# The guard that matters, on three real notices that carry an orthopaedic CPV code
+# and are not this speciality. The last one carries 85121283 inside a basket of
+# twenty-five codes: filed under all of them, bought under one.
+for cpv_only in ["Prosthetics and Orthotics Rehabilitation Service",
+                 "Orthotic Footwear",
+                 "Provision of Insourced and Outsourced Clinical Services Framework "
+                 "(Framework Reopening)"]:
+    check("an orthopaedic CPV code cannot admit: %s" % cpv_only[:50],
+          not B.match_title(orx, cpv_only))
+
+print("\nTHE COVERAGE LIMIT IS PUBLISHED, NOT HIDDEN (rule 14)")
+# Without this, 101 supplier names on TOS3 read as the orthopaedic market. They are not.
+for k in ("frameworks", "suppliers"):
+    check("coverage limit stated on the %s rule" % k,
+          "COVERAGE LIMIT" in (o.get("rules") or {}).get(k, ""))
+check("the other buying routes are named as uncounted",
+      "NHS Wales Shared Services" in (o.get("rules") or {}).get("suppliers", ""))
+check("the shared navigation framework is declared shared",
+      "shared with" in (o.get("rules") or {}).get("frameworks", ""))
+
+print("\nTHE RULE TRAVELS WITH THE DATA (rule 14a)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((o.get("rules") or {}).get(k)))
+check("licence notice carried", bool(o.get("_notice", {}).get("owner")))
+okb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", ORTHO + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % okb, okb < 200)
 
 
 print()

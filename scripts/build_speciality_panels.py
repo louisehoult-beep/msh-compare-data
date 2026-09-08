@@ -500,6 +500,136 @@ SPECIALITY_RULES = {
             "appears in the framework list above."
         ),
     },
+    # PAGE 2799. Scope, in the page's own words: "Elective joint replacement, trauma
+    # and spinal surgery: implants, instrumentation and the theatre consumables that
+    # go with them." Overlap with Theatres and Surgical is expected and correct, the
+    # same way Pressure Area Care is shared between wound care and patient handling:
+    # a theatre buying orthopaedic power tools is buying both.
+    "orthopaedics-and-trauma": {
+        "label": "Orthopaedics and Trauma",
+        # Two NHSSC frameworks, matched on their distinctive names. Seven others in
+        # frameworks.json carry an orthopaedic-sounding word and every one was checked
+        # and left out:
+        #   Orthotics, Podiatry and Immobilisation (63 suppliers) and Prosthetic
+        #       Components and Associated Products    -> the Rehabilitation, Prosthetics
+        #       and Orthotics page's own frameworks, as the patient handling rule above
+        #       already records. Casting and immobilisation sit inside the first of
+        #       them, which is why no plaster or casting term is claimed here either.
+        #   Robotic Medical Equipment and Associated Accessories -> named suppliers are
+        #       CMR Surgical, Intuitive Surgical, Medtronic, Johnson & Johnson, MCT
+        #       Lifesciences and Procept Biorobotics. That is soft-tissue and urology
+        #       robotics. Not one orthopaedic robot vendor is on it: no Stryker Mako, no
+        #       Zimmer Biomet ROSA, no Smith & Nephew CORI. Putting it here would have
+        #       added six suppliers who are not on this patch, so it stays with Theatres
+        #       and Surgical. The orthopaedic robot AWARDS still reach this page on
+        #       their titles, which is the honest route.
+        #   Bone Densitometers, Associated Options and Related Services -> DXA scanning,
+        #       a diagnostic imaging and bone-health route, not orthopaedic surgery.
+        #   Surgical Implants for Men's and Women's Health -> urology and gynaecology.
+        #   External Breast Prosthesis and Chest Support, and Audiological Diagnostics
+        #       Implantable Devices and Services -> neither is this speciality; both
+        #       matched only because they carry the words prosthesis and implantable.
+        # Surgical Navigation Systems IS included: Brainlab, Medtronic and Stryker
+        # navigation is the spinal and orthopaedic route, and the page's own scope names
+        # spinal surgery. It is SHARED with neurosurgery and ENT (Karl Storz is on it
+        # for ENT navigation), so presence on it is a buying route, never a volume claim.
+        "frameworks": r"\b(total orthopaedic solutions|surgical navigation)\b",
+        # NOT INCLUDED, deliberately. Each was run over all 1,972 rows of
+        # tender-history.json and all 1,294 of framework-awards.json and read:
+        #   "orthotic", "orthoses", "podiatr" -> fourteen rows between them and every
+        #       one is the orthotics, podiatry and prosthetics patch: NHS Lothian,
+        #       Lanarkshire, Greater Glasgow, NHS Wales, BSO Northern Ireland and
+        #       Dorset all buying orthotic consumables or podiatry orthoses. Dropping
+        #       "podiatr" whole costs one arguable row, "Purchase of Power Tools for
+        #       Podiatric Surgery", and that is the right trade: podiatric surgery is
+        #       its own profession and its own framework lot, not orthopaedics.
+        #   bare "prosthes" / "prosthetic" -> "ON-X Ascending Aortic Prosthesis with
+        #       Valsalva Graft" (cardiac), "Surgically Implanted Breast Prostheses",
+        #       "External Breast Prosthesis" and "Supply of Prosthetics" (limb
+        #       prosthetics). Four rows, none of them this speciality. Joint prostheses
+        #       reach the panel as arthroplasty, hip, knee and implant titles instead.
+        #   bare "bone" -> "Bone Conduction", a NHS Scotland audiology award. The
+        #       pattern is the specific bone products below, so it never fires.
+        #   bare "power tool" -> its only unique hit was the podiatric surgery row
+        #       above. Orthopaedic power tools carry the word orthopaedic and match on
+        #       that, so the bare term buys nothing and risks an estates purchase.
+        #   bare "navigation" -> would admit neurosurgical and ENT navigation, which is
+        #       not this page. "spinal navigation" reaches the real row on "spinal".
+        #   "femoral", "tibial" -> dropped as vascular-ambiguous (femoral access
+        #       sheaths, femoral catheters). "femur" and "acetabular" are kept because
+        #       neither has any non-orthopaedic reading.
+        "include": (
+            r"\b(orthopaedic\w*|orthopedic\w*|orthobiologic\w*|trauma\w*|tos3|"
+            r"arthroplast\w*|joint replacement|hip\b|knee\b|shoulder\b|elbow\b|ankle\b|"
+            r"spinal|spine\b|scoliosis|vertebr\w*|pedicle|interbody|"
+            r"kyphoplast\w*|vertebroplast\w*|discectom\w*|laminectom\w*|"
+            r"fractur\w*|osteotom\w*|osteosynthes\w*|femur|acetabul\w*|"
+            r"bone (?:cement|graft|substitute|prep|screw|anchor|plate|mill|void filler)|"
+            r"arthroscop\w*|cruciate|meniscal|meniscus|"
+            r"external fixation|fixator|intramedullary|"
+            r"tourniquet\w*|sagittal saw|pulse lavage|"
+            r"musculoskelet\w*|limb reconstruction)\b"
+        ),
+        # Five patterns. Every one matched a real notice, was read, and was rejected:
+        #   medicines           -> "NP40925 Analgesics, Anaesthetics, Musculoskeletal &
+        #                          Joint Disease Medicines", NHS National Services
+        #                          Scotland. A mixed pharmacy basket caught on the word
+        #                          musculoskeletal. The same notice is excluded from
+        #                          Theatres and Surgical for the same reason.
+        #   spinal cord
+        #   stimulators         -> "Neuromodulation/Spinal Cord Stimulators, Intrathecal
+        #                          Drug Pumps, Radiofrequency Ablation and Associated
+        #                          Products", Procurement and Logistics Service. Chronic
+        #                          pain neuromodulation, not spinal surgery.
+        #   epidural            -> "Spinal, Epidural and Associated Products",
+        #                          Procurement and Logistics Service. Spinal and
+        #                          epidural anaesthesia needles and packs. The word
+        #                          spinal here is the anaesthetic route, not the spine.
+        #   fgm, sexual abuse   -> "Impact of HPV self-testing - insights & good
+        #                          practice in FGM, sexual abuse & trauma", NHS England,
+        #                          CPV 73110000 research services. Psychological trauma.
+        #                          The single clearest reason bare "trauma" needs a
+        #                          guard even though every other trauma row is real.
+        #   spinal muscular
+        #   atrophy             -> "Referapatient for zolgensma for spinal muscular
+        #                          atrophy", NHS England, CPV 72000000. A referral IT
+        #                          platform for a gene therapy. Neurology, and software.
+        "exclude": (
+            r"\b(medicines|spinal cord stimulat\w*|epidural|"
+            r"fgm|sexual abuse|spinal muscular atrophy)\b"
+        ),
+        # The three CPV families the matching notices actually carry, read off them
+        # rather than assumed: 331417 orthopaedic supplies (fracture devices, pins and
+        # plates sit at 33141770), 33183 the orthopaedic devices family (33183000
+        # supports, 33183100 implants, 33183200 prostheses), and 85121283, the
+        # orthopaedic medical services code the insourcing and elective-capacity awards
+        # are filed under. Corroboration only; the title still has to match.
+        "cpv": ("331417", "33183", "85121283"),
+        # SERVICE CONTRACTS ARE KEPT, deliberately, and this is the rule a reader
+        # should judge: three of the matching awards are clinical capacity rather than
+        # product — "Trauma & Orthopaedics Insourcing Services" (Countess of Chester),
+        # "Orthopaedic Procedures" (NHS Borders) and "Electives - Trauma and
+        # Orthopaedic" (Cornwall and the Isles of Scilly ICB). They are unambiguously
+        # this speciality and they tell a rep where elective activity is being bought,
+        # so they stay, with their CPV recorded. They are NOT product awards and should
+        # not be read as implant spend.
+        # NO DRUG TARIFF PART. Part IX reimburses dressings and elastic hosiery (IXA),
+        # incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery
+        # (IXR), all community prescription routes. No implant, instrument or theatre
+        # consumable on this patch is listed there, so the panel carries none.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Total Orthopaedic Solutions 3 "
+            "is the main NHS Supply Chain route for this patch and carries 101 named "
+            "suppliers, but being named on it is evidence of a route, not of volume, "
+            "and NHS Supply Chain is only one route. The award record below shows "
+            "orthopaedic and trauma implants bought through NHS Wales Shared Services, "
+            "National Procurement in Scotland, the Business Services Organisation in "
+            "Northern Ireland and trusts' own direct awards, none of which appears in "
+            "the framework list above. Surgical Navigation Systems is shared with "
+            "neurosurgery and ENT. No unit or market-share split is published for any "
+            "of it, and none is claimed here."
+        ),
+    },
 }
 
 

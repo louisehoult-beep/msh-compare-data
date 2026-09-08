@@ -1,0 +1,1525 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "orthopaedics-and-trauma",
+ "label": "Orthopaedics and Trauma",
+ "defined": true,
+ "generated": "2026-09-08",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-07T12:26:14+00:00",
+  "openTenders": "07/09/2026",
+  "drugTariff": "2026-09-07"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(total orthopaedic solutions|surgical navigation)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Total Orthopaedic Solutions 3 is the main NHS Supply Chain route for this patch and carries 101 named suppliers, but being named on it is evidence of a route, not of volume, and NHS Supply Chain is only one route. The award record below shows orthopaedic and trauma implants bought through NHS Wales Shared Services, National Procurement in Scotland, the Business Services Organisation in Northern Ireland and trusts' own direct awards, none of which appears in the framework list above. Surgical Navigation Systems is shared with neurosurgery and ENT. No unit or market-share split is published for any of it, and none is claimed here.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Total Orthopaedic Solutions 3 is the main NHS Supply Chain route for this patch and carries 101 named suppliers, but being named on it is evidence of a route, not of volume, and NHS Supply Chain is only one route. The award record below shows orthopaedic and trauma implants bought through NHS Wales Shared Services, National Procurement in Scotland, the Business Services Organisation in Northern Ireland and trusts' own direct awards, none of which appears in the framework list above. Surgical Navigation Systems is shared with neurosurgery and ENT. No unit or market-share split is published for any of it, and none is claimed here.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(orthopaedic\\w*|orthopedic\\w*|orthobiologic\\w*|trauma\\w*|tos3|arthroplast\\w*|joint replacement|hip\\b|knee\\b|shoulder\\b|elbow\\b|ankle\\b|spinal|spine\\b|scoliosis|vertebr\\w*|pedicle|interbody|kyphoplast\\w*|vertebroplast\\w*|discectom\\w*|laminectom\\w*|fractur\\w*|osteotom\\w*|osteosynthes\\w*|femur|acetabul\\w*|bone (?:cement|graft|substitute|prep|screw|anchor|plate|mill|void filler)|arthroscop\\w*|cruciate|meniscal|meniscus|external fixation|fixator|intramedullary|tourniquet\\w*|sagittal saw|pulse lavage|musculoskelet\\w*|limb reconstruction)\\b/i and does not match /\\b(medicines|spinal cord stimulat\\w*|epidural|fgm|sexual abuse|spinal muscular atrophy)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 331417 or 33183 or 85121283 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 2,
+  "suppliers": 104,
+  "suppliersUnresolved": 5,
+  "awardsShown": 40,
+  "awardsMatched": 41,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Surgical Navigation Systems with Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-navigation-systems-with-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 6,
+   "supplierSource": "no stated count on the page; 6 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Brainlab Ltd",
+    "Hospital Services Limited",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Medtronic Ltd",
+    "Stryker UK Ltd",
+    "T.J.Smith and Nephew Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Total Orthopaedic Solutions 3",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/total-orthopaedic-solutions/",
+   "reference": "2023/S 000-025037",
+   "category": "Medical Technology",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "1 February 2024",
+   "ends": "30 January 2028",
+   "supplierCount": 101,
+   "supplierSource": "no stated count on the page; 106 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "3D LifePrints UK Ltd",
+    "3D Metal Printing Ltd",
+    "Acumed Ltd",
+    "Adler Ortho UK Limited",
+    "Anetic Aid Ltd",
+    "Anika Therapeutics Ltd",
+    "Arthrex Ltd",
+    "Arthro Dynamik Ltd",
+    "Braun Medical Limited",
+    "Baxter Healthcare Ltd",
+    "Biedermann Motech International LTD",
+    "Biocomposites Ltd",
+    "Biomet 3i UK, Ltd (ZimVie)",
+    "Bioventus Cooperatief U.A",
+    "Bonesupport",
+    "Braun and Company Limited",
+    "Cenobiologics Ltd",
+    "ConMed UK Ltd",
+    "Contura Orthopaedics Ltd",
+    "Corin Ltd",
+    "De Soutter Medical Ltd",
+    "Delta Surgical Ltd",
+    "DP Medical Systems Ltd",
+    "Eakin Surgical Ltd",
+    "Edge Medical Ltd",
+    "Eurospine",
+    "Exactech UK Ltd",
+    "Fannin UK Limited",
+    "FH Ortho Ltd",
+    "Freelance Surgical Limited",
+    "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
+    "GenX MediCare",
+    "Globus Medical UK Ltd",
+    "Greenbone Spa",
+    "GS Medical Healthcare",
+    "Heraeus Medical UK Ltd",
+    "Hospital Innovations",
+    "Ideal Med",
+    "IGEA S.p.A. Branch UK",
+    "implantcast UK",
+    "Innovate Orthopaedics Ltd",
+    "Integra LifeSciences",
+    "Johnson & Johnson Medical Ltd",
+    "joimax UK",
+    "Joint Operations (UK) Ltd",
+    "JRI Orthopaedics Ltd",
+    "Judd Medical Ltd",
+    "Kaiser Medical Technology Ltd",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "KLS Martin UK Limited",
+    "Lavender Medical",
+    "Leda Orthopaedics Ltd",
+    "Lima Orthopaedics UK Ltd",
+    "Lindare Medical Ltd",
+    "Link Orthopaedics UK Ltd",
+    "M.D.M Medical Ltd",
+    "Macromed UK Ltd",
+    "Marquardt UK",
+    "Materialise",
+    "MatOrtho Ltd",
+    "Medacta UK Limited",
+    "Medartis Ltd",
+    "MedScience Distribution Ltd",
+    "Medtronic Limited",
+    "Mercian Surgical Supply Company Limited",
+    "Meril UK Pvt Ltd",
+    "Metaphysis LLP",
+    "Microport Scientific Ltd",
+    "Molnlycke Health Care Ltd",
+    "Neptune Medical Limited",
+    "NSK United Kingdom Limited",
+    "NuVasive UK Ltd",
+    "Open Medical Ltd",
+    "Ortho Solutions UK Ltd",
+    "OrthoAccess Ltd",
+    "Orthofix Limited",
+    "Orthomotion Medical Ltd",
+    "Orthopediatrics EU Limited",
+    "Osteon Medical Ltd",
+    "Osteotec Ltd",
+    "Ovidius Medical Ltd",
+    "Ovidius Solutions Ltd",
+    "Paragon 28",
+    "Permedica UK Limited",
+    "Platts & Nisbett Ltd",
+    "Q Medical Technologies Ltd",
+    "Sectra Limited",
+    "Silony Medical Ltd",
+    "Smith & Nephew",
+    "Sovereign Medical",
+    "Spineart UK Ltd",
+    "Stryker UK Ltd",
+    "Summit Medical UK Ltd",
+    "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)",
+    "Surgical Holdings",
+    "Surgical Instruments Group Holdings Ltd",
+    "Symbios",
+    "TRB Chemedica (UK) Ltd",
+    "United Orthopaedic Corporation UK Limited",
+    "Venturis Medical Ltd",
+    "Zimmer Biomet Limited"
+   ],
+   "delisted": [
+    "Athrodax Healthcare International Ltd",
+    "Avicenna Surgical Ltd",
+    "Empire Medical UK",
+    "One Surgical Ltd",
+    "Total Ortho LLP"
+   ]
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz Endoscopy (UK) Ltd"
+   ],
+   "frameworks": [
+    "Surgical Navigation Systems with Associated Options and Related Services",
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited",
+    "Medtronic Ltd"
+   ],
+   "frameworks": [
+    "Surgical Navigation Systems with Associated Options and Related Services",
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Stryker",
+   "resolved": true,
+   "variants": [
+    "Stryker UK Ltd"
+   ],
+   "frameworks": [
+    "Surgical Navigation Systems with Associated Options and Related Services",
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "3D LifePrints UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "3D Metal Printing Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Acumed Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Adler Ortho UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Anetic Aid Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Anika Therapeutics Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Arthrex",
+   "resolved": true,
+   "variants": [
+    "Arthrex Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Arthro Dynamik Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Baxter Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Biedermann Motech International LTD",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Biocomposites Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Biomet 3i UK, Ltd (ZimVie)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Bioventus Cooperatief U.A",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Bonesupport",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Brainlab Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Navigation Systems with Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Braun and Company Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Cenobiologics Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Conmed UK Ltd",
+   "resolved": true,
+   "variants": [
+    "ConMed UK Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Contura Orthopaedics Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Corin",
+   "resolved": true,
+   "variants": [
+    "Corin Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "D.P. Medical Systems Limited",
+   "resolved": true,
+   "variants": [
+    "DP Medical Systems Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "De Soutter Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Delta Surgical",
+   "resolved": true,
+   "variants": [
+    "Delta Surgical Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Eakin Surgical Limited",
+   "resolved": true,
+   "variants": [
+    "Eakin Surgical Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Edge Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Eurospine",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Exactech",
+   "resolved": true,
+   "variants": [
+    "Exactech UK Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Limited"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "FH Ortho Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Freelance Surgical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "GenX MediCare"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Globus Medical UK Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Greenbone Spa",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "GS Medical Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "GS Medical Healthcare"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Heraeus Medical UK",
+   "resolved": true,
+   "variants": [
+    "Heraeus Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Hospital Innovations",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Hospital Services Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Navigation Systems with Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Ideal Med",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "IGEA S.p.A. Branch UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "implantcast UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Innovate Orthopaedics Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Integra LifeSciences (Integra Neurosciences)",
+   "resolved": true,
+   "variants": [
+    "Integra LifeSciences"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Johnson & Johnson MedTech",
+   "resolved": true,
+   "variants": [
+    "Johnson & Johnson Medical Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "joimax UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Joint Operations",
+   "resolved": true,
+   "variants": [
+    "Joint Operations (UK) Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "JRI Orthopaedics Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Judd Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Kaiser Medical Technology Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "KLS Martin UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Lavender Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Leda Orthopaedics Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Lima Orthopaedics UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Lindare Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Link Orthopaedics UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "M.D.M Medical Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Macromed UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Marquardt UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Materialise",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "MatOrtho Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Medacta",
+   "resolved": true,
+   "variants": [
+    "Medacta UK Limited"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Medartis Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "MedScience Distribution",
+   "resolved": true,
+   "variants": [
+    "MedScience Distribution Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Mercian Surgical Supply Company Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Meril UK Pvt Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Metaphysis LLP",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Microport Scientific Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Mölnlycke",
+   "resolved": true,
+   "variants": [
+    "Molnlycke Health Care Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Neptune Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "NSK United Kingdom Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "NuVasive UK Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Open Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Ortho Solutions UK Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "OrthoAccess Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Orthofix Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Orthomotion Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Orthopediatrics EU Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Osteon Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Osteotec Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Ovidius Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Ovidius Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Paragon 28",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Permedica UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Platts & Nisbett Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Q Medical Technologies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Sectra Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Silony Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Smith+Nephew",
+   "resolved": true,
+   "variants": [
+    "Smith & Nephew"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Sovereign Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Spineart UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Summit Medical UK",
+   "resolved": true,
+   "variants": [
+    "Summit Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Surgical Instrument Group Holdings Ltd",
+   "resolved": true,
+   "variants": [
+    "Surgical Instruments Group Holdings Ltd"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Surgical Instruments (dental)",
+   "resolved": true,
+   "variants": [
+    "Surgical Holdings"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Symbios",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "T.J.Smith and Nephew Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Surgical Navigation Systems with Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "TRB Chemedica (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "United Orthopaedic Corporation UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Venturis Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  },
+  {
+   "name": "Zimmer Biomet",
+   "resolved": true,
+   "variants": [
+    "Zimmer Biomet Limited"
+   ],
+   "frameworks": [
+    "Total Orthopaedic Solutions 3"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Total Orthopaedic Solutions 4",
+   "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+   "supplier": null,
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081660-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "33100000",
+    "33141700",
+    "33160000",
+    "33162000",
+    "33168000",
+    "33169000",
+    "33183100",
+    "33190000",
+    "33199000",
+    "33697110",
+    "85121283"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Trauma & Orthopaedics Insourcing Services",
+   "buyer": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
+   "supplier": "Cheshire Care Allance LLP",
+   "date": "2026-08-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080204-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "75122000",
+    "85121283"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "BWC - Edge Medical Ltd - Spinal Surgical consumables",
+   "buyer": "Birmingham Women's and Children's NHS Foundation Trust",
+   "supplier": "Edge Medical Ltd",
+   "date": "2026-08-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079788-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33184100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Orthopaedic Procedures",
+   "buyer": "NHS Borders",
+   "supplier": "Spire Ltd",
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078073-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121283"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Partial Knee Replacement",
+   "buyer": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
+   "supplier": "ZIMMER BIOMET UK LIMITED",
+   "date": "2026-08-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077469-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33183100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Electives - Trauma and Orthopaedic",
+   "buyer": "NHS Cornwall and the Isles of Scilly Integrated Care Board",
+   "supplier": "Sulis Hospital Bath",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077413-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Orthopaedics - Hip and Knee Replacement Products",
+   "buyer": "Business Services Organisation Procurement and Logistics Service",
+   "supplier": "Stryker Ltd, PEI Surgical, Fannin NI Ltd, Link Orthopaedics, Adler Ortho UK Ltd, Uniphar Medtech Ltd T/A Tekno",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077401-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33141700",
+    "33183000",
+    "33183200"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "ESNEFT3171 Orthopaedic Power Tools",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Stryker UK Limited",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075656-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Foot & Ankle Implants",
+   "buyer": "CITY HOSPITALS INDEPENDENT COMMERCIAL ENTERPRISES LIMITED",
+   "supplier": "Lavender Medical Ltd",
+   "date": "2026-07-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/071552-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "KGH Lot 1.5 Trauma Implants Medartis",
+   "buyer": "Kettering General Hospital NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-07-02",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/b958e568-db90-44b4-a2bc-0eb6cab1a2bf",
+   "value": 10872,
+   "periodEnd": "2030-04-21",
+   "source": "tender-history"
+  },
+  {
+   "title": "NGH Lot 1.5 Trauma Implants Medartis",
+   "buyer": "Northampton General Hospital NHS Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-07-02",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/c1a0cea7-296a-4edb-9f39-c8c8532c3475",
+   "value": 68072,
+   "periodEnd": "2030-04-21",
+   "source": "tender-history"
+  },
+  {
+   "title": "NGH Lot 1.5 Trauma Implants Medartis",
+   "buyer": "Northampton General Hospital NHS Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-07-01",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/62efb746-a238-4ed5-b13b-29ee5a75f8c5",
+   "value": 152000,
+   "periodEnd": "2030-04-21",
+   "source": "tender-history"
+  },
+  {
+   "title": "UHN Lot 1.5 Trauma Implants Orthopaedics EU Ltd",
+   "buyer": "Kettering General Hospital",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-07-01",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/f2837e89-8050-411e-b97a-a209cb89bb27",
+   "value": 68000,
+   "periodEnd": "2030-03-05",
+   "source": "tender-history"
+  },
+  {
+   "title": "NHSSC - TOS3 1.8a Bone Prep Award",
+   "buyer": "Oxford University Hospitals",
+   "supplier": "Zimmer Biomet UK Limited",
+   "date": "2026-06-24",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/9b4332cd-f272-4a72-9ced-bc0ce1b43339",
+   "value": 132638,
+   "periodEnd": "2028-01-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "NHSSC - TOS3 1.8a Bone Prep Award",
+   "buyer": "Oxford University Hospitals",
+   "supplier": "Zimmer Biomet UK Limited",
+   "date": "2026-06-23",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/0317e11c-3f9e-454c-848c-162efb953726",
+   "value": 132638,
+   "periodEnd": "2028-01-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Orthopaedic Hoods",
+   "buyer": "East Sussex Healthcare NHS Trust",
+   "supplier": "Stryker UK Limited",
+   "date": "2026-06-12",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/fa9e71de-53d5-446d-8d6b-954077ae2c5b",
+   "value": 175844,
+   "periodEnd": "2028-01-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Internal/External fixation",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "Acumed Ltd",
+   "date": "2026-06-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/3ee35752-9dc7-41d4-b007-bc88b03664cf",
+   "value": 137413,
+   "periodEnd": "2031-03-29",
+   "source": "tender-history"
+  },
+  {
+   "title": "Internal/External fixation",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "Acumed Ltd",
+   "date": "2026-06-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/52033c85-b4fa-4120-bfed-dd55b0d9b02f",
+   "value": 137413,
+   "periodEnd": "2031-03-29",
+   "source": "tender-history"
+  },
+  {
+   "title": "Orthopaedic Drill Burrs and Saw Blades",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-06-09",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/e8a312e0-ecb9-4edb-b9ac-4a38957877d2",
+   "value": 437427,
+   "periodEnd": "2030-06-15",
+   "source": "tender-history"
+  },
+  {
+   "title": "Orthopaedic Ankle Replacement Implants",
+   "buyer": "Worcestershire Acute Hospitals NHS Trust",
+   "supplier": "Stryker UK Limited",
+   "date": "2026-06-07",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/b5c803ed-8ab7-41c2-8185-fe81c16e759f",
+   "value": 125000,
+   "periodEnd": "2028-01-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "CA17970 - PAM 6672/26-Richard Wolf Spine Equipment Purchase.",
+   "buyer": "Partners Procurement Service (PPS)",
+   "supplier": "Richard Wolf UK Ltd",
+   "date": "2026-06-04",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/23da2132-f3c0-403b-9b97-8b33b22351f4",
+   "value": 215332,
+   "periodEnd": "2027-02-28",
+   "source": "tender-history"
+  },
+  {
+   "title": "Bridging Contract - Replacement of Spinal Implants and Consumables",
+   "buyer": "Nottingham University Hospitals NHS Trust",
+   "supplier": "Johnson & Johnson Medical Limited",
+   "date": "2026-05-21",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/4c674ffd-43b8-42e9-816e-d4610a03126b",
+   "value": 261691,
+   "periodEnd": "2026-06-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Foot and Ankle Implants",
+   "buyer": "Worcestershire Acute Hospitals NHS Trust",
+   "supplier": "Paragon 28 UK, Ltd",
+   "date": "2026-05-10",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/71504ad7-8303-4e04-ab8c-e900af93a719",
+   "value": 195000,
+   "periodEnd": "2028-01-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Orthopaedic Battery Drivers",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "supplier": "Stryker UK Limited",
+   "date": "2026-05-06",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/0d6c947f-2760-4f81-8c5f-7963d75c9025",
+   "value": 69403,
+   "periodEnd": "2026-05-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Orthopaedic Battery Drivers",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-05-06",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/e4455b24-3142-47c1-ad79-ffb3acbb23eb",
+   "value": 118845,
+   "periodEnd": "2026-05-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT2394 Purchase of Spinal Navigation System",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Medtronic Limited",
+   "date": "2026-03-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027872-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Cardiff and Vale Knee Contract",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "ZIMMER BIOMET UK LIMITED",
+   "date": "2026-03-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/021902-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Orthopaedic Spinal & Scoliosis Implants & Consumables",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "B Braun Medical Ltd, Globus Medical UK Ltd, Medtronic, Richard Wolf UK Ltd, Spin",
+   "date": "2026-03-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/020794-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Orthopaedic Spinal & Scoliosis Implants & Consumables",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "B Braun Medical Ltd, Globus Medical UK Ltd, Medtronic, Richard Wolf UK Ltd, Spin",
+   "date": "2026-03-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/020798-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Arthroscopy Consumables",
+   "buyer": "Somerset NHS Foundation Trust",
+   "supplier": "Arthrex Limited",
+   "date": "2026-02-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/017659-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "TOS3 lot 1.8 Cement",
+   "buyer": "Norfolk and Norwich University Hospitals NHS Foundation Trust",
+   "supplier": "Summit Medical Limited",
+   "date": "2025-10-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/062586-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Orthopaedic Hip & Knee Implants & Consumables",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "B Braun Medical Ltd, Johnson & Johnson Medical Ltd, Link Orthopaedics UK Ltd, ST",
+   "date": "2024-10-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/035088-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Arthroscopy Equipment, Implants & consumables",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Arthrex LTD, ConMed UK, Johnson & Johnson Medical Ltd, Richard Wolf, Stryker UK ",
+   "date": "2023-12-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/036667-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Total Orthopaedic Solutions 3 (TOS3) (FaT)",
+   "buyer": "NHS Supply Chain",
+   "supplier": "3D Metal Printing Ltd, Acumed Limited, Adler Ortho UK Limited, ANIKA THERAPEUTIC",
+   "date": "2023-08-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/025037-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Orthopaedic Power Tools, Bone Cement, Mixing Systems, Pulse Lavage & Tourniquets",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Arthrex LTD, B. Braun Medical Limited, ConMed UK, DE SOUTTER MEDICAL, Johnson & ",
+   "date": "2021-11-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/029179-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "All Wales Orthopaedic, Trauma and Joint Replacement Framework",
+   "buyer": "NHS Wales Shared Services Partnership",
+   "supplier": "Adler Ortho UK Ltd, B. Braun Medical Limited, Corin Limited, Down Surgical Ltd, ",
+   "date": "2021-07-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/018218-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "The Supply of Multi-Use Pneumatic Tourniquet Devices",
+   "buyer": "Leidos Supply",
+   "supplier": "Braun and Company Ltd.",
+   "date": "2021-05-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011543-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Orthopaedic Spinal & Scoliosis Implants, Consumables & Equipment",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "BBraun Avitum, Globus Medical UK Ltd, Johnson & Johnson Medical Ltd, MACROMED, M",
+   "date": "2021-02-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002064-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Needle Arthroscopy with Disposable Instruments",
+   "buyer": "NHS Golden Jubilee",
+   "supplier": "Arthrex LTD",
+   "date": "2021-02-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001991-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Orthopaedic Surgical Robotic System (Hip Application)",
+   "buyer": "NHS Golden Jubilee",
+   "supplier": "Stryker UK Limited",
+   "date": "2021-01-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001378-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}
