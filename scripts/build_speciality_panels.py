@@ -155,6 +155,80 @@ SPECIALITY_RULES = {
         # mattresses, wheelchairs or daily living aids, so the panel carries none rather
         # than reaching for the nearest part.
     },
+    # PAGE 2802. Scope, in the page's own words: "Peripheral arterial disease, aortic
+    # work and the endovascular range that sits between vascular surgery and the IR
+    # suite." Arterial and aortic, NOT vascular access (cannulae and central lines),
+    # NOT interventional neuroradiology, NOT coronary work.
+    "vascular-surgery-and-pad": {
+        "label": "Vascular Surgery and Peripheral Arterial Disease",
+        # Only two NHSSC frameworks in frameworks.json touch this patch, and they are
+        # the two the page's own Buying route section names:
+        #   Vascular Therapy and Associated Products (2023/S 000-012286) — compression
+        #     only, as the page says. Its 23 suppliers are the hosiery and lymphoedema
+        #     firms (Juzo, Sigvaris, medi, Haddenham, Thuasne, L&R), not stent grafts.
+        #   Angiography, Hybrid Theatres, Capital Equipment (2025/S 000-077456) — the
+        #     angio suite and hybrid theatre capital route.
+        # The framework this patch actually buys its implants through, NHSSC's IC/IR
+        # framework 2021/S 000-017565 Lot 1, is NOT in frameworks.json. See the
+        # coverage note below: the panel says so rather than implying these two are
+        # the whole picture.
+        "frameworks": r"\b(vascular therapy|angiography|endovascular|aortic|peripheral vascular)\b",
+        # NOT INCLUDED, deliberately: bare "aortic", "stent", "catheter", "balloon",
+        # "graft", "vein" and "venous". Every one of them was tried and every one
+        # pulled in coronary, urology, renal-dialysis or cardiac-valve work that
+        # cannot be told from this patch on the title alone — PCI balloons and stents,
+        # Memokath urology stents, Nipro dialysis fistula needles, an ON-X mechanical
+        # aortic/mitral valve, ExoVasc and Exstent external aortic ROOT supports
+        # (cardiac, not vascular surgery). The aortic terms below are all qualified
+        # for that reason. Root rule 14: refuse to fire on thin evidence, never widen.
+        "include": (
+            r"\b(vascular|endovascular|evar|tevar|fevar|bevar|aneurysm|"
+            r"abdominal aortic|thoraco[- ]?abdominal|aortic dissection|aortic arch|"
+            r"aortic aneurysm|aortic stent|aortic graft|aortic endograft|"
+            r"peripheral arter\w*|claudication|critical limb|limb ischaem\w*|limb salvage|"
+            r"angioplasty|atherectomy|stent graft|endograft|"
+            r"carotid|endarterectomy|varicose|sclerotherapy|arteriovenous fistula|"
+            r"angiograph\w*|angiogram|interventional radiolog\w*|"
+            r"ankle brachial|abpi|amputation)\b"
+        ),
+        # Three patterns, each put here because a real row matched `include` and was
+        # read and rejected:
+        #   retinal        -> "NHS National Framework for Medical Retinal Vascular
+        #                     Treatments", twice, NHS England. Ophthalmology anti-VEGF
+        #                     injections. Retinal vascular disease is not this patch.
+        #   vascular access-> "Vascular Access Accessories", NHS Wales Shared Services.
+        #                     Cannulae and central lines — the IV therapy patch, whose
+        #                     own NHSSC frameworks (Central Venous Catheters,
+        #                     Intravenous Cannula) are deliberately not matched above.
+        #   neuro vascular -> "HEY/17/266 NEURO VASCULAR RADIOLOGY CONSUMABLES", Hull.
+        #                     Interventional neuroradiology and stroke thrombectomy.
+        # Note the exclusion is `neuro vascular`, NOT `neuroradiology`: NHSSC's own
+        # IC/IR framework title carries the word NEURORADIOLOGY, and excluding that
+        # would drop this patch's headline framework award.
+        "exclude": r"\b(retinal|vascular access|neuro[- ]?vascular)\b",
+        # NO CPV LIST. Not one award that matched carries a vascular-specific CPV
+        # code: the managed-service notice carries fourteen general medical-equipment
+        # codes, and the two service contracts carry 85100000 and 85111200, health
+        # services. A prefix here would corroborate nothing, so the panel states that
+        # rather than listing a family that never fires.
+        # NO DRUG TARIFF PART. The page says it outright: "This patch has no Drug
+        # Tariff Part IX presence." Part IX reimburses dressings and elastic hosiery,
+        # incontinence and stoma appliances. Stent grafts, peripheral stents and
+        # angiography capital are not listed there.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. The framework this patch buys "
+            "its implants through — NHS Supply Chain's Interventional Cardiology and "
+            "Interventional Radiology framework, 2021/S 000-017565 Lot 1, which carries "
+            "the endovascular stent grafts, peripheral vascular stents, carotid, iliac "
+            "and renal stents and aneurysm coils — is not in the Hub's framework "
+            "dataset, so its twelve suppliers are not counted below. Aortic and "
+            "peripheral implants also travel through NHS England's Specialised Services "
+            "Devices Programme, a central supply route with no NHS Supply Chain "
+            "framework page at all. What follows is therefore the compression and "
+            "capital-equipment end of this patch, which is what the record holds, not "
+            "the whole buying picture. The page's Deep dive covers the IC/IR route."
+        ),
+    },
 }
 
 
@@ -370,6 +444,9 @@ def build(slug, sources):
     open_tenders = build_open_tenders(rx, slug, ot_doc)
     tariff = build_tariff(rule, dt_doc)
 
+    note = rule.get("coverageNote")
+    qualify = (lambda text: (text + " " + note) if note else text)
+
     return {
         "_notice": sources["notice"],
         "slug": slug,
@@ -384,12 +461,12 @@ def build(slug, sources):
             "drugTariff": dt_doc.get("dataAsOf"),
         },
         "rules": {
-            "frameworks": (
+            "frameworks": qualify(
                 "NHS Supply Chain framework names matching /%s/i. NHSSC names a framework "
                 "after its clinical category, so the name is the key; the CBU category "
                 "field is far too broad to filter on." % rule["frameworks"]
             ),
-            "suppliers": (
+            "suppliers": qualify(
                 "Every supplier NHS Supply Chain names on the frameworks above, resolved to one "
                 "name per company through the Hub's alias registry, and ordered by how many of "
                 "this speciality's frameworks they appear on. That count is the only claim made. "
@@ -399,11 +476,16 @@ def build(slug, sources):
             "awards": (
                 "Award-stage notices whose TITLE matches /%s/i and does not match /%s/i. The "
                 "exclusion list exists because every pattern in it matched a real notice that "
-                "was not this speciality. A CPV code beginning %s is recorded as corroboration "
-                "where the feed carries one, but never admits a notice on its own: a notice "
-                "carrying a basket of CPV codes is filed under all of them and bought under "
-                "one. Buyer names are never matched on." % (
-                    rule["include"], rule["exclude"], " or ".join(rule.get("cpv") or ()) or "n/a")
+                "was not this speciality. %s Buyer names are never matched on." % (
+                    rule["include"], rule["exclude"],
+                    ("A CPV code beginning %s is recorded as corroboration where the feed "
+                     "carries one, but never admits a notice on its own: a notice carrying a "
+                     "basket of CPV codes is filed under all of them and bought under one."
+                     % " or ".join(rule["cpv"])) if rule.get("cpv") else
+                    ("No CPV family corroborates this speciality: not one matching notice in "
+                     "this data carries a CPV code specific to it, so none is claimed. A CPV "
+                     "code could never admit a notice on its own in any case, because a notice "
+                     "carrying a basket of them is filed under all and bought under one."))
             ),
             "openTenders": (
                 "Notices still open for bidding, matched the same way. An empty list means no "
