@@ -58,9 +58,13 @@
   var ICC = {};
   /* One record per product, gathering EVERY source the Hub holds about it, with
      the source named against every value. Built by build_product_dossiers.py.
-     Wound care is the speciality built so far; a product outside it simply has
-     no dossier and the block does not render. */
+     One file per speciality built so far (wound, respiratory); a product
+     outside all of them simply has no dossier and the block does not render.
+     Every speciality's Dossier.key is "supplier|normalised name" (see the
+     Python builder), so the fetched sets merge into one DOSSIERS map with no
+     collision risk — a product belongs to one speciality in practice. */
   var DOSSIERURL = BASE + 'data/product-dossiers-wound.json' + CB;
+  var DOSSIERURL_RESPIRATORY = BASE + 'data/product-dossiers-respiratory.json' + CB;
   var DOSSIERS = {};
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
@@ -106,12 +110,14 @@
     // the tool degrades to the last-known-good taxonomy rather than dying.
     fetch(PTYPESURL).then(function(r){return r.json();}).catch(function(){return null;}),
     fetch(ICCURL).then(function(r){return r.json();}).catch(function(){return {matrices:{}};}),
-    fetch(DOSSIERURL).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};})
+    fetch(DOSSIERURL).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};}),
+    fetch(DOSSIERURL_RESPIRATORY).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};})
   ]).then(function(res){
     RANGE = (res[4] && res[4].suppliers) || {};
     PDETAIL = (res[5] && res[5].products) || {};
     ICC = (res[7] && res[7].matrices) || {};
     ((res[8] && res[8].dossiers) || []).forEach(function(d){ DOSSIERS[d.key] = d; });
+    ((res[9] && res[9].dossiers) || []).forEach(function(d){ DOSSIERS[d.key] = d; });
     var PT = res[6];
     if (PT && Array.isArray(PT.types) && PT.types.length) TYPES = PT.types;
     if (PT && PT.generic_type_override) GENERIC_TYPE_OVERRIDE = PT.generic_type_override;

@@ -91,6 +91,7 @@ REFS = {
     "products.json":           "ETH-D34736E9E",
     "speciality-label-map.json":        "ETH-DF33A4F04",
     "speciality-map.json":     "ETH-DF6043FFA",
+    "product-dossiers-respiratory.json": "ETH-D85A9957F",
     "product-dossiers-wound.json":      "ETH-D31F5C656",
     "supplier-careers.json":       "ETH-D503B3895",
     "supplier-index.json":     "ETH-D773506D0",

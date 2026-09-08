@@ -173,6 +173,33 @@ SPECIALITIES = {
             "pen needle", "lancet", "test strip", "stoma", "ostomy", "truss",
         ],
     },
+    "respiratory": {
+        "differentiator_prefix": "respiratory:",
+        # Named explicitly from data/icc-matrices.json, checked 08/09/2026 -
+        # a category not on this list (e.g. "Winged Non Ported Cannula",
+        # which is IV cannulation, not respiratory, despite the shared word)
+        # is deliberately excluded rather than keyword-matched in.
+        "icc_categories": [
+            "Oxygen Masks",
+            "Adult High Concentration Oxygen Facemasks",
+            "Paediatric High Concentration Oxygen Facemasks",
+            "Nebulisers",
+            "Nasal Cannula",
+            "Anaesthetic Facemasks",
+            "CPAP Devices",
+        ],
+        # No Drug Tariff Part IX coverage - checked 08/09/2026 against all
+        # 66,400 rows: oxygen masks/nebulisers/CPAP/oxygen-therapy nasal
+        # cannula do not appear (the only nasal/respiratory-adjacent IXA
+        # lines are nasal sprays, nasal aspirators and tracheostomy tubes -
+        # different devices, out of this speciality's scope). This kit is
+        # NHS home-oxygen-service or hospital supplied, not a Part IX
+        # appliance. An honest gap to publish, not a reason to force a
+        # tariff_include match that would misfile something else into it.
+        "tariff_parts": [],
+        "tariff_include": [],
+        "tariff_exclude": [],
+    },
 }
 
 
