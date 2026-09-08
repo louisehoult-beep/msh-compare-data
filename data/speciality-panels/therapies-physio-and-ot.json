@@ -1,0 +1,1669 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "therapies-physio-and-ot",
+ "label": "Patient Moving and Handling",
+ "defined": true,
+ "generated": "2026-09-08",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-07T12:26:14+00:00",
+  "openTenders": "07/09/2026",
+  "drugTariff": "2026-09-07"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(patient handling|physiotherapy and occupational therapy|aids for daily living|wheelchairs?)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(patient handling|manual handling|moving and handling|people handling|hoists?|patient sling|hoist sling|toileting sling|standing sling|falls prevention|falls management|falls detection|fall detection|falls service|mobility (?:aids?|equipment|goods|services?|scooters?)|walking aid|walking frame|rollator|crutch(?:es)?|wheelchairs?|specialist seating|postural support|riser recliner|profiling bed|hospital beds?|bed rails?|mattress(?:es)?|pressure redistribut\\w*|pressure relieving|pressure area care|patient transfer|transfer board|slide sheet|glide sheet|aids for daily living|daily living aids?|bariatric|stand(?:ing)? aids?|turning aid|stairlift|stair lift)\\b/i and does not match /\\b(wheelchair lifts?|b7r|disabled adaptations|atw grant|hcid)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33193 or 3319212 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 4,
+  "suppliers": 114,
+  "suppliersUnresolved": 5,
+  "awardsShown": 32,
+  "awardsMatched": 32,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Aids for Daily Living",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/walking-aids-and-simple-aids-for-daily-living/",
+   "reference": "2022/S 000-033396",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 November 2023",
+   "ends": "31 October 2027",
+   "supplierCount": 31,
+   "supplierSource": "count verified against the page's own stated total (31)",
+   "suppliers": [
+    "Aidapt Bathrooms Ltd",
+    "Arjo UK Ltd",
+    "Cefndy Healthcare",
+    "Drive DeVilbiss Healthcare Ltd",
+    "GAMA Healthcare Ltd",
+    "Invacare LTD",
+    "Nottingham Rehab Limited (Trading as NRS Healthcare)",
+    "Performance Health Interntional",
+    "Prism UK Medical Limited",
+    "Roma Medical Aids ltd",
+    "Sunrise Medical Ltd",
+    "The Helping Hand Company",
+    "Trulife Limited",
+    "Vernacare LTD",
+    "AJ Mobility Ltd",
+    "Benmor Medical",
+    "Care and Independence Ltd",
+    "Chiltern Invadex (UK) Limited",
+    "Enable Access Ltd",
+    "Essential Healthcare Solutions (UK) Ltd",
+    "Etac Ltd",
+    "Henleys Medical Supplies Limited",
+    "Langham Gordon Ellis",
+    "Lisclare Limited",
+    "Medi-plinth Equipment Ltd",
+    "Medequip Assisstive Technology Ltd",
+    "Omnimedical Ltd",
+    "Rehabilitation Manufacturing Services ltd",
+    "Splice Cast Ltd t/a Eureka Physiocare",
+    "Ultimate Healthcare Ltd",
+    "Valley Northern Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Physiotherapy and Occupational Therapy",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/physiotherapy-and-occupational-therapy/",
+   "reference": "2023/S 000-033230",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "31 October 2024",
+   "ends": "30 October 2028",
+   "supplierCount": 22,
+   "supplierSource": "count verified against the page's own stated total (22)",
+   "suppliers": [
+    "Algeo Ltd",
+    "Brighthedge Ltd T/A Summit Medical and Scientific",
+    "Crest Medical Ltd",
+    "Cuxson Gerrard & Company Limited",
+    "Enovis UK (previously DJO)",
+    "Essity (previously BSN Medical)",
+    "Eureka Physiocare (previously Splice Cast)",
+    "Kinetik Medical Devices Ltd",
+    "Koolpak Ltd",
+    "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
+    "Medichill UK Ltd",
+    "Medinox (London) Limited",
+    "Medline Industries Ltd",
+    "Meglio Ltd",
+    "Orca Medical Ltd",
+    "Performance Health International Limited",
+    "Phoenix Medical Ltd",
+    "Physiolab Technologies Limited",
+    "Praxis Medical Ltd",
+    "Promedics Orthopaedic Ltd",
+    "Reliance Medical Ltd",
+    "Thera Trainer UK Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Pressure Area Care and Patient Handling",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-area-care-and-patient-handling/",
+   "reference": "2025/S 000-086469",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "9 March 2026",
+   "ends": "8 March 2028",
+   "supplierCount": 53,
+   "supplierSource": "count verified against the page's own stated total (53)",
+   "suppliers": [
+    "Algeo Ltd",
+    "Accora Ltd",
+    "Agile Medical Ltd",
+    "AHT Apollo Healthcare Technologies Ltd",
+    "ARJO UK Ltd",
+    "BES Healthcare Ltd",
+    "Central Medical Supplies Ltd (CMS)",
+    "CJ Medical Ltd",
+    "Croyde Medical Ltd",
+    "Delta Surgical Ltd",
+    "Direct Healthcare Group",
+    "Direct Manufacturing Limited",
+    "Drive Devilbiss Healthcare Ltd",
+    "Etac Limited",
+    "Fannin UK Ltd*",
+    "Felgains",
+    "Frontier Therapeutics",
+    "GBUK Healthcare",
+    "Harvest Healthcare",
+    "HCE UK (Health-Care Equipment & Supplies) Ltd",
+    "Hillrom UK",
+    "Hospital Direct",
+    "Howard Wright Europe Ltd",
+    "Inspire Community Trust",
+    "Interweave Textiles",
+    "Invacare UK Ltd",
+    "IQ Medical Limited",
+    "Linet UK",
+    "Lisclare Ltd",
+    "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
+    "Mediplinth Equipment Ltd",
+    "Medline Industries Ltd",
+    "Medserve (Southwest) Ltd",
+    "Medstrom Ltd",
+    "MIP UK Ltd",
+    "Molnlycke Health Care Ltd",
+    "Montcalm International Ltd",
+    "OSKA Care Ltd",
+    "Peacocks Medical Group Ltd",
+    "Performance Health",
+    "Prism UK Medical Limited",
+    "Promedics Orthopaedic Ltd",
+    "ProSys International Ltd",
+    "Renray Healthcare Ltd",
+    "Select Health Care (UK) Ltd",
+    "Silvalea Ltd (Savaria, trading as Silvalea Ltd)",
+    "STERIS Solutions Limited",
+    "Stryker UK Ltd",
+    "TALARMADE LTD",
+    "Ultimate Healthcare Ltd (Millbrook, trading as Ultimate)",
+    "V.Guldmann A/S",
+    "Wealden Rehab Ltd",
+    "Winncare PAC Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Wheelchairs, Specialist Seating and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/powered-and-non-powered-wheelchairs/",
+   "reference": "2024/S 000-039981",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Direct",
+   "starts": "9 June 2025",
+   "ends": "8 June 2027",
+   "supplierCount": 31,
+   "supplierSource": "count verified against the page's own stated total (31)",
+   "suppliers": [
+    "Aayan Medical Imaging Limited",
+    "AJ Mobility Ltd",
+    "AM Healthcare Group",
+    "BES Healthcare",
+    "Blatchford Limited",
+    "Chunc Limited",
+    "Consolor Ltd",
+    "DGT Services Ltd",
+    "Etac Ltd",
+    "FormAL Group Ltd",
+    "Independence Mobility Limited",
+    "Inspire Community Trust",
+    "Invacare LTD",
+    "Karma Mobility Ltd",
+    "Merits Health Products UK Ltd",
+    "MEYRA UK LTD",
+    "Millbrook Healthcare Limited",
+    "Otto Bock Healthcare PLC",
+    "Peacocks Medical Group",
+    "Performance Health International Limited",
+    "Pride Mobility Products Ltd",
+    "R Link Ltd",
+    "Rehabilitation Manufacturing Services ltd",
+    "Roma Medical Aids ltd",
+    "Ross Auto Engineering Limited",
+    "Seating Matters",
+    "Spex UK Limited",
+    "Sunrise Medical Ltd",
+    "TENDERCARE LTD",
+    "WHEELSHARE (LONDON) LTD",
+    "William Davies Care Limited"
+   ],
+   "delisted": [
+    "Nottingham Rehab Limited",
+    "Opcare Ltd",
+    "Southwest Seating and Rehab Ltd",
+    "Specialised Orthotic Services Limited",
+    "Sumed International (UK( Ltd.",
+    "to view the Product Matrix including supplier details."
+   ]
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Performance Health International Limited",
+   "resolved": true,
+   "variants": [
+    "Performance Health",
+    "Performance Health International Limited",
+    "Performance Health Interntional"
+   ],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Physiotherapy and Occupational Therapy",
+    "Pressure Area Care and Patient Handling",
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Etac Ltd",
+   "resolved": true,
+   "variants": [
+    "Etac Limited",
+    "Etac Ltd"
+   ],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Pressure Area Care and Patient Handling",
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Invacare UK",
+   "resolved": true,
+   "variants": [
+    "Invacare LTD",
+    "Invacare UK Ltd"
+   ],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Pressure Area Care and Patient Handling",
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "AJ Mobility Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Algeo",
+   "resolved": true,
+   "variants": [
+    "Algeo Ltd"
+   ],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Arjo",
+   "resolved": true,
+   "variants": [
+    "ARJO UK Ltd",
+    "Arjo UK Ltd"
+   ],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "BES Healthcare",
+   "resolved": true,
+   "variants": [
+    "BES Healthcare",
+    "BES Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling",
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Drive DeVilbiss Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "Drive DeVilbiss Healthcare Ltd",
+    "Drive Devilbiss Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "Care and Independence Ltd",
+    "GBUK Healthcare"
+   ],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Inspire Community Trust",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling",
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Lisclare",
+   "resolved": true,
+   "variants": [
+    "Lisclare Limited",
+    "Lisclare Ltd"
+   ],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Medi-Plinth Equipment",
+   "resolved": true,
+   "variants": [
+    "Medi-plinth Equipment Ltd",
+    "Mediplinth Equipment Ltd"
+   ],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Peacocks Medical Group",
+   "resolved": true,
+   "variants": [
+    "Peacocks Medical Group",
+    "Peacocks Medical Group Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling",
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Prism Medical UK",
+   "resolved": true,
+   "variants": [
+    "Prism UK Medical Limited"
+   ],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Promedics Orthopaedics Ltd",
+   "resolved": true,
+   "variants": [
+    "Promedics Orthopaedic Ltd"
+   ],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy",
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Rehabilitation Manufacturing Services ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Roma Medical Aids Ltd",
+   "resolved": true,
+   "variants": [
+    "Roma Medical Aids ltd"
+   ],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Sunrise Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living",
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Aayan Medical Imaging Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Accora",
+   "resolved": true,
+   "variants": [
+    "Accora Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Agile Medical",
+   "resolved": true,
+   "variants": [
+    "Agile Medical Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Aidapt Bathrooms Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "AM Healthcare Group",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Apollo Healthcare Technologies",
+   "resolved": true,
+   "variants": [
+    "AHT Apollo Healthcare Technologies Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Baxter / Hillrom",
+   "resolved": true,
+   "variants": [
+    "Hillrom UK"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Benmor Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Blatchford Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Brighthedge Ltd T/A Summit Medical and Scientific",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Cefndy Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Central Medical Supplies",
+   "resolved": true,
+   "variants": [
+    "Central Medical Supplies Ltd (CMS)"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Chiltern Invadex (UK) Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Chunc Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "CJ Medical",
+   "resolved": true,
+   "variants": [
+    "CJ Medical Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Consolor Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Croyde Medical",
+   "resolved": true,
+   "variants": [
+    "Croyde Medical Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Cuxson Gerrard & Company Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Delta Surgical",
+   "resolved": true,
+   "variants": [
+    "Delta Surgical Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "DGT Services Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Direct Healthcare Group",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Direct Manufacturing",
+   "resolved": true,
+   "variants": [
+    "Direct Manufacturing Limited"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "DJO UK Ltd (Enovis)",
+   "resolved": true,
+   "variants": [
+    "Enovis UK (previously DJO)"
+   ],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Enable Access Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Essential Healthcare Solutions (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Essity UK Limited",
+   "resolved": true,
+   "variants": [
+    "Essity (previously BSN Medical)"
+   ],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Eureka Physiocare Ltd",
+   "resolved": true,
+   "variants": [
+    "Eureka Physiocare (previously Splice Cast)"
+   ],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Ltd*"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Felgains",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "FormAL Group Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Frontier Therapeutics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "GAMA Healthcare",
+   "resolved": true,
+   "variants": [
+    "GAMA Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Guldmann",
+   "resolved": true,
+   "variants": [
+    "V.Guldmann A/S"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Harvest Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "HCE UK (Health-Care Equipment & Supplies) Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Henleys Medical Supplies Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Hospital Direct",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Howard Wright Europe",
+   "resolved": true,
+   "variants": [
+    "Howard Wright Europe Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Independence Mobility Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Interweave Textiles",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "iQ Medical",
+   "resolved": true,
+   "variants": [
+    "IQ Medical Limited"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Karma Mobility Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Kinetik Medical Devices",
+   "resolved": true,
+   "variants": [
+    "Kinetik Medical Devices Ltd"
+   ],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Koolpak Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Langham Gordon Ellis",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "LINET UK",
+   "resolved": true,
+   "variants": [
+    "Linet UK"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Medequip Assistive Technology",
+   "resolved": true,
+   "variants": [
+    "Medequip Assisstive Technology Ltd"
+   ],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Medichill UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Medinox (London) Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Medserve (South West)",
+   "resolved": true,
+   "variants": [
+    "Medserve (Southwest) Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Medstrom",
+   "resolved": true,
+   "variants": [
+    "Medstrom Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Meglio Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Merits Health Products UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "MEYRA UK LTD",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Millbrook Healthcare",
+   "resolved": true,
+   "variants": [
+    "Millbrook Healthcare Limited"
+   ],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "MIP UK",
+   "resolved": true,
+   "variants": [
+    "MIP UK Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Montcalm International",
+   "resolved": true,
+   "variants": [
+    "Montcalm International Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Mölnlycke",
+   "resolved": true,
+   "variants": [
+    "Molnlycke Health Care Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Nottingham Rehab Limited (Trading as NRS Healthcare)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Omnimedical Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Orca Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "OSKA Care",
+   "resolved": true,
+   "variants": [
+    "OSKA Care Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Otto Bock Healthcare PLC",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Phoenix Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Physiolab Technologies Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Praxis Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Pride Mobility Products Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "ProSys International Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "R Link Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Renray Healthcare",
+   "resolved": true,
+   "variants": [
+    "Renray Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Ross Auto Engineering Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Seating Matters",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Select Health Care (UK)",
+   "resolved": true,
+   "variants": [
+    "Select Health Care (UK) Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Silvalea",
+   "resolved": true,
+   "variants": [
+    "Silvalea Ltd (Savaria, trading as Silvalea Ltd)"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Spex UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Splice Cast Ltd t/a Eureka Physiocare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Steris",
+   "resolved": true,
+   "variants": [
+    "STERIS Solutions Limited"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Stryker",
+   "resolved": true,
+   "variants": [
+    "Stryker UK Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Talarmade Limited",
+   "resolved": true,
+   "variants": [
+    "TALARMADE LTD"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "TENDERCARE LTD",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "The Helping Hand Company",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Thera Trainer UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Physiotherapy and Occupational Therapy"
+   ]
+  },
+  {
+   "name": "Trulife Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Ultimate Healthcare",
+   "resolved": true,
+   "variants": [
+    "Ultimate Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Ultimate Healthcare Ltd (Millbrook, trading as Ultimate)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "Valley Northern Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Vernacare",
+   "resolved": true,
+   "variants": [
+    "Vernacare LTD"
+   ],
+   "frameworks": [
+    "Aids for Daily Living"
+   ]
+  },
+  {
+   "name": "Wealden Rehab",
+   "resolved": true,
+   "variants": [
+    "Wealden Rehab Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  },
+  {
+   "name": "WHEELSHARE (LONDON) LTD",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "William Davies Care Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Wheelchairs, Specialist Seating and Related Services"
+   ]
+  },
+  {
+   "name": "Winncare UK",
+   "resolved": true,
+   "variants": [
+    "Winncare PAC Ltd"
+   ],
+   "frameworks": [
+    "Pressure Area Care and Patient Handling"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Provision of Falls Prevention, Rehabilitation and Recovery Services",
+   "buyer": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
+   "supplier": "HOMELINK HEALTHCARE LIMITED",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083646-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Dudley Wheelchair Assessment and Equipment Service",
+   "buyer": "NHS Black Country Integrated Care Board",
+   "supplier": "AJM Healthcare Group Limited",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083222-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33193120",
+    "50421100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Contract for the Provision of FaME - Falls Management Exercise Programme",
+   "buyer": "Gateshead Borough Council",
+   "supplier": "Gateshead Older People's Assembly",
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081619-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Bariatric Equipment Rental - Lancashire Teaching Hospitals",
+   "buyer": "Lancashire Teaching Hospitals NHS Foundation Trust",
+   "supplier": "ARJO UK LIMITED",
+   "date": "2026-08-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080521-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33192000",
+    "33192120",
+    "39110000",
+    "42410000",
+    "50421000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Integrated Clinical Mobility Service (Wheelchairs and Orthotics) in Northamptonshire",
+   "buyer": "NHS NORTHAMPTONSHIRE INTEGRATED CARE BOARD",
+   "supplier": "Blatchford Limited",
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079217-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85111600"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Wheelchair and Postural Services - North Yorkshire and York",
+   "buyer": "NHS HUMBER AND NORTH YORKSHIRE INTEGRATED CARE BOARD",
+   "supplier": "Blatchford Limited",
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079099-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33193120",
+    "33193121",
+    "33193200",
+    "33193220",
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Dynamic Mattresses [Maintenance of]",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services",
+   "supplier": "Drive DeVilbiss Healthcare Limited",
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078198-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Contract for the Provision of Hoist Maintenance, Service  and Ad Hoc Repairs",
+   "buyer": "TEES, ESK AND WEAR VALLEYS NHS FOUNDATION TRUST",
+   "supplier": null,
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076288-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50420000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Hoist an Rail Systems for Dunkery Ward",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "Gulmann Ltd",
+   "date": "2026-07-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/065185-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "The Supply and Delivery of Daily Living Aids",
+   "buyer": "Glasgow City Council",
+   "supplier": "Aidapt Bathrooms Ltd",
+   "date": "2026-05-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/050731-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Beds and Mattresses",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Medstrom Ltd, OSKA Care Ltd",
+   "date": "2026-01-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000172-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Pressure Area Care and Patient Handling",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "A.Algeo Limited, Accora Limited, Agile Medical Ltd, Apollo Healthcare Technologi",
+   "date": "2025-12-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086469-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Bariatric Hire Contract",
+   "buyer": "JAMES PAGET UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "supplier": "Arjo UK Ltd",
+   "date": "2025-12-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079869-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Wheelchair Seating and Postural Supports",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Sumed International (UK) Ltd, INVACARE LIMITED, Direct Healthcare Group",
+   "date": "2025-11-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077645-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase and award of contract for Tracking Hoists to support Community Equipment Service",
+   "buyer": "Cumberland Council",
+   "supplier": "Direct Health Care Group",
+   "date": "2025-10-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/063467-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Wheelchairs, Specialist Seating and Related Services",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Aayan Medical Imaging Limited, AJ Mobility Ltd, AM Healthcare Group, BES Healthc",
+   "date": "2025-08-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/046177-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply and Delivery of Specialist Seating",
+   "buyer": "Glasgow City Council",
+   "supplier": "Accora Ltd",
+   "date": "2025-06-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/036239-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Wheelchair Seating and Postural Supports",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "INVACARE LIMITED, Direct Healthcare Group Ltd, Sumed International (UK) Ltd",
+   "date": "2025-05-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027037-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Specialist Wheelchair Seating",
+   "buyer": "Berkshire Healthcare NHS Foundation Trust",
+   "supplier": "Blatchford Limited",
+   "date": "2025-02-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005513-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Framework Agreement for the Supply & Delivery of Aids for Daily Living, Occupational Therapy Equipment and Supporting Se",
+   "buyer": "Aberdeenshire Council",
+   "supplier": "W Munro(Rehab) Ltd, Allardyce Healthcare Ltd, Care and Independence Ltd, Fast Ai",
+   "date": "2025-02-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005302-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Equipment (Daily Living Aids)",
+   "buyer": "Dundee City Council",
+   "supplier": "",
+   "date": "2024-12-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/039942-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Aids for Daily Living Equipment for Children and Young People Framework Agreement",
+   "buyer": "The Highland Council",
+   "supplier": "Enable Access Ltd, The Helping Hand Company, Care and Independence Ltd, Daytot L",
+   "date": "2024-01-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001629-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "The Supply and Delivery of High Back Slings, Dress Toileting Slings, Electric Hoists, Stand Aids and Stand Aid Slings",
+   "buyer": "Glasgow City Council",
+   "supplier": "Prism UK Medical Ltd",
+   "date": "2023-10-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/031356-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "HH002-22 Aids for Daily Living",
+   "buyer": "NHS Highland",
+   "supplier": "Nottingham Rehab Limited",
+   "date": "2023-06-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/017043-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Aids for Daily Living Equipment for Children and Young People Framework Agreement",
+   "buyer": "The Highland Council",
+   "supplier": "",
+   "date": "2023-06-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016140-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Wheelchairs, Associated Parts and Accessories",
+   "buyer": "NHS Wales Shared Services Partnership",
+   "supplier": "Invacare LTD, Sunrise Medical",
+   "date": "2023-03-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/009232-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Wheelchairs, Associated Parts and Accessories - Supplementary",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Sumed International (UK) Ltd, Invacare LTD",
+   "date": "2023-03-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/009183-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Nimbus Pressure Relieving System Spare Parts [4237773]",
+   "buyer": "Business Services Organisation, Procurement and Logistics Service",
+   "supplier": "Arjo UK Ltd",
+   "date": "2022-12-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/034157-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Children's Buggies and Adult & Children's Wheelchairs",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Pride Mobility Products Ltd, Invacare Ltd",
+   "date": "2022-09-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027095-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Postural Support Equipment and Accessories for Southern Health and Social Care Trust (SHSCT)",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "EVOLUTION HEALTHCARE LTD, John Preston Co Belfast Ltd, Moorings Mediquip UK Ltd,",
+   "date": "2022-02-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005469-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Pressure Relieving Redistribution Products & Associated Service Provision",
+   "buyer": "NHS Lanarkshire",
+   "supplier": "Drive DeVilbiss Sidhil Ltd",
+   "date": "2022-02-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004506-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Framework for beds, mattresses and wheelchairs both services and products, continence home delivery services plus manage",
+   "buyer": "NHS Shared Business Services Ltd (NHS SBS)",
+   "supplier": "accora",
+   "date": "2021-12-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/032107-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}

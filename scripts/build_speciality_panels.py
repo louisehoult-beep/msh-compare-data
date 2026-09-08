@@ -98,6 +98,63 @@ SPECIALITY_RULES = {
         # range sits here, which is why Juzo and Sigvaris dominate the line count.
         "tariffParts": ("IXA",),
     },
+    # PAGE 2913. The slug is legacy: the page is named "Patient Moving and Handling"
+    # and its scope is falls prevention, moving and handling, and the mobility, seating
+    # and pressure redistribution range. Physiotherapy and occupational therapy reach it
+    # as EQUIPMENT (the NHSSC framework of that name), not as service contracts —
+    # see the note on the include list below.
+    "therapies-physio-and-ot": {
+        "label": "Patient Moving and Handling",
+        # Four NHSSC frameworks, all under the Rehabilitation and Community CBU.
+        # Orthotics, Podiatry and Immobilisation, Prosthetic Components and External
+        # Breast Prosthesis are deliberately NOT here: they are the Rehabilitation,
+        # Prosthetics and Orthotics page's own frameworks. Technology Enabled Care is
+        # left out too — it is telecare and lone worker devices, not patient handling.
+        # Pressure Area Care and Patient Handling is shared with wound care on purpose:
+        # one framework really does carry both the mattresses and the hoists.
+        "frameworks": r"\b(patient handling|physiotherapy and occupational therapy|aids for daily living|wheelchairs?)\b",
+        # NOT INCLUDED, deliberately: bare "physiotherapy" and "occupational therapy".
+        # Every award they matched in this data was an employer buying occupational
+        # physio for its own staff — a university sports physio contract, a fire and
+        # rescue authority, a borough council — none of which is this speciality and
+        # none of which can be told apart from a genuine NHS therapies contract on the
+        # title alone. Root rule 14: refuse to fire on thin evidence rather than widen.
+        "include": (
+            r"\b(patient handling|manual handling|moving and handling|people handling|"
+            r"hoists?|patient sling|hoist sling|toileting sling|standing sling|"
+            r"falls prevention|falls management|falls detection|fall detection|falls service|"
+            r"mobility (?:aids?|equipment|goods|services?|scooters?)|"
+            r"walking aid|walking frame|rollator|crutch(?:es)?|"
+            r"wheelchairs?|specialist seating|postural support|riser recliner|"
+            r"profiling bed|hospital beds?|bed rails?|"
+            r"mattress(?:es)?|pressure redistribut\w*|pressure relieving|pressure area care|"
+            r"patient transfer|transfer board|slide sheet|glide sheet|"
+            r"aids for daily living|daily living aids?|"
+            r"bariatric|stand(?:ing)? aids?|turning aid|stairlift|stair lift)\b"
+        ),
+        # Every one of these matched a real row in tender-history.json or
+        # framework-awards.json that was not this speciality:
+        #   wheelchair lift / b7r  -> Translink's B7R bus wheelchair lifts, twice. A
+        #                             Volvo bus chassis, not a ward.
+        #   disabled adaptations   -> Choice Housing's shower and mobility goods
+        #                             adaptations, twice. A housing association's
+        #                             building works, not patient handling equipment.
+        #   atw grant              -> "Waiver for Staff Wheelchair ATW Grant", an
+        #                             Access to Work reasonable adjustment for one
+        #                             employee, not a wheelchair procurement.
+        #   hcid                   -> "HCID Tactical Patient Transfer", EpiGuard
+        #                             biocontainment transport isolators bought through
+        #                             Leidos. High consequence infectious disease
+        #                             transport, not moving and handling.
+        "exclude": r"\b(wheelchair lifts?|b7r|disabled adaptations|atw grant|hcid)\b",
+        # 33193 wheelchairs and associated devices, 3319212 hospital beds. Corroboration
+        # only — the title still has to match.
+        "cpv": ("33193", "3319212"),
+        # NO DRUG TARIFF PART. Part IX is dressings and hosiery (IXA), incontinence
+        # (IXB), stoma (IXC) and elastic hosiery (IXR). None of it reimburses hoists,
+        # mattresses, wheelchairs or daily living aids, so the panel carries none rather
+        # than reaching for the nearest part.
+    },
 }
 
 
@@ -355,7 +412,12 @@ def build(slug, sources):
             "drugTariff": (
                 "NHSBSA Drug Tariff Part %s for the stated effective month, summarised. Prices "
                 "are the reimbursement price at publication, not necessarily today's."
-                % "/".join(rule.get("tariffParts") or ())
+                % "/".join(rule["tariffParts"])
+                if rule.get("tariffParts") else
+                "No Drug Tariff part applies to this speciality. Part IX reimburses dressings "
+                "and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances "
+                "(IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so "
+                "the panel carries no tariff rather than reaching for the nearest part."
             ),
         },
         "counts": {
