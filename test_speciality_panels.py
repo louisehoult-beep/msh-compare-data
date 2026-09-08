@@ -898,7 +898,7 @@ check("slice stays under 200 KB (is %d KB)" % pkb, pkb < 200)
 
 
 print("\n" + "=" * 72)
-print("FRAILTY AND OLDER PEOPLE (page 2915)")
+print("FRAILTY AND OLDER PEOPLE (page 2921)")
 print("=" * 72)
 subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), FRAILTY],
                check=True, capture_output=True)

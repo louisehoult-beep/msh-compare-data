@@ -769,7 +769,8 @@ SPECIALITY_RULES = {
             "not evidence of absence from this market."
         ),
     },
-    # PAGE 2915. Frailty and older people. The scope the page itself publishes is the
+    # PAGE 2921. Frailty and older people. Page id verified against the live site
+    # on 08/09/2026 (title "Frailty and Older People (Subscribers only)", parent 675). The scope the page itself publishes is the
     # pathway: identification (eFI, HFRS, Clinical Frailty Scale), Comprehensive
     # Geriatric Assessment, the acute frailty front door, and then everything after it
     # leaves hospital — urgent community response, virtual wards, intermediate care,
