@@ -10,13 +10,13 @@
   "ref": "ETH-D31F5C656",
   "contact": "contact@elevateandthrive.uk"
  },
- "generated": "2026-09-07T21:48:28+00:00",
+ "generated": "2026-09-08T10:54:30+00:00",
  "speciality": "wound",
  "joinRule": "Two records describe the same product when either they carry the same NPC, or their supplier resolves to the same Hub company AND their normalised product names are identical. A name that merely contains another is recorded as a candidate link and never merged.",
  "readingRule": "Sources are shown side by side, never merged into one value. Where two sources disagree, both are published with their own attribution — the disagreement is the intelligence. Only the 'independent' source (NHS Supply Chain's Information for Clinical Choice) measures every supplier the same way; 'manufacturer' is each supplier's own words about its own product.",
  "counts": {
-  "dossiers": 793,
-  "withMoreThanOneSource": 77,
+  "dossiers": 799,
+  "withMoreThanOneSource": 78,
   "withIndependentSpec": 121
  },
  "dossiers": [
@@ -4866,7 +4866,9 @@
      "detail": "the supplier's own product page",
      "captured": "2026-08-18",
      "url": "https://www.convatec.com/en-gb/products/advanced-wound-care/wound-type/pc-wound-leg-ulcers/aquacel-extra-dressing",
-     "authority": "The manufacturer's own words about its own product. Not independently verified."
+     "authority": "The manufacturer's own words about its own product. Not independently verified.",
+     "specsCaptured": "2026-09-08",
+     "specsUrl": "https://www.convatec.com/en-gb/products/advanced-wound-care/wound-type/pc-wound-leg-ulcers/aquacel-extra-dressing"
     },
     "drug-tariff": {
      "id": "drug-tariff",
@@ -4956,6 +4958,69 @@
      },
      {
       "value": "Painful wounds",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "sizesAvailable": [
+     {
+      "value": "4x10cm, 4x20cm, 4x30cm, 20x24cm, 2x45cm (ribbon), 5x5cm, 10x10cm, 15x15cm",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "exudateLevel": [
+     {
+      "value": "balancing fluid level",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "material": [
+     {
+      "value": "Soft, sterile, non-woven pad dressing composed of sodium carboxymethylcellulose and regenerated cellulose fibre",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "packSize": [
+     {
+      "value": "10 or 5 per box (varies by size)",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "sterility": [
+     {
+      "value": "Sterile",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "indications": [
+     {
+      "value": "Leg ulcers, pressure ulcers (Stage 2-4) and diabetic ulcers. Surgical wounds. Partial thickness second degree burns. Traumatic wounds. Wounds that are prone to bleeding.",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "clinicalClaims": [
+     {
+      "value": "Transforms into a cohesive gel to minimise pain at dressing changes and to provide a moist wound healing environment.",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "latexFree": [
+     {
+      "value": "This product does not contain latex.",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "contraindications": [
+     {
+      "value": "Should not be used on individuals who are sensitive to or who have had an allergic reaction to the dressing or its components.",
       "source": "manufacturer:Convatec",
       "scope": "product"
      }
@@ -9594,6 +9659,580 @@
       "source": "drug-tariff",
       "scope": "family",
       "variant": "Durafiber dressing 5cm x 5cm square"
+     }
+    ]
+   },
+   "familyMembers": []
+  },
+  {
+   "key": "Mölnlycke|exufiber",
+   "name": "Exufiber",
+   "supplier": "Mölnlycke",
+   "supplierResolved": true,
+   "supplierResolution": "confirmed",
+   "npc": [
+    "ELY819",
+    "ELY844"
+   ],
+   "mpc": [
+    "709901",
+    "709909"
+   ],
+   "family": "Exufiber",
+   "categories": [
+    "Gelling Fibres"
+   ],
+   "sourceCount": 3,
+   "sources": {
+    "icc:Gelling Fibres": {
+     "id": "icc:Gelling Fibres",
+     "kind": "independent",
+     "name": "NHS Supply Chain — Information for Clinical Choice",
+     "detail": "Gelling Fibres",
+     "issued": "2024-09-01",
+     "url": "https://azuksappnpdsa01.blob.core.windows.net/datashare/ICC-NP-Gelling-Fibres-Support-Doc-September-2024.pdf",
+     "listingStatus": "unlinked",
+     "authority": "Authored by NHS Supply Chain's Clinical Collaboration Teams with NHS clinical stakeholders."
+    },
+    "manufacturer:Mölnlycke": {
+     "id": "manufacturer:Mölnlycke",
+     "kind": "manufacturer",
+     "name": "Mölnlycke",
+     "detail": "the supplier's own product page",
+     "captured": "2026-09-07",
+     "url": "https://www.molnlycke.com/en-gb/products-solutions/exufiber",
+     "authority": "The manufacturer's own words about its own product. Not independently verified.",
+     "specsCaptured": "2026-09-07",
+     "specsUrl": "https://www.molnlycke.com/en-gb/products-solutions/exufiber"
+    },
+    "drug-tariff": {
+     "id": "drug-tariff",
+     "kind": "tariff",
+     "name": "NHSBSA Drug Tariff Part IX",
+     "detail": "Part IXA, 2026-09",
+     "url": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
+     "asOf": "2026-09-07",
+     "authority": "What is reimbursable in primary care and at what price. A listing fact, not a measurement of the product."
+    }
+   },
+   "fields": {
+    "Description": [
+     {
+      "value": "Gelling fibre dressing 10cm x 10cm",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "Gelling fibre dressing 2cm x 45cm ribbon",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Route": [
+     {
+      "value": "Stocked",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "eDirect",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "UOI": [
+     {
+      "value": "10",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "25",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Range of Available Sizes": [
+     {
+      "value": "4.5cm x 10cm 4.5cm x 20cm 4.5cm x 30cm 5cm x 5cm 15cm x 15cm 20cm x 30cm",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "1cm x 45cm",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Number of dressings displayed on box": [
+     {
+      "value": "Y",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "Y",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Are they supplied sterile": [
+     {
+      "value": "Y",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "Y",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Maximum Wear time": [
+     {
+      "value": "7 Days",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "7 Days",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Suitable for use with NPWT": [
+     {
+      "value": "N",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "N",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Safe to cut to size": [
+     {
+      "value": "Y",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "Y",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Clear panel to internal packaging to allow visualisation of dressing": [
+     {
+      "value": "Y",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "Y",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Instructions for application on individual packaging": [
+     {
+      "value": "N",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "N",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Anti-Microbial Brand Available": [
+     {
+      "value": "Exufiber Ag+",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "Exufiber Ag+",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Tensile Strength as per SMTL test method TM-191 (N) - Length": [
+     {
+      "value": "8.08",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     }
+    ],
+    "Tensile Strength as per SMTL test method TM-191 (N) - Width": [
+     {
+      "value": "5.41",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     }
+    ],
+    "Free Swell Absorbency": [
+     {
+      "value": "22.15",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "22.15",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Absorbency Category": [
+     {
+      "value": "High",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "High",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Material": [
+     {
+      "value": "Poly(vinylalcohol) (PVA)",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY819",
+      "variant": "Gelling fibre dressing 10cm x 10cm"
+     },
+     {
+      "value": "Poly(vinylalcohol) (PVA)",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Tensile Strength as per SMTL test method TM- 191 (N) - Length": [
+     {
+      "value": "5.34",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "Tensile Strength as per SMTL test method TM- 191 (N) - Width": [
+     {
+      "value": "Not Testable",
+      "source": "icc:Gelling Fibres",
+      "scope": "product",
+      "npc": "ELY844",
+      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+     }
+    ],
+    "sizesAvailable": [
+     {
+      "value": "5x5cm, 10x10cm, 15x15cm, 20x30cm, 4.5x10cm, 4.5x20cm, 4.5x30cm, 1x45cm, 2x45cm",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "material": [
+     {
+      "value": "Highly absorbent polyvinyl alcohol (PVA) fibres, nonwoven",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "packSize": [
+     {
+      "value": "5 or 10 pcs depending on size",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "sterility": [
+     {
+      "value": "Sterile",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "clinicalClaims": [
+     {
+      "value": "Hydrophilic fibres attract, absorb and lock-in high levels of exudate, transforming into a soft, conformable gel. This helps to break down slough by promoting autolytic debridement, supporting a clean wound bed. Small spaces between the fibres result in less free fluid within the dressing, supporting fluid retention, even under compression, reducing the risk of leakage and maceration.",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "Drug Tariff price": [
+     {
+      "value": "£178",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 1cm x 45cm"
+     },
+     {
+      "value": "£466",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ Ribbon dressing 2cm x 45cm"
+     },
+     {
+      "value": "£200",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 2cm x 45cm"
+     },
+     {
+      "value": "£483",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 10cm x 10cm square"
+     },
+     {
+      "value": "£913",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 15cm x 15cm square"
+     },
+     {
+      "value": "£2252",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 20cm x 30cm rectangular"
+     },
+     {
+      "value": "£295",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 4.5cm x 10cm rectangular"
+     },
+     {
+      "value": "£382",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 4.5cm x 20cm rectangular"
+     },
+     {
+      "value": "£575",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 4.5cm x 30cm rectangular"
+     },
+     {
+      "value": "£204",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 5cm x 5cm square"
+     },
+     {
+      "value": "£221",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 10cm x 10cm square"
+     },
+     {
+      "value": "£416",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 15cm x 15cm square"
+     },
+     {
+      "value": "£966",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 20cm x 30cm rectangular"
+     },
+     {
+      "value": "£121",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 4.5cm x 10cm rectangular"
+     },
+     {
+      "value": "£177",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 4.5cm x 20cm rectangular"
+     },
+     {
+      "value": "£268",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 4.5cm x 30cm rectangular"
+     },
+     {
+      "value": "£92",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 5cm x 5cm square"
+     }
+    ],
+    "Drug Tariff pack": [
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 1cm x 45cm"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ Ribbon dressing 2cm x 45cm"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 2cm x 45cm"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 10cm x 10cm square"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 15cm x 15cm square"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 20cm x 30cm rectangular"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 4.5cm x 10cm rectangular"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 4.5cm x 20cm rectangular"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 4.5cm x 30cm rectangular"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber Ag+ dressing 5cm x 5cm square"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 10cm x 10cm square"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 15cm x 15cm square"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 20cm x 30cm rectangular"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 4.5cm x 10cm rectangular"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 4.5cm x 20cm rectangular"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 4.5cm x 30cm rectangular"
+     },
+     {
+      "value": "1 dressing",
+      "source": "drug-tariff",
+      "scope": "family",
+      "variant": "Exufiber dressing 5cm x 5cm square"
      }
     ]
    },
@@ -19294,34 +19933,27 @@
    ]
   },
   {
-   "key": "Mölnlycke|exufiber",
-   "name": "Exufiber",
-   "supplier": "Mölnlycke",
+   "key": "Convatec|duoderm extra thin dressing",
+   "name": "DuoDERM Extra Thin Dressing",
+   "supplier": "Convatec",
    "supplierResolved": true,
    "supplierResolution": "confirmed",
-   "npc": [
-    "ELY819",
-    "ELY844"
-   ],
-   "mpc": [
-    "709901",
-    "709909"
-   ],
-   "family": "Exufiber",
-   "categories": [
-    "Gelling Fibres"
-   ],
+   "npc": [],
+   "mpc": [],
+   "family": null,
+   "categories": [],
    "sourceCount": 2,
    "sources": {
-    "icc:Gelling Fibres": {
-     "id": "icc:Gelling Fibres",
-     "kind": "independent",
-     "name": "NHS Supply Chain — Information for Clinical Choice",
-     "detail": "Gelling Fibres",
-     "issued": "2024-09-01",
-     "url": "https://azuksappnpdsa01.blob.core.windows.net/datashare/ICC-NP-Gelling-Fibres-Support-Doc-September-2024.pdf",
-     "listingStatus": "unlinked",
-     "authority": "Authored by NHS Supply Chain's Clinical Collaboration Teams with NHS clinical stakeholders."
+    "manufacturer:Convatec": {
+     "id": "manufacturer:Convatec",
+     "kind": "manufacturer",
+     "name": "Convatec",
+     "detail": "the supplier's own product page",
+     "captured": "2026-09-08",
+     "url": "https://www.convatec.com/en-gb/products/advanced-wound-care/wound-type/pc-wound-diabetic-foot-ulcers/duoderm-extra-thin-dressing/",
+     "authority": "The manufacturer's own words about its own product. Not independently verified.",
+     "specsCaptured": "2026-09-08",
+     "specsUrl": "https://www.convatec.com/en-gb/products/advanced-wound-care/wound-type/pc-wound-diabetic-foot-ulcers/duoderm-extra-thin-dressing/"
     },
     "drug-tariff": {
      "id": "drug-tariff",
@@ -19334,488 +19966,141 @@
     }
    },
    "fields": {
-    "Description": [
+    "sizesAvailable": [
      {
-      "value": "Gelling fibre dressing 10cm x 10cm",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "Gelling fibre dressing 2cm x 45cm ribbon",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+      "value": "7.5x7.5cm, 5x10cm, 9x15cm, 9x25cm, 9x35cm",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
      }
     ],
-    "Route": [
+    "exudateLevel": [
      {
-      "value": "Stocked",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "eDirect",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+      "value": "Management of lightly exuding wounds",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
      }
     ],
-    "UOI": [
+    "material": [
      {
-      "value": "10",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "25",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+      "value": "Hydrocolloid with vapour-permeable outer film",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
      }
     ],
-    "Range of Available Sizes": [
+    "packSize": [
      {
-      "value": "4.5cm x 10cm 4.5cm x 20cm 4.5cm x 30cm 5cm x 5cm 15cm x 15cm 20cm x 30cm",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "1cm x 45cm",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+      "value": "5 or 10 per box (varies by size)",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
      }
     ],
-    "Number of dressings displayed on box": [
+    "indications": [
      {
-      "value": "Y",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "Y",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+      "value": "Management of wounds and for the protection of intact skin, as a primary or secondary dressing.",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
      }
     ],
-    "Are they supplied sterile": [
+    "clinicalClaims": [
      {
-      "value": "Y",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "Y",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+      "value": "Easy to use; does not restrict joint motion or patient mobility.",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
      }
     ],
-    "Maximum Wear time": [
+    "latexFree": [
      {
-      "value": "7 Days",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "7 Days",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
-     }
-    ],
-    "Suitable for use with NPWT": [
-     {
-      "value": "N",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "N",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
-     }
-    ],
-    "Safe to cut to size": [
-     {
-      "value": "Y",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "Y",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
-     }
-    ],
-    "Clear panel to internal packaging to allow visualisation of dressing": [
-     {
-      "value": "Y",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "Y",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
-     }
-    ],
-    "Instructions for application on individual packaging": [
-     {
-      "value": "N",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "N",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
-     }
-    ],
-    "Anti-Microbial Brand Available": [
-     {
-      "value": "Exufiber Ag+",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "Exufiber Ag+",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
-     }
-    ],
-    "Tensile Strength as per SMTL test method TM-191 (N) - Length": [
-     {
-      "value": "8.08",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     }
-    ],
-    "Tensile Strength as per SMTL test method TM-191 (N) - Width": [
-     {
-      "value": "5.41",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     }
-    ],
-    "Free Swell Absorbency": [
-     {
-      "value": "22.15",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "22.15",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
-     }
-    ],
-    "Absorbency Category": [
-     {
-      "value": "High",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "High",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
-     }
-    ],
-    "Material": [
-     {
-      "value": "Poly(vinylalcohol) (PVA)",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY819",
-      "variant": "Gelling fibre dressing 10cm x 10cm"
-     },
-     {
-      "value": "Poly(vinylalcohol) (PVA)",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
-     }
-    ],
-    "Tensile Strength as per SMTL test method TM- 191 (N) - Length": [
-     {
-      "value": "5.34",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
-     }
-    ],
-    "Tensile Strength as per SMTL test method TM- 191 (N) - Width": [
-     {
-      "value": "Not Testable",
-      "source": "icc:Gelling Fibres",
-      "scope": "product",
-      "npc": "ELY844",
-      "variant": "Gelling fibre dressing 2cm x 45cm ribbon"
+      "value": "This product does not contain latex.",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
      }
     ],
     "Drug Tariff price": [
      {
-      "value": "£178",
+      "value": "£146",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 1cm x 45cm"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 10cm x 10cm square"
      },
      {
-      "value": "£466",
+      "value": "£316",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ Ribbon dressing 2cm x 45cm"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 15cm x 15cm square"
      },
      {
-      "value": "£200",
+      "value": "£86",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 2cm x 45cm"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 5cm x 10cm rectangular"
      },
      {
-      "value": "£483",
+      "value": "£88",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 10cm x 10cm square"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 7.5cm x 7.5cm square"
      },
      {
-      "value": "£913",
+      "value": "£196",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 15cm x 15cm square"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 9cm x 15cm rectangular"
      },
      {
-      "value": "£2252",
+      "value": "£313",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 20cm x 30cm rectangular"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 9cm x 25cm rectangular"
      },
      {
-      "value": "£295",
+      "value": "£437",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 4.5cm x 10cm rectangular"
-     },
-     {
-      "value": "£382",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 4.5cm x 20cm rectangular"
-     },
-     {
-      "value": "£575",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 4.5cm x 30cm rectangular"
-     },
-     {
-      "value": "£204",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 5cm x 5cm square"
-     },
-     {
-      "value": "£221",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 10cm x 10cm square"
-     },
-     {
-      "value": "£416",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 15cm x 15cm square"
-     },
-     {
-      "value": "£966",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 20cm x 30cm rectangular"
-     },
-     {
-      "value": "£121",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 4.5cm x 10cm rectangular"
-     },
-     {
-      "value": "£177",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 4.5cm x 20cm rectangular"
-     },
-     {
-      "value": "£268",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 4.5cm x 30cm rectangular"
-     },
-     {
-      "value": "£92",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 5cm x 5cm square"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 9cm x 35cm rectangular"
      }
     ],
     "Drug Tariff pack": [
      {
       "value": "1 dressing",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 1cm x 45cm"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 10cm x 10cm square"
      },
      {
       "value": "1 dressing",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ Ribbon dressing 2cm x 45cm"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 15cm x 15cm square"
      },
      {
       "value": "1 dressing",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 2cm x 45cm"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 5cm x 10cm rectangular"
      },
      {
       "value": "1 dressing",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 10cm x 10cm square"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 7.5cm x 7.5cm square"
      },
      {
       "value": "1 dressing",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 15cm x 15cm square"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 9cm x 15cm rectangular"
      },
      {
       "value": "1 dressing",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 20cm x 30cm rectangular"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 9cm x 25cm rectangular"
      },
      {
       "value": "1 dressing",
       "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 4.5cm x 10cm rectangular"
-     },
-     {
-      "value": "1 dressing",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 4.5cm x 20cm rectangular"
-     },
-     {
-      "value": "1 dressing",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 4.5cm x 30cm rectangular"
-     },
-     {
-      "value": "1 dressing",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber Ag+ dressing 5cm x 5cm square"
-     },
-     {
-      "value": "1 dressing",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 10cm x 10cm square"
-     },
-     {
-      "value": "1 dressing",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 15cm x 15cm square"
-     },
-     {
-      "value": "1 dressing",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 20cm x 30cm rectangular"
-     },
-     {
-      "value": "1 dressing",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 4.5cm x 10cm rectangular"
-     },
-     {
-      "value": "1 dressing",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 4.5cm x 20cm rectangular"
-     },
-     {
-      "value": "1 dressing",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 4.5cm x 30cm rectangular"
-     },
-     {
-      "value": "1 dressing",
-      "source": "drug-tariff",
-      "scope": "family",
-      "variant": "Exufiber dressing 5cm x 5cm square"
+      "scope": "product",
+      "variant": "DuoDERM Extra Thin dressing 9cm x 35cm rectangular"
      }
     ]
    },
@@ -27482,7 +27767,9 @@
      "detail": "the supplier's own product page",
      "captured": "2026-08-18",
      "url": "https://www.convatec.com/en-gb/products/advanced-wound-care/wound-type/pc-wound-closed-surgical-solutions/aquacel-ag-plus-dressings",
-     "authority": "The manufacturer's own words about its own product. Not independently verified."
+     "authority": "The manufacturer's own words about its own product. Not independently verified.",
+     "specsCaptured": "2026-09-08",
+     "specsUrl": "https://www.convatec.com/en-gb/products/advanced-wound-care/wound-type/pc-wound-closed-surgical-solutions/aquacel-ag-plus-dressings"
     }
    },
    "fields": {
@@ -27551,6 +27838,60 @@
      },
      {
       "value": "Bowler PG, Welsby S, Towers V, Booth V, Hogarth A, Rowlands V, Joseph A, et al, 2012. Multidrug-resistant organisms, wounds and topical antimicrobial protection. Int Wound J. 9: 387-396.",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "sizesAvailable": [
+     {
+      "value": "5x5cm, 10x10cm, 15x15cm, 20x30cm, 4x10cm, 4x20cm, 4x30cm, 1x45cm (ribbon), 2x45cm (ribbon)",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "exudateLevel": [
+     {
+      "value": "Excess exudate; optimal moisture balance",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "material": [
+     {
+      "value": "Carboxymethyl cellulose (AQUACEL), Hydrofiber Technology, with three components: BEC, EDTA, and ionic silver",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "packSize": [
+     {
+      "value": "10 per box (most sizes), 5 per box (larger/ribbon sizes)",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "indications": [
+     {
+      "value": "Venous leg ulcers, infected leg ulcer, hard-to-heal wounds.",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "clinicalClaims": [
+     {
+      "value": "Heals more wounds, heals wounds faster and with more than 3x fewer adverse events versus non-silver dressings.",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     },
+     {
+      "value": "MORE THAN SILVER Technology disrupts and breaks down biofilm slime, kills a broad spectrum of bacteria and prevents biofilm formation.",
+      "source": "manufacturer:Convatec",
+      "scope": "product"
+     }
+    ],
+    "antimicrobial": [
+     {
+      "value": "MORE THAN SILVER Technology — BEC, EDTA and ionic silver; disrupts and breaks down biofilm, kills a broad spectrum of bacteria",
       "source": "manufacturer:Convatec",
       "scope": "product"
      }
@@ -42952,6 +43293,216 @@
    "familyMembers": []
   },
   {
+   "key": "Mölnlycke|mefix",
+   "name": "Mefix",
+   "supplier": "Mölnlycke",
+   "supplierResolved": true,
+   "supplierResolution": "confirmed",
+   "npc": [],
+   "mpc": [],
+   "family": null,
+   "categories": [],
+   "sourceCount": 1,
+   "sources": {
+    "manufacturer:Mölnlycke": {
+     "id": "manufacturer:Mölnlycke",
+     "kind": "manufacturer",
+     "name": "Mölnlycke",
+     "detail": "the supplier's own product page",
+     "captured": "2026-09-07",
+     "url": "https://www.molnlycke.com/en-gb/products-solutions/mefix",
+     "authority": "The manufacturer's own words about its own product. Not independently verified.",
+     "specsCaptured": "2026-09-07",
+     "specsUrl": "https://www.molnlycke.com/en-gb/products-solutions/mefix"
+    }
+   },
+   "fields": {
+    "sizesAvailable": [
+     {
+      "value": "2.5cm x 10m, 2.5cm x 5m, 5cm x 10m, 5cm x 5m, 10cm x 10m, 10cm x 5m, 15cm x 10m, 15cm x 5m, 20cm x 10m, 20cm x 5m, 30cm x 10m, 30cm x 5m",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "material": [
+     {
+      "value": "Self-adhesive fabric",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "waterproof": [
+     {
+      "value": "Breathable but water-resistant, provides protection from outside contamination",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "packSize": [
+     {
+      "value": "1 pc (roll)",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "sterility": [
+     {
+      "value": "Non-sterile",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "indications": [
+     {
+      "value": "Can be used where self-adhesive fixation is required, for example for the secure fixation of dressings, tubes and cannulas.",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "clinicalClaims": [
+     {
+      "value": "Mefix is a self-adhesive fabric for secure fixation of dressings, tubes and cannulas. Gentle on the skin and skin friendly, and its conformability makes it comfortable to wear.",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ]
+   },
+   "familyMembers": []
+  },
+  {
+   "key": "Mölnlycke|melgisorb ag",
+   "name": "Melgisorb Ag",
+   "supplier": "Mölnlycke",
+   "supplierResolved": true,
+   "supplierResolution": "confirmed",
+   "npc": [],
+   "mpc": [],
+   "family": null,
+   "categories": [],
+   "sourceCount": 1,
+   "sources": {
+    "manufacturer:Mölnlycke": {
+     "id": "manufacturer:Mölnlycke",
+     "kind": "manufacturer",
+     "name": "Mölnlycke",
+     "detail": "the supplier's own product page",
+     "captured": "2026-09-07",
+     "url": "https://www.molnlycke.com/en-gb/products-solutions/melgisorb-ag",
+     "authority": "The manufacturer's own words about its own product. Not independently verified.",
+     "specsCaptured": "2026-09-07",
+     "specsUrl": "https://www.molnlycke.com/en-gb/products-solutions/melgisorb-ag"
+    }
+   },
+   "fields": {
+    "sizesAvailable": [
+     {
+      "value": "5x5cm, 10x10cm, 15x15cm, 3x44cm",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "material": [
+     {
+      "value": "High G (guluronic acid) calcium alginate, carboxymethylcellulose (CMC), and an ionic silver complex (Silver Sodium Hydrogen Zirconium Phosphate)",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "packSize": [
+     {
+      "value": "10 pcs",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "sterility": [
+     {
+      "value": "Sterile",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "clinicalClaims": [
+     {
+      "value": "Melgisorb Ag is a highly absorbent, sterile, non woven, antimicrobial pad which releases silver ions in the presence of wound exudate.",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "antimicrobial": [
+     {
+      "value": "Ionic silver complex (Silver Sodium Hydrogen Zirconium Phosphate) which releases silver ions in the presence of wound exudate",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ]
+   },
+   "familyMembers": []
+  },
+  {
+   "key": "Mölnlycke|melgisorb plus",
+   "name": "Melgisorb Plus",
+   "supplier": "Mölnlycke",
+   "supplierResolved": true,
+   "supplierResolution": "confirmed",
+   "npc": [],
+   "mpc": [],
+   "family": null,
+   "categories": [],
+   "sourceCount": 1,
+   "sources": {
+    "manufacturer:Mölnlycke": {
+     "id": "manufacturer:Mölnlycke",
+     "kind": "manufacturer",
+     "name": "Mölnlycke",
+     "detail": "the supplier's own product page",
+     "captured": "2026-09-07",
+     "url": "https://www.molnlycke.com/en-gb/products-solutions/melgisorb-plus",
+     "authority": "The manufacturer's own words about its own product. Not independently verified.",
+     "specsCaptured": "2026-09-07",
+     "specsUrl": "https://www.molnlycke.com/en-gb/products-solutions/melgisorb-plus"
+    }
+   },
+   "fields": {
+    "sizesAvailable": [
+     {
+      "value": "5x5cm, 10x10cm, 10x20cm, 3x45cm",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "material": [
+     {
+      "value": "Calcium sodium alginate fibres",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "packSize": [
+     {
+      "value": "10 pcs (5 pcs for 3x45cm)",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "sterility": [
+     {
+      "value": "Sterile",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "clinicalClaims": [
+     {
+      "value": "Melgisorb Plus is a soft, highly absorbent, sterile, single use dressing made of calcium sodium alginate fibres. It creates a gel on contact with exudate or solutions containing saline. It does not adhere to the wound site upon removal when gelled and absorbs and retains wound exudate.",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ]
+   },
+   "familyMembers": []
+  },
+  {
    "key": "Mölnlycke|mepiform",
    "name": "Mepiform",
    "supplier": "Mölnlycke",
@@ -43427,6 +43978,88 @@
     "Description": [
      {
       "value": "Contact Questions about Mölnlycke products details and usage We value your interest in Mölnlycke products and are here to help with any questions you may have about product details, usage, or applications. Please fill out the form below, and our team will get back to you with the information you need. First Name Last name Company Email Zip Code Phone Role -- Select an option -- Anesthetist Staff Nursing Home Staff Distributor Educational Staff Emergency Dept Staff Infection Control Staff Management Nurse OR Staff Pharmacy Staff Physician Podiatrist Purchasing Surgeon WoundCare Staff Other How can we assist you? -- Select an option -- I am interested in receiving a product sample. I am interested in clinical education. I would like to connect with my local rep. I would like to trial product at my facility. I would like more information on this product. Implementation Timeline -- Select an option -- We are ready to go Within next 3 months Within next 6 months Within next 12 months More than 12 months Street City State Submit",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ]
+   },
+   "familyMembers": []
+  },
+  {
+   "key": "Mölnlycke|mepilex border sacrum ag",
+   "name": "Mepilex Border Sacrum Ag",
+   "supplier": "Mölnlycke",
+   "supplierResolved": true,
+   "supplierResolution": "confirmed",
+   "npc": [],
+   "mpc": [],
+   "family": null,
+   "categories": [],
+   "sourceCount": 1,
+   "sources": {
+    "manufacturer:Mölnlycke": {
+     "id": "manufacturer:Mölnlycke",
+     "kind": "manufacturer",
+     "name": "Mölnlycke",
+     "detail": "the supplier's own product page",
+     "captured": "2026-09-07",
+     "url": "https://www.molnlycke.com/en-gb/products-solutions/mepilex-border-sacrum-ag",
+     "authority": "The manufacturer's own words about its own product. Not independently verified.",
+     "specsCaptured": "2026-09-07",
+     "specsUrl": "https://www.molnlycke.com/en-gb/products-solutions/mepilex-border-sacrum-ag"
+    }
+   },
+   "fields": {
+    "sizesAvailable": [
+     {
+      "value": "18x18cm, 20x20cm, 23x23cm",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "material": [
+     {
+      "value": "Safetac soft silicone wound contact layer, absorbent polyurethane foam pad containing silver sulphate coloured by activated carbon, super absorbent fibre layer, nonwoven, breathable and water proof film",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "waterproof": [
+     {
+      "value": "Breathable and water proof film",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "packSize": [
+     {
+      "value": "5 pcs",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "sterility": [
+     {
+      "value": "Sterile",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "clinicalClaims": [
+     {
+      "value": "Fast (as from 30 min, in vitro), sustained (up to 7 days, in vitro) and broad range antimicrobial action (in vitro).",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     },
+     {
+      "value": "Efficient exudate handling by minimising leakage and a high absorption, retention and MVTR. This could help support a reduced number of dressing changes.",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "antimicrobial": [
+     {
+      "value": "Silver sulphate; broad-range antimicrobial action in vitro, fast (from 30 min) and sustained (up to 7 days)",
       "source": "manufacturer:Mölnlycke",
       "scope": "product"
      }
@@ -47404,6 +48037,69 @@
     }
    },
    "fields": {},
+   "familyMembers": []
+  },
+  {
+   "key": "Mölnlycke|setopress",
+   "name": "Setopress",
+   "supplier": "Mölnlycke",
+   "supplierResolved": true,
+   "supplierResolution": "confirmed",
+   "npc": [],
+   "mpc": [],
+   "family": null,
+   "categories": [],
+   "sourceCount": 1,
+   "sources": {
+    "manufacturer:Mölnlycke": {
+     "id": "manufacturer:Mölnlycke",
+     "kind": "manufacturer",
+     "name": "Mölnlycke",
+     "detail": "the supplier's own product page",
+     "captured": "2026-09-07",
+     "url": "https://www.molnlycke.com/en-gb/products-solutions/setopress",
+     "authority": "The manufacturer's own words about its own product. Not independently verified.",
+     "specsCaptured": "2026-09-07",
+     "specsUrl": "https://www.molnlycke.com/en-gb/products-solutions/setopress"
+    }
+   },
+   "fields": {
+    "sizesAvailable": [
+     {
+      "value": "10cm x 3.5m",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "packSize": [
+     {
+      "value": "12 pcs",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "sterility": [
+     {
+      "value": "Non-sterile",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "indications": [
+     {
+      "value": "For the treatment of venous leg ulcers.",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ],
+    "clinicalClaims": [
+     {
+      "value": "Setopress is a compression (medium/high) extensible bandage for the treatment of venous leg ulcers.",
+      "source": "manufacturer:Mölnlycke",
+      "scope": "product"
+     }
+    ]
+   },
    "familyMembers": []
   },
   {
