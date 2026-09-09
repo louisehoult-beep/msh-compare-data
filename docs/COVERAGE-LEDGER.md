@@ -59,7 +59,7 @@ low coverage there means exhausted, not neglected.
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 4 | 3 | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 6 | 6 | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 4 | 1 | STARTED |
-| Clinical and Sharps Waste Management | infection | 14 | 2 | 14.3% | 6 | 2 | STARTED |
+| Clinical and Sharps Waste Management | infection | 14 | 2 | 14.3% | 5 | 3 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 2 | 15.4% | 6 | 3 | STARTED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | 5 | 3 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 1 | 6 | STARTED |
