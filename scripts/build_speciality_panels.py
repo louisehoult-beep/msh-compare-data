@@ -2876,7 +2876,7 @@ SPECIALITY_RULES = {
         ),
     },
 
-    # PAGE 2891. Two pathways that run in parallel and are bought separately: the
+    # PAGE 2908. Two pathways that run in parallel and are bought separately: the
     # maternity pathway from first contact to postnatal discharge, and the neonatal
     # pathway from anticipated preterm birth to two-year follow-up. The page's own
     # Buying route card says it plainly: "Four NHS Supply Chain agreements across two
