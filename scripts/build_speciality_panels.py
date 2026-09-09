@@ -1333,6 +1333,154 @@ SPECIALITY_RULES = {
             "their expiry dates."
         ),
     },
+    # PAGE 2927. Scope, in the page's own words: "Oral nutritional supplements, enteral
+    # tube feeding and parenteral nutrition, across acute and community." The page's own
+    # research, verified 08/09/2026, establishes that this is two markets sharing a
+    # clinical pathway and almost nothing else: a community prescribing market worth
+    # 638.2m of net ingredient cost in England in 2024/25, written on FP10 and reimbursed
+    # under Part XV of the Drug Tariff, entirely outside any framework; and an acute
+    # device market of 89m over the whole term of one NHS Supply Chain framework, four
+    # fifths of which is syringes and tubes rather than food. This panel can only see the
+    # second of those two. The coverage note below says so on the page rather than
+    # leaving a reader to infer that 89m is the market.
+    "nutrition-and-dietetics": {
+        "label": "Nutrition and Dietetics",
+        # Two NHSSC frameworks and no more. Both are named on this page's own calendar
+        # with expiry dates read at NHS Supply Chain's own contract launch briefs:
+        #   Enteral Feeding, Bile Bags and Associated Products (2025/S 000-028317),
+        #     19 suppliers, ends 13 July 2027. The acute device route, and the one the
+        #     page's Buying route section names.
+        #   Infant Feeding and Accessories (2023/S 000-011743), 18 suppliers, ends
+        #     28 February 2028, extension already used. Roughly half its supplier list
+        #     is condition-specific formula (Danone Nutricia Early Life Nutrition, HiPP,
+        #     Kendal Nutricare, Nestle Nutrition, Babease, Heinz) and half is expression
+        #     and feeding hardware (Ardo, Medela, MAM, Alcado). It is counted here
+        #     because this page's own calendar places it on this patch, and because the
+        #     maternity and neonatal page names a different buying route entirely
+        #     (Maternity, Obstetrics, Gynaecology and Sexual Health Products) and does
+        #     not claim it. See the note on breast pumps in the include list.
+        # DELIBERATELY NOT COUNTED: the five NHSSC Food and Facilities frameworks.
+        # Ambient Food, Fresh Food DPS, Multi Temperature Food Solutions, Food Vending
+        # Solutions and Catering Consumables and Equipment are hospital catering, bought
+        # by facilities, and their supplier lists are Weetabix, Walkers Snacks, Kraft
+        # Heinz, Tilda and Brake Bros. Aymes and Danone do appear on Ambient Food, and
+        # that is exactly the trap: one shared supplier does not make a catering
+        # framework a dietetics framework. "food" and "catering" are therefore absent
+        # from every pattern in this rule, kept out at the include stage rather than
+        # swept back out at the exclude stage.
+        # NOT USED, and worth recording: \bbile\b. It matches "Mobile", and NHSSC has
+        # four frameworks whose names begin with that word. The enteral framework is
+        # reached on "enteral" instead.
+        "frameworks": r"\b(enteral|parenteral|nutrition\w*|dietet\w*|infant feeding)\b",
+        # Derived by running this include over all 1,972 rows of tender-history.json and
+        # all 1,342 of framework-awards.json and reading every hit. 26 rows matched and
+        # were read one by one.
+        #
+        # NOT INCLUDED, deliberately:
+        #   food, catering, hydration -> hospital catering, as above. "Central
+        #     Procurement of Vitamin D Food Supplements Clinically Extremely Vulnerable"
+        #     (DHSC, twice, 2021) is the reason this matters: a shielding-programme
+        #     vitamin mailout, supplied by The Oxford Health Company and Cuttlefish
+        #     Limited, sitting in BNF 0906 vitamins rather than the 0913 and 0914
+        #     sections this page measures. Keeping "food" out keeps it out.
+        #   milk (bare)   -> "BVD PCR Test Kits for Serum and Milk Samples", SRUC,
+        #     supplied by IDEXX. Bovine viral diarrhoea testing in cattle. Only the
+        #     qualified forms "milk kitchen" and "milk bank" are used.
+        #   breast pump, breast milk collection, sterile milk bottles -> these matched
+        #     real NHS rows ("Breast Pumps and Breast Milk Collection Sets [5180689]",
+        #     Ardo Medical; "Sterile Milk Bottles [4692898]", Mediq) and they are
+        #     genuine NHS purchases, but they are the maternity and neonatal patch,
+        #     which has its own page. The framework is counted here because the page
+        #     put it here; the expression hardware awards are left to the page that
+        #     owns them, rather than claimed twice across the Hub.
+        #   dysphagia, gluten free, coeliac -> not one row matched any of them, and each
+        #     straddles another patch (speech and language therapy for the first,
+        #     catering for the second). Root rule 14: no pattern earns its place by
+        #     making a panel look fuller.
+        "include": (
+            r"\b(enteral|parenteral|nutrition|nutritional|dietetic\w*|dietitian\w*|"
+            r"dietician\w*|sip feeds?|tube feed\w*|"
+            r"feeding (?:tubes?|pumps?|sets?|systems?|services?|products?|"
+            r"accessor\w*|consumables?)|"
+            r"nasogastric|naso[- ]gastric|orogastric|oro[- ]gastric|nasojejunal|"
+            r"gastrostom\w*|jejunostom\w*|peg|bile bags?|"
+            r"thickeners?|thickening agents?|malnutrition|malnourish\w*|"
+            r"infant formula|milk kitchens?|milk bank\w*)\b"
+        ),
+        # Four patterns. Every one matched a real row under the include above, was read,
+        # and was rejected:
+        #   endocrine       -> "Gastro Intestinal, Endocrine, Nutrition & Blood Generic
+        #                      Medicines" (2021) and "Gastrointestinal, Endocrine,
+        #                      Nutrition & Blood Medicines" (2025), both the Common
+        #                      Services Agency, both awarded to Kent Pharmaceuticals. A
+        #                      Scottish national generic medicines basket organised by
+        #                      BNF chapter, in which Nutrition is one of four headings.
+        #                      The guard is "endocrine" rather than "medicines" on
+        #                      purpose: parenteral nutrition is genuinely bought through
+        #                      pharmacy on this patch, and "medicines" would throw away
+        #                      real rows. A basket that lists Endocrine alongside
+        #                      Nutrition is a medicines basket, and endocrinology has its
+        #                      own page in any case.
+        #   asparaginase    -> "Procurement of Peg-asparaginase Injection from Alloga
+        #                      UK", Belfast Health and Social Care Trust. Pegaspargase is
+        #                      a PEGylated chemotherapy enzyme. It matches because a
+        #                      hyphen is a word boundary, so \bpeg\b fires on
+        #                      "Peg-asparaginase". PEG is kept in the include list
+        #                      because percutaneous endoscopic gastrostomy is core
+        #                      vocabulary on this patch, and guarded here instead.
+        #   cpd             -> "CPD Courses 26/27 British Dietetic Association (BDA)",
+        #                      Mid and South Essex NHS Foundation Trust, CPV 80000000,
+        #                      education services. A trust buying continuing professional
+        #                      development for its own dietitians. Workforce training,
+        #                      not a market contract, on the same ground as the
+        #                      cardiology rule's "training programme" guard.
+        #   non-parenteral  -> "NHS National Framework for Generics Orals, Non-Parenteral
+        #                      & Housekeeping", NHS England, CPV 33600000, pharmaceutical
+        #                      products. It matches on the word "Parenteral" inside
+        #                      "Non-Parenteral", which is the exact opposite of what it
+        #                      says. A generic oral medicines framework.
+        "exclude": r"\b(endocrine|asparaginase|cpd|non[- ]parenteral)\b",
+        # ONE CPV prefix, and it fires on exactly one notice in this data, which is a
+        # genuine one. 33692200 is "Parenteral nutrition products", read back from Find
+        # a Tender's own OCDS API on 09/09/2026 (release ocds-h6vhtk-06eba1, notice
+        # 080876-2026, "Inpatient Parenteral Nutrition Products"), not from memory.
+        # 33692300 Enteral feeds and 15882000 Dietetic products are deliberately left
+        # out: not one notice in this data carries either, and a family that corroborates
+        # nothing is not claimed. Corroboration only, never admission: the title still
+        # has to match.
+        "cpv": ("33692200",),
+        # NO DRUG TARIFF PART, and this one is worth being explicit about because the
+        # opposite is easy to assume. Part IX reimburses dressings and elastic hosiery
+        # (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic
+        # hosiery (IXR). It carries no enteral feeding or nutrition category at all: the
+        # September 2026 Part IX was searched in full on 08/09/2026 for this page and
+        # nothing on this patch is listed in it. Feeds, oral nutritional supplements and
+        # gluten-free products are reimbursed under Part XV, borderline substances, on
+        # ACBS approval, which is a different list and is not in the Hub's tariff
+        # dataset. The panel carries no tariff rather than reaching for Part IXA.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This panel shows the smaller "
+            "half of this patch by value, and it is much the smaller half. Nutrition and "
+            "dietetics is two markets. The community market is prescribing: 638.2m of "
+            "net ingredient cost in England in 2024/25 across BNF sections 0913 and "
+            "0914, decided by a dietitian, written on an FP10, gated by ACBS approval "
+            "and the ICB formulary, reimbursed under Part XV of the Drug Tariff, and "
+            "entirely outside every framework and every award notice counted below. Two "
+            "companies, Nutricia and Abbott, hold 68.7% of that money. None of it can "
+            "appear in a framework or tender feed, because none of it is bought that "
+            "way. What follows is the acute device route only: NHS Supply Chain's "
+            "Enteral Feeding, Bile Bags and Associated Products framework (2025/S "
+            "000-028317, 19 suppliers, 89m over its full term, ending 13 July 2027), the "
+            "Infant Feeding and Accessories framework (2023/S 000-011743, 18 suppliers, "
+            "ending 28 February 2028), and the trust and national award trail for feeds, "
+            "pumps and parenteral nutrition. Being named on a framework here is not "
+            "evidence of volume, and being absent from one is not evidence of absence "
+            "from this market: the largest supplier on this patch by money earns most of "
+            "it through a route that has no framework at all. The page's Market "
+            "intelligence section carries the community figures, their derivation rule "
+            "and their source."
+        ),
+    },
 }
 
 

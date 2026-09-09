@@ -1,0 +1,688 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "nutrition-and-dietetics",
+ "label": "Nutrition and Dietetics",
+ "defined": true,
+ "generated": "2026-09-09",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-08T11:13:54+00:00",
+  "openTenders": "08/09/2026",
+  "drugTariff": "2026-09-08"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(enteral|parenteral|nutrition\\w*|dietet\\w*|infant feeding)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This panel shows the smaller half of this patch by value, and it is much the smaller half. Nutrition and dietetics is two markets. The community market is prescribing: 638.2m of net ingredient cost in England in 2024/25 across BNF sections 0913 and 0914, decided by a dietitian, written on an FP10, gated by ACBS approval and the ICB formulary, reimbursed under Part XV of the Drug Tariff, and entirely outside every framework and every award notice counted below. Two companies, Nutricia and Abbott, hold 68.7% of that money. None of it can appear in a framework or tender feed, because none of it is bought that way. What follows is the acute device route only: NHS Supply Chain's Enteral Feeding, Bile Bags and Associated Products framework (2025/S 000-028317, 19 suppliers, 89m over its full term, ending 13 July 2027), the Infant Feeding and Accessories framework (2023/S 000-011743, 18 suppliers, ending 28 February 2028), and the trust and national award trail for feeds, pumps and parenteral nutrition. Being named on a framework here is not evidence of volume, and being absent from one is not evidence of absence from this market: the largest supplier on this patch by money earns most of it through a route that has no framework at all. The page's Market intelligence section carries the community figures, their derivation rule and their source.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This panel shows the smaller half of this patch by value, and it is much the smaller half. Nutrition and dietetics is two markets. The community market is prescribing: 638.2m of net ingredient cost in England in 2024/25 across BNF sections 0913 and 0914, decided by a dietitian, written on an FP10, gated by ACBS approval and the ICB formulary, reimbursed under Part XV of the Drug Tariff, and entirely outside every framework and every award notice counted below. Two companies, Nutricia and Abbott, hold 68.7% of that money. None of it can appear in a framework or tender feed, because none of it is bought that way. What follows is the acute device route only: NHS Supply Chain's Enteral Feeding, Bile Bags and Associated Products framework (2025/S 000-028317, 19 suppliers, 89m over its full term, ending 13 July 2027), the Infant Feeding and Accessories framework (2023/S 000-011743, 18 suppliers, ending 28 February 2028), and the trust and national award trail for feeds, pumps and parenteral nutrition. Being named on a framework here is not evidence of volume, and being absent from one is not evidence of absence from this market: the largest supplier on this patch by money earns most of it through a route that has no framework at all. The page's Market intelligence section carries the community figures, their derivation rule and their source.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(enteral|parenteral|nutrition|nutritional|dietetic\\w*|dietitian\\w*|dietician\\w*|sip feeds?|tube feed\\w*|feeding (?:tubes?|pumps?|sets?|systems?|services?|products?|accessor\\w*|consumables?)|nasogastric|naso[- ]gastric|orogastric|oro[- ]gastric|nasojejunal|gastrostom\\w*|jejunostom\\w*|peg|bile bags?|thickeners?|thickening agents?|malnutrition|malnourish\\w*|infant formula|milk kitchens?|milk bank\\w*)\\b/i and does not match /\\b(endocrine|asparaginase|cpd|non[- ]parenteral)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33692200 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 2,
+  "suppliers": 35,
+  "suppliersUnresolved": 4,
+  "awardsShown": 26,
+  "awardsMatched": 26,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Enteral Feeding, Bile Bags and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/enteral-feeding-bile-bags-and-associated-products/",
+   "reference": "2025/S 000-028317",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "5 September 2025",
+   "ends": "13 July 2027",
+   "supplierCount": 19,
+   "supplierSource": "count verified against the page's own stated total (19)",
+   "suppliers": [
+    "Abbott Laboratories Limited",
+    "Avanos Medical UK Limited",
+    "Cardinal Health UK 432 Limited",
+    "Crest Medical Ltd",
+    "Enteral Access Technologies Ltd (previously named on the framework as Nasogastric Feeding Solutions Ltd",
+    "Fresenius Kabi",
+    "GBUK Enteral Ltd",
+    "GenX Medicare",
+    "Helapet Ltd",
+    "Ivor Shaw Ltd (t/a Pennine Healthcare)",
+    "Kebomed UK Ltd",
+    "Kendal Nutricare",
+    "Medicina Limited",
+    "Mediq Healthcare UK Ltd",
+    "NGPod Global Ltd",
+    "Nutricia Ltd",
+    "Richardson Healthcare Ltd",
+    "Valley Northern Ltd",
+    "Vygon (UK) Ltd"
+   ],
+   "delisted": [
+    "Anaiah Healthcare",
+    "Capatex Ltd",
+    "Firmly Medical Ltd",
+    "Westbourne Medical Limited."
+   ]
+  },
+  {
+   "name": "Infant Feeding and Accessories",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/baby-food-and-feeding-accessories/",
+   "reference": "2023/S 000-011743",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "29 February 2024",
+   "ends": "28 February 2028",
+   "supplierCount": 18,
+   "supplierSource": "count verified against the page's own stated total (18)",
+   "suppliers": [
+    "Alcado Limited",
+    "Ardo medical Limited",
+    "Babease Limited",
+    "Central Medical Supplies Limited",
+    "Danone Nutricia Early Life Nutrition",
+    "GBUK Enteral Limited",
+    "HiPP UK Ltd",
+    "J Heinz Foods UK Limited",
+    "Inspiration Healthcare",
+    "Kendal Nutricare Ltd",
+    "Laborie Medical Technologies Ltd",
+    "MAM UK Ltd",
+    "Medela UK",
+    "Medicare Colgate Limited",
+    "Nestle Nutrition",
+    "Newell Brands",
+    "Sharon Services (UK) Ltd",
+    "Sinapi Biomedical"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK Enteral Limited",
+    "GBUK Enteral Ltd"
+   ],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products",
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Kendal Nutricare",
+   "resolved": true,
+   "variants": [
+    "Kendal Nutricare",
+    "Kendal Nutricare Ltd"
+   ],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products",
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Abbott Laboratories Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Alcado Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Ardo medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Avanos Medical UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Babease Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Cardinal Health U.K. 432 Ltd",
+   "resolved": true,
+   "variants": [
+    "Cardinal Health UK 432 Limited"
+   ],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Central Medical Supplies",
+   "resolved": true,
+   "variants": [
+    "Central Medical Supplies Limited"
+   ],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Danone Nutricia Early Life Nutrition",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Enteral Access Technologies Ltd (previously named on the framework as Nasogastric Feeding Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Fresenius Kabi Ltd",
+   "resolved": true,
+   "variants": [
+    "Fresenius Kabi"
+   ],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "GenX Medicare"
+   ],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Helapet Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "HiPP UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Inspiration Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Ivor Shaw Ltd (t/a Pennine Healthcare)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "J Heinz Foods UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Kebomed UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Laborie Medical Technologies UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Laborie Medical Technologies Ltd"
+   ],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "MAM UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Medela",
+   "resolved": true,
+   "variants": [
+    "Medela UK"
+   ],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Medicare Colgate Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Medicina Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Nestle Nutrition",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Newell Brands",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "NGPod Global Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Nutricia Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Richardson Healthcare",
+   "resolved": true,
+   "variants": [
+    "Richardson Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Sharon Services (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Sinapi Biomedical UK",
+   "resolved": true,
+   "variants": [
+    "Sinapi Biomedical"
+   ],
+   "frameworks": [
+    "Infant Feeding and Accessories"
+   ]
+  },
+  {
+   "name": "Valley Northern Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon (UK) Ltd"
+   ],
+   "frameworks": [
+    "Enteral Feeding, Bile Bags and Associated Products"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Inpatient Parenteral Nutrition Products",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": null,
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080876-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33692200"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Framework  Agreement for Supply of Adult and Paediatric Nutrition Products",
+   "buyer": "East Midlands Pharmacy Collaborative",
+   "supplier": "Multiple Suppliers",
+   "date": "2026-07-13",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/306c89f5-65ee-4f5c-bad9-82decba2ed17",
+   "value": 1500000,
+   "periodEnd": "2027-04-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Framework  Agreement for Supply of Adult and Paediatric Nutrition Products",
+   "buyer": "East Midlands Pharmacy Collaborative",
+   "supplier": "Multiple Suppliers",
+   "date": "2026-07-13",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/ef02b110-cbd9-46eb-956e-d17457790d68",
+   "value": 1500000,
+   "periodEnd": "2027-04-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Enteral Feeds",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Fresenius Kabi Limited, Nestle Health Science, Nutricia Ltd",
+   "date": "2026-01-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/003184-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP31325 Parenteral Nutrition Products",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "B Braun Medical, Baxter Healthcare Ltd, Fresenius Kabi Limited",
+   "date": "2025-10-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/068291-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Enteral Feeding, Bile Bags and Associated Products",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Avanos Medical UK Limited, Crest Medical Ltd, GBUK Enteral Ltd, Helapet Ltd, Med",
+   "date": "2025-05-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028317-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Parenteral Nutrition",
+   "buyer": "Velindre NHS Trust, NHS Shared Services Partnership - Procurement Services (on b",
+   "supplier": "B Braun Medical Ltd",
+   "date": "2025-05-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028357-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Parenteral Nutrition Products",
+   "buyer": "Berkshire Healthcare NHS Foundation Trust",
+   "supplier": "Fresenius Kabi Limited",
+   "date": "2025-02-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005476-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Framework Agreement for the Supply of Unlicensed Parenteral Nutrition (PN) direct award; mini competition or a combinati",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "ITH Pharma",
+   "date": "2024-04-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/013476-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Enteral Feeding Products",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Medicina Limited, GBUK Enteral Ltd., Avanos Medical UK Limited, Leib Medical Ltd",
+   "date": "2024-01-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001728-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Framework Agreement for the Supply of Parenteral Nutrition",
+   "buyer": "HealthTrust Europe LLP (HTE) acting on behalf of Mid and South Essex NHS Foundat",
+   "supplier": "B. Braun Medical Limited",
+   "date": "2023-10-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/030155-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Parenteral Nutrition Inpatient [3970500]",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "BAXTER HEALTHCARE LTD, B. Braun Medical Limited, Fresenius Kabi Limited Company",
+   "date": "2023-04-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/012279-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "A Provision of Nutritional Supplies, Associated Products and Support Services",
+   "buyer": "NHS Hampshire and Isle of Wight Integrated Care Board",
+   "supplier": "Nutricia Limited",
+   "date": "2023-04-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/012385-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Enteral Feed contract",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": "Abbott Nutrition",
+   "date": "2023-01-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000877-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Provision of a Fully Managed Enteral Feeding Service; for Nutrition Supply Services for Enteral Feeds & Ancillary Materi",
+   "buyer": "Midlands Partnership NHS Foundation Trust",
+   "supplier": "Abbott Laboratories ",
+   "date": "2022-12-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/035732-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Provision of Enteral Feeding Pumps, Feeds and Consumables to Hospital Sites and the Provision of Home Delivery Service f",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Abbott Laboratories",
+   "date": "2022-11-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/032322-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Enteral Feeds, Ancillaries including Provision of Pumps and Home Delivery Service",
+   "buyer": "Somerset NHS Foundation Trust",
+   "supplier": "fresenius kabi limited",
+   "date": "2022-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027159-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "National Framework for the Provision of an Enteral Feeding Accessories Delivery Service",
+   "buyer": "Countess of Chester Hospital NHS Foundation Trust",
+   "supplier": "Vygon (UK) Ltd",
+   "date": "2022-06-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016228-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Enteral Feeds, Ancillaries & Provision of Pumps & Home Delivery Service",
+   "buyer": "Royal Devon and Exeter NHS Foundation Trust",
+   "supplier": "Abbott Laboratories Ltd",
+   "date": "2022-02-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005454-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Enteral Feeding Pumps, Feeds and Consumables to Hospital Sites and the Provision of Home Delivery Service for United Lin",
+   "buyer": "United Lincolnshire Hospitals NHS Trust",
+   "supplier": "Fresenius Kabi Limited",
+   "date": "2021-11-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028053-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Enteral Nutrition Products and Services Procurement  for the Leeds Health Economy",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Nutricia Limited",
+   "date": "2021-11-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028069-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Parenteral Nutrition for Adults and Paediatrics",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "B. Braun Medical Limited, Baxter Healthcare Ltd, Fresenius Kabi Limited",
+   "date": "2021-11-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027811-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Parenteral Nutrition Formulation Bags for Neo Nates",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Baxter Healthcare Ltd",
+   "date": "2021-11-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027812-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Enteral Feeds & Associated Products",
+   "buyer": "NHS HAMPSHIRE, SOUTHAMPTON AND ISLE OF WIGHT CCG",
+   "supplier": "Nutricia Limited",
+   "date": "2021-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023738-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Home Parenteral Nutrition [3530787]",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "B. BRAUN MEDICAL LTD, Fresenius Kabi Limited",
+   "date": "2021-07-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/017706-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Enteral Nutrition Products and Services Procurement The Leeds Health Economy",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "",
+   "date": "2021-03-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005891-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}

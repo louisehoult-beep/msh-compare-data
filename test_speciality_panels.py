@@ -26,6 +26,7 @@ PLASTICS = "plastics-burns-and-reconstruction"
 FRAILTY = "frailty-and-older-people"
 IR = "interventional-radiology"
 CARDIAC = "cardiology-and-cardiac-surgery"
+NUTRITION = "nutrition-and-dietetics"
 fails = []
 
 
@@ -1377,6 +1378,163 @@ for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
 check("licence notice carried", bool(ca.get("_notice", {}).get("owner")))
 cakb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", CARDIAC + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % cakb, cakb < 200)
+
+print("\n" + "=" * 70)
+print("NUTRITION AND DIETETICS (page 2927)")
+print("=" * 70)
+print("Rebuilding the nutrition and dietetics slice from live data...")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), NUTRITION],
+               check=True, capture_output=True)
+nu = load_panel(NUTRITION)
+nux = B.compile_rule(B.SPECIALITY_RULES[NUTRITION])
+nutitles = " || ".join((a.get("title") or "") for a in nu["awards"]).lower()
+
+print("\nFALSE POSITIVES — every one matched the include list and was rejected")
+# The four exclusion patterns, tested against the exact real titles that put them
+# there. Each has to be admitted by `include` and then thrown out by `exclude`,
+# otherwise the guard is decoration rather than a working filter.
+for title, why in [
+    ("Gastro Intestinal, Endocrine, Nutrition & Blood Generic Medicines",
+     "Scottish generic medicines basket, Kent Pharmaceuticals"),
+    ("Gastrointestinal, Endocrine, Nutrition & Blood Medicines",
+     "the same basket, 2025 award"),
+    ("Procurement of Peg-asparaginase Injection from Alloga   UK",
+     "PEGylated chemotherapy enzyme, Belfast HSCT"),
+    ("CPD Courses 26/27 British Dietetic Association (BDA)",
+     "workforce training, CPV 80000000"),
+    ("NHS National Framework for Generics Orals, Non-Parenteral & Housekeeping",
+     "generic oral medicines, NHS England"),
+]:
+    check("include admits it (so the guard is doing work): %s" % why,
+          bool(nux["inc"].search(title)))
+    check("exclude rejects it: %s" % why, not B.match_title(nux, title))
+
+# Kept out at the include stage instead, because "food" and "catering" are hospital
+# catering on this patch, not dietetics.
+for title, why in [
+    ("Central Procurement of Vitamin D  Food Supplements Clinically Extremely Vulnerable",
+     "DHSC shielding vitamin mailout, BNF 0906"),
+    ("BVD PCR Test Kits for Serum and Milk Samples", "bovine viral diarrhoea, SRUC"),
+    ("Breast Pumps and Breast Milk Collection Sets [5180689]",
+     "maternity and neonatal, which has its own page"),
+    ("Sterile Milk Bottles [ 4692898 ]", "milk kitchen hardware, maternity and neonatal"),
+]:
+    check("never admitted in the first place: %s" % why, not B.match_title(nux, title))
+
+for bad in ["endocrine", "asparaginase", "cpd courses", "non-parenteral", "vitamin d",
+            "serum and milk", "breast pump", "sterile milk bottles", "ambient food"]:
+    check("absent from the published panel: %s" % bad, bad not in nutitles)
+
+print("\nTRUE POSITIVES — awards that must be on this patch")
+for good in ["enteral feeding, bile bags and associated products",
+             "home parenteral nutrition", "unlicensed parenteral nutrition",
+             "enteral feeds", "nutritional supplies", "enteral feeding pumps",
+             "parenteral nutrition formulation bags for neo nates"]:
+    check("present: %s" % good, good in nutitles)
+check("nothing was lost to the exclusion list: every matched award is published",
+      nu["counts"]["awardsShown"] == nu["counts"]["awardsMatched"] == 26,
+      "shown=%s matched=%s" % (nu["counts"]["awardsShown"], nu["counts"]["awardsMatched"]))
+
+print("\nFRAMEWORKS")
+nunames = [f["name"] for f in nu["frameworks"]]
+for want in ["Enteral Feeding, Bile Bags and Associated Products",
+             "Infant Feeding and Accessories"]:
+    check("framework present: %s" % want, want in nunames)
+check("exactly two frameworks, and no third crept in", len(nunames) == 2,
+      "got %d: %s" % (len(nunames), nunames))
+# The catering trap. Aymes and Danone Nutricia are both named on Ambient Food, so a
+# supplier-led filter would pull the whole NHSSC Food category onto a dietetics page.
+for bad in ["Ambient Food", "Fresh Food DPS", "Multi Temperature Food Solutions",
+            "Food Vending Solutions", "Catering Consumables and Equipment"]:
+    check("catering framework kept out: %s" % bad, bad not in nunames)
+# \bbile\b matches "Mobile". Four NHSSC frameworks start with that word.
+for bad in ["Mobile X-Ray Systems and Associated Option and Related Services",
+            "Mobile Image Intensifiers and Associated Options and Related Services"]:
+    check("the Mobile/bile collision is not made: %s" % bad[:28], bad not in nunames)
+check("every framework carries an end date", all(f.get("ends") for f in nu["frameworks"]))
+check("every framework carries its NHSSC url", all(f.get("url") for f in nu["frameworks"]))
+check("both framework references are the ones the page verified",
+      sorted(f["reference"] for f in nu["frameworks"]) ==
+      ["2023/S 000-011743", "2025/S 000-028317"])
+
+print("\nSUPPLIERS ARE READ OFF THE FRAMEWORK, NEVER GUESSED")
+nusup = nu["suppliers"]
+check("every named supplier is on one of this speciality's frameworks",
+      all(set(s["frameworks"]) <= set(nunames) for s in nusup))
+check("no supplier appears twice", len(nusup) == len(set(s["name"] for s in nusup)))
+nuall = " || ".join({s["name"] for s in nusup} |
+                    {v for s in nusup for v in s["variants"]}).lower()
+# Named on the two contract launch briefs read at NHS Supply Chain.
+for want in ["nutricia", "abbott", "fresenius kabi", "vygon", "avanos", "medicina",
+             "hipp", "kendal nutricare", "ardo", "medela"]:
+    check("framework supplier present: %s" % want, want in nuall)
+# Named on Ambient Food and the other catering frameworks and nowhere else on this
+# patch. If one appears, a catering framework has been claimed by mistake.
+for bad in ["weetabix", "walkers snacks", "tilda", "brake bros", "kraft heinz",
+            "premier foods", "unilever"]:
+    check("catering supplier absent: %s" % bad, bad not in nuall)
+# GBUK Enteral and Kendal Nutricare are on both frameworks, spelled two ways across
+# NHSSC's own pages. 19 + 18 = 37 raw names, 35 companies.
+check("the alias merge actually reduced the raw NHSSC list", len(nusup) == 35,
+      "got %d, expected 35 from 37 raw names" % len(nusup))
+gbuk = [s for s in nusup if "gbuk" in s["name"].lower()]
+check("GBUK appears exactly once", len(gbuk) == 1, "got %s" % [s["name"] for s in gbuk])
+check("GBUK is credited on both frameworks",
+      bool(gbuk) and len(gbuk[0]["frameworks"]) == 2)
+check("a merged supplier shows both NHSSC spellings",
+      bool(gbuk) and len(gbuk[0]["variants"]) == 2)
+check("an unresolved name is flagged, never silently merged",
+      all(("resolved" in s) for s in nusup))
+
+print("\nCPV CORROBORATES, IT NEVER ADMITS")
+# 33692200 Parenteral nutrition products, read back from Find a Tender's own OCDS API
+# on 09/09/2026 (release ocds-h6vhtk-06eba1, notice 080876-2026).
+check("only the parenteral nutrition family is claimed",
+      B.SPECIALITY_RULES[NUTRITION].get("cpv") == ("33692200",))
+# 33692300 Enteral feeds and 15882000 Dietetic products would both look right here.
+# Neither appears on a single notice in this data, so neither is claimed.
+for unfired in ("33692300", "15882000", "33600000", "33690000", "15800000"):
+    check("the unfired family %s is not claimed" % unfired,
+          unfired not in (B.SPECIALITY_RULES[NUTRITION].get("cpv") or ()))
+check("no award reached the panel on CPV alone",
+      all(B.match_title(nux, a["title"]) for a in nu["awards"] if a.get("cpvCorroborates")))
+check("at least one award is corroborated by CPV",
+      any(a.get("cpvCorroborates") for a in nu["awards"]))
+
+print("\nNO DRUG TARIFF, SAID HONESTLY (rule 14)")
+# Part IX carries no enteral feeding or nutrition category at all. Feeds, oral
+# nutritional supplements and gluten-free products are reimbursed under Part XV,
+# borderline substances, on ACBS approval, which is a different list entirely.
+check("no tariff panel is published for this patch", nu.get("drugTariff") is None)
+check("no tariff part is claimed", not B.SPECIALITY_RULES[NUTRITION].get("tariffParts"))
+check("the tariff rule says why rather than going quiet",
+      "No Drug Tariff part applies" in (nu.get("rules") or {}).get("drugTariff", ""))
+check("Part XV is named as the real reimbursement route",
+      "Part XV" in (nu.get("rules") or {}).get("frameworks", ""))
+
+print("\nTHE COVERAGE LIMIT IS PUBLISHED, NOT HIDDEN (rule 14)")
+for k in ("frameworks", "suppliers"):
+    check("coverage limit stated on the %s rule" % k,
+          "COVERAGE LIMIT" in (nu.get("rules") or {}).get(k, ""))
+nufw = (nu.get("rules") or {}).get("frameworks", "")
+check("the community market this panel cannot see is quantified", "638.2m" in nufw)
+check("both framework references and their end dates are named",
+      "2025/S 000-028317" in nufw and "13 July 2027" in nufw
+      and "2023/S 000-011743" in nufw and "28 February 2028" in nufw)
+check("the concentration a rep needs is stated", "68.7%" in nufw)
+
+print("\nAN EMPTY PANEL IS AN HONEST ANSWER, NOT A REASON TO WIDEN (rule 14)")
+check("no open tender on this patch today, and none invented", nu["openTenders"] == [])
+check("the open-tender rule says an empty list means none open",
+      "empty list means" in (nu.get("rules") or {}).get("openTenders", ""))
+
+print("\nTHE RULE TRAVELS WITH THE DATA (rule 14a)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((nu.get("rules") or {}).get(k)))
+check("licence notice carried", bool(nu.get("_notice", {}).get("owner")))
+nukb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", NUTRITION + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % nukb, nukb < 200)
+
 
 print()
 if fails:
