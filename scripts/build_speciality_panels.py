@@ -1345,6 +1345,122 @@ SPECIALITY_RULES = {
     # fifths of which is syringes and tubes rather than food. This panel can only see the
     # second of those two. The coverage note below says so on the page rather than
     # leaving a reader to infer that 89m is the market.
+    # PAGE 2927. The only speciality in this rollout so far whose patch carries NO
+    # NHS Supply Chain framework at all. That is the commercial story of obesity and
+    # weight management, not a hole in the data: the money moves on an FP10 or through
+    # a hospital specialist service, and the service end is commissioned by ICBs,
+    # health boards and local authorities on their own notices. The page's own build
+    # (08/09/2026) reached the same finding independently from the NHSBSA Prescription
+    # Cost Analysis files.
+    "obesity-and-weight-management": {
+        "label": "Obesity and Weight Management",
+        # NO FRAMEWORK, DELIBERATELY, and this is the honest answer rather than a
+        # pattern that happens to find nothing. All 121 NHSSC framework names were read
+        # on 09/09/2026 and not one is this speciality's. There is no obesity, weight
+        # management or bariatric framework.
+        #
+        # THE TRAP THAT WAS REFUSED. Arjo won both bariatric equipment contracts in this
+        # data (Bariatric Equipment Rental, Lancashire Teaching Hospitals, 24/08/2026;
+        # Bariatric Hire Contract, James Paget, 04/12/2025) and Arjo is named on four
+        # NHSSC frameworks: Pressure Area Care and Patient Handling, Aids for Daily
+        # Living, Operating Theatres Equipment, and Vascular Therapy. Claiming any of
+        # them here would have produced a fuller-looking panel and a false one. Every
+        # one of those four is another page's framework, counted there: the first two on
+        # Patient Moving and Handling (2913), the third on Theatres and Surgical, the
+        # fourth on Vascular Surgery and PAD. One shared supplier does not make a
+        # patient-handling framework an obesity framework, on exactly the ground the
+        # nutrition rule keeps hospital catering out. build_frameworks therefore returns
+        # an empty list, the Suppliers tab is empty for the same reason, and the rules
+        # block says so in the file rather than leaving a reader to wonder.
+        "frameworks": None,
+        # Derived by running the candidate include over all 1,972 rows of
+        # tender-history.json and all 1,342 of framework-awards.json on 09/09/2026 and
+        # reading all 12 hits one by one. 8 were this speciality, 4 were not.
+        #
+        # NOT INCLUDED, deliberately, kept out at the include stage rather than swept
+        # back out at the exclude stage:
+        #   tier 2 / tier 3 / tier 4 (bare) -> the weight management tiers are real
+        #     vocabulary on this patch, but bare they are not this speciality at all.
+        #     "Tier 2 Cardiology and Direct Access Diagnostics" (NHS Lancashire and
+        #     South Cumbria ICB, FCMS (NW), 17/08/2026) and "CAMHs Tier 4 Beds and
+        #     associated services" (Avon and Wiltshire Mental Health Partnership,
+        #     11/08/2026) both matched. NHS commissioning tiers services of every kind.
+        #     The genuine rows reach this panel on "weight management" instead, which is
+        #     how "Child Tier 2 Weight Management Service" is matched.
+        #   lifestyle programme / lifestyle service -> "NHS South West London ICB -
+        #     Long-Term Conditions (LTC) Community Outreach, Expert Patient Programme
+        #     (EPP) LTC Self-Management And Pentathlon Healthy Lifestyle Programme
+        #     Services." (Asian Resource Centre of Croydon, 20/08/2026). A long-term
+        #     conditions self-management contract. Healthy lifestyle is a whole public
+        #     health category and most of it is not weight.
+        #   exercise referral -> same ground, and not one row matched it.
+        #   gastrectomy (bare) -> not one row matched, and bare gastrectomy is upper GI
+        #     cancer surgery far more often than it is bariatric. Only the qualified
+        #     "sleeve gastrectomy" is used.
+        #   semaglutide, tirzepatide, liraglutide, Mounjaro -> not one row matched, and
+        #     each is dual-licensed. This page's own build recorded the structural
+        #     finding that tirzepatide and semaglutide are classified under Drugs used
+        #     in diabetes, not under the BNF section named for obesity. A notice naming
+        #     the molecule could as easily be the diabetes and endocrinology patch,
+        #     which has its own page. The obesity-only brands are included instead:
+        #     Wegovy (semaglutide 2.4mg) and Saxenda (liraglutide 3mg) are licensed for
+        #     weight management only, as are orlistat, Xenical and Mysimba, and none of
+        #     them can belong to another patch.
+        "include": (
+            r"\b(obesity|obese|adiposity|bariatric|"
+            r"weight[- ]?(?:management|loss|reduction)|healthy weight|"
+            r"gastric (?:band|banding|bypass|sleeve|balloon)|sleeve gastrectomy|"
+            r"metabolic surgery|"
+            r"orlistat|xenical|mysimba|wegovy|saxenda)\b"
+        ),
+        # ONE PATTERN, and it is here because a real row matched the include above and
+        # was read and rejected:
+        #   covid / vaccination -> "Combined Safety Syringes and Needles for COVID-19
+        #     Vaccination Programme - Morbidly Obese Requirement" (NHS Supply Chain
+        #     operated by DHL, Owen Mumford and Reliance Medical, 16/09/2021). It
+        #     matches on "Obese" and it is a needle procurement: the phrase is a needle
+        #     LENGTH specification for vaccinating patients with a higher BMI, not an
+        #     obesity service or an obesity product. "obese" cannot be dropped from the
+        #     include list, since it is the core word of the speciality, so it is
+        #     guarded here. The guard is deliberately narrow: a COVID vaccination
+        #     syringe contract is never this speciality, whereas "syringe" or "needle"
+        #     on their own would throw away a genuine GLP-1 pen needle row if one ever
+        #     appeared.
+        "exclude": r"\b(covid(?:[- ]?19)?|vaccination)\b",
+        # NO CPV FAMILY IS CLAIMED. The seven service awards on this patch carry
+        # 85100000 (health services) and 85000000 (health and social work), which are
+        # the whole of healthcare and corroborate nothing; the bariatric equipment
+        # rental carries 33192000 and 33192120 (medical furniture and hospital beds),
+        # which are the patient-handling family and belong to that page. Nothing here
+        # is specific to obesity, so nothing is recorded. Corroboration that
+        # corroborates every speciality equally is not corroboration.
+        #
+        # NO DRUG TARIFF PART, and it is worth being explicit. Part IX reimburses
+        # dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma
+        # appliances (IXC) and elastic hosiery (IXR). Obesity medicines are not
+        # appliances and are not in Part IX at all; they are dispensed against Part
+        # VIIIA and, for the specialist-service routes, not through community
+        # prescribing at all. The panel carries no tariff rather than reaching.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This panel shows the service and "
+            "equipment end of this patch, and that is much the smaller end. Obesity and "
+            "weight management is the one speciality in this Hub with no NHS Supply Chain "
+            "framework at all, because almost none of the money is bought through one. It "
+            "moves two other ways instead. The first is community prescribing: Mounjaro "
+            "alone accounted for 574,302,390 of net ingredient cost across 3,064,223 items "
+            "in England in 2025/26, which is 4.93% of England's entire community "
+            "prescribing bill from one brand, and none of it can appear in a framework or "
+            "an award notice because none of it is bought that way. The second is hospital "
+            "specialist services, including the 7,260 NHS-funded bariatric procedures "
+            "carried out in 2025/26. What follows is what the procurement record does "
+            "hold: ICB, health board and local authority awards for tiered and digital "
+            "weight management services, and trust contracts for bariatric equipment "
+            "hire. Absence from this panel is not absence from this market, and no "
+            "supplier list is published here at all, because there is no framework for "
+            "one to be drawn from. The page's Market intelligence and Deep dive sections "
+            "carry the prescribing and bariatric surgery figures with their sources."
+        ),
+    },
     "nutrition-and-dietetics": {
         "label": "Nutrition and Dietetics",
         # Two NHSSC frameworks and no more. Both are named on this page's own calendar
@@ -1486,9 +1602,20 @@ SPECIALITY_RULES = {
 }
 
 
+# A speciality whose patch carries no NHS Supply Chain framework at all sets
+# "frameworks": None. That is a finding, not a gap, and it is different from a
+# pattern that happens to match nothing today: obesity and weight management is
+# bought through an FP10 or a hospital specialist service, so there is no
+# framework for a pattern to find and none will appear. NEVER_MATCHES is a regex
+# that cannot match any string, so build_frameworks returns an empty list without
+# the rule having to pretend to a keyword it does not have.
+NEVER_MATCHES = re.compile(r"(?!x)x")
+
+
 def compile_rule(rule):
     return {
-        "fw": re.compile(rule["frameworks"], re.I),
+        "fw": NEVER_MATCHES if rule["frameworks"] is None
+              else re.compile(rule["frameworks"], re.I),
         "inc": re.compile(rule["include"], re.I),
         "exc": re.compile(rule["exclude"], re.I),
     }
@@ -1716,11 +1843,26 @@ def build(slug, sources):
         },
         "rules": {
             "frameworks": qualify(
-                "NHS Supply Chain framework names matching /%s/i. NHSSC names a framework "
-                "after its clinical category, so the name is the key; the CBU category "
-                "field is far too broad to filter on." % rule["frameworks"]
+                ("NO NHS Supply Chain framework covers this speciality. That is a finding "
+                 "about the patch, not a missing filter: every NHSSC framework name was "
+                 "read and none of them is this speciality's. Suppliers on this page are "
+                 "therefore empty for the same reason, because the supplier list is built "
+                 "from the speciality's own frameworks and there are none to build it "
+                 "from. Where a supplier here does appear on an NHSSC framework, it is "
+                 "another speciality's framework and is counted on that page.")
+                if rule["frameworks"] is None else
+                ("NHS Supply Chain framework names matching /%s/i. NHSSC names a framework "
+                 "after its clinical category, so the name is the key; the CBU category "
+                 "field is far too broad to filter on." % rule["frameworks"])
             ),
             "suppliers": qualify(
+                ("No supplier list is published for this speciality, because this patch has no "
+                 "NHS Supply Chain framework for one to be drawn from. This panel names "
+                 "suppliers only where the procurement record names them on this speciality's "
+                 "own frameworks. It will not fall back to a keyword guess against the "
+                 "supplier directory, which would return firms that sell to this patch and "
+                 "firms that merely mention it in the same list.")
+                if rule["frameworks"] is None else
                 "Every supplier NHS Supply Chain names on the frameworks above, resolved to one "
                 "name per company through the Hub's alias registry, and ordered by how many of "
                 "this speciality's frameworks they appear on. That count is the only claim made. "

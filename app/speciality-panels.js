@@ -93,8 +93,14 @@
     h += '<div class="sp-tile"><b>' + d.counts.awardsMatched + '</b><span>Awards recorded</span></div>';
     h += '</div>';
 
-    /* FRAMEWORKS */
-    h += '<div class="sp-sec"><h3 class="sub-h3">Frameworks</h3><div class="sp-scroll"><table class="sp-tbl">';
+    /* FRAMEWORKS. A speciality with none gets an honest empty state, not a table
+       with only a header row: obesity and weight management genuinely has no NHS
+       Supply Chain framework, and a bare header reads as a panel that failed. */
+    h += '<div class="sp-sec"><h3 class="sub-h3">Frameworks</h3>';
+    if (!d.frameworks.length) {
+      h += '<div class="empty-state">No NHS Supply Chain framework covers this speciality. Every framework name was checked, so this is a fact about how the patch is bought rather than a gap in the data. See the rule below for what that means, and what this panel shows instead.</div>';
+    } else {
+    h += '<div class="sp-scroll"><table class="sp-tbl">';
     h += '<tr><th>Framework</th><th>Route</th><th>Ends</th><th>Suppliers</th></tr>';
     for (i = 0; i < d.frameworks.length; i++) {
       var f = d.frameworks[i];
@@ -105,7 +111,9 @@
       if (m !== null && m <= 12) { h += ' <span class="sp-soon">(' + (m <= 0 ? 'expired' : m + ' months)') + '</span>'; }
       h += '</td><td>' + esc(f.supplierCount === null || f.supplierCount === undefined ? 'not stated' : f.supplierCount) + '</td></tr>';
     }
-    h += '</table></div></div>';
+    h += '</table></div>';
+    }
+    h += '</div>';
 
     /* OPEN TENDERS */
     h += '<div class="sp-sec"><h3 class="sub-h3">Open now</h3>';
@@ -169,6 +177,15 @@
   function renderSuppliers(d) {
     if (!SUP) { return; }
     var h = '';
+    /* No framework means no supplier list can honestly be drawn. Say so, rather than
+       showing a search box over an empty table, and never fall back to a keyword
+       guess against the whole directory. */
+    if (!d.suppliers.length) {
+      h += '<div class="empty-state">No supplier list is published for this speciality. This panel names suppliers only where NHS Supply Chain names them on the speciality\'s own frameworks, and this patch has none for a list to be drawn from. Firms that sell here do appear on NHSSC frameworks, but on other specialities\' frameworks, and they are counted on those pages. The awarded contracts on the previous tab do name who won them.</div>';
+      h += ruleBlock(d.rules, ['suppliers']);
+      SUP.innerHTML = h;
+      return;
+    }
     h += '<p style="font-size:13.5px;line-height:1.65;margin:0 0 14px;">Every supplier NHS Supply Chain names on this speciality\'s own frameworks, ' +
          d.counts.suppliers + ' of them, resolved to one name per company. Not the whole directory, and not a guess: these are the firms on the agreements a buyer on this patch actually orders through.</p>';
     h += '<input class="sp-find" id="sp-find" type="search" placeholder="Find a supplier..." autocomplete="off">';

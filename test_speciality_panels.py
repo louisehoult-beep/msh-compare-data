@@ -27,6 +27,7 @@ FRAILTY = "frailty-and-older-people"
 IR = "interventional-radiology"
 CARDIAC = "cardiology-and-cardiac-surgery"
 NUTRITION = "nutrition-and-dietetics"
+OBESITY = "obesity-and-weight-management"
 fails = []
 
 
@@ -1534,6 +1535,109 @@ for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
 check("licence notice carried", bool(nu.get("_notice", {}).get("owner")))
 nukb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", NUTRITION + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % nukb, nukb < 200)
+
+
+# ---------------------------------------------------------------------------
+print("\nOBESITY AND WEIGHT MANAGEMENT (page 2927)")
+print("Rebuilding the obesity and weight management slice from live data...")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), OBESITY],
+               check=True, capture_output=True)
+ob = load_panel(OBESITY)
+obx = B.compile_rule(B.SPECIALITY_RULES[OBESITY])
+
+print("\nFALSE POSITIVES — every one matched the include list and was read and rejected")
+# All four are real rows from the 09/09/2026 derivation. Three are kept out at the
+# include stage (the bare tier and lifestyle patterns were never adopted); the
+# fourth cannot be, because "obese" is the core word of the speciality.
+for bad in [
+    "Tier 2 Cardiology and Direct Access Diagnostics",
+    "CAMHs Tier 4 Beds and associated services",
+    "NHS South West London ICB - Long-Term Conditions (LTC) Community Outreach, Expert "
+    "Patient Programme (EPP) LTC Self-Management And Pentathlon Healthy Lifestyle "
+    "Programme Services.",
+    "Combined Safety Syringes and Needles for COVID-19 Vaccination Programme - "
+    "Morbidly Obese Requirement",
+]:
+    check("excluded: %s" % bad[:58], not B.match_title(obx, bad))
+
+# The COVID guard has to be the reason, not a coincidence of the include list.
+check("the COVID vaccination row is caught by the exclude list, not missed by include",
+      bool(obx["inc"].search("Combined Safety Syringes and Needles for COVID-19 "
+                            "Vaccination Programme - Morbidly Obese Requirement")))
+# ...and the guard must stay narrow enough to keep a genuine row.
+check("the COVID guard does not throw away a genuine pen needle row",
+      B.match_title(obx, "Supply of Wegovy Pen Needles and Sharps Disposal"))
+
+print("\nTRUE POSITIVES — rows that must be present")
+obt = " || ".join((a.get("title") or "") for a in ob["awards"]).lower()
+for good in ["obesity pathway innovation programme",
+             "child tier 2 weight management service",
+             "bariatric equipment rental",
+             "bariatric hire contract",
+             "level 3 digital weight management service"]:
+    check("present: %s" % good, good in obt)
+check("every award matched is shown (8 of 8)",
+      ob["counts"]["awardsShown"] == ob["counts"]["awardsMatched"] == 8,
+      "shown=%s matched=%s" % (ob["counts"]["awardsShown"], ob["counts"]["awardsMatched"]))
+
+print("\nNO FRAMEWORK IS A FINDING, NOT A GAP (rule 14)")
+check("the rule declares no framework rather than a pattern that finds none",
+      B.SPECIALITY_RULES[OBESITY]["frameworks"] is None)
+check("no framework is published", ob["frameworks"] == [] and ob["counts"]["frameworks"] == 0)
+check("no supplier list is published", ob["suppliers"] == [] and ob["counts"]["suppliers"] == 0)
+obfw = (ob.get("rules") or {}).get("frameworks", "")
+obsup = (ob.get("rules") or {}).get("suppliers", "")
+check("the frameworks rule says outright that none covers this speciality",
+      "NO NHS Supply Chain framework covers this speciality" in obfw)
+check("the suppliers rule explains why the list is empty",
+      "no supplier list is published" in obsup.lower() and "keyword guess" in obsup.lower())
+
+# THE TRAP. Arjo won both bariatric contracts and sits on four NHSSC frameworks,
+# every one of them another page's. If a later edit reaches for one to fill this
+# panel out, this fails.
+print("\nTHE SHARED-SUPPLIER TRAP MUST STAY REFUSED")
+for stolen in ["Pressure Area Care and Patient Handling", "Aids for Daily Living",
+               "Operating Theatres Equipment and Related Accessories and Services",
+               "Vascular Therapy and Associated Products"]:
+    check("not claimed from another page: %s" % stolen[:44],
+          not any(f.get("name") == stolen for f in ob["frameworks"]))
+
+print("\nNOTHING IS CLAIMED THAT THE DATA DOES NOT SUPPORT")
+check("no CPV family is claimed", not B.SPECIALITY_RULES[OBESITY].get("cpv"))
+check("no tariff part is claimed", not B.SPECIALITY_RULES[OBESITY].get("tariffParts"))
+check("no Drug Tariff block is published", ob.get("drugTariff") is None)
+check("no open tender on this patch today, and none invented", ob["openTenders"] == [])
+# The molecule names were deliberately not adopted: dual-licensed, and the
+# diabetes and endocrinology page has its own claim on them.
+for straddler in ["Supply of Tirzepatide", "Semaglutide Injection Framework",
+                  "Mounjaro KwikPen Supply", "Liraglutide Tender"]:
+    check("dual-licensed molecule not claimed: %s" % straddler[:34],
+          not B.match_title(obx, straddler))
+# ...but the obesity-only brands are.
+check("obesity-only brands are claimed", B.match_title(obx, "Provision of Orlistat and Mysimba"))
+
+print("\nTHE COVERAGE LIMIT IS STATED, NOT HIDDEN")
+check("the prescribing route this panel cannot see is quantified", "574,302,390" in obfw)
+check("the share of England's prescribing bill is stated", "4.93%" in obfw)
+check("the bariatric surgery volume is stated", "7,260" in obfw)
+check("absence from the panel is not presented as absence from the market",
+      "Absence from this panel is not absence from this market" in obfw)
+
+print("\nTHE RULE TRAVELS WITH THE DATA (rule 14a)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((ob.get("rules") or {}).get(k)))
+check("licence notice carried", bool(ob.get("_notice", {}).get("owner")))
+obkb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", OBESITY + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % obkb, obkb < 200)
+
+print("\nTHE RENDERER HAS AN HONEST EMPTY STATE FOR BOTH TABS")
+_js = open(os.path.join(HERE, "app", "speciality-panels.js"), encoding="utf-8").read()
+check("frameworks tab does not render a header-only table",
+      "if (!d.frameworks.length) {" in _js
+      and "No NHS Supply Chain framework covers this speciality." in _js)
+check("suppliers tab does not render a search box over an empty table",
+      "if (!d.suppliers.length) {" in _js
+      and "No supplier list is published for this speciality." in _js)
 
 
 print()
