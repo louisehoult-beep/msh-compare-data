@@ -2641,7 +2641,7 @@ SPECIALITY_RULES = {
             "laboratory medicine page."
         ),
     },
-    # PAGE 2809. Scope, in the page's own words: two pathways that are bought by
+    # PAGE 2906. Scope, in the page's own words: two pathways that are bought by
     # different people. "The transfusion pathway is owned by the hospital transfusion
     # team; the VTE prevention pathway is owned by the thrombosis committee and the
     # ward." The page's own Related specialities line sends theatre consumables to
