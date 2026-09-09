@@ -2499,7 +2499,7 @@ SPECIALITY_RULES = {
             "Supply Chain's two spellings of the ICU Medical group resolve to one entry. "
             "The page's Suppliers section sets out which names collapse into which group."
         ),
-    },    # PAGE 2917. Scope as the page itself states it: dialysis, kidney transplantation
+    },    # PAGE 2845. Scope as the page itself states it: dialysis, kidney transplantation
     # and chronic kidney disease.
     "renal": {
         "label": "Renal",
