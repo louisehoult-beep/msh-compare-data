@@ -32,6 +32,7 @@ NEURO = "neurology-and-neurosurgery"
 PALLIATIVE = "palliative-and-end-of-life-care"
 PATHOLOGY = "pathology-and-laboratory-medicine"
 RADIOLOGY = "radiology-and-imaging"
+RENAL = "renal"
 fails = []
 
 
@@ -2323,6 +2324,172 @@ check("every published award title is one the rule actually accepts",
 check("licence notice carried", bool(ri.get("_notice", {}).get("owner")))
 rikb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", RADIOLOGY + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % rikb, rikb < 200)
+
+
+
+# ---------------------------------------------------------------------------
+# RENAL (page 2917), added 09/09/2026.
+#
+# This is the first rule in the file with NO EXCLUSION LIST, and that is exactly
+# why it needs the most testing. Nothing was excluded because nothing had to be:
+# all 36 hits were read and every one is renal replacement therapy. The safety
+# was bought in the include list instead, by refusing seven loose terms that
+# every future editor will be tempted to add back. Each refusal below is a REAL
+# row that the loose term would have admitted, so the assertion fails the moment
+# someone widens the pattern.
+# ---------------------------------------------------------------------------
+print("\nRENAL")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), RENAL],
+               check=True, capture_output=True)
+rn = load_panel(RENAL)
+check("panel is defined", rn.get("defined") is True)
+
+# Checked over the WHOLE corpus of 3,314 titles, not over the 40 rows the slice
+# publishes, so a false positive below the display cap still fails the test.
+_rn_rule = B.SPECIALITY_RULES[RENAL]
+_rn_rx = B.compile_rule(_rn_rule)
+_rn_th = B.load("tender-history.json")
+_rn_ix = {k: i for i, k in enumerate(_rn_th["schema"])}
+_rn_corpus = [r[_rn_ix["t"]] or "" for r in _rn_th["rows"]]
+_rn_corpus += [(a.get("title") or "") for a in B.load("framework-awards.json")["awards"]]
+rn_titles = [t for t in _rn_corpus if B.match_title(_rn_rx, t)]
+
+print("  the loose terms stay refused — each of these is a real row")
+# bare "kidney" would admit nothing extra today, but a kidney dish is medical
+# hollowware and a kidney stone is urology. bare "nephr*" would admit a
+# nephrostomy, which is interventional radiology.
+# bare "transplant": both hits in this data are corneal.
+for bad in [
+        "Supply of donated eye tissue used for corneal transplantation and other surgery",
+        # Apheresis: NHSBT and the blood services, counted on the haematology page.
+        "Plasmapheresis Collection Systems",
+        "Support of existing NHSBT owned Multi-functional Apheresis Systems",
+        "Spectra Optia Apheresis System x2",
+        "Support of existing NHSBT Low Density Lipid (LDL) Removal Apheresis",
+        "Lipoprotein Apheresis",
+        # Water purification at NHS Blood and Transplant, bought from Veolia, who
+        # IS on the renal framework. The supplier is not the test; the title is.
+        "Supply & Maintenance of New and Existing Water Purification",
+        # Multi-organ transplant logistics, not renal.
+        "Framework Agreement for the Supply of Cold Static Perfusion Fluid UW Solution",
+        "Supply of cold static perfusion fluid solution",
+        "Framework Agreement for the Supply of Retrieval Packs",
+        # A kidney research biobank at Cardiff University, not renal procurement.
+        "NURTuRE-AKI biobank Custom tubing",
+        # Transplant tissue typing belongs to pathology and laboratory medicine.
+        "Supply of HLA Sequencing Systems",
+        "HLA Typing for Immunogenetics",
+        # Urology is not nephrology.
+        "Urology Consumables",
+        "Memokath stents for BCH Urology service",
+        "Intravascular Lithotripsy Equipment and Consumables - 4307395",
+        # Renal anaemia drugs are a medicines contract, not a device one.
+        "NP40725 Erythropoietin Stimulating Agents",
+        # Rows the feed's own `spec` field tags renal and which are not.
+        "Supply of Micro Pastettes",
+        "Consumable products used in Minimally Invasive Surgery",
+        "Supply of Cryopreservation Freezing Bags",
+        "Red Cell Washing System",
+        "Genotyping Microarray Kits",
+        "Supply of Copper Sulphate Solution",
+]:
+    check("never admitted: %s" % bad[:60], not B.match_title(_rn_rx, bad), "matched and should not")
+
+print("  the genuine patch is admitted")
+for good in [
+        "Renal Replacement Consumables",
+        "C453377 - Renal Dialysis machines x 4",
+        "Purchase of Dialysis Machines",
+        "Call-Off Order - FY26/27 - Home Peritoneal Dialysis - Hull",
+        "Haemodialysis Machines & Consumables",
+        "Hemodialysis consumables and spare parts for 5008H Cordiax Machines",
+        "Continuous Renal Replacement Therapies (CRRT) Consumables",
+        "Purchase of CRRT Consumables and Fluids",
+        "ITU Haemofiltration",
+        "Supply of Hemofiltration Equipment and Consumables",
+        "Nephral 500ST Artificial Kidneys",
+        "Nipro Fistula needles",
+        "Supply of Renal Catheters and Fistula Packs",
+        "Satellite Dialysis Services",
+        "RRT Stockpile Call Off Terms - Fresenius",
+]:
+    check("admitted: %s" % good[:60], B.match_title(_rn_rx, good), "did not match and should")
+
+# The one mixed contract that is admitted on its own words. It is kept because
+# its title names Renal Equipment; if a future editor adds a "water treatment"
+# exclusion to tidy the panel, this row goes and the coverage note lies.
+check("the Belfast mixed water treatment contract is admitted on its own title",
+      any("Decontamination and Renal Equipment" in t for t in rn_titles))
+
+print("  the framework filter picks the one framework and no neighbours")
+_rn_names = [f["name"] for f in rn["frameworks"]]
+check("framework present: Renal Replacement Therapies",
+      any(n.startswith("Renal Replacement Therapies") for n in _rn_names))
+check("exactly one framework is claimed", len(_rn_names) == 1, str(_rn_names))
+for other in ["Central Venous Catheters and Associated Products",
+              "Urology and Bowel Management",
+              "Male Intra-Urethral Catheter with Magnet Control",
+              "Infusion Pumps and Administration Sets and Associated Products"]:
+    check("another speciality's framework stays out: %s" % other, other not in _rn_names)
+
+print("  the suppliers are the framework's own, resolved to one name per company")
+# NHS Supply Chain lists 25 names; Nikkiso Belgium BV and Nikkiso Europe GmbH are
+# one company. Published raw that is a count inflated by one and a rep chasing two
+# distributors that are the same firm.
+_rn_nik = [s for s in rn["suppliers"] if "Nikkiso" in s["name"]]
+check("Nikkiso appears exactly once", len(_rn_nik) == 1, str([s["name"] for s in _rn_nik]))
+check("Nikkiso shows both NHSSC spellings",
+      len(_rn_nik) == 1 and len(_rn_nik[0]["variants"]) == 2, str(_rn_nik))
+check("supplier count is the framework's 25 names less the one merge",
+      rn["counts"]["suppliers"] == 24, str(rn["counts"]["suppliers"]))
+check("unresolved supplier names are flagged, not silently merged",
+      rn["counts"]["suppliersUnresolved"] >= 1)
+
+print("  the derived claims carry their rule and their limits (rules 14a, 14c)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((rn.get("rules") or {}).get(k)))
+_rn_aw = (rn.get("rules") or {}).get("awards", "")
+# The published wording must say there is no exclusion list rather than printing
+# a regex that cannot match and claiming it caught real false positives.
+check("the absent exclusion list is declared, not faked",
+      "NO EXCLUSION LIST IS APPLIED" in _rn_aw)
+check("no never-matching regex is published as if it were an exclusion list",
+      "(?!x)x" not in _rn_aw)
+# The coverage note is appended to the frameworks and suppliers rules, which is
+# where a reader judging the supplier list will be looking.
+_rn_note = (rn.get("rules") or {}).get("frameworks", "")
+check("the CRRT overlap with critical care is declared, not hidden",
+      "CONTINUOUS RENAL REPLACEMENT THERAPY IS CLAIMED BY THIS PAGE" in _rn_note)
+check("Baxter and Vantive are declared as one incumbent, not two",
+      "Read them as one incumbent, not two." in _rn_note)
+check("the supplier-count difference is explained on the suppliers rule",
+      "Nikkiso" in (rn.get("rules") or {}).get("suppliers", ""))
+# Part IX is dressings, incontinence, stoma and elastic hosiery. Home dialysis
+# fluids are delivered under the trust's own contract, not dispensed on an FP10.
+check("no Drug Tariff part is claimed for renal", rn.get("drugTariff") is None)
+_rn_dt = (rn.get("rules") or {}).get("drugTariff", "")
+check("the absence of a Drug Tariff part is explained, not silent",
+      "No Drug Tariff part applies" in _rn_dt
+      and "reaching for the nearest part" in _rn_dt)
+check("no open tender is invented for an empty day",
+      rn["counts"]["openTenders"] == len(rn["openTenders"]))
+_rn_raw = len([t for t in _rn_corpus if B.match_title(_rn_rx, t)])
+check("the published match count is not inflated above what the filter returns",
+      rn["counts"]["awardsShown"] <= rn["counts"]["awardsMatched"] <= _rn_raw,
+      "shown %d, matched %d, raw %d" % (
+          rn["counts"]["awardsShown"], rn["counts"]["awardsMatched"], _rn_raw))
+check("every published award title is one the rule actually accepts",
+      all(B.match_title(_rn_rx, a.get("title") or "") for a in rn["awards"]))
+check("licence notice carried", bool(rn.get("_notice", {}).get("owner")))
+_rn_kb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", RENAL + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % _rn_kb, _rn_kb < 200)
+
+# The exclude=None path must not leak to any other rule: every other speciality
+# still has to carry a real exclusion list it earned.
+for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
+    if _slug == RENAL:
+        continue
+    check("%s still carries an exclusion list" % _slug, bool(_r.get("exclude")))
 
 
 

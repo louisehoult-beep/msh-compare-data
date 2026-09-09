@@ -70,6 +70,12 @@ def load(name):
 # include    : the award/tender title must match this.
 # exclude    : ...and must not match this. Every pattern here was put in because a
 #              real row in tender-history.json matched `include` and was wrong.
+#              None means the include list produced no false positive to exclude.
+#              That is only ever written after every hit has been read one by one,
+#              and it is a statement about the include list being narrow enough,
+#              never a shortcut past the reading. See the renal rule, where the
+#              loose terms were refused in the include instead of admitted and
+#              then argued with here.
 # cpv        : CPV code prefixes used for award feeds that carry classification.
 # tariffParts: Drug Tariff Part IX parts that belong to this speciality.
 # ---------------------------------------------------------------------------
@@ -2493,7 +2499,149 @@ SPECIALITY_RULES = {
             "Supply Chain's two spellings of the ICU Medical group resolve to one entry. "
             "The page's Suppliers section sets out which names collapse into which group."
         ),
+    },    # PAGE 2917. Scope as the page itself states it: dialysis, kidney transplantation
+    # and chronic kidney disease.
+    "renal": {
+        "label": "Renal",
+        # ONE framework, and it is the whole patch. "Renal Replacement Therapies
+        # Services, Technologies and Consumables" (2023/S 000-017117, 28 March 2024 to
+        # 27 March 2028, 25 suppliers, Diagnostic Equipment and Services CBU) is the
+        # only NHS Supply Chain agreement named after this speciality. All 121 framework
+        # names were read; three near neighbours carry renal product but are refused,
+        # and are named here so nobody re-tests them:
+        #   Central Venous Catheters and Associated Products (18 suppliers) does carry
+        #     tunnelled dialysis lines, but the framework is vascular access for
+        #     intensive care, oncology and parenteral nutrition as well, it publishes no
+        #     supplier-by-lot split in this dataset, and claiming it whole would put
+        #     eighteen vascular access firms under a renal Suppliers heading.
+        #   Urology and Bowel Management and Male Intra-Urethral Catheter with Magnet
+        #     Control are urology, not nephrology. A kidney stone is not renal medicine,
+        #     and both are the continence, bladder and bowel page's frameworks.
+        #   Infusion Pumps and Administration Sets is claimed by palliative and
+        #     end-of-life care; nothing in its name is renal.
+        "frameworks": r"\brenal replacement therap(?:y|ies)\b",
+        # DERIVED, not guessed. Every pattern below was run over all 1,972 rows of
+        # tender-history.json and all 1,342 of framework-awards.json — 3,314 titles —
+        # and all 36 surviving hits were read one by one. Every one of them is renal
+        # replacement therapy: dialysis machines and consumables, peritoneal dialysis
+        # fluids, CRRT, ITU haemofiltration, artificial kidneys, fistula needles,
+        # dialysis catheters, satellite dialysis services and the DHSC RRT stockpile.
+        #
+        # WHY THERE IS NO EXCLUSION LIST. There was nothing to exclude: this pattern
+        # produced no false positive at all. That is a real property of the patch —
+        # renal vocabulary is unusually unshared — but it was reached by refusing the
+        # loose terms in the include list, not by admitting them and arguing back.
+        # Seven were tried first and every one of their hits was read:
+        #   bare "kidney"    -> refused. Its only hits are the four Belfast "Nephral
+        #     500ST Artificial Kidneys" rows, which "artificial kidney" catches on its
+        #     own. The bare word is left out because a kidney dish is medical
+        #     hollowware and a kidney stone is urology, and neither should ever be able
+        #     to reach this panel on one word.
+        #   bare "nephr*"    -> refused for the same reason and it costs nothing: its
+        #     only hits today are those same four Nephral rows. A nephrostomy is
+        #     interventional radiology and a nephrectomy is surgery. Only "nephrology"
+        #     is kept, as an unambiguous term with no hit today.
+        #   bare "transplant" -> refused. Both hits are corneal transplantation, at
+        #     Queen Victoria Hospital and Moorfields. Only "kidney transplant" and
+        #     "renal transplant" are kept, neither of which has a hit today.
+        #   bare "fistula"   -> refused in favour of the qualified forms. All three of
+        #     its hits are genuine here (Nipro fistula needles at Leeds, and NHS
+        #     Lanarkshire's renal catheter and fistula packs twice), but an anal fistula
+        #     is colorectal and the word must not be able to carry that in.
+        #   "apheresis" and "plasma exchange" -> refused, 13 hits and none of them this
+        #     page's. They are NHS Blood and Transplant, the Scottish National Blood
+        #     Transfusion Service and trust transfusion departments buying Spectra Optia
+        #     and LDL apheresis. TerumoBCT sits on the renal framework and Spectra Optia
+        #     does therapeutic plasma exchange, which is exactly what makes the word
+        #     look right; the contracts are haematology and patient blood management
+        #     ones and are counted on that page.
+        #   "water treatment" / "water purification" -> refused as terms. NHS Blood and
+        #     Transplant's "Supply & Maintenance of New and Existing Water Purification"
+        #     went to Veolia Water Technologies, who is on the renal framework, and it
+        #     is still blood-processing water at NHSBT, not a dialysis unit. Belfast's
+        #     water treatment contract IS admitted, but only because its own title names
+        #     "Renal Equipment" — see the coverage note.
+        #   bare "AKI"       -> refused. Its one hit is "NURTuRE-AKI biobank Custom
+        #     tubing", bought by Cardiff University for a kidney research biobank.
+        #   Organ retrieval was refused with it: NHSBT's cold static perfusion fluid
+        #     (UW solution) and retrieval packs are multi-organ transplant logistics,
+        #     not renal, and nothing in their titles separates a kidney from a liver.
+        #
+        # NEVER READ THE FEED'S OWN `spec` FIELD AND TRUST IT. It tags 41 rows renal and
+        # 31 of them are wrong: micro pastettes, minimally invasive surgery consumables,
+        # a Sentimag magnetic seed system, cryopreservation freezing bags, HLA
+        # sequencing, blood pack and red cell washing contracts, copper sulphate
+        # solution, genotyping microarrays and a veterinary pharmaceutical framework.
+        "include": (
+            r"\b(renal|dialys\w*|haemodialy\w*|hemodialy\w*|"
+            r"haemofiltrat\w*|hemofiltrat\w*|haemodiafil\w*|hemodiafil\w*|"
+            r"artificial kidney\w*|kidney transplant\w*|renal transplant\w*|"
+            r"chronic kidney\w*|nephrolog\w*|"
+            r"\bCRRT\b|\bRRT\b|fistula (?:needle|pack)\w*)\b"
+        ),
+        # NOTHING TO EXCLUDE. See the note above: this is written only because all 36
+        # hits were read and every one is this speciality, and it is the one field a
+        # future editor should fill the moment a false positive appears rather than
+        # widening anything.
+        "exclude": None,
+        # CPV CORROBORATES, IT NEVER ADMITS. Renal has its own family and it shows on
+        # this patch: 33181* renal support devices (33181000 on Northern Ireland's CRRT
+        # and urology maintenance contract, 33181500 renal care consumables on Swansea
+        # Bay's CRRT consumables), 3369280 dialysis solutions, and 85111900 hospital
+        # dialysis services, which is the code Guy's and St Thomas' filed Satellite
+        # Dialysis Services under. The generic codes these notices also carry —
+        # 33140000 medical consumables, 33000000, 50000000 repair — are not listed,
+        # because they corroborate nothing.
+        "cpv": ("33181", "3369280", "85111900"),
+        # NO DRUG TARIFF PART, and this is an absence rather than a refusal. Part IX
+        # reimburses appliances dispensed in primary care against an FP10: IXA dressings
+        # and elastic hosiery, IXB incontinence, IXC stoma, IXR elastic hosiery. Home
+        # dialysis fluids and consumables are not dispensed that way — they are
+        # delivered to the patient's home under the trust's own contract, which is what
+        # Hull's "Home Peritoneal Dialysis" call-off with Vantive is — so there is no
+        # renal part to claim.
+        "coverageNote": (
+            "WHAT THE COUNTS BELOW DO AND DO NOT COVER. NHS Supply Chain lists 25 "
+            "supplier names on Renal Replacement Therapies Services, Technologies and "
+            "Consumables, and that count matches the total stated on its own page. The "
+            "Suppliers tab shows 24, because Nikkiso Belgium BV and Nikkiso Europe GmbH "
+            "are one company and the Hub resolves them to one entry with both spellings "
+            "against it. They are not 24 competitors for any one piece of business "
+            "either: the framework spans haemodialysis machines, peritoneal dialysis, "
+            "continuous renal replacement therapy, water treatment and body composition "
+            "monitoring, and no lot-by-lot split is published in this dataset, so a "
+            "supplier's presence here means it is on the agreement somewhere, not that "
+            "it competes for the line you are selling. "
+            "ONE COMPANY APPEARS UNDER TWO NAMES IN THE AWARDS LIST. Baxter Healthcare "
+            "and Vantive are the same renal business either side of a change of owner, "
+            "which is why NHS Supply Chain itself writes the supplier as \"Vantive "
+            "Limited (formerly part of Baxter Healthcare Ltd)\" on the framework above. "
+            "Awards are shown with the supplier name the notice carries and are not "
+            "re-resolved, so older rows say Baxter and recent ones say Vantive. Read "
+            "them as one incumbent, not two. "
+            "CONTINUOUS RENAL REPLACEMENT THERAPY IS CLAIMED BY THIS PAGE and the "
+            "critical care page will meet the same contracts. Every award below whose "
+            "title says ITU, haemofiltration or CRRT was bought by intensive care rather "
+            "than by a renal directorate. They are kept here because NHS Supply Chain "
+            "itself files them under Renal Replacement Therapies and because the "
+            "suppliers on them — Fresenius Medical Care, Vantive, Nikkiso and B. Braun — "
+            "are this framework's suppliers. "
+            "TWO AWARDS ARE MIXED CONTRACTS and are kept because their own titles say "
+            "so, with the full title shown on the row. Belfast Health and Social Care "
+            "Trust's water treatment maintenance covers decontamination equipment and "
+            "microbiological water testing as well as renal equipment; the renal element "
+            "is the dialysis water plant, and Veolia Water Technologies is on the "
+            "framework above. The Regional Business Services Organisation's maintenance "
+            "contract covers continuous renal replacement therapy and urology equipment "
+            "together, and its urology half belongs to another page. "
+            "The awards list is filtered on contract titles, so it shows what a buyer "
+            "chose to call a purchase. Organ retrieval and transplant preservation "
+            "contracts at NHS Blood and Transplant are excluded because they are "
+            "multi-organ, and transplant tissue typing is counted on the pathology and "
+            "laboratory medicine page."
+        ),
     },
+
 }
 
 
@@ -2512,7 +2660,11 @@ def compile_rule(rule):
         "fw": NEVER_MATCHES if rule["frameworks"] is None
               else re.compile(rule["frameworks"], re.I),
         "inc": re.compile(rule["include"], re.I),
-        "exc": re.compile(rule["exclude"], re.I),
+        # A rule with nothing to exclude gets a regex that cannot match, for the
+        # same reason build_frameworks does: the absence has to be said in the
+        # data, not faked with a pattern that happens to match nothing today.
+        "exc": NEVER_MATCHES if rule["exclude"] is None
+               else re.compile(rule["exclude"], re.I),
     }
 
 
@@ -2764,11 +2916,19 @@ def build(slug, sources):
                 "It is not a ranking of size or share. Where NHS Supply Chain spelled a company "
                 "two ways across its own pages, both spellings are shown against the one entry."
             ),
-            "awards": (
-                "Award-stage notices whose TITLE matches /%s/i and does not match /%s/i. The "
-                "exclusion list exists because every pattern in it matched a real notice that "
-                "was not this speciality. %s Buyer names are never matched on." % (
-                    rule["include"], rule["exclude"],
+            "awards": ((
+                ("Award-stage notices whose TITLE matches /%s/i. NO EXCLUSION LIST IS "
+                 "APPLIED, because every notice this pattern matched was read one by one "
+                 "and all of them are this speciality. The loose terms that would have "
+                 "needed excluding were refused from the pattern above instead of "
+                 "admitted and then argued with. %%s Buyer names are never matched on."
+                 % rule["include"])
+                if rule["exclude"] is None else
+                ("Award-stage notices whose TITLE matches /%s/i and does not match /%s/i. The "
+                 "exclusion list exists because every pattern in it matched a real notice that "
+                 "was not this speciality. %%s Buyer names are never matched on." % (
+                     rule["include"], rule["exclude"]))
+            ) % (
                     ("A CPV code beginning %s is recorded as corroboration where the feed "
                      "carries one, but never admits a notice on its own: a notice carrying a "
                      "basket of CPV codes is filed under all of them and bought under one."

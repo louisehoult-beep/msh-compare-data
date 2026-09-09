@@ -1,0 +1,696 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "renal",
+ "label": "Renal",
+ "defined": true,
+ "generated": "2026-09-09",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-08T11:13:54+00:00",
+  "openTenders": "08/09/2026",
+  "drugTariff": "2026-09-08"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\brenal replacement therap(?:y|ies)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. WHAT THE COUNTS BELOW DO AND DO NOT COVER. NHS Supply Chain lists 25 supplier names on Renal Replacement Therapies Services, Technologies and Consumables, and that count matches the total stated on its own page. The Suppliers tab shows 24, because Nikkiso Belgium BV and Nikkiso Europe GmbH are one company and the Hub resolves them to one entry with both spellings against it. They are not 24 competitors for any one piece of business either: the framework spans haemodialysis machines, peritoneal dialysis, continuous renal replacement therapy, water treatment and body composition monitoring, and no lot-by-lot split is published in this dataset, so a supplier's presence here means it is on the agreement somewhere, not that it competes for the line you are selling. ONE COMPANY APPEARS UNDER TWO NAMES IN THE AWARDS LIST. Baxter Healthcare and Vantive are the same renal business either side of a change of owner, which is why NHS Supply Chain itself writes the supplier as \"Vantive Limited (formerly part of Baxter Healthcare Ltd)\" on the framework above. Awards are shown with the supplier name the notice carries and are not re-resolved, so older rows say Baxter and recent ones say Vantive. Read them as one incumbent, not two. CONTINUOUS RENAL REPLACEMENT THERAPY IS CLAIMED BY THIS PAGE and the critical care page will meet the same contracts. Every award below whose title says ITU, haemofiltration or CRRT was bought by intensive care rather than by a renal directorate. They are kept here because NHS Supply Chain itself files them under Renal Replacement Therapies and because the suppliers on them — Fresenius Medical Care, Vantive, Nikkiso and B. Braun — are this framework's suppliers. TWO AWARDS ARE MIXED CONTRACTS and are kept because their own titles say so, with the full title shown on the row. Belfast Health and Social Care Trust's water treatment maintenance covers decontamination equipment and microbiological water testing as well as renal equipment; the renal element is the dialysis water plant, and Veolia Water Technologies is on the framework above. The Regional Business Services Organisation's maintenance contract covers continuous renal replacement therapy and urology equipment together, and its urology half belongs to another page. The awards list is filtered on contract titles, so it shows what a buyer chose to call a purchase. Organ retrieval and transplant preservation contracts at NHS Blood and Transplant are excluded because they are multi-organ, and transplant tissue typing is counted on the pathology and laboratory medicine page.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. WHAT THE COUNTS BELOW DO AND DO NOT COVER. NHS Supply Chain lists 25 supplier names on Renal Replacement Therapies Services, Technologies and Consumables, and that count matches the total stated on its own page. The Suppliers tab shows 24, because Nikkiso Belgium BV and Nikkiso Europe GmbH are one company and the Hub resolves them to one entry with both spellings against it. They are not 24 competitors for any one piece of business either: the framework spans haemodialysis machines, peritoneal dialysis, continuous renal replacement therapy, water treatment and body composition monitoring, and no lot-by-lot split is published in this dataset, so a supplier's presence here means it is on the agreement somewhere, not that it competes for the line you are selling. ONE COMPANY APPEARS UNDER TWO NAMES IN THE AWARDS LIST. Baxter Healthcare and Vantive are the same renal business either side of a change of owner, which is why NHS Supply Chain itself writes the supplier as \"Vantive Limited (formerly part of Baxter Healthcare Ltd)\" on the framework above. Awards are shown with the supplier name the notice carries and are not re-resolved, so older rows say Baxter and recent ones say Vantive. Read them as one incumbent, not two. CONTINUOUS RENAL REPLACEMENT THERAPY IS CLAIMED BY THIS PAGE and the critical care page will meet the same contracts. Every award below whose title says ITU, haemofiltration or CRRT was bought by intensive care rather than by a renal directorate. They are kept here because NHS Supply Chain itself files them under Renal Replacement Therapies and because the suppliers on them — Fresenius Medical Care, Vantive, Nikkiso and B. Braun — are this framework's suppliers. TWO AWARDS ARE MIXED CONTRACTS and are kept because their own titles say so, with the full title shown on the row. Belfast Health and Social Care Trust's water treatment maintenance covers decontamination equipment and microbiological water testing as well as renal equipment; the renal element is the dialysis water plant, and Veolia Water Technologies is on the framework above. The Regional Business Services Organisation's maintenance contract covers continuous renal replacement therapy and urology equipment together, and its urology half belongs to another page. The awards list is filtered on contract titles, so it shows what a buyer chose to call a purchase. Organ retrieval and transplant preservation contracts at NHS Blood and Transplant are excluded because they are multi-organ, and transplant tissue typing is counted on the pathology and laboratory medicine page.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(renal|dialys\\w*|haemodialy\\w*|hemodialy\\w*|haemofiltrat\\w*|hemofiltrat\\w*|haemodiafil\\w*|hemodiafil\\w*|artificial kidney\\w*|kidney transplant\\w*|renal transplant\\w*|chronic kidney\\w*|nephrolog\\w*|\\bCRRT\\b|\\bRRT\\b|fistula (?:needle|pack)\\w*)\\b/i. NO EXCLUSION LIST IS APPLIED, because every notice this pattern matched was read one by one and all of them are this speciality. The loose terms that would have needed excluding were refused from the pattern above instead of admitted and then argued with. A CPV code beginning 33181 or 3369280 or 85111900 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 1,
+  "suppliers": 24,
+  "suppliersUnresolved": 2,
+  "awardsShown": 36,
+  "awardsMatched": 36,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Renal Replacement Therapies Services, Technologies and Consumables",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/renal-replacement-therapy-equipment-and-consumables/",
+   "reference": "2023/S 000-017117",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "28 March 2024",
+   "ends": "27 March 2028",
+   "supplierCount": 25,
+   "supplierSource": "count verified against the page's own stated total (25)",
+   "suppliers": [
+    "Acime UK Ltd",
+    "Andrac Ltd",
+    "B. Braun Medical Limited",
+    "Becton, Dickinson U.K. Limited",
+    "Bodystat",
+    "CytoSorbents Medical UK Ltd",
+    "Fresenius Medical Care (UK) Ltd",
+    "InBody",
+    "KIMAL PLC",
+    "Leib Medical Ltd",
+    "LINC Medical",
+    "Maltron International Ltd",
+    "Medica Advanced Technologies Ltd",
+    "Medical Access Ltd",
+    "MedScience Distribution Ltd",
+    "Medtronic Limited",
+    "Nikkiso Belgium BV",
+    "Nikkiso Europe GmbH",
+    "Nipro Medical UK Ltd",
+    "TerumoBCT Europe NV",
+    "U-drain Ltd",
+    "Valiant Medical Ltd",
+    "Vantive Limited (formerly part of Baxter Healthcare Ltd)",
+    "VWS (UK) Ltd Trading As Veolia Water Technologies",
+    "Xtra-Med"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Acime UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Andrac Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B. Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton, Dickinson U.K. Limited"
+   ],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Bodystat",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "CytoSorbents Medical UK",
+   "resolved": true,
+   "variants": [
+    "CytoSorbents Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Fresenius Medical Care UK",
+   "resolved": true,
+   "variants": [
+    "Fresenius Medical Care (UK) Ltd"
+   ],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "InBody",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Kimal PLC",
+   "resolved": true,
+   "variants": [
+    "KIMAL PLC"
+   ],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Leib Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "LINC Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Maltron International Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Medica Advanced Technologies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Medical Access Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "MedScience Distribution",
+   "resolved": true,
+   "variants": [
+    "MedScience Distribution Ltd"
+   ],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited"
+   ],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Nikkiso Medical",
+   "resolved": true,
+   "variants": [
+    "Nikkiso Belgium BV",
+    "Nikkiso Europe GmbH"
+   ],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Nipro Medical Europe",
+   "resolved": true,
+   "variants": [
+    "Nipro Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Terumo BCT",
+   "resolved": true,
+   "variants": [
+    "TerumoBCT Europe NV"
+   ],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "U-drain Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Valiant Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Vantive Limited (formerly part of Baxter Healthcare Ltd)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "VWS (UK) Ltd Trading As Veolia Water Technologies",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  },
+  {
+   "name": "Xtra-Med",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Renal Replacement Therapies Services, Technologies and Consumables"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Maintenance of Water Treatment Systems including Supply and Delivery of Salt relating to a range of Hospital Equip including Decontamination and Renal Equipment, Chemical and Microbiological Water Testing and Provision of Associated Testing Consumables",
+   "buyer": "Belfast Health & Social Care Trust",
+   "supplier": "CHEMICAL TREATMENT SERVICES (IRELAND) LIMITED, Veolia Water Technologies, THEATRE AND ENDOSCOPY SERVICE TECHNICIANS LIMITED",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083732-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "15872400",
+    "24000000",
+    "33698100",
+    "39137000",
+    "41000000",
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Renal Catheter & Fistula Packs",
+   "buyer": "NHS Lanarkshire",
+   "supplier": "A2B Healthcare",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083827-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000",
+    "33141620"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Continuous Renal Replacement Therapies (CRRT) Consumables",
+   "buyer": "Swansea Bay University HealthBoard",
+   "supplier": "Fresenius Medical Care (UK) Limited, Fresenius Medical Care (UK) Limited",
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082200-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33181500"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Maintenance of Continuous Renal Replacement Therapy & Urology Equipment",
+   "buyer": "Regional Business Services Organisation Procurement and Logistics",
+   "supplier": "Vantive Limited, Creo Medical UK Ltd",
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078238-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "33125000",
+    "33181000",
+    "50000000",
+    "50400000",
+    "50420000",
+    "50430000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Satellite Dialysis Services",
+   "buyer": "Guy's and St Thomas' NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075941-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111900"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Nipro Fistula needles",
+   "buyer": "Leeds Teaching Hospital NHS Trust",
+   "supplier": "Nipro Medical UK Ltd",
+   "date": "2026-07-20",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/d2b5f046-39b6-4391-a8c5-e252316e2e9d",
+   "value": 80159,
+   "periodEnd": "2027-06-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Renal Replacement Consumables",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-07-01",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/30939c6d-715b-4786-81bb-fa1bd3ff28ab",
+   "value": 294564,
+   "periodEnd": "2030-06-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "C453377 - Renal Dialysis machines x 4",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Fresenius Medical Care UK Ltd",
+   "date": "2026-06-18",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/22259673-2f94-4543-bffa-4018ca4ccac3",
+   "value": 70560,
+   "periodEnd": "2026-07-15",
+   "source": "tender-history"
+  },
+  {
+   "title": "Call-Off Order - FY26/27 - Home Peritoneal Dialysis - Hull",
+   "buyer": "HULL ROYAL INFIRMARY",
+   "supplier": "Vantive Limited",
+   "date": "2026-05-26",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/4f4744a0-5fe1-484a-b774-7f5a9083ea3a",
+   "value": 750000,
+   "periodEnd": "2027-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Dialysis Machines",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "FRESENIUS MEDICAL CARE (UK) LIMITED",
+   "date": "2026-05-13",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/9bdca77a-7276-4f74-890c-dfc13f5e285e",
+   "value": 772853,
+   "periodEnd": "2031-03-26",
+   "source": "tender-history"
+  },
+  {
+   "title": "NP56326 Service for Peritoneal Dialysis Treatments",
+   "buyer": "The Common Services Agency (more commonly known as Public Service Delivery Scotl",
+   "supplier": "Vantive Limited, Fresenius Medical Care (UK) Limited",
+   "date": "2026-04-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/037557-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Fluids and Consumables for Continuous Renal Replacement Therapy Machines",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "VANTIVE LIMITED",
+   "date": "2025-02-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/006562-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "The Provision of a Renal Dialysis and Outpatient Clinic Managed Service",
+   "buyer": "Lancashire Teaching Hospitals NHS Foundation Trust",
+   "supplier": "",
+   "date": "2024-10-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/032728-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Nephral 500ST Artificial Kidneys",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Vantive Ltd.",
+   "date": "2024-09-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/030152-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Nephral 500ST Artificial Kidneys",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Vantive Ltd.",
+   "date": "2024-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/026333-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply, Storage, and Management of Peritoneal Dialysis Fluids",
+   "buyer": "Department of Health and Social Care",
+   "supplier": "Vantive Limited",
+   "date": "2024-07-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/022657-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Haemodialysis Consumables and Spare Parts",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "BAXTER HEALTHCARE LTD",
+   "date": "2024-04-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011962-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "HAEMOFILTRATION MACHINES FLUIDS & CONSUMABLES",
+   "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
+   "supplier": "Fresenius Medical Care",
+   "date": "2024-02-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005606-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Renal Replacement Therapies Services, Technologies and Consumables 2024",
+   "buyer": "NHS Supply Chain",
+   "supplier": "Acime UK Ltd, Andrac Ltd, B. Braun Avitum UK Limited, Baxter Healthcare Ltd, Bec",
+   "date": "2023-12-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/037615-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Renal Replacement Therapies Services, Technologies and Consumables 2024",
+   "buyer": "NHS Supply Chain",
+   "supplier": "Acime UK Ltd, Andrac Ltd, B. Braun Avitum UK Limited, Baxter Healthcare Ltd, Bec",
+   "date": "2023-12-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/036810-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Haemodialysis Machines & Consumables",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Fresenius Medical Care (UK) Limited, Baxter Healthcare Ltd, Nikkiso, B. Braun Me",
+   "date": "2023-10-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/029337-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Hemodialysis consumables and spare parts for 5008H Cordiax Machines",
+   "buyer": "WESTERN TRUST NORTHERN IRELAND",
+   "supplier": "Fresenius Medical (Care Ireland) Ltd",
+   "date": "2023-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028008-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ITU Haemofiltration",
+   "buyer": "NHS National Services Scotland",
+   "supplier": "Nikkiso Belgium BV, Baxter Healthcare Ltd, Fresenius Medical Care (UK) Limited, ",
+   "date": "2023-01-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000897-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "The Supply and Storage of Intravenous Fluids and Peritoneal dialysis fluids",
+   "buyer": "Department of Health and Social Care",
+   "supplier": "Baxter Healthcare LTD",
+   "date": "2022-10-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028603-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ITU Haemofiltration",
+   "buyer": "NHS National Services Scotland",
+   "supplier": "Fresenius Medical Care (UK) Limited, Baxter Healthcare Ltd, Nikkiso",
+   "date": "2022-08-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023291-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of CRRT Consumables and Fluids",
+   "buyer": "South Eastern Health and Social Care Trust",
+   "supplier": "Baxter Healthcare Ltd",
+   "date": "2022-06-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016995-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Procurement of Nephral 500ST Artificial Kidneys",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Baxter Healthcare Ltd",
+   "date": "2022-01-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001299-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ITU Haemofiltration Machines, Fluids and Consumables",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Fresenius Medical Care (UK) Limited, Baxter Healthcare Ltd, Nikkiso",
+   "date": "2021-11-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/029415-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Procurement of Nephral 500ST Artificial Kidneys",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Baxter Healthcare Ltd",
+   "date": "2021-11-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/029242-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Hemofiltration Equipment and Consumables",
+   "buyer": "HealthTrust Europe LLP (HTE) acting as agent for the University Hospitals of Cov",
+   "supplier": "Baxter Healthcare Ltd",
+   "date": "2021-11-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028191-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Peritoneal Dialysis",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Fresenius Medical Care (UK) Limited, Baxter Healthcare Ltd",
+   "date": "2021-11-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028076-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Haemodialysis Machines and Consumables.",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Fresenius Medical Care (UK) Limited, Baxter Healthcare Ltd, B. Braun Medical Lim",
+   "date": "2021-09-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023138-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Renal Catheters and Fistula Packs",
+   "buyer": "NHS Lanarkshire",
+   "supplier": "Bunzl Retail & Healthcare Supplies Ltd (365 Healthcare)",
+   "date": "2021-06-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/014323-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "RRT Stockpile Call Off Terms – B Braun",
+   "buyer": "Department of Health and Social Care",
+   "supplier": "B. Braun Medical Limited",
+   "date": "2021-01-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001748-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "RRT Stockpile Call Off Terms - Fresenius",
+   "buyer": "Department of Health and Social Care",
+   "supplier": "Fresenius Medical Care (UK) Limited",
+   "date": "2021-01-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001650-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "RRT Stockpile Call Off Terms - Baxter",
+   "buyer": "Department of Health and Social Care",
+   "supplier": "Baxter Healthcare Ltd",
+   "date": "2021-01-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001653-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}
