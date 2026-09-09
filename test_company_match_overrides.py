@@ -148,5 +148,86 @@ class LiveDataMatchesTheDecision(unittest.TestCase):
         self.assertEqual(rec["matchConfidence"], "confirmed")
 
 
+class ProseIsNotACuratorAssertion(unittest.TestCase):
+    """^o345, 09/09/2026 — route 1 read a curator EXPLAINING a number as one
+    ASSERTING it.
+
+    `recorded_number()` finds route-1 numbers with a regex over the supplier's
+    own alerts/background/note. On 03/09/2026 the Identity Decision Pack wrote
+    research prose into those fields; four records then had a number matched out
+    of a sentence whose whole point was that the number is unproved, or is a
+    DIFFERENT company. `record_for()` graded those `confirmed` — the top tier,
+    which also fetches officers and feeds derived claims — and verify.py refused
+    the 07/09/2026 company-intelligence commit because the seed's own
+    `companyNumberCandidate` still called the same number unverified.
+
+    Each test below is one way `candidate_refuses()` could silently stop working.
+    """
+
+    def _supplier(self, note, candidate):
+        s = {"name": "Test Supplier Ltd", "note": note}
+        if candidate is not None:
+            s["companyNumberCandidate"] = candidate
+        return s
+
+    def test_refuses_a_number_its_own_candidate_calls_unverified(self):
+        s = self._supplier(
+            "Companies House 02559193 — OSSUR UK LIMITED, active.",
+            {"number": "02559193",
+             "matchedOn": "Companies House name search on 2026-08-14 — NOT verified "
+                          "against a number published by the company."})
+        number, why, source = R.recorded_number(s)
+        self.assertIsNone(number, "an unverified number was taken as route 1")
+        self.assertIsNone(source)
+        self.assertIn("NOT verified", why)
+
+    def test_refuses_a_sibling_companys_number_named_only_to_distinguish_it(self):
+        """Beaver Visitec: the note names 01889847 to say it is a DIFFERENT entity."""
+        s = self._supplier(
+            "The seed already carries a separate record for Beaver Visitec International "
+            "(Companies House 01889847) — that is a DIFFERENT legal entity from this one.",
+            {"number": "07289364",
+             "matchedOn": "Found by Companies House name search on 2026-09-02."})
+        number, why, source = R.recorded_number(s)
+        self.assertIsNone(number, "a sibling company's number was taken as route 1")
+        self.assertIn("07289364", why)
+
+    def test_a_genuine_curator_assertion_still_confirms(self):
+        """The guard must not cost the 246 records that are real route 1."""
+        s = self._supplier("Companies House 00520386 — TALLEY GROUP LIMITED.", None)
+        number, _why, source = R.recorded_number(s)
+        self.assertEqual(number, "00520386")
+        self.assertEqual(source, "alerts")
+
+    def test_a_candidate_rewritten_to_say_how_it_was_proved_stops_matching(self):
+        """The refusal is a statement about the record, not a permanent block."""
+        s = self._supplier(
+            "Companies House 02559193 — OSSUR UK LIMITED, active.",
+            {"number": "02559193",
+             "matchedOn": "Proved from the company's own imprint page publishing 02559193."})
+        number, _why, source = R.recorded_number(s)
+        self.assertEqual(number, "02559193")
+        self.assertEqual(source, "alerts")
+
+    def test_the_four_live_records_are_actually_refused(self):
+        """Against the real seed, not a fixture — this is what failed the gate."""
+        seed = {s["name"]: s
+                for s in json.load(open(R.SEED, encoding="utf-8"))["suppliers"]}
+        for name in ("Daniels Health (Sharpsmart)", "Ossur UK Limited",
+                     "Ontex Healthcare UK Ltd",
+                     "Beaver Visitec International Sales Ltd"):
+            with self.subTest(name):
+                number, why, source = R.recorded_number(seed[name])
+                self.assertIsNone(number, "%s is still anchored by prose" % name)
+                self.assertIsNone(source)
+                self.assertTrue(why, "%s refused with no reason logged" % name)
+
+    def test_daniels_cleared_number_is_excluded_by_every_route(self):
+        """The 03/09 decision said 04261387 is not asserted; the exclude list
+        must carry it, or a name search re-attaches it — ^o96 all over again."""
+        self.assertIn("04261387",
+                      {n.upper() for n in ENTRIES["Daniels Health (Sharpsmart)"]["exclude"]})
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

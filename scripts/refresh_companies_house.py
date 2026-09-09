@@ -44,7 +44,10 @@ The two accepted sources for test 1 (routes 1 and 2 of the method doc; route 3,
 the NHSSC legal supplier name, is specified there and not yet implemented):
 
   ROUTE 1 — the anchored "Companies House NNNNNNNN" pattern in the supplier's
-     own alerts[]/note, curated by hand.
+     own alerts[]/note, curated by hand. REFUSED where the record's own
+     `companyNumberCandidate` names a different number, or names that number
+     and says it is "NOT verified": prose that DISCUSSES a number is not a
+     curator asserting it (see candidate_refuses(), ^o345).
   ROUTE 2 — `companyNumberProof`, the registration number the company publishes
      on its OWN site, written by scripts/confirm_company_numbers.py from the
      evidence in state/domain-seeding-report.json. It carries the source URL and
@@ -612,8 +615,59 @@ def recorded_number(supplier):
                      ", ".join(sorted(found)), None
 
     if found:
-        return found.pop(), "", "alerts"
+        anchored = found.pop()
+        refusal = candidate_refuses(supplier, anchored)
+        if refusal:
+            return None, refusal, None
+        return anchored, "", "alerts"
     return None, "", None
+
+
+def candidate_refuses(supplier, anchored):
+    """Why this record's own companyNumberCandidate forbids treating `anchored`
+    as a curator assertion — or "" when it does not.
+
+    ROUTE 1 reads prose. The regex cannot tell a curator WRITING DOWN a number
+    ("Companies House 02559193 — OSSUR UK LIMITED, active") from a curator
+    EXPLAINING one ("Companies House 01889847 ... that is a DIFFERENT legal
+    entity from this one"). Both shapes are real and both are in the seed. On
+    03/09/2026 the Identity Decision Pack wrote research prose into the
+    background/note of many records; four of those also carry a
+    `companyNumberCandidate` that says, in terms, that the number is NOT proved
+    and must not be written. The next run read the prose as route 1 and graded
+    it `confirmed` — the strongest tier — on the very numbers the record itself
+    says are unproved. That is what refused the 07/09/2026 company-intelligence
+    commit at the gate (^o345), and on Beaver Visitec International Sales Ltd it
+    would have published a SIBLING company's finances: the note names 01889847
+    only to say it is a different entity from this supplier's 07289364.
+
+    So the record's own explicit statement about the number outranks a regex
+    reading of its prose. Two shapes are refused:
+
+      * the candidate names a DIFFERENT number — two sourced numbers disagree,
+        which is checked by hand, never broken in code (the same rule route 2
+        already applies above);
+      * the candidate names the SAME number and says it is NOT verified — the
+        prose is that same unverified name-search number written up, not a
+        second, independent curator assertion of it.
+
+    Neither refusal invents anything: the supplier falls through to name search
+    and can still earn `probable`, the honest state for an unproved number. A
+    record whose candidate is later rewritten to say how the number WAS proved
+    stops matching here and confirms normally.
+    """
+    cand = supplier.get("companyNumberCandidate")
+    if not isinstance(cand, dict):
+        return ""
+    stated = str(cand.get("number") or "").strip().upper()
+    if stated and stated != anchored:
+        return ("the note mentions %s but this record's companyNumberCandidate names %s — "
+                "two sourced numbers disagree, not guessed" % (anchored, stated))
+    if "NOT verified" in str(cand.get("matchedOn") or ""):
+        return ("the note mentions %s but this record's own companyNumberCandidate says it is "
+                "NOT verified against a number published by the company — not a curator "
+                "assertion, so not route 1" % anchored)
+    return ""
 
 
 # Registered-office addresses used by formation agents and virtual-office
