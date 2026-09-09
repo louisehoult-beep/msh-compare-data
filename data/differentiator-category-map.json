@@ -358,11 +358,11 @@
   }
  },
  "counts": {
-  "pairs": 5474,
-  "mapped": 4770,
-  "notTaxonomy": 163,
-  "products": 87871,
-  "productsMapped": 60804
+  "pairs": 5531,
+  "mapped": 4778,
+  "notTaxonomy": 168,
+  "products": 89534,
+  "productsMapped": 60884
  },
  "entries": [
   {
@@ -91185,9 +91185,11 @@
     "Quad Lumen Needle-Free Extension Set, 10cm With Pinch Clamp - SecureConnect®",
     "Triple Lumen Needle-Free Extension Set, 10cm With Pinch Clamp - SecureConnect®"
    ],
-   "hub": null,
+   "hub": "vascular:conn",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division is the company's own product category on spiritmedical.com, re-read live 09/09/2026, and all nineteen products are needle-free IV connectors and extension sets: single/double/triple/quad lumen needle-free extension sets (10cm, 30cm, 160cm, 200cm, with pinch clamp, slide clamp or anti-reflux valves), paediatric filtered sets, Luer-slip and Luer-lock T-piece connectors with microbore extension, a Needle-Free Access Connector, a Needle-Free Access Connector For Arterial Use, and a Non-Vented Needle-Free Bag Spike. vascular:conn is 'IV connectors, extensions & accessories' and every item in the division is one.",
+   "decidedIn": "Spirit-Medical-Ltd--framework-coverage-infusion-0909.json"
   },
   {
    "supplier": "Medical Imaging Systems (MIS Healthcare)",
@@ -91217,9 +91219,14 @@
     "Surgical Gown - High Performance",
     "Sleeved Blue Polythene Apron"
    ],
-   "hub": null,
+   "hub": [
+    "infection:ppe",
+    "infection:nitrile"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division is the company's own product category on spiritmedical.com, re-read live 09/09/2026, and its own evidence names products from two categories, so Lou's list rule (25/08/2026) applies. Twelve of the thirteen products are general PPE — non-sterile isolation gown, standard and high performance surgical gowns, sleeved and standard fit polythene aprons, full-face shield with foam headband, single use FFP3 respirator, and five Type IIR medical face masks including a children's size and one with an integrated visor — which is infection:ppe, 'General PPE'. The thirteenth is named 'Nitrile Examination Gloves', which is infection:nitrile, 'Nitrile examination', exactly.",
+   "decidedIn": "Spirit-Medical-Ltd--framework-coverage-infusion-0909.json"
   },
   {
    "supplier": "Medical Imaging Systems (MIS Healthcare)",
@@ -91251,9 +91258,11 @@
     "Single Lumen-Polyethylene Lined Protect Extension Set with Y-site and Anti-Reflux Valve, 180cm, Spirit Medical® Specialised Sets",
     "TIVA Double Lumen Peripheral Extension Set Spirit Medical® TIVA Sets"
    ],
-   "hub": null,
+   "hub": "vascular:conn",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division is the company's own product category on spiritmedical.com, re-read live 09/09/2026, and ten of its eleven products are IV extension sets — TIVA double and triple lumen peripheral extension sets, DuoCath® single-female-into-two-male extension sets, polyethylene-lined Protect extension sets (150cm, 180cm, 200cm) and Luer-connection double/triple lumen sets with anti-reflux valves — which is exactly vascular:conn, 'IV connectors, extensions & accessories'. The eleventh, UROLine® Closed System Set, is NOT an IV extension set: its own product page (read 09/09/2026) describes a closed system for reconstituting Mitomycin C from a 40mg vial and administering it intravesically via a urinary catheter. It is a Luer-connected tubing set and the company files it here itself, so the division mapping stands, but it would be better served by a product-level override; raised in OUTSTANDING.md on 09/09/2026 as ^o393, because a map part has no route to propose one.",
+   "decidedIn": "Spirit-Medical-Ltd--framework-coverage-infusion-0909.json"
   },
   {
    "supplier": "Spirit Medical Ltd",
@@ -91268,9 +91277,14 @@
     "Multi-Line Chemotherapy Set with Spirit Medical AirGuard® Gravity Administration Set and SIX Needle-Free Ports, ChemoConnect®",
     "Multi-Line Chemotherapy Set with Spirit Medical AirGuard® Gravity Administration Set and FOUR Needle-Free Ports, ChemoConnect®"
    ],
-   "hub": null,
+   "hub": [
+    "vascular:conn",
+    "bloodtx:grav"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division is the company's own product category on spiritmedical.com, re-read live 09/09/2026, and its own evidence names products from two categories, so Lou's list rule (25/08/2026) applies rather than a single pick. Eight of the eleven are extension sets — Chemo-Sure dual-line universal port extension sets with and without needle-free access, multi-line universal port extension sets with two, four or six needle-free ports, and single lumen 35cm extension sets with a vented spike or dual Luer connectors — which is vascular:conn, 'IV connectors, extensions & accessories'. The other three are named 'Multi-Line Chemotherapy Set with Spirit Medical AirGuard® Gravity Administration Set and TWO / FOUR / SIX Needle-Free Ports', i.e. the company's own gravity administration set built into a chemotherapy set, which is bloodtx:grav, 'Gravity administration sets'.",
+   "decidedIn": "Spirit-Medical-Ltd--framework-coverage-infusion-0909.json"
   },
   {
    "supplier": "Spirit Medical Ltd",
@@ -91285,9 +91299,11 @@
     "Gravity IV Administration Set with SecureConnect® Needle-Free Access Port - Spirit Medical AirGuard®",
     "Operating Theatres Gravity IV Administration Set with Anti-Reflux Valve and 3-way Stopcock with Extension Set - Spirit Medical AirGuard®"
    ],
-   "hub": null,
+   "hub": "bloodtx:grav",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division is the company's own product category on spiritmedical.com, re-read live 09/09/2026, and all six of its products are named 'Gravity IV Administration Set' — Gravity IV Administration Set; with Anti-Reflux Valve; with SecureConnect® Needle-Free Access Port; with Anti-Reflux Valve and SecureConnect® Needle-Free Access Port; and two Operating Theatres variants with a 3-way stopcock and extension set. bloodtx:grav is 'Gravity administration sets' and that is what every item in the division is. No pump-dedicated set and no pump sits in this division, so it needs no second category.",
+   "decidedIn": "Spirit-Medical-Ltd--framework-coverage-infusion-0909.json"
   },
   {
    "supplier": "Spirit Medical Ltd",
@@ -91318,9 +91334,11 @@
     "Blood Administration Gravity Set With Air-Vent - Spirit Medical® Blood Sets",
     "Blood Administration Gravity Set - Spirit Medical® Blood Sets"
    ],
-   "hub": null,
+   "hub": "bloodtx:grav",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division is the company's own product category on spiritmedical.com, re-read live 09/09/2026, and all three of its products are named 'Blood Administration Gravity Set' — plain, With Air-Vent, and an Operating Theatre variant With 3-Way Tap and Extension. bloodtx:grav is 'Gravity administration sets'. Nothing pump-driven sits in this division, so it needs no second category.",
+   "decidedIn": "Spirit-Medical-Ltd--framework-coverage-infusion-0909.json"
   },
   {
    "supplier": "Spirit Medical Ltd",
@@ -91362,9 +91380,11 @@
    "examples": [
     "WoundSoak® Catheters for Continuous Wound Infusion (CWI)"
    ],
-   "hub": null,
+   "hub": "anaesthesia:reg",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division is the company's own product category on spiritmedical.com and holds one product, the WoundSoak® Continuous Wound Infusion (CWI) Soaking Catheter. Its own product page, read 09/09/2026, describes 'a fenestrated wound catheter for postoperative continuous infusion of local anaesthetics and analgesics directly into the surgical site for optimised postoperative pain relief', used 'as a single technique or as part of multi-modal pain management approach'. anaesthesia:reg is 'Regional anaesthesia & pain management kits', which is what the company's own description of the product names. It is not a wound dressing and not an infusion pump: the same page says it is used with elastomeric or electronic infusion pumps, i.e. it is the catheter half of a pain-management set.",
+   "decidedIn": "Spirit-Medical-Ltd--framework-coverage-infusion-0909.json"
   },
   {
    "kind": "nhssc-term",
@@ -91882,6 +91902,474 @@
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; this product was found 07/09/2026 filed under the Infusion Therapy division (mapped to vascular:conn), which is right for the division's other 76 products but wrong for this one",
    "why": "Arterial blood-gas sampling kit, not an IV connector. The Infusion Therapy division mapping is correct for the rest of the division; this product needed its own decision, published via build_differentiator.py's dedicated product-override tier (added 07/09/2026) so it can never be shadowed by the division's own mapping.",
    "decidedIn": "bloodcoll:abg addition, accepted by Lou 07/09/2026"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Uncategorised",
+   "products": 709,
+   "categories": [],
+   "examples": [
+    "Ethicon Echelon Plus Stapler",
+    "Sigma Total Knee System",
+    "Sistema De Rodilla Total Sigma",
+    "Sistema De Rodilla Pfc Sigma Tc3"
+   ],
+   "hub": null,
+   "notTaxonomy": true,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Numed Healthcare",
+   "division": "Uncategorised",
+   "products": 309,
+   "categories": [],
+   "examples": [
+    "Clinell Universal Wipes Pack Of 200",
+    "Infection Control",
+    "Defibrillator Accessories",
+    "Disposable Accessories"
+   ],
+   "hub": null,
+   "notTaxonomy": true,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Hologic UK",
+   "division": "Uncategorised",
+   "products": 95,
+   "categories": [],
+   "examples": [
+    "Faxitron® Core Specimen Radiography System",
+    "Faxitron® Trident® HD Specimen Radiography System",
+    "Faxitron® Path Specimen Radiography System",
+    "Panther® System"
+   ],
+   "hub": null,
+   "notTaxonomy": true,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Surgery",
+   "products": 68,
+   "categories": [],
+   "examples": [
+    "Wound Closure And Healing",
+    "Smoother Recovery Starts With The Right Suture",
+    "Surgical Stapling",
+    "Enseal X1 Large Jaw Tissue Sealer"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Numed Healthcare",
+   "division": "Related",
+   "products": 64,
+   "categories": [],
+   "examples": [
+    "332",
+    "395",
+    "401",
+    "402"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Ideal Medical Solutions",
+   "division": "Uncategorised",
+   "products": 41,
+   "categories": [],
+   "examples": [
+    "TransEasy Tackers",
+    "THEIA Eye Block",
+    "BIOSIS",
+    "OMNIFinger™"
+   ],
+   "hub": null,
+   "notTaxonomy": true,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Cardiovascular",
+   "products": 36,
+   "categories": [],
+   "examples": [
+    "Radiofrequency Rf Ablation",
+    "Ultrasound Solutions",
+    "Cartosound Sonata",
+    "Hardware"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Healthium Medtech UK",
+   "division": "Panama- Advanced Surgery",
+   "products": 24,
+   "categories": [
+    "Advanced Surgery",
+    "Absorbable Sutures",
+    "Panama- Advanced Surgery"
+   ],
+   "examples": [
+    "Trusynth",
+    "Truloop",
+    "Trushield™ Anti-Microbial Gloves",
+    "Truskin Non Sterile"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Spirit Medical Ltd",
+   "division": "MedFuser®",
+   "products": 16,
+   "categories": [
+    "MedFuser®"
+   ],
+   "examples": [
+    "MedFuser® FastFlow Portable Elastomeric Infusion Pump with High Flow Rate",
+    "MedFuser® PCA MultiFlow NRFit Portable Elastomeric Infusion Pump with MultiFlow Patient Control Analgesia Module",
+    "MedFuser® MultiFlow SPLIT NRFit Portable Elastomeric Infusion Pump with bifurcated NRFit output and MultiFlow rate control module",
+    "MedFuser® MultiFlow NRFit Portable Elastomeric Infusion Pump with MultiFlow Rate Control Module"
+   ],
+   "hub": "bloodtx:disp",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division is the company's own product category on spiritmedical.com, and the company's own description of it, read from the site's category record on 09/09/2026, is 'Portfolio of Portable Elastomeric Infusion Pumps'. All sixteen products are named '... Portable Elastomeric Infusion Pump' (FastFlow, MultiFlow, MultiFlow SPLIT, DUO, PCA, PCA plus Basal, ONCO, and NRFit variants of each). bloodtx:disp is 'Disposable pumps', which is what an elastomeric pump is; bloodtx:pumps ('Infusion pumps') is deliberately NOT also claimed, because the vocabulary separates the two and claiming both would be a hedge rather than a division genuinely spanning two categories. NOTE this division replaced 'Dosi-Fuser®' on the company's own site between the 06/09/2026 crawl and the 09/09/2026 re-crawl; the older Dosi-Fuser® pair is left unmapped because the company no longer files anything under it.",
+   "decidedIn": "Spirit-Medical-Ltd--framework-coverage-infusion-0909.json"
+  },
+  {
+   "supplier": "Numed Healthcare",
+   "division": "Brand",
+   "products": 14,
+   "categories": [],
+   "examples": [
+    "Clinell",
+    "Iem",
+    "Ambu",
+    "Carefusion"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Starkstrom Limited",
+   "division": "Uncategorised",
+   "products": 14,
+   "categories": [],
+   "examples": [
+    "Isolated Power Supply Systems – Starkstrom",
+    "Uninterruptible Power Supply Systems – Starkstrom",
+    "Earthing and Sockets – Starkstrom",
+    "Theatre Control Panels – Starkstrom"
+   ],
+   "hub": null,
+   "notTaxonomy": true,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Healthium Medtech UK",
+   "division": "Advanced Surgery",
+   "products": 12,
+   "categories": [
+    "Absorbable Sutures",
+    "Advanced Surgery"
+   ],
+   "examples": [
+    "Vertex Access",
+    "Trutack",
+    "Alphalene",
+    "Trugut Chromic"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Avanos Medical UK Limited",
+   "division": "Chronic Pain",
+   "products": 11,
+   "categories": [],
+   "examples": [
+    "Videos",
+    "Coolief Cooled Radiofrequency System For Discogenic Pain",
+    "Coolief Cooled Radiofrequency For Cervical Facet Joint Pain",
+    "Coolief Cooled Radiofrequency For Hip"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Mentor",
+   "products": 10,
+   "categories": [],
+   "examples": [
+    "Memorygelxtra",
+    "Expansores De Tejido Mamario Cpx4",
+    "Expansores De Tejido Lisos",
+    "Implantesexpansores Mamarios Mentor Becker"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Digital Surgery",
+   "products": 10,
+   "categories": [],
+   "examples": [
+    "Online Terms Digital Surgery Agreement Sept 2023",
+    "Digital Surgery Agreement Business Associate Agreement",
+    "Power Tools Schedule Nov 2024",
+    "Velys Active Robotic Assistance And Velys Spine Navigation Schedule"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Healthium Medtech UK",
+   "division": "with Prod code",
+   "products": 9,
+   "categories": [
+    "Panama- Advanced Surgery"
+   ],
+   "examples": [
+    "PDSynth",
+    "Trugut Chromic",
+    "Trulene",
+    "Trusynth Plus Neo"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Healthium Medtech UK",
+   "division": "US Advanced Surgery",
+   "products": 9,
+   "categories": [
+    "US Advanced Surgery"
+   ],
+   "examples": [
+    "Trulene",
+    "Monoglyde",
+    "PDSynth",
+    "Trusynth"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Robotics",
+   "products": 7,
+   "categories": [],
+   "examples": [
+    "Training",
+    "Overview",
+    "Instrumentation",
+    "System"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Power Tools",
+   "products": 7,
+   "categories": [],
+   "examples": [
+    "Us Power Tools Warranty",
+    "Return Goods Policy",
+    "Quotation Terms And Conditions",
+    "Evaluation Request Form"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Enabling Tech",
+   "products": 7,
+   "categories": [],
+   "examples": [
+    "Insight Driven Care Portal",
+    "Hip Evidence",
+    "Knee Videos",
+    "Hip Videos"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Healthium Medtech UK",
+   "division": "US- Arthroscopy",
+   "products": 5,
+   "categories": [
+    "US- Arthroscopy"
+   ],
+   "examples": [
+    "Stativ® Knotted UHMWPE Suture Anchor",
+    "SURESTITCH™ UHMWPE Suture PEEK Button Meniscus Repair Implant",
+    "CEPTRE® Knotted UHMWPE Suture PEEK Anchor",
+    "T-Button® A Adjustable Loop UHMWPE Suture PEEK Button, Close Button; T-Button® S Adjustable Loop UHMWPE Suture PEEK Button, Open Button"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Neurovascular",
+   "products": 5,
+   "categories": [],
+   "examples": [
+    "Cerebase Da Guide Sheath",
+    "Emboguard Balloon Guide Catheter",
+    "Trufill N Bca Liquid Embolic System",
+    "Prowler Ex Microcatheter"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Numed Healthcare",
+   "division": "System",
+   "products": 3,
+   "categories": [],
+   "examples": [
+    "Systmone",
+    "Emis",
+    "Inps"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Avanos Medical UK Limited",
+   "division": "Digestive Health",
+   "products": 3,
+   "categories": [],
+   "examples": [
+    "Ancoris",
+    "Enteral Feeding",
+    "Cortrak 2 Enteral Access System Eas"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Digital",
+   "products": 3,
+   "categories": [],
+   "examples": [
+    "Ottava",
+    "Overview",
+    "Solutions"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Healthium Medtech UK",
+   "division": "Skin Stapler",
+   "products": 2,
+   "categories": [
+    "Advanced Surgery"
+   ],
+   "examples": [
+    "Trupler",
+    "Truseal"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Aesthetics And Reconstructive Surgery",
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Breast Augmentation",
+    "Breast Reconstruction"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Plus Sutures",
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Evidence",
+    "Experts"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Healthium Medtech UK",
+   "division": "Panama - Wound Care",
+   "products": 1,
+   "categories": [
+    "Panama - Wound Care"
+   ],
+   "examples": [
+    "Theruptor™ NXT"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Attune Knee System",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Attune Evidence"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Johnson & Johnson MedTech",
+   "division": "Evidence And Video Library",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Simplify Your Revision Evidence Library"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
   }
  ],
  "kinds": {

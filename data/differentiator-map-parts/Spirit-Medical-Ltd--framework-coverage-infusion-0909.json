@@ -1,0 +1,34 @@
+{"supplier": "Spirit Medical Ltd",
+ "decisions": [
+   {"division": "Spirit Medical AirGuard®",
+    "hub": "bloodtx:grav",
+    "why": "the division is the company's own product category on spiritmedical.com, re-read live 09/09/2026, and all six of its products are named 'Gravity IV Administration Set' — Gravity IV Administration Set; with Anti-Reflux Valve; with SecureConnect® Needle-Free Access Port; with Anti-Reflux Valve and SecureConnect® Needle-Free Access Port; and two Operating Theatres variants with a 3-way stopcock and extension set. bloodtx:grav is 'Gravity administration sets' and that is what every item in the division is. No pump-dedicated set and no pump sits in this division, so it needs no second category."},
+
+   {"division": "Spirit Medical® Blood Sets",
+    "hub": "bloodtx:grav",
+    "why": "the division is the company's own product category on spiritmedical.com, re-read live 09/09/2026, and all three of its products are named 'Blood Administration Gravity Set' — plain, With Air-Vent, and an Operating Theatre variant With 3-Way Tap and Extension. bloodtx:grav is 'Gravity administration sets'. Nothing pump-driven sits in this division, so it needs no second category."},
+
+   {"division": "MedFuser®",
+    "hub": "bloodtx:disp",
+    "why": "the division is the company's own product category on spiritmedical.com, and the company's own description of it, read from the site's category record on 09/09/2026, is 'Portfolio of Portable Elastomeric Infusion Pumps'. All sixteen products are named '... Portable Elastomeric Infusion Pump' (FastFlow, MultiFlow, MultiFlow SPLIT, DUO, PCA, PCA plus Basal, ONCO, and NRFit variants of each). bloodtx:disp is 'Disposable pumps', which is what an elastomeric pump is; bloodtx:pumps ('Infusion pumps') is deliberately NOT also claimed, because the vocabulary separates the two and claiming both would be a hedge rather than a division genuinely spanning two categories. NOTE this division replaced 'Dosi-Fuser®' on the company's own site between the 06/09/2026 crawl and the 09/09/2026 re-crawl; the older Dosi-Fuser® pair is left unmapped because the company no longer files anything under it."},
+
+   {"division": "SecureConnect®",
+    "hub": "vascular:conn",
+    "why": "the division is the company's own product category on spiritmedical.com, re-read live 09/09/2026, and all nineteen products are needle-free IV connectors and extension sets: single/double/triple/quad lumen needle-free extension sets (10cm, 30cm, 160cm, 200cm, with pinch clamp, slide clamp or anti-reflux valves), paediatric filtered sets, Luer-slip and Luer-lock T-piece connectors with microbore extension, a Needle-Free Access Connector, a Needle-Free Access Connector For Arterial Use, and a Non-Vented Needle-Free Bag Spike. vascular:conn is 'IV connectors, extensions & accessories' and every item in the division is one."},
+
+   {"division": "TIVA and Specialised Extension Sets",
+    "hub": "vascular:conn",
+    "why": "the division is the company's own product category on spiritmedical.com, re-read live 09/09/2026, and ten of its eleven products are IV extension sets — TIVA double and triple lumen peripheral extension sets, DuoCath® single-female-into-two-male extension sets, polyethylene-lined Protect extension sets (150cm, 180cm, 200cm) and Luer-connection double/triple lumen sets with anti-reflux valves — which is exactly vascular:conn, 'IV connectors, extensions & accessories'. The eleventh, UROLine® Closed System Set, is NOT an IV extension set: its own product page (read 09/09/2026) describes a closed system for reconstituting Mitomycin C from a 40mg vial and administering it intravesically via a urinary catheter. It is a Luer-connected tubing set and the company files it here itself, so the division mapping stands, but it would be better served by a product-level override; raised in OUTSTANDING.md on 09/09/2026 as ^o393, because a map part has no route to propose one."},
+
+   {"division": "ChemoConnect®",
+    "hub": ["vascular:conn", "bloodtx:grav"],
+    "why": "the division is the company's own product category on spiritmedical.com, re-read live 09/09/2026, and its own evidence names products from two categories, so Lou's list rule (25/08/2026) applies rather than a single pick. Eight of the eleven are extension sets — Chemo-Sure dual-line universal port extension sets with and without needle-free access, multi-line universal port extension sets with two, four or six needle-free ports, and single lumen 35cm extension sets with a vented spike or dual Luer connectors — which is vascular:conn, 'IV connectors, extensions & accessories'. The other three are named 'Multi-Line Chemotherapy Set with Spirit Medical AirGuard® Gravity Administration Set and TWO / FOUR / SIX Needle-Free Ports', i.e. the company's own gravity administration set built into a chemotherapy set, which is bloodtx:grav, 'Gravity administration sets'."},
+
+   {"division": "Personal Protection",
+    "hub": ["infection:ppe", "infection:nitrile"],
+    "why": "the division is the company's own product category on spiritmedical.com, re-read live 09/09/2026, and its own evidence names products from two categories, so Lou's list rule (25/08/2026) applies. Twelve of the thirteen products are general PPE — non-sterile isolation gown, standard and high performance surgical gowns, sleeved and standard fit polythene aprons, full-face shield with foam headband, single use FFP3 respirator, and five Type IIR medical face masks including a children's size and one with an integrated visor — which is infection:ppe, 'General PPE'. The thirteenth is named 'Nitrile Examination Gloves', which is infection:nitrile, 'Nitrile examination', exactly."},
+
+   {"division": "WoundSoak® CWI Wound Catheters",
+    "hub": "anaesthesia:reg",
+    "why": "the division is the company's own product category on spiritmedical.com and holds one product, the WoundSoak® Continuous Wound Infusion (CWI) Soaking Catheter. Its own product page, read 09/09/2026, describes 'a fenestrated wound catheter for postoperative continuous infusion of local anaesthetics and analgesics directly into the surgical site for optimised postoperative pain relief', used 'as a single technique or as part of multi-modal pain management approach'. anaesthesia:reg is 'Regional anaesthesia & pain management kits', which is what the company's own description of the product names. It is not a wound dressing and not an infusion pump: the same page says it is used with elastomeric or electronic infusion pumps, i.e. it is the catheter half of a pain-management set."}
+ ]}

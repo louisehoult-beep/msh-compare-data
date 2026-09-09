@@ -43,7 +43,7 @@ low coverage there means exhausted, not neglected.
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 8 | 25.8% | 12 | 7 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 8 | 5 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 5 | 9 | STARTED |
-| Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 4 | 14.8% | 8 | 5 | STARTED |
+| Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 5 | 18.5% | 7 | 5 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 6 | 24.0% | 12 | 5 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | 9 | 5 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 3 | 7 | STARTED |
@@ -84,7 +84,7 @@ low coverage there means exhausted, not neglected.
 | Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics | — | 28 | 0 | 0.0% | 14 | 4 | UNMAPPED |
 | Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 8 | 3 | UNMAPPED |
 | Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions | — | 25 | 0 | 0.0% | 11 | 9 | UNMAPPED |
-| Extension Sets and Lines | — | 23 | 0 | 0.0% | 7 | 4 | UNMAPPED |
+| Extension Sets and Lines | — | 23 | 0 | 0.0% | 6 | 4 | UNMAPPED |
 | Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 10 | 4 | UNMAPPED |
 | External Defibrillation Devices and Related Services and Accessories | — | 21 | 0 | 0.0% | 10 | 5 | UNMAPPED |
 | Hand Hygiene and Associated Products and Services | — | 21 | 0 | 0.0% | 8 | 4 | UNMAPPED |
@@ -92,7 +92,7 @@ low coverage there means exhausted, not neglected.
 | Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 4 | 2 | UNMAPPED |
 | Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 5 | 6 | UNMAPPED |
 | Rigid Endoscopy and Associated Options and Related Services | — | 18 | 0 | 0.0% | 8 | 3 | UNMAPPED |
-| Needlefree Connection Systems and Associated Products | — | 16 | 0 | 0.0% | 4 | 3 | UNMAPPED |
+| Needlefree Connection Systems and Associated Products | — | 16 | 0 | 0.0% | 3 | 3 | UNMAPPED |
 | Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services | — | 14 | 0 | 0.0% | 6 | 3 | UNMAPPED |
 | Mobile X-Ray Systems and Associated Option and Related Services | — | 14 | 0 | 0.0% | 1 | 8 | UNMAPPED |
 | Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories | — | 13 | 0 | 0.0% | 10 | 0 | UNMAPPED |
