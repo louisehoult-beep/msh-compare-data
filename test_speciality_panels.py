@@ -1380,7 +1380,7 @@ cakb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", CARDIAC +
 check("slice stays under 200 KB (is %d KB)" % cakb, cakb < 200)
 
 print("\n" + "=" * 70)
-print("NUTRITION AND DIETETICS (page 2927)")
+print("NUTRITION AND DIETETICS (page 2911)")
 print("=" * 70)
 print("Rebuilding the nutrition and dietetics slice from live data...")
 subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), NUTRITION],

@@ -1333,8 +1333,10 @@ SPECIALITY_RULES = {
             "their expiry dates."
         ),
     },
-    # PAGE 2927. Scope, in the page's own words: "Oral nutritional supplements, enteral
-    # tube feeding and parenteral nutrition, across acute and community." The page's own
+    # PAGE 2911. The live id was read back from the WordPress.com API on 09/09/2026:
+    # slug nutrition-and-dietetics, title "Nutrition and Dietetics (Subscribers only)".
+    # Scope, in the page's own words: "Oral nutritional supplements, enteral tube
+    # feeding and parenteral nutrition, across acute and community." The page's own
     # research, verified 08/09/2026, establishes that this is two markets sharing a
     # clinical pathway and almost nothing else: a community prescribing market worth
     # 638.2m of net ingredient cost in England in 2024/25, written on FP10 and reimbursed
