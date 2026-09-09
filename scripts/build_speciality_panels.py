@@ -2641,6 +2641,235 @@ SPECIALITY_RULES = {
             "laboratory medicine page."
         ),
     },
+    # PAGE 2809. Scope, in the page's own words: two pathways that are bought by
+    # different people. "The transfusion pathway is owned by the hospital transfusion
+    # team; the VTE prevention pathway is owned by the thrombosis committee and the
+    # ward." The page's own Related specialities line sends theatre consumables to
+    # Theatres and surgical, haemato-oncology to Oncology and SACT, and the wider
+    # laboratory to Pathology and laboratory medicine.
+    "haematology-and-patient-blood-management": {
+        "label": "Haematology and Patient Blood Management",
+        # TWO FRAMEWORKS, NOT THE SEVEN THE PAGE NAMES, AND THE GAP IS DELIBERATE.
+        # The page's Buying route section names seven NHS Supply Chain agreements that
+        # each carry a slice of this patch. Two of the seven are not in frameworks.json
+        # at all, and three are other pages' frameworks whose supplier lists cannot be
+        # split. All five are named in the coverage note rather than quietly dropped.
+        #   Blood Collection Devices (2024/S 000-033791, 19 suppliers) IS claimed. One
+        #     lot, and the whole of it is blood collection: it absorbed the former Blood
+        #     Collection Systems and Blood Lancets framework and the former Blood
+        #     Culture Collection Systems framework. Pathology and laboratory medicine
+        #     claims it too, and that is correct — a vacutainer is bought once and used
+        #     by both — in the same way Pressure Area Care is shared between wound care
+        #     and patient handling.
+        #   Pressure Infusers and Associated Products (2025/S 000-047797, 8 suppliers)
+        #     IS claimed. Rapid pressurised infusion of blood and fluid, no other page
+        #     claims it, and it is the newest agreement on this patch: live from
+        #     1 September 2026, with the brief promising a Core List refresh by mini
+        #     competition within 12 months of go-live.
+        # REFUSED, and each was checked rather than assumed:
+        #   Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services
+        #     (2023/S 000-028831) carries 122 suppliers across seven lots, of which only
+        #     Lot 2, Blood and Cellular Sciences, is this patch. frameworks.json records
+        #     supplierLots as None for it, so there is no split to apply, and claiming it
+        #     whole would put 122 genomics, digital pathology and point of care firms
+        #     under a haematology Suppliers heading. This is the same refusal the renal
+        #     rule makes over Central Venous Catheters.
+        #   Vascular Therapy and Associated Products (2023/S 000-012286) carries 23
+        #     suppliers across ten lots, of which Lots 1 to 3 are the anti-embolism
+        #     stockings and intermittent pneumatic compression garments. Again no lot
+        #     split, and the other seven lots are compression hosiery, lymphoedema and
+        #     neuromuscular electrostimulation. The page says it outright: it is "a
+        #     Rehabilitation and Community category agreement, not a haematology one".
+        #     It is the vascular surgery page's framework and is counted there.
+        #   Perfusion Devices, Consumables and Associated Equipment (2024/S 000-033613)
+        #     is cardiopulmonary bypass, cardioplegia, oxygenators and ECMO. That is
+        #     cardiac surgery and critical care, it is already the cardiology and
+        #     cardiac surgery page's framework, and the perfusion vocabulary is refused
+        #     from the include list below for the same reason.
+        #   Suction, Wound Drainage, Autologous Blood Systems and Related Consumables
+        #     (302060/1487175) and Blood Draw Tools and Accessories (2024/S 000-009366)
+        #     are BOTH ABSENT from frameworks.json — all 121 names were read. The first
+        #     is the only national route to cell salvage, so this is a real hole and the
+        #     coverage note says so. Their award notices still reach the panel through
+        #     the awards feed, because those are matched on title, not on framework.
+        "frameworks": r"\b(blood collection devices|pressure infusers)\b",
+        # DERIVED, not guessed. Every pattern below was run over all 1,972 rows of
+        # tender-history.json, all 1,397 of framework-awards.json and the 6 open notices
+        # — 3,375 titles — and every surviving hit was read one by one, then every term
+        # was run again on its own to see what only it brought in.
+        #
+        # NOT INCLUDED, deliberately. Each was tried, its hits were read, and it was
+        # refused rather than admitted and then argued with in the exclusion list:
+        #   bare "blood"      -> the single worst term on this patch. It matches Blood
+        #     Pressure Cuffs, three blood glucose contracts, three blood gas ones,
+        #     "Gastrointestinal, Endocrine, Nutrition & Blood Medicines" twice, Dried
+        #     Blood Spot Testing, a Blood Extraction Platform that is a molecular
+        #     nucleic-acid extractor, "Clozapine Tablets and Blood Testing Service"
+        #     twice, a taxi and courier contract for transporting blood tests, a health
+        #     economic analysis of the blood culture pathway, and two titles too bare to
+        #     call at all — "Blood Analyser" and "Blood Kiosks". Every genuine row is
+        #     reached below through a qualified pair instead.
+        #   bare "plasma"     -> "Inductively Coupled Plasma Optical Emission
+        #     Spectrometer (ICP-OES)", University of Sussex. Analytical chemistry. The
+        #     qualified forms below carry every real row.
+        #   bare "coagulation"-> "Purchase of Electrosurgical Devices (Cut & Coagulation,
+        #     Uterine Ablation)". Diathermy. It also takes out the open notice "NP646
+        #     Haemostatic & Coagulation Products", which is ambiguous between surgical
+        #     haemostats and coagulation reagents on the title alone and is therefore
+        #     refused by both this page and theatres.
+        #   bare "haemostat"  -> surgical haemostats, the same ambiguity. Only the
+        #     -stasis form is used, which is the viscoelastic testing term.
+        #   "anticoagulant", "heparin", "warfarin", "DOAC" -> "Heparins &
+        #     Anticoagulants" and the NHS England Direct Oral Anticoagulant framework
+        #     are real and are real anticoagulation, but the page puts them out of scope
+        #     in its own words: pharmacological VTE prophylaxis is "bought through
+        #     pharmacy, not through this patch".
+        #   bare "thromb*"    -> "INR and Thrombectomy Consumables" and "Interventional
+        #     Neuro Radiology and Thrombectomy Consumables", both NHS National Services
+        #     Scotland. Stroke thrombectomy. The qualified thrombo- terms below are kept
+        #     because they cannot carry that.
+        #   bare "INR"        -> the same notice, and the reason it matched is worth
+        #     recording: in "INR and Thrombectomy Consumables" the letters mean
+        #     Interventional NeuroRadiology, not International Normalised Ratio. Refused
+        #     outright; there is no way to tell the two apart on a title.
+        #   bare "perfusion"  -> two LifePort organ perfusion contracts and two NHSBT
+        #     cold static perfusion fluid (UW solution) ones, all kidney and multi-organ
+        #     transplant preservation, which the renal rule refuses for the same reason.
+        #     The cardiac bypass vocabulary — cardiopulmonary bypass, cardioplegia,
+        #     oxygenator, ECMO — is refused with it: eight further rows, all of them
+        #     cardiac surgery and critical care, and all of them the cardiology and
+        #     cardiac surgery page's.
+        #   bare "tourniquet" -> "The Supply of Multi-Use Pneumatic Tourniquet Devices"
+        #     and an orthopaedic power tools bundle. Surgical limb tourniquets, not the
+        #     phlebotomy kind.
+        #   bare "stem cell" and bare "bone marrow" -> refused in favour of the donation
+        #     forms. Both of today's hits are blood service donor work and both survive
+        #     below, but an orthopaedic bone marrow aspirate concentrate and an ophthalmic
+        #     limbal stem cell graft both carry these words and neither may reach this
+        #     panel on them. "Stem Cell and Immunotherapy Services" at Newcastle is lost
+        #     by that decision and it is the right trade: it is haemato-oncology, which
+        #     the page's own Related specialities line routes to Oncology and SACT.
+        #   bare "embolism"   -> only the qualified "anti-embolism" and "pulmonary
+        #     embolism" are used, so an embolisation coil can never arrive here.
+        #
+        # NEVER READ THE FEED'S OWN `spec` FIELD AND TRUST IT. It is not used here and
+        # must not be: it is a loose keyword match, and on the neighbouring wound care
+        # patch it tags 10 false positives out of 16.
+        "include": (
+            r"\b(transfus\w*|h(?:ae|e)matolog\w*|immunoh(?:ae|e)matolog\w*|"
+            r"h(?:ae|e)moglobin\w*|h(?:ae|e)moglobinopath\w*|an(?:ae|e)mia|"
+            r"patient blood management|"
+            r"blood component\w*|blood product\w*|blood bank\w*|blood group\w*|"
+            r"blood pack\w*|blood collection|blood culture collection|"
+            r"blood cell separator\w*|blood lancet\w*|blood warm\w*|blood and plasma|"
+            r"blood don\w*|blood disorder\w*|blood service\w*|blood fridge\w*|"
+            r"blood tracking|cord blood|whole blood|red cell\w*|"
+            r"platelet\w*|cryoprecipitat\w*|granulocyte\w*|buffy coat\w*|"
+            r"fresh frozen plasma|dried plasma|plasma component\w*|plasma exchange|"
+            r"plasma fractionation|plasma storage|"
+            r"plasma[\s/]*(?:blast[\s/]*)?freezer|"
+            r"\w*pheresis\w*|bone marrow don\w*|stem cell don\w*|\bRhD\b|"
+            r"cell salvage|autologous blood|autotransfus\w*|tranexamic|"
+            r"viscoelastic\w*|thromboelast\w*|\bTEG\b|\bROTEM\b|sonoclot|"
+            r"h(?:ae|e)mostasis|"
+            r"rapid infuser\w*|pressure infuser\w*|major h(?:ae|e)morrhage|"
+            r"anti[- ]?embolism|intermittent pneumatic compression|"
+            r"venous thromboembol\w*|\bVTE\b|deep vein thromb\w*|\bDVT\b|"
+            r"pulmonary embolism|thromboprophylax\w*|thrombophilia|"
+            r"h(?:ae|e)mophil\w*|von willebrand|sickle cell|thalass\w*)\b"
+        ),
+        # ONE PATTERN, and it is here because one real row matched `include` and was
+        # read and rejected:
+        #   intraocular / phaco -> "Intraocular Lenses, Viscoelastics & Phaco machines".
+        #     Ophthalmic viscoelastic device — the gel injected into the anterior chamber
+        #     during cataract surgery. It shares its whole name with viscoelastic
+        #     haemostatic testing and shares nothing else. Viscoelastic testing is named
+        #     on the page as one of the two things to lead with, so the term stays and
+        #     the cataract row goes.
+        # Every other term above was narrowed until it produced no false positive, and
+        # the notes on the refused terms record what each one caught before it was
+        # dropped. This is the field to fill the moment a new false positive appears —
+        # never widen anything to compensate.
+        "exclude": r"\b(intraocular|phaco\w*)\b",
+        # CPV CORROBORATES, IT NEVER ADMITS. Six prefixes, and every one of them fires
+        # on a real row in this data rather than being listed on the strength of the
+        # code book: 336961 blood-grouping reagents and 336962 blood-testing reagents
+        # (Red Cell Reagents at National Services Scotland, and the Automated
+        # Immunohaematology System), 3843457 haematology analysers (the Welsh Blood
+        # Service analyser), 3843452 blood analysers, 3314150 haematological consumables
+        # and 8511181 blood-analysis services (the Welsh Blood Service stem cell donor
+        # evaluation). The generic codes these same notices also carry — 50000000
+        # repair, 33100000, 85100000, 38000000 — are left out because they corroborate
+        # everything and therefore nothing.
+        "cpv": ("336961", "336962", "3843452", "3843457", "3314150", "8511181"),
+        # NO DRUG TARIFF PART. Part IX reimburses appliances dispensed in primary care
+        # against an FP10: IXA dressings and elastic hosiery, IXB incontinence, IXC
+        # stoma, IXR elastic hosiery. Nothing on this patch is dispensed that way. Blood
+        # components are invoiced to hospitals by NHS Blood and Transplant against a
+        # national price list, cell salvage and viscoelastic testing are hospital
+        # capital, and hospital anti-embolism stockings are issued on the ward, not
+        # prescribed — Part IXA elastic hosiery is the community venous disease and
+        # lymphoedema range, which is the wound care page's. So the panel carries no
+        # tariff rather than reaching for the nearest part.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no NHS Supply Chain "
+            "haematology framework. The page's Buying route section names seven "
+            "agreements written for other categories that each carry a slice of this "
+            "patch, and the Frameworks tab below claims two of them. Blood Collection "
+            "Devices and Pressure Infusers and Associated Products are claimed because "
+            "each is wholly this patch. Laboratory Diagnostics, Point of Care Testing "
+            "and Pathology Managed Services (122 suppliers) and Vascular Therapy and "
+            "Associated Products (23 suppliers) are NOT claimed: this patch is one lot "
+            "of seven on the first and three lots of ten on the second, neither "
+            "publishes a supplier-by-lot split in this dataset, and claiming either "
+            "whole would put genomics, digital pathology or compression hosiery firms "
+            "under a haematology Suppliers heading. Perfusion Devices, Consumables and "
+            "Associated Equipment is not claimed either: cardiopulmonary bypass and "
+            "ECMO are the cardiology and cardiac surgery page's. "
+            "TWO OF THE SEVEN ARE NOT IN THE HUB'S FRAMEWORK DATASET AT ALL, and one of "
+            "them matters. Suction, Wound Drainage, Autologous Blood Systems and Related "
+            "Consumables (302060/1487175) is the only national route to cell salvage, "
+            "and Blood Draw Tools and Accessories (2024/S 000-009366) carries the "
+            "tourniquets and blood lancets. Neither is among the 121 framework records "
+            "the Hub holds, so their suppliers are not counted below. Their own award "
+            "notices do appear in the awards list, because awards are matched on the "
+            "title of the notice and not on framework membership. "
+            "BLOOD COMPONENTS ARE NOT PROCURED AT ALL and no framework will ever show "
+            "them. Red cells, platelets, fresh frozen plasma, cryoprecipitate, "
+            "granulocytes and buffy coats are manufactured and issued by NHS Blood and "
+            "Transplant and invoiced to hospitals against a national price list "
+            "reissued annually. There is no tender, no competitive field and no expiry "
+            "date, so the largest single line of spend on this patch is structurally "
+            "invisible to every panel below. The page's Market intelligence section "
+            "carries the price list instead. "
+            "ONE COMPANY APPEARS TWICE IN THE SUPPLIER LIST BELOW AND IS NOT YET "
+            "MERGED. NHS Supply Chain names \"GBUK Ltd\" on Blood Collection Devices "
+            "and \"GB UK Ltd\" on Pressure Infusers, and they are the same Yorkshire "
+            "company: no company called GB UK Ltd or GB UK Limited exists on the active "
+            "Companies House register, searched 09/09/2026, and the Hub\'s own record "
+            "for the second spelling already carries gbukgroup.com as its website. The "
+            "Hub\'s supplier seed still holds them as two records, so the count below "
+            "reads 26 where 25 companies stand. Merging them changes the Compare tab as "
+            "well as this panel and is being done as its own change rather than folded "
+            "into this one. Read them as one supplier. "
+            "THE AWARDS LIST IS WIDER THAN THE TWO CLINICAL PATHWAYS THE PAGE WALKS "
+            "THROUGH. It also counts the blood services' own contracts — donor "
+            "eligibility, bone marrow and stem cell donor work, apheresis, component "
+            "manufacture and storage — and the inherited bleeding and haemoglobin "
+            "disorders: haemophilia and von Willebrand factor, sickle cell and "
+            "thalassaemia. Those are this speciality by name and no other Hub page "
+            "would hold them. Haemato-oncology is not counted here; the page's own "
+            "Related specialities line routes it to Oncology and SACT. "
+            "TWO AWARDS ARE MIXED CONTRACTS and are kept because their own titles say "
+            "so, with the full title shown on the row. The Procurement and Logistics "
+            "Service's Evacuated Blood Collection Systems and Urine Collection Systems "
+            "buys phlebotomy and specimen tubes together, and its urine half belongs to "
+            "the continence page. The BSO's Blood and Fluid Warming Systems buys blood "
+            "warming and general fluid warming on one notice. "
+            "Being named on a framework is not evidence of volume, and being absent "
+            "from one is not evidence of absence from the market."
+        ),
+    },
 
 }
 

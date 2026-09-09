@@ -33,6 +33,7 @@ PALLIATIVE = "palliative-and-end-of-life-care"
 PATHOLOGY = "pathology-and-laboratory-medicine"
 RADIOLOGY = "radiology-and-imaging"
 RENAL = "renal"
+HAEM = "haematology-and-patient-blood-management"
 fails = []
 
 
@@ -2483,6 +2484,226 @@ check("every published award title is one the rule actually accepts",
 check("licence notice carried", bool(rn.get("_notice", {}).get("owner")))
 _rn_kb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", RENAL + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % _rn_kb, _rn_kb < 200)
+
+# ---------------------------------------------------------------------------
+# HAEMATOLOGY AND PATIENT BLOOD MANAGEMENT (page 2809), added 09/09/2026.
+#
+# The word "blood" is the most dangerous single token in the whole dataset: it
+# appears on blood pressure cuffs, blood glucose strips, blood gas analysers, a
+# mixed pharmacy medicines basket, dried blood spot screening, a molecular
+# extraction platform, a clozapine monitoring service and a courier contract for
+# carrying blood tests. Not one of those is this speciality. Every case below is
+# a REAL row that a widened pattern would admit, so the assertions fail the
+# moment somebody reaches for the bare word.
+# ---------------------------------------------------------------------------
+print("\nHAEMATOLOGY AND PATIENT BLOOD MANAGEMENT")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), HAEM],
+               check=True, capture_output=True)
+hb = load_panel(HAEM)
+check("panel is defined", hb.get("defined") is True)
+
+_hb_rule = B.SPECIALITY_RULES[HAEM]
+_hb_rx = B.compile_rule(_hb_rule)
+_hb_th = B.load("tender-history.json")
+_hb_ix = {k: i for i, k in enumerate(_hb_th["schema"])}
+_hb_corpus = [r[_hb_ix["t"]] or "" for r in _hb_th["rows"]]
+_hb_corpus += [(a.get("title") or "") for a in B.load("framework-awards.json")["awards"]]
+
+print("  bare 'blood' stays refused — every one of these is a real row")
+for bad in [
+        "Blood Pressure Cuffs and Support Products",
+        "PROVISION OF BLOOD GLUCOSE METERS",
+        "CLI-STA-52156 Professional Blood Glucose Testing Strips, Consumables and QC Material",
+        "Supply of Replacement Blood Gas Analysers and Consumables",
+        "Blood Gas Managed Service for Betsi Cadwaladr University Health Board",
+        "Gastrointestinal, Endocrine, Nutrition & Blood Medicines",
+        "Dried Blood Spot Testing",
+        "Blood Extraction Platform",
+        "Clozapine Tablets and Blood Testing Service",
+        "Provision of Taxi, Courier, parcel and Transport of Human Tissues & Blood  Tests",
+        "Blood Culture pathway- Health economic analysis",
+        # Two titles too bare to call either way. Refusing them is the point of
+        # rule 14: publishing nothing beats publishing a guess.
+        "Blood Analyser",
+        "Blood Kiosks",
+]:
+    check("never admitted: %s" % bad[:62], not B.match_title(_hb_rx, bad), "matched and should not")
+
+print("  the other loose terms stay refused — also real rows")
+for bad in [
+        # bare "plasma": analytical chemistry at a university.
+        "Inductively Coupled Plasma Optical Emission Spectrometer (ICP-OES)",
+        # bare "coagulation" and bare "haemostat": diathermy, and an open notice
+        # that cannot be told from surgical haemostats on its title.
+        "Purchase of Electrosurgical Devices (Cut & Coagulation, Uterine Ablation)",
+        "NP646 Haemostatic & Coagulation Products",
+        # Pharmacological VTE prophylaxis is pharmacy's, in the page's own words.
+        "Heparins & Anticoagulants",
+        "NHS Framework Agreement for the Supply of Direct Oral Anticoagulant (DOAC) "
+        "Medicines for the NHS in England",
+        # bare "thromb*" and bare "INR". In the first title the letters INR mean
+        # Interventional NeuroRadiology, not International Normalised Ratio.
+        "INR and Thrombectomy Consumables",
+        "Interventional Neuro Radiology and Thrombectomy Consumables",
+        # bare "perfusion": kidney and multi-organ transplant preservation, which
+        # the renal rule refuses for the same reason, then the cardiac bypass and
+        # ECMO rows, which are the cardiology and cardiac surgery page's.
+        "Contract Award Notice for the Provision of LifePort Perfusion Consumables",
+        "Framework Agreement for the Supply of Cold Static Perfusion Fluid UW Solution",
+        "NHS Golden Jubilee Cardiac Perfusion Consumables",
+        "Cardiopulmonary Bypass Oxygenators with Customised Tubing Pack [2339172]",
+        "Blood Cardioplegia Sets",
+        "Purchase of ECMO Trolley",
+        "Maintenance Perfusion Heart and Lung Machine",
+        "Monitoring devices for continuous measurement of blood parameters during "
+        "extracorporeal circulation",
+        "Maintenance - CDI 550 blood parameter monitors - PW004",
+        # bare "tourniquet": surgical limb tourniquets, not the phlebotomy kind.
+        "The Supply of Multi-Use Pneumatic Tourniquet Devices",
+        "Purchase of Orthopaedic Power Tools, Bone Cement, Mixing Systems, "
+        "Pulse Lavage & Tourniquets",
+        # bare "stem cell": haemato-oncology, which the page routes to Oncology
+        # and SACT. The donation forms below still admit the blood service rows.
+        "Stem Cell and Immunotherapy Services",
+]:
+    check("never admitted: %s" % bad[:62], not B.match_title(_hb_rx, bad), "matched and should not")
+
+print("  the one exclusion pattern earns its place")
+# The single entry in `exclude`. Ophthalmic viscoelastic device — the gel used in
+# cataract surgery — shares its whole name with viscoelastic haemostatic testing.
+# Viscoelastic testing is one of the two things the page says to lead with, so the
+# include term stays and this row is taken back out.
+check("never admitted: Intraocular Lenses, Viscoelastics & Phaco machines",
+      not B.match_title(_hb_rx, "Intraocular Lenses, Viscoelastics & Phaco machines"))
+check("the exclusion list is a real one, not a never-matching placeholder",
+      bool(_hb_rule["exclude"]) and "(?!x)x" not in (_hb_rule["exclude"] or ""))
+
+print("  the genuine patch is admitted")
+for good in [
+        # Patient blood management: cell salvage and viscoelastic testing.
+        "Suction Consumables, Wound Drainage, Autologous Blood Systems and Related Accessories",
+        "HEY/17/177 CELL SALVAGE EQUIPMENT AND CONSUMABLES",
+        "The Supply and Support of TEG-6 Viscoelastic Monitors - VTN",
+        "WSFT - Pathology - Hemostasis Management TEG 65 Analyser",
+        # Pathway two: VTE prevention, mechanical prophylaxis.
+        "Anti-Embolism Stockings",
+        "Intermittent Pneumatic Compression",
+        # The transfusion pathway and its laboratory.
+        "Maintenance of Blood Transfusion Systems",
+        "Red Cell Reagents",
+        "Red Cell Washing System",
+        "Donation and Patient Testing - Automated Red Cell Immunohaematology",
+        "Automated Immunohaematology System",
+        "Blood Collection NPM Agreement",
+        "Sampling Device for the Bacterial Screening of Platelets [3983168]",
+        "International Blood Pack 1",
+        # The -pheresis family, which the renal rule sends here by name. The
+        # pattern is \w*pheresis\w* precisely so plasmapheresis and photopheresis
+        # cannot fall through a leading word boundary.
+        "Plasmapheresis Collection Systems",
+        "Support of existing NHSBT owned Extracorporeal Photopheresis (ECP) Systems",
+        # Component manufacture at the blood services.
+        "UK Domestic Plasma Fractionation Service",
+        "UK Derived & Manufactured Dried Plasma Component",
+        "WBS-FTS-63787 Replacement of Rapid Plasma/Blast Freezer Equipment",
+        "Supply of Cord Blood Collection Systems",
+        # Donor work. NOTE THE TYPO: the Welsh Blood Service notice really is
+        # spelled "Doner". The pattern is `bone marrow don\w*` for that reason and
+        # narrowing it to `donor` silently drops the row.
+        "Welsh Blood Service Bone Marrow Doner Service",
+        "2526-087-STA-WBS Medical Evaluation of Prospective Stem Cell Donors",
+        # Inherited bleeding and haemoglobin disorders. No other Hub page holds them.
+        "Sickle Cell and Thalassemia lab clinical support 2027",
+        "NHS Framework - Blood Disorders including Haemophilia A and B - July 2024",
+        "NHS National Framework Agreement for the Supply of Recombinant Von Willebrand Factor",
+        # Rapid and pressurised infusion.
+        "Rapid Infuser Blood/IV Infusion Pump",
+]:
+    check("admitted: %s" % good[:62], B.match_title(_hb_rx, good), "did not match and should")
+
+print("  the framework filter claims two of the page's seven and no more")
+_hb_names = [f["name"] for f in hb["frameworks"]]
+check("exactly two frameworks are claimed", len(_hb_names) == 2, str(_hb_names))
+for want in ["Blood Collection Devices", "Pressure Infusers and Associated Products"]:
+    check("framework present: %s" % want, want in _hb_names)
+# The three the page names that are other pages' frameworks. Claiming any of them
+# whole would put 122 genomics and digital pathology firms, 23 compression hosiery
+# firms, or 9 cardiac bypass firms under a haematology Suppliers heading.
+for other in ["Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+              "Vascular Therapy and Associated Products",
+              "Perfusion Devices, Consumables and Associated Equipment",
+              "Central Venous Catheters and Associated Products",
+              "Renal Replacement Therapies Services, Technologies and Consumables"]:
+    check("another speciality's framework stays out: %s" % other[:56], other not in _hb_names)
+# The two of the seven that are absent from the dataset entirely. If either is
+# ever added to frameworks.json this fails, which is the prompt to claim it.
+_hb_all_fw = [f.get("name") or "" for f in B.load("frameworks.json")["frameworks"]]
+for missing in ["Suction", "Blood Draw Tools"]:
+    check("still absent from frameworks.json, and the note says so: %s" % missing,
+          not any(missing in n for n in _hb_all_fw))
+
+print("  the suppliers are the frameworks' own, resolved to one name per company")
+check("supplier count matches the two frameworks' 19 + 8 names",
+      hb["counts"]["suppliers"] == 26, str(hb["counts"]["suppliers"]))
+check("no supplier name is left unresolved",
+      hb["counts"]["suppliersUnresolved"] == 0, str(hb["counts"]["suppliersUnresolved"]))
+# Reflex Medical is on both frameworks under two spellings and is correctly one row.
+_hb_reflex = [s for s in hb["suppliers"] if "Reflex" in s["name"]]
+check("Reflex Medical appears exactly once across both frameworks",
+      len(_hb_reflex) == 1, str([s["name"] for s in _hb_reflex]))
+check("Reflex Medical is shown on both frameworks",
+      len(_hb_reflex) == 1 and len(_hb_reflex[0]["frameworks"]) == 2)
+_hb_note = (hb.get("rules") or {}).get("frameworks", "")
+# GBUK is held as TWO records in supplier-seed.json — NHS Supply Chain writes
+# "GBUK Ltd" on one framework and "GB UK Ltd" on the other, and no company by the
+# second name exists on the active Companies House register. Until the seed is
+# merged the panel must say so out loud; after it is merged there will be one row
+# and the declaration is no longer needed. Both states pass, silence does not.
+_hb_gbuk = [s for s in hb["suppliers"] if s["name"].upper().replace(" ", "").startswith("GBUK")]
+check("GBUK is either merged to one row or declared as two",
+      len(_hb_gbuk) == 1 or "ONE COMPANY APPEARS TWICE" in _hb_note,
+      str([s["name"] for s in _hb_gbuk]))
+
+print("  the derived claims carry their rule and their limits (rules 14a, 14c)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((hb.get("rules") or {}).get(k)))
+check("the two frameworks claimed out of seven are explained, not hidden",
+      "the Frameworks tab below claims two of them" in _hb_note)
+check("the two frameworks missing from the dataset are declared",
+      "TWO OF THE SEVEN ARE NOT IN THE HUB'S FRAMEWORK DATASET AT ALL" in _hb_note)
+check("the blood component monopoly is declared, since no panel can ever show it",
+      "BLOOD COMPONENTS ARE NOT PROCURED AT ALL" in _hb_note)
+check("the wider award scope is declared against the page's two pathways",
+      "THE AWARDS LIST IS WIDER THAN THE TWO CLINICAL PATHWAYS" in _hb_note)
+# Part IX is dressings and elastic hosiery, incontinence and stoma — community
+# FP10 appliances. Blood components are invoiced by NHSBT, cell salvage is capital,
+# and hospital anti-embolism stockings are issued on the ward, not prescribed.
+check("no Drug Tariff part is claimed for haematology", hb.get("drugTariff") is None)
+_hb_dt = (hb.get("rules") or {}).get("drugTariff", "")
+check("the absence of a Drug Tariff part is explained, not silent",
+      "No Drug Tariff part applies" in _hb_dt and "reaching for the nearest part" in _hb_dt)
+# Every CPV prefix claimed must actually fire on a real notice. A family listed
+# from the code book and never seen corroborates nothing.
+_hb_fa = B.load("framework-awards.json")["awards"]
+for _pfx in _hb_rule["cpv"]:
+    _fires = any(
+        B.match_title(_hb_rx, a.get("title") or "")
+        and any(str(c).startswith(_pfx) for c in (a.get("cpv") or []))
+        for a in _hb_fa)
+    check("CPV prefix %s fires on a real notice" % _pfx, _fires)
+check("no open tender is invented for an empty day",
+      hb["counts"]["openTenders"] == len(hb["openTenders"]))
+_hb_raw = len([t for t in _hb_corpus if B.match_title(_hb_rx, t)])
+check("the published match count is not inflated above what the filter returns",
+      hb["counts"]["awardsShown"] <= hb["counts"]["awardsMatched"] <= _hb_raw,
+      "shown %d, matched %d, raw %d" % (
+          hb["counts"]["awardsShown"], hb["counts"]["awardsMatched"], _hb_raw))
+check("every published award title is one the rule actually accepts",
+      all(B.match_title(_hb_rx, a.get("title") or "") for a in hb["awards"]))
+check("licence notice carried", bool(hb.get("_notice", {}).get("owner")))
+_hb_kb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", HAEM + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % _hb_kb, _hb_kb < 200)
+
 
 # The exclude=None path must not leak to any other rule: every other speciality
 # still has to carry a real exclusion list it earned.

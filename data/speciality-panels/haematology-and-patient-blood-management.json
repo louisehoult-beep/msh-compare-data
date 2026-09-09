@@ -1,0 +1,838 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "haematology-and-patient-blood-management",
+ "label": "Haematology and Patient Blood Management",
+ "defined": true,
+ "generated": "2026-09-09",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-09T11:18:46+00:00",
+  "openTenders": "09/09/2026",
+  "drugTariff": "2026-09-09"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(blood collection devices|pressure infusers)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no NHS Supply Chain haematology framework. The page's Buying route section names seven agreements written for other categories that each carry a slice of this patch, and the Frameworks tab below claims two of them. Blood Collection Devices and Pressure Infusers and Associated Products are claimed because each is wholly this patch. Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services (122 suppliers) and Vascular Therapy and Associated Products (23 suppliers) are NOT claimed: this patch is one lot of seven on the first and three lots of ten on the second, neither publishes a supplier-by-lot split in this dataset, and claiming either whole would put genomics, digital pathology or compression hosiery firms under a haematology Suppliers heading. Perfusion Devices, Consumables and Associated Equipment is not claimed either: cardiopulmonary bypass and ECMO are the cardiology and cardiac surgery page's. TWO OF THE SEVEN ARE NOT IN THE HUB'S FRAMEWORK DATASET AT ALL, and one of them matters. Suction, Wound Drainage, Autologous Blood Systems and Related Consumables (302060/1487175) is the only national route to cell salvage, and Blood Draw Tools and Accessories (2024/S 000-009366) carries the tourniquets and blood lancets. Neither is among the 121 framework records the Hub holds, so their suppliers are not counted below. Their own award notices do appear in the awards list, because awards are matched on the title of the notice and not on framework membership. BLOOD COMPONENTS ARE NOT PROCURED AT ALL and no framework will ever show them. Red cells, platelets, fresh frozen plasma, cryoprecipitate, granulocytes and buffy coats are manufactured and issued by NHS Blood and Transplant and invoiced to hospitals against a national price list reissued annually. There is no tender, no competitive field and no expiry date, so the largest single line of spend on this patch is structurally invisible to every panel below. The page's Market intelligence section carries the price list instead. ONE COMPANY APPEARS TWICE IN THE SUPPLIER LIST BELOW AND IS NOT YET MERGED. NHS Supply Chain names \"GBUK Ltd\" on Blood Collection Devices and \"GB UK Ltd\" on Pressure Infusers, and they are the same Yorkshire company: no company called GB UK Ltd or GB UK Limited exists on the active Companies House register, searched 09/09/2026, and the Hub's own record for the second spelling already carries gbukgroup.com as its website. The Hub's supplier seed still holds them as two records, so the count below reads 26 where 25 companies stand. Merging them changes the Compare tab as well as this panel and is being done as its own change rather than folded into this one. Read them as one supplier. THE AWARDS LIST IS WIDER THAN THE TWO CLINICAL PATHWAYS THE PAGE WALKS THROUGH. It also counts the blood services' own contracts — donor eligibility, bone marrow and stem cell donor work, apheresis, component manufacture and storage — and the inherited bleeding and haemoglobin disorders: haemophilia and von Willebrand factor, sickle cell and thalassaemia. Those are this speciality by name and no other Hub page would hold them. Haemato-oncology is not counted here; the page's own Related specialities line routes it to Oncology and SACT. TWO AWARDS ARE MIXED CONTRACTS and are kept because their own titles say so, with the full title shown on the row. The Procurement and Logistics Service's Evacuated Blood Collection Systems and Urine Collection Systems buys phlebotomy and specimen tubes together, and its urine half belongs to the continence page. The BSO's Blood and Fluid Warming Systems buys blood warming and general fluid warming on one notice. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no NHS Supply Chain haematology framework. The page's Buying route section names seven agreements written for other categories that each carry a slice of this patch, and the Frameworks tab below claims two of them. Blood Collection Devices and Pressure Infusers and Associated Products are claimed because each is wholly this patch. Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services (122 suppliers) and Vascular Therapy and Associated Products (23 suppliers) are NOT claimed: this patch is one lot of seven on the first and three lots of ten on the second, neither publishes a supplier-by-lot split in this dataset, and claiming either whole would put genomics, digital pathology or compression hosiery firms under a haematology Suppliers heading. Perfusion Devices, Consumables and Associated Equipment is not claimed either: cardiopulmonary bypass and ECMO are the cardiology and cardiac surgery page's. TWO OF THE SEVEN ARE NOT IN THE HUB'S FRAMEWORK DATASET AT ALL, and one of them matters. Suction, Wound Drainage, Autologous Blood Systems and Related Consumables (302060/1487175) is the only national route to cell salvage, and Blood Draw Tools and Accessories (2024/S 000-009366) carries the tourniquets and blood lancets. Neither is among the 121 framework records the Hub holds, so their suppliers are not counted below. Their own award notices do appear in the awards list, because awards are matched on the title of the notice and not on framework membership. BLOOD COMPONENTS ARE NOT PROCURED AT ALL and no framework will ever show them. Red cells, platelets, fresh frozen plasma, cryoprecipitate, granulocytes and buffy coats are manufactured and issued by NHS Blood and Transplant and invoiced to hospitals against a national price list reissued annually. There is no tender, no competitive field and no expiry date, so the largest single line of spend on this patch is structurally invisible to every panel below. The page's Market intelligence section carries the price list instead. ONE COMPANY APPEARS TWICE IN THE SUPPLIER LIST BELOW AND IS NOT YET MERGED. NHS Supply Chain names \"GBUK Ltd\" on Blood Collection Devices and \"GB UK Ltd\" on Pressure Infusers, and they are the same Yorkshire company: no company called GB UK Ltd or GB UK Limited exists on the active Companies House register, searched 09/09/2026, and the Hub's own record for the second spelling already carries gbukgroup.com as its website. The Hub's supplier seed still holds them as two records, so the count below reads 26 where 25 companies stand. Merging them changes the Compare tab as well as this panel and is being done as its own change rather than folded into this one. Read them as one supplier. THE AWARDS LIST IS WIDER THAN THE TWO CLINICAL PATHWAYS THE PAGE WALKS THROUGH. It also counts the blood services' own contracts — donor eligibility, bone marrow and stem cell donor work, apheresis, component manufacture and storage — and the inherited bleeding and haemoglobin disorders: haemophilia and von Willebrand factor, sickle cell and thalassaemia. Those are this speciality by name and no other Hub page would hold them. Haemato-oncology is not counted here; the page's own Related specialities line routes it to Oncology and SACT. TWO AWARDS ARE MIXED CONTRACTS and are kept because their own titles say so, with the full title shown on the row. The Procurement and Logistics Service's Evacuated Blood Collection Systems and Urine Collection Systems buys phlebotomy and specimen tubes together, and its urine half belongs to the continence page. The BSO's Blood and Fluid Warming Systems buys blood warming and general fluid warming on one notice. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(transfus\\w*|h(?:ae|e)matolog\\w*|immunoh(?:ae|e)matolog\\w*|h(?:ae|e)moglobin\\w*|h(?:ae|e)moglobinopath\\w*|an(?:ae|e)mia|patient blood management|blood component\\w*|blood product\\w*|blood bank\\w*|blood group\\w*|blood pack\\w*|blood collection|blood culture collection|blood cell separator\\w*|blood lancet\\w*|blood warm\\w*|blood and plasma|blood don\\w*|blood disorder\\w*|blood service\\w*|blood fridge\\w*|blood tracking|cord blood|whole blood|red cell\\w*|platelet\\w*|cryoprecipitat\\w*|granulocyte\\w*|buffy coat\\w*|fresh frozen plasma|dried plasma|plasma component\\w*|plasma exchange|plasma fractionation|plasma storage|plasma[\\s/]*(?:blast[\\s/]*)?freezer|\\w*pheresis\\w*|bone marrow don\\w*|stem cell don\\w*|\\bRhD\\b|cell salvage|autologous blood|autotransfus\\w*|tranexamic|viscoelastic\\w*|thromboelast\\w*|\\bTEG\\b|\\bROTEM\\b|sonoclot|h(?:ae|e)mostasis|rapid infuser\\w*|pressure infuser\\w*|major h(?:ae|e)morrhage|anti[- ]?embolism|intermittent pneumatic compression|venous thromboembol\\w*|\\bVTE\\b|deep vein thromb\\w*|\\bDVT\\b|pulmonary embolism|thromboprophylax\\w*|thrombophilia|h(?:ae|e)mophil\\w*|von willebrand|sickle cell|thalass\\w*)\\b/i and does not match /\\b(intraocular|phaco\\w*)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 336961 or 336962 or 3843452 or 3843457 or 3314150 or 8511181 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 2,
+  "suppliers": 26,
+  "suppliersUnresolved": 0,
+  "awardsShown": 40,
+  "awardsMatched": 71,
+  "openTenders": 1
+ },
+ "frameworks": [
+  {
+   "name": "Blood Collection Devices",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/blood-collection-devices/",
+   "reference": "2024/S 000-033791",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "13 October 2025",
+   "ends": "12 October 2027",
+   "supplierCount": 19,
+   "supplierSource": "count verified against the page's own stated total (19)",
+   "suppliers": [
+    "Balmung Medical Handel GmbH",
+    "Becton, Dickinson U.K. Limited",
+    "Cambridge Sensors Ltd",
+    "Crest Medical Ltd",
+    "GBUK Ltd",
+    "Greiner Bio-One Ltd",
+    "Iskus Health UK Limited",
+    "ISOL8 Healthcare Ltd",
+    "Nipro Medical Europe",
+    "Owen Mumford Ltd",
+    "Prosum Medical Ltd",
+    "Radiometer Ltd",
+    "Reflex Medical Limited",
+    "Reliance Medical Ltd",
+    "RPG Medical Limited",
+    "Sarstedt Ltd",
+    "Siemens Healthcare Diagnostics Limited",
+    "Smiths Medical International Ltd",
+    "Vygon (UK) Ltd"
+   ],
+   "delisted": [
+    "IMS Euro Ltd",
+    "Sol Millenium Medical UK Ltd",
+    "Sterilab Services."
+   ]
+  },
+  {
+   "name": "Pressure Infusers and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-infusers-and-associated-products/",
+   "reference": "2025/S 000-047797",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 September 2026",
+   "ends": null,
+   "supplierCount": 8,
+   "supplierSource": "no stated count on the page; 8 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Fannin UK Ltd",
+    "GB UK Ltd",
+    "Merit Medical UK Ltd",
+    "Proact Medical Ltd",
+    "Reflex Medical Ltd",
+    "Salter Labs UK Ltd",
+    "Sharon Services UK Ltd",
+    "TerraMed Ltd"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Reflex Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Reflex Medical Limited",
+    "Reflex Medical Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices",
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Balmung Medical Handel GmbH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton, Dickinson U.K. Limited"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "Cambridge Sensors Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Ltd"
+   ],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "GB UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "Greiner Bio-One Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "ICU Medical (incl. Smiths Medical)",
+   "resolved": true,
+   "variants": [
+    "Smiths Medical International Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "Iskus Health UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "ISOL8 Healthcare Limited",
+   "resolved": true,
+   "variants": [
+    "ISOL8 Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "Merit Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Nipro Medical Europe",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "Owen Mumford",
+   "resolved": true,
+   "variants": [
+    "Owen Mumford Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "Proact Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Prosum Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "Radiometer UK",
+   "resolved": true,
+   "variants": [
+    "Radiometer Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "RPG Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "Salter Labs UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Sarstedt Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "Sharon Services (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Sharon Services UK Ltd"
+   ],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Siemens Healthineers",
+   "resolved": true,
+   "variants": [
+    "Siemens Healthcare Diagnostics Limited"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  },
+  {
+   "name": "TerraMed Limited",
+   "resolved": true,
+   "variants": [
+    "TerraMed Ltd"
+   ],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon (UK) Ltd"
+   ],
+   "frameworks": [
+    "Blood Collection Devices"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Maintenance of Blood Transfusion Systems",
+   "buyer": "Aneurin Bevan University Health Board",
+   "supplier": "Haemonetics Limited",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084264-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Blood Transfusion Systems",
+   "buyer": "Aneurin Bevan University Health Board",
+   "supplier": "Haemonetics Limited",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084261-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Red Cell Reagents",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": null,
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084514-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33696100",
+    "33696200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "WBS-FTS-63787 Replacement of Rapid Plasma/Blast Freezer Equipment",
+   "buyer": "Velindre University NHS Trust",
+   "supplier": null,
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083935-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "38000000",
+    "39711124"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Welsh Blood Service Bone Marrow Doner Service",
+   "buyer": "Welsh Blood Service (hosted by Velindre University NHS Trust)",
+   "supplier": "ALCURA UK LTD",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082485-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Blood Donor eligibility and risk assessment support",
+   "buyer": "Welsh Blood Service (Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082255-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "75100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Framework Agreement for Supply and Maintenance of Blood Component Transport Containers - Lot 2 – Repair and Maintenance of Existing Blood Component Transport Containers",
+   "buyer": "NHS Blood and Transplant",
+   "supplier": "va-Q-tec Thermal Solutions GmbH",
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082022-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Supply & Maintenance of Platelet Agitator and Incubator equipment",
+   "buyer": "NHS Blood and Transplant",
+   "supplier": null,
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081832-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Sickle Cell and Thalassemia lab clinical support 2027",
+   "buyer": "NHS England",
+   "supplier": "Oxford University Hospitals NHS FT",
+   "date": "2026-08-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081313-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71900000",
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Haematology Analyser for the Welsh Blood Service ",
+   "buyer": "Velindre University NHS Trust",
+   "supplier": null,
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080964-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "38434570"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Rapid Infuser Blood/IV Infusion Pump",
+   "buyer": "UNIVERSITY HOSPITALS OF DERBY AND BURTON NHS FOUNDATION TRUST",
+   "supplier": "BELMONT MEDICAL TECHNOLOGIES LTD",
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078960-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33194110"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Automated Immunohaematology System",
+   "buyer": "Regional Business Services Organisation, Procurement and Logistics Service",
+   "supplier": null,
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077321-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33127000",
+    "33141500",
+    "33696100",
+    "33696200",
+    "33696500",
+    "38434000",
+    "38434520"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Service Maintenance of Cell Salvage Equipment with an additional console Plus for 9 months",
+   "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
+   "supplier": "LIVANOVA UK LIMITED",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077180-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Platelet Incubator for CGH",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-08-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/42da351d-2767-452b-8595-cce50b8eb88c",
+   "value": 6240,
+   "periodEnd": "2027-06-24",
+   "source": "tender-history"
+  },
+  {
+   "title": "2526-087-STA-WBS Medical Evaluation of Prospective Stem Cell Donors",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": "Bone Marrow Donor Registry",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075595-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111810"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Maintenance of Apheresis Machines",
+   "buyer": "NOTTINGHAM UNIVERSITY HOSPITALS NHS TRUST",
+   "supplier": "TERUMO BCT LTD.",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075579-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50420000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NHSSC Led Mini Competition for Safety Finger Lancets Via Lot 2 Blood Lancets of the Blood Draw Tools and Accessories Fra",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Balmung Medical Handel GmbH",
+   "date": "2026-07-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/072009-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "WSFT - Pathology - Hemostasis Management TEG 65 Analyser",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": "Haemonetics Limited",
+   "date": "2026-07-09",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/0c6455be-a858-4235-9e7c-c54c188eaa3a",
+   "value": 30000,
+   "periodEnd": "2027-03-17",
+   "source": "tender-history"
+  },
+  {
+   "title": "WSFT - Pathology - Hemostasis Management TEG 65 Analyser",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": "Haemonetics Limited",
+   "date": "2026-07-09",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/82bf10d5-8e30-43de-84c3-99a1a7388f73",
+   "value": 30000,
+   "periodEnd": "2027-03-17",
+   "source": "tender-history"
+  },
+  {
+   "title": "Blood Collection NPM Agreement",
+   "buyer": "Gloucestershire Health and Care NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-06-04",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/13224ac0-14d8-4b33-aa56-a51801b35996",
+   "value": 1431,
+   "periodEnd": "2029-10-12",
+   "source": "tender-history"
+  },
+  {
+   "title": "Blood Collection NPM Agreement",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-06-04",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/6f2dd5ee-b950-424d-9b48-776285b2d27f",
+   "value": 48189,
+   "periodEnd": "2027-10-12",
+   "source": "tender-history"
+  },
+  {
+   "title": "Blood Collection NPM Agreement",
+   "buyer": "Gloucestershire Hospitals Subsidiary Company Limited",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-06-04",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/b9c8ec5d-9601-4e73-bae1-b8deb58722f8",
+   "value": 124656,
+   "periodEnd": "2029-10-12",
+   "source": "tender-history"
+  },
+  {
+   "title": "KBX: maintenance - blood transfusion refrigeration",
+   "buyer": "University Hospitals Sussex NHS Foundation Trust",
+   "supplier": "Labcold Limited",
+   "date": "2026-06-04",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/cf2e3658-6b56-4063-a6b0-bdb467232575",
+   "value": 67575,
+   "periodEnd": "2029-01-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "FTS - Blood Collection Devices",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Balmung Medical Handel GmbH, Becton, Dickinson U.K. Limited, Cambridge Sensors L",
+   "date": "2025-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/051658-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Suction Consumables, Wound Drainage, Autologous Blood Systems and Related Accessories",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Cardinal Health U.K. 432 Limited, Flexicare Medical Ltd, GBUK Ltd, Intersurgical",
+   "date": "2025-06-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/030577-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Plasmapheresis Collection Systems",
+   "buyer": "Scottish National Blood Transfusion Service",
+   "supplier": "Fresenius Kabi",
+   "date": "2025-06-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/029198-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Blood Collection Safety Sets",
+   "buyer": "Royal Berkshire NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2025-04-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/014120-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Donation and Patient Testing - Automated Red Cell Immunohaematology",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "MEDICAL SUPPLY CO. LTD",
+   "date": "2025-02-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005671-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "VEAT Notice for the Provision of Belmont Medical Rapid Infuser Consumables",
+   "buyer": "Manchester University NHS Foundation Trust",
+   "supplier": "Belmont Medical Technologies Ltd",
+   "date": "2024-12-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/041337-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Support of existing NHSBT owned Extracorporeal Photopheresis (ECP) Systems",
+   "buyer": "NHS Blood and Transplant",
+   "supplier": "Therakos (UK), Ltd",
+   "date": "2024-12-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/040875-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Support of existing NHSBT owned Multi-functional Apheresis Systems",
+   "buyer": "NHS Blood and Transplant",
+   "supplier": "Terumo BCT Europe NV",
+   "date": "2024-12-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/040553-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "The Supply and Support of TEG-6 Viscoelastic Monitors - VTN",
+   "buyer": "Leidos Supply",
+   "supplier": "Haemonetics Ltd",
+   "date": "2024-10-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/035362-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Human Derived Blood Products",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "GRIFOLS UK LIMITED, Bio Products Laboratory Ltd, CSL BEHRING UK LIMITED, LFB BIO",
+   "date": "2024-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027425-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Evacuated Blood Collection Systems and Urine Collection Systems",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "AQUILANT NORTHERN IRELAND LTD",
+   "date": "2024-08-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/026074-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Blood and Fluid Warming Systems Rapid Infuser and Accessories (4833440)",
+   "buyer": "BSO Procurement and Logistics Service",
+   "supplier": "3M United Kingdom PLC, NORTHERN HOSPITAL SUPPLIES LTD",
+   "date": "2024-06-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/018210-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NHS Framework - Blood Disorders including Haemophilia A and B - July 2024",
+   "buyer": "NHS England",
+   "supplier": "Pfizer Ltd",
+   "date": "2024-06-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/018011-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Additive Solutions for the Suspension of Blood Products Framework Agreement",
+   "buyer": "NHS Blood and Transplant",
+   "supplier": "Terumo BCT Europe NV",
+   "date": "2023-12-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/037491-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Spectra Optia Apheresis System x2",
+   "buyer": "The Newcastle Upon Tyne Hospitals NHS Foundation Trust",
+   "supplier": "Terumo UK Ltd",
+   "date": "2023-12-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/035691-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "WBS-OJEU-54032 Welsh Blood Service Cell Free DNA RhD Typing",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Devyser UK",
+   "date": "2023-11-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/033930-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "LSL/MED/0151 - The Supply and Support of Blood and Plasma Storage Units",
+   "buyer": "Leidos Supply Ltd",
+   "supplier": "DBS Ltd",
+   "date": "2023-08-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/025430-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [
+  {
+   "title": "Red Cell Reagents",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "status": "planning",
+   "stage": "preliminary market engagement / planning",
+   "closingDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/084514-2026",
+   "value": null,
+   "source": "Find a Tender"
+  }
+ ],
+ "drugTariff": null
+}
