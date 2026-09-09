@@ -1,0 +1,1174 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "cardiology-and-cardiac-surgery",
+ "label": "Cardiology and Cardiac Surgery",
+ "defined": true,
+ "generated": "2026-09-09",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-08T11:13:54+00:00",
+  "openTenders": "08/09/2026",
+  "drugTariff": "2026-09-08"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(angiography|cardiac and pulmonary diagnostics|perfusion devices|structural heart)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. The single agreement this speciality is mostly bought on is not counted below. NHS Supply Chain's Interventional Cardiology, Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm Management and Electrophysiology framework (2021/S 000-017565), which carries the coronary, rhythm management, electrophysiology and intracardiac monitoring lots and 67 suppliers, publishes a supplier count on its brief but no list of names, so the Hub's framework dataset records it as unparsed and its suppliers cannot be named here. That agreement ends on 26 February 2027 and its successor, Find a Tender 2026/S 000-043775 Total Cardiology and Vascular Solutions, has an estimated award decision of 8 December 2026, so the framework picture on this patch is due to change wholesale within the year. Resuscitation is also deliberately absent: the External Defibrillation Devices framework and the Electrodes, Ultrasound Gels and Defibrillation consumables framework are not counted here, because their supplier lists are public access defibrillator distributors and general ward consumables rather than this speciality's market. What follows is therefore the structural heart, perfusion, cardiac physiology and catheter laboratory capital end of the patch, which is what the framework record holds, plus the award trail for the rest. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from this market. The page's Buying route and Framework calendar sections set out the full picture with their expiry dates.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. The single agreement this speciality is mostly bought on is not counted below. NHS Supply Chain's Interventional Cardiology, Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm Management and Electrophysiology framework (2021/S 000-017565), which carries the coronary, rhythm management, electrophysiology and intracardiac monitoring lots and 67 suppliers, publishes a supplier count on its brief but no list of names, so the Hub's framework dataset records it as unparsed and its suppliers cannot be named here. That agreement ends on 26 February 2027 and its successor, Find a Tender 2026/S 000-043775 Total Cardiology and Vascular Solutions, has an estimated award decision of 8 December 2026, so the framework picture on this patch is due to change wholesale within the year. Resuscitation is also deliberately absent: the External Defibrillation Devices framework and the Electrodes, Ultrasound Gels and Defibrillation consumables framework are not counted here, because their supplier lists are public access defibrillator distributors and general ward consumables rather than this speciality's market. What follows is therefore the structural heart, perfusion, cardiac physiology and catheter laboratory capital end of the patch, which is what the framework record holds, plus the award trail for the rest. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from this market. The page's Buying route and Framework calendar sections set out the full picture with their expiry dates.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(cardi[ao]\\w*|echocardi\\w*|myocardial|coronary|angina|\\becg\\b|electrocardiogra\\w*|holter|cath ?labs?\\b|catheteri[sz]ation lab\\w*|pacemakers?|pacing (?:lead|wire|system|pack)s?|implantable cardioverter|electrophysiolog\\w*|pulsed[- ]field ablation|catheter ablation|structural heart|transcatheter|\\btavi\\b|\\btavr\\b|heart valves?|mitral|tricuspid|aortic root|ventricular assist|impella|heart pumps?|mechanical circulatory|\\becmo\\b|atrial appendage|atrial fibrillation|perfusion|oxygenators?)\\b/i and does not match /\\b(medicines|ophthalm\\w*|lifeport|static perfusion|perfusion fluid|anaesthe\\w*|principal designer|training programme)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33112340 or 33121500 or 33123 or 85121231 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 4,
+  "suppliers": 54,
+  "suppliersUnresolved": 3,
+  "awardsShown": 40,
+  "awardsMatched": 58,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/angiography-hybrid-theatres-capital-equipment/",
+   "reference": "2025/S 000-077456",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "9 December 2025",
+   "ends": "8 December 2027",
+   "supplierCount": 14,
+   "supplierSource": "count verified against the page's own stated total (14)",
+   "suppliers": [
+    "Agito Medical A/S",
+    "AmRay UK",
+    "APC Cardiovascular Ltd",
+    "Canon Medical Systems",
+    "Compleo Health Limited",
+    "GE Medical Systems Ltd",
+    "Genmed.Me Ltd",
+    "InHealth Ltd",
+    "Medtronic Limited",
+    "Philips Electronics UK Limited",
+    "Regent’s Park Healthcare",
+    "Siemens Healthcare Limited",
+    "United Imaging Health Ltd",
+    "WSR Medical Solutions Ltd"
+   ],
+   "delisted": [
+    "Althea UK & Ireland Ltd",
+    "Medecon Healthcare UK Ltd"
+   ]
+  },
+  {
+   "name": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cardiac-and-pulmonary-diagnostics-and-exercise-stress-testing-solutions/",
+   "reference": "2026/S 000-012699",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "27 July 2026",
+   "ends": null,
+   "supplierCount": 25,
+   "supplierSource": "count verified against the page's own stated total (25)",
+   "suppliers": [
+    "Broomwell Healthwatch",
+    "Cambridge Heartwear",
+    "Cardiac Services",
+    "CardioScan Ltd",
+    "Cortrium ApS",
+    "Express Diagnostics Ltd",
+    "Fukuda Denshi UK Ltd",
+    "GE Medical Systems Ltd",
+    "Icentia Limited",
+    "Intermedical (UK) Ltd",
+    "iRhythm Technologies Ltd",
+    "Jaeger Medical UK Limited",
+    "LifeSignals Europe Limited",
+    "Love Medical",
+    "Medical Graphics UK Ltd",
+    "Mindray UK Limited",
+    "Numed Holdings Ltd (T/A Numed Healthcare)",
+    "Philips Electronics UK Limited",
+    "Schiller UK Ltd",
+    "SECA UK Ltd",
+    "Spacelabs Healthcare Ltd",
+    "Technomed Ltd",
+    "Walters Medical Ltd",
+    "Welch Allyn Ltd",
+    "Wiliams Medical Supplies Limited"
+   ],
+   "delisted": [
+    "Aktiia SA",
+    "Alivecor",
+    "Ascend Care",
+    "Bealo Co Ltd",
+    "BHA Medical",
+    "Braun & Company",
+    "Cardioline S.P.A",
+    "Cardiologic Ltd",
+    "Dot Medical",
+    "Edan Medical Uk",
+    "Henry Schein UK",
+    "Microlife Health Management",
+    "Microport CRM UK",
+    "Nihon Koden",
+    "Novacor",
+    "PMS Instruments",
+    "Preventice Solutions",
+    "Regents Park Healthcare",
+    "Vitalograph",
+    "Zenicor Medical."
+   ]
+  },
+  {
+   "name": "Perfusion Devices, Consumables and Associated Equipment",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/perfusion/",
+   "reference": "2024/S 000-033613",
+   "category": "Medical Technology",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "10 November 2025",
+   "ends": "9 November 2027",
+   "supplierCount": 9,
+   "supplierSource": "count verified against the page's own stated total (9)",
+   "suppliers": [
+    "Chalice Medical Ltd",
+    "Getinge Limited",
+    "LivaNova UK Limited",
+    "Medtronic Limited",
+    "Spectrum Medical Limited",
+    "Terumo UK Ltd",
+    "TFX Group Ltd T/A Teleflex Medical",
+    "Uniphar Medtech Ltd",
+    "XVIVO"
+   ],
+   "delisted": [
+    "Eurosets,"
+   ]
+  },
+  {
+   "name": "Structural Heart and Ventricular Assist Devices",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/structural-heart-and-ventricular-assist-devices/",
+   "reference": "2024/S 000-020906",
+   "category": "Medical Technology",
+   "supplyRoute": "eDirect",
+   "starts": "20 June 2025",
+   "ends": "19 June 2027",
+   "supplierCount": 10,
+   "supplierSource": "count verified against the page's own stated total (10)",
+   "suppliers": [
+    "Abbott Medical U.K. Ltd",
+    "Abiomed Ltd",
+    "Aquilant Limited",
+    "Artivion UK Ltd (CryoLife Europa, Ltd)",
+    "Becton, Dickinson U.K. Limited",
+    "Corcym UK (Holding) Ltd",
+    "Edwards Lifesciences Ltd",
+    "Medtronic Limited",
+    "Meril UK Pvt Ltd",
+    "R&D Surgical Ltd"
+   ],
+   "delisted": [
+    "Berlin Heart GmBH",
+    "BVM Medical Limited",
+    "Eurosets SRL",
+    "Lemaitre Vascular Limited",
+    "Livanova UK Limited."
+   ]
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited"
+   ],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+    "Perfusion Devices, Consumables and Associated Equipment",
+    "Structural Heart and Ventricular Assist Devices"
+   ]
+  },
+  {
+   "name": "GE HealthCare",
+   "resolved": true,
+   "variants": [
+    "GE Medical Systems Ltd"
+   ],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Philips",
+   "resolved": true,
+   "variants": [
+    "Philips Electronics UK Limited"
+   ],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Abbott Medical U.K. Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Structural Heart and Ventricular Assist Devices"
+   ]
+  },
+  {
+   "name": "Abiomed Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Structural Heart and Ventricular Assist Devices"
+   ]
+  },
+  {
+   "name": "Agito Medical A/S",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "AmRay UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "APC Cardiovascular Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Structural Heart and Ventricular Assist Devices"
+   ]
+  },
+  {
+   "name": "Artivion UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Artivion UK Ltd (CryoLife Europa, Ltd)"
+   ],
+   "frameworks": [
+    "Structural Heart and Ventricular Assist Devices"
+   ]
+  },
+  {
+   "name": "Baxter / Hillrom",
+   "resolved": true,
+   "variants": [
+    "Welch Allyn Ltd"
+   ],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton, Dickinson U.K. Limited"
+   ],
+   "frameworks": [
+    "Structural Heart and Ventricular Assist Devices"
+   ]
+  },
+  {
+   "name": "Broomwell Healthwatch",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Cambridge Heartwear",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Canon Medical Systems",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "CardioScan Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Chalice Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Perfusion Devices, Consumables and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Compleo Health Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Corcym UK (Holding) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Structural Heart and Ventricular Assist Devices"
+   ]
+  },
+  {
+   "name": "Cortrium ApS",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Edwards Lifesciences",
+   "resolved": true,
+   "variants": [
+    "Edwards Lifesciences Ltd"
+   ],
+   "frameworks": [
+    "Structural Heart and Ventricular Assist Devices"
+   ]
+  },
+  {
+   "name": "Express Diagnostics Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Fukuda Denshi UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Genmed.Me Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Getinge",
+   "resolved": true,
+   "variants": [
+    "Getinge Limited"
+   ],
+   "frameworks": [
+    "Perfusion Devices, Consumables and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Icentia Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "InHealth Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Intermedical (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "iRhythm Technologies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Jaeger Medical UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "LifeSignals Europe Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "LivaNova UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Perfusion Devices, Consumables and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Love Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Medical Graphics UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Meril UK Pvt Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Structural Heart and Ventricular Assist Devices"
+   ]
+  },
+  {
+   "name": "Mindray UK",
+   "resolved": true,
+   "variants": [
+    "Mindray UK Limited"
+   ],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Numed Healthcare",
+   "resolved": true,
+   "variants": [
+    "Numed Holdings Ltd (T/A Numed Healthcare)"
+   ],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "R&D Surgical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Structural Heart and Ventricular Assist Devices"
+   ]
+  },
+  {
+   "name": "Regent’s Park Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Schiller UK Limited",
+   "resolved": true,
+   "variants": [
+    "Schiller UK Ltd"
+   ],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Seca Ltd",
+   "resolved": true,
+   "variants": [
+    "SECA UK Ltd"
+   ],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Siemens Healthineers",
+   "resolved": true,
+   "variants": [
+    "Siemens Healthcare Limited"
+   ],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Spacelabs Healthcare Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Spectrum Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Perfusion Devices, Consumables and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Technomed Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Terumo UK",
+   "resolved": true,
+   "variants": [
+    "Terumo UK Ltd"
+   ],
+   "frameworks": [
+    "Perfusion Devices, Consumables and Associated Equipment"
+   ]
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "TFX Group Ltd T/A Teleflex Medical"
+   ],
+   "frameworks": [
+    "Perfusion Devices, Consumables and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Uniphar Medtech",
+   "resolved": true,
+   "variants": [
+    "Uniphar Medtech Ltd"
+   ],
+   "frameworks": [
+    "Perfusion Devices, Consumables and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "resolved": true,
+   "variants": [
+    "Cardiac Services"
+   ],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "United Imaging Health Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Walters Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "Williams Medical Supplies",
+   "resolved": true,
+   "variants": [
+    "Wiliams Medical Supplies Limited"
+   ],
+   "frameworks": [
+    "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"
+   ]
+  },
+  {
+   "name": "WSR Medical Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "XVIVO",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Perfusion Devices, Consumables and Associated Equipment"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Maintenance of Cath Lab Trollies",
+   "buyer": "COUNTESS OF CHESTER HOSPITAL NHS FOUNDATION TRUST",
+   "supplier": "STRYKER UK LIMITED",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084258-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50400000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BCU-FCONC-64071 - Echocardiography Service - Insourcing",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": "ELECTIVE SERVICES LTD",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084582-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Managed Service for Catheterisation Lab, Cardio Thoracic Centre and Vascular",
+   "buyer": "Mid and South Essex NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084031-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "31211110",
+    "33100000",
+    "33110000",
+    "33111000",
+    "33112000",
+    "33140000",
+    "33192000",
+    "33192160",
+    "33195000",
+    "50400000",
+    "50421000",
+    "51400000",
+    "63121100",
+    "79991000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of  a Cardiology Insourced Service (Echocardiograms) for Aneurin Bevan UHB",
+   "buyer": "Aneurin Bevan University Health Board",
+   "supplier": "Health Now Limited",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083399-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "PSR - Cardiac Rehab - NLaG",
+   "buyer": "Northern Lincolnshire and Goole NHS Foundation Trust",
+   "supplier": "North Lincolnshire Council",
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081637-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111400"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Echocardiogram Services",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080491-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121231"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "C&C Heart Valves Human Tissue",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": null,
+   "date": "2026-08-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080232-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Specialist Cardio, Respiratory and Physiology Systems and Medical Training Equipment",
+   "buyer": "Regional Business Services Organisation Procurement and Logistics Service",
+   "supplier": "Sword Medical Ltd, Uniphar Medtech UK Ltd T/A Cardiac Services",
+   "date": "2026-08-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079976-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33112330",
+    "33112340",
+    "33121000",
+    "33123000",
+    "33123230",
+    "33170000",
+    "33172000",
+    "33172200",
+    "39162200",
+    "50000000",
+    "50420000",
+    "50800000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Provision of Echocardiogram service at Wisbech & Ely CDC",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "supplier": "Elective Services Ltd",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079325-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85150000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "West Norfolk Health - ECG Monitoring",
+   "buyer": "The Queen Elizabeth Hospital King's Lynn NHS Foundation Trust",
+   "supplier": "West Norfolk Health Limited",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079296-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+   "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+   "supplier": "Cambridge Heartwear Limited, Cardiac Services, Cortrium ApS, Fukuda Denshi UK Ltd, GE HealthCare, Intermedical (UK) Ltd, Love Medical Limited, Mindray (UK) Limited, Numed Healthcare, Philips Electronics UK Limited, Schiller UK Ltd, Seca Limited, Spacelabs Healthcare Limited, Walters Medical Limited, Welch Allyn (U.K.) Limited, Williams Medical Supplies Limited, Broomwell Healthwatch Limited, Cardioscan Ltd, Express Diagnostics Limited, Icentia Limited, iRhythm Technologies Ltd, LifeSignals Europe Ltd, Technomed Limited, Jaeger Medical UK Limited, Medical Graphics UK Ltd",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079245-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "33121000",
+    "33121500",
+    "33123200",
+    "33124100",
+    "33190000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "LivaNova Essenz Perfusion Heart Lung System",
+   "buyer": "Hull University Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Livanova UK Limited",
+   "date": "2026-08-18",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/56174e8c-822d-43a0-91a2-94d426a967b7",
+   "value": 225061,
+   "periodEnd": "2026-08-18",
+   "source": "tender-history"
+  },
+  {
+   "title": "Maintenance Perfusion Heart and Lung Machine",
+   "buyer": "NOTTINGHAM UNIVERSITY HOSPITALS NHS TRUST",
+   "supplier": "LIVANOVA UK LIMITED",
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078427-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50420000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Cardiology GPwSI Service",
+   "buyer": "NHS Lancashire and South Cumbria Integrated Care Board",
+   "supplier": "Cardiohealth Medical Services Ltd",
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078221-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Tier 2 Cardiology and Direct Access Diagnostics",
+   "buyer": "NHS Lancashire and South Cumbria Integrated Care Board",
+   "supplier": "FCMS (NW)",
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078211-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "ECG Interpretation",
+   "buyer": "CHESHIRE AND WIRRAL PARTNERSHIP NHS FOUNDATION TRUST",
+   "supplier": "Stockport NHS Foundation Trust",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077375-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Medcon Horizon Cardiology System",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "Change Healthcare UK Holdings Ltd",
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076569-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "72250000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Ultima CardiO2/PFX and Ergoselect 200",
+   "buyer": "NHS Gloucestershire Shared Services",
+   "supplier": "Medical Graphics UK LTD",
+   "date": "2026-08-06",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/aafe241e-84c5-49f7-a3ff-e252cccd9402",
+   "value": 50249,
+   "periodEnd": "2027-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Eclipse ECG Monitor",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Spacelabs Healthcare Limited",
+   "date": "2026-07-16",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/4f62e533-342a-4c11-bcba-5b9744b936f5",
+   "value": 13713,
+   "periodEnd": "2027-06-23",
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Cardiac Rhythm Management (CRM)",
+   "buyer": "Nottingham University Hospitals NHS Trust",
+   "supplier": "Medtronic Limited",
+   "date": "2026-06-25",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/88dc04ec-e34f-4cf4-8252-c017b43d59ea",
+   "value": 14860368,
+   "periodEnd": "2030-01-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of ECG machines for Somerset community sites",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "WELCH ALLYN (U.K.) LIMITED",
+   "date": "2026-06-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/059517-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Cath Labs and Cardiology Stents",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Abbott Medical U.K. Ltd, APR Medtech Ltd, Biosensors International UK Limited, B",
+   "date": "2026-06-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/055594-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NHSGJ0090/22 Supply of Heart Valves and Associated Products",
+   "buyer": "NHS Golden Jubilee",
+   "supplier": "LeMaitre Vascular Limited, Corcym UK (Holding) Ltd, Edwards Lifesciences Ltd, Me",
+   "date": "2026-06-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/053435-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Cardiology Pendant Accessories (CICU)",
+   "buyer": "University Hospitals Sussex NHS Foundation Trust",
+   "supplier": "Brandon Medical Co Ltd",
+   "date": "2026-05-20",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/d2b81892-b861-4b68-a40a-12d0405f46fe",
+   "value": 50160,
+   "periodEnd": "2027-06-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of ECMO Trolley",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Spectrum Medical Limited",
+   "date": "2026-05-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/e62b4f7d-b62d-40d5-82cb-8027d910c015",
+   "value": 119599,
+   "periodEnd": "2031-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Cath Labs and Cardiology Stents",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "",
+   "date": "2026-01-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000979-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Cath Labs and Cardiology Stents",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "",
+   "date": "2026-01-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001143-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of ECG equipment",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "Welch Allyn",
+   "date": "2025-11-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077647-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ECG Monitoring Service",
+   "buyer": "BUCKINGHAMSHIRE HEALTHCARE NHS TRUST",
+   "supplier": "Icentia Limited",
+   "date": "2025-10-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/064931-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Interventional Implantable Cardiac Devices and Accessories 5643930",
+   "buyer": "Regional Business Services Organisation Procurement and Logistics Service",
+   "supplier": "DOT MEDICAL LIMITED, MEDTRONIC LIMITED, M3 MEDICAL, Abbott Medical U.K. Ltd, Bos",
+   "date": "2025-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/060425-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Perfusion Devices, Consumables and Associated Equipment",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "CHALICE MEDICAL LIMITED, EDWARDS LIFESCIENCES LIMITED, GETINGE LIMITED, LIVANOVA",
+   "date": "2025-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/051933-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ExoVasc Custom Made External Aortic Root Support",
+   "buyer": "The Newcastle Upon Tyne Hospitals NHS Foundation Trust",
+   "supplier": "Exstent Limited",
+   "date": "2025-05-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027954-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Heart Valves and Cardiac Consumables - 5614910",
+   "buyer": "Regional Business Services Organisation Procurement and Logistics Service",
+   "supplier": "Biosensors International UK Ltd, DOT MEDICAL LIMITED, CARDIOLOGIC LIMITED, ARTIV",
+   "date": "2025-04-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/017184-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Structural Heart & VAD’s 2025",
+   "buyer": "NHS Supply Chain",
+   "supplier": "Abbott Medical U.K. Ltd, AQUILANT LIMITED, BECTON, DICKINSON U.K. LIMITED, CORCY",
+   "date": "2025-02-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005111-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Impella Heart Pumps",
+   "buyer": "The Newcastle Upon Tyne Hospitals NHS Foundation Trust",
+   "supplier": "Abiomed, LTD.",
+   "date": "2025-01-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001718-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Pacemakers, ICD's & CRT's",
+   "buyer": "NHS National Services Scotland",
+   "supplier": "Biotronik UK LTD., Boston Scientific Ltd, Dot Medical Ltd, Medtronic Limited, St",
+   "date": "2024-12-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/040830-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Blood Cardioplegia Sets",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "LIVANOVA UK LIMITED, MEDTRONIC LIMITED",
+   "date": "2024-07-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/022663-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Radiology, Cardiology and Pacing Packs",
+   "buyer": "NHS Grampian",
+   "supplier": "Kimal plc",
+   "date": "2024-05-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016560-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Exstent Personalised External Aortic Root Support",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Exstent Limited",
+   "date": "2023-08-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/025494-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Procurement of ONX Mechanical Aoritic/Mitral Valve, ON-X Ascending Aortic Prosthesis with Valsalva Graft",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "CryoLife Europa Ltd",
+   "date": "2023-06-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016277-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}

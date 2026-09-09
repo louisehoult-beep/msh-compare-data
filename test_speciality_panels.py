@@ -25,6 +25,7 @@ ORTHO = "orthopaedics-and-trauma"
 PLASTICS = "plastics-burns-and-reconstruction"
 FRAILTY = "frailty-and-older-people"
 IR = "interventional-radiology"
+CARDIAC = "cardiology-and-cardiac-surgery"
 fails = []
 
 
@@ -1216,6 +1217,166 @@ check("licence notice carried", bool(ir.get("_notice", {}).get("owner")))
 irkb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", IR + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % irkb, irkb < 200)
 
+print("\n" + "=" * 72)
+print("CARDIOLOGY AND CARDIAC SURGERY (page 2801)")
+print("=" * 72)
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), CARDIAC],
+               check=True, capture_output=True)
+ca = load_panel(CARDIAC)
+cax = B.compile_rule(B.SPECIALITY_RULES[CARDIAC])
+
+print("\nFALSE POSITIVES — every one matched `include` and was read and rejected")
+catitles = " || ".join((a.get("title") or "") for a in ca["awards"]).lower()
+# Each of these is a real row in tender-history.json or framework-awards.json.
+for bad, why in [
+    ("lifeport", "Organ Recovery Systems kidney transport perfusion, not bypass"),
+    ("cold static perfusion", "NHS Blood and Transplant organ preservation solution"),
+    ("respiratory medicines", "a Scottish national pharmacy contract, not devices"),
+    ("ophthalmology visual electrophysiology", "visual evoked potentials, not cardiac EP"),
+    ("principal designer", "an architect's CDM appointment, CPV 71315200"),
+    ("scientists training programme", "NHS England workforce commissioning, CPV 80000000"),
+    ("anaesthetics machines", "a four-item basket bought by anaesthesia and critical care"),
+]:
+    check("excluded: %s (%s)" % (bad, why), bad not in catitles)
+# These never reach `include` at all, because the loose term that would admit them
+# was refused. Each is a real row that a wider pattern would have published here.
+for bad in ["healthy hearts", "htg valves", "external ventricular drainage",
+            "memokath", "endometrial ablation", "uterine ablation",
+            "diffractometer", "tavistock", "zetaview", "extavia",
+            "defibrillators and aeds", "chest compression"]:
+    check("never admitted: %s" % bad, bad not in catitles)
+# CARDIFF is the reason bare "cardi" is refused.
+check("bare 'cardi' refused so CARDIFF cannot match",
+      not cax["inc"].search("CPD Courses 26/27 Cardiff University")
+      and not cax["inc"].search("PUBLIC HEALTH WALES BTW CARDIFF - BUILDING WORKS"))
+check("TAVI needs a boundary on both sides",
+      not cax["inc"].search("TAVISTOCK EDUCATION AND TRAINING")
+      and not cax["inc"].search("Interferon Beta-1b (Extavia)")
+      and bool(cax["inc"].search("TAVI valve delivery system")))
+check("VAD is not matched, because VAD is also a vascular access device",
+      not cax["inc"].search("Vascular Access Device (VAD) Consumables")
+      and bool(cax["inc"].search("Ventricular Assist Device")))
+check("FFR is not matched, because it matches DIFFRACTOMETER",
+      not cax["inc"].search("Supply of an X-ray Diffractometer"))
+
+print("\nTRUE POSITIVES — awards that must be on this patch")
+for want in ["cardiac rhythm management", "structural heart", "impella",
+             "heart valves", "pacemakers", "cardioplegia", "cath lab",
+             "perfusion heart lung", "echocardiogram", "ecg",
+             "aortic root", "cardiology stents"]:
+    check("present: %s" % want, want in catitles)
+# Checked against the rule, not against the panel, because AWARD_CAP shows the 40
+# most recent of the 58 matched and these sit below that line today. The invariant
+# is that the rule admits them, which is what would break if a pattern were lost.
+for want in ["TRANSCATHETER HEART VALVE REPAIR, REPLACEMENT AND ASSOCIATED DEVICES",
+             "Procurement of ONX Mechanical Aoritic/Mitral Valve, ON-X Ascending "
+             "Aortic Prosthesis with Valsalva Graft",
+             "Atriclip Gillinov-Cosgrove:  Left Atrial Appendage Exclusion System Device",
+             "Percutaneous Catheter Delivered Heart Pumps",
+             "Cardiopulmonary Bypass Oxygenators with Customised Tubing Pack [2339172]",
+             "Cardiac Surgery Consumables [4152960]",
+             "Purchase of ECMO Trolley",
+             "Consumables for Continuous Cardiac Ouput (CCO) Monitoring"]:
+    check("rule admits: %s" % want[:44], B.match_title(cax, want))
+check("at least 40 awards matched", ca["counts"]["awardsMatched"] >= 40)
+check("every award shown really matches the published rule",
+      all(B.match_title(cax, a["title"]) for a in ca["awards"]))
+
+print("\nFRAMEWORKS ARE THE SPECIALITY'S OWN, AND RESUSCITATION IS NOT ONE")
+canames = {f["name"] for f in ca["frameworks"]}
+for want in ["Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+             "Structural Heart and Ventricular Assist Devices",
+             "Perfusion Devices, Consumables and Associated Equipment",
+             "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"]:
+    check("framework claimed: %s" % want[:46], want in canames)
+# Both were read and both are resuscitation or general ward consumables. Claiming
+# them would put public-access AED distributors and an office-supplies wholesaler
+# on this page as cardiology suppliers.
+for other in ["External Defibrillation Devices and Related Services and Accessories",
+              "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+              "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, "
+              "Related Products and Services",
+              "Central Venous Catheters and Associated Products"]:
+    check("resuscitation/general ward not claimed: %s" % other[:44], other not in canames)
+# Cardiac and Pulmonary Diagnostics went live on 27 July 2026 and NHS Supply Chain
+# publishes no end date for it on the brief. That is the record, not a gap in the
+# parse, so the test states the exception by name rather than asserting something
+# untrue. If any OTHER framework loses its end date, this fails.
+check("every framework carries a reference and a start date",
+      all(f.get("reference") and f.get("starts") for f in ca["frameworks"]))
+check("only the one framework with no published end date lacks one",
+      {f["name"] for f in ca["frameworks"] if not f.get("ends")}
+      == {"Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions"})
+# The angiography suite is shared with interventional radiology and vascular
+# surgery on purpose. If that sharing ever silently stops, this fails.
+check("the angio suite is shared with interventional radiology, not duplicated away",
+      "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services"
+      in {f["name"] for f in ir["frameworks"]})
+
+print("\nSUPPLIERS ARE READ OFF THE FRAMEWORK, NEVER GUESSED")
+casup = ca["suppliers"]
+canamed = {s["name"] for s in casup}
+check("every named supplier is on one of this speciality's frameworks",
+      all(set(s["frameworks"]) <= set(canames) for s in casup))
+caall = " || ".join(canamed | {v for s in casup for v in s["variants"]}).lower()
+# Named on the Structural Heart and VAD and Perfusion briefs read at NHS Supply Chain.
+for want in ["abbott", "edwards lifesciences", "medtronic", "abiomed",
+             "livanova", "getinge", "terumo", "corcym"]:
+    check("structural heart / perfusion supplier present: %s" % want, want in caall)
+# Named on the External Defibrillation brief and nowhere else on this patch. If one
+# of these appears, the resuscitation framework has been claimed by mistake.
+for bad in ["british heart foundation", "martek lifecare", "aero healthcare",
+            "lyreco"]:
+    check("resuscitation/office supplier absent: %s" % bad, bad not in caall)
+check("an unresolved name is flagged, never silently merged",
+      all(("resolved" in s) for s in casup))
+check("no supplier appears twice under two spellings",
+      len(canamed) == len(casup))
+
+print("\nCPV CORROBORATES, IT NEVER ADMITS")
+# All four descriptions were read back from Find a Tender's own OCDS API on
+# 09/09/2026: 33112340 Echocardiographs, 33121500 Electrocardiogram, 33123
+# Cardiovascular devices, 85121231 Cardiology services. Every one fires.
+check("only cardiac-specific families are claimed",
+      B.SPECIALITY_RULES[CARDIAC].get("cpv") == ("33112340", "33121500", "33123", "85121231"))
+for generic in ("33100000", "33110000", "33140000", "33190000", "33124100", "33121000"):
+    check("the catch-all %s is not claimed" % generic,
+          generic not in (B.SPECIALITY_RULES[CARDIAC].get("cpv") or ()))
+check("no award reached the panel on CPV alone",
+      all(B.match_title(cax, a["title"]) for a in ca["awards"] if a.get("cpvCorroborates")))
+check("at least one award is corroborated by CPV",
+      any(a.get("cpvCorroborates") for a in ca["awards"]))
+
+print("\nNO DRUG TARIFF, SAID HONESTLY (rule 14)")
+# Pacemakers, leads, coronary stents, heart valves, oxygenators and cath lab
+# capital are not reimbursed through Part IX.
+check("no tariff panel is published for this patch", ca.get("drugTariff") is None)
+check("the tariff rule says why rather than going quiet",
+      "No Drug Tariff part applies" in (ca.get("rules") or {}).get("drugTariff", ""))
+
+print("\nTHE COVERAGE LIMIT IS PUBLISHED, NOT HIDDEN (rule 14)")
+for k in ("frameworks", "suppliers"):
+    check("coverage limit stated on the %s rule" % k,
+          "COVERAGE LIMIT" in (ca.get("rules") or {}).get(k, ""))
+cafw = (ca.get("rules") or {}).get("frameworks", "")
+check("the unparsable headline framework is named", "2021/S 000-017565" in cafw)
+check("its end date and successor are named",
+      "26 February 2027" in cafw and "2026/S 000-043775" in cafw)
+check("the resuscitation frameworks are named as deliberately absent",
+      "External Defibrillation" in cafw)
+
+print("\nAN EMPTY PANEL IS AN HONEST ANSWER, NOT A REASON TO WIDEN (rule 14)")
+check("no open tender on this patch today, and none invented",
+      ca["openTenders"] == [])
+check("the open-tender rule says an empty list means none open",
+      "empty list means" in (ca.get("rules") or {}).get("openTenders", ""))
+
+print("\nTHE RULE TRAVELS WITH THE DATA (rule 14a)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((ca.get("rules") or {}).get(k)))
+check("licence notice carried", bool(ca.get("_notice", {}).get("owner")))
+cakb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", CARDIAC + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % cakb, cakb < 200)
 
 print()
 if fails:

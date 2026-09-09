@@ -1124,6 +1124,215 @@ SPECIALITY_RULES = {
             "sets out all four routes with their expiry dates."
         ),
     },
+    # PAGE 2801. Scope: cardiology and cardiac surgery — the catheter laboratory,
+    # cardiac rhythm management and electrophysiology, structural heart, mechanical
+    # circulatory support, cardiac surgery and perfusion, and cardiac physiology
+    # diagnostics. Resuscitation is NOT this patch: see the framework note below.
+    "cardiology-and-cardiac-surgery": {
+        "label": "Cardiology and Cardiac Surgery",
+        # FOUR frameworks, and the one that matters most is not among them. See the
+        # coverage note: NHS Supply Chain 2021/S 000-017565, the agreement this whole
+        # patch is bought on, sits in the `unparsed` list of frameworks.json because
+        # its brief states a supplier count and publishes no list of names.
+        #
+        #   Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions
+        #     (2026/S 000-012699, live from 27 July 2026, 25 suppliers) is the cardiac
+        #     physiology route — ECG, ambulatory and patch monitoring, CPET. It is
+        #     SHARED with respiratory on purpose: one framework really does carry both
+        #     the Holter monitors and the spirometers, the same way Pressure Area Care
+        #     is shared between wound care and patient handling.
+        #   Structural Heart and Ventricular Assist Devices (2024/S 000-020906, 10
+        #     suppliers) — TAVI, mitral and tricuspid repair, VADs.
+        #   Perfusion Devices, Consumables and Associated Equipment (2024/S 000-033613,
+        #     9 suppliers) — cardiopulmonary bypass. Cardiac surgery's own route.
+        #   Angiography, Hybrid Theatres, Capital Equipment (2025/S 000-077456, 14
+        #     suppliers) is the catheter laboratory capital route. It is claimed by
+        #     three pages — this one, interventional radiology and vascular surgery —
+        #     and that is correct: an angiography suite really is bought by all three,
+        #     and APC Cardiovascular sits on it alongside Philips, Siemens, GE and
+        #     Canon. The interventional radiology rule already states the same sharing.
+        #
+        # TWO FRAMEWORKS DELIBERATELY NOT MATCHED, and both were read:
+        #   External Defibrillation Devices and Related Services and Accessories
+        #     (2022/S 000-035844, 21 suppliers) is resuscitation, not cardiology. Its
+        #     supplier list is public-access AED distributors and resuscitation
+        #     training firms — British Heart Foundation, Martek Lifecare, Aero
+        #     Healthcare, Imperative Training — and a cardiology account manager sells
+        #     none of it. It belongs to emergency and urgent care, which is still in
+        #     this rollout's queue. Implantable cardioverter defibrillators are a
+        #     different market and are matched below by name.
+        #   Electrodes, Ultrasound Gels, Defibrillation and Related Consumables
+        #     (2023/S 000-030987, 37 suppliers) is a mixed ward-consumables basket.
+        #     ECG electrodes sit on it, but so do ultrasound gel and Lyreco, KCI and
+        #     Rocket Medical. Publishing its 37 names as cardiology suppliers would
+        #     put an office-supplies wholesaler on this page.
+        "frameworks": r"\b(angiography|cardiac and pulmonary diagnostics|perfusion devices|structural heart)\b",
+        # DERIVED, not guessed. Every pattern below was run over all 1,972 rows of
+        # tender-history.json and all 1,342 of framework-awards.json — 3,314 titles —
+        # and all 58 admitted titles were read one by one before this list was fixed.
+        #
+        # NOT INCLUDED, deliberately, and every one was tried and read:
+        #   bare "cardi"      -> matches CARDIFF. "CPD Courses 26/27 Cardiff University"
+        #                        and "PUBLIC HEALTH WALES BTW CARDIFF - BUILDING WORKS"
+        #                        both matched it. The `cardi[ao]` form below is used
+        #                        instead and takes neither.
+        #   bare "heart"      -> "Healthy Hearts and Building Foundations", St Helens
+        #                        Council. A council public-health programme. The
+        #                        qualified forms (heart valve, heart pump, structural
+        #                        heart) take every genuine row without it.
+        #   bare "valve"      -> "Installation of HTG valves across all THQ Building",
+        #                        Leeds. Plumbing. "heart valve", "mitral" and
+        #                        "tricuspid" reach the real ones.
+        #   bare "ventricular"-> "4183924 External Ventricular Drainage (EVD)".
+        #                        Neurosurgery. "ventricular assist" is used instead.
+        #   bare "ablation"   -> ten rows and none of them is cardiac: endoscopic
+        #                        oncology ablation, uterine and endometrial ablation,
+        #                        spinal cord stimulator radiofrequency ablation, an
+        #                        MRI-guided laser ablation system, a CT-guided
+        #                        percutaneous insertion. The interventional radiology
+        #                        rule refused it for the same reason. "catheter
+        #                        ablation" and "pulsed-field ablation" are used instead
+        #                        and find nothing today, which is stated rather than
+        #                        left to look like coverage.
+        #   bare "stent"      -> Memokath urology stents twice, a Jotec aortic stent
+        #                        graft. The genuine coronary rows all carry the word
+        #                        CARDIOLOGY ("Cath Labs and Cardiology Stents" three
+        #                        times, "Cardiology Stents - DES") and reach the panel
+        #                        that way.
+        #   bare "defibrillat"-> "Defibrillators", "Defibrillators and AEDs",
+        #                        "Preliminary Market Engagement For Defibrillators".
+        #                        External defibrillation is resuscitation, consistent
+        #                        with the framework decision above. "implantable
+        #                        cardioverter" is included instead.
+        #   "\bicd\b"         -> its one hit, "Purchase of Pacemakers, ICD's & CRT's",
+        #                        already reaches the panel on "pacemakers". ICD is also
+        #                        the International Classification of Diseases and would
+        #                        admit a clinical-coding contract on the next refresh,
+        #                        so it is not used. "\bcrt\b" is refused for the same
+        #                        reason: cathode ray tube, community response team.
+        #   "\bvad\b"         -> VAD is also VASCULAR ACCESS DEVICE, which is another
+        #                        page's whole speciality. "ventricular assist" is used.
+        #   bare "ffr"        -> fractional flow reserve looks like a free true
+        #                        positive and matches DIFFRACTOMETER: three university
+        #                        X-ray diffractometer purchases. Refused outright.
+        #   bare "pacing"     -> its one hit, "Radiology, Cardiology and Pacing Packs",
+        #                        already reaches the panel on "cardiology". The
+        #                        qualified pacing forms below are kept for the next
+        #                        refresh.
+        #   bare "tavi"/"tavr"-> kept, but only with word boundaries on BOTH sides.
+        #                        Without the trailing boundary "tavi" matches
+        #                        TAVISTOCK, ZETAVIEW and EXTAVIA (interferon beta-1b).
+        #                        With it, all three fall out and nothing is lost.
+        #
+        # TERMS THAT FIND NOTHING TODAY AND ARE KEPT ANYWAY, stated so the list is not
+        # mistaken for coverage: coronary, angina, myocardial, holter, catheter
+        # ablation, pulsed-field ablation, implantable cardioverter, the qualified
+        # pacing forms, TAVI, TAVR, tricuspid, atrial fibrillation and mechanical
+        # circulatory. None of them can mean anything but this speciality, so they cost
+        # nothing and will catch the next refresh.
+        "include": (
+            r"\b(cardi[ao]\w*|echocardi\w*|myocardial|coronary|angina|"
+            r"\becg\b|electrocardiogra\w*|holter|"
+            r"cath ?labs?\b|catheteri[sz]ation lab\w*|"
+            r"pacemakers?|pacing (?:lead|wire|system|pack)s?|implantable cardioverter|"
+            r"electrophysiolog\w*|pulsed[- ]field ablation|catheter ablation|"
+            r"structural heart|transcatheter|\btavi\b|\btavr\b|heart valves?|"
+            r"mitral|tricuspid|aortic root|"
+            r"ventricular assist|impella|heart pumps?|mechanical circulatory|\becmo\b|"
+            r"atrial appendage|atrial fibrillation|"
+            r"perfusion|oxygenators?)\b"
+        ),
+        # Seven patterns. Every one matched a real row, was read, and was rejected:
+        #   medicines        -> "NP35923 Cardiovascular & Respiratory Medicines" and
+        #                       "Cardiovascular & Respiratory Medicines", both the
+        #                       Common Services Agency. A Scottish national pharmacy
+        #                       contract for cardiovascular drugs. This page covers the
+        #                       device and service patch, not the medicines route, and
+        #                       the theatres and orthopaedics rules reject mixed
+        #                       pharmacy baskets on the same ground.
+        #   ophthalm         -> "Purchase of Ophthalmology Visual Electrophysiology
+        #                       System", NHS Wales. Visual evoked potentials. This is
+        #                       the single reason "electrophysiolog" needs a guard, and
+        #                       it needs one badly: electrophysiology is the largest
+        #                       lot on this patch's successor framework.
+        #   lifeport         -> "LifePort Perfusion Consumables", Manchester, twice
+        #                       (an award notice and a VEAT). LifePort is Organ
+        #                       Recovery Systems' kidney transport perfusion machine.
+        #                       Transplant, not cardiopulmonary bypass.
+        #   static perfusion,
+        #   perfusion fluid  -> "Cold Static Perfusion Fluid UW Solution" and "cold
+        #                       static perfusion fluid solution", both NHS Blood and
+        #                       Transplant. University of Wisconsin organ preservation
+        #                       solution. Two guards because the two notices word it
+        #                       two ways.
+        #   anaesthe         -> "Patient Monitors, Anaesthetics Machines, Ventilators &
+        #                       ECG", Common Services Agency. A four-item basket in
+        #                       which ECG is the minority item and anaesthesia and
+        #                       critical care are the buyers. No genuine cardiac row in
+        #                       this data mentions anaesthesia, so the guard costs
+        #                       nothing.
+        #   principal designer-> "Cath Lab 1 Refurbishment CDM Principal Designer
+        #                       Services", Imperial. CPV 71315200, building consultancy
+        #                       services, awarded to Ingleton Wood LLP, an architecture
+        #                       and surveying practice. An architect's appointment, not
+        #                       a cardiology purchase. Capital and estates ground.
+        #   training programme-> "National Education and Training for NHS Healthcare
+        #                       Science - Scientists Training Programme (STP) and
+        #                       Echocardiography Training Programme (ETP)", NHS
+        #                       England. CPV 80000000, education services, no supplier
+        #                       named. Workforce commissioning, not a market contract.
+        #                       The guard is "training programme", NOT "training":
+        #                       "Medical Training Equipment" is part of a genuine
+        #                       cardiac physiology maintenance award and must survive.
+        "exclude": (
+            r"\b(medicines|ophthalm\w*|lifeport|static perfusion|perfusion fluid|"
+            r"anaesthe\w*|principal designer|training programme)\b"
+        ),
+        # FOUR CPV prefixes, and every one of them actually fires on a matching notice
+        # in this data. A family that corroborates nothing is not claimed. All four
+        # descriptions were read back from Find a Tender's own OCDS API on 09/09/2026,
+        # not from memory:
+        #   33112340  Echocardiographs
+        #   33121500  Electrocardiogram
+        #   33123     Cardiovascular devices, and beneath it 33123200 Electrocardiography
+        #             devices and 33123230 Cardiographs
+        #   85121231  Cardiology services
+        # Corroboration only, never admission: the title still has to match. 33121000,
+        # Long term ambulatory recording system, is deliberately left out because it is
+        # not cardiac-specific, and 33182 Cardiac devices is left out because not one
+        # notice in this data carries it.
+        "cpv": ("33112340", "33121500", "33123", "85121231"),
+        # NO DRUG TARIFF PART. Part IX reimburses dressings and elastic hosiery (IXA),
+        # incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery
+        # (IXR), all community prescription routes. Nothing this speciality buys —
+        # pacemakers, leads, coronary stents, heart valves, oxygenators, cath lab
+        # capital — is listed there. The panel carries none rather than reaching.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. The single agreement this "
+            "speciality is mostly bought on is not counted below. NHS Supply Chain's "
+            "Interventional Cardiology, Interventional Radiology and Interventional "
+            "Neuroradiology, Cardiac Rhythm Management and Electrophysiology framework "
+            "(2021/S 000-017565), which carries the coronary, rhythm management, "
+            "electrophysiology and intracardiac monitoring lots and 67 suppliers, "
+            "publishes a supplier count on its brief but no list of names, so the Hub's "
+            "framework dataset records it as unparsed and its suppliers cannot be named "
+            "here. That agreement ends on 26 February 2027 and its successor, Find a "
+            "Tender 2026/S 000-043775 Total Cardiology and Vascular Solutions, has an "
+            "estimated award decision of 8 December 2026, so the framework picture on "
+            "this patch is due to change wholesale within the year. Resuscitation is "
+            "also deliberately absent: the External Defibrillation Devices framework "
+            "and the Electrodes, Ultrasound Gels and Defibrillation consumables "
+            "framework are not counted here, because their supplier lists are public "
+            "access defibrillator distributors and general ward consumables rather than "
+            "this speciality's market. What follows is therefore the structural heart, "
+            "perfusion, cardiac physiology and catheter laboratory capital end of the "
+            "patch, which is what the framework record holds, plus the award trail for "
+            "the rest. Being named on a framework is not evidence of volume, and being "
+            "absent from one is not evidence of absence from this market. The page's "
+            "Buying route and Framework calendar sections set out the full picture with "
+            "their expiry dates."
+        ),
+    },
 }
 
 
