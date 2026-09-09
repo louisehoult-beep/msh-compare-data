@@ -33,6 +33,23 @@ So: a refused supplier is reported in its own bucket, is excluded from
 crawlWorklist and domainsMissing, and does not count towards `actionable`.
 A framework with no actionable suppliers left carries a blockedReason.
 
+PUBLISHING ELSEWHERE IS NOT BEING UNREACHABLE (added 09/09/2026). A supplier
+awarded on this framework that already publishes products, but none under a
+category belonging to this framework's speciality, sits in
+`publishedElsewhere`. Until this change that bucket counted towards nothing:
+a framework whose whole unpublished remainder was publishing elsewhere came
+out with `actionableTotal` 0 and was stamped BLOCKED — "every awarded supplier
+not yet published has been read and refused" — which was simply untrue of
+suppliers that had been crawled successfully and were only missing a
+(supplier, division) -> category mapping into this speciality. Digital
+Diagnostic Solutions (11 of 54), Blood Collection Devices (8 of 19) and CT
+Scanners (4 of 8) were all wrongly BLOCKED on 09/09/2026 for that reason, and
+BLOCKED is not a soft label: the sweep skips a blocked framework, so a wrong
+one drops it for good. Those suppliers are now counted as
+`actionable.publishedElsewhereNeedingCategory` — mapping work, not crawl work
+— and BLOCKED additionally requires at least one recorded refusal, so the
+message can never claim refusals that do not exist.
+
 A framework is DONE only when every awarded supplier is published with a
 category. Anything else is named, counted and left as work — never rounded up.
 
@@ -44,11 +61,15 @@ never fuzzy-matched (see [[company-alias-registry]]).
 Usage:  python3 scripts/build_coverage_ledger.py
 Writes: data/coverage-ledger.json  and  docs/COVERAGE-LEDGER.md
 
-MIRRORED INTO msh-compare-data 03/09/2026 (canonical original stays at
-Hub/Product-Build/market-intelligence-engine/scripts/, which writes its
-ledger alongside itself) so a cloud session, with no OneDrive access, can
-regenerate the ledger and pick a framework to work on. Re-copy this file
-from the canonical original after any change there.
+THIS COPY IS THE ONE THAT RUNS. It was mirrored into msh-compare-data on
+03/09/2026 from Hub/Product-Build/market-intelligence-engine/scripts/, which
+was then the canonical original. It no longer is: the 06/09/2026 refusals and
+heldBySupplier fixes and the 09/09/2026 publishedElsewhere fix were all made
+here and never in that copy, and `differentiator-framework-coverage` — the
+only thing that regenerates the ledger — works entirely inside this repo.
+Corrected 09/09/2026, because the sentence that used to sit here said to
+re-copy this file from the engine folder, which would have silently reverted
+three fixes. The engine copy is marked superseded; edit this one.
 """
 import json, os, sys, collections, urllib.parse
 
@@ -249,6 +270,10 @@ def main():
             # permitted route", which is not the same as DONE.
             "actionable": {
                 "unresolvedNames": len(buckets["unknown"]),
+                # Crawled and publishing, just not into this speciality: the
+                # work is a category mapping, never a re-crawl. See the
+                # docstring's PUBLISHING ELSEWHERE note (09/09/2026).
+                "publishedElsewhereNeedingCategory": len(buckets["publishedElsewhere"]),
                 "heldNeedingCategory": len(buckets["heldOnly"]),
                 "crawlable": sum(1 for n in buckets["notCrawled"] if domains.get(n)),
                 "needDomain": sum(1 for n in buckets["notCrawled"] if not domains.get(n)),
@@ -258,8 +283,11 @@ def main():
         a = rows[-1]["actionable"]
         left = sum(a.values())
         rows[-1]["actionableTotal"] = left
-        rows[-1]["blockedReason"] = None if left or rows[-1]["state"] in (
-            "DONE", "OUT OF SCOPE", "UNMAPPED") else (
+        # `left` now includes publishedElsewhere, so BLOCKED is already out of
+        # reach for those frameworks; the refusal test is kept as well so the
+        # sentence below can never report "(0 recorded refusal(s))".
+        rows[-1]["blockedReason"] = None if left or not buckets["refused"] or \
+            rows[-1]["state"] in ("DONE", "OUT OF SCOPE", "UNMAPPED") else (
             "every awarded supplier not yet published has been read and refused "
             "(%d recorded refusal(s)) — no permitted route left to the rest of "
             "this framework, so its coverage cannot rise without a new route"
@@ -313,8 +341,11 @@ def main():
           "route, so coverage cannot be measured against it yet. It is not a",
           "synonym for out of scope: decide each one deliberately.", "",
           "**Left** is the work genuinely still available on a framework: unresolved",
-          "supplier names + suppliers held uncategorised + suppliers crawlable +",
-          "suppliers needing a website. **Refused** suppliers were read and found",
+          "supplier names + suppliers publishing only outside this speciality +",
+          "suppliers held uncategorised + suppliers crawlable + suppliers needing",
+          "a website. The second of those is mapping work, not a re-crawl: the",
+          "supplier's range is already captured and published, just not under a",
+          "category this framework's speciality contains. **Refused** suppliers were read and found",
           "uncrawlable (robots.txt, no product API, or a catalogue that would",
           "misrepresent the range), with the reason and date recorded in",
           "`data/supplier-products.json`; they are not counted as work and must not",
@@ -345,8 +376,10 @@ def main():
     print("\nLowest-coverage STARTED frameworks that still have work left:")
     for r in live[:8]:
         a = r["actionable"]
-        print("  %5.1f%%  %3d left (%d unresolved, %d held, %d crawlable, %d need domain)  %s"
+        print("  %5.1f%%  %3d left (%d unresolved, %d mapped elsewhere, %d held, "
+              "%d crawlable, %d need domain)  %s"
               % (r["coverage"], r["actionableTotal"], a["unresolvedNames"],
+                 a["publishedElsewhereNeedingCategory"],
                  a["heldNeedingCategory"], a["crawlable"], a["needDomain"],
                  (r["framework"] or "")[:52]))
 
