@@ -1786,6 +1786,277 @@ SPECIALITY_RULES = {
             "neuromodulation successor tender — is there rather than here."
         ),
     },
+    "pathology-and-laboratory-medicine": {
+        "label": "Pathology and Laboratory Medicine",
+        # TWO frameworks, named rather than pattern-guessed, and the first one is what
+        # this whole patch runs on. NHS Supply Chain's "Laboratory Diagnostics, Point of
+        # Care Testing and Pathology Managed Services" (2023/S 000-028831, 12 March 2024
+        # to 11 March 2028, 48 months with no extension language in the term sentence)
+        # carries 122 suppliers across seven live lots, and its Lot 7 Outsourcing was
+        # never awarded: NHS Supply Chain states it "has not been awarded and will be
+        # going back out to tender", with no date published. Page 2827 leads on exactly
+        # that. "Blood Collection Devices" (2024/S 000-033791, 13 October 2025 to
+        # 12 October 2027, 19 suppliers) is the pre-analytical half of the same market:
+        # Greiner Bio-One, Sarstedt, BD, Radiometer and Siemens Healthcare Diagnostics
+        # sell the tube the sample arrives in, and the tube decides the assay.
+        #
+        # THREE FURTHER FRAMEWORKS WERE READ AND REFUSED, each named rather than quietly
+        # dropped, because all three carry the word "diagnostics" and would look like
+        # obvious inclusions to the next person editing this rule:
+        #   Digital Diagnostic Solutions (2025/S 000-043444, 54 suppliers) genuinely
+        #     carries a laboratory strand — Clinisys, CGM Lab, Magentus, Soliton IT and
+        #     InterSystems are laboratory information systems, Leica Microsystems and
+        #     Epredia are digital pathology, Roche Diagnostics and Sysmex are analyser
+        #     houses. It also carries roughly twenty radiology PACS and imaging-AI firms
+        #     (Agfa, Sectra, Intelerad, Infinitt, Aidoc, Aidence, Radiobotics,
+        #     Harrison-AI, Lucida, Hexarad, InferVision, Feedback), a cardiology cluster
+        #     (Circle, HeartFlow, inHeart, Cardiac Services) and an endoscopy cluster
+        #     (Endosoft, Karl Storz, KeyMed). The brief publishes NO supplier-by-lot
+        #     split in this dataset, so the pathology strand cannot be separated from the
+        #     rest. Claiming it whole would put twenty imaging vendors under a pathology
+        #     Suppliers heading. It is primarily the radiology and imaging page's
+        #     framework and is left to it.
+        #   Specimen Cabinets and Associated Options and Related Services (5 suppliers)
+        #     is NOT laboratory equipment despite its name. Its suppliers are Hologic,
+        #     Cirdan Imaging, Medical Imaging Systems, BD and Synapse Medical, and its
+        #     reference 2021/S 000-007768 is the shared imaging reference. A specimen
+        #     cabinet here is an intra-operative specimen RADIOGRAPHY cabinet, an X-ray
+        #     unit. The word "specimen" does not make a framework pathology.
+        #   Cardiac and Pulmonary Diagnostics, Audiological Diagnostics and the sleep
+        #     monitoring diagnostics framework are cardiology, audiology and respiratory
+        #     respectively, and are named here only so nobody re-tests them.
+        "frameworks": r"\b(laboratory diagnostics|blood collection devices)\b",
+        # DERIVED, not guessed. Every pattern below was run over all 1,972 rows of
+        # tender-history.json and all 1,342 of framework-awards.json — 3,314 titles —
+        # and every surviving hit was read one by one. The list returns 174 rows
+        # (159 distinct title-and-buyer pairs) and all of them are this speciality.
+        #
+        # THE STRUCTURAL PROBLEM ON THIS PATCH, and why the obvious words are refused:
+        # laboratory medicine shares its entire vocabulary with academic research,
+        # veterinary science, forensic science, water hygiene and bioprocessing, all of
+        # which buy the same instruments from the same companies. Four words that look
+        # like the natural keys for this speciality are therefore NOT in the include
+        # list, and each was tried first and its hits read:
+        #   bare "laborator*"  -> 22 hits, of which about four are clinical. The word is
+        #     owned by universities (Portsmouth, Swansea, APUC, SUPC, LSHTM), water
+        #     utilities (Northumbrian Water, NI Water), a nuclear site (Sellafield),
+        #     a city council and a dental laboratory. Only "laboratory medicine" and
+        #     "laboratory diagnostics" are kept, because only those two are unambiguous;
+        #     the genuine clinical rows the bare word would have caught are all reached
+        #     through "reagents", "biochemistry" or "mycology" instead, so nothing is
+        #     lost. "laboratory consumables" is deliberately NOT kept: it is the exact
+        #     phrase the water utilities and universities use.
+        #   bare "lab" / "labs" -> 11 hits, and the cath lab owns it. Six of them are
+        #     cardiac catheterisation laboratories and one is a cath lab refurbishment.
+        #   bare "microscop*"  -> 11 hits, of which eight are somebody else's: NHS Supply
+        #     Chain's own Operating Microscopes framework, an ENT microscope and an
+        #     ophthalmic microscope at East Suffolk and North Essex, Belfast's theatre
+        #     microscope maintenance, an MRC X-ray tomography microscope and a Glasgow
+        #     multi-spectral light sheet microscope. Refused rather than kept and then
+        #     argued with in the exclusion list. Digital pathology microscopy is reached
+        #     through "digital pathology" and "slide scanner" instead.
+        #   bare "screening"   -> 19 hits, of which about eight are laboratory. The rest
+        #     are child vision screening, diabetic eye screening twice, lung cancer
+        #     screening, mobile breast screening trailers, an immigration TB screening
+        #     service for the Home Office, a surveillance service and a Dundee research
+        #     genotyping array. Only the named laboratory programmes are kept: newborn,
+        #     bloodspot, genetic, bowel, cervical and bacterial screening. The one row
+        #     this costs is Leeds Teaching Hospitals' "Purchase of Screening Kits", and
+        #     checking its supplier proves the refusal right: it is Natus Nicolet, whose
+        #     screening kits are newborn HEARING screening, not laboratory work at all.
+        # Three more were refused for the same reason and are recorded so they are not
+        # retried: bare "molecular" (its largest single hit is NHS England's national
+        # framework for low molecular WEIGHT heparin, a drug contract); bare "INR" (its
+        # only hit is "INR and Thrombectomy Consumables", where INR is Interventional
+        # NeuroRadiology, not the clotting ratio); and bare "chromatograph" (both hits
+        # are Cell and Gene Therapy Catapult bioprocessing columns, not analytical
+        # chemistry). "cervical" and "HPV" are refused too: cervical also means the
+        # cervical spine, and of six HPV hits three are vaccination and uptake work.
+        #
+        # Four more terms were tried LAST, after the feed's own loose `spec` field was
+        # read to see what this rule was missing, and all four were refused:
+        #   "lateral flow"     -> 10 hits, and every one is the 2021 DHSC mass-testing
+        #     programme: manufacture contracts, raw materials for manufacture, five
+        #     near-identical antigen device notices, and a staff-testing contract bought
+        #     through the Nuclear Decommissioning Authority's shared services alliance.
+        #     Self-test antigen devices distributed nationally are a closed pandemic
+        #     market, not laboratory medicine procurement, and every row sits below the
+        #     40-row cap in any case, so including them would have raised a headline
+        #     count and shown a member nothing. The COVID rows that ARE kept are the
+        #     laboratory-performed ones — PCR, serology, ELISA — bought by PHE, NHS
+        #     Scotland and NHS trusts to run in their own laboratories.
+        #   "extraction kit"   -> 2 hits. One is PHE's RapiPREP nucleic acid extraction
+        #     kit, which "nucleic acid" already catches, and the other is QIAGEN
+        #     extraction kits for Forensic Science Northern Ireland, whose title carries
+        #     no forensic word at all — only its buyer does, and the exclusion list can
+        #     only see titles. Refusing the term costs nothing and removes the row.
+        #   "liquid handler"   -> 6 genuine laboratory-automation rows at PHE and DHSC,
+        #     and one Scottish Police Authority automated liquid handler that, again,
+        #     nothing in its title separates from them. Refused for the same reason,
+        #     which does cost three PHE and DHSC rows. Better than publishing a police
+        #     forensic instrument as a pathology award.
+        #   "blood glucose"    -> 3 hits. Professional glucose meters and strips are
+        #     genuinely run by hospital point-of-care testing teams inside pathology,
+        #     and two of the three were bought by mental health trusts for physical
+        #     health monitoring. The patch is contested with diabetes and endocrinology,
+        #     and this page does not need to claim it: point-of-care testing is already
+        #     reached through the framework's own name and through titles that say
+        #     "point of care". Publishing nothing on a contested patch is the right
+        #     output.
+        # "bacteria" is included only in qualified forms — bacterial ID, bacteria
+        # testing, mycobacteria, susceptibility testing, antimicrobial diffusion discs —
+        # because bare "bacterial" catches breathing-circuit "Bacterial and Viral
+        # Filters" and "Pulmonary Function Bacterial Viral Filters", which are
+        # respiratory consumables.
+        #
+        # Included with no hit today, because each is unambiguous on this patch and
+        # nothing else in health buys it: microtome, tissue processor, flow cytometry,
+        # mass spectrometry, histocompatibility, toxicology, parasitology, blood bank,
+        # cervical screening, cervical cytology, phlebotomy, venepuncture, vacutainer,
+        # blood sciences, urinalysis and in vitro diagnostic. "autostainer" is included
+        # with one hit, an immunohistochemistry autostainer at the University of
+        # Glasgow, and is spelled with the optional prefix because a plain word-boundary
+        # "stainer" does not match "Autostainer" — the form every vendor actually uses.
+        "include": (
+            r"\b(patholog\w*|histolog\w*|cytolog\w*|immunohistochem\w*|microbiolog\w*|"
+            r"biochem\w*|haematolog\w*|hematolog\w*|immunolog\w*|virolog\w*|serolog\w*|"
+            r"toxicolog\w*|mycolog\w*|parasitolog\w*|blood scienc\w*|"
+            r"reagents?|assays?|analys(?:er|ers|or|ors)|"
+            r"laboratory (?:medicine|diagnostic\w*)|"
+            r"blood collection|phlebotom\w*|venepunctur\w*|venipunctur\w*|vacutainer|"
+            r"specimen (?:bags?|containers?|transport|collection|pots?|tubes?|reception)|"
+            r"transport of human tissue\w*|"
+            r"point[- ]of[- ]care|\bPOCT\b|"
+            r"\bPCR\b|next generation sequencing|\bNGS\b|sequencing|genomic\w*|"
+            r"nucleic acid|genotyping|\bRCI\b|"
+            r"mycobacteria\w*|bacterial id\b|bacteria testing|susceptibility testing|"
+            r"antimicrobial susceptib\w*|antimicrobial diffusion disc\w*|"
+            r"cytogenetic\w*|exome|molecular (?:diagnostic\w*|patholog\w*|test\w*)|"
+            r"\bacgh\b|slide scanner|digital patholog\w*|"
+            r"cryostat|microtome|tissue processor|(?:auto)?stainers?|"
+            r"\bLIMS\b|laboratory information (?:management )?system\w*|"
+            r"transfusion|blood group\w*|red cell|blood bank|"
+            r"newborn screening|bloodspot|blood[- ]spot|genetic screening|bowel screening|"
+            r"cervical screening|cervical cytolog\w*|bacterial screening|"
+            r"\bFIT kits?\b|faecal immunochemical|"
+            r"culture media|blood culture|swabs?|agar|"
+            r"blood gas|coagulation|haemostasis|hemostasis|"
+            r"immunoassay|\bELISA\b|mass spectrom\w*|flow cytometr\w*|"
+            r"\bHLA\b|tissue typing|histocompatib\w*|"
+            r"urinalys\w*|urine (?:collection|culture|specimen|sample)\w*|"
+            r"in vitro diagnostic\w*|test kits?|testing kits?)\b"
+        ),
+        # EVERY PATTERN HERE FIRED ON A REAL ROW THAT MATCHED THE INCLUDE LIST AND WAS
+        # WRONG. There are no speculative entries: the rule was rebuilt until each one
+        # could be shown the title it caught. They fall into six families.
+        #
+        # VETERINARY AND AGRICULTURAL. The same PCR machines, ELISA kits and slide
+        # scanners are bought to test cattle and soil. "Veterinary Molecular Biology Test
+        # Kits" and "BVD PCR Test Kits for Serum and Milk Samples" are Scotland's Rural
+        # College testing for bovine viral diarrhoea; "Provision of Johne's Elisa Test
+        # Kits" is Johne's disease in cattle; DAERA and AFBI are Northern Ireland's
+        # Agri-Food and Biosciences Institute, which bought both a digital pathology
+        # slide scanner and TSE (BSE) rapid test kits; and the Animal and Plant Health
+        # Agency's sterile boot swab kits are farm biosecurity.
+        # FORENSIC SCIENCE. "HUMAN QUANTIFICATION REAL-TIME PCR SYSTEMS" is Forensic
+        # Science Northern Ireland, part of the Department of Justice, quantifying DNA
+        # for identification. FSNI appears on five notices in this data and is a
+        # different discipline from clinical laboratory medicine, with different
+        # vendors and no NHS market. Coronial HISTOPATHOLOGY is a different matter and
+        # is kept — see the note under the counts below.
+        # ACADEMIC RESEARCH PLATFORMS. Single-cell and spatial biology instruments are
+        # research tools, not diagnostics: 10x Genomics at Birmingham and Edinburgh,
+        # Glasgow's Chromium instruments and its spatial and single-cell platform at
+        # Manchester, UKRI's Illumina NextSeq consumables, Glasgow's generic "Molecular
+        # Biology Reagents" and its biomarker assay reagents for stored trial serum, and
+        # UKRI's "Label Reagents". "Tissue culture" media is cell culture, and is
+        # already excluded on the wound care page for the same reason.
+        # WATER AND ENVIRONMENTAL MICROBIOLOGY. IDEXX Colilert and Quanti-Tray are
+        # coliform counting in water, and Belfast's water treatment maintenance contract
+        # matched on "microbiological water testing". None of it is a patient sample.
+        # ANOTHER SPECIALITY'S INSTRUMENT WEARING THIS ONE'S WORD. "Purchase of Visual
+        # Field Analysers" and "REICHERT OCULAR ANALYSER" are ophthalmology;
+        # "Electrosurgical Devices (Cut & Coagulation, Uterine Ablation)" is diathermy;
+        # the two UKRI "Cooling System (CryoStat)" notices are accelerator cryostats,
+        # not histology ones; and "Insourcing of Bowel Screening and General Endoscopy
+        # Services" is an endoscopy list, not a FIT laboratory. "Point of Care
+        # Ultrasound (PoCUS) female patient simulator upgrades" is a training manikin:
+        # point-of-care testing and point-of-care ultrasound share four words and
+        # nothing else.
+        # A TENDER TOO THIN TO PLACE. "NP646 Haemostatic & Coagulation Products" is an
+        # NHS Scotland planning notice worth GBP 15,000,000 that matched on
+        # "coagulation". Its full description on Find a Tender is one sentence — "The
+        # Supply of Haemostatic & Coagulation Products within a healthcare environment
+        # throughout the whole of Scotland" — and its only CPV code is 33140000, medical
+        # consumables, not one of the laboratory reagent or analyser families. A
+        # coagulation LABORATORY contract would carry 33696 or 38434. On the evidence
+        # available it is at least as likely to be topical surgical haemostats, so it is
+        # refused: haemostatic, the adjective for a product that stops bleeding, is a
+        # surgical word, while haemostasis, the discipline, is the laboratory one, and
+        # the exclusion is written to catch only the first. A GBP 15m lead published on
+        # the wrong page is worse than no lead.
+        # NOT A LABORATORY CONTRACT AT ALL. "NHS Pathologist" is Kent County Council
+        # engaging a pathologist, a staffing contract with no laboratory goods or
+        # service in it. "DHSC:GH: Fleming Fund" is the UK's overseas antimicrobial
+        # resistance aid programme, buying reagents for laboratories in other countries.
+        "exclude": (
+            r"(veterinar\w*|\bAFBI\b|DAERA|animal and plant health|boot swab|\bBVD\b|"
+            r"milk samples|johne|spongiform|nhs pathologist|\bFSNI\b|10x genomics|"
+            r"chromium instrument|spatial genomics|single[- ]cell|"
+            r"nextseq sequencing consumables|molecular biology reagents|label reagents|"
+            r"biomarker assay|tissue culture|cooling system|visual field|ocular analys\w*|"
+            r"electrosurgical|cut & coagulation|quanti[- ]?tray|coliert|colilert|"
+            r"water treatment|fleming fund|endoscopy|point of care ultrasound|\bpocus\b|"
+            r"haemostatic|hemostatic)"
+        ),
+        # CPV CORROBORATES, IT NEVER ADMITS, and on this patch the classification is
+        # unusually clean because laboratory medicine has its own families: 33696*
+        # reagents (33696100 blood grouping, 33696200 blood test, 33696300 chemical,
+        # 33696500 laboratory), 85145000 services provided by medical laboratories,
+        # 851118* pathology and blood analysis services, 38434* analysers, 24931250
+        # culture media, 33124130 diagnostic supplies and 33141625 diagnostic kits.
+        # The generic codes these notices also carry — 33100000 medical equipment,
+        # 50000000 repair, 64120000 courier, 22820000 forms, 85100000 health services —
+        # are deliberately not listed, because they corroborate nothing.
+        "cpv": ("33696", "85145", "851118", "38434", "2493125", "33124130", "33141625"),
+        # NO DRUG TARIFF PART, and this is an absence rather than a refusal. Part IX is
+        # the reimbursement list for appliances dispensed in primary care: IXA dressings
+        # and elastic hosiery, IXB incontinence appliances, IXC stoma appliances, IXR
+        # elastic hosiery. There is no laboratory part, because a diagnostic test is not
+        # an appliance and is never dispensed against an FP10. The field is left out
+        # rather than reached for.
+        "coverageNote": (
+            "WHAT THE COUNTS BELOW DO AND DO NOT COVER. The 122 suppliers on Laboratory "
+            "Diagnostics, Point of Care Testing and Pathology Managed Services are the "
+            "names NHS Supply Chain lists across seven lots, and the count matches the "
+            "total on its own product matrix. They are not 122 competitors for any one "
+            "piece of business: no supplier is on all seven lots, only Roche Diagnostics "
+            "and VWR International are on six, and 71 of the 122 are on exactly one lot. "
+            "Lot 7, Outsourcing, was never awarded at all, so no supplier below is a "
+            "route to a managed pathology service through this agreement. This panel "
+            "carries no lot-by-lot split because the product matrix is not part of this "
+            "dataset; page 2827 sets the lot structure out in full. "
+            "Three NHS Supply Chain frameworks that carry a genuine laboratory strand "
+            "are counted elsewhere and named in the rule rather than dropped: Digital "
+            "Diagnostic Solutions, whose 54 suppliers mix laboratory information "
+            "systems and digital pathology with about twenty radiology and imaging-AI "
+            "firms and which publishes no supplier-by-lot split, is left to the "
+            "radiology and imaging page; Specimen Cabinets is specimen radiography, an "
+            "X-ray framework, despite its name; and the cardiac, audiological and sleep "
+            "diagnostics frameworks belong to their own specialities. "
+            "The awards list is filtered on contract titles, so it shows what a buyer "
+            "chose to call a purchase. Two rows in it are histology service contracts "
+            "bought by Police and Crime Commissioners rather than by the NHS. They are "
+            "kept, and the buyer is named on each row, because coronial histopathology "
+            "is the same discipline bought from the same laboratories; forensic DNA "
+            "profiling, which is not, is excluded. Several rows are academic buyers "
+            "— Queen's University Belfast, the London School of Hygiene and Tropical "
+            "Medicine, the Liverpool School of Tropical Medicine — kept on the same "
+            "test: the product is a clinical diagnostic one and the buyer is stated. "
+            "Research-only single-cell and spatial biology platforms are excluded, "
+            "whoever bought them."
+        ),
+    },
     "palliative-and-end-of-life-care": {
         "label": "Palliative and End-of-Life Care",
         # ONE framework, and it is the one this patch is defined by. NHS Supply Chain's

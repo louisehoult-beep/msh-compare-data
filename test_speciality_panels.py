@@ -30,6 +30,7 @@ NUTRITION = "nutrition-and-dietetics"
 OBESITY = "obesity-and-weight-management"
 NEURO = "neurology-and-neurosurgery"
 PALLIATIVE = "palliative-and-end-of-life-care"
+PATHOLOGY = "pathology-and-laboratory-medicine"
 fails = []
 
 
@@ -1971,6 +1972,149 @@ for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
 check("licence notice carried", bool(pa.get("_notice", {}).get("owner")))
 pakb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", PALLIATIVE + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % pakb, pakb < 200)
+
+# ---------------------------------------------------------------------------
+# PATHOLOGY AND LABORATORY MEDICINE (page 2827), added 09/09/2026.
+#
+# This patch's whole difficulty is that laboratory medicine shares its entire
+# vocabulary with academic research, veterinary science, forensic science, water
+# hygiene and bioprocessing, all of which buy the same instruments from the same
+# companies. Every excluded case below is a REAL row that matched the include list
+# and was wrong, so each of these assertions fails the moment the filter loosens.
+# ---------------------------------------------------------------------------
+print("\nPATHOLOGY AND LABORATORY MEDICINE")
+pt = load_panel(PATHOLOGY)
+check("panel is defined", pt.get("defined") is True)
+
+# Checked over the WHOLE corpus of 3,314 award and tender titles, not over the 40
+# rows the slice publishes. A false positive that happened to fall below the display
+# cap would still be a broken filter, and a true positive that aged out of the top 40
+# would still have to be caught. Both are cap-independent here on purpose.
+_pt_rule = B.SPECIALITY_RULES[PATHOLOGY]
+_pt_rx = B.compile_rule(_pt_rule)
+_pt_th = B.load("tender-history.json")
+_pt_ix = {k: i for i, k in enumerate(_pt_th["schema"])}
+_pt_corpus = [r[_pt_ix["t"]] or "" for r in _pt_th["rows"]]
+_pt_corpus += [(a.get("title") or "") for a in B.load("framework-awards.json")["awards"]]
+pt_titles = [t for t in _pt_corpus if B.match_title(_pt_rx, t)]
+pt_all = " || ".join(pt_titles)
+
+
+def pt_absent(label, needle):
+    check("excluded: %s" % label, needle.lower() not in pt_all.lower(), needle)
+
+
+def pt_present(label, needle):
+    check("present: %s" % label,
+          any(needle.lower() in t.lower() for t in pt_titles), needle)
+
+
+print("  the two frameworks, and only those two")
+pt_fw = sorted(f["name"] for f in pt["frameworks"])
+check("Laboratory Diagnostics, POCT and Pathology Managed Services is carried",
+      any("Laboratory Diagnostics" in n for n in pt_fw))
+check("Blood Collection Devices is carried", "Blood Collection Devices" in pt_fw)
+check("exactly two frameworks", len(pt_fw) == 2, str(pt_fw))
+# Digital Diagnostic Solutions carries a real laboratory strand but roughly twenty
+# radiology and imaging-AI firms alongside it, with no supplier-by-lot split in this
+# dataset. Specimen Cabinets is specimen RADIOGRAPHY: Hologic, Cirdan, MIS. Neither
+# may be claimed here, and the rule says so rather than dropping them silently.
+check("Digital Diagnostic Solutions is not claimed",
+      not any("Digital Diagnostic" in n for n in pt_fw))
+check("Specimen Cabinets is not claimed (it is specimen radiography)",
+      not any("Specimen Cabinet" in n for n in pt_fw))
+check("the defining framework's own supplier count is carried unaltered",
+      any(f.get("supplierCount") == 122 for f in pt["frameworks"]))
+
+print("  false positives that a loose filter WOULD publish")
+# Veterinary and agricultural science buys the same PCR machines and slide scanners.
+pt_absent("veterinary molecular biology kits", "Veterinary Molecular Biology")
+pt_absent("bovine viral diarrhoea PCR on milk samples", "BVD PCR Test Kits")
+pt_absent("Johne's disease ELISA (cattle)", "Johne")
+pt_absent("AFBI's digital pathology slide scanner", "AFBI")
+pt_absent("farm biosecurity boot swabs", "Boot Swab")
+# Forensic science is a different discipline with no NHS market.
+pt_absent("forensic DNA quantification PCR", "HUMAN QUANTIFICATION")
+pt_absent("forensic QIAGEN extraction kits", "QIAGEN Extraction Kits")
+# Research-only single-cell and spatial platforms are not diagnostics.
+pt_absent("10x Genomics research platform", "10x Genomics")
+pt_absent("Chromium single-cell instruments", "Chromium Instrument")
+pt_absent("spatial and single-cell genomics platform", "spatial genomics")
+pt_absent("generic molecular biology reagents", "Molecular Biology Reagents")
+pt_absent("stored-trial-serum biomarker assay reagents", "Biomarker Assay")
+pt_absent("cell culture media", "Tissue Culture Media")
+# Water and environmental microbiology is not a patient sample.
+pt_absent("IDEXX Colilert water coliform testing", "Coliert")
+pt_absent("IDEXX Quanti-Tray water testing", "Quanti Tray")
+pt_absent("water treatment maintenance", "Water Treatment Systems")
+# Another speciality's instrument wearing this one's word.
+pt_absent("ophthalmology visual field analysers", "Visual Field Analyser")
+pt_absent("ophthalmology ocular analyser", "OCULAR ANALYSER")
+pt_absent("diathermy (cut and coagulation)", "Electrosurgical Devices")
+pt_absent("accelerator cryostats, not histology ones", "Cooling System")
+pt_absent("point-of-care ULTRASOUND simulator", "PoCUS")
+pt_absent("an endoscopy list, not a FIT laboratory", "General Endoscopy Services")
+# Not a laboratory contract at all.
+pt_absent("a locum pathologist engagement", "NHS Pathologist")
+pt_absent("overseas AMR aid programme reagents", "Fleming Fund")
+pt_absent("generic research label reagents", "Label Reagents")
+# A GBP 15m tender too thin to place: CPV 33140000 medical consumables, one-sentence
+# description, and "haemostatic" is the surgical word, not the laboratory one.
+check("the NP646 haemostatic tender is not claimed as pathology",
+      not any("Haemostatic" in (t.get("title") or "") for t in pt["openTenders"]))
+# The feed's own loose `spec` field tags this row pathology on the word "collection".
+pt_absent("breast milk collection sets (the feed's own false positive)", "Breast Pump")
+
+print("  true positives that must survive")
+pt_present("the pathology LIMS pre-market engagement", "Pathology IT LIMS")
+pt_present("a histopathology cryostat", "Cryostat for Pathology")
+pt_present("cellular pathology referrals", "Cellular Pathology Referrals")
+pt_present("a microbiology managed service", "Microbiology Services Managed Service")
+pt_present("culture media", "Culture Media")
+pt_present("HLA typing (histocompatibility and immunogenetics)", "HLA")
+pt_present("blood transfusion systems", "Blood Transfusion")
+pt_present("blood gas analysers", "Blood Gas")
+pt_present("immunohistochemistry", "Immunohistochemistry")
+pt_present("newborn screening", "Newborn Screening")
+pt_present("whole genome sequencing", "Genome Sequencing")
+pt_present("blood collection devices", "Blood Collection")
+pt_present("antimicrobial susceptibility and bacterial ID", "Bacteria")
+pt_present("point-of-care testing", "Point of Care")
+
+print("  the derived claims carry their rule and their limits (rules 14a, 14c)")
+ptfw = (pt.get("rules") or {}).get("frameworks", "")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((pt.get("rules") or {}).get(k)))
+check("coverage limit stated on the frameworks rule", "WHAT THE COUNTS" in ptfw)
+check("122 suppliers are not presented as 122 competitors",
+      "not 122 competitors" in ptfw)
+check("the never-awarded Lot 7 is stated, not smoothed over",
+      "Lot 7" in ptfw and "never awarded" in ptfw)
+check("the three frameworks left to other pages are named, not dropped",
+      "Digital Diagnostic Solutions" in ptfw and "Specimen Cabinets" in ptfw)
+check("the two coronial histology buyers are declared rather than hidden",
+      "Police and Crime Commissioner" in ptfw)
+# Part IX is dressings, incontinence, stoma and elastic hosiery. A diagnostic test is
+# not an appliance and is never dispensed against an FP10, so there is nothing to claim.
+check("no Drug Tariff part is claimed for a laboratory speciality",
+      pt.get("drugTariff") is None)
+_pt_dt = (pt.get("rules") or {}).get("drugTariff", "")
+check("the absence of a Drug Tariff part is explained, not silent",
+      "No Drug Tariff part applies" in _pt_dt
+      and "reaching for the nearest part" in _pt_dt)
+# awardsMatched is post-deduplication (the two feeds overlap at the recent end), so
+# it can only ever be smaller than the raw match count, never larger.
+_pt_raw = len([t for t in _pt_corpus if B.match_title(_pt_rx, t)])
+check("the published match count is not inflated above what the filter returns",
+      pt["counts"]["awardsShown"] <= pt["counts"]["awardsMatched"] <= _pt_raw,
+      "shown %d, matched %d, raw %d" % (
+          pt["counts"]["awardsShown"], pt["counts"]["awardsMatched"], _pt_raw))
+check("every published award title is one the rule actually accepts",
+      all(B.match_title(_pt_rx, a.get("title") or "") for a in pt["awards"]))
+check("licence notice carried", bool(pt.get("_notice", {}).get("owner")))
+ptkb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", PATHOLOGY + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % ptkb, ptkb < 200)
+
 
 print()
 if fails:
