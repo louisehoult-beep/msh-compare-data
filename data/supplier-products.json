@@ -406107,6 +406107,89 @@
      "category": ""
     }
    ]
+  },
+  "Econix Limited": {
+   "domain": "bio-bin.co.uk",
+   "verified": "2026-09-09",
+   "source": "bio-bin.co.uk, each product's own page read this run",
+   "structureFrom": "sitemap products, each page's own name and breadcrumb division (per-page fallback)",
+   "partialRead": false,
+   "hasDivisions": false,
+   "landingPagesDropped": 0,
+   "furniturePagesDropped": 0,
+   "duplicateUrlsDropped": 0,
+   "droppedCategoryPages": 0,
+   "captureCaveat": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 12 page(s) could not be read and fall back to their URL slug.",
+   "structure": "No usable breadcrumb division on this site — listed as one flat range.",
+   "filingRule": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 12 page(s) could not be read and fall back to their URL slug. Every item is listed by name below rather than grouped, because a fabricated grouping would misrepresent the company's own filing.",
+   "divisions": [
+    {
+     "name": "Uncategorised",
+     "products": 12
+    }
+   ],
+   "products": [
+    {
+     "n": "Waste Segregation Posters",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Small Accessories",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Large Accessories",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "30 Litre Bio-Bin®",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "6 Litre Bio-Bin®",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Loop Bio-Bin®",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Placenta Pack",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "2 Litre Bio-Bin®",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "5 Litre Bio-Bin®",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "1 Litre Bio-Bin®",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Hygiene+ Sanitary Bin",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "50 Litre Bio-Bin®",
+     "division": "Uncategorised",
+     "category": ""
+    }
+   ]
   }
  },
  "refusals": {
@@ -408083,6 +408166,21 @@
   "Mauser UK Ltd": {
    "domain": "mauserpackaging.com",
    "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+   "checked": "2026-09-09"
+  },
+  "British Bins Ltd": {
+   "domain": "britishbins.co.uk",
+   "reason": "the crawl came back as \"OK, 1177 products\" but the capture is not usable: 55% of the read \"names\" (644 of 1177) are literally the string \"Store Loading...\" (the site's own JS-hydration placeholder, read before the page's React/Pakk storefront renders) and the rest are raw SKU codes (e.g. \"hsb-0052-can\") rather than product names — the site's product pages are client-rendered and this crawler reads pre-hydration HTML/sitemap slugs only. No product from this capture is usable, so it is refused rather than left recorded as a valid range; the site's own catalogue is real (Wheelie Bins, Clinical Bins, Recycling Bins, Equipment, etc. per its nav) but unreadable by this route.",
+   "checked": "2026-09-09"
+  },
+  "Inpress Precision Limited": {
+   "domain": "inpress.info",
+   "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+   "checked": "2026-09-09"
+  },
+  "NeedleDock Ltd": {
+   "domain": "needledock.com",
+   "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
    "checked": "2026-09-09"
   }
  }

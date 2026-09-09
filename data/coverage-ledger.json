@@ -14,7 +14,7 @@
  "generatedFrom": {
   "frameworks.json": "2026-09-02",
   "differentiator.json published": 33061,
-  "differentiator.json held": 47608
+  "differentiator.json held": 47620
  },
  "counts": {
   "frameworks": 121,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 459,
-  "inScopeSuppliersNeedingCrawl": 522,
-  "inScopeSuppliersNeedingDomain": 478,
-  "suppliersRefused": 240,
+  "inScopeSuppliersNeedingCrawl": 519,
+  "inScopeSuppliersNeedingDomain": 474,
+  "suppliersRefused": 243,
   "blockedFrameworks": 1
  },
  "unresolvedSupplierNames": [
@@ -9248,34 +9248,24 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "British Bins Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Econix Limited",
-     "domain": null
+     "domain": "bio-bin.co.uk"
     },
     {
      "supplier": "G&N Laboratory",
      "domain": null
-    },
-    {
-     "supplier": "Inpress Precision Limited",
-     "domain": null
-    },
-    {
-     "supplier": "NeedleDock Ltd",
-     "domain": null
     }
    ],
    "domainsMissing": [
-    "British Bins Ltd",
-    "Econix Limited",
-    "G&N Laboratory",
-    "Inpress Precision Limited",
-    "NeedleDock Ltd"
+    "G&N Laboratory"
    ],
    "refusedSuppliers": [
+    {
+     "supplier": "British Bins Ltd",
+     "domain": "britishbins.co.uk",
+     "reason": "the crawl came back as \"OK, 1177 products\" but the capture is not usable: 55% of the read \"names\" (644 of 1177) are literally the string \"Store Loading...\" (the site's own JS-hydration placeholder, read before the page's React/Pakk storefront renders) and the rest are raw SKU codes (e.g. \"hsb-0052-can\") rather than product names \u2014 the site's product pages are client-rendered and this crawler reads pre-hydration HTML/sitemap slugs only. No product from this capture is usable, so it is refused rather than left recorded as a valid range; the site's own catalogue is real (Wheelie Bins, Clinical Bins, Recycling Bins, Equipment, etc. per its nav) but unreadable by this route.",
+     "checked": "2026-09-09"
+    },
     {
      "supplier": "Central Medical Supplies",
      "domain": "centralmedical.co.uk",
@@ -9283,9 +9273,21 @@
      "checked": "2026-08-31"
     },
     {
+     "supplier": "Inpress Precision Limited",
+     "domain": "inpress.info",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-09"
+    },
+    {
      "supplier": "Mauser UK Ltd",
      "domain": "mauserpackaging.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-09"
+    },
+    {
+     "supplier": "NeedleDock Ltd",
+     "domain": "needledock.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
      "checked": "2026-09-09"
     },
     {
@@ -9304,9 +9306,9 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 4,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "crawlable": 0,
-    "needDomain": 5
+    "needDomain": 1
    },
    "published": [
     "Mediq Healthcare UK Ltd",
@@ -9318,21 +9320,22 @@
     "Medline Industries",
     "Vernacare"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "Econix Limited"
+   ],
    "notCrawled": [
-    "British Bins Ltd",
-    "Econix Limited",
-    "G&N Laboratory",
-    "Inpress Precision Limited",
-    "NeedleDock Ltd"
+    "G&N Laboratory"
    ],
    "refused": [
+    "British Bins Ltd",
     "Central Medical Supplies",
+    "Inpress Precision Limited",
     "Mauser UK Ltd",
+    "NeedleDock Ltd",
     "Valley Northern Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 9,
+   "actionableTotal": 6,
    "blockedReason": null
   },
   {
