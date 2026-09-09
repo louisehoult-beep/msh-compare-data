@@ -31,6 +31,7 @@ OBESITY = "obesity-and-weight-management"
 NEURO = "neurology-and-neurosurgery"
 PALLIATIVE = "palliative-and-end-of-life-care"
 PATHOLOGY = "pathology-and-laboratory-medicine"
+RADIOLOGY = "radiology-and-imaging"
 fails = []
 
 
@@ -2114,6 +2115,215 @@ check("every published award title is one the rule actually accepts",
 check("licence notice carried", bool(pt.get("_notice", {}).get("owner")))
 ptkb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", PATHOLOGY + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % ptkb, ptkb < 200)
+
+
+# ---------------------------------------------------------------------------
+# RADIOLOGY AND IMAGING (page 2915), added 09/09/2026.
+#
+# Two things make this patch easy to get wrong. First, its whole vocabulary is
+# shared with physical science: X-ray means crystallography to a chemistry
+# department, computed tomography means dimensional metrology to an engineering
+# one, and "imaging" means a plate reader to a cell biologist. Second, it borders
+# interventional radiology, and the two pages have to divide a single word.
+# Every excluded case below is a REAL row that matched the include list and was
+# read and rejected, so each assertion fails the moment the filter loosens.
+# ---------------------------------------------------------------------------
+print("\nRADIOLOGY AND IMAGING")
+ri = load_panel(RADIOLOGY)
+check("panel is defined", ri.get("defined") is True)
+
+# Checked over the WHOLE corpus of 3,314 titles, not over the 40 rows the slice
+# publishes, so a false positive below the display cap still fails the test.
+_ri_rule = B.SPECIALITY_RULES[RADIOLOGY]
+_ri_rx = B.compile_rule(_ri_rule)
+_ri_th = B.load("tender-history.json")
+_ri_ix = {k: i for i, k in enumerate(_ri_th["schema"])}
+_ri_corpus = [r[_ri_ix["t"]] or "" for r in _ri_th["rows"]]
+_ri_corpus += [(a.get("title") or "") for a in B.load("framework-awards.json")["awards"]]
+ri_titles = [t for t in _ri_corpus if B.match_title(_ri_rx, t)]
+ri_all = " || ".join(ri_titles)
+
+
+def ri_absent(label, needle):
+    check("excluded: %s" % label, needle.lower() not in ri_all.lower(), needle)
+
+
+def ri_present(label, needle):
+    check("present: %s" % label,
+          any(needle.lower() in t.lower() for t in ri_titles), needle)
+
+
+print("  the twelve frameworks the page's own Buying route names, and only those")
+ri_fw = sorted(f["name"] for f in ri["frameworks"])
+check("exactly twelve frameworks", len(ri_fw) == 12, str(ri_fw))
+for _need in ["CT Scanners", "Magnetic Resonance Imaging Scanners", "Static X-Ray",
+              "Mobile X-Ray", "Mammography Imaging", "Nuclear Medicine Imaging",
+              "Bone Densitometers", "Ultrasound Scanners", "Fluoroscopy",
+              "Mobile Image Intensifiers", "Contrast Injectors",
+              "Digital Diagnostic Solutions"]:
+    check("carried: %s" % _need, any(_need in n for n in ri_fw))
+# The eleven modality briefs SHARE reference 2021/S 000-007768 with a twelfth brief
+# that is not this speciality's. The page says outright that "the reference
+# identifies a category, not an agreement", so the rule matches brief names. If
+# anyone ever switches it to the reference, this is the assertion that fails.
+check("Bladder Scanners is not claimed, though it shares the reference",
+      not any("Bladder Scanner" in n for n in ri_fw))
+# Claimed by interventional radiology and by vascular surgery, both correctly. This
+# page's own Buying route section names twelve briefs and this is not one of them.
+check("Angiography and Hybrid Theatres is left to the two pages that work in it",
+      not any("Angiography" in n for n in ri_fw))
+check("eleven of the twelve share the one reference",
+      sum(1 for f in ri["frameworks"] if f.get("reference") == "2021/S 000-007768") == 11)
+# Every one of the eleven states the same hard stop, both 24-month extensions already
+# inside the 72-month term. If a refresh ever silently rolls one over, this fails.
+check("all eleven modality briefs still end 31 March 2028",
+      all(f.get("ends") == "31 March 2028" for f in ri["frameworks"]
+          if f.get("reference") == "2021/S 000-007768"))
+
+print("  false positives that a loose filter WOULD publish")
+# Physical science buys X-ray instruments that are not imaging modalities.
+ri_absent("X-ray powder diffractometers (crystallography)", "Powder Diffractometer")
+ri_absent("single-crystal diffractometers at a chemistry school", "School of Chemistry")
+ri_absent("Diamond Light Source's diffractometer", "8041768")
+ri_absent("X-ray absorption/emission spectroscopy", "Spectroscopy")
+ri_absent("industrial metrology CT", "Nikon Metrology")
+ri_absent("an X-ray tomography microscope", "Tomography Microscope")
+ri_absent("a materials-science mid-kV CT system", "mid-kV")
+ri_absent("Kew's seed viability X-ray cabinet", "Seed viability")
+ri_absent("National Museums Scotland's X-ray unit", "National Museums")
+ri_absent("blood and laboratory X-ray irradiators", "Irradiators")
+# Preclinical and veterinary imaging is a different machine and a different market.
+ri_absent("a preclinical nanoScan PET/CT", "Preclinical PET")
+ri_absent("a preclinical ultrasound imaging system", "Preclinical Ultrasound")
+ri_absent("in vivo micro-ultrasound", "MICRO-ULTRASOUND")
+ri_absent("MicroPET-MRI", "MicroPET")
+ri_absent("micro CT scanners", "Micro CT")
+ri_absent("standing modular equine MRI", "Equine")
+ri_absent("functional ultrasound (a neuroscience research technique)", "Functional Ultrasound")
+ri_absent("couch components for an MRI scanner being designed", "Scanner Design")
+# Interventional radiology's ground, which this page does not claim.
+ri_absent("interventional radiology products", "Interventional Radiology Products")
+ri_absent("NHS Scotland's interventional radiology award", "NP68424")
+ri_absent("mobile interventional radiology tables", "Interventional Radiology Tables")
+ri_absent("interventional neuroradiology and thrombectomy", "Thrombectomy")
+ri_absent("the IC/IR/INR framework award", "CARDIAC RHYTHM MANAGEMENT")
+ri_absent("neuro vascular radiology consumables", "NEURO VASCULAR")
+ri_absent("CT guidance for percutaneous instrument insertion", "percutaneous")
+ri_absent("an MRI-guided laser ablation system", "Laser Ablation")
+ri_absent("cath lab and pacing procedure packs", "Pacing Packs")
+ri_absent("intravascular ultrasound (interventional cardiology)", "Intravascular Ultrasound")
+# Other departments wearing this speciality's words.
+ri_absent("dental X-ray systems", "Dental Xray")
+ri_absent("panoramic dental X-ray", "Panoramic Xray")
+ri_absent("digitising dental X-ray", "Digitise Dental")
+ri_absent("Planmeca oral X-ray maintenance", "Planmeca")
+ri_absent("ultrasound gel, bought on the consumables framework", "Ultrasound Gel")
+ri_absent("therapeutic high-intensity focused ultrasound", "focused ultrasound")
+ri_absent("FibroScan, which its own title calls non-imaging", "Non-Imaging")
+ri_absent("a PoCUS training manikin", "PoCUS")
+# MRI Software Ltd is a property-management vendor. This is the single reason the
+# \bmri\b term needs a guard at all.
+ri_absent("MRI Software's Planet housing product", "MRI Planet")
+# Ministry of Defence platform support: NDT radiography and EOD screening.
+ri_absent("MoD X-ray generators and film processors", "Film Processors")
+ri_absent("EOD lightweight X-ray capability", "lightweight x-ray")
+# Terms that were tried across the whole corpus and refused for being wrong more
+# often than right. Each of these is a row a bare term WOULD have admitted.
+ri_absent("an endoscopic imaging system (bare 'imaging')", "EVIS X1")
+ri_absent("an ophthalmic imaging machine (bare 'imaging')", "Ophthalmic Imaging")
+ri_absent("a cell imaging plate reader (bare 'imaging')", "Cell imaging")
+ri_absent("a night vision imaging system for aircrew (bare 'imaging')", "Night Vision")
+ri_absent("the ONYX software platform (bare 'imaging')", "ONYX imaging")
+ri_absent("a research multimodal imaging platform", "Multimodal Imaging Platform")
+ri_absent("teledermatoscopy (bare 'image transfer')", "dermatoscopes")
+ri_absent("bowel screening kits (bare 'screening')", "Bowel Screening")
+ri_absent("newborn screening kits (bare 'screening')", "Newborn Screening")
+ri_absent("digital pathology slide scanners (bare 'scanner')", "Slide Scanner")
+ri_absent("airport baggage scanners (bare 'scanner')", "baggage scanner")
+ri_absent("bladder scanners (bare 'scanner')", "Bladder Scanner")
+ri_absent("research scan time at a contract research organisation", "Invicro")
+# Echocardiography is a cardiology test and the page's own DM01 rule says so.
+ri_absent("an echocardiography insourcing contract", "Echocardiography Service")
+ri_absent("an echocardiogram service at a CDC", "Echocardiogram")
+
+print("  true positives that must survive any tightening")
+ri_present("mobile digital radiography (Samsung GC85)", "GC85")
+ri_present("outsourced radiology reporting", "Outsourced Radiology Reporting")
+ri_present("insourcing radiographers, which is the workforce constraint",
+           "Insourcing of Radiographers")
+ri_present("teleradiology", "Teleradiology")
+ri_present("a PACS interface integration project", "PACS")
+ri_present("a radiology order communications solution", "Order Communications")
+ri_present("relocatable MRI", "Relocatable MRI")
+ri_present("mobile CT trailer maintenance", "MOBILE CT TRAILER")
+ri_present("non-obstetric ultrasound insourcing (one of the DM01 five)",
+           "Non-Obstetric Ultrasound")
+ri_present("fluoroscopy suite enabling works", "Fluoroscopy Suite")
+ri_present("digital mammography equipment", "Digital Mammography")
+ri_present("SPECT/CT gamma camera", "Gamma Camera")
+ri_present("nuclear medicine radiopharmacy", "Nuclear Medicine")
+ri_present("PET dose dispensing", "PET Dose")
+ri_present("contrast media and barium", "Barium")
+ri_present("contrast injector consumables", "CONTRAST MEDIA INJECTION CONSUMABLES")
+ri_present("X-ray protective wear", "Protective Wear")
+ri_present("radiation protection services", "Radiation Protection")
+ri_present("the Quality Standard for Imaging subscription", "Quality Standard for Imaging")
+ri_present("NHS Scotland's multi-modality imaging framework", "Multi Modality Imaging")
+# The plural was missed on the first draft: "Replacement of City X-Rays" matched
+# nothing because the term was written x[- ]?ray with no optional s.
+ri_present("a plural X-Rays title", "City X-Rays")
+
+print("  the supplier list is the frameworks' own, and it corroborates the page")
+# The page's Deep dive derives, independently of this panel and from the eleven
+# product matrices rather than the supplier lists, that MIS Healthcare appears on
+# more of the imaging briefs than GE or Siemens. Two separate routes to the same
+# ordering is the check that the framework filter picked the right twelve.
+_ri_by_name = {s["name"]: len(s["frameworks"]) for s in ri["suppliers"]}
+_ri_mis = max((v for k, v in _ri_by_name.items() if "MIS Healthcare" in k), default=0)
+_ri_ge = max((v for k, v in _ri_by_name.items() if k == "GE HealthCare"), default=0)
+check("MIS Healthcare, a distributor, is on more of these frameworks than GE",
+      _ri_mis > _ri_ge and _ri_mis >= 11, "MIS %d, GE %d" % (_ri_mis, _ri_ge))
+check("the supplier list is not empty and not the whole directory",
+      50 < ri["counts"]["suppliers"] < 200, str(ri["counts"]["suppliers"]))
+# NHS Supply Chain writes "GE" and "Siemens" bare on the nuclear medicine brief. The
+# registry refuses to resolve a bare two-letter token, and the builder flags rather
+# than guessing. That refusal is correct and must not be papered over here.
+check("unresolved supplier names are flagged, not silently merged",
+      ri["counts"]["suppliersUnresolved"] >= 1)
+
+print("  the derived claims carry their rule and their limits (rules 14a, 14c)")
+rifw = (ri.get("rules") or {}).get("frameworks", "")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((ri.get("rules") or {}).get(k)))
+check("coverage note carried on the frameworks rule", "COVERAGE" in rifw)
+check("the shared reference is explained, not left to imply an agreement",
+      "identifies a category and not an agreement" in rifw)
+check("the brief that shares the reference and is not claimed is named",
+      "Bladder Scanners" in rifw)
+check("the devolved and regional routes are declared as absent, not hidden",
+      "NP167/22" in rifw)
+# Part IX is dressings, incontinence, stoma and elastic hosiery. A scanner is not an
+# appliance and is never dispensed against an FP10, so there is nothing to claim.
+check("no Drug Tariff part is claimed for an imaging speciality",
+      ri.get("drugTariff") is None)
+_ri_dt = (ri.get("rules") or {}).get("drugTariff", "")
+check("the absence of a Drug Tariff part is explained, not silent",
+      "No Drug Tariff part applies" in _ri_dt
+      and "reaching for the nearest part" in _ri_dt)
+# An empty open-tender list is the honest answer, not a gap to be padded.
+check("no open tender is invented for an empty day",
+      ri["counts"]["openTenders"] == len(ri["openTenders"]))
+_ri_raw = len([t for t in _ri_corpus if B.match_title(_ri_rx, t)])
+check("the published match count is not inflated above what the filter returns",
+      ri["counts"]["awardsShown"] <= ri["counts"]["awardsMatched"] <= _ri_raw,
+      "shown %d, matched %d, raw %d" % (
+          ri["counts"]["awardsShown"], ri["counts"]["awardsMatched"], _ri_raw))
+check("every published award title is one the rule actually accepts",
+      all(B.match_title(_ri_rx, a.get("title") or "") for a in ri["awards"]))
+check("licence notice carried", bool(ri.get("_notice", {}).get("owner")))
+rikb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", RADIOLOGY + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % rikb, rikb < 200)
+
 
 
 print()

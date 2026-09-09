@@ -1124,6 +1124,286 @@ SPECIALITY_RULES = {
             "sets out all four routes with their expiry dates."
         ),
     },
+    # PAGE 2915. Scope, in the page's own words: "Diagnostic imaging departments, the
+    # eleven-framework capital estate that serves them, and the reporting capacity that
+    # is the real constraint." Diagnostic imaging, NOT interventional radiology: the
+    # angio suite, embolics, ablation kit and percutaneous work are the Interventional
+    # Radiology page's, and that page's rule says in terms that CT, MRI, ultrasound,
+    # mammography, nuclear medicine, fluoroscopy and static and mobile X-ray are "the
+    # Radiology and Imaging page's". This rule holds the other side of that line.
+    "radiology-and-imaging": {
+        "label": "Radiology and Imaging",
+        # TWELVE frameworks, and they are exactly the twelve the page's own Buying route
+        # section names, all read on NHS Supply Chain's contract launch briefs 08/09/2026:
+        # the eleven modality briefs that share reference 2021/S 000-007768 and expire
+        # together on 31 March 2028 with both 24-month extensions used, plus Digital
+        # Diagnostic Solutions (2025/S 000-043444, expiring 31 July 2027), which is the
+        # PACS, RIS, VNA, dose monitoring and diagnostic AI route. The pattern names each
+        # brief rather than matching the shared reference, and that is deliberate: the
+        # page says outright that "the reference identifies a category, not an agreement",
+        # and a thirteenth brief carries the same reference — Bladder Scanners, which is
+        # the continence and urology assessment device and is not in the page's eleven.
+        # Matching on 2021/S 000-007768 would publish it here.
+        #
+        # The CBU `category` field is no use either: "Diagnostic Equipment and Services"
+        # also holds Laboratory Diagnostics (122 suppliers), Cardiac and Pulmonary
+        # Diagnostics, Audiological Diagnostics and the bladder scanners.
+        #
+        # NOT MATCHED, deliberately: Angiography, Hybrid Theatres, Capital Equipment
+        # (2025/S 000-077456). It is a real imaging room, and both the interventional
+        # radiology and the vascular surgery pages claim it, correctly. This page's own
+        # Buying route section does not: it names twelve briefs and that is not one of
+        # them. The page is the authority on its own scope, so the angio suite stays with
+        # the two pages that work in it.
+        "frameworks": (
+            r"\b(ct scanners|magnetic resonance imaging scanners|static x-ray|mobile x-ray|"
+            r"mammography imaging|nuclear medicine imaging|bone densitometers|"
+            r"ultrasound scanners|fluoroscopy|mobile image intensifiers|contrast injectors|"
+            r"digital diagnostic solutions)\b"
+        ),
+        # DERIVED, not guessed. Every pattern below was run over all 1,972 rows of
+        # tender-history.json and all 1,342 of framework-awards.json — 3,314 titles — and
+        # all 152 hits of the first draft were read one by one, with their buyers, before
+        # this list was fixed. 104 rows survive.
+        #
+        # THE RULE THIS PANEL MATCHES ON IS PRODUCT CLASS, NOT BUYER. A clinical imaging
+        # modality is on this panel whoever bought it, so a university's 3 Tesla MRI, a
+        # research council's DEXA and a Queen's University Belfast ultrasound system are
+        # all here: they are the same machines, sold by the same firms, that a trust buys.
+        # An instrument that is NOT a clinical imaging modality is not here whoever bought
+        # it, which is what most of the exclusion list below removes. Stating the rule
+        # this way round is the only way it can be applied consistently, because the
+        # builder matches titles and never buyer names.
+        #
+        # NOT INCLUDED, deliberately, and every one was tried and read:
+        #   bare "imaging"   -> 34 rows and fewer than half are this patch. The others are
+        #                       an endoscopic imaging system, an ophthalmic imaging
+        #                       machine, a small-animal retinal imaging system, a cell
+        #                       imaging plate reader, a time-lapse incubation imaging
+        #                       system, a hyperspectral imaging rig, an in vivo imaging
+        #                       system, a night vision imaging system for aircrew, and the
+        #                       ONYX software platform the interventional radiology rule
+        #                       also refused. The qualified forms — diagnostic imaging,
+        #                       medical imaging, multi-modality imaging — are used instead.
+        #   "multimodal
+        #    imaging"        -> its only hit is the University of Edinburgh's Multimodal
+        #                       Imaging Platform, a research platform. "Multi Modality
+        #                       Imaging" is kept because its only hit is NHS Scotland's
+        #                       NP167/22 equipment framework, which is this patch.
+        #   "image transfer" -> two hits and one is "Supply of dermatoscopes & image
+        #                       transfer system", dermatology teledermatoscopy. Genomics
+        #                       England's "Multi Modal Radiology image transfer" reaches
+        #                       the panel on "radiology" instead, without the term.
+        #   bare "scanner"   -> bladder scanners, digital pathology slide scanners, a
+        #                       fibroscanner, an automated ultrasonic vessel inspection
+        #                       scanner and three airport baggage scanners. The modality
+        #                       terms reach every real one.
+        #   bare "screening" -> 19 rows and one is imaging. The other eighteen are bowel,
+        #                       newborn, genetic, STI, cystic fibrosis, SCID and diabetic
+        #                       eye screening. "breast screening" is used instead, which
+        #                       is mammography and can be nothing else.
+        #   "radiopharma-
+        #    ceutical"       -> ten rows, and the title never says whether the product is
+        #                       a diagnostic imaging tracer or therapeutic molecular
+        #                       radiotherapy, which is a different patch bought on a
+        #                       different route. Radiopharmaceuticals are also bought
+        #                       through radiopharmacy, not through any of the twelve
+        #                       frameworks above. Refused rather than widened (rule 14).
+        #                       The two rows that genuinely are imaging reach the panel by
+        #                       their own names — "Nuclear Medicine" and "Diagnostic
+        #                       Imaging Agent Kit".
+        #   "echo",
+        #   "echocardiograph"-> four rows, and the page's own DM01 rule excludes
+        #                       echocardiography in terms: "Echocardiography is excluded
+        #                       because it is a cardiology test". It is the Cardiology and
+        #                       Cardiac Surgery page's. Note the consequence, stated so it
+        #                       can be judged: "Purchase of a Vivid E95 Ultrasound Machine"
+        #                       IS on this panel, because its title says ultrasound
+        #                       machine, even though a Vivid E95 is a cardiac system. The
+        #                       title is what the rule can see.
+        #   "\bvna\b"        -> matches nothing here and could mean anything in a future
+        #                       refresh. "vendor neutral archive" is used instead.
+        #
+        # TERMS THAT FIND NOTHING TODAY AND ARE KEPT ANYWAY: tomosynthesis, image
+        # intensifier, vendor neutral archive, picture archiving, positron emission, bone
+        # densitometer, densitometry, lead apron. None of them can mean anything but this
+        # speciality, so they cost nothing and will catch the next refresh. Not one row on
+        # the panel today reaches it through them, and that is stated rather than left to
+        # look like coverage.
+        "include": (
+            r"\b(radiolog\w*|radiograph\w*|radiograhic|teleradiolog\w*|"
+            r"diagnostic imaging|medical imaging|multi[- ]?modality imaging|"
+            r"quality standard for imaging|"
+            r"x[- ]?rays?|\bmris?\b|magnetic resonance|\bct\b|computed tomograph\w*|"
+            r"ultrasounds?|mammograph\w*|tomosynthesis|breast screening|"
+            r"nuclear medicine|\bspect\b|positron emission|pet[/ -]?ct|pet dose|"
+            r"gamma cameras?|fluoroscop\w*|image intensifiers?|c[- ]?arms?|"
+            r"bone densitometer\w*|densitometr\w*|absorptiometry|\bdexa\b|"
+            r"\bpacs\b|picture archiv\w*|vendor neutral archive|"
+            r"contrast media|contrast injectors?|barium|"
+            r"radiation protect\w*|radiation gloves?|lead aprons?)\b"
+        ),
+        # Every pattern below matched a real row, was read with its buyer, and was
+        # rejected. Grouped by why.
+        #
+        # ANOTHER PAGE'S GROUND, not a mistake in the feed:
+        #   interventional   -> eight rows, all the Interventional Radiology page's: two
+        #                       "Interventional Radiology Products", NP68424, the mobile
+        #                       IR tables framework, the Scottish INR and thrombectomy
+        #                       consumables, CLI-OJEU-46286 and NHS Supply Chain's own
+        #                       IC/IR/INR agreement.
+        #   percutaneous     -> Sheffield's "CT guidance technology for percutaneous
+        #                       instrument insertion and ablation volume validation".
+        #                       The IR rule claims it by name and it is IR's.
+        #   ablation         -> "Purchase of MRI-Guided Laser Ablation System", KCH
+        #                       Interventional Facilities Management. Ablation is a
+        #                       therapeutic act, not an imaging modality, whatever guides
+        #                       it. No row kept here carries the word.
+        #   neuro vascular   -> "HEY/17/266 NEURO VASCULAR RADIOLOGY CONSUMABLES", Hull.
+        #                       Interventional neuroradiology, which the IR page admits
+        #                       and this one does not. Excluded as "neuro vascular", not
+        #                       "neuroradiology", for the same reason the vascular rule
+        #                       gives.
+        #   pacing           -> "Radiology, Cardiology and Pacing Packs", NHS Grampian.
+        #                       Cath lab and IR procedure packs. A diagnostic imaging
+        #                       department does not buy pacing packs.
+        #   intravascular    -> "Purchase of 3 x Intravascular Ultrasounds", King's. IVUS
+        #                       is an interventional cardiology catheter.
+        #   dental,
+        #   oral x-ray,
+        #   panoramic        -> four rows: a dental X-ray system, a panoramic X-ray
+        #                       system, equipment to digitise dental X-ray, and the
+        #                       maintenance of Planmeca oral xray equipment. Dental
+        #                       radiography is its own patch, its own kit and its own
+        #                       buyer inside a trust.
+        #   ultrasound gel   -> two rows, both bought on NHS Supply Chain's Electrodes,
+        #                       Ultrasound Gels, Defibrillation and Related Consumables
+        #                       framework, which is none of the twelve above and is shared
+        #                       with resuscitation and cardiac physiology.
+        #   hifu, high-
+        #   intensity focused-> three rows. HIFU is a therapeutic ultrasound modality
+        #                       (prostate and uterine), not a diagnostic one.
+        #
+        # NOT A CLINICAL IMAGING MODALITY AT ALL, whoever bought it:
+        #   diffractomet*    -> five X-ray diffractometers: two School of Chemistry
+        #                       purchases at St Andrews, Cardiff, Glasgow and Diamond
+        #                       Light Source. Crystallography.
+        #   spectroscop*     -> "X-ray Absorption/Emission Spectroscopy", Warwick.
+        #   metrology        -> "Nikon Metrology XT H 225 X-ray CT system", Birmingham.
+        #                       Industrial computed tomography for dimensional metrology.
+        #   microscope       -> "MRC LMB High Resolution 3D X-ray Tomography Microscope".
+        #   mid-kV           -> "A mid-kV X-ray Computed Tomography System for CiMAT",
+        #                       Warwick. Mid-kV is a materials-testing tube specification;
+        #                       no clinical scanner notice carries it.
+        #   irradiator       -> "Provision of X-Ray Irradiators", Public Health England.
+        #                       Blood and laboratory irradiation, not imaging.
+        #   museum           -> "National Museums Scotland - X Ray Unit". Heritage.
+        #   seed viability   -> "RBGKEW1500 - Seed viability X-ray cabinet", Kew. The same
+        #                       row the wound care rule had to exclude on "viability".
+        #   preclinical,
+        #   in vivo, micro-CT,
+        #   micro-PET, micro-
+        #   ultrasound       -> seven research instruments: a nanoScan preclinical PET/CT,
+        #                       a preclinical ultrasound imaging system, an in vivo
+        #                       high-frequency micro-ultrasound array, MicroPET-MRI, and
+        #                       two Micro CT Scanners. Small-animal imaging is a different
+        #                       machine sold by different firms.
+        #   equine,
+        #   veterinary       -> "Standing Modular Equine MRI", Glasgow.
+        #   functional
+        #   ultrasound       -> "Functional Ultrasound Scanner", Edinburgh. fUS is a
+        #                       neuroscience research technique, not a clinical modality.
+        #   scanner design   -> "Motorized Patient Couch and Plastic Composite Outer
+        #                       Covers for a new MRI Scanner Design", Aberdeen. Components
+        #                       supplied INTO a scanner being designed, not a scanner
+        #                       bought.
+        #   simulator        -> "Point of Care Ultrasound (PoCUS) female patient simulator
+        #                       upgrades", NHS Golden Jubilee, twice. A training manikin.
+        #   non-imaging      -> "Standalone Non-Imaging Vibration-Controlled Ultrasound
+        #                       System", twice. FibroScan liver elastography, and the
+        #                       title says non-imaging itself.
+        #   invicro          -> "Use of PET and MRI imaging facilities, plus [11C]
+        #                       radiopharmaceuticals at Invicro LLC", Exeter. Buying
+        #                       research scan time at a contract research organisation is
+        #                       neither equipment nor NHS clinical capacity. Excluded on
+        #                       the CRO's name rather than on "imaging facilities", which
+        #                       would silently drop a genuine NHS managed-facility notice
+        #                       in a future refresh.
+        #   mri planet       -> "Annual MRI Planet Cloud Fee ... Invoice MRIUK1061277",
+        #                       Humber Teaching NHS Foundation Trust. MRI Software Ltd is
+        #                       a property-management software vendor whose initials
+        #                       collide with magnetic resonance imaging. Planet is its
+        #                       housing product. This is the single reason \bmri\b needs
+        #                       a guard at all.
+        #
+        # ONE EXCLUSION THAT IS A CONTRACTING PHRASE, NOT A PRODUCT CLASS, SAID PLAINLY:
+        #   in-service
+        #   support          -> three Ministry of Defence platform-support notices, and
+        #                       nothing else in 3,314 titles carries the phrase. Two are
+        #                       demonstrably not clinical: "In-Service Support of X-Ray
+        #                       Generators, Real Time Systems and Film Processors", which
+        #                       is non-destructive-testing radiography, and "Procurement
+        #                       and In Service Support lightweight x-ray capability",
+        #                       bought by the Specialist EOD&S, Exploitation and
+        #                       Countermeasures Team, which is explosive ordnance
+        #                       screening. The third, a portable digital X-ray system,
+        #                       could be a deployable clinical unit and cannot be told
+        #                       from its title. Dropping one possible true positive is the
+        #                       right side to err on (rule 14), and it is recorded here
+        #                       rather than hidden.
+        "exclude": (
+            r"\b(interventional|percutaneous|ablation|neuro[- ]?vascular|pacing|"
+            r"intravascular|dental|oral x[- ]?rays?|panoramic|ultrasound gels?|"
+            r"hifu|high[- ]intensity focused|"
+            r"diffractomet\w*|spectroscop\w*|metrology|microscope|mid[- ]?kv|"
+            r"irradiator\w*|museum\w*|seed viability|"
+            r"preclinical|pre[- ]clinical|in[- ]vivo|micro[- ]?ct|micro[- ]?pet|"
+            r"micro[- ]?ultrasound|equine|veterinar\w*|functional ultrasound|"
+            r"scanner design|simulators?|non[- ]?imaging|invicro|mri planet|"
+            r"in[- ]service support)\b"
+        ),
+        # THREE CPV FAMILIES, all of which fire on rows this rule already admits:
+        # 3311 is the imaging-equipment family (33110000 imaging equipment, 33111000
+        # X-ray devices, 33113000 magnetic resonance imaging equipment all appear here);
+        # 85150 is medical imaging SERVICES, which is the insourcing, outsourcing and
+        # reporting half of this patch and carries six of the rows below; 33696800 is
+        # X-ray contrast media, shared with interventional radiology because contrast
+        # injectors is genuinely both patches' framework.
+        #
+        # Corroboration only, and this speciality is the clearest illustration in the
+        # whole file of why a CPV code may never admit a notice on its own: 85150000,
+        # "medical imaging services", is also carried by an echocardiogram service at
+        # Wisbech and Ely, a colon capsule endoscopy contract and an insourced breast
+        # SURGERY list, and 33112300 sits on three airport baggage scanners. The title
+        # still has to match.
+        "cpv": ("3311", "85150", "33696800"),
+        # NO DRUG TARIFF PART. Part IX reimburses dressings and elastic hosiery (IXA),
+        # incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery
+        # (IXR), all community prescription routes. Nothing an imaging department buys —
+        # scanners, X-ray rooms, contrast media, PACS, radiation protection or reporting
+        # capacity — is listed there, and the page claims no tariff presence. The panel
+        # carries none rather than reaching for the nearest part.
+        "coverageNote": (
+            "COVERAGE, STATED RATHER THAN ASSUMED. Unlike the interventional radiology "
+            "and vascular surgery patches, every NHS Supply Chain framework this "
+            "speciality buys on parsed cleanly, so the twelve below really are the whole "
+            "national route: the eleven modality briefs that share reference 2021/S "
+            "000-007768 and expire together on 31 March 2028 with both 24-month "
+            "extensions already used, and Digital Diagnostic Solutions (2025/S "
+            "000-043444, expiring 31 July 2027) for PACS, RIS, VNA, dose monitoring and "
+            "diagnostic AI. Two limits are worth knowing. First, that shared reference "
+            "identifies a category and not an agreement: a thirteenth brief carries it, "
+            "Bladder Scanners, which is the continence and urology assessment device and "
+            "is not counted here. Second, the devolved nations and the regional "
+            "collaboratives buy on their own routes, which have no NHS Supply Chain "
+            "framework page and so contribute no suppliers below — NHS Scotland's "
+            "NP167/22 multi-modality imaging equipment framework and NHS Wales Shared "
+            "Services' contrast and imaging awards both appear in the award trail and in "
+            "neither the framework list nor the supplier count. Being named on a "
+            "framework is not evidence of volume, and being absent from one is not "
+            "evidence of absence from this market."
+        ),
+    },
     # PAGE 2801. Scope: cardiology and cardiac surgery — the catheter laboratory,
     # cardiac rhythm management and electrophysiology, structural heart, mechanical
     # circulatory support, cardiac surgery and perfusion, and cardiac physiology
