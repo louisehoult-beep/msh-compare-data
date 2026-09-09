@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-08",
+ "lastRun": "2026-09-09",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -258,7 +258,19 @@
   "Headington Medical Technology Ltd",
   "Healogics",
   "Healthcare Supply Solutions Limited",
-  "Healthy.io"
+  "Healthy.io",
+  "G&N Laboratory",
+  "Heartflow UK Ltd",
+  "Helapet Ltd",
+  "Helena Biosciences",
+  "Henleys Medical Supplies Limited",
+  "Henry Schien Medical",
+  "Heraeus Medical UK",
+  "Herida Healthcare",
+  "HiPP UK Ltd",
+  "HistoSonics",
+  "Hitachi Medical Systems UK Ltd",
+  "Hospital Innovations"
  ],
  "refusals": [
   {
@@ -520,6 +532,41 @@
    "name": "Healthcare Supply Solutions Limited",
    "date": "2026-09-08",
    "reason": "No verifiable name form. No company website could be found: healthcaresupplysolutions.co.uk resolves but serves only a \"Launching Soon\" placeholder carrying no company name, registration number or address (read 08/09/2026); healthcaresupplysolutions.com and hss-healthcare.co.uk do not resolve. Companies House holds no company of this name - the record's own companyNumberNote already records that finding from 14/08/2026, and nothing has changed. The only source that names this supplier is NHS Supply Chain's own contract launch brief for 2021/S 000-007768, which writes it as exactly \"Healthcare Supply Solutions Limited\", the form the record already holds. Its specialities array is empty and was LEFT empty: no source states its clinical scope, and the two frameworks it sits on (Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices; Radiotherapy Treatment Systems) are a framework award, not a statement of scope by the company."
+  },
+  {
+   "name": "G&N Laboratory",
+   "date": "2026-09-09",
+   "reason": "Already the subject of an unresolved cross-record identity dispute raised the same day this record was added (09/09/2026, differentiator-framework-coverage run) - the record's own identityNote documents that NHS Supply Chain's awarded name \"G&N Laboratory\" matches Companies House's G & N LABORATORY LIMITED (06424823) exactly, but the catalogue site for the range sits with a different entity, GRIFFITHS & NIELSEN LIMITED (01201146), and the Hub separately holds two more records for that name (\"Griffiths and Nielsen Ltd\", \"Griffiths and Neilson Ltd\", the second already refused 07/09/2026 for the same reason). Read live today: the dedicated lab.gandn.com site for \"G&N Laboratory\" carries the footer copyright line \"© 2020 Griffith & Nielsen\" - the G&N Laboratory-branded site itself attributes to the Griffiths & Nielsen name, deepening rather than resolving the ambiguity. Companies House alone would support adding \"G & N Laboratory Limited\" as a two-token alias, but doing so risks matching press about the wrong sibling company while the three-way identity question sits open. Left for the merge decision the 09/09/2026 identityNote already raised; no alias added."
+  },
+  {
+   "name": "Heartflow UK Ltd",
+   "date": "2026-09-09",
+   "reason": "Verified, but no additional usable name form exists. Companies House, read today, holds HEARTFLOW U.K. LTD. (10018961, active) - wording that differs from the seed's own alias \"Heartflow UK Ltd\" only in punctuation (full stops, spacing), not a genuinely distinct form. Two other UK entities exist in the same group - HEARTFLOW TECHNOLOGY U.K. LIMITED (11107941) and HEARTFLOW LTD (16939933) - but neither is shown to be this framework supplier rather than a different group entity, so neither was added. heartflow.com (the group's own global site, read today) names only \"Heartflow, Inc.\" (the US parent) in its footer and states no UK-specific trading entity. heartflow.co.uk returned HTTP 403 on a direct fetch and could not be read to confirm whether it is even the same company. No name form was seen on a source that could be verified as distinct from what the record already holds."
+  },
+  {
+   "name": "Heraeus Medical UK",
+   "date": "2026-09-09",
+   "reason": "Verified, but no additional usable name form exists. Companies House, read today, holds HERAEUS MEDICAL UK LTD (14402538, active, incorporated 06/10/2022) - wording essentially identical to the seed's existing alias \"Heraeus Medical UK\" plus the corporate suffix, not a genuinely distinct form. The only other name in use is \"Heraeus Medical\" (bare), which heraeus.com and heraeus-medical.com use throughout for the German parent group headquartered in Wehrheim - Heraeus Medical UK Ltd is that group's UK subsidiary, so under rule 4 the parent's name is not added as an alias of the subsidiary. No UK-specific trading name distinct from both of these was found."
+  },
+  {
+   "name": "Herida Healthcare",
+   "date": "2026-09-09",
+   "reason": "No safe alias exists because of an unresolved acquisition/rebrand, not a lack of information. Herida Medical (trading as Herida Healthcare, Companies House HERIDA HEALTHCARE LTD, company number 09918019, Morley, Leeds) was acquired by French group Winncare on 30/11/2022, confirmed on Winncare's own site (winncare.com, \"Winncare Acquires Herida Medical\") and corroborated by two independent trade sources (thiis.co.uk, selectmedical.co.uk), all read today. The company's own current site, herida.co.uk, now titles itself \"Winncare UK | Healthcare Solutions Designed For Life\" and files its pressure-care ranges under \"/by-winncare/\". The seed ALREADY holds a separate record, \"Winncare UK\" (aliases include \"Winncare PAC Ltd\"), so adding any Winncare-derived name form to this record would publish the same company's press under two Hub records at once - the duplicate-publication problem rule 10 exists to prevent, the same pattern as the G&N Laboratory / Griffiths & Nielsen records. The only safe form, \"Herida Healthcare Ltd\" (the CH legal name with the corporate suffix added), was judged not worth adding on its own because it does nothing to fix the real problem: this record and \"Winncare UK\" now describe the same trading business and need a merge decision, not an alias. Left for that decision; no alias added."
+  },
+  {
+   "name": "HistoSonics",
+   "date": "2026-09-09",
+   "reason": "No verifiable additional name form. HistoSonics is a US company (Plymouth, Minnesota) with no UK subsidiary or UK distributor named anywhere I could read: histosonics.com's own footer gives only the stylised brand \"HistoSonics®\", with no corporate suffix stated; a Medical Device Network article on its UK market-access authorisation (read today) refers to it throughout only as \"HistoSonics\" and \"The US company\", naming no UK entity; a BusinessWire press release on the same authorisation returned HTTP 403 and could not be read to confirm a fuller corporate name. Nothing beyond the display name already held could be confirmed on a source I could actually read."
+  },
+  {
+   "name": "Hitachi Medical Systems UK Ltd",
+   "date": "2026-09-09",
+   "reason": "No safe alias exists because of an unresolved corporate merger, not a lack of information. Fujifilm completed its acquisition of Hitachi's diagnostic-imaging business on 31/03/2021, and in the UK the ex-Hitachi ultrasound business was folded into FUJIFILM Healthcare UK Limited on 30/09/2023 - confirmed on Fujifilm's own site (fujifilm.com/uk, read today) and corroborated by independent trade coverage (AuntMinnie, AAMI News, healthcare-in-europe.com), all read today. The seed ALREADY holds a separate record, \"Fujifilm Healthcare UK\" (aliases include \"HITACHI ULTRASOUND LIMITED\" and \"ECOSCAN ULTRASOUND LIMITED\", but not \"Hitachi Medical Systems UK Ltd\"), so adding any Fujifilm-derived form to this record would publish the same business under two Hub records at once - the same duplicate-publication problem as the G&N Laboratory and Herida Healthcare refusals above. No Companies House number distinct from the display name could be found for \"Hitachi Medical Systems UK Ltd\" itself. Left for a merge decision between this record and \"Fujifilm Healthcare UK\"; no alias added."
+  },
+  {
+   "name": "Henry Schien Medical",
+   "date": "2026-09-09",
+   "reason": "Partial: added the corrected spelling \"Henry Schein Medical\" (the seed's own display name is misspelled \"Schien\"), but withdrew a second candidate alias, \"Henry Schein UK Holdings Limited\", after verify.py failed a hard check: the seed already holds a separate record \"Henry Schein UK Holdings\" under that exact name, so the alias would have made alias lookup (first-wins) answer for that record's own name from the wrong record. \"Henry Schein UK Holdings Limited\" is in any case the parent legal entity that also owns the separate Hub record, and rule 4 excludes a parent/subsidiary name from the other's aliases - the same reasoning applies here even without the hard check. Own-site source (henryschein.co.uk/about/company-information, read 09/09/2026) confirmed the trading name \"Henry Schein UK Holdings Limited t/a Henry Schein Medical\", which is what verified the corrected spelling now held as an alias."
   }
  ],
  "sources": {
