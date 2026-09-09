@@ -359,10 +359,10 @@
  },
  "counts": {
   "pairs": 5474,
-  "mapped": 4769,
+  "mapped": 4770,
   "notTaxonomy": 163,
   "products": 87871,
-  "productsMapped": 60780
+  "productsMapped": 60804
  },
  "entries": [
   {
@@ -91163,9 +91163,14 @@
     "HM70 Evo - POC",
     "HM70 Evo - General Imaging"
    ],
-   "hub": null,
+   "hub": [
+    "ultrasound:cart",
+    "ultrasound:port"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division is the company's own, read from each product's breadcrumb trail on mishealthcare.co.uk, and its 24 products are the Samsung Medison diagnostic ultrasound range the company distributes. Lou's list rule applies: the division's own evidence names products from more than one category. The company files this range on its own asset and brochure paths under three sub-lines — /Ultrasound/POC/, /Ultrasound/General-Imaging/ and /Ultrasound/Womens-Health/ (read 09/09/2026) — so the division spans point-of-care and full diagnostic systems in one folder. ultrasound:port ('Trolley & portable') is carried by the POC line: the EVO Q10 page says 'Built for every Point of Care demand' and 'POC-dedicated design', and the V5 - POC page says 'a compact, portable design' (both read 09/09/2026). ultrasound:cart ('Cart-based systems') is carried by the company's own image naming for these systems — EVO-Q10-Front-Cart-without-probe on /Ultrasound/POC/EVO-Q10/ — which names the form factor as a cart, alongside the General-Imaging and Womens-Health consoles (HERA W9/W10/W10 Elite/Z20, RS80 EVO, RS85 Prestige, V4-V8 One, R20, HM70 EVO). No handheld device and no separate transducer line sits in this division, so ultrasound:hand and ultrasound:trans are deliberately not claimed.",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--framework-coverage-0909.json"
   },
   {
    "supplier": "Spirit Medical Ltd",
