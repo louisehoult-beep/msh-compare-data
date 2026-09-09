@@ -1599,6 +1599,193 @@ SPECIALITY_RULES = {
             "and their source."
         ),
     },
+    # PAGE 2800. Scope: neurology and neurosurgery — the neurology outpatient
+    # pathway, clinical neurophysiology, elective and emergency neurosurgery, and
+    # neuromodulation. Stroke is NOT this patch: it has its own page and its own
+    # pathway, which is why thrombectomy and every stroke service row is kept out
+    # below. Neurorehabilitation is not this patch either: those are ICB-commissioned
+    # bed and community contracts and they belong to the rehabilitation page.
+    "neurology-and-neurosurgery": {
+        "label": "Neurology and Neurosurgery",
+        # TWO frameworks out of the five the page names, and the three that are left
+        # out are named here rather than quietly dropped.
+        #
+        #   Neuromodulation Devices and Associated Products (2023/S 000-034841, to
+        #     18/03/2028) is the only NHSSC framework named after any part of this
+        #     speciality. All 23 suppliers are neuromodulation suppliers, its three
+        #     lots are Deep Brain Stimulation, Spinal Cord Stimulation and Other
+        #     Neuromodulation, and it is unambiguously this patch's.
+        #   Surgical Navigation Systems with Associated Options and Related Services
+        #     (2021/S 000-007768, to 31/03/2028) is SHARED with the orthopaedics and
+        #     trauma page, which claims it too. That sharing is deliberate and correct,
+        #     the same way Pressure Area Care is shared between wound care and patient
+        #     handling: the brief's first product category is "Cranial Neurosurgery/
+        #     Spinal Surgery Navigation System" and it names Cranial and Neuro surgeons
+        #     among the users, so the navigation route really is bought by both.
+        #
+        # NOT MATCHED, deliberately, and each was read on its own brief:
+        #   Robotic Medical Equipment and Associated Accessories (2024/S 000-004668)
+        #     carries Lot 2 Spinal and Neurological Robots, and that lot holds
+        #     Medtronic Limited and no other supplier. Claiming the framework would put
+        #     its other five suppliers — CMR Surgical, Intuitive Surgical, Johnson and
+        #     Johnson Medical, MCT Lifesciences and Procept BioRobotics, none of whom
+        #     holds the neurological lot — under a neurology Suppliers heading and
+        #     attribute to them a neurosurgical presence the brief does not. It is
+        #     counted on the Theatres and Surgical page. The award trail still reaches
+        #     this panel where a notice names this patch.
+        #   Total Orthopaedic Solutions 3 (2023/S 000-025037) is where spinal implants
+        #     sit, and the page says so. Its supplier list is 101 names and is an
+        #     orthopaedic list; republishing it here would bury the two dozen names
+        #     that are this speciality's under five dozen that are not. It is counted
+        #     on the orthopaedics and trauma page.
+        #   Operating (Theatre and Outpatient) Microscopes and Associated Accessories
+        #     (2022/S 000-020537), whose Lot 1 carries Neurological Operating, IS in
+        #     frameworks.json but in its `unparsed` list, not its `frameworks` list:
+        #     the brief states 10 suppliers and 8 incumbents and then names 9 and 7, so
+        #     a list that does not match its own page is not published. build_frameworks
+        #     reads only the parsed list, so it cannot be counted here either way. Its
+        #     award notice does reach the Awards list below on "operating microscope".
+        "frameworks": r"\b(neuromodulation|surgical navigation)\b",
+        # DERIVED, not guessed. Every pattern below was run over all 1,972 rows of
+        # tender-history.json and all 1,342 of framework-awards.json — 3,314 titles —
+        # and every hit was read one by one before this list was fixed. A first,
+        # deliberately over-wide draft using bare "neuro\w*", "brain", "stereotact\w*",
+        # "shunt\w*" and "aneurysm" returned 40 rows of which 10 were not this
+        # speciality. Most of those were cut at the include stage rather than swept
+        # back out at the exclude stage, which is why the include list names the
+        # neuro- compounds one by one instead of matching the prefix.
+        #
+        # NOT INCLUDED, deliberately, and every one was tried and read:
+        #   bare "neuro\w*"    -> catches four things that are not this speciality and
+        #     nothing this speciality needs. "Purchase of AAA Netspot ... to Detect
+        #     Neuroendocrine Tumours" and "Purchase of 177Lu-Dotatate (Lutathera) to
+        #     treat patients with neuroendocrine tumours" (both Royal Marsden) are
+        #     oncology; "Neurodevelopmental Support for Children, Families and
+        #     Professionals" (NHS Cheshire and Merseyside ICB, twice) is a children's
+        #     autism and ADHD support service; "Neurodiverse Environmental Audits"
+        #     (Oxford Health, 10/08/2026) is an estates audit; and "Neuro MRI: MRI 1
+        #     and MRI 3" (King's College, 19/08/2026) is an MRI scanner purchase, which
+        #     is the radiology and imaging page's patch whatever the suite is called.
+        #   bare "brain"       -> its only hit is "Brain Injury Rehabilitation Service"
+        #     (NHS Norfolk and Suffolk ICB, 18/08/2026), a rehabilitation bed contract.
+        #     Deep brain stimulation is matched by its own full phrase instead.
+        #   bare "stereotact\w*" -> its only two hits are the same Royal Free contract
+        #     twice, "PR8980 - RFL Mammography Equipment consumables for Stereotactic
+        #     Procedure", which is breast biopsy. The genuine stereotactic row here,
+        #     Belfast's Neurosurgery Vantage Frame, is matched on "neurosurgery".
+        #   bare "shunt\w*"    -> matches Cambridge's "Medtronic Ltd - EVD and Shunts"
+        #     and nothing else in this data, but a bare shunt is an arteriovenous
+        #     dialysis shunt or a cardiac shunt at least as often as it is a CSF one.
+        #     That row is matched on "EVD" instead, which is the neurosurgical term in
+        #     the same title.
+        #   bare "spinal" / "spine" -> nine rows and one at most is this speciality.
+        #     "Purchase of Orthopaedic Spinal and Scoliosis Implants and Consumables"
+        #     (NHS National Services Scotland, three times), "Bridging Contract -
+        #     Replacement of Spinal Implants and Consumables" (Nottingham) and "BWC -
+        #     Edge Medical Ltd - Spinal Surgical consumables" (Birmingham Women's and
+        #     Children's) are orthopaedic spine, bought on Total Orthopaedic Solutions
+        #     3; "Spinal, Epidural and Associated Products" and "Epidural Pumps" are
+        #     anaesthesia. Only the qualified forms are used: "spinal cord stimulation"
+        #     and "spinal navigation".
+        #   bare "microscope"  -> six rows and five are not this speciality: an Olympus
+        #     BX53 laboratory microscope, an ophthalmic microscope, an ENT theatre
+        #     microscope, a multi-spectral light sheet research microscope at the
+        #     University of Glasgow and a Class II cabinet with an integrated
+        #     microscope. Only "operating microscope" is used, which matches the NHSSC
+        #     framework award and nothing else.
+        #   "thrombectomy"     -> stroke, which is its own page. The one row that is
+        #     genuinely this patch's as well, NHS National Services Scotland's
+        #     "Interventional Neuro Radiology and Thrombectomy Consumables"
+        #     (28/07/2025), reaches the panel on "neuro radiology" instead.
+        #   bare "INR"         -> its only hit, "INR and Thrombectomy Consumables"
+        #     (NHS National Services Scotland, 23/04/2021), is the 2025 contract above
+        #     under an earlier name, so the abbreviation is genuinely interventional
+        #     neuroradiology there. It is still refused: INR is the international
+        #     normalised ratio far more often, that is a coagulation test on the
+        #     haematology patch, and nothing in the title tells the two apart. The
+        #     successor contract is on the panel under its full name.
+        #   "spinal muscular atrophy" -> its only hit, "Referapatient for zolgensma for
+        #     spinal muscular atrophy" (NHS England, 11/08/2026), is a referral-platform
+        #     contract for a commissioned gene therapy, not a neurology purchase.
+        #
+        # ONE EDGE CASE KEPT, and it is kept on purpose. "EMG System" (University of
+        # Salford, 13/08/2026) is a university purchase, not an NHS one, and is almost
+        # certainly a biomechanics laboratory rather than a clinical neurophysiology
+        # department. It stays because an EMG system is genuinely this speciality's
+        # product and the only thing that marks the row out is its buyer — and buyer
+        # names are never matched on here, in either direction. Excluding it would mean
+        # writing a rule about who is buying, which is a different and worse rule than
+        # one about what is being bought.
+        "include": (
+            r"\b(neurolog(?:y|ical|ists?)|neurosurg\w*|neurophysiolog\w*|"
+            r"neuromodulation|neurostimulat\w*|neuromonitoring|"
+            r"neuro[- ]?navigation|neuro[- ]?radiolog\w*|neuro[- ]?vascular|"
+            r"neuro[- ]?oncolog\w*|deep brain stimulat\w*|spinal cord stimulat\w*|"
+            r"vagus nerve stimulat\w*|spinal[- ]?navigation|cranial[- ]?navigation|"
+            r"operating microscopes?|intracranial|cranioplast\w*|craniotom\w*|"
+            r"craniect\w*|burr hole|cranial (?:implant|fixation|plate)|"
+            r"dural|dura mater|hydrocephal\w*|ventriculoperitoneal|"
+            r"cerebrospinal fluid|external ventricular drain\w*|evd|"
+            r"aneurysm clips?|electroencephalo\w*|eeg|emgs?|electromyograph\w*|"
+            r"evoked potential|nerve conduction|epilep\w*|parkinson\w*|"
+            r"multiple sclerosis|motor neuron\w*)\b"
+        ),
+        # Two patterns, and both were put here because a real row matched the include
+        # list above and was wrong:
+        #   rehabilitation          -> "Neurological Rehabilitation Service" (NHS
+        #     Greater Manchester ICB, 20/08/2026). A commissioned rehabilitation
+        #     service, which is the rehabilitation, prosthetics and orthotics page's
+        #     patch, not a neurology or neurosurgery purchase. It also holds out
+        #     "Provision of Specialist Level 2b Neuro-rehabilitation Beds" and "Brain
+        #     Injury Rehabilitation Service" if either is ever reworded into a form the
+        #     include list reaches.
+        #   interventional cardiology -> "INTERVENTIONAL CARDIOLOGY, INTERVENTIONAL
+        #     RADIOLOGY AND INTERVENTIONAL NEURORADIOLOGY, CARDIAC RHYTHM MANAGEMENT
+        #     AND ELECTROPHYSIOLOGY" (NHS Supply Chain, 22/11/2022), matched on
+        #     "neuroradiology". The notice really does carry an interventional
+        #     neuroradiology lot, but it is the cardiology and interventional radiology
+        #     pages' framework and is counted there, its neuroradiology share cannot be
+        #     separated out of the title, and the page's own Buying route section names
+        #     five frameworks and not this one. Publishing it here would contradict the
+        #     page a reader is standing on.
+        "exclude": r"\b(rehabilitation|interventional cardiology)\b",
+        # NO CPV FAMILY, and that is checked rather than skipped. Every matching notice
+        # in framework-awards.json that carries CPV codes at all carries only generic
+        # ones: 85100000 and 85111000 health services, 85112200 outpatient services,
+        # 33140000 medical consumables, 31711140 electrodes, 33698000 clinical
+        # products. Not one is specific to neurology or neurosurgery, so none is
+        # claimed. A CPV code could not admit a notice on its own in any case.
+        #
+        # NO DRUG TARIFF PART. Part IX reimburses dressings and elastic hosiery (IXA),
+        # incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery
+        # (IXR). Nothing this speciality buys is listed there. Its community spend is
+        # real and large — 411.3m pounds a year across BNF sections 4.8 and 4.9, on the
+        # page's own PCA analysis — but that is Part VIII drugs, a different part of a
+        # different tariff, and the panel carries none rather than reaching for the
+        # nearest one.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This speciality has no NHS "
+            "Supply Chain framework of its own. The whole contract launch brief index "
+            "was read on 09/09/2026 — 140 unique briefs — and not one names cranial "
+            "implants, cerebrospinal fluid shunts or valves, dural substitutes, "
+            "aneurysm clips, cranial fixation or hydrocephalus. Those products are "
+            "bought at trust or unit level and no framework record can show them. What "
+            "is counted below is the two of the five agreements the page names whose "
+            "supplier lists are genuinely this patch's. Three are not counted: Robotic "
+            "Medical Equipment, whose Lot 2 Spinal and Neurological Robots holds "
+            "Medtronic Limited alone, and Total Orthopaedic Solutions 3, which carries "
+            "spinal implants among 101 largely orthopaedic suppliers, are both counted "
+            "on the pages whose frameworks they are; and Operating (Theatre and "
+            "Outpatient) Microscopes, whose Lot 1 carries Neurological Operating, sits "
+            "in the framework dataset's unparsed list because its brief states 10 "
+            "suppliers and 8 incumbents and then names 9 and 7. Being named on a "
+            "framework is not evidence of volume, and being absent from one is not "
+            "evidence of absence from this market. The page's Buying route section "
+            "sets out all five agreements with their expiry dates, and the date that "
+            "matters most — 11 November 2026, the planned publication of the "
+            "neuromodulation successor tender — is there rather than here."
+        ),
+    },
 }
 
 

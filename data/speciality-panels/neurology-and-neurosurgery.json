@@ -1,0 +1,741 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "neurology-and-neurosurgery",
+ "label": "Neurology and Neurosurgery",
+ "defined": true,
+ "generated": "2026-09-09",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-08T11:13:54+00:00",
+  "openTenders": "08/09/2026",
+  "drugTariff": "2026-09-08"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(neuromodulation|surgical navigation)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This speciality has no NHS Supply Chain framework of its own. The whole contract launch brief index was read on 09/09/2026 — 140 unique briefs — and not one names cranial implants, cerebrospinal fluid shunts or valves, dural substitutes, aneurysm clips, cranial fixation or hydrocephalus. Those products are bought at trust or unit level and no framework record can show them. What is counted below is the two of the five agreements the page names whose supplier lists are genuinely this patch's. Three are not counted: Robotic Medical Equipment, whose Lot 2 Spinal and Neurological Robots holds Medtronic Limited alone, and Total Orthopaedic Solutions 3, which carries spinal implants among 101 largely orthopaedic suppliers, are both counted on the pages whose frameworks they are; and Operating (Theatre and Outpatient) Microscopes, whose Lot 1 carries Neurological Operating, sits in the framework dataset's unparsed list because its brief states 10 suppliers and 8 incumbents and then names 9 and 7. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from this market. The page's Buying route section sets out all five agreements with their expiry dates, and the date that matters most — 11 November 2026, the planned publication of the neuromodulation successor tender — is there rather than here.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This speciality has no NHS Supply Chain framework of its own. The whole contract launch brief index was read on 09/09/2026 — 140 unique briefs — and not one names cranial implants, cerebrospinal fluid shunts or valves, dural substitutes, aneurysm clips, cranial fixation or hydrocephalus. Those products are bought at trust or unit level and no framework record can show them. What is counted below is the two of the five agreements the page names whose supplier lists are genuinely this patch's. Three are not counted: Robotic Medical Equipment, whose Lot 2 Spinal and Neurological Robots holds Medtronic Limited alone, and Total Orthopaedic Solutions 3, which carries spinal implants among 101 largely orthopaedic suppliers, are both counted on the pages whose frameworks they are; and Operating (Theatre and Outpatient) Microscopes, whose Lot 1 carries Neurological Operating, sits in the framework dataset's unparsed list because its brief states 10 suppliers and 8 incumbents and then names 9 and 7. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from this market. The page's Buying route section sets out all five agreements with their expiry dates, and the date that matters most — 11 November 2026, the planned publication of the neuromodulation successor tender — is there rather than here.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(neurolog(?:y|ical|ists?)|neurosurg\\w*|neurophysiolog\\w*|neuromodulation|neurostimulat\\w*|neuromonitoring|neuro[- ]?navigation|neuro[- ]?radiolog\\w*|neuro[- ]?vascular|neuro[- ]?oncolog\\w*|deep brain stimulat\\w*|spinal cord stimulat\\w*|vagus nerve stimulat\\w*|spinal[- ]?navigation|cranial[- ]?navigation|operating microscopes?|intracranial|cranioplast\\w*|craniotom\\w*|craniect\\w*|burr hole|cranial (?:implant|fixation|plate)|dural|dura mater|hydrocephal\\w*|ventriculoperitoneal|cerebrospinal fluid|external ventricular drain\\w*|evd|aneurysm clips?|electroencephalo\\w*|eeg|emgs?|electromyograph\\w*|evoked potential|nerve conduction|epilep\\w*|parkinson\\w*|multiple sclerosis|motor neuron\\w*)\\b/i and does not match /\\b(rehabilitation|interventional cardiology)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 2,
+  "suppliers": 28,
+  "suppliersUnresolved": 1,
+  "awardsShown": 33,
+  "awardsMatched": 33,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Neuromodulation Devices and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+   "reference": "2023/S 000-034841",
+   "category": "Medical Technology",
+   "supplyRoute": "eDirect",
+   "starts": "18 March 2024",
+   "ends": "18 March 2028",
+   "supplierCount": 23,
+   "supplierSource": "count verified against the page's own stated total (23)",
+   "suppliers": [
+    "Abbott Medical U.K.Ltd",
+    "Avanos Medical UK Limited",
+    "Axonics Modulation Technologies UK Limited",
+    "Boston Scientific Ltd",
+    "BVM Medical Ltd",
+    "Charco Neurotech",
+    "electroCore UK Ltd",
+    "Far From Surgical Solutions",
+    "Flow Neuroscience",
+    "Freedom Neuro BV",
+    "inomed Neurocare Limited",
+    "Inspire Medical Systems",
+    "LivaNova UK Limited",
+    "Mainstay Medical Distribution Ltd",
+    "Medtronic Limited",
+    "Nevro Medical Limited",
+    "Nyxoah SA",
+    "Optimus Medical Ltd",
+    "P14 Medical Limited",
+    "Phagenesis",
+    "Polar Medical Ltd",
+    "Precisis",
+    "Saluda Medical"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Surgical Navigation Systems with Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-navigation-systems-with-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 6,
+   "supplierSource": "no stated count on the page; 6 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Brainlab Ltd",
+    "Hospital Services Limited",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Medtronic Ltd",
+    "Stryker UK Ltd",
+    "T.J.Smith and Nephew Limited"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited",
+    "Medtronic Ltd"
+   ],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products",
+    "Surgical Navigation Systems with Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Abbott Medical U.K. Ltd",
+   "resolved": true,
+   "variants": [
+    "Abbott Medical U.K.Ltd"
+   ],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Avanos Medical UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Axonics Modulation Technologies UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Boston Scientific",
+   "resolved": true,
+   "variants": [
+    "Boston Scientific Ltd"
+   ],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Brainlab Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Navigation Systems with Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "BVM Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Charco Neurotech",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "electroCore UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Far From Surgical Solutions",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Flow Neuroscience",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Freedom Neuro BV",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Hospital Services Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Navigation Systems with Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "inomed Neurocare Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Inspire Medical Systems",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz Endoscopy (UK) Ltd"
+   ],
+   "frameworks": [
+    "Surgical Navigation Systems with Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "LivaNova UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Mainstay Medical Distribution Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Nevro Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Nyxoah SA",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Optimus Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "P14 Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Phagenesis",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Polar Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Precisis",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Saluda Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Stryker",
+   "resolved": true,
+   "variants": [
+    "Stryker UK Ltd"
+   ],
+   "frameworks": [
+    "Surgical Navigation Systems with Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "T.J.Smith and Nephew Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Surgical Navigation Systems with Associated Options and Related Services"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Provision of Outsourced Neurology Services for Barking, Havering & Redbridge University Hospital NHS Trust",
+   "buyer": "Barking, Havering and Redbridge University Hospitals NHS Trust",
+   "supplier": "Health Now Ltd",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084438-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Outsourced Neurology Services for Barking, Havering & Redbridge University Hospital NHS Trust",
+   "buyer": "Barking, Havering and Redbridge University Hospitals NHS Trust",
+   "supplier": "Gutcare.org Ltd (Medcare World)",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084428-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85111000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Sub Contract Insourcing of Neurology Out Patient Activity 2026-27",
+   "buyer": "Sheffield Teaching Hospitals NHS Foundation Trust",
+   "supplier": "18 Week Support Limited",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084114-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85112200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Sub Contract Insourcing of Neurology Out Patient Activity 2026-27",
+   "buyer": "Sheffield Teaching Hospitals NHS Foundation Trust",
+   "supplier": "18 Week Support Limited",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084107-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85112200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Sub Contract Insourcing of Neurology Out Patient Activity 2026-27",
+   "buyer": "Sheffield Teaching Hospitals NHS Foundation Trust",
+   "supplier": "18 Week Support Limited",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084106-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85112200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Sub Contract Insourcing of Neurology Out Patient Activity 2026-27",
+   "buyer": "Sheffield Teaching Hospitals NHS Foundation Trust",
+   "supplier": "18 Week Support Limited",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084100-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85112200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "WPL07040 - Neurology Insourcing",
+   "buyer": "UNIVERSITY HOSPITAL SOUTHAMPTON NHS FOUNDATION TRUST",
+   "supplier": "18 Week Support Limited",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083927-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Neurophysiology Insourced Services",
+   "buyer": "Northampton General Hospital NHS Trust",
+   "supplier": "NeurophysCare Ltd",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083318-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Nerve Conduction Studies",
+   "buyer": "MID CHESHIRE HOSPITALS NHS FOUNDATION TRUST",
+   "supplier": "Mediservices Healthcare Ltd",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082646-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Medtronic Ltd - EVD and Shunts",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "supplier": "MEDTRONIC LIMITED",
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081728-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of EEG Electrodes",
+   "buyer": "HULL UNIVERSITY TEACHING HOSPITALS NHS TRUST",
+   "supplier": "NEUROGEN LIMITED",
+   "date": "2026-08-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077599-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "31711140",
+    "33140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Electromyography (EMG), Complex Nerve Conduction Studies (CNS) and Single Fibre EMGs",
+   "buyer": "UNITED LINCOLNSHIRE TEACHING HOSPITALS NHS TRUST",
+   "supplier": "Bespoke Healthcare",
+   "date": "2026-08-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077550-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "EMG System",
+   "buyer": "University of Salford",
+   "supplier": "DELSYS EUROPE LTD",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077175-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33698000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Intraoperative Neurophysiological Monitoring",
+   "buyer": "YORK AND SCARBOROUGH TEACHING HOSPITALS NHS FOUNDATION TRUST",
+   "supplier": "Inomed Neurocare Limited",
+   "date": "2026-08-03",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/b5cc29e9-cfce-477f-963b-cf354ec85b6f",
+   "value": 450000,
+   "periodEnd": "2028-07-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Neurophysiology EEG Equipment",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "supplier": "Nihon Kohden UK Limited",
+   "date": "2026-07-17",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/8ce75cb9-5724-4132-bca6-059878d3eb96",
+   "value": 124054,
+   "periodEnd": "2026-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Neurophysiology Equipment (LIDIA003)",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "supplier": "Medevolve Limited",
+   "date": "2026-07-07",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/15fae76f-7a2d-4d65-8d74-b83b33d41705",
+   "value": 38880,
+   "periodEnd": "2026-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT2394 Purchase of Spinal Navigation System",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Medtronic Limited",
+   "date": "2026-03-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027872-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of EEG/EMG equipment upgrade",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "Medevolve LTD",
+   "date": "2026-03-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023187-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP30925 Psychiatry and Neurology Medicines",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Accord-UK Ltd, Aventis Pharma Ltd Trading As Sanofi, Crescent Pharma Limited, CS",
+   "date": "2025-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/049343-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Interventional Neuro Radiology and Thrombectomy Consumables",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Abbott Medical U.K. Ltd, Acandis GmbH, Cordis Medical UK Limited, Microvention U",
+   "date": "2025-07-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/043625-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Provision of Cranioplasties",
+   "buyer": "Sheffield Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Meridian Technique Limited trading as Materialise UK",
+   "date": "2024-07-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/022408-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Neurosurgery Vantage Frame",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Severn Healthcare Technologies Limited",
+   "date": "2024-03-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/010481-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Neurosurgery Vantage Frame",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Severn Healthcare Technologies Limited",
+   "date": "2024-02-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005658-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Neurosurgery Consumables",
+   "buyer": "NHS National Services Scotland",
+   "supplier": "B. Braun Medical Limited, Integra NeuroSciences Limited, Medtronic Limited, Stry",
+   "date": "2024-01-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002361-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Neuromodulation Devices Consumables and Associated Products 2023",
+   "buyer": "NHS Supply Chain",
+   "supplier": "Abbott Medical U.K.Ltd, Boston Scientific Ltd, Far From Surgical Solutions, Medt",
+   "date": "2023-11-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/034841-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP30923 Psychiatry and Neurology Medicines",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Aspire Pharma Ltd, CST Pharma Ltd, Aventis Pharma Ltd Trading As Sanofi, Day Lew",
+   "date": "2023-10-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/030958-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP47822 Multiple Sclerosis Medicines",
+   "buyer": "The Common Services Industry (more commonly known as NHS National Services Scotl",
+   "supplier": "Biogen Idec Ltd, Merck Serono Limited, Mylan, Teva UK Limited",
+   "date": "2023-02-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004666-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Neuromodulation/Spinal Cord Stimulators, Intrathecal Drug Pumps, Radiofrequency Ablation and Associated Products",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "MEDTRONIC LIMITED, Nevro Medical Ltd, PEI SURGICAL LTD, PLATFORM - 14 LTD, PLATF",
+   "date": "2023-01-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000691-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Intracranial Pressure Monitoring Kits",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "DELTA SURGICAL LTD",
+   "date": "2022-12-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/034645-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Operating Microscopes and Associated Accessories",
+   "buyer": "NHS Supply Chain",
+   "supplier": "B. BRAUN MEDICAL LIMITED, D.P. MEDICAL SYSTEMS LIMITED, KEYMED (MEDICAL & INDUST",
+   "date": "2022-11-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/032182-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "4183924 External Ventricular Drainage (EVD)",
+   "buyer": "Business Services Organisation Procurement and Logistics Service",
+   "supplier": "INTEGRA NEUROSCIENCES LTD, DELTA SURGICAL LTD",
+   "date": "2022-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/026532-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Dural Repair Patches [2977787]",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "B. BRAUN MEDICAL LTD, DELTA SURGICAL LTD",
+   "date": "2022-05-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/013357-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "HEY/17/266 NEURO VASCULAR RADIOLOGY CONSUMABLES",
+   "buyer": "Hull University Teaching Hospitals NHS Trust",
+   "supplier": "Neurologic Europe, Penumbra Europe GMBH, Stryker UK Limited, Terumo UK Ltd",
+   "date": "2021-11-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028564-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}

@@ -28,6 +28,7 @@ IR = "interventional-radiology"
 CARDIAC = "cardiology-and-cardiac-surgery"
 NUTRITION = "nutrition-and-dietetics"
 OBESITY = "obesity-and-weight-management"
+NEURO = "neurology-and-neurosurgery"
 fails = []
 
 
@@ -1638,6 +1639,166 @@ check("frameworks tab does not render a header-only table",
 check("suppliers tab does not render a search box over an empty table",
       "if (!d.suppliers.length) {" in _js
       and "No supplier list is published for this speciality." in _js)
+
+
+# ---------------------------------------------------------------------------
+print("\nNEUROLOGY AND NEUROSURGERY (page 2800)")
+print("Rebuilding the neurology and neurosurgery slice from live data...")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), NEURO],
+               check=True, capture_output=True)
+ne = load_panel(NEURO)
+nex = B.compile_rule(B.SPECIALITY_RULES[NEURO])
+
+print("\nFALSE POSITIVES — every one is a real row that a wider rule matched and was read and rejected")
+for bad in [
+    # Oncology. "neuroendocrine" is why the include list names the neuro- compounds
+    # one by one instead of matching the prefix.
+    "Purchase of AAA Netspot - Diagnostic Imaging Agent Kit to Detect Neuroendocrine Tumours",
+    "Purchase of 177Lu- Dotatate (Lutathera ®) to treat patients with neuroendocrine tumours",
+    # Children's autism and ADHD support, and an estates audit.
+    "Neurodevelopmental Support for Children, Families and Professionals",
+    "Neurodiverse Environmental Audits",
+    # An MRI scanner is the radiology and imaging page's patch whatever the suite
+    # it stands in is called.
+    "Neuro MRI: MRI 1 and MRI 3",
+    # Rehabilitation beds and services, which are the rehabilitation page's.
+    "Brain Injury Rehabilitation Service.",
+    "Provision of Specialist Level 2b Neuro-rehabilitation Beds",
+    "Neurological Rehabilitation Service",
+    # Breast biopsy, which is why bare "stereotactic" was never adopted.
+    "PR8980 - RFL Mammography Equipment consumables for Stereotactic Procedure",
+    # Orthopaedic spine and anaesthesia, which is why bare "spinal" was never adopted.
+    "Purchase of Orthopaedic Spinal & Scoliosis Implants & Consumables",
+    "Bridging Contract - Replacement of Spinal Implants and Consumables",
+    "BWC - Edge Medical Ltd - Spinal Surgical consumables",
+    "Spinal, Epidural and Associated Products",
+    "Epidural Pumps",
+    # Laboratory, ophthalmic and ENT microscopes, which is why only the qualified
+    # "operating microscope" is used.
+    "BX53 Microscope",
+    "ESNEFT3184 Purchase of Ophthalmic Microscope",
+    "ESNEFT2728 Purchase of ENT Microscope for Theatre",
+    "PURCH2281 PROVISION OF A CONTRACT FOR A MULTI-SPECTRAL LIGHT SHEET MICROSCOPE & "
+    "ASSOCIATED MAINTENANCE",
+    # Stroke has its own page and its own pathway.
+    "Provision of Transport for Stroke and Suspected Stroke Patients",
+    "Early Stroke Discharge Service",
+    "Stroke Central Monitor",
+    # A referral platform for a commissioned gene therapy, not a neurology purchase.
+    "Referapatient for zolgensma for spinal muscular atrophy",
+    # INR is the international normalised ratio far more often than it is
+    # interventional neuroradiology, and the title cannot tell them apart.
+    "INR and Thrombectomy Consumables",
+    # The multi-speciality NHSSC framework, counted on the cardiology and
+    # interventional radiology pages.
+    "INTERVENTIONAL CARDIOLOGY, INTERVENTIONAL RADIOLOGY AND INTERVENTIONAL "
+    "NEURORADIOLOGY, CARDIAC RHYTHM MANAGEMENT AND ELECTROPHYSIOLOGY",
+]:
+    check("excluded: %s" % bad[:58], not B.match_title(nex, bad))
+
+print("\nTHE EXCLUDE LIST MUST BE THE REASON, NOT A COINCIDENCE OF THE INCLUDE LIST")
+# Both exclusions exist because the include list really does reach these rows. If a
+# later edit narrows the include list, these stop testing anything, so assert both
+# halves: the include matches, and the exclude is what stops it.
+for caught in ["Neurological Rehabilitation Service",
+               "INTERVENTIONAL CARDIOLOGY, INTERVENTIONAL RADIOLOGY AND INTERVENTIONAL "
+               "NEURORADIOLOGY, CARDIAC RHYTHM MANAGEMENT AND ELECTROPHYSIOLOGY"]:
+    check("include reaches it, exclude stops it: %s" % caught[:40],
+          bool(nex["inc"].search(caught)) and bool(nex["exc"].search(caught)))
+# ...and the rehabilitation guard must stay narrow enough to keep the genuine rows.
+check("the rehabilitation guard does not throw away a genuine neurophysiology row",
+      B.match_title(nex, "Neurophysiology Insourced Services"))
+
+print("\nTRUE POSITIVES — rows that must be on this patch")
+net = " || ".join((a.get("title") or "") for a in ne["awards"]).lower()
+for good in ["neurosurgery consumables", "provision of cranioplasties",
+             "dural repair patches", "external ventricular drainage",
+             "intracranial pressure monitoring kits", "nerve conduction studies",
+             "intraoperative neurophysiological monitoring",
+             "neuromodulation devices consumables", "operating microscopes",
+             "interventional neuro radiology"]:
+    check("present: %s" % good, good in net)
+check("every award matched is shown (33 of 33)",
+      ne["counts"]["awardsShown"] == ne["counts"]["awardsMatched"] == 33,
+      "shown=%s matched=%s" % (ne["counts"]["awardsShown"], ne["counts"]["awardsMatched"]))
+
+print("\nFRAMEWORKS — two claimed, three named and left to the pages they belong to")
+nenames = [f["name"] for f in ne["frameworks"]]
+for want in ["Neuromodulation Devices and Associated Products",
+             "Surgical Navigation Systems with Associated Options and Related Services"]:
+    check("claimed: %s" % want[:46], want in nenames)
+check("exactly two frameworks claimed", len(nenames) == 2, "got %s" % nenames)
+# Each of these carries a slice of this speciality and each is refused, with the
+# reason in the rule. If a later edit reaches for one to fill the panel out, this
+# fails.
+for notmine in ["Robotic Medical Equipment and Associated Accessories",
+                "Total Orthopaedic Solutions 3"]:
+    check("not claimed from another page: %s" % notmine[:44], notmine not in nenames)
+# The microscopes framework is in frameworks.json's `unparsed` list, so it cannot be
+# claimed even though its Lot 1 carries Neurological Operating. Its award notice does
+# reach the Awards list, which is asserted above.
+check("the unparsed microscopes framework is not claimed",
+      not any("Microscopes" in n for n in nenames))
+check("the neuromodulation framework end date is carried",
+      any(f.get("ends") == "18 March 2028" for f in ne["frameworks"]))
+
+print("\nSUPPLIERS — the frameworks' own lists, one name per company")
+nesup = ne["suppliers"]
+check("28 suppliers from 29 raw names across the two frameworks",
+      len(nesup) == 28, "got %d" % len(nesup))
+medtronic = [s for s in nesup if s["name"] == "Medtronic"]
+check("Medtronic appears exactly once", len(medtronic) == 1,
+      "got %s" % [s["name"] for s in nesup if "medtronic" in s["name"].lower()])
+check("Medtronic is credited on both frameworks",
+      bool(medtronic) and len(medtronic[0]["frameworks"]) == 2)
+# The alias registry keeps T.J. Smith and Nephew (Companies House 00093994) separate
+# from Smith+Nephew (00156031) on purpose. It must be flagged, never merged and never
+# dropped.
+tj = [s for s in nesup if s["name"].lower().startswith("t.j.smith")]
+check("T.J. Smith and Nephew is kept as NHSSC wrote it", len(tj) == 1)
+check("...and flagged unresolved rather than merged into Smith+Nephew",
+      bool(tj) and tj[0]["resolved"] is False)
+check("no supplier from Total Orthopaedic Solutions 3 leaked in",
+      not any(s["name"] in ("Zimmer Biomet Limited", "Arthrex Ltd", "Corin Ltd")
+              for s in nesup))
+# The robotics framework's other five suppliers hold no neurological lot. If the
+# framework is ever claimed, they arrive with it and this fails.
+for offpatch in ("CMR Surgical Ltd", "Intuitive Surgical Limited", "Procept Biorobotics"):
+    check("no robotics-only supplier on this patch: %s" % offpatch,
+          not any(s["name"] == offpatch for s in nesup))
+
+print("\nNOTHING IS CLAIMED THAT THE DATA DOES NOT SUPPORT")
+check("no CPV family is claimed", not B.SPECIALITY_RULES[NEURO].get("cpv"))
+check("the awards rule says why no CPV family is claimed",
+      "No CPV family corroborates" in (ne.get("rules") or {}).get("awards", ""))
+check("no award reached the panel on CPV alone",
+      all(B.match_title(nex, a["title"]) for a in ne["awards"]))
+check("no tariff part is claimed", not B.SPECIALITY_RULES[NEURO].get("tariffParts"))
+check("no Drug Tariff block is published", ne.get("drugTariff") is None)
+check("the tariff rule says why rather than going quiet",
+      "No Drug Tariff part applies" in (ne.get("rules") or {}).get("drugTariff", ""))
+check("no open tender on this patch today, and none invented", ne["openTenders"] == [])
+
+print("\nTHE COVERAGE LIMIT IS PUBLISHED, NOT HIDDEN (rule 14)")
+nefw = (ne.get("rules") or {}).get("frameworks", "")
+for k in ("frameworks", "suppliers"):
+    check("coverage limit stated on the %s rule" % k,
+          "COVERAGE LIMIT" in (ne.get("rules") or {}).get(k, ""))
+check("the products with no framework at all are named",
+      "cranial implants" in nefw and "aneurysm clips" in nefw)
+check("the size of the brief index that was read is stated", "140 unique briefs" in nefw)
+check("the three uncounted frameworks are named, not dropped",
+      "Robotic Medical Equipment" in nefw and "Total Orthopaedic Solutions 3" in nefw
+      and "Microscopes" in nefw)
+check("absence from the panel is not presented as absence from the market",
+      "being absent from one is not evidence of absence from this market" in nefw)
+
+print("\nTHE RULE TRAVELS WITH THE DATA (rule 14a)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((ne.get("rules") or {}).get(k)))
+check("licence notice carried", bool(ne.get("_notice", {}).get("owner")))
+nekb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", NEURO + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % nekb, nekb < 200)
 
 
 print()
