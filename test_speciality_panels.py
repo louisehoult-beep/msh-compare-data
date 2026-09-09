@@ -34,6 +34,7 @@ PATHOLOGY = "pathology-and-laboratory-medicine"
 RADIOLOGY = "radiology-and-imaging"
 RENAL = "renal"
 HAEM = "haematology-and-patient-blood-management"
+MATERNITY = "maternity-and-neonatal"
 fails = []
 
 
@@ -2703,6 +2704,242 @@ check("every published award title is one the rule actually accepts",
 check("licence notice carried", bool(hb.get("_notice", {}).get("owner")))
 _hb_kb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", HAEM + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % _hb_kb, _hb_kb < 200)
+
+
+# ---------------------------------------------------------------------------
+# MATERNITY AND NEONATAL. Two pathways bought separately, and a patch where the
+# ordinary words are the dangerous ones: breast, milk, infant, baby, incubator,
+# fetal, labour, delivery, cord. Every case below is a REAL row that a widened
+# pattern would admit or a real row a narrowed one would lose.
+# ---------------------------------------------------------------------------
+print("\nMATERNITY AND NEONATAL")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), MATERNITY],
+               check=True, capture_output=True)
+mn = load_panel(MATERNITY)
+check("panel is defined", mn.get("defined") is True)
+
+_mn_rule = B.SPECIALITY_RULES[MATERNITY]
+_mn_rx = B.compile_rule(_mn_rule)
+_mn_th = B.load("tender-history.json")
+_mn_ix = {k: i for i, k in enumerate(_mn_th["schema"])}
+_mn_corpus = [r[_mn_ix["t"]] or "" for r in _mn_th["rows"]]
+_mn_corpus += [(a.get("title") or "") for a in B.load("framework-awards.json")["awards"]]
+
+print("  the exclusion list earns its place — 'non-obstetric' means the opposite")
+# The word "obstetric" here is defining what the contract EXCLUDES. Four real rows,
+# two buyers. No narrowing of the include list can reach this; the negation has to
+# be matched.
+for bad in [
+        "Non-Obstetrical Ultrasound – East Surrey – CAN",
+        "Non-Obstetric Ultrasound Service – East Surrey – CAN",
+        "Insourced Non-Obstetric Ultrasound Services YSTH",
+        "PSR Urgent Award for Insourced Non-Obstetric Ultrasound Services YSTH",
+]:
+    check("never admitted: %s" % bad[:62], not B.match_title(_mn_rx, bad))
+check("the exclusion list is a real one, not a never-matching placeholder",
+      bool(_mn_rule["exclude"]) and "(?!x)x" not in (_mn_rule["exclude"] or ""))
+
+print("  the ordinary words stay refused — every one of these is a real row")
+for bad in [
+        # bare "breast" — eleven rows, all oncology, plastics or radiology.
+        "Philips Epiq Elite Diagnostic Ultrasound for Breast Clinic CHH",
+        "Breast Biopsy Needle NPM",
+        "HEY/18/161 BREAST IMPLANTS",
+        "CLI-OJEU-45806 SURGICALLY IMPLANTED BREAST PROSTHESES",
+        "External Breast Prosthesis [4233683]",
+        "Provision of Oncotype DX Breast Recurrence ScoreTM Assay",
+        "Maintenance of Mobile Breast Screening Tailers and Mobile MRI Trailers",
+        "Insourcing of Breast Radiology Services",
+        "Insourced Breast Surgery Imaging and OP Services - USC (HHP)",
+        "Breast Service Support (insourced capacity)",
+        # bare "milk" — hospital catering and cattle.
+        "Provision of Milk & Bread - University Hospitals of Morecambe Bay",
+        "BVD PCR Test Kits for Serum and Milk Samples",
+        # bare "infant" and bare "baby" — council services and welfare schemes.
+        "Parent Infant Psychotherapy to families in East Sussex",
+        "Market Engagement Event – Brent Parent and Infant Relationship Service (PAIRS)",
+        "Supply & Distribution of Baby Packs  (1)",
+        "Baby Bundles",
+        # bare "incubator" — laboratory and blood bank, every one.
+        "Platelet Incubator for CGH",
+        "Supply & Maintenance of Platelet Agitator and Incubator equipment",
+        "BINDER CB170 CO₂ incubators",
+        # bare "fetal"/"foetal" — the standard cell culture reagent.
+        "Supply of BVD-free Foetal Bovine Serum to APHA",
+        # bare "labour" — work, not childbirth.
+        "YAS 58 2026_27 (DA Non FW) Various Ortus Parts & Labour",
+        # bare "uterine" — gynaecology, which has its own page.
+        "Purchase of Electrosurgical Devices (Cut & Coagulation, Uterine Ablation)",
+        "Endometrial Ablation Devices and Uterine Tissue Removal Systems",
+        # bare "sanitary" / "period" — council welfare schemes.
+        "Provision of Sanitary Products",
+        "Period Dignity Programme – Supply of Sanitary / Feminine Care Products",
+        # bare "cord" — neuromodulation, and cord blood banking which is haematology's.
+        "Neuromodulation/Spinal Cord Stimulators, Intrathecal Drug Pumps, Radiofrequency Ablation and Associated Products",
+        "Supply of Cord Blood Collection Systems",
+        # "blood spot" — adult virology.
+        "Dried Blood Spot Testing",
+        # anaesthesia, gynaecology, radiology and net zero.
+        "Mobile Entonox Destruction Devices",
+        "Spinal, Epidural and Associated Products",
+        "Epidural Pumps",
+        "Vaginal Speculum",
+        "ESNEFT3156 Purchase of Ultrasound Scanners",
+        "PROJ007278_Replacement of Trans-Rectal Ultrasound Scanner",
+        # termination of pregnancy is the gynaecology and women's health page's.
+        "Complex Termination of Pregnancy (CTOP) Services across the South East",
+]:
+    check("never admitted: %s" % bad[:62], not B.match_title(_mn_rx, bad))
+
+print("  the genuine patch is admitted")
+for good in [
+        # The maternity pathway.
+        "Lease_PROJ004570_Antenatal Ultrasound Scanner",
+        "Supply of Surgical Positioning Table and Leg Positioning Accessories for Maternity and Gynaecology Procedures",
+        "NGH - Maternity Bereavement Suite",
+        "Button Hole CTG Belts [4806692]",
+        "Fetal Cushions [3299279]",
+        "Obstetrics and Vinyl Pessaries",
+        "Pessaries [4186866]",
+        "Preliminary Market Engagement Questionnaire - Pessaries",
+        "0P002079 - Colposcope - Capital - Central Delivery Suite RSCH",
+        # The neonatal pathway.
+        "Purchase of Neonatal Resus Systems",
+        "ESNEFT3075 Purchase of Neonatal Imaging System",
+        "NP14220 Neonatal and Paediatric Tracheostomy Tubes",
+        "Neonatal Equipment, Adult, Paediatric & Neonatal Phototherapy Devices and Associated Accessories & Services",
+        "Purchase of Baby Warmers with Resuscitation",
+        "Maintenance of Infant Ventilators",
+        "Spare Parts for Draeger Isolette Incubators [3995346]",
+        "Newborn Transport Harnesses for London Ambulance",
+        "Purchase of BiliCare Transcutaneous Bilirubin Meter & Case",
+        # Feeding, expression and milk banking.
+        "Breast Pumps and Breast Milk Collection Sets [5180689]",
+        "Sterile Milk Bottles [ 4692898 ]",
+        "DHSC: GPH: Mothers Living with HIV Formula Milk Funding Scheme 2027",
+        # Newborn screening.
+        "SMA Newborn Screening Kits",
+        "Newborn Bloodspot Cards",
+        "Procurement of Test Kits for Newborn Screening of Cystic Fibrosis (CF), Congenital Hypothyroidism (CHT) and the Maintena",
+]:
+    check("admitted: %s" % good[:62], B.match_title(_mn_rx, good), "did not match and should")
+
+# THE UNDERSCORE CASE, kept as its own assertion because it is the one that would
+# be lost silently. An underscore is a word character, so \b would not fire before
+# "Antenatal" in "Lease_PROJ004570_Antenatal Ultrasound Scanner" and the only
+# antenatal scanner award in the data would vanish with no error anywhere.
+check("a word boundary is not \\b: punctuation-glued titles still match",
+      B.match_title(_mn_rx, "Lease_PROJ004570_Antenatal Ultrasound Scanner")
+      and B.match_title(_mn_rx, "X_NEONATAL_KIT")
+      and not B.match_title(_mn_rx, "PRENEONATALX"))
+
+print("  the framework filter claims the page's four and no more")
+_mn_names = [f["name"] for f in mn["frameworks"]]
+check("exactly four frameworks are claimed", len(_mn_names) == 4, str(_mn_names))
+for want in ["Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+             "Obstetrics and Vinyl Pessaries",
+             "Infant Feeding and Accessories",
+             "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, "
+             "Related Accessories and Services"]:
+    check("framework present: %s" % want[:56], want in _mn_names)
+for other in ["External Breast Prosthesis and Chest Support",
+              "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"]:
+    check("another speciality's framework stays out: %s" % other[:52], other not in _mn_names)
+
+print("  the six delisted companies are OUT of the supplier list (root rule 13)")
+# frameworks.json holds 57 names for the maternity framework and flags the count as
+# UNVERIFIED. NHS Supply Chain's brief prints 51 suppliers and then six more under
+# "The following suppliers are being delisted at the start of the new framework".
+# 57 = 51 + 6. Published raw it would name six companies as competitors on a
+# framework they have left.
+_mn_mat = [f for f in mn["frameworks"] if f["name"].startswith("Maternity, Obstetrics")][0]
+check("the maternity framework shows 51 suppliers, not 57",
+      _mn_mat["supplierCount"] == 51 and len(_mn_mat["suppliers"]) == 51,
+      "count %s, listed %d" % (_mn_mat["supplierCount"], len(_mn_mat["suppliers"])))
+_mn_delisted = ["Bray Group Limited", "Cardiac Services UK Ltd", "Durbin Plc",
+                "Medichill UK Ltd", "Valley Northern", "Viomedex Ltd"]
+# A delisted name must not reach the Suppliers tab AS A SUPPLIER ON THE MATERNITY
+# AGREEMENT. Bray is the case that makes the distinction matter: Bray Group Ltd
+# (Bray Healthcare) genuinely holds Obstetrics and Vinyl Pessaries, so it belongs
+# on the tab — just never against the framework it was delisted from.
+_mn_on_maternity = [
+    s for s in mn["suppliers"]
+    if any(f.startswith("Maternity, Obstetrics") for f in s["frameworks"])]
+_mn_mat_names = " | ".join(
+    s["name"] + " " + " ".join(s["variants"]) for s in _mn_on_maternity)
+for gone in _mn_delisted:
+    check("delisted, so not a supplier: %s" % gone, gone not in _mn_mat["suppliers"])
+    check("delisted, so not credited to that framework: %s" % gone,
+          gone not in _mn_mat_names)
+check("the maternity agreement credits exactly its 51 current suppliers",
+      len(_mn_on_maternity) == 51, "got %d" % len(_mn_on_maternity))
+check("the six are recorded against the framework, not dropped",
+      sorted(_mn_mat["delisted"] or []) == sorted(_mn_delisted), str(_mn_mat["delisted"]))
+# Bray holds the pessaries agreement under a different spelling and must survive.
+check("Bray survives on the pessaries agreement it does hold",
+      any("Bray" in s["name"] for s in mn["suppliers"]))
+# If the crawler is ever fixed upstream, the correction must FAIL rather than
+# silently do nothing. Replay it against a framework record that no longer carries
+# the delisted names.
+_mn_fake = {"frameworks": [dict(_mn_mat, suppliers=["Argon Medical Devices UK Ltd"],
+                                name="Maternity, Obstetrics, Gynaecology and Sexual Health Products")]}
+try:
+    B.build_frameworks(_mn_rx, _mn_rule, _mn_fake)
+    check("the delisted correction fails loudly when the data changes under it", False,
+          "it returned quietly")
+except SystemExit:
+    check("the delisted correction fails loudly when the data changes under it", True)
+
+print("  the derived claims carry their rule and their limits (rules 14a, 14c)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((mn.get("rules") or {}).get(k)))
+_mn_note = (mn.get("rules") or {}).get("frameworks", "")
+check("the lot limits on two of the four agreements are declared",
+      "COVERAGE LIMIT, STATED RATHER THAN HIDDEN" in _mn_note
+      and "only Lot 3 is neonatal equipment" in _mn_note)
+check("the delisted correction is declared to the reader",
+      "SIX DELISTED COMPANIES HAVE BEEN TAKEN OUT" in _mn_note)
+check("the brief's own contradictory supplier count is declared",
+      "THE SUPPLIER COUNT ON THAT BRIEF DOES NOT ADD UP" in _mn_note)
+check("the loss of the neonatal agreement is declared",
+      "THE NEONATAL CATEGORY NO LONGER HAS AN AGREEMENT OF ITS OWN" in _mn_note)
+check("the two mixed contracts are declared, not hidden",
+      "TWO AWARDS BELOW ARE MIXED CONTRACTS" in _mn_note)
+check("what this page does NOT claim is stated",
+      "Gynaecology, sexual health, fertility and termination of pregnancy are NOT counted" in _mn_note)
+
+# Part IX is dressings and elastic hosiery, incontinence and stoma. Nothing on this
+# patch is dispensed against an FP10.
+check("no Drug Tariff part is claimed for maternity and neonatal", mn.get("drugTariff") is None)
+_mn_dt = (mn.get("rules") or {}).get("drugTariff", "")
+check("the absence of a Drug Tariff part is explained, not silent",
+      "No Drug Tariff part applies" in _mn_dt and "reaching for the nearest part" in _mn_dt)
+
+# Every CPV prefix claimed must actually fire on a real notice.
+_mn_fa = B.load("framework-awards.json")["awards"]
+for _pfx in _mn_rule["cpv"]:
+    _fires = any(
+        B.match_title(_mn_rx, a.get("title") or "")
+        and any(str(c).startswith(_pfx) for c in (a.get("cpv") or []))
+        for a in _mn_fa)
+    check("CPV prefix %s fires on a real notice" % _pfx, _fires)
+# ...and CPV must never admit on its own. 33750 also sits on "Baby Bundles", which
+# the title filter refuses.
+check("CPV cannot admit a notice the title filter refuses",
+      not any(a.get("title") == "Baby Bundles" for a in mn["awards"]))
+
+check("no open tender is invented for an empty day",
+      mn["counts"]["openTenders"] == len(mn["openTenders"]))
+_mn_raw = len([t for t in _mn_corpus if B.match_title(_mn_rx, t)])
+check("the published match count is not inflated above what the filter returns",
+      mn["counts"]["awardsShown"] <= mn["counts"]["awardsMatched"] <= _mn_raw,
+      "shown %d, matched %d, raw %d" % (
+          mn["counts"]["awardsShown"], mn["counts"]["awardsMatched"], _mn_raw))
+check("every published award title is one the rule actually accepts",
+      all(B.match_title(_mn_rx, a.get("title") or "") for a in mn["awards"]))
+check("licence notice carried", bool(mn.get("_notice", {}).get("owner")))
+_mn_kb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", MATERNITY + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % _mn_kb, _mn_kb < 200)
 
 
 # The exclude=None path must not leak to any other rule: every other speciality

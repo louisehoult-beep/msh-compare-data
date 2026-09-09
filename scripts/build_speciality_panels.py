@@ -1759,10 +1759,15 @@ SPECIALITY_RULES = {
         #     is condition-specific formula (Danone Nutricia Early Life Nutrition, HiPP,
         #     Kendal Nutricare, Nestle Nutrition, Babease, Heinz) and half is expression
         #     and feeding hardware (Ardo, Medela, MAM, Alcado). It is counted here
-        #     because this page's own calendar places it on this patch, and because the
-        #     maternity and neonatal page names a different buying route entirely
-        #     (Maternity, Obstetrics, Gynaecology and Sexual Health Products) and does
-        #     not claim it. See the note on breast pumps in the include list.
+        #     because this page's own calendar places it on this patch, AND ALSO ON THE
+        #     MATERNITY AND NEONATAL PAGE, which names it as one of the four NHS Supply
+        #     Chain agreements on its patch. Shared deliberately, in the way Pressure
+        #     Area Care is shared between wound care and patient handling: one framework
+        #     really does carry both the condition-specific formula a dietitian
+        #     prescribes and the expression hardware a neonatal unit buys. Corrected
+        #     09/09/2026 — this note previously said the maternity page claimed a
+        #     different route and did not claim this one, which its own Buying route
+        #     section contradicts. See the note on breast pumps in the include list.
         # DELIBERATELY NOT COUNTED: the five NHSSC Food and Facilities frameworks.
         # Ambient Food, Fresh Food DPS, Multi Temperature Food Solutions, Food Vending
         # Solutions and Catering Consumables and Equipment are hospital catering, bought
@@ -2871,6 +2876,272 @@ SPECIALITY_RULES = {
         ),
     },
 
+    # PAGE 2891. Two pathways that run in parallel and are bought separately: the
+    # maternity pathway from first contact to postnatal discharge, and the neonatal
+    # pathway from anticipated preterm birth to two-year follow-up. The page's own
+    # Buying route card says it plainly: "Four NHS Supply Chain agreements across two
+    # categories. Only one carries the word maternity; neonatal equipment is Lot 3 of
+    # four on an anaesthesia framework."
+    "maternity-and-neonatal": {
+        "label": "Maternity and Neonatal",
+        # ALL FOUR AGREEMENTS THE PAGE NAMES, and all four are in frameworks.json.
+        # Matched on maternity / obstetrics / infant feeding / neonatal, which between
+        # them hit these four names and no other of the 121:
+        #   Maternity, Obstetrics, Gynaecology and Sexual Health Products
+        #     (2019/S 214-525123, ends 30 June 2027)
+        #   Obstetrics and Vinyl Pessaries (2025/S 000-007017, ends 20 August 2027)
+        #   Infant Feeding and Accessories (2023/S 000-011743, ends 28 February 2028)
+        #   Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy
+        #     Systems, Related Accessories and Services (2026/S 000-008108)
+        # TWO OF THE FOUR ARE SHARED WITH ANOTHER PAGE ON PURPOSE, in the same way
+        # Pressure Area Care is shared between wound care and patient handling:
+        #   Infant Feeding and Accessories is also nutrition and dietetics'. Half its
+        #     list is condition-specific formula and half is expression and feeding
+        #     hardware, and both pages' own Buying route sections name it.
+        #   Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy
+        #     Systems is also theatres and surgical's, for Lots 1 and 2. Neonatal
+        #     equipment is Lot 3 and it is the only national route to it, so this page
+        #     cannot omit the agreement its own neonatal half is bought through.
+        # NOT CLAIMED, and each was checked against the 121 names rather than assumed:
+        #   External Breast Prosthesis and Chest Support is post-mastectomy fitting,
+        #     which is the rehabilitation, prosthetics and orthotics page's. It is the
+        #     reason bare "breast" is refused from the include list below.
+        #   Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring
+        #     Diagnostics is adult respiratory and sleep. Neonatal CPAP is bought on
+        #     the anaesthesia and neonatal agreement above, not on this one.
+        "frameworks": r"\b(maternity|obstetrics|infant feeding|neonatal)\b",
+        # SIX COMPANIES ARE REMOVED FROM THE MATERNITY FRAMEWORK'S SUPPLIER LIST
+        # BECAUSE NHS SUPPLY CHAIN LISTS THEM AS DELISTED. frameworks.json holds 57
+        # names for that framework and flags the count itself as UNVERIFIED. The brief
+        # was read live on 09/09/2026: it prints 51 current suppliers, then the line
+        # "The following suppliers are being delisted at the start of the new
+        # framework:" and six more. The crawler swept that tail into the supplier list.
+        # 57 = 51 + 6, exactly. Publishing it raw would tell a rep that Bray, Cardiac
+        # Services, Durbin, Medichill, Valley Northern and Viomedex are competitors on
+        # a framework they have just left. Corrected here rather than in
+        # frameworks.json, which is regenerated by the crawler and would revert.
+        "frameworkCorrections": {
+            "Maternity, Obstetrics, Gynaecology and Sexual Health Products": {
+                "removeSuppliers": [
+                    "Bray Group Limited",
+                    "Cardiac Services UK Ltd",
+                    "Durbin Plc",
+                    "Medichill UK Ltd",
+                    "Valley Northern",
+                    "Viomedex Ltd",
+                ],
+                "why": (
+                    "51 current suppliers, read from NHS Supply Chain's own contract "
+                    "launch brief on 09/09/2026. The brief's Suppliers section prints "
+                    "51 entries and then names six further companies as being delisted "
+                    "at the start of the new framework; the Hub's crawler read all 57 "
+                    "as suppliers, and the six delisted names are taken back out here. "
+                    "The brief's own prose states 54 in two places and 51 are printed, "
+                    "so 51 is what the list supports and 54 is what NHS Supply Chain "
+                    "asserts. Two of the 51 printed entries (Elemental Healthcare Ltd "
+                    "and Pelvic Relief) may be one company shown on two lines."
+                ),
+            },
+        },
+        # DERIVED, not guessed. Every pattern below was run over all 1,972 rows of
+        # tender-history.json, all 1,397 of framework-awards.json and the 6 open
+        # notices — 3,375 titles — and every surviving hit was read one by one.
+        #
+        # THE WORD BOUNDARIES ARE LOOKAROUNDS, NOT \b, AND THAT IS DELIBERATE. An
+        # underscore is a word character, so \bantenatal\b does not match
+        # "Lease_PROJ004570_Antenatal Ultrasound Scanner" — a real Nottingham University
+        # Hospitals row, and the only antenatal scanner award in the data. Losing a true
+        # positive to punctuation is as wrong as admitting a false one, so the pattern
+        # treats anything that is not a letter or a digit as a boundary.
+        #
+        # NOT INCLUDED, deliberately. Each was tried, its hits were read, and it was
+        # refused rather than admitted and then argued with in the exclusion list:
+        #   bare "breast"     -> the worst term on this patch by some distance. Breast
+        #     imaging, breast biopsy needles, breast implants, surgically implanted
+        #     breast prostheses, external breast prosthesis, Oncotype DX, mobile breast
+        #     screening trailers, insourced breast radiology and breast surgery
+        #     capacity. Eleven rows, none of them maternity. Only "breast pump" and
+        #     "breast milk" are used.
+        #   bare "milk"       -> "Provision of Milk & Bread" at Morecambe Bay (hospital
+        #     catering) and "BVD PCR Test Kits for Serum and Milk Samples" at SRUC
+        #     (bovine viral diarrhoea testing in cattle). Only the qualified milk terms
+        #     are used.
+        #   bare "infant" and bare "baby" -> "Parent Infant Psychotherapy to families in
+        #     East Sussex" and the Brent Parent and Infant Relationship Service, both
+        #     local-authority mental health services; "Supply & Distribution of Baby
+        #     Packs" at Rotherham MBC and the Welsh Government's "Baby Bundles", both
+        #     welfare schemes rather than clinical procurement. The genuine rows are
+        #     reached through "infant ventilator", "baby warmer", "infant feeding" and
+        #     "infant formula" instead.
+        #   bare "incubator"  -> "Platelet Incubator for CGH", NHS Blood and Transplant's
+        #     "Platelet Agitator and Incubator equipment", and two Cambridge "BINDER
+        #     CB170 CO2 incubators". Laboratory and blood-bank incubators, every one.
+        #     The neonatal kind is reached through neonatal / infant / transport
+        #     incubator and through "isolette", which is Draeger's neonatal incubator
+        #     name and carries the one real row ("Spare Parts for Draeger Isolette
+        #     Incubators").
+        #   bare "fetal"/"foetal" -> "Supply of BVD-free Foetal Bovine Serum to APHA".
+        #     Foetal bovine serum is the standard cell-culture reagent and it will keep
+        #     recurring, so the term is qualified rather than excluded.
+        #   bare "labour"     -> "YAS 58 2026_27 (DA Non FW) Various Ortus Parts &
+        #     Labour". Work, not childbirth. Only "labour ward" is used.
+        #   bare "delivery"   -> the single most overloaded word in public procurement.
+        #     Only the phrase "delivery suite" is used, which means the labour ward and
+        #     nothing else.
+        #   bare "uterine"/"uterus" -> "Purchase of Electrosurgical Devices (Cut &
+        #     Coagulation, Uterine Ablation)" and "Endometrial Ablation Devices and
+        #     Uterine Tissue Removal Systems". Gynaecology, which has its own Hub page.
+        #   bare "phototherapy" -> Lot 4 of the neonatal agreement is ADULT and
+        #     PAEDIATRIC phototherapy, which is dermatology. Neonatal phototherapy is
+        #     already reached through "neonatal", so the bare word buys nothing and
+        #     would one day admit a dermatology UVB cabinet.
+        #   "pregnancy"       -> "Complex Termination of Pregnancy (CTOP) Services
+        #     across the South East". Termination services are the gynaecology and
+        #     women's health page's, as is Lot 2 Sexual Health of the framework above.
+        #     It was the only row the term brought, so it is refused outright.
+        #   "lactate"-safe forms only -> "lactation" is used, never "lactat\w*", which
+        #     would match blood lactate and Ringer's lactate.
+        #   bare "sanitary", "period", "feminine" -> North Lanarkshire Council's
+        #     "Provision of Sanitary Products" and Cardiff Council's Period Dignity
+        #     Programme. Council welfare schemes.
+        #   bare "cord"       -> "Neuromodulation/Spinal Cord Stimulators" and NHS Blood
+        #     and Transplant's "Supply of Cord Blood Collection Systems". Cord blood
+        #     banking is haematology's and is claimed there by name. Only "cord clamp"
+        #     and "umbilical" are used.
+        #   "blood spot"      -> "Dried Blood Spot Testing" at Midlands Partnership,
+        #     which is adult virology. "Newborn Bloodspot Cards" is reached through
+        #     "newborn" instead.
+        #   bare "entonox"    -> "Mobile Entonox Destruction Devices" at Sheffield, which
+        #     is nitrous oxide abatement bought for net zero, not a labour-ward analgesia
+        #     purchase.
+        #   "epidural", "speculum", "ultrasound scanner" -> anaesthesia, gynaecology and
+        #     radiology respectively. Six rows between them, none of them this patch.
+        #   "prematur\w*"     -> refused in favour of "preterm" and "retinopathy of
+        #     prematurity". "Premature termination" is a contract-law phrase.
+        #
+        # NEVER READ THE FEED'S OWN `spec` FIELD AND TRUST IT, and this patch is the
+        # clearest demonstration in the dataset. It tags just 3 of the 1,972 rows
+        # maternity-and-neonatal. All 3 are genuine and all 3 are kept, but it files
+        # "Purchase of Baby Warmers with Resuscitation" under pharmacy-and-medicines,
+        # "Breast Pumps and Breast Milk Collection Sets" under pathology-and-laboratory-
+        # medicine, newborn screening test kits under gynaecology-and-womens-health, and
+        # both "Fetal Cushions" and "Button Hole CTG Belts" under digital-and-medical-it.
+        "include": (
+            r"(?<![A-Za-z0-9])("
+            r"maternit\w*|midwif\w*|obstetric\w*|antenatal|ante[- ]natal|"
+            r"postnatal|post[- ]natal|perinatal|intrapartum|peripartum|"
+            r"neonat\w*|newborn|new[- ]born|NICU|SCBU|special care baby|"
+            r"delivery suite|labour ward|birthing|childbirth|home birth|stillbirth|"
+            r"fo?etal (?:monitor\w*|doppler\w*|cushion\w*|pillow\w*|scalp|heart|"
+            r"medicine|neuroprotect\w*|blood sampl\w*)|"
+            r"CTG|cardiotocograph\w*|caesarean|cesarean|episiotom\w*|ventouse|"
+            r"vacuum extract\w*|pessar\w*|cord clamp\w*|umbilical|placenta\w*|"
+            r"breast pump\w*|breast milk|breastmilk|human milk|donor milk|"
+            r"milk bank\w*|milk kitchen|milk bottle\w*|milk fortifier\w*|"
+            r"formula milk|infant formula|infant food|infant feeding|lactation|"
+            r"baby warmer\w*|infant warmer\w*|radiant warmer\w*|resuscitaire\w*|"
+            r"infant ventilator\w*|infant incubator\w*|neonatal incubator\w*|"
+            r"transport incubator\w*|isolette\w*|"
+            r"transcutaneous bilirubin|bilirubin meter\w*|bilirubinomet\w*|jaundice|"
+            r"surfactant|retinopathy of prematurity|preterm|pre[- ]term"
+            r")(?![A-Za-z0-9])"
+        ),
+        # ONE PATTERN, and it is here because four real rows matched `include` and were
+        # read and rejected:
+        #   non-obstetric / non-obstetrical -> "Non-Obstetrical Ultrasound - East Surrey"
+        #     and "Non-Obstetric Ultrasound Service - East Surrey" at Surrey and Sussex
+        #     ICB, and "Insourced Non-Obstetric Ultrasound Services YSTH" twice at York
+        #     and Scarborough. All four are general ultrasound capacity defined by
+        #     EXCLUDING obstetrics. The word "obstetric" is doing the opposite of what a
+        #     keyword match assumes, which is why the negation has to be matched
+        #     explicitly and cannot be narrowed away in the include list.
+        "exclude": r"(?<![A-Za-z0-9])non[- ]?obstetric\w*",
+        # CPV CORROBORATES, IT NEVER ADMITS. Two prefixes, and both fire on a real
+        # matching row rather than being listed from the code book: 15884 baby food and
+        # 33750 baby care products, both on the DHSC formula milk funding scheme. They
+        # corroborate the infant feeding half of this patch and nothing else — there is
+        # no obstetric or neonatal-device CPV family in this data. Two codes were
+        # checked and REFUSED: 33152000 incubators, which in this feed fires only on
+        # Cambridge's laboratory CO2 incubators, and 3314111x dressings, which is the
+        # very code that put "Newborn Transport Harnesses for London Ambulance" on the
+        # wound care page. 33750 also fires on "Baby Bundles", which the title filter
+        # refuses as a Welsh Government welfare scheme — and it stays refused, because a
+        # CPV code cannot admit a notice on its own.
+        "cpv": ("15884", "33750"),
+        # NO DRUG TARIFF PART. Part IX reimburses appliances dispensed in primary care
+        # against an FP10: IXA dressings and elastic hosiery, IXB incontinence, IXC
+        # stoma, IXR elastic hosiery. Nothing on this patch is listed there. Maternity
+        # and neonatal consumables are bought by trusts through NHS Supply Chain, the
+        # neonatal equipment is capital, and infant formula reaches families through
+        # Healthy Start and the DHSC scheme above rather than through Part IX. So the
+        # panel carries no tariff rather than reaching for the nearest part.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. All four NHS Supply Chain "
+            "agreements the page names are claimed below, and two of the four carry "
+            "more than this patch. Maternity, Obstetrics, Gynaecology and Sexual "
+            "Health Products has two lots, of which Lot 2 is Sexual Health; "
+            "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy "
+            "Systems has four lots, of which only Lot 3 is neonatal equipment. NHS "
+            "Supply Chain publishes no supplier-by-lot split for either, so the "
+            "supplier list below is every company named on the agreement as a whole. "
+            "That is why anaesthesia machine manufacturers such as Draeger, Penlon and "
+            "GE appear under a maternity and neonatal Suppliers heading, and why the "
+            "sexual health suppliers on the first agreement appear too. Theatres and "
+            "surgical counts the same anaesthesia agreement for Lots 1 and 2, and "
+            "nutrition and dietetics counts Infant Feeding and Accessories; both are "
+            "genuinely shared, in the way one Pressure Area Care agreement really does "
+            "carry both mattresses and hoists. "
+            "SIX DELISTED COMPANIES HAVE BEEN TAKEN OUT OF THE MATERNITY SUPPLIER "
+            "LIST. NHS Supply Chain's contract launch brief prints 51 current "
+            "suppliers and then names Bray Group Limited, Cardiac Services UK Ltd, "
+            "Durbin Plc, Medichill UK Ltd, Valley Northern and Viomedex Ltd as being "
+            "delisted at the start of the new framework. The Hub's framework crawler "
+            "read all 57 names as suppliers. Read live on 09/09/2026, the six are "
+            "removed here, and they are recorded against the framework rather than "
+            "dropped. The upstream crawler still has the fault. "
+            "THE SUPPLIER COUNT ON THAT BRIEF DOES NOT ADD UP, AND NEITHER FIGURE IS "
+            "SAFE TO QUOTE. The brief states 54 suppliers in its Overview and 54 again "
+            "in its Suppliers section, where it also says 11 are new against 12 in the "
+            "Overview. The list printed underneath contains 51 entries. This panel "
+            "shows 51, because that is the number the published list supports; 54 is "
+            "what NHS Supply Chain asserts. Two of the 51 (Elemental Healthcare Ltd "
+            "and Pelvic Relief) may be one company presented as two lines, which is "
+            "why the honest statement is 51 printed entries against a stated 54 rather "
+            "than a claim about how many companies hold the framework. "
+            "BRAY GROUP HOLDS ONE AGREEMENT AND WAS DELISTED FROM THE OTHER. Bray "
+            "Group Ltd (Bray Healthcare) is one of only three suppliers on Obstetrics "
+            "and Vinyl Pessaries, and Bray Group Limited is on the maternity "
+            "agreement's delisted list. It therefore appears below on the pessaries "
+            "agreement only. NHS Supply Chain states no relationship between the "
+            "delisting and the pessary carve-out and this panel draws none. "
+            "THE NEONATAL CATEGORY NO LONGER HAS AN AGREEMENT OF ITS OWN. Until 2 "
+            "March 2026 there was a framework whose title began with the word "
+            "Neonatal. Neonatal equipment is now Lot 3 of four on an agreement whose "
+            "title begins Anaesthesia Machines, in the Diagnostic Equipment and "
+            "Services category, bought through the Direct route with a Unique "
+            "Reference Number from the Category team rather than through the stocked "
+            "catalogue. Seven suppliers were delisted at the start of it, including "
+            "SLE Ltd and Vyaire Medical Products Limited, and NHS Supply Chain gives "
+            "no reason. "
+            "TWO AWARDS BELOW ARE MIXED CONTRACTS and are kept because their own "
+            "titles say so, with the full title shown on the row. The surgical "
+            "positioning table bought by NHS Wales is for maternity AND gynaecology "
+            "procedures, and the colposcope bought by University Hospitals Sussex is "
+            "capital for the Central Delivery Suite — a gynaecology device, sited and "
+            "funded on the labour ward. "
+            "THE AWARDS LIST COUNTS NEWBORN SCREENING. Bloodspot cards, SMA screening "
+            "kits and the cystic fibrosis and congenital hypothyroidism test kits are "
+            "national newborn screening programmes delivered through maternity and "
+            "neonatal services, and no other Hub page holds them. Gynaecology, sexual "
+            "health, fertility and termination of pregnancy are NOT counted here; they "
+            "are the gynaecology and women's health page's, which is why the open "
+            "notices Womens Health and NP36726 Fertility Medicines do not appear below "
+            "even though both are live today. "
+            "Being named on a framework is not evidence of volume, and being absent "
+            "from one is not evidence of absence from the market."
+        ),
+    },
+
 }
 
 
@@ -2902,12 +3173,51 @@ def match_title(rx, title):
     return bool(rx["inc"].search(t)) and not rx["exc"].search(t)
 
 
-def build_frameworks(rx, fw_doc):
-    """The speciality's NHSSC frameworks, with the supplier list each one carries."""
+def build_frameworks(rx, rule, fw_doc):
+    """The speciality's NHSSC frameworks, with the supplier list each one carries.
+
+    A `frameworkCorrections` entry on the rule removes names that frameworks.json
+    holds as suppliers but NHS Supply Chain's own brief lists as DELISTED. The
+    crawler reads the brief's Suppliers section as one block, and where the brief
+    ends that section with "The following suppliers are being delisted at the start
+    of the new framework:" it sweeps that tail in too. Published raw, that puts
+    companies which have LEFT the framework in front of a paying member as though
+    they were still on it, which is worse than showing nothing.
+
+    The correction is applied by NAME and it FAILS LOUDLY if the names are not all
+    there. If the crawler is fixed upstream, or NHS Supply Chain reissues the brief,
+    this build stops rather than quietly doing nothing: the list has to be re-read
+    against the live page before it can be trusted again (root rule 13 — where the
+    gate and the data disagree, assume the data is wrong).
+    """
+    corrections = rule.get("frameworkCorrections") or {}
     out = []
     for f in fw_doc["frameworks"]:
-        if not rx["fw"].search(f.get("name") or ""):
+        name = f.get("name") or ""
+        if not rx["fw"].search(name):
             continue
+        suppliers = [s for s in (f.get("suppliers") or []) if isinstance(s, str)]
+        count = f.get("supplierCount")
+        source = f.get("supplierSource")
+        delisted = f.get("delisted")
+        corr = corrections.get(name)
+        if corr:
+            want = [n.lower() for n in corr["removeSuppliers"]]
+            have = [s.lower() for s in suppliers]
+            missing = [n for n in want if n not in have]
+            if missing:
+                raise SystemExit(
+                    "build_speciality_panels: the delisted-supplier correction for\n"
+                    "  %s\n"
+                    "no longer matches frameworks.json. Not found: %s\n"
+                    "Re-read NHS Supply Chain's own contract launch brief and either "
+                    "update or remove the frameworkCorrections entry. Refusing to "
+                    "build rather than publish a supplier list that may be wrong."
+                    % (name, "; ".join(missing)))
+            delisted = [s for s in suppliers if s.lower() in want]
+            suppliers = [s for s in suppliers if s.lower() not in want]
+            count = len(suppliers)
+            source = corr["why"]
         out.append({
             "name": f.get("name"),
             "url": f.get("url"),
@@ -2916,10 +3226,10 @@ def build_frameworks(rx, fw_doc):
             "supplyRoute": f.get("supplyRoute"),
             "starts": f.get("starts"),
             "ends": f.get("ends"),
-            "supplierCount": f.get("supplierCount"),
-            "supplierSource": f.get("supplierSource"),
-            "suppliers": [s for s in (f.get("suppliers") or []) if isinstance(s, str)],
-            "delisted": f.get("delisted"),
+            "supplierCount": count,
+            "supplierSource": source,
+            "suppliers": suppliers,
+            "delisted": delisted,
         })
     out.sort(key=lambda x: (x.get("name") or ""))
     return out
@@ -3095,7 +3405,7 @@ def build(slug, sources):
     fw_doc, th_doc = sources["frameworks"], sources["tender_history"]
     fa_doc, ot_doc, dt_doc = sources["framework_awards"], sources["open_tenders"], sources["drug_tariff"]
 
-    frameworks = build_frameworks(rx, fw_doc)
+    frameworks = build_frameworks(rx, rule, fw_doc)
     suppliers = build_suppliers(frameworks, sources["registry"])
     awards, award_total = build_awards(rx, rule, th_doc, fa_doc)
     open_tenders = build_open_tenders(rx, slug, ot_doc)
