@@ -60,6 +60,15 @@ check("an EU city is not UK", rc.uk_flag("Amsterdam, Netherlands"), False)
 check("no location published stays unknown", rc.uk_flag(""), None)
 check("an unrecognised location stays unknown", rc.uk_flag("2 Locations"), None)
 
+# 3b. A US PLACE NAME THAT IS ALSO A UK PLACE NAME MUST NOT READ AS THE UK.
+#     Live bug found in AOTI's data 09/09/2026: "Albany, New York" and
+#     "Syracuse, New York" both published as uk: true because UK_RE's bare
+#     "york" matched inside "New York" before NON_UK_RE ever got a look.
+check("New York is not the UK, despite containing 'York'",
+      rc.uk_flag("Albany, New York"), False)
+check("a York, England location is still the UK",
+      rc.uk_flag("York, England"), True)
+
 # 4. A LAYOUT IS NEVER COUNTED. A careers page with no applicant tracking system
 #    and no JobPosting data must yield NO roles — not a count scraped off list
 #    markup. "No vacancies right now" above a six-item footer is six roles to a

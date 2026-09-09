@@ -249,13 +249,22 @@ def clean(s):
 
 
 def uk_flag(loc):
-    """True / False / None. None means the company published no location."""
+    """True / False / None. None means the company published no location.
+
+    NON_UK_RE and US_STATE_RE are checked BEFORE UK_RE, not after. Several UK
+    place names in UK_RE are also US place names — "York" is Albany's own
+    borough as much as it is England's — so "Albany, New York" and "Syracuse,
+    New York" were both matching UK_RE on "york" and publishing as UK roles.
+    An explicit non-UK signal (a named country, "New York", or a two-letter
+    US/Canadian state code) is stronger evidence than a bare city-name
+    substring collision, so it wins. Found live in AOTI's data 09/09/2026.
+    """
     if not loc or not loc.strip():
         return None
-    if UK_RE.search(loc):
-        return True
     if NON_UK_RE.search(loc) or US_STATE_RE.search(loc):
         return False
+    if UK_RE.search(loc):
+        return True
     return None
 
 
