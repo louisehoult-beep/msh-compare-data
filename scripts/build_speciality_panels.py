@@ -1786,6 +1786,163 @@ SPECIALITY_RULES = {
             "neuromodulation successor tender — is there rather than here."
         ),
     },
+    "palliative-and-end-of-life-care": {
+        "label": "Palliative and End-of-Life Care",
+        # ONE framework, and it is the one this patch is defined by. NHS Supply Chain's
+        # "Infusion Pumps and Administration Sets and Associated Products"
+        # (Project_12 ITT_382) is where syringe drivers and their dedicated giving sets
+        # sit, it holds 27 named suppliers, and it ENDS ON 30 SEPTEMBER 2026 with no
+        # successor named on the brief. Page 2924 leads on exactly that.
+        #
+        # The page names SEVEN buying routes. Six are deliberately not claimed here, and
+        # each is named rather than quietly dropped:
+        #   NHS SBS10015 Acute and Community Health and Social Care Equipment (expires
+        #     31/12/2026) is the community equipment route and is real, but it is an NHS
+        #     Shared Business Services agreement. frameworks.json is built from NHS
+        #     Supply Chain contract launch briefs only, so SBS10015 is not in this
+        #     dataset at all and cannot be counted from it. The page carries it in its
+        #     Buying route section with its own source link, which is where it belongs.
+        #   Pressure Area Care and Patient Handling (53 suppliers) is counted on the
+        #     tissue viability and patient handling pages, which is already two.
+        #   Wheelchairs, Specialist Seating and Related Services (31) and Aids for Daily
+        #     Living (31) are counted on the Patient Moving and Handling page.
+        #   Disposable and Washable Continence Care (12) is counted on the continence,
+        #     bladder and bowel page.
+        #   Technology Enabled Care, Electronic Assistive Technology and Lone Worker
+        #     Devices (18) is counted on the frailty and older people page.
+        # Those five are genuinely bought for dying patients, and the page says so. They
+        # are still not republished here, for the reason the page itself gives in its own
+        # framework calendar note: "wound care, ostomy and nutrition frameworks that
+        # touch a dying patient are carried on their own Hub pages rather than
+        # duplicated here." Claiming them would put 145 mobility, continence and telecare
+        # suppliers under a palliative Suppliers heading and bury the 27 that are this
+        # patch's actual market. Sharing a framework across two pages is done where the
+        # supplier list genuinely belongs to both, as Pressure Area Care does for wound
+        # care and patient handling. A wheelchair framework's supplier list does not
+        # become a palliative supplier list because hospices use wheelchairs.
+        "frameworks": r"\binfusion pumps and administration sets\b",
+        # DERIVED, not guessed. Every pattern below was run over all 1,972 rows of
+        # tender-history.json and all 1,342 of framework-awards.json — 3,314 titles —
+        # and every hit was read one by one. The list returns 9 rows and all 9 are this
+        # speciality.
+        #
+        # NOT INCLUDED, deliberately, and every one was tried and its hits read:
+        #   bare "infusion pumps?"  -> four of its six hits are not this speciality.
+        #     "Insulin Infusion Pumps, Continuous Glucose Monitoring Systems and
+        #     Associated Consumables" (NHS National Services Scotland, twice) is
+        #     diabetes, and "Rapid Infuser Blood/IV Infusion Pump" (University Hospitals
+        #     of Derby and Burton, 19/08/2026) is a trauma and theatre rapid infuser.
+        #     Nothing is lost by refusing it: all three genuine multi-product category
+        #     contracts in this data also say "syringe pump" or "syringe driver" in the
+        #     same title, so they are matched on the qualified term instead. A ward
+        #     volumetric pump fleet is not a palliative purchase and this page will not
+        #     claim one.
+        #   bare "subcutaneous"     -> catches "Tocilizumab Subcutaneous Injection
+        #     (RoActemra)" (NHS National Services Scotland, 03/02/2021), a rheumatology
+        #     biologic. A subcutaneous injection is not a continuous subcutaneous
+        #     infusion. Only the infusion, set, line and administration forms are used.
+        #   bare "bereavement"      -> all four of its hits are somebody else's patch:
+        #     "NGH - Maternity Bereavement Suite" (Northampton General, 07/09/2026) is a
+        #     maternity room fit-out, "Provision of Suicide Bereavement Support Services"
+        #     (Aneurin Bevan, 07/09/2026) and "Specialist Support Service For People
+        #     Bereaved By Suicide" (Kent County Council, 04/09/2026) are mental health
+        #     services, and "Provision of Bereavement and Mortuary Services (Funeral)"
+        #     (North West Anglia, 28/08/2026) is a mortuary and funeral contract.
+        #     Bereavement support is part of end-of-life care in NG142, but not one row
+        #     in this data is the palliative kind, so the term is refused rather than
+        #     kept and then argued with in the exclusion list.
+        #   bare "mortuary"         -> its two hits are the funeral contract above and
+        #     "Kings Park Mortuary and Medical Records Store Demolition Works" (Dorset
+        #     HealthCare, 19/08/2026), which is a demolition. Care after death is not
+        #     this dataset's mortuary spend.
+        #   bare "terminal"         -> both its hits are "Aseptically Manipulated or
+        #     Terminally Sterile Medicinal Products" (NHS South West Acutes and Peninsula
+        #     Purchasing, 20/08/2024). Terminal sterilisation, not terminal care.
+        #   bare "EOL"              -> "PAHT - EOLAS Medical Subscription" (Princess
+        #     Alexandra Hospital, 02/09/2026) is a clinical guidelines app. The
+        #     abbreviation also means end of life for an ASSET at least as often as for a
+        #     patient, so it is refused in both readings.
+        #   bare "resuscitation"    -> "Purchase of Baby Warmers with Resuscitation"
+        #     (King's College, 25/04/2024) and "Resuscitation Council Course Manuals"
+        #     (Southern Health and Social Care Trust, 31/01/2024). Neither is a DNACPR or
+        #     ReSPECT matter, and neither is this patch.
+        #   bare "respite"          -> its only hit, "Residential, respite and nursing
+        #     care beds" (Comhairle nan Eilean Siar, 21/08/2026), is a council social
+        #     care bed contract.
+        #   opioid and anxiolytic drug names (morphine, diamorphine, midazolam, hyoscine,
+        #     levomepromazine, and "opioid" itself) -> not one hit in 3,314 titles. They
+        #     are refused for the future as well as the present: a morphine supply
+        #     contract is acute pain or anaesthesia at least as often as it is palliative,
+        #     and nothing in a title separates the two.
+        #
+        # Included with no hit today, because each is unambiguous on this patch and
+        # nothing else buys it: continuous subcutaneous infusion, advance care planning,
+        # anticipatory medicines and anticipatory prescribing.
+        "include": (
+            r"\b(palliative|hospices?|end[- ]of[- ]life|end of life|"
+            r"syringe drivers?|syringe pumps?|ambulatory (?:syringe |infusion )?pumps?|"
+            r"(?:continuous )?subcutaneous (?:infusion|set|administration|line)s?|"
+            r"administration sets?|giving sets?|gravity sets?|"
+            r"advance care plan\w*|anticipatory (?:medicines?|medication|prescrib\w*))\b"
+        ),
+        # ONE pattern, and it was put here because three real rows matched the include
+        # list above and were wrong: "RPG Medical Administration Sets for Pandemic
+        # Preparedness 25/26" (13/01/2026) and "Medical Administration Sets for Pandemic
+        # Preparedness 24/25" (23/09/2025 and 22/09/2025), all three bought by the
+        # Secretary of State for Health and Social Care. Those are national stockpile
+        # intravenous giving sets held against a pandemic. Administration and giving sets
+        # are kept in the include list because they are this framework's own named
+        # products and the page's own words for them are "syringe drivers and giving
+        # sets"; the stockpile is swept back out because a pandemic reserve is not a
+        # palliative purchase.
+        "exclude": r"\bpandemic preparedness\b",
+        # NO CPV FAMILY, and it was checked rather than skipped. The only matching notice
+        # carrying device codes at all is the Northern Ireland market engagement, and it
+        # carries 33194110 infusion pumps and 33194120 infusion supplies — the whole
+        # infusion family, shared with anaesthesia, oncology, diabetes and critical care,
+        # not a palliative code. Every other matching notice carries only generic service
+        # codes: 85323000 community health, 85100000 and 85000000 health services,
+        # 60100000 road transport and 64120000 courier services. Not one is specific to
+        # this speciality, so none is claimed. A CPV code could not admit a notice on its
+        # own in any case.
+        #
+        # NO DRUG TARIFF PART, and this one is a deliberate refusal rather than an
+        # absence. Part IX genuinely does reach dying patients at home: IXA dressings and
+        # elastic hosiery, IXB incontinence appliances and IXC stoma appliances are all
+        # used in end-of-life care, and page 2924's own Buying route section says so.
+        # They are still not claimed here. IXA is 56,833 lines, and those three parts are
+        # the tissue viability, continence and stoma pages' reimbursement lists;
+        # republishing them under a palliative heading would present another speciality's
+        # market as this one's and tell a rep nothing about a syringe driver. The page
+        # names the route and links it. This panel carries no tariff.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. On this patch the buyer is very "
+            "often not the NHS, and no framework record can show that. CQC's own care "
+            "directory, produced 01 September 2026, lists 288 registered hospice "
+            "locations in England across 210 providers, of which 167 providers are not "
+            "NHS bodies, and 201 of the 288 locations carry a registered charity number "
+            "in CQC's own file. That estate spends its own money and is under no "
+            "obligation to use any NHS framework at all. None of that spend appears "
+            "below, because it is not "
+            "procured through anything this dataset records. What is counted is the one "
+            "NHS Supply Chain framework this speciality is defined by, and it expires "
+            "on 30 September 2026 with no successor named on its brief. Six further "
+            "buying routes the page claims are counted elsewhere or are outside this "
+            "dataset: NHS SBS10015 is an NHS Shared Business Services agreement and "
+            "frameworks.json is built from NHS Supply Chain briefs only; Pressure Area "
+            "Care and Patient Handling, Wheelchairs and Specialist Seating, Aids for "
+            "Daily Living, Disposable and Washable Continence Care and Technology "
+            "Enabled Care are all counted on the pages whose frameworks they primarily "
+            "are. The supplier count also needs reading with care: NHS Supply Chain "
+            "states no supplier total on its own brief for this framework, so the 27 is "
+            "a count of the names it lists, and 27 names are not 27 competitors — two "
+            "are Becton Dickinson entities, two more are the same ICU Medical group, "
+            "and the T34 and the BodyGuard-T are the same company's products. The "
+            "Suppliers count below reads 26 and not 27 for exactly that reason: NHS "
+            "Supply Chain's two spellings of the ICU Medical group resolve to one entry. "
+            "The page's Suppliers section sets out which names collapse into which group."
+        ),
+    },
 }
 
 

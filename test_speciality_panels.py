@@ -29,6 +29,7 @@ CARDIAC = "cardiology-and-cardiac-surgery"
 NUTRITION = "nutrition-and-dietetics"
 OBESITY = "obesity-and-weight-management"
 NEURO = "neurology-and-neurosurgery"
+PALLIATIVE = "palliative-and-end-of-life-care"
 fails = []
 
 
@@ -1800,6 +1801,176 @@ check("licence notice carried", bool(ne.get("_notice", {}).get("owner")))
 nekb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", NEURO + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % nekb, nekb < 200)
 
+
+# ---------------------------------------------------------------------------
+print("\nPALLIATIVE AND END-OF-LIFE CARE (page 2924)")
+print("Rebuilding the palliative and end-of-life care slice from live data...")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), PALLIATIVE],
+               check=True, capture_output=True)
+pa = load_panel(PALLIATIVE)
+pax = B.compile_rule(B.SPECIALITY_RULES[PALLIATIVE])
+
+print("\nFALSE POSITIVES — every one is a real row that a wider rule matched and was read and rejected")
+for bad in [
+    # THE EXCLUSION THAT EXISTS. National pandemic stockpile intravenous giving sets,
+    # bought by the Secretary of State. "Administration sets" is kept in the include
+    # list because it is this framework's own product name; the stockpile is swept out.
+    "RPG Medical Administration Sets for Pandemic Preparedness 25/26",
+    "Medical Administration Sets for Pandemic Preparedness 24/25",
+    # Diabetes and a trauma rapid infuser, which is why bare "infusion pump" was
+    # never adopted. All three genuine category contracts say "syringe pump" or
+    # "syringe driver" in the same title, so nothing is lost by refusing it.
+    "Insulin Infusion Pumps, Continuous Glucose Monitoring Systems and Associated Consumables",
+    "Rapid Infuser Blood/IV Infusion Pump",
+    # A rheumatology biologic. An injection is not a continuous subcutaneous infusion,
+    # which is why bare "subcutaneous" was never adopted.
+    "Tocilizumab Subcutaneous Injection (RoActemra®)",
+    # Bereavement support is part of end-of-life care in NG142, but not one bereavement
+    # row in this data is the palliative kind: a maternity room fit-out, two suicide
+    # bereavement services and a mortuary and funeral contract.
+    "NGH - Maternity Bereavement Suite",
+    "Provision of Suicide Bereavement Support Services",
+    "Specialist Support Service For People Bereaved By Suicide",
+    "Provision of Bereavement and Mortuary Services (Funeral)",
+    "Kings Park Mortuary and Medical Records Store Demolition Works",
+    # Terminal sterilisation, not terminal care.
+    "Aseptically Manipulated or Terminally Sterile Medicinal Products Framework (Lot 5)",
+    "Aseptically Manipulated or Terminally Sterile Medicinal Products",
+    # A clinical guidelines app. EOL also means end of life for an ASSET at least as
+    # often as for a patient, so the abbreviation is refused in both readings.
+    "PAHT - EOLAS Medical Subscription",
+    # Neither is a DNACPR or ReSPECT matter.
+    "Purchase of Baby Warmers with Resuscitation",
+    "Resuscitation Council Course Manuals and Registration Fee - ALS, ILS and PILS courses",
+    # A council social care bed contract.
+    "Residential, respite and nursing care beds",
+    # Named here because the panel must never reach for the neighbouring patches whose
+    # frameworks the page also lists. Each is another page's market.
+    "Disposable and Washable Continence Care",
+    "Wheelchairs, Specialist Seating and Related Services",
+    "Pressure Area Care and Patient Handling",
+]:
+    check("excluded: %s" % bad[:58], not B.match_title(pax, bad))
+
+print("\nTHE EXCLUDE LIST MUST BE THE REASON, NOT A COINCIDENCE OF THE INCLUDE LIST")
+# The one exclusion exists because the include list really does reach these rows. If a
+# later edit narrows the include list, this stops testing anything, so assert both
+# halves: the include matches, and the exclude is what stops it.
+for caught in ["RPG Medical Administration Sets for Pandemic Preparedness 25/26",
+               "Medical Administration Sets for Pandemic Preparedness 24/25"]:
+    check("include reaches it, exclude stops it: %s" % caught[:44],
+          bool(pax["inc"].search(caught)) and bool(pax["exc"].search(caught)))
+# ...and the pandemic guard must stay narrow enough to keep the genuine set rows.
+check("the pandemic guard does not throw away a genuine administration set row",
+      B.match_title(pax, "Infusion Pumps, Syringe Pumps, Administration Sets and Associated Equipment"))
+
+print("\nTRUE POSITIVES — rows that must be on this patch")
+pat = " || ".join((a.get("title") or "") for a in pa["awards"]).lower()
+for good in ["palliative care medicines transport service",
+             "bodyguard t syringe drivers",
+             "pharmaceutical stock supplies to independent hospices",
+             "palliative and end of life care and community services",
+             "national audit of care at the end of life",
+             "ambulatory pumps, subcutaneous, administration and gravity sets",
+             "infusion pumps, syringe pumps, administration sets"]:
+    check("present: %s" % good[:52], good in pat)
+check("every award matched is shown (9 of 9)",
+      pa["counts"]["awardsShown"] == pa["counts"]["awardsMatched"] == 9,
+      "shown=%s matched=%s" % (pa["counts"]["awardsShown"], pa["counts"]["awardsMatched"]))
+
+print("\nFRAMEWORKS — one claimed, six named and left to the routes they belong to")
+panames = [f["name"] for f in pa["frameworks"]]
+check("claimed: Infusion Pumps and Administration Sets and Associated Products",
+      "Infusion Pumps and Administration Sets and Associated Products" in panames)
+check("exactly one framework claimed", len(panames) == 1, "got %s" % panames)
+# The five NHSSC frameworks the page also lists as buying routes are each counted on
+# the page whose patch they primarily are. If a later edit reaches for one to fill this
+# panel out, this fails.
+for notmine in ["Pressure Area Care and Patient Handling",
+                "Wheelchairs, Specialist Seating and Related Services",
+                "Aids for Daily Living",
+                "Disposable and Washable Continence Care",
+                "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices"]:
+    check("not claimed from another page: %s" % notmine[:44], notmine not in panames)
+# The commercial fact this whole patch turns on this quarter.
+check("the framework expiry that the page leads on is carried",
+      any(f.get("ends") == "30 September 2026" for f in pa["frameworks"]))
+check("its NHS Supply Chain reference is carried",
+      any(f.get("reference") == "Project_12 ITT_382" for f in pa["frameworks"]))
+# NHS Supply Chain states no supplier total on this brief. That must travel with the
+# count, never be quietly presented as a verified 27.
+check("the unverified supplier count is flagged as NHSSC left it",
+      any("UNVERIFIED COUNT" in (f.get("supplierSource") or "") for f in pa["frameworks"]))
+
+print("\nSUPPLIERS — the framework's own list, one name per company")
+pasup = pa["suppliers"]
+check("26 suppliers from the 27 names NHS Supply Chain lists",
+      len(pasup) == 26, "got %d" % len(pasup))
+# The page's own warning is that 27 rows are not 27 competitors. The registry must
+# actually collapse the ICU Medical group, or the panel repeats the error the page
+# tells a rep to avoid.
+icu = [s for s in pasup if s["name"] == "ICU Medical (incl. Smiths Medical)"]
+check("ICU Medical and Smiths Medical resolve to one entry", len(icu) == 1)
+check("...and both NHSSC spellings are shown against it",
+      bool(icu) and sorted(icu[0]["variants"]) == ["ICU UK Medical Ltd", "Smiths Medical International Ltd"])
+# Two Becton Dickinson legal entities, which the page names as two entities of one
+# group. The CME entity is not in the alias registry, so it must be kept exactly as
+# NHS Supply Chain wrote it and flagged — never merged, never dropped.
+cme = [s for s in pasup if "CME" in s["name"]]
+check("the Becton Dickinson (CME) entity is kept as NHSSC wrote it", len(cme) == 1)
+check("...and flagged unresolved rather than merged into BD",
+      bool(cme) and cme[0]["resolved"] is False)
+check("exactly one supplier is unresolved and it is that one",
+      pa["counts"]["suppliersUnresolved"] == 1)
+# Eitan holds the framework in its own right. It must be present: the page's Suppliers
+# section turns on Eitan being on the framework but having no part in the T34.
+check("Eitan Medical is present in its own right",
+      any(s["name"].lower().startswith("eitan") for s in pasup))
+# No supplier may arrive from a framework this page does not claim.
+for offpatch in ("Juzo", "Sigvaris Britain Ltd", "Molnlycke Health Care Ltd"):
+    check("no supplier from an unclaimed framework: %s" % offpatch,
+          not any(s["name"] == offpatch for s in pasup))
+
+print("\nNOTHING IS CLAIMED THAT THE DATA DOES NOT SUPPORT")
+check("no CPV family is claimed", not B.SPECIALITY_RULES[PALLIATIVE].get("cpv"))
+check("the awards rule says why no CPV family is claimed",
+      "No CPV family corroborates" in (pa.get("rules") or {}).get("awards", ""))
+check("no award reached the panel on CPV alone",
+      all(B.match_title(pax, a["title"]) for a in pa["awards"]))
+# Part IX genuinely reaches dying patients at home. It is still refused here, because
+# IXA, IXB and IXC are the tissue viability, continence and stoma pages' lists.
+check("no tariff part is claimed", not B.SPECIALITY_RULES[PALLIATIVE].get("tariffParts"))
+check("no Drug Tariff block is published", pa.get("drugTariff") is None)
+check("the tariff rule says why rather than going quiet",
+      "No Drug Tariff part applies" in (pa.get("rules") or {}).get("drugTariff", ""))
+check("no open tender on this patch today, and none invented", pa["openTenders"] == [])
+
+print("\nTHE COVERAGE LIMIT IS PUBLISHED, NOT HIDDEN (rule 14)")
+pafw = (pa.get("rules") or {}).get("frameworks", "")
+for k in ("frameworks", "suppliers"):
+    check("coverage limit stated on the %s rule" % k,
+          "COVERAGE LIMIT" in (pa.get("rules") or {}).get(k, ""))
+# The defining fact about this patch: most of the addressable estate is not the NHS
+# and cannot appear in any procurement dataset.
+check("the non-NHS hospice estate is quantified rather than implied",
+      "288 registered hospice locations" in pafw and "167 providers are not NHS bodies" in pafw)
+check("the NHS SBS route is named and its absence explained",
+      "SBS10015" in pafw and "NHS Supply Chain briefs only" in pafw)
+check("the five frameworks counted elsewhere are named, not dropped",
+      "Pressure Area Care and Patient Handling" in pafw
+      and "Disposable and Washable Continence Care" in pafw
+      and "Technology Enabled Care" in pafw)
+check("the 26-against-27 supplier count is explained where a member will see it",
+      "reads 26 and not 27" in pafw)
+check("27 names are not presented as 27 competitors",
+      "27 names are not 27 competitors" in pafw)
+
+print("\nTHE RULE TRAVELS WITH THE DATA (rule 14a)")
+for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
+    check("rule stated: %s" % k, bool((pa.get("rules") or {}).get(k)))
+check("licence notice carried", bool(pa.get("_notice", {}).get("owner")))
+pakb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", PALLIATIVE + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % pakb, pakb < 200)
 
 print()
 if fails:

@@ -1,0 +1,452 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "palliative-and-end-of-life-care",
+ "label": "Palliative and End-of-Life Care",
+ "defined": true,
+ "generated": "2026-09-09",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-08T11:13:54+00:00",
+  "openTenders": "08/09/2026",
+  "drugTariff": "2026-09-08"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\binfusion pumps and administration sets\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. On this patch the buyer is very often not the NHS, and no framework record can show that. CQC's own care directory, produced 01 September 2026, lists 288 registered hospice locations in England across 210 providers, of which 167 providers are not NHS bodies, and 201 of the 288 locations carry a registered charity number in CQC's own file. That estate spends its own money and is under no obligation to use any NHS framework at all. None of that spend appears below, because it is not procured through anything this dataset records. What is counted is the one NHS Supply Chain framework this speciality is defined by, and it expires on 30 September 2026 with no successor named on its brief. Six further buying routes the page claims are counted elsewhere or are outside this dataset: NHS SBS10015 is an NHS Shared Business Services agreement and frameworks.json is built from NHS Supply Chain briefs only; Pressure Area Care and Patient Handling, Wheelchairs and Specialist Seating, Aids for Daily Living, Disposable and Washable Continence Care and Technology Enabled Care are all counted on the pages whose frameworks they primarily are. The supplier count also needs reading with care: NHS Supply Chain states no supplier total on its own brief for this framework, so the 27 is a count of the names it lists, and 27 names are not 27 competitors — two are Becton Dickinson entities, two more are the same ICU Medical group, and the T34 and the BodyGuard-T are the same company's products. The Suppliers count below reads 26 and not 27 for exactly that reason: NHS Supply Chain's two spellings of the ICU Medical group resolve to one entry. The page's Suppliers section sets out which names collapse into which group.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. On this patch the buyer is very often not the NHS, and no framework record can show that. CQC's own care directory, produced 01 September 2026, lists 288 registered hospice locations in England across 210 providers, of which 167 providers are not NHS bodies, and 201 of the 288 locations carry a registered charity number in CQC's own file. That estate spends its own money and is under no obligation to use any NHS framework at all. None of that spend appears below, because it is not procured through anything this dataset records. What is counted is the one NHS Supply Chain framework this speciality is defined by, and it expires on 30 September 2026 with no successor named on its brief. Six further buying routes the page claims are counted elsewhere or are outside this dataset: NHS SBS10015 is an NHS Shared Business Services agreement and frameworks.json is built from NHS Supply Chain briefs only; Pressure Area Care and Patient Handling, Wheelchairs and Specialist Seating, Aids for Daily Living, Disposable and Washable Continence Care and Technology Enabled Care are all counted on the pages whose frameworks they primarily are. The supplier count also needs reading with care: NHS Supply Chain states no supplier total on its own brief for this framework, so the 27 is a count of the names it lists, and 27 names are not 27 competitors — two are Becton Dickinson entities, two more are the same ICU Medical group, and the T34 and the BodyGuard-T are the same company's products. The Suppliers count below reads 26 and not 27 for exactly that reason: NHS Supply Chain's two spellings of the ICU Medical group resolve to one entry. The page's Suppliers section sets out which names collapse into which group.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(palliative|hospices?|end[- ]of[- ]life|end of life|syringe drivers?|syringe pumps?|ambulatory (?:syringe |infusion )?pumps?|(?:continuous )?subcutaneous (?:infusion|set|administration|line)s?|administration sets?|giving sets?|gravity sets?|advance care plan\\w*|anticipatory (?:medicines?|medication|prescrib\\w*))\\b/i and does not match /\\bpandemic preparedness\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 1,
+  "suppliers": 26,
+  "suppliersUnresolved": 1,
+  "awardsShown": 9,
+  "awardsMatched": 9,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Infusion Pumps and Administration Sets and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+   "reference": "Project_12 ITT_382",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "3 October 2022",
+   "ends": "30 September 2026",
+   "supplierCount": 27,
+   "supplierSource": "no stated count on the page; 27 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "ALXR LIMITED",
+    "Arcomedical Infusion Ltd",
+    "Avanos Medical UK Limited",
+    "B. Braun Medical Limited",
+    "Baxter Healthcare Ltd",
+    "Becton, Dickinson U.K. Limited",
+    "BMS Critical Care",
+    "Braun and Company Limited",
+    "BECTON DICKINSON (CME) U.K. LIMITED",
+    "Bunzl Retail & Healthcare Supplies Ltd",
+    "CODAN Limited",
+    "Crest Medical Limited",
+    "Eitan Medical UK Ltd",
+    "Fannin UK Limited",
+    "Fresenius Kabi",
+    "GBUK",
+    "GenX MediCare",
+    "ICU UK Medical Ltd",
+    "Inspiration Healthcare Limited",
+    "Prosum Medical Ltd",
+    "Qualasept Ltd t/a Bath ASU",
+    "Reliance Medical Ltd",
+    "RPG Medical Limited",
+    "Smiths Medical International Ltd",
+    "Spirit Medical Ltd",
+    "TLB Medical Supplies",
+    "Vygon Uk Ltd"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "ALXR Limited",
+   "resolved": true,
+   "variants": [
+    "ALXR LIMITED"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Arcomedical Infusion Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Avanos Medical UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B. Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Baxter Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton, Dickinson U.K. Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "BECTON DICKINSON (CME) U.K. LIMITED",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "BMS Critical Care Ltd",
+   "resolved": true,
+   "variants": [
+    "BMS Critical Care"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Braun and Company Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "CODAN Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "Crest Medical Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Eitan Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Fresenius Kabi Ltd",
+   "resolved": true,
+   "variants": [
+    "Fresenius Kabi"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "GenX MediCare"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "ICU Medical (incl. Smiths Medical)",
+   "resolved": true,
+   "variants": [
+    "ICU UK Medical Ltd",
+    "Smiths Medical International Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Inspiration Healthcare",
+   "resolved": true,
+   "variants": [
+    "Inspiration Healthcare Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Bunzl Retail & Healthcare Supplies Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Prosum Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Qualasept Ltd t/a Bath ASU",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "RPG Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Spirit Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "TLB Medical Supplies",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon Uk Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Palliative Care Medicines Transport Service",
+   "buyer": "Aneurin Bevan University Health Board",
+   "supplier": "ETS MEDICAL",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082604-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "60100000",
+    "64120000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Preliminary Market Engagement For Infusion Pumps, Syringe Pumps, Ambulatory Pumps, Subcutaneous, Administration and Gravity Sets and Associated Equipment",
+   "buyer": "Business Services Organisation Procurement and Logistics Service",
+   "supplier": null,
+   "date": "2026-08-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081175-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "33100000",
+    "33141624",
+    "33194000",
+    "33194100",
+    "33194110",
+    "33194120"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Palliative and End of Life Care and Community Services",
+   "buyer": "Thames Valley Integrated Care Board",
+   "supplier": null,
+   "date": "2026-08-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080143-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85323000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Palliative End of Life Care Adult Rapid Response Service in Northamptonshire",
+   "buyer": "NHS NORTHAMPTONSHIRE INTEGRATED CARE BOARD",
+   "supplier": "DHU Healthcare C.I.C.",
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079221-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "West Yorkshire CYP Palliative and End of Life Care Out of Hours Service – 24/7 Advice and Call-Out Support",
+   "buyer": "NHS West Yorkshire Integrated Care Board",
+   "supplier": null,
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079094-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "National Audit of Care at the End of Life (NACEL)",
+   "buyer": "Healthcare Quality Improvement Partnership Ltd",
+   "supplier": null,
+   "date": "2026-08-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077512-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "[4801618] Spare Parts for BodyGuard T Syringe Drivers and Infusion Pumps",
+   "buyer": "Business Services Organisation, Procurement and Logistics Service",
+   "supplier": "ROCKFORD HEALTHCARE LIMITED",
+   "date": "2023-10-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/031159-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Pharmaceutical Stock Supplies to Independent Hospices",
+   "buyer": "NHS Lanarkshire",
+   "supplier": "Ashtons Hospital Pharmacy Services Ltd",
+   "date": "2023-06-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/017753-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Infusion Pumps, Syringe Pumps, Administration Sets and Associated Equipment",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "SISK HEALTHCARE UK LTD t/a Cardiac Services, BAXTER HEALTHCARE LTD, ICU UK MEDIC",
+   "date": "2023-04-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011090-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}
