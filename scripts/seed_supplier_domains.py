@@ -740,7 +740,11 @@ def main():
                     help="JSON {supplier name: [candidate urls]} from any search source. "
                          "Still only candidates — the proof bar is unchanged.")
     ap.add_argument("--fresh", action="store_true",
-                    help="ignore the banked report and re-probe every supplier")
+                    help="re-probe rather than skip: ignore what the banked report "
+                         "already decided about the suppliers THIS RUN attempts. "
+                         "Banked results for suppliers the run does not attempt are "
+                         "kept — combining it with --supplier or --limit narrows what "
+                         "is re-probed, it does not empty the report")
     ap.add_argument("--retry-unproven", action="store_true",
                     help="re-probe only the suppliers the report has no proof for, "
                          "keeping proven and REFUSED results banked (use after widening "
@@ -791,12 +795,29 @@ def main():
     # Resume. A sweep is ~40 minutes of other people's servers; losing it to one
     # broken host is unacceptable, so every result is banked as it lands and a
     # re-run skips what is already decided (--fresh starts over).
-    done = {}
-    if not a.fresh:
-        try:
-            done = {r["name"]: r for r in json.load(open(REPORT, encoding="utf-8"))["results"]}
-        except (OSError, ValueError, KeyError):
-            done = {}
+    #
+    # THE BANK AND THE RESUME SET ARE TWO DIFFERENT THINGS, AND CONFLATING THEM
+    # DESTROYED THE REPORT TWICE. `banked` is every row the report already holds;
+    # it exists so this run can write the report back without deleting suppliers
+    # it never touched. `done` is the subset this run is allowed to SKIP.
+    # --fresh means "re-probe rather than skip", so it empties the resume set —
+    # but it must never empty the bank, because --supplier and --limit narrow the
+    # run to a handful of suppliers while the report covers hundreds. Reading the
+    # report only when --fresh was absent meant `--fresh --supplier X` started
+    # from an empty results list and wrote the whole report out as that one
+    # result: 525 banked results became 1 on 06/09/2026 (^o318) and 537 again on
+    # 08/09/2026 (^o384), both recovered from git rather than from the file.
+    # Every row a run does re-probe is still replaced in place as it lands, so
+    # --fresh keeps meaning exactly what it says.
+    banked = {}
+    try:
+        banked = {r["name"]: r for r in json.load(open(REPORT, encoding="utf-8"))["results"]}
+    except (OSError, ValueError, KeyError):
+        banked = {}
+    done = {} if a.fresh else dict(banked)
+    if a.fresh and banked:
+        print("  --fresh: re-probing %d supplier(s) this run; %d banked result(s) "
+              "carried through untouched" % (len(todo), len(banked)), flush=True)
     stale = set()
     if done and a.retry_unproven:
         # An unproven result is not a finding, it is the absence of one, and it
@@ -827,7 +848,7 @@ def main():
     # killed — and the version that carried only the untouched rows wrote the
     # not-yet-reached ones out of the report on the way down. Now an interrupted
     # run costs the results of that run, never the bank.
-    results = list(done.values())
+    results = list(banked.values())
     at = {r["name"]: i for i, r in enumerate(results)}
 
     def bank():

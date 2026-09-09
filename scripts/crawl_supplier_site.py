@@ -2071,6 +2071,20 @@ def main():
 
     targets = []
     if a.supplier:
+        # THE TTL IS NOT ONLY AN --auto RULE. The named-supplier route used to
+        # walk straight past a refusal recorded days earlier, which is how three
+        # judged refusals were re-attempted inside the 90-day window on
+        # 06/09/2026 (^o312). A refusal is a read outcome someone recorded on a
+        # date and for a stated reason; re-opening one is a deliberate act, so
+        # it needs the flag that says so.
+        if not a.retry_refused and recently_refused(a.supplier):
+            r = doc["refusals"][a.supplier]
+            print("Refused on %s and still inside the %d-day window — not re-attempted.\n"
+                  "  reason: %s\n"
+                  "  Re-run with --retry-refused if you mean to re-open it."
+                  % (r.get("checked", "an unrecorded date"), a.refusal_ttl,
+                     r.get("reason", "no reason recorded")), flush=True)
+            return
         targets = [(a.supplier, a.domain or domain_for(index.get(a.supplier, {})))]
     elif a.auto:
         fw = json.load(open(FW, encoding="utf-8"))
@@ -2113,7 +2127,7 @@ def main():
     if not targets:
         sys.exit("Nothing to crawl. Pass --supplier NAME [--domain host], or --auto.")
 
-    done, refused = 0, 0
+    done, refused, held = 0, 0, 0
     for name, domain in targets:
         if not domain:
             print("  -- %-30s no website recorded for this supplier" % name[:30], flush=True)
@@ -2123,6 +2137,40 @@ def main():
                 save(doc)
             continue
         shaped, why = crawl(domain)
+        if shaped:
+            # DISTINCT NAMES, NOT ROW COUNT, ARE WHAT MAKES A CATALOGUE.
+            # Every route already refuses a capture with fewer than MIN_PRODUCTS
+            # rows, but nothing tested whether those rows say anything different
+            # from each other. MIS Healthcare's 104 real product names came back
+            # as 105 records ALL named "Home" on the per-page breadcrumb route,
+            # cleared every existing bar, and silently replaced a good capture
+            # (^o300, 05/09/2026 — reverted by hand). One name repeated 105 times
+            # is a page-title read gone wrong, not a range, and publishing it puts
+            # 105 products called "Home" on a paid page under a named supplier.
+            #
+            # THE RULE, stated so a reader can judge it: with at least
+            # MIN_PRODUCTS rows captured, the DISTINCT names in them (compared
+            # case-insensitively) must be more than a quarter of the row count.
+            # Below that the rows are repeating one or two strings rather than
+            # naming a range, and the product count the report prints is a claim
+            # about the company that the capture cannot support.
+            #
+            # DELIBERATELY A RATIO, NOT A FLOOR. Testing distinct names against
+            # MIN_PRODUCTS instead would refuse a genuinely small range: MIP UK
+            # and Urgo Medical each publish 5 products under 5 distinct names and
+            # are real. Repetition is the fault here, not smallness. The quarter
+            # threshold clears ordinary locale duplication with room to spare
+            # (Clinisys: ~20 distinct across 44 rows) and refuses the MIS shape
+            # outright (1 across 105).
+            rows = shaped.get("products") or []
+            names = {str(x.get("n") or "").strip().lower() for x in rows}
+            names.discard("")
+            if len(rows) >= MIN_PRODUCTS and len(names) * 4 <= len(rows):
+                shaped, why = None, (
+                    "%d product record(s) carry only %d distinct name(s) (%s) — a repeated "
+                    "page title, not a product range" % (
+                        len(rows), len(names),
+                        ", ".join(sorted(names)[:3]) or "none"))
         if not shaped:
             print("  -- %-30s %s" % (name[:30], (why or "")[:70]), flush=True)
             record_refusal(name, domain, why)
@@ -2132,6 +2180,28 @@ def main():
             # spends its budget on again.
             if not a.dry_run:
                 save(doc)
+            continue
+        # A SUCCESSFUL CRAWL IS NOT AUTOMATICALLY A BETTER ANSWER THAN A REFUSAL.
+        # This line used to drop the refusal record unconditionally, so a re-crawl
+        # deleted the reason someone had written for NOT publishing that site —
+        # and the reasons that matter most are exactly the ones a mechanical
+        # re-run cannot reproduce, because the site passes every automated bar
+        # and is still the wrong catalogue (Clinisys: 44 rows for ~20 products,
+        # one per locale; Hermes: 518 regulatory documents; Magentus: Australian
+        # training-course bookings, not its clinical software). ^o312, 06/09/2026:
+        # all three lost their 05/09 reasons to a re-crawl and were restored by
+        # hand. Worse than losing data — it destroys a judgement.
+        #
+        # Inside the TTL the refusal stands and the capture is discarded unless
+        # --retry-refused says to re-open it. Past the TTL the refusal has expired
+        # by design and a fresh reading replaces it, which is what the TTL is for.
+        if not a.retry_refused and recently_refused(name):
+            r = doc["refusals"][name]
+            print("  -- %-30s crawled OK but a refusal recorded %s stands (%s). "
+                  "Not published; re-run with --retry-refused to re-open."
+                  % (name[:30], r.get("checked", "earlier"),
+                     (r.get("reason") or "no reason recorded")[:60]), flush=True)
+            held += 1
             continue
         doc["refusals"].pop(name, None)
         existing = doc["suppliers"].get(name) or {}
@@ -2158,6 +2228,12 @@ def main():
     print("\n%d supplier range(s) captured, %d refused (%d refusals on record).%s"
           % (done, refused, len(doc["refusals"]),
              "  (dry run: nothing written)" if a.dry_run else ""))
+    if held:
+        # Said out loud rather than folded into "refused": these DID crawl, and a
+        # reader comparing the numbers to the queue needs to know why they were
+        # not published. See ^o312.
+        print("  %d crawled but held by a refusal still inside the %d-day window "
+              "— nothing published for them." % (held, a.refusal_ttl))
 
 
 if __name__ == "__main__":
