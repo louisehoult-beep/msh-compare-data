@@ -18,3 +18,10 @@ sitemap-cache/
 # trust-profile batch scratch — draft layer1/profile JSON, never committed.
 # See scripts/extract_trust_layer1.py, verify_trust_profile.py, merge_trust_profiles.py.
 tmp/trust-batch/
+
+# Crawler scratch beside the data files, never history:
+#   *.lock  — the same-clone concurrency guard in scripts/crawl_supplier_site.py
+#             (a live pid, meaningless in any other checkout)
+#   *.tmp   — the half-written file an atomic save renames over the real one
+data/*.lock
+data/*.tmp

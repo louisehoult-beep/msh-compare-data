@@ -65,6 +65,7 @@ import datetime as dt
 import difflib
 import html as H
 import json
+import os
 import re
 import sys
 import time
@@ -73,6 +74,11 @@ import urllib.parse
 import urllib.request
 import urllib.robotparser
 import socket
+
+try:
+    import fcntl
+except ImportError:      # not POSIX; the guard below degrades to a no-op
+    fcntl = None
 
 # Backstop. Every fetch here passes an explicit timeout, but a library that
 # opens its own connection (RobotFileParser did) would otherwise inherit "wait
@@ -2017,6 +2023,71 @@ def domain_for(rec):
 crawl.product_paths = None
 
 
+def atomic_write_json(path, doc):
+    """Write `doc` to `path` via a temp file and a rename.
+
+    A plain open(path, "w") truncates the real file first, so a process killed
+    part-way through the dump leaves a truncated, unparseable file where a
+    whole capture used to be. The product-detail crawler was given this on
+    21/08/2026 for exactly that reason; the range crawler never was.
+    """
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(doc, f, indent=1, ensure_ascii=False)
+        f.write("\n")
+    os.replace(tmp, path)
+
+
+class AnotherCrawlIsRunning(RuntimeError):
+    pass
+
+
+def claim_out_file(path):
+    """Take an exclusive, non-blocking lock on `path` for the life of this
+    process, and return the open lock file (the caller must keep a reference:
+    closing it releases the lock).
+
+    WHY (09/09/2026, OUTSTANDING ^o397). This script is a READ-MODIFY-WRITE on
+    one JSON file: main() loads the whole document at startup, mutates it as
+    each supplier is crawled, and saves the whole thing back. Two invocations
+    inside one clone therefore both load the SAME starting document, and
+    whichever finishes last writes its copy over the other's captures — the
+    first has simply gone. It is not theoretical: backgrounding a slow crawl
+    and starting another beside it silently lost the Econix, Inpress and
+    NeedleDock captures on 09/09/2026, and they had to be re-crawled.
+
+    Refusing is the right answer rather than queueing. A crawl can run for
+    many minutes on someone else's server; a second one that sat waiting for
+    the lock would look hung. Parallel crawling is supported — it just needs a
+    separate clone from ./begin.sh, which has its own working tree and so its
+    own output file, with git handling the merge at landing time.
+
+    The lock is advisory and per-file, so it never reaches outside this clone
+    and cannot make a scheduled task in another clone wait.
+    """
+    lock = open(path + ".lock", "a+")
+    if fcntl is None:
+        return lock
+    try:
+        fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        lock.seek(0)
+        holder = lock.read().strip() or "an unrecorded pid"
+        lock.close()
+        raise AnotherCrawlIsRunning(
+            "another crawl_supplier_site.py is already writing %s in this clone "
+            "(started by %s). Two of them share one read-modify-write on that "
+            "file and the second to finish silently overwrites the first — that "
+            "is how the Econix, Inpress and NeedleDock captures were lost on "
+            "09/09/2026. Wait for it, or run this one in its own clone from "
+            "./begin.sh." % (path, holder))
+    lock.seek(0)
+    lock.truncate()
+    lock.write("pid %d, started %s\n" % (os.getpid(), dt.datetime.now().isoformat(timespec="seconds")))
+    lock.flush()
+    return lock
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--supplier")
@@ -2035,6 +2106,14 @@ def main():
                     help="days a recorded refusal suppresses a re-attempt (default 90)")
     a = ap.parse_args()
     crawl.product_paths = a.product_path or None
+
+    # HELD FOR THE WHOLE RUN, from before the load to process exit: the race
+    # this closes is between one invocation's load and another's save, so a
+    # lock taken only around the write would not close it.
+    try:
+        out_lock = claim_out_file(OUT)          # noqa: F841 - the handle IS the lock
+    except AnotherCrawlIsRunning as e:
+        sys.exit("REFUSING: %s" % e)
 
     doc = json.load(open(OUT, encoding="utf-8"))
     doc.setdefault("refusals", {})
@@ -2065,9 +2144,7 @@ def main():
                                  "checked": dt.date.today().isoformat()}
 
     def save(d):
-        with open(OUT, "w", encoding="utf-8") as f:
-            json.dump(d, f, indent=1, ensure_ascii=False)
-            f.write("\n")
+        atomic_write_json(OUT, d)
 
     targets = []
     if a.supplier:
