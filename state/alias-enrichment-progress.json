@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-09",
+ "lastRun": "2026-09-10",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -270,7 +270,19 @@
   "HiPP UK Ltd",
   "HistoSonics",
   "Hitachi Medical Systems UK Ltd",
-  "Hospital Innovations"
+  "Hospital Innovations",
+  "Hospital Services Limited",
+  "Hygenica",
+  "Hygiene Pro Clean Ltd",
+  "I3 Membrane GMBH",
+  "Iansyst Ltd",
+  "Icentia Limited",
+  "Ideal Med",
+  "Ideal Medical Solutions",
+  "IGEA S.p.A. Branch UK",
+  "IMS Euro Ltd",
+  "Independent Physiological Diagnostics Ltd",
+  "InferVision UK Ltd"
  ],
  "refusals": [
   {
@@ -567,6 +579,21 @@
    "name": "Henry Schien Medical",
    "date": "2026-09-09",
    "reason": "Partial: added the corrected spelling \"Henry Schein Medical\" (the seed's own display name is misspelled \"Schien\"), but withdrew a second candidate alias, \"Henry Schein UK Holdings Limited\", after verify.py failed a hard check: the seed already holds a separate record \"Henry Schein UK Holdings\" under that exact name, so the alias would have made alias lookup (first-wins) answer for that record's own name from the wrong record. \"Henry Schein UK Holdings Limited\" is in any case the parent legal entity that also owns the separate Hub record, and rule 4 excludes a parent/subsidiary name from the other's aliases - the same reasoning applies here even without the hard check. Own-site source (henryschein.co.uk/about/company-information, read 09/09/2026) confirmed the trading name \"Henry Schein UK Holdings Limited t/a Henry Schein Medical\", which is what verified the corrected spelling now held as an alias."
+  },
+  {
+   "name": "IGEA S.p.A. Branch UK",
+   "reason": "Own site (igeamedical.com) returned HTTP 403 and could not be verified this run. Companies House shows a separate, distinct entity 'IGEA UK LIMITED' (07065560) alongside the overseas branch 'IGEA S.P.A' (FC029969) that this seed record represents, so the single token 'IGEA' is ambiguous between two real UK-registered entities and was not added without the own-site confirmation the rule requires.",
+   "date": "2026-09-10"
+  },
+  {
+   "name": "Independent Physiological Diagnostics Ltd",
+   "reason": "Own site (ipdiagnostics.co.uk) returned HTTP 403 and could not be verified this run. Companies House (11950087) confirms the registered name and lists no previous or trading names. Search snippets show a CQC listing and site title using 'IPDiagnostics' but that form was not seen on a source this task can name (company's own site, Companies House, or NHS framework record), so it was not added. Specialities left empty for the same reason (own site not verifiable).",
+   "date": "2026-09-10"
+  },
+  {
+   "name": "InferVision UK Ltd",
+   "reason": "The only reachable site (infervision.com) is the Chinese parent company's own global site, not a UK-specific page, and carries no UK entity naming. Companies House confirms 'INFERVISION UK LTD' (13555165) matches the seed name already. Adding the parent brand 'InferVision' alone as an alias of the UK subsidiary would conflate a parent/subsidiary pair, which the task rules forbid, so it was not added.",
+   "date": "2026-09-10"
   }
  ],
  "sources": {
