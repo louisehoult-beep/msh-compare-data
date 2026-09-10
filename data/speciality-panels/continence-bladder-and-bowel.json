@@ -13,20 +13,20 @@
  "slug": "continence-bladder-and-bowel",
  "label": "Continence, Bladder and Bowel",
  "defined": true,
- "generated": "2026-09-08",
+ "generated": "2026-09-10",
  "dataAsOf": {
   "frameworks": "2026-09-02",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-07T12:26:14+00:00",
-  "openTenders": "07/09/2026",
-  "drugTariff": "2026-09-07"
+  "frameworkAwards": "2026-09-09T11:18:46+00:00",
+  "openTenders": "09/09/2026",
+  "drugTariff": "2026-09-09"
  },
  "rules": {
   "frameworks": "NHS Supply Chain framework names matching /\\b(continence|urology and bowel)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This is a framework membership list, not a market share and not the whole buying picture. The larger part of this patch is bought in the community on prescription, through NHSBSA Drug Tariff Part IX and the dispensing appliance contractors, a route with no NHS Supply Chain framework page at all; the Drug Tariff summary is where that route appears, and the page's Market intelligence section sizes the two populations separately. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This is a framework membership list, not a market share and not the whole buying picture. The larger part of this patch is bought in the community on prescription, through NHSBSA Drug Tariff Part IX and the dispensing appliance contractors, a route with no NHS Supply Chain framework page at all; the Drug Tariff summary is where that route appears, and the page's Market intelligence section sizes the two populations separately. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
   "awards": "Award-stage notices whose TITLE matches /\\b(continence|incontinen\\w*|urinary catheters?|urethral catheters?|indwelling catheters?|intermittent catheters?|foley|suprapubic|catheterisation|catheterization|urinary drainage|drainage bags?|leg bags?|night bags?|catheter valves?|catheter maintenance|urine meters?|urine collection|urine bags?|penile sheaths?|urinary sheaths?|uridome|stomas?|ostomy|colostomy|ileostomy|urostomy|bowel management|bowel care|faecal management|fecal management|anal irrigation|trans[- ]?anal irrigation|rectal irrigation|bladder washout|bladder irrigation|pelvic floor|continence pads?|absorbent pads?|pads and garments|commodes?|enuresis|nocturia)\\b/i and does not match /\\b(blood collection|catheterisation lab|surgical mesh)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "NHSBSA Drug Tariff Part IXB/IXC/IXB & IXC for the stated effective month, summarised. Prices are the reimbursement price at publication, not necessarily today's."
+  "drugTariff": "NHSBSA Drug Tariff Part IXB/IXC/IXB & IXC for the stated effective month, summarised. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
  },
  "counts": {
   "frameworks": 2,
@@ -437,16 +437,6 @@
    ]
   },
   {
-   "name": "Ivor Shaw Ltd",
-   "resolved": true,
-   "variants": [
-    "Pennine Healthcare"
-   ],
-   "frameworks": [
-    "Urology and Bowel Management"
-   ]
-  },
-  {
    "name": "KCI Medical Limited (3m)",
    "resolved": false,
    "variants": [],
@@ -572,6 +562,16 @@
    "name": "Peak Medical Ltd",
    "resolved": true,
    "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Pennine Healthcare (Ivor Shaw Ltd)",
+   "resolved": true,
+   "variants": [
+    "Pennine Healthcare"
+   ],
    "frameworks": [
     "Urology and Bowel Management"
    ]
@@ -870,8 +870,10 @@
    "IXC",
    "IXB & IXC"
   ],
+  "vmpFilter": null,
+  "vmpCount": null,
   "effectiveMonth": "2026-09",
-  "dataAsOf": "2026-09-07",
+  "dataAsOf": "2026-09-09",
   "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
   "lineCount": 9466,
   "supplierCount": 98,
@@ -957,7 +959,7 @@
     "lines": 97
    }
   ],
-  "priceMin": 94.0,
-  "priceMax": 20021.0
+  "priceMin": 0.94,
+  "priceMax": 200.21
  }
 }

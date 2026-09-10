@@ -36,6 +36,7 @@ RENAL = "renal"
 HAEM = "haematology-and-patient-blood-management"
 MATERNITY = "maternity-and-neonatal"
 GYNAE = "gynaecology-and-womens-health"
+PAEDS = "paediatrics"
 fails = []
 
 
@@ -987,13 +988,21 @@ councils = [a for a in fr["awards"]
 check("the local-authority route dominates the awards, as the page says it does",
       len(councils) >= 15, "got %d of %d" % (len(councils), len(fr["awards"])))
 
-print("\nTHE CLINICAL VOCABULARY IS ABSENT FROM THE DATA, AND SAID SO")
-# Zero rows in 3,314 contain any of these. They stay in the include because each
-# can only mean this speciality, but not one row reaches the panel through them.
-# If one ever does, that is a genuine new notice, not a leak.
-for word in ["frailty", "geriatric", "delirium", "reablement",
+print("\nTHE CLINICAL VOCABULARY IS MOSTLY ABSENT FROM THE DATA, AND SAID SO")
+# These were zero rows in 3,314 when the rule was written. They stay in the
+# include because each can only mean this speciality, and this block records
+# which of them the data has since caught up with.
+#
+# REABLEMENT MOVED, 10/09/2026, and it moved the way this block said it would:
+# "Reablement Care Service" (London Borough of Enfield, 08/09/2026) is a genuine
+# award on this patch and the panel is right to publish it. The word is now
+# asserted PRESENT rather than absent, because leaving it in the absent list
+# would make a correctly working filter look like a broken one on every run.
+for word in ["frailty", "geriatric", "delirium",
              "urgent community response", "discharge to assess"]:
     check("nothing published on '%s' today" % word, word not in ftitles)
+check("reablement is published now that a real notice exists for it",
+      "reablement" in ftitles)
 check("the include still carries the speciality's own vocabulary",
       all(w in B.SPECIALITY_RULES[FRAILTY]["include"]
           for w in ["frailty", "geriatric", "delirium", "reablement"]))
@@ -1920,14 +1929,24 @@ check("ICU Medical and Smiths Medical resolve to one entry", len(icu) == 1)
 check("...and both NHSSC spellings are shown against it",
       bool(icu) and sorted(icu[0]["variants"]) == ["ICU UK Medical Ltd", "Smiths Medical International Ltd"])
 # Two Becton Dickinson legal entities, which the page names as two entities of one
-# group. The CME entity is not in the alias registry, so it must be kept exactly as
-# NHS Supply Chain wrote it and flagged — never merged, never dropped.
+# group. THE THING BEING PROTECTED IS THAT THEY STAY TWO. Merging them would tell a
+# rep there is one BD on this framework when NHS Supply Chain names two, and
+# dropping either would lose a competitor.
+#
+# UPDATED 10/09/2026. This pair used to assert the CME entity was UNRESOLVED,
+# because it was not in the alias registry when the rule was written. Commit
+# 84602d4 ("Infusion Pumps framework: BD (CME) record") deliberately onboarded it
+# as an entity in its own right, so it now resolves to itself and the panel has no
+# unresolved suppliers at all. The old assertion described the registry's gap, not
+# the guarantee, and it is replaced rather than left standing with a note.
 cme = [s for s in pasup if "CME" in s["name"]]
 check("the Becton Dickinson (CME) entity is kept as NHSSC wrote it", len(cme) == 1)
-check("...and flagged unresolved rather than merged into BD",
-      bool(cme) and cme[0]["resolved"] is False)
-check("exactly one supplier is unresolved and it is that one",
-      pa["counts"]["suppliersUnresolved"] == 1)
+check("...as its own company, never merged into the other BD entity",
+      bool(cme) and cme[0]["name"] != "BD — Becton, Dickinson"
+      and any(s["name"] == "BD — Becton, Dickinson" for s in pasup))
+check("no supplier on this framework is left unresolved",
+      pa["counts"]["suppliersUnresolved"] == 0,
+      "got %s" % pa["counts"]["suppliersUnresolved"])
 # Eitan holds the framework in its own right. It must be present: the page's Suppliers
 # section turns on Eitan being on the framework but having no part in the T34.
 check("Eitan Medical is present in its own right",
@@ -3168,9 +3187,224 @@ check("licence notice carried", bool(gy.get("_notice", {}).get("owner")))
 _gy_kb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", GYNAE + ".json")) // 1024
 check("slice stays under 200 KB (is %d KB)" % _gy_kb, _gy_kb < 200)
 
-# The tariff slicing must not have changed any panel that does not ask for it.
+
+# ===========================================================================
+# PAEDIATRICS (page 2929). The second speciality in the rollout with no NHS
+# Supply Chain framework of its own, and the first where that is true because
+# NHSSC organises by PRODUCT and this speciality is a POPULATION. Nine adult
+# agreements carry paediatric lots; none of them is paediatrics' and claiming
+# them would have published roughly 150 office furniture, wheelchair and apron
+# manufacturers as this speciality's named suppliers.
+# ===========================================================================
+print("\nRebuilding the paediatrics slice from live data...")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), PAEDS],
+               check=True, capture_output=True)
+pd_ = load_panel(PAEDS)
+check("the paediatrics slice exists at all", pd_ is not None)
+_pd_rule = B.SPECIALITY_RULES[PAEDS]
+_pd_rx = B.compile_rule(_pd_rule)
+
+print("  bare child / children is REFUSED, and these are the rows that is refused for")
+# 36 titles carry the word and roughly four are this speciality's market. Every
+# one below is a real contract in the feeds. If any of them ever matches, the
+# word has been admitted to the include list and this tab has become a listing
+# of children's mental health, social care and public health commissioning.
+for bad in [
+        "CAMHs Tier 4 Beds and associated services",
+        "Mental Health Support Services for Children and Young People in Liverpool and Knowsley",
+        "Digital Mental Health and Emotional Wellbeing Service for Children and Young People",
+        "Black Country Self Harm Digital Therapeutic Child and Family Service",
+        "Children and Young People Safe Space Support Services",
+        "Therapeutic support and mental health services for children in care",
+        "NHS SY ICB - Initial Health Check for Looked After Children - Doncaster",
+        "Child Sexual Abuse (CSA) Services - Emotional Wellbeing and Support Service and Training for Educational Professionals",
+        "Integrated 0-19 Healthy Child Programme Service",
+        "Knowsley 0-19(25) Healthy Child Programme",
+        "715926485 - Defence Healthy Child Program",
+        "0-19 Health Visiting and School Nursing",
+        "Inactivated influenza vaccine for children 2025",
+        "Contract for the supply of inactivated influenza vaccine for children's flu programme",
+        "NHSE1117 Child Only Dental Services",
+        "Childsmilie",
+        "Child Vision Screening Service (Provider Selection Regime) (Most Suitable Provider Process)",
+        "Child Tier 2 Weight Management Service",
+        "Neurodevelopmental Support for Children, Families and Professionals",
+        "Provision of ASD/ADHD Assessment and Support for Children and Young People across Mid and South Essex",
+        # A hospital garden. The clearest demonstration that the word carries no
+        # clinical meaning on its own.
+        "NGH - Children's Garden",
+        "LGA children's improvement - Health Engagement Advisors (HEA) with notice",
+]:
+    check("child-word row left off this patch: %s" % bad[:56], not B.match_title(_pd_rx, bad))
+
+print("  PICU on this data means PSYCHIATRIC intensive care every time")
+for bad in [
+        "Mental Health PICU provision",
+        "North Staffordshire Combined Healthcare NHS Trust Out of Area Psychiatric Intensive Care (PICU) Placement",
+]:
+    check("PICU row not read as paediatric: %s" % bad[:52], not B.match_title(_pd_rx, bad))
+
+print("  adult neurodevelopmental services stay off a children's page")
+for bad in [
+        "Adult ADHD assessment service",
+        "Autism/ADHD Diagnostic Assessment and Treatment – Adults",
+        "Adult ADHD Services",
+        "Pre- and Post-Diagnostics Service for Adults with Autism",
+        "Autism Spectrum Disorder Assessments",
+]:
+    check("adult ADHD/autism row refused: %s" % bad[:52], not B.match_title(_pd_rx, bad))
+
+print("  the neonatal vocabulary is left to the page that owns it")
+for bad in [
+        "Maintenance of Infant Ventilators",
+        "Parent Infant Psychotherapy to families in East Sussex",
+        "Market Engagement Event – Brent Parent and Infant Relationship Service (PAIRS)",
+        "Purchase of Baby Warmers with Resuscitation",
+        "Supply & Distribution of Baby Packs  (1)",
+        "Baby Bundles",
+        "Breast Pumps and Breast Milk Collection Sets [5180689]",
+]:
+    check("maternity/neonatal row not claimed here: %s" % bad[:52], not B.match_title(_pd_rx, bad))
+
+print("  bare tracheostomy is adult ENT and critical care")
+for bad in [
+        "Tracheostomy Tubes and Accessories",
+        "Tracheostomy Tubes, Tube Holders and Accessories - 5806781",
+]:
+    check("adult tracheostomy row refused: %s" % bad[:52], not B.match_title(_pd_rx, bad))
+
+print("  true positives — awards that must be on this patch")
+for good in [
+        "Specialised Paediatric Whole-Body MRI Surveillance for Cancer Predisposing Syndromes",
+        "Paediatric Videoflouroscopy Service for CLEFT patients",
+        "Paediatric Occupational Therapy for Special Schools",
+        "Childrens Community Health Services",
+        "Framework  Agreement for Supply of Adult and Paediatric Nutrition Products",
+        "Manuals / Registrations for Advanced Paediatric Life Support Courses.",
+        # Reached through the qualified equipment phrase, never through "children".
+        "Aids for Daily Living Equipment for Children and Young People Framework Agreement",
+        "All Wales Women & Child Health Consumables",
+        "Supply of Children's Buggies and Adult & Children's Wheelchairs",
+        "Parenteral Nutrition for Adults and Paediatrics",
+        "Neonatal Equipment, Adult, Paediatric & Neonatal Phototherapy Devices and Associated Accessories & Services",
+        "NP14220 Neonatal and Paediatric Tracheostomy Tubes",
+]:
+    check("admitted: %s" % good[:58], B.match_title(_pd_rx, good))
+
+print("  no framework and no supplier list, said in the data rather than left blank")
+check("frameworks is genuinely None, not a pattern that finds nothing today",
+      _pd_rule["frameworks"] is None)
+check("the frameworks list is empty", pd_["counts"]["frameworks"] == 0 and not pd_["frameworks"])
+check("the suppliers list is empty for the same reason",
+      pd_["counts"]["suppliers"] == 0 and not pd_["suppliers"])
+check("the published rule says no framework covers this speciality",
+      "NO NHS Supply Chain framework covers this speciality" in pd_["rules"]["frameworks"])
+# The nine agreements are the useful thing this panel can say. If the coverage
+# note loses them the panel stops being worth reading.
+for phrase in ["Lot 23 crutches", "paediatric buggies inside Lot 1",
+               "Lot 4 adult", "Infant Feeding and Accessories",
+               "Peripheral IV Site Monitoring Device", "2022/S 000-033396",
+               "2026/S 000-031173", "roughly 150 companies"]:
+    check("coverage note carries: %s" % phrase, phrase in pd_["rules"]["frameworks"])
+check("the note says what is deliberately not counted",
+      "Children's mental health" in pd_["rules"]["frameworks"])
+
+print("  the Drug Tariff slice reproduces the page's own published figures")
+_pd_dt = pd_["drugTariff"]
+check("three parts are claimed", _pd_dt["parts"] == ["IXA", "IXB", "IXC"])
+check("and they are narrowed by a stated product filter",
+      _pd_dt["vmpFilter"] == "p[ae]ediatric|child|infant|junior")
+check("473 lines, the figure the page publishes", _pd_dt["lineCount"] == 473,
+      "got %s" % _pd_dt["lineCount"])
+check("52 suppliers list a paediatric-named line",
+      _pd_dt["supplierCount"] == 52, "got %s" % _pd_dt["supplierCount"])
+# The whole of the three parts is 66,293 lines. If the slice ever approaches that,
+# the filter has stopped being applied and the entire dressings and stoma
+# catalogue is about to be published as paediatrics'.
+_pd_all = len([r for r in B.load("drug-tariff-part-ix.json")["rows"]
+               if r[0] in ("IXA", "IXB", "IXC")])
+check("the slice is well under one per cent of the three parts (%d of %d)"
+      % (_pd_dt["lineCount"], _pd_all), _pd_dt["lineCount"] < _pd_all / 100)
+# The brand-name search is the whole reason Part IXC appears at all. Searching the
+# generic description alone returns 258 lines, every one of them IXA.
+_pd_dtrows = [r for r in B.load("drug-tariff-part-ix.json")["rows"]
+              if r[0] in ("IXA", "IXB", "IXC")]
+import re as _re
+_pd_vrx = _re.compile(_pd_rule["tariffVmp"], _re.I)
+check("the rule reads the brand name as well as the generic one",
+      tuple(_pd_rule.get("tariffFields") or ()) == ("vmp", "amp"))
+check("generic-name-only would lose Part IXC entirely, which is why it is not used",
+      len([r for r in _pd_dtrows if _pd_vrx.search(r[2] or "")]) == 258)
+check("the published rule states the limit of the counting rule",
+      "is invisible to it" in pd_["rules"]["drugTariff"])
+_pd_top = {x["name"]: x["lines"] for x in _pd_dt["topSuppliers"]}
+for name, lines in [("Dermacea Ltd", 54), ("Kavendor Ltd", 52), ("Coloplast Ltd", 26),
+                    ("Flexicare Medical Ltd", 23), ("Charles S Bullen Stomacare Ltd", 22)]:
+    check("top supplier matches the page: %s %d lines" % (name, lines),
+          _pd_top.get(name) == lines, "got %s" % _pd_top.get(name))
+
+print("  no exclusion list, and the file says why rather than hiding it")
+check("exclude is genuinely None, not a never-matching placeholder",
+      _pd_rule["exclude"] is None)
+check("the published rule explains the absence",
+      "NO EXCLUSION LIST IS APPLIED" in pd_["rules"]["awards"])
+check("no CPV family is claimed, and the absence is explained",
+      _pd_rule["cpv"] is None and "No CPV family corroborates" in pd_["rules"]["awards"])
+check("no open tender is invented for an empty day",
+      pd_["counts"]["openTenders"] == len(pd_["openTenders"]))
+check("every published award title is one the rule actually accepts",
+      all(B.match_title(_pd_rx, a.get("title") or "") for a in pd_["awards"]))
+check("licence notice carried", bool(pd_.get("_notice", {}).get("owner")))
+_pd_kb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", PAEDS + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % _pd_kb, _pd_kb < 200)
+
+
+# ===========================================================================
+# DRUG TARIFF PRICES ARE POUNDS, NOT PENCE. NHSBSA publishes Part IX prices in
+# pence and until 10/09/2026 build_tariff passed them straight to a renderer
+# that prints a pound sign in front of them. Three live panels were telling
+# paying members that Part IXA reimburses "from £3.0 to £46900.0" when the real
+# range is £0.03 to £469.00. Checked arithmetically against the source rows so
+# it cannot silently come back.
+# ===========================================================================
+print("\nDrug Tariff prices are published in pounds, not NHSBSA's pence")
+_dt_doc = B.load("drug-tariff-part-ix.json")
+_dt_ix = {k: i for i, k in enumerate(_dt_doc["schema"])}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
-    if _r.get("tariffVmp") and _slug != GYNAE:
+    if not _r.get("tariffParts"):
+        continue
+    _pan = load_panel(_slug)
+    _t = (_pan or {}).get("drugTariff")
+    if not _t:
+        continue
+    _rows = [r for r in _dt_doc["rows"] if r[_dt_ix["part"]] in tuple(_r["tariffParts"])]
+    if _r.get("tariffVmp"):
+        _f = tuple(_r.get("tariffFields") or ("vmp",))
+        _rx2 = __import__("re").compile(_r["tariffVmp"], __import__("re").I)
+        _rows = [r for r in _rows
+                 if _rx2.search(" ".join((r[_dt_ix[k]] or "") for k in _f))]
+    _raw = [float(r[_dt_ix["price"]]) for r in _rows
+            if str(r[_dt_ix["price"]]).strip() not in ("", "None")]
+    check("%s publishes the tariff range in pounds" % _slug,
+          abs(_t["priceMax"] - round(max(_raw) / 100.0, 2)) < 0.005
+          and abs(_t["priceMin"] - round(min(_raw) / 100.0, 2)) < 0.005,
+          "panel %s..%s, source pence %s..%s" % (
+              _t["priceMin"], _t["priceMax"], min(_raw), max(_raw)))
+    # Part IX reimburses appliances. A four-figure line would be a pence value
+    # that slipped through rather than a real dressing.
+    check("%s tariff top price is a plausible appliance price" % _slug,
+          _t["priceMax"] < 1000, "got %s" % _t["priceMax"])
+
+
+# The tariff slicing must not have changed any panel that does not ask for it.
+# TWO RULES SLICE A PART, and each is here because the part it slices is not its
+# speciality: gynaecology takes the 257 pessary lines out of Part IXA's 56,833, and
+# paediatrics takes the 473 lines whose product or brand name says paediatric, child,
+# infant or junior out of Parts IXA, IXB and IXC. Adding a slug to this set is a
+# decision about a published claim, never a way past a failing check.
+_TARIFF_FILTER_EARNED = {GYNAE, PAEDS}
+for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
+    if _r.get("tariffVmp") and _slug not in _TARIFF_FILTER_EARNED:
         check("%s must not have grown a tariff filter unnoticed" % _slug, False)
 
 
@@ -3178,7 +3412,7 @@ for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
 # renal and gynaecology, each because every hit its include produced was read one by
 # one and none of them was wrong. Every other speciality still has to carry a real
 # exclusion list. Adding a slug to this set is a decision, not a way past a failure.
-_EXCLUDE_NONE_EARNED = {RENAL, GYNAE}
+_EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _slug in _EXCLUDE_NONE_EARNED:
         check("%s declares its empty exclusion list explicitly" % _slug,

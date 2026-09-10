@@ -3463,6 +3463,255 @@ SPECIALITY_RULES = {
             "from one is not evidence of absence from the market."
         ),
     },
+    # PAGE 2929. Scope, in the page's own words: "General child health. Paediatric
+    # product is a lot, a size band or a line inside somebody else's framework —
+    # there is no children's category anywhere in NHS Supply Chain."
+    #
+    # THIS IS THE SECOND SPECIALITY IN THE ROLLOUT WITH NO FRAMEWORK OF ITS OWN, and
+    # unlike obesity it is not because the money moves outside procurement. It is
+    # because NHS Supply Chain organises by PRODUCT and paediatrics is a POPULATION.
+    # All 121 framework names in frameworks.json were read on 10/09/2026 and not one
+    # is a children's category; the page reached the same finding independently from
+    # NHS Supply Chain's own 140 contract launch briefs. Cardiology gets a category
+    # because cardiac devices are a product class. A child needs a smaller version of
+    # almost everything, so there is no distinct thing to make a category out of.
+    "paediatrics": {
+        "label": "Paediatrics",
+        # NO FRAMEWORK, DELIBERATELY, and this is the hardest refusal in the rollout
+        # so far because there WERE nine candidates and every one of them is real.
+        #
+        # WHAT WAS REFUSED, AND WHY IT WOULD HAVE BEEN A FALSE STATEMENT. The page's
+        # own research names nine NHS Supply Chain agreements that carry paediatric
+        # product, eight of which are in frameworks.json and were re-read there on
+        # 10/09/2026 against their references and dates. Claiming them here would have
+        # produced a "Frameworks on this patch" tile reading 8 and a Suppliers tab of
+        # roughly 150 companies presented as this speciality's market. Almost none of
+        # them sells a paediatric product. Office and Outdoor Furniture is on the list
+        # because Lot 5 is children's and play furniture; its 28 suppliers are office
+        # furniture manufacturers. Wheelchairs, Specialist Seating and Related Services
+        # is on it because paediatric buggies sit inside Lot 1's product list; its 31
+        # suppliers are overwhelmingly adult powered and manual chair makers. A rep
+        # reading that tab would take away a supplier list for a market that does not
+        # exist as a market. That is exactly the ground on which the obesity rule
+        # refuses to claim Arjo's four patient-handling frameworks, and it is refused
+        # here for the same reason: a paediatric LOT inside an adult agreement does
+        # not make the agreement, or its supplier list, paediatrics'.
+        #
+        # THE NINE ARE NOT LOST. They are named in the coverage note below with their
+        # references, dates and the specific lot or line that is paediatric, and the
+        # page's own Buying route and Framework calendar sections carry them in full
+        # with the expiry dates. Naming eight agreements and the one paediatric lot in
+        # each is a true and useful statement. Publishing their combined supplier list
+        # under the heading "Named suppliers" is not.
+        "frameworks": None,
+        # DERIVED, not guessed. Every pattern below was run over all 1,972 rows of
+        # tender-history.json, all 1,397 of framework-awards.json and the 6 open
+        # notices — 3,375 titles — on 10/09/2026, and every surviving hit was read one
+        # by one. Twelve unique titles survive and all twelve are this speciality.
+        #
+        # BARE "child" AND "children" ARE REFUSED, and this is the whole judgement on
+        # this patch. The term matches 36 titles and roughly four of them are this
+        # speciality's procurement market. The other thirty-two are children's mental
+        # health (CAMHS tier 4 beds, self-harm digital therapeutics, emotional
+        # wellbeing counselling, "Children and Young People Safe Space Support
+        # Services"), children's social care (looked-after-children health checks,
+        # child sexual abuse services, therapeutic support for children in care),
+        # public health nursing ("Integrated 0-19 Healthy Child Programme",
+        # "0-19 Health Visiting and School Nursing", the Defence Healthy Child
+        # Program), childhood immunisation (three separate inactivated influenza
+        # vaccine contracts let by DHSC), child dental services, Scotland's Childsmile
+        # oral health programme, and one hospital garden ("NGH - Children's Garden",
+        # Northampton General). Those are real contracts with real buyers and they are
+        # a different market from the one this page serves. Admitting the word and
+        # then arguing with it in an exclusion list would need a dozen patterns and
+        # would still let the next council wellbeing contract through, so the word is
+        # refused at the include stage and the four genuine rows are reached through
+        # qualified phrases that generalise instead.
+        #
+        # ALSO NOT INCLUDED, deliberately, each tried and its hits read:
+        #   neonat* / newborn / infant / baby -> the maternity and neonatal page's,
+        #     claimed there by name. This page's pathway starts after the newborn
+        #     period. "Maintenance of Infant Ventilators" (Hywel Dda) is maternity's;
+        #     "Parent Infant Psychotherapy" (East Sussex) and the Brent Parent and
+        #     Infant Relationship Service are local authority mental health, which
+        #     maternity refuses on the same ground. The two genuinely shared rows,
+        #     "Neonatal Equipment, Adult, Paediatric & Neonatal Phototherapy Devices"
+        #     and "NP14220 Neonatal and Paediatric Tracheostomy Tubes", reach this
+        #     panel through the word paediatric that is in both titles, so nothing is
+        #     lost by leaving the neonatal vocabulary to the page that owns it.
+        #   ADHD / autism / ASD -> nine hits and six are explicitly ADULT services
+        #     ("Adult ADHD assessment service", "Autism/ADHD Diagnostic Assessment and
+        #     Treatment – Adults", "Adult ADHD Services", "Pre- and Post-Diagnostics
+        #     Service for Adults with Autism"). The children's ones are commissioned
+        #     as neurodevelopmental and mental health services, not as paediatric
+        #     medicine. The community paediatrics assessment backlog those services
+        #     sit behind is on the page itself, with NHS England's figures.
+        #   neurodevelopmental -> one hit, and it is a children's one, but the word
+        #     carries no age at all and the next adult neurodevelopmental pathway
+        #     notice would match it. Refused rather than admitted on a single row.
+        #   PICU -> five hits and every one is a PSYCHIATRIC intensive care unit, not
+        #     a paediatric one. "Mental Health PICU provision" (Pennine Care) and
+        #     "Out of Area Psychiatric Intensive Care (PICU) Placement" (North
+        #     Staffordshire Combined Healthcare). The abbreviation is shared and on
+        #     this data it means psychiatric every time.
+        #   tracheostomy (bare) -> four hits, three of them adult ENT and critical
+        #     care tube contracts. The paediatric one names itself.
+        #   PEWS, Martha's Rule, bronchiolitis, croup, NICU, weaning, toddler,
+        #     juvenile, youth, kids, safeguarding, under-5s -> zero hits each. They
+        #     are the page's clinical vocabulary, not its procurement vocabulary, and
+        #     a pattern that matches nothing today is a pattern nobody has read the
+        #     hits of. Left out.
+        #
+        # NEVER READ THE FEED'S OWN `spec` FIELD AND TRUST IT. It tags exactly one of
+        # the 1,972 tender-history rows paediatrics — the Advanced Paediatric Life
+        # Support courses — and misfiles the rest: "Framework Agreement for Supply of
+        # Adult and Paediatric Nutrition Products" and "Supply of Children's Buggies
+        # and Adult & Children's Wheelchairs" both under audiology-and-hearing,
+        # "Aids for Daily Living Equipment for Children and Young People" and the
+        # paediatric phototherapy award both under theatres-and-surgical, "All Wales
+        # Women & Child Health Consumables" under gynaecology-and-womens-health, and
+        # the neonatal and paediatric tracheostomy tubes under maternity-and-neonatal.
+        "include": (
+            r"(?<![A-Za-z0-9])("
+            r"p[ae]ediatric\w*|"
+            # Paediatric mobility and continence product, which is where the money on
+            # this patch is and which the adult agreements carry as named lots. Every
+            # one of these is a phrase, never the bare word: "children's wheelchair"
+            # cannot be a council wellbeing contract, "children" on its own can.
+            r"child(?:ren)?'?s? (?:bugg(?:y|ies)|wheelchair\w*|walking (?:aid|frame)\w*|"
+            r"crutch\w*|seating|nappi\w*|pull[- ]ups?)|"
+            # "child health" is the page's own name for the patch and, unlike "child",
+            # it does not match the Healthy Child Programme contracts, which are
+            # written "Healthy Child Programme" and carry no "child health" anywhere.
+            r"child health|child(?:ren)?'?s? community health|"
+            r"(?:equipment|aids?|consumables?|devices?|appliances?|products?) for children"
+            r")(?![A-Za-z0-9])"
+        ),
+        # NO EXCLUSION LIST, and it is None rather than a pattern that happens to
+        # match nothing. All twelve surviving titles were read one by one on
+        # 10/09/2026 and not one of them is another speciality's:
+        #   Specialised Paediatric Whole-Body MRI Surveillance for Cancer Predisposing
+        #     Syndromes (NHS England, 17/08/2026)
+        #   Paediatric Videoflouroscopy Service for CLEFT patients (Nottingham
+        #     University Hospitals, 14/08/2026)
+        #   Paediatric Occupational Therapy for Special Schools (North Tyneside
+        #     Borough Council, 12/08/2026)
+        #   Childrens Community Health Services (NHS Bristol, North Somerset and South
+        #     Gloucestershire ICB, 10/08/2026)
+        #   Framework Agreement for Supply of Adult and Paediatric Nutrition Products
+        #     (East Midlands Pharmacy Collaborative, 13/07/2026)
+        #   Manuals / Registrations for Advanced Paediatric Life Support Courses
+        #     (Southern Health and Social Care Trust, 31/01/2024)
+        #   Aids for Daily Living Equipment for Children and Young People Framework
+        #     Agreement (The Highland Council, 17/01/2024)
+        #   All Wales Women & Child Health Consumables (NHS Wales Shared Services
+        #     Partnership, 10/01/2023)
+        #   Supply of Children's Buggies and Adult & Children's Wheelchairs (NHS
+        #     National Services Scotland, 27/09/2022)
+        #   Parenteral Nutrition for Adults and Paediatrics (NHS National Services
+        #     Scotland, 05/11/2021)
+        #   Neonatal Equipment, Adult, Paediatric & Neonatal Phototherapy Devices and
+        #     Associated Accessories & Services (NHS Supply Chain, 10/09/2021)
+        #   NP14220 Neonatal and Paediatric Tracheostomy Tubes (NHS National Services
+        #     Scotland, 05/02/2021)
+        # Four of those are shared with another page on purpose and each is shared
+        # because its own title says so: the two nutrition contracts are adult AND
+        # paediatric and are nutrition and dietetics' too, the phototherapy award is
+        # the predecessor of the agreement maternity and neonatal claims, and the
+        # tracheostomy tubes are neonatal AND paediatric.
+        "exclude": None,
+        # NO CPV FAMILY IS CLAIMED. The three award-feed rows on this patch carry
+        # 85100000 (health services), 85000000 (health and social work services) and
+        # 85323000 (community health services). Those are the whole of healthcare and
+        # they corroborate every speciality equally, which is not corroboration.
+        # There is no paediatric CPV code in the classification at all: CPV describes
+        # what is bought, not who it is bought for, which is the same structural fact
+        # that leaves this speciality without a Supply Chain category.
+        "cpv": None,
+        # THE DRUG TARIFF IS A SLICE OF THREE PARTS, NEVER THE PARTS WHOLE, and the
+        # slicing rule is the page's own, reproduced here exactly so the panel and the
+        # page cannot drift apart. Part IX carries 66,400 lines for September 2026.
+        # Searching the virtual AND actual medicinal product names of every line for
+        # paediatric, child, infant or junior returns 473 — 0.71% — of which 353 are
+        # in IXA, 111 in IXC (stoma) and 9 in IXB (incontinence appliances). Those are
+        # the page's published figures and this filter reproduces all four exactly.
+        #
+        # THE LIMIT OF THE RULE IS PUBLISHED WITH IT, because it is a real one: a
+        # paediatric product named without one of those four words — a small-size
+        # adult line used in children — is invisible to it. Understating the count is
+        # the safe direction to be wrong in and it is stated rather than hidden.
+        #
+        # WHY THE ACTUAL MEDICINAL PRODUCT NAME IS SEARCHED TOO, which no other rule
+        # does: the brand name is where the paediatric marker often lives. Sanofi's
+        # JuniorSTAR half-unit insulin pen carries nothing paediatric in its virtual
+        # product description ("Hypodermic insulin injection pen reusable for 3ml
+        # cartridge 0.5 unit dial up") and is a children's dosing device. Searching
+        # the virtual name alone returns 258 lines, all of them IXA, and loses Part
+        # IXC's 111 paediatric stoma lines entirely.
+        "tariffParts": ("IXA", "IXB", "IXC"),
+        "tariffVmp": r"p[ae]ediatric|child|infant|junior",
+        "tariffFields": ("vmp", "amp"),
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no paediatric "
+            "category at NHS Supply Chain and no paediatric framework, so this panel "
+            "publishes no framework list and no supplier list. That is a finding "
+            "about how children's product is bought, not a gap in the data: NHS "
+            "Supply Chain organises its 140 agreements by product — Medical and "
+            "Surgical Consumables, Rehabilitation and Community, Diagnostic Equipment "
+            "and Services, Medical Technology, Facilities and Office Solutions, Food "
+            "— and none of those is a population. Paediatric product is a lot, a size "
+            "band or a line inside an adult agreement. "
+            "NINE AGREEMENTS CARRY IT, AND NAMING THEM IS THE USEFUL THING THIS PANEL "
+            "CAN DO. Eight are in the Hub's framework record and were re-read there "
+            "on 10/09/2026: 2022/S 000-033396, the walking aids and simple aids for "
+            "daily living agreement, 1 November 2023 to 31 October 2027, 31 "
+            "suppliers, which is the only one of the nine giving paediatric product "
+            "numbered lots of its own (Lot 23 crutches, Lot 28 posture walkers, Lot "
+            "30 walking frames); Wheelchairs, Specialist Seating and Related Services "
+            "(2024/S 000-039981), 9 June 2025 to 8 June 2027, 31 suppliers, with "
+            "paediatric buggies inside Lot 1's product list rather than as a lot; "
+            "Disposable and Washable Continence Care (2026/S 000-031173), 24 August "
+            "2026 to 23 August 2028, 12 suppliers, Lot 2 paediatric nappies and pull "
+            "ups and Lot 3 paediatric body worn washables; Anaesthesia Machines, "
+            "Ventilators, Neonatal Equipment and Phototherapy Systems (2026/S "
+            "000-008108), 2 March 2026 to 28 February 2029, 25 suppliers, Lot 4 adult "
+            "and paediatric phototherapy; Infant Feeding and Accessories (2023/S "
+            "000-011743), 29 February 2024 to 28 February 2028, 18 suppliers, the "
+            "only one of the 140 agreements written for children as a population and "
+            "it is food and feeding equipment rather than clinical device; Polymer "
+            "Aprons (2023/S 000-014652), 9 October 2023 to 8 October 2027, 8 "
+            "suppliers, one paediatric apron beyond the standard range; Polymer "
+            "Products (2022/S 171-486016), from 31 October 2022 with no end date "
+            "published, 5 suppliers, child-size items returned to catalogue; and "
+            "Office and Outdoor Furniture (2025/S 000-046095), 25 November 2025 to 24 "
+            "November 2028, 28 suppliers, Lot 5 children's and play furniture, which "
+            "is not clinical and is here because NICE NG204 1.8.1 requires an "
+            "environment appropriate to a child's age and developmental stage. The "
+            "ninth, Peripheral IV Site Monitoring Device (2025/S 000-043122, 16 "
+            "February 2026 to 15 February 2027), is a one-year agreement for a single "
+            "named product and NHS Supply Chain publishes no supplier list for it, so "
+            "the Hub's framework record holds it unparsed. "
+            "WHY THOSE EIGHT ARE NOT CLAIMED AS THIS SPECIALITY'S FRAMEWORKS. Their "
+            "combined supplier lists run to roughly 150 companies, the great majority "
+            "of which sell no paediatric product at all — Office and Outdoor "
+            "Furniture's 28 are office furniture manufacturers, and the wheelchair "
+            "agreement's 31 are overwhelmingly adult chair makers. Published under "
+            "the heading Named suppliers they would describe a paediatric market that "
+            "does not exist. A paediatric lot inside an adult agreement does not make "
+            "the agreement, or its supplier list, this speciality's, and each of the "
+            "eight is counted on the page whose product class it is. "
+            "WHAT THIS PANEL DOES SHOW: the award trail for contracts whose own title "
+            "says paediatric or names children's equipment, and the paediatric slice "
+            "of the Drug Tariff. Children's mental health, children's social care, "
+            "school nursing and health visiting, childhood immunisation and child "
+            "dental services are deliberately not counted here. They are commissioned "
+            "by different buyers on different notices and they would fill this tab "
+            "with contracts a rep on this patch cannot sell into. Being absent from "
+            "this panel is not being absent from this market. The page's Buying "
+            "route, Framework calendar and Deep dive sections carry the full picture "
+            "with their sources and their expiry dates."
+        ),
+    },
 
 }
 
@@ -3699,9 +3948,18 @@ def build_tariff(rule, dt_doc):
     ix = {k: i for i, k in enumerate(dt_doc["schema"])}
     rows = [r for r in dt_doc["rows"] if r[ix["part"]] in parts]
     vmp_pattern = rule.get("tariffVmp")
+    # WHICH NAME THE FILTER READS. By default the virtual medicinal product
+    # description, which is the generic clinical name and is where a term like
+    # "pessar" lives. A rule may name more fields, and paediatrics is the case that
+    # needs it: the paediatric marker often lives only in the BRAND name, so Sanofi's
+    # JuniorSTAR half-unit insulin pen is a children's dosing device whose virtual
+    # description says nothing about children. Searching the virtual name alone
+    # returns 258 of its 473 lines and loses Part IXC's paediatric stoma range whole.
+    fields = tuple(rule.get("tariffFields") or ("vmp",))
     if vmp_pattern:
         vrx = re.compile(vmp_pattern, re.I)
-        rows = [r for r in rows if vrx.search(r[ix["vmp"]] or "")]
+        rows = [r for r in rows
+                if vrx.search(" ".join((r[ix[f]] or "") for f in fields))]
     if not rows:
         return None
     by_sup = {}
@@ -3709,7 +3967,17 @@ def build_tariff(rule, dt_doc):
     for r in rows:
         by_sup[r[ix["supplier"]]] = by_sup.get(r[ix["supplier"]], 0) + 1
         try:
-            prices.append(float(r[ix["price"]]))
+            # NHSBSA PUBLISHES PART IX PRICES IN PENCE, and until 10/09/2026 this
+            # function passed them straight through to a renderer that prints a pound
+            # sign in front of them. Three live panels were telling paying members
+            # that Part IXA reimburses "from £3.0 to £46900.0" when the range is
+            # £0.03 to £469.00, a hundredfold overstatement of every reimbursement
+            # price on the Hub. Proven against the tariff's own rows rather than
+            # assumed: "Foley catheter paediatric 8Ch" carries 555 and 1064 in this
+            # file, and NHSBSA's September 2026 Part IX prints that line at £5.55 to
+            # £10.64. Converted here, at the point the summary is built, so no panel
+            # can carry the raw unit again.
+            prices.append(float(r[ix["price"]]) / 100.0)
         except (TypeError, ValueError):
             pass
     top = sorted(by_sup.items(), key=lambda kv: (-kv[1], kv[0]))[:20]
@@ -3826,16 +4094,36 @@ def build(slug, sources):
             ),
             "drugTariff": (
                 ("NHSBSA Drug Tariff Part %s for the stated effective month, narrowed to the "
+                 "lines whose virtual medicinal product description or brand name matches "
+                 "/%s/i, and then summarised. Both names are read because on this patch the "
+                 "marker often lives only in the brand: a half-unit insulin pen sold as "
+                 "JuniorSTAR is a children's dosing device whose generic description says "
+                 "nothing about children. The parts are sliced rather than claimed whole "
+                 "because no part of the tariff is this speciality: Part IXA alone is 56,833 "
+                 "lines of dressings and elastic hosiery, which are the tissue viability "
+                 "page's. THE LIMIT OF THIS RULE, STATED RATHER THAN HIDDEN: a product for "
+                 "children named without one of those words, which is to say a small-size "
+                 "adult line used in children, is invisible to it, so this count understates "
+                 "the paediatric range and does not overstate it. Every count and price below "
+                 "is taken from the lines the pattern selects. Prices are the reimbursement "
+                 "price at publication, converted from the pence NHSBSA publishes, and are not "
+                 "necessarily today's."
+                 % ("/".join(rule["tariffParts"]), rule["tariffVmp"]))
+                if rule.get("tariffParts") and rule.get("tariffVmp")
+                and tuple(rule.get("tariffFields") or ("vmp",)) != ("vmp",) else
+                ("NHSBSA Drug Tariff Part %s for the stated effective month, narrowed to the "
                  "lines whose virtual medicinal product description matches /%s/i, and then "
                  "summarised. The part is sliced rather than claimed whole because the part is "
                  "not this speciality: Part IXA is 56,833 lines of dressings and elastic "
                  "hosiery, which are the tissue viability page's, and only the lines this "
                  "pattern selects belong here. Every count and price below is taken from those "
-                 "lines. Prices are the reimbursement price at publication, not necessarily "
-                 "today's." % ("/".join(rule["tariffParts"]), rule["tariffVmp"]))
+                 "lines. Prices are the reimbursement price at publication, converted from the "
+                 "pence NHSBSA publishes, and are not necessarily today's."
+                 % ("/".join(rule["tariffParts"]), rule["tariffVmp"]))
                 if rule.get("tariffParts") and rule.get("tariffVmp") else
                 "NHSBSA Drug Tariff Part %s for the stated effective month, summarised. Prices "
-                "are the reimbursement price at publication, not necessarily today's."
+                "are the reimbursement price at publication, converted from the pence NHSBSA "
+                "publishes, and are not necessarily today's."
                 % "/".join(rule["tariffParts"])
                 if rule.get("tariffParts") else
                 "No Drug Tariff part applies to this speciality. Part IX reimburses dressings "

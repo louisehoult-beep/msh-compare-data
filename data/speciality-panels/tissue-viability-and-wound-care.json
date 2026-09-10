@@ -13,27 +13,27 @@
  "slug": "tissue-viability-and-wound-care",
  "label": "Tissue Viability and Wound Care",
  "defined": true,
- "generated": "2026-09-08",
+ "generated": "2026-09-10",
  "dataAsOf": {
   "frameworks": "2026-09-02",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-07T12:26:14+00:00",
-  "openTenders": "07/09/2026",
-  "drugTariff": "2026-09-07"
+  "frameworkAwards": "2026-09-09T11:18:46+00:00",
+  "openTenders": "09/09/2026",
+  "drugTariff": "2026-09-09"
  },
  "rules": {
   "frameworks": "NHS Supply Chain framework names matching /\\b(wound|dressing|npwt|negative[- ]pressure|pressure area care)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry.",
   "awards": "Award-stage notices whose TITLE matches /\\b(wound|woundcare|dressing|dressings|npwt|negative[- ]pressure wound|tissue viability|pressure ulcer|pressure sore|pressure relieving|pressure area care|debridement|larval therapy|compression (?:bandag|hosiery|garment|therapy|stocking)|lymphoedema|bandag(?:e|ing)|skin integrity|wound closure|suture|leg ulcer|diabetic foot|venous ulcer|honey dressing|silver dressing|foam dressing|hydrocolloid|alginate)\\b/i and does not match /\\b(seed viability|eye tissue|corneal|toilet tissue|paper hygiene|facial tissue|chest compression|test rig|laminar flow|pressure infus|blood pressure|pressure washer|tissue culture|breast tissue|soft tissue (?:sarcoma|imaging))\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 3314111 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
-  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, summarised. Prices are the reimbursement price at publication, not necessarily today's."
+  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, summarised. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
  },
  "counts": {
   "frameworks": 5,
   "suppliers": 140,
   "suppliersUnresolved": 8,
-  "awardsShown": 29,
-  "awardsMatched": 29,
+  "awardsShown": 30,
+  "awardsMatched": 30,
   "openTenders": 0
  },
  "frameworks": [
@@ -1673,6 +1673,21 @@
  ],
  "awards": [
   {
+   "title": "Supply of Lymphoedema Consumables",
+   "buyer": "Gloucestershire Health and Care NHS Foundation Trust",
+   "supplier": "JUZO UK LIMITED",
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085072-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33141113"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
    "title": "Negative Pressure Wound Therapy",
    "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
    "supplier": "CONVATEC LIMITED, CREED MEDICAL LTD T/A Creed Health, KCI MEDICAL LIMITED, MOLNLYCKE HEALTH CARE LIMITED, OSCARTECH UK LTD, T.J.SMITH AND NEPHEW,LIMITED",
@@ -1985,8 +2000,10 @@
   "parts": [
    "IXA"
   ],
+  "vmpFilter": null,
+  "vmpCount": null,
   "effectiveMonth": "2026-09",
-  "dataAsOf": "2026-09-07",
+  "dataAsOf": "2026-09-09",
   "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
   "lineCount": 56833,
   "supplierCount": 393,
@@ -2072,7 +2089,7 @@
     "lines": 211
    }
   ],
-  "priceMin": 3.0,
-  "priceMax": 46900.0
+  "priceMin": 0.03,
+  "priceMax": 469.0
  }
 }
