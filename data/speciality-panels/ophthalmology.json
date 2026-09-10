@@ -1,0 +1,1153 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "ophthalmology",
+ "label": "Ophthalmology",
+ "defined": true,
+ "generated": "2026-09-10",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-09T11:18:46+00:00",
+  "openTenders": "09/09/2026",
+  "drugTariff": "2026-09-09"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\bophthalm\\w*/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch splits in two and only one half has a national route. The hospital half — intraocular lenses, viscoelastics, phaco and vitreoretinal capital, surgical packs, instruments, glaucoma stents and the anti-VEGF drugs, which are hospital-administered high-cost medicines — is bought on Complete Ophthalmology Solutions 3, on regional and national framework awards, or trust by trust, and that is what the frameworks, suppliers and awards above show. The community half is the ocular surface range in Drug Tariff Part IXA below, which is a different set of suppliers almost entirely and is prescribed rather than tendered. Being named on the framework is not evidence of volume, and being absent from it is not evidence of absence from the market: high street optometry, the General Ophthalmic Services contract and the independent-sector cataract providers who now hold a growing share of this speciality's activity buy outside NHS Supply Chain entirely and appear here only when they publish an award notice.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch splits in two and only one half has a national route. The hospital half — intraocular lenses, viscoelastics, phaco and vitreoretinal capital, surgical packs, instruments, glaucoma stents and the anti-VEGF drugs, which are hospital-administered high-cost medicines — is bought on Complete Ophthalmology Solutions 3, on regional and national framework awards, or trust by trust, and that is what the frameworks, suppliers and awards above show. The community half is the ocular surface range in Drug Tariff Part IXA below, which is a different set of suppliers almost entirely and is prescribed rather than tendered. Being named on the framework is not evidence of volume, and being absent from it is not evidence of absence from the market: high street optometry, the General Ophthalmic Services contract and the independent-sector cataract providers who now hold a growing share of this speciality's activity buy outside NHS Supply Chain entirely and appear here only when they publish an award notice.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(ophthalm\\w*|ocular|intra-?ocular|intravitreal|vitreoretinal|vitrectomy|cataract|phaco\\w*|iol|eyesi|retina|retinal|retinopath\\w*|macula|macular|glaucoma|tonomet\\w*|cornea|corneal|keratoplasty|keratoconus|keratomet\\w*|optometr\\w*|orthopt\\w*|slit lamp|fundus camera|optical coherence tomograph\\w*|optic nerve|eye|low vision|visual field\\w*|visual acuity|visual electrophysiolog\\w*|squint|strabismus|blepharo\\w*|oculoplast\\w*|lacrimal|punctal|ranibizumab|aflibercept|brolucizumab|faricimab|pegaptanib|verteporfin|spectacle\\w*|contact lens\\w*)\\b/i and does not match /\\b(eye protection|small animal|intravascular)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33122000 or 33731110 or 85121281 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /\\beye/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
+ },
+ "counts": {
+  "frameworks": 1,
+  "suppliers": 53,
+  "suppliersUnresolved": 2,
+  "awardsShown": 40,
+  "awardsMatched": 57,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Complete Ophthalmology Solutions 3",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ophthalmology-solutions/",
+   "reference": "2024/S 000-033370",
+   "category": "Medical Technology",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "3 November 2025",
+   "ends": "2 November 2027",
+   "supplierCount": 53,
+   "supplierSource": "count verified against the page's own stated total (53)",
+   "suppliers": [
+    "Accrington Surgical Instrument Suppliers Ltd",
+    "Albert Waeschle Ltd",
+    "Alcon Eye Care UK Ltd",
+    "Altomed Limited",
+    "Andersen Caledonia",
+    "Associated Optical Products",
+    "Bausch & Lomb U.K. Ltd",
+    "Beaver Visitec International Sales Ltd",
+    "Birmingham Optical Group",
+    "Blink Medical Ltd",
+    "BVM MEDICAL LTD",
+    "Carl Zeiss Ltd",
+    "Clonallon Laboratories",
+    "Core Surgical Limited",
+    "D.O.R.C. Limited",
+    "Daybreak Medical Ltd",
+    "DTR Medical Ltd",
+    "Duckworth & Kent Ltd",
+    "EziDrops Ltd",
+    "Glaukos UK Ltd",
+    "Grafton Optical Company Limited",
+    "Hanson Instruments Ltd",
+    "Heidelberg Engineering Limited",
+    "Innovant Healthcare Limited",
+    "Instinctive Limited",
+    "Johnson and Johnson Surgical Vision",
+    "Joint Operations (UK) Ltd",
+    "KCI Medical Limited",
+    "Leica Microsystems (UK) Limited",
+    "Lenstec (Barbados) Inc",
+    "Litechnica Ltd",
+    "Mainline Instruments Ltd",
+    "MedScience Distribution Ltd",
+    "Meticuly INNOVATIONS Ltd",
+    "Molnlycke Health Care Ltd",
+    "Optelec UK",
+    "Optos Plc",
+    "OscarTech UK Ltd",
+    "OSI INC. Ltd",
+    "Rayner Intraocular Lenses",
+    "RB Medical Engineering Ltd",
+    "Rudolf Riester GmbH",
+    "Scope Ophthalmics",
+    "Sense Medical Limited",
+    "Sight Sciences UK Ltd",
+    "Surgitrac Instruments UK Limited",
+    "Topcon Great Britain Medical Limited",
+    "Uniphar Medtech T/A Synapse Medical",
+    "Unisurge International Ltd",
+    "Veni Vidi Medical Limited",
+    "Vernacare International Ltd",
+    "Vision Matrix",
+    "Vision Pharmaceuticals Ltd T/A Spectrum"
+   ],
+   "delisted": [
+    "Carleton Optical Equipment Ltd",
+    "Haag-Streit UK Ltd",
+    "Keeler Ltd",
+    "Kestrel Ophthalmics Ltd",
+    "M.I.S.S Ophthalmics Ltd",
+    "Oculus Instruments Ltd."
+   ]
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Accrington Surgical Instrument Suppliers Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Albert Waeschle Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Alcon Eye Care UK",
+   "resolved": true,
+   "variants": [
+    "Alcon Eye Care UK Ltd"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Altomed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Andersen Caledonia Ltd",
+   "resolved": true,
+   "variants": [
+    "Andersen Caledonia"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Associated Optical Products",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Bausch & Lomb UK",
+   "resolved": true,
+   "variants": [
+    "Bausch & Lomb U.K. Ltd"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Beaver Visitec International Sales Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Birmingham Optical Group",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Blink Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Blink Medical Ltd"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "BVM Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "BVM MEDICAL LTD"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Carl Zeiss Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Clonallon Laboratories Limited",
+   "resolved": true,
+   "variants": [
+    "Clonallon Laboratories"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Core Surgical Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "D.O.R.C.",
+   "resolved": true,
+   "variants": [
+    "D.O.R.C. Limited"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Daybreak Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "DTR Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Duckworth & Kent Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "EziDrops Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Glaukos UK",
+   "resolved": true,
+   "variants": [
+    "Glaukos UK Ltd"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Grafton Optical Company Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Hanson Instruments Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Heidelberg Engineering",
+   "resolved": true,
+   "variants": [
+    "Heidelberg Engineering Limited"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Innovant Healthcare Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Instinctive Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Johnson & Johnson Surgical Vision",
+   "resolved": true,
+   "variants": [
+    "Johnson and Johnson Surgical Vision"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Joint Operations",
+   "resolved": true,
+   "variants": [
+    "Joint Operations (UK) Ltd"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Leica Microsystems (UK)",
+   "resolved": true,
+   "variants": [
+    "Leica Microsystems (UK) Limited"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Lenstec (Barbados) Inc",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Litechnica Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Mainline Instruments Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "MedScience Distribution",
+   "resolved": true,
+   "variants": [
+    "MedScience Distribution Ltd"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Meticuly INNOVATIONS Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Mölnlycke",
+   "resolved": true,
+   "variants": [
+    "Molnlycke Health Care Ltd"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Optelec UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Optos",
+   "resolved": true,
+   "variants": [
+    "Optos Plc"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "OscarTech UK",
+   "resolved": true,
+   "variants": [
+    "OscarTech UK Ltd"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "OSI INC. Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Rayner Intraocular Lenses",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "RB Medical Engineering Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Rudolf Riester GmbH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Scope Ophthalmics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Sense Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Sight Sciences UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Solventum (3M Health Care)",
+   "resolved": true,
+   "variants": [
+    "KCI Medical Limited"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Surgitrac Instruments UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Topcon GB Medical",
+   "resolved": true,
+   "variants": [
+    "Topcon Great Britain Medical Limited"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "resolved": true,
+   "variants": [
+    "Uniphar Medtech T/A Synapse Medical"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Unisurge International Limited",
+   "resolved": true,
+   "variants": [
+    "Unisurge International Ltd"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Veni Vidi Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Vernacare",
+   "resolved": true,
+   "variants": [
+    "Vernacare International Ltd"
+   ],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Vision Matrix",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  },
+  {
+   "name": "Vision Pharmaceuticals Ltd T/A Spectrum",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Complete Ophthalmology Solutions 3"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "NHSE1060 Diabetic Eye Screening Programme",
+   "buyer": "NHS England - North West",
+   "supplier": "Lot 1  - Medical Imaging UK Limited.    Lot 2 - East Lancashire Hospitals NHS Trust, Lot 1 - Medical Imaging UK Limited.  Lot 2 - East Lancashire Hospitals NHS Trust",
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084676-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000",
+    "85121280",
+    "85121281",
+    "85121282"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Replacement of Orthoptic diagnostic and therapeutic device",
+   "buyer": "KCH Interventional Facilities Management LLP",
+   "supplier": "Grafton Optical Limited",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083607-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33122000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "(Maintenance of) Ophthalmic Equipment",
+   "buyer": "Hywel Dda University Health Board",
+   "supplier": "Carl Zeiss Ltd",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082914-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Special Schools Eye Care Service  - West Yorkshire",
+   "buyer": "NHS West Yorkshire Integrated Care Board",
+   "supplier": null,
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082444-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85160000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Optometry in Special Educations Settings (SES) across the South West - Market Engagement",
+   "buyer": "NHS Devon Integrated Care Board",
+   "supplier": null,
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082802-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "CLI-FTS-63874 Ophthalmology & Vision Care Consumables",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080959-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "33122000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Community Ophthalmology Service",
+   "buyer": "NHS THAMES VALLEY INTEGRATED CARE BOARD",
+   "supplier": "The Eye Academy (Richmond) Ltd",
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080868-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121281"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Community Ophthalmology",
+   "buyer": "NHS THAMES VALLEY INTEGRATED CARE BOARD",
+   "supplier": "SOPS Healthcare Ltd",
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080862-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121281"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Transforming Digital High Street Optometry",
+   "buyer": "NHS England",
+   "supplier": null,
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079144-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "80000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "ESNEFT3325 Eye Department Procedure Chairs",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "DP Medical Systems",
+   "date": "2026-08-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077803-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "IOL's and associated Products",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "ALCON EYE CARE UK LIMITED",
+   "date": "2026-08-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077739-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33731110"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Maintenance of Corneal Topography Systems and Lensmeters",
+   "buyer": "Royal Berkshire NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076537-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33122000",
+    "50421000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Diabetic Eye Screening Data Collection & Management",
+   "buyer": "NHS England",
+   "supplier": "QUICKSILVA LIMITED",
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076518-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "72000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Outsourcing of Ophthalmic Procedures",
+   "buyer": "Hywel Dda University Local Health Board",
+   "supplier": "SPAMEDICA LTD",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076038-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Ru-106 Eye Applicators",
+   "buyer": "NHS Greater Glasgow and Clyde",
+   "supplier": "Eckert & Ziegler BEBIG Ltd.",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076375-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Stable Glaucoma Monitoring in Surrey Downs - CAN",
+   "buyer": "NHS SURREY AND SUSSEX INTEGRATED CARE BOARD",
+   "supplier": null,
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075764-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121281"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "CA17852 - Provision of Tonometer Probes",
+   "buyer": "University Hospitals of Derby and Burton NHS Foundation Trust",
+   "supplier": "Mainline Instruments Ltd",
+   "date": "2026-07-22",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/a94baec6-37b0-4bed-b763-528530a4911b",
+   "value": 60000,
+   "periodEnd": "2027-07-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "RFL-6592/26 REICHERT OCULAR ANALYSER",
+   "buyer": "Partners Procurement Service",
+   "supplier": "Grafton Optical  Company",
+   "date": "2026-06-22",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/e2d35f60-aa5f-41e0-a160-35389d467fdd",
+   "value": 15427,
+   "periodEnd": "2026-05-14",
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT3184 Purchase of Ophthalmic Microscope",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Instinctive Ltd",
+   "date": "2026-06-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/058385-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "CARL ZEISS IOL MASTER 700 SYSTEM",
+   "buyer": "Hull University Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Carl Zeiss Ltd",
+   "date": "2026-06-08",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/ef424987-b4b1-4ef7-bb88-fdcddb20f163",
+   "value": 57221,
+   "periodEnd": "2026-06-08",
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Visual Field Analysers",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Carl Zeiss Ltd",
+   "date": "2026-05-08",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/84e9916c-64e7-42b6-abc3-e943eb46dffc",
+   "value": 117124,
+   "periodEnd": "2031-03-29",
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT3206 Purchase of Ophthalmic Imaging Machine",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Optos Public Limited Company",
+   "date": "2026-05-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/041114-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP90425 Faricimab (Vabysmo®)",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Roche Products Ltd",
+   "date": "2026-03-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/026580-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Vitreoretinal and Cataract Machines",
+   "buyer": "Somerset NHS Foundation Trust",
+   "supplier": "Alcon Eye Care UK Ltd",
+   "date": "2026-01-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000948-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Branded and Biosimilar Ophthalmology",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "",
+   "date": "2025-11-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076640-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Pouches for Serum Eye Drops",
+   "buyer": "NHS Blood and Transplant",
+   "supplier": "Meise Medizintechnik GmbH",
+   "date": "2025-10-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/067156-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "FTS - Complete Ophthalmology Solutions 3",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Albert Waeschle Limited, AMO United Kingdom Limited, Alcon Eye Care UK Limited, ",
+   "date": "2025-10-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/061535-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Low Vision Aid Supply and Recycling Services to WGOS - Low Vision",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "EDWARD MARCUS LIMITED",
+   "date": "2025-07-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/044067-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Goods - Preloaded Intra-Ocular Lenses",
+   "buyer": "University Hospitals Bristol and Weston NHS Foundation Trust",
+   "supplier": "Rayner Intraocular Lenses Limited",
+   "date": "2025-06-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/031083-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Aflibercept 8mg PFS",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Bayer Plc",
+   "date": "2025-02-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005757-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of donated eye tissue used for corneal transplantation and other surgery",
+   "buyer": "Queen Victoria Hospital NHS Foundation Trust",
+   "supplier": "Lions World Vision Institute",
+   "date": "2025-02-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/006023-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Aflibercept Pre-filled Syringe 2mg",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Bayer Plc",
+   "date": "2025-02-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004839-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ENT, Ophthalmology & Skin Medicines/Medical Devices",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Scope Ophthalmics Limited, Consilient Health Ltd, AbbVie Ltd, Altacor, Aspire Ph",
+   "date": "2024-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/030345-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NHS National Framework for Medical Retinal Vascular Treatments 1 August 2024",
+   "buyer": "NHS England",
+   "supplier": "Bayer plc",
+   "date": "2024-08-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/026978-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Framework Agreement for the Supply of Ophthalmic Surgical Pathway Goods & Services",
+   "buyer": "HealthTrust Europe LLP (HTE) acting on behalf of Mid and South Essex NHS Foundat",
+   "supplier": "Bausch & Lomb U.K. Ltd, BEAVER-VISITEC INTERNATIONAL SALES LTD, D.O.R.C. Limited",
+   "date": "2024-07-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/022637-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Mercaptamine Eye Drops",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Recordati Netherlands BV",
+   "date": "2024-04-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/013404-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP92520b Aflibercept (Eylea®)",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Bayer Plc",
+   "date": "2023-11-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/035009-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "All Wales Ophthalmology Consumables Framework Agreement",
+   "buyer": "NHS Wales Shared Service Partnership (hosted by Velindre NHS Trust)",
+   "supplier": "Accrington Surgical instrument Suppliers Limited, Alcon Eye Care UK Ltd, Altomed",
+   "date": "2023-07-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/021740-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP33923 Ranibizumab",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Teva UK Limited, Biogen Idec Ltd, Thornton & Ross, Novartis Pharmaceuticals UK L",
+   "date": "2023-07-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/021851-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Intraocular Lenses and Single use I/A Handpieces [ 4305265 ]",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "AMO UNITED KINGDOM LIMITED, ALCON EYE CARE UK LTD, John Bannon Ltd, SISK HEALTHC",
+   "date": "2023-06-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016371-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": {
+  "parts": [
+   "IXA"
+  ],
+  "vmpFilter": "\\beye",
+  "vmpCount": 89,
+  "effectiveMonth": "2026-09",
+  "dataAsOf": "2026-09-09",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
+  "lineCount": 223,
+  "supplierCount": 36,
+  "topSuppliers": [
+   {
+    "name": "TriOn Pharma Ltd",
+    "lines": 22
+   },
+   {
+    "name": "Visufarma UK Ltd",
+    "lines": 17
+   },
+   {
+    "name": "Aspire Pharma Ltd",
+    "lines": 15
+   },
+   {
+    "name": "Blumont Healthcare Ltd",
+    "lines": 15
+   },
+   {
+    "name": "Sai-Meds Ltd",
+    "lines": 12
+   },
+   {
+    "name": "Essential-Healthcare Ltd",
+    "lines": 11
+   },
+   {
+    "name": "Farmigea S.p.A.",
+    "lines": 11
+   },
+   {
+    "name": "Scope Ophthalmics Ltd",
+    "lines": 11
+   },
+   {
+    "name": "Warneford Healthcare Ltd",
+    "lines": 11
+   },
+   {
+    "name": "Medicom Healthcare Ltd",
+    "lines": 10
+   },
+   {
+    "name": "Ridge Pharma Ltd",
+    "lines": 9
+   },
+   {
+    "name": "Alcon Eye Care UK Ltd",
+    "lines": 8
+   },
+   {
+    "name": "Alissa Healthcare Research Ltd",
+    "lines": 7
+   },
+   {
+    "name": "Allergan Ltd",
+    "lines": 6
+   },
+   {
+    "name": "Altacor Ltd",
+    "lines": 5
+   },
+   {
+    "name": "Bausch & Lomb UK Ltd",
+    "lines": 5
+   },
+   {
+    "name": "East Midlands Pharma Ltd",
+    "lines": 5
+   },
+   {
+    "name": "Rayner Pharmaceuticals Ltd",
+    "lines": 5
+   },
+   {
+    "name": "TRB Chemidica (UK) Ltd",
+    "lines": 5
+   },
+   {
+    "name": "Agepha Pharma s.r.o.",
+    "lines": 4
+   }
+  ],
+  "priceMin": 0.61,
+  "priceMax": 25.25
+ }
+}

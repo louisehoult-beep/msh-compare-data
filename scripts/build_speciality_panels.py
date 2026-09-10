@@ -4512,6 +4512,146 @@ SPECIALITY_RULES = {
             "has no framework and no Drug Tariff Part IX presence at all."
         ),
     },
+    # PAGE 2831. One NHS Supply Chain framework, one large community reimbursement
+    # range, and a title vocabulary that is unusually clean once three words are
+    # taken out of it.
+    "ophthalmology": {
+        "label": "Ophthalmology",
+        # ONE FRAMEWORK, AND THE PATTERN IS DELIBERATELY THE BARE STEM. All 121
+        # NHSSC framework names were read: exactly one, "Complete Ophthalmology
+        # Solutions 3" (Medical Technology CBU, 3 November 2025 to 2 November 2027,
+        # 53 suppliers), is this speciality's. Nothing else in the list is an eye
+        # framework under another word — checked against "eye", "ocular", "vision",
+        # "optic", "lens", "cataract" and "retina" over every name, expired list and
+        # unparsed entry, and none of them returned anything. So the stem matches
+        # what it should and there is no second name to reach for.
+        "frameworks": r"\bophthalm\w*",
+        # EVERY MATCH WAS READ, ALL 63 OF THEM, ACROSS ALL THREE FEEDS. Terms kept
+        # because a real notice needed them and the notice was genuinely this
+        # speciality: "Ru-106 Eye Applicators" (ruthenium-106 plaque brachytherapy
+        # for ocular tumours), "Supply of Pouches for Serum Eye Drops" (NHSBT's
+        # serum eye drop service), "Mercaptamine Eye Drops", the donated corneal
+        # tissue contracts at Queen Victoria Hospital and Moorfields, "Eyesi
+        # Surgical Complete Simulator", "CARL ZEISS IOL MASTER 700 SYSTEM" and
+        # "IOL's and associated Products".
+        #
+        # REFUSED FROM THE INCLUDE RATHER THAN EXCLUDED AFTERWARDS:
+        #   bare "vision"   -> matches the word "provision", which appears in 100+
+        #                      titles of every speciality. Only "low vision",
+        #                      "visual field", "visual acuity" and "visual
+        #                      electrophysiology" are admitted.
+        #   bare "optic"    -> "Optical Laser Fibre Consumables for CyberHo 100
+        #                      Holmium Laser System" and two more Cook optical laser
+        #                      fibre awards are urology lithotripsy, and
+        #                      "Inductively Coupled Plasma Optical Emission
+        #                      Spectrometer" is analytical chemistry. Only "optical
+        #                      coherence tomography" and "optic nerve" are admitted.
+        #   bare "lens"     -> admitted only as "intraocular", "contact lens" or
+        #                      "spectacle"; a bare lens is a camera part.
+        #   "bevacizumab"   -> "Bevacizumab IV Infusion Vials" (NHS National
+        #                      Services Scotland) is the oncology intravenous
+        #                      product, not the off-label intravitreal use. The
+        #                      title cannot tell the two apart, so it is refused.
+        #   "oct"           -> never used as a bare abbreviation: it is also the
+        #                      month.
+        # "aflibercept", "ranibizumab" and "faricimab" ARE admitted bare. All six
+        # aflibercept notices in this data are intravitreal (2mg, 8mg and 3.6mg in
+        # 90 microlitres pre-filled syringes) and all are wet AMD. The oncology form
+        # of aflibercept is spelled ziv-aflibercept or branded Zaltrap, and neither
+        # string appears anywhere in this repository's data — checked, not assumed.
+        # If one ever arrives it will need excluding, and the invariant in
+        # test_speciality_panels.py is what will show it.
+        "include": (
+            r"\b(ophthalm\w*|ocular|intra-?ocular|intravitreal|"
+            r"vitreoretinal|vitrectomy|cataract|phaco\w*|iol|eyesi|"
+            r"retina|retinal|retinopath\w*|macula|macular|"
+            r"glaucoma|tonomet\w*|"
+            r"cornea|corneal|keratoplasty|keratoconus|keratomet\w*|"
+            r"optometr\w*|orthopt\w*|"
+            r"slit lamp|fundus camera|optical coherence tomograph\w*|optic nerve|"
+            r"eye|"
+            r"low vision|visual field\w*|visual acuity|visual electrophysiolog\w*|"
+            r"squint|strabismus|blepharo\w*|oculoplast\w*|lacrimal|punctal|"
+            r"ranibizumab|aflibercept|brolucizumab|faricimab|pegaptanib|verteporfin|"
+            r"spectacle\w*|contact lens\w*)\b"
+        ),
+        # THREE PATTERNS, and each is here because a real row matched `include`, was
+        # read, and was rejected:
+        #   eye protection -> "Single Use Eye Protection", Supply Chain Coordination
+        #                     Limited. Goggles and visors. That is personal
+        #                     protective equipment and infection prevention's patch,
+        #                     and it is the highest-volume false positive the bare
+        #                     word "eye" produces.
+        #   small animal   -> "QUB/2597/24 a Fully Integrated Small Animal In-Vivo
+        #                     Ophthalmic Retinal Ocular Imaging System", Queen's
+        #                     University Belfast. A preclinical research rig. It
+        #                     carries three of this rule's terms at once and is not
+        #                     an NHS ophthalmology purchase by any reading. Same
+        #                     shape as Kew Gardens' seed viability X-ray cabinet on
+        #                     the wound care page.
+        #   intravascular  -> "Intravascular Optical Coherence Tomography (OCT)",
+        #                     NHS Golden Jubilee. Intravascular OCT is a coronary
+        #                     imaging catheter. Same three letters, different organ;
+        #                     it belongs to cardiology.
+        "exclude": r"\b(eye protection|small animal|intravascular)\b",
+        # THE THREE OPHTHALMOLOGY-SPECIFIC CPV CODES SEEN ON GENUINE NOTICES IN THIS
+        # DATA: 33122000 on the orthoptic device replacement, the Wales
+        # Ophthalmology and Vision Care consumables award and the corneal topography
+        # maintenance; 33731110 on "IOL's and associated Products"; 85121281 on
+        # Community Ophthalmology twice, Community Ophthalmology Service and Stable
+        # Glaucoma Monitoring in Surrey Downs. They corroborate only. The Diabetic
+        # Eye Screening Programme award, which is genuinely this speciality, carries
+        # none of them and reaches the panel on its title alone — which is the point
+        # of the title gate being the admitting one.
+        "cpv": ("33122000", "33731110", "85121281"),
+        # PART IXA, SLICED, AND IT IS A LARGER RANGE THAN THIS PAGE PREVIOUSLY SAID.
+        # Part IXA is 56,833 lines of appliances. Inside it sits the whole community
+        # ocular surface range: 223 lines, 89 virtual medicinal products, 36
+        # suppliers, reimbursed from £0.61 to £25.25. Every one of the 89 was read.
+        # They are the ocular lubricants (sodium hyaluronate, carmellose,
+        # hypromellose, carbomer and polyvinyl alcohol eye drops, gels and
+        # ointments, preserved and preservative free), the lid hygiene range
+        # (AccuSoft and Evolve eyelid wipes, Epimax eyelid ointment, the Meibopatch,
+        # Optase and Clinitas warm compresses, the Blepha EyeBag), sodium chloride
+        # 5% and 6% for corneal oedema, artificial eye lubricants, the eye drop
+        # dispenser and the eye pad. Leading suppliers by line count are TriOn
+        # Pharma, Visufarma UK, Aspire Pharma, Blumont Healthcare and Scope
+        # Ophthalmics.
+        #
+        # WHY THE PATTERN IS A PREFIX AND NOT A WHOLE WORD. "\beye" rather than
+        # "\beye\b" is needed for "eyelid" and for "Generic Blepha EyeBag", which a
+        # whole-word match loses; it was then checked against every Part IX row and
+        # selects nothing outside IXA and nothing that is not ophthalmic. "ocular",
+        # "corneal", "conjunctiv" and "lacrimal" were tested over both the virtual
+        # and the brand name across all five parts and match zero rows, so they are
+        # not in the pattern: an alternative that cannot fire is noise in a rule a
+        # member is asked to judge.
+        #
+        # ONE OVERLAP, STATED. "Eye pad No 16 with bandage BPC" is an eye dressing
+        # and is also inside the Part IXA range that tissue viability and wound care
+        # claims whole. It is counted on both pages and that is correct: it is one
+        # product with two clinical homes, not a double count of two things.
+        "tariffParts": ("IXA",),
+        "tariffVmp": r"\beye",
+        "coverageNote": (
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch splits in two and "
+            "only one half has a national route. The hospital half — intraocular "
+            "lenses, viscoelastics, phaco and vitreoretinal capital, surgical packs, "
+            "instruments, glaucoma stents and the anti-VEGF drugs, which are "
+            "hospital-administered high-cost medicines — is bought on Complete "
+            "Ophthalmology Solutions 3, on regional and national framework awards, or "
+            "trust by trust, and that is what the frameworks, suppliers and awards "
+            "above show. The community half is the ocular surface range in Drug "
+            "Tariff Part IXA below, which is a different set of suppliers almost "
+            "entirely and is prescribed rather than tendered. Being named on the "
+            "framework is not evidence of volume, and being absent from it is not "
+            "evidence of absence from the market: high street optometry, the General "
+            "Ophthalmic Services contract and the independent-sector cataract "
+            "providers who now hold a growing share of this speciality's activity buy "
+            "outside NHS Supply Chain entirely and appear here only when they publish "
+            "an award notice."
+        ),
+    },
 
 }
 

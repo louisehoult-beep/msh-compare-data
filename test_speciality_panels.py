@@ -41,6 +41,7 @@ VASCACCESS = "vascular-access-and-iv-therapy"
 UROLOGY = "urology"
 RESP = "respiratory"
 STROKE = "stroke"
+OPHTH = "ophthalmology"
 fails = []
 
 
@@ -3401,17 +3402,21 @@ for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
 
 
 # The tariff slicing must not have changed any panel that does not ask for it.
-# FOUR RULES SLICE A PART, and each is here because the part it slices is not its
+# FIVE RULES SLICE A PART, and each is here because the part it slices is not its
 # speciality: gynaecology takes the 257 pessary lines out of Part IXA's 56,833,
 # paediatrics takes the 473 lines whose product or brand name says paediatric, child,
 # infant or junior out of Parts IXA, IXB and IXC, urology takes the 3,108 catheter,
-# urostomy and catheter-drainage lines out of the same three parts, and respiratory
+# urostomy and catheter-drainage lines out of the same three parts, respiratory
 # takes 608 lines out of Part IXA — the tracheostomy breathing aid, tube holder,
 # cleaning device and laryngectomy protector families plus the peak flow meters —
-# leaving the 56,225 dressing and elastic hosiery lines to tissue viability, including
-# the tracheostomy DRESSING range, which is a dressing. Adding a slug to this set is a
-# decision about a published claim, never a way past a failing check.
-_TARIFF_FILTER_EARNED = {GYNAE, PAEDS, UROLOGY, RESP}
+# and ophthalmology takes the 223 lines of the community ocular surface range,
+# which is 89 virtual medicinal products of ocular lubricants, lid hygiene
+# products and hypertonic saline, added 10/09/2026. That leaves the dressing and
+# elastic hosiery lines to tissue viability, including the tracheostomy DRESSING
+# range, which is a dressing, and the eye pad, which is on both pages because it
+# is one product with two clinical homes. Adding a slug to this set is a decision
+# about a published claim, never a way past a failing check.
+_TARIFF_FILTER_EARNED = {GYNAE, PAEDS, UROLOGY, RESP, OPHTH}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _r.get("tariffVmp") and _slug not in _TARIFF_FILTER_EARNED:
         check("%s must not have grown a tariff filter unnoticed" % _slug, False)
@@ -4059,6 +4064,122 @@ check("neurology still refuses the interventional framework award",
 check("stroke carries it, because this page names it as the buying route",
       any(a["title"].upper().startswith("INTERVENTIONAL CARDIOLOGY")
           for a in sk["awards"]))
+
+
+# ---------------------------------------------------------------------------
+# OPHTHALMOLOGY. Three dangers on this patch. The bare word "eye" is also
+# personal protective equipment. Three of this rule's own terms land together on
+# a university's small-animal research rig. And "OCT" is a coronary imaging
+# catheter as often as it is a retinal scan. Against that, this is the first
+# speciality since wound care whose Drug Tariff presence is substantial, and the
+# page it feeds said in prose that it had none.
+# ---------------------------------------------------------------------------
+print("\nOPHTHALMOLOGY")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), OPHTH],
+               check=True, capture_output=True)
+op = load_panel(OPHTH)
+check("panel is defined", op.get("defined") is True)
+check("label is the page's own", op["label"] == "Ophthalmology")
+
+_op_rule = B.SPECIALITY_RULES[OPHTH]
+_op_rx = B.compile_rule(_op_rule)
+
+print("  the three false positives, every one a real row read on 10/09/2026")
+for bad, why in [
+        ("Single Use Eye Protection", "PPE goggles and visors, SCCL"),
+        ("QUB/2597/24 a Fully Integrated Small Animal In-Vivo Ophthalmic Retinal "
+         "Ocular Imaging System", "preclinical research rig, QUB"),
+        ("Intravascular Optical Coherence Tomography (OCT)", "coronary OCT, Golden Jubilee"),
+]:
+    check("refused (%s): %s" % (why[:32], bad[:40]), not B.match_title(_op_rx, bad))
+
+print("  the terms refused from the include rather than argued with afterwards")
+# Each of these is a real row in this data. None is ophthalmology, and none of
+# them may ever be admitted by widening a term back out.
+for bad, why in [
+        ("Orthotics Service and Products Provision", "provision contains vision"),
+        ("Provision of Wigs and Wig Services", "provision contains vision"),
+        ("Optical Laser Fibre Consumables for CyberHo 100 Holmium Laser System (4839792)",
+         "urology lithotripsy fibres"),
+        ("Cook Optical Laser Fibres", "urology lithotripsy fibres"),
+        ("Inductively Coupled Plasma Optical Emission Spectrometer (ICP-OES)",
+         "analytical chemistry"),
+        ("Bevacizumab IV Infusion Vials", "oncology IV, not intravitreal"),
+]:
+    check("cut at the include stage (%s): %s" % (why[:30], bad[:40]),
+          not B.match_title(_op_rx, bad))
+
+print("  and the rows that must be present, every one read on 10/09/2026")
+for good in ["FTS - Complete Ophthalmology Solutions 3",
+             "Intraocular Lenses, Viscoelastics & Phaco machines",
+             "Vitreoretinal and Cataract Machines",
+             "NHSE1060 Diabetic Eye Screening Programme",
+             "Stable Glaucoma Monitoring in Surrey Downs - CAN",
+             "Ru-106 Eye Applicators",
+             "Aflibercept Intravitreal Prefilled Syringe",
+             "NP33922 Ranibizumab",
+             "NP90425 Faricimab (Vabysmo®)",
+             "CARL ZEISS IOL MASTER 700 SYSTEM",
+             "Purchase of Visual Field Analysers",
+             "Low Vision Aid Supply and Recycling Services to WGOS - Low Vision"]:
+    check("admitted: %s" % good[:52], B.match_title(_op_rx, good))
+
+print("  the corneal tissue notices are wound care's false positive and this page's true one")
+# "Supply of donated eye tissue used for corneal transplantation and other
+# surgery" is one of the ten rows the loose `spec` field wrongly tags wound care.
+# It is genuinely ophthalmology, and both halves of that have to stay true.
+_op_titles = " || ".join((a.get("title") or "") for a in op["awards"]).lower()
+check("ophthalmology carries the corneal transplantation notices",
+      "corneal transplantation" in _op_titles)
+check("wound care still refuses them",
+      "corneal transplantation" not in
+      " || ".join((a.get("title") or "") for a in d["awards"]).lower())
+
+print("  aflibercept is admitted bare, and the reason it is safe is checked not assumed")
+# Bare "aflibercept" is admitted because all six notices carrying it in this data
+# are intravitreal. The oncology form is ziv-aflibercept or Zaltrap. If either
+# string ever appears in a notice title, this rule needs an exclusion and this
+# check is what says so.
+_op_onc = [a["title"] for a in op["awards"]
+           if "ziv-aflibercept" in a["title"].lower() or "zaltrap" in a["title"].lower()]
+check("no oncology aflibercept notice has reached this panel", not _op_onc,
+      "; ".join(_op_onc))
+check("every award was admitted by its title",
+      all(B.match_title(_op_rx, a["title"]) for a in op["awards"]))
+
+print("  one framework, and it is the only one")
+check("exactly one framework", len(op["frameworks"]) == 1,
+      "got %d" % len(op["frameworks"]))
+check("and it is Complete Ophthalmology Solutions 3",
+      op["frameworks"][0]["name"] == "Complete Ophthalmology Solutions 3")
+check("NHS Supply Chain's own supplier count is carried through unchanged",
+      op["counts"]["suppliers"] == 53, "got %d" % op["counts"]["suppliers"])
+
+print("  PART IXA IS NOT EMPTY ON THIS PATCH, WHICH THE PAGE PROSE HAD SAID IT WAS")
+# Page 2831 stated in prose, when it was rebuilt on 10/09/2026, that "none of this
+# speciality's product is dispensed on FP10 against Drug Tariff Part IX". NHSBSA's
+# own Part IXA carries the entire community ocular surface range. The prose was
+# corrected the same day. These are the numbers that were checked, and if the
+# slice ever falls back to nothing the claim has to be revisited, not the check.
+check("a Drug Tariff part is claimed", op["drugTariff"] is not None)
+check("it is Part IXA", op["drugTariff"]["parts"] == ["IXA"])
+check("the ocular surface range is present in full",
+      op["drugTariff"]["vmpCount"] >= 80, "got %s" % op["drugTariff"]["vmpCount"])
+check("over more than 200 reimbursement lines",
+      op["drugTariff"]["lineCount"] >= 200, "got %s" % op["drugTariff"]["lineCount"])
+check("prices are in pounds, not the pence NHSBSA publishes",
+      op["drugTariff"]["priceMax"] < 100, "got %s" % op["drugTariff"]["priceMax"])
+# The prefix form of the pattern exists for these two and nothing else.
+_op_vmp = B.re.compile(_op_rule["tariffVmp"], B.re.I)
+for good in ["Generic AccuSoft eyelid wipes", "Generic Blepha EyeBag",
+             "Sodium hyaluronate 0.2% eye drops preservative free",
+             "Artificial eye lubricants"]:
+    check("tariff line selected: %s" % good[:44], bool(_op_vmp.search(good)))
+# And nothing outside the eye range may ride in on it.
+for bad in ["Artificial saliva gel", "Voice prosthesis cleaning brush",
+            "Sodium hyaluronate 40mg/20ml intravesical solution pre-filled syringes",
+            "Sodium hyaluronate cream"]:
+    check("tariff line refused: %s" % bad[:44], not _op_vmp.search(bad))
 
 
 # The exclude=None path must not leak to any rule that has not earned it. Two have:
