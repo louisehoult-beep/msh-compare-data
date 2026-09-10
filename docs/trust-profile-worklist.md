@@ -630,6 +630,25 @@ profiled partner before researching these, and be precise about which facts are 
   URLs on this domain all confirmed genuinely live via WebFetch before merge; the automated
   gate check will keep failing them, so verify manually rather than treating the gate's
   result as final for this domain specifically.
+- **Broken TLS chain, fails Python but fine via curl:** `ekhuft.nhs.uk` (East Kent
+  Hospitals University, RVV), found on the 10/09/2026 refresh. The server sends a valid
+  GlobalSign leaf certificate but appends two of its own internal AD CA certificates
+  (KCHSUBCA01-CA / KCHSUBCA02-CA, issued by EKHUFTROOTCA) instead of the GlobalSign
+  intermediate, so `urllib` raises CERTIFICATE_VERIFY_FAILED while `curl` returns 200.
+  `verify_trust_profile.py` will therefore fail every ekhuft URL on every future batch.
+  All eight were independently confirmed 200 via curl before publishing. Re-check with
+  curl rather than dropping them.
+- **403 only when Sec-Fetch-* headers are sent:** `cwplus.org.uk` (CW+, the Chelsea and
+  Westminster charity, cited by RQM). Plain curl and curl with User-Agent, Accept and
+  Accept-Language all return 200; adding the `Sec-Fetch-*` set that
+  `verify_trust_profile.py` sends triggers a 403. The inverse of the Royal Devon pattern,
+  so retry WITHOUT Sec-Fetch headers before treating it as dead.
+- **Imperva/Incapsula bot-challenge on rendered pages:** `elht.nhs.uk` (East Lancashire
+  Hospitals, RXR), found on the 10/09/2026 refresh. Returns a challenge page rather than
+  content. Its PDF document paths are still fetchable, so the August 2025 senior management
+  org chart was usable where the live board page was not. Separately, the most recent ELHT
+  annual report retrievable anywhere is 2022/23, three years stale, so annual-report facts
+  for this trust cannot be refreshed at all.
 - **403 to curl:** Find a Tender notice pages. Usable as evidence read another way, but do
   not cite one as a `source` URL that will be checked.
 - **Scanned-image PDFs that will not extract:** Royal Wolverhampton's 2025/26 financial
