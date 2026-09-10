@@ -1,0 +1,1943 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "urology",
+ "label": "Urology",
+ "defined": true,
+ "generated": "2026-09-10",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-09T11:18:46+00:00",
+  "openTenders": "09/09/2026",
+  "drugTariff": "2026-09-09"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(urology and bowel|endourology|intra-urethral|lithotripsy|bladder scanners|brachytherapy seeds|rigid endoscopy|flexible endoscopes|surgical implants for men)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the nine agreements above, Rigid Endoscopy and Flexible Endoscopes, are capital routes shared with other specialities, and their suppliers are endoscope manufacturers rather than urology houses; three more, Urology and Bowel Management, Surgical Implants for Men's and Women's Health and Brachytherapy Seeds, are shared with continence, gynaecology and oncology. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. One agreement the page carries is missing here for a data reason rather than a judgement: Maintenance, Repair and Calibration of Medical Equipment, which names urodynamics and lithotripsy equipment among the estates it maintains, is not one of the 121 framework names the Hub's crawler holds, so it cannot be claimed. Five of the nine agreements share one procurement reference, 2021/S 000-007768, and all five end on 31 March 2028 — that reference wraps NHS Supply Chain's whole diagnostic capital portfolio and 22 of its 140 briefs carry it, so its expiry is not a urology event. Finally, the larger half of the catheter economy is bought in the community on prescription through NHSBSA Drug Tariff Part IX and the dispensing appliance contractors, a route with no NHS Supply Chain framework page at all; the Drug Tariff summary is where it appears.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the nine agreements above, Rigid Endoscopy and Flexible Endoscopes, are capital routes shared with other specialities, and their suppliers are endoscope manufacturers rather than urology houses; three more, Urology and Bowel Management, Surgical Implants for Men's and Women's Health and Brachytherapy Seeds, are shared with continence, gynaecology and oncology. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. One agreement the page carries is missing here for a data reason rather than a judgement: Maintenance, Repair and Calibration of Medical Equipment, which names urodynamics and lithotripsy equipment among the estates it maintains, is not one of the 121 framework names the Hub's crawler holds, so it cannot be claimed. Five of the nine agreements share one procurement reference, 2021/S 000-007768, and all five end on 31 March 2028 — that reference wraps NHS Supply Chain's whole diagnostic capital portfolio and 22 of its 140 briefs carry it, so its expiry is not a urology event. Finally, the larger half of the catheter economy is bought in the community on prescription through NHSBSA Drug Tariff Part IX and the dispensing appliance contractors, a route with no NHS Supply Chain framework page at all; the Drug Tariff summary is where it appears.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(urolog\\w*|endourolog\\w*|prostat\\w*|transurethral|turp|turbt|holep|cystoscop\\w*|ureterosc\\w*|nephroscop\\w*|resectoscop\\w*|urodynam\\w*|uroflow\\w*|lithotrip\\w*|eswl|pcnl|ureter\\w*|urethr\\w*|nephrostom\\w*|nephrolithotom\\w*|penile|testicular|orchidectom\\w*|orchidopex\\w*|vasectomy|varicocele|circumcision|erectile dysfunction|holmium|thulium|green ?light laser|brachytherapy seeds?|urinary catheters?|urostom\\w*|bladder scanner\\w*|bladder cancer|bladder tumou?r|overactive bladder|neurogenic bladder|bladder washout|bladder irrigation|bladder instillation|urine meters?|urine flow)\\b/i and does not match /\\b(intravascular)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33125 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "NHSBSA Drug Tariff Part IXA/IXB/IXC for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /\\b(nelaton|foley|dilatation catheter|reusable catheter|catheterisation packs?|catheter (?:disposable|retaining|safety|securement|maintenance|valves?)|urinar\\w*|urostom\\w*|uridome|suprapubic|penile sheaths?|incontinence sheaths?|leg bags?|night bags?|bladder (?:infusion|irrigat\\w*|washout)|urine (?:meters?|bags?))\\b/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
+ },
+ "counts": {
+  "frameworks": 9,
+  "suppliers": 125,
+  "suppliersUnresolved": 7,
+  "awardsShown": 29,
+  "awardsMatched": 29,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Bladder Scanners and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/bladder-scanners-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 11,
+   "supplierSource": "no stated count on the page; 11 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Bard Limited",
+    "BioSpectrum Ltd",
+    "Butterfly Network",
+    "Creo Medical UK Ltd (previously known as Albyn Medical Ltd)",
+    "De Smit Medical Systems Limited",
+    "FUJIFILM UK Ltd",
+    "GE Healthcare",
+    "SISK Healthcare (UK) Ltd trading as Cardiac Services",
+    "Source Medical",
+    "Verathon Medical",
+    "Win Health Medical Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Brachytherapy Seeds and Associated Accessories",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/brachytherapy-seeds-and-associated-accessories/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 2,
+   "supplierSource": "no stated count on the page; 2 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Becton, Dickinson U.K. Limited",
+    "BXT Accelyon Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+   "reference": "2024/S 000-029975",
+   "category": "Medical Technology",
+   "supplyRoute": "eDirect",
+   "starts": "1 October 2025",
+   "ends": "30 September 2027",
+   "supplierCount": 58,
+   "supplierSource": "count verified against the page's own stated total (58)",
+   "suppliers": [
+    "Advanced Medical Systems Ltd",
+    "Ambu Limited",
+    "APR Medtech Limited",
+    "Aquilant Endoscopy Ltd",
+    "Aquilant Limited",
+    "Argon Medical Devices UK Ltd",
+    "Becton, Dickinson UK Limited",
+    "BioSpectrum Ltd",
+    "Boston Scientific Ltd",
+    "BVM Medical Ltd",
+    "CJ Medical",
+    "Coloplast Ltd",
+    "ConMed UK Ltd",
+    "Cook (UK) Ltd",
+    "Creo Medical Limited",
+    "Erbe Medical UK Ltd",
+    "Fairmont Medical Products Limited",
+    "Fannin UK Limited",
+    "GAP Medical Solutions Ltd",
+    "GBUK Ltd",
+    "GenX MediCare",
+    "GI UK Medical Ltd (Duomed)",
+    "GTA (UK) Ltd",
+    "H4 Medical Ltd",
+    "HistoSonics",
+    "IGEA S.p.A. Branch UK",
+    "Ingles Ltd",
+    "It’s Interventional Limited",
+    "Johnson & Johnson Medical Ltd",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Kebomed UK Ltd",
+    "KeyMed (Medical and Industrial Equipment) Ltd",
+    "Laborie Medical Technologies Ltd",
+    "Leib Medical Ltd",
+    "Macromed UK Ltd",
+    "MCT Lifesciences Ltd",
+    "Medtronic Limited",
+    "Merit Medical UK Ltd",
+    "Micro-Tech (UK) Ltd",
+    "Newtons Medical Supplies Ltd",
+    "Novus Med Ltd",
+    "Omnimed Limited",
+    "Partners for Endoscopy Limited",
+    "Penlon Limited",
+    "Pennamed Limited",
+    "Pentax UK Limited",
+    "Promed Limited",
+    "RB Medical Engineering Ltd",
+    "Richard Wolf UK Ltd",
+    "Rocamed France",
+    "Steris Solutions Limited",
+    "Synectics Medical T/A SynMed",
+    "Terumo UK Ltd",
+    "TFX Group Ltd T/A Teleflex Medical",
+    "TSC Endovision",
+    "Uniphar Medtech T/A Synapse Medical",
+    "Uniplex UK Ltd",
+    "Varian Medical Systems"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Flexible Endoscopes and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 5,
+   "supplierSource": "no stated count on the page; 5 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "FUJIFILM Healthcare UK Limited",
+    "Karl Storz Endoscopy UK Ltd",
+    "Olympus KeyMed",
+    "Pentax Medical",
+    "Richard Wolf UK Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Lithotripsy and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/lithotripsy-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 3,
+   "supplierSource": "no stated count on the page; 3 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Hospital Services Limited",
+    "Richard Wolf UK Ltd",
+    "Storz Medical UK"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Male Intra-Urethral Catheter with Magnet Control",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/male-intra-urethral-catheter-with-magnet-control/",
+   "reference": "2026/S 000-013783",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "eDirect",
+   "starts": "30 March 2026",
+   "ends": "22 February 2027",
+   "supplierCount": 1,
+   "supplierSource": "no stated count on the page; 1 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Ingenion Medical"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Rigid Endoscopy and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/rigid-endoscopy-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 18,
+   "supplierSource": "no stated count on the page; 18 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Aquilant Ltd",
+    "Arthrex Limited",
+    "B. Braun Medical Limited",
+    "Conmed UK Limited",
+    "DP Medical",
+    "Emmat Medical",
+    "G S Medical",
+    "Karl Storz Endoscopy (UK) Limited",
+    "LiteOptics Limited",
+    "Locamed Limited",
+    "Medtronic Limited",
+    "Novus Med",
+    "Olympus KeyMed",
+    "Pentax UK Limited",
+    "RB Medical Engineering Limited",
+    "Richard Wolf UK Limited",
+    "Smith and Nephew",
+    "Stryker UK Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Surgical Implants for Men’s and Women’s Health",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-implants-for-mens-and-womens-health/",
+   "reference": "2025/S 000-025202",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2026",
+   "ends": "31 March 2028",
+   "supplierCount": 6,
+   "supplierSource": "no stated count on the page; 9 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Boston Scientific Ltd",
+    "Coloplast Ltd",
+    "iMEDicare Ltd",
+    "Johnson & Johnson Medical Ltd",
+    "Q Medical Technologies Ltd",
+    "Silimed UK Limited"
+   ],
+   "delisted": [
+    "Eurosurgical Limited",
+    "Motiva Implants UK Limited",
+    "Nagor Limited."
+   ]
+  },
+  {
+   "name": "Urology and Bowel Management",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+   "reference": "2023/S 000-011173",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "21 February 2024",
+   "ends": "20 February 2027",
+   "supplierCount": 57,
+   "supplierSource": "count verified against the page's own stated total (57)",
+   "suppliers": [
+    "Abena UK Limited",
+    "AQLANE Medical BV",
+    "Ardo Medical Ltd",
+    "Astric Medical Ltd",
+    "B Braun Medical Ltd",
+    "Baxter Healthcare Limited",
+    "Beambridge Medical Ltd",
+    "Becton Dickinson UK Ltd Woking",
+    "C&P Medical Trading Ltd",
+    "CD Medical Ltd",
+    "Class Medical Ltd",
+    "CliniMed Ltd",
+    "Clinisupplies GB Limited",
+    "Clinisupplies Ltd",
+    "CODAN Limited",
+    "Coloplast Limited",
+    "Convatec Ltd",
+    "Creo Medical UK Ltd",
+    "E&E MEDICAL SUPPLIES LIMITED",
+    "Essity UK TENA Heath & Medical",
+    "Fairmont Medical Products Limited",
+    "Fannin UK Ltd",
+    "Flexicare Medical Ltd",
+    "Fresenius Kabi Ltd",
+    "GBUK Healthcare",
+    "GenX MediCare Ltd",
+    "Hollister Ltd",
+    "iMEDicare Ltd",
+    "KCI Medical Limited (3m)",
+    "Key Health Solutions",
+    "Laborie Medical Technologies UK Ltd",
+    "LINC Medical Systems Ltd",
+    "Medicina Limited",
+    "Mediplus Ltd",
+    "Mediq Healthcare",
+    "Medline Industries Ltd",
+    "Oakmed Ltd",
+    "Optimum Medical Solutions Ltd",
+    "Paramount Medical Solutions Ltd",
+    "Peak Medical Ltd",
+    "Pelican Healthcare Limited",
+    "Pennine Healthcare",
+    "ProSys International Ltd",
+    "RB Medical",
+    "Redland embh Group Limited",
+    "Rhodes Pharma Ltd",
+    "Rocialle Healthcare Limited",
+    "Salts Healthcare (Ostomy)",
+    "Sharon services (UK) Ltd",
+    "Smith & Nephew Healthcare Ltd",
+    "Teleflex Medical UK",
+    "Trion Pharma Limited",
+    "UNOQUIP GMBH",
+    "Venture Healthcare Ltd",
+    "Vernacare International Limited",
+    "Wellspect Limited",
+    "Sinapi Biomedical UK"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Bard Limited",
+    "Becton Dickinson UK Ltd Woking",
+    "Becton, Dickinson U.K. Limited",
+    "Becton, Dickinson UK Limited"
+   ],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services",
+    "Brachytherapy Seeds and Associated Accessories",
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Richard Wolf UK",
+   "resolved": true,
+   "variants": [
+    "Richard Wolf UK Limited",
+    "Richard Wolf UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Lithotripsy and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Coloplast",
+   "resolved": true,
+   "variants": [
+    "Coloplast Limited",
+    "Coloplast Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Surgical Implants for Men’s and Women’s Health",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz Endoscopy (UK) Limited",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Karl Storz Endoscopy UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Olympus (KeyMed)",
+   "resolved": true,
+   "variants": [
+    "KeyMed (Medical and Industrial Equipment) Ltd",
+    "Olympus KeyMed"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Pentax Medical",
+   "resolved": true,
+   "variants": [
+    "Pentax Medical",
+    "Pentax UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "RB Medical Engineering Ltd",
+   "resolved": true,
+   "variants": [
+    "RB Medical",
+    "RB Medical Engineering Limited",
+    "RB Medical Engineering Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [
+    "Aquilant Limited",
+    "Aquilant Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B Braun Medical Ltd",
+    "B. Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "BioSpectrum Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services",
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Boston Scientific",
+   "resolved": true,
+   "variants": [
+    "Boston Scientific Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Surgical Implants for Men’s and Women’s Health"
+   ]
+  },
+  {
+   "name": "Conmed UK Ltd",
+   "resolved": true,
+   "variants": [
+    "ConMed UK Ltd",
+    "Conmed UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Creo Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Creo Medical Limited",
+    "Creo Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Fairmont Medical Products Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Limited",
+    "Fannin UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Fujifilm Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "FUJIFILM Healthcare UK Limited",
+    "FUJIFILM UK Ltd"
+   ],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services",
+    "Flexible Endoscopes and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK Healthcare",
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "GenX MediCare",
+    "GenX MediCare Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "iMEDicare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Implants for Men’s and Women’s Health",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Johnson & Johnson MedTech",
+   "resolved": true,
+   "variants": [
+    "Johnson & Johnson Medical Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Surgical Implants for Men’s and Women’s Health"
+   ]
+  },
+  {
+   "name": "Laborie Medical Technologies UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Laborie Medical Technologies Ltd",
+    "Laborie Medical Technologies UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Novus Med Ltd",
+   "resolved": true,
+   "variants": [
+    "Novus Med",
+    "Novus Med Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Smith+Nephew",
+   "resolved": true,
+   "variants": [
+    "Smith & Nephew Healthcare Ltd",
+    "Smith and Nephew"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "TFX Group Ltd T/A Teleflex Medical",
+    "Teleflex Medical UK"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "resolved": true,
+   "variants": [
+    "SISK Healthcare (UK) Ltd trading as Cardiac Services",
+    "Uniphar Medtech T/A Synapse Medical"
+   ],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services",
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Abena UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Advanced Medical Systems Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Ambu UK",
+   "resolved": true,
+   "variants": [
+    "Ambu Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "APR Medtech Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "AQLANE Medical BV",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Aquilant Endoscopy Limited",
+   "resolved": true,
+   "variants": [
+    "Aquilant Endoscopy Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Ardo medical Limited",
+   "resolved": true,
+   "variants": [
+    "Ardo Medical Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Argon Medical Devices UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Arthrex",
+   "resolved": true,
+   "variants": [
+    "Arthrex Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Astric Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Baxter Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "Baxter Healthcare Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Beambridge Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Butterfly Network",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "BVM Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "BXTAccelyon Ltd",
+   "resolved": true,
+   "variants": [
+    "BXT Accelyon Ltd"
+   ],
+   "frameworks": [
+    "Brachytherapy Seeds and Associated Accessories"
+   ]
+  },
+  {
+   "name": "C&P Medical Trading Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "CD Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "CJ Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Class Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "CliniMed",
+   "resolved": true,
+   "variants": [
+    "CliniMed Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Clinisupplies",
+   "resolved": true,
+   "variants": [
+    "Clinisupplies GB Limited",
+    "Clinisupplies Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "CODAN Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Convatec",
+   "resolved": true,
+   "variants": [
+    "Convatec Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Cook Medical",
+   "resolved": true,
+   "variants": [
+    "Cook (UK) Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Creo Medical UK Ltd (previously known as Albyn Medical Ltd)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "D.P. Medical Systems Limited",
+   "resolved": true,
+   "variants": [
+    "DP Medical"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "De Smit Medical Systems Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "E&E MEDICAL SUPPLIES LIMITED",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Eakin Ostomy (Pelican Healthcare)",
+   "resolved": true,
+   "variants": [
+    "Pelican Healthcare Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Emmat Medical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Erbe Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Essity UK Limited",
+   "resolved": true,
+   "variants": [
+    "Essity UK TENA Heath & Medical"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Flexicare Medical",
+   "resolved": true,
+   "variants": [
+    "Flexicare Medical Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Fresenius Kabi Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "G S Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "GAP Medical Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "GE HealthCare",
+   "resolved": true,
+   "variants": [
+    "GE Healthcare"
+   ],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "GI UK Medical Ltd (Duomed)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "GTA (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "H4 Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "HistoSonics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Hollister",
+   "resolved": true,
+   "variants": [
+    "Hollister Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Hospital Services Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Lithotripsy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "IGEA S.p.A. Branch UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Ingenion Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Male Intra-Urethral Catheter with Magnet Control"
+   ]
+  },
+  {
+   "name": "Ingles Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "It’s Interventional Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "KCI Medical Limited (3m)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Kebomed UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Key Health Solutions",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Leib Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "LINC Medical",
+   "resolved": true,
+   "variants": [
+    "LINC Medical Systems Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "LiteOptics",
+   "resolved": true,
+   "variants": [
+    "LiteOptics Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "LocaMed Ltd",
+   "resolved": true,
+   "variants": [
+    "Locamed Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Macromed UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "MCT Lifesciences Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Medicina Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Mediplus Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Mediq Healthcare"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Merit Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Micro-Tech (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Newtons Medical Supplies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Omnimed Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Optimum Medical",
+   "resolved": true,
+   "variants": [
+    "Optimum Medical Solutions Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Paramount Medical Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Partners for Endoscopy Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Peak Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Penlon",
+   "resolved": true,
+   "variants": [
+    "Penlon Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Pennamed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Pennine Healthcare (Ivor Shaw Ltd)",
+   "resolved": true,
+   "variants": [
+    "Pennine Healthcare"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Promed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "ProSys International Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Q Medical Technologies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Implants for Men’s and Women’s Health"
+   ]
+  },
+  {
+   "name": "Redland embh Group Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Rhodes Pharma Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Rocamed France",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Rocialle Healthcare",
+   "resolved": true,
+   "variants": [
+    "Rocialle Healthcare Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Salts Healthcare (Ostomy)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Sharon Services (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Sharon services (UK) Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Silimed UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Implants for Men’s and Women’s Health"
+   ]
+  },
+  {
+   "name": "Sinapi Biomedical UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Source Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Steris",
+   "resolved": true,
+   "variants": [
+    "Steris Solutions Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Storz Medical UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Lithotripsy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Stryker",
+   "resolved": true,
+   "variants": [
+    "Stryker UK Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Synectics Medical T/A SynMed",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Terumo UK",
+   "resolved": true,
+   "variants": [
+    "Terumo UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Trion Pharma Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "TSC Endovision",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Uniplex",
+   "resolved": true,
+   "variants": [
+    "Uniplex UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "UNOQUIP GMBH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Unora Healthcare Ltd (formerly Oakmed Ltd)",
+   "resolved": true,
+   "variants": [
+    "Oakmed Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Varian Medical Systems",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Venture Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Verathon Medical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Vernacare",
+   "resolved": true,
+   "variants": [
+    "Vernacare International Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Wellspect",
+   "resolved": true,
+   "variants": [
+    "Wellspect Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Win Health Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "WSFT - Theatres - EBME - Lithotripter Maintenance",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": "Boston Scientific Limited",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083904-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50420000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "WSFT - EBME - Holmium Pulse POS maintenance",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": "Boston Scientific",
+   "date": "2026-08-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080021-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50420000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Advanced Urology Bootcamp February 2027",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "BRIDGE COMMUNITY CHURCH",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079268-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "80000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NH2659 Urology Cystoscopy Surveillance Service",
+   "buyer": "Northumbria Healthcare NHS Foundation Trust",
+   "supplier": "Tyneside Surgical Services Limited",
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079022-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "WPL06900 - Urology and OMFS Insourcing",
+   "buyer": "UNIVERSITY HOSPITAL SOUTHAMPTON NHS FOUNDATION TRUST",
+   "supplier": "18 Week Support Limited",
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078403-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Continuous Renal Replacement Therapy & Urology Equipment",
+   "buyer": "Regional Business Services Organisation Procurement and Logistics",
+   "supplier": "Vantive Limited, Creo Medical UK Ltd",
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078238-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "33125000",
+    "33181000",
+    "50000000",
+    "50400000",
+    "50420000",
+    "50430000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "C455465 - Lithotriptor",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Storz Medical (UK) Limited",
+   "date": "2026-08-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/dfacaaad-080a-459d-b792-9cc5da89c99b",
+   "value": 290000,
+   "periodEnd": "2026-05-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Green Light Laser",
+   "buyer": "Frimley Health NHS Foundation Trust",
+   "supplier": "Boston Scientific Ltd.",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076201-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Auriga XL & Holmium Pulse 120 Service Agreement",
+   "buyer": "MERSEY AND WEST LANCASHIRE TEACHING HOSPITALS NHS TRUST",
+   "supplier": "BOSTON SCIENTIFIC LIMITED",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076148-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "ESNEFT3207 Urodynamics",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Laborie Medical Technologies UK",
+   "date": "2026-08-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075431-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Bladder Scanners",
+   "buyer": "Northumbria Healthcare Facilities Management",
+   "supplier": "Verathon Medical (UK) Ltd",
+   "date": "2026-07-30",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/208b8c20-dd66-4867-bc15-b40cc5b289a3",
+   "value": 258563,
+   "periodEnd": "2026-08-17",
+   "source": "tender-history"
+  },
+  {
+   "title": "Bladder Scanner Purchase",
+   "buyer": "Swansea Bay University HealthBoard",
+   "supplier": "VERATHON MEDICAL (UK) LTD",
+   "date": "2026-06-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/057131-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Prostatic Ablation Devices",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "Boston Scientific Limited",
+   "date": "2026-06-02",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/d2bf0c5f-e160-481f-be46-7ce7287cf682",
+   "value": 683029,
+   "periodEnd": "2029-05-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Endoscopy, Endourology & Oncology Ablation Consumables & Associated Products",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "ADVANCED MEDICAL SYSTEMS LTD., AMBU LIMITED, APR MEDTECH LIMITED, AQUILANT ENDOS",
+   "date": "2025-07-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/044733-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "CUBESCAN BIOCON-700-S BLADDER SCANNER",
+   "buyer": "DERBYSHIRE COMMUNITY HEALTH SERVICES NHS FOUNDATION TRUST",
+   "supplier": "DE SMIT MEDICAL SYSTEMS LTD",
+   "date": "2025-04-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/015756-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Optical Laser Fibre Consumables for CyberHo 100 Holmium Laser System (4839792)",
+   "buyer": "Business Services Organisation, Procurement and Logistics Service",
+   "supplier": "COOK UK LTD",
+   "date": "2024-06-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/017918-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Indwelling Urinary Catheters & Drainage Bags",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "iMEDicare Ltd, Mediplus Ltd",
+   "date": "2024-04-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011410-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Memokath stents for BCH Urology service",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Northlands Medical",
+   "date": "2024-04-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011042-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Urology Consumables",
+   "buyer": "WESTERN TRUST NORTHERN IRELAND",
+   "supplier": "M.E.D. Surgical",
+   "date": "2024-03-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/010116-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Memokath stents for BCH Urology service",
+   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
+   "supplier": "Northlands Medical",
+   "date": "2024-02-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/006406-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Invitation to Tender for the Supply of Urine Meters",
+   "buyer": "NHS Wales Shares Services Procurement",
+   "supplier": "Clinisupplies Ltd",
+   "date": "2023-08-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023268-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "CLI-OJEU-46286 Interventional Cardiology, Radiology, Endoscopy and Surgical Urology Consumables",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Acrostak-UK Ltd, APC Cardiovascular Ltd, Aquilant Ltd, B. Braun Medical Limited,",
+   "date": "2022-12-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/035111-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Provision of Maintenance & Consumables for Urology Robot",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Intuitive Surgical Ltd",
+   "date": "2022-10-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027826-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Urinary Catheters & Drainage Bags",
+   "buyer": "National Services Scotland, National Procurement",
+   "supplier": "Coloplast Ltd, Mediplus Ltd, LINC Medical, Bard Limited, Teleflex, Clinisupplies",
+   "date": "2022-08-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/022482-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Urology Consumables",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "ProSys International Ltd",
+   "date": "2022-06-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016499-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Urology Products (2529408)",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "",
+   "date": "2021-11-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028603-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "National Framework Agreement for Transperineal Prostate Biopsy System",
+   "buyer": "Countess of Chester Hospital NHS Foundation Trust",
+   "supplier": "BXTAccelyon Ltd",
+   "date": "2021-09-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/024387-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Transperineal Prostate Access Device",
+   "buyer": "NHS Supply Chain Operated by DHL Supply Chain Limited acting as agent of Supply ",
+   "supplier": "",
+   "date": "2021-03-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005463-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "GGC0584 Endourology Disposable Products",
+   "buyer": "NHS Greater Glasgow and Clyde",
+   "supplier": "",
+   "date": "2021-02-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/003284-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": {
+  "parts": [
+   "IXA",
+   "IXB",
+   "IXC"
+  ],
+  "vmpFilter": "\\b(nelaton|foley|dilatation catheter|reusable catheter|catheterisation packs?|catheter (?:disposable|retaining|safety|securement|maintenance|valves?)|urinar\\w*|urostom\\w*|uridome|suprapubic|penile sheaths?|incontinence sheaths?|leg bags?|night bags?|bladder (?:infusion|irrigat\\w*|washout)|urine (?:meters?|bags?))\\b",
+  "vmpCount": 92,
+  "effectiveMonth": "2026-09",
+  "dataAsOf": "2026-09-09",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
+  "lineCount": 3108,
+  "supplierCount": 55,
+  "topSuppliers": [
+   {
+    "name": "Coloplast Ltd",
+    "lines": 285
+   },
+   {
+    "name": "Bard Ltd",
+    "lines": 239
+   },
+   {
+    "name": "Teleflex",
+    "lines": 218
+   },
+   {
+    "name": "Hollister Ltd",
+    "lines": 214
+   },
+   {
+    "name": "Flexicare Medical Ltd",
+    "lines": 139
+   },
+   {
+    "name": "LINC Medical Systems Ltd",
+    "lines": 119
+   },
+   {
+    "name": "Charles S Bullen Stomacare Ltd",
+    "lines": 115
+   },
+   {
+    "name": "B.Braun Medical Ltd",
+    "lines": 113
+   },
+   {
+    "name": "Wellspect HealthCare",
+    "lines": 111
+   },
+   {
+    "name": "Marlen Healthcare Ltd",
+    "lines": 110
+   },
+   {
+    "name": "Manfred Sauer UK Ltd",
+    "lines": 109
+   },
+   {
+    "name": "Clinisupplies Ltd",
+    "lines": 96
+   },
+   {
+    "name": "ConvaTec Ltd",
+    "lines": 95
+   },
+   {
+    "name": "Salts Healthcare",
+    "lines": 91
+   },
+   {
+    "name": "Unora Healthcare Ltd",
+    "lines": 82
+   },
+   {
+    "name": "Peak Medical Ltd",
+    "lines": 68
+   },
+   {
+    "name": "Optimum Medical Solutions Ltd",
+    "lines": 66
+   },
+   {
+    "name": "Welland Medical Ltd",
+    "lines": 65
+   },
+   {
+    "name": "Hunter Urology Ltd",
+    "lines": 61
+   },
+   {
+    "name": "Jade-Euro-Med",
+    "lines": 61
+   }
+  ],
+  "priceMin": 0.4,
+  "priceMax": 469.0
+ }
+}

@@ -38,6 +38,7 @@ MATERNITY = "maternity-and-neonatal"
 GYNAE = "gynaecology-and-womens-health"
 PAEDS = "paediatrics"
 VASCACCESS = "vascular-access-and-iv-therapy"
+UROLOGY = "urology"
 fails = []
 
 
@@ -3399,11 +3400,12 @@ for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
 
 # The tariff slicing must not have changed any panel that does not ask for it.
 # TWO RULES SLICE A PART, and each is here because the part it slices is not its
-# speciality: gynaecology takes the 257 pessary lines out of Part IXA's 56,833, and
+# speciality: gynaecology takes the 257 pessary lines out of Part IXA's 56,833,
 # paediatrics takes the 473 lines whose product or brand name says paediatric, child,
-# infant or junior out of Parts IXA, IXB and IXC. Adding a slug to this set is a
+# infant or junior out of Parts IXA, IXB and IXC, and urology takes the 3,108 catheter,
+# urostomy and catheter-drainage lines out of the same three parts. Adding a slug to this set is a
 # decision about a published claim, never a way past a failing check.
-_TARIFF_FILTER_EARNED = {GYNAE, PAEDS}
+_TARIFF_FILTER_EARNED = {GYNAE, PAEDS, UROLOGY}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _r.get("tariffVmp") and _slug not in _TARIFF_FILTER_EARNED:
         check("%s must not have grown a tariff filter unnoticed" % _slug, False)
@@ -3519,6 +3521,200 @@ check("Fresenius Kabi appears exactly once",
 check("no supply-route marker survives in a supplier name",
       not [n for n in _va_names if "All Routes" in n],
       ", ".join(n for n in _va_names if "All Routes" in n))
+
+
+
+# ---------------------------------------------------------------------------
+# UROLOGY. Three dangers, and all three are about words that look urological
+# and are not. "Neurology" contains the letters of urology, so an unanchored
+# pattern turns a urology tab into a neurology insourcing list. Intravascular
+# lithotripsy is the same physics as kidney stone lithotripsy and the opposite
+# patch. And Part IXA holds 85 catheter product families of which one, the
+# indwelling pleural drainage catheter, is respiratory.
+# ---------------------------------------------------------------------------
+print("\nUROLOGY")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), UROLOGY],
+               check=True, capture_output=True)
+ur = load_panel(UROLOGY)
+check("panel is defined", ur.get("defined") is True)
+
+_ur_rule = B.SPECIALITY_RULES[UROLOGY]
+_ur_rx = B.compile_rule(_ur_rule)
+
+print("  NEUROLOGY is not urology, and the letters say otherwise")
+# Seven real rows in the feeds. Every one of them matches a pattern written as
+# "urolog" without a leading word boundary. If any is ever admitted, this tab has
+# become an outpatient insourcing listing.
+for bad in [
+        "WPL07040 - Neurology Insourcing",
+        "Provision of Outsourced Neurology Services for Barking, Havering & Redbridge "
+        "University Hospital NHS Trust",
+        "Sub Contract Insourcing of Neurology Out Patient Activity 2026-27",
+        "NP30923 Psychiatry and Neurology Medicines",
+        "NP30925 Psychiatry and Neurology Medicines",
+        "Neurological Rehabilitation Service",
+        "Neuromodulation/Spinal Cord Stimulators, Intrathecal Drug Pumps, "
+        "Radiofrequency Ablation and Associated Products",
+]:
+    check("neurology row refused: %s" % bad[:52], not B.match_title(_ur_rx, bad))
+
+print("  the one false positive the include list produced, and it is excluded by name")
+# Shockwave Medical's coronary and peripheral IVL. Same physics, opposite patch.
+check("intravascular lithotripsy refused",
+      not B.match_title(_ur_rx, "Intravascular Lithotripsy Equipment and Consumables - 4307395"))
+check("and the exclusion is the only one the rule carries",
+      _ur_rule["exclude"] == r"\b(intravascular)\b")
+
+print("  the loose terms were refused in the include, not argued with afterwards")
+for bad in [
+        # bare "urinary" — the pharmacy patch, three real rows.
+        "Antibiotic, Antiviral & Genito Urinary Medicines",
+        "NP36124 Antibiotic, Antiviral & Genito Urinary Medicines",
+        "NP36126 Antibiotic & Genito Urinary Medicines",
+        # bare "urine" — pathology specimen tubes.
+        "Evacuated Blood Collection Systems and Urine Collection Systems",
+        # bare "catheterisation" — a cardiac cath lab.
+        "Managed Service for Catheterisation Lab, Cardio Thoracic Centre and Vascular",
+        # bare "brachytherap" — an HDR afterloader treats cervix and breast too.
+        "NHS Grampian HDR Brachytherapy Afterloader",
+        # bare "endoscop" — 36 rows and almost none of them this patch.
+        "Colon Capsule Endoscopy (CCE)",
+        "Purchase of Nasendoscopes",
+        "Automated Endoscope Washer Disinfectors",
+        "Replacement of Hysteroscopy Scopes",
+        "NHSGJ0089/22 Supply of Endoscopic Vessel Harvesting Tools and Associated Consumables",
+        "Endoscopy Insourcing Services-Bowel Screening Wales and Weekend Diagnostics Activity",
+        # bare "laser" — ophthalmology, ENT, burns and dermatology.
+        "ESNEFT2730 Purchase of ENT Laser",
+        "Contract for UltraPulse Alpha Laser for Burns Unit with Point of Sale Maintenance",
+        "Topcon - Pascal Synthesis Y4 laser - PPM maintenance",
+        "Cook Optical Laser Fibres",
+        # bare "ablation" — endometrial, radiofrequency, spinal.
+        "Endometrial Ablation Devices and Uterine Tissue Removal Systems",
+        "Radiofrequency Ablation Device and Consumables [3115211]",
+        # bare "stent" — eight of nine hits are cardiac or aortic.
+        "Cardiology Stents - DES",
+        "Exstent Personalised External Aortic Root Support",
+        # bare "stone" — a place name, not a calculus.
+        "Maidstone and Tunbridge Wells Managed Equipment Service",
+        # bare "orchid" — a flower.
+        "Orchid Ward Refurbishment",
+        # bare "catheter" — the continence rule's own list of what it drags in.
+        "HRIM Solid State Catheter",
+        "Renal Catheter & Fistula Packs",
+]:
+    check("never admitted: %s" % bad[:58], not B.match_title(_ur_rx, bad))
+
+print("  true positives — awards that must be on this patch")
+for good in [
+        "Urology Consumables",
+        "Urology Products (2529408)",
+        "GGC0584 Endourology Disposable Products",
+        "Endoscopy, Endourology & Oncology Ablation Consumables & Associated Products",
+        "NH2659 Urology Cystoscopy Surveillance Service",
+        "ESNEFT3207 Urodynamics",
+        "Prostatic Ablation Devices",
+        "National Framework Agreement for Transperineal Prostate Biopsy System",
+        "C455465 - Lithotriptor",
+        "WSFT - Theatres - EBME - Lithotripter Maintenance",
+        # The holmium laser is the urology laser, and this row reaches the panel on
+        # that word alone — "Optical Laser Fibres" on its own never does.
+        "Optical Laser Fibre Consumables for CyberHo 100 Holmium Laser System (4839792)",
+        "Auriga XL & Holmium Pulse 120 Service Agreement",
+        "Green Light Laser",
+        "Bladder Scanner Purchase",
+        "CUBESCAN BIOCON-700-S BLADDER SCANNER",
+        "Urinary Catheters & Drainage Bags",
+        "Invitation to Tender for the Supply of Urine Meters",
+        "Memokath stents for BCH Urology service",
+        "Provision of Maintenance & Consumables for Urology Robot",
+]:
+    check("admitted: %s" % good[:58], B.match_title(_ur_rx, good))
+
+print("  the nine frameworks, and the six refused by name")
+_ur_fw = {f["name"] for f in ur["frameworks"]}
+check("nine frameworks exactly", len(ur["frameworks"]) == 9, ", ".join(sorted(_ur_fw)))
+for name in [
+        "Urology and Bowel Management",
+        "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+        "Male Intra-Urethral Catheter with Magnet Control",
+        "Lithotripsy and Associated Options and Related Services",
+        "Bladder Scanners and Associated Options and Related Services",
+        "Brachytherapy Seeds and Associated Accessories",
+        "Rigid Endoscopy and Associated Options and Related Services",
+        "Flexible Endoscopes and Associated Options and Related Services",
+]:
+    check("framework carried: %s" % name[:52], name in _ur_fw)
+# The apostrophe in this one is NHS Supply Chain's own curly character, which is
+# why the pattern stops at "surgical implants for men".
+check("framework carried: Surgical Implants for Men's and Women's Health",
+      any(n.startswith("Surgical Implants for Men") for n in _ur_fw))
+# THE TRAP. Neuromodulation is 23 pain-management suppliers, Electrosurgical
+# Consumables 33 diathermy ones and Robotic Medical Equipment six capital houses.
+# All three carry urological product and none of them is a urology agreement.
+for name in [
+        "Neuromodulation Devices and Associated Products",       # neurology's
+        "Electrosurgical Consumables and Related Accessories",   # theatres'
+        "Robotic Medical Equipment and Associated Accessories",  # theatres'
+        "Disposable and Washable Continence Care",               # continence's
+        "Central Venous Catheters and Associated Products",      # vascular access'
+        "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+]:
+    check("framework refused: %s" % name[:52], name not in _ur_fw)
+
+print("  the Drug Tariff slice is a slice, and the pleural catheter is not in it")
+_ur_dt = ur["drugTariff"]
+check("three parts are claimed", _ur_dt["parts"] == ["IXA", "IXB", "IXC"])
+check("and narrowed by a stated product filter", bool(_ur_dt["vmpFilter"]))
+check("3,108 lines", _ur_dt["lineCount"] == 3108, "got %s" % _ur_dt["lineCount"])
+check("92 virtual medicinal products, every one of them read",
+      _ur_dt["vmpCount"] == 92, "got %s" % _ur_dt["vmpCount"])
+check("55 suppliers list a line on this patch",
+      _ur_dt["supplierCount"] == 55, "got %s" % _ur_dt["supplierCount"])
+import re as _ur_re
+_ur_vrx = _ur_re.compile(_ur_rule["tariffVmp"], _ur_re.I)
+# THE ONE THAT MATTERS. Bare "catheter" over Part IXA returns 85 product families
+# and 84 are urinary. This is the eighty-fifth, and it is respiratory.
+check("the indwelling pleural drainage catheter is not a urology line",
+      not _ur_vrx.search("Indwelling pleural drainage systems catheter"))
+# Containment is the continence page's half of Part IXB, not this page's.
+for bad in ["Disposable pads for light incontinence", "Washable absorbent pants",
+            "Colostomy bags", "Ileostomy bags"]:
+    check("containment or colorectal line left off: %s" % bad[:46],
+          not _ur_vrx.search(bad))
+for good in ["Nelaton catheter male 12Ch", "Foley catheter paediatric 8Ch",
+             "Urinary suprapubic catheter 16Ch", "Urostomy bags",
+             "Incontinence sheaths", "Sterile leg bags", "Catheter valves"]:
+    check("tariff line carried: %s" % good[:46], bool(_ur_vrx.search(good)))
+# The whole of the three parts is 66,293 lines. If the slice ever approaches that,
+# the filter has stopped being applied and the dressings catalogue is about to be
+# published as urology's.
+_ur_all = len([r for r in B.load("drug-tariff-part-ix.json")["rows"]
+               if r[0] in ("IXA", "IXB", "IXC")])
+check("the slice is under a tenth of the three parts (%d of %d)"
+      % (_ur_dt["lineCount"], _ur_all), _ur_dt["lineCount"] < _ur_all / 10)
+
+print("  CPV corroborates and never admits")
+check("one CPV prefix, the urology exploration devices family",
+      _ur_rule["cpv"] == ("33125",))
+# Every award on this panel title-matched. If one ever appears that did not, the
+# builder's title-match-required rule has been loosened.
+check("every award shown was admitted by its title, not by a CPV code",
+      all(B.match_title(_ur_rx, a["title"]) for a in ur["awards"]))
+
+print("  the coverage note says what is shared and what is missing")
+for phrase in ["Rigid Endoscopy and Flexible Endoscopes",
+               "Maintenance, Repair and Calibration of Medical Equipment",
+               "2021/S 000-007768",
+               "dispensing appliance contractors"]:
+    check("coverage note carries: %s" % phrase[:52], phrase in ur["rules"]["frameworks"])
+
+print("  one name per company")
+_ur_names = [s["name"] for s in ur["suppliers"]]
+check("no duplicate supplier names", len(_ur_names) == len(set(_ur_names)))
+check("Coloplast appears exactly once",
+      sum(1 for n in _ur_names if n.startswith("Coloplast")) == 1,
+      ", ".join(n for n in _ur_names if "Coloplast" in n))
 
 
 

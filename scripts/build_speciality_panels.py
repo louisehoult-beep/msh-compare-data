@@ -3256,8 +3256,9 @@ SPECIALITY_RULES = {
         #     on maternity. Vinyl pessaries are fitted for pelvic organ prolapse,
         #     which is NG123 ground, so the page that carries NG123 cannot omit it.
         #   Rigid Endoscopy and Associated Options and Related Services
-        #     (2021/S 000-007768, ends 31 March 2028) — hysteroscopes. Not claimed by
-        #     any other page today.
+        #     (2021/S 000-007768, ends 31 March 2028) — hysteroscopes. Shared with
+        #     urology from 10/09/2026, whose rule counts the Urology Scopes half of the
+        #     same brief's product categories.
         #   Minimally Invasive Surgery, Related Equipment and Accessories
         #     (2026/S 000-061906, ends 9 August 2028) — Lot 6 is Gynaecological
         #     Endoscopy and Uterine Ablation, live 10 August 2026. Shared with
@@ -3804,6 +3805,224 @@ SPECIALITY_RULES = {
             "this panel is not being absent from this market. The page's Buying "
             "route, Framework calendar and Deep dive sections carry the full picture "
             "with their sources and their expiry dates."
+        ),
+    },
+    # PAGE 2939. Scope, in the page's own tagline: "Stones, scopes, stents and lasers,
+    # the prostate and bladder cancer pathways, and the catheter that goes home with the
+    # patient." Urology is the rare speciality with an NHS Supply Chain agreement carrying
+    # its own name, and that agreement goes to tender on 11/09/2026.
+    "urology": {
+        "label": "Urology",
+        # NINE AGREEMENTS. Every one is named on the page's own Buying route and
+        # framework tables, and all nine were matched back against the 121 names in
+        # frameworks.json on 10/09/2026:
+        #   Urology and Bowel Management (2023/S 000-011173, 57 suppliers, ends
+        #     20/02/2027) — the only agreement in the whole NHSSC portfolio named after
+        #     this speciality. Lot 1 internal urinary catheters, Lot 2 external
+        #     catheters and sheaths, Lot 3 urine drainage bags, Lot 4 urine flow
+        #     monitoring, Lot 6 bladder washout, Lot 15 urodynamics and surgery, Lot 18
+        #     urethral bulking agents. Shared with continence, bladder and bowel, which
+        #     counts the bowel and containment half. Both pages are right: the
+        #     agreement really does carry both, exactly as Pressure Area Care is shared
+        #     between tissue viability and patient moving and handling.
+        #   Endoscopy, Endourology and Oncology Ablation Consumables and Associated
+        #     Products (2024/S 000-029975, 58 suppliers) — endourology is in the
+        #     agreement's own name. Not claimed by any other page today.
+        #   Male Intra-Urethral Catheter with Magnet Control (2026/S 000-013783, one
+        #     supplier, Ingenion Medical Ltd).
+        #   Lithotripsy and Associated Options and Related Services (3 suppliers) —
+        #     NHSSC's own brief: lithotripsy is "performed by Urologists".
+        #   Bladder Scanners and Associated Options and Related Services (11) —
+        #     NHSSC's own brief: "Used by Urology professionals and Continence Nurse
+        #     Specialists". The continence rule refused it as a Diagnostic Equipment
+        #     capital route outside that page's stated scope, and the gynaecology rule
+        #     refused it too, so claiming it here creates no contradiction.
+        #   Brachytherapy Seeds and Associated Accessories (2) — NHSSC's own brief:
+        #     the seeds "implant low dose rate radiation to the prostate".
+        #   Rigid Endoscopy and Associated Options and Related Services (18) — the
+        #     brief's product categories include Urology Scopes. Shared with
+        #     gynaecology, whose rule counts the hysteroscope half; that rule's comment
+        #     saying it was unclaimed elsewhere is corrected in the same change.
+        #   Flexible Endoscopes and Associated Options and Related Services (5) — the
+        #     brief's product categories include cystoscopes and ureteroscopes. STATED
+        #     LIMIT: the same brief's own summary describes the framework as
+        #     gastrointestinal, so it is a shared route rather than a urology one, and
+        #     its five suppliers are endoscope manufacturers, not urology houses.
+        #   Surgical Implants for Men's and Women's Health (2025/S 000-025202, 6) —
+        #     Lot 1 names testicular implants and penile implants. Shared with
+        #     gynaecology, which counts the urogynaecology half.
+        #
+        # NOT CLAIMED, and each was checked against the 121 names rather than assumed:
+        #   Neuromodulation Devices and Associated Products -> already claimed by
+        #     neurology and neurosurgery, and that is the right home. The page carries
+        #     it on clinical grounds because Axonics Modulation Technologies UK Limited
+        #     is on its published supplier list and sacral neuromodulation for
+        #     overactive bladder is called off against it, and the page says plainly
+        #     that the brief contains no urological word at all and describes itself as
+        #     "strategic pain management solutions". NHSSC publishes no lot breakdown,
+        #     so claiming the agreement here would put 23 pain-management suppliers
+        #     under a urology Suppliers heading on the strength of one supplier name.
+        #     Refused for the panel on the same reasoning the gynaecology rule refused
+        #     it (rule 14c). The page keeps its own sourced row and its own caveat.
+        #   Electrosurgical Consumables and Related Accessories -> theatres and
+        #     surgical's, and claimed there. Its brief lists "urological" as one of
+        #     eleven specialities electrosurgery is used in. A consumable shared with
+        #     ten other specialities is theatres', not this page's.
+        #   Robotic Medical Equipment and Associated Accessories -> theatres and
+        #     surgical's, and claimed there. Lot 1 is minimally invasive generally and
+        #     names prostate removal alongside hysterectomy, thyroid and gastric
+        #     bypass. No lot is named for urology, which is the test applied throughout.
+        #   Disposable and Washable Continence Care -> continence, bladder and bowel's,
+        #     and claimed there. The page itself calls it "containment rather than
+        #     urology proper".
+        #   Central Venous Catheters and Associated Products -> vascular access and IV
+        #     therapy's. A central venous catheter is not a urinary one.
+        #   Ear, Nose and Throat (ENT) Endoscopes -> the ENT page's, which is why the
+        #     pattern says "flexible endoscopes" and "rigid endoscopy" by name and
+        #     never bare "endoscop".
+        "frameworks": (
+            r"\b(urology and bowel|endourology|intra-urethral|lithotripsy|"
+            r"bladder scanners|brachytherapy seeds|rigid endoscopy|flexible endoscopes|"
+            r"surgical implants for men)\b"
+        ),
+        # DERIVED, not guessed. The pattern below was run over all 1,972 rows of
+        # tender-history.json and all 1,397 of framework-awards.json — 3,369 titles —
+        # and all 29 surviving hits were read one by one on 10/09/2026. Every one of
+        # them is this patch: urology consumables and products, endourology disposables,
+        # bladder scanners, a lithotriptor and two lithotripter service contracts, three
+        # holmium laser service and fibre contracts and a GreenLight laser, urodynamics,
+        # prostatic ablation, two transperineal prostate biopsy contracts, Memokath
+        # ureteric stents, urinary catheters and drainage bags, urine meters, a urology
+        # robot maintenance contract, a cystoscopy surveillance service, urology
+        # insourcing and a urology bootcamp.
+        #
+        # NOT INCLUDED, deliberately, and every one was run over the 3,369 titles and
+        # its hits read before it was dropped:
+        #   bare "endoscop"   -> 36 hits and almost none of them urology: capsule
+        #     endoscopy, bowel screening insourcing, nasendoscopes, endoscope washer
+        #     disinfectors, endoscopic vessel harvesting, hysteroscopy scopes. The
+        #     urology ground is carried by "endourolog" and "cystoscop", which is how
+        #     the real rows are actually titled.
+        #   bare "brachytherap" -> its only hit is "NHS Grampian HDR Brachytherapy
+        #     Afterloader". A high dose rate afterloader treats cervical, endometrial
+        #     and breast disease as well as prostate, and the title cannot tell you
+        #     which. "brachytherapy seeds" is used instead — the low dose rate prostate
+        #     product NHSSC's own framework is named after — and it costs the panel
+        #     nothing today because that row is not this page's.
+        #   bare "bladder"    -> refused because a gall bladder is not a urinary one.
+        #     The qualified forms below catch all three real rows (two bladder scanner
+        #     purchases and a CUBESCAN) without the bare word ever being able to carry
+        #     a hepatobiliary contract in.
+        #   bare "urinary"    -> three of its five hits are "Antibiotic and Genito
+        #     Urinary Medicines", which is the pharmacy patch. "urinary catheter" is
+        #     used and both real rows still match.
+        #   bare "catheter" and bare "catheterisation" -> refused. The continence rule
+        #     records what bare "catheter" drags in (cardiac ablation, central venous,
+        #     renal fistula and HRIM manometry catheters) and "catheterisation"'s only
+        #     hit here is "Managed Service for Catheterisation Lab, Cardio Thoracic
+        #     Centre and Vascular", a cardiac cath lab. Refusing them in the include
+        #     means neither can reach a member even if the exclusion list is edited
+        #     later.
+        #   bare "urine"      -> one of its two hits is "Evacuated Blood Collection
+        #     Systems and Urine Collection Systems", pathology specimen tubes. "urine
+        #     meter" is used and the real row still matches.
+        #   bare "stent"      -> nine hits and eight are cardiac or aortic. The one
+        #     urology row, Memokath stents for BCH Urology service, matches on
+        #     "Urology" anyway. Qualified ureteric and prostatic forms are kept.
+        #   bare "stone"      -> refused. Maidstone, Basingstoke and every other place
+        #     name containing it would match. The qualified stone forms are kept.
+        #   bare "orchid"     -> refused. An orchid is a flower and an Orchid Ward is a
+        #     ward. "orchidectom" and "orchidopex" are kept.
+        #   bare "laser" and "optical laser fibre" -> refused, 16 hits and most are
+        #     ophthalmology, dermatology, ENT and burns. Holmium and thulium are the
+        #     urology lasers by name and are used instead; "Optical Laser Fibre
+        #     Consumables for CyberHo 100 Holmium Laser System" still matches on
+        #     "Holmium".
+        #   bare "ablation"   -> 10 hits, mostly endometrial, radiofrequency and
+        #     spinal. "Prostatic Ablation Devices" matches on "prostat".
+        "include": (
+            r"\b(urolog\w*|endourolog\w*|prostat\w*|transurethral|turp|turbt|holep|"
+            r"cystoscop\w*|ureterosc\w*|nephroscop\w*|resectoscop\w*|"
+            r"urodynam\w*|uroflow\w*|lithotrip\w*|eswl|pcnl|"
+            r"ureter\w*|urethr\w*|nephrostom\w*|nephrolithotom\w*|"
+            r"penile|testicular|orchidectom\w*|orchidopex\w*|vasectomy|varicocele|"
+            r"circumcision|erectile dysfunction|"
+            r"holmium|thulium|green ?light laser|brachytherapy seeds?|"
+            r"urinary catheters?|urostom\w*|"
+            r"bladder scanner\w*|bladder cancer|bladder tumou?r|overactive bladder|"
+            r"neurogenic bladder|bladder washout|bladder irrigation|"
+            r"bladder instillation|urine meters?|urine flow)\b"
+        ),
+        # ONE PATTERN, and it is here because a real row matched `include`, was read,
+        # and was rejected:
+        #   intravascular -> "Intravascular Lithotripsy Equipment and Consumables -
+        #                    4307395", Procurement and Logistics Service, awarded to
+        #                    SHOCKWAVE MEDICAL INC. Intravascular lithotripsy breaks
+        #                    calcified plaque in a coronary or peripheral artery. It is
+        #                    the same physics and the opposite patch, and it belongs to
+        #                    cardiology and vascular surgery. It is the only false
+        #                    positive the include list produced.
+        "exclude": r"\b(intravascular)\b",
+        # CPV 33125000 is "Urology, exploration devices", read on the notice itself at
+        # find-tender.service.gov.uk/Notice/078238-2026 on 10/09/2026. Exactly one
+        # notice in this feed carries it, "Maintenance of Continuous Renal Replacement
+        # Therapy and Urology Equipment", and that notice title-matches anyway — which
+        # is the point. The code corroborates; it never admits.
+        "cpv": ("33125",),
+        # THE PART IS NOT THE SPECIALITY, so all three parts are sliced, never claimed
+        # whole. Part IXA is 56,833 lines of which 1,730 are urinary catheters and
+        # catheter care: Nelaton, Foley, dilatation, reusable and suprapubic catheters,
+        # catheterisation packs, catheter maintenance solutions, retaining straps,
+        # safety valves and securement devices. The other 55,000 are dressings and
+        # elastic hosiery and are the tissue viability page's. Part IXB is 1,242 lines
+        # of incontinence appliances, of which 595 are the catheter drainage range —
+        # incontinence sheaths, leg bags and catheter valves — and the rest are
+        # absorbent pads and garments, which are containment and are the continence
+        # page's. Part IXC is 8,218 stoma lines of which 783 are urostomy bags, the
+        # urinary diversion range; colostomy and ileostomy are colorectal.
+        #
+        # ONE FALSE POSITIVE WAS FOUND AND DESIGNED OUT RATHER THAN EXCLUDED. Bare
+        # "catheter" over Part IXA returns 85 virtual medicinal products and 84 of them
+        # are urinary; the eighty-fifth is "Indwelling pleural drainage systems
+        # catheter", which is respiratory. build_tariff has no exclusion mechanism, so
+        # the pattern names the catheter families instead of the bare word and that row
+        # cannot reach the panel. The selection is 3,108 lines across 92 virtual
+        # medicinal products, and every one of the 92 was read.
+        #
+        # STATED LIMIT: the IXB and IXC slices overlap the continence, bladder and
+        # bowel page, which claims those parts whole. That is deliberate. A leg bag is
+        # bought by the same nurse for the same catheter, and both pages showing it is
+        # honest where one page hiding it would not be.
+        "tariffParts": ("IXA", "IXB", "IXC"),
+        "tariffVmp": (
+            r"\b(nelaton|foley|dilatation catheter|reusable catheter|"
+            r"catheterisation packs?|"
+            r"catheter (?:disposable|retaining|safety|securement|maintenance|valves?)|"
+            r"urinar\w*|urostom\w*|uridome|suprapubic|penile sheaths?|"
+            r"incontinence sheaths?|leg bags?|night bags?|"
+            r"bladder (?:infusion|irrigat\w*|washout)|urine (?:meters?|bags?))\b"
+        ),
+        "coverageNote": (
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the nine agreements "
+            "above, Rigid Endoscopy and Flexible Endoscopes, are capital routes shared "
+            "with other specialities, and their suppliers are endoscope manufacturers "
+            "rather than urology houses; three more, Urology and Bowel Management, "
+            "Surgical Implants for Men's and Women's Health and Brachytherapy Seeds, "
+            "are shared with continence, gynaecology and oncology. Being named on a "
+            "framework is not evidence of volume on this patch, and being absent from "
+            "one is not evidence of absence from the market. One agreement the page "
+            "carries is missing here for a data reason rather than a judgement: "
+            "Maintenance, Repair and Calibration of Medical Equipment, which names "
+            "urodynamics and lithotripsy equipment among the estates it maintains, is "
+            "not one of the 121 framework names the Hub's crawler holds, so it cannot "
+            "be claimed. Five of the nine agreements share one procurement reference, "
+            "2021/S 000-007768, and all five end on 31 March 2028 — that reference "
+            "wraps NHS Supply Chain's whole diagnostic capital portfolio and 22 of its "
+            "140 briefs carry it, so its expiry is not a urology event. Finally, the "
+            "larger half of the catheter economy is bought in the community on "
+            "prescription through NHSBSA Drug Tariff Part IX and the dispensing "
+            "appliance contractors, a route with no NHS Supply Chain framework page at "
+            "all; the Drug Tariff summary is where it appears."
         ),
     },
 
