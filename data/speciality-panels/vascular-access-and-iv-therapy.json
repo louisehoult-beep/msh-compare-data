@@ -1,0 +1,1134 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "vascular-access-and-iv-therapy",
+ "label": "Vascular Access and IV Therapy",
+ "defined": true,
+ "generated": "2026-09-10",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-09T11:18:46+00:00",
+  "openTenders": "09/09/2026",
+  "drugTariff": "2026-09-09"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(central venous catheter|intravenous (?:cannula|accessories)|needlefree connection|infusion pumps and administration sets|extension sets and lines)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(vascular access|picc\\b|peripherally inserted central|midline catheter|central venous (?:catheter|access|line)|central line|intravenous|iv\\b|cannulae?\\b|cannulation|infusion pump|syringe driver|syringe pump|administration set|giving set|needle[- ]?free|venepunctur|venipunctur|phlebotom|port-?a-?cath|implantable port|totally implantable venous|tivad|hickman|groshong|broviac|arterial line|arterial catheter|extension set|catheter securement|opat\\b|outpatient parenteral|infusion therapy)/i and does not match /\\b(nasal cannula|\\w+mab\\b|fluids?\\b|irrigation|insulin|glucose|erythropoietin|immunoglobulin|antibiotics?\\b|\\d+\\s?m(?:g|l|cg)\\b|vials?\\b|concentrate for|powder for|solution for (?:infusion|injection)|pre-?filled)/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33141220 or 331941 or 33141624 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 6,
+  "suppliers": 63,
+  "suppliersUnresolved": 2,
+  "awardsShown": 20,
+  "awardsMatched": 20,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Central Venous Catheters and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/central-venous-catheters-and-associated-products/",
+   "reference": "2025/S 000-001530",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "23 March 2026",
+   "ends": "22 March 2028",
+   "supplierCount": 18,
+   "supplierSource": "count verified against the page's own stated total (18)",
+   "suppliers": [
+    "Aquilant Limited",
+    "B Braun Medical Ltd",
+    "Balmung Medical Handel GmbH",
+    "Becton, Dickinson U.K. Limited",
+    "Fannin UK Ltd",
+    "GBUK Healthcare",
+    "Headington Medical Technology Ltd",
+    "ICU Medical International Limited",
+    "Johnson & Johnson Medical Ltd",
+    "Kimal PLC",
+    "Medical Access Ltd",
+    "Pfm Medical UK Limited",
+    "Reflex Medical Limited",
+    "Scottmed Distribution (UK) Ltd",
+    "Teleflex Medical UK",
+    "Timesco Healthcare Ltd",
+    "Unisurge International Ltd",
+    "Vygon UK Ltd"
+   ],
+   "delisted": [
+    "Cleartrace Ltd",
+    "Iskus Health UK Ltd",
+    "Merit Medical UK Limited."
+   ]
+  },
+  {
+   "name": "Extension Sets and Lines",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/extension-sets-and-lines/",
+   "reference": "Project_720, ITT_508",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 August 2023",
+   "ends": "31 July 2027",
+   "supplierCount": 23,
+   "supplierSource": "count verified against the page's own stated total (23)",
+   "suppliers": [
+    "B Braun Medical Ltd",
+    "Baxter Healthcare Limited",
+    "Becton Dickinson UK Ltd",
+    "BMS Critical Care Ltd",
+    "Bunzl Healthcare",
+    "Codan Ltd",
+    "Crest Medical Ltd",
+    "Europlaz Technologies Ltd",
+    "Fannin UK Ltd",
+    "Fresenius Kabi Ltd All Routes",
+    "Gbuk Healthcare",
+    "Icu UK Medical Ltd",
+    "Infutech Ltd",
+    "IMS Euro Ltd",
+    "Mediplus Ltd",
+    "Merit Medical UK Ltd",
+    "Prosum Medical Ltd",
+    "Rocialle",
+    "Smiths Medical International Ltd",
+    "Spirit Medical Ltd",
+    "Vannin Healthcare Global Ltd",
+    "Vygon Uk Ltd",
+    "Wescott Medical Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Infusion Pumps and Administration Sets and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+   "reference": "Project_12 ITT_382",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "3 October 2022",
+   "ends": "30 September 2026",
+   "supplierCount": 27,
+   "supplierSource": "no stated count on the page; 27 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "ALXR LIMITED",
+    "Arcomedical Infusion Ltd",
+    "Avanos Medical UK Limited",
+    "B. Braun Medical Limited",
+    "Baxter Healthcare Ltd",
+    "Becton, Dickinson U.K. Limited",
+    "BMS Critical Care",
+    "Braun and Company Limited",
+    "BECTON DICKINSON (CME) U.K. LIMITED",
+    "Bunzl Retail & Healthcare Supplies Ltd",
+    "CODAN Limited",
+    "Crest Medical Limited",
+    "Eitan Medical UK Ltd",
+    "Fannin UK Limited",
+    "Fresenius Kabi",
+    "GBUK",
+    "GenX MediCare",
+    "ICU UK Medical Ltd",
+    "Inspiration Healthcare Limited",
+    "Prosum Medical Ltd",
+    "Qualasept Ltd t/a Bath ASU",
+    "Reliance Medical Ltd",
+    "RPG Medical Limited",
+    "Smiths Medical International Ltd",
+    "Spirit Medical Ltd",
+    "TLB Medical Supplies",
+    "Vygon Uk Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Intravenous Accessories and Pressure Monitoring Accessories",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-accessories/",
+   "reference": "Project_112 ITT_460",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "2 May 2023",
+   "ends": "30 April 2027",
+   "supplierCount": 20,
+   "supplierSource": "count verified against the page's own stated total (20)",
+   "suppliers": [
+    "B Braun Medical Ltd",
+    "BECTON DICKINSON UK LTD",
+    "BMS Critical Care Ltd",
+    "Codan Ltd",
+    "Edwards Lifesciences Ltd",
+    "Fannin UK Ltd",
+    "Fresenius Kabi Ltd All Routes",
+    "ICU UK Medical Ltd",
+    "IMS Euro Ltd",
+    "Kimal PLC Stock",
+    "Medical Devices Technology Inter Ltd",
+    "Medicina Ltd",
+    "Merit Medical UK Ltd",
+    "365 Healthcare Ltd",
+    "Vygon UK Ltd",
+    "Walters Medical Ltd",
+    "PALL Europe Ltd",
+    "Prosum Medical Ltd",
+    "TLB Medical Supplies",
+    "William Davies Care Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Intravenous Cannula and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-cannula-and-associated-products/",
+   "reference": "2022/S 000-005941",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "27 March 2023",
+   "ends": "31 March 2027",
+   "supplierCount": 21,
+   "supplierSource": "count verified against the page's own stated total (21)",
+   "suppliers": [
+    "Applied Medical Technology Limited",
+    "Braun Medical Limited",
+    "Becton Dickinson Uk Ltd Ed Wokingham",
+    "Becton Dickinson Uk Ltd Stock Oxford",
+    "Fannin UK Limited",
+    "GBUK Ltd",
+    "Greiner Bio-One Ltd",
+    "ICU UK Medical Ltd",
+    "Iskus Health UK Limited",
+    "Praxis Medical Ltd",
+    "Smiths Medical International Ltd",
+    "Terumo UK Ltd",
+    "Unomedical Ltd (A ConvaTec Company)",
+    "Vygon (UK) Ltd",
+    "Nipro Medical Europe",
+    "Prosum Medical Ltd",
+    "Reliance Medical Ltd",
+    "Rocialle Healthcare Ltd",
+    "Terumo Uk Ltd (E-Direct)",
+    "TLB Medical Supplies",
+    "William Davies Care Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Needlefree Connection Systems and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/needlefree-connection-systems-and-associated-products/",
+   "reference": "2024/S 000-034741",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "26 January 2026",
+   "ends": "25 January 2028",
+   "supplierCount": 16,
+   "supplierSource": "count verified against the page's own stated total (16)",
+   "suppliers": [
+    "B Braun Medical Ltd",
+    "Balmung Medical Handel GmbH",
+    "Baxter Healthcare Limited Newbury01",
+    "Becton Dickinson UK Ltd",
+    "Codan Ltd",
+    "Fannin UK Ltd",
+    "GBUK Healthcare",
+    "ICU UK Medical Ltd",
+    "KCI Medical Limited (3m)",
+    "Merit Medical UK Ltd",
+    "OncoSem UK Limited",
+    "RPG Medical Limited",
+    "Spirit Medical Ltd",
+    "Super B Plus Group Ltd",
+    "Vygon UK Ltd",
+    "Wescott Medical Ltd"
+   ],
+   "delisted": [
+    "BMS Critical Care",
+    "GS Medical Limited",
+    "Iskus Health UK Ltd (Novated to Fannin UK Ltd)",
+    "Medicina Ltd."
+   ]
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B Braun Medical Ltd",
+    "B. Braun Medical Limited",
+    "Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products",
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Accessories and Pressure Monitoring Accessories",
+    "Intravenous Cannula and Associated Products",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "BECTON DICKINSON UK LTD",
+    "Becton Dickinson UK Ltd",
+    "Becton Dickinson Uk Ltd Ed Wokingham",
+    "Becton Dickinson Uk Ltd Stock Oxford",
+    "Becton, Dickinson U.K. Limited"
+   ],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products",
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Accessories and Pressure Monitoring Accessories",
+    "Intravenous Cannula and Associated Products",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Limited",
+    "Fannin UK Ltd"
+   ],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products",
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Accessories and Pressure Monitoring Accessories",
+    "Intravenous Cannula and Associated Products",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "ICU Medical (incl. Smiths Medical)",
+   "resolved": true,
+   "variants": [
+    "ICU Medical International Limited",
+    "ICU UK Medical Ltd",
+    "Icu UK Medical Ltd",
+    "Smiths Medical International Ltd"
+   ],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products",
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Accessories and Pressure Monitoring Accessories",
+    "Intravenous Cannula and Associated Products",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon (UK) Ltd",
+    "Vygon UK Ltd",
+    "Vygon Uk Ltd"
+   ],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products",
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Accessories and Pressure Monitoring Accessories",
+    "Intravenous Cannula and Associated Products",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK",
+    "GBUK Healthcare",
+    "GBUK Ltd",
+    "Gbuk Healthcare"
+   ],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products",
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Cannula and Associated Products",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "CODAN Limited",
+   "resolved": true,
+   "variants": [
+    "CODAN Limited",
+    "Codan Ltd"
+   ],
+   "frameworks": [
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Accessories and Pressure Monitoring Accessories",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "Prosum Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Accessories and Pressure Monitoring Accessories",
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Baxter Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "Baxter Healthcare Limited",
+    "Baxter Healthcare Limited Newbury01",
+    "Baxter Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "BMS Critical Care Ltd",
+   "resolved": true,
+   "variants": [
+    "BMS Critical Care",
+    "BMS Critical Care Ltd"
+   ],
+   "frameworks": [
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Accessories and Pressure Monitoring Accessories"
+   ]
+  },
+  {
+   "name": "Fresenius Kabi Ltd",
+   "resolved": true,
+   "variants": [
+    "Fresenius Kabi",
+    "Fresenius Kabi Ltd All Routes"
+   ],
+   "frameworks": [
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Accessories and Pressure Monitoring Accessories"
+   ]
+  },
+  {
+   "name": "Merit Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Extension Sets and Lines",
+    "Intravenous Accessories and Pressure Monitoring Accessories",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "Spirit Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "TLB Medical Supplies",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Accessories and Pressure Monitoring Accessories",
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Balmung Medical Handel GmbH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "Crest Medical Limited",
+    "Crest Medical Ltd"
+   ],
+   "frameworks": [
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "IMS Euro Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Extension Sets and Lines",
+    "Intravenous Accessories and Pressure Monitoring Accessories"
+   ]
+  },
+  {
+   "name": "Kimal PLC",
+   "resolved": true,
+   "variants": [
+    "Kimal PLC",
+    "Kimal PLC Stock"
+   ],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products",
+    "Intravenous Accessories and Pressure Monitoring Accessories"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Bunzl Healthcare",
+    "Bunzl Retail & Healthcare Supplies Ltd"
+   ],
+   "frameworks": [
+    "Extension Sets and Lines",
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Rocialle Healthcare",
+   "resolved": true,
+   "variants": [
+    "Rocialle",
+    "Rocialle Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Extension Sets and Lines",
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "RPG Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "Wescott Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Extension Sets and Lines",
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "William Davies Care Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Accessories and Pressure Monitoring Accessories",
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "365 Healthcare",
+   "resolved": true,
+   "variants": [
+    "365 Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Intravenous Accessories and Pressure Monitoring Accessories"
+   ]
+  },
+  {
+   "name": "ALXR Limited",
+   "resolved": true,
+   "variants": [
+    "ALXR LIMITED"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Applied Medical Technology Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products"
+   ]
+  },
+  {
+   "name": "Arcomedical Infusion Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Avanos Medical UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "BECTON DICKINSON (CME) U.K. LIMITED",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Braun and Company Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Edwards Lifesciences",
+   "resolved": true,
+   "variants": [
+    "Edwards Lifesciences Ltd"
+   ],
+   "frameworks": [
+    "Intravenous Accessories and Pressure Monitoring Accessories"
+   ]
+  },
+  {
+   "name": "Eitan Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Europlaz Technologies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Extension Sets and Lines"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "GenX MediCare"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Greiner Bio-One Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Headington Medical Technology Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products"
+   ]
+  },
+  {
+   "name": "Infutech Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Extension Sets and Lines"
+   ]
+  },
+  {
+   "name": "Inspiration Healthcare",
+   "resolved": true,
+   "variants": [
+    "Inspiration Healthcare Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Iskus Health UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Johnson & Johnson MedTech",
+   "resolved": true,
+   "variants": [
+    "Johnson & Johnson Medical Ltd"
+   ],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products"
+   ]
+  },
+  {
+   "name": "KCI Medical Limited (3m)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "Medical Access Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products"
+   ]
+  },
+  {
+   "name": "Medical Devices Technology Inter Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Accessories and Pressure Monitoring Accessories"
+   ]
+  },
+  {
+   "name": "Medicina Limited",
+   "resolved": true,
+   "variants": [
+    "Medicina Ltd"
+   ],
+   "frameworks": [
+    "Intravenous Accessories and Pressure Monitoring Accessories"
+   ]
+  },
+  {
+   "name": "Mediplus Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Extension Sets and Lines"
+   ]
+  },
+  {
+   "name": "Nipro Medical Europe",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "OncoSem UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "Pall Europe Limited",
+   "resolved": true,
+   "variants": [
+    "PALL Europe Ltd"
+   ],
+   "frameworks": [
+    "Intravenous Accessories and Pressure Monitoring Accessories"
+   ]
+  },
+  {
+   "name": "pfm medical UK",
+   "resolved": true,
+   "variants": [
+    "Pfm Medical UK Limited"
+   ],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products"
+   ]
+  },
+  {
+   "name": "Praxis Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Qualasept Ltd t/a Bath ASU",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Reflex Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products"
+   ]
+  },
+  {
+   "name": "Scottmed Distribution (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products"
+   ]
+  },
+  {
+   "name": "Super B Plus Group Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Needlefree Connection Systems and Associated Products"
+   ]
+  },
+  {
+   "name": "Terumo UK",
+   "resolved": true,
+   "variants": [
+    "Terumo UK Ltd",
+    "Terumo Uk Ltd (E-Direct)"
+   ],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "Teleflex Medical UK"
+   ],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products"
+   ]
+  },
+  {
+   "name": "Timesco Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products"
+   ]
+  },
+  {
+   "name": "Unisurge International Limited",
+   "resolved": true,
+   "variants": [
+    "Unisurge International Ltd"
+   ],
+   "frameworks": [
+    "Central Venous Catheters and Associated Products"
+   ]
+  },
+  {
+   "name": "Unomedical Ltd",
+   "resolved": true,
+   "variants": [
+    "Unomedical Ltd (A ConvaTec Company)"
+   ],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Vannin Healthcare Global Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Extension Sets and Lines"
+   ]
+  },
+  {
+   "name": "Walters Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Accessories and Pressure Monitoring Accessories"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Preliminary Market Engagement For Infusion Pumps, Syringe Pumps, Ambulatory Pumps, Subcutaneous, Administration and Gravity Sets and Associated Equipment",
+   "buyer": "Business Services Organisation Procurement and Logistics Service",
+   "supplier": null,
+   "date": "2026-08-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081175-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "33100000",
+    "33141624",
+    "33194000",
+    "33194100",
+    "33194110",
+    "33194120"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "IV Cannulae and Associated Infusion Set (5973078)",
+   "buyer": "Regional Business Services Organisation, Procurement and Logistics Service",
+   "supplier": "B. Braun Medical Ltd Ireland, Balmung Medical Handel GmbH, BECTON, DICKINSON U.K. LIMITED, EBRINGTON (NI) LTD, NORTHERN HOSPITAL SUPPLIES LIMITED, PREMIER HEALTHCARE (NI) LTD, REFLEX MEDICAL LIMITED, AQUILANT NORTHERN IRELAND LIMITED, INNOVATE HEALTH GROUP LTD, VYGON (U.K.) LIMITED",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079360-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33141220",
+    "33190000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Rapid Infuser Blood/IV Infusion Pump",
+   "buyer": "UNIVERSITY HOSPITALS OF DERBY AND BURTON NHS FOUNDATION TRUST",
+   "supplier": "BELMONT MEDICAL TECHNOLOGIES LTD",
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078960-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33194110"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Intravenous Cannula and Associated Products",
+   "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+   "supplier": "Airglove Medical Ltd, B. Braun Medical Limited, Balmung Medical Handel GmbH, Crest Medical Ltd, Critical Healthcare Ltd, Fannin UK Limited, GBUK Ltd, Greiner Bio-One Ltd, Infutech Ltd, ITL Australia Pty Ltd, Javelo Health Limited, Mediq Healthcare UK Ltd, Nipro Medical UK Ltd, OscarTech UK Ltd, Prosum Medical Ltd, Reflex Medical Limited, Smiths Medical International Ltd, SOL-MILLENNIUM UK, Terumo UK Ltd, Unomedical Ltd, Vygon (UK) Ltd",
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078334-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33141220"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Needle Free Connection Systems & Associated Products",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "BECTON DICKINSON UK LTD",
+   "date": "2026-07-30",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/05f1de83-a01d-425d-82ba-4e7a552f5a8e",
+   "value": 1046708,
+   "periodEnd": "2028-06-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "BBraun Medical IV Cannula for Pandemic Preparedness 25/26",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown throug",
+   "supplier": "B. Braun Medical Limited",
+   "date": "2026-01-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002571-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "RPG Medical Administration Sets for Pandemic Preparedness 25/26",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown throug",
+   "supplier": "RPG Medical Limited",
+   "date": "2026-01-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002583-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": ": Central Venous Catheters and Associated Products",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Aquilant Limited, B. Braun Medical Limited, Balmung Medical Handel GmbH, Becton,",
+   "date": "2025-11-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075287-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Medical Administration Sets for Pandemic Preparedness 24/25",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown throug",
+   "supplier": "Intersurgical Limited",
+   "date": "2025-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/058850-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Medical Administration Sets for Pandemic Preparedness 24/25",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown throug",
+   "supplier": "RPG Medical Limited",
+   "date": "2025-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/058668-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "IV Admin & Accessories",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "B Braun Medical, Balmung Medical Handel GmbH, Becton, Dickinson U.K. Limited",
+   "date": "2025-05-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/025504-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Needlefree & Associated Products",
+   "buyer": "Royal Berkshire NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2025-04-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/014122-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Needlefree Connection Systems and Associated Products",
+   "buyer": "NHS Supply Chain Operated by Supply Chain Coordination Ltd (SCCL)",
+   "supplier": "",
+   "date": "2024-08-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/025307-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "[4801618] Spare Parts for BodyGuard T Syringe Drivers and Infusion Pumps",
+   "buyer": "Business Services Organisation, Procurement and Logistics Service",
+   "supplier": "ROCKFORD HEALTHCARE LIMITED",
+   "date": "2023-10-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/031159-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Infusion Pumps, Syringe Pumps, Administration Sets and Associated Equipment",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "SISK HEALTHCARE UK LTD t/a Cardiac Services, BAXTER HEALTHCARE LTD, ICU UK MEDIC",
+   "date": "2023-04-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011090-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Extension Sets",
+   "buyer": "NHS Supply Chain Operated by DHL Supply Chain Limited acting as agent of Supply ",
+   "supplier": "B. Braun Medical Limited, Baxter Healthcare Limited, Becton, Dickinson U.K. Limi",
+   "date": "2023-02-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004780-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Intravenous and Pressure Monitoring Accessories",
+   "buyer": "NHS Supply Chain",
+   "supplier": "B. Braun Medical Limited, Becton, Dickinson U.K. Limited, B M S Critical Care Li",
+   "date": "2022-11-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/032261-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Vascular Access Accessories",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Smiths Medical International",
+   "date": "2022-10-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028192-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "IV Cannulae",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "BECTON DICKINSON U.K. LTD, B. BRAUN MEDICAL LTD, Vannin Healthcare Global Ltd., ",
+   "date": "2022-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023048-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Needle Free Access Devices and IV Accessories",
+   "buyer": "BSO, Procurement and Logistics Service",
+   "supplier": "RELIANCE MEDICAL LTD, Fannin NI Ltd, SMC NI Ltd T/A BRENNAN CO NI LTD, TECHNOPAT",
+   "date": "2022-04-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/010756-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}

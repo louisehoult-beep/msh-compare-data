@@ -37,6 +37,7 @@ HAEM = "haematology-and-patient-blood-management"
 MATERNITY = "maternity-and-neonatal"
 GYNAE = "gynaecology-and-womens-health"
 PAEDS = "paediatrics"
+VASCACCESS = "vascular-access-and-iv-therapy"
 fails = []
 
 
@@ -3406,6 +3407,119 @@ _TARIFF_FILTER_EARNED = {GYNAE, PAEDS}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _r.get("tariffVmp") and _slug not in _TARIFF_FILTER_EARNED:
         check("%s must not have grown a tariff filter unnoticed" % _slug, False)
+
+
+# ---------------------------------------------------------------------------
+# VASCULAR ACCESS AND IV THERAPY. The patch is the line, not what goes down it.
+# Its two dangers are opposites. One is that "intravenous" and "IV" appear on
+# every medicine and fluid bought by that route, so the include admits fourteen
+# pharmacy contracts unless the dose form is refused. The other is that the word
+# "vascular" belongs to a DIFFERENT page: NHS Supply Chain's "Vascular Therapy and
+# Associated Products" is compression and mechanical VTE prophylaxis, and it is
+# vascular-surgery-and-pad's framework, not this one.
+# ---------------------------------------------------------------------------
+print("\nVASCULAR ACCESS AND IV THERAPY")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), VASCACCESS],
+               check=True, capture_output=True)
+va = load_panel(VASCACCESS)
+check("panel is defined", va.get("defined") is True)
+
+_va_rule = B.SPECIALITY_RULES[VASCACCESS]
+_va_rx = B.compile_rule(_va_rule)
+
+print("  the route is not the product — every one of these is a real row that matched")
+for bad in [
+        # Monoclonals. \w+mab was checked against the whole corpus first: it matches
+        # 41 titles and all 41 are drugs, so it refuses nothing real.
+        "Bevacizumab IV Infusion Vials",
+        "Ravulizumab IV Infusion",
+        "ALLOGA UK LTD (WT) - WT2024-04 - MOGAMULIZUMAB (POTELIGEO) 20 mg in 5mL "
+        "Concentrate for IV Infusion;1 Vial Pack",
+        # Dose form, not device. None of the sixteen true positives carries a dose.
+        "Procurement of MIFAMURTIDE (PAS) 4 mg Intravenous Infusion",
+        "Supply, Storage, and Maintenance of Glucose 10% and 50% 500ml iv infusion",
+        # Named substances the dose-form signature does not reach.
+        "Hepatitis B immunoglobulin intravenous use (IV)",
+        "Erythropoietin Stimulating Agents & Intravenous Iron",
+        # Fluids are pharmacy wholesale. Seven rows, all of them medicines supply.
+        "The Supply, Storage, and Management of Intravenous Fluids",
+        "The Supply and Storage of Intravenous Fluids and Peritoneal dialysis fluids",
+        "Intravenous & Topical Fluids",
+        "IV Fluids & Irrigation Solutions",
+        "Dynamic Purchasing System (DPS) for the Supply of Antibiotics and IV Fluids",
+        "Dynamic Purchasing System (DPS) for the Supply of Antibiotics and IV Fluids "
+        "(Quarterly Notice)",
+]:
+    check("never admitted: %s" % bad[:58], not B.match_title(_va_rx, bad))
+
+print("  the word is not the route — cannula and pump both belong to other patches")
+for bad in [
+        # "cannula" without a vein. Respiratory.
+        "The supply of Nasal Cannula & Oxygen Masks for Pandemic Preparedness 24/25",
+        # An insulin pump is subcutaneous. Diabetes, and on no framework above.
+        "Insulin Infusion Pumps, Continuous Glucose Monitoring Systems and Associated Consumables",
+]:
+    check("never admitted: %s" % bad[:58], not B.match_title(_va_rx, bad))
+
+print("  true positives — awards that must be on this patch")
+for good in [
+        # The framework's own award notice. It is PLURAL, and an end-anchored
+        # include pattern silently drops it; that is how this rule failed its first
+        # draft, so it is pinned here.
+        ": Central Venous Catheters and Associated Products",
+        "Intravenous Cannula and Associated Products",
+        "Needlefree Connection Systems and Associated Products",
+        "IV Cannulae",
+        "Vascular Access Accessories",
+        "Intravenous and Pressure Monitoring Accessories",
+        "Infusion Pumps, Syringe Pumps, Administration Sets and Associated Equipment",
+        "Extension Sets",
+        "Needle Free Access Devices and IV Accessories",
+]:
+    check("admitted: %s" % good[:58], B.match_title(_va_rx, good))
+
+print("  the six frameworks, and the three refused by name")
+_va_fw = {f["name"] for f in va["frameworks"]}
+check("six frameworks exactly", len(va["frameworks"]) == 6,
+      ", ".join(sorted(_va_fw)))
+for name in [
+        "Central Venous Catheters and Associated Products",
+        "Intravenous Cannula and Associated Products",
+        "Intravenous Accessories and Pressure Monitoring Accessories",
+        "Needlefree Connection Systems and Associated Products",
+        "Infusion Pumps and Administration Sets and Associated Products",
+        "Extension Sets and Lines",
+]:
+    check("framework carried: %s" % name[:52], name in _va_fw)
+# THE TRAP. Compression hosiery — Juzo, Sigvaris, Haddenham, Medi, Thuasne — reaching
+# a vascular ACCESS page would be the wound care "seed viability" failure repeated.
+_va_fwrx = B.compile_rule(_va_rule)
+for name in [
+        "Vascular Therapy and Associated Products",   # compression, vascular-surgery-and-pad's
+        "Blood Collection Devices",                   # pathology's and haematology's
+        "Syringes, Needles and Associated Products",  # a product, not a clinical category
+]:
+    check("framework refused: %s" % name[:52], name not in _va_fw)
+
+print("  no Drug Tariff part, and that was checked not assumed")
+# Part IX's only hits on this include list are tracheostomy inner cannulae and a
+# needle-free INSULIN system. Neither is vascular access, and these devices are not
+# FP10 reimbursable, so reaching for IXA here would publish another page's products.
+check("declares no tariff part", _va_rule.get("tariffParts") is None)
+check("carries no Drug Tariff lines", not va.get("drugTariff"))
+
+print("  one name per company")
+_va_names = [s["name"] for s in va["suppliers"]]
+check("no duplicate supplier names", len(_va_names) == len(set(_va_names)))
+# "ALL ROUTES" is an SCCL supply-route marker, not part of a company name. Left
+# unaliased it published Fresenius Kabi twice, once under each spelling.
+check("Fresenius Kabi appears exactly once",
+      sum(1 for n in _va_names if "Fresenius Kabi" in n) == 1,
+      ", ".join(n for n in _va_names if "Fresenius Kabi" in n))
+check("no supply-route marker survives in a supplier name",
+      not [n for n in _va_names if "All Routes" in n],
+      ", ".join(n for n in _va_names if "All Routes" in n))
+
 
 
 # The exclude=None path must not leak to any rule that has not earned it. Two have:

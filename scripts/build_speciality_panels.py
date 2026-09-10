@@ -235,6 +235,98 @@ SPECIALITY_RULES = {
             "the whole buying picture. The page's Deep dive covers the IC/IR route."
         ),
     },
+    # PAGE 2912. Vascular access DEVICES and the giving of intravenous therapy: the
+    # cannula, the PICC, the central line, the connector, the pump and the set. It is
+    # NOT the drug or the fluid that travels down them, and it is not arterial disease
+    # — vascular-surgery-and-pad owns that, and owns the "Vascular Therapy" framework
+    # name, which is a trap: NHS Supply Chain's "Vascular Therapy and Associated
+    # Products" is mechanical VTE prophylaxis and compression, its supplier list being
+    # Juzo, Sigvaris, Haddenham, Medi, Thuasne and Urgo. Nothing on it is vascular
+    # access. The frameworks pattern below is written to name the six agreements that
+    # are, not to match the word "vascular".
+    "vascular-access-and-iv-therapy": {
+        "label": "Vascular Access and IV Therapy",
+        # Six NHSSC frameworks, five of them under Medical and Surgical Consumables.
+        # Infusion Pumps and Administration Sets is deliberately SHARED with
+        # palliative-and-end-of-life-care: one agreement really does carry both the
+        # ward infusion pump and the syringe driver, exactly as Pressure Area Care is
+        # shared between wound care and patient handling.
+        # DELIBERATELY NOT CLAIMED, each checked and rejected:
+        #   Vascular Therapy and Associated Products — compression, see above.
+        #   Blood Collection Devices — venepuncture consumables, already claimed by
+        #     pathology-and-laboratory-medicine and haematology-and-patient-blood-
+        #     management. Sampling is diagnostics, not therapy; a third claim on it
+        #     would inflate this page's supplier count with tube and vacutainer firms.
+        #   Syringes, Needles and Associated Products — 52 suppliers, and the syringe
+        #     is a general consumable used by every speciality that injects anything.
+        #     A framework named after a product, not a clinical category, is the one
+        #     case the framework-name rule does not hold, so it is left out.
+        "frameworks": (
+            r"\b(central venous catheter|intravenous (?:cannula|accessories)|"
+            r"needlefree connection|infusion pumps and administration sets|"
+            r"extension sets and lines)"
+        ),
+        # No trailing \b on the group: NHSSC and the notice feeds disagree on plurals
+        # ("Central Venous Catheters and Associated Products" against "central venous
+        # catheter"), and an end-anchored pattern silently drops the framework's own
+        # award notice. That is how this rule failed its first draft.
+        "include": (
+            r"\b(vascular access|picc\b|peripherally inserted central|midline catheter|"
+            r"central venous (?:catheter|access|line)|central line|"
+            r"intravenous|iv\b|cannulae?\b|cannulation|"
+            r"infusion pump|syringe driver|syringe pump|administration set|giving set|"
+            r"needle[- ]?free|venepunctur|venipunctur|phlebotom|"
+            r"port-?a-?cath|implantable port|totally implantable venous|tivad|"
+            r"hickman|groshong|broviac|arterial line|arterial catheter|"
+            r"extension set|catheter securement|opat\b|outpatient parenteral|"
+            r"infusion therapy)"
+        ),
+        # Derived, not guessed: the include above was run over all 1,972 rows of
+        # tender-history.json and all 1,397 of framework-awards.json and every hit
+        # read. It returned 33 tender-history rows, of which 17 were wrong. They fall
+        # into exactly two families and every pattern here comes from one of them.
+        #
+        # 1. THE ROUTE IS NOT THE PRODUCT. Fourteen of the seventeen are medicines and
+        #    fluids that happen to be given intravenously — "Bevacizumab IV Infusion
+        #    Vials", "Hepatitis B immunoglobulin intravenous use (IV)", "Glucose 10%
+        #    and 50% 500ml iv infusion", "DPS for the Supply of Antibiotics and IV
+        #    Fluids", "Intravenous Fluids and Peritoneal dialysis fluids". A rep on
+        #    this page sells the line, not what goes down it. \w+mab was checked
+        #    against the whole corpus before being used: it matches 41 titles and all
+        #    41 are monoclonal antibodies, so it excludes nothing real. The dose-form
+        #    signature (a number followed by mg/ml/mcg, "vial", "concentrate for",
+        #    "powder for", "solution for infusion", "pre-filled") catches the rest
+        #    generically rather than naming drugs one at a time; it fires on none of
+        #    the 16 true positives, which carry no dose.
+        # 2. THE WORD IS NOT THE ROUTE. "Nasal Cannula & Oxygen Masks" is respiratory,
+        #    and "Insulin Infusion Pumps, Continuous Glucose Monitoring Systems" is
+        #    diabetes — an insulin pump is subcutaneous and belongs to no lot on any
+        #    framework above.
+        #
+        # KNOWN AND ACCEPTED COST: bare \bfluids?\b would also drop a genuine
+        # "IV fluid administration set" notice if one is ever published. Dropping a
+        # true positive is the safe direction and rule 14 prefers an honest empty
+        # line to a wrong one; the seven fluid-supply contracts it removes today are
+        # all pharmacy wholesale, none of them a device.
+        "exclude": (
+            r"\b(nasal cannula|\w+mab\b|fluids?\b|irrigation|insulin|glucose|"
+            r"erythropoietin|immunoglobulin|antibiotics?\b|"
+            r"\d+\s?m(?:g|l|cg)\b|vials?\b|concentrate for|powder for|"
+            r"solution for (?:infusion|injection)|pre-?filled)"
+        ),
+        # Observed, not looked up. These are the prefixes actually carried by the
+        # framework-awards rows this rule keeps: 33141220 on both IV cannula notices,
+        # 331941x on the infusion pump and infusion device notices, 33141624 on the
+        # administration set notice. CPV corroborates and never admits, so a code that
+        # has never been seen on this patch is not listed on the strength of what the
+        # CPV schedule says it means.
+        "cpv": ("33141220", "331941", "33141624"),
+        # NO tariffParts, and this was checked rather than assumed. Part IX was
+        # searched for every term in the include list: the only hits are tracheostomy
+        # inner cannulae (respiratory) under IXA and a needle-free INSULIN delivery
+        # system (diabetes). Vascular access devices are hospital-supplied and are not
+        # FP10 reimbursable, so no part of the Drug Tariff belongs to this page.
+    },
     # PAGE 2910. Scope, in the page's own words: "Community and acute continence
     # services, catheters and containment products." Products and services, not
     # diagnostics and not surgery: bladder scanning and urodynamics belong to the
