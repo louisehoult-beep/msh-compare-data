@@ -13,14 +13,14 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-02",
-  "differentiator.json published": 33061,
-  "differentiator.json held": 47620
+  "differentiator.json published": 33083,
+  "differentiator.json held": 47598
  },
  "counts": {
   "frameworks": 121,
   "done": 0,
-  "started": 47,
-  "notStarted": 7,
+  "started": 48,
+  "notStarted": 6,
   "unmapped": 47,
   "outOfScope": 20,
   "inScope": 101,
@@ -9819,8 +9819,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "31 March 2028",
    "suppliersAwarded": 8,
-   "suppliersPublished": 1,
-   "coverage": 12.5,
+   "suppliersPublished": 2,
+   "coverage": 25.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9859,16 +9859,16 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 4,
+    "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 0,
     "crawlable": 0,
     "needDomain": 0
    },
    "published": [
-    "Canon Medical Systems"
+    "Canon Medical Systems",
+    "Medical Imaging Systems (MIS Healthcare)"
    ],
    "publishedElsewhere": [
-    "Medical Imaging Systems (MIS Healthcare)",
     "Philips",
     "Siemens Healthineers",
     "Stryker"
@@ -9881,7 +9881,7 @@
     "GE HealthCare"
    ],
    "unknown": [],
-   "actionableTotal": 4,
+   "actionableTotal": 3,
    "blockedReason": null
   },
   {
@@ -9975,6 +9975,79 @@
    "unknown": [],
    "actionableTotal": 0,
    "blockedReason": "every awarded supplier not yet published has been read and refused (7 recorded refusal(s)) \u2014 no permitted route left to the rest of this framework, so its coverage cannot rise without a new route"
+  },
+  {
+   "framework": "Contrast Injectors, Consumables and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/contrast-injectors-consumables-and-associated-options-and-related-services/",
+   "category": "Diagnostic Equipment and Services",
+   "ends": "31 March 2028",
+   "suppliersAwarded": 5,
+   "suppliersPublished": 1,
+   "coverage": 20.0,
+   "nhsscCategory": "Diagnostic Equipment and Services",
+   "inScope": true,
+   "outOfScopeReason": null,
+   "state": "STARTED",
+   "speciality": [
+    "imaging"
+   ],
+   "crawlWorklist": [
+    {
+     "supplier": "Bayer",
+     "domain": null
+    },
+    {
+     "supplier": "Bracco UK Limited",
+     "domain": null
+    },
+    {
+     "supplier": "Guerbet Laboratories Limited",
+     "domain": null
+    }
+   ],
+   "domainsMissing": [
+    "Bayer",
+    "Bracco UK Limited",
+    "Guerbet Laboratories Limited"
+   ],
+   "refusedSuppliers": [
+    {
+     "supplier": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+     "domain": "cardiac-services.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-05"
+    }
+   ],
+   "route": "NHSSC framework",
+   "catsInScope": [
+    "imaging:angio",
+    "imaging:ct",
+    "imaging:mri",
+    "imaging:xray"
+   ],
+   "actionable": {
+    "unresolvedNames": 0,
+    "publishedElsewhereNeedingCategory": 0,
+    "heldNeedingCategory": 0,
+    "crawlable": 0,
+    "needDomain": 3
+   },
+   "published": [
+    "Medical Imaging Systems (MIS Healthcare)"
+   ],
+   "publishedElsewhere": [],
+   "heldOnly": [],
+   "notCrawled": [
+    "Bayer",
+    "Bracco UK Limited",
+    "Guerbet Laboratories Limited"
+   ],
+   "refused": [
+    "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
+   ],
+   "unknown": [],
+   "actionableTotal": 3,
+   "blockedReason": null
   },
   {
    "framework": "Polymer Products",
@@ -10165,74 +10238,6 @@
     "D.P. Medical Systems Limited",
     "Karl Storz UK",
     "LiteOptics"
-   ],
-   "unknown": [],
-   "actionableTotal": 4,
-   "blockedReason": null
-  },
-  {
-   "framework": "Contrast Injectors, Consumables and Associated Options and Related Services",
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/contrast-injectors-consumables-and-associated-options-and-related-services/",
-   "category": "Diagnostic Equipment and Services",
-   "ends": "31 March 2028",
-   "suppliersAwarded": 5,
-   "suppliersPublished": 0,
-   "coverage": 0.0,
-   "nhsscCategory": "Diagnostic Equipment and Services",
-   "inScope": true,
-   "outOfScopeReason": null,
-   "state": "NOT STARTED",
-   "speciality": [
-    "imaging"
-   ],
-   "crawlWorklist": [
-    {
-     "supplier": "Bayer",
-     "domain": null
-    },
-    {
-     "supplier": "Bracco UK Limited",
-     "domain": null
-    },
-    {
-     "supplier": "Guerbet Laboratories Limited",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Bayer",
-    "Bracco UK Limited",
-    "Guerbet Laboratories Limited"
-   ],
-   "refusedSuppliers": [
-    {
-     "supplier": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
-     "domain": "cardiac-services.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-05"
-    }
-   ],
-   "route": "NHSSC framework",
-   "catsInScope": [],
-   "actionable": {
-    "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 1,
-    "heldNeedingCategory": 0,
-    "crawlable": 0,
-    "needDomain": 3
-   },
-   "published": [],
-   "publishedElsewhere": [
-    "Medical Imaging Systems (MIS Healthcare)"
-   ],
-   "heldOnly": [],
-   "notCrawled": [
-    "Bayer",
-    "Bracco UK Limited",
-    "Guerbet Laboratories Limited"
-   ],
-   "refused": [
-    "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
    "unknown": [],
    "actionableTotal": 4,
