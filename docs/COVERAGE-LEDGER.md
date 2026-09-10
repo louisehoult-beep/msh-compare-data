@@ -52,7 +52,7 @@ low coverage there means exhausted, not neglected.
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 4 | 7 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 5 | 22.7% | 11 | 6 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 8 | 3 | STARTED |
-| Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 3 | 14.3% | 11 | 7 | STARTED |
+| Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 3 | 14.3% | 10 | 8 | STARTED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 6 | 30.0% | 10 | 4 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 6 | 31.6% | 8 | 5 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 10 | 52.6% | 6 | 3 | STARTED |
