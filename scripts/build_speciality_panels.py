@@ -4515,6 +4515,144 @@ SPECIALITY_RULES = {
     # PAGE 2831. One NHS Supply Chain framework, one large community reimbursement
     # range, and a title vocabulary that is unusually clean once three words are
     # taken out of it.
+    # PAGE 2826. Scope, in the page's own words: "ITU and HDU: organ support, patient
+    # monitoring, infusion and continuous renal replacement — four separate frameworks,
+    # four separate expiry dates, and no single critical care agreement to sell into."
+    # Adult and paediatric intensive care. NOT the anaesthetic room (theatres), NOT
+    # sleep and home ventilation (respiratory), NOT chronic in-centre dialysis (renal),
+    # NOT peripheral cannulation (vascular access).
+    "critical-care": {
+        "label": "Critical Care",
+        # THE FOUR THE PAGE NAMES, AND ONLY THOSE. Each one's expiry date in
+        # frameworks.json matches the gold date the page's own calendar already
+        # carries: Infusion Pumps 30 September 2026, Renal Replacement Therapies
+        # 27 March 2028, Patient Monitoring 7 June 2028, Anaesthesia Machines and
+        # Ventilators 28 February 2029. Deliberately NOT here, though every one of
+        # them is used on an intensive care unit:
+        #   Pulse Oximetry, Capnography and Related Monitoring Technologies
+        #                        -> unclaimed by any speciality rule, and adding it
+        #                           would make five frameworks on a page whose own
+        #                           prose says four and lists four expiry dates. The
+        #                           gap is real and is recorded rather than papered
+        #                           over; it is the speciality PAGE that would have to
+        #                           change first, not this filter.
+        #   Airway Management Products               -> theatres and respiratory's.
+        #   Non Invasive Ventilation, Sleep Therapy, CPAP -> respiratory's.
+        #   Central Venous Catheters, Intravenous Accessories and Pressure Monitoring
+        #                                            -> vascular access's.
+        #   Enteral Feeding, Bile Bags                -> nutrition and dietetics'.
+        #   External Defibrillation Devices           -> not this patch: every
+        #                           defibrillator notice in this data is a community
+        #                           or public-access AED, one of them bought by an
+        #                           Education Authority for schools.
+        "frameworks": r"(infusion pumps|renal replacement therap|patient monitoring equipment|anaesthesia machines)",
+        # WRITTEN NARROW ON PURPOSE, because the loose form of nearly every term on
+        # this patch is a false-positive nest and refusing it in the include is
+        # cleaner than admitting it and arguing with it in the exclude:
+        #   "ventilation" (not used)  -> 31 rows carry it and two are buildings:
+        #                                Hillingdon's "Ventilation Verification" and
+        #                                Buckinghamshire's "Provision of Ventilation
+        #                                and Other Remediation Works". "ventilators?"
+        #                                is the device and reaches neither.
+        #   "infusion" (not used)     -> 30 rows, and 16 of them are DRUGS: nivolumab,
+        #                                mogamulizumab, ravulizumab, gemcitabine,
+        #                                Zolgensma, "Generic Drugs - Injections/
+        #                                Infusions". Every one of them is the phrase
+        #                                "solution for infusion" on a pharmacy buy.
+        #                                The device terms are named individually here.
+        #   "multiparameter" (not used) -> its one row is the University of Exeter
+        #                                buying multiparameter sondes for fresh water
+        #                                monitoring.
+        #   "high dependency" (not used) -> its one row is Leicester City Council's
+        #                                "High Dependency Bed Service", social care
+        #                                placements, not an HDU. "high dependency
+        #                                unit" is used instead and matches nothing
+        #                                today, which is the honest answer.
+        #   "life support" (not used)  -> two rows, both wrong: Advanced Paediatric
+        #                                Life Support COURSE manuals, and Defence
+        #                                Equipment and Support's Diving Life Support.
+        #   "extracorporeal" (not used) -> three rows, none of them critical care:
+        #                                NHSBT's extracorporeal photopheresis systems
+        #                                twice, and blood-parameter monitoring during
+        #                                cardiopulmonary bypass. "ecmo" is used
+        #                                instead and reaches the one true row.
+        #   "suction" (not used)       -> five rows of general theatre and ward
+        #                                suction. Only "tracheal suction" is distinctly
+        #                                intensive care.
+        #   "resuscitation", "defibrillator", "airway", "blood gas" (not used)
+        #                             -> resuscitation and defibrillation rows are
+        #                                course manuals, neonatal baby warmers and
+        #                                public-access AEDs; airway and blood gas are
+        #                                the theatres and pathology pages' patches.
+        "include": (
+            r"\b(critical care|intensive care|itu|high dependency unit|"
+            r"ventilators?|mechanical ventilation|"
+            r"ecmo|extracorporeal membrane oxygenation|"
+            r"patient monitors?|patient monitoring|vital signs? monitors?|"
+            r"pulse oximet\w*|capnograph\w*|"
+            r"infusion pumps?|infusion device|infusion system|rapid infuser|"
+            r"administration sets?|syringe (?:pumps?|drivers?)|"
+            r"crrt|renal replacement|h[ae]mofiltration|"
+            r"tracheostom\w*|tracheal suction)\b"
+        ),
+        # Every one of these matched a real row that the include list let through and
+        # that is not this speciality. All 71 titles the include list returned were
+        # read one by one; these six are the ones that were wrong.
+        #   medicines -> "For the Supply of ITU Medicine Covid-19 Preparedness -
+        #                Propofol 1g/50ml emulsion for infusion vial", "ITU Medicines
+        #                and End of Life Care Medicines for Covid-19 preparedness" and
+        #                "Supportive Medicines - additional products (ITU, Antibiotics
+        #                & EOI medicines)". All three are DHSC pharmacy stockpile buys
+        #                that say ITU because of the ward the drug is used on. This
+        #                page is organ support, monitoring and infusion hardware; the
+        #                drugs that run through the pumps are not on it.
+        #   insulin   -> "Insulin Infusion Pumps, Continuous Glucose Monitoring Systems
+        #                and Associated Consumables". An insulin pump is a diabetes
+        #                device on its own NHSSC framework, not an ITU infusion pump.
+        #   cpap      -> "Non-Invasive CPAP Ventilators". CPAP and adaptive servo
+        #                ventilation sit on NHS Supply Chain's Non Invasive
+        #                Ventilation, Sleep Therapy and CPAP framework, which is the
+        #                respiratory page's, not this one's.
+        #   psychiatric intensive care
+        #             -> "North Staffordshire Combined Healthcare NHS Trust Out of
+        #                Area Psychiatric Intensive Care (PICU) Placement". A mental
+        #                health bed placement. Note that the bare acronym PICU is NOT
+        #                excluded, because elsewhere it means paediatric intensive
+        #                care; only the spelled-out psychiatric phrase is.
+        "exclude": r"\b(medicines?|insulin|cpap|psychiatric intensive care)\b",
+        # 33194 transfusion and infusion devices, 33195 patient monitoring systems,
+        # 33181 renal support devices — the three families that actually corroborate a
+        # matching row in this data. CORROBORATION ONLY, and this patch shows why the
+        # builder refuses to admit on CPV: Cwm Taf Morgannwg filed "Supply of Critical
+        # Care Ventilators (Dräger Evita V800)" under CPV 39714100, which sits in the
+        # building ventilation and air-conditioning family, not the medical one. A
+        # filter that trusted CPV would have thrown out a real ICU ventilator award and
+        # let in an air handling unit.
+        "cpv": ("33194", "33195", "33181"),
+        # NO DRUG TARIFF PART, and not for want of looking. Part IX reimburses
+        # dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma
+        # appliances (IXC) and elastic hosiery (IXR) dispensed in the community on
+        # prescription. Ventilators, patient monitors, infusion pumps and CRRT
+        # machines are hospital capital and hospital consumables and appear nowhere in
+        # it. The panel carries none rather than reaching for the nearest part.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. These are the four NHS Supply "
+            "Chain frameworks this page's own scope names, and being on one is not the "
+            "same as selling to critical care. Each of the four is bought by wards far "
+            "beyond the intensive care unit — the patient monitoring framework covers "
+            "every bedside in the hospital, the anaesthesia framework covers the "
+            "theatre suite and the neonatal unit — so a supplier counted here is a "
+            "supplier on an agreement critical care buys through, never a measure of "
+            "its critical care business. Three routes onto an ICU are missing from "
+            "this count entirely: NHS Supply Chain's Pulse Oximetry, Capnography and "
+            "Related Monitoring Technologies framework, which no speciality page yet "
+            "claims; the Airway Management, Central Venous Catheter and Non Invasive "
+            "Ventilation frameworks, counted on the theatres, vascular access and "
+            "respiratory pages; and ECMO and specialist organ support, which NHS "
+            "England commissions centrally through its Specialised Services route with "
+            "no NHS Supply Chain framework page at all."
+        ),
+    },
     "ophthalmology": {
         "label": "Ophthalmology",
         # ONE FRAMEWORK, AND THE PATTERN IS DELIBERATELY THE BARE STEM. All 121

@@ -42,6 +42,7 @@ UROLOGY = "urology"
 RESP = "respiratory"
 STROKE = "stroke"
 OPHTH = "ophthalmology"
+CC = "critical-care"
 fails = []
 
 
@@ -4180,6 +4181,141 @@ for bad in ["Artificial saliva gel", "Voice prosthesis cleaning brush",
             "Sodium hyaluronate 40mg/20ml intravesical solution pre-filled syringes",
             "Sodium hyaluronate cream"]:
     check("tariff line refused: %s" % bad[:44], not _op_vmp.search(bad))
+
+
+# ---------------------------------------------------------------------------
+# CRITICAL CARE (page 2826). Added 10/09/2026.
+# The patch is ITU and HDU: organ support, patient monitoring, infusion and
+# continuous renal replacement. Nearly every term on it has a loose form that is
+# a false-positive nest, so most of the work is in what the include list refuses.
+# ---------------------------------------------------------------------------
+cc = load_panel(CC)
+check("critical care panel exists", cc is not None)
+if cc:
+    _cc_rule = B.SPECIALITY_RULES[CC]
+    _cc_rx = B.compile_rule(_cc_rule)
+
+    print("  the six real rows the include list let through that are NOT critical care")
+    # Each of these matched the include pattern in this data and was read and found
+    # wrong. They are why the exclusion list exists at all.
+    for bad, why in [
+            ("For the Supply of ITU Medicine  Covid-19 Preparedness - Propofol "
+             "1g/50ml emulsion for infusion vial.", "DHSC pharmacy stockpile, not hardware"),
+            ("ITU  Medicines and  End  of  Life Care Medicines for Covid-19 preparedness.",
+             "DHSC pharmacy stockpile"),
+            ("Supportive Medicines - additional products (ITU, Antibiotics & EOI medicines)",
+             "DHSC pharmacy stockpile"),
+            ("Insulin Infusion Pumps, Continuous Glucose Monitoring Systems and "
+             "Associated Consumables", "diabetes device, its own NHSSC framework"),
+            ("Non-Invasive CPAP Ventilators", "respiratory's NIV and sleep framework"),
+            ("North Staffordshire Combined Healthcare NHS Trust Out of Area "
+             "Psychiatric Intensive Care (PICU) Placement", "mental health bed placement"),
+    ]:
+        check("excluded (%s): %s" % (why[:34], bad[:40]), not B.match_title(_cc_rx, bad))
+
+    print("  and the loose terms refused from the include rather than argued with after")
+    # Every one of these is a real row in this data. None is critical care, and none
+    # of them may ever be admitted by widening a term back out.
+    for bad, why in [
+            ("Ventilation Verification", "building HVAC validation, Hillingdon"),
+            ("Provision of Ventilation and Other Remediation Works", "building works"),
+            ("Multiparameter Sondes for Fresh Water Monitoring", "water quality, Exeter"),
+            ("SCE0076- High Dependency Bed Service", "social care placements, Leicester CC"),
+            ("Manuals / Registrations for Advanced Paediatric Life Support Courses.",
+             "course manuals"),
+            ("Diving Life Support (DLS) In-Service Support (ISS)", "Defence Equipment"),
+            ("Support of existing NHSBT owned Extracorporeal Photopheresis (ECP) Systems",
+             "photopheresis, not ECMO"),
+            ("Monitoring devices for continuous measurement of blood parameters during "
+             "extracorporeal circulation", "cardiopulmonary bypass"),
+            ("Suction Consumables", "general ward and theatre suction"),
+            ("BSP-25-003 SUPPLY OF AUTOMATED EXTERNAL DEFIBRILLATORS (AED) AND ANCILLARIES",
+             "school AEDs, Education Authority"),
+            ("Airway Management", "theatres and respiratory's framework"),
+            ("Supply of Replacement Blood Gas Analysers and Consumables", "pathology"),
+            ("Remote Monitoring of Vital Signs", "council telecare, Dumfries and Galloway"),
+    ]:
+        check("cut at the include stage (%s): %s" % (why[:30], bad[:38]),
+              not B.match_title(_cc_rx, bad))
+
+    print("  the sixteen drug rows that bare \"infusion\" would have admitted")
+    # 30 rows in tender-history.json carry "infusion" and over half of them are the
+    # phrase "solution for infusion" on a pharmacy buy. The include names the device
+    # forms individually for exactly this reason.
+    for bad in ["NIVOLUMAB 240MG/RELATLIMAB 80MG (OPDUALAG ) Solution for Infusion 1 Vial Pack",
+                "LONCASTUXIMAB 10 mg Powder for Soln for Infusion 1 Vial Box",
+                "Ravulizumab IV Infusion",
+                "Ciprofloxacin solution for infusion 2024",
+                "Generic Drugs - Injections/Infusions",
+                "ZOLGENSMA 2 X 10 EXP 13 VECTOR GENOMES/ML Solution for Infusion 1 Treatment Pack Pack",
+                "Supply, Storage, and Maintenance of Glucose 10% and 50% 500ml iv infusion",
+                "Procurement of ANDEXANET ALFA Powder for Soln for Infusion from Alexion Pharma UK",
+                "Bevacizumab IV Infusion Vials",
+                "IV Cannulae and Associated Infusion Set (5973078)"]:
+        check("no drug or cannula row: %s" % bad[:46], not B.match_title(_cc_rx, bad))
+
+    print("  and the rows that must be present, every one read on 10/09/2026")
+    for good in ["Supply of Critical Care Ventilators and Associated Support Services "
+                 "(Dräger Evita V800)",
+                 "Intensive Care Ventilator Circuits (3510059)",
+                 "Capital Purchase of Hamilton T1 Transport Ventilator",
+                 "ITU Haemofiltration Machines, Fluids and Consumables",
+                 "Continuous Renal Replacement Therapies (CRRT) Consumables",
+                 "Purchase of ECMO Trolley",
+                 "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring "
+                 "Systems and Related Products and Services",
+                 "Pulse Oximetry, Capnography and Related Patient Monitoring Technologies",
+                 "Infusion Pumps, Syringe Pumps, Administration Sets and Associated Equipment",
+                 "Sterile Closed Tracheal Suction Systems (3225312)",
+                 "Tracheostomy Tubes, Tube Holders and Accessories - 5806781",
+                 "Vital Signs Monitors and Associated Equipment"]:
+        check("admitted: %s" % good[:52], B.match_title(_cc_rx, good))
+
+    check("every award was admitted by its title",
+          all(B.match_title(_cc_rx, a["title"]) for a in cc["awards"]))
+    _cc_titles = " || ".join((a.get("title") or "") for a in cc["awards"]).lower()
+    check("no \"solution for infusion\" pharmacy row reached the panel",
+          "solution for infusion" not in _cc_titles)
+    check("no psychiatric intensive care placement reached the panel",
+          "psychiatric" not in _cc_titles)
+
+    print("  four frameworks, the four the page's own scope and calendar name")
+    check("exactly four frameworks", len(cc["frameworks"]) == 4,
+          "got %d" % len(cc["frameworks"]))
+    _cc_fw = sorted(f["name"] for f in cc["frameworks"])
+    for want in ["Anaesthesia Machines, Ventilators, Neonatal Equipment",
+                 "Infusion Pumps and Administration Sets",
+                 "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring",
+                 "Renal Replacement Therapies Services, Technologies and Consumables"]:
+        check("framework carried: %s" % want[:50],
+              any(n.startswith(want) for n in _cc_fw))
+    # The page's calendar prints these four gold expiry dates. If frameworks.json
+    # ever disagrees with the page, one of the two is wrong and it has to be looked
+    # at, not smoothed over.
+    _cc_ends = {f["name"][:24]: f.get("ends") for f in cc["frameworks"]}
+    for key, when in [("Infusion Pumps and Admin", "30 September 2026"),
+                      ("Renal Replacement Therap", "27 March 2028"),
+                      ("Patient Monitoring Equip", "7 June 2028"),
+                      ("Anaesthesia Machines, Ve", "28 February 2029")]:
+        check("expiry still matches the page's calendar: %s" % key,
+              _cc_ends.get(key) == when, "got %s" % _cc_ends.get(key))
+    # The oximetry and capnography framework is deliberately NOT counted here, and
+    # that omission is recorded in the published coverage note rather than hidden.
+    check("the pulse oximetry framework is not silently counted",
+          not any("Pulse Oximetry" in f["name"] for f in cc["frameworks"]))
+    check("and the coverage note says so in the published file",
+          "Pulse Oximetry" in (cc["rules"]["frameworks"] or ""))
+
+    print("  no Drug Tariff part, and that is a finding")
+    # Part IX reimburses dressings, hosiery, incontinence and stoma appliances
+    # dispensed in the community. Ventilators, monitors, infusion pumps and CRRT
+    # machines are hospital capital and appear nowhere in it.
+    check("no tariff is claimed", cc["drugTariff"] is None)
+    check("and the published rule says why",
+          "No Drug Tariff part applies" in cc["rules"]["drugTariff"])
+    check("suppliers come only from the four frameworks",
+          cc["counts"]["suppliers"] > 0 and
+          all(s.get("frameworks") for s in cc["suppliers"]))
 
 
 # The exclude=None path must not leak to any rule that has not earned it. Two have:
