@@ -4969,7 +4969,7 @@ SPECIALITY_RULES = {
             "auto inflation device."
         ),
     },
-    # PAGE 2916. Scope, in the page's own words: "Adult and paediatric audiology,
+    # PAGE 2917. Scope, in the page's own words: "Adult and paediatric audiology,
     # hearing aids, implants, tinnitus and balance." The ear as an ORGAN OF HEARING
     # AND BALANCE, not the ear as a surgical site: mastoid, tympanoplasty, grommets
     # and stapes surgery are the ENT and head and neck page's, and that page's rule
