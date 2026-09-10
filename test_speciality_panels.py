@@ -43,6 +43,7 @@ RESP = "respiratory"
 STROKE = "stroke"
 OPHTH = "ophthalmology"
 CC = "critical-care"
+ENT = "ent-and-head-and-neck"
 fails = []
 
 
@@ -3417,7 +3418,12 @@ for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
 # range, which is a dressing, and the eye pad, which is on both pages because it
 # is one product with two clinical homes. Adding a slug to this set is a decision
 # about a published claim, never a way past a failing check.
-_TARIFF_FILTER_EARNED = {GYNAE, PAEDS, UROLOGY, RESP, OPHTH}
+# ENT and head and neck, added 10/09/2026, takes 645 Part IXA lines: the whole
+# tracheostomy and laryngectomy range (582 of which respiratory also claims, on
+# purpose and stated in both files), plus the voice prosthesis cleaning brushes,
+# tracheostomy dressings, ear drops, nasal preparations and the one auto
+# inflation device that no other page reaches.
+_TARIFF_FILTER_EARNED = {GYNAE, PAEDS, UROLOGY, RESP, OPHTH, ENT}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _r.get("tariffVmp") and _slug not in _TARIFF_FILTER_EARNED:
         check("%s must not have grown a tariff filter unnoticed" % _slug, False)
@@ -4316,6 +4322,141 @@ if cc:
     check("suppliers come only from the four frameworks",
           cc["counts"]["suppliers"] > 0 and
           all(s.get("frameworks") for s in cc["suppliers"]))
+
+
+# ---------------------------------------------------------------------------
+# ENT AND HEAD AND NECK. Three dangers, and the first is not a false positive at
+# all. This patch borders audiology so closely that eight genuine purchases on
+# the same clinical territory belong to the neighbouring page, so the boundary
+# has to be enforced by a test or it will drift back. The second is the word
+# laryngoscope, which reaches the emergency department and the anaesthetic room
+# far more often than it reaches ENT. The third is that a nasal cannula is oxygen
+# therapy.
+# ---------------------------------------------------------------------------
+print("\nENT AND HEAD AND NECK")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), ENT],
+               check=True, capture_output=True)
+en = load_panel(ENT)
+check("panel is defined", en.get("defined") is True)
+check("label is the page's own", en["label"] == "ENT and Head and Neck")
+
+_en_rule = B.SPECIALITY_RULES[ENT]
+_en_rx = B.compile_rule(_en_rule)
+
+print("  the one false positive, a real row read on 10/09/2026")
+check("refused (oxygen therapy, DHSC): nasal cannula pandemic stock",
+      not B.match_title(_en_rx,
+          "The supply of Nasal Cannula & Oxygen Masks for Pandemic Preparedness 24/25"))
+
+print("  the laryngoscope rows, refused from the include not argued with after")
+# All five are real rows in tender-history.json. The intubating laryngoscope and
+# the ENT rhino-laryngoscope share a word and nothing else. If any of these ever
+# starts matching, the include has been widened and this patch has quietly
+# annexed the airway.
+for bad in ["ED C-MAC Video Laryngoscope",
+            "ESNEFT3113 Purchase of Video Laryngoscopes",
+            "ESNEFT Purchase of Video Laryngoscopes",
+            "Laryngoscope Blades and Associated Consumables",
+            "Laryngoscope Handles and Blades"]:
+    check("refused (airway, not ENT): %s" % bad[:44], not B.match_title(_en_rx, bad))
+
+print("  the audiology boundary — genuine purchases that are the other page's")
+# These are NOT wrong matches. Every one is a real purchase on this clinical
+# territory, and each belongs to audiology-and-hearing because that page owns the
+# Audiological Diagnostics Implantable Devices and Services framework. The
+# boundary is a decision, so it gets a test.
+for other in ["Hearing Aid Batteries",
+              "Audiology Products",
+              "981 - Audiology Equipment",
+              "Audiological Equipment",
+              "Audiological Diagnostics, Implantable Devices, Accessories & Services 2024",
+              "Cochlear Implants and Accessories",
+              "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories",
+              "Preliminary Market Engagement Questionnaire for Cochlear Implants and Accessories"]:
+    check("left to audiology: %s" % other[:44], not B.match_title(_en_rx, other))
+
+print("  and the rows that must keep reaching it")
+for good in ["WSFT - Capital Purchase - ENT - Disinfection equipment incl Warranty device",
+             "WSFT - ENT - Werewolf Generator service contract",
+             "Purchase of Nasendoscopes",
+             "ESNEFT2730 Purchase of ENT Laser",
+             "ESNEFT2728 Purchase of ENT Microscope for Theatre",
+             "Tracheostomy Tubes, Tube Holders and Accessories - 5806781",
+             "ENT, Ophthalmology & Skin Medicines/Medical Devices",
+             "Provision of Bespoke Dental Implants",
+             "Provision of 3D Dental Implants",
+             "NP14220 Neonatal and Paediatric Tracheostomy Tubes",
+             "ENT Outsourcing",
+             "WPL06900 - Urology and OMFS Insourcing"]:
+    check("admitted: %s" % good[:52], B.match_title(_en_rx, good))
+
+check("every award was admitted by its title",
+      all(B.match_title(_en_rx, a["title"]) for a in en["awards"]))
+_en_titles = " || ".join((a.get("title") or "") for a in en["awards"]).lower()
+check("no laryngoscope row reached the panel", "laryngoscop" not in _en_titles)
+check("no audiology row reached the panel",
+      "audiolog" not in _en_titles and "hearing" not in _en_titles
+      and "cochlear" not in _en_titles)
+
+print("  two frameworks, and the third is refused upstream on purpose")
+check("exactly two frameworks", len(en["frameworks"]) == 2,
+      "got %d" % len(en["frameworks"]))
+_en_fw = sorted(f["name"] for f in en["frameworks"])
+for want in ["Ear, Nose and Throat (ENT) Endoscopes",
+             "Rigid Endoscopy and Associated Options"]:
+    check("framework carried: %s" % want[:48],
+          any(n.startswith(want) for n in _en_fw))
+# frameworks.json holds the Dental Technologies brief in `unparsed` because NHS
+# Supply Chain's own page states 33 suppliers and 35 parse. That refusal is the
+# gate working, and the published coverage note has to keep saying so.
+check("Dental Technologies is not silently counted",
+      not any("Dental Technologies" in f["name"] for f in en["frameworks"]))
+check("and the published rule says why it is missing",
+      "Dental Technologies" in (en["rules"]["frameworks"] or ""))
+# The ENT framework carries the flexible and video scopes and 7 suppliers; the
+# rigid ENT set is on a framework that does not say ENT in its name and carries
+# 18. If either count moves, the page's own prose is wrong too.
+def _en_count(prefix):
+    for f in en["frameworks"]:
+        if f["name"].startswith(prefix):
+            return f.get("supplierCount")
+    return None
+check("ENT Endoscopes still names 7 suppliers",
+      _en_count("Ear, Nose and Throat (ENT)") == 7,
+      "got %s" % _en_count("Ear, Nose and Throat (ENT)"))
+check("Rigid Endoscopy still names 18 suppliers",
+      _en_count("Rigid Endoscopy") == 18,
+      "got %s" % _en_count("Rigid Endoscopy"))
+check("both still end 31 March 2028",
+      all(f.get("ends") == "31 March 2028" for f in en["frameworks"]))
+
+print("  the Drug Tariff slice, and the ostomy range it must never eat")
+_en_t = en["drugTariff"]
+check("Part IXA only", _en_t["parts"] == ["IXA"])
+check("645 lines from 19 virtual products",
+      _en_t["lineCount"] == 645 and _en_t["vmpCount"] == 19,
+      "got %s lines / %s vmps" % (_en_t["lineCount"], _en_t["vmpCount"]))
+check("31 suppliers", _en_t["supplierCount"] == 31, "got %s" % _en_t["supplierCount"])
+check("Severn Healthcare leads it",
+      _en_t["topSuppliers"][0]["name"] == "Severn Healthcare Technologies Ltd")
+# Stoma caps were tested and refused: all 14 lines are Part IXC ostomy appliances
+# (Assura Minicap, Nova MiniCap, Confidence Gold), not laryngectomy stoma covers.
+import re as _en_re
+_en_vrx = _en_re.compile(_en_rule["tariffVmp"], _en_re.I)
+for bad in ["Stoma caps", "Ostomy bag covers", "Ileostomy bags", "Ostomy belts",
+            "Lymphoedema garments thigh length open toe with waist/hip attachment",
+            "Incontinence sheaths", "Peak flow meter standard range"]:
+    check("tariff filter refuses: %s" % bad[:44], not _en_vrx.search(bad))
+for good in ["Tracheostomy breathing aids", "Voice prosthesis cleaning brush",
+             "Auto inflation device", "Olive oil ear drops", "Nasal aspirator"]:
+    check("tariff filter admits: %s" % good[:44], bool(_en_vrx.search(good)))
+check("the overlap with respiratory is published, not hidden",
+      "respiratory" in (en["rules"].get("drugTariff") or "").lower()
+      or "RESPIRATORY" in (en["rules"].get("frameworks") or ""))
+check("suppliers come only from the two frameworks",
+      en["counts"]["suppliers"] > 0 and
+      all(s.get("frameworks") for s in en["suppliers"]))
+
 
 
 # The exclude=None path must not leak to any rule that has not earned it. Two have:

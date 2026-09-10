@@ -4791,6 +4791,185 @@ SPECIALITY_RULES = {
         ),
     },
 
+    "ent-and-head-and-neck": {
+        "label": "ENT and Head and Neck",
+        # THREE FRAMEWORKS, AND THE PATTERN NAMES ALL THREE EXPLICITLY BECAUSE NHS
+        # SUPPLY CHAIN'S NAMING IS COUNTER-INTUITIVE IN BOTH DIRECTIONS ON THIS PATCH.
+        # All 110 NHSSC framework names were read for this build.
+        #   "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related
+        #     Services" is the one with the speciality's name on it. Its own Product
+        #     Categories section lists only Fibre Optic Endoscopes, Intubating
+        #     Endoscopes, Video Endoscopes and Video Processors / Light Source -- it is
+        #     the FLEXIBLE and video half of the patch and nothing else.
+        #   "Rigid Endoscopy and Associated Options and Related Services" does not say
+        #     ENT in its title, and "ENT Scopes" is one of the nine product categories
+        #     it publishes. The rigid ENT set is bought there, from 18 suppliers, not
+        #     from the 7 on the framework named after the speciality. It is also
+        #     claimed by the urology page, correctly: one agreement, several clinical
+        #     homes, the same way an eye pad is counted on both wound care and
+        #     ophthalmology.
+        #   "Dental Technologies, Implants and Related Consumables and Services" carries
+        #     the OMFS half. Its brief states in its own words that it covers "multiple
+        #     dental disciplines including orthodontics and maxillofacial". It is named
+        #     in this pattern but it does NOT reach the panel, and that is correct
+        #     behaviour rather than a miss: frameworks.json holds it in `unparsed` with
+        #     the reason "the page states 33 suppliers but 35 were parsed - refusing
+        #     rather than publishing a list that does not match the page". The brief
+        #     renders three delisted names (Hospital Services, Straumann, Wyvern) in the
+        #     same block as the awarded ones, and its own awarded list prints "RPA
+        #     Dental Equipment" twice, so 32 distinct awarded names + 3 delisted = 35
+        #     against a stated 33. The refusal is the gate working. Do not loosen it to
+        #     make this panel show three frameworks; the coverage note says what is
+        #     missing and why.
+        # DELIBERATELY NOT CLAIMED, each for a stated reason, not an oversight:
+        #   "Flexible Endoscopes and Associated Options and Related Services" shares the
+        #     ENT framework's procurement reference but publishes ten product
+        #     categories -- bronchoscopes, gastroscopes, duodenoscopes, cystoscopes,
+        #     ureteroscopes and the rest -- and not one of them is an ENT scope. Its own
+        #     overview says it is used "by Endoscopy and Gastroenterology professionals".
+        #   "Audiological Diagnostics Implantable Devices and Services" is the
+        #     audiology-and-hearing page's framework, and the boundary between these two
+        #     pages is drawn there.
+        #   "Airway Management Products and Associated Equipment" holds the tracheostomy
+        #     tubes and is claimed by theatres-and-surgical and critical care.
+        "frameworks": r"(ear,? nose and throat|\(ENT\)|rigid endoscopy|dental technologies)",
+        # EVERY MATCH WAS READ. The unrefined version of this pattern returned 28 rows
+        # in tender-history.json and 8 in framework-awards.json. Sixteen survive, and
+        # the twelve that do not were removed by refusing terms in the include rather
+        # than excluding them afterwards, which is the standard the renal and
+        # ophthalmology rules set.
+        #
+        # REFUSED FROM THE INCLUDE:
+        #   hearing, audiolog*, audiometr*, cochlear, tinnitus, ear mould, vestibular
+        #                 -> eight real rows (Hearing Aid Batteries, Audiology Products
+        #                    twice, 981 Audiology Equipment, Audiological Equipment,
+        #                    Audiological Diagnostics Implantable Devices Accessories &
+        #                    Services 2024, Cochlear Implants and Accessories, Hearing
+        #                    Aids Hearing Aid Batteries Custom Ear Moulds). None of
+        #                    those is a false positive -- every one is a genuine
+        #                    purchase on this clinical territory. They are refused
+        #                    because they belong to the audiology-and-hearing page, and
+        #                    a boundary between two pages is not the same thing as a
+        #                    wrong match. Said plainly here so nobody "fixes" it later.
+        #   laryngoscop*  -> five rows, and all five are airway management rather than
+        #                    ENT: "ED C-MAC Video Laryngoscope", "ESNEFT3113 Purchase of
+        #                    Video Laryngoscopes", "ESNEFT Purchase of Video
+        #                    Laryngoscopes", "Laryngoscope Blades and Associated
+        #                    Consumables", "Laryngoscope Handles and Blades". The
+        #                    intubating laryngoscope and the ENT rhino-laryngoscope
+        #                    share a word and nothing else. ENT's own scopes reach this
+        #                    panel as "nasendoscope", which is admitted.
+        #   bare "sinus"  -> coronary sinus and sinus rhythm are cardiology. Only
+        #                    "sinusitis", "rhinosinusitis" and "paranasal" are admitted.
+        #   bare "pharyn" -> the oropharyngeal airway is anaesthesia's.
+        #   bare "ear"    -> nothing is lost by dropping it once hearing is refused, and
+        #                    it is the highest-risk single word in the list.
+        # ADMITTED AND WORTH SAYING WHY: "dental implant*" is admitted although two of
+        # its three rows are Leidos Supply Limited, which is Defence Medical Services
+        # rather than NHS. Bespoke dental implants are an OMFS product wherever they are
+        # bought, and the buyer is published beside each row so a reader can judge it.
+        "include": (
+            r"\b(ENT|otolaryng\w*|otolog\w*|rhinolog\w*|rhinoplast\w*|rhinosinusit\w*|"
+            r"septoplast\w*|turbinate\w*|"
+            r"nasal|nose|nasendoscop\w*|paranasal|sinusitis|"
+            r"tonsil\w*|adenoid\w*|grommet\w*|tympan\w*|myringo\w*|mastoid\w*|otitis|"
+            r"otoscop\w*|stapes|"
+            r"epistaxis|tracheostom\w*|laryngectom\w*|voice prosthes\w*|"
+            r"head and neck|maxillofacial|OMFS|oral surgery|orthognathic|dental implant\w*|"
+            r"thyroidectom\w*|parathyroid\w*|salivary|parotid|throat)\b"
+        ),
+        # ONE PATTERN, AND IT IS HERE BECAUSE A REAL ROW MATCHED AND WAS WRONG.
+        # "The supply of Nasal Cannula & Oxygen Masks for Pandemic Preparedness 24/25",
+        # Secretary of State for Health and Social Care. A nasal cannula is oxygen
+        # therapy: it goes in the nose and has nothing to do with this speciality. The
+        # neighbouring forms are excluded with it before one of them arrives.
+        "exclude": r"\b(nasal cannula\w*|nasal high flow|nasal prong\w*|nasal oxygen|nasogastric)\b",
+        # THE TWO CPV CODES SEEN ON GENUINE ROWS IN THIS DATA: 85121240, on Kettering
+        # General Hospital's ENT Outsourcing notice, is the ENT services code;
+        # 85111100 is on University Hospital Southampton's Urology and OMFS Insourcing
+        # award. They corroborate only -- both of this patch's live procurement rows
+        # reach the panel on their titles.
+        "cpv": ("85121240", "85111100"),
+        # PART IXA, SLICED, AND IT IS A REAL COMMUNITY MARKET THAT A HOSPITAL-FACING
+        # ENT REP NEVER SEES. 645 lines, 19 virtual medicinal products, 31 suppliers,
+        # reimbursed from 33p to 174.18 pounds, all inside Part IXA. It is the
+        # head and neck cancer survivorship range -- tracheostomy breathing aids (483
+        # lines on their own), tracheostomy and laryngectomy protectors, tube holders,
+        # cleaning devices, tracheostomy dressings and voice prosthesis cleaning
+        # brushes -- plus the small primary care ENT range: olive oil, sodium
+        # bicarbonate and Burow's solution ear drops, sea water and sodium chloride
+        # nasal preparations, the nasal aspirator, and one auto inflation device.
+        #
+        # WHY THE PATTERN IS A LIST OF ANCHORED NAMES AND NOT A KEYWORD. Part IXA is
+        # 56,833 lines and the loose ENT words select rubbish from it: "nasal" alone
+        # reaches sodium chloride nebuliser solutions, and "ear" reaches every
+        # lymphoedema garment with "waist/hip" in the description via "wear". Each of
+        # the 19 virtual products below was read and named. Stoma caps were tested and
+        # REFUSED: all 14 lines are Part IXC ostomy appliances (Assura Minicap, Nova
+        # MiniCap, Confidence Gold), not laryngectomy stoma covers, and they belong to
+        # colorectal-gi-and-endoscopy.
+        #
+        # THE OVERLAP WITH RESPIRATORY, MEASURED AND STATED RATHER THAN DISCOVERED
+        # LATER. The respiratory rule already claims four of these families -- peak flow
+        # meters plus tracheostomy breathing aids, tube holders and cleaning devices and
+        # the tracheostomy and laryngectomy protectors -- 608 Part IXA lines in all.
+        # 582 of this rule's 645 lines are the same rows. That is deliberate and it is
+        # correct: the tracheostomy and laryngectomy range has two clinical homes, the
+        # head and neck surgeon and cancer multidisciplinary team who create and manage
+        # the stoma, and the respiratory team who manage the airway through it. The 63
+        # lines that are ONLY on this page are the ones no respiratory reading reaches:
+        # 15 voice prosthesis cleaning brushes, 15 tracheostomy dressings, 21 ear drop
+        # lines, 11 nasal preparation lines and the single auto inflation device. The
+        # 26 peak flow meter lines are respiratory's alone and are not claimed here.
+        # Whoever next rebuilds the respiratory page should decide whether the voice
+        # prosthesis and laryngectomy protector families belong there at all; this build
+        # did not change another speciality's rule, it recorded the question.
+        #
+        # ONE FURTHER OVERLAP, STATED. The tracheostomy dressings are dressings and also
+        # sit inside the Part IXA range that tissue viability and wound care claims
+        # whole. Counted on both, correctly: one product, two clinical homes.
+        "tariffParts": ("IXA",),
+        "tariffVmp": (
+            r"^(Tracheostomy|Voice prosthesis|Laryngectomy|Auto inflation device|"
+            r"Olive oil ear drops|Sodium bicarbonate 5% ear drops|Burow|"
+            r"Sea water nasal spray|Sesame oil nasal spray|Nasal aspirator|"
+            r"Sodium chloride 0\.9% nasal drops)"
+        ),
+        "coverageNote": (
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch is two specialities "
+            "sharing a page -- ear, nose and throat surgery and oral and maxillofacial "
+            "surgery -- and neither of them buys most of its product through an "
+            "agreement with its own name on it. The framework named after ENT covers "
+            "flexible and video endoscopes only; the rigid ENT set is on Rigid "
+            "Endoscopy, and the OMFS half is on Dental Technologies. Everything else "
+            "this patch uses -- the microdebriders, coblation wands, image guidance "
+            "systems, operating microscopes, nerve monitors, sinus balloons, tonsil "
+            "instruments, tracheostomy tubes and the head and neck cancer implants -- "
+            "is bought on cross-speciality agreements owned by theatres, capital or "
+            "critical care, or trust by trust. Being named on a framework here is not "
+            "evidence of volume on this patch, and being absent from one is not "
+            "evidence of absence from the market. The audiology half of ear surgery -- "
+            "cochlear implants, bone conduction devices, diagnostic and fitting "
+            "equipment -- is on the Audiological Diagnostics Implantable Devices and "
+            "Services framework and is counted on the audiology and hearing page, not "
+            "here. ONE FRAMEWORK IS MISSING FROM THE LIST ABOVE ON PURPOSE. Dental "
+            "Technologies, Implants and Related Consumables and Services (2023/S "
+            "000-008274, 5 January 2024 to 4 January 2028, 11 lots) is this patch's "
+            "OMFS agreement and the Hub refuses to publish its supplier list, because "
+            "NHS Supply Chain's own brief states 33 suppliers and the page parses 35: "
+            "it renders three delisted names in the same block as the awarded ones and "
+            "prints RPA Dental Equipment twice. A list that does not match the page it "
+            "came from is not published here. Read the brief itself for that "
+            "framework. THE DRUG TARIFF PANEL BELOW OVERLAPS THE RESPIRATORY PAGE ON "
+            "PURPOSE: 582 of its 645 lines are the tracheostomy and laryngectomy range, "
+            "which is counted there too because the airway through the stoma is "
+            "respiratory's and the stoma itself is this speciality's. The 63 lines "
+            "unique to this page are the voice prosthesis cleaning brushes, the "
+            "tracheostomy dressings, the ear drops, the nasal preparations and the one "
+            "auto inflation device."
+        ),
+    },
+
 }
 
 

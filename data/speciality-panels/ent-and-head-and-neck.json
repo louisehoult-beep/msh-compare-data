@@ -1,0 +1,559 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "ent-and-head-and-neck",
+ "label": "ENT and Head and Neck",
+ "defined": true,
+ "generated": "2026-09-10",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-09T11:18:46+00:00",
+  "openTenders": "09/09/2026",
+  "drugTariff": "2026-09-09"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /(ear,? nose and throat|\\(ENT\\)|rigid endoscopy|dental technologies)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch is two specialities sharing a page -- ear, nose and throat surgery and oral and maxillofacial surgery -- and neither of them buys most of its product through an agreement with its own name on it. The framework named after ENT covers flexible and video endoscopes only; the rigid ENT set is on Rigid Endoscopy, and the OMFS half is on Dental Technologies. Everything else this patch uses -- the microdebriders, coblation wands, image guidance systems, operating microscopes, nerve monitors, sinus balloons, tonsil instruments, tracheostomy tubes and the head and neck cancer implants -- is bought on cross-speciality agreements owned by theatres, capital or critical care, or trust by trust. Being named on a framework here is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. The audiology half of ear surgery -- cochlear implants, bone conduction devices, diagnostic and fitting equipment -- is on the Audiological Diagnostics Implantable Devices and Services framework and is counted on the audiology and hearing page, not here. ONE FRAMEWORK IS MISSING FROM THE LIST ABOVE ON PURPOSE. Dental Technologies, Implants and Related Consumables and Services (2023/S 000-008274, 5 January 2024 to 4 January 2028, 11 lots) is this patch's OMFS agreement and the Hub refuses to publish its supplier list, because NHS Supply Chain's own brief states 33 suppliers and the page parses 35: it renders three delisted names in the same block as the awarded ones and prints RPA Dental Equipment twice. A list that does not match the page it came from is not published here. Read the brief itself for that framework. THE DRUG TARIFF PANEL BELOW OVERLAPS THE RESPIRATORY PAGE ON PURPOSE: 582 of its 645 lines are the tracheostomy and laryngectomy range, which is counted there too because the airway through the stoma is respiratory's and the stoma itself is this speciality's. The 63 lines unique to this page are the voice prosthesis cleaning brushes, the tracheostomy dressings, the ear drops, the nasal preparations and the one auto inflation device.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch is two specialities sharing a page -- ear, nose and throat surgery and oral and maxillofacial surgery -- and neither of them buys most of its product through an agreement with its own name on it. The framework named after ENT covers flexible and video endoscopes only; the rigid ENT set is on Rigid Endoscopy, and the OMFS half is on Dental Technologies. Everything else this patch uses -- the microdebriders, coblation wands, image guidance systems, operating microscopes, nerve monitors, sinus balloons, tonsil instruments, tracheostomy tubes and the head and neck cancer implants -- is bought on cross-speciality agreements owned by theatres, capital or critical care, or trust by trust. Being named on a framework here is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. The audiology half of ear surgery -- cochlear implants, bone conduction devices, diagnostic and fitting equipment -- is on the Audiological Diagnostics Implantable Devices and Services framework and is counted on the audiology and hearing page, not here. ONE FRAMEWORK IS MISSING FROM THE LIST ABOVE ON PURPOSE. Dental Technologies, Implants and Related Consumables and Services (2023/S 000-008274, 5 January 2024 to 4 January 2028, 11 lots) is this patch's OMFS agreement and the Hub refuses to publish its supplier list, because NHS Supply Chain's own brief states 33 suppliers and the page parses 35: it renders three delisted names in the same block as the awarded ones and prints RPA Dental Equipment twice. A list that does not match the page it came from is not published here. Read the brief itself for that framework. THE DRUG TARIFF PANEL BELOW OVERLAPS THE RESPIRATORY PAGE ON PURPOSE: 582 of its 645 lines are the tracheostomy and laryngectomy range, which is counted there too because the airway through the stoma is respiratory's and the stoma itself is this speciality's. The 63 lines unique to this page are the voice prosthesis cleaning brushes, the tracheostomy dressings, the ear drops, the nasal preparations and the one auto inflation device.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(ENT|otolaryng\\w*|otolog\\w*|rhinolog\\w*|rhinoplast\\w*|rhinosinusit\\w*|septoplast\\w*|turbinate\\w*|nasal|nose|nasendoscop\\w*|paranasal|sinusitis|tonsil\\w*|adenoid\\w*|grommet\\w*|tympan\\w*|myringo\\w*|mastoid\\w*|otitis|otoscop\\w*|stapes|epistaxis|tracheostom\\w*|laryngectom\\w*|voice prosthes\\w*|head and neck|maxillofacial|OMFS|oral surgery|orthognathic|dental implant\\w*|thyroidectom\\w*|parathyroid\\w*|salivary|parotid|throat)\\b/i and does not match /\\b(nasal cannula\\w*|nasal high flow|nasal prong\\w*|nasal oxygen|nasogastric)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 85121240 or 85111100 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /^(Tracheostomy|Voice prosthesis|Laryngectomy|Auto inflation device|Olive oil ear drops|Sodium bicarbonate 5% ear drops|Burow|Sea water nasal spray|Sesame oil nasal spray|Nasal aspirator|Sodium chloride 0\\.9% nasal drops)/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
+ },
+ "counts": {
+  "frameworks": 2,
+  "suppliers": 19,
+  "suppliersUnresolved": 1,
+  "awardsShown": 16,
+  "awardsMatched": 16,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ear-nose-and-throat-ent-endoscopes-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 7,
+   "supplierSource": "no stated count on the page; 7 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "DP Medical",
+    "Aquilant Endoscopy limited",
+    "Karl Storz",
+    "LiteOptics Limited",
+    "Olympus KeyMed",
+    "Pentax Medical",
+    "Richard Wolf UK Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Rigid Endoscopy and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/rigid-endoscopy-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 18,
+   "supplierSource": "no stated count on the page; 18 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Aquilant Ltd",
+    "Arthrex Limited",
+    "B. Braun Medical Limited",
+    "Conmed UK Limited",
+    "DP Medical",
+    "Emmat Medical",
+    "G S Medical",
+    "Karl Storz Endoscopy (UK) Limited",
+    "LiteOptics Limited",
+    "Locamed Limited",
+    "Medtronic Limited",
+    "Novus Med",
+    "Olympus KeyMed",
+    "Pentax UK Limited",
+    "RB Medical Engineering Limited",
+    "Richard Wolf UK Limited",
+    "Smith and Nephew",
+    "Stryker UK Limited"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "D.P. Medical Systems Limited",
+   "resolved": true,
+   "variants": [
+    "DP Medical"
+   ],
+   "frameworks": [
+    "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz",
+    "Karl Storz Endoscopy (UK) Limited"
+   ],
+   "frameworks": [
+    "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "LiteOptics",
+   "resolved": true,
+   "variants": [
+    "LiteOptics Limited"
+   ],
+   "frameworks": [
+    "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Olympus (KeyMed)",
+   "resolved": true,
+   "variants": [
+    "Olympus KeyMed"
+   ],
+   "frameworks": [
+    "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Pentax Medical",
+   "resolved": true,
+   "variants": [
+    "Pentax Medical",
+    "Pentax UK Limited"
+   ],
+   "frameworks": [
+    "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Richard Wolf UK",
+   "resolved": true,
+   "variants": [
+    "Richard Wolf UK Limited"
+   ],
+   "frameworks": [
+    "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Aquilant Endoscopy Limited",
+   "resolved": true,
+   "variants": [
+    "Aquilant Endoscopy limited"
+   ],
+   "frameworks": [
+    "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [
+    "Aquilant Ltd"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Arthrex",
+   "resolved": true,
+   "variants": [
+    "Arthrex Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B. Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Conmed UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Conmed UK Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Emmat Medical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "G S Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "LocaMed Ltd",
+   "resolved": true,
+   "variants": [
+    "Locamed Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Novus Med Ltd",
+   "resolved": true,
+   "variants": [
+    "Novus Med"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "RB Medical Engineering Ltd",
+   "resolved": true,
+   "variants": [
+    "RB Medical Engineering Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Smith+Nephew",
+   "resolved": true,
+   "variants": [
+    "Smith and Nephew"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Stryker",
+   "resolved": true,
+   "variants": [
+    "Stryker UK Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "ENT Outsourcing",
+   "buyer": "Kettering General Hospital NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084137-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121240"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "WPL06900 - Urology and OMFS Insourcing",
+   "buyer": "UNIVERSITY HOSPITAL SOUTHAMPTON NHS FOUNDATION TRUST",
+   "supplier": "18 Week Support Limited",
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078403-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "WSFT - Capital Purchase - ENT - Disinfection equipment incl Warranty device",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": "WASSENBURG MEDICAL LTD",
+   "date": "2026-07-24",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/3b3d91d7-6760-4518-a66f-82aaac12e0ce",
+   "value": 237110,
+   "periodEnd": "2027-06-29",
+   "source": "tender-history"
+  },
+  {
+   "title": "WSFT - ENT - Werewolf Generator service contract",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": "TJ SMITH & NEPHEW LTD",
+   "date": "2026-07-15",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/8720ffda-c9f5-4eaf-95fd-46291eef7829",
+   "value": 16014,
+   "periodEnd": "2031-06-28",
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Nasendoscopes",
+   "buyer": "Hywel Dda University Health Board",
+   "supplier": "KARL STORZ ENDOSCOPY (UK) LIMITED",
+   "date": "2026-07-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/065414-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT2730 Purchase of ENT Laser",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Carleton Medical Limited",
+   "date": "2026-03-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027424-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT2728 Purchase of ENT Microscope for Theatre",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "LEICA MICROSYSTEMS (UK) LIMITED",
+   "date": "2026-03-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027454-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Tracheostomy Tubes, Tube Holders and Accessories - 5806781",
+   "buyer": "Business Services Organisation Procurement and Logistics Service",
+   "supplier": "Fannin Limited, Healthcare 21 NI, Iskus Health Limited",
+   "date": "2025-05-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028413-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ENT, Ophthalmology & Skin Medicines/Medical Devices",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Scope Ophthalmics Limited, Consilient Health Ltd, AbbVie Ltd, Altacor, Aspire Ph",
+   "date": "2024-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/030345-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Tracheostomy Tubes and Accessories",
+   "buyer": "NHS National Services Scotland",
+   "supplier": "Atos UK, Smiths Medical International Ltd, Healthcare 21 UK Ltd.",
+   "date": "2024-01-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/003225-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Provision of Bespoke Dental Implants",
+   "buyer": "Leidos Supply Limited",
+   "supplier": "Nobel Biocare UK and Ireland Ltd.",
+   "date": "2024-01-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002750-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "LSL/MED/0149 - The Provision of Bespoke Dental Implants",
+   "buyer": "Leidos Supply",
+   "supplier": "Nobel Biocare UK and Ireland Ltd.",
+   "date": "2023-09-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027395-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Provision of 3D Dental Implants",
+   "buyer": "NHS Wales Shared Services Partnership - Procurement Services",
+   "supplier": "3D Metal Printing Ltd",
+   "date": "2023-04-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/012246-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP37122 ENT, Ophthalmology & Skin Medicines/Medical Devices",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Zentiva Pharma UK Ltd, Thornton & Ross, TJ Smith and Nephew Ltd (Trading as Smit",
+   "date": "2022-09-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027484-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Tracheostomy Tubes, Tube Holders and Accessories [3064381]",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "NORTHERN HOSPITAL SUPPLIES LTD, KAPITEX HEALTHCARE LIMITED, Healthcare 21 NI, Sm",
+   "date": "2021-11-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027918-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP14220 Neonatal and Paediatric Tracheostomy Tubes",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Smiths Medical International Ltd",
+   "date": "2021-02-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002403-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": {
+  "parts": [
+   "IXA"
+  ],
+  "vmpFilter": "^(Tracheostomy|Voice prosthesis|Laryngectomy|Auto inflation device|Olive oil ear drops|Sodium bicarbonate 5% ear drops|Burow|Sea water nasal spray|Sesame oil nasal spray|Nasal aspirator|Sodium chloride 0\\.9% nasal drops)",
+  "vmpCount": 19,
+  "effectiveMonth": "2026-09",
+  "dataAsOf": "2026-09-09",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
+  "lineCount": 645,
+  "supplierCount": 31,
+  "topSuppliers": [
+   {
+    "name": "Severn Healthcare Technologies Ltd",
+    "lines": 226
+   },
+   {
+    "name": "Atos Medical AB",
+    "lines": 172
+   },
+   {
+    "name": "Healthcare 21",
+    "lines": 71
+   },
+   {
+    "name": "Smiths Medical International Ltd",
+    "lines": 52
+   },
+   {
+    "name": "Sheffmed Ltd",
+    "lines": 34
+   },
+   {
+    "name": "Insight Medical Products Ltd",
+    "lines": 16
+   },
+   {
+    "name": "Advancis Medical",
+    "lines": 14
+   },
+   {
+    "name": "JLJ Healthcare Ltd",
+    "lines": 6
+   },
+   {
+    "name": "Kapitex Healthcare Ltd",
+    "lines": 6
+   },
+   {
+    "name": "CCMed Ltd",
+    "lines": 5
+   },
+   {
+    "name": "AHA Sales Services Ltd",
+    "lines": 4
+   },
+   {
+    "name": "Church & Dwight UK Ltd",
+    "lines": 4
+   },
+   {
+    "name": "Teleflex",
+    "lines": 4
+   },
+   {
+    "name": "TriOn Pharma Ltd",
+    "lines": 3
+   },
+   {
+    "name": "Zuche Pharmaceuticals Ltd",
+    "lines": 3
+   },
+   {
+    "name": "Alissa Healthcare Research Ltd",
+    "lines": 2
+   },
+   {
+    "name": "Allergy Kids Ltd",
+    "lines": 2
+   },
+   {
+    "name": "Bell,Sons & Co (Druggists) Ltd",
+    "lines": 2
+   },
+   {
+    "name": "Biovantic Pharma Ltd",
+    "lines": 2
+   },
+   {
+    "name": "Essential-Healthcare Ltd",
+    "lines": 2
+   }
+  ],
+  "priceMin": 0.33,
+  "priceMax": 174.18
+ }
+}
