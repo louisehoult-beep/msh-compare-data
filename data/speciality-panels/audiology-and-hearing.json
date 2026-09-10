@@ -1,0 +1,509 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "audiology-and-hearing",
+ "label": "Audiology and Hearing",
+ "defined": true,
+ "generated": "2026-09-10",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-10T11:14:59+00:00",
+  "openTenders": "10/09/2026",
+  "drugTariff": "2026-09-10"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(audiolog\\w*|hearing aids?|cochlear|ear moulds?)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Both of this patch's national agreements are in their final years -- Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories ends 26 March 2027 and Audiological Diagnostics Implantable Devices and Services ends 1 April 2028 -- and their successor has not been awarded, so it is not in the Hub's framework dataset and cannot be. Being named on either framework below is a statement about the current agreements only. TWO ROWS THAT ARE PROBABLY THIS SPECIALITY ARE NOT COUNTED, and it is worth saying which rather than letting a reader assume the feed is complete. Leeds Teaching Hospitals' \"Purchase of Screening Kits\", won by Natus Nicolet UK, is very likely newborn hearing screening, and Diatec Diagnostics' \"New equipment (2 x Titan)\" is very likely the Interacoustics Titan tympanometry and otoacoustic emissions platform. Both are refused because neither title can carry the claim on its own: screening kits are bought for a dozen clinical purposes and Titan is a product name in several industries. Matching either on the supplier's name instead of the title would admit every notice a diagnostics distributor ever won. THE SUPPLIER COUNT BELOW IS ONE HIGHER THAN THE NUMBER OF COMPANIES, AND HERE IS WHY. WS Audiology and Sivantos Limited are the same firm: Companies House 00203774 was SIEMENS HEARING INSTRUMENTS LTD, became SIVANTOS LIMITED on 20 March 2015 and has been WS AUDIOLOGY LIMITED since 29 September 2022. NHS Supply Chain named it Sivantos Limited on the 2022 hearing aid agreement and WS Audiology on the 2024 audiological diagnostics agreement, which is correct for the date each was signed. The Hub's supplier seed still holds the two names as two separate supplier records, so the alias registry cannot merge them and the list below shows 25 entries for 24 companies. The names are published exactly as the procurement record states them; merging the two seed records is a change to shared supplier data that affects the compare tab as well as this panel, so it is recorded here rather than made quietly inside a single speciality build. THE SURGICAL HALF OF EAR CARE IS NOT HERE: mastoid, tympanoplasty, grommet and stapes work, the ENT endoscopes framework and the operating microscopes those procedures use are on the ENT and head and neck page, which claims them explicitly. This page is hearing and balance -- assessment, aids, implants, tinnitus and vestibular.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Both of this patch's national agreements are in their final years -- Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories ends 26 March 2027 and Audiological Diagnostics Implantable Devices and Services ends 1 April 2028 -- and their successor has not been awarded, so it is not in the Hub's framework dataset and cannot be. Being named on either framework below is a statement about the current agreements only. TWO ROWS THAT ARE PROBABLY THIS SPECIALITY ARE NOT COUNTED, and it is worth saying which rather than letting a reader assume the feed is complete. Leeds Teaching Hospitals' \"Purchase of Screening Kits\", won by Natus Nicolet UK, is very likely newborn hearing screening, and Diatec Diagnostics' \"New equipment (2 x Titan)\" is very likely the Interacoustics Titan tympanometry and otoacoustic emissions platform. Both are refused because neither title can carry the claim on its own: screening kits are bought for a dozen clinical purposes and Titan is a product name in several industries. Matching either on the supplier's name instead of the title would admit every notice a diagnostics distributor ever won. THE SUPPLIER COUNT BELOW IS ONE HIGHER THAN THE NUMBER OF COMPANIES, AND HERE IS WHY. WS Audiology and Sivantos Limited are the same firm: Companies House 00203774 was SIEMENS HEARING INSTRUMENTS LTD, became SIVANTOS LIMITED on 20 March 2015 and has been WS AUDIOLOGY LIMITED since 29 September 2022. NHS Supply Chain named it Sivantos Limited on the 2022 hearing aid agreement and WS Audiology on the 2024 audiological diagnostics agreement, which is correct for the date each was signed. The Hub's supplier seed still holds the two names as two separate supplier records, so the alias registry cannot merge them and the list below shows 25 entries for 24 companies. The names are published exactly as the procurement record states them; merging the two seed records is a change to shared supplier data that affects the compare tab as well as this panel, so it is recorded here rather than made quietly inside a single speciality build. THE SURGICAL HALF OF EAR CARE IS NOT HERE: mastoid, tympanoplasty, grommet and stapes work, the ENT endoscopes framework and the operating microscopes those procedures use are on the ENT and head and neck page, which claims them explicitly. This page is hearing and balance -- assessment, aids, implants, tinnitus and vestibular.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(audiolog\\w*|audiometr\\w*|hearing aids?|hearing loss|hearing screening|hearing assessment|hearing therap\\w*|hearing services?|hearing care|hearing tests?|hearing loop|assistive listening|induction loop|cochlear|auditory implant\\w*|auditory brainstem|bone conduction|bone anchored|ear moulds?|earmoulds?|tinnitus|otoacoustic|tympanometr\\w*|ototox\\w*|vestibular|balance clinic|deaf|deafness)\\b/i and does not match /\\bdeaf awareness\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33185200 or 85121240 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 2,
+  "suppliers": 25,
+  "suppliersUnresolved": 0,
+  "awardsShown": 16,
+  "awardsMatched": 16,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Audiological Diagnostics Implantable Devices and Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/audiological-implantable-devices/",
+   "reference": "2023/S 000-007624",
+   "category": "Medical Technology",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "2 April 2024",
+   "ends": "1 April 2028",
+   "supplierCount": 15,
+   "supplierSource": "count verified against the page's own stated total (15)",
+   "suppliers": [
+    "Advanced Bionics",
+    "Amplivox Ltd",
+    "Audit Data",
+    "Cochlear Europe",
+    "Cosium Healthcare",
+    "Diatec Diagnostics",
+    "Guymark",
+    "Interacoustics",
+    "Med-El Ltd",
+    "Natus Nicolet UK",
+    "Oticon Ltd",
+    "Otodynamics",
+    "Puretone Ltd",
+    "Sheffmed Limited",
+    "WS Audiology"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/hearing-aids-and-custom-ear-moulds/",
+   "reference": "2022/S 000-010796",
+   "category": "Medical Technology",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "27 March 2023",
+   "ends": "26 March 2027",
+   "supplierCount": 13,
+   "supplierSource": "count verified against the page's own stated total (13)",
+   "suppliers": [
+    "GN ReSound UK Ltd",
+    "Oticon Limited",
+    "Puretone Ltd",
+    "Sivantos Limited",
+    "Phonak/Sonova UK",
+    "Starkey Laboratories Limited",
+    "Energizer Group Ltd",
+    "Varta Microbattery GmbH",
+    "DCL Hearing Ltd",
+    "Minerva Laboratories Ltd",
+    "Normanby Laboratory Services Ltd",
+    "Sonic Labs",
+    "Universal Aids"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Oticon",
+   "resolved": true,
+   "variants": [
+    "Oticon Limited",
+    "Oticon Ltd"
+   ],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services",
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "Puretone",
+   "resolved": true,
+   "variants": [
+    "Puretone Ltd"
+   ],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services",
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "Advanced Bionics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services"
+   ]
+  },
+  {
+   "name": "Amplivox",
+   "resolved": true,
+   "variants": [
+    "Amplivox Ltd"
+   ],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services"
+   ]
+  },
+  {
+   "name": "Audit Data",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services"
+   ]
+  },
+  {
+   "name": "Cochlear Europe",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services"
+   ]
+  },
+  {
+   "name": "Cosium Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services"
+   ]
+  },
+  {
+   "name": "DCL Hearing Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "Diatec Diagnostics (Interacoustics)",
+   "resolved": true,
+   "variants": [
+    "Diatec Diagnostics",
+    "Interacoustics"
+   ],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services"
+   ]
+  },
+  {
+   "name": "Energizer Group Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "GN ReSound UK",
+   "resolved": true,
+   "variants": [
+    "GN ReSound UK Ltd"
+   ],
+   "frameworks": [
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "Guymark",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services"
+   ]
+  },
+  {
+   "name": "MED-EL",
+   "resolved": true,
+   "variants": [
+    "Med-El Ltd"
+   ],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services"
+   ]
+  },
+  {
+   "name": "Minerva Laboratories Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "Natus Nicolet UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services"
+   ]
+  },
+  {
+   "name": "Normanby Laboratory Services Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "Otodynamics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services"
+   ]
+  },
+  {
+   "name": "Phonak/Sonova UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "Sheffmed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services"
+   ]
+  },
+  {
+   "name": "Sivantos Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "Sonic Labs",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "Starkey Laboratories Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "Universal Aids",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "Varta Microbattery GmbH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories"
+   ]
+  },
+  {
+   "name": "WS Audiology",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Audiological Diagnostics Implantable Devices and Services"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Adult Community Audiology Services",
+   "buyer": "NHS HAMPSHIRE AND THE ISLE OF WIGHT INTEGRATED CARE BOARD",
+   "supplier": null,
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085568-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121240"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Preliminary Market Engagement Questionnaire for Cochlear Implants and Accessories",
+   "buyer": "Business Services Organisation Procurement and Logistics Services",
+   "supplier": null,
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078568-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33185200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Audiology",
+   "buyer": "NHS Cornwall and the Isles of Scilly Integrated Care Board",
+   "supplier": "Scrivens Limited",
+   "date": "2026-08-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077644-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121240"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Audiology",
+   "buyer": "NHS Cornwall and the Isles of Scilly Integrated Care Board",
+   "supplier": "Specsavers Hearcare",
+   "date": "2026-08-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077642-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121240"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Community Audiology - NHS Birmingham and Solihull ICB",
+   "buyer": "NHS Birmingham and Solihull Integrated Care Board",
+   "supplier": null,
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076392-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Diatec - calibration of Audiology equipment",
+   "buyer": "Norfolk and Norwich University Hospitals NHS Foundation Trust",
+   "supplier": "Diatec Diagnostics Limited",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075538-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50420000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "HH072-25-HB Specialist Environmental Aids for Deaf People",
+   "buyer": "NHS Highland",
+   "supplier": "Sarabec Ltd",
+   "date": "2026-04-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/038350-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Hearing Aid Batteries",
+   "buyer": "Royal Berkshire NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2025-04-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/014121-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Audiology Products",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "STARKEY LABORATORIES LIMITED, GN HEARING UK LTD, OTICON LIMITED, SONOVA UK LIMIT",
+   "date": "2025-01-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/003098-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "981 - Audiology Equipment",
+   "buyer": "Aston University",
+   "supplier": "Natus Nicolet U.K. Limited",
+   "date": "2024-12-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/039552-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Bone Conduction",
+   "buyer": "he Common Services Agency (more commonly known as NHS National Services Scotland",
+   "supplier": "MED-EL UK Ltd., Oticon Limited, Cochlear Europe Limited",
+   "date": "2024-06-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/017230-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Audiological Equipment",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Amplivox ltd, Diatec Diagnostics Ltd, Guymark UK Ltd, Natus, PATH MEDICAL GMBH, ",
+   "date": "2023-11-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/034827-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Audiological Diagnostics, Implantable Devices, Accessories & Services 2024",
+   "buyer": "NHS Supply Chain",
+   "supplier": "ADVANCED BIONICS UK LIMITED, COCHLEAR EUROPE LIMITED, Med-EL UK Limited, Oticon ",
+   "date": "2023-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028594-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Cochlear Implants and Accessories",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "MED-EL UK LIMITED, OTICON LTD, ADVANCED BIONICS UK LIMITED, COCHLEAR EUROPE LIMI",
+   "date": "2023-01-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000692-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories",
+   "buyer": "NHS Supply Chain Operated by Health Solutions Team Limited acting as agent of Su",
+   "supplier": "GN Hearing UK Limited, Oticon Limited, Puretone Limited, Sivantos Limited, Sonov",
+   "date": "2022-11-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/032576-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Audiology Products",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "MED-EL UK Ltd., GN Hearing UK LTD, Oticon Limited, Puretone Ltd, Phonak, Sivanto",
+   "date": "2021-01-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001774-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}

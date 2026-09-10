@@ -44,6 +44,7 @@ STROKE = "stroke"
 OPHTH = "ophthalmology"
 CC = "critical-care"
 ENT = "ent-and-head-and-neck"
+AUDIO = "audiology-and-hearing"
 fails = []
 
 
@@ -4457,6 +4458,191 @@ check("suppliers come only from the two frameworks",
       en["counts"]["suppliers"] > 0 and
       all(s.get("frameworks") for s in en["suppliers"]))
 
+
+
+# ---------------------------------------------------------------------------
+# AUDIOLOGY AND HEARING. Four dangers, and only one of them is an ordinary false
+# positive. The first is the word "audio", which in this data reaches a
+# government department's conference AV contract. The second is that the CPV code
+# for audiology services, 85121240, sits on that same AV contract and inside two
+# 25-code baskets, so this patch is the sharpest proof in the dataset that CPV
+# must corroborate and never admit. The third is the border with ENT: this page
+# owns hearing and balance, that page owns ear surgery, and both rules have to
+# hold the line from their own side. The fourth is the supplier count, where one
+# company is named twice because the Hub's seed carries it as two records.
+# ---------------------------------------------------------------------------
+print("\nAUDIOLOGY AND HEARING")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), AUDIO],
+               check=True, capture_output=True)
+au = load_panel(AUDIO)
+check("panel is defined", au.get("defined") is True)
+check("label is the page's own", au["label"] == "Audiology and Hearing")
+
+_au_rule = B.SPECIALITY_RULES[AUDIO]
+_au_rx = B.compile_rule(_au_rule)
+
+print("  the one false positive, a real row read on 10/09/2026")
+# Mersey and West Lancashire Teaching Hospitals, CPV 80561000 — health training
+# services. It reached the panel on "deaf" and it is workforce education, not a
+# purchase of hearing products or a commissioned hearing service.
+check("refused (staff training, not a hearing purchase): Deaf Awareness Training Courses",
+      not B.match_title(_au_rx, "Deaf Awareness Training Courses"))
+# ...and the row "deaf" was admitted for must keep reaching the panel, or the
+# exclusion has been widened into the thing it was meant to protect.
+check("but deaf people's equipment still reaches it",
+      B.match_title(_au_rx, "HH072-25-HB Specialist Environmental Aids for Deaf People"))
+
+print("  bare audio, refused from the include and not argued with afterwards")
+check("refused (a conference, DESNZ): Audio Visual (AV) Event Support",
+      not B.match_title(_au_rx, "Audio Visual (AV) Event Support For International Conference"))
+
+print("  bare sound would annex every ultrasound row in the dataset")
+for bad in ["Philips Epiq Elite Diagnostic Ultrasound for Breast Clinic CHH",
+            "0P002146 Fujifilm Sonosite Ultrasound machine ED SRH - Direct Award Purchase",
+            "PROJ007278_Replacement of Trans-Rectal Ultrasound Scanner",
+            "TE9 Portable Diagnostic Ultrasound System",
+            "GE bkActiv Ultrasound"]:
+    check("refused (imaging, not hearing): %s" % bad[:44], not B.match_title(_au_rx, bad))
+
+print("  bare implant would annex orthopaedics and cardiology")
+for bad in ["Foot & Ankle Implants", "KGH Lot 1.5 Trauma Implants Medartis",
+            "Orthopaedic Ankle Replacement Implants", "IMPLANTABLE LOOP RECORDER",
+            "Provision of Bespoke Dental Implants"]:
+    check("refused (another patch's implant): %s" % bad[:44], not B.match_title(_au_rx, bad))
+# IMPLANTABLE LOOP RECORDER is in that list for a second reason: this include
+# carries "hearing loop" and "induction loop" but never a bare "loop", and a
+# cardiac loop recorder is what a bare one would reach first.
+
+print("  speech and language therapy is a neighbouring service, not this one")
+for bad in ["Provision of 'Experts at Hand' Educational Psychologists, Speech and Language "
+            "and Occupational Therapy Support - Market Engagement",
+            "Experts at Hand Sheffield - Speech and Language Therapy and Occupational Therapy"]:
+    check("refused (SLT, not audiology): %s" % bad[:44], not B.match_title(_au_rx, bad))
+
+print("  the ENT border, held from this side too")
+# The mirror of the audiology boundary test on the ENT rule. These are genuine
+# purchases on the neighbouring page's patch — ear surgery, not hearing — and if
+# any of them starts matching, this page has annexed the operating theatre.
+for other in ["WSFT - Capital Purchase - ENT - Disinfection equipment incl Warranty device",
+              "WSFT - ENT - Werewolf Generator service contract",
+              "ESNEFT2730 Purchase of ENT Laser",
+              "ESNEFT2728 Purchase of ENT Microscope for Theatre",
+              "ENT, Ophthalmology & Skin Medicines/Medical Devices",
+              "ENT Outsourcing",
+              "Purchase of Nasendoscopes",
+              "Tracheostomy Tubes, Tube Holders and Accessories - 5806781"]:
+    check("left to ENT: %s" % other[:44], not B.match_title(_au_rx, other))
+
+print("  and the rows that must keep reaching it")
+for good in ["Hearing Aid Batteries",
+             "Audiology Products",
+             "981 - Audiology Equipment",
+             "Audiological Equipment",
+             "Audiological Diagnostics, Implantable Devices, Accessories & Services 2024",
+             "Cochlear Implants and Accessories",
+             "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories",
+             "Preliminary Market Engagement Questionnaire for Cochlear Implants and Accessories",
+             "Adult Community Audiology Services",
+             "Community Audiology - NHS Birmingham and Solihull ICB",
+             "Diatec - calibration of Audiology equipment",
+             "Bone Conduction",
+             "Audiology"]:
+    check("admitted: %s" % good[:52], B.match_title(_au_rx, good))
+
+check("every award was admitted by its title",
+      all(B.match_title(_au_rx, a["title"]) for a in au["awards"]))
+check("16 awards matched and all 16 are shown",
+      au["counts"]["awardsMatched"] == 16 and au["counts"]["awardsShown"] == 16,
+      "got %s matched / %s shown" % (au["counts"]["awardsMatched"], au["counts"]["awardsShown"]))
+_au_titles = " || ".join((a.get("title") or "") for a in au["awards"]).lower()
+check("no ultrasound row reached the panel", "ultrasound" not in _au_titles)
+check("no audio visual row reached the panel", "audio visual" not in _au_titles)
+check("no deaf awareness row reached the panel", "deaf awareness" not in _au_titles)
+
+print("  CPV corroborates and never admits — the proof case for the whole dataset")
+# 85121240 is the ENT-or-audiology-services code and it really does sit on a
+# Department for Energy Security and Net Zero conference AV contract. If CPV ever
+# starts admitting, that notice is published to a paying member as audiology.
+check("85121240 is carried as corroboration", "85121240" in tuple(_au_rule["cpv"]))
+check("33185200, cochlear implant, is carried too", "33185200" in tuple(_au_rule["cpv"]))
+check("but the AV conference row is still refused on its title",
+      not B.match_title(_au_rx, "Audio Visual (AV) Event Support For International Conference"))
+check("and so are the 25-code baskets",
+      not B.match_title(_au_rx, "Employee Benefits and Occupational Health Services")
+      and not B.match_title(_au_rx,
+          "Provision of Insourced and Outsourced Clinical Services Framework (Framework Reopening)"))
+
+print("  two frameworks, and the one with 'ear' in its name is not one of them")
+check("exactly two frameworks", len(au["frameworks"]) == 2,
+      "got %d" % len(au["frameworks"]))
+_au_fw = sorted(f["name"] for f in au["frameworks"])
+check("Audiological Diagnostics is carried",
+      any(n.startswith("Audiological Diagnostics Implantable Devices") for n in _au_fw))
+check("Hearing Aids, Batteries and Custom Ear Moulds is carried",
+      any(n.startswith("Hearing Aids, Hearing Aid Batteries") for n in _au_fw))
+# The ENT endoscopes framework is the only other NHSSC name carrying "ear". It is
+# ENT surgery's and that page claims it explicitly. Two pages claiming one
+# framework is sometimes correct — Rigid Endoscopy is on ENT and urology both —
+# but this is not one of those, and the pattern is written so it cannot reach it.
+check("ENT Endoscopes is NOT claimed here",
+      not any("Ear, Nose and Throat" in f["name"] for f in au["frameworks"]))
+
+def _au_count(prefix):
+    for f in au["frameworks"]:
+        if f["name"].startswith(prefix):
+            return f.get("supplierCount")
+    return None
+# Both counts are verified against NHS Supply Chain's own stated total on the
+# brief. If either moves, the brief has been reissued and the page's prose needs
+# re-reading before it publishes again.
+check("Audiological Diagnostics still names 15 suppliers",
+      _au_count("Audiological Diagnostics") == 15, "got %s" % _au_count("Audiological Diagnostics"))
+check("Hearing Aids still names 13 suppliers",
+      _au_count("Hearing Aids, Hearing Aid Batteries") == 13,
+      "got %s" % _au_count("Hearing Aids, Hearing Aid Batteries"))
+# The two end dates are the page's whole news story: the agreements expire
+# thirteen months apart and the successor is not awarded.
+_au_ends = sorted(f.get("ends") or "" for f in au["frameworks"])
+check("the two end dates are still 1 April 2028 and 26 March 2027",
+      _au_ends == ["1 April 2028", "26 March 2027"], "got %s" % _au_ends)
+
+print("  no Drug Tariff, and that is measured rather than assumed")
+# All 66,400 lines of Part IX were searched for hearing, audiolog, cochlear,
+# tinnitus, ear mould, auditory and deaf. The answer is zero: hearing aids,
+# batteries, earmoulds and implants are hospital-supplied, not FP10-reimbursed.
+check("no tariff part is claimed", _au_rule.get("tariffParts") is None)
+check("and the panel carries none", au.get("drugTariff") is None)
+check("the published rule says why rather than going quiet",
+      "Part IX" in (au["rules"].get("drugTariff") or ""))
+
+print("  the supplier count, and the one company that is named twice")
+check("no supplier name failed to resolve", au["counts"]["suppliersUnresolved"] == 0)
+check("suppliers come only from the two frameworks",
+      au["counts"]["suppliers"] > 0 and all(s.get("frameworks") for s in au["suppliers"]))
+_au_names = {s["name"] for s in au["suppliers"]}
+for want in ["Advanced Bionics", "Cochlear Europe", "MED-EL", "Oticon", "Puretone"]:
+    check("supplier carried: %s" % want, want in _au_names)
+# Companies House 00203774 was SIEMENS HEARING INSTRUMENTS LTD, became SIVANTOS
+# LIMITED on 20/03/2015 and has been WS AUDIOLOGY LIMITED since 29/09/2022. NHS
+# Supply Chain named it Sivantos on the 2022 agreement and WS Audiology on the
+# 2024 one, which is right for each signing date. The Hub's supplier seed holds
+# the two names as two supplier records, so the alias registry cannot merge them
+# and the panel shows 25 entries for 24 companies. That is disclosed in the
+# published file, and this test fails if the disclosure is ever dropped while the
+# duplicate is still there.
+_au_dup = {"WS Audiology", "Sivantos Limited"} <= _au_names
+check("the seed still carries 00203774 under both its names", _au_dup)
+if _au_dup:
+    check("and the panel says so in its own published text",
+          "Sivantos" in (au["rules"]["suppliers"] or "")
+          and "00203774" in (au["rules"]["suppliers"] or ""))
+    check("25 entries for 24 companies", au["counts"]["suppliers"] == 25,
+          "got %s" % au["counts"]["suppliers"])
+
+print("  open tenders — empty is the honest answer, not a miss")
+check("no open notice on this patch today", au["openTenders"] == [])
+check("and the rule says an empty list means none was open, not none was sought",
+      "empty" in (au["rules"].get("openTenders") or "").lower())
 
 
 # The exclude=None path must not leak to any rule that has not earned it. Two have:

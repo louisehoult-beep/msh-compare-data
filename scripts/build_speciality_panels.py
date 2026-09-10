@@ -4969,6 +4969,169 @@ SPECIALITY_RULES = {
             "auto inflation device."
         ),
     },
+    # PAGE 2916. Scope, in the page's own words: "Adult and paediatric audiology,
+    # hearing aids, implants, tinnitus and balance." The ear as an ORGAN OF HEARING
+    # AND BALANCE, not the ear as a surgical site: mastoid, tympanoplasty, grommets
+    # and stapes surgery are the ENT and head and neck page's, and that page's rule
+    # draws the same boundary from the other side.
+    "audiology-and-hearing": {
+        "label": "Audiology and Hearing",
+        # TWO FRAMEWORKS, AND THEY ARE THE WHOLE NHS SUPPLY CHAIN ROUTE FOR THIS
+        # PATCH. All 121 framework names in frameworks.json were read for this build.
+        #   "Audiological Diagnostics Implantable Devices and Services"
+        #     (2023/S 000-007624, 2 April 2024 to 1 April 2028, 15 suppliers) is the
+        #     diagnostic and implantable half: the cochlear, bone conduction and
+        #     middle ear implant manufacturers (Advanced Bionics, Cochlear Europe,
+        #     Med-El) sitting alongside the test-booth and diagnostic firms
+        #     (Amplivox, Interacoustics, Otodynamics, Natus Nicolet, Guymark, Diatec).
+        #   "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid
+        #     Accessories" (2022/S 000-010796, 27 March 2023 to 26 March 2027, 13
+        #     suppliers) is the aid, battery and earmould half.
+        # Both parse cleanly and both counts are verified against NHS Supply Chain's
+        # own stated total on the brief (15 and 13), so neither is in `unparsed` and
+        # neither needs a frameworkCorrections entry.
+        # DELIBERATELY NOT CLAIMED:
+        #   "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related
+        #     Services" is the only other framework whose name carries the word "ear".
+        #     It is flexible and video endoscopes for ENT surgery and it belongs to
+        #     ent-and-head-and-neck, which claims it explicitly. The pattern below is
+        #     written so it cannot reach it: "audiolog", "hearing aid", "cochlear" and
+        #     "ear mould" are all absent from that title.
+        "frameworks": r"\b(audiolog\w*|hearing aids?|cochlear|ear moulds?)\b",
+        # EVERY MATCH WAS READ, ONE BY ONE. The include below returns 17 rows across
+        # the two award feeds -- 10 in tender-history.json and 7 in
+        # framework-awards.json -- and 16 of the 17 are genuinely this speciality:
+        # the two NHS Supply Chain agreements themselves, NHS Wales' Audiology
+        # Products twice, NHS Scotland's Audiological Equipment and Bone Conduction,
+        # Northern Ireland's Cochlear Implants and Accessories and its 2026 market
+        # engagement for the successor, three ICB community audiology services
+        # (Hampshire and the Isle of Wight, Cornwall, Birmingham and Solihull), a
+        # Royal Berkshire hearing aid battery call-off, an Aston University audiology
+        # equipment purchase, a Norfolk and Norwich audiology calibration contract and
+        # NHS Highland's environmental aids for deaf people.
+        #
+        # WHAT THE FEED'S OWN `spec` FIELD SAYS ABOUT THOSE SAME ROWS, AND WHY IT IS
+        # NEVER READ HERE: of the 10 tender-history rows, it tags ONE correctly. It
+        # files Audiology Products under continence-bladder-and-bowel (twice),
+        # Audiological Equipment and Audiological Diagnostics under
+        # theatres-and-surgical, Cochlear Implants and Accessories under
+        # orthopaedics-and-trauma, and Hearing Aids, Hearing Aid Batteries, Custom Ear
+        # Moulds under gynaecology-and-womens-health. Nine wrong out of ten.
+        #
+        # REFUSED FROM THE INCLUDE, each with what it actually did:
+        #   bare "audio"  -> reaches "Audio Visual (AV) Event Support For
+        #                    International Conference", Department for Energy Security
+        #                    and Net Zero. Refused in favour of "audiolog\w*", which
+        #                    cannot reach it.
+        #   bare "sound"  -> 41 rows in tender-history alone, and they are ultrasound:
+        #                    the word is a substring of the biggest imaging term in
+        #                    the dataset.
+        #   bare "implant"-> 25 rows across the two feeds, and they are orthopaedic
+        #                    and dental. Only the qualified forms are admitted:
+        #                    "cochlear", "auditory implant", "bone conduction",
+        #                    "bone anchored".
+        #   "speech"      -> two real rows, both Experts at Hand educational
+        #                    psychology, speech and language and occupational therapy
+        #                    support. Speech and language therapy is a neighbouring
+        #                    service, not audiology, and neither row is a product
+        #                    purchase on this patch.
+        #   bare "hearing"-> REFUSED ON RISK, NOT ON AN OBSERVED WRONG MATCH, and said
+        #                    plainly so nobody "corrects" it later. In this data today
+        #                    it matches exactly two rows and both are genuine. It is
+        #                    still refused, because in public procurement the commonest
+        #                    sense of the word is a tribunal, appeal or court hearing,
+        #                    and nothing at all is lost by dropping it: both rows are
+        #                    caught by "hearing aid".
+        #   bare "ear"    -> the same judgement. With a word boundary it matches only
+        #                    the genuine Custom Ear Moulds row today, but it is the
+        #                    highest-risk single word available here and the title it
+        #                    would most likely reach next is "Ear, Nose and Throat",
+        #                    which is the neighbouring page's. "ear mould" is admitted
+        #                    instead.
+        #   bare "balance"-> matches nothing in this data and would reach fluid
+        #                    balance, balance sheets and balance of plant if it did.
+        #                    The vestibular half of this patch is admitted as
+        #                    "vestibular" and "balance clinic", which mean one thing.
+        "include": (
+            r"\b(audiolog\w*|audiometr\w*|"
+            r"hearing aids?|hearing loss|hearing screening|hearing assessment|"
+            r"hearing therap\w*|hearing services?|hearing care|hearing tests?|"
+            r"hearing loop|assistive listening|induction loop|"
+            r"cochlear|auditory implant\w*|auditory brainstem|"
+            r"bone conduction|bone anchored|"
+            r"ear moulds?|earmoulds?|"
+            r"tinnitus|otoacoustic|tympanometr\w*|ototox\w*|"
+            r"vestibular|balance clinic|"
+            r"deaf|deafness)\b"
+        ),
+        # ONE PATTERN, AND IT IS HERE BECAUSE A REAL ROW MATCHED AND WAS WRONG.
+        # "Deaf Awareness Training Courses", Mersey and West Lancashire Teaching
+        # Hospitals NHS Trust, CPV 80561000 -- health training services. It reached the
+        # panel on "deaf" and it is a workforce education contract, not a purchase of
+        # hearing products or a commissioned hearing service. A rep on this patch
+        # cannot sell into it. "deaf" itself stays admitted, because the row it was
+        # put there for -- NHS Highland's "Specialist Environmental Aids for Deaf
+        # People", won by Sarabec -- is exactly this market.
+        "exclude": r"\bdeaf awareness\b",
+        # THE TWO CPV CODES SEEN ON GENUINE ROWS: 33185200 is cochlear implant, on
+        # Northern Ireland's market engagement notice; 85121240 is ENT or audiology
+        # services, on all three ICB community audiology awards. They corroborate and
+        # they never admit, and this patch is the clearest proof of that rule in the
+        # whole dataset: 85121240 also sits on "Audio Visual (AV) Event Support For
+        # International Conference" for the Department for Energy Security and Net
+        # Zero, and inside 25-code baskets on the Government Commercial Agency's
+        # Employee Benefits and Occupational Health Services and the Countess of
+        # Chester's insourcing framework. Admitted on CPV, a government department's
+        # conference AV contract would be published to a paying member as audiology.
+        "cpv": ("33185200", "85121240"),
+        # NO DRUG TARIFF PART, AND THIS ONE IS MEASURED RATHER THAN ASSUMED. All
+        # 66,400 lines of Part IX were searched for "hearing", "audiolog", "cochlear",
+        # "tinnitus", "ear mould", "auditory" and "deaf". The result is zero. Part IX
+        # reimburses dressings and elastic hosiery (IXA), incontinence (IXB), stoma
+        # (IXC) and elastic hosiery (IXR); hearing aids, batteries, earmoulds and
+        # implants are supplied through hospital audiology departments and the two
+        # NHS Supply Chain agreements above, not prescribed on an FP10. The panel
+        # carries no tariff rather than reaching for the nearest part.
+        "coverageNote": (
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Both of this patch's national "
+            "agreements are in their final years -- Hearing Aids, Hearing Aid "
+            "Batteries, Custom Ear Moulds and Hearing Aid Accessories ends 26 March "
+            "2027 and Audiological Diagnostics Implantable Devices and Services ends 1 "
+            "April 2028 -- and their successor has not been awarded, so it is not in "
+            "the Hub's framework dataset and cannot be. Being named on either "
+            "framework below is a statement about the current agreements only. TWO "
+            "ROWS THAT ARE PROBABLY THIS SPECIALITY ARE NOT COUNTED, and it is worth "
+            "saying which rather than letting a reader assume the feed is complete. "
+            "Leeds Teaching Hospitals' \"Purchase of Screening Kits\", won by Natus "
+            "Nicolet UK, is very likely newborn hearing screening, and Diatec "
+            "Diagnostics' \"New equipment (2 x Titan)\" is very likely the "
+            "Interacoustics Titan tympanometry and otoacoustic emissions platform. "
+            "Both are refused because neither title can carry the claim on its own: "
+            "screening kits are bought for a dozen clinical purposes and Titan is a "
+            "product name in several industries. Matching either on the supplier's "
+            "name instead of the title would admit every notice a diagnostics "
+            "distributor ever won. THE SUPPLIER COUNT BELOW IS ONE HIGHER THAN THE "
+            "NUMBER OF COMPANIES, AND HERE IS WHY. WS Audiology and Sivantos Limited "
+            "are the same firm: Companies House 00203774 was SIEMENS HEARING "
+            "INSTRUMENTS LTD, became SIVANTOS LIMITED on 20 March 2015 and has been "
+            "WS AUDIOLOGY LIMITED since 29 September 2022. NHS Supply Chain named it "
+            "Sivantos Limited on the 2022 hearing aid agreement and WS Audiology on "
+            "the 2024 audiological diagnostics agreement, which is correct for the "
+            "date each was signed. The Hub's supplier seed still holds the two names "
+            "as two separate supplier records, so the alias registry cannot merge "
+            "them and the list below shows 25 entries for 24 companies. The names are "
+            "published exactly as the procurement record states them; merging the two "
+            "seed records is a change to shared supplier data that affects the "
+            "compare tab as well as this panel, so it is recorded here rather than "
+            "made quietly inside a single speciality build. THE SURGICAL HALF OF EAR "
+            "CARE IS NOT HERE: "
+            "mastoid, tympanoplasty, grommet and stapes work, the ENT endoscopes "
+            "framework and the operating microscopes those procedures use are on the "
+            "ENT and head and neck page, which claims them explicitly. This page is "
+            "hearing and balance -- assessment, aids, implants, tinnitus and "
+            "vestibular."
+        ),
+    },
 
 }
 
