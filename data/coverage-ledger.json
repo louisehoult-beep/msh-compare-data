@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 451,
-  "inScopeSuppliersNeedingCrawl": 520,
-  "inScopeSuppliersNeedingDomain": 475,
-  "suppliersRefused": 244,
+  "inScopeSuppliersNeedingCrawl": 515,
+  "inScopeSuppliersNeedingDomain": 469,
+  "suppliersRefused": 249,
   "blockedFrameworks": 1
  },
  "unresolvedSupplierNames": [
@@ -5950,7 +5950,7 @@
     },
     {
      "supplier": "Lyreco UK Limited",
-     "domain": null
+     "domain": "why.lyreco.com"
     },
     {
      "supplier": "Medevolve Limited",
@@ -5971,7 +5971,6 @@
    ],
    "domainsMissing": [
     "Electro Spyres Healthcare Limited",
-    "Lyreco UK Limited",
     "Medevolve Limited",
     "Meditrade UK Ltd",
     "Techmed Charts UK Limited",
@@ -6081,8 +6080,8 @@
     "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 8,
     "heldNeedingCategory": 1,
-    "crawlable": 0,
-    "needDomain": 6
+    "crawlable": 1,
+    "needDomain": 5
    },
    "published": [
     "Ambu UK",
@@ -7027,7 +7026,7 @@
    "crawlWorklist": [
     {
      "supplier": "Lyreco UK Limited",
-     "domain": null
+     "domain": "why.lyreco.com"
     },
     {
      "supplier": "PAL International Ltd",
@@ -7055,7 +7054,6 @@
     }
    ],
    "domainsMissing": [
-    "Lyreco UK Limited",
     "PAL International Ltd",
     "PTP Healthcare Ltd",
     "Premium Wipes & Textiles Ltd",
@@ -7106,8 +7104,8 @@
     "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 7,
     "heldNeedingCategory": 0,
-    "crawlable": 0,
-    "needDomain": 7
+    "crawlable": 1,
+    "needDomain": 6
    },
    "published": [
     "B. Braun Medical",
@@ -9351,41 +9349,33 @@
     {
      "supplier": "Promedics Orthopaedics Ltd",
      "domain": "promedics.co.uk"
-    },
+    }
+   ],
+   "domainsMissing": [],
+   "refusedSuppliers": [
     {
      "supplier": "Brainlab Ltd",
-     "domain": null
+     "domain": "brainlab.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-10"
     },
     {
      "supplier": "Healthcare Supply Solutions Limited",
-     "domain": null
+     "domain": "healthcaresupplysolutions.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-10"
     },
-    {
-     "supplier": "Oncology Systems Ltd (OSL)",
-     "domain": null
-    },
-    {
-     "supplier": "PTW-UK Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Vision RT Ltd",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Brainlab Ltd",
-    "Healthcare Supply Solutions Limited",
-    "Oncology Systems Ltd (OSL)",
-    "PTW-UK Ltd",
-    "Vision RT Ltd"
-   ],
-   "refusedSuppliers": [
     {
      "supplier": "Mirada Medical",
      "domain": "www.mirada-medical.com",
      "reason": "the site's WordPress API returned HTTP 429; the WooCommerce Store API returned HTTP 429; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 429: Too Many Requests)",
      "checked": "2026-08-31"
+    },
+    {
+     "supplier": "Oncology Systems Ltd (OSL)",
+     "domain": "osl.uk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-10"
     },
     {
      "supplier": "Phoenix Dosimetry Ltd",
@@ -9394,10 +9384,22 @@
      "checked": "2026-08-31"
     },
     {
+     "supplier": "PTW-UK Ltd",
+     "domain": "ptwdosimetry.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-10"
+    },
+    {
      "supplier": "Vertec Scientific",
      "domain": "www.vertec.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31"
+    },
+    {
+     "supplier": "Vision RT Ltd",
+     "domain": "visionrt.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-10"
     }
    ],
    "route": "NHSSC framework",
@@ -9410,7 +9412,7 @@
     "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 1,
     "crawlable": 0,
-    "needDomain": 5
+    "needDomain": 0
    },
    "published": [
     "Elekta",
@@ -9423,20 +9425,19 @@
    "heldOnly": [
     "Promedics Orthopaedics Ltd"
    ],
-   "notCrawled": [
+   "notCrawled": [],
+   "refused": [
     "Brainlab Ltd",
     "Healthcare Supply Solutions Limited",
+    "Mirada Medical",
     "Oncology Systems Ltd (OSL)",
+    "Phoenix Dosimetry Ltd",
     "PTW-UK Ltd",
+    "Vertec Scientific",
     "Vision RT Ltd"
    ],
-   "refused": [
-    "Mirada Medical",
-    "Phoenix Dosimetry Ltd",
-    "Vertec Scientific"
-   ],
    "unknown": [],
-   "actionableTotal": 8,
+   "actionableTotal": 3,
    "blockedReason": null
   },
   {
@@ -9460,22 +9461,12 @@
      "domain": null
     },
     {
-     "supplier": "Healthcare Supply Solutions Limited",
-     "domain": null
-    },
-    {
-     "supplier": "Oncology Systems Ltd (OSL)",
-     "domain": null
-    },
-    {
      "supplier": "Viewray,Inc",
      "domain": null
     }
    ],
    "domainsMissing": [
     "Accuray UK",
-    "Healthcare Supply Solutions Limited",
-    "Oncology Systems Ltd (OSL)",
     "Viewray,Inc"
    ],
    "refusedSuppliers": [
@@ -9484,6 +9475,18 @@
      "domain": "ezag.com",
      "reason": "the site's WordPress API could not be read (<urlopen error [Errno 8] nodename nor servname provided, or ); the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-25"
+    },
+    {
+     "supplier": "Healthcare Supply Solutions Limited",
+     "domain": "healthcaresupplysolutions.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-10"
+    },
+    {
+     "supplier": "Oncology Systems Ltd (OSL)",
+     "domain": "osl.uk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-10"
     },
     {
      "supplier": "Sirtex Medical",
@@ -9509,7 +9512,7 @@
     "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 0,
     "crawlable": 0,
-    "needDomain": 4
+    "needDomain": 2
    },
    "published": [
     "Boston Scientific",
@@ -9523,19 +9526,19 @@
    "heldOnly": [],
    "notCrawled": [
     "Accuray UK",
-    "Healthcare Supply Solutions Limited",
-    "Oncology Systems Ltd (OSL)",
     "Viewray,Inc"
    ],
    "refused": [
     "Eckert & Ziegler BEBIG",
+    "Healthcare Supply Solutions Limited",
+    "Oncology Systems Ltd (OSL)",
     "Sirtex Medical",
     "Vertec Scientific"
    ],
    "unknown": [
     "Varian Medical Systems UK Ltd"
    ],
-   "actionableTotal": 6,
+   "actionableTotal": 4,
    "blockedReason": null
   },
   {
@@ -12315,7 +12318,7 @@
     },
     {
      "supplier": "Lyreco UK Limited",
-     "domain": null
+     "domain": "why.lyreco.com"
     },
     {
      "supplier": "SC Johnson Ltd",
@@ -12326,7 +12329,6 @@
     "Abbliss Ltd",
     "Creed Medical Ltd",
     "GDP Compliance Ltd",
-    "Lyreco UK Limited",
     "SC Johnson Ltd"
    ],
    "refusedSuppliers": [
@@ -12361,8 +12363,8 @@
     "unresolvedNames": 3,
     "publishedElsewhereNeedingCategory": 9,
     "heldNeedingCategory": 0,
-    "crawlable": 0,
-    "needDomain": 5
+    "crawlable": 1,
+    "needDomain": 4
    },
    "published": [],
    "publishedElsewhere": [
@@ -13350,7 +13352,7 @@
    "crawlWorklist": [
     {
      "supplier": "Lyreco UK Limited",
-     "domain": null
+     "domain": "why.lyreco.com"
     },
     {
      "supplier": "PAL International Ltd",
@@ -13362,7 +13364,6 @@
     }
    ],
    "domainsMissing": [
-    "Lyreco UK Limited",
     "PAL International Ltd",
     "Saraco Industries"
    ],
@@ -13386,8 +13387,8 @@
     "unresolvedNames": 2,
     "publishedElsewhereNeedingCategory": 6,
     "heldNeedingCategory": 0,
-    "crawlable": 0,
-    "needDomain": 3
+    "crawlable": 1,
+    "needDomain": 2
    },
    "published": [],
    "publishedElsewhere": [
@@ -13785,16 +13786,15 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
-   "crawlWorklist": [
+   "crawlWorklist": [],
+   "domainsMissing": [],
+   "refusedSuppliers": [
     {
      "supplier": "Brainlab Ltd",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Brainlab Ltd"
-   ],
-   "refusedSuppliers": [
+     "domain": "brainlab.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-10"
+    },
     {
      "supplier": "Fujifilm Healthcare UK",
      "domain": "fujifilm.com",
@@ -13827,7 +13827,7 @@
     "publishedElsewhereNeedingCategory": 5,
     "heldNeedingCategory": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 0
    },
    "published": [],
    "publishedElsewhere": [
@@ -13838,17 +13838,16 @@
     "Siemens Healthineers"
    ],
    "heldOnly": [],
-   "notCrawled": [
-    "Brainlab Ltd"
-   ],
+   "notCrawled": [],
    "refused": [
+    "Brainlab Ltd",
     "Fujifilm Healthcare UK",
     "GE HealthCare",
     "Vertec Scientific",
     "Xograph Healthcare Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 6,
+   "actionableTotal": 5,
    "blockedReason": null
   },
   {
@@ -14796,16 +14795,15 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
-   "crawlWorklist": [
+   "crawlWorklist": [],
+   "domainsMissing": [],
+   "refusedSuppliers": [
     {
      "supplier": "Brainlab Ltd",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Brainlab Ltd"
-   ],
-   "refusedSuppliers": [
+     "domain": "brainlab.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-10"
+    },
     {
      "supplier": "Karl Storz UK",
      "domain": "karlstorz.com",
@@ -14820,7 +14818,7 @@
     "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 0
    },
    "published": [],
    "publishedElsewhere": [
@@ -14829,16 +14827,15 @@
     "Stryker"
    ],
    "heldOnly": [],
-   "notCrawled": [
-    "Brainlab Ltd"
-   ],
+   "notCrawled": [],
    "refused": [
+    "Brainlab Ltd",
     "Karl Storz UK"
    ],
    "unknown": [
     "T.J.Smith and Nephew Limited"
    ],
-   "actionableTotal": 5,
+   "actionableTotal": 4,
    "blockedReason": null
   },
   {
@@ -14979,19 +14976,21 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "Oncology Systems Ltd (OSL)",
-     "domain": null
-    },
-    {
      "supplier": "Raysearch UK Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Oncology Systems Ltd (OSL)",
     "Raysearch UK Ltd"
    ],
-   "refusedSuppliers": [],
+   "refusedSuppliers": [
+    {
+     "supplier": "Oncology Systems Ltd (OSL)",
+     "domain": "osl.uk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-10"
+    }
+   ],
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "actionable": {
@@ -14999,7 +14998,7 @@
     "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [],
    "publishedElsewhere": [
@@ -15008,14 +15007,15 @@
    ],
    "heldOnly": [],
    "notCrawled": [
-    "Oncology Systems Ltd (OSL)",
     "Raysearch UK Ltd"
    ],
-   "refused": [],
+   "refused": [
+    "Oncology Systems Ltd (OSL)"
+   ],
    "unknown": [
     "Varian Medical Systems UK Ltd"
    ],
-   "actionableTotal": 5,
+   "actionableTotal": 4,
    "blockedReason": null
   },
   {
@@ -15334,7 +15334,7 @@
    "crawlWorklist": [
     {
      "supplier": "Lyreco UK Limited",
-     "domain": null
+     "domain": "why.lyreco.com"
     },
     {
      "supplier": "Praxis Medical Ltd",
@@ -15346,7 +15346,6 @@
     }
    ],
    "domainsMissing": [
-    "Lyreco UK Limited",
     "Praxis Medical Ltd",
     "Premium Wipes & Textiles Ltd"
    ],
@@ -15399,8 +15398,8 @@
     "unresolvedNames": 43,
     "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 0,
-    "crawlable": 0,
-    "needDomain": 3
+    "crawlable": 1,
+    "needDomain": 2
    },
    "published": [
     "Crest Medical Ltd",
@@ -15745,7 +15744,7 @@
     },
     {
      "supplier": "Lyreco UK Limited",
-     "domain": null
+     "domain": "why.lyreco.com"
     },
     {
      "supplier": "PTP Healthcare Ltd",
@@ -15758,7 +15757,6 @@
    ],
    "domainsMissing": [
     "J & M Medical",
-    "Lyreco UK Limited",
     "PTP Healthcare Ltd",
     "Valmy SAS Ltd"
    ],
@@ -15803,8 +15801,8 @@
     "unresolvedNames": 20,
     "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 0,
-    "crawlable": 0,
-    "needDomain": 4
+    "crawlable": 1,
+    "needDomain": 3
    },
    "published": [
     "Gailarde Ltd",
@@ -16008,12 +16006,10 @@
    "crawlWorklist": [
     {
      "supplier": "Lyreco UK Limited",
-     "domain": null
+     "domain": "why.lyreco.com"
     }
    ],
-   "domainsMissing": [
-    "Lyreco UK Limited"
-   ],
+   "domainsMissing": [],
    "refusedSuppliers": [
     {
      "supplier": "ALXR Limited",
@@ -16052,8 +16048,8 @@
     "unresolvedNames": 22,
     "publishedElsewhereNeedingCategory": 0,
     "heldNeedingCategory": 0,
-    "crawlable": 0,
-    "needDomain": 1
+    "crawlable": 1,
+    "needDomain": 0
    },
    "published": [],
    "publishedElsewhere": [],
@@ -16400,7 +16396,7 @@
    "crawlWorklist": [
     {
      "supplier": "Lyreco UK Limited",
-     "domain": null
+     "domain": "why.lyreco.com"
     },
     {
      "supplier": "Praxis Medical Ltd",
@@ -16408,7 +16404,6 @@
     }
    ],
    "domainsMissing": [
-    "Lyreco UK Limited",
     "Praxis Medical Ltd"
    ],
    "refusedSuppliers": [
@@ -16431,8 +16426,8 @@
     "unresolvedNames": 13,
     "publishedElsewhereNeedingCategory": 0,
     "heldNeedingCategory": 0,
-    "crawlable": 0,
-    "needDomain": 2
+    "crawlable": 1,
+    "needDomain": 1
    },
    "published": [],
    "publishedElsewhere": [],
@@ -16479,7 +16474,7 @@
    "crawlWorklist": [
     {
      "supplier": "Lyreco UK Limited",
-     "domain": null
+     "domain": "why.lyreco.com"
     },
     {
      "supplier": "MC Tissue",
@@ -16511,7 +16506,6 @@
     }
    ],
    "domainsMissing": [
-    "Lyreco UK Limited",
     "MC Tissue",
     "Meditrade UK Ltd",
     "Medscience",
@@ -16546,8 +16540,8 @@
     "unresolvedNames": 2,
     "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 0,
-    "crawlable": 0,
-    "needDomain": 8
+    "crawlable": 1,
+    "needDomain": 7
    },
    "published": [],
    "publishedElsewhere": [
@@ -16595,12 +16589,10 @@
    "crawlWorklist": [
     {
      "supplier": "Lyreco UK Limited",
-     "domain": null
+     "domain": "why.lyreco.com"
     }
    ],
-   "domainsMissing": [
-    "Lyreco UK Limited"
-   ],
+   "domainsMissing": [],
    "refusedSuppliers": [
     {
      "supplier": "Banner Group Limited",
@@ -16621,8 +16613,8 @@
     "unresolvedNames": 13,
     "publishedElsewhereNeedingCategory": 0,
     "heldNeedingCategory": 0,
-    "crawlable": 0,
-    "needDomain": 1
+    "crawlable": 1,
+    "needDomain": 0
    },
    "published": [],
    "publishedElsewhere": [],
@@ -16668,7 +16660,7 @@
    "crawlWorklist": [
     {
      "supplier": "Lyreco UK Limited",
-     "domain": null
+     "domain": "why.lyreco.com"
     },
     {
      "supplier": "Zebra Technologies",
@@ -16676,7 +16668,6 @@
     }
    ],
    "domainsMissing": [
-    "Lyreco UK Limited",
     "Zebra Technologies"
    ],
    "refusedSuppliers": [
@@ -16717,8 +16708,8 @@
     "unresolvedNames": 7,
     "publishedElsewhereNeedingCategory": 0,
     "heldNeedingCategory": 0,
-    "crawlable": 0,
-    "needDomain": 2
+    "crawlable": 1,
+    "needDomain": 1
    },
    "published": [],
    "publishedElsewhere": [],

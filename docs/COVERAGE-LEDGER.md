@@ -63,8 +63,8 @@ low coverage there means exhausted, not neglected.
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 7 | 6 | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 1 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 2 | 14.3% | 6 | 6 | STARTED |
-| Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 2 | 15.4% | 8 | 3 | STARTED |
-| Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | 6 | 3 | STARTED |
+| Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 2 | 15.4% | 3 | 8 | STARTED |
+| Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | 4 | 5 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 4 | 6 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 2 | 16.7% | 7 | 3 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 6 | 0 | STARTED |
@@ -105,7 +105,7 @@ low coverage there means exhausted, not neglected.
 | Finance Solutions | — | 12 | 0 | 0.0% | 10 | 2 | UNMAPPED |
 | Bladder Scanners and Associated Options and Related Services | — | 11 | 0 | 0.0% | 7 | 4 | UNMAPPED |
 | Fluoroscopy and Associated Options and Related Services | — | 11 | 0 | 0.0% | 6 | 5 | UNMAPPED |
-| Mobile Image Intensifiers and Associated Options and Related Services | — | 10 | 0 | 0.0% | 6 | 4 | UNMAPPED |
+| Mobile Image Intensifiers and Associated Options and Related Services | — | 10 | 0 | 0.0% | 5 | 5 | UNMAPPED |
 | Structural Heart and Ventricular Assist Devices | — | 10 | 0 | 0.0% | 8 | 2 | UNMAPPED |
 | External Breast Prosthesis and Chest Support | — | 9 | 0 | 0.0% | 5 | 4 | UNMAPPED |
 | Perfusion Devices, Consumables and Associated Equipment | — | 9 | 0 | 0.0% | 8 | 1 | UNMAPPED |
@@ -119,10 +119,10 @@ low coverage there means exhausted, not neglected.
 | Negative Pressure Wound Therapy | — | 6 | 0 | 0.0% | 4 | 2 | UNMAPPED |
 | Robotic Medical Equipment and Associated Accessories | — | 6 | 0 | 0.0% | 3 | 3 | UNMAPPED |
 | Surgical Implants for Men’s and Women’s Health | — | 6 | 0 | 0.0% | 6 | 0 | UNMAPPED |
-| Surgical Navigation Systems with Associated Options and Related Services | — | 6 | 0 | 0.0% | 5 | 1 | UNMAPPED |
+| Surgical Navigation Systems with Associated Options and Related Services | — | 6 | 0 | 0.0% | 4 | 2 | UNMAPPED |
 | Flexible Endoscopes and Associated Options and Related Services | — | 5 | 0 | 0.0% | 3 | 2 | UNMAPPED |
 | Medical Chart Paper and Ultrasound Film | — | 5 | 0 | 0.0% | 4 | 1 | UNMAPPED |
-| Radiotherapy IT Solutions and Associated Options and Related Services | — | 5 | 0 | 0.0% | 5 | 0 | UNMAPPED |
+| Radiotherapy IT Solutions and Associated Options and Related Services | — | 5 | 0 | 0.0% | 4 | 1 | UNMAPPED |
 | Specimen Cabinets and Associated Options and Related Services | — | 5 | 0 | 0.0% | 3 | 2 | UNMAPPED |
 | Reusable Plastic Medical Hollowware | — | 4 | 0 | 0.0% | 2 | 2 | UNMAPPED |
 | Obstetrics and Vinyl Pessaries | — | 3 | 0 | 0.0% | 3 | 0 | UNMAPPED |
