@@ -3463,7 +3463,9 @@ SPECIALITY_RULES = {
             "from one is not evidence of absence from the market."
         ),
     },
-    # PAGE 2929. Scope, in the page's own words: "General child health. Paediatric
+    # PAGE 2926. The live id was read back from the WordPress.com API on 10/09/2026:
+    # slug paediatrics, title "Paediatrics (Subscribers only)". Scope, in the page's
+    # own words: "General child health. Paediatric
     # product is a lot, a size band or a line inside somebody else's framework —
     # there is no children's category anywhere in NHS Supply Chain."
     #
