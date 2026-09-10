@@ -3142,7 +3142,7 @@ SPECIALITY_RULES = {
         ),
     },
 
-    # PAGE 2734. Scope, in the page's own words: two clinically distinct pathways.
+    # PAGE 2836. Scope, in the page's own words: two clinically distinct pathways.
     # Benign gynaecology runs on NICE NG88 and ends in theatre or an outpatient
     # hysteroscopy suite; urogynaecology and the pelvic floor runs on NG123, is
     # governed by the mesh restriction, and ends in a regional multidisciplinary team.
