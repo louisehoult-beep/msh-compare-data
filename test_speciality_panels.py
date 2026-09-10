@@ -39,6 +39,7 @@ GYNAE = "gynaecology-and-womens-health"
 PAEDS = "paediatrics"
 VASCACCESS = "vascular-access-and-iv-therapy"
 UROLOGY = "urology"
+RESP = "respiratory"
 fails = []
 
 
@@ -3399,13 +3400,17 @@ for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
 
 
 # The tariff slicing must not have changed any panel that does not ask for it.
-# TWO RULES SLICE A PART, and each is here because the part it slices is not its
+# FOUR RULES SLICE A PART, and each is here because the part it slices is not its
 # speciality: gynaecology takes the 257 pessary lines out of Part IXA's 56,833,
 # paediatrics takes the 473 lines whose product or brand name says paediatric, child,
-# infant or junior out of Parts IXA, IXB and IXC, and urology takes the 3,108 catheter,
-# urostomy and catheter-drainage lines out of the same three parts. Adding a slug to this set is a
+# infant or junior out of Parts IXA, IXB and IXC, urology takes the 3,108 catheter,
+# urostomy and catheter-drainage lines out of the same three parts, and respiratory
+# takes 608 lines out of Part IXA — the tracheostomy breathing aid, tube holder,
+# cleaning device and laryngectomy protector families plus the peak flow meters —
+# leaving the 56,225 dressing and elastic hosiery lines to tissue viability, including
+# the tracheostomy DRESSING range, which is a dressing. Adding a slug to this set is a
 # decision about a published claim, never a way past a failing check.
-_TARIFF_FILTER_EARNED = {GYNAE, PAEDS, UROLOGY}
+_TARIFF_FILTER_EARNED = {GYNAE, PAEDS, UROLOGY, RESP}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _r.get("tariffVmp") and _slug not in _TARIFF_FILTER_EARNED:
         check("%s must not have grown a tariff filter unnoticed" % _slug, False)
@@ -3715,6 +3720,206 @@ check("no duplicate supplier names", len(_ur_names) == len(set(_ur_names)))
 check("Coloplast appears exactly once",
       sum(1 for n in _ur_names if n.startswith("Coloplast")) == 1,
       ", ".join(n for n in _ur_names if "Coloplast" in n))
+
+
+
+# ---------------------------------------------------------------------------
+# RESPIRATORY. Four dangers, and every one of them was a real hit that was read
+# and rejected. A building has ventilation and so does a patient. "Rough
+# sleeping" and an ICB insomnia service both contain the word sleep. A
+# heart-lung machine is cardiac perfusion and a cardiopulmonary bypass
+# oxygenator contains the letters of oxygen. And anaesthesia sits on the same
+# framework as ventilators without being this patch.
+# ---------------------------------------------------------------------------
+print("\nRESPIRATORY")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), RESP],
+               check=True, capture_output=True)
+rs = load_panel(RESP)
+check("panel is defined", rs.get("defined") is True)
+check("label is the page's own", rs["label"] == "Respiratory")
+
+_rs_rule = B.SPECIALITY_RULES[RESP]
+_rs_rx = B.compile_rule(_rs_rule)
+
+print("  a building is ventilated too")
+# Both are real rows in framework-awards.json. Bare "ventilat" admits them, which
+# is why the include names "ventilator" and the qualified clinical forms instead.
+for bad in ["Provision of Ventilation and Other Remediation Works",
+            "Ventilation Verification"]:
+    check("HVAC row refused: %s" % bad[:52], not B.match_title(_rs_rx, bad))
+
+print("  sleep is not sleep apnoea")
+# Three real rows. A homelessness contract and an ICB insomnia service must never
+# reach a respiratory panel on the strength of one word.
+for bad in ["Universal Sleep Support Model - NHS West Yorkshire Integrated Care Board "
+            "(Bradford District and Craven Health and Care Partnership)",
+            "Provision of Drug and Alcohol Support for  Rough Sleepers",
+            "Rough Sleeping Drug and Alcohol Psychology Service"]:
+    check("sleep row refused: %s" % bad[:52], not B.match_title(_rs_rx, bad))
+
+print("  a heart-lung machine is cardiac perfusion")
+for bad in ["Capital Purchase of Heart and Lung Machines with associated Maintenance "
+            "and Heater Cooler Units",
+            "LivaNova Essenz Perfusion Heart Lung System",
+            "Maintenance Perfusion Heart and Lung Machine",
+            "Cardiopulmonary Bypass Oxygenators with Customised Tubing Pack [2339172]",
+            "Managed Service for Catheterisation Lab, Cardio Thoracic Centre and Vascular"]:
+    check("cardiac row refused: %s" % bad[:52], not B.match_title(_rs_rx, bad))
+
+print("  anaesthesia, monitoring, pathology and public health stay on their own pages")
+for bad in ["Anaesthetic Gases (Sevoflurane & Isoflurane)",
+            "NHS National Framework Agreement for the supply of Inhalation Anaesthetics "
+            "and Vaporisers",
+            "Purchase of 5 Anaesthetic Machines",
+            "ESNEFT2684 Purchase of Anaesthetic Machines",
+            "MER T&A Philips - 6 x anaesthetic monitors",
+            "Provision of Anaesthetic Management Software",
+            "Medacs Anaesthetics Insourcing",
+            "The Support of Fabius tiro anaesthesia apparatus",
+            "Serenity vaporisers",
+            "Sevoflurane and Vaporisers",
+            "Pulse Oximetry Consumables",
+            "Pulse Oximetry Sensors [4827016]",
+            "Pulse Oximetry, Capnography and Related Patient Monitoring Technologies",
+            "Blood Gas Managed Service for Betsi Cadwaladr University Health Board",
+            "Supply of Replacement Blood Gas Analysers and Consumables",
+            "Suction Consumables",
+            "Suction Consumables, Wound Drainage, Autologous Blood Systems and Related "
+            "Accessories",
+            "Suction Controllers (three types) & associated filters",
+            "Suction Devices and Tubing",
+            "Allen Carr Easyway Smoking Cessation Programme",
+            "Smoking Cessation Service in SMEs",
+            "Local Stop Smoking Services and Support (LSSSSG)",
+            "Global Tuberculosis Screening Service",
+            "NEL ICB Latent Tuberculosis Infection (LTBI) Screening Programme (Lots 1-6)",
+            "Provision of Medical Gases in Cylinders",
+            "STW26-03 AE for Medical Gas",
+            "Lung Cancer Screening - DAP C",
+            "Replacement Ultrasound Machine for Lung Cancer Diagnostic",
+            "Purchase of Baby Warmers with Resuscitation",
+            "Resuscitation Council Course Manuals and Registration Fee - ALS, ILS and "
+            "PILS courses"]:
+    check("off-patch row refused: %s" % bad[:52], not B.match_title(_rs_rx, bad))
+
+print("  the three exclusions, each one a hit that was read and rejected")
+for bad, why in [
+        ("Most Suitable Provider: Hyperbaric Oxygen Therapy (HBOT) Services for all ages",
+         "hyperbaric oxygen is not respiratory medicine"),
+        ("WSFT - Pathology - COPD - 6 EPOC devices service cover",
+         "an epoc is a blood gas analyser and the title says Pathology"),
+        ("Procurement of Test Kits for Newborn Screening of Cystic Fibrosis (CF), "
+         "Congenital Hypothyroidism (CHT) and the Maintena",
+         "a newborn bloodspot card screens for nine conditions"),
+]:
+    check("excluded (%s): %s" % (why[:44], bad[:40]), not B.match_title(_rs_rx, bad))
+
+print("  and the rows that must be present")
+for good in ["Respiratory Solutions",
+             "Non-Invasive Ventilation, Sleep Therapy (CPAP) and Sleep Monitoring "
+             "(Diagnostics)",
+             "Airway Management Products and Associated Equipment",
+             "Supply of Critical Care Ventilators and Associated Support Services "
+             "(Dräger Evita V800)",
+             "Pulmonary Function Testing Equipment (Maintenance of) PS5002/25",
+             "Lung Function Equipment",
+             "Fractional Exhaled Nitric Oxide (FeNO) Equipment and Consumables [4638012]",
+             "Asthma Diagnostic Hubs - Fractional exhaled Nitric Oxide (FeNO) Machines, "
+             "Consumables and Support",
+             "Oxygen Therapy & Inhalation",
+             "NP37314 Medical Liquid Oxygen and Associated Equipment and Services",
+             "Contract for Amikacin liposomal with nebulisation (with device)",
+             "NP94023a-d Ellipta Inhalers",
+             "Tracheostomy Tubes, Tube Holders and Accessories - 5806781",
+             "Sterile Closed Tracheal Suction Systems (3225312)",
+             "Robotic Bronchoscopy System",
+             "BTH23-143 Sleep Apnoea Service",
+             "ESNEFT3212 Purchase of Sleep Study Equipment",
+             "North Cumbria Acute Respiratory Infection Services",
+             "Kaftrio - Vertex - Cystic Fibrosis"]:
+    check("row carried: %s" % good[:52], B.match_title(_rs_rx, good))
+
+print("  four frameworks, which is the page's own number")
+_rs_fw = [f["name"] for f in rs["frameworks"]]
+check("exactly four", len(_rs_fw) == 4, "; ".join(_rs_fw))
+for name in ["Respiratory Solutions",
+             "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring "
+             "Diagnostics",
+             "Airway Management Products and Associated Equipment",
+             "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy "
+             "Systems, Related Accessories and Services"]:
+    check("framework carried: %s" % name[:52], name in _rs_fw)
+# Refused on purpose. The monitoring framework is nobody's and stays nobody's here,
+# because the page names four frameworks and a fifth would contradict it in front of
+# the same member. The other three belong to pages that already claim them.
+for name in ["Pulse Oximetry, Capnography and Related Monitoring Technologies",
+             "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+             "Perfusion Devices, Consumables and Associated Equipment",
+             "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, "
+             "Related Products and Services"]:
+    check("framework refused: %s" % name[:52], name not in _rs_fw)
+
+print("  the supplier list is the page's own overlap finding")
+_rs_names = [s["name"] for s in rs["suppliers"]]
+check("no duplicate supplier names", len(_rs_names) == len(set(_rs_names)))
+# The page states, from its own reading of the four published lists, that exactly one
+# supplier is on all four and that five hold three each. If the alias registry ever
+# splits one of those names in two, this panel and the page stop agreeing.
+for name in ["Draeger Medical UK", "Armstrong Medical (Eakin Respiratory)",
+             "Fisher & Paykel Healthcare", "Flexicare Medical",
+             "Henleys Medical Supplies Limited", "Intersurgical"]:
+    check("supplier present exactly once: %s" % name[:44],
+          sum(1 for n in _rs_names if n == name) == 1)
+
+print("  Part IXA is sliced, and a dressing is not a respiratory line")
+_rs_dt = rs["drugTariff"]
+check("one part is claimed", _rs_dt["parts"] == ["IXA"])
+check("and narrowed by a stated product filter", bool(_rs_dt["vmpFilter"]))
+check("608 lines", _rs_dt["lineCount"] == 608, "got %s" % _rs_dt["lineCount"])
+check("7 virtual medicinal products, every one of them read",
+      _rs_dt["vmpCount"] == 7, "got %s" % _rs_dt["vmpCount"])
+check("23 suppliers list a line on this patch",
+      _rs_dt["supplierCount"] == 23, "got %s" % _rs_dt["supplierCount"])
+import re as _rs_re
+_rs_vrx = _rs_re.compile(_rs_rule["tariffVmp"], _rs_re.I)
+# THE ONE THAT MATTERS. Bare "tracheostomy" over Part IXA also returns the
+# tracheostomy dressing range, which is a dressing and is tissue viability's.
+for bad in ["Tracheostomy dressing sterile 8cm x 10cm",
+            "Tracheostomy dressing sterile 5cm x 6.5cm",
+            "Polyurethane foam film dressing sterile without adhesive border "
+            "10cm x 10cm square (fenestrated)",
+            "Absorbent perforated dressing with adhesive border 10cm x 10cm",
+            "Compression hosiery below knee class 2"]:
+    check("tariff line left off: %s" % bad[:46], not _rs_vrx.search(bad))
+for good in ["Tracheostomy breathing aids", "Tracheostomy tube holders",
+             "Tracheostomy cleaning devices",
+             "Tracheostomy and laryngectomy protectors",
+             "Peak flow meter standard range", "Peak flow meter low range",
+             "Peak flow meter replacement mouthpiece plastic"]:
+    check("tariff line carried: %s" % good[:46], bool(_rs_vrx.search(good)))
+# Part IXA whole is 56,833 lines of dressings and hosiery. If the slice ever
+# approaches that, the filter has stopped being applied.
+_rs_all = len([r for r in B.load("drug-tariff-part-ix.json")["rows"] if r[0] == "IXA"])
+check("the slice is under a fiftieth of Part IXA (%d of %d)"
+      % (_rs_dt["lineCount"], _rs_all), _rs_dt["lineCount"] < _rs_all / 50)
+
+print("  CPV corroborates and never admits")
+check("one CPV prefix, the gas therapy and respiratory devices family",
+      _rs_rule["cpv"] == ("33157",))
+# 33157500 is the hyperbaric chamber code and it sits inside the 33157 family.
+# "Diving Life Support (DLS) In-Service Support (ISS)" carries it. The only thing
+# keeping a Royal Navy diving contract off this panel is the title gate.
+check("the diving life support notice is refused on its title",
+      not B.match_title(_rs_rx, "Diving Life Support (DLS) In-Service Support (ISS)"))
+check("every award shown was admitted by its title, not by a CPV code",
+      all(B.match_title(_rs_rx, a["title"]) for a in rs["awards"]))
+
+print("  the coverage note says what is shared and what is missing")
+for phrase in ["Medical and Surgical Consumables",
+               "maternity and neonatal",
+               "Home Oxygen Service contracts",
+               "BNF Chapter 3"]:
+    check("coverage note carries: %s" % phrase[:52], phrase in rs["rules"]["frameworks"])
 
 
 

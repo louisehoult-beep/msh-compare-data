@@ -1,0 +1,1882 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "respiratory",
+ "label": "Respiratory",
+ "defined": true,
+ "generated": "2026-09-10",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-09T11:18:46+00:00",
+  "openTenders": "09/09/2026",
+  "drugTariff": "2026-09-09"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(respiratory solutions|non invasive ventilation|airway management|anaesthesia machines)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the four agreements above are shared routes rather than respiratory ones: Airway Management Products is categorised by NHS Supply Chain under Medical and Surgical Consumables and is claimed by theatres and surgical, and Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems is claimed by theatres and surgical and by maternity and neonatal, with this page claiming only the ventilator half. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. The supplier list is built from the four frameworks, so it counts airway and anaesthesia houses alongside respiratory ones; the page's own overlap analysis is the better guide to who is really on this patch, and it finds one supplier on all four lists and five on three. Home oxygen is the largest gap and it is a real one: it is bought through regional Home Oxygen Service contracts, not through any national NHS Supply Chain framework, so it appears in awards and tenders and nowhere else. The community medicines half of this patch — the larger half by money — is FP10 prescribing under BNF Chapter 3 and has no framework and no Drug Tariff Part IX presence at all.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the four agreements above are shared routes rather than respiratory ones: Airway Management Products is categorised by NHS Supply Chain under Medical and Surgical Consumables and is claimed by theatres and surgical, and Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems is claimed by theatres and surgical and by maternity and neonatal, with this page claiming only the ventilator half. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. The supplier list is built from the four frameworks, so it counts airway and anaesthesia houses alongside respiratory ones; the page's own overlap analysis is the better guide to who is really on this patch, and it finds one supplier on all four lists and five on three. Home oxygen is the largest gap and it is a real one: it is bought through regional Home Oxygen Service contracts, not through any national NHS Supply Chain framework, so it appears in awards and tenders and nowhere else. The community medicines half of this patch — the larger half by money — is FP10 prescribing under BNF Chapter 3 and has no framework and no Drug Tariff Part IX presence at all.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(respirator\\w*|pulmonary function\\w*|pulmonary diagnostic\\w*|pulmonary rehabilitation|lung function|lung volume|asthma|copd|chronic obstructive pulmonary|bronchoscop\\w*|bronchodilat\\w*|bronchiectasis|spirometr\\w*|spirometer\\w*|peak flow|feno|fractional exhaled nitric oxide|nitric oxide|oxygen|nebulis\\w*|nebuliz\\w*|inhaler\\w*|ventilator\\w*|(?:non-?invasive|mechanical|home|nasal|neonatal|infant|patient|jet|transport|critical care) ventilation|cpap|bipap|continuous positive airway pressure|sleep (?:apnoea|apnea|therapy|monitoring|diagnostic\\w*|stud\\w*)|apnoea|apnea|polysomnograph\\w*|airway\\w*|intubat\\w*|laryngoscop\\w*|tracheostom\\w*|tracheotom\\w*|tracheal|endotracheal|breathing circuit\\w*|breathing system\\w*|cystic fibrosis|pleural|chest drain\\w*|pneumothorax|pneumonia|cough assist|high[- ]flow nasal)\\b/i and does not match /\\b(hyperbaric|epoc devices?|newborn screening)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33157 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /peak flow meter|tracheostomy (?:breathing aid|tube holder|cleaning device)|tracheostomy and laryngectomy protector/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
+ },
+ "counts": {
+  "frameworks": 4,
+  "suppliers": 109,
+  "suppliersUnresolved": 4,
+  "awardsShown": 40,
+  "awardsMatched": 85,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Airway Management Products and Associated Equipment",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+   "reference": "2023/S 000-005729",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "22 July 2024",
+   "ends": "21 July 2028",
+   "supplierCount": 54,
+   "supplierSource": "count verified against the page's own stated total (54)",
+   "suppliers": [
+    "Albert Waeschle Ltd",
+    "Ambu UK Ltd",
+    "Aquilant Critical Care",
+    "Armstrong Medical Ltd",
+    "Athrodax Healthcare International Ltd",
+    "Atos Medical (UK)",
+    "Avanos Medical UK Limited",
+    "Avicenna Surgical Limited",
+    "Boston Scientific Ltd",
+    "Cardiac Services UK Ltd",
+    "Ccmed Ltd",
+    "Chemical Intelligence Limited",
+    "Cook (UK) Ltd",
+    "Creo Medical UK Ltd",
+    "Draeger Medical",
+    "Ebrington (Ni) Ltd",
+    "Eden Medical (UK) Limited",
+    "Fannin UK Ltd",
+    "Fisher & Paykel Healthcare Ltd",
+    "Flexicare Medical Ltd",
+    "Freelance Surgical Limited",
+    "Genx Medicare Ltd",
+    "Gvs Filter Technology UK Ltd",
+    "Hamilton Sales And Service UK Ltd",
+    "Healthcare 21 UK Ltd",
+    "Henleys Medical Supplies Limited",
+    "Insight Medical Products Limited",
+    "Intersurgical Ltd",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Marshall Products",
+    "Medasil Surgical Ltd",
+    "Medecon Healthcare UK Limited",
+    "Meditech Systems Ltd (Dorset)",
+    "Medline Industries Ltd",
+    "Medscience Distribution Ltd",
+    "Oscartech UK Ltd",
+    "P3 Medical Limited",
+    "Pall Europe Limited",
+    "Penlon Limited",
+    "Pentland Medical Ltd",
+    "Proact Medical Ltd",
+    "Prosys International Ltd",
+    "Richardson Healthcare Ltd",
+    "Rudolf Riester Gmbh",
+    "Sai Quality Fruits And Veg Limited",
+    "Sheffmed Ltd",
+    "Smiths Medical",
+    "Teleflex Medical (Rusch & Pilling Weck)",
+    "Timesco Healthcare Ltd",
+    "Verathon Medical",
+    "Vyaire Medical Products Ltd",
+    "Vygon UK Ltd",
+    "William Davies Care Limited",
+    "Zoll Medical UK Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/anaesthesia-machines-ventilator-equipment-and-related-accessories/",
+   "reference": "2026/S 000-008108",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "2 March 2026",
+   "ends": "28 February 2029",
+   "supplierCount": 25,
+   "supplierSource": "count verified against the page's own stated total (25)",
+   "suppliers": [
+    "Aquilant Limited",
+    "Athrodax Healthcare International Limited",
+    "Atom Medical Corporation UK ltd",
+    "Central Medical Supplies Limited",
+    "Charter Kontron Limited",
+    "Croyde Medical Ltd",
+    "Draeger Medical UK Limited",
+    "GE Medical Systems Ltd",
+    "Getinge Limited",
+    "Hamilton Medical UK Ltd",
+    "Henleys Medical Supplies Limited",
+    "Inspiration Healthcare Ltd",
+    "Loewenstein Medical UK Ltd",
+    "MEDACX Limited",
+    "Mediprema",
+    "Mieka Ltd",
+    "Mindray UK Limited",
+    "mOm Incubators Ltd",
+    "Nihon Kohden UK Ltd",
+    "Ortus Technology Limited",
+    "Penlon Limited",
+    "Philips Electronics UK Limited",
+    "Scott Medical Ltd",
+    "@SimulationMan Ltd",
+    "Walters Medical Ltd"
+   ],
+   "delisted": [
+    "BNOS Meditech Limited",
+    "Dot Medical",
+    "QED Medical Systems Ltd",
+    "Safeguard Medical Technologies",
+    "SLE Ltd",
+    "Vyaire Medical Products Limited",
+    "Zoll Medical."
+   ]
+  },
+  {
+   "name": "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/non-invasive-ventilation-sleep-therapy-cpap-sleep-monitoring-diagnostics/",
+   "reference": "2025/S 000-023362",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "29 September 2025",
+   "ends": "28 September 2027",
+   "supplierCount": 28,
+   "supplierSource": "count verified against the page's own stated total (28)",
+   "suppliers": [
+    "Acurable Ltd",
+    "Armstrong Medical Ltd",
+    "Baywater Healthcare UK Ltd",
+    "Breas Medical Ltd",
+    "Cavagna Group UK",
+    "Draeger Medical",
+    "Fisher & Paykel Healthcare Ltd",
+    "Flexicare Medical Ltd",
+    "Independent Physiological Diagnostics Ltd",
+    "Intermedical UK Ltd",
+    "Intersurgical Ltd",
+    "Intus Healthcare",
+    "Lowenstein Medical UK Ltd",
+    "Medicina Ltd",
+    "Nihon Kohden UK Ltd",
+    "Nowus Healthcare",
+    "Philips Healthcare / Philips Respironics",
+    "Radiometer Ltd",
+    "Reflex Medical Ltd",
+    "Remserve Medical Supplies Ltd",
+    "ResMed UK Ltd",
+    "Sefam Medical Ltd",
+    "S-Med Ltd",
+    "SomnoMed UK",
+    "Stowood Scientific Instruments",
+    "The Better Sleep Clinic",
+    "Vapotherm UK Ltd",
+    "ZOLL Medical UK Ltd"
+   ],
+   "delisted": [
+    "Air Liquide UK Ltd",
+    "Aquilant Ltd",
+    "Arcadia14 Medical Supplies UK Ltd",
+    "Dolby Medical Home Respiratory Care Ltd",
+    "Genx Medicare Ltd",
+    "Meditech Systems Ltd",
+    "Proact Medical Ltd",
+    "Salter Labs UK T/A Airlife",
+    "Signifier Medical Technologies Limited"
+   ]
+  },
+  {
+   "name": "Respiratory Solutions",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+   "reference": null,
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 August 2022",
+   "ends": "15 June 2027",
+   "supplierCount": 37,
+   "supplierSource": "no stated count on the page; 37 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Air Liquide Healthcare Limited",
+    "Ambu UK Ltd",
+    "Aquilant Ltd Bd Bas Critical",
+    "Armstrong Medical Ltd",
+    "B.N.O.S Meditech Ltd",
+    "Draeger Medical",
+    "Eden Medical",
+    "Fannin Uk Ltd",
+    "Fisher & Paykel Healthcare Ltd",
+    "Flexicare Medical Ltd",
+    "Gce Group Ltd",
+    "Ge Medical Systems Ltd",
+    "Genx Medicare Ltd",
+    "Hamilton Medical Uk Ltd",
+    "Healthcare 21 Uk Ltd",
+    "Henleys Medical Supplies Limited",
+    "Inspiration Healthcare Limited",
+    "Intermedical (Uk) Ltd",
+    "Intersurgical Ltd",
+    "Kinetik Medical Devices Ltd",
+    "Marshall Products",
+    "Mediq Healthcare Uk Limited Ex Bunzl Hea",
+    "Meditech Systems Ltd (Dorset)",
+    "Medline Industries Ltd",
+    "Numed Healthcare",
+    "Pari Medical Ltd",
+    "Pennine Healthcare All Routes",
+    "Proact Medical Ltd",
+    "Prosys International Ltd",
+    "Philips Respironics",
+    "Salter Labs Uk T/A Airlife",
+    "Schiller Uk Ltd",
+    "Icu Medical International Limited",
+    "Syringa Wholesale Distributor",
+    "Teleflex Medical (Rusch & Pilling Weck)",
+    "Timesco Healthcare Ltd",
+    "Vitalograph Ltd"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Draeger Medical UK",
+   "resolved": true,
+   "variants": [
+    "Draeger Medical",
+    "Draeger Medical UK Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Armstrong Medical (Eakin Respiratory)",
+   "resolved": true,
+   "variants": [
+    "Armstrong Medical Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Fisher & Paykel Healthcare",
+   "resolved": true,
+   "variants": [
+    "Fisher & Paykel Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Flexicare Medical",
+   "resolved": true,
+   "variants": [
+    "Flexicare Medical Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Henleys Medical Supplies Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Intersurgical",
+   "resolved": true,
+   "variants": [
+    "Intersurgical Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Ambu UK",
+   "resolved": true,
+   "variants": [
+    "Ambu UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Aquilant Critical Care",
+   "resolved": true,
+   "variants": [
+    "Aquilant Critical Care",
+    "Aquilant Ltd Bd Bas Critical"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Athrodax Healthcare International Ltd",
+   "resolved": true,
+   "variants": [
+    "Athrodax Healthcare International Limited",
+    "Athrodax Healthcare International Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Eden Medical (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Eden Medical",
+    "Eden Medical (UK) Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Ltd",
+    "Fannin Uk Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "GE HealthCare",
+   "resolved": true,
+   "variants": [
+    "GE Medical Systems Ltd",
+    "Ge Medical Systems Ltd"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "Genx Medicare Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Hamilton Medical UK",
+   "resolved": true,
+   "variants": [
+    "Hamilton Medical UK Ltd",
+    "Hamilton Medical Uk Ltd"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "HC21 (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Healthcare 21 UK Ltd",
+    "Healthcare 21 Uk Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "ICU Medical (incl. Smiths Medical)",
+   "resolved": true,
+   "variants": [
+    "Icu Medical International Limited",
+    "Smiths Medical"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Inspiration Healthcare",
+   "resolved": true,
+   "variants": [
+    "Inspiration Healthcare Limited",
+    "Inspiration Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Intermedical (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Intermedical (Uk) Ltd",
+    "Intermedical UK Ltd"
+   ],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Marshall Products",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Meditech Systems Ltd (Dorset)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Nihon Kohden UK Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Penlon",
+   "resolved": true,
+   "variants": [
+    "Penlon Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Proact Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "ProSys International Ltd",
+   "resolved": true,
+   "variants": [
+    "Prosys International Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "Teleflex Medical (Rusch & Pilling Weck)"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Timesco Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Zoll Medical UK Limited",
+   "resolved": true,
+   "variants": [
+    "ZOLL Medical UK Ltd",
+    "Zoll Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "@SimulationMan Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Acurable Limited",
+   "resolved": true,
+   "variants": [
+    "Acurable Ltd"
+   ],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Air Liquide Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "Air Liquide Healthcare Limited"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Albert Waeschle Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Atom Medical Corporation UK ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Atos Medical (UK)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Avanos Medical UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Avicenna Surgical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "B.N.O.S Meditech Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Baywater Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Boston Scientific",
+   "resolved": true,
+   "variants": [
+    "Boston Scientific Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Breas Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Cavagna Group UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Ccmed Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Central Medical Supplies",
+   "resolved": true,
+   "variants": [
+    "Central Medical Supplies Limited"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Charter Kontron Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Chemical Intelligence Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Cook Medical",
+   "resolved": true,
+   "variants": [
+    "Cook (UK) Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Creo Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Creo Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Croyde Medical",
+   "resolved": true,
+   "variants": [
+    "Croyde Medical Ltd"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Ebrington (NI) Limited",
+   "resolved": true,
+   "variants": [
+    "Ebrington (Ni) Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Freelance Surgical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Gce Group Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Getinge",
+   "resolved": true,
+   "variants": [
+    "Getinge Limited"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Gvs Filter Technology UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Hamilton Sales And Service UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Independent Physiological Diagnostics Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Insight Medical Products Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Intus Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz Endoscopy (UK) Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Kinetik Medical Devices",
+   "resolved": true,
+   "variants": [
+    "Kinetik Medical Devices Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Loewenstein Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Lowenstein Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "MEDACX Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Medasil Surgical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Medecon Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "Medecon Healthcare UK Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Medicina Limited",
+   "resolved": true,
+   "variants": [
+    "Medicina Ltd"
+   ],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Mediprema",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Mediq Healthcare Uk Limited Ex Bunzl Hea"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "MedScience Distribution",
+   "resolved": true,
+   "variants": [
+    "Medscience Distribution Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Mieka Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Mindray UK",
+   "resolved": true,
+   "variants": [
+    "Mindray UK Limited"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "mOm Incubators Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Nowus Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Numed Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Ortus Technology Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "OscarTech UK",
+   "resolved": true,
+   "variants": [
+    "Oscartech UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "P3 Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "P3 Medical Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Pall Europe Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Pari Medical",
+   "resolved": true,
+   "variants": [
+    "Pari Medical Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Pennine Healthcare (Ivor Shaw Ltd)",
+   "resolved": true,
+   "variants": [
+    "Pennine Healthcare All Routes"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Pentland Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Philips",
+   "resolved": true,
+   "variants": [
+    "Philips Electronics UK Limited"
+   ],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Philips Healthcare / Philips Respironics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Philips Respironics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Radiometer UK",
+   "resolved": true,
+   "variants": [
+    "Radiometer Ltd"
+   ],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Reflex Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Reflex Medical Ltd"
+   ],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Remserve Medical Supplies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "ResMed",
+   "resolved": true,
+   "variants": [
+    "ResMed UK Ltd"
+   ],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Richardson Healthcare",
+   "resolved": true,
+   "variants": [
+    "Richardson Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Rudolf Riester GmbH",
+   "resolved": true,
+   "variants": [
+    "Rudolf Riester Gmbh"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "S-Med Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Sai Quality Fruits And Veg Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Salter Labs Uk T/A Airlife",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Schiller UK Limited",
+   "resolved": true,
+   "variants": [
+    "Schiller Uk Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Scott Medical Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "Sefam Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Sheffmed Limited",
+   "resolved": true,
+   "variants": [
+    "Sheffmed Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "SomnoMed UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Stowood Scientific Instruments",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Syringa Wholesale Distributor",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "The Better Sleep Clinic",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "resolved": true,
+   "variants": [
+    "Cardiac Services UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Vapotherm UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
+   ]
+  },
+  {
+   "name": "Verathon Medical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Vitalograph",
+   "resolved": true,
+   "variants": [
+    "Vitalograph Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Vyaire Medical Products Limited",
+   "resolved": true,
+   "variants": [
+    "Vyaire Medical Products Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Walters Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
+   ]
+  },
+  {
+   "name": "William Davies Care Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Preliminary Market Engagement Questionnaire - Intubating Devices",
+   "buyer": "Business Services Organisation Procurement and Logistics Service",
+   "supplier": null,
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083999-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "North Cumbria Acute Respiratory Infection Services",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "supplier": "Primary Care Collaborative North Cumbria Limited",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083612-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Pulmonary Function Testing Equipment (Maintenance of) PS5002/25",
+   "buyer": "Swansea Bay University Health Board",
+   "supplier": "Jaeger Medical Uk Limited",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082791-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Supply of Critical Care Ventilators and Associated Support Services (Dräger Evita V800)",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "supplier": "DRAEGER MEDICAL UK LIMITED",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082738-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "39714100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Infant Ventilators",
+   "buyer": "Hywel Dda University Health Board",
+   "supplier": "Inspiration Healthcare",
+   "date": "2026-08-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081504-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Specialist Cardio, Respiratory and Physiology Systems and Medical Training Equipment",
+   "buyer": "Regional Business Services Organisation Procurement and Logistics Service",
+   "supplier": "Sword Medical Ltd, Uniphar Medtech UK Ltd T/A Cardiac Services",
+   "date": "2026-08-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079976-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33112330",
+    "33112340",
+    "33121000",
+    "33123000",
+    "33123230",
+    "33170000",
+    "33172000",
+    "33172200",
+    "39162200",
+    "50000000",
+    "50420000",
+    "50800000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
+   "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+   "supplier": "Cambridge Heartwear Limited, Cardiac Services, Cortrium ApS, Fukuda Denshi UK Ltd, GE HealthCare, Intermedical (UK) Ltd, Love Medical Limited, Mindray (UK) Limited, Numed Healthcare, Philips Electronics UK Limited, Schiller UK Ltd, Seca Limited, Spacelabs Healthcare Limited, Walters Medical Limited, Welch Allyn (U.K.) Limited, Williams Medical Supplies Limited, Broomwell Healthwatch Limited, Cardioscan Ltd, Express Diagnostics Limited, Icentia Limited, iRhythm Technologies Ltd, LifeSignals Europe Ltd, Technomed Limited, Jaeger Medical UK Limited, Medical Graphics UK Ltd",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079245-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "33121000",
+    "33121500",
+    "33123200",
+    "33124100",
+    "33190000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Airway Management Products and Associated Equipment",
+   "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+   "supplier": null,
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079242-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33157000",
+    "33157400",
+    "33162100",
+    "33171100",
+    "33171210",
+    "33172100",
+    "33190000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Northumberland Acute Respiratory Infection Service (Winter Pressures)",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "supplier": null,
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079167-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "SFT Purchase of respiratory testing kits for 26-27",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "CEPHEID UK LIMITED",
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078867-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33696500"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Patient Monitors, Anaesthetics Machines, Ventilators & ECG",
+   "buyer": "The Common Services Agency (more commonly known as Public Delivery Services Scotland) ( PSD Scotland )",
+   "supplier": "AC Cossor & Son (Surgical) Ltd, Air Liquide Healthcare Ltd, Aquilant Ltd, Armstrong Medical Ltd., Cardiac Services, Dot Medical Ltd, Draeger Medical UK Limited, EDAN Medical (UK) Ltd, Eden Medical (UK) Limited, Fukuda Denshi UK, GE Healthcare, Getinge Limited, Loewenstein Medical Uk Ltd, Masimo UK, Mindray UK Ltd, Nihon Kohden UK Ltd, Ortus Technology Ltd, Philips Electronics UK Limited, Pro Health Solutions Limited, Vapotherm UK Ltd, Welch Allyn UK LTD, ZOLL Medical UK Ltd, Inspiration healthcare, Dot Medical Limited, Loewenstein Medical UK Ltd, Masimo, Nihon Kohden, ZOLL Medical ltd",
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078154-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "33195000",
+    "33661100",
+    "39714100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Non-Invasive CPAP Ventilators",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-08-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/c4c051cf-2e78-4ac6-a1e0-9b436e7956fd",
+   "value": 109999,
+   "periodEnd": "2027-06-22",
+   "source": "tender-history"
+  },
+  {
+   "title": "Preliminary Market Engagement for Consumables for Continuous Positive Airway Pressure (CPAP) and Adaptive Support Ventilation (ASV) Machines",
+   "buyer": "Business Services Organisation Procurement and Logistics Services",
+   "supplier": null,
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076235-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "33100000",
+    "33140000",
+    "33157000",
+    "33157100",
+    "33157400"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NENC ICB Central Acute Respiratory Infection Service (Temporary/Winter Pressures) Most Suitable Provider Process",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "supplier": "Durham Dales Health Federation, Chester le Street Health Limited, Central Durham GP Providers, Derwentside Healthcare Ltd, South Durham GP CIC Federation, Sunderland GP Alliance, South Tyneside West PCN",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075852-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Capital Purchase of Hamilton T1 Transport Ventilator",
+   "buyer": "Hywel Dda University Local Health Board",
+   "supplier": "HAMILTON MEDICAL UK LTD",
+   "date": "2026-08-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075099-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ED C-MAC Video Laryngoscope",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-08-05",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/c41ef013-8c79-4f36-a6b2-48c8e2184cd1",
+   "value": 12030,
+   "periodEnd": "2027-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Respiratory Therapy Consumables & Ventilator Consumables & Accessories",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "HEADINGTON MEDICAL TECHNOLOGY LTD, CAVAGNA GROUP UK LIMITED, INTUS HEALTHCARE LT",
+   "date": "2026-07-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/069368-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Oxygen Therapy & Inhalation",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "FLEXICARE MEDICAL LIMITED",
+   "date": "2026-07-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/063132-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Robotic Bronchoscopy System",
+   "buyer": "NHS Golden Jubilee",
+   "supplier": "Intuitive Surgical Limited",
+   "date": "2026-06-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/057127-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT3212 Purchase of Sleep Study Equipment",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "S-Med Limited",
+   "date": "2026-05-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/043568-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT3113 Purchase of Video Laryngoscopes",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Verathon Medical (UK) Ltd",
+   "date": "2026-03-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/025848-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT Purchase of Video Laryngoscopes",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "OLYMPUS KEYMED GROUP LIMITED",
+   "date": "2026-02-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/017966-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Provision of Equipment and Consumables for the Sleep Apnoea Service",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "supplier": "Philips Electronics UK Limited",
+   "date": "2025-12-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082974-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Respiratory Metagenomics Expansion Programme to Oxford Nanopore Technologies PLC",
+   "buyer": "Guy's and St Thomas' NHS Foundation Trust",
+   "supplier": "Oxford Nanopore Technologies Limited",
+   "date": "2025-12-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079107-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Lung Function Equipment",
+   "buyer": "Royal Papworth Hospital NHS Foundation Trust",
+   "supplier": "VITALOGRAPH LIMITED",
+   "date": "2025-10-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/066627-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "The supply of Nasal Cannula & Oxygen Masks for Pandemic Preparedness 24/25",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown throug",
+   "supplier": "Flexicare Medical Limited",
+   "date": "2025-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/060521-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Framework Agreement for the Supply of Respiratory Products and Services",
+   "buyer": "HealthTrust Europe LLP (HTE) acting as agent for Mid and South Essex NHS Foundat",
+   "supplier": "Ambu Ltd, Critical Healthcare Ltd, Flexicare Medical Ltd, Healthcare 21 UK Ltd, ",
+   "date": "2025-06-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/031795-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Tracheostomy Tubes, Tube Holders and Accessories - 5806781",
+   "buyer": "Business Services Organisation Procurement and Logistics Service",
+   "supplier": "Fannin Limited, Healthcare 21 NI, Iskus Health Limited",
+   "date": "2025-05-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028413-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Non-Invasive Ventilation, Sleep Therapy (CPAP) and Sleep Monitoring (Diagnostics)",
+   "buyer": "NHS Supply Chain Operated by Supply Chain Coordination Ltd (SCCL)",
+   "supplier": "Acurable Limited, Armstrong Medical Ltd, Baywater Healthcare UK Limited, Breas M",
+   "date": "2025-05-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023362-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Robotic Bronchoscopy System",
+   "buyer": "NHS Golden Jubilee",
+   "supplier": "Intuitive Surgical Limited",
+   "date": "2025-02-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/006829-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Robotic Bronchoscopy System",
+   "buyer": "NHS Golden Jubilee",
+   "supplier": "Intuitive Surgical Limited",
+   "date": "2025-02-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/006880-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Robotic Bronchoscopy System",
+   "buyer": "NHS Golden Jubilee",
+   "supplier": "",
+   "date": "2025-02-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/006884-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Respiratory therapy services, equipment and consumables",
+   "buyer": "Queen Victoria Hospital NHS Foundation Trust",
+   "supplier": "Resmed (UK) Limited",
+   "date": "2024-12-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/041577-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Oxygen and Sleep Therapy",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Baywater Healthcare UK Limited, Dolby Vivisol, Loewenstein Medical Uk Ltd, Phili",
+   "date": "2024-12-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/039526-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "BTH23-143 Sleep Apnoea Service",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Dolby Vivisol",
+   "date": "2024-10-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/034596-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Fractional Exhaled Nitric Oxide (FeNO) Equipment and Consumables [4638012]",
+   "buyer": "BSO Procurement and Logistics Service on Behalf of Belfast Health and Social Car",
+   "supplier": "NIOX Group PLC Circassia Ltd",
+   "date": "2024-06-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/019601-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Contract for Amikacin liposomal with nebulisation (with device)",
+   "buyer": "Northern Health and Social Care Trust",
+   "supplier": "INSMED LIMITED",
+   "date": "2024-04-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/013387-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Tracheostomy Tubes and Accessories",
+   "buyer": "NHS National Services Scotland",
+   "supplier": "Atos UK, Smiths Medical International Ltd, Healthcare 21 UK Ltd.",
+   "date": "2024-01-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/003225-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Jet Ventilator Purchase",
+   "buyer": "NWSSP Cardiff and Vale NHS trust",
+   "supplier": "CLS Surgical Ltd",
+   "date": "2024-01-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002198-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Jet Ventilator Purchase",
+   "buyer": "NWSSP Cardiff and Vale NHS trust",
+   "supplier": "CLS Surgical Ltd",
+   "date": "2023-10-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/031482-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": {
+  "parts": [
+   "IXA"
+  ],
+  "vmpFilter": "peak flow meter|tracheostomy (?:breathing aid|tube holder|cleaning device)|tracheostomy and laryngectomy protector",
+  "vmpCount": 7,
+  "effectiveMonth": "2026-09",
+  "dataAsOf": "2026-09-09",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
+  "lineCount": 608,
+  "supplierCount": 23,
+  "topSuppliers": [
+   {
+    "name": "Severn Healthcare Technologies Ltd",
+    "lines": 211
+   },
+   {
+    "name": "Atos Medical AB",
+    "lines": 168
+   },
+   {
+    "name": "Healthcare 21",
+    "lines": 71
+   },
+   {
+    "name": "Smiths Medical International Ltd",
+    "lines": 52
+   },
+   {
+    "name": "Sheffmed Ltd",
+    "lines": 33
+   },
+   {
+    "name": "Insight Medical Products Ltd",
+    "lines": 15
+   },
+   {
+    "name": "Advancis Medical",
+    "lines": 10
+   },
+   {
+    "name": "JLJ Healthcare Ltd",
+    "lines": 6
+   },
+   {
+    "name": "Kapitex Healthcare Ltd",
+    "lines": 6
+   },
+   {
+    "name": "CCMed Ltd",
+    "lines": 5
+   },
+   {
+    "name": "Clement Clarke International Ltd",
+    "lines": 5
+   },
+   {
+    "name": "Teleflex",
+    "lines": 4
+   },
+   {
+    "name": "nSpire Health Ltd",
+    "lines": 4
+   },
+   {
+    "name": "Vitalograph Ltd",
+    "lines": 3
+   },
+   {
+    "name": "Essential-Healthcare Ltd",
+    "lines": 2
+   },
+   {
+    "name": "Generic Unspec",
+    "lines": 2
+   },
+   {
+    "name": "Medicareplus International Ltd",
+    "lines": 2
+   },
+   {
+    "name": "Micro Medical Ltd",
+    "lines": 2
+   },
+   {
+    "name": "Syringa UK Ltd",
+    "lines": 2
+   },
+   {
+    "name": "TriOn Pharma Ltd",
+    "lines": 2
+   }
+  ],
+  "priceMin": 0.38,
+  "priceMax": 174.18
+ }
+}

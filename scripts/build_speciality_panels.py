@@ -4026,6 +4026,245 @@ SPECIALITY_RULES = {
         ),
     },
 
+    # PAGE 2843. Scope, taken from the page itself rather than from the word
+    # "respiratory": airways disease and inhaled therapy, oxygen, aerosol and
+    # nebuliser therapy, lung function and diagnostics, non-invasive ventilation,
+    # CPAP and sleep, airway management and tracheostomy, and ventilators. The page
+    # carries NO thoracic oncology section, NO tuberculosis service section and NO
+    # cystic fibrosis section, and the refusals below follow that scope rather than
+    # widening past it.
+    "respiratory": {
+        "label": "Respiratory",
+        # FOUR AGREEMENTS, and the number is the page's own. Its Buying route, its
+        # framework calendar, its Deep dive and its Verification table all name the
+        # same four, each read on its NHS Supply Chain contract launch brief on
+        # 07/09/2026, and the page says in terms that "four frameworks cover this
+        # patch". All four were matched back against the 121 names in frameworks.json
+        # on 10/09/2026 and the pattern below returns exactly those four:
+        #   Respiratory Solutions (37 suppliers across 6 product lots, ends
+        #     15/06/2027) — the framework the patch is named after. Lot 1 oxygen
+        #     therapy, Lot 2 aerosol therapy, Lot 3 respiratory therapy including
+        #     spirometers, peak flow meters, FeNO analysers, cough assist and
+        #     compressor nebulisers, Lot 5 the diagnostics lot NHS Supply Chain says
+        #     was developed with respiratory specialists, Lot 6 consumables. The
+        #     nearest expiry on the patch, and it has already taken a 24-month and an
+        #     11-month extension.
+        #   Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring
+        #     Diagnostics (2025/S 000-023362, 28 suppliers, one lot, ends 28/09/2027).
+        #   Airway Management Products and Associated Equipment (2023/S 000-005729,
+        #     54 suppliers, ends 21/07/2028). SHARED with theatres and surgical, which
+        #     claims it too, and rightly: the page's own words are that airway
+        #     management is "largely a theatre and critical care conversation, but the
+        #     same accounts hold the ventilated respiratory patients". It is also
+        #     categorised under Medical and Surgical Consumables, so a search of NHS
+        #     Supply Chain for "respiratory" does not find it — which is exactly why
+        #     the CBU category field is never the key here.
+        #   Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy
+        #     Systems, Related Accessories and Services (2026/S 000-008108, 25
+        #     suppliers, ends 28/02/2029). SHARED with theatres and surgical and with
+        #     maternity and neonatal, which claim the anaesthesia and the neonatal
+        #     halves. This page claims it for the ventilator half only, which is the
+        #     half the page names.
+        #
+        # NOT CLAIMED, each checked against the 121 names rather than assumed:
+        #   Pulse Oximetry, Capnography and Related Monitoring Technologies (26
+        #     suppliers) -> claimed by nobody, and still refused. It is a patient
+        #     monitoring framework, capnography is an anaesthesia and critical care
+        #     measurement, and the page names four frameworks and not five. Claiming a
+        #     fifth here would put the panel and the page in contradiction in front of
+        #     the same member (root rule 18). Overnight pulse oximetry does appear on
+        #     the page, as the sleep screening test and as an ARTP competency, and the
+        #     include list reaches those rows through "sleep monitoring" and "sleep
+        #     diagnostics" instead.
+        #   Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions
+        #     -> cardiology and cardiac surgery's, and claimed there. Its award row
+        #     does reach this panel on the title, because cardiopulmonary exercise
+        #     testing is lung function and the page names CPET, but the framework
+        #     itself stays where it is.
+        #   Enteral Feeding, Patient Monitoring Equipment, Electrodes and the medical
+        #     gas routes -> not this patch. Piped and cylinder medical gases are an
+        #     estates and pharmacy category covering nitrous oxide, medical air and
+        #     surgical CO2 as well as oxygen.
+        "frameworks": (
+            r"\b(respiratory solutions|non invasive ventilation|airway management|"
+            r"anaesthesia machines)\b"
+        ),
+        # DERIVED, not guessed. The pattern below was run over all 1,972 rows of
+        # tender-history.json and all 1,397 of framework-awards.json — 3,369 titles —
+        # on 10/09/2026, and all 80 surviving titles were read one by one. Every one
+        # is this patch: the four NHSSC agreements themselves, respiratory therapy
+        # services and consumables, three regional Acute Respiratory Infection
+        # services, FeNO and asthma diagnostic hubs, lung function and pulmonary
+        # function testing equipment and filters, Ellipta inhalers, nebulised
+        # amikacin, three cystic fibrosis modulator contracts, oxygen therapy,
+        # manifolds, liquid oxygen and pandemic oxygen masks, inhaled nitric oxide,
+        # CPAP and ASV equipment and consumables, two sleep apnoea services and a
+        # sleep study equipment purchase, tracheostomy tubes, holders and closed
+        # tracheal suction, breathing systems and circuits, video laryngoscopes and
+        # intubating devices, a robotic bronchoscopy system, respiratory metagenomic
+        # sequencing, and sixteen rows of the 2020-21 Ventilator Challenge and Rapid
+        # Manufacture Ventilator System programme.
+        #
+        # NOT INCLUDED, deliberately. Every term below was run over the same 3,369
+        # titles and its hits were read before it was dropped, which is why none of
+        # them needs an exclusion later:
+        #   bare "anaesthe*"  -> 11 hits and only the ventilator ones are this patch:
+        #     sevoflurane and isoflurane, inhalation anaesthetics and vaporisers,
+        #     anaesthetic monitors, anaesthetic management software, anaesthetics
+        #     insourcing, an analgesics and anaesthetics medicines contract, and three
+        #     anaesthetic machine purchases. Anaesthesia is theatres and surgical's
+        #     patch and is claimed there. "breathing circuit" and "breathing system"
+        #     are used instead and still catch the two circuit contracts.
+        #   bare "ventilation" -> refused because a building has it too: "Provision of
+        #     Ventilation and Other Remediation Works" and "Ventilation Verification"
+        #     are HVAC contracts. "ventilator" plus the qualified clinical forms
+        #     (non-invasive, mechanical, home, nasal, neonatal, infant, patient, jet,
+        #     transport, critical care) catch every real row and neither HVAC contract
+        #     can reach a member even if the exclusion list is edited later.
+        #   bare "sleep"      -> its hits include "Universal Sleep Support Model" from
+        #     an ICB, which is an insomnia and sleep-behaviour service, and two rough
+        #     sleeping drug and alcohol contracts. The qualified forms below catch all
+        #     five real sleep rows without the bare word ever being able to carry a
+        #     homelessness contract onto a respiratory page.
+        #   bare "lung"       -> three of its six hits are heart-lung machines and
+        #     perfusion systems, which are cardiac surgery. "lung function" is used.
+        #   "lung cancer"     -> refused, and this is a scope decision rather than a
+        #     data one. "Lung Cancer Screening - DAP C" and "Replacement Ultrasound
+        #     Machine for Lung Cancer Diagnostic" are real and are respiratory-adjacent,
+        #     but the page carries no thoracic oncology or screening section and
+        #     Targeted Lung Health Checks are a population radiology programme.
+        #     "bronchoscop" IS included, because bronchoscopy is the respiratory
+        #     physician's own instrument whatever the indication.
+        #   bare "pulmon*"    -> "Cardiopulmonary Bypass Oxygenators with Customised
+        #     Tubing Pack" is perfusion. The pattern says "pulmonary function",
+        #     "pulmonary diagnostic" and "pulmonary rehabilitation", and the word
+        #     boundary means "Cardiopulmonary" cannot match any of them.
+        #   "oximet" and "capnograph" -> refused for the same reason the Pulse
+        #     Oximetry framework is not claimed above. Their three hits are monitoring
+        #     consumables, sensors and the framework itself.
+        #   bare "suction"    -> four hits and three are general theatre and ward
+        #     suction sold alongside wound drainage and autologous blood systems.
+        #     "tracheal" catches the one real row, Sterile Closed Tracheal Suction.
+        #   "blood gas"       -> two hits, both pathology point-of-care managed
+        #     services, and claimed by pathology and laboratory medicine. Blood gas
+        #     sampling appears on this page only as an ARTP competency certificate.
+        #   "smoking cessation" and "tobacco" -> five hits, all local authority and
+        #     ICB public health commissioning, including a workplace scheme and a
+        #     behaviour-change advertising campaign. The page carries smoking only as
+        #     NICE NG115's long-term oxygen exclusion and as a calendar date.
+        #   "tuberculosis"    -> two hits, an ICB latent TB screening programme and a
+        #     "Global Tuberculosis Screening Service" which is the pre-entry
+        #     immigration screening market. TB reaches the page as a BTS/BIA/NICE
+        #     guideline news item, not as a procurement route.
+        #   "medical gas"     -> two hits, cylinder supply and an estates gas contract.
+        #     The oxygen-specific rows (BOC Oxygen Manifolds, Medical Liquid Oxygen)
+        #     match on "oxygen" and the generic gas category stays out.
+        #   "resuscitat", "vaporis", "humidificat" and bare "thoracic" -> refused.
+        #     Their hits are baby warmers, Resuscitation Council course manuals,
+        #     sevoflurane vaporisers, and a cardiac catheterisation lab at a Cardio
+        #     Thoracic Centre. "humidificat" has no hit at all and could only ever
+        #     arrive as plant machinery.
+        "include": (
+            r"\b(respirator\w*|"
+            r"pulmonary function\w*|pulmonary diagnostic\w*|pulmonary rehabilitation|"
+            r"lung function|lung volume|"
+            r"asthma|copd|chronic obstructive pulmonary|"
+            r"bronchoscop\w*|bronchodilat\w*|bronchiectasis|"
+            r"spirometr\w*|spirometer\w*|peak flow|"
+            r"feno|fractional exhaled nitric oxide|nitric oxide|"
+            r"oxygen|nebulis\w*|nebuliz\w*|inhaler\w*|"
+            r"ventilator\w*|"
+            r"(?:non-?invasive|mechanical|home|nasal|neonatal|infant|patient|jet|"
+            r"transport|critical care) ventilation|"
+            r"cpap|bipap|continuous positive airway pressure|"
+            r"sleep (?:apnoea|apnea|therapy|monitoring|diagnostic\w*|stud\w*)|"
+            r"apnoea|apnea|polysomnograph\w*|"
+            r"airway\w*|intubat\w*|laryngoscop\w*|"
+            r"tracheostom\w*|tracheotom\w*|tracheal|endotracheal|"
+            r"breathing circuit\w*|breathing system\w*|"
+            r"cystic fibrosis|"
+            r"pleural|chest drain\w*|pneumothorax|pneumonia|"
+            r"cough assist|high[- ]flow nasal)\b"
+        ),
+        # THREE PATTERNS, and each is here because a real row matched `include`, was
+        # read, and was rejected:
+        #   hyperbaric      -> "Most Suitable Provider: Hyperbaric Oxygen Therapy
+        #                      (HBOT) Services for all ages". HBOT treats decompression
+        #                      illness, radiation injury and non-healing wounds. It is
+        #                      oxygen and it is not respiratory medicine.
+        #   epoc device     -> "WSFT - Pathology - COPD - 6 EPOC devices service
+        #                      cover". The epoc is a blood gas point-of-care analyser
+        #                      and the title says Pathology. Whether "COPD" there names
+        #                      a pathway or a contract code cannot be told from the
+        #                      title, so it is refused rather than guessed at (rule 2).
+        #   newborn screening -> "Procurement of Test Kits for Newborn Screening of
+        #                      Cystic Fibrosis (CF), Congenital Hypothyroidism (CHT)".
+        #                      A newborn bloodspot card screens for nine conditions and
+        #                      is the neonatal screening programme's, not respiratory's.
+        "exclude": r"\b(hyperbaric|epoc devices?|newborn screening)\b",
+        # CPV 33157 is the "Gas therapy and respiratory devices" family — 33157000 the
+        # family itself, 33157100 medical gas masks, 33157400 medical breathing
+        # devices. Two rows in this panel carry it (Airway Management Products, and the
+        # CPAP and ASV consumables market engagement). Exactly one other notice in the
+        # whole feed carries a 33157 code and it is instructive: "Diving Life Support
+        # (DLS) In-Service Support (ISS)" is filed under 33157500, hyperbaric chambers,
+        # alongside diving gear and compressor codes. It cannot reach this panel,
+        # because the title gate refuses it. That is the rule working: the CPV
+        # corroborates a title match, it never admits on its own.
+        "cpv": ("33157",),
+        # PART IXA, SLICED, NEVER CLAIMED WHOLE. Part IXA is 56,833 lines and 56,225
+        # of them are the dressing and elastic hosiery range that belongs to tissue
+        # viability and wound care. Inside it sit two genuinely respiratory
+        # reimbursement ranges, 608 lines across 7 virtual medicinal products, and
+        # every one of the 7 was read: Tracheostomy breathing aids (483 lines), the
+        # Tracheostomy and laryngectomy protectors (58), Tracheostomy tube holders
+        # (24), Tracheostomy cleaning devices (17), and the peak flow meters —
+        # standard range (15), low range (8) and replacement plastic mouthpieces (3).
+        # 23 suppliers, led by Severn Healthcare Technologies and Atos Medical, and
+        # reimbursement from £0.38 to £174.18.
+        #
+        # ONE FAMILY WAS FOUND AND DESIGNED OUT RATHER THAN EXCLUDED. Bare
+        # "tracheostomy" over Part IXA also returns 11 tracheostomy dressing lines and
+        # one fenestrated polyurethane foam dressing. Those are dressings, which is
+        # tissue viability's product and tissue viability's part; build_tariff has no
+        # exclusion mechanism, so the pattern names the four tracheostomy care
+        # families rather than the bare word and no dressing line can reach the panel.
+        #
+        # STATED LIMIT, because it is the larger half of the money. The community
+        # respiratory economy is overwhelmingly Part VIII drugs on FP10 — £1.219bn net
+        # ingredient cost and 77.6m items in England in 2024/25, the fourth largest BNF
+        # chapter — and Part IX carries none of it. Inhalers, and therefore Chiesi's
+        # 35.8%, GSK's 18.5% and AstraZeneca's 9.5% community share, are not in this
+        # summary and must never be read out of it. The page's own community section
+        # is where that market lives.
+        "tariffParts": ("IXA",),
+        "tariffVmp": (
+            r"peak flow meter|"
+            r"tracheostomy (?:breathing aid|tube holder|cleaning device)|"
+            r"tracheostomy and laryngectomy protector"
+        ),
+        "coverageNote": (
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the four agreements "
+            "above are shared routes rather than respiratory ones: Airway Management "
+            "Products is categorised by NHS Supply Chain under Medical and Surgical "
+            "Consumables and is claimed by theatres and surgical, and Anaesthesia "
+            "Machines, Ventilators, Neonatal Equipment and Phototherapy Systems is "
+            "claimed by theatres and surgical and by maternity and neonatal, with this "
+            "page claiming only the ventilator half. Being named on a framework is not "
+            "evidence of volume on this patch, and being absent from one is not "
+            "evidence of absence from the market. The supplier list is built from the "
+            "four frameworks, so it counts airway and anaesthesia houses alongside "
+            "respiratory ones; the page's own overlap analysis is the better guide to "
+            "who is really on this patch, and it finds one supplier on all four lists "
+            "and five on three. Home oxygen is the largest gap and it is a real one: "
+            "it is bought through regional Home Oxygen Service contracts, not through "
+            "any national NHS Supply Chain framework, so it appears in awards and "
+            "tenders and nowhere else. The community medicines half of this patch — "
+            "the larger half by money — is FP10 prescribing under BNF Chapter 3 and "
+            "has no framework and no Drug Tariff Part IX presence at all."
+        ),
+    },
+
 }
 
 
