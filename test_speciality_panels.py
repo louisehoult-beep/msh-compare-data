@@ -35,6 +35,7 @@ RADIOLOGY = "radiology-and-imaging"
 RENAL = "renal"
 HAEM = "haematology-and-patient-blood-management"
 MATERNITY = "maternity-and-neonatal"
+GYNAE = "gynaecology-and-womens-health"
 fails = []
 
 
@@ -2942,10 +2943,246 @@ _mn_kb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", MATERNI
 check("slice stays under 200 KB (is %d KB)" % _mn_kb, _mn_kb < 200)
 
 
-# The exclude=None path must not leak to any other rule: every other speciality
-# still has to carry a real exclusion list it earned.
+# ---------------------------------------------------------------------------
+# GYNAECOLOGY AND WOMEN'S HEALTH. Two pathways, NG88 and NG123, and a patch whose
+# danger is not one loose word but SUBSTRINGS: "uter" lives inside Computer and
+# Outer, "ovar" inside Novartis, "IUS" inside Fresenius and Fabius, "HRT" inside a
+# reference number. It is also the first speciality whose Drug Tariff lines are a
+# SLICE of a part rather than the part, so there is an invariant for that too.
+# ---------------------------------------------------------------------------
+print("\nGYNAECOLOGY AND WOMEN'S HEALTH")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), GYNAE],
+               check=True, capture_output=True)
+gy = load_panel(GYNAE)
+check("panel is defined", gy.get("defined") is True)
+
+_gy_rule = B.SPECIALITY_RULES[GYNAE]
+_gy_rx = B.compile_rule(_gy_rule)
+_gy_th = B.load("tender-history.json")
+_gy_ix = {k: i for i, k in enumerate(_gy_th["schema"])}
+_gy_corpus = [r[_gy_ix["t"]] or "" for r in _gy_th["rows"]]
+_gy_corpus += [(a.get("title") or "") for a in B.load("framework-awards.json")["awards"]]
+
+print("  the substring traps stay shut — every one of these is a real row")
+for bad in [
+        # "uter" inside Computer and Outer. Only uterine/uterus/intrauterine are used.
+        "Motorized Patient Couch and Plastic Composite Outer Covers for a new MRI Scanner Design",
+        "Procurement of a Computer Aided Facilities Management (CAFM) System",
+        # "ovar" inside Novartis. Only ovarian/ovary/ovaries are used.
+        "NOVARTIS PHARMACEUTICALS UK LTD (WT) - WT2024-11, WT2024-12, WT2024-13 - RIBOCICLIB [KISQALI]",
+        "Procurement of Midostaurin from Novartis UK",
+        # "IUS" inside Fresenius, Excelsius and Fabius. Only LNG-IUS is used.
+        "C461962 - W148888 - Waiver for the Supply of Fresenius Spare Parts",
+        "ExcelsiusGPS robot with 5 year servicing",
+        "The Support of Fabius tiro anaesthesia apparatus",
+        "RRT Stockpile Call Off Terms - Fresenius",
+        # "HRT" inside a contract reference number.
+        "CHRT503-2021-22 -DS/DN - Greater Manchester Pharmacy Logistics Supply Chain Service",
+        # "coil" is an MRI part here, never the contraceptive kind.
+        "1917/ITT/LW Supply and Installation of Rx coils for MRI scanners",
+        "Purchase of replacement coil for Logiq E10S",
+]:
+    check("never admitted: %s" % bad[:58], not B.match_title(_gy_rx, bad))
+
+print("  the ordinary words stay refused — each was tried and read")
+for bad in [
+        # "menstrual" — a Leidos/Bunzl hygiene supply contract, not gynaecology.
+        # Only the phrase "heavy menstrual bleeding" is used.
+        "The Supply of Menstrual Products",
+        # "sling" — patient handling hoist slings.
+        "The Supply and Delivery of High Back Slings, Dress Toileting Slings, Electric Hoists, Stand Aids",
+        # "mesh" — the include says "surgical mesh", so hernia never reaches here.
+        "Hernia Mesh incl. Fixation",
+        "NP51820 Hernia Mesh",
+        # "obstetric" is refused outright, which is why this page never has to
+        # write the exclusion the maternity rule needs for the same four rows.
+        "Non-Obstetric Ultrasound Service – East Surrey – CAN",
+        "Non-Obstetrical Ultrasound – East Surrey – CAN",
+        "Insourced Non-Obstetric Ultrasound Services YSTH",
+        "PSR Urgent Award for Insourced Non-Obstetric Ultrasound Services YSTH",
+        # HPV vaccination is a national immunisation programme. The feed's `spec`
+        # field tags both of these rows as this speciality. It is wrong.
+        "Human Papillomavirus (HPV) vaccine (2025)",
+        "Human papillomavirus vaccine 2021",
+        "Improving HPV uptake in school leavers living in areas of high deprivation",
+        # STI testing — one row is already pathology's, and neither is gynaecology.
+        "WSFT - Pathology - STI Testing",
+        # Bare HIV is antiretroviral pharmacy and commissioned HIV services.
+        "HIV Medicines",
+        "NP43324 HIV Generic Medicines",
+        "South London HIV Peer Support and Advice & Advocacy Services",
+        # Botulinum toxin covers every indication; none of these is a gynae buy.
+        "NP90323(a) Botulinum Toxin Type A Medicines (Botox®)",
+        "NP90323(c) Botulinum Toxin Type A Medicines (Xeomin®)",
+        # Hologic sells into mammography and cytology as well as gynaecology, and
+        # this row is already counted on pathology. Only "novasure" is used.
+        "Roche - Hologic - Cytology - Equipment and Consumables MSC",
+        # Names no organ. Genuinely ambiguous on the title, so it is declined.
+        "Tissue removal devices and accessories",
+        # Bare "screening" is bowel, lung, eye, TB, newborn and genetic screening.
+        "NHSS Bowel Screening Test Kits and Analysers",
+        "Lung Cancer Screening - DAP C",
+        "Procurement of Test Kits for Newborn Screening of Cystic Fibrosis (CF)",
+        # Bare "cervical" is a spine and collar word, so only the cervical
+        # screening / smear / cytology forms are used.
+        "Cervical Collars and Spinal Immobilisation",
+]:
+    check("never admitted: %s" % bad[:58], not B.match_title(_gy_rx, bad))
+
+print("  breast stays with plastics — this page counts the framework, not the awards")
+# The page has a section headed BREAST IMPLANTS, EXPANDERS AND EXTERNAL PROSTHESES,
+# but plastics, burns and reconstruction already claims these four awards. Counting
+# them twice would tell a rep nothing new.
+for bad in [
+        "HEY/18/161 BREAST IMPLANTS",
+        "CLI-OJEU-45806 SURGICALLY IMPLANTED BREAST PROSTHESES",
+        "External Breast Prosthesis",
+        "External Breast Prosthesis [4233683]",
+        "Breast Pumps and Breast Milk Collection Sets [5180689]",
+        "Maintenance of Mobile Breast Screening Tailers and Mobile MRI Trailers",
+]:
+    check("breast award left to its own page: %s" % bad[:48], not B.match_title(_gy_rx, bad))
+
+print("  true positives — awards that must be on this patch")
+for good in [
+        "Provision of Outsourcing Gynaecology Services for Barking, Havering & Redbridge University Hospital NHS Trust",
+        "All Wales Womens Health Obs & Gynae Consumables",
+        "Hysteroscopes",
+        "Replacement of Hysteroscopy Scopes",
+        "Endometrial Ablation Devices and Uterine Tissue Removal Systems",
+        # Only reachable through the brand name, exactly as "isolette" is on the
+        # maternity patch. Hologic's endometrial ablation system.
+        "2 X HOLOGIC NOVASURE RFC2010 RF CONTROLLERS",
+        "Pessaries [4186866]",
+        "Obstetrics and Vinyl Pessaries",
+        "0P002079 - Colposcope - Capital - Central Delivery Suite RSCH",
+        "ESNEFT3207 Urodynamics",
+        # Continence hands the surgical stress-incontinence ground to this page and
+        # excludes it by name on its own; it must therefore land somewhere.
+        "Tower 2 - Surgical Mesh, Fixation Devices, Stress Incontinence and Bulking Agents",
+        "Complex Termination of Pregnancy (CTOP) Services across the South East",
+        "NP36726 Fertility Medicines",
+        "NP57421 Condoms and related Products",
+        "Vaginal Speculum",
+        "AA-563-24 TW Provision of Intrauterine Shaver and associate units",
+]:
+    check("admitted: %s" % good[:58], B.match_title(_gy_rx, good))
+
+print("  the six agreements, and only those six")
+_gy_want = {
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+    "Obstetrics and Vinyl Pessaries",
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Surgical Mesh",
+    "Surgical Implants for Men’s and Women’s Health",
+}
+_gy_got = {f["name"] for f in gy["frameworks"]}
+check("exactly the six agreements the page's Buying route blocks name",
+      _gy_got == _gy_want, "got %s" % sorted(_gy_got - _gy_want))
+# Named refusals. Each is a framework that exists in frameworks.json and is NOT
+# this page's, and each would inflate the Suppliers tab if it crept in.
+_gy_fw_rx = B.compile_rule(_gy_rule)["fw"]
+for bad in [
+        "External Breast Prosthesis and Chest Support",
+        "Neuromodulation Devices and Associated Products",
+        "Procedure Packs",
+        "Electrosurgical Consumables and Related Accessories",
+        "Mammography Imaging Systems and Associated Options and Related Services",
+        "Urology and Bowel Management",
+        "Disposable and Washable Continence Care",
+        "Bladder Scanners and Associated Options and Related Services",
+        "Flexible Endoscopes and Associated Options and Related Services",
+]:
+    check("framework not claimed: %s" % bad[:52], not _gy_fw_rx.search(bad))
+
+print("  the delisted six are removed here as well as on maternity")
+# A shared framework corrected on one page and published raw on the other is the
+# same class of defect as a wired page with no data behind it.
+_gy_shared = [f for f in gy["frameworks"]
+              if f["name"] == "Maternity, Obstetrics, Gynaecology and Sexual Health Products"][0]
+check("the shared agreement shows 51 suppliers, not 57",
+      _gy_shared["supplierCount"] == 51, "got %s" % _gy_shared["supplierCount"])
+check("all six delisted companies are recorded rather than dropped",
+      len(_gy_shared["delisted"] or []) == 6)
+_gy_names = " || ".join(
+    s["name"] + " " + " ".join(s["variants"]) for s in gy["suppliers"]).lower()
+for gone in ["cardiac services", "durbin", "medichill", "valley northern", "viomedex"]:
+    check("delisted company absent from the Suppliers tab: %s" % gone, gone not in _gy_names)
+# Bray holds the pessary agreement and was delisted from the other, so it must
+# still appear — but only against the pessaries.
+_gy_bray = [s for s in gy["suppliers"] if "bray" in s["name"].lower()]
+check("Bray appears on the pessary agreement only",
+      len(_gy_bray) == 1 and _gy_bray[0]["frameworks"] == ["Obstetrics and Vinyl Pessaries"],
+      "got %s" % [(s["name"], s["frameworks"]) for s in _gy_bray])
+
+print("  the Drug Tariff is a SLICE of Part IXA, never the whole part")
+_gy_dt = gy["drugTariff"]
+check("Part IXA is claimed", _gy_dt["parts"] == ["IXA"])
+check("and it is narrowed by a stated product filter", _gy_dt["vmpFilter"] == "pessar")
+# The whole of Part IXA is 56,833 lines of dressings and elastic hosiery. If this
+# ever approaches that, the filter has stopped being applied and Juzo and Sigvaris
+# are about to be published as gynaecology's leading suppliers.
+_gy_ixa_all = len([r for r in B.load("drug-tariff-part-ix.json")["rows"] if r[0] == "IXA"])
+check("the slice is a small fraction of Part IXA (%d of %d lines)"
+      % (_gy_dt["lineCount"], _gy_ixa_all),
+      _gy_dt["lineCount"] < _gy_ixa_all / 100)
+check("every counted line is a pessary line", _gy_dt["lineCount"] == 257,
+      "got %s" % _gy_dt["lineCount"])
+check("64 distinct virtual medicinal products, as the page states",
+      _gy_dt["vmpCount"] == 64, "got %s" % _gy_dt["vmpCount"])
+check("eight suppliers, as the page states",
+      _gy_dt["supplierCount"] == 8, "got %s" % _gy_dt["supplierCount"])
+# The dressing and hosiery names that dominate Part IXA must never surface here.
+_gy_dt_names = " ".join(s["name"] for s in _gy_dt["topSuppliers"]).lower()
+for bad in ["juzo", "sigvaris", "molnlycke", "smith & nephew", "convatec"]:
+    check("no Part IXA dressing/hosiery supplier leaks in: %s" % bad, bad not in _gy_dt_names)
+check("the published rule states the slicing, so a reader can judge it",
+      "narrowed to the lines whose virtual medicinal product" in gy["rules"]["drugTariff"]
+      and "/pessar/i" in gy["rules"]["drugTariff"])
+
+print("  no exclusion list, and the file says why rather than hiding it")
+check("exclude is genuinely None, not a never-matching placeholder",
+      _gy_rule["exclude"] is None)
+check("the published rule explains the absence",
+      "NO EXCLUSION LIST IS APPLIED" in gy["rules"]["awards"])
+check("no CPV family is claimed, and the absence is explained",
+      _gy_rule["cpv"] is None and "No CPV family corroborates" in gy["rules"]["awards"])
+
+print("  the coverage limits are stated, not hidden")
+_gy_note = gy["rules"]["frameworks"]
+for phrase in ["no gynaecology category", "Lot 6", "British Hernia Society",
+               "Operating Theatre and Outpatient Microscopes", "Neuromodulation"]:
+    check("coverage note carries: %s" % phrase, phrase in _gy_note)
+
+check("no open tender is invented for an empty day",
+      gy["counts"]["openTenders"] == len(gy["openTenders"]))
+_gy_raw = len([t for t in _gy_corpus if B.match_title(_gy_rx, t)])
+check("the published match count is not inflated above what the filter returns",
+      gy["counts"]["awardsShown"] <= gy["counts"]["awardsMatched"] <= _gy_raw,
+      "shown %d, matched %d, raw %d" % (
+          gy["counts"]["awardsShown"], gy["counts"]["awardsMatched"], _gy_raw))
+check("every published award title is one the rule actually accepts",
+      all(B.match_title(_gy_rx, a.get("title") or "") for a in gy["awards"]))
+check("licence notice carried", bool(gy.get("_notice", {}).get("owner")))
+_gy_kb = os.path.getsize(os.path.join(HERE, "data", "speciality-panels", GYNAE + ".json")) // 1024
+check("slice stays under 200 KB (is %d KB)" % _gy_kb, _gy_kb < 200)
+
+# The tariff slicing must not have changed any panel that does not ask for it.
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
-    if _slug == RENAL:
+    if _r.get("tariffVmp") and _slug != GYNAE:
+        check("%s must not have grown a tariff filter unnoticed" % _slug, False)
+
+
+# The exclude=None path must not leak to any rule that has not earned it. Two have:
+# renal and gynaecology, each because every hit its include produced was read one by
+# one and none of them was wrong. Every other speciality still has to carry a real
+# exclusion list. Adding a slug to this set is a decision, not a way past a failure.
+_EXCLUDE_NONE_EARNED = {RENAL, GYNAE}
+for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
+    if _slug in _EXCLUDE_NONE_EARNED:
+        check("%s declares its empty exclusion list explicitly" % _slug,
+              _r.get("exclude") is None)
         continue
     check("%s still carries an exclusion list" % _slug, bool(_r.get("exclude")))
 

@@ -1,0 +1,2060 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "gynaecology-and-womens-health",
+ "label": "Gynaecology and Women's Health",
+ "defined": true,
+ "generated": "2026-09-10",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-09T11:18:46+00:00",
+  "openTenders": "09/09/2026",
+  "drugTariff": "2026-09-09"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(gynaecolog\\w*|pessar\\w*|rigid endoscopy|minimally invasive surgery|surgical mesh|surgical implants for men)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no gynaecology category at NHS Supply Chain. Its briefs sit in six categories, none of which is a population or a speciality, so this patch is scattered across agreements owned by different category teams with different expiry dates. Six agreements are counted below and every one of them carries more than gynaecology. Maternity, Obstetrics, Gynaecology and Sexual Health Products has two lots and the obstetric half is the maternity and neonatal page's. Minimally Invasive Surgery has eight lots, of which only Lot 6, Gynaecological Endoscopy and Uterine Ablation, is named for this speciality; theatres and surgical counts Lots 1 to 5. Surgical Implants for Men's and Women's Health is half men's health, which is why companies known for penile implants and for breast implants both appear under a gynaecology Suppliers heading. NHS Supply Chain publishes no supplier-by-lot split for any of the three, so the supplier list is every company named on each agreement as a whole. THE SIX DELISTED COMPANIES ARE REMOVED, exactly as they are on the maternity and neonatal page, which shares that agreement. NHS Supply Chain's contract launch brief prints 51 current suppliers and then names Bray Group Limited, Cardiac Services UK Ltd, Durbin Plc, Medichill UK Ltd, Valley Northern and Viomedex Ltd as being delisted at the start of the new framework; the Hub's crawler read all 57 as suppliers. The brief states 54 in its own prose and prints 51, so 51 is what the published list supports and 54 is what NHS Supply Chain asserts. The upstream crawler still has the fault. THE SURGICAL MESH AGREEMENT IS COUNTED, WITH THE PAGE'S OWN WARNING ATTACHED. Its four lots are Synthetic, Biological, Specialist and Fixation Devices, and its published Clinical Information section names its clinical engagement as the British Hernia Society, the Association of Laparoscopic Surgeons of UK and Ireland, the Royal College of Surgeons, NHS consultant surgeons and key surgical mesh suppliers. No gynaecology or urogynaecology body is named, and the word prolapse appears once in the whole brief. The agreement is a route to this patch and the supplier list is real; it was not written with a urogynaecology customer in the room, and this panel says so rather than implying otherwise. Separately, transvaginal mesh repair of vaginal wall prolapse sits in NICE's research-only tier under HTG456 while mid-urethral slings for stress urinary incontinence do not, and the two are constantly conflated; the page sets out that distinction with its sources. ONE ROUTE THE PAGE NAMES IS MISSING FROM THIS PANEL BECAUSE THE HUB'S DATA DOES NOT HOLD IT. Operating Theatre and Outpatient Microscopes and Associated Accessories (2022/S 000-020537), the colposcope route, is not among the 121 framework records the Hub has crawled, so it cannot be shown here. The page carries it, including its 4 December 2026 expiry. That is a gap in this panel's source data, not a finding about the market. Neuromodulation Devices and Associated Products is also left out, because NHS Supply Chain publishes no lot breakdown for it and whether sacral neuromodulation for bladder is called off there is not verifiable from the public brief. THE AWARDS LIST COUNTS SEXUAL HEALTH, CONTRACEPTION, FERTILITY AND TERMINATION OF PREGNANCY, which the maternity and neonatal page explicitly does not, and it does NOT count breast implants, breast prostheses or breast reconstruction, which plastics, burns and reconstruction already counts. Three awards are shared with another page on purpose and each is shared because its own title says so: the surgical positioning table bought by NHS Wales is for maternity AND gynaecology procedures, the colposcope bought by University Hospitals Sussex is a gynaecology device sited on the Central Delivery Suite, and the electrosurgical devices bought for cut, coagulation and uterine ablation are a theatres purchase doing a gynaecology job. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no gynaecology category at NHS Supply Chain. Its briefs sit in six categories, none of which is a population or a speciality, so this patch is scattered across agreements owned by different category teams with different expiry dates. Six agreements are counted below and every one of them carries more than gynaecology. Maternity, Obstetrics, Gynaecology and Sexual Health Products has two lots and the obstetric half is the maternity and neonatal page's. Minimally Invasive Surgery has eight lots, of which only Lot 6, Gynaecological Endoscopy and Uterine Ablation, is named for this speciality; theatres and surgical counts Lots 1 to 5. Surgical Implants for Men's and Women's Health is half men's health, which is why companies known for penile implants and for breast implants both appear under a gynaecology Suppliers heading. NHS Supply Chain publishes no supplier-by-lot split for any of the three, so the supplier list is every company named on each agreement as a whole. THE SIX DELISTED COMPANIES ARE REMOVED, exactly as they are on the maternity and neonatal page, which shares that agreement. NHS Supply Chain's contract launch brief prints 51 current suppliers and then names Bray Group Limited, Cardiac Services UK Ltd, Durbin Plc, Medichill UK Ltd, Valley Northern and Viomedex Ltd as being delisted at the start of the new framework; the Hub's crawler read all 57 as suppliers. The brief states 54 in its own prose and prints 51, so 51 is what the published list supports and 54 is what NHS Supply Chain asserts. The upstream crawler still has the fault. THE SURGICAL MESH AGREEMENT IS COUNTED, WITH THE PAGE'S OWN WARNING ATTACHED. Its four lots are Synthetic, Biological, Specialist and Fixation Devices, and its published Clinical Information section names its clinical engagement as the British Hernia Society, the Association of Laparoscopic Surgeons of UK and Ireland, the Royal College of Surgeons, NHS consultant surgeons and key surgical mesh suppliers. No gynaecology or urogynaecology body is named, and the word prolapse appears once in the whole brief. The agreement is a route to this patch and the supplier list is real; it was not written with a urogynaecology customer in the room, and this panel says so rather than implying otherwise. Separately, transvaginal mesh repair of vaginal wall prolapse sits in NICE's research-only tier under HTG456 while mid-urethral slings for stress urinary incontinence do not, and the two are constantly conflated; the page sets out that distinction with its sources. ONE ROUTE THE PAGE NAMES IS MISSING FROM THIS PANEL BECAUSE THE HUB'S DATA DOES NOT HOLD IT. Operating Theatre and Outpatient Microscopes and Associated Accessories (2022/S 000-020537), the colposcope route, is not among the 121 framework records the Hub has crawled, so it cannot be shown here. The page carries it, including its 4 December 2026 expiry. That is a gap in this panel's source data, not a finding about the market. Neuromodulation Devices and Associated Products is also left out, because NHS Supply Chain publishes no lot breakdown for it and whether sacral neuromodulation for bladder is called off there is not verifiable from the public brief. THE AWARDS LIST COUNTS SEXUAL HEALTH, CONTRACEPTION, FERTILITY AND TERMINATION OF PREGNANCY, which the maternity and neonatal page explicitly does not, and it does NOT count breast implants, breast prostheses or breast reconstruction, which plastics, burns and reconstruction already counts. Three awards are shared with another page on purpose and each is shared because its own title says so: the surgical positioning table bought by NHS Wales is for maternity AND gynaecology procedures, the colposcope bought by University Hospitals Sussex is a gynaecology device sited on the Central Delivery Suite, and the electrosurgical devices bought for cut, coagulation and uterine ablation are a theatres purchase doing a gynaecology job. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
+  "awards": "Award-stage notices whose TITLE matches /(?<![A-Za-z0-9])(gynaecolog\\w*|gynecolog\\w*|gynae\\w*|hysteroscop\\w*|hysterectom\\w*|colposcop\\w*|endometri\\w*|uterine|uterus|intra[- ]?uterine|fibroid\\w*|myomectom\\w*|adenomyosis|morcellat\\w*|novasure|pessar\\w*|prolapse|urogyn\\w*|vagin\\w*|vulv\\w*|cervical (?:screen\\w*|smear\\w*|cytolog\\w*)|contracept\\w*|condoms?|LNG[- ]?IUS|sexual health|fertilit\\w*|IVF|termination of pregnancy|termination services?|ovarian|ovaries|ovary|salping\\w*|oophorect\\w*|menopaus\\w*|menorrhagia|heavy menstrual bleeding|polycystic ovar\\w*|PCOS|women['’]?s health|womens health|women (?:&|and) child health|surgical mesh|transvaginal mesh|bulking agents?|stress incontinence|stress urinary incontinence|urodynamic\\w*)(?![A-Za-z0-9])/i. NO EXCLUSION LIST IS APPLIED, because every notice this pattern matched was read one by one and all of them are this speciality. The loose terms that would have needed excluding were refused from the pattern above instead of admitted and then argued with. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /pessar/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, not necessarily today's."
+ },
+ "counts": {
+  "frameworks": 6,
+  "suppliers": 123,
+  "suppliersUnresolved": 3,
+  "awardsShown": 40,
+  "awardsMatched": 43,
+  "openTenders": 2
+ },
+ "frameworks": [
+  {
+   "name": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-gynaecology-and-sexual-health-products/",
+   "reference": "2019/S 214-525123",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 July 2025",
+   "ends": "30 June 2027",
+   "supplierCount": 51,
+   "supplierSource": "51 current suppliers, read from NHS Supply Chain's own contract launch brief on 09/09/2026 and applied identically on the maternity and neonatal page, which shares this agreement. The brief's Suppliers section prints 51 entries and then names six further companies as being delisted at the start of the new framework; the Hub's crawler read all 57 as suppliers, and the six delisted names are taken back out here. The brief's own prose states 54 in two places and 51 are printed, so 51 is what the list supports and 54 is what NHS Supply Chain asserts. Two of the 51 printed entries (Elemental Healthcare Ltd and Pelvic Relief) may be one company shown on two lines.",
+   "suppliers": [
+    "Argon Medical Devices UK Ltd",
+    "B Braun Medical Ltd",
+    "Bodywise (UK) Ltd",
+    "Bridea Medical B.V",
+    "Ceannaire Medical",
+    "Crest Medical Ltd",
+    "Croyde Medical Ltd",
+    "Dpek Healthcare Ltd",
+    "Elemental Healthcare Ltd",
+    "Pelvic Relief",
+    "Espere Healthcare Ltd",
+    "Eurosurgical Ltd",
+    "Farla Medical Healthcare Limited",
+    "GBUK Healthcare",
+    "Gemini Surgical UK",
+    "Genx Medicare Ltd",
+    "Henleys Medical Supplies Limited",
+    "Henry Schein Medical",
+    "Huntleigh Diagnostics Ltd",
+    "Imedicare Ltd",
+    "Pennine Healthcare All Routes",
+    "Kimal Renal Care",
+    "Laborie Medical Technologies UK Ltd",
+    "LTC Healthcare (Leeds Trading Company)",
+    "Lil-Lets UK Limited",
+    "Medela UK Ltd",
+    "Medical Devices Technology Inter Ltd",
+    "Medicare Colgate Ltd (Sterifeed)",
+    "Mediplus Ltd",
+    "Mediq Healthcare UK Limited (formerly Bunzl Healthcare)",
+    "Optimum Medical Solutions Ltd",
+    "Organon Pharma (UK)",
+    "Oscartech UK Ltd",
+    "Owen Mumford Limited",
+    "Parburch Medical Developments Ltd",
+    "Pasante Healthcare",
+    "Pioneer Medical Europe Limited",
+    "Praxis Medical Ltd",
+    "Purple Surgical",
+    "RB Medical",
+    "Reliance Medical Ltd",
+    "Rocialle",
+    "Rocket Medical Plc",
+    "Sxwell UK Limited",
+    "Timesco Healthcare Ltd",
+    "Trion Pharma Limited",
+    "Unisurge International Ltd",
+    "Vernacare International Limited",
+    "Viveca Biomed Ltd",
+    "Vygon UK Ltd",
+    "Williams Medical Supplies Plc"
+   ],
+   "delisted": [
+    "Bray Group Limited",
+    "Cardiac Services UK Ltd",
+    "Durbin Plc",
+    "Medichill UK Ltd",
+    "Valley Northern",
+    "Viomedex Ltd"
+   ]
+  },
+  {
+   "name": "Minimally Invasive Surgery, Related Equipment and Accessories",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/minimally-invasive-surgery/",
+   "reference": "2026/S 000-061906",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "10 August 2026",
+   "ends": "9 August 2028",
+   "supplierCount": 60,
+   "supplierSource": "count verified against the page's own stated total (60)",
+   "suppliers": [
+    "Advanced Medical Solutions Ltd",
+    "Applied Medical UK Ltd",
+    "Aquilant Ltd",
+    "Avicenna Surgical Limited",
+    "B Braun Medical Limited",
+    "Bariatric Solutions International",
+    "BioSpectrum Ltd",
+    "Bolton Surgical Ltd",
+    "CJ Medical",
+    "ConMed UK Ltd",
+    "Creed Medical Ltd",
+    "Elemental healthcare Ltd",
+    "Erbe Medical UK Ltd",
+    "Eurosurgical",
+    "Fairmont Medical Products Limited",
+    "Fannin UK Limited",
+    "Genmed Enterprises Ltd",
+    "GS Medical Healthcare",
+    "Harris-Jones Medical Ltd",
+    "HC21 (UK) Ltd",
+    "Healthcare 25 Ltd",
+    "Healthium Medtech UK Limited",
+    "Hologic Ltd",
+    "Ideal Medical Solutions",
+    "Integra Lifesciences",
+    "Johnson & Johnson Medical Ltd",
+    "June Medical",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Kebomed (UK) Ltd",
+    "Keymed (Medical & Industrial Equipment) Limited",
+    "Laprosurge Limited",
+    "Lawmed Ltd",
+    "Lexington Medical UK Ltd",
+    "LocaMed Ltd",
+    "Medecon Healthcare UK Ltd",
+    "Medline Industries Ltd",
+    "MedScience Distribution Ltd",
+    "Medtronic Limited",
+    "Meril UK Pvt Ltd",
+    "Mermaid Medical Ltd",
+    "Minitouch Ltd",
+    "Molnlycke Health Care Ltd",
+    "Novus Med Ltd",
+    "Purple Surgical UK Limited",
+    "RB Medical Engineering Ltd",
+    "Reflex Medical Limited",
+    "Richard Wolf UK Ltd",
+    "Schultz Medical (UK) Limited",
+    "Sela Medical UK Ltd",
+    "SRA Developments",
+    "Starkstrom Limited",
+    "Stryker UK Ltd",
+    "Surgical Holdings",
+    "TFX Group Ltd, trading as Teleflex Medical",
+    "Uniphar Medtech",
+    "Unisurge International Ltd",
+    "Vanguard AG",
+    "Venturis Medical Ltd",
+    "W.L. Gore & Associates (UK) Ltd",
+    "Winners First Trading Limited"
+   ],
+   "delisted": [
+    "Brennan & Co NI",
+    "GenX MediCare",
+    "Judd Medical Ltd",
+    "Mercian Surgical Supply Company Limited",
+    "Vernacare International Limited",
+    "Welfare Medical Ltd"
+   ]
+  },
+  {
+   "name": "Obstetrics and Vinyl Pessaries",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/obstetrics-vinyl-pessaries/",
+   "reference": "2025/S 000-007017",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "21 August 2025",
+   "ends": "20 August 2027",
+   "supplierCount": 3,
+   "supplierSource": "no stated count on the page; 3 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Bray Group Ltd (Bray Healthcare)",
+    "Origio Limited",
+    "TriOn Pharma"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Rigid Endoscopy and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/rigid-endoscopy-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 18,
+   "supplierSource": "no stated count on the page; 18 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Aquilant Ltd",
+    "Arthrex Limited",
+    "B. Braun Medical Limited",
+    "Conmed UK Limited",
+    "DP Medical",
+    "Emmat Medical",
+    "G S Medical",
+    "Karl Storz Endoscopy (UK) Limited",
+    "LiteOptics Limited",
+    "Locamed Limited",
+    "Medtronic Limited",
+    "Novus Med",
+    "Olympus KeyMed",
+    "Pentax UK Limited",
+    "RB Medical Engineering Limited",
+    "Richard Wolf UK Limited",
+    "Smith and Nephew",
+    "Stryker UK Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Surgical Implants for Men’s and Women’s Health",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-implants-for-mens-and-womens-health/",
+   "reference": "2025/S 000-025202",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2026",
+   "ends": "31 March 2028",
+   "supplierCount": 6,
+   "supplierSource": "no stated count on the page; 9 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Boston Scientific Ltd",
+    "Coloplast Ltd",
+    "iMEDicare Ltd",
+    "Johnson & Johnson Medical Ltd",
+    "Q Medical Technologies Ltd",
+    "Silimed UK Limited"
+   ],
+   "delisted": [
+    "Eurosurgical Limited",
+    "Motiva Implants UK Limited",
+    "Nagor Limited."
+   ]
+  },
+  {
+   "name": "Surgical Mesh",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
+   "reference": "2024/S 000-021744",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "7 July 2025",
+   "ends": "6 July 2027",
+   "supplierCount": 21,
+   "supplierSource": "count verified against the page's own stated total (21)",
+   "suppliers": [
+    "Advanced Medical Solutions Ltd",
+    "Aquilant Limited",
+    "Assut UK LTD",
+    "B. Braun Medical Limited",
+    "Becton Dickinson U.K, Limited",
+    "Boston Scientific Ltd",
+    "Carrow Medical Limited",
+    "Elemental Healthcare Ltd",
+    "Eurosurgical",
+    "HC21 (UK) Ltd",
+    "Ideal Medical Solutions",
+    "Johnson & Johnson Medical Ltd",
+    "JUNE Medical",
+    "Lawmed Ltd",
+    "Medtronic Limited",
+    "pfm medical UK Ltd",
+    "Q Medical Technologies Ltd",
+    "Raise Healthcare Pvt Ltd",
+    "Sela Medical UK LTD",
+    "TELA Bio Ltd",
+    "W.L. Gore & Associates (UK) Ltd"
+   ],
+   "delisted": [
+    "H&R Healthcare Ltd",
+    "Inomed Health Limited",
+    "Pierson Surgical Ltd",
+    "ProSys International Ltd."
+   ]
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B Braun Medical Limited",
+    "B Braun Medical Ltd",
+    "B. Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [
+    "Aquilant Limited",
+    "Aquilant Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Elemental Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "Elemental Healthcare Ltd",
+    "Elemental healthcare Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Eurosurgical Ltd",
+   "resolved": true,
+   "variants": [
+    "Eurosurgical",
+    "Eurosurgical Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Johnson & Johnson MedTech",
+   "resolved": true,
+   "variants": [
+    "Johnson & Johnson Medical Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Surgical Implants for Men’s and Women’s Health",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "RB Medical Engineering Ltd",
+   "resolved": true,
+   "variants": [
+    "RB Medical",
+    "RB Medical Engineering Limited",
+    "RB Medical Engineering Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Advanced Medical Solutions (AMS)",
+   "resolved": true,
+   "variants": [
+    "Advanced Medical Solutions Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Boston Scientific",
+   "resolved": true,
+   "variants": [
+    "Boston Scientific Ltd"
+   ],
+   "frameworks": [
+    "Surgical Implants for Men’s and Women’s Health",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Conmed UK Ltd",
+   "resolved": true,
+   "variants": [
+    "ConMed UK Ltd",
+    "Conmed UK Limited"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "HC21 (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Healthcare 25 Ltd",
+   "resolved": true,
+   "variants": [
+    "Gemini Surgical UK",
+    "Healthcare 25 Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Ideal Medical Solutions",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "iMEDicare Ltd",
+   "resolved": true,
+   "variants": [
+    "Imedicare Ltd",
+    "iMEDicare Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+    "Surgical Implants for Men’s and Women’s Health"
+   ]
+  },
+  {
+   "name": "June Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "JUNE Medical",
+    "June Medical"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz Endoscopy (UK) Limited",
+    "Karl Storz Endoscopy (UK) Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Lawmed Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "LocaMed Ltd",
+   "resolved": true,
+   "variants": [
+    "LocaMed Ltd",
+    "Locamed Limited"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Novus Med Ltd",
+   "resolved": true,
+   "variants": [
+    "Novus Med",
+    "Novus Med Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Olympus (KeyMed)",
+   "resolved": true,
+   "variants": [
+    "Keymed (Medical & Industrial Equipment) Limited",
+    "Olympus KeyMed"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Purple Surgical",
+   "resolved": true,
+   "variants": [
+    "Purple Surgical",
+    "Purple Surgical UK Limited"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Q Medical Technologies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Implants for Men’s and Women’s Health",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Richard Wolf UK",
+   "resolved": true,
+   "variants": [
+    "Richard Wolf UK Limited",
+    "Richard Wolf UK Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Sela Medical UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Sela Medical UK LTD",
+    "Sela Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Stryker",
+   "resolved": true,
+   "variants": [
+    "Stryker UK Limited",
+    "Stryker UK Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Trion Pharma Limited",
+   "resolved": true,
+   "variants": [
+    "TriOn Pharma",
+    "Trion Pharma Limited"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+    "Obstetrics and Vinyl Pessaries"
+   ]
+  },
+  {
+   "name": "Unisurge International Limited",
+   "resolved": true,
+   "variants": [
+    "Unisurge International Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "W.L. Gore & Associates",
+   "resolved": true,
+   "variants": [
+    "W.L. Gore & Associates (UK) Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories",
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Applied Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Argon Medical Devices UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Arthrex",
+   "resolved": true,
+   "variants": [
+    "Arthrex Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Assut UK LTD",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Avicenna Surgical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Bariatric Solutions International",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton Dickinson U.K, Limited"
+   ],
+   "frameworks": [
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "BioSpectrum Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Bodywise (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Bolton Surgical Limited",
+   "resolved": true,
+   "variants": [
+    "Bolton Surgical Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Bray Group Limited",
+   "resolved": true,
+   "variants": [
+    "Bray Group Ltd (Bray Healthcare)"
+   ],
+   "frameworks": [
+    "Obstetrics and Vinyl Pessaries"
+   ]
+  },
+  {
+   "name": "Bridea Medical B.V",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Carrow Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Ceannaire Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "CJ Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Coloplast",
+   "resolved": true,
+   "variants": [
+    "Coloplast Ltd"
+   ],
+   "frameworks": [
+    "Surgical Implants for Men’s and Women’s Health"
+   ]
+  },
+  {
+   "name": "Creed Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Croyde Medical",
+   "resolved": true,
+   "variants": [
+    "Croyde Medical Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "D.P. Medical Systems Limited",
+   "resolved": true,
+   "variants": [
+    "DP Medical"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Dpek Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Emmat Medical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Erbe Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Espere Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Fairmont Medical Products Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Limited"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Farla Medical",
+   "resolved": true,
+   "variants": [
+    "Farla Medical Healthcare Limited"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "G S Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK Healthcare"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Genmed Enterprises Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "Genx Medicare Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "GS Medical Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "GS Medical Healthcare"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Harris-Jones Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Healthium Medtech UK",
+   "resolved": true,
+   "variants": [
+    "Healthium Medtech UK Limited"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Henleys Medical Supplies Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Henry Schein Medical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Hologic UK",
+   "resolved": true,
+   "variants": [
+    "Hologic Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Huntleigh",
+   "resolved": true,
+   "variants": [
+    "Huntleigh Diagnostics Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Integra LifeSciences (Integra Neurosciences)",
+   "resolved": true,
+   "variants": [
+    "Integra Lifesciences"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Kebomed UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Kebomed (UK) Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Kimal Renal Care",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Laborie Medical Technologies UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Laprosurge Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Lexington Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Lil-Lets UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "LiteOptics",
+   "resolved": true,
+   "variants": [
+    "LiteOptics Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "LTC Healthcare (Leeds Trading Company)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Medecon Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "Medecon Healthcare UK Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Medela",
+   "resolved": true,
+   "variants": [
+    "Medela UK Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Medical Devices Technology Inter Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Medicare Colgate Ltd (Sterifeed)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Mediplus Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Mediq Healthcare UK Limited (formerly Bunzl Healthcare)"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "MedScience Distribution",
+   "resolved": true,
+   "variants": [
+    "MedScience Distribution Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Meril UK Pvt Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Mermaid Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Minitouch Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Mölnlycke",
+   "resolved": true,
+   "variants": [
+    "Molnlycke Health Care Ltd"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Optimum Medical",
+   "resolved": true,
+   "variants": [
+    "Optimum Medical Solutions Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Organon UK",
+   "resolved": true,
+   "variants": [
+    "Organon Pharma (UK)"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Origio Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Obstetrics and Vinyl Pessaries"
+   ]
+  },
+  {
+   "name": "OscarTech UK",
+   "resolved": true,
+   "variants": [
+    "Oscartech UK Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Owen Mumford",
+   "resolved": true,
+   "variants": [
+    "Owen Mumford Limited"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Parburch Medical Developments Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Pasante Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Pelvic Relief",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Pennine Healthcare (Ivor Shaw Ltd)",
+   "resolved": true,
+   "variants": [
+    "Pennine Healthcare All Routes"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Pentax Medical",
+   "resolved": true,
+   "variants": [
+    "Pentax UK Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "pfm medical UK",
+   "resolved": true,
+   "variants": [
+    "pfm medical UK Ltd"
+   ],
+   "frameworks": [
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Pioneer Medical Europe Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Praxis Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Raise Healthcare Pvt Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "Reflex Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Rocialle Healthcare",
+   "resolved": true,
+   "variants": [
+    "Rocialle"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Rocket Medical",
+   "resolved": true,
+   "variants": [
+    "Rocket Medical Plc"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Schultz Medical (UK) Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Silimed UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Implants for Men’s and Women’s Health"
+   ]
+  },
+  {
+   "name": "Smith+Nephew",
+   "resolved": true,
+   "variants": [
+    "Smith and Nephew"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "SRA Developments",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Starkstrom Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Surgical Instruments (dental)",
+   "resolved": true,
+   "variants": [
+    "Surgical Holdings"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Sxwell UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "TELA Bio Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Mesh"
+   ]
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "TFX Group Ltd, trading as Teleflex Medical"
+   ],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Timesco Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Uniphar Medtech",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Vanguard AG",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Venturis Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  },
+  {
+   "name": "Vernacare",
+   "resolved": true,
+   "variants": [
+    "Vernacare International Limited"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Viveca Biomed Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon UK Ltd"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Williams Medical Supplies",
+   "resolved": true,
+   "variants": [
+    "Williams Medical Supplies Plc"
+   ],
+   "frameworks": [
+    "Maternity, Obstetrics, Gynaecology and Sexual Health Products"
+   ]
+  },
+  {
+   "name": "Winners First Trading Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Minimally Invasive Surgery, Related Equipment and Accessories"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Womens Health",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": null,
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084315-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33641200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Sexual Health Service",
+   "buyer": "NORTHAMPTONSHIRE HEALTHCARE NHS FOUNDATION TRUST",
+   "supplier": "LINCOLNSHIRE COMMUNITY HEALTH SERVICES NHS TRUST",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083567-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "PHW-DCO-58400 Sexual Health Testing Managed Service For PHW",
+   "buyer": "Public Health Wales NHS Trust",
+   "supplier": "ROCHE DIAGNOSTICS LIMITED",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082997-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71900000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Supply of Surgical Positioning Table and Leg Positioning Accessories for Maternity and Gynaecology Procedures",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "supplier": "HILL-ROM LIMITED",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082736-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33192130"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Women's Termination Services",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services",
+   "supplier": "BPAS, BPAS",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082616-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Early Intervention, Prevention and Support Sexual Health Service for Young People in Newcastle (Ages 11-25)",
+   "buyer": "Newcastle City Council",
+   "supplier": "BROOK YOUNG PEOPLE",
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082375-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "75122000",
+    "85140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "0P002079 - Colposcope - Capital - Central Delivery Suite RSCH",
+   "buyer": "University Hospitals Sussex NHS Foundation Trust",
+   "supplier": "NJ DEVICES LTD",
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080878-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "33164100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Outsourcing Gynaecology Services for Barking, Havering & Redbridge University Hospital NHS Trust",
+   "buyer": "Barking, Havering and Redbridge University Hospitals NHS Trust",
+   "supplier": "Spire Healthcare PLC",
+   "date": "2026-08-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080375-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000",
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Women's Health Hub for Berkshire West (Reading, Wokingham and West Berkshire)",
+   "buyer": "Thames Valley Integrated Care Board",
+   "supplier": null,
+   "date": "2026-08-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080161-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85323000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Outsourcing Gynaecology Services for Barking, Havering & Redbridge University Hospital NHS Trust",
+   "buyer": "Barking, Havering and Redbridge University Hospitals NHS Trust",
+   "supplier": "Nuffield Health (The Holly Hospital)",
+   "date": "2026-08-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079914-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Outsourcing Gynaecology Services for Barking, Havering & Redbridge University Hospital NHS Trust",
+   "buyer": "Barking, Havering and Redbridge University Hospitals NHS Trust",
+   "supplier": "Circle Health Group",
+   "date": "2026-08-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079912-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85112200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Direct award to Oxleas Foundation NHS Trust for the delivery of Community Clinics and Contraception & Sexual Health Service (CASH)",
+   "buyer": "Royal Borough of Greenwich",
+   "supplier": "Oxleas NHS Foundation Trust",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079683-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NCC1722 Integrated Sexual Health Service",
+   "buyer": "Northumberland County Council",
+   "supplier": "Northumbria Healthcare NHS Foundation Trust",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079514-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Preliminary Market Engagement Questionnaire - Pessaries",
+   "buyer": "Business Services Organisation Procurement and Logistics Service",
+   "supplier": null,
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079423-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Women's Health Service",
+   "buyer": "NHS Central East Integrated Care Board",
+   "supplier": "BEDOC",
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078394-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Contraceptive Medicines",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scot",
+   "supplier": "Lupin Healthcare UK Ltd, Morningside Pharmaceuticals Limited, Organon Pharma (UK",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077388-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP57426 Condoms & Sexual Health Products",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": null,
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076931-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33124110",
+    "33140000",
+    "33712000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Complex Termination of Pregnancy (CTOP) Services across the South East",
+   "buyer": "NHS Thames Valley Integrated Care Board (ICB)",
+   "supplier": null,
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076653-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85111100",
+    "85111200",
+    "85111300",
+    "85121210"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NP36726 Fertility Medicines",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": null,
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076592-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33600000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Mannequin Gynaecology",
+   "buyer": "GLOUCESTERSHIRE HOSPITALS SUBSIDIARY COMPANY LIMITED",
+   "supplier": "Limbs & Things Limited",
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076264-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Level 2 Sexual Health Services - Breckland/South Norfolk",
+   "buyer": "Norfolk County Council",
+   "supplier": null,
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075813-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85121000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "ESNEFT3207 Urodynamics",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Laborie Medical Technologies UK",
+   "date": "2026-08-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075431-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Surgical Positioning Table and Leg Positioning Accessories for Maternity and Gynaecology Procedures",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "HILL-ROM LIMITED",
+   "date": "2026-07-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/071325-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "C450060 - BTH25-336 Hysteroscopy/Coloscopy",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Karl Storz Endoscopy (UK) Limited",
+   "date": "2026-06-16",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/d64ea6dc-f535-45a0-a12d-1a78089f0888",
+   "value": 52838,
+   "periodEnd": "2026-01-01",
+   "source": "tender-history"
+  },
+  {
+   "title": "Sexual health LARC + HIV testing (F03 award)",
+   "buyer": "Southampton City Council",
+   "supplier": "Southampton Primary Care Ltd",
+   "date": "2026-06-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/054492-2026",
+   "value": 1040250,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "2 X HOLOGIC NOVASURE RFC2010 RF CONTROLLERS",
+   "buyer": "Partners Procurement Service",
+   "supplier": "HOLOGIC LTD.",
+   "date": "2026-05-18",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/b65c8827-9cd9-40a8-95bf-c4b1a3ceb179",
+   "value": 24000,
+   "periodEnd": "2026-05-18",
+   "source": "tender-history"
+  },
+  {
+   "title": "Hysteroscopes",
+   "buyer": "Somerset NHS Foundation Trust",
+   "supplier": "Hologic UK Ltd",
+   "date": "2026-05-15",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/5ebcdd90-0720-4beb-b80a-d47916a5eba2",
+   "value": 33500,
+   "periodEnd": "2027-05-14",
+   "source": "tender-history"
+  },
+  {
+   "title": "Replacement of Hysteroscopy Scopes",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "supplier": "Medtronic Limited",
+   "date": "2026-05-14",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/4cefd309-8e91-41d5-9998-87c33fce7903",
+   "value": 185486,
+   "periodEnd": "2027-03-18",
+   "source": "tender-history"
+  },
+  {
+   "title": "Obstetrics and Vinyl Pessaries",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Bray Group Ltd, Origio Ltd, Toffeln Ltd, Trion Pharma",
+   "date": "2025-08-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/050365-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "AA-563-24 TW Provision of Intrauterine Shaver and associate units",
+   "buyer": "NHS Ayrshire & Arran",
+   "supplier": "KARL STORZ Endoscopy (UK) Ltd",
+   "date": "2025-02-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/007465-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "IVF Media [4838305]",
+   "buyer": "BSO Procurement and Logistics Service on behalf of Belfast Health and Social Car",
+   "supplier": "Fujifilm UK Ltd",
+   "date": "2024-08-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/025146-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Electrosurgical Devices (Cut & Coagulation, Uterine Ablation)",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Applied Medical UK Ltd., ERBE Medical UK Ltd., Hologic Ltd, Johnson & Johnson Me",
+   "date": "2024-02-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004434-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Pessaries [4186866]",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "RB MEDICAL ENGINEERING LTD, SISK HEALTHCARE t/a M.E.D. Surgical, TECHNO-PATH DIS",
+   "date": "2023-02-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005793-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP36722 Fertility Products",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Gedeon Richter, Merck Serono Limited, Theramex HQ UK Ltd",
+   "date": "2023-01-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/001508-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "All Wales Womens Health Obs & Gynae Consumables",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Williams Medical Supplies Ltd",
+   "date": "2023-01-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000762-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "All Wales Women & Child Health Consumables",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Williams Medical Supplies Ltd, RB Medical Engineering Ltd, SPLICE CAST LTD, Roci",
+   "date": "2023-01-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000699-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP41422 Contraceptive Medicines",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Bayer Plc, Consilient Health Ltd, Morningside Pharmaceuticals Limited, Organon P",
+   "date": "2022-10-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/030599-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "All Wales Womens Health Obs & Gynae Consumables",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Rocialle",
+   "date": "2022-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/026457-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Vaginal Speculum",
+   "buyer": "BSO, Procurement and Logistics Service",
+   "supplier": "EBRINGTON NI LTD",
+   "date": "2022-05-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/013452-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "All Wales Womens Health Obs & Gynae Consumables",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Rocialle",
+   "date": "2022-02-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005234-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [
+  {
+   "title": "NP36726 Fertility Medicines",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "status": "active",
+   "stage": "open tender",
+   "closingDate": "2026-09-14T12:00:00+01:00",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076592-2026",
+   "value": 6379692,
+   "source": "Find a Tender"
+  },
+  {
+   "title": "Womens Health",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "status": "planning",
+   "stage": "preliminary market engagement / planning",
+   "closingDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/084315-2026",
+   "value": 3500000,
+   "source": "Find a Tender"
+  }
+ ],
+ "drugTariff": {
+  "parts": [
+   "IXA"
+  ],
+  "vmpFilter": "pessar",
+  "vmpCount": 64,
+  "effectiveMonth": "2026-09",
+  "dataAsOf": "2026-09-09",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
+  "lineCount": 257,
+  "supplierCount": 8,
+  "topSuppliers": [
+   {
+    "name": "Mediplus Ltd",
+    "lines": 42
+   },
+   {
+    "name": "Pioneer Medical Europe Ltd",
+    "lines": 40
+   },
+   {
+    "name": "TriOn Pharma Ltd",
+    "lines": 40
+   },
+   {
+    "name": "Medicare Colgate Ltd",
+    "lines": 38
+   },
+   {
+    "name": "R&J Medical Ltd",
+    "lines": 38
+   },
+   {
+    "name": "Generic Supplier",
+    "lines": 31
+   },
+   {
+    "name": "GBUK Healthcare",
+    "lines": 27
+   },
+   {
+    "name": "BBI Healthcare Ltd",
+    "lines": 1
+   }
+  ],
+  "priceMin": 247.0,
+  "priceMax": 2460.0
+ }
+}

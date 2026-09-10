@@ -3142,6 +3142,328 @@ SPECIALITY_RULES = {
         ),
     },
 
+    # PAGE 2734. Scope, in the page's own words: two clinically distinct pathways.
+    # Benign gynaecology runs on NICE NG88 and ends in theatre or an outpatient
+    # hysteroscopy suite; urogynaecology and the pelvic floor runs on NG123, is
+    # governed by the mesh restriction, and ends in a regional multidisciplinary team.
+    # The page also carries colposcopy and outpatient optics, the pessary economy,
+    # sexual health, fertility and termination of pregnancy.
+    "gynaecology-and-womens-health": {
+        "label": "Gynaecology and Women's Health",
+        # SIX AGREEMENTS, and every one of them is named in the page's own Buying
+        # route blocks, which were read against frameworks.json on 10/09/2026. The
+        # reference number and end date of all six match what the page states:
+        #   Maternity, Obstetrics, Gynaecology and Sexual Health Products
+        #     (2019/S 214-525123, ends 30 June 2027) — the page calls this "the
+        #     consumables route for this whole patch". Shared with maternity and
+        #     neonatal, which counts the obstetric half; this page counts the
+        #     gynaecology and sexual health half. Maternity's own rule records that
+        #     Lot 2 Sexual Health is this page's, so the two do not contradict.
+        #   Obstetrics and Vinyl Pessaries (2025/S 000-007017, ends 20 August 2027) —
+        #     three suppliers, the hospital half of the pessary economy. Also counted
+        #     on maternity. Vinyl pessaries are fitted for pelvic organ prolapse,
+        #     which is NG123 ground, so the page that carries NG123 cannot omit it.
+        #   Rigid Endoscopy and Associated Options and Related Services
+        #     (2021/S 000-007768, ends 31 March 2028) — hysteroscopes. Not claimed by
+        #     any other page today.
+        #   Minimally Invasive Surgery, Related Equipment and Accessories
+        #     (2026/S 000-061906, ends 9 August 2028) — Lot 6 is Gynaecological
+        #     Endoscopy and Uterine Ablation, live 10 August 2026. Shared with
+        #     theatres and surgical, which counts Lots 1 to 5.
+        #   Surgical Mesh (2024/S 000-021744, ends 6 July 2027) — see the coverage
+        #     note, which carries the page's own sourced warning about it.
+        #   Surgical Implants for Men's and Women's Health (2025/S 000-025202, ends
+        #     31 March 2028) — six suppliers, the urogynaecology implant route.
+        #
+        # NOT CLAIMED, and each was checked against the 121 names rather than assumed:
+        #   External Breast Prosthesis and Chest Support -> post-mastectomy fitting.
+        #     The maternity and neonatal rule already records this as the
+        #     rehabilitation, prosthetics and orthotics page's, and a decision already
+        #     taken is not reopened here to make this panel look fuller.
+        #   Neuromodulation Devices and Associated Products -> the page gives it a
+        #     Buying route block and then states, in its own words, that whether
+        #     sacral neuromodulation for bladder is called off there is "Not verified
+        #     from the public brief", because NHS Supply Chain describes the agreement
+        #     as "strategic pain management solutions" and publishes no lot breakdown.
+        #     Claiming it would put 23 pain-management suppliers on a gynaecology
+        #     Suppliers tab on the strength of something the page itself refuses to
+        #     assert. Refused until the lot split is published (rule 14c).
+        #   Procedure Packs and Electrosurgical Consumables -> the page's own heading
+        #     for these is "THEATRE PACKS, ELECTROSURGERY AND THE SHARED CONSUMABLE
+        #     BASE". Procedure Packs Lot 2 is listed as covering "Obstetrics,
+        #     Gynaecological, General Surgical, Orthopaedics, Vascular, ENT" and
+        #     Electrosurgical Consumables as "commonly used in dermatological,
+        #     gynaecological, cardiac" procedures. A lot shared with five other
+        #     specialities is theatres', not this page's. The test applied throughout
+        #     is whether a lot is NAMED for this speciality: Minimally Invasive
+        #     Surgery Lot 6 is, these are not.
+        #   Mammography Imaging Systems -> radiology and imaging's, and claimed there.
+        #   Urology and Bowel Management, Disposable and Washable Continence Care ->
+        #     continence, bladder and bowel's, and claimed there.
+        #   Bladder Scanners -> the continence rule already refuses it as a Diagnostic
+        #     Equipment capital route, and this page's pathway two turns on
+        #     urodynamics rather than bladder scanning.
+        #   Operating Theatre and Outpatient Microscopes and Associated Accessories
+        #     (2022/S 000-020537) -> the colposcope route, and the page is right that
+        #     it expires 4 December 2026. It CANNOT be claimed because it is not in
+        #     frameworks.json at all: the crawler holds 121 names and this is not one
+        #     of them. That is a coverage gap in the Hub's own data, not a judgement
+        #     about the patch, and it is stated in the coverage note rather than
+        #     papered over.
+        "frameworks": (
+            r"\b(gynaecolog\w*|pessar\w*|rigid endoscopy|minimally invasive surgery|"
+            r"surgical mesh|surgical implants for men)"
+        ),
+        # THE SAME SIX DELISTED COMPANIES THE MATERNITY RULE REMOVES ARE REMOVED HERE.
+        # frameworks.json holds 57 names for the shared maternity, obstetrics,
+        # gynaecology and sexual health agreement and flags the count itself as
+        # UNVERIFIED. NHS Supply Chain's own contract launch brief prints 51 current
+        # suppliers and then the line "The following suppliers are being delisted at
+        # the start of the new framework:" followed by six more; the crawler swept
+        # that tail into the supplier list. 57 = 51 + 6, exactly. The correction is
+        # duplicated rather than shared because a shared framework must not be
+        # corrected on one page and published raw on the other — that is precisely the
+        # defect that put "HTTP 404" panels in front of members, in a different shape.
+        "frameworkCorrections": {
+            "Maternity, Obstetrics, Gynaecology and Sexual Health Products": {
+                "removeSuppliers": [
+                    "Bray Group Limited",
+                    "Cardiac Services UK Ltd",
+                    "Durbin Plc",
+                    "Medichill UK Ltd",
+                    "Valley Northern",
+                    "Viomedex Ltd",
+                ],
+                "why": (
+                    "51 current suppliers, read from NHS Supply Chain's own contract "
+                    "launch brief on 09/09/2026 and applied identically on the "
+                    "maternity and neonatal page, which shares this agreement. The "
+                    "brief's Suppliers section prints 51 entries and then names six "
+                    "further companies as being delisted at the start of the new "
+                    "framework; the Hub's crawler read all 57 as suppliers, and the "
+                    "six delisted names are taken back out here. The brief's own "
+                    "prose states 54 in two places and 51 are printed, so 51 is what "
+                    "the list supports and 54 is what NHS Supply Chain asserts. Two "
+                    "of the 51 printed entries (Elemental Healthcare Ltd and Pelvic "
+                    "Relief) may be one company shown on two lines."
+                ),
+            },
+        },
+        # DERIVED, not guessed. Every pattern below was run over all 1,972 rows of
+        # tender-history.json, all 1,397 of framework-awards.json and the 6 open
+        # notices — 3,375 titles — and all 38 surviving hits were read one by one.
+        #
+        # THE WORD BOUNDARIES ARE LOOKAROUNDS, NOT \b, for the reason the maternity
+        # rule gives: an underscore is a word character, and a real row here is
+        # "0P002079 - Colposcope - Capital - Central Delivery Suite RSCH".
+        #
+        # NOT INCLUDED, deliberately. Each was tried, its hits were read, and it was
+        # refused in the include rather than admitted and then argued with in an
+        # exclusion list:
+        #   bare "uter"      -> matches "Motorized Patient Couch ... for a new MRI
+        #     Scanner Design" and "Procurement of a Computer Aided Facilities
+        #     Management (CAFM) System". The substring is inside "Outer" and
+        #     "Computer". Only uterine / uterus / intrauterine are used.
+        #   bare "ovar"      -> "NOVARTIS PHARMACEUTICALS UK LTD ... RIBOCICLIB" and
+        #     "Procurement of Midostaurin from Novartis UK". Only the whole words
+        #     ovarian / ovary / ovaries are used.
+        #   bare "IUS"       -> "Waiver for the Supply of Fresenius Spare Parts",
+        #     "ExcelsiusGPS robot", "RRT Stockpile Call Off Terms - Fresenius" and
+        #     "The Support of Fabius tiro anaesthesia apparatus". Only LNG-IUS is used.
+        #   bare "HRT"       -> "CHRT503-2021-22 -DS/DN - Greater Manchester Pharmacy
+        #     Logistics Supply Chain Service". A reference number. Refused outright;
+        #     no hormone replacement row exists in this data to reach.
+        #   bare "coil"      -> "Supply and Installation of Rx coils for MRI scanners"
+        #     and "Purchase of replacement coil for Logiq E10S". MRI coils. The
+        #     contraceptive kind is reached through contraceptive and intrauterine.
+        #   bare "menstrual" -> "The Supply of Menstrual Products", bought by Leidos
+        #     Supply Limited from Bunzl Cleaning & Hygiene Supplies. That is a
+        #     hygiene and welfare supply contract, not gynaecology, and it is the same
+        #     trap the maternity rule found in "sanitary" and "period". Only the
+        #     phrase "heavy menstrual bleeding" is used, which cannot match it.
+        #   bare "sling"     -> "The Supply and Delivery of High Back Slings, Dress
+        #     Toileting Slings, Electric Hoists, Stand Aids and Stand Aid Slings".
+        #     Patient handling. No mid-urethral sling row exists in this data, so
+        #     nothing is lost and a hoist contract is kept off the page.
+        #   bare "prolapse" is USED but is worth flagging for whoever reads this next:
+        #     it matches nothing today, and the one foreseeable false positive is
+        #     mitral valve prolapse. If a cardiology row ever appears on this panel,
+        #     that is where it came from.
+        #   bare "screening" -> twenty rows, and they are bowel, lung, diabetic eye,
+        #     tuberculosis, newborn and genetic screening. Only the cervical forms are
+        #     used, and they are qualified as cervical screening / smear / cytology
+        #     because bare "cervical" is a spine and collar word.
+        #   "HPV" and "papillomavirus" -> six rows. Two are the DHSC national vaccine
+        #     contracts with Merck Sharpe and Dohme, three are trust HPV lines and one
+        #     is a research contract on self-testing. HPV vaccination is a national
+        #     immunisation programme delivered in schools to both sexes, and the page
+        #     does not mention HPV once in its own text — it reaches this ground
+        #     through colposcopy instead. The feed's `spec` field tags both vaccine
+        #     rows gynaecology-and-womens-health; that is not a reason to publish them.
+        #   "STI"            -> "Freetest.me - Online STI Screening" and "WSFT -
+        #     Pathology - STI Testing". The second is already counted on pathology and
+        #     laboratory medicine, and neither is a gynaecology device or service. The
+        #     sexual health rows this page counts are reached through "sexual health"
+        #     and "condoms" instead, and the Freetest.me row is knowingly left
+        #     unmatched rather than splitting a two-row term across two pages.
+        #   bare "HIV"       -> nine rows: antiretroviral therapy, HIV generic
+        #     medicines, national preventative treatments, peer support and advocacy.
+        #     Pharmacy and commissioned HIV services. The one genuine row, "Sexual
+        #     health LARC + HIV testing", is reached through "sexual health".
+        #   bare "breast"    -> twelve rows, and this page does NOT count them even
+        #     though it has a section headed BREAST IMPLANTS, EXPANDERS AND EXTERNAL
+        #     PROSTHESES. Plastics, burns and reconstruction already claims breast
+        #     reconstruction, breast implant and breast prosthesis in its own award
+        #     filter; the remainder are breast radiology, mammography trailers,
+        #     Oncotype DX and breast pumps, which are radiology's, oncology's and
+        #     maternity's. Publishing the same four awards under two headings tells a
+        #     rep nothing new. The framework half of that section IS counted, because
+        #     Surgical Implants for Men's and Women's Health is claimed above.
+        #   "botulinum"      -> the three national Botulinum Toxin Type A medicines
+        #     contracts (Botox, Dysport, Xeomin). They cover every indication from
+        #     spasticity to bladder, and none of them is a gynaecology purchase.
+        #   "Hologic"        -> five rows, of which "Roche - Hologic - Cytology" is
+        #     already pathology's and two are unrelated psychological-therapies
+        #     programmes that merely contain the letters. "Trustwide - Hologic -
+        #     Fluent Fluid systems 2 Years Maintenance" is very probably the
+        #     hysteroscopy fluid management system the page discusses under distension
+        #     media, and it is STILL left unmatched: the title carries no clinical
+        #     term, so counting it would mean publishing a product-knowledge claim
+        #     with nothing in the record to cite. Stated here as a known gap. Only
+        #     "novasure" is used, which is Hologic's endometrial ablation system and
+        #     the only way to reach "2 X HOLOGIC NOVASURE RFC2010 RF CONTROLLERS".
+        #   "tissue removal" -> "Tissue removal devices and accessories" names no
+        #     organ and could be uterine, ENT or neurosurgical. Genuinely ambiguous on
+        #     the title, so it is declined (rule 14). "Endometrial Ablation Devices and
+        #     Uterine Tissue Removal Systems" is reached through endometrial.
+        #   "obstetric"      -> refused outright, and this is the one term the
+        #     maternity rule had to write an exclusion for. Four of its five rows are
+        #     "Non-Obstetric Ultrasound" services at Surrey and Sussex and at York,
+        #     which are general ultrasound capacity DEFINED BY EXCLUDING obstetrics.
+        #     By not using the term at all, this rule never has to argue with them.
+        #     "Obstetrics and Vinyl Pessaries" is reached through pessaries.
+        #
+        # NEVER READ THE FEED'S OWN `spec` FIELD AND TRUST IT. On this patch it files
+        # "All Wales Womens Health Obs & Gynae Consumables" under capital-estates-watch
+        # three times over, "Contraceptive Medicines" under diabetes-and-endocrinology,
+        # "NP41422 Contraceptive Medicines" under pharmacy-and-medicines, "NP36722
+        # Fertility Products" under continence-bladder-and-bowel, and "The Supply of
+        # Menstrual Products" — a Leidos and Bunzl hygiene contract — under
+        # continence-bladder-and-bowel. Meanwhile it tags the DHSC HPV vaccine
+        # contracts as this speciality, which they are not.
+        "include": (
+            r"(?<![A-Za-z0-9])("
+            r"gynaecolog\w*|gynecolog\w*|gynae\w*|"
+            r"hysteroscop\w*|hysterectom\w*|colposcop\w*|"
+            r"endometri\w*|uterine|uterus|intra[- ]?uterine|"
+            r"fibroid\w*|myomectom\w*|adenomyosis|morcellat\w*|novasure|"
+            r"pessar\w*|prolapse|urogyn\w*|vagin\w*|vulv\w*|"
+            r"cervical (?:screen\w*|smear\w*|cytolog\w*)|"
+            r"contracept\w*|condoms?|LNG[- ]?IUS|sexual health|"
+            r"fertilit\w*|IVF|termination of pregnancy|termination services?|"
+            r"ovarian|ovaries|ovary|salping\w*|oophorect\w*|"
+            r"menopaus\w*|menorrhagia|heavy menstrual bleeding|polycystic ovar\w*|PCOS|"
+            r"women['’]?s health|womens health|women (?:&|and) child health|"
+            r"surgical mesh|transvaginal mesh|bulking agents?|"
+            r"stress incontinence|stress urinary incontinence|urodynamic\w*"
+            r")(?![A-Za-z0-9])"
+        ),
+        # NO EXCLUSION LIST, and that is a statement about the include list rather
+        # than a shortcut past the reading. All 38 titles the pattern above matches
+        # were read one by one and every one of them is this speciality. The loose
+        # terms that WOULD have needed excluding are enumerated above and were refused
+        # from the pattern instead, which is the renal rule's approach and the reason
+        # "Hernia Mesh incl. Fixation" and "NP51820 Hernia Mesh" never reach this
+        # panel: the include says "surgical mesh", not "mesh", so there is nothing to
+        # argue with afterwards.
+        "exclude": None,
+        # NO CPV LIST. Not one matching notice in this data carries a CPV code
+        # specific to gynaecology, so none is claimed rather than listing a family
+        # that corroborates everything and therefore nothing. 33141116, the dressing
+        # packs code, is the standing example of why a CPV may never admit a notice on
+        # its own: it is what put "Newborn Transport Harnesses for London Ambulance"
+        # on the wound care page.
+        "cpv": None,
+        # THE FIRST SLICED DRUG TARIFF PART ON THE HUB, and the reason build_tariff
+        # grew a `tariffVmp` filter. The community pessary route really is in Part IX
+        # — the page counts 257 lines across 64 virtual medicinal products from eight
+        # suppliers — but those lines sit INSIDE Part IXA, whose other 56,576 lines
+        # are dressings and elastic hosiery and belong to tissue viability. Claiming
+        # IXA whole would have made Juzo and Sigvaris the leading suppliers on a
+        # gynaecology panel. Filtering IXA to the pessary lines reproduces the page's
+        # figures exactly: 257 lines, 64 products, and BBI Healthcare, GBUK
+        # Healthcare, Medicare Colgate, Mediplus, Pioneer Medical Europe, R&J Medical,
+        # TriOn Pharma and a Generic Supplier entry — the same eight the page names.
+        # "Lactic acid 250mg pessaries" is a medicated vaginal pessary rather than a
+        # prolapse device; it is a women's health product on the same route and is
+        # counted.
+        "tariffParts": ("IXA",),
+        "tariffVmp": r"pessar",
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no gynaecology "
+            "category at NHS Supply Chain. Its briefs sit in six categories, none of "
+            "which is a population or a speciality, so this patch is scattered across "
+            "agreements owned by different category teams with different expiry "
+            "dates. Six agreements are counted below and every one of them carries "
+            "more than gynaecology. Maternity, Obstetrics, Gynaecology and Sexual "
+            "Health Products has two lots and the obstetric half is the maternity and "
+            "neonatal page's. Minimally Invasive Surgery has eight lots, of which "
+            "only Lot 6, Gynaecological Endoscopy and Uterine Ablation, is named for "
+            "this speciality; theatres and surgical counts Lots 1 to 5. Surgical "
+            "Implants for Men's and Women's Health is half men's health, which is why "
+            "companies known for penile implants and for breast implants both appear "
+            "under a gynaecology Suppliers heading. NHS Supply Chain publishes no "
+            "supplier-by-lot split for any of the three, so the supplier list is "
+            "every company named on each agreement as a whole. "
+            "THE SIX DELISTED COMPANIES ARE REMOVED, exactly as they are on the "
+            "maternity and neonatal page, which shares that agreement. NHS Supply "
+            "Chain's contract launch brief prints 51 current suppliers and then names "
+            "Bray Group Limited, Cardiac Services UK Ltd, Durbin Plc, Medichill UK "
+            "Ltd, Valley Northern and Viomedex Ltd as being delisted at the start of "
+            "the new framework; the Hub's crawler read all 57 as suppliers. The brief "
+            "states 54 in its own prose and prints 51, so 51 is what the published "
+            "list supports and 54 is what NHS Supply Chain asserts. The upstream "
+            "crawler still has the fault. "
+            "THE SURGICAL MESH AGREEMENT IS COUNTED, WITH THE PAGE'S OWN WARNING "
+            "ATTACHED. Its four lots are Synthetic, Biological, Specialist and "
+            "Fixation Devices, and its published Clinical Information section names "
+            "its clinical engagement as the British Hernia Society, the Association "
+            "of Laparoscopic Surgeons of UK and Ireland, the Royal College of "
+            "Surgeons, NHS consultant surgeons and key surgical mesh suppliers. No "
+            "gynaecology or urogynaecology body is named, and the word prolapse "
+            "appears once in the whole brief. The agreement is a route to this patch "
+            "and the supplier list is real; it was not written with a urogynaecology "
+            "customer in the room, and this panel says so rather than implying "
+            "otherwise. Separately, transvaginal mesh repair of vaginal wall prolapse "
+            "sits in NICE's research-only tier under HTG456 while mid-urethral slings "
+            "for stress urinary incontinence do not, and the two are constantly "
+            "conflated; the page sets out that distinction with its sources. "
+            "ONE ROUTE THE PAGE NAMES IS MISSING FROM THIS PANEL BECAUSE THE HUB'S "
+            "DATA DOES NOT HOLD IT. Operating Theatre and Outpatient Microscopes and "
+            "Associated Accessories (2022/S 000-020537), the colposcope route, is not "
+            "among the 121 framework records the Hub has crawled, so it cannot be "
+            "shown here. The page carries it, including its 4 December 2026 expiry. "
+            "That is a gap in this panel's source data, not a finding about the "
+            "market. Neuromodulation Devices and Associated Products is also left "
+            "out, because NHS Supply Chain publishes no lot breakdown for it and "
+            "whether sacral neuromodulation for bladder is called off there is not "
+            "verifiable from the public brief. "
+            "THE AWARDS LIST COUNTS SEXUAL HEALTH, CONTRACEPTION, FERTILITY AND "
+            "TERMINATION OF PREGNANCY, which the maternity and neonatal page "
+            "explicitly does not, and it does NOT count breast implants, breast "
+            "prostheses or breast reconstruction, which plastics, burns and "
+            "reconstruction already counts. Three awards are shared with another page "
+            "on purpose and each is shared because its own title says so: the "
+            "surgical positioning table bought by NHS Wales is for maternity AND "
+            "gynaecology procedures, the colposcope bought by University Hospitals "
+            "Sussex is a gynaecology device sited on the Central Delivery Suite, and "
+            "the electrosurgical devices bought for cut, coagulation and uterine "
+            "ablation are a theatres purchase doing a gynaecology job. "
+            "Being named on a framework is not evidence of volume, and being absent "
+            "from one is not evidence of absence from the market."
+        ),
+    },
+
 }
 
 
@@ -3355,12 +3677,31 @@ def build_open_tenders(rx, slug, ot_doc):
 def build_tariff(rule, dt_doc):
     """Drug Tariff Part IX for this speciality — the reimbursement list a prescribing
     conversation actually turns on. Summarised, never shipped whole: Part IXA alone is
-    56,833 lines and no panel can carry that."""
+    56,833 lines and no panel can carry that.
+
+    A PART IS NOT ALWAYS A SPECIALITY, WHICH IS WHY `tariffVmp` EXISTS. For wound care
+    and for continence the whole part is the patch: IXA is dressings and elastic
+    hosiery, IXB incontinence appliances, IXC stoma. Gynaecology is the first
+    speciality where that stops being true. Its community route is 257 pessary lines
+    which sit INSIDE Part IXA, alongside 56,576 dressing and hosiery lines that belong
+    to tissue viability. Claiming the part whole would have put Juzo and Sigvaris at
+    the top of a gynaecology panel as its leading suppliers, which is a false statement
+    about the market made by a filter that was too blunt rather than wrong.
+
+    So a rule may narrow a part by the virtual medicinal product description. The
+    pattern is written into the published file (rule 14a) so a reader can see exactly
+    which lines were counted, and the counts fall out of the same rows that are
+    summarised, never out of a separate assertion.
+    """
     parts = tuple(rule.get("tariffParts") or ())
     if not parts:
         return None
     ix = {k: i for i, k in enumerate(dt_doc["schema"])}
     rows = [r for r in dt_doc["rows"] if r[ix["part"]] in parts]
+    vmp_pattern = rule.get("tariffVmp")
+    if vmp_pattern:
+        vrx = re.compile(vmp_pattern, re.I)
+        rows = [r for r in rows if vrx.search(r[ix["vmp"]] or "")]
     if not rows:
         return None
     by_sup = {}
@@ -3374,6 +3715,8 @@ def build_tariff(rule, dt_doc):
     top = sorted(by_sup.items(), key=lambda kv: (-kv[1], kv[0]))[:20]
     return {
         "parts": list(parts),
+        "vmpFilter": vmp_pattern,
+        "vmpCount": len({r[ix["vmp"]] for r in rows}) if vmp_pattern else None,
         "effectiveMonth": dt_doc.get("effectiveMonth"),
         "dataAsOf": dt_doc.get("dataAsOf"),
         "sourcePage": dt_doc.get("sourcePage"),
@@ -3482,6 +3825,15 @@ def build(slug, sources):
                 "open notice on this patch today, not that none was looked for."
             ),
             "drugTariff": (
+                ("NHSBSA Drug Tariff Part %s for the stated effective month, narrowed to the "
+                 "lines whose virtual medicinal product description matches /%s/i, and then "
+                 "summarised. The part is sliced rather than claimed whole because the part is "
+                 "not this speciality: Part IXA is 56,833 lines of dressings and elastic "
+                 "hosiery, which are the tissue viability page's, and only the lines this "
+                 "pattern selects belong here. Every count and price below is taken from those "
+                 "lines. Prices are the reimbursement price at publication, not necessarily "
+                 "today's." % ("/".join(rule["tariffParts"]), rule["tariffVmp"]))
+                if rule.get("tariffParts") and rule.get("tariffVmp") else
                 "NHSBSA Drug Tariff Part %s for the stated effective month, summarised. Prices "
                 "are the reimbursement price at publication, not necessarily today's."
                 % "/".join(rule["tariffParts"])
