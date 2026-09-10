@@ -4,13 +4,26 @@ Written 08/09/2026 by the `differentiator-framework-coverage` run, working the
 Operating Theatres Equipment and Related Accessories and Services framework, and
 added to 09/09/2026 by the same routine working Ultrasound Scanners and
 Associated Options and Related Services.
-**Nothing here has been written to `data/supplier-seed.json`.** It is a proposal
-for `scripts/seed_supplier_domains.py`, and it needs Lou's ruling first
-(OUTSTANDING ^o363). The 09/09 run wrote two of these proofs into the seed before
-reading this file, and reverted both the moment it found them: the route is not
-ruled on, and a run quietly crossing a bar Lou has been asked to set would settle
-the question by fait accompli. That revert is the reason the Ultrasound Scanners
-framework did not move that day.
+**The address-route rule proposed below is still unruled** — it is a proposal
+for `scripts/seed_supplier_domains.py` and needs Lou's ruling first (OUTSTANDING
+^o363), so none of the other seven candidates in this document (the six Operating
+Theatres suppliers and FUJIFILM Sonosite Ltd) have been written to
+`data/supplier-seed.json` on the strength of it. The 09/09 run wrote two of these
+proofs into the seed before reading this file, and reverted both the moment it
+found them, precisely to avoid a run quietly crossing a bar Lou has been asked to
+set.
+
+**Exception: Probo Medical's domain WAS added, 10/09/2026, on separate grounds.**
+Its `probomedical.co.uk` was not written on this document's address-route
+reasoning: the seed record's own `background` section already cited
+`probomedical.co.uk / Companies House 03466990 / businesswire.com` as the source
+for an identity correction made 20/07/2026, well before this proposal existed, and
+the URL was independently confirmed live (HTTP 200) on 10/09/2026. That is
+narrower evidence than the address route below — a domain the record already
+named as its own source, not a fresh address match — so it did not need to wait
+on ^o363. The table row below is kept as a record of the address-route evidence
+found for this supplier, which remains real and unused for the decision that
+still needs to be made about the general rule.
 
 ## The problem it answers
 
