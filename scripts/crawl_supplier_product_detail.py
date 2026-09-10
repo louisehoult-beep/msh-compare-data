@@ -63,6 +63,16 @@ WHAT IT WILL NOT DO
 - It never overwrites the file with less than it started with: unreadable
   entries keep whatever was captured last time, and are simply not refreshed.
 
+WHERE IT PICKS UP FROM
+----------------------
+A supplier's range can be far longer than one run's time budget, so the run
+does NOT start at product 1 each time: it resumes after the last product it
+attempted, recorded per supplier in state/product-detail-cursor.json, and
+wraps round at the end of the range. Committing that file is part of the
+weekly sweep (.github/workflows/supplier-product-detail-capture.yml) — a
+cursor left behind in a CI checkout is the same as no cursor at all. Pass
+--restart for a deliberate re-read of a range from the top.
+
 Run:  python3 scripts/crawl_supplier_product_detail.py --supplier "Vygon (UK)" --domain vygon.co.uk --products-limit 5
       python3 scripts/crawl_supplier_product_detail.py --auto --limit 20
 Then: python3 scripts/stamp_notice.py && python3 verify.py
@@ -92,6 +102,132 @@ MAX_PRODUCTS_PER_SUPPLIER = 40
 # ~34 pages). Matches crawl_supplier_site.py's own SHOPIFY_BUDGET_S order of
 # magnitude for the same reason.
 SHOPIFY_BUDGET_S = 900
+
+# A RESUME POSITION, so a range longer than one run's budget is not read from
+# product 1 for ever (06/09/2026, ^o295/^o288/^o331). The per-supplier loop
+# below stops when the site budget is spent, and used to start again at the
+# first product in the range every run — so Medical Imaging Systems captured
+# the identical first 36 of its 105 products on three consecutive runs, Conmed
+# UK stalled at 30 of 167 and Avicenna at 23 of 78, however often the sweep
+# ran. Raising the budget (--site-budget) only moves where the wall is; it
+# does not make successive runs walk forward.
+#
+# The cursor records, per supplier, the NAME of the last product this script
+# ATTEMPTED — attempted, not captured, because a product that can never be
+# read (no matching sitemap URL, no WP record) would otherwise sit at the head
+# of the queue and re-block the range every single run, which is the same
+# stall in a different place. The next run resumes at the product AFTER that
+# name and wraps round at the end of the range, so successive runs walk the
+# whole range and then start refreshing it.
+#
+# A name, not an index: the range list is rebuilt by the site crawl and
+# products are added and removed, so an index silently points at a different
+# product later. If the recorded name is no longer in the range, the cursor
+# has nothing to resume from and the run honestly starts at the beginning.
+CURSOR = "state/product-detail-cursor.json"
+
+
+def cursor_path_for(out_path):
+    """Separate --out shards must not share one cursor file: two parallel
+    workers writing the same cursor would each overwrite the other's position
+    and both keep re-reading the same slice — the exact stall this fixes. The
+    canonical output keeps the canonical cursor; any other --out gets its own
+    beside it."""
+    if os.path.normpath(out_path) == os.path.normpath(OUT):
+        return CURSOR
+    return out_path + ".cursor.json"
+
+
+def load_cursors(path):
+    if not os.path.exists(path):
+        return {}
+    try:
+        doc = json.load(open(path, encoding="utf-8"))
+    except (ValueError, OSError):
+        # A cursor is an optimisation, never a source of truth: an unreadable
+        # one costs a run that restarts at product 1, not a wrong capture.
+        return {}
+    return doc.get("cursors") or {}
+
+
+def save_cursors(path, cursors):
+    doc = {
+        "_note": "Resume position for scripts/crawl_supplier_product_detail.py: "
+                 "the last product NAME attempted per supplier. Not published data "
+                 "- delete it and the next run simply starts each range at the top.",
+        "generated": time.strftime("%Y-%m-%d"),
+        "cursors": cursors,
+    }
+    d = os.path.dirname(path)
+    if d and not os.path.isdir(d):
+        os.makedirs(d, exist_ok=True)
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(doc, f, indent=1, ensure_ascii=False, sort_keys=True)
+        f.write("\n")
+    os.replace(tmp, path)
+
+
+def resume_slice(products, last_attempted, limit):
+    """The next `limit` products to attempt, starting after `last_attempted`
+    and wrapping round at the end of the range.
+
+    Returns (slice, started_at_top). `started_at_top` is True when there was
+    no usable resume position, so the caller can say so rather than implying
+    it resumed.
+
+    Wrapping matters: without it, a supplier whose cursor sits near the end of
+    its range would get a slice of one or two products and the run would spend
+    its budget on almost nothing. With it, every run gets a full window and the
+    window advances; once the whole range has been walked the cursor comes back
+    round to the start and the oldest captures get refreshed.
+    """
+    if limit <= 0 or not products:
+        return [], True
+    names = [nk(p.get("n")) for p in products]
+    start = 0
+    started_at_top = True
+    if last_attempted:
+        key = nk(last_attempted)
+        if key in names:
+            start = (names.index(key) + 1) % len(products)
+            started_at_top = False
+    if limit >= len(products):
+        # The whole range fits in one window; ordering it from the resume
+        # point still puts the unreached tail first, which is the point.
+        return products[start:] + products[:start], started_at_top
+    out = []
+    i = start
+    while len(out) < limit:
+        out.append(products[i])
+        i = (i + 1) % len(products)
+    return out, started_at_top
+
+
+def bootstrap_cursor(products, products_store, supplier):
+    """A ONE-TIME resume position for a supplier that has captures but no saved
+    cursor yet — every supplier, the first run after the cursor was added.
+
+    Without it the first run re-reads the prefix it has already got (105
+    products at 36 a run means three wasted runs before Medical Imaging
+    Systems reaches anything new), because a cursor can only be written by a
+    run that has happened.
+
+    This is DERIVED FROM STORED CAPTURES, not guessed: it returns the last
+    product in range order that this file already holds a capture for, i.e.
+    the furthest point the old take-the-first-N loop can be shown to have
+    reached. Anything unread before that point is not lost — resume_slice
+    wraps, so the next cycle comes back round to it.
+
+    Returns None when nothing in the range has been captured, and the run then
+    honestly starts at the top."""
+    last = None
+    for prod in products:
+        name = prod.get("n")
+        if name and (supplier + "|" + nk(name)) in products_store:
+            last = name
+    return last
+
 
 
 def nk(s):
@@ -599,6 +735,16 @@ def main():
                          "processes both loading+saving the SAME file can silently "
                          "drop each other's captures. Merge the shard files back "
                          "into the canonical one afterwards." % OUT)
+    ap.add_argument("--restart", action="store_true",
+                    help="ignore the saved resume position and start every supplier "
+                         "at the first product in its range. Use when you want a "
+                         "deliberate re-read of a range from the top; the default "
+                         "resumes where the last run stopped.")
+    ap.add_argument("--cursor-file", default=None,
+                    help="where the per-supplier resume position is kept (default "
+                         "%s for the canonical --out, or <out>.cursor.json for a "
+                         "shard). Deleting it costs nothing but a run that starts "
+                         "each range at the top." % CURSOR)
     ap.add_argument("--coverage-from", default=None,
                     help="read coverage ranking (for --auto's least-covered-first "
                          "ordering) from THIS file instead of --out — use when "
@@ -612,6 +758,9 @@ def main():
 
     rangedoc = json.load(open(RANGE, encoding="utf-8"))
     suppliers_range = rangedoc.get("suppliers", {})
+
+    cursor_file = a.cursor_file or cursor_path_for(out_path)
+    cursors = {} if a.restart else load_cursors(cursor_file)
 
     coverage_path = a.coverage_from or out_path
     if os.path.exists(coverage_path):
@@ -639,6 +788,10 @@ def main():
             json.dump(outdoc, f, indent=1, ensure_ascii=False)
             f.write("\n")
         os.replace(tmp, out_path)
+        # The resume position goes down with the captures it describes. A run
+        # killed part-way through would otherwise lose its position and read
+        # the same slice again next time, which is the stall this fixes.
+        save_cursors(cursor_file, cursors)
 
     if a.supplier:
         targets = [(a.supplier, a.domain or (suppliers_range.get(a.supplier) or {}).get("domain"))]
@@ -677,10 +830,23 @@ def main():
             print("== %s: no website domain recorded — skipped" % supplier, flush=True)
             continue
         rec = suppliers_range.get(supplier) or {}
-        products = (rec.get("products") or [])[:a.products_limit]
-        if not products:
+        full_range = rec.get("products") or []
+        if not full_range:
             print("== %s: no products recorded in %s to look detail up for" % (supplier, RANGE), flush=True)
             continue
+        resume_from = cursors.get(supplier)
+        bootstrapped = False
+        if not resume_from and not a.restart:
+            resume_from = bootstrap_cursor(full_range, products_store, supplier)
+            bootstrapped = resume_from is not None
+        products, from_top = resume_slice(full_range, resume_from, a.products_limit)
+        if len(full_range) > len(products):
+            print("== %s: %d of %d product(s) this run, %s"
+                  % (supplier, len(products), len(full_range),
+                     "starting at the top of the range" if from_top
+                     else "resuming after %r%s" % (resume_from,
+                          " (from the last product already captured — no saved "
+                          "cursor yet)" if bootstrapped else "")), flush=True)
 
         started = time.time()
         deadline = started + a.site_budget
@@ -721,6 +887,7 @@ def main():
                 name = p.get("n")
                 if not name:
                     continue
+                cursors[supplier] = name
                 entry = bulk.get(nk(name))
                 if not entry:
                     print("   -- %-40s skipped: not in this supplier's Shopify bulk pull "
@@ -761,8 +928,15 @@ def main():
             if not name:
                 continue
             if time.time() > deadline:
-                print("   -- (site time budget spent — remaining products skipped this run)", flush=True)
+                print("   -- (site time budget spent — %d product(s) left this window, "
+                      "next run resumes after %r)"
+                      % (len(products) - products.index(p),
+                         cursors.get(supplier) or resume_from), flush=True)
                 break
+            # BEFORE the attempt, not after it: a product that raises, times
+            # out or can never be matched must still advance the cursor, or it
+            # blocks the head of the range on every future run.
+            cursors[supplier] = name
             pdeadline = min(deadline, time.time() + PRODUCT_BUDGET_S)
             entry, why = capture_one(domain, name, id_index, pdeadline, ptype or "product")
             if not entry:
@@ -782,6 +956,7 @@ def main():
 
     if not a.dry_run:
         save()
+        save_cursors(cursor_file, cursors)
     print("\n%d captured, %d skipped, %d changed since a prior capture."
           % (captured, skipped, changed))
 

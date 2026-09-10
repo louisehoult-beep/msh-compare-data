@@ -108,7 +108,13 @@ jobs:
         run: |
           git config user.name "supplier-product-detail-bot"
           git config user.email "actions@github.com"
-          git add data
+          # state/product-detail-cursor.json is the RESUME POSITION and must be
+          # committed with the captures it describes, exactly as acquirer-press.yml
+          # and company-press.yml commit their rotation state. A fresh checkout has
+          # no cursor, so if this were left uncommitted every weekly run would start
+          # each supplier's range at the top again — the stall this file's cursor was
+          # added to fix (OUTSTANDING ^o295 / ^o288 / ^o331, 10/09/2026).
+          git add data state/product-detail-cursor.json
           git diff --cached --quiet || git commit -m "Supplier product-detail capture $(date -u +%F)"
           pushed=0
           for attempt in 1 2 3 4 5; do
