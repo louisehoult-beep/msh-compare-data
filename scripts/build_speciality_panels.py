@@ -78,6 +78,34 @@ def load(name):
 #              then argued with here.
 # cpv        : CPV code prefixes used for award feeds that carry classification.
 # tariffParts: Drug Tariff Part IX parts that belong to this speciality.
+#
+# excludeFinding
+#            : OPTIONAL. The default wording for a rule that HAS an exclusion list
+#              states that every pattern in it matched a real notice that was not
+#              this speciality. That is the standard and it is true of every rule
+#              that does not set this key. Stroke is the one exception so far and
+#              it is written out rather than glossed: no award title in this data
+#              carries "stroke volume", so the pattern was derived from more than
+#              forty real matches in the Hub's own supplier product data, where the
+#              phrase is a cardiac output parameter or a bag valve mask spec. It is
+#              still a match that was read and found wrong, which is the standard
+#              that matters, but it is not an award row and the published text has
+#              to say which it was.
+# frameworksFinding
+#            : OPTIONAL, and only ever set alongside "frameworks": None. The
+#              default wording for a speciality with no framework says that every
+#              NHSSC framework name was read and none of them is this
+#              speciality's. For obesity and for paediatrics that is true. For
+#              stroke it is not: the agreement that patch buys on exists, and the
+#              reason it is not counted is that NHS Supply Chain's brief for it
+#              publishes a supplier count and no names, so the Hub's framework
+#              record holds it in `unparsed` and build_frameworks cannot read it.
+#              Those are two different findings and a member is owed the right
+#              one. This key replaces the opening statement of the frameworks and
+#              suppliers rule text with the one that is true for the patch, rather
+#              than leaving a false sentence standing and correcting it in the
+#              coverage note underneath. A rule that does not set it gets the
+#              default wording unchanged.
 # ---------------------------------------------------------------------------
 SPECIALITY_RULES = {
     "tissue-viability-and-wound-care": {
@@ -2167,6 +2195,226 @@ SPECIALITY_RULES = {
             "sets out all five agreements with their expiry dates, and the date that "
             "matters most — 11 November 2026, the planned publication of the "
             "neuromodulation successor tender — is there rather than here."
+        ),
+    },
+    # PAGE 2746. Hyperacute stroke and mechanical thrombectomy. The page's own
+    # subtitle states the structural finding this rule has to encode: "There is no
+    # stroke framework: the devices sit on Lot 2, Interventional Neuroradiology, of
+    # the interventional cardiology agreement, and that agreement expires on 26
+    # February 2027."
+    "stroke": {
+        "label": "Stroke",
+        # NO FRAMEWORK IS COUNTED, and the reason is different from obesity's and
+        # paediatrics'. Those two patches have no NHSSC framework at all. This one
+        # has exactly one and the Hub cannot read it.
+        #
+        # NHS Supply Chain 2021/S 000-017565, Interventional Cardiology,
+        # Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm
+        # Management and Electrophysiology, carries Lot 2 Interventional
+        # Neuroradiology, which is where mechanical thrombectomy and the neurovascular
+        # access range are bought. Its brief was read on 10/09/2026: category Medical
+        # Technology, supply route eDirect, five lots, 27 February 2023 to 26 February
+        # 2027, a 48 month term with its 24 month extension already inside it. It is
+        # in frameworks.json but in the `unparsed` list, with the recorded reason "the
+        # page states its supplier count but publishes no list of names".
+        # build_frameworks reads only the parsed list, so it cannot be counted here.
+        # That is stated in the finding below rather than dressed up as an absence.
+        #
+        # TWO PARSED FRAMEWORKS WERE REFUSED, and each was read on its own brief:
+        #   Neuromodulation Devices and Associated Products (2023/S 000-034841, to 18
+        #     March 2028) is where vagus nerve stimulation for post stroke
+        #     rehabilitation sits, and the page names it for that. Its three lots are
+        #     Deep Brain Stimulation, Spinal Cord Stimulation and Other
+        #     Neuromodulation, and its 23 suppliers are a neuromodulation field.
+        #     Claiming it would put all 23 under a stroke Suppliers heading on the
+        #     strength of one category whose own evidence the page reports as Cochrane
+        #     "very uncertain". It is counted on the neurology and neurosurgery page.
+        #   Digital Diagnostic Solutions (2025/S 000-043444, to 31 July 2027) is the
+        #     route the page names for advanced stroke imaging software. Its 54
+        #     suppliers are a general digital diagnostics field, and HTG708 names only
+        #     three products usable in the NHS. Claiming the agreement would present
+        #     fifty one firms with no stroke imaging proposition as this patch's
+        #     market.
+        # Both refusals are the paediatrics ground: a lot or a line inside a broader
+        # agreement does not make the agreement's supplier list this speciality's.
+        "frameworks": None,
+        "frameworksFinding": {
+            "frameworks": (
+                "NO NHS SUPPLY CHAIN FRAMEWORK IS COUNTED HERE, AND THE REASON IS NOT THAT "
+                "NONE EXISTS. This patch buys on Lot 2, Interventional Neuroradiology, of "
+                "2021/S 000-017565. That agreement is in the Hub's framework record but in "
+                "its unparsed list, because NHS Supply Chain's brief for it states a "
+                "supplier count and publishes no list of names, so it cannot be captured "
+                "from that source. A framework this panel cannot evidence is not counted, "
+                "and the Suppliers tab is empty for the same reason rather than a "
+                "different one."
+            ),
+            "suppliers": (
+                "No supplier list is published for this speciality. This panel names "
+                "suppliers only where a framework record names them, and the one agreement "
+                "this patch buys on publishes no supplier names on its brief. It will not "
+                "fall back to a keyword guess against the supplier directory, and it will "
+                "not carry a hand keyed list either, because both would give a member a "
+                "supplier table without the alias resolution and the provenance every "
+                "other supplier list on the Hub carries."
+            ),
+        },
+        # DERIVED, not guessed. A deliberately over wide draft was run over all 1,972
+        # rows of tender-history.json, all 1,397 of framework-awards.json and the 6
+        # open notices, 3,375 titles in all, on 10/09/2026, and every hit was read one
+        # by one. The draft carried "clot", "retriev", "cerebr", "carotid", "ischaem",
+        # "TIA", "hyperacute", "dysphagia", "swallow", "CYP2C19", "genotyp",
+        # "haemorrhag", "aspiration", "perfusion", "SSNAP" and "CVA" alongside the
+        # three terms kept. Eight titles survive and all eight are this speciality.
+        #
+        # NOT INCLUDED, deliberately, and each was tried and read. As with neurology,
+        # the wrong ones are cut at the include stage rather than swept back out at
+        # the exclude stage:
+        #   bare "clot"        -> its only hit is "Patient Dry Wiping Cloths", because
+        #     "cloth" contains the letters. "clot retriever" and "thrombus" match
+        #     nothing at all in this data.
+        #   bare "retriev"     -> NHS Blood and Transplant's organ "Retrieval Packs"
+        #     and Guy's and St Thomas' "South Thames Retrieval Service (STRS) Patient
+        #     Transport Services", a paediatric transport contract. Neither is a stent
+        #     retriever.
+        #   "perfusion"        -> nine rows and every one is cardiac bypass or organ
+        #     perfusion: a LivaNova Essenz heart lung system, NHS Golden Jubilee
+        #     cardiac perfusion consumables, LifePort kidney perfusion consumables
+        #     twice, cold static perfusion fluid twice. CT perfusion is the imaging
+        #     this patch turns on under NOSIP and HTG708, and not one notice in this
+        #     data carries it, so the term buys nothing and costs nine false positives.
+        #   "genotyp" / "CYP2C19" -> HTG724 puts point of care CYP2C19 testing on this
+        #     pathway, but "CYP2C19" matches no title in this data and "genotyp"
+        #     matches only NHS Blood and Transplant's red cell immunohaematology
+        #     genotyping consumables and microarray kits, which are pathology's.
+        #   bare "cerebr", "carotid", "ischaem", "thrombolys", "alteplase",
+        #   "tenecteplase", "embolect", "neurovascul", "microcatheter", "occlusion",
+        #   "endarterect", "hyperacute", "dysphagia", "swallow", "haemorrhag",
+        #   "aspiration", "reperfusion", "SSNAP", "NIHSS", "modified Rankin",
+        #   "RapidAI", "e-Stroke", "DTAC" -> every one of them matches nothing at all
+        #   in this data. They are left out rather than carried as decoration: a
+        #   pattern that has never been tested against a hit is a pattern nobody has
+        #   read. Carotid intervention is refused on a second ground as well, because
+        #   the page routes it to vascular surgery's own frameworks rather than Lot 2.
+        #   bare "neurolog\w*" -> six rows, and they are the neurology and
+        #     neurosurgery page's: "WPL07040 - Neurology Insourcing" (University
+        #     Hospital Southampton) is an outpatient capacity contract and
+        #     "Neurological Rehabilitation Service" (NHS Greater Manchester ICB) is a
+        #     commissioned rehabilitation service. Stroke reaches its own ground on
+        #     "stroke" and on the interventional neuroradiology term instead.
+        #
+        # THE FOUR SERVICE CONTRACTS ARE KEPT ON PURPOSE. "Provision of Transport for
+        # Stroke and Suspected Stroke Patients" (Somerset), "Early Stroke Discharge
+        # Service" (Essex Partnership University), "Community Stroke Service for
+        # Newham" and "City & Hackney Post Stroke Community Service" (both NHS North
+        # East London ICB) are commissioned services, not product purchases. They stay
+        # because they are named for this speciality, belong to no other page, and are
+        # the contracts SSNAP's own recommendations 1, 3, 4 and 5 are addressed to:
+        # onset to hospital time, hyperacute inpatient care, seven day rehabilitation
+        # including integrated community stroke services, and the six month review.
+        # This follows the palliative and end of life care panel, which carries a
+        # rapid response service, an out of hours service and a medicines transport
+        # service on the same ground. It is the opposite of the neurology rule's
+        # refusal of "Neurological Rehabilitation Service", and deliberately so: that
+        # contract belongs to the rehabilitation page, and these belong to no page but
+        # this one.
+        #
+        # THE FRAMEWORK AWARD NOTICE IS KEPT, AND THIS DIVERGES FROM THE NEUROLOGY
+        # RULE ON PURPOSE. "INTERVENTIONAL CARDIOLOGY, INTERVENTIONAL RADIOLOGY AND
+        # INTERVENTIONAL NEURORADIOLOGY, CARDIAC RHYTHM MANAGEMENT AND ELECTROPHYSIOLOGY"
+        # (NHS Supply Chain, 22/11/2022) is the award notice for 2021/S 000-017565.
+        # The neurology rule excludes it because the neurology page's Buying route
+        # names five agreements and not that one, so publishing it there would
+        # contradict the page a reader is standing on. Here the page names it as the
+        # buying route in its own subtitle, so refusing it would contradict this page
+        # instead. The interventional radiology and vascular surgery panels carry the
+        # same notice already; the overlap is deliberate, the way Pressure Area Care
+        # is shared between wound care and patient handling.
+        "include": (
+            r"\b(strokes?|thrombectom\w*|neuro[- ]?radiolog\w*)\b"
+        ),
+        # ONE PATTERN, AND ITS EVIDENCE IS NAMED RATHER THAN IMPLIED. No award title
+        # in this data carries "stroke volume", so this exclusion was not derived from
+        # an award row the way every other rule's was. It is derived from a real match
+        # in the Hub's own data all the same: "stroke volume" appears more than forty
+        # times across supplier-product-detail.json, differentiator.json and
+        # product-dossiers-respiratory.json, in every case as a cardiac output
+        # parameter on a haemodynamic monitor (Deltex CardioQ-ODM, LiDCO, Cogent,
+        # INVOS) or as a bag valve mask specification (Ambu Spur II). Those are
+        # cardiology, critical care and resuscitation, not this patch.
+        #
+        # It is written here rather than left to a future refresh because "Stroke
+        # Central Monitor" is one of the eight rows this rule genuinely carries. That
+        # proves patient monitoring notices reach this panel, and a haemodynamic
+        # monitor is the immediate neighbour of a stroke unit monitor in the same
+        # product family. Without this pattern the first "Cardiac Output and Stroke
+        # Volume Monitoring" notice to be published would appear on the stroke page as
+        # this speciality's. That is a match that has been read in this data and found
+        # to be wrong, which is the standard, and it is the only pattern here: nothing
+        # is carried on a guess.
+        "exclude": r"\bstroke volumes?\b",
+        "excludeFinding": (
+            "THE ONE EXCLUSION, AND WHERE ITS EVIDENCE CAME FROM. No award title in this "
+            "data carries the phrase \"stroke volume\", so unlike every other speciality's "
+            "exclusion list this pattern was not derived from an award row. It was derived "
+            "from a real match all the same: \"stroke volume\" appears more than forty times "
+            "across the Hub's own supplier product data, every time as a cardiac output "
+            "parameter on a haemodynamic monitor or as a bag valve mask specification, which "
+            "is cardiology, critical care and resuscitation rather than this patch. It is "
+            "written now rather than after the event because \"Stroke Central Monitor\" is "
+            "one of the notices this rule genuinely carries, so patient monitoring notices "
+            "do reach this panel and a haemodynamic monitor is the nearest neighbour to a "
+            "stroke unit monitor in the same product family."
+        ),
+        # NO CPV FAMILY, and that is checked rather than skipped. The four notices in
+        # framework-awards.json that this rule matches carry 85143000 ambulance
+        # services, 85121200 medical specialist services, 85323000 community health
+        # services and 85100000 health services. Every one is generic and not one is
+        # specific to stroke, so none is claimed. A CPV code could not admit a notice
+        # on its own in any case.
+        #
+        # NO DRUG TARIFF PART. Part IX reimburses dressings and elastic hosiery (IXA),
+        # incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery
+        # (IXR). Nothing this speciality buys is listed there. Its medicines half is
+        # real and is the pathway's front door, but tenecteplase (TA990) and alteplase
+        # (TA264) are hospital pharmacy and the trust formulary, which is Part VIII of
+        # a different tariff and a different buyer. The panel carries none rather than
+        # reaching for the nearest part.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no stroke framework, and "
+            "this page says so in its own subtitle. Mechanical thrombectomy and the "
+            "neurovascular access range are bought on Lot 2, Interventional Neuroradiology, "
+            "of NHS Supply Chain 2021/S 000-017565, Interventional Cardiology, "
+            "Interventional Radiology and Interventional Neuroradiology, Cardiac Rhythm "
+            "Management and Electrophysiology. Read on NHS Supply Chain's own contract "
+            "launch brief on 10 September 2026: category Medical Technology, supply route "
+            "eDirect, five lots, running 27 February 2023 to 26 February 2027, a 48 month "
+            "term with its 24 month extension already inside it, so it cannot roll. THE LOT "
+            "2 FIELD IS KNOWN, IT IS SIMPLY NOT IN THE FRAMEWORK RECORD. The brief's own "
+            "Product Matrix, an Excel file dated 12 February 2026, was downloaded and "
+            "parsed independently on 10 September 2026 and gives what the brief withholds: "
+            "67 suppliers across the five lots, 52 on Lot 1, 16 on Lot 2, 13 on Lot 3, 15 "
+            "on Lot 4 and 7 on Lot 5. Sixteen firms hold Lot 2 and seven of them hold Lot 2 "
+            "and no other lot, which is the pure play neurovascular field: Acandis GMBH, "
+            "Kaneka Pharma Europe NV, Microvention UK Limited, Phenox UK Limited, Rapid "
+            "Medical Sub. UK Limited, Sela Medical UK Limited and Stryker UK Limited, in "
+            "the matrix's own spelling. The Suppliers tab above is empty all the same, "
+            "because it is built only from framework records that publish supplier names "
+            "and this one does not. This page's own Product ranges and Buying route "
+            "sections carry the Lot 2 position in full, and the date that matters most, 26 "
+            "February 2027, is there rather than here. TWO PARSED FRAMEWORKS WERE REFUSED, "
+            "and each was read. Neuromodulation Devices and Associated Products (2023/S "
+            "000-034841, to 18 March 2028) is where vagus nerve stimulation for post stroke "
+            "rehabilitation sits, but its three lots are Deep Brain Stimulation, Spinal "
+            "Cord Stimulation and Other Neuromodulation and its 23 suppliers are a "
+            "neuromodulation field; it is counted on the neurology and neurosurgery page. "
+            "Digital Diagnostic Solutions (2025/S 000-043444, to 31 July 2027) is the route "
+            "named here for advanced stroke imaging software, but its 54 suppliers are a "
+            "general digital diagnostics field and NICE HTG708 names only three products "
+            "usable in the NHS. A lot or a line inside a broader agreement does not make "
+            "that agreement's supplier list this speciality's. Being named on a framework "
+            "is not evidence of volume, and being absent from one is not evidence of "
+            "absence from this market."
         ),
     },
     "pathology-and-laboratory-medicine": {
@@ -4592,6 +4840,8 @@ def build(slug, sources):
         },
         "rules": {
             "frameworks": qualify(
+                (rule.get("frameworksFinding") or {}).get("frameworks")
+                if rule["frameworks"] is None and rule.get("frameworksFinding") else
                 ("NO NHS Supply Chain framework covers this speciality. That is a finding "
                  "about the patch, not a missing filter: every NHSSC framework name was "
                  "read and none of them is this speciality's. Suppliers on this page are "
@@ -4605,6 +4855,8 @@ def build(slug, sources):
                  "field is far too broad to filter on." % rule["frameworks"])
             ),
             "suppliers": qualify(
+                (rule.get("frameworksFinding") or {}).get("suppliers")
+                if rule["frameworks"] is None and rule.get("frameworksFinding") else
                 ("No supplier list is published for this speciality, because this patch has no "
                  "NHS Supply Chain framework for one to be drawn from. This panel names "
                  "suppliers only where the procurement record names them on this speciality's "
@@ -4626,10 +4878,12 @@ def build(slug, sources):
                  "admitted and then argued with. %%s Buyer names are never matched on."
                  % rule["include"])
                 if rule["exclude"] is None else
-                ("Award-stage notices whose TITLE matches /%s/i and does not match /%s/i. The "
-                 "exclusion list exists because every pattern in it matched a real notice that "
-                 "was not this speciality. %%s Buyer names are never matched on." % (
-                     rule["include"], rule["exclude"]))
+                ("Award-stage notices whose TITLE matches /%s/i and does not match /%s/i. %s "
+                 "%%s Buyer names are never matched on." % (
+                     rule["include"], rule["exclude"],
+                     rule.get("excludeFinding")
+                     or ("The exclusion list exists because every pattern in it matched a real "
+                         "notice that was not this speciality.")))
             ) % (
                     ("A CPV code beginning %s is recorded as corroboration where the feed "
                      "carries one, but never admits a notice on its own: a notice carrying a "

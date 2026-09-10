@@ -40,6 +40,7 @@ PAEDS = "paediatrics"
 VASCACCESS = "vascular-access-and-iv-therapy"
 UROLOGY = "urology"
 RESP = "respiratory"
+STROKE = "stroke"
 fails = []
 
 
@@ -3921,6 +3922,143 @@ for phrase in ["Medical and Surgical Consumables",
                "BNF Chapter 3"]:
     check("coverage note carries: %s" % phrase[:52], phrase in rs["rules"]["frameworks"])
 
+
+
+# ---------------------------------------------------------------------------
+# STROKE. The page's own subtitle states the finding: there is no stroke
+# framework, and thrombectomy sits on Lot 2 of an agreement whose title begins
+# "Interventional Cardiology". Three dangers here. A stroke is also a unit of
+# cardiac output, and this panel genuinely carries a patient monitor. The words
+# clot, retrieval, perfusion and genotyping all belong to this pathway in
+# clinical English and to somebody else entirely in this data. And the one
+# framework that matters cannot be counted, so the panel has to say why without
+# claiming a framework it cannot evidence.
+# ---------------------------------------------------------------------------
+print("\nSTROKE")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), STROKE],
+               check=True, capture_output=True)
+sk = load_panel(STROKE)
+check("panel is defined", sk.get("defined") is True)
+check("label is the page's own", sk["label"] == "Stroke")
+
+_sk_rule = B.SPECIALITY_RULES[STROKE]
+_sk_rx = B.compile_rule(_sk_rule)
+
+print("  a stroke is also a unit of cardiac output")
+# THE ONE THAT MATTERS. "Stroke Central Monitor" is a row this panel carries, so
+# patient monitoring notices do reach it. "stroke volume" appears more than forty
+# times in the Hub's own supplier product data as a haemodynamic parameter (Deltex
+# CardioQ-ODM, LiDCO, Cogent) and as a bag valve mask spec (Ambu Spur II). Without
+# the exclusion the first such notice published lands on the stroke page.
+for bad in ["Cardiac Output and Stroke Volume Monitoring",
+            "Stroke Volume Variation Sensors and Consumables",
+            "Oesophageal Doppler Monitor measuring Stroke Volume and Cardiac Output",
+            "Supply of Bag Valve Masks (stroke volume 1500ml)"]:
+    check("cardiac output row refused: %s" % bad[:50], not B.match_title(_sk_rx, bad))
+
+print("  the words that belong to this pathway and to somebody else in this data")
+# Every one of these is a real row that a wider draft matched and that was read
+# and rejected on 10/09/2026.
+for bad, why in [
+        ("Patient Dry Wiping Cloths [5075392]", "cloth contains clot"),
+        ("Framework Agreement for the Supply of Retrieval Packs", "organ retrieval, NHSBT"),
+        ("South Thames Retrieval Service (STRS) Patient Transport Services",
+         "paediatric retrieval transport"),
+        ("LivaNova Essenz Perfusion Heart Lung System", "cardiac perfusion"),
+        ("Contract Award Notice for the Provision of LifePort Perfusion Consumables",
+         "kidney perfusion"),
+        ("Framework Agreement for the Supply of Cold Static Perfusion Fluid UW Solution",
+         "organ preservation"),
+        ("NHS Golden Jubilee Cardiac Perfusion Consumables", "cardiac perfusion"),
+        ("Genotyping Microarray Kits", "NHSBT red cell genotyping"),
+        ("FOR THE SUPPLY OF  RCI GENOTYPING CONSUMABLES AND MAINTENANCE",
+         "NHSBT immunohaematology"),
+        ("WPL07040 - Neurology Insourcing", "neurology outpatient capacity"),
+        ("Neurological Rehabilitation Service", "the rehabilitation page's"),
+        ("Estates Capital Project - Trevor Gibbens Unit Strategic Outline Case",
+         "Trevor is not Trevo"),
+]:
+    check("cut at the include stage (%s): %s" % (why[:34], bad[:38]),
+          not B.match_title(_sk_rx, bad))
+
+print("  and the eight rows that must be present, every one read on 10/09/2026")
+for good in ["Stroke Central Monitor",
+             "Interventional Neuro Radiology and Thrombectomy Consumables",
+             "INR and Thrombectomy Consumables",
+             "INTERVENTIONAL CARDIOLOGY, INTERVENTIONAL RADIOLOGY AND INTERVENTIONAL "
+             "NEURORADIOLOGY, CARDIAC RHYTHM MANAGEMENT AND ELE",
+             "Provision of Transport for Stroke and Suspected Stroke Patients",
+             "Early Stroke Discharge Service",
+             "Community Stroke Service for Newham (2026/27)",
+             "City & Hackney Post Stroke Community Service"]:
+    check("row carried: %s" % good[:52], B.match_title(_sk_rx, good))
+check("exactly eight, and every one of them was read",
+      sk["counts"]["awardsMatched"] == 8, "got %s" % sk["counts"]["awardsMatched"])
+check("nothing is held back from the reader",
+      sk["counts"]["awardsShown"] == sk["counts"]["awardsMatched"])
+
+print("  no framework is counted, and the panel says which one it cannot count")
+check("no framework claimed", sk["counts"]["frameworks"] == 0)
+check("the framework list is genuinely empty", sk["frameworks"] == [])
+check("the suppliers list is genuinely empty", sk["suppliers"] == [])
+check("the rule declares the absence rather than faking it with a pattern",
+      _sk_rule["frameworks"] is None)
+# The default wording for "frameworks": None says every NHSSC framework name was
+# read and none is this speciality's. That is true of obesity and paediatrics and
+# FALSE here, so this rule overrides it. If the override is ever dropped the panel
+# starts telling a member something untrue.
+check("the false default sentence is not published",
+      "none of them is this speciality's" not in sk["rules"]["frameworks"])
+check("the true finding is published instead",
+      "THE REASON IS NOT THAT NONE EXISTS" in sk["rules"]["frameworks"])
+for phrase in ["2021/S 000-017565", "Interventional Neuroradiology", "unparsed",
+               "26 February 2027", "Product Matrix", "12 February 2026",
+               "Neuromodulation Devices", "Digital Diagnostic Solutions"]:
+    check("frameworks finding carries: %s" % phrase[:44],
+          phrase in sk["rules"]["frameworks"])
+check("the suppliers tab explains its own emptiness",
+      "publishes no supplier names" in sk["rules"]["suppliers"])
+
+print("  the exclusion says where its evidence came from")
+# Every other rule's exclusion list was derived from an award row. This one was
+# not, and the published text has to say so rather than assert the house sentence.
+check("the rule carries an exclusion list at all", bool(_sk_rule.get("exclude")))
+check("the default award-row claim is not published",
+      "every pattern in it matched a real notice" not in sk["rules"]["awards"])
+check("the true provenance is published instead",
+      "not derived from an award row" in sk["rules"]["awards"])
+
+print("  no CPV family and no Drug Tariff part, both checked rather than skipped")
+check("no CPV prefix claimed", not _sk_rule.get("cpv"))
+check("every award was admitted by its title",
+      all(B.match_title(_sk_rx, a["title"]) for a in sk["awards"]))
+# The four service notices carry 85143000, 85121200, 85323000 and 85100000. All
+# generic. If a stroke-specific CPV family ever appears this check still holds,
+# but the rule should then be revisited rather than left alone.
+_sk_cpv = sorted({c for a in sk["awards"] for c in (a.get("cpv") or [])})
+check("only generic health service CPV codes are present",
+      all(c.startswith("85") for c in _sk_cpv), ", ".join(_sk_cpv))
+check("no Drug Tariff part is claimed", sk["drugTariff"] is None)
+check("and the panel says why", "nothing on this patch is listed there"
+      in sk["rules"]["drugTariff"])
+
+print("  the two shared award notices are shared on purpose")
+# The interventional radiology and neurology panels carry these too. That overlap
+# is deliberate: the same notice really is bought by all three patches. If it ever
+# stops appearing on the others, one of the rules has drifted.
+_ir_titles = {a["title"] for a in load_panel(IR)["awards"]}
+_nr_titles = {a["title"] for a in load_panel(NEURO)["awards"]}
+check("interventional radiology still carries the thrombectomy consumables notice",
+      "Interventional Neuro Radiology and Thrombectomy Consumables" in _ir_titles)
+check("neurology still carries it too",
+      "Interventional Neuro Radiology and Thrombectomy Consumables" in _nr_titles)
+# And the divergence from the neurology rule is deliberate: neurology excludes the
+# framework award notice because its page names five agreements and not that one.
+check("neurology still refuses the interventional framework award",
+      not any(t.upper().startswith("INTERVENTIONAL CARDIOLOGY") for t in _nr_titles))
+check("stroke carries it, because this page names it as the buying route",
+      any(a["title"].upper().startswith("INTERVENTIONAL CARDIOLOGY")
+          for a in sk["awards"]))
 
 
 # The exclude=None path must not leak to any rule that has not earned it. Two have:
