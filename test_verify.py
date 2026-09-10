@@ -2774,6 +2774,107 @@ def _(tmp):
     return "2026/S 000-010151"
 
 
+# ---------------------------------------------------------------------------
+# THE COVERAGE LEDGER'S CLASSIFICATION (added 10/09/2026).
+#
+# data/coverage-ledger.json decides what the Differentiator sweep does next: a
+# framework's crawlWorklist is crawled, and "N left" in COVERAGE-LEDGER.md is
+# read as the work remaining. Three misclassifications had already happened in
+# it and nothing was checking any of them — a re-crawl of an answered supplier
+# is how three considered refusal records were destroyed on 06/09/2026.
+# Each case below puts the ledger back into the exact shape it was in.
+# ---------------------------------------------------------------------------
+
+def _ledger(mutate):
+    """Load the real ledger, apply one mutation, write it back."""
+    import json as _json
+    d = _json.load(open("data/coverage-ledger.json"))
+    mutate(d)
+    _json.dump(d, open("data/coverage-ledger.json", "w"), indent=1)
+
+
+@case("a crawl refusal invisible because the supplier publishes something somewhere")
+def _(tmp):
+    # ^o404. The bucket chain tests published/held BEFORE refusals, so any
+    # supplier publishing anything anywhere never reached the `refused` branch
+    # and its recorded refusal vanished from the framework's report: 270 rows
+    # across 62 suppliers on 10/09/2026, Philips on 20 of them. A reader then
+    # sees a framework as neglected when its remainder was read and answered.
+    def m(d):
+        for r in d["frameworks"]:
+            if r.get("refusedSuppliers"):
+                r["refusedSuppliers"] = []
+                return
+    _ledger(m)
+    return "refusedSuppliers does not list"
+
+
+@case("a supplier captured in full reported as never crawled")
+def _(tmp):
+    # ^o385. Mapping a category for a supplier whose captured rows carry no
+    # source drops it out of heldBySupplier without adding it to products, so
+    # both counts read zero and it fell all the way through to notCrawled and
+    # was re-offered as fresh crawl work. Swann Morton, whose 137 products sit
+    # at numeric URLs the detail crawler's slug match never reaches (^o379).
+    def m(d):
+        for r in d["frameworks"]:
+            if r.get("capturedNothingCounted"):
+                r["notCrawled"] = (r.get("notCrawled") or []) + r["capturedNothingCounted"]
+                r["capturedNothingCounted"] = []
+                return
+    _ledger(m)
+    return "records a capture of their site"
+
+
+@case("a crawl queued against a domain already captured under another name")
+def _(tmp):
+    # ^o322. "GB UK Ltd" and "GBUK Group" are one company on one website; the
+    # ledger offered the second as crawlable, a run crawled it, and the same
+    # range filed twice as 344 products beside 343. Crawled and reverted
+    # 06/09/2026. The work is an identity/merge decision, not a crawl.
+    def m(d):
+        for r in d["frameworks"]:
+            for w in (r.get("duplicateOfCapturedSupplier") or []):
+                r.setdefault("crawlWorklist", []).append(
+                    {"supplier": w["supplier"], "domain": w["domain"]})
+                return
+    _ledger(m)
+    return "already captured under a different canonical name"
+
+
+@case("a duplicate that also has held products, counted twice in `left`")
+def _(tmp):
+    # Not a shipped bug — the shape the 10/09/2026 change itself nearly shipped.
+    # All three live duplicates (MIS Healthcare, Danone Nutricia Early Life
+    # Nutrition, Talley) also have held products, so counting them under
+    # duplicateOfCapturedSupplier as well as heldNeedingCategory inflated `left`
+    # by one apiece. Caught by diffing the ledger before and after; a number
+    # that is one too high is exactly the kind of drift nobody spots by eye.
+    def m(d):
+        for r in d["frameworks"]:
+            dup = r.get("duplicateOfCapturedSupplier") or []
+            nc = set(r.get("notCrawled") or [])
+            if dup and not any(w["supplier"] in nc for w in dup):
+                r["actionable"]["duplicateOfCapturedSupplier"] = len(dup)
+                r["actionableTotal"] = sum(r["actionable"].values())
+                return
+    _ledger(m)
+    return "being counted twice"
+
+
+@case("the script fix landed but the ledger it writes was never regenerated")
+def _(tmp):
+    # A fix to a generator and the file it generates are two halves of one
+    # change. Landing build_coverage_ledger.py without re-running it leaves the
+    # old, wrong classification live and every reader looking at it.
+    def m(d):
+        for r in d["frameworks"]:
+            r.pop("capturedNothingCounted", None)
+    _ledger(m)
+    return "predates the 10/09/2026 classification fixes"
+
+
+
 def main():
     # THE CONTACT FIXTURE, first of all.
     #

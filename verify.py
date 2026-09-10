@@ -4860,6 +4860,142 @@ def check_differentiator(doc, vocab):
 
 
 
+
+def check_coverage_ledger(doc):
+    """The coverage ledger must never re-offer work that is already on record.
+
+    data/coverage-ledger.json is what drives the Differentiator sweep: a
+    framework's crawlWorklist is the list of suppliers a run will go and crawl,
+    and its `actionable` counts are what "N left" means in COVERAGE-LEDGER.md.
+    A misclassification there is not cosmetic — a re-crawl of an answered
+    supplier is how three considered refusal records were destroyed on
+    06/09/2026, and a wrongly-BLOCKED framework is dropped by the sweep for
+    good.
+
+    Three misclassifications have actually happened, all fixed in
+    scripts/build_coverage_ledger.py, none of which anything was checking:
+
+      * a recorded refusal invisible because the supplier publishes something
+        somewhere, so the bucket chain never reached the refused branch
+        (^o404, 270 rows across 62 suppliers on 10/09/2026)
+      * a supplier captured in full but contributing neither a published nor a
+        held product reported as never crawled (^o385, Swann Morton)
+      * a seed record queued for a crawl whose website is already captured
+        under another canonical name, filing the same range twice
+        (^o322, "GB UK Ltd" beside "GBUK Group" on gbukgroup.com)
+
+    Plus the arithmetic guard that catches the shape of a bug this check's own
+    change nearly shipped: a duplicate that also has held products counted once
+    under heldNeedingCategory and again under duplicateOfCapturedSupplier,
+    inflating `left` on all three live cases.
+    """
+    if not doc:
+        return
+    rows = doc.get("frameworks") or []
+    if not rows:
+        return
+    prod = load("supplier-products.json") or {}
+    try:
+        sys.path.insert(0, "company-aliases")
+        import company_alias as CA
+        reg = CA.load_registry()
+    except Exception as e:
+        WARN("coverage-ledger",
+             "the company alias registry would not load (%s), so the ledger's "
+             "supplier joins could not be re-checked against "
+             "supplier-products.json this run" % e)
+        return
+
+    def canon(n):
+        st, c, _ = CA.resolve(n, reg)
+        return c if st == "RESOLVED" else n
+
+    refused = {canon(k) for k in (prod.get("refusals") or {})}
+    captured, cap_by_domain = set(), {}
+    for k, v in (prod.get("suppliers") or {}).items():
+        key = canon(k)
+        captured.add(key)
+        d = (v.get("domain") or "").strip().lower()
+        d = d[4:] if d.startswith("www.") else d
+        if d:
+            cap_by_domain.setdefault(d, set()).add(key)
+
+    BUCKETS = ("published", "publishedElsewhere", "heldOnly",
+               "capturedNothingCounted", "notCrawled", "refused", "unknown")
+    hidden, recrawl, dupqueued, arith, overlap = [], [], [], [], []
+    for r in rows:
+        name = r.get("framework") or "?"
+        if "capturedNothingCounted" not in r:
+            FAIL("coverage-ledger",
+                 "data/coverage-ledger.json predates the 10/09/2026 "
+                 "classification fixes (no `capturedNothingCounted` bucket on "
+                 "%r), so it is still reporting captured suppliers as never "
+                 "crawled. Regenerate it: python3 scripts/build_coverage_ledger.py"
+                 % name)
+            return
+        listed = {w.get("supplier") for w in (r.get("refusedSuppliers") or [])}
+        for b in BUCKETS:
+            for n in (r.get(b) or []):
+                if n in refused and n not in listed:
+                    hidden.append((name, n, b))
+        for n in (r.get("notCrawled") or []):
+            if n in captured:
+                recrawl.append((name, n))
+        for w in (r.get("crawlWorklist") or []):
+            n, d = w.get("supplier"), (w.get("domain") or "").lower()
+            owners = cap_by_domain.get(d, set()) - {n}
+            if d and owners:
+                dupqueued.append((name, n, d, sorted(owners)[0]))
+        a = r.get("actionable") or {}
+        if r.get("actionableTotal") != sum(a.values()):
+            arith.append((name, r.get("actionableTotal"), sum(a.values())))
+        # A duplicate counted here must be one that is NOT already counted under
+        # another head. Only notCrawled duplicates qualify.
+        nc = set(r.get("notCrawled") or [])
+        eligible = sum(1 for w in (r.get("duplicateOfCapturedSupplier") or [])
+                       if w.get("supplier") in nc)
+        if a.get("duplicateOfCapturedSupplier", 0) > eligible:
+            overlap.append((name, a.get("duplicateOfCapturedSupplier"), eligible))
+
+    if hidden:
+        FAIL("coverage-ledger",
+             "%d framework row(s) hold an awarded supplier with a recorded crawl "
+             "refusal that the row's own refusedSuppliers does not list, so the "
+             "framework reads as neglected when it was read and answered: %s. "
+             "A refusal is a fact about the site, not about which bucket the "
+             "supplier fell into (^o404)."
+             % (len(hidden), "; ".join("%s / %s (in %s)" % h for h in hidden[:4])))
+    if recrawl:
+        FAIL("coverage-ledger",
+             "%d supplier(s) are reported as notCrawled although "
+             "data/supplier-products.json records a capture of their site, so a "
+             "sweep would re-crawl an answered supplier and overwrite what is on "
+             "record: %s. Captured is not the same as counted (^o385)."
+             % (len(recrawl), "; ".join("%s / %s" % x for x in recrawl[:4])))
+    if dupqueued:
+        FAIL("coverage-ledger",
+             "%d crawlWorklist entr(y/ies) point at a domain already captured "
+             "under a different canonical name, so crawling would file the same "
+             "range twice under two names: %s. That is an identity/merge "
+             "decision, not crawl work (^o322)."
+             % (len(dupqueued),
+                "; ".join("%s / %s -> %s already captured as %s" % x
+                          for x in dupqueued[:4])))
+    if arith:
+        FAIL("coverage-ledger",
+             "%d framework row(s) have an actionableTotal that is not the sum of "
+             "their `actionable` heads, so \"N left\" in COVERAGE-LEDGER.md does "
+             "not describe the work named beside it: %s"
+             % (len(arith), "; ".join("%s: total %s vs sum %s" % x for x in arith[:4])))
+    if overlap:
+        FAIL("coverage-ledger",
+             "%d framework row(s) count more duplicate-of-captured suppliers as "
+             "actionable than they have notCrawled duplicates, so a supplier "
+             "already counted under heldNeedingCategory is being counted twice "
+             "and `left` is inflated: %s"
+             % (len(overlap), "; ".join("%s: counted %s, eligible %s" % x
+                                        for x in overlap[:4])))
+
 def check_awareness(doc):
     """The hand-maintained half of the calendar. Every other calendar stream is derived
     from a store that already has its own gate; this one is typed by a person, so this
@@ -5529,6 +5665,7 @@ def main():
     check_hospital_prescribing(load("hospital-prescribing/index.json"))
     # The Differentiator. The category lock is the check — see the note above.
     check_differentiator(load("differentiator.json"), load("compare-suppliers.json"))
+    check_coverage_ledger(load("coverage-ledger.json"))
 
     # The Calendar. Two checks: the hand-typed awareness input, where the source
     # discipline has to be enforced, and the built join, where the risk is an
