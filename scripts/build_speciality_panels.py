@@ -3807,7 +3807,7 @@ SPECIALITY_RULES = {
             "with their sources and their expiry dates."
         ),
     },
-    # PAGE 2939. Scope, in the page's own tagline: "Stones, scopes, stents and lasers,
+    # PAGE 2803. Scope, in the page's own tagline: "Stones, scopes, stents and lasers,
     # the prostate and bladder cancer pathways, and the catheter that goes home with the
     # patient." Urology is the rare speciality with an NHS Supply Chain agreement carrying
     # its own name, and that agreement goes to tender on 11/09/2026.
