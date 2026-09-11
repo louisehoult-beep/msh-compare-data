@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-02",
-  "differentiator.json published": 34076,
-  "differentiator.json held": 47737
+  "differentiator.json published": 34091,
+  "differentiator.json held": 47736
  },
  "counts": {
   "frameworks": 121,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 448,
-  "inScopeSuppliersNeedingCrawl": 499,
-  "inScopeSuppliersNeedingDomain": 460,
-  "suppliersRefused": 356,
+  "inScopeSuppliersNeedingCrawl": 494,
+  "inScopeSuppliersNeedingDomain": 456,
+  "suppliersRefused": 359,
   "suppliersRefusedButPublishingElsewhere": 100,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 3,
@@ -3204,8 +3204,8 @@
    "category": "Rehabilitation and Community",
    "ends": "2 March 2027",
    "suppliersAwarded": 63,
-   "suppliersPublished": 15,
-   "coverage": 23.8,
+   "suppliersPublished": 16,
+   "coverage": 25.4,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3217,10 +3217,6 @@
     {
      "supplier": "Footlabs Ltd",
      "domain": "footlabs.co.uk"
-    },
-    {
-     "supplier": "Medalin Limited",
-     "domain": "medalin.co.uk"
     },
     {
      "supplier": "Promedics Orthopaedics Ltd",
@@ -3236,10 +3232,6 @@
     },
     {
      "supplier": "Benefoot UK Ltd trading as BeneCare Medical",
-     "domain": null
-    },
-    {
-     "supplier": "Bespoke Prosthetics & Orthotics Ltd",
      "domain": null
     },
     {
@@ -3319,7 +3311,6 @@
     "Arden Orthotics Ltd",
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
-    "Bespoke Prosthetics & Orthotics Ltd",
     "Birmingham Orthotic Services",
     "C&P Medical Trading Ltd",
     "C&S Footwear Adaptions Ltd",
@@ -3352,6 +3343,13 @@
      "domain": "www.aposhealth.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-29",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Bespoke Prosthetics & Orthotics Ltd",
+     "domain": "bpoclinic.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
      "bucket": "refused"
     },
     {
@@ -3511,11 +3509,11 @@
    "actionable": {
     "unresolvedNames": 3,
     "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 1,
-    "needDomain": 21
+    "needDomain": 20
    },
    "published": [
     "Allard Support UK Limited",
@@ -3528,6 +3526,7 @@
     "Essity UK Limited",
     "Kettering Surgical Appliances",
     "MAG Orthotics Limited",
+    "Medalin Limited",
     "medi UK",
     "Performance Health International Limited",
     "Talarmade Limited",
@@ -3545,7 +3544,6 @@
    ],
    "heldOnly": [
     "Footlabs Ltd",
-    "Medalin Limited",
     "Promedics Orthopaedics Ltd"
    ],
    "capturedNothingCounted": [],
@@ -3553,7 +3551,6 @@
     "Arden Orthotics Ltd",
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
-    "Bespoke Prosthetics & Orthotics Ltd",
     "Birmingham Orthotic Services",
     "C&P Medical Trading Ltd",
     "C&S Footwear Adaptions Ltd",
@@ -3576,6 +3573,7 @@
    "refused": [
     "Algeo",
     "Apos Medical UK Ltd",
+    "Bespoke Prosthetics & Orthotics Ltd",
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
     "Critical Healthcare",
     "Cuxson Gerrard & Company Limited",
@@ -3593,7 +3591,7 @@
     "Reed Medical Ltd",
     "Thesis Technology Products Ltd"
    ],
-   "actionableTotal": 35,
+   "actionableTotal": 33,
    "blockedReason": null
   },
   {
@@ -12080,8 +12078,8 @@
    "category": "Rehabilitation and Community",
    "ends": "23 November 2027",
    "suppliersAwarded": 12,
-   "suppliersPublished": 2,
-   "coverage": 16.7,
+   "suppliersPublished": 4,
+   "coverage": 33.3,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -12091,28 +12089,8 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Medalin Limited",
-     "domain": "medalin.co.uk"
-    },
-    {
      "supplier": "Otto Bock Healthcare PLC",
      "domain": "ottobock.com"
-    },
-    {
-     "supplier": "Amparo Prosthetics Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Bespoke Prosthetics & Orthotics Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "ExpHand Prosthetics Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Koalaa Ltd",
-     "domain": null
     },
     {
      "supplier": "Orthoeurope Ltd",
@@ -12120,14 +12098,31 @@
     }
    ],
    "domainsMissing": [
-    "Amparo Prosthetics Ltd",
-    "Bespoke Prosthetics & Orthotics Ltd",
-    "ExpHand Prosthetics Ltd",
-    "Koalaa Ltd",
     "Orthoeurope Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "Amparo Prosthetics Ltd",
+     "domain": "amparo-prosthetics.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Bespoke Prosthetics & Orthotics Ltd",
+     "domain": "bpoclinic.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "ExpHand Prosthetics Ltd",
+     "domain": "exphandprosthetics.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; the Wix products sitemap carries 2 product URL(s), too few to call a catalogue",
+     "checked": "2026-09-11",
+     "bucket": "refused"
+    },
     {
      "supplier": "Hugh Steeper Limited",
      "domain": "www.steepergroup.com",
@@ -12160,41 +12155,42 @@
    "route": "NHSSC framework",
    "catsInScope": [
     "orthotics:afo",
-    "orthotics:hosiery"
+    "orthotics:hosiery",
+    "orthotics:prosth"
    ],
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 0,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 5
+    "needDomain": 1
    },
    "published": [
     "Blatchford Limited",
-    "Juzo UK Limited"
+    "Juzo UK Limited",
+    "Koalaa Ltd",
+    "Medalin Limited"
    ],
    "publishedElsewhere": [],
    "heldOnly": [
-    "Medalin Limited",
     "Otto Bock Healthcare PLC"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Amparo Prosthetics Ltd",
-    "Bespoke Prosthetics & Orthotics Ltd",
-    "ExpHand Prosthetics Ltd",
-    "Koalaa Ltd",
     "Orthoeurope Ltd"
    ],
    "refused": [
+    "Amparo Prosthetics Ltd",
+    "Bespoke Prosthetics & Orthotics Ltd",
+    "ExpHand Prosthetics Ltd",
     "Hugh Steeper Limited",
     "\u00d6ssur UK",
     "TayCare Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 7,
+   "actionableTotal": 2,
    "blockedReason": null
   },
   {
@@ -15148,10 +15144,6 @@
      "domain": "gardamed.com"
     },
     {
-     "supplier": "Medalin Limited",
-     "domain": "medalin.co.uk"
-    },
-    {
      "supplier": "Gardamed Ltd - Mego Afek",
      "domain": null
     },
@@ -15251,8 +15243,8 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 4,
-    "publishedElsewhereNeedingCategory": 9,
-    "heldNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 10,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -15266,13 +15258,13 @@
     "Essity UK Limited",
     "Juzo UK Limited",
     "L&R Medical / Activa (Lohmann & Rauscher)",
+    "Medalin Limited",
     "medi UK",
     "Thuasne UK Ltd",
     "Urgo Medical"
    ],
    "heldOnly": [
-    "Gardamed",
-    "Medalin Limited"
+    "Gardamed"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -17625,10 +17617,6 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "Medalin Limited",
-     "domain": "medalin.co.uk"
-    },
-    {
      "supplier": "Anita UK Ltd",
      "domain": null
     },
@@ -17683,8 +17671,8 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 3,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -17693,11 +17681,10 @@
    "published": [],
    "publishedElsewhere": [
     "Thuasne UK Ltd",
-    "Trulife Limited"
-   ],
-   "heldOnly": [
+    "Trulife Limited",
     "Medalin Limited"
    ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Anita UK Ltd",

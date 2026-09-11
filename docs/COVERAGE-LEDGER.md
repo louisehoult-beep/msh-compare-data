@@ -35,7 +35,7 @@ low coverage there means exhausted, not neglected.
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 29 | 23.8% | 74 | 32 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 20 | 19.8% | 61 | 32 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 15 | 23.8% | 35 | 22 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 16 | 25.4% | 33 | 23 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 11 | 18.3% | 39 | 20 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 15 | 25.9% | 33 | 20 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 10 | 17.5% | 35 | 20 | STARTED |
@@ -74,7 +74,7 @@ low coverage there means exhausted, not neglected.
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 2 | 15.4% | 3 | 9 | STARTED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | 4 | 7 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 4 | 8 | STARTED |
-| Prosthetic Components and Associated Products | orthotics | 12 | 2 | 16.7% | 7 | 4 | STARTED |
+| Prosthetic Components and Associated Products | orthotics | 12 | 4 | 33.3% | 2 | 7 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 6 | 4 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 3 | 6 | STARTED |
 | Polymer Aprons | infection | 8 | 1 | 12.5% | 0 | 7 | STARTED · BLOCKED |

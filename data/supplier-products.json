@@ -411682,6 +411682,93 @@
      "category": "Access Plus"
     }
    ]
+  },
+  "Koalaa Ltd": {
+   "domain": "yourkoalaa.com",
+   "verified": "2026-09-11",
+   "source": "yourkoalaa.com Wix storefront, each product page's own JSON-LD, read this run",
+   "structureFrom": "Wix product pages' own JSON-LD Product blocks (no bulk endpoint, one request per product)",
+   "hasDivisions": false,
+   "structure": "No usable grouping — Wix's JSON-LD Product block carries no category or additionalProperty field on any product checked, and the site's real categories are JS-rendered pages with no server-side membership list a plain fetch can read. Listed as one flat range.",
+   "filingRule": "Read from each product's own JSON-LD record on its Wix product page, so names, SKUs and descriptions are exact. Wix's Product schema carries no division field on this site — checked against several live product pages, not assumed — so every item is listed by name below rather than grouped, because a fabricated grouping would misrepresent the company's own filing. A future mapping pass may still assign a Hub category per product from its description text (the same rule build_differentiator.py already applies to NHS Supply Chain rows); this crawl does not attempt that.",
+   "divisions": [
+    {
+     "name": "Uncategorised",
+     "products": 14
+    }
+   ],
+   "products": [
+    {
+     "n": "ALX Starter Bundle",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Shannon's ALX Bundle",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Amy ALX",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Daniela's ALX Pro Bundle",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Grace ALX",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Janet ALX",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Joanie",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Kitty ALX",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nicole Pro ALX",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Rushton ALX",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Sarah ALX",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "ALX Bundle",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Nicole ALX",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "ALX Bundle",
+     "division": "Uncategorised",
+     "category": ""
+    }
+   ]
   }
  },
  "refusals": {
@@ -413738,6 +413825,21 @@
   "Lyreco UK Limited": {
    "domain": "why.lyreco.com",
    "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+   "checked": "2026-09-11"
+  },
+  "Amparo Prosthetics Ltd": {
+   "domain": "amparo-prosthetics.com",
+   "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+   "checked": "2026-09-11"
+  },
+  "Bespoke Prosthetics & Orthotics Ltd": {
+   "domain": "bpoclinic.co.uk",
+   "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+   "checked": "2026-09-11"
+  },
+  "ExpHand Prosthetics Ltd": {
+   "domain": "exphandprosthetics.com",
+   "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; the Wix products sitemap carries 2 product URL(s), too few to call a catalogue",
    "checked": "2026-09-11"
   }
  }
