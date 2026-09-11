@@ -148506,9 +148506,9 @@
    "source": "www.mediuk.co.uk XML sitemap, read this run",
    "structureFrom": "sitemap",
    "hasDivisions": false,
-   "landingPagesDropped": 5,
+   "landingPagesDropped": 10,
    "duplicateUrlsDropped": 0,
-   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 5 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation. 146 of 173 product URLs carry no division segment, so most of the range sits in one unsorted 'Uncategorised' list rather than the company's own grouping.",
+   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 5 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation. 146 of 173 product URLs carry no division segment, so most of the range sits in one unsorted 'Uncategorised' list rather than the company's own grouping. Five further entries removed by hand 2026-09-11 (OUTSTANDING ^o281): three article titles under \"Highlights\" (Painful Elbow, Ucs Debridement, Times Approach) and two section headings under \"Vascular\" (Assessment, Hand), confirmed live on mediuk.co.uk as marketing/landing pages, not products — see Hub/Architecture/DIFFERENTIATOR-CRAWLER-ROUTES.md, 05/09/2026 entry. This is a targeted data fix, not a general landing-vs-product detector — the rest of Highlights and Vascular has not been re-checked against the same pattern.",
    "structure": "No division structure found in the URLs — listed as one flat range.",
    "droppedCategoryPages": 0,
    "filingRule": "Read from the sitemap, so product NAMES come from URL slugs. 146 of 173 product URLs carry no division segment, so most of the range sits in one unsorted 'Uncategorised' list rather than the company's own grouping — every item is listed by name below rather than grouped, because a flat list is honest and a fabricated grouping would not be.",
@@ -148519,11 +148519,11 @@
     },
     {
      "name": "Highlights",
-     "products": 15
+     "products": 12
     },
     {
      "name": "Vascular",
-     "products": 6
+     "products": 4
     },
     {
      "name": "Orthopaedics",
@@ -149082,11 +149082,6 @@
      "category": ""
     },
     {
-     "n": "Painful Elbow",
-     "division": "Highlights",
-     "category": ""
-    },
-    {
      "n": "Epicomed Emotion",
      "division": "Uncategorised",
      "category": ""
@@ -149137,11 +149132,6 @@
      "category": ""
     },
     {
-     "n": "Ucs Debridement",
-     "division": "Highlights",
-     "category": ""
-    },
-    {
      "n": "Genumedi Pss",
      "division": "Uncategorised",
      "category": ""
@@ -149182,11 +149172,6 @@
      "category": ""
     },
     {
-     "n": "Times Approach",
-     "division": "Highlights",
-     "category": ""
-    },
-    {
      "n": "Mediven Cosy",
      "division": "Uncategorised",
      "category": ""
@@ -149199,16 +149184,6 @@
     {
      "n": "Juxta Toe Cap",
      "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Assessment",
-     "division": "Vascular",
-     "category": ""
-    },
-    {
-     "n": "Hand",
-     "division": "Vascular",
      "category": ""
     },
     {
