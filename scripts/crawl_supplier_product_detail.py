@@ -481,6 +481,106 @@ def _sitemap_urls(domain, deadline):
 # --product-path for a single run.
 product_paths = None
 
+# A NUMERIC-SLUG SITE'S NAME INDEX, and the pages it was read from.
+# Both are per-run, per-domain and in-memory only: sitemap-cache/ is gitignored
+# and every scheduled run works in a throwaway clone, so there is no run-to-run
+# disk cache to lean on here — one build per domain per run is the whole win.
+_NAME_INDEX = {}        # domain -> {nk(product name): url}
+_PAGE_CACHE = {}        # url -> the HTML already fetched while indexing
+
+
+def _leaf_stem(u):
+    """The last path segment with any file extension removed: /product/15.php -> 15."""
+    leaf = urllib.parse.urlparse(u).path.rstrip("/").rsplit("/", 1)[-1]
+    return re.sub(r"\.[a-zA-Z0-9]{1,5}$", "", leaf)
+
+
+def _is_numeric_slug_site(prod_urls):
+    """Are this site's product URLs bare ids rather than names?
+
+    THE SAME TEST crawl_supplier_site.py's sitemap route already applies before
+    it reads names off the pages themselves — at least 80% of product leaf stems
+    pure digits — and deliberately the same numbers, so the two crawlers cannot
+    disagree about what kind of site they are looking at. A URL that merely ends
+    in a digit ("...-2") is not this failure and must not divert a normal
+    descriptive-slug site into the slower per-page read.
+    """
+    if not prod_urls:
+        return False
+    numeric = sum(1 for u in prod_urls if re.match(r"^\d+$", _leaf_stem(u)))
+    return numeric * 5 >= len(prod_urls) * 4
+
+
+# The name index gets ITS OWN budget, deliberately equal to the budget
+# crawl_supplier_site.py gives the identical per-page read, so the two crawlers
+# cannot disagree about how long reading one site's product pages is worth.
+NAME_INDEX_BUDGET_S = base.NUMERIC_SLUG_BUDGET_S
+
+
+def _name_index(domain, prod_urls):
+    """Map each numeric-slug product URL to the name its own page publishes.
+
+    WHY (11/09/2026, OUTSTANDING ^o379). find_product_url() below matches a
+    product name against the URL's last path segment. On a site that files
+    products at bare ids — swann-morton.co.uk/product/15.php is the worked
+    example, 137 of them — that segment slugifies to "15-php" and can never
+    match "Surgical Scalpel Blade No. 9", so EVERY product was refused for "no
+    sitemap URL's slug matches this product's name", no row ever got a source,
+    and the coverage ledger read the supplier as never crawled and re-offered
+    all 137 on every single run.
+
+    The name is not missing, only absent from the URL: crawl_supplier_site.py
+    already reads it off each page to capture the range at all, via
+    `_page_title()` (schema.org markup, then <h1>, then <title> minus the site's
+    own name tail). This reuses that exact function rather than writing a second
+    one, so a page the range crawl named "Surgical Scalpel Blade No. 9" cannot
+    be named anything else here.
+
+    ONE GET PER URL, ONCE PER DOMAIN PER RUN — and the HTML is kept, so route B
+    below does not fetch the same page a second time to read its detail. That
+    keeps this route's request count equal to the range crawl's, not double it.
+    Running out of budget partway is a PARTIAL index, not a refusal: the names
+    read so far are returned and used, exactly as numeric_slug_products() treats
+    the same situation, and the rest simply miss this run.
+
+    THE BUDGET IS THIS FUNCTION'S OWN AND NOT THE CALLER'S, for the same reason
+    _sitemap_urls() above keeps its own: find_product_url() is handed a
+    PER-PRODUCT deadline (PRODUCT_BUDGET_S, 15 seconds), and a whole-site index
+    built inside one product's 15 seconds is not an index. Measured on the first
+    real run against swann-morton.co.uk, that read 32 of 137 pages before the
+    deadline and then refused the other 105 products for "no page in its name
+    index publishes this product's name" — a wrong answer, not a slow one, and
+    the exact failure the sitemap cache above was written to stop. The deadline
+    argument is not accepted here at all, so it cannot be reintroduced by
+    accident.
+    """
+    if domain in _NAME_INDEX:
+        return _NAME_INDEX[domain]
+    idx = {}
+    _NAME_INDEX[domain] = idx           # set first: a partial index is still an index
+    build_deadline = time.time() + NAME_INDEX_BUDGET_S
+    read = failed = 0
+    for u in prod_urls:
+        if time.time() > build_deadline:
+            print("      (name index stopped at %d of %d page(s) — out of budget)"
+                  % (read + failed, len(prod_urls)), flush=True)
+            break
+        try:
+            body, _ = base.get(u, timeout=20)
+        except Exception:
+            failed += 1
+            continue
+        name = base._page_title(body)
+        if not name:
+            failed += 1
+            continue
+        _PAGE_CACHE[u] = body
+        idx.setdefault(nk(name), u)     # first wins, like the sitemap slug match
+        read += 1
+    print("      built a name index for %s from %d page(s) (%d unreadable)"
+          % (domain, read, failed), flush=True)
+    return idx
+
 
 def find_product_url(domain, name, deadline):
     """Locate this product's own URL from the site's XML sitemap, by matching
@@ -502,7 +602,15 @@ def find_product_url(domain, name, deadline):
     this function could ever match, so every one of its products was held out
     of the Differentiator for "no source carries this product" however
     completely the range itself had been read. The default list is unchanged,
-    so no other supplier's capture moves."""
+    so no other supplier's capture moves.
+
+    A SITE THAT FILES PRODUCTS AT BARE IDS IS NOT MATCHED ON ITS URLs AT ALL
+    (11/09/2026). swann-morton.co.uk publishes 137 products at /product/15.php
+    and the like: there is no name in the URL to match, so every one of them was
+    refused here and the ledger re-offered the whole supplier on every run. Those
+    sites go through _name_index() above instead, which reads the name off each
+    product's own page exactly as crawl_supplier_site.py already does to capture
+    the range. The slug route below is untouched for every other site."""
     urls = _sitemap_urls(domain, deadline)
 
     segs = tuple(product_paths) if product_paths else \
@@ -511,6 +619,23 @@ def find_product_url(domain, name, deadline):
     prod = [u for u in urls if re.search(pattern, u, re.I)]
     if not prod:
         return None, "the sitemap carries no product URLs to match against"
+
+    # A BARE-ID SITE CAN NEVER BE MATCHED ON ITS URLs. Try the page-read index
+    # first on those sites — not as a fallback after the slug match, because on
+    # a numeric-slug site the slug match cannot succeed and its "partial" branch
+    # can only ever mis-fire (slugify("15.php") is "15-php", and "15-php"
+    # contains "15", so a product literally called "15" would match the wrong
+    # page).
+    if _is_numeric_slug_site(prod):
+        idx = _name_index(domain, prod)
+        hit = idx.get(nk(name))
+        if hit:
+            return hit, None
+        if idx:
+            return None, ("this site files products at bare ids, and no page in its name "
+                          "index publishes this product's name")
+        return None, ("this site files products at bare ids and none of its product pages "
+                      "could be read to find out what they are")
 
     target = slugify(name)
     if not target:
@@ -587,6 +712,92 @@ def extract_jsonld_product(html_doc):
     return None
 
 
+_MICRODATA_FIELDS = ("brand", "model", "manufacturer", "sku", "mpn", "material", "colour", "color")
+
+
+def _itemprop(doc, prop):
+    """One schema.org MICRODATA property, as text or as an attribute value.
+
+    A property is carried either by an element's text (<span itemprop="name">X)
+    or by an attribute on a void element (<meta itemprop="model" content="No. 09">,
+    <img itemprop="image" src="...">). Both forms are read; neither is guessed at.
+    """
+    m = re.search(r'<(meta|img|link)\b[^>]*itemprop=["\']%s["\'][^>]*>' % prop, doc, re.I)
+    if m:
+        v = re.search(r'(?:content|src|href)=["\']([^"\']+)["\']', m.group(0), re.I)
+        if v:
+            return v.group(1).strip()
+    m = re.search(r'<([a-zA-Z0-9]+)\b[^>]*itemprop=["\']%s["\'][^>]*>(.*?)</\1>' % prop,
+                  doc, re.I | re.S)
+    if m:
+        v = base.clean(m.group(2))
+        if v:
+            return v
+        inner = re.search(r'<(?:img|meta|link)\b[^>]*(?:src|content|href)=["\']([^"\']+)["\']',
+                          m.group(2), re.I)
+        if inner:
+            return inner.group(1).strip()
+    return None
+
+
+def extract_microdata_product(html_doc):
+    """The schema.org Product a page marks up as MICRODATA rather than JSON-LD.
+
+    WHY (11/09/2026). Once the bare-id name index above could finally find
+    swann-morton.co.uk's 137 product pages, route B read them — and produced
+    navigation: "Product Ranges Product Ranges... No. 3 Range No. 4 Range Safety
+    Scalpels". The site's theme puts nothing this file's main_content_fragment()
+    recognises around the product copy, so the heuristic swept up the menu. That
+    is worse than capturing nothing: it would have put a site menu in front of
+    members as 137 product descriptions.
+
+    The page was never short of a description. It carries a full schema.org
+    Product — <body itemscope itemtype="https://schema.org/Product"> with
+    itemprop name, description, brand, model and manufacturer — in microdata,
+    the older of the two schema.org encodings, which extract_jsonld_product()
+    above does not read. Reading it is not a heuristic: it is the site telling
+    us, in a standard vocabulary, what this page is about.
+
+    NO IMAGE IS READ FROM MICRODATA, AND THAT IS DELIBERATE. Swann Morton's only
+    itemprop="image" sits inside a block its own theme has commented out
+    (<!-- <span itemprop="image"><img src="..."> -->), so publishing it would put
+    a picture on 137 product pages that the site itself has switched off. There
+    is no dependable way to tell from here: that page carries 84 "<!--" against
+    82 "-->", because of IE conditional comments, so neither stripping them nor
+    counting them decides reliably whether a given match is live markup. A
+    description that is one sentence about this exact blade is self-evidently the
+    product's own; an image URL carries no such tell. So the image comes from
+    og:image — a single unambiguous <meta> in <head> — or the product simply has
+    none, which on this site is the truthful answer.
+
+    A BREADCRUMB IS NOT A PRODUCT. A schema.org BreadcrumbList marks each crumb
+    up as itemprop="name", the same attribute the Product uses, and sits above it
+    in the document — the exact trap that made MIS Healthcare read as 105
+    products called "Home" (see _page_title() in crawl_supplier_site.py). The
+    trail is removed before anything is read.
+
+    Returns None unless the page actually declares itself a Product, so a page
+    carrying only a BreadcrumbList or an Organization block falls through to the
+    heuristic below rather than being mined for stray attributes.
+    """
+    # Best effort only — see the docstring: this removes ordinary well-formed
+    # comments, and is NOT trusted to decide anything on its own.
+    doc = re.sub(r"<!--.*?-->", " ", html_doc, flags=re.S)
+    if not re.search(r'itemtype=["\'][^"\']*schema\.org/Product["\']', doc, re.I):
+        return None
+    doc = re.sub(base._BREADCRUMB_CONTAINER, "", doc, flags=re.S | re.I)
+
+    desc = _itemprop(doc, "description") or ""
+    features = []
+    for f in _MICRODATA_FIELDS:
+        v = _itemprop(doc, f)
+        if v and len(v) < 120:
+            features.append("%s: %s" % (f.capitalize(), v))
+    if not desc and not features:
+        return None
+    return {"description": desc, "features": features}
+
+
 def og_image(html_doc):
     m = re.search(r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
                   html_doc, re.I)
@@ -594,13 +805,26 @@ def og_image(html_doc):
 
 
 def page_product_detail(url):
+    # Already read while building the name index for a bare-id site — reading it
+    # again would double this route's request count against the same site for
+    # nothing.
+    cached = _PAGE_CACHE.get(url)
+    if cached is not None:
+        return _detail_from_html(url, cached)
     try:
         html_doc, _ = base.get(url, timeout=25)
     except urllib.error.HTTPError as e:
         return None, "the product page returned HTTP %d" % e.code
     except Exception as e:
         return None, "the product page could not be fetched (%s)" % str(e)[:60]
+    return _detail_from_html(url, html_doc)
 
+
+def _detail_from_html(url, html_doc):
+    """Everything page_product_detail() does once the HTML is in hand. Split out
+    11/09/2026 so the bare-id name index above and the ordinary fetch share ONE
+    parser — two copies would be free to drift, and this is the code that decides
+    what a member reads."""
     ld = extract_jsonld_product(html_doc)
     if ld:
         desc = base.clean(ld.get("description") or "")
@@ -620,6 +844,14 @@ def page_product_detail(url):
         return {
             "sourceUrl": url, "parsed": "structured",
             "description": desc[:2000], "features": features[:20], "image": img or og_image(html_doc),
+        }, None
+
+    md = extract_microdata_product(html_doc)
+    if md:
+        return {
+            "sourceUrl": url, "parsed": "structured",
+            "description": md["description"][:2000], "features": md["features"][:20],
+            "image": og_image(html_doc),
         }, None
 
     frag = main_content_fragment(html_doc)
