@@ -6798,6 +6798,110 @@ SPECIALITY_RULES = {
     # estate. NOT the device a medicine is given through - the pump, the giving set,
     # the cannula and the syringe are the vascular access and IV therapy page's, and
     # are claimed there.
+    "digital-and-medical-it": {
+        "label": "Digital and Medical IT",
+        # WRITTEN 11/09/2026, alongside the page-2919 build. This is the LAST of the
+        # 43 specialities to get a rule, and it is deliberately the narrowest in the
+        # file, because "digital" and "IT" are the two most promiscuous words in the
+        # whole procurement corpus.
+        #
+        # FRAMEWORKS CLAIMED, each read at NHS Supply Chain's own contract launch
+        # brief on 11/09/2026:
+        #   Digital Diagnostic Solutions (2025/S 000-043444, 1 Aug 2025 to 31 Jul
+        #     2027, one lot, 24 product categories, 54 suppliers of whom 24 are new,
+        #     34 delisted at the start). SHARED with radiology-and-imaging, which
+        #     claims it correctly as its PACS/RIS/VNA route. It is here because it is
+        #     the ONLY NHS Supply Chain route for departmental clinical IT of any
+        #     kind, and page 2919's whole Buying route section turns on that fact.
+        #   Radiotherapy IT Solutions and Associated Options and Related Services
+        #     (2021/S 000-007768, 1 Apr 2022 to 31 Mar 2028, five suppliers, three
+        #     product categories). Named by page 2919 as a separate route with its own
+        #     team and its own capital line, and not claimed by any other rule.
+        #
+        # NOT CLAIMED, deliberately, and each was tried:
+        #   PACS, teleradiology, vendor neutral archive -> radiology-and-imaging's
+        #     include already carries all three and carries them correctly. A page
+        #     about the IT department does not own the radiologist's reporting queue.
+        #   digital pathology, LIMS, "patholog*" -> pathology-and-laboratory-
+        #     medicine's ground, and the one row that would have been gained is a
+        #     false positive anyway: "Digital Pathology Services", East of England
+        #     Community Health and Care, GBP 7,097,923 to Preventx Limited, which is
+        #     online sexual health testing and not a slide-imaging system at all.
+        #   bare "software", bare "licence"/"license" -> 65 rows, and the majority are
+        #     not this patch: a Motion Picture Licensing Company film licence at
+        #     Cambridge University Hospitals, a Wolters Kluwer UpToDate subscription,
+        #     an AFD address-lookup licence, facilities-management software, a
+        #     warehouse file-tracking tool and DocuSign. Refused rather than excluded
+        #     one by one, because the exclusion list would never finish.
+        #   bare "digital" -> reaches digital weight management, digital wayfinding,
+        #     a digital interview recording system for a police and crime
+        #     commissioner, digital therapeutics for self-harm and a digital diabetes
+        #     prevention programme. Every one belongs to another patch or to no patch.
+        #   bare "AI"/"artificial intelligence" -> zero genuine rows in either feed on
+        #     11/09/2026, and "AI" as a bare token reaches anti- compounds (finding
+        #     34). The clinical-AI market on this patch moves through NICE evidence
+        #     generation agreements and framework call-offs, not noticed contracts.
+        #   bare "IT" -> unusable as a token in any form.
+        #   "network", "WiFi", "data warehouse" -> each returns estate and
+        #     infrastructure work that the capital-estates-watch page is the right
+        #     home for.
+        "frameworks": (
+            r"(digital diagnostic solutions|radiotherapy it solutions)"
+        ),
+        # AWARDS: every term below was run over all 1,554 rows of
+        # framework-awards.json plus all of tender-history.json and every hit was
+        # read, with its buyer and supplier, before this list was fixed. The include
+        # returns EIGHT unique rows and all eight are genuine: an electronic document
+        # management award to Civica at Medway, an electronic prescribing system at
+        # Sheffield Health and Social Care, three separate EPR services awards at
+        # Medway and Lincolnshire Community Health Services, EPR support on Sunrise
+        # 22.1 to Altera at Liverpool Heart and Chest, a mental health clinical system
+        # to Imosphere at Cwm Taf Morgannwg, and electronic prescribing hardware to
+        # Insight Direct at NHS Wales Shared Services.
+        #
+        # THE RULE THIS PANEL MATCHES ON IS THE SYSTEM, NOT THE DEPARTMENT. A record
+        # system, a prescribing system, a document management system or the services
+        # to implement one is on this panel whoever bought it. A clinical device with
+        # software in it is not, however digital it is.
+        "include": (
+            r"\b(electronic patient record|EPR|electronic health record|"
+            r"patient administration system|clinical systems?|"
+            r"electronic prescrib\w*|ePMA|"
+            r"electronic document management|EDMS|EDRM|e-?observations?|"
+            r"cyber ?security|cyber essentials|interoperab\w*|"
+            r"clinical decision support|digital dictation|speech recognition|"
+            r"health information exchange|electronic staff record|"
+            r"digital diagnostic solutions)\b"
+        ),
+        # No exclude is written. The include returned no false positive when every
+        # one of its eight rows was read on 11/09/2026, and a decorative exclude
+        # would imply a problem that does not exist (same reasoning as pain
+        # management).
+        "exclude": None,
+        "coverageNote": (
+            "This is the one speciality in the Hub with no single buying route, and "
+            "this panel shows the two NHS Supply Chain frameworks that do reach it "
+            "\u2014 Digital Diagnostic Solutions and Radiotherapy IT Solutions. It "
+            "cannot show the rest, because the rest are not NHS Supply Chain "
+            "agreements: all four pages of the contract launch brief index were "
+            "listed on 11/09/2026, 140 briefs, and no brief covers an electronic "
+            "patient record, a GP clinical system, cyber security, networking or "
+            "enterprise software. Those move through NHS Shared Business Services "
+            "SBS10515 Tech Devices \u2013 Link 4, the NHS England Buying Catalogue, "
+            "and Government Commercial Agency agreements including G-Cloud 15 "
+            "(RM1557.15, live since 6 August 2026), none of which this feed covers. "
+            "The award rows are correspondingly small: across the whole digital "
+            "patch in the month to 10 September 2026 the median published award "
+            "value was \u00a321,911, and one \u00a3100m teleradiology framework "
+            "modification was 98.4% of the total. The big money on this patch does "
+            "not appear as a contract notice at all \u2014 it moves as capital "
+            "business cases inside NHS England's Frontline Digitisation programme, "
+            "as framework call-offs under a Unique Reference Number, and as G-Cloud "
+            "awards without competition. An empty or short panel here is the honest "
+            "answer, not a gap."
+        ),
+    },
+
     "pharmacy-and-medicines": {
         "label": "Pharmacy and Medicines",
         # NO FRAMEWORK. All 121 parsed framework names in frameworks.json and all 16

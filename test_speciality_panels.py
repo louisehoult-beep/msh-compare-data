@@ -50,6 +50,7 @@ DERM = "dermatology"
 IPC = "infection-prevention-and-control"
 ONC = "oncology-and-sact"
 PAIN = "pain-management"
+DIGITAL = "digital-and-medical-it"
 PHARM = "pharmacy-and-medicines"
 SEPSIS = "sepsis-and-the-deteriorating-patient"
 REHAB = "rehabilitation-prosthetics-and-orthotics"
@@ -6116,7 +6117,45 @@ if _r:
           "detox" not in _t)
 
 
-_EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS, DERM, ONC, PAIN}
+# DIGITAL AND MEDICAL IT (page 2919, rule written 11/09/2026). The last of the 43
+# specialities to get a rule, and the last slug added to the earned set below. It
+# qualifies on the stated criterion and on nothing softer: the include returns EIGHT
+# unique award rows, all eight were read one by one with their buyers and suppliers on
+# 11/09/2026, and none is wrong. The terms that WOULD have needed excluding were
+# refused inside the include instead, which is the order this file prefers: bare
+# "software" and bare "licence" (65 rows, reaching a Motion Picture Licensing film
+# licence and a Wolters Kluwer UpToDate subscription), bare "digital" (digital weight
+# management, digital wayfinding, a police digital interview recorder), bare "AI" and
+# bare "IT" (unusable as tokens), and "digital pathology" — whose only extra row is
+# "Digital Pathology Services" to Preventx Limited, an online sexual health testing
+# contract, and which is pathology-and-laboratory-medicine's ground in any case.
+print("\nDIGITAL AND MEDICAL IT — the words the whole corpus abuses")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), DIGITAL],
+               check=True, capture_output=True)
+_d = load_panel(DIGITAL)
+check("digital panel is defined", bool(_d) and _d.get("defined") is True)
+if _d:
+    _t = " || ".join((a.get("title") or "") for a in _d.get("awards") or []).lower()
+    for _bad, _why in [
+        ("digital pathology", "Preventx's online sexual health testing contract is titled Digital Pathology Services and is not a slide-imaging system"),
+        ("weight management", "digital weight management is obesity's patch"),
+        ("wayfinding", "Moorfields' Oriel digital wayfinding service is estates, and its planning notice is duplicated twelve times in one day"),
+        ("motion picture", "a film screening licence is not clinical software"),
+        ("up to date", "a Wolters Kluwer reference subscription is a library purchase"),
+        ("docusign", "an e-signature licence is not a clinical system"),
+    ]:
+        check("digital awards exclude %r (%s)" % (_bad, _why), _bad not in _t)
+    check("digital keeps its EPR rows, which are the point of the rule",
+          _t.count("epr") >= 3, "got %r" % _t[:200])
+    _names = [f.get("name", "") for f in _d.get("frameworks") or []]
+    check("digital keeps both frameworks page 2919 names",
+          any("Digital Diagnostic Solutions" in n for n in _names)
+          and any("Radiotherapy IT" in n for n in _names), "got %s" % _names)
+    check("digital claims no open tender it cannot evidence",
+          _d.get("openTenders") == [])
+
+
+_EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS, DERM, ONC, PAIN, DIGITAL}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _slug in _EXCLUDE_NONE_EARNED:
         check("%s declares its empty exclusion list explicitly" % _slug,
