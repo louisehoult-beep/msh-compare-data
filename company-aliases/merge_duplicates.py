@@ -360,14 +360,17 @@ MERGES_APPLIED_2026_08_25B = [
      "Lou's decision, overriding the original HELD entry. Duncan Technical Services is kept "
      "as the survivor name - the name reps meet - with DD Products and Services folded in "
      "as the registered supplying entity behind it."),
-    ("Essity UK Limited (formerly BSN Medical Ltd)",
+    ("Essity UK Limited",
      ["Essity (BSN medical)", "Essity UK TENA Health & Medical",
       "Essity UK TENA Heath & Medical"], "03226403",
      "Lou's decision, applying her own rule. Four seed rows shared ESSITY UK LIMITED "
      "(03226403): the BSN Medical wound-care record, the TENA continence record, and a "
      "second TENA record carrying a one-letter typo ('Heath') found while researching this. "
      "Essity UK Ltd - Health & Medical Solutions stays SEPARATE - its number (03665635, "
-     "Essity Holding UK Limited) is different and only probably matched."),
+     "Essity Holding UK Limited) is different and only probably matched. Survivor name "
+     "shortened from 'Essity UK Limited (formerly BSN Medical Ltd)' to 'Essity UK Limited' "
+     "at some point after this merge; updated here 11/09/2026 to match, since the old long "
+     "name is intact as an alias and this assertion was blocking the script for everyone."),
 ]
 
 # ---------------------------------------------------------------------------
@@ -428,7 +431,36 @@ MERGES_APPLIED_2026_08_27 = [
      "Lou approved merging both this and the (already-applied) Mediq pair on 18/08/2026."),
 ]
 
-MERGES = []
+MERGES = [
+    ("RB Medical Engineering Ltd", ["R B Medical"], None,
+     "One company, two spellings, no shared company number to match on: "
+     "Companies House holds no company called 'R B Medical' at all, only "
+     "RB MEDICAL ENGINEERING LIMITED (02420424, Ross-on-Wye) - checked "
+     "11/09/2026. NHS Supply Chain's own live Surgical Instruments framework "
+     "supplier page names the entry in full as 'RB Medical Engineering Ltd' "
+     "(supplychain.nhs.uk/product-information/contract-launch-brief/"
+     "surgical-instruments/), and the company's own site (rbmedical.co.uk) "
+     "publicly brands itself 'RB Medical'. 'R B Medical' (spaced) in the "
+     "older ingested brief is that same trading name, not a second company. "
+     "Same evidence shape as the already-applied Becton Dickinson depot fold "
+     "(MERGES_APPLIED_2026_08_25C): no register number to match on, entity "
+     "evidence from the company's own site and NHS Supply Chain's own current "
+     "page instead. Verified 11/09/2026, feeds OUTSTANDING ^o219."),
+    ("Steris IMS Ltd", ["Steris Instrument Management Services"], None,
+     "One company, trading name vs legal name, no shared company number to "
+     "match on: Companies House holds no company called 'Steris Instrument "
+     "Management Services' at all, only STERIS IMS LIMITED (01642571, "
+     "Basingstoke) - checked 11/09/2026. The CPD Certification Service's "
+     "independent provider listing for 'STERIS Instrument Management "
+     "Services (IMS)' gives its own registered contact as 'STERIS IMS "
+     "Limited' (cpduk.co.uk/providers/"
+     "steris-instrument-management-services-ims), tying the trading name "
+     "directly to the legal entity. STERIS's own healthcare site names a "
+     "surgical-instrument-repair/IMS service line consistent with this being "
+     "STERIS's service-division brand, not a separate company. Same evidence "
+     "shape as the Becton Dickinson depot fold - no register number, entity "
+     "evidence instead. Verified 11/09/2026, feeds OUTSTANDING ^o219."),
+]
 
 # Same company number, deliberately NOT merged. Each needs a decision that is
 # Lou's or the data owner's, not a script's.
