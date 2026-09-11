@@ -5952,6 +5952,193 @@ SPECIALITY_RULES = {
             "something that looks close."
         ),
     },
+    # PAGE 2846. Systemic anti-cancer therapy: the drug, the aseptic unit that
+    # prepares it, and the kit it is given through. This is the rollout's first
+    # speciality whose page opens on a procurement ABSENCE, and the absence is the
+    # thing this rule has to get right. In the page's own words: "not one NHS Supply
+    # Chain framework for a cytotoxic or a chemotherapy product". Its build read the
+    # whole NHSSC catalogue and the 59-row Procurement Calendar and found no
+    # oncology, cancer, chemotherapy, cytotoxic or ablation row on the calendar at
+    # all. So there is no cancer framework to match, and the two agreements below are
+    # general ones that a cancer service buys THROUGH, which is a different claim and
+    # is said as such in the coverage note.
+    #
+    # RADIOTHERAPY IS DELIBERATELY NOT HERE, and it is the biggest call on this rule.
+    # frameworks.json holds four agreements a cancer centre buys through — Radiotherapy
+    # Treatment Systems, Radiotherapy Ancillary Devices incl Dosimetry, Radiotherapy IT
+    # Solutions, and Brachytherapy Seeds and Associated Accessories — and no speciality
+    # rule claims the first three. They are left out because this page draws the
+    # modality line itself and draws it repeatedly: its demand panel sets SACT's 98.6%
+    # against radiotherapy's 88.9% as a different modality running a different service,
+    # and nothing in its scope, its buying route or its product ranges is a linear
+    # accelerator. Brachytherapy Seeds is already counted on the urology page. The
+    # right home for the other three is a radiotherapy page, which does not exist yet;
+    # until it does the gap is recorded here and in the coverage note rather than
+    # filled by widening this rule to the word "cancer".
+    "oncology-and-sact": {
+        "label": "Oncology and SACT",
+        # THE TWO THE PAGE NAMES, AND ONLY THOSE. Both are named in its own buying
+        # route and both expiry dates match the gold dates its calendar carries:
+        # Infusion Pumps, Administration Sets and Associated Products on 30 September
+        # 2026 — the page's live chip, with its 24-month extension already spent inside
+        # the 48-month term — and Endoscopy, Endourology and Oncology Ablation
+        # Consumables on 30 September 2027, which the page calls "the next one on this
+        # patch". The second is also the only agreement in the entire NHSSC catalogue
+        # whose name carries the word oncology, and it carries it for tumour ablation
+        # devices, not for a drug. Neither is a cancer framework. Deliberately NOT here:
+        #   Radiotherapy Treatment Systems / Ancillary Devices / IT Solutions
+        #                        -> see the modality note above.
+        #   Brachytherapy Seeds and Associated Accessories -> urology's.
+        #   Mammography Imaging Systems -> radiology and imaging's. Breast screening is
+        #                        cancer detection, which this page's own pathway section
+        #                        places before any product decision a rep on this patch
+        #                        makes.
+        #   External Breast Prosthesis and Chest Support -> the rehabilitation,
+        #                        prosthetics and orthotics patch.
+        "frameworks": r"\b(oncology ablation|infusion pumps and administration sets)\b",
+        # WRITTEN NARROW ON PURPOSE. Every title in tender-history.json and
+        # framework-awards.json carrying cancer, oncolog, chemo, cytotox, tumour,
+        # aseptic, immunotherap, biosimilar, radiotherap or brachytherap was printed
+        # and read — 49 rows in the history feed and the award feed's cancer rows on
+        # top. The loose terms are refused here rather than admitted and then argued
+        # with in an exclusion list:
+        #   "cancer" (not used bare) -> 13 rows, and 8 of them are cancer DIAGNOSIS,
+        #                        screening or imaging, which this page's own pathway
+        #                        section puts before the first product decision on this
+        #                        patch: "Lung Cancer Screening - DAP C", "Non Specific
+        #                        Symptom Urgent Suspected Cancer pathway", "C The Signs
+        #                        Earlier Cancer Detection Platform", "NHS Essex ICB
+        #                        Urgent Skin Cancer Dermoscopy Triage service",
+        #                        "Specialised Paediatric Whole-Body MRI Surveillance for
+        #                        Cancer Predisposing Syndromes", "Replacement Ultrasound
+        #                        Machine for Lung Cancer Diagnostic", "SR Cancer - Multi
+        #                        Modal Radiology image transfer" and Life Technologies'
+        #                        "Cancer Service Panel", a sequencing panel. The
+        #                        qualified forms below reach the treatment rows without
+        #                        any of them.
+        #   "oncolog" (not used bare) -> 8 rows, 4 of them wrong: two Queen Elizabeth
+        #                        Hospital waivers for an Oncology Imaging System and its
+        #                        phantom maintenance, which are radiotherapy physics;
+        #                        "Supply of FDG and other Radiotracers for Oncology
+        #                        Scanning", which is nuclear medicine; and a Next
+        #                        Generation Sequencing panel for haemato-oncology
+        #                        samples, which is the pathology page's.
+        #   "aseptic" (not used) -> 17 rows. Aseptic preparation is step 4 of this
+        #                        page's own pathway and the step the National Cancer
+        #                        Plan is putting £80m into, but the word alone is a
+        #                        pharmacy technical services word: compounded aseptic
+        #                        medicines, aseptic isolators, aseptic cleanroom
+        #                        consumables and laundry, unlicensed aseptic specials.
+        #                        None of those says cancer, and the pharmacy and
+        #                        medicines page is the honest home for them. The four
+        #                        aseptic rows that ARE cancer say so in their own
+        #                        titles — cytotoxics, or Systemic Anti-Cancer Treatment
+        #                        — and are reached by those words instead.
+        #   "tumour" (not used)  -> 4 rows, 3 of them lab or imaging: a tumour profiling
+        #                        test, the haemato-oncology sequencing panel, and an
+        #                        AAA Netspot diagnostic imaging agent kit. The fourth,
+        #                        177Lu-Dotatate (Lutathera) for neuroendocrine tumours,
+        #                        IS a systemic anti-cancer medicine but it is molecular
+        #                        radiotherapy given by nuclear medicine, which is the
+        #                        same modality line drawn above. Losing it is the
+        #                        correct outcome of that line, not an accident.
+        #   "monoclonal" (not used) -> 3 rows, 2 of them wrong: "Supply of
+        #                        Nonchemotherapy Compounded Monoclonal Antibodies",
+        #                        which says in its own title that it is not this patch,
+        #                        and a Midlands and East branded medicines tranche of
+        #                        cytokine modulators. The third says cytotoxic and is
+        #                        reached by that.
+        #   "immunotherap" (not used) -> 1 row, "Stem Cell and Immunotherapy Services",
+        #                        NHS Blood and Transplant supplying Newcastle. A cell
+        #                        therapy and donor service, not a SACT buy.
+        #   "biosimilar" (not used) -> 6 rows, 4 of them general pharmacy transition
+        #                        and biologics agreements and one ophthalmology. The
+        #                        two cancer ones say "Cancer Medicines" and are reached
+        #                        by that.
+        #   MOLECULE NAMES (not used) -> deliberate, and it costs this panel two real
+        #                        rows: a 2022 gemcitabine infusion-bag buy and a 2021
+        #                        bevacizumab vials buy. A cytotoxic drug-name list
+        #                        cannot be maintained honestly against a feed that
+        #                        refreshes, and several oncology molecules are another
+        #                        page's medicine — bevacizumab is an ophthalmology
+        #                        anti-VEGF as often as it is a cancer drug, rituximab
+        #                        is rheumatology's, methotrexate is dermatology's.
+        #                        Publishing two fewer awards is the correct price.
+        #   "extravasation" (not used) -> no row carries it today, and the device that
+        #                        would carry it tomorrow is as likely to be a contrast
+        #                        media extravasation detector on a CT scanner as a
+        #                        chemotherapy kit. Not reached for.
+        # NOTE ON \b AND "Nonchemotherapy": the word boundary in front of chemotherap
+        # is doing real work. "Supply of Nonchemotherapy Compounded Monoclonal
+        # Antibodies" does not match it, which is correct and is why that row needs no
+        # exclusion.
+        "include": (
+            r"\b(chemotherap\w*|cytotoxics?|sact|anti-?cancer|"
+            r"cancer medicines?|cancer drugs?|cancer treatments?|cancer therap\w*|"
+            r"cancer care|"
+            r"oncology (?:generics?|ablation|medicines?|drugs?|pharmac\w*|"
+            r"day unit|consumables?)|"
+            r"scalp cooling|cold caps?|dose band\w*)\b"
+        ),
+        # NO EXCLUSION LIST, and it is earned rather than skipped. All thirteen titles
+        # the include list returns were printed and read one by one and every one of
+        # them is this speciality: dose banded chemotherapy services, oncology ablation
+        # consumables twice, aseptics medicines including cytotoxics, aseptically
+        # prepared SACT, aseptically prepared cytotoxic medicines and monoclonal
+        # antibodies, generic and biosimilar cancer medicines three times, oncology
+        # generic medicines twice, chemotherapy cold caps twice, and Cheshire and
+        # Merseyside ICB's cancer care services award to the Clatterbridge Cancer
+        # Centre. The terms that would have needed excluding were refused above.
+        #
+        # WHAT THE FEED'S OWN `spec` FIELD SAYS ABOUT THIS PATCH, because it is the
+        # sharpest illustration in the rollout so far of why it is never read: it tags
+        # 31 rows oncology-and-sact and 26 of them are wrong. It has matched on "anti-"
+        # and pulled in anti-rabies immunoglobulin, anti-D immunoglobulin, anti-embolism
+        # stockings, anti-retroviral drugs and a COVID-19 antibody testing reagent; it
+        # has added needle syringe programmes three times, a fluoroscopy unit, and
+        # National Museums Scotland buying an X-ray unit. Meanwhile it misses dose
+        # banded chemotherapy services, which it files under rehabilitation,
+        # prosthetics and orthotics, and chemotherapy cold caps, which it leaves
+        # unclassified.
+        #
+        # NO CPV LIST. Only one matching notice carries a CPV code at all and it is
+        # 85100000, health services. Nothing in either award feed carries an
+        # antineoplastic CPV: the whole 33652xx family is absent from this data, and
+        # the only 3365x codes present are 33651600, vaccines. A prefix here would
+        # corroborate nothing, so none is claimed.
+        #
+        # NO DRUG TARIFF PART. Part IX reimburses dressings and elastic hosiery (IXA),
+        # incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery
+        # (IXR) dispensed in the community on prescription. Systemic anti-cancer
+        # therapy is a hospital-administered or hospital-dispensed medicine funded
+        # through NICE technology appraisals, the Cancer Drugs Fund and high-cost drug
+        # pass-through, and appears nowhere in Part IX. The panel carries none rather
+        # than reaching for the nearest part.
+        "exclude": None,
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN, AND IT IS THE WHOLE POINT OF "
+            "THIS PATCH. There is no NHS Supply Chain framework for a cytotoxic or a "
+            "chemotherapy product, and the drug itself does not travel this way at "
+            "all: it moves through NICE technology appraisal, the Cancer Drugs Fund, "
+            "NHS England specialised commissioning and regional medicines procurement, "
+            "none of which has an NHS Supply Chain framework page. The two agreements "
+            "below are general ones that a cancer service buys THROUGH, not cancer "
+            "agreements. Infusion Pumps, Administration Sets and Associated Products "
+            "is the whole hospital's pump and giving-set route, counted on the "
+            "critical care, palliative care and vascular access pages too. Endoscopy, "
+            "Endourology and Oncology Ablation Consumables is the only agreement in "
+            "the catalogue whose name carries the word oncology, and it carries it for "
+            "tumour ablation devices; NHS Supply Chain publishes no lot breakdown for "
+            "it, so all 58 of its suppliers are listed and most of them sell endoscopy "
+            "rather than anything a chemotherapy day unit or an aseptic unit buys. "
+            "Radiotherapy is not counted here either: its three NHS Supply Chain "
+            "frameworks and Brachytherapy Seeds are a different treatment modality, "
+            "which this page's own demand section treats as a different service, and "
+            "no radiotherapy speciality page exists yet to hold them. A supplier named "
+            "below is therefore a supplier on an agreement cancer services buy "
+            "through, never a measure of anyone's oncology business."
+        ),
+    },
 
 }
 

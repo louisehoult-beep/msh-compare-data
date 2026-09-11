@@ -1,0 +1,1008 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "oncology-and-sact",
+ "label": "Oncology and SACT",
+ "defined": true,
+ "generated": "2026-09-11",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-10T11:14:59+00:00",
+  "openTenders": "10/09/2026",
+  "drugTariff": "2026-09-10"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(oncology ablation|infusion pumps and administration sets)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN, AND IT IS THE WHOLE POINT OF THIS PATCH. There is no NHS Supply Chain framework for a cytotoxic or a chemotherapy product, and the drug itself does not travel this way at all: it moves through NICE technology appraisal, the Cancer Drugs Fund, NHS England specialised commissioning and regional medicines procurement, none of which has an NHS Supply Chain framework page. The two agreements below are general ones that a cancer service buys THROUGH, not cancer agreements. Infusion Pumps, Administration Sets and Associated Products is the whole hospital's pump and giving-set route, counted on the critical care, palliative care and vascular access pages too. Endoscopy, Endourology and Oncology Ablation Consumables is the only agreement in the catalogue whose name carries the word oncology, and it carries it for tumour ablation devices; NHS Supply Chain publishes no lot breakdown for it, so all 58 of its suppliers are listed and most of them sell endoscopy rather than anything a chemotherapy day unit or an aseptic unit buys. Radiotherapy is not counted here either: its three NHS Supply Chain frameworks and Brachytherapy Seeds are a different treatment modality, which this page's own demand section treats as a different service, and no radiotherapy speciality page exists yet to hold them. A supplier named below is therefore a supplier on an agreement cancer services buy through, never a measure of anyone's oncology business.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN, AND IT IS THE WHOLE POINT OF THIS PATCH. There is no NHS Supply Chain framework for a cytotoxic or a chemotherapy product, and the drug itself does not travel this way at all: it moves through NICE technology appraisal, the Cancer Drugs Fund, NHS England specialised commissioning and regional medicines procurement, none of which has an NHS Supply Chain framework page. The two agreements below are general ones that a cancer service buys THROUGH, not cancer agreements. Infusion Pumps, Administration Sets and Associated Products is the whole hospital's pump and giving-set route, counted on the critical care, palliative care and vascular access pages too. Endoscopy, Endourology and Oncology Ablation Consumables is the only agreement in the catalogue whose name carries the word oncology, and it carries it for tumour ablation devices; NHS Supply Chain publishes no lot breakdown for it, so all 58 of its suppliers are listed and most of them sell endoscopy rather than anything a chemotherapy day unit or an aseptic unit buys. Radiotherapy is not counted here either: its three NHS Supply Chain frameworks and Brachytherapy Seeds are a different treatment modality, which this page's own demand section treats as a different service, and no radiotherapy speciality page exists yet to hold them. A supplier named below is therefore a supplier on an agreement cancer services buy through, never a measure of anyone's oncology business.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(chemotherap\\w*|cytotoxics?|sact|anti-?cancer|cancer medicines?|cancer drugs?|cancer treatments?|cancer therap\\w*|cancer care|oncology (?:generics?|ablation|medicines?|drugs?|pharmac\\w*|day unit|consumables?)|scalp cooling|cold caps?|dose band\\w*)\\b/i. NO EXCLUSION LIST IS APPLIED, because every notice this pattern matched was read one by one and all of them are this speciality. The loose terms that would have needed excluding were refused from the pattern above instead of admitted and then argued with. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 2,
+  "suppliers": 80,
+  "suppliersUnresolved": 2,
+  "awardsShown": 13,
+  "awardsMatched": 13,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/endoscopy-endourology-oncology-ablation-consumables/",
+   "reference": "2024/S 000-029975",
+   "category": "Medical Technology",
+   "supplyRoute": "eDirect",
+   "starts": "1 October 2025",
+   "ends": "30 September 2027",
+   "supplierCount": 58,
+   "supplierSource": "count verified against the page's own stated total (58)",
+   "suppliers": [
+    "Advanced Medical Systems Ltd",
+    "Ambu Limited",
+    "APR Medtech Limited",
+    "Aquilant Endoscopy Ltd",
+    "Aquilant Limited",
+    "Argon Medical Devices UK Ltd",
+    "Becton, Dickinson UK Limited",
+    "BioSpectrum Ltd",
+    "Boston Scientific Ltd",
+    "BVM Medical Ltd",
+    "CJ Medical",
+    "Coloplast Ltd",
+    "ConMed UK Ltd",
+    "Cook (UK) Ltd",
+    "Creo Medical Limited",
+    "Erbe Medical UK Ltd",
+    "Fairmont Medical Products Limited",
+    "Fannin UK Limited",
+    "GAP Medical Solutions Ltd",
+    "GBUK Ltd",
+    "GenX MediCare",
+    "GI UK Medical Ltd (Duomed)",
+    "GTA (UK) Ltd",
+    "H4 Medical Ltd",
+    "HistoSonics",
+    "IGEA S.p.A. Branch UK",
+    "Ingles Ltd",
+    "It’s Interventional Limited",
+    "Johnson & Johnson Medical Ltd",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Kebomed UK Ltd",
+    "KeyMed (Medical and Industrial Equipment) Ltd",
+    "Laborie Medical Technologies Ltd",
+    "Leib Medical Ltd",
+    "Macromed UK Ltd",
+    "MCT Lifesciences Ltd",
+    "Medtronic Limited",
+    "Merit Medical UK Ltd",
+    "Micro-Tech (UK) Ltd",
+    "Newtons Medical Supplies Ltd",
+    "Novus Med Ltd",
+    "Omnimed Limited",
+    "Partners for Endoscopy Limited",
+    "Penlon Limited",
+    "Pennamed Limited",
+    "Pentax UK Limited",
+    "Promed Limited",
+    "RB Medical Engineering Ltd",
+    "Richard Wolf UK Ltd",
+    "Rocamed France",
+    "Steris Solutions Limited",
+    "Synectics Medical T/A SynMed",
+    "Terumo UK Ltd",
+    "TFX Group Ltd T/A Teleflex Medical",
+    "TSC Endovision",
+    "Uniphar Medtech T/A Synapse Medical",
+    "Uniplex UK Ltd",
+    "Varian Medical Systems"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Infusion Pumps and Administration Sets and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+   "reference": "Project_12 ITT_382",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "3 October 2022",
+   "ends": "30 September 2026",
+   "supplierCount": 27,
+   "supplierSource": "no stated count on the page; 27 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "ALXR LIMITED",
+    "Arcomedical Infusion Ltd",
+    "Avanos Medical UK Limited",
+    "B. Braun Medical Limited",
+    "Baxter Healthcare Ltd",
+    "Becton, Dickinson U.K. Limited",
+    "BMS Critical Care",
+    "Braun and Company Limited",
+    "BECTON DICKINSON (CME) U.K. LIMITED",
+    "Bunzl Retail & Healthcare Supplies Ltd",
+    "CODAN Limited",
+    "Crest Medical Limited",
+    "Eitan Medical UK Ltd",
+    "Fannin UK Limited",
+    "Fresenius Kabi",
+    "GBUK",
+    "GenX MediCare",
+    "ICU UK Medical Ltd",
+    "Inspiration Healthcare Limited",
+    "Prosum Medical Ltd",
+    "Qualasept Ltd t/a Bath ASU",
+    "Reliance Medical Ltd",
+    "RPG Medical Limited",
+    "Smiths Medical International Ltd",
+    "Spirit Medical Ltd",
+    "TLB Medical Supplies",
+    "Vygon Uk Ltd"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton, Dickinson U.K. Limited",
+    "Becton, Dickinson UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK",
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "GenX MediCare"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Advanced Medical Systems Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "ALXR Limited",
+   "resolved": true,
+   "variants": [
+    "ALXR LIMITED"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Ambu UK",
+   "resolved": true,
+   "variants": [
+    "Ambu Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "APR Medtech Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Aquilant Endoscopy Limited",
+   "resolved": true,
+   "variants": [
+    "Aquilant Endoscopy Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Arcomedical Infusion Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Argon Medical Devices UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Avanos Medical UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B. Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Baxter Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "BECTON DICKINSON (CME) U.K. LIMITED",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "BioSpectrum Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "BMS Critical Care Ltd",
+   "resolved": true,
+   "variants": [
+    "BMS Critical Care"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Boston Scientific",
+   "resolved": true,
+   "variants": [
+    "Boston Scientific Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Braun and Company Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "BVM Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "CJ Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "CODAN Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Coloplast",
+   "resolved": true,
+   "variants": [
+    "Coloplast Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Conmed UK Ltd",
+   "resolved": true,
+   "variants": [
+    "ConMed UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Cook Medical",
+   "resolved": true,
+   "variants": [
+    "Cook (UK) Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Creo Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "Crest Medical Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Eitan Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Erbe Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Fairmont Medical Products Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Fresenius Kabi Ltd",
+   "resolved": true,
+   "variants": [
+    "Fresenius Kabi"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "GAP Medical Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "GI UK Medical Ltd (Duomed)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "GTA (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "H4 Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "HistoSonics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "ICU Medical (incl. Smiths Medical)",
+   "resolved": true,
+   "variants": [
+    "ICU UK Medical Ltd",
+    "Smiths Medical International Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "IGEA S.p.A. Branch UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Ingles Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Inspiration Healthcare",
+   "resolved": true,
+   "variants": [
+    "Inspiration Healthcare Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "It’s Interventional Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Johnson & Johnson MedTech",
+   "resolved": true,
+   "variants": [
+    "Johnson & Johnson Medical Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz Endoscopy (UK) Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Kebomed UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Laborie Medical Technologies UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Laborie Medical Technologies Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Leib Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Macromed UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "MCT Lifesciences Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Bunzl Retail & Healthcare Supplies Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Merit Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Micro-Tech (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Newtons Medical Supplies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Novus Med Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Olympus (KeyMed)",
+   "resolved": true,
+   "variants": [
+    "KeyMed (Medical and Industrial Equipment) Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Omnimed Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Partners for Endoscopy Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Penlon",
+   "resolved": true,
+   "variants": [
+    "Penlon Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Pennamed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Pentax Medical",
+   "resolved": true,
+   "variants": [
+    "Pentax UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Promed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Prosum Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Qualasept Ltd t/a Bath ASU",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "RB Medical Engineering Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Richard Wolf UK",
+   "resolved": true,
+   "variants": [
+    "Richard Wolf UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Rocamed France",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "RPG Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Spirit Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Steris",
+   "resolved": true,
+   "variants": [
+    "Steris Solutions Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Synectics Medical T/A SynMed",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Terumo UK",
+   "resolved": true,
+   "variants": [
+    "Terumo UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "TFX Group Ltd T/A Teleflex Medical"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "TLB Medical Supplies",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "TSC Endovision",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "resolved": true,
+   "variants": [
+    "Uniphar Medtech T/A Synapse Medical"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Uniplex",
+   "resolved": true,
+   "variants": [
+    "Uniplex UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Varian Medical Systems",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon Uk Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Cancer Care Services in Cheshire and Merseyside",
+   "buyer": "NHS CHESHIRE AND MERSEYSIDE INTEGRATED CARE BOARD",
+   "supplier": "The Clatterbridge Cancer Centre NHS Foundation Trust",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075713-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Framework Agreement for the Provision of Dose Banded Chemotherapy Services",
+   "buyer": "East Midlands Pharmacy Collaborative",
+   "supplier": "ITH Pharma, Baxter Healthcare Ltd, Qualasept Ltd t/a Bath ASU",
+   "date": "2026-06-22",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/2b799a57-5a9f-4ffd-8637-c86691a4412e",
+   "value": 9000000,
+   "periodEnd": "2027-06-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Oncology Ablation Consumables",
+   "buyer": "Leeds Teaching Hospitals NHS Trust",
+   "supplier": "Boston Scientific Limited",
+   "date": "2026-06-05",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/e1fc5e53-1b31-4aaf-8743-30c12227be2d",
+   "value": 1324732,
+   "periodEnd": "2026-09-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Endoscopy, Endourology & Oncology Ablation Consumables & Associated Products",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "ADVANCED MEDICAL SYSTEMS LTD., AMBU LIMITED, APR MEDTECH LIMITED, AQUILANT ENDOS",
+   "date": "2025-07-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/044733-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Aseptics Medicines (Including Cytotoxics)",
+   "buyer": "Velindre NHS Trust, NHS Wales Shared Services Partnership — Procurement Services",
+   "supplier": "Accord-UK",
+   "date": "2025-07-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/044954-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP39724 Generic and Biosimilar Cancer Medicines",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Accord-UK Ltd",
+   "date": "2025-02-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/007352-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Chemotherapy Cold Caps",
+   "buyer": "NHS Wales Shared Services Partnership",
+   "supplier": "Paxman Coolers Ltd",
+   "date": "2024-12-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/041550-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Chemotherapy Cold Caps",
+   "buyer": "NHS Wales Shared Services Partnership",
+   "supplier": "Paxman Coolers Ltd",
+   "date": "2024-12-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/039802-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Aseptically Prepared Systemic Anti-Cancer Treatment (SACT)",
+   "buyer": "Velindre NHS Trust, NHS Wales Shared Services Partnership - Procurement Services",
+   "supplier": "Qualasept Ltd t/a Bath ASU",
+   "date": "2024-08-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/025276-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Generic and Biosimilar Cancer Medicines",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Accord-UK Ltd",
+   "date": "2023-04-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011419-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Oncology Generic Medicines - Additions",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Dr Reddy's Laboratories (UK) Ltd, Novartis Pharmaceuticals UK Ltd, Accord Health",
+   "date": "2021-06-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/014174-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "National Framework Agreement for the supply of Aseptically Prepared Cytotoxic Medicines and Monoclonal Antibodies – Nort",
+   "buyer": "The NHS Commissioning Board (operating under the name of NHS England)",
+   "supplier": "Qualasept Ltd t/a Bath ASU",
+   "date": "2021-04-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/009177-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Oncology Generics Medicines",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Waverley Pharma Europe Limited",
+   "date": "2021-02-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002350-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}

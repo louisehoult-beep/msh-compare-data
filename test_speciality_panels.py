@@ -48,6 +48,7 @@ AUDIO = "audiology-and-hearing"
 COLO = "colorectal-gi-and-endoscopy"
 DERM = "dermatology"
 IPC = "infection-prevention-and-control"
+ONC = "oncology-and-sact"
 fails = []
 
 
@@ -5327,11 +5328,192 @@ print("  open tenders — empty is the honest answer, not a miss")
 check("no open notice on this patch today", ip["openTenders"] == [])
 
 
-# The exclude=None path must not leak to any rule that has not earned it. Two have:
-# renal and gynaecology, each because every hit its include produced was read one by
-# one and none of them was wrong. Every other speciality still has to carry a real
-# exclusion list. Adding a slug to this set is a decision, not a way past a failure.
-_EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS, DERM}
+# ---------------------------------------------------------------------------
+# ONCOLOGY AND SACT. The first speciality in the rollout whose page opens on a
+# procurement ABSENCE: there is no NHS Supply Chain framework for a cytotoxic or a
+# chemotherapy product, the drug travels by NICE appraisal, the Cancer Drugs Fund
+# and specialised commissioning instead, and the two agreements this rule matches
+# are general ones a cancer service buys THROUGH. The invariants below exist
+# because the two ways to get this patch wrong both look like helpfulness:
+# widening to the word "cancer", which fills the panel with screening, dermoscopy
+# and whole-body MRI surveillance; and picking up radiotherapy, which is a
+# different modality with three unclaimed NHSSC frameworks and no speciality page
+# of its own yet.
+#
+# It is also the sharpest case in the rollout for never reading the feed's own
+# `spec` field: it tags 31 rows oncology-and-sact and 26 are wrong, having matched
+# "anti-" on anti-rabies immunoglobulin, anti-D, anti-embolism stockings and
+# anti-retrovirals, and having thrown in National Museums Scotland's X-ray unit.
+# Those rows are tested as refusals below.
+# ---------------------------------------------------------------------------
+print("\nONCOLOGY AND SACT")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), ONC],
+               check=True, capture_output=True)
+onc = load_panel(ONC)
+check("panel is defined", onc.get("defined") is True)
+
+_onc_rule = B.SPECIALITY_RULES[ONC]
+_onc_rx = B.compile_rule(_onc_rule)
+_onc_fw = sorted(f["name"] for f in onc["frameworks"])
+
+print("  the two frameworks the page itself names, and no third")
+_ONC_TWO = sorted([
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Infusion Pumps and Administration Sets and Associated Products",
+])
+check("exactly two frameworks", len(_onc_fw) == 2, "got %d" % len(_onc_fw))
+check("and they are the two that were read", _onc_fw == _ONC_TWO,
+      "unexpected: %s" % "; ".join(set(_onc_fw) ^ set(_ONC_TWO)))
+
+print("  radiotherapy is a different modality and stays out until it has its own page")
+for bad in [
+        # Three agreements a cancer centre really does buy through, and no speciality
+        # rule claims any of them. They are NOT quietly absorbed here: this page's own
+        # demand section treats radiotherapy as a separate modality running a separate
+        # service, and a linac is nowhere in its scope or product ranges.
+        "Radiotherapy Treatment Systems and Associated Options and Related Services",
+        "Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices",
+        "Radiotherapy IT Solutions and Associated Options and Related Services",
+        # Already counted on the urology page.
+        "Brachytherapy Seeds and Associated Accessories",
+        # Cancer DETECTION, and radiology and imaging's framework.
+        "Mammography Imaging Systems and Associated Options and Related Services",
+        # Rehabilitation, prosthetics and orthotics'.
+        "External Breast Prosthesis and Chest Support",
+        # The general pharmacy and aseptic services patch, which is not this one.
+        "Pharmacy Robotics and Automation",
+        # Vascular access's, and a reminder that the frameworks pattern names the
+        # infusion agreement in full rather than matching the word "infusion".
+        "Central Venous Catheters, Intravenous Accessories and Pressure Monitoring",
+]:
+    check("framework refused: %s" % bad[:56], not _onc_rx["fw"].search(bad))
+
+print("  the thirteen titles that were read one by one and are all this speciality")
+for want in [
+        "Framework Agreement for the Provision of Dose Banded Chemotherapy Services",
+        "Oncology Ablation Consumables",
+        "Endoscopy, Endourology & Oncology Ablation Consumables & Associated Products",
+        "Aseptics Medicines (Including Cytotoxics)",
+        "NP39724 Generic and Biosimilar Cancer Medicines",
+        "Generic and Biosimilar Cancer Medicines",
+        "Chemotherapy Cold Caps",
+        "Aseptically Prepared Systemic Anti-Cancer Treatment (SACT)",
+        "National Framework Agreement for the supply of Aseptically Prepared Cytotoxic "
+        "Medicines and Monoclonal Antibodies",
+        "Oncology Generic Medicines - Additions",
+        "Oncology Generics Medicines",
+        "Cancer Care Services in Cheshire and Merseyside",
+]:
+    check("admitted: %s" % want[:56], B.match_title(_onc_rx, want))
+
+print("  cancer DIAGNOSIS is not cancer treatment, and the word alone would fill the panel with it")
+for bad in [
+        # Every one of these is a real row that the bare word "cancer" matched and
+        # that was read and rejected. This page's own pathway section puts all of
+        # them before the first product decision a rep on this patch makes.
+        "Lung Cancer Screening - DAP C",
+        "Non Specific Symptom Urgent Suspected Cancer pathway",
+        "C The Signs Earlier Cancer Detection Platform",
+        "NHS Essex Integrated Care Board (ICB) Urgent Skin Cancer Dermoscopy Triage service",
+        "Specialised Paediatric Whole-Body MRI Surveillance for Cancer Predisposing Syndromes",
+        "Replacement Ultrasound Machine for Lung Cancer Diagnostic",
+        "SR Cancer - Multi Modal Radiology image transfer",
+        "Waiver - BWC_RQ3 - 06819 - Life Technologies Limited  -  Cancer Service Panel",
+        # "oncolog" bare: radiotherapy physics twice, nuclear medicine once, and the
+        # pathology page's sequencing panel once.
+        "Waiver - UHB_QEH - 12044 - Oncology Imaging System (OIS)-  Maintenance Contract",
+        "Waiver - UHB_QEH - 12043 - Oncology Imaging Systems  -  Phantom Maintenance Contract",
+        "Supply of FDG and other Radiotracers for Oncology Scanning.",
+        "Next Generation Sequencing Panel for Analysis of Somatic (Solid Tumour and "
+        "Haemato-oncology) Samples",
+        # "aseptic" bare: pharmacy technical services, not cancer. Step 4 of this
+        # page's pathway is an aseptic unit, but the word is not a cancer word.
+        "NP38626 Compounded Aseptic Medicines",
+        "Aseptic Isolators and Cabinets",
+        "Supply and Maintenance of Aseptic Isolators",
+        "Provision of Aseptic Unit Pharmaceutical Isolators",
+        "NP48618 Aseptic Consumables",
+        "Aseptically Manipulated or Terminally Sterile Medicinal Products",
+        "EoECPH Aseptic Cleanroom Consumables and Laundry Services.",
+        # "tumour" bare: two lab tests and a diagnostic imaging agent. The fourth,
+        # 177Lu-Dotatate, is a real systemic anti-cancer medicine but it is molecular
+        # radiotherapy, and it falls on the far side of the same modality line that
+        # keeps the linacs out.
+        "PROVISION OF TUMOUR PROFILING TEST",
+        "Purchase of AAA Netspot - Diagnostic Imaging Agent Kit to Detect Neuroendocrine Tumours",
+        "Purchase of 177Lu- Dotatate (Lutathera ®) to treat patients with neuroendocrine tumours",
+        # The word boundary in front of chemotherap is load-bearing: this title says
+        # in its own words that it is not this patch.
+        "Supply of Nonchemotherapy Compounded Monoclonal Antibodies",
+        # "monoclonal" and "biosimilar" bare: general branded and biologic medicines.
+        "NHS Framework for the Midlands and East, Branded Medicines - Tranche B plus "
+        "Cytokine Modulators and other Monoclonal Antibodies",
+        "NP49425 Generic and Biosimilar Transition Medicines",
+        "Biologic and Biosimilar Medicines",
+        "Branded and Biosimilar Ophthalmology",
+        # "immunotherap" bare: NHS Blood and Transplant's cell therapy and donor
+        # service, not a SACT buy.
+        "Stem Cell and Immunotherapy Services",
+        # What the feed's own `spec` field files under oncology-and-sact. All of these
+        # are tagged this speciality in tender-history.json and not one of them is.
+        "NP34925c Anti Rabies immunoglobulin intramuscular use (IM)",
+        "NHS Framework Agreement for Human Albumin & Normal and Anti-D Immunoglobulin",
+        "Anti-Embolism Stockings",
+        "Anti-Retroviral Drugs",
+        "COVID-19 Reagant Agreement for Anti-body Testing",
+        "Needle Syringe Programme",
+        "National Museums Scotland - X Ray Unit",
+        "Fluoroscopy Unit and Associated Enabling Works",
+        "Nitric Oxide Therapy",
+]:
+    check("refused: %s" % bad[:56], not B.match_title(_onc_rx, bad))
+
+print("  and nothing diagnostic, radiotherapy or estates reached the live panel")
+_ONC_BANNED = ["screening", "dermoscopy", "radiotracer", "phantom", "sequencing",
+               "linac", "linear accelerator", "brachytherap", "mammograph",
+               "x ray unit", "fluoroscopy", "immunoglobulin", "anti-embolism",
+               "anti-retroviral", "needle syringe"]
+for a in onc["awards"]:
+    low = (a["title"] or "").lower()
+    check("clean award title: %s" % (a["title"] or "")[:50],
+          not any(b in low for b in _ONC_BANNED))
+check("every matched award is shown, none truncated",
+      onc["counts"]["awardsShown"] == onc["counts"]["awardsMatched"])
+check("the panel is not empty", onc["counts"]["awardsShown"] >= 10,
+      "got %d" % onc["counts"]["awardsShown"])
+
+print("  no exclusion list, and the published text says why rather than glossing it")
+check("exclude is declared None", _onc_rule.get("exclude") is None)
+check("and the awards rule says no exclusion list is applied",
+      "NO EXCLUSION LIST IS APPLIED" in onc["rules"]["awards"])
+
+print("  no CPV family is claimed, because none corroborates")
+check("no cpv on the rule", not _onc_rule.get("cpv"))
+check("and the rule says so", "No CPV family corroborates" in onc["rules"]["awards"])
+
+print("  no Drug Tariff part, and it is not a close call")
+check("no tariff is claimed", onc.get("drugTariff") is None)
+check("and the rule says why", "No Drug Tariff part applies" in onc["rules"]["drugTariff"])
+
+print("  the coverage note states the absence the whole patch turns on")
+for phrase in ["no NHS Supply Chain framework for a cytotoxic or a chemotherapy product",
+               "Cancer Drugs Fund",
+               "Radiotherapy is not counted here",
+               "no lot breakdown",
+               "never a measure of anyone's oncology business"]:
+    check("coverage note carries: %s" % phrase[:50], phrase in onc["rules"]["frameworks"])
+
+print("  open tenders - empty is the honest answer, not a miss")
+check("no open notice on this patch today", onc["openTenders"] == [])
+
+
+# The exclude=None path must not leak to any rule that has not earned it. Five have:
+# renal, gynaecology, paediatrics, dermatology and oncology, each because every hit
+# its include produced was printed and read one by one and none of them was wrong,
+# the loose terms having been refused in the include instead. Every other speciality
+# still has to carry a real exclusion list. Adding a slug to this set is a decision,
+# not a way past a failure.
+_EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS, DERM, ONC}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _slug in _EXCLUDE_NONE_EARNED:
         check("%s declares its empty exclusion list explicitly" % _slug,
