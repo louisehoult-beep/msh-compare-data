@@ -66,7 +66,7 @@ low coverage there means exhausted, not neglected.
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 10 | 52.6% | 6 | 9 | STARTED |
 | Examination Gloves | infection | 19 | 4 | 21.1% | 13 | 6 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 8 | 7 | STARTED |
-| Infant Feeding and Accessories | neonatal | 18 | 3 | 16.7% | 12 | 4 | STARTED |
+| Infant Feeding and Accessories | neonatal | 18 | 4 | 22.2% | 11 | 5 | STARTED |
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 8 | 7 | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 7 | 6 | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
