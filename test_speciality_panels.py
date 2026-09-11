@@ -46,6 +46,7 @@ CC = "critical-care"
 ENT = "ent-and-head-and-neck"
 AUDIO = "audiology-and-hearing"
 COLO = "colorectal-gi-and-endoscopy"
+DERM = "dermatology"
 fails = []
 
 
@@ -3425,7 +3426,14 @@ for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
 # purpose and stated in both files), plus the voice prosthesis cleaning brushes,
 # tracheostomy dressings, ear drops, nasal preparations and the one auto
 # inflation device that no other page reaches.
-_TARIFF_FILTER_EARNED = {GYNAE, PAEDS, UROLOGY, RESP, OPHTH, ENT}
+# Dermatology, added 11/09/2026, takes 87 Part IXA lines: the reimbursed emollient
+# range, 28 virtual medicinal products from 19 companies. It is the sixth slice and
+# the one whose page has no framework at all, so the tariff IS its supplier list.
+# The pattern never uses bare "paraffin", because "Paraffin gauze dressing sterile"
+# is a wound contact layer and tissue viability's, and it anchors "urea" on a word
+# boundary and a percentage, because "Curea" ends in those four letters and would
+# otherwise bring thirteen wound dressing lines with it.
+_TARIFF_FILTER_EARNED = {GYNAE, PAEDS, UROLOGY, RESP, OPHTH, ENT, DERM}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _r.get("tariffVmp") and _slug not in _TARIFF_FILTER_EARNED:
         check("%s must not have grown a tariff filter unnoticed" % _slug, False)
@@ -4928,11 +4936,178 @@ print("  open tenders — empty is the honest answer, not a miss")
 check("no open notice on this patch today", co["openTenders"] == [])
 
 
+# ---------------------------------------------------------------------------
+# DERMATOLOGY. The first speciality whose framework answer is "none, and here are
+# the two lots instead", so the invariants have to hold a NEGATIVE as well as a
+# positive: the frameworks and suppliers sections must stay empty and the finding
+# must keep naming both agreements. The include's danger is "skin", which NHS
+# Supply Chain uses for hand hygiene and Swansea Bay uses for burns allograft, and
+# "phototherapy", which in this data means neonatal jaundice every single time.
+# ---------------------------------------------------------------------------
+print("\nDERMATOLOGY")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), DERM],
+               check=True, capture_output=True)
+de = load_panel(DERM)
+check("panel is defined", de.get("defined") is True)
+
+_de_rule = B.SPECIALITY_RULES[DERM]
+_de_rx = B.compile_rule(_de_rule)
+
+print("  no framework is claimed, and the emptiness is the finding")
+check("frameworks list is empty", de["frameworks"] == [])
+check("suppliers list is empty", de["suppliers"] == [])
+check("the rule text is the written finding, not the default wording",
+      "NO NHS SUPPLY CHAIN FRAMEWORK IS COUNTED HERE" in de["rules"]["frameworks"])
+for ref in ["2025/S 000-032216", "2026/S 000-008108",
+            "Total Patient Assessment Device Solutions",
+            "Adult and Paediatric Phototherapy Devices"]:
+    check("the finding still names %s" % ref[:44], ref in de["rules"]["frameworks"])
+check("and it still says why neither is counted",
+      "never per lot" in de["rules"]["frameworks"])
+
+print("  the thirteen true positives — every one was read before it was published")
+_de_titles = [a["title"] for a in de["awards"]]
+for want in [
+        "Community Dermatology Support Services",
+        "The Provision of Lancashire and South Cumbria Adult Teledermatology Service",
+        "North East London Community Dermatology Service",
+        "Services Contract for Dermatology",
+        "NHS Essex Integrated Care Board (ICB) Urgent Skin Cancer Dermoscopy Triage service",
+        "Supply of dermatoscopes & image transfer system",
+        "ENT, Ophthalmology & Skin Medicines/Medical Devices",
+]:
+    check("carried: %s" % want[:58], want in _de_titles)
+check("both West Yorkshire awards stand, they are two providers not one notice",
+      sum(1 for t in _de_titles if t.startswith("NHSWYICB")) == 2)
+check("every award shown matched on its title", de["counts"]["awardsMatched"] == len(_de_titles))
+
+print("  bare \"skin\" stays refused — both of these are real rows on other pages")
+for bad in [
+        # NHS Supply Chain's hand hygiene and patient wash agreement. Infection
+        # prevention's, and the next slug in this rollout.
+        "Skin Cleansing and Disinfection",
+        "Skin Cleansing, Disinfection and Hygiene",
+        # Cadaveric skin allograft for burns. Swansea Bay, three rows in the feed.
+        "Cryopreserved Skin - Cryoskin",
+        # Surgical closure and wound care, both claimed by name on their own pages.
+        "Skin Closure Strips and Associated Products",
+        "Skin integrity and pressure area care products",
+]:
+    check("never admitted: %s" % bad[:56], not B.match_title(_de_rx, bad))
+
+print("  bare \"phototherapy\" stays refused — in this data it is always neonatal")
+for bad in [
+        "Neonatal Equipment, Adult, Paediatric & Neonatal Phototherapy Devices and "
+        "Associated Accessories & Services",
+        "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems",
+        "Supply of Neonatal Phototherapy Units",
+]:
+    check("never admitted: %s" % bad[:56], not B.match_title(_de_rx, bad))
+
+print("  the other nine loose words stay refused, each with the row that proved it")
+for bad in [
+        # laser — eighteen rows, none dermatology, and two unattributable.
+        "POS Broomfield - Candela - laser GMAX PRO - 4 yrs maintenance",
+        "Acupulse Laser Service Contract",
+        "ESNEFT2730 Purchase of ENT Laser",
+        "Green Light Laser",
+        # wig — refused deliberately; the page says the NHSSC wigs agreement is not
+        # a dermatology agreement, so the panel cannot claim nine wig awards.
+        "Supply of Wigs",
+        "Fully Managed Wig Service",
+        "Supply, Repair and Maintenance of Wigs and Accessories",
+        "Supply of Wigs and Accessories",
+        # hair — schools and colleges buying groups, and "chair" inside "wheelchair".
+        "Hair and Beauty Framework",
+        "Hair, Beauty and Wigs Supplies",
+        "Wheelchairs, Specialist Seating and Related Services",
+        # topical — route of administration, not skin.
+        "Intravenous & Topical Fluids",
+        "Generic Drugs - Topicals & Miscellaneous",
+        # lesion — breast surgery.
+        "National Framework Agreement for Non-Wire Lesion Localisation and Sentinel "
+        "Lymph Node Location Products",
+        # squamous cell — only the cutaneous form is admitted.
+        "Head and Neck Squamous Cell Carcinoma Pathway Services",
+        # cryo — ablation, preservation and pathology cryostats.
+        "BOSTON - ICEFX CRYOBLATION SYSTEM EQUIPMENT AND CONSUMABLE AGREEMENT",
+        "BCU-DCO-63480 - Purchase of Cryostat for Pathology at Glan Clwyd Hospital",
+        # sunscreen — Ministry of Defence logistics, not the NHS.
+        "The Supply Of Sunscreen",
+        "LSL/MED/0150 - The Supply of Sunscreen - VTN",
+        # biopsy — breast and transperineal prostate.
+        "Breast Biopsy Needle NPM",
+        "National Framework Agreement for Transperineal Prostate Biopsy System",
+        # the diabetic eye screening programme carries CPV 85121282 and must never
+        # be admitted on it: CPV corroborates, it never admits.
+        "NHSE1060 Diabetic Eye Screening Programme",
+        "Provision of Insourced and Outsourced Clinical Services Framework (Framework Reopening)",
+]:
+    check("never admitted: %s" % bad[:56], not B.match_title(_de_rx, bad))
+
+print("  the dermatology vocabulary that matches nothing today still would")
+for want in [
+        "Supply of Narrowband UVB Phototherapy Cabinets",
+        "Psoriasis Biologic Pathway Service",
+        "Community Eczema and Atopic Dermatitis Service",
+        "Hidradenitis Suppurativa Pathway Redesign",
+        "Isotretinoin Shared Care Service",
+        "Mohs Micrographic Surgery Service",
+        "Cutaneous Squamous Cell Carcinoma Treatment Pathway",
+]:
+    check("would be admitted: %s" % want[:52], B.match_title(_de_rx, want))
+
+print("  the Drug Tariff slice is emollients, and only emollients")
+_de_t = de["drugTariff"]
+check("Part IXA only", _de_t["parts"] == ["IXA"])
+check("it is a slice, not the part — IXA whole is 56,833 lines",
+      0 < _de_t["lineCount"] < 500)
+check("and it names a real supplier set", 5 <= _de_t["supplierCount"] <= 60)
+check("prices are pounds, not the pence NHSBSA publishes", _de_t["priceMax"] < 100)
+_de_vrx = __import__("re").compile(_de_rule["tariffVmp"], __import__("re").I)
+print("  the tariff pattern's own traps stay shut")
+for bad in [
+        # a wound contact layer, not an emollient — this is why bare "paraffin"
+        # is never used.
+        "Paraffin gauze dressing sterile 10cm x 10cm",
+        "Paraffin gauze dressing sterile 5cm x 5cm",
+        # "Curea" ends in the letters u-r-e-a. A bare "urea" takes all 13 of its
+        # wound dressing lines.
+        "Generic Curea P1 dressing 10cm x 10cm square",
+        "Generic Curea P2 dressing 15cm x 15cm square",
+        # peristomal skin care, Part IXC, the stoma pages'.
+        "Ostomy skin protectives",
+        # scar management, plastics and burns.
+        "Silicone gel sheet 13cm x 13cm square",
+        # gynaecology.
+        "Vaginal moisturisers",
+        # Full Marks head lice solution. Refused so the slice stays describable as
+        # the emollient range.
+        "Cyclomethicone 50% / Isopropyl myristate 50% solution",
+        # compression hosiery, which is what claiming IXA whole would have brought.
+        "Class 2 below knee compression stocking",
+]:
+    check("tariff never counts: %s" % bad[:52], not _de_vrx.search(bad))
+for want in [
+        "Generic AproDerm emollient cream",
+        "Emulsifying wax 30% / Yellow soft paraffin 30% ointment",
+        "White soft paraffin 13.2% / Liquid paraffin light 10.5% cream",
+        "Isopropyl myristate 15% / Liquid paraffin 15% gel",
+        "Urea 10% cream",
+        "Generic Diprobase Advanced Eczema cream",
+        "Generic Dermatonics Once Callus Removing Balm",
+]:
+    check("tariff counts: %s" % want[:52], bool(_de_vrx.search(want)))
+
+print("  open tenders — empty is the honest answer, not a miss")
+check("no open notice on this patch today", de["openTenders"] == [])
+
+
 # The exclude=None path must not leak to any rule that has not earned it. Two have:
 # renal and gynaecology, each because every hit its include produced was read one by
 # one and none of them was wrong. Every other speciality still has to carry a real
 # exclusion list. Adding a slug to this set is a decision, not a way past a failure.
-_EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS}
+_EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS, DERM}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _slug in _EXCLUDE_NONE_EARNED:
         check("%s declares its empty exclusion list explicitly" % _slug,

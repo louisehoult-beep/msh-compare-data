@@ -5430,6 +5430,305 @@ SPECIALITY_RULES = {
         ),
     },
 
+    # PAGE 2925. Outpatient dermatology, teledermatology and the topical prescribing
+    # bill. THIS IS THE FIRST SPECIALITY WHOSE FRAMEWORK ANSWER IS "NONE, AND HERE ARE
+    # THE TWO LOTS INSTEAD", and the whole rule turns on that being said accurately.
+    "dermatology": {
+        "label": "Dermatology",
+        # NO FRAMEWORK IS CLAIMED, AND IT IS NOT BECAUSE NOTHING TOUCHES THE PATCH.
+        # NHS Supply Chain's own site search, run 11/09/2026, returns "No results found
+        # for 'dermatology'". All 121 parsed framework names and all 16 unparsed ones
+        # were read and not one is named for this speciality. Two agreements do carry a
+        # dermatology lot and both are named in frameworksFinding below with their
+        # reference, dates and lot, verified against NHS Supply Chain's own briefs on
+        # 11/09/2026:
+        #   Total Patient Assessment Device Solutions (2025/S 000-032216, 4 August 2026
+        #     to 3 August 2028, 40 suppliers, option to extend 24 months). NHS Supply
+        #     Chain's site search for "dermatoscope" returns this agreement and nothing
+        #     else. Five lots: 1 blood pressure monitors and cuffs, 2 thermometers,
+        #     3 patient weighing, 4 Patient Assessment Devices and Kits, 5 personal
+        #     health monitors.
+        #   Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy
+        #     Systems (2026/S 000-008108, 2 March 2026 to 28 February 2029, 25
+        #     suppliers), whose Lot 4 is named on the brief, verbatim, "Adult and
+        #     Paediatric Phototherapy Devices". Adult phototherapy is narrowband UVB
+        #     and PUVA, which is this patch; Lot 3 is neonatal jaundice equipment,
+        #     which is maternity and neonatal's and is claimed there.
+        # NEITHER IS CLAIMED AS A FRAMEWORK HERE, and the reason is the supplier list,
+        # not the lot. frameworks.json records supplier names at AGREEMENT level, never
+        # at lot level, because that is how NHS Supply Chain publishes them. Claiming
+        # either agreement would put its whole list into the Suppliers tab: 40 names
+        # from the first, which is Seca and Marsden weighing scales, AliveCor ECG and
+        # Welch Allyn thermometers, and 25 from the second, which is Draeger, Penlon and
+        # Hamilton ventilators and Atom and mOm incubators. That would tell a rep that
+        # sixty-odd firms are the dermatology market. They are not, and an honest empty
+        # state with both references and both lot names written into it is worth more.
+        "frameworks": None,
+        "frameworksFinding": {
+            "frameworks": (
+                "NO NHS SUPPLY CHAIN FRAMEWORK IS COUNTED HERE, AND THAT IS THE FINDING "
+                "RATHER THAN A GAP. NHS Supply Chain's own website search returns \"No "
+                "results found for 'dermatology'\", run 11 September 2026, and no one of "
+                "the 121 framework names in the Hub's record is this speciality's. TWO "
+                "AGREEMENTS DO CARRY A DERMATOLOGY LOT AND BOTH ARE NAMED HERE RATHER "
+                "THAN COUNTED. Total Patient Assessment Device Solutions, 2025/S "
+                "000-032216, 4 August 2026 to 3 August 2028, 40 suppliers, with an "
+                "option to extend 24 months to 3 August 2030: NHS Supply Chain's site "
+                "search for \"dermatoscope\" returns this agreement and no other. Its "
+                "five lots are blood pressure monitors and cuffs, thermometers, patient "
+                "weighing, Patient Assessment Devices and Kits, and personal health "
+                "monitors; the lot a dermatoscope sits in is not stated anywhere on the "
+                "public brief, because the product listing is in the Framework Matrices "
+                "download, so Lot 4 is the lot whose NAME covers it and that is a "
+                "reading, not a sourced statement. And Anaesthesia Machines, "
+                "Ventilators, Neonatal Equipment and Phototherapy Systems, 2026/S "
+                "000-008108, 2 March 2026 to 28 February 2029, 25 suppliers, whose Lot 4 "
+                "the brief names verbatim as \"Adult and Paediatric Phototherapy "
+                "Devices\" - adult phototherapy being narrowband UVB and PUVA, which is "
+                "this patch, while Lot 3 neonatal equipment is the maternity and "
+                "neonatal page's. WHY NEITHER IS COUNTED: NHS Supply Chain publishes "
+                "supplier names per agreement and never per lot, so claiming either "
+                "would publish its whole list as this speciality's market - weighing "
+                "scales, thermometers and ECG from the first, ventilators and incubators "
+                "from the second. Both references are given above so a rep can go "
+                "straight to the right agreement. Every date, reference and count in "
+                "this paragraph was read on NHS Supply Chain's own brief on 11 September "
+                "2026."
+            ),
+            "suppliers": (
+                "NO SUPPLIER LIST IS PUBLISHED FOR THIS SPECIALITY FROM THE FRAMEWORK "
+                "ROUTE, because this panel names suppliers only where a framework record "
+                "names them on this speciality's own frameworks, and this patch has "
+                "none. The two agreements carrying a dermatology lot are named in the "
+                "frameworks rule above, and their supplier lists are not reproduced "
+                "here: both are published per agreement rather than per lot, so a list "
+                "of forty patient assessment device suppliers or twenty-five anaesthesia "
+                "and neonatal suppliers would name the wrong market. THE SUPPLIER "
+                "ANSWER ON THIS PATCH IS THE DRUG TARIFF, NOT A FRAMEWORK. The "
+                "reimbursed emollient range below names nineteen companies and they are "
+                "the firms a dermatology conversation is actually had with. This panel "
+                "will not fall back to a keyword guess against the supplier directory."
+            ),
+        },
+        # EVERY MATCH WAS READ, ONE BY ONE, AND THERE ARE THIRTEEN. Ten in
+        # framework-awards.json and three in tender-history.json, and all thirteen are
+        # this speciality. NINE are commissioned community dermatology or teledermatology
+        # services: Royal Wolverhampton (Medinet Clinical Services), North East London
+        # twice, St George's (Cryotomy), Greater Manchester twice (Health Harmonie and
+        # About Health), West Yorkshire twice, and Lancashire and South Cumbria's adult
+        # teledermatology service. The two West Yorkshire rows are NOT one notice
+        # published twice: they carry the same title and the same day and they were
+        # awarded to different providers, Novus Health and DMC Healthcare, so both are
+        # real and both stand. The remaining four are NHS Essex's urgent skin cancer
+        # dermoscopy triage service (Mayflower Healthcare Alliance), NHS Scotland's ENT,
+        # Ophthalmology and Skin Medicines contract twice, and Calderdale and
+        # Huddersfield's purchase of dermatoscopes and an image transfer system.
+        #
+        # WHAT THE FEED'S OWN `spec` FIELD SAYS ABOUT THE SAME PATCH, AND WHY IT IS
+        # NEVER READ HERE: it tags five rows dermatology and not one of the five is.
+        # They are "Intravenous & Topical Fluids" (IV fluids), "Hair and Beauty
+        # Framework" (APUC, a further education college beauty supplies agreement),
+        # "Microbiological Safety Cabinets", "National Framework Agreement for Non-Wire
+        # Lesion Localisation and Sentinel Lymph Node Location Products" (breast) and
+        # "Supply of Wigs". Meanwhile it files the three genuine tender-history rows
+        # under capital-estates-watch and theatres-and-surgical. Five for five wrong in,
+        # three for three wrong out.
+        #
+        # REFUSED FROM THE INCLUDE, each with what it actually did. Every loose term
+        # was refused here rather than admitted and then argued with in an exclusion
+        # list, which is why `exclude` below is None.
+        #   bare "skin"       -> "Skin Cleansing, Disinfection and Hygiene" (the NHS
+        #                        Supply Chain hand hygiene and patient wash agreement,
+        #                        which is infection prevention's) and "Cryopreserved
+        #                        Skin - Cryoskin", Swansea Bay, three rows, which is
+        #                        cadaveric skin allograft for burns and is the plastics,
+        #                        burns and reconstruction page's by name. Admitted only
+        #                        as "skin cancer", "skin lesion" and "skin medicines".
+        #   bare
+        #   "phototherapy"    -> the only phototherapy row in either feed is "Neonatal
+        #                        Equipment, Adult, Paediatric & Neonatal Phototherapy
+        #                        Devices and Associated Accessories & Services", NHS
+        #                        Supply Chain 2021, the predecessor of 2026/S 000-008108.
+        #                        Its adult lot is genuinely this patch, and admitting the
+        #                        word to reach it would open a dermatology panel with a
+        #                        neonatal incubator and ventilator award. The current
+        #                        agreement and its Lot 4 are named in the frameworks
+        #                        finding above instead, which is where a rep needs them.
+        #                        Only "narrowband UVB" and "PUVA" are admitted, and
+        #                        neither matches anything today.
+        #   bare "laser"      -> eighteen rows and not one is dermatology: ENT, holmium
+        #                        urology, green light prostate, ophthalmic Pascal,
+        #                        cardiac lead extraction, MRI-guided ablation and two
+        #                        university microdissection systems. Two are arguable and
+        #                        both are refused because the title cannot settle them -
+        #                        "POS Broomfield - Candela - laser GMAX PRO", a Candela
+        #                        GentleMax Pro at Mid and South Essex, which is a
+        #                        dermatology and aesthetic platform sited at a burns
+        #                        centre, and two Lumenis AcuPulse CO2 laser maintenance
+        #                        contracts, which serve ENT and dermatology alike.
+        #   bare "wig"        -> nine rows, and wigs are refused DELIBERATELY and against
+        #                        the pull of the clinical argument. Most NHS wig
+        #                        provision is for chemotherapy alopecia, which is
+        #                        oncology's, and the page above states in terms that the
+        #                        NHS Supply Chain wigs agreement is not a dermatology
+        #                        agreement. A panel cannot say that on the page and then
+        #                        claim nine wig awards in the tab beneath it. "alopecia"
+        #                        is admitted instead, which reaches an alopecia-specific
+        #                        notice if one ever appears and matches nothing today.
+        #   bare "hair"       -> "Hair, Beauty and Wigs Supplies" (Crescent Purchasing
+        #                        Consortium, a schools and colleges buying group) and
+        #                        "Hair and Beauty Framework" (APUC). Also matches
+        #                        "chair" inside "wheelchair" on twenty-five rows without
+        #                        a word boundary, which is its own warning.
+        #   bare "topical"    -> "Intravenous & Topical Fluids", which is IV fluid
+        #                        therapy, and "Generic Drugs - Topicals & Miscellaneous",
+        #                        a Velindre and NHS Wales generic pharmacy basket.
+        #                        Topical prescribing is the whole of this patch's budget
+        #                        and the word is still refused, because in procurement
+        #                        titles it means route of administration and not skin.
+        #   bare "lesion"     -> "National Framework Agreement for Non-Wire Lesion
+        #                        Localisation and Sentinel Lymph Node Location Products",
+        #                        which is breast surgery. "skin lesion" is admitted.
+        #   bare
+        #   "squamous cell"   -> refused on risk: it matches nothing today, and head and
+        #                        neck, lung and cervical squamous cell carcinoma would
+        #                        all reach it. Only "cutaneous squamous cell" is
+        #                        admitted, which is the form NICE uses for the cemiplimab
+        #                        appraisal this page's calendar carries.
+        #   bare "cryo"       -> ten rows and every one is cryoablation, cryopreservation
+        #                        or a pathology cryostat. Dermatological cryotherapy is a
+        #                        clinic procedure bought as a nitrogen flask, and it does
+        #                        not reach a procurement notice at all.
+        #   bare "sunscreen"  -> two rows, both Leidos Supply Limited, which runs Ministry
+        #                        of Defence logistics. Not an NHS purchase.
+        #   bare "biopsy"     -> six rows, all breast or transperineal prostate. Skin
+        #                        punch biopsy is a consumable on a general surgical
+        #                        agreement and never appears in a title.
+        # ADMITTED ON PURPOSE THOUGH IT IS A THREE-SPECIALITY BASKET: NHS Scotland's
+        # "ENT, Ophthalmology & Skin Medicines/Medical Devices", 2022 and 2024. The
+        # colorectal rule refuses the equivalent shape - "Gastrointestinal, Endocrine,
+        # Nutrition & Blood Medicines" - and the difference is stated rather than
+        # glossed. There, a medicines wholesale award is not an endoscopy opportunity,
+        # because that page's market is devices and it sizes GI prescribing separately.
+        # Here the medicines ARE the market: this page's own strap says the money runs
+        # through FP10 and ICB formularies, and a national contract for skin medicines
+        # is the single clearest route to market on the patch. It is admitted with its
+        # scope stated in the coverage note, not passed off as a dermatology contract.
+        "include": (
+            r"\b((?:tele)?dermatolog\w*|dermatoscop\w*|dermoscop\w*|"
+            r"skin cancer|skin lesion\w*|skin medicines|"
+            r"melanoma|basal cell carcinoma|cutaneous squamous cell|mohs|"
+            r"psoria\w*|eczema|atopic dermatitis|dermatitis|acne|rosacea|urticaria|"
+            r"hidradenitis|vitiligo|prurigo|pruritus|pemphig\w*|"
+            r"epidermolysis bullosa|ichthyos\w*|alopecia|actinic keratos\w*|"
+            r"emollient\w*|isotretinoin|narrowband uvb|narrow[- ]band uvb|puva)\b"
+        ),
+        # NOTHING TO EXCLUDE, AND THAT IS A STATEMENT ABOUT THE INCLUDE LIST BEING
+        # NARROW ENOUGH, NEVER A SHORTCUT PAST THE READING. All thirteen rows the
+        # pattern returns were read one by one and all thirteen are dermatology. The
+        # eleven loose terms that would have needed an exclusion list are enumerated
+        # above and were refused from the include instead, which is the renal rule's
+        # discipline and the one this page needs most: "skin" alone is the third most
+        # dangerous word in this dataset after "fit" and "delivery".
+        "exclude": None,
+        # 85121282 IS "DERMATOLOGY SERVICES" AND IT IS THE CLEANEST CPV ON THE HUB, AND
+        # IT STILL ONLY CORROBORATES. Twelve notices in the award feed carry it. Ten are
+        # the community dermatology and skin cancer rows below, every one of which the
+        # title already admitted. The other two are "NHSE1060 Diabetic Eye Screening
+        # Programme", which carries 85121280, 85121281 and 85121282 as a block of
+        # specialist medical service codes, and Countess of Chester's "Provision of
+        # Insourced and Outsourced Clinical Services Framework", which carries
+        # twenty-five CPV codes covering every speciality in the NHS. Admitted on CPV
+        # alone, this panel would open with a diabetic eye screening contract.
+        "cpv": ("85121282",),
+        # PART IXA, NARROWED TO THE EMOLLIENT RANGE, AND THE NARROWING IS THE POINT.
+        # Part IXA whole is 56,833 lines of dressings and elastic hosiery and belongs to
+        # the tissue viability page, which claims it whole. Inside it sit 87 lines from
+        # 28 virtual medicinal products and 19 companies which are emollients: the
+        # reimbursed creams, ointments, gels and bath additives that are the largest
+        # single line in the dermatology prescribing bill this page is about. Claiming
+        # the part whole would have put Juzo and Sigvaris compression hosiery at the top
+        # of a dermatology panel, which is the gynaecology pessary problem exactly.
+        # Thornton & Ross leads on 25 lines (Cetraben, Zerobase, Zeroderm, Zerocream,
+        # Zerolatum, Flexitol), then Alliance Pharmaceuticals and Ennogen on 8, Aspire
+        # on 7, Fontus on 6 and Dermatonics on 5. Reimbursement runs £1.12 to £15.77.
+        # WHAT THE PATTERN DELIBERATELY DOES NOT REACH:
+        #   "Paraffin gauze dressing sterile" (Jelonet, Cuticell, Neotulle, Zelaffin) is
+        #     a wound contact layer, not an emollient, which is why bare "paraffin" is
+        #     not used and only "white/yellow soft paraffin" and "liquid paraffin" are.
+        #   "Ostomy skin protectives", the 55-line Part IXC barrier cream and barrier
+        #     film range, is stoma peristomal skin care and is the continence and
+        #     colorectal pages'. Only IXA is claimed, so it cannot reach this panel.
+        #   "Silicone gel sheet" (Dermatix) is scar management and is the plastics,
+        #     burns and reconstruction page's.
+        #   "Vaginal moisturisers" (Regelle) is gynaecology's.
+        #   "Cyclomethicone 50% / Isopropyl myristate 50% solution" is Full Marks head
+        #     lice solution, and it is the one line refused that has a real dermatology
+        #     argument: pediculosis is a skin infestation and the product is on the
+        #     topical prescribing bill. It is refused because this slice is described as
+        #     the emollient range and one ectoparasiticide inside it would misdescribe
+        #     what is being counted. "isopropyl myristate" was dropped from the pattern
+        #     to achieve it, and nothing else was lost: every AproDerm, Epimax isomol,
+        #     Exmabase, MyriBase and Zerodouble gel line is still reached through
+        #     "liquid paraffin".
+        #   "Curea P1 / P2 dressing" is a wound dressing, and it is named here because
+        #     it is the trap an unanchored pattern falls into: "Curea" ends in the
+        #     letters u-r-e-a, so a bare "urea" matches all thirteen of its lines. The
+        #     pattern uses "\burea \d" - word boundary, then a percentage.
+        "tariffParts": ("IXA",),
+        "tariffVmp": (
+            r"emollient|emulsifying wax|"
+            r"(?:white|yellow) soft paraffin|liquid paraffin|paraffin-free|"
+            r"\burea \d|lauromacrogols|"
+            r"eczema|dry skin balm|heel balm|hand balm|skin balm|callus removing"
+        ),
+        "coverageNote": (
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. THIS IS A PATCH WITH NO "
+            "FRAMEWORK AND THEREFORE NO FRAMEWORK SUPPLIER LIST, AND THE EMPTY "
+            "FRAMEWORKS AND SUPPLIERS SECTIONS ARE THE ANSWER, NOT A FAILURE TO LOAD. "
+            "NHS Supply Chain's own site search returns no results at all for "
+            "'dermatology', run 11 September 2026, and its Procurement Calendar carries "
+            "no dermatology row. The two agreements that do carry a dermatology lot are "
+            "named in full in the frameworks rule, with their references, dates and lot "
+            "names, so a rep can go to the right agreement without this panel "
+            "publishing sixty-five suppliers of thermometers, weighing scales and "
+            "ventilators as a dermatology market. THE AWARDS BELOW ARE SERVICE "
+            "CONTRACTS, NOT PRODUCT CONTRACTS, AND THAT IS WHAT THIS MARKET LOOKS LIKE. "
+            "Nine of the thirteen are Integrated Care Board and trust commissioning of "
+            "community dermatology and teledermatology services - Royal Wolverhampton, "
+            "North East London, St George's, Greater Manchester, West Yorkshire, "
+            "Lancashire and South Cumbria - and one is NHS Essex's urgent skin cancer "
+            "dermoscopy triage service. A product supplier's route into those is the "
+            "provider who won them, not the notice. Only one award in the whole feed is "
+            "a dermatology product purchase: Calderdale and Huddersfield's dermatoscopes "
+            "and image transfer system, and it was published in 2021. TWO AWARDS ARE A "
+            "THREE-SPECIALITY MEDICINES BASKET and are included because skin is named in "
+            "the title, not because the whole award is this patch: NHS National Services "
+            "Scotland's 'ENT, Ophthalmology & Skin Medicines/Medical Devices', 2022 and "
+            "2024. Read them as a route in, not as a dermatology contract value. THE "
+            "DRUG TARIFF SLICE IS EMOLLIENTS AND NOTHING ELSE. It is the reimbursed "
+            "emollient range inside Part IXA and it is the honest supplier list for this "
+            "patch, but it is not the whole dermatology prescribing bill: topical "
+            "corticosteroids, topical retinoids, antifungals, isotretinoin and every "
+            "biologic NICE has appraised for atopic dermatitis, psoriasis, prurigo "
+            "nodularis and hidradenitis suppurativa are Part VIII medicines, not Part IX "
+            "appliances, and no part of the Drug Tariff in this dataset carries them. "
+            "THESE 87 LINES ALSO SIT INSIDE THE PART IXA TOTAL THE TISSUE VIABILITY AND "
+            "WOUND CARE PAGE CARRIES WHOLE, which is stated so nobody reads the two "
+            "panels as counting different things. WHAT IS NOT HERE: wigs, which most "
+            "often serve chemotherapy alopecia and which NHS Supply Chain buys under an "
+            "agreement this page states is not a dermatology agreement; systemic "
+            "melanoma and cutaneous squamous cell carcinoma therapy, which is the "
+            "oncology patch; skin graft, skin substitute and cryopreserved allograft, "
+            "which are plastics, burns and reconstruction's; peristomal barrier creams, "
+            "which are Part IXC and the stoma pages'; skin cleansing and disinfection, "
+            "which is infection prevention's; and the AI skin lesion triage NICE names "
+            "in HTG746, which is a per-referral licence bought by an individual "
+            "teledermatology service and has no framework at all, so no panel can carry "
+            "it."
+        ),
+    },
+
 }
 
 
