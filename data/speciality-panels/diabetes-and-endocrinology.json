@@ -1,0 +1,576 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "diabetes-and-endocrinology",
+ "label": "Diabetes and Endocrinology",
+ "defined": true,
+ "generated": "2026-09-11",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-11T11:16:36+00:00",
+  "openTenders": "11/09/2026",
+  "drugTariff": "2026-09-11"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(insulin pump|continuous glucose|hybrid closed loop)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch has ONE NHS Supply Chain framework and it covers only half the market. Pumps, acute continuous glucose monitoring and the algorithms that join them are bought on framework 2025/S 000-4043, which expires on 31 May 2027. Community sensors and testing strips never touch it: they are prescribed on FP10 and reimbursed at the Drug Tariff Part IX listed price, which is a monthly reimbursement list and not a contract price. Quoting one as though it were the other is the single most common mistake on this patch. THE ENDOCRINOLOGY HALF OF THIS PAGE'S NAME HAS NO PROCUREMENT OF ITS OWN IN THIS DATA: no NHS Supply Chain framework name carries it, and every award title matching an endocrine or thyroid term turned out to be oncology, pharmacy or newborn screening, so the panel claims none of them. The insulin and GLP-1 medicines themselves - semaglutide, tirzepatide, the insulin analogues - are BNF Chapter 6 prescribing and appear in no framework and no Part IX line here; they are pharmacy's and obesity's. The awards list is also unusually service-heavy: the six rows from the framework-awards feed are eye screening, community diabetes services and digital prevention programmes, not device buys. Two rows are named rather than hidden because the product is exactly what this patch sells even though the buyer is not a trust: a portable glucometer contract bought by Leidos Supply for defence, and the Northern Ireland insulin pen needle contract. Being named on the framework is not evidence of volume, and being absent from it is not evidence of absence from the market.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch has ONE NHS Supply Chain framework and it covers only half the market. Pumps, acute continuous glucose monitoring and the algorithms that join them are bought on framework 2025/S 000-4043, which expires on 31 May 2027. Community sensors and testing strips never touch it: they are prescribed on FP10 and reimbursed at the Drug Tariff Part IX listed price, which is a monthly reimbursement list and not a contract price. Quoting one as though it were the other is the single most common mistake on this patch. THE ENDOCRINOLOGY HALF OF THIS PAGE'S NAME HAS NO PROCUREMENT OF ITS OWN IN THIS DATA: no NHS Supply Chain framework name carries it, and every award title matching an endocrine or thyroid term turned out to be oncology, pharmacy or newborn screening, so the panel claims none of them. The insulin and GLP-1 medicines themselves - semaglutide, tirzepatide, the insulin analogues - are BNF Chapter 6 prescribing and appear in no framework and no Part IX line here; they are pharmacy's and obesity's. The awards list is also unusually service-heavy: the six rows from the framework-awards feed are eye screening, community diabetes services and digital prevention programmes, not device buys. Two rows are named rather than hidden because the product is exactly what this patch sells even though the buyer is not a trust: a portable glucometer contract bought by Leidos Supply for defence, and the Northern Ireland insulin pen needle contract. Being named on the framework is not evidence of volume, and being absent from it is not evidence of absence from the market.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(diabet\\w*|insulin|glucose|glucometer|glycaem\\w*|glycem\\w*|hb\\s?a1c|cgm|continuous glucose|closed[- ]loop|ketone|hypoglyc\\w*|hyperglyc\\w*)\\b/i and does not match /\\bglucose\\s+\\d/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "NHSBSA Drug Tariff Part IXA/IXR for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /insulin|glucose|ketone|lancet|neuropathy sweat|diabetic/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
+ },
+ "counts": {
+  "frameworks": 1,
+  "suppliers": 12,
+  "suppliersUnresolved": 0,
+  "awardsShown": 26,
+  "awardsMatched": 26,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/insulin-pumps-and-associated-products/",
+   "reference": "2025/S 000-4043",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Direct",
+   "starts": "28 November 2025",
+   "ends": "31 May 2027",
+   "supplierCount": 12,
+   "supplierSource": "count verified against the page's own stated total (12)",
+   "suppliers": [
+    "Abbott Laboratories Ltd",
+    "Advanced Therapeutics UK Ltd",
+    "Air Liquide Healthcare Ltd",
+    "Dexcom International Ltd",
+    "Glooko Ltd",
+    "GlucoRX Technologies Ltd",
+    "Insulet International Ltd",
+    "Medtronic Ltd",
+    "Medtrum Ltd",
+    "Novo Nordisk Ltd",
+    "Urathon Europe Ltd",
+    "Ypsomed Ltd"
+   ],
+   "delisted": [
+    "Roche Diabetes Care Ltd",
+    "CamDiab Ltd"
+   ]
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Abbott Laboratories Limited",
+   "resolved": true,
+   "variants": [
+    "Abbott Laboratories Ltd"
+   ],
+   "frameworks": [
+    "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products"
+   ]
+  },
+  {
+   "name": "Advanced Therapeutics UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products"
+   ]
+  },
+  {
+   "name": "Air Liquide Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products"
+   ]
+  },
+  {
+   "name": "Dexcom International Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products"
+   ]
+  },
+  {
+   "name": "Glooko Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products"
+   ]
+  },
+  {
+   "name": "GlucoRx",
+   "resolved": true,
+   "variants": [
+    "GlucoRX Technologies Ltd"
+   ],
+   "frameworks": [
+    "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products"
+   ]
+  },
+  {
+   "name": "Insulet International Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products"
+   ]
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Ltd"
+   ],
+   "frameworks": [
+    "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products"
+   ]
+  },
+  {
+   "name": "Medtrum Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products"
+   ]
+  },
+  {
+   "name": "mylife Diabetes Care Ltd (formerly Ypsomed Ltd)",
+   "resolved": true,
+   "variants": [
+    "Ypsomed Ltd"
+   ],
+   "frameworks": [
+    "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products"
+   ]
+  },
+  {
+   "name": "Novo Nordisk Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products"
+   ]
+  },
+  {
+   "name": "Urathon Europe Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "NHSE1060 Diabetic Eye Screening Programme",
+   "buyer": "NHS England - North West",
+   "supplier": "Lot 1  - Medical Imaging UK Limited.    Lot 2 - East Lancashire Hospitals NHS Trust, Lot 1 - Medical Imaging UK Limited.  Lot 2 - East Lancashire Hospitals NHS Trust",
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084676-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000",
+    "85121280",
+    "85121281",
+    "85121282"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Pilot for type 1 diabetes monitoring & triage (Cloudcare)",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "supplier": "Medtronic Limited",
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084930-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33195000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Integrated Community Diabetes Service",
+   "buyer": "MAIDSTONE AND TUNBRIDGE WELLS NHS TRUST",
+   "supplier": null,
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082257-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85141200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Digital Diabetes Prevention and Primary Hypertension Programme",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": null,
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080970-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "48000000",
+    "80000000",
+    "85100000",
+    "85120000",
+    "85140000",
+    "85141000",
+    "85312320",
+    "98334000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Procurement for the provision of Pre-Diabetes Programme in South Bristol",
+   "buyer": "NHS BRISTOL, NORTH SOMERSET AND SOUTH GLOUCESTERSHIRE INTEGRATED CARE BOARD",
+   "supplier": "HEALTH EXCHANGE",
+   "date": "2026-08-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077610-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85323000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Diabetic Eye Screening Data Collection & Management",
+   "buyer": "NHS England",
+   "supplier": "QUICKSILVA LIMITED",
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076518-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "72000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Insulin pumps and consumables - Dexcom",
+   "buyer": "Norfolk and Norwich University Hospitals NHS Foundation Trust",
+   "supplier": "Dexcom International Limited",
+   "date": "2026-05-20",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/318afef8-dd57-472b-a608-287674ceb743",
+   "value": 1030000,
+   "periodEnd": "2027-05-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "Diabetic Hybrid Closed Loop",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "Dexcom International Limited",
+   "date": "2026-05-12",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/1ba016b3-279c-46a9-b195-50c0610bf4c5",
+   "value": 10110146,
+   "periodEnd": "2027-05-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Diabetic Hybrid Closed Loop",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "INSULET INTERNATIONAL LIMITED",
+   "date": "2026-05-12",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/3f05de26-956f-4808-8b41-d83be1a2d7b0",
+   "value": 16242928,
+   "periodEnd": "2027-05-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Diabetic Hybrid Closed Loop",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "MYLIFE DIABETES CARE LTD",
+   "date": "2026-05-12",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/59e109d7-c991-483e-be3a-b949dd642617",
+   "value": 3269641,
+   "periodEnd": "2027-05-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Diabetic Hybrid Closed Loop",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "Medtronic Limited",
+   "date": "2026-05-12",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/78872ce0-63d2-4139-817c-7b0561561234",
+   "value": 10190344,
+   "periodEnd": "2027-05-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Diabetic Hybrid Closed Loop",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "Abbott Laboratories Limited",
+   "date": "2026-05-12",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/99755454-4326-46c1-86aa-d5b4e980d32e",
+   "value": 679023,
+   "periodEnd": "2027-05-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Diabetic Hybrid Closed Loop",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "Air Liquide Healthcare Ltd",
+   "date": "2026-05-12",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/9bdd1bf6-105a-4842-a40e-a1f45f21b172",
+   "value": 1412400,
+   "periodEnd": "2027-05-30",
+   "source": "tender-history"
+  },
+  {
+   "title": "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and A",
+   "buyer": "Supply Chain Coordination Ltd (SCCL)",
+   "supplier": "Advanced Therapeutics (UK) Ltd, Air Liquide Healthcare Ltd, GlucoRx Ltd, Insulet",
+   "date": "2025-12-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079536-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "PROVISION OF BLOOD GLUCOSE METERS",
+   "buyer": "North East London NHS Foundation Trust",
+   "supplier": "GlucoRx Ltd",
+   "date": "2024-01-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002410-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "PROVISION OF BLOOD GLUCOSE METERS",
+   "buyer": "Barnet Enfield and Haringey Mental Health Trust",
+   "supplier": "GlucoRx Ltd",
+   "date": "2024-01-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002442-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Insulin Infusion Pumps, Continuous Glucose Monitoring Systems and Associated Consumables",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Ypsomed Ltd, Tandem Diabetes Care, Inc., Roche Diabetes Care, Medtrum Ltd, Insul",
+   "date": "2023-06-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/018005-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Insulin Infusion Pumps, Continuous Glucose Monitoring Systems and Associated Consumables",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Medtronic Limited, Dexcom, Advanced Therapeutics UK Ltd, Cellnovo Ltd, Insulet I",
+   "date": "2023-02-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004664-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "CLI-STA-52156 Professional Blood Glucose Testing Strips, Consumables and QC Material",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Abbott Laboratories",
+   "date": "2023-02-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/003712-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "CLI-STA-52156 Professional Blood Glucose Testing Strips, Consumables and QC Material",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Abbott Laboratories",
+   "date": "2022-12-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/036728-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Insulin Pumps, Continuous Glucose Monitoring, Closed Loop Insulin Delivery Systems and",
+   "buyer": "NHS Supply Chain Operated by DHL Supply Chain Limited acting as agent of Supply ",
+   "supplier": "Roche Diabetes Care Limited, TLB Medical Supplies Ltd",
+   "date": "2022-12-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/035953-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "CLI-OJEU-45710 INSULIN PUMPS, CGM, ASSOCIATED CONSUMABLES AND TECHNOLOGY",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "ViCentra Ltd, AIR LIQUIDE HEALTHCARE LTD., Ypsomed Ltd, Medtronic Limited",
+   "date": "2022-03-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/006337-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Portable Glucometer and Cholesterol Monitors",
+   "buyer": "Leidos Supply",
+   "supplier": "BHR Pharmaceuticals Ltd",
+   "date": "2022-01-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002754-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Insulin Pen Needles [3344994]",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "GLUCO RX LIMITED",
+   "date": "2022-01-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000449-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Insulin Pumps, Continuous Glucose Monitoring, Closed Loop Insulin Delivery Systems and Associated  Products",
+   "buyer": "NHS Supply Chain Operated by DHL Supply Chain Limited acting as agent of Supply ",
+   "supplier": "A.Menarini Diagnostics Ltd, Advanced Therapeutics (UK) Ltd, Air Liquide Healthca",
+   "date": "2022-01-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000260-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Point of Care Hb A1c Testing [3137491]",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "ACCU-SCIENCE IRELAND LTD",
+   "date": "2021-03-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/006421-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": {
+  "parts": [
+   "IXA",
+   "IXR"
+  ],
+  "vmpFilter": "insulin|glucose|ketone|lancet|neuropathy sweat|diabetic",
+  "vmpCount": 100,
+  "effectiveMonth": "2026-09",
+  "dataAsOf": "2026-09-11",
+  "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
+  "lineCount": 434,
+  "supplierCount": 63,
+  "topSuppliers": [
+   {
+    "name": "GlucoRx Ltd",
+    "lines": 45
+   },
+   {
+    "name": "Owen Mumford Ltd",
+    "lines": 31
+   },
+   {
+    "name": "HTL-STREFA S.A.",
+    "lines": 28
+   },
+   {
+    "name": "Neon Diagnostics Ltd",
+    "lines": 28
+   },
+   {
+    "name": "Spirit Healthcare Ltd",
+    "lines": 23
+   },
+   {
+    "name": "Cambridge Sensors Ltd",
+    "lines": 20
+   },
+   {
+    "name": "Apollo Medical Technologies Ltd",
+    "lines": 17
+   },
+   {
+    "name": "Pikdare S.p.A.",
+    "lines": 16
+   },
+   {
+    "name": "A. Menarini Diagnostics Ltd",
+    "lines": 14
+   },
+   {
+    "name": "Mediq Healthcare UK Ltd",
+    "lines": 11
+   },
+   {
+    "name": "Nipro Medical UK Ltd",
+    "lines": 11
+   },
+   {
+    "name": "Generic Supplier",
+    "lines": 10
+   },
+   {
+    "name": "AgaMatrix Europe Ltd",
+    "lines": 9
+   },
+   {
+    "name": "Trividia Health UK Ltd",
+    "lines": 9
+   },
+   {
+    "name": "embecta UK Ltd",
+    "lines": 8
+   },
+   {
+    "name": "Ascensia Diabetes Care UK Ltd",
+    "lines": 7
+   },
+   {
+    "name": "B.Braun Medical Ltd",
+    "lines": 7
+   },
+   {
+    "name": "Abbott Laboratories Ltd",
+    "lines": 6
+   },
+   {
+    "name": "Covidien (UK) Commercial Ltd",
+    "lines": 6
+   },
+   {
+    "name": "Kinetik Medical Devices Ltd",
+    "lines": 6
+   }
+  ],
+  "priceMin": 1.23,
+  "priceMax": 230.0
+ }
+}

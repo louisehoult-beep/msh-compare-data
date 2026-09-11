@@ -55,6 +55,7 @@ CAPITAL = "capital-estates-watch"
 PHARM = "pharmacy-and-medicines"
 SEPSIS = "sepsis-and-the-deteriorating-patient"
 REHAB = "rehabilitation-prosthetics-and-orthotics"
+DIAB = "diabetes-and-endocrinology"
 fails = []
 
 
@@ -3441,7 +3442,24 @@ for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
 # is a wound contact layer and tissue viability's, and it anchors "urea" on a word
 # boundary and a percentage, because "Curea" ends in those four letters and would
 # otherwise bring thirteen wound dressing lines with it.
-_TARIFF_FILTER_EARNED = {GYNAE, PAEDS, UROLOGY, RESP, OPHTH, ENT, DERM}
+# Diabetes and endocrinology, added 11/09/2026, is the SEVENTH slice and the only
+# one that slices TWO parts. It takes 342 lines out of Part IXA — insulin pen
+# needles, lancets, U100 insulin syringes, reusable insulin pens, needle-free
+# insulin delivery, the 10 "Glucose interstitial fluid detection sensor" lines
+# that are the community CGM range, and the diabetic foot-cream and retinopathy
+# lines — all of which also sit inside the Part IXA total tissue viability claims
+# whole, which is stated in both files. It also takes 92 of Part IXR's 101 lines,
+# and IXR is the ONLY part on the Hub that is mostly one speciality's: 66 blood
+# glucose biosensor strips, 12 blood ketones, the colorimetric and urine ranges
+# and one line of neuropathy sweat detection pads. The 9 left behind are the 7
+# international normalised ratio strips, which are anticoagulation and
+# haematology's, and 2 urine protein strips, which are generic urinalysis. The
+# pattern refuses the 54-line "Sterile subcutaneous drug delivery device" range,
+# which LOOKS like the insulin pump infusion sets and is not provably so — EVER
+# Pharma's D-mine on that range is apomorphine delivery for Parkinson's — and it
+# refuses "Plantar pressure offloading device", which is diabetic foot offloading
+# and is left to tissue viability rather than contested.
+_TARIFF_FILTER_EARNED = {GYNAE, PAEDS, UROLOGY, RESP, OPHTH, ENT, DERM, DIAB}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _r.get("tariffVmp") and _slug not in _TARIFF_FILTER_EARNED:
         check("%s must not have grown a tariff filter unnoticed" % _slug, False)
@@ -6250,6 +6268,177 @@ check("suppliers come only from that one framework",
       cap["counts"]["suppliers"] > 0
       and all(s.get("frameworks") for s in cap["suppliers"]))
 check("capital claims no open tender it cannot evidence", cap.get("openTenders") == [])
+
+# ---------------------------------------------------------------------------
+# DIABETES AND ENDOCRINOLOGY. The last page on the rollout, and the only patch
+# whose market is split down the middle by buying route: one NHS Supply Chain
+# framework for pumps, acute CGM and algorithms, and FP10 prescribing at a Drug
+# Tariff listed price for community sensors and strips. Four traps, each guarded
+# below: bare "podiatry" annexing seven orthotics rows, bare "endocrin" annexing
+# two neuroendocrine TUMOUR buys and two pharmacy medicines bundles, bare
+# "glucose" annexing an intravenous fluid contract, and Part IXA/IXR being
+# claimed whole when 56,833 of those lines are tissue viability's and 7 are
+# haematology's.
+# ---------------------------------------------------------------------------
+print("\nDIABETES AND ENDOCRINOLOGY")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), DIAB],
+               check=True, capture_output=True)
+db = load_panel(DIAB)
+check("panel is defined", db.get("defined") is True)
+check("label is the page's own", db["label"] == "Diabetes and Endocrinology")
+
+_db_rule = B.SPECIALITY_RULES[DIAB]
+_db_rx = B.compile_rule(_db_rule)
+
+
+def _db_absent(label, needle):
+    check("refused (%s): %s" % (label, needle[:52]), not B.match_title(_db_rx, needle))
+
+
+def _db_present(label, needle):
+    check("kept (%s): %s" % (label, needle[:52]), B.match_title(_db_rx, needle))
+
+
+print("  one framework, the one page 2844 is built around")
+_db_fw = sorted(f["name"] for f in db["frameworks"])
+check("exactly one framework", len(_db_fw) == 1, "; ".join(_db_fw))
+check("and it is the insulin pump and CGM agreement",
+      _db_fw == ["Insulin Pumps, Continuous Glucose Monitoring, Products Contributing "
+                 "to the Delivery of Hybrid Closed Loop Pathways and Associated Products"])
+check("its reference is the one the page quotes",
+      db["frameworks"][0].get("reference") == "2025/S 000-4043")
+# An insulin pump is not an infusion pump in procurement terms, and HbA1c on a
+# pathology analyser is not this patch's framework. If a later edit reaches for
+# either to make the panel look fuller, these fail.
+for bad in ["Infusion Pumps and Administration Sets and Associated Products",
+            "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+            "Orthotics, Podiatry and Immobilisation",
+            "Renal Replacement Therapies Services, Technologies and Consumables",
+            "Blood Collection Devices",
+            "Enteral Feeding, Bile Bags and Associated Products"]:
+    check("framework refused (another page's): %s" % bad[:44],
+          not _db_rx["fw"].search(bad))
+
+print("  the twelve suppliers, with the two delisted ones kept out of the count")
+check("twelve suppliers, as NHS Supply Chain's own brief states",
+      db["counts"]["suppliers"] == 12, str(db["counts"]["suppliers"]))
+check("every supplier name resolved through the alias registry",
+      db["counts"]["suppliersUnresolved"] == 0)
+_db_sup = " || ".join(s["name"] for s in db["suppliers"]).lower()
+# Roche Diabetes Care and CamDiab were delisted at the start of this framework.
+# Publishing them as current suppliers is the failure this guards.
+check("Roche Diabetes Care is not shown as a current supplier",
+      "roche" not in _db_sup, _db_sup)
+check("CamDiab is not shown as a current supplier", "camdiab" not in _db_sup, _db_sup)
+check("both are still recorded as delisted rather than dropped silently",
+      sorted(db["frameworks"][0].get("delisted") or [])
+      == ["CamDiab Ltd", "Roche Diabetes Care Ltd"])
+# One name per company: NHS Supply Chain still writes "Ypsomed Ltd" on a page
+# written for the 28/11/2025 start, but Companies House 07132723 has been mylife
+# Diabetes Care Ltd since 01/04/2026. Being corrected on this in front of a
+# procurement lead is exactly what the registry exists to prevent.
+check("Ypsomed is resolved to its current registered name",
+      any("mylife" in s["name"].lower() for s in db["suppliers"]), _db_sup)
+
+print("  the one exclusion, a real row that matched the include and was wrong")
+_db_absent("an intravenous fluid bought by pharmacy, not a monitoring product",
+           "Supply, Storage, and Maintenance of Glucose 10% and 50% 500ml iv infusion")
+print("  ...and the exclusion must not have been widened into what it protects")
+_db_present("blood glucose meters are the patch", "PROVISION OF BLOOD GLUCOSE METERS")
+_db_present("professional testing strips are the patch",
+            "CLI-STA-52156 Professional Blood Glucose Testing Strips, Consumables and QC Material")
+_db_present("continuous glucose monitoring is the patch",
+            "Insulin Infusion Pumps, Continuous Glucose Monitoring Systems and Associated Consumables")
+
+print("  bare 'podiatry' would annex seven orthotics rows")
+for bad in ["Podiatry Orthoses Consumables [5820615]",
+            "Single Use Instruments - Podiatry",
+            "Single Use Podiatry Instruments",
+            "Custom Made Podiatry Orthoses for the South Eastern Health and Social Care Trust (SEHSCT)",
+            "Podiatry Products",
+            "Podiatry Orthoses and Plantar Fascia Socks [3195515]",
+            "Podiatry Consumables for South Eastern Health and Social Care Trust (SEHSCT)"]:
+    _db_absent("orthotics and podiatry instruments, rehab's", bad)
+
+print("  bare 'endocrin' would annex two oncology buys and two pharmacy bundles")
+_db_absent("a neuroendocrine tumour imaging agent, nuclear medicine's",
+           "Purchase of AAA Netspot - Diagnostic Imaging Agent Kit to Detect Neuroendocrine Tumours")
+_db_absent("a neuroendocrine tumour radioligand therapy, oncology's",
+           "Purchase of 177Lu- Dotatate (Lutathera - ) to treat patients with neuroendocrine tumours")
+_db_absent("a generic medicines bundle, pharmacy's",
+           "Gastrointestinal, Endocrine, Nutrition & Blood Medicines")
+_db_absent("the same bundle under its other spelling",
+           "Gastro Intestinal, Endocrine, Nutrition & Blood Generic Medicines")
+_db_absent("newborn congenital hypothyroidism screening, maternity and neonatal's",
+           "Procurement of Test Kits for Newborn Screening of Cystic Fibrosis (CF), "
+           "Congenital Hypothyroidism (CHT) and the Maintenance")
+_db_absent("bariatric equipment hire, obesity's", "Bariatric Hire Contract")
+
+print("  the true positives this panel exists to show")
+_db_present("the national framework award itself",
+            "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the "
+            "Delivery of Hybrid Closed Loop Pathways and A")
+_db_present("a trust buying hybrid closed loop", "Diabetic Hybrid Closed Loop")
+_db_present("insulin pen needles", "Insulin Pen Needles [3344994]")
+_db_present("a portable glucometer contract", "Supply of Portable Glucometer and Cholesterol Monitors")
+_db_present("an integrated community diabetes service", "Integrated Community Diabetes Service")
+# Written "Hb A1c" with a space in the only notice that carries it. An unspaced
+# pattern misses a true positive, which is how this nearly went out short.
+_db_present("point of care HbA1c, spaced as the notice spells it",
+            "Point of Care Hb A1c Testing [3137491]")
+
+_db_titles = " || ".join((a.get("title") or "") for a in db["awards"]).lower()
+check("no podiatry row reached the published slice", "podiatry" not in _db_titles)
+check("no endocrine tumour row reached the published slice", "neuroendocrine" not in _db_titles)
+check("no intravenous glucose fluid row reached the published slice",
+      "iv infusion" not in _db_titles)
+check("the hybrid closed loop awards are published", "hybrid closed loop" in _db_titles)
+check("diabetes claims no open tender it cannot evidence", db.get("openTenders") == [])
+
+print("  the Drug Tariff is TWO parts, both sliced, neither claimed whole")
+_db_dt = db["drugTariff"]
+check("parts IXA and IXR", _db_dt["parts"] == ["IXA", "IXR"], str(_db_dt["parts"]))
+check("the slice is narrowed by a published vmp filter", bool(_db_dt.get("vmpFilter")))
+_db_vrx = __import__("re").compile(_db_rule["tariffVmp"], __import__("re").I)
+# Part IXR is the only part on the Hub that is mostly this speciality: 92 of its
+# 101 lines. The 9 that are not must stay out.
+check("INR testing strips stay out (anticoagulation, haematology's)",
+      not _db_vrx.search("International normalised ratio testing strips"))
+check("urine protein strips stay out (generic urinalysis)",
+      not _db_vrx.search("Urine protein testing strips"))
+# Part IXA is 56,833 lines of dressings and hosiery. These four matched an
+# exploratory pattern and are not this patch.
+check("the suture range stays out",
+      not _db_vrx.search("Absorbable synthetic suture 2gauge 70cm length with "
+                         "19mm 3/8 curved reverse cutting needle"))
+check("pressure ulcer prevention sensors stay out (tissue viability's)",
+      not _db_vrx.search("Pressure ulcer prevention sensor"))
+check("plantar pressure offloading stays out (left to tissue viability)",
+      not _db_vrx.search("Plantar pressure offloading device"))
+# Neria, Saflo, Cleo 90 and EVER Pharma's D-mine. D-mine is apomorphine delivery
+# for Parkinson's, so this range is not provably insulin and is refused.
+check("subcutaneous drug delivery sets stay out (shared with apomorphine)",
+      not _db_vrx.search("Sterile subcutaneous drug delivery device 110cm tubing "
+                         "6mm needle 27gauge"))
+for good in ["Blood glucose biosensor testing strips",
+             "Blood ketones testing strips",
+             "Glucose interstitial fluid detection sensor",
+             "Lancets sterile single use 0.36mm/28gauge",
+             "Hypodermic insulin needles for pre-filled / reusable pen injectors screw on 4mm/32gauge",
+             "Needle free Insulin delivery system",
+             "Neuropathy sweat detection pads"]:
+    check("tariff line kept: %s" % good[:52], bool(_db_vrx.search(good)))
+check("the CGM sensor range the page names is counted",
+      _db_dt["lineCount"] > 300 and _db_dt["supplierCount"] > 40,
+      "lines=%s suppliers=%s" % (_db_dt["lineCount"], _db_dt["supplierCount"]))
+# NHSBSA publishes Part IX in PENCE. Three live panels once told members the
+# range was "£3.0 to £46900.0". A diabetes line is single or double digit pounds.
+check("prices are in pounds, not pence",
+      _db_dt["priceMax"] is not None and _db_dt["priceMax"] < 1000,
+      str(_db_dt["priceMax"]))
+check("the coverage note says the endocrinology half has no procurement of its own",
+      "ENDOCRINOLOGY HALF" in (db["rules"]["frameworks"] or ""))
+
 
 _EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS, DERM, ONC, PAIN, DIGITAL}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):

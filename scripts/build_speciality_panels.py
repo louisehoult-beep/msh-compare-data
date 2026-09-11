@@ -7218,6 +7218,140 @@ SPECIALITY_RULES = {
             "are present and a bare molecule tender would not be."
         ),
     },
+    # PAGE 2844. The last page on this rollout, and the only one that was live with a
+    # 13-tab bar and no panel mount at all (finding 203). Scope, in the page's own
+    # words: "Two buying routes that almost never meet." Pumps, acute CGM and the
+    # algorithms that join them are bought on ONE NHS Supply Chain framework;
+    # community sensors and testing strips are prescribed on FP10 and reimbursed at a
+    # published Drug Tariff price. The panel has to show both or it misrepresents the
+    # patch.
+    "diabetes-and-endocrinology": {
+        "label": "Diabetes and Endocrinology",
+        # ONE FRAMEWORK, AND TWO NEAR-MISSES REFUSED. All 121 live framework names,
+        # the 3 expired and the 16 unparsed were read. Exactly one is this patch's:
+        # "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the
+        # Delivery of Hybrid Closed Loop Pathways and Associated Products"
+        # (2025/S 000-4043, 28/11/2025 to 31/05/2027), which is the agreement page
+        # 2844 is built around.
+        #
+        # REFUSED: "Infusion Pumps and Administration Sets and Associated Products"
+        # matched an exploratory "pump" pattern and is NOT this patch — it is the
+        # general IV infusion agreement already claimed by critical care, palliative
+        # care and sepsis. An insulin pump is not an infusion pump in procurement
+        # terms and the page says so. Also refused: "Laboratory Diagnostics, Point of
+        # Care Testing and Pathology Managed Services", which does carry HbA1c
+        # analysers but is pathology's framework, is claimed there, and is not named
+        # anywhere on page 2844.
+        "frameworks": r"\b(insulin pump|continuous glucose|hybrid closed loop)\b",
+        # EVERY MATCH WAS READ, ALL 27 OF THEM, ACROSS BOTH AWARD FEEDS.
+        #
+        # REFUSED FROM THE INCLUDE RATHER THAN EXCLUDED AFTERWARDS (the renal
+        # precedent). Three loose terms were tried and dropped because each returned
+        # real notices and not one of them was this patch:
+        #   "podiatry"  - 7 rows, every one orthotics or single-use instruments
+        #                 (Podiatry Orthoses Consumables, Single Use Podiatry
+        #                 Instruments, Plantar Fascia Socks). That is
+        #                 rehabilitation-prosthetics-and-orthotics' patch, and the
+        #                 diabetic foot ULCER is already tissue viability's.
+        #   "endocrin"  - 4 rows, none endocrinology as this page means it: two
+        #                 Royal Marsden neuroendocrine TUMOUR buys (Netspot imaging
+        #                 agent, 177Lu-Dotatate) which are oncology and nuclear
+        #                 medicine, and two Scottish "Gastrointestinal, Endocrine,
+        #                 Nutrition & Blood" generic-medicines bundles which are
+        #                 pharmacy's.
+        #   "thyroid"   - 1 row, newborn screening test kits for congenital
+        #                 hypothyroidism, which is maternity-and-neonatal screening.
+        # THE FINDING THAT FOLLOWS: there is no endocrinology award in either feed.
+        # The half of this speciality's name after the "and" has no procurement of
+        # its own in this data, and the coverage note says so rather than letting a
+        # reader assume the panel covers it.
+        #
+        # "hb\s?a1c" IS SPACED ON PURPOSE. The one HbA1c notice in the data is
+        # written "Point of Care Hb A1c Testing [3137491]". An unspaced pattern
+        # misses it, and it is a true positive.
+        "include": (
+            r"\b(diabet\w*|insulin|glucose|glucometer|glycaem\w*|glycem\w*|"
+            r"hb\s?a1c|cgm|continuous glucose|closed[- ]loop|ketone|"
+            r"hypoglyc\w*|hyperglyc\w*)\b"
+        ),
+        # ONE PATTERN, FOR ONE ROW THAT MATCHED AND WAS WRONG: "Supply, Storage, and
+        # Maintenance of Glucose 10% and 50% 500ml iv infusion" (DHSC / Baxter
+        # Healthcare). Glucose at a stated concentration is an intravenous fluid
+        # bought by pharmacy, not a monitoring or delivery product, and putting a
+        # 500ml bag of 50 per cent glucose in front of a rep selling hybrid closed
+        # loop is the filter lying about the market. The pattern matches the molecule
+        # followed by a strength, which is the medicines naming convention and is
+        # written WITHOUT a per-cent sign on purpose: the rule text is published
+        # through a per-cent-formatted template, so a literal one breaks the build.
+        # No true positive carries a digit after "glucose" - checked against all 27.
+        "exclude": r"\bglucose\s+\d",
+        # NO CPV, AND THAT IS A FINDING RATHER THAN AN OMISSION. Every one of the six
+        # framework-awards rows on this patch is a SERVICE or IT contract - diabetic
+        # eye screening, an integrated community diabetes service, a digital
+        # prevention programme - and they carry health-service codes (85xxxxxx), IT
+        # codes (72000000, 48000000) and a single patient-monitoring code
+        # (33195000) between them. There is no device CPV family to corroborate
+        # against, so none is claimed. The device money on this patch is all in
+        # tender-history and on the NHS Supply Chain framework.
+        # PARTS IXA AND IXR, BOTH SLICED, NEITHER CLAIMED WHOLE.
+        #
+        # This is the only speciality on the Hub for which Part IXR is the right
+        # part. IXR is Chemical Reagents, 101 lines in the September 2026 file, and
+        # 92 of them are diabetes: 66 blood glucose biosensor testing strips, 12
+        # blood ketones, the colorimetric glucose range, urine glucose and ketone
+        # strips, and one line of neuropathy sweat detection pads. The 9 lines left
+        # out are the 7 international normalised ratio strips (anticoagulation, which
+        # is haematology's) and 2 urine protein strips (generic urinalysis, used in
+        # nephropathy screening but not exclusively diabetes). That is why the filter
+        # is written rather than the part claimed.
+        #
+        # Part IXA is 56,833 lines of mostly dressings and hosiery and is claimed
+        # WHOLE by tissue-viability-and-wound-care. The 342 lines counted here -
+        # insulin pen needles, lancets, U100 insulin syringes, reusable insulin pens,
+        # needle-free insulin delivery, the 10 "Glucose interstitial fluid detection
+        # sensor" lines that are the community CGM range page 2844 names, and the
+        # diabetic foot-cream and retinopathy lines - ALSO SIT INSIDE THAT TISSUE
+        # VIABILITY TOTAL. Two panels counting the same lines for different reasons
+        # is correct; either panel claiming them exclusively would not be.
+        #
+        # REFUSED FROM THE TARIFF FILTER, each after reading what it actually
+        # returned: "Sterile subcutaneous drug delivery device" (54 lines) LOOKS like
+        # the insulin pump infusion-set range and is not provably so - the brands on
+        # it are Neria, Saflo, Cleo 90 and EVER Pharma's D-mine, and D-mine is
+        # apomorphine delivery for Parkinson's. "Plantar pressure offloading device"
+        # (25 lines) is diabetic foot offloading and is left to tissue viability
+        # rather than contested. "Pressure ulcer prevention sensor" and the suture
+        # range both matched an exploratory "needle"/"sensor" pattern and are plainly
+        # not this patch.
+        "tariffParts": ("IXA", "IXR"),
+        "tariffVmp": r"insulin|glucose|ketone|lancet|neuropathy sweat|diabetic",
+        "coverageNote": (
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch has ONE NHS "
+            "Supply Chain framework and it covers only half the market. Pumps, acute "
+            "continuous glucose monitoring and the algorithms that join them are "
+            "bought on framework 2025/S 000-4043, which expires on 31 May 2027. "
+            "Community sensors and testing strips never touch it: they are "
+            "prescribed on FP10 and reimbursed at the Drug Tariff Part IX listed "
+            "price, which is a monthly reimbursement list and not a contract price. "
+            "Quoting one as though it were the other is the single most common "
+            "mistake on this patch. THE ENDOCRINOLOGY HALF OF THIS PAGE'S NAME HAS "
+            "NO PROCUREMENT OF ITS OWN IN THIS DATA: no NHS Supply Chain framework "
+            "name carries it, and every award title matching an endocrine or thyroid "
+            "term turned out to be oncology, pharmacy or newborn screening, so the "
+            "panel claims none of them. The insulin and GLP-1 medicines themselves - "
+            "semaglutide, tirzepatide, the insulin analogues - are BNF Chapter 6 "
+            "prescribing and appear in no framework and no Part IX line here; they "
+            "are pharmacy's and obesity's. The awards list is also unusually "
+            "service-heavy: the six rows from the framework-awards feed are eye "
+            "screening, community diabetes services and digital prevention "
+            "programmes, not device buys. Two rows are named rather than hidden "
+            "because the product is exactly what this patch sells even though the "
+            "buyer is not a trust: a portable glucometer contract bought by Leidos "
+            "Supply for defence, and the Northern Ireland insulin pen needle "
+            "contract. Being named on the framework is not evidence of volume, and "
+            "being absent from it is not evidence of absence from the market."
+        ),
+    },
 
 }
 
