@@ -4653,6 +4653,236 @@ SPECIALITY_RULES = {
             "no NHS Supply Chain framework page at all."
         ),
     },
+    "emergency-and-urgent-care": {
+        "label": "Emergency and Urgent Care",
+        # FIVE AGREEMENTS, AND THE NUMBER IS THE PAGE'S OWN. Page 2922 says in terms
+        # that there is "no single national route" and that "five NHS Supply Chain
+        # frameworks carry the department's own kit". Its Buying route, its framework
+        # calendar, its four Product ranges cards and its "five frameworks, side by
+        # side" table all name the same five. Every reference and every expiry below
+        # was matched back against the 121 names in frameworks.json on 11/09/2026 and
+        # the pattern returns exactly those five and nothing else:
+        #   External Defibrillation Devices and Related Services and Accessories
+        #     (2022/S 000-035844, Direct route, 31/07/2023 to 30/07/2027, 3 lots,
+        #     21 suppliers). Lot 1 AEDs with optional manual override, Lot 2 manual
+        #     defibrillators, Lot 3 mechanical chest compression.
+        #   Electrodes, Ultrasound Gels, Defibrillation and Related Consumables
+        #     (2023/S 000-030987, Stocked and eDirect, 01/02/2024 to 31/01/2028, 37
+        #     suppliers). The pads and ECG electrodes the devices above consume, and
+        #     deliberately a separate agreement: NHS Supply Chain's own framework page
+        #     says the device framework "will cover the capital purchase of the
+        #     devices, but replacement consumables need to be purchased via" this one.
+        #   Airway Management Products and Associated Equipment (2023/S 000-005729,
+        #     22/07/2024 to 21/07/2028, 4 lots, 54 suppliers). SHARED, and the page
+        #     says so: NHS Supply Chain describes it as covering products used "within
+        #     NHS theatres, wards, Intensive Care Units (ICU), Accident and Emergency
+        #     (A&E) areas, and ambulances". Theatres and surgical and respiratory both
+        #     claim it and are right to.
+        #   Respiratory Solutions (01/08/2022 to 15/06/2027, 6 lots, 37 suppliers).
+        #     Claimed here for LOT 4, ANAESTHESIA AND RESUSCITATION ONLY — bag-valve
+        #     masks, CPR masks, anaesthetic facemasks, absorbers and corrugated
+        #     tubing. The other five lots are respiratory's and are claimed there.
+        #   Simulation Devices and Services (2022/S 000-031912, Direct route,
+        #     09/05/2023 to 08/05/2027, one lot, 7 suppliers). The first of the five
+        #     to expire. NO OTHER SPECIALITY RULE CLAIMS IT, which was checked across
+        #     all 34 rules rather than assumed, and it belongs here because the
+        #     agreement exists precisely because resuscitation and simulation manikins
+        #     were removed from the External Defibrillation Devices framework.
+        #
+        # NOT CLAIMED, each checked against the 121 names rather than assumed:
+        #   Patient Monitoring Equipment, Infusion Pumps, Renal Replacement Therapies,
+        #     Anaesthesia Machines and Ventilators -> critical care's four, claimed
+        #     there. An emergency department uses all of them; being used in a place
+        #     is not the same as being bought by it, and the page names five.
+        #   Pulse Oximetry, Capnography and Related Monitoring Technologies -> still
+        #     claimed by nobody, and still refused here for the same reason critical
+        #     care and respiratory refused it. The gap is recorded in the coverage
+        #     note rather than papered over by the page that happens to be next.
+        "frameworks": (
+            r"\b(simulation devices|external defibrillation|electrodes, ultrasound gels|"
+            r"airway management|respiratory solutions)\b"
+        ),
+        # DERIVED, NOT GUESSED. The pattern below was run over all 1,972 rows of
+        # tender-history.json and all 1,474 of framework-awards.json — 3,446 titles —
+        # on 11/09/2026, and all 43 surviving titles were read one by one. 37 are this
+        # patch and 6 were not; those 6 are the whole of the exclude list below.
+        #
+        # WRITTEN NARROW ON PURPOSE. The loose form of almost every word on this patch
+        # is a false-positive nest, and refusing a term in the include is cleaner than
+        # admitting it and then arguing with it in the exclude:
+        #   bare "emergency" (NOT USED) -> 18 hits and 11 are buildings and vehicles:
+        #     three separate emergency LIGHTING contracts, theatre emergency battery
+        #     units, high voltage switchgear "emergency response", an emergency DCU
+        #     and asbestos decontamination job, a housing association's alarms and
+        #     entry systems, and three NON-emergency patient transport contracts that
+        #     match on the very word that says they are not this patch. The qualified
+        #     forms "emergency department", "emergency care" and "emergency medicine"
+        #     are used instead and no lighting contract can reach a member even if
+        #     this exclude list is edited later.
+        #   "emergency medical" (NOT USED) -> both its hits are non-NHS workplace
+        #     first aid: Thames Valley Police's "First Aid Emergency Medical
+        #     Consumables and Equipment" and South Western Railway's "Provision of
+        #     Emergency Medical Technician and Paramedic services".
+        #   bare "first aid" (NOT USED) -> 16 hits and every one is a council, police
+        #     force, fire service or buying consortium stocking workplace first aid
+        #     kits: South Ayrshire, ESPO, Kent, Derbyshire, Hertfordshire, Lancashire,
+        #     YPO, Scotland Excel, the Civil Nuclear Police Authority. Workplace first
+        #     aid is a different market with different buyers and is not on this page.
+        #   bare "urgent" (NOT USED) -> 12 hits and 7 are wrong: urgent suspected
+        #     CANCER pathways, an urgent skin cancer dermoscopy triage service, an
+        #     urgent non-obstetric ultrasound insourcing award, and "PIlgrim Urgent
+        #     Pipe Replacement Works". "urgent care" and "urgent treatment centre" are
+        #     used instead.
+        #   bare "triage" (NOT USED) -> 3 hits and 2 are other specialities' (skin
+        #     cancer dermoscopy, type 1 diabetes monitoring). The third, "The Supply
+        #     of Triage Cards", is Leidos Supply buying military major-incident triage
+        #     tags. Triage is the defining activity of this patch and the feed carries
+        #     no NHS triage procurement at all; that is the honest answer and the
+        #     pattern says nothing rather than reaching for the defence row.
+        #   bare "resuscitat" (NOT USED) -> 2 hits, both refused for the same reasons
+        #     critical care refused them: "Purchase of Baby Warmers with Resuscitation"
+        #     is neonatal, and "Resuscitation Council Course Manuals and Registration
+        #     Fee" is a book and a course fee, not a product on this patch. The
+        #     resuscitation EQUIPMENT rows are reached through "chest compression",
+        #     "defibrillat" and "manikin" instead.
+        #   bare "aed" (NOT USED) -> its second hit is Surrey and Borders Partnership's
+        #     "Provision Monitoring of service for the AED waitlist (10403)", a mental
+        #     health trust waitlist where AED is not a defibrillator at all. Every real
+        #     AED row spells "DEFIBRILLATORS" somewhere in the title and is reached by
+        #     "defibrillat" without the acronym ever being used.
+        #   bare "ambulance" (NOT USED) -> 10 hits and 6 are wrong: heat
+        #     decarbonisation of four ambulance STATIONS, a station building
+        #     improvement job, ambulance DRIVER TRAINING VEHICLES, two non-emergency
+        #     patient transport notices and newborn transport harnesses. "ambulance
+        #     services?" returns 4, of which 3 are this patch and the fourth is
+        #     excluded below by name.
+        #   bare "stretcher" (NOT USED) -> "Xtract Stretchers" is Hereford and
+        #     Worcester FIRE AND RESCUE SERVICE buying extrication equipment. Fire and
+        #     rescue casualty extrication is a neighbouring market with its own buyers
+        #     and it is not the NHS ambulance service. "trolley beds" and "scoops and
+        #     spineboards" reach both real rows — London Ambulance's trolley beds and
+        #     Yorkshire Ambulance's scoops and spineboards — and the fire service
+        #     cannot arrive through either.
+        #   bare "electrode" (NOT USED) -> "Provision of EEG Electrodes" is
+        #     neurology's. The named forms below reach all four real ECG and
+        #     monitoring electrode rows and EEG cannot arrive through any of them.
+        #   bare "utc" (NOT USED) -> its extra hit is "UNDERTAKE CAR PARK RESURFACING
+        #     WORK AS PER ATTACHED QUOTE OUTSIDE UTC". "urgent treatment centre" is
+        #     used and reaches all four real UTC rows.
+        #   bare "111" (NOT USED) -> it happens to be clean today, on two rows, but a
+        #     bare three-digit number in a corpus full of lot and reference numbers is
+        #     a future false positive waiting to happen. "nhs 111" is used; the second
+        #     row, BLMK's "Integrated Urgent Care (111 & Out of Hours) Service",
+        #     arrives through "urgent care" anyway.
+        #   bare "out of hours" (NOT USED) -> 3 hits and 2 are other services' — a
+        #     Bromley out-of-hours PRIMARY CARE home visiting service and a West
+        #     Yorkshire children's PALLIATIVE care out-of-hours advice line.
+        #   "accident and emergency" and "a&e" (NOT USED) -> zero hits in the whole
+        #     3,446-title corpus. The department's own name appears in no notice
+        #     title in this feed. Recorded because an empty result is a finding.
+        "include": (
+            r"\b(emergency department|emergency care|emergency medicine|"
+            r"urgent care|urgent treatment centre|"
+            r"nhs 111|"
+            r"ambulance services?|pre[- ]hospital|"
+            r"defibrillat\w*|chest compression|"
+            r"electrodes, ultrasound|patient diagnostic and monitoring electrodes|"
+            r"ecg electrodes?|ultrasound gels?|"
+            r"airway management|laryngoscop\w*|"
+            r"simulations?|manikins?|mannequins?|"
+            r"trolley beds?|scoops? and spineboards?|spineboards?)\b"
+        ),
+        # FOUR PATTERNS, SIX ROWS, AND EVERY ONE WAS READ BEFORE IT WAS EXCLUDED:
+        #   dental        -> "C002027 Dental Simulation Units supply and installation"
+        #                    (NHS Education for Scotland, dental phantom heads) and
+        #                    "Dental Urgent Care Helpline(s) across the South West".
+        #                    Dental simulation and dental urgent care are a separate
+        #                    commissioning route with a separate contract holder.
+        #   mental health -> "Mental Health Emergency Department (MH ED)" and "Mental
+        #                    Health Recovery Workers - Mental Health Urgent Care
+        #                    Department". Both are mental health staffing and service
+        #                    commissions that borrow this patch's vocabulary for a
+        #                    crisis pathway. Psychiatric liaison IS on page 2922, as a
+        #                    clinical topic; the contracts are the mental health
+        #                    trust's, not the emergency department's.
+        #   gynaecolog    -> "Mannequin Gynaecology" (Gloucestershire Hospitals
+        #                    Subsidiary Company). A gynaecological training model,
+        #                    reached by "mannequin" and nothing else about it.
+        #   decarbonisation -> "Heat Decarbonisation for 4 Ambulance Stations at East
+        #                    Midlands Ambulance Service NHS Trust". An estates and net
+        #                    zero capital scheme that reaches "ambulance service"
+        #                    through the buyer's name sitting inside the title.
+        "exclude": r"\b(dental|mental health|gynaecolog\w*|decarbonisation)\b",
+        # CPV CORROBORATES, IT NEVER ADMITS, and 85143000 is the clearest
+        # demonstration of that rule anywhere in this file. All four labels below were
+        # read on 11/09/2026 from Regulation (EC) No 213/2008, the CPV regulation
+        # itself, on EUR-Lex, rather than recalled:
+        #   33182100 Defibrillator        — 2 notices in the feed carry it, both
+        #                                   defibrillator buys.
+        #   33172200 Resuscitation devices — the defibrillator market engagement and a
+        #                                   cardio-respiratory systems maintenance
+        #                                   contract. 33172100 Anaesthesia devices is
+        #                                   deliberately NOT claimed: it is theatres'.
+        #   31711140 Electrodes            — the monitoring electrodes market
+        #                                   engagement, and "Provision of EEG
+        #                                   Electrodes", which is neurology's and
+        #                                   which the title gate refuses.
+        #   85143000 Ambulance services    — TEN notices in this feed carry it and
+        #                                   only TWO are this patch. The other eight
+        #                                   are non-emergency patient transport, a
+        #                                   stroke transport service, a paediatric
+        #                                   retrieval service's patient transport, a
+        #                                   dedicated hospital discharge vehicle and a
+        #                                   secure transport contract. A filter that
+        #                                   admitted on this code would have put all
+        #                                   eight on an emergency care page. The title
+        #                                   has to match; the code is recorded so a
+        #                                   reader can see the classification agreed.
+        "cpv": ("33182100", "33172200", "31711140", "85143000"),
+        # NO DRUG TARIFF PART, AND THIS WAS PROVEN RATHER THAN ASSUMED. Page 2922
+        # states that "nothing on this patch is dispensed on FP10 or listed in Part
+        # IX". That claim was tested against the Hub's own tariff dataset on
+        # 11/09/2026 by searching every Part IX row for defibrillator, manikin,
+        # electrode, laryngoscope, resuscitation, airway, ambulance, simulation,
+        # spineboard, scoop and ECG: zero rows matched, across IXA, IXB, IXB & IXC,
+        # IXC and IXR. Part IX reimburses appliances dispensed in the community on
+        # prescription; defibrillators, pads, airway adjuncts and training manikins
+        # are hospital and ambulance-trust capital and consumables and appear nowhere
+        # in it. The panel carries no tariff rather than reaching for the nearest part.
+        "coverageNote": (
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the five agreements "
+            "above are shared routes rather than emergency care ones, and this page "
+            "claims only part of each: Airway Management Products is claimed by "
+            "theatres and surgical and by respiratory, and NHS Supply Chain's own "
+            "description has it covering theatres, wards, intensive care and "
+            "ambulances as well as A&E; Respiratory Solutions is respiratory's "
+            "framework and is claimed here for Lot 4, Anaesthesia and Resuscitation, "
+            "alone. The supplier list is built from all five frameworks whole, because "
+            "NHS Supply Chain publishes suppliers per framework and not per lot, so a "
+            "supplier counted here may be on this page only through a lot this patch "
+            "does not buy. Being named on a framework is not evidence of volume on "
+            "this patch, and being absent from one is not evidence of absence from the "
+            "market. Three further limits are real and are named rather than left to "
+            "be discovered. NHS Supply Chain's Pulse Oximetry, Capnography and Related "
+            "Monitoring Technologies framework is claimed by no speciality page at "
+            "all, so that route onto an emergency department is missing from every "
+            "count on the Hub. The patient monitoring, infusion and ventilator "
+            "agreements an emergency department uses daily are counted on the critical "
+            "care page, because that is where they are bought. And the largest part of "
+            "this patch by money has no framework at all: NHS 111, integrated urgent "
+            "care, urgent treatment centre provision and urgent community response are "
+            "commissioned by integrated care boards contract by contract, which is why "
+            "they appear in the awards and tenders below and nowhere else. Four rows "
+            "in that award list have buyers outside an NHS acute or ambulance trust "
+            "and are kept deliberately, because the product and the supplier are the "
+            "same market: a schools defibrillator purchase by Northern Ireland's "
+            "Education Authority, which is public-access defibrillation; a university's "
+            "simulation manikin purchase; a Ministry of Defence pre-hospital blood "
+            "warming system; and the one medicines row on the panel, methoxyflurane "
+            "(Penthrox) bought by the Welsh Ambulance Service, which is a pre-hospital "
+            "analgesic with no other setting."
+        ),
+    },
     "ophthalmology": {
         "label": "Ophthalmology",
         # ONE FRAMEWORK, AND THE PATTERN IS DELIBERATELY THE BARE STEM. All 121

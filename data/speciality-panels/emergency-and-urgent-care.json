@@ -1,0 +1,1828 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "emergency-and-urgent-care",
+ "label": "Emergency and Urgent Care",
+ "defined": true,
+ "generated": "2026-09-11",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-10T11:14:59+00:00",
+  "openTenders": "10/09/2026",
+  "drugTariff": "2026-09-10"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(simulation devices|external defibrillation|electrodes, ultrasound gels|airway management|respiratory solutions)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the five agreements above are shared routes rather than emergency care ones, and this page claims only part of each: Airway Management Products is claimed by theatres and surgical and by respiratory, and NHS Supply Chain's own description has it covering theatres, wards, intensive care and ambulances as well as A&E; Respiratory Solutions is respiratory's framework and is claimed here for Lot 4, Anaesthesia and Resuscitation, alone. The supplier list is built from all five frameworks whole, because NHS Supply Chain publishes suppliers per framework and not per lot, so a supplier counted here may be on this page only through a lot this patch does not buy. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. Three further limits are real and are named rather than left to be discovered. NHS Supply Chain's Pulse Oximetry, Capnography and Related Monitoring Technologies framework is claimed by no speciality page at all, so that route onto an emergency department is missing from every count on the Hub. The patient monitoring, infusion and ventilator agreements an emergency department uses daily are counted on the critical care page, because that is where they are bought. And the largest part of this patch by money has no framework at all: NHS 111, integrated urgent care, urgent treatment centre provision and urgent community response are commissioned by integrated care boards contract by contract, which is why they appear in the awards and tenders below and nowhere else. Four rows in that award list have buyers outside an NHS acute or ambulance trust and are kept deliberately, because the product and the supplier are the same market: a schools defibrillator purchase by Northern Ireland's Education Authority, which is public-access defibrillation; a university's simulation manikin purchase; a Ministry of Defence pre-hospital blood warming system; and the one medicines row on the panel, methoxyflurane (Penthrox) bought by the Welsh Ambulance Service, which is a pre-hospital analgesic with no other setting.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the five agreements above are shared routes rather than emergency care ones, and this page claims only part of each: Airway Management Products is claimed by theatres and surgical and by respiratory, and NHS Supply Chain's own description has it covering theatres, wards, intensive care and ambulances as well as A&E; Respiratory Solutions is respiratory's framework and is claimed here for Lot 4, Anaesthesia and Resuscitation, alone. The supplier list is built from all five frameworks whole, because NHS Supply Chain publishes suppliers per framework and not per lot, so a supplier counted here may be on this page only through a lot this patch does not buy. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. Three further limits are real and are named rather than left to be discovered. NHS Supply Chain's Pulse Oximetry, Capnography and Related Monitoring Technologies framework is claimed by no speciality page at all, so that route onto an emergency department is missing from every count on the Hub. The patient monitoring, infusion and ventilator agreements an emergency department uses daily are counted on the critical care page, because that is where they are bought. And the largest part of this patch by money has no framework at all: NHS 111, integrated urgent care, urgent treatment centre provision and urgent community response are commissioned by integrated care boards contract by contract, which is why they appear in the awards and tenders below and nowhere else. Four rows in that award list have buyers outside an NHS acute or ambulance trust and are kept deliberately, because the product and the supplier are the same market: a schools defibrillator purchase by Northern Ireland's Education Authority, which is public-access defibrillation; a university's simulation manikin purchase; a Ministry of Defence pre-hospital blood warming system; and the one medicines row on the panel, methoxyflurane (Penthrox) bought by the Welsh Ambulance Service, which is a pre-hospital analgesic with no other setting.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(emergency department|emergency care|emergency medicine|urgent care|urgent treatment centre|nhs 111|ambulance services?|pre[- ]hospital|defibrillat\\w*|chest compression|electrodes, ultrasound|patient diagnostic and monitoring electrodes|ecg electrodes?|ultrasound gels?|airway management|laryngoscop\\w*|simulations?|manikins?|mannequins?|trolley beds?|scoops? and spineboards?|spineboards?)\\b/i and does not match /\\b(dental|mental health|gynaecolog\\w*|decarbonisation)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33182100 or 33172200 or 31711140 or 85143000 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 5,
+  "suppliers": 113,
+  "suppliersUnresolved": 2,
+  "awardsShown": 37,
+  "awardsMatched": 37,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Airway Management Products and Associated Equipment",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/airways-management/",
+   "reference": "2023/S 000-005729",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "22 July 2024",
+   "ends": "21 July 2028",
+   "supplierCount": 54,
+   "supplierSource": "count verified against the page's own stated total (54)",
+   "suppliers": [
+    "Albert Waeschle Ltd",
+    "Ambu UK Ltd",
+    "Aquilant Critical Care",
+    "Armstrong Medical Ltd",
+    "Athrodax Healthcare International Ltd",
+    "Atos Medical (UK)",
+    "Avanos Medical UK Limited",
+    "Avicenna Surgical Limited",
+    "Boston Scientific Ltd",
+    "Cardiac Services UK Ltd",
+    "Ccmed Ltd",
+    "Chemical Intelligence Limited",
+    "Cook (UK) Ltd",
+    "Creo Medical UK Ltd",
+    "Draeger Medical",
+    "Ebrington (Ni) Ltd",
+    "Eden Medical (UK) Limited",
+    "Fannin UK Ltd",
+    "Fisher & Paykel Healthcare Ltd",
+    "Flexicare Medical Ltd",
+    "Freelance Surgical Limited",
+    "Genx Medicare Ltd",
+    "Gvs Filter Technology UK Ltd",
+    "Hamilton Sales And Service UK Ltd",
+    "Healthcare 21 UK Ltd",
+    "Henleys Medical Supplies Limited",
+    "Insight Medical Products Limited",
+    "Intersurgical Ltd",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Marshall Products",
+    "Medasil Surgical Ltd",
+    "Medecon Healthcare UK Limited",
+    "Meditech Systems Ltd (Dorset)",
+    "Medline Industries Ltd",
+    "Medscience Distribution Ltd",
+    "Oscartech UK Ltd",
+    "P3 Medical Limited",
+    "Pall Europe Limited",
+    "Penlon Limited",
+    "Pentland Medical Ltd",
+    "Proact Medical Ltd",
+    "Prosys International Ltd",
+    "Richardson Healthcare Ltd",
+    "Rudolf Riester Gmbh",
+    "Sai Quality Fruits And Veg Limited",
+    "Sheffmed Ltd",
+    "Smiths Medical",
+    "Teleflex Medical (Rusch & Pilling Weck)",
+    "Timesco Healthcare Ltd",
+    "Verathon Medical",
+    "Vyaire Medical Products Ltd",
+    "Vygon UK Ltd",
+    "William Davies Care Limited",
+    "Zoll Medical UK Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/electrodes-ultrasound-gels-defibrillation-consumables/",
+   "reference": "2023/S 000-030987",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 February 2024",
+   "ends": "31 January 2028",
+   "supplierCount": 37,
+   "supplierSource": "no stated count on the page; 37 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Ambu Limited",
+    "British Heart Foundation",
+    "Cardiac Services",
+    "Cardinal Health UK 432 Limited",
+    "ConMed UK Limited",
+    "Ebrington (NI) Limited",
+    "Electro Spyres Healthcare Limited",
+    "Fannin UK Limited",
+    "GE Medical Systems Limited",
+    "GenX MediCare",
+    "GS Medical Healthcare",
+    "Henleys Medical Supplies Limited",
+    "Henry Schein UK Holdings Limited",
+    "Kci Medical Limited",
+    "Lyreco UK Limited",
+    "Medevolve Limited",
+    "Meditrade UK Limited",
+    "MedScience Distribution Limited",
+    "Mindray UK Limited",
+    "Neoventa Medical Limited",
+    "NISSHA Medical Technologies Limited",
+    "Optimum Medical Solutions Limited",
+    "Ortus Technology Limited",
+    "OscarTech UK Limited*",
+    "Philips Electronics UK Limited",
+    "Reflex Medical Limited",
+    "Reliance Medical Limited*",
+    "Rocket Medical Plc",
+    "Salter Labs UK T/A Airlife",
+    "Schiller UK Limited",
+    "Sharon Services (UK) Limited",
+    "SP Services Limited",
+    "Stryker UK Limited*",
+    "Surgical Holdings",
+    "Techmed Charts UK Limited",
+    "Walters Medical Limited",
+    "Zoll Medical UK Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "External Defibrillation Devices and Related Services and Accessories",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/external-defibrillation-devices-related-equipment-and-associated-accessories/",
+   "reference": "2022/S 000-035844",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "31 July 2023",
+   "ends": "30 July 2027",
+   "supplierCount": 21,
+   "supplierSource": "no stated count on the page; 21 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Aero Healthcare Ltd",
+    "Baywater",
+    "BHA Medical",
+    "British Heart Foundation",
+    "Cardiac Services",
+    "CorMed-DX",
+    "Crest Medical",
+    "Imperartive Training",
+    "Martek Lifecare",
+    "Mindray UK Ltd",
+    "Nihon Koden",
+    "Ortivus",
+    "Ortus",
+    "Oscar Tech UK Ltd",
+    "Philips",
+    "Reliance Medical",
+    "Schiller UK",
+    "Stryker",
+    "Tamaki Group",
+    "Wel Medical",
+    "Zoll"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Respiratory Solutions",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/respiratory-solutions/",
+   "reference": null,
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 August 2022",
+   "ends": "15 June 2027",
+   "supplierCount": 37,
+   "supplierSource": "no stated count on the page; 37 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Air Liquide Healthcare Limited",
+    "Ambu UK Ltd",
+    "Aquilant Ltd Bd Bas Critical",
+    "Armstrong Medical Ltd",
+    "B.N.O.S Meditech Ltd",
+    "Draeger Medical",
+    "Eden Medical",
+    "Fannin Uk Ltd",
+    "Fisher & Paykel Healthcare Ltd",
+    "Flexicare Medical Ltd",
+    "Gce Group Ltd",
+    "Ge Medical Systems Ltd",
+    "Genx Medicare Ltd",
+    "Hamilton Medical Uk Ltd",
+    "Healthcare 21 Uk Ltd",
+    "Henleys Medical Supplies Limited",
+    "Inspiration Healthcare Limited",
+    "Intermedical (Uk) Ltd",
+    "Intersurgical Ltd",
+    "Kinetik Medical Devices Ltd",
+    "Marshall Products",
+    "Mediq Healthcare Uk Limited Ex Bunzl Hea",
+    "Meditech Systems Ltd (Dorset)",
+    "Medline Industries Ltd",
+    "Numed Healthcare",
+    "Pari Medical Ltd",
+    "Pennine Healthcare All Routes",
+    "Proact Medical Ltd",
+    "Prosys International Ltd",
+    "Philips Respironics",
+    "Salter Labs Uk T/A Airlife",
+    "Schiller Uk Ltd",
+    "Icu Medical International Limited",
+    "Syringa Wholesale Distributor",
+    "Teleflex Medical (Rusch & Pilling Weck)",
+    "Timesco Healthcare Ltd",
+    "Vitalograph Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Simulation Devices and Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/simulation-devices-and-services/",
+   "reference": "2022/S 000-031912",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "9 May 2023",
+   "ends": "8 May 2027",
+   "supplierCount": 7,
+   "supplierSource": "count verified against the page's own stated total (7)",
+   "suppliers": [
+    "Gener8 Spaces Ltd",
+    "Laerdal Medical Ltd",
+    "Sim & Skills Ltd",
+    "Simulaids Ltd",
+    "Simulation Man",
+    "Wel Medical Ltd",
+    "Zoll Medical UK Ltd"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Zoll Medical UK Limited",
+   "resolved": true,
+   "variants": [
+    "Zoll",
+    "Zoll Medical UK Limited",
+    "Zoll Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "External Defibrillation Devices and Related Services and Accessories",
+    "Simulation Devices and Services"
+   ]
+  },
+  {
+   "name": "Ambu UK",
+   "resolved": true,
+   "variants": [
+    "Ambu Limited",
+    "Ambu UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Limited",
+    "Fannin UK Ltd",
+    "Fannin Uk Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "GenX MediCare",
+    "Genx Medicare Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Henleys Medical Supplies Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "OscarTech UK",
+   "resolved": true,
+   "variants": [
+    "Oscar Tech UK Ltd",
+    "OscarTech UK Limited*",
+    "Oscartech UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Schiller UK Limited",
+   "resolved": true,
+   "variants": [
+    "Schiller UK",
+    "Schiller UK Limited",
+    "Schiller Uk Ltd"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "External Defibrillation Devices and Related Services and Accessories",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
+   "resolved": true,
+   "variants": [
+    "Cardiac Services",
+    "Cardiac Services UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Aquilant Critical Care",
+   "resolved": true,
+   "variants": [
+    "Aquilant Critical Care",
+    "Aquilant Ltd Bd Bas Critical"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Armstrong Medical (Eakin Respiratory)",
+   "resolved": true,
+   "variants": [
+    "Armstrong Medical Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "British Heart Foundation",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Draeger Medical UK",
+   "resolved": true,
+   "variants": [
+    "Draeger Medical"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Ebrington (NI) Limited",
+   "resolved": true,
+   "variants": [
+    "Ebrington (NI) Limited",
+    "Ebrington (Ni) Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Eden Medical (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Eden Medical",
+    "Eden Medical (UK) Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Fisher & Paykel Healthcare",
+   "resolved": true,
+   "variants": [
+    "Fisher & Paykel Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Flexicare Medical",
+   "resolved": true,
+   "variants": [
+    "Flexicare Medical Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "GE HealthCare",
+   "resolved": true,
+   "variants": [
+    "GE Medical Systems Limited",
+    "Ge Medical Systems Ltd"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "HC21 (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Healthcare 21 UK Ltd",
+    "Healthcare 21 Uk Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "ICU Medical (incl. Smiths Medical)",
+   "resolved": true,
+   "variants": [
+    "Icu Medical International Limited",
+    "Smiths Medical"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Intersurgical",
+   "resolved": true,
+   "variants": [
+    "Intersurgical Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Marshall Products",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Meditech Systems Ltd (Dorset)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "MedScience Distribution",
+   "resolved": true,
+   "variants": [
+    "MedScience Distribution Limited",
+    "Medscience Distribution Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Mindray UK",
+   "resolved": true,
+   "variants": [
+    "Mindray UK Limited",
+    "Mindray UK Ltd"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Philips",
+   "resolved": true,
+   "variants": [
+    "Philips",
+    "Philips Electronics UK Limited"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Proact Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "ProSys International Ltd",
+   "resolved": true,
+   "variants": [
+    "Prosys International Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical",
+    "Reliance Medical Limited*"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Salter Labs UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Salter Labs UK T/A Airlife",
+    "Salter Labs Uk T/A Airlife"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Stryker",
+   "resolved": true,
+   "variants": [
+    "Stryker",
+    "Stryker UK Limited*"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "Teleflex Medical (Rusch & Pilling Weck)"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Timesco Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment",
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Wel Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "Wel Medical",
+    "Wel Medical Ltd"
+   ],
+   "frameworks": [
+    "External Defibrillation Devices and Related Services and Accessories",
+    "Simulation Devices and Services"
+   ]
+  },
+  {
+   "name": "Aero Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Air Liquide Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "Air Liquide Healthcare Limited"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Albert Waeschle Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Athrodax Healthcare International Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Atos Medical (UK)",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Avanos Medical UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Avicenna Surgical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "B.N.O.S Meditech Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Baywater Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Baywater"
+   ],
+   "frameworks": [
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "BHA Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Boston Scientific",
+   "resolved": true,
+   "variants": [
+    "Boston Scientific Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Cardinal Health U.K. 432 Ltd",
+   "resolved": true,
+   "variants": [
+    "Cardinal Health UK 432 Limited"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Ccmed Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Chemical Intelligence Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Conmed UK Ltd",
+   "resolved": true,
+   "variants": [
+    "ConMed UK Limited"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Cook Medical",
+   "resolved": true,
+   "variants": [
+    "Cook (UK) Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "CorMed-DX",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Creo Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Creo Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "Crest Medical"
+   ],
+   "frameworks": [
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Electro Spyres Healthcare Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Freelance Surgical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Gce Group Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Gener8 Spaces Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Simulation Devices and Services"
+   ]
+  },
+  {
+   "name": "GS Medical Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "GS Medical Healthcare"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Gvs Filter Technology UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Hamilton Medical UK",
+   "resolved": true,
+   "variants": [
+    "Hamilton Medical Uk Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Hamilton Sales And Service UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Henry Schein UK Holdings",
+   "resolved": true,
+   "variants": [
+    "Henry Schein UK Holdings Limited"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Imperartive Training",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Insight Medical Products Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Inspiration Healthcare",
+   "resolved": true,
+   "variants": [
+    "Inspiration Healthcare Limited"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Intermedical (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Intermedical (Uk) Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz Endoscopy (UK) Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Kinetik Medical Devices",
+   "resolved": true,
+   "variants": [
+    "Kinetik Medical Devices Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Laerdal Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Simulation Devices and Services"
+   ]
+  },
+  {
+   "name": "Lyreco UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Martek Lifecare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Medasil Surgical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Medecon Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "Medecon Healthcare UK Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Medevolve Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Mediq Healthcare Uk Limited Ex Bunzl Hea"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Meditrade UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Meditrade UK Limited"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Neoventa Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Nihon Koden",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "NISSHA Medical Technologies",
+   "resolved": true,
+   "variants": [
+    "NISSHA Medical Technologies Limited"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Numed Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Optimum Medical",
+   "resolved": true,
+   "variants": [
+    "Optimum Medical Solutions Limited"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Ortivus",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Ortus",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Ortus Technology Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "P3 Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "P3 Medical Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Pall Europe Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Pari Medical",
+   "resolved": true,
+   "variants": [
+    "Pari Medical Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Penlon",
+   "resolved": true,
+   "variants": [
+    "Penlon Limited"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Pennine Healthcare (Ivor Shaw Ltd)",
+   "resolved": true,
+   "variants": [
+    "Pennine Healthcare All Routes"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Pentland Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Philips Respironics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Reflex Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Richardson Healthcare",
+   "resolved": true,
+   "variants": [
+    "Richardson Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Rocket Medical",
+   "resolved": true,
+   "variants": [
+    "Rocket Medical Plc"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Rudolf Riester GmbH",
+   "resolved": true,
+   "variants": [
+    "Rudolf Riester Gmbh"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Sai Quality Fruits And Veg Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Sharon Services (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Sharon Services (UK) Limited"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Sheffmed Limited",
+   "resolved": true,
+   "variants": [
+    "Sheffmed Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Sim & Skills Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Simulation Devices and Services"
+   ]
+  },
+  {
+   "name": "Simulaids Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Simulation Devices and Services"
+   ]
+  },
+  {
+   "name": "Simulation Man",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Simulation Devices and Services"
+   ]
+  },
+  {
+   "name": "Solventum (3M Health Care)",
+   "resolved": true,
+   "variants": [
+    "Kci Medical Limited"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "SP Services (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "SP Services Limited"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Surgical Instruments (dental)",
+   "resolved": true,
+   "variants": [
+    "Surgical Holdings"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Syringa Wholesale Distributor",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Tamaki Group",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "External Defibrillation Devices and Related Services and Accessories"
+   ]
+  },
+  {
+   "name": "Techmed Charts UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "Verathon Medical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Vitalograph",
+   "resolved": true,
+   "variants": [
+    "Vitalograph Ltd"
+   ],
+   "frameworks": [
+    "Respiratory Solutions"
+   ]
+  },
+  {
+   "name": "Vyaire Medical Products Limited",
+   "resolved": true,
+   "variants": [
+    "Vyaire Medical Products Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon UK Ltd"
+   ],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  },
+  {
+   "name": "Walters Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "Walters Medical Limited"
+   ],
+   "frameworks": [
+    "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables"
+   ]
+  },
+  {
+   "name": "William Davies Care Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Airway Management Products and Associated Equipment"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Urgent Treatment Centre Services for YSTH",
+   "buyer": "York and Scarborough Teaching Hospital NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083225-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85120000",
+    "85121200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "SWAST-5143-F Clinical Training Manikins and Simulation Equipment Maintenance",
+   "buyer": "South Western Ambulance Service NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081814-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50421000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Preliminary Market Engagement For Defibrillators and Associated Equipment",
+   "buyer": "Business Services Organisation Procurement and Logistics Service",
+   "supplier": null,
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081670-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "33100000",
+    "33172200",
+    "33182100"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Urgent Treatment Centre & Integrated Urgent Care Clinical Assessment Service",
+   "buyer": "NHS Bedfordshire, Luton and Milton Keynes Integrated Care Board",
+   "supplier": null,
+   "date": "2026-08-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081137-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Preliminary Market Engagement Questionnaire - Patient Diagnostic and Monitoring Electrodes",
+   "buyer": "Business Services Organisation Procurement and Logistics",
+   "supplier": null,
+   "date": "2026-08-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079939-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "31711140",
+    "33000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Airway Management Products and Associated Equipment",
+   "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+   "supplier": null,
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079242-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33157000",
+    "33157400",
+    "33162100",
+    "33171100",
+    "33171210",
+    "33172100",
+    "33190000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "LAS Ambulance Services Resilience Partnership",
+   "buyer": "London Ambulance Service NHS Trust",
+   "supplier": null,
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078929-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85143000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "BLMK ICB Integrated Urgent Care (111 & Out of Hours) Service",
+   "buyer": "NHS Bedfordshire, Luton and Milton Keynes Integrated Care Board",
+   "supplier": null,
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078441-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NHS 111 Service - Milton Keynes",
+   "buyer": "NHS Bedfordshire, Luton and Milton Keynes Integrated Care Board",
+   "supplier": null,
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078428-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Emergency And Urgent Care Private Ambulance Services",
+   "buyer": "SOUTH CENTRAL AMBULANCE SERVICE NHS FOUNDATION TRUST",
+   "supplier": null,
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078358-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85143000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "HHFT Urgent Treatment Centre Clinical Service Provision (3 + 2 years)",
+   "buyer": "Hampshire Hospitals NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078214-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "UHS Urgent Treatment Centre Clinical Service Provision",
+   "buyer": "University Hospital Southampton NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076965-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "LUCAS 3 Chest Compression System",
+   "buyer": "NHS Gloucestershire Shared Services",
+   "supplier": "Stryker UK Limited",
+   "date": "2026-08-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/099ab6ff-88c8-4b09-8c25-18d081c8accd",
+   "value": 11586,
+   "periodEnd": "2027-08-09",
+   "source": "tender-history"
+  },
+  {
+   "title": "Mechanical Autopulse - Chest Compression Device Upgrade",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "Zoll Medical UK Limited",
+   "date": "2026-08-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/ba25698e-34fd-4544-94be-e59d5b0dff66",
+   "value": 16377,
+   "periodEnd": "2027-03-01",
+   "source": "tender-history"
+  },
+  {
+   "title": "Medical Simulations Devices and Technologies",
+   "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+   "supplier": null,
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076079-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "34152000",
+    "35112100",
+    "39162200",
+    "45214800",
+    "48931000",
+    "80000000",
+    "80320000",
+    "80560000",
+    "80561000",
+    "80562000",
+    "85140000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Mechanical Chest Compression Device Upgrade",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "Zoll Medical UK Limited",
+   "date": "2026-08-05",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/ab07af5a-341c-4395-bf2b-0d5a9ed5995c",
+   "value": 16377,
+   "periodEnd": "2027-03-01",
+   "source": "tender-history"
+  },
+  {
+   "title": "ED C-MAC Video Laryngoscope",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
+   "date": "2026-08-05",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/c41ef013-8c79-4f36-a6b2-48c8e2184cd1",
+   "value": 12030,
+   "periodEnd": "2027-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "YAS 101 (DA FW) Scoops and Spineboards",
+   "buyer": "YORKSHIRE AMBULANCE SERVICE NHS TRUST",
+   "supplier": "Ferno (UK) Limited",
+   "date": "2026-07-22",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/d80f6aca-0b7d-4097-aad4-541de16265fc",
+   "value": 36119,
+   "periodEnd": "2027-07-21",
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT3130 Purchase & Maintenance Contract for Resus Simulation Equipment",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Laerdal Medical Limited",
+   "date": "2026-03-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/026604-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT3113 Purchase of Video Laryngoscopes",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "Verathon Medical (UK) Ltd",
+   "date": "2026-03-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/025848-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "ESNEFT Purchase of Video Laryngoscopes",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": "OLYMPUS KEYMED GROUP LIMITED",
+   "date": "2026-02-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/017966-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "BSP-25-003 SUPPLY OF AUTOMATED EXTERNAL DEFIBRILLATORS (AED) AND ANCILLARIES",
+   "buyer": "the Education Authority",
+   "supplier": "MKB MEDICAL SERVICES LIMITED",
+   "date": "2025-09-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/058010-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "External Defibrillation Devices and Related Services and Accessories",
+   "buyer": "NHS Supply Chain",
+   "supplier": "Aero Healthcare, Baywater Healthcare UK Ltd, BHA Medical Limited, British Heart ",
+   "date": "2025-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/050296-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Defibrillators",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Cardiac Services, Health-Care Equipment & Supplies Co Ltd, Mindray (UK) Limited,",
+   "date": "2025-02-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004883-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "SBRI Competition - Welsh Ambulance: Changing the Way We Deliver Emergency Care",
+   "buyer": "SBRI",
+   "supplier": "",
+   "date": "2024-12-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/039806-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Ultrasound Gel (4804767)",
+   "buyer": "BSO Procurement and Logistics Service",
+   "supplier": "RELIANCE MEDICAL LTD",
+   "date": "2024-07-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023961-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Electrodes, Ultrasound Gel, Defibrillation and Related Consumables",
+   "buyer": "NHS Supply Chain Operated by Supply Chain Coordination Ltd (SCCL)",
+   "supplier": "Ebrington (NI) Ltd, Electro Spyres Healthcare Ltd, Fannin (UK) Limited, Genx Med",
+   "date": "2023-10-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/030987-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Laryngoscope Blades and Associated Consumables",
+   "buyer": "NHS Wales Shared Service Partnership",
+   "supplier": "",
+   "date": "2023-10-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/029194-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Patient Diagnostic and Monitoring Electrodes - Adult Long Term [4719982]",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "AMBU LIMITED, Fannin Limited, INNOVATE HEALTH GROUP LTD, KEANEY MEDICAL LTD, MED",
+   "date": "2023-06-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016232-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Simulation Manikins",
+   "buyer": "Coventry University",
+   "supplier": "MSE Medical",
+   "date": "2023-05-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/014656-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Patient Diagnostic and Monitoring Electrodes [4333037]",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "",
+   "date": "2023-04-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011507-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Airway Management",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "Teleflex Group Ltd",
+   "date": "2023-04-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011227-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Contract Award Notice for Defibrillators and AEDs",
+   "buyer": "Kettering General Hospital NHS Foundation Trust",
+   "supplier": "Mindray UK",
+   "date": "2023-04-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/010175-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Methoxyflurane (Penthrox) to Welsh Ambulance Service Trust",
+   "buyer": "Velindre NHS Trust, NHS Shared Services Partnership — Procurement Services (on b",
+   "supplier": "Galen Ltd",
+   "date": "2023-02-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/003994-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Purchase of Trolley Beds (Stretchers)",
+   "buyer": "London Ambulance Service NHS Trust",
+   "supplier": "Stryker UK LTD",
+   "date": "2023-01-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/000850-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Laryngoscope Handles and Blades",
+   "buyer": "BSO Procurement and Logistics Service",
+   "supplier": "ARMSTRONG MEDICAL LTD, SISK HEALTHCARE UK LTD t/a Cardiac Services, BUNZL RETAIL",
+   "date": "2022-11-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/033822-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "The Supply and Support of a Pre-Hospital Blood Warming System",
+   "buyer": "Leidos Supply",
+   "supplier": "Fenton Pharmaceutical Ltd.",
+   "date": "2021-06-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/012232-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}

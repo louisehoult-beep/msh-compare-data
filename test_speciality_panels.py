@@ -5666,6 +5666,243 @@ check("the cap is what limits the panel, not the filter",
       pharm["counts"]["awardsShown"] == B.AWARD_CAP)
 
 
+# ---------------------------------------------------------------------------
+# EMERGENCY AND URGENT CARE (page 2922). Added 11/09/2026.
+# 999, NHS 111, the urgent treatment centre and the emergency department front
+# door. The patch's vocabulary is the most heavily borrowed on the Hub: every
+# building has emergency lighting, every council buys first aid kits, every
+# ambulance service also runs non-emergency patient transport, and "urgent" is
+# how the NHS labels a cancer pathway. Almost all the work here is in what the
+# include list refuses.
+# ---------------------------------------------------------------------------
+EUC = "emergency-and-urgent-care"
+euc = load_panel(EUC)
+check("emergency and urgent care panel exists", euc is not None)
+if euc:
+    _euc_rule = B.SPECIALITY_RULES[EUC]
+    _euc_rx = B.compile_rule(_euc_rule)
+
+    print("  the six real rows the include list let through that are NOT this patch")
+    # Each of these matched the include pattern in this data and was read and found
+    # wrong. They are the entire reason the exclusion list exists.
+    for bad, why in [
+            ("C002027 Dental Simulation Units supply and installation",
+             "dental phantom heads, NHS Education for Scotland"),
+            ("Dental Urgent Care Helpline(s) across the South West",
+             "dental urgent care, separate commissioning route"),
+            ("Mental Health Emergency Department (MH ED)",
+             "mental health service commission"),
+            ("Mental Health Recovery Workers - Mental Health Urgent Care Department",
+             "mental health staffing"),
+            ("Mannequin Gynaecology", "gynaecological training model"),
+            ("Heat Decarbonisation for 4 Ambulance Stations at East Midlands "
+             "Ambulance Service NHS Trust", "estates and net zero capital scheme"),
+    ]:
+        check("excluded (%s): %s" % (why[:36], bad[:42]), not B.match_title(_euc_rx, bad))
+
+    print("  and the loose terms refused from the include rather than argued with after")
+    # Every one of these is a real row in this data. None is this patch, and none of
+    # them may ever be admitted by widening a term back out. If a future edit makes
+    # any of these match, the rule has stopped being this speciality's.
+    for bad, why in [
+            ("- replacement of emergency lighting systems  Orchard MSU",
+             "emergency LIGHTING, West London NHS Trust"),
+            ("RMH Emergency Lighting System Maintenance)", "emergency lighting"),
+            ("OHA Alarms, Entry Systems, Security, Emergency Lighting",
+             "housing association estates"),
+            ("PPM annual service for Theatre operating lights and emergency battery units",
+             "theatre estates"),
+            ("High Voltage Switchgear Warranty Support, Maintenance & Emergency "
+             "Response Services", "electrical infrastructure"),
+            ("WHHT - Emergency DCU Supply and Plant Room Asbestos Decontamination Services",
+             "asbestos works"),
+            ("Non Emergency Patient Transfer 26/27", "NON-emergency PTS"),
+            ("Non-Emergency Patient Transport Service", "NON-emergency PTS"),
+            ("Preliminary Market Engagement for Non-Emergency Ambulance Patient "
+             "Transport Service", "NON-emergency PTS"),
+            ("Midlands Critical Care Transfer Service Ambulance Provider",
+             "critical care inter-hospital transfer"),
+            ("Newborn Transport Harnesses for London Ambulance", "neonatal transport"),
+            ("Short-Term Rental/Lease of Ambulance Driver Training Vehicles",
+             "fleet and driver training"),
+            ("SWAST-5141-FM Liskeard Ambulance Station Building Improvement and "
+             "Minor Works", "estates"),
+            ("First Aid Emergency Medical Consumables and Equipment",
+             "Thames Valley Police workplace first aid"),
+            ("Provision of Emergency Medical Technician and Paramedic services",
+             "South Western Railway staffing"),
+            ("67_22 - First Aid Consumables and Furniture", "ESPO workplace first aid"),
+            ("HCC2012605 - Framework Agreement for Supply of First Aid Kits and "
+             "Consumables", "Hertfordshire County Council"),
+            ("Medical and First Aid Items for NIFRS", "fire and rescue service"),
+            ("Non Specific Symptom Urgent Suspected Cancer pathway", "cancer pathway"),
+            ("NHS Essex Integrated Care Board (ICB) Urgent Skin Cancer Dermoscopy "
+             "Triage service", "dermatology, and the reason triage is refused"),
+            ("Pilot for type 1 diabetes monitoring & triage (Cloudcare)", "diabetes"),
+            ("The Supply of Triage Cards", "Leidos, military major-incident tags"),
+            ("PIlgrim Urgent Pipe Replacement Works", "estates"),
+            ("PSR Urgent Award for Insourced Non-Obstetric Ultrasound Services YSTH",
+             "radiology insourcing"),
+            ("UNDERTAKE CAR PARK RESURFACING WORK AS PER ATTACHED QUOTE OUTSIDE UTC",
+             "car park, and the reason bare UTC is refused"),
+            ("Purchase of Baby Warmers with Resuscitation", "neonatal"),
+            ("Resuscitation Council Course Manuals and Registration Fee - ALS, ILS "
+             "and PILS courses", "books and course fees"),
+            ("Provision Monitoring of service for the AED waitlist (10403)",
+             "mental health waitlist, AED is not a defibrillator"),
+            ("Provision of EEG Electrodes", "neurology"),
+            ("Xtract Stretchers", "Hereford and Worcester Fire and Rescue"),
+            ("Bromley Out of Hours Primary Care Home Visiting (OOHPCHV) Service",
+             "primary care"),
+            ("West Yorkshire CYP Palliative and End of Life Care Out of Hours Service "
+             "- 24/7 Advice and Call-Out Support", "palliative care"),
+    ]:
+        check("never admitted (%s): %s" % (why[:34], bad[:40]),
+              not B.match_title(_euc_rx, bad))
+
+    print("  the true positives that must survive any future edit")
+    for good in ["Urgent Treatment Centre Services for YSTH",
+                 "NHS 111 Service - Milton Keynes",
+                 "Emergency And Urgent Care Private Ambulance Services",
+                 "Contract Award Notice for Defibrillators and AEDs",
+                 "LUCAS 3 Chest Compression System",
+                 "Mechanical Autopulse - Chest Compression Device Upgrade",
+                 "ED C-MAC Video Laryngoscope",
+                 "Patient Diagnostic and Monitoring Electrodes [4333037]",
+                 "ESNEFT3130 Purchase & Maintenance Contract for Resus Simulation Equipment",
+                 "SWAST-5143-F Clinical Training Manikins and Simulation Equipment Maintenance",
+                 "YAS 101 (DA FW) Scoops and Spineboards",
+                 "Purchase of Trolley Beds (Stretchers)",
+                 "The Supply and Support of a Pre-Hospital Blood Warming System",
+                 "Airway Management Products and Associated Equipment"]:
+        check("admitted: %s" % good[:52], B.match_title(_euc_rx, good))
+
+    check("every award was admitted by its title",
+          all(B.match_title(_euc_rx, a["title"]) for a in euc["awards"]))
+    _euc_titles = " || ".join((a.get("title") or "") for a in euc["awards"]).lower()
+    for banned, why in [("lighting", "emergency lighting is estates"),
+                        ("first aid", "workplace first aid is a different market"),
+                        ("non-emergency", "non-emergency PTS is not this patch"),
+                        ("non emergency", "non-emergency PTS is not this patch"),
+                        ("dental", "dental is its own route"),
+                        ("mental health", "mental health crisis is its own route"),
+                        ("cancer", "urgent cancer pathways are not urgent care")]:
+        check("no %s row reached the panel (%s)" % (banned, why[:34]),
+              banned not in _euc_titles)
+
+    print("  five frameworks, the five the page's own scope and calendar name")
+    check("exactly five frameworks", len(euc["frameworks"]) == 5,
+          "got %d" % len(euc["frameworks"]))
+    _euc_fw = sorted(f["name"] for f in euc["frameworks"])
+    for want in ["Airway Management Products and Associated Equipment",
+                 "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
+                 "External Defibrillation Devices and Related Services and Accessories",
+                 "Respiratory Solutions",
+                 "Simulation Devices and Services"]:
+        check("framework carried: %s" % want[:50], want in _euc_fw)
+    # The page's calendar prints these five gold expiry dates and its "five
+    # frameworks, side by side" table prints the references. If frameworks.json ever
+    # disagrees with the page, one of the two is wrong and it has to be looked at,
+    # not smoothed over.
+    _euc_ends = {f["name"][:24]: (f.get("ends"), f.get("reference"))
+                 for f in euc["frameworks"]}
+    for key, when, ref in [
+            ("Simulation Devices and S", "8 May 2027", "2022/S 000-031912"),
+            ("Respiratory Solutions", "15 June 2027", None),
+            ("External Defibrillation ", "30 July 2027", "2022/S 000-035844"),
+            ("Electrodes, Ultrasound G", "31 January 2028", "2023/S 000-030987"),
+            ("Airway Management Produc", "21 July 2028", "2023/S 000-005729")]:
+        got = _euc_ends.get(key)
+        check("expiry still matches the page's calendar: %s" % key,
+              got is not None and got[0] == when, "got %s" % (got,))
+        if ref:
+            check("reference still matches the page: %s" % key,
+                  got is not None and got[1] == ref, "got %s" % (got,))
+    # The oximetry and capnography framework is claimed by no page at all, and this
+    # one does not quietly adopt it just because it is next door.
+    check("the pulse oximetry framework is not silently counted",
+          not any("Pulse Oximetry" in f["name"] for f in euc["frameworks"]))
+    check("and the coverage note says so in the published file",
+          "Pulse Oximetry" in (euc["rules"]["frameworks"] or ""))
+    # Critical care's four are counted on critical care's page, not borrowed here.
+    for other in ["Patient Monitoring Equipment", "Infusion Pumps",
+                  "Renal Replacement Therapies", "Anaesthesia Machines"]:
+        check("critical care's framework is not borrowed: %s" % other[:40],
+              not any(f["name"].startswith(other) for f in euc["frameworks"]))
+
+    print("  the seven simulation suppliers the page names, exactly")
+    # Page 2922 lists all seven by name. This is the one framework on the patch
+    # small enough to state whole, so it is the cheapest possible check that the
+    # supplier join has not drifted.
+    _sim = [f for f in euc["frameworks"] if f["name"].startswith("Simulation")]
+    check("the simulation framework carries its suppliers", len(_sim) == 1)
+    if _sim:
+        _sim_sup = sorted(_sim[0]["suppliers"])
+        check("seven simulation suppliers", len(_sim_sup) == 7, "got %d" % len(_sim_sup))
+        for want in ["Gener8 Spaces Ltd", "Laerdal Medical Ltd", "Sim & Skills Ltd",
+                     "Simulaids Ltd", "Simulation Man", "Wel Medical Ltd",
+                     "Zoll Medical UK Ltd"]:
+            check("simulation supplier named on the page: %s" % want, want in _sim_sup)
+
+    print("  one name per company — the Salter Labs case this page surfaced")
+    # This is the first page to carry Airway Management and Respiratory Solutions
+    # together, and NHS Supply Chain spells the same firm two ways across them:
+    # "Salter Labs UK T/A Airlife" and "Salter Labs Uk T/A Airlife". Unresolved
+    # names are keyed raw, so before the alias was recorded that was one supplier
+    # appearing as two rows and a count inflated by one. AirLife's own UK carbon
+    # reduction plan states "AirLife is a trading name of Salter Labs UK Limited,
+    # Registered in England and Wales No. 08927162", and Companies House 08927162
+    # is SALTER LABS UK LIMITED, active. Read 11/09/2026.
+    _euc_names = [s["name"] for s in euc["suppliers"]]
+    check("no duplicate supplier rows at all",
+          len(_euc_names) == len(set(_euc_names)))
+    check("Salter Labs appears exactly once",
+          sum(1 for n in _euc_names if "salter" in n.lower()) == 1)
+    check("and it appears under its resolved name, not a trading name",
+          "Salter Labs UK Ltd" in _euc_names)
+    check("no supplier row is a bare trading name",
+          not any("t/a airlife" in n.lower() for n in _euc_names))
+
+    print("  no Drug Tariff part, and that is proven rather than assumed")
+    # Page 2922 states that nothing on this patch is dispensed on FP10 or listed in
+    # Part IX. Searching every Part IX row for defibrillator, manikin, electrode,
+    # laryngoscope, resuscitation, airway, ambulance, simulation, spineboard, scoop
+    # and ECG returns zero rows across IXA, IXB, IXB & IXC, IXC and IXR.
+    check("no tariff is claimed", euc["drugTariff"] is None)
+    check("and the published rule says why",
+          "No Drug Tariff part applies" in euc["rules"]["drugTariff"])
+    check("no tariff part is declared on the rule", not _euc_rule.get("tariffParts"))
+
+    print("  CPV corroborates, it never admits")
+    # 85143000 Ambulance services is carried by ten notices in this feed and only
+    # two of them are this patch; the other eight are patient transport, stroke
+    # transport, a retrieval service, a discharge vehicle and secure transport. If
+    # the builder ever started admitting on CPV, those eight would arrive here.
+    for bad in ["Non Emergency Patient Transfer 26/27",
+                "Provision of Transport for Stroke and Suspected Stroke Patients",
+                "South Thames Retrieval Service (STRS) Patient Transport Services",
+                "Sunderland Dedicated Discharge Vehicle Royal Hospital",
+                "Pn092 Secure Transport Services"]:
+        check("85143000 does not admit: %s" % bad[:46],
+              not B.match_title(_euc_rx, bad))
+    check("the published rule records the CPV prefixes",
+          all(p in (euc["rules"].get("awards") or "")
+              for p in ["33182100", "85143000"]))
+
+    print("  the coverage note names the limits rather than leaving them to be found")
+    for phrase in ["Pulse Oximetry",
+                   "Lot 4, Anaesthesia and Resuscitation",
+                   "not evidence of volume",
+                   "Education Authority",
+                   "Penthrox"]:
+        check("coverage note carries: %s" % phrase[:44],
+              phrase in (euc["rules"]["frameworks"] or ""))
+
+    check("suppliers come only from the five frameworks",
+          euc["counts"]["suppliers"] > 0 and
+          all(s.get("frameworks") for s in euc["suppliers"]))
+
+
 # The exclude=None path must not leak to any rule that has not earned it. Five have:
 # renal, gynaecology, paediatrics, dermatology and oncology, each because every hit
 # its include produced was printed and read one by one and none of them was wrong,
