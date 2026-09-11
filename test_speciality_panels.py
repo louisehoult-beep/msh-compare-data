@@ -49,6 +49,7 @@ COLO = "colorectal-gi-and-endoscopy"
 DERM = "dermatology"
 IPC = "infection-prevention-and-control"
 ONC = "oncology-and-sact"
+PHARM = "pharmacy-and-medicines"
 fails = []
 
 
@@ -5505,6 +5506,164 @@ for phrase in ["no NHS Supply Chain framework for a cytotoxic or a chemotherapy 
 
 print("  open tenders - empty is the honest answer, not a miss")
 check("no open notice on this patch today", onc["openTenders"] == [])
+
+# ---------------------------------------------------------------------------
+# PHARMACY AND MEDICINES (page 2916). The rollout's only speciality with NO NHS
+# Supply Chain route at all, which makes two things testable that are not
+# testable anywhere else: that the framework and supplier panels stay EMPTY and
+# keep saying why, and that the panel never reaches for a drug name to look
+# fuller. Its include list is procurement vocabulary only. Every refusal below
+# is a row that really matched an earlier draft of that list and was read and
+# rejected on 11/09/2026.
+# ---------------------------------------------------------------------------
+print("\nPHARMACY AND MEDICINES — the speciality with no framework route")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), PHARM],
+               check=True, capture_output=True)
+pharm = load_panel(PHARM)
+check("the slice exists", pharm is not None)
+_ph_rule = B.SPECIALITY_RULES[PHARM]
+_ph_rx = B.compile_rule(_ph_rule)
+
+print("  FALSE POSITIVES — every one matched a draft include list and is not this patch")
+for bad in [
+        # "drug" bare, and this is the largest false positive group on the patch:
+        # local authority substance misuse commissioning. Fourteen rows.
+        "All Age Alcohol and Drug Treatment Recovery Service",
+        "Drug and Alcohol Treatment, Recovery and Improvement",
+        "SCE0085 - Inpatient detoxification for people who use drugs and alcohol",
+        "SOL Drug & Alcohol Services 2027",
+        "Rough Sleeping Drug and Alcohol Psychology Service",
+        "Provision of Halton Integrated Drug and Alcohol Treatment and Recovery Service",
+        "Young people alcohol & drug support service (F03 award)",
+        "Contract for the Provision of Drug, Alcohol and DNA Testing Services",
+        # the one substance-misuse row whose title carries no "alcohol" at all
+        "BLC0339 - Drug Test on Arrest Scheme",
+        # "drug" in a research and in a device sense
+        "AMPA PH1 Drug Substance",
+        "Neuromodulation/Spinal Cord Stimulators, Intrathecal Drug Pumps, "
+        "Radiofrequency Ablation and Associated Products",
+        # "medicine" as the PROFESSION, not a medicinal product
+        "Paramedic, Nursing & Medicine Skills Equipment",
+        "Access to medicine and the professions 2026/27",
+        # "prescribing" as a social intervention
+        "SEL ICB (Bexley) Health & Wellbeing Coaching and Community Health & "
+        "Wellbeing Workers (CHWWs) with Social Prescribing",
+        # "pharmaceutical" outside the NHS entirely
+        "PURCH1851 Provision Of A Framework Contract For Veterinary Pharmaceutical "
+        "And Consumable/Disposable Products",
+        "Pharmaceutical Supplies to the MRC Unit the Gambia at LSHTM",
+        "Unlocking Space for Business: In-orbit R&D and manufacturing of pharmaceuticals  RFI",
+        # "vaccine" on a print contract and on a device consumable
+        "CHIS Measles Mumps and Rubella (MMR) Vaccine Postcards 26-28",
+        "Combined Safety Syringes and Needles for the COVID-19 Vaccination Programme",
+        "Combined Safety Syringes and Needles for COVID-19 Vaccination Programme - "
+        "Morbidly Obese Requirement",
+        # THE OCCUPATIONAL HEALTH VACCINATION GROUP. A vaccine SUPPLY contract is a
+        # medicines contract; an employer buying a service to vaccinate its own
+        # staff is not, and no vaccine manufacturer bids for one.
+        "Flu Vaccine Vouchers",
+        "Staff Flu Vaccination Programme",
+        "846-NYC-HA Staff Flu Vaccinations",
+        "Staff Winter Vaccination Programme",
+        "Workforce Influenza Vaccination Programme: On-site Settings Delivery Model",
+        "Flu Vaccination Campaign",
+        "Community and School Aged Immunisation Service (CSAIS) in Birmingham and Solihull",
+]:
+    check("refused: %s" % bad[:58], not B.match_title(_ph_rx, bad))
+
+print("  TRUE POSITIVES — the four routes a medicine actually travels, plus the estate")
+for good in [
+        # NHS England medicines procurement
+        "NHS Framework Agreement for Branded Medicines - National Tender",
+        "NHS Generic Pharmaceuticals - Wave 17a",
+        "National Generic Pharmaceuticals – Project Revive",
+        # the devolved national contracts
+        "NP38626 Compounded Aseptic Medicines",
+        "Generic, Branded Generic & Proprietary Medicinal Products - Group 18",
+        "Generic Drugs - Injections/Infusions",
+        # unlicensed, specials and aseptic manufacture
+        "Framework for the supply of Unlicensed Specials",
+        "Framework Agreement for the Supply of Unlicensed Imported Medicines Services and Products",
+        "Cleanroom consulting - Aseptic Services",
+        # vaccine SUPPLY, which is a medicines contract and is claimed here because
+        # no other page will hold it: the gynaecology rule explicitly refuses the
+        # DHSC vaccine rows as a national immunisation programme.
+        "Smallpox Vaccine (Imvanex)",
+        "Vaccine Prospectus: National Immunisation Programme and vaccine products",
+        "SARS-CoV-2 Adult Vaccine Supply (2026)",
+        # community pharmacy and wholesale
+        "On-going maintenance Hub & Spoke dispensing registration – BSA 2026/2027",
+        "YHPPC - Provision of Pharmaceutical Wholesale Services",
+        "NHS South Yorkshire ICB - Pharmacy Local Enhanced Services - Heritage pharmacy",
+        # the pharmacy estate and its automation
+        "Maintenance of Pharmacy Robot",
+        "RLI Pharmacy Robot Refurbishment",
+        "The Supply and Support of Pharmaceutical Refrigerators",
+        "Provision of Aseptic Unit Pharmaceutical Isolators",
+        # medicines systems
+        "Controlled Drugs Management System including Electronic Controlled Drugs Register",
+        "BlueTeq Medicines Optimisation",
+]:
+    check("present: %s" % good[:58], B.match_title(_ph_rx, good))
+
+print("  'nuclear medicine' is NOT excluded, and that is deliberate")
+# Its single appearance in this data is a genuine radiopharmacy contract. An
+# exclusion on the phrase would have cost a true positive to guard a false one
+# that does not exist. If a nuclear medicine IMAGING notice ever appears, this
+# is the test that has to be revisited rather than the rule quietly widened.
+check("radiopharmacy row is kept",
+      B.match_title(_ph_rx, "UHL_Radiopharmaceuticals Radiopharmacy Nuclear Medicine"))
+
+print("  NO FRAMEWORK, NO SUPPLIERS — the finding, restated every build")
+check("no framework is claimed", _ph_rule["frameworks"] is None)
+check("the frameworks panel is empty", pharm["frameworks"] == [])
+check("the suppliers panel is empty", pharm["suppliers"] == [])
+for phrase in ["NHS Supply Chain does not buy medicines",
+               "140 briefs",
+               "there is no pharmacy category",
+               "Infusion Pumps and Administration Sets",
+               "Robotic Medical Equipment",
+               "Procept Biorobotics",
+               "surgical robot market and not the pharmacy dispensing robot market"]:
+    check("frameworks finding carries: %s" % phrase[:46],
+          phrase in pharm["rules"]["frameworks"])
+check("suppliers finding says why it is empty",
+      "NHS Supply Chain is not where they are listed" in pharm["rules"]["suppliers"])
+
+print("  NO DRUG TARIFF — Part IX is appliances, medicines are Part VIII")
+check("no tariff part is claimed", not _ph_rule.get("tariffParts"))
+check("no tariff panel is built", pharm.get("drugTariff") is None)
+check("the coverage note says which Part is missing and why",
+      "Medicines are reimbursed under Part VIII" in pharm["rules"]["frameworks"])
+
+print("  the no-molecule-names rule is stated, so a reader can judge it")
+check("coverage note admits the cost of refusing drug names",
+      "never drug names" in pharm["rules"]["frameworks"])
+
+print("  and no molecule name leaked into the include list")
+# Root rule 14: the rule a claim was derived under has to be judgeable. If a drug
+# name ever appears in this include list the panel has stopped being maintainable
+# against a refreshing feed, and it will have started stealing other pages'
+# medicines. bevacizumab is ophthalmology's as often as oncology's.
+for _mol in ["bevacizumab", "rituximab", "methotrexate", "tirzepatide", "clozapine",
+             "propofol", "ivacaftor", "lenalidomide", "adalimumab", "insulin"]:
+    check("no molecule in include: %s" % _mol, _mol not in _ph_rule["include"].lower())
+
+print("  every published award title is genuinely this patch")
+_PH_BANNED = ["alcohol", "drug test", "drug substance", "intrathecal",
+              "medicine skills", "access to medicine", "social prescribing",
+              "veterinary", "gambia", "in-orbit", "postcard",
+              "syringes and needles", "staff flu", "staff winter",
+              "workforce influenza", "vaccine vouchers", "immunisation service"]
+for a in pharm["awards"]:
+    low = (a["title"] or "").lower()
+    check("clean award title: %s" % (a["title"] or "")[:50],
+          not any(b in low for b in _PH_BANNED))
+
+print("  the awards panel is the page's buying route, so it must not be empty")
+check("awards were matched", pharm["counts"]["awardsMatched"] > 100)
+check("the cap is what limits the panel, not the filter",
+      pharm["counts"]["awardsShown"] == B.AWARD_CAP)
 
 
 # The exclude=None path must not leak to any rule that has not earned it. Five have:

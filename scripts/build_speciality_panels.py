@@ -6140,6 +6140,224 @@ SPECIALITY_RULES = {
         ),
     },
 
+    # PAGE 2916. THE ONLY SPECIALITY IN THIS ROLLOUT WITH NO NHS SUPPLY CHAIN ROUTE AT
+    # ALL. The page says so in its own At a glance tile, and this rule has to match that
+    # rather than manufacture a framework list to look like every other page. Scope is
+    # the medicine itself and the pharmacy that handles it: branded and generic
+    # medicines procurement, aseptic and unlicensed manufacture, homecare and
+    # wholesale, community pharmacy contracts, pharmacy automation and the aseptic
+    # estate. NOT the device a medicine is given through - the pump, the giving set,
+    # the cannula and the syringe are the vascular access and IV therapy page's, and
+    # are claimed there.
+    "pharmacy-and-medicines": {
+        "label": "Pharmacy and Medicines",
+        # NO FRAMEWORK. All 121 parsed framework names in frameworks.json and all 16
+        # unparsed ones were read on 11/09/2026 and not one of them is a medicine.
+        # There is no pharmacy CBU category. The three that come nearest were checked
+        # by supplier list, not by name, and all three were rejected:
+        #   Infusion Pumps and Administration Sets (Project_12 ITT_382) - the ward pump
+        #     and giving-set route. Already counted on vascular access and IV therapy,
+        #     critical care and oncology. Its 27 suppliers are B. Braun, Baxter,
+        #     Becton Dickinson, Fresenius Kabi and Smiths Medical selling pumps.
+        #   Syringes, Needles and Associated Products - the same patch, same reason.
+        #   Robotic Medical Equipment and Associated Accessories (2024/S 000-004668) -
+        #     the word "robotics" appears in the page's own buying-route tile, and this
+        #     framework is NOT what it means. Its six suppliers are CMR Surgical,
+        #     Intuitive Surgical, Medtronic, Johnson & Johnson Medical, MCT
+        #     Lifesciences and Procept Biorobotics. That is the surgical robot market,
+        #     not the pharmacy dispensing robot market (Omnicell, BD Rowa, Swisslog),
+        #     and publishing it as pharmacy's framework would be flatly wrong.
+        # Claiming any of the three would fill the Suppliers tab with pump and surgical
+        # robot firms and tell a pharmaceutical rep that they are the pharmacy market.
+        # They are not. An honest empty state with the reason written into it is worth
+        # more, and the awards and tenders panel below carries the route that is real.
+        "frameworks": None,
+        "frameworksFinding": {
+            "frameworks": (
+                "NO NHS SUPPLY CHAIN FRAMEWORK IS COUNTED HERE, AND FOR THIS SPECIALITY "
+                "THAT IS THE SINGLE MOST USEFUL FACT ON THE PAGE RATHER THAN A GAP. NHS "
+                "Supply Chain does not buy medicines. All four pages of its contract "
+                "launch brief index, 140 briefs, were read on 11 September 2026 and not "
+                "one covers a medicine; there is no pharmacy category; and none of the "
+                "121 framework names in the Hub's record, or the 16 it holds unparsed, "
+                "is a medicine. Medicines reach the NHS by four other routes entirely - "
+                "NHS England medicines procurement and its Branded and Generic "
+                "Pharmaceuticals tenders, regional pharmaceutical procurement in Wales, "
+                "Scotland and Northern Ireland, homecare medicines contracts, and Drug "
+                "Tariff reimbursement in the community. Those are what the awards and "
+                "tenders panel shows. THREE AGREEMENTS COME NEAR AND ARE NAMED RATHER "
+                "THAN COUNTED. Infusion Pumps and Administration Sets and Associated "
+                "Products (Project_12 ITT_382, expiring 30 September 2026) and "
+                "Syringes, Needles and Associated Products are the hardware a medicine "
+                "is given through, not the medicine; both are counted on the vascular "
+                "access and IV therapy page. Robotic Medical Equipment and Associated "
+                "Accessories (2024/S 000-004668) is named because the word robotics "
+                "invites the mistake: its six suppliers are CMR Surgical, Intuitive "
+                "Surgical, Medtronic, Johnson and Johnson Medical, MCT Lifesciences and "
+                "Procept Biorobotics, which is the surgical robot market and not the "
+                "pharmacy dispensing robot market. Pharmacy automation does appear in "
+                "this panel, but as trust-level contracts for robot maintenance and "
+                "refurbishment, never as an NHS Supply Chain agreement."
+            ),
+            "suppliers": (
+                "NO SUPPLIER LIST IS PUBLISHED FOR THIS SPECIALITY FROM THE FRAMEWORK "
+                "ROUTE, because this panel names suppliers only where a framework "
+                "record names them and no framework belongs to this speciality. That is "
+                "not the same as saying the market has no suppliers: it is that NHS "
+                "Supply Chain is not where they are listed. The firms that sell "
+                "medicines into the NHS appear on NHS England's Branded and Generic "
+                "Pharmaceuticals framework awards, on the Scottish, Welsh and Northern "
+                "Irish national contracts, and on trust-level homecare, unlicensed "
+                "specials and aseptic compounding contracts - all of which appear as "
+                "named awards in the panel beside this one."
+            ),
+        },
+        # INCLUDE. Procurement vocabulary only. NO MOLECULE NAMES, deliberately, and at
+        # this speciality's scale that refusal matters more than anywhere else: a
+        # medicines page could be widened with a drug-name list indefinitely and it
+        # would be unmaintainable against a refreshing feed and would steal every other
+        # page's medicine (bevacizumab is ophthalmology's as often as oncology's,
+        # methotrexate is dermatology's). The cost is visible and accepted - single
+        # product awards only reach this panel when the notice also carries a company
+        # or category word, as the Vertex, Jazz and Novartis rows below do.
+        #
+        # NOT INCLUDED, deliberately: "prescription" and "prescriptions". Both were
+        # tried. In 3,452 titles they match exactly two rows and both are Cumbria County
+        # Council's "Supply of Care Equipment for Daily Living (Simple Aids by
+        # Prescription)", a local authority daily living aids scheme that is the patient
+        # moving and handling page's ground. A term whose entire yield is false is
+        # refused in the include rather than admitted and then argued with in the
+        # exclude list. "Prescribing" is kept and is a different word: it matches
+        # electronic prescribing systems, which are a medicines system.
+        #
+        # Eight terms below match nothing in today's data and are kept knowingly, not
+        # by accident: civas, compounding, medication, formulary, wholesaler,
+        # immunization, controlled drug in the singular, and antimicrobial stewardship.
+        # Each is unambiguous medicines vocabulary that cannot plausibly mean anything
+        # else in a procurement title, so each is a safe forward catch on a feed that
+        # refreshes. "Controlled drugs" in the plural does match, once, and correctly.
+        "include": (
+            r"\b(pharmac\w*|medicines?|medicinal|medication\w*|"
+            r"dispensing|dispensar(?:y|ies)|prescribing|prescriber\w*|formular\w*|"
+            r"aseptic\w*|civas|compounded|compounding|unlicensed|overlabelling|"
+            r"over[- ]?labelled|biosimilars?|biologics?|wholesale|wholesaler\w*|"
+            r"vaccin\w*|immunisation\w*|immunization\w*|"
+            r"antimicrobial stewardship|controlled drugs?|drugs?)\b"
+        ),
+        # EXCLUDE. Every pattern here was put in because a real row in
+        # tender-history.json, framework-awards.json or open-tenders.json matched the
+        # include list above and was read and found not to be this speciality.
+        #   alcohol        -> fourteen rows, the largest false positive group by far and
+        #                     all of them bare "drug": All Age Alcohol and Drug Treatment
+        #                     Recovery Service (Rotherham), Drug and Alcohol Treatment
+        #                     Recovery and Improvement (Hammersmith and Fulham, twice),
+        #                     Inpatient detoxification for people who use drugs and
+        #                     alcohol (Leicester, three times), SOL Drug and Alcohol
+        #                     Services 2027 (Solihull), Rough Sleeping Drug and Alcohol
+        #                     Psychology Service (Hampshire), Drug and Alcohol Support
+        #                     for Rough Sleepers (Camden), Halton Integrated Drug and
+        #                     Alcohol Treatment, Newcastle Treatment and Recovery, and
+        #                     Drug, Alcohol and DNA Testing Services (Swansea). Substance
+        #                     misuse commissioning by local authorities, not pharmacy.
+        #   drug test      -> "BLC0339 - Drug Test on Arrest Scheme", Police and Crime
+        #                     Commissioner for Durham. Forensic testing, and the one
+        #                     substance-misuse row whose title carries no "alcohol".
+        #   drug substance -> "AMPA PH1 Drug Substance", Cardiff University, twice. An
+        #                     active ingredient manufactured for a university research
+        #                     programme, not an NHS medicines contract.
+        #   intrathecal drug pump
+        #                  -> "Neuromodulation/Spinal Cord Stimulators, Intrathecal Drug
+        #                     Pumps, Radiofrequency Ablation and Associated Products".
+        #                     An implantable device tender; pain management's ground.
+        #   medicine skills-> "Paramedic, Nursing & Medicine Skills Equipment",
+        #                     University of Ulster, twice. Clinical skills training
+        #                     equipment, where "medicine" is the profession.
+        #   access to medicine
+        #                  -> "Access to medicine and the professions 2026/27", NHS
+        #                     England, three times, CPV 80000000 education services. A
+        #                     widening participation programme for entry to the medical
+        #                     professions. Same word, and nothing to do with a medicinal
+        #                     product. Note this is the ONLY discipline-sense use of
+        #                     "medicine" excluded: "nuclear medicine" is deliberately
+        #                     NOT excluded, because its single appearance in this data is
+        #                     "UHL_Radiopharmaceuticals Radiopharmacy Nuclear Medicine",
+        #                     which is a genuine radiopharmacy contract and belongs here.
+        #   social prescribing
+        #                  -> SEL ICB (Bexley) Health and Wellbeing Coaching and
+        #                     Community Health and Wellbeing Workers with Social
+        #                     Prescribing. Link workers, not medicines.
+        #   veterinary     -> "PURCH1851 ... Veterinary Pharmaceutical And Consumable/
+        #                     Disposable Products", University of Glasgow.
+        #   gambia         -> "Pharmaceutical Supplies to the MRC Unit the Gambia at
+        #                     LSHTM". An overseas research unit's supplies, not UK NHS.
+        #   in-orbit       -> "Unlocking Space for Business: In-orbit R&D and
+        #                     manufacturing of pharmaceuticals RFI", Department for
+        #                     Science, Innovation and Technology. Space manufacturing
+        #                     research.
+        #   postcards      -> "CHIS Measles Mumps and Rubella (MMR) Vaccine Postcards
+        #                     26-28", CPV 79824000, printing. A print contract.
+        #   syringes and needles
+        #                  -> "Combined Safety Syringes and Needles for the COVID-19
+        #                     Vaccination Programme" and its Morbidly Obese Requirement
+        #                     variant. Device consumables reached through "vaccination";
+        #                     both are the vascular access and IV therapy page's and are
+        #                     claimed there.
+        #   THE OCCUPATIONAL HEALTH VACCINATION GROUP. Seven rows, and they are the one
+        #   genuinely difficult call in this rule. A vaccine SUPPLY contract is a
+        #   medicines contract and is counted here. An employer buying a service to
+        #   vaccinate its own staff is an occupational health contract that no vaccine
+        #   manufacturer bids for, so it is not. The excluded rows are Flu Vaccine
+        #   Vouchers (The Pensions Regulator), Staff Flu Vaccination Programme (Hull
+        #   City Council), 846-NYC-HA Staff Flu Vaccinations (North Yorkshire), Staff
+        #   Winter Vaccination Programme (Bradford Teaching Hospitals), Workforce
+        #   Influenza Vaccination Programme (Lancashire), Flu Vaccination Campaign (NHS
+        #   West and North London ICB), and Community and School Aged Immunisation
+        #   Service (NHS England) - a delivery service, not a product.
+        "exclude": (
+            r"\b(alcohol|drug test\w*|drug substance|intrathecal drug pumps?|"
+            r"medicine skills|access to medicine|social prescribing|"
+            r"veterinary|gambia|in[- ]orbit|postcards?|syringes and needles|"
+            r"staff (?:flu|winter|influenza|vaccinat)\w*|staff vaccinat\w*|"
+            r"workforce influenza|flu vaccination campaign|vaccine vouchers|"
+            r"immunisation service)\b"
+        ),
+        # 33600000 pharmaceutical products and 33651600 vaccines. Nothing wider: a bare
+        # "336" prefix would reach 33696xxx laboratory reagents, which is pathology's,
+        # 33693xxx nicotine replacement and e-cigarettes, which is public health's,
+        # 33697110 on a Total Orthopaedic Solutions notice, and - genuinely - 33682000
+        # on a flooring contract. Corroboration only; the title still has to match.
+        "cpv": ("33600", "336516"),
+        # NO DRUG TARIFF PART, AND THE REASON IS WORTH STATING BECAUSE IT LOOKS LIKE AN
+        # OMISSION AND IS NOT. Part IX is the APPLIANCE list - dressings and elastic
+        # hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC), elastic
+        # hosiery (IXR). Medicines are reimbursed under Part VIII, which the Hub does
+        # not hold. A community pharmacy dispenses all of Part IX, so it would be easy
+        # to claim the whole of it here, and that would publish twenty thousand
+        # appliance lines as this speciality's market and drown the medicine. The
+        # coverage note below states the Part VIII gap in the member's own terms
+        # instead.
+        "coverageNote": (
+            "TWO COVERAGE LIMITS, STATED RATHER THAN HIDDEN. FIRST, THE DRUG TARIFF. "
+            "This page carries no Drug Tariff panel, and that is deliberate. The Hub "
+            "holds Part IX of the Drug Tariff, which is the appliance list - dressings "
+            "and elastic hosiery, incontinence appliances, stoma appliances. Medicines "
+            "are reimbursed under Part VIII, which the Hub does not hold. A community "
+            "pharmacy dispenses the whole of Part IX, so claiming it here would be easy "
+            "and would bury the medicine under twenty thousand appliance lines that "
+            "belong to the wound care, continence and stoma pages. The community "
+            "medicines figure a rep actually needs is on this page's own money section, "
+            "computed from Prescription Cost Analysis. SECOND, SINGLE-PRODUCT AWARDS. "
+            "This panel matches procurement vocabulary and never drug names, so a "
+            "notice titled with a molecule alone does not reach it. That is a known and "
+            "accepted cost: a molecule list cannot be maintained honestly against a "
+            "refreshing feed, and most molecules belong to a clinical page rather than "
+            "to pharmacy - bevacizumab is ophthalmology's as often as oncology's. "
+            "Single-product awards appear here only where the notice also carries a "
+            "company or category word, which is why the Vertex, Jazz and Novartis rows "
+            "are present and a bare molecule tender would not be."
+        ),
+    },
+
 }
 
 

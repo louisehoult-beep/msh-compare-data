@@ -1,0 +1,625 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "pharmacy-and-medicines",
+ "label": "Pharmacy and Medicines",
+ "defined": true,
+ "generated": "2026-09-11",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-10T11:14:59+00:00",
+  "openTenders": "10/09/2026",
+  "drugTariff": "2026-09-10"
+ },
+ "rules": {
+  "frameworks": "NO NHS SUPPLY CHAIN FRAMEWORK IS COUNTED HERE, AND FOR THIS SPECIALITY THAT IS THE SINGLE MOST USEFUL FACT ON THE PAGE RATHER THAN A GAP. NHS Supply Chain does not buy medicines. All four pages of its contract launch brief index, 140 briefs, were read on 11 September 2026 and not one covers a medicine; there is no pharmacy category; and none of the 121 framework names in the Hub's record, or the 16 it holds unparsed, is a medicine. Medicines reach the NHS by four other routes entirely - NHS England medicines procurement and its Branded and Generic Pharmaceuticals tenders, regional pharmaceutical procurement in Wales, Scotland and Northern Ireland, homecare medicines contracts, and Drug Tariff reimbursement in the community. Those are what the awards and tenders panel shows. THREE AGREEMENTS COME NEAR AND ARE NAMED RATHER THAN COUNTED. Infusion Pumps and Administration Sets and Associated Products (Project_12 ITT_382, expiring 30 September 2026) and Syringes, Needles and Associated Products are the hardware a medicine is given through, not the medicine; both are counted on the vascular access and IV therapy page. Robotic Medical Equipment and Associated Accessories (2024/S 000-004668) is named because the word robotics invites the mistake: its six suppliers are CMR Surgical, Intuitive Surgical, Medtronic, Johnson and Johnson Medical, MCT Lifesciences and Procept Biorobotics, which is the surgical robot market and not the pharmacy dispensing robot market. Pharmacy automation does appear in this panel, but as trust-level contracts for robot maintenance and refurbishment, never as an NHS Supply Chain agreement. TWO COVERAGE LIMITS, STATED RATHER THAN HIDDEN. FIRST, THE DRUG TARIFF. This page carries no Drug Tariff panel, and that is deliberate. The Hub holds Part IX of the Drug Tariff, which is the appliance list - dressings and elastic hosiery, incontinence appliances, stoma appliances. Medicines are reimbursed under Part VIII, which the Hub does not hold. A community pharmacy dispenses the whole of Part IX, so claiming it here would be easy and would bury the medicine under twenty thousand appliance lines that belong to the wound care, continence and stoma pages. The community medicines figure a rep actually needs is on this page's own money section, computed from Prescription Cost Analysis. SECOND, SINGLE-PRODUCT AWARDS. This panel matches procurement vocabulary and never drug names, so a notice titled with a molecule alone does not reach it. That is a known and accepted cost: a molecule list cannot be maintained honestly against a refreshing feed, and most molecules belong to a clinical page rather than to pharmacy - bevacizumab is ophthalmology's as often as oncology's. Single-product awards appear here only where the notice also carries a company or category word, which is why the Vertex, Jazz and Novartis rows are present and a bare molecule tender would not be.",
+  "suppliers": "NO SUPPLIER LIST IS PUBLISHED FOR THIS SPECIALITY FROM THE FRAMEWORK ROUTE, because this panel names suppliers only where a framework record names them and no framework belongs to this speciality. That is not the same as saying the market has no suppliers: it is that NHS Supply Chain is not where they are listed. The firms that sell medicines into the NHS appear on NHS England's Branded and Generic Pharmaceuticals framework awards, on the Scottish, Welsh and Northern Irish national contracts, and on trust-level homecare, unlicensed specials and aseptic compounding contracts - all of which appear as named awards in the panel beside this one. TWO COVERAGE LIMITS, STATED RATHER THAN HIDDEN. FIRST, THE DRUG TARIFF. This page carries no Drug Tariff panel, and that is deliberate. The Hub holds Part IX of the Drug Tariff, which is the appliance list - dressings and elastic hosiery, incontinence appliances, stoma appliances. Medicines are reimbursed under Part VIII, which the Hub does not hold. A community pharmacy dispenses the whole of Part IX, so claiming it here would be easy and would bury the medicine under twenty thousand appliance lines that belong to the wound care, continence and stoma pages. The community medicines figure a rep actually needs is on this page's own money section, computed from Prescription Cost Analysis. SECOND, SINGLE-PRODUCT AWARDS. This panel matches procurement vocabulary and never drug names, so a notice titled with a molecule alone does not reach it. That is a known and accepted cost: a molecule list cannot be maintained honestly against a refreshing feed, and most molecules belong to a clinical page rather than to pharmacy - bevacizumab is ophthalmology's as often as oncology's. Single-product awards appear here only where the notice also carries a company or category word, which is why the Vertex, Jazz and Novartis rows are present and a bare molecule tender would not be.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(pharmac\\w*|medicines?|medicinal|medication\\w*|dispensing|dispensar(?:y|ies)|prescribing|prescriber\\w*|formular\\w*|aseptic\\w*|civas|compounded|compounding|unlicensed|overlabelling|over[- ]?labelled|biosimilars?|biologics?|wholesale|wholesaler\\w*|vaccin\\w*|immunisation\\w*|immunization\\w*|antimicrobial stewardship|controlled drugs?|drugs?)\\b/i and does not match /\\b(alcohol|drug test\\w*|drug substance|intrathecal drug pumps?|medicine skills|access to medicine|social prescribing|veterinary|gambia|in[- ]orbit|postcards?|syringes and needles|staff (?:flu|winter|influenza|vaccinat)\\w*|staff vaccinat\\w*|workforce influenza|flu vaccination campaign|vaccine vouchers|immunisation service)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33600 or 336516 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 0,
+  "suppliers": 0,
+  "suppliersUnresolved": 0,
+  "awardsShown": 40,
+  "awardsMatched": 239,
+  "openTenders": 1
+ },
+ "frameworks": [],
+ "suppliers": [],
+ "awards": [
+  {
+   "title": "Developing Adaptable Pharmacy Professionals through Training and Education",
+   "buyer": "NHS England",
+   "supplier": "The University of Manchester",
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085458-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "80000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "LSL/MED/0250 The Supply of Over Labelled Pre-Packed Medicines",
+   "buyer": "LEIDOS SUPPLY, LIMITED",
+   "supplier": null,
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085503-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33692000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Smallpox Vaccine (Imvanex)",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown through UK Health Security Agency",
+   "supplier": "Bavarian Nordic A/S",
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085113-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33651600"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Vaccine Prospectus: National Immunisation Programme and vaccine products",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown through UK Health Security Agency",
+   "supplier": null,
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085109-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33651600"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "PN426 Electronic Prescribing System ESP",
+   "buyer": "Sheffield Health Partnership University NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084793-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "48180000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Cleanroom consulting - Aseptic Services",
+   "buyer": "The Christie NHS Foundation Trust",
+   "supplier": "W2 Cleanroom Consulting Ltd",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084520-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "79212200",
+    "79410000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NHS Generic Pharmaceuticals - Wave 17a",
+   "buyer": "NHS England",
+   "supplier": null,
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083832-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33600000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS Generic Pharmaceuticals - Wave 16c",
+   "buyer": "NHS England",
+   "supplier": null,
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083835-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33600000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Hepatitis C Medicines ",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083668-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33600000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Provision of Medicine Supply",
+   "buyer": "NORTHAMPTONSHIRE HEALTHCARE NHS FOUNDATION TRUST",
+   "supplier": "Bestway National Chemists Limited",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083587-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85149000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Software for Drug Dispensing Services",
+   "buyer": "NORTHAMPTONSHIRE HEALTHCARE NHS FOUNDATION TRUST",
+   "supplier": "Medilogic UK LTD",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083580-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Medicine Supply",
+   "buyer": "NORTHAMPTONSHIRE HEALTHCARE NHS FOUNDATION TRUST",
+   "supplier": "Bestway National Chemists Limited (Well Pharmacy)",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083576-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "RLI Pharmacy Robot Refurbishment",
+   "buyer": "University Hospitals of Morecambe Bay NHS Foundation Trust",
+   "supplier": "Gilling Dod Limited",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082943-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71541000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NHS National Generic Pharmaceuticals - Wave 16a",
+   "buyer": "NHS England",
+   "supplier": "ASPIRE PHARMA LIMITED, BROWN & BURK UK LIMITED, CRESCENT PHARMA LIMITED, DRUGSRUS LIMITED, ENNOGEN HEALTHCARE INTERNATIONAL LIMITED, FARMAK PHARMACEUTICALS UK LTD, FLYNN PHARMA LIMITED, KENT PHARMA UK LIMITED, Medreich PLC, MERCURY PHARMACEUTICALS LIMITED, MILPHARM LIMITED, NECESSITY SUPPLIES LIMITED, NOVUMGEN LIMITED, RPH PHARMA LTD, SANDOZ LIMITED, STRIDES PHARMA UK LTD, SUN PHARMA UK LIMITED, TEVA UK LIMITED, TORRENT PHARMA (UK) LTD, ZENTIVA PHARMA UK LIMITED, DR REDDY'S LABORATORIES (UK) LIMITED, Accord UK Ltd, AFT Pharma UK Limited, AGB Pharma (UK) Ltd, Aguettant Limited, Amarox Limited, FONTUS HEALTH LTD, AOP Orphan Limited, Arcadia Pharma Limited, ASCEND LABORATORIES (UK) LIMITED, ASCOT LABORATORIES LIMITED, ASPEN PHARMACARE UK LIMITED, B. BRAUN MEDICAL LIMITED, BAXTER HEALTHCARE LIMITED, Biocon Pharma UK Limited, BOWMED IBISQUS LIMITED, BRANCASTER PHARMA LIMITED, CELIX PHARMA LTD, CHIESI LIMITED, CIPLA (EU) LIMITED, CLINIGEN HEALTHCARE LIMITED, COLONIS PHARMA LIMITED, CONSILIENT HEALTH (UK) LIMITED, C. S. T. PHARMA LIMITED, DAY LEWIS MEDICAL LIMITED, DESITIN PHARMA LIMITED, ERAMOL (UK) Limited, ESTEVE PHARMACEUTICALS LTD, FERRING PHARMACEUTICALS LTD, FLEXIPHARM AUSTRADING LIMITED, FRESENIUS KABI LIMITED, GALVANY PHARMA LIMITED, GENNISIUM PHARMA, GILEAD SCIENCES LTD, GLAXOSMITHKLINE UK LIMITED, HAMELN PHARMA LTD, GLENMARK PHARMACEUTICALS EUROPE LIMITED, GRINDEKS KALCEKS UK LIMITED, HIKMA PHARMACEUTICALS INTERNATIONAL LIMITED, Lipomed GmbH, LUNDBECK LIMITED, MACLEODS PHARMA UK LIMITED, MACURE PHARMA UK LIMITED, MACARTHYS LABORATORIES LIMITED, MEDAC PHARMA LLP, MORNINGSIDE PHARMACEUTICALS LIMITED, MSN LABORATORIES EUROPE LIMITED, NEON HEALTHCARE LTD, NEURAXPHARM UK LIMITED, NORTHUMBRIA PHARMA THROMBOSIS LIMITED, NOVARTIS PHARMACEUTICALS UK LIMITED, Orifarm UK Ltd, OTSUKA PHARMACEUTICALS (U.K.) LTD., PANPHARMA UK LIMITED, PARI MEDICAL LIMITED, PERENNIAL PHARMA LTD, PFIZER LIMITED, Phoenix labs U.C., PIERRE FABRE LIMITED, PIRAMAL CRITICAL CARE LIMITED, PROVEPHARM UK LTD, REIG JOFRE UK LIMITED, RIDGE PHARMA LIMITED, ROCHE PRODUCTS LIMITED, ROVI BIOTECH LIMITED, SEACROSS PHARMACEUTICALS LTD, SELECTIVE SUPPLIES LIMITED, SERB LTD, SVP PHARMA LTD, SYNCHRONY PHARMA, TAKEDA UK LIMITED, THEA PHARMACEUTICALS LIMITED, THORNTON & ROSS LIMITED, Tillomed Laboratories Ltd, TORBAY PHARMACEUTICALS LIMITED, UNICORN PHARMACEUTICALS LIMITED, USV UK LIMITED, VANTAGE PHARMACEUTICALS LTD, WAYMADE PLC, VIATRIS UK HEALTHCARE LIMITED, WOCKHARDT UK LIMITED, ZYDUS PHARMACEUTICALS UK LTD",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082784-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33600000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Maintenance of Pharmacy Robot",
+   "buyer": "Hywel Dda University Health Board",
+   "supplier": "Becton Dickinson Dispensing UK Limited",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082668-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Framework for the supply of Unlicensed Specials",
+   "buyer": "University Hospitals of Derby and Burton NHS Foundation Trust",
+   "supplier": "Rosemont Pharmaceuticals Ltd, Prulab Pharma Ltd, Vertical Pharma Resources Ltd/IPS Pharma, Eaststone Ltd, Ascot Laboratories",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082617-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33600000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Palliative Care Medicines Transport Service",
+   "buyer": "Aneurin Bevan University Health Board",
+   "supplier": "ETS MEDICAL",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082604-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "60100000",
+    "64120000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BlueTeq Medicines Optimisation",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "supplier": "Blueteq",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082580-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "72000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Generic Drugs - Injections/Infusions",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082307-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33600000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "LSL/MED/0225 - The Supply and Support of Pharmaceutical Refrigerator, 3 sizes  - Preliminary Market Engagement Notice - (New RFI) - PA23",
+   "buyer": "LEIDOS SUPPLY, LIMITED",
+   "supplier": null,
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082160-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "42513000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BCU-DCO-63450 Purchase of Positive Pressure Laminar Flow Isolators for Pharmacy, Ysbyty Gwynedd",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre U",
+   "supplier": "AMERCARE LIMITED",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079505-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "National Generic Pharmaceuticals – Project Revive",
+   "buyer": "NHS England",
+   "supplier": null,
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079388-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33600000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - Pharmacy Local Enhanced Services - Heritage pharmacy",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Heritage Pharmacy",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079356-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85149000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Vaccine Sample Carrier",
+   "buyer": "Gloucestershire Health and Care NHS Foundation Trust",
+   "supplier": "Labcold Ltd",
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078631-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "63120000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "EoECPH Aseptic Cleanroom Consumables and Laundry Services.",
+   "buyer": "East of England NHS collaborative Procurement Hub",
+   "supplier": "AGMA LIMITED, ANSELL (U.K.) LIMITED, CONNECT 2 CLEANROOMS LIMITED, MICRONCLEAN LIMITED, RIVERSIDE MEDICAL PACKAGING COMPANY LIMITED, ELIS UK LIMITED, SYNERGY HEALTH MANAGED SERVICES LIMITED, MOLNLYCKE HEALTH CARE LIMITED, VALLEY NORTHERN LIMITED",
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078268-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Service level agreement for supervision of Pharmacy Placement students 2026/27",
+   "buyer": "UNIVERSITY OF EAST ANGLIA",
+   "supplier": "NORFOLK AND NORWICH UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078201-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71248000",
+    "80320000",
+    "80561000",
+    "80570000",
+    "85149000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Controlled Drugs Management System including Electronic Controlled Drugs Register",
+   "buyer": "NORTH WEST AMBULANCE SERVICE NHS TRUST",
+   "supplier": null,
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078179-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "48180000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Contraceptive Medicines",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scot",
+   "supplier": "Lupin Healthcare UK Ltd, Morningside Pharmaceuticals Limited, Organon Pharma (UK",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077388-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "UHL_Radiopharmaceuticals Radiopharmacy Nuclear Medicine",
+   "buyer": "The Queen Elizabeth Hospital King's Lynn NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077045-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "On-going maintenance Hub & Spoke dispensing registration – BSA 2026/2027",
+   "buyer": "NHS England",
+   "supplier": "NHS BSA",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077026-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "72267100",
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Medicine Optimisation for Public Health Services",
+   "buyer": "South Tyneside Borough Council",
+   "supplier": null,
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076670-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NP36726 Fertility Medicines",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": null,
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076592-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33600000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Pharmacy Fridges for PMU",
+   "buyer": "Gloucestershire Hospitals NHS Foundation Trust",
+   "supplier": "Labcold Limited",
+   "date": "2026-08-11",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/291929d9-e67d-4c9a-bab5-880d997995c7",
+   "value": 27066,
+   "periodEnd": "2027-04-29",
+   "source": "tender-history"
+  },
+  {
+   "title": "Medicine Dispensing Lockers - Provision & Support",
+   "buyer": "Berkshire Healthcare NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076444-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "42968000",
+    "85149000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Electronic Prescribing Hardware",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": "INSIGHT DIRECT (UK) LTD",
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075851-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "30200000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NP38626 Compounded Aseptic Medicines",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "ITH Pharma Limited, Quantum Aseptics",
+   "date": "2026-07-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/072001-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Generic, Branded Generic & Proprietary Medicinal Products - Group 18",
+   "buyer": "Regional Business Services Organisation, Procurement and Logistics Service",
+   "supplier": "Abbvie Ltd",
+   "date": "2026-07-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/062803-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Under-18 SARS-CoV-2 Vaccine Supply (2026)",
+   "buyer": "UK Health Security Agency",
+   "supplier": "PFIZER LIMITED",
+   "date": "2026-07-02",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/bb2f9265-eaae-4ab6-acfd-43966a4500ac",
+   "value": 1,
+   "periodEnd": "2027-08-15",
+   "source": "tender-history"
+  },
+  {
+   "title": "Under-18 SARS-CoV-2 Vaccine Supply (2026)",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown throug",
+   "supplier": "PFIZER LIMITED",
+   "date": "2026-07-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/062139-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "SARS-CoV-2 Adult Vaccine Supply (2026)",
+   "buyer": "UK Health Security Agency",
+   "supplier": "ACCORD-UK LTD",
+   "date": "2026-06-25",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/53bb81c5-1ed8-40c2-8d48-b9ec4c9a8248",
+   "value": 1,
+   "periodEnd": "2027-03-09",
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [
+  {
+   "title": "NP36726 Fertility Medicines",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "status": "active",
+   "stage": "open tender",
+   "closingDate": "2026-09-14T12:00:00+01:00",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076592-2026",
+   "value": 6379692,
+   "source": "Find a Tender"
+  }
+ ],
+ "drugTariff": null
+}
