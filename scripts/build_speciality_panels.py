@@ -5729,6 +5729,230 @@ SPECIALITY_RULES = {
         ),
     },
 
+    # PAGE 2914. Scope, in the page's own words: the chain of precautions applied to
+    # every patient all the time, and the escalation chain for when one of them fails.
+    # Consumables (gloves, aprons, masks, gowns, hand hygiene, skin cleansing, wipes),
+    # decontamination (instrument, endoscope, environmental and the capital equipment
+    # behind them), waste (clinical and sharps), and the cleaning and washroom range
+    # that Estates and Facilities buys. NOT antibiotics, NOT microbiology diagnostics,
+    # NOT the national screening programmes.
+    #
+    # THE STRUCTURAL FACT THIS RULE HAS TO COPE WITH, published on the page itself:
+    # NHS Supply Chain has NO infection prevention category. Twenty national agreements
+    # govern this patch and they are filed under three unrelated categories - Medical
+    # and Surgical Consumables, Facilities and Office Solutions, and Diagnostic
+    # Equipment and Services. More frameworks than any other speciality in this Hub,
+    # and no single search at NHS Supply Chain finds them. The `frameworks` pattern
+    # below therefore names the subjects, not a category, and was checked to return
+    # exactly sixteen and no stray.
+    "infection-prevention-and-control": {
+        "label": "Infection Prevention and Control",
+        # SIXTEEN of the twenty. Checked against every name in frameworks.json: the
+        # pattern returns these sixteen and nothing else.
+        #   Cleaning Equipment, Supplies and Associated Products
+        #   Clinical and Sharps Waste Management
+        #   Curtains, Blinds and Associated Services
+        #   Decontamination Capital Equipment, Associated Accessories and Services
+        #   Environmental Decontamination
+        #   Examination Gloves
+        #   Hand Hygiene and Associated Products and Services
+        #   Instrument Decontamination and Accessories
+        #   Medical Pulp, Macerators and Support Products
+        #   Paper Hygiene
+        #   Polymer Aprons
+        #   Reusable Clinical and Sharps Waste Management Service
+        #   Skin Cleansing, Disinfection and Hygiene
+        #   Surgical Gloves
+        #   Tray Wrap and Sterilisation Equipment
+        #   Wipes for Surface Cleaning and Disinfection
+        # THE OTHER FOUR ARE NOT LOST AND NOT DENIED. They are in frameworks.json's
+        # `unparsed` block, which build_frameworks cannot read, and they are named with
+        # their references in the coverage note below rather than left to look like
+        # they do not exist.
+        "frameworks": (
+            r"\b(gloves?|hand hygiene|skin cleansing|paper hygiene|polymer aprons|"
+            r"tray wrap|wipes for surface|cleaning equipment|environmental decontamination|"
+            r"instrument decontamination|decontamination capital|sharps waste|curtains|"
+            r"macerators)\b"
+        ),
+        # NOT INCLUDED, DELIBERATELY. Each of these was run over all 1,972 rows of
+        # tender-history.json and all 1,474 of framework-awards.json, every hit was
+        # read, and the term was REFUSED in the include rather than admitted and then
+        # argued with in the exclusion list (root rule 14, and the renal and therapies
+        # precedent above):
+        #   autoclave        -> 11 hits, 9 of them research and teaching laboratory
+        #                       autoclaves: University of Hertfordshire three times,
+        #                       Glasgow's CL3 containment autoclave, Leeds, Warwick,
+        #                       Quadram Institute Bioscience, UKRI, the Pirbright
+        #                       Institute, an Aberystwyth scientific-equipment DPS.
+        #                       Bare "Autoclave 2024" carries nothing in the title to
+        #                       separate a university lab from a sterile services
+        #                       department, so the term is refused whole. The cost is
+        #                       named in the coverage note: two genuine NHS rows go
+        #                       with it.
+        #   antimicrobial    -> every hit was a MEDICINE or a LABORATORY ASSAY, not an
+        #                       infection prevention product: NHS England's antibiotic
+        #                       subscription model twice, its evaluation notice, and
+        #                       antimicrobial susceptibility diffusion discs.
+        #   ppe / personal protective equipment
+        #                    -> as a bare term it is workwear. Orbit Group (a housing
+        #                       association), Kent County Council, Derbyshire County
+        #                       Council, Scotland Excel and a London borough all buy
+        #                       "PPE" that is hi-vis, boots and first aid. Nothing
+        #                       genuine is lost: every clinical PPE row here is caught
+        #                       by its garment - glove, apron, gown, mask.
+        #   paper hygiene    -> 9 hits, 7 of them schools and councils buying toilet
+        #                       tissue and washroom dispensers (Education Authority NI
+        #                       four times, ESPO twice, YPO, East Riding of Yorkshire).
+        #                       The framework IS this patch's and appears in the
+        #                       frameworks list above; its AWARD titles cannot be told
+        #                       apart from a school's toilet roll contract on the title.
+        #   hand sanitiser   -> 6 hits, 3 of them Education Authority NI and Sport NI.
+        #                       "Supply and Delivery of Hand Sanitiser and Dispensers"
+        #                       carries nothing to separate a school from a ward. The
+        #                       NHS rows are all 2020 emergency pandemic buys and the
+        #                       procurement term this patch actually uses, hand hygiene,
+        #                       is included.
+        #   screening, swab  -> the national screening programmes (bowel, newborn, eye,
+        #                       lung, TB, vision) and microbiology consumables. Neither
+        #                       is infection prevention.
+        #   infection (bare) -> acute respiratory infection winter services and latent
+        #                       TB screening. "infection prevention" and "infection
+        #                       control" are included instead.
+        #   pest control, laundry, legionella, water safety
+        #                    -> all real, all Estates and Facilities, and none of them
+        #                       one of the twenty agreements. Named in the coverage note
+        #                       rather than swept in to make the panel look fuller.
+        "include": (
+            r"\b(infection prevention|infection control|hand hygiene|handrub\w*|"
+            r"gloves?|aprons?|gowns?|facemasks?|face masks?|surgical masks?|type iir|"
+            r"ffp2|ffp3|single use personal protective equipment|"
+            r"medical protective consumables|theatre wear|theatre protective wear|"
+            r"decontaminat\w*|sterilis\w*|steriliz\w*|washer disinfect\w*|"
+            r"washer.disinfectors?|disinfect\w*|sterile services|tray wrap|"
+            r"skin cleansing|chlorhexidine|povidone iodine|wipes?|clinical waste|"
+            r"sharps|healthcare waste|macerators?|medical pulp|cleaning|curtains?|"
+            r"mrsa|clostridi\w*|carbapenemase|norovirus|"
+            r"healthcare.associated infection|hospital.acquired infection|hcai|"
+            r"surgical site infection|hydrogen peroxide|ultraviolet)\b"
+        ),
+        # EVERY PATTERN HERE MATCHED A REAL NOTICE THAT WAS NOT THIS SPECIALITY:
+        #   first aid        -> Kent County Council's "First Aid Consumables, Equipment
+        #                       and Disposable Gloves" and "First Aid Equipment,
+        #                       Disposable Gloves, PPE and Workwear". A first aid box,
+        #                       not a ward.
+        #   workwear         -> the same two, and Scotland Excel's PPE and workwear
+        #                       framework. Safety clothing for staff, not barrier
+        #                       precautions for patients.
+        #   janitorial       -> "CLEANING MATERIALS & JANITORIAL SUPPLIES", Fusion
+        #                       School Services Limited. A schools catering and cleaning
+        #                       contractor.
+        #   fuel tank        -> "WHHT - Specialist Fuel Tank Cleaning & Scaffolding".
+        #                       An estates job that shares one word with this patch.
+        #   asbestos         -> "WHHT - Emergency DCU Supply and Plant Room Asbestos
+        #                       Decontamination Services". Decontamination of a plant
+        #                       room, not of an instrument.
+        #   radiation        -> "Supply of Radiation Gloves", Hull University Teaching
+        #                       Hospitals. Lead-equivalent radiology protection.
+        #   shroud           -> "Multi-Purpose Butterfly Sleeve Gown/Shroud", Shrewsbury
+        #                       and Telford. Patient and mortuary wear, not PPE.
+        #   shower curtain   -> "Shower Curtains & Brackets", the same trust. A washroom
+        #                       fitting, not the antimicrobial cubicle curtain range the
+        #                       Curtains, Blinds framework lets.
+        #   reagent          -> "Cepheid Cov2/FLU/RSV/MRSA Reagents", Cambridge
+        #                       University Hospitals. A molecular respiratory panel
+        #                       bought by pathology.
+        #   isolator         -> "Integrated Vapour Hydrogen Peroxide (VHP)-Isolator
+        #                       Module", Newcastle. A pharmacy aseptic isolator. VHP is
+        #                       this patch's environmental decontamination technology,
+        #                       but an isolator module is pharmacy's cabinet.
+        "exclude": (
+            r"\b(first aid|workwear|janitorial|fuel tank|asbestos|radiation|shrouds?|"
+            r"shower curtains?|reagents?|isolator)\b"
+        ),
+        # 33191 sterilisation, disinfection and hygiene devices, and 90524 medical
+        # waste related services. Those two are specific to this patch. The other codes
+        # the matching notices carry are not and are deliberately not claimed: 90910 and
+        # 90919 are general cleaning services, 33199 is medical clothing shared with
+        # theatres, 50421 is repair of medical equipment. Corroboration only - the title
+        # still has to match, and on a patch with no procurement category of its own the
+        # CPV scatter is itself the finding.
+        "cpv": ("33191", "90524"),
+        # NO DRUG TARIFF PART, and this one is not a close call. Part IX reimburses
+        # dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma
+        # appliances (IXC) and elastic hosiery (IXR). Gloves, aprons, masks, handrub,
+        # disinfectants, sharps bins and washer-disinfectors are none of those. The
+        # panel carries no tariff rather than reaching for the nearest part.
+        "coverageNote": (
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. FOUR OF THIS PATCH'S TWENTY "
+            "NHS SUPPLY CHAIN AGREEMENTS ARE MISSING FROM THE FRAMEWORKS LIST ABOVE, "
+            "AND THEY ARE MISSING FOR A DATA REASON, NOT BECAUSE THEY DO NOT EXIST. "
+            "The Hub's framework record holds them in its `unparsed` block, which means "
+            "the crawler could not read a supplier list off the brief, so nothing "
+            "downstream can show them. They are: Single Use Personal Protective "
+            "Equipment and Medical Protective Consumables (2021/S 000-016429, 76 "
+            "suppliers, published expiry 3 September 2026 already passed with the brief "
+            "unchanged); Non-Sterile Single Use Fluid-Resistant Surgical Facemasks Type "
+            "IIR (2023/S 000-018722, expiry 3 September 2027); Single Use Theatre "
+            "Protective Wear and Related Consumables (2025/S 000-077817, expiry 25 May "
+            "2029); and Hand Hygiene Active Hand Shield (2025/S 000-077035, a direct "
+            "award to one supplier, Primel Corporation Ltd, expiry 14 June 2027). Go to "
+            "the Speciality page's own Buying route tab for the full twenty-row table "
+            "with lots, terms and supplier counts. THE SUPPLIER LIST BELOW IS THEREFORE "
+            "SIXTEEN FRAMEWORKS' WORTH, NOT TWENTY. It is not the whole supplier market "
+            "on this patch and the four above carry names it does not. THERE IS NO NHS "
+            "SUPPLY CHAIN INFECTION PREVENTION CATEGORY. The twenty agreements sit "
+            "under Medical and Surgical Consumables, Facilities and Office Solutions, "
+            "and Diagnostic Equipment and Services, so no single category filter could "
+            "have produced this list and none was used: the frameworks are matched by "
+            "subject, and the rule is printed above so it can be judged. WHAT WAS "
+            "REFUSED, AND WHAT IT COST. Bare 'autoclave' is not in the award filter "
+            "because nine of its eleven matches in this data are university and "
+            "research-institute laboratory autoclaves with nothing in the title to "
+            "separate them from a sterile services department; the price of that "
+            "refusal is two genuine NHS rows, Bedfordshire's SSD autoclave cooling "
+            "water chiller and East Suffolk and North Essex's microbiology autoclave "
+            "replacement, and they are named here rather than quietly lost. Bare "
+            "'paper hygiene' is not in the award filter either, although the Paper "
+            "Hygiene framework IS in the list above: seven of its nine award matches "
+            "are schools and councils buying toilet tissue and washroom dispensers, and "
+            "an NHS couch-roll contract cannot be told from them on the title. Hand "
+            "sanitiser, bare PPE, screening, swabs and bare 'infection' were refused "
+            "for the same reason and the detail is in the rule comments. WHAT IS NOT "
+            "HERE AT ALL: antibiotics and the antimicrobial subscription model, which "
+            "are medicines and pharmacy's; microbiology culture, susceptibility testing "
+            "and molecular respiratory panels, which are pathology and laboratory "
+            "medicine's; the national screening programmes, which are public health's; "
+            "and pest control, laundry, legionella testing and water safety, which are "
+            "real Estates and Facilities spend on every one of these sites but are not "
+            "among the twenty agreements and are not claimed. NHS Supply Chain's "
+            "successor to Environmental Decontamination is renamed Environmental "
+            "Decontamination and Water Purification with a go-live of 28 March 2030, so "
+            "water purification joins this patch then; it has not joined it yet. NO "
+            "OPEN TENDER MATCHED TODAY, which means no notice on this patch is open for "
+            "bidding in this feed, not that none was looked for. "
+            "FIVE COMPANIES ARE COUNTED TWICE IN THE SUPPLIER LIST BELOW AND THE "
+            "NUMBER OF COMPANIES IS THEREFORE FIVE LOWER THAN THE COUNT. This is "
+            "said rather than quietly corrected, because merging two names without "
+            "confirming they are one company is how a false statement about a real "
+            "firm gets published. NHS Supply Chain prints each of these two ways "
+            "across its own briefs and the Hub's alias registry does not yet carry "
+            "the second spelling: 'Vernacare' and 'Vernacare LTD (Robinson "
+            "Healthcare Limited)'; 'Polyco Healthline' and 'Polyco Healthline "
+            "Limited'; 'Globus (Shetland)' and 'Globus (Shetland) Ltd'; '2 San "
+            "Global' and '2San Global Limited (New to the framework and NHS Supply "
+            "Chain)'; 'Reliance Medical' and 'Reliance Medical Ltd (New)'. This is "
+            "the first page in the rollout to carry both spellings of any of them, "
+            "because it is the first to carry sixteen frameworks at once. 58 of the "
+            "205 names below are flagged unresolved for the same reason - they are "
+            "the cleaning machine, janitorial and waste firms on the Facilities and "
+            "Office Solutions agreements, which the registry was built for medical "
+            "device companies and does not yet hold. Every one is printed exactly "
+            "as NHS Supply Chain wrote it, never dropped and never merged into "
+            "something that looks close."
+        ),
+    },
+
 }
 
 

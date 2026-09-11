@@ -1,0 +1,2950 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "infection-prevention-and-control",
+ "label": "Infection Prevention and Control",
+ "defined": true,
+ "generated": "2026-09-11",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-10T11:14:59+00:00",
+  "openTenders": "10/09/2026",
+  "drugTariff": "2026-09-10"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /\\b(gloves?|hand hygiene|skin cleansing|paper hygiene|polymer aprons|tray wrap|wipes for surface|cleaning equipment|environmental decontamination|instrument decontamination|decontamination capital|sharps waste|curtains|macerators)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. FOUR OF THIS PATCH'S TWENTY NHS SUPPLY CHAIN AGREEMENTS ARE MISSING FROM THE FRAMEWORKS LIST ABOVE, AND THEY ARE MISSING FOR A DATA REASON, NOT BECAUSE THEY DO NOT EXIST. The Hub's framework record holds them in its `unparsed` block, which means the crawler could not read a supplier list off the brief, so nothing downstream can show them. They are: Single Use Personal Protective Equipment and Medical Protective Consumables (2021/S 000-016429, 76 suppliers, published expiry 3 September 2026 already passed with the brief unchanged); Non-Sterile Single Use Fluid-Resistant Surgical Facemasks Type IIR (2023/S 000-018722, expiry 3 September 2027); Single Use Theatre Protective Wear and Related Consumables (2025/S 000-077817, expiry 25 May 2029); and Hand Hygiene Active Hand Shield (2025/S 000-077035, a direct award to one supplier, Primel Corporation Ltd, expiry 14 June 2027). Go to the Speciality page's own Buying route tab for the full twenty-row table with lots, terms and supplier counts. THE SUPPLIER LIST BELOW IS THEREFORE SIXTEEN FRAMEWORKS' WORTH, NOT TWENTY. It is not the whole supplier market on this patch and the four above carry names it does not. THERE IS NO NHS SUPPLY CHAIN INFECTION PREVENTION CATEGORY. The twenty agreements sit under Medical and Surgical Consumables, Facilities and Office Solutions, and Diagnostic Equipment and Services, so no single category filter could have produced this list and none was used: the frameworks are matched by subject, and the rule is printed above so it can be judged. WHAT WAS REFUSED, AND WHAT IT COST. Bare 'autoclave' is not in the award filter because nine of its eleven matches in this data are university and research-institute laboratory autoclaves with nothing in the title to separate them from a sterile services department; the price of that refusal is two genuine NHS rows, Bedfordshire's SSD autoclave cooling water chiller and East Suffolk and North Essex's microbiology autoclave replacement, and they are named here rather than quietly lost. Bare 'paper hygiene' is not in the award filter either, although the Paper Hygiene framework IS in the list above: seven of its nine award matches are schools and councils buying toilet tissue and washroom dispensers, and an NHS couch-roll contract cannot be told from them on the title. Hand sanitiser, bare PPE, screening, swabs and bare 'infection' were refused for the same reason and the detail is in the rule comments. WHAT IS NOT HERE AT ALL: antibiotics and the antimicrobial subscription model, which are medicines and pharmacy's; microbiology culture, susceptibility testing and molecular respiratory panels, which are pathology and laboratory medicine's; the national screening programmes, which are public health's; and pest control, laundry, legionella testing and water safety, which are real Estates and Facilities spend on every one of these sites but are not among the twenty agreements and are not claimed. NHS Supply Chain's successor to Environmental Decontamination is renamed Environmental Decontamination and Water Purification with a go-live of 28 March 2030, so water purification joins this patch then; it has not joined it yet. NO OPEN TENDER MATCHED TODAY, which means no notice on this patch is open for bidding in this feed, not that none was looked for. FIVE COMPANIES ARE COUNTED TWICE IN THE SUPPLIER LIST BELOW AND THE NUMBER OF COMPANIES IS THEREFORE FIVE LOWER THAN THE COUNT. This is said rather than quietly corrected, because merging two names without confirming they are one company is how a false statement about a real firm gets published. NHS Supply Chain prints each of these two ways across its own briefs and the Hub's alias registry does not yet carry the second spelling: 'Vernacare' and 'Vernacare LTD (Robinson Healthcare Limited)'; 'Polyco Healthline' and 'Polyco Healthline Limited'; 'Globus (Shetland)' and 'Globus (Shetland) Ltd'; '2 San Global' and '2San Global Limited (New to the framework and NHS Supply Chain)'; 'Reliance Medical' and 'Reliance Medical Ltd (New)'. This is the first page in the rollout to carry both spellings of any of them, because it is the first to carry sixteen frameworks at once. 58 of the 205 names below are flagged unresolved for the same reason - they are the cleaning machine, janitorial and waste firms on the Facilities and Office Solutions agreements, which the registry was built for medical device companies and does not yet hold. Every one is printed exactly as NHS Supply Chain wrote it, never dropped and never merged into something that looks close.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. FOUR OF THIS PATCH'S TWENTY NHS SUPPLY CHAIN AGREEMENTS ARE MISSING FROM THE FRAMEWORKS LIST ABOVE, AND THEY ARE MISSING FOR A DATA REASON, NOT BECAUSE THEY DO NOT EXIST. The Hub's framework record holds them in its `unparsed` block, which means the crawler could not read a supplier list off the brief, so nothing downstream can show them. They are: Single Use Personal Protective Equipment and Medical Protective Consumables (2021/S 000-016429, 76 suppliers, published expiry 3 September 2026 already passed with the brief unchanged); Non-Sterile Single Use Fluid-Resistant Surgical Facemasks Type IIR (2023/S 000-018722, expiry 3 September 2027); Single Use Theatre Protective Wear and Related Consumables (2025/S 000-077817, expiry 25 May 2029); and Hand Hygiene Active Hand Shield (2025/S 000-077035, a direct award to one supplier, Primel Corporation Ltd, expiry 14 June 2027). Go to the Speciality page's own Buying route tab for the full twenty-row table with lots, terms and supplier counts. THE SUPPLIER LIST BELOW IS THEREFORE SIXTEEN FRAMEWORKS' WORTH, NOT TWENTY. It is not the whole supplier market on this patch and the four above carry names it does not. THERE IS NO NHS SUPPLY CHAIN INFECTION PREVENTION CATEGORY. The twenty agreements sit under Medical and Surgical Consumables, Facilities and Office Solutions, and Diagnostic Equipment and Services, so no single category filter could have produced this list and none was used: the frameworks are matched by subject, and the rule is printed above so it can be judged. WHAT WAS REFUSED, AND WHAT IT COST. Bare 'autoclave' is not in the award filter because nine of its eleven matches in this data are university and research-institute laboratory autoclaves with nothing in the title to separate them from a sterile services department; the price of that refusal is two genuine NHS rows, Bedfordshire's SSD autoclave cooling water chiller and East Suffolk and North Essex's microbiology autoclave replacement, and they are named here rather than quietly lost. Bare 'paper hygiene' is not in the award filter either, although the Paper Hygiene framework IS in the list above: seven of its nine award matches are schools and councils buying toilet tissue and washroom dispensers, and an NHS couch-roll contract cannot be told from them on the title. Hand sanitiser, bare PPE, screening, swabs and bare 'infection' were refused for the same reason and the detail is in the rule comments. WHAT IS NOT HERE AT ALL: antibiotics and the antimicrobial subscription model, which are medicines and pharmacy's; microbiology culture, susceptibility testing and molecular respiratory panels, which are pathology and laboratory medicine's; the national screening programmes, which are public health's; and pest control, laundry, legionella testing and water safety, which are real Estates and Facilities spend on every one of these sites but are not among the twenty agreements and are not claimed. NHS Supply Chain's successor to Environmental Decontamination is renamed Environmental Decontamination and Water Purification with a go-live of 28 March 2030, so water purification joins this patch then; it has not joined it yet. NO OPEN TENDER MATCHED TODAY, which means no notice on this patch is open for bidding in this feed, not that none was looked for. FIVE COMPANIES ARE COUNTED TWICE IN THE SUPPLIER LIST BELOW AND THE NUMBER OF COMPANIES IS THEREFORE FIVE LOWER THAN THE COUNT. This is said rather than quietly corrected, because merging two names without confirming they are one company is how a false statement about a real firm gets published. NHS Supply Chain prints each of these two ways across its own briefs and the Hub's alias registry does not yet carry the second spelling: 'Vernacare' and 'Vernacare LTD (Robinson Healthcare Limited)'; 'Polyco Healthline' and 'Polyco Healthline Limited'; 'Globus (Shetland)' and 'Globus (Shetland) Ltd'; '2 San Global' and '2San Global Limited (New to the framework and NHS Supply Chain)'; 'Reliance Medical' and 'Reliance Medical Ltd (New)'. This is the first page in the rollout to carry both spellings of any of them, because it is the first to carry sixteen frameworks at once. 58 of the 205 names below are flagged unresolved for the same reason - they are the cleaning machine, janitorial and waste firms on the Facilities and Office Solutions agreements, which the registry was built for medical device companies and does not yet hold. Every one is printed exactly as NHS Supply Chain wrote it, never dropped and never merged into something that looks close.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(infection prevention|infection control|hand hygiene|handrub\\w*|gloves?|aprons?|gowns?|facemasks?|face masks?|surgical masks?|type iir|ffp2|ffp3|single use personal protective equipment|medical protective consumables|theatre wear|theatre protective wear|decontaminat\\w*|sterilis\\w*|steriliz\\w*|washer disinfect\\w*|washer.disinfectors?|disinfect\\w*|sterile services|tray wrap|skin cleansing|chlorhexidine|povidone iodine|wipes?|clinical waste|sharps|healthcare waste|macerators?|medical pulp|cleaning|curtains?|mrsa|clostridi\\w*|carbapenemase|norovirus|healthcare.associated infection|hospital.acquired infection|hcai|surgical site infection|hydrogen peroxide|ultraviolet)\\b/i and does not match /\\b(first aid|workwear|janitorial|fuel tank|asbestos|radiation|shrouds?|shower curtains?|reagents?|isolator)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33191 or 90524 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 16,
+  "suppliers": 205,
+  "suppliersUnresolved": 58,
+  "awardsShown": 40,
+  "awardsMatched": 57,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Cleaning Equipment, Supplies and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/cleaning-supplies-equipment-and-associated-products/",
+   "reference": "2024/S 000-039165",
+   "category": "Facilities and Office Solutions",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "16 June 2025",
+   "ends": "15 June 2027",
+   "supplierCount": 60,
+   "supplierSource": "count verified against the page's own stated total (60)",
+   "suppliers": [
+    "2 San Global",
+    "Ace Janitorial Supplies Ltd",
+    "Alliance Disposables Ltd",
+    "Arrow County Supplies",
+    "Banner Group Limited",
+    "Bates Office Services Ltd",
+    "Bauer Consultants Ltd",
+    "Bio Technics Ltd",
+    "Bunzl Catering",
+    "Bunzl UK Ltd T/A Bunzl Cleaning and Hygiene Supplies",
+    "Central Management Catalogue Agency UK Ltd T/A CMCA (UK)",
+    "Charles Bentley & Son Ltd",
+    "Civil Defence Supply",
+    "Crest Medical Ltd",
+    "Disposables & Catering Supplies Ltd",
+    "Diversey Ltd",
+    "Ecolab Ltd",
+    "EL Oils Limited",
+    "Essity UK Ltd – Professional Hygiene",
+    "Evans Vanodine Ltd",
+    "Freudenberg Household Products LP",
+    "GAMA Healthcare Ltd",
+    "Global View Healthcare",
+    "GT Cleaning Machines",
+    "Guest Medical Limited",
+    "GV Health",
+    "HOCL Health Ltd",
+    "Hooper Services Ltd",
+    "IIC Products Ltd T/A Victor Floorcare",
+    "Industrial Cleaning Equipment Rental Ltd",
+    "i-Team Global",
+    "Karcher UK Ltd",
+    "Killis Ltd",
+    "Kimberly-Clark Limited",
+    "Lyreco UK Limited",
+    "Nationwide Hygiene",
+    "Nilfisk Ltd",
+    "Nine Group International",
+    "Nobisco Ltd",
+    "Numatic International Ltd",
+    "Orange Technology Ltd",
+    "Parc Supplies",
+    "Pattersons (Bristol) Ltd",
+    "Polyco Healthline",
+    "Praxis Medical Ltd",
+    "Premium Wipes & Textiles Ltd",
+    "Primeline Sales & Marketing UK",
+    "PVA Hygiene",
+    "Ramon Holdings Ltd",
+    "Rexel UK Limited",
+    "Robert Scott & Sons",
+    "Scientific Sanitation Solutions Ltd",
+    "Scotmas Ltd",
+    "Scot Young Research Ltd",
+    "Sky Chemicals (UK) Ltd",
+    "SpectrumX Ltd",
+    "Synbiotix Solutions Ltd",
+    "Tennant UK",
+    "Thomas Stoner Supplies Ltd",
+    "Tristel Solutions Limited"
+   ],
+   "delisted": [
+    "Anglian Chemicals",
+    "Decitex",
+    "Hako Machines",
+    "Inivos",
+    "Kersia Ireland",
+    "Lifeclean",
+    "Techtex",
+    "Vacalesa."
+   ]
+  },
+  {
+   "name": "Clinical and Sharps Waste Management",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/clinical-and-sharps-waste-management/",
+   "reference": "2022/S 000-028722",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 November 2023",
+   "ends": "23 October 2027",
+   "supplierCount": 14,
+   "supplierSource": "count verified against the page's own stated total (14)",
+   "suppliers": [
+    "British Bins Ltd",
+    "Bunzl Healthcare (Ex S/Syringe)",
+    "Cardinal Health UK 432 Limited",
+    "Central Medical Supplies Ltd (Cms)",
+    "Econix Limited",
+    "Fannin UK Ltd",
+    "G&N Laboratory",
+    "GV Health Ltd",
+    "Inpress Precision Limited",
+    "Mauser UK Ltd",
+    "Medline Industries Ltd",
+    "NeedleDock Ltd",
+    "Valley Northern",
+    "Vernacare International Limited (previously Frontier Plastics Limited)"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Curtains, Blinds and Associated Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/curtains-and-blinds/",
+   "reference": "2025/S 000-030206",
+   "category": "Facilities and Office Solutions",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "6 October 2025",
+   "ends": "5 October 2029",
+   "supplierCount": 10,
+   "supplierSource": "count verified against the page's own stated total (10)",
+   "suppliers": [
+    "Biotechnics Ltd",
+    "Gailarde Ltd",
+    "Grosvenor Contracts London Ltd",
+    "Hygenica",
+    "Marlux Medical",
+    "Opal Health",
+    "Orn Health",
+    "Panaz Ltd",
+    "Sir Jacob Behrens",
+    "Sol Komfort Interiors Ltd"
+   ],
+   "delisted": [
+    "Inivos Ltd",
+    "Interweave Textiles",
+    "Iskus Health UK Ltd",
+    "Leo Medica Europe",
+    "Southgate Global",
+    "Yewdale."
+   ]
+  },
+  {
+   "name": "Decontamination Capital Equipment, Associated Accessories and Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/decontamination-capital-equipment-endoscopy-and-sterile-services-and-related-accessories/",
+   "reference": "2024/S 000-017758",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "19 February 2025",
+   "ends": "18 February 2027",
+   "supplierCount": 20,
+   "supplierSource": "count verified against the page's own stated total (20)",
+   "suppliers": [
+    "Advanced Sterilization Products (UK) Limited",
+    "Avidity Science Limited",
+    "BMM Weston Limited",
+    "Dekomed Limited",
+    "Ecolab Limited",
+    "Envirogen Water Technologies Limited",
+    "ESTS (GB) Limited",
+    "Getinge Limited",
+    "Hospital Services Limited",
+    "IM Med Limited",
+    "Keymed (Medical & Industrial Equipment) Limited",
+    "LTE Scientific Limited",
+    "Lubron Uk Limited",
+    "MMM Medical Equipment UK Limited",
+    "Peacocks (Surgical and Medical Equipment) Limited",
+    "Steris Solutions Limited",
+    "Sychem Limited",
+    "Tristel Solutions Limited",
+    "VWS (UK) Limited",
+    "Wassenburg Limited"
+   ],
+   "delisted": [
+    "Whitewater",
+    "OSKA Care",
+    "Partners for Endoscopy",
+    "Suez"
+   ]
+  },
+  {
+   "name": "Environmental Decontamination",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/environmental-decontamination/",
+   "reference": "2025/S 000-074584",
+   "category": "Facilities and Office Solutions",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "30 March 2026",
+   "ends": "29 March 2028",
+   "supplierCount": 22,
+   "supplierSource": "count verified against the page's own stated total (22)",
+   "suppliers": [
+    "Airbon Ltd, trading as Smart Air UK",
+    "Architectural Wallsz (International) Limited",
+    "CK Facilities Management Ltd",
+    "Daro Group Limited",
+    "Ecolab Limited",
+    "Finsen Technologies Limited",
+    "Gama Healthcare Ltd",
+    "Global Life Sciences Solutions Operations UK Ltd",
+    "Hygiene Pro Clean Ltd",
+    "I3 Membrane GMBH",
+    "Inivos UK Limited",
+    "Innotec Hygiene Solutions Ltd",
+    "Innova Nanojet Technologies Ltd",
+    "Nine Group International Ltd",
+    "Rock Compliance Limited",
+    "RON Services",
+    "Schulke & Mayr UK Limited",
+    "Scotmas Biosecurity Limited",
+    "T-Safe UK Ltd",
+    "The Global Development Partnership Limited",
+    "Uvisan Limited",
+    "VTM (UK) Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Examination Gloves",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/examination-gloves/",
+   "reference": "2023/S 000-016807",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "27 November 2023",
+   "ends": "25 April 2027",
+   "supplierCount": 19,
+   "supplierSource": "no stated count on the page; 19 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "2San Global Limited (New to the framework and NHS Supply Chain)",
+    "Abena UK Limited",
+    "Ansell Healthcare Europe sa/nv",
+    "Ergea UK and Ireland Limited (Althea UK and Ireland Limited) (New)",
+    "Bunzl Retail & Healthcare Supplies Ltd",
+    "Cargo Services Far East Limited (New)",
+    "Globus (Shetland) Ltd",
+    "H&R Healthcare Ltd (New)",
+    "Medicom Healthpro Ltd (New)",
+    "Meditrade UK Ltd (New)",
+    "Medline Industries Ltd",
+    "ORN International T/A Spectra Corporate (New)",
+    "Polyco Healthline",
+    "Reliance Medical Ltd (New)",
+    "Schottlander (New)",
+    "Semperit Investments Asia Pte Ltd",
+    "Supermax Healthcare Limited",
+    "Unigloves UK LTD",
+    "Vernacare LTD (Robinson Healthcare Limited)"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Hand Hygiene and Associated Products and Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/hand-hygiene-and-associated-products-and-services/",
+   "reference": "2023/S 000-000335",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "12 June 2023",
+   "ends": "11 June 2027",
+   "supplierCount": 21,
+   "supplierSource": "count verified against the page's own stated total (21)",
+   "suppliers": [
+    "Abbliss Ltd",
+    "Alliance Disposables Ltd",
+    "B Braun Medical Ltd",
+    "Banner",
+    "Biotechnics Ltd",
+    "Bioguard Hygiene Solutions",
+    "Creed Medical Ltd",
+    "Cuxson Gerrard & Company Ltd",
+    "Diversey Ltd",
+    "Ecohydra Technologies Ltd",
+    "Ecolab Ltd",
+    "Essity UK Ltd",
+    "Fenton Pharmaceuticals Ltd",
+    "Gama Healthcare Ltd",
+    "GDP Compliance Ltd",
+    "Lyreco UK Ltd",
+    "Nine Group International",
+    "Paul Hartmann Ltd",
+    "PDI (EMEA) Ltd",
+    "SC Johnson Ltd",
+    "Schulke & Mayr"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Instrument Decontamination and Accessories",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/instrument-decontamination-and-accessories/",
+   "reference": "2022/S 000-035065",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "22 May 2023",
+   "ends": "1 April 2028",
+   "supplierCount": 20,
+   "supplierSource": "no stated count on the page; 20 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Advanced Medical Systems Ltd",
+    "Advanced Sterilization Products (UK) Limited",
+    "Amity International",
+    "Creed Medical Ltd",
+    "Dr Weigert UK Ltd",
+    "Ecolab Ltd",
+    "Getinge Limited",
+    "i3medical",
+    "iM-MED Limited",
+    "KeyMed (Medical and Industrial Equipment) Ltd",
+    "MDI Medical Ltd",
+    "Nanosonics",
+    "Partners for Endoscopy Limited",
+    "Peacocks Medical Group",
+    "Pennamed Limited",
+    "Schulke & Mayr UK Ltd",
+    "Serchem Limited",
+    "STERIS Solutions Limited",
+    "Tristel Solutions Limited",
+    "Wassenburg Medical"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Medical Pulp, Macerators and Support Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-pulp-products-macerators-for-pulping-patient-waste-pump-stations/",
+   "reference": "ITT_596",
+   "category": "Facilities and Office Solutions",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "3 July 2023",
+   "ends": "2 July 2027",
+   "supplierCount": 11,
+   "supplierSource": "count verified against the page's own stated total (11)",
+   "suppliers": [
+    "Vernacare Limited",
+    "Moulded Fibre Products Limited",
+    "DDC Dolphin Limited",
+    "Polyco Healthline Limited",
+    "Datesand Group",
+    "Prosys International Limited",
+    "Gen X Medicare",
+    "Genmed Enterprises Limited",
+    "Valley Northern Limited",
+    "Paramount Packaging (UK) Limited",
+    "Nine Group International"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Paper Hygiene",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/paper-hygiene-products/",
+   "reference": "ITT_766",
+   "category": "Facilities and Office Solutions",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "8 April 2024",
+   "ends": "7 April 2028",
+   "supplierCount": 17,
+   "supplierSource": "count verified against the page's own stated total (17)",
+   "suppliers": [
+    "Abena",
+    "Arrow County Supplies",
+    "Banner",
+    "Essity",
+    "HC Innovations",
+    "Kimberly Clark",
+    "Lyreco",
+    "MC Tissue",
+    "Meditrade",
+    "Medscience",
+    "Metsa",
+    "Nobisco",
+    "Northwood",
+    "Parc Global Supplies",
+    "Polyco Healthline",
+    "Sofidel",
+    "UKR"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Polymer Aprons",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/polymer-aprons/",
+   "reference": "2023/S 000-014652",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked",
+   "starts": "9 October 2023",
+   "ends": "8 October 2027",
+   "supplierCount": 8,
+   "supplierSource": "no stated count on the page; 8 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Polyco",
+    "GV Health",
+    "Opalion",
+    "Polystar",
+    "PFF Plastics",
+    "Vector Consumer",
+    "GB UK Ltd",
+    "Southgate Group Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Reusable Clinical and Sharps Waste Management Service",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/reusable-clinical-sharps-waste-management/",
+   "reference": "2025/S 000-078535",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Direct",
+   "starts": "19 January 2026",
+   "ends": "18 January 2028",
+   "supplierCount": 3,
+   "supplierSource": "no stated count on the page; 3 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Grundon Waste Management Ltd",
+    "Sharpsmart Ltd",
+    "SRCL Ltd, trading as Stericycle"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Skin Cleansing, Disinfection and Hygiene",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/skin-cleansing-disinfection-and-hygiene/",
+   "reference": "2025/S 000-001018",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "16 February 2026",
+   "ends": "15 February 2028",
+   "supplierCount": 29,
+   "supplierSource": "count verified against the page's own stated total (29)",
+   "suppliers": [
+    "B Braun Medical Limited",
+    "Banner Group Limited",
+    "Becton Dickinson UK Limited",
+    "Cambridge Sensors Ltd",
+    "Cod Beck Blenders Ltd",
+    "Crest Medical Ltd",
+    "Ecolab Ltd",
+    "Essity UK Ltd – Health & Medical Solutions",
+    "Fannin UK Ltd",
+    "Gama Healthcare Ltd",
+    "KCI Medical Limited",
+    "LINC Medical",
+    "Lyreco UK Limited",
+    "Mediq Healthcare UK Ltd",
+    "Medline Industries Ltd",
+    "Molnlycke Health Care Ltd",
+    "PAL International Ltd",
+    "PDI (EMEA) Ltd",
+    "Polyco Healthline",
+    "Premium Wipes & Textiles Ltd",
+    "Procotech Limited",
+    "PTP Healthcare Ltd",
+    "Reliance Medical Ltd",
+    "Saraco Industries",
+    "Schulke & Mayr UK Ltd",
+    "Sharon Services UK Ltd",
+    "Terramed Limited",
+    "Valley Northern Ltd",
+    "Vernacare International Ltd"
+   ],
+   "delisted": [
+    "Bio-Tech Solutions Ltd",
+    "Optimum Medical Solutions Ltd",
+    "Pearmine Health Ltd",
+    "Potter & Moore Innovations Limited",
+    "Prosys International Ltd",
+    "Paul Hartmann Ltd."
+   ]
+  },
+  {
+   "name": "Surgical Gloves",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-gloves/",
+   "reference": "2022/S 000-028900",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "27 November 2023",
+   "ends": "25 April 2027",
+   "supplierCount": 9,
+   "supplierSource": "no stated count on the page; 12 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Ansell Healthcare",
+    "Cardinal Health",
+    "Globus (Shetland)",
+    "Leanvation",
+    "Meditrade UK Ltd",
+    "Medline Industries",
+    "Molnlycke",
+    "Polyco Healthline",
+    "Semperit Investment"
+   ],
+   "delisted": [
+    "Euro Packaging Ltd",
+    "Fannin Ltd",
+    "Omnimedical Ltd."
+   ]
+  },
+  {
+   "name": "Tray Wrap and Sterilisation Equipment",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/tray-wrap-and-sterilisation-goods/",
+   "reference": "2023/S 000-004551",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "2 October 2023",
+   "ends": "1 October 2027",
+   "supplierCount": 8,
+   "supplierSource": "no stated count on the page; 8 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Health Edge Solutions Ltd",
+    "IPS Converters Ltd",
+    "KCI Medical Ltd (previously 3M United Kingdom PLC)",
+    "Medline Industries Ltd",
+    "Owens and Minor Halyard Ltd",
+    "Steris Solutions Ltd",
+    "Vernacare Ltd",
+    "Westfield Medical Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Wipes for Surface Cleaning and Disinfection",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/wipes-for-surface-cleaning-and-disinfection/",
+   "reference": "2025/S 000-025231",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "6 July 2026",
+   "ends": "5 July 2029",
+   "supplierCount": 13,
+   "supplierSource": "count verified against the page's own stated total (13)",
+   "suppliers": [
+    "Arrow County Supplies",
+    "GAMA Healthcare Ltd",
+    "Guest Medical Limited",
+    "HC Innovations",
+    "LINC Medical",
+    "Lyreco UK Limited",
+    "Nuvik UK Ltd",
+    "Pal International Ltd",
+    "PDI (EMEA) LTD",
+    "Saraco Industries",
+    "Schulke & Mayr UK Ltd",
+    "Valley Northern Ltd",
+    "Vernacare International Limited"
+   ],
+   "delisted": [
+    "Bio Technics Ltd",
+    "Nine Group International."
+   ]
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Ecolab",
+   "resolved": true,
+   "variants": [
+    "Ecolab Limited",
+    "Ecolab Ltd"
+   ],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Decontamination Capital Equipment, Associated Accessories and Services",
+    "Environmental Decontamination",
+    "Hand Hygiene and Associated Products and Services",
+    "Instrument Decontamination and Accessories",
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "GAMA Healthcare",
+   "resolved": true,
+   "variants": [
+    "GAMA Healthcare Ltd",
+    "Gama Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Environmental Decontamination",
+    "Hand Hygiene and Associated Products and Services",
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "Lyreco UK Limited",
+   "resolved": true,
+   "variants": [
+    "Lyreco",
+    "Lyreco UK Limited",
+    "Lyreco UK Ltd"
+   ],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Hand Hygiene and Associated Products and Services",
+    "Paper Hygiene",
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries",
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Clinical and Sharps Waste Management",
+    "Examination Gloves",
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Surgical Gloves",
+    "Tray Wrap and Sterilisation Equipment"
+   ]
+  },
+  {
+   "name": "Polyco Healthline",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Examination Gloves",
+    "Paper Hygiene",
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Surgical Gloves"
+   ]
+  },
+  {
+   "name": "Schulke & Mayr UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Schulke & Mayr",
+    "Schulke & Mayr UK Limited",
+    "Schulke & Mayr UK Ltd"
+   ],
+   "frameworks": [
+    "Environmental Decontamination",
+    "Hand Hygiene and Associated Products and Services",
+    "Instrument Decontamination and Accessories",
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "Vernacare",
+   "resolved": true,
+   "variants": [
+    "Vernacare International Limited",
+    "Vernacare International Limited (previously Frontier Plastics Limited)",
+    "Vernacare International Ltd",
+    "Vernacare Limited",
+    "Vernacare Ltd"
+   ],
+   "frameworks": [
+    "Clinical and Sharps Waste Management",
+    "Medical Pulp, Macerators and Support Products",
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Tray Wrap and Sterilisation Equipment",
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "Banner Group Limited",
+   "resolved": true,
+   "variants": [
+    "Banner",
+    "Banner Group Limited"
+   ],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Hand Hygiene and Associated Products and Services",
+    "Paper Hygiene",
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "Nine Group International",
+   "resolved": true,
+   "variants": [
+    "Nine Group International",
+    "Nine Group International Ltd"
+   ],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Environmental Decontamination",
+    "Hand Hygiene and Associated Products and Services",
+    "Medical Pulp, Macerators and Support Products"
+   ]
+  },
+  {
+   "name": "Valley Northern Ltd",
+   "resolved": true,
+   "variants": [
+    "Valley Northern",
+    "Valley Northern Limited",
+    "Valley Northern Ltd"
+   ],
+   "frameworks": [
+    "Clinical and Sharps Waste Management",
+    "Medical Pulp, Macerators and Support Products",
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "Arrow County Supplies",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Paper Hygiene",
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "Biotechnics Ltd",
+   "resolved": true,
+   "variants": [
+    "Bio Technics Ltd",
+    "Biotechnics Ltd"
+   ],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Curtains, Blinds and Associated Services",
+    "Hand Hygiene and Associated Products and Services"
+   ]
+  },
+  {
+   "name": "Essity UK Limited",
+   "resolved": true,
+   "variants": [
+    "Essity",
+    "Essity UK Ltd",
+    "Essity UK Ltd – Health & Medical Solutions"
+   ],
+   "frameworks": [
+    "Hand Hygiene and Associated Products and Services",
+    "Paper Hygiene",
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "GV Health",
+   "resolved": true,
+   "variants": [
+    "GV Health",
+    "GV Health Ltd"
+   ],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Clinical and Sharps Waste Management",
+    "Polymer Aprons"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Bunzl Healthcare (Ex S/Syringe)",
+    "Bunzl Retail & Healthcare Supplies Ltd",
+    "Mediq Healthcare UK Ltd"
+   ],
+   "frameworks": [
+    "Clinical and Sharps Waste Management",
+    "Examination Gloves",
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "Meditrade UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Meditrade",
+    "Meditrade UK Ltd",
+    "Meditrade UK Ltd (New)"
+   ],
+   "frameworks": [
+    "Examination Gloves",
+    "Paper Hygiene",
+    "Surgical Gloves"
+   ]
+  },
+  {
+   "name": "PDI (EMEA)",
+   "resolved": true,
+   "variants": [
+    "PDI (EMEA) LTD",
+    "PDI (EMEA) Ltd"
+   ],
+   "frameworks": [
+    "Hand Hygiene and Associated Products and Services",
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "Steris",
+   "resolved": true,
+   "variants": [
+    "STERIS Solutions Limited",
+    "Steris Solutions Limited",
+    "Steris Solutions Ltd"
+   ],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services",
+    "Instrument Decontamination and Accessories",
+    "Tray Wrap and Sterilisation Equipment"
+   ]
+  },
+  {
+   "name": "Tristel Solutions Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Decontamination Capital Equipment, Associated Accessories and Services",
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Abena UK Limited",
+   "resolved": true,
+   "variants": [
+    "Abena",
+    "Abena UK Limited"
+   ],
+   "frameworks": [
+    "Examination Gloves",
+    "Paper Hygiene"
+   ]
+  },
+  {
+   "name": "Advanced Sterilization Products (UK) Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services",
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Alliance Disposables Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Hand Hygiene and Associated Products and Services"
+   ]
+  },
+  {
+   "name": "Ansell",
+   "resolved": true,
+   "variants": [
+    "Ansell Healthcare",
+    "Ansell Healthcare Europe sa/nv"
+   ],
+   "frameworks": [
+    "Examination Gloves",
+    "Surgical Gloves"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B Braun Medical Limited",
+    "B Braun Medical Ltd"
+   ],
+   "frameworks": [
+    "Hand Hygiene and Associated Products and Services",
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "Cardinal Health U.K. 432 Ltd",
+   "resolved": true,
+   "variants": [
+    "Cardinal Health",
+    "Cardinal Health UK 432 Limited"
+   ],
+   "frameworks": [
+    "Clinical and Sharps Waste Management",
+    "Surgical Gloves"
+   ]
+  },
+  {
+   "name": "Creed Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hand Hygiene and Associated Products and Services",
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "Diversey",
+   "resolved": true,
+   "variants": [
+    "Diversey Ltd"
+   ],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Hand Hygiene and Associated Products and Services"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Ltd"
+   ],
+   "frameworks": [
+    "Clinical and Sharps Waste Management",
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "Getinge",
+   "resolved": true,
+   "variants": [
+    "Getinge Limited"
+   ],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services",
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Guest Medical Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "HC Innovations",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Paper Hygiene",
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "iM-MED Limited",
+   "resolved": true,
+   "variants": [
+    "IM Med Limited",
+    "iM-MED Limited"
+   ],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services",
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Kimberly Clark",
+   "resolved": true,
+   "variants": [
+    "Kimberly Clark",
+    "Kimberly-Clark Limited"
+   ],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Paper Hygiene"
+   ]
+  },
+  {
+   "name": "LINC Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "Mölnlycke",
+   "resolved": true,
+   "variants": [
+    "Molnlycke",
+    "Molnlycke Health Care Ltd"
+   ],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Surgical Gloves"
+   ]
+  },
+  {
+   "name": "Nobisco",
+   "resolved": true,
+   "variants": [
+    "Nobisco",
+    "Nobisco Ltd"
+   ],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Paper Hygiene"
+   ]
+  },
+  {
+   "name": "Olympus (KeyMed)",
+   "resolved": true,
+   "variants": [
+    "KeyMed (Medical and Industrial Equipment) Ltd",
+    "Keymed (Medical & Industrial Equipment) Limited"
+   ],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services",
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "PAL International Ltd",
+   "resolved": true,
+   "variants": [
+    "PAL International Ltd",
+    "Pal International Ltd"
+   ],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "Premium Wipes & Textiles Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "Saraco Industries",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "Wassenburg Medical",
+   "resolved": true,
+   "variants": [
+    "Wassenburg Limited",
+    "Wassenburg Medical"
+   ],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services",
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "2 San Global",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "2San Global Limited (New to the framework and NHS Supply Chain)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "Abbliss Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hand Hygiene and Associated Products and Services"
+   ]
+  },
+  {
+   "name": "Ace Janitorial Supplies Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Advanced Medical Systems Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Airbon Ltd, trading as Smart Air UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Amity International",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Architectural Wallsz (International) Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Avidity Science Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Bates Office Services Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Bauer Consultants Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton Dickinson UK Limited"
+   ],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "Bioguard Hygiene Solutions",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Hand Hygiene and Associated Products and Services"
+   ]
+  },
+  {
+   "name": "BMM Weston Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "British Bins Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Clinical and Sharps Waste Management"
+   ]
+  },
+  {
+   "name": "Bunzl Catering",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Bunzl UK Ltd T/A Bunzl Cleaning and Hygiene Supplies",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Cambridge Sensors Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "Cargo Services Far East Limited",
+   "resolved": true,
+   "variants": [
+    "Cargo Services Far East Limited (New)"
+   ],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "Central Management Catalogue Agency UK Ltd T/A CMCA(UK)",
+   "resolved": true,
+   "variants": [
+    "Central Management Catalogue Agency UK Ltd T/A CMCA (UK)"
+   ],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Central Medical Supplies",
+   "resolved": true,
+   "variants": [
+    "Central Medical Supplies Ltd (Cms)"
+   ],
+   "frameworks": [
+    "Clinical and Sharps Waste Management"
+   ]
+  },
+  {
+   "name": "Charles Bentley & Son Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Civil Defence Supply",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "CK Facilities Management Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Cod Beck Blenders",
+   "resolved": true,
+   "variants": [
+    "Cod Beck Blenders Ltd"
+   ],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "Cuxson Gerrard & Company Limited",
+   "resolved": true,
+   "variants": [
+    "Cuxson Gerrard & Company Ltd"
+   ],
+   "frameworks": [
+    "Hand Hygiene and Associated Products and Services"
+   ]
+  },
+  {
+   "name": "Daniels Health (Sharpsmart)",
+   "resolved": true,
+   "variants": [
+    "Sharpsmart Ltd"
+   ],
+   "frameworks": [
+    "Reusable Clinical and Sharps Waste Management Service"
+   ]
+  },
+  {
+   "name": "Daro Group Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Datesand Group",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Medical Pulp, Macerators and Support Products"
+   ]
+  },
+  {
+   "name": "DDC Dolphin Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Medical Pulp, Macerators and Support Products"
+   ]
+  },
+  {
+   "name": "Dekomed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Disposables & Catering Supplies Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Dr Weigert UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Ecohydra Technologies Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Hand Hygiene and Associated Products and Services"
+   ]
+  },
+  {
+   "name": "Econix Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Clinical and Sharps Waste Management"
+   ]
+  },
+  {
+   "name": "EL Oils Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Envirogen Water Technologies Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
+   "resolved": true,
+   "variants": [
+    "Ergea UK and Ireland Limited (Althea UK and Ireland Limited) (New)"
+   ],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "Essity UK Ltd – Professional Hygiene",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "ESTS (GB)",
+   "resolved": true,
+   "variants": [
+    "ESTS (GB) Limited"
+   ],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Evans Vanodine Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Fenton Pharmaceuticals Limited",
+   "resolved": true,
+   "variants": [
+    "Fenton Pharmaceuticals Ltd"
+   ],
+   "frameworks": [
+    "Hand Hygiene and Associated Products and Services"
+   ]
+  },
+  {
+   "name": "Finsen Technologies Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Freudenberg Household Products LP",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "G&N Laboratory",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Clinical and Sharps Waste Management"
+   ]
+  },
+  {
+   "name": "Gailarde Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Curtains, Blinds and Associated Services"
+   ]
+  },
+  {
+   "name": "GB UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Polymer Aprons"
+   ]
+  },
+  {
+   "name": "GDP Compliance Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hand Hygiene and Associated Products and Services"
+   ]
+  },
+  {
+   "name": "Genmed Enterprises Ltd",
+   "resolved": true,
+   "variants": [
+    "Genmed Enterprises Limited"
+   ],
+   "frameworks": [
+    "Medical Pulp, Macerators and Support Products"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "Gen X Medicare"
+   ],
+   "frameworks": [
+    "Medical Pulp, Macerators and Support Products"
+   ]
+  },
+  {
+   "name": "Global Life Sciences Solutions Operations UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Global View Healthcare",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Globus (Shetland)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Surgical Gloves"
+   ]
+  },
+  {
+   "name": "Globus (Shetland) Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "Grosvenor Contracts London Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Curtains, Blinds and Associated Services"
+   ]
+  },
+  {
+   "name": "Grundon Waste Management Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Reusable Clinical and Sharps Waste Management Service"
+   ]
+  },
+  {
+   "name": "GT Cleaning Machines",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "H & R Healthcare Ltd",
+   "resolved": true,
+   "variants": [
+    "H&R Healthcare Ltd (New)"
+   ],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "Health Edge Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Tray Wrap and Sterilisation Equipment"
+   ]
+  },
+  {
+   "name": "HOCL Health Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Hooper Services Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Hospital Services Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Hygenica",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Curtains, Blinds and Associated Services"
+   ]
+  },
+  {
+   "name": "Hygiene Pro Clean Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "i-Team Global",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "I3 Membrane GMBH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "i3medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "IIC Products Ltd T/A Victor Floorcare",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Industrial Cleaning Equipment Rental Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Inivos UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Innotec Hygiene Solutions Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Innova Nanojet Technologies Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Inpress Precision Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Clinical and Sharps Waste Management"
+   ]
+  },
+  {
+   "name": "IPS Converters Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Tray Wrap and Sterilisation Equipment"
+   ]
+  },
+  {
+   "name": "Karcher UK Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "KCI Medical Ltd (previously 3M United Kingdom PLC)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Tray Wrap and Sterilisation Equipment"
+   ]
+  },
+  {
+   "name": "Killis Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Leanvation",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Surgical Gloves"
+   ]
+  },
+  {
+   "name": "LTE Scientific Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Lubron UK Limited",
+   "resolved": true,
+   "variants": [
+    "Lubron Uk Limited"
+   ],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Marlux Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Curtains, Blinds and Associated Services"
+   ]
+  },
+  {
+   "name": "Mauser UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Clinical and Sharps Waste Management"
+   ]
+  },
+  {
+   "name": "MC Tissue",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Paper Hygiene"
+   ]
+  },
+  {
+   "name": "MDI Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Medicom Healthpro Ltd",
+   "resolved": true,
+   "variants": [
+    "Medicom Healthpro Ltd (New)"
+   ],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "Medscience",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Paper Hygiene"
+   ]
+  },
+  {
+   "name": "Metsa",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Paper Hygiene"
+   ]
+  },
+  {
+   "name": "MMM Medical Equipment UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Moulded Fibre Products Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Medical Pulp, Macerators and Support Products"
+   ]
+  },
+  {
+   "name": "Nanosonics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Nationwide Hygiene",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "NeedleDock Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Clinical and Sharps Waste Management"
+   ]
+  },
+  {
+   "name": "Nilfisk Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Northwood",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Paper Hygiene"
+   ]
+  },
+  {
+   "name": "Numatic International Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Nuvik UK Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Wipes for Surface Cleaning and Disinfection"
+   ]
+  },
+  {
+   "name": "Opal Health",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Curtains, Blinds and Associated Services"
+   ]
+  },
+  {
+   "name": "Opalion",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Polymer Aprons"
+   ]
+  },
+  {
+   "name": "Orange Technology Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Orn Health",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Curtains, Blinds and Associated Services"
+   ]
+  },
+  {
+   "name": "ORN International T/A Spectra Corporate",
+   "resolved": true,
+   "variants": [
+    "ORN International T/A Spectra Corporate (New)"
+   ],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "Owens and Minor Halyard Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Tray Wrap and Sterilisation Equipment"
+   ]
+  },
+  {
+   "name": "Panaz Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Curtains, Blinds and Associated Services"
+   ]
+  },
+  {
+   "name": "Paramount Packaging (UK) Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Medical Pulp, Macerators and Support Products"
+   ]
+  },
+  {
+   "name": "Parc Global Supplies",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Paper Hygiene"
+   ]
+  },
+  {
+   "name": "Parc Supplies",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Partners for Endoscopy Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Pattersons (Bristol) Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Paul Hartmann (HARTMANN)",
+   "resolved": true,
+   "variants": [
+    "Paul Hartmann Ltd"
+   ],
+   "frameworks": [
+    "Hand Hygiene and Associated Products and Services"
+   ]
+  },
+  {
+   "name": "Peacocks (Surgical and Medical Equipment) Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Peacocks Medical Group",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Pennamed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "PFF Plastics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Polymer Aprons"
+   ]
+  },
+  {
+   "name": "Polyco",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Polymer Aprons"
+   ]
+  },
+  {
+   "name": "Polyco Healthline Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Medical Pulp, Macerators and Support Products"
+   ]
+  },
+  {
+   "name": "Polystar",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Polymer Aprons"
+   ]
+  },
+  {
+   "name": "Praxis Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Primeline Sales & Marketing UK",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Procotech Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "ProSys International Ltd",
+   "resolved": true,
+   "variants": [
+    "Prosys International Limited"
+   ],
+   "frameworks": [
+    "Medical Pulp, Macerators and Support Products"
+   ]
+  },
+  {
+   "name": "PTP Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "PVA Hygiene",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Ramon Holdings Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "Reliance Medical Ltd (New)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "Rexel UK Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Robert Scott & Sons",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Rock Compliance Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "RON Services",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "SC Johnson Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Hand Hygiene and Associated Products and Services"
+   ]
+  },
+  {
+   "name": "Schottlander",
+   "resolved": true,
+   "variants": [
+    "Schottlander (New)"
+   ],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "Scientific Sanitation Solutions Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Scot Young Research Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Scotmas Biosecurity Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Scotmas Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Semperit Investment",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Surgical Gloves"
+   ]
+  },
+  {
+   "name": "Semperit Investments Asia",
+   "resolved": true,
+   "variants": [
+    "Semperit Investments Asia Pte Ltd"
+   ],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "Serchem Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Instrument Decontamination and Accessories"
+   ]
+  },
+  {
+   "name": "Sharon Services (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Sharon Services UK Ltd"
+   ],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "Sir Jacob Behrens",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Curtains, Blinds and Associated Services"
+   ]
+  },
+  {
+   "name": "Sky Chemicals (UK) Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "Sofidel",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Paper Hygiene"
+   ]
+  },
+  {
+   "name": "Sol Komfort Interiors Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Curtains, Blinds and Associated Services"
+   ]
+  },
+  {
+   "name": "Solventum (3M Health Care)",
+   "resolved": true,
+   "variants": [
+    "KCI Medical Limited"
+   ],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "Southgate Group Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Polymer Aprons"
+   ]
+  },
+  {
+   "name": "SpectrumX Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "SRCL Ltd, trading as Stericycle",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Reusable Clinical and Sharps Waste Management Service"
+   ]
+  },
+  {
+   "name": "Supermax Healthcare",
+   "resolved": true,
+   "variants": [
+    "Supermax Healthcare Limited"
+   ],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "Sychem",
+   "resolved": true,
+   "variants": [
+    "Sychem Limited"
+   ],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Synbiotix Solutions Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "T-Safe UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Tennant UK",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "TerraMed Limited",
+   "resolved": true,
+   "variants": [
+    "Terramed Limited"
+   ],
+   "frameworks": [
+    "Skin Cleansing, Disinfection and Hygiene"
+   ]
+  },
+  {
+   "name": "The Global Development Partnership Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Thomas Stoner Supplies Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Cleaning Equipment, Supplies and Associated Products"
+   ]
+  },
+  {
+   "name": "UKR",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Paper Hygiene"
+   ]
+  },
+  {
+   "name": "Unigloves (UK)",
+   "resolved": true,
+   "variants": [
+    "Unigloves UK LTD"
+   ],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "Uvisan Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "Vector Consumer",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Polymer Aprons"
+   ]
+  },
+  {
+   "name": "Vernacare LTD (Robinson Healthcare Limited)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Examination Gloves"
+   ]
+  },
+  {
+   "name": "VTM (UK) Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Environmental Decontamination"
+   ]
+  },
+  {
+   "name": "VWS (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "VWS (UK) Limited"
+   ],
+   "frameworks": [
+    "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Westfield Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Tray Wrap and Sterilisation Equipment"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "The Supply of Sterilisation Products",
+   "buyer": "University Hospitals of North Midlands NHS Trust",
+   "supplier": null,
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085454-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33191000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "OUTSOURCING OF COMMUNITY CLEANING SERVICES",
+   "buyer": "Cardiff and Vale University Health Board",
+   "supplier": null,
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085414-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "90910000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Healthcare Waste Collection, Treatment and Disposal Services",
+   "buyer": "THE NEWCASTLE UPON TYNE HOSPITALS NHS FOUNDATION TRUST",
+   "supplier": "SHARPSMART LIMITED, SUEZ RECYCLING AND RECOVERY UK LTD",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084531-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "90524000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Maintenance of Water Treatment Systems including Supply and Delivery of Salt relating to a range of Hospital Equip including Decontamination and Renal Equipment, Chemical and Microbiological Water Testing and Provision of Associated Testing Consumables",
+   "buyer": "Belfast Health & Social Care Trust",
+   "supplier": "CHEMICAL TREATMENT SERVICES (IRELAND) LIMITED, Veolia Water Technologies, THEATRE AND ENDOSCOPY SERVICE TECHNICIANS LIMITED",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083732-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "15872400",
+    "24000000",
+    "33698100",
+    "39137000",
+    "41000000",
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "CVH - Macerators plus Maintenance for 2 Years",
+   "buyer": "Sussex Partnership NHS Foundation Trust",
+   "supplier": "DDC Dolphin Limited",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083292-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45330000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Washer Disinfector Units Maintenance (202-134 & 202-135)",
+   "buyer": "Aneurin Bevan University Health Board",
+   "supplier": "WASSENBURG LIMITED",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082505-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50421000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Clinical Waste Management Services",
+   "buyer": "University Hospitals of Morecambe Bay NHS Foundation Trust",
+   "supplier": "Sharpsmart Limited",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082705-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "90524100",
+    "90524200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Community Infection Prevention and Control (IPC) Services",
+   "buyer": "Walsall Council",
+   "supplier": null,
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080790-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Clinical & Sharps Waste Management",
+   "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+   "supplier": null,
+   "date": "2026-08-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080300-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000",
+    "33141000",
+    "33141123",
+    "33141124",
+    "33190000",
+    "34928480",
+    "44613800",
+    "44619000",
+    "90524100",
+    "90524200",
+    "90524300",
+    "90524400"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Automated Endoscope Washer Disinfectors",
+   "buyer": "Great Western Hospitals NHS Foundation Trust",
+   "supplier": "Wassenburg Medical UK Limited",
+   "date": "2026-08-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080288-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33100000",
+    "50421000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Clinical Waste Containers",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": "Vernacare International Ltd",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079630-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "44613800"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Community Cleaning Contract ",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078953-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "90910000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Framework for the Provision of FFP3 Masks",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078709-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33199000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Cleaning Services at Yeomans House UHD",
+   "buyer": "University Hospitals Dorset NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075783-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "90919200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Sitewide Macerator upgrade",
+   "buyer": "The Christie NHS Foundation Trust",
+   "supplier": "Vernacare International Limited",
+   "date": "2026-07-24",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/1659217d-9894-438a-a010-06496a73b76e",
+   "value": 30889,
+   "periodEnd": "2027-06-15",
+   "source": "tender-history"
+  },
+  {
+   "title": "WSFT - Capital Purchase - ENT - Disinfection equipment incl Warranty device",
+   "buyer": "West Suffolk NHS Foundation Trust",
+   "supplier": "WASSENBURG MEDICAL LTD",
+   "date": "2026-07-24",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/3b3d91d7-6760-4518-a66f-82aaac12e0ce",
+   "value": 237110,
+   "periodEnd": "2027-06-29",
+   "source": "tender-history"
+  },
+  {
+   "title": "Surgical Gloves",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "MEDLINE INDUSTRIES LTD, Cardinal Health UK 432 Limited, Molnlycke Health Care, A",
+   "date": "2026-06-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/052593-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Hire of Mobile EDU Decontamination Unit",
+   "buyer": "The Queen Elizabeth Hospital King's Lynn NHS Foundation Trust",
+   "supplier": "EMS Healthcare Limited",
+   "date": "2026-05-06",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/93272033-3bae-4d9a-942e-019b3141e51f",
+   "value": 601382,
+   "periodEnd": "2026-03-31",
+   "source": "tender-history"
+  },
+  {
+   "title": "PPE Mini Competition Hand Hygiene",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Alliance Disposables Limited, Ecolab Ltd",
+   "date": "2026-01-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/006082-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Non-Sterile Single Use Type IIR Facemasks without Anti-Fog Strip",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "GLOBUS (SHETLAND) LIMITED",
+   "date": "2025-12-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080691-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Disinfectants",
+   "buyer": "NHS Blood and Transplant",
+   "supplier": "MICRONCLEAN LIMITED",
+   "date": "2025-09-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/060932-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Supply of Sterile Services Consumables",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "O&M Halyard UK Limited, STERIS SOLUTIONS Limited, Vernacare International Limite",
+   "date": "2025-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/051445-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Medical Pulp (4951708)",
+   "buyer": "BSO Procurement and Logistics Service",
+   "supplier": "MDI MEDICAL N.I. LTD",
+   "date": "2024-12-06",
+   "url": "https://www.find-tender.service.gov.uk/Notice/039430-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "[4782426] MMM Steriliser Spare Parts",
+   "buyer": "Business Services Organisation, Procurement and Logistics Service",
+   "supplier": "MMM MEDICAL EQUIPMENT U K LTD",
+   "date": "2023-10-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/030844-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NP43518 Chlorhexidine & Povidone Iodine Solutions",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Ecolab Ltd, Insight Health Limited, GAMA Healthcare Ltd, Molnlycke Health Care",
+   "date": "2023-09-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028499-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "BSOL Examination Gloves",
+   "buyer": "University Hospitals Birmingham NHS Foundation Trust",
+   "supplier": "Reliance Medical Ltd",
+   "date": "2023-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/028103-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Disposable Drapes, Gowns, Light Handle Covers and Theatre wear",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "MEDLINE IRELAND LIMITED, CLONALLON LABORATORIES LTD, ACCU-SCIENCE IRELAND LTD, F",
+   "date": "2023-07-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/021528-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Tray Wrap & Sterilisation Products",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Medline Industries Ltd, Health Edge Solutions, Owens & Minor Halyard UK Ltd, STE",
+   "date": "2023-06-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016805-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Surgical Gloves",
+   "buyer": "Supply Chain Coordination Limited",
+   "supplier": "Ansell Healthcare Europe, Cardinal Health UK 432 Limited, Globus (shetland) ltd,",
+   "date": "2023-06-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/016808-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Hand Hygiene Products [4016092]",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "GOJO INDUSTRIES - EUROPE LIMITED, BUNZL MCLAUGHLIN, ESSITY UK LTD, DIVERSEY LTD,",
+   "date": "2022-12-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/034175-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "[3807864] - Spare Parts for Cantel RapidAER Endoscope Washer Disinfector, Cantel EDC10T2 Endoscope Drying Cabinet and Su",
+   "buyer": "Business Services Organisation, Procurement and Logistics Service",
+   "supplier": "Cantel UK Ltd",
+   "date": "2022-12-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/034229-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "AA-84-22-MC NP143/21 Instrument Washer Disinfectors",
+   "buyer": "NHS Ayrshire & Arran",
+   "supplier": "MMM Medical Equipment UK Ltd",
+   "date": "2022-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/022046-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "PPE-Gowns",
+   "buyer": "Department of Health and Social Care",
+   "supplier": "A Plus International",
+   "date": "2022-03-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/006190-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NHS Greater Glasgow and Clyde COVID-19 Disposable Surgical Gowns",
+   "buyer": "NHS Greater Glasgow and Clyde",
+   "supplier": "Costain Environmental Services",
+   "date": "2022-02-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004527-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "NHS Greater Glasgow and Clyde COVID-19 Disposable Surgical Gowns",
+   "buyer": "NHS Greater Glasgow and Clyde",
+   "supplier": "Costain Environmental Services",
+   "date": "2022-02-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004528-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Sterilisation Tray Liners and Sterilisation Paper.",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "WESTFIELD MEDICAL LIMITED",
+   "date": "2022-02-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/004092-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Skin Cleansing and Disinfection",
+   "buyer": "NHS Supply Chain",
+   "supplier": "Gama Healthcare Ltd, Pearmine Health Ltd, Procotech Ltd, Robinson Healthcare Lim",
+   "date": "2022-01-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002764-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Surgical Gloves 2536562",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "MEDLINE IRELAND LIMITED, MEDICARE PRODUCTS LIMITED, Healthcare Essentials Ltd, A",
+   "date": "2021-12-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/032036-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Standard Length Examination Gloves, Nitrile",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "Bunzl Retail & Healthcare Supplies Ltd -365 Healthcare",
+   "date": "2021-11-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027549-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "FFP3 Facemasks",
+   "buyer": "Procurement & Logistics Service",
+   "supplier": "Alpha Solway Ltd",
+   "date": "2021-07-30",
+   "url": "https://www.find-tender.service.gov.uk/Notice/018194-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}

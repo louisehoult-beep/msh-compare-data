@@ -47,6 +47,7 @@ ENT = "ent-and-head-and-neck"
 AUDIO = "audiology-and-hearing"
 COLO = "colorectal-gi-and-endoscopy"
 DERM = "dermatology"
+IPC = "infection-prevention-and-control"
 fails = []
 
 
@@ -5101,6 +5102,229 @@ for want in [
 
 print("  open tenders — empty is the honest answer, not a miss")
 check("no open notice on this patch today", de["openTenders"] == [])
+
+
+# ---------------------------------------------------------------------------
+# INFECTION PREVENTION AND CONTROL. The biggest framework patch in the rollout -
+# sixteen NHS Supply Chain agreements matched here, out of the twenty the page
+# itself counts - and the first whose frameworks are spread across THREE unrelated
+# NHSSC categories, because NHS Supply Chain has no infection prevention category
+# at all. That is why the framework pattern names subjects and not a category, and
+# why the first invariant below is that it returns those sixteen and nothing else.
+#
+# The include's dangers are all words this patch shares with somebody else's
+# budget: "cleaning" is estates and schools, "gloves" is radiology and first aid
+# boxes, "decontamination" is asbestos, "gown" is a mortuary shroud, "curtain" is
+# a shower rail, "antimicrobial" is an antibiotic, and "autoclave" is a university
+# research laboratory nine times out of eleven. Four of those were refused in the
+# include instead of admitted; the rest are the exclusion list, and both halves
+# are tested here.
+# ---------------------------------------------------------------------------
+print("\nINFECTION PREVENTION AND CONTROL")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), IPC],
+               check=True, capture_output=True)
+ip = load_panel(IPC)
+check("panel is defined", ip.get("defined") is True)
+
+_ip_rule = B.SPECIALITY_RULES[IPC]
+_ip_rx = B.compile_rule(_ip_rule)
+_ip_fw = sorted(f["name"] for f in ip["frameworks"])
+
+print("  the sixteen frameworks, by name, and no seventeenth")
+_IPC_SIXTEEN = sorted([
+    "Cleaning Equipment, Supplies and Associated Products",
+    "Clinical and Sharps Waste Management",
+    "Curtains, Blinds and Associated Services",
+    "Decontamination Capital Equipment, Associated Accessories and Services",
+    "Environmental Decontamination",
+    "Examination Gloves",
+    "Hand Hygiene and Associated Products and Services",
+    "Instrument Decontamination and Accessories",
+    "Medical Pulp, Macerators and Support Products",
+    "Paper Hygiene",
+    "Polymer Aprons",
+    "Reusable Clinical and Sharps Waste Management Service",
+    "Skin Cleansing, Disinfection and Hygiene",
+    "Surgical Gloves",
+    "Tray Wrap and Sterilisation Equipment",
+    "Wipes for Surface Cleaning and Disinfection",
+])
+check("exactly sixteen frameworks", len(_ip_fw) == 16, "got %d" % len(_ip_fw))
+check("and they are exactly the sixteen that were read", _ip_fw == _IPC_SIXTEEN,
+      "unexpected: %s" % "; ".join(set(_ip_fw) ^ set(_IPC_SIXTEEN)))
+
+print("  the framework pattern does not reach a neighbouring agreement")
+for bad in [
+        # "Advanced Wound Care" and "General Wound Care" are tissue viability's, and
+        # neither may arrive on a pattern that contains "cleaning" or "hygiene".
+        "Advanced Wound Care",
+        "General Wound Care",
+        # Uniforms and textiles are Facilities like Paper Hygiene is, and are NOT
+        # among the twenty. The patch is not "everything Facilities buys".
+        "NHS Healthcare Uniform",
+        "Textiles and Associated Products",
+        "National Ambulance Uniforms and General Workwear",
+        # Surgical Instruments is theatres'; sterilisation of them is this patch's,
+        # buying them is not.
+        "Surgical Instruments",
+        "Procedure Packs",
+        # Catering and office consumables share the Facilities category and nothing
+        # else.
+        "Catering Consumables and Equipment",
+        "Office Supplies",
+]:
+    check("framework never claimed: %s" % bad[:52],
+          not __import__("re").compile(_ip_rule["frameworks"], __import__("re").I).search(bad))
+
+print("  the true positives — every award title in the slice was read before publishing")
+_ip_titles = [a["title"] for a in ip["awards"]]
+for want in [
+        "Community Infection Prevention and Control (IPC) Services",
+        "Clinical & Sharps Waste Management",
+        "Automated Endoscope Washer Disinfectors",
+        "Framework for the Provision of FFP3 Masks",
+        "Skin Cleansing and Disinfection",
+        "Hand Hygiene Products [4016092]",
+        "Tray Wrap & Sterilisation Products",
+        "Non-Sterile Single Use Type IIR Facemasks without Anti-Fog Strip",
+        "Sitewide Macerator upgrade",
+        "Medical Pulp (4951708)",
+]:
+    check("carried: %s" % want[:58], want in _ip_titles)
+
+print("  the exclusion list — every one of these is a real row that matched and was wrong")
+for bad in [
+        # first aid / workwear — Kent County Council and Scotland Excel buying
+        # first aid boxes and safety clothing, not barrier precautions.
+        "First Aid Consumables, Equipment and Disposable Gloves – Y21031",
+        "First Aid Equipment, Disposable Gloves, PPE and Workwear – Y20044",
+        "Supply and Delivery of Personal Protective Equipment (PPE), First Aid "
+        "Materials and Workwear",
+        # janitorial — a schools catering and cleaning contractor.
+        "CLEANING MATERIALS & JANITORIAL SUPPLIES",
+        # fuel tank — an estates job that shares one word with this patch.
+        "WHHT - Specialist Fuel Tank Cleaning & Scaffolding",
+        # asbestos — decontamination of a plant room, not of an instrument.
+        "WHHT - Emergency DCU Supply and Plant Room Asbestos Decontamination Services",
+        # radiation — lead-equivalent radiology protection, not IPC PPE.
+        "Supply of Radiation Gloves",
+        "X-Ray Protective Wear and Accessories",
+        # shroud — patient and mortuary wear.
+        "Multi-Purpose Butterfly Sleeve Gown/Shroud",
+        # shower curtain — a washroom fitting, not the antimicrobial cubicle range.
+        "Shower Curtains & Brackets",
+        # reagent — a molecular respiratory panel bought by pathology.
+        "Cepheid Cov2/FLU/RSV/MRSA Reagents",
+        # isolator — a pharmacy aseptic cabinet. VHP is this patch's technology;
+        # the isolator is not this patch's purchase.
+        "Integrated Vapour Hydrogen Peroxide (VHP)–Isolator Module",
+]:
+    check("never admitted: %s" % bad[:56], not B.match_title(_ip_rx, bad))
+
+print("  the words REFUSED IN THE INCLUDE stay refused — these never reach the exclusion list")
+for bad in [
+        # autoclave — nine of eleven matches are university and research-institute
+        # laboratory autoclaves, and bare "Autoclave 2024" cannot be told from a
+        # sterile services department on the title.
+        "Autoclave 2024",
+        "Autoclave",
+        "Purchase of Autoclaves",
+        "Replacement of Life Science Autoclaves",
+        "PURCH2250 Provision of Contract Agreement for the CL3 Compliant Double Ended "
+        "Autoclave and Associated Parts",
+        "UKRI-6261 Self-Steam Generating Autoclave",
+        "Site Autoclave Service and Validation",
+        # antimicrobial — every match was a medicine or a laboratory assay.
+        "Provision of a new antimicrobial to the NHS in England via a "
+        "subscription-based payment model",
+        "Provision of an Existing Antimicrobial to the NHS in England via a "
+        "Subscription-based Payment Model",
+        "Evaluation of antibiotic products for antimicrobial subscription model scheme",
+        "Automated Mycobacteria Culturing Systems, Media, Manual Broth Microdilution, "
+        "Antimicrobial Diffusion Discs and Test Strips",
+        # bare PPE — a housing association and three councils buying hi-vis, and
+        # the University of Glasgow using "PPE Ref" as a purchase-order prefix.
+        "Personal Protective Equipment - Dynamic Purchasing System",
+        "Personal Protective Equipment, Corporate Uniform and Equipment",
+        "PPE Ref 9346 DIRECT AWARD FOR IN VIVO HIGH-FREQUENCY LINEAR ARRAY "
+        "MICRO-ULTRASOUND",
+        "PPE Ref 7753 Direct Award For Upgrade And Service Of 7t MRI Scanner",
+        # paper hygiene — seven of nine matches are schools and councils buying
+        # toilet tissue. The framework is this patch's; the award titles are not.
+        "Paper Hygiene and Toilet Tissue",
+        "189_24 Paper Hygiene Consumables & Dispensers (ESPO Private Label \"Smartbuy\")",
+        "YPO - 001137 Paper Hygiene and Associated Dispensers",
+        "70358 Supply and Delivery of Paper Hygiene Products to the Education Authority",
+        "Paper Hygiene – Couch rolls",
+        # hand sanitiser — the Education Authority NI and Sport NI. "hand hygiene"
+        # is the procurement term this patch actually uses and it IS included.
+        "FMM-20-041 Supply and Delivery of Hand Sanitiser and Dispensers",
+        "DfC Sport NI – Supply and Delivery of Hand Sanitiser Dispenser and Trigger "
+        "Spray Bottle",
+        "NSSCOVID-19 -328 Hand Sanitiser",
+        # screening and swabs — the national screening programmes and microbiology
+        # consumables. Neither is infection prevention.
+        "NHS Scotland Bowel Screening FIT Kits, Distribution and Analysers",
+        "SMA Newborn Screening Kits",
+        "NEL ICB Latent Tuberculosis Infection (LTBI) Screening Programme (Lots 1-6)",
+        "Medical Wire Swabs & Consumables",
+        "The Supply of Sterile Boot Swab Kits to the Animal and Plant Health Agency",
+        # bare "infection" — winter respiratory services, not infection prevention.
+        "North Cumbria Acute Respiratory Infection Services",
+        "Northumberland Acute Respiratory Infection Service (Winter Pressures)",
+        # estates spend that is real but is not one of the twenty agreements.
+        "GEH Pest Control",
+        "Pest Control - House Crickets",
+        "Laundry services",
+        "Legionella Laboratory Testing Service & Sample Collection",
+        "SWAST-5126-FM Water Safety",
+        "NHSL424 WEST OF SCOTLAND LAUNDRY CONTINUOUS BATCH WASHER LINE REPLACEMENT",
+]:
+    check("never admitted: %s" % bad[:56], not B.match_title(_ip_rx, bad))
+
+print("  the infection prevention vocabulary that matches nothing today still would")
+for want in [
+        "Supply of Sterile Nitrile Examination Gloves",
+        "Hand Hygiene and Associated Products and Services",
+        "Environmental Decontamination and Water Purification",
+        "Wipes for Surface Cleaning and Disinfection",
+        "Clostridioides difficile Deep Clean Programme",
+        "Carbapenemase-Producing Enterobacterales Isolation Capacity",
+        "Surgical Site Infection Surveillance Service",
+        "Single Use Personal Protective Equipment and Medical Protective Consumables",
+        "Single Use Theatre Protective Wear and Related Consumables",
+]:
+    check("would be admitted: %s" % want[:52], B.match_title(_ip_rx, want))
+
+print("  no Drug Tariff part, and it is not a close call")
+check("no tariff is claimed", ip.get("drugTariff") is None)
+check("and the rule says why", "No Drug Tariff part applies" in ip["rules"]["drugTariff"])
+
+print("  CPV corroborates the two codes that are specific to this patch, and no more")
+check("33191 and 90524 only", tuple(_ip_rule["cpv"]) == ("33191", "90524"))
+for loose in ["90910", "90919", "33199", "50421"]:
+    check("does not claim %s" % loose, loose not in _ip_rule["cpv"])
+
+print("  the four unreadable agreements are named, not denied")
+for ref in ["2021/S 000-016429", "2023/S 000-018722", "2025/S 000-077817",
+            "2025/S 000-077035", "Primel Corporation Ltd"]:
+    check("coverage note names %s" % ref[:40], ref in ip["rules"]["frameworks"])
+check("and it says the supplier list is sixteen frameworks' worth, not twenty",
+      "SIXTEEN FRAMEWORKS' WORTH, NOT TWENTY" in ip["rules"]["suppliers"])
+
+print("  the five double-counted companies are declared rather than quietly merged")
+for pair in ["Vernacare LTD (Robinson Healthcare Limited)", "Polyco Healthline Limited",
+             "Globus (Shetland) Ltd", "2San Global Limited", "Reliance Medical Ltd (New)"]:
+    check("declared: %s" % pair[:48], pair in ip["rules"]["suppliers"])
+check("and the count is not passed off as a company count",
+      "FIVE LOWER THAN THE COUNT" in ip["rules"]["suppliers"])
+
+print("  what the refusals cost is named, not quietly lost")
+for cost in ["SSD autoclave cooling water chiller", "microbiology autoclave"]:
+    check("names the cost: %s" % cost[:44], cost in ip["rules"]["frameworks"])
+
+print("  open tenders — empty is the honest answer, not a miss")
+check("no open notice on this patch today", ip["openTenders"] == [])
 
 
 # The exclude=None path must not leak to any rule that has not earned it. Two have:
