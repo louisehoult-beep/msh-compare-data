@@ -4883,6 +4883,172 @@ SPECIALITY_RULES = {
             "analgesic with no other setting."
         ),
     },
+    "sepsis-and-the-deteriorating-patient": {
+        "label": "Sepsis and the Deteriorating Patient",
+        # NOBODY BUYS SEPSIS, AND THE FILTER HAS TO SAY SO. There is no NHS Supply
+        # Chain framework with sepsis, deterioration or early warning in its name —
+        # all 121 names in frameworks.json were read on 11/09/2026 and the only one
+        # that even touches the vocabulary is the Laboratory Diagnostics agreement,
+        # which reaches it through point of care testing. So this rule claims the
+        # FOUR agreements page 2920 itself names, each matched back to its reference
+        # and dates in frameworks.json on 11/09/2026, and the pattern returns exactly
+        # those four and nothing else:
+        #   Laboratory Diagnostics, Point of Care Testing and Pathology Managed
+        #     Services (2023/S 000-028831, 12 March 2024 to 11 March 2028, 122
+        #     suppliers). SHARED with pathology and laboratory medicine, which claims
+        #     it as its own patch and is right to. It is here for the blood gas,
+        #     lactate, blood culture and rapid molecular half of the sepsis pathway.
+        #   Infusion Pumps and Administration Sets and Associated Products
+        #     (Project_12 ITT_382, 3 October 2022 to 30 September 2026, 27 suppliers).
+        #     SHARED with critical care and with palliative care. The nearest of the
+        #     four expiries and the reason this page has a live clock on it.
+        #   Intravenous Cannula and Associated Products (2022/S 000-005941, 27 March
+        #     2023 to 31 March 2027, 21 suppliers).
+        #   Pressure Infusers and Associated Products (2025/S 000-047797, started
+        #     1 September 2026). frameworks.json carries NO end date for this one;
+        #     NHS Supply Chain's own brief says 31 August 2028 with an option to
+        #     extend 24 months, and page 2920 quotes it. The panel publishes the
+        #     field as the source holds it rather than back-filling a date the feed
+        #     does not carry — the gap is named in the coverage note instead.
+        #
+        # DELIBERATELY NOT CLAIMED, each checked against the 121 names:
+        #   Patient Monitoring Equipment, Anaesthesia Machines and Ventilators,
+        #     Renal Replacement Therapies -> critical care's, claimed there. A
+        #     deteriorating patient is monitored on all of them; being used on a
+        #     deteriorating patient is not the same as being bought for this pathway,
+        #     and page 2920 names four frameworks, not seven.
+        #   Pulse Oximetry, Capnography and Related Monitoring Technologies -> still
+        #     claimed by no speciality rule, and refused here for the same reason
+        #     critical care, emergency and respiratory refused it. The gap is recorded
+        #     in the coverage note rather than filled by whichever page came last.
+        #   External Defibrillation Devices, Simulation Devices -> emergency and
+        #     urgent care's.
+        #   Blood Collection Devices -> pathology's pre-analytical half.
+        "frameworks": (
+            r"(laboratory diagnostics|infusion pumps and administration sets|"
+            r"intravenous cannula|pressure infusers)"
+        ),
+        # WRITTEN NARROW, because on this patch the loose form of almost every term
+        # is somebody else's market and refusing it in the include is cleaner than
+        # admitting it and arguing with it below:
+        #   "septic" (not used)     -> 15 rows and every one is ASEPTIC: compounded
+        #                              aseptic medicines, aseptic isolators, aseptic
+        #                              pharmaceutical units. Pharmacy compounding, not
+        #                              sepsis. "\bsepsis\b" reaches none of them and
+        #                              matches nothing in this data at all, which is
+        #                              the honest answer for a syndrome nobody
+        #                              procures by name.
+        #   "point of care" (not used) -> 5 rows and all 5 are wrong: two PoCUS
+        #                              ultrasound simulator upgrades, a county
+        #                              council's testing contract, an NHS Scotland
+        #                              COVID-19 buy and a point of care HbA1c
+        #                              analyser. The two point-of-care tests this
+        #                              pathway actually turns on are named
+        #                              individually, as "blood gas analys*" and
+        #                              "blood culture".
+        #   "cannula" bare (not used) -> "The supply of Nasal Cannula & Oxygen Masks
+        #                              for Pandemic Preparedness 24/25" is oxygen
+        #                              delivery and belongs to respiratory. Requiring
+        #                              "iv" or "intravenous" in front reaches the
+        #                              three genuine intravenous rows and never
+        #                              reaches that one.
+        #   "patient monitoring" (not used) -> 40 rows carry "monitor" and the term
+        #                              would pull in the whole bedside-monitoring
+        #                              estate, which is critical care's patch.
+        #                              "vital signs monitor" is the track-and-trigger
+        #                              device and matches one row, correctly. Note it
+        #                              does NOT reach "Remote Monitoring of Vital
+        #                              Signs", which is Dumfries and Galloway COUNCIL
+        #                              buying telecare, because the words are the
+        #                              other way round.
+        #   "antibiotic", "antimicrobial", "medicines" (not used) -> page 2920 states
+        #                              in terms that antimicrobials are on none of
+        #                              these frameworks and go through pharmacy and
+        #                              the local formulary. The 14 rows these terms
+        #                              match are pharmacy buys and DHSC stockpiles,
+        #                              and the page's own scope puts them off this
+        #                              patch.
+        #   "culture" bare (not used) -> mycobacterium bovis solid media, tissue
+        #                              culture media and three microbiology culture
+        #                              media contracts. "blood culture" is the sepsis
+        #                              diagnostic and matches two rows, both right.
+        "include": (
+            r"\b(sepsis|septic shock|septic(?:a|ae)mia|"
+            r"deteriorating patient|early warning score|news2|track and trigger|"
+            r"e-?observations?|critical care outreach|rapid response team|"
+            r"procalcitonin|blood culture|blood gas analys\w*|lactate analys\w*|"
+            r"vital signs? monitors?|"
+            r"pressure infus(?:er|or)\w*|"
+            r"(?:iv|intravenous) cannulae?|"
+            r"infusion pumps?|administration sets?)\b"
+        ),
+        # All 16 titles the include list returned across both award feeds were read
+        # one by one on 11/09/2026. These three are the ones that were wrong.
+        #   insulin        -> "Insulin Infusion Pumps, Continuous Glucose Monitoring
+        #                     Systems and Associated Consumables", twice, both NHS
+        #                     National Services Scotland. An insulin pump is a
+        #                     diabetes device on its own agreement, not a resuscitation
+        #                     pump. Critical care excludes it for the same reason.
+        #   syringe driver -> "[4801618] Spare Parts for BodyGuard T Syringe Drivers
+        #                     and Infusion Pumps". A BodyGuard T is an ambulatory
+        #                     subcutaneous syringe driver and this is a spare-parts
+        #                     buy; the feed tags it oncology and that is nearer the
+        #                     truth than this page. Note "syringe PUMPS" is not
+        #                     excluded — it appears in two genuine multi-product
+        #                     infusion contracts that are on this patch.
+        #   rapid infuser  -> "Rapid Infuser Blood/IV Infusion Pump", University
+        #                     Hospitals of Derby and Burton. A trauma rapid infuser,
+        #                     already judged a false positive on the palliative care
+        #                     patch (rollout plan finding 62) and the same judgement
+        #                     holds here: rapid infusion with blood warming is major
+        #                     haemorrhage kit, and page 2920's fluid route is pressure
+        #                     infusers and giving sets.
+        "exclude": r"\b(insulin|syringe drivers?|rapid infuser)\b",
+        # CORROBORATION ONLY. 33194 is transfusion and infusion devices and 3314122 is
+        # intravenous cannulae — the two families the matched notices in this data
+        # were actually filed under. Nothing is admitted on a code: NHS England's
+        # "Blood Culture pathway- Health economic analysis" carries 79315000 research
+        # services and 85100000 health services and no medical device code at all,
+        # and it is the single most on-patch row in the whole slice.
+        "cpv": ("33194", "3314122"),
+        # NO DRUG TARIFF PART, and it was looked for rather than assumed. Part IX
+        # reimburses dressings and elastic hosiery (IXA), incontinence appliances
+        # (IXB), stoma appliances (IXC) and chemical reagents (IXR) dispensed in the
+        # community. IXR is the only part that could plausibly carry a sepsis test and
+        # all 101 of its rows in the September 2026 file are diabetes and
+        # anticoagulation consumables — blood glucose and ketone strips, INR and urine
+        # strips. Nothing on this pathway is dispensed on an FP10. The panel carries
+        # no tariff rather than reaching for the nearest part.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Sepsis is a pathway, not a "
+            "product category, and every number in this panel is borrowed from an "
+            "agreement bought for something broader. All four frameworks here are "
+            "shared: the Laboratory Diagnostics agreement is counted on the pathology "
+            "page, the infusion pumps agreement on the critical care and palliative "
+            "care pages, and all four are used across wards that have nothing to do "
+            "with deterioration. A supplier counted here is a supplier on an agreement "
+            "this pathway buys through, never a measure of its sepsis business. Three "
+            "things this count cannot reach at all. Antimicrobials, which are the "
+            "single largest recurring spend on the Sepsis Six, sit on no framework "
+            "here and go through pharmacy and the local formulary. E-observation and "
+            "deterioration software, which is what NHS England's Sepsis modern service "
+            "framework actually commits to standardising, is on no NHS Supply Chain "
+            "framework at all and is bought trust by trust through digital "
+            "procurement with a clinical safety case. And NHS Supply Chain's Pulse "
+            "Oximetry, Capnography and Related Monitoring Technologies framework, "
+            "which no speciality page yet claims, is refused here rather than swept up "
+            "by whichever page happened to be built last. One field is published as "
+            "the source holds it and not as the speciality page states it: "
+            "frameworks.json carries no end date for the Pressure Infusers agreement, "
+            "where NHS Supply Chain's own contract launch brief says 31 August 2028. "
+            "Four of the fifteen awards below are Department of Health and Social Care "
+            "pandemic-preparedness stockpile buys rather than trust purchases, and they "
+            "are kept deliberately: the product in each is intravenous cannulae or "
+            "intravenous giving sets, which is exactly what two of the frameworks above "
+            "carry. Read them as national stockpiling, not as a trust opening a "
+            "conversation."
+        ),
+    },
     "ophthalmology": {
         "label": "Ophthalmology",
         # ONE FRAMEWORK, AND THE PATTERN IS DELIBERATELY THE BARE STEM. All 121

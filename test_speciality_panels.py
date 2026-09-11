@@ -50,6 +50,7 @@ DERM = "dermatology"
 IPC = "infection-prevention-and-control"
 ONC = "oncology-and-sact"
 PHARM = "pharmacy-and-medicines"
+SEPSIS = "sepsis-and-the-deteriorating-patient"
 fails = []
 
 
@@ -5901,6 +5902,166 @@ if euc:
     check("suppliers come only from the five frameworks",
           euc["counts"]["suppliers"] > 0 and
           all(s.get("frameworks") for s in euc["suppliers"]))
+
+
+# ---------------------------------------------------------------------------
+# SEPSIS AND THE DETERIORATING PATIENT. The hardest patch in the set to filter,
+# because the speciality has no product of its own: there is no framework, no
+# tariff part and no award anywhere in this data with "sepsis" in it. Everything
+# on the panel is borrowed from an agreement bought for something broader, so the
+# danger is not one stray row, it is the whole panel quietly becoming critical
+# care's or pathology's. Four traps, each with its own guard below: "septic"
+# reaching fifteen ASEPTIC pharmacy rows, bare "cannula" reaching oxygen therapy,
+# bare "point of care" reaching ultrasound simulators and HbA1c, and bare
+# "monitoring" reaching the entire bedside estate.
+# ---------------------------------------------------------------------------
+print("\nSEPSIS AND THE DETERIORATING PATIENT")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), SEPSIS],
+               check=True, capture_output=True)
+sp = load_panel(SEPSIS)
+check("panel is defined", sp.get("defined") is True)
+check("label is the page's own", sp["label"] == "Sepsis and the Deteriorating Patient")
+
+_sp_rule = B.SPECIALITY_RULES[SEPSIS]
+_sp_rx = B.compile_rule(_sp_rule)
+
+
+def _sp_absent(label, needle):
+    check("refused (%s): %s" % (label, needle[:52]), not B.match_title(_sp_rx, needle))
+
+
+def _sp_present(label, needle):
+    check("kept (%s): %s" % (label, needle[:52]), B.match_title(_sp_rx, needle))
+
+
+print("  the four frameworks page 2920 names, and only those four")
+_sp_fw = sorted(f["name"] for f in sp["frameworks"])
+check("exactly four frameworks", len(_sp_fw) == 4, "; ".join(_sp_fw))
+for want in ["Infusion Pumps and Administration Sets and Associated Products",
+             "Intravenous Cannula and Associated Products",
+             "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+             "Pressure Infusers and Associated Products"]:
+    check("framework present: %s" % want[:50], want in _sp_fw)
+# Every one of these is used on a deteriorating patient and none of them is bought
+# for this pathway. If a later edit reaches for one to make the panel look fuller,
+# these fail.
+for bad in ["Patient Monitoring Equipment",
+            "Anaesthesia Machines and Ventilators",
+            "Renal Replacement Therapies",
+            "Pulse Oximetry, Capnography and Related Monitoring Technologies",
+            "External Defibrillation Devices and Related Services and Accessories",
+            "Blood Collection Devices",
+            "Airway Management Products and Associated Equipment"]:
+    check("framework refused (another page's): %s" % bad[:44],
+          not _sp_rx["fw"].search(bad))
+
+print("  the three exclusions, each a real row that matched the include and was wrong")
+_sp_absent("a diabetes pump, not a resuscitation pump",
+           "Insulin Infusion Pumps, Continuous Glucose Monitoring Systems and Associated Consumables")
+_sp_absent("an ambulatory subcutaneous driver, tagged oncology",
+           "[4801618] Spare Parts for BodyGuard T Syringe Drivers and Infusion Pumps")
+_sp_absent("a trauma rapid infuser, finding 62",
+           "Rapid Infuser Blood/IV Infusion Pump")
+# ...and the exclusions must not have been widened into what they protect. Both of
+# these carry "syringe pumps", which is deliberately NOT excluded.
+_sp_present("a genuine multi-product infusion contract",
+            "Infusion Pumps, Syringe Pumps, Administration Sets and Associated Equipment")
+_sp_present("the pump framework's own market engagement",
+            "Preliminary Market Engagement For Infusion Pumps, Syringe Pumps, Ambulatory "
+            "Pumps, Subcutaneous, Administration and Gravity Sets and Associated Equipment")
+
+print("  bare 'septic' would annex fifteen pharmacy compounding rows")
+for bad in ["NP38626 Compounded Aseptic Medicines",
+            "Aseptic Isolators and Cabinets",
+            "Supply and Maintenance of Aseptic Isolators",
+            "Aseptically Manipulated or Terminally Sterile Medicinal Products",
+            "Aseptically Prepared Systemic Anti-Cancer Treatment (SACT)",
+            "Provision of Aseptic Unit Pharmaceutical Isolators",
+            "NP48618 Aseptic Consumables"]:
+    _sp_absent("aseptic pharmacy, not sepsis", bad)
+
+print("  bare 'cannula' would annex oxygen therapy")
+_sp_absent("oxygen delivery, respiratory's",
+           "The supply of Nasal Cannula & Oxygen Masks for Pandemic Preparedness 24/25")
+_sp_present("but intravenous cannulae still reach it", "IV Cannulae")
+
+print("  bare 'point of care' returns five rows and all five are somebody else's")
+for bad in ["Point of Care Ultrasound (PoCUS) female patient simulator upgrades",
+            "21057 Cambridgeshire County Council (CCC) - Point of Care Testing",
+            "NSSCOVID-19 -189 Point of Care Testing",
+            "Point of Care Hb A1c Testing [3137491]"]:
+    _sp_absent("not a sepsis point-of-care test", bad)
+
+print("  bare 'monitoring' would annex the whole bedside estate")
+for bad in ["Philips Patient Monitoring Equipment for ED Resus",
+            "Purchase of acute patient monitoring equipment CCU",
+            "Patient Monitoring Systems",
+            "Intracranial Pressure Monitoring Kits",
+            "Consumables for Continuous Cardiac Ouput (CCO) Monitoring",
+            "Remote Monitoring of Vital Signs"]:
+    _sp_absent("critical care's or another patch's monitoring", bad)
+# "Remote Monitoring of Vital Signs" is in that list for its own reason: it is
+# Dumfries and Galloway COUNCIL buying telecare, and it is refused only because
+# the include says "vital signs monitor" and never a bare "vital signs".
+_sp_present("the track-and-trigger device itself",
+            "Vital Signs Monitors and Associated Equipment")
+
+print("  bare 'culture' and the antimicrobial terms, both refused at the include")
+for bad in ["AFBI – THE SUPPLY AND DELIVERY OF SOLID MEDIA FOR CULTURE OF MYCOBACTERIUM BOVIS",
+            "PURCH1965 For The Provision Of A Framework For The Supply Of Tissue Culture Media Supplies",
+            "CLI-OJEU-44377 Culture Media & Associated Consumables"]:
+    _sp_absent("microbiology media, not a blood culture", bad)
+# Page 2920 states in terms that antimicrobials are on none of these frameworks
+# and go through pharmacy and the local formulary, so they are off this patch by
+# the page's own scope, not by accident.
+for bad in ["Dynamic Purchasing System (DPS) for the Supply of Antibiotics and IV Fluids",
+            "NP36126 Antibiotic & Genito Urinary Medicines",
+            "Provision of a new antimicrobial to the NHS in England via a "
+            "subscription-based payment model",
+            "Supportive Medicines - additional products (ITU, Antibiotics & EOI medicines)"]:
+    _sp_absent("pharmacy and formulary, not a framework here", bad)
+
+print("  the rows that must be present, or the panel has stopped being this speciality")
+for want in ["Blood Culture pathway- Health economic analysis",
+             "Blood Culture Collection Systems",
+             "Supply of Replacement Blood Gas Analysers and Consumables",
+             "Pressure Infusers and Associated Products",
+             "Pressure Infusor Bags (3338798)",
+             "Intravenous Cannula and Associated Products"]:
+    _sp_present("on this pathway", want)
+_sp_titles = [(a.get("title") or "") for a in sp["awards"]]
+for want in ["Blood Culture pathway- Health economic analysis",
+             "Blood Culture Collection Systems",
+             "Supply of Replacement Blood Gas Analysers and Consumables",
+             "Vital Signs Monitors and Associated Equipment"]:
+    check("reaches the published panel: %s" % want[:46], want in _sp_titles)
+check("no insulin row reached the panel",
+      not any("insulin" in t.lower() for t in _sp_titles))
+check("no aseptic row reached the panel",
+      not any("aseptic" in t.lower() for t in _sp_titles))
+
+print("  no Drug Tariff part, and that is the answer rather than a gap")
+# Part IX reimburses dressings, incontinence and stoma appliances and chemical
+# reagents dispensed on an FP10. IXR is the only part that could plausibly carry a
+# sepsis test and all 101 of its rows are diabetes and anticoagulation
+# consumables. Nothing on this pathway is dispensed in the community.
+check("drugTariff is absent", sp.get("drugTariff") is None)
+check("no tariff part is claimed", not _sp_rule.get("tariffParts"))
+
+print("  the published rule carries its own reasoning (root rule 14a)")
+check("the CPV prefixes are recorded",
+      all(p in (sp["rules"].get("awards") or "") for p in ["33194", "3314122"]))
+for phrase in ["Sepsis is a pathway, not a product category",
+               "Pulse Oximetry",
+               "Antimicrobials",
+               "pandemic-preparedness stockpile buys",
+               "no end date for the Pressure Infusers agreement"]:
+    check("coverage note carries: %s" % phrase[:44],
+          phrase in (sp["rules"]["frameworks"] or ""))
+
+check("every supplier is traced to a framework on this patch",
+      sp["counts"]["suppliers"] > 0 and all(s.get("frameworks") for s in sp["suppliers"]))
+check("open tenders is an honest empty list", sp["openTenders"] == [])
 
 
 # The exclude=None path must not leak to any rule that has not earned it. Five have:

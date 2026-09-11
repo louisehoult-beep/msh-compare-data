@@ -1,0 +1,1973 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "sepsis-and-the-deteriorating-patient",
+ "label": "Sepsis and the Deteriorating Patient",
+ "defined": true,
+ "generated": "2026-09-11",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-10T11:14:59+00:00",
+  "openTenders": "10/09/2026",
+  "drugTariff": "2026-09-10"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /(laboratory diagnostics|infusion pumps and administration sets|intravenous cannula|pressure infusers)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Sepsis is a pathway, not a product category, and every number in this panel is borrowed from an agreement bought for something broader. All four frameworks here are shared: the Laboratory Diagnostics agreement is counted on the pathology page, the infusion pumps agreement on the critical care and palliative care pages, and all four are used across wards that have nothing to do with deterioration. A supplier counted here is a supplier on an agreement this pathway buys through, never a measure of its sepsis business. Three things this count cannot reach at all. Antimicrobials, which are the single largest recurring spend on the Sepsis Six, sit on no framework here and go through pharmacy and the local formulary. E-observation and deterioration software, which is what NHS England's Sepsis modern service framework actually commits to standardising, is on no NHS Supply Chain framework at all and is bought trust by trust through digital procurement with a clinical safety case. And NHS Supply Chain's Pulse Oximetry, Capnography and Related Monitoring Technologies framework, which no speciality page yet claims, is refused here rather than swept up by whichever page happened to be built last. One field is published as the source holds it and not as the speciality page states it: frameworks.json carries no end date for the Pressure Infusers agreement, where NHS Supply Chain's own contract launch brief says 31 August 2028. Four of the fifteen awards below are Department of Health and Social Care pandemic-preparedness stockpile buys rather than trust purchases, and they are kept deliberately: the product in each is intravenous cannulae or intravenous giving sets, which is exactly what two of the frameworks above carry. Read them as national stockpiling, not as a trust opening a conversation.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Sepsis is a pathway, not a product category, and every number in this panel is borrowed from an agreement bought for something broader. All four frameworks here are shared: the Laboratory Diagnostics agreement is counted on the pathology page, the infusion pumps agreement on the critical care and palliative care pages, and all four are used across wards that have nothing to do with deterioration. A supplier counted here is a supplier on an agreement this pathway buys through, never a measure of its sepsis business. Three things this count cannot reach at all. Antimicrobials, which are the single largest recurring spend on the Sepsis Six, sit on no framework here and go through pharmacy and the local formulary. E-observation and deterioration software, which is what NHS England's Sepsis modern service framework actually commits to standardising, is on no NHS Supply Chain framework at all and is bought trust by trust through digital procurement with a clinical safety case. And NHS Supply Chain's Pulse Oximetry, Capnography and Related Monitoring Technologies framework, which no speciality page yet claims, is refused here rather than swept up by whichever page happened to be built last. One field is published as the source holds it and not as the speciality page states it: frameworks.json carries no end date for the Pressure Infusers agreement, where NHS Supply Chain's own contract launch brief says 31 August 2028. Four of the fifteen awards below are Department of Health and Social Care pandemic-preparedness stockpile buys rather than trust purchases, and they are kept deliberately: the product in each is intravenous cannulae or intravenous giving sets, which is exactly what two of the frameworks above carry. Read them as national stockpiling, not as a trust opening a conversation.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(sepsis|septic shock|septic(?:a|ae)mia|deteriorating patient|early warning score|news2|track and trigger|e-?observations?|critical care outreach|rapid response team|procalcitonin|blood culture|blood gas analys\\w*|lactate analys\\w*|vital signs? monitors?|pressure infus(?:er|or)\\w*|(?:iv|intravenous) cannulae?|infusion pumps?|administration sets?)\\b/i and does not match /\\b(insulin|syringe drivers?|rapid infuser)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33194 or 3314122 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 4,
+  "suppliers": 158,
+  "suppliersUnresolved": 1,
+  "awardsShown": 15,
+  "awardsMatched": 15,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Infusion Pumps and Administration Sets and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+   "reference": "Project_12 ITT_382",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "3 October 2022",
+   "ends": "30 September 2026",
+   "supplierCount": 27,
+   "supplierSource": "no stated count on the page; 27 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "ALXR LIMITED",
+    "Arcomedical Infusion Ltd",
+    "Avanos Medical UK Limited",
+    "B. Braun Medical Limited",
+    "Baxter Healthcare Ltd",
+    "Becton, Dickinson U.K. Limited",
+    "BMS Critical Care",
+    "Braun and Company Limited",
+    "BECTON DICKINSON (CME) U.K. LIMITED",
+    "Bunzl Retail & Healthcare Supplies Ltd",
+    "CODAN Limited",
+    "Crest Medical Limited",
+    "Eitan Medical UK Ltd",
+    "Fannin UK Limited",
+    "Fresenius Kabi",
+    "GBUK",
+    "GenX MediCare",
+    "ICU UK Medical Ltd",
+    "Inspiration Healthcare Limited",
+    "Prosum Medical Ltd",
+    "Qualasept Ltd t/a Bath ASU",
+    "Reliance Medical Ltd",
+    "RPG Medical Limited",
+    "Smiths Medical International Ltd",
+    "Spirit Medical Ltd",
+    "TLB Medical Supplies",
+    "Vygon Uk Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Intravenous Cannula and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-cannula-and-associated-products/",
+   "reference": "2022/S 000-005941",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "27 March 2023",
+   "ends": "31 March 2027",
+   "supplierCount": 21,
+   "supplierSource": "count verified against the page's own stated total (21)",
+   "suppliers": [
+    "Applied Medical Technology Limited",
+    "Braun Medical Limited",
+    "Becton Dickinson Uk Ltd Ed Wokingham",
+    "Becton Dickinson Uk Ltd Stock Oxford",
+    "Fannin UK Limited",
+    "GBUK Ltd",
+    "Greiner Bio-One Ltd",
+    "ICU UK Medical Ltd",
+    "Iskus Health UK Limited",
+    "Praxis Medical Ltd",
+    "Smiths Medical International Ltd",
+    "Terumo UK Ltd",
+    "Unomedical Ltd (A ConvaTec Company)",
+    "Vygon (UK) Ltd",
+    "Nipro Medical Europe",
+    "Prosum Medical Ltd",
+    "Reliance Medical Ltd",
+    "Rocialle Healthcare Ltd",
+    "Terumo Uk Ltd (E-Direct)",
+    "TLB Medical Supplies",
+    "William Davies Care Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/laboratory-diagnostics-point-of-care-testing-and-pathology/",
+   "reference": "2023/S 000-028831",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "12 March 2024",
+   "ends": "11 March 2028",
+   "supplierCount": 122,
+   "supplierSource": "count verified against the page's own stated total (122)",
+   "suppliers": [
+    "1 Stop Medical Supplies LTD",
+    "2San Global Limited",
+    "Menarini Diagnostics",
+    "Abbott Laboratories Limited",
+    "Abbott Rapid Diagnostics Limited",
+    "Abbott Toxicology Ltd",
+    "AB Scientific Limited",
+    "Advanced Global Health Ltd",
+    "AESKU.UK LIMITED",
+    "AFOS LIMITED",
+    "Agilent Technologies LDA UK Ltd",
+    "Alpha Laboratories Ltd",
+    "Andrac Ltd",
+    "Apacor Ltd",
+    "Appleton Woods Ltd",
+    "AttoLife Ltd (formerly Anglia DNA)",
+    "Barber of Sheffield Ltd",
+    "Beckman Coulter United Kingdom Limited",
+    "Becton, Dickinson U.K. Limited",
+    "BHA Medical Limited",
+    "BHR Pharmaceuticals Ltd",
+    "bioMerieux UK Ltd",
+    "Bio-Packaging Ltd",
+    "Bio-Rad Laboratories Limited",
+    "Bruker UK Ltd",
+    "CellPath Ltd",
+    "Cepheid",
+    "Chirus Limited",
+    "Clinical Design Technologies LTD",
+    "Coolmed Ltd",
+    "Craven & Co",
+    "Critical Healthcare Ltd",
+    "Denward Manufacturing Ltd",
+    "DGP Intelsius LTD",
+    "Diagnostica Stago UK Ltd",
+    "DiaSorin Ltd",
+    "Digostics",
+    "Don Whitley Scientific Ltd",
+    "DWK Life Sciences Ltd",
+    "E&O Laboratories Ltd",
+    "Edinburgh Genetics Limited",
+    "ELITech UK LTD",
+    "Epredia",
+    "ESTS(GB)Ltd",
+    "Ethicheck Ltd",
+    "EUROIMMUN UK",
+    "Exact Sciences UK Ltd",
+    "Fisher Scientific UK LTD",
+    "FUJIFILM UK Ltd",
+    "Genetic Signatures",
+    "Genmed Ltd",
+    "Glen Dimplex Home Appliances",
+    "Greiner Bio-One Ltd",
+    "Grifols UK",
+    "Haemonetics Ltd",
+    "Haier Biomedical",
+    "Hawksley & Sons",
+    "Helena Biosciences",
+    "Henry Schein UK Holdings Ltd",
+    "Hologic Ltd",
+    "Home Health (UK) Ltd",
+    "HORIBA UK Limited",
+    "Hygeco",
+    "IBG Immucor Ltd",
+    "Illumina Cambridge Ltd",
+    "International Scientific Supplies Ltd",
+    "Kinetik Medical Devices Ltd",
+    "Labcold Ltd",
+    "Launch Diagnostics Ltd",
+    "LEEC Ltd",
+    "Leica Microsystems (UK) Ltd",
+    "Life Technologies Ltd",
+    "LTE Scientific Limited",
+    "LumiraDx Ltd",
+    "Mast Group Ltd",
+    "Matrix Diagnostics Limited",
+    "Medecon Healthcare UK Ltd",
+    "Medical Wire & Equipment Co (Bath) Ltd",
+    "Medline Scientific Limited",
+    "MedScience Distribution Ltd",
+    "Mornington 2000LLP Trading as Sterilab Services",
+    "Msoft Esolutions Ltd",
+    "nal von minden",
+    "Nova Biomedical",
+    "Ortho Clinical Diagnostics/Quidel",
+    "OscarTech UK Ltd",
+    "Oxford Biosystems Ltd",
+    "Pasante Healthcare",
+    "Revvity formerly PerkinElmer LAS (UK) Limited",
+    "pfm medical UK Ltd",
+    "PHC Europe B.V",
+    "Pisces Scientific Ltd",
+    "Pro-Lab",
+    "Promega UK Ltd",
+    "QIAGEN LTD",
+    "R & L Slaughter Ltd",
+    "Radiometer Ltd",
+    "Randox Laboratories Ltd",
+    "Roche Diagnostics Ltd",
+    "Sakura Finetek UK Ltd",
+    "Sarstedt Ltd",
+    "Scientific Laboratory Supplies Ltd",
+    "SciQuip Ltd",
+    "Sebia UK Ltd",
+    "Serosep UK",
+    "Siemens Healthcare Diagnostics Limited",
+    "Solmedia Ltd",
+    "SureScreen Diagnostics Limited",
+    "Sychem Limited",
+    "SYRINGA UK LTD",
+    "Sysmex UK",
+    "Thermo Electron LED GmbH",
+    "Thermo Electron Manufacturing Ltd t/a Thermo Fisher Scientific",
+    "Thermo Fisher Diagnostics Ltd",
+    "Thriva",
+    "Twist Bioscience",
+    "Una Health Ltd",
+    "Valley Northern Ltd",
+    "VWR International Ltd",
+    "Werfen Limited",
+    "Williams Medical Supplies Limited",
+    "Wolf Laboratories Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Pressure Infusers and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/pressure-infusers-and-associated-products/",
+   "reference": "2025/S 000-047797",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 September 2026",
+   "ends": null,
+   "supplierCount": 8,
+   "supplierSource": "no stated count on the page; 8 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Fannin UK Ltd",
+    "GB UK Ltd",
+    "Merit Medical UK Ltd",
+    "Proact Medical Ltd",
+    "Reflex Medical Ltd",
+    "Salter Labs UK Ltd",
+    "Sharon Services UK Ltd",
+    "TerraMed Ltd"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton Dickinson Uk Ltd Ed Wokingham",
+    "Becton Dickinson Uk Ltd Stock Oxford",
+    "Becton, Dickinson U.K. Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Cannula and Associated Products",
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Limited",
+    "Fannin UK Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Cannula and Associated Products",
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B. Braun Medical Limited",
+    "Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK",
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Greiner Bio-One Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products",
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "ICU Medical (incl. Smiths Medical)",
+   "resolved": true,
+   "variants": [
+    "ICU UK Medical Ltd",
+    "Smiths Medical International Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Prosum Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "TLB Medical Supplies",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon (UK) Ltd",
+    "Vygon Uk Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "1 Stop Medical Supplies",
+   "resolved": true,
+   "variants": [
+    "1 Stop Medical Supplies LTD"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "2San Global",
+   "resolved": true,
+   "variants": [
+    "2San Global Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "A. Menarini Diagnostics Ltd",
+   "resolved": true,
+   "variants": [
+    "Menarini Diagnostics"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "AB Scientific",
+   "resolved": true,
+   "variants": [
+    "AB Scientific Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Abbott Diagnostics",
+   "resolved": true,
+   "variants": [
+    "Abbott Rapid Diagnostics Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Abbott Laboratories Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Abbott Toxicology",
+   "resolved": true,
+   "variants": [
+    "Abbott Toxicology Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Advanced Global Health",
+   "resolved": true,
+   "variants": [
+    "Advanced Global Health Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "AESKU.UK",
+   "resolved": true,
+   "variants": [
+    "AESKU.UK LIMITED"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "AFOS",
+   "resolved": true,
+   "variants": [
+    "AFOS LIMITED"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Agilent Technologies UK",
+   "resolved": true,
+   "variants": [
+    "Agilent Technologies LDA UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Alpha Laboratories",
+   "resolved": true,
+   "variants": [
+    "Alpha Laboratories Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "ALXR Limited",
+   "resolved": true,
+   "variants": [
+    "ALXR LIMITED"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Andrac Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Apacor",
+   "resolved": true,
+   "variants": [
+    "Apacor Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Appleton Woods",
+   "resolved": true,
+   "variants": [
+    "Appleton Woods Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Applied Medical Technology Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Arcomedical Infusion Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "AttoLife",
+   "resolved": true,
+   "variants": [
+    "AttoLife Ltd (formerly Anglia DNA)"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Avanos Medical UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Barber of Sheffield",
+   "resolved": true,
+   "variants": [
+    "Barber of Sheffield Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Baxter Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Beckman Coulter",
+   "resolved": true,
+   "variants": [
+    "Beckman Coulter United Kingdom Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "BECTON DICKINSON (CME) U.K. LIMITED",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "BHA Medical",
+   "resolved": true,
+   "variants": [
+    "BHA Medical Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "BHR Pharmaceuticals",
+   "resolved": true,
+   "variants": [
+    "BHR Pharmaceuticals Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Bio-Packaging",
+   "resolved": true,
+   "variants": [
+    "Bio-Packaging Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Bio-Rad Laboratories UK",
+   "resolved": true,
+   "variants": [
+    "Bio-Rad Laboratories Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "bioMérieux UK",
+   "resolved": true,
+   "variants": [
+    "bioMerieux UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "BMS Critical Care Ltd",
+   "resolved": true,
+   "variants": [
+    "BMS Critical Care"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Braun and Company Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Bruker UK",
+   "resolved": true,
+   "variants": [
+    "Bruker UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "CellPath",
+   "resolved": true,
+   "variants": [
+    "CellPath Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Cepheid",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Chirus",
+   "resolved": true,
+   "variants": [
+    "Chirus Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Clinical Design Technologies",
+   "resolved": true,
+   "variants": [
+    "Clinical Design Technologies LTD"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "CODAN Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Coolmed",
+   "resolved": true,
+   "variants": [
+    "Coolmed Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Craven & Co",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "Crest Medical Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Critical Healthcare",
+   "resolved": true,
+   "variants": [
+    "Critical Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Denward Manufacturing",
+   "resolved": true,
+   "variants": [
+    "Denward Manufacturing Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "DGP Intelsius",
+   "resolved": true,
+   "variants": [
+    "DGP Intelsius LTD"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Diagnostica Stago UK",
+   "resolved": true,
+   "variants": [
+    "Diagnostica Stago UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "DiaSorin",
+   "resolved": true,
+   "variants": [
+    "DiaSorin Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Digostics",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Don Whitley Scientific",
+   "resolved": true,
+   "variants": [
+    "Don Whitley Scientific Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "DWK Life Sciences",
+   "resolved": true,
+   "variants": [
+    "DWK Life Sciences Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "E&O Laboratories",
+   "resolved": true,
+   "variants": [
+    "E&O Laboratories Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Edinburgh Genetics",
+   "resolved": true,
+   "variants": [
+    "Edinburgh Genetics Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Eitan Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "ELITech UK",
+   "resolved": true,
+   "variants": [
+    "ELITech UK LTD"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Epredia",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "ESTS (GB)",
+   "resolved": true,
+   "variants": [
+    "ESTS(GB)Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Ethicheck",
+   "resolved": true,
+   "variants": [
+    "Ethicheck Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "EUROIMMUN UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Exact Sciences UK",
+   "resolved": true,
+   "variants": [
+    "Exact Sciences UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Fresenius Kabi Ltd",
+   "resolved": true,
+   "variants": [
+    "Fresenius Kabi"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Fujifilm Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "FUJIFILM UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "GB UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Genetic Signatures",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Genmed",
+   "resolved": true,
+   "variants": [
+    "Genmed Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "GenX MediCare"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Glen Dimplex Home Appliances",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Grifols UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Grifols UK"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Haemonetics",
+   "resolved": true,
+   "variants": [
+    "Haemonetics Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Haier Biomedical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Hawksley & Sons",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Helena Biosciences",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Henry Schein UK Holdings",
+   "resolved": true,
+   "variants": [
+    "Henry Schein UK Holdings Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Hologic UK",
+   "resolved": true,
+   "variants": [
+    "Hologic Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Home Health (UK)",
+   "resolved": true,
+   "variants": [
+    "Home Health (UK) Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "HORIBA UK",
+   "resolved": true,
+   "variants": [
+    "HORIBA UK Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Hygeco",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Illumina UK",
+   "resolved": true,
+   "variants": [
+    "Illumina Cambridge Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Immucor (IBG Immucor)",
+   "resolved": true,
+   "variants": [
+    "IBG Immucor Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Inspiration Healthcare",
+   "resolved": true,
+   "variants": [
+    "Inspiration Healthcare Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "International Scientific Supplies",
+   "resolved": true,
+   "variants": [
+    "International Scientific Supplies Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Iskus Health UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Kinetik Medical Devices",
+   "resolved": true,
+   "variants": [
+    "Kinetik Medical Devices Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Labcold",
+   "resolved": true,
+   "variants": [
+    "Labcold Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Launch Diagnostics",
+   "resolved": true,
+   "variants": [
+    "Launch Diagnostics Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "LEEC",
+   "resolved": true,
+   "variants": [
+    "LEEC Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Leica Microsystems (UK)",
+   "resolved": true,
+   "variants": [
+    "Leica Microsystems (UK) Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "LTE Scientific Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "LumiraDx",
+   "resolved": true,
+   "variants": [
+    "LumiraDx Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Mast Group",
+   "resolved": true,
+   "variants": [
+    "Mast Group Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Matrix Diagnostics",
+   "resolved": true,
+   "variants": [
+    "Matrix Diagnostics Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Medecon Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "Medecon Healthcare UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Medical Wire & Equipment (MWE)",
+   "resolved": true,
+   "variants": [
+    "Medical Wire & Equipment Co (Bath) Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Bunzl Retail & Healthcare Supplies Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Medline Scientific",
+   "resolved": true,
+   "variants": [
+    "Medline Scientific Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "MedScience Distribution",
+   "resolved": true,
+   "variants": [
+    "MedScience Distribution Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Merit Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Msoft eSolutions",
+   "resolved": true,
+   "variants": [
+    "Msoft Esolutions Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "nal von minden",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Nipro Medical Europe",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Nova Biomedical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "OscarTech UK",
+   "resolved": true,
+   "variants": [
+    "OscarTech UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Oxford Biosystems",
+   "resolved": true,
+   "variants": [
+    "Oxford Biosystems Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Pasante Healthcare",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "pfm medical UK",
+   "resolved": true,
+   "variants": [
+    "pfm medical UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "PHC Europe / PHCbi",
+   "resolved": true,
+   "variants": [
+    "PHC Europe B.V"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Pisces Scientific",
+   "resolved": true,
+   "variants": [
+    "Pisces Scientific Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Praxis Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Pro-Lab Diagnostics",
+   "resolved": true,
+   "variants": [
+    "Pro-Lab"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Proact Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Promega UK",
+   "resolved": true,
+   "variants": [
+    "Promega UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "QIAGEN UK",
+   "resolved": true,
+   "variants": [
+    "QIAGEN LTD"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Qualasept Ltd t/a Bath ASU",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
+   "resolved": true,
+   "variants": [
+    "Ortho Clinical Diagnostics/Quidel"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "R&L Slaughter",
+   "resolved": true,
+   "variants": [
+    "R & L Slaughter Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Radiometer UK",
+   "resolved": true,
+   "variants": [
+    "Radiometer Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Randox Laboratories",
+   "resolved": true,
+   "variants": [
+    "Randox Laboratories Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Reflex Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Reflex Medical Ltd"
+   ],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Revvity (formerly PerkinElmer)",
+   "resolved": true,
+   "variants": [
+    "Revvity formerly PerkinElmer LAS (UK) Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Roche Diagnostics UK",
+   "resolved": true,
+   "variants": [
+    "Roche Diagnostics Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Rocialle Healthcare",
+   "resolved": true,
+   "variants": [
+    "Rocialle Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "RPG Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Sakura Finetek UK",
+   "resolved": true,
+   "variants": [
+    "Sakura Finetek UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Salter Labs UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Sarstedt Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Scientific Laboratory Supplies (SLS)",
+   "resolved": true,
+   "variants": [
+    "Scientific Laboratory Supplies Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "SciQuip",
+   "resolved": true,
+   "variants": [
+    "SciQuip Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Sebia UK",
+   "resolved": true,
+   "variants": [
+    "Sebia UK Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Serosep UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Sharon Services (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Sharon Services UK Ltd"
+   ],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Siemens Healthineers",
+   "resolved": true,
+   "variants": [
+    "Siemens Healthcare Diagnostics Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Solmedia Laboratory Supplies",
+   "resolved": true,
+   "variants": [
+    "Solmedia Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Spirit Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Sterilab Services",
+   "resolved": true,
+   "variants": [
+    "Mornington 2000LLP Trading as Sterilab Services"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "SureScreen Diagnostics",
+   "resolved": true,
+   "variants": [
+    "SureScreen Diagnostics Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Sychem",
+   "resolved": true,
+   "variants": [
+    "Sychem Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Syringa UK",
+   "resolved": true,
+   "variants": [
+    "SYRINGA UK LTD"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Sysmex UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "TerraMed Limited",
+   "resolved": true,
+   "variants": [
+    "TerraMed Ltd"
+   ],
+   "frameworks": [
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
+   "name": "Terumo UK",
+   "resolved": true,
+   "variants": [
+    "Terumo UK Ltd",
+    "Terumo Uk Ltd (E-Direct)"
+   ],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Thermo Fisher Scientific UK",
+   "resolved": true,
+   "variants": [
+    "Fisher Scientific UK LTD",
+    "Life Technologies Ltd",
+    "Thermo Electron LED GmbH",
+    "Thermo Electron Manufacturing Ltd t/a Thermo Fisher Scientific",
+    "Thermo Fisher Diagnostics Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Thriva",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Twist Bioscience",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Una Health",
+   "resolved": true,
+   "variants": [
+    "Una Health Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Unomedical Ltd",
+   "resolved": true,
+   "variants": [
+    "Unomedical Ltd (A ConvaTec Company)"
+   ],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Valley Northern Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "VWR International (Avantor)",
+   "resolved": true,
+   "variants": [
+    "VWR International Ltd"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Werfen (Instrumentation Laboratory) UK",
+   "resolved": true,
+   "variants": [
+    "Werfen Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "William Davies Care Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Intravenous Cannula and Associated Products"
+   ]
+  },
+  {
+   "name": "Williams Medical Supplies",
+   "resolved": true,
+   "variants": [
+    "Williams Medical Supplies Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  },
+  {
+   "name": "Wolf Laboratories",
+   "resolved": true,
+   "variants": [
+    "Wolf Laboratories Limited"
+   ],
+   "frameworks": [
+    "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Blood Culture pathway- Health economic analysis",
+   "buyer": "NHS England",
+   "supplier": null,
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082428-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "79315000",
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Preliminary Market Engagement For Infusion Pumps, Syringe Pumps, Ambulatory Pumps, Subcutaneous, Administration and Gravity Sets and Associated Equipment",
+   "buyer": "Business Services Organisation Procurement and Logistics Service",
+   "supplier": null,
+   "date": "2026-08-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081175-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000",
+    "33100000",
+    "33141624",
+    "33194000",
+    "33194100",
+    "33194110",
+    "33194120"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "IV Cannulae and Associated Infusion Set (5973078)",
+   "buyer": "Regional Business Services Organisation, Procurement and Logistics Service",
+   "supplier": "B. Braun Medical Ltd Ireland, Balmung Medical Handel GmbH, BECTON, DICKINSON U.K. LIMITED, EBRINGTON (NI) LTD, NORTHERN HOSPITAL SUPPLIES LIMITED, PREMIER HEALTHCARE (NI) LTD, REFLEX MEDICAL LIMITED, AQUILANT NORTHERN IRELAND LIMITED, INNOVATE HEALTH GROUP LTD, VYGON (U.K.) LIMITED",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079360-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33141220",
+    "33190000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Intravenous Cannula and Associated Products",
+   "buyer": "SUPPLY CHAIN COORDINATION LIMITED",
+   "supplier": "Airglove Medical Ltd, B. Braun Medical Limited, Balmung Medical Handel GmbH, Crest Medical Ltd, Critical Healthcare Ltd, Fannin UK Limited, GBUK Ltd, Greiner Bio-One Ltd, Infutech Ltd, ITL Australia Pty Ltd, Javelo Health Limited, Mediq Healthcare UK Ltd, Nipro Medical UK Ltd, OscarTech UK Ltd, Prosum Medical Ltd, Reflex Medical Limited, Smiths Medical International Ltd, SOL-MILLENNIUM UK, Terumo UK Ltd, Unomedical Ltd, Vygon (UK) Ltd",
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078334-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33141220"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Supply of Replacement Blood Gas Analysers and Consumables",
+   "buyer": "Nottingham University Hospitals NHS Trust",
+   "supplier": "Radiometer Limited",
+   "date": "2026-06-17",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/b99f6b47-d3a4-4fb9-8cfe-08606f8895fb",
+   "value": 4738000,
+   "periodEnd": "2031-02-05",
+   "source": "tender-history"
+  },
+  {
+   "title": "BBraun Medical IV Cannula for Pandemic Preparedness 25/26",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown throug",
+   "supplier": "B. Braun Medical Limited",
+   "date": "2026-01-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002571-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "RPG Medical Administration Sets for Pandemic Preparedness 25/26",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown throug",
+   "supplier": "RPG Medical Limited",
+   "date": "2026-01-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/002583-2026",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Medical Administration Sets for Pandemic Preparedness 24/25",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown throug",
+   "supplier": "Intersurgical Limited",
+   "date": "2025-09-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/058850-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Medical Administration Sets for Pandemic Preparedness 24/25",
+   "buyer": "Secretary of State for Health and Social Care acting as part of the Crown throug",
+   "supplier": "RPG Medical Limited",
+   "date": "2025-09-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/058668-2025",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Blood Culture Collection Systems",
+   "buyer": "NHS Supply Chain",
+   "supplier": "Iskus Health UK Limited",
+   "date": "2023-06-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/017816-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Infusion Pumps, Syringe Pumps, Administration Sets and Associated Equipment",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "SISK HEALTHCARE UK LTD t/a Cardiac Services, BAXTER HEALTHCARE LTD, ICU UK MEDIC",
+   "date": "2023-04-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/011090-2023",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Vital Signs Monitors and Associated Equipment",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "Coffey Healthcare Limited, NORSO MEDICAL LIMITED, Fannin Limited, SISK HEALTHCAR",
+   "date": "2022-11-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/033090-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "IV Cannulae",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "BECTON DICKINSON U.K. LTD, B. BRAUN MEDICAL LTD, Vannin Healthcare Global Ltd., ",
+   "date": "2022-08-19",
+   "url": "https://www.find-tender.service.gov.uk/Notice/023048-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Pressure Infusor Bags (3338798)",
+   "buyer": "BSO Procurement and Logistics Service",
+   "supplier": "MEDILINK SERVICES NI LTD",
+   "date": "2022-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/022794-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Pressure Infusers and Associated Products",
+   "buyer": "NHS Supply Chain Operated by DHL Supply Chain Limited acting as agent of Supply ",
+   "supplier": "Blue Box Medical Limited, Fannin UK Limited, Merit Medical UK Limited, Proact Me",
+   "date": "2022-05-23",
+   "url": "https://www.find-tender.service.gov.uk/Notice/013807-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}
