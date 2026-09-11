@@ -4883,6 +4883,133 @@ SPECIALITY_RULES = {
             "analgesic with no other setting."
         ),
     },
+    "pain-management": {
+        "label": "Pain Management",
+        # WRITTEN 11/09/2026, alongside the page-2907 build. Pain management is the
+        # one speciality several other rules have been explicitly RESERVING a
+        # framework for: gynaecology and plastics both refuse Neuromodulation
+        # Devices in their own comments on the grounds that it is "pain
+        # management's ground". This rule claims it, and claims only what page 2907
+        # itself names.
+        #
+        # CLAIMED, each read at NHS Supply Chain's own contract launch brief on
+        # 11/09/2026 and matched back to frameworks.json the same day:
+        #   Neuromodulation Devices and Associated Products (2023/S 000-034841,
+        #     18 March 2024 to 18 March 2028, 23 suppliers, three lots: Deep Brain
+        #     Stimulation, Spinal Cord Stimulation, Other Neuromodulation). THIS
+        #     PATCH'S OWN. It is the ONLY one of the 140 NHS Supply Chain contract
+        #     launch briefs whose text claims pain management -- "a variety of
+        #     strategic pain management solutions" -- and no brief TITLE in the
+        #     whole catalogue contains the word "pain". Not shared with anybody.
+        #     Caveat that belongs on the page and on this panel: NHSSC publishes no
+        #     supplier-to-lot map, and several of the 23 are not pain companies at
+        #     all (Inspire and Nyxoah are hypoglossal nerve stimulation for sleep
+        #     apnoea, Phagenesis is pharyngeal stimulation for dysphagia, Flow
+        #     Neuroscience is tDCS for depression). The supplier panel is therefore
+        #     the framework's field, not a pain market-share table.
+        #   Infusion Pumps and Administration Sets and Associated Products
+        #     (Project_12 ITT_382, 3 October 2022 to 30 September 2026, 27
+        #     suppliers, four lots). SHARED with critical care, palliative care and
+        #     sepsis, all of which already claim it. It is here for the acute pain
+        #     service: Lot 1 carries the patient-controlled analgesia pumps and
+        #     Lot 4 the disposable elastomeric infusors used for continuous local
+        #     anaesthetic. Nineteen days from expiry at the time of writing, with
+        #     its 24-month extension already spent.
+        #   Syringes, Needles and Associated Products (2026/S 000-002484, 52
+        #     suppliers). SHARED, and shared very widely. It is here because the
+        #     consumable under every diagnostic medial branch block, epidural and
+        #     radiofrequency cannula on this patch sits on it, and because page
+        #     2907 tells a rep to say so out loud rather than claim a pain
+        #     framework that does not exist.
+        "frameworks": (
+            r"(neuromodulation|infusion pumps and administration sets|"
+            r"syringes, needles)"
+        ),
+        # AWARDS: WRITTEN AS NARROW AS THE DATA ALLOWS, AND IT IS VERY NARROW.
+        # The include is applied to BOTH award feeds. All 1,474 rows in
+        # framework-awards.json and the whole of tender-history.json were searched
+        # on 11/09/2026 for stimulat, neuro, pain, infusion, syringe, needle,
+        # epidural, anaesthe, analges and catheter. The honest yield is FOUR rows,
+        # all four read individually and all four kept:
+        #   "Chronic Pain Service across Cheshire and Merseyside" -- NHS Cheshire
+        #     and Merseyside ICB to Pastel Health Ltd, 25 August 2026, CPV 85100000.
+        #     An ICB buying a whole chronic pain service from an independent
+        #     provider, which is the shape this patch is moving into.
+        #   "Provision of Outsourced Pain Management Services for Barking, Havering
+        #     & Redbridge University Hospital NHS Trust" -- TWO notices, 21 and 24
+        #     August 2026, and they are NOT a duplicate: one awards to Nuffield
+        #     Health (The Holly Hospital) and one to Spire Healthcare PLC. One trust
+        #     outsourcing its pain service to two independent providers in the same
+        #     week. Keeping both is correct; deduplicating on title would lose a
+        #     supplier.
+        #   "Pain Management Pumps and Consumables [3632005]" -- Procurement and
+        #     Logistics Service to Smiths Medical International Ltd, 5 November
+        #     2021, from tender-history. The ONLY product award on this patch in
+        #     either feed, and it is five years old and Northern Irish.
+        #
+        # THE FINDING THAT MATTERS: three of the four awards are for a SERVICE, and
+        # two of those three hand a pain service to an independent provider. The
+        # award data on this patch is about who runs the clinic, not about what the
+        # clinic buys.
+        #
+        # DELIBERATELY NOT MATCHED, each checked row by row:
+        #   bare "pain"        -> reaches "Hammersmith & Fulham MHU Refurbishment
+        #                         Painting Works". Requiring "chronic pain" or
+        #                         "pain management" reaches all four genuine rows
+        #                         and never reaches the decorators.
+        #   "stimulat"         -> ZERO rows in the framework-awards feed. There is
+        #                         no published neuromodulation device award in this
+        #                         data at all, which is itself the finding: the
+        #                         devices move on the NHSSC framework by eDirect
+        #                         order, not by individually noticed contract.
+        #   "neuro"            -> 13 rows and every one is neurology or
+        #                         neurophysiology insourcing, or neurodevelopmental
+        #                         support for children. Neurology and neurosurgery's
+        #                         patch, claimed there.
+        #   "infusion"         -> 5 rows: an agalsidase alfa homecare line, a
+        #                         generic injections and infusions contract, an IV
+        #                         cannula set, a rapid infuser (already judged a
+        #                         false positive on the palliative patch by finding
+        #                         62 and again on sepsis) and a preliminary market
+        #                         engagement notice for infusion and syringe pumps.
+        #                         The last is genuinely relevant to acute pain but
+        #                         is a market-engagement notice, not an award, and
+        #                         it is equally critical care's and palliative's.
+        #   "syringe"/"needle" -> 4 rows: two homecare biologic pre-filled syringe
+        #                         contracts (rheumatology), the same market
+        #                         engagement notice, and one syringes-and-needles
+        #                         buy. The consumable frameworks are claimed above;
+        #                         these award rows are not this speciality's.
+        #   "epidural", "analges" -> ZERO rows each.
+        "include": (
+            r"(chronic pain|pain management)"
+        ),
+        # No exclude is needed and none is written: the include is already narrow
+        # enough that every row it returns was read and is genuine. Writing a
+        # decorative exclude would suggest a false positive exists that does not.
+        "exclude": None,
+        "coverageNote": (
+            "Pain management has ONE framework of its own -- Neuromodulation Devices "
+            "and Associated Products -- and it is the only agreement in NHS Supply "
+            "Chain's whole 140-brief catalogue whose text claims this speciality; no "
+            "brief title in the catalogue contains the word \u201cpain\u201d at all. "
+            "The other two agreements shown here are shared general agreements that "
+            "pain services buy through rather than own, and their supplier counts are "
+            "borrowed: Infusion Pumps is also claimed by critical care, palliative "
+            "care and sepsis, and Syringes, Needles is claimed very widely. Three of "
+            "the four award rows are for a SERVICE rather than a product, and two of "
+            "those three hand one trust’s pain service to an independent provider "
+            "in the same week; the only product award in either feed is a 2021 Northern "
+            "Irish pain-pump contract. A search of all 1,474 award rows for stimulat, "
+            "neuro, infusion, syringe, needle, epidural, anaesthe, analges and catheter "
+            "returned no neuromodulation device award of any kind, because those devices "
+            "move by eDirect order on the framework rather than by individually noticed "
+            "contract. The Drug Tariff reaches "
+            "this patch too: four rows out of 66,400 in the September 2026 Part IX "
+            "touch pain, three of them the same pulsed electromagnetic device at "
+            "\u00a313.95, so no Part IX panel is published here."
+        ),
+    },
     "sepsis-and-the-deteriorating-patient": {
         "label": "Sepsis and the Deteriorating Patient",
         # NOBODY BUYS SEPSIS, AND THE FILTER HAS TO SAY SO. There is no NHS Supply

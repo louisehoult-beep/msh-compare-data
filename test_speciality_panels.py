@@ -49,6 +49,7 @@ COLO = "colorectal-gi-and-endoscopy"
 DERM = "dermatology"
 IPC = "infection-prevention-and-control"
 ONC = "oncology-and-sact"
+PAIN = "pain-management"
 PHARM = "pharmacy-and-medicines"
 SEPSIS = "sepsis-and-the-deteriorating-patient"
 fails = []
@@ -6064,13 +6065,24 @@ check("every supplier is traced to a framework on this patch",
 check("open tenders is an honest empty list", sp["openTenders"] == [])
 
 
-# The exclude=None path must not leak to any rule that has not earned it. Five have:
-# renal, gynaecology, paediatrics, dermatology and oncology, each because every hit
-# its include produced was printed and read one by one and none of them was wrong,
-# the loose terms having been refused in the include instead. Every other speciality
-# still has to carry a real exclusion list. Adding a slug to this set is a decision,
-# not a way past a failure.
-_EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS, DERM, ONC}
+# The exclude=None path must not leak to any rule that has not earned it. Six have:
+# renal, gynaecology, paediatrics, dermatology, oncology and pain management, each
+# because every hit its include produced was printed and read one by one and none of
+# them was wrong, the loose terms having been refused in the include instead. Every
+# other speciality still has to carry a real exclusion list. Adding a slug to this
+# set is a decision, not a way past a failure.
+#
+# pain-management added 11/09/2026, alongside the page-2907 build. Its include is
+# r"(chronic pain|pain management)" and it returns FOUR rows in the two award feeds
+# combined. All four were read: an ICB buying a whole chronic pain service from
+# Pastel Health, two notices outsourcing one trust’s pain service to Nuffield
+# Health and to Spire in the same week, and a 2021 Northern Irish pain-pump contract
+# to Smiths Medical. None is wrong. The loose term that WOULD have needed excluding,
+# bare "pain", reaches "Hammersmith & Fulham MHU Refurbishment Painting Works" and
+# was refused in the include instead of admitted and argued with. Writing a
+# decorative exclude here would be the never-matching placeholder this file forbids
+# three checks above.
+_EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS, DERM, ONC, PAIN}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _slug in _EXCLUDE_NONE_EARNED:
         check("%s declares its empty exclusion list explicitly" % _slug,

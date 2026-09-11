@@ -1,0 +1,1045 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "pain-management",
+ "label": "Pain Management",
+ "defined": true,
+ "generated": "2026-09-11",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-10T11:14:59+00:00",
+  "openTenders": "10/09/2026",
+  "drugTariff": "2026-09-10"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /(neuromodulation|infusion pumps and administration sets|syringes, needles)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. Pain management has ONE framework of its own -- Neuromodulation Devices and Associated Products -- and it is the only agreement in NHS Supply Chain's whole 140-brief catalogue whose text claims this speciality; no brief title in the catalogue contains the word “pain” at all. The other two agreements shown here are shared general agreements that pain services buy through rather than own, and their supplier counts are borrowed: Infusion Pumps is also claimed by critical care, palliative care and sepsis, and Syringes, Needles is claimed very widely. Three of the four award rows are for a SERVICE rather than a product, and two of those three hand one trust’s pain service to an independent provider in the same week; the only product award in either feed is a 2021 Northern Irish pain-pump contract. A search of all 1,474 award rows for stimulat, neuro, infusion, syringe, needle, epidural, anaesthe, analges and catheter returned no neuromodulation device award of any kind, because those devices move by eDirect order on the framework rather than by individually noticed contract. The Drug Tariff reaches this patch too: four rows out of 66,400 in the September 2026 Part IX touch pain, three of them the same pulsed electromagnetic device at £13.95, so no Part IX panel is published here.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. Pain management has ONE framework of its own -- Neuromodulation Devices and Associated Products -- and it is the only agreement in NHS Supply Chain's whole 140-brief catalogue whose text claims this speciality; no brief title in the catalogue contains the word “pain” at all. The other two agreements shown here are shared general agreements that pain services buy through rather than own, and their supplier counts are borrowed: Infusion Pumps is also claimed by critical care, palliative care and sepsis, and Syringes, Needles is claimed very widely. Three of the four award rows are for a SERVICE rather than a product, and two of those three hand one trust’s pain service to an independent provider in the same week; the only product award in either feed is a 2021 Northern Irish pain-pump contract. A search of all 1,474 award rows for stimulat, neuro, infusion, syringe, needle, epidural, anaesthe, analges and catheter returned no neuromodulation device award of any kind, because those devices move by eDirect order on the framework rather than by individually noticed contract. The Drug Tariff reaches this patch too: four rows out of 66,400 in the September 2026 Part IX touch pain, three of them the same pulsed electromagnetic device at £13.95, so no Part IX panel is published here.",
+  "awards": "Award-stage notices whose TITLE matches /(chronic pain|pain management)/i. NO EXCLUSION LIST IS APPLIED, because every notice this pattern matched was read one by one and all of them are this speciality. The loose terms that would have needed excluding were refused from the pattern above instead of admitted and then argued with. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 3,
+  "suppliers": 90,
+  "suppliersUnresolved": 1,
+  "awardsShown": 4,
+  "awardsMatched": 4,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Infusion Pumps and Administration Sets and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/infusion-pumps-and-administration-sets-and-associated-products/",
+   "reference": "Project_12 ITT_382",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "3 October 2022",
+   "ends": "30 September 2026",
+   "supplierCount": 27,
+   "supplierSource": "no stated count on the page; 27 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "ALXR LIMITED",
+    "Arcomedical Infusion Ltd",
+    "Avanos Medical UK Limited",
+    "B. Braun Medical Limited",
+    "Baxter Healthcare Ltd",
+    "Becton, Dickinson U.K. Limited",
+    "BMS Critical Care",
+    "Braun and Company Limited",
+    "BECTON DICKINSON (CME) U.K. LIMITED",
+    "Bunzl Retail & Healthcare Supplies Ltd",
+    "CODAN Limited",
+    "Crest Medical Limited",
+    "Eitan Medical UK Ltd",
+    "Fannin UK Limited",
+    "Fresenius Kabi",
+    "GBUK",
+    "GenX MediCare",
+    "ICU UK Medical Ltd",
+    "Inspiration Healthcare Limited",
+    "Prosum Medical Ltd",
+    "Qualasept Ltd t/a Bath ASU",
+    "Reliance Medical Ltd",
+    "RPG Medical Limited",
+    "Smiths Medical International Ltd",
+    "Spirit Medical Ltd",
+    "TLB Medical Supplies",
+    "Vygon Uk Ltd"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Neuromodulation Devices and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/neuromodulation-devices-and-associated-products/",
+   "reference": "2023/S 000-034841",
+   "category": "Medical Technology",
+   "supplyRoute": "eDirect",
+   "starts": "18 March 2024",
+   "ends": "18 March 2028",
+   "supplierCount": 23,
+   "supplierSource": "count verified against the page's own stated total (23)",
+   "suppliers": [
+    "Abbott Medical U.K.Ltd",
+    "Avanos Medical UK Limited",
+    "Axonics Modulation Technologies UK Limited",
+    "Boston Scientific Ltd",
+    "BVM Medical Ltd",
+    "Charco Neurotech",
+    "electroCore UK Ltd",
+    "Far From Surgical Solutions",
+    "Flow Neuroscience",
+    "Freedom Neuro BV",
+    "inomed Neurocare Limited",
+    "Inspire Medical Systems",
+    "LivaNova UK Limited",
+    "Mainstay Medical Distribution Ltd",
+    "Medtronic Limited",
+    "Nevro Medical Limited",
+    "Nyxoah SA",
+    "Optimus Medical Ltd",
+    "P14 Medical Limited",
+    "Phagenesis",
+    "Polar Medical Ltd",
+    "Precisis",
+    "Saluda Medical"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Syringes, Needles and Associated Products",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/syringes-needles-and-associated-products/",
+   "reference": "2026/S 000-002484",
+   "category": "Medical and Surgical Consumables",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "1 July 2026",
+   "ends": "30 June 2029",
+   "supplierCount": 52,
+   "supplierSource": "no stated count on the page; 52 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Apollo Medical Technologies Ltd",
+    "Aquilant Limited",
+    "Argon Medical Devices UK Ltd",
+    "B. Braun Medical Limited",
+    "Balmung Medical Handel GmbH",
+    "Becton, Dickinson U.K. Limited",
+    "BXTAccelyon",
+    "Cambridge Sensors Ltd",
+    "Cardinal Health UK 432 Limited",
+    "Crest Medical Ltd",
+    "D S Medical",
+    "Delta Surgical Ltd",
+    "embecta UK Limited",
+    "Fannin UK Limited",
+    "GBUK Ltd",
+    "Greiner Bio-One Ltd",
+    "Henleys Medical Supplies Limited",
+    "Henry Schein UK Holdings Ltd",
+    "It’s Interventional Limited",
+    "MCT Lifesciences Ltd",
+    "Medical Access Ltd",
+    "Medicina Limited",
+    "Meditrade UK Ltd",
+    "Mediworld Ltd",
+    "Medline Industries Ltd",
+    "Merit Medical UK Ltd",
+    "Neon Diagnostics Ltd",
+    "Nipro Medical Europe",
+    "Optimum Medical Solutions Ltd",
+    "Owen Mumford Ltd",
+    "Pajunk UK Medical Products Limited",
+    "Prospect Diagnostics Ltd",
+    "Prosum Medical Ltd",
+    "Reflex Medical Limited",
+    "Reliance Medical Ltd",
+    "Rocialle Healthcare Ltd",
+    "Rocket Medical Plc",
+    "RPG Medical Limited",
+    "Scottmed Distribution (UK) Ltd",
+    "TerraMed Limited",
+    "Terumo UK Ltd",
+    "TFX Group Ltd trading as Teleflex Medical",
+    "Trion Pharma",
+    "Unisurge International Ltd",
+    "Valley Northern Ltd",
+    "Vygon (UK) Ltd",
+    "Blink Medical",
+    "Griffiths and Neilson Ltd",
+    "ICU Medical International Ltd",
+    "IMS Euro Ltd",
+    "Mermaid Medical Ltd",
+    "Orion Medical Supplies"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Avanos Medical UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B. Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton, Dickinson U.K. Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Crest Medical Ltd",
+   "resolved": true,
+   "variants": [
+    "Crest Medical Limited",
+    "Crest Medical Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK",
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "ICU Medical (incl. Smiths Medical)",
+   "resolved": true,
+   "variants": [
+    "ICU Medical International Ltd",
+    "ICU UK Medical Ltd",
+    "Smiths Medical International Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Prosum Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Reliance Medical",
+   "resolved": true,
+   "variants": [
+    "Reliance Medical Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "RPG Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Vygon (UK)",
+   "resolved": true,
+   "variants": [
+    "Vygon (UK) Ltd",
+    "Vygon Uk Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Abbott Medical U.K. Ltd",
+   "resolved": true,
+   "variants": [
+    "Abbott Medical U.K.Ltd"
+   ],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "ALXR Limited",
+   "resolved": true,
+   "variants": [
+    "ALXR LIMITED"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Apollo Medical Technologies Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Arcomedical Infusion Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Argon Medical Devices UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Axonics Modulation Technologies UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Balmung Medical Handel GmbH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Baxter Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "BECTON DICKINSON (CME) U.K. LIMITED",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Blink Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Blink Medical"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "BMS Critical Care Ltd",
+   "resolved": true,
+   "variants": [
+    "BMS Critical Care"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Boston Scientific",
+   "resolved": true,
+   "variants": [
+    "Boston Scientific Ltd"
+   ],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Braun and Company Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "BVM Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "BXTAccelyon Ltd",
+   "resolved": true,
+   "variants": [
+    "BXTAccelyon"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Cambridge Sensors Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Cardinal Health U.K. 432 Ltd",
+   "resolved": true,
+   "variants": [
+    "Cardinal Health UK 432 Limited"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Charco Neurotech",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "CODAN Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "D S Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Delta Surgical",
+   "resolved": true,
+   "variants": [
+    "Delta Surgical Ltd"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Eitan Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "electroCore UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "embecta UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Far From Surgical Solutions",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Flow Neuroscience",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Freedom Neuro BV",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Fresenius Kabi Ltd",
+   "resolved": true,
+   "variants": [
+    "Fresenius Kabi"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "GenX MediCare"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Greiner Bio-One Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Griffiths and Neilson Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Henleys Medical Supplies Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Henry Schein UK Holdings",
+   "resolved": true,
+   "variants": [
+    "Henry Schein UK Holdings Ltd"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "IMS Euro Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "inomed Neurocare Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Inspiration Healthcare",
+   "resolved": true,
+   "variants": [
+    "Inspiration Healthcare Limited"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Inspire Medical Systems",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "It’s Interventional Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "LivaNova UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Mainstay Medical Distribution Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "MCT Lifesciences Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Medical Access Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Medicina Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Bunzl Retail & Healthcare Supplies Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Meditrade UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Mediworld Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited"
+   ],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Merit Medical UK Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Mermaid Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Neon Diagnostics Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Nevro Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Nipro Medical Europe",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Nyxoah SA",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Optimum Medical",
+   "resolved": true,
+   "variants": [
+    "Optimum Medical Solutions Ltd"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Optimus Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Orion Medical Supplies",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Owen Mumford",
+   "resolved": true,
+   "variants": [
+    "Owen Mumford Ltd"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "P14 Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Pajunk UK Medical Products Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Phagenesis",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Polar Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Precisis",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Prospect Diagnostics Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Qualasept Ltd t/a Bath ASU",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Reflex Medical Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Rocialle Healthcare",
+   "resolved": true,
+   "variants": [
+    "Rocialle Healthcare Ltd"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Rocket Medical",
+   "resolved": true,
+   "variants": [
+    "Rocket Medical Plc"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Saluda Medical",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Neuromodulation Devices and Associated Products"
+   ]
+  },
+  {
+   "name": "Scottmed Distribution (UK) Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Spirit Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "TerraMed Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Terumo UK",
+   "resolved": true,
+   "variants": [
+    "Terumo UK Ltd"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "TFX Group Ltd trading as Teleflex Medical"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "TLB Medical Supplies",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products"
+   ]
+  },
+  {
+   "name": "Trion Pharma Limited",
+   "resolved": true,
+   "variants": [
+    "Trion Pharma"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Unisurge International Limited",
+   "resolved": true,
+   "variants": [
+    "Unisurge International Ltd"
+   ],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  },
+  {
+   "name": "Valley Northern Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Syringes, Needles and Associated Products"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "Chronic Pain Service across Cheshire and Merseyside",
+   "buyer": "NHS CHESHIRE AND MERSEYSIDE INTEGRATED CARE BOARD",
+   "supplier": "Pastel Health Ltd",
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080798-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Outsourced Pain Management Services for Barking, Havering & Redbridge University Hospital NHS Trust",
+   "buyer": "Barking, Havering and Redbridge University Hospitals NHS Trust",
+   "supplier": "Spire Healthcare PLC",
+   "date": "2026-08-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080362-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000",
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of Outsourced Pain Management Services for Barking, Havering & Redbridge University Hospital NHS Trust",
+   "buyer": "Barking, Havering and Redbridge University Hospitals NHS Trust",
+   "supplier": "Nuffield Health (The Holly Hospital)",
+   "date": "2026-08-21",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079920-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Pain Management Pumps and Consumables [3632005]",
+   "buyer": "Procurement and Logistics Service",
+   "supplier": "Smiths Medical International Ltd",
+   "date": "2021-11-05",
+   "url": "https://www.find-tender.service.gov.uk/Notice/027807-2021",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}
