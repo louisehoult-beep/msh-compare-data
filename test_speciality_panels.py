@@ -52,6 +52,7 @@ ONC = "oncology-and-sact"
 PAIN = "pain-management"
 PHARM = "pharmacy-and-medicines"
 SEPSIS = "sepsis-and-the-deteriorating-patient"
+REHAB = "rehabilitation-prosthetics-and-orthotics"
 fails = []
 
 
@@ -6082,6 +6083,39 @@ check("open tenders is an honest empty list", sp["openTenders"] == [])
 # was refused in the include instead of admitted and argued with. Writing a
 # decorative exclude here would be the never-matching placeholder this file forbids
 # three checks above.
+
+# REHABILITATION, PROSTHETICS AND ORTHOTICS (page 2909, rule written 11/09/2026).
+# "Prosthesis" and "wheelchair" each mean at least two different things in this data
+# and all three exclusions below replay a real notice that matched and is not this
+# speciality. The fourth check is the mirror image: the EXTERNAL breast prosthesis
+# notices ARE this patch and must survive an exclusion aimed at the implanted kind.
+print("\nREHABILITATION, PROSTHETICS AND ORTHOTICS — the false positives the words invite")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), REHAB],
+               check=True, capture_output=True)
+_r = load_panel(REHAB)
+check("rehab panel is defined", bool(_r) and _r.get("defined") is True)
+if _r:
+    _t = " || ".join((a.get("title") or "") for a in _r.get("awards") or []).lower()
+    for _bad, _why in [
+        ("aortic prosthesis", "an ON-X mechanical heart valve is cardiac surgery, not a limb"),
+        ("mitral", "same notice, same reason"),
+        ("surgically implanted breast", "breast implants are plastics; only EXTERNAL breast prostheses are this patch"),
+        ("wheelchair lift", "vehicle and building access equipment, not a wheelchair — and the feed's own spec field tags both B7R lift notices to this slug"),
+    ]:
+        check("rehab awards exclude %r (%s)" % (_bad, _why), _bad not in _t)
+    _names = [f.get("name", "") for f in _r.get("frameworks") or []]
+    check("rehab keeps its two own frameworks",
+          any("Orthotics, Podiatry" in n for n in _names)
+          and any("Prosthetic Components" in n for n in _names),
+          "got %s" % _names)
+    check("rehab keeps External Breast Prosthesis (external, not implanted)",
+          any("External Breast Prosthesis" in n for n in _names), "got %s" % _names)
+    check("rehab does not swallow orthodontics or orthopaedics",
+          "orthodontic" not in _t and "orthopaedic power tool" not in _t)
+    check("rehab does not swallow residential drug and alcohol rehabilitation",
+          "detox" not in _t)
+
+
 _EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS, DERM, ONC, PAIN}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _slug in _EXCLUDE_NONE_EARNED:

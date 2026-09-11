@@ -5010,6 +5010,132 @@ SPECIALITY_RULES = {
             "\u00a313.95, so no Part IX panel is published here."
         ),
     },
+    "rehabilitation-prosthetics-and-orthotics": {
+        "label": "Rehabilitation, Prosthetics and Orthotics",
+    # WRITTEN 11/09/2026, alongside the page-2909 build. This is the page that the
+    # therapies-physio-and-ot rule has been explicitly RESERVING frameworks for: its
+    # own comment says "Orthotics, Podiatry and Immobilisation, Prosthetic Components
+    # and External Breast Prosthesis are deliberately NOT here: they are the
+    # Rehabilitation, Prosthetics and Orthotics page's own frameworks." This rule
+    # claims them.
+    #
+    # CLAIMED — six frameworks, each read at NHS Supply Chain's own contract launch
+    # brief on 11/09/2026 and matched back to frameworks.json the same day:
+    #   Orthotics, Podiatry and Immobilisation (2024/S 000-019205, 3 Mar 2025 to
+    #     2 Mar 2027, 63 suppliers, 21 new and 16 delisted, three lots). THIS PATCH'S
+    #     OWN and the largest agreement on it: Find a Tender notice 019205-2024 puts
+    #     the estimated total at GBP 714m, of which Lot 3 "Services" alone is 416m.
+    #   Prosthetic Components and Associated Products (2025/S 000-005015, 24 Nov 2025
+    #     to 23 Nov 2027, 12 suppliers, one lot, GBP 157m). THIS PATCH'S OWN, and NHS
+    #     Supply Chain states it is mandated by NHS England as "the only compliant
+    #     route for procuring prosthetic products".
+    #   Wheelchairs, Specialist Seating and Related Services (2024/S 000-039981,
+    #     9 Jun 2025 to 8 Jun 2027, 31 suppliers, two lots, GBP 77m). SHARED with
+    #     therapies-physio-and-ot, which matches bare "wheelchairs?" in its own
+    #     frameworks pattern. The sharing is deliberate and mutual, the way Pressure
+    #     Area Care is shared between wound care and patient handling: one framework
+    #     genuinely carries both patches' product.
+    #   Physiotherapy and Occupational Therapy (2023/S 000-033230, to 30 Oct 2028,
+    #     22 suppliers). SHARED with therapies-physio-and-ot, which claims it by name.
+    #     Here because it is the rehabilitation-consumable end of this patch.
+    #   Technology Enabled Care, Electronic Assistive Technology and Lone Worker
+    #     Devices (2021/S 000-031857, to 31 Aug 2027, 18 suppliers, nine lots).
+    #     therapies-physio-and-ot explicitly refuses it ("telecare and lone worker
+    #     devices, not patient handling") and it is claimed here instead, because
+    #     NHS Supply Chain's own description is that the products "are prescribed to
+    #     the most severely disabled patients to help them live independently and are
+    #     supplied via specialist regional disability centres" — which is this patch.
+    #     NOTE a data gap found on 11/09/2026 and not papered over: frameworks.json
+    #     carries `ends: null` for this framework. Its own brief gives 31 August 2027.
+    #   External Breast Prosthesis and Chest Support (2023/S 000-036001, to 30 Oct
+    #     2028). Assigned here by the therapies rule's own note. It is external
+    #     prosthetics, not implanted; the implanted kind is excluded below.
+    "frameworks": (
+        r"(orthotic|orthoses|podiatry and immobilisation|prosthetic components|"
+        r"artificial limb|wheelchairs?|specialist seating|"
+        r"physiotherapy and occupational therapy|technology enabled care|"
+        r"electronic assistive technology|external breast prosthes)"
+    ),
+    # AWARDS. The include is applied to BOTH feeds. On 11/09/2026 it returned
+    # 30 rows in tender-history.json and 12 in framework-awards.json, and every one
+    # of the 42 was read individually. All 42 are this speciality.
+    #
+    # THE FINDING THIS PATCH'S AWARD DATA CARRIES: the money is in SERVICES. Five of
+    # the six award notices published in the four weeks to 11/09/2026 buy a service,
+    # not a product — Blatchford Limited took NHS Northamptonshire ICB's Integrated
+    # Clinical Mobility Service at GBP 16,146,859 (notice 079217-2026, concluded
+    # 12 Aug 2026) and NHS Humber and North Yorkshire ICB's Wheelchair and Postural
+    # Services at GBP 14,347,572.40 (079099-2026, concluded 19 Aug 2026), eight days
+    # apart; AJM Healthcare Group took Dudley's wheelchair service at GBP 6,749,999
+    # (083222-2026); Hugh Steeper Limited took the RNOH's prosthetic and orthotic
+    # service (084824-2026, concluded 3 Sep 2026).
+    #
+    # DELIBERATELY NOT MATCHED, each counted row by row on 11/09/2026:
+    #   bare "ortho"   -> 59 rows in framework-awards and 35 in tender-history, and
+    #                     the great majority are Primary Care Orthodontic Services or
+    #                     orthopaedic implants and power tools. Requiring "orthotic"
+    #                     or "orthoses" reaches every genuine row and none of those.
+    #   bare "rehab"   -> 20 rows in framework-awards, and they are residential drug
+    #                     and alcohol detoxification and rehabilitation services. Not
+    #                     one is physical rehabilitation.
+    #   bare "mobility"-> reaches "Shopmobility", a town-centre loan scheme, and two
+    #                     disabled-adaptations shower contracts. "Integrated Clinical
+    #                     Mobility Service" is reached on "wheelchairs" instead.
+    #   bare "seating" -> requiring "specialist seating" is what keeps this off
+    #                     auditorium and waiting-room furniture. Bare "seating"
+    #                     returns nothing extra that is genuine in either feed today,
+    #                     but the narrow form is kept because the feeds grow.
+    #   "limb", "amputee", "posture", "podiatry", "splint", "brace", "footwear" alone
+    #                  -> zero or near-zero rows, and every genuine row carrying them
+    #                     also carries orthotic, orthoses or prosthetic.
+    "include": (
+        r"\b(prosthetic(?:s)?|prosthes[ei]s|orthotic(?:s)?|orthos(?:is|es)|"
+        r"artificial limb(?:s)?|amputee(?:s)?|wheelchair(?:s)?|specialist seating|"
+        r"postural (?:seating|management|supports?|services?)|"
+        r"electronic assistive technology)\b"
+    ),
+    # EVERY PATTERN HERE MATCHED A REAL NOTICE THAT IS NOT THIS SPECIALITY, on
+    # 11/09/2026, and each one is a different way "prosthesis" or "wheelchair" means
+    # something else:
+    #   aortic / mitral / heart valve -> "Procurement of ONX Mechanical Aoritic/Mitral
+    #       Valve, ON-X Ascending Aortic Prosthesis with Valsalva Graft". A heart
+    #       valve. Cardiology and cardiac surgery's, and tagged vascular-surgery-and-pad
+    #       by the feed's own spec field.
+    #   surgically implanted breast -> "CLI-OJEU-45806 SURGICALLY IMPLANTED BREAST
+    #       PROSTHESES". Breast implants are plastics and breast surgery. The EXTERNAL
+    #       breast prosthesis notices are this patch and are kept; the implanted ones
+    #       are not. That distinction is the whole reason this pattern is worded the
+    #       way it is rather than as bare "breast".
+    #   wheelchair lift -> "P-2696 B7R Wheelchair Lifts (C6691)" and "P-2501 C6691
+    #       B7R Wheelchair Lifts". Vehicle and building access equipment, not a
+    #       wheelchair. The tender feed's own spec field tags both of these
+    #       rehabilitation-prosthetics-and-orthotics, which is exactly the loose
+    #       keyword match this file exists to refuse.
+    "exclude": (
+        r"\b(aortic|mitral|heart valve|surgically implanted breast|wheelchair lift(?:s)?)\b"
+    ),
+    # 331931xx and 331932xx are wheelchairs and their parts; 33183 is orthopaedic
+    # support devices and external prostheses. Four of the twelve framework-award
+    # rows carry a 33193 code and two carry 33183. Corroboration only, never an
+    # admission on its own.
+    "cpv": ("331931", "331932", "33183"),
+    "coverageNote": (
+        "This patch is three services that share a commissioner and little else, and "
+        "the frameworks above reflect that: two are its own (Orthotics, Podiatry and "
+        "Immobilisation; Prosthetic Components and Associated Products), two are shared "
+        "with the Patient Moving and Handling page (Wheelchairs, Specialist Seating and "
+        "Related Services; Physiotherapy and Occupational Therapy), and the supplier "
+        "counts on the shared ones are therefore borrowed rather than exclusive. "
+        "No Drug Tariff panel is published here, and that is a finding rather than a "
+        "gap: aggregating the whole of NHSBSA Prescription Cost Analysis for 2025/26 on "
+        "11/09/2026 returned \u00a32,254 of prosthetic adhesives on 143 items, "
+        "\u00a325,707 of chiropody appliances and \u00a39,863 of trusses across England "
+        "for a full year. Prosthetics and orthotics are not reimbursed in the community; "
+        "they are issued by a service against a framework. The compression and "
+        "lymphoedema lines that do sit in Part IXA belong to the Tissue Viability and "
+        "Wound Care page, which claims that part."
+    ),
+    },
     "sepsis-and-the-deteriorating-patient": {
         "label": "Sepsis and the Deteriorating Patient",
         # NOBODY BUYS SEPSIS, AND THE FILTER HAS TO SAY SO. There is no NHS Supply
