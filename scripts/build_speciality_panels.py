@@ -5143,8 +5143,15 @@ SPECIALITY_RULES = {
     # neighbouring pages that own the surgery, the catheter and the feed.
     "colorectal-gi-and-endoscopy": {
         "label": "Colorectal, GI and Endoscopy",
-        # THREE FRAMEWORKS, AND THEY ARE THE THREE THE PAGE'S OWN PATHWAY NAMES. All
-        # 121 framework names in frameworks.json were read for this build.
+        # FIVE FRAMEWORKS, AND THEY ARE THE FIVE THE PAGE'S OWN DEEP DIVE NAMES. All
+        # 121 framework names in frameworks.json were read for this build, and the
+        # page's "The buying route, exactly - five agreements, and one of them is not
+        # a framework at all" section is the authority for which five. THIS WAS GOT
+        # WRONG ONCE, ON 11/09/2026, AND IS RECORDED RATHER THAN QUIETLY FIXED: a
+        # first version of this rule claimed three, having read the page's clinical
+        # pathway section and the NHSSC framework names but not the Deep dive, and it
+        # published a panel that contradicted the page it sits on. Rigid Endoscopy and
+        # Urology and Bowel Management were restored the same night.
         #   "Flexible Endoscopes and Associated Options and Related Services"
         #     (2021/S 000-007768, 1 April 2022 to 31 March 2028) is the scope and
         #     stack: FUJIFILM, Karl Storz, Olympus KeyMed, Pentax and Richard Wolf.
@@ -5156,36 +5163,51 @@ SPECIALITY_RULES = {
         #     suppliers, eDirect) is every snare, clip, stent, biopsy forceps,
         #     injection needle and suturing device. The reference and the count both
         #     match the page's own sourced statement.
+        #   "Rigid Endoscopy and Associated Options and Related Services" is
+        #     published under the SAME reference as the flexible scopes, 2021/S
+        #     000-007768, with the same start and end dates and the same 72-month term
+        #     with both extensions already spent, and the page's Deep dive says so in
+        #     terms: "For scopes, 2021/S 000-007768, which covers Flexible Endoscopes
+        #     and Rigid Endoscopy under one reference". 18 suppliers. It is claimed
+        #     here because the page's sourced statement claims it, and because a
+        #     member asking "which framework am I on for scopes" is given one
+        #     reference covering both halves.
         #   "Decontamination Capital Equipment, Associated Accessories and Services"
         #     (2024/S 000-017758, 19 February 2025 to 18 February 2027, 20 suppliers)
-        #     is the washer-disinfector and the drying cabinet. NHS Supply Chain's own
-        #     brief URL for it reads
-        #     decontamination-capital-equipment-endoscopy-and-sterile-services, so it
-        #     is genuinely half this patch and half theatres, and it is claimed here
-        #     with that shared ownership stated rather than implied.
+        #     is the washer-disinfector and the drying cabinet, and specifically its
+        #     Lot 1, Endoscopy Decontamination Unit. NHS Supply Chain's own brief URL
+        #     for it reads decontamination-capital-equipment-endoscopy-and-sterile-
+        #     services, so it is genuinely half this patch and half theatres, and it
+        #     is claimed with that shared ownership stated rather than implied.
+        #   "Urology and Bowel Management" (2023/S 000-011173, 21 February 2024 to 20
+        #     February 2027, 57 suppliers, 18 lots) is the stoma route, and the page
+        #     names it as the fifth agreement while saying plainly that most of the
+        #     money does not go through it: Lot 10 Bowel and Faecal Management, Lot 11
+        #     Enema Accessories, Lot 12 Stoma Appliances, Lot 13 Stoma Accessories,
+        #     Lot 14 Wound and Fistula Management and Lot 17 Chyme Infusion Systems
+        #     are this patch. The other twelve lots are catheters, sheaths and
+        #     containment, which are the continence page's, and that page claims the
+        #     same framework for them.
         # DELIBERATELY NOT CLAIMED, each one read and rejected:
-        #   "Rigid Endoscopy and Associated Options and Related Services" -- rigid
-        #     endoscopy is laparoscopy, arthroscopy, hysteroscopy and ENT. Arthrex and
-        #     Smith & Nephew are on it. It is the theatres and surgical patch.
         #   "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related
         #     Services" -- the ENT and head and neck page claims it explicitly.
         #   "Instrument Decontamination and Accessories" -- surgical instrument
         #     reprocessing and the chemistry that goes with it, which is sterile
         #     services. Endoscope reprocessing firms appear on it (Wassenburg,
-        #     Partners for Endoscopy) but the framework is not this patch's.
+        #     Partners for Endoscopy) but the framework is not this patch's, and the
+        #     page's buying route names five agreements, not six.
         #   "Enteral Feeding, Bile Bags and Associated Products" -- gastrointestinal
         #     anatomy, but the nutrition and dietetics page's market: feeds, pumps and
         #     giving sets bought by a dietetics service.
-        #   "Urology and Bowel Management" -- catheters, sheaths and drainage bags.
-        #     The continence, bladder and bowel page claims it, and that page's own
-        #     rule already records that this page owns the endoscopy consumables
-        #     framework in return.
         #   "Minimally Invasive Surgery, Related Equipment and Accessories" -- the
         #     laparoscopic resection in step 6 of the pathway is bought against it,
         #     but it is 60 suppliers of ports, staplers and energy devices across
         #     every surgical speciality, and theatres and surgical is where a
         #     cross-cutting framework belongs.
-        "frameworks": r"\b(flexible endoscopes?|endoscopy, endourology|decontamination capital)\b",
+        "frameworks": (
+            r"\b(flexible endoscopes?|rigid endoscopy|endoscopy, endourology|"
+            r"decontamination capital|urology and bowel)\b"
+        ),
         # EVERY MATCH WAS READ, ONE BY ONE. The include below returns 39 rows across
         # the two award feeds after exclusions -- 26 in tender-history.json and 13 in
         # framework-awards.json -- and all 39 are this patch: the NHS Supply Chain
@@ -5283,8 +5305,8 @@ SPECIALITY_RULES = {
             r"oesophagogastr\w*|oesophagectom\w*|oesophageal stent\w*|"
             r"haemorrhoid\w*|anal fistula|proctolog\w*)\b"
         ),
-        # FIVE PATTERNS. Four of them removed a row that is not this speciality; the
-        # fifth removed a row nobody can attribute from its title. That difference is
+        # FOUR PATTERNS. Three of them removed a row that is not this speciality; the
+        # fourth removed a row nobody can attribute from its title. That difference is
         # written out in excludeFinding below rather than glossed.
         #   vessel harvesting -> two NHS Golden Jubilee awards, "Endoscopic Vessel
         #                        Harvesting Tools and Associated Consumables"
@@ -5297,16 +5319,6 @@ SPECIALITY_RULES = {
         #                        Suturectomy Patients", Birmingham Women's and
         #                        Children's. Infant craniosynostosis surgery and the
         #                        moulding helmets worn afterwards.
-        #   rigid endoscopy,
-        #   flexible absent   -> "Rigid Endoscopy Equipment, Accessories and
-        #                        Maintenance and Repair", NHS Scotland, awarded to
-        #                        Arthrex, Emmat, Karl Storz and others. Arthroscopy
-        #                        and laparoscopy, not this patch. The pattern is
-        #                        anchored and conditional on purpose: NHS Scotland
-        #                        also runs "Flexible Video, Capsule & Rigid Endoscopy
-        #                        Equipment", which is a combined award carrying the
-        #                        flexible and capsule scopes this page's unit buys,
-        #                        and that one is kept.
         #   medicines         -> "Gastrointestinal, Endocrine, Nutrition & Blood
         #                        Medicines", NHS Scotland, awarded to Kent
         #                        Pharmaceuticals. Genuinely gastrointestinal, and
@@ -5323,24 +5335,31 @@ SPECIALITY_RULES = {
         #                        the ENT patch, and Aquilant supplies both. Refused
         #                        because the title cannot settle it, not because it
         #                        was shown to be ENT.
-        "exclude": (
-            r"\b(vessel harvesting|craniofacial|medicines|transnasal)\b"
-            r"|^(?!.*\bflexible\b).*\brigid endoscop"
-        ),
+        # NHS SCOTLAND'S STANDALONE "Rigid Endoscopy Equipment, Accessories and
+        # Maintenance and Repair" IS ADMITTED, AND THE FIRST VERSION OF THIS RULE
+        # EXCLUDED IT. It was excluded on the argument that rigid endoscopy is
+        # arthroscopy and laparoscopy, which is true of part of it -- Arthrex and
+        # Smith & Nephew are on the NHSSC framework of that name. It is admitted now
+        # because this rule claims the Rigid Endoscopy framework, on the page's own
+        # sourced statement, and a panel cannot publish that framework as this
+        # patch's scope route in one tab and refuse an award for the same equipment
+        # in the next. The honest position is one position, and it is this one.
+        "exclude": r"\b(vessel harvesting|craniofacial|medicines|transnasal)\b",
         "excludeFinding": (
-            "FOUR OF THE FIVE EXCLUSION PATTERNS IN THAT RULE REMOVED A NOTICE THAT "
-            "IS NOT "
-            "THIS SPECIALITY: two endoscopic vessel harvesting awards that are "
-            "cardiac surgery, a craniofacial helmet therapy engagement that is "
-            "infant neurosurgery, a rigid endoscopy award that is arthroscopy and "
-            "laparoscopy, and a pharmacy wholesale award covering four therapeutic "
-            "areas of which gastrointestinal medicines is one. The fifth is "
-            "different and is said plainly rather than counted with them: "
+            "THREE OF THE FOUR EXCLUSION PATTERNS IN THAT RULE REMOVED A NOTICE "
+            "THAT IS NOT THIS SPECIALITY: two endoscopic vessel harvesting awards "
+            "that are cardiac surgery, a craniofacial helmet therapy engagement that "
+            "is infant neurosurgery, and a pharmacy wholesale award covering four "
+            "therapeutic areas of which gastrointestinal medicines is one. The "
+            "fourth is different and is said plainly rather than counted with them: "
             "\"transnasal\" removed Somerset NHS Foundation Trust's purchase of "
             "transnasal endoscopes, which is either unsedated upper gastrointestinal "
             "endoscopy, which is this patch, or ENT nasendoscopy, which is not, and "
             "the title cannot settle which. It is refused because it could not be "
-            "attributed, not because it was shown to be wrong."
+            "attributed, not because it was shown to be wrong. NOTHING IS EXCLUDED "
+            "FOR BEING RIGID RATHER THAN FLEXIBLE ENDOSCOPY: this patch's scope "
+            "route is one NHS Supply Chain reference covering both, so both reach "
+            "this panel."
         ),
         # THE TWO ENDOSCOPY CPV CODES, AND THEY CORROBORATE ONLY. 33168000 is
         # endoscopy and endosurgery devices and 33168100 is endoscopes. Across the
@@ -5360,40 +5379,54 @@ SPECIALITY_RULES = {
         # products, which are continence's and not stoma at all.
         "tariffParts": ("IXC",),
         "coverageNote": (
-            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. ONE SUPPLIER COUNT BELOW IS "
-            "UNVERIFIED. NHS Supply Chain publishes no supplier total on the Flexible "
-            "Endoscopes brief, so its five names are the five the Hub's crawler "
-            "parsed and nothing confirms that five is all of them; the other two "
-            "frameworks state their own totals (58 and 20) and both match. ONE OF THE "
-            "THREE FRAMEWORKS IS SHARED WITH THEATRES. Decontamination Capital "
-            "Equipment covers endoscopy decontamination and sterile services "
-            "together, which is NHS Supply Chain's own scoping, not the Hub's: its "
-            "brief URL reads decontamination-capital-equipment-endoscopy-and-sterile-"
-            "services. Roughly half its 20 suppliers sell into a sterile services "
-            "department rather than an endoscopy unit. THE CONTRACT DATES MATTER MORE "
-            "HERE THAN ON MOST PAGES. Decontamination Capital Equipment ends 18 "
-            "February 2027 and Endoscopy, Endourology and Oncology Ablation "
-            "Consumables ends 30 September 2027; no successor to either has been "
-            "awarded, so no successor is in the Hub's framework dataset and cannot "
-            "be. Being named below is a statement about the current agreements only. "
-            "TWO OF THE AWARDS BELOW ARE MULTI-SPECIALITY BASKETS and are included "
-            "because endoscopy is named in the title, not because the whole award is "
-            "this patch: NHS Wales' \"Interventional Cardiology, Radiology, Endoscopy "
-            "and Surgical Urology Consumables\" and NHS Supply Chain's \"Imaging, "
-            "Radiotherapy and Endoscopy Equipment\". Read them as a route in, not as "
-            "an endoscopy contract value. THE STOMA ROWS APPEAR ON TWO PAGES ON "
-            "PURPOSE. Stoma appliances are step 7 of this page's pathway and the "
-            "largest single budget on it, and they are also containment, which is the "
-            "continence, bladder and bowel page's patch. Both pages claim Part IXC "
-            "and the three stoma award rows, in the same way Pressure Area Care is "
-            "shared between wound care and patient handling. WHAT IS NOT HERE: the "
-            "FIT assays NICE names in NG12 are bought by pathology laboratories on "
-            "pathology's own managed service route and only three FIT contracts reach "
-            "the award feeds at all; the theatre products in step 6 -- staplers, "
-            "energy devices, ports, colonic stents, robotic consumables -- are on the "
-            "theatres and surgical page's frameworks; and liver disease, enteral "
-            "feeding and bowel management are the hepatology, nutrition and "
-            "continence patches respectively and are not claimed."
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. THE FIVE AGREEMENTS BELOW "
+            "ARE THE FIVE THIS PAGE'S OWN DEEP DIVE NAMES AS THE BUYING ROUTE, AND "
+            "TWO OF THEM ARE SHARED WITH A NEIGHBOURING PAGE. Decontamination "
+            "Capital Equipment covers endoscopy decontamination and sterile services "
+            "together, which is NHS Supply Chain's own scoping and not the Hub's: "
+            "its brief URL reads decontamination-capital-equipment-endoscopy-and-"
+            "sterile-services, and only its Lot 1, Endoscopy Decontamination Unit, "
+            "is this patch. Urology and Bowel Management carries 18 lots and six of "
+            "them are this patch -- Bowel and Faecal Management, Enema Accessories, "
+            "Stoma Appliances, Stoma Accessories, Wound and Fistula Management and "
+            "Chyme Infusion Systems. The other twelve are catheters, sheaths and "
+            "containment, and the continence, bladder and bowel page claims the same "
+            "framework for those. So a supplier named below may be on it for a "
+            "product this page never sells: read the lot, not the membership. ONE "
+            "SUPPLIER COUNT IS UNVERIFIED. NHS Supply Chain publishes no supplier "
+            "total on the Flexible Endoscopes brief, so its five names are the five "
+            "the Hub's crawler parsed and nothing confirms five is all of them; the "
+            "same is true of Rigid Endoscopy's 18. Endoscopy, Endourology and "
+            "Oncology Ablation Consumables (58), Decontamination Capital Equipment "
+            "(20) and Urology and Bowel Management (57) all state their own totals "
+            "and all three match. THE CONTRACT DATES MATTER MORE HERE THAN ON MOST "
+            "PAGES. Urology and Bowel Management ends 20 February 2027, "
+            "Decontamination Capital Equipment 18 February 2027 and Endoscopy, "
+            "Endourology and Oncology Ablation Consumables 30 September 2027, and "
+            "the two scope agreements share one reference, 2021/S 000-007768, and "
+            "both end 31 March 2028 with both extensions already spent. No successor "
+            "to any of them has been awarded, so none is in the Hub's framework "
+            "dataset and none can be. Being named below is a statement about the "
+            "current agreements only. TWO OF THE AWARDS BELOW ARE MULTI-SPECIALITY "
+            "BASKETS and are included because endoscopy is named in the title, not "
+            "because the whole award is this patch: NHS Wales' \"Interventional "
+            "Cardiology, Radiology, Endoscopy and Surgical Urology Consumables\" and "
+            "NHS Supply Chain's \"Imaging, Radiotherapy and Endoscopy Equipment\". "
+            "Read them as a route in, not as an endoscopy contract value. THE STOMA "
+            "ROWS APPEAR ON TWO PAGES ON PURPOSE. Stoma appliances are step 7 of "
+            "this page's pathway and the largest single budget on it, and they are "
+            "also containment, which is the continence page's patch. Both pages "
+            "claim Part IXC and the three stoma award rows, in the same way Pressure "
+            "Area Care is shared between wound care and patient handling. WHAT IS "
+            "NOT HERE: the FIT assays NICE names in NG12 are bought by pathology "
+            "laboratories on pathology's own managed service route and only three "
+            "FIT contracts reach the award feeds at all; the theatre products in "
+            "step 6 -- staplers, energy devices, ports, colonic stents, robotic "
+            "consumables -- are on the theatres and surgical page's frameworks; the "
+            "AI polyp detection boxes NICE names in HTG514 have no framework at all "
+            "and are a trust-level licence, so no panel can carry them; and liver "
+            "disease and enteral feeding are the hepatology and nutrition patches "
+            "and are not claimed."
         ),
     },
 

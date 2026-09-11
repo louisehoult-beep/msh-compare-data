@@ -22,18 +22,18 @@
   "drugTariff": "2026-09-10"
  },
  "rules": {
-  "frameworks": "NHS Supply Chain framework names matching /\\b(flexible endoscopes?|endoscopy, endourology|decontamination capital)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. ONE SUPPLIER COUNT BELOW IS UNVERIFIED. NHS Supply Chain publishes no supplier total on the Flexible Endoscopes brief, so its five names are the five the Hub's crawler parsed and nothing confirms that five is all of them; the other two frameworks state their own totals (58 and 20) and both match. ONE OF THE THREE FRAMEWORKS IS SHARED WITH THEATRES. Decontamination Capital Equipment covers endoscopy decontamination and sterile services together, which is NHS Supply Chain's own scoping, not the Hub's: its brief URL reads decontamination-capital-equipment-endoscopy-and-sterile-services. Roughly half its 20 suppliers sell into a sterile services department rather than an endoscopy unit. THE CONTRACT DATES MATTER MORE HERE THAN ON MOST PAGES. Decontamination Capital Equipment ends 18 February 2027 and Endoscopy, Endourology and Oncology Ablation Consumables ends 30 September 2027; no successor to either has been awarded, so no successor is in the Hub's framework dataset and cannot be. Being named below is a statement about the current agreements only. TWO OF THE AWARDS BELOW ARE MULTI-SPECIALITY BASKETS and are included because endoscopy is named in the title, not because the whole award is this patch: NHS Wales' \"Interventional Cardiology, Radiology, Endoscopy and Surgical Urology Consumables\" and NHS Supply Chain's \"Imaging, Radiotherapy and Endoscopy Equipment\". Read them as a route in, not as an endoscopy contract value. THE STOMA ROWS APPEAR ON TWO PAGES ON PURPOSE. Stoma appliances are step 7 of this page's pathway and the largest single budget on it, and they are also containment, which is the continence, bladder and bowel page's patch. Both pages claim Part IXC and the three stoma award rows, in the same way Pressure Area Care is shared between wound care and patient handling. WHAT IS NOT HERE: the FIT assays NICE names in NG12 are bought by pathology laboratories on pathology's own managed service route and only three FIT contracts reach the award feeds at all; the theatre products in step 6 -- staplers, energy devices, ports, colonic stents, robotic consumables -- are on the theatres and surgical page's frameworks; and liver disease, enteral feeding and bowel management are the hepatology, nutrition and continence patches respectively and are not claimed.",
-  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. ONE SUPPLIER COUNT BELOW IS UNVERIFIED. NHS Supply Chain publishes no supplier total on the Flexible Endoscopes brief, so its five names are the five the Hub's crawler parsed and nothing confirms that five is all of them; the other two frameworks state their own totals (58 and 20) and both match. ONE OF THE THREE FRAMEWORKS IS SHARED WITH THEATRES. Decontamination Capital Equipment covers endoscopy decontamination and sterile services together, which is NHS Supply Chain's own scoping, not the Hub's: its brief URL reads decontamination-capital-equipment-endoscopy-and-sterile-services. Roughly half its 20 suppliers sell into a sterile services department rather than an endoscopy unit. THE CONTRACT DATES MATTER MORE HERE THAN ON MOST PAGES. Decontamination Capital Equipment ends 18 February 2027 and Endoscopy, Endourology and Oncology Ablation Consumables ends 30 September 2027; no successor to either has been awarded, so no successor is in the Hub's framework dataset and cannot be. Being named below is a statement about the current agreements only. TWO OF THE AWARDS BELOW ARE MULTI-SPECIALITY BASKETS and are included because endoscopy is named in the title, not because the whole award is this patch: NHS Wales' \"Interventional Cardiology, Radiology, Endoscopy and Surgical Urology Consumables\" and NHS Supply Chain's \"Imaging, Radiotherapy and Endoscopy Equipment\". Read them as a route in, not as an endoscopy contract value. THE STOMA ROWS APPEAR ON TWO PAGES ON PURPOSE. Stoma appliances are step 7 of this page's pathway and the largest single budget on it, and they are also containment, which is the continence, bladder and bowel page's patch. Both pages claim Part IXC and the three stoma award rows, in the same way Pressure Area Care is shared between wound care and patient handling. WHAT IS NOT HERE: the FIT assays NICE names in NG12 are bought by pathology laboratories on pathology's own managed service route and only three FIT contracts reach the award feeds at all; the theatre products in step 6 -- staplers, energy devices, ports, colonic stents, robotic consumables -- are on the theatres and surgical page's frameworks; and liver disease, enteral feeding and bowel management are the hepatology, nutrition and continence patches respectively and are not claimed.",
-  "awards": "Award-stage notices whose TITLE matches /\\b(endoscop\\w*|colonoscop\\w*|gastroscop\\w*|sigmoidoscop\\w*|proctoscop\\w*|duodenoscop\\w*|enteroscop\\w*|colonograph\\w*|colorectal|colon cancer|bowel cancer|bowel screening|bowel preparation|inflammatory bowel|crohn\\w*|ulcerative colitis|faecal immunochemical|faecal occult|faecal calprotectin|fit kits?|gastrointestinal|gastroenterolog\\w*|digestive disease|stomas?|colostom\\w*|ileostom\\w*|ostomy|polypectom\\w*|adenoma detection|oesophagogastr\\w*|oesophagectom\\w*|oesophageal stent\\w*|haemorrhoid\\w*|anal fistula|proctolog\\w*)\\b/i and does not match /\\b(vessel harvesting|craniofacial|medicines|transnasal)\\b|^(?!.*\\bflexible\\b).*\\brigid endoscop/i. FOUR OF THE FIVE EXCLUSION PATTERNS IN THAT RULE REMOVED A NOTICE THAT IS NOT THIS SPECIALITY: two endoscopic vessel harvesting awards that are cardiac surgery, a craniofacial helmet therapy engagement that is infant neurosurgery, a rigid endoscopy award that is arthroscopy and laparoscopy, and a pharmacy wholesale award covering four therapeutic areas of which gastrointestinal medicines is one. The fifth is different and is said plainly rather than counted with them: \"transnasal\" removed Somerset NHS Foundation Trust's purchase of transnasal endoscopes, which is either unsedated upper gastrointestinal endoscopy, which is this patch, or ENT nasendoscopy, which is not, and the title cannot settle which. It is refused because it could not be attributed, not because it was shown to be wrong. A CPV code beginning 33168 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "frameworks": "NHS Supply Chain framework names matching /\\b(flexible endoscopes?|rigid endoscopy|endoscopy, endourology|decontamination capital|urology and bowel)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. THE FIVE AGREEMENTS BELOW ARE THE FIVE THIS PAGE'S OWN DEEP DIVE NAMES AS THE BUYING ROUTE, AND TWO OF THEM ARE SHARED WITH A NEIGHBOURING PAGE. Decontamination Capital Equipment covers endoscopy decontamination and sterile services together, which is NHS Supply Chain's own scoping and not the Hub's: its brief URL reads decontamination-capital-equipment-endoscopy-and-sterile-services, and only its Lot 1, Endoscopy Decontamination Unit, is this patch. Urology and Bowel Management carries 18 lots and six of them are this patch -- Bowel and Faecal Management, Enema Accessories, Stoma Appliances, Stoma Accessories, Wound and Fistula Management and Chyme Infusion Systems. The other twelve are catheters, sheaths and containment, and the continence, bladder and bowel page claims the same framework for those. So a supplier named below may be on it for a product this page never sells: read the lot, not the membership. ONE SUPPLIER COUNT IS UNVERIFIED. NHS Supply Chain publishes no supplier total on the Flexible Endoscopes brief, so its five names are the five the Hub's crawler parsed and nothing confirms five is all of them; the same is true of Rigid Endoscopy's 18. Endoscopy, Endourology and Oncology Ablation Consumables (58), Decontamination Capital Equipment (20) and Urology and Bowel Management (57) all state their own totals and all three match. THE CONTRACT DATES MATTER MORE HERE THAN ON MOST PAGES. Urology and Bowel Management ends 20 February 2027, Decontamination Capital Equipment 18 February 2027 and Endoscopy, Endourology and Oncology Ablation Consumables 30 September 2027, and the two scope agreements share one reference, 2021/S 000-007768, and both end 31 March 2028 with both extensions already spent. No successor to any of them has been awarded, so none is in the Hub's framework dataset and none can be. Being named below is a statement about the current agreements only. TWO OF THE AWARDS BELOW ARE MULTI-SPECIALITY BASKETS and are included because endoscopy is named in the title, not because the whole award is this patch: NHS Wales' \"Interventional Cardiology, Radiology, Endoscopy and Surgical Urology Consumables\" and NHS Supply Chain's \"Imaging, Radiotherapy and Endoscopy Equipment\". Read them as a route in, not as an endoscopy contract value. THE STOMA ROWS APPEAR ON TWO PAGES ON PURPOSE. Stoma appliances are step 7 of this page's pathway and the largest single budget on it, and they are also containment, which is the continence page's patch. Both pages claim Part IXC and the three stoma award rows, in the same way Pressure Area Care is shared between wound care and patient handling. WHAT IS NOT HERE: the FIT assays NICE names in NG12 are bought by pathology laboratories on pathology's own managed service route and only three FIT contracts reach the award feeds at all; the theatre products in step 6 -- staplers, energy devices, ports, colonic stents, robotic consumables -- are on the theatres and surgical page's frameworks; the AI polyp detection boxes NICE names in HTG514 have no framework at all and are a trust-level licence, so no panel can carry them; and liver disease and enteral feeding are the hepatology and nutrition patches and are not claimed.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. THE FIVE AGREEMENTS BELOW ARE THE FIVE THIS PAGE'S OWN DEEP DIVE NAMES AS THE BUYING ROUTE, AND TWO OF THEM ARE SHARED WITH A NEIGHBOURING PAGE. Decontamination Capital Equipment covers endoscopy decontamination and sterile services together, which is NHS Supply Chain's own scoping and not the Hub's: its brief URL reads decontamination-capital-equipment-endoscopy-and-sterile-services, and only its Lot 1, Endoscopy Decontamination Unit, is this patch. Urology and Bowel Management carries 18 lots and six of them are this patch -- Bowel and Faecal Management, Enema Accessories, Stoma Appliances, Stoma Accessories, Wound and Fistula Management and Chyme Infusion Systems. The other twelve are catheters, sheaths and containment, and the continence, bladder and bowel page claims the same framework for those. So a supplier named below may be on it for a product this page never sells: read the lot, not the membership. ONE SUPPLIER COUNT IS UNVERIFIED. NHS Supply Chain publishes no supplier total on the Flexible Endoscopes brief, so its five names are the five the Hub's crawler parsed and nothing confirms five is all of them; the same is true of Rigid Endoscopy's 18. Endoscopy, Endourology and Oncology Ablation Consumables (58), Decontamination Capital Equipment (20) and Urology and Bowel Management (57) all state their own totals and all three match. THE CONTRACT DATES MATTER MORE HERE THAN ON MOST PAGES. Urology and Bowel Management ends 20 February 2027, Decontamination Capital Equipment 18 February 2027 and Endoscopy, Endourology and Oncology Ablation Consumables 30 September 2027, and the two scope agreements share one reference, 2021/S 000-007768, and both end 31 March 2028 with both extensions already spent. No successor to any of them has been awarded, so none is in the Hub's framework dataset and none can be. Being named below is a statement about the current agreements only. TWO OF THE AWARDS BELOW ARE MULTI-SPECIALITY BASKETS and are included because endoscopy is named in the title, not because the whole award is this patch: NHS Wales' \"Interventional Cardiology, Radiology, Endoscopy and Surgical Urology Consumables\" and NHS Supply Chain's \"Imaging, Radiotherapy and Endoscopy Equipment\". Read them as a route in, not as an endoscopy contract value. THE STOMA ROWS APPEAR ON TWO PAGES ON PURPOSE. Stoma appliances are step 7 of this page's pathway and the largest single budget on it, and they are also containment, which is the continence page's patch. Both pages claim Part IXC and the three stoma award rows, in the same way Pressure Area Care is shared between wound care and patient handling. WHAT IS NOT HERE: the FIT assays NICE names in NG12 are bought by pathology laboratories on pathology's own managed service route and only three FIT contracts reach the award feeds at all; the theatre products in step 6 -- staplers, energy devices, ports, colonic stents, robotic consumables -- are on the theatres and surgical page's frameworks; the AI polyp detection boxes NICE names in HTG514 have no framework at all and are a trust-level licence, so no panel can carry them; and liver disease and enteral feeding are the hepatology and nutrition patches and are not claimed.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(endoscop\\w*|colonoscop\\w*|gastroscop\\w*|sigmoidoscop\\w*|proctoscop\\w*|duodenoscop\\w*|enteroscop\\w*|colonograph\\w*|colorectal|colon cancer|bowel cancer|bowel screening|bowel preparation|inflammatory bowel|crohn\\w*|ulcerative colitis|faecal immunochemical|faecal occult|faecal calprotectin|fit kits?|gastrointestinal|gastroenterolog\\w*|digestive disease|stomas?|colostom\\w*|ileostom\\w*|ostomy|polypectom\\w*|adenoma detection|oesophagogastr\\w*|oesophagectom\\w*|oesophageal stent\\w*|haemorrhoid\\w*|anal fistula|proctolog\\w*)\\b/i and does not match /\\b(vessel harvesting|craniofacial|medicines|transnasal)\\b/i. THREE OF THE FOUR EXCLUSION PATTERNS IN THAT RULE REMOVED A NOTICE THAT IS NOT THIS SPECIALITY: two endoscopic vessel harvesting awards that are cardiac surgery, a craniofacial helmet therapy engagement that is infant neurosurgery, and a pharmacy wholesale award covering four therapeutic areas of which gastrointestinal medicines is one. The fourth is different and is said plainly rather than counted with them: \"transnasal\" removed Somerset NHS Foundation Trust's purchase of transnasal endoscopes, which is either unsedated upper gastrointestinal endoscopy, which is this patch, or ENT nasendoscopy, which is not, and the title cannot settle which. It is refused because it could not be attributed, not because it was shown to be wrong. NOTHING IS EXCLUDED FOR BEING RIGID RATHER THAN FLEXIBLE ENDOSCOPY: this patch's scope route is one NHS Supply Chain reference covering both, so both reach this panel. A CPV code beginning 33168 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "NHSBSA Drug Tariff Part IXC for the stated effective month, summarised. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
  },
  "counts": {
-  "frameworks": 3,
-  "suppliers": 77,
-  "suppliersUnresolved": 2,
-  "awardsShown": 39,
-  "awardsMatched": 39,
+  "frameworks": 5,
+  "suppliers": 130,
+  "suppliersUnresolved": 5,
+  "awardsShown": 40,
+  "awardsMatched": 40,
   "openTenders": 0
  },
  "frameworks": [
@@ -166,6 +166,109 @@
     "Richard Wolf UK Limited"
    ],
    "delisted": null
+  },
+  {
+   "name": "Rigid Endoscopy and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/rigid-endoscopy-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct, eDirect",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 18,
+   "supplierSource": "no stated count on the page; 18 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "Aquilant Ltd",
+    "Arthrex Limited",
+    "B. Braun Medical Limited",
+    "Conmed UK Limited",
+    "DP Medical",
+    "Emmat Medical",
+    "G S Medical",
+    "Karl Storz Endoscopy (UK) Limited",
+    "LiteOptics Limited",
+    "Locamed Limited",
+    "Medtronic Limited",
+    "Novus Med",
+    "Olympus KeyMed",
+    "Pentax UK Limited",
+    "RB Medical Engineering Limited",
+    "Richard Wolf UK Limited",
+    "Smith and Nephew",
+    "Stryker UK Limited"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Urology and Bowel Management",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/urology-and-bowel-management/",
+   "reference": "2023/S 000-011173",
+   "category": "Rehabilitation and Community",
+   "supplyRoute": "Stocked, eDirect",
+   "starts": "21 February 2024",
+   "ends": "20 February 2027",
+   "supplierCount": 57,
+   "supplierSource": "count verified against the page's own stated total (57)",
+   "suppliers": [
+    "Abena UK Limited",
+    "AQLANE Medical BV",
+    "Ardo Medical Ltd",
+    "Astric Medical Ltd",
+    "B Braun Medical Ltd",
+    "Baxter Healthcare Limited",
+    "Beambridge Medical Ltd",
+    "Becton Dickinson UK Ltd Woking",
+    "C&P Medical Trading Ltd",
+    "CD Medical Ltd",
+    "Class Medical Ltd",
+    "CliniMed Ltd",
+    "Clinisupplies GB Limited",
+    "Clinisupplies Ltd",
+    "CODAN Limited",
+    "Coloplast Limited",
+    "Convatec Ltd",
+    "Creo Medical UK Ltd",
+    "E&E MEDICAL SUPPLIES LIMITED",
+    "Essity UK TENA Heath & Medical",
+    "Fairmont Medical Products Limited",
+    "Fannin UK Ltd",
+    "Flexicare Medical Ltd",
+    "Fresenius Kabi Ltd",
+    "GBUK Healthcare",
+    "GenX MediCare Ltd",
+    "Hollister Ltd",
+    "iMEDicare Ltd",
+    "KCI Medical Limited (3m)",
+    "Key Health Solutions",
+    "Laborie Medical Technologies UK Ltd",
+    "LINC Medical Systems Ltd",
+    "Medicina Limited",
+    "Mediplus Ltd",
+    "Mediq Healthcare",
+    "Medline Industries Ltd",
+    "Oakmed Ltd",
+    "Optimum Medical Solutions Ltd",
+    "Paramount Medical Solutions Ltd",
+    "Peak Medical Ltd",
+    "Pelican Healthcare Limited",
+    "Pennine Healthcare",
+    "ProSys International Ltd",
+    "RB Medical",
+    "Redland embh Group Limited",
+    "Rhodes Pharma Ltd",
+    "Rocialle Healthcare Limited",
+    "Salts Healthcare (Ostomy)",
+    "Sharon services (UK) Ltd",
+    "Smith & Nephew Healthcare Ltd",
+    "Teleflex Medical UK",
+    "Trion Pharma Limited",
+    "UNOQUIP GMBH",
+    "Venture Healthcare Ltd",
+    "Vernacare International Limited",
+    "Wellspect Limited",
+    "Sinapi Biomedical UK"
+   ],
+   "delisted": null
   }
  ],
  "suppliers": [
@@ -180,19 +283,22 @@
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services",
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
-    "Flexible Endoscopes and Associated Options and Related Services"
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
    ]
   },
   {
    "name": "Karl Storz UK",
    "resolved": true,
    "variants": [
+    "Karl Storz Endoscopy (UK) Limited",
     "Karl Storz Endoscopy (UK) Ltd",
     "Karl Storz Endoscopy UK Ltd"
    ],
    "frameworks": [
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
-    "Flexible Endoscopes and Associated Options and Related Services"
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
    ]
   },
   {
@@ -204,7 +310,22 @@
    ],
    "frameworks": [
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
-    "Flexible Endoscopes and Associated Options and Related Services"
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "RB Medical Engineering Ltd",
+   "resolved": true,
+   "variants": [
+    "RB Medical",
+    "RB Medical Engineering Limited",
+    "RB Medical Engineering Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -216,7 +337,172 @@
    ],
    "frameworks": [
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
-    "Flexible Endoscopes and Associated Options and Related Services"
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Aquilant Limited",
+   "resolved": true,
+   "variants": [
+    "Aquilant Limited",
+    "Aquilant Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "B. Braun Medical",
+   "resolved": true,
+   "variants": [
+    "B Braun Medical Ltd",
+    "B. Braun Medical Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "BD — Becton, Dickinson",
+   "resolved": true,
+   "variants": [
+    "Becton Dickinson UK Ltd Woking",
+    "Becton, Dickinson UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Coloplast",
+   "resolved": true,
+   "variants": [
+    "Coloplast Limited",
+    "Coloplast Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Conmed UK Ltd",
+   "resolved": true,
+   "variants": [
+    "ConMed UK Ltd",
+    "Conmed UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Creo Medical Limited",
+   "resolved": true,
+   "variants": [
+    "Creo Medical Limited",
+    "Creo Medical UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Fairmont Medical Products Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Fannin (UK) Limited",
+   "resolved": true,
+   "variants": [
+    "Fannin UK Limited",
+    "Fannin UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GBUK Healthcare",
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "GenX MediCare Ltd",
+   "resolved": true,
+   "variants": [
+    "GenX MediCare",
+    "GenX MediCare Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Laborie Medical Technologies UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Laborie Medical Technologies Ltd",
+    "Laborie Medical Technologies UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Medtronic",
+   "resolved": true,
+   "variants": [
+    "Medtronic Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Novus Med Ltd",
+   "resolved": true,
+   "variants": [
+    "Novus Med",
+    "Novus Med Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Smith+Nephew",
+   "resolved": true,
+   "variants": [
+    "Smith & Nephew Healthcare Ltd",
+    "Smith and Nephew"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services",
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -228,6 +514,26 @@
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services",
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "TFX Group Ltd (Teleflex Medical)",
+   "resolved": true,
+   "variants": [
+    "TFX Group Ltd T/A Teleflex Medical",
+    "Teleflex Medical UK"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Abena UK Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -265,6 +571,14 @@
    ]
   },
   {
+   "name": "AQLANE Medical BV",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
    "name": "Aquilant Endoscopy Limited",
    "resolved": true,
    "variants": [
@@ -275,11 +589,13 @@
    ]
   },
   {
-   "name": "Aquilant Limited",
+   "name": "Ardo medical Limited",
    "resolved": true,
-   "variants": [],
+   "variants": [
+    "Ardo Medical Ltd"
+   ],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -291,6 +607,24 @@
    ]
   },
   {
+   "name": "Arthrex",
+   "resolved": true,
+   "variants": [
+    "Arthrex Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Astric Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
    "name": "Avidity Science Limited",
    "resolved": true,
    "variants": [],
@@ -299,13 +633,21 @@
    ]
   },
   {
-   "name": "BD — Becton, Dickinson",
+   "name": "Baxter Healthcare Ltd",
    "resolved": true,
    "variants": [
-    "Becton, Dickinson UK Limited"
+    "Baxter Healthcare Limited"
    ],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Beambridge Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -343,6 +685,22 @@
    ]
   },
   {
+   "name": "C&P Medical Trading Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "CD Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
    "name": "CJ Medical",
    "resolved": true,
    "variants": [],
@@ -351,23 +709,50 @@
    ]
   },
   {
-   "name": "Coloplast",
+   "name": "Class Medical Ltd",
    "resolved": true,
-   "variants": [
-    "Coloplast Ltd"
-   ],
+   "variants": [],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Urology and Bowel Management"
    ]
   },
   {
-   "name": "Conmed UK Ltd",
+   "name": "CliniMed",
    "resolved": true,
    "variants": [
-    "ConMed UK Ltd"
+    "CliniMed Ltd"
    ],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Clinisupplies",
+   "resolved": true,
+   "variants": [
+    "Clinisupplies GB Limited",
+    "Clinisupplies Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "CODAN Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Convatec",
+   "resolved": true,
+   "variants": [
+    "Convatec Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -381,11 +766,13 @@
    ]
   },
   {
-   "name": "Creo Medical Limited",
+   "name": "D.P. Medical Systems Limited",
    "resolved": true,
-   "variants": [],
+   "variants": [
+    "DP Medical"
+   ],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Rigid Endoscopy and Associated Options and Related Services"
    ]
   },
   {
@@ -397,6 +784,24 @@
    ]
   },
   {
+   "name": "E&E MEDICAL SUPPLIES LIMITED",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Eakin Ostomy (Pelican Healthcare)",
+   "resolved": true,
+   "variants": [
+    "Pelican Healthcare Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
    "name": "Ecolab",
    "resolved": true,
    "variants": [
@@ -404,6 +809,14 @@
    ],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Emmat Medical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
    ]
   },
   {
@@ -423,6 +836,16 @@
    ]
   },
   {
+   "name": "Essity UK Limited",
+   "resolved": true,
+   "variants": [
+    "Essity UK TENA Heath & Medical"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
    "name": "ESTS (GB)",
    "resolved": true,
    "variants": [
@@ -433,21 +856,21 @@
    ]
   },
   {
-   "name": "Fairmont Medical Products Limited",
+   "name": "Flexicare Medical",
    "resolved": true,
-   "variants": [],
+   "variants": [
+    "Flexicare Medical Ltd"
+   ],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Urology and Bowel Management"
    ]
   },
   {
-   "name": "Fannin (UK) Limited",
+   "name": "Fresenius Kabi Ltd",
    "resolved": true,
-   "variants": [
-    "Fannin UK Limited"
-   ],
+   "variants": [],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -461,29 +884,17 @@
    ]
   },
   {
-   "name": "GAP Medical Solutions Ltd",
+   "name": "G S Medical",
    "resolved": true,
    "variants": [],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Rigid Endoscopy and Associated Options and Related Services"
    ]
   },
   {
-   "name": "GBUK Group",
+   "name": "GAP Medical Solutions Ltd",
    "resolved": true,
-   "variants": [
-    "GBUK Ltd"
-   ],
-   "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
-   ]
-  },
-  {
-   "name": "GenX MediCare Ltd",
-   "resolved": true,
-   "variants": [
-    "GenX MediCare"
-   ],
+   "variants": [],
    "frameworks": [
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
    ]
@@ -531,6 +942,16 @@
    ]
   },
   {
+   "name": "Hollister",
+   "resolved": true,
+   "variants": [
+    "Hollister Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
    "name": "Hospital Services Limited",
    "resolved": true,
    "variants": [],
@@ -554,6 +975,14 @@
    ],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "iMEDicare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -583,6 +1012,14 @@
    ]
   },
   {
+   "name": "KCI Medical Limited (3m)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
    "name": "Kebomed UK Ltd",
    "resolved": true,
    "variants": [],
@@ -591,13 +1028,11 @@
    ]
   },
   {
-   "name": "Laborie Medical Technologies UK Ltd",
+   "name": "Key Health Solutions",
    "resolved": true,
-   "variants": [
-    "Laborie Medical Technologies Ltd"
-   ],
+   "variants": [],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -606,6 +1041,36 @@
    "variants": [],
    "frameworks": [
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "LINC Medical",
+   "resolved": true,
+   "variants": [
+    "LINC Medical Systems Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "LiteOptics",
+   "resolved": true,
+   "variants": [
+    "LiteOptics Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "LocaMed Ltd",
+   "resolved": true,
+   "variants": [
+    "Locamed Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
    ]
   },
   {
@@ -643,13 +1108,39 @@
    ]
   },
   {
-   "name": "Medtronic",
+   "name": "Medicina Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Mediplus Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Mediq Healthcare UK Ltd",
    "resolved": true,
    "variants": [
-    "Medtronic Limited"
+    "Mediq Healthcare"
    ],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Medline Industries",
+   "resolved": true,
+   "variants": [
+    "Medline Industries Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -685,19 +1176,29 @@
    ]
   },
   {
-   "name": "Novus Med Ltd",
-   "resolved": true,
+   "name": "Omnimed Limited",
+   "resolved": false,
    "variants": [],
    "frameworks": [
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
    ]
   },
   {
-   "name": "Omnimed Limited",
-   "resolved": false,
+   "name": "Optimum Medical",
+   "resolved": true,
+   "variants": [
+    "Optimum Medical Solutions Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Paramount Medical Solutions Ltd",
+   "resolved": true,
    "variants": [],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -714,6 +1215,14 @@
    "variants": [],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Peak Medical Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -735,6 +1244,16 @@
    ]
   },
   {
+   "name": "Pennine Healthcare (Ivor Shaw Ltd)",
+   "resolved": true,
+   "variants": [
+    "Pennine Healthcare"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
    "name": "Promed Limited",
    "resolved": true,
    "variants": [],
@@ -743,11 +1262,27 @@
    ]
   },
   {
-   "name": "RB Medical Engineering Ltd",
+   "name": "ProSys International Ltd",
    "resolved": true,
    "variants": [],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Redland embh Group Limited",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Rhodes Pharma Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -756,6 +1291,52 @@
    "variants": [],
    "frameworks": [
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Rocialle Healthcare",
+   "resolved": true,
+   "variants": [
+    "Rocialle Healthcare Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Salts Healthcare (Ostomy)",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Sharon Services (UK) Ltd",
+   "resolved": true,
+   "variants": [
+    "Sharon services (UK) Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Sinapi Biomedical UK",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Stryker",
+   "resolved": true,
+   "variants": [
+    "Stryker UK Limited"
+   ],
+   "frameworks": [
+    "Rigid Endoscopy and Associated Options and Related Services"
    ]
   },
   {
@@ -787,13 +1368,11 @@
    ]
   },
   {
-   "name": "TFX Group Ltd (Teleflex Medical)",
+   "name": "Trion Pharma Limited",
    "resolved": true,
-   "variants": [
-    "TFX Group Ltd T/A Teleflex Medical"
-   ],
+   "variants": [],
    "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -833,11 +1412,47 @@
    ]
   },
   {
+   "name": "UNOQUIP GMBH",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Unora Healthcare Ltd (formerly Oakmed Ltd)",
+   "resolved": true,
+   "variants": [
+    "Oakmed Ltd"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
    "name": "Varian Medical Systems",
    "resolved": false,
    "variants": [],
    "frameworks": [
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
+   ]
+  },
+  {
+   "name": "Venture Healthcare Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Vernacare",
+   "resolved": true,
+   "variants": [
+    "Vernacare International Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
    ]
   },
   {
@@ -858,6 +1473,16 @@
    ],
    "frameworks": [
     "Decontamination Capital Equipment, Associated Accessories and Services"
+   ]
+  },
+  {
+   "name": "Wellspect",
+   "resolved": true,
+   "variants": [
+    "Wellspect Limited"
+   ],
+   "frameworks": [
+    "Urology and Bowel Management"
    ]
   }
  ],
@@ -1253,6 +1878,16 @@
    "supplier": "Cantel UK Ltd",
    "date": "2022-12-02",
    "url": "https://www.find-tender.service.gov.uk/Notice/034229-2022",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Rigid Endoscopy Equipment, Accessories and Maintenance and Repair",
+   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
+   "supplier": "Arthrex LTD, Emmat Medical Ltd, Karl Storz Endoscopy (UK) Ltd, RB Medical, Richa",
+   "date": "2022-11-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/033612-2022",
    "value": null,
    "periodEnd": null,
    "source": "tender-history"

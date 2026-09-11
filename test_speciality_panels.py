@@ -4683,19 +4683,17 @@ check("refused (infant neurosurgery): Craniofacial Orthotics and Helmet Therapy"
       not B.match_title(_co_rx,
           "Pre-Market Engagement for Craniofacial Orthotics and Helmet Therapy Services for "
           "Endoscopic-Assisted Suturectomy Patients and Craniofacial Orthotist Services"))
-# NHS Scotland, awarded to Arthrex, Emmat, Karl Storz and others. Arthroscopy and
-# laparoscopy — the theatres patch, not the endoscopy unit.
-check("refused (arthroscopy and laparoscopy): Rigid Endoscopy Equipment, Accessories",
-      not B.match_title(_co_rx,
-          "Rigid Endoscopy Equipment, Accessories and Maintenance and Repair"))
-# ...but the exclusion is anchored and conditional on purpose. NHS Scotland also
-# runs a COMBINED award carrying the flexible and capsule scopes this unit buys,
-# and it must survive. If this check ever fails the exclusion has been widened
-# into the thing it was written to protect.
-for good in ["Flexible Video, Capsule & Rigid Endoscopy Equipment Including Accessories, "
+# NOTHING IS REFUSED FOR BEING RIGID RATHER THAN FLEXIBLE, and the first version
+# of this rule got that wrong on 11/09/2026: it excluded NHS Scotland's rigid
+# endoscopy award as arthroscopy while the panel's own Frameworks tab published
+# the Rigid Endoscopy framework as this patch's scope route. NHS Supply Chain
+# publishes Flexible Endoscopes and Rigid Endoscopy under ONE reference, 2021/S
+# 000-007768, and the page's Deep dive says so. One position, not two.
+for good in ["Rigid Endoscopy Equipment, Accessories and Maintenance and Repair",
+             "Flexible Video, Capsule & Rigid Endoscopy Equipment Including Accessories, "
              "Maintenance and Repair",
              "Flexible Video Endoscopy Equipment Including Maintenance and Capsule Endoscopy"]:
-    check("but the combined flexible award still reaches it: %s" % good[:44],
+    check("scope awards reach it, rigid and flexible alike: %s" % good[:44],
           B.match_title(_co_rx, good))
 # NHS Scotland, Kent Pharmaceuticals. Genuinely gastrointestinal and genuinely
 # not this panel: one pharmacy wholesale award across four therapeutic areas.
@@ -4776,15 +4774,15 @@ for good in ["Endoscopy, Endourology & Oncology Ablation Consumables & Associate
 
 check("every award was admitted by its title",
       all(B.match_title(_co_rx, a["title"]) for a in co["awards"]))
-check("39 awards matched and all 39 are shown",
-      co["counts"]["awardsMatched"] == 39 and co["counts"]["awardsShown"] == 39,
+check("40 awards matched and all 40 are shown",
+      co["counts"]["awardsMatched"] == 40 and co["counts"]["awardsShown"] == 40,
       "got %s matched / %s shown" % (co["counts"]["awardsMatched"], co["counts"]["awardsShown"]))
 _co_titles = " || ".join((a.get("title") or "") for a in co["awards"]).lower()
 for gone in ["vessel harvesting", "craniofacial", "transnasal", "wigs", "flooring",
              "faecal management", "hysteroscopy"]:
     check("no %s row reached the panel" % gone, gone not in _co_titles)
-check("the rigid-only award did not reach it",
-      "rigid endoscopy equipment, accessories" not in _co_titles)
+check("the rigid scope award DID reach it",
+      "rigid endoscopy equipment, accessories" in _co_titles)
 
 print("  CPV corroborates and never admits")
 # 33168000 and 33168100 are the endoscopy and endoscope codes, and across the
@@ -4797,20 +4795,36 @@ check("but the orthopaedic framework carrying the same code is refused on its ti
 check("and so is the laparoscopy framework carrying it",
       not B.match_title(_co_rx, "Minimally Invasive Surgery"))
 
-print("  three frameworks, and the four neighbours that are NOT claimed")
-check("exactly three frameworks", len(co["frameworks"]) == 3, "got %d" % len(co["frameworks"]))
+print("  five frameworks — the five the page's own Deep dive names, no more and no fewer")
+# THE PAGE IS THE AUTHORITY HERE AND THIS TEST EXISTS BECAUSE THE PANEL ONCE
+# DISAGREED WITH IT. Page 2830's Deep dive carries a section headed "The buying
+# route, exactly — five agreements, and one of them is not a framework at all".
+# A first version of this rule claimed three, having read the clinical pathway
+# section and the NHSSC framework names but not that one, and published a panel
+# that contradicted its own page.
+check("exactly five frameworks", len(co["frameworks"]) == 5, "got %d" % len(co["frameworks"]))
 _co_fw = sorted(f["name"] for f in co["frameworks"])
 for want in ["Flexible Endoscopes and Associated Options and Related Services",
+             "Rigid Endoscopy and Associated Options and Related Services",
              "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
-             "Decontamination Capital Equipment, Associated Accessories and Services"]:
+             "Decontamination Capital Equipment, Associated Accessories and Services",
+             "Urology and Bowel Management"]:
     check("carried: %s" % want[:52], want in _co_fw)
+# The two scope agreements share one NHS Supply Chain reference, which is the
+# page's own headline finding about this patch's capital route.
+def _co_ref(prefix):
+    for f in co["frameworks"]:
+        if f["name"].startswith(prefix):
+            return f.get("reference")
+    return None
+check("the two scope agreements still share one reference",
+      _co_ref("Flexible Endoscopes") == _co_ref("Rigid Endoscopy") == "2021/S 000-007768",
+      "flexible %s / rigid %s" % (_co_ref("Flexible Endoscopes"), _co_ref("Rigid Endoscopy")))
 # Each of these is a real NHSSC framework whose name contains a word this rule
 # matches on, or nearly does, and each belongs to a neighbouring page.
-for other in ["Rigid Endoscopy and Associated Options and Related Services",
-              "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+for other in ["Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
               "Instrument Decontamination and Accessories",
               "Environmental Decontamination",
-              "Urology and Bowel Management",
               "Enteral Feeding, Bile Bags and Associated Products",
               "Minimally Invasive Surgery, Related Equipment and Accessories"]:
     check("NOT claimed: %s" % other[:52], not any(f["name"] == other for f in co["frameworks"]))
@@ -4826,6 +4840,16 @@ check("Endoscopy, Endourology still names 58 suppliers",
       _co_count("Endoscopy, Endourology") == 58, "got %s" % _co_count("Endoscopy, Endourology"))
 check("Decontamination Capital still names 20 suppliers",
       _co_count("Decontamination Capital") == 20, "got %s" % _co_count("Decontamination Capital"))
+check("Urology and Bowel Management still names 57 suppliers",
+      _co_count("Urology and Bowel") == 57, "got %s" % _co_count("Urology and Bowel"))
+check("Rigid Endoscopy carries 18 parsed names",
+      _co_count("Rigid Endoscopy") == 18, "got %s" % _co_count("Rigid Endoscopy"))
+# Urology and Bowel Management is claimed for six of its eighteen lots. The other
+# twelve are the continence page's, and the panel has to keep saying so or a
+# member reads a catheter supplier as a stoma supplier.
+check("the lot-level basis for the stoma framework is published",
+      "Stoma Appliances" in (co["rules"].get("frameworks") or "")
+      or "18 lots" in (co["rules"].get("frameworks") or ""))
 # The third is NOT verified, NHS Supply Chain states no total on that brief, and
 # the panel has to keep saying so rather than presenting five as a fact.
 check("Flexible Endoscopes carries 5 parsed names", _co_count("Flexible Endoscopes") == 5,
@@ -4867,30 +4891,36 @@ check("and this panel says the overlap is on purpose",
       or "continence" in (co["rules"].get("suppliers") or "").lower())
 
 print("  suppliers, and the two names the alias registry cannot resolve")
-check("suppliers come only from the three frameworks",
+check("suppliers come only from the five frameworks",
       co["counts"]["suppliers"] > 0 and all(s.get("frameworks") for s in co["suppliers"]))
-check("77 suppliers from 83 framework seats", co["counts"]["suppliers"] == 77,
+check("130 suppliers across the five frameworks", co["counts"]["suppliers"] == 130,
       "got %s" % co["counts"]["suppliers"])
 _co_unres = sorted(s["name"] for s in co["suppliers"] if not s["resolved"])
 # Kept exactly as NHS Supply Chain wrote them and flagged, never dropped and
-# never quietly merged into something that looks close.
-check("exactly two names are still unresolved and they are the expected two",
-      _co_unres == ["Omnimed Limited", "Varian Medical Systems"], "got %s" % _co_unres)
-check("the count of unresolved names is published", co["counts"]["suppliersUnresolved"] == 2)
+# never quietly merged into something that looks close. "Salts Healthcare
+# (Ostomy)" is the one worth watching: the Drug Tariff names the same firm
+# "Salts Healthcare", so one company appears under two spellings in two tabs of
+# the same panel. That is an alias-registry gap, recorded here rather than fixed
+# inside a speciality build, because company-aliases is shared data.
+check("exactly five names are still unresolved and they are the expected five",
+      _co_unres == ["Emmat Medical", "KCI Medical Limited (3m)", "Omnimed Limited",
+                    "Salts Healthcare (Ostomy)", "Varian Medical Systems"],
+      "got %s" % _co_unres)
+check("the count of unresolved names is published", co["counts"]["suppliersUnresolved"] == 5)
 _co_names = {s["name"] for s in co["suppliers"]}
 for want in ["Boston Scientific", "Olympus (KeyMed)", "Pentax Medical", "Wassenburg Medical",
              "Micro-Tech (UK) Ltd"]:
     check("supplier carried: %s" % want, want in _co_names)
 # ONE NAME PER COMPANY, and this patch is the case that needs it: NHS Supply
-# Chain spells Olympus three different ways across the three frameworks here --
+# Chain spells Olympus three different ways across the frameworks here --
 # "Olympus KeyMed" on Flexible Endoscopes, "KeyMed (Medical and Industrial
 # Equipment) Ltd" on the consumables agreement and "Keymed (Medical & Industrial
 # Equipment) Limited" on Decontamination Capital. Published raw that is the
 # biggest name on the patch appearing as three suppliers.
 _co_oly = [s for s in co["suppliers"] if s["name"] == "Olympus (KeyMed)"]
 check("Olympus is one supplier, not three", len(_co_oly) == 1)
-check("and it is named on all three frameworks",
-      bool(_co_oly) and len(_co_oly[0]["frameworks"]) == 3)
+check("and it is named on four of the five frameworks",
+      bool(_co_oly) and len(_co_oly[0]["frameworks"]) == 4)
 check("with the three NHSSC spellings kept visible",
       bool(_co_oly) and len(_co_oly[0]["variants"]) == 3)
 
