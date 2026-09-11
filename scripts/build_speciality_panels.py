@@ -5133,7 +5133,7 @@ SPECIALITY_RULES = {
         ),
     },
 
-    # PAGE 2932. Scope, in the page's own words: a person with a bowel symptom moving
+    # PAGE 2830. Scope, in the page's own words: a person with a bowel symptom moving
     # through the English NHS, from the GP's quantitative FIT, through the bowel cancer
     # screening programme, into the endoscopy unit, on to theatre, and out to a stoma
     # prescribed on FP10. So this patch is three markets that a rep sells into
