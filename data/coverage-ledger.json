@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-02",
-  "differentiator.json published": 34091,
-  "differentiator.json held": 47736
+  "differentiator.json published": 34103,
+  "differentiator.json held": 47819
  },
  "counts": {
   "frameworks": 121,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 448,
-  "inScopeSuppliersNeedingCrawl": 494,
-  "inScopeSuppliersNeedingDomain": 456,
-  "suppliersRefused": 359,
+  "inScopeSuppliersNeedingCrawl": 490,
+  "inScopeSuppliersNeedingDomain": 451,
+  "suppliersRefused": 362,
   "suppliersRefusedButPublishingElsewhere": 100,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 3,
@@ -7107,8 +7107,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "31 January 2028",
    "suppliersAwarded": 37,
-   "suppliersPublished": 6,
-   "coverage": 16.2,
+   "suppliersPublished": 7,
+   "coverage": 18.9,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -7118,41 +7118,20 @@
    ],
    "crawlWorklist": [
     {
+     "supplier": "Electro Spyres Healthcare Limited",
+     "domain": "electrospyres.com"
+    },
+    {
      "supplier": "Henleys Medical Supplies Limited",
      "domain": "henleysmed.com"
     },
     {
-     "supplier": "Electro Spyres Healthcare Limited",
-     "domain": null
-    },
-    {
-     "supplier": "Medevolve Limited",
-     "domain": null
-    },
-    {
-     "supplier": "Meditrade UK Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Salter Labs UK Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Techmed Charts UK Limited",
-     "domain": null
-    },
-    {
-     "supplier": "Zoll Medical UK Limited",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Electro Spyres Healthcare Limited",
-    "Medevolve Limited",
-    "Meditrade UK Ltd",
-    "Salter Labs UK Ltd",
-    "Techmed Charts UK Limited",
-    "Zoll Medical UK Limited"
+    "Salter Labs UK Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -7213,6 +7192,20 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Medevolve Limited",
+     "domain": "medevolve.co.uk",
+     "reason": "neither medevolve.co.uk nor www.medevolve.co.uk answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Meditrade UK Ltd",
+     "domain": "meditradeuk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Neoventa Medical Limited",
      "domain": "www.neoventa.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -7259,6 +7252,13 @@
      "domain": "surgicalholdings.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-07",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Techmed Charts UK Limited",
+     "domain": "techmedcharts.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
      "bucket": "refused"
     },
     {
@@ -7336,11 +7336,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 8,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 6
+    "needDomain": 1
    },
    "published": [
     "Ambu UK",
@@ -7348,7 +7348,8 @@
     "Fannin (UK) Limited",
     "MedScience Distribution",
     "NISSHA Medical Technologies",
-    "Stryker"
+    "Stryker",
+    "Zoll Medical UK Limited"
    ],
    "publishedElsewhere": [
     "Conmed UK Ltd",
@@ -7361,16 +7362,12 @@
     "Rocket Medical"
    ],
    "heldOnly": [
+    "Electro Spyres Healthcare Limited",
     "Henleys Medical Supplies Limited"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Electro Spyres Healthcare Limited",
-    "Medevolve Limited",
-    "Meditrade UK Ltd",
-    "Salter Labs UK Ltd",
-    "Techmed Charts UK Limited",
-    "Zoll Medical UK Limited"
+    "Salter Labs UK Ltd"
    ],
    "refused": [
     "British Heart Foundation",
@@ -7381,6 +7378,8 @@
     "GS Medical Healthcare Ltd",
     "Solventum (3M Health Care)",
     "Lyreco UK Limited",
+    "Medevolve Limited",
+    "Meditrade UK Ltd",
     "Neoventa Medical Limited",
     "Ortus Technology Limited",
     "OscarTech UK",
@@ -7388,10 +7387,11 @@
     "Sharon Services (UK) Ltd",
     "SP Services (UK) Ltd",
     "Surgical Instruments (dental)",
+    "Techmed Charts UK Limited",
     "Walters Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 15,
+   "actionableTotal": 11,
    "blockedReason": null
   },
   {
@@ -7667,10 +7667,6 @@
      "domain": null
     },
     {
-     "supplier": "Medevolve Limited",
-     "domain": null
-    },
-    {
      "supplier": "Neurogen Ltd",
      "domain": null
     },
@@ -7697,24 +7693,18 @@
     {
      "supplier": "Viamed Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Zoll Medical UK Limited",
-     "domain": null
     }
    ],
    "domainsMissing": [
     "Dot Medical Limited",
     "EDAN Medical (UK) Ltd",
-    "Medevolve Limited",
     "Neurogen Ltd",
     "Optima Medical Ltd",
     "Penlon",
     "Pro Health Solutions Limited",
     "TBG Solutions Limited",
     "UNEEG Medical UK Ltd",
-    "Viamed Ltd",
-    "Zoll Medical UK Limited"
+    "Viamed Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -7758,6 +7748,13 @@
      "domain": "gehealthcare.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Medevolve Limited",
+     "domain": "medevolve.co.uk",
+     "reason": "neither medevolve.co.uk nor www.medevolve.co.uk answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-11",
      "bucket": "refused"
     },
     {
@@ -7818,12 +7815,12 @@
    ],
    "actionable": {
     "unresolvedNames": 4,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 11
+    "needDomain": 9
    },
    "published": [
     "Huntleigh",
@@ -7837,7 +7834,8 @@
    "publishedElsewhere": [
     "Draeger Medical UK",
     "HC21 (UK) Ltd",
-    "Philips"
+    "Philips",
+    "Zoll Medical UK Limited"
    ],
    "heldOnly": [
     "Deltex Medical Ltd"
@@ -7846,15 +7844,13 @@
    "notCrawled": [
     "Dot Medical Limited",
     "EDAN Medical (UK) Ltd",
-    "Medevolve Limited",
     "Neurogen Ltd",
     "Optima Medical Ltd",
     "Penlon",
     "Pro Health Solutions Limited",
     "TBG Solutions Limited",
     "UNEEG Medical UK Ltd",
-    "Viamed Ltd",
-    "Zoll Medical UK Limited"
+    "Viamed Ltd"
    ],
    "refused": [
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
@@ -7863,6 +7859,7 @@
     "Edwards Lifesciences",
     "Fukuda Denshi UK Ltd",
     "GE HealthCare",
+    "Medevolve Limited",
     "Neoventa Medical Limited",
     "Schiller UK Limited",
     "Wardray Premise Limited"
@@ -7873,7 +7870,7 @@
     "Nihon Kohden UK Ltd",
     "Spacelabs Healthcare Ltd"
    ],
-   "actionableTotal": 19,
+   "actionableTotal": 18,
    "blockedReason": null
   },
   {
@@ -8793,10 +8790,6 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Meditrade UK Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Mediworld Ltd",
      "domain": null
     },
@@ -8806,7 +8799,6 @@
     }
    ],
    "domainsMissing": [
-    "Meditrade UK Ltd",
     "Mediworld Ltd",
     "SAI Medical Solutions Ltd"
    ],
@@ -8851,6 +8843,13 @@
      "supplier": "IMS Euro Ltd",
      "domain": "imseuro.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Meditrade UK Ltd",
+     "domain": "meditradeuk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-11",
      "bucket": "refused"
     },
@@ -8968,7 +8967,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 2
    },
    "published": [
     "Clinisupplies",
@@ -8991,7 +8990,6 @@
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Meditrade UK Ltd",
     "Mediworld Ltd",
     "SAI Medical Solutions Ltd"
    ],
@@ -9002,6 +9000,7 @@
     "Gentell UK Ltd",
     "Global Health and Safety Ltd",
     "IMS Euro Ltd",
+    "Meditrade UK Ltd",
     "Rocialle Healthcare",
     "SP Services (UK) Ltd",
     "Steroplast Healthcare Ltd",
@@ -9010,7 +9009,7 @@
    "unknown": [
     "Polyco Healthline Limited"
    ],
-   "actionableTotal": 7,
+   "actionableTotal": 6,
    "blockedReason": null
   },
   {
@@ -10748,10 +10747,6 @@
      "domain": null
     },
     {
-     "supplier": "Meditrade UK Ltd",
-     "domain": null
-    },
-    {
      "supplier": "ORN International T/A Spectra Corporate",
      "domain": null
     },
@@ -10764,7 +10759,6 @@
     "Cargo Services Far East Limited",
     "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
     "Medicom Healthpro Ltd",
-    "Meditrade UK Ltd",
     "ORN International T/A Spectra Corporate",
     "Schottlander"
    ],
@@ -10775,6 +10769,13 @@
      "domain": "mediq.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Meditrade UK Ltd",
+     "domain": "meditradeuk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
      "bucket": "refused"
     },
     {
@@ -10828,7 +10829,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 6
+    "needDomain": 5
    },
    "published": [
     "Ansell",
@@ -10846,12 +10847,12 @@
     "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
     "Cargo Services Far East Limited",
     "Medicom Healthpro Ltd",
-    "Meditrade UK Ltd",
     "ORN International T/A Spectra Corporate",
     "Schottlander"
    ],
    "refused": [
     "H & R Healthcare Ltd",
+    "Meditrade UK Ltd",
     "Supermax Healthcare"
    ],
    "unknown": [
@@ -10861,7 +10862,7 @@
     "Reliance Medical Ltd (New)",
     "Vernacare LTD (Robinson Healthcare Limited)"
    ],
-   "actionableTotal": 13,
+   "actionableTotal": 12,
    "blockedReason": null
   },
   {
@@ -12212,18 +12213,20 @@
     {
      "supplier": "Leanvation",
      "domain": null
-    },
-    {
-     "supplier": "Meditrade UK Ltd",
-     "domain": null
     }
    ],
    "domainsMissing": [
-    "Leanvation",
-    "Meditrade UK Ltd"
+    "Leanvation"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "Meditrade UK Ltd",
+     "domain": "meditradeuk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
+     "bucket": "refused"
+    },
     {
      "supplier": "Medline Industries",
      "domain": "medline.com",
@@ -12266,7 +12269,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [
     "Ansell",
@@ -12279,16 +12282,17 @@
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Leanvation",
+    "Leanvation"
+   ],
+   "refused": [
     "Meditrade UK Ltd"
    ],
-   "refused": [],
    "unknown": [
     "Globus (Shetland)",
     "Polyco Healthline",
     "Semperit Investment"
    ],
-   "actionableTotal": 6,
+   "actionableTotal": 5,
    "blockedReason": null
   },
   {
@@ -13119,10 +13123,6 @@
     {
      "supplier": "William Davies Care Limited",
      "domain": null
-    },
-    {
-     "supplier": "Zoll Medical UK Limited",
-     "domain": null
     }
    ],
    "domainsMissing": [
@@ -13134,8 +13134,7 @@
     "Penlon",
     "Sai Quality Fruits And Veg Limited",
     "Vyaire Medical Products Limited",
-    "William Davies Care Limited",
-    "Zoll Medical UK Limited"
+    "William Davies Care Limited"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -13319,12 +13318,12 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 25,
+    "publishedElsewhereNeedingCategory": 26,
     "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 10
+    "needDomain": 9
    },
    "published": [],
    "publishedElsewhere": [
@@ -13352,7 +13351,8 @@
     "ICU Medical (incl. Smiths Medical)",
     "TFX Group Ltd (Teleflex Medical)",
     "Timesco Healthcare Ltd",
-    "Vygon (UK)"
+    "Vygon (UK)",
+    "Zoll Medical UK Limited"
    ],
    "heldOnly": [
     "Atos Medical (UK)",
@@ -13370,8 +13370,7 @@
     "Penlon",
     "Sai Quality Fruits And Veg Limited",
     "Vyaire Medical Products Limited",
-    "William Davies Care Limited",
-    "Zoll Medical UK Limited"
+    "William Davies Care Limited"
    ],
    "refused": [
     "Albert Waeschle Ltd",
@@ -13430,10 +13429,6 @@
      "domain": null
     },
     {
-     "supplier": "Meditrade UK Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Mediworld Ltd",
      "domain": null
     },
@@ -13467,7 +13462,6 @@
     "BXTAccelyon Ltd",
     "D S Medical",
     "Griffiths and Neilson Ltd",
-    "Meditrade UK Ltd",
     "Mediworld Ltd",
     "Mermaid Medical Ltd",
     "Neon Diagnostics Ltd",
@@ -13511,6 +13505,13 @@
      "domain": "www.medicalaccess.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Meditrade UK Ltd",
+     "domain": "meditradeuk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
      "bucket": "refused"
     },
     {
@@ -13635,7 +13636,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 12
+    "needDomain": 11
    },
    "published": [],
    "publishedElsewhere": [
@@ -13675,7 +13676,6 @@
     "BXTAccelyon Ltd",
     "D S Medical",
     "embecta UK Limited",
-    "Meditrade UK Ltd",
     "Mediworld Ltd",
     "Neon Diagnostics Ltd",
     "Pajunk UK Medical Products Limited",
@@ -13690,6 +13690,7 @@
     "Delta Surgical",
     "MCT Lifesciences Ltd",
     "Medical Access Ltd",
+    "Meditrade UK Ltd",
     "Prospect Diagnostics Ltd",
     "Prosum Medical Ltd",
     "Rocialle Healthcare",
@@ -13701,7 +13702,7 @@
    "unknown": [
     "Apollo Medical Technologies Ltd"
    ],
-   "actionableTotal": 40,
+   "actionableTotal": 39,
    "blockedReason": null
   },
   {
@@ -14497,10 +14498,6 @@
     {
      "supplier": "Vapotherm UK Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Zoll Medical UK Limited",
-     "domain": null
     }
    ],
    "domainsMissing": [
@@ -14513,8 +14510,7 @@
     "Remserve Medical Supplies Ltd",
     "S-Med Ltd",
     "SomnoMed UK",
-    "Vapotherm UK Ltd",
-    "Zoll Medical UK Limited"
+    "Vapotherm UK Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -14572,12 +14568,12 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 10,
+    "publishedElsewhereNeedingCategory": 11,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 11
+    "needDomain": 10
    },
    "published": [],
    "publishedElsewhere": [
@@ -14590,7 +14586,8 @@
     "Medicina Limited",
     "Radiometer UK",
     "Reflex Medical Limited",
-    "ResMed"
+    "ResMed",
+    "Zoll Medical UK Limited"
    ],
    "heldOnly": [
     "Sefam Medical Ltd",
@@ -14607,8 +14604,7 @@
     "Remserve Medical Supplies Ltd",
     "S-Med Ltd",
     "SomnoMed UK",
-    "Vapotherm UK Ltd",
-    "Zoll Medical UK Limited"
+    "Vapotherm UK Ltd"
    ],
    "refused": [
     "Acurable Limited",
@@ -14655,18 +14651,13 @@
     {
      "supplier": "Sentec Medical Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Zoll Medical UK Limited",
-     "domain": null
     }
    ],
    "domainsMissing": [
     "Kinetic Medical Devices Ltd",
     "Med Matters Ltd",
     "Praxis Medical Ltd",
-    "Sentec Medical Ltd",
-    "Zoll Medical UK Limited"
+    "Sentec Medical Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -14731,12 +14722,12 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 2,
-    "publishedElsewhereNeedingCategory": 15,
+    "publishedElsewhereNeedingCategory": 16,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 5
+    "needDomain": 4
    },
    "published": [],
    "publishedElsewhere": [
@@ -14754,7 +14745,8 @@
     "Rudolf Riester GmbH",
     "Stryker",
     "Timesco Healthcare Ltd",
-    "Vygon (UK)"
+    "Vygon (UK)",
+    "Zoll Medical UK Limited"
    ],
    "heldOnly": [
     "Henleys Medical Supplies Limited"
@@ -14764,8 +14756,7 @@
     "Kinetic Medical Devices Ltd",
     "Med Matters Ltd",
     "Praxis Medical Ltd",
-    "Sentec Medical Ltd",
-    "Zoll Medical UK Limited"
+    "Sentec Medical Ltd"
    ],
    "refused": [
     "Albert Waeschle Ltd",
@@ -15333,10 +15324,6 @@
     {
      "supplier": "Wel Medical Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Zoll Medical UK Limited",
-     "domain": null
     }
    ],
    "domainsMissing": [
@@ -15347,8 +15334,7 @@
     "Nihon Koden",
     "Ortivus",
     "Tamaki Group",
-    "Wel Medical Ltd",
-    "Zoll Medical UK Limited"
+    "Wel Medical Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -15413,12 +15399,12 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 6,
+    "publishedElsewhereNeedingCategory": 7,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 9
+    "needDomain": 8
    },
    "published": [],
    "publishedElsewhere": [
@@ -15427,7 +15413,8 @@
     "Mindray UK",
     "Philips",
     "Reliance Medical",
-    "Stryker"
+    "Stryker",
+    "Zoll Medical UK Limited"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
@@ -15439,8 +15426,7 @@
     "Nihon Koden",
     "Ortivus",
     "Tamaki Group",
-    "Wel Medical Ltd",
-    "Zoll Medical UK Limited"
+    "Wel Medical Ltd"
    ],
    "refused": [
     "Baywater Healthcare UK Ltd",
@@ -16958,10 +16944,6 @@
      "domain": null
     },
     {
-     "supplier": "Meditrade UK Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Ontex Healthcare UK Ltd",
      "domain": null
     },
@@ -16972,7 +16954,6 @@
    ],
    "domainsMissing": [
     "Forma-Care (UK) Ltd",
-    "Meditrade UK Ltd",
     "Ontex Healthcare UK Ltd",
     "P&S Healthcare Ltd"
    ],
@@ -16983,6 +16964,13 @@
      "domain": "www.attends.co.uk",
      "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Meditrade UK Ltd",
+     "domain": "meditradeuk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
      "bucket": "refused"
     },
     {
@@ -17030,7 +17018,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 4
+    "needDomain": 3
    },
    "published": [],
    "publishedElsewhere": [
@@ -17046,16 +17034,16 @@
    "capturedNothingCounted": [],
    "notCrawled": [
     "Forma-Care (UK) Ltd",
-    "Meditrade UK Ltd",
     "Ontex Healthcare UK Ltd",
     "P&S Healthcare Ltd"
    ],
    "refused": [
     "Attends Ltd",
+    "Meditrade UK Ltd",
     "Sharon Services (UK) Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 10,
+   "actionableTotal": 9,
    "blockedReason": null
   },
   {
@@ -18261,10 +18249,6 @@
     {
      "supplier": "Wel Medical Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Zoll Medical UK Limited",
-     "domain": null
     }
    ],
    "domainsMissing": [
@@ -18272,8 +18256,7 @@
     "Laerdal Medical Ltd",
     "Sim & Skills Ltd",
     "Simulation Man",
-    "Wel Medical Ltd",
-    "Zoll Medical UK Limited"
+    "Wel Medical Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -18289,15 +18272,17 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 0,
+    "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 6
+    "needDomain": 5
    },
    "published": [],
-   "publishedElsewhere": [],
+   "publishedElsewhere": [
+    "Zoll Medical UK Limited"
+   ],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -18305,8 +18290,7 @@
     "Laerdal Medical Ltd",
     "Sim & Skills Ltd",
     "Simulation Man",
-    "Wel Medical Ltd",
-    "Zoll Medical UK Limited"
+    "Wel Medical Ltd"
    ],
    "refused": [
     "Simulaids Ltd"
@@ -18806,15 +18790,8 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
-   "crawlWorklist": [
-    {
-     "supplier": "Zoll Medical UK Limited",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Zoll Medical UK Limited"
-   ],
+   "crawlWorklist": [],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
@@ -18850,24 +18827,23 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 0
    },
    "published": [],
    "publishedElsewhere": [
     "NISSHA Medical Technologies",
     "Philips",
-    "Stryker"
+    "Stryker",
+    "Zoll Medical UK Limited"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
-   "notCrawled": [
-    "Zoll Medical UK Limited"
-   ],
+   "notCrawled": [],
    "refused": [
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
@@ -20564,10 +20540,6 @@
      "domain": null
     },
     {
-     "supplier": "Meditrade UK Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Medscience",
      "domain": null
     },
@@ -20590,7 +20562,6 @@
    ],
    "domainsMissing": [
     "MC Tissue",
-    "Meditrade UK Ltd",
     "Medscience",
     "Metsa",
     "Northwood",
@@ -20617,6 +20588,13 @@
      "supplier": "Lyreco UK Limited",
      "domain": "why.lyreco.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Meditrade UK Ltd",
+     "domain": "meditradeuk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-11",
      "bucket": "refused"
     },
@@ -20651,7 +20629,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 7
+    "needDomain": 6
    },
    "published": [],
    "publishedElsewhere": [
@@ -20664,7 +20642,6 @@
    "capturedNothingCounted": [],
    "notCrawled": [
     "MC Tissue",
-    "Meditrade UK Ltd",
     "Medscience",
     "Metsa",
     "Northwood",
@@ -20675,13 +20652,14 @@
     "Arrow County Supplies",
     "Banner Group Limited",
     "Lyreco UK Limited",
+    "Meditrade UK Ltd",
     "Nobisco"
    ],
    "unknown": [
     "Polyco Healthline",
     "UKR"
    ],
-   "actionableTotal": 13,
+   "actionableTotal": 12,
    "blockedReason": null
   },
   {

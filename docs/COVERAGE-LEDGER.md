@@ -46,14 +46,14 @@ low coverage there means exhausted, not neglected.
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 17 | 22 | STARTED |
 | Surgical Instruments | surgical | 50 | 10 | 20.0% | 22 | 22 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 7 | 16.3% | 29 | 14 | STARTED |
-| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 6 | 16.2% | 15 | 24 | STARTED |
+| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 7 | 18.9% | 11 | 27 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 18 | 16 | STARTED |
-| Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 7 | 20.0% | 19 | 13 | STARTED |
+| Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 7 | 20.0% | 18 | 14 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 9 | 27.3% | 15 | 17 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 14 | 8 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 8 | 25.8% | 16 | 12 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 14 | 18 | STARTED |
-| General Wound Care | wound | 28 | 11 | 39.3% | 7 | 20 | STARTED |
+| General Wound Care | wound | 28 | 11 | 39.3% | 6 | 21 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 5 | 18.5% | 17 | 11 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 6 | 24.0% | 14 | 7 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | 13 | 11 | STARTED |
@@ -64,7 +64,7 @@ low coverage there means exhausted, not neglected.
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 6 | 30.0% | 10 | 6 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 6 | 31.6% | 8 | 10 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 10 | 52.6% | 6 | 9 | STARTED |
-| Examination Gloves | infection | 19 | 4 | 21.1% | 13 | 6 | STARTED |
+| Examination Gloves | infection | 19 | 4 | 21.1% | 12 | 7 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 8 | 7 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 4 | 22.2% | 11 | 5 | STARTED |
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 8 | 7 | STARTED |
@@ -75,7 +75,7 @@ low coverage there means exhausted, not neglected.
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | 4 | 7 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 4 | 8 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 4 | 33.3% | 2 | 7 | STARTED |
-| Surgical Gloves | theatres | 9 | 3 | 33.3% | 6 | 4 | STARTED |
+| Surgical Gloves | theatres | 9 | 3 | 33.3% | 5 | 5 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 3 | 6 | STARTED |
 | Polymer Aprons | infection | 8 | 1 | 12.5% | 0 | 7 | STARTED · BLOCKED |
 | Contrast Injectors, Consumables and Associated Options and Related Services | imaging | 5 | 1 | 20.0% | 3 | 1 | STARTED |
@@ -88,7 +88,7 @@ low coverage there means exhausted, not neglected.
 | Male Intra-Urethral Catheter with Magnet Control | continence | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Non-Imaging Vibration Controlled Ultrasound System | ultrasound | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 40 | 25 | UNMAPPED |
-| Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 40 | 21 | UNMAPPED |
+| Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 39 | 22 | UNMAPPED |
 | Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 29 | 19 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 31 | 16 | UNMAPPED |
 | Procedure Packs | — | 29 | 0 | 0.0% | 19 | 16 | UNMAPPED |
@@ -109,7 +109,7 @@ low coverage there means exhausted, not neglected.
 | Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories | — | 13 | 0 | 0.0% | 13 | 1 | UNMAPPED |
 | Static X-Ray and Associated Options and Related Services | — | 13 | 0 | 0.0% | 6 | 9 | UNMAPPED |
 | Wipes for Surface Cleaning and Disinfection | — | 13 | 0 | 0.0% | 10 | 6 | UNMAPPED |
-| Disposable and Washable Continence Care | — | 12 | 0 | 0.0% | 10 | 6 | UNMAPPED |
+| Disposable and Washable Continence Care | — | 12 | 0 | 0.0% | 9 | 7 | UNMAPPED |
 | Finance Solutions | — | 12 | 0 | 0.0% | 10 | 3 | UNMAPPED |
 | Bladder Scanners and Associated Options and Related Services | — | 11 | 0 | 0.0% | 7 | 5 | UNMAPPED |
 | Fluoroscopy and Associated Options and Related Services | — | 11 | 0 | 0.0% | 6 | 7 | UNMAPPED |
@@ -146,7 +146,7 @@ low coverage there means exhausted, not neglected.
 | Multi Temperature Food Solutions | — | 27 | 0 | 0.0% | 27 | 0 | OUT OF SCOPE |
 | Environmental Decontamination | — | 22 | 0 | 0.0% | 19 | 4 | OUT OF SCOPE |
 | Catering Consumables and Equipment | — | 17 | 0 | 0.0% | 14 | 3 | OUT OF SCOPE |
-| Paper Hygiene | — | 17 | 0 | 0.0% | 13 | 6 | OUT OF SCOPE |
+| Paper Hygiene | — | 17 | 0 | 0.0% | 12 | 7 | OUT OF SCOPE |
 | Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging) | — | 16 | 0 | 0.0% | 13 | 3 | OUT OF SCOPE |
 | Office Supplies | — | 14 | 0 | 0.0% | 8 | 6 | OUT OF SCOPE |
 | Medical Pulp, Macerators and Support Products | — | 11 | 0 | 0.0% | 9 | 4 | OUT OF SCOPE |
