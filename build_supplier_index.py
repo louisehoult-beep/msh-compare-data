@@ -9,7 +9,12 @@ Merges into one supplier-keyed index:
      distinct REPUTABLE publishers (PR wires / stock sites never count). Both
      sources are attached so a rep can verify.
 
-RULES: append-only for awards/alerts; curated seed fields sacred; news is
+RULES: awards are APPEND-ONLY — the previous index's awards are carried forward
+onto the record each one's supplier name resolves to today, because a contract
+award is a dated historical fact and the scan in step 3 only reads a fixed
+window of the most recent releases. ALERTS ARE NOT append-only and never were:
+they are rebuilt every run from data/compare-issues.json, so a notice withdrawn
+at source correctly leaves the index. Curated seed fields sacred; news is
 regenerated per run for queried suppliers only; graceful degradation; exit 0.
 Stdlib only.
 """
@@ -311,6 +316,72 @@ def main():
         print("merged carried-forward duplicate: %s" % m)
     alias_lut = build_alias_lookup(by_name.values())
 
+    # 1b. CARRY THE PREVIOUS RUN'S AWARDS FORWARD. This module's own rules line
+    # says awards are append-only, and until 11/09/2026 they were not.
+    #
+    # `by_name` is rebuilt from the SEED at the top of main(), and the
+    # carry-forward loop above only re-attaches previous AUTO-DETECTED records.
+    # A curated supplier — 1,238 of the 1,314 in the index — therefore started
+    # every run with whatever `awards` the seed happened to hold, which is
+    # nothing: Contracts Finder awards only ever accumulate here, never in the
+    # curated seed. So a supplier's awards survived exactly one run. Anything the
+    # scan in section 3 below no longer returns inside its MAX_PAGES window was
+    # dropped in silence.
+    #
+    # It was not theoretical. Counted across this file's own git history, the
+    # index fell from 121 awards on 23/08/2026 to 54 on 11/09/2026 with no award
+    # ever withdrawn at source — a steady bleed, one run at a time, of the exact
+    # records the rules line promised were safe. A contract award is a dated
+    # historical fact. It does not stop having happened because it has scrolled
+    # out of a 20-page scan.
+    #
+    # The previous record's name is resolved through the CURRENT alias lookup
+    # rather than re-attached by its exact old spelling, so an identity
+    # correction made since the last run re-routes its awards instead of pinning
+    # them to a name that has since been merged away.
+    def _award_key(a):
+        # Section 3 dedupes on `_id` (title[:50] + "|" + date), so this must too,
+        # or a carried award and the same award re-found this run become two.
+        if not isinstance(a, dict):
+            return ("raw", str(a))
+        return ("id", a.get("_id") or (a.get("title", ""), a.get("date", ""), a.get("url", "")))
+
+    awards_carried = 0
+    unplaced_names = []
+    for s in prev.get("suppliers", []):
+        old = s.get("awards") or []
+        if not old:
+            continue
+        canonical = alias_lut.get(norm(s["name"])) or alias_lut.get(norm_co(s["name"]))
+        rec = by_name.get(canonical) if canonical else None
+        if rec is None:
+            rec = by_name.get(s["name"])
+        if rec is None:
+            # The record this award hung on is not in this build at all — it was
+            # dropped above as a multi-company name, or renamed out of the alias
+            # map. Re-attaching it would mean GUESSING which real company the
+            # award belongs to, so it is counted and named for a human instead.
+            unplaced_names.append("%s (%d award(s))" % (s["name"], len(old)))
+            continue
+        have = {_award_key(a) for a in rec["awards"]}
+        for a in old:
+            k = _award_key(a)
+            if k not in have:
+                rec["awards"].append(a)
+                have.add(k)
+                awards_carried += 1
+    # Every award counted here would have been lost on this run, and the record
+    # it hangs on is still in the build, so nothing about it is ambiguous. The
+    # gate does not take this counter's word for it: verify.py's
+    # check_supplier_index_awards() reads the PUBLISHED index out of git and
+    # compares it with the one about to be pushed, so removing this block turns
+    # the gate red rather than letting the bleed run unnoticed for 19 days a
+    # second time.
+    if awards_carried:
+        print("carried forward %d award(s) from the previous index" % awards_carried)
+    for u in unplaced_names:
+        print("award(s) NOT carried — supplier record no longer in this build: %s" % u)
+
     # 2. recalls
     added_alerts = 0
     for sp_key, sp in (load(ISSUES, {}).get("specialities", {}) or {}).items():
@@ -401,6 +472,8 @@ def main():
     STATE.parent.mkdir(exist_ok=True)
     STATE.write_text(json.dumps({"ran": out["generated"], "suppliers": len(out["suppliers"]),
         "scanned_award_releases": scanned, "added_awards": added_awards, "added_alerts": added_alerts,
+        "carried_awards": awards_carried, "unplaced_awards": len(unplaced_names),
+        "awards_total": sum(len(s.get("awards") or []) for s in out["suppliers"]),
         "news_suppliers_checked": news_checked, "news_stories_verified": news_verified}, indent=1))
     log("suppliers=%d | +%d awards, +%d alerts | news: %d verified across %d suppliers"
         % (len(out["suppliers"]), added_awards, added_alerts, news_verified, news_checked))

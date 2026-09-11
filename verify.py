@@ -1296,6 +1296,73 @@ def check_seed_index_alert_parity(seed, index):
                            "(suppressed)." % (len(drifted) - 5))
 
 
+def check_supplier_index_awards(index, committed_index=None):
+    """Awards are append-only. Prove it against what is already published.
+
+    THE BLEED THIS CATCHES, found 06/09/2026 and fixed 11/09/2026.
+    build_supplier_index.py's own rules line said "append-only for awards", and
+    for the 1,238 CURATED suppliers in the index it was not. main() rebuilds
+    `by_name` from data/supplier-seed.json, which holds no awards at all — they
+    only ever accumulate in the index — and the carry-forward loop underneath it
+    re-attached AUTO-DETECTED records only. So a curated supplier's awards lasted
+    exactly one run: anything that had scrolled out of the Contracts Finder scan
+    window since the last build was dropped in silence, one run at a time. Across
+    this file's own git history the index went 121 awards (23/08/2026) -> 54
+    (11/09/2026) with nothing ever withdrawn at source.
+
+    The builder now carries them forward, and this is the check that keeps it
+    honest. It does not take the builder's word for anything: it reads the
+    PUBLISHED index straight out of git and compares it with the one about to go
+    out. A supplier that is still in the index cannot come back with fewer awards
+    than it was published with — the only ways that happens are the carry-forward
+    being removed again, or a hand edit that meant to remove one and should say
+    so in the commit.
+
+    A supplier that has LEFT the index is not this check's business: records get
+    merged and dropped deliberately (a multi-company auto-detected name, an
+    identity correction), and that path is reported by the builder for a human
+    rather than guessed at here.
+    """
+    new_suppliers = (index or {}).get("suppliers") or []
+    if committed_index is None:
+        committed_index = committed("data/supplier-index.json")
+    old_suppliers = (committed_index or {}).get("suppliers") or []
+    if not new_suppliers or not old_suppliers:
+        WARN("index-awards", "could not read both the committed and the working "
+                             "data/supplier-index.json, so award append-only was not checked.")
+        return
+
+    def _keys(rec):
+        out = set()
+        for a in (rec.get("awards") or []):
+            if isinstance(a, dict):
+                out.add(a.get("_id") or (a.get("title", ""), a.get("date", ""), a.get("url", "")))
+            else:
+                out.add(("raw", str(a)))
+        return out
+
+    new_by = {s.get("name"): s for s in new_suppliers}
+    lost = []
+    for s in old_suppliers:
+        rec = new_by.get(s.get("name"))
+        if rec is None:
+            continue                    # left the index deliberately — not this check
+        gone = _keys(s) - _keys(rec)
+        if gone:
+            lost.append((s.get("name") or "(unnamed)", len(gone), len(_keys(s))))
+    for name, n, had in lost[:5]:
+        FAIL("index-awards",
+             "%s loses %d of its %d published award(s) in this build. Awards are append-only: a "
+             "contract award is a dated historical fact and does not stop having happened "
+             "because it has scrolled out of Contracts Finder's scan window. This is the exact "
+             "shape of the 23/08-11/09/2026 bleed (121 awards down to 54) — check that "
+             "build_supplier_index.py still carries the previous index's awards forward before "
+             "section 3 appends this run's." % (name, n, had))
+    if len(lost) > 5:
+        FAIL("index-awards", "...and %d further supplier(s) losing published awards (suppressed)."
+                             % (len(lost) - 5))
+
+
 def check_migrated_prose_not_in_alerts(seed, index):
     """The prose must leave alerts[] when it moves to a structured panel.
 
@@ -5616,6 +5683,7 @@ def main():
     check_migrated_prose_not_in_alerts(load("supplier-seed.json"),
                                        load("supplier-index.json"))
     check_curated_alerts_are_typed(load("supplier-index.json"))
+    check_supplier_index_awards(load("supplier-index.json"))
     check_seed_index_alert_parity(load("supplier-seed.json"),
                                   load("supplier-index.json"))
     check_vocab(load("compare-suppliers.json"), load("products.json"),
