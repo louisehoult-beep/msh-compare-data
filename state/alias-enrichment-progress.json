@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-10",
+ "lastRun": "2026-09-11",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -282,7 +282,19 @@
   "IGEA S.p.A. Branch UK",
   "IMS Euro Ltd",
   "Independent Physiological Diagnostics Ltd",
-  "InferVision UK Ltd"
+  "InferVision UK Ltd",
+  "Infutech Ltd",
+  "Ingenion Medical",
+  "inHeart S.A.S",
+  "Inivos UK Limited",
+  "Innotec Hygiene Solutions Ltd",
+  "Innova Nanojet Technologies Ltd",
+  "Innovant Healthcare Limited",
+  "Innovate Orthopaedics Ltd",
+  "Inotec AMD (Natrox)",
+  "Inpress Precision Limited",
+  "Insight Direct",
+  "Insight Medical Products Limited"
  ],
  "refusals": [
   {
@@ -594,6 +606,16 @@
    "name": "InferVision UK Ltd",
    "reason": "The only reachable site (infervision.com) is the Chinese parent company's own global site, not a UK-specific page, and carries no UK entity naming. Companies House confirms 'INFERVISION UK LTD' (13555165) matches the seed name already. Adding the parent brand 'InferVision' alone as an alias of the UK subsidiary would conflate a parent/subsidiary pair, which the task rules forbid, so it was not added.",
    "date": "2026-09-10"
+  },
+  {
+   "name": "Inivos UK Limited",
+   "reason": "Own site (inivos.com) returns a bot/cookie-check challenge page to both WebFetch and a rendered browser fetch (\"Robot Challenge Screen\" / \"This page requires cookies to be enabled\"), so no additional name form or clinical scope could be read from source. Companies House (company 14137664, INIVOS UK LIMITED, active) confirms the registered name is identical to the seed's own name — no new alias arises from that. Specialities left empty for the same reason.",
+   "date": "2026-09-11"
+  },
+  {
+   "name": "Insight Direct",
+   "reason": "Three distinct Companies House entities share the \"Insight Direct\" prefix — Insight Direct (UK) Ltd (02579852, 100% owned by Insight Enterprises (UK) Ltd), Insight Direct (GB) Limited (03604424), and Insight Direct (Services) Limited (03525219) — and the seed's own name (\"Insight Direct\", no parenthetical) does not match any one of them exactly. The company's own site (uk.insight.com) uses only \"Insight UK\" and the bare word \"Insight\", neither of which is safe to add: \"Insight\" is a single generic word, not the whole canonical name, and it is also the name of the wider Insight Enterprises group — adding it risks exactly the parent/group-vs-subsidiary conflation the process forbids. No alias added.",
+   "date": "2026-09-11"
   }
  ],
  "sources": {
