@@ -359,10 +359,10 @@
  },
  "counts": {
   "pairs": 5598,
-  "mapped": 4817,
+  "mapped": 4819,
   "notTaxonomy": 175,
   "products": 90735,
-  "productsMapped": 61175
+  "productsMapped": 61498
  },
  "entries": [
   {
@@ -690,9 +690,11 @@
     "Airway Management Flexible Tube Holder Large",
     "Anaesthesia Frame Carbon Fibre 10 313 Hook On For Eu Side Bar"
    ],
-   "hub": null,
+   "hub": "theatres:theatre",
    "notTaxonomy": true,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the site carries no division structure so the whole flat range was read: it is entirely operating-table patient positioning accessories - armboards, headrests, lateral supports, lithotomy stirrups, table pads, Mayo tables, anaesthesia frames/screens, arm and leg retainers. This is general theatre consumables (theatres:theatre) with no products outside that class across the sampled range (checked positions 1-30, 100-180 and 280-309 of 309).",
+   "decidedIn": "Anetic Aid Ltd--framework-coverage-0911.json"
   },
   {
    "supplier": "Aero Healthcare Ltd",
@@ -92074,9 +92076,11 @@
     "Earthing and Sockets – Starkstrom",
     "Theatre Control Panels – Starkstrom"
    ],
-   "hub": null,
+   "hub": "theatres:capital",
    "notTaxonomy": true,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the site carries no division structure so the whole flat range (14 items) was read: Operating Tables, Operating Lights, Examination Lights, Theatre Control Panels and Clinical Pendants are named products in the range - Starkstrom is a theatre integration specialist and the range as a whole is sold as operating-theatre capital equipment/OR integration (theatres:capital), which is the framework's own description of the award (Operating Theatres Equipment and Related Accessories and Services). A handful of items (Isolated/Uninterruptible Power Supply, Earthing and Sockets, Battery Backup, Illuminated Warning Signs, PACS) are theatre-building electrical infrastructure rather than tables/lights themselves, but sit within the same integrated theatre-fit-out range with no separate division to split them into - left under theatres:capital rather than invented a second category with no supporting evidence.",
+   "decidedIn": "Starkstrom Limited--framework-coverage-0911.json"
   },
   {
    "supplier": "Healthium Medtech UK",

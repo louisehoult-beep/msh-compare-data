@@ -44,12 +44,12 @@ low coverage there means exhausted, not neglected.
 | Digital Diagnostic Solutions | digital | 54 | 7 | 13.0% | 11 | 43 | STARTED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 10 | 18.9% | 30 | 19 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 17 | 22 | STARTED |
-| Surgical Instruments | surgical | 50 | 10 | 20.0% | 22 | 22 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 7 | 16.3% | 29 | 14 | STARTED |
+| Surgical Instruments | surgical | 50 | 11 | 22.0% | 21 | 22 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 9 | 20.9% | 27 | 14 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 7 | 18.9% | 11 | 27 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 18 | 16 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 7 | 20.0% | 18 | 14 | STARTED |
-| Electrosurgical Consumables and Related Accessories | theatres | 33 | 9 | 27.3% | 15 | 17 | STARTED |
+| Electrosurgical Consumables and Related Accessories | theatres | 33 | 10 | 30.3% | 14 | 17 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 14 | 8 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 8 | 25.8% | 16 | 12 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 14 | 18 | STARTED |

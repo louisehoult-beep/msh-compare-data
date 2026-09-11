@@ -4,6 +4,68 @@ Run of the `differentiator-framework-coverage` scheduled task. Framework worked:
 **Electrodes, Ultrasound Gels, Defibrillation and Related Consumables** (cardiology
 speciality). Coverage moved 6/37 published (16.2%) → 7/37 published (18.9%).
 
+## Second run, same day — Operating Theatres Equipment
+
+Re-ran the ledger fresh. Its own top pick was again Digital Diagnostic Solutions
+(13.0%) and second was Radiotherapy Ancillary Devices (15.4%) — both re-checked
+independently against this doc's findings above/below and confirmed unchanged
+(no new suppliers, same evidence gap), so left untouched rather than
+re-investigated from scratch. Moved to the next lowest-coverage framework with
+genuine actionable work: **Operating Theatres Equipment and Related Accessories
+and Services** (theatres speciality). Coverage moved 7/43 published (16.3%) →
+9/43 published (20.9%).
+
+- **Anetic Aid Ltd** (309 products, one flat "Uncategorised" division, no site
+  division structure) → mapped to `theatres:theatre`. Sampled across the full
+  range (positions 1-30, 100-180, 280-309) and it is entirely operating-table
+  patient-positioning consumables — armboards, headrests, lateral supports,
+  lithotomy stirrups, table pads, Mayo tables, anaesthesia frames/screens, arm
+  and leg retainers. No stray items found outside that class.
+- **Starkstrom Limited** (14 products, same flat-division shape) → mapped to
+  `theatres:capital`. Starkstrom is a theatre-integration specialist; the range
+  includes named items "Operating Tables", "Operating Lights", "Examination
+  Lights" and "Theatre Control Panels". A handful of items (UPS, isolated power
+  supply, earthing, battery backup, illuminated warning signs, PACS) are
+  theatre-building electrical infrastructure rather than tables/lights
+  themselves, but sit in the same undivided range with no separate division to
+  split them into — left under `theatres:capital` rather than inventing a
+  second category with no supporting evidence.
+- Both landed via `data/differentiator-map-parts/` part files, merged with
+  `merge_differentiator_parts.py --apply` (2 applied, 0 refused).
+
+## Left unmapped this run — genuine judgement calls
+
+- **Howard Wright Europe** (10 products, flat range): beds (M8/M9/M10),
+  examination couch, stretcher trolley, bathing trolley, mattresses. Reads as
+  general ward furniture — nothing on the crawled site names an operating
+  table, theatre light, or other theatre-specific item. Either this supplier's
+  theatre-specific line isn't on the crawled site, or the framework award
+  covers a narrower lot. Logged to OUTSTANDING.md (^o435) rather than guessed.
+- **Ideal Medical Solutions** (41 products, flat range): hernia mesh (COUSIN,
+  4D Mesh/Ventral/Dome, Intermesh), skin staplers (MicroCure, MIRUS), tissue
+  sealant/glue (MERIGLU), wound matrix (Matriderm), surgical energy systems and
+  staplers (REACH range), a dermatome and vein-visualisation device. None of
+  this fits the framework's in-scope categories (`theatres:capital/electro/
+  perfusion/theatre/warm`) — it reads as general surgical consumables, closer
+  to the Surgical Instruments framework's vocabulary than Operating Theatres'.
+  Logged to OUTSTANDING.md (^o436) rather than forced into a mismatched
+  category.
+- **Promedics Orthopaedics Ltd** (Radiotherapy Ancillary Devices framework,
+  the one `heldNeedingCategory` supplier there): re-confirmed this run's
+  finding above — 429 products across ~35 divisions, entirely orthopaedic
+  bracing/splinting/collars, nothing resembling dosimetry or patient
+  positioning for radiotherapy. Already logged (^o434), not re-logged.
+
+## Not actioned this run, still outstanding elsewhere in Operating Theatres
+
+15 `notCrawled` suppliers have no recorded domain (Brandon Medical, Carleton
+Medical, Erbe Medical UK, Ferno (UK), Fulbourn Medical, Ingles, Lynton Lasers,
+Newmaw Medical, NJ Devices/Ocean Med, Novus Med, Promed, Richard Wolf UK, Ryna
+Medical UK, Soluvos Medical, SRA Developments) — finding and confirming domains
+for 15 suppliers was judged too large for this session alongside the mapping
+work above; left for a future run, per the brief's "work through as many as
+fit in a reasonable session" instruction.
+
 ## What moved
 
 - Found and added confirmed domains for 5 of the framework's 6 `needDomain`
