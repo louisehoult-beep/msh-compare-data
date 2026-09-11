@@ -66,9 +66,24 @@ report = json.load(open(REPORT, encoding="utf-8"))["results"]
 titles = [r for r in report if r.get("proof") == "name"]
 check("no title proof is left replayable", not titles,
       "%d still carry proof=name: %s" % (len(titles), [r["name"] for r in titles[:5]]))
+# REFUSED suppliers that also hold a STRONG proof (registration /
+# self-declared-foreign) were later proved by their registration number —
+# the right outcome. They must NOT be stamped refused in the report.
+# Compute the expected refused count dynamically so the test does not need
+# updating every time a refused supplier later proves itself.
+STRONG = ("registration", "self-declared-foreign")
+report_by_name = {r["name"]: r for r in report}
+expected_refused = sum(
+    1 for n in refused_names
+    if report_by_name.get(n, {}).get("proof") not in STRONG
+)
 refused_rows = [r for r in report if r.get("secondSourced") == "REFUSED"]
-check("124 report rows carry the REFUSED verdict", len(refused_rows) == 124,
-      "found %d" % len(refused_rows))
+check("all refused-name-proof suppliers without a later strong proof carry "
+      "secondSourced='REFUSED' in the report",
+      len(refused_rows) == expected_refused,
+      "expected %d (refused %d minus %d later-proved-strong), found %d"
+      % (expected_refused, len(refused_names),
+         len(refused_names) - expected_refused, len(refused_rows)))
 check("a refused row keeps no top-level domain",
       all("domain" not in r for r in refused_rows),
       "a domain at the top level is what the write loop reads")

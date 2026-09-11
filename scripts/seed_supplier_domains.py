@@ -712,6 +712,89 @@ def refused_name_proofs():
     return {r["name"] for r in v if r.get("verdict") == "REFUSED"}
 
 
+def _refused_row_from_verdict(v):
+    """Build the canonical refused-row dict from a VERDICTS entry.
+
+    The verdicts file is an adjudication that outlives any sweep; refused rows
+    must survive every --fresh re-run. This function is the single source of
+    truth for what a refused row looks like, so the test cannot drift from the
+    writer. Called both when backfilling a missing row and when stamping an
+    existing one that lost its secondSourced field.
+    """
+    domain = v.get("domain", "")
+    return {
+        "name": v["name"],
+        "proof": None,
+        "companyNumber": v.get("companyNumber"),
+        "checked": v.get("checked"),
+        "refusedNameProof": {
+            "domain": domain,
+            "url": "https://" + domain if domain and not domain.startswith("http") else domain,
+            "evidence": v.get("priorEvidence", ""),
+            "foundBy": "guess",
+        },
+        "secondSourced": "REFUSED",
+        "secondSourcedOn": v.get("checked"),
+        "reason": v.get("reason", ""),
+        "candidatesTried": [domain] if domain else [],
+    }
+
+
+def _ensure_refused_rows(results):
+    """Guarantee the 124 adjudicated-REFUSED rows are in the report.
+
+    WHY THIS EXISTS. The verdict adjudication is permanent and must survive
+    every --fresh sweep. Prior to 11/09/2026, a fresh sweep would re-probe
+    the 124 refused suppliers, find nothing (the probe path blocks title
+    proofs), and write rows with proof=None — indistinguishable from an
+    ordinary unproven supplier. test_seed_domains.py caught this because it
+    checks for the secondSourced='REFUSED' field, but the root cause was that
+    seed_supplier_domains.py's bank() never wrote that field. This function
+    runs immediately after results is initialised from the banked report and
+    stamps/injects all 124 refused rows before any probing begins, so that
+    even a fresh sweep that retries every unproven row cannot wipe the
+    verdicts out of the report.
+
+    Data source: VERDICTS (state/name-proof-verification.json), not the
+    report itself — the verdicts are an adjudication and outlive any sweep.
+    See refused_name_proofs() for the same guarantee on the read side.
+    """
+    try:
+        verdicts = json.load(open(VERDICTS, encoding="utf-8"))["results"]
+    except (OSError, ValueError, KeyError):
+        print("  ⚠️  %s missing/unreadable — cannot stamp refused rows; "
+              "see refused_name_proofs() for the full error." % VERDICTS)
+        return
+
+    refused_verdicts = {v["name"]: v for v in verdicts if v.get("verdict") == "REFUSED"}
+    if not refused_verdicts:
+        return
+
+    STRONG = ("registration", "self-declared-foreign")
+    by_name = {r["name"]: i for i, r in enumerate(results)}
+    added = stamped = 0
+    for name, v in refused_verdicts.items():
+        if name in by_name:
+            row = results[by_name[name]]
+            # A STRONG proof (registration / self-declared-foreign) overrides the
+            # refused-name-proof verdict: the supplier later proved itself via its
+            # registration number, so we do NOT stamp it back to refused.
+            if row.get("proof") in STRONG:
+                continue
+            if row.get("secondSourced") != "REFUSED":
+                # Row exists but lost its refused stamp — re-stamp it.
+                results[by_name[name]] = _refused_row_from_verdict(v)
+                stamped += 1
+        else:
+            results.append(_refused_row_from_verdict(v))
+            by_name[name] = len(results) - 1
+            added += 1
+
+    if added or stamped:
+        print("  refused-row guard: %d added, %d re-stamped (verdicts from %s)"
+              % (added, stamped, VERDICTS), flush=True)
+
+
 def domain_for(rec):
     """Same test crawl_supplier_site.py applies — kept identical on purpose."""
     for l in (rec.get("links") or []):
@@ -849,9 +932,11 @@ def main():
     # not-yet-reached ones out of the report on the way down. Now an interrupted
     # run costs the results of that run, never the bank.
     results = list(banked.values())
+    _ensure_refused_rows(results)        # always keep the 124 adjudicated verdicts alive
     at = {r["name"]: i for i, r in enumerate(results)}
 
     def bank():
+        _ensure_refused_rows(results)    # re-stamp any row a --fresh probe overwrote
         json.dump({"_notice": "Evidence for every domain written to supplier-seed.json by "
                               "scripts/seed_supplier_domains.py. Report only — no consumer reads this.",
                    "generated": dt.date.today().isoformat(),
