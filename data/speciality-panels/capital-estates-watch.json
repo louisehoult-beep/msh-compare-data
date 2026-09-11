@@ -1,0 +1,890 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "contact": "contact@elevateandthrive.uk",
+  "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
+ },
+ "slug": "capital-estates-watch",
+ "label": "Capital and Estates Watch",
+ "defined": true,
+ "generated": "2026-09-11",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-11T11:16:36+00:00",
+  "openTenders": "11/09/2026",
+  "drugTariff": "2026-09-11"
+ },
+ "rules": {
+  "frameworks": "NHS Supply Chain framework names matching /(batteries, lighting, tools)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. Read this panel differently from every other speciality's. NHS Supply Chain barely reaches this patch: it has exactly one agreement here, for batteries, lighting, tools, FM consumables and EV charging, and it buys none of the plant, works or construction the rest of the page is about. The real routes are Government Commercial Agency agreements RM6267 CWAS2 / NHS ProCure23 and RM6088 CWAS, which both expire on 31 March 2027 with all contracts awarded by that date; NHS Shared Business Services Hard Facilities Management 3, awarded 1 September 2026 with 28 lots and 185 suppliers, running from 20 October 2026; NHS SBS Public Sector Construction Works 2, still only a planned procurement notice with its tender delayed to mid-to-late November 2026; the New Hospital Programme's own Hospital 2.0 Alliance of ten construction firms; and, increasingly, dynamic markets opened by individual trusts under the Procurement Act 2023, which admit new suppliers at any time. None of those five is an NHS Supply Chain framework, so none appears in the Frameworks list above however large it is. One award row below is not NHS at all: “16_26 Flooring (Supply, Fit and Refurbishment)” was bought by Leicestershire County Council and is left in rather than blinding the rule to the word “flooring”, which NHS trusts also buy.",
+  "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. Read this panel differently from every other speciality's. NHS Supply Chain barely reaches this patch: it has exactly one agreement here, for batteries, lighting, tools, FM consumables and EV charging, and it buys none of the plant, works or construction the rest of the page is about. The real routes are Government Commercial Agency agreements RM6267 CWAS2 / NHS ProCure23 and RM6088 CWAS, which both expire on 31 March 2027 with all contracts awarded by that date; NHS Shared Business Services Hard Facilities Management 3, awarded 1 September 2026 with 28 lots and 185 suppliers, running from 20 October 2026; NHS SBS Public Sector Construction Works 2, still only a planned procurement notice with its tender delayed to mid-to-late November 2026; the New Hospital Programme's own Hospital 2.0 Alliance of ten construction firms; and, increasingly, dynamic markets opened by individual trusts under the Procurement Act 2023, which admit new suppliers at any time. None of those five is an NHS Supply Chain framework, so none appears in the Frameworks list above however large it is. One award row below is not NHS at all: “16_26 Flooring (Supply, Fit and Refurbishment)” was bought by Leicestershire County Council and is left in rather than blinding the rule to the word “flooring”, which NHS trusts also buy.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(backlog maintenance|estates?|capital works?|refurbishment|refurbish\\w*|ventilation|air handling|boiler|chiller|electrical infrastructure|fire (?:safety|alarm|compartmentation|stopping|damper)|roof\\w*|water (?:hygiene|safety|treatment)|legionella|decarbonisation|heat pump|modular (?:building|ward|theatre)|demolition|asbestos|RAAC|hard fm|soft fm|facilities management|building management system|lift replacement|standby generator|medical gas|construction works?|new build|main contractor|design and build)\\b/i and does not match /\\b(wheelchair (?:maintenance|servicing|repairs?)|equipment refurbishment|non[- ]?invasive ventilation|graduate management training)\\b/i. Four titles matched the include and are excluded by name, each read in full on 11 September 2026: a wheelchair maintenance and refurbishment contract (rehabilitation's patch, while a wheelchair LIFT stays here because it is estates), an Olympus endoscopy stack refurbishment at NHS Grampian, an NHS Supply Chain non-invasive ventilation and CPAP framework (respiratory - the one place where “ventilation” means a machine breathing for a patient rather than air handling), and the NHS Graduate Management Training Scheme engineering stream. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 1,
+  "suppliers": 16,
+  "suppliersUnresolved": 13,
+  "awardsShown": 40,
+  "awardsMatched": 75,
+  "openTenders": 0
+ },
+ "frameworks": [
+  {
+   "name": "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/lighting-tools-and-facilities-management-consumables/",
+   "reference": "2025/S 000-049694",
+   "category": "Facilities and Office Solutions",
+   "supplyRoute": "Direct, Stocked, eDirect",
+   "starts": "9 February 2026",
+   "ends": "8 February 2030",
+   "supplierCount": 16,
+   "supplierSource": "count verified against the page's own stated total (16)",
+   "suppliers": [
+    "Banner",
+    "Bates Office Services Ltd",
+    "City Electrical Factors Ltd",
+    "Denchi Group Ltd",
+    "E.On Drive Solutions Uk Ltd",
+    "Edmundson Electrical Limited",
+    "Luceco Uk Limited",
+    "Lyreco Uk Ltd",
+    "Mer Fleet Services Limited",
+    "RS Components Limited",
+    "Screwfix Direct Limited",
+    "TW Engineering Co. Ltd",
+    "UK Electric Ltd T/A H-Squared",
+    "Upergy",
+    "Vev Services Limited",
+    "Yesss Electrical"
+   ],
+   "delisted": null
+  }
+ ],
+ "suppliers": [
+  {
+   "name": "Banner Group Limited",
+   "resolved": true,
+   "variants": [
+    "Banner"
+   ],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "Bates Office Services Ltd",
+   "resolved": true,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "City Electrical Factors Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "Denchi Group Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "E.On Drive Solutions Uk Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "Edmundson Electrical Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "Luceco Uk Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "Lyreco UK Limited",
+   "resolved": true,
+   "variants": [
+    "Lyreco Uk Ltd"
+   ],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "Mer Fleet Services Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "RS Components Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "Screwfix Direct Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "TW Engineering Co. Ltd",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "UK Electric Ltd T/A H-Squared",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "Upergy",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "Vev Services Limited",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  },
+  {
+   "name": "Yesss Electrical",
+   "resolved": false,
+   "variants": [],
+   "frameworks": [
+    "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)"
+   ]
+  }
+ ],
+ "awards": [
+  {
+   "title": "HPFT - Asbestos Management Survey",
+   "buyer": "Hertfordshire Partnership University NHS Foundation Trust",
+   "supplier": "Tetra Consulting Limited",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085666-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71317210"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "16_26 Flooring (Supply, Fit and Refurbishment)",
+   "buyer": "Leicestershire County Council, trading as ESPO",
+   "supplier": "ACE CONTRACT FLOORING LIMITED (15792578), BATES OFFICE SERVICES LTD (03352929), CROWN FLOORING LIMITED (03313671), DELTA FORCE GROUP LTD (07683845), FUSION FURNITURE SOLUTIONS LTD (05455720), J SLACK FLOORING LTD (13261734), JOHN L LORD & SON (RIZISTAL) LIMITED (00759394), LOGIC CONTRACT SERVICES LTD (10111623), MSB PROPERTY SERVICES LTD (09264204), REDDIFLOOR LTD (15174976), RETROSERVE LTD (13411061), TAPI CARPETS & FLOORS LIMITED (09247255), THE PRECISE DESIGN (PROJECTS) LIMITED (12017978), VESTIS CONTRACT FLOORING LIMITED (05899963), RELIANT RUBBER ENGINEERS LIMITED (04316552)",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085763-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "03410000",
+    "19520000",
+    "33682000",
+    "39530000",
+    "44112200",
+    "44112210",
+    "44112230",
+    "44191200",
+    "45430000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Oxford Health NHS Foundation Trust Estates & Facilities Dynamic Market (PA23)",
+   "buyer": "Oxford Health NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086145-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45215100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "QEHKL239 Roof Re-covering Works",
+   "buyer": "The Queen Elizabeth Hospital King's Lynn NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086131-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45210000",
+    "50700000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "STW26-03 AE for Medical Gas",
+   "buyer": "Leeds Community Healthcare NHS Trust",
+   "supplier": "Medical Engineering Systems Limited",
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085247-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50413100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "-MRI 2 Replacement Refurbishment Works",
+   "buyer": "Imperial College Healthcare NHS Trust",
+   "supplier": "Cuffe PLC",
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085173-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45210000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Minor Works, Repairs and Refurbishment Framework",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "supplier": "East Kirkby Engineering Company Limited, Gelder Ltd, H.C.G.Heating Construction Limited, Irwin M&E Limited, MTX Contracts Limited, Pipework Services Limited, Selmec (Lincoln) Ltd, Sleaford Building Services, Sureserve Compliance Central Limited, Thermatic Technical FM, Brook and Mayo Limited, GRS Electrical Services Ltd, G-Tech Electrical Contractors Ltd, Storage Display Equipment Electrical Limited, Sudlows Enterprise Services, BM Construction, Fenax Developments Ltd t/a FDL Contractors, Lindum Group Ltd, M & J Group (Construction & Roofing) Ltd, Rocare Building Services Ltd, Ron Gale & Sons Ltd, Alfred Bagnall & Sons, Ian Williams Limited, NSS Maintenance Ltd, Dalrod UK Limited, Lanes Group Limited, Metro Rod Ltd, HAYLEY DEXIS – Hayley Group Limited, JC Watson Mechanical Ltd, Playfords Ltd, Safecontrol Limited",
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085354-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45113000",
+    "45210000",
+    "45232450",
+    "45232451",
+    "45310000",
+    "45430000",
+    "45440000",
+    "45441000",
+    "45453100",
+    "50700000",
+    "50712000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "103 Denmark Hill Main Contractor",
+   "buyer": "South London and Maudsley NHS Foundation Trust",
+   "supplier": "T&B Contractors",
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085076-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45262690"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "The Provision of Town Planner Services for the New Frimley Park Hospital and the Retained Estate at Frimley Park",
+   "buyer": "Frimley Health NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084205-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71313000",
+    "71400000",
+    "71410000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "V00726 - Fire Alarm Maintenance",
+   "buyer": "NHS Golden Jubilee",
+   "supplier": "ADT Fire & Security",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084198-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "75251110"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "WHHT - Emergency DCU Supply and Plant Room Asbestos Decontamination Services",
+   "buyer": "West Hertfordshire Hospitals NHS Trust",
+   "supplier": "SCK Group Ltd",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084434-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "79993000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "EEAST - Refurbishment of Hellesdon Roof (26-T15)",
+   "buyer": "East of England Ambulance Service NHS Trust",
+   "supplier": null,
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084380-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45453100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "GGC0904 Professional Services - Estates Minor Works",
+   "buyer": "NHS Greater Glasgow and Clyde",
+   "supplier": null,
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083746-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71242000",
+    "71314000",
+    "71314100",
+    "71314200",
+    "71314300",
+    "71321300",
+    "71334000",
+    "71530000",
+    "71541000",
+    "79412000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Water Treatment Systems including Supply and Delivery of Salt relating to a range of Hospital Equip including Decontamination and Renal Equipment, Chemical and Microbiological Water Testing and Provision of Associated Testing Consumables",
+   "buyer": "Belfast Health & Social Care Trust",
+   "supplier": "CHEMICAL TREATMENT SERVICES (IRELAND) LIMITED, Veolia Water Technologies, THEATRE AND ENDOSCOPY SERVICE TECHNICIANS LIMITED",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083732-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "15872400",
+    "24000000",
+    "33698100",
+    "39137000",
+    "41000000",
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "WHHT - Gas Suppression System / Fire Alarm  Modification Works",
+   "buyer": "West Hertfordshire Teaching Hospitals NHS Trust",
+   "supplier": "Alarm Communication Limited",
+   "date": "2026-09-04",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083878-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "35121700"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Warminster Flat Roofs & Window Replacement Scheme",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "Parogon Contracts Limited",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083360-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45210000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Public Sector Construction Works 2",
+   "buyer": "NHS Shared Business Services Limited",
+   "supplier": null,
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083562-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45000000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "HCT - Howard Court, building 1A and 1B passenger lift replacement stages",
+   "buyer": "Hertfordshire Community NHS Trust",
+   "supplier": "ILECS Limited",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083467-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50750000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "RLI Pharmacy Robot Refurbishment",
+   "buyer": "University Hospitals of Morecambe Bay NHS Foundation Trust",
+   "supplier": "Gilling Dod Limited",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082943-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71541000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "SWFTCS SOFT FM",
+   "buyer": "South Warwickshire NHS Foundation Trust",
+   "supplier": "OCS Group UK Limited",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083248-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "79993100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Heat Decarbonisation for 4 Ambulance Stations at East Midlands Ambulance Service NHS Trust",
+   "buyer": "East Midlands Ambulance Service NHS Trust",
+   "supplier": "Heb Group Ltd",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083145-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "42511110"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Fire Compartmentation Survey Hope House",
+   "buyer": "Gloucestershire Health and Care NHS Foundation Trust",
+   "supplier": "KGC Limited",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083082-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71315400"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "chiller hire",
+   "buyer": "CAMBRIDGE UNIVERSITY HOSPITALS NHS FOUNDATION TRUST",
+   "supplier": "ADCOCK REFRIGERATION AND AIR CONDITIONING LIMITED",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082995-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "42513000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Allendale HC - Electrical distribution board and fire alarm replacement",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "Gemini Electrical Services Limited",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082982-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45210000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Facilities Management Transition Support",
+   "buyer": "Velindre University NHS Trust",
+   "supplier": "Mott MacDonald",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082514-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "79993100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Consultancy Services - HV/LV Electrical Infrastructure Survey and Short-Term Resilience Works, Princess of Wales Hospital",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "supplier": "ETA Projects",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082480-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71315200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Hard Facilities Management 3",
+   "buyer": "NHS Shared Business Services Limited",
+   "supplier": "ASSOCIATED ENGINEERING SERVICES LIMITED, ATC SYSTEMS LIMITED, ARCUS FM LIMITED, ARTIC BUILDING SERVICES LIMITED, BUILDING AUTOMATION CONTROLS LTD., CARBON NUMBERS LIMITED, CHC GROUP LIMITED, CRAIGALAN CONTROLS LIMITED, H.& J. MARTIN LIMITED, HONEYWELL CONTROL SYSTEMS LIMITED, IMPACT CONTROL SYSTEMS LIMITED, ISS MEDICLEAN LIMITED, JACKWOLF GROUP LIMITED, KENDRA ENERGY SOLUTIONS LIMITED, KERNOW CONTROLS LTD, LANCASHIRE GAS SERVICES LIMITED, PARR FACILITIES MANAGEMENT LIMITED, PORTAL BUILDING CONTROLS LIMITED, POWELL SYSTEM ENGINEERING LIMITED, SBS ELECTRICAL, HEATING & PLUMBING SERVICES LIMITED, SCHNEIDER ELECTRIC LIMITED, LEARND UK LIMITED, CONCERTO SUPPORT SERVICES LIMITED, ENERGY & COMPLIANCE TECHNOLOGY LTD., MICAD SYSTEMS (U.K.) LIMITED, Nuvolo Technologies Corporation, ALFRED BAGNALL & SONS (NORTH) LIMITED, AVRENIM FACILITIES MANAGEMENT LIMITED, BELL GROUP LTD, C.L.C. CONTRACTORS LIMITED, CONSTRUCT BUILDING SERVICES LIMITED, CORRIGENDA LIMITED, D & G BUILDERS AND JOINERS LIMITED, DEANWAY CONSTRUCTION LIMITED, ELEVATE HOMES LTD, GEOFFREY ROBINSON LIMITED, HILLSWOOD SERVICES LTD, HYGIENIC FINISHES ( SOUTH) LTD, I.E.D. INSTALLATIONS LIMITED, J.C. WATSON MECHANICAL LIMITED, JSS RAIL LIMITED, KILLOWEN CONTRACTS LIMITED, KIMPTON LTD, KIRKMAN AND JOURDAIN LIMITED, KSD SUPPORT SERVICES LIMITED, Lifetime Construction Ltd, LINK CONTRACTING SERVICES LIMITED, MAURICE FLYNN & SONS LTD, MET HEALTHCARE UK LIMITED, MITIE PROPERTY SERVICES (UK) LIMITED, MORRISON FACILITIES SERVICES LIMITED, OPUS BUILDING SERVICES LIMITED, PSR & SONS JOINERS AND BUILDING CONTRACTORS LIMITED, SEE SERVICES LTD, SKAFFTEC LIMITED, SHIELD MECHANICAL ELECTRICAL & FACILITIES SERVICES LTD, SURECAST LIMITED, WILLIAM GOUGH & SONS LIMITED, CORNERSTONE CONTRACTORS UK. LTD., B.& M.MCHUGH LIMITED, DENNIS JOHNS SERVICE GROUP LIMITED, DURA PUMP LTD, H.C.G.HEATING CONSTRUCTION LIMITED, MEEL GROUP (BUILDING SERVICES) LIMITED, SENATE MECH LIMITED, SEWELL FACILITIES MANAGEMENT LIMITED, BAUVILL FACILITIES LIMITED, FRANK ROGERS (BUILDING CONTRACTOR) LIMITED, IRWIN M&E LIMITED, NOVUS PROPERTY SOLUTIONS LIMITED, A G FLOORING LIMITED, CROWN FLOORING LIMITED, GEMINI FLOORING LIMITED, SIMPLED SERVICES LTD, WESTMADE LIMITED, BPM CONTRACTING SERVICES LIMITED, CENTRAL ROOFING AND BUILDING SERVICES LIMITED, CLIFFORD DEVLIN LIMITED, COMPLETE ROOFING SYSTEMS LIMITED, GABLES UK LIMITED, JAMES ROOFING & CONSTRUCTION LTD, M & J GROUP (CONSTRUCTION & ROOFING) LTD, MARSHDALE CONSTRUCTION LIMITED, NSS MAINTENANCE LIMITED, NORSE COMMERCIAL SERVICES LIMITED, RIVERCREST LIMITED, SILWOOD FACILITIES LIMITED, TOUREEN RETAIL LIMITED, ABCA SYSTEMS LIMITED, ADC ENTRANCE SOLUTIONS LIMITED, ASTWOODS CONSTRUCTION GROUP LIMITED, ELITE ENTRANCE SYSTEMS LIMITED, RECORD U.K. LIMITED, TURNER SECURITY GROUP LTD, BPS MANAGEMENT (KENT) LTD, BTU (INSTALLATION & MAINTENANCE) LIMITED, HWAC MECHANICAL CONTRACTS LTD, MULLEN PROPERTY SERVICES LTD, NOTTINGHAM & MANSFIELD DRAINS LTD, PREOU HEATING VENTILATION & AIR CONDITIONING LTD, RICHARD IRVIN FM LIMITED, THE JAMES MERCER GROUP LIMITED, D & L MEDICAL LIMITED, K. & H. MEDICAL LIMITED, SHJ HOSPITAL PIPELINES LTD, ENERGEIA TECHNOLOGIES LIMITED, GEOFF CASTLES BOILER SERVICES LIMITED, R.T.S. ENGINEERING (SOMERSET) LIMITED, SPIRAX-SARCO LIMITED, VEOLIA ENERGY & UTILITY SERVICES UK LIMITED, AIRCO REFRIGERATION AND AIRCONDITIONING LIMITED, ATLAS MAINTENANCE SERVICES LTD, HAYMAN MECHANICAL SERVICES LIMITED, HESIS LIMITED, WHITEHEAD BUILDING SERVICES LIMITED, HOWORTH AIR TECHNOLOGY LIMITED, IOM CONSULTING LIMITED, LORNE STEWART PLC, MCALPINE GRANT ILCO LIMITED, J & E HALL LTD T/A DAIKIN APPLIED SERVICE, MARCOLD LIMITED, A COPELAND GROUP LIMITED, BSN GROUP CONSTRUCTION LIMITED, AUREOS ENERGY LIMITED, HITACHI ENERGY UK LIMITED, QUARTZELEC LTD, SAVAGE & SONS (ELECTRICAL) LIMITED, SENCAT LTD, SUDLOWS ENTERPRISE SERVICES LIMITED, KONECT ELECTRICAL SERVICES LTD, BES GROUP ELECTRICAL LIMITED, MIDWEST MECHANICAL AND ELECTRICAL SERVICES LIMITED, MULTIPHASE ELECTRICAL & FIRE PROTECTION LTD, PHS COMPLIANCE LIMITED, TCS (UK) LIMITED, TEST INCORPORATED LIMITED, AC AUTOMATION (U.K.) LIMITED, DIESELEC THISTLE GENERATORS LIMITED, P & I GENERATORS LIMITED, POWER ELECTRICS (BRISTOL) LIMITED, POWER CONTROL LTD, POWERWORKS MAINTENANCE SERVICES LTD, FIREMARK LTD, GRAHAM ASSET MANAGEMENT LIMITED, NIFES PROPERTY LIMITED, VENTRO LTD, EDMUNDSON ELECTRICAL LIMITED, HUWS GRAY LIMITED, RS Components Ltd, REXEL UK LIMITED, YESSS (B) ELECTRICAL LTD, AGM BISHOPS LIMITED, BUSINESS MOVES LIMITED, CROWN WORKSPACE LIMITED, HARROW GREEN LIMITED, J.A. STEEL & SON LIMITED, JOHNSONS 1871 LIMITED, L & L BRAINES LIMITED, RIGHTGREENRECYCLE LIMITED, WEBBS CLEANING LIMITED, AIRISQ LIMITED, AIR PROJECTS LIMITED, PSMG HEALTHCARE LTD, VEGA ENVIRONMENTAL CONSULTANTS LIMITED, CERTAS ENERGY UK LIMITED, FUEL STORAGE SOLUTIONS LIMITED, AGGREKO UK LIMITED, SUNBELT RENTALS LIMITED, TEMPLANT HIRE LIMITED, CARRIER RENTAL SYSTEMS (UK) LIMITED, CBRE Managed Services, INTEGRATED ESTATES MANAGEMENT LTD, KIER SERVICES LIMITED, MTX CONTRACTS LIMITED, TULLYRAINE QUARRIES, LIMITED",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082849-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "24111500",
+    "31000000",
+    "31100000",
+    "31120000",
+    "31200000",
+    "31682530",
+    "34928470",
+    "35100000",
+    "39715300",
+    "42123000",
+    "42160000",
+    "42416100",
+    "42500000",
+    "42510000",
+    "42520000",
+    "44100000",
+    "44115200",
+    "44115210",
+    "44160000",
+    "44221220",
+    "44221230",
+    "44221300",
+    "44221310",
+    "44221400",
+    "44610000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Consultancy Services - Refurbishment of Pinewood House Mental Health Facility",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "supplier": "Expedite Design Services LTD",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082756-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71315200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Fire Alarm System Upgrade",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "supplier": "Morris Churchfield Fire",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082751-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Fire Alarm System  & Access Works",
+   "buyer": "MERSEY AND WEST LANCASHIRE TEACHING HOSPITALS NHS TRUST",
+   "supplier": "HESIS LIMITED",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082694-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "31625000",
+    "45310000",
+    "45421131"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Maintenance of Life Critical, Statutory Fire Alarm Systems and Accessories",
+   "buyer": "Cwm Taf Morgannwg University Health Board",
+   "supplier": "Morrisline Engineering ",
+   "date": "2026-09-01",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082562-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "ALEXANDRA House Lift Refurbishment",
+   "buyer": "South London and Maudsley NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-31",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082409-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45453100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Ventilation Verification",
+   "buyer": "The Hillingdon Hospitals NHS Foundation Trust",
+   "supplier": "AIRISQ LIMITED",
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082349-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71315410"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BCU-ITT-63385 - COLWYN BAY HOSPITAL OUTPATIENTS ROOF UPGRADE",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": null,
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082079-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Fire Compartmentation Works",
+   "buyer": "George Eliot Hospital NHS Trust",
+   "supplier": null,
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082071-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45343000",
+    "45343100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "The Hillingdon Hospital roof works",
+   "buyer": "The Hillingdon Hospitals NHS Foundation Trust",
+   "supplier": "Carmelcrest Limited",
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082062-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45260000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Reception Refurbishment Works at Ann Burrow Thomas Health Centre",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "C.L.C. CONTRACTORS LIMITED",
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082054-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45453100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Estates & Facilities Consultancy Services Framework 4",
+   "buyer": "Guy's and St Thomas' NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081843-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "70000000",
+    "70112000",
+    "70220000",
+    "70332000",
+    "71000000",
+    "71314300",
+    "71315200",
+    "71324000",
+    "71530000",
+    "71541000",
+    "72224000",
+    "73431000",
+    "79000000",
+    "79417000",
+    "79993100",
+    "79994000",
+    "80610000",
+    "90713000",
+    "98000000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "PW023 Provision of Facilities Management for No. 1 Bede Island",
+   "buyer": "University Hospitals of Leicester NHS Trust",
+   "supplier": "NHS Property Services",
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081577-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "79993000",
+    "79993100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Design and Build the Lift Replacement  at Longley",
+   "buyer": "Sheffield Health Partnership University NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081488-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45313100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
+}

@@ -6798,6 +6798,114 @@ SPECIALITY_RULES = {
     # estate. NOT the device a medicine is given through - the pump, the giving set,
     # the cannula and the syringe are the vascular access and IV therapy page's, and
     # are claimed there.
+    # PAGE 1756. WRITTEN 11/09/2026, alongside the rebuild of the Capital and Estates
+    # Watch page. This is the 42nd rule in the file and the only one whose subject is a
+    # BUILDING rather than a treatment, which changes what the panel is for: on every
+    # other page the awards feed is a sideshow next to the NHS Supply Chain frameworks,
+    # and here it is the main event, because estates work is bought by individual
+    # notices and almost none of it touches NHS Supply Chain at all.
+    #
+    # FRAMEWORK CLAIMED, read at NHS Supply Chain's own contract launch brief on
+    # 11/09/2026:
+    #   Batteries, Lighting, Tools and Associated Facilities Management Consumables
+    #     (Including EV Charging) - 2025/S 000-049694, 9 February 2026 to 8 February
+    #     2030, five lots, 16 suppliers of whom 10 are new, category "Facilities and
+    #     Office Solutions", supply routes Direct, Stocked and eDirect. It replaced a
+    #     predecessor that expired 6 February 2026. It is the ONLY NHS Supply Chain
+    #     agreement on this patch and it is unclaimed by any other rule.
+    #
+    # NOT CLAIMED, deliberately, and each was checked against the rule that already
+    # holds it:
+    #   Cleaning Equipment / Environmental Decontamination / Clinical and Sharps Waste
+    #     Management / Reusable Clinical and Sharps Waste Management Service ->
+    #     infection-prevention-and-control claims all four, correctly. Cleaning and
+    #     waste are soft FM and sit with the infection team, not with capital.
+    #   Decontamination Capital Equipment -> already claimed by theatres-and-surgical,
+    #     colorectal-gi-and-endoscopy and infection-prevention-and-control. The word
+    #     "Capital" in its name is about the washer-disinfector, not about the capital
+    #     regime this page is about.
+    #   Catering Consumables and Equipment -> unclaimed by anyone, and left that way.
+    #     It is hotel services. A page about CDEL, business cases and critical
+    #     infrastructure risk claiming the catering framework would be padding.
+    #
+    # AWARDS: every term below was run over all 1,554 rows of framework-awards.json and
+    # all 1,972 rows of tender-history.json on 11/09/2026 and EVERY hit was read with
+    # its buyer and supplier before this list was fixed. The include returns 75 rows in
+    # the award feed and 3 in tender history. The shape is consistent: roofs, fire
+    # alarms and compartmentation, ventilation verification, chillers, lifts, asbestos,
+    # water hygiene, decarbonisation, refurbishment and hard/soft FM, one trust at a
+    # time, plus the two NHS SBS national frameworks awarded this month.
+    #
+    # THREE FALSE POSITIVES WERE FOUND AND ARE EXCLUDED BY NAME, each for a reason that
+    # survives the row changing:
+    #   "LTH SMRC Wheelchair maintenance and refurbishment" -> wheelchair SERVICING is
+    #     rehabilitation-prosthetics-and-orthotics' patch. Bare "wheelchair" is NOT
+    #     excluded, because a wheelchair LIFT is estates (HTM 08-02) and that rule's
+    #     own exclude list pushes wheelchair lifts away from rehabilitation.
+    #   "Theatre Integrated Equipment Refurbishment", NHS Grampian, Olympus KeyMed ->
+    #     refurbishing an endoscopy stack is not refurbishing a building.
+    #   "Non-Invasive Ventilation, Sleep Therapy (CPAP) and Sleep Monitoring" -> the
+    #     respiratory patch. "Ventilation" on this page means air handling, and this is
+    #     the one place in the corpus where the same word means a machine breathing for
+    #     a patient.
+    #   "NHS Graduate Management Training Scheme (GMTS) Engineering" -> a graduate
+    #     scheme, not an engineering contract.
+    # ONE FALSE POSITIVE IS KEPT AND NAMED IN THE COVERAGE NOTE INSTEAD: "16_26
+    # Flooring (Supply, Fit and Refurbishment)", bought by Leicestershire County
+    # Council. It is genuine flooring work, it is simply not NHS. Matching here is on
+    # the TITLE only, so there is no way to exclude a buyer without also excluding the
+    # word "flooring", which would lose real NHS flooring awards - and Hard FM 3 has a
+    # flooring lot with 18 suppliers on it. Naming the row is more honest than blinding
+    # the rule.
+    "capital-estates-watch": {
+        "label": "Capital and Estates Watch",
+        "frameworks": r"(batteries, lighting, tools)",
+        "include": (
+            r"\b(backlog maintenance|estates?|capital works?|refurbishment|refurbish\w*|"
+            r"ventilation|air handling|boiler|chiller|electrical infrastructure|"
+            r"fire (?:safety|alarm|compartmentation|stopping|damper)|roof\w*|"
+            r"water (?:hygiene|safety|treatment)|legionella|decarbonisation|heat pump|"
+            r"modular (?:building|ward|theatre)|demolition|asbestos|RAAC|hard fm|soft fm|"
+            r"facilities management|building management system|lift replacement|"
+            r"standby generator|medical gas|construction works?|new build|main contractor|"
+            r"design and build)\b"
+        ),
+        "exclude": (
+            r"\b(wheelchair (?:maintenance|servicing|repairs?)|equipment refurbishment|"
+            r"non[- ]?invasive ventilation|graduate management training)\b"
+        ),
+        "excludeFinding": (
+            "Four titles matched the include and are excluded by name, each read in full "
+            "on 11 September 2026: a wheelchair maintenance and refurbishment contract "
+            "(rehabilitation's patch, while a wheelchair LIFT stays here because it is "
+            "estates), an Olympus endoscopy stack refurbishment at NHS Grampian, an NHS "
+            "Supply Chain non-invasive ventilation and CPAP framework (respiratory - the "
+            "one place where “ventilation” means a machine breathing for a "
+            "patient rather than air handling), and the NHS Graduate Management Training "
+            "Scheme engineering stream."
+        ),
+        "coverageNote": (
+            "Read this panel differently from every other speciality's. NHS Supply Chain "
+            "barely reaches this patch: it has exactly one agreement here, for batteries, "
+            "lighting, tools, FM consumables and EV charging, and it buys none of the "
+            "plant, works or construction the rest of the page is about. The real routes "
+            "are Government Commercial Agency agreements RM6267 CWAS2 / NHS ProCure23 and "
+            "RM6088 CWAS, which both expire on 31 March 2027 with all contracts awarded by "
+            "that date; NHS Shared Business Services Hard Facilities Management 3, awarded "
+            "1 September 2026 with 28 lots and 185 suppliers, running from 20 October 2026; "
+            "NHS SBS Public Sector Construction Works 2, still only a planned procurement "
+            "notice with its tender delayed to mid-to-late November 2026; the New Hospital "
+            "Programme's own Hospital 2.0 Alliance of ten construction firms; and, "
+            "increasingly, dynamic markets opened by individual trusts under the "
+            "Procurement Act 2023, which admit new suppliers at any time. None of those "
+            "five is an NHS Supply Chain framework, so none appears in the Frameworks list "
+            "above however large it is. One award row below is not NHS at all: “16_26 "
+            "Flooring (Supply, Fit and Refurbishment)” was bought by Leicestershire "
+            "County Council and is left in rather than blinding the rule to the word "
+            "“flooring”, which NHS trusts also buy."
+        ),
+    },
+
     "digital-and-medical-it": {
         "label": "Digital and Medical IT",
         # WRITTEN 11/09/2026, alongside the page-2919 build. This is the LAST of the

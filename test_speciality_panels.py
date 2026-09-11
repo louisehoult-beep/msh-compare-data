@@ -51,6 +51,7 @@ IPC = "infection-prevention-and-control"
 ONC = "oncology-and-sact"
 PAIN = "pain-management"
 DIGITAL = "digital-and-medical-it"
+CAPITAL = "capital-estates-watch"
 PHARM = "pharmacy-and-medicines"
 SEPSIS = "sepsis-and-the-deteriorating-patient"
 REHAB = "rehabilitation-prosthetics-and-orthotics"
@@ -6154,6 +6155,101 @@ if _d:
     check("digital claims no open tender it cannot evidence",
           _d.get("openTenders") == [])
 
+
+
+# ---------------------------------------------------------------------------
+# CAPITAL AND ESTATES WATCH (page 1756). Added 11/09/2026 with the page rebuild.
+# The only rule in the file whose subject is a building. Its include is broad by
+# necessity - "estates", "refurbishment", "ventilation" - so the guards below are
+# about the four words that mean something else somewhere in this corpus, and
+# about the one NHS Supply Chain framework this patch actually has.
+# ---------------------------------------------------------------------------
+print("\nCAPITAL AND ESTATES WATCH")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), CAPITAL],
+               check=True, capture_output=True)
+cap = load_panel(CAPITAL)
+check("panel is defined", cap.get("defined") is True)
+check("label is the page's own", cap["label"] == "Capital and Estates Watch")
+
+_cap_rx = B.compile_rule(B.SPECIALITY_RULES[CAPITAL])
+
+
+def _cap_absent(label, needle):
+    check("refused (%s): %s" % (label, needle[:52]), not B.match_title(_cap_rx, needle))
+
+
+def _cap_present(label, needle):
+    check("kept (%s): %s" % (label, needle[:52]), B.match_title(_cap_rx, needle))
+
+
+print("  the one NHS Supply Chain framework on this patch, and only that one")
+_cap_fw = sorted(f["name"] for f in cap["frameworks"])
+check("exactly one framework", len(_cap_fw) == 1, "; ".join(_cap_fw))
+check("and it is the FM consumables one",
+      _cap_fw and _cap_fw[0].startswith("Batteries, Lighting, Tools"), "; ".join(_cap_fw))
+# Each of these is soft FM or decontamination and each already belongs to another
+# page. If a later edit widens the frameworks pattern to make this tab look
+# fuller, these fail rather than quietly annexing infection control's list.
+for bad in ["Cleaning Equipment, Supplies and Associated Products",
+            "Environmental Decontamination",
+            "Clinical and Sharps Waste Management",
+            "Reusable Clinical and Sharps Waste Management Service",
+            "Decontamination Capital Equipment, Associated Accessories and Services",
+            "Catering Consumables and Equipment"]:
+    check("framework refused (another page's, or deliberately unclaimed): %s" % bad[:44],
+          not _cap_rx["fw"].search(bad))
+
+print("  the four excluded titles, each a real row that matched the include and was wrong")
+_cap_absent("wheelchair servicing is rehabilitation's",
+            "LTH SMRC Wheelchair maintenance and refurbishment")
+_cap_absent("an endoscopy stack, not a building",
+            "Theatre Integrated Equipment Refurbishment")
+_cap_absent("a machine breathing for a patient, not air handling",
+            "Non-Invasive Ventilation, Sleep Therapy (CPAP) and Sleep Monitoring Diagnostics")
+_cap_absent("a graduate scheme, not an engineering contract",
+            "NHS Graduate Management Training Scheme(GMTS) Engineering")
+
+print("  ...and the exclusions must not have been widened into what they protect")
+_cap_present("a wheelchair LIFT is estates, HTM 08-02",
+             "Wheelchair Lift Replacement Works")
+_cap_present("theatre ventilation verification is the point of the page",
+             "Ventilation Verification")
+_cap_present("a refurbishment of a building still lands",
+             "Reception Refurbishment Works at Ann Burrow Thomas Health Centre")
+
+print("  the estate vocabulary the page is built on")
+for good in ["QEHKL239 Roof Re-covering Works",
+             "Fire Compartmentation Survey Hope House",
+             "Hard Facilities Management 3",
+             "Public Sector Construction Works 2",
+             "Oxford Health NHS Foundation Trust Estates & Facilities Dynamic Market (PA23)",
+             "Heat Decarbonisation for 4 Ambulance Stations",
+             "HPFT - Asbestos Management Survey",
+             "Legionella Laboratory Testing Service",
+             "BE25/082 - LGI Generating Station Complex Decarbonisation - Phase 1"]:
+    _cap_present("estates vocabulary", good)
+
+print("  what the page must never annex from a clinical patch")
+for bad in ["Insulin Infusion Pumps and Continuous Glucose Monitoring Systems",
+            "Wound Care Dressings and Associated Products",
+            "Electronic Patient Record Services",
+            "Aseptically Prepared Systemic Anti-Cancer Treatment (SACT)"]:
+    _cap_absent("clinical, not estates", bad)
+
+_cap_titles = " ".join((r.get("title") or "").lower() for r in cap["awards"])
+check("the published rows are estates work, not clinical kit",
+      "insulin" not in _cap_titles and "dressing" not in _cap_titles
+      and "wheelchair" not in _cap_titles, "got %r" % _cap_titles[:200])
+check("the coverage note names the routes that are NOT in the frameworks list",
+      all(phrase in (cap["rules"]["frameworks"] or "")
+          for phrase in ["RM6267", "31 March 2027", "Hard Facilities Management 3",
+                         "Hospital 2.0 Alliance", "dynamic markets"]))
+check("the coverage note names the one non-NHS buyer it keeps",
+      "Leicestershire County Council" in (cap["rules"]["frameworks"] or ""))
+check("suppliers come only from that one framework",
+      cap["counts"]["suppliers"] > 0
+      and all(s.get("frameworks") for s in cap["suppliers"]))
+check("capital claims no open tender it cannot evidence", cap.get("openTenders") == [])
 
 _EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS, DERM, ONC, PAIN, DIGITAL}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
