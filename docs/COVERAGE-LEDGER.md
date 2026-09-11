@@ -46,13 +46,13 @@ low coverage there means exhausted, not neglected.
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 17 | 22 | STARTED |
 | Surgical Instruments | surgical | 50 | 10 | 20.0% | 22 | 22 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 7 | 16.3% | 29 | 14 | STARTED |
-| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 6 | 16.2% | 16 | 23 | STARTED |
+| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 6 | 16.2% | 15 | 24 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 18 | 16 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 7 | 20.0% | 19 | 13 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 9 | 27.3% | 15 | 17 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 14 | 8 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 8 | 25.8% | 16 | 12 | STARTED |
-| Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 15 | 17 | STARTED |
+| Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 14 | 18 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 7 | 20 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 5 | 18.5% | 17 | 11 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 6 | 24.0% | 14 | 7 | STARTED |
@@ -98,7 +98,7 @@ low coverage there means exhausted, not neglected.
 | Extension Sets and Lines | — | 23 | 0 | 0.0% | 18 | 10 | UNMAPPED |
 | Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 19 | 10 | UNMAPPED |
 | External Defibrillation Devices and Related Services and Accessories | — | 21 | 0 | 0.0% | 16 | 8 | UNMAPPED |
-| Hand Hygiene and Associated Products and Services | — | 21 | 0 | 0.0% | 16 | 10 | UNMAPPED |
+| Hand Hygiene and Associated Products and Services | — | 21 | 0 | 0.0% | 15 | 11 | UNMAPPED |
 | Surgical Mesh | — | 21 | 0 | 0.0% | 17 | 8 | UNMAPPED |
 | Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 17 | 9 | UNMAPPED |
 | Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 13 | 11 | UNMAPPED |
@@ -108,7 +108,7 @@ low coverage there means exhausted, not neglected.
 | Mobile X-Ray Systems and Associated Option and Related Services | — | 14 | 0 | 0.0% | 6 | 10 | UNMAPPED |
 | Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories | — | 13 | 0 | 0.0% | 13 | 1 | UNMAPPED |
 | Static X-Ray and Associated Options and Related Services | — | 13 | 0 | 0.0% | 6 | 9 | UNMAPPED |
-| Wipes for Surface Cleaning and Disinfection | — | 13 | 0 | 0.0% | 11 | 5 | UNMAPPED |
+| Wipes for Surface Cleaning and Disinfection | — | 13 | 0 | 0.0% | 10 | 6 | UNMAPPED |
 | Disposable and Washable Continence Care | — | 12 | 0 | 0.0% | 10 | 6 | UNMAPPED |
 | Finance Solutions | — | 12 | 0 | 0.0% | 10 | 3 | UNMAPPED |
 | Bladder Scanners and Associated Options and Related Services | — | 11 | 0 | 0.0% | 7 | 5 | UNMAPPED |
@@ -135,20 +135,20 @@ low coverage there means exhausted, not neglected.
 | Reusable Plastic Medical Hollowware | — | 4 | 0 | 0.0% | 2 | 3 | UNMAPPED |
 | Obstetrics and Vinyl Pessaries | — | 3 | 0 | 0.0% | 3 | 0 | UNMAPPED |
 | Fresh Food DPS | — | 97 | 0 | 0.0% | 97 | 0 | OUT OF SCOPE |
-| Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 7 | 11.7% | 47 | 7 | OUT OF SCOPE |
+| Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 7 | 11.7% | 46 | 8 | OUT OF SCOPE |
 | Medical Healthcare Furniture | — | 51 | 0 | 0.0% | 46 | 7 | OUT OF SCOPE |
 | Beverages, Confectionary and Snacks | — | 44 | 0 | 0.0% | 42 | 2 | OUT OF SCOPE |
-| Textiles and Associated Products | workwear | 34 | 2 | 5.9% | 27 | 7 | OUT OF SCOPE |
+| Textiles and Associated Products | workwear | 34 | 2 | 5.9% | 26 | 8 | OUT OF SCOPE |
 | Food Vending Solutions | — | 31 | 0 | 0.0% | 30 | 1 | OUT OF SCOPE |
 | Delivered Ready Prepared Meals | — | 29 | 0 | 0.0% | 29 | 0 | OUT OF SCOPE |
-| Office and Outdoor Furniture | — | 28 | 0 | 0.0% | 23 | 5 | OUT OF SCOPE |
+| Office and Outdoor Furniture | — | 28 | 0 | 0.0% | 22 | 6 | OUT OF SCOPE |
 | Ambient Food | — | 27 | 0 | 0.0% | 26 | 1 | OUT OF SCOPE |
 | Multi Temperature Food Solutions | — | 27 | 0 | 0.0% | 27 | 0 | OUT OF SCOPE |
 | Environmental Decontamination | — | 22 | 0 | 0.0% | 19 | 4 | OUT OF SCOPE |
-| Catering Consumables and Equipment | — | 17 | 0 | 0.0% | 15 | 2 | OUT OF SCOPE |
-| Paper Hygiene | — | 17 | 0 | 0.0% | 14 | 5 | OUT OF SCOPE |
-| Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging) | — | 16 | 0 | 0.0% | 14 | 2 | OUT OF SCOPE |
-| Office Supplies | — | 14 | 0 | 0.0% | 9 | 5 | OUT OF SCOPE |
+| Catering Consumables and Equipment | — | 17 | 0 | 0.0% | 14 | 3 | OUT OF SCOPE |
+| Paper Hygiene | — | 17 | 0 | 0.0% | 13 | 6 | OUT OF SCOPE |
+| Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging) | — | 16 | 0 | 0.0% | 13 | 3 | OUT OF SCOPE |
+| Office Supplies | — | 14 | 0 | 0.0% | 8 | 6 | OUT OF SCOPE |
 | Medical Pulp, Macerators and Support Products | — | 11 | 0 | 0.0% | 9 | 4 | OUT OF SCOPE |
 | Curtains, Blinds and Associated Services | — | 10 | 0 | 0.0% | 8 | 2 | OUT OF SCOPE |
 | Printable Patient Identification Wristbands and Associated Accessories | — | 8 | 0 | 0.0% | 5 | 3 | OUT OF SCOPE |
