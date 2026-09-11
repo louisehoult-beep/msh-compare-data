@@ -45,6 +45,7 @@ OPHTH = "ophthalmology"
 CC = "critical-care"
 ENT = "ent-and-head-and-neck"
 AUDIO = "audiology-and-hearing"
+COLO = "colorectal-gi-and-endoscopy"
 fails = []
 
 
@@ -4643,6 +4644,258 @@ print("  open tenders — empty is the honest answer, not a miss")
 check("no open notice on this patch today", au["openTenders"] == [])
 check("and the rule says an empty list means none was open, not none was sought",
       "empty" in (au["rules"].get("openTenders") or "").lower())
+
+
+
+# ---------------------------------------------------------------------------
+# COLORECTAL, GI AND ENDOSCOPY. Four dangers. The first is that "endoscopy" is a
+# technique, not a speciality: the same word buys a colonoscope, an arthroscope,
+# a nasendoscope and a saphenous vein harvesting system, and only one of those is
+# this patch. The second is the letters FIT, which are the most important test on
+# this page and also the ordinary English word in "Supply and Fit including
+# Styling of Wigs". The third is the border with continence, which owns bowel
+# management and the catheter while this page owns bowel screening and the stoma,
+# with Part IXC deliberately claimed by both. The fourth is Part IX itself: this
+# is the second largest tariff patch in the dataset and claiming one part too
+# many would put catheter suppliers at the top of a colorectal panel.
+# ---------------------------------------------------------------------------
+print("\nCOLORECTAL, GI AND ENDOSCOPY")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), COLO],
+               check=True, capture_output=True)
+co = load_panel(COLO)
+check("panel is defined", co.get("defined") is True)
+check("label is the page's own", co["label"] == "Colorectal, GI and Endoscopy")
+
+_co_rule = B.SPECIALITY_RULES[COLO]
+_co_rx = B.compile_rule(_co_rule)
+
+print("  the false positives, every one a real row read on 11/09/2026")
+# NHS Golden Jubilee, both of them. Endoscopic saphenous vein harvesting is how
+# the conduit for a coronary artery bypass graft is taken. It is cardiac surgery
+# and it reached this panel on the word "endoscopic".
+for bad in ["NHSGJ0089/22 Supply of Endoscopic Vessel Harvesting Tools and Associated Consumables",
+            "NHSGJ0098/22 Supply of Table Attached Compact Display Monitor for Endoscopic "
+            "Vessel Harvesting System"]:
+    check("refused (cardiac surgery): %s" % bad[:52], not B.match_title(_co_rx, bad))
+# Birmingham Women's and Children's. Infant craniosynostosis surgery and the
+# moulding helmets worn afterwards, matched on "endoscopic-assisted".
+check("refused (infant neurosurgery): Craniofacial Orthotics and Helmet Therapy",
+      not B.match_title(_co_rx,
+          "Pre-Market Engagement for Craniofacial Orthotics and Helmet Therapy Services for "
+          "Endoscopic-Assisted Suturectomy Patients and Craniofacial Orthotist Services"))
+# NHS Scotland, awarded to Arthrex, Emmat, Karl Storz and others. Arthroscopy and
+# laparoscopy — the theatres patch, not the endoscopy unit.
+check("refused (arthroscopy and laparoscopy): Rigid Endoscopy Equipment, Accessories",
+      not B.match_title(_co_rx,
+          "Rigid Endoscopy Equipment, Accessories and Maintenance and Repair"))
+# ...but the exclusion is anchored and conditional on purpose. NHS Scotland also
+# runs a COMBINED award carrying the flexible and capsule scopes this unit buys,
+# and it must survive. If this check ever fails the exclusion has been widened
+# into the thing it was written to protect.
+for good in ["Flexible Video, Capsule & Rigid Endoscopy Equipment Including Accessories, "
+             "Maintenance and Repair",
+             "Flexible Video Endoscopy Equipment Including Maintenance and Capsule Endoscopy"]:
+    check("but the combined flexible award still reaches it: %s" % good[:44],
+          B.match_title(_co_rx, good))
+# NHS Scotland, Kent Pharmaceuticals. Genuinely gastrointestinal and genuinely
+# not this panel: one pharmacy wholesale award across four therapeutic areas.
+check("refused (pharmacy wholesale): Gastrointestinal, Endocrine, Nutrition & Blood Medicines",
+      not B.match_title(_co_rx, "Gastrointestinal, Endocrine, Nutrition & Blood Medicines"))
+# Somerset, from Aquilant Endoscopy. Refused because the title cannot say whether
+# it is unsedated upper GI endoscopy or ENT nasendoscopy — not because it was
+# shown to be ENT. That difference is published, and this checks it still is.
+check("refused (unattributable): Purchase of transnasal endoscopes and accessories",
+      not B.match_title(_co_rx, "Purchase of transnasal endoscopes and accessories"))
+check("and the panel publishes WHY that one differs from the other four",
+      "could not be attributed" in (co["rules"].get("awards") or ""))
+
+print("  bare FIT is the most dangerous three letters in the dataset")
+for bad in ["Supply and Fit including Styling of Wigs Service",
+            "16_26 Flooring (Supply, Fit and Refurbishment)",
+            "Supply, Delivery and Fitting of Wigs"]:
+    check("refused (the ordinary English word): %s" % bad[:44], not B.match_title(_co_rx, bad))
+for good in ["NHS Scotland Bowel Screening FIT Kits, Distribution and Analysers",
+             "Faecal Immunochemical Testing (FIT) to provide support for patients identified "
+             "with symptoms associated with bowel cancer"]:
+    check("but the FIT pathway still reaches it: %s" % good[:44], B.match_title(_co_rx, good))
+
+print("  the continence border, held from this side")
+# Faecal management systems are bowel containment for a bedbound patient and the
+# continence page claims them by name. Bare "faecal" would annex them.
+for other in ["Faecal Management System", "Faecal Management Systems",
+              "NP57122 Supply and Delivery of Continence Products",
+              "Bulk Delivery of Continence Products for Community Services",
+              "Continence Home Delivery - Brent CLCH"]:
+    check("left to continence: %s" % other[:44], not B.match_title(_co_rx, other))
+
+print("  bare scope would annex three other pages")
+for bad in ["Replacement of Hysteroscopy Scopes", "Scopes Model 11272VH",
+            "Scope Application service level agreement", "Flexible Scopes"]:
+    check("refused (cannot be attributed from the title): %s" % bad[:44],
+          not B.match_title(_co_rx, bad))
+
+print("  the words refused on risk, each with the thing it would reach")
+# polypropylene is surgical mesh and suture; trans-oesophageal echo is cardiology;
+# the gastric band is the obesity page's; laparoscopy and trans-rectal ultrasound
+# are theatres and urology; instrument washer-disinfectors are sterile services.
+for bad in ["Polypropylene Mesh and Fixation Devices",
+            "Trans-oesophageal Echocardiography Probes",
+            "Gastric Band Adjustment Service",
+            "Laparoscopic Ligation Clips & Appliers",
+            "Contract for Laparoscopic Sets Service Agreement",
+            "PROJ007278_Replacement of Trans-Rectal Ultrasound Scanner",
+            "AA-84-22-MC NP143/21 Instrument Washer Disinfectors",
+            "Washer Disinfector Units Maintenance (202-134 & 202-135)",
+            "Maintenance of Fibroscan machines",
+            "Outpatient Network Hepatology Insourcing",
+            "Provision of Enteral Feeding Pumps, Feeds and Consumables to Hospital Sites"]:
+    check("refused (another patch): %s" % bad[:48], not B.match_title(_co_rx, bad))
+# ...and the two endoscope washer contracts that DO say endoscope must stay.
+for good in ["Automated Endoscope Washer Disinfectors",
+             "Service, Validation and weekly testing of Poka Yoke Endoscope Washers",
+             "[3807864] - Spare Parts for Cantel RapidAER Endoscope Washer Disinfector, "
+             "Cantel EDC10T2 Endoscope Drying Cabinet and Supporting Products"]:
+    check("but endoscope decontamination still reaches it: %s" % good[:44],
+          B.match_title(_co_rx, good))
+
+print("  and the rows that must keep reaching it")
+for good in ["Endoscopy, Endourology & Oncology Ablation Consumables & Associated Products",
+             "Colon Capsule Endoscopy (CCE)",
+             "NHSS Bowel Screening Test Kits and Analysers",
+             "Insourcing of Bowel Screening and General Endoscopy Services at Aneurin Bevan "
+             "University Health Board",
+             "Outpatient Network Gastroenterology Insourcing",
+             "Co-Developing the 'Digestive Disease Centre' at University Hospital Southampton",
+             "Stoma Acute Patient",
+             "National Framework Agreement for the Provision of Prescription Hub Services "
+             "(Stoma and/or Catheter)",
+             "Purchase of Flexible Endoscopes",
+             "EVIS X1 Endoscopic Imaging System",
+             "Wireless Capsule Endoscopy Equipment and Capsules [3498209]"]:
+    check("admitted: %s" % good[:52], B.match_title(_co_rx, good))
+
+check("every award was admitted by its title",
+      all(B.match_title(_co_rx, a["title"]) for a in co["awards"]))
+check("39 awards matched and all 39 are shown",
+      co["counts"]["awardsMatched"] == 39 and co["counts"]["awardsShown"] == 39,
+      "got %s matched / %s shown" % (co["counts"]["awardsMatched"], co["counts"]["awardsShown"]))
+_co_titles = " || ".join((a.get("title") or "") for a in co["awards"]).lower()
+for gone in ["vessel harvesting", "craniofacial", "transnasal", "wigs", "flooring",
+             "faecal management", "hysteroscopy"]:
+    check("no %s row reached the panel" % gone, gone not in _co_titles)
+check("the rigid-only award did not reach it",
+      "rigid endoscopy equipment, accessories" not in _co_titles)
+
+print("  CPV corroborates and never admits")
+# 33168000 and 33168100 are the endoscopy and endoscope codes, and across the
+# whole award feed the 33168 family also sits on Total Orthopaedic Solutions 4
+# and on Minimally Invasive Surgery. Admitted on CPV, this panel would open with
+# an orthopaedic implant framework.
+check("33168 is carried as corroboration", "33168" in tuple(_co_rule["cpv"]))
+check("but the orthopaedic framework carrying the same code is refused on its title",
+      not B.match_title(_co_rx, "Total Orthopaedic Solutions 4"))
+check("and so is the laparoscopy framework carrying it",
+      not B.match_title(_co_rx, "Minimally Invasive Surgery"))
+
+print("  three frameworks, and the four neighbours that are NOT claimed")
+check("exactly three frameworks", len(co["frameworks"]) == 3, "got %d" % len(co["frameworks"]))
+_co_fw = sorted(f["name"] for f in co["frameworks"])
+for want in ["Flexible Endoscopes and Associated Options and Related Services",
+             "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+             "Decontamination Capital Equipment, Associated Accessories and Services"]:
+    check("carried: %s" % want[:52], want in _co_fw)
+# Each of these is a real NHSSC framework whose name contains a word this rule
+# matches on, or nearly does, and each belongs to a neighbouring page.
+for other in ["Rigid Endoscopy and Associated Options and Related Services",
+              "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
+              "Instrument Decontamination and Accessories",
+              "Environmental Decontamination",
+              "Urology and Bowel Management",
+              "Enteral Feeding, Bile Bags and Associated Products",
+              "Minimally Invasive Surgery, Related Equipment and Accessories"]:
+    check("NOT claimed: %s" % other[:52], not any(f["name"] == other for f in co["frameworks"]))
+
+def _co_count(prefix):
+    for f in co["frameworks"]:
+        if f["name"].startswith(prefix):
+            return f.get("supplierCount")
+    return None
+# Two counts are verified against NHS Supply Chain's own stated total. If either
+# moves, the brief has been reissued and the page's prose needs re-reading.
+check("Endoscopy, Endourology still names 58 suppliers",
+      _co_count("Endoscopy, Endourology") == 58, "got %s" % _co_count("Endoscopy, Endourology"))
+check("Decontamination Capital still names 20 suppliers",
+      _co_count("Decontamination Capital") == 20, "got %s" % _co_count("Decontamination Capital"))
+# The third is NOT verified, NHS Supply Chain states no total on that brief, and
+# the panel has to keep saying so rather than presenting five as a fact.
+check("Flexible Endoscopes carries 5 parsed names", _co_count("Flexible Endoscopes") == 5,
+      "got %s" % _co_count("Flexible Endoscopes"))
+check("and the panel still declares that count UNVERIFIED",
+      any("UNVERIFIED" in (f.get("supplierSource") or "")
+          for f in co["frameworks"] if f["name"].startswith("Flexible Endoscopes")))
+check("the shared ownership of the decontamination framework is published",
+      "sterile services" in (co["rules"].get("frameworks") or "").lower()
+      or "sterile services" in (co["rules"].get("suppliers") or "").lower())
+
+print("  Part IXC only — one part too many would rewrite the market")
+check("only IXC is claimed", tuple(_co_rule["tariffParts"]) == ("IXC",))
+_co_t = co["drugTariff"]
+check("the panel carries it", _co_t is not None and _co_t["parts"] == ["IXC"])
+check("8,218 stoma lines", _co_t["lineCount"] == 8218, "got %s" % _co_t["lineCount"])
+# 68 is the same supplier count the page's own market intelligence states for the
+# £433.5m a year England spend on Part IXC. If these ever diverge, one of the two
+# is out of date and the page must not keep publishing both.
+check("68 suppliers, the same number the page states", _co_t["supplierCount"] == 68,
+      "got %s" % _co_t["supplierCount"])
+check("Coloplast leads it on line count", _co_t["topSuppliers"][0]["name"] == "Coloplast Ltd")
+check("no vmp filter is applied — the whole part is the patch",
+      _co_t.get("vmpFilter") is None)
+# Prices are pence in NHSBSA's file and pounds in the panel. A four-figure max
+# here would mean the pence-to-pounds conversion has been lost again.
+check("prices are in pounds, not pence", _co_t["priceMax"] < 1000,
+      "max %s" % _co_t["priceMax"])
+# IXA is dressings and hosiery; IXB is incontinence appliances; the literal part
+# "IXB & IXC" is six Manfred Sauer catheter lines. All three are other pages'.
+for part in ["IXA", "IXB", "IXB & IXC", "IXR"]:
+    check("%s is not claimed here" % part, part not in tuple(_co_rule["tariffParts"]))
+
+print("  the stoma overlap with continence is deliberate and published")
+check("continence claims Part IXC too",
+      "IXC" in tuple(B.SPECIALITY_RULES[CONTINENCE]["tariffParts"]))
+check("and this panel says the overlap is on purpose",
+      "continence" in (co["rules"].get("drugTariff") or "").lower()
+      or "continence" in (co["rules"].get("suppliers") or "").lower())
+
+print("  suppliers, and the two names the alias registry cannot resolve")
+check("suppliers come only from the three frameworks",
+      co["counts"]["suppliers"] > 0 and all(s.get("frameworks") for s in co["suppliers"]))
+check("77 suppliers from 83 framework seats", co["counts"]["suppliers"] == 77,
+      "got %s" % co["counts"]["suppliers"])
+_co_unres = sorted(s["name"] for s in co["suppliers"] if not s["resolved"])
+# Kept exactly as NHS Supply Chain wrote them and flagged, never dropped and
+# never quietly merged into something that looks close.
+check("exactly two names are still unresolved and they are the expected two",
+      _co_unres == ["Omnimed Limited", "Varian Medical Systems"], "got %s" % _co_unres)
+check("the count of unresolved names is published", co["counts"]["suppliersUnresolved"] == 2)
+_co_names = {s["name"] for s in co["suppliers"]}
+for want in ["Boston Scientific", "Olympus (KeyMed)", "Pentax Medical", "Wassenburg Medical",
+             "Micro-Tech (UK) Ltd"]:
+    check("supplier carried: %s" % want, want in _co_names)
+# ONE NAME PER COMPANY, and this patch is the case that needs it: NHS Supply
+# Chain spells Olympus three different ways across the three frameworks here --
+# "Olympus KeyMed" on Flexible Endoscopes, "KeyMed (Medical and Industrial
+# Equipment) Ltd" on the consumables agreement and "Keymed (Medical & Industrial
+# Equipment) Limited" on Decontamination Capital. Published raw that is the
+# biggest name on the patch appearing as three suppliers.
+_co_oly = [s for s in co["suppliers"] if s["name"] == "Olympus (KeyMed)"]
+check("Olympus is one supplier, not three", len(_co_oly) == 1)
+check("and it is named on all three frameworks",
+      bool(_co_oly) and len(_co_oly[0]["frameworks"]) == 3)
+check("with the three NHSSC spellings kept visible",
+      bool(_co_oly) and len(_co_oly[0]["variants"]) == 3)
+
+print("  open tenders — empty is the honest answer, not a miss")
+check("no open notice on this patch today", co["openTenders"] == [])
 
 
 # The exclude=None path must not leak to any rule that has not earned it. Two have:
