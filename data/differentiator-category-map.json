@@ -89,7 +89,8 @@
    "capital": "Capital equipment (tables, lights & OR integration)",
    "perfusion": "Cardiopulmonary bypass and perfusion (oxygenators, circuits, centrifugal pumps, beating-heart stabilisation)",
    "drain": "Chest/thoracic drainage systems (trocars, drainage valves, digital suction)",
-   "sui": "Single-use surgical instruments"
+   "sui": "Single-use surgical instruments",
+   "sharps": "Intra-operative sharps safety devices"
   },
   "pathology": {
    "consum": "Laboratory consumables",
@@ -150,7 +151,9 @@
    "mri": "MRI scanners",
    "mammo": "Mammography systems",
    "xray": "Radiography / X-ray systems",
-   "angio": "Angiography / interventional imaging systems"
+   "angio": "Angiography / interventional imaging systems",
+   "dxa": "DXA / bone densitometry scanners",
+   "pet": "Molecular imaging / PET-CT scanners"
   },
   "ent": {
    "fibre": "Fibre optic endoscopes",
@@ -181,7 +184,8 @@
    "sex": "Sexual health & contraception",
    "feed": "Breastfeeding & milk handling",
    "pelv": "Pelvic health & urogynaecology",
-   "mastect": "Mastectomy & breast prostheses"
+   "mastect": "Mastectomy & breast prostheses",
+   "period": "Period care (tampons, sanitary pads & panty liners)"
   },
   "gastro": {
    "haem": "Haemostasis & banding",
@@ -271,7 +275,9 @@
    "hygiene": "Personal hygiene",
    "daily": "Daily living & occupational therapy aids",
    "access": "Ramps & evacuation aids",
-   "comms": "Augmentative and alternative communication (speech-generating devices, eye gaze, switches, access and AAC software)"
+   "comms": "Augmentative and alternative communication (speech-generating devices, eye gaze, switches, access and AAC software)",
+   "mounts": "Mounting systems for communication aids & assistive technology (wheelchair, table & floor mounts)",
+   "sensory": "Multi-sensory environment & interactive sensory room equipment"
   },
   "oncology": {
    "abl": "Ablation — cryo, RF and pulsed field",
@@ -358,11 +364,11 @@
   }
  },
  "counts": {
-  "pairs": 5640,
-  "mapped": 4840,
+  "pairs": 5655,
+  "mapped": 4868,
   "notTaxonomy": 178,
   "products": 91011,
-  "productsMapped": 61591
+  "productsMapped": 61714
  },
  "entries": [
   {
@@ -90557,9 +90563,11 @@
     "Puncture Proof Pad",
     "Purple Turtle"
    ],
-   "hub": null,
+   "hub": "theatres:sharps",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "confirmed on the supplier's own site (purplesurgical.com), a dedicated 'Sharps Safe Management' range of intra-operative sharps-safety devices (Sharps Safety Station, Puncture Proof Pad, Purple Turtle, magnetic retrieval). Distinct from infection:sharps (disposal containers, not intra-op safety) and theatres:theatre (no safety theme). New type theatres:sharps added this batch.",
+   "decidedIn": "Purple-Surgical--vocab-gap-0912.json"
   },
   {
    "supplier": "Purple Surgical",
@@ -90626,9 +90634,11 @@
     "Ultra Long Period Pads",
     "Ultra Super Plus Period Pads"
    ],
-   "hub": null,
+   "hub": "womens:period",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "period pads (Ultra Regular/Extra Regular/Long/Super Plus), general period care not incontinence. New type womens:period added this batch; continence:pads would misfile these as incontinence products.",
+   "decidedIn": "Bodywise-UK-Ltd--vocab-gap-0912.json"
   },
   {
    "supplier": "Pelvic Relief",
@@ -90673,9 +90683,11 @@
     "Mini Panty Liners",
     "Tanga Panty Liners"
    ],
-   "hub": null,
+   "hub": "womens:period",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "panty liners for period care, same family as Pads on the supplier's own site.",
+   "decidedIn": "Bodywise-UK-Ltd--vocab-gap-0912.json"
   },
   {
    "supplier": "Pelvic Relief",
@@ -90705,9 +90717,11 @@
     "Organic Super Plus Non Applicator Tampons",
     "Organic Regular Non Applicator Tampons"
    ],
-   "hub": null,
+   "hub": "womens:period",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "period tampons, same family as Pads/Liners on the supplier's own site.",
+   "decidedIn": "Bodywise-UK-Ltd--vocab-gap-0912.json"
   },
   {
    "supplier": "Pelvic Relief",
@@ -90782,9 +90796,11 @@
     "Dry Light Slim Incontinence Pads",
     "Dry Light Plus Incontinence Pads"
    ],
-   "hub": null,
+   "hub": "continence:pads",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "named 'Incontinence Pads' by the supplier itself (Dry Light Slim/Plus) - a genuinely different product family from the period-care divisions above, and continence:pads already exists for exactly this.",
+   "decidedIn": "Bodywise-UK-Ltd--vocab-gap-0912.json"
   },
   {
    "supplier": "Pelvic Relief",
@@ -90913,9 +90929,11 @@
     "Table Clamp L3D 2QS UDS",
     "Table Clamp L3D 3QS UDS"
    ],
-   "hub": null,
+   "hub": "rehab:mounts",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "confirmed on the supplier's own site: wheelchair/table/floor mounting systems for communication aids, not the AAC device itself and not office-IT hardware. New type rehab:mounts added this batch for exactly this family.",
+   "decidedIn": "Sensory-Guru-Ltd--vocab-gap-0912.json"
   },
   {
    "supplier": "Sensory Guru Ltd",
@@ -90931,9 +90949,11 @@
     "Magic Room Software",
     "Sensory Classroom Hub Essential Bundle"
    ],
-   "hub": null,
+   "hub": "rehab:sensory",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "confirmed on the supplier's own site: interactive/projected multi-sensory environment installations. New type rehab:sensory added this batch.",
+   "decidedIn": "Sensory-Guru-Ltd--vocab-gap-0912.json"
   },
   {
    "supplier": "Skyguard Ltd T/A Peoplesafe",
@@ -90968,9 +90988,11 @@
     "Mobile Magic Carpet",
     "Magic Carpet"
    ],
-   "hub": null,
+   "hub": "rehab:sensory",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "same product family as Magic Room (Magic Mirror, sensory classroom bundles) on the supplier's own site.",
+   "decidedIn": "Sensory-Guru-Ltd--vocab-gap-0912.json"
   },
   {
    "supplier": "Skyguard Ltd T/A Peoplesafe",
@@ -91040,9 +91062,11 @@
     "Magic Eye FX",
     "Tobii Gaze Viewer"
    ],
-   "hub": null,
+   "hub": "digital:aac",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "same supplier's own AAC categories already mapped here: Eye Gaze -> digital:aac and AT & AAC -> digital:aac. Sensory Eye FX 2 and Magic Eye FX are the software companions to that same eye-gaze hardware; Tobii Gaze Viewer is an assessment tool for it. rehab:comms already defines AAC software as in scope.",
+   "decidedIn": "Sensory-Guru-Ltd--vocab-gap-0912.json"
   },
   {
    "supplier": "Sensory Guru Ltd",
@@ -91123,9 +91147,11 @@
     "Body Worn Camera",
     "SureCam"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "both products in this division (Body Worn Camera, SureCam) are lone-worker safety hardware, the same family already mapped to digital:tec under this supplier's Safety Devices and Safety Apps divisions - not a service/API line like the other held divisions.",
+   "decidedIn": "Skyguard-Ltd-T-A-Peoplesafe--vocab-gap-0912.json"
   },
   {
    "supplier": "Skyguard Ltd T/A Peoplesafe",
@@ -91137,9 +91163,11 @@
    "examples": [
     "Smart Button"
    ],
-   "hub": null,
+   "hub": "digital:tec",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the sole product (Smart Button) is lone-worker safety hardware, same digital:tec family as Safety Devices already mapped for this supplier.",
+   "decidedIn": "Skyguard-Ltd-T-A-Peoplesafe--vocab-gap-0912.json"
   },
   {
    "supplier": "Medical Imaging Systems (MIS Healthcare)",
@@ -91356,9 +91384,11 @@
     "Tamper-Evidence and Sterility Seals For Use With SYRINGES, Steri-Tamp®",
     "Tamper-Evidence and Sterility Seals For Use With IV BAG PORTS - Steri-Tamp®"
    ],
-   "hub": null,
+   "hub": "pharma:iv",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "aseptic-preparation sterility tamper-evidence seals; pharma:iv already covers IV fluids & aseptic, and this supplier already has other lines mapped there via product-override on the same aseptic-consumables logic.",
+   "decidedIn": "Spirit-Medical-Ltd--vocab-gap-0912.json"
   },
   {
    "supplier": "Spirit Medical Ltd",
@@ -91370,9 +91400,11 @@
    "examples": [
     "SecureFill® Non-PVC IV Sterile Needle-Free Bag"
    ],
-   "hub": null,
+   "hub": "pharma:iv",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "empty sterile IV bag for aseptic compounding, same aseptic-preparation family as Steri-Tamp® above.",
+   "decidedIn": "Spirit-Medical-Ltd--vocab-gap-0912.json"
   },
   {
    "supplier": "Spirit Medical Ltd",
@@ -94149,6 +94181,231 @@
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
    "why": "cystocele is a form of pelvic organ prolapse and the example (Shaatz Pessary) is a prolapse-support pessary",
    "decidedIn": "Pioneer Medical Europe Limited--framework-coverage-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "Rayscan α",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Rayscan α"
+   ],
+   "hub": "dental:img",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/dental, which lists this product by name.",
+   "why": "listed by name on mishealthcare.co.uk/products/categories/imaging/dental (read 12/09/2026), the company's own Dental category page.",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "Rayscan α+",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Rayscan α+"
+   ],
+   "hub": "dental:img",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/dental, which lists this product by name.",
+   "why": "listed by name on the company's own Dental category page (read 12/09/2026).",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "Rioscan",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Rioscan"
+   ],
+   "hub": "dental:img",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/dental, which lists this product by name.",
+   "why": "listed by name on the company's own Dental category page (read 12/09/2026).",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "Riosensor",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Riosensor"
+   ],
+   "hub": "dental:img",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/dental, which lists this product by name.",
+   "why": "listed by name on the company's own Dental category page (read 12/09/2026).",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "DEXUM T Quantum",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "DEXUM T Quantum"
+   ],
+   "hub": "imaging:dxa",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/dxa, which lists this product by name.",
+   "why": "listed by name on the company's own DXA category page (read 12/09/2026). New type imaging:dxa added this batch.",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "Dexxum T Half Body DXA",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Dexxum T Half Body DXA"
+   ],
+   "hub": "imaging:dxa",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/dxa, which lists this product by name.",
+   "why": "listed by name on the company's own DXA category page (read 12/09/2026).",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "Excellus DXA",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Excellus DXA"
+   ],
+   "hub": "imaging:dxa",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/dxa, which lists this product by name.",
+   "why": "listed by name on the company's own DXA category page (read 12/09/2026).",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "Primus Whole Body DXA",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Primus Whole Body DXA"
+   ],
+   "hub": "imaging:dxa",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/dxa, which lists this product by name.",
+   "why": "listed by name on the company's own DXA category page (read 12/09/2026).",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "uEXPLORER",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "uEXPLORER"
+   ],
+   "hub": "imaging:pet",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/molecular-imaging, which lists this product by name.",
+   "why": "listed by name on the company's own Molecular Imaging category page (read 12/09/2026). New type imaging:pet added this batch.",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "uMI 550",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "uMI 550"
+   ],
+   "hub": "imaging:pet",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/molecular-imaging, which lists this product by name.",
+   "why": "listed by name on the company's own Molecular Imaging category page (read 12/09/2026).",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "uMI Panorama",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "uMI Panorama"
+   ],
+   "hub": "imaging:pet",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/molecular-imaging, which lists this product by name.",
+   "why": "listed by name on the company's own Molecular Imaging category page (read 12/09/2026).",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "uMI Panorama GS",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "uMI Panorama GS"
+   ],
+   "hub": "imaging:pet",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/molecular-imaging, which lists this product by name.",
+   "why": "listed by name on the company's own Molecular Imaging category page (read 12/09/2026).",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "uMI Panvivo",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "uMI Panvivo"
+   ],
+   "hub": "imaging:pet",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/molecular-imaging, which lists this product by name.",
+   "why": "listed by name on the company's own Molecular Imaging category page (read 12/09/2026).",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "uMI Panvivo EX/ES",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "uMI Panvivo EX/ES"
+   ],
+   "hub": "imaging:pet",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/molecular-imaging, which lists this product by name.",
+   "why": "listed by name on the company's own Molecular Imaging category page (read 12/09/2026).",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "uPMR® 790",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "uPMR® 790"
+   ],
+   "hub": "imaging:pet",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py under the flat 'Imaging'/'Uncategorised' divisions; confirmed 12/09/2026 against the company's own category page mishealthcare.co.uk/products/categories/imaging/molecular-imaging, which lists this product by name.",
+   "why": "listed by name on the company's own Molecular Imaging category page (read 12/09/2026).",
+   "decidedIn": "Medical-Imaging-Systems-MIS-Healthcare--vocab-gap-0912.json"
   }
  ],
  "kinds": {
