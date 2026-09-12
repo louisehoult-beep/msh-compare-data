@@ -2786,11 +2786,22 @@ def _(tmp):
 # ---------------------------------------------------------------------------
 
 def _ledger(mutate):
-    """Load the real ledger, apply one mutation, write it back."""
+    """Load the real ledger, apply one mutation, write it back.
+
+    Returns whatever `mutate` returns. Every mutate() below returns True only
+    from the branch that actually found a row to break — so a case whose
+    target shape does not currently exist anywhere in the live ledger reports
+    that honestly (via the caller returning None, "fixture unavailable")
+    instead of asserting an expected failure that can never come. Fixed
+    12/09/2026: "a supplier captured in full reported as never crawled" found
+    no row with `capturedNothingCounted` in the live ledger (correctly — that
+    bucket was empty), silently mutated nothing, and then reported "GATE HAS A
+    HOLE" against unmutated, valid data for 14 consecutive CI runs."""
     import json as _json
     d = _json.load(open("data/coverage-ledger.json"))
-    mutate(d)
+    found = mutate(d)
     _json.dump(d, open("data/coverage-ledger.json", "w"), indent=1)
+    return found
 
 
 @case("a crawl refusal invisible because the supplier publishes something somewhere")
@@ -2804,8 +2815,10 @@ def _(tmp):
         for r in d["frameworks"]:
             if r.get("refusedSuppliers"):
                 r["refusedSuppliers"] = []
-                return
-    _ledger(m)
+                return True
+        return False
+    if not _ledger(m):
+        return None
     return "refusedSuppliers does not list"
 
 
@@ -2821,8 +2834,10 @@ def _(tmp):
             if r.get("capturedNothingCounted"):
                 r["notCrawled"] = (r.get("notCrawled") or []) + r["capturedNothingCounted"]
                 r["capturedNothingCounted"] = []
-                return
-    _ledger(m)
+                return True
+        return False
+    if not _ledger(m):
+        return None
     return "records a capture of their site"
 
 
@@ -2837,8 +2852,10 @@ def _(tmp):
             for w in (r.get("duplicateOfCapturedSupplier") or []):
                 r.setdefault("crawlWorklist", []).append(
                     {"supplier": w["supplier"], "domain": w["domain"]})
-                return
-    _ledger(m)
+                return True
+        return False
+    if not _ledger(m):
+        return None
     return "already captured under a different canonical name"
 
 
@@ -2857,8 +2874,10 @@ def _(tmp):
             if dup and not any(w["supplier"] in nc for w in dup):
                 r["actionable"]["duplicateOfCapturedSupplier"] = len(dup)
                 r["actionableTotal"] = sum(r["actionable"].values())
-                return
-    _ledger(m)
+                return True
+        return False
+    if not _ledger(m):
+        return None
     return "being counted twice"
 
 
@@ -2868,9 +2887,14 @@ def _(tmp):
     # change. Landing build_coverage_ledger.py without re-running it leaves the
     # old, wrong classification live and every reader looking at it.
     def m(d):
+        found = False
         for r in d["frameworks"]:
+            if "capturedNothingCounted" in r:
+                found = True
             r.pop("capturedNothingCounted", None)
-    _ledger(m)
+        return found
+    if not _ledger(m):
+        return None
     return "predates the 10/09/2026 classification fixes"
 
 

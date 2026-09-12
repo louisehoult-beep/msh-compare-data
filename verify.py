@@ -4962,6 +4962,7 @@ def check_coverage_ledger(doc):
     if not rows:
         return
     prod = load("supplier-products.json") or {}
+    diff = load("differentiator.json") or {}
     try:
         sys.path.insert(0, "company-aliases")
         import company_alias as CA
@@ -4986,6 +4987,18 @@ def check_coverage_ledger(doc):
         d = d[4:] if d.startswith("www.") else d
         if d:
             cap_by_domain.setdefault(d, set()).add(key)
+    # ^o385: a supplier whose captured rows carry no source is a real capture
+    # that products-counting drops entirely, so it never reaches
+    # `prod["suppliers"]` above and this check missed it (Swann Morton, whose
+    # 137 products sit at numeric URLs the detail crawler's slug match never
+    # reaches). differentiator.json's heldBySupplier is complete regardless of
+    # whether a capture counted toward a product entry — build_coverage_ledger.py
+    # already reads it for exactly this reason (see its own docstring). Fixed
+    # 12/09/2026 after the gate self-test found this hole with no live row to
+    # demonstrate it on.
+    for k, held in (diff.get("heldBySupplier") or {}).items():
+        if held:
+            captured.add(canon(k))
 
     BUCKETS = ("published", "publishedElsewhere", "heldOnly",
                "capturedNothingCounted", "notCrawled", "refused", "unknown")
