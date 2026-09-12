@@ -35,14 +35,14 @@ low coverage there means exhausted, not neglected.
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 29 | 23.8% | 74 | 32 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 20 | 19.8% | 61 | 32 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 16 | 25.4% | 33 | 23 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 17 | 27.0% | 32 | 23 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 11 | 18.3% | 39 | 20 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 15 | 25.9% | 33 | 20 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 14 | 24.6% | 22 | 29 | STARTED |
 | Urology and Bowel Management | continence | 57 | 18 | 31.6% | 30 | 30 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 20 | 36 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 7 | 13.0% | 11 | 43 | STARTED |
-| Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 10 | 18.9% | 28 | 21 | STARTED |
+| Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 11 | 20.8% | 27 | 21 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 17 | 22 | STARTED |
 | Surgical Instruments | surgical | 50 | 11 | 22.0% | 21 | 22 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 9 | 20.9% | 27 | 14 | STARTED |
@@ -55,10 +55,10 @@ low coverage there means exhausted, not neglected.
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 14 | 18 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 6 | 21 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 5 | 18.5% | 17 | 11 | STARTED |
-| Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 6 | 24.0% | 14 | 7 | STARTED |
+| Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 7 | 28.0% | 13 | 7 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | 13 | 11 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 4 | 17 | STARTED |
-| Physiotherapy and Occupational Therapy | rehab | 22 | 5 | 22.7% | 11 | 11 | STARTED |
+| Physiotherapy and Occupational Therapy | rehab | 22 | 6 | 27.3% | 10 | 11 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 8 | 8 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 4 | 19.0% | 9 | 11 | STARTED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 6 | 30.0% | 10 | 6 | STARTED |
