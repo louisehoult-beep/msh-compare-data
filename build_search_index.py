@@ -82,7 +82,9 @@ EXTRA_IDS = {
 
 # Never index these, whatever their path: they are transactional, they contain
 # no answers, and a member landing on them from a search has been sent nowhere.
-EXCLUDE_IDS = {165, 166, 167, 685, 686, 687, 688, 946, 955, 957}
+# 3768 added 12/09/2026: its div.stage link lists (outside <nav>) leaked 11 nav
+# words into the index, making it compete with the pages it links to.
+EXCLUDE_IDS = {165, 166, 167, 685, 686, 687, 688, 946, 955, 957, 3768}
 
 # Text that appears on many pages and belongs to the furniture, not the content.
 # Matched after tag-stripping, case-insensitively, and removed.
