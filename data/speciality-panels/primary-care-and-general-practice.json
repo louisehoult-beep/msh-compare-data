@@ -11,7 +11,614 @@
   "markerRef": "Not yet minted. This file sits in data/speciality-panels/ and scripts/stamp_notice.py walks only data/*.json."
  },
  "slug": "primary-care-and-general-practice",
- "defined": false,
- "generated": "2026-09-11",
- "whyEmpty": "No speciality rule has been written for this page yet. The panel shows nothing rather than guessing: a keyword match on the title alone is wrong more often than it is right on this data."
+ "label": "Primary Care and General Practice",
+ "defined": true,
+ "generated": "2026-09-12",
+ "dataAsOf": {
+  "frameworks": "2026-09-02",
+  "tenderHistory": "2026-08-20",
+  "frameworkAwards": "2026-09-11T11:16:36+00:00",
+  "openTenders": "11/09/2026",
+  "drugTariff": "2026-09-11"
+ },
+ "rules": {
+  "frameworks": "NO NHS SUPPLY CHAIN FRAMEWORK IS COUNTED HERE, AND THAT IS THE FINDING RATHER THAN A GAP. All 140 contract launch briefs NHS Supply Chain publishes were read - 121 parsed framework names, 16 unparsed and 3 expired - and not one of them is primary care or general practice. NHS Supply Chain organises its agreements by product category and runs six of them: Diagnostic Equipment and Services, Facilities and Office Solutions, Food, Medical Technology, Medical and Surgical Consumables, and Rehabilitation and Community. A CARE SETTING IS NOT ONE OF THEM, and that is the whole reason this panel carries no framework. A general practice buys off other pages' agreements: examination gloves, Total Patient Assessment Device Solutions, Advanced Wound Care, Disposable and Washable Continence Care. ONE AGREEMENT COMES CLOSEST AND IT IS NAMED HERE RATHER THAN COUNTED: Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services, category Diagnostic Equipment and Services, 122 suppliers. Point of care testing in general practice sits inside it. WHY IT IS NOT COUNTED: NHS Supply Chain publishes supplier names per agreement and never per lot, so claiming it would put all 122 laboratory and pathology suppliers in front of a rep as the primary care market, which they are not. That agreement is counted on the Pathology and Laboratory Medicine page and on the Sepsis and the Deteriorating Patient page, where it is those pages' own framework. Every framework name, category and count in this paragraph was read on the Hub's own framework record on 12 September 2026. COVERAGE, STATED PLAINLY: this panel covers the COMMISSIONING of general practice, which is what the procurement record holds. It does not and cannot cover what an individual practice buys with its own money - consumables, furniture, a spirometer, a blood pressure monitor - because a practice is an independent contractor and its purchases are never published as public notices. That is the largest part of the primary care market and it is invisible to every source this page uses. Saying so is the finding; the panel will not pad itself with other pages' frameworks to hide it.",
+  "suppliers": "NO SUPPLIER LIST IS PUBLISHED FOR THIS SPECIALITY, because this panel names suppliers only where an NHS Supply Chain framework record names them on this speciality's own frameworks, and a care setting has none. The 122 suppliers on Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services are not reproduced here: that list is published per agreement rather than per lot, so it would name the pathology market rather than the general practice point of care testing market inside it. THE SUPPLIER ANSWER ON THIS PATCH IS NOT A FRAMEWORK. General practice is an independent contractor model: a practice is a business that buys its own consumables, its own clinical system and its own equipment, and most of that spend never touches a national agreement at all. The awards list below names the providers that won commissioned work on this patch, which is weaker evidence than a framework supplier list and is labelled as such. This panel will not fall back to a keyword guess against the supplier directory. COVERAGE, STATED PLAINLY: this panel covers the COMMISSIONING of general practice, which is what the procurement record holds. It does not and cannot cover what an individual practice buys with its own money - consumables, furniture, a spirometer, a blood pressure monitor - because a practice is an independent contractor and its purchases are never published as public notices. That is the largest part of the primary care market and it is invisible to every source this page uses. Saying so is the finding; the panel will not pad itself with other pages' frameworks to hide it.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(primary care|general practice|general practitioner\\w*|gp|general medical services|apms|gms|special allocations? service|nhs health check\\w*|practice nurse\\w*|qof|quality and outcomes framework)\\b/i and does not match /\\b(primary care orthodontic\\w*|shared care documentation)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality, and there were five rows across two patterns: four NHS Norfolk and Suffolk ICB primary care orthodontic contracts, which are high-street dentistry on a separate performers list and a separate commissioning route, and NHS Essex ICB's denosumab outpatient therapy agreement, where primary care appears only as the recipient of the shared care paperwork. WHAT A READER OF THIS LIST SHOULD KNOW BEFORE READING IT: 56 of the 81 matching notices are a single contract family - NHS South Yorkshire ICB's GP Locally Commissioned Services, awarded practice by practice across Sheffield and published on 9 and 10 September 2026. They are genuine, they are counted, and because this panel shows the 40 most recent of what it matches, they fill it. The count above is the honest total and the rest of this patch is inside it rather than on the screen. IT IS ALSO WHAT THE PATCH LOOKS LIKE: general practice is commissioned one practice at a time, so a single integrated care board re-letting its enhanced services produces dozens of notices in two days while a whole year of national activity produces a handful. SO THAT ONE ROUND OF LOCAL PAPERWORK DOES NOT BECOME THE WHOLE PAGE, this panel - alone among the Hub's speciality panels - limits any single buyer to twelve of its forty display slots. That is a display rule and not a filter: nothing is removed from the matched total, and the number of notices held back from the screen is published as awardsWithheldByBuyerCap so a reader can see it was done. A buyer is keyed on the name the notice carries, so a body that spells itself two ways is treated as two buyers rather than guessed at. A CPV code beginning 85121000 or 85121100 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
+  "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
+ },
+ "counts": {
+  "frameworks": 0,
+  "suppliers": 0,
+  "suppliersUnresolved": 0,
+  "awardsShown": 38,
+  "awardsMatched": 81,
+  "awardsWithheldByBuyerCap": 43,
+  "openTenders": 0
+ },
+ "frameworks": [],
+ "suppliers": [],
+ "awards": [
+  {
+   "title": "Primary Care Enhanced Services",
+   "buyer": "NHS LINCOLNSHIRE INTEGRATED CARE BOARD",
+   "supplier": "Glebe Park Surgery",
+   "date": "2026-09-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086279-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Primary Care Enhanced Services",
+   "buyer": "NHS LINCOLNSHIRE INTEGRATED CARE BOARD",
+   "supplier": "East Lindsey Medical Group",
+   "date": "2026-09-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086257-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract -  Harold Street  Medical Centre",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Harold Street Medical Centre",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085756-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract - Carrfield Medical Centre",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Carrfield Medical Centre",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085755-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract -  Handsworth Medical Practice",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Handsworth Medical Practice",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085754-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract - The Thorpe Practice",
+   "buyer": "NHS South Yorkshire ICB",
+   "supplier": "The Thorpe Practice",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085752-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract - Greystones Medical Centre",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Greystones Medical Centre",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085748-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract - Burngreave Surgery",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Burngreave Surgery",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085745-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Primary Care Enhanced Services",
+   "buyer": "NHS LINCOLNSHIRE INTEGRATED CARE BOARD",
+   "supplier": "Cliff House Medical Practice",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085741-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract - Grenoside Surgery",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Grenoside Surgery",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085626-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract - Dykes Hall Medical Centre",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Dykes Hall Medical Centre",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085624-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract - Duke Medical Centre",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Duke Medical Centre",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085623-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract - Dovercourt Medical Centre",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Dovercourt Group Practice",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085621-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract - Devonshire Green  Medical Centre",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Devonshire Green Medical Centre",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085620-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract - Deepcar Medical Centre",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Deepcar Medical Centre",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085618-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Primary Care Virtual Licences",
+   "buyer": "NHS England",
+   "supplier": "IRIS-Connect Ltd",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085615-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "72212218"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract - Darnall Health Centre",
+   "buyer": "NHS South Yorkshire Integrated Care Board",
+   "supplier": "Darnall Health Centre",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085614-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "GP Services for Enhanced Primary Care Services (EhPC)",
+   "buyer": "University Hospitals of North Midlands NHS Trust",
+   "supplier": "NORTH STAFFORDSHIRE GP FEDERATION LIMITED",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086065-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Bromley Out of Hours Primary Care Home Visiting (OOHPCHV) Service",
+   "buyer": "NHS South East London Integrated Care Board",
+   "supplier": null,
+   "date": "2026-09-08",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084801-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "GP Public Health Locally Enhanced Services",
+   "buyer": "Plymouth City Council",
+   "supplier": "Adelaide Surgery",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084296-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Elizabeth Garrett Anderson Programme – Primary Care Manchester University",
+   "buyer": "NHS England",
+   "supplier": "The University of Manchester",
+   "date": "2026-09-07",
+   "url": "https://www.find-tender.service.gov.uk/Notice/084475-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "80000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Provision of GP Services",
+   "buyer": "NORTHAMPTONSHIRE HEALTHCARE NHS FOUNDATION TRUST",
+   "supplier": "Doctor PA LTD",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083569-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Primary Care Workforce Intelligence System Performers List Implementation",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": "Bluewave Technology UK Ltd",
+   "date": "2026-09-02",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083163-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "72227000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Aberbeeg General Medical Services Contract",
+   "buyer": "Aneurin Bevan University Health Board",
+   "supplier": "Cwm Calon Surgery",
+   "date": "2026-08-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/082142-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85140000",
+    "85323000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "APMS GP Services Cressex Health Centre",
+   "buyer": "NHS THAMES VALLEY INTEGRATED CARE BOARD",
+   "supplier": "Better Health Bucks C.I.C",
+   "date": "2026-08-27",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081583-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Provision of General Medical Services at Tollgate Practice, Colchester",
+   "buyer": "NHS Essex Integrated Care Board",
+   "supplier": null,
+   "date": "2026-08-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081546-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Primary Care Gambling Service",
+   "buyer": "NHS England",
+   "supplier": "Hurley Clinic Partnership known as the Hurley Group",
+   "date": "2026-08-26",
+   "url": "https://www.find-tender.service.gov.uk/Notice/081093-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Special Allocations Service in Buckinghamshire",
+   "buyer": "NHS Thames Valley Integrated Care Board",
+   "supplier": null,
+   "date": "2026-08-25",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080758-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "NHS Health Checks",
+   "buyer": "Somerset Council",
+   "supplier": "Somerset NHS Foundation Trust",
+   "date": "2026-08-24",
+   "url": "https://www.find-tender.service.gov.uk/Notice/080570-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85140000",
+    "85141200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "GP Services",
+   "buyer": "North London Foundation Trust",
+   "supplier": "Dr Niel Amin",
+   "date": "2026-08-20",
+   "url": "https://www.find-tender.service.gov.uk/Notice/079573-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "General Practice Assistant (GPA) Accredited Education Route",
+   "buyer": "NHS England",
+   "supplier": "PRIMARY CARE WORKFORCE ACADEMY COMMUNITY INTEREST COMPANY",
+   "date": "2026-08-18",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078498-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "80000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "SEL GMS Clinical Cover ToPL Lambeth",
+   "buyer": "NHS South East London Integrated Care Board",
+   "supplier": null,
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078255-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Primary Care Medical Cover",
+   "buyer": "NHS Lancashire and South Cumbria Integrated Care Board",
+   "supplier": "Adelaide Family Practice",
+   "date": "2026-08-17",
+   "url": "https://www.find-tender.service.gov.uk/Notice/078246-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Luton Town Centre Surgery APMS Contract [Direct Award Process C]",
+   "buyer": "NHS Bedfordshire, Luton and Milton Keynes Integrated Care Board",
+   "supplier": null,
+   "date": "2026-08-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077454-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85121100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "GP & Specialist Nurse services for Soss Moss Hospital and Greenways Unit",
+   "buyer": "CHESHIRE AND WIRRAL PARTNERSHIP NHS FOUNDATION TRUST",
+   "supplier": "Better Health Manchester Ltd",
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076912-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Alternative Provider for the Provision of NHS Health Checks",
+   "buyer": "London Borough of Bromley",
+   "supplier": "BROMLEY GP ALLIANCE LIMITED",
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076820-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85300000",
+    "98000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "NHS Health Checks - Community Outreach Offer for Milton Keynes City Council",
+   "buyer": "Milton Keynes City Council",
+   "supplier": null,
+   "date": "2026-08-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076394-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000",
+    "85121000",
+    "85140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "HMP Wandsworth - GP Services",
+   "buyer": "Oxleas NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-08-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/075517-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85100000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  }
+ ],
+ "openTenders": [],
+ "drugTariff": null
 }

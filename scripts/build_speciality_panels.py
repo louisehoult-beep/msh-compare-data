@@ -7557,6 +7557,237 @@ SPECIALITY_RULES = {
             "awards list are the visible edge of it and are the rows to start from."
         ),
     },
+    # PAGE 3078. Primary Care and General Practice. THIS PAGE IS A SETTING, NOT A
+    # PRODUCT CATEGORY, and every decision below follows from that. There is no
+    # "primary care" aisle in NHS Supply Chain and no primary care CBU; a GP practice
+    # buys examination gloves, vital signs monitors and point of care tests off
+    # frameworks that belong to other pages. What IS this page's own is the
+    # commissioning of general practice itself: the GMS, PMS and APMS contracts, the
+    # locally commissioned and locally enhanced services layered on top of them, and
+    # the workforce and IT bought to run them.
+    "primary-care-and-general-practice": {
+        "label": "Primary Care and General Practice",
+        # NO NHS SUPPLY CHAIN FRAMEWORK. All 140 contract launch briefs NHS Supply
+        # Chain publishes were read on 12/09/2026 - 121 parsed framework names, 16 the
+        # crawler could not parse and 3 expired - and not one is primary care or
+        # general practice. NHSSC runs six categories (Diagnostic Equipment and
+        # Services, Facilities and Office Solutions, Food, Medical Technology, Medical
+        # and Surgical Consumables, Rehabilitation and Community) and none of them is a
+        # care setting. The nearest agreement is named in frameworksFinding rather than
+        # claimed, for the reason the mental health rule sets out: frameworks.json
+        # records suppliers per AGREEMENT and never per lot.
+        "frameworks": None,
+        "frameworksFinding": {
+            "frameworks": (
+                "NO NHS SUPPLY CHAIN FRAMEWORK IS COUNTED HERE, AND THAT IS THE FINDING "
+                "RATHER THAN A GAP. All 140 contract launch briefs NHS Supply Chain "
+                "publishes were read - 121 parsed framework names, 16 unparsed and 3 "
+                "expired - and not one of them is primary care or general practice. NHS "
+                "Supply Chain organises its agreements by product category and runs six "
+                "of them: Diagnostic Equipment and Services, Facilities and Office "
+                "Solutions, Food, Medical Technology, Medical and Surgical Consumables, "
+                "and Rehabilitation and Community. A CARE SETTING IS NOT ONE OF THEM, "
+                "and that is the whole reason this panel carries no framework. A general "
+                "practice buys off other pages' agreements: examination gloves, Total "
+                "Patient Assessment Device Solutions, Advanced Wound Care, Disposable "
+                "and Washable Continence Care. ONE AGREEMENT COMES CLOSEST AND IT IS "
+                "NAMED HERE RATHER THAN COUNTED: Laboratory Diagnostics, Point of Care "
+                "Testing and Pathology Managed Services, category Diagnostic Equipment "
+                "and Services, 122 suppliers. Point of care testing in general practice "
+                "sits inside it. WHY IT IS NOT COUNTED: NHS Supply Chain publishes "
+                "supplier names per agreement and never per lot, so claiming it would "
+                "put all 122 laboratory and pathology suppliers in front of a rep as the "
+                "primary care market, which they are not. That agreement is counted on "
+                "the Pathology and Laboratory Medicine page and on the Sepsis and the "
+                "Deteriorating Patient page, where it is those pages' own framework. "
+                "Every framework name, category and count in this paragraph was read on "
+                "the Hub's own framework record on 12 September 2026."
+            ),
+            "suppliers": (
+                "NO SUPPLIER LIST IS PUBLISHED FOR THIS SPECIALITY, because this panel "
+                "names suppliers only where an NHS Supply Chain framework record names "
+                "them on this speciality's own frameworks, and a care setting has none. "
+                "The 122 suppliers on Laboratory Diagnostics, Point of Care Testing and "
+                "Pathology Managed Services are not reproduced here: that list is "
+                "published per agreement rather than per lot, so it would name the "
+                "pathology market rather than the general practice point of care testing "
+                "market inside it. THE SUPPLIER ANSWER ON THIS PATCH IS NOT A FRAMEWORK. "
+                "General practice is an independent contractor model: a practice is a "
+                "business that buys its own consumables, its own clinical system and its "
+                "own equipment, and most of that spend never touches a national "
+                "agreement at all. The awards list below names the providers that won "
+                "commissioned work on this patch, which is weaker evidence than a "
+                "framework supplier list and is labelled as such. This panel will not "
+                "fall back to a keyword guess against the supplier directory."
+            ),
+        },
+        # THE INCLUDE LIST. Every term below was run over all 1,972 rows of
+        # tender-history.json, all 1,554 rows of framework-awards.json and the 7 open
+        # notices, and every hit was read one by one. 81 rows survive the exclusions and
+        # all 81 are this speciality.
+        #
+        # NOT INCLUDED, DELIBERATELY, and each refusal is a real ambiguity in this data
+        # rather than a tidy-up:
+        #   "gps" (plural)    -> matches nothing here, and "GPS" is satellite navigation
+        #                        in every other sector this feed covers. The singular
+        #                        "gp" returns all 63 GP rows on its own, so the plural
+        #                        buys nothing and risks a fleet tracking contract. This
+        #                        is a refusal made before the fact rather than after it:
+        #                        no GPS row exists in today's data to exclude.
+        #   "pcn"             -> Primary Care Network and Penalty Charge Notice share the
+        #                        acronym, and this feed carries council buyers. It
+        #                        matches nothing today, so admitting it would be pure
+        #                        downside. "primary care network" as a phrase is already
+        #                        covered by "primary care".
+        #   "emis"            -> the GP clinical system, and a substring of "chemistry",
+        #                        "biochemistry", "immunohistochemistry" and "emission".
+        #                        Eight rows prove it: a biochemistry analyser at NHS
+        #                        Golden Jubilee, pathology reagents at West Suffolk, two
+        #                        immunohistochemistry buys at Swansea Bay, an ICP optical
+        #                        emission spectrometer at Sussex, X-ray emission
+        #                        spectroscopy at Warwick and two School of Chemistry
+        #                        diffractometer buys at St Andrews. Not one EMIS contract
+        #                        exists in this data for it to have found.
+        #   bare "health check" -> "NHS SY ICB - Initial Health Check for Looked After
+        #                        Children - Doncaster" is a statutory safeguarding
+        #                        assessment, not the NHS Health Check programme. The
+        #                        phrase "nhs health check" is used instead and admits the
+        #                        three genuine rows without it.
+        #   bare "enhanced services" -> "NHS South Yorkshire ICB - Pharmacy Local
+        #                        Enhanced Services - Heritage pharmacy" is community
+        #                        pharmacy's, and the Hub counts it on the Pharmacy and
+        #                        Medicines page. Both genuine rows here say "GP" or
+        #                        "Primary Care" in the same title and are admitted on
+        #                        that.
+        #   "dispensing"      -> claimed by the Pharmacy and Medicines page, and all five
+        #                        rows it matches are pharmacy: MoD pre-pack overlabelling
+        #                        twice, drug dispensing software at Northamptonshire, NHS
+        #                        England hub and spoke dispensing registration, and
+        #                        medicine dispensing lockers at Berkshire. Dispensing
+        #                        practices are a real general practice model and no row
+        #                        in this data is one.
+        #   "urgent treatment centre", "nhs 111", "out of hours"
+        #                     -> urgent treatment centres and NHS 111 are claimed by the
+        #                        Emergency and Urgent Care page and are counted there;
+        #                        publishing them here would put the same five contracts
+        #                        on two pages. Bare "out of hours" is looser still: of
+        #                        its three rows one is a children's palliative care
+        #                        out-of-hours advice line, which is the Palliative and
+        #                        End of Life Care page's. The one genuine row, Bromley
+        #                        Out of Hours Primary Care Home Visiting, says "Primary
+        #                        Care" in its own title and is admitted on that.
+        #   "advice and guidance" -> a real primary care pathway term and useless as a
+        #                        filter: its two rows are a Humber Teaching telephone
+        #                        support service that never says primary care, and North
+        #                        Central London ICB's mental health employment support
+        #                        contract, which is the Mental Health page's.
+        #   bare "federation" -> matches "NHS ConFEDERATION". The one row is a
+        #                        Birmingham Community Healthcare membership subscription
+        #                        waiver. GP federations are real and none appears here.
+        #   "medical practice", "health centre"
+        #                     -> 40 rows, and the false positives are NHS Property
+        #                        Services estates works: consulting room alterations at
+        #                        Daybrook Health Centre, internal alterations at Flagg
+        #                        Court, heating upgrades at North Baddesley. Building
+        #                        work on a primary care estate is capital, and every
+        #                        genuine row already says "GP".
+        #
+        # THREE TERMS ARE CARRIED THAT MATCH NOTHING IN TODAY'S DATA - practice nurse,
+        # qof and quality and outcomes framework - and they are stated here rather than
+        # left to look as though they fired. Each can mean nothing else in UK healthcare
+        # procurement.
+        #
+        # TWO TERMS WERE ADDED BECAUSE THE GP SERVICES CPV FOUND ROWS THE FIRST DRAFT
+        # MISSED, which is the honest use of a CPV code - to look for gaps, never to
+        # admit a notice. "general medical services" spelled out recovered Aberbeeg
+        # General Medical Services Contract at Aneurin Bevan University Health Board and
+        # the Provision of General Medical Services at Tollgate Practice, Colchester,
+        # neither of which uses the GMS acronym. "special allocations service" recovered
+        # NHS Thames Valley ICB's Special Allocations Service in Buckinghamshire: that is
+        # the primary care service for patients removed from a practice list, the phrase
+        # means nothing else in the NHS, and the title never says general practice.
+        "include": (
+            r"\b(primary care|general practice|general practitioner\w*|gp|"
+            r"general medical services|apms|gms|special allocations? service|"
+            r"nhs health check\w*|"
+            r"practice nurse\w*|qof|quality and outcomes framework)\b"
+        ),
+        # FIVE ROWS MATCHED THE INCLUDE LIST AND WERE WRONG. All five were read:
+        #   primary care orthodontic -> four rows across two titles, Primary Care
+        #                        Orthodontic Services and Primary Care Orthodontic
+        #                        Services Suffolk, both NHS Norfolk and Suffolk ICB.
+        #                        "Primary care orthodontics" is the NHS term for
+        #                        high-street orthodontic treatment and it is dentistry: a
+        #                        separate contract, a separate performers list and a
+        #                        separate commissioning route from general practice. No
+        #                        general practice rep sells into it.
+        #   shared care documentation -> "Denosumab Therapy Outpatients (Short-term
+        #                        agreement) and provision of Shared Care Documentation to
+        #                        Primary Care" (NHS Essex ICB). The purchase is denosumab
+        #                        therapy delivered in outpatients; primary care appears
+        #                        only as the recipient of the shared care paperwork
+        #                        afterwards. Buying a secondary care drug service is not
+        #                        a primary care contract.
+        "exclude": r"\b(primary care orthodontic\w*|shared care documentation)\b",
+        "excludeFinding": (
+            "The exclusion list exists because every pattern in it matched a real notice "
+            "that was not this speciality, and there were five rows across two patterns: "
+            "four NHS Norfolk and Suffolk ICB primary care orthodontic contracts, which "
+            "are high-street dentistry on a separate performers list and a separate "
+            "commissioning route, and NHS Essex ICB's denosumab outpatient therapy "
+            "agreement, where primary care appears only as the recipient of the shared "
+            "care paperwork. WHAT A READER OF THIS LIST SHOULD KNOW BEFORE READING IT: "
+            "56 of the 81 matching notices are a single contract family - NHS South "
+            "Yorkshire ICB's GP Locally Commissioned Services, awarded practice by "
+            "practice across Sheffield and published on 9 and 10 September 2026. They "
+            "are genuine, they are counted, and because this panel shows the 40 most "
+            "recent of what it matches, they fill it. The count above is the honest "
+            "total and the rest of this patch is inside it rather than on the screen. "
+            "IT IS ALSO WHAT THE PATCH LOOKS LIKE: general practice is commissioned one "
+            "practice at a time, so a single integrated care board re-letting its "
+            "enhanced services produces dozens of notices in two days while a whole year "
+            "of national activity produces a handful. SO THAT ONE ROUND OF LOCAL "
+            "PAPERWORK DOES NOT BECOME THE WHOLE PAGE, this panel - alone among the "
+            "Hub's speciality panels - limits any single buyer to twelve of its forty "
+            "display slots. That is a display rule and not a filter: nothing is removed "
+            "from the matched total, and the number of notices held back from the screen "
+            "is published as awardsWithheldByBuyerCap so a reader can see it was done. "
+            "A buyer is keyed on the name the notice carries, so a body that spells "
+            "itself two ways is treated as two buyers rather than guessed at."
+        ),
+        # 85121100 is CPV's own code for General practitioner services and 63 of the
+        # matching rows carry it, which makes it the most speciality-specific CPV family
+        # on any page here. It still only corroborates: 15 rows in this data carry it and
+        # are NOT general practice - echocardiography insourcing at Betsi Cadwaladr, MRI
+        # scanning at Herefordshire and Worcestershire, Home Office short-term holding
+        # facility healthcare, Government Commercial Agency occupational health, lung
+        # cancer screening at NHS Essex, Norfolk sexual health, two urgent treatment
+        # centres - and the title-match requirement is what keeps every one of them off
+        # this page.
+        "cpv": ("85121000", "85121100"),
+        # THE ONLY RULE IN THIS FILE THAT SETS A BUYER CAP, and it is here because this
+        # patch is commissioned one practice at a time. See build_awards for what the
+        # key does; the short version is that no single buyer may take more than twelve
+        # of the forty display slots, the count above is untouched, and the number
+        # withheld from the screen is published in counts.awardsWithheldByBuyerCap.
+        "buyerCap": 12,
+        # NO DRUG TARIFF PART. Part IX reimburses dressings and elastic hosiery (IXA),
+        # incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery
+        # (IXR). A GP signs the FP10 that reimburses all four, which is exactly why none
+        # of them is claimed here: the prescriber is not the speciality. Those lines
+        # belong to Tissue Viability and Wound Care and to Continence, Bladder and Bowel,
+        # and claiming them here would publish the same 56,833 IXA lines twice.
+        "coverageNote": (
+            "COVERAGE, STATED PLAINLY: this panel covers the COMMISSIONING of general "
+            "practice, which is what the procurement record holds. It does not and "
+            "cannot cover what an individual practice buys with its own money - "
+            "consumables, furniture, a spirometer, a blood pressure monitor - because a "
+            "practice is an independent contractor and its purchases are never published "
+            "as public notices. That is the largest part of the primary care market and "
+            "it is invisible to every source this page uses. Saying so is the finding; "
+            "the panel will not pad itself with other pages' frameworks to hide it."
+        ),
+    },
 
 }
 
@@ -7746,7 +7977,36 @@ def build_awards(rx, rule, th_doc, fa_doc):
             continue
         seen.add(k)
         uniq.append(r)
-    return uniq[:AWARD_CAP], len(uniq)
+
+    # OPT-IN BUYER CAP, AND IT IS A DISPLAY RULE ONLY. Some patches are commissioned
+    # one contract at a time, so a single buyer doing one round of work floods the
+    # feed: NHS South Yorkshire ICB published 56 GP Locally Commissioned Services
+    # awards, one per Sheffield practice, on 9 and 10 September 2026. Every one is
+    # genuine and every one is counted, but shown raw they take 36 of the 40 display
+    # slots and bury every other primary care contract in the country. A rule that
+    # sets "buyerCap" limits how many of ITS OWN matching rows any single buyer name
+    # may occupy on screen; the rest are withheld from the list, never from the count,
+    # and the number withheld is published in `counts` so the reader can see the
+    # trimming happened. NOTHING IS FILTERED OUT BY THIS: awardsMatched is unchanged.
+    # A rule that does not set the key behaves exactly as before, which is every rule
+    # but one.
+    cap = rule.get("buyerCap")
+    if not cap:
+        return uniq[:AWARD_CAP], len(uniq), 0
+    # The key is the buyer name as the notice publishes it. Where one body spells
+    # itself two ways - "NHS South Yorkshire ICB" and "NHS South Yorkshire Integrated
+    # Care Board" both appear - those are two keys and each gets its own allowance.
+    # Guessing that two strings are one organisation is exactly the kind of derived
+    # claim this repo refuses to make without a registry behind it.
+    shown, per_buyer, withheld = [], {}, 0
+    for r in uniq:
+        key = (r.get("buyer") or "").strip().lower()
+        if per_buyer.get(key, 0) >= cap:
+            withheld += 1
+            continue
+        per_buyer[key] = per_buyer.get(key, 0) + 1
+        shown.append(r)
+    return shown[:AWARD_CAP], len(uniq), withheld
 
 
 def build_open_tenders(rx, slug, ot_doc):
@@ -7863,7 +8123,7 @@ def build(slug, sources):
 
     frameworks = build_frameworks(rx, rule, fw_doc)
     suppliers = build_suppliers(frameworks, sources["registry"])
-    awards, award_total = build_awards(rx, rule, th_doc, fa_doc)
+    awards, award_total, awards_withheld = build_awards(rx, rule, th_doc, fa_doc)
     open_tenders = build_open_tenders(rx, slug, ot_doc)
     tariff = build_tariff(rule, dt_doc)
 
@@ -7989,6 +8249,7 @@ def build(slug, sources):
             "suppliersUnresolved": sum(1 for s in suppliers if not s["resolved"]),
             "awardsShown": len(awards),
             "awardsMatched": award_total,
+            "awardsWithheldByBuyerCap": awards_withheld,
             "openTenders": len(open_tenders),
         },
         "frameworks": frameworks,

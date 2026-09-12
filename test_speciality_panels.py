@@ -57,6 +57,7 @@ SEPSIS = "sepsis-and-the-deteriorating-patient"
 REHAB = "rehabilitation-prosthetics-and-orthotics"
 DIAB = "diabetes-and-endocrinology"
 MH = "mental-health"
+PRIMARY = "primary-care-and-general-practice"
 fails = []
 
 
@@ -6583,6 +6584,173 @@ check("the ligature rows are published", "ligature" in _mh_titles)
 check("the awards list is substantial rather than a token slice",
       mh["counts"]["awardsMatched"] >= 70, str(mh["counts"]["awardsMatched"]))
 check("mental health claims no open tender it cannot evidence", mh.get("openTenders") == [])
+
+
+# ---------------------------------------------------------------------------
+# PRIMARY CARE AND GENERAL PRACTICE. The first patch in this file that is a
+# SETTING rather than a product category, and the traps follow from that. Six are
+# guarded below: "emis" (the GP clinical system) matching "chemistry",
+# "biochemistry", "immunohistochemistry" and "emission"; "primary care
+# orthodontic", which is high-street dentistry wearing this page's words; a
+# secondary care drug contract that mentions handing shared care paperwork to
+# primary care; bare "health check", which reaches a statutory looked-after
+# children assessment; bare "enhanced services", which reaches community
+# pharmacy; and the urgent treatment centre and NHS 111 rows that belong to the
+# Emergency and Urgent Care page and must not appear on two pages at once.
+# The seventh trap is not a false positive at all but a flood: one integrated
+# care board published 56 practice-by-practice awards in two days, and without
+# the buyer cap they take 36 of the 40 display slots.
+# ---------------------------------------------------------------------------
+print("\nPRIMARY CARE AND GENERAL PRACTICE")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), PRIMARY],
+               check=True, capture_output=True)
+pc = load_panel(PRIMARY)
+check("panel is defined", pc.get("defined") is True)
+check("label is the page's own", pc["label"] == "Primary Care and General Practice")
+
+_pc_rule = B.SPECIALITY_RULES[PRIMARY]
+_pc_rx = B.compile_rule(_pc_rule)
+
+
+def _pc_absent(label, needle):
+    check("refused (%s): %s" % (label, needle[:52]), not B.match_title(_pc_rx, needle))
+
+
+def _pc_present(label, needle):
+    check("kept (%s): %s" % (label, needle[:52]), B.match_title(_pc_rx, needle))
+
+
+print("  no framework, no supplier list and no Drug Tariff part, and that is the finding")
+check("zero frameworks", pc["counts"]["frameworks"] == 0)
+check("zero suppliers", pc["counts"]["suppliers"] == 0)
+check("no Drug Tariff part is claimed", pc.get("drugTariff") is None)
+check("the frameworks rule names the one agreement that comes closest",
+      all(p in (pc["rules"]["frameworks"] or "")
+          for p in ["Laboratory Diagnostics, Point of Care Testing",
+                    "122 suppliers", "per agreement and never per lot"]))
+check("the frameworks rule says a care setting is not an NHSSC category",
+      "A CARE SETTING IS NOT ONE OF THEM" in (pc["rules"]["frameworks"] or ""))
+check("the coverage note admits what the procurement record cannot see",
+      "independent contractor" in (pc["rules"]["suppliers"] or ""))
+
+print("  every false positive that was read and thrown out")
+_pc_absent("dentistry, not general practice", "Primary Care Orthodontic Services")
+_pc_absent("dentistry, not general practice", "Primary Care Orthodontic Services Suffolk")
+_pc_absent("a secondary care drug contract, not a primary care one",
+           "Denosumab Therapy Outpatients (Short-term agreement) and provision of "
+           "Shared Care Documentation to Primary Care")
+
+print("  the 'emis' trap: the GP clinical system is a substring of chemistry and emission")
+for bad in ["V00625 Biochemistry Analysers and Associated Service, Consumables and "
+            "Reagents for Laboratories",
+            "WSFT - Pathology - Equipment & Reagents (Biochemistry)",
+            "Reagents for Immunohistochemistry",
+            "Provision of equipment, reagents and consumables for Immunohistochemistry",
+            "Inductively Coupled Plasma Optical Emission Spectrometer (ICP-OES)",
+            "X-ray Absorption/Emission Spectroscopy",
+            "School of Chemistry: Single-Crystal X-Ray Diffractometers",
+            "School of Chemistry: Supply of Two X-Ray Powder Diffractometers"]:
+    _pc_absent("'emis' would have matched this and it is not primary care", bad)
+
+print("  the loose terms that were refused rather than admitted and argued with")
+_pc_absent("bare 'health check' reaches a safeguarding assessment",
+           "NHS SY ICB - Initial Health Check for Looked After Children - Doncaster")
+_pc_absent("bare 'enhanced services' reaches community pharmacy",
+           "NHS South Yorkshire ICB - Pharmacy Local Enhanced Services - Heritage pharmacy")
+_pc_absent("bare 'federation' reaches the NHS Confederation",
+           "Waiver - BCHC - 1816 - NHS Confederation - NHS Alliance Membership")
+_pc_absent("'dispensing' is the Pharmacy and Medicines page's",
+           "Medicine Dispensing Lockers - Provision & Support")
+_pc_absent("'dispensing' is the Pharmacy and Medicines page's",
+           "On-going maintenance Hub & Spoke dispensing registration - BSA 2026/2027")
+_pc_absent("bare 'advice and guidance' reaches a mental health employment contract",
+           "North Central London ICB Mental Health Employment Support (Individual "
+           "Placement & Support, Information Advice and Guidance, and Employment Advisers)")
+_pc_absent("estates work on a health centre is capital, not general practice",
+           "Daybrook Health Centre - Consult Rooms")
+_pc_absent("estates work on a health centre is capital, not general practice",
+           "Heating System Upgrades at North Baddesley Health Centre")
+
+print("  no double-claiming: urgent care belongs to the Emergency and Urgent Care page")
+_pc_absent("urgent treatment centres are counted on page 2922",
+           "UHS Urgent Treatment Centre Clinical Service Provision")
+_pc_absent("urgent treatment centres are counted on page 2922",
+           "HHFT Urgent Treatment Centre Clinical Service Provision (3 + 2 years)")
+_pc_absent("NHS 111 and integrated urgent care are counted on page 2922",
+           "BLMK ICB Integrated Urgent Care (111 & Out of Hours) Service")
+_pc_absent("a children's palliative out-of-hours line is the palliative page's",
+           "West Yorkshire CYP Palliative and End of Life Care Out of Hours Service "
+           "- 24/7 Advice and Call-Out Support")
+
+print("  'GPS' is satellite navigation, and the singular token finds every real row")
+_pc_absent("the plural would admit fleet tracking and finds nothing here",
+           "Supply and Installation of GPS Vehicle Tracking Units")
+_pc_absent("Primary Care Network and Penalty Charge Notice share the acronym",
+           "PCN Enforcement and Debt Recovery Services")
+
+print("  the rows that must be there")
+_pc_present("a GP contract award", "Provision of GP Services")
+_pc_present("an APMS contract", "Luton Town Centre Surgery APMS Contract [Direct Award Process C]")
+_pc_present("GMS spelled out, which the acronym alone would have missed",
+            "Aberbeeg General Medical Services Contract")
+_pc_present("GMS spelled out, which the acronym alone would have missed",
+            "Provision of General Medical Services at Tollgate Practice, Colchester")
+_pc_present("the Special Allocations Service, which never says general practice",
+            "Special Allocations Service in Buckinghamshire")
+_pc_present("the NHS Health Check programme", "NHS Health Checks")
+_pc_present("locally commissioned services, on the GP token",
+            "NHS South Yorkshire ICB - GP Locally Commissioned Services Contract - Firth Park Surgery")
+
+_pc_titles = " || ".join((a.get("title") or "") for a in pc["awards"]).lower()
+check("no orthodontic row reached the published slice", "orthodontic" not in _pc_titles)
+check("no urgent treatment centre row reached the published slice",
+      "urgent treatment centre" not in _pc_titles)
+check("no chemistry or emission row reached the published slice",
+      "chemistry" not in _pc_titles and "emission" not in _pc_titles)
+check("the GP contract rows are published", "gp " in _pc_titles or " gp" in _pc_titles)
+check("the awards list is substantial rather than a token slice",
+      pc["counts"]["awardsMatched"] >= 70, str(pc["counts"]["awardsMatched"]))
+check("primary care claims no open tender it cannot evidence", pc.get("openTenders") == [])
+
+print("  the buyer cap is a display rule and nothing is filtered out by it")
+check("this is the only rule in the file that sets a buyer cap",
+      [s for s, r in B.SPECIALITY_RULES.items() if r.get("buyerCap")] == [PRIMARY])
+_pc_buyers = {}
+for _a in pc["awards"]:
+    _k = (_a.get("buyer") or "").strip().lower()
+    _pc_buyers[_k] = _pc_buyers.get(_k, 0) + 1
+check("no single buyer takes more than its twelve display slots",
+      max(_pc_buyers.values()) <= _pc_rule["buyerCap"], str(max(_pc_buyers.values())))
+check("the flood no longer fills the panel: at least fifteen distinct buyers are shown",
+      len(_pc_buyers) >= 15, str(len(_pc_buyers)))
+check("the withheld notices are counted, not silently dropped",
+      pc["counts"]["awardsShown"] + pc["counts"]["awardsWithheldByBuyerCap"]
+      == min(pc["counts"]["awardsMatched"], B.AWARD_CAP + pc["counts"]["awardsWithheldByBuyerCap"]))
+check("awardsWithheldByBuyerCap is published and non-zero on this patch",
+      pc["counts"].get("awardsWithheldByBuyerCap", 0) > 0,
+      str(pc["counts"].get("awardsWithheldByBuyerCap")))
+check("the matched total is untouched by the cap", pc["counts"]["awardsMatched"] == 81,
+      str(pc["counts"]["awardsMatched"]))
+check("the awards rule tells the reader the cap was applied",
+      "twelve of its forty" in (pc["rules"]["awards"] or "")
+      and "awardsWithheldByBuyerCap" in (pc["rules"]["awards"] or ""))
+
+print("  no other panel is touched by the buyer cap")
+for _slug in sorted(B.SPECIALITY_RULES):
+    if _slug == PRIMARY:
+        continue
+    check("%s sets no buyer cap" % _slug, B.SPECIALITY_RULES[_slug].get("buyerCap") is None)
+
+print("  CPV corroborates and never admits, and this is the page that proves it")
+check("the GP services CPV family is recorded", _pc_rule["cpv"] == ("85121000", "85121100"))
+for bad in ["BCU-FCONC-64071 - Echocardiography Service - Insourcing",
+            "Pre-engagement for MRI Scanning Services for Herefordshire and Worcestershire",
+            "Healthcare at Short-Term Holding Facilities",
+            "Employee Benefits and Occupational Health Services",
+            "Lung Cancer Screening - DAP C",
+            "Global Tuberculosis Screening Service",
+            "Level 2 Sexual Health Services - Breckland/South Norfolk"]:
+    _pc_absent("carries the GP services CPV and is not general practice", bad)
 
 
 _EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS, DERM, ONC, PAIN, DIGITAL}
