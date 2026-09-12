@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-11",
+ "lastRun": "2026-09-12",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -294,7 +294,19 @@
   "Inotec AMD (Natrox)",
   "Inpress Precision Limited",
   "Insight Direct",
-  "Insight Medical Products Limited"
+  "Insight Medical Products Limited",
+  "Inspiration Healthcare",
+  "Inspire Community Trust",
+  "Intelerad Medical Systems",
+  "Intersystems",
+  "iRhythm Technologies Ltd",
+  "Iskus Health UK Limited",
+  "ITL Australia Pty Ltd",
+  "It’s Interventional Limited",
+  "J & M Medical",
+  "J Heinz Foods UK Limited",
+  "joimax UK",
+  "Judd Medical Ltd"
  ],
  "refusals": [
   {
@@ -616,6 +628,26 @@
    "name": "Insight Direct",
    "reason": "Three distinct Companies House entities share the \"Insight Direct\" prefix — Insight Direct (UK) Ltd (02579852, 100% owned by Insight Enterprises (UK) Ltd), Insight Direct (GB) Limited (03604424), and Insight Direct (Services) Limited (03525219) — and the seed's own name (\"Insight Direct\", no parenthetical) does not match any one of them exactly. The company's own site (uk.insight.com) uses only \"Insight UK\" and the bare word \"Insight\", neither of which is safe to add: \"Insight\" is a single generic word, not the whole canonical name, and it is also the name of the wider Insight Enterprises group — adding it risks exactly the parent/group-vs-subsidiary conflation the process forbids. No alias added.",
    "date": "2026-09-11"
+  },
+  {
+   "name": "Intersystems",
+   "reason": "The supplier's own canonical name IS the single word \"Intersystems\", which already matches on its own under press_match.py's rule 2 (a single token that equals the whole canonical name stands for it) — there is no shortening gap to fill. Checked intersystems.com (own site, 12/09/2026): the company presents as \"InterSystems\" throughout with no additional legal suffix in the footer/header content available. A UK Companies House search for \"intersystems\" (12/09/2026) found no active UK entity clearly matching InterSystems Corporation (the two active near-matches, INTERSYSTEMS BR000524 and Apollo Intersystems Ltd 12042115, are not evidenced as the same company). No verifiable extra name form that would change matching.",
+   "date": "2026-09-12"
+  },
+  {
+   "name": "Iskus Health UK Limited",
+   "reason": "Iskus Health UK has been integrated into Fannin UK — confirmed via multiple trade press reports (Healthcare Packaging, PharmiWeb, Digital Health News, 2026) of \"Fannin UK Completes Its Integration With ISKUS Health UK\", and the record's own existing link already points to fannin.eu. Fannin is now the parent/absorbing company, so recording \"Fannin\" as an alias of \"Iskus Health UK Limited\" would be exactly the parent/subsidiary conflation root rule 8 (and this task's rule 4) forbids. No other distinct, verifiable name form found.",
+   "date": "2026-09-12"
+  },
+  {
+   "name": "ITL Australia Pty Ltd",
+   "reason": "Could not verify on a named source that \"ITL Australia Pty Ltd\" (ABN 22 619 636 127, confirmed via TGA sponsor listing and ABN Lookup) is the operating entity behind the \"ITL BioMedical\" brand (itlbiomedical.com) — that site names only \"ITL BioMedical\" in its footer with no ABN or legal-entity confirmation, and the TGA sponsor detail page timed out on fetch. \"ITL\" is also used by unrelated groups of the same family tree (ITL Health Group Ltd / ASX:ITD, ITL Cosmos Group), so a single-token or brand alias would risk attributing another entity's coverage. No alias added without a source directly confirming the link.",
+   "date": "2026-09-12"
+  },
+  {
+   "name": "Judd Medical Ltd",
+   "reason": "Checked judd-medical.co.uk (own site, footer, 12/09/2026): trades as \"Judd Medical Limited\" / \"Judd Medical\", and Companies House confirms JUDD MEDICAL LTD, company no. 03323507 — both already fully covered by the existing name/alias \"Judd Medical Ltd\". No additional distinct name form found on the company's own site, Companies House, or its NHS Supply Chain framework records.",
+   "date": "2026-09-12"
   }
  ],
  "sources": {
