@@ -73,7 +73,7 @@ low coverage there means exhausted, not neglected.
 | Clinical and Sharps Waste Management | infection | 14 | 3 | 21.4% | 5 | 11 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 2 | 15.4% | 3 | 9 | STARTED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | 4 | 7 | STARTED |
-| Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 4 | 8 | STARTED |
+| Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 3 | 9 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 4 | 33.3% | 2 | 7 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 5 | 5 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 3 | 6 | STARTED |
