@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-02",
-  "differentiator.json published": 34291,
-  "differentiator.json held": 47626
+  "differentiator.json published": 34392,
+  "differentiator.json held": 47809
  },
  "counts": {
   "frameworks": 121,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 448,
-  "inScopeSuppliersNeedingCrawl": 488,
-  "inScopeSuppliersNeedingDomain": 451,
-  "suppliersRefused": 362,
+  "inScopeSuppliersNeedingCrawl": 475,
+  "inScopeSuppliersNeedingDomain": 437,
+  "suppliersRefused": 371,
   "suppliersRefusedButPublishingElsewhere": 100,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -3291,10 +3291,6 @@
      "domain": null
     },
     {
-     "supplier": "Praxis Medical Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Prestige Health Footwear Ltd",
      "domain": null
     },
@@ -3322,7 +3318,6 @@
     "Ossur UK Limited",
     "Piedro Ltd",
     "Podopro UK Ltd",
-    "Praxis Medical Ltd",
     "Prestige Health Footwear Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -3504,12 +3499,12 @@
    ],
    "actionable": {
     "unresolvedNames": 3,
-    "publishedElsewhereNeedingCategory": 7,
+    "publishedElsewhereNeedingCategory": 8,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 1,
-    "needDomain": 20
+    "needDomain": 19
    },
    "published": [
     "Allard Support UK Limited",
@@ -3535,6 +3530,7 @@
     "Joint Operations",
     "L&R Medical / Activa (Lohmann & Rauscher)",
     "Peacocks Medical Group",
+    "Praxis Medical Ltd",
     "Purple Surgical",
     "Win Health Medical Ltd"
    ],
@@ -3562,7 +3558,6 @@
     "Medfac UK Ltd",
     "Ossur UK Limited",
     "Piedro Ltd",
-    "Praxis Medical Ltd",
     "Prestige Health Footwear Ltd",
     "Darco UK Ltd (formerly V-M Orthotics Ltd)"
    ],
@@ -4358,8 +4353,8 @@
    "category": "Rehabilitation and Community",
    "ends": "30 June 2027",
    "suppliersAwarded": 57,
-   "suppliersPublished": 10,
-   "coverage": 17.5,
+   "suppliersPublished": 14,
+   "coverage": 24.6,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -4377,85 +4372,26 @@
      "domain": "henleysmed.com"
     },
     {
-     "supplier": "Bridea Medical B.V",
-     "domain": null
-    },
-    {
-     "supplier": "Ceannaire Medical",
-     "domain": null
-    },
-    {
-     "supplier": "Espere Healthcare Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Henry Schien Medical",
-     "domain": null
-    },
-    {
-     "supplier": "LTC Healthcare (Leeds Trading Company)",
-     "domain": null
-    },
-    {
-     "supplier": "Lil-Lets UK Limited",
-     "domain": null
-    },
-    {
      "supplier": "Organon UK",
-     "domain": null
-    },
-    {
-     "supplier": "Parburch Medical Developments Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Pioneer Medical Europe Limited",
-     "domain": null
-    },
-    {
-     "supplier": "Praxis Medical Ltd",
-     "domain": null
+     "domain": "organon.com"
     },
     {
      "supplier": "Sxwell UK Limited",
      "domain": null
-    },
-    {
-     "supplier": "Viveca Biomed Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Bray Group Limited",
-     "domain": null
-    },
-    {
-     "supplier": "Durbin Plc",
-     "domain": null
-    },
-    {
-     "supplier": "Viomedex Ltd",
-     "domain": null
     }
    ],
    "domainsMissing": [
-    "Bray Group Limited",
-    "Bridea Medical B.V",
-    "Ceannaire Medical",
-    "Durbin Plc",
-    "Espere Healthcare Ltd",
-    "Henry Schien Medical",
-    "LTC Healthcare (Leeds Trading Company)",
-    "Lil-Lets UK Limited",
-    "Organon UK",
-    "Parburch Medical Developments Ltd",
-    "Pioneer Medical Europe Limited",
-    "Praxis Medical Ltd",
-    "Sxwell UK Limited",
-    "Viomedex Ltd",
-    "Viveca Biomed Ltd"
+    "Sxwell UK Limited"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "Ceannaire Medical",
+     "domain": "ceannairemedical.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-12",
+     "bucket": "refused"
+    },
     {
      "supplier": "Dpek Healthcare Ltd",
      "domain": "dpekhealthcare.co.uk",
@@ -4468,6 +4404,13 @@
      "domain": "elementalhealthcare.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-06",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Espere Healthcare Ltd",
+     "domain": "esperehealth.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-12",
      "bucket": "refused"
     },
     {
@@ -4485,6 +4428,27 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Henry Schien Medical",
+     "domain": "henryschein.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-12",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "LTC Healthcare (Leeds Trading Company)",
+     "domain": "ltchealthcare.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-12",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Lil-Lets UK Limited",
+     "domain": "lil-lets.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 500: Internal Server Error)",
+     "checked": "2026-09-12",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Medical Devices Technology Inter Ltd",
      "domain": "mdti.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -4496,6 +4460,13 @@
      "domain": "oscartech-uk.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Parburch Medical Developments Ltd",
+     "domain": "parburchmedical.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-12",
      "bucket": "refused"
     },
     {
@@ -4520,6 +4491,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Viveca Biomed Ltd",
+     "domain": "vivecabiomed.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-12",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Williams Medical Supplies",
      "domain": "wms.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -4534,10 +4512,24 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Durbin Plc",
+     "domain": "durbinglobal.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-12",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Valley Northern Ltd",
      "domain": "valleynorthern.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Viomedex Ltd",
+     "domain": "viomedex.com",
+     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-12",
      "bucket": "refused"
     },
     {
@@ -4608,15 +4600,16 @@
    "actionable": {
     "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 16,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 15
+    "needDomain": 1
    },
    "published": [
     "Argon Medical Devices UK Ltd",
     "Bodywise (UK) Ltd",
+    "Bridea Medical B.V",
     "Pelvic Relief",
     "Farla Medical",
     "iMEDicare Ltd",
@@ -4624,7 +4617,10 @@
     "Medicare Colgate Ltd (Sterifeed)",
     "Mediplus Ltd",
     "Pasante Healthcare",
-    "Trion Pharma Limited"
+    "Pioneer Medical Europe Limited",
+    "Praxis Medical Ltd",
+    "Trion Pharma Limited",
+    "Bray Group Limited"
    ],
    "publishedElsewhere": [
     "B. Braun Medical",
@@ -4647,44 +4643,40 @@
    "heldOnly": [
     "Croyde Medical",
     "Healthcare 25 Ltd",
-    "Henleys Medical Supplies Limited"
+    "Henleys Medical Supplies Limited",
+    "Organon UK"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Bridea Medical B.V",
+    "Sxwell UK Limited"
+   ],
+   "refused": [
     "Ceannaire Medical",
+    "Dpek Healthcare Ltd",
+    "Elemental Healthcare Ltd",
     "Espere Healthcare Ltd",
+    "Eurosurgical Ltd",
+    "GenX MediCare Ltd",
     "Henry Schien Medical",
     "LTC Healthcare (Leeds Trading Company)",
     "Lil-Lets UK Limited",
-    "Organon UK",
-    "Parburch Medical Developments Ltd",
-    "Pioneer Medical Europe Limited",
-    "Praxis Medical Ltd",
-    "Sxwell UK Limited",
-    "Viveca Biomed Ltd",
-    "Bray Group Limited",
-    "Durbin Plc",
-    "Viomedex Ltd"
-   ],
-   "refused": [
-    "Dpek Healthcare Ltd",
-    "Elemental Healthcare Ltd",
-    "Eurosurgical Ltd",
-    "GenX MediCare Ltd",
     "Medical Devices Technology Inter Ltd",
     "OscarTech UK",
+    "Parburch Medical Developments Ltd",
     "RB Medical Engineering Ltd",
     "Rocialle Healthcare",
     "Unisurge International Limited",
+    "Viveca Biomed Ltd",
     "Williams Medical Supplies",
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
-    "Valley Northern Ltd"
+    "Durbin Plc",
+    "Valley Northern Ltd",
+    "Viomedex Ltd"
    ],
    "unknown": [
     "Kimal Renal Care"
    ],
-   "actionableTotal": 35,
+   "actionableTotal": 22,
    "blockedReason": null
   },
   {
@@ -9794,10 +9786,6 @@
      "domain": null
     },
     {
-     "supplier": "Praxis Medical Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Thera Trainer UK Ltd",
      "domain": null
     }
@@ -9807,7 +9795,6 @@
     "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
     "Medinox (London) Limited",
     "Phoenix Medical Ltd",
-    "Praxis Medical Ltd",
     "Thera Trainer UK Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -9898,12 +9885,12 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 4,
+    "publishedElsewhereNeedingCategory": 5,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 6
+    "needDomain": 5
    },
    "published": [
     "Crest Medical Ltd",
@@ -9916,6 +9903,7 @@
     "DJO UK Ltd (Enovis)",
     "Medline Industries",
     "Orca Medical Ltd",
+    "Praxis Medical Ltd",
     "Reliance Medical"
    ],
    "heldOnly": [
@@ -9927,7 +9915,6 @@
     "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
     "Medinox (London) Limited",
     "Phoenix Medical Ltd",
-    "Praxis Medical Ltd",
     "Thera Trainer UK Ltd"
    ],
    "refused": [
@@ -9959,10 +9946,6 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Praxis Medical Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Unomedical Ltd",
      "domain": null
     },
@@ -9976,7 +9959,6 @@
     }
    ],
    "domainsMissing": [
-    "Praxis Medical Ltd",
     "TLB Medical Supplies",
     "Unomedical Ltd",
     "William Davies Care Limited"
@@ -10051,12 +10033,12 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 4
+    "needDomain": 3
    },
    "published": [
     "B. Braun Medical",
@@ -10072,13 +10054,13 @@
    ],
    "publishedElsewhere": [
     "Fannin (UK) Limited",
+    "Praxis Medical Ltd",
     "Nipro Medical Europe",
     "Reliance Medical"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Praxis Medical Ltd",
     "Unomedical Ltd",
     "TLB Medical Supplies",
     "William Davies Care Limited"
@@ -12575,17 +12557,12 @@
      "domain": null
     },
     {
-     "supplier": "Praxis Medical Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Slik-Pak Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
     "Berry BPI Recycled Products",
-    "Praxis Medical Ltd",
     "Slik-Pak Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -12597,23 +12574,24 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 0,
+    "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 2
    },
    "published": [
     "GV Health",
     "Polystar Plastics Ltd"
    ],
-   "publishedElsewhere": [],
+   "publishedElsewhere": [
+    "Praxis Medical Ltd"
+   ],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Berry BPI Recycled Products",
-    "Praxis Medical Ltd",
     "Slik-Pak Ltd"
    ],
    "refused": [],
@@ -13715,10 +13693,6 @@
      "domain": null
     },
     {
-     "supplier": "Henry Schien Medical",
-     "domain": null
-    },
-    {
      "supplier": "Marsden Weighing Machine Co Ltd",
      "domain": null
     },
@@ -13742,7 +13716,6 @@
    "domainsMissing": [
     "Alivecor Ltd",
     "GM Instruments",
-    "Henry Schien Medical",
     "Marsden Weighing Machine Co Ltd",
     "Schuco International (London) Ltd",
     "Sterimed Medical Implants UK Ltd",
@@ -13777,6 +13750,13 @@
      "domain": "hce-uk.com",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Henry Schien Medical",
+     "domain": "henryschein.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-12",
      "bucket": "refused"
     },
     {
@@ -13894,7 +13874,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 8
+    "needDomain": 7
    },
    "published": [],
    "publishedElsewhere": [
@@ -13925,7 +13905,6 @@
    "notCrawled": [
     "Alivecor Ltd",
     "GM Instruments",
-    "Henry Schien Medical",
     "Marsden Weighing Machine Co Ltd",
     "Schuco International (London) Ltd",
     "Sterimed Medical Implants UK Ltd",
@@ -13937,6 +13916,7 @@
     "Albert Waeschle Ltd",
     "GE HealthCare",
     "Health-Care Equipment & Supplies",
+    "Henry Schien Medical",
     "Kinetik Medical Devices",
     "PD Neurotechnology Ltd",
     "PMS (Instruments) Ltd",
@@ -13948,7 +13928,7 @@
    "unknown": [
     "KCI Medical Ltd (3M)"
    ],
-   "actionableTotal": 29,
+   "actionableTotal": 28,
    "blockedReason": null
   },
   {
@@ -14624,10 +14604,6 @@
      "domain": null
     },
     {
-     "supplier": "Praxis Medical Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Sentec Medical Ltd",
      "domain": null
     }
@@ -14635,7 +14611,6 @@
    "domainsMissing": [
     "Kinetic Medical Devices Ltd",
     "Med Matters Ltd",
-    "Praxis Medical Ltd",
     "Sentec Medical Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -14701,12 +14676,12 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 2,
-    "publishedElsewhereNeedingCategory": 16,
+    "publishedElsewhereNeedingCategory": 17,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 4
+    "needDomain": 3
    },
    "published": [],
    "publishedElsewhere": [
@@ -14719,6 +14694,7 @@
     "Mindray UK",
     "Orca Medical Ltd",
     "Philips",
+    "Praxis Medical Ltd",
     "Proact Medical Ltd",
     "Radiometer UK",
     "Rudolf Riester GmbH",
@@ -14734,7 +14710,6 @@
    "notCrawled": [
     "Kinetic Medical Devices Ltd",
     "Med Matters Ltd",
-    "Praxis Medical Ltd",
     "Sentec Medical Ltd"
    ],
    "refused": [
@@ -15124,17 +15099,12 @@
     {
      "supplier": "Neo-Innovations UK Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Praxis Medical Ltd",
-     "domain": null
     }
    ],
    "domainsMissing": [
     "Gardamed Ltd - Mego Afek",
     "Griffiths and Nielsen Ltd",
-    "Neo-Innovations UK Ltd",
-    "Praxis Medical Ltd"
+    "Neo-Innovations UK Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -15213,12 +15183,12 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 4,
-    "publishedElsewhereNeedingCategory": 10,
+    "publishedElsewhereNeedingCategory": 11,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 4
+    "needDomain": 3
    },
    "published": [],
    "publishedElsewhere": [
@@ -15230,6 +15200,7 @@
     "L&R Medical / Activa (Lohmann & Rauscher)",
     "Medalin Limited",
     "medi UK",
+    "Praxis Medical Ltd",
     "Thuasne UK Ltd",
     "Urgo Medical"
    ],
@@ -15240,8 +15211,7 @@
    "notCrawled": [
     "Gardamed Ltd - Mego Afek",
     "Griffiths and Nielsen Ltd",
-    "Neo-Innovations UK Ltd",
-    "Praxis Medical Ltd"
+    "Neo-Innovations UK Ltd"
    ],
    "refused": [
     "Global Health and Safety Ltd",
@@ -17782,17 +17752,12 @@
      "domain": null
     },
     {
-     "supplier": "Praxis Medical Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Warwick SASCo Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
     "Continuum Scotland Ltd",
-    "Praxis Medical Ltd",
     "Warwick SASCo Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -17830,23 +17795,23 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 2
    },
    "published": [],
    "publishedElsewhere": [
     "MedScience Distribution",
+    "Praxis Medical Ltd",
     "Vernacare"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Continuum Scotland Ltd",
-    "Praxis Medical Ltd",
     "Warwick SASCo Ltd"
    ],
    "refused": [
@@ -19055,16 +19020,11 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "Bray Group Limited",
-     "domain": null
-    },
-    {
      "supplier": "Origio Limited",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Bray Group Limited",
     "Origio Limited"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -19073,21 +19033,21 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [],
    "publishedElsewhere": [
+    "Bray Group Limited",
     "Trion Pharma Limited"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Bray Group Limited",
     "Origio Limited"
    ],
    "refused": [],
@@ -19248,16 +19208,11 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Praxis Medical Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Premium Wipes & Textiles Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Praxis Medical Ltd",
     "Premium Wipes & Textiles Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -19328,12 +19283,12 @@
    ],
    "actionable": {
     "unresolvedNames": 43,
-    "publishedElsewhereNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [
     "Crest Medical Ltd",
@@ -19345,12 +19300,12 @@
     "Tristel Solutions Limited"
    ],
    "publishedElsewhere": [
-    "Kimberly Clark"
+    "Kimberly Clark",
+    "Praxis Medical Ltd"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Praxis Medical Ltd",
     "Premium Wipes & Textiles Ltd"
    ],
    "refused": [
@@ -19443,16 +19398,11 @@
     {
      "supplier": "Ocura Healthcare Furniture",
      "domain": null
-    },
-    {
-     "supplier": "Praxis Medical Ltd",
-     "domain": null
     }
    ],
    "domainsMissing": [
     "Denward Manufacturing",
-    "Ocura Healthcare Furniture",
-    "Praxis Medical Ltd"
+    "Ocura Healthcare Furniture"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -19510,12 +19460,12 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 28,
-    "publishedElsewhereNeedingCategory": 12,
+    "publishedElsewhereNeedingCategory": 13,
     "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 2
    },
    "published": [],
    "publishedElsewhere": [
@@ -19528,6 +19478,7 @@
     "Hospital Services Limited",
     "Medi-Plinth Equipment",
     "Medstrom",
+    "Praxis Medical Ltd",
     "Renray Healthcare",
     "Roma Medical Aids Ltd",
     "Stryker"
@@ -19540,8 +19491,7 @@
    "capturedNothingCounted": [],
    "notCrawled": [
     "Denward Manufacturing",
-    "Ocura Healthcare Furniture",
-    "Praxis Medical Ltd"
+    "Ocura Healthcare Furniture"
    ],
    "refused": [
     "Banner Group Limited",
@@ -20422,15 +20372,8 @@
    "outOfScopeReason": "estates, catering and office supply \u2014 outside the Hub's medical sales audience",
    "state": "OUT OF SCOPE",
    "speciality": [],
-   "crawlWorklist": [
-    {
-     "supplier": "Praxis Medical Ltd",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Praxis Medical Ltd"
-   ],
+   "crawlWorklist": [],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
@@ -20459,20 +20402,20 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 13,
-    "publishedElsewhereNeedingCategory": 0,
+    "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 0
    },
    "published": [],
-   "publishedElsewhere": [],
-   "heldOnly": [],
-   "capturedNothingCounted": [],
-   "notCrawled": [
+   "publishedElsewhere": [
     "Praxis Medical Ltd"
    ],
+   "heldOnly": [],
+   "capturedNothingCounted": [],
+   "notCrawled": [],
    "refused": [
     "Arrow County Supplies",
     "Banner Group Limited",

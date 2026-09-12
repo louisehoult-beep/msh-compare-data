@@ -38,7 +38,7 @@ low coverage there means exhausted, not neglected.
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 16 | 25.4% | 33 | 23 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 11 | 18.3% | 39 | 20 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 15 | 25.9% | 33 | 20 | STARTED |
-| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 10 | 17.5% | 35 | 20 | STARTED |
+| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 14 | 24.6% | 22 | 29 | STARTED |
 | Urology and Bowel Management | continence | 57 | 18 | 31.6% | 30 | 30 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 20 | 36 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 7 | 13.0% | 11 | 43 | STARTED |
@@ -89,7 +89,7 @@ low coverage there means exhausted, not neglected.
 | Non-Imaging Vibration Controlled Ultrasound System | ultrasound | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 40 | 25 | UNMAPPED |
 | Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 39 | 22 | UNMAPPED |
-| Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 29 | 19 | UNMAPPED |
+| Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 28 | 20 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 31 | 16 | UNMAPPED |
 | Procedure Packs | — | 29 | 0 | 0.0% | 19 | 16 | UNMAPPED |
 | Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics | — | 28 | 0 | 0.0% | 24 | 7 | UNMAPPED |
