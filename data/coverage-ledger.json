@@ -24,10 +24,10 @@
   "unmapped": 47,
   "outOfScope": 20,
   "inScope": 101,
-  "supplierNamesUnresolved": 448,
+  "supplierNamesUnresolved": 446,
   "inScopeSuppliersNeedingCrawl": 474,
   "inScopeSuppliersNeedingDomain": 436,
-  "suppliersRefused": 372,
+  "suppliersRefused": 374,
   "suppliersRefusedButPublishingElsewhere": 100,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -656,14 +656,6 @@
   ],
   [
    "Tennant UK",
-   1
-  ],
-  [
-   "Core Surgical Limited",
-   1
-  ],
-  [
-   "Mainline Instruments Ltd",
    1
   ],
   [
@@ -6011,6 +6003,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Core Surgical Limited",
+     "domain": "coresurgical.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-12",
+     "bucket": "refused"
+    },
+    {
      "supplier": "D.O.R.C.",
      "domain": "www.dorc.eu",
      "reason": "the site's WordPress API returned HTTP 503; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -6029,6 +6028,13 @@
      "domain": "solventum.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-26",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Mainline Instruments Ltd",
+     "domain": "main-line.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-12",
      "bucket": "refused"
     },
     {
@@ -6132,7 +6138,7 @@
     "ophthalmology:optom"
    ],
    "actionable": {
-    "unresolvedNames": 2,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 7,
     "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
@@ -6191,9 +6197,11 @@
     "Accrington Surgical Instrument Suppliers Ltd",
     "Albert Waeschle Ltd",
     "BVM Medical Ltd",
+    "Core Surgical Limited",
     "D.O.R.C.",
     "Hanson Instruments Ltd",
     "Solventum (3M Health Care)",
+    "Mainline Instruments Ltd",
     "Optos",
     "OscarTech UK",
     "RB Medical Engineering Ltd",
@@ -6202,11 +6210,8 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
     "Unisurge International Limited"
    ],
-   "unknown": [
-    "Core Surgical Limited",
-    "Mainline Instruments Ltd"
-   ],
-   "actionableTotal": 30,
+   "unknown": [],
+   "actionableTotal": 28,
    "blockedReason": null
   },
   {

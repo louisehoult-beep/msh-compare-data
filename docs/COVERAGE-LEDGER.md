@@ -42,7 +42,7 @@ low coverage there means exhausted, not neglected.
 | Urology and Bowel Management | continence | 57 | 18 | 31.6% | 30 | 30 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 20 | 36 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 7 | 13.0% | 11 | 43 | STARTED |
-| Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 10 | 18.9% | 30 | 19 | STARTED |
+| Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 10 | 18.9% | 28 | 21 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 17 | 22 | STARTED |
 | Surgical Instruments | surgical | 50 | 11 | 22.0% | 21 | 22 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 9 | 20.9% | 27 | 14 | STARTED |
