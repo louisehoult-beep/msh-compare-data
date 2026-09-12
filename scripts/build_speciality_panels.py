@@ -7353,7 +7353,7 @@ SPECIALITY_RULES = {
         ),
     },
 
-    # PAGE 2912. Scope, in the page's own words: "Community and acute mental health.
+    # PAGE 2923. Scope, in the page's own words: "Community and acute mental health.
     # There is no NHS Supply Chain mental health framework and no mental health product
     # range - the money is in medicines pharmacy buys, and in the estate." This rule is
     # written to that scope and not one inch wider.
@@ -7366,9 +7366,11 @@ SPECIALITY_RULES = {
     # is zero, and the supplier count is zero with it. That is the finding, not a gap.
     "mental-health": {
         "label": "Mental Health",
-        # NO NHS SUPPLY CHAIN FRAMEWORK. All 121 framework names in frameworks.json
-        # were read this session and not one is mental health; NHS Supply Chain has no
-        # mental health category either. The only agreement that touches the patch is
+        # NO NHS SUPPLY CHAIN FRAMEWORK. frameworks.json holds all 140 contract launch
+        # briefs NHS Supply Chain publishes: 121 parsed framework names, 16 the crawler
+        # could not parse and 3 expired. All three lists were searched this session and
+        # not one name is mental health; NHS Supply Chain has no mental health category
+        # either. The only agreement that touches the patch is
         # Medical Healthcare Furniture, and it is NAMED in frameworksFinding rather than
         # claimed, for the reason the dermatology rule sets out: frameworks.json records
         # suppliers per AGREEMENT and never per lot, so claiming it would publish all 51
@@ -7381,9 +7383,10 @@ SPECIALITY_RULES = {
         "frameworksFinding": {
             "frameworks": (
                 "NO NHS SUPPLY CHAIN FRAMEWORK IS COUNTED HERE, AND THAT IS THE FINDING "
-                "RATHER THAN A GAP. All 121 framework names in the Hub's record were read "
-                "and not one of them is mental health; NHS Supply Chain runs no mental "
-                "health category. ONE AGREEMENT TOUCHES THIS PATCH AND IT IS NAMED HERE "
+                "RATHER THAN A GAP. The Hub's record covers all 140 contract launch briefs "
+                "NHS Supply Chain publishes - 121 parsed framework names, 16 unparsed and "
+                "3 expired - and all three lists were searched: not one name is mental "
+                "health, and NHS Supply Chain runs no mental health category. ONE AGREEMENT TOUCHES THIS PATCH AND IT IS NAMED HERE "
                 "RATHER THAN COUNTED: Medical Healthcare Furniture, reference 2024/S "
                 "000-025534, category Facilities and Office Solutions, starting 12 May "
                 "2025 and ending 11 May 2027 with an option to extend a further 24 "
