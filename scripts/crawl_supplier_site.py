@@ -988,12 +988,95 @@ def _page_title(body):
     return t or None
 
 
+def _jsonld_breadcrumb_division(body, root_host=None):
+    """The site's own filing, read from a JSON-LD BreadcrumbList — the OTHER
+    convention sites use for the same schema.org markup that
+    _BREADCRUMB_CONTAINER reads out of visible HTML.
+
+    Confirmed missing 12/09/2026 on sensemedical.co.uk: every product page
+    embeds a Yoast SEO `<script type="application/ld+json" class="yoast-
+    schema-graph">` block whose `@graph` array carries a `BreadcrumbList`
+    node with a real `itemListElement` trail ("Our Products" > "Optical
+    Coherence Tomography (OCT)") — genuine, well-formed schema.org data,
+    just never rendered into the page as an HTML element, so the existing
+    HTML-container read found nothing and the whole 20-product range
+    published as one flat "Uncategorised" division.
+
+    Yoast (and other SEO plugins) commonly wrap several schema.org node
+    types in one `@graph` array per page, so this reads every ld+json block
+    on the page and returns the first BreadcrumbList's second-or-later crumb
+    (dropping the first exactly as the HTML route drops "Home"/"Products"/
+    the bare site root) — same contract, same crumb-picking rule, different
+    place to find it. A page with no such block, or one that fails to parse
+    as JSON, returns None and the caller falls through to the HTML route
+    unchanged."""
+    for m in re.finditer(
+            r"""<script[^>]*type=["']application/ld\+json["'][^>]*>(.*?)</script>""",
+            body, re.S | re.I):
+        try:
+            data = json.loads(m.group(1))
+        except Exception:
+            continue
+        nodes = data if isinstance(data, list) else data.get("@graph", [data])
+        for node in nodes:
+            if not isinstance(node, dict) or node.get("@type") != "BreadcrumbList":
+                continue
+            items = sorted((node.get("itemListElement") or []),
+                            key=lambda it: it.get("position", 0))
+            crumbs = []
+            for it in items:
+                t = clean(it.get("name") or "")
+                if not t:
+                    continue
+                # The LAST crumb (the current page) legitimately carries NO
+                # "item" URL at all per the schema.org spec — it is not a
+                # link. Confirmed 12/09/2026 on sensemedical.co.uk: dropping
+                # every href-less crumb as if it were the root took the
+                # terminal, real-division crumb out along with genuine home
+                # links. Only an href that is PRESENT and resolves to the
+                # root counts as a root link; an absent href is judged by
+                # wording alone, same as the HTML route for a home crumb
+                # that is not itself a link.
+                #
+                # "ROOT" INCLUDES THE GENERIC CATALOGUE PAGE, NOT JUST THE
+                # BARE DOMAIN (12/09/2026). Sense Medical's own crumb reads
+                # "Our Products" and links to /products/ — one path segment
+                # deep, so a bare host-equality check let it through as a
+                # real division and it beat the genuine one to crumbs[0].
+                # Reusing PRODUCT_PATHS (the same generic segments the
+                # sitemap route already treats as non-product) catches this
+                # structurally, the same way the HTML route's own word list
+                # catches "Products" by wording — this is the JSON-LD
+                # equivalent, checked by link target instead of text so it
+                # is not defeated by a company's own phrasing of the same
+                # generic page ("Our Products", "Product Range", ...).
+                href = str(it.get("item") or "").strip()
+                is_root_link = False
+                if href:
+                    h_path = re.sub(r"^https?://(www\.)?", "", href, flags=re.I)
+                    h_host, _, h_rest = h_path.partition("/")
+                    h_rest = h_rest.strip("/").lower()
+                    is_root_link = (
+                        (root_host and h_host.lower() == root_host)
+                        and (not h_rest or h_rest in PRODUCT_PATHS)
+                    )
+                if is_root_link or t.lower() in ("home", "products", "product"):
+                    continue
+                crumbs.append(t)
+            if crumbs:
+                return crumbs[0]
+    return None
+
+
 def _breadcrumb_division(body, domain=None):
     """The site's own filing for this one product — the first breadcrumb
     entry after the generic root(s) ("Home", "Products", the domain name).
     Reads any nav/ul/ol/div carrying "breadcrumb" in its id or class, not a
     literal id="breadcrumbs" — so this is not tied to Swann Morton's own
-    markup, only to the breadcrumb convention it happens to use.
+    markup, only to the breadcrumb convention it happens to use. Tries a
+    JSON-LD BreadcrumbList first (_jsonld_breadcrumb_division) since it is
+    structured data and cheaper to trust outright; falls back to the HTML
+    element read below for sites that only carry the visible-markup form.
 
     THE HOME CRUMB IS DROPPED BY WHERE IT LINKS, NOT BY ITS WORDING
     (05/09/2026). Swann Morton and Gore's home crumb reads "Home"; Direct
@@ -1010,12 +1093,20 @@ def _breadcrumb_division(body, domain=None):
     link whatever text it carries, and is dropped alongside the existing
     word list (kept as a cheaper second check, and for a home crumb that is
     not itself a link)."""
-    m = re.search(_BREADCRUMB_CONTAINER, body, re.S | re.I)
-    if not m:
-        return None
     root_host = None
     if domain:
         root_host = (domain[4:] if domain.startswith("www.") else domain).lower()
+    m = re.search(_BREADCRUMB_CONTAINER, body, re.S | re.I)
+    if not m:
+        # No visible breadcrumb element at all — try JSON-LD as the fallback,
+        # never the other way round. Checked live 12/09/2026: Henleys' own
+        # JSON-LD trail is a SHORTER, less accurate "Home > Products >
+        # <product name>" — it omits the real division ("Blood Pressure
+        # Monitoring") that its visible HTML breadcrumb carries correctly.
+        # The two conventions are not interchangeable data of equal quality
+        # on the same site, so JSON-LD only gets a turn when there is
+        # nothing else to read.
+        return _jsonld_breadcrumb_division(body, root_host)
     crumbs = []
     for href, text in re.findall(r'<a[^>]*\bhref=["\']([^"\']*)["\'][^>]*>(.*?)</a>',
                                   m.group(2), re.S):
