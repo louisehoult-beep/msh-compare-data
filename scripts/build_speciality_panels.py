@@ -7353,6 +7353,208 @@ SPECIALITY_RULES = {
         ),
     },
 
+    # PAGE 2912. Scope, in the page's own words: "Community and acute mental health.
+    # There is no NHS Supply Chain mental health framework and no mental health product
+    # range - the money is in medicines pharmacy buys, and in the estate." This rule is
+    # written to that scope and not one inch wider.
+    #
+    # THE SHAPE OF THIS PATCH, AND WHY IT LOOKS UNLIKE EVERY OTHER RULE IN THIS FILE.
+    # Almost every speciality here is organised around a framework because almost every
+    # speciality buys a product through one. Mental health buys services, medicines and
+    # buildings. So the awards list below is overwhelmingly commissioned services bought
+    # by integrated care boards, councils and mental health trusts, the framework count
+    # is zero, and the supplier count is zero with it. That is the finding, not a gap.
+    "mental-health": {
+        "label": "Mental Health",
+        # NO NHS SUPPLY CHAIN FRAMEWORK. All 121 framework names in frameworks.json
+        # were read this session and not one is mental health; NHS Supply Chain has no
+        # mental health category either. The only agreement that touches the patch is
+        # Medical Healthcare Furniture, and it is NAMED in frameworksFinding rather than
+        # claimed, for the reason the dermatology rule sets out: frameworks.json records
+        # suppliers per AGREEMENT and never per lot, so claiming it would publish all 51
+        # furniture suppliers - trolleys, birthing furniture, recycling bins, portering
+        # chairs - as though they were the mental health market. They are not.
+        # A note on the discovery pass: a naive search of the framework names for
+        # "mental" returns "Environmental Decontamination". That is the whole reason no
+        # bare "mental" appears anywhere in this rule.
+        "frameworks": None,
+        "frameworksFinding": {
+            "frameworks": (
+                "NO NHS SUPPLY CHAIN FRAMEWORK IS COUNTED HERE, AND THAT IS THE FINDING "
+                "RATHER THAN A GAP. All 121 framework names in the Hub's record were read "
+                "and not one of them is mental health; NHS Supply Chain runs no mental "
+                "health category. ONE AGREEMENT TOUCHES THIS PATCH AND IT IS NAMED HERE "
+                "RATHER THAN COUNTED: Medical Healthcare Furniture, reference 2024/S "
+                "000-025534, category Facilities and Office Solutions, starting 12 May "
+                "2025 and ending 11 May 2027 with an option to extend a further 24 "
+                "months, 13 lots and 51 suppliers. Two of its lots are this patch and "
+                "both are quoted from NHS Supply Chain's own contract launch brief: Lot 3 "
+                "Challenging Environment Furniture and Lot 5 Multi-sensory. WHY IT IS NOT "
+                "COUNTED: NHS Supply Chain publishes supplier names per agreement and "
+                "never per lot, so claiming it would put all 51 furniture suppliers - "
+                "hospital trolleys, birthing furniture, recycling bins, portering chairs, "
+                "workstations on wheels - in front of a rep as the mental health market. "
+                "The reference is given so a rep can go straight to the right agreement "
+                "and the right lot. Every date, reference, lot name and count in this "
+                "paragraph was read on NHS Supply Chain's own brief on 12 September 2026."
+            ),
+            "suppliers": (
+                "NO SUPPLIER LIST IS PUBLISHED FOR THIS SPECIALITY, because this panel "
+                "names suppliers only where a framework record names them on this "
+                "speciality's own frameworks, and this patch has none. The 51 suppliers "
+                "on Medical Healthcare Furniture are not reproduced here: that list is "
+                "published per agreement rather than per lot, so it would name the "
+                "furniture market rather than the challenging-environment market inside "
+                "it. THE SUPPLIER ANSWER ON THIS PATCH IS NOT A FRAMEWORK AND NOT A "
+                "CATALOGUE. There is no national agreement, no published market-share "
+                "data and no product catalogue for the ward environment; it is bought "
+                "through capital projects and a trust's own estates team. The awards list "
+                "below names the providers that actually won work on this patch, which is "
+                "weaker evidence than a framework supplier list and is labelled as such. "
+                "This panel will not fall back to a keyword guess against the supplier "
+                "directory."
+            ),
+        },
+        # THE INCLUDE LIST. Every term below was run over all 1,972 rows of
+        # tender-history.json and all 1,554 rows of framework-awards.json and every hit
+        # was read one by one. 79 rows survive and all 79 are this speciality.
+        #
+        # NOT INCLUDED, DELIBERATELY, and each refusal is a real ambiguity rather than a
+        # tidy-up:
+        #   bare "mental"     -> matches "Environmental". Four rows in this data prove it:
+        #                        Specialist Environmental Aids for Deaf People, Environmental
+        #                        Monitoring Media Plates, Environmental clean up for oil
+        #                        spill remediation, an ISO 14001 Environmental Management
+        #                        certification. The phrase "mental health" is used instead.
+        #   "wellbeing"       -> "Fatigue Management and Wellbeing Services" (Cadent Gas),
+        #                        "CWC25178 Employee Health and Wellbeing Service"
+        #                        (Wolverhampton City Council), "Health and Wellbeing
+        #                        Assessments" (Heritage Fund). Employee wellbeing is an HR
+        #                        purchase, not a mental health service. Every genuine
+        #                        wellbeing row on this patch also says "mental health" and
+        #                        is admitted on that.
+        #   "bereavement"     -> "NGH Maternity Bereavement Suite" (a building) and
+        #                        "Provision of Bereavement and Mortuary Services (Funeral)".
+        #                        Neither is mental health. The two genuine rows are suicide
+        #                        bereavement support and are admitted on "suicide".
+        #   bare "crisis"     -> too loose in procurement English on its own. The four
+        #                        genuine rows are admitted on the specific service names
+        #                        instead: crisis text, crisis house, crisis alternatives.
+        #   "picu"            -> Psychiatric Intensive Care Unit and Paediatric Intensive
+        #                        Care Unit share the acronym and the title never says
+        #                        which. All five PICU rows here are admitted on
+        #                        "psychiatric" or "mental health" in the same title, so
+        #                        nothing is lost by refusing it.
+        #   "asd"             -> atrial septal defect in cardiology. The one row using it
+        #                        is "ASD/ADHD Assessment" and comes in on "adhd".
+        #   "dementia"        -> core vocabulary on the frailty and older people page,
+        #                        which claims it. The one dementia award row in this data
+        #                        is an estates consultancy about ligature risk at a mental
+        #                        health unit, and it is admitted here on "ligature".
+        #   substance misuse, drug and alcohol, addiction, detoxification
+        #                     -> fourteen rows, all of them council-commissioned public
+        #                        health treatment services. Real contracts, but not this
+        #                        page's scope, and admitting them would double the awards
+        #                        list with work no mental health rep sells into.
+        #
+        # Four terms are carried that match nothing in today's data - iapt, seclusion,
+        # electroconvulsive, mental illness (which matches two rows) - and they are here
+        # because each is an unambiguous mental health token that can mean nothing else
+        # in UK procurement. They are stated rather than left to look like they fired.
+        "include": (
+            r"\b(mental health|mental illness|camhs|"
+            r"psychiatr\w*|psycholog\w*|psychother\w*|"
+            r"talking therap\w*|iapt|counselling|"
+            r"eating disorder\w*|autis\w*|adhd|learning disabilit\w*|"
+            r"neurodevelopmental|neurodivers\w*|"
+            r"ligature|seclusion|challenging environment|restraint training|"
+            r"suicide|self[- ]?harm|electroconvulsive|"
+            r"recovery college|forensic\w*|"
+            r"crisis (?:text|house|alternatives|resolution|team|line))\b"
+        ),
+        # SEVEN ROWS MATCHED THE INCLUDE LIST AND WERE WRONG. All seven were read:
+        #   educational psychology -> four rows, and the clearest false positive on this
+        #                        patch: RCC-1642 Educational Psychology Services (Virtual
+        #                        School) and RCC-1588 for Rutland County Council, The
+        #                        Provision of Education Psychology Assessments for West
+        #                        Northamptonshire Council, and Milton Keynes City
+        #                        Council's "Experts at Hand" Educational Psychologists,
+        #                        Speech and Language and Occupational Therapy Support.
+        #                        Educational psychology is a statutory school SEND service
+        #                        bought by a local authority's education directorate. It
+        #                        is not a mental health service and no mental health rep
+        #                        sells into it.
+        #   psychology services group -> "Reports Services Commissioned Through HMPPS
+        #                        Psychology Services Group (PSG)" (Ministry of Justice).
+        #                        A criminal justice service buying court and parole
+        #                        reports. Prison healthcare itself is NOT excluded - HMP
+        #                        Wandsworth counselling, bought by Oxleas NHS Foundation
+        #                        Trust, stays in - so the pattern is written against the
+        #                        named HMPPS body, not against prisons.
+        #   forensic vacuum / forensic science / dna profiling
+        #                     -> "Forensic Vacuum Metal Deposition Chamber" (South West
+        #                        Police Procurement Service) and "Supply of DNA Kits for
+        #                        DNA profiling in a forensic science context" (Scottish
+        #                        Police Authority). Police forensics, not forensic mental
+        #                        health. Bare "forensic" is kept because the two genuine
+        #                        rows - Bedford and Luton Community Forensic Services at
+        #                        Essex Partnership University NHS Foundation Trust, and
+        #                        Forensic Advocacy Services for South West Yorkshire
+        #                        Partnership and Humber - do not say "mental health" in
+        #                        the title and would otherwise be lost.
+        "exclude": (
+            r"\b(education(?:al)? psycholog\w*|psychology services group|"
+            r"forensic (?:vacuum|science)|dna profiling)\b"
+        ),
+        "excludeFinding": (
+            "The exclusion list exists because every pattern in it matched a real notice "
+            "that was not this speciality, and there were seven: four educational "
+            "psychology contracts bought by local authority education directorates "
+            "(Rutland twice, West Northamptonshire, Milton Keynes), the Ministry of "
+            "Justice's HMPPS Psychology Services Group court and parole reports service, "
+            "and two police forensics buys - a forensic vacuum metal deposition chamber "
+            "and DNA profiling kits. Prison healthcare is deliberately NOT excluded: HMP "
+            "Wandsworth counselling, bought by Oxleas NHS Foundation Trust, and Northern "
+            "Ireland Prison Service challenging environment furniture are both this "
+            "market and both stand."
+        ),
+        # 85111500 is "Psychiatric hospital services" and it is the one CPV code in this
+        # data that is specific to the patch: six notices carry it and five are claimed
+        # here (four out-of-area PICU placements and CAMHS Tier 4 beds), the sixth being
+        # a general insourcing framework carrying a basket of codes. 85121270 is
+        # "Psychiatrist or psychologist services" and names this speciality's own
+        # clinicians. NOT CLAIMED: 85100000 "Health services", which 36 of these rows
+        # carry and 241 notices in this feed carry in total. It corroborates everything
+        # and therefore nothing. Neither claimed code can admit a notice on its own.
+        "cpv": ("85111500", "85121270"),
+        # NO DRUG TARIFF PART, and on this patch that needs saying out loud because the
+        # medicines number is the biggest on the page. Part IX reimburses appliances -
+        # dressings and elastic hosiery (IXA), incontinence (IXB), stoma (IXC), elastic
+        # hosiery (IXR). Mental health medicines are Part VIII drugs: antidepressants,
+        # ADHD stimulants, antipsychotics, hypnotics and anxiolytics, dementia drugs.
+        # The builder can only slice Part IX, so the panel carries no tariff rather than
+        # reaching for a part that reimburses something else entirely.
+        "coverageNote": (
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This patch is three markets that "
+            "share a name. The MEDICINES, which are the largest identifiable spend on "
+            "it, are bought by pharmacy against the Drug Tariff on a prescription, not by "
+            "mental health, and they appear in no framework and no Part IX line here; "
+            "they belong to the Hub's Pharmacy and Medicines page. The SERVICES - talking "
+            "therapies, crisis provision, CAMHS beds, autism and ADHD assessment, "
+            "learning disability services - are commissioned by integrated care boards, "
+            "councils and mental health trusts, which is why almost every buyer in the "
+            "awards list below is one of those three and why almost none of it is a "
+            "product buy. The only part of this patch a product rep sells into directly "
+            "is the ESTATE AND WARD ENVIRONMENT: anti-ligature fittings, "
+            "challenging-environment furniture, doors and vision panels, seclusion and "
+            "de-escalation spaces, staff safety systems and sensory rooms. That market "
+            "has no national framework, no published market-share data and no product "
+            "catalogue, and is bought through capital projects and a trust's own estates "
+            "team. The ligature, challenging-environment and refurbishment rows in the "
+            "awards list are the visible edge of it and are the rows to start from."
+        ),
+    },
+
 }
 
 

@@ -56,6 +56,7 @@ PHARM = "pharmacy-and-medicines"
 SEPSIS = "sepsis-and-the-deteriorating-patient"
 REHAB = "rehabilitation-prosthetics-and-orthotics"
 DIAB = "diabetes-and-endocrinology"
+MH = "mental-health"
 fails = []
 
 
@@ -6438,6 +6439,150 @@ check("prices are in pounds, not pence",
       str(_db_dt["priceMax"]))
 check("the coverage note says the endocrinology half has no procurement of its own",
       "ENDOCRINOLOGY HALF" in (db["rules"]["frameworks"] or ""))
+
+
+# ---------------------------------------------------------------------------
+# MENTAL HEALTH. The only patch in this file with no framework, no supplier list
+# and no Drug Tariff part, so almost everything that could go wrong here goes
+# wrong in the award matching. Five traps, each guarded below: bare "mental"
+# matching "Environmental", bare "psycholog" annexing four local-authority
+# EDUCATIONAL psychology contracts, bare "forensic" annexing two police forensics
+# buys, bare "wellbeing" annexing employee assistance contracts, and the feed's
+# own `spec` field, which tags thirty rows mental-health and is wrong on all
+# thirty because it matches the BUYER's name.
+# ---------------------------------------------------------------------------
+print("\nMENTAL HEALTH")
+subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), MH],
+               check=True, capture_output=True)
+mh = load_panel(MH)
+check("panel is defined", mh.get("defined") is True)
+check("label is the page's own", mh["label"] == "Mental Health")
+
+_mh_rule = B.SPECIALITY_RULES[MH]
+_mh_rx = B.compile_rule(_mh_rule)
+
+
+def _mh_absent(label, needle):
+    check("refused (%s): %s" % (label, needle[:52]), not B.match_title(_mh_rx, needle))
+
+
+def _mh_present(label, needle):
+    check("kept (%s): %s" % (label, needle[:52]), B.match_title(_mh_rx, needle))
+
+
+print("  no framework and no supplier list, and that is the finding")
+check("zero frameworks", mh["counts"]["frameworks"] == 0)
+check("zero suppliers", mh["counts"]["suppliers"] == 0)
+check("no Drug Tariff part is claimed", mh.get("drugTariff") is None)
+check("the frameworks rule names the one agreement that touches the patch",
+      all(p in (mh["rules"]["frameworks"] or "")
+          for p in ["Medical Healthcare Furniture", "2024/S 000-025534",
+                    "Challenging Environment Furniture", "Multi-sensory", "51 suppliers"]))
+check("and says why it is named rather than counted",
+      "per agreement and never per lot" in (mh["rules"]["frameworks"] or ""))
+check("the coverage note sends the medicines to pharmacy's page",
+      "Pharmacy and Medicines page" in (mh["rules"]["frameworks"] or ""))
+check("the drug tariff rule states the absence rather than reaching for a part",
+      "No Drug Tariff part applies" in (mh["rules"]["drugTariff"] or ""))
+
+print("  bare 'mental' matches 'Environmental' — four real rows prove it")
+for bad in ["HH072-25-HB Specialist Environmental Aids for Deaf People",
+            "BCU-OJEU-45457 Environmental Monitoring Media Plates",
+            "Environmental clean up for oil spill remediation works",
+            "Provision of ISO 14001 Environmental Management Standard Accredited "
+            "Certification Services to Cwm Taf Morgannwg University Health Board (CTMUHB)",
+            "Environmental Decontamination"]:
+    _mh_absent("'Environmental', not 'mental health'", bad)
+check("no framework name is matched, not even Environmental Decontamination",
+      not _mh_rx["fw"].search("Environmental Decontamination"))
+
+print("  educational psychology is a school SEND service, not this patch")
+for bad in ["RCC-1642 Educational Psychology SERVICES (VIRTUAL SCHOOL)",
+            "RCC-1588 Educational Psychology Services for Rutland County Council",
+            "The Provision of Education Psychology Assessments",
+            "Provision of 'Experts at Hand' Educational Psychologists, Speech and "
+            "Language and Occupational Therapy Support - Market Engagement"]:
+    _mh_absent("a local authority education directorate's", bad)
+
+print("  police forensics is not forensic mental health")
+_mh_absent("a police fingerprint chamber", "Forensic Vacuum Metal Deposition Chamber")
+_mh_absent("police DNA kits",
+           "Supply of DNA Kits for DNA profiling in a forensic science context")
+_mh_absent("a Ministry of Justice court and parole reports service",
+           "Reports Services Commissioned Through HMPPS Psychology Services Group (PSG)")
+
+print("  ...and the exclusions must not have been widened into what they protect")
+_mh_present("community forensic mental health", "Bedford and Luton Community Forensic Services")
+_mh_present("forensic mental health advocacy",
+            "Forensic Advocacy Services on behalf of SWYPFT & Humber")
+_mh_present("NHS-commissioned prison counselling", "HMP Wandsworth - Counselling")
+_mh_present("a prison buying the exact ward-environment product",
+            "ID 6636040 - DoJ - NIPS - Supply and Delivery of Challenging Environment Furniture 2026")
+
+print("  bare 'wellbeing' is an HR purchase, and bare 'bereavement' is a mortuary")
+for bad in ["Fatigue Management and Wellbeing Services",
+            "CWC25178 - Employee Health and Wellbeing Service",
+            "Health & Wellbeing Assessments",
+            "NGH - Maternity Bereavement Suite",
+            "Provision of Bereavement and Mortuary Services (Funeral)"]:
+    _mh_absent("not a mental health service", bad)
+_mh_present("suicide bereavement is the patch", "Provision of Suicide Bereavement Support Services")
+
+print("  substance misuse is council public health, and is out of scope by decision")
+for bad in ["All Age Alcohol and Drug Treatment Recovery Service",
+            "Provision of Halton Integrated Drug and Alcohol Treatment and Recovery Service",
+            "SCE0085 - Inpatient detoxification for people who use drugs and alcohol",
+            "HMP Wandsworth - Integrated Addiction & Substance Misuse Services",
+            "Psychosocial Substance Misuse",
+            "Young people alcohol & drug support service (F03 award)"]:
+    _mh_absent("public health treatment, not mental health", bad)
+
+print("  the true positives this panel exists to show")
+_mh_present("the estate: anti-ligature doors",
+            "Fitting of Anti-Baricade and Anti-Ligature alarmed bedroom doors")
+_mh_present("the estate: ligature reduction works",
+            "BCU-ITT-62954 - PHASE 2 LIGATURE REDUCTION WORKS - HEDDFAN UNIT, WREXHAM MAELOR HOSPITAL")
+_mh_present("the estate: a mental health facility refurbishment",
+            "Consultancy Services - Refurbishment of Pinewood House Mental Health Facility")
+_mh_present("psychiatric intensive care",
+            "North Staffordshire Combined Healthcare NHS Trust Out of Area Psychiatric "
+            "Intensive Care (PICU) Placement")
+_mh_present("CAMHS tier 4 beds", "CAMHs Tier 4 Beds and associated services")
+_mh_present("talking therapies", "Leeds Mental Health Wellbeing Support - Talking Therapies")
+_mh_present("an ADHD product, not a service", "PSR Direct Award C - QbTest ADHD Management System")
+_mh_present("autism assessment", "Autism Spectrum Disorder Assessments")
+_mh_present("learning disabilities inpatient care",
+            "Learning Disabilities Inpatient Assessment and Treatment Service")
+_mh_present("a mental health crisis service", "Humber & North Yorkshire Crisis Text Support Service")
+_mh_present("psychiatry medicines", "NP30925 Psychiatry and Neurology Medicines")
+_mh_present("restraint training", "SCH - Provision of Restraint Training Services - Pre-Market Engagement")
+
+print("  the feed's own `spec` field tags thirty rows mental-health and is wrong on all thirty")
+# It matches the BUYER's name, so a mental health trust buying an MRI scanner is
+# filed as mental health. None of these may reach a paying member.
+for bad in ["Portable Low-Field MRI System",
+            "PROVISION OF BLOOD GLUCOSE METERS",
+            "Aseptics Medicines (Including Cytotoxics)",
+            "Podiatry Orthoses Consumables [5820615]",
+            "Parenteral Nutrition",
+            "Vaccines",
+            "Heparins & Anticoagulants",
+            "IV Fluids & Irrigation Solutions",
+            "Sevoflurane and Vaporisers",
+            "Disinfectants"]:
+    _mh_absent("the feed's `spec` field says mental-health and is wrong", bad)
+
+_mh_titles = " || ".join((a.get("title") or "") for a in mh["awards"]).lower()
+check("no educational psychology row reached the published slice",
+      "educational psycholog" not in _mh_titles and "education psycholog" not in _mh_titles)
+check("no police forensics row reached the published slice",
+      "dna profiling" not in _mh_titles and "metal deposition" not in _mh_titles)
+check("no 'Environmental' row reached the published slice",
+      "environmental" not in _mh_titles)
+check("the ligature rows are published", "ligature" in _mh_titles)
+check("the awards list is substantial rather than a token slice",
+      mh["counts"]["awardsMatched"] >= 70, str(mh["counts"]["awardsMatched"]))
+check("mental health claims no open tender it cannot evidence", mh.get("openTenders") == [])
 
 
 _EXCLUDE_NONE_EARNED = {RENAL, GYNAE, PAEDS, DERM, ONC, PAIN, DIGITAL}
