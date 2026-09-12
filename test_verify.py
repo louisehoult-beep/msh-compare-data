@@ -2682,6 +2682,53 @@ def _(tmp):
     return "capped"
 
 
+@case("a calendar event that has genuinely ENDED is still refused")
+def _(tmp):
+    """Guards the 12/09/2026 fix to the calendar past-date rule.
+
+    That fix changed the rule from "started before today" to "ended before
+    today", so a multi-day conference is no longer dropped on its own middle
+    day. This case is the other half: an event whose endDate is itself in the
+    past must STILL fail. If this ever stops failing, the fix has been widened
+    into a hole and genuinely stale rows can reach a paying member.
+    """
+    import json as _json, datetime as _dt
+    cal = _json.load(open("data/hub-calendar.json"))
+    y = _dt.date.today() - _dt.timedelta(days=30)
+    cal["entries"].append({
+        "id": "ev-verify-self-test-ended", "type": "event",
+        "title": "Verify Self Test Event That Has Ended",
+        "date": (y - _dt.timedelta(days=2)).isoformat(),
+        "endDate": y.isoformat(), "past": False,
+        "location": "Nowhere", "audience": "Self test", "owner": None,
+        "source": "https://example.invalid/", "verified": "2026-09",
+        "rule": "Synthetic row added by test_verify.py; never published.",
+        "specialities": [], "links": [],
+    })
+    _json.dump(cal, open("data/hub-calendar.json", "w"), indent=1)
+    return "is in the past"
+
+
+@case("a calendar event with no endDate that has passed is still refused")
+def _(tmp):
+    """The single-day path through the same rule: with no endDate, `date` is
+    still the deciding field, exactly as before the 12/09/2026 fix."""
+    import json as _json, datetime as _dt
+    cal = _json.load(open("data/hub-calendar.json"))
+    cal["entries"].append({
+        "id": "ev-verify-self-test-single-day-past", "type": "event",
+        "title": "Verify Self Test Single Day Past Event",
+        "date": (_dt.date.today() - _dt.timedelta(days=10)).isoformat(),
+        "past": False,
+        "location": "Nowhere", "audience": "Self test", "owner": None,
+        "source": "https://example.invalid/", "verified": "2026-09",
+        "rule": "Synthetic row added by test_verify.py; never published.",
+        "specialities": [], "links": [],
+    })
+    _json.dump(cal, open("data/hub-calendar.json", "w"), indent=1)
+    return "is in the past"
+
+
 @case("framework expiry contradicted by NHS Supply Chain's own procurement calendar")
 def _(tmp):
     # The Technology Enabled Care case. The launch brief said the framework runs
