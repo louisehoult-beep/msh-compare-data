@@ -5204,7 +5204,13 @@ def check_calendar(doc, specmap_unused=None):
                 FAIL("calendar", "%s: endDate %s is before date %s." % (eid, end, date))
         # A past date is dropped, not shown as expired. The single exception is a
         # framework end inside the recent-past window, and it must be flagged as past.
-        if date < today:
+        # A multi-day row (endDate set) is judged by whether it has FINISHED, not by
+        # whether it has STARTED — a conference running today through Sunday is not
+        # "in the past" on its first morning. Fixed 12/09/2026: this fired on
+        # ev-dukes-club-2026 (11-13 Sep), started but not finished, and blocked
+        # calendar-build.yml's publish gate for a day.
+        effective_end = end or date
+        if effective_end < today:
             if e.get("type") != "framework-end":
                 FAIL("calendar", "%s: date %s is in the past. Only a recently expired "
                                  "framework may appear, and only flagged as past."
