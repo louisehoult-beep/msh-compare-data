@@ -137,18 +137,38 @@ def main():
             keys.discard("")
             own_names = {norm_name(n) for n in [s.get("name")] + list(s.get("aliases") or []) if n}
             hits = []
+            excluded_urls = set()
             seen_urls = set()
             for k in keys:
                 for f, matched in by_key.get(k, []):
                     if k in ambiguous_keys and norm_name(matched) not in own_names:
                         # Shared key, no exact name/alias match — this hit belongs
                         # to the other supplier sharing the key, not this one.
+                        # That is a POSITIVE signal, not silence: a previous run
+                        # (before this supplier's key was known to be ambiguous,
+                        # or before its ambiguity guard existed) may have written
+                        # exactly this row here in error. Recorded so it can be
+                        # stripped below even when `hits` ends up empty — fixed
+                        # 12/09/2026 (^o219) after "Baxter Healthcare Corporation"
+                        # was found still carrying five NHS Supply Chain framework
+                        # rows that every brief actually names "Baxter Healthcare
+                        # Ltd/Limited" for — correctly excluded by this guard on
+                        # every run since, but never removed, because the
+                        # `if not hits: continue` below skipped the supplier
+                        # entirely rather than reaching the code that drops stale
+                        # nhssc-brief rows.
+                        excluded_urls.add(f["url"])
                         continue
                     if f["url"] in seen_urls:
                         continue
                     seen_urls.add(f["url"])
                     hits.append((f, matched))
-            if not hits:
+            if not hits and not excluded_urls:
+                # Genuinely no signal at all under any of this supplier's keys —
+                # the original, still-correct reason to leave existing sourced
+                # rows untouched (see STALE-BRIEF-ROWS-2026-09-02.md): a capture
+                # that simply doesn't cover this supplier this cycle is not
+                # evidence the supplier's existing rows are wrong.
                 continue
 
             existing = list(s.get("frameworks") or [])
