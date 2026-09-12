@@ -2869,6 +2869,55 @@ def _(tmp):
     return "refusedSuppliers does not list"
 
 
+def _a_captured_supplier(d):
+    """Pick (row, bucket, name) for a supplier the repo has genuinely captured.
+
+    The check under test (^o385) fires on one thing only: a name in a row's
+    `notCrawled` that the repo records a capture for. It joins the two by
+    canonical name and it builds `captured` from BOTH supplier-products.json's
+    `suppliers` and differentiator.json's `heldBySupplier` — the second half
+    added 12/09/2026, because a capture whose rows carry no source never
+    reaches the first. This picks its candidate the same way, so the fixture
+    and the check cannot drift apart.
+
+    Preference order matters. `capturedNothingCounted` is the exact bucket the
+    live bug fell out of, so it is tried first and the case keeps its original
+    shape whenever the repo still holds one. The published/held buckets are the
+    fallback: those suppliers are captured too, so moving one into notCrawled
+    states the same untruth about the same kind of supplier.
+    """
+    import json as _json, sys as _sys
+    _sys.path.insert(0, "company-aliases")
+    import company_alias as CA
+    reg = CA.load_registry()
+
+    def canon(n):
+        st, c, _ = CA.resolve(n, reg)
+        return c if st == "RESOLVED" else n
+
+    prod = _json.load(open("data/supplier-products.json"))
+    captured = {canon(k) for k in (prod.get("suppliers") or {})}
+    try:
+        diff = _json.load(open("data/differentiator.json"))
+        captured |= {canon(k) for k, held in (diff.get("heldBySupplier") or {}).items()
+                     if held}
+    except OSError:
+        pass
+    # A refused supplier moved into notCrawled would trip the ^o404 refusal
+    # check first and the case would be rejected for the wrong reason, so those
+    # are excluded rather than left to chance.
+    refused = {canon(k) for k in (prod.get("refusals") or {})}
+
+    for bucket in ("capturedNothingCounted", "published",
+                   "publishedElsewhere", "heldOnly"):
+        for r in d["frameworks"]:
+            for n in (r.get(bucket) or []):
+                if (n in captured and n not in refused
+                        and n not in (r.get("notCrawled") or [])):
+                    return r, bucket, n
+    return None, None, None
+
+
 @case("a supplier captured in full reported as never crawled")
 def _(tmp):
     # ^o385. Mapping a category for a supplier whose captured rows carry no
@@ -2876,13 +2925,29 @@ def _(tmp):
     # both counts read zero and it fell all the way through to notCrawled and
     # was re-offered as fresh crawl work. Swann Morton, whose 137 products sit
     # at numeric URLs the detail crawler's slug match never reaches (^o379).
+    #
+    # This case used to empty whichever row still carried a
+    # `capturedNothingCounted` entry. Sourcing Swann Morton's products on
+    # 11/09/2026 emptied that bucket across all 121 rows, the mutation became a
+    # no-op, and the suite called it a HOLE for 14 CI runs while verify.py was
+    # catching the fault perfectly well (^o442). Returning "fixture
+    # unavailable" fixes the false alarm but leaves the check with nothing
+    # testing it, on the day a real hole was found in it — and this suite's
+    # whole premise is that a gate nobody tests is a gate that quietly stops
+    # working. So the shape is BUILT rather than found, and the case keeps
+    # asserting whatever the ledger currently looks like. It falls back to
+    # "fixture unavailable" only if the repo records no capture at all.
+    picked = {}
+
     def m(d):
-        for r in d["frameworks"]:
-            if r.get("capturedNothingCounted"):
-                r["notCrawled"] = (r.get("notCrawled") or []) + r["capturedNothingCounted"]
-                r["capturedNothingCounted"] = []
-                return True
-        return False
+        r, bucket, n = _a_captured_supplier(d)
+        if not r:
+            return False
+        picked["name"] = n
+        r["notCrawled"] = (r.get("notCrawled") or []) + [n]
+        if bucket == "capturedNothingCounted":
+            r[bucket] = [x for x in r[bucket] if x != n]
+        return True
     if not _ledger(m):
         return None
     return "records a capture of their site"
