@@ -41,7 +41,7 @@ low coverage there means exhausted, not neglected.
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 14 | 24.6% | 22 | 29 | STARTED |
 | Urology and Bowel Management | continence | 57 | 18 | 31.6% | 30 | 30 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 20 | 36 | STARTED |
-| Digital Diagnostic Solutions | digital | 54 | 7 | 13.0% | 11 | 43 | STARTED |
+| Digital Diagnostic Solutions | digital | 54 | 9 | 16.7% | 9 | 43 | STARTED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 11 | 20.8% | 27 | 21 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 17 | 22 | STARTED |
 | Surgical Instruments | surgical | 50 | 11 | 22.0% | 21 | 22 | STARTED |

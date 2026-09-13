@@ -365,11 +365,11 @@
   }
  },
  "counts": {
-  "pairs": 5680,
-  "mapped": 4918,
+  "pairs": 5687,
+  "mapped": 4925,
   "notTaxonomy": 178,
   "products": 92387,
-  "productsMapped": 62681
+  "productsMapped": 62688
  },
  "entries": [
   {
@@ -94854,6 +94854,104 @@
    "hub": null,
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Getinge",
+   "division": "Tegris",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tegris"
+   ],
+   "hub": "digital:sw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "OR integration and hospital-efficiency platform, not a bracket/ perfusion/ endoscopy product like the rest of Getinge's range. Confirmed 13/09/2026 on getinge.com/int/products/tegris: 'one platform, for each operating room', combining video/data/device integration, HL7/DICOM connectivity and OR workflow software. Getinge's Digital Diagnostic Solutions award and the digital:sw category ('clinical and departmental software systems') are the right fit; the product is not counted anywhere else.",
+   "decidedIn": "Getinge--framework-coverage-0913.json"
+  },
+  {
+   "supplier": "Getinge",
+   "division": "Talis Hub",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Talis Hub"
+   ],
+   "hub": "digital:sw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "Vendor-neutral medical-device-to-EMR data-capture platform. Confirmed 13/09/2026 on getinge.com/int/products/talis-hub/: 'an integrated platform combining hardware, software, and support services' that 'captures data from any connected medical device and sends it directly to your EMR'. A clinical/departmental data-integration software product, fitting digital:sw; not counted anywhere else.",
+   "decidedIn": "Getinge--framework-coverage-0913.json"
+  },
+  {
+   "supplier": "Huntleigh",
+   "division": "Dopplex® Vascular Reporter Software",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Dopplex® Vascular Reporter Software"
+   ],
+   "hub": "digital:sw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "Windows PC vascular-study reporting application, not a Doppler device. Confirmed 13/09/2026 on huntleigh-diagnostics.com/products/dopplex-vascular-reporter-software/: 'Software... vascular reporting software package for use in conjunction with the Dopplex DMX, ATP and ABI kits... visualisation of waveforms on a PC and stored for reviewing, archiving and printing', with a PDF generator for interfacing to electronic patient record systems. The Vascular Assessment division's Doppler hardware correctly maps to ultrasound:hand; this named product is the reporting software that runs alongside it, fitting digital:sw instead.",
+   "decidedIn": "Huntleigh--framework-coverage-0913.json"
+  },
+  {
+   "supplier": "Huntleigh",
+   "division": "Dopplex® DR4 Patient Record Software",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Dopplex® DR4 Patient Record Software"
+   ],
+   "hub": "digital:sw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "Windows PC vascular-study reporting application, not a Doppler device. Confirmed 13/09/2026 on huntleigh-diagnostics.com/products/dr4/: 'Software... enables automated ABIs to be undertaken and saved in a patient database' with 'pdf file capability for interfacing to Electronic Patient Record Systems'. Same reasoning as Dopplex Vascular Reporter Software: the division's hardware correctly maps to ultrasound:hand, this named reporting product fits digital:sw.",
+   "decidedIn": "Huntleigh--framework-coverage-0913.json"
+  },
+  {
+   "supplier": "Sysmex UK",
+   "division": "Quantcenter",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Quantcenter"
+   ],
+   "hub": "digital:sw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "Image-analysis software, not a lab analyser. Confirmed 13/09/2026: listed on 3dhistech.com's own software index under Image Analysis, described as a repository of image-analysis tools for quantifying tissue structures and IHC/CISH/FISH staining, called up from CaseViewer/SlideViewer. Sysmex UK distributes 3DHISTECH's digital pathology range; this named product sits in the otherwise wholly-unmapped 'Products Detail' bucket alongside genuine hardware analysers, which stay unmapped. Fits digital:sw ('clinical and departmental software systems').",
+   "decidedIn": "Sysmex-UK--framework-coverage-0913.json"
+  },
+  {
+   "supplier": "Sysmex UK",
+   "division": "Slidecenter",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Slidecenter"
+   ],
+   "hub": "digital:sw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "Web-based database/repository for digitised pathology slides, not a lab analyser. Confirmed 13/09/2026: listed on 3dhistech.com's own software index; described (via Sysmex's own SlideViewer page) as the destination scanned slides are uploaded to, 'a web-based database for your digitized tissue sections that can be accessed from any location'. Sits in the same otherwise wholly-unmapped 'Products Detail' bucket. Fits digital:sw.",
+   "decidedIn": "Sysmex-UK--framework-coverage-0913.json"
+  },
+  {
+   "supplier": "Sysmex UK",
+   "division": "Slideviewer",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Slideviewer"
+   ],
+   "hub": "digital:sw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "Digital pathology viewing application. Confirmed 13/09/2026 on 3dhistech.com/software/slide-viewer/: 'SlideViewer is software, not hardware... a digital microscope application designed for viewing and analyzing pathology slides', with whole-slide viewing, annotation and remote-collaboration features. Sits in the same otherwise wholly-unmapped 'Products Detail' bucket. Fits digital:sw. ('Slidedriver', the fourth software-sounding name in the same bucket, was checked and left held: it is a physical USB stage-control peripheral, not software, and was not force-mapped.)",
+   "decidedIn": "Sysmex-UK--framework-coverage-0913.json"
   }
  ],
  "kinds": {
