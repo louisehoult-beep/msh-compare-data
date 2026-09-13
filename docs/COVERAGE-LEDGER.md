@@ -34,13 +34,13 @@ low coverage there means exhausted, not neglected.
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 29 | 23.8% | 74 | 32 | STARTED |
-| Total Orthopaedic Solutions 3 | ortho | 101 | 20 | 19.8% | 61 | 32 | STARTED |
+| Total Orthopaedic Solutions 3 | ortho | 101 | 20 | 19.8% | 60 | 33 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 17 | 27.0% | 32 | 23 | STARTED |
-| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 11 | 18.3% | 27 | 32 | STARTED |
+| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 12 | 20.0% | 24 | 34 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 15 | 25.9% | 29 | 24 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 14 | 24.6% | 22 | 29 | STARTED |
 | Urology and Bowel Management | continence | 57 | 18 | 31.6% | 29 | 31 | STARTED |
-| Advanced Wound Care | wound | 56 | 17 | 30.4% | 20 | 36 | STARTED |
+| Advanced Wound Care | wound | 56 | 17 | 30.4% | 19 | 37 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 9 | 16.7% | 9 | 43 | STARTED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 11 | 20.8% | 27 | 21 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 17 | 22 | STARTED |
@@ -91,7 +91,7 @@ low coverage there means exhausted, not neglected.
 | Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 38 | 23 | UNMAPPED |
 | Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 27 | 21 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 31 | 16 | UNMAPPED |
-| Procedure Packs | — | 29 | 0 | 0.0% | 19 | 16 | UNMAPPED |
+| Procedure Packs | — | 29 | 0 | 0.0% | 18 | 17 | UNMAPPED |
 | Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics | — | 28 | 0 | 0.0% | 24 | 7 | UNMAPPED |
 | Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 23 | 8 | UNMAPPED |
 | Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions | — | 25 | 0 | 0.0% | 16 | 10 | UNMAPPED |
@@ -149,7 +149,7 @@ low coverage there means exhausted, not neglected.
 | Paper Hygiene | — | 17 | 0 | 0.0% | 12 | 7 | OUT OF SCOPE |
 | Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging) | — | 16 | 0 | 0.0% | 13 | 3 | OUT OF SCOPE |
 | Office Supplies | — | 14 | 0 | 0.0% | 8 | 6 | OUT OF SCOPE |
-| Medical Pulp, Macerators and Support Products | — | 11 | 0 | 0.0% | 9 | 4 | OUT OF SCOPE |
+| Medical Pulp, Macerators and Support Products | — | 11 | 0 | 0.0% | 8 | 5 | OUT OF SCOPE |
 | Curtains, Blinds and Associated Services | — | 10 | 0 | 0.0% | 8 | 2 | OUT OF SCOPE |
 | Printable Patient Identification Wristbands and Associated Accessories | — | 8 | 0 | 0.0% | 5 | 3 | OUT OF SCOPE |
 | NHS Healthcare Uniform | workwear | 2 | 0 | 0.0% | 2 | 0 | OUT OF SCOPE |

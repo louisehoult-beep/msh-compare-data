@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-02",
-  "differentiator.json published": 34607,
-  "differentiator.json held": 47631
+  "differentiator.json published": 34610,
+  "differentiator.json held": 47628
  },
  "counts": {
   "frameworks": 121,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 446,
-  "inScopeSuppliersNeedingCrawl": 458,
-  "inScopeSuppliersNeedingDomain": 420,
-  "suppliersRefused": 386,
+  "inScopeSuppliersNeedingCrawl": 455,
+  "inScopeSuppliersNeedingDomain": 418,
+  "suppliersRefused": 388,
   "suppliersRefusedButPublishingElsewhere": 100,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -2643,10 +2643,6 @@
      "domain": null
     },
     {
-     "supplier": "Integra LifeSciences (Integra Neurosciences)",
-     "domain": null
-    },
-    {
      "supplier": "joimax UK",
      "domain": null
     },
@@ -2791,7 +2787,6 @@
     "Hospital Innovations",
     "Ideal Med",
     "Innovate Orthopaedics Ltd",
-    "Integra LifeSciences (Integra Neurosciences)",
     "KLS Martin UK Limited",
     "Kaiser Medical Technology Ltd",
     "Lavender Medical",
@@ -2917,6 +2912,13 @@
      "domain": "www.igeamedical.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Integra LifeSciences (Integra Neurosciences)",
+     "domain": "www.integralife.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-13",
      "bucket": "refused"
     },
     {
@@ -3067,7 +3069,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 49
+    "needDomain": 48
    },
    "published": [
     "Acumed Ltd",
@@ -3121,7 +3123,6 @@
     "Ideal Med",
     "implantcast UK",
     "Innovate Orthopaedics Ltd",
-    "Integra LifeSciences (Integra Neurosciences)",
     "joimax UK",
     "Kaiser Medical Technology Ltd",
     "KLS Martin UK Limited",
@@ -3169,6 +3170,7 @@
     "GenX MediCare Ltd",
     "GS Medical Healthcare Ltd",
     "IGEA S.p.A. Branch UK",
+    "Integra LifeSciences (Integra Neurosciences)",
     "JRI Orthopaedics Ltd",
     "Karl Storz UK",
     "Link Orthopaedics UK Ltd",
@@ -3183,7 +3185,7 @@
     "NuVasive UK Ltd",
     "Ortho Solutions UK Ltd"
    ],
-   "actionableTotal": 61,
+   "actionableTotal": 60,
    "blockedReason": null
   },
   {
@@ -3579,8 +3581,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "9 August 2028",
    "suppliersAwarded": 60,
-   "suppliersPublished": 11,
-   "coverage": 18.3,
+   "suppliersPublished": 12,
+   "coverage": 20.0,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3594,10 +3596,6 @@
      "domain": "boltons.co.uk"
     },
     {
-     "supplier": "Ideal Medical Solutions",
-     "domain": "ideal-ms.com"
-    },
-    {
      "supplier": "Sela Medical UK Ltd",
      "domain": "selamedical.co.uk"
     },
@@ -3607,14 +3605,6 @@
     },
     {
      "supplier": "Bariatric Solutions International",
-     "domain": null
-    },
-    {
-     "supplier": "Genmed Enterprises Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Integra LifeSciences (Integra Neurosciences)",
      "domain": null
     },
     {
@@ -3653,8 +3643,6 @@
    "domainsMissing": [
     "Aquilant Limited",
     "Bariatric Solutions International",
-    "Genmed Enterprises Ltd",
-    "Integra LifeSciences (Integra Neurosciences)",
     "Lexington Medical UK Ltd",
     "Medecon Healthcare UK",
     "Meril UK Pvt Ltd",
@@ -3716,6 +3704,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Genmed Enterprises Ltd",
+     "domain": "genmedltd.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-13",
+     "bucket": "refused"
+    },
+    {
      "supplier": "GS Medical Healthcare Ltd",
      "domain": "gsmedical.ie",
      "reason": "robots.txt disallows automated reading of this site",
@@ -3725,6 +3720,13 @@
     {
      "supplier": "Harris-Jones Medical Ltd",
      "domain": "www.hjmedical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-13",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Integra LifeSciences (Integra Neurosciences)",
+     "domain": "www.integralife.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-13",
      "bucket": "refused"
@@ -3904,11 +3906,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 11,
-    "heldNeedingCategory": 4,
+    "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 12
+    "needDomain": 10
    },
    "published": [
     "Avicenna Surgical Limited",
@@ -3916,6 +3918,7 @@
     "Conmed UK Ltd",
     "HC21 (UK) Ltd",
     "Healthium Medtech UK",
+    "Ideal Medical Solutions",
     "Johnson & Johnson MedTech",
     "Olympus (KeyMed)",
     "MedScience Distribution",
@@ -3939,15 +3942,12 @@
    "heldOnly": [
     "Bolton Surgical Limited",
     "Healthcare 25 Ltd",
-    "Ideal Medical Solutions",
     "Sela Medical UK Ltd"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Aquilant Limited",
     "Bariatric Solutions International",
-    "Genmed Enterprises Ltd",
-    "Integra LifeSciences (Integra Neurosciences)",
     "Lexington Medical UK Ltd",
     "Medecon Healthcare UK",
     "Meril UK Pvt Ltd",
@@ -3965,8 +3965,10 @@
     "Erbe Medical UK Ltd",
     "Eurosurgical Ltd",
     "Fairmont Medical Products Limited",
+    "Genmed Enterprises Ltd",
     "GS Medical Healthcare Ltd",
     "Harris-Jones Medical Ltd",
+    "Integra LifeSciences (Integra Neurosciences)",
     "June Medical Ltd",
     "Karl Storz UK",
     "Laprosurge Limited",
@@ -3982,7 +3984,7 @@
     "Vanguard AG"
    ],
    "unknown": [],
-   "actionableTotal": 27,
+   "actionableTotal": 24,
    "blockedReason": null
   },
   {
@@ -5088,10 +5090,6 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Ideal Medical Solutions",
-     "domain": "ideal-ms.com"
-    },
-    {
      "supplier": "Clarity Pharma",
      "domain": null
     },
@@ -5116,10 +5114,6 @@
      "domain": null
     },
     {
-     "supplier": "Integra LifeSciences (Integra Neurosciences)",
-     "domain": null
-    },
-    {
      "supplier": "Oswell Penda",
      "domain": null
     },
@@ -5135,7 +5129,6 @@
     "Esp\u00e8re Healthcare Ltd",
     "Firstkind Ltd",
     "Griffiths and Nielsen Ltd",
-    "Integra LifeSciences (Integra Neurosciences)",
     "Oswell Penda",
     "Phoenix Medical Ltd"
    ],
@@ -5202,6 +5195,13 @@
      "domain": "imseuro.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Integra LifeSciences (Integra Neurosciences)",
+     "domain": "www.integralife.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-13",
      "bucket": "refused"
     },
     {
@@ -5404,12 +5404,12 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 8,
-    "heldNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 9,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 9
+    "needDomain": 8
    },
    "published": [
     "Advanced Medical Solutions (AMS)",
@@ -5434,6 +5434,7 @@
     "BD \u2014 Becton, Dickinson",
     "CliniMed",
     "Frontier Therapeutics",
+    "Ideal Medical Solutions",
     "Joint Operations",
     "Medline Industries",
     "Schulke & Mayr UK Ltd",
@@ -5441,8 +5442,7 @@
     "Vernacare"
    ],
    "heldOnly": [
-    "CD Medical Ltd",
-    "Ideal Medical Solutions"
+    "CD Medical Ltd"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -5452,7 +5452,6 @@
     "Esp\u00e8re Healthcare Ltd",
     "Firstkind Ltd",
     "Griffiths and Nielsen Ltd",
-    "Integra LifeSciences (Integra Neurosciences)",
     "Oswell Penda",
     "Phoenix Medical Ltd"
    ],
@@ -5466,6 +5465,7 @@
     "Global Health and Safety Ltd",
     "GS Medical Healthcare Ltd",
     "IMS Euro Ltd",
+    "Integra LifeSciences (Integra Neurosciences)",
     "Iskus Health UK Limited",
     "Solventum (3M Health Care)",
     "Medicareplus",
@@ -5480,7 +5480,7 @@
    "unknown": [
     "Brightwake Limited (trading as Advancis Medical)"
    ],
-   "actionableTotal": 20,
+   "actionableTotal": 19,
    "blockedReason": null
   },
   {
@@ -6838,10 +6838,6 @@
      "domain": "howardwright.com"
     },
     {
-     "supplier": "Ideal Medical Solutions",
-     "domain": "ideal-ms.com"
-    },
-    {
      "supplier": "Brandon Medical Company Ltd",
      "domain": null
     },
@@ -7034,8 +7030,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 10,
-    "heldNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 11,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 2,
@@ -7061,12 +7057,12 @@
     "Draeger Medical UK",
     "Felgains",
     "Baxter / Hillrom",
+    "Ideal Medical Solutions",
     "Olympus (KeyMed)",
     "LINET UK"
    ],
    "heldOnly": [
-    "Howard Wright Europe",
-    "Ideal Medical Solutions"
+    "Howard Wright Europe"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -7884,10 +7880,6 @@
      "domain": "boltons.co.uk"
     },
     {
-     "supplier": "Ideal Medical Solutions",
-     "domain": "ideal-ms.com"
-    },
-    {
      "supplier": "Sela Medical UK Ltd",
      "domain": "selamedical.co.uk"
     },
@@ -8050,8 +8042,8 @@
    ],
    "actionable": {
     "unresolvedNames": 2,
-    "publishedElsewhereNeedingCategory": 4,
-    "heldNeedingCategory": 4,
+    "publishedElsewhereNeedingCategory": 5,
+    "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -8070,6 +8062,7 @@
     "Timesco Healthcare Ltd"
    ],
    "publishedElsewhere": [
+    "Ideal Medical Solutions",
     "Fannin (UK) Limited",
     "Olympus (KeyMed)",
     "Medline Industries",
@@ -8077,7 +8070,6 @@
    ],
    "heldOnly": [
     "Bolton Surgical Limited",
-    "Ideal Medical Solutions",
     "Healthcare 25 Ltd",
     "Sela Medical UK Ltd"
    ],
@@ -13942,10 +13934,6 @@
      "domain": "ansermedical.com"
     },
     {
-     "supplier": "Ideal Medical Solutions",
-     "domain": "ideal-ms.com"
-    },
-    {
      "supplier": "Sela Medical UK Ltd",
      "domain": "selamedical.co.uk"
     },
@@ -14111,8 +14099,8 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 4,
-    "publishedElsewhereNeedingCategory": 16,
-    "heldNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 17,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -14125,6 +14113,7 @@
     "Essity UK Limited",
     "Crest Medical Ltd",
     "Healthium Medtech UK",
+    "Ideal Medical Solutions",
     "Johnson & Johnson MedTech",
     "Kebomed UK Ltd",
     "Mediq Healthcare UK Ltd",
@@ -14139,7 +14128,6 @@
    ],
    "heldOnly": [
     "Anser Medical",
-    "Ideal Medical Solutions",
     "Sela Medical UK Ltd"
    ],
    "capturedNothingCounted": [],
@@ -14195,10 +14183,6 @@
      "domain": null
     },
     {
-     "supplier": "Genmed Enterprises Ltd",
-     "domain": null
-    },
-    {
      "supplier": "O&M Halyard Uk Limited",
      "domain": null
     },
@@ -14214,7 +14198,6 @@
    "domainsMissing": [
     "Accrington Surgical Inst. Suppliers",
     "Andersen Caledonia Ltd",
-    "Genmed Enterprises Ltd",
     "O&M Halyard Uk Limited",
     "Plasmic Healthsciences Uk Limited",
     "Vascular Perspectives Ltd"
@@ -14233,6 +14216,13 @@
      "domain": "www.deltasurgical.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (<urlopen error timed out>)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Genmed Enterprises Ltd",
+     "domain": "genmedltd.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-13",
      "bucket": "refused"
     },
     {
@@ -14343,7 +14333,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 6
+    "needDomain": 5
    },
    "published": [],
    "publishedElsewhere": [
@@ -14366,7 +14356,6 @@
    "notCrawled": [
     "Accrington Surgical Inst. Suppliers",
     "Andersen Caledonia Ltd",
-    "Genmed Enterprises Ltd",
     "O&M Halyard Uk Limited",
     "Plasmic Healthsciences Uk Limited",
     "Vascular Perspectives Ltd"
@@ -14374,6 +14363,7 @@
    "refused": [
     "ALXR Limited",
     "Delta Surgical",
+    "Genmed Enterprises Ltd",
     "H & R Healthcare Ltd",
     "IMS Euro Ltd",
     "OscarTech UK",
@@ -14384,7 +14374,7 @@
     "Unisurge International Limited"
    ],
    "unknown": [],
-   "actionableTotal": 19,
+   "actionableTotal": 18,
    "blockedReason": null
   },
   {
@@ -15549,10 +15539,6 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "Ideal Medical Solutions",
-     "domain": "ideal-ms.com"
-    },
-    {
      "supplier": "Sela Medical UK Ltd",
      "domain": "selamedical.co.uk"
     },
@@ -15659,8 +15645,8 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 8,
-    "heldNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 9,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -15673,12 +15659,12 @@
     "BD \u2014 Becton, Dickinson",
     "Boston Scientific",
     "HC21 (UK) Ltd",
+    "Ideal Medical Solutions",
     "Johnson & Johnson MedTech",
     "Medtronic",
     "W.L. Gore & Associates"
    ],
    "heldOnly": [
-    "Ideal Medical Solutions",
     "Sela Medical UK Ltd"
    ],
    "capturedNothingCounted": [],
@@ -20783,17 +20769,12 @@
      "domain": null
     },
     {
-     "supplier": "Genmed Enterprises Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Paramount Packaging (UK) Limited",
      "domain": null
     }
    ],
    "domainsMissing": [
     "Datesand Group",
-    "Genmed Enterprises Ltd",
     "Moulded Fibre Products Limited",
     "Paramount Packaging (UK) Limited"
    ],
@@ -20804,6 +20785,13 @@
      "domain": "genxmedicare.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Genmed Enterprises Ltd",
+     "domain": "genmedltd.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-13",
      "bucket": "refused"
     },
     {
@@ -20837,7 +20825,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 4
+    "needDomain": 3
    },
    "published": [],
    "publishedElsewhere": [
@@ -20851,17 +20839,17 @@
    "notCrawled": [
     "Moulded Fibre Products Limited",
     "Datesand Group",
-    "Genmed Enterprises Ltd",
     "Paramount Packaging (UK) Limited"
    ],
    "refused": [
     "GenX MediCare Ltd",
+    "Genmed Enterprises Ltd",
     "Valley Northern Ltd"
    ],
    "unknown": [
     "Polyco Healthline Limited"
    ],
-   "actionableTotal": 9,
+   "actionableTotal": 8,
    "blockedReason": null
   },
   {
