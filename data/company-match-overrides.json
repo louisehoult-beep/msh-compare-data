@@ -453,7 +453,7 @@
     "04261387"
    ],
    "excludedName": "DANIELS SHARPSMART LIMITED (04109860); SHARPSMART LIMITED (04261387)",
-   "reason": "DANIELS SHARPSMART LIMITED 04109860 was DISSOLVED on 2015-09-22, before the 2021 framework. SHARPSMART LIMITED 04261387 is active at the same Spennymoor address and is the obvious successor, but the shared address is Companies House data and so is not an independent second source; danielshealth.co.uk did not yield a published company number. One source is not enough to assert an identity, so this is cleared rather than corrected. 09/09/2026: 04261387 added to `exclude` so that same decision holds by EVERY route. It was always the decision recorded here, but only 04109860 was listed, so the number the curator declined to assert was still reachable through the prose in this supplier\u0027s background note \u2014 which scripts/refresh_companies_house.py read as a route-1 curator assertion and graded `confirmed`. No new judgement is made: this records the reason already written above, and keeps the honest empty state members see today.",
+   "reason": "DANIELS SHARPSMART LIMITED 04109860 was DISSOLVED on 2015-09-22, before the 2021 framework. SHARPSMART LIMITED 04261387 is active at the same Spennymoor address and is the obvious successor, but the shared address is Companies House data and so is not an independent second source; danielshealth.co.uk did not yield a published company number. One source is not enough to assert an identity, so this is cleared rather than corrected. 09/09/2026: 04261387 added to `exclude` so that same decision holds by EVERY route. It was always the decision recorded here, but only 04109860 was listed, so the number the curator declined to assert was still reachable through the prose in this supplier's background note — which scripts/refresh_companies_house.py read as a route-1 curator assertion and graded `confirmed`. No new judgement is made: this records the reason already written above, and keeps the honest empty state members see today.",
    "evidence": "https://find-and-update.company-information.service.gov.uk/company/04109860",
    "decidedOn": "2026-09-03",
    "excludeExtendedOn": "2026-09-09"
@@ -505,6 +505,31 @@
    ],
    "decidedOn": "2026-09-07",
    "decidedIn": "framework-coverage run on Operating Theatres Equipment and Related Accessories and Services, 07/09/2026. STATE THE LIMIT SO A READER CAN JUDGE IT: the match is on the exact registered name plus the NUTS region, not the town - the notice gives Dunstable and the registered office is Luton, five miles away in the same county, which is the ordinary trading-address / registered-office split. arjo.com publishes no registration number, so there is no self-published third source. Arjo's other UK entities (ARJO HUNTLEIGH INTERNATIONAL LIMITED 02693603, ARJO LIMITED 00632658 dissolved) were checked and ruled out: neither is the name on the award notice."
+  },
+  "Polyco": {
+   "exclude": [
+    "06916369"
+   ],
+   "excludedName": "POLYCO LIMITED",
+   "reason": "POLYCO LIMITED (06916369) is a wood-products manufacturer (SIC 16290 - manufacture of other products of wood) at Unit 11 Albion Park, Warrington Road, Glazebury, Warrington WA3 5PG. It is an unrelated namesake, matched only by a Companies House name search on the short form \"Polyco\". 02000388 is established against two independent sources, listed in correctSources.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/06916369",
+   "correct": "02000388",
+   "correctSources": [
+    "https://www.find-tender.service.gov.uk/Notice/014652-2023 - the contract award notice for NHS Supply Chain's Polymer Aprons framework (2023/S 000-014652), on which NHS Supply Chain's own launch brief names this supplier as \"Polyco\", names the contractor in full as \"Polyco Healthline\", Bourne, United Kingdom. Read 13/09/2026.",
+    "https://find-and-update.company-information.service.gov.uk/company/02000388 - POLYCO HEALTHLINE LIMITED, active, incorporated 1986-03-14, registered office \"Polyco Healthline, South Fen Road, Bourne, Lincolnshire, England, PE10 0DN\" - the same town the award notice gives, and the only company of that registered name on the register. SIC 14120 manufacture of workwear, 32500 manufacture of medical and dental instruments and supplies, 46420 wholesale of clothing and footwear. Read 13/09/2026."
+   ],
+   "decidedOn": "2026-09-13",
+   "decidedIn": "outstanding-sweep run 13/09/2026, settling ^o324 and the Polyco half of ^o319. STATE THE LIMIT SO A READER CAN JUDGE IT: the match is on the registered name plus the town, both taken from the award notice and the register, each read live on 13/09/2026. A third, self-published source exists and is already recorded in this repo - polycohealthline.com/contact/, read 06/09/2026 by the framework-coverage run, gives \"Polyco Healthline, South Fen Business Park, South Fen Road, Bourne, Lincolnshire, PE10 0DN\" and \"Registered in England | Registration No. 02000388\" - but that page could NOT be re-read on 13/09/2026 (Cloudflare returns 403 to both curl and headless Chrome), so it is cited as a recorded earlier read, not as a source verified today."
+  },
+  "Polystar": {
+   "exclude": [
+    "SC347440"
+   ],
+   "excludedName": "POLYSTAR LIMITED",
+   "reason": "POLYSTAR LIMITED (SC347440) is a video production business (SIC 59112) at 15 St. Leonard Street, Lanark, Scotland ML11 7AB. It is an unrelated namesake, matched only by a Companies House name search on the short form \"Polystar\". NO replacement number is recorded here: the Find a Tender award notice for this framework names the contractor \"Polystar Plastics Ltd\", Southampton, which is POLYSTAR PLASTICS LIMITED (02690339) - and this repo ALREADY holds that company as a separate seed supplier record, \"Polystar Plastics Ltd\". Attaching 02690339 here as well would publish one company as two suppliers. Folding this stub's Polymer Aprons award into the existing record is an identity merge (it touches aliases and map keys) and is left open as ^o334.",
+   "evidence": "https://find-and-update.company-information.service.gov.uk/company/SC347440",
+   "decidedOn": "2026-09-13",
+   "decidedIn": "outstanding-sweep run 13/09/2026, settling the Polystar half of ^o319 and clearing the blocker described in ^o321. Sources, both read live 13/09/2026: https://www.find-tender.service.gov.uk/Notice/014652-2023 names the Polymer Aprons contractor \"Polystar Plastics Ltd\", Southampton; https://find-and-update.company-information.service.gov.uk/company/02690339 gives POLYSTAR PLASTICS LIMITED, active, incorporated 1992-02-24, Peel House, Peel Street, Northam, Southampton SO14 5QT, SIC 20160 manufacture of plastics in primary forms. POLYSTAR PLASTICS (HOLDINGS) LIMITED (08495431) shares that registered office but is not the name on the award notice, and a bracket disambiguates (COMPANY-REPORT-METHOD.md)."
   }
  }
 }
