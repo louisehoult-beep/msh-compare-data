@@ -150,6 +150,43 @@ rather than find it pre-refused on a domain the seed never accepted.
   one already refused as `fujifilm.com` on 05/09/2026, so there is no crawlable route
   to a product range under this name either way.
 
+## What it proves on Minimally Invasive Surgery, Related Equipment and Accessories
+
+Read 13/09/2026 by the `outstanding-sweep` task, working OUTSTANDING ^o463. Same method,
+same bar, and again **nothing written to `data/supplier-seed.json`** — the route is still
+unruled (^o363).
+
+| Supplier | Domain | Address on the site | Companies House registered office |
+|---|---|---|---|
+| Minitouch Ltd | minitouch.eu | "1 Hutton Close, S Church Enterprise Park, Bishop Auckland, DL14 6XG UK", in the footer of the company's own Modern Slavery Statement (`minitouch.eu/Modern Slavery Statement.pdf`), which names "Minitouch LTD" throughout and describes it as selling "medical devices for women's health in the UK and Europe" | MINITOUCH LTD (07933081) — 1 Hutton Close, South Church Enterprise Park, Bishop Auckland, England, DL14 6XG |
+
+**This corrects ^o463's premise, which was wrong.** That finding recorded minitouch.eu
+and minitouch.us as sites that "do not clearly belong to this UK company", on the basis
+that the Minitouch endometrial ablation device's US PMA applicant is MicroCube LLC. The
+register settles it the other way: Companies House records MINITOUCH LTD (07933081) as
+**previously MICROCUBE LTD** (02/02/2012 to 15/05/2014), which is the same corporate
+lineage, not a coincidence of product naming. `data/company-financials.json` already
+holds that previous name on the Minitouch record.
+
+So the identity question ^o463 was raised for is answered, and it was never a decision
+for Lou: there is one candidate, not two, and the evidence is primary. What actually
+blocks the domain being recorded is the unruled ADDRESS bar above — Minitouch publishes
+no registration number anywhere this route can read (home, contacts, Modern Slavery
+Statement and Carbon Reduction Plan all read in full on 13/09/2026; the contacts page
+gives only "Minitouch, Ltd." and an email address). It is therefore an eighth supplier
+waiting on ^o363, not a separate open item.
+
+Two notes for whoever implements the ruling:
+
+- The site is four static HTML pages and three PDFs, with no product catalogue at all.
+  Recording the domain would give this supplier a member-facing website link; as with
+  Sonosite above, it would not give it a product range. No read outcome has been
+  recorded in `data/supplier-products.json`, for the same reason given there.
+- The seed record carries the framework award twice (one row with `dates: null` and no
+  `source`, one full `nhssc-brief` row, both citing reference 2026/S 000-061906). That
+  is the same duplicate-award shape as OUTSTANDING ^o206 and is noted here only so it is
+  not mistaken for two separate awards.
+
 ## A separate finding, not about domains: brand-filed catalogues
 
 Found 09/09/2026 while working Probo Medical, and it will bite again the moment the
