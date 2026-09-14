@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-12",
+ "lastRun": "2026-09-14",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -306,7 +306,19 @@
   "J & M Medical",
   "J Heinz Foods UK Limited",
   "joimax UK",
-  "Judd Medical Ltd"
+  "Judd Medical Ltd",
+  "Kaiser Medical Technology Ltd",
+  "KaVo Dental Ltd",
+  "Kettering Surgical Appliances",
+  "Kimberly Clark",
+  "Koalaa Ltd",
+  "Langham Gordon Ellis",
+  "Laprosurge Limited",
+  "Lawmed Ltd",
+  "Leanvation",
+  "Leda Orthopaedics Ltd",
+  "Leib Medical Ltd",
+  "Key Health Solutions"
  ],
  "refusals": [
   {
@@ -648,6 +660,26 @@
    "name": "Judd Medical Ltd",
    "reason": "Checked judd-medical.co.uk (own site, footer, 12/09/2026): trades as \"Judd Medical Limited\" / \"Judd Medical\", and Companies House confirms JUDD MEDICAL LTD, company no. 03323507 — both already fully covered by the existing name/alias \"Judd Medical Ltd\". No additional distinct name form found on the company's own site, Companies House, or its NHS Supply Chain framework records.",
    "date": "2026-09-12"
+  },
+  {
+   "name": "Key Health Solutions",
+   "reason": "No new alias form adds real matching coverage. keyhealthsolutions.co.uk (company's own site) footers \"Key Health Solutions Ltd\" and uses the logo abbreviation \"KHS\" — but the existing bare alias \"Key Health Solutions\" already matches any text carrying that phrase regardless of a following \"Ltd\", so the suffixed form adds nothing, and \"KHS\" is a 3-character token (below this repo's 4-character floor) and a generic-sounding initialism shared by unrelated organisations, so it was not added. Speciality already populated (\"Continence / Urology\"), left as is.",
+   "date": "2026-09-14"
+  },
+  {
+   "name": "Kimberly Clark",
+   "reason": "Verified, but no new alias form adds real coverage. NHS Supply Chain's own briefs name the supplier \"Kimberly-Clark Limited\" and \"Kimberly Clark\"; both normalise to a superset of the existing 2-token alias \"Kimberly Clark\" under this repo's exact-phrase matcher, so they already match. Companies House carries three equally plausible active entities (00308676, 10065051, 04060641) with no way to pick one, so none was added. Specialities left empty: the frameworks held here (Cleaning Equipment, Paper Hygiene) sit under Facilities and Office Solutions, not a clinical category, and this record's own ownership note already documents that the healthcare-adjacent Kimberly-Clark spin-offs (Avanos; Halyard/Owens & Minor) are different companies.",
+   "date": "2026-09-14"
+  },
+  {
+   "name": "Leanvation",
+   "reason": "No name form could be verified from a source that could be read in full. leanvation.com's footer, contact and privacy pages would not return readable content (repeated fetch truncation/404). Companies House holds two candidates that are not provably the same entity: LEANVATION LTD (07316310, active, Manchester — this record's existing candidate) and LEANVATION WORLDWIDE LIMITED (08520866, IN LIQUIDATION, Ashby-de-la-Zouch); third-party coverage (Clinical Services Journal's supplier directory) names the NHS-facing entity as \"Leanvation Worldwide Ltd\", which is the liquidated company, not the seed's active candidate. Recording either name risks attributing a defunct entity's name to the wrong record, so nothing was added. Speciality left empty: no company-site statement of scope could be read; third-party descriptions of surgical gloves are not a source this record can cite as the company's own.",
+   "date": "2026-09-14"
+  },
+  {
+   "name": "Leda Orthopaedics Ltd",
+   "reason": "ledaortho.com (company's own site, About Us page, read via rendered browser after WebFetch redirect-looped) brands the company only as \"LEDA\" or \"LEDA Orthopaedics\" throughout — no \"Limited\" suffix appears anywhere, and no other trading name is given. Its stated registered office (Unit 4 Falcon Court, Hinchingbrooke Business Park, Huntingdon PE29 6AH) matches Companies House 08730490 LEDA ORTHOPAEDICS LIMITED exactly, corroborating the existing company number candidate, but yields no alias beyond what the existing bare \"Leda Orthopaedics Ltd\" entry already covers (it already matches text carrying that phrase regardless of suffix). Bare \"LEDA\" was not added: the site's own explanation (\"We took LE and DA from their first names\") confirms it is a shortening of the full name, not the whole canonical name, and \"Leda\" is also a common name shared by unrelated companies — the single-token ambiguity rule 2 exists to stop. Speciality already populated (\"Orthopaedics and trauma\"), left as is.",
+   "date": "2026-09-14"
   }
  ],
  "sources": {
