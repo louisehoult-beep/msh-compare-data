@@ -75,6 +75,18 @@ to "GB UK Ltd" beside "GBUK Group" on gbukgroup.com.
 A framework is DONE only when every awarded supplier is published with a
 category. Anything else is named, counted and left as work — never rounded up.
 
+A DEFERRED FRAMEWORK IS STILL COUNTED (added 14/09/2026, ^o465). Some frameworks
+have a non-zero Left that no run can move, because every remaining supplier is
+waiting on a routing or identity ruling only Lou can give. The picker selected
+Radiotherapy Ancillary Devices on 10/09, 11/09 and 13/09 and re-confirmed zero
+movement each time. `data/coverage-deferrals.json` names such a framework and
+the decision it waits on; the ONLY effect is that it drops out of the pick list
+at the tail of this script. Its coverage %, its Left and its buckets are
+untouched — a deferral hides a framework from the queue, never from the count.
+It also refuses to fire on stale evidence: the entry applies only while every
+actionable supplier is named in it, so one new awarded supplier, unresolved name
+or held range puts the framework straight back in the queue.
+
 NAME RESOLUTION. Framework supplier names and crawl supplier names disagree
 constantly ("BD" / "Becton Dickinson UK Ltd"). Every join goes through the
 company alias registry; an UNRESOLVED or AMBIGUOUS name is reported as such and
@@ -100,6 +112,42 @@ REPO = os.path.dirname(HERE)
 DATA = os.path.join(REPO, "data")
 sys.path.insert(0, os.path.join(REPO, "company-aliases"))
 import company_alias as CA
+
+
+def load_deferrals():
+    """Frameworks parked pending a decision only Lou can make (^o465).
+
+    Returns {framework name: entry}. Never invents one: an absent or malformed
+    file simply means nothing is deferred.
+    """
+    path = os.path.join(DATA, "coverage-deferrals.json")
+    if not os.path.exists(path):
+        return {}
+    with open(path) as f:
+        raw = json.load(f)
+    return {d["framework"]: d for d in raw.get("deferrals", [])
+            if d.get("framework") and d.get("suppliers") and d.get("reason")}
+
+
+def deferral_for(row, deferrals):
+    """The deferral that applies to this row, or None.
+
+    An entry fires only while EVERY supplier the ledger still counts as
+    actionable is named in it. New work — a fresh award, an unresolved name, a
+    newly held range — is not covered by a decision recorded before it existed,
+    so the framework returns to the pick list on its own rather than sitting
+    silently parked behind a stale entry.
+    """
+    d = deferrals.get(row["framework"])
+    if not d:
+        return None
+    outstanding = set(row["unknown"]) | set(row["publishedElsewhere"]) | \
+        set(row["heldOnly"]) | set(row["capturedNothingCounted"]) | \
+        set(row["notCrawled"])
+    uncovered = sorted(outstanding - set(d["suppliers"]))
+    if uncovered:
+        return {"stale": True, "uncovered": uncovered, **d}
+    return d
 
 
 # SCOPE (Lou's decision, 26/08/2026: "clinical only"). Scope is read from NHS
@@ -412,6 +460,22 @@ def main():
     ORDER = {"STARTED": 0, "NOT STARTED": 1, "UNMAPPED": 2, "DONE": 3,
              "OUT OF SCOPE": 4}
     rows.sort(key=lambda r: (ORDER[r["state"]], -r["suppliersAwarded"]))
+
+    # Frameworks parked pending a decision only Lou can make (^o465). This sets
+    # a label and nothing else: no count, coverage or bucket above is touched.
+    deferrals = load_deferrals()
+    staleDeferrals = []
+    for r in rows:
+        d = deferral_for(r, deferrals)
+        if d and d.get("stale"):
+            staleDeferrals.append((r["framework"], d["uncovered"]))
+            d = None
+        r["deferred"] = None if not d else {
+            "reason": d["reason"],
+            "queuedIn": d.get("queuedIn"),
+            "decisionRef": d.get("decisionRef"),
+            "addedOn": d.get("addedOn"),
+        }
     out = {
         "rule": "A framework counts as DONE only when every supplier awarded on it "
                 "has at least one product published with a gated category in the "
@@ -450,6 +514,7 @@ def main():
                 w["supplier"] for r in rows if r["inScope"]
                 for w in r["duplicateOfCapturedSupplier"]}),
             "blockedFrameworks": sum(1 for r in rows if r["blockedReason"]),
+            "deferredFrameworks": sum(1 for r in rows if r["deferred"]),
         },
         "unresolvedSupplierNames": unresolved.most_common(),
         "frameworks": rows,
@@ -485,7 +550,12 @@ def main():
           "the two facts are separate, and the refusal used to be invisible for any",
           "supplier publishing anything anywhere.",
           f"**{c['blockedFrameworks']} framework(s) have nothing left by a permitted route** —",
-          "low coverage there means exhausted, not neglected.", "",
+          "low coverage there means exhausted, not neglected.",
+          f"**{c['deferredFrameworks']} framework(s) are DEFERRED** — their Left is real and",
+          "counted here, but every supplier in it is waiting on a ruling only Lou can",
+          "give, so `differentiator-framework-coverage` skips them when it picks a",
+          "framework to work. They are listed in `data/coverage-deferrals.json` with",
+          "the decision each waits on; delete the entry once that decision is made.", "",
           "| Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |",
           "|---|---|---|---|---|---|---|---|"]
     for r in rows:
@@ -493,7 +563,8 @@ def main():
             r["framework"], ", ".join(r["speciality"]) or "—",
             r["suppliersAwarded"], r["suppliersPublished"],
             r["coverage"], r["actionableTotal"], len(r["refusedSuppliers"]),
-            r["state"] + (" · BLOCKED" if r["blockedReason"] else "")))
+            r["state"] + (" · BLOCKED" if r["blockedReason"] else "")
+            + (" · DEFERRED" if r["deferred"] else "")))
     with open(os.path.join(REPO, "docs", "COVERAGE-LEDGER.md"), "w") as f:
         f.write("\n".join(md) + "\n")
 
@@ -505,7 +576,23 @@ def main():
             r["suppliersAwarded"], r["suppliersPublished"],
             r["actionableTotal"], r["state"]))
 
-    live = [x for x in rows if x["state"] == "STARTED" and x["actionableTotal"]]
+    for fw, uncovered in staleDeferrals:
+        print("  NOTE: deferral for %s no longer covers %d supplier(s) (%s) — "
+              "framework returned to the pick list"
+              % (fw, len(uncovered), ", ".join(uncovered[:4])))
+
+    parked = [x for x in rows if x["state"] == "STARTED" and x["actionableTotal"]
+              and x["deferred"]]
+    if parked:
+        print("\nDeferred — real work left, but all of it awaits a decision "
+              "(data/coverage-deferrals.json):")
+        for r in parked:
+            print("  %5.1f%%  %3d left  %s  [%s]" % (
+                r["coverage"], r["actionableTotal"], (r["framework"] or "")[:52],
+                r["deferred"]["decisionRef"] or r["deferred"]["queuedIn"] or "queued"))
+
+    live = [x for x in rows if x["state"] == "STARTED" and x["actionableTotal"]
+            and not x["deferred"]]
     live.sort(key=lambda x: (x["coverage"], -x["suppliersAwarded"]))
     print("\nLowest-coverage STARTED frameworks that still have work left:")
     for r in live[:8]:

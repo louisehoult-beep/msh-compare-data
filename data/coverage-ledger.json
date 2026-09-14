@@ -13,7 +13,7 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-02",
-  "differentiator.json published": 34610,
+  "differentiator.json published": 34617,
   "differentiator.json held": 47628
  },
  "counts": {
@@ -25,13 +25,14 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 442,
-  "inScopeSuppliersNeedingCrawl": 455,
+  "inScopeSuppliersNeedingCrawl": 456,
   "inScopeSuppliersNeedingDomain": 421,
   "suppliersRefused": 392,
   "suppliersRefusedButPublishingElsewhere": 102,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
-  "blockedFrameworks": 0
+  "blockedFrameworks": 0,
+  "deferredFrameworks": 1
  },
  "unresolvedSupplierNames": [
   [
@@ -2532,7 +2533,8 @@
    ],
    "unknown": [],
    "actionableTotal": 74,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Total Orthopaedic Solutions 3",
@@ -3189,7 +3191,8 @@
    ],
    "unknown": [],
    "actionableTotal": 60,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Orthotics, Podiatry and Immobilisation",
@@ -3576,7 +3579,8 @@
     "Thesis Technology Products Ltd"
    ],
    "actionableTotal": 32,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Minimally Invasive Surgery, Related Equipment and Accessories",
@@ -3988,7 +3992,8 @@
    ],
    "unknown": [],
    "actionableTotal": 24,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
@@ -4376,7 +4381,8 @@
     "Varian Medical Systems"
    ],
    "actionableTotal": 29,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Maternity, Obstetrics, Gynaecology and Sexual Health Products",
@@ -4401,6 +4407,10 @@
     {
      "supplier": "Organon UK",
      "domain": "organon.com"
+    },
+    {
+     "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
+     "domain": "penninehealthcare.co.uk"
     }
    ],
    "domainsMissing": [],
@@ -4635,11 +4645,11 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 17,
+    "publishedElsewhereNeedingCategory": 16,
     "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 0,
+    "crawlable": 1,
     "needDomain": 0
    },
    "published": [
@@ -4664,7 +4674,6 @@
     "GBUK Group",
     "Henleys Medical Supplies Limited",
     "Huntleigh",
-    "Pennine Healthcare (Ivor Shaw Ltd)",
     "Laborie Medical Technologies UK Ltd",
     "Mediq Healthcare UK Ltd",
     "Optimum Medical",
@@ -4683,7 +4692,9 @@
     "Organon UK"
    ],
    "capturedNothingCounted": [],
-   "notCrawled": [],
+   "notCrawled": [
+    "Pennine Healthcare (Ivor Shaw Ltd)"
+   ],
    "refused": [
     "Ceannaire Medical",
     "Dpek Healthcare Ltd",
@@ -4712,7 +4723,8 @@
     "Kimal Renal Care"
    ],
    "actionableTotal": 21,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Urology and Bowel Management",
@@ -4720,8 +4732,8 @@
    "category": "Rehabilitation and Community",
    "ends": "20 February 2027",
    "suppliersAwarded": 57,
-   "suppliersPublished": 18,
-   "coverage": 31.6,
+   "suppliersPublished": 17,
+   "coverage": 29.8,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -4749,6 +4761,10 @@
     {
      "supplier": "Key Health Solutions",
      "domain": null
+    },
+    {
+     "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
+     "domain": "penninehealthcare.co.uk"
     },
     {
      "supplier": "Redland embh Group Limited",
@@ -5021,7 +5037,7 @@
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 0,
+    "crawlable": 1,
     "needDomain": 9
    },
    "published": [
@@ -5040,7 +5056,6 @@
     "LINC Medical",
     "Mediplus Ltd",
     "Paramount Medical Solutions Ltd",
-    "Pennine Healthcare (Ivor Shaw Ltd)",
     "ProSys International Ltd",
     "Wellspect"
    ],
@@ -5073,6 +5088,7 @@
     "C&P Medical Trading Ltd",
     "E&E MEDICAL SUPPLIES LIMITED",
     "Key Health Solutions",
+    "Pennine Healthcare (Ivor Shaw Ltd)",
     "Redland embh Group Limited",
     "UNOQUIP GMBH",
     "Venture Healthcare Ltd",
@@ -5094,8 +5110,9 @@
     "KCI Medical Limited (3m)",
     "Salts Healthcare (Ostomy)"
    ],
-   "actionableTotal": 29,
-   "blockedReason": null
+   "actionableTotal": 30,
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Advanced Wound Care",
@@ -5512,7 +5529,8 @@
     "Brightwake Limited (trading as Advancis Medical)"
    ],
    "actionableTotal": 19,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Digital Diagnostic Solutions",
@@ -5914,7 +5932,8 @@
    ],
    "unknown": [],
    "actionableTotal": 9,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Complete Ophthalmology Solutions 3",
@@ -6261,7 +6280,8 @@
    ],
    "unknown": [],
    "actionableTotal": 27,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Pressure Area Care and Patient Handling",
@@ -6554,7 +6574,8 @@
     "Ultimate Healthcare Ltd (Millbrook, trading as Ultimate)"
    ],
    "actionableTotal": 17,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Surgical Instruments",
@@ -6860,7 +6881,8 @@
    ],
    "unknown": [],
    "actionableTotal": 21,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Operating Theatres Equipment and Related Accessories and Services",
@@ -7144,7 +7166,8 @@
    ],
    "unknown": [],
    "actionableTotal": 22,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Electrodes, Ultrasound Gels, Defibrillation and Related Consumables",
@@ -7433,7 +7456,8 @@
    ],
    "unknown": [],
    "actionableTotal": 11,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Respiratory Solutions",
@@ -7470,6 +7494,10 @@
     {
      "supplier": "Gce Group Ltd",
      "domain": null
+    },
+    {
+     "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
+     "domain": "penninehealthcare.co.uk"
     },
     {
      "supplier": "Philips Respironics",
@@ -7616,11 +7644,11 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 10,
+    "publishedElsewhereNeedingCategory": 9,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 0,
+    "crawlable": 1,
     "needDomain": 6
    },
    "published": [
@@ -7644,7 +7672,6 @@
     "Henleys Medical Supplies Limited",
     "Inspiration Healthcare",
     "Mediq Healthcare UK Ltd",
-    "Pennine Healthcare (Ivor Shaw Ltd)",
     "Proact Medical Ltd",
     "ProSys International Ltd",
     "TFX Group Ltd (Teleflex Medical)"
@@ -7658,6 +7685,7 @@
     "Aquilant Critical Care",
     "B.N.O.S Meditech Ltd",
     "Gce Group Ltd",
+    "Pennine Healthcare (Ivor Shaw Ltd)",
     "Philips Respironics",
     "Salter Labs UK Ltd",
     "Syringa Wholesale Distributor"
@@ -7673,7 +7701,8 @@
    ],
    "unknown": [],
    "actionableTotal": 18,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services",
@@ -7908,7 +7937,8 @@
     "Spacelabs Healthcare Ltd"
    ],
    "actionableTotal": 18,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Electrosurgical Consumables and Related Accessories",
@@ -8147,7 +8177,8 @@
     "Surgica Limited"
    ],
    "actionableTotal": 13,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Aids for Daily Living",
@@ -8341,7 +8372,8 @@
     "Rehabilitation Manufacturing Services ltd"
    ],
    "actionableTotal": 14,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Wheelchairs, Specialist Seating and Related Services",
@@ -8566,7 +8598,8 @@
     "Rehabilitation Manufacturing Services ltd"
    ],
    "actionableTotal": 16,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Skin Cleansing, Disinfection and Hygiene",
@@ -8804,7 +8837,8 @@
     "Polyco Healthline"
    ],
    "actionableTotal": 14,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "General Wound Care",
@@ -9050,7 +9084,8 @@
     "Polyco Healthline Limited"
    ],
    "actionableTotal": 6,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Infusion Pumps and Administration Sets and Associated Products",
@@ -9248,7 +9283,8 @@
    ],
    "unknown": [],
    "actionableTotal": 17,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
@@ -9422,7 +9458,8 @@
     "Scott Medical Ltd"
    ],
    "actionableTotal": 13,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Renal Replacement Therapies Services, Technologies and Consumables",
@@ -9609,7 +9646,8 @@
     "VWS (UK) Ltd Trading As Veolia Water Technologies"
    ],
    "actionableTotal": 13,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Neuromodulation Devices and Associated Products",
@@ -9819,7 +9857,8 @@
    ],
    "unknown": [],
    "actionableTotal": 4,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Physiotherapy and Occupational Therapy",
@@ -9994,7 +10033,8 @@
    ],
    "unknown": [],
    "actionableTotal": 10,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Intravenous Cannula and Associated Products",
@@ -10148,7 +10188,8 @@
     "Applied Medical Technology Limited"
    ],
    "actionableTotal": 8,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Ultrasound Scanners and Associated Options and Related Services",
@@ -10315,7 +10356,8 @@
    ],
    "unknown": [],
    "actionableTotal": 9,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Decontamination Capital Equipment, Associated Accessories and Services",
@@ -10467,7 +10509,8 @@
    ],
    "unknown": [],
    "actionableTotal": 10,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Blood Collection Devices",
@@ -10613,7 +10656,8 @@
    ],
    "unknown": [],
    "actionableTotal": 8,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Enteral Feeding, Bile Bags and Associated Products",
@@ -10765,7 +10809,8 @@
     "Ivor Shaw Ltd (t/a Pennine Healthcare)"
    ],
    "actionableTotal": 6,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Examination Gloves",
@@ -10912,7 +10957,8 @@
     "Vernacare LTD (Robinson Healthcare Limited)"
    ],
    "actionableTotal": 12,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Central Venous Catheters and Associated Products",
@@ -11060,7 +11106,8 @@
    ],
    "unknown": [],
    "actionableTotal": 8,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Infant Feeding and Accessories",
@@ -11210,7 +11257,8 @@
     "Nestle Nutrition"
    ],
    "actionableTotal": 11,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Patient Temperature Management",
@@ -11348,7 +11396,8 @@
     "Novus Medical Ltd"
    ],
    "actionableTotal": 8,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices",
@@ -11490,7 +11539,8 @@
    ],
    "unknown": [],
    "actionableTotal": 6,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Audiological Diagnostics Implantable Devices and Services",
@@ -11620,7 +11670,8 @@
    ],
    "unknown": [],
    "actionableTotal": 5,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Clinical and Sharps Waste Management",
@@ -11767,7 +11818,8 @@
    ],
    "unknown": [],
    "actionableTotal": 5,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices",
@@ -11890,7 +11942,13 @@
    ],
    "unknown": [],
    "actionableTotal": 3,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": {
+    "reason": "All three remaining suppliers need a routing or identity ruling from Lou, not crawl or mapping work. Xiel Ltd's Radiotherapy division is filed imaging:mobile, outside oncology's catsInScope (^o460); Medical Imaging Systems (MIS Healthcare) is an unresolved duplicate seed record (^o377) with its imaging vocabulary also unruled (^o320, ^o329); Promedics Orthopaedics Ltd publishes only orthopaedic bracing, correctly held (^o434).",
+    "queuedIn": "02-Elevate-and-Thrive/Hub/identity-vocab-decision-queue.md",
+    "decisionRef": "^o411",
+    "addedOn": "2026-09-14"
+   }
   },
   {
    "framework": "Radiotherapy Treatment Systems and Associated Options and Related Services",
@@ -12014,7 +12072,8 @@
     "Varian Medical Systems UK Ltd"
    ],
    "actionableTotal": 4,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products",
@@ -12136,7 +12195,8 @@
    ],
    "unknown": [],
    "actionableTotal": 3,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Prosthetic Components and Associated Products",
@@ -12257,7 +12317,8 @@
    ],
    "unknown": [],
    "actionableTotal": 2,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Surgical Gloves",
@@ -12358,7 +12419,8 @@
     "Semperit Investment"
    ],
    "actionableTotal": 5,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "CT Scanners and Associated Options and Related Services",
@@ -12459,7 +12521,8 @@
    ],
    "unknown": [],
    "actionableTotal": 3,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Polymer Aprons",
@@ -12563,7 +12626,8 @@
    ],
    "unknown": [],
    "actionableTotal": 1,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Contrast Injectors, Consumables and Associated Options and Related Services",
@@ -12643,7 +12707,8 @@
    ],
    "unknown": [],
    "actionableTotal": 3,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Polymer Products",
@@ -12714,7 +12779,8 @@
    "refused": [],
    "unknown": [],
    "actionableTotal": 3,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Reusable Clinical and Sharps Waste Management Service",
@@ -12761,7 +12827,8 @@
     "SRCL Ltd, trading as Stericycle"
    ],
    "actionableTotal": 2,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Brachytherapy Seeds and Associated Accessories",
@@ -12822,7 +12889,8 @@
    "refused": [],
    "unknown": [],
    "actionableTotal": 1,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services",
@@ -12920,7 +12988,8 @@
    ],
    "unknown": [],
    "actionableTotal": 3,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Nuclear Medicine Imaging and Associated Options and Related Services",
@@ -12974,7 +13043,8 @@
     "Siemens"
    ],
    "actionableTotal": 4,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Lithotripsy and Associated Options and Related Services",
@@ -13034,7 +13104,8 @@
    ],
    "unknown": [],
    "actionableTotal": 2,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Male Intra-Urethral Catheter with Magnet Control",
@@ -13083,7 +13154,8 @@
    "refused": [],
    "unknown": [],
    "actionableTotal": 1,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Non-Imaging Vibration Controlled Ultrasound System",
@@ -13132,7 +13204,8 @@
    "refused": [],
    "unknown": [],
    "actionableTotal": 1,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Airway Management Products and Associated Equipment",
@@ -13464,7 +13537,8 @@
     "Verathon Medical"
    ],
    "actionableTotal": 40,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Syringes, Needles and Associated Products",
@@ -13779,7 +13853,8 @@
     "Apollo Medical Technologies Ltd"
    ],
    "actionableTotal": 38,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Total Patient Assessment Device Solutions",
@@ -14053,7 +14128,8 @@
     "KCI Medical Ltd (3M)"
    ],
    "actionableTotal": 27,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Wound Closure",
@@ -14298,7 +14374,8 @@
     "T.J Smith & Nephew Ltd"
    ],
    "actionableTotal": 31,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Procedure Packs",
@@ -14325,6 +14402,10 @@
     {
      "supplier": "O&M Halyard Uk Limited",
      "domain": null
+    },
+    {
+     "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
+     "domain": "penninehealthcare.co.uk"
     },
     {
      "supplier": "Plasmic Healthsciences Uk Limited",
@@ -14468,11 +14549,11 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 13,
+    "publishedElsewhereNeedingCategory": 12,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 0,
+    "crawlable": 1,
     "needDomain": 5
    },
    "published": [],
@@ -14487,7 +14568,6 @@
     "MedScience Distribution",
     "M\u00f6lnlycke",
     "Paramount Medical Solutions Ltd",
-    "Pennine Healthcare (Ivor Shaw Ltd)",
     "Vernacare",
     "Vygon (UK)"
    ],
@@ -14497,6 +14577,7 @@
     "Accrington Surgical Inst. Suppliers",
     "Andersen Caledonia Ltd",
     "O&M Halyard Uk Limited",
+    "Pennine Healthcare (Ivor Shaw Ltd)",
     "Plasmic Healthsciences Uk Limited",
     "Vascular Perspectives Ltd"
    ],
@@ -14515,7 +14596,8 @@
    ],
    "unknown": [],
    "actionableTotal": 18,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics",
@@ -14696,7 +14778,8 @@
     "Nihon Kohden UK Ltd"
    ],
    "actionableTotal": 24,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Pulse Oximetry, Capnography and Related Monitoring Technologies",
@@ -14838,7 +14921,8 @@
     "Reflex Medical Ltd (New)"
    ],
    "actionableTotal": 23,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions",
@@ -15027,7 +15111,8 @@
     "Spacelabs Healthcare Ltd"
    ],
    "actionableTotal": 16,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Extension Sets and Lines",
@@ -15191,7 +15276,8 @@
    ],
    "unknown": [],
    "actionableTotal": 18,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Vascular Therapy and Associated Products",
@@ -15349,7 +15435,8 @@
     "Gardamed Limited (Barcelcom SA)"
    ],
    "actionableTotal": 19,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "External Defibrillation Devices and Related Services and Accessories",
@@ -15511,7 +15598,8 @@
     "Ortus"
    ],
    "actionableTotal": 16,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Hand Hygiene and Associated Products and Services",
@@ -15669,7 +15757,8 @@
     "Ecohydra Technologies Ltd"
    ],
    "actionableTotal": 15,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Surgical Mesh",
@@ -15832,7 +15921,8 @@
    ],
    "unknown": [],
    "actionableTotal": 16,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Instrument Decontamination and Accessories",
@@ -15974,7 +16064,8 @@
    ],
    "unknown": [],
    "actionableTotal": 17,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Intravenous Accessories and Pressure Monitoring Accessories",
@@ -16130,7 +16221,8 @@
    ],
    "unknown": [],
    "actionableTotal": 13,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Rigid Endoscopy and Associated Options and Related Services",
@@ -16299,7 +16391,8 @@
     "Emmat Medical"
    ],
    "actionableTotal": 11,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Needlefree Connection Systems and Associated Products",
@@ -16419,7 +16512,8 @@
     "KCI Medical Limited (3m)"
    ],
    "actionableTotal": 13,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services",
@@ -16540,7 +16634,8 @@
     "InHealth Ltd"
    ],
    "actionableTotal": 11,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Mobile X-Ray Systems and Associated Option and Related Services",
@@ -16665,7 +16760,8 @@
    ],
    "unknown": [],
    "actionableTotal": 6,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories",
@@ -16778,7 +16874,8 @@
    "refused": [],
    "unknown": [],
    "actionableTotal": 13,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Static X-Ray and Associated Options and Related Services",
@@ -16895,7 +16992,8 @@
    ],
    "unknown": [],
    "actionableTotal": 6,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Wipes for Surface Cleaning and Disinfection",
@@ -17005,7 +17103,8 @@
     "Nuvik UK Ltd"
    ],
    "actionableTotal": 10,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Disposable and Washable Continence Care",
@@ -17133,7 +17232,8 @@
    ],
    "unknown": [],
    "actionableTotal": 9,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Finance Solutions",
@@ -17246,7 +17346,8 @@
     "GENMED.ME LIMITED"
    ],
    "actionableTotal": 10,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Bladder Scanners and Associated Options and Related Services",
@@ -17347,7 +17448,8 @@
     "Verathon Medical"
    ],
    "actionableTotal": 7,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Fluoroscopy and Associated Options and Related Services",
@@ -17456,7 +17558,8 @@
    ],
    "unknown": [],
    "actionableTotal": 6,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Mobile Image Intensifiers and Associated Options and Related Services",
@@ -17563,7 +17666,8 @@
    ],
    "unknown": [],
    "actionableTotal": 5,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Structural Heart and Ventricular Assist Devices",
@@ -17677,7 +17781,8 @@
    ],
    "unknown": [],
    "actionableTotal": 8,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "External Breast Prosthesis and Chest Support",
@@ -17775,7 +17880,8 @@
    ],
    "unknown": [],
    "actionableTotal": 5,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Perfusion Devices, Consumables and Associated Equipment",
@@ -17873,7 +17979,8 @@
    ],
    "unknown": [],
    "actionableTotal": 7,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Medical Hollowware",
@@ -17964,7 +18071,8 @@
     "GenMed Enterprises Ltd (dormant on existing framework)"
    ],
    "actionableTotal": 6,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Pressure Infusers and Associated Products",
@@ -18047,7 +18155,8 @@
    ],
    "unknown": [],
    "actionableTotal": 7,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Tray Wrap and Sterilisation Equipment",
@@ -18133,7 +18242,8 @@
     "KCI Medical Ltd (previously 3M United Kingdom PLC)"
    ],
    "actionableTotal": 8,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Magnetic Resonance Imaging Scanners and Associated Option and Related Services",
@@ -18216,7 +18326,8 @@
    ],
    "unknown": [],
    "actionableTotal": 4,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Mammography Imaging Systems and Associated Options and Related Services",
@@ -18300,7 +18411,8 @@
    ],
    "unknown": [],
    "actionableTotal": 4,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Simulation Devices and Services",
@@ -18383,7 +18495,8 @@
    ],
    "unknown": [],
    "actionableTotal": 6,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Bone Densitometers, Associated Options and Related Services",
@@ -18466,7 +18579,8 @@
    ],
    "unknown": [],
    "actionableTotal": 2,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Negative Pressure Wound Therapy",
@@ -18548,7 +18662,8 @@
    ],
    "unknown": [],
    "actionableTotal": 4,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Robotic Medical Equipment and Associated Accessories",
@@ -18632,7 +18747,8 @@
     "Johnson & Johnson Medical Ltd (New to framework)"
    ],
    "actionableTotal": 3,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Surgical Implants for Men\u2019s and Women\u2019s Health",
@@ -18705,7 +18821,8 @@
    "refused": [],
    "unknown": [],
    "actionableTotal": 6,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Surgical Navigation Systems with Associated Options and Related Services",
@@ -18781,7 +18898,8 @@
     "T.J.Smith and Nephew Limited"
    ],
    "actionableTotal": 4,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Flexible Endoscopes and Associated Options and Related Services",
@@ -18863,7 +18981,8 @@
    ],
    "unknown": [],
    "actionableTotal": 2,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Medical Chart Paper and Ultrasound Film",
@@ -18937,7 +19056,8 @@
    ],
    "unknown": [],
    "actionableTotal": 4,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Radiotherapy IT Solutions and Associated Options and Related Services",
@@ -19006,7 +19126,8 @@
     "Varian Medical Systems UK Ltd"
    ],
    "actionableTotal": 4,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Specimen Cabinets and Associated Options and Related Services",
@@ -19073,7 +19194,8 @@
    ],
    "unknown": [],
    "actionableTotal": 3,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Reusable Plastic Medical Hollowware",
@@ -19147,7 +19269,8 @@
    ],
    "unknown": [],
    "actionableTotal": 2,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Obstetrics and Vinyl Pessaries",
@@ -19197,7 +19320,8 @@
    "refused": [],
    "unknown": [],
    "actionableTotal": 3,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Fresh Food DPS",
@@ -19333,7 +19457,8 @@
     "Your Choice Fruit & Vegetables T/A Your Choice Catering Supplies"
    ],
    "actionableTotal": 97,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Cleaning Equipment, Supplies and Associated Products",
@@ -19507,7 +19632,8 @@
     "Thomas Stoner Supplies Ltd"
    ],
    "actionableTotal": 46,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Medical Healthcare Furniture",
@@ -19675,7 +19801,8 @@
     "Wybone Ltd"
    ],
    "actionableTotal": 46,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Beverages, Confectionary and Snacks",
@@ -19774,7 +19901,8 @@
     "Walkers Snacks Ltd"
    ],
    "actionableTotal": 42,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Textiles and Associated Products",
@@ -19937,7 +20065,8 @@
     "Workwear Express Ltd"
    ],
    "actionableTotal": 26,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Food Vending Solutions",
@@ -20016,7 +20145,8 @@
     "Unox UK"
    ],
    "actionableTotal": 30,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Delivered Ready Prepared Meals",
@@ -20084,7 +20214,8 @@
     "Yumchop Foods Limited"
    ],
    "actionableTotal": 29,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Office and Outdoor Furniture",
@@ -20195,7 +20326,8 @@
     "Workscape Ltd"
    ],
    "actionableTotal": 22,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Ambient Food",
@@ -20277,7 +20409,8 @@
     "Weetabix Limited"
    ],
    "actionableTotal": 26,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Multi Temperature Food Solutions",
@@ -20343,7 +20476,8 @@
     "Yearsley Food Limited"
    ],
    "actionableTotal": 27,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Environmental Decontamination",
@@ -20508,7 +20642,8 @@
     "RON Services"
    ],
    "actionableTotal": 19,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Catering Consumables and Equipment",
@@ -20588,7 +20723,8 @@
     "Stephens Catering Equipment Co Ltd"
    ],
    "actionableTotal": 14,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Paper Hygiene",
@@ -20729,7 +20865,8 @@
     "UKR"
    ],
    "actionableTotal": 12,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Batteries, Lighting, Tools and Associated Facilities Management Consumables (Including EV Charging)",
@@ -20807,7 +20944,8 @@
     "Yesss Electrical"
    ],
    "actionableTotal": 13,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Office Supplies",
@@ -20912,7 +21050,8 @@
     "UK Laser Supplies Ltd"
    ],
    "actionableTotal": 8,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Medical Pulp, Macerators and Support Products",
@@ -21018,7 +21157,8 @@
     "Polyco Healthline Limited"
    ],
    "actionableTotal": 8,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Curtains, Blinds and Associated Services",
@@ -21121,7 +21261,8 @@
    ],
    "unknown": [],
    "actionableTotal": 8,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Printable Patient Identification Wristbands and Associated Accessories",
@@ -21210,7 +21351,8 @@
     "Robinson Healthcare Limited (Vernacare)"
    ],
    "actionableTotal": 5,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "NHS Healthcare Uniform",
@@ -21253,7 +21395,8 @@
     "Alsico UK"
    ],
    "actionableTotal": 2,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   },
   {
    "framework": "Multi Temperature Distribution",
@@ -21300,7 +21443,8 @@
    "refused": [],
    "unknown": [],
    "actionableTotal": 1,
-   "blockedReason": null
+   "blockedReason": null,
+   "deferred": null
   }
  ]
 }

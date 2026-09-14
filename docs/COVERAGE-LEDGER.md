@@ -30,6 +30,11 @@ the two facts are separate, and the refusal used to be invisible for any
 supplier publishing anything anywhere.
 **0 framework(s) have nothing left by a permitted route** —
 low coverage there means exhausted, not neglected.
+**1 framework(s) are DEFERRED** — their Left is real and
+counted here, but every supplier in it is waiting on a ruling only Lou can
+give, so `differentiator-framework-coverage` skips them when it picks a
+framework to work. They are listed in `data/coverage-deferrals.json` with
+the decision each waits on; delete the entry once that decision is made.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
@@ -39,7 +44,7 @@ low coverage there means exhausted, not neglected.
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 12 | 20.0% | 24 | 34 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 15 | 25.9% | 29 | 25 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 14 | 24.6% | 21 | 31 | STARTED |
-| Urology and Bowel Management | continence | 57 | 18 | 31.6% | 29 | 32 | STARTED |
+| Urology and Bowel Management | continence | 57 | 17 | 29.8% | 30 | 32 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 19 | 38 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 9 | 16.7% | 9 | 43 | STARTED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 11 | 20.8% | 27 | 21 | STARTED |
@@ -71,7 +76,7 @@ low coverage there means exhausted, not neglected.
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 6 | 7 | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 3 | 21.4% | 5 | 11 | STARTED |
-| Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 2 | 15.4% | 3 | 9 | STARTED |
+| Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 2 | 15.4% | 3 | 9 | STARTED · DEFERRED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | 4 | 7 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 3 | 9 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 4 | 33.3% | 2 | 7 | STARTED |
