@@ -125,8 +125,9 @@ jobs:
       # the whole dataset against live URLs, which is the daily crawl's job and
       # not this one's. Every other check runs.
       - name: Publish gate — nothing commits until this passes
-        run: python3 verify.py --no-links
-
+        run: |
+          python3 scripts/prune_calendar.py
+          python3 verify.py --no-links
       - name: Commit if changed
         if: inputs.dry_run != true
         run: |

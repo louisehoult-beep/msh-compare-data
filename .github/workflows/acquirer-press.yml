@@ -85,8 +85,9 @@ jobs:
       # is caught here rather than surprising the next data/ writer that reads
       # this file. Root rule 13's "verify before push" spirit, not its letter.
       - name: Sanity check — nothing else in the repo broke
-        run: python3 verify.py
-
+        run: |
+          python3 scripts/prune_calendar.py
+          python3 verify.py
       - name: Commit if changed
         run: |
           git config user.name "acquirer-press-bot"

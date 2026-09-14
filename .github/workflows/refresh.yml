@@ -54,7 +54,9 @@ jobs:
         run: python3 scripts/change_report.py --since 7d --brief state/whats-moved-7d.json > /dev/null
 
       - name: Publish gate — nothing commits until this passes
-        run: python3 verify.py
+        run: |
+          python3 scripts/prune_calendar.py
+          python3 verify.py
       - name: Commit if changed
         run: |
           git config user.name "compare-refresh-bot"
