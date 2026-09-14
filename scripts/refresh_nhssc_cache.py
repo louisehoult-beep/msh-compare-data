@@ -12,6 +12,11 @@ Rules (why this never degrades the cache):
   rarely vanish; a stale status beats losing 200 verified products).
 - The agent-verified notCatalogue map is preserved, minus any product that now
   has live codes.
+- The "NPC:<code>" entries written by scripts/seed_nhssc_from_icc_npc.py are
+  carried forward untouched. This script joins by product NAME and never
+  produces one, so rebuilding `products` from its own results alone would
+  delete them all (it did, 13/09/2026 — see the note beside the guard in
+  main()). The never-shrink guard measures the name-keyed rows only.
 Runs in GitHub Actions (Playwright chromium). ~30–40 min for ~900 products.
 """
 import json, re, asyncio, time
@@ -196,14 +201,37 @@ async def main():
         b = await pw.chromium.launch(headless=True)
         await asyncio.gather(*[worker(b, sh, results, counter, len(jobs)) for sh in shards])
         await b.close()
-    if len(results) < 0.8 * len(oldp):
-        raise SystemExit("ABORT: refresh produced %d products vs %d previously — refusing to shrink the cache." % (len(results), len(oldp)))
+    # TWO NAMESPACES LIVE IN `products`, AND THIS SCRIPT ONLY OWNS ONE (^o366,
+    # 13/09/2026). scripts/seed_nhssc_from_icc_npc.py joins the ICC matrices to
+    # the pilot catalogue by NPC CODE and writes its matches under keys of the
+    # form "NPC:<code>" — a namespace this script never produces, because it
+    # searches by product NAME. Rebuilding `products` from `results` alone
+    # therefore DELETED all 923 of them: the 13/09/2026 weekly run reached 843
+    # name matches against a cache of 1,761 and the never-shrink guard below
+    # aborted the whole job. The guard was right and is not the thing to change
+    # — it was comparing this script's name-search output against a total that
+    # includes 923 rows it was never going to produce. So: carry the NPC:
+    # namespace forward untouched (the same never-shrink rule that script's own
+    # docstring states), and measure the guard against like for like.
+    carried = {k: v for k, v in oldp.items() if k.startswith('NPC:')}
+    oldname = {k: v for k, v in oldp.items() if not k.startswith('NPC:')}
+    if len(results) < 0.8 * len(oldname):
+        raise SystemExit("ABORT: refresh produced %d name-matched products vs %d previously — refusing to shrink the cache." % (len(results), len(oldname)))
+    # notCatalogue is the name-search route's own honest empty state, so it is
+    # resolved against the name-keyed results only, before the carried rows join.
     notcat = {k: v for k, v in (old.get('notCatalogue') or {}).items() if k.lower() not in {r.lower() for r in results}}
-    out = {'_meta': {'source': 'pilot.supplychain.nhs.uk', 'refreshed': time.strftime('%d/%m/%Y'),
-                     'matched': len(results), 'notCatalogue': len(notcat)},
-           'products': results, 'notCatalogue': notcat}
+    matched = len(results)
+    results.update(carried)   # keys cannot collide: "NPC:XXXNNNNN" is never a product name
+    # Anything else the ICC seed (or a future writer) recorded in _meta belongs
+    # to that writer, not to this run. Keep it rather than rebuilding _meta from
+    # scratch and silently dropping icc_npc_seed_refreshed/_matched.
+    meta = dict(old.get('_meta') or {})
+    meta.update({'source': 'pilot.supplychain.nhs.uk', 'refreshed': time.strftime('%d/%m/%Y'),
+                 'matched': matched, 'npcCarried': len(carried), 'notCatalogue': len(notcat)})
+    out = {'_meta': meta, 'products': results, 'notCatalogue': notcat}
     json.dump(out, open(CACHE_PATH, 'w'))
     imgs = sum(1 for v in results.values() if any(i.get('img') for i in v['items']))
-    print("DONE: %d products (%d with images) | %d not-catalogue preserved" % (len(results), imgs, len(notcat)))
+    print("DONE: %d products (%d name-matched this run, %d NPC: rows carried, %d with images) | %d not-catalogue preserved"
+          % (len(results), matched, len(carried), imgs, len(notcat)))
 
 asyncio.run(main())

@@ -86,9 +86,29 @@ jobs:
           print("accounted for   : %d of %d" % (ranges + refused, len(seed)))
           EOF
 
-      # build_supplier_index.py is NOT run here. This workflow writes one file.
-      # The index rebuild belongs to refresh.yml, 55 minutes later, and running
-      # it twice a night just doubles the chance of a writer collision.
+      # WHY THE LEDGER IS REBUILT HERE (added 13/09/2026 after this workflow
+      # failed its own gate on 13/09). This run RECORDS REFUSALS: a supplier
+      # whose site is read and found uncrawlable goes into
+      # data/supplier-products.json's `refusals`. verify.py's coverage-ledger
+      # check then requires every awarded supplier carrying a refusal to appear
+      # in that framework row's `refusedSuppliers` (^o404) — and nothing else in
+      # this repo regenerates the ledger, so the first new refusal of a supplier
+      # sitting in a framework's notCrawled bucket made the gate FAIL and the
+      # whole night's crawl was discarded uncommitted. Three rows failed that
+      # way on 13/09 (Carleton Medical, Fulbourn Medical, Relianace High -Tech).
+      # The ledger is a pure local derivation over frameworks.json,
+      # supplier-products.json and differentiator.json — no network, ~0.4s — so
+      # rebuilding it in the same run that changed its inputs is the cheap,
+      # correct answer. It must run BEFORE stamp_notice.py: the rebuild writes a
+      # fresh file with no `_notice` block, and an unstamped data file fails the
+      # gate on its own.
+      - name: Rebuild the coverage ledger over this run's refusals
+        run: python3 scripts/build_coverage_ledger.py
+
+      # build_supplier_index.py is NOT run here. This workflow writes the one
+      # crawled file plus the ledger derived from it directly above; the index
+      # rebuild belongs to refresh.yml, 55 minutes later, and running it twice a
+      # night just doubles the chance of a writer collision.
       - name: Re-stamp the ownership notice and data markers
         run: python3 scripts/stamp_notice.py
 
@@ -102,7 +122,11 @@ jobs:
         run: |
           git config user.name "supplier-capture-bot"
           git config user.email "actions@github.com"
-          git add data
+          # docs/COVERAGE-LEDGER.md is written by build_coverage_ledger.py in the
+          # same pass as the JSON, and it lives outside data/ — staging only
+          # `data` would leave the human-readable ledger drifting behind the
+          # file it describes on every run.
+          git add data docs/COVERAGE-LEDGER.md
           git diff --cached --quiet || git commit -m "Supplier range capture $(date -u +%F)"
           pushed=0
           for attempt in 1 2 3 4 5; do
