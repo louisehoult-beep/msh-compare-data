@@ -38,14 +38,14 @@ low coverage there means exhausted, not neglected.
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 17 | 27.0% | 32 | 23 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 12 | 20.0% | 24 | 34 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 15 | 25.9% | 29 | 24 | STARTED |
-| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 14 | 24.6% | 22 | 29 | STARTED |
+| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 14 | 24.6% | 21 | 30 | STARTED |
 | Urology and Bowel Management | continence | 57 | 18 | 31.6% | 29 | 31 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 19 | 37 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 9 | 16.7% | 9 | 43 | STARTED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 11 | 20.8% | 27 | 21 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 17 | 22 | STARTED |
 | Surgical Instruments | surgical | 50 | 11 | 22.0% | 21 | 22 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 9 | 20.9% | 24 | 17 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 9 | 20.9% | 22 | 19 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 7 | 18.9% | 11 | 27 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 18 | 16 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 7 | 20.0% | 18 | 14 | STARTED |
@@ -68,7 +68,7 @@ low coverage there means exhausted, not neglected.
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 8 | 7 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 4 | 22.2% | 11 | 5 | STARTED |
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 8 | 7 | STARTED |
-| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 7 | 6 | STARTED |
+| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 6 | 7 | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 3 | 21.4% | 5 | 11 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 2 | 15.4% | 3 | 9 | STARTED |

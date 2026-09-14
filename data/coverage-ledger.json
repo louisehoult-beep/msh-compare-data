@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 446,
-  "inScopeSuppliersNeedingCrawl": 455,
+  "inScopeSuppliersNeedingCrawl": 451,
   "inScopeSuppliersNeedingDomain": 417,
-  "suppliersRefused": 388,
+  "suppliersRefused": 392,
   "suppliersRefusedButPublishingElsewhere": 100,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -4391,10 +4391,6 @@
     {
      "supplier": "Organon UK",
      "domain": "organon.com"
-    },
-    {
-     "supplier": "Sxwell UK Limited",
-     "domain": "mates.co.uk"
     }
    ],
    "domainsMissing": [],
@@ -4496,6 +4492,13 @@
      "domain": "rociallehealthcare.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Sxwell UK Limited",
+     "domain": "www.mates.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-14",
      "bucket": "refused"
     },
     {
@@ -4619,7 +4622,7 @@
     "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 1,
+    "crawlable": 0,
     "needDomain": 0
    },
    "published": [
@@ -4663,9 +4666,7 @@
     "Organon UK"
    ],
    "capturedNothingCounted": [],
-   "notCrawled": [
-    "Sxwell UK Limited"
-   ],
+   "notCrawled": [],
    "refused": [
     "Ceannaire Medical",
     "Dpek Healthcare Ltd",
@@ -4681,6 +4682,7 @@
     "Parburch Medical Developments Ltd",
     "RB Medical Engineering Ltd",
     "Rocialle Healthcare",
+    "Sxwell UK Limited",
     "Unisurge International Limited",
     "Viveca Biomed Ltd",
     "Williams Medical Supplies",
@@ -4692,7 +4694,7 @@
    "unknown": [
     "Kimal Renal Care"
    ],
-   "actionableTotal": 22,
+   "actionableTotal": 21,
    "blockedReason": null
   },
   {
@@ -6840,16 +6842,8 @@
      "domain": null
     },
     {
-     "supplier": "Carleton Medical",
-     "domain": "carletonmedical.co.uk"
-    },
-    {
      "supplier": "Ferno (UK) Limited",
      "domain": null
-    },
-    {
-     "supplier": "Fulbourn Medical",
-     "domain": "fulbournmedical.com"
     },
     {
      "supplier": "Ingles Ltd",
@@ -6906,6 +6900,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Carleton Medical",
+     "domain": "www.carletonmedical.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-14",
+     "bucket": "refused"
+    },
+    {
      "supplier": "D.P. Medical Systems Limited",
      "domain": "dpmedicalsys.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -6917,6 +6918,13 @@
      "domain": "uk.erbegroup.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-13",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Fulbourn Medical",
+     "domain": "www.fulbournmedical.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-14",
      "bucket": "refused"
     },
     {
@@ -7032,7 +7040,7 @@
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 2,
+    "crawlable": 0,
     "needDomain": 10
    },
    "published": [
@@ -7065,9 +7073,7 @@
    "capturedNothingCounted": [],
    "notCrawled": [
     "Brandon Medical Company Ltd",
-    "Carleton Medical",
     "Ferno (UK) Limited",
-    "Fulbourn Medical",
     "Ingles Ltd",
     "Lynton Lasers",
     "Newmaw Medical Ltd",
@@ -7079,8 +7085,10 @@
    ],
    "refused": [
     "Bender UK Ltd",
+    "Carleton Medical",
     "D.P. Medical Systems Limited",
     "Erbe Medical UK Ltd",
+    "Fulbourn Medical",
     "Howorth Air Technology",
     "Karl Storz UK",
     "Novus Med Ltd",
@@ -7090,7 +7098,7 @@
     "Xograph Healthcare Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 24,
+   "actionableTotal": 22,
    "blockedReason": null
   },
   {
@@ -11267,10 +11275,6 @@
      "domain": null
     },
     {
-     "supplier": "Relianace High -Tech Ltd",
-     "domain": "reliancehightech.co.uk"
-    },
-    {
      "supplier": "Tobii Dynavox Ltd",
      "domain": null
     }
@@ -11313,6 +11317,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Relianace High -Tech Ltd",
+     "domain": "www.reliancehightech.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-14",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Smartbox Assistive Technology",
      "domain": "thinksmartbox.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -11338,7 +11349,7 @@
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 1,
+    "crawlable": 0,
     "needDomain": 5
    },
    "published": [
@@ -11358,7 +11369,6 @@
     "Lifeline 24",
     "Mounts & More Ltd",
     "Orbis Protect",
-    "Relianace High -Tech Ltd",
     "Tobii Dynavox Ltd"
    ],
    "refused": [
@@ -11366,11 +11376,12 @@
     "DH2 Solutions Ltd",
     "Legrand Electric Ltd",
     "PCByVoice",
+    "Relianace High -Tech Ltd",
     "Smartbox Assistive Technology",
     "Total Mobile"
    ],
    "unknown": [],
-   "actionableTotal": 7,
+   "actionableTotal": 6,
    "blockedReason": null
   },
   {
