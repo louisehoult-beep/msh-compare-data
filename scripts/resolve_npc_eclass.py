@@ -80,8 +80,19 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
-PIPELINE = ("/Users/louisehoult/Library/CloudStorage/OneDrive-Personal/Cowork-OS/"
-            "02-Elevate-and-Thrive/Hub/Medical-Sales-Hub/cloud-pipeline")
+# Where the Supply Disruption Tracker's own repo is checked out. This script
+# needs two things from it: sdt_fetch.py (imported below) and, for
+# build_eclass_map.py beside it, sdt-suspensions.json. That repo
+# (medical-sales-hub-pipeline) is PRIVATE, so a GitHub runner in THIS repo
+# cannot see it at all — which is why the weekly job that ran these two
+# scripts lived here and never once worked in CI (13/09/2026: it reported 283
+# NPCs to resolve, resolved none, and exited green, then build_eclass_map.py
+# died on the missing file). The job now runs in the pipeline repo, where both
+# inputs are local, and passes its own path in through PIPELINE_ROOT. The
+# default below is Lou's Mac, so running this by hand is unchanged.
+PIPELINE = os.environ.get("PIPELINE_ROOT") or (
+    "/Users/louisehoult/Library/CloudStorage/OneDrive-Personal/Cowork-OS/"
+    "02-Elevate-and-Thrive/Hub/Medical-Sales-Hub/cloud-pipeline")
 
 DIFFERENTIATOR = os.path.join(REPO, "data", "differentiator.json")
 OUT = os.path.join(REPO, "data", "npc-eclass.json")
@@ -143,9 +154,17 @@ def _resolve(npc):
 
     Never raises: a miss means "drop this NPC", not "the run failed" — the same
     contract sdt_fetch.py's own resolver uses.
+
+    ⚠️ THE IMPORT IS NOT IN HERE ANY MORE (13/09/2026). It used to be, inside
+    this same `except Exception`, which made "sdt_fetch isn't importable" look
+    identical to "this NPC isn't in the catalogue". On a GitHub runner the
+    pipeline repo is not present, so EVERY call raised ImportError and returned
+    None: the run reported 283 NPCs to resolve, resolved 0, and still exited
+    GREEN. A missing dependency is a broken run, not 283 honest misses, so it
+    is now checked once in main() and fails the run loudly. What stays caught
+    here is what genuinely varies per NPC — a network blip or an odd payload.
     """
     try:
-        import sdt_fetch
         data = sdt_fetch._post({"limit": 3, "query": npc})
     except Exception:
         return None
@@ -183,6 +202,18 @@ def main():
     args = ap.parse_args()
 
     sys.path.insert(0, PIPELINE)
+    # Fail loudly and early if the Tracker's fetcher is not reachable — see
+    # _resolve()'s docstring for the green-but-empty run this prevents.
+    global sdt_fetch
+    try:
+        import sdt_fetch
+    except ImportError as e:
+        raise SystemExit(
+            "ABORT: cannot import sdt_fetch from %r (%s).\n"
+            "That module lives in the private medical-sales-hub-pipeline repo. Set "
+            "PIPELINE_ROOT to a checkout of it, or run this from the eclass-map "
+            "workflow in that repo, which passes the path in. Refusing to "
+            "'resolve' every NPC to nothing and report success." % (PIPELINE, e))
 
     cand = load_categorised_npcs()
     cache = load_cache()
@@ -207,7 +238,7 @@ def main():
         return
 
     if todo:
-        done = 0
+        done, resolved = 0, 0
         with concurrent.futures.ThreadPoolExecutor(max_workers=args.pool) as ex:
             futs = {ex.submit(_resolve, n): n for n in todo}
             for fut in concurrent.futures.as_completed(futs):
@@ -218,6 +249,9 @@ def main():
                     print("  resolved %d/%d" % (done, len(todo)))
                 if rec and rec.get("eclass"):
                     known[npc] = rec
+                    resolved += 1
+        print("  resolved %d of %d attempted (%d not found in the catalogue)"
+              % (resolved, len(todo), len(todo) - resolved))
 
     # Emit the observations: one row per NPC where we have BOTH an eClass and a
     # cat, carrying the join strength so the map builder can judge it.
