@@ -105,3 +105,59 @@ unchanged — NSK's range didn't map into an in-scope category). `needDomain` 52
 `heldNeedingCategory` 3 → 4. Real forward motion (a domain found and proven, a genuine
 745-product capture on record) even though the published count didn't move this run —
 matches the brief's own point that coverage % is not the only signal of progress.
+
+## Second run 14/09 — Infusion Pumps and Administration Sets and Associated Products
+
+Coverage-ledger regeneration this run showed the same lowest-coverage pick order as the
+earlier run today (Radiotherapy 15.4%, Digital Diagnostic Solutions 16.7%, Insulin Pumps
+16.7%, Infusion Pumps 18.5%). Radiotherapy, Digital Diagnostic Solutions and Insulin Pumps
+were already confirmed dead ends earlier today (see above) and re-confirmed unchanged
+against this run's fresh ledger. Worked **Infusion Pumps and Administration Sets and
+Associated Products** (18.5%, 5/27 published), whose 7 `needDomain` suppliers had not yet
+been attempted today.
+
+All 7 were already correctly identity-resolved in the seed (own distinct records, `company_alias.py`
+returns exact-name/no-conflict for each), so no identity work was needed — only domain-finding.
+Researched primary sources (company's own site, exhibitor listings, Bloomberg company profile,
+LinkedIn) for each of the 7:
+
+- **BMS Critical Care Ltd** → `bmscriticalcare.com`, confirmed via the company's own About page.
+  Crawled: 24 products across 8 divisions (PE/PVC Syringe Pump Lines, ECO RANGE, EasiFlush
+  NeedleFree Range, 4 Way Stopcock & Lines, T34 Compatible Line, EasiFlo Flow Regulator Set,
+  Wide Bore Lines, Accessories) — IV administration lines, stopcocks and needle-free connectors.
+  Held, not mapped: no `differentiator-category-map.json` entry yet for this supplier. Logged to
+  OUTSTANDING (`^o473`) rather than guessed at a category, per the brief's rule against forcing
+  mapping decisions in this run.
+- **BECTON DICKINSON (CME) U.K. LIMITED** → `cme-infusion.com`, confirmed via Bloomberg company
+  profile tying the company number directly to "CME Medical UK Ltd". Crawl refused: robots.txt
+  disallows automated reading. No products captured, so the pre-existing identity-tie flag
+  against the published "BD — Becton, Dickinson" record (`^o466`, already logged before this run)
+  is unaffected — nothing was published under either name this run.
+- **Eitan Medical UK Ltd** → `eitanmedical.com`, confirmed via the company's own UK-launch press
+  release. Crawl refused: robots.txt disallows automated reading.
+- **Qualasept Ltd t/a Bath ASU** → `bathasu.com`, confirmed as the trading name's own site. Crawl
+  refused: WordPress API exposes no product post type and no WooCommerce Store API — Bath ASU is
+  an aseptic-compounding manufacturer, not a catalogue storefront.
+- **TLB Medical Supplies** → `tlbmedicalsupplies.com`, confirmed as the registered entity's own
+  site. Crawl refused: robots.txt disallows automated reading.
+- **Braun and Company Limited** → `brauninternational.com`, confirmed via its own exhibitor
+  listing (ebme.co.uk), but the domain now resolves to an expired-domain parking page
+  (`exp.gname.net`) rather than the company's site — crawl correctly refused it as unreachable.
+  Logged to OUTSTANDING (`^o474`).
+- **Arcomedical Infusion Ltd**: no domain added. `arcomed.com` (used in the company's own email
+  address) is the Swiss parent arcomed AG's site (recently acquired by CODAN), with no UK/NHS
+  mention; the UK-specific domain LinkedIn lists (`arcomed.co.uk`) does not resolve. Left
+  un-domained rather than risk filing the Swiss parent's catalogue under the UK entity's name.
+  Logged to OUTSTANDING (`^o475`).
+
+All 6 domains added to `supplier-seed.json` as `links: [{"label": "Website", ...}]` entries
+(round-trip verified against the file's current minified format before writing).
+
+## Coverage movement
+
+Infusion Pumps and Administration Sets and Associated Products: 5/27 published (18.5%) →
+5/27 published (18.5%, unchanged — BMS Critical Care's capture didn't map into an in-scope
+category). `needDomain` 7 → 1 (Arcomedical Infusion Ltd only), `heldNeedingCategory` 0 → 1.
+Real forward motion (2 domains proven and crawled — one live capture, one confirmed-dead — plus
+3 honest robots.txt/no-catalogue refusals recorded) even though the published count did not
+move this run, matching the brief's point that coverage % is not the only signal of progress.

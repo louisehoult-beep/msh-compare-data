@@ -14,7 +14,7 @@
  "generatedFrom": {
   "frameworks.json": "2026-09-02",
   "differentiator.json published": 34617,
-  "differentiator.json held": 48373
+  "differentiator.json held": 48397
  },
  "counts": {
   "frameworks": 121,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 442,
-  "inScopeSuppliersNeedingCrawl": 456,
-  "inScopeSuppliersNeedingDomain": 420,
-  "suppliersRefused": 392,
+  "inScopeSuppliersNeedingCrawl": 451,
+  "inScopeSuppliersNeedingDomain": 414,
+  "suppliersRefused": 397,
   "suppliersRefusedButPublishingElsewhere": 102,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -2589,10 +2589,6 @@
      "domain": null
     },
     {
-     "supplier": "Braun and Company Limited",
-     "domain": null
-    },
-    {
      "supplier": "Cenobiologics Ltd",
      "domain": null
     },
@@ -2779,7 +2775,6 @@
     "Biedermann Motech International LTD",
     "Biomet 3i UK, Ltd (ZimVie)",
     "Bioventus Cooperatief U.A",
-    "Braun and Company Limited",
     "Cenobiologics Ltd",
     "Contura Orthopaedics Ltd",
     "Edge Medical Ltd",
@@ -2854,6 +2849,13 @@
      "domain": "www.bonesupport.com",
      "reason": "the site's WordPress API exposes no product post type; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-29",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Braun and Company Limited",
+     "domain": "www.brauninternational.com",
+     "reason": "neither www.brauninternational.com nor www.www.brauninternational.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-14",
      "bucket": "refused"
     },
     {
@@ -3074,7 +3076,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 51
+    "needDomain": 50
    },
    "published": [
     "Acumed Ltd",
@@ -3118,7 +3120,6 @@
     "Biedermann Motech International LTD",
     "Biomet 3i UK, Ltd (ZimVie)",
     "Bioventus Cooperatief U.A",
-    "Braun and Company Limited",
     "Cenobiologics Ltd",
     "Contura Orthopaedics Ltd",
     "Edge Medical Ltd",
@@ -3170,6 +3171,7 @@
     "Adler Ortho UK Limited",
     "Baxter Healthcare Ltd",
     "Bonesupport",
+    "Braun and Company Limited",
     "De Soutter Medical Ltd",
     "Delta Surgical",
     "D.P. Medical Systems Limited",
@@ -3189,7 +3191,7 @@
     "Surgical Instrument Group Holdings Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 60,
+   "actionableTotal": 59,
    "blockedReason": null,
    "deferred": null
   },
@@ -9103,42 +9105,16 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Arcomedical Infusion Ltd",
-     "domain": null
-    },
-    {
      "supplier": "BMS Critical Care Ltd",
-     "domain": null
+     "domain": "bmscriticalcare.com"
     },
     {
-     "supplier": "Braun and Company Limited",
-     "domain": null
-    },
-    {
-     "supplier": "BECTON DICKINSON (CME) U.K. LIMITED",
-     "domain": null
-    },
-    {
-     "supplier": "Eitan Medical UK Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Qualasept Ltd t/a Bath ASU",
-     "domain": null
-    },
-    {
-     "supplier": "TLB Medical Supplies",
+     "supplier": "Arcomedical Infusion Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Arcomedical Infusion Ltd",
-    "BECTON DICKINSON (CME) U.K. LIMITED",
-    "BMS Critical Care Ltd",
-    "Braun and Company Limited",
-    "Eitan Medical UK Ltd",
-    "Qualasept Ltd t/a Bath ASU",
-    "TLB Medical Supplies"
+    "Arcomedical Infusion Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -9157,6 +9133,27 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Braun and Company Limited",
+     "domain": "www.brauninternational.com",
+     "reason": "neither www.brauninternational.com nor www.www.brauninternational.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-14",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "BECTON DICKINSON (CME) U.K. LIMITED",
+     "domain": "www.cme-infusion.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-14",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Eitan Medical UK Ltd",
+     "domain": "eitanmedical.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-14",
+     "bucket": "refused"
+    },
+    {
      "supplier": "GenX MediCare Ltd",
      "domain": "genxmedicare.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -9171,10 +9168,24 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Qualasept Ltd t/a Bath ASU",
+     "domain": "www.bathasu.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-14",
+     "bucket": "refused"
+    },
+    {
      "supplier": "RPG Medical Limited",
      "domain": "rpgmedical.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "TLB Medical Supplies",
+     "domain": "tlbmedicalsupplies.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-14",
      "bucket": "refused"
     },
     {
@@ -9237,11 +9248,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 10,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 7
+    "needDomain": 1
    },
    "published": [
     "B. Braun Medical",
@@ -9262,26 +9273,27 @@
     "ICU Medical (incl. Smiths Medical)",
     "Vygon (UK)"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "BMS Critical Care Ltd"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Arcomedical Infusion Ltd",
-    "BMS Critical Care Ltd",
-    "Braun and Company Limited",
-    "BECTON DICKINSON (CME) U.K. LIMITED",
-    "Eitan Medical UK Ltd",
-    "Qualasept Ltd t/a Bath ASU",
-    "TLB Medical Supplies"
+    "Arcomedical Infusion Ltd"
    ],
    "refused": [
     "ALXR Limited",
     "Baxter Healthcare Ltd",
+    "Braun and Company Limited",
+    "BECTON DICKINSON (CME) U.K. LIMITED",
+    "Eitan Medical UK Ltd",
     "GenX MediCare Ltd",
     "Prosum Medical Ltd",
-    "RPG Medical Limited"
+    "Qualasept Ltd t/a Bath ASU",
+    "RPG Medical Limited",
+    "TLB Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 17,
+   "actionableTotal": 12,
    "blockedReason": null,
    "deferred": null
   },
@@ -10056,16 +10068,11 @@
      "domain": null
     },
     {
-     "supplier": "TLB Medical Supplies",
-     "domain": null
-    },
-    {
      "supplier": "William Davies Care Limited",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "TLB Medical Supplies",
     "Unomedical Ltd",
     "William Davies Care Limited"
    ],
@@ -10090,6 +10097,13 @@
      "domain": "rociallehealthcare.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "TLB Medical Supplies",
+     "domain": "tlbmedicalsupplies.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-14",
      "bucket": "refused"
     },
     {
@@ -10151,7 +10165,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 2
    },
    "published": [
     "B. Braun Medical",
@@ -10175,18 +10189,18 @@
    "capturedNothingCounted": [],
    "notCrawled": [
     "Unomedical Ltd",
-    "TLB Medical Supplies",
     "William Davies Care Limited"
    ],
    "refused": [
     "Iskus Health UK Limited",
     "Prosum Medical Ltd",
-    "Rocialle Healthcare"
+    "Rocialle Healthcare",
+    "TLB Medical Supplies"
    ],
    "unknown": [
     "Applied Medical Technology Limited"
    ],
-   "actionableTotal": 8,
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
@@ -15129,7 +15143,7 @@
    "crawlWorklist": [
     {
      "supplier": "BMS Critical Care Ltd",
-     "domain": null
+     "domain": "bmscriticalcare.com"
     },
     {
      "supplier": "Europlaz Technologies Ltd",
@@ -15145,7 +15159,6 @@
     }
    ],
    "domainsMissing": [
-    "BMS Critical Care Ltd",
     "Europlaz Technologies Ltd",
     "Vannin Healthcare Global Ltd",
     "Wescott Medical Ltd"
@@ -15235,11 +15248,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 14,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 4
+    "needDomain": 3
    },
    "published": [],
    "publishedElsewhere": [
@@ -15258,10 +15271,11 @@
     "Spirit Medical Ltd",
     "Vygon (UK)"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "BMS Critical Care Ltd"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "BMS Critical Care Ltd",
     "Europlaz Technologies Ltd",
     "Vannin Healthcare Global Ltd",
     "Wescott Medical Ltd"
@@ -16082,11 +16096,7 @@
    "crawlWorklist": [
     {
      "supplier": "BMS Critical Care Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "TLB Medical Supplies",
-     "domain": null
+     "domain": "bmscriticalcare.com"
     },
     {
      "supplier": "William Davies Care Limited",
@@ -16094,8 +16104,6 @@
     }
    ],
    "domainsMissing": [
-    "BMS Critical Care Ltd",
-    "TLB Medical Supplies",
     "William Davies Care Limited"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -16150,6 +16158,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "TLB Medical Supplies",
+     "domain": "tlbmedicalsupplies.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-14",
+     "bucket": "refused"
+    },
+    {
      "supplier": "B. Braun Medical",
      "domain": "bbraun.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -16183,11 +16198,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 10,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 1
    },
    "published": [],
    "publishedElsewhere": [
@@ -16202,11 +16217,11 @@
     "Merit Medical UK Ltd",
     "Vygon (UK)"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "BMS Critical Care Ltd"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "BMS Critical Care Ltd",
-    "TLB Medical Supplies",
     "William Davies Care Limited"
    ],
    "refused": [
@@ -16216,10 +16231,11 @@
     "365 Healthcare",
     "Walters Medical Ltd",
     "Pall Europe Limited",
-    "Prosum Medical Ltd"
+    "Prosum Medical Ltd",
+    "TLB Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 13,
+   "actionableTotal": 12,
    "blockedReason": null,
    "deferred": null
   },

@@ -39,7 +39,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 29 | 23.8% | 74 | 32 | STARTED |
-| Total Orthopaedic Solutions 3 | ortho | 101 | 20 | 19.8% | 60 | 33 | STARTED |
+| Total Orthopaedic Solutions 3 | ortho | 101 | 20 | 19.8% | 59 | 34 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 17 | 27.0% | 32 | 23 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 12 | 20.0% | 24 | 34 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 15 | 25.9% | 29 | 25 | STARTED |
@@ -59,12 +59,12 @@ the decision each waits on; delete the entry once that decision is made.
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 8 | 25.8% | 16 | 12 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 14 | 18 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 6 | 22 | STARTED |
-| Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 5 | 18.5% | 17 | 12 | STARTED |
+| Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 5 | 18.5% | 12 | 17 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 7 | 28.0% | 13 | 7 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | 13 | 11 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 4 | 17 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 6 | 27.3% | 10 | 11 | STARTED |
-| Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 8 | 9 | STARTED |
+| Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 7 | 10 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 4 | 19.0% | 9 | 11 | STARTED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 6 | 30.0% | 10 | 6 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 6 | 31.6% | 8 | 11 | STARTED |
@@ -106,7 +106,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Hand Hygiene and Associated Products and Services | — | 21 | 0 | 0.0% | 15 | 11 | UNMAPPED |
 | Surgical Mesh | — | 21 | 0 | 0.0% | 16 | 9 | UNMAPPED |
 | Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 17 | 9 | UNMAPPED |
-| Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 13 | 11 | UNMAPPED |
+| Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 12 | 12 | UNMAPPED |
 | Rigid Endoscopy and Associated Options and Related Services | — | 18 | 0 | 0.0% | 11 | 13 | UNMAPPED |
 | Needlefree Connection Systems and Associated Products | — | 16 | 0 | 0.0% | 13 | 7 | UNMAPPED |
 | Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services | — | 14 | 0 | 0.0% | 11 | 6 | UNMAPPED |
