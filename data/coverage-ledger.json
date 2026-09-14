@@ -24,14 +24,14 @@
   "unmapped": 47,
   "outOfScope": 20,
   "inScope": 101,
-  "supplierNamesUnresolved": 446,
-  "inScopeSuppliersNeedingCrawl": 451,
-  "inScopeSuppliersNeedingDomain": 417,
+  "supplierNamesUnresolved": 442,
+  "inScopeSuppliersNeedingCrawl": 455,
+  "inScopeSuppliersNeedingDomain": 421,
   "suppliersRefused": 392,
-  "suppliersRefusedButPublishingElsewhere": 100,
+  "suppliersRefusedButPublishingElsewhere": 102,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
-  "blockedFrameworks": 1
+  "blockedFrameworks": 0
  },
  "unresolvedSupplierNames": [
   [
@@ -1759,22 +1759,6 @@
    1
   ],
   [
-   "Globus Medical UK Ltd",
-   1
-  ],
-  [
-   "M.D.M Medical Ltd",
-   1
-  ],
-  [
-   "NuVasive UK Ltd",
-   1
-  ],
-  [
-   "Ortho Solutions UK Ltd",
-   1
-  ],
-  [
    "KCI Medical Ltd (3M)",
    1
   ],
@@ -2623,6 +2607,10 @@
      "domain": null
     },
     {
+     "supplier": "Globus Medical UK Ltd",
+     "domain": null
+    },
+    {
      "supplier": "Greenbone Spa",
      "domain": null
     },
@@ -2667,6 +2655,10 @@
      "domain": null
     },
     {
+     "supplier": "M.D.M Medical Ltd",
+     "domain": null
+    },
+    {
      "supplier": "Marquardt UK",
      "domain": null
     },
@@ -2699,7 +2691,15 @@
      "domain": null
     },
     {
+     "supplier": "NuVasive UK Ltd",
+     "domain": null
+    },
+    {
      "supplier": "Open Medical Ltd",
+     "domain": null
+    },
+    {
+     "supplier": "Ortho Solutions UK Ltd",
      "domain": null
     },
     {
@@ -2783,6 +2783,7 @@
     "Edge Medical Ltd",
     "Exactech",
     "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
+    "Globus Medical UK Ltd",
     "Greenbone Spa",
     "Hospital Innovations",
     "Ideal Med",
@@ -2792,6 +2793,7 @@
     "Lavender Medical",
     "Leda Orthopaedics Ltd",
     "Lima Orthopaedics UK Ltd",
+    "M.D.M Medical Ltd",
     "Marquardt UK",
     "Materialise",
     "Medartis Ltd",
@@ -2800,7 +2802,9 @@
     "Microport Scientific Ltd",
     "NSK United Kingdom Limited",
     "Neptune Medical Limited",
+    "NuVasive UK Ltd",
     "Open Medical Ltd",
+    "Ortho Solutions UK Ltd",
     "OrthoAccess Ltd",
     "Orthofix Limited",
     "Orthopediatrics EU Limited",
@@ -3063,13 +3067,13 @@
     "ortho:trauma"
    ],
    "actionable": {
-    "unresolvedNames": 4,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 5,
     "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 48
+    "needDomain": 52
    },
    "published": [
     "Acumed Ltd",
@@ -3118,6 +3122,7 @@
     "Edge Medical Ltd",
     "Exactech",
     "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
+    "Globus Medical UK Ltd",
     "Greenbone Spa",
     "Hospital Innovations",
     "Ideal Med",
@@ -3129,6 +3134,7 @@
     "Lavender Medical",
     "Leda Orthopaedics Ltd",
     "Lima Orthopaedics UK Ltd",
+    "M.D.M Medical Ltd",
     "Marquardt UK",
     "Materialise",
     "Medartis Ltd",
@@ -3137,7 +3143,9 @@
     "Microport Scientific Ltd",
     "Neptune Medical Limited",
     "NSK United Kingdom Limited",
+    "NuVasive UK Ltd",
     "Open Medical Ltd",
+    "Ortho Solutions UK Ltd",
     "OrthoAccess Ltd",
     "Orthofix Limited",
     "Orthopediatrics EU Limited",
@@ -3179,12 +3187,7 @@
     "Surgical Instruments (dental)",
     "Surgical Instrument Group Holdings Ltd"
    ],
-   "unknown": [
-    "Globus Medical UK Ltd",
-    "M.D.M Medical Ltd",
-    "NuVasive UK Ltd",
-    "Ortho Solutions UK Ltd"
-   ],
+   "unknown": [],
    "actionableTotal": 60,
    "blockedReason": null
   },
@@ -4255,6 +4258,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "published"
+    },
+    {
      "supplier": "Medtronic",
      "domain": "medtronic.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -4555,6 +4565,13 @@
      "domain": "bbraun.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-08",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
      "bucket": "publishedElsewhere"
     },
     {
@@ -4967,6 +4984,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "published"
+    },
+    {
      "supplier": "LINC Medical",
      "domain": "linc-medical.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 2 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -5342,6 +5366,13 @@
      "domain": "flenhealth.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-26",
+     "bucket": "published"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
      "bucket": "published"
     },
     {
@@ -6415,6 +6446,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "published"
+    },
+    {
      "supplier": "Peacocks Medical Group",
      "domain": "www.peacocks.net",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -6711,6 +6749,13 @@
      "domain": "fannin.eu",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-08",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
      "bucket": "publishedElsewhere"
     },
     {
@@ -8197,6 +8242,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Performance Health International Limited",
      "domain": "www.performancehealth.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -8891,6 +8943,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "published"
+    },
+    {
      "supplier": "Paul Hartmann (HARTMANN)",
      "domain": "hartmann.info",
      "reason": "robots.txt disallows automated reading of this site",
@@ -9103,6 +9162,13 @@
      "domain": "www.fresenius-kabi.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
      "bucket": "publishedElsewhere"
     },
     {
@@ -10021,6 +10087,13 @@
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-26",
      "bucket": "published"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "published"
     }
    ],
    "route": "NHSSC framework",
@@ -10472,6 +10545,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "published"
+    },
+    {
      "supplier": "Owen Mumford",
      "domain": "www.owenmumford.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -10620,6 +10700,13 @@
      "domain": "www.fresenius-kabi.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
      "bucket": "published"
     },
     {
@@ -10911,6 +10998,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "published"
+    },
+    {
      "supplier": "TFX Group Ltd (Teleflex Medical)",
      "domain": "teleflex.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -11045,6 +11139,13 @@
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
      "bucket": "refused"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "published"
     },
     {
      "supplier": "Kendal Nutricare",
@@ -11183,6 +11284,13 @@
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "published"
     },
     {
      "supplier": "M\u00f6lnlycke",
@@ -12359,8 +12467,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "8 October 2027",
    "suppliersAwarded": 8,
-   "suppliersPublished": 1,
-   "coverage": 12.5,
+   "suppliersPublished": 2,
+   "coverage": 25.0,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -12387,13 +12495,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Polystar",
-     "domain": null,
-     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"Polystar Plastics Ltd, Southampton, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). The Hub already holds a separate 'Polystar Plastics Ltd' record with polystar.co.uk proved by registration number 02690339, publishing 8 products, and polystar.co.uk sells the 16-micron LDPE disposable healthcare aprons the NHSSC brief describes. Crawling this stub would duplicate that catalogue under a second supplier name. The outstanding step is the merge \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o334 (07/09/2026) \u2014 not a crawl. Separately, this stub's companyNumberCandidate SC347440 (POLYSTAR LIMITED, Lanark) is SIC 59112 video production and is the wrong company; it is gated as unverified and must never graduate.",
-     "checked": "2026-09-07",
-     "bucket": "refused"
-    },
-    {
      "supplier": "PFF Plastics",
      "domain": "pff.uk.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -12408,18 +12509,25 @@
      "bucket": "refused"
     },
     {
-     "supplier": "GB UK Ltd",
-     "domain": null,
-     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
-     "checked": "2026-09-07",
-     "bucket": "refused"
-    },
-    {
      "supplier": "Southgate Group Ltd",
      "domain": "southgateglobal.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-06",
      "bucket": "refused"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Polystar Plastics Ltd",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"Polystar Plastics Ltd, Southampton, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). The Hub already holds a separate 'Polystar Plastics Ltd' record with polystar.co.uk proved by registration number 02690339, publishing 8 products, and polystar.co.uk sells the 16-micron LDPE disposable healthcare aprons the NHSSC brief describes. Crawling this stub would duplicate that catalogue under a second supplier name. The outstanding step is the merge \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o334 (07/09/2026) \u2014 not a crawl. Separately, this stub's companyNumberCandidate SC347440 (POLYSTAR LIMITED, Lanark) is SIC 59112 video production and is the wrong company; it is gated as unverified and must never graduate.",
+     "checked": "2026-09-07",
+     "bucket": "published"
     }
    ],
    "route": "NHSSC framework",
@@ -12429,7 +12537,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 0,
+    "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -12437,24 +12545,25 @@
     "needDomain": 0
    },
    "published": [
-    "GV Health"
+    "GV Health",
+    "Polystar Plastics Ltd"
    ],
-   "publishedElsewhere": [],
+   "publishedElsewhere": [
+    "GBUK Group"
+   ],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [],
    "refused": [
     "Polyco",
     "Opalion",
-    "Polystar",
     "PFF Plastics",
     "Vector Consumer",
-    "GB UK Ltd",
     "Southgate Group Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 0,
-   "blockedReason": "every awarded supplier not yet published has been read and refused (7 recorded refusal(s)) \u2014 no permitted route left to the rest of this framework, so its coverage cannot rise without a new route"
+   "actionableTotal": 1,
+   "blockedReason": null
   },
   {
    "framework": "Contrast Injectors, Consumables and Associated Options and Related Services",
@@ -12566,7 +12675,15 @@
     "Slik-Pak Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
-   "refusedSuppliers": [],
+   "refusedSuppliers": [
+    {
+     "supplier": "Polystar Plastics Ltd",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"Polystar Plastics Ltd, Southampton, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). The Hub already holds a separate 'Polystar Plastics Ltd' record with polystar.co.uk proved by registration number 02690339, publishing 8 products, and polystar.co.uk sells the 16-micron LDPE disposable healthcare aprons the NHSSC brief describes. Crawling this stub would duplicate that catalogue under a second supplier name. The outstanding step is the merge \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o334 (07/09/2026) \u2014 not a crawl. Separately, this stub's companyNumberCandidate SC347440 (POLYSTAR LIMITED, Lanark) is SIC 59112 video production and is the wrong company; it is gated as unverified and must never graduate.",
+     "checked": "2026-09-07",
+     "bucket": "published"
+    }
+   ],
    "route": "NHSSC framework",
    "catsInScope": [
     "infection:ppe",
@@ -13545,6 +13662,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Medline Industries",
      "domain": "medline.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -13813,6 +13937,13 @@
      "domain": "www.draeger.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-12",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
      "bucket": "publishedElsewhere"
     },
     {
@@ -15005,6 +15136,13 @@
      "domain": "www.fresenius-kabi.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
      "bucket": "publishedElsewhere"
     }
    ],
@@ -16233,6 +16371,13 @@
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-08",
      "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "publishedElsewhere"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
@@ -16929,6 +17074,13 @@
      "domain": "www.essity.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-05",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
      "bucket": "publishedElsewhere"
     },
     {
@@ -17844,13 +17996,6 @@
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
-     "supplier": "GB UK Ltd",
-     "domain": null,
-     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
-     "checked": "2026-09-07",
-     "bucket": "refused"
-    },
-    {
      "supplier": "Sharon Services (UK) Ltd",
      "domain": "sharonservices.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -17863,13 +18008,20 @@
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-08",
      "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "publishedElsewhere"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 4,
+    "publishedElsewhereNeedingCategory": 5,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -17879,6 +18031,7 @@
    "published": [],
    "publishedElsewhere": [
     "Fannin (UK) Limited",
+    "GBUK Group",
     "Merit Medical UK Ltd",
     "Proact Medical Ltd",
     "Reflex Medical Limited"
@@ -17890,11 +18043,10 @@
     "TerraMed Limited"
    ],
    "refused": [
-    "GB UK Ltd",
     "Sharon Services (UK) Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 6,
+   "actionableTotal": 7,
    "blockedReason": null
   },
   {
@@ -19707,6 +19859,13 @@
      "domain": "fannin.eu",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-08",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
      "bucket": "publishedElsewhere"
     },
     {
