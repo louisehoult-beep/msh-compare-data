@@ -2096,6 +2096,15 @@ def _check_candidate_wording(companies):
     Note it deliberately does NOT touch the 804 records that are genuinely still
     `probable`. Their wording is correct and is the honest empty state the Company
     Report renders as "IDENTITY NOT CONFIRMED".
+
+    A disagreement stops being "unchecked" the moment a human resolves it. When
+    that happens the record is stamped `supersededOn` / `supersededBy`, kept as
+    the audit trail of the original name search rather than deleted (Polyco is
+    the case that exposed this: 06916369 was a same-named wood-products company
+    in Warrington, settled 13/09/2026 against 02000388 in
+    data/company-match-overrides.json). A record carrying that stamp has already
+    been checked by hand — it is the FAIL, not the disagreement, that would be
+    a superseded statement left standing.
     """
     seed = load("supplier-seed.json")
     if not isinstance(seed, dict):
@@ -2108,6 +2117,8 @@ def _check_candidate_wording(companies):
         cand = s.get("companyNumberCandidate")
         if not isinstance(cand, dict):
             continue
+        if cand.get("supersededBy"):
+            continue                        # already resolved by hand, audit trail only
         rec = companies.get(s.get("name")) or {}
         if str(rec.get("matchConfidence") or "").lower() != "confirmed":
             continue
@@ -5160,6 +5171,89 @@ def check_awareness(doc):
             FAIL("awareness", "%s: is in BOTH `days` and `unverified`." % u.get("id"))
 
 
+def _self_heal_calendar():
+    """Prune hub-calendar.json in place, before check_calendar gates it.
+
+    WHY THIS EXISTS. calendar-prune.yml runs on its own 01:50 UTC schedule so
+    the calendar is clean before the day's first writer. It shares
+    msh-compare-data-writer with every other writer, so when the queue backs
+    up (a long job ahead of it, several dispatches landing close together) it
+    can land hours late — on 14/09/2026 it didn't finish until ~07:10-07:22,
+    after Atamis (05:29) and Acquirer press sweep (06:09) had already hit a
+    row that aged into the past overnight and failed the gate on it. Neither
+    workflow had done anything wrong; the calendar under them had gone stale.
+
+    Relying on a separate scheduled job to win a race against the rest of the
+    queue is exactly the class of failure the calendar-prune.yml header
+    already documents once (25/08/2026, nothing had ever run the builder).
+    This closes it a second way: every writer prunes its OWN copy of the
+    calendar immediately before the gate checks it, using the exact same
+    rules as scripts/prune_calendar.py (the one module — imported, not
+    reimplemented, so there is one place these rules live).
+    calendar-prune.yml still runs, and still matters: it is what keeps the
+    committed file clean for the writers that never touch the calendar at
+    all. This is the backstop for the writers that do.
+
+    Silent unless it changes something, in which case it prints exactly what
+    prune_calendar.py would have: the same "drop"/"flag" lines, so a run log
+    reads the same whichever of the two caught it. Never raises past this
+    function — if scripts/prune_calendar.py cannot be imported, or the file
+    beneath it is absent or malformed, check_calendar sees exactly what it
+    saw before this existed and gates on that as normal.
+    """
+    path = os.path.join(DATA, "hub-calendar.json")
+    if not os.path.exists(path):
+        return
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "scripts"))
+        import prune_calendar
+    except Exception:
+        return
+
+    try:
+        with open(path) as fh:
+            doc = json.load(fh)
+    except Exception:
+        return
+
+    today = datetime.date.today()
+    horizon = today - datetime.timedelta(days=prune_calendar.RECENT_PAST_DAYS)
+    entries = doc.get("entries") or []
+
+    kept, dropped, flagged = [], [], []
+    for e in entries:
+        keep, e2, reason = prune_calendar.decide(e, today, horizon)
+        if keep:
+            kept.append(e2)
+            if reason:
+                flagged.append((e2.get("id"), reason))
+        else:
+            dropped.append((e.get("id"), e.get("date"), reason))
+
+    if not dropped and not flagged:
+        return
+
+    # Same refusal guards as the standalone script — this is a self-heal for a
+    # day's ageing, not licence to gut the file if something is badly wrong.
+    if len(kept) < prune_calendar.MIN_ENTRIES_AFTER:
+        return
+    if entries and len(dropped) / len(entries) > prune_calendar.MAX_DROP_FRACTION:
+        return
+
+    for eid, date, reason in dropped:
+        print("  self-heal [calendar]  drop  %s  %s  (%s)" % (date, eid, reason))
+    for eid, reason in flagged:
+        print("  self-heal [calendar]  flag  %s  (%s)" % (eid, reason))
+
+    doc["entries"] = kept
+    meta = doc.setdefault("_meta", {})
+    meta["lastPruned"] = today.isoformat()
+    meta["lastPrunedCounts"] = {"dropped": len(dropped), "flaggedPast": len(flagged),
+                                "remaining": len(kept)}
+    with open(path, "w") as fh:
+        json.dump(doc, fh, indent=1, ensure_ascii=False)
+
+
 def check_calendar(doc, specmap_unused=None):
     """The built calendar. Derived from stores that each have their own gate, so this
     checks the JOIN rather than re-deriving the data: that every row can be attributed,
@@ -5758,6 +5852,9 @@ def main():
     # discipline has to be enforced, and the built join, where the risk is an
     # invented Hub link.
     check_awareness(load("awareness-days.json"))
+    # Prune this writer's own copy before gating it — see _self_heal_calendar
+    # for why a separate scheduled prune job is not enough on its own.
+    _self_heal_calendar()
     check_calendar(load("hub-calendar.json"))
     # Supplier hiring signal, read from each company's own careers page. Optional
     # like the layers above — no file means it is not built. Built, every check
