@@ -28,6 +28,16 @@ WHAT IT DOES, AND WHAT IT REFUSES TO DO
   like a duplicate of a sourced one is kept, because the two carry different facts.
 - Deduplicates only against rows this script previously added (matched on the brief URL),
   so re-running is idempotent and does not stack copies.
+- DROPS a generated `productCategories` row whose framework this run has just taken off
+  the supplier. That field is derived from `frameworks[]` (backfill_product_categories.py)
+  and nothing else in the company-intelligence workflow re-derives it, so a delisting used
+  to leave the category behind, still citing a framework the supplier is no longer recorded
+  as being on. That is a claim with its evidence removed, and verify.py's
+  seed-product-categories check fails on it — which is how it was found: NHS Supply Chain
+  took J & M Medical off the Textiles and Associated Products brief (2025/S 000-048142),
+  and the run of 14/09/2026 and every run after it failed the publish gate on the orphaned
+  "Facilities and Office Solutions" category. Curated rows (anything this repo did not
+  generate) are never touched here, same discipline as the framework rows above.
 
 Run AFTER build_supplier_index.py (which rebuilds the index from scratch and would drop
 these rows) and AFTER refresh_frameworks.py. Then stamp_notice.py, then verify.py.
@@ -109,6 +119,57 @@ def dump(path, doc, style):
         f.write("\n")
 
 
+GENERATED_CATEGORIES_BY = "backfill_product_categories.py"
+
+
+def prune_orphaned_categories(supplier):
+    """Drop generated `productCategories` rows citing a framework the supplier no
+    longer has, and return how many went.
+
+    Call this immediately AFTER rewriting `supplier["frameworks"]`. A category in
+    that field is not an observation — it is derived from a framework row, and
+    carries the reference it was derived from. When the brief stops naming the
+    supplier, the framework row goes and the derivation no longer holds, so the
+    category must go with it rather than outlive its own evidence.
+
+    Deliberately narrow:
+      * only rows marked `generatedBy: backfill_product_categories.py` are ever
+        considered. A curated category is somebody's own fact and is left alone,
+        even if it cites a framework that has gone;
+      * a row citing no `frameworkRef` is left alone — there is nothing to check
+        it against, and silence is not evidence it is wrong;
+      * nothing is dropped when the supplier ends up with no framework references
+        at all, which is the shape of a capture that simply did not cover this
+        supplier this cycle rather than of a delisting (same reasoning as the
+        `if not hits` skip in main(), see STALE-BRIEF-ROWS-2026-09-02.md).
+    """
+    rows = supplier.get("productCategories")
+    if not isinstance(rows, list) or not rows:
+        return 0
+    own_refs = {fw.get("reference") for fw in (supplier.get("frameworks") or [])
+                if isinstance(fw, dict) and fw.get("reference")}
+    if not own_refs:
+        return 0
+
+    kept = []
+    for row in rows:
+        if (isinstance(row, dict)
+                and row.get("generatedBy") == GENERATED_CATEGORIES_BY
+                and isinstance(row.get("source"), dict)):
+            ref = row["source"].get("frameworkRef")
+            if ref and ref not in own_refs:
+                continue
+        kept.append(row)
+
+    dropped = len(rows) - len(kept)
+    if dropped:
+        if kept:
+            supplier["productCategories"] = kept
+        else:
+            del supplier["productCategories"]
+    return dropped
+
+
 def main():
     fw = load(FW)
     frameworks = fw.get("frameworks") or []
@@ -124,12 +185,13 @@ def main():
                 continue
             by_key.setdefault(k, []).append((f, name))
 
-    stats = {"files": 0, "suppliers_touched": 0, "rows_added": 0, "rows_refreshed": 0}
+    stats = {"files": 0, "suppliers_touched": 0, "rows_added": 0, "rows_refreshed": 0,
+             "categories_dropped": 0}
 
     for path, style in ((INDEX, {"indent": 1, "ensure_ascii": False}),
                         (SEED, {"separators": (",", ":"), "ensure_ascii": False})):
         doc = load(path)
-        touched = added = refreshed = 0
+        touched = added = refreshed = dropped_categories = 0
         ambiguous_keys = ambiguous_keys_for(doc)
 
         for s in (doc.get("suppliers") or []):
@@ -196,6 +258,7 @@ def main():
                 })
             added += len(rows)
             s["frameworks"] = kept + rows
+            dropped_categories += prune_orphaned_categories(s)
             touched += 1
 
         dump(path, doc, style)
@@ -203,8 +266,12 @@ def main():
         stats["suppliers_touched"] += touched
         stats["rows_added"] += added
         stats["rows_refreshed"] += refreshed
+        stats["categories_dropped"] += dropped_categories
         print("%-28s %d supplier(s) given sourced frameworks, %d row(s) written "
               "(%d replaced from a previous run)" % (path, touched, added, refreshed))
+        if dropped_categories:
+            print("%-28s %d generated productCategories row(s) dropped — the framework each "
+                  "cited is no longer on that supplier" % ("", dropped_categories))
 
     print("Done. Curated rows were never removed; only rows previously written by this "
           "script were replaced.")
