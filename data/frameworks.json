@@ -10,13 +10,13 @@
   "ref": "ETH-DB4D6B772",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "2026-09-02",
+ "dataAsOf": "2026-09-15",
  "source": "NHS Supply Chain Contract Launch Briefs (https://www.supplychain.nhs.uk/product-information/contract-launch-briefs/), each framework's own page, fetched this run.",
  "rule": "A supplier appears under a framework here ONLY because that framework's own NHS Supply Chain brief names it. Nothing is inferred from product ranges, specialities or catalogue categories. Frameworks whose brief could not be parsed are listed in `unparsed` with the reason and are NOT silently dropped.",
  "briefsSeen": 140,
  "frameworkCount": 121,
- "unparsedCount": 16,
- "expiredCount": 3,
+ "unparsedCount": 17,
+ "expiredCount": 2,
  "expiredRule": "A brief whose framework has already ended is captured but kept OUT of `frameworks`, because every consumer reads that list as live routes to market. NHS Supply Chain leaves briefs published after they end. A brief with no readable end date stays in `frameworks` rather than being dropped.",
  "dateContestedCount": 5,
  "dateContestedRule": "A framework named in data/framework-date-conflicts.json has its `ends` date withheld (null) rather than published, because NHS Supply Chain's own two sources — the launch brief and the procurement calendar — disagree about when it ends by more than the deliberate-handover window. The framework itself stays live here; only the disputed date is suppressed, until a human review confirms the owner's own pages agree.",
@@ -1663,26 +1663,6 @@
    "delistedSource": "data/nhssc-launch-briefs.json"
   },
   {
-   "name": "Flexible Endoscopes and Associated Options and Related Services",
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
-   "type": "Contract Extension",
-   "category": "Diagnostic Equipment and Services",
-   "reference": "2021/S 000-007768",
-   "supplyRoute": "Direct",
-   "starts": "1 April 2022",
-   "ends": "31 March 2028",
-   "suppliers": [
-    "FUJIFILM Healthcare UK Limited",
-    "Karl Storz Endoscopy UK Ltd",
-    "Olympus KeyMed",
-    "Pentax Medical",
-    "Richard Wolf UK Limited"
-   ],
-   "supplierSource": "no stated count on the page; 5 names parsed (UNVERIFIED COUNT)",
-   "supplierCount": 5,
-   "supplierLots": null
-  },
-  {
    "name": "Fluoroscopy and Associated Options and Related Services",
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fluoroscopy-and-associated-options-and-related-services/",
    "type": "Contract Extension",
@@ -2882,8 +2862,8 @@
     "Avanos Medical UK Limited",
     "Axonics Modulation Technologies UK Limited",
     "Boston Scientific Ltd",
-    "BVM Medical Ltd",
     "Charco Neurotech",
+    "Creed Health – novated from BVM Medical Ltd",
     "electroCore UK Ltd",
     "Far From Surgical Solutions",
     "Flow Neuroscience",
@@ -4041,12 +4021,11 @@
     "CMR Surgical Ltd",
     "Intuitive Surgical Limited",
     "Medtronic Limited",
-    "Johnson & Johnson Medical Ltd (New to framework)",
     "MCT Lifesciences Ltd (New to framework)",
     "Procept Biorobotics"
    ],
-   "supplierSource": "no stated count on the page; 6 names parsed (UNVERIFIED COUNT)",
-   "supplierCount": 6,
+   "supplierSource": "no stated count on the page; 5 names parsed (UNVERIFIED COUNT)",
+   "supplierCount": 5,
    "supplierLots": null
   },
   {
@@ -4514,7 +4493,6 @@
     "Gailarde Ltd",
     "GBUK Ltd",
     "Interweave Textiles Ltd",
-    "J & M Medical",
     "James Walker Textiles Ltd",
     "Kiesta Fabrics & Interiors Ltd",
     "Lyreco UK Limited",
@@ -4527,7 +4505,6 @@
     "PTP Healthcare Ltd",
     "Rathin Tex Ltd",
     "Robson Brown International Ltd",
-    "RS Components Ltd",
     "Sharon Services (UK) Ltd",
     "Spentex BCA Limited",
     "The Rizues Ltd",
@@ -4536,8 +4513,8 @@
     "Valmy SAS Ltd",
     "Workwear Express Ltd"
    ],
-   "supplierSource": "count verified against the page's own stated total (34)",
-   "supplierCount": 34,
+   "supplierSource": "no stated count on the page; 42 names parsed (UNVERIFIED COUNT)",
+   "supplierCount": 32,
    "supplierLots": null,
    "delisted": [
     "Bridge Contract Solutions",
@@ -4764,6 +4741,32 @@
     "Worldlink Resources Ltd."
    ],
    "delistedSource": "data/nhssc-launch-briefs.json"
+  },
+  {
+   "name": "Transcatheter Heart Valve Repair, Replacement and Associated Devices",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/transcatheter-heart-valve-repair-replacement-and-associated-devices/",
+   "type": "Contract Extension",
+   "category": "Medical Technology",
+   "reference": "2022/S 000-025267",
+   "supplyRoute": "eDirect",
+   "starts": "18 September 2023",
+   "ends": "26 February 2027",
+   "suppliers": [
+    "Abbott",
+    "Acrostak",
+    "Biosensors",
+    "BVM",
+    "Dot Medical",
+    "Edwards",
+    "Jenavalve",
+    "MCT",
+    "Medtronic",
+    "Meril",
+    "SMT"
+   ],
+   "supplierSource": "count verified against the page's own stated total (11)",
+   "supplierCount": 11,
+   "supplierLots": null
   },
   {
    "name": "Tray Wrap and Sterilisation Equipment",
@@ -5142,34 +5145,6 @@
    "supplierCount": 23,
    "supplierLots": null,
    "endedOn": "2025-03-10"
-  },
-  {
-   "name": "Transcatheter Heart Valve Repair, Replacement and Associated Devices",
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/transcatheter-heart-valve-repair-replacement-and-associated-devices/",
-   "type": "New Contract",
-   "category": "Medical Technology",
-   "reference": "2022/S 000-025267",
-   "supplyRoute": "eDirect",
-   "starts": "18 September 2023",
-   "ends": "17 September 2025",
-   "suppliers": [
-    "Abbott",
-    "Acrostak",
-    "Biosensors",
-    "Boston Scientific",
-    "BVM",
-    "Dot Medical",
-    "Edwards",
-    "Jenavalve",
-    "MCT",
-    "Medtronic",
-    "Meril",
-    "SMT"
-   ],
-   "supplierSource": "count verified against the page's own stated total (12)",
-   "supplierCount": 12,
-   "supplierLots": null,
-   "endedOn": "2025-09-17"
   }
  ],
  "unparsed": [
@@ -5184,14 +5159,17 @@
    "reason": "the page states 33 suppliers but 35 were parsed — refusing rather than publishing a list that does not match the page"
   },
   {
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
+   "reason": "fetch or parse error: HTTP Error 502: Bad Gateway"
+  },
+  {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fresh-and-food-to-go/",
    "name": "Fresh and Food To Go Direct Solutions",
    "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/hand-hygiene-active-hand-shield/",
-   "name": "Hand Hygiene Active Hand Shield",
-   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
+   "reason": "fetch or parse error: HTTP Error 502: Bad Gateway"
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/interventional-cardiology-interventional-radiology-and-interventional-neuroradiology-cardiac-rhythm-management-and-electrophysiology/",

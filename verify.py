@@ -2145,11 +2145,18 @@ def _check_candidate_wording(companies):
 
 
 
-def _supplier_universe():
-    """Every supplier name and alias this repo holds, normalised. None if unreadable."""
+SUPPLIER_FILES = ("supplier-seed.json", "supplier-index.json")
+
+
+def _supplier_universe(files=SUPPLIER_FILES):
+    """Every supplier name and alias this repo holds, normalised. None if unreadable.
+
+    `files` narrows it to one source. supplier-index.json is GENERATED — see
+    check_vocab section 1b for why resolving against the seed alone matters.
+    """
     names = set()
     seen_file = False
-    for fn in ("supplier-seed.json", "supplier-index.json"):
+    for fn in files:
         doc = load(fn)
         if not isinstance(doc, dict):
             continue
@@ -2249,6 +2256,33 @@ VOCAB_BASELINE = {
     # same day. split_companies() stops one being CREATED; the carry-forward
     # guard in build_supplier_index.py stops this one being resurrected; this
     # makes a third one impossible to publish by any route.
+
+    # `compare_index_only` — Compare-tab names that resolve through the
+    # GENERATED supplier-index.json but NOT through supplier-seed.json — REACHED
+    # 0 on 15/09/2026 and is now a HARD FAIL with no baseline. The index is
+    # rebuilt from the seed nightly, so one of these resolves today and resolves
+    # nowhere tomorrow: 'Stryker UK' was one, and it cost four consecutive
+    # nightly failures and four days of stale data on page 1109 before anyone
+    # read the log.
+    #
+    # It was 17 when the check was written on 11/08/2026, 5 by 12/09/2026, and
+    # the last three were decided on 15/09/2026 on Lou's instruction:
+    #
+    #   'Mölnlycke Health Care' and 'Polyco Healthline' were spellings, not
+    #   companies, and became aliases on the record that already held the
+    #   company — Mölnlycke, which carried "Molnlycke Health Care Limited" but
+    #   not the umlaut spelling the Compare tab prints, and Polyco, whose own
+    #   number has been CONFIRMED since 13/09/2026 as 02000388 POLYCO HEALTHLINE
+    #   LIMITED, which is that Compare-tab name exactly.
+    #
+    #   'Nipro Medical UK Ltd' was a different company and got its own record.
+    #   06993337 NIPRO MEDICAL UK LTD, against 03936551 NIPRO DIAGNOSTICS (UK)
+    #   LIMITED for 'Nipro Medical Europe'. Lou settled it on 15/09/2026 by
+    #   reading award notice 2026/S 000-078334 at source, and the Intravenous
+    #   Cannula award moved to the company that actually won it. Closing it also
+    #   needed scripts/company_match.py to try a verbatim name before stripping
+    #   the territory word, because until then both names keyed to
+    #   "nipro medical" and neither resolved.
 }
 
 # A name is a list-of-companies, not a company: two or more commas AND a
@@ -2337,6 +2371,36 @@ def check_vocab(sup, products, specmap, index, comptab_js):
     _ratchet("vocab", "compare_unresolved", len(unresolved), unresolved,
              "Compare-tab companies reaching no supplier record",
              "Every name here must exist in supplier-seed.json, as a `name` or in `aliases`.")
+
+    # -- 1b. Names that resolve ONLY through the GENERATED index -------------
+    # supplier-index.json is rebuilt from supplier-seed.json on every daily
+    # refresh, so a name carried only by the index resolves today and stops
+    # resolving the moment the index is rebuilt.
+    #
+    # This is not hypothetical. 'Stryker UK' lived in the index and not in the
+    # seed. Every push went GREEN, because verify.yml gates the COMMITTED index
+    # and the committed index still held the name. refresh.yml rebuilds the
+    # index BEFORE it gates, so only the nightly job could see the break: it
+    # failed on 08, 09, 10 and 11/08/2026 and the Compare tab served 07/08 data
+    # to paying members for four days while looking current.
+    #
+    # Check 1 above cannot catch this — it resolves against seed AND index, so
+    # it is green until the rebuild. This one names it on the commit that
+    # introduces it, which is the only cheap moment to fix it.
+    seed_only_universe = _supplier_universe(("supplier-seed.json",))
+    if seed_only_universe is None:
+        WARN("vocab", "supplier-seed.json could not be read, so no name could be checked "
+                      "for index-only resolution — the failure mode that froze the "
+                      "Compare tab for four days in August 2026 is unguarded this run.")
+    else:
+        index_only = [c for c in companies
+                      if _norm_co(c) not in seed_only_universe
+                      and _norm_co(c) in universe]
+        _ratchet("vocab", "compare_index_only", len(index_only), index_only,
+                 "Compare-tab companies resolving only through the generated supplier index",
+                 "supplier-index.json is rebuilt from the seed every night, so these "
+                 "resolve now and will not after the next rebuild. Add each spelling to "
+                 "the matching record's `aliases` in supplier-seed.json.")
 
     # -- 2. The same company spelled two ways in the same file ---------------
     groups = {}
@@ -5621,8 +5685,16 @@ FTS_NOTICE = re.compile(r"\b(20\d\d/S \d{3}-\d{6})\b")
 # contract launch brief for X (2023/S 000-028831)") is not a deadline claim and
 # must not fire this gate — an earlier draft of it did, 2,339 times.
 DEADLINE = re.compile(
-    r"\b(clos(?:e|es|ed|ing)|deadline|submission date|bids? (?:due|close)|"
-    r"tender period)\b", re.I)
+    # clos(?:es|ed|ing) — inflected forms only; "closes", "closed", "closing"
+    # are unambiguous deadline verbs/participles.  The bare noun/infinitive
+    # "close" is deliberately excluded: it matches street addresses ending in
+    # "...Close, Coventry" and fires a false positive when a notice reference
+    # appears in the same 300-char sentence window (the seed JSON is a single
+    # compact line, so "registeredAddress" and "frameworks[].reference" often
+    # share one window).  "close date", "close on", "close by" — where "close"
+    # acts as a deadline noun — are captured separately.
+    r"\b(clos(?:es|ed|ing)|close\s+(?:date|on\b|by\b)|"
+    r"deadline|submission date|bids? (?:due|close)|tender period)\b", re.I)
 
 
 def check_notice_citations(files):

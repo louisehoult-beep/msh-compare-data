@@ -13,24 +13,24 @@
  "_meta": {
   "what": "eClass -> Hub category (`cat`) map, so the Supply Disruption Tracker can gate its alternatives on category equality instead of word overlap.",
   "why": "differentiator.json's own rule: comparison is locked to a single category. An NHS Supply Chain suspended line carries an eClass, not a `cat` — this file is the bridge.",
-  "generated": "07/09/2026",
+  "generated": "14/09/2026",
   "generatedBy": "scripts/build_eclass_map.py",
   "rule": "A mapped eClass's `cat` is the category with majority support among its own NPC->cat observations (data/npc-eclass.json), weighted 2x for a strong join (>=2 shared significant words between the Hub product name and the NHS Supply Chain description) and 1x for a weak one (exactly 1 shared word); a 0-word join carries no vote. HIGH confidence needs >=3 distinct NPCs on strong joins AND >=65%% weighted support AND >=3 distinct NPCs total. MEDIUM needs >=1 strong NPC or >=3 weak NPCs AND >=60%% weighted support AND >=2 distinct NPCs AND >=3 total observations for the eClass. Everything else is UNMAPPED and carries no `cat` — root rule 14: publishing nothing is the correct output when the evidence is thin. This is a STATISTICAL aggregation over real, sourced observations, not a guess from general knowledge of medical devices.",
   "source": "data/npc-eclass.json (NPC->eClass live lookups, from scripts/resolve_npc_eclass.py, joined to differentiator.json's own `cat` on the same NPC) aggregated per eClass code found in <cloud-pipeline>/sdt-suspensions.json.",
   "vocabularyAuthority": "data/compare-suppliers.json — every `cat` this file writes is checked against that vocabulary before being written; none outside it is ever emitted.",
   "counts": {
-   "eclassInSuspensions": 155,
-   "eclassWithAnyObservation": 99,
-   "eclassMappedHigh": 20,
-   "eclassMappedMedium": 18,
-   "eclassMappedTotal": 38,
-   "eclassUnmapped": 117,
-   "suspendedLinesTotal": 973,
-   "suspendedLinesCoveredHigh": 105,
-   "suspendedLinesCoveredMedium": 246,
-   "suspendedLinesCoveredTotal": 351,
-   "suspendedLinesUncovered": 622,
-   "suspendedLinesCoveredPct": 36.1
+   "eclassInSuspensions": 156,
+   "eclassWithAnyObservation": 106,
+   "eclassMappedHigh": 19,
+   "eclassMappedMedium": 17,
+   "eclassMappedTotal": 36,
+   "eclassUnmapped": 120,
+   "suspendedLinesTotal": 936,
+   "suspendedLinesCoveredHigh": 99,
+   "suspendedLinesCoveredMedium": 193,
+   "suspendedLinesCoveredTotal": 292,
+   "suspendedLinesUncovered": 644,
+   "suspendedLinesCoveredPct": 31.2
   },
   "thresholds": {
    "high": {
@@ -47,10 +47,7 @@
    }
   },
   "inferredCarriedOver": 83,
-  "inferredNote": "Carried across from the previous build. This script does not produce or recompute the inferred layer — see scripts/apply_eclass_proposals.py.",
-  "inferredCount": 83,
-  "inferredRule": "Entries under `inferred` were proposed by reading the NHS Supply Chain descriptions of the suspended lines filed under each eClass code, not observed from paired (eClass, cat) data as `mappings` were. They are kept separate so the two kinds of evidence are never mixed, and an observed mapping always wins. Every category was validated against the gated vocabulary before being written.",
-  "inferredAddedOn": "10/09/2026"
+  "inferredNote": "Carried across from the previous build. This script does not produce or recompute the inferred layer — see scripts/apply_eclass_proposals.py."
  },
  "mappings": {
   "AZC": {
@@ -76,11 +73,11 @@
    "itemclass": "23- Rehabilitation and Community",
    "suspendedLines": 6,
    "evidence": {
-    "strongNpcs": 55,
+    "strongNpcs": 54,
     "weakNpcs": 3,
-    "distinctNpcs": 58,
+    "distinctNpcs": 57,
     "supportShare": 1.0,
-    "totalObservations": 58,
+    "totalObservations": 57,
     "runnerUp": null
    }
   },
@@ -112,20 +109,6 @@
     "distinctNpcs": 8,
     "supportShare": 1.0,
     "totalObservations": 8,
-    "runnerUp": null
-   }
-  },
-  "EAF": {
-   "cat": "ortho:trauma",
-   "confidence": "high",
-   "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 4,
-   "evidence": {
-    "strongNpcs": 5,
-    "weakNpcs": 0,
-    "distinctNpcs": 5,
-    "supportShare": 1.0,
-    "totalObservations": 5,
     "runnerUp": null
    }
   },
@@ -192,16 +175,16 @@
    "cat": "wound:adv",
    "confidence": "high",
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 4,
+   "suspendedLines": 2,
    "evidence": {
     "strongNpcs": 20,
     "weakNpcs": 15,
     "distinctNpcs": 35,
-    "supportShare": 0.887,
-    "totalObservations": 40,
+    "supportShare": 0.902,
+    "totalObservations": 39,
     "runnerUp": {
      "cat": "handling:cushion",
-     "support": 5
+     "support": 4
     }
    }
   },
@@ -211,31 +194,14 @@
    "itemclass": "23- Rehabilitation and Community",
    "suspendedLines": 1,
    "evidence": {
-    "strongNpcs": 21,
+    "strongNpcs": 23,
     "weakNpcs": 8,
-    "distinctNpcs": 29,
-    "supportShare": 0.893,
-    "totalObservations": 32,
+    "distinctNpcs": 31,
+    "supportShare": 0.9,
+    "totalObservations": 34,
     "runnerUp": {
      "cat": "wound:comp",
      "support": 4
-    }
-   }
-  },
-  "FAE": {
-   "cat": "nutrition:dev",
-   "confidence": "medium",
-   "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 5,
-   "evidence": {
-    "strongNpcs": 0,
-    "weakNpcs": 5,
-    "distinctNpcs": 5,
-    "supportShare": 0.833,
-    "totalObservations": 6,
-    "runnerUp": {
-     "cat": "nutrition:sets",
-     "support": 1
     }
    }
   },
@@ -246,10 +212,10 @@
    "suspendedLines": 99,
    "evidence": {
     "strongNpcs": 0,
-    "weakNpcs": 7,
-    "distinctNpcs": 7,
+    "weakNpcs": 8,
+    "distinctNpcs": 8,
     "supportShare": 1.0,
-    "totalObservations": 7,
+    "totalObservations": 8,
     "runnerUp": null
    }
   },
@@ -257,13 +223,13 @@
    "cat": "nutrition:dev",
    "confidence": "medium",
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 2,
+   "suspendedLines": 4,
    "evidence": {
     "strongNpcs": 0,
-    "weakNpcs": 23,
-    "distinctNpcs": 23,
+    "weakNpcs": 22,
+    "distinctNpcs": 22,
     "supportShare": 1.0,
-    "totalObservations": 23,
+    "totalObservations": 22,
     "runnerUp": null
    }
   },
@@ -271,13 +237,13 @@
    "cat": "neonatal:feed",
    "confidence": "medium",
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 2,
+   "suspendedLines": 1,
    "evidence": {
     "strongNpcs": 1,
-    "weakNpcs": 2,
-    "distinctNpcs": 3,
+    "weakNpcs": 3,
+    "distinctNpcs": 4,
     "supportShare": 1.0,
-    "totalObservations": 3,
+    "totalObservations": 4,
     "runnerUp": null
    }
   },
@@ -294,23 +260,6 @@
     "totalObservations": 5,
     "runnerUp": {
      "cat": "mis:instruments",
-     "support": 1
-    }
-   }
-  },
-  "FCC": {
-   "cat": "mis:energy",
-   "confidence": "medium",
-   "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 63,
-   "evidence": {
-    "strongNpcs": 0,
-    "weakNpcs": 3,
-    "distinctNpcs": 3,
-    "supportShare": 0.75,
-    "totalObservations": 4,
-    "runnerUp": {
-     "cat": "neonatal:equip",
      "support": 1
     }
    }
@@ -332,18 +281,35 @@
     }
    }
   },
+  "FMG": {
+   "cat": "nutrition:dev",
+   "confidence": "medium",
+   "itemclass": "21- Medical and Surgical Consumables",
+   "suspendedLines": 1,
+   "evidence": {
+    "strongNpcs": 0,
+    "weakNpcs": 3,
+    "distinctNpcs": 3,
+    "supportShare": 1.0,
+    "totalObservations": 3,
+    "runnerUp": null
+   }
+  },
   "FNG": {
    "cat": "bloodcoll:lance",
    "confidence": "high",
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 2,
+   "suspendedLines": 3,
    "evidence": {
     "strongNpcs": 6,
     "weakNpcs": 1,
     "distinctNpcs": 7,
-    "supportShare": 1.0,
-    "totalObservations": 7,
-    "runnerUp": null
+    "supportShare": 0.929,
+    "totalObservations": 8,
+    "runnerUp": {
+     "cat": "bloodcoll:tube",
+     "support": 1
+    }
    }
   },
   "FQP": {
@@ -397,31 +363,14 @@
    "itemclass": "22- Medical Technology",
    "suspendedLines": 7,
    "evidence": {
-    "strongNpcs": 2,
+    "strongNpcs": 1,
     "weakNpcs": 2,
-    "distinctNpcs": 4,
-    "supportShare": 0.75,
-    "totalObservations": 6,
+    "distinctNpcs": 3,
+    "supportShare": 0.667,
+    "totalObservations": 5,
     "runnerUp": {
      "cat": "cardiology:equip",
      "support": 1
-    }
-   }
-  },
-  "FRD": {
-   "cat": "vascsurg:access",
-   "confidence": "medium",
-   "itemclass": "22- Medical Technology",
-   "suspendedLines": 15,
-   "evidence": {
-    "strongNpcs": 1,
-    "weakNpcs": 1,
-    "distinctNpcs": 2,
-    "supportShare": 0.6,
-    "totalObservations": 3,
-    "runnerUp": {
-     "cat": "endourology:stent",
-     "support": 2
     }
    }
   },
@@ -432,28 +381,11 @@
    "suspendedLines": 18,
    "evidence": {
     "strongNpcs": 5,
-    "weakNpcs": 1,
-    "distinctNpcs": 6,
-    "supportShare": 1.0,
-    "totalObservations": 6,
-    "runnerUp": null
-   }
-  },
-  "FRL": {
-   "cat": "vascsurg:stent",
-   "confidence": "medium",
-   "itemclass": "22- Medical Technology",
-   "suspendedLines": 4,
-   "evidence": {
-    "strongNpcs": 2,
     "weakNpcs": 0,
-    "distinctNpcs": 2,
-    "supportShare": 0.667,
-    "totalObservations": 3,
-    "runnerUp": {
-     "cat": "endourology:stent",
-     "support": 2
-    }
+    "distinctNpcs": 5,
+    "supportShare": 1.0,
+    "totalObservations": 5,
+    "runnerUp": null
    }
   },
   "FRM": {
@@ -462,32 +394,60 @@
    "itemclass": "22- Medical Technology",
    "suspendedLines": 4,
    "evidence": {
-    "strongNpcs": 8,
+    "strongNpcs": 10,
     "weakNpcs": 0,
-    "distinctNpcs": 8,
-    "supportShare": 0.941,
-    "totalObservations": 9,
+    "distinctNpcs": 10,
+    "supportShare": 0.952,
+    "totalObservations": 11,
     "runnerUp": {
      "cat": "vascsurg:access",
      "support": 1
     }
    }
   },
+  "FRP": {
+   "cat": "oncology:abl",
+   "confidence": "medium",
+   "itemclass": "22- Medical Technology",
+   "suspendedLines": 22,
+   "evidence": {
+    "strongNpcs": 2,
+    "weakNpcs": 1,
+    "distinctNpcs": 3,
+    "supportShare": 1.0,
+    "totalObservations": 3,
+    "runnerUp": null
+   }
+  },
   "FTP": {
    "cat": "theatres:glove",
-   "confidence": "high",
+   "confidence": "medium",
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 3,
+   "suspendedLines": 2,
    "evidence": {
     "strongNpcs": 23,
     "weakNpcs": 0,
     "distinctNpcs": 23,
-    "supportShare": 0.657,
-    "totalObservations": 35,
+    "supportShare": 0.605,
+    "totalObservations": 38,
     "runnerUp": {
      "cat": "infection:nitrile",
      "support": 16
     }
+   }
+  },
+  "FTT": {
+   "cat": "theatres:glove",
+   "confidence": "high",
+   "itemclass": "21- Medical and Surgical Consumables",
+   "suspendedLines": 1,
+   "evidence": {
+    "strongNpcs": 19,
+    "weakNpcs": 0,
+    "distinctNpcs": 19,
+    "supportShare": 1.0,
+    "totalObservations": 19,
+    "runnerUp": null
    }
   },
   "FUI": {
@@ -513,8 +473,8 @@
     "strongNpcs": 7,
     "weakNpcs": 1,
     "distinctNpcs": 8,
-    "supportShare": 0.833,
-    "totalObservations": 10,
+    "supportShare": 0.789,
+    "totalObservations": 11,
     "runnerUp": {
      "cat": "continence:urinal",
      "support": 2
@@ -542,7 +502,7 @@
    "cat": "vascular:pivc",
    "confidence": "high",
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 2,
+   "suspendedLines": 3,
    "evidence": {
     "strongNpcs": 4,
     "weakNpcs": 1,
@@ -555,21 +515,18 @@
     }
    }
   },
-  "FVR": {
-   "cat": "bloodtx:pump",
+  "FXK": {
+   "cat": "theatres:theatre",
    "confidence": "medium",
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 7,
+   "suspendedLines": 15,
    "evidence": {
     "strongNpcs": 1,
-    "weakNpcs": 7,
-    "distinctNpcs": 8,
-    "supportShare": 0.6,
-    "totalObservations": 13,
-    "runnerUp": {
-     "cat": "vascular:conn",
-     "support": 3
-    }
+    "weakNpcs": 4,
+    "distinctNpcs": 5,
+    "supportShare": 1.0,
+    "totalObservations": 5,
+    "runnerUp": null
    }
   },
   "FXS": {
@@ -627,10 +584,10 @@
    "suspendedLines": 11,
    "evidence": {
     "strongNpcs": 2,
-    "weakNpcs": 2,
-    "distinctNpcs": 4,
-    "supportShare": 0.6,
-    "totalObservations": 7,
+    "weakNpcs": 3,
+    "distinctNpcs": 5,
+    "supportShare": 0.636,
+    "totalObservations": 8,
     "runnerUp": {
      "cat": "dental:equip",
      "support": 2
@@ -664,7 +621,7 @@
   },
   "BWC": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 5,
+   "suspendedLines": 2,
    "strongNpcs": 0,
    "weakNpcs": 1,
    "distinctNpcs": 1,
@@ -682,7 +639,7 @@
   },
   "BWO": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 16,
+   "suspendedLines": 10,
    "strongNpcs": 0,
    "weakNpcs": 1,
    "distinctNpcs": 1,
@@ -712,19 +669,22 @@
   },
   "EAZ": {
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 2,
+   "suspendedLines": 3,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
   "ECA": {
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 3,
+   "suspendedLines": 2,
    "strongNpcs": 0,
    "weakNpcs": 1,
    "distinctNpcs": 1,
-   "supportShare": 1.0,
-   "totalObservations": 1,
-   "runnerUp": null,
+   "supportShare": 0.5,
+   "totalObservations": 2,
+   "runnerUp": {
+    "cat": "wound:fa",
+    "support": 1
+   },
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "wound:comp"
   },
@@ -751,13 +711,13 @@
   },
   "EGJ": {
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 3,
+   "suspendedLines": 1,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
   "EGT": {
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 5,
+   "suspendedLines": 6,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
@@ -767,17 +727,11 @@
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
-  "EHO": {
+  "EHR": {
    "itemclass": "23- Rehabilitation and Community",
    "suspendedLines": 1,
-   "strongNpcs": 0,
-   "weakNpcs": 2,
-   "distinctNpcs": 2,
-   "supportShare": 1.0,
-   "totalObservations": 2,
-   "runnerUp": null,
-   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "wound:fa"
+   "reason": "no eClass->cat observations",
+   "totalObservations": 0
   },
   "EIR": {
    "itemclass": "21- Medical and Surgical Consumables",
@@ -793,7 +747,7 @@
   },
   "ELW": {
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 4,
+   "suspendedLines": 1,
    "strongNpcs": 3,
    "weakNpcs": 1,
    "distinctNpcs": 4,
@@ -824,26 +778,20 @@
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
+  "EOA": {
+   "itemclass": "23- Rehabilitation and Community",
+   "suspendedLines": 1,
+   "reason": "no eClass->cat observations",
+   "totalObservations": 0
+  },
   "ERF": {
    "itemclass": "23- Rehabilitation and Community",
    "suspendedLines": 4,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
-  "ESB": {
-   "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 1,
-   "reason": "no eClass->cat observations",
-   "totalObservations": 0
-  },
   "ESC": {
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 2,
-   "reason": "no eClass->cat observations",
-   "totalObservations": 0
-  },
-  "ETC": {
-   "itemclass": "21- Medical and Surgical Consumables",
    "suspendedLines": 1,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
@@ -869,11 +817,20 @@
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "monitoring:sens"
   },
-  "EVX": {
+  "FAE": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 1,
-   "reason": "no eClass->cat observations",
-   "totalObservations": 0
+   "suspendedLines": 5,
+   "strongNpcs": 0,
+   "weakNpcs": 2,
+   "distinctNpcs": 2,
+   "supportShare": 0.667,
+   "totalObservations": 3,
+   "runnerUp": {
+    "cat": "nutrition:sets",
+    "support": 1
+   },
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "nutrition:dev"
   },
   "FAL": {
    "itemclass": "21- Medical and Surgical Consumables",
@@ -899,8 +856,14 @@
   "FAR": {
    "itemclass": "21- Medical and Surgical Consumables",
    "suspendedLines": 1,
-   "reason": "no eClass->cat observations",
-   "totalObservations": 0
+   "strongNpcs": 0,
+   "weakNpcs": 1,
+   "distinctNpcs": 1,
+   "supportShare": 1.0,
+   "totalObservations": 1,
+   "runnerUp": null,
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "nutrition:dev"
   },
   "FAT": {
    "itemclass": "21- Medical and Surgical Consumables",
@@ -916,18 +879,18 @@
   },
   "FBE": {
    "itemclass": "22- Medical Technology",
-   "suspendedLines": 28,
-   "strongNpcs": 0,
-   "weakNpcs": 1,
-   "distinctNpcs": 1,
-   "supportShare": 0.333,
-   "totalObservations": 3,
+   "suspendedLines": 26,
+   "strongNpcs": 2,
+   "weakNpcs": 0,
+   "distinctNpcs": 2,
+   "supportShare": 0.571,
+   "totalObservations": 5,
    "runnerUp": {
-    "cat": "gastro:energy",
+    "cat": "endoscopy:access",
     "support": 1
    },
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "endoscopy:access"
+   "candidateCat": "endourology:stent"
   },
   "FBH": {
    "itemclass": "21- Medical and Surgical Consumables",
@@ -950,10 +913,10 @@
    "strongNpcs": 1,
    "weakNpcs": 0,
    "distinctNpcs": 1,
-   "supportShare": 0.286,
-   "totalObservations": 4,
+   "supportShare": 0.182,
+   "totalObservations": 7,
    "runnerUp": {
-    "cat": "oncology:acc",
+    "cat": "oncology:abl",
     "support": 2
    },
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
@@ -973,7 +936,7 @@
   },
   "FCB": {
    "itemclass": "22- Medical Technology",
-   "suspendedLines": 20,
+   "suspendedLines": 19,
    "strongNpcs": 1,
    "weakNpcs": 0,
    "distinctNpcs": 1,
@@ -985,6 +948,21 @@
    },
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "cardiology:equip"
+  },
+  "FCC": {
+   "itemclass": "22- Medical Technology",
+   "suspendedLines": 56,
+   "strongNpcs": 2,
+   "weakNpcs": 0,
+   "distinctNpcs": 2,
+   "supportShare": 0.4,
+   "totalObservations": 8,
+   "runnerUp": {
+    "cat": "mis:energy",
+    "support": 3
+   },
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "vascsurg:access"
   },
   "FCH": {
    "itemclass": "21- Medical and Surgical Consumables",
@@ -1010,14 +988,14 @@
    "strongNpcs": 9,
    "weakNpcs": 1,
    "distinctNpcs": 10,
-   "supportShare": 0.345,
+   "supportShare": 0.339,
    "totalObservations": 29,
    "runnerUp": {
-    "cat": "neuro:pns",
-    "support": 17
+    "cat": "neuro:scs",
+    "support": 18
    },
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "neuro:scs"
+   "candidateCat": "neuro:pns"
   },
   "FDA": {
    "itemclass": "21- Medical and Surgical Consumables",
@@ -1033,7 +1011,7 @@
   },
   "FDJ": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 2,
+   "suspendedLines": 1,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
@@ -1069,13 +1047,13 @@
   },
   "FEC": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 8,
+   "suspendedLines": 7,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
   "FED": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 12,
+   "suspendedLines": 15,
    "strongNpcs": 0,
    "weakNpcs": 1,
    "distinctNpcs": 1,
@@ -1090,6 +1068,18 @@
    "suspendedLines": 7,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
+  },
+  "FET": {
+   "itemclass": "21- Medical and Surgical Consumables",
+   "suspendedLines": 1,
+   "strongNpcs": 1,
+   "weakNpcs": 1,
+   "distinctNpcs": 2,
+   "supportShare": 1.0,
+   "totalObservations": 2,
+   "runnerUp": null,
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "theatres:drain"
   },
   "FFH": {
    "itemclass": "21- Medical and Surgical Consumables",
@@ -1121,12 +1111,18 @@
   "FJF": {
    "itemclass": "21- Medical and Surgical Consumables",
    "suspendedLines": 1,
-   "reason": "no eClass->cat observations",
-   "totalObservations": 0
+   "strongNpcs": 2,
+   "weakNpcs": 0,
+   "distinctNpcs": 2,
+   "supportShare": 1.0,
+   "totalObservations": 2,
+   "runnerUp": null,
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "monitoring:gen"
   },
   "FJH": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 39,
+   "suspendedLines": 38,
    "strongNpcs": 1,
    "weakNpcs": 0,
    "distinctNpcs": 1,
@@ -1139,6 +1135,18 @@
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "monitoring:gen"
   },
+  "FJM": {
+   "itemclass": "21- Medical and Surgical Consumables",
+   "suspendedLines": 1,
+   "strongNpcs": 0,
+   "weakNpcs": 1,
+   "distinctNpcs": 1,
+   "supportShare": 1.0,
+   "totalObservations": 1,
+   "runnerUp": null,
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "cardiology:ctg"
+  },
   "FJQ": {
    "itemclass": "21- Medical and Surgical Consumables",
    "suspendedLines": 1,
@@ -1147,7 +1155,7 @@
   },
   "FKF": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 3,
+   "suspendedLines": 2,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
@@ -1180,7 +1188,7 @@
   },
   "FMB": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 7,
+   "suspendedLines": 5,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
@@ -1189,18 +1197,6 @@
    "suspendedLines": 5,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
-  },
-  "FMG": {
-   "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 2,
-   "strongNpcs": 0,
-   "weakNpcs": 1,
-   "distinctNpcs": 1,
-   "supportShare": 1.0,
-   "totalObservations": 1,
-   "runnerUp": null,
-   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "nutrition:dev"
   },
   "FMI": {
    "itemclass": "21- Medical and Surgical Consumables",
@@ -1229,9 +1225,21 @@
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "vascular:gen"
   },
+  "FNB": {
+   "itemclass": "22- Medical Technology",
+   "suspendedLines": 1,
+   "strongNpcs": 0,
+   "weakNpcs": 1,
+   "distinctNpcs": 1,
+   "supportShare": 1.0,
+   "totalObservations": 1,
+   "runnerUp": null,
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "oncology:acc"
+  },
   "FNK": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 1,
+   "suspendedLines": 2,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
@@ -1249,7 +1257,7 @@
   },
   "FNS": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 10,
+   "suspendedLines": 11,
    "strongNpcs": 1,
    "weakNpcs": 0,
    "distinctNpcs": 1,
@@ -1267,7 +1275,7 @@
   },
   "FNY": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 4,
+   "suspendedLines": 5,
    "strongNpcs": 1,
    "weakNpcs": 3,
    "distinctNpcs": 4,
@@ -1282,18 +1290,18 @@
   },
   "FPA": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 13,
-   "strongNpcs": 1,
+   "suspendedLines": 12,
+   "strongNpcs": 2,
    "weakNpcs": 0,
-   "distinctNpcs": 1,
-   "supportShare": 0.4,
-   "totalObservations": 3,
+   "distinctNpcs": 2,
+   "supportShare": 0.444,
+   "totalObservations": 5,
    "runnerUp": {
-    "cat": "ent:instr",
+    "cat": "cardiology:ecg",
     "support": 2
    },
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "cardiology:ecg"
+   "candidateCat": "respiratory:resp"
   },
   "FPH": {
    "itemclass": "21- Medical and Surgical Consumables",
@@ -1335,22 +1343,34 @@
    "itemclass": "22- Medical Technology",
    "suspendedLines": 3,
    "strongNpcs": 1,
-   "weakNpcs": 2,
-   "distinctNpcs": 3,
-   "supportShare": 0.571,
-   "totalObservations": 5,
+   "weakNpcs": 1,
+   "distinctNpcs": 2,
+   "supportShare": 0.5,
+   "totalObservations": 4,
    "runnerUp": {
-    "cat": "audiology:acc",
+    "cat": "audiology:impl",
     "support": 3
    },
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "audiology:impl"
+   "candidateCat": "audiology:acc"
   },
   "FQZ": {
    "itemclass": "22- Medical Technology",
    "suspendedLines": 3,
    "reason": "no eClass->cat observations",
    "totalObservations": 0
+  },
+  "FRD": {
+   "itemclass": "22- Medical Technology",
+   "suspendedLines": 15,
+   "strongNpcs": 0,
+   "weakNpcs": 1,
+   "distinctNpcs": 1,
+   "supportShare": 1.0,
+   "totalObservations": 1,
+   "runnerUp": null,
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "vascsurg:access"
   },
   "FRE": {
    "itemclass": "22- Medical Technology",
@@ -1367,8 +1387,29 @@
   "FRK": {
    "itemclass": "22- Medical Technology",
    "suspendedLines": 13,
-   "reason": "no eClass->cat observations",
-   "totalObservations": 0
+   "strongNpcs": 1,
+   "weakNpcs": 0,
+   "distinctNpcs": 1,
+   "supportShare": 1.0,
+   "totalObservations": 1,
+   "runnerUp": null,
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "vascsurg:stent"
+  },
+  "FRL": {
+   "itemclass": "22- Medical Technology",
+   "suspendedLines": 4,
+   "strongNpcs": 2,
+   "weakNpcs": 0,
+   "distinctNpcs": 2,
+   "supportShare": 0.5,
+   "totalObservations": 4,
+   "runnerUp": {
+    "cat": "vascsurg:stent",
+    "support": 4
+   },
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "endourology:stent"
   },
   "FRN": {
    "itemclass": "22- Medical Technology",
@@ -1376,26 +1417,14 @@
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
-  "FRP": {
-   "itemclass": "22- Medical Technology",
-   "suspendedLines": 22,
-   "strongNpcs": 1,
-   "weakNpcs": 1,
-   "distinctNpcs": 2,
-   "supportShare": 1.0,
-   "totalObservations": 2,
-   "runnerUp": null,
-   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "oncology:abl"
-  },
   "FRS": {
    "itemclass": "22- Medical Technology",
    "suspendedLines": 5,
    "strongNpcs": 0,
-   "weakNpcs": 1,
-   "distinctNpcs": 1,
+   "weakNpcs": 2,
+   "distinctNpcs": 2,
    "supportShare": 1.0,
-   "totalObservations": 1,
+   "totalObservations": 2,
    "runnerUp": null,
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "gastro:stent"
@@ -1424,8 +1453,8 @@
    "strongNpcs": 0,
    "weakNpcs": 2,
    "distinctNpcs": 2,
-   "supportShare": 0.333,
-   "totalObservations": 5,
+   "supportShare": 0.4,
+   "totalObservations": 4,
    "runnerUp": {
     "cat": "mis:staple",
     "support": 2
@@ -1462,14 +1491,14 @@
   },
   "FTE": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 7,
+   "suspendedLines": 12,
    "strongNpcs": 5,
    "weakNpcs": 1,
    "distinctNpcs": 6,
    "supportShare": 0.524,
    "totalObservations": 11,
    "runnerUp": {
-    "cat": "infection:latex",
+    "cat": "theatres:glove",
     "support": 6
    },
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
@@ -1483,7 +1512,7 @@
   },
   "FVB": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 11,
+   "suspendedLines": 5,
    "strongNpcs": 17,
    "weakNpcs": 8,
    "distinctNpcs": 25,
@@ -1510,7 +1539,7 @@
   },
   "FVI": {
    "itemclass": "22- Medical Technology",
-   "suspendedLines": 8,
+   "suspendedLines": 7,
    "strongNpcs": 1,
    "weakNpcs": 1,
    "distinctNpcs": 2,
@@ -1525,7 +1554,7 @@
   },
   "FVN": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 7,
+   "suspendedLines": 4,
    "strongNpcs": 6,
    "weakNpcs": 3,
    "distinctNpcs": 9,
@@ -1537,6 +1566,21 @@
    },
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "vascular:pivc"
+  },
+  "FVR": {
+   "itemclass": "21- Medical and Surgical Consumables",
+   "suspendedLines": 9,
+   "strongNpcs": 1,
+   "weakNpcs": 7,
+   "distinctNpcs": 8,
+   "supportShare": 0.562,
+   "totalObservations": 14,
+   "runnerUp": {
+    "cat": "vascular:conn",
+    "support": 3
+   },
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "bloodtx:pump"
   },
   "FWA": {
    "itemclass": "24- Diagnostics, Equipment and Services",
@@ -1580,21 +1624,9 @@
    "reason": "no eClass->cat observations",
    "totalObservations": 0
   },
-  "FXK": {
-   "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 18,
-   "strongNpcs": 0,
-   "weakNpcs": 1,
-   "distinctNpcs": 1,
-   "supportShare": 1.0,
-   "totalObservations": 1,
-   "runnerUp": null,
-   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
-   "candidateCat": "theatres:theatre"
-  },
   "FXT": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 2,
+   "suspendedLines": 1,
    "strongNpcs": 1,
    "weakNpcs": 0,
    "distinctNpcs": 1,
@@ -1622,6 +1654,18 @@
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "respiratory:aero"
   },
+  "GBA": {
+   "itemclass": "23- Rehabilitation and Community",
+   "suspendedLines": 1,
+   "strongNpcs": 0,
+   "weakNpcs": 1,
+   "distinctNpcs": 1,
+   "supportShare": 1.0,
+   "totalObservations": 1,
+   "runnerUp": null,
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "womens:sex"
+  },
   "GFA": {
    "itemclass": "22- Medical Technology",
    "suspendedLines": 6,
@@ -1644,7 +1688,7 @@
    "totalObservations": 8,
    "runnerUp": {
     "cat": "audiology:impl",
-    "support": 3
+    "support": 4
    },
    "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
    "candidateCat": "audiology:acc"
@@ -1658,14 +1702,14 @@
   "GFE": {
    "itemclass": "22- Medical Technology",
    "suspendedLines": 1,
-   "reason": "no eClass->cat observations",
-   "totalObservations": 0
-  },
-  "GLB": {
-   "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 1,
-   "reason": "no eClass->cat observations",
-   "totalObservations": 0
+   "strongNpcs": 0,
+   "weakNpcs": 1,
+   "distinctNpcs": 1,
+   "supportShare": 1.0,
+   "totalObservations": 1,
+   "runnerUp": null,
+   "reason": "evidence below the confidence floor (see thresholds in build_eclass_map.py)",
+   "candidateCat": "audiology:diag"
   },
   "GMB": {
    "itemclass": "23- Rehabilitation and Community",
@@ -1681,12 +1725,12 @@
   },
   "GPC": {
    "itemclass": "23- Rehabilitation and Community",
-   "suspendedLines": 2,
+   "suspendedLines": 3,
    "strongNpcs": 32,
    "weakNpcs": 0,
    "distinctNpcs": 32,
-   "supportShare": 0.587,
-   "totalObservations": 61,
+   "supportShare": 0.593,
+   "totalObservations": 60,
    "runnerUp": {
     "cat": "ostomy:ileo",
     "support": 16
@@ -1711,7 +1755,7 @@
   },
   "KBC": {
    "itemclass": "24- Diagnostics, Equipment and Services",
-   "suspendedLines": 1,
+   "suspendedLines": 2,
    "strongNpcs": 1,
    "weakNpcs": 1,
    "distinctNpcs": 2,
@@ -1723,12 +1767,12 @@
   },
   "KBD": {
    "itemclass": "24- Diagnostics, Equipment and Services",
-   "suspendedLines": 7,
+   "suspendedLines": 6,
    "strongNpcs": 2,
-   "weakNpcs": 8,
-   "distinctNpcs": 10,
-   "supportShare": 0.5,
-   "totalObservations": 19,
+   "weakNpcs": 6,
+   "distinctNpcs": 8,
+   "supportShare": 0.455,
+   "totalObservations": 17,
    "runnerUp": {
     "cat": "pathology:consum",
     "support": 10
@@ -1771,7 +1815,7 @@
   },
   "VEB": {
    "itemclass": "21- Medical and Surgical Consumables",
-   "suspendedLines": 14,
+   "suspendedLines": 11,
    "strongNpcs": 1,
    "weakNpcs": 0,
    "distinctNpcs": 1,

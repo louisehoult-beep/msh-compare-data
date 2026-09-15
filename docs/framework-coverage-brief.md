@@ -26,6 +26,20 @@ STARTED (partial coverage); the rest are not started.**
    for a structural reason (UNMAPPED — no Hub speciality claims it as a buying route — or
    every awarded supplier forbids crawling), stop and report that rather than picking one.
 
+   **DEFERRED FRAMEWORKS ARE ALREADY OUT OF THAT LIST** (added 14/09/2026, ^o465). A
+   framework whose entire remaining `Left` is waiting on a routing or identity ruling only
+   Lou can give is named in `data/coverage-deferrals.json`, and the ledger prints it in its
+   own "Deferred" block above the pick list instead of inside it. Its coverage % and `Left`
+   are untouched and still honest — the entry parks it in the queue, it does not shrink the
+   count. Do not pick a deferred framework, and do not delete its entry to work it: the
+   ruling is the work, and it is on the decision queue
+   (`02-Elevate-and-Thrive/Hub/identity-vocab-decision-queue.md`). Remove the entry once Lou
+   has ruled. A deferral also expires by itself — it applies only while every actionable
+   supplier on that framework is named in it, so a new award, a newly unresolved name or a
+   newly held range puts the framework straight back in the pick list and prints a NOTE
+   saying so. Radiotherapy Ancillary Devices was the first entry, after the picker selected
+   it on 10/09, 11/09 and 13/09 and re-confirmed zero movement each time.
+
    **A LOW COVERAGE % IS NOT EVIDENCE OF NEGLECT.** Added 06/09/2026 after a run picked
    Digital Diagnostic Solutions on 11.1% and re-crawled 34 suppliers that had all been read
    and refused the day before. Read the `Refused` column with the coverage: those suppliers

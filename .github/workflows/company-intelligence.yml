@@ -76,6 +76,30 @@ jobs:
       - name: Backfill sourced frameworks into the index and seed
         run: python3 scripts/backfill_index_frameworks.py
 
+      # MUST run immediately after the backfill above. `productCategories` is DERIVED
+      # from frameworks[], and that step is the only thing that rewrites frameworks[]
+      # from the fresh capture — so this is the moment the derivation is stale. It
+      # re-derives from what the briefs now say, which is how the layer GAINS a
+      # category when NHS Supply Chain adds a supplier to a framework rather than
+      # only losing one when it drops them. Idempotent, and it only ever replaces
+      # rows carrying its own generatedBy marker, so curated entries are untouched.
+      # Nothing had re-derived these since the one-off backfill of 24/08/2026.
+      - name: Re-derive product categories from the refreshed frameworks
+        run: python3 scripts/backfill_product_categories.py
+
+      # Belt and braces, because the two mechanisms cover different populations and
+      # the gap is real: the re-derivation above only runs for suppliers whose
+      # `products` array is empty, and 5 suppliers (Abbott Diagnostics, BD, Essity,
+      # Kimal, RB Medical Engineering) carry generated categories AND curated
+      # products. A delisting on one of those is invisible to it. The pruning inside
+      # backfill_index_frameworks.py catches those; this proves it still catches only
+      # those, and never a curated category or a supplier the capture simply did not
+      # cover. Added 15/09/2026, after NHS Supply Chain took J & M Medical off the
+      # Textiles brief (2025/S 000-048142) and the orphaned "Facilities and Office
+      # Solutions" category failed the publish gate on every run for three days.
+      - name: Prove no derived category outlives its framework
+        run: python3 test_orphaned_product_categories.py
+
       # MUST run after the frameworks refresh above: it checks pending awards
       # against the FRESH data/frameworks.json to retire anything NHSSC has
       # now published its own brief for, in the same run that captured it.

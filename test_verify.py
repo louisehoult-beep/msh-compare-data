@@ -2821,6 +2821,8 @@ def _(tmp):
     return "2026/S 000-010151"
 
 
+
+
 # ---------------------------------------------------------------------------
 # THE COVERAGE LEDGER'S CLASSIFICATION (added 10/09/2026).
 #
@@ -3168,6 +3170,7 @@ def _run(tmp):
     failures += company_press_cases()
     failures += company_logos_cases(tmp)
     failures += concurrency_cases()
+    failures += notice_citation_cases()
 
     rc, out = gate()
     if rc != 0:
@@ -3179,15 +3182,81 @@ def _run(tmp):
     # cases + 2 concurrency cases, 1 Company Report no-op, plus the award
     # gate's own stale-quarantine and no-op cases — and every case list
     # counted rather than typed.
+    # +2 for notice_citation_cases (one fires, one must-not-fire)
     extras = (5 + 1 + 2 + len(CR_CASES) + len(CR_QUIET) + len(CA_CASES)
               + len(CA_QUIET) + len(CP_CASES) + len(CP_QUIET) + 1
-              + len(CL_CASES) + len(CL_QUIET) + 1)
+              + len(CL_CASES) + len(CL_QUIET) + 1 + 2)
     # Skips are printed in the tally, not just in the rows. A suite that runs 60
     # of 74 cases and says "GATE HOLDS" is telling you less than it sounds like.
     ran = len(CASES) + extras - skipped
     print("GATE HOLDS — %d case(s) run, %d skipped." % (ran, skipped) if not failures
           else "GATE HAS %d HOLE(S) — fix verify.py before trusting it." % failures)
     return 1 if failures else 0
+
+
+def notice_citation_cases():
+    """In-process tests for check_notice_citations (^o471, added 15/09/2026).
+
+    Two cases:
+    1. A genuine deadline citation must fire (gate still works).
+    2. A supplier address ending '...Close, Town' near a notice reference must
+       NOT fire (false-positive fix: bare 'Close' no longer matches DEADLINE).
+
+    Uses verify.check_notice_citations() directly so each case can be verified
+    independently — the gate() approach only tells you whether ANY failure
+    occurred, not which sentence caused it.
+    """
+    import importlib, tempfile, os as _os
+    v = importlib.import_module("verify")
+    failures = 0
+
+    # Case 1: genuine deadline must fire — "closing" is an inflected form that
+    # was always unambiguous and must still catch the error.
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json",
+                                     delete=False, encoding="utf-8") as fh:
+        fh.write(
+            '{"note":"Bidding closing 14 September 2026 under 2026/S 000-099999."}'
+        )
+        path1 = fh.name
+    try:
+        v.fails[:] = []
+        v.warns[:] = []
+        v.check_notice_citations([path1])
+        if not v.fails:
+            print("HOLE  notice_citations: genuine deadline 'closing' did not fire"); failures += 1
+        elif "with no ocid" not in " ".join(m for _, m in v.fails).lower():
+            print("HOLE  notice_citations: genuine deadline fired but wrong message: %s"
+                  % " ".join(m for _, m in v.fails)[:200]); failures += 1
+        else:
+            print("ok    notice_citations: genuine deadline 'closing' fires correctly")
+    finally:
+        _os.unlink(path1)
+
+    # Case 2: address 'Close' near a notice reference must NOT fire (^o471).
+    # The seed JSON is a single compact line, so a supplier's registeredAddress
+    # and its frameworks[].reference can sit within the 300-char sentence window.
+    # Before the fix, DEADLINE matched the noun 'Close' as a deadline indicator.
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json",
+                                     delete=False, encoding="utf-8") as fh:
+        # Compact, no newlines, exactly mimicking the seed's single-line format.
+        fh.write(
+            '{"name":"Test Co","registeredAddress":"4 Brunel Close, Coventry CV21 1HF",'
+            '"frameworks":[{"reference":"2023/S 000-025037","dates":"1 Jan 2024 to 31 Dec 2027"}]}'
+        )
+        path2 = fh.name
+    try:
+        v.fails[:] = []
+        v.warns[:] = []
+        v.check_notice_citations([path2])
+        if v.fails:
+            print("HOLE  notice_citations: address 'Close' false-positive still fires: %s"
+                  % " ".join(m for _, m in v.fails)[:220]); failures += 1
+        else:
+            print("ok    notice_citations: address 'Close' does not fire — false-positive fixed")
+    finally:
+        _os.unlink(path2)
+
+    return failures
 
 
 if __name__ == "__main__":

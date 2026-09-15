@@ -68,6 +68,7 @@ REFS = {
     "mhra-alerts.json":         "ETH-D9D253BB8",
     "private-provider-moves.json":      "ETH-DA1F71B56",
     "company-awards.json":     "ETH-D8F9201A9",
+    "coverage-deferrals.json":          "ETH-DB4C1294E",
     "coverage-ledger.json":             "ETH-D1122007A",
     "company-press.json":      "ETH-D5A18D6E2",
     "company-logos.json":      "ETH-D6F85FA5F",

@@ -81,6 +81,17 @@ No randomness, no external call. Every run against the same
 `data/npc-eclass.json` and `data/differentiator.json` produces byte-identical
 output (key order fixed, ties broken alphabetically by `cat`).
 
+WHERE THE WEEKLY JOB LIVES (moved 14/09/2026). Not in this repo. It needs
+sdt-suspensions.json and, via resolve_npc_eclass.py beside it, sdt_fetch.py —
+both of which live in the PRIVATE medical-sales-hub-pipeline repo, which a
+runner in this public repo cannot see. The workflow that used to sit in
+.github/workflows/eclass-map.yml here therefore never once worked in CI; it is
+now .github/workflows/eclass-map.yml in the pipeline repo, which has both
+inputs locally, checks this repo out with MSH_DATA_DEPLOY_KEY, runs verify.py
+here as the gate, and pushes the two data files back. It passes its own
+checkout path in through PIPELINE_ROOT. Running either script by hand on Lou's
+Mac is unchanged — the default path is still hers.
+
 USAGE
     python3 scripts/build_eclass_map.py --report   # print coverage, write nothing
     python3 scripts/build_eclass_map.py             # write data/eclass-category-map.json
@@ -101,8 +112,19 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
-PIPELINE = ("/Users/louisehoult/Library/CloudStorage/OneDrive-Personal/Cowork-OS/"
-            "02-Elevate-and-Thrive/Hub/Medical-Sales-Hub/cloud-pipeline")
+# Where the Supply Disruption Tracker's own repo is checked out. This script
+# needs two things from it: sdt_fetch.py (imported below) and, for
+# build_eclass_map.py beside it, sdt-suspensions.json. That repo
+# (medical-sales-hub-pipeline) is PRIVATE, so a GitHub runner in THIS repo
+# cannot see it at all — which is why the weekly job that ran these two
+# scripts lived here and never once worked in CI (13/09/2026: it reported 283
+# NPCs to resolve, resolved none, and exited green, then build_eclass_map.py
+# died on the missing file). The job now runs in the pipeline repo, where both
+# inputs are local, and passes its own path in through PIPELINE_ROOT. The
+# default below is Lou's Mac, so running this by hand is unchanged.
+PIPELINE = os.environ.get("PIPELINE_ROOT") or (
+    "/Users/louisehoult/Library/CloudStorage/OneDrive-Personal/Cowork-OS/"
+    "02-Elevate-and-Thrive/Hub/Medical-Sales-Hub/cloud-pipeline")
 
 NPC_ECLASS = os.path.join(REPO, "data", "npc-eclass.json")
 VOCAB_FILE = os.path.join(REPO, "data", "compare-suppliers.json")

@@ -28,6 +28,12 @@ Normalisation, and nothing more than this:
     A/S, AB, Oy, Pty …);
   * trailing territory words stripped (UK, GB, England, Ireland, Europe, EMEA).
 
+A name the seed holds VERBATIM — norm() alone, nothing stripped — is matched
+before that. Narrower than the rule above, never wider: it reaches only names
+already recorded. It exists because the territory strip collapses two real
+companies onto one key when the territory word is the only thing between them,
+and quarantining a company against its own namesake helps nobody.
+
 There is NO fuzzy matching, no substring matching, no edit distance and no
 initial matching, on purpose. Those are how homonyms merge. The stripping is
 shallow for the same reason: "healthcare", "medical", "group", "holdings" and
@@ -76,7 +82,11 @@ RULE = (
     "words (UK, GB, England, Ireland, Europe, EMEA). Nothing else is stripped and "
     "there is no fuzzy, substring or edit-distance matching. A name matching two "
     "different companies, or none, is quarantined unpublished — it is a question "
-    "for a human, never a best guess."
+    "for a human, never a best guess. One name is tried before that stripping: a "
+    "notice name that a company holds verbatim, as its own name or a recorded "
+    "alias, resolves to that company. This is narrower than the rule above, never "
+    "wider, and it exists so two real companies whose names differ only by a "
+    "territory word are told apart rather than quarantined against each other."
 )
 
 
@@ -103,23 +113,45 @@ def key(s):
     return n
 
 
+class Index(dict):
+    """The stripped-key map, with the unstripped map that disambiguates it.
+
+    Subclasses dict, so it is still the {key: {company, ...}} mapping every
+    caller has always been handed. `exact` is the same shape built from norm()
+    alone, with no legal-form or territory word removed.
+
+    Why two: key() strips the territory word, so two REAL companies whose names
+    differ only by that word collapse onto one key. "Nipro Medical UK Ltd" and
+    "Nipro Medical Europe" are two active registrations — 06993337 and
+    03936551 — and both key to "nipro medical". Consulting the unstripped map
+    first tells them apart without loosening anything: it only ever matches a
+    name the seed holds verbatim.
+    """
+
+    def __init__(self, *a, **kw):
+        dict.__init__(self, *a, **kw)
+        self.exact = {}
+
+
 def build_index(seed):
-    """{normalised key: set of seed company names} from a supplier-seed doc.
+    """Index of every seed company name and alias, stripped and unstripped.
 
     A key that reaches more than one company is kept AS a set rather than being
     resolved to the first one seen. Silently taking the first is how a homonym
     becomes a published fact, and dictionary order is not evidence.
     """
-    index = {}
+    index = Index()
     for company in (seed or {}).get("suppliers", []) or []:
         name = company.get("name")
         if not name:
             continue
         for candidate in [name] + list(company.get("aliases") or []):
             k = key(candidate)
-            if not k:
-                continue
-            index.setdefault(k, set()).add(name)
+            if k:
+                index.setdefault(k, set()).add(name)
+            e = norm(candidate)
+            if e:
+                index.exact.setdefault(e, set()).add(name)
     return index
 
 
@@ -130,6 +162,21 @@ def resolve(name, index):
     written into the published file verbatim, so it is phrased for a reader,
     not for a log.
     """
+    # ---- the name exactly as the seed holds it, before any stripping -------
+    # Narrower than the rule below, never wider: it matches only a name or
+    # alias recorded verbatim. It runs first so that a company whose whole
+    # distinguishing feature is its territory word ("Nipro Medical UK Ltd"
+    # beside "Nipro Medical Europe") resolves to itself rather than being
+    # quarantined as ambiguous against its own namesake.
+    e = norm(name)
+    exact = getattr(index, "exact", None) or {}
+    ehits = exact.get(e)
+    if ehits and len(ehits) == 1:
+        company = sorted(ehits)[0]
+        return company, "confirmed", (
+            "\"%s\" is held verbatim by this company, as its own name or a recorded "
+            "alias, before any legal-form or territory word is stripped." % e)
+
     k = key(name)
     if not k:
         return None, "unmatched", "the notice records no supplier name"

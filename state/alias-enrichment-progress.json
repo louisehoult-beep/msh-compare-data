@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-14",
+ "lastRun": "2026-09-15",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -318,7 +318,19 @@
   "Leanvation",
   "Leda Orthopaedics Ltd",
   "Leib Medical Ltd",
-  "Key Health Solutions"
+  "Key Health Solutions",
+  "Lenience UK Ltd",
+  "Lenstec (Barbados) Inc",
+  "Lexington Medical UK Ltd",
+  "Lifeline 24",
+  "LifeSignals Europe Limited",
+  "Lima Orthopaedics UK Ltd",
+  "Link Orthopaedics UK Ltd",
+  "LiteOptics",
+  "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
+  "LocaMed Ltd",
+  "Loewenstein Medical UK Ltd",
+  "Love Medical"
  ],
  "refusals": [
   {
@@ -680,6 +692,36 @@
    "name": "Leda Orthopaedics Ltd",
    "reason": "ledaortho.com (company's own site, About Us page, read via rendered browser after WebFetch redirect-looped) brands the company only as \"LEDA\" or \"LEDA Orthopaedics\" throughout — no \"Limited\" suffix appears anywhere, and no other trading name is given. Its stated registered office (Unit 4 Falcon Court, Hinchingbrooke Business Park, Huntingdon PE29 6AH) matches Companies House 08730490 LEDA ORTHOPAEDICS LIMITED exactly, corroborating the existing company number candidate, but yields no alias beyond what the existing bare \"Leda Orthopaedics Ltd\" entry already covers (it already matches text carrying that phrase regardless of suffix). Bare \"LEDA\" was not added: the site's own explanation (\"We took LE and DA from their first names\") confirms it is a shortening of the full name, not the whole canonical name, and \"Leda\" is also a common name shared by unrelated companies — the single-token ambiguity rule 2 exists to stop. Speciality already populated (\"Orthopaedics and trauma\"), left as is.",
    "date": "2026-09-14"
+  },
+  {
+   "name": "Lenience UK Ltd",
+   "reason": "No verifiable extra name form. Companies House 12545155 shows the registered name as \"LENIENCE UK LTD\" (matches display, no previous names on record). Web search found no dedicated company website — only NHS Supply Chain's own Wound Closure framework brief, Companies House, and directory aggregators (Endole, companycheck). No own-named source states a different name form. Specialities also left empty: no own website found to state clinical scope.",
+   "date": "2026-09-15"
+  },
+  {
+   "name": "Lexington Medical UK Ltd",
+   "reason": "No verifiable extra name form for the UK entity itself. Companies House 14771423 shows the registered name as \"LEXINGTON MEDICAL UK LTD\" with no previous names. The only other name form found is the US parent, \"Lexington Medical, Inc.\" (lexington-med.com), which per rule 4 must not be added as an alias of its UK subsidiary.",
+   "date": "2026-09-15"
+  },
+  {
+   "name": "LifeSignals Europe Limited",
+   "reason": "No UK Companies House registration found under \"LifeSignals\" (advanced-search companyNameIncludes=LifeSignals returns zero results, checked 15/09/2026), so no previous/trading names to check. The company's own global site, lifesignals.com, refers only to the parent, \"LifeSignals\" — which per rule 4 must not be added as an alias of the UK entity named on the NHS Supply Chain framework brief.",
+   "date": "2026-09-15"
+  },
+  {
+   "name": "Link Orthopaedics UK Ltd",
+   "reason": "No verifiable extra name form for the UK entity itself. Companies House SC586309 shows the registered name as \"LINK ORTHOPAEDICS UK LTD\" with no previous names. Its own site (linkorthopaedics.co.uk, redirecting to link-ortho.com/uk) names the parent as \"Waldemar Link GmbH & Co. KG\", which per rule 4 must not be added as an alias of its UK subsidiary.",
+   "date": "2026-09-15"
+  },
+  {
+   "name": "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
+   "reason": "This record duplicates the existing \"Caversham Health\" supplier record: both cite the same NHS Supply Chain framework award (Pressure Area Care and Patient Handling, 2025/S 000-086469) and the same company website (cavershamhealth.com), and \"Caversham Health\" already carries the real alias forms (\"Caversham Health\", \"Live By Lulu Limited\", \"Live By Lulu\", \"Live By Lulu Limited, trading as Caversham Health\"). Adding those same alias forms here would let a single press story match two separate Hub supplier cards for the same company. Not aliased — flagged for a dedup pass instead of enrichment.",
+   "date": "2026-09-15"
+  },
+  {
+   "name": "Loewenstein Medical UK Ltd",
+   "reason": "Withdrawn after verify.py caught it: the candidate alias \"Löwenstein Medical UK Ltd\" (umlaut spelling, seen on loewensteinmedical.com) is itself the own name of a THIRD separate seed record, \"Löwenstein Medical UK\" (with no \"Ltd\" suffix) — alongside a fourth-way-round \"Lowenstein Medical UK Ltd\" record (no umlaut/oe). All three appear to be unreconciled duplicate entries for the same real company under different spellings, from different NHS SC framework briefs. Adding the umlaut form as an alias here would make alias lookup answer for two different Hub records (first-wins), which verify.py correctly rejects as a hard failure. Not aliased — flagged for a dedup pass across all three records rather than fixed here.",
+   "date": "2026-09-15"
   }
  ],
  "sources": {
