@@ -330,7 +330,19 @@
   "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
   "LocaMed Ltd",
   "Loewenstein Medical UK Ltd",
-  "Love Medical"
+  "Love Medical",
+  "Lowenstein Medical UK Ltd",
+  "LTC Healthcare (Leeds Trading Company)",
+  "Lyreco UK Limited",
+  "MAM UK Ltd",
+  "Marsden Weighing Machine Co Ltd",
+  "Marshall Products",
+  "Martek Lifecare",
+  "Masimo Europe",
+  "Materialise",
+  "MC Tissue",
+  "McKillop Dental Equipment",
+  "MDI Medical Ltd"
  ],
  "refusals": [
   {
@@ -721,6 +733,21 @@
   {
    "name": "Loewenstein Medical UK Ltd",
    "reason": "Withdrawn after verify.py caught it: the candidate alias \"Löwenstein Medical UK Ltd\" (umlaut spelling, seen on loewensteinmedical.com) is itself the own name of a THIRD separate seed record, \"Löwenstein Medical UK\" (with no \"Ltd\" suffix) — alongside a fourth-way-round \"Lowenstein Medical UK Ltd\" record (no umlaut/oe). All three appear to be unreconciled duplicate entries for the same real company under different spellings, from different NHS SC framework briefs. Adding the umlaut form as an alias here would make alias lookup answer for two different Hub records (first-wins), which verify.py correctly rejects as a hard failure. Not aliased — flagged for a dedup pass across all three records rather than fixed here.",
+   "date": "2026-09-15"
+  },
+  {
+   "name": "Martek Lifecare",
+   "reason": "martek-lifecare.com unreachable (Cloudflare 523) for direct verification; the only alternate name found (Martek Marine Ltd, 03930003) is a sibling brand under the same group operating a distinct product line (marine safety equipment vs medical AEDs) — adding it risks cross-attributing marine-industry press to the medical supplier.",
+   "date": "2026-09-15"
+  },
+  {
+   "name": "Masimo Europe",
+   "reason": "The only alternate form found (\"Masimo\") is the shared global brand of the parent, Masimo Corporation. Adding it as an alias of the \"Masimo Europe\" record risks conflating parent and subsidiary press coverage, which the task rules prohibit.",
+   "date": "2026-09-15"
+  },
+  {
+   "name": "MDI Medical Ltd",
+   "reason": "NHS Supply Chain's own contract launch brief for Instrument Decontamination and Accessories names this supplier verbatim as \"MDI Medical Ltd\" — identical to the display name. Companies House shows multiple similarly named but legally distinct entities (MDI Medical Limited, Ireland OE032148; MDI Medical (N.I.) Limited NI023111) with no way to confirm which is the NHS Supply Chain contracted entity, so no additional alias was added to avoid misattribution.",
    "date": "2026-09-15"
   }
  ],
