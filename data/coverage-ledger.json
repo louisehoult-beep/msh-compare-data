@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-02",
-  "differentiator.json published": 34617,
-  "differentiator.json held": 48397
+  "differentiator.json published": 34830,
+  "differentiator.json held": 48769
  },
  "counts": {
   "frameworks": 121,
@@ -24,10 +24,10 @@
   "unmapped": 47,
   "outOfScope": 20,
   "inScope": 101,
-  "supplierNamesUnresolved": 442,
+  "supplierNamesUnresolved": 438,
   "inScopeSuppliersNeedingCrawl": 451,
   "inScopeSuppliersNeedingDomain": 414,
-  "suppliersRefused": 397,
+  "suppliersRefused": 398,
   "suppliersRefusedButPublishingElsewhere": 102,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -45,10 +45,6 @@
   ],
   [
    "Brake Bros Ltd",
-   3
-  ],
-  [
-   "Nihon Kohden UK Ltd",
    3
   ],
   [
@@ -85,10 +81,6 @@
   ],
   [
    "UK Vending Ltd",
-   2
-  ],
-  [
-   "Spacelabs Healthcare Ltd",
    2
   ],
   [
@@ -141,10 +133,6 @@
   ],
   [
    "Polyco Healthline Limited",
-   2
-  ],
-  [
-   "AC Cossor & Son (Surgical) Ltd",
    2
   ],
   [
@@ -1609,10 +1597,6 @@
   ],
   [
    "UKR",
-   1
-  ],
-  [
-   "Probo UK Ltd",
    1
   ],
   [
@@ -7711,8 +7695,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "7 June 2028",
    "suppliersAwarded": 35,
-   "suppliersPublished": 7,
-   "coverage": 20.0,
+   "suppliersPublished": 8,
+   "coverage": 22.9,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -7735,6 +7719,10 @@
     },
     {
      "supplier": "Neurogen Ltd",
+     "domain": null
+    },
+    {
+     "supplier": "Nihon Koden",
      "domain": null
     },
     {
@@ -7766,6 +7754,7 @@
     "Dot Medical Limited",
     "EDAN Medical (UK) Ltd",
     "Neurogen Ltd",
+    "Nihon Koden",
     "Optima Medical Ltd",
     "Penlon",
     "Pro Health Solutions Limited",
@@ -7775,6 +7764,13 @@
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "AC Cossor & Son (Surgical) Ltd",
+     "domain": "accoson.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-15",
+     "bucket": "refused"
+    },
     {
      "supplier": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
      "domain": "cardiac-services.com",
@@ -7881,13 +7877,13 @@
     "monitoring:spec"
    ],
    "actionable": {
-    "unresolvedNames": 4,
-    "publishedElsewhereNeedingCategory": 4,
+    "unresolvedNames": 0,
+    "publishedElsewhereNeedingCategory": 5,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 9
+    "needDomain": 10
    },
    "published": [
     "Huntleigh",
@@ -7895,12 +7891,14 @@
     "Medtronic",
     "Mindray UK",
     "Rudolf Riester GmbH",
+    "Spacelabs Healthcare Ltd",
     "Vygon (UK)",
     "Baxter / Hillrom"
    ],
    "publishedElsewhere": [
     "Draeger Medical UK",
     "HC21 (UK) Ltd",
+    "Probo Medical (formerly MIUS)",
     "Philips",
     "Zoll Medical UK Limited"
    ],
@@ -7912,6 +7910,7 @@
     "Dot Medical Limited",
     "EDAN Medical (UK) Ltd",
     "Neurogen Ltd",
+    "Nihon Koden",
     "Optima Medical Ltd",
     "Penlon",
     "Pro Health Solutions Limited",
@@ -7920,6 +7919,7 @@
     "Viamed Ltd"
    ],
    "refused": [
+    "AC Cossor & Son (Surgical) Ltd",
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
     "Central Medical Supplies",
     "Delta Surgical",
@@ -7931,13 +7931,8 @@
     "Schiller UK Limited",
     "Wardray Premise Limited"
    ],
-   "unknown": [
-    "AC Cossor & Son (Surgical) Ltd",
-    "Probo UK Ltd",
-    "Nihon Kohden UK Ltd",
-    "Spacelabs Healthcare Ltd"
-   ],
-   "actionableTotal": 18,
+   "unknown": [],
+   "actionableTotal": 16,
    "blockedReason": null,
    "deferred": null
   },
@@ -9343,6 +9338,10 @@
      "domain": null
     },
     {
+     "supplier": "Nihon Koden",
+     "domain": null
+    },
+    {
      "supplier": "Penlon",
      "domain": null
     },
@@ -9358,6 +9357,7 @@
     "Charter Kontron Limited",
     "Loewenstein Medical UK Ltd",
     "Mieka Ltd",
+    "Nihon Koden",
     "Penlon",
     "mOm Incubators Ltd"
    ],
@@ -9422,13 +9422,13 @@
     "neonatal:resp"
    ],
    "actionable": {
-    "unresolvedNames": 2,
+    "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 8
+    "needDomain": 9
    },
    "published": [
     "Draeger Medical UK",
@@ -9454,6 +9454,7 @@
     "Loewenstein Medical UK Ltd",
     "Mieka Ltd",
     "mOm Incubators Ltd",
+    "Nihon Koden",
     "Penlon",
     "@SimulationMan Ltd"
    ],
@@ -9465,7 +9466,6 @@
     "Walters Medical Ltd"
    ],
    "unknown": [
-    "Nihon Kohden UK Ltd",
     "Scott Medical Ltd"
    ],
    "actionableTotal": 13,
@@ -14651,6 +14651,10 @@
      "domain": null
     },
     {
+     "supplier": "Nihon Koden",
+     "domain": null
+    },
+    {
      "supplier": "Nowus Healthcare",
      "domain": null
     },
@@ -14680,6 +14684,7 @@
     "Cavagna Group UK",
     "Independent Physiological Diagnostics Ltd",
     "Lowenstein Medical UK Ltd",
+    "Nihon Koden",
     "Nowus Healthcare",
     "Philips Healthcare / Philips Respironics",
     "Remserve Medical Supplies Ltd",
@@ -14742,13 +14747,13 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 11,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 10
+    "needDomain": 11
    },
    "published": [],
    "publishedElsewhere": [
@@ -14774,6 +14779,7 @@
     "Cavagna Group UK",
     "Independent Physiological Diagnostics Ltd",
     "Lowenstein Medical UK Ltd",
+    "Nihon Koden",
     "Nowus Healthcare",
     "Philips Healthcare / Philips Respironics",
     "Remserve Medical Supplies Ltd",
@@ -14787,9 +14793,7 @@
     "Flexicare Medical",
     "The Better Sleep Clinic"
    ],
-   "unknown": [
-    "Nihon Kohden UK Ltd"
-   ],
+   "unknown": [],
    "actionableTotal": 24,
    "blockedReason": null,
    "deferred": null
@@ -15078,8 +15082,8 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "actionable": {
-    "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 5,
+    "unresolvedNames": 0,
+    "publishedElsewhereNeedingCategory": 6,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -15092,6 +15096,7 @@
     "Love Medical",
     "Mindray UK",
     "Philips",
+    "Spacelabs Healthcare Ltd",
     "Baxter / Hillrom"
    ],
    "heldOnly": [
@@ -15120,9 +15125,7 @@
     "Walters Medical Ltd",
     "Williams Medical Supplies"
    ],
-   "unknown": [
-    "Spacelabs Healthcare Ltd"
-   ],
+   "unknown": [],
    "actionableTotal": 16,
    "blockedReason": null,
    "deferred": null
@@ -19692,6 +19695,13 @@
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
+     "supplier": "AC Cossor & Son (Surgical) Ltd",
+     "domain": "accoson.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-15",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Banner Group Limited",
      "domain": "www.banneruk.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -19744,7 +19754,7 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "actionable": {
-    "unresolvedNames": 28,
+    "unresolvedNames": 27,
     "publishedElsewhereNeedingCategory": 13,
     "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
@@ -19779,6 +19789,7 @@
     "Ocura Healthcare Furniture"
    ],
    "refused": [
+    "AC Cossor & Son (Surgical) Ltd",
     "Banner Group Limited",
     "D.P. Medical Systems Limited",
     "Eureka Physiocare Ltd",
@@ -19786,7 +19797,6 @@
     "Toffeln Ltd"
    ],
    "unknown": [
-    "AC Cossor & Son (Surgical) Ltd",
     "Caremed Alrick UK Ltd",
     "CKT Holdings Limited T/A Aspire",
     "Creative Activity Group Ltd",
@@ -19815,7 +19825,7 @@
     "Workspace Design Global Ltd t/a Hygenius",
     "Wybone Ltd"
    ],
-   "actionableTotal": 46,
+   "actionableTotal": 45,
    "blockedReason": null,
    "deferred": null
   },
