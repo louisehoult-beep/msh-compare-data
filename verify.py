@@ -2247,49 +2247,31 @@ VOCAB_BASELINE = {
     # makes a third one impossible to publish by any route.
 
     # `compare_index_only` — Compare-tab names that resolve through the
-    # GENERATED supplier-index.json but NOT through supplier-seed.json. The
-    # index is rebuilt from the seed nightly, so every one of these is one
-    # rebuild away from resolving nowhere. 'Stryker UK' was the 18th, and it
-    # cost four consecutive nightly failures and four days of stale data on
-    # page 1109 before anyone read the log.
+    # GENERATED supplier-index.json but NOT through supplier-seed.json — REACHED
+    # 0 on 15/09/2026 and is now a HARD FAIL with no baseline. The index is
+    # rebuilt from the seed nightly, so one of these resolves today and resolves
+    # nowhere tomorrow: 'Stryker UK' was one, and it cost four consecutive
+    # nightly failures and four days of stale data on page 1109 before anyone
+    # read the log.
     #
-    # Baseline 1, NOT 0. It was 17 when this check was written on 11/08/2026 and
-    # 5 by 12/09/2026; seed work closed the twelve in between, and two more were
-    # closed on 15/09/2026 on Lou's instruction to decide the remainder:
+    # It was 17 when the check was written on 11/08/2026, 5 by 12/09/2026, and
+    # the last three were decided on 15/09/2026 on Lou's instruction:
     #
     #   'Mölnlycke Health Care' and 'Polyco Healthline' were spellings, not
-    #   companies. Both are now aliases on the record that already held the
-    #   company: Mölnlycke, which carried 'Molnlycke Health Care Limited' but not
-    #   the umlaut spelling the Compare tab prints; and Polyco, whose own
-    #   companyNumberCandidate has been CONFIRMED since 13/09/2026 as 02000388
-    #   POLYCO HEALTHLINE LIMITED — the Compare-tab name IS that record's
-    #   registered name.
+    #   companies, and became aliases on the record that already held the
+    #   company — Mölnlycke, which carried "Molnlycke Health Care Limited" but
+    #   not the umlaut spelling the Compare tab prints, and Polyco, whose own
+    #   number has been CONFIRMED since 13/09/2026 as 02000388 POLYCO HEALTHLINE
+    #   LIMITED, which is that Compare-tab name exactly.
     #
-    # The one left is 'Nipro Medical UK Ltd', and it stays here deliberately
-    # rather than being closed either way, because BOTH available moves are
-    # wrong and the third needs a decision this check cannot make.
-    #
-    #   It is NOT an alias of this file's 'Nipro Medical Europe'.
-    #   data/company-financials.json holds 06993337 NIPRO MEDICAL UK LTD for it
-    #   and 03936551 NIPRO DIAGNOSTICS (UK) LIMITED for Nipro Medical Europe:
-    #   two active entities, two numbers on the register. Aliasing them would
-    #   hand every Nipro Medical UK lookup to the wrong company.
-    #
-    #   It cannot have its own seed record either, as things stand. Tried on
-    #   15/09/2026 and reverted: scripts/company_match.py `key()` strips the
-    #   legal suffix and then the territory, so "Nipro Medical UK Ltd" and
-    #   "Nipro Medical Europe" BOTH normalise to "nipro medical". A second
-    #   record makes that key ambiguous, and the Intravenous Cannula pending
-    #   award — published today against Nipro Medical Europe, matched on the
-    #   notice name "Nipro Medical UK Ltd" — stops resolving to anybody. The
-    #   gate caught it: check_pending_awards re-derives every published match.
-    #
-    #   So closing this one means either confirming which entity holds that
-    #   award and re-running scripts/refresh_pending_awards.py, or changing how
-    #   `key()` treats a territory word that distinguishes two real companies —
-    #   which would re-resolve every company match in the repo and is not a
-    #   change to make as a side effect of a vocabulary fix.
-    "compare_index_only": 1,
+    #   'Nipro Medical UK Ltd' was a different company and got its own record.
+    #   06993337 NIPRO MEDICAL UK LTD, against 03936551 NIPRO DIAGNOSTICS (UK)
+    #   LIMITED for 'Nipro Medical Europe'. Lou settled it on 15/09/2026 by
+    #   reading award notice 2026/S 000-078334 at source, and the Intravenous
+    #   Cannula award moved to the company that actually won it. Closing it also
+    #   needed scripts/company_match.py to try a verbatim name before stripping
+    #   the territory word, because until then both names keyed to
+    #   "nipro medical" and neither resolved.
 }
 
 # A name is a list-of-companies, not a company: two or more commas AND a
