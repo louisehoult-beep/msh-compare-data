@@ -19,7 +19,7 @@ Rules (why this never degrades the cache):
   main()). The never-shrink guard measures the name-keyed rows only.
 Runs in GitHub Actions (Playwright chromium). ~30–40 min for ~900 products.
 """
-import json, re, asyncio, time
+import argparse, json, re, asyncio, time
 from playwright.async_api import async_playwright
 
 SEED_PATH = "data/supplier-seed.json"
@@ -180,27 +180,72 @@ async def worker(browser, batch, results, counter, total):
             print("%d/%d | %d in cache" % (counter[0], total, len(results)), flush=True)
     await ctx.close()
 
-async def main():
+async def main(supplier_filter=None):
+    """supplier_filter: optional set of exact supplier names (as they appear in
+    data/supplier-seed.json's `name` field) to search ONLY those suppliers'
+    already-seeded product names, instead of the full weekly sweep. Added
+    15/09/2026 after importing this module's helper functions (candidates(),
+    name_ok(), etc.) for a targeted 5-supplier search re-triggered the entire
+    2,283-job full sweep — this module had `asyncio.run(main())` at module
+    level with no `if __name__ == "__main__":` guard, so any import ran it.
+    That run was killed before its single end-of-run write, so nothing was
+    lost, but the risk was real: run this file with --supplier instead of
+    importing its internals for a scoped job.
+    """
     seed = json.load(open(SEED_PATH))
     old = json.load(open(CACHE_PATH))
     oldp = old.get('products', {})
-    jobs, seen = [], set()
+    jobs, seen, scoped_keys = [], set(), set()
     for s in seed.get('suppliers', []):
+        if supplier_filter and s.get('name', '') not in supplier_filter:
+            continue
         toks = norm(s.get('name',''), *(s.get('aliases',[]) or []))
         supplier_raw = ' '.join([s.get('name','')] + (s.get('aliases',[]) or []))
         for p in s.get('products', []):
             n = (p if isinstance(p, str) else p.get('name','')).strip()
             if not n or n.lower() in seen: continue
             seen.add(n.lower())
+            scoped_keys.add(n)
             jobs.append({'key': n, 'supplier': s.get('name',''), 'supplierRaw': supplier_raw,
                          'supTokens': toks, 'prev': oldp.get(n)})
     print("jobs:", len(jobs), "| previously cached:", len(oldp))
+    if supplier_filter and not jobs:
+        print("no seeded product name(s) for the given supplier(s) — nothing to search. "
+              "Add product names to data/supplier-seed.json first.")
+        return
     results, counter = {}, [0]
     shards = [jobs[i::CONC] for i in range(CONC)]
     async with async_playwright() as pw:
         b = await pw.chromium.launch(headless=True)
         await asyncio.gather(*[worker(b, sh, results, counter, len(jobs)) for sh in shards])
         await b.close()
+
+    if supplier_filter:
+        # SCOPED RUN: only ever touch the searched suppliers' own product-name
+        # keys. Merge into the existing cache rather than rebuilding `products`
+        # from `results` alone — `results` here holds nothing for the other
+        # ~1,700+ suppliers, and the full-sweep logic below would read that as
+        # a catastrophic shrink (or, worse without the guard below, silently
+        # wipe the rest of the cache). A scoped miss does NOT delete a
+        # previously-found row for the same key.
+        merged = dict(oldp)
+        for k in scoped_keys:
+            if k in results:
+                merged[k] = results[k]
+        notcat = dict(old.get('notCatalogue') or {})
+        for k in scoped_keys:
+            if k in results:
+                notcat.pop(k, None)
+            else:
+                notcat[k] = notcat.get(k, {'checked': time.strftime('%d/%m/%Y')})
+        meta = dict(old.get('_meta') or {})
+        meta['lastScopedRefresh'] = {'suppliers': sorted(supplier_filter),
+                                      'when': time.strftime('%d/%m/%Y'),
+                                      'searched': len(jobs), 'matched': len(results)}
+        json.dump({'_meta': meta, 'products': merged, 'notCatalogue': notcat}, open(CACHE_PATH, 'w'))
+        print("SCOPED DONE: %d of %d searched product name(s) matched in the pilot catalogue"
+              % (len(results), len(jobs)))
+        return
     # TWO NAMESPACES LIVE IN `products`, AND THIS SCRIPT ONLY OWNS ONE (^o366,
     # 13/09/2026). scripts/seed_nhssc_from_icc_npc.py joins the ICC matrices to
     # the pilot catalogue by NPC CODE and writes its matches under keys of the
@@ -234,4 +279,12 @@ async def main():
     print("DONE: %d products (%d name-matched this run, %d NPC: rows carried, %d with images) | %d not-catalogue preserved"
           % (len(results), matched, len(carried), imgs, len(notcat)))
 
-asyncio.run(main())
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--supplier", action="append",
+                     help="Exact supplier name (as in data/supplier-seed.json's `name` field) "
+                          "to search only that supplier's own seeded product names, instead of "
+                          "the full weekly sweep. Repeatable for more than one supplier.")
+    args = ap.parse_args()
+    asyncio.run(main(supplier_filter=set(args.supplier) if args.supplier else None))
