@@ -428379,8 +428379,8 @@
   },
   "Caversham Health": {
    "domain": "cavershamhealth.com",
-   "reason": "the site's WordPress API returned HTTP 429; the sitemap carries 0 product URLs, too few to call a catalogue",
-   "checked": "2026-08-20"
+   "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; the Wix products sitemap carries 1 product URL(s), too few to call a catalogue",
+   "checked": "2026-09-15"
   },
   "CD Medical Ltd": {
    "domain": "cdmedical.co.uk",
@@ -430215,11 +430215,6 @@
   "Baxter / Hillrom": {
    "domain": "hillrom.co.uk",
    "reason": "verified 15/09/2026 this is not a crawler-side parsing bug: hillrom.co.uk 301-redirects to www.hillrom.co.uk, which 301-redirects again to hillrom.baxter.eu (the actual current Hillrom site, confirmed by curl -L) — a Drupal 10 site, not WordPress, so /wp-json/wp/v2/types returns that page's HTML and the crawler's JSON parse correctly fails on it (reproduced: 'Expecting value: line 3 column 1 (char 4)'). hillrom.baxter.eu's own sitemap.xml (1,284,294 bytes, checked directly) carries only 2 URLs under /product-category or /products/ across its whole EN-GB section — too few to call a catalogue by this crawler's own bar. A genuine no-catalogue site, not a bug or a block.",
-   "checked": "2026-09-15"
-  },
-  "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)": {
-   "domain": "cavershamhealth.com",
-   "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; the Wix products sitemap carries 1 product URL(s), too few to call a catalogue",
    "checked": "2026-09-15"
   }
  }
