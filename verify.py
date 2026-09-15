@@ -5610,8 +5610,16 @@ FTS_NOTICE = re.compile(r"\b(20\d\d/S \d{3}-\d{6})\b")
 # contract launch brief for X (2023/S 000-028831)") is not a deadline claim and
 # must not fire this gate — an earlier draft of it did, 2,339 times.
 DEADLINE = re.compile(
-    r"\b(clos(?:e|es|ed|ing)|deadline|submission date|bids? (?:due|close)|"
-    r"tender period)\b", re.I)
+    # clos(?:es|ed|ing) — inflected forms only; "closes", "closed", "closing"
+    # are unambiguous deadline verbs/participles.  The bare noun/infinitive
+    # "close" is deliberately excluded: it matches street addresses ending in
+    # "...Close, Coventry" and fires a false positive when a notice reference
+    # appears in the same 300-char sentence window (the seed JSON is a single
+    # compact line, so "registeredAddress" and "frameworks[].reference" often
+    # share one window).  "close date", "close on", "close by" — where "close"
+    # acts as a deadline noun — are captured separately.
+    r"\b(clos(?:es|ed|ing)|close\s+(?:date|on\b|by\b)|"
+    r"deadline|submission date|bids? (?:due|close)|tender period)\b", re.I)
 
 
 def check_notice_citations(files):
