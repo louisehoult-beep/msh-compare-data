@@ -116,3 +116,58 @@ compare-suppliers.json ref fix) on top of it. Landed clean on the second attempt
 
 Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and
 Services: 20.0% (7/35 published) → **22.9% (8/35 published)**. `unresolvedNames` 4 → 0.
+
+## Second run 15/09
+
+Ledger regenerated fresh (already reflecting the above). Same lowest-coverage pick order:
+Digital Diagnostic Solutions (16.7%), Insulin Pumps, CGM & Hybrid Closed Loop (16.7%),
+Infusion Pumps (18.5%) — all three re-checked and confirmed unchanged dead ends again,
+with one new detail each:
+
+- **Digital Diagnostic Solutions**: went through all 9 `publishedElsewhereNeedingCategory`
+  suppliers individually rather than accepting the "structural ceiling" label at face value.
+  8 of 9 (Draeger, Haemonetics, Olympus (KeyMed), Leica Microsystems, Philips, Roche
+  Diagnostics, Siemens Healthineers) confirmed as before — their one crawled division has
+  zero genuine digital-diagnostics content. **Epredia is a genuine exception**: its
+  "Digital Pathology" division (25 products, mapped whole to `pathology:histo`) contains
+  real scanner hardware (P1000/P250/P480 Dx/Rx Scanner, Midi scanners) and software
+  (Slidecenter, Slidemanager, Quantcenter, CaseManager) by its own product names, alongside
+  slides/consumables. Not forced: `merge_differentiator_parts.py` only fills a null `hub`,
+  amending this already-decided mapping needs a deliberate hand-edit, and adding digital:hw/sw
+  to the whole division would also mistag the consumables. Logged to OUTSTANDING as a ruling.
+  Also found: Sysmex UK's category-map carries 3 orphaned entries (Quantcenter, Slidecenter,
+  Slideviewer → `digital:sw`) referencing divisions absent from the current raw crawl — logged
+  to OUTSTANDING as data hygiene, not a decision.
+- **Insulin Pumps, CGM & Hybrid Closed Loop**: unchanged, `^o469`/`^o452` bug re-confirmed,
+  not re-crawled again (would only repeat today's earlier result and risk the refusal-TTL
+  trap the brief warns about).
+- **Infusion Pumps**: unchanged, both remaining items (`^o473`, `^o475`) already logged.
+
+## Framework worked (again): Total Orthopaedic Solutions 3
+
+Continued the `needDomain` backlog rather than re-attempt the 4 suppliers the earlier run
+today already tried and left unproven (Globus Medical UK Ltd, M.D.M Medical Ltd, NuVasive UK
+Ltd, Ortho Solutions UK Ltd). Researched 14 different, not-yet-attempted `needDomain`
+suppliers (WebSearch + WebFetch, registration-number proof bar, `seed_supplier_domains.py
+--candidates-file --retry-unproven --supplier` run per name to stay scoped to this
+framework only):
+
+- **2 proven and written**: **Ovidius Medical Ltd** → `www.ovidius-medical.com` (privacy
+  policy states company number 10054904, matching the seed's recorded number exactly) and
+  **Ovidius Solutions Ltd** → `www.ovidius-solutions.co.uk` (homepage states company number
+  11640816, matching exactly). Both crawled: neither exposes a WordPress or WooCommerce
+  product API and neither sitemap carries product-path URLs, so both are correctly refused —
+  no catalogue to read, recorded with the full reason.
+- **12 refused on the strong bar** (site read, never states the seed's recorded registration
+  number): Innovate Orthopaedics Ltd, Leda Orthopaedics Ltd, OrthoAccess Ltd, Sovereign
+  Medical, Venturis Medical Ltd, Kaiser Medical Technology Ltd, Lavender Medical, Hospital
+  Innovations, Ideal Med, Edge Medical Ltd, Cenobiologics Ltd, Arthro Dynamik Ltd. Correct,
+  honest refusals — not written to the seed.
+
+### Coverage movement, second run
+
+Total Orthopaedic Solutions 3: 20/101 published (19.8%) → 20/101 published (19.8%,
+unchanged — neither new capture had a catalogue to map). `needDomain` 50 → 48. Real forward
+motion (2 domains proven and crawled, both honest refusals correctly recorded) even though
+the published count did not move, matching the brief's own point that coverage % is not the
+only signal of progress.
