@@ -13,13 +13,13 @@
  "slug": "respiratory",
  "label": "Respiratory",
  "defined": true,
- "generated": "2026-09-10",
+ "generated": "2026-09-15",
  "dataAsOf": {
-  "frameworks": "2026-09-02",
+  "frameworks": "2026-09-15",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-09T11:18:46+00:00",
-  "openTenders": "09/09/2026",
-  "drugTariff": "2026-09-09"
+  "frameworkAwards": "2026-09-15T11:40:36+00:00",
+  "openTenders": "15/09/2026",
+  "drugTariff": "2026-09-15"
  },
  "rules": {
   "frameworks": "NHS Supply Chain framework names matching /\\b(respiratory solutions|non invasive ventilation|airway management|anaesthesia machines)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the four agreements above are shared routes rather than respiratory ones: Airway Management Products is categorised by NHS Supply Chain under Medical and Surgical Consumables and is claimed by theatres and surgical, and Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems is claimed by theatres and surgical and by maternity and neonatal, with this page claiming only the ventilator half. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. The supplier list is built from the four frameworks, so it counts airway and anaesthesia houses alongside respiratory ones; the page's own overlap analysis is the better guide to who is really on this patch, and it finds one supplier on all four lists and five on three. Home oxygen is the largest gap and it is a real one: it is bought through regional Home Oxygen Service contracts, not through any national NHS Supply Chain framework, so it appears in awards and tenders and nowhere else. The community medicines half of this patch — the larger half by money — is FP10 prescribing under BNF Chapter 3 and has no framework and no Drug Tariff Part IX presence at all.",
@@ -31,9 +31,10 @@
  "counts": {
   "frameworks": 4,
   "suppliers": 109,
-  "suppliersUnresolved": 4,
+  "suppliersUnresolved": 2,
   "awardsShown": 40,
-  "awardsMatched": 85,
+  "awardsMatched": 88,
+  "awardsWithheldByBuyerCap": 0,
   "openTenders": 0
  },
  "frameworks": [
@@ -501,9 +502,11 @@
    ]
   },
   {
-   "name": "Nihon Kohden UK Ltd",
-   "resolved": false,
-   "variants": [],
+   "name": "Nihon Koden",
+   "resolved": true,
+   "variants": [
+    "Nihon Kohden UK Ltd"
+   ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services",
     "Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics"
@@ -1137,9 +1140,11 @@
    ]
   },
   {
-   "name": "Salter Labs Uk T/A Airlife",
-   "resolved": false,
-   "variants": [],
+   "name": "Salter Labs UK Ltd",
+   "resolved": true,
+   "variants": [
+    "Salter Labs Uk T/A Airlife"
+   ],
    "frameworks": [
     "Respiratory Solutions"
    ]
@@ -1286,6 +1291,66 @@
   }
  ],
  "awards": [
+  {
+   "title": "Purchase of respiratory testing kits for 26-27",
+   "buyer": "SOMERSET NHS FOUNDATION TRUST",
+   "supplier": "CEPHEID UK LIMITED",
+   "date": "2026-09-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087162-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33696500"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "QHM-2025-1566 Spirometry",
+   "buyer": "NHS NORTH EAST AND NORTH CUMBRIA INTEGRATED CARE BOARD",
+   "supplier": "HARTLEPOOL & STOCKTON HEALTH LTD",
+   "date": "2026-09-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087197-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Laryngoscope Blades & Associated Consumables",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-09-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086900-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Oxygen Delivery Device consumables",
+   "buyer": "Bradford Teaching Hospitals NHS Foundation Trust",
+   "supplier": "Fisher & Paykel Healthcare Limited",
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085396-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
   {
    "title": "Preliminary Market Engagement Questionnaire - Intubating Devices",
    "buyer": "Business Services Organisation Procurement and Logistics Service",
@@ -1438,21 +1503,6 @@
    "periodEnd": null,
    "cpv": [
     "85140000"
-   ],
-   "isFramework": false,
-   "source": "framework-awards",
-   "cpvCorroborates": false
-  },
-  {
-   "title": "SFT Purchase of respiratory testing kits for 26-27",
-   "buyer": "SOMERSET NHS FOUNDATION TRUST",
-   "supplier": "CEPHEID UK LIMITED",
-   "date": "2026-08-19",
-   "url": "https://www.find-tender.service.gov.uk/Notice/078867-2026",
-   "value": null,
-   "periodEnd": null,
-   "cpv": [
-    "33696500"
    ],
    "isFramework": false,
    "source": "framework-awards",
@@ -1750,36 +1800,6 @@
    "value": null,
    "periodEnd": null,
    "source": "tender-history"
-  },
-  {
-   "title": "Tracheostomy Tubes and Accessories",
-   "buyer": "NHS National Services Scotland",
-   "supplier": "Atos UK, Smiths Medical International Ltd, Healthcare 21 UK Ltd.",
-   "date": "2024-01-31",
-   "url": "https://www.find-tender.service.gov.uk/Notice/003225-2024",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
-  },
-  {
-   "title": "Jet Ventilator Purchase",
-   "buyer": "NWSSP Cardiff and Vale NHS trust",
-   "supplier": "CLS Surgical Ltd",
-   "date": "2024-01-23",
-   "url": "https://www.find-tender.service.gov.uk/Notice/002198-2024",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
-  },
-  {
-   "title": "Jet Ventilator Purchase",
-   "buyer": "NWSSP Cardiff and Vale NHS trust",
-   "supplier": "CLS Surgical Ltd",
-   "date": "2023-10-25",
-   "url": "https://www.find-tender.service.gov.uk/Notice/031482-2023",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
   }
  ],
  "openTenders": [],
@@ -1790,7 +1810,7 @@
   "vmpFilter": "peak flow meter|tracheostomy (?:breathing aid|tube holder|cleaning device)|tracheostomy and laryngectomy protector",
   "vmpCount": 7,
   "effectiveMonth": "2026-09",
-  "dataAsOf": "2026-09-09",
+  "dataAsOf": "2026-09-15",
   "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
   "lineCount": 608,
   "supplierCount": 23,

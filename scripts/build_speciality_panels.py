@@ -153,6 +153,22 @@ SPECIALITY_RULES = {
         # rescue authority, a borough council — none of which is this speciality and
         # none of which can be told apart from a genuine NHS therapies contract on the
         # title alone. Root rule 14: refuse to fire on thin evidence rather than widen.
+        #
+        # ADDED 15/09/2026: "community equipment" / "equipment loan[s]" — these are the
+        # Integrated Community Equipment Service (ICES) contracts named in the Buying
+        # section above (NHS SBS10015 Lot 7). Run over all 1,972 rows of
+        # tender-history.json and all 1,706 of framework-awards.json and every hit read:
+        # 11 of 11 matches are genuine ICES/community-equipment-loan-store contracts —
+        # Cumberland Council (Direct Healthcare Group, tracking hoists), Cornwall Council
+        # (Medequip, CELS), Central Bedfordshire Council (Medequip), Worcestershire County
+        # Council (Prism UK Medical; also a DPS notice with no supplier), Royal Borough of
+        # Kensington and Chelsea (NRS Healthcare), North Somerset Council (Medequip, joint
+        # with BNSSG CCG/Bristol/South Gloucestershire), Herefordshire Council (framework,
+        # no supplier), Betsi Cadwaladr UHB/Flintshire/Denbighshire (Drive Medical),
+        # Oldham MBC (Medequip + two others), Tower Hamlets (Enabled Living Healthcare).
+        # Zero false positives, so no exclude term was needed for this addition. All 11
+        # were previously falling through to a different speciality's weaker match —
+        # none is a device word, so nothing here overlaps the terms above.
         "include": (
             r"\b(patient handling|manual handling|moving and handling|people handling|"
             r"hoists?|patient sling|hoist sling|toileting sling|standing sling|"
@@ -163,6 +179,7 @@ SPECIALITY_RULES = {
             r"profiling bed|hospital beds?|bed rails?|"
             r"mattress(?:es)?|pressure redistribut\w*|pressure relieving|pressure area care|"
             r"patient transfer|transfer board|slide sheet|glide sheet|"
+            r"(?:integrated )?community equipment(?: service| loan\w*| framework)?|"
             r"aids for daily living|daily living aids?|"
             r"bariatric|stand(?:ing)? aids?|turning aid|stairlift|stair lift)\b"
         ),

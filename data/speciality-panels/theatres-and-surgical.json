@@ -13,13 +13,13 @@
  "slug": "theatres-and-surgical",
  "label": "Theatres and Surgical",
  "defined": true,
- "generated": "2026-09-10",
+ "generated": "2026-09-15",
  "dataAsOf": {
-  "frameworks": "2026-09-02",
+  "frameworks": "2026-09-15",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-09T11:18:46+00:00",
-  "openTenders": "09/09/2026",
-  "drugTariff": "2026-09-09"
+  "frameworkAwards": "2026-09-15T11:40:36+00:00",
+  "openTenders": "15/09/2026",
+  "drugTariff": "2026-09-15"
  },
  "rules": {
   "frameworks": "NHS Supply Chain framework names matching /\\b(airway management|anaesthesia machines|decontamination capital|instrument decontamination|electrosurgical|minimally invasive surgery|operating theatres|procedure packs|robotic medical equipment|surgical gloves|surgical instruments|tray wrap|wound closure)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This patch has no single framework and no single market-share figure: spend sits across at least thirteen separate NHS Supply Chain frameworks, each a different product category with its own buying cycle, and none publishes a unit share breakdown. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market. NHS Supply Chain is also only one route here: the award record below shows theatre consumables bought through NHS Wales Shared Services, National Procurement in Scotland, HealthTrust Europe, the Collaborative Procurement Partnership and trusts' own direct awards, none of which appears in the framework list above.",
@@ -30,11 +30,12 @@
  },
  "counts": {
   "frameworks": 13,
-  "suppliers": 266,
-  "suppliersUnresolved": 14,
+  "suppliers": 265,
+  "suppliersUnresolved": 12,
   "awardsShown": 40,
-  "awardsMatched": 95,
-  "openTenders": 0
+  "awardsMatched": 98,
+  "awardsWithheldByBuyerCap": 0,
+  "openTenders": 1
  },
  "frameworks": [
   {
@@ -461,13 +462,12 @@
    "supplyRoute": "Direct",
    "starts": "15 July 2024",
    "ends": "14 July 2028",
-   "supplierCount": 6,
-   "supplierSource": "no stated count on the page; 6 names parsed (UNVERIFIED COUNT)",
+   "supplierCount": 5,
+   "supplierSource": "no stated count on the page; 5 names parsed (UNVERIFIED COUNT)",
    "suppliers": [
     "CMR Surgical Ltd",
     "Intuitive Surgical Limited",
     "Medtronic Limited",
-    "Johnson & Johnson Medical Ltd (New to framework)",
     "MCT Lifesciences Ltd (New to framework)",
     "Procept Biorobotics"
    ],
@@ -2362,14 +2362,6 @@
    ]
   },
   {
-   "name": "Johnson & Johnson Medical Ltd (New to framework)",
-   "resolved": false,
-   "variants": [],
-   "frameworks": [
-    "Robotic Medical Equipment and Associated Accessories"
-   ]
-  },
-  {
    "name": "KCI Medical Limited (Solventum)",
    "resolved": false,
    "variants": [],
@@ -2654,9 +2646,11 @@
    ]
   },
   {
-   "name": "Nihon Kohden UK Ltd",
-   "resolved": false,
-   "variants": [],
+   "name": "Nihon Koden",
+   "resolved": true,
+   "variants": [
+    "Nihon Kohden UK Ltd"
+   ],
    "frameworks": [
     "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services"
    ]
@@ -3218,6 +3212,53 @@
  ],
  "awards": [
   {
+   "title": "Laryngoscope Blades & Associated Consumables",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-09-14",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086900-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Wound Closure Products",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "supplier": null,
+   "date": "2026-09-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086444-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "24911200",
+    "33141121",
+    "33141122"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "The Supply of Sterilisation Products",
+   "buyer": "University Hospitals of North Midlands NHS Trust",
+   "supplier": null,
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085454-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33191000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
    "title": "Pre-Market Engagement for Craniofacial Orthotics and Helmet Therapy Services for Endoscopic-Assisted Suturectomy Patients and Craniofacial Orthotist Services",
    "buyer": "Birmingham Women's and Children's NHS Foundation Trust",
    "supplier": null,
@@ -3726,38 +3767,19 @@
    "value": null,
    "periodEnd": null,
    "source": "tender-history"
-  },
-  {
-   "title": "ESNEFT2684 Purchase of Anaesthetic Machines",
-   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
-   "supplier": "GE HEALTHCARE LIMITED",
-   "date": "2026-03-24",
-   "url": "https://www.find-tender.service.gov.uk/Notice/026657-2026",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
-  },
-  {
-   "title": "ESNEFT3113 Purchase of Video Laryngoscopes",
-   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
-   "supplier": "Verathon Medical (UK) Ltd",
-   "date": "2026-03-20",
-   "url": "https://www.find-tender.service.gov.uk/Notice/025848-2026",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
-  },
-  {
-   "title": "ESNEFT Purchase of Video Laryngoscopes",
-   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
-   "supplier": "OLYMPUS KEYMED GROUP LIMITED",
-   "date": "2026-02-27",
-   "url": "https://www.find-tender.service.gov.uk/Notice/017966-2026",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
   }
  ],
- "openTenders": [],
+ "openTenders": [
+  {
+   "title": "Wound Closure Products",
+   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland) (PSD Scotland)",
+   "status": "planning",
+   "stage": "preliminary market engagement / planning",
+   "closingDate": null,
+   "url": "https://www.find-tender.service.gov.uk/Notice/086444-2026",
+   "value": 20000000,
+   "source": "Find a Tender"
+  }
+ ],
  "drugTariff": null
 }

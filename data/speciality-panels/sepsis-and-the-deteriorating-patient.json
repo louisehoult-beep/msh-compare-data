@@ -13,13 +13,13 @@
  "slug": "sepsis-and-the-deteriorating-patient",
  "label": "Sepsis and the Deteriorating Patient",
  "defined": true,
- "generated": "2026-09-11",
+ "generated": "2026-09-15",
  "dataAsOf": {
-  "frameworks": "2026-09-02",
+  "frameworks": "2026-09-15",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-10T11:14:59+00:00",
-  "openTenders": "10/09/2026",
-  "drugTariff": "2026-09-10"
+  "frameworkAwards": "2026-09-15T11:40:36+00:00",
+  "openTenders": "15/09/2026",
+  "drugTariff": "2026-09-15"
  },
  "rules": {
   "frameworks": "NHS Supply Chain framework names matching /(laboratory diagnostics|infusion pumps and administration sets|intravenous cannula|pressure infusers)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Sepsis is a pathway, not a product category, and every number in this panel is borrowed from an agreement bought for something broader. All four frameworks here are shared: the Laboratory Diagnostics agreement is counted on the pathology page, the infusion pumps agreement on the critical care and palliative care pages, and all four are used across wards that have nothing to do with deterioration. A supplier counted here is a supplier on an agreement this pathway buys through, never a measure of its sepsis business. Three things this count cannot reach at all. Antimicrobials, which are the single largest recurring spend on the Sepsis Six, sit on no framework here and go through pharmacy and the local formulary. E-observation and deterioration software, which is what NHS England's Sepsis modern service framework actually commits to standardising, is on no NHS Supply Chain framework at all and is bought trust by trust through digital procurement with a clinical safety case. And NHS Supply Chain's Pulse Oximetry, Capnography and Related Monitoring Technologies framework, which no speciality page yet claims, is refused here rather than swept up by whichever page happened to be built last. One field is published as the source holds it and not as the speciality page states it: frameworks.json carries no end date for the Pressure Infusers agreement, where NHS Supply Chain's own contract launch brief says 31 August 2028. Four of the fifteen awards below are Department of Health and Social Care pandemic-preparedness stockpile buys rather than trust purchases, and they are kept deliberately: the product in each is intravenous cannulae or intravenous giving sets, which is exactly what two of the frameworks above carry. Read them as national stockpiling, not as a trust opening a conversation.",
@@ -30,10 +30,11 @@
  },
  "counts": {
   "frameworks": 4,
-  "suppliers": 158,
+  "suppliers": 157,
   "suppliersUnresolved": 1,
   "awardsShown": 15,
   "awardsMatched": 15,
+  "awardsWithheldByBuyerCap": 0,
   "openTenders": 0
  },
  "frameworks": [
@@ -301,23 +302,25 @@
    ]
   },
   {
+   "name": "GBUK Group",
+   "resolved": true,
+   "variants": [
+    "GB UK Ltd",
+    "GBUK",
+    "GBUK Ltd"
+   ],
+   "frameworks": [
+    "Infusion Pumps and Administration Sets and Associated Products",
+    "Intravenous Cannula and Associated Products",
+    "Pressure Infusers and Associated Products"
+   ]
+  },
+  {
    "name": "B. Braun Medical",
    "resolved": true,
    "variants": [
     "B. Braun Medical Limited",
     "Braun Medical Limited"
-   ],
-   "frameworks": [
-    "Infusion Pumps and Administration Sets and Associated Products",
-    "Intravenous Cannula and Associated Products"
-   ]
-  },
-  {
-   "name": "GBUK Group",
-   "resolved": true,
-   "variants": [
-    "GBUK",
-    "GBUK Ltd"
    ],
    "frameworks": [
     "Infusion Pumps and Administration Sets and Associated Products",
@@ -944,14 +947,6 @@
    ],
    "frameworks": [
     "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services"
-   ]
-  },
-  {
-   "name": "GB UK Ltd",
-   "resolved": true,
-   "variants": [],
-   "frameworks": [
-    "Pressure Infusers and Associated Products"
    ]
   },
   {

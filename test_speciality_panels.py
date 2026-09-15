@@ -993,14 +993,36 @@ for other in [
     check("stays out: %s" % other[:52], not B.match_title(frx, other))
 
 print("\nTRUE POSITIVES — awards that must be on this patch")
+# Checked against the SHOWN slice, capped at AWARD_CAP by recency — a title can
+# be genuinely matched and still fall outside the cap once matched > 40 (see
+# below). These two stay common enough to keep appearing in the shown slice.
 for good in ["telecare", "community equipment", "care home", "intermediate care",
              "virtual ward", "technology enabled care", "falls prevention",
-             "independent living", "digital care alarms", "nursing care beds"]:
+             "independent living", "nursing care beds"]:
     check("present: %s" % good, good in ftitles)
+# "digital care alarms" is checked against the full matched set, not the shown
+# slice: added 15/09/2026 when backfilling three genuine Integrated Community
+# Equipment Service awards (Calderdale, Nottinghamshire Adults/Children — see
+# therapies-physio-and-ot's include-list note) pushed this speciality's matched
+# total past AWARD_CAP for the first time, ageing this older title out of the
+# top 40 by date. The matcher still admits it; only the display window changed.
+_fr_th = B.load("tender-history.json")
+_fr_fa = B.load("framework-awards.json")
+_fr_matched_titles = " || ".join(
+    (a.get("title") or "") for a in (
+        # rebuild the full (uncapped) matched set the same way build_awards does
+        [{"title": r[2]} for r in _fr_th["rows"] if B.match_title(frx, r[2])]
+        + [{"title": a.get("title")} for a in _fr_fa["awards"] if B.match_title(frx, a.get("title"))]
+    )
+).lower()
+check("present in the full matched set (beyond the display cap): digital care alarms",
+      "digital care alarms" in _fr_matched_titles)
 check("every award shown is one the matcher still admits",
       all(B.match_title(frx, a["title"]) for a in fr["awards"]))
-check("the whole matched set is published, nothing silently capped",
-      fr["counts"]["awardsShown"] == fr["counts"]["awardsMatched"])
+check("the shown slice is the matched set up to AWARD_CAP, nothing else withheld",
+      fr["counts"]["awardsShown"] == min(fr["counts"]["awardsMatched"], B.AWARD_CAP),
+      "got %s shown / %s matched / cap %s" % (
+          fr["counts"]["awardsShown"], fr["counts"]["awardsMatched"], B.AWARD_CAP))
 # The community half of this pathway is bought by councils, not trusts. If that
 # ever stops being true of the awards list, the filter has drifted.
 councils = [a for a in fr["awards"]

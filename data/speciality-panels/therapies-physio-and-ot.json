@@ -13,18 +13,18 @@
  "slug": "therapies-physio-and-ot",
  "label": "Patient Moving and Handling",
  "defined": true,
- "generated": "2026-09-10",
+ "generated": "2026-09-15",
  "dataAsOf": {
-  "frameworks": "2026-09-02",
+  "frameworks": "2026-09-15",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-09T11:18:46+00:00",
-  "openTenders": "09/09/2026",
-  "drugTariff": "2026-09-09"
+  "frameworkAwards": "2026-09-15T11:40:36+00:00",
+  "openTenders": "15/09/2026",
+  "drugTariff": "2026-09-15"
  },
  "rules": {
   "frameworks": "NHS Supply Chain framework names matching /\\b(patient handling|physiotherapy and occupational therapy|aids for daily living|wheelchairs?)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry.",
-  "awards": "Award-stage notices whose TITLE matches /\\b(patient handling|manual handling|moving and handling|people handling|hoists?|patient sling|hoist sling|toileting sling|standing sling|falls prevention|falls management|falls detection|fall detection|falls service|mobility (?:aids?|equipment|goods|services?|scooters?)|walking aid|walking frame|rollator|crutch(?:es)?|wheelchairs?|specialist seating|postural support|riser recliner|profiling bed|hospital beds?|bed rails?|mattress(?:es)?|pressure redistribut\\w*|pressure relieving|pressure area care|patient transfer|transfer board|slide sheet|glide sheet|aids for daily living|daily living aids?|bariatric|stand(?:ing)? aids?|turning aid|stairlift|stair lift)\\b/i and does not match /\\b(wheelchair lifts?|b7r|disabled adaptations|atw grant|hcid)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33193 or 3319212 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(patient handling|manual handling|moving and handling|people handling|hoists?|patient sling|hoist sling|toileting sling|standing sling|falls prevention|falls management|falls detection|fall detection|falls service|mobility (?:aids?|equipment|goods|services?|scooters?)|walking aid|walking frame|rollator|crutch(?:es)?|wheelchairs?|specialist seating|postural support|riser recliner|profiling bed|hospital beds?|bed rails?|mattress(?:es)?|pressure redistribut\\w*|pressure relieving|pressure area care|patient transfer|transfer board|slide sheet|glide sheet|(?:integrated )?community equipment(?: service| loan\\w*| framework)?|aids for daily living|daily living aids?|bariatric|stand(?:ing)? aids?|turning aid|stairlift|stair lift)\\b/i and does not match /\\b(wheelchair lifts?|b7r|disabled adaptations|atw grant|hcid)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33193 or 3319212 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "No Drug Tariff part applies to this speciality. Part IX reimburses dressings and elastic hosiery (IXA), incontinence appliances (IXB), stoma appliances (IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so the panel carries no tariff rather than reaching for the nearest part."
  },
@@ -32,8 +32,9 @@
   "frameworks": 4,
   "suppliers": 114,
   "suppliersUnresolved": 5,
-  "awardsShown": 33,
-  "awardsMatched": 33,
+  "awardsShown": 40,
+  "awardsMatched": 50,
+  "awardsWithheldByBuyerCap": 0,
   "openTenders": 0
  },
  "frameworks": [
@@ -1294,6 +1295,58 @@
  ],
  "awards": [
   {
+   "title": "The Servicing, Maintenance & Repair of Domestic Lifts & Hoists Contract",
+   "buyer": "London Borough of Hillingdon",
+   "supplier": "CARETECH UK LIMITED",
+   "date": "2026-09-15",
+   "url": "https://www.find-tender.service.gov.uk/Notice/087191-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33192600",
+    "42400000",
+    "44115600",
+    "50750000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "The Supply of Bedding, Mattresses, Textiles and Cloths",
+   "buyer": "LEIDOS SUPPLY, LIMITED",
+   "supplier": "Vision Linens Limited, Bishops Beds",
+   "date": "2026-09-11",
+   "url": "https://www.find-tender.service.gov.uk/Notice/086442-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33192110",
+    "39143100",
+    "39143110",
+    "39512000",
+    "39525800"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Non Emergency Patient Transfer 26/27",
+   "buyer": "The Princess Alexandra Hospital NHS Trust",
+   "supplier": "Access Anyone Ltd",
+   "date": "2026-09-10",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085718-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85143000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
    "title": "Lease of Mattresses",
    "buyer": "Lancashire Teaching Hospitals NHS Foundation Trust",
    "supplier": "Medstrom Ltd",
@@ -1305,6 +1358,37 @@
     "39143112"
    ],
    "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "LTH SMRC Wheelchair maintenance and refurbishment",
+   "buyer": "Lancashire Teaching Hospitals NHS Foundation Trust",
+   "supplier": "A J MOBILITY LIMITED (T/A AJM HEALTHCARE)",
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085448-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33193120",
+    "50421100"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": true
+  },
+  {
+   "title": "Framework of Community Equipment Suppliers",
+   "buyer": "Herefordshire Council",
+   "supplier": null,
+   "date": "2026-09-09",
+   "url": "https://www.find-tender.service.gov.uk/Notice/085440-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33000000"
+   ],
+   "isFramework": true,
    "source": "framework-awards",
    "cpvCorroborates": false
   },
@@ -1418,6 +1502,55 @@
    "periodEnd": null,
    "cpv": [
     "50000000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "BCU-FTS-60443- Service, Maintenance and Calibration of Community Equipment across Betsi Cadwaladr University Health Board, Flintshire County Council and Denbighshire County",
+   "buyer": "Betsi Cadwaladr University Health Board",
+   "supplier": "Drive Medical Limited",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077360-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "50400000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Integrated Community Equipment Services & Minor Adaptations Services",
+   "buyer": "Oldham Metropolitan Borough Council",
+   "supplier": "MEDEQUIP ASSISTIVE TECHNOLOGY LIMITED, SRD BUILDING SERVICES LTD, 24-7 Locks Secure Horizon Ltd",
+   "date": "2026-08-13",
+   "url": "https://www.find-tender.service.gov.uk/Notice/077078-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33190000",
+    "50000000",
+    "85140000",
+    "85323000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "HAC6143 Community Equipment Purchases",
+   "buyer": "Tower Hamlets",
+   "supplier": "Enabled Living Healthcare Limited",
+   "date": "2026-08-12",
+   "url": "https://www.find-tender.service.gov.uk/Notice/076621-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33196000",
+    "50421000"
    ],
    "isFramework": false,
    "source": "framework-awards",
@@ -1569,6 +1702,36 @@
    "source": "tender-history"
   },
   {
+   "title": "Cornwall Community Equipment Loan Service (CELS)",
+   "buyer": "Cornwall Council",
+   "supplier": "Medequip Assistive Technology Ltd",
+   "date": "2024-08-16",
+   "url": "https://www.find-tender.service.gov.uk/Notice/026185-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "CBC-1529-T-LS Integrated Community Equipment Service",
+   "buyer": "Central Bedfordshire Council",
+   "supplier": "Medequip Assistive Technology Ltd",
+   "date": "2024-06-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/019764-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "CC00105 Community Equipment Services Planned Preventative Maintenance Services, Inspections and Repairs",
+   "buyer": "Worcestershire County Council ",
+   "supplier": "Prism UK Medical Ltd ",
+   "date": "2024-02-22",
+   "url": "https://www.find-tender.service.gov.uk/Notice/005738-2024",
+   "value": null,
+   "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
    "title": "Aids for Daily Living Equipment for Children and Young People Framework Agreement",
    "buyer": "The Highland Council",
    "supplier": "Enable Access Ltd, The Helping Hand Company, Care and Independence Ltd, Daytot L",
@@ -1586,6 +1749,16 @@
    "url": "https://www.find-tender.service.gov.uk/Notice/031356-2023",
    "value": null,
    "periodEnd": null,
+   "source": "tender-history"
+  },
+  {
+   "title": "Servicing Community Equipment Service",
+   "buyer": "The Borough Council of Calderdale",
+   "supplier": "Simply Moving and Sleeping",
+   "date": "2023-08-10",
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/acc42f78-1aca-49da-8124-096d531159eb",
+   "value": 840000,
+   "periodEnd": "2031-01-07",
    "source": "tender-history"
   },
   {
@@ -1624,56 +1797,6 @@
    "supplier": "Sumed International (UK) Ltd, Invacare LTD",
    "date": "2023-03-29",
    "url": "https://www.find-tender.service.gov.uk/Notice/009183-2023",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
-  },
-  {
-   "title": "Nimbus Pressure Relieving System Spare Parts [4237773]",
-   "buyer": "Business Services Organisation, Procurement and Logistics Service",
-   "supplier": "Arjo UK Ltd",
-   "date": "2022-12-02",
-   "url": "https://www.find-tender.service.gov.uk/Notice/034157-2022",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
-  },
-  {
-   "title": "Supply of Children's Buggies and Adult & Children's Wheelchairs",
-   "buyer": "The Common Services Agency (more commonly known as NHS National Services Scotlan",
-   "supplier": "Pride Mobility Products Ltd, Invacare Ltd",
-   "date": "2022-09-27",
-   "url": "https://www.find-tender.service.gov.uk/Notice/027095-2022",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
-  },
-  {
-   "title": "Postural Support Equipment and Accessories for Southern Health and Social Care Trust (SHSCT)",
-   "buyer": "Procurement and Logistics Service",
-   "supplier": "EVOLUTION HEALTHCARE LTD, John Preston Co Belfast Ltd, Moorings Mediquip UK Ltd,",
-   "date": "2022-02-28",
-   "url": "https://www.find-tender.service.gov.uk/Notice/005469-2022",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
-  },
-  {
-   "title": "Pressure Relieving Redistribution Products & Associated Service Provision",
-   "buyer": "NHS Lanarkshire",
-   "supplier": "Drive DeVilbiss Sidhil Ltd",
-   "date": "2022-02-17",
-   "url": "https://www.find-tender.service.gov.uk/Notice/004506-2022",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
-  },
-  {
-   "title": "Framework for beds, mattresses and wheelchairs both services and products, continence home delivery services plus manage",
-   "buyer": "NHS Shared Business Services Ltd (NHS SBS)",
-   "supplier": "accora",
-   "date": "2021-12-22",
-   "url": "https://www.find-tender.service.gov.uk/Notice/032107-2021",
    "value": null,
    "periodEnd": null,
    "source": "tender-history"
