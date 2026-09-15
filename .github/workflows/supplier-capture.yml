@@ -66,6 +66,19 @@ jobs:
         with:
           python-version: "3.12"
 
+      # Added 15/09/2026: crawl_supplier_site.py's get() now retries a
+      # script-only HTTP 403 through a real headless browser before giving up
+      # (see browser_get() in that file) — bot-management on TLS/JS
+      # fingerprint blocks a plain fetch on some sites while happily serving a
+      # real browser the same public pages. Only reached on 403, and
+      # allowed()'s robots.txt check still honours a genuine refusal —
+      # including one specifically naming ClaudeBot or anthropic-ai — so this
+      # never crawls a site that has said no to Claude by name.
+      - name: Install headless browser for the 403 fallback
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps chromium
+
       - name: Capture own-site product ranges
         run: |
           python3 scripts/crawl_supplier_site.py \

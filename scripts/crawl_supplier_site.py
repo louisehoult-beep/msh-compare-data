@@ -242,13 +242,55 @@ def pick_product_type(types):
     return None, None, "the site's WordPress API exposes no product post type"
 
 
+def browser_get(url, as_json=False, timeout=30):
+    """Fetch a URL with a real rendered browser, for sites whose bot-management
+    blocks a plain HTTP client with a 403 regardless of intent.
+
+    Added 15/09/2026 (Seating Matters, OUTSTANDING gap from the 31/08 NBE review):
+    a script-only 403 is not reliable evidence a site refuses automated reads —
+    Cloudflare-style bot management commonly challenges on TLS/JS fingerprint,
+    not on a stated policy, and still serves the same public pages to a real
+    browser. Lou decided 15/09/2026: use a real browser to reach public product
+    pages a human visitor would see, rather than treat every script-only 403 as
+    a refusal. This is used ONLY as a fallback from `get()` on HTTP 403 — never
+    tried first, never used to defeat an actual login wall (401 is untouched),
+    and it still goes through `allowed()`'s robots.txt check like any other
+    fetch, so a genuine disallow in the site's real robots.txt still refuses.
+
+    Requires the `playwright` package with the chromium browser installed
+    (`pip install playwright && playwright install chromium`) — imported here,
+    not at module load, so the whole crawler still runs where it is not
+    installed; a missing/broken install simply means the 403 stands.
+    """
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(headless=True)
+        try:
+            page = browser.new_page(user_agent=UA_STR)
+            page.goto(url, timeout=timeout * 1000, wait_until="domcontentloaded")
+            if as_json:
+                text = page.evaluate("() => document.body.innerText")
+                return json.loads(text), {}
+            return page.content(), {}
+        finally:
+            browser.close()
+
+
 def get(url, as_json=False, timeout=30):
     time.sleep(PAUSE)
-    r = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout)
-    raw = r.read()
-    if as_json:
-        return json.loads(raw.decode("utf-8", "replace")), dict(r.headers)
-    return raw.decode("utf-8", "replace"), dict(r.headers)
+    try:
+        r = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout)
+        raw = r.read()
+        if as_json:
+            return json.loads(raw.decode("utf-8", "replace")), dict(r.headers)
+        return raw.decode("utf-8", "replace"), dict(r.headers)
+    except urllib.error.HTTPError as e:
+        if e.code == 403:
+            try:
+                return browser_get(url, as_json=as_json, timeout=timeout)
+            except Exception:
+                raise e
+        raise
 
 
 def allowed(domain, path="/"):
@@ -268,6 +310,15 @@ def allowed(domain, path="/"):
         # right to: a site that refuses to show its robots.txt is not inviting a
         # crawler. Rewriting the fetch lost that rule and briefly had this
         # trying sites that had said no — GE HealthCare serves 403 here.
+        #
+        # UPDATED 15/09/2026: `get()` itself now retries a 403 through a real
+        # browser first (see `browser_get()`) — a script-only 403 is often
+        # bot-management on TLS/JS fingerprint, not a stated refusal, and
+        # Seating Matters' own robots.txt reads fine through a real browser
+        # while blocking every plain HTTP client. So by the time a 403 reaches
+        # HERE, a real browser has already been tried and also failed (or
+        # playwright is not installed) — this remains the correct, narrower
+        # refusal: genuinely unreachable, not just unreachable-by-script.
         if e.code in (401, 403):
             return False
         return True                     # 404 and friends = nothing to obey
@@ -304,7 +355,24 @@ def allowed(domain, path="/"):
         return False                    # genuinely different HTML: a block page
 
     rp.parse(body.splitlines())
-    return rp.can_fetch(UA_STR, "https://%s%s" % (domain, path))
+    if not rp.can_fetch(UA_STR, "https://%s%s" % (domain, path)):
+        return False
+
+    # OUR REAL IDENTITY, added 15/09/2026 (Seating Matters). `rp.can_fetch`
+    # above only tested UA_STR — a generic browser string — because that is
+    # what actually goes over the wire. But this crawler is Claude-operated
+    # automation, whatever User-Agent header it happens to send, and a growing
+    # number of sites now carry a robots.txt shaped exactly like "allow
+    # everyone generic, disallow ClaudeBot/GPTBot/etc by name" (Cloudflare's
+    # own managed template does this). Checking only the wire UA would read
+    # that as "allowed" and crawl straight past a site's explicit, named
+    # opt-out of Claude — worse than the false-refusal problem this file's
+    # browser fallback exists to fix. A disallow naming either of our real
+    # identities is honoured regardless of what the generic rule says.
+    for our_identity in ("ClaudeBot", "anthropic-ai"):
+        if not rp.can_fetch(our_identity, "https://%s%s" % (domain, path)):
+            return False
+    return True
 
 
 def clean(s):
