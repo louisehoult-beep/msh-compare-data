@@ -2253,15 +2253,43 @@ VOCAB_BASELINE = {
     # cost four consecutive nightly failures and four days of stale data on
     # page 1109 before anyone read the log.
     #
-    # Baseline 5, NOT 0, and deliberately so: failing on the standing 5 today
-    # would block every push and both scheduled refreshes, which is the one
-    # outcome worse than the drift. The ratchet blocks a 6th from today. It was
-    # 17 when this check was written on 11/08/2026; seed work since has taken it
-    # to 5, measured on 12/09/2026. Work the 5 down by adding each spelling to
-    # its record's `aliases` in the seed, lower this number as you go, and delete
-    # the entry when it reaches 0 so it graduates to a hard check and cannot
-    # drift back.
-    "compare_index_only": 5,
+    # Baseline 1, NOT 0. It was 17 when this check was written on 11/08/2026 and
+    # 5 by 12/09/2026; seed work closed the twelve in between, and two more were
+    # closed on 15/09/2026 on Lou's instruction to decide the remainder:
+    #
+    #   'Mölnlycke Health Care' and 'Polyco Healthline' were spellings, not
+    #   companies. Both are now aliases on the record that already held the
+    #   company: Mölnlycke, which carried 'Molnlycke Health Care Limited' but not
+    #   the umlaut spelling the Compare tab prints; and Polyco, whose own
+    #   companyNumberCandidate has been CONFIRMED since 13/09/2026 as 02000388
+    #   POLYCO HEALTHLINE LIMITED — the Compare-tab name IS that record's
+    #   registered name.
+    #
+    # The one left is 'Nipro Medical UK Ltd', and it stays here deliberately
+    # rather than being closed either way, because BOTH available moves are
+    # wrong and the third needs a decision this check cannot make.
+    #
+    #   It is NOT an alias of this file's 'Nipro Medical Europe'.
+    #   data/company-financials.json holds 06993337 NIPRO MEDICAL UK LTD for it
+    #   and 03936551 NIPRO DIAGNOSTICS (UK) LIMITED for Nipro Medical Europe:
+    #   two active entities, two numbers on the register. Aliasing them would
+    #   hand every Nipro Medical UK lookup to the wrong company.
+    #
+    #   It cannot have its own seed record either, as things stand. Tried on
+    #   15/09/2026 and reverted: scripts/company_match.py `key()` strips the
+    #   legal suffix and then the territory, so "Nipro Medical UK Ltd" and
+    #   "Nipro Medical Europe" BOTH normalise to "nipro medical". A second
+    #   record makes that key ambiguous, and the Intravenous Cannula pending
+    #   award — published today against Nipro Medical Europe, matched on the
+    #   notice name "Nipro Medical UK Ltd" — stops resolving to anybody. The
+    #   gate caught it: check_pending_awards re-derives every published match.
+    #
+    #   So closing this one means either confirming which entity holds that
+    #   award and re-running scripts/refresh_pending_awards.py, or changing how
+    #   `key()` treats a territory word that distinguishes two real companies —
+    #   which would re-resolve every company match in the repo and is not a
+    #   change to make as a side effect of a vocabulary fix.
+    "compare_index_only": 1,
 }
 
 # A name is a list-of-companies, not a company: two or more commas AND a
