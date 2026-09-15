@@ -179,3 +179,68 @@ unchanged — neither new capture had a catalogue to map). `needDomain` 50 → 4
 motion (2 domains proven and crawled, both honest refusals correctly recorded) even though
 the published count did not move, matching the brief's own point that coverage % is not the
 only signal of progress.
+
+## Third run 15/09
+
+Ledger regenerated fresh, same lowest-coverage pick order (Digital Diagnostic Solutions,
+Insulin Pumps, Infusion Pumps, Electrodes/Ultrasound Gels/Defib, Ultrasound Scanners — all
+five re-checked in the ledger's own numbers and unchanged from the second run's confirmed
+dead ends, not re-investigated a third time in one day). Continued **Total Orthopaedic
+Solutions 3**'s `needDomain` backlog with 18 suppliers no previous run this week had
+attempted: Exactech, Meril UK Pvt Ltd, Microport Scientific Ltd, Open Medical Ltd, Future
+Health Works Ltd. (t/a myrecovery & msk.ai), Bioventus Cooperatief U.A, Greenbone Spa, Lima
+Orthopaedics UK Ltd, Permedica UK Limited, Symbios, United Orthopaedic Corporation UK
+Limited, Biedermann Motech International LTD, Contura Orthopaedics Ltd, Marquardt UK,
+Metaphysis LLP, Orthopediatrics EU Limited, Q Medical Technologies Ltd, Surgalign UK Ltd.
+
+Researched a primary-source candidate domain for each (company's own site, exhibitor
+listings, LinkedIn, Companies House where it names the entity) and ran
+`scripts/seed_supplier_domains.py --candidates-file --retry-unproven --allow-foreign --write`
+against them. **None proved.** Every one of the 18 came back either "site read, but it never
+identifies itself as this company" or, for Exactech specifically, the candidate site
+(`exac.co.uk`) states in its own text that "Exactech does not offer direct sales or
+distribution in the UK" — worth a look at whether the framework award sits under a different
+operating name (the search also surfaced EXACTECH (UK) 2 LIMITED, incorporated 25/06/2025,
+and a 2022 acquisition of JointMedica; not chased further this run, logged to OUTSTANDING.
+None of the 18's proposed domains were second-sourced strongly enough to clear the
+REGISTRATION or self-declared-foreign bar, several because the candidate is a global parent
+site that never states a UK entity's own details. Correct, honest non-writes — not forced.
+
+**`--retry-unproven` without `--supplier` re-probes the WHOLE 600+-supplier unproven
+backlog, not just the named candidates-file entries** — worth flagging in the brief for the
+next run, because it cost real wall-clock time (a 600+-supplier live-fetch sweep) and,
+unscoped, it also proved 2 domains for suppliers on other frameworks entirely (Newell
+Brands, Steris IMS Ltd) that this run had no business touching. Those two writes were
+reverted from `data/supplier-seed.json` before landing, keeping the diff to only this
+framework's suppliers, per the brief's rule against touching other frameworks' data in one
+run. `--supplier "<name>"` run once per candidate (as the first and second runs today did)
+stays scoped; `--retry-unproven --candidates-file` does not, unless combined with
+`--supplier`.
+
+### A genuine data-loss bug found and fixed: the second run's Ovidius write never survived
+
+The second run's report above says Ovidius Medical Ltd and Ovidius Solutions Ltd were
+"proven and written." They were — commit `21b16b0` — but `data/supplier-seed.json` at
+today's `origin/main` HEAD, before this run touched anything, carried **empty `links` for
+both**. Traced with `git log`: the very next commit to the file, `fd3ef2d` ("company
+intelligence: frameworks + awards + Companies House 2026-09-15", an automated `hub-bot`
+commit, 17 minutes after `21b16b0` by wall-clock time though earlier by its own recorded
+author date because of a rebase), touched `data/supplier-seed.json` too and the two records'
+`links` came back empty in its version — a race between two automated writers touching the
+same single-line minified JSON file, the same failure class already fixed elsewhere in this
+workspace for `OUTSTANDING.md` (`outstanding_io.py`) and `louise-os-data.json`, evidently
+not yet fixed for this repo's own generated/curated data files. **Not a guess**: the
+Ovidius links are verifiable in `21b16b0`'s own tree and absent in every commit after it.
+Restored both records' `links` from `21b16b0` verbatim (same URLs, same proof, same
+evidence text) in this run's land rather than re-running the domain-proof tool against them
+again. Logged to OUTSTANDING as a process/tooling gap — this land is a fix for one instance,
+not a fix for the underlying race.
+
+### Coverage movement, third run
+
+Total Orthopaedic Solutions 3: 20/101 published (19.8%) → 20/101 published (19.8%,
+unchanged — no new domain proved this run). `needDomain` unchanged at 48 (the 18 researched
+this run were already inside that count, not newly discovered suppliers). Forward motion is
+the Ovidius data-loss fix (2 supplier records restored to their correct, previously-proven
+state) and 18 more suppliers now carrying banked, honest refusal evidence in
+`state/domain-seeding-report.json` so a future run does not re-spend the same research.
