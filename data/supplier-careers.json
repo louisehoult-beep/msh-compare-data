@@ -10,17 +10,17 @@
   "ref": "ETH-D503B3895",
   "contact": "contact@elevateandthrive.uk"
  },
- "generatedOn": "2026-09-08",
+ "generatedOn": "2026-09-15",
  "firstRun": true,
  "rule": "A careers page URL is recorded on the company's own link or a conventional path answering from its own domain. A role COUNT is recorded only where each role was read as a discrete record — an applicant tracking system's public API, or schema.org JobPosting structured data. Layouts are never pattern-counted. Everything else is refused, with the reason kept.",
  "scope": "UK ROLES ONLY. Where the source can filter by its own country facet, ukRoleCount is the company's own UK total and ukCountFrom says 'source'. Otherwise the whole board is read and UK roles are picked out from the locations the company published; roles it published with NO location are EXCLUDED and counted in rolesUnplaceable, because folding them in either direction would invent a number. totalRolesAllLocations, where present, is the source's own worldwide figure — context, never the headline.",
  "roleFlagRule": "commercial/clinical are matched from the job title against a fixed vocabulary in the script. A filing aid, not a claim about the role.",
  "ukRule": "uk is true only where the company's own published location names a UK nation, city or region; false where it names somewhere else; null where no location was published. rolesWithoutLocation gives the denominator a UK count must be read against.",
  "counts": {
-  "checked": 141,
-  "withCareersPage": 75,
+  "checked": 165,
+  "withCareersPage": 82,
   "withRoleCount": 9,
-  "refused": 132,
+  "refused": 156,
   "ukRoles": 277,
   "completeBreakdowns": 9,
   "rolesUnplaceable": 242
@@ -2561,6 +2561,15 @@
    "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
   },
   {
+   "name": "Applied Medical UK Ltd",
+   "domain": "appliedmedical.com",
+   "checkedOn": "2026-09-15",
+   "careersUrl": "https://careers.appliedmedical.com/careers-home",
+   "careersUrlFoundBy": "nav",
+   "ats": "icims",
+   "refused": "icims detected — it renders its listings in the browser, so the roles cannot be read as records. The page is linked; the count is not stated."
+  },
+  {
    "name": "Argon Medical Devices UK Ltd",
    "domain": "www.argonmedical.com",
    "checkedOn": "2026-09-01",
@@ -2790,6 +2799,14 @@
    "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
   },
   {
+   "name": "Brainlab Ltd",
+   "domain": "www.brainlab.com",
+   "checkedOn": "2026-09-15",
+   "careersUrl": "https://www.brainlab.com/career/",
+   "careersUrlFoundBy": "path",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
    "name": "Bridgehead Software",
    "domain": "www.bridgeheadsoftware.com",
    "checkedOn": "2026-09-08",
@@ -2954,6 +2971,47 @@
    "careersUrlFoundBy": "nav",
    "ats": "successfactors",
    "refused": "successfactors detected — it renders its listings in the browser, so the roles cannot be read as records. The page is linked; the count is not stated."
+  },
+  {
+   "name": "Conmed UK Ltd",
+   "domain": "www.conmed.com",
+   "checkedOn": "2026-09-15",
+   "careersUrl": "https://careers.conmed.com/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Consolor Ltd",
+   "domain": "consolor.co.uk",
+   "checkedOn": "2026-09-15",
+   "careersUrl": "https://consolor.co.uk/vacancies/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Cook Medical",
+   "domain": "www.cookmedical.com",
+   "checkedOn": "2026-09-15",
+   "careersUrl": "https://www.cookmedical.com/careers/",
+   "careersUrlFoundBy": "nav",
+   "ats": "icims",
+   "refused": "icims detected — it renders its listings in the browser, so the roles cannot be read as records. The page is linked; the count is not stated."
+  },
+  {
+   "name": "Corin",
+   "domain": "www.coringroup.com",
+   "checkedOn": "2026-09-15",
+   "careersUrl": "https://www.coringroup.com/about-us/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Cortrium ApS",
+   "domain": "cortrium.com",
+   "checkedOn": "2026-09-15",
+   "careersUrl": "https://cortrium.com/career/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
   },
   {
    "name": "bioMérieux UK",
