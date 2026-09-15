@@ -1,0 +1,68 @@
+name: Speciality news refresh
+
+# Builds data/speciality-news/<slug>.json for every speciality with a tagged
+# trade-press/journal source — 29 sources across 23 specialities as of
+# 15/09/2026. Fixes the gap found the same day: cloud-pipeline (a separate
+# repo) tags these same sources but never actually publishes them anywhere;
+# see 02-Elevate-and-Thrive/Hub/speciality-page-news-pipeline-gap-2026-09-15.md.
+# This workflow, scripts/build_speciality_news.py and app/speciality-news.js
+# are a small, independent fix living in THIS repo instead, following the
+# exact pattern already proved live by speciality-panels.yml (07/09/2026):
+# generate small per-slug JSON here, WordPress fetches it via a loader script,
+# no WordPress page ever needs touching again once its loader is in place.
+#
+# Daily, not weekly — several of the sources (Vascular News, Cardiovascular
+# News, IVTeam etc.) publish daily, and MAX_AGE_DAYS=60 in the build script
+# means a stale run just shows slightly older items, never wrong ones.
+
+on:
+  schedule:
+    - cron: "15 5 * * *"     # 05:15 UTC daily, clear of the Sunday weekly-refresh's 04:30 slot
+  workflow_dispatch: {}
+
+# Same group as every other writer to this repo (see weekly-refresh.yml's own
+# comment, 26/07/2026 incident) — a push here queues behind another writer
+# instead of racing it.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Build speciality news
+        run: python3 scripts/build_speciality_news.py
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+      - name: Commit and push
+        run: |
+          git config user.name "hub-bot"
+          git config user.email "contact@elevateandthrive.uk"
+          git add data/speciality-news/
+          git diff --cached --quiet || git commit -m "speciality news refresh $(date -u +'%F %H:%M')"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (attempt $attempt) — rebasing and re-gating"
+            git fetch origin
+            git rebase origin/main
+            python3 verify.py
+          done
+          if [ "$pushed" != "1" ]; then
+            echo "push still rejected after 5 attempts — next scheduled run will carry it"
+          fi
