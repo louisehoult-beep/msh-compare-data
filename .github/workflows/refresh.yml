@@ -59,6 +59,7 @@ jobs:
       # thing this step exists to prevent.
       - name: Publish gate — nothing commits until this passes
         run: |
+          python3 scripts/prune_calendar.py
           set -o pipefail
           python3 verify.py 2>&1 | tee /tmp/gate.log
       - name: Commit if changed
