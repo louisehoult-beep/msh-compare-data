@@ -430199,12 +430199,12 @@
   },
   "WHEELSHARE (LONDON) LTD": {
    "domain": null,
-   "reason": "no website recorded for this supplier",
+   "reason": "confirmed 15/09/2026 not a manufacturer with a product range to capture: Companies House company 14227325 (WHEELSHARE (LONDON) LTD, active, incorporated 12/07/2022) carries only SIC 86900 'Other human health activities', no manufacturing SIC; its own case study (transformacy.com/client-stories/wheelshare) describes it as 'a pioneering company specialising in automated self-service wheelchair rental stations' operating a loan/rental managed-service model, matching its NHS Supply Chain Lot 2 listing (repairs, maintenance, fully managed services, wheelchair loan services) rather than Lot 1 (the product lot). No product range exists to add; this is a closed, not an open, gap.",
    "checked": "2026-09-15"
   },
   "William Davies Care Limited": {
-   "domain": null,
-   "reason": "no website recorded for this supplier",
+   "domain": "williamdaviescare.com",
+   "reason": "domain found 15/09/2026 (not previously recorded) via web search — williamdaviescare.com, described independently as 'a trusted provider of medical consumables to NHS Trusts across the UK', matching its own 4 NHS Supply Chain framework awards (Airway Management, IV Accessories, IV Cannula, Wheelchairs) and Companies House company 12023351 (active, SIC 32500 Manufacture of medical and dental instruments and supplies). This is a genuine supplier, NOT a non-manufacturer — but the site itself could not be read: every path tried (/, /products-2/, /wp-json/, /wp-json/wp/v2/types, /sitemap.xml) returned HTTP 200 with a zero-byte body to both a plain HTTP fetch and a headless Chromium render (networkidle), despite robots.txt allowing all crawlers. robots.txt itself carries a third, malformed sitemap entry ('http://williamdaviescare.com/savep.php?sitemap.xml') suggesting the site is compromised or misconfigured rather than deliberately blocking. Domain now recorded so a future crawl attempt does not have to be re-discovered from scratch.",
    "checked": "2026-09-15"
   },
   "Invacare UK": {
@@ -430214,7 +430214,7 @@
   },
   "Baxter / Hillrom": {
    "domain": "hillrom.co.uk",
-   "reason": "the site's WordPress API could not be read (Expecting value: line 3 column 1 (char 4)); not a readable WooCommerce Store API (Expecting value: line 3 column 1 (char 4)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+   "reason": "verified 15/09/2026 this is not a crawler-side parsing bug: hillrom.co.uk 301-redirects to www.hillrom.co.uk, which 301-redirects again to hillrom.baxter.eu (the actual current Hillrom site, confirmed by curl -L) — a Drupal 10 site, not WordPress, so /wp-json/wp/v2/types returns that page's HTML and the crawler's JSON parse correctly fails on it (reproduced: 'Expecting value: line 3 column 1 (char 4)'). hillrom.baxter.eu's own sitemap.xml (1,284,294 bytes, checked directly) carries only 2 URLs under /product-category or /products/ across its whole EN-GB section — too few to call a catalogue by this crawler's own bar. A genuine no-catalogue site, not a bug or a block.",
    "checked": "2026-09-15"
   },
   "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)": {
