@@ -30,11 +30,34 @@ this run's evidence before being set aside — none had a permitted route this r
   - Abbott and Medtronic are **already correctly refused** under their real seed identities
     (curated records "Abbott Diabetes Care", refused 20/08/2026, and "Medtronic", refused
     08/09/2026 — both re-confirmed by dry-run this run, same refusal). The coverage ledger
-    counts them as `publishedElsewhere` "actionable" because the framework's literal NHSSC
-    award-list name ("Abbott Laboratories Limited") doesn't canonicalise to the curated
-    "Abbott Diabetes Care" seed record the refusal is actually recorded against — a
-    name-canonicalisation gap in the ledger, not real available work. **New finding, not
-    previously logged** — see OUTSTANDING.
+    counts them as `publishedElsewhere` "actionable". **The cause named here on 14/09 was
+    wrong and is corrected 15/09 (^o469): there is no name-canonicalisation gap.** Tested
+    directly: `CA.resolve("Abbott Laboratories Limited")` returns RESOLVED/exact-name, and
+    `data/supplier-products.json` carries a refusal under that exact key (www.abbott.co.uk,
+    checked 2026-08-20) as well as under "Abbott Diabetes Care"; the ledger sees both, and
+    lists both suppliers in this framework's `refusedSuppliers` with `bucket:
+    "publishedElsewhere"`. The real cause is in `build_coverage_ledger.py`: the bucket chain
+    tests `pubcount` before refusals, and `actionable.publishedElsewhereNeedingCategory` is a
+    plain `len(buckets["publishedElsewhere"])` that does not subtract refusals — contradicting
+    the comment above it, which claims "A refused supplier appears in none of these"
+    (`crawlWorklist` does exclude them; this count does not). Abbott and Medtronic publish
+    only NHSSC-catalogue ranges here (Ensure, Ligasure — division "(NHS Supply Chain only)",
+    20 and 24 products, `sources: nhssc` only), nothing from an insulin-pump or CGM range, and
+    their own sites are refused, so there is no captured range of theirs to categorise into
+    this framework.
+
+    **Not fixed 15/09, deliberately.** Measured blast radius before touching it: 92 of 121
+    framework rows carry at least one refused-and-publishedElsewhere supplier, 291
+    supplier-row instances across 64 distinct suppliers (Fannin 22 rows, Philips 20, Medline
+    16, Vernacare 13), and 2 rows' total `actionable` would fall to zero — i.e. two frameworks
+    would change state — so the picker's work order changes too. A blanket exclusion would
+    also be wrong for the 28 instances whose supplier DOES carry manufacturer-sourced products
+    (a refusal recorded on a second domain, with a first domain captured); only the 263
+    NHSSC/ICC-only instances match the Abbott/Medtronic shape. The narrow rule that fits the
+    evidence — exclude a refused supplier from `publishedElsewhereNeedingCategory` only when
+    every product it publishes is NHSSC/ICC-sourced, so there is no own-site range to
+    categorise — is a change to what the pipeline treats as available work across most
+    frameworks, which is an attended decision, not an unattended sweep's call.
   - Urathon Europe Ltd's curated note names a real, dated product ("Yuwell Anytime CGM
     (CT-3 system) — exclusive UK distribution since 01/05/2025") but their crawled catalogue
     (104 products, 5 divisions: Mobility Aids, Moving & Handling, Bathing/Showering/Toilet

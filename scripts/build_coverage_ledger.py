@@ -419,10 +419,31 @@ def main():
                                    for c in published[s]
                                    if c and c.split(":")[0] in specKeys}),
             # What is genuinely left to do on this framework, split by the kind of
-            # work it is. A refused supplier appears in none of these: it has been
-            # read and answered, and re-queueing it is how recorded judgements get
-            # overwritten. Zero across all four is the honest "nothing left by a
+            # work it is. Zero across all four is the honest "nothing left by a
             # permitted route", which is not the same as DONE.
+            #
+            # A refused supplier is kept out of `crawlWorklist` and out of the
+            # crawl-shaped counts, because re-queueing it is how recorded
+            # judgements get overwritten. It is NOT kept out of
+            # `publishedElsewhereNeedingCategory`: the bucket chain tests
+            # `pubcount` before refusals, so a supplier that publishes anything
+            # anywhere lands in `publishedElsewhere` whatever its refusal says,
+            # and this count is a plain len() of that bucket. An earlier version
+            # of this comment claimed refusals appeared in none of these counts;
+            # that was never true of this one, and saying so hid ^o469.
+            #
+            # Whether it SHOULD subtract them is open (^o469, corrected
+            # 15/09/2026 in docs/framework-coverage-findings-2026-09-14.md).
+            # Worked example: Abbott Laboratories Limited and Medtronic on
+            # Insulin Pumps/CGM — both refused on their own sites, both counted
+            # actionable here, and both publish only NHSSC-catalogue ranges
+            # (Ensure, Ligasure) with nothing from this framework's product
+            # class, so there is no captured range of theirs to categorise. But
+            # 92 of 121 rows carry at least one such supplier (291 instances, 64
+            # suppliers), 28 of those instances DO carry own-site manufacturer
+            # products and would be wrongly dropped by a blanket rule, and 2 rows
+            # would change state. Left as measured evidence for an attended
+            # decision rather than changed in passing.
             "actionable": {
                 "unresolvedNames": len(buckets["unknown"]),
                 # Crawled and publishing, just not into this speciality: the

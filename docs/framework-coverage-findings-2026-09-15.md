@@ -135,9 +135,17 @@ with one new detail each:
   slides/consumables. Not forced: `merge_differentiator_parts.py` only fills a null `hub`,
   amending this already-decided mapping needs a deliberate hand-edit, and adding digital:hw/sw
   to the whole division would also mistag the consumables. Logged to OUTSTANDING as a ruling.
-  Also found: Sysmex UK's category-map carries 3 orphaned entries (Quantcenter, Slidecenter,
-  Slideviewer → `digital:sw`) referencing divisions absent from the current raw crawl — logged
-  to OUTSTANDING as data hygiene, not a decision.
+  Also found, and **corrected on 15/09 (^o476)**: Sysmex UK's category-map carries 3 entries
+  (Quantcenter, Slidecenter, Slideviewer → `digital:sw`) whose `division` value does not appear
+  in the current raw crawl. They are **not orphans and must not be deleted**. Each is tagged
+  `kind: "product-override"`, the opt-in tier added 07/09/2026, which `build_differentiator.py`
+  reads at line 215 as `product_override.get((co, name))` — keyed on the PRODUCT NAME, so a
+  product-override entry's `division` field is by design a product name and never matches a
+  crawl division. These three were seeded deliberately on 13/09 (`^o464`) from a stale
+  pre-05/09 Sysmex bucket, and publish automatically once `^o457`'s re-crawl reaches Sysmex.
+  Verified 15/09: the live Sysmex UK capture is dated `verified: 2026-08-13` — one of `^o457`'s
+  82 pre-fix stale crawls — and holds none of the three products, exactly as `^o464` predicted.
+  Nothing to clean up.
 - **Insulin Pumps, CGM & Hybrid Closed Loop**: unchanged, `^o469`/`^o452` bug re-confirmed,
   not re-crawled again (would only repeat today's earlier result and risk the refusal-TTL
   trap the brief warns about).
