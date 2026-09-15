@@ -46,7 +46,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 14 | 24.6% | 21 | 31 | STARTED |
 | Urology and Bowel Management | continence | 57 | 17 | 29.8% | 30 | 32 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 19 | 38 | STARTED |
-| Digital Diagnostic Solutions | digital | 54 | 9 | 16.7% | 9 | 43 | STARTED |
+| Digital Diagnostic Solutions | digital | 54 | 10 | 18.5% | 8 | 43 | STARTED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 11 | 20.8% | 27 | 21 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 16 | 26 | STARTED |
 | Surgical Instruments | surgical | 50 | 11 | 22.0% | 21 | 23 | STARTED |
