@@ -61,7 +61,20 @@ class DeadCompanyGate(unittest.TestCase):
         # Symlinked, not copied: assets/ is large and read-only to every check,
         # and a copy that omits it makes 200 logo checks fail for reasons that
         # have nothing to do with this test.
-        for extra in ("app", "docs", "assets", "sitemap-cache", "state", "hooks"):
+        # scripts/ and company-aliases/ are REQUIRED, not optional extras: verify.py
+        # calls os.chdir(root) for a --root run (see verify.py's own comment on that
+        # line), and every one of its `sys.path.insert(0, "scripts")` /
+        # `sys.path.insert(0, "company-aliases")` calls is relative — so once chdir'd
+        # into this temp root, those imports resolve against IT, not the real repo.
+        # Omitting them here isn't a missing nice-to-have: it makes every check that
+        # imports from either directory silently unable to run, which is exactly the
+        # class of silent gap this test file exists to catch elsewhere. Found
+        # 15/09/2026 when this test failed with "No module named 'company_match'"
+        # etc. on an otherwise-unrelated change, and reproduced identically on a
+        # clean, unmodified checkout — confirming it was always broken, not a
+        # regression from that change.
+        for extra in ("app", "docs", "assets", "sitemap-cache", "state", "hooks",
+                      "scripts", "company-aliases"):
             src = os.path.join(HERE, extra)
             if os.path.isdir(src):
                 os.symlink(src, os.path.join(self.root, extra))
@@ -99,7 +112,33 @@ class DeadCompanyGate(unittest.TestCase):
         self.assertIn("cannot be the holder", r.stdout)
 
     def test_gemini_dissolved_2017_is_refused(self):
-        self._write("Gemini Surgical UK", GEMINI)
+        # Found 15/09/2026: "Gemini Surgical UK", the original supplier this
+        # test used, no longer exists anywhere in data/supplier-seed.json (no
+        # record, no alias, no company-financials entry) — removed from the
+        # Hub's data since this test was written on 03/09/2026, for reasons
+        # this test can't see. Without a seed record carrying a framework
+        # date, injecting a fake company-financials.json entry under that name
+        # gave the gate NOTHING to compare a dissolution date against, so it
+        # could never fire — the test was silently checking nothing, not
+        # confirming the gate holds (it passed "0 == 0" by accident, not by
+        # the gate working).
+        #
+        # Fixed by re-pointing this test at a real, CURRENT supplier instead
+        # of trying to keep Gemini alive artificially: "365 Healthcare" holds
+        # a real framework starting 2 May 2023 and has no existing
+        # company-financials.json entry (so nothing here can collide with a
+        # live record — everything in this test runs against a throwaway
+        # tempdir copy, never the real data). The fictional dissolved company
+        # this test injects (GEMINI SURGICAL INNOVATIONS (U.K.) LIMITED,
+        # dissolved 27/06/2017 — well before 2023) is unchanged; only the
+        # supplier name it's attached to changed, so the assertion this test
+        # makes is exactly the one it always made: a company that died years
+        # before its earliest framework cannot be that framework's holder.
+        supplier = "365 Healthcare"
+        self.assertTrue(self._seed_framework_years(supplier),
+                        "%s must hold a framework in data/supplier-seed.json "
+                        "for this test to mean anything." % supplier)
+        self._write(supplier, GEMINI)
         r = _run_verify(self.root)
         self.assertNotEqual(r.returncode, 0)
         self.assertIn("GEMINI SURGICAL INNOVATIONS", r.stdout)
