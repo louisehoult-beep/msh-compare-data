@@ -12,9 +12,9 @@
  },
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
-  "frameworks.json": "2026-09-02",
-  "differentiator.json published": 34830,
-  "differentiator.json held": 48769
+  "frameworks.json": "2026-09-15",
+  "differentiator.json published": 34858,
+  "differentiator.json held": 48745
  },
  "counts": {
   "frameworks": 121,
@@ -24,10 +24,10 @@
   "unmapped": 47,
   "outOfScope": 20,
   "inScope": 101,
-  "supplierNamesUnresolved": 438,
-  "inScopeSuppliersNeedingCrawl": 449,
+  "supplierNamesUnresolved": 445,
+  "inScopeSuppliersNeedingCrawl": 448,
   "inScopeSuppliersNeedingDomain": 412,
-  "suppliersRefused": 400,
+  "suppliersRefused": 401,
   "suppliersRefusedButPublishingElsewhere": 102,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -1464,6 +1464,10 @@
    1
   ],
   [
+   "Creed Health \u2013 novated from BVM Medical Ltd",
+   1
+  ],
+  [
    "Alexandra Workwear (Mi-Hub)",
    1
   ],
@@ -1644,10 +1648,6 @@
    1
   ],
   [
-   "Johnson & Johnson Medical Ltd (New to framework)",
-   1
-  ],
-  [
    "Globus (Shetland)",
    1
   ],
@@ -1728,10 +1728,6 @@
    1
   ],
   [
-   "RS Components Ltd",
-   1
-  ],
-  [
    "Spentex BCA Limited",
    1
   ],
@@ -1745,6 +1741,38 @@
   ],
   [
    "KCI Medical Ltd (3M)",
+   1
+  ],
+  [
+   "Acrostak",
+   1
+  ],
+  [
+   "Biosensors",
+   1
+  ],
+  [
+   "BVM",
+   1
+  ],
+  [
+   "Edwards",
+   1
+  ],
+  [
+   "Jenavalve",
+   1
+  ],
+  [
+   "MCT",
+   1
+  ],
+  [
+   "Meril",
+   1
+  ],
+  [
+   "SMT",
    1
   ],
   [
@@ -9093,8 +9121,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "30 September 2026",
    "suppliersAwarded": 27,
-   "suppliersPublished": 5,
-   "coverage": 18.5,
+   "suppliersPublished": 6,
+   "coverage": 22.2,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9103,10 +9131,6 @@
     "bloodtx"
    ],
    "crawlWorklist": [
-    {
-     "supplier": "BMS Critical Care Ltd",
-     "domain": "bmscriticalcare.com"
-    },
     {
      "supplier": "Arcomedical Infusion Ltd",
      "domain": null
@@ -9247,7 +9271,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 10,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -9256,6 +9280,7 @@
    "published": [
     "B. Braun Medical",
     "BD \u2014 Becton, Dickinson",
+    "BMS Critical Care Ltd",
     "CODAN Limited",
     "Inspiration Healthcare",
     "Spirit Medical Ltd"
@@ -9272,9 +9297,7 @@
     "ICU Medical (incl. Smiths Medical)",
     "Vygon (UK)"
    ],
-   "heldOnly": [
-    "BMS Critical Care Ltd"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Arcomedical Infusion Ltd"
@@ -9292,7 +9315,7 @@
     "TLB Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 12,
+   "actionableTotal": 11,
    "blockedReason": null,
    "deferred": null
   },
@@ -9708,13 +9731,6 @@
      "bucket": "refused"
     },
     {
-     "supplier": "BVM Medical Ltd",
-     "domain": "www.bvmmedical.com",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "refused"
-    },
-    {
      "supplier": "Freedom Neuro BV",
      "domain": "curonix.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -9829,7 +9845,7 @@
     "neuro:sns"
    ],
    "actionable": {
-    "unresolvedNames": 0,
+    "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -9863,15 +9879,16 @@
    ],
    "refused": [
     "Axonics Modulation Technologies UK Limited",
-    "BVM Medical Ltd",
     "Freedom Neuro BV",
     "inomed Neurocare Limited",
     "Nyxoah SA",
     "Phagenesis",
     "Polar Medical Ltd"
    ],
-   "unknown": [],
-   "actionableTotal": 4,
+   "unknown": [
+    "Creed Health \u2013 novated from BVM Medical Ltd"
+   ],
+   "actionableTotal": 5,
    "blockedReason": null,
    "deferred": null
   },
@@ -15149,10 +15166,6 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "BMS Critical Care Ltd",
-     "domain": "bmscriticalcare.com"
-    },
-    {
      "supplier": "Europlaz Technologies Ltd",
      "domain": null
     },
@@ -15254,8 +15267,8 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 14,
-    "heldNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 15,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -15265,6 +15278,7 @@
    "publishedElsewhere": [
     "B. Braun Medical",
     "BD \u2014 Becton, Dickinson",
+    "BMS Critical Care Ltd",
     "Mediq Healthcare UK Ltd",
     "CODAN Limited",
     "Crest Medical Ltd",
@@ -15278,9 +15292,7 @@
     "Spirit Medical Ltd",
     "Vygon (UK)"
    ],
-   "heldOnly": [
-    "BMS Critical Care Ltd"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Europlaz Technologies Ltd",
@@ -16102,10 +16114,6 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "BMS Critical Care Ltd",
-     "domain": "bmscriticalcare.com"
-    },
-    {
      "supplier": "William Davies Care Limited",
      "domain": null
     }
@@ -16204,8 +16212,8 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 10,
-    "heldNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 11,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -16215,6 +16223,7 @@
    "publishedElsewhere": [
     "B. Braun Medical",
     "BD \u2014 Becton, Dickinson",
+    "BMS Critical Care Ltd",
     "CODAN Limited",
     "Fannin (UK) Limited",
     "Fresenius Kabi Ltd",
@@ -16224,9 +16233,7 @@
     "Merit Medical UK Ltd",
     "Vygon (UK)"
    ],
-   "heldOnly": [
-    "BMS Critical Care Ltd"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "William Davies Care Limited"
@@ -17584,6 +17591,82 @@
    "deferred": null
   },
   {
+   "framework": "Transcatheter Heart Valve Repair, Replacement and Associated Devices",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/transcatheter-heart-valve-repair-replacement-and-associated-devices/",
+   "category": "Medical Technology",
+   "ends": "26 February 2027",
+   "suppliersAwarded": 11,
+   "suppliersPublished": 0,
+   "coverage": 0.0,
+   "nhsscCategory": "Medical Technology",
+   "inScope": true,
+   "outOfScopeReason": null,
+   "state": "UNMAPPED",
+   "speciality": [],
+   "crawlWorklist": [
+    {
+     "supplier": "Dot Medical Limited",
+     "domain": null
+    }
+   ],
+   "domainsMissing": [
+    "Dot Medical Limited"
+   ],
+   "duplicateOfCapturedSupplier": [],
+   "refusedSuppliers": [
+    {
+     "supplier": "Abbott Diabetes Care",
+     "domain": "www.abbott.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-20",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Medtronic",
+     "domain": "medtronic.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-08",
+     "bucket": "publishedElsewhere"
+    }
+   ],
+   "route": "no Hub speciality mapped to this framework",
+   "catsInScope": [],
+   "actionable": {
+    "unresolvedNames": 8,
+    "publishedElsewhereNeedingCategory": 1,
+    "heldNeedingCategory": 0,
+    "capturedNothingCounted": 0,
+    "duplicateOfCapturedSupplier": 0,
+    "crawlable": 0,
+    "needDomain": 1
+   },
+   "published": [],
+   "publishedElsewhere": [
+    "Medtronic"
+   ],
+   "heldOnly": [],
+   "capturedNothingCounted": [],
+   "notCrawled": [
+    "Dot Medical Limited"
+   ],
+   "refused": [
+    "Abbott Diabetes Care"
+   ],
+   "unknown": [
+    "Acrostak",
+    "Biosensors",
+    "BVM",
+    "Edwards",
+    "Jenavalve",
+    "MCT",
+    "Meril",
+    "SMT"
+   ],
+   "actionableTotal": 10,
+   "blockedReason": null,
+   "deferred": null
+  },
+  {
    "framework": "Mobile Image Intensifiers and Associated Options and Related Services",
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/mobile-image-intensifiers-and-associated-options-and-related-services/",
    "category": "Diagnostic Equipment and Services",
@@ -18688,91 +18771,6 @@
    "deferred": null
   },
   {
-   "framework": "Robotic Medical Equipment and Associated Accessories",
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/robotic-medical-equipment/",
-   "category": "Diagnostic Equipment and Services",
-   "ends": "14 July 2028",
-   "suppliersAwarded": 6,
-   "suppliersPublished": 0,
-   "coverage": 0.0,
-   "nhsscCategory": "Diagnostic Equipment and Services",
-   "inScope": true,
-   "outOfScopeReason": null,
-   "state": "UNMAPPED",
-   "speciality": [],
-   "crawlWorklist": [
-    {
-     "supplier": "Procept Biorobotics",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Procept Biorobotics"
-   ],
-   "duplicateOfCapturedSupplier": [],
-   "refusedSuppliers": [
-    {
-     "supplier": "CMR Surgical",
-     "domain": "cmrsurgical.com",
-     "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-25",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Intuitive Surgical",
-     "domain": "www.intuitive.com",
-     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-25",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "MCT Lifesciences Ltd",
-     "domain": "www.mctlife.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Medtronic",
-     "domain": "medtronic.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-08",
-     "bucket": "publishedElsewhere"
-    }
-   ],
-   "route": "no Hub speciality mapped to this framework",
-   "catsInScope": [],
-   "actionable": {
-    "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 1,
-    "heldNeedingCategory": 0,
-    "capturedNothingCounted": 0,
-    "duplicateOfCapturedSupplier": 0,
-    "crawlable": 0,
-    "needDomain": 1
-   },
-   "published": [],
-   "publishedElsewhere": [
-    "Medtronic"
-   ],
-   "heldOnly": [],
-   "capturedNothingCounted": [],
-   "notCrawled": [
-    "Procept Biorobotics"
-   ],
-   "refused": [
-    "CMR Surgical",
-    "Intuitive Surgical",
-    "MCT Lifesciences Ltd"
-   ],
-   "unknown": [
-    "Johnson & Johnson Medical Ltd (New to framework)"
-   ],
-   "actionableTotal": 3,
-   "blockedReason": null,
-   "deferred": null
-  },
-  {
    "framework": "Surgical Implants for Men\u2019s and Women\u2019s Health",
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-implants-for-mens-and-womens-health/",
    "category": "Rehabilitation and Community",
@@ -18924,89 +18922,6 @@
    "deferred": null
   },
   {
-   "framework": "Flexible Endoscopes and Associated Options and Related Services",
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
-   "category": "Diagnostic Equipment and Services",
-   "ends": "31 March 2028",
-   "suppliersAwarded": 5,
-   "suppliersPublished": 0,
-   "coverage": 0.0,
-   "nhsscCategory": "Diagnostic Equipment and Services",
-   "inScope": true,
-   "outOfScopeReason": null,
-   "state": "UNMAPPED",
-   "speciality": [],
-   "crawlWorklist": [
-    {
-     "supplier": "Pentax Medical",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Pentax Medical"
-   ],
-   "duplicateOfCapturedSupplier": [],
-   "refusedSuppliers": [
-    {
-     "supplier": "Fujifilm Healthcare UK",
-     "domain": "fujifilm.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-09-05",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Karl Storz UK",
-     "domain": "karlstorz.com",
-     "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-08",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Richard Wolf UK",
-     "domain": "richard-wolf.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-09-13",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Olympus (KeyMed)",
-     "domain": "www.olympus.co.uk",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    }
-   ],
-   "route": "no Hub speciality mapped to this framework",
-   "catsInScope": [],
-   "actionable": {
-    "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 1,
-    "heldNeedingCategory": 0,
-    "capturedNothingCounted": 0,
-    "duplicateOfCapturedSupplier": 0,
-    "crawlable": 0,
-    "needDomain": 1
-   },
-   "published": [],
-   "publishedElsewhere": [
-    "Olympus (KeyMed)"
-   ],
-   "heldOnly": [],
-   "capturedNothingCounted": [],
-   "notCrawled": [
-    "Pentax Medical"
-   ],
-   "refused": [
-    "Fujifilm Healthcare UK",
-    "Karl Storz UK",
-    "Richard Wolf UK"
-   ],
-   "unknown": [],
-   "actionableTotal": 2,
-   "blockedReason": null,
-   "deferred": null
-  },
-  {
    "framework": "Medical Chart Paper and Ultrasound Film",
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-chart-paper-and-ultrasound-film/",
    "category": "Medical and Surgical Consumables",
@@ -19148,6 +19063,89 @@
     "Varian Medical Systems UK Ltd"
    ],
    "actionableTotal": 4,
+   "blockedReason": null,
+   "deferred": null
+  },
+  {
+   "framework": "Robotic Medical Equipment and Associated Accessories",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/robotic-medical-equipment/",
+   "category": "Diagnostic Equipment and Services",
+   "ends": "14 July 2028",
+   "suppliersAwarded": 5,
+   "suppliersPublished": 0,
+   "coverage": 0.0,
+   "nhsscCategory": "Diagnostic Equipment and Services",
+   "inScope": true,
+   "outOfScopeReason": null,
+   "state": "UNMAPPED",
+   "speciality": [],
+   "crawlWorklist": [
+    {
+     "supplier": "Procept Biorobotics",
+     "domain": null
+    }
+   ],
+   "domainsMissing": [
+    "Procept Biorobotics"
+   ],
+   "duplicateOfCapturedSupplier": [],
+   "refusedSuppliers": [
+    {
+     "supplier": "CMR Surgical",
+     "domain": "cmrsurgical.com",
+     "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-25",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Intuitive Surgical",
+     "domain": "www.intuitive.com",
+     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-25",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "MCT Lifesciences Ltd",
+     "domain": "www.mctlife.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Medtronic",
+     "domain": "medtronic.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-08",
+     "bucket": "publishedElsewhere"
+    }
+   ],
+   "route": "no Hub speciality mapped to this framework",
+   "catsInScope": [],
+   "actionable": {
+    "unresolvedNames": 0,
+    "publishedElsewhereNeedingCategory": 1,
+    "heldNeedingCategory": 0,
+    "capturedNothingCounted": 0,
+    "duplicateOfCapturedSupplier": 0,
+    "crawlable": 0,
+    "needDomain": 1
+   },
+   "published": [],
+   "publishedElsewhere": [
+    "Medtronic"
+   ],
+   "heldOnly": [],
+   "capturedNothingCounted": [],
+   "notCrawled": [
+    "Procept Biorobotics"
+   ],
+   "refused": [
+    "CMR Surgical",
+    "Intuitive Surgical",
+    "MCT Lifesciences Ltd"
+   ],
+   "unknown": [],
+   "actionableTotal": 2,
    "blockedReason": null,
    "deferred": null
   },
@@ -19938,9 +19936,9 @@
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/textiles/",
    "category": "Facilities and Office Solutions",
    "ends": "19 April 2030",
-   "suppliersAwarded": 34,
+   "suppliersAwarded": 32,
    "suppliersPublished": 2,
-   "coverage": 5.9,
+   "coverage": 6.2,
    "nhsscCategory": "Facilities and Office Solutions",
    "inScope": false,
    "outOfScopeReason": "estates, catering and office supply \u2014 outside the Hub's medical sales audience",
@@ -19949,10 +19947,6 @@
     "workwear"
    ],
    "crawlWorklist": [
-    {
-     "supplier": "J & M Medical",
-     "domain": null
-    },
     {
      "supplier": "PTP Healthcare Ltd",
      "domain": null
@@ -19963,7 +19957,6 @@
     }
    ],
    "domainsMissing": [
-    "J & M Medical",
     "PTP Healthcare Ltd",
     "Valmy SAS Ltd"
    ],
@@ -20039,13 +20032,13 @@
     "workwear:scrubs"
    ],
    "actionable": {
-    "unresolvedNames": 20,
+    "unresolvedNames": 19,
     "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 2
    },
    "published": [
     "Gailarde Ltd",
@@ -20059,7 +20052,6 @@
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "J & M Medical",
     "PTP Healthcare Ltd",
     "Valmy SAS Ltd"
    ],
@@ -20088,12 +20080,11 @@
     "Polyco Healthline Ltd",
     "Rathin Tex Ltd",
     "Robson Brown International Ltd",
-    "RS Components Ltd",
     "Spentex BCA Limited",
     "The Rizues Ltd",
     "Workwear Express Ltd"
    ],
-   "actionableTotal": 26,
+   "actionableTotal": 24,
    "blockedReason": null,
    "deferred": null
   },

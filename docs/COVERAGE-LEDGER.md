@@ -59,10 +59,10 @@ the decision each waits on; delete the entry once that decision is made.
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 8 | 25.8% | 16 | 12 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 14 | 18 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 6 | 22 | STARTED |
-| Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 5 | 18.5% | 12 | 17 | STARTED |
+| Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 6 | 22.2% | 11 | 17 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 7 | 28.0% | 13 | 7 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | 13 | 11 | STARTED |
-| Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 4 | 17 | STARTED |
+| Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 5 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 6 | 27.3% | 10 | 11 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 7 | 10 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 4 | 19.0% | 9 | 11 | STARTED |
@@ -118,6 +118,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Finance Solutions | — | 12 | 0 | 0.0% | 10 | 3 | UNMAPPED |
 | Bladder Scanners and Associated Options and Related Services | — | 11 | 0 | 0.0% | 7 | 5 | UNMAPPED |
 | Fluoroscopy and Associated Options and Related Services | — | 11 | 0 | 0.0% | 6 | 7 | UNMAPPED |
+| Transcatheter Heart Valve Repair, Replacement and Associated Devices | — | 11 | 0 | 0.0% | 10 | 2 | UNMAPPED |
 | Mobile Image Intensifiers and Associated Options and Related Services | — | 10 | 0 | 0.0% | 5 | 8 | UNMAPPED |
 | Structural Heart and Ventricular Assist Devices | — | 10 | 0 | 0.0% | 8 | 5 | UNMAPPED |
 | External Breast Prosthesis and Chest Support | — | 9 | 0 | 0.0% | 5 | 5 | UNMAPPED |
@@ -130,12 +131,11 @@ the decision each waits on; delete the entry once that decision is made.
 | Simulation Devices and Services | — | 7 | 0 | 0.0% | 6 | 1 | UNMAPPED |
 | Bone Densitometers, Associated Options and Related Services | — | 6 | 0 | 0.0% | 2 | 4 | UNMAPPED |
 | Negative Pressure Wound Therapy | — | 6 | 0 | 0.0% | 4 | 4 | UNMAPPED |
-| Robotic Medical Equipment and Associated Accessories | — | 6 | 0 | 0.0% | 3 | 4 | UNMAPPED |
 | Surgical Implants for Men’s and Women’s Health | — | 6 | 0 | 0.0% | 6 | 2 | UNMAPPED |
 | Surgical Navigation Systems with Associated Options and Related Services | — | 6 | 0 | 0.0% | 4 | 4 | UNMAPPED |
-| Flexible Endoscopes and Associated Options and Related Services | — | 5 | 0 | 0.0% | 2 | 4 | UNMAPPED |
 | Medical Chart Paper and Ultrasound Film | — | 5 | 0 | 0.0% | 4 | 4 | UNMAPPED |
 | Radiotherapy IT Solutions and Associated Options and Related Services | — | 5 | 0 | 0.0% | 4 | 2 | UNMAPPED |
+| Robotic Medical Equipment and Associated Accessories | — | 5 | 0 | 0.0% | 2 | 4 | UNMAPPED |
 | Specimen Cabinets and Associated Options and Related Services | — | 5 | 0 | 0.0% | 3 | 3 | UNMAPPED |
 | Reusable Plastic Medical Hollowware | — | 4 | 0 | 0.0% | 2 | 3 | UNMAPPED |
 | Obstetrics and Vinyl Pessaries | — | 3 | 0 | 0.0% | 3 | 0 | UNMAPPED |
@@ -143,7 +143,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 7 | 11.7% | 46 | 8 | OUT OF SCOPE |
 | Medical Healthcare Furniture | — | 51 | 0 | 0.0% | 45 | 8 | OUT OF SCOPE |
 | Beverages, Confectionary and Snacks | — | 44 | 0 | 0.0% | 42 | 2 | OUT OF SCOPE |
-| Textiles and Associated Products | workwear | 34 | 2 | 5.9% | 26 | 9 | OUT OF SCOPE |
+| Textiles and Associated Products | workwear | 32 | 2 | 6.2% | 24 | 9 | OUT OF SCOPE |
 | Food Vending Solutions | — | 31 | 0 | 0.0% | 30 | 1 | OUT OF SCOPE |
 | Delivered Ready Prepared Meals | — | 29 | 0 | 0.0% | 29 | 0 | OUT OF SCOPE |
 | Office and Outdoor Furniture | — | 28 | 0 | 0.0% | 22 | 6 | OUT OF SCOPE |
