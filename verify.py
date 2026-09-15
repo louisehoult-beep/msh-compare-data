@@ -502,6 +502,64 @@ def check_js():
 
 
 # --------------------------------------------------------------------------
+# 4b. SPECIALITY NEWS FRESHNESS
+# --------------------------------------------------------------------------
+# Added 15/09/2026, the same day the whole speciality-news mechanism was
+# built, specifically so the class of bug that prompted it can't recur
+# silently. The original problem was never a crash — it was a scheduled
+# publisher that quietly stopped existing (cloud-pipeline's own
+# publish_speciality.py, referenced in that repo's comments and tests, but
+# never actually built). Nothing failed loudly, so nobody noticed for a
+# month. This check is the guard against the same shape of failure here: if
+# .github/workflows/speciality-news.yml stops firing, or starts failing
+# before it writes anything, every data/speciality-news/<slug>.json file
+# just sits there with an ageing generatedAt timestamp and this WARNs on
+# every subsequent verify.py run — CI, hooks/pre-push, every session that
+# lands work here — until someone looks. It WARNs rather than FAILs: a data
+# file going stale should be visible, but must never block an unrelated
+# push to this repo (root rule 12's "publish nothing rather than something
+# thin" is about content, not about refusing everyone else's work over a
+# feed this repo doesn't itself control the uptime of).
+STALE_NEWS_AFTER_DAYS = 5   # daily cadence + generous room for a missed run or two
+
+
+def check_speciality_news_freshness():
+    d = os.path.join(DATA, "speciality-news")
+    if not os.path.isdir(d):
+        return   # nothing built yet — not this check's job to demand it exists
+    now = datetime.datetime.now(datetime.timezone.utc)
+    stale = []
+    unparsed = []
+    for fn in sorted(os.listdir(d)):
+        if not fn.endswith(".json"):
+            continue
+        path = os.path.join(d, fn)
+        try:
+            with open(path, encoding="utf-8") as fh:
+                doc = json.load(fh)
+            gen = doc.get("generatedAt")
+            dt = datetime.datetime.strptime(gen, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=datetime.timezone.utc)
+        except (OSError, ValueError, TypeError, json.JSONDecodeError):
+            unparsed.append(fn)
+            continue
+        age_days = (now - dt).total_seconds() / 86400
+        if age_days > STALE_NEWS_AFTER_DAYS:
+            stale.append((fn, round(age_days, 1)))
+    if unparsed:
+        WARN("speciality-news", "%d speciality-news file(s) have no readable generatedAt timestamp "
+                                "(build_speciality_news.py always writes one — check the file wasn't "
+                                "hand-edited or truncated): %s" % (len(unparsed), ", ".join(unparsed)))
+    if stale:
+        WARN("speciality-news", "%d speciality-news file(s) are more than %d days old — the daily "
+                                "speciality-news.yml workflow has likely stopped firing or failing "
+                                "silently before it writes anything; this is exactly the class of bug "
+                                "root-caused 15/09/2026: %s"
+             % (len(stale), STALE_NEWS_AFTER_DAYS,
+                ", ".join("%s (%sd)" % (fn, age) for fn, age in stale[:8])
+                + (" ..." if len(stale) > 8 else "")))
+
+
+# --------------------------------------------------------------------------
 # 5b. TRUST PRESSURES
 # --------------------------------------------------------------------------
 def check_trust_pressures(doc, trust_codes):
@@ -5787,6 +5845,7 @@ def main():
     check_privacy(n, retention, offline)
     check_trust_pressures(load("trust-pressures.json"), trust_codes)
     check_js()
+    check_speciality_news_freshness()
     check_product_types(load("product-types.json"))
 
     suppress = set()
