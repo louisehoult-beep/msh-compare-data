@@ -592,6 +592,38 @@ def check_trust_pressures(doc, trust_codes):
 
 
 # --------------------------------------------------------------------------
+# 5b. PERSONAL-DATA REINTRODUCTION GUARD
+# --------------------------------------------------------------------------
+def check_no_personal_data_reintroduction():
+    """data/trust-contacts.json and data/people-moves.json hold real named NHS
+    staff and their work emails. They were committed here by accident on
+    24/07/2026 (swept in by a `git add -A` before anyone decided they should
+    be public) and were world-readable for three weeks before the 17/08/2026
+    fix moved them to the private repo msh-hub-private, served to members
+    only through the authenticated gate (see 'Process flows for all
+    brands/hub-data-gate.md'). This repo's .gitignore blocks a routine
+    `git add -A` from picking them up again, but that is a soft guard — an
+    explicit `git add -f`, or a future edit that drops the two .gitignore
+    lines, would not be caught by it. This is the hard guard: it fails the
+    push outright if either file is tracked by git at all, however it got
+    there. Deliberately checks `git ls-files` (what's actually tracked), not
+    disk presence — test_verify.py's synthetic fixture writes a stand-in copy
+    to disk for the duration of a run and must not trip this."""
+    tracked = subprocess.run(
+        ["git", "ls-files", "--", "data/trust-contacts.json", "data/people-moves.json"],
+        cwd=REPO_DIR, capture_output=True, text=True, timeout=30,
+    ).stdout.split()
+    if tracked:
+        FAIL("privacy-reintroduction",
+             "%s tracked in this PUBLIC repo. Real NHS staff names and work "
+             "emails must live only in msh-hub-private. This is the "
+             "24/07/2026 class of error recurring — do not commit, do not "
+             "override: `git rm --cached %s`, confirm the two lines are "
+             "still in .gitignore, and re-run this gate."
+             % (", ".join(sorted(tracked)), " ".join(sorted(tracked))))
+
+
+# --------------------------------------------------------------------------
 # 6. SHRINK GUARD
 # --------------------------------------------------------------------------
 def check_shrink():
@@ -5732,6 +5764,8 @@ def main():
         if not os.path.isdir(root):
             sys.exit("--root: no such directory: %s" % root)
     os.chdir(root)
+
+    check_no_personal_data_reintroduction()
 
     optout = load("contacts-optout.json") or {}
     blocked = {n.strip().lower() for n in optout.get("names", []) if n.strip()}
