@@ -137,7 +137,7 @@ SPECIALITY_RULES = {
     # and pressure redistribution range. Physiotherapy and occupational therapy reach it
     # as EQUIPMENT (the NHSSC framework of that name), not as service contracts —
     # see the note on the include list below.
-    "therapies-physio-and-ot": {
+    "patient-handling": {
         "label": "Patient Moving and Handling",
         # Four NHSSC frameworks, all under the Rehabilitation and Community CBU.
         # Orthotics, Podiatry and Immobilisation, Prosthetic Components and External
@@ -5051,7 +5051,7 @@ SPECIALITY_RULES = {
     "rehabilitation-prosthetics-and-orthotics": {
         "label": "Rehabilitation, Prosthetics and Orthotics",
     # WRITTEN 11/09/2026, alongside the page-2909 build. This is the page that the
-    # therapies-physio-and-ot rule has been explicitly RESERVING frameworks for: its
+    # patient-handling rule has been explicitly RESERVING frameworks for: its
     # own comment says "Orthotics, Podiatry and Immobilisation, Prosthetic Components
     # and External Breast Prosthesis are deliberately NOT here: they are the
     # Rehabilitation, Prosthetics and Orthotics page's own frameworks." This rule
@@ -5069,16 +5069,16 @@ SPECIALITY_RULES = {
     #     route for procuring prosthetic products".
     #   Wheelchairs, Specialist Seating and Related Services (2024/S 000-039981,
     #     9 Jun 2025 to 8 Jun 2027, 31 suppliers, two lots, GBP 77m). SHARED with
-    #     therapies-physio-and-ot, which matches bare "wheelchairs?" in its own
+    #     patient-handling, which matches bare "wheelchairs?" in its own
     #     frameworks pattern. The sharing is deliberate and mutual, the way Pressure
     #     Area Care is shared between wound care and patient handling: one framework
     #     genuinely carries both patches' product.
     #   Physiotherapy and Occupational Therapy (2023/S 000-033230, to 30 Oct 2028,
-    #     22 suppliers). SHARED with therapies-physio-and-ot, which claims it by name.
+    #     22 suppliers). SHARED with patient-handling, which claims it by name.
     #     Here because it is the rehabilitation-consumable end of this patch.
     #   Technology Enabled Care, Electronic Assistive Technology and Lone Worker
     #     Devices (2021/S 000-031857, to 31 Aug 2027, 18 suppliers, nine lots).
-    #     therapies-physio-and-ot explicitly refuses it ("telecare and lone worker
+    #     patient-handling explicitly refuses it ("telecare and lone worker
     #     devices, not patient handling") and it is claimed here instead, because
     #     NHS Supply Chain's own description is that the products "are prescribed to
     #     the most severely disabled patients to help them live independently and are

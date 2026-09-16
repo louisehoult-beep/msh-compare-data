@@ -138,7 +138,11 @@ SOURCES = [
      "specialities": ["primary-care-and-general-practice"]},
     {"id": "ijtr_toc", "name": "International Journal of Therapy and Rehabilitation (contents)",
      "url": "https://www.magonlinelibrary.com/action/showFeed?jc=ijtr&type=etoc&feed=rss",
-     "specialities": ["therapies-physio-and-ot", "rehabilitation-prosthetics-and-orthotics"]},
+     # Was also tagged to patient-handling (2913, formerly "Therapies") until
+     # 16/09/2026 — dropped on the slug rename because a general therapy-and-rehab
+     # ToC feed is a poor fit for a page now specifically about moving/handling
+     # equipment and technique, not physio/OT research.
+     "specialities": ["rehabilitation-prosthetics-and-orthotics"]},
     {"id": "wounds_uk", "name": "Wounds UK", "url": "https://wounds-uk.com/feed/",
      "specialities": ["tissue-viability-and-wound-care"]},
     {"id": "ivteam", "name": "IVTeam", "url": "https://www.ivteam.com/feed/",

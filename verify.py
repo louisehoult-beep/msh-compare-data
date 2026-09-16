@@ -5332,10 +5332,11 @@ def check_calendar(doc, specmap_unused=None):
     link the calendar invented.
 
     A dead link on a members' page is worse than no link, and it is the failure this
-    build already hit once: pages-map.json calls a speciality `therapies-physio-and-ot`
-    but that page was renamed and lives at /patient-handling/, so a URL built from the
-    slug 404'd. The builder now resolves permalinks from the live site; this check makes
-    sure nobody quietly reintroduces the shortcut."""
+    build already hit once: pages-map.json used to call this speciality
+    `therapies-physio-and-ot` (renamed 16/09/2026 to `patient-handling` to match) while
+    the page itself had already been renamed and now lives at /patient-handling/, so a
+    URL built from the internal slug 404'd. The builder now resolves permalinks from the
+    live site; this check makes sure nobody quietly reintroduces the shortcut."""
     if doc is None:
         return
 

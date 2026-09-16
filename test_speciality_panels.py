@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.join(HERE, "scripts"))
 import build_speciality_panels as B  # noqa: E402
 
 WOUND = "tissue-viability-and-wound-care"
-HANDLING = "therapies-physio-and-ot"
+HANDLING = "patient-handling"
 VASCULAR = "vascular-surgery-and-pad"
 CONTINENCE = "continence-bladder-and-bowel"
 THEATRES = "theatres-and-surgical"
@@ -151,7 +151,7 @@ check("Drug Tariff is summarised, not shipped",
       "rows" not in (d.get("drugTariff") or {}) and d["drugTariff"]["lineCount"] > 1000)
 
 print("\n" + "=" * 70)
-print("PATIENT MOVING AND HANDLING (slug therapies-physio-and-ot, page 2913)")
+print("PATIENT MOVING AND HANDLING (slug patient-handling, page 2913)")
 print("=" * 70)
 subprocess.run([sys.executable, os.path.join(HERE, "scripts", "build_speciality_panels.py"), HANDLING],
                check=True, capture_output=True)
@@ -1003,7 +1003,7 @@ for good in ["telecare", "community equipment", "care home", "intermediate care"
 # "digital care alarms" is checked against the full matched set, not the shown
 # slice: added 15/09/2026 when backfilling three genuine Integrated Community
 # Equipment Service awards (Calderdale, Nottinghamshire Adults/Children — see
-# therapies-physio-and-ot's include-list note) pushed this speciality's matched
+# patient-handling's include-list note) pushed this speciality's matched
 # total past AWARD_CAP for the first time, ageing this older title out of the
 # top 40 by date. The matcher still admits it; only the display window changed.
 _fr_th = B.load("tender-history.json")
