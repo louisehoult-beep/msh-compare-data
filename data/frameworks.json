@@ -10,12 +10,12 @@
   "ref": "ETH-DB4D6B772",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "2026-09-15",
+ "dataAsOf": "2026-09-16",
  "source": "NHS Supply Chain Contract Launch Briefs (https://www.supplychain.nhs.uk/product-information/contract-launch-briefs/), each framework's own page, fetched this run.",
  "rule": "A supplier appears under a framework here ONLY because that framework's own NHS Supply Chain brief names it. Nothing is inferred from product ranges, specialities or catalogue categories. Frameworks whose brief could not be parsed are listed in `unparsed` with the reason and are NOT silently dropped.",
  "briefsSeen": 140,
- "frameworkCount": 121,
- "unparsedCount": 17,
+ "frameworkCount": 122,
+ "unparsedCount": 16,
  "expiredCount": 2,
  "expiredRule": "A brief whose framework has already ended is captured but kept OUT of `frameworks`, because every consumer reads that list as live routes to market. NHS Supply Chain leaves briefs published after they end. A brief with no readable end date stays in `frameworks` rather than being dropped.",
  "dateContestedCount": 5,
@@ -1661,6 +1661,26 @@
     "Shawbrook Bank Limited."
    ],
    "delistedSource": "data/nhssc-launch-briefs.json"
+  },
+  {
+   "name": "Flexible Endoscopes and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
+   "type": "Contract Extension",
+   "category": "Diagnostic Equipment and Services",
+   "reference": "2021/S 000-007768",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "suppliers": [
+    "FUJIFILM Healthcare UK Limited",
+    "Karl Storz Endoscopy UK Ltd",
+    "Olympus KeyMed",
+    "Pentax Medical",
+    "Richard Wolf UK Limited"
+   ],
+   "supplierSource": "no stated count on the page; 5 names parsed (UNVERIFIED COUNT)",
+   "supplierCount": 5,
+   "supplierLots": null
   },
   {
    "name": "Fluoroscopy and Associated Options and Related Services",
@@ -5159,17 +5179,14 @@
    "reason": "the page states 33 suppliers but 35 were parsed — refusing rather than publishing a list that does not match the page"
   },
   {
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
-   "reason": "fetch or parse error: HTTP Error 502: Bad Gateway"
-  },
-  {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/fresh-and-food-to-go/",
    "name": "Fresh and Food To Go Direct Solutions",
    "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/hand-hygiene-active-hand-shield/",
-   "reason": "fetch or parse error: HTTP Error 502: Bad Gateway"
+   "name": "Hand Hygiene Active Hand Shield",
+   "reason": "the page states its supplier count but publishes no list of names (no list or table in the Suppliers section) — this framework cannot be captured from this source"
   },
   {
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/interventional-cardiology-interventional-radiology-and-interventional-neuroradiology-cardiac-rhythm-management-and-electrophysiology/",
