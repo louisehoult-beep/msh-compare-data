@@ -2186,6 +2186,15 @@ def _check_candidate_wording(companies):
     Note it deliberately does NOT touch the 804 records that are genuinely still
     `probable`. Their wording is correct and is the honest empty state the Company
     Report renders as "IDENTITY NOT CONFIRMED".
+
+    A disagreement stops being "unchecked" the moment a human resolves it. When
+    that happens the record is stamped `supersededOn` / `supersededBy`, kept as
+    the audit trail of the original name search rather than deleted (Polyco is
+    the case that exposed this: 06916369 was a same-named wood-products company
+    in Warrington, settled 13/09/2026 against 02000388 in
+    data/company-match-overrides.json). A record carrying that stamp has already
+    been checked by hand — it is the FAIL, not the disagreement, that would be
+    a superseded statement left standing.
     """
     seed = load("supplier-seed.json")
     if not isinstance(seed, dict):
@@ -2198,6 +2207,8 @@ def _check_candidate_wording(companies):
         cand = s.get("companyNumberCandidate")
         if not isinstance(cand, dict):
             continue
+        if cand.get("supersededBy"):
+            continue                        # already resolved by hand, audit trail only
         rec = companies.get(s.get("name")) or {}
         if str(rec.get("matchConfidence") or "").lower() != "confirmed":
             continue

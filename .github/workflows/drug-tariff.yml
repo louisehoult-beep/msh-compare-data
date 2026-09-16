@@ -78,8 +78,9 @@ jobs:
           "
 
       - name: Publish gate — the same one every other writer runs
-        run: python3 verify.py
-
+        run: |
+          python3 scripts/prune_calendar.py
+          python3 verify.py
       - name: Commit if changed
         run: |
           git config user.name "drug-tariff-bot"

@@ -60,7 +60,9 @@ jobs:
       - name: Re-stamp the ownership notice and data markers
         run: python3 scripts/stamp_notice.py
       - name: Publish gate — nothing commits until this passes
-        run: python3 verify.py
+        run: |
+          python3 scripts/prune_calendar.py
+          python3 verify.py
       - name: Commit updates
         run: |
           git config user.name "hub-bot"
