@@ -25,13 +25,13 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 438,
-  "inScopeSuppliersNeedingCrawl": 437,
-  "inScopeSuppliersNeedingDomain": 400,
-  "suppliersRefused": 415,
+  "inScopeSuppliersNeedingCrawl": 434,
+  "inScopeSuppliersNeedingDomain": 397,
+  "suppliersRefused": 418,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
-  "blockedFrameworks": 0,
+  "blockedFrameworks": 1,
   "deferredFrameworks": 1
  },
  "unresolvedSupplierNames": [
@@ -12767,27 +12767,31 @@
    "speciality": [
     "imaging"
    ],
-   "crawlWorklist": [
+   "crawlWorklist": [],
+   "domainsMissing": [],
+   "duplicateOfCapturedSupplier": [],
+   "refusedSuppliers": [
     {
      "supplier": "Bayer",
-     "domain": null
+     "domain": "bayer.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-16",
+     "bucket": "refused"
     },
     {
      "supplier": "Bracco UK Limited",
-     "domain": null
+     "domain": "bracco.com",
+     "reason": "all 30 sitemap product-path URLs read cleanly (0 of 30 pages unreadable) but the schema.org name field on 26 of them is the site's own boilerplate disclaimer 'Product availability varies by market', 3 more are 'VueBox\u00ae Support'/'VueBox: Contact'/'VueBox: Request a test' (support pages, not products), and one is a press-release headline ('Bracco Receives Health Canada Approval for VUEWAY\u00ae injection') \u2014 the product-path URL pattern on this site is not a product catalogue, it is a mix of support and marketing pages, so a capture would publish disclaimer text and page titles as if they were Bracco's product range",
+     "checked": "2026-09-16",
+     "bucket": "refused"
     },
     {
      "supplier": "Guerbet Laboratories Limited",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Bayer",
-    "Bracco UK Limited",
-    "Guerbet Laboratories Limited"
-   ],
-   "duplicateOfCapturedSupplier": [],
-   "refusedSuppliers": [
+     "domain": "guerbet.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-16",
+     "bucket": "refused"
+    },
     {
      "supplier": "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
      "domain": "cardiac-services.com",
@@ -12812,7 +12816,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 0
    },
    "published": [
     "Medical Imaging Systems (MIS Healthcare)"
@@ -12820,17 +12824,16 @@
    "publishedElsewhere": [],
    "heldOnly": [],
    "capturedNothingCounted": [],
-   "notCrawled": [
+   "notCrawled": [],
+   "refused": [
     "Bayer",
     "Bracco UK Limited",
-    "Guerbet Laboratories Limited"
-   ],
-   "refused": [
+    "Guerbet Laboratories Limited",
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
    "unknown": [],
-   "actionableTotal": 3,
-   "blockedReason": null,
+   "actionableTotal": 0,
+   "blockedReason": "every awarded supplier not yet published has been read and refused (4 recorded refusal(s)) \u2014 no permitted route left to the rest of this framework, so its coverage cannot rise without a new route",
    "deferred": null
   },
   {
