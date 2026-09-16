@@ -86,10 +86,6 @@ MAX_AGE_DAYS = 60
 ITEMS_PER_SPECIALITY = 6
 FETCH_TIMEOUT = 20
 
-# canonical slug -> old slug still hardcoded in a live page's own HTML mount.
-# See the write-out below for why this exists. Keep in sync with the matching
-# map in build_speciality_panels.py.
-LEGACY_SLUG_ALIASES = {"patient-handling": "therapies-physio-and-ot"}
 UA = "Mozilla/5.0 (compatible; MedSalesHub/1.0; +https://medsalesintelligencehub.co.uk)"
 
 # --- cloud-pipeline handoff (see "THE PIPELINE MERGE" in the docstring) ------
@@ -441,24 +437,6 @@ def build(only_id=None, dry_run=False, pause=0.6):
             json.dump(doc, fh, indent=2, ensure_ascii=False)
             fh.write("\n")
         log("wrote %s (%d item(s))" % (path, len(items)))
-
-        # LEGACY ALIAS, added 16/09/2026 during the therapies-physio-and-ot ->
-        # patient-handling slug rename. Page 2913's own live HTML mount still
-        # reads data-speciality-news="therapies-physio-and-ot" — a single
-        # attribute inside a 269KB core/html block that no session tool call
-        # can push back through (see hub-speciality-news-autowire-2026-09-16.html
-        # and the systems-overhaul rename record). Until that one attribute is
-        # fixed by hand in the block editor, this writes an identical copy under
-        # the old filename so the live page keeps working with fresh content.
-        # REMOVE this block once page 2913's mount is manually updated to
-        # "patient-handling" and confirmed live.
-        alias = LEGACY_SLUG_ALIASES.get(slug)
-        if alias:
-            alias_path = os.path.join(OUT_DIR, "%s.json" % alias)
-            with open(alias_path, "w", encoding="utf-8") as fh:
-                json.dump(doc, fh, indent=2, ensure_ascii=False)
-                fh.write("\n")
-            log("wrote %s (legacy alias of %s, %d item(s))" % (alias_path, slug, len(items)))
 
     if fetch_errors:
         log("%d source(s) failed to fetch this run — their specialities keep " % len(fetch_errors)

@@ -40,11 +40,6 @@ ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data")
 OUT = os.path.join(DATA, "speciality-panels")
 
-# canonical slug -> old slug still hardcoded in a live page's own HTML mount.
-# See the write-out in main() for why this exists. Keep in sync with the
-# matching map in build_speciality_news.py.
-LEGACY_SLUG_ALIASES = {"patient-handling": "therapies-physio-and-ot"}
-
 # ONE NAME PER COMPANY (company-aliases/README.md). NHS Supply Chain spells the same
 # firm differently on two of its own framework pages: "Molnlycke Health Care Ltd" on
 # Advanced Wound Care and "Molnlycke Healthcare" on Pressure Area Care; "ConvaTec
@@ -8356,12 +8351,6 @@ def main():
             c.get("awardsMatched"), c.get("openTenders"),
             (doc.get("drugTariff") or {}).get("lineCount") if doc.get("drugTariff") else "-",
             os.path.getsize(path) // 1024))
-        alias = LEGACY_SLUG_ALIASES.get(slug)
-        if alias:
-            alias_path = os.path.join(OUT, alias + ".json")
-            with open(alias_path, "w", encoding="utf-8") as fh:
-                json.dump(doc, fh, indent=1, ensure_ascii=False)
-            print("%-38s legacy alias of %s (%d KB)" % (alias, slug, os.path.getsize(alias_path) // 1024))
 
 
 if __name__ == "__main__":
