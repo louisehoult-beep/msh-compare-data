@@ -1373,6 +1373,25 @@ SPECIALITY_RULES = {
         # speciality, so they cost nothing and will catch the next refresh. Not one row on
         # the panel today reaches it through them, and that is stated rather than left to
         # look like coverage.
+        #
+        # ADDED 16/09/2026: breast localisation and biopsy devices — mammotome, sentimag,
+        # non-wire lesion localisation, sentinel lymph node, vacuum-assisted biopsy, breast
+        # biopsy. Found unclaimed by any speciality in a follow-up sweep (see
+        # docs/speciality-classification-gaps-2026-09-15.md). Every speciality that
+        # discusses these devices already points them here: gynaecology-and-womens-health's
+        # own exclusion note says bare "breast" rows are "breast radiology, mammography
+        # trailers, Oncotype DX and breast pumps, which are radiology's, oncology's and
+        # maternity's"; oncology-and-sact's rule states "Mammography Imaging Systems ->
+        # radiology and imaging's. Breast screening is cancer detection", drawing the same
+        # line — detection and localisation are this page's, SACT drug treatment is
+        # oncology's; dermatology and interventional radiology both separately read and
+        # refused the same rows as "breast surgery" / not theirs. Run over all 1,972 rows
+        # of tender-history.json and all 1,706 of framework-awards.json: 8 hits, all 8
+        # genuine (Royal Free's Mammotome Revolve, Countess of Chester's national
+        # non-wire lesion localisation framework, Somerset's and Swansea Bay's and Norfolk
+        # and Norwich's Sentimag systems, Leeds' vacuum-assisted biopsy purchase,
+        # Gloucestershire's breast biopsy needle). Zero false positives, so no exclude term
+        # was needed for this addition.
         "include": (
             r"\b(radiolog\w*|radiograph\w*|radiograhic|teleradiolog\w*|"
             r"diagnostic imaging|medical imaging|multi[- ]?modality imaging|"
@@ -1384,6 +1403,8 @@ SPECIALITY_RULES = {
             r"bone densitometer\w*|densitometr\w*|absorptiometry|\bdexa\b|"
             r"\bpacs\b|picture archiv\w*|vendor neutral archive|"
             r"contrast media|contrast injectors?|barium|"
+            r"mammotome|sentimag|non-wire lesion localisation|sentinel lymph node|"
+            r"vacuum[- ]?assisted biopsy|breast biopsy|"
             r"radiation protect\w*|radiation gloves?|lead aprons?)\b"
         ),
         # Every pattern below matched a real row, was read with its buyer, and was
@@ -5365,10 +5386,17 @@ SPECIALITY_RULES = {
         # string appears anywhere in this repository's data — checked, not assumed.
         # If one ever arrives it will need excluding, and the invariant in
         # test_speciality_panels.py is what will show it.
+        # ADDED 16/09/2026: "subretinal" — Moorfields' "MEH - PRIMA Subretinal
+        # Photovoltaic Implant System" was falling through because the leading \b on
+        # this whole alternation requires a word boundary immediately before "retinal",
+        # and "sub" + "retinal" has none (both word characters, no boundary). Confirmed
+        # by direct regex test before this was added. One genuine hit, no false
+        # positives — every other "retinal" match in the two feeds already reaches the
+        # panel through the unqualified "retina|retinal" alternative.
         "include": (
             r"\b(ophthalm\w*|ocular|intra-?ocular|intravitreal|"
             r"vitreoretinal|vitrectomy|cataract|phaco\w*|iol|eyesi|"
-            r"retina|retinal|retinopath\w*|macula|macular|"
+            r"subretinal|retina|retinal|retinopath\w*|macula|macular|"
             r"glaucoma|tonomet\w*|"
             r"cornea|corneal|keratoplasty|keratoconus|keratomet\w*|"
             r"optometr\w*|orthopt\w*|"
@@ -5534,6 +5562,18 @@ SPECIALITY_RULES = {
         # its three rows are Leidos Supply Limited, which is Defence Medical Services
         # rather than NHS. Bespoke dental implants are an OMFS product wherever they are
         # bought, and the buyer is published beside each row so a reader can judge it.
+        #
+        # ADDED 16/09/2026: hypoglossal nerve stimulation — sleep apnoea devices
+        # (Inspire, Nyxoah) that pain-management's own rule already identifies as ENT's,
+        # not pain's, but no ENT term previously reached them. Bradford Teaching
+        # Hospitals' "C461007 - Hyperglossal Nerve Stimulation Device" is the one row in
+        # tender-history.json — the title itself misspells "hypoglossal" as
+        # "hyperglossal" (an upstream data-entry error at the buyer/portal, not a Hub
+        # transcription error; the correct clinical term is hypoglossal). Both spellings
+        # are admitted: "hypoglossal" for the correct term going forward, "hyperglossal"
+        # so this specific, verified, misspelled row is actually caught. Checked for
+        # false positives across both feeds — the only two hits are this row and its
+        # correctly-spelled form, which does not exist in the data today.
         "include": (
             r"\b(ENT|otolaryng\w*|otolog\w*|rhinolog\w*|rhinoplast\w*|rhinosinusit\w*|"
             r"septoplast\w*|turbinate\w*|"
@@ -5541,6 +5581,7 @@ SPECIALITY_RULES = {
             r"tonsil\w*|adenoid\w*|grommet\w*|tympan\w*|myringo\w*|mastoid\w*|otitis|"
             r"otoscop\w*|stapes|"
             r"epistaxis|tracheostom\w*|laryngectom\w*|voice prosthes\w*|"
+            r"hypoglossal|hyperglossal|"
             r"head and neck|maxillofacial|OMFS|oral surgery|orthognathic|dental implant\w*|"
             r"thyroidectom\w*|parathyroid\w*|salivary|parotid|throat)\b"
         ),

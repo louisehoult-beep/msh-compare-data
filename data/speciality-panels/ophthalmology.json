@@ -13,7 +13,7 @@
  "slug": "ophthalmology",
  "label": "Ophthalmology",
  "defined": true,
- "generated": "2026-09-15",
+ "generated": "2026-09-16",
  "dataAsOf": {
   "frameworks": "2026-09-15",
   "tenderHistory": "2026-08-20",
@@ -24,7 +24,7 @@
  "rules": {
   "frameworks": "NHS Supply Chain framework names matching /\\bophthalm\\w*/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch splits in two and only one half has a national route. The hospital half — intraocular lenses, viscoelastics, phaco and vitreoretinal capital, surgical packs, instruments, glaucoma stents and the anti-VEGF drugs, which are hospital-administered high-cost medicines — is bought on Complete Ophthalmology Solutions 3, on regional and national framework awards, or trust by trust, and that is what the frameworks, suppliers and awards above show. The community half is the ocular surface range in Drug Tariff Part IXA below, which is a different set of suppliers almost entirely and is prescribed rather than tendered. Being named on the framework is not evidence of volume, and being absent from it is not evidence of absence from the market: high street optometry, the General Ophthalmic Services contract and the independent-sector cataract providers who now hold a growing share of this speciality's activity buy outside NHS Supply Chain entirely and appear here only when they publish an award notice.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch splits in two and only one half has a national route. The hospital half — intraocular lenses, viscoelastics, phaco and vitreoretinal capital, surgical packs, instruments, glaucoma stents and the anti-VEGF drugs, which are hospital-administered high-cost medicines — is bought on Complete Ophthalmology Solutions 3, on regional and national framework awards, or trust by trust, and that is what the frameworks, suppliers and awards above show. The community half is the ocular surface range in Drug Tariff Part IXA below, which is a different set of suppliers almost entirely and is prescribed rather than tendered. Being named on the framework is not evidence of volume, and being absent from it is not evidence of absence from the market: high street optometry, the General Ophthalmic Services contract and the independent-sector cataract providers who now hold a growing share of this speciality's activity buy outside NHS Supply Chain entirely and appear here only when they publish an award notice.",
-  "awards": "Award-stage notices whose TITLE matches /\\b(ophthalm\\w*|ocular|intra-?ocular|intravitreal|vitreoretinal|vitrectomy|cataract|phaco\\w*|iol|eyesi|retina|retinal|retinopath\\w*|macula|macular|glaucoma|tonomet\\w*|cornea|corneal|keratoplasty|keratoconus|keratomet\\w*|optometr\\w*|orthopt\\w*|slit lamp|fundus camera|optical coherence tomograph\\w*|optic nerve|eye|low vision|visual field\\w*|visual acuity|visual electrophysiolog\\w*|squint|strabismus|blepharo\\w*|oculoplast\\w*|lacrimal|punctal|ranibizumab|aflibercept|brolucizumab|faricimab|pegaptanib|verteporfin|spectacle\\w*|contact lens\\w*)\\b/i and does not match /\\b(eye protection|small animal|intravascular)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33122000 or 33731110 or 85121281 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
+  "awards": "Award-stage notices whose TITLE matches /\\b(ophthalm\\w*|ocular|intra-?ocular|intravitreal|vitreoretinal|vitrectomy|cataract|phaco\\w*|iol|eyesi|subretinal|retina|retinal|retinopath\\w*|macula|macular|glaucoma|tonomet\\w*|cornea|corneal|keratoplasty|keratoconus|keratomet\\w*|optometr\\w*|orthopt\\w*|slit lamp|fundus camera|optical coherence tomograph\\w*|optic nerve|eye|low vision|visual field\\w*|visual acuity|visual electrophysiolog\\w*|squint|strabismus|blepharo\\w*|oculoplast\\w*|lacrimal|punctal|ranibizumab|aflibercept|brolucizumab|faricimab|pegaptanib|verteporfin|spectacle\\w*|contact lens\\w*)\\b/i and does not match /\\b(eye protection|small animal|intravascular)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33122000 or 33731110 or 85121281 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
   "openTenders": "Notices still open for bidding, matched the same way. An empty list means no open notice on this patch today, not that none was looked for.",
   "drugTariff": "NHSBSA Drug Tariff Part IXA for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /\\beye/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
  },
@@ -33,7 +33,7 @@
   "suppliers": 53,
   "suppliersUnresolved": 0,
   "awardsShown": 40,
-  "awardsMatched": 61,
+  "awardsMatched": 62,
   "awardsWithheldByBuyerCap": 0,
   "openTenders": 0
  },
@@ -676,6 +676,21 @@
    "cpvCorroborates": true
   },
   {
+   "title": "MEH - PRIMA Subretinal Photovoltaic Implant System",
+   "buyer": "Moorfields Eye Hospital NHS Foundation Trust",
+   "supplier": "La Science SAS",
+   "date": "2026-09-03",
+   "url": "https://www.find-tender.service.gov.uk/Notice/083386-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33190000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
    "title": "(Maintenance of) Ophthalmic Equipment",
    "buyer": "Hywel Dda University Health Board",
    "supplier": "Carl Zeiss Ltd",
@@ -1059,16 +1074,6 @@
    "supplier": "Bausch & Lomb U.K. Ltd, BEAVER-VISITEC INTERNATIONAL SALES LTD, D.O.R.C. Limited",
    "date": "2024-07-22",
    "url": "https://www.find-tender.service.gov.uk/Notice/022637-2024",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
-  },
-  {
-   "title": "Mercaptamine Eye Drops",
-   "buyer": "BELFAST HEALTH AND SOCIAL CARE TRUST",
-   "supplier": "Recordati Netherlands BV",
-   "date": "2024-04-25",
-   "url": "https://www.find-tender.service.gov.uk/Notice/013404-2024",
    "value": null,
    "periodEnd": null,
    "source": "tender-history"
