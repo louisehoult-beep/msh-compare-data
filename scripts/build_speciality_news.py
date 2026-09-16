@@ -34,6 +34,27 @@ gets an EMPTY list, never a guess pulled from an untagged general feed. The
 renderer (app/speciality-news.js) shows an honest empty state for that case,
 the same as speciality-panels.js does for a speciality with no panel rule.
 
+THE PIPELINE MERGE (added 16/09/2026). SOURCES above is trade press: fetched,
+not individually checked. The cloud-pipeline repo separately produces
+data/speciality-intel.json (speciality_handoff.py, landed there as 0b487f3) —
+items it has ranked and, for the cowork_intel ones, that intel-ingest verified
+at source, each carrying a controlled speciality slug. Those are a HIGHER tier
+of content than an RSS title, and Lou's 16/09 decision was that a sales
+opportunity belongs on the speciality page as well as in the Rep's Briefing.
+fetch_pipeline_intel() merges them into the same per-slug lists, tagged
+verified=True so the renderer can label and badge them differently.
+
+  * That repo is PRIVATE, so raw.githubusercontent 404s anonymously. This
+    reads the GitHub Contents API with a token instead (PIPELINE_TOKEN_ENV),
+    which is why the workflow passes secrets.PIPELINE_READ_TOKEN through. The
+    merge happens server-side in CI; what a member's browser fetches is still
+    only the PUBLIC file this script writes in this repo, so no token is ever
+    exposed to a page.
+  * NO TOKEN, OR A FAILED FETCH, IS NOT AN ERROR. The run continues with trade
+    press alone and says so loudly in the log. That keeps local dry runs
+    working with no credentials at all, and keeps one repo's outage from
+    failing the other repo's daily build.
+
 CADENCE AND FRESHNESS. Items older than MAX_AGE_DAYS are dropped before
 writing — a "what changed this month" band should not still be citing a
 six-month-old article. Each file keeps at most ITEMS_PER_SPECIALITY entries,
@@ -65,6 +86,19 @@ MAX_AGE_DAYS = 60
 ITEMS_PER_SPECIALITY = 6
 FETCH_TIMEOUT = 20
 UA = "Mozilla/5.0 (compatible; MedSalesHub/1.0; +https://medsalesintelligencehub.co.uk)"
+
+# --- cloud-pipeline handoff (see "THE PIPELINE MERGE" in the docstring) ------
+# The Contents API, NOT raw.githubusercontent: the pipeline repo is private, and
+# raw 404s for a private repo even with a token on the request. The Contents
+# endpoint honours Authorization, and with Accept: application/vnd.github.raw it
+# returns the file body itself rather than the base64-in-JSON wrapper.
+PIPELINE_INTEL_URL = ("https://api.github.com/repos/louisehoult-beep/"
+                      "medical-sales-hub-pipeline/contents/data/speciality-intel.json")
+PIPELINE_TOKEN_ENV = "PIPELINE_READ_TOKEN"
+# What a member sees under a merged item. Deliberately names the Hub, not the
+# upstream RSS feed or the pipeline's internal source_id, because the point of
+# the label is the TIER of checking, not the plumbing.
+PIPELINE_LABEL = "Hub intelligence"
 
 # Synced from cloud-pipeline/sources.py, feeds=["speciality_pages"] entries, 15/09/2026.
 # id/name/url/specialities only — everything else in that registry (cadence, category)
@@ -239,6 +273,71 @@ def parse_feed(raw_bytes, source_name):
     return items
 
 
+def pipeline_entry(row):
+    """One cloud-pipeline row -> this script's own item shape.
+
+    The two sides name the same things differently (url/link, date/published)
+    and the renderer only understands this side's names. `verified` and
+    `opportunity` are additions, not renames: they carry WHY the item is on the
+    page, which is what app/speciality-news.js badges and labels on."""
+    return {
+        "title": row.get("title", ""),
+        "link": row.get("url", ""),
+        "published": row.get("date") or None,
+        "summary": (row.get("summary") or "")[:220],
+        "source": PIPELINE_LABEL,
+        "verified": True,
+        "opportunity": bool(row.get("opportunity")),
+    }
+
+
+def fetch_pipeline_intel(token=None):
+    """Fetch the cloud-pipeline handoff. Returns {slug: [entry, ...]}.
+
+    Returns {} — never raises — when there is no token, the fetch fails, or the
+    body is not the document we expect. A speciality page losing its merged
+    rows for a day is a bad day; this repo's daily build failing outright, and
+    every page's trade-press band going stale with it, is a worse one."""
+    token = token if token is not None else os.environ.get(PIPELINE_TOKEN_ENV, "")
+    if not token:
+        log("pipeline intel: no %s in the environment — trade press only this run. "
+            "(Expected locally; in CI it means the secret is missing.)" % PIPELINE_TOKEN_ENV)
+        return {}
+
+    req = urllib.request.Request(PIPELINE_INTEL_URL, headers={
+        "User-Agent": UA,
+        "Accept": "application/vnd.github.raw",
+        "Authorization": "Bearer %s" % token,
+        "X-GitHub-Api-Version": "2022-11-28",
+    })
+    try:
+        with urllib.request.urlopen(req, timeout=FETCH_TIMEOUT) as r:
+            doc = json.loads(r.read().decode("utf-8"))
+    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError,
+            ValueError) as e:
+        log("pipeline intel: FETCH FAILED (%s) — trade press only this run. Merged "
+            "items will be absent from every page until the next successful run." % e)
+        return {}
+
+    data = doc.get("specialities") if isinstance(doc, dict) else None
+    if not isinstance(data, dict):
+        log("pipeline intel: unexpected document shape — no 'specialities' object. "
+            "Trade press only this run.")
+        return {}
+
+    out = {}
+    for slug, rows in data.items():
+        if not isinstance(rows, list):
+            continue
+        entries = [pipeline_entry(r) for r in rows if isinstance(r, dict)]
+        entries = [e for e in entries if e["title"] and e["link"]]
+        if entries:
+            out[slug] = entries
+    log("pipeline intel: %d row(s) across %d speciality page(s)"
+        % (sum(len(v) for v in out.values()), len(out)))
+    return out
+
+
 def build(only_id=None, dry_run=False, pause=0.6):
     now = datetime.datetime.now(datetime.timezone.utc)
     cutoff = now - datetime.timedelta(days=MAX_AGE_DAYS)
@@ -275,8 +374,19 @@ def build(only_id=None, dry_run=False, pause=0.6):
         log("  %d item(s) within %dd" % (kept, MAX_AGE_DAYS))
         time.sleep(pause)
 
+    # Merge the cloud-pipeline handoff on top of the trade press. Done for an
+    # --only run too: that run rewrites its source's slug files, and skipping
+    # the merge there would silently strip those pages' verified rows until the
+    # next full run.
+    pipeline = fetch_pipeline_intel()
+    for slug, entries in pipeline.items():
+        by_speciality.setdefault(slug, []).extend(entries)
+
     if only_id:
-        # Partial run for one source — do not touch every other speciality's file.
+        # Partial run for one source — do not touch every other speciality's
+        # file. Note the pipeline's own slugs deliberately do NOT widen this
+        # set: writing a slug this run never fetched RSS for would rewrite its
+        # file with merged rows only, wiping its trade-press items.
         touched = set()
         for src in SOURCES:
             if src["id"] == only_id:
@@ -284,10 +394,15 @@ def build(only_id=None, dry_run=False, pause=0.6):
         slugs = touched
     else:
         slugs = {s for src in SOURCES for s in src["specialities"]}
+        slugs |= set(pipeline)
 
     if dry_run:
         for slug in sorted(slugs):
-            log("--- %s: %d item(s)" % (slug, len(by_speciality.get(slug, []))))
+            got = by_speciality.get(slug, [])
+            log("--- %s: %d item(s) (%d merged, %d opportunity)"
+                % (slug, len(got),
+                   sum(1 for i in got if i.get("verified")),
+                   sum(1 for i in got if i.get("opportunity"))))
         return 0
 
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -299,6 +414,12 @@ def build(only_id=None, dry_run=False, pause=0.6):
             return dt or datetime.datetime.min.replace(tzinfo=datetime.timezone.utc)
 
         items.sort(key=sort_key, reverse=True)
+        # Second, STABLE sort: anything flagged as a sales opportunity goes to
+        # the top, newest-first order preserved inside each group. A rep opening
+        # a speciality page wants the thing to act on first; Lou, 16/09/2026.
+        # This runs after the cap-free date sort and before the cap, so an
+        # opportunity can never be cut by six older trade-press headlines.
+        items.sort(key=lambda it: 0 if it.get("opportunity") else 1)
         items = items[:ITEMS_PER_SPECIALITY]
         doc = {
             "speciality": slug,

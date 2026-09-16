@@ -42,6 +42,15 @@ jobs:
         with:
           python-version: "3.12"
       - name: Build speciality news
+        # PIPELINE_READ_TOKEN is a fine-grained PAT, Contents:Read-only on
+        # louisehoult-beep/medical-sales-hub-pipeline and nothing else. That repo
+        # is private, so the build cannot read its speciality-intel.json handoff
+        # anonymously — raw.githubusercontent just 404s. The merge happens here,
+        # server-side; the file this job commits is public and carries no token.
+        # Missing or expired, the build still succeeds with trade press alone and
+        # says so in the log — see fetch_pipeline_intel().
+        env:
+          PIPELINE_READ_TOKEN: ${{ secrets.PIPELINE_READ_TOKEN }}
         run: python3 scripts/build_speciality_news.py
       - name: Publish gate — nothing commits until this passes
         run: python3 verify.py

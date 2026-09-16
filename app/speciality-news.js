@@ -15,11 +15,12 @@
    items, it inserts nothing at all — the page's own static content and its
    own empty-state note (if any) are left completely alone either way.
 
-   The live block is visually and textually labelled as a different tier of
-   content from the hand-verified static list above it — fetched, not
-   individually fact-checked — consistent with the Hub's verification
-   standard (root rule 12/16): nothing here claims to be checked at source
-   the way the static items are.
+   EVERY ITEM CARRIES ITS SOURCE, and that is what discharges the Hub's
+   verification standard (root rule 12/16) here: a reader can see whether a
+   line came from Hub intelligence or from a named trade title, and judge it
+   on that. The band label says what the block holds and how current it is,
+   and does not repeat a blanket "not individually checked" caveat over the
+   top of source lines that are already there (Lou, 16/09/2026).
 
    Follows the exact pattern proved live by app/speciality-panels.js
    (07/09/2026): a loader script on the WordPress page fetches this file from
@@ -44,7 +45,13 @@
       '.msh .news-live-wrap{margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed var(--border);}',
       '.msh .news-live-lbl{font-size:10px;letter-spacing:1.2px;font-weight:800;text-transform:uppercase;',
       'color:var(--dim);margin-bottom:6px;}',
-      '.msh .month-highlight .news-live-lbl{color:#9aa5b5;}'
+      '.msh .month-highlight .news-live-lbl{color:#9aa5b5;}',
+      /* Gold on navy, the Hub's own accent — marks an item the pipeline flagged
+         as a commercial opportunity, which is why it has been sorted to the top.
+         Dark ink on gold, never gold on gold (see the fcal-ev-links incident). */
+      '.msh .news-opp{display:inline-block;margin-right:6px;padding:1px 6px;border-radius:3px;',
+      'background:#E0BE8E;color:#0B1C33;font-size:9px;font-weight:800;letter-spacing:1px;',
+      'text-transform:uppercase;vertical-align:1px;}'
     ].join('');
     document.head.appendChild(st);
   }
@@ -68,19 +75,29 @@
     if (!items.length) { return; }   // additive only — nothing to add, so add nothing
     css();
     var body = '';
+    var anyVerified = false;
     for (var i = 0; i < items.length; i++) {
       var it = items[i];
+      if (it.verified) { anyVerified = true; }
       body += '<div class="news-item">'
         + '<div class="news-date">' + esc(fmtDate(it.published)) + '</div>'
         + '<div>'
-        + '<div class="news-t"><a href="' + esc(it.link) + '" target="_blank" rel="noopener">' + esc(it.title) + '</a></div>'
+        + '<div class="news-t">'
+        + (it.opportunity ? '<span class="news-opp">Opportunity</span>' : '')
+        + '<a href="' + esc(it.link) + '" target="_blank" rel="noopener">' + esc(it.title) + '</a></div>'
         + (it.summary ? '<div class="news-b">' + esc(it.summary) + '</div>' : '')
         + '<div class="news-src">' + esc(it.source) + '</div>'
         + '</div></div>';
     }
+    // Lou, 16/09/2026: drop the "not individually checked" caveat — every item
+    // already carries its source on its own line, which is what a reader needs
+    // to judge it. The label says what the block holds and how current it is;
+    // the per-item source line settles any individual case.
+    var label = anyVerified
+      ? 'Live feed — Hub intelligence and trade press, updated daily'
+      : 'Live feed — trade press, updated daily';
     var wrapper = '<div class="news-live-wrap">'
-      + '<div class="news-live-lbl">Live feed — fetched daily, not individually checked at source '
-      + '(unlike the list below)</div>'
+      + '<div class="news-live-lbl">' + label + '</div>'
       + body + '</div>';
     mount.insertAdjacentHTML('afterbegin', wrapper);
   }
