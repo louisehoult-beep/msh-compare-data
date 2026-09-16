@@ -12,22 +12,22 @@
  },
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
-  "frameworks.json": "2026-09-15",
-  "differentiator.json published": 34858,
-  "differentiator.json held": 50760
+  "frameworks.json": "2026-09-16",
+  "differentiator.json published": 34875,
+  "differentiator.json held": 50991
  },
  "counts": {
-  "frameworks": 121,
+  "frameworks": 122,
   "done": 0,
   "started": 49,
   "notStarted": 5,
-  "unmapped": 47,
+  "unmapped": 48,
   "outOfScope": 20,
-  "inScope": 101,
-  "supplierNamesUnresolved": 445,
-  "inScopeSuppliersNeedingCrawl": 441,
-  "inScopeSuppliersNeedingDomain": 404,
-  "suppliersRefused": 410,
+  "inScope": 102,
+  "supplierNamesUnresolved": 438,
+  "inScopeSuppliersNeedingCrawl": 437,
+  "inScopeSuppliersNeedingDomain": 400,
+  "suppliersRefused": 415,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -35,10 +35,6 @@
   "deferredFrameworks": 1
  },
  "unresolvedSupplierNames": [
-  [
-   "Polyco Healthline",
-   5
-  ],
   [
    "Hunts Food Group Ltd",
    4
@@ -54,10 +50,6 @@
   [
    "Thomas Stoner Supplies Ltd",
    3
-  ],
-  [
-   "Rehabilitation Manufacturing Services ltd",
-   2
   ],
   [
    "Verathon Medical",
@@ -132,10 +124,6 @@
    2
   ],
   [
-   "Polyco Healthline Limited",
-   2
-  ],
-  [
    "Emergent Crown Contract Office Furnishings Limited",
    2
   ],
@@ -145,10 +133,6 @@
   ],
   [
    "KCI Medical Ltd (previously 3M United Kingdom PLC)",
-   2
-  ],
-  [
-   "Varian Medical Systems UK Ltd",
    2
   ],
   [
@@ -757,10 +741,6 @@
   ],
   [
    "Omnimed Limited",
-   1
-  ],
-  [
-   "Varian Medical Systems",
    1
   ],
   [
@@ -1608,11 +1588,7 @@
    1
   ],
   [
-   "HCE UK (Health-Care Equipment & Supplies) Ltd",
-   1
-  ],
-  [
-   "Ultimate Healthcare Ltd (Millbrook, trading as Ultimate)",
+   "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
    1
   ],
   [
@@ -1713,10 +1689,6 @@
   ],
   [
    "PLS Medical Ltd",
-   1
-  ],
-  [
-   "Polyco Healthline Ltd",
    1
   ],
   [
@@ -2006,10 +1978,6 @@
      "domain": null
     },
     {
-     "supplier": "Medecon Healthcare UK",
-     "domain": null
-    },
-    {
      "supplier": "Medical Wire & Equipment (MWE)",
      "domain": null
     },
@@ -2142,7 +2110,6 @@
     "Launch Diagnostics",
     "LumiraDx",
     "Matrix Diagnostics",
-    "Medecon Healthcare UK",
     "Medical Wire & Equipment (MWE)",
     "Medline Scientific",
     "Msoft eSolutions",
@@ -2258,6 +2225,13 @@
      "domain": "labcold.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-15",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Medecon Healthcare UK",
+     "domain": "medecon.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
+     "checked": "2026-09-16",
      "bucket": "refused"
     },
     {
@@ -2408,7 +2382,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 62
+    "needDomain": 61
    },
    "published": [
     "Abbott Diagnostics",
@@ -2497,7 +2471,6 @@
     "Launch Diagnostics",
     "LumiraDx",
     "Matrix Diagnostics",
-    "Medecon Healthcare UK",
     "Medical Wire & Equipment (MWE)",
     "Medline Scientific",
     "Sterilab Services",
@@ -2536,6 +2509,7 @@
     "Haier Biomedical",
     "Kinetik Medical Devices",
     "Labcold",
+    "Medecon Healthcare UK",
     "OscarTech UK",
     "Randox Laboratories",
     "Sakura Finetek UK",
@@ -2544,7 +2518,7 @@
     "Williams Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 74,
+   "actionableTotal": 73,
    "blockedReason": null,
    "deferred": null
   },
@@ -2767,10 +2741,6 @@
     {
      "supplier": "United Orthopaedic Corporation UK Limited",
      "domain": null
-    },
-    {
-     "supplier": "Venturis Medical Ltd",
-     "domain": null
     }
    ],
    "domainsMissing": [
@@ -2819,7 +2789,6 @@
     "Symbios",
     "TRB Chemedica (UK) Ltd",
     "United Orthopaedic Corporation UK Limited",
-    "Venturis Medical Ltd",
     "implantcast UK",
     "joimax UK"
    ],
@@ -2994,6 +2963,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Venturis Medical Ltd",
+     "domain": "venturismedical.com",
+     "reason": "12 product record(s) carry only 1 distinct name(s) (i'm a product) \u2014 a repeated page title, not a product range",
+     "checked": "2026-09-16",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Fannin (UK) Limited",
      "domain": "fannin.eu",
      "reason": "robots.txt disallows automated reading of this site",
@@ -3092,7 +3068,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 48
+    "needDomain": 47
    },
    "published": [
     "Acumed Ltd",
@@ -3177,8 +3153,7 @@
     "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)",
     "Symbios",
     "TRB Chemedica (UK) Ltd",
-    "United Orthopaedic Corporation UK Limited",
-    "Venturis Medical Ltd"
+    "United Orthopaedic Corporation UK Limited"
    ],
    "refused": [
     "3D LifePrints UK Ltd",
@@ -3204,10 +3179,11 @@
     "Ovidius Solutions Ltd",
     "Platts & Nisbett Ltd",
     "Surgical Instruments (dental)",
-    "Surgical Instrument Group Holdings Ltd"
+    "Surgical Instrument Group Holdings Ltd",
+    "Venturis Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 57,
+   "actionableTotal": 56,
    "blockedReason": null,
    "deferred": null
   },
@@ -3605,8 +3581,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "9 August 2028",
    "suppliersAwarded": 60,
-   "suppliersPublished": 12,
-   "coverage": 20.0,
+   "suppliersPublished": 13,
+   "coverage": 21.7,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3636,31 +3612,11 @@
      "domain": null
     },
     {
-     "supplier": "Medecon Healthcare UK",
-     "domain": null
-    },
-    {
      "supplier": "Meril UK Pvt Ltd",
      "domain": null
     },
     {
      "supplier": "Minitouch Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Schultz Medical (UK) Limited",
-     "domain": null
-    },
-    {
-     "supplier": "SRA Developments",
-     "domain": null
-    },
-    {
-     "supplier": "Venturis Medical Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Winners First Trading Limited",
      "domain": null
     }
    ],
@@ -3668,13 +3624,8 @@
     "Aquilant Limited",
     "Bariatric Solutions International",
     "Lexington Medical UK Ltd",
-    "Medecon Healthcare UK",
     "Meril UK Pvt Ltd",
-    "Minitouch Ltd",
-    "SRA Developments",
-    "Schultz Medical (UK) Limited",
-    "Venturis Medical Ltd",
-    "Winners First Trading Limited"
+    "Minitouch Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -3791,6 +3742,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Medecon Healthcare UK",
+     "domain": "medecon.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
+     "checked": "2026-09-16",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Mermaid Medical Ltd",
      "domain": "mermaidmedical.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -3819,6 +3777,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "SRA Developments",
+     "domain": "bowa-medical.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-16",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Surgical Instruments (dental)",
      "domain": "surgicalholdings.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -3844,6 +3809,20 @@
      "domain": "www.vanguard.de",
      "reason": "the site's WordPress API returned HTTP 401; the WooCommerce Store API returned HTTP 401; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-13",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Venturis Medical Ltd",
+     "domain": "venturismedical.com",
+     "reason": "12 product record(s) carry only 1 distinct name(s) (i'm a product) \u2014 a repeated page title, not a product range",
+     "checked": "2026-09-16",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Winners First Trading Limited",
+     "domain": "winners1trading.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-16",
      "bucket": "refused"
     },
     {
@@ -3934,7 +3913,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 10
+    "needDomain": 5
    },
    "published": [
     "Avicenna Surgical Limited",
@@ -3948,6 +3927,7 @@
     "MedScience Distribution",
     "Medtronic",
     "Purple Surgical",
+    "Schultz Medical (UK) Limited",
     "TFX Group Ltd (Teleflex Medical)"
    ],
    "publishedElsewhere": [
@@ -3973,13 +3953,8 @@
     "Aquilant Limited",
     "Bariatric Solutions International",
     "Lexington Medical UK Ltd",
-    "Medecon Healthcare UK",
     "Meril UK Pvt Ltd",
-    "Minitouch Ltd",
-    "Schultz Medical (UK) Limited",
-    "SRA Developments",
-    "Venturis Medical Ltd",
-    "Winners First Trading Limited"
+    "Minitouch Ltd"
    ],
    "refused": [
     "Applied Medical UK Ltd",
@@ -3998,17 +3973,21 @@
     "Laprosurge Limited",
     "Lawmed Ltd",
     "LocaMed Ltd",
+    "Medecon Healthcare UK",
     "Mermaid Medical Ltd",
     "Novus Med Ltd",
     "RB Medical Engineering Ltd",
     "Richard Wolf UK",
+    "SRA Developments",
     "Surgical Instruments (dental)",
     "Uniphar Medtech",
     "Unisurge International Limited",
-    "Vanguard AG"
+    "Vanguard AG",
+    "Venturis Medical Ltd",
+    "Winners First Trading Limited"
    ],
    "unknown": [],
-   "actionableTotal": 24,
+   "actionableTotal": 19,
    "blockedReason": null,
    "deferred": null
   },
@@ -4102,6 +4081,10 @@
     {
      "supplier": "TSC Endovision",
      "domain": null
+    },
+    {
+     "supplier": "Varian (Siemens Healthineers)",
+     "domain": null
     }
    ],
    "domainsMissing": [
@@ -4121,7 +4104,8 @@
     "Promed Limited",
     "Rocamed France",
     "Synectics Medical T/A SynMed",
-    "TSC Endovision"
+    "TSC Endovision",
+    "Varian (Siemens Healthineers)"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -4318,13 +4302,13 @@
     "oncology:stent"
    ],
    "actionable": {
-    "unresolvedNames": 2,
+    "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 9,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 17
+    "needDomain": 18
    },
    "published": [
     "Ambu UK",
@@ -4375,7 +4359,8 @@
     "Promed Limited",
     "Rocamed France",
     "Synectics Medical T/A SynMed",
-    "TSC Endovision"
+    "TSC Endovision",
+    "Varian (Siemens Healthineers)"
    ],
    "refused": [
     "BVM Medical Ltd",
@@ -4394,8 +4379,7 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
    "unknown": [
-    "Omnimed Limited",
-    "Varian Medical Systems"
+    "Omnimed Limited"
    ],
    "actionableTotal": 29,
    "blockedReason": null,
@@ -6306,8 +6290,8 @@
    "category": "Rehabilitation and Community",
    "ends": "8 March 2028",
    "suppliersAwarded": 53,
-   "suppliersPublished": 24,
-   "coverage": 45.3,
+   "suppliersPublished": 25,
+   "coverage": 47.2,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -6331,15 +6315,9 @@
     {
      "supplier": "Wealden Rehab",
      "domain": "wealdenrehab.com"
-    },
-    {
-     "supplier": "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
-     "domain": null
     }
    ],
-   "domainsMissing": [
-    "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)"
-   ],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
@@ -6375,6 +6353,13 @@
      "domain": "harvesthealthcare.co.uk",
      "reason": "the site's WordPress API could not be read (<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate ); the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-25",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Health-Care Equipment & Supplies",
+     "domain": "hce-uk.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-31",
      "bucket": "refused"
     },
     {
@@ -6530,13 +6515,13 @@
     "handling:sling"
    ],
    "actionable": {
-    "unresolvedNames": 2,
+    "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 10,
     "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 0
    },
    "published": [
     "Accora",
@@ -6561,6 +6546,7 @@
     "Select Health Care (UK)",
     "Steris",
     "Talarmade Limited",
+    "Ultimate Healthcare",
     "Guldmann",
     "Winncare UK"
    ],
@@ -6583,15 +6569,14 @@
     "Wealden Rehab"
    ],
    "capturedNothingCounted": [],
-   "notCrawled": [
-    "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)"
-   ],
+   "notCrawled": [],
    "refused": [
     "Algeo",
     "Central Medical Supplies",
     "CJ Medical",
     "Delta Surgical",
     "Harvest Healthcare",
+    "Health-Care Equipment & Supplies",
     "iQ Medical",
     "Lisclare",
     "Medserve (South West)",
@@ -6601,10 +6586,9 @@
     "Silvalea"
    ],
    "unknown": [
-    "HCE UK (Health-Care Equipment & Supplies) Ltd",
-    "Ultimate Healthcare Ltd (Millbrook, trading as Ultimate)"
+    "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)"
    ],
-   "actionableTotal": 17,
+   "actionableTotal": 15,
    "blockedReason": null,
    "deferred": null
   },
@@ -6970,10 +6954,6 @@
     {
      "supplier": "Soluvos Medical Ltd",
      "domain": null
-    },
-    {
-     "supplier": "SRA Developments",
-     "domain": null
     }
    ],
    "domainsMissing": [
@@ -6985,7 +6965,6 @@
     "Newmaw Medical Ltd",
     "Promed Limited",
     "Ryna Medical Uk Limited",
-    "SRA Developments",
     "Soluvos Medical Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -7058,6 +7037,13 @@
      "domain": "richard-wolf.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-13",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "SRA Developments",
+     "domain": "bowa-medical.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-16",
      "bucket": "refused"
     },
     {
@@ -7146,7 +7132,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 10
+    "needDomain": 9
    },
    "published": [
     "Anetic Aid Ltd",
@@ -7185,8 +7171,7 @@
     "NJ Devices Ltd t/a Ocean Med",
     "Promed Limited",
     "Ryna Medical Uk Limited",
-    "Soluvos Medical Ltd",
-    "SRA Developments"
+    "Soluvos Medical Ltd"
    ],
    "refused": [
     "Bender UK Ltd",
@@ -7199,11 +7184,12 @@
     "Novus Med Ltd",
     "OscarTech UK",
     "Richard Wolf UK",
+    "SRA Developments",
     "Surgical Instruments (dental)",
     "Xograph Healthcare Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 22,
+   "actionableTotal": 21,
    "blockedReason": null,
    "deferred": null
   },
@@ -8021,17 +8007,12 @@
      "domain": null
     },
     {
-     "supplier": "SRA Developments",
-     "domain": null
-    },
-    {
      "supplier": "Sterimed Medical Implants UK Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
     "J & M Medical",
-    "SRA Developments",
     "Sterimed Medical Implants UK Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -8083,6 +8064,13 @@
      "domain": "rbmedical.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "SRA Developments",
+     "domain": "bowa-medical.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-16",
      "bucket": "refused"
     },
     {
@@ -8180,7 +8168,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 2
    },
    "published": [
     "Conmed UK Ltd",
@@ -8209,7 +8197,6 @@
    "capturedNothingCounted": [],
    "notCrawled": [
     "J & M Medical",
-    "SRA Developments",
     "Sterimed Medical Implants UK Ltd"
    ],
    "refused": [
@@ -8220,6 +8207,7 @@
     "Eurosurgical Ltd",
     "OscarTech UK",
     "RB Medical Engineering Ltd",
+    "SRA Developments",
     "P.W.Coole & Son Limited T/A Surgical Holdings",
     "Toffeln Ltd",
     "Unisurge International Limited"
@@ -8228,7 +8216,7 @@
     "KCI Medical Limited (Solventum)",
     "Surgica Limited"
    ],
-   "actionableTotal": 13,
+   "actionableTotal": 12,
    "blockedReason": null,
    "deferred": null
   },
@@ -8318,6 +8306,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Rehabilitation Manufacturing Services",
+     "domain": "rms-rehab.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-16",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Valley Northern Ltd",
      "domain": "valleynorthern.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -8378,7 +8373,7 @@
     "rehab:walk"
    ],
    "actionable": {
-    "unresolvedNames": 3,
+    "unresolvedNames": 2,
     "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
@@ -8423,14 +8418,14 @@
     "Prism Medical UK",
     "AJ Mobility Ltd",
     "Lisclare",
+    "Rehabilitation Manufacturing Services",
     "Valley Northern Ltd"
    ],
    "unknown": [
     "The Helping Hand Company",
-    "Omnimedical Ltd",
-    "Rehabilitation Manufacturing Services ltd"
+    "Omnimedical Ltd"
    ],
-   "actionableTotal": 14,
+   "actionableTotal": 13,
    "blockedReason": null,
    "deferred": null
   },
@@ -8538,6 +8533,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Rehabilitation Manufacturing Services",
+     "domain": "rms-rehab.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-16",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Seating Matters",
      "domain": "seatingmatters.com",
      "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -8625,7 +8627,7 @@
     "rehab:walk"
    ],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
@@ -8667,16 +8669,15 @@
     "MEYRA UK LTD",
     "Pride Mobility Products Ltd",
     "R Link Ltd",
+    "Rehabilitation Manufacturing Services",
     "Seating Matters",
     "Spex UK Limited",
     "TENDERCARE LTD",
     "WHEELSHARE (LONDON) LTD",
     "William Davies Care Limited"
    ],
-   "unknown": [
-    "Rehabilitation Manufacturing Services ltd"
-   ],
-   "actionableTotal": 9,
+   "unknown": [],
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -8757,6 +8758,13 @@
      "domain": "why.lyreco.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Polyco",
+     "domain": "polycohealthline.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-06",
      "bucket": "refused"
     },
     {
@@ -8866,7 +8874,7 @@
     "skin-prep:wipe"
    ],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 7,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -8909,13 +8917,12 @@
     "Cambridge Sensors Ltd",
     "Solventum (3M Health Care)",
     "Lyreco UK Limited",
+    "Polyco",
     "Sharon Services (UK) Ltd",
     "Valley Northern Ltd"
    ],
-   "unknown": [
-    "Polyco Healthline"
-   ],
-   "actionableTotal": 14,
+   "unknown": [],
+   "actionableTotal": 13,
    "blockedReason": null,
    "deferred": null
   },
@@ -8997,6 +9004,13 @@
      "domain": "meditradeuk.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Polyco",
+     "domain": "polycohealthline.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-06",
      "bucket": "refused"
     },
     {
@@ -9114,7 +9128,7 @@
     "wound:iv"
    ],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -9154,15 +9168,14 @@
     "Global Health and Safety Ltd",
     "IMS Euro Ltd",
     "Meditrade UK Ltd",
+    "Polyco",
     "Rocialle Healthcare",
     "SP Services (UK) Ltd",
     "Steroplast Healthcare Ltd",
     "Unisurge International Limited"
    ],
-   "unknown": [
-    "Polyco Healthline Limited"
-   ],
-   "actionableTotal": 6,
+   "unknown": [],
+   "actionableTotal": 5,
    "blockedReason": null,
    "deferred": null
   },
@@ -9556,8 +9569,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "27 March 2028",
    "suppliersAwarded": 25,
-   "suppliersPublished": 7,
-   "coverage": 28.0,
+   "suppliersPublished": 6,
+   "coverage": 24.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9587,6 +9600,10 @@
      "domain": "nikkisomedical.eu"
     },
     {
+     "supplier": "Nipro Medical UK Ltd",
+     "domain": null
+    },
+    {
      "supplier": "Terumo BCT",
      "domain": null
     },
@@ -9599,6 +9616,7 @@
     "CytoSorbents Medical UK",
     "Maltron International Ltd",
     "Medica Advanced Technologies Ltd",
+    "Nipro Medical UK Ltd",
     "Terumo BCT",
     "Xtra-Med"
    ],
@@ -9695,14 +9713,13 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 2,
-    "needDomain": 5
+    "needDomain": 6
    },
    "published": [
     "B. Braun Medical",
     "Fresenius Medical Care UK",
     "Kimal PLC",
     "Medtronic",
-    "Nipro Medical Europe",
     "U-drain Ltd",
     "Valiant Medical Ltd"
    ],
@@ -9720,6 +9737,7 @@
     "Medica Advanced Technologies Ltd",
     "Nikkiso Medical",
     "Nikkiso Medical",
+    "Nipro Medical UK Ltd",
     "Terumo BCT",
     "Xtra-Med"
    ],
@@ -9734,7 +9752,7 @@
     "Vantive Limited (formerly part of Baxter Healthcare Ltd)",
     "VWS (UK) Ltd Trading As Veolia Water Technologies"
    ],
-   "actionableTotal": 13,
+   "actionableTotal": 14,
    "blockedReason": null,
    "deferred": null
   },
@@ -10960,6 +10978,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Polyco",
+     "domain": "polycohealthline.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-06",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Supermax Healthcare",
      "domain": "www.supermax.com.my",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -11004,7 +11029,7 @@
     "infection:vinyl"
    ],
    "actionable": {
-    "unresolvedNames": 5,
+    "unresolvedNames": 4,
     "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -11034,16 +11059,16 @@
    "refused": [
     "H & R Healthcare Ltd",
     "Meditrade UK Ltd",
+    "Polyco",
     "Supermax Healthcare"
    ],
    "unknown": [
     "2San Global Limited (New to the framework and NHS Supply Chain)",
     "Globus (Shetland) Ltd",
-    "Polyco Healthline",
     "Reliance Medical Ltd (New)",
     "Vernacare LTD (Robinson Healthcare Limited)"
    ],
-   "actionableTotal": 12,
+   "actionableTotal": 11,
    "blockedReason": null,
    "deferred": null
   },
@@ -12058,12 +12083,17 @@
      "domain": null
     },
     {
+     "supplier": "Varian (Siemens Healthineers)",
+     "domain": null
+    },
+    {
      "supplier": "Viewray,Inc",
      "domain": null
     }
    ],
    "domainsMissing": [
     "Accuray UK",
+    "Varian (Siemens Healthineers)",
     "Viewray,Inc"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -12125,13 +12155,13 @@
     "oncology:radio"
    ],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 3
    },
    "published": [
     "Boston Scientific",
@@ -12146,6 +12176,7 @@
    "capturedNothingCounted": [],
    "notCrawled": [
     "Accuray UK",
+    "Varian (Siemens Healthineers)",
     "Viewray,Inc"
    ],
    "refused": [
@@ -12155,9 +12186,7 @@
     "Sirtex Medical",
     "Vertec Scientific"
    ],
-   "unknown": [
-    "Varian Medical Systems UK Ltd"
-   ],
+   "unknown": [],
    "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
@@ -12441,6 +12470,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Polyco",
+     "domain": "polycohealthline.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-06",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Medline Industries",
      "domain": "medline.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -12476,7 +12512,7 @@
     "theatres:theatre"
    ],
    "actionable": {
-    "unresolvedNames": 3,
+    "unresolvedNames": 2,
     "publishedElsewhereNeedingCategory": 1,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -12498,14 +12534,14 @@
     "Leanvation"
    ],
    "refused": [
-    "Meditrade UK Ltd"
+    "Meditrade UK Ltd",
+    "Polyco"
    ],
    "unknown": [
     "Globus (Shetland)",
-    "Polyco Healthline",
     "Semperit Investment"
    ],
-   "actionableTotal": 5,
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },
@@ -13337,10 +13373,6 @@
      "domain": null
     },
     {
-     "supplier": "Medecon Healthcare UK",
-     "domain": null
-    },
-    {
      "supplier": "Penlon",
      "domain": null
     },
@@ -13358,7 +13390,6 @@
     "Ccmed Ltd",
     "Gvs Filter Technology UK Ltd",
     "Hamilton Sales And Service UK Ltd",
-    "Medecon Healthcare UK",
     "Penlon",
     "Sai Quality Fruits And Veg Limited",
     "Vyaire Medical Products Limited"
@@ -13440,6 +13471,13 @@
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-08",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Medecon Healthcare UK",
+     "domain": "medecon.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
+     "checked": "2026-09-16",
      "bucket": "refused"
     },
     {
@@ -13557,7 +13595,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 8
+    "needDomain": 7
    },
    "published": [],
    "publishedElsewhere": [
@@ -13600,7 +13638,6 @@
     "Ccmed Ltd",
     "Gvs Filter Technology UK Ltd",
     "Hamilton Sales And Service UK Ltd",
-    "Medecon Healthcare UK",
     "Penlon",
     "Sai Quality Fruits And Veg Limited",
     "Vyaire Medical Products Limited"
@@ -13617,6 +13654,7 @@
     "GenX MediCare Ltd",
     "Insight Medical Products Limited",
     "Karl Storz UK",
+    "Medecon Healthcare UK",
     "OscarTech UK",
     "Pall Europe Limited",
     "Richardson Healthcare",
@@ -13625,7 +13663,7 @@
    "unknown": [
     "Verathon Medical"
    ],
-   "actionableTotal": 39,
+   "actionableTotal": 38,
    "blockedReason": null,
    "deferred": null
   },
@@ -14276,10 +14314,6 @@
     {
      "supplier": "SAI Medical Solutions Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Winners First Trading Limited",
-     "domain": null
     }
    ],
    "domainsMissing": [
@@ -14289,8 +14323,7 @@
     "Lenience UK Ltd",
     "Pearsalls Ltd",
     "R&D Surgical Ltd",
-    "SAI Medical Solutions Ltd",
-    "Winners First Trading Limited"
+    "SAI Medical Solutions Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -14348,6 +14381,13 @@
      "domain": "www.terumo.com",
      "reason": "the site's WordPress API returned HTTP 403; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-20",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Winners First Trading Limited",
+     "domain": "winners1trading.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-16",
      "bucket": "refused"
     },
     {
@@ -14416,7 +14456,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 8
+    "needDomain": 7
    },
    "published": [],
    "publishedElsewhere": [
@@ -14450,8 +14490,7 @@
     "Lenience UK Ltd",
     "Pearsalls Ltd",
     "R&D Surgical Ltd",
-    "SAI Medical Solutions Ltd",
-    "Winners First Trading Limited"
+    "SAI Medical Solutions Ltd"
    ],
    "refused": [
     "Baxter Healthcare Ltd",
@@ -14461,7 +14500,8 @@
     "Solventum (3M Health Care)",
     "OscarTech UK",
     "Richardson Healthcare",
-    "Terumo Aortic"
+    "Terumo Aortic",
+    "Winners First Trading Limited"
    ],
    "unknown": [
     "Chemence Ltd",
@@ -14469,7 +14509,7 @@
     "Meril UK Ltd",
     "T.J Smith & Nephew Ltd"
    ],
-   "actionableTotal": 31,
+   "actionableTotal": 30,
    "blockedReason": null,
    "deferred": null
   },
@@ -17369,16 +17409,11 @@
     {
      "supplier": "Triple Point Lease Partners",
      "domain": null
-    },
-    {
-     "supplier": "Medecon Healthcare UK",
-     "domain": null
     }
    ],
    "domainsMissing": [
     "CHG Meridian UK Limited",
     "De Lage Landen Leasing Limited",
-    "Medecon Healthcare UK",
     "Room Twelve Limited",
     "Siemens Financial Services",
     "Solutions Asset Finance Limited",
@@ -17391,6 +17426,13 @@
      "domain": "tpleasing.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Medecon Healthcare UK",
+     "domain": "medecon.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
+     "checked": "2026-09-16",
      "bucket": "refused"
     },
     {
@@ -17417,7 +17459,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 7
+    "needDomain": 6
    },
    "published": [],
    "publishedElsewhere": [
@@ -17431,18 +17473,18 @@
     "Room Twelve Limited",
     "Siemens Financial Services",
     "Solutions Asset Finance Limited",
-    "Triple Point Lease Partners",
-    "Medecon Healthcare UK"
+    "Triple Point Lease Partners"
    ],
    "refused": [
     "TP Leasing Limited",
+    "Medecon Healthcare UK",
     "Surgical Instrument Group Holdings Ltd"
    ],
    "unknown": [
     "GE Capital Equipment Finance Limited",
     "GENMED.ME LIMITED"
    ],
-   "actionableTotal": 10,
+   "actionableTotal": 9,
    "blockedReason": null,
    "deferred": null
   },
@@ -18990,6 +19032,89 @@
    "deferred": null
   },
   {
+   "framework": "Flexible Endoscopes and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
+   "category": "Diagnostic Equipment and Services",
+   "ends": "31 March 2028",
+   "suppliersAwarded": 5,
+   "suppliersPublished": 0,
+   "coverage": 0.0,
+   "nhsscCategory": "Diagnostic Equipment and Services",
+   "inScope": true,
+   "outOfScopeReason": null,
+   "state": "UNMAPPED",
+   "speciality": [],
+   "crawlWorklist": [
+    {
+     "supplier": "Pentax Medical",
+     "domain": null
+    }
+   ],
+   "domainsMissing": [
+    "Pentax Medical"
+   ],
+   "duplicateOfCapturedSupplier": [],
+   "refusedSuppliers": [
+    {
+     "supplier": "Fujifilm Healthcare UK",
+     "domain": "fujifilm.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Karl Storz UK",
+     "domain": "karlstorz.com",
+     "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-08",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Richard Wolf UK",
+     "domain": "richard-wolf.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-13",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Olympus (KeyMed)",
+     "domain": "www.olympus.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    }
+   ],
+   "route": "no Hub speciality mapped to this framework",
+   "catsInScope": [],
+   "actionable": {
+    "unresolvedNames": 0,
+    "publishedElsewhereNeedingCategory": 1,
+    "heldNeedingCategory": 0,
+    "capturedNothingCounted": 0,
+    "duplicateOfCapturedSupplier": 0,
+    "crawlable": 0,
+    "needDomain": 1
+   },
+   "published": [],
+   "publishedElsewhere": [
+    "Olympus (KeyMed)"
+   ],
+   "heldOnly": [],
+   "capturedNothingCounted": [],
+   "notCrawled": [
+    "Pentax Medical"
+   ],
+   "refused": [
+    "Fujifilm Healthcare UK",
+    "Karl Storz UK",
+    "Richard Wolf UK"
+   ],
+   "unknown": [],
+   "actionableTotal": 2,
+   "blockedReason": null,
+   "deferred": null
+  },
+  {
    "framework": "Medical Chart Paper and Ultrasound Film",
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/medical-chart-paper-and-ultrasound-film/",
    "category": "Medical and Surgical Consumables",
@@ -19081,10 +19206,15 @@
     {
      "supplier": "Raysearch UK Ltd",
      "domain": null
+    },
+    {
+     "supplier": "Varian (Siemens Healthineers)",
+     "domain": null
     }
    ],
    "domainsMissing": [
-    "Raysearch UK Ltd"
+    "Raysearch UK Ltd",
+    "Varian (Siemens Healthineers)"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -19106,13 +19236,13 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 2
    },
    "published": [],
    "publishedElsewhere": [
@@ -19122,14 +19252,13 @@
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Raysearch UK Ltd"
+    "Raysearch UK Ltd",
+    "Varian (Siemens Healthineers)"
    ],
    "refused": [
     "Oncology Systems Ltd (OSL)"
    ],
-   "unknown": [
-    "Varian Medical Systems UK Ltd"
-   ],
+   "unknown": [],
    "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
@@ -19624,6 +19753,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Polyco",
+     "domain": "polycohealthline.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-06",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Diversey",
      "domain": "solenis.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -19639,7 +19775,7 @@
     "facilities:washroom"
    ],
    "actionable": {
-    "unresolvedNames": 43,
+    "unresolvedNames": 42,
     "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -19672,7 +19808,8 @@
     "Biotechnics Ltd",
     "Central Management Catalogue Agency UK Ltd T/A CMCA(UK)",
     "Lyreco UK Limited",
-    "Nobisco"
+    "Nobisco",
+    "Polyco"
    ],
    "unknown": [
     "2 San Global",
@@ -19704,7 +19841,6 @@
     "Orange Technology Ltd",
     "Parc Supplies",
     "Pattersons (Bristol) Ltd",
-    "Polyco Healthline",
     "Primeline Sales & Marketing UK",
     "PVA Hygiene",
     "Ramon Holdings Ltd",
@@ -19719,7 +19855,7 @@
     "Tennant UK",
     "Thomas Stoner Supplies Ltd"
    ],
-   "actionableTotal": 46,
+   "actionableTotal": 45,
    "blockedReason": null,
    "deferred": null
   },
@@ -20052,6 +20188,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Polyco",
+     "domain": "polycohealthline.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-06",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Sharon Services (UK) Ltd",
      "domain": "sharonservices.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -20100,7 +20243,7 @@
     "workwear:scrubs"
    ],
    "actionable": {
-    "unresolvedNames": 19,
+    "unresolvedNames": 18,
     "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -20127,6 +20270,7 @@
     "Attends Ltd",
     "Lyreco UK Limited",
     "MIP UK",
+    "Polyco",
     "Sharon Services (UK) Ltd",
     "Toffeln Ltd",
     "Valley Northern Ltd"
@@ -20145,14 +20289,13 @@
     "Mi Hub Ltd",
     "Northumbria Healthcare Trust",
     "PLS Medical Ltd",
-    "Polyco Healthline Ltd",
     "Rathin Tex Ltd",
     "Robson Brown International Ltd",
     "Spentex BCA Limited",
     "The Rizues Ltd",
     "Workwear Express Ltd"
    ],
-   "actionableTotal": 24,
+   "actionableTotal": 23,
    "blockedReason": null,
    "deferred": null
   },
@@ -20899,6 +21042,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Polyco",
+     "domain": "polycohealthline.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-06",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Abena UK Limited",
      "domain": "www.abena.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -20916,7 +21066,7 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "actionable": {
-    "unresolvedNames": 2,
+    "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -20946,13 +21096,13 @@
     "Banner Group Limited",
     "Lyreco UK Limited",
     "Meditrade UK Ltd",
-    "Nobisco"
+    "Nobisco",
+    "Polyco"
    ],
    "unknown": [
-    "Polyco Healthline",
     "UKR"
    ],
-   "actionableTotal": 12,
+   "actionableTotal": 11,
    "blockedReason": null,
    "deferred": null
   },
@@ -21176,6 +21326,13 @@
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
+     "supplier": "Polyco",
+     "domain": "polycohealthline.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-06",
+     "bucket": "refused"
+    },
+    {
      "supplier": "GenX MediCare Ltd",
      "domain": "genxmedicare.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -21214,7 +21371,7 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -21237,14 +21394,13 @@
     "Paramount Packaging (UK) Limited"
    ],
    "refused": [
+    "Polyco",
     "GenX MediCare Ltd",
     "Genmed Enterprises Ltd",
     "Valley Northern Ltd"
    ],
-   "unknown": [
-    "Polyco Healthline Limited"
-   ],
-   "actionableTotal": 8,
+   "unknown": [],
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
