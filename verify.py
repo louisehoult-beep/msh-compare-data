@@ -5332,11 +5332,10 @@ def check_calendar(doc, specmap_unused=None):
     link the calendar invented.
 
     A dead link on a members' page is worse than no link, and it is the failure this
-    build already hit once: pages-map.json used to call this speciality
-    `therapies-physio-and-ot` (renamed 16/09/2026 to `patient-handling` to match) while
-    the page itself had already been renamed and now lives at /patient-handling/, so a
-    URL built from the internal slug 404'd. The builder now resolves permalinks from the
-    live site; this check makes sure nobody quietly reintroduces the shortcut."""
+    build already hit once: pages-map.json calls a speciality `therapies-physio-and-ot`
+    but that page was renamed and lives at /patient-handling/, so a URL built from the
+    slug 404'd. The builder now resolves permalinks from the live site; this check makes
+    sure nobody quietly reintroduces the shortcut."""
     if doc is None:
         return
 
@@ -5632,27 +5631,44 @@ ABSOLUTE_OK = (
 )
 
 
-def check_absolutising_language(files):
-    """Fail when published prose states a scoring threshold more absolutely
-    than the guidance behind it does."""
-    for path in files:
+_SENTENCE_RE = re.compile(r"[^.!?\n]{0,300}[.!?]")
+
+
+def _iter_prose_sentences(files_or_sentences):
+    """Split prose files into sentences once and yield (path, sentence) pairs.
+
+    Accepts either a list of file paths (splits on-demand, for direct callers
+    like the in-process unit tests) or a pre-built list of (path, sentence)
+    tuples (for the main() path, which passes both checks the same sentence
+    list so the files are read and split exactly once).
+    """
+    if files_or_sentences and isinstance(files_or_sentences[0], tuple):
+        yield from files_or_sentences
+        return
+    for path in files_or_sentences:
         try:
             text = open(path, encoding="utf-8", errors="replace").read()
         except Exception:
             continue
-        for m in re.finditer(r"[^.!?\n]{0,300}[.!?]", text):
-            s = m.group(0)
-            if not (ABSOLUTE.search(s) and SCORING.search(s) and PERCENT.search(s)):
-                continue
-            if any(ok.lower() in s.lower() for ok in ABSOLUTE_OK):
-                continue
-            word = ABSOLUTE.search(s).group(0)
-            FAIL("language",
-                 "%s states a scoring threshold absolutely (\"%s\"): %s "
-                 "— check the source's own wording before publishing this. A "
-                 "guidance that says \"should\" is not a cap, and a member who "
-                 "quotes it as one in a tender meeting gets corrected in public."
-                 % (path, word, s.strip()[:180]))
+        for m in _SENTENCE_RE.finditer(text):
+            yield path, m.group(0)
+
+
+def check_absolutising_language(files_or_sentences):
+    """Fail when published prose states a scoring threshold more absolutely
+    than the guidance behind it does."""
+    for path, s in _iter_prose_sentences(files_or_sentences):
+        if not (ABSOLUTE.search(s) and SCORING.search(s) and PERCENT.search(s)):
+            continue
+        if any(ok.lower() in s.lower() for ok in ABSOLUTE_OK):
+            continue
+        word = ABSOLUTE.search(s).group(0)
+        FAIL("language",
+             "%s states a scoring threshold absolutely (\"%s\"): %s "
+             "— check the source's own wording before publishing this. A "
+             "guidance that says \"should\" is not a cap, and a member who "
+             "quotes it as one in a tender meeting gets corrected in public."
+             % (path, word, s.strip()[:180]))
 
 
 # --------------------------------------------------------------------------
@@ -5788,28 +5804,22 @@ DEADLINE = re.compile(
     r"deadline|submission date|bids? (?:due|close)|tender period)\b", re.I)
 
 
-def check_notice_citations(files):
+def check_notice_citations(files_or_sentences):
     """A bare Find a Tender notice number published next to a date, with no OCID
     beside it, cannot be checked for supersession by anyone reading it."""
-    for path in files:
-        try:
-            text = open(path, encoding="utf-8", errors="replace").read()
-        except Exception:
+    for path, s in _iter_prose_sentences(files_or_sentences):
+        hit = FTS_NOTICE.search(s)
+        if not hit or not DEADLINE.search(s):
             continue
-        for m in re.finditer(r"[^.!?\n]{0,300}[.!?]", text):
-            s = m.group(0)
-            hit = FTS_NOTICE.search(s)
-            if not hit or not DEADLINE.search(s):
-                continue
-            if "ocds-" in s:
-                continue
-            FAIL("notice",
-                 "%s cites Find a Tender notice %s next to a date with no OCID "
-                 "beside it: %s — Find a Tender supersedes notices and marks the "
-                 "old one, so a bare identifier cannot be checked. Cite the OCID, "
-                 "which is version-independent, or confirm this release is the "
-                 "latest and say so."
-                 % (path, hit.group(1), s.strip()[:170]))
+        if "ocds-" in s:
+            continue
+        FAIL("notice",
+             "%s cites Find a Tender notice %s next to a date with no OCID "
+             "beside it: %s — Find a Tender supersedes notices and marks the "
+             "old one, so a bare identifier cannot be checked. Cite the OCID, "
+             "which is version-independent, or confirm this release is the "
+             "latest and say so."
+             % (path, hit.group(1), s.strip()[:170]))
 
 
 def main():
@@ -5965,8 +5975,9 @@ def main():
         ("prep-config.json", "compare-issues.json", "supplier-seed.json",
          "supplier-index.json", "interview-prep.json")
         if os.path.exists(os.path.join(DATA, n))]
-    check_absolutising_language(prose)
-    check_notice_citations(prose)
+    prose_sentences = list(_iter_prose_sentences(prose))
+    check_absolutising_language(prose_sentences)
+    check_notice_citations(prose_sentences)
     check_framework_calendar_agreement(load("frameworks.json"),
                                        load("nhssc-procurement-calendar.json"))
 
