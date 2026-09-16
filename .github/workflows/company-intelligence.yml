@@ -160,13 +160,31 @@ jobs:
               pushed=1
               break
             fi
-            echo "push rejected (another writer landed first). Rebasing and re-running the gate, attempt $attempt of 5."
-            # -X theirs: during a REBASE ours/theirs are inverted, so this means "this run's
-            # freshly regenerated file wins any conflicting hunk", while the other writer's
-            # non-conflicting changes are kept. Without it a conflict stops the rebase and
-            # the whole run's work is thrown away (11/08/2026, company-intelligence #2).
-            git pull --rebase -X theirs --autostash
-            python3 verify.py || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            echo "push rejected (another writer landed first). Re-fetching and re-merging, attempt $attempt of 5."
+            # Do NOT use `-X theirs` here. On 15/09/2026 it silently discarded
+            # curated additions (Ovidius links) that a concurrent session had just
+            # landed — the hub-bot had read the seed before those landed, and `-X
+            # theirs` chose the hub-bot's stale version over the fresh one on main.
+            # (11/08/2026 context: that run used `-X theirs` on a full rebase, which
+            # is now moot because the rebase below only applies to files other than
+            # supplier-seed.json.)
+            #
+            # For supplier-seed.json specifically: fetch the latest origin/main,
+            # then let scripts/merge_seed_on_retry.py produce a proper field-level
+            # merge (CI-owned fields from HEAD; curated fields preserved from
+            # origin/main; new suppliers from either side kept). This is the fix for
+            # the ^o96/^o478 class of data-loss bug on this file.
+            git fetch origin
+            python3 scripts/merge_seed_on_retry.py || { echo "SEED MERGE FAILED - refusing to push"; exit 1; }
+            # Rebase everything else onto origin/main without a strategy flag —
+            # if another file conflicts we want a loud failure, not a silent wrong merge.
+            # supplier-seed.json is excluded because we just merged it above.
+            git add data/supplier-seed.json
+            if ! git rebase origin/main; then
+              echo "REBASE CONFLICT on a non-seed file - refusing to push. Abort and re-run."
+              exit 1
+            fi
+            python3 verify.py || { echo "GATE FAILED after merge/rebase - refusing to push"; exit 1; }
             sleep 5
           done
           if [ "$pushed" -ne 1 ]; then
