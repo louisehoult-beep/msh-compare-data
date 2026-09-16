@@ -20,11 +20,11 @@
   "derivationRule": "Every row is derived, so every row carries the rule it was derived under in its own `rule` field and a `source` link to the record it came from. No date is estimated, averaged, or rolled forward from a previous year.",
   "omittedCounts": {
    "frameworks": {
-    "published": 116,
+    "published": 117,
     "omitted": {
      "no_end_date": 5,
      "unparsed_date": 0,
-     "too_old": 111
+     "too_old": 112
     }
    },
    "awareness": {
@@ -35,12 +35,12 @@
     }
    },
    "events": {
-    "published": 76,
+    "published": 75,
     "omitted": {
      "published_as_a_body": 40,
      "published_as_undated": 5,
      "past": 21,
-     "published_with_no_speciality": 19
+     "published_with_no_speciality": 18
     }
    },
    "contracts": {
@@ -55,7 +55,7 @@
    "deadlines": {
     "published": 0,
     "omitted": {
-     "no_live_deadline": 46
+     "no_live_deadline": 48
     }
    },
    "bodies": {
@@ -77,13 +77,7 @@
    "contract-expiry",
    "action-deadline"
   ],
-  "undatedRule": "`bodies` and `undatedEvents` carry no date and are NOT part of the dated index. They are published so that a body or a recurring conference the Hub knows about is never silently dropped for the one reason it can never have - a date the owner has not stated.",
-  "lastPruned": "2026-09-16",
-  "lastPrunedCounts": {
-   "dropped": 1,
-   "flaggedPast": 0,
-   "remaining": 319
-  }
+  "undatedRule": "`bodies` and `undatedEvents` carry no date and are NOT part of the dated index. They are published so that a body or a recurring conference the Hub knows about is never silently dropped for the one reason it can never have - a date the owner has not stated."
  },
  "specialities": [
   {
@@ -227,6 +221,11 @@
    "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/pathology-and-laboratory-medicine/"
   },
   {
+   "slug": "patient-handling",
+   "name": "Patient Moving and Handling",
+   "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/patient-handling/"
+  },
+  {
    "slug": "pharmacy-and-medicines",
    "name": "Pharmacy and Medicines",
    "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/pharmacy-and-medicines/"
@@ -275,11 +274,6 @@
    "slug": "theatres-and-surgical",
    "name": "Theatres and Surgical",
    "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/theatres-and-surgical/"
-  },
-  {
-   "slug": "patient-handling",
-   "name": "Patient Moving and Handling",
-   "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/patient-handling/"
   },
   {
    "slug": "tissue-viability-and-wound-care",
@@ -435,6 +429,41 @@
   }
  ],
  "entries": [
+  {
+   "id": "ev-bapm-annual-conference-2026",
+   "type": "event",
+   "title": "BAPM Annual Conference 2026",
+   "date": "2026-09-15",
+   "endDate": "2026-09-17",
+   "past": false,
+   "location": "University of Nottingham",
+   "audience": "Perinatal and neonatal medicine. Workshops 15 Sep, main conference 16-17 Sep",
+   "owner": null,
+   "source": "https://www.bapm.org/events/bapm-annual-conference-2026",
+   "verified": "2026-08",
+   "rule": "Conference and exhibition dates as published by the organiser.",
+   "specialities": [
+    "maternity-and-neonatal"
+   ],
+   "links": [
+    {
+     "label": "Maternity and Neonatal",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/maternity-and-neonatal/",
+     "kind": "hub"
+    },
+    {
+     "label": "The Calendar",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/calendar/",
+     "kind": "hub"
+    },
+    {
+     "label": "Event site",
+     "url": "https://www.bapm.org/events/bapm-annual-conference-2026",
+     "kind": "source"
+    }
+   ],
+   "note": "University of Nottingham. Perinatal and neonatal medicine. Workshops 15 Sep, main conference 16-17 Sep"
+  },
   {
    "id": "ev-convenzis-path360-scotland-advancing-healthcare-sc",
    "type": "event",
@@ -849,45 +878,17 @@
    "note": "ExCeL London. Digital health / NHS technology"
   },
   {
-   "id": "ev-rcni-nursing-careers-jobs-fair-manchester-2026",
-   "type": "event",
-   "title": "Nursing Careers & Jobs Fair – Manchester",
-   "date": "2026-09-29",
-   "endDate": null,
-   "past": false,
-   "location": "Lancashire Cricket Ground, Manchester",
-   "audience": "Nursing staff — leadership, revalidation, interviews, career development, independent prescribing, COPD care, senior nursing career pathways",
-   "owner": null,
-   "source": "https://rcninews.rcn.org.uk/c/12MkUkBH1Eyy7Zs770iAQ7EoCraM",
-   "verified": "2026-09",
-   "rule": "Conference and exhibition dates as published by the organiser.",
-   "specialities": [],
-   "links": [
-    {
-     "label": "The Calendar",
-     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/calendar/",
-     "kind": "hub"
-    },
-    {
-     "label": "Event site",
-     "url": "https://rcninews.rcn.org.uk/c/12MkUkBH1Eyy7Zs770iAQ7EoCraM",
-     "kind": "source"
-    }
-   ],
-   "note": "Lancashire Cricket Ground, Manchester. Nursing staff — leadership, revalidation, interviews, career development, independent prescribing, COPD care, senior nursing career pathways"
-  },
-  {
    "id": "ev-rcni-careers-fair-manchester-2026",
    "type": "event",
    "title": "RCNi Nursing Careers and Jobs Fair, Manchester 2026",
    "date": "2026-09-29",
    "endDate": null,
    "past": false,
-   "location": "Manchester",
-   "audience": "Nurses and nursing students; NHS and independent-sector employers exhibiting",
+   "location": "Lancashire Cricket Ground, Manchester",
+   "audience": "Nurses and nursing students; NHS and independent-sector employers exhibiting. Sessions on leadership, revalidation, interviews, career development, independent prescribing, COPD care and senior nursing career pathways.",
    "owner": null,
    "source": "https://www.careersandjobsfair.com/",
-   "verified": "2026-07",
+   "verified": "2026-09",
    "rule": "Conference and exhibition dates as published by the organiser.",
    "specialities": [],
    "links": [
@@ -902,7 +903,7 @@
      "kind": "source"
     }
    ],
-   "note": "Manchester. Nurses and nursing students; NHS and independent-sector employers exhibiting"
+   "note": "Lancashire Cricket Ground, Manchester. Nurses and nursing students; NHS and independent-sector employers exhibiting. Sessions on leadership, revalidation, interviews, career development, independent prescribing, COPD care and senior nursing career pathways"
   },
   {
    "id": "aw-world-heart-day-2026",
@@ -7664,6 +7665,33 @@
     {
      "label": "Contract launch brief",
      "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/ear-nose-and-throat-ent-endoscopes-and-associated-options-and-related-services/",
+     "kind": "source"
+    }
+   ],
+   "note": "Expiry date. Note it and work backwards."
+  },
+  {
+   "id": "fw-framework-end-flexible-endoscopes-and-associated-options-and-related-services",
+   "type": "framework-end",
+   "title": "Framework expires: Flexible Endoscopes and Associated Options and Related Services",
+   "date": "2028-03-31",
+   "past": false,
+   "category": "Diagnostic Equipment and Services",
+   "reference": "2021/S 000-007768",
+   "supplierCount": 5,
+   "owner": "NHS Supply Chain",
+   "source": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
+   "rule": "Taken verbatim from the framework's own NHS Supply Chain contract launch brief. Frameworks with no stated ends date are omitted, never estimated.",
+   "specialities": [],
+   "links": [
+    {
+     "label": "Framework Hub",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/frameworks/",
+     "kind": "hub"
+    },
+    {
+     "label": "Contract launch brief",
+     "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
      "kind": "source"
     }
    ],
