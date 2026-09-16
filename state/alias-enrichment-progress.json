@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-15",
+ "lastRun": "2026-09-16",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -342,7 +342,19 @@
   "Materialise",
   "MC Tissue",
   "McKillop Dental Equipment",
-  "MDI Medical Ltd"
+  "MDI Medical Ltd",
+  "MDSAS",
+  "Med Matters Ltd",
+  "Medacta",
+  "MEDACX Limited",
+  "Medartis Ltd",
+  "Medasil Surgical Ltd",
+  "Medezine Ltd",
+  "Medfac UK Ltd",
+  "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
+  "medi UK",
+  "Medica Advanced Technologies Ltd",
+  "Medical Access Ltd"
  ],
  "refusals": [
   {
@@ -749,6 +761,26 @@
    "name": "MDI Medical Ltd",
    "reason": "NHS Supply Chain's own contract launch brief for Instrument Decontamination and Accessories names this supplier verbatim as \"MDI Medical Ltd\" — identical to the display name. Companies House shows multiple similarly named but legally distinct entities (MDI Medical Limited, Ireland OE032148; MDI Medical (N.I.) Limited NI023111) with no way to confirm which is the NHS Supply Chain contracted entity, so no additional alias was added to avoid misattribution.",
    "date": "2026-09-15"
+  },
+  {
+   "name": "Med Matters Ltd",
+   "reason": "No usable alias found. medmatters.co.uk did not return fetchable content (blocked/empty on repeated attempts). Companies House 07773448 shows the exact recorded name only, no previous or trading names. Speciality left empty: company's own site could not be read to confirm clinical scope in its own words.",
+   "date": "2026-09-16"
+  },
+  {
+   "name": "Medfac UK Ltd",
+   "reason": "Did not add 'Kinetec Medical Products UK Ltd' despite NHS Supply Chain's own brief wording for the sister record. Companies House shows Kinetec Medical Products UK Limited (09748313, Wellingborough) is a SEPARATE, still-active legal entity from Medfac UK Ltd (08608060, London) -- not a former name of it. Adding it as an alias would misattribute Kinetec Medical Products UK Limited's own press to this supplier. medfacorthotics.co.uk (the group's orthotics brand site) does not itself confirm it is operated by this exact legal entity, so 'MedFac Orthotics' was not added either.",
+   "date": "2026-09-16"
+  },
+  {
+   "name": "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
+   "reason": "Same reasoning as 'Medfac UK Ltd': Companies House confirms Kinetec Medical Products UK Limited (09748313) is a distinct, still-active company, not a legal predecessor of Medfac UK Ltd (08608060) -- despite this record's own name and the NHS Supply Chain brief carrying the 'previously Kinetec...' wording. No alias added to avoid attributing Kinetec's own coverage to this supplier.",
+   "date": "2026-09-16"
+  },
+  {
+   "name": "Medica Advanced Technologies Ltd",
+   "reason": "Speciality left empty: Companies House 14440401 confirms the legal name only (used for the Ltd/Limited alias). Could not confirm this UK entity has its own website stating clinical scope in plain terms -- the CRRT/renal replacement therapy detail found was on Medica S.p.A.'s own international site, which is not confirmed as the same legal entity, so it was not used as the specialities source.",
+   "date": "2026-09-16"
   }
  ],
  "sources": {
