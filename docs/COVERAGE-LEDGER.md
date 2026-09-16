@@ -51,7 +51,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Pressure Area Care and Patient Handling | handling | 53 | 25 | 47.2% | 15 | 26 | STARTED |
 | Surgical Instruments | surgical | 50 | 11 | 22.0% | 21 | 23 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 9 | 20.9% | 21 | 21 | STARTED |
-| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 7 | 18.9% | 11 | 27 | STARTED |
+| Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 8 | 21.6% | 10 | 27 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 18 | 16 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 8 | 22.9% | 16 | 16 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 10 | 30.3% | 12 | 19 | STARTED |
