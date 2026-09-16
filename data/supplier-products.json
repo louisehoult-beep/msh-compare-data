@@ -434112,6 +434112,11 @@
    "domain": "hillrom.co.uk",
    "reason": "verified 15/09/2026 this is not a crawler-side parsing bug: hillrom.co.uk 301-redirects to www.hillrom.co.uk, which 301-redirects again to hillrom.baxter.eu (the actual current Hillrom site, confirmed by curl -L) — a Drupal 10 site, not WordPress, so /wp-json/wp/v2/types returns that page's HTML and the crawler's JSON parse correctly fails on it (reproduced: 'Expecting value: line 3 column 1 (char 4)'). hillrom.baxter.eu's own sitemap.xml (1,284,294 bytes, checked directly) carries only 2 URLs under /product-category or /products/ across its whole EN-GB section — too few to call a catalogue by this crawler's own bar. A genuine no-catalogue site, not a bug or a block.",
    "checked": "2026-09-15"
+  },
+  "Rehabilitation Manufacturing Services": {
+   "domain": "rms-rehab.co.uk",
+   "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+   "checked": "2026-09-16"
   }
  }
 }
