@@ -48,7 +48,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 19 | 38 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 10 | 18.5% | 8 | 43 | STARTED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 11 | 20.8% | 27 | 21 | STARTED |
-| Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 16 | 26 | STARTED |
+| Pressure Area Care and Patient Handling | handling | 53 | 24 | 45.3% | 17 | 25 | STARTED |
 | Surgical Instruments | surgical | 50 | 11 | 22.0% | 21 | 23 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 9 | 20.9% | 22 | 20 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 7 | 18.9% | 11 | 27 | STARTED |

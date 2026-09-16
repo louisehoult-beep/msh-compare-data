@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 101,
   "supplierNamesUnresolved": 445,
-  "inScopeSuppliersNeedingCrawl": 440,
-  "inScopeSuppliersNeedingDomain": 404,
-  "suppliersRefused": 411,
+  "inScopeSuppliersNeedingCrawl": 441,
+  "inScopeSuppliersNeedingDomain": 405,
+  "suppliersRefused": 410,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -6331,9 +6331,15 @@
     {
      "supplier": "Wealden Rehab",
      "domain": "wealdenrehab.com"
+    },
+    {
+     "supplier": "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)",
+     "domain": null
     }
    ],
-   "domainsMissing": [],
+   "domainsMissing": [
+    "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)"
+   ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
@@ -6383,13 +6389,6 @@
      "domain": "lisclare.com",
      "reason": "the site's WordPress API could not be read (<urlopen error timed out>); the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-13",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Caversham Health",
-     "domain": "cavershamhealth.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; the Wix products sitemap carries 1 product URL(s), too few to call a catalogue",
-     "checked": "2026-09-15",
      "bucket": "refused"
     },
     {
@@ -6537,7 +6536,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 0
+    "needDomain": 1
    },
    "published": [
     "Accora",
@@ -6584,7 +6583,9 @@
     "Wealden Rehab"
    ],
    "capturedNothingCounted": [],
-   "notCrawled": [],
+   "notCrawled": [
+    "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)"
+   ],
    "refused": [
     "Algeo",
     "Central Medical Supplies",
@@ -6593,7 +6594,6 @@
     "Harvest Healthcare",
     "iQ Medical",
     "Lisclare",
-    "Caversham Health",
     "Medserve (South West)",
     "MIP UK",
     "Montcalm International",
@@ -6604,7 +6604,7 @@
     "HCE UK (Health-Care Equipment & Supplies) Ltd",
     "Ultimate Healthcare Ltd (Millbrook, trading as Ultimate)"
    ],
-   "actionableTotal": 16,
+   "actionableTotal": 17,
    "blockedReason": null,
    "deferred": null
   },
