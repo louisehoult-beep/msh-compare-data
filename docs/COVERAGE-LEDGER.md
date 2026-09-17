@@ -47,7 +47,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Urology and Bowel Management | continence | 57 | 17 | 29.8% | 30 | 32 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 19 | 38 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 10 | 18.5% | 8 | 43 | STARTED |
-| Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 11 | 20.8% | 27 | 21 | STARTED |
+| Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 15 | 28.3% | 19 | 25 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 25 | 47.2% | 15 | 26 | STARTED |
 | Surgical Instruments | surgical | 50 | 11 | 22.0% | 21 | 23 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 9 | 20.9% | 21 | 21 | STARTED |

@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-16",
-  "differentiator.json published": 35073,
-  "differentiator.json held": 50854
+  "differentiator.json published": 35169,
+  "differentiator.json held": 51157
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 438,
-  "inScopeSuppliersNeedingCrawl": 430,
-  "inScopeSuppliersNeedingDomain": 396,
-  "suppliersRefused": 419,
+  "inScopeSuppliersNeedingCrawl": 422,
+  "inScopeSuppliersNeedingDomain": 385,
+  "suppliersRefused": 423,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 2,
@@ -5934,8 +5934,8 @@
    "category": "Medical Technology",
    "ends": "2 November 2027",
    "suppliersAwarded": 53,
-   "suppliersPublished": 11,
-   "coverage": 20.8,
+   "suppliersPublished": 15,
+   "coverage": 28.3,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -5949,24 +5949,20 @@
      "domain": "altomed.com"
     },
     {
-     "supplier": "Sense Medical Limited",
-     "domain": "sensemedical.co.uk"
-    },
-    {
      "supplier": "Andersen Caledonia Ltd",
-     "domain": null
+     "domain": "andersencaledonia.com"
     },
     {
-     "supplier": "Associated Optical Products",
-     "domain": null
+     "supplier": "Innovant Healthcare Limited",
+     "domain": "innovanthealthcare.co.uk"
     },
     {
-     "supplier": "Beaver Visitec International Sales Ltd",
-     "domain": null
+     "supplier": "Johnson & Johnson Surgical Vision",
+     "domain": "jnjvisionpro.com"
     },
     {
-     "supplier": "Daybreak Medical Ltd",
-     "domain": null
+     "supplier": "Scope Ophthalmics",
+     "domain": "scopeeyecare.com"
     },
     {
      "supplier": "Duckworth & Kent Ltd",
@@ -5977,23 +5973,7 @@
      "domain": null
     },
     {
-     "supplier": "Innovant Healthcare Limited",
-     "domain": null
-    },
-    {
      "supplier": "Instinctive Limited",
-     "domain": null
-    },
-    {
-     "supplier": "Johnson & Johnson Surgical Vision",
-     "domain": null
-    },
-    {
-     "supplier": "Lenstec (Barbados) Inc",
-     "domain": null
-    },
-    {
-     "supplier": "Litechnica Ltd",
      "domain": null
     },
     {
@@ -6005,40 +5985,17 @@
      "domain": null
     },
     {
-     "supplier": "Scope Ophthalmics",
-     "domain": null
-    },
-    {
-     "supplier": "Sight Sciences UK Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Vision Matrix",
-     "domain": null
-    },
-    {
-     "supplier": "Vision Pharmaceuticals Ltd T/A Spectrum",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Andersen Caledonia Ltd",
-    "Associated Optical Products",
-    "Beaver Visitec International Sales Ltd",
-    "Daybreak Medical Ltd",
     "Duckworth & Kent Ltd",
     "EziDrops Ltd",
-    "Innovant Healthcare Limited",
     "Instinctive Limited",
-    "Johnson & Johnson Surgical Vision",
-    "Lenstec (Barbados) Inc",
-    "Litechnica Ltd",
     "Meticuly INNOVATIONS Ltd",
     "OSI INC. Ltd",
-    "Scope Ophthalmics",
-    "Sight Sciences UK Ltd",
-    "Vision Matrix",
-    "Vision Pharmaceuticals Ltd T/A Spectrum"
+    "Vision Matrix"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -6054,6 +6011,13 @@
      "domain": "www.aw-online.com",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Associated Optical Products",
+     "domain": "associatedoptical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-17",
      "bucket": "refused"
     },
     {
@@ -6078,6 +6042,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Daybreak Medical Ltd",
+     "domain": "www.daybreakmedical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
+     "checked": "2026-09-17",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Hanson Instruments Ltd",
      "domain": "www.hansoninstruments.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -6089,6 +6060,13 @@
      "domain": "solventum.com",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-26",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Lenstec (Barbados) Inc",
+     "domain": "www.lenstecuk.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
+     "checked": "2026-09-17",
      "bucket": "refused"
     },
     {
@@ -6117,6 +6095,13 @@
      "domain": "rbmedical.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Sight Sciences UK Ltd",
+     "domain": "sightsciences.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-17",
      "bucket": "refused"
     },
     {
@@ -6201,24 +6186,28 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 8,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 5,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 17
+    "needDomain": 6
    },
    "published": [
     "Alcon Eye Care UK",
     "Bausch & Lomb UK",
+    "Beaver Visitec International Sales Ltd",
     "Birmingham Optical Group",
     "Blink Medical Limited",
     "Carl Zeiss Ltd",
     "Glaukos UK",
     "Grafton Optical Company Limited",
     "Heidelberg Engineering",
+    "Litechnica Ltd",
     "Rayner Intraocular Lenses",
     "Rudolf Riester GmbH",
-    "Veni Vidi Medical Limited"
+    "Sense Medical Limited",
+    "Veni Vidi Medical Limited",
+    "Vision Pharmaceuticals Ltd T/A Spectrum"
    ],
    "publishedElsewhere": [
     "Clonallon Laboratories Limited",
@@ -6232,47 +6221,43 @@
    ],
    "heldOnly": [
     "Altomed Limited",
-    "Sense Medical Limited"
+    "Andersen Caledonia Ltd",
+    "Innovant Healthcare Limited",
+    "Johnson & Johnson Surgical Vision",
+    "Scope Ophthalmics"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Andersen Caledonia Ltd",
-    "Associated Optical Products",
-    "Beaver Visitec International Sales Ltd",
-    "Daybreak Medical Ltd",
     "Duckworth & Kent Ltd",
     "EziDrops Ltd",
-    "Innovant Healthcare Limited",
     "Instinctive Limited",
-    "Johnson & Johnson Surgical Vision",
-    "Lenstec (Barbados) Inc",
-    "Litechnica Ltd",
     "Meticuly INNOVATIONS Ltd",
     "OSI INC. Ltd",
-    "Scope Ophthalmics",
-    "Sight Sciences UK Ltd",
-    "Vision Matrix",
-    "Vision Pharmaceuticals Ltd T/A Spectrum"
+    "Vision Matrix"
    ],
    "refused": [
     "Accrington Surgical Instrument Suppliers Ltd",
     "Albert Waeschle Ltd",
+    "Associated Optical Products",
     "BVM Medical Ltd",
     "Core Surgical Limited",
     "D.O.R.C.",
+    "Daybreak Medical Ltd",
     "Hanson Instruments Ltd",
     "Solventum (3M Health Care)",
+    "Lenstec (Barbados) Inc",
     "Mainline Instruments Ltd",
     "Optos",
     "OscarTech UK",
     "RB Medical Engineering Ltd",
+    "Sight Sciences UK Ltd",
     "Surgitrac Instruments UK Limited",
     "Topcon GB Medical",
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
     "Unisurge International Limited"
    ],
    "unknown": [],
-   "actionableTotal": 27,
+   "actionableTotal": 19,
    "blockedReason": null,
    "deferred": null
   },
@@ -6609,10 +6594,6 @@
      "domain": null
     },
     {
-     "supplier": "Beaver Visitec International Sales Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Decree Thermo",
      "domain": null
     },
@@ -6631,7 +6612,6 @@
    ],
    "domainsMissing": [
     "Aquilant Limited",
-    "Beaver Visitec International Sales Ltd",
     "Decree Thermo",
     "Scientific Medical Clinical Limited",
     "Steris IMS Ltd",
@@ -6818,12 +6798,12 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 14,
+    "publishedElsewhereNeedingCategory": 15,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 6
+    "needDomain": 5
    },
    "published": [
     "Apple Star Corp Limited",
@@ -6841,6 +6821,7 @@
    "publishedElsewhere": [
     "Avicenna Surgical Limited",
     "B. Braun Medical",
+    "Beaver Visitec International Sales Ltd",
     "BioSpectrum Ltd",
     "Fannin (UK) Limited",
     "Farla Medical",
@@ -6860,7 +6841,6 @@
    "capturedNothingCounted": [],
    "notCrawled": [
     "Aquilant Limited",
-    "Beaver Visitec International Sales Ltd",
     "Decree Thermo",
     "Scientific Medical Clinical Limited",
     "Steris IMS Ltd",
@@ -14510,11 +14490,11 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "Accrington Surgical Inst. Suppliers",
-     "domain": null
+     "supplier": "Andersen Caledonia Ltd",
+     "domain": "andersencaledonia.com"
     },
     {
-     "supplier": "Andersen Caledonia Ltd",
+     "supplier": "Accrington Surgical Inst. Suppliers",
      "domain": null
     },
     {
@@ -14536,7 +14516,6 @@
    ],
    "domainsMissing": [
     "Accrington Surgical Inst. Suppliers",
-    "Andersen Caledonia Ltd",
     "O&M Halyard Uk Limited",
     "Plasmic Healthsciences Uk Limited",
     "Vascular Perspectives Ltd"
@@ -14668,11 +14647,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 12,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 1,
-    "needDomain": 5
+    "needDomain": 4
    },
    "published": [],
    "publishedElsewhere": [
@@ -14689,11 +14668,12 @@
     "Vernacare",
     "Vygon (UK)"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "Andersen Caledonia Ltd"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Accrington Surgical Inst. Suppliers",
-    "Andersen Caledonia Ltd",
     "O&M Halyard Uk Limited",
     "Pennine Healthcare (Ivor Shaw Ltd)",
     "Plasmic Healthsciences Uk Limited",
