@@ -42,15 +42,15 @@ the decision each waits on; delete the entry once that decision is made.
 | Total Orthopaedic Solutions 3 | ortho | 101 | 22 | 21.8% | 54 | 37 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 17 | 27.0% | 32 | 23 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 13 | 21.7% | 19 | 38 | STARTED |
-| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 15 | 25.9% | 29 | 25 | STARTED |
+| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 16 | 27.6% | 28 | 25 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 14 | 24.6% | 21 | 31 | STARTED |
 | Urology and Bowel Management | continence | 57 | 17 | 29.8% | 30 | 32 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 19 | 38 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 10 | 18.5% | 8 | 43 | STARTED |
-| Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 15 | 28.3% | 19 | 26 | STARTED |
+| Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 15 | 28.3% | 18 | 26 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 25 | 47.2% | 15 | 26 | STARTED |
 | Surgical Instruments | surgical | 50 | 11 | 22.0% | 21 | 23 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 9 | 20.9% | 21 | 21 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 10 | 23.3% | 16 | 25 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 8 | 21.6% | 10 | 27 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 18 | 16 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 8 | 22.9% | 16 | 16 | STARTED |
