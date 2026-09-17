@@ -14,7 +14,7 @@
  "generatedFrom": {
   "frameworks.json": "2026-09-16",
   "differentiator.json published": 35169,
-  "differentiator.json held": 51157
+  "differentiator.json held": 52038
  },
  "counts": {
   "frameworks": 122,
@@ -24,10 +24,10 @@
   "unmapped": 48,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 438,
+  "supplierNamesUnresolved": 433,
   "inScopeSuppliersNeedingCrawl": 422,
-  "inScopeSuppliersNeedingDomain": 385,
-  "suppliersRefused": 423,
+  "inScopeSuppliersNeedingDomain": 380,
+  "suppliersRefused": 424,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 2,
@@ -749,22 +749,6 @@
   ],
   [
    "RON Services",
-   1
-  ],
-  [
-   "2San Global Limited (New to the framework and NHS Supply Chain)",
-   1
-  ],
-  [
-   "Globus (Shetland) Ltd",
-   1
-  ],
-  [
-   "Reliance Medical Ltd (New)",
-   1
-  ],
-  [
-   "Vernacare LTD (Robinson Healthcare Limited)",
    1
   ],
   [
@@ -1621,10 +1605,6 @@
   ],
   [
    "Emmat Medical",
-   1
-  ],
-  [
-   "Globus (Shetland)",
    1
   ],
   [
@@ -5970,15 +5950,15 @@
     },
     {
      "supplier": "EziDrops Ltd",
-     "domain": null
+     "domain": "ezidrops.com"
     },
     {
      "supplier": "Instinctive Limited",
-     "domain": null
+     "domain": "instinctiveuk.com"
     },
     {
      "supplier": "Meticuly INNOVATIONS Ltd",
-     "domain": null
+     "domain": "meticuly.com"
     },
     {
      "supplier": "OSI INC. Ltd",
@@ -5986,16 +5966,12 @@
     },
     {
      "supplier": "Vision Matrix",
-     "domain": null
+     "domain": "visionmatrix.co.uk"
     }
    ],
    "domainsMissing": [
     "Duckworth & Kent Ltd",
-    "EziDrops Ltd",
-    "Instinctive Limited",
-    "Meticuly INNOVATIONS Ltd",
-    "OSI INC. Ltd",
-    "Vision Matrix"
+    "OSI INC. Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -6189,8 +6165,8 @@
     "heldNeedingCategory": 5,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 0,
-    "needDomain": 6
+    "crawlable": 4,
+    "needDomain": 2
    },
    "published": [
     "Alcon Eye Care UK",
@@ -10893,6 +10869,10 @@
    ],
    "crawlWorklist": [
     {
+     "supplier": "Globus (Shetland) Ltd",
+     "domain": "globusgroup.com"
+    },
+    {
      "supplier": "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
      "domain": null
     },
@@ -10907,21 +10887,23 @@
     {
      "supplier": "ORN International T/A Spectra Corporate",
      "domain": null
-    },
-    {
-     "supplier": "Schottlander",
-     "domain": null
     }
    ],
    "domainsMissing": [
     "Cargo Services Far East Limited",
     "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
     "Medicom Healthpro Ltd",
-    "ORN International T/A Spectra Corporate",
-    "Schottlander"
+    "ORN International T/A Spectra Corporate"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "2San Global",
+     "domain": "2san.com",
+     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-28",
+     "bucket": "refused"
+    },
     {
      "supplier": "H & R Healthcare Ltd",
      "domain": "mediq.co.uk",
@@ -10944,6 +10926,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Schottlander",
+     "domain": "schottlander.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-17",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Supermax Healthcare",
      "domain": "www.supermax.com.my",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -10962,6 +10951,20 @@
      "domain": "medline.com",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-08",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Reliance Medical",
+     "domain": "www.reliancemedical.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Vernacare",
+     "domain": "vernacare.com",
+     "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue",
+     "checked": "2026-08-26",
      "bucket": "publishedElsewhere"
     },
     {
@@ -10988,13 +10991,13 @@
     "infection:vinyl"
    ],
    "actionable": {
-    "unresolvedNames": 4,
-    "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 0,
+    "unresolvedNames": 0,
+    "publishedElsewhereNeedingCategory": 4,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 5
+    "needDomain": 4
    },
    "published": [
     "Ansell",
@@ -11004,30 +11007,30 @@
    ],
    "publishedElsewhere": [
     "Abena UK Limited",
-    "Medline Industries"
+    "Medline Industries",
+    "Reliance Medical",
+    "Vernacare"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "Globus (Shetland) Ltd"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
     "Cargo Services Far East Limited",
     "Medicom Healthpro Ltd",
-    "ORN International T/A Spectra Corporate",
-    "Schottlander"
+    "ORN International T/A Spectra Corporate"
    ],
    "refused": [
+    "2San Global",
     "H & R Healthcare Ltd",
     "Meditrade UK Ltd",
     "Polyco",
+    "Schottlander",
     "Supermax Healthcare"
    ],
-   "unknown": [
-    "2San Global Limited (New to the framework and NHS Supply Chain)",
-    "Globus (Shetland) Ltd",
-    "Reliance Medical Ltd (New)",
-    "Vernacare LTD (Robinson Healthcare Limited)"
-   ],
-   "actionableTotal": 11,
+   "unknown": [],
+   "actionableTotal": 9,
    "blockedReason": null,
    "deferred": null
   },
@@ -12412,6 +12415,10 @@
    ],
    "crawlWorklist": [
     {
+     "supplier": "Globus (Shetland) Ltd",
+     "domain": "globusgroup.com"
+    },
+    {
      "supplier": "Leanvation",
      "domain": null
     }
@@ -12471,9 +12478,9 @@
     "theatres:theatre"
    ],
    "actionable": {
-    "unresolvedNames": 2,
+    "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 1,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -12487,7 +12494,9 @@
    "publishedElsewhere": [
     "Medline Industries"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "Globus (Shetland) Ltd"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Leanvation"
@@ -12497,7 +12506,6 @@
     "Polyco"
    ],
    "unknown": [
-    "Globus (Shetland)",
     "Semperit Investment"
    ],
    "actionableTotal": 4,
