@@ -45,17 +45,13 @@ Web-searched each supplier, then confirmed identity via a primary source
 - **Johnson & Johnson Surgical Vision** → `jnjvisionpro.com` — J&J's own EMEA
   professional site for its Surgical Vision division.
 
-**5 left unconfirmed, no domain guessed** (logged to OUTSTANDING.md rather than
-guessed): EziDrops Ltd (ezidrops.com found but no tie back to the UK entity, CH
-11896998, confirmed on that site), Meticuly INNOVATIONS Ltd (no primary source
-found at all), OSI INC. Ltd (a genuine UK company exists — CH 11611660, Barking,
-"other human health activities" — but no matching website found; several
-unrelated global "OSI" ophthalmic companies exist instead), Vision Matrix
-(possibly not a real distinct supplier — may be an artifact of NHS Supply
-Chain's own "Framework Matrix" documentation rather than an actual awarded
-company; worth checking the original award notice), Instinctive Limited
-(candidate site instinctiveuk.com has an expired TLS certificate, content
-unverified this run).
+**5 left unconfirmed at the time of this run, no domain guessed** (logged to
+OUTSTANDING.md rather than guessed): EziDrops Ltd, Meticuly INNOVATIONS Ltd,
+OSI INC. Ltd, Vision Matrix, Instinctive Limited.
+
+**Update, later the same day (17/09/2026): four of the five are now proved and
+seeded** — see "Second pass on the five unconfirmed suppliers" at the end of this
+document. Only OSI INC. Ltd remains unresolved.
 
 ## Crawled, and what came of it
 
@@ -155,3 +151,30 @@ Spectrum, Sense Medical Limited.
 
 `verify.py` passed (14 pre-existing warnings, unrelated to this framework) before
 landing.
+
+## Second pass on the five unconfirmed suppliers (17/09/2026, `outstanding-sweep` 17:10)
+
+Re-checked the five suppliers this run left without a domain (^o515). Four are
+proved from the company's own site and seeded; one is genuinely unresolved.
+
+| Supplier | Domain | Proof |
+|---|---|---|
+| EziDrops Ltd | `ezidrops.com` | The site sells the EziDrops eye and ear drop applicators and its own Contact Us page gives "EziDrops, The Shires, Watford, WD25 0JL" — a match to the Companies House registered office for EZIDROPS LTD (11896998), 28 The Shires, Watford, WD25 0JL, SIC 32500. |
+| Instinctive Limited | `instinctiveuk.com` | The site states "© 2019 Instinctive Limited" on every page and, in its privacy policy, "write to Instinctive Limited, 16 St Cuthbert's Street, Bedford MK40 3JG" — a name-exact match to the awarded supplier name. UK supplier of ophthalmic lasers (Ziemer LDV, Avedro KXL, Navilas). One active INSTINCTIVE LIMITED at Companies House (02616259, SIC 33130 repair of electronic and optical equipment). |
+| Vision Matrix | `visionmatrix.co.uk` | The site gives "Vision Matrix Ltd, 31 East Parade, Harrogate HG1 5LQ" — an exact match to the registered office of VISION MATRIX LIMITED (03152261), SIC 32500 / 46460. |
+| Meticuly INNOVATIONS Ltd | `meticuly.com` | The manufacturer's own Contact page and privacy policy both name the UK entity: "United Kingdom Office — METICULY Innovations Ltd, Office 235, 23 King Street, Cambridge, CB1 1AH" — an exact match to the registered office of METICULY INNOVATIONS LTD (13771048), SIC 25990 / 32500. |
+| OSI INC. Ltd | none | **Still unresolved.** OSI INC. LTD (11611660) is a real active company at 50 Ripple Road, Barking, IG11 7PG, but its SIC is 86900 "other human health activities" and no website could be tied to it. The ophthalmic "OSI" sites that do exist (e.g. `osi.za.com`) are other companies in other territories. No domain recorded. |
+
+**The "Vision Matrix may be an artifact of the framework matrix" reading in this
+run's original note was wrong** and has been corrected above: Vision Matrix Ltd is a
+real, active, ophthalmic-only UK supplier trading from the registered office
+Companies House holds for it.
+
+Company numbers were **not** promoted from `companyNumberCandidate` to
+`companyNumber` for any of the four: none of these sites publishes its registration
+number, which is the bar `confirm_company_numbers.py` applies. The registered-office
+address matches are recorded as the proof for the *domain* only.
+
+Not crawled in this pass — `visionmatrix.co.uk` is a WooCommerce catalogue and is the
+obvious next candidate for the coverage task; `instinctiveuk.com` is a brochure site
+with an expired TLS certificate (http only) and has no readable catalogue.
