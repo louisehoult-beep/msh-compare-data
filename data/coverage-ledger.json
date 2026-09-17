@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-16",
-  "differentiator.json published": 34884,
-  "differentiator.json held": 50982
+  "differentiator.json published": 34990,
+  "differentiator.json held": 50877
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 438,
-  "inScopeSuppliersNeedingCrawl": 433,
-  "inScopeSuppliersNeedingDomain": 397,
-  "suppliersRefused": 418,
+  "inScopeSuppliersNeedingCrawl": 432,
+  "inScopeSuppliersNeedingDomain": 396,
+  "suppliersRefused": 419,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -10305,16 +10305,11 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "FUJIFILM Sonosite Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Hitachi Medical Systems UK Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "FUJIFILM Sonosite Ltd",
     "Hitachi Medical Systems UK Ltd"
    ],
    "duplicateOfCapturedSupplier": [
@@ -10358,6 +10353,13 @@
      "domain": "fujifilm.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "FUJIFILM Sonosite Ltd",
+     "domain": "sonosite.com",
+     "reason": "neither sonosite.com nor www.sonosite.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-17",
      "bucket": "refused"
     },
     {
@@ -10417,7 +10419,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [
     "Canon Medical Systems",
@@ -10438,7 +10440,6 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "FUJIFILM Sonosite Ltd",
     "Hitachi Medical Systems UK Ltd"
    ],
    "refused": [
@@ -10447,12 +10448,13 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
     "Esaote",
     "Fujifilm Healthcare UK",
+    "FUJIFILM Sonosite Ltd",
     "GE HealthCare",
     "Imaging First Ltd",
     "Vertec Scientific"
    ],
    "unknown": [],
-   "actionableTotal": 9,
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
