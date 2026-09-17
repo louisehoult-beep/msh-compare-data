@@ -606,6 +606,45 @@ profiled partner before researching these, and be precise about which facts are 
 | Torbay and South Devon (RA9, profiled batch sixteen) | Royal Devon (RH8, profiled), University Hospitals Plymouth (RK9, profiled) | One Devon Procurement Service, hosted by Plymouth. RA9's own annual report and its external auditor's report both confirm membership and the Plymouth host directly. The December 2025 formation date, five-member count and 44 WTE transfer figure remain attributed to Plymouth's own side only — RA9's own documents don't repeat those specifics. |
 | Leicestershire Partnership (RT5, profiled batch seventeen) | Northamptonshire Healthcare (RP1, profiled batch sixteen) | Group model since 2019: shared Chief Executive (Angela Hillery), shared CFO, Strategy Director and Chair. Confirmed on RT5's own Trust Board page. No leadership link to University Hospitals of Leicester (RK5) despite sharing a city — that was tested and refuted, not assumed. Procurement is NOT shared: RT5 runs its own in-house department, separate from the leadership arrangement. |
 
+## Refresh log (`nhs-trust-profile-refresh`)
+
+**Refresh 17/09/2026 re-verified 24 trusts** (RVR, RDU, RTE, RN3, RJ1, RN5, RW1, RQX, RWA, RYJ,
+RGP, RNQ, RJZ, RAX, RXN, RR8, RJ2, REM, R1K, RWF, R0A, RPA, RBN, RBT), taken oldest-first from the
+154 profiles that still carried no `verifiedAt` stamp. Two waves of twelve parallel Sonnet agents,
+one per trust. **11 of the 24 annual reports had moved to a newer financial year** and were re-read
+from the new report rather than carried forward. **Six named post-holders were removed** as no
+longer in post, and successors recorded where the trust's own page named one.
+
+**A systematic defect was found and fixed across the whole file, not just this batch.** The date
+04/08/2026 appears in 47 of 202 profiles. It is the date the ORIGINAL BUILD CHECKED CQC, not a CQC
+publication date. 42 of the 47 phrase it correctly ("as at", "as of", "dated", "held on"). **Six
+phrased it as a publication date**, asserting a CQC report that does not exist: RJL, RK9, RN3, RP6,
+RWG, RXN. Verified independently twice: Great Western's (RN3) last full trust-level CQC report is
+30 June 2020, and Plymouth's (RK9) rating is dated 19 January 2022. CQC does not publish 47 trust
+reports in one day. All six were corrected. RN3 and RXN were in the batch; **RJL, RK9, RP6 and RWG
+were corrected in the same pass under root rule 18 but deliberately NOT stamped `verifiedAt`,
+because the false claim was removed rather than the profile re-verified.** RJL was the worst case:
+it reasoned from the false date to tell the reader the rating was "current and live".
+
+**The refresh is catching never-compliant data, not only stale data.** Beyond the CQC dates, this
+batch found and fixed: em dashes in already-published text (RW1, RDU, RR8), a `context` missing the
+mandatory layer-1 figures entirely (RR8), two `reportFacts` citing trade press as the source for a
+trust's own facts (RWF, one re-sourced to the actual High Court judgment, one demoted to news prose
+with a caveat because no primary source could be found), a person sourced only to a barred Find a
+Tender notice (RAX), a profile whose `context` and `reportFacts` gave two different NHS oversight
+segments (RXN, now stating both with their sources rather than reconciling them), and a wrongly
+dated go-live (RBT, stated as 14 June 2026, actually June 2025 per the trust's own report).
+
+Two cross-trust items for the reference table: **Epsom and St Helier (RVR) confirmed from its own
+Note 1.3 that it participates in the South West London Procurement Partnership hosted by St
+George's**, resolving a gap flagged as unverifiable at build time, and its **boards approved a
+Strategic Case for a merger with St George's in March 2026, outcome pending**. Separately, **Laura
+Churchward has left the University Hospitals of Northamptonshire group chief executive post** and is
+gone from both Kettering's (RNQ) and Northampton General's own board pages.
+
+Standing obstacles re-confirmed unchanged: `uhliverpool.nhs.uk` (REM) is still totally
+Cloudflare-blocked, checked three ways.
+
 ## Known fetching obstacles
 
 - **403 to every automated fetch, permanently:** `royalfree.nhs.uk` (Royal Free London,
@@ -649,6 +688,37 @@ profiled partner before researching these, and be precise about which facts are 
   org chart was usable where the live board page was not. Separately, the most recent ELHT
   annual report retrievable anywhere is 2022/23, three years stale, so annual-report facts
   for this trust cannot be refreshed at all.
+- **INVERTED block, 200 to PLAIN curl but 403 to any browser User-Agent:**
+  `guysandstthomas.nhs.uk` (Guy's and St Thomas', RJ1), found on the 17/09/2026 refresh. Plain
+  `curl` with NO User-Agent returns 200 and real content; adding a browser User-Agent returns 403,
+  with or without `Sec-Fetch-*`. This is the reverse of the Royal Devon pattern and of the CW+
+  pattern. `verify_trust_profile.py` always sends a browser User-Agent, so it will fail every
+  guysandstthomas URL on every future batch. All three were confirmed 200 and content-bearing via
+  plain curl before publishing, including a 3MB annual report PDF whose figures were checked in the
+  extracted text. Try plain curl FIRST on this domain.
+- **HTTP 200 that is NOT content, the gate's blind spot:** `fhft.nhs.uk` (Frimley Health, RDU),
+  found on the 17/09/2026 refresh. Imperva/Incapsula serves **HTTP 200 with a 212 to 955 byte
+  challenge stub and no page content**. `verify_trust_profile.py` checks the status code only, so
+  it reports 200 and PASSES on a page that served nothing. **A 200 from the gate is not evidence a
+  page has content.** Always confirm the response body actually contains the fact being cited.
+  Real content was reachable only through a text-extraction proxy. This is a candidate for
+  TIGHTENING the gate (a minimum-body-length or content-match check); never loosen it.
+- **WebFetch's AI summary of a PDF is not safe as a primary read:** found on the 17/09/2026 refresh
+  on Hampshire Hospitals' (RN5) 2025/26 annual report, where the summary returned wrong figures and
+  invented two names that appear nowhere in the document. Caught only because the agent re-read the
+  same PDF with `curl` plus `pdftotext` and got a different answer. **Download the PDF and extract
+  the text before citing any financial figure or name.** Same PDF-conversion failure, without the
+  hallucination, was hit on Gloucestershire (RTE).
+- **CQC's own site is a JS-rendered SPA** and its API is key-gated (403), so plain `curl` returns
+  script bundles with no readable rating or date. A text-extraction proxy against
+  `https://www.cqc.org.uk/provider/<CODE>` DOES return the rating and its date, and was used on the
+  17/09/2026 refresh to confirm Plymouth's (RK9) rating date as 19 January 2022.
+- **Expired SSL certificate:** the Lancashire Procurement Collaborative's own domain, found on the
+  17/09/2026 refresh. Unusable as a source, so the "hosted by East Lancashire Hospitals" sub-detail
+  for RXN could not be re-verified and was left exactly as previously recorded.
+- **Browser headers REQUIRED (the normal direction):** `lewishamandgreenwich` (RJ2) 403s to plain
+  curl and needs the full browser header set. Listed here only to make the point that both
+  directions exist on NHS domains and both must be tried before calling a link dead.
 - **403 to curl:** Find a Tender notice pages. Usable as evidence read another way, but do
   not cite one as a `source` URL that will be checked.
 - **Scanned-image PDFs that will not extract:** Royal Wolverhampton's 2025/26 financial
