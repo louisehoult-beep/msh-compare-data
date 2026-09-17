@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-16",
+ "lastRun": "2026-09-17",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -354,7 +354,19 @@
   "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
   "medi UK",
   "Medica Advanced Technologies Ltd",
-  "Medical Access Ltd"
+  "Medical Access Ltd",
+  "Medical Devices Technology Inter Ltd",
+  "Medichill UK Ltd",
+  "Medinox (London) Limited",
+  "Mediprema",
+  "Meditech Systems Ltd (Dorset)",
+  "Mediworld Ltd",
+  "Medscience",
+  "Meglio Ltd",
+  "Meril UK Pvt Ltd",
+  "Mermaid Medical Ltd",
+  "Metaphysis LLP",
+  "Metsa"
  ],
  "refusals": [
   {
@@ -781,6 +793,21 @@
    "name": "Medica Advanced Technologies Ltd",
    "reason": "Speciality left empty: Companies House 14440401 confirms the legal name only (used for the Ltd/Limited alias). Could not confirm this UK entity has its own website stating clinical scope in plain terms -- the CRRT/renal replacement therapy detail found was on Medica S.p.A.'s own international site, which is not confirmed as the same legal entity, so it was not used as the specialities source.",
    "date": "2026-09-16"
+  },
+  {
+   "name": "Medical Devices Technology Inter Ltd",
+   "reason": "Own site mdti.co.uk trades as \"MDTI\"/\"MDTi\" and its footer copyright names a DIFFERENT legal entity, \"MDTi Company Ltd - A subsidiary of Medical Devices Technology International\", not \"Medical Devices Technology Inter Ltd\" (the seed's display name, sourced only from NHS Supply Chain contract launch briefs). A Companies House search for \"Medical Devices Technology Inter\" returns no matching entity; the only close UK match found, MDTI COMPANY LIMITED (06089910, Wolverhampton), is described as a retail seller of medical/orthopaedic goods in specialised stores, which does not obviously match an NHS framework-listed manufacturer/distributor. Cannot confirm the website and the seed record are the same legal entity, so no alias was added rather than risk attributing another company's identity.",
+   "date": "2026-09-17"
+  },
+  {
+   "name": "Medscience",
+   "reason": "Companies House holds at least five distinct, unrelated \"Medscience\"-named UK companies (Medscience Group Ltd 10699410, Medscience Distribution Ltd 02491098, Medscience Limited 07332065, Medscience Asia-Europe Trade Limited 08573073, Open Medscience Limited NI725546), and no framework document or company site was found that ties the seed's \"Medscience\" (NHS Supply Chain Paper Hygiene framework, ITT_766) to any one of them specifically. medscienceuk.com trades in diagnostic/medical equipment, not paper hygiene, so it looks like a different business rather than a confirming match. The canonical name is a single common-enough term that a wrong match would misattribute another company's news. No alias or speciality added.",
+   "date": "2026-09-17"
+  },
+  {
+   "name": "Meglio Ltd",
+   "reason": "Own site mymeglio.com (previously proved as this record's own site by its stated Companies House number 09971786) trades throughout only as \"Meglio\", a single token. \"Meglio\" is not the whole canonical name (\"Meglio Ltd\") and is an ordinary Italian word (\"better\"), so it is barred as an ambiguous single-token alias under the Jeenie Solutions rule. The domain itself is \"mymeglio.com\", not \"meglio.com\", so the owned-domain exception does not apply either. No other trading form was found on the site. No alias added.",
+   "date": "2026-09-17"
   }
  ],
  "sources": {
@@ -2336,6 +2363,90 @@
    ],
    "specialities": [],
    "evidence": "The company's own website healthy.io, read 08/09/2026 (the record's own Website link). The terms of use read \"the Website ... is owned, operated and managed by Healthy.io Ltd\" and the privacy policy footer reads \"Healthy.io Ltd.\" The privacy policy also names \"Healthy.io UK Ltd\" as the company's UK Representative; that is a separate legal entity from the one this record names, so it was NOT added - a subsidiary's name is not an alias of its parent. Product brands on the site (Minuteful Kidney, Minuteful for Wound, Minuteful UTI, Minuteful 10) are product names, not company name forms, so none was added. Specialities Digital and medical IT and Wound care were already recorded and were left untouched."
+  },
+  {
+   "name": "Medichill UK Ltd",
+   "date": "2026-09-17",
+   "aliases": [
+    "Medichill UK",
+    "Medichill"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website medichill.co.uk, read 17/09/2026. Masthead/header trades as \"Medichill UK\"; footer copyright reads \"Copyright © Medichill 2026\" and \"Medichill Group - UK - AUSTRALIA - NZ\" (Gosport, Hampshire). \"Medichill UK\" is a two-token form of the same entity. \"Medichill\" alone is the exact base of the domain the company itself owns (medichill.co.uk) and is the word it uses to sign its own footer, so it is not a bare shortening guess. Specialities already populated, left untouched."
+  },
+  {
+   "name": "Medinox (London) Limited",
+   "date": "2026-09-17",
+   "aliases": [
+    "Medinox UK"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website medinox.co.uk, read 17/09/2026. Masthead/footer brand throughout is \"Medinox UK™\"; footer copyright \"© 2024 Medinox. All Rights Reserved.\" Two-token form \"Medinox UK\" added. Site lists categories (diagnostics, first aid, medical devices, wound care, hygiene, mobility etc.) but specialities was already populated (\"Rehabilitation and mobility\"), so left untouched per the empty-only rule."
+  },
+  {
+   "name": "Mediprema",
+   "date": "2026-09-17",
+   "aliases": [
+    "Mediprema SA"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website mediprema.com, read 17/09/2026. Footer names the legal entity \"MEDIPREMA SA\" (French Société Anonyme). \"Mediprema\" alone is already the record's display name (the company IS that one word). \"Mediprema SA\" is a two-token form of the same entity and was added. Specialities already populated, left untouched."
+  },
+  {
+   "name": "Meditech Systems Ltd (Dorset)",
+   "date": "2026-09-17",
+   "aliases": [
+    "Meditech Systems Ltd",
+    "Meditech Systems Limited"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website meditechsystems.co.uk, read 17/09/2026. Masthead/logo \"Meditech Systems Ltd.\"; footer \"Meditech Systems Limited\"; copyright \"© 2026 | Meditech Systems Ltd\". The site never qualifies the name with \"(Dorset)\" - that qualifier exists only in this seed to disambiguate from other Meditech-named suppliers - so both the \".Ltd\" and \"Limited\" forms without the qualifier were added as they are the forms press coverage would actually use. Specialities already populated, left untouched."
+  },
+  {
+   "name": "Mediworld Ltd",
+   "date": "2026-09-17",
+   "aliases": [
+    "Mediworld"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website mediworld.co.uk (confirmed via search results as \"Mediworld Ltd: Medical Supplies Store London\"), read 17/09/2026. \"Mediworld\" is the exact base of the domain the company owns. No other trading form found beyond \"Mediworld Ltd\" itself. Specialities already populated (\"Wound care\"), left untouched."
+  },
+  {
+   "name": "Meril UK Pvt Ltd",
+   "date": "2026-09-17",
+   "aliases": [
+    "Meril UK Limited"
+   ],
+   "specialities": [],
+   "evidence": "Companies House 12053049, read 17/09/2026: registered name \"MERIL UK LIMITED\", active, incorporated 17/06/2019, registered office Bristol. This is a genuine two-token+ form distinct from the seed's display name \"Meril UK Pvt Ltd\" (an Indian-style suffix that is not how UK Companies House records the entity). Only the Companies House registered form was added; the single token \"Meril\" was not added as it is a shortening of the group brand and is used by multiple Meril group entities worldwide, not distinctively this UK company alone. Specialities already populated, left untouched."
+  },
+  {
+   "name": "Mermaid Medical Ltd",
+   "date": "2026-09-17",
+   "aliases": [
+    "Mermaid Medical"
+   ],
+   "specialities": [],
+   "evidence": "The group site mermaidmedical.com, read 17/09/2026, footer \"© Mermaid Medical\". \"Mermaid Medical\" (two tokens, dropping \"Ltd\") added. The Danish parent's own suffixed form \"Mermaid Medical A/S\" was seen on the same site (via a LinkedIn footer reference) and was deliberately NOT added, as that names the separate parent entity, not this UK Ltd (Companies House 07637052, already confirmed in this record's note). Specialities already populated, left untouched."
+  },
+  {
+   "name": "Metaphysis LLP",
+   "date": "2026-09-17",
+   "aliases": [
+    "Intelligent Orthopaedics"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website intelligent-orthopaedics.com, read 17/09/2026. Footer: \"Metaphysis LLP. A company registered in England and Wales. Registered Office: The Keele Centre, Three Mile Lane, Keele, Staffordshire, ST5 5HH\" (matches Companies House OC387134's registered office). Site header reads \"METAPHYSIS LLP (Intelligent Orthopaedics)\", confirming \"Intelligent Orthopaedics\" is this same LLP's own trading name, not a different company. Two-token form added. Specialities already populated, left untouched."
+  },
+  {
+   "name": "Metsa",
+   "date": "2026-09-17",
+   "aliases": [
+    "Metsa Tissue Limited",
+    "Metsa Tissue"
+   ],
+   "specialities": [],
+   "evidence": "Companies House 02842567, read 17/09/2026: registered name \"METSA TISSUE LIMITED\", active, incorporated 05/08/1993 (previous names METSA-SERLA TISSUE LIMITED, SPEED 3731 LIMITED - not added, historic only). This is the UK tissue-products entity whose business (tissue/paper hygiene products, per metsagroup.com) matches the NHS Supply Chain Paper Hygiene framework this seed record carries, distinguishing it from the unrelated \"Metsa Board\" and \"Metsa Wood\" UK entities found in the same Companies House search, which were NOT used. No plain statement of clinical/facilities scope found on metsagroup.com beyond tissue paper manufacturing, which does not match any speciality string already used elsewhere in this seed, so specialities was left empty rather than guessed."
   }
  ]
 }
