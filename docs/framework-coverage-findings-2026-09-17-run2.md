@@ -108,8 +108,10 @@ labels — before mapping anything, per the brief's rule against forcing:
   Stomach, Otology, Rhinology, Oral Maxillo-Facial, Cranio Maxillo-Facial,
   Holloware) captured as if each label were a product. This is a crawl defect,
   not evidence about the supplier — no real product range was actually read.
-  Logged to OUTSTANDING; needs a `--product-path` fix or a different crawl
-  approach before this supplier can be assessed at all.
+  Logged to OUTSTANDING. **Resolved later the same day (see the second-pass
+  section at the end of this document): it is not a `--product-path` fix — the site
+  has no product path at all. The capture has been withdrawn and Innovant recorded
+  as a refusal.**
 - **Johnson & Johnson Surgical Vision**: NOT mapped — the crawl of jnjvisionpro.com
   returned 111 products, but the great majority are German- and Czech-language
   ACUVUE contact-lens catalogue pages ("Alle ACUVUE® Kontaktlinsen", "Všechny
@@ -178,3 +180,30 @@ address matches are recorded as the proof for the *domain* only.
 Not crawled in this pass — `visionmatrix.co.uk` is a WooCommerce catalogue and is the
 obvious next candidate for the coverage task; `instinctiveuk.com` is a brochure site
 with an expired TLS certificate (http only) and has no readable catalogue.
+
+## Innovant Healthcare Limited: not a crawler fix, a site with no product pages (17/09/2026, `outstanding-sweep` 17:10)
+
+^o517 assumed the 17 false "products" meant the crawler needed a `--product-path`.
+Checked at source, and that is not the problem:
+
+- `innovanthealthcare.co.uk/wp-json/wp/v2/types` exposes **no product post type** —
+  post, page, attachment, nav_menu_item, wp_block, wp_template, wp_template_part,
+  wp_global_styles, wp_navigation, wp_font_family, wp_font_face, portfolio, event,
+  porto_builder.
+- `wp-sitemap-posts-portfolio-1.xml` holds **exactly those 17 URLs**, all under
+  `/products/`. They are the company's own speciality landing pages.
+- Each one (checked `/products/ophthalmic/`) offers a **PDF catalogue download** and a
+  prose "Key Products Include" list of instrument categories — "Algerbrush and Capsule
+  Polishers", "Bipolar Forceps", "Diamond Knives" — with no per-product pages behind it.
+- The site's own Shop link points at **shop.innovanthealthcare.co.uk**, a separate
+  storefront that returns **"This store is unavailable"**.
+
+So there is no product path to point `--product-path` at, and `crawl_supplier_site.py`
+needs no change. The 17-record capture has been removed from
+`data/supplier-products.json` and Innovant Healthcare Limited recorded in that file's
+`refusals` with the reason above; `data/coverage-ledger.json` and `docs/COVERAGE-LEDGER.md`
+were rebuilt so the Complete Ophthalmology Solutions 3 row counts it as read-and-answered
+rather than as work outstanding.
+
+The only route to this supplier's range would be reading its 17 PDF catalogues, which is
+a different capability from the site crawler and is not proposed here.
