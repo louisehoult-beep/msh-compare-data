@@ -25,10 +25,10 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 433,
-  "inScopeSuppliersNeedingCrawl": 422,
+  "inScopeSuppliersNeedingCrawl": 421,
   "inScopeSuppliersNeedingDomain": 380,
-  "suppliersRefused": 424,
-  "suppliersRefusedButPublishingElsewhere": 104,
+  "suppliersRefused": 425,
+  "suppliersRefusedButPublishingElsewhere": 105,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 2,
   "blockedFrameworks": 1,
@@ -5933,10 +5933,6 @@
      "domain": "andersencaledonia.com"
     },
     {
-     "supplier": "Innovant Healthcare Limited",
-     "domain": "innovanthealthcare.co.uk"
-    },
-    {
      "supplier": "Johnson & Johnson Surgical Vision",
      "domain": "jnjvisionpro.com"
     },
@@ -6135,6 +6131,13 @@
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue",
      "checked": "2026-08-26",
      "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Innovant Healthcare Limited",
+     "domain": "innovanthealthcare.co.uk",
+     "reason": "no per-product pages exist on this site: the WordPress API exposes no product post type (types are post/page/attachment/portfolio/event/porto_builder), and the 17 URLs under /products/ in wp-sitemap-posts-portfolio-1.xml are the company's own speciality landing pages (Cardiac/Vascular, Ophthalmic, Orthopaedic, Dental ...), each offering a PDF catalogue download and a prose \"Key Products Include\" list of instrument categories, not individual products. The separate storefront linked from the site's Shop link, shop.innovanthealthcare.co.uk, returns \"This store is unavailable\". A 17/09 capture read those 17 landing pages as if each speciality label were a product; that capture has been withdrawn. Not a --product-path fix: there is no product path.",
+     "checked": "2026-09-17",
+     "bucket": "heldOnly"
     },
     {
      "supplier": "Alcon Eye Care UK",

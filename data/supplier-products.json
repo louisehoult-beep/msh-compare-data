@@ -433537,114 +433537,6 @@
     }
    ]
   },
-  "Innovant Healthcare Limited": {
-   "domain": "innovanthealthcare.co.uk",
-   "verified": "2026-09-17",
-   "source": "innovanthealthcare.co.uk, each product's own page read this run",
-   "structureFrom": "sitemap products, each page's own name and breadcrumb division (per-page fallback)",
-   "partialRead": false,
-   "hasDivisions": false,
-   "landingPagesDropped": 0,
-   "furniturePagesDropped": 0,
-   "duplicateUrlsDropped": 0,
-   "droppedCategoryPages": 0,
-   "captureCaveat": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 17 page(s) could not be read and fall back to their URL slug.",
-   "structure": "No usable breadcrumb division on this site — listed as one flat range.",
-   "filingRule": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 17 page(s) could not be read and fall back to their URL slug. Every item is listed by name below rather than grouped, because a fabricated grouping would misrepresent the company's own filing.",
-   "divisions": [
-    {
-     "name": "Uncategorised",
-     "products": 17
-    }
-   ],
-   "products": [
-    {
-     "n": "Cardiac/Vascular",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ophthalmic",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Orthopaedic",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Dental",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "General Surgery",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Ear, Nose and Throat",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Anaesthesia and Diagnostics",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Neurosurgery",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Obstetrics",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Gynaecology",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Urology",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Intestines and Stomach",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Otology",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Rhinology",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Oral Maxillo-Facial",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Cranio Maxillo-Facial",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Holloware",
-     "division": "Uncategorised",
-     "category": ""
-    }
-   ]
-  },
   "Litechnica Ltd": {
    "domain": "litechnica.co.uk",
    "verified": "2026-09-17",
@@ -442291,6 +442183,11 @@
   "Schottlander": {
    "domain": "schottlander.com",
    "reason": "robots.txt disallows automated reading of this site",
+   "checked": "2026-09-17"
+  },
+  "Innovant Healthcare Limited": {
+   "domain": "innovanthealthcare.co.uk",
+   "reason": "no per-product pages exist on this site: the WordPress API exposes no product post type (types are post/page/attachment/portfolio/event/porto_builder), and the 17 URLs under /products/ in wp-sitemap-posts-portfolio-1.xml are the company's own speciality landing pages (Cardiac/Vascular, Ophthalmic, Orthopaedic, Dental ...), each offering a PDF catalogue download and a prose \"Key Products Include\" list of instrument categories, not individual products. The separate storefront linked from the site's Shop link, shop.innovanthealthcare.co.uk, returns \"This store is unavailable\". A 17/09 capture read those 17 landing pages as if each speciality label were a product; that capture has been withdrawn. Not a --product-path fix: there is no product path.",
    "checked": "2026-09-17"
   }
  }
