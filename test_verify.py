@@ -29,7 +29,10 @@ here by a synthetic equivalent.
 import atexit
 import concurrent.futures as cf
 import datetime
+import multiprocessing as mp
+import queue as queuemod
 import signal
+import time
 import hashlib, json, os, re, shutil, subprocess, sys, tempfile
 
 REPO = os.path.dirname(os.path.abspath(__file__))
@@ -61,6 +64,12 @@ WORK = os.path.join(tempfile.mkdtemp(prefix="test_verify_"), "repo")
 shutil.copytree(REPO, WORK,
                 ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"))
 os.chdir(WORK)
+
+# The copy is ~200MB and used to be left behind on every run — four of them had
+# piled up on Lou's Mac by 17/09/2026. Harmless on a throwaway CI runner, untidy
+# on a real machine, and it matters more now that a parallel run makes one copy
+# PER WORKER instead of one per run.
+atexit.register(shutil.rmtree, os.path.dirname(WORK), True)
 
 sys.path.insert(0, os.path.join(REPO, "tests", "fixtures"))
 import contacts as fixture_contacts        # noqa: E402  (needs the path above)
@@ -3088,7 +3097,7 @@ def _install_cleanup():
         signal.signal(sig, handler)
 
 
-def _run(tmp):
+def _snapshot(tmp):
     # Snapshot every file a case might touch, so each case starts from clean data.
     # This resets the COPY between cases (see WORK at the top of the file); the real
     # repo is not in play here at all, which is why two concurrent runs can no longer
@@ -3137,6 +3146,147 @@ def _run(tmp):
     # between two cases must not leave a deliberately broken file behind for the
     # cases that follow it in this same run.
     _register_cleanup(restore)
+    return restore
+
+
+# ---------------------------------------------------------------------------
+# THE CASES RUN IN PARALLEL, ONE REPO COPY PER WORKER (17/09/2026)
+#
+# Every case runs the whole gate once, so the suite's cost is simply the case
+# count times one verify.py run. Serially that reached 43-44 minutes against
+# this workflow's 45-minute timeout — 26 minutes on 04/09/2026, 44 twelve days
+# later, purely because cases kept being added. verify.yml said at the time what
+# to do when it next crowded the limit, and this is it: run the cases in
+# parallel, NOT keep raising the number.
+#
+# WHY A COPY PER WORKER, AND NOT ONE SHARED COPY. Every case deliberately breaks
+# a data file and restore() puts it back between cases. Two cases mutating one
+# tree at once would read each other's damage and the verdicts would be noise.
+# concurrency_cases() already proves the other half — four gate() runs against
+# one tree agree and raise no false JS failure — so verify.py itself is safe to
+# run concurrently; it is the MUTATION that cannot be shared. Each worker
+# therefore gets its own copy, which it gets for free: spawn re-imports this
+# module in the child, and the copytree at the top of the file runs there too.
+#
+# WHY FIXED SHARDS RATHER THAN A WORK QUEUE. Each worker takes every Nth case,
+# so which worker runs which case is fixed before the run starts. That keeps the
+# run reproducible, and it lets each worker prove ITS OWN copy restored cleanly
+# at the end. Interleaving rather than contiguous blocks keeps the shards even,
+# since every case costs about the same one gate run.
+#
+# AND WHY ONE EXPLICIT PROCESS PER SHARD, NOT A POOL. The first attempt at this
+# used ProcessPoolExecutor.map with one item per worker, which looks equivalent
+# and is not: a pool hands work to whichever worker is free, and a probe on
+# 17/09/2026 showed ONE worker taking all four shards while the others were
+# still booting. Shards sharing a process are still CORRECT — they run one after
+# another in that process's single copy, so nothing is mutated concurrently —
+# but the run quietly stops being parallel, and a copy that never ran a shard
+# cannot report on its own restore. One process per shard makes both guarantees
+# structural instead of a matter of timing.
+#
+# Spawn is requested EXPLICITLY. Fork is the default on Linux, and a forked
+# child would inherit the parent's copy and cwd — all four workers would mutate
+# one tree, which is the exact thing this design exists to prevent. That would
+# not fail loudly; it would just make the verdicts wrong.
+# ---------------------------------------------------------------------------
+WORKERS = int(os.environ.get("TEST_VERIFY_WORKERS") or 0) or min(4, os.cpu_count() or 1)
+
+
+def _run_shard(arg):
+    """Run every case with index ≡ k (mod n) in THIS process's own repo copy."""
+    k, n = arg
+    _install_cleanup()
+    synthetic = fixture_contacts.write()
+    if synthetic:
+        _register_cleanup(lambda: fixture_contacts.remove(synthetic))
+    tmp = tempfile.mkdtemp()
+    _register_cleanup(lambda: shutil.rmtree(tmp, ignore_errors=True))
+    restore = _snapshot(tmp)
+
+    rows = []
+    for i in range(k, len(CASES), n):
+        restore()
+        try:
+            expect = CASES[i][1](tmp)
+        except Exception:
+            # Serially this would abort the run with a traceback. A worker
+            # cannot do that without taking the other shards' verdicts with it,
+            # so the traceback is carried back and counted as a failure — the
+            # suite still goes red, and nothing is swallowed.
+            import traceback
+            rows.append((i, "ERROR", traceback.format_exc())); continue
+        if isinstance(expect, Skip):
+            rows.append((i, "SKIP", str(expect))); continue
+        if expect is None:
+            rows.append((i, "SKIPFIX", "")); continue
+        rc, out = gate()
+        if rc == 0:
+            rows.append((i, "HOLE", ""))
+        elif expect.lower() not in out.lower():
+            rows.append((i, "WEAK", expect))
+        else:
+            rows.append((i, "ok", ""))
+
+    # Each copy proves its own restore. Serially this was one check at the end
+    # of the run; with a copy per worker, one check would leave the other three
+    # untested.
+    restore()
+    rc, _out = gate()
+    return rows, rc == 0
+
+
+def _shard_entry(k, n, out):
+    """Worker process entry point: run shard k and post the verdicts back."""
+    try:
+        rows, clean = _run_shard((k, n))
+        out.put((k, rows, clean))
+    except BaseException:
+        import traceback
+        out.put((k, [], False, traceback.format_exc()))
+
+
+def _run_shards_in_parallel(n):
+    """Start one process per shard and collect them. Returns (shards, lost).
+
+    A shard that dies without posting anything is reported by number rather than
+    silently dropped: the cases it held did not run, and a suite that quietly
+    tests 80 of 105 cases and still says GATE HOLDS is worse than one that fails.
+    """
+    ctx = mp.get_context("spawn")
+    out = ctx.Queue()
+    procs = [ctx.Process(target=_shard_entry, args=(k, n, out), daemon=False)
+             for k in range(n)]
+    for p in procs:
+        p.start()
+
+    got = {}
+    # Generous: a shard is a quarter of the suite, and a stuck gate() is capped
+    # at its own 300s timeout well before this.
+    deadline = time.time() + 3 * 60 * 60
+    while len(got) < n and time.time() < deadline:
+        try:
+            msg = out.get(timeout=5)
+        except queuemod.Empty:
+            if all(p.exitcode is not None for p in procs):
+                break           # everyone has exited; nothing more is coming
+            continue
+        if len(msg) == 4:
+            k, _rows, _clean, tb = msg
+            print("ERROR shard %d raised before it could report:\n%s" % (k, tb))
+            got[k] = ([], False)
+        else:
+            k, rows, clean = msg
+            got[k] = (rows, clean)
+
+    for p in procs:
+        p.join(timeout=30)
+        if p.is_alive():
+            p.terminate()
+    return [got[k] for k in sorted(got)], [k for k in range(n) if k not in got]
+
+
+def _run(tmp):
+    restore = _snapshot(tmp)
 
     # The gate must pass on the real, current data first — otherwise every
     # "caught it" below is meaningless.
@@ -3146,19 +3296,36 @@ def _run(tmp):
         restore(); return 1
 
     failures = skipped = 0
-    for name, fn in CASES:
-        restore()
-        expect = fn(tmp)
-        if isinstance(expect, Skip):
-            print("SKIP  %s — %s" % (name, expect)); skipped += 1; continue
-        if expect is None:
-            print("SKIP  %s (fixture unavailable)" % name); skipped += 1; continue
-        rc, out = gate()
-        if rc == 0:
+    n = max(1, min(WORKERS, len(CASES)))
+    # Say it in the log: the worker count follows the runner's CPUs, so a
+    # slower-than-expected run is a smaller box, not a regression in the suite.
+    print("%d case(s) across %d worker(s), %s CPU(s) visible\n"
+          % (len(CASES), n, os.cpu_count()))
+    if n == 1:
+        shards = [_run_shard((0, 1))]
+    else:
+        shards, lost = _run_shards_in_parallel(n)
+        for k in lost:
+            print("ERROR shard %d of %d died without reporting — the cases it held "
+                  "(%s) did NOT run." % (k, n, ", ".join(
+                      CASES[i][0] for i in range(k, len(CASES), n))))
+            failures += 1
+
+    # Printed in case order, not completion order, so the output reads exactly as
+    # it did when the cases ran one after another.
+    for i, verdict, detail in sorted(r for rows, _clean in shards for r in rows):
+        name = CASES[i][0]
+        if verdict == "SKIP":
+            print("SKIP  %s — %s" % (name, detail)); skipped += 1
+        elif verdict == "SKIPFIX":
+            print("SKIP  %s (fixture unavailable)" % name); skipped += 1
+        elif verdict == "HOLE":
             print("HOLE  %s — the gate PASSED this. It should not." % name); failures += 1
-        elif expect.lower() not in out.lower():
+        elif verdict == "WEAK":
             print("WEAK  %s — rejected, but not for the expected reason (%r missing)"
-                  % (name, expect)); failures += 1
+                  % (name, detail)); failures += 1
+        elif verdict == "ERROR":
+            print("ERROR %s — the case itself raised:\n%s" % (name, detail)); failures += 1
         else:
             print("ok    %s" % name)
 
@@ -3172,11 +3339,19 @@ def _run(tmp):
     failures += concurrency_cases()
     failures += notice_citation_cases()
 
+    # This copy is the one the extras above mutate; the cases' copies each
+    # checked themselves inside their own worker.
     rc, out = gate()
     if rc != 0:
-        print("\nWARNING: the working copy did not restore cleanly between cases —\n"
+        print("\nWARNING: the working copy did not restore cleanly after the extra cases —\n"
               "         the fault is in this suite, not in the repo, which was never written to.")
         failures += 1
+    dirty = sum(1 for _rows, clean in shards if not clean)
+    if dirty:
+        print("\nWARNING: %d worker copy/ies did not restore cleanly between cases —\n"
+              "         the fault is in this suite, not in the repo, which was never written to."
+              % dirty)
+        failures += dirty
     print()
     # The tally is itself a count in prose that has to match the rows: 3 link
     # cases + 2 concurrency cases, 1 Company Report no-op, plus the award

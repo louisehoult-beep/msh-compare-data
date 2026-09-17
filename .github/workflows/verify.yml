@@ -29,10 +29,19 @@ name: Verify (publish gate)
 #                 a real failure here means the gate is untrustworthy, not that
 #                 the live data is bad.
 #
-#   The self-test's 45 minutes is headroom over the ~26 it needed on 04/09, not
-#   a target. It grows with the case count. When it next crowds the limit, the
-#   fix is to run the cases in parallel — they each work in their own temp copy
-#   of the repo — not to keep raising this number.
+#   The self-test's 45 minutes is headroom, not a target, and it grows with the
+#   case count: ~26 minutes on 04/09/2026, 43-44 by 16/09 — three runs that day
+#   cleared the limit by under a minute. Nothing was wrong with it; the suite
+#   runs the whole gate once per case, so 105 cases x one ~20s verify.py run on
+#   a runner IS 40 minutes.
+#
+#   THE CASES NOW RUN IN PARALLEL (17/09/2026), which is what the note here said
+#   to do when it next crowded the limit, rather than raising the number again.
+#   Four workers, each with its own copy of the repo — a shared copy cannot work
+#   because every case deliberately breaks a data file. See the block above
+#   _run_shard in test_verify.py for why it shards rather than queues, and why
+#   spawn is requested explicitly. The 45 minutes stays: it is now roughly four
+#   times the headroom it was, which is the point.
 
 on:
   push:
