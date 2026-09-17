@@ -365,11 +365,11 @@
   }
  },
  "counts": {
-  "pairs": 5874,
-  "mapped": 4972,
+  "pairs": 5875,
+  "mapped": 4974,
   "notTaxonomy": 185,
-  "products": 96057,
-  "productsMapped": 63229
+  "products": 96134,
+  "productsMapped": 63303
  },
  "entries": [
   {
@@ -81387,9 +81387,16 @@
     "OsteoCool™ Radiofrequency Ablation System",
     "Kyphon V™ Premium Vertebroplasty Platform"
    ],
-   "hub": null,
+   "hub": [
+    "ortho:cement",
+    "ortho:equip",
+    "ortho:implant",
+    "ortho:trauma"
+   ],
    "notTaxonomy": true,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division's 14 captured products are Kyphon bone cement (KYPHON Xpede, Kyphon VuE = ortho:cement); Kyphon vertebroplasty/kyphoplasty delivery platforms and the OsteoCool radiofrequency ablation system (ortho:equip); allograft bone/tendon products (Frozen Anterior Tibialis Tendon, Frozen Semi-T tendons, Tendons & Ligaments, OrthoBlast II, Accell Connexus Putty, Allograft Cancellous Bone, TOPS System = implant biologics, ortho:implant); and Jazz Posterior Fixation (spinal fixation hardware, ortho:trauma). Awarded on Total Orthopaedic Solutions 3.",
+   "decidedIn": "Lindare-Medical-Ltd--framework-coverage-0917.json"
   },
   {
    "supplier": "Surtex Instruments Ltd",
@@ -97943,6 +97950,31 @@
    "kind": "product-override",
    "why": "a foetal scalp electrode by name and function — this framework's own Lot 6 is literally 'foetal scalp electrodes', which is exactly what cardiology:ctg (Foetal / CTG) is gated to",
    "decidedIn": "Salter Labs UK Ltd.json"
+  },
+  {
+   "supplier": "Osteotec Ltd",
+   "division": "Body Part",
+   "products": 60,
+   "categories": [
+    "Upper extremities",
+    "Brands",
+    "Osteotec"
+   ],
+   "examples": [
+    "ADDplus™",
+    "ADD™",
+    "neon³™",
+    "Obelisc™"
+   ],
+   "hub": [
+    "ortho:implant",
+    "ortho:trauma",
+    "ortho:equip"
+   ],
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division's 60 captured products are upper/lower extremity and spine implants (Cervical Cage, KONG-C/TL VBR System, VADER Pedicle System, Anterior Cervical Plate, STAR Ankle, ELiS CMCJ Replacement, Spaceflex Shoulder, EXABONE bone graft substitutes = ortho:implant); trauma/fixation hardware for hand, wrist, elbow, forearm and clavicle (Dorsal Hook Plate, Volar Fixed Angle Plate, Forearm Plates, Olecranon Hook Plate/Sled, Radial Column plates, Clavicle plates, Wrist Fusion Plate, K-wires, screws, staples = ortho:trauma); and surgical instruments (Percutaneous Burrs, Surgical Burs, Saw blades = ortho:equip). Awarded on Total Orthopaedic Solutions 3. This division replaced the stale 'Categories'/'Brands' split (both now unmapped orphans in the map, superseded by this crawl) after scripts/union_differentiator_pairs.py --apply added the new pair on 17/09/2026.",
+   "decidedIn": "Osteotec-Ltd--framework-coverage-0917.json"
   }
  ],
  "kinds": {
