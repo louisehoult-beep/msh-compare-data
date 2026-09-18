@@ -13,13 +13,13 @@
  "slug": "oncology-and-sact",
  "label": "Oncology and SACT",
  "defined": true,
- "generated": "2026-09-16",
+ "generated": "2026-09-18",
  "dataAsOf": {
-  "frameworks": "2026-09-15",
+  "frameworks": "2026-09-16",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-15T11:40:36+00:00",
-  "openTenders": "15/09/2026",
-  "drugTariff": "2026-09-15"
+  "frameworkAwards": "2026-09-18T11:10:05+00:00",
+  "openTenders": "18/09/2026",
+  "drugTariff": "2026-09-18"
  },
  "rules": {
   "frameworks": "NHS Supply Chain framework names matching /\\b(oncology ablation|infusion pumps and administration sets)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN, AND IT IS THE WHOLE POINT OF THIS PATCH. There is no NHS Supply Chain framework for a cytotoxic or a chemotherapy product, and the drug itself does not travel this way at all: it moves through NICE technology appraisal, the Cancer Drugs Fund, NHS England specialised commissioning and regional medicines procurement, none of which has an NHS Supply Chain framework page. The two agreements below are general ones that a cancer service buys THROUGH, not cancer agreements. Infusion Pumps, Administration Sets and Associated Products is the whole hospital's pump and giving-set route, counted on the critical care, palliative care and vascular access pages too. Endoscopy, Endourology and Oncology Ablation Consumables is the only agreement in the catalogue whose name carries the word oncology, and it carries it for tumour ablation devices; NHS Supply Chain publishes no lot breakdown for it, so all 58 of its suppliers are listed and most of them sell endoscopy rather than anything a chemotherapy day unit or an aseptic unit buys. Radiotherapy is not counted here either: its three NHS Supply Chain frameworks and Brachytherapy Seeds are a different treatment modality, which this page's own demand section treats as a different service, and no radiotherapy speciality page exists yet to hold them. A supplier named below is therefore a supplier on an agreement cancer services buy through, never a measure of anyone's oncology business.",
@@ -31,7 +31,7 @@
  "counts": {
   "frameworks": 2,
   "suppliers": 80,
-  "suppliersUnresolved": 2,
+  "suppliersUnresolved": 1,
   "awardsShown": 13,
   "awardsMatched": 13,
   "awardsWithheldByBuyerCap": 0,
@@ -849,9 +849,11 @@
    ]
   },
   {
-   "name": "Varian Medical Systems",
-   "resolved": false,
-   "variants": [],
+   "name": "Varian (Siemens Healthineers)",
+   "resolved": true,
+   "variants": [
+    "Varian Medical Systems"
+   ],
    "frameworks": [
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
    ]

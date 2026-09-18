@@ -13,13 +13,13 @@
  "slug": "urology",
  "label": "Urology",
  "defined": true,
- "generated": "2026-09-16",
+ "generated": "2026-09-18",
  "dataAsOf": {
-  "frameworks": "2026-09-15",
+  "frameworks": "2026-09-16",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-15T11:40:36+00:00",
-  "openTenders": "15/09/2026",
-  "drugTariff": "2026-09-15"
+  "frameworkAwards": "2026-09-18T11:10:05+00:00",
+  "openTenders": "18/09/2026",
+  "drugTariff": "2026-09-18"
  },
  "rules": {
   "frameworks": "NHS Supply Chain framework names matching /\\b(urology and bowel|endourology|intra-urethral|lithotripsy|bladder scanners|brachytherapy seeds|rigid endoscopy|flexible endoscopes|surgical implants for men)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the nine agreements above, Rigid Endoscopy and Flexible Endoscopes, are capital routes shared with other specialities, and their suppliers are endoscope manufacturers rather than urology houses; three more, Urology and Bowel Management, Surgical Implants for Men's and Women's Health and Brachytherapy Seeds, are shared with continence, gynaecology and oncology. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. One agreement the page carries is missing here for a data reason rather than a judgement: Maintenance, Repair and Calibration of Medical Equipment, which names urodynamics and lithotripsy equipment among the estates it maintains, is not one of the 121 framework names the Hub's crawler holds, so it cannot be claimed. Five of the nine agreements share one procurement reference, 2021/S 000-007768, and all five end on 31 March 2028 — that reference wraps NHS Supply Chain's whole diagnostic capital portfolio and 22 of its 140 briefs carry it, so its expiry is not a urology event. Finally, the larger half of the catheter economy is bought in the community on prescription through NHSBSA Drug Tariff Part IX and the dispensing appliance contractors, a route with no NHS Supply Chain framework page at all; the Drug Tariff summary is where it appears.",
@@ -29,9 +29,9 @@
   "drugTariff": "NHSBSA Drug Tariff Part IXA/IXB/IXC for the stated effective month, narrowed to the lines whose virtual medicinal product description matches /\\b(nelaton|foley|dilatation catheter|reusable catheter|catheterisation packs?|catheter (?:disposable|retaining|safety|securement|maintenance|valves?)|urinar\\w*|urostom\\w*|uridome|suprapubic|penile sheaths?|incontinence sheaths?|leg bags?|night bags?|bladder (?:infusion|irrigat\\w*|washout)|urine (?:meters?|bags?))\\b/i, and then summarised. The part is sliced rather than claimed whole because the part is not this speciality: Part IXA is 56,833 lines of dressings and elastic hosiery, which are the tissue viability page's, and only the lines this pattern selects belong here. Every count and price below is taken from those lines. Prices are the reimbursement price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's."
  },
  "counts": {
-  "frameworks": 8,
+  "frameworks": 9,
   "suppliers": 125,
-  "suppliersUnresolved": 7,
+  "suppliersUnresolved": 6,
   "awardsShown": 31,
   "awardsMatched": 31,
   "awardsWithheldByBuyerCap": 0,
@@ -148,6 +148,25 @@
     "Uniphar Medtech T/A Synapse Medical",
     "Uniplex UK Ltd",
     "Varian Medical Systems"
+   ],
+   "delisted": null
+  },
+  {
+   "name": "Flexible Endoscopes and Associated Options and Related Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/flexible-endoscopes-and-associated-options-and-related-services/",
+   "reference": "2021/S 000-007768",
+   "category": "Diagnostic Equipment and Services",
+   "supplyRoute": "Direct",
+   "starts": "1 April 2022",
+   "ends": "31 March 2028",
+   "supplierCount": 5,
+   "supplierSource": "no stated count on the page; 5 names parsed (UNVERIFIED COUNT)",
+   "suppliers": [
+    "FUJIFILM Healthcare UK Limited",
+    "Karl Storz Endoscopy UK Ltd",
+    "Olympus KeyMed",
+    "Pentax Medical",
+    "Richard Wolf UK Limited"
    ],
    "delisted": null
   },
@@ -329,6 +348,20 @@
    ]
   },
   {
+   "name": "Richard Wolf UK",
+   "resolved": true,
+   "variants": [
+    "Richard Wolf UK Limited",
+    "Richard Wolf UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Lithotripsy and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
    "name": "Coloplast",
    "resolved": true,
    "variants": [
@@ -339,6 +372,46 @@
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
     "Surgical Implants for Men’s and Women’s Health",
     "Urology and Bowel Management"
+   ]
+  },
+  {
+   "name": "Karl Storz UK",
+   "resolved": true,
+   "variants": [
+    "Karl Storz Endoscopy (UK) Limited",
+    "Karl Storz Endoscopy (UK) Ltd",
+    "Karl Storz Endoscopy UK Ltd"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Olympus (KeyMed)",
+   "resolved": true,
+   "variants": [
+    "KeyMed (Medical and Industrial Equipment) Ltd",
+    "Olympus KeyMed"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
+   ]
+  },
+  {
+   "name": "Pentax Medical",
+   "resolved": true,
+   "variants": [
+    "Pentax Medical",
+    "Pentax UK Limited"
+   ],
+   "frameworks": [
+    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
+    "Flexible Endoscopes and Associated Options and Related Services",
+    "Rigid Endoscopy and Associated Options and Related Services"
    ]
   },
   {
@@ -353,19 +426,6 @@
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
     "Rigid Endoscopy and Associated Options and Related Services",
     "Urology and Bowel Management"
-   ]
-  },
-  {
-   "name": "Richard Wolf UK",
-   "resolved": true,
-   "variants": [
-    "Richard Wolf UK Limited",
-    "Richard Wolf UK Ltd"
-   ],
-   "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
-    "Lithotripsy and Associated Options and Related Services",
-    "Rigid Endoscopy and Associated Options and Related Services"
    ]
   },
   {
@@ -458,6 +518,18 @@
    ]
   },
   {
+   "name": "Fujifilm Healthcare UK",
+   "resolved": true,
+   "variants": [
+    "FUJIFILM Healthcare UK Limited",
+    "FUJIFILM UK Ltd"
+   ],
+   "frameworks": [
+    "Bladder Scanners and Associated Options and Related Services",
+    "Flexible Endoscopes and Associated Options and Related Services"
+   ]
+  },
+  {
    "name": "GBUK Group",
    "resolved": true,
    "variants": [
@@ -502,18 +574,6 @@
    ]
   },
   {
-   "name": "Karl Storz UK",
-   "resolved": true,
-   "variants": [
-    "Karl Storz Endoscopy (UK) Limited",
-    "Karl Storz Endoscopy (UK) Ltd"
-   ],
-   "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
-    "Rigid Endoscopy and Associated Options and Related Services"
-   ]
-  },
-  {
    "name": "Laborie Medical Technologies UK Ltd",
    "resolved": true,
    "variants": [
@@ -542,29 +602,6 @@
    "variants": [
     "Novus Med",
     "Novus Med Ltd"
-   ],
-   "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
-    "Rigid Endoscopy and Associated Options and Related Services"
-   ]
-  },
-  {
-   "name": "Olympus (KeyMed)",
-   "resolved": true,
-   "variants": [
-    "KeyMed (Medical and Industrial Equipment) Ltd",
-    "Olympus KeyMed"
-   ],
-   "frameworks": [
-    "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
-    "Rigid Endoscopy and Associated Options and Related Services"
-   ]
-  },
-  {
-   "name": "Pentax Medical",
-   "resolved": true,
-   "variants": [
-    "Pentax UK Limited"
    ],
    "frameworks": [
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products",
@@ -906,16 +943,6 @@
    "variants": [],
    "frameworks": [
     "Urology and Bowel Management"
-   ]
-  },
-  {
-   "name": "Fujifilm Healthcare UK",
-   "resolved": true,
-   "variants": [
-    "FUJIFILM UK Ltd"
-   ],
-   "frameworks": [
-    "Bladder Scanners and Associated Options and Related Services"
    ]
   },
   {
@@ -1425,9 +1452,11 @@
    ]
   },
   {
-   "name": "Varian Medical Systems",
-   "resolved": false,
-   "variants": [],
+   "name": "Varian (Siemens Healthineers)",
+   "resolved": true,
+   "variants": [
+    "Varian Medical Systems"
+   ],
    "frameworks": [
     "Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products"
    ]
@@ -1855,7 +1884,7 @@
   "vmpFilter": "\\b(nelaton|foley|dilatation catheter|reusable catheter|catheterisation packs?|catheter (?:disposable|retaining|safety|securement|maintenance|valves?)|urinar\\w*|urostom\\w*|uridome|suprapubic|penile sheaths?|incontinence sheaths?|leg bags?|night bags?|bladder (?:infusion|irrigat\\w*|washout)|urine (?:meters?|bags?))\\b",
   "vmpCount": 92,
   "effectiveMonth": "2026-09",
-  "dataAsOf": "2026-09-15",
+  "dataAsOf": "2026-09-18",
   "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
   "lineCount": 3108,
   "supplierCount": 55,

@@ -7,9 +7,14 @@ name: Speciality news refresh
 # see 02-Elevate-and-Thrive/Hub/speciality-page-news-pipeline-gap-2026-09-15.md.
 # This workflow, scripts/build_speciality_news.py and app/speciality-news.js
 # are a small, independent fix living in THIS repo instead, following the
-# exact pattern already proved live by speciality-panels.yml (07/09/2026):
-# generate small per-slug JSON here, WordPress fetches it via a loader script,
-# no WordPress page ever needs touching again once its loader is in place.
+# pattern proved live by the speciality PANELS (07/09/2026): generate small
+# per-slug JSON here, WordPress fetches it via a loader script, no WordPress
+# page ever needs touching again once its loader is in place.
+#
+# Corrected 18/09/2026: this used to credit "speciality-panels.yml", which had
+# never existed — the panels' loader pattern was proved, but their JSON was
+# built by hand and then went stale for a fortnight because no workflow rebuilt
+# it (^o538). speciality-panels.yml exists now, added that day.
 #
 # Daily, not weekly — several of the sources (Vascular News, Cardiovascular
 # News, IVTeam etc.) publish daily, and MAX_AGE_DAYS=60 in the build script
