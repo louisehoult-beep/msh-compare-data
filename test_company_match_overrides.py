@@ -244,7 +244,7 @@ class ProseIsNotACuratorAssertion(unittest.TestCase):
         """Against the real seed, not a fixture — this is what failed the gate."""
         seed = {s["name"]: s
                 for s in json.load(open(R.SEED, encoding="utf-8"))["suppliers"]}
-        for name in ("Daniels Health (Sharpsmart)", "Ossur UK Limited",
+        for name in ("Daniels Health (Sharpsmart)", "Össur UK",
                      "Ontex Healthcare UK Ltd",
                      "Beaver Visitec International Sales Ltd"):
             with self.subTest(name):
