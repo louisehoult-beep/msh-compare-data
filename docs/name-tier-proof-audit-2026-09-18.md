@@ -106,7 +106,8 @@ forward-looking, and is now closed.
 - `scripts/verify_name_proofs.py` — new `merge_verdicts()`; `main()` merges
   instead of overwriting, and reports carried-forward vs re-adjudicated counts.
 - `state/name-proof-verification.json` — 128 → 148 verdicts (4 VERIFIED, 144
-  REFUSED). The original 128 are byte-identical.
+  REFUSED). All 128 original rows are present and unchanged; the list is now
+  sorted by name, so their order in the file differs.
 - `state/domain-seeding-report.json` — the 20 `proof: "name"` rows re-stamped
   as refused rows by `_ensure_refused_rows()`, the script's own writer.
 - `test_seed_domains.py` — the 14/08 counts pinned by check date and asserted
