@@ -143,6 +143,42 @@ def verify(rec):
     return out
 
 
+def merge_verdicts(fresh):
+    """This run's verdicts on top of every verdict already banked.
+
+    WHY THIS IS A MERGE AND NOT A WRITE (found 18/09/2026, `^o526`). Until today
+    this function did not exist and main() wrote `results: res` straight over
+    OUT — only the rows the CURRENT report happens to carry proof="name" for.
+    That is safe exactly once. The 14/08/2026 adjudication banked 124 REFUSED
+    verdicts, and seed_supplier_domains.refused_name_proofs() reads this file
+    before every write and drops those 124 names; _ensure_refused_rows() also
+    re-stamps them into the report on every --fresh sweep, citing this file as
+    "an adjudication that outlives any sweep". But a later sweep produces a
+    NEW, smaller set of name proofs — 20 of them on 18/09/2026, none of them
+    among the original 128 — so re-running this script to adjudicate those 20,
+    which is the documented remedy for them, would have replaced 128 verdicts
+    with 20 and silently re-opened all 124 refusals for writing.
+
+    A verdict is an adjudication. It is only ever added to or re-adjudicated by
+    a fresh probe of the same supplier, never dropped because this run did not
+    happen to look at it.
+
+    Returns (merged, kept, updated): the full verdict list, how many rows came
+    from the existing file untouched, and how many this run re-adjudicated.
+    """
+    try:
+        prior = json.load(open(OUT, encoding="utf-8")).get("results", [])
+    except (OSError, ValueError):
+        prior = []
+
+    by_name = {r["name"]: r for r in prior}
+    updated = sum(1 for r in fresh if r["name"] in by_name)
+    for r in fresh:
+        by_name[r["name"]] = r
+    merged = sorted(by_name.values(), key=lambda r: r["name"].lower())
+    return merged, len(prior) - updated, updated
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true",
@@ -168,14 +204,23 @@ def main():
     print("\n%d of %d second-sourced. %d were parked/for-sale domains." % (
         len(ok), len(res), len(parked)))
 
-    json.dump({"_notice": "Second-sourcing of the 128 name-proof domains. "
-                          "VERIFIED = the live site publishes this supplier's "
-                          "Companies House number. REFUSED = not second-sourceable; "
-                          "must not be written.",
+    merged, kept, updated = merge_verdicts(res)
+    if kept or updated:
+        print("  carried forward %d earlier verdict(s); %d re-adjudicated this run"
+              % (kept, updated))
+
+    json.dump({"_notice": "Second-sourcing of every name-proof domain ever "
+                          "recorded. CUMULATIVE — a verdict written here is an "
+                          "adjudication and outlives any sweep, so this file is "
+                          "merged, never replaced. VERIFIED = the live site "
+                          "publishes this supplier's Companies House number. "
+                          "REFUSED = not second-sourceable; must not be written.",
                "generated": dt.date.today().isoformat(),
-               "checked": len(res), "verified": len(ok),
-               "results": res}, open(OUT, "w"), indent=1)
-    print("report -> %s" % OUT)
+               "checked": len(merged),
+               "verified": sum(1 for r in merged if r.get("verdict") == "VERIFIED"),
+               "results": merged}, open(OUT, "w"), indent=1)
+    print("report -> %s  (%d verdicts, %d verified)"
+          % (OUT, len(merged), sum(1 for r in merged if r.get("verdict") == "VERIFIED")))
 
     if not a.write:
         print("\nreport only — nothing written to the seed.")

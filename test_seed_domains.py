@@ -54,12 +54,28 @@ def gate(proven, refused):
 print("verdict file")
 verdicts = json.load(open(VERDICTS, encoding="utf-8"))["results"]
 refused_names = seeder.refused_name_proofs()
-check("124 suppliers stand REFUSED", len(refused_names) == 124,
-      "found %d" % len(refused_names))
-check("4 suppliers stand VERIFIED",
-      sum(1 for v in verdicts if v.get("verdict") == "VERIFIED") == 4)
-check("every one of the 128 has a verdict", len(verdicts) == 128,
-      "found %d" % len(verdicts))
+
+# THE 14/08/2026 ADJUDICATION IS A FLOOR, NOT A SNAPSHOT (added 18/09/2026,
+# `^o526`). It used to be asserted as exact counts — 124 REFUSED, 4 VERIFIED,
+# 128 rows — which quietly made the file look like a one-off. It is not: every
+# later sweep produces new name proofs that need adjudicating too, and
+# verify_name_proofs.py now MERGES them in (it used to overwrite, which would
+# have dropped all 124 of these the first time it was re-run). So the original
+# 128 are pinned by their own check date and the totals are only ever allowed
+# to grow.
+orig = [v for v in verdicts if v.get("checked") == "2026-08-14"]
+check("the 14/08/2026 adjudication is intact: 124 REFUSED",
+      sum(1 for v in orig if v.get("verdict") == "REFUSED") == 124,
+      "found %d of the original 128" % sum(1 for v in orig if v.get("verdict") == "REFUSED"))
+check("the 14/08/2026 adjudication is intact: 4 VERIFIED",
+      sum(1 for v in orig if v.get("verdict") == "VERIFIED") == 4)
+check("the 14/08/2026 adjudication is intact: all 128 rows still present",
+      len(orig) == 128, "found %d" % len(orig))
+check("no verdict was ever dropped (the file only grows)",
+      len(verdicts) >= 128 and len(refused_names) >= 124,
+      "%d verdicts, %d refused" % (len(verdicts), len(refused_names)))
+check("every verdict row carries a name and a verdict",
+      all(v.get("name") and v.get("verdict") in ("REFUSED", "VERIFIED") for v in verdicts))
 
 print("banked report")
 report = json.load(open(REPORT, encoding="utf-8"))["results"]
@@ -263,6 +279,53 @@ blocked_test = [r for r in [{"name": "Absorbest AB", "proof": "self-declared-for
                 if r["name"] in refused_names_test and r["proof"] not in STRONG]
 check("self-declared-foreign is not blocked by the refused-title-proof gate",
       not blocked_test)
+
+print("verdict merge (added 18/09/2026, `^o526`)")
+# THE BUG THIS PINS. verify_name_proofs.py rebuilds its verdict file from
+# whatever the CURRENT seeding report happens to carry proof="name" for. On
+# 18/09/2026 that was 20 suppliers, none of them among the 128 adjudicated on
+# 14/08 — so writing `results: res` straight out, as it did until today, would
+# have replaced 128 verdicts with 20 and silently re-opened all 124 refusals
+# for writing. seed_supplier_domains.refused_name_proofs() reads exactly this
+# file to decide what can never be seeded.
+import verify_name_proofs as vnp  # noqa: E402
+
+_real_out = vnp.OUT
+try:
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        vnp.OUT = os.path.join(td, "verdicts.json")
+        json.dump({"results": [
+            {"name": "Old Refused Co", "verdict": "REFUSED", "checked": "2026-08-14",
+             "reason": "never second-sourced"},
+            {"name": "Old Verified Co", "verdict": "VERIFIED", "checked": "2026-08-14",
+             "proof": "registration"},
+        ]}, open(vnp.OUT, "w"))
+
+        fresh = [
+            {"name": "New Refused Co", "verdict": "REFUSED", "checked": "2026-09-18",
+             "reason": "site read, no registration number"},
+            {"name": "Old Refused Co", "verdict": "VERIFIED", "checked": "2026-09-18",
+             "proof": "registration"},
+        ]
+        merged, kept, updated = vnp.merge_verdicts(fresh)
+        by = {m["name"]: m for m in merged}
+
+        check("an earlier verdict this run did not look at is carried forward",
+              "Old Verified Co" in by and by["Old Verified Co"]["verdict"] == "VERIFIED")
+        check("a new verdict is added", "New Refused Co" in by)
+        check("re-adjudicating the same supplier replaces its row, not duplicates it",
+              len([m for m in merged if m["name"] == "Old Refused Co"]) == 1
+              and by["Old Refused Co"]["verdict"] == "VERIFIED")
+        check("nothing is dropped", len(merged) == 3, "got %d" % len(merged))
+        check("the counts report what was kept vs re-adjudicated",
+              (kept, updated) == (1, 1), "got kept=%d updated=%d" % (kept, updated))
+
+        # The failure mode itself: the pre-18/09 behaviour, run on this fixture.
+        check("the old overwrite behaviour would have lost a verdict",
+              len(fresh) < len(merged))
+finally:
+    vnp.OUT = _real_out
 
 print()
 if failures:
