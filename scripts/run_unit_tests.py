@@ -64,6 +64,7 @@ ELSEWHERE = {
 RUN = [
     "test_breadcrumb_division.py",
     "test_company_match_overrides.py",
+    "test_company_press_story_links.py",
     "test_company_tiers.py",
     "test_coverage_ledger.py",
     "test_crawl_site_concurrency.py",
