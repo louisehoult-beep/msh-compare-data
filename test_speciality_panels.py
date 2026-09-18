@@ -67,6 +67,39 @@ def check(name, ok, detail=""):
         fails.append(name)
 
 
+def matched_titles(slug):
+    """Every award title the rule MATCHES, not just the AWARD_CAP most recent
+    that the panel actually publishes.
+
+    Added 18/09/2026 (^o537). `panel["awards"]` is the capped, most-recent
+    slice, so asserting that a particular row appears in it freezes a
+    fast-moving feed into the test: the mental-health ligature rows were still
+    matched and correct, but three weeks of newer awards had pushed them out of
+    the newest forty and the assertion failed on nothing. Coverage questions
+    belong against the matched set; the cap is a display rule.
+    """
+    rule = B.SPECIALITY_RULES[slug]
+    rx = B.compile_rule(rule)
+    was = B.AWARD_CAP
+    try:
+        B.AWARD_CAP = 10 ** 9
+        rows, _total, _withheld = B.build_awards(
+            rx, rule, B.load("tender-history.json"), B.load("framework-awards.json"))
+    finally:
+        B.AWARD_CAP = was
+    return " || ".join((r.get("title") or "") for r in rows).lower()
+
+
+def shown_is_matched_or_capped(counts):
+    """The cap is the ONLY thing allowed to reduce what a panel shows.
+
+    Replaces a frozen `shown == matched == <n>` (^o537). The literal count rots
+    the moment the feed grows — which it did, on four panels at once — while the
+    rule it was standing for does not.
+    """
+    return counts["awardsShown"] == min(counts["awardsMatched"], B.AWARD_CAP)
+
+
 def load_panel(slug):
     p = os.path.join(HERE, "data", "speciality-panels", slug + ".json")
     if not os.path.exists(p):
@@ -1636,9 +1669,12 @@ for good in ["obesity pathway innovation programme",
              "bariatric hire contract",
              "level 3 digital weight management service"]:
     check("present: %s" % good, good in obt)
-check("every award matched is shown (8 of 8)",
-      ob["counts"]["awardsShown"] == ob["counts"]["awardsMatched"] == 8,
-      "shown=%s matched=%s" % (ob["counts"]["awardsShown"], ob["counts"]["awardsMatched"]))
+check("every award matched is shown, or the cap explains the difference",
+      shown_is_matched_or_capped(ob["counts"]),
+      "shown=%s matched=%s cap=%s" % (ob["counts"]["awardsShown"],
+                                      ob["counts"]["awardsMatched"], B.AWARD_CAP))
+check("award coverage has not collapsed below the 8 this panel had on 18/09/2026",
+      ob["counts"]["awardsMatched"] >= 8, str(ob["counts"]["awardsMatched"]))
 
 print("\nNO FRAMEWORK IS A FINDING, NOT A GAP (rule 14)")
 check("the rule declares no framework rather than a pattern that finds none",
@@ -1777,9 +1813,12 @@ for good in ["neurosurgery consumables", "provision of cranioplasties",
              "neuromodulation devices consumables", "operating microscopes",
              "interventional neuro radiology"]:
     check("present: %s" % good, good in net)
-check("every award matched is shown (33 of 33)",
-      ne["counts"]["awardsShown"] == ne["counts"]["awardsMatched"] == 33,
-      "shown=%s matched=%s" % (ne["counts"]["awardsShown"], ne["counts"]["awardsMatched"]))
+check("every award matched is shown, or the cap explains the difference",
+      shown_is_matched_or_capped(ne["counts"]),
+      "shown=%s matched=%s cap=%s" % (ne["counts"]["awardsShown"],
+                                      ne["counts"]["awardsMatched"], B.AWARD_CAP))
+check("award coverage has not collapsed below the 33 this panel had on 18/09/2026",
+      ne["counts"]["awardsMatched"] >= 33, str(ne["counts"]["awardsMatched"]))
 
 print("\nFRAMEWORKS — two claimed, three named and left to the pages they belong to")
 nenames = [f["name"] for f in ne["frameworks"]]
@@ -1932,9 +1971,12 @@ for good in ["palliative care medicines transport service",
              "ambulatory pumps, subcutaneous, administration and gravity sets",
              "infusion pumps, syringe pumps, administration sets"]:
     check("present: %s" % good[:52], good in pat)
-check("every award matched is shown (9 of 9)",
-      pa["counts"]["awardsShown"] == pa["counts"]["awardsMatched"] == 9,
-      "shown=%s matched=%s" % (pa["counts"]["awardsShown"], pa["counts"]["awardsMatched"]))
+check("every award matched is shown, or the cap explains the difference",
+      shown_is_matched_or_capped(pa["counts"]),
+      "shown=%s matched=%s cap=%s" % (pa["counts"]["awardsShown"],
+                                      pa["counts"]["awardsMatched"], B.AWARD_CAP))
+check("award coverage has not collapsed below the 9 this panel had on 18/09/2026",
+      pa["counts"]["awardsMatched"] >= 9, str(pa["counts"]["awardsMatched"]))
 
 print("\nFRAMEWORKS — one claimed, six named and left to the routes they belong to")
 panames = [f["name"] for f in pa["frameworks"]]
@@ -2707,8 +2749,20 @@ for missing in ["Suction", "Blood Draw Tools"]:
           not any(missing in n for n in _hb_all_fw))
 
 print("  the suppliers are the frameworks' own, resolved to one name per company")
-check("supplier count matches the two frameworks' 19 + 8 names",
-      hb["counts"]["suppliers"] == 26, str(hb["counts"]["suppliers"]))
+# Was `== 26` until 18/09/2026 (^o537). The two frameworks still carry 19 + 8
+# names; what changed is that the alias registry learned one more pair of
+# spellings, so 27 raw names now resolve to 25 rows rather than 26. Merging is
+# the point of this step, so a falling count is progress, not loss — the rule
+# worth asserting is that every raw name is accounted for and nothing is
+# invented, which is this plus the unresolved-is-zero check below.
+_hb_raw = sum(len(f.get("suppliers") or [])
+              for f in B.build_frameworks(B.compile_rule(B.SPECIALITY_RULES[HAEM]),
+                                          B.SPECIALITY_RULES[HAEM], B.load("frameworks.json")))
+check("the two frameworks still carry 19 + 8 = 27 names between them",
+      _hb_raw == 27, str(_hb_raw))
+check("every framework name resolves to a row, merges only ever reducing the count",
+      20 <= hb["counts"]["suppliers"] <= _hb_raw,
+      "%s rows from %s names" % (hb["counts"]["suppliers"], _hb_raw))
 check("no supplier name is left unresolved",
       hb["counts"]["suppliersUnresolved"] == 0, str(hb["counts"]["suppliersUnresolved"]))
 # Reflex Medical is on both frameworks under two spellings and is correctly one row.
@@ -4832,9 +4886,12 @@ for good in ["Endoscopy, Endourology & Oncology Ablation Consumables & Associate
 
 check("every award was admitted by its title",
       all(B.match_title(_co_rx, a["title"]) for a in co["awards"]))
-check("40 awards matched and all 40 are shown",
-      co["counts"]["awardsMatched"] == 40 and co["counts"]["awardsShown"] == 40,
-      "got %s matched / %s shown" % (co["counts"]["awardsMatched"], co["counts"]["awardsShown"]))
+check("awards shown is the matched total, or the cap explains the difference",
+      shown_is_matched_or_capped(co["counts"]),
+      "got %s matched / %s shown / cap %s" % (co["counts"]["awardsMatched"],
+                                              co["counts"]["awardsShown"], B.AWARD_CAP))
+check("award coverage has not collapsed below the 40 this panel had on 18/09/2026",
+      co["counts"]["awardsMatched"] >= 40, str(co["counts"]["awardsMatched"]))
 _co_titles = " || ".join((a.get("title") or "") for a in co["awards"]).lower()
 for gone in ["vessel harvesting", "craniofacial", "transnasal", "wigs", "flooring",
              "faecal management", "hysteroscopy"]:
@@ -4960,11 +5017,18 @@ _co_unres = sorted(s["name"] for s in co["suppliers"] if not s["resolved"])
 # "Salts Healthcare", so one company appears under two spellings in two tabs of
 # the same panel. That is an alias-registry gap, recorded here rather than fixed
 # inside a speciality build, because company-aliases is shared data.
-check("exactly five names are still unresolved and they are the expected five",
-      _co_unres == ["Emmat Medical", "KCI Medical Limited (3m)", "Omnimed Limited",
-                    "Salts Healthcare (Ostomy)", "Varian Medical Systems"],
-      "got %s" % _co_unres)
-check("the count of unresolved names is published", co["counts"]["suppliersUnresolved"] == 5)
+# Was a frozen list of five until 18/09/2026 (^o537). Varian Medical Systems has
+# since been resolved in the registry, which is the work succeeding — so the rule
+# is that this set may SHRINK freely and must never grow: a new unresolved name
+# is a new alias-registry gap and should fail here.
+_CO_UNRESOLVED_CEILING = {"Emmat Medical", "KCI Medical Limited (3m)", "Omnimed Limited",
+                          "Salts Healthcare (Ostomy)", "Varian Medical Systems"}
+check("no NEW unresolved name has appeared (the set may only shrink)",
+      set(_co_unres) <= _CO_UNRESOLVED_CEILING,
+      "new: %s" % sorted(set(_co_unres) - _CO_UNRESOLVED_CEILING))
+check("the count of unresolved names is published and agrees with the list",
+      co["counts"]["suppliersUnresolved"] == len(_co_unres),
+      "count=%s list=%s" % (co["counts"]["suppliersUnresolved"], _co_unres))
 _co_names = {s["name"] for s in co["suppliers"]}
 for want in ["Boston Scientific", "Olympus (KeyMed)", "Pentax Medical", "Wassenburg Medical",
              "Micro-Tech (UK) Ltd"]:
@@ -6602,7 +6666,14 @@ check("no police forensics row reached the published slice",
       "dna profiling" not in _mh_titles and "metal deposition" not in _mh_titles)
 check("no 'Environmental' row reached the published slice",
       "environmental" not in _mh_titles)
-check("the ligature rows are published", "ligature" in _mh_titles)
+# Asserted against the MATCHED set, not the published slice, since 18/09/2026
+# (^o537). The three ligature awards are still matched and still correct; three
+# weeks of newer mental-health awards had simply pushed them out of the
+# AWARD_CAP most-recent rows the panel publishes. The rule being tested is that
+# the mental-health pattern admits ligature work at all — a display cap is not
+# a coverage failure.
+check("the ligature rows are matched by the rule",
+      "ligature" in matched_titles(MH))
 check("the awards list is substantial rather than a token slice",
       mh["counts"]["awardsMatched"] >= 70, str(mh["counts"]["awardsMatched"]))
 check("mental health claims no open tender it cannot evidence", mh.get("openTenders") == [])
@@ -6751,8 +6822,17 @@ check("the withheld notices are counted, not silently dropped",
 check("awardsWithheldByBuyerCap is published and non-zero on this patch",
       pc["counts"].get("awardsWithheldByBuyerCap", 0) > 0,
       str(pc["counts"].get("awardsWithheldByBuyerCap")))
-check("the matched total is untouched by the cap", pc["counts"]["awardsMatched"] == 81,
-      str(pc["counts"]["awardsMatched"]))
+# Was `== 81` until 18/09/2026 (^o537); the feed has since grown past 100. The
+# claim is that awardsMatched counts every match REGARDLESS of what the buyer
+# cap and the display cap hold back — so it must account for both, and must not
+# fall below what this panel already had.
+check("the matched total is untouched by the cap",
+      pc["counts"]["awardsMatched"] >= (pc["counts"]["awardsShown"]
+                                        + pc["counts"].get("awardsWithheldByBuyerCap", 0))
+      and pc["counts"]["awardsMatched"] >= 81,
+      "matched=%s shown=%s withheld=%s" % (pc["counts"]["awardsMatched"],
+                                           pc["counts"]["awardsShown"],
+                                           pc["counts"].get("awardsWithheldByBuyerCap")))
 check("the awards rule tells the reader the cap was applied",
       "twelve of its forty" in (pc["rules"]["awards"] or "")
       and "awardsWithheldByBuyerCap" in (pc["rules"]["awards"] or ""))

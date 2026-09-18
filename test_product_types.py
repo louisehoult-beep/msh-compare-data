@@ -198,7 +198,18 @@ fails, _ = run(good_doc(), comparison_js=DRIFTED_FALLBACK_JS)
 check("a fallback TYPES literal missing an entry the JSON has fails",
       any("drifted" in m and "dressing" in m for _, m in fails), str(fails))
 
-fails, _ = run(good_doc(), comparison_js=GOOD_JS)
+# This is the only case in the file that asserts a CLEAN run — every other
+# scenario looks for one specific message and ignores the rest. That makes it
+# the only one exposed to the shrink check, which diffs the doc under test
+# against whatever is committed at data/product-types.json. Without a
+# committed_fn it read the real 167-entry file, so this three-entry fixture
+# looked like 164 quietly lost entries and the case failed on a fault it was
+# not testing (found 18/09/2026, ^o536). Stand the baseline in, exactly as the
+# "no entries lost against the committed version" case above does, so this
+# checks what its name says: a matching fallback literal, nothing else.
+MATCHING_DOC = good_doc()
+fails, _ = run(MATCHING_DOC, comparison_js=GOOD_JS,
+              committed_fn=lambda path: MATCHING_DOC if path == "data/product-types.json" else None)
 check("a fallback TYPES literal matching the JSON passes clean", not fails, str(fails))
 
 # A fetch comment that merely NAMES the file (e.g. explaining the drift this

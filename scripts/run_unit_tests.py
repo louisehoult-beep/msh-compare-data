@@ -69,11 +69,13 @@ RUN = [
     "test_merge_seed_on_retry.py",
     "test_numeric_slug_detail.py",
     "test_product_detail_cursor.py",
+    "test_product_types.py",
     "test_product_dossiers.py",
     "test_product_specs.py",
     "test_seed_domains.py",
     "test_speciality_news.py",
     "test_speciality_news_pipeline_merge.py",
+    "test_speciality_panels.py",
     "test_stale_brief_rows.py",
     "test_supplier_index_awards.py",
 ]
@@ -88,19 +90,55 @@ KNOWN_RED = {
         "until Lou rules on rename-versus-sale. Also 6 register-sourced "
         "previous names that are not aliases (so no search finds them), and 2 "
         "new name collisions (Lowenstein, Nipro). Lou's decision, not a fix.",
-    "test_product_types.py":
-        "^o536 — test-isolation bug, not a data fault. All three 'real, "
-        "currently-shipped files' checks pass. One synthetic fixture case trips "
-        "verify.py's own shrink guard, because the fixture's cut-down "
-        "product-types.json looks like 164 lost entries against the committed "
-        "one. The case needs isolating from the shrink guard.",
-    "test_speciality_panels.py":
-        "^o537 — 9 failures, mostly hard-coded expected counts that drifted as "
-        "the data grew (8 awards -> 11, 33 -> 35, 19+8 suppliers -> 25, five "
-        "unresolved names -> four). One looks real and is not drift: 42 awards "
-        "matched but only 40 shown. Also rebuilds data/speciality-panels/ as a "
-        "side effect, so it dirties the tree it runs in.",
 }
+
+
+# Tests that REBUILD repo data as a side effect of running. They are legitimate
+# — test_speciality_panels.py has to rebuild the panels to assert on them — but
+# this runner also fires from hooks/pre-push, and leaving a working tree dirty
+# mid-push is how a stray generated file ends up committed by accident. So the
+# runner puts back exactly what such a test rebuilt.
+#
+# It CANNOT protect an uncommitted edit of its own: the test overwrites those
+# files the moment it runs, before anything here sees them. Tried and measured
+# 18/09/2026 — a hand-edited dermatology.json was destroyed by the rebuild, and
+# skipping the restore for it only left the rebuilt version sitting there
+# instead. So the honest behaviour is to REFUSE up front when the test's own
+# output paths are already dirty, and say what to do, rather than quietly
+# destroy work.
+DIRTIES_TREE = {
+    "test_speciality_panels.py": ["data/speciality-panels"],
+}
+
+
+def _dirty_paths():
+    """Paths git currently reports as changed. Empty on any git failure — this
+    is a convenience, and it must never be the reason a test run fails."""
+    try:
+        out = subprocess.run(["git", "status", "--porcelain"],
+                             capture_output=True, text=True, cwd=ROOT)
+        if out.returncode != 0:
+            return None
+        return {line[3:].strip() for line in out.stdout.splitlines() if line.strip()}
+    except Exception:
+        return None
+
+
+def _restore(before, after, roots):
+    """git checkout -- the generated files this test rebuilt.
+
+    Only reached once the clash check above has established that nothing under
+    `roots` was dirty beforehand, so everything new here is the test's own
+    output and safe to throw away.
+    """
+    if before is None or after is None:
+        return []
+    new = sorted(p for p in (after - before)
+                 if any(p.startswith(r.rstrip("/") + "/") or p == r for r in roots))
+    if new:
+        subprocess.run(["git", "checkout", "--"] + new, cwd=ROOT,
+                       capture_output=True, text=True)
+    return new
 
 
 def main():
@@ -141,10 +179,28 @@ def main():
           "workflow." % (len(RUN), len(KNOWN_RED), len(ELSEWHERE)))
     failed = []
     for t in RUN:
+        roots = DIRTIES_TREE.get(t)
+        before = _dirty_paths() if roots else None
+        if roots and before is not None:
+            clash = sorted(p for p in before
+                           if any(p.startswith(r.rstrip("/") + "/") or p == r for r in roots))
+            if clash:
+                print("%-42s %6s  REFUSED" % (t, "-"))
+                print("    %s rebuilds %s, which would destroy these uncommitted "
+                      "changes:" % (t, ", ".join(roots)))
+                for c in clash[:10]:
+                    print("        %s" % c)
+                if len(clash) > 10:
+                    print("        ... and %d more" % (len(clash) - 10))
+                print("    Commit or stash them, then run again.")
+                failed.append((t, "refused: uncommitted changes under %s" % ", ".join(roots)))
+                continue
         started = time.time()
         p = subprocess.run([sys.executable, t], capture_output=True, text=True)
         took = time.time() - started
-        print("%-42s %6.1fs  %s" % (t, took, "ok" if p.returncode == 0 else "FAILED"))
+        restored = _restore(before, _dirty_paths(), roots) if roots else []
+        note = "" if not restored else "  (put back %d rebuilt file(s))" % len(restored)
+        print("%-42s %6.1fs  %s%s" % (t, took, "ok" if p.returncode == 0 else "FAILED", note))
         if p.returncode != 0:
             failed.append((t, (p.stdout or "") + (p.stderr or "")))
         sys.stdout.flush()
