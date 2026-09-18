@@ -117,16 +117,47 @@ class LiveDataMatchesTheDecision(unittest.TestCase):
                              "%s still publishes excluded company %s (%s)"
                              % (name, num, rec.get("registeredName")))
 
-    def test_cleared_records_carry_no_identity(self):
+    def test_a_cleared_record_never_re_acquires_a_weak_identity(self):
+        """A supplier we cleared may only be re-identified by a CONFIRMED route.
+
+        Narrowed 18/09/2026 (was test_cleared_records_carry_no_identity). Written
+        03/09/2026, when all 42 exclusion entries had just been cleared, it asserted
+        that such a supplier carried no company at all. That is stronger than the
+        rule the override file itself states: an `exclude` bars ONE NUMBER by any
+        route, and the supplier falls to the empty state only while nothing else is
+        found. Curators have since established several of these identities properly
+        and recorded it — Solventum's own seed record says in terms that 01130981
+        "supersed[es] the 03/09/2026 clearance" — and the test as written demanded
+        those be thrown away again.
+
+        What must never come back is the route that made all 35 wrong matches: a
+        weak, unverified match on a supplier already known to have a namesake on the
+        register. `probable` is exactly that tier — a bare Companies House name
+        search, a recorded number whose registered name does not corroborate, or a
+        dissolved company — and `corroborated` is explicitly "never a derived claim".
+        So an overridden supplier may carry an identity only at `confirmed`. That is
+        what caught Air Liquide Healthcare Ltd and Direct Healthcare Group on
+        18/09/2026, both re-attached by name search in the 15/09 refresh.
+
+        Officers are deliberately not asserted on here. They are only ever fetched
+        for a confirmed match, and that rule is enforced where the fetch happens, in
+        record_for(). Asserting it again here would fail Solventum, which legitimately
+        names a board on a properly confirmed record.
+        """
         cleared = [n for n, e in ENTRIES.items() if not e.get("correct")]
         self.assertGreaterEqual(len(cleared), 30)
         for name in cleared:
             rec = FIN.get(name)
-            if not rec:
+            if not rec or not rec.get("companyNumber"):
                 continue
-            self.assertIsNone(rec.get("companyNumber"), "%s still has a number" % name)
-            self.assertIsNone(rec.get("registeredName"), "%s still has a name" % name)
-            self.assertIsNone(rec.get("officers"), "%s still names officers" % name)
+            self.assertEqual(
+                rec.get("matchConfidence"), "confirmed",
+                "%s was cleared as a wrong match, and carries %s (%s) again at "
+                "'%s' — %s. Only a confirmed route may re-identify a cleared "
+                "supplier; record it in %s with two independent sources, or leave "
+                "the supplier empty."
+                % (name, rec.get("companyNumber"), rec.get("registeredName"),
+                   rec.get("matchConfidence"), rec.get("matchedOn"), R.OVERRIDES))
 
     def test_corrected_records_carry_the_decided_number(self):
         for name, e in ENTRIES.items():
