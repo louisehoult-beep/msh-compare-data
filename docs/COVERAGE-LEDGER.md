@@ -46,7 +46,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 14 | 24.6% | 21 | 31 | STARTED |
 | Urology and Bowel Management | continence | 57 | 17 | 29.8% | 30 | 32 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 19 | 38 | STARTED |
-| Digital Diagnostic Solutions | digital | 54 | 10 | 18.5% | 8 | 43 | STARTED |
+| Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 43 | STARTED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 15 | 28.3% | 18 | 26 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 25 | 47.2% | 15 | 26 | STARTED |
 | Surgical Instruments | surgical | 50 | 11 | 22.0% | 21 | 23 | STARTED |
@@ -65,7 +65,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 5 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 6 | 27.3% | 10 | 11 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 6 | 11 | STARTED |
-| Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 5 | 23.8% | 7 | 12 | STARTED |
+| Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 5 | 23.8% | 6 | 13 | STARTED |
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 6 | 30.0% | 10 | 6 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 6 | 31.6% | 8 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 10 | 52.6% | 6 | 10 | STARTED |
@@ -76,7 +76,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 6 | 7 | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 3 | 21.4% | 5 | 11 | STARTED |
-| Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 2 | 15.4% | 3 | 9 | STARTED · DEFERRED |
+| Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | 4 | 7 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 3 | 9 | STARTED · DEFERRED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 4 | 33.3% | 2 | 7 | STARTED |

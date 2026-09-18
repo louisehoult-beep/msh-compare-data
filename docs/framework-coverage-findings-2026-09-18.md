@@ -82,3 +82,54 @@ Cargo Services Far East, came back refused). The genuine progress is: one suppli
 blocked to a documented dead end, two domain-identity questions raised as fresh judgement
 calls, and one already-exhausted framework (Insulin Pumps) taken out of the picker's rotation
 so it stops being reselected for no movement.
+
+---
+
+## Addendum, 18/09/2026 (outstanding-sweep 12:10 run) — Digital Diagnostic Solutions: the three held Sysmex products now publish
+
+`^o464` / `^o508` said the three Sysmex UK products mapped to `digital:sw` on 13/09/2026
+(Quantcenter, Slidecenter, Slideviewer) would publish once `^o457`'s re-crawl ran. The
+re-crawl ran on 17/09/2026 and they did **not** publish, still held with "no source carries
+this product". 17/09's own findings diagnosed why: the override supplies the category, but a
+product also needs a capture in `data/supplier-product-detail.json`, and two 300-second
+`crawl_supplier_product_detail.py --supplier "Sysmex UK"` runs both stayed inside a long
+flow-cytometry reagent tail without ever reaching indexes 48, 57 and 59 of a 1254-product
+range. The three product pages had already been confirmed live by hand.
+
+The blocker was therefore **which products a run reaches**, not whether a source exists — the
+detail crawler could only ever be pointed at a supplier, never at a named product.
+
+**Fix:** `scripts/crawl_supplier_product_detail.py` gains `--product NAME` (repeatable, with
+`--supplier`). It *selects* from the supplier's own recorded range in
+`data/supplier-products.json`; a name that is not already in that range is **refused and
+reported, never searched for**, and each selected product still goes through the same
+`capture_one()` path, so an unreadable page is still skipped rather than summarised. A
+targeted run does not move or restamp the sweep's resume cursor
+(`state/product-detail-cursor.json`), which is left exactly where the scheduled sweep put it.
+Seven new tests in `test_product_detail_cursor.py` cover the selection, the refusal of an
+invented name, and the cursor guard; the cursor-guard test was proven to fail when the guard
+is removed.
+
+**Result:** all three captured first time from Sysmex's own product pages, `parsed:
+"structured"` (JSON-LD `Product` schema), on 18/09/2026:
+
+| Product | Source read |
+|---|---|
+| Quantcenter | `https://www.sysmex.co.uk/products/products-detail/quantcenter/` |
+| Slidecenter | `https://www.sysmex.co.uk/products/products-detail/slidecenter/` |
+| Slideviewer | `https://www.sysmex.co.uk/products/products-detail/slideviewer/` |
+
+All three now publish under `digital:sw`. Differentiator published count 35264 → 35267.
+
+**Coverage:** Digital Diagnostic Solutions 18.5% → **20.4%** (10 → 11 suppliers published,
+8 → 7 left); Sysmex UK moves out of `publishedElsewhere`. This is the first supplier to
+publish under `digital:hw`/`digital:sw` in this framework, so `^o422`'s "none publishes
+under digital:hw/sw" no longer holds as written — the practical ceiling it describes is
+real but sits one supplier lower than recorded.
+
+**Two other rows in this rebuild are not from this work.** A plain
+`build_differentiator.py` + `build_coverage_ledger.py` rebuild on an unmodified clone of the
+same `main` moves them identically: Radiotherapy Ancillary Devices (oncology → imaging,
+oncology; 2 → 4 published, 15.4% → 30.8%) and Ultrasound Scanners (7 → 6 left). Both are
+commit `4ae9101`'s already-landed vocabulary decisions, which never had the ledger rebuilt
+after them. Verified against a control clone before committing.

@@ -199,5 +199,83 @@ class TheWeeklySweepKeepsTheCursor(unittest.TestCase):
                                  "never be committed")
 
 
+class SelectNamedProducts(unittest.TestCase):
+    """--product: attempt NAMED products of a supplier's range instead of the
+    next cursor window (18/09/2026, ^o464/^o508).
+
+    Every test here fails against the cursor-window-only behaviour, where three
+    named products sitting at indexes 48/57/59 of a 1254-product range could
+    only ever be reached by the window happening to land on them.
+    """
+
+    def test_it_returns_the_named_products_in_range_order(self):
+        rangedoc = rng(100)
+        got, missing = c.select_named(rangedoc, ["Product 59", "Product 48"])
+        self.assertEqual(names(got), ["Product 48", "Product 59"])
+        self.assertEqual(missing, [])
+
+    def test_it_reaches_a_product_no_window_from_the_cursor_would(self):
+        # The exact Sysmex shape: a long range, a cursor deep in a tail, and a
+        # products-limit that can never span the distance back to index 48.
+        rangedoc = rng(1254)
+        window, _ = c.resume_slice(rangedoc, "Product 900", 40)
+        self.assertNotIn("Product 48", names(window))
+        got, missing = c.select_named(rangedoc, ["Product 48"])
+        self.assertEqual(names(got), ["Product 48"])
+        self.assertEqual(missing, [])
+
+    def test_a_name_not_in_the_range_is_refused_not_searched_for(self):
+        got, missing = c.select_named(rng(10), ["Product 3", "Invented Product"])
+        self.assertEqual(names(got), ["Product 3"])
+        self.assertEqual(missing, ["Invented Product"])
+
+    def test_matching_is_case_and_whitespace_insensitive(self):
+        got, missing = c.select_named(rng(10), ["  pRoDuCt   4 "])
+        self.assertEqual(names(got), ["Product 4"])
+        self.assertEqual(missing, [])
+
+    def test_a_name_asked_for_twice_is_attempted_once(self):
+        got, missing = c.select_named(rng(10), ["Product 2", "product 2"])
+        self.assertEqual(names(got), ["Product 2"])
+        self.assertEqual(missing, [])
+
+    def test_empty_inputs_do_not_raise(self):
+        self.assertEqual(c.select_named([], ["Product 1"]), ([], ["Product 1"]))
+        self.assertEqual(c.select_named(rng(3), []), ([], []))
+        self.assertEqual(c.select_named(rng(3), [""]), ([], []))
+
+    def test_it_never_invents_a_product_record(self):
+        got, _ = c.select_named(rng(5), ["Product 2"])
+        self.assertTrue(all(p in rng(5) for p in got),
+                        "selection must hand back the range's own records, "
+                        "never a name-shaped stub built from --product")
+
+
+class TargetedRunLeavesTheSweepAlone(unittest.TestCase):
+    """A --product run must not move, or restamp, the resume position the
+    scheduled sweep depends on."""
+
+    def test_the_source_guards_every_cursor_write_on_a_targeted_run(self):
+        src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "scripts", "crawl_supplier_product_detail.py"),
+                   encoding="utf-8").read()
+        for line_no, line in enumerate(src.splitlines(), 1):
+            stripped = line.strip()
+            if stripped.startswith("cursors[supplier] = name") or \
+               stripped.startswith("save_cursors(cursor_file, cursors)"):
+                indent = len(line) - len(line.lstrip())
+                above = src.splitlines()[max(0, line_no - 2)]
+                self.assertIn("if not a.product:", above,
+                              "line %d (%s) writes a cursor without checking "
+                              "for a targeted run" % (line_no, stripped))
+                self.assertLess(len(above) - len(above.lstrip()), indent)
+
+    def test_product_without_supplier_is_rejected(self):
+        src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "scripts", "crawl_supplier_product_detail.py"),
+                   encoding="utf-8").read()
+        self.assertIn("--product names products within ONE supplier's range", src)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

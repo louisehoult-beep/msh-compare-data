@@ -75,6 +75,7 @@ cursor left behind in a CI checkout is the same as no cursor at all. Pass
 
 Run:  python3 scripts/crawl_supplier_product_detail.py --supplier "Vygon (UK)" --domain vygon.co.uk --products-limit 5
       python3 scripts/crawl_supplier_product_detail.py --auto --limit 20
+      python3 scripts/crawl_supplier_product_detail.py --supplier "Sysmex UK" --product Quantcenter --product Slidecenter
 Then: python3 scripts/stamp_notice.py && python3 verify.py
 """
 import argparse
@@ -227,6 +228,45 @@ def bootstrap_cursor(products, products_store, supplier):
         if name and (supplier + "|" + nk(name)) in products_store:
             last = name
     return last
+
+
+
+def select_named(products, wanted):
+    """The products in THIS supplier's recorded range whose names were asked
+    for by --product, in range order, plus the asked-for names that are not in
+    the range at all.
+
+    WHY A TARGETED MODE EXISTS (18/09/2026, OUTSTANDING ^o464/^o508). The sweep
+    reads a supplier's range in a moving window from a resume cursor, which is
+    right for covering a whole range over many runs and wrong when three
+    NAMED products matter and the range is 1254 long: two 300-second runs
+    against Sysmex UK on 17/09/2026 both stayed inside a flow-cytometry
+    reagent tail and never reached Quantcenter (index 48), Slidecenter (57) or
+    Slideviewer (59), whose own live product pages had already been confirmed
+    by hand. The blocker was which products a run reaches, not whether a source
+    exists.
+
+    This selects, it does not invent. A name that is not already in
+    data/supplier-products.json for this supplier is REFUSED and returned in
+    `missing` — it never becomes a product to go looking for, because a product
+    this crawler has not been told the supplier sells is not a product. Each
+    selected product still goes through capture_one() exactly as the sweep
+    does, so a page that cannot be read is still skipped rather than summarised.
+    """
+    if not products or not wanted:
+        return [], list(wanted or [])
+    want = {}
+    for w in wanted:
+        k = nk(w)
+        if k:
+            want.setdefault(k, w)
+    chosen = []
+    for prod in products:
+        k = nk(prod.get("n"))
+        if k in want:
+            chosen.append(prod)
+            want.pop(k, None)
+    return chosen, list(want.values())
 
 
 
@@ -938,6 +978,13 @@ def main():
     ap.add_argument("--limit", type=int, default=6, help="max SUPPLIERS to attempt (auto mode)")
     ap.add_argument("--products-limit", type=int, default=MAX_PRODUCTS_PER_SUPPLIER,
                     help="max products per supplier, per run")
+    ap.add_argument("--product", action="append", default=[],
+                    help="attempt ONLY this product of --supplier's recorded range, "
+                         "by name, instead of the next window from the resume "
+                         "cursor. Repeatable. A name that is not already in "
+                         "data/supplier-products.json for that supplier is refused, "
+                         "not searched for. A targeted run does not move the sweep's "
+                         "resume position.")
     ap.add_argument("--dry-run", action="store_true")
     # A SUPPLIER WITH MORE PRODUCTS THAN 60 SECONDS BUYS HAS AN UNREACHABLE TAIL
     # (06/09/2026). The per-supplier loop below always starts at the first
@@ -1023,7 +1070,13 @@ def main():
         # The resume position goes down with the captures it describes. A run
         # killed part-way through would otherwise lose its position and read
         # the same slice again next time, which is the stall this fixes.
-        save_cursors(cursor_file, cursors)
+        # A --product run has not stepped through anybody's range, so it writes
+        # no cursor at all rather than restamping the sweep's file.
+        if not a.product:
+            save_cursors(cursor_file, cursors)
+
+    if a.product and not a.supplier:
+        sys.exit("--product names products within ONE supplier's range: pass --supplier NAME too.")
 
     if a.supplier:
         targets = [(a.supplier, a.domain or (suppliers_range.get(a.supplier) or {}).get("domain"))]
@@ -1068,11 +1121,28 @@ def main():
             continue
         resume_from = cursors.get(supplier)
         bootstrapped = False
-        if not resume_from and not a.restart:
-            resume_from = bootstrap_cursor(full_range, products_store, supplier)
-            bootstrapped = resume_from is not None
-        products, from_top = resume_slice(full_range, resume_from, a.products_limit)
-        if len(full_range) > len(products):
+        if a.product:
+            # TARGETED: the named products only, and the sweep's own resume
+            # position is left exactly where it was — this run is not a step
+            # through the range and must not look like one to the next sweep.
+            products, missing = select_named(full_range, a.product)
+            for name in missing:
+                print("== %s: %r is not in this supplier's recorded range — refused, "
+                      "not searched for" % (supplier, name), flush=True)
+            if not products:
+                print("== %s: none of the named product(s) are in its recorded range "
+                      "— nothing to do" % supplier, flush=True)
+                continue
+            print("== %s: %d named product(s) of %d in range; resume position left "
+                  "at %r" % (supplier, len(products), len(full_range),
+                             resume_from), flush=True)
+            from_top = False
+        else:
+            if not resume_from and not a.restart:
+                resume_from = bootstrap_cursor(full_range, products_store, supplier)
+                bootstrapped = resume_from is not None
+            products, from_top = resume_slice(full_range, resume_from, a.products_limit)
+        if not a.product and len(full_range) > len(products):
             print("== %s: %d of %d product(s) this run, %s"
                   % (supplier, len(products), len(full_range),
                      "starting at the top of the range" if from_top
@@ -1119,7 +1189,8 @@ def main():
                 name = p.get("n")
                 if not name:
                     continue
-                cursors[supplier] = name
+                if not a.product:
+                    cursors[supplier] = name
                 entry = bulk.get(nk(name))
                 if not entry:
                     print("   -- %-40s skipped: not in this supplier's Shopify bulk pull "
@@ -1168,7 +1239,8 @@ def main():
             # BEFORE the attempt, not after it: a product that raises, times
             # out or can never be matched must still advance the cursor, or it
             # blocks the head of the range on every future run.
-            cursors[supplier] = name
+            if not a.product:
+                cursors[supplier] = name
             pdeadline = min(deadline, time.time() + PRODUCT_BUDGET_S)
             entry, why = capture_one(domain, name, id_index, pdeadline, ptype or "product")
             if not entry:
@@ -1188,7 +1260,8 @@ def main():
 
     if not a.dry_run:
         save()
-        save_cursors(cursor_file, cursors)
+        if not a.product:
+            save_cursors(cursor_file, cursors)
     print("\n%d captured, %d skipped, %d changed since a prior capture."
           % (captured, skipped, changed))
 
