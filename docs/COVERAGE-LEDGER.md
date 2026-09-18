@@ -69,7 +69,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 6 | 30.0% | 10 | 6 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 6 | 31.6% | 8 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 10 | 52.6% | 6 | 10 | STARTED |
-| Examination Gloves | infection | 19 | 4 | 21.1% | 8 | 13 | STARTED |
+| Examination Gloves | infection | 19 | 5 | 26.3% | 6 | 14 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 8 | 8 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 4 | 22.2% | 11 | 6 | STARTED |
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 8 | 8 | STARTED |

@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-16",
-  "differentiator.json published": 35204,
-  "differentiator.json held": 52047
+  "differentiator.json published": 35264,
+  "differentiator.json held": 52241
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 433,
-  "inScopeSuppliersNeedingCrawl": 414,
-  "inScopeSuppliersNeedingDomain": 373,
-  "suppliersRefused": 430,
+  "inScopeSuppliersNeedingCrawl": 412,
+  "inScopeSuppliersNeedingDomain": 371,
+  "suppliersRefused": 431,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 2,
@@ -10855,8 +10855,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "25 April 2027",
    "suppliersAwarded": 19,
-   "suppliersPublished": 4,
-   "coverage": 21.1,
+   "suppliersPublished": 5,
+   "coverage": 26.3,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -10870,21 +10870,11 @@
      "domain": "globusgroup.com"
     },
     {
-     "supplier": "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
-     "domain": null
-    },
-    {
-     "supplier": "Medicom Healthpro Ltd",
-     "domain": null
-    },
-    {
      "supplier": "ORN International T/A Spectra Corporate",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
-    "Medicom Healthpro Ltd",
     "ORN International T/A Spectra Corporate"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -10894,6 +10884,13 @@
      "domain": "2san.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-28",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
+     "domain": "ergeagroup.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-18",
      "bucket": "refused"
     },
     {
@@ -10996,11 +10993,12 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 1
    },
    "published": [
     "Ansell",
     "Mediq Healthcare UK Ltd",
+    "Medicom Healthpro Ltd",
     "Semperit Investments Asia",
     "Unigloves (UK)"
    ],
@@ -11015,12 +11013,11 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
-    "Medicom Healthpro Ltd",
     "ORN International T/A Spectra Corporate"
    ],
    "refused": [
     "2San Global",
+    "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
     "Cargo Services Far East Limited",
     "H & R Healthcare Ltd",
     "Meditrade UK Ltd",
@@ -11029,7 +11026,7 @@
     "Supermax Healthcare"
    ],
    "unknown": [],
-   "actionableTotal": 8,
+   "actionableTotal": 6,
    "blockedReason": null,
    "deferred": null
   },
