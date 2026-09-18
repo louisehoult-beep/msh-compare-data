@@ -70,6 +70,43 @@ jobs:
             -d "msh-compare-data failed its publish gate. The Hub serves this repo directly, so members may be seeing bad data right now. github.com/louisehoult-beep/msh-compare-data/actions" \
             ntfy.sh/eth-hub-lou-4437
 
+  units:
+    name: Unit tests (do the repo's own tests still pass?)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      # ADDED 18/09/2026. Until today this repo had 25 test_*.py files at its
+      # root and SIX of them ran anywhere. The other nineteen were written,
+      # committed and then never executed again — and four were already red on
+      # clean main, one since 03/09. The same fortnight of silence let six
+      # company-match override keys go stale and publish a wrong company number
+      # to paying members (^o96).
+      #
+      # scripts/run_unit_tests.py holds the split and, more importantly, REFUSES
+      # if any test_*.py is in neither its RUN list nor its KNOWN_RED list. That
+      # is the part that stops the rot coming back: a test added tomorrow cannot
+      # quietly join the nineteen.
+      #
+      # ~45s, nearly all of it test_dead_company_check.py. Its own job, not a
+      # step on the gate, for the reason the block at the top of this file
+      # gives: a slow or failing test must not kill a job that has already
+      # cleared the live data and fire the "members may be seeing bad data"
+      # alarm about data that is fine.
+      - name: Repo unit tests
+        run: python3 scripts/run_unit_tests.py
+      - name: Phone alert if the repo's own tests broke (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Medical Sales Hub - UNIT TESTS FAILED" -H "Priority: default" -H "Tags: warning" \
+            -d "msh-compare-data's unit tests failed. This does NOT mean the live data is bad - the publish gate reports separately. github.com/louisehoult-beep/msh-compare-data/actions" \
+            ntfy.sh/eth-hub-lou-4437
+
   selftest:
     name: Gate self-test (does the gate still catch things?)
     runs-on: ubuntu-latest

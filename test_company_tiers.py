@@ -22,9 +22,12 @@ import unittest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "scripts"))
-# company-aliases lives beside Medical-Sales-Hub, three levels up from this
-# repo: 02-Elevate-and-Thrive/Hub/{company-aliases, Medical-Sales-Hub/Website/msh-compare-data}
-sys.path.insert(0, os.path.join(HERE, "..", "..", "..", "company-aliases"))
+# company-aliases lives INSIDE this repo (moved in by c2d9a4c, so cloud sessions
+# can resolve company identity). It used to sit three levels up, beside
+# Medical-Sales-Hub, and this line still pointed there until 18/09/2026 — which
+# meant the test only ever imported on a machine that still had the old copy on
+# disk, and raised ModuleNotFoundError everywhere else, CI included.
+sys.path.insert(0, os.path.join(HERE, "company-aliases"))
 os.chdir(HERE)
 
 import refresh_companies_house as R  # noqa: E402

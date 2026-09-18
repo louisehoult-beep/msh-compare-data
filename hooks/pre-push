@@ -21,11 +21,8 @@ if [ ! -f verify.py ]; then
 fi
 
 echo "pre-push: running the publish gate..."
-if python3 verify.py; then
-  exit 0
-fi
-
-cat >&2 <<'MSG'
+if ! python3 verify.py; then
+  cat >&2 <<'MSG'
 
   PUSH BLOCKED — verify.py failed.
 
@@ -35,4 +32,27 @@ cat >&2 <<'MSG'
   Fix them, or if you are certain the gate is wrong, say so in the commit
   message and use:  git push --no-verify
 MSG
-exit 1
+  exit 1
+fi
+
+# ADDED 18/09/2026. verify.py checks the DATA. It does not run the repo's own
+# test files, and until today nineteen of the twenty-five ran nowhere at all —
+# which is how six company-match override keys went stale and published a wrong
+# company number to paying members (^o96). ~45s on top of the gate.
+echo "pre-push: running the repo's unit tests..."
+if [ -f scripts/run_unit_tests.py ] && ! python3 scripts/run_unit_tests.py; then
+  cat >&2 <<'MSG'
+
+  PUSH BLOCKED — the repo's unit tests failed.
+
+  These are the repo's own invariants, not the live-data gate above. Either a
+  test caught a real regression, or a new test_*.py was added without being
+  listed in scripts/run_unit_tests.py.
+
+  Fix them, or if you are certain they are wrong, say so in the commit message
+  and use:  git push --no-verify
+MSG
+  exit 1
+fi
+
+exit 0
