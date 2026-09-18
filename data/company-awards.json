@@ -10,8 +10,8 @@
   "ref": "ETH-D8F9201A9",
   "contact": "contact@elevateandthrive.uk"
  },
- "dataAsOf": "16/09/2026",
- "generated": "2026-09-16",
+ "dataAsOf": "18/09/2026",
+ "generated": "2026-09-18",
  "source": "Find a Tender and Contracts Finder award-stage OCDS notices, Open Government Licence v3",
  "sourceUrls": {
   "Find a Tender": "https://www.find-tender.service.gov.uk/",
@@ -22,22 +22,16 @@
  "matchRule": "A supplier named on an award notice is attached to a Hub company only where the notice's name, normalised, is EXACTLY a normalised form of that company's own name or one of its recorded aliases. Normalisation lower-cases, turns & into and, drops punctuation, and strips trailing legal-form words (Ltd, Limited, plc, LLP, Inc, GmbH, BV, A/S, AB, Oy, Pty) and trailing territory words (UK, GB, England, Ireland, Europe, EMEA). Nothing else is stripped and there is no fuzzy, substring or edit-distance matching. A name matching two different companies, or none, is quarantined unpublished — it is a question for a human, never a best guess. One name is tried before that stripping: a notice name that a company holds verbatim, as its own name or a recorded alias, resolves to that company. This is narrower than the rule above, never wider, and it exists so two real companies whose names differ only by a territory word are told apart rather than quarantined against each other.",
  "coverage": {
   "complete": false,
-  "window": {
-   "from": "2026-09-08",
-   "to": "2026-09-16",
-   "days": 8,
-   "run": "2026-09-16"
-  },
+  "window": null,
   "note": "⚠️ INCOMPLETE — at least one feed hit its page guard before the window was exhausted, so awards from this window are missing. Re-run with a shorter window.",
   "notes": [
-   "Find a Tender: 7 supplier row(s) from 353 release(s) over 4 page(s)",
-   "Contracts Finder: 14 supplier row(s) from 600 release(s) over 6 page(s), back to 2026-09-08 — ⚠️ STOPPED AT THE 40-PAGE GUARD before reaching the cutoff, so this window was NOT fully walked and awards are missing."
+   "re-matched from stored rows, no fetch"
   ]
  },
  "counts": {
-  "companies": 61,
-  "awardRows": 70,
-  "unmatched": 36,
+  "companies": 62,
+  "awardRows": 71,
+  "unmatched": 35,
   "ambiguous": 0,
   "rowsHeld": 106
  },
@@ -430,6 +424,26 @@
     "ocid": "ocds-b5fd17-b9faaf1e-4f43-4e86-bdb8-f771ae74d1a1",
     "company": "Johnson & Johnson MedTech",
     "matchedOn": "\"johnson and johnson medical ltd\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
+   }
+  ],
+  "Direct Healthcare Group": [
+   {
+    "noticeSupplierName": "Direct Health Group",
+    "title": "Patient Lifting",
+    "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland)",
+    "date": "2026-08-06",
+    "url": "https://www.find-tender.service.gov.uk/Notice/074950-2026",
+    "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
+    "source": "Find a Tender",
+    "section": "tender-awards",
+    "cpv": "33192600",
+    "valueAmount": null,
+    "valueCurrency": "",
+    "periodStart": null,
+    "periodEnd": null,
+    "ocid": "ocds-h6vhtk-0664e2",
+    "company": "Direct Healthcare Group",
+    "matchedOn": "\"direct health group\" is held verbatim by this company, as its own name or a recorded alias, before any legal-form or territory word is stripped."
    }
   ],
   "Baxter / Hillrom": [
@@ -1765,23 +1779,6 @@
    "periodEnd": null,
    "ocid": "ocds-h6vhtk-06de42",
    "reason": "no Hub company's name or recorded alias normalises to \"st helens independent medical clinic\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
-  },
-  {
-   "noticeSupplierName": "Direct Health Group",
-   "title": "Patient Lifting",
-   "buyer": "The Common Services Agency (more commonly known as Public Services Delivery Scotland)",
-   "date": "2026-08-06",
-   "url": "https://www.find-tender.service.gov.uk/Notice/074950-2026",
-   "hubUrl": "https://medsalesintelligencehub.co.uk/medical-sales-hub/awards/",
-   "source": "Find a Tender",
-   "section": "tender-awards",
-   "cpv": "33192600",
-   "valueAmount": null,
-   "valueCurrency": "",
-   "periodStart": null,
-   "periodEnd": null,
-   "ocid": "ocds-h6vhtk-0664e2",
-   "reason": "no Hub company's name or recorded alias normalises to \"direct health group\". Add the alias to that company's record in data/supplier-seed.json to attach this award."
   },
   {
    "noticeSupplierName": "NHS SUPPLY CHAIN COORDINATION LIMITED (NHSSC - SCCL)",
