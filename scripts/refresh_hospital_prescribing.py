@@ -90,14 +90,31 @@ def fetch(url, timeout=180, retries=3):
 
 
 def resources():
-    """Monthly CSVs, oldest first. Names are HOSPITAL_DISP_COMMUNITY_YYYYMM."""
+    """Monthly CSVs, oldest first. Names are HOSPITAL_DISP_COMMUNITY_YYYYMM.
+
+    NHSBSA also republishes a month as a revision, named with a trailing word:
+    HOSPITAL_DISP_COMMUNITY_202505FINAL. The matcher used to anchor the six digits
+    to end-of-string, so a revised month was skipped as if it did not exist and was
+    carried as a null gap in every sparkline. That is exactly what happened to May
+    2025: the 15/08/2026 build recorded it as "never published by NHSBSA", and by
+    18/09/2026 it was published, as ...202505FINAL, and still invisible to us.
+
+    So the six digits may be followed by an optional revision word, and where a
+    month has both a plain and a revised resource the revision wins — it is the
+    later, corrected file.
+    """
     doc = json.loads(fetch("%s/package_show?id=%s" % (CKAN, PACKAGE), timeout=90))
-    out = []
+    best = {}
     for r in doc["result"]["resources"]:
-        m = re.search(r"(\d{6})$", r.get("name", "") or "")
-        if m and (r.get("format", "") or "").upper() == "CSV":
-            out.append((m.group(1), r["url"]))
-    return sorted(out)
+        m = re.search(r"(\d{6})([A-Z]*)$", (r.get("name", "") or "").upper())
+        if not m or (r.get("format", "") or "").upper() != "CSV":
+            continue
+        period, revision = m.group(1), m.group(2)
+        # A revised file outranks the plain one; two plain files for one month
+        # cannot happen, and if it ever did the last one read would win harmlessly.
+        if period not in best or (revision and not best[period][0]):
+            best[period] = (revision, r["url"])
+    return sorted((p, u) for p, (_rev, u) in best.items())
 
 
 def label_of(name):
