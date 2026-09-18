@@ -30,7 +30,7 @@ the two facts are separate, and the refusal used to be invisible for any
 supplier publishing anything anywhere.
 **1 framework(s) have nothing left by a permitted route** —
 low coverage there means exhausted, not neglected.
-**1 framework(s) are DEFERRED** — their Left is real and
+**2 framework(s) are DEFERRED** — their Left is real and
 counted here, but every supplier in it is waiting on a ruling only Lou can
 give, so `differentiator-framework-coverage` skips them when it picks a
 framework to work. They are listed in `data/coverage-deferrals.json` with
@@ -69,7 +69,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 6 | 30.0% | 10 | 6 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 6 | 31.6% | 8 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 10 | 52.6% | 6 | 10 | STARTED |
-| Examination Gloves | infection | 19 | 4 | 21.1% | 9 | 12 | STARTED |
+| Examination Gloves | infection | 19 | 4 | 21.1% | 8 | 13 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 8 | 8 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 4 | 22.2% | 11 | 6 | STARTED |
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 8 | 8 | STARTED |
@@ -78,7 +78,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Clinical and Sharps Waste Management | infection | 14 | 3 | 21.4% | 5 | 11 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | oncology | 13 | 2 | 15.4% | 3 | 9 | STARTED · DEFERRED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | 4 | 7 | STARTED |
-| Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 3 | 9 | STARTED |
+| Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 3 | 9 | STARTED · DEFERRED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 4 | 33.3% | 2 | 7 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 4 | 6 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 3 | 6 | STARTED |

@@ -25,14 +25,14 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 433,
-  "inScopeSuppliersNeedingCrawl": 415,
-  "inScopeSuppliersNeedingDomain": 374,
-  "suppliersRefused": 429,
+  "inScopeSuppliersNeedingCrawl": 414,
+  "inScopeSuppliersNeedingDomain": 373,
+  "suppliersRefused": 430,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 2,
   "blockedFrameworks": 1,
-  "deferredFrameworks": 1
+  "deferredFrameworks": 2
  },
  "unresolvedSupplierNames": [
   [
@@ -10874,10 +10874,6 @@
      "domain": null
     },
     {
-     "supplier": "Cargo Services Far East Limited",
-     "domain": null
-    },
-    {
      "supplier": "Medicom Healthpro Ltd",
      "domain": null
     },
@@ -10887,7 +10883,6 @@
     }
    ],
    "domainsMissing": [
-    "Cargo Services Far East Limited",
     "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
     "Medicom Healthpro Ltd",
     "ORN International T/A Spectra Corporate"
@@ -10899,6 +10894,13 @@
      "domain": "2san.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-28",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Cargo Services Far East Limited",
+     "domain": "cargofe.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-18",
      "bucket": "refused"
     },
     {
@@ -10994,7 +10996,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 4
+    "needDomain": 3
    },
    "published": [
     "Ansell",
@@ -11014,12 +11016,12 @@
    "capturedNothingCounted": [],
    "notCrawled": [
     "Ergea UK and Ireland Limited (Althea UK and Ireland Limited)",
-    "Cargo Services Far East Limited",
     "Medicom Healthpro Ltd",
     "ORN International T/A Spectra Corporate"
    ],
    "refused": [
     "2San Global",
+    "Cargo Services Far East Limited",
     "H & R Healthcare Ltd",
     "Meditrade UK Ltd",
     "Polyco",
@@ -11027,7 +11029,7 @@
     "Supermax Healthcare"
    ],
    "unknown": [],
-   "actionableTotal": 9,
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -12271,7 +12273,12 @@
    "unknown": [],
    "actionableTotal": 3,
    "blockedReason": null,
-   "deferred": null
+   "deferred": {
+    "reason": "All three remaining suppliers are parent/division identity questions, not crawl or mapping work. Abbott Laboratories Limited (CH 00329102, nutrition-only, confirmed) vs. Abbott Diabetes Care (CH 02548046, FreeStyle Libre/CGM, already claims this framework in its own record) \u2014 NHSSC's brief names \"Abbott Laboratories Ltd\" as the awarded supplier, which resolves via the alias registry to the nutrition entity, not the diabetes one. Medtronic (specialities still list Diabetes/CGM despite a 20/07/2026 note saying those tags should have been removed) vs. MiniMed Group, Inc. (already a separate Hub record, already claims this same framework) \u2014 NHSSC's brief still names \"Medtronic Ltd\", not MiniMed Group. Urathon Europe Ltd's CGM award (Yuwell Anytime, May 2025) is sourced only to Urathon's own site and was crawled fresh 15/09/2026 (104 products across 5 divisions) with no CGM item surfacing on the crawlable catalogue at all.",
+    "queuedIn": "02-Elevate-and-Thrive/Hub/identity-vocab-decision-queue.md",
+    "decisionRef": "^o527",
+    "addedOn": "2026-09-18"
+   }
   },
   {
    "framework": "Prosthetic Components and Associated Products",
