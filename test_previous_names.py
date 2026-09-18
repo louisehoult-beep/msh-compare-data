@@ -69,6 +69,19 @@ class PreviousNamesAreNotAMerge(unittest.TestCase):
     # They are listed so that a NEW collision still fails this test.
     KNOWN_PRE_EXISTING = {"cardiac services", "gs medical"}
 
+    # SETTLED distinct pairs: two records that norm_stripped() collapses onto one
+    # key ONLY because it removes territory words, and that Lou has already ruled
+    # are separate legal entities. Listing one here records a decision that was
+    # made; it never makes one.
+    #   nipro medical - 06993337 NIPRO MEDICAL UK LTD vs 03936551 NIPRO
+    #                   DIAGNOSTICS (UK) LIMITED, both active. Ruled separate by
+    #                   Lou on 15/09/2026 from the Intravenous Cannula award
+    #                   notice (2026/S 000-078334); the seed note on 'Nipro
+    #                   Medical UK Ltd' says the two must never be merged.
+    #                   "Europe" and "UK" are the distinguishing words, and
+    #                   norm_stripped() is what discards them.
+    SETTLED_DISTINCT = {"nipro medical"}
+
     def test_no_previous_name_is_claimed_by_another_supplier(self):
         """The guard. A previous name that is already another supplier's own
         name or alias must NOT have been added — that is a merge by the back
@@ -98,7 +111,8 @@ class PreviousNamesAreNotAMerge(unittest.TestCase):
                 if v:
                     owners.setdefault(norm_stripped(v), set()).add(s["name"])
         clashes = {k: sorted(v) for k, v in owners.items()
-                   if len(v) > 1 and k not in self.KNOWN_PRE_EXISTING}
+                   if len(v) > 1 and k not in self.KNOWN_PRE_EXISTING
+                   and k not in self.SETTLED_DISTINCT}
         self.assertEqual(clashes, {},
                          "new name forms are claimed by more than one supplier: %s" % clashes)
 

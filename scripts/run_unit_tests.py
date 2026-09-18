@@ -85,11 +85,19 @@ RUN = [
 # into RUN in the same change.
 KNOWN_RED = {
     "test_previous_names.py":
-        "^o535 — three failures. The one that matters: a seed merge folded "
-        "Gemini Surgical UK into Healthcare 25 Ltd, which this test forbids "
-        "until Lou rules on rename-versus-sale. Also 6 register-sourced "
-        "previous names that are not aliases (so no search finds them), and 2 "
-        "new name collisions (Lowenstein, Nipro). Lou's decision, not a fix.",
+        "^o535 — TWO failures left, both identity rulings for Lou. (1) The seed "
+        "merge that folded Gemini Surgical UK into Healthcare 25 Ltd, which "
+        "this test still forbids: the Find a Tender award notice for "
+        "2025/S 000-077817 (OCDS ocds-h6vhtk-051753, read 18/09/2026) names ONE "
+        "supplier party, legal name 'Healthcare 25 Ltd', PPON "
+        "GB-PPON-PNTQ-6715-JVMV, contact Paula@geminisurgical.co.uk — the page "
+        "renders the trading name 'Gemini Surgical UK' over that same party. "
+        "That is the closing check the 03/09 decision pack named, and it reads "
+        "rename, not sale. Lou confirms, then this test is rewritten. (2) "
+        "Lowenstein Medical UK Ltd vs Löwenstein Medical UK — a genuine "
+        "duplicate pair awaiting Lou's merge ruling. FIXED 18/09: the 6 "
+        "register-sourced previous names are now aliases, and the Nipro "
+        "collision is recorded as SETTLED_DISTINCT (Lou ruled 15/09).",
 }
 
 
