@@ -1,19 +1,38 @@
 #!/usr/bin/env python3
-"""Register-sourced previous names: searchable, evidenced, and NEVER a merge.
+"""Register-sourced previous names: searchable, evidenced, and never a merge
+made on a name alone.
 
 Added 03/09/2026. Companies House records a change of registered NAME against
 one company number, so a member who knows a supplier by its old name should
 still find it. What the register does NOT record is whether the business behind
-the name was sold, split or bought — so a shared previous name is a lead, never
-proof that two Hub records are one company.
+the name was sold, split or bought — so a shared previous name is a lead that
+has to be closed with a second, independent source. It is never proof on its
+own that two Hub records are one company. (See the Sigma Healthcare case in
+ALIAS-REVIEW-QUEUE.md, where three different companies have held one name.)
 
-That distinction is the whole reason for this file. Healthcare 25 Ltd's
-registered previous name is GEMINI SURGICAL UK LTD, and the seed also holds a
-SEPARATE `Gemini Surgical UK` record. Aliasing the old name onto Healthcare 25
-would quietly merge two records on a name alone — the exact move the alias
-registry exists to refuse (see the Sigma Healthcare case in
-ALIAS-REVIEW-QUEUE.md, where three different companies have held one name).
-Rename-versus-sale is Lou's open decision and no automated step may pre-empt it.
+The worked example is Healthcare 25 Ltd, whose registered previous name is
+GEMINI SURGICAL UK LTD, and which the seed once held as a second, separate
+`Gemini Surgical UK` record.
+
+UPDATED 18/09/2026 — the merge is CORRECT and this file now asserts it.
+Until today these tests required the two records to stay apart, because
+rename-versus-sale was open. It is closed, on the evidence the 03/09 identity
+decision pack itself nominated as the check that would close it:
+
+  Find a Tender award notice 2025/S 000-077817, OCDS ocds-h6vhtk-051753,
+  read 18/09/2026. Lot 1's award names ONE supplier party — legal name
+  "Healthcare 25 Ltd", PPON GB-PPON-PNTQ-6715-JVMV, registered office 128 City
+  Road EC1V 2NX, contactPoint.email Paula@geminisurgical.co.uk. The notice PAGE
+  renders the trading name "Gemini Surgical UK" over that same party. The award
+  was decided 10/09/2025, nearly two months AFTER 11241419 was renamed
+  HEALTHCARE 25 LTD on 18/07/2025.
+
+One legal person trading under both names, asserted by a statutory procurement
+notice and not by name similarity. Lou confirmed 18/09/2026 (^o535).
+
+What is still forbidden is unchanged, and is what the rest of this file guards:
+folding one record into another because the names look alike, with no second
+source. 128 City Road is a mass-registration address and is NOT corroboration.
 
   python3 -m unittest test_previous_names       exit 0 = the rule holds
 """
@@ -116,19 +135,40 @@ class PreviousNamesAreNotAMerge(unittest.TestCase):
         self.assertEqual(clashes, {},
                          "new name forms are claimed by more than one supplier: %s" % clashes)
 
-    def test_gemini_surgical_was_not_folded_into_healthcare_25(self):
+    def test_gemini_surgical_is_merged_into_healthcare_25_and_stays_searchable(self):
         """The live example, asserted by name because it is the one that matters.
 
-        Healthcare 25 Ltd IS registered as formerly Gemini Surgical UK Ltd, and
-        the Companies House panel says so. But the two seed records stay
-        separate until Lou decides rename-versus-sale."""
-        self.assertIn("Gemini Surgical UK", BY_NAME, "the separate record must survive")
+        Settled 18/09/2026 against Find a Tender 2025/S 000-077817 (see the
+        module docstring): one supplier party, legal name Healthcare 25 Ltd,
+        contact Paula@geminisurgical.co.uk, awarded after the 18/07/2025
+        rename. Rename, not sale — so ONE record, carrying both names.
+
+        This asserts the surviving shape, not the reasoning: exactly one record
+        answers to both names, and a member searching the old name still
+        reaches it. If a later refresh re-splits them, this fails."""
+        self.assertNotIn("Gemini Surgical UK", BY_NAME,
+                         "the merged-away record must not come back as a second supplier — "
+                         "one legal person is one record")
         h25 = BY_NAME["Healthcare 25 Ltd"]
         aliases = {norm_stripped(a) for a in (h25.get("aliases") or [])}
-        self.assertNotIn(norm_stripped("Gemini Surgical UK Ltd"), aliases,
-                         "Gemini Surgical UK Ltd must NOT be an alias of Healthcare 25 Ltd — "
-                         "that folds a separate supplier record in on a name alone")
-        self.assertNotIn(norm_stripped("Gemini Surgical UK"), aliases)
+        for old_name in ("Gemini Surgical UK", "Gemini Surgical UK Ltd"):
+            self.assertIn(norm_stripped(old_name), aliases,
+                          "%r must be an alias of Healthcare 25 Ltd, or a member who knows "
+                          "the supplier by its old name finds nothing" % old_name)
+
+    def test_the_gemini_merge_still_excludes_the_dissolved_namesake(self):
+        """Merging must not cost us the exclusion that guards the old name.
+
+        GEMINI SURGICAL INNOVATIONS (U.K.) LIMITED (09955180) was dissolved in
+        2017 and never held the name. It is exactly the company a name search
+        on 'Gemini Surgical UK' finds — and that name is now an alias of
+        Healthcare 25 Ltd, so the exclusion matters MORE after the merge, not
+        less."""
+        ov = json.load(open(os.path.join(HERE, "data", "company-match-overrides.json")))
+        entry = ov["overrides"].get("Healthcare 25 Ltd") or {}
+        self.assertIn("09955180", [str(x) for x in (entry.get("exclude") or [])],
+                      "the dissolved Gemini namesake 09955180 must stay excluded from "
+                      "Healthcare 25 Ltd now that 'Gemini Surgical UK' is one of its aliases")
 
     def test_the_register_still_records_the_rename_for_display(self):
         """Refusing the alias must not lose the fact. The bracketed display in

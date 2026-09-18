@@ -13,9 +13,11 @@ WHY THIS EXISTS (18/09/2026)
       repo. The registry was moved INTO the repo by c2d9a4c, so the test only
       ever imported on a machine that still had the old folder on disk. Fixed
       the same day.
-    * test_previous_names.py asserts that Gemini Surgical UK stays a separate
-      seed record until Lou rules on rename-versus-sale. A seed merge folded it
-      into Healthcare 25 Ltd anyway. Nothing noticed, because nothing ran it.
+    * test_previous_names.py asserted that Gemini Surgical UK stays a separate
+      seed record until Lou ruled on rename-versus-sale. A seed merge folded it
+      into Healthcare 25 Ltd anyway, and nothing noticed, because nothing ran
+      it. Settled 18/09 on the Find a Tender award notice the 03/09 decision
+      pack had itself nominated; the test now asserts the merge and runs here.
 
   The same fortnight of silence let six company-match override keys go stale and
   put a wrong company number in front of paying members (^o96, fixed 18/09).
@@ -72,6 +74,7 @@ RUN = [
     "test_product_types.py",
     "test_product_dossiers.py",
     "test_product_specs.py",
+    "test_previous_names.py",
     "test_seed_domains.py",
     "test_speciality_news.py",
     "test_speciality_news_pipeline_merge.py",
@@ -80,25 +83,18 @@ RUN = [
     "test_supplier_index_awards.py",
 ]
 
-# Red on clean main 18/09/2026, each for a reason that is its own decision.
-# These are NOT excused — they are tracked. Fix the cause, then move the file up
-# into RUN in the same change.
-KNOWN_RED = {
-    "test_previous_names.py":
-        "^o535 — TWO failures left, both identity rulings for Lou. (1) The seed "
-        "merge that folded Gemini Surgical UK into Healthcare 25 Ltd, which "
-        "this test still forbids: the Find a Tender award notice for "
-        "2025/S 000-077817 (OCDS ocds-h6vhtk-051753, read 18/09/2026) names ONE "
-        "supplier party, legal name 'Healthcare 25 Ltd', PPON "
-        "GB-PPON-PNTQ-6715-JVMV, contact Paula@geminisurgical.co.uk — the page "
-        "renders the trading name 'Gemini Surgical UK' over that same party. "
-        "That is the closing check the 03/09 decision pack named, and it reads "
-        "rename, not sale. Lou confirms, then this test is rewritten. (2) "
-        "Lowenstein Medical UK Ltd vs Löwenstein Medical UK — a genuine "
-        "duplicate pair awaiting Lou's merge ruling. FIXED 18/09: the 6 "
-        "register-sourced previous names are now aliases, and the Nipro "
-        "collision is recorded as SETTLED_DISTINCT (Lou ruled 15/09).",
-}
+# A test that is red for a reason that is its own decision goes HERE, not out of
+# the runner: tracked, with the decision named, and moved back up into RUN in the
+# same change that fixes the cause. Empty is the correct steady state.
+#
+# Emptied 18/09/2026. test_previous_names.py was the last entry — it forbade the
+# Gemini Surgical UK / Healthcare 25 Ltd merge until rename-versus-sale was
+# settled. Find a Tender 2025/S 000-077817 settled it (one supplier party, legal
+# name Healthcare 25 Ltd, contact Paula@geminisurgical.co.uk, awarded after the
+# rename), Lou confirmed, and the test was rewritten to assert the merge and
+# moved into RUN (^o535). The Lowenstein/Löwenstein duplicate it also caught was
+# merged the same day.
+KNOWN_RED = {}
 
 
 # Tests that REBUILD repo data as a side effect of running. They are legitimate
