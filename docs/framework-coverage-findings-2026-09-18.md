@@ -133,3 +133,96 @@ same `main` moves them identically: Radiotherapy Ancillary Devices (oncology →
 oncology; 2 → 4 published, 15.4% → 30.8%) and Ultrasound Scanners (7 → 6 left). Both are
 commit `4ae9101`'s already-landed vocabulary decisions, which never had the ledger rebuilt
 after them. Verified against a control clone before committing.
+
+## Clinical and Sharps Waste Management — G&N Laboratory identity resolved, crawled, published (run started 17:07)
+
+**Picked Clinical and Sharps Waste Management (21.4%, 5 left) after Digital Diagnostic
+Solutions (20.4%, 7 left) re-confirmed as a practical ceiling** — its 7 remaining suppliers
+are the same "majors captured only incidentally elsewhere, no genuine range to categorise"
+pattern already logged (`^o469`, reconfirmed again this run, unchanged).
+
+**G&N Laboratory identity.** NHS Supply Chain's own contract launch brief names an awarded
+supplier "G&N Laboratory", which the seed carried as a standalone unverified record (added
+09/09/2026, no domain, no company number, `needDomain`). Confirmed same company as the
+existing Hub supplier `Griffiths and Nielsen Ltd` (Advanced Wound Care / Vascular Therapy /
+Syringes & Needles frameworks): `lab.gandn.com` (footer-branded "G&N Medical | Griffith &
+Nielsen") is a subdomain of `gandn.com`, and its footer registered address (Stane Street,
+Slinfold, Horsham, West Sussex RH13 0GN) matches the Companies House registered office for
+GRIFFITHS & NIELSEN LIMITED, 01201146 — the same number this record's own
+`companyNumberProof` had confirmed earlier the same day via `gandn.com`'s footer address.
+Not a name-similarity guess: same domain family, same registered address as an
+already-proven company number. Merged in `data/supplier-seed.json` (alias added, Clinical
+and Sharps Waste Management framework transferred, standalone record deleted) and recorded
+in `company-aliases/alias-overlay.json`.
+
+**A second, unrelated wrong match found and removed in the same pass.**
+`data/company-financials.json` separately carried `G&N Laboratory` -> `G & N LABORATORY
+LIMITED` (06424823) — a DIFFERENT company from GRIFFITHS & NIELSEN LIMITED (01201146),
+`matchConfidence: "probable"`, `matchedOn: "name search on Companies House — NOT verified
+against a recorded number"`. This is exactly the bare-name-search matching rule 11
+forbids, and it predates today's proper resolution. Removed rather than re-keyed, since
+`Griffiths and Nielsen Ltd` already carries its own correctly-sourced financials entry
+(01201146, matched by registered-office address, the same method already accepted for this
+record). `data/company-press.json` also carried an orphaned `G&N Laboratory` key (empty
+`items`, so nothing lost) — deleted, its alias moved onto the survivor, header counts
+recomputed via `refresh_company_press.py`'s own `recount()` rather than hand-edited (root
+cause of an earlier incident, 14/08/2026, per that script's own comment).
+
+**Crawl.** `gandn.com` itself carried a same-day refusal ("the sitemap carries 0 URLs...")
+from earlier today's `companyNumberProof` work. Tested live before overturning it — not "in
+passing": direct calls to `scripts/crawl_supplier_site.py`'s own `sitemap_products('gandn.com')`
+and a full `crawl()` retry both succeeded cleanly, reading `sitemap_index.xml` ->
+`products-sitemap.xml` -> 27 real product URLs, including exactly the framework's own
+products (Eco-Sharps, Sharps Containers, Griff® Pac, Griff® Carton, Griff Eco Range, Ecodas
+Waste Treatment System). The earlier refusal's exact cause wasn't isolated (transient
+network response, most likely, since the same domain string and same code path succeeded
+minutes later) — recorded here rather than left unexplained. Re-crawled via
+`--retry-refused`, captured 27 products across 10 divisions on the company's own taxonomy.
+
+**Category mapping.** Only the two divisions inside this framework's scope
+(`infection:nitrile`/`infection:ppe`/`infection:sharps`) were mapped, per the hard rule not
+to touch other frameworks' data this run: `Clinical Waste Containment` (6 products: Eco-Sharps,
+Griff Eco Range, Griff® Grip, Sharps Containers, Griff® Pac, Griff® Carton) and `Clinical
+Waste Treatment` (1: Ecodas Waste Treatment System), both -> `infection:sharps`, evidenced by
+explicit product names. Recorded in
+`data/differentiator-map-parts/Griffiths-and-Nielsen-Ltd.json` and merged. The other 8
+divisions (Wound Dressings, Wound Care and Prevention, Mechanical DVT Prophylaxis, Medical
+Compression, Colorectal Scopes, Rehabilitation Products, Safety Needles & Syringes,
+Laboratory Products — 20 products) are left unmapped: they belong to this supplier's OTHER
+framework awards, out of scope for this run.
+
+**Missing step found and fixed: mapped-but-unpublished.** After mapping + rebuilding, the 7
+sharps/waste products stayed OUT of both `products` and `held` in `differentiator.json` —
+traced to `build_differentiator.py`'s `if not sources: held.append(...)` gate: a
+sitemap-route crawl gives a product NAME but no per-product detail page, so a mapped
+division with no separate product-detail capture never publishes. Ran
+`scripts/crawl_supplier_product_detail.py --supplier "Griffiths and Nielsen Ltd" --domain
+gandn.com --product <name>` for all 7 named products (all captured first time, structured
+JSON-LD product pages). Rebuilt: published count 35267 -> 35274, all 7 under
+`infection:sharps`.
+
+**Coverage:** Clinical and Sharps Waste Management 21.4% -> **28.6%** (3 -> 4 of 14
+suppliers published, actionable 5 -> 4).
+
+**Same gap re-found on the framework's other actionable suppliers, left unforced.** The 4
+remaining `publishedElsewhereNeedingCategory` suppliers (Cardinal Health U.K. 432 Ltd, Fannin
+(UK) Limited, Medline Industries — none yet in `supplier-products.json` at all — and
+Vernacare, which is crawled and whose relevant divisions ARE already correctly mapped to
+`infection:sharps`/`infection:ppe`) do not publish for the same "no sources" reason. Tried
+`crawl_supplier_product_detail.py` against Vernacare's 17 relevant product entries
+(`Large Range`, `Small Range`, `Chemopure® Gloves`, etc.) and all 17 were skipped: "the
+sitemap carries no product URLs to match against". Vernacare's original crawl read from site
+NAVIGATION, not a sitemap of real product pages — its "products" under these divisions are
+generic size/range labels (`Large Range`, `Pocket Size Range`), not individual products with
+their own page to source from. Same shape as the Globus (Shetland) Ltd Hand Protection
+finding (`^o521`): mapping a navigation label as if it were a sourced product would publish
+something that doesn't exist. Left held, not forced.
+
+**Peer collision during landing.** First landing attempt (from a different clone) hit
+`f65a443` (the Espere/Ossur merge, landed mid-work) — the record-level no-loss check flagged
+an untouched-file drift, and once cleared, `git rebase origin/main` produced real conflicts
+in the shared single-line JSON files (`company-alias-registry.json`, `company-financials.json`,
+`company-press.json`, `supplier-seed.json`) despite no overlapping records, purely because
+both commits touched the same minified blob. Aborted per policy (never hand-resolve a
+generated JSON conflict) and redid the entire batch on a fresh `./begin.sh` clone taken after
+`f65a443`, rather than resolving the rebase.

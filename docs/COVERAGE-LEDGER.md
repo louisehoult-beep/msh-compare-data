@@ -75,7 +75,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 8 | 8 | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 6 | 7 | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
-| Clinical and Sharps Waste Management | infection | 14 | 3 | 21.4% | 5 | 11 | STARTED |
+| Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 4 | 11 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | 4 | 7 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 3 | 9 | STARTED · DEFERRED |
