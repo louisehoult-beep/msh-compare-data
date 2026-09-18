@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-16",
-  "differentiator.json published": 35274,
-  "differentiator.json held": 52258
+  "differentiator.json published": 35285,
+  "differentiator.json held": 52535
  },
  "counts": {
   "frameworks": 122,
@@ -25,14 +25,14 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 430,
-  "inScopeSuppliersNeedingCrawl": 405,
-  "inScopeSuppliersNeedingDomain": 363,
-  "suppliersRefused": 431,
+  "inScopeSuppliersNeedingCrawl": 403,
+  "inScopeSuppliersNeedingDomain": 361,
+  "suppliersRefused": 432,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 2,
   "blockedFrameworks": 1,
-  "deferredFrameworks": 2
+  "deferredFrameworks": 3
  },
  "unresolvedSupplierNames": [
   [
@@ -2619,10 +2619,6 @@
      "domain": null
     },
     {
-     "supplier": "Meril UK Pvt Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Metaphysis LLP",
      "domain": null
     },
@@ -2728,7 +2724,6 @@
     "Marquardt UK",
     "Materialise",
     "Medartis Ltd",
-    "Meril UK Pvt Ltd",
     "Metaphysis LLP",
     "Microport Scientific Ltd",
     "Neptune Medical Limited",
@@ -3023,12 +3018,12 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 6,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 47
+    "needDomain": 46
    },
    "published": [
     "Acumed Ltd",
@@ -3058,6 +3053,7 @@
     "Anetic Aid Ltd",
     "Fannin (UK) Limited",
     "Johnson & Johnson MedTech",
+    "Meril UK Pvt Ltd",
     "M\u00f6lnlycke",
     "Sectra Limited"
    ],
@@ -3093,7 +3089,6 @@
     "Marquardt UK",
     "Materialise",
     "Medartis Ltd",
-    "Meril UK Pvt Ltd",
     "Metaphysis LLP",
     "Microport Scientific Ltd",
     "Neptune Medical Limited",
@@ -3543,8 +3538,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "9 August 2028",
    "suppliersAwarded": 60,
-   "suppliersPublished": 13,
-   "coverage": 21.7,
+   "suppliersPublished": 14,
+   "coverage": 23.3,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3570,14 +3565,6 @@
      "domain": null
     },
     {
-     "supplier": "Lexington Medical UK Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Meril UK Pvt Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Minitouch Ltd",
      "domain": null
     }
@@ -3585,8 +3572,6 @@
    "domainsMissing": [
     "Aquilant Limited",
     "Bariatric Solutions International",
-    "Lexington Medical UK Ltd",
-    "Meril UK Pvt Ltd",
     "Minitouch Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -3694,6 +3679,13 @@
      "domain": "www.lawmed.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-13",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Lexington Medical UK Ltd",
+     "domain": "lexington-med.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-18",
      "bucket": "refused"
     },
     {
@@ -3875,7 +3867,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 5
+    "needDomain": 3
    },
    "published": [
     "Avicenna Surgical Limited",
@@ -3888,6 +3880,7 @@
     "Olympus (KeyMed)",
     "MedScience Distribution",
     "Medtronic",
+    "Meril UK Pvt Ltd",
     "Purple Surgical",
     "Schultz Medical (UK) Limited",
     "TFX Group Ltd (Teleflex Medical)"
@@ -3914,8 +3907,6 @@
    "notCrawled": [
     "Aquilant Limited",
     "Bariatric Solutions International",
-    "Lexington Medical UK Ltd",
-    "Meril UK Pvt Ltd",
     "Minitouch Ltd"
    ],
    "refused": [
@@ -3934,6 +3925,7 @@
     "Karl Storz UK",
     "Laprosurge Limited",
     "Lawmed Ltd",
+    "Lexington Medical UK Ltd",
     "LocaMed Ltd",
     "Medecon Healthcare UK",
     "Mermaid Medical Ltd",
@@ -3949,7 +3941,7 @@
     "Winners First Trading Limited"
    ],
    "unknown": [],
-   "actionableTotal": 19,
+   "actionableTotal": 17,
    "blockedReason": null,
    "deferred": null
   },
@@ -5889,7 +5881,12 @@
    "unknown": [],
    "actionableTotal": 7,
    "blockedReason": null,
-   "deferred": null
+   "deferred": {
+    "reason": "All 7 remaining suppliers (Draeger Medical UK, Haemonetics, Olympus (KeyMed), Leica Microsystems (UK), Philips, Roche Diagnostics UK, Siemens Healthineers) already publish ranges elsewhere in the Differentiator, but nothing under digital:hw/sw -- confirmed again this run by reading every one of their NHSSC-cache catalogue lines under this framework (36 terms across the 7): ECG electrodes, anaesthetic facemasks, CPAP/NIV consumables, a cardiology pressure-guidewire console, POC glucose/coagulation/blood-gas test strips, lab analysers (cobas, Atellica), microscopy histology accessories and an energy handpiece -- none of it clinical IT software or hardware by the Hub's own digital:hw/sw definitions. Forcing any of it into digital:hw/sw would be inventing a category the evidence does not support. This is the same structural ceiling identity-vocab-decision-queue.md #4 already closed as 'nothing left here for Lou' on the identity/tie question; what remains open is the coverage-target policy question in OUTSTANDING ^o268 -- whether Lou wants this framework kept as an active coverage target at all, or accepted at its structural ceiling.",
+    "queuedIn": "02-Elevate-and-Thrive/Hub/identity-vocab-decision-queue.md",
+    "decisionRef": "^o268",
+    "addedOn": "2026-09-18"
+   }
   },
   {
    "framework": "Complete Ophthalmology Solutions 3",
@@ -14256,10 +14253,6 @@
      "domain": null
     },
     {
-     "supplier": "Meril UK Pvt Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Pearsalls Ltd",
      "domain": null
     },
@@ -14277,7 +14270,6 @@
     "Artivion UK Ltd",
     "Assut UK LTD",
     "Lenience UK Ltd",
-    "Meril UK Pvt Ltd",
     "Pearsalls Ltd",
     "R&D Surgical Ltd",
     "SAI Medical Solutions Ltd"
@@ -14408,12 +14400,12 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 3,
-    "publishedElsewhereNeedingCategory": 17,
+    "publishedElsewhereNeedingCategory": 18,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 8
+    "needDomain": 7
    },
    "published": [],
    "publishedElsewhere": [
@@ -14428,6 +14420,7 @@
     "Mediq Healthcare UK Ltd",
     "Medline Industries",
     "Medtronic",
+    "Meril UK Pvt Ltd",
     "P3 Medical Ltd",
     "Reflex Medical Limited",
     "Reliance Medical",
@@ -14445,7 +14438,6 @@
     "Artivion UK Ltd",
     "Assut UK LTD",
     "Lenience UK Ltd",
-    "Meril UK Pvt Ltd",
     "Pearsalls Ltd",
     "R&D Surgical Ltd",
     "SAI Medical Solutions Ltd"
@@ -17669,15 +17661,10 @@
     {
      "supplier": "Dot Medical Limited",
      "domain": null
-    },
-    {
-     "supplier": "Meril UK Pvt Ltd",
-     "domain": null
     }
    ],
    "domainsMissing": [
-    "Dot Medical Limited",
-    "Meril UK Pvt Ltd"
+    "Dot Medical Limited"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -17700,22 +17687,22 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 7,
-    "publishedElsewhereNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [],
    "publishedElsewhere": [
-    "Medtronic"
+    "Medtronic",
+    "Meril UK Pvt Ltd"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Dot Medical Limited",
-    "Meril UK Pvt Ltd"
+    "Dot Medical Limited"
    ],
    "refused": [
     "Abbott Diabetes Care"
@@ -17868,10 +17855,6 @@
      "domain": null
     },
     {
-     "supplier": "Meril UK Pvt Ltd",
-     "domain": null
-    },
-    {
      "supplier": "R&D Surgical Ltd",
      "domain": null
     }
@@ -17880,7 +17863,6 @@
     "Aquilant Limited",
     "Artivion UK Ltd",
     "Corcym UK (Holding) Ltd",
-    "Meril UK Pvt Ltd",
     "R&D Surgical Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -17925,18 +17907,19 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 5
+    "needDomain": 4
    },
    "published": [],
    "publishedElsewhere": [
     "Abbott Medical U.K. Ltd",
     "BD \u2014 Becton, Dickinson",
-    "Medtronic"
+    "Medtronic",
+    "Meril UK Pvt Ltd"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
@@ -17944,7 +17927,6 @@
     "Aquilant Limited",
     "Artivion UK Ltd",
     "Corcym UK (Holding) Ltd",
-    "Meril UK Pvt Ltd",
     "R&D Surgical Ltd"
    ],
    "refused": [
