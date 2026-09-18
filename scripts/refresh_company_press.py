@@ -163,8 +163,98 @@ CORROBORATION_RULE = (
     "A story publishes only where at least two DISTINCT publishers carry it and each of those "
     "publishers is either a named reputable outlet or a publication whose own name signals a "
     "clinical or medical-device title. PR wires, stock-tip sites and SEO syndication never "
-    "count towards the two, whatever else they look like."
+    "count towards the two, whatever else they look like. Where the published links can be "
+    "read for what they are about — a publisher-resolved URL usually carries the article's own "
+    "headline in its path — at least two of them must speak to THIS story and not merely to "
+    "this company, or the story is dropped rather than published as corroborated."
 )
+
+# --- the story test on the published links (18/09/2026) --------------------
+# Structural words a URL path carries whatever the story is. Kept to structural
+# words only: every entry here is a word the test can no longer see, so a real
+# headline word added by mistake quietly weakens it. Deliberately the same list
+# verify.py holds as PRESS_URL_BOILERPLATE, and test_company_press_story_links.py
+# fails if the two ever drift apart.
+URL_BOILERPLATE = {
+    "news", "article", "articles", "articleview", "html", "htm", "php", "aspx",
+    "story", "stories", "view", "index", "idxno", "content", "print", "node",
+    "post", "posts", "page", "pages", "default", "item", "items", "detail",
+    "details", "feature", "featured", "topics", "topic", "section", "sections",
+    "category", "categories", "tag", "tags", "archive", "latest", "breaking",
+    "press", "releases", "release", "media", "read", "show", "full",
+}
+
+
+def story_link_evidence(headline, sources, name_toks):
+    """How many of an item's published links are ABOUT this story, not this company.
+
+    Returns (assessed, agree, disagree): the number of links carrying enough slug
+    to judge, the distinct publishers among them whose slug shares a substantial
+    word with the headline, and those whose slug shares none.
+
+    Same reading of the same evidence verify.py's corroboration invariant makes,
+    written here so the writer can decline to publish what the gate would refuse.
+    The two are kept deliberately separate — the gate must stay an INDEPENDENT
+    test of the published file, because a gate that simply re-ran the writer's
+    own logic would have passed the very file that was wrong on 18/08/2026.
+    test_company_press_story_links.py holds them to the same answer.
+    """
+    name_toks = name_toks or set()
+    topic = {t for t in press_match.norm(headline).split() if len(t) > 3} - name_toks
+    agree, disagree, assessed = set(), [], 0
+    if len(topic) < 2:
+        return assessed, agree, disagree
+    for s in sources or []:
+        if (s or {}).get("urlType") != "publisher":
+            continue            # a redirect's URL is Google's, not the publisher's
+        raw = str((s or {}).get("url") or "")
+        # PATH ONLY — the host is the publisher's name, not the story's.
+        path = raw.split("//")[-1]
+        path = path[path.find("/"):] if "/" in path else ""
+        slug = press_match.norm(re.sub(r"[-/_.?=&]", " ", path))
+        slug_toks = {t for t in slug.split() if len(t) > 3} - name_toks - URL_BOILERPLATE
+        if len(slug_toks) < 3:
+            # An ID-style or section-only URL carries no headline to compare.
+            # Not assessed in either direction: absence of evidence is not evidence.
+            continue
+        assessed += 1
+        pub = str((s or {}).get("publisher") or "").strip().lower()
+        if topic & slug_toks:
+            agree.add(pub)
+        else:
+            disagree.append(pub)
+    return assessed, agree, disagree
+
+
+def story_links_unsupported(headline, sources, name_toks):
+    """The reason this item's links do not support the claim, or None if they do.
+
+    WHY THE WRITER REFUSES RATHER THAN THE GATE CATCHING IT (18/09/2026)
+      The gate has tested this since 18/08/2026 and was right to. What it could
+      not do is stop the sweep failing: Google News returns a different set of
+      outlets for the same story from one day to the next, so an item published
+      on Tuesday with three corroborating links can regenerate on Wednesday with
+      two, one of which is an Independent-style short slug carrying nothing of
+      the story. Live case that forced this, 18/09/2026: Stryker's cyberattack
+      published fine on 17/09 with Healthcare IT News, the AHA and The
+      Independent; on 18/09 the AHA link was simply not in the results, the
+      remaining evidence no longer supported "two publishers carried this", and
+      the whole daily sweep failed the gate — so EVERY supplier's news went
+      unpublished over one item.
+
+      Publishing nothing is the correct output when the evidence is thin (root
+      rule 14). So this item is dropped and the sweep carries on, rather than
+      being written out and taking the run down with it.
+    """
+    assessed, agree, disagree = story_link_evidence(headline, sources, name_toks)
+    if assessed >= 2 and len(agree) < 2 and disagree:
+        return ("rule 5 CORROBORATION (story, not company): of %d published link(s) that carry "
+                "a readable headline slug, only %d publisher(s) share a word with this headline "
+                "beyond the company's own name — %s appear%s to carry a different story about "
+                "the same company"
+                % (assessed, len(agree), ", ".join(sorted(set(disagree))) or "?",
+                   "" if len(set(disagree)) > 1 else "s"))
+    return None
 ROTATION_RULE = (
     "Every supplier in supplier-seed.json is queried on a fixed rotation, oldest-checked first, "
     "with never-checked suppliers first: those carrying a curated note every %d days, the "
@@ -446,6 +536,15 @@ def build_items(supplier, raw, cache, resolve=True, rejects=None, universe=None)
             else:
                 sources.append({"publisher": s["publisher"], "url": s["link"],
                                 "urlType": "google-news-redirect"})
+        # The links are only known once they are resolved, so this is the first
+        # point at which the item's own published evidence can be read. See
+        # story_links_unsupported() for why the writer refuses here.
+        why_links = story_links_unsupported(lead["headline"], sources, name_toks)
+        if why_links:
+            rejects.append({"headline": lead["headline"],
+                            "publisher": ", ".join(sorted({i["publisher"] for i in c["items"]})),
+                            "reason": why_links})
+            continue
         out.append({
             "headline": lead["headline"],
             "date": lead.get("date") or "",
