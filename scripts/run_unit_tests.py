@@ -68,6 +68,7 @@ RUN = [
     "test_coverage_ledger.py",
     "test_crawl_site_concurrency.py",
     "test_dead_company_check.py",
+    "test_hospital_prescribing_resources.py",
     "test_merge_seed_on_retry.py",
     "test_numeric_slug_detail.py",
     "test_product_detail_cursor.py",

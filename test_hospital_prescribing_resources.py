@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""A revised NHSBSA month must not read as a month that was never published.
+r"""A revised NHSBSA month must not read as a month that was never published.
 
 Added 18/09/2026, from the re-verification pass before the hospital-prescribing
 tool was given a Hub page (^o49).
