@@ -25,11 +25,11 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 430,
-  "inScopeSuppliersNeedingCrawl": 403,
+  "inScopeSuppliersNeedingCrawl": 399,
   "inScopeSuppliersNeedingDomain": 361,
-  "suppliersRefused": 432,
+  "suppliersRefused": 435,
   "suppliersRefusedButPublishingElsewhere": 104,
-  "suppliersCapturedNothingCounted": 0,
+  "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 2,
   "blockedFrameworks": 1,
   "deferredFrameworks": 3
@@ -5925,24 +5925,8 @@
      "domain": null
     },
     {
-     "supplier": "EziDrops Ltd",
-     "domain": "ezidrops.com"
-    },
-    {
-     "supplier": "Instinctive Limited",
-     "domain": "instinctiveuk.com"
-    },
-    {
-     "supplier": "Meticuly INNOVATIONS Ltd",
-     "domain": "meticuly.com"
-    },
-    {
      "supplier": "OSI INC. Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Vision Matrix",
-     "domain": "visionmatrix.co.uk"
     }
    ],
    "domainsMissing": [
@@ -6001,6 +5985,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "EziDrops Ltd",
+     "domain": "ezidrops.com",
+     "reason": "only 3 product records on the site's API \u2014 that is a landing page, not a catalogue; the WooCommerce Store API returned 3 product(s), too few to be a catalogue; the sitemap carries 7 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-19",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Hanson Instruments Ltd",
      "domain": "www.hansoninstruments.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
@@ -6012,6 +6003,13 @@
      "domain": "innovanthealthcare.co.uk",
      "reason": "no per-product pages exist on this site: the WordPress API exposes no product post type (types are post/page/attachment/portfolio/event/porto_builder), and the 17 URLs under /products/ in wp-sitemap-posts-portfolio-1.xml are the company's own speciality landing pages (Cardiac/Vascular, Ophthalmic, Orthopaedic, Dental ...), each offering a PDF catalogue download and a prose \"Key Products Include\" list of instrument categories, not individual products. The separate storefront linked from the site's Shop link, shop.innovanthealthcare.co.uk, returns \"This store is unavailable\". A 17/09 capture read those 17 landing pages as if each speciality label were a product; that capture has been withdrawn. Not a --product-path fix: there is no product path.",
      "checked": "2026-09-17",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Instinctive Limited",
+     "domain": "www.instinctiveuk.com",
+     "reason": "neither www.instinctiveuk.com nor www.www.instinctiveuk.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-19",
      "bucket": "refused"
     },
     {
@@ -6033,6 +6031,13 @@
      "domain": "main-line.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-12",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Meticuly INNOVATIONS Ltd",
+     "domain": "www.meticuly.com",
+     "reason": "the site's WordPress API returned HTTP 429; the WooCommerce Store API returned HTTP 429; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 429: Too Many Requests)",
+     "checked": "2026-09-19",
      "bucket": "refused"
     },
     {
@@ -6146,9 +6151,9 @@
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 8,
     "heldNeedingCategory": 4,
-    "capturedNothingCounted": 0,
+    "capturedNothingCounted": 1,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 4,
+    "crawlable": 0,
     "needDomain": 2
    },
    "published": [
@@ -6184,14 +6189,12 @@
     "Johnson & Johnson Surgical Vision",
     "Scope Ophthalmics"
    ],
-   "capturedNothingCounted": [],
+   "capturedNothingCounted": [
+    "Vision Matrix"
+   ],
    "notCrawled": [
     "Duckworth & Kent Ltd",
-    "EziDrops Ltd",
-    "Instinctive Limited",
-    "Meticuly INNOVATIONS Ltd",
-    "OSI INC. Ltd",
-    "Vision Matrix"
+    "OSI INC. Ltd"
    ],
    "refused": [
     "Accrington Surgical Instrument Suppliers Ltd",
@@ -6201,11 +6204,14 @@
     "Core Surgical Limited",
     "D.O.R.C.",
     "Daybreak Medical Ltd",
+    "EziDrops Ltd",
     "Hanson Instruments Ltd",
     "Innovant Healthcare Limited",
+    "Instinctive Limited",
     "Solventum (3M Health Care)",
     "Lenstec (Barbados) Inc",
     "Mainline Instruments Ltd",
+    "Meticuly INNOVATIONS Ltd",
     "Optos",
     "OscarTech UK",
     "RB Medical Engineering Ltd",
@@ -6216,7 +6222,7 @@
     "Unisurge International Limited"
    ],
    "unknown": [],
-   "actionableTotal": 18,
+   "actionableTotal": 15,
    "blockedReason": null,
    "deferred": null
   },
