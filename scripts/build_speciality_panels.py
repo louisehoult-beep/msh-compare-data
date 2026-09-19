@@ -7232,13 +7232,25 @@ SPECIALITY_RULES = {
         #   Influenza Vaccination Programme (Lancashire), Flu Vaccination Campaign (NHS
         #   West and North London ICB), and Community and School Aged Immunisation
         #   Service (NHS England) - a delivery service, not a product.
+        #   An eighth arrived 18/09/2026 and reached the live panel before this was
+        #   caught: "Occupational Health Services (OHS), Health Surveillance and
+        #   Vaccination and Immunisation Services (HS&VIS)", Salix Homes Limited (a
+        #   housing association) to Health Partners Group Limited. Same call as the
+        #   seven above - an employer buying a service to vaccinate its own staff -
+        #   and it was admitted on "Vaccination" only because "immunisation service"
+        #   cannot match its own plural: the trailing \b sits against the "s" of
+        #   "Services". Both halves are fixed here, the pattern bug and the class:
+        #   "immunisation services?" so the term matches what it was written for, and
+        #   "occupational health services?" for the contract type itself. The SERVICE
+        #   is what is refused, not the words - a vaccine SUPPLY contract that happens
+        #   to name occupational health is still a medicines contract and still counted.
         "exclude": (
             r"\b(alcohol|drug test\w*|drug substance|intrathecal drug pumps?|"
             r"medicine skills|access to medicine|social prescribing|"
             r"veterinary|gambia|in[- ]orbit|postcards?|syringes and needles|"
             r"staff (?:flu|winter|influenza|vaccinat)\w*|staff vaccinat\w*|"
             r"workforce influenza|flu vaccination campaign|vaccine vouchers|"
-            r"immunisation service)\b"
+            r"occupational health services?|immunisation services?)\b"
         ),
         # 33600000 pharmaceutical products and 33651600 vaccines. Nothing wider: a bare
         # "336" prefix would reach 33696xxx laboratory reagents, which is pathology's,

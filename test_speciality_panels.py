@@ -1356,14 +1356,25 @@ check("FFR is not matched, because it matches DIFFRACTOMETER",
 
 print("\nTRUE POSITIVES — awards that must be on this patch")
 for want in ["cardiac rhythm management", "structural heart", "impella",
-             "heart valves", "pacemakers", "cardioplegia", "cath lab",
+             "heart valves", "pacemakers", "cath lab",
              "perfusion heart lung", "echocardiogram", "ecg",
              "aortic root", "cardiology stents"]:
     check("present: %s" % want, want in catitles)
 # Checked against the rule, not against the panel, because AWARD_CAP shows the 40
-# most recent of the 58 matched and these sit below that line today. The invariant
+# most recent of the 62 matched and these sit below that line today. The invariant
 # is that the rule admits them, which is what would break if a pattern were lost.
-for want in ["TRANSCATHETER HEART VALVE REPAIR, REPLACEMENT AND ASSOCIATED DEVICES",
+#
+# "Blood Cardioplegia Sets" (Procurement and Logistics Service, 22/07/2024) moved
+# down into this list 19/09/2026. It was asserted present ON THE PANEL until newer
+# awards took the matched count from 58 to 62 and pushed the cap line back to
+# 18/12/2024 - which turned a true statement about the data into a failing test
+# about the display, and took the publish gate and the nightly panels rebuild red
+# with it. Nothing was lost and nothing was loosened: the rule still admits the
+# row, which is the invariant this file exists to protect. Any "present:"
+# assertion on an award older than the cap line is a time bomb on a refreshing
+# feed; it belongs here.
+for want in ["Blood Cardioplegia Sets",
+             "TRANSCATHETER HEART VALVE REPAIR, REPLACEMENT AND ASSOCIATED DEVICES",
              "Procurement of ONX Mechanical Aoritic/Mitral Valve, ON-X Ascending "
              "Aortic Prosthesis with Valsalva Graft",
              "Atriclip Gillinov-Cosgrove:  Left Atrial Appendage Exclusion System Device",
