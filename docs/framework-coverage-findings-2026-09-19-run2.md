@@ -42,20 +42,37 @@ three). Aquilant is already a known-hard case, flagged the same way on the MIS f
 
 ### `heldNeedingCategory` (1) — genuine structural gap, not forced
 
-**Bolton Surgical Limited** — 2311 products, but the crawl found "No usable category structure
-in the site's own taxonomy — listed as one flat range" (`hasDivisions: false`). The map entry's
-`categories` field lists 12 taxonomy terms scraped from the site's navigation (General Surgery,
-Orthopaedic/Neuro, ENT, Plastic Surgery, GU/Gynaecology, Colo Rectal/Intestinal, Dental,
-Cardio Vascular/Thoracic, Forceps, Scissors, Retractors, Scissors - Surecut) but these are NOT
-attached per-product — every one of the 2311 products individually carries `division:
-"Uncategorised"`, so there is no way to know which of the 2311 is a forceps versus a retractor
-versus an ENT instrument without reading each one. Bolton Surgical is a genuine reusable
-stainless-steel instrument maker (examples read like premium reusable instruments — "Peet Nasal
-Rasp... Gold Handle", "Micro Crocodile Grasping Forceps with Fixed Shaft"), so this is a real
-prize if a future run re-crawls it targeting the site's own category URLs
-(`--product-path forceps`, `--product-path scissors`, etc., after checking the sitemap) instead
-of the flat product list. Not attempted this run — a re-crawl-with-different-paths is more work
-than this batch's remaining time allowed and deserves its own attempt. Noted rather than forced.
+**Bolton Surgical Limited** — 2311 products. The supplier record's own `structure` string says
+"No usable category structure in the site's own taxonomy — listed as one flat range"
+(`hasDivisions: false`), and that is true of the `division` field only: every one of the 2311
+products carries `division: "Uncategorised"`.
+
+**It is not true of the product records as a whole, and this section originally said it was.
+Corrected 19/09/2026 by the 12:10 `outstanding-sweep`, measured against `main`:** each product
+also carries a `category` field, and it is populated. The 12 terms in the map entry's
+`categories` field are not navigation labels — they are the distinct values of that per-product
+field. The counts:
+
+| | products | share |
+|---|---|---|
+| one of 8 clinical specialities (General Surgery 477, Orthopaedic/Neuro 343, Ear Nose & Throat 317, Plastic Surgery 246, GU/Gynaecology 150, Colo Rectal/Intestinal 140, Dental 87, Cardio Vascular/Thoracic 81) | 1841 | 79.7% |
+| one of 145 other labels — instrument types (Forceps 24, Scissors 26, Retractors 8, Rongeurs 6…) trailing into individual instrument names | 253 | 10.9% |
+| blank | 217 | 9.4% |
+
+So four-fifths of the catalogue is already filed by clinical speciality, per product, on disk.
+**A re-crawl is therefore the wrong next step** — nothing needs fetching again, and
+`--product-path forceps` / `--product-path scissors` would re-read the site for structure it has
+already given us. What is missing is a derivation: the builder reads `division`, which is flat,
+and never looks at `category`. Bolton Surgical is the only supplier in the whole file in this
+shape (one flat division, two or more distinct per-product categories), so this is a
+single-supplier derivation, not a pipeline change — and the 253 instrument-type rows and 217
+blanks must stay held either way, since an instrument type is not a speciality.
+
+Bolton Surgical is a genuine reusable stainless-steel instrument maker (examples read like
+premium reusable instruments — "Peet Nasal Rasp... Gold Handle", "Micro Crocodile Grasping
+Forceps with Fixed Shaft"), so the 1841 are a real prize. Still not attempted — promoting a
+`category` to a published grouping is a data-shape decision with a publish behind it, so it
+wants an attended run, now that it has the right premise to start from.
 
 ### `publishedElsewhereNeedingCategory` (15) — one lead taken, fourteen checked and left
 

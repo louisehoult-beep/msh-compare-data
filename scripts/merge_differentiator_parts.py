@@ -43,6 +43,22 @@ This script refuses rather than guesses:
   * a decision with no `why` — a mapping is a judgement and has to carry its reason
   * a supplier or division that is not in the worklist (a typo silently maps nothing)
 
+A PART CANNOT PROPOSE A PRODUCT-OVERRIDE — SEED THOSE DIRECTLY. The last refusal
+above is keyed on the worklist, so a part can only fill in the `hub` of a
+(supplier, division) pair the map already carries. It can never create a new
+entry, and a product-override IS a new entry: on a `kind: "product-override"`
+entry the `division` field holds a PRODUCT NAME, not a division, so the pair is
+never in the worklist and every attempt comes back as "not a pair in the
+worklist". That is the check working, not a bug.
+
+When a division genuinely needs splitting at product level, write the
+`kind: "product-override"` entries straight into
+data/differentiator-category-map.json instead, each carrying its own `evidence`
+and `why` exactly as a division decision does. build_differentiator.py reads that
+tier first, ahead of both the division match and the name fallback (see the
+`product_override` block there, and the collision check behind it). Verified
+19/09/2026: 97 product-override entries live, every one carrying a hub.
+
 Usage:  python3 scripts/merge_differentiator_parts.py [--apply]
 Without --apply it reports and changes nothing.
 """
