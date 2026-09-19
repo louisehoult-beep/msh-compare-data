@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-18",
+ "lastRun": "2026-09-19",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -378,7 +378,18 @@
   "Moulded Fibre Products Limited",
   "Murray Surgical Limited",
   "nal von minden",
-  "Neptune Medical Limited"
+  "Neptune Medical Limited",
+  "Network Medical Products Ltd",
+  "Neurogen Ltd",
+  "Newell Brands",
+  "Newmaw Medical Ltd",
+  "Newtons Medical Supplies Ltd",
+  "Normanby Laboratory Services Ltd",
+  "Northumbria Healthcare Facilities Management",
+  "Northwood",
+  "Nova Biomedical",
+  "Novus Med Ltd",
+  "Nowus Healthcare"
  ],
  "refusals": [
   {
@@ -850,6 +861,11 @@
    "name": "Neptune Medical Limited",
    "reason": "'Neptune Medical' is also the name of a prominent, VC-funded US endoscopy/surgical-robotics company (Burlingame, CA \u2014 Pathfinder device, Triton Medical Robotics division, FDA clearances, frequent trade press coverage). The UK company's own Companies House match is still unconfirmed (two similarly named candidates, 12204410 and 10530138, neither proven). Adding the bare form 'Neptune Medical' risks the US company's press being filed under this small UK orthopaedic distributor \u2014 the exact failure mode press_match.py's Jeenie Solutions example warns against. No alias added.",
    "date": "2026-09-18"
+  },
+  {
+   "name": "Nottingham Rehab Limited (Trading as NRS Healthcare)",
+   "reason": "Nottingham Rehab Limited and NRS Healthcare Limited entered liquidation 01/08/2025 (Official Receiver appointed); the NRS Healthcare product sales division was sold to Mobilitas Group 28/08/2025. The 'NRS Healthcare' trading name may no longer be current for this entity, so no alias was added without a fresher check of who now trades under it. Flagged for a record-status review rather than enrichment.",
+   "date": "2026-09-19"
   }
  ],
  "sources": {
