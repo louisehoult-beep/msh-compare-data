@@ -144,6 +144,13 @@ jobs:
       # covered without anyone remembering the file exists.
       - name: Prove an accented supplier name is findable without its accents
         run: python3 test_ascii_folding.py
+      # 19/09/2026: this suite existed but no workflow ran it, so the protection it
+      # holds — a REFUSED title proof cannot reach supplier-seed.json, and a
+      # --supplier/--limit run cannot write the whole banked report — was never
+      # actually checked anywhere. A seed write is a publish (root rule 13), so it
+      # is checked here with everything else. Offline, seconds, no network.
+      - name: Prove a bad or out-of-scope domain proof cannot reach the seed
+        run: python3 test_seed_domains.py
       - name: Phone alert if the gate itself is untrustworthy (ntfy)
         if: failure()
         run: |

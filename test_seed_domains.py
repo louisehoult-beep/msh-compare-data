@@ -327,6 +327,65 @@ try:
 finally:
     vnp.OUT = _real_out
 
+# ---------------------------------------------------------------------------
+# A NARROWED RUN MUST NOT WRITE THE WHOLE BANK (added 19/09/2026, ^o549).
+#
+# --supplier and --limit narrowed what the script PROBED and not what it WROTE.
+# The write loop walks `proven`, which is built from the banked report — every
+# STRONG proof any earlier run ever recorded — so `--supplier X --write` merged
+# the whole bank. On 19/09/2026 it wrote an unrelated supplier (Newell Brands)
+# into supplier-seed.json in the middle of a single-supplier batch. Caught and
+# reverted before landing, but only because a person read the diff: the run's own
+# output said nothing about it, which is why this is a test and not a note.
+print()
+print("scoped write — a narrowed run writes only what it targeted")
+
+BANK = [
+    {"name": "Targeted Co", "proof": "registration", "domain": "targeted.example"},
+    {"name": "Newell Brands", "proof": "registration", "domain": "newell.example"},
+    {"name": "Another Banked Co", "proof": "self-declared-foreign", "domain": "other.example"},
+]
+
+kept, dropped = seeder.apply_write_scope(BANK, {"Targeted Co"})
+check("--supplier writes the targeted supplier",
+      [r["name"] for r in kept] == ["Targeted Co"],
+      "got %s" % [r["name"] for r in kept])
+check("--supplier does NOT write the rest of the bank",
+      {r["name"] for r in dropped} == {"Newell Brands", "Another Banked Co"},
+      "got %s" % [r["name"] for r in dropped])
+check("nothing is lost — every banked proof is in exactly one of the two lists",
+      len(kept) + len(dropped) == len(BANK))
+
+kept_all, dropped_all = seeder.apply_write_scope(BANK, None)
+check("an unnarrowed sweep still writes the whole bank",
+      len(kept_all) == len(BANK) and dropped_all == [],
+      "got kept=%d dropped=%d" % (len(kept_all), len(dropped_all)))
+
+kept_two, _ = seeder.apply_write_scope(BANK, {"Targeted Co", "Another Banked Co"})
+check("--limit scopes to the run's own targets, not to one name",
+      {r["name"] for r in kept_two} == {"Targeted Co", "Another Banked Co"})
+
+check("a scope naming a supplier with no banked proof writes nothing, not everything",
+      seeder.apply_write_scope(BANK, {"Never Probed Co"})[0] == [])
+
+# The failure mode itself, stated as the regression it is.
+check("the pre-19/09 behaviour would have written Newell Brands",
+      "Newell Brands" in {r["name"] for r in BANK}
+      and "Newell Brands" not in {r["name"] for r in kept})
+
+# A correct helper nothing calls is worse than no helper: it reads as protection
+# and provides none. main() does the probing and cannot be run in a test without
+# hitting 127 suppliers' websites, so its WIRING is asserted against the source.
+SRC = open(os.path.join(REPO, "scripts", "seed_supplier_domains.py"),
+           encoding="utf-8").read()
+check("main() narrows the write scope where it narrows the run",
+      "write_scope = {s[\"name\"] for s in todo} if (a.supplier or a.limit) else None" in SRC)
+check("main() applies that scope before writing the seed",
+      "proven, out_of_scope = apply_write_scope(proven, write_scope)" in SRC)
+check("the scope is applied AFTER the --write guard, not instead of it",
+      SRC.index("if not a.write:")
+      < SRC.index("proven, out_of_scope = apply_write_scope("))
+
 print()
 if failures:
     print("FAILED: %d check(s) — %s" % (len(failures), ", ".join(failures)))

@@ -76,6 +76,7 @@ USAGE
   python3 scripts/seed_supplier_domains.py                 # report only, writes nothing
   python3 scripts/seed_supplier_domains.py --limit 25      # try 25 suppliers
   python3 scripts/seed_supplier_domains.py --write         # merge proven domains into the seed
+  python3 scripts/seed_supplier_domains.py --supplier "NAME" --write   # that supplier ONLY
   python3 scripts/seed_supplier_domains.py --accept-name --write
   python3 scripts/seed_supplier_domains.py --allow-foreign --retry-unproven --write
 
@@ -806,6 +807,22 @@ def domain_for(rec):
     return (m.group(1) or m.group(2)) if m else None
 
 
+def apply_write_scope(proven, write_scope):
+    """Narrow a banked proof list to the suppliers this run actually targeted.
+
+    Returns (in_scope, out_of_scope). `write_scope` of None means the run was not
+    narrowed, so the whole bank writes — that is what an unrestricted sweep is
+    for. Separated out from main() so test_seed_domains.py can hold it: the bug
+    this closes was invisible in every output the script printed, and was caught
+    by a person reading a diff.
+    """
+    if write_scope is None:
+        return list(proven), []
+    keep = [r for r in proven if r["name"] in write_scope]
+    drop = [r for r in proven if r["name"] not in write_scope]
+    return keep, drop
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0, help="how many suppliers to attempt (0 = all)")
@@ -870,6 +887,27 @@ def main():
         todo = [s for s in seed["suppliers"] if s["name"] == a.supplier]
     if a.limit:
         todo = todo[:a.limit]
+
+    # WHAT A NARROWED RUN IS ALLOWED TO WRITE.
+    #
+    # --supplier and --limit narrow what this run PROBES, and until 19/09/2026 they
+    # did not narrow what it WROTE. The write loop below walks `proven`, which is
+    # built from the banked report — every STRONG proof any earlier run has ever
+    # recorded — so `--supplier X --write` merged the whole bank into the seed and
+    # not just X. On 19/09/2026 that wrote an unrelated supplier (Newell Brands)
+    # into supplier-seed.json in the middle of a single-supplier batch; it was
+    # caught and reverted before landing, but only because someone read the diff.
+    #
+    # A supplier-seed.json write is a publish (root rule 13): crawl_supplier_site.py
+    # reads whatever domain the seed holds and publishes that site's catalogue as
+    # that supplier's range on a paid page. A write nobody asked for is exactly the
+    # 24/07/2026 error class, and "it was a STRONG proof" does not make it one this
+    # run was asked to make.
+    #
+    # So the scope is fixed here, where the narrowing happens, not guessed later.
+    # An unnarrowed sweep still writes the whole bank, which is what it is for.
+    # This can only ever REMOVE rows from the write; it never adds one.
+    write_scope = {s["name"] for s in todo} if (a.supplier or a.limit) else None
     print("%d supplier(s) to attempt (framework-named, no website on record)" % len(todo),
           flush=True)
     if not todo:
@@ -997,6 +1035,18 @@ def main():
     if not a.write:
         print("\nreport only — nothing written to the seed. Re-run with --write to seed them.")
         return
+
+    # Apply the scope fixed at the top of the run. `proven` is the whole bank, so
+    # without this a narrowed run seeds suppliers it never looked at — see the
+    # note beside write_scope.
+    proven, out_of_scope = apply_write_scope(proven, write_scope)
+    if out_of_scope:
+        print("\n  scoped write: %d banked proof(s) belong to suppliers this run "
+              "did not target and are NOT being written (%s%s). Re-run without "
+              "--supplier/--limit to seed the whole bank."
+              % (len(out_of_scope),
+                 ", ".join(r["name"] for r in out_of_scope[:5]),
+                 ", ..." if len(out_of_scope) > 5 else ""))
 
     # --accept-name GATES THE WRITE, NOT JUST THE PROBE.
     # `proven` includes results BANKED BY EARLIER RUNS, replayed from the report.
