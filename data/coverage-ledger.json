@@ -24,10 +24,10 @@
   "unmapped": 48,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 430,
-  "inScopeSuppliersNeedingCrawl": 388,
-  "inScopeSuppliersNeedingDomain": 346,
-  "suppliersRefused": 445,
+  "supplierNamesUnresolved": 429,
+  "inScopeSuppliersNeedingCrawl": 382,
+  "inScopeSuppliersNeedingDomain": 340,
+  "suppliersRefused": 452,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 2,
@@ -1225,10 +1225,6 @@
   ],
   [
    "Babease Limited",
-   1
-  ],
-  [
-   "Nestle Nutrition",
    1
   ],
   [
@@ -4735,10 +4731,6 @@
     {
      "supplier": "Venture Healthcare Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Sinapi Biomedical UK",
-     "domain": null
     }
    ],
    "domainsMissing": [
@@ -4748,7 +4740,6 @@
     "E&E MEDICAL SUPPLIES LIMITED",
     "Key Health Solutions",
     "Redland embh Group Limited",
-    "Sinapi Biomedical UK",
     "UNOQUIP GMBH",
     "Venture Healthcare Ltd"
    ],
@@ -4822,6 +4813,13 @@
      "domain": "sharonservices.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Sinapi Biomedical UK",
+     "domain": "sinapibiomedical.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-19",
      "bucket": "refused"
     },
     {
@@ -4996,7 +4994,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 1,
-    "needDomain": 9
+    "needDomain": 8
    },
    "published": [
     "Abena UK Limited",
@@ -5049,8 +5047,7 @@
     "Pennine Healthcare (Ivor Shaw Ltd)",
     "Redland embh Group Limited",
     "UNOQUIP GMBH",
-    "Venture Healthcare Ltd",
-    "Sinapi Biomedical UK"
+    "Venture Healthcare Ltd"
    ],
    "refused": [
     "Ardo medical Limited",
@@ -5062,13 +5059,14 @@
     "Peak Medical Ltd",
     "RB Medical Engineering Ltd",
     "Rocialle Healthcare",
-    "Sharon Services (UK) Ltd"
+    "Sharon Services (UK) Ltd",
+    "Sinapi Biomedical UK"
    ],
    "unknown": [
     "KCI Medical Limited (3m)",
     "Salts Healthcare (Ostomy)"
    ],
-   "actionableTotal": 30,
+   "actionableTotal": 29,
    "blockedReason": null,
    "deferred": null
   },
@@ -11192,40 +11190,8 @@
    "speciality": [
     "neonatal"
    ],
-   "crawlWorklist": [
-    {
-     "supplier": "Alcado Limited",
-     "domain": null
-    },
-    {
-     "supplier": "HiPP UK Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "J Heinz Foods UK Limited",
-     "domain": null
-    },
-    {
-     "supplier": "MAM UK Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Newell Brands",
-     "domain": null
-    },
-    {
-     "supplier": "Sinapi Biomedical UK",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Alcado Limited",
-    "HiPP UK Ltd",
-    "J Heinz Foods UK Limited",
-    "MAM UK Ltd",
-    "Newell Brands",
-    "Sinapi Biomedical UK"
-   ],
+   "crawlWorklist": [],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [
     {
      "supplier": "Danone Nutricia Early Life Nutrition",
@@ -11234,6 +11200,13 @@
     }
    ],
    "refusedSuppliers": [
+    {
+     "supplier": "Alcado Limited",
+     "domain": "alcado.co.uk",
+     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-19",
+     "bucket": "refused"
+    },
     {
      "supplier": "Ardo medical Limited",
      "domain": "www.ardomedical.co.uk",
@@ -11249,10 +11222,52 @@
      "bucket": "refused"
     },
     {
+     "supplier": "HiPP UK Ltd",
+     "domain": "hipp.co.uk",
+     "reason": "the site's WordPress API returned HTTP 429; the WooCommerce Store API returned HTTP 429; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 429: Too Many Requests)",
+     "checked": "2026-09-19",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "J Heinz Foods UK Limited",
+     "domain": "heinzbaby.co.uk",
+     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-19",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "MAM UK Ltd",
+     "domain": "mambaby.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-19",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Nestle Nutrition",
+     "domain": "smababy.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 6 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-19",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Newell Brands",
+     "domain": "nuk.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-19",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Sharon Services (UK) Ltd",
      "domain": "sharonservices.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Sinapi Biomedical UK",
+     "domain": "sinapibiomedical.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-19",
      "bucket": "refused"
     },
     {
@@ -11285,13 +11300,13 @@
     "neonatal:resp"
    ],
    "actionable": {
-    "unresolvedNames": 2,
+    "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 6
+    "needDomain": 0
    },
    "published": [
     "GBUK Group",
@@ -11307,24 +11322,23 @@
     "Danone Nutricia Early Life Nutrition"
    ],
    "capturedNothingCounted": [],
-   "notCrawled": [
+   "notCrawled": [],
+   "refused": [
     "Alcado Limited",
+    "Ardo medical Limited",
+    "Central Medical Supplies",
     "HiPP UK Ltd",
     "J Heinz Foods UK Limited",
     "MAM UK Ltd",
+    "Nestle Nutrition",
     "Newell Brands",
+    "Sharon Services (UK) Ltd",
     "Sinapi Biomedical UK"
    ],
-   "refused": [
-    "Ardo medical Limited",
-    "Central Medical Supplies",
-    "Sharon Services (UK) Ltd"
-   ],
    "unknown": [
-    "Babease Limited",
-    "Nestle Nutrition"
+    "Babease Limited"
    ],
-   "actionableTotal": 11,
+   "actionableTotal": 4,
    "blockedReason": null,
    "deferred": null
   },
