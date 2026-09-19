@@ -136,6 +136,14 @@ jobs:
       # synthetic equivalent rather than left uncovered.
       - name: Prove the gate still catches the incident it was built for
         run: python3 test_verify.py
+      # 19/09/2026: Hub search returned nothing for "Molnlycke" or "Ossur" because
+      # every normaliser stripped to [a-z0-9], turning an accented letter into a
+      # SPACE instead of its base letter. A "no results" on this Hub reads as "not
+      # on the framework", so this is a correctness check, not a nicety. The suite
+      # is data-driven off supplier-seed.json, so a new accented supplier is
+      # covered without anyone remembering the file exists.
+      - name: Prove an accented supplier name is findable without its accents
+        run: python3 test_ascii_folding.py
       - name: Phone alert if the gate itself is untrustworthy (ntfy)
         if: failure()
         run: |

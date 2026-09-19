@@ -18,7 +18,7 @@ at source correctly leaves the index. Curated seed fields sacred; news is
 regenerated per run for queried suppliers only; graceful degradation; exit 0.
 Stdlib only.
 """
-import json, re, sys, time, html, urllib.request, urllib.parse, datetime, pathlib
+import json, re, sys, time, html, unicodedata, urllib.request, urllib.parse, datetime, pathlib
 
 DATA_DIR = pathlib.Path("data")
 SEED   = DATA_DIR / "supplier-seed.json"
@@ -68,7 +68,21 @@ PRWIRE = ["globenewswire","prnewswire","pr newswire","businesswire","business wi
   "healthline","verywell","patch.com","medianews","stocktwits","fool.com","barchart","nasdaq.com"]
 
 log = lambda m: print("[supplier-index]", m)
-def norm(s): return re.sub(r"[^a-z0-9]+", " ", str(s or "").lower()).strip()
+# ASCII-fold before the strip: [^a-z0-9] turns an accented letter into a SPACE,
+# not into its base letter, so "Molnlycke" keyed as "m lnlycke" and never matched
+# the plain spelling any other source used (18/09/2026). Same fold as
+# company_alias.ascii_fold() and build_search_index.ascii_fold() — keep the three
+# in step.
+_FOLD = str.maketrans({
+    "\u00f8": "o", "\u00d8": "O", "\u00df": "ss",
+    "\u00e6": "ae", "\u00c6": "AE", "\u0153": "oe", "\u0152": "OE",
+    "\u0111": "d", "\u0110": "D", "\u0142": "l", "\u0141": "L",
+    "\u00f0": "d", "\u00d0": "D", "\u00fe": "th", "\u00de": "TH", "\u0131": "i",
+})
+def ascii_fold(s):
+    s = str(s or "").translate(_FOLD)
+    return "".join(c for c in unicodedata.normalize("NFKD", s) if not unicodedata.combining(c))
+def norm(s): return re.sub(r"[^a-z0-9]+", " ", ascii_fold(s).lower()).strip()
 def norm_co(s):
     n = norm(s)
     return re.sub(r"\b(limited|ltd|plc|uk|u k|gmbh|inc|llc|llp|group|holdings|the)\b", " ", n).strip()

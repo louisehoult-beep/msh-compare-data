@@ -36,6 +36,7 @@ import json
 import os
 import re
 import sys
+import unicodedata
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OVERLAY = os.path.join(HERE, "alias-overlay.json")
@@ -96,9 +97,39 @@ NHSSC_DEPOT_CODE = r"[a-z]+\d{2,}"
 
 
 
+# An accented letter is not punctuation, but the [^a-z0-9] strip below cannot
+# tell the difference and replaced it with a SPACE: "Molnlycke" normalised to
+# "m lnlycke", "Ossur" to "ssur". Every lookup keyed on that missed the plain
+# spelling, so a member searching "Molnlycke" or "Ossur" got nothing back
+# (found 18/09/2026 — 11 suppliers, incl. bioMerieux, Drager, Schulke). Fold to
+# the base letter FIRST, then strip. NFKD covers everything that decomposes into
+# a base letter plus a combining mark; the table covers the Latin letters that
+# have no decomposition at all. Measured before landing: across all 1,238 seed
+# suppliers and 4,581 name/alias strings this changes 19 keys and creates ZERO
+# new cross-supplier collisions, so it merges nothing that was distinct.
+_FOLD = str.maketrans({
+    "\u00f8": "o", "\u00d8": "O",       # o with stroke
+    "\u00df": "ss",                     # eszett
+    "\u00e6": "ae", "\u00c6": "AE",
+    "\u0153": "oe", "\u0152": "OE",
+    "\u0111": "d", "\u0110": "D",       # d with stroke
+    "\u0142": "l", "\u0141": "L",       # l with stroke
+    "\u00f0": "d", "\u00d0": "D",       # eth
+    "\u00fe": "th", "\u00de": "TH",     # thorn
+    "\u0131": "i",                      # dotless i
+})
+
+
+def ascii_fold(s):
+    """Map accented Latin letters onto their ASCII base, before any strip."""
+    s = str(s or "").translate(_FOLD)
+    s = unicodedata.normalize("NFKD", s)
+    return "".join(c for c in s if not unicodedata.combining(c))
+
+
 def norm(s):
-    """Lowercase, & -> and, strip punctuation and collapse whitespace."""
-    s = str(s or "").lower().replace("&", " and ")
+    """ASCII-fold, lowercase, & -> and, strip punctuation, collapse whitespace."""
+    s = ascii_fold(s).lower().replace("&", " and ")
     s = re.sub(r"[^a-z0-9]+", " ", s)
     return re.sub(r"\s+", " ", s).strip()
 

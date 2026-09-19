@@ -80,8 +80,37 @@
       .replace(/"/g, '&quot;');
   }
 
+  /* ASCII-FOLD BEFORE ANY [^a-z0-9] STRIP.
+   *
+   * clean() used to strip straight to [a-z0-9 ], which maps an accented letter
+   * to a SPACE rather than to its base letter. Both sides of the comparison
+   * were broken by it: the index held 'm lnlycke' for Molnlycke and 'ssur' for
+   * Ossur, and a member typing either name plainly got nothing back (found
+   * 18/09/2026 — 11 suppliers, incl. bioMerieux, Drager, Schulke). Folding here
+   * and in prepare() means the accented and unaccented spellings both work,
+   * whichever the member types. The Python side folds identically in
+   * build_search_index.py's ascii_fold(). */
+  var FOLD_PAIRS = [
+    ['\u00f8', 'o'], ['\u00d8', 'O'], ['\u00df', 'ss'],
+    ['\u00e6', 'ae'], ['\u00c6', 'AE'], ['\u0153', 'oe'], ['\u0152', 'OE'],
+    ['\u0111', 'd'], ['\u0110', 'D'], ['\u0142', 'l'], ['\u0141', 'L'],
+    ['\u00f0', 'd'], ['\u00d0', 'D'], ['\u00fe', 'th'], ['\u00de', 'TH'],
+    ['\u0131', 'i']
+  ];
+
+  function fold(x) {
+    var s = String(x == null ? '' : x), i;
+    for (i = 0; i < FOLD_PAIRS.length; i++) {
+      s = s.split(FOLD_PAIRS[i][0]).join(FOLD_PAIRS[i][1]);
+    }
+    if (s.normalize) {
+      s = s.normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+    }
+    return s;
+  }
+
   function clean(q) {
-    return String(q).toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
+    return fold(q).toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
   }
 
   function tokenise(q) {
@@ -120,21 +149,21 @@
     var i, j, p, s;
     for (i = 0; i < doc.pages.length; i++) {
       p = doc.pages[i];
-      p._t = ' ' + String(p.t || '').toLowerCase() + ' ';
+      p._t = ' ' + fold(p.t).toLowerCase() + ' ';
       for (j = 0; j < p.sec.length; j++) {
         s = p.sec[j];
-        s._h = ' ' + String(s.h || '').toLowerCase() + ' ';
+        s._h = ' ' + fold(s.h).toLowerCase() + ' ';
         /* `w` is a bag of words, not prose: unique, alphabetised, stopwords
          * dropped. The index is served from a public repo, so it deliberately
          * carries nothing that can be read back as the Hub's paid content. That
          * is why there is no snippet under a result — do not add one by putting
          * text back in the index. */
-        s._w = ' ' + String(s.w || '').toLowerCase() + ' ';
+        s._w = ' ' + fold(s.w).toLowerCase() + ' ';
       }
     }
     for (i = 0; i < doc.records.length; i++) {
-      doc.records[i]._t = ' ' + String(doc.records[i].t || '').toLowerCase() + ' ';
-      doc.records[i]._k = ' ' + String(doc.records[i].k || '') + ' ';
+      doc.records[i]._t = ' ' + fold(doc.records[i].t).toLowerCase() + ' ';
+      doc.records[i]._k = ' ' + fold(doc.records[i].k).toLowerCase() + ' ';
     }
     return doc;
   }

@@ -59,12 +59,41 @@ import re
 import sys
 import time
 import urllib.error
+import unicodedata
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
 SITE = "254135288"
 API = "https://public-api.wordpress.com/wp/v2/sites/%s/pages" % SITE
+
+# ---------------------------------------------------------------------------
+# ASCII-FOLDING. Every normaliser below strips to [a-z0-9], and a bare strip maps
+# an accented letter to a SPACE, not to its base letter: "Molnlycke" became
+# "m lnlycke" and "Ossur" became "ssur", so typing either name plainly returned
+# nothing (found 18/09/2026, 11 suppliers incl. bioMerieux, Drager, Schulke).
+# Fold FIRST, then strip. NFKD handles anything that decomposes into a base
+# letter plus a combining mark; the table catches the Latin letters that have no
+# decomposition at all (o-slash, eszett, ae/oe ligatures, d-stroke, l-stroke).
+_FOLD = str.maketrans({
+    "\u00f8": "o", "\u00d8": "O",       # o with stroke
+    "\u00df": "ss",                     # eszett
+    "\u00e6": "ae", "\u00c6": "AE",
+    "\u0153": "oe", "\u0152": "OE",
+    "\u0111": "d", "\u0110": "D",       # d with stroke
+    "\u0142": "l", "\u0141": "L",       # l with stroke
+    "\u00f0": "d", "\u00d0": "D",       # eth
+    "\u00fe": "th", "\u00de": "TH",     # thorn
+    "\u0131": "i",                      # dotless i
+})
+
+
+def ascii_fold(s):
+    """Map accented Latin letters onto their ASCII base, before any strip."""
+    s = str(s or "").translate(_FOLD)
+    s = unicodedata.normalize("NFKD", s)
+    return "".join(c for c in s if not unicodedata.combining(c))
+
 
 OUT = "data/hub-search-index.json"
 FIXTURES = "tests/fixtures/search"
@@ -371,7 +400,7 @@ def bag(text):
     way, and turning it back into running text would republish a paid product.
     """
     words = set()
-    for w in re.split(r"[^a-z0-9]+", text.lower()):
+    for w in re.split(r"[^a-z0-9]+", ascii_fold(text).lower()):
         if len(w) < 2:
             continue
         if w in BAG_STOP:
@@ -436,7 +465,7 @@ def supplier_records():
                 bits.append(fw)
             elif isinstance(fw, dict) and fw.get("name"):
                 bits.append(fw["name"])
-        keywords = " ".join(bits).lower()
+        keywords = ascii_fold(" ".join(bits)).lower()
         keywords = re.sub(r"[^a-z0-9 ]+", " ", keywords)
         keywords = re.sub(r"\s+", " ", keywords).strip()
         out.append({

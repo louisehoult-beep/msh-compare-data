@@ -98,6 +98,12 @@ jobs:
           fi
           echo "token present"
 
+      # Runs BEFORE the crawl, not after: if the fold has drifted the index would
+      # be built wrong and then published, and a member searching "Molnlycke" or
+      # "Ossur" would get "no results" — which on this Hub reads as "not on the
+      # framework". Cheap, offline, and it fails the run before anything is written.
+      - name: Prove an accented supplier name is findable without its accents
+        run: python3 test_ascii_folding.py
       - name: Crawl the Hub and build the index
         env:
           WPCOM_TOKEN: ${{ secrets.WPCOM_TOKEN }}
