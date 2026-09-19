@@ -45,7 +45,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 16 | 27.6% | 28 | 25 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 14 | 24.6% | 21 | 31 | STARTED |
 | Urology and Bowel Management | continence | 57 | 17 | 29.8% | 29 | 33 | STARTED |
-| Advanced Wound Care | wound | 56 | 17 | 30.4% | 18 | 39 | STARTED |
+| Advanced Wound Care | wound | 56 | 17 | 30.4% | 17 | 40 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 43 | STARTED · DEFERRED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 15 | 28.3% | 15 | 29 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 25 | 47.2% | 15 | 26 | STARTED |
@@ -53,7 +53,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 10 | 23.3% | 16 | 25 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 10 | 27.0% | 8 | 27 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 18 | 16 | STARTED |
-| Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 8 | 22.9% | 16 | 16 | STARTED |
+| Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 11 | 31.4% | 8 | 21 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 10 | 30.3% | 12 | 19 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 13 | 11 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 8 | 25.8% | 8 | 21 | STARTED |
@@ -118,7 +118,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Finance Solutions | — | 12 | 0 | 0.0% | 9 | 4 | UNMAPPED |
 | Bladder Scanners and Associated Options and Related Services | — | 11 | 0 | 0.0% | 7 | 5 | UNMAPPED |
 | Fluoroscopy and Associated Options and Related Services | — | 11 | 0 | 0.0% | 6 | 7 | UNMAPPED |
-| Transcatheter Heart Valve Repair, Replacement and Associated Devices | — | 11 | 0 | 0.0% | 10 | 2 | UNMAPPED |
+| Transcatheter Heart Valve Repair, Replacement and Associated Devices | — | 11 | 0 | 0.0% | 9 | 3 | UNMAPPED |
 | Mobile Image Intensifiers and Associated Options and Related Services | — | 10 | 0 | 0.0% | 5 | 8 | UNMAPPED |
 | Structural Heart and Ventricular Assist Devices | — | 10 | 0 | 0.0% | 8 | 5 | UNMAPPED |
 | External Breast Prosthesis and Chest Support | — | 9 | 0 | 0.0% | 5 | 5 | UNMAPPED |
