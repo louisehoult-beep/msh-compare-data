@@ -39,7 +39,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 29 | 23.8% | 73 | 33 | STARTED |
-| Total Orthopaedic Solutions 3 | ortho | 101 | 22 | 21.8% | 54 | 37 | STARTED |
+| Total Orthopaedic Solutions 3 | ortho | 101 | 24 | 23.8% | 42 | 47 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 17 | 27.0% | 31 | 24 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 14 | 23.3% | 17 | 39 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 16 | 27.6% | 28 | 25 | STARTED |
@@ -104,7 +104,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Vascular Therapy and Associated Products | — | 23 | 0 | 0.0% | 19 | 10 | UNMAPPED |
 | External Defibrillation Devices and Related Services and Accessories | — | 21 | 0 | 0.0% | 16 | 8 | UNMAPPED |
 | Hand Hygiene and Associated Products and Services | — | 21 | 0 | 0.0% | 15 | 11 | UNMAPPED |
-| Surgical Mesh | — | 21 | 0 | 0.0% | 16 | 9 | UNMAPPED |
+| Surgical Mesh | — | 21 | 0 | 0.0% | 15 | 10 | UNMAPPED |
 | Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 17 | 9 | UNMAPPED |
 | Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 11 | 13 | UNMAPPED |
 | Rigid Endoscopy and Associated Options and Related Services | — | 18 | 0 | 0.0% | 11 | 13 | UNMAPPED |
@@ -131,7 +131,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Simulation Devices and Services | — | 7 | 0 | 0.0% | 6 | 1 | UNMAPPED |
 | Bone Densitometers, Associated Options and Related Services | — | 6 | 0 | 0.0% | 2 | 4 | UNMAPPED |
 | Negative Pressure Wound Therapy | — | 6 | 0 | 0.0% | 4 | 4 | UNMAPPED |
-| Surgical Implants for Men’s and Women’s Health | — | 6 | 0 | 0.0% | 6 | 2 | UNMAPPED |
+| Surgical Implants for Men’s and Women’s Health | — | 6 | 0 | 0.0% | 5 | 3 | UNMAPPED |
 | Surgical Navigation Systems with Associated Options and Related Services | — | 6 | 0 | 0.0% | 4 | 4 | UNMAPPED |
 | Flexible Endoscopes and Associated Options and Related Services | — | 5 | 0 | 0.0% | 2 | 4 | UNMAPPED |
 | Medical Chart Paper and Ultrasound Film | — | 5 | 0 | 0.0% | 4 | 4 | UNMAPPED |
