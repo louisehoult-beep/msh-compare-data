@@ -241,13 +241,34 @@ def api_get(url, token, timeout=45, tries=3):
             raise
 
 
+# How many pages to ask WordPress.com for at a time.
+#
+# This was 100 until 19/09/2026, when the daily build failed two runs running
+# (18/09 and 19/09) on a bare HTTP 500 that api_get's retry could not get past.
+# The 500 is WordPress.com's own proxy giving up: the body reads "cURL error
+# 28: Operation timed out after 30002 milliseconds", i.e. the origin took more
+# than its 30-second ceiling to assemble the batch. The Hub now has 140
+# published pages and a context=edit page carries its full raw content, so 100
+# of them in one response is several megabytes of Gutenberg markup — too much
+# to build inside 30 seconds, and it will only get worse as the Hub grows.
+#
+# Measured live on 19/09/2026 against site 254135288, page 1, context=edit:
+#   per_page=100 -> HTTP 500 (origin timeout)   per_page=50 -> HTTP 200, 6.4 MB
+#   per_page=40  -> HTTP 200, 5.5 MB            per_page=25 -> HTTP 200, 4.3 MB
+#   per_page=20  -> HTTP 200, 4.0 MB
+# 25 is deliberately well under the boundary rather than just inside it: the
+# cost of being wrong is the whole index build dying, and the cost of being
+# conservative is a handful of extra requests at 0.4s apart.
+PER_PAGE = 25
+
+
 def fetch_pages(token):
     """Every published page, with its raw content. Paginated."""
     out, page = [], 1
     while True:
         url = API + "?" + urllib.parse.urlencode({
             "status": "publish",
-            "per_page": "100",
+            "per_page": str(PER_PAGE),
             "page": str(page),
             "context": "edit",
             "orderby": "id",
@@ -262,7 +283,7 @@ def fetch_pages(token):
         if not batch:
             break
         out.extend(batch)
-        if len(batch) < 100:
+        if len(batch) < PER_PAGE:
             break
         page += 1
         time.sleep(0.4)
