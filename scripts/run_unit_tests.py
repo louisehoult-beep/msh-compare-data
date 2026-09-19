@@ -57,6 +57,12 @@ ELSEWHERE = {
     "test_icc_matrix.py":                 "icc-and-ccf.yml",
     "test_orphaned_product_categories.py": "company-intelligence.yml",
     "test_prune_calendar.py":             "calendar-prune.yml",
+    # Added 19/09/2026 with the ASCII-folding fix, and registered here the same
+    # day because it arrived unregistered and stopped this job dead (three red
+    # pushes, publish gate green throughout). It runs on every push in
+    # verify.yml's own selftest job, which is where a check that the Hub's
+    # search still finds Molnlycke belongs.
+    "test_ascii_folding.py":              "verify.yml (selftest job), search-index.yml",
 }
 
 # Green on clean main, 18/09/2026. Total runtime ~45s, nearly all of it

@@ -67,7 +67,12 @@ class OverrideFileShape(unittest.TestCase):
 
 class OverrideLogic(unittest.TestCase):
     def test_excluded_number_is_refused(self):
-        s = {"name": "Hitachi Medical Systems UK Ltd"}
+        # Keyed on "Fujifilm Healthcare UK" since 19/09/2026: the seed merged the
+        # separate "Hitachi Medical Systems UK Ltd" record into it, and
+        # override_for() matches the canonical name only — no alias fallback — so
+        # the entry was rekeyed to follow the supplier. Same exclusion, same
+        # assertion; only the name the guard hangs on changed.
+        s = {"name": "Fujifilm Healthcare UK"}
         excluded, correct = R.override_for(s, ENTRIES)
         self.assertIn("FC041492", excluded)
         self.assertIsNone(correct)
