@@ -188,6 +188,44 @@ Two notes for whoever implements the ruling:
   is the same duplicate-award shape as OUTSTANDING ^o206 and is noted here only so it is
   not mistaken for two separate awards.
 
+## Policy 2 applied to its own worked example, 20/09/2026 evening
+
+The identity-vocabulary-policy table's `domain-proof-tier` policy (`^o487`) named these
+four as "the same shape" as FUJIFILM Sonosite. Read against the shared-address guard,
+same method, same bar, using Companies House advanced search by exact registered
+address (not just postcode) as the count.
+
+| Supplier | Outcome | Domain | Site address | Companies House registered office | Shared-address count |
+|---|---|---|---|---|---|
+| Globus Medical UK Ltd | Accepted | globusmedical.com | "United Kingdom — 5 Upper Priory Street, Northampton, NN12PT, United Kingdom" (globusmedical.com/about/contact/) | GLOBUS MEDICAL UK LTD (06491893) — 5 Upper Priory Street, Northampton, NN1 2PT | 2 (Globus Medical UK Ltd + NuVasive UK Limited — the 2023 merger, not an agent) |
+| NuVasive UK Ltd | Accepted | nuvasive.com/uk-and-ireland/ | Same globusmedical.com contact page (nuvasive.com itself returns HTTP 403 to a plain fetch and forces an interactive Cloudflare human-check in the browser pane, not solved) | NUVASIVE UK LIMITED (05518404) — 5 Upper Priory Street, Northampton, NN1 2PT | 2 (as above) |
+| Kaiser Medical Technology Ltd | **Refused** | kaisermedicaltech.com | Site itself gives Brinkworth House Business Centre, Brinkworth, Wiltshire SN15 5DF (read 14/09/2026) | Both KAISER MEDICAL TECHNOLOGY LIMITED (06703471) and KAISER MEDICAL TECHNOLOGY EUROPE LIMITED (12825582) sit at 1 Cricklade Court, Old Town, Swindon SN1 3EY — which does not even match the site's own address | 367 at 1 Cricklade Court, overwhelmingly dissolved — a formation-agent signature |
+| Hitachi Medical Systems UK Ltd | **Out of scope** | — | — | — | — |
+
+**Globus and NuVasive share a registered office because they are now the same corporate
+group**, not because of a formation agent: Globus Medical completed its acquisition of
+NuVasive in 2023, and globusmedical.com's own Contact Us page lists NuVasive Germany
+GmbH and Nuvasive Italia srl as its own subsidiaries alongside the same "United Kingdom"
+office line. Two companies at one address, both explained by name, is the "handful
+sharing a real building" case the guard is written to let through.
+
+**Kaiser fails twice over.** Its registered office is shared with 367 mostly-dissolved
+companies — well past the Soluvos/Minitouch bar — and even setting that aside, neither
+of the two Companies House candidates is registered at the address the company's own
+site prints, so this would have been a near-miss refusal (the Carleton Medical shape)
+regardless. Nothing was recorded, and the record's existing companyNumberNote (two
+equally plausible companies) still stands unresolved.
+
+**Hitachi Medical Systems UK Ltd has no row this policy can act on.** A Companies House
+advanced search for "Hitachi Medical" on 20/09/2026 returns zero results, confirming the
+09/09/2026 finding above: the awarded name is the FORMER registered name of company
+03218117, now FUJIFILM HEALTHCARE UK LIMITED, and no separate entity survives on the
+register to hold a registered office at all. There is nothing for an ADDRESS proof to
+match against. The Hub's record for this identity is "Fujifilm Healthcare UK", which
+already carries "Hitachi Medical Systems UK Ltd" as an alias; whether that merge is
+right is the standing question on `^o376`, not a Policy 2 question, and was not
+reopened or touched here.
+
 ## A separate finding, not about domains: brand-filed catalogues
 
 Found 09/09/2026 while working Probo Medical, and it will bite again the moment the
