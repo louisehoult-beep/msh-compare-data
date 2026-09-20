@@ -670,7 +670,8 @@
       ? '<img src="' + esc(imgSrc(s.image)) + '" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;object-fit:contain;background:#fff;border:1px solid ' + LINE + ';" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><div style="display:none;width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#efe9db;border:1px solid ' + LINE + ';align-items:center;justify-content:center;font-weight:700;color:' + G + ';font-size:16px;">' + inits + '</div>'
       : ph;
     var h = '<div style="display:flex;gap:13px;align-items:flex-start;">' + thumb + '<div><div style="font-size:21px;font-weight:700;color:' + INK + ';line-height:1.25;">' + esc(s.name) +
-      (s.autoDetected ? ' <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#7a5b14;background:#f3e8cf;border-radius:99px;padding:2px 8px;vertical-align:3px;">AUTO — VERIFY AT SOURCE</span>' : '') + '</div>' +
+      (s.autoDetected ? ' <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#7a5b14;background:#f3e8cf;border-radius:99px;padding:2px 8px;vertical-align:3px;">AUTO — VERIFY AT SOURCE</span>' : '') +
+      (s.identityUnconfirmed ? ' <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#8a2b2b;background:#fdeaea;border:1px solid #f0c4c4;border-radius:99px;padding:2px 8px;vertical-align:3px;" title="This name is exactly as the awarding source wrote it. No search confirms it as a specific registered company — no company number, financials, domain or logo are attached.">IDENTITY UNCONFIRMED</span>' : '') + '</div>' +
       (s.note ? '<p style="margin:5px 0 0;font-size:13.5px;color:#37485a;line-height:1.55;">' + esc(s.note) + '</p>' : '') +
       '</div></div>';
 
