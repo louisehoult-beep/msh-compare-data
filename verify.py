@@ -5842,6 +5842,88 @@ def check_identity_policy():
         FAIL("policy", "identity-vocabulary-policy.json: %s" % m)
 
 
+_VOCAB_STOPWORDS = frozenset((
+    "and", "or", "the", "a", "an", "of", "for", "to", "in", "on", "with",
+))
+
+# Any pair of type labels in the same speciality scoring at or above this on
+# normalised-token overlap reads as the same concept, not two related ones.
+# Calibrated against the live vocabulary on 20/09/2026: the closest genuine
+# pair anywhere in it (monitoring:gen "Non-specialist monitoring" vs
+# monitoring:spec "Specialist monitoring", deliberately opposite meanings)
+# scores 0.67, and the next-closest pairs (imaging:ct/mri, neuro:sns/pns) are
+# lower still. 0.75 clears all of them with margin while still catching two
+# labels for one concept written up twice in different words. Raise it only
+# after checking it still clears every live pair — see test_verify.py.
+VOCAB_DUPLICATE_THRESHOLD = 0.75
+
+
+def _vocab_label_tokens(label):
+    text = re.sub(r"[^a-z0-9\s]", " ", (label or "").lower())
+    return {w for w in text.split() if w not in _VOCAB_STOPWORDS and len(w) > 2}
+
+
+def _vocab_label_similarity(a, b):
+    ta, tb = _vocab_label_tokens(a), _vocab_label_tokens(b)
+    if not ta or not tb:
+        return 0.0
+    return len(ta & tb) / len(ta | tb)
+
+
+def check_vocabulary_duplicates(vocab):
+    """WARN when two gated-vocabulary types in the same speciality read as the
+    same underlying concept added under different keys.
+
+    Added 20/09/2026 (^o572), after the Xiel remap review found that two
+    sessions working in parallel on 20/09 had each independently added the
+    same three concepts — radiotherapy positioning, dosimetry/QA, ECG
+    accessories — to the gated vocabulary under DIFFERENT keys: one session
+    added oncology:posn / oncology:dosim / cardiology:ecgacc, the other added
+    oncology:pos / oncology:dosqa / cardiology:cons. Nothing here would have
+    caught it: check_differentiator() only proves compare-suppliers.json and
+    differentiator-category-map.json agree WITH EACH OTHER, and a fork added
+    consistently to both files agrees with itself perfectly while still being
+    wrong. Only a cross-session chat message stopped it landing.
+
+    This is a WARN, never a FAIL, on purpose — see check_source_links()'s own
+    note (item 7 in this file's header) for the house reasoning on that
+    distinction. Whether two similarly-worded labels are one concept that
+    needs merging, or two real ones that only sound alike, is a policy
+    judgement, not a mechanical fact: monitoring:gen "Non-specialist
+    monitoring" and monitoring:spec "Specialist monitoring" share two of
+    three meaningful words and mean opposite things; oncology:dosim
+    "Dosimetry and QA devices" and nuclear:dosim "Personnel & environmental
+    radiation dosimetry" share a key AND a word and are different equipment
+    for different purposes. A hard FAIL here would either block deliberate
+    near-neighbours like those or get its threshold loosened the first time
+    it did, which defeats the point — same trade-off check_identity_policy()
+    makes by only auto-resolving what Lou already ruled on and escalating
+    everything else, rather than guessing.
+
+    Comparison is deliberately scoped to types WITHIN the same speciality.
+    The same words carry different meaning in a different clinical context
+    (see the dosim/dosim example above), and the 20/09 fork happened within
+    single specialities, not across them.
+    """
+    specialities = (vocab or {}).get("specialities") or {}
+    for spec, obj in sorted(specialities.items()):
+        types = sorted(((obj or {}).get("types") or {}).items())
+        for i, (code_a, label_a) in enumerate(types):
+            for code_b, label_b in types[i + 1:]:
+                score = _vocab_label_similarity(label_a, label_b)
+                if score >= VOCAB_DUPLICATE_THRESHOLD:
+                    WARN("vocabulary",
+                         "%s:%s %r and %s:%s %r read as the same concept "
+                         "under different keys (%.0f%% word overlap once "
+                         "normalised). If they are one concept, merge them "
+                         "and remap whatever is mapped to the newer key; if "
+                         "they are genuinely distinct, say why in this "
+                         "speciality's routeNote so the next pass does not "
+                         "raise this again."
+                         % (spec, code_a, label_a, spec, code_b, label_b,
+                            score * 100))
+
+
 def check_notice_citations(files_or_sentences):
     """A bare Find a Tender notice number published next to a date, with no OCID
     beside it, cannot be checked for supersession by anyone reading it."""
@@ -5995,6 +6077,7 @@ def main():
     check_shrink()
     check_notice()
     check_identity_policy()
+    check_vocabulary_duplicates(load("compare-suppliers.json"))
     check_no_clusters_on_tools(comptab_js)
     check_compare_groups_by_ref(comptab_js)
     check_no_expired_frameworks(load("frameworks.json"))
