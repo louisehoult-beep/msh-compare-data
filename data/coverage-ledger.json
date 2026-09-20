@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-16",
-  "differentiator.json published": 35746,
-  "differentiator.json held": 52868
+  "differentiator.json published": 35756,
+  "differentiator.json held": 52858
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 429,
-  "inScopeSuppliersNeedingCrawl": 373,
-  "inScopeSuppliersNeedingDomain": 331,
-  "suppliersRefused": 459,
+  "inScopeSuppliersNeedingCrawl": 370,
+  "inScopeSuppliersNeedingDomain": 329,
+  "suppliersRefused": 461,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 2,
@@ -6243,8 +6243,8 @@
    "category": "Rehabilitation and Community",
    "ends": "8 March 2028",
    "suppliersAwarded": 53,
-   "suppliersPublished": 25,
-   "coverage": 47.2,
+   "suppliersPublished": 26,
+   "coverage": 49.1,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -6260,10 +6260,6 @@
     {
      "supplier": "Croyde Medical",
      "domain": "croydemedical.co.uk"
-    },
-    {
-     "supplier": "Howard Wright Europe",
-     "domain": "howardwright.com"
     },
     {
      "supplier": "Wealden Rehab",
@@ -6470,7 +6466,7 @@
    "actionable": {
     "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 10,
-    "heldNeedingCategory": 4,
+    "heldNeedingCategory": 3,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -6487,6 +6483,7 @@
     "Frontier Therapeutics",
     "GBUK Group",
     "Hospital Direct",
+    "Howard Wright Europe",
     "Inspire Community Trust",
     "Interweave Textiles",
     "Invacare UK",
@@ -6518,7 +6515,6 @@
    "heldOnly": [
     "Apollo Healthcare Technologies",
     "Croyde Medical",
-    "Howard Wright Europe",
     "Wealden Rehab"
    ],
    "capturedNothingCounted": [],
@@ -6541,7 +6537,7 @@
    "unknown": [
     "Live By Lulu Limited, trading as Caversham Health, (parent company Magicdust Holdings)"
    ],
-   "actionableTotal": 15,
+   "actionableTotal": 14,
    "blockedReason": null,
    "deferred": null
   },
@@ -6865,26 +6861,12 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Howard Wright Europe",
-     "domain": "howardwright.com"
-    },
-    {
-     "supplier": "Ferno (UK) Limited",
-     "domain": null
-    },
-    {
      "supplier": "Ingles Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Lynton Lasers",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Ferno (UK) Limited",
-    "Ingles Ltd",
-    "Lynton Lasers"
+    "Ingles Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -6917,6 +6899,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Ferno (UK) Limited",
+     "domain": "ferno.com",
+     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-20",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Fulbourn Medical",
      "domain": "www.fulbournmedical.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -6935,6 +6924,13 @@
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-08",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Lynton Lasers",
+     "domain": "lynton.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-20",
      "bucket": "refused"
     },
     {
@@ -7074,12 +7070,12 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 12,
-    "heldNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 13,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 1
    },
    "published": [
     "Anetic Aid Ltd",
@@ -7102,28 +7098,27 @@
     "Draeger Medical UK",
     "Felgains",
     "Baxter / Hillrom",
+    "Howard Wright Europe",
     "Ideal Medical Solutions",
     "Olympus (KeyMed)",
     "LINET UK",
     "Promed Limited"
    ],
-   "heldOnly": [
-    "Howard Wright Europe"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Ferno (UK) Limited",
-    "Ingles Ltd",
-    "Lynton Lasers"
+    "Ingles Ltd"
    ],
    "refused": [
     "Bender UK Ltd",
     "Carleton Medical",
     "D.P. Medical Systems Limited",
     "Erbe Medical UK Ltd",
+    "Ferno (UK) Limited",
     "Fulbourn Medical",
     "Howorth Air Technology",
     "Karl Storz UK",
+    "Lynton Lasers",
     "Newmaw Medical Ltd",
     "NJ Devices Ltd t/a Ocean Med",
     "Novus Med Ltd",
@@ -7136,7 +7131,7 @@
     "Xograph Healthcare Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 16,
+   "actionableTotal": 14,
    "blockedReason": null,
    "deferred": null
   },
