@@ -67,6 +67,14 @@ ELSEWHERE = {
 
 # Green on clean main, 18/09/2026. Total runtime ~45s, nearly all of it
 # test_dead_company_check.py.
+#
+# test_identity_policy.py (added by 2d70d94) and test_vocabulary_duplicates.py
+# (added by d1f18e1) arrived unregistered on 20/09/2026 and stopped this job
+# dead on fourteen consecutive pushes — publish gate and gate self-test green
+# throughout, so no bad data reached the Hub. Both were run against clean main
+# on 20/09 (18 cases and 11 cases respectively, both green) and registered here
+# the same evening. Neither runs in a workflow of its own, so RUN is where they
+# belong.
 RUN = [
     "test_breadcrumb_division.py",
     "test_company_match_overrides.py",
@@ -76,6 +84,7 @@ RUN = [
     "test_crawl_site_concurrency.py",
     "test_dead_company_check.py",
     "test_hospital_prescribing_resources.py",
+    "test_identity_policy.py",
     "test_merge_seed_on_retry.py",
     "test_numeric_slug_detail.py",
     "test_product_detail_cursor.py",
@@ -89,6 +98,7 @@ RUN = [
     "test_speciality_panels.py",
     "test_stale_brief_rows.py",
     "test_supplier_index_awards.py",
+    "test_vocabulary_duplicates.py",
 ]
 
 # A test that is red for a reason that is its own decision goes HERE, not out of
