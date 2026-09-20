@@ -41,7 +41,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 29 | 23.8% | 73 | 33 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 24 | 23.8% | 41 | 48 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 17 | 27.0% | 31 | 24 | STARTED |
-| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 14 | 23.3% | 15 | 41 | STARTED |
+| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 15 | 25.0% | 14 | 41 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 16 | 27.6% | 27 | 26 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 15 | 26.3% | 20 | 31 | STARTED |
 | Urology and Bowel Management | continence | 57 | 17 | 29.8% | 29 | 33 | STARTED |
@@ -79,7 +79,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | 4 | 7 | STARTED |
 | Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 3 | 9 | STARTED · DEFERRED |
-| Prosthetic Components and Associated Products | orthotics | 12 | 4 | 33.3% | 2 | 7 | STARTED |
+| Prosthetic Components and Associated Products | orthotics | 12 | 5 | 41.7% | 1 | 7 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 4 | 6 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 3 | 6 | STARTED |
 | Polymer Aprons | infection | 8 | 2 | 25.0% | 1 | 7 | STARTED |

@@ -548,7 +548,9 @@
    ],
    "hub": null,
    "notTaxonomy": true,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "HELD, POLICY 5, 20/09/2026 (^o423 Policy 5 pass 20/09/2026). All 429 rows are bare Ottobock catalogue codes with no descriptive text of their own — confirmed ambiguous for the 390 that never had a manufacturer detail record captured, which stay held under the guard (a bare SKU is ambiguous by definition). CORRECTION to the 11/09/2026 finding on ^o423: 39 of the 429 DO have a supplier-product-detail record with real marketing description (mostly in German), which was checked and translated on 20/09/2026 — 31 of those 39 resolve to a confirmed orthotic/prosthetic product and are mapped by product-override above. The remaining 8 (617Pg5 with no description text at all, the Bioness L100 Go functional electrical stimulation system with no gated fit, and 6 workshop machines/equipment — sanding/grinding machines, a vacuum pump, a lamination workstation, silicone-processing rollers and a digital socket-design service — stay held: no gated type covers workshop capital equipment or an FES device, and inventing one for 6-7 SKUs from one supplier would not meet the vocabulary-gap policy's own bar. ^o423's guard (never map a bare SKU) still holds; what changed is recognising which SKUs actually were bare and which had evidence.",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
   },
   {
    "supplier": "Abilia Ltd",
@@ -8601,8 +8603,8 @@
    "hub": "pathology:histo",
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
-   "why": "judged from the row's own examples rather than the division name: Microscope Slides, Coverglass, Coverslipping and Consumables are histology and cellular slide-preparation products, the same class as this supplier's Cytology division (Cytospin, Coverslipping, Coverglass) already mapped pathology:histo",
-   "decidedIn": "Epredia - Phase D.json"
+   "why": "SPLIT AT PRODUCT LEVEL, POLICY 5 (^o475), 20/09/2026. 16 of 25 products already had a correct product-override from the 15/09/2026 framework-coverage run (10 Dx/Rx scanners + E1000 Dx Digital Pathology Solution -> digital:hw, Barco Display -> digital:hw, Casemanager/Slidecenter/Slidemanager/Quantcenter -> digital:sw) and are UNCHANGED. This pass added the remaining 9: Filter Cubes and Desk Ii/Flash Desk (Epredia's own 'Accessories' subcategory for the scanner range) to digital:hw; Tma Grand Master and Tma Master (tissue microarrayers, a lab instrument) to pathology:equip; and Consumables/Microscope Slides/Coverslipping/Coverglass (the same slide-preparation consumables as this supplier's Cytology division) to pathology:histo. Nothing held.",
+   "decidedIn": "^o475 Policy 5 pass 20/09/2026 (16 already mapped 15/09, 9 newly split)"
   },
   {
    "supplier": "Epredia",
@@ -93643,7 +93645,9 @@
    ],
    "hub": null,
    "notTaxonomy": true,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "HELD, POLICY 5 + nav-labels policy, 20/09/2026. 46 rows read individually on electrospyres.com. 3 are the site's own navigation/URL slugs ('range', 'clinical-applications', 'all'), held under the nav-labels-are-not-products policy. 8 are already mapped by product-override (5 UltraGel gel variants -> cardiology:gel, 3 Vitatrode ECG electrodes -> cardiology:ecg, added earlier). This 20/09/2026 pass added product-overrides for a further 27: 9 ThermoBlue electrosurgical accessories, ElectroGel, 16 SkinResQ dressing/closure/fixation products and 2 Pneumo-SOS chest seals — see their own override entries. REMAINING HELD, checked and genuinely without a home: LubriPro sterile lubricating jelly and LubriPlay personal lubricant are both explicitly multi-purpose (catheters, endoscopes, ETT/NG tubes, personal/sexual use) with no single speciality fit — the same call already made on Farla Medical's own 'Lubricating Jelly' division, which sits unmapped. Cosmetic Gel (aloe IPL/laser/RF aesthetic gel) and ThermoGel reusable hot/cold pack are outside every gated clinical vocabulary's scope as it stands (IPL/aesthetics has no Hub speciality; a hot/cold pack has a precedent at rehab:therapy on other suppliers but Electro Spyres' own product is a therapy/comfort accessory rather than a device with a clinical procedure attached, so held rather than forced).",
+   "decidedIn": "^o434 Policy 5 pass 20/09/2026"
   },
   {
    "supplier": "Zoll Medical UK Limited",
@@ -95601,7 +95605,9 @@
    ],
    "hub": null,
    "notTaxonomy": true,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "HELD, POLICY 5 + nav-labels policy, 20/09/2026. Two rows: 'Glutack' is a duplicate capture of the Surgical Division product already mapped above (crawler artefact); 'Dna Testing Division' is the site's own division-label text captured as if it were a product, which the nav-labels-are-not-products policy holds outright.",
+   "decidedIn": "^o561 Policy 5 pass 20/09/2026"
   },
   {
    "supplier": "NSK United Kingdom Limited",
@@ -101391,6 +101397,1028 @@
    "kind": "product-override",
    "why": "POLICY 5 product-level split, 20/09/2026. The supplier files this under \"Imaging › TIMS\" (read 20/09/2026 from the product's own page on mishealthcare.co.uk, whose breadcrumb gives the company's own second-level filing under Imaging — the crawler only captured the top-level 'Imaging' division, which is why this needed a page read). TIMS MVP is a medical video recording, annotation and archiving platform integrating with PACS/VNA — clinical and departmental software, which is what digital:sw names. It is not an imaging modality and does not belong in any imaging comparison.",
    "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
+  },
+  {
+   "supplier": "Sela Medical UK Ltd",
+   "division": "Glutack",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Glutack"
+   ],
+   "hub": "mis:instruments",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o561), 20/09/2026. read 20/09/2026 from the product's own page on selamedical.co.uk. Glutack is 'an atraumatic laparoscopic & laparatomic mesh fixation device' that dispenses Glubran2 adhesive — a MIS instrument, not a mechanical clip.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Sela Medical UK Ltd",
+   "division": "Endograb",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Endograb"
+   ],
+   "hub": "mis:instruments",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o561), 20/09/2026. read 20/09/2026 from the product's own page on selamedical.co.uk. EndoGrab is 'an ultra-versatile organ and tissue maneuvering system' for latching to organs/tissue during laparoscopic procedures — a MIS retraction instrument.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Sela Medical UK Ltd",
+   "division": "Endolift",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Endolift"
+   ],
+   "hub": "mis:instruments",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o561), 20/09/2026. read 20/09/2026 from the product's own page on selamedical.co.uk. EndoLift is a 'soft tissue suspension' device using anchoring clips on a telescopic tube for gasless laparoscopic liver/organ retraction — a MIS instrument.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Sela Medical UK Ltd",
+   "division": "Applier",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Applier"
+   ],
+   "hub": "mis:instruments",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o561), 20/09/2026. read 20/09/2026 from the product's own page on selamedical.co.uk. The Applier is the one-handed application device for EndoGrab/EndoLift, described as 'agnostic to EndoGrab/EndoLift connection' — an accessory instrument, not itself a clip.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Sela Medical UK Ltd",
+   "division": "Dipromed",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Dipromed"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "HELD, POLICY 5 (^o561), 20/09/2026. read 20/09/2026 from the product's own page on selamedical.co.uk: 'Dipromed' on Sela's own site is a manufacturer brand landing page, not one product. Dipromed itself makes hernia mesh, uro-gynaecological and male incontinence prosthetic systems, IVD specimen-transport containers and surgical masks — a division-shaped, multi-speciality name, not a single identifiable item. ^o561's original text assumed it was specifically hernia mesh; it is not just that. Held under the mixed-division policy rather than guessed into theatres:theatre.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "thermoblue-reusable-electrosurgical-adaptor-ad960b",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "thermoblue-reusable-electrosurgical-adaptor-ad960b"
+   ],
+   "hub": "theatres:electro",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. Product name states its own class directly (electrosurgical adaptor/pencil/dispersive patient plate/cable/forceps cable/cautery accessory), matching theatres:electro (Electrosurgery consumables) exactly, the same precedent as Henleys Medical's Electrosurgical Instruments division.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "thermoblue-hand-controlled-electrosurgical-pencil-hsbl201",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "thermoblue-hand-controlled-electrosurgical-pencil-hsbl201"
+   ],
+   "hub": "theatres:electro",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. Product name states its own class directly (electrosurgical adaptor/pencil/dispersive patient plate/cable/forceps cable/cautery accessory), matching theatres:electro (Electrosurgery consumables) exactly, the same precedent as Henleys Medical's Electrosurgical Instruments division.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "thermoblue-adult-dual-element-dispersive-patient-plate",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "thermoblue-adult-dual-element-dispersive-patient-plate"
+   ],
+   "hub": "theatres:electro",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. Product name states its own class directly (electrosurgical adaptor/pencil/dispersive patient plate/cable/forceps cable/cautery accessory), matching theatres:electro (Electrosurgery consumables) exactly, the same precedent as Henleys Medical's Electrosurgical Instruments division.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "thermoblue-adult-single-element-dispersive-patient-plate",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "thermoblue-adult-single-element-dispersive-patient-plate"
+   ],
+   "hub": "theatres:electro",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. Product name states its own class directly (electrosurgical adaptor/pencil/dispersive patient plate/cable/forceps cable/cautery accessory), matching theatres:electro (Electrosurgery consumables) exactly, the same precedent as Henleys Medical's Electrosurgical Instruments division.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "thermoblue-infant-single-element-dispersive-patient-plate",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "thermoblue-infant-single-element-dispersive-patient-plate"
+   ],
+   "hub": "theatres:electro",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. Product name states its own class directly (electrosurgical adaptor/pencil/dispersive patient plate/cable/forceps cable/cautery accessory), matching theatres:electro (Electrosurgery consumables) exactly, the same precedent as Henleys Medical's Electrosurgical Instruments division.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "thermoblue-infant-dual-element-dispersive-patient-plate",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "thermoblue-infant-dual-element-dispersive-patient-plate"
+   ],
+   "hub": "theatres:electro",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. Product name states its own class directly (electrosurgical adaptor/pencil/dispersive patient plate/cable/forceps cable/cautery accessory), matching theatres:electro (Electrosurgery consumables) exactly, the same precedent as Henleys Medical's Electrosurgical Instruments division.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "thermoblue-reusable-patient-plate-cable-135vr",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "thermoblue-reusable-patient-plate-cable-135vr"
+   ],
+   "hub": "theatres:electro",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. Product name states its own class directly (electrosurgical adaptor/pencil/dispersive patient plate/cable/forceps cable/cautery accessory), matching theatres:electro (Electrosurgery consumables) exactly, the same precedent as Henleys Medical's Electrosurgical Instruments division.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "thermoblue-monopolar-forceps-cable-4-3mm",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "thermoblue-monopolar-forceps-cable-4-3mm"
+   ],
+   "hub": "theatres:electro",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. Product name states its own class directly (electrosurgical adaptor/pencil/dispersive patient plate/cable/forceps cable/cautery accessory), matching theatres:electro (Electrosurgery consumables) exactly, the same precedent as Henleys Medical's Electrosurgical Instruments division.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "thermoblue-cautery-tip-cleaner-pad",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "thermoblue-cautery-tip-cleaner-pad"
+   ],
+   "hub": "theatres:electro",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. Product name states its own class directly (electrosurgical adaptor/pencil/dispersive patient plate/cable/forceps cable/cautery accessory), matching theatres:electro (Electrosurgery consumables) exactly, the same precedent as Henleys Medical's Electrosurgical Instruments division.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "electrogel-eg40-conductive-gel-300ml-bottle",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "electrogel-eg40-conductive-gel-300ml-bottle"
+   ],
+   "hub": "cardiology:ecgacc",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com: ElectroGel is 'specifically formulated for clinical procedures that require superior ionic conductivity ... for ECG, EEG, EMG, and biofeedback.' It is electrode conductive gel for biosignal RECORDING, not diagnostic ultrasound imaging, so cardiology:gel ('Ultrasound gels') would be wrong. Mapped to the new cardiology:ecgacc type ('ECG cables, accessories and recording consumables') added earlier today.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-dynaderm-film-island-dressing-80x60mm",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-dynaderm-film-island-dressing-80x60mm"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. An island/transparent film wound dressing, unambiguous from its own name, matching wound:adv (Advanced dressings).",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-dynaderm-film-island-dressing-120x85mm",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-dynaderm-film-island-dressing-120x85mm"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. An island/transparent film wound dressing, unambiguous from its own name, matching wound:adv (Advanced dressings).",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-dynaderm-film-island-dressing-180x80mm",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-dynaderm-film-island-dressing-180x80mm"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. An island/transparent film wound dressing, unambiguous from its own name, matching wound:adv (Advanced dressings).",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-protoderm-non-woven-island-dressing-80x60mm",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-protoderm-non-woven-island-dressing-80x60mm"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. An island/transparent film wound dressing, unambiguous from its own name, matching wound:adv (Advanced dressings).",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-protoderm-non-woven-island-dressing-120x85mm",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-protoderm-non-woven-island-dressing-120x85mm"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. An island/transparent film wound dressing, unambiguous from its own name, matching wound:adv (Advanced dressings).",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-protoderm-non-woven-island-dressing-180x85mm",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-protoderm-non-woven-island-dressing-180x85mm"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. An island/transparent film wound dressing, unambiguous from its own name, matching wound:adv (Advanced dressings).",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-spiroderm-transparent-film-dressing-76x60mm",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-spiroderm-transparent-film-dressing-76x60mm"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. An island/transparent film wound dressing, unambiguous from its own name, matching wound:adv (Advanced dressings).",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-spiroderm-transparent-film-dressing-120x100mm",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-spiroderm-transparent-film-dressing-120x100mm"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. An island/transparent film wound dressing, unambiguous from its own name, matching wound:adv (Advanced dressings).",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-epiderm-wound-closure-strips-3-2x76mm",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-epiderm-wound-closure-strips-3-2x76mm"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com: 'a simple, non-invasive alternative or supplement to sutures for wound closure.' A wound closure product, unambiguous from its own name; no dedicated closure-strip type exists, so filed under wound:adv (Advanced dressings) as the nearest gated type.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-epiderm-wound-closure-strips-6-4x101mm",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-epiderm-wound-closure-strips-6-4x101mm"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com: 'a simple, non-invasive alternative or supplement to sutures for wound closure.' A wound closure product, unambiguous from its own name; no dedicated closure-strip type exists, so filed under wound:adv (Advanced dressings) as the nearest gated type.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-epiderm-wound-closure-strips-12-7x101mm",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-epiderm-wound-closure-strips-12-7x101mm"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com: 'a simple, non-invasive alternative or supplement to sutures for wound closure.' A wound closure product, unambiguous from its own name; no dedicated closure-strip type exists, so filed under wound:adv (Advanced dressings) as the nearest gated type.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-protofix-non-woven-dressing-roll-25mm-x-3m",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-protofix-non-woven-dressing-roll-25mm-x-3m"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com: a fixation roll 'for securing dressings, cannulas, catheters, and other devices', filed by the supplier itself under 'WOUND CARE'. No dedicated fixation-tape type exists in the gated vocabulary, so filed under wound:adv following the supplier's own category.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-protofix-non-woven-dressing-roll-50mm-x-10m",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-protofix-non-woven-dressing-roll-50mm-x-10m"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com: a fixation roll 'for securing dressings, cannulas, catheters, and other devices', filed by the supplier itself under 'WOUND CARE'. No dedicated fixation-tape type exists in the gated vocabulary, so filed under wound:adv following the supplier's own category.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-protofix-non-woven-dressing-roll-120mm-x-10m",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-protofix-non-woven-dressing-roll-120mm-x-10m"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com: a fixation roll 'for securing dressings, cannulas, catheters, and other devices', filed by the supplier itself under 'WOUND CARE'. No dedicated fixation-tape type exists in the gated vocabulary, so filed under wound:adv following the supplier's own category.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-protofix-non-woven-dressing-roll-250mm-x-10m",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-protofix-non-woven-dressing-roll-250mm-x-10m"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com: a fixation roll 'for securing dressings, cannulas, catheters, and other devices', filed by the supplier itself under 'WOUND CARE'. No dedicated fixation-tape type exists in the gated vocabulary, so filed under wound:adv following the supplier's own category.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "skinresq-spirofix-transparent-film-dressing-roll-120mm-x-10m",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "skinresq-spirofix-transparent-film-dressing-roll-120mm-x-10m"
+   ],
+   "hub": "wound:adv",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com: a fixation roll 'for securing dressings, cannulas, catheters, and other devices', filed by the supplier itself under 'WOUND CARE'. No dedicated fixation-tape type exists in the gated vocabulary, so filed under wound:adv following the supplier's own category.",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "pneumo-sos-vented-chest-seal",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "pneumo-sos-vented-chest-seal"
+   ],
+   "hub": "wound:fa",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com: 'a sterile, vented chest seal applied to a chest wound ... temporarily treats and prevents a pneumothorax ... in patients injured by gunshot, blast shrapnel, knife ... while in transit to the nearest hospital.' An emergency trauma dressing, matching wound:fa (First Aid).",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "pneumo-sos-non-vented-chest-seal",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "pneumo-sos-non-vented-chest-seal"
+   ],
+   "hub": "wound:fa",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o434), 20/09/2026. read 20/09/2026 from the product's own page on electrospyres.com. The non-vented variant of the same emergency chest seal, wound:fa (First Aid).",
+   "decidedIn": "^o565 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "4R57 62898",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "4R57 62898"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): knee-joint rotation/turntable adapter for a transfemoral prosthesis, letting the user pivot the knee ('perform turning and rotation movements of the knee joint'). Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "1C59 61164",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "1C59 61164"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Taleo Adapt — a hydraulic ankle unit prosthetic foot that adapts to uneven ground. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "1C56 61148",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "1C56 61148"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Taleo Adjust — a prosthetic foot with an adjustable heel height for different shoes. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "3B5 4 61135",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "3B5 4 61135"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): a mechatronic (microprocessor) prosthetic knee joint. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "Vs5 61134",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Vs5 61134"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Restore — a prosthetic foot for less active users, giving simple roll-over and stability. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "Vs4 61133",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Vs4 61133"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Kintrol — a hydraulic prosthetic foot for stability and a more natural ankle movement. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "Lp2 W2 61132",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Lp2 W2 61132"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Freestyle Swim — a prosthetic foot designed for swimming, with an adjustable ankle. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "1C70 61131",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "1C70 61131"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Evanto — a carbon prosthetic foot with multiaxial flexibility for active users. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "1C30 1 61122",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "1C30 1 61122"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Trias — a lightweight carbon prosthetic foot for moderately active users. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "1A1 2 61113",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "1A1 2 61113"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Empower — a prosthetic foot designed for active users covering longer distances at higher walking speed. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "1C51 61102",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "1C51 61102"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Taleo Vertical Shock — a prosthetic foot that absorbs rotation and vertical shock for the residual limb. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "1C52 61100",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "1C52 61100"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Taleo Harmony — a prosthetic foot with an integrated vacuum system to manage daily volume fluctuation in the socket. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "3R85 61089",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "3R85 61089"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Dynion — a microprocessor prosthetic knee for stairs, ramps, uneven terrain, cycling and swimming. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "1C53 61088",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "1C53 61088"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Taleo Low Profile — a prosthetic foot for users with limited build height. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "1C50 61073",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "1C50 61073"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Taleo — a prosthetic foot with a natural roll-over and efficient energy return. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "F22 61066",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "F22 61066"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Maverick Comfort AT — a fibreglass prosthetic foot for limited build height. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "F21 61065",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "F21 61065"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Maverick Xtreme AT — a fibreglass prosthetic foot built for high-intensity activity. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "8E2 61267",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "8E2 61267"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): speedhand — a modular prosthetic hand/wrist for more natural everyday movement. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "8E7    61161",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "8E7    61161"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): bebionic Hand — a multi-articulating myoelectric prosthetic hand. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "17B203 61903",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "17B203 61903"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): E-MAG Active — a leg orthosis with a sensor system that secures the knee for users with muscle weakness or paralysis. Matches orthotics:prosth (Prosthetic components).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "6Y45 63605",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "6Y45 63605"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Silikonliner 6Y45 — a silicone liner for compression therapy. A prosthetic liner is componentry, matching orthotics:prosth.",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "6Y44 63604",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "6Y44 63604"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Silikonliner 6Y44 — a silicone liner for compression therapy. A prosthetic liner is componentry, matching orthotics:prosth.",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "6Y43 63603",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "6Y43 63603"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Skeo Pure — a transparent silicone prosthetic liner for checking fit and skin condition. A prosthetic liner is componentry, matching orthotics:prosth.",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "6Y200 63599",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "6Y200 63599"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Varos liner — a prosthetic liner forming a functional unit with the 5A60 Varos socket. A prosthetic liner is componentry, matching orthotics:prosth.",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "6Y110 63595",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "6Y110 63595"
+   ],
+   "hub": "orthotics:prosth",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Skeo Sealing — a sealing prosthetic liner for daily flexibility with less maintenance. A prosthetic liner is componentry, matching orthotics:prosth.",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "50S5 63156",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "50S5 63156"
+   ],
+   "hub": "orthotics:afo",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): Malleo Sensa — an ankle support providing stability and compression after injury or inflammation. Matches orthotics:afo (Ankle-foot orthoses and bracing).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "50S3 63155",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "50S3 63155"
+   ],
+   "hub": "orthotics:afo",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): an active ankle orthosis for acute injuries or chronic instability, allowing continued foot movement. Matches orthotics:afo (Ankle-foot orthoses and bracing).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "28F10 62270",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "28F10 62270"
+   ],
+   "hub": "orthotics:afo",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): a heel-relief orthosis that suspends the heel to offload pressure, without crutches. Matches orthotics:afo (Ankle-foot orthoses and bracing).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "24H1 61116",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "24H1 61116"
+   ],
+   "hub": "orthotics:paed",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): the MyCRO Band is a cranial remoulding orthosis (CRO) for infants 3-18 months with plagiocephaly or brachycephaly. Matches orthotics:paed (Paediatric / clubfoot).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "17Ko1000  0   B 61085",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "17Ko1000  0   B 61085"
+   ],
+   "hub": "orthotics:brace",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): the C-Brace is a microprocessor stance-control leg orthosis (not an amputee prosthesis — for users who still have their own leg) enabling stairs, slopes and uneven terrain. Matches orthotics:brace (Knee, calf & general limb supports).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Otto Bock Healthcare PLC",
+   "division": "617Hg5 61146",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "617Hg5 61146"
+   ],
+   "hub": "orthotics:materials",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o423 Policy 5 pass 20/09/2026), 20/09/2026. supplier's own manufacturer detail record in data/supplier-product-detail.json, translated from the German marketing copy where the source was German, cross-checked against the product code family Ottobock uses for its own catalogue (1C.. = carbon feet, 6Y.. = liners, 8E.. = hands, 3B.. = mechatronic knees): OrthoEpox GreenLine is described as 'a sustainable epoxy resin, made 50% from renewable raw materials, for producing light, thin-walled yet stable laminates in prosthetics and orthotics.' Matches orthotics:materials (Orthotic fabrication materials and componentry).",
+   "decidedIn": "^o423 Policy 5 pass 20/09/2026 — 39 of 429 had a supplier-product-detail record; the rest remain bare SKU codes and stay held"
+  },
+  {
+   "supplier": "Epredia",
+   "division": "Tma Grand Master",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tma Grand Master"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o475), 20/09/2026. epredia.com's own Digital Pathology filter taxonomy, read 20/09/2026, which sorts this exact range into Clinical/Research Whole Slide Imaging, Image Analysis/Management Software, Tissue Microarrayers, Accessories and Coverglass/Coverslipping. A tissue microarrayer is a laboratory instrument that builds TMA blocks, matching pathology:equip (Analysers & equipment), not the histology consumables the rest of the division holds.",
+   "decidedIn": "^o475 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Epredia",
+   "division": "Tma Master",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Tma Master"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o475), 20/09/2026. epredia.com's own Digital Pathology filter taxonomy, read 20/09/2026, which sorts this exact range into Clinical/Research Whole Slide Imaging, Image Analysis/Management Software, Tissue Microarrayers, Accessories and Coverglass/Coverslipping. A tissue microarrayer is a laboratory instrument that builds TMA blocks, matching pathology:equip (Analysers & equipment), not the histology consumables the rest of the division holds.",
+   "decidedIn": "^o475 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Epredia",
+   "division": "Filter Cubes",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Filter Cubes"
+   ],
+   "hub": "digital:hw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o475), 20/09/2026. epredia.com's own Digital Pathology filter taxonomy, read 20/09/2026, which sorts this exact range into Clinical/Research Whole Slide Imaging, Image Analysis/Management Software, Tissue Microarrayers, Accessories and Coverglass/Coverslipping. Epredia's own 'Accessories' subcategory for the whole-slide-imaging range (a pathology-grade review monitor, fluorescence filter cubes, and viewing-desk workstations) — clinical IT hardware supporting the scanners, matching digital:hw.",
+   "decidedIn": "^o475 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Epredia",
+   "division": "Desk Ii",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Desk Ii"
+   ],
+   "hub": "digital:hw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o475), 20/09/2026. epredia.com's own Digital Pathology filter taxonomy, read 20/09/2026, which sorts this exact range into Clinical/Research Whole Slide Imaging, Image Analysis/Management Software, Tissue Microarrayers, Accessories and Coverglass/Coverslipping. Epredia's own 'Accessories' subcategory for the whole-slide-imaging range (a pathology-grade review monitor, fluorescence filter cubes, and viewing-desk workstations) — clinical IT hardware supporting the scanners, matching digital:hw.",
+   "decidedIn": "^o475 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Epredia",
+   "division": "Flash Desk",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Flash Desk"
+   ],
+   "hub": "digital:hw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o475), 20/09/2026. epredia.com's own Digital Pathology filter taxonomy, read 20/09/2026, which sorts this exact range into Clinical/Research Whole Slide Imaging, Image Analysis/Management Software, Tissue Microarrayers, Accessories and Coverglass/Coverslipping. Epredia's own 'Accessories' subcategory for the whole-slide-imaging range (a pathology-grade review monitor, fluorescence filter cubes, and viewing-desk workstations) — clinical IT hardware supporting the scanners, matching digital:hw.",
+   "decidedIn": "^o475 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Epredia",
+   "division": "Consumables",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Consumables"
+   ],
+   "hub": "pathology:histo",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o475), 20/09/2026. epredia.com's own Digital Pathology filter taxonomy, read 20/09/2026, which sorts this exact range into Clinical/Research Whole Slide Imaging, Image Analysis/Management Software, Tissue Microarrayers, Accessories and Coverglass/Coverslipping. Slide-preparation consumables, the same class as this supplier's Cytology division (already mapped pathology:histo).",
+   "decidedIn": "^o475 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Epredia",
+   "division": "Microscope Slides",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Microscope Slides"
+   ],
+   "hub": "pathology:histo",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o475), 20/09/2026. epredia.com's own Digital Pathology filter taxonomy, read 20/09/2026, which sorts this exact range into Clinical/Research Whole Slide Imaging, Image Analysis/Management Software, Tissue Microarrayers, Accessories and Coverglass/Coverslipping. Slide-preparation consumables, the same class as this supplier's Cytology division (already mapped pathology:histo).",
+   "decidedIn": "^o475 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Epredia",
+   "division": "Coverslipping",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Coverslipping"
+   ],
+   "hub": "pathology:histo",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o475), 20/09/2026. epredia.com's own Digital Pathology filter taxonomy, read 20/09/2026, which sorts this exact range into Clinical/Research Whole Slide Imaging, Image Analysis/Management Software, Tissue Microarrayers, Accessories and Coverglass/Coverslipping. Slide-preparation consumables, the same class as this supplier's Cytology division (already mapped pathology:histo).",
+   "decidedIn": "^o475 Policy 5 pass 20/09/2026"
+  },
+  {
+   "supplier": "Epredia",
+   "division": "Coverglass",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Coverglass"
+   ],
+   "hub": "pathology:histo",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 (^o475), 20/09/2026. epredia.com's own Digital Pathology filter taxonomy, read 20/09/2026, which sorts this exact range into Clinical/Research Whole Slide Imaging, Image Analysis/Management Software, Tissue Microarrayers, Accessories and Coverglass/Coverslipping. Slide-preparation consumables, the same class as this supplier's Cytology division (already mapped pathology:histo).",
+   "decidedIn": "^o475 Policy 5 pass 20/09/2026"
   }
  ],
  "kinds": {
