@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-19",
+ "lastRun": "2026-09-20",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -389,7 +389,19 @@
   "Northwood",
   "Nova Biomedical",
   "Novus Med Ltd",
-  "Nowus Healthcare"
+  "Nowus Healthcare",
+  "NSK United Kingdom Limited",
+  "O&M Halyard Uk Limited",
+  "OncoSem UK Limited",
+  "Opal Health",
+  "Open Medical Ltd",
+  "Optima Medical Ltd",
+  "Oral Care Innovations",
+  "Orn Health",
+  "OrthoAccess Ltd",
+  "Orthopediatrics EU Limited",
+  "Ortus Technology Limited",
+  "OSI INC. Ltd"
  ],
  "refusals": [
   {
@@ -866,6 +878,31 @@
    "name": "Nottingham Rehab Limited (Trading as NRS Healthcare)",
    "reason": "Nottingham Rehab Limited and NRS Healthcare Limited entered liquidation 01/08/2025 (Official Receiver appointed); the NRS Healthcare product sales division was sold to Mobilitas Group 28/08/2025. The 'NRS Healthcare' trading name may no longer be current for this entity, so no alias was added without a fresher check of who now trades under it. Flagged for a record-status review rather than enrichment.",
    "date": "2026-09-19"
+  },
+  {
+   "name": "O&M Halyard Uk Limited",
+   "reason": "Own domain (halyardhealth.co.uk) is dead (SSL handshake failure, unreachable). Companies House 11111792 lists no previous/trading names. NHS Supply Chain framework brief uses only \"O&M Halyard Uk Limited\". Confirmed via web search that the entity relates to parent Owens & Minor (US), but a parent/subsidiary name is never added as an alias (rule 4). No usable alternate name form found.",
+   "date": "2026-09-20"
+  },
+  {
+   "name": "Optima Medical Ltd",
+   "reason": "Own former site (optimamedical.com) now 301-redirects entirely to acquirer Natus Medical's site (natus.com) \u2014 confirms the company was acquired by Natus and has no standalone site left to verify a trading name from. Companies House 03737869 lists no previous names. Acquirer's name is excluded per rule 4 (never add a parent/acquirer's name as an alias), and it is also far too ambiguous/broad (global company, unrelated press volume) to use safely.",
+   "date": "2026-09-20"
+  },
+  {
+   "name": "Orn Health",
+   "reason": "Own site (ornhealth.com) confirms trading name \"\u00d8RN Health\" (same as seed name, only differs by the special character \u00d8 vs O, not a new alias) and states it is \"part of the \u00d8RN International group\" \u2014 excluded as a parent/group name per rule 4. Companies House has no company registered exactly as \"Orn Health\"; several similarly-named entities exist (ORN (INT) LIMITED, ORN UK LIMITED, ORN HOLDINGS LTD) with no way to confirm which, if any, is the trading entity behind this brand \u2014 too ambiguous to guess. Site's own stated product range (cleaning solutions, air purifiers, PPE, patient protection products, curtains, gloves, disposable sheets) spans several categories rather than stating one plain speciality, so specialities also left empty.",
+   "date": "2026-09-20"
+  },
+  {
+   "name": "Orthopediatrics EU Limited",
+   "reason": "Companies House 10642293 confirms the registered name exactly as seeded, with no previous names. The only other verifiable name form is the US parent's global brand \"OrthoPediatrics\" (Warsaw, Indiana) \u2014 excluded per rule 4 as a parent/subsidiary name. No distinct UK trading name found.",
+   "date": "2026-09-20"
+  },
+  {
+   "name": "OSI INC. Ltd",
+   "reason": "Companies House 11611660 confirms the registered name exactly as seeded (SIC 86900, Barking), with no previous names, and no company website could be located for this UK entity. \"OSI\" alone is a highly ambiguous 3-letter acronym shared by multiple unrelated companies (OSI Electronics (UK) Ltd, OSI Pharmaceuticals (UK) Ltd, OSI Regulatory Services Ltd, and the US IOL maker Ophthalmic Solution Inc., which the Barking entity may relate to but this was not confirmed on a named source) \u2014 not usable as a single-token alias, and no multi-token form was found.",
+   "date": "2026-09-20"
   }
  ],
  "sources": {
