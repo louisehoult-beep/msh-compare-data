@@ -75,6 +75,13 @@ ELSEWHERE = {
 # on 20/09 (18 cases and 11 cases respectively, both green) and registered here
 # the same evening. Neither runs in a workflow of its own, so RUN is where they
 # belong.
+#
+# test_slug_name_divergence_detail.py (added by 1304073) did the same thing
+# later the same day and stopped this job dead on two consecutive pushes —
+# publish gate and gate self-test green throughout, so again no bad data
+# reached the Hub. Run against clean main on 20/09 (green, 0.05s, leaves the
+# tree clean) and registered here the same evening. It runs in no workflow of
+# its own, so RUN is where it belongs.
 RUN = [
     "test_breadcrumb_division.py",
     "test_company_match_overrides.py",
@@ -93,6 +100,7 @@ RUN = [
     "test_product_specs.py",
     "test_previous_names.py",
     "test_seed_domains.py",
+    "test_slug_name_divergence_detail.py",
     "test_speciality_news.py",
     "test_speciality_news_pipeline_merge.py",
     "test_speciality_panels.py",
