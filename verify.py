@@ -3420,6 +3420,119 @@ NAMED_TAXONOMY_SITES = {
 }
 
 
+# A DIVISION RENAME SILENTLY UNPUBLISHES A CURATED MAPPING (20/09/2026, ^o459).
+#
+# build_differentiator.py keys its curated mapping in
+# differentiator-category-map.json on the pair (supplier, division) — a human
+# decision about what that division IS. `_breadcrumb_division` in
+# scripts/crawl_supplier_site.py changed the same day to read the DEEPEST
+# breadcrumb crumb rather than the top-level one (see the long comment on that
+# function, and Hub/breadcrumb-second-level-blast-radius-2026-09-15.md for the
+# measurement behind it) — a genuinely necessary fix, but exactly the kind of
+# change that failure mode is missing. A re-crawl that reads a different
+# `division` string for products that already have a mapped, published
+# category does not error: build_differentiator.py just stops finding the old
+# key, and the range quietly un-publishes on its next build.
+#
+# THE GATE: any (supplier, division) entry in the category map that is
+# actually mapped (hub is not None, i.e. a real decision was made, not a held
+# row) must still name a division that supplier's current
+# supplier-products.json capture actually carries. If it doesn't, the mapping
+# is stranded — either the site was re-crawled without re-curating the
+# entries it affects (rule: re-curate in the same change), or something else
+# renamed the division underneath it. Either way this must be loud, not
+# silent, which is the whole point of writing it as a check rather than
+# trusting the next person to remember.
+def check_breadcrumb_division_stability(sup, cmap):
+    if not sup or not cmap:
+        return
+    suppliers = sup.get("suppliers") or {}
+    entries = cmap.get("entries") or []
+    for row in entries:
+        if row.get("hub") is None:
+            continue                     # a held row, not a published decision
+        # ONLY A PLAIN (supplier, division) ENTRY IS KEYED ON THE CRAWLED
+        # DIVISION STRING AT ALL. A `product-override` entry stores an exact
+        # PRODUCT NAME in the same `division` field (see `kinds` in
+        # differentiator-category-map.json) so it reads with every other row
+        # in this file, and build_differentiator.py matches it against each
+        # product's own name, never against its division — confirmed live,
+        # 20/09/2026: Electro Spyres' 27 product-override rows all carry the
+        # product's URL SLUG as "division", which cannot and must not be
+        # found in that supplier's divisions list. An `nhssc-term` entry is
+        # keyed on an NHS Supply Chain catalogue search term, read from the
+        # buyer's own published list, not from the supplier's site at all.
+        # Flagging either kind here would be noise on every single crawl,
+        # not a genuine stranding.
+        if row.get("kind") in ("product-override", "nhssc-term"):
+            continue
+        name = row.get("supplier")
+        rec = suppliers.get(name)
+        if rec is None:
+            continue                     # not a captured-from-the-supplier's-own-site
+                                          # entry at all (NHSSC-term / product-override
+                                          # kinds are keyed differently — see `kinds`
+                                          # in differentiator-category-map.json)
+        if "breadcrumb" not in (rec.get("structureFrom") or ""):
+            continue                     # this supplier's division wasn't read off a
+                                          # breadcrumb trail, so this fix cannot have
+                                          # touched it
+        current_divisions = {d.get("name") for d in (rec.get("divisions") or [])}
+        division = row.get("division")
+        if division not in current_divisions:
+            FAIL("differentiator",
+                 "%s's curated mapping for division %r (hub=%r, %s products) no longer "
+                 "matches any division this supplier's current supplier-products.json "
+                 "capture carries (%s). A re-crawl renamed or dropped it, and "
+                 "build_differentiator.py will silently stop publishing this range. "
+                 "Re-curate the category-map entry to the current division name in "
+                 "the same change that re-crawled it."
+                 % (name, division, row.get("hub"), row.get("products"),
+                    ", ".join(sorted(current_divisions)[:10]) or "none"))
+
+    check_product_override_stability(sup, cmap)
+
+
+# THE SAME STRANDING, ONE TIER DOWN (20/09/2026). A `product-override` entry
+# stores an exact PRODUCT NAME in its `division` field, not a division, and
+# build_differentiator.py matches it against each product's own current name
+# (`product_override.get((supplier, name))` in build_differentiator.py). A
+# re-crawl that reads a BETTER name for the same product — exactly what the
+# CSR headless-render fallback in scripts/crawl_supplier_site.py does for
+# electrospyres.com, ^o575: its plain-HTTP capture could not read the site at
+# all, so every product's "name" fell back to its own URL SLUG, and the
+# product-override entries decided against that capture were curated against
+# those slugs — strands every one of them the moment the real capture
+# replaces the slug names with the site's own product names. Found and fixed
+# in the same pass this check was added: 36 Electro Spyres product-override
+# rows were re-curated from slug to real name.
+def check_product_override_stability(sup, cmap):
+    suppliers = sup.get("suppliers") or {}
+    entries = cmap.get("entries") or []
+    for row in entries:
+        if row.get("kind") != "product-override" or row.get("hub") is None:
+            continue
+        name = row.get("supplier")
+        rec = suppliers.get(name)
+        if rec is None:
+            continue
+        current_names = {p.get("n") for p in (rec.get("products") or [])}
+        override_name = row.get("division")
+        if override_name not in current_names:
+            FAIL("differentiator",
+                 "%s's product-override mapping %r (hub=%r) no longer matches any "
+                 "product name this supplier's current supplier-products.json capture "
+                 "carries. A re-crawl read a different name for this product (a slug "
+                 "replaced by a real name, or a rewording), and "
+                 "build_differentiator.py's product_override lookup matches by exact "
+                 "current name, so this mapping will silently stop publishing. "
+                 "Re-curate the category-map entry to the current name in the same "
+                 "change that re-crawled it."
+                 % (name, override_name, row.get("hub")))
+
+
+
+
 def check_named_taxonomy_structure(doc):
     """Suppliers whose own product taxonomy is not called "cat" anything. See above."""
     if doc is None:
@@ -6053,6 +6166,11 @@ def main():
     # A Wix-sourced range must never invent a division its own JSON-LD doesn't
     # carry — see the note above check_wix_crawl_divisions.
     check_wix_crawl_divisions(load("supplier-products.json"))
+    # A curated (supplier, division) mapping must still name a division the
+    # supplier's current capture carries — see the note above
+    # check_breadcrumb_division_stability.
+    check_breadcrumb_division_stability(load("supplier-products.json"),
+                                        load("differentiator-category-map.json"))
     # NHSBSA hospital prescribing. Optional like the layers above: no index means
     # the tool is not built. Built, every check below is one the tests demanded
     # before the checks existed — which is exactly why it had not shipped.

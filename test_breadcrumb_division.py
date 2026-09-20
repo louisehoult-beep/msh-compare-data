@@ -47,6 +47,48 @@ class HtmlBreadcrumbStillWorks(unittest.TestCase):
         self.assertIsNotNone(division, "the Tailwind-class breadcrumb regression must stay fixed")
 
 
+class DeepestCrumbNotTopLevel(unittest.TestCase):
+    """20/09/2026, ^o459. MIS Healthcare's own trail is "Home > Imaging >
+    Mobile CT > <product>" — the top-level crumb ("Imaging") used to be
+    stored as every product's division, flattening a real second level the
+    company's own site carries. See
+    Hub/breadcrumb-second-level-blast-radius-2026-09-15.md for the full
+    measurement behind this change."""
+
+    def test_mis_healthcare_returns_the_second_level_not_imaging(self):
+        body = _load("mis_healthcare_product.html")
+        division = cs._breadcrumb_division(body, "mishealthcare.co.uk")
+        self.assertEqual(division, "Mobile CT")
+        self.assertNotEqual(division, "Imaging",
+                             "the top-level crumb must not win over the real, "
+                             "product-distinguishing second level")
+
+    def test_a_single_level_site_is_unaffected_by_the_deeper_read(self):
+        # Henleys carries exactly one non-root, non-generic crumb. Confirmed
+        # by ^o459's own measurement that most captured sites are this
+        # shape — crumbs[-1] must equal crumbs[0] here, or every
+        # single-level supplier's division would blank out.
+        body = _load("henleys_product.html")
+        self.assertEqual(cs._breadcrumb_division(body, "www.henleysmed.com"),
+                         "Blood Pressure Monitoring")
+
+
+class JsonLdDuplicateHrefIsNotADeeperLevel(unittest.TestCase):
+    """20/09/2026, ^o459 / electrospyres.com. Its own JSON-LD BreadcrumbList
+    carries a genuine authoring bug: the category crumb ("Ultrasound") AND
+    the terminal product-name crumb both link to the IDENTICAL product URL.
+    Taking the deepest crumb unfiltered would return the product's own name
+    as its "division" — this is the guard that stops that, by treating a
+    crumb sharing the immediately-preceding kept crumb's own href as the
+    same page repeated, not a real third level."""
+
+    def test_electrospyres_returns_the_category_not_the_product_name(self):
+        body = _load("electrospyres_product.html")
+        division = cs._jsonld_breadcrumb_division(body, "electrospyres.com")
+        self.assertEqual(division, "Ultrasound")
+        self.assertNotEqual(division, "UltraGel™ UG-50 300ml Clear Bottle")
+
+
 class JsonLdIsAFallbackNeverAPriority(unittest.TestCase):
     """The 12/09/2026 finding: JSON-LD and the visible HTML breadcrumb are NOT
     interchangeable data of equal quality on the same site. JSON-LD only gets

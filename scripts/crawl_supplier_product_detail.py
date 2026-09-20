@@ -698,6 +698,27 @@ def find_product_url(domain, name, deadline):
     if partial:
         return None, ("%d sitemap URLs partially match this product's slug and none matches "
                       "exactly — not guessed which one is right" % len(partial))
+    # A DESCRIPTIVE SLUG SITE CAN STILL DIVERGE FROM ITS OWN DISPLAY NAME
+    # (20/09/2026, ^o575, electrospyres.com). Its product URLs are real
+    # descriptive slugs, not bare ids, so _is_numeric_slug_site() above is
+    # false and the name index is never tried first — but the SITE'S OWN
+    # naming is inconsistent between its <h1>/schema.org product name and
+    # the URL it filed the page under: "SkinResQ(TM) Film Island Dressing
+    # 80mm x 60mm" (the page's own name, what crawl_supplier_site.py
+    # captured) sits at
+    # /product/skinresq-dynaderm-film-island-dressing-80x60mm — a brand
+    # word ("Dynaderm") the display name simply omits. slugify(name) can
+    # never match that URL, exactly or partially, however correct both
+    # strings are. Rather than refuse every one of these (39 of 46 products
+    # here), fall back to the SAME per-page name index the bare-id route
+    # above already builds — one GET per URL, capped by its own budget, no
+    # slower than what a numeric-slug site already pays — and look this
+    # product's own read name up in it directly, sidestepping the slug
+    # question entirely.
+    idx = _name_index(domain, prod)
+    hit = idx.get(nk(name))
+    if hit:
+        return hit, None
     return None, "no sitemap URL's slug matches this product's name"
 
 

@@ -67,7 +67,9 @@ import html as H
 import json
 import os
 import re
+import subprocess
 import sys
+import tempfile
 import time
 import urllib.error
 import urllib.parse
@@ -276,6 +278,115 @@ def browser_get(url, as_json=False, timeout=30):
             browser.close()
 
 
+_CHROME_BIN_CANDIDATES = (
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "/usr/bin/google-chrome",
+    "/usr/bin/google-chrome-stable",
+    "/usr/bin/chromium-browser",
+    "/usr/bin/chromium",
+)
+
+
+def _chrome_binary():
+    for path in _CHROME_BIN_CANDIDATES:
+        if os.path.exists(path):
+            return path
+    return None
+
+
+def chrome_dump_dom(url, timeout=30):
+    """Render a URL with the machine's own installed Google Chrome, headless,
+    and return the fully rendered DOM as HTML — a SECOND rendered-browser
+    route, alongside `browser_get` above, for exactly the case that motivated
+    it (^o575, electrospyres.com, 20/09/2026): a client-side-rendered SPA
+    whose server response is an empty shell (`<div id="root"></div>` plus a
+    bundled JS module) with every real page painted in by JS after load.
+
+    WHY A SECOND ROUTE RATHER THAN JUST USING `browser_get`: `browser_get`
+    needs the `playwright` PACKAGE, and it is not actually installed
+    anywhere on this Mac — checked both the system Python and
+    `~/.venvs/icc` (the venv already used for this repo's other
+    headless-render script, `seed_nhssc_from_icc_npc.py`); only playwright's
+    downloaded Chromium browser BINARIES are present, under
+    `~/Library/Caches/ms-playwright/`, with no driver installed to run them.
+    What IS already proven, working tooling here is the machine's own
+    Google Chrome run headless with `--dump-dom` — the exact method
+    `render-in-scheduled-runs-use-headless-chrome` already documents for
+    looking at a rendered page in an unattended run. Reusing it means this
+    fallback works today, with no new dependency to install, rather than
+    adding a `pip install playwright && playwright install chromium` step
+    this repo has only ever imported lazily and never actually completed.
+
+    Tried as a fallback AFTER playwright in `render_get` below, so a machine
+    that does have playwright installed keeps using it unchanged; this only
+    fires where that import fails or errors."""
+    binary = _chrome_binary()
+    if not binary:
+        raise RuntimeError("no local Chrome/Chromium binary found for a headless render")
+    with tempfile.TemporaryDirectory() as profile_dir:
+        try:
+            result = subprocess.run(
+                [binary, "--headless=new", "--disable-gpu", "--hide-scrollbars",
+                 "--virtual-time-budget=%d" % (timeout * 1000),
+                 "--user-data-dir=%s" % profile_dir,
+                 "--user-agent=%s" % UA_STR,
+                 "--dump-dom", url],
+                capture_output=True, text=True, timeout=timeout + 15)
+        except subprocess.TimeoutExpired as e:
+            raise RuntimeError("headless Chrome timed out rendering %s" % url) from e
+    if result.returncode != 0 or not result.stdout.strip():
+        raise RuntimeError("headless Chrome dump-dom failed for %s: %s"
+                            % (url, (result.stderr or "no stderr")[-300:]))
+    return result.stdout
+
+
+def render_get(url, as_json=False, timeout=30):
+    """The rendered-browser fallback `get()` reaches for, whatever the
+    reason a plain HTTP fetch was not enough (a script-only 403, or a
+    client-side-rendered shell — see the two callers in `get()` below).
+    Tries playwright (`browser_get`) first, the locally-installed Chrome's
+    own `--dump-dom` second; raises the FIRST (playwright) error if both
+    fail, since that is the more informative one where playwright is meant
+    to be the primary route and Chrome is genuinely absent too."""
+    try:
+        return browser_get(url, as_json=as_json, timeout=timeout)
+    except Exception as playwright_exc:
+        try:
+            html_doc = chrome_dump_dom(url, timeout=timeout)
+        except Exception:
+            raise playwright_exc
+        if as_json:
+            return json.loads(html_doc), {}
+        return html_doc, {}
+
+
+# A PLAIN HTTP 200 IS NOT ALWAYS A PAGE WITH ANYTHING ON IT (20/09/2026,
+# ^o575). electrospyres.com is a client-side-rendered SPA: every real page
+# — including every one of its 46 product pages — answers with the SAME
+# near-empty shell (`<!doctype html>...<div id="root"></div>` plus a
+# bundled JS `<script type="module">`), and the actual product markup is
+# painted in by that script after load, which this crawler's plain GET
+# never runs. The result was 0/46 usable pages: not a refusal, not an
+# error, just nothing to parse in what came back.
+#
+# JUDGED BY HOW LITTLE TEXT THE RAW HTML CARRIES, NOT BY ANY SITE-SPECIFIC
+# MARKER. Strip scripts/styles/tags and see what is left. A genuine content
+# page — however minimal — carries far more than a couple of hundred
+# characters of real text; an unrendered SPA shell carries close to none.
+# This is deliberately generic so the SAME fallback catches the next CSR
+# site without being named for it, the way `browser_get`'s 403 fallback
+# already generalised past the one site (Seating Matters) that first
+# needed it.
+_CSR_SHELL_MIN_TEXT = 250
+
+
+def _looks_like_csr_shell(body):
+    no_script = re.sub(r"<(script|style)\b[^>]*>.*?</\1>", " ", body, flags=re.S | re.I)
+    text = re.sub(r"<[^>]+>", " ", no_script)
+    text = re.sub(r"\s+", " ", text).strip()
+    return len(text) < _CSR_SHELL_MIN_TEXT
+
+
 def get(url, as_json=False, timeout=30):
     time.sleep(PAUSE)
     try:
@@ -283,11 +394,17 @@ def get(url, as_json=False, timeout=30):
         raw = r.read()
         if as_json:
             return json.loads(raw.decode("utf-8", "replace")), dict(r.headers)
-        return raw.decode("utf-8", "replace"), dict(r.headers)
+        text = raw.decode("utf-8", "replace")
+        if _looks_like_csr_shell(text):
+            try:
+                return render_get(url, as_json=False, timeout=timeout)
+            except Exception:
+                pass    # no rendered route available -- return the thin shell as read
+        return text, dict(r.headers)
     except urllib.error.HTTPError as e:
         if e.code == 403:
             try:
-                return browser_get(url, as_json=as_json, timeout=timeout)
+                return render_get(url, as_json=as_json, timeout=timeout)
             except Exception:
                 raise e
         raise
@@ -1158,6 +1275,7 @@ def _jsonld_breadcrumb_division(body, root_host=None):
             items = sorted((node.get("itemListElement") or []),
                             key=lambda it: it.get("position", 0))
             crumbs = []
+            crumb_hrefs = []
             for it in items:
                 t = clean(it.get("name") or "")
                 if not t:
@@ -1196,9 +1314,31 @@ def _jsonld_breadcrumb_division(body, root_host=None):
                     )
                 if is_root_link or t.lower() in ("home", "products", "product"):
                     continue
+                # A CRUMB SHARING THE PREVIOUS KEPT CRUMB'S OWN HREF IS THE
+                # SAME PAGE REPEATED, NOT A DEEPER LEVEL (20/09/2026, ^o459 /
+                # electrospyres.com). Confirmed live: its product pages carry
+                # a 4-entry trail — Home, Products, "Ultrasound" and the
+                # product's own name — where BOTH the category crumb and the
+                # product-name crumb link to the identical product URL. That
+                # is the site's own authoring bug, not a genuine third level;
+                # taking the deepest crumb unfiltered would return the
+                # product's own name as its "division". Only an exact,
+                # non-empty href match is treated as the same page — a
+                # missing href (the legitimate, spec-permitted way to mark
+                # the current page, per the comment above) is judged by
+                # wording alone, unchanged.
+                if href and crumb_hrefs and crumb_hrefs[-1] == href:
+                    continue
                 crumbs.append(t)
+                crumb_hrefs.append(href)
             if crumbs:
-                return crumbs[0]
+                # DEEPEST CRUMB, NOT THE TOP-LEVEL ONE (20/09/2026, ^o459).
+                # See the matching change and its long comment in
+                # _breadcrumb_division below — same rule, same reasoning,
+                # applied to the JSON-LD reading of the same convention. A
+                # single-level trail is untouched: crumbs[-1] == crumbs[0]
+                # when there is only one entry.
+                return crumbs[-1]
     return None
 
 
@@ -1253,7 +1393,35 @@ def _breadcrumb_division(body, domain=None):
         if is_root_link or t.lower() in ("home", "products", "product"):
             continue
         crumbs.append(t)
-    return crumbs[0] if crumbs else None
+    # DEEPEST CRUMB, NOT THE TOP-LEVEL ONE (20/09/2026, ^o459). MIS
+    # Healthcare's own trail is "Home > Imaging > Mobile CT > <product>" —
+    # crumbs[0] ("Imaging") was every product's stored division, so the
+    # whole 105-range read as 4 flat top-level words when the site's own
+    # filing actually distinguishes products two levels deeper ("Imaging ›
+    # Injectors", "Imaging › C-Arms", ...), and reading that required
+    # opening 18 pages by hand (see
+    # Hub/breadcrumb-second-level-blast-radius-2026-09-15.md).
+    #
+    # SAFE BY CONSTRUCTION FOR A SINGLE-LEVEL SITE. The measurement in that
+    # file found most captured sites (Swann Morton, Direct Healthcare
+    # Group, Talley, ...) carry only ONE non-root, non-generic crumb —
+    # crumbs[-1] == crumbs[0] there, so this is a no-op for them. It is
+    # crumbs[1] specifically that would have been destructive: `None` on
+    # every one of those single-level sites, blanking every division they
+    # already have correctly. Only a site with a genuine second level
+    # (MIS Healthcare, and Altomed per ^o459's original finding) changes
+    # what gets stored, which is the point of the fix.
+    #
+    # THE TERMINAL (CURRENT-PAGE) NODE CANNOT LEAK IN HERE. This loop only
+    # ever collects an ANCHORED crumb (`<a href=...>`); the current page's
+    # own name is conventionally a bare, unlinked final `<li>` in this
+    # markup convention (confirmed on the Henleys and MIS Healthcare
+    # fixtures: the last `<li>` carries a plain `<span>`, not an `<a>`), so
+    # it is never appended to `crumbs` and crumbs[-1] can never be the
+    # product's own name by construction. See
+    # _jsonld_breadcrumb_division's own, separate guard for the OTHER
+    # convention, where the terminal node sometimes IS an anchor.
+    return crumbs[-1] if crumbs else None
 
 
 def numeric_slug_products(domain, prod_urls, reason=None, fallback_label=None):
