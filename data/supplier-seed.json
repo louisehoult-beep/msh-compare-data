@@ -7113,13 +7113,17 @@
    ],
    "alerts": [],
    "news": [],
-   "note": "Added 2026-09-02 from NHS Supply Chain's own contract launch brief for the Surgical Instruments framework (2020/S 170-412524), where this company is named as \"Aquilant Limited\". The framework award is the only verified fact carried from that brief. Aquilant Limited is part of the Healthcare21/AddLife group; the seed already carries a separate record for its sibling company \"Aquilant Critical Care\", which is a DIFFERENT Companies House entity — not merged with this one. Website domain could not be confirmed from a primary source (aquilant.co.uk did not respond to a direct fetch); omitted rather than guessed.",
+   "note": "Added 2026-09-02 from NHS Supply Chain's own contract launch brief for the Surgical Instruments framework (2020/S 170-412524), where this company is named as \"Aquilant Limited\". The framework award is the only verified fact carried from that brief. Aquilant Limited is part of the Healthcare21/AddLife group; the seed already carries a separate record for its sibling company \"Aquilant Critical Care\", which is a DIFFERENT Companies House entity — not merged with this one. Website domain aquilantservices.com added 2026-09-20: the site's own \"About\" text (via search cache) states the address \"Aquilant House, Unit B1-B2 Bond Close, Kingsland Business Park, Basingstoke, RG24 8PZ\", which matches Companies House's registered office for AQUILANT LIMITED (02090807) exactly. The domain itself refuses a direct fetch (TLS handshake failure on both a plain curl and this session's fetch tool, consistent with the earlier aquilant.co.uk finding) so no crawl was possible this run; recorded as a refusal by scripts/crawl_supplier_site.py.",
    "verified": "2026-09-02",
    "source": "NHS Supply Chain contract launch brief, Surgical Instruments (2020/S 170-412524), fetched 2026-09-02.",
    "links": [
     {
      "label": "NHS Supply Chain catalogue",
      "url": "https://my.supplychain.nhs.uk/catalogue/search?query=Aquilant%20Limited"
+    },
+    {
+     "label": "Website",
+     "url": "https://aquilantservices.com"
     }
    ],
    "curated": true,
@@ -10853,7 +10857,8 @@
   {
    "name": "Bariatric Solutions International",
    "aliases": [
-    "Bariatric Solutions International"
+    "Bariatric Solutions International",
+    "Bariatric Solutions International GmbH"
    ],
    "specialities": [
     "Minimally invasive surgery"
@@ -10883,23 +10888,19 @@
    ],
    "alerts": [],
    "news": [],
-   "links": [],
+   "links": [
+    {
+     "label": "Website",
+     "url": "https://bariatric-solutions.com"
+    }
+   ],
    "awards": [],
    "curated": true,
-   "note": "Added 07/09/2026 from NHS Supply Chain's own contract launch briefs for 1 framework (2026/S 000-061906). The framework award is the only verified fact in this record. Product range, UK entity, ownership and website have NOT been verified and must be checked at source before being used with a customer.",
-   "verified": "2026-09-07",
-   "source": "NHS Supply Chain contract launch briefs (2026/S 000-061906), fetched 07/09/2026",
+   "note": "Added 07/09/2026 from NHS Supply Chain's own contract launch briefs for 1 framework (2026/S 000-061906). The framework award is the only verified fact in this record. Identity resolved 2026-09-20: the official Find a Tender award notice for this framework (find-tender.service.gov.uk/Notice/061906-2026, reference 2026/S 000-061906) names the contractor \"Bariatric Solutions International GmbH\", Stein am Rhein, Switzerland (NUTS CH052) — a Swiss GmbH, not a UK company, which is why the earlier Companies House candidate below was never right and is now removed. The company's own site (bariatric-solutions.com) gives a matching Stein am Rhein address and sells banded gastric bypass/sleeve/gastric-banding devices, consistent with the Minimally Invasive Surgery award. No UK company number exists to record. The site itself returns an anti-bot challenge (HTTP 202 redirect to /.well-known/sgcaptcha/) on every direct fetch, so it could not be crawled this run.",
+   "verified": "2026-09-20",
+   "source": "Find a Tender award notice 2026/S 000-061906 (find-tender.service.gov.uk/Notice/061906-2026), fetched 2026-09-20; company's own site bariatric-solutions.com.",
    "reconciledFrom": "reconcile_suppliers.py tier-5 backfill, 07/09/2026",
    "_specialitiesEvidence": "Speciality assigned solely because the company is named on NHS Supply Chain's Minimally Invasive Surgery, Related Equipment and Accessories framework. No product-level evidence yet.",
-   "companyNumberCandidate": {
-    "number": "14890948",
-    "registeredName": "BARIATRIC SOLUTIONS UK LIMITED",
-    "companyStatus": "active",
-    "incorporated": "2023-05-24",
-    "confidence": "probable",
-    "matchedOn": "Companies House name search on 2026-09-07 — NOT verified against a number published by the company. Must be proved by confirm_company_numbers.py before it may be written to companyNumber or feed any derived claim.",
-    "caution": "The awarded name says 'International'; the only plausible active UK company found is 'Bariatric Solutions UK Limited'. International versus UK is a genuine wording difference, not a bare legal or territory suffix, so this is not an exact match. A real, recently-incorporated company with a matching core name, but route 2 before any number is asserted."
-   },
    "productCategories": [
     {
      "category": "Medical and Surgical Consumables",
