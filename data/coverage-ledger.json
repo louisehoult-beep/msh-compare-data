@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-16",
-  "differentiator.json published": 35756,
-  "differentiator.json held": 52858
+  "differentiator.json published": 35781,
+  "differentiator.json held": 52743
  },
  "counts": {
   "frameworks": 122,
@@ -25,10 +25,10 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 429,
-  "inScopeSuppliersNeedingCrawl": 369,
+  "inScopeSuppliersNeedingCrawl": 368,
   "inScopeSuppliersNeedingDomain": 329,
   "suppliersRefused": 462,
-  "suppliersRefusedButPublishingElsewhere": 105,
+  "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 2,
   "blockedFrameworks": 1,
@@ -1786,10 +1786,6 @@
      "domain": "phchd.com"
     },
     {
-     "supplier": "Sychem",
-     "domain": "sychem.co.uk"
-    },
-    {
      "supplier": "1 Stop Medical Supplies",
      "domain": null
     },
@@ -2341,8 +2337,8 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 8,
+    "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -2386,14 +2382,14 @@
     "Greiner Bio-One Ltd",
     "Haemonetics",
     "Henry Schein UK Holdings",
-    "Pasante Healthcare"
+    "Pasante Healthcare",
+    "Sychem"
    ],
    "heldOnly": [
     "Agilent Technologies UK",
     "LTE Scientific Limited",
     "QuidelOrtho (Ortho Clinical Diagnostics UK)",
-    "PHC Europe / PHCbi",
-    "Sychem"
+    "PHC Europe / PHCbi"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -2819,6 +2815,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Lima Orthopaedics UK Ltd",
+     "domain": "limacorporate.com",
+     "reason": "limacorporate.com now serves enovis-surgical.com. Its sitemap holds 7 /en/products/category/<id>/<name>.html landing pages and 95 /en/products/<id>/<slug>.html product pages, but every one of them redirects to /en/check.html, a healthcare-professional interstitial that does not clear with a cookie jar on a repeat request (checked twice, 20/09/2026), so no product page can be read and no name, division or source record can be taken from this site. The capture of 102 records removed on 20/09/2026 was not a catalogue: the 7 category landing pages were counted as products, the other 95 names were URL slugs of pages that were never read, and the numeric id segment of each URL was recorded as the company's own division (1, 2, 3 ... 337)",
+     "checked": "2026-09-20",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Link Orthopaedics UK Ltd",
      "domain": "linkorthopaedics.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
@@ -2938,13 +2941,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Lima Orthopaedics UK Ltd",
-     "domain": "limacorporate.com",
-     "reason": "limacorporate.com now serves enovis-surgical.com. Its sitemap holds 7 /en/products/category/<id>/<name>.html landing pages and 95 /en/products/<id>/<slug>.html product pages, but every one of them redirects to /en/check.html, a healthcare-professional interstitial that does not clear with a cookie jar on a repeat request (checked twice, 20/09/2026), so no product page can be read and no name, division or source record can be taken from this site. The capture of 102 records removed on 20/09/2026 was not a catalogue: the 7 category landing pages were counted as products, the other 95 names were URL slugs of pages that were never read, and the numeric id segment of each URL was recorded as the company's own division (1, 2, 3 ... 337)",
-     "checked": "2026-09-20",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Arthrex",
      "domain": "www.arthrex.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -3025,7 +3021,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 6,
-    "heldNeedingCategory": 5,
+    "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -3066,7 +3062,6 @@
     "Sectra Limited"
    ],
    "heldOnly": [
-    "Lima Orthopaedics UK Ltd",
     "Macromed UK Ltd",
     "NSK United Kingdom Limited",
     "Paragon 28",
@@ -3127,6 +3122,7 @@
     "JRI Orthopaedics Ltd",
     "Karl Storz UK",
     "KLS Martin UK Limited",
+    "Lima Orthopaedics UK Ltd",
     "Link Orthopaedics UK Ltd",
     "Materialise",
     "Medartis Ltd",
@@ -3144,7 +3140,7 @@
     "Venturis Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 42,
+   "actionableTotal": 41,
    "blockedReason": null,
    "deferred": null
   },
@@ -9122,8 +9118,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "30 September 2026",
    "suppliersAwarded": 27,
-   "suppliersPublished": 6,
-   "coverage": 22.2,
+   "suppliersPublished": 9,
+   "coverage": 33.3,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9271,7 +9267,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 10,
+    "publishedElsewhereNeedingCategory": 7,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -9283,8 +9279,11 @@
     "BD \u2014 Becton, Dickinson",
     "BMS Critical Care Ltd",
     "CODAN Limited",
+    "ICU Medical (incl. Smiths Medical)",
     "Inspiration Healthcare",
-    "Spirit Medical Ltd"
+    "ICU Medical (incl. Smiths Medical)",
+    "Spirit Medical Ltd",
+    "Vygon (UK)"
    ],
    "publishedElsewhere": [
     "Avanos Medical UK Limited",
@@ -9293,10 +9292,7 @@
     "Fannin (UK) Limited",
     "Fresenius Kabi Ltd",
     "GBUK Group",
-    "ICU Medical (incl. Smiths Medical)",
-    "Reliance Medical",
-    "ICU Medical (incl. Smiths Medical)",
-    "Vygon (UK)"
+    "Reliance Medical"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
@@ -9316,7 +9312,7 @@
     "TLB Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 11,
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -10398,8 +10394,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "18 February 2027",
    "suppliersAwarded": 20,
-   "suppliersPublished": 6,
-   "coverage": 30.0,
+   "suppliersPublished": 7,
+   "coverage": 35.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -10411,10 +10407,6 @@
     {
      "supplier": "LTE Scientific Limited",
      "domain": "lte-scientific.co.uk"
-    },
-    {
-     "supplier": "Sychem",
-     "domain": "sychem.co.uk"
     },
     {
      "supplier": "VWS (UK) Ltd",
@@ -10503,7 +10495,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 2,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -10514,6 +10506,7 @@
     "Getinge",
     "Peacocks (Surgical and Medical Equipment) Limited",
     "Steris",
+    "Sychem",
     "Tristel Solutions Limited",
     "Wassenburg Medical"
    ],
@@ -10523,7 +10516,6 @@
    ],
    "heldOnly": [
     "LTE Scientific Limited",
-    "Sychem",
     "VWS (UK) Ltd"
    ],
    "capturedNothingCounted": [],
@@ -10541,7 +10533,7 @@
     "Lubron UK Limited"
    ],
    "unknown": [],
-   "actionableTotal": 10,
+   "actionableTotal": 9,
    "blockedReason": null,
    "deferred": null
   },
@@ -19855,10 +19847,6 @@
      "domain": "croydemedical.co.uk"
     },
     {
-     "supplier": "Sychem",
-     "domain": "sychem.co.uk"
-    },
-    {
      "supplier": "Wealden Rehab",
      "domain": "wealdenrehab.com"
     },
@@ -19938,8 +19926,8 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 27,
-    "publishedElsewhereNeedingCategory": 13,
-    "heldNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 14,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -19959,11 +19947,11 @@
     "Praxis Medical Ltd",
     "Renray Healthcare",
     "Roma Medical Aids Ltd",
-    "Stryker"
+    "Stryker",
+    "Sychem"
    ],
    "heldOnly": [
     "Croyde Medical",
-    "Sychem",
     "Wealden Rehab"
    ],
    "capturedNothingCounted": [],

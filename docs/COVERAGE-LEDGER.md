@@ -39,7 +39,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 29 | 23.8% | 73 | 33 | STARTED |
-| Total Orthopaedic Solutions 3 | ortho | 101 | 24 | 23.8% | 42 | 48 | STARTED |
+| Total Orthopaedic Solutions 3 | ortho | 101 | 24 | 23.8% | 41 | 48 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 17 | 27.0% | 31 | 24 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 14 | 23.3% | 15 | 41 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 16 | 27.6% | 27 | 26 | STARTED |
@@ -59,14 +59,14 @@ the decision each waits on; delete the entry once that decision is made.
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 8 | 25.8% | 8 | 21 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 13 | 19 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 5 | 23 | STARTED |
-| Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 6 | 22.2% | 11 | 17 | STARTED |
+| Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 9 | 33.3% | 8 | 17 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 7 | 28.0% | 12 | 8 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 6 | 24.0% | 14 | 11 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 5 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 6 | 27.3% | 10 | 11 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 6 | 11 | STARTED |
 | Ultrasound Scanners and Associated Options and Related Services | ultrasound | 21 | 5 | 23.8% | 6 | 13 | STARTED |
-| Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 6 | 30.0% | 10 | 6 | STARTED |
+| Decontamination Capital Equipment, Associated Accessories and Services | ssd | 20 | 7 | 35.0% | 9 | 6 | STARTED |
 | Blood Collection Devices | bloodcoll | 19 | 6 | 31.6% | 8 | 11 | STARTED |
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 10 | 52.6% | 6 | 10 | STARTED |
 | Examination Gloves | infection | 19 | 5 | 26.3% | 6 | 14 | STARTED |
