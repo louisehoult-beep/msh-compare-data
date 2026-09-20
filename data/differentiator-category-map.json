@@ -155,7 +155,8 @@
    "xray": "Radiography / X-ray systems",
    "angio": "Angiography / interventional imaging systems",
    "dxa": "DXA / bone densitometry scanners",
-   "pet": "Molecular imaging / PET-CT scanners"
+   "pet": "Molecular imaging / PET-CT scanners",
+   "inject": "Contrast media injectors"
   },
   "ent": {
    "fibre": "Fibre optic endoscopes",
@@ -53263,9 +53264,11 @@
    "examples": [
     "Optivantage Multiuse®"
    ],
-   "hub": null,
+   "hub": "imaging:inject",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "POLICY 4 + the new imaging:inject type, 20/09/2026. The division is the company's own and its single product, Optivantage Multiuse, is a CT contrast injector. The division name states the category outright; it was unmapped only because no injector type existed.",
+   "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
   },
   {
    "supplier": "HC21 (UK) Ltd",
@@ -91399,7 +91402,9 @@
    ],
    "hub": null,
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "HELD AT DIVISION LEVEL BY DESIGN — POLICY 5, 20/09/2026. 'Imaging' is this company's top-level division and spans every modality it distributes, so no single mapping can be right for all 55 products. All mapping is at product level: 37 were split out before 20/09 (CT, MRI, PET, DXA, X-ray, dental, angiography) and 10 more on 20/09 (4 contrast injectors, a mobile C-arm, an R/F table, a CO2 insufflator and 3 TIMS software rows). EIGHT ARE DELIBERATELY HELD and reported held, not missing: GI, ENT, MBS and FEES are clinical-application pages for TIMS MVP rather than products, and Epic Lumens is an integration page for a third party's product — all five are navigation under \"Imaging › TIMS\", which the nav-labels policy says is never published as a product. CoreLite and Solas OR are specimen radiography cabinets: real products, but filing them under imaging:xray would put a specimen cabinet in front of a rep comparing patient radiography systems, and two products do not justify their own type. WorkstationOne's product page did not resolve on 20/09/2026, so there is no evidence to map it on.",
+   "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
   },
   {
    "supplier": "Medical Imaging Systems (MIS Healthcare)",
@@ -101246,6 +101251,146 @@
    "kind": "product-override",
    "why": "Read 20/09/2026 from the supplier's own Radiotherapy division in data/supplier-products.json. The Sensus SRT-100 range is a superficial radiotherapy treatment unit — treatment capital equipment, which is what oncology:radio names — not a patient positioning or immobilisation device. Split out under POLICY 5 (mixed-division mapping) while applying POLICY 4 to the division.",
    "decidedIn": "identity policy table pass 20/09/2026 (^o565)"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "CT Dual Shot Alpha 7",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "CT Dual Shot Alpha 7"
+   ],
+   "hub": "imaging:inject",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 4 + the new imaging:inject type, 20/09/2026. The supplier files this under \"Imaging › Injectors\" (read 20/09/2026 from the product's own page on mishealthcare.co.uk, whose breadcrumb gives the company's own second-level filing under Imaging — the crawler only captured the top-level 'Imaging' division, which is why this needed a page read). A contrast media injector is not a scanner and has no other home in the imaging vocabulary.",
+   "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "Smart Shot Alpha",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Smart Shot Alpha"
+   ],
+   "hub": "imaging:inject",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 4 + the new imaging:inject type, 20/09/2026. The supplier files this under \"Imaging › Injectors\" (read 20/09/2026 from the product's own page on mishealthcare.co.uk, whose breadcrumb gives the company's own second-level filing under Imaging — the crawler only captured the top-level 'Imaging' division, which is why this needed a page read). A contrast media injector is not a scanner and has no other home in the imaging vocabulary.",
+   "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "MRI Sonic Shot 7",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "MRI Sonic Shot 7"
+   ],
+   "hub": "imaging:inject",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 4 + the new imaging:inject type, 20/09/2026. The supplier files this under \"Imaging › Injectors\" (read 20/09/2026 from the product's own page on mishealthcare.co.uk, whose breadcrumb gives the company's own second-level filing under Imaging — the crawler only captured the top-level 'Imaging' division, which is why this needed a page read). A contrast media injector is not a scanner and has no other home in the imaging vocabulary.",
+   "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "Press Duo Elite",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Press Duo Elite"
+   ],
+   "hub": "imaging:inject",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 4 + the new imaging:inject type, 20/09/2026. The supplier files this under \"Imaging › Injectors\" (read 20/09/2026 from the product's own page on mishealthcare.co.uk, whose breadcrumb gives the company's own second-level filing under Imaging — the crawler only captured the top-level 'Imaging' division, which is why this needed a page read). A contrast media injector is not a scanner and has no other home in the imaging vocabulary.",
+   "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "EXTRON 5 & 7",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "EXTRON 5 & 7"
+   ],
+   "hub": "imaging:mobile",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 product-level split, 20/09/2026. The supplier files this under \"Imaging › C-Arms\" (read 20/09/2026 from the product's own page on mishealthcare.co.uk, whose breadcrumb gives the company's own second-level filing under Imaging — the crawler only captured the top-level 'Imaging' division, which is why this needed a page read). A mobile C-arm is mobile imaging, which is what imaging:mobile (\"Mobile & RT simulation\") names.",
+   "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "SONIALVISION G4",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "SONIALVISION G4"
+   ],
+   "hub": "imaging:xray",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 product-level split, 20/09/2026. The supplier files this under \"Imaging › Fluoroscopy Remote Tables\" (read 20/09/2026 from the product's own page on mishealthcare.co.uk, whose breadcrumb gives the company's own second-level filing under Imaging — the crawler only captured the top-level 'Imaging' division, which is why this needed a page read) and the page describes an R/F system for barium examinations. Mapped to imaging:xray following the Hub's existing precedent — Canon Medical Systems' own \"Radiography And Fluoroscopy\" division is already imaging:xray. A new imaging:fluoro type was deliberately NOT added: the vocabulary-gap policy forbids adding a type that duplicates one already present under a different word.",
+   "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "Vimap 1020A",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Vimap 1020A"
+   ],
+   "hub": "mis:instruments",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 product-level split, 20/09/2026. The supplier files this under \"Imaging › Insufflators\" (read 20/09/2026 from the product's own page on mishealthcare.co.uk, whose breadcrumb gives the company's own second-level filing under Imaging — the crawler only captured the top-level 'Imaging' division, which is why this needed a page read) and the page describes a CO2 insufflator, which is not imaging at all. Mapped to mis:instruments following the Hub's existing precedent — Conmed UK's \"Airseal And Insufflation\" division is already mis:instruments. No new type was needed.",
+   "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "TIMS Medical Video Platform (MVP)",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "TIMS Medical Video Platform (MVP)"
+   ],
+   "hub": "digital:sw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 product-level split, 20/09/2026. The supplier files this under \"Imaging › TIMS\" (read 20/09/2026 from the product's own page on mishealthcare.co.uk, whose breadcrumb gives the company's own second-level filing under Imaging — the crawler only captured the top-level 'Imaging' division, which is why this needed a page read). TIMS MVP is a medical video recording, annotation and archiving platform integrating with PACS/VNA — clinical and departmental software, which is what digital:sw names. It is not an imaging modality and does not belong in any imaging comparison.",
+   "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "TIMS Review",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "TIMS Review"
+   ],
+   "hub": "digital:sw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 product-level split, 20/09/2026. The supplier files this under \"Imaging › TIMS\" (read 20/09/2026 from the product's own page on mishealthcare.co.uk, whose breadcrumb gives the company's own second-level filing under Imaging — the crawler only captured the top-level 'Imaging' division, which is why this needed a page read). TIMS MVP is a medical video recording, annotation and archiving platform integrating with PACS/VNA — clinical and departmental software, which is what digital:sw names. It is not an imaging modality and does not belong in any imaging comparison.",
+   "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
+  },
+  {
+   "supplier": "Medical Imaging Systems (MIS Healthcare)",
+   "division": "TIMS Surgical Imaging",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "TIMS Surgical Imaging"
+   ],
+   "hub": "digital:sw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "POLICY 5 product-level split, 20/09/2026. The supplier files this under \"Imaging › TIMS\" (read 20/09/2026 from the product's own page on mishealthcare.co.uk, whose breadcrumb gives the company's own second-level filing under Imaging — the crawler only captured the top-level 'Imaging' division, which is why this needed a page read). TIMS MVP is a medical video recording, annotation and archiving platform integrating with PACS/VNA — clinical and departmental software, which is what digital:sw names. It is not an imaging modality and does not belong in any imaging comparison.",
+   "decidedIn": "MIS Healthcare Imaging split 20/09/2026 (^o320/^o405)"
   }
  ],
  "kinds": {
