@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-16",
-  "differentiator.json published": 36073,
-  "differentiator.json held": 52463
+  "differentiator.json published": 36074,
+  "differentiator.json held": 52462
  },
  "counts": {
   "frameworks": 122,
@@ -6833,8 +6833,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "11 April 2028",
    "suppliersAwarded": 43,
-   "suppliersPublished": 10,
-   "coverage": 23.3,
+   "suppliersPublished": 11,
+   "coverage": 25.6,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -7008,13 +7008,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Draeger Medical UK",
-     "domain": "www.draeger.com",
-     "reason": "neither www.draeger.com nor www.www.draeger.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Baxter / Hillrom",
      "domain": "hillrom.co.uk",
      "reason": "verified 15/09/2026 this is not a crawler-side parsing bug: hillrom.co.uk 301-redirects to www.hillrom.co.uk, which 301-redirects again to hillrom.baxter.eu (the actual current Hillrom site, confirmed by curl -L) \u2014 a Drupal 10 site, not WordPress, so /wp-json/wp/v2/types returns that page's HTML and the crawler's JSON parse correctly fails on it (reproduced: 'Expecting value: line 3 column 1 (char 4)'). hillrom.baxter.eu's own sitemap.xml (1,284,294 bytes, checked directly) carries only 2 URLs under /product-category or /products/ across its whole EN-GB section \u2014 too few to call a catalogue by this crawler's own bar. A genuine no-catalogue site, not a bug or a block.",
@@ -7027,6 +7020,13 @@
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Draeger Medical UK",
+     "domain": "www.draeger.com",
+     "reason": "neither www.draeger.com nor www.www.draeger.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-08-31",
+     "bucket": "published"
     },
     {
      "supplier": "Medtronic",
@@ -7053,7 +7053,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 13,
+    "publishedElsewhereNeedingCategory": 12,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -7064,6 +7064,7 @@
     "Anetic Aid Ltd",
     "Brandon Medical Company Ltd",
     "Conmed UK Ltd",
+    "Draeger Medical UK",
     "Getinge",
     "Hospital Services Limited",
     "Johnson & Johnson MedTech",
@@ -7078,7 +7079,6 @@
     "Boston Scientific",
     "Coloplast",
     "Cook Medical",
-    "Draeger Medical UK",
     "Felgains",
     "Baxter / Hillrom",
     "Howard Wright Europe",
@@ -7114,7 +7114,7 @@
     "Xograph Healthcare Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 14,
+   "actionableTotal": 13,
    "blockedReason": null,
    "deferred": null
   },
@@ -11309,8 +11309,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "19 June 2027",
    "suppliersAwarded": 18,
-   "suppliersPublished": 7,
-   "coverage": 38.9,
+   "suppliersPublished": 8,
+   "coverage": 44.4,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -11365,13 +11365,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Draeger Medical UK",
-     "domain": "www.draeger.com",
-     "reason": "neither www.draeger.com nor www.www.draeger.com answered \u2014 the domain does not resolve or serves no usable certificate",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Reliance Medical",
      "domain": "www.reliancemedical.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -11383,6 +11376,13 @@
      "domain": null,
      "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
      "checked": "2026-09-07",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Draeger Medical UK",
+     "domain": "www.draeger.com",
+     "reason": "neither www.draeger.com nor www.www.draeger.com answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-08-31",
      "bucket": "published"
     },
     {
@@ -11403,7 +11403,7 @@
    ],
    "actionable": {
     "unresolvedNames": 2,
-    "publishedElsewhereNeedingCategory": 4,
+    "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -11415,6 +11415,7 @@
     "HC21 (UK) Ltd",
     "ICU Medical (incl. Smiths Medical)",
     "Crest Medical Ltd",
+    "Draeger Medical UK",
     "M\u00f6lnlycke",
     "Steris",
     "Proact Medical Ltd"
@@ -11422,7 +11423,6 @@
    "publishedElsewhere": [
     "BD \u2014 Becton, Dickinson",
     "Ecolab",
-    "Draeger Medical UK",
     "Reliance Medical"
    ],
    "heldOnly": [],
@@ -11440,7 +11440,7 @@
     "KCI Medical Ltd (previously 3M United Kingdom PLC)",
     "Novus Medical Ltd"
    ],
-   "actionableTotal": 7,
+   "actionableTotal": 6,
    "blockedReason": null,
    "deferred": null
   },

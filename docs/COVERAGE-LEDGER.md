@@ -50,7 +50,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 15 | 28.3% | 15 | 29 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 14 | 26 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 18 | 24 | STARTED |
-| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 10 | 23.3% | 14 | 27 | STARTED |
+| Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 11 | 25.6% | 13 | 27 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 12 | 32.4% | 6 | 27 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 18 | 16 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 11 | 31.4% | 8 | 21 | STARTED |
@@ -72,7 +72,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Examination Gloves | infection | 19 | 5 | 26.3% | 6 | 14 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 7 | 9 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 6 | 33.3% | 2 | 13 | STARTED |
-| Patient Temperature Management | theatres | 18 | 7 | 38.9% | 7 | 9 | STARTED |
+| Patient Temperature Management | theatres | 18 | 8 | 44.4% | 6 | 9 | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 6 | 7 | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 4 | 11 | STARTED |

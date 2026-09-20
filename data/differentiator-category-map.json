@@ -135260,6 +135260,54 @@
    "evidence": "Read from the supplier's full product list across all three divisions in data/supplier-products.json, not from the four category-map examples — the divisions mix ophthalmic, ENT, dental/podiatry, gynae and general-surgery items so each product needed its own read.",
    "why": "Name/category names 'Needle Holder', which the surgical instruments vocabulary's surgical:needle type ('Needle holders & suture passers') covers by definition. Read from the full product list under this supplier's divisions in data/supplier-products.json, not from category-map examples.",
    "decidedIn": "Policy 5 product-level split, 20/09/2026 (^o516)"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "DRAEGER MEDICAL",
+   "term": "NPC:FAG7065",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Anaesthetic Facemask Transparent BPA PVC free without hook ring single patient use size 4"
+   ],
+   "hub": "theatres:theatre",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py",
+   "why": "A single-patient-use anaesthetic facemask is a general theatre consumable used during surgery for airway management; no more specific theatres type applies. Supplier field matches the cache record's own rec-level supplier string (\"DRAEGER MEDICAL\") so build_differentiator.py's exact-match nhssc-term lookup fires; this resolves to canonical \"Draeger Medical UK\" via the company alias registry (case/punctuation variant), same as every other Draeger nhssc-term row.",
+   "decidedIn": "framework-coverage-batch 20/09/2026 (Operating Theatres Equipment and Related Accessories and Services)"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "DRAEGER MEDICAL",
+   "term": "NPC:FAG7060",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Cushioned Anaesthetic Facemask strawberry scented with hook ring and check valve single patient use size 4"
+   ],
+   "hub": "theatres:theatre",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py",
+   "why": "A single-patient-use anaesthetic facemask is a general theatre consumable used during surgery for airway management; no more specific theatres type applies. Supplier field matches the cache record's own rec-level supplier string so the exact-match nhssc-term lookup fires; resolves to canonical \"Draeger Medical UK\" via the company alias registry.",
+   "decidedIn": "framework-coverage-batch 20/09/2026 (Operating Theatres Equipment and Related Accessories and Services)"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "DRAEGER MEDICAL",
+   "term": "NPC:FAG7040",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Anaesthetic Facemask Silicone resuscitation/anaesthesia mask reusable size 4"
+   ],
+   "hub": "theatres:theatre",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py",
+   "why": "A reusable silicone resuscitation/anaesthesia mask is a general theatre consumable used during surgery for airway management; no more specific theatres type applies. Supplier field matches the cache record's own rec-level supplier string so the exact-match nhssc-term lookup fires; resolves to canonical \"Draeger Medical UK\" via the company alias registry.",
+   "decidedIn": "framework-coverage-batch 20/09/2026 (Operating Theatres Equipment and Related Accessories and Services)"
   }
  ],
  "kinds": {
