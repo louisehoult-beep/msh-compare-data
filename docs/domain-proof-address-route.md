@@ -4,14 +4,19 @@ Written 08/09/2026 by the `differentiator-framework-coverage` run, working the
 Operating Theatres Equipment and Related Accessories and Services framework, and
 added to 09/09/2026 by the same routine working Ultrasound Scanners and
 Associated Options and Related Services.
-**The address-route rule proposed below is still unruled** — it is a proposal
-for `scripts/seed_supplier_domains.py` and needs Lou's ruling first (OUTSTANDING
-^o363), so none of the other seven candidates in this document (the six Operating
-Theatres suppliers and FUJIFILM Sonosite Ltd) have been written to
-`data/supplier-seed.json` on the strength of it. The 09/09 run wrote two of these
-proofs into the seed before reading this file, and reverted both the moment it
-found them, precisely to avoid a run quietly crossing a bar Lou has been asked to
-set.
+
+**RULED IN, 20/09/2026.** The address route is now tier 2 of the identity policy
+table's `domain-proof-tier` policy (`data/identity-vocabulary-policy.json`):
+below an on-site registration number, above a name match. OUTSTANDING ^o363 is
+answered. The proofs below were applied to `data/supplier-seed.json` the same
+day, with `"route": "registered-address"` recorded on each accepted link so the
+basis of every domain stays auditable.
+
+**Two of the proposals below were REFUSED when the policy was applied**, by the
+policy's own guard that a shared serviced-office address is no proof at all.
+They are struck through in the tables and the reasons are in
+"Refused on applying the policy" at the foot of this document. Read that section
+before re-proposing either.
 
 **Exception: Probo Medical's domain WAS added, 10/09/2026, on separate grounds.**
 Its `probomedical.co.uk` was not written on this document's address-route
@@ -19,11 +24,7 @@ reasoning: the seed record's own `background` section already cited
 `probomedical.co.uk / Companies House 03466990 / businesswire.com` as the source
 for an identity correction made 20/07/2026, well before this proposal existed, and
 the URL was independently confirmed live (HTTP 200) on 10/09/2026. That is
-narrower evidence than the address route below — a domain the record already
-named as its own source, not a fresh address match — so it did not need to wait
-on ^o363. The table row below is kept as a record of the address-route evidence
-found for this supplier, which remains real and unused for the decision that
-still needs to be made about the general rule.
+narrower evidence than the address route below.
 
 ## The problem it answers
 
@@ -37,7 +38,7 @@ But most UK supplier sites never print their registration number anywhere the
 script looks. On this framework, 15 of 43 awarded suppliers have no website
 recorded at all, and that — not the crawler — is what caps coverage at 14.0%.
 
-## The proposed route
+## The route, as ruled
 
 **ADDRESS.** The site publishes a postal address, and that address matches the
 registered office Companies House holds for a company whose *exact* registered
@@ -69,10 +70,10 @@ Read 08/09/2026. Companies House pages read from
 |---|---|---|---|
 | Brandon Medical Company Ltd | brandon-medical.com | Brandon Medical Co Ltd, Elmfield Road, Morley, Leeds LS27 0EL | BRANDON MEDICAL COMPANY LIMITED (02827189) — Elmfield Road, Morley, Leeds, LS27 0EL |
 | Erbe Medical UK Ltd | uk.erbegroup.com | Erbe Medical UK Ltd, The Antler Complex, 1A Bruntcliffe Way, Morley, LS27 0JG, Leeds | ERBE MEDICAL UK LIMITED (03184850) — 1a The Antler Complex, Bruntcliffe Way Morley, Leeds, LS27 0JG |
-| Ferno (UK) Limited | ferno.com/uk | Ferno (UK) Limited, Ferno House, Stubs Beck Ln, West 26 Industrial Estate, Cleckheaton BD19 4TZ | FERNO (01007475) — Ferno House, Stubs Beck Lane, Cleckheaton, West Yorkshire, BD19 4TZ |
+| Ferno (UK) Limited | ferno.com/uk | Ferno (UK) Limited, Ferno House, Stubs Beck Ln, West 26 Industrial Estate, Cleckheaton BD19 4TZ | FERNO (UK) LIMITED (01007475) — Ferno House, Stubs Beck Lane, Cleckheaton, West Yorkshire, BD19 4TZ |
 | Fulbourn Medical | fulbournmedical.com | Fulbourn Medical, Unit 1 Falcon Court, Hinchingbrooke Business Park, Huntingdon, Cambridgeshire PE29 6AH | FULBOURN MEDICAL LIMITED (02764966) — Unit 1 Falcon Court Falcon Road, Hinchingbrooke Business Park, Huntingdon, Cambridgeshire, PE29 6AH |
 | Ryna Medical Uk Limited | rynamedical.co.uk | RYNA MEDICAL UK LIMITED, Backfield Farm Business Park, Wotton Road, Iron Acton, Bristol BS37 9XD | RYNA MEDICAL UK LIMITED (06800377) — Unit A12 Backfield Farm Business Park Wotton Road, Iron Acton, Bristol, BS37 9XD |
-| Soluvos Medical Ltd | soluvos.com | SOLUVOS MEDICAL Ltd., International House, 36-38 Cornhill, City of London EC3V 3NG | SOLUVOS MEDICAL LTD (10982713) — International House, 36-38 Cornhill, London, EC3V 3NG |
+| ~~Soluvos Medical Ltd~~ REFUSED 20/09 | soluvos.com | SOLUVOS MEDICAL Ltd., International House, 36-38 Cornhill, City of London EC3V 3NG | SOLUVOS MEDICAL LTD (10982713) — International House, 36-38 Cornhill, London, EC3V 3NG |
 
 Ferno carries a caveat of its own even if the route is accepted: `ferno.co.uk`
 redirects to the UK section of the group site, so the host a crawler would read
@@ -113,7 +114,7 @@ register itself confirms the record's own naming — nothing here rests on the t
 names resembling each other.
 
 Sonosite carries a caveat of the same kind as Ferno's, and it is decisive rather than
-cosmetic: even if the route is accepted, this domain cannot be crawled. Read
+cosmetic: the route is accepted and the domain IS now recorded, but it cannot be crawled. Read
 09/09/2026, `sonosite.com` and `www.sonosite.com` both reset the connection for
 `crawl_supplier_site.py` (ConnectionResetError, errno 54) while answering HTTP 200 to
 a browser-shaped request, and `robots.txt` allows general crawling — so it is CDN bot
@@ -158,7 +159,7 @@ unruled (^o363).
 
 | Supplier | Domain | Address on the site | Companies House registered office |
 |---|---|---|---|
-| Minitouch Ltd | minitouch.eu | "1 Hutton Close, S Church Enterprise Park, Bishop Auckland, DL14 6XG UK", in the footer of the company's own Modern Slavery Statement (`minitouch.eu/Modern Slavery Statement.pdf`), which names "Minitouch LTD" throughout and describes it as selling "medical devices for women's health in the UK and Europe" | MINITOUCH LTD (07933081) — 1 Hutton Close, South Church Enterprise Park, Bishop Auckland, England, DL14 6XG |
+| ~~Minitouch Ltd~~ REFUSED 20/09 | minitouch.eu | "1 Hutton Close, S Church Enterprise Park, Bishop Auckland, DL14 6XG UK", in the footer of the company's own Modern Slavery Statement (`minitouch.eu/Modern Slavery Statement.pdf`), which names "Minitouch LTD" throughout and describes it as selling "medical devices for women's health in the UK and Europe" | MINITOUCH LTD (07933081) — 1 Hutton Close, South Church Enterprise Park, Bishop Auckland, England, DL14 6XG |
 
 **This corrects ^o463's premise, which was wrong.** That finding recorded minitouch.eu
 and minitouch.us as sites that "do not clearly belong to this UK company", on the basis
@@ -218,3 +219,31 @@ company's own filing — both entirely `Ultrasound Probes`, i.e. `ultrasound:tra
 So for a brand-filing site the honest options are two: read `prod_type` as the
 division where a site publishes one, or leave the supplier held. Guessing from the
 brand is not a third option. Raised in OUTSTANDING.md on 09/09/2026.
+
+## Refused on applying the policy, 20/09/2026
+
+Both were proposed above as address proofs. Both fail the `domain-proof-tier`
+policy's own guard: *"a shared serviced-office address used by many companies …
+must be treated as no proof at all."* Companies House advanced search, run on the
+registered office string itself on 20/09/2026, is what settles each.
+
+- **Soluvos Medical Ltd** — SOLUVOS MEDICAL LTD (10982713) is registered at
+  International House, 36-38 Cornhill, London EC3V 3NG. **998 companies** share
+  that registered office. The address therefore says nothing about who owns
+  `soluvos.com`. The seed's existing website link for this supplier is unchanged
+  and still rests on its weaker 17/09/2026 name self-identification — the address
+  route did not strengthen it, and this document no longer claims it does.
+- **Minitouch Ltd** — MINITOUCH LTD (07933081) is registered at 1 Hutton Close,
+  South Church Enterprise Park, Bishop Auckland DL14 6XG. **~398 companies** share
+  that exact address (472 in the postcode), overwhelmingly dissolved, which is the
+  signature of a company-formation registered-office service rather than an
+  occupied trading address. No domain was recorded for this supplier. The separate
+  identity finding on this record — that 07933081 was previously MICROCUBE LTD,
+  which settles the ^o463 question — is unaffected and still stands.
+
+**The check is now part of the route, not an afterthought.** Before accepting an
+address proof, search Companies House for that registered office. A handful of
+companies is a real business park or building; hundreds is a serviced office or a
+formation agent, and the proof is refused. The seven accepted proofs were all
+re-checked this way on 20/09/2026 and the counts recorded on each seed link:
+Brandon 6, Erbe 1 (at unit 1a), Ferno 3, Fulbourn 7, Ryna 10, Sonosite 4.
