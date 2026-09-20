@@ -49,7 +49,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 43 | STARTED · DEFERRED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 15 | 28.3% | 15 | 29 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 14 | 26 | STARTED |
-| Surgical Instruments | surgical | 50 | 12 | 24.0% | 19 | 24 | STARTED |
+| Surgical Instruments | surgical | 50 | 13 | 26.0% | 18 | 24 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 10 | 23.3% | 14 | 27 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 11 | 29.7% | 7 | 27 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 18 | 16 | STARTED |
