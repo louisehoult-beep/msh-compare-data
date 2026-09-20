@@ -13,7 +13,7 @@
  "_meta": {
   "what": "NPC -> eClass lookups, and the (eClass, cat) observations they yield.",
   "why": "The bridge that lets an NHS Supply Chain line carry a Hub product category, so the Supply Disruption Tracker can obey differentiator.json's own rule that comparison is locked to a single category.",
-  "generated": "14/09/2026",
+  "generated": "20/09/2026",
   "source": "pilot.supplychain.nhs.uk's backend search API, via cloud-pipeline/sdt_fetch.py",
   "rule": "An observation pairs an eClass (read from NHS Supply Chain) with a cat (read from differentiator.json) for the SAME NPC. `overlap` is the number of significant words shared between the Hub product name and the NHSSC description that backed the original join: 0 means the join is unusable, 1 means it is thin. Weight accordingly — do not treat all observations as equal evidence.",
   "npcsResolved": 1739,
