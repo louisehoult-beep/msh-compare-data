@@ -25,10 +25,10 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 429,
-  "inScopeSuppliersNeedingCrawl": 370,
+  "inScopeSuppliersNeedingCrawl": 369,
   "inScopeSuppliersNeedingDomain": 329,
-  "suppliersRefused": 461,
-  "suppliersRefusedButPublishingElsewhere": 104,
+  "suppliersRefused": 462,
+  "suppliersRefusedButPublishingElsewhere": 105,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 2,
   "blockedFrameworks": 1,
@@ -2503,10 +2503,6 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Lima Orthopaedics UK Ltd",
-     "domain": "limacorporate.com"
-    },
-    {
      "supplier": "Macromed UK Ltd",
      "domain": "macromed.co.uk"
     },
@@ -2940,6 +2936,13 @@
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-08",
      "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Lima Orthopaedics UK Ltd",
+     "domain": "limacorporate.com",
+     "reason": "limacorporate.com now serves enovis-surgical.com. Its sitemap holds 7 /en/products/category/<id>/<name>.html landing pages and 95 /en/products/<id>/<slug>.html product pages, but every one of them redirects to /en/check.html, a healthcare-professional interstitial that does not clear with a cookie jar on a repeat request (checked twice, 20/09/2026), so no product page can be read and no name, division or source record can be taken from this site. The capture of 102 records removed on 20/09/2026 was not a catalogue: the 7 category landing pages were counted as products, the other 95 names were URL slugs of pages that were never read, and the numeric id segment of each URL was recorded as the company's own division (1, 2, 3 ... 337)",
+     "checked": "2026-09-20",
+     "bucket": "heldOnly"
     },
     {
      "supplier": "Arthrex",
