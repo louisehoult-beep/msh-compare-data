@@ -26,7 +26,8 @@
    "gel": "Ultrasound gels",
    "ctg": "Foetal / CTG",
    "equip": "Diagnostic cardiology equipment (ECG/Holter recorders & data management)",
-   "capital": "Defibrillator / AED devices & accessories"
+   "capital": "Defibrillator / AED devices & accessories",
+   "ecgacc": "ECG cables, accessories and recording consumables"
   },
   "skin-prep": {
    "prep": "Pre-operative skin prep",
@@ -123,7 +124,8 @@
    "cons": "Surgical consumables & packs",
    "equip": "Capital equipment & imaging",
    "glauc": "Glaucoma & drug delivery",
-   "optom": "Optometry dispensing & diagnostic consumables"
+   "optom": "Optometry dispensing & diagnostic consumables",
+   "dryeye": "Dry eye and ocular surface products (lubricant eye drops and gels)"
   },
   "vascular": {
    "pivc": "Peripheral IV cannula",
@@ -284,7 +286,9 @@
    "abl": "Ablation — cryo, RF and pulsed field",
    "stent": "Stents and drainage",
    "acc": "Procedure consumables",
-   "radio": "Radiotherapy capital equipment (linacs, gamma knife, brachytherapy afterloaders)"
+   "radio": "Radiotherapy capital equipment (linacs, gamma knife, brachytherapy afterloaders)",
+   "posn": "Radiotherapy patient positioning and immobilisation devices",
+   "dosim": "Dosimetry and QA devices"
   },
   "neonatal": {
    "equip": "Neonatal equipment and resuscitation",
@@ -9401,11 +9405,11 @@
     "Cablon Medical CNERGY Go!",
     "C-Rad Catalyst+ HD PT"
    ],
-   "hub": "imaging:mobile",
+   "hub": "oncology:posn",
    "notTaxonomy": false,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
-   "why": "Sensus SRT-100 (superficial radiotherapy system), Cablon Medical CNERGY Go! and C-Rad Catalyst+ HD PT (surface-guided radiotherapy positioning) are radiotherapy treatment/positioning equipment, matching Mobile & RT simulation",
-   "decidedIn": "Xiel Ltd.json"
+   "why": "POLICY 4 (vocabulary-gap) + the new oncology:posn type, 20/09/2026 — REMAPPED off imaging:mobile, which was wrong: this is a radiotherapy division, not mobile imaging. All 23 products were read from data/supplier-products.json. The division maps to oncology:posn because the body of it is radiotherapy patient positioning and immobilisation — C-RAD Catalyst+ HD PT and cAutoVerify surface-guided positioning, Cablon CNERGY Go!, MOLDCARE RI II, thermoplastics for radiation therapy, vacuum bags and positioning cushions, the Aerial proton couch top, TBI STEP, and the belly/pelvic, prone-breast, lung-board, paediatric and SRS positioning solutions. POLICY 5 applies to the remainder: the two Sensus SRT-100 units are superficial radiotherapy TREATMENT systems, not positioning devices, and are split out at product level below rather than published as positioning. A list mapping was deliberately NOT used here — it would publish a treatment machine into the positioning comparison and a positioning board into the treatment comparison. OUTSTANDING ^o460.",
+   "decidedIn": "identity policy table pass 20/09/2026 (^o565)"
   },
   {
    "supplier": "Vivid Care",
@@ -89093,9 +89097,11 @@
     "Solstice%E2%84%A2 Srs Immobilization System",
     "Proform%E2%84%A2 Proton Head %26 Neck Device"
    ],
-   "hub": null,
+   "hub": "oncology:posn",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "POLICY 4 (vocabulary-gap) + the new oncology:posn type, 20/09/2026. All 70 products were read from data/supplier-products.json: they are radiotherapy patient positioning and immobilisation devices (Body Pro Lok, Solstice SRS Immobilization System, Evolve and C-Qual breastboards, 2/3/4/5-point and U/S-frame thermoplastic masks, Qfix Kvue couchtops and overlays, vacuum bags, bolus, and CT-simulation and skin setup markers). This is exactly what NHS Supply Chain's own framework title calls patient positioning. Nothing in the division is a treatment machine, so oncology:radio is not claimed.",
+   "decidedIn": "identity policy table pass 20/09/2026 (^o565)"
   },
   {
    "supplier": "Promedics Orthopaedics Ltd",
@@ -89125,9 +89131,11 @@
     "Delta4 Insight",
     "Structsure%E2%84%A2%2C Ai Qa"
    ],
-   "hub": null,
+   "hub": "oncology:dosim",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "POLICY 4 (vocabulary-gap) + the new oncology:dosim type, 20/09/2026. All 54 products were read from data/supplier-products.json: parallel-plate, CT, spherical, thimble and micro ion chambers, Exradin diodes and scintillators, Supermax/Max 4000/CDX2000B electrometers, HDR-1000 and IVB-1000 well chambers, brachytherapy source holders, Delta4 phantoms and software, Lucy/Winston-Lutz/IMRT dose-verification phantoms, orthochromic film dosimetry and the ImSure, PIPSpro and QA Pilot QA software. That is dosimetry and QA, the second half of the framework's own title. Two products in the division are treatment-planning software rather than dosimetry (Ezfluence, AutoContour) and are overridden individually below rather than published as dosimetry.",
+   "decidedIn": "identity policy table pass 20/09/2026 (^o565)"
   },
   {
    "supplier": "Promedics Orthopaedics Ltd",
@@ -94738,9 +94746,11 @@
     "Video Imaging Paper",
     "Creams, Sprays, Preps, Pads & Pastes"
    ],
-   "hub": null,
+   "hub": "cardiology:ecgacc",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "POLICY 4 (vocabulary-gap) + the new cardiology:ecgacc type, 20/09/2026. All 4 products were read from data/supplier-products.json: \"3 & 5 Lead ECG Cables and Accessories\", \"10 & 12 Lead ECG Cables and Accessories\", \"Video Imaging Paper\" and \"Creams, Sprays, Preps, Pads & Pastes\". None is an electrode, so cardiology:ecg would be wrong, and none is a recorder, so cardiology:equip would be wrong. OUTSTANDING ^o552.",
+   "decidedIn": "identity policy table pass 20/09/2026 (^o565)"
   },
   {
    "supplier": "Henleys Medical Supplies Limited",
@@ -100175,9 +100185,11 @@
     "Clarius Power Fan HD3",
     "Clarius L7 Scanner HD3 wireless ultrasound scanner"
    ],
-   "hub": null,
+   "hub": "ultrasound:hand",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "POLICY 4 (^o556), 20/09/2026: mapped to its real speciality rather than forced into orthopaedics. All 5 products were read from data/supplier-products.json — the Clarius L7, L15 and L20 HD3 wireless scanners plus the Clarius Premium carry case and Power Fan HD3. The Clarius HD3 range is a handheld wireless ultrasound scanner, which is exactly ultrasound:hand. No new type was needed.",
+   "decidedIn": "identity policy table pass 20/09/2026 (^o565)"
   },
   {
    "supplier": "TRB Chemedica (UK) Ltd",
@@ -100190,9 +100202,11 @@
     "VISMED GEL",
     "VISMED MULTI"
    ],
-   "hub": null,
+   "hub": "ophthalmology:dryeye",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "POLICY 4 (^o556) + the new ophthalmology:dryeye type, 20/09/2026: mapped to its real speciality rather than forced into orthopaedics. All 5 products were read from data/supplier-products.json — VISMED, VISMED GEL, VISMED GEL MULTI, VISMED MULTI and VISMED LIGHT, the company's carmellose/hyaluronate ocular lubricant range. Ophthalmology held no type for ocular surface products; filing them under \"Glaucoma & drug delivery\" would be actively wrong, which is the vocabulary-gap policy's own test.",
+   "decidedIn": "identity policy table pass 20/09/2026 (^o565)"
   },
   {
    "supplier": "Meril UK Pvt Ltd",
@@ -101176,6 +101190,62 @@
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; this product sits in the 'Vascular Access Devices' division (mapped to vascular:sec) under the site's own 'Elastomeric Pumps' category, which vascular:sec does not cover",
    "why": "The division is mapped to vascular:sec on the strength of its PICC/tunnelled/midline catheter products, which is correct for those. This one product is filed by the supplier under its own 'Elastomeric Pumps' category and is a disposable elastomeric infusion pump (bloodtx:disp), a different clinical use entirely. Own-site filing (vygon.co.uk), re-read 20/09/2026 during framework-coverage work on 'Infusion Pumps and Administration Sets and Associated Products', the framework Vygon (UK) is awarded on. Published via the product-override tier so it is never shadowed by the division's vascular:sec mapping.",
    "decidedIn": "framework-coverage batch, Infusion Pumps and Administration Sets and Associated Products, 20/09/2026"
+  },
+  {
+   "supplier": "Oncology Imaging Systems (OIS)",
+   "division": "Ezfluence",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Ezfluence"
+   ],
+   "hub": "digital:sw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "Read 20/09/2026 from the supplier's own Physics division in data/supplier-products.json. Ezfluence is radiotherapy treatment-planning / auto-contouring software, not a dosimetry or QA device, so it is held out of oncology:dosim and mapped to digital:sw, whose own description names oncology software explicitly. Split out under POLICY 5 (mixed-division mapping) while applying POLICY 4 to the division.",
+   "decidedIn": "identity policy table pass 20/09/2026 (^o565)"
+  },
+  {
+   "supplier": "Oncology Imaging Systems (OIS)",
+   "division": "Autocontour",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Autocontour"
+   ],
+   "hub": "digital:sw",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "Read 20/09/2026 from the supplier's own Physics division in data/supplier-products.json. Autocontour is radiotherapy treatment-planning / auto-contouring software, not a dosimetry or QA device, so it is held out of oncology:dosim and mapped to digital:sw, whose own description names oncology software explicitly. Split out under POLICY 5 (mixed-division mapping) while applying POLICY 4 to the division.",
+   "decidedIn": "identity policy table pass 20/09/2026 (^o565)"
+  },
+  {
+   "supplier": "Xiel Ltd",
+   "division": "Sensus SRT-100 Vision",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Sensus SRT-100 Vision"
+   ],
+   "hub": "oncology:radio",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "Read 20/09/2026 from the supplier's own Radiotherapy division in data/supplier-products.json. The Sensus SRT-100 range is a superficial radiotherapy treatment unit — treatment capital equipment, which is what oncology:radio names — not a patient positioning or immobilisation device. Split out under POLICY 5 (mixed-division mapping) while applying POLICY 4 to the division.",
+   "decidedIn": "identity policy table pass 20/09/2026 (^o565)"
+  },
+  {
+   "supplier": "Xiel Ltd",
+   "division": "Sensus SRT-100",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Sensus SRT-100"
+   ],
+   "hub": "oncology:radio",
+   "notTaxonomy": false,
+   "kind": "product-override",
+   "why": "Read 20/09/2026 from the supplier's own Radiotherapy division in data/supplier-products.json. The Sensus SRT-100 range is a superficial radiotherapy treatment unit — treatment capital equipment, which is what oncology:radio names — not a patient positioning or immobilisation device. Split out under POLICY 5 (mixed-division mapping) while applying POLICY 4 to the division.",
+   "decidedIn": "identity policy table pass 20/09/2026 (^o565)"
   }
  ],
  "kinds": {
