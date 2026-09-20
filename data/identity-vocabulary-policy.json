@@ -1,0 +1,121 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-DDFBF24FB",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "generated": "2026-09-20",
+ "purpose": "Standing policy for the recurring SHAPES of identity and vocabulary ambiguity, so that one ruling from Lou answers every future case of that shape instead of each company arriving as a fresh question. Answers the finding of the Operating Model Review (18/09/2026) that ~44 of 135 open items were a human standing in for a missing rule. company-match-overrides.json remains the per-company exception layer BELOW this: this file says what to do with a SHAPE, that file records a decision about one named COMPANY.",
+ "rule": "Before any task escalates an identity or vocabulary question to Lou, it MUST check this file for a policy whose shape matches. If one matches, apply it and do not escalate. Escalate ONLY when the fact pattern matches no policy here, and then escalate the SHAPE ('should a division of a dissolved parent credit anywhere?'), never the single company. A new policy is added only by Lou's ruling, dated, with the pack it was decided in. A policy is never widened to make an awkward case fit: if it does not match, it does not apply, and that is the signal to ask for a new one. Every policy below carries a guard naming what it must never be used to do; the guard outranks the ruling.",
+ "decidedOn": "2026-09-20",
+ "decidedBy": "Louise Hoult",
+ "decidedIn": "02-Elevate-and-Thrive/Hub/company-aliases/IDENTITY-DECISION-PACK-2026-09-20.md",
+ "policies": {
+  "parent-subsidiary-award-credit": {
+   "title": "Award credits to the entity NHS Supply Chain names; financials attach to the legal entity",
+   "shape": "The awarding source (NHS Supply Chain brief, Find a Tender notice, framework document) names one entity, and the product range, the trading operation or the seed record sits under a different but related entity: a parent, a group, a division, a trading name, or an alternate spelling of the same name.",
+   "ruling": "These are two different facts about two different things and they are recorded separately. (a) The AWARD credits to the entity exactly as the awarding source names it, because that is the published fact about the award and the Hub must not assert an attribution its source does not make. (b) Company FINANCIALS, Companies House data, officers and registered office attach to the specific UK legal entity they actually describe, never to the named parent by inheritance. (c) The related entity is recorded as an alias of the named entity so that a member searching either name finds the award.",
+   "guard": "Never merge two companies into one record on the strength of this policy. It routes an award and it links an alias; it does not assert that two legal entities are the same company. Two companies sharing a name is not evidence; two sharing a registration number is. Never publish a parent's financials against a UK subsidiary's award, or the reverse.",
+   "appliesTo": [
+    "^o523",
+    "^o527",
+    "^o286",
+    "^o528",
+    "^o529",
+    "^o560",
+    "^o540",
+    "^o190"
+   ],
+   "workedExample": "NHS Supply Chain names the Insulin Pumps/CGM awardee 'Abbott Laboratories Ltd'. The FreeStyle Libre range sits under Abbott Diabetes Care. The award credits to Abbott Laboratories Ltd as named; Abbott Diabetes Care is recorded as an alias so the range is findable; any financials shown are those of the specific entity they were filed by, and are labelled with that entity's name and number.",
+   "decidedOn": "2026-09-20"
+  },
+  "domain-proof-tier": {
+   "title": "A registered-office address match is documentary proof of a supplier's own site",
+   "shape": "A website is plainly the named supplier's own site, but does not print the UK entity's company registration number anywhere, so the strong domain-proof bar refuses it. Characteristically a UK arm of a named global parent.",
+   "ruling": "Accept a SECOND proof tier: the site displays a registered office address that matches the Companies House record for that entity. This is documentary evidence read off two independent sources, not an inference from branding, and it ranks below an on-site registration number but above a name match. Record which tier proved the domain, so the basis of every accepted domain stays auditable.",
+   "guard": "An address match proves the site belongs to that entity. It does not prove the entity holds the award, does not license a name-based merge, and never substitutes for a registration number where one is actually printed. A trading address that is not the registered office does not satisfy this; neither does a shared serviced-office address used by many companies, which must be treated as no proof at all.",
+   "appliesTo": [
+    "^o487",
+    "^o363"
+   ],
+   "workedExample": "FUJIFILM Sonosite's UK site prints no company number but shows a registered office matching its Companies House record. Domain accepted at tier 2, recorded as address-proved. Globus Medical, NuVasive, Kaiser Medical and Hitachi Medical Systems are the same shape.",
+   "decidedOn": "2026-09-20"
+  },
+  "unconfirmable-awardee": {
+   "title": "Publish the award under the name as given, with no company record attached",
+   "shape": "An awarding source names a supplier, the award itself is fully verified, but the named string cannot be resolved to a confirmable company by any route.",
+   "ruling": "Publish the award, carrying the supplier name EXACTLY as the awarding source writes it, explicitly marked as an unconfirmed supplier. Attach no company number, no financials, no domain and no logo. The award is a verified fact from a named source and withholding it makes the Hub silently incomplete about something it knows; the identity is not verified and must not be implied.",
+   "guard": "Never attach a best-guess company to an unconfirmed name, however obvious the reading looks. 'Ingles Ltd' is not linked to 'Ingles Medical Limited' on similarity. The unconfirmed marker must be visible to the member, not held only in the data: a member must never be able to mistake an unconfirmed string for a resolved company.",
+   "appliesTo": [
+    "^o525",
+    "^o256",
+    "^o546",
+    "^o547",
+    "^o557"
+   ],
+   "workedExample": "NHS Supply Chain's Operating Theatres brief names 'Ingles Ltd'. No search confirms it as 'Ingles Medical Limited' (08650170). The award publishes as 'Ingles Ltd', marked unconfirmed, with no company record. If the identity is later proved, the record is completed then.",
+   "decidedOn": "2026-09-20"
+  },
+  "vocabulary-gap": {
+   "title": "Add the category type when a real range genuinely fits nothing",
+   "shape": "A confirmed, real product range maps to no existing Hub category type, so it is held and never reaches a member, and the nearest existing type would be actively wrong.",
+   "ruling": "Add the category type without escalating. The new type is named from the framework's own language or the supplier's own language, never invented from scratch, and the addition is logged with the range that prompted it and the source of the name. This is a standing authority: no per-case ruling is required.",
+   "guard": "Never invent a type to absorb one odd product. Never rename, merge or re-scope an existing type under this policy, which is add-only. Never add a type that duplicates one already present under a different word: check the existing vocabulary first and extend it rather than forking it. If the range itself is unconfirmed, this policy does not apply, because the gap is in the evidence, not the vocabulary.",
+   "appliesTo": [
+    "^o460",
+    "^o451",
+    "^o303",
+    "^o552",
+    "^o556",
+    "^o563",
+    "^o285",
+    "^o320",
+    "^o405",
+    "^o423",
+    "^o434",
+    "^o475"
+   ],
+   "workedExample": "Oncology's vocabulary holds only 'acc' and 'radio', so Radiotherapy positioning and dosimetry-QA hardware fits nothing, although the framework is itself named for it. The types are added using the framework's own wording, and the addition is logged.",
+   "decidedOn": "2026-09-20"
+  },
+  "mixed-division-mapping": {
+   "title": "Map a mixed division at product level, hold what is ambiguous",
+   "shape": "A supplier files its whole catalogue under one flat division spanning several specialities, so no division-level mapping can be correct for all of it.",
+   "ruling": "Never blanket-map a mixed division to a single speciality. Map at PRODUCT level wherever the product's own name unambiguously identifies its speciality, and hold the remainder unmapped. Partial coverage of a mixed division is the correct output; the held remainder is reported as held, not as missing.",
+   "guard": "'Unambiguous' means the product name alone identifies the speciality, without inference from the supplier's other products or from which framework the award sits on. A dominant-speciality assumption is never sufficient. Where a product name is a bare SKU, a URL slug or a numeric id, it is by definition ambiguous and is held.",
+   "appliesTo": [
+    "^o516",
+    "^o488",
+    "^o561",
+    "^o257",
+    "^o550",
+    "^o437",
+    "^o459"
+   ],
+   "workedExample": "Salter Labs UK Ltd holds 409 products in one division mixing genuine ECG and gel items with wound-care, respiratory and electrosurgery. The ECG items whose names say so are mapped to cardiology at product level; everything else is held, and the held count is reported.",
+   "decidedOn": "2026-09-20"
+  },
+  "nav-labels-are-not-products": {
+   "title": "A navigation label, category page or URL id is never a product",
+   "shape": "A crawl returns entries that are the site's own navigation or taxonomy rather than its catalogue: section names such as 'Urology', 'PPE', 'ENT', sub-category labels such as 'Surgical Gloves', or all-digit URL record ids standing in as product or division names.",
+   "ruling": "These are never published as products or as division names. A capture whose entries are predominantly navigation is treated as a FAILED capture, not a thin one: it is held, the supplier is reported as needing a real product path, and nothing from it reaches a member view. An all-digits path segment is an identifier, not a name, and is never used as a label.",
+   "guard": "This policy holds data back and can never be used to publish anything, so it needs no ruling from Lou and is recorded here as an engineering default rather than a business decision. It must not be used to justify deleting a capture: the capture is held for recrawl, not discarded.",
+   "appliesTo": [
+    "^o521",
+    "^o534",
+    "^o562",
+    "^o289",
+    "^o564"
+   ],
+   "workedExample": "Healthcare 25 Ltd's twelve 'products' are the site's own nav labels, and Crest Medical holds 872 of 872 URL record ids as division names, which members saw rendered as '518234'. Both are failed captures: held, reported, queued for a real product-path crawl.",
+   "decidedOn": "2026-09-20",
+   "decidedBy": "Engineering default, not a Lou ruling"
+  }
+ }
+}

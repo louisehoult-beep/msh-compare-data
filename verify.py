@@ -5804,6 +5804,44 @@ DEADLINE = re.compile(
     r"deadline|submission date|bids? (?:due|close)|tender period)\b", re.I)
 
 
+def check_identity_policy():
+    """The identity/vocabulary policy table must stay well formed and honest.
+
+    Added 20/09/2026 after the Operating Model Review found that ~44 of the 135
+    open items in OUTSTANDING.md were the same four or five SHAPES of ambiguity
+    escalated over and over, because nothing captured "when X shape occurs,
+    apply Y". Lou ruled on the shapes on 20/09/2026.
+
+    This gate exists because the failure mode is silent: a policy added without
+    a guard, or with a guard that just restates the ruling, reads like a rule
+    but constrains nothing, and the first anyone would know is a wrong merge
+    already published. scripts/identity_policy.py owns the definition of valid
+    so the gate and the loader can never drift apart.
+    """
+    try:
+        sys.path.insert(0, "scripts")
+        import identity_policy
+    except Exception as exc:
+        FAIL("policy", "cannot import scripts/identity_policy.py (%s), so the identity "
+                       "and vocabulary policy cannot be checked. Every escalation path "
+                       "reads it before deciding whether to ask Lou." % exc)
+        return
+
+    try:
+        problems = identity_policy.validate()
+    except FileNotFoundError:
+        FAIL("policy", "data/identity-vocabulary-policy.json is missing. Without it every "
+                       "identity question escalates to Lou again, which is the backlog "
+                       "this file was created to stop.")
+        return
+    except Exception as exc:
+        FAIL("policy", "data/identity-vocabulary-policy.json could not be read (%s)." % exc)
+        return
+
+    for m in problems:
+        FAIL("policy", "identity-vocabulary-policy.json: %s" % m)
+
+
 def check_notice_citations(files_or_sentences):
     """A bare Find a Tender notice number published next to a date, with no OCID
     beside it, cannot be checked for supersession by anyone reading it."""
@@ -5956,6 +5994,7 @@ def main():
 
     check_shrink()
     check_notice()
+    check_identity_policy()
     check_no_clusters_on_tools(comptab_js)
     check_compare_groups_by_ref(comptab_js)
     check_no_expired_frameworks(load("frameworks.json"))
