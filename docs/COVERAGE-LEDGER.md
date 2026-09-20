@@ -43,7 +43,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 17 | 27.0% | 31 | 24 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 14 | 23.3% | 15 | 41 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 16 | 27.6% | 27 | 26 | STARTED |
-| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 14 | 24.6% | 21 | 31 | STARTED |
+| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 15 | 26.3% | 20 | 31 | STARTED |
 | Urology and Bowel Management | continence | 57 | 17 | 29.8% | 29 | 33 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 17 | 40 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 43 | STARTED · DEFERRED |
@@ -71,7 +71,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Enteral Feeding, Bile Bags and Associated Products | nutrition | 19 | 10 | 52.6% | 6 | 10 | STARTED |
 | Examination Gloves | infection | 19 | 5 | 26.3% | 6 | 14 | STARTED |
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 7 | 9 | STARTED |
-| Infant Feeding and Accessories | neonatal | 18 | 4 | 22.2% | 4 | 13 | STARTED |
+| Infant Feeding and Accessories | neonatal | 18 | 6 | 33.3% | 2 | 13 | STARTED |
 | Patient Temperature Management | theatres | 18 | 7 | 38.9% | 7 | 9 | STARTED |
 | Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 5 | 27.8% | 6 | 7 | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
