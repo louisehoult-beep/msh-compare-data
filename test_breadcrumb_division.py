@@ -93,5 +93,47 @@ class GenericCatalogueCrumbsAreDroppedByLinkNotWording(unittest.TestCase):
         self.assertIsNotNone(cs._jsonld_breadcrumb_division(body, "sensemedical.co.uk"))
 
 
+class H1KickerIsTheDivisionOnASiteWithNoBreadcrumb(unittest.TestCase):
+    """20/09/2026, OUTSTANDING ^o555. paragon28.com publishes no breadcrumb at
+    all — no HTML container, no JSON-LD BreadcrumbList — and prints the
+    company's own category as a kicker span INSIDE the product's <h1>. Stripping
+    the tags therefore glued the two together, so all 109 products read
+    "Plating Systems Gorilla(R) ..." under one flat "Uncategorised" division.
+
+    The rule is scoped to the <h1> on purpose: the same theme class carries
+    "LINKS", "SOCIAL" and "CALL US" in the footer of every page. The
+    all-systems fixture is here to pin that — if the rule ever widens beyond
+    the <h1>, that test fails before anything publishes."""
+
+    def test_paragon28_publishes_no_breadcrumb_of_either_kind(self):
+        body = _load("paragon28_product.html")
+        self.assertIsNone(cs._breadcrumb_division(body, "paragon28.com"),
+                          "if this site gains a real breadcrumb, the kicker "
+                          "fallback stops being needed for it — re-read the rule")
+
+    def test_the_h1_kicker_gives_the_companys_own_category(self):
+        body = _load("paragon28_product.html")
+        self.assertEqual(cs._h1_kicker_division(body), "Plating Systems")
+
+    def test_the_product_name_no_longer_carries_the_category(self):
+        body = _load("paragon28_product.html")
+        self.assertEqual(cs._page_title(body),
+                         "Gorilla\u00ae Universal HEvans\u00ae Plate")
+
+    def test_page_furniture_using_the_same_class_is_never_read_as_a_division(self):
+        # /all-systems/ has no product <h1> kicker; its only superheadline
+        # spans are the footer's LINKS / SOCIAL / CALL US, in h6 elements.
+        body = _load("paragon28_all_systems.html")
+        self.assertIsNone(cs._h1_kicker_division(body))
+
+    def test_an_ordinary_single_part_h1_is_untouched(self):
+        # Henleys' <h1> carries no kicker, so the name must come through
+        # exactly as it did before this rule existed.
+        body = _load("henleys_product.html")
+        kicker, rest = cs._h1_kicker(body)
+        self.assertIsNone(kicker)
+        self.assertIsNone(rest)
+
+
 if __name__ == "__main__":
     unittest.main()

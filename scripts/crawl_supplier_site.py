@@ -1019,6 +1019,67 @@ _BREADCRUMB_CONTAINER = (
     r'|itemtype=["\'][^"\']*schema\.org/BreadcrumbList[^"\']*["\'])[^>]*>(.*?)</\1>')
 
 
+# A KICKER INSIDE THE <h1> IS THE SITE'S OWN CATEGORY, NOT PART OF THE PRODUCT
+# NAME (20/09/2026, OUTSTANDING ^o555). paragon28.com marks each product page up
+# as
+#   <h1 class="bt_bb_headline_tag">
+#     <span class="bt_bb_headline_superheadline">Plating Systems</span>
+#     <span class="bt_bb_headline_content"><span>Gorilla(R) Universal HEvans(R)
+#     Plate</span></span></h1>
+# and carries no breadcrumb trail of any kind — no HTML container, no JSON-LD
+# BreadcrumbList. Stripping the tags and joining what is left therefore produced
+# 109 product names of the form "Plating Systems Gorilla(R) Universal HEvans(R)
+# Plate", every one of them filed under a single flat "Uncategorised" division,
+# when the company's own filing (Plating Systems, Screw Systems, Staple Systems,
+# Wedge Systems, Syndesmosis / Soft Tissue, Biologics ...) was sitting inside the
+# heading the whole time.
+#
+# THE RULE IS SCOPED TO THE <h1>, DELIBERATELY. The superheadline span is a
+# Bold Page Builder theme convention and the same class is used for ordinary page
+# furniture: on paragon28.com/all-systems/ and in every page's footer it carries
+# "LINKS", "SOCIAL", "CALL US" and "Home". Verified live 20/09/2026 on
+# paragon28.com/products/universal-hevansplate/ and paragon28.com/all-systems/:
+# the chrome uses of the class are all h2/h5/h6, and the ONLY <h1> superheadline
+# on a product page is the product's own category. Reading any superheadline on
+# the page would file products under "LINKS"; reading only the <h1>'s cannot.
+# A page with no such kicker is untouched, so this can only fire on the markup it
+# was written for.
+_H1_BLOCK = r"<h1[^>]*>(.*?)</h1>"
+_H1_SUPERHEADLINE = (
+    r'<span[^>]*class=["\'][^"\']*headline_superheadline[^"\']*["\'][^>]*>'
+    r"(.*?)</span>")
+
+
+def _h1_kicker(body):
+    """(kicker, rest-of-h1) for a page whose <h1> opens with a superheadline
+    kicker, else (None, None). `body` is expected to have had any breadcrumb
+    container removed already, exactly as _page_title does before it reads a
+    name — the two callers below both do that."""
+    m = re.search(_H1_BLOCK, body, re.S | re.I)
+    if not m:
+        return None, None
+    inner = m.group(1)
+    k = re.search(_H1_SUPERHEADLINE, inner, re.S | re.I)
+    if not k:
+        return None, None
+    kicker = clean(k.group(1))
+    rest = clean(inner[:k.start()] + inner[k.end():])
+    if not kicker or not rest:
+        # Either half empty means this is not the two-part heading the rule is
+        # for; fall back rather than publish half a name or a bare kicker.
+        return None, None
+    return kicker, rest
+
+
+def _h1_kicker_division(body):
+    """The site's own category for this one product, read from the kicker span
+    inside its <h1> — the fallback for a site that files its products but
+    publishes no breadcrumb trail at all (see the block comment above)."""
+    kicker, _ = _h1_kicker(re.sub(_BREADCRUMB_CONTAINER, "", body,
+                                  flags=re.S | re.I))
+    return kicker
+
+
 def _page_title(body):
     """Real product name from a numeric-slug page's own record — schema.org
     markup first, then a bare <h1>, then <title> (stripped of a trailing
@@ -1040,6 +1101,11 @@ def _page_title(body):
         t = clean(m.group(1))
         if t:
             return t
+    # A two-part <h1> (kicker + product) gives up the product half only; the
+    # kicker is the site's category and _h1_kicker_division reads it separately.
+    _, rest = _h1_kicker(body)
+    if rest:
+        return rest
     m = re.search(r"<h1[^>]*>(.*?)</h1>", body, re.S)
     if m:
         t = clean(m.group(1))
@@ -1229,6 +1295,7 @@ def numeric_slug_products(domain, prod_urls, reason=None, fallback_label=None):
     started = time.time()
     deadline = started + NUMERIC_SLUG_BUDGET_S
     rows, unread, out_of_budget = [], 0, 0
+    from_kicker = 0
     for u in prod_urls:
         if time.time() > deadline:
             out_of_budget = len(prod_urls) - len(rows)
@@ -1240,6 +1307,12 @@ def numeric_slug_products(domain, prod_urls, reason=None, fallback_label=None):
         else:
             name = _page_title(body)
         division = _breadcrumb_division(body, domain) if (name and body) else None
+        if not division and name and body:
+            # No breadcrumb trail of any kind on this site, but the <h1> itself
+            # carries the company's own category as a kicker (^o555).
+            division = _h1_kicker_division(body)
+            if division:
+                from_kicker += 1
         if not name:
             leaf = urllib.parse.urlparse(u).path.rstrip("/").rsplit("/", 1)[-1]
             name = re.sub(r"\.[a-zA-Z0-9]{1,5}$", "", leaf)
@@ -1264,10 +1337,15 @@ def numeric_slug_products(domain, prod_urls, reason=None, fallback_label=None):
     real = [d for d in divisions if d != "Uncategorised"]
     uncat = divisions.get("Uncategorised", 0)
     has_divisions = bool(real) and uncat * 2 <= len(rows)
+    division_source = ("the page's own breadcrumb trail for the division"
+                       if from_kicker == 0 else
+                       ("the category the page's own <h1> carries beside the product "
+                        "name for the division (%d of %d), this site publishing no "
+                        "breadcrumb trail" % (from_kicker, len(rows))))
     caveat = ("Names and divisions are read from each product's own page — schema.org "
-              "product markup for the name, the page's own breadcrumb trail for the "
-              "division — because %s. %d of %d page(s) could not be "
-              "read and fall back to their %s." % (reason, unread, len(rows), fallback_label))
+              "product markup for the name, %s — because %s. %d of %d page(s) could not be "
+              "read and fall back to their %s." % (division_source, reason, unread,
+                                                   len(rows), fallback_label))
     if out_of_budget:
         caveat += (" %d of those %d ran out of the %ds per-page-read budget before being "
                    "reached at all, not because the page itself failed — the same shape "
@@ -1286,12 +1364,20 @@ def numeric_slug_products(domain, prod_urls, reason=None, fallback_label=None):
         "duplicateUrlsDropped": 0,
         "droppedCategoryPages": 0,
         "captureCaveat": caveat,
-        "structure": ("The company's own division for each product, read from its own "
-                      "breadcrumb trail." if has_divisions else
+        "structure": (("The company's own division for each product, read from its own "
+                       "breadcrumb trail." if from_kicker == 0 else
+                       "The company's own division for each product, read from the "
+                       "category its own product page prints beside the product name.")
+                      if has_divisions else
                       "No usable breadcrumb division on this site — listed as one flat range."),
-        "filingRule": ("Grouping MIRRORS the manufacturer's own filing, read from each "
-                       "product's own breadcrumb trail because the site's URLs carry no "
-                       "division segment of their own." if has_divisions else
+        "filingRule": (("Grouping MIRRORS the manufacturer's own filing, read from each "
+                        "product's own breadcrumb trail because the site's URLs carry no "
+                        "division segment of their own." if from_kicker == 0 else
+                        "Grouping MIRRORS the manufacturer's own filing, read from the "
+                        "category each product page prints beside the product name, "
+                        "because the site's URLs carry no division segment of their own "
+                        "and it publishes no breadcrumb trail.")
+                       if has_divisions else
                        caveat + " Every item is listed by name below rather than grouped, "
                        "because a fabricated grouping would misrepresent the company's own "
                        "filing."),
