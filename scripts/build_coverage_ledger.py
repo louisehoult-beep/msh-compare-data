@@ -105,7 +105,7 @@ Corrected 09/09/2026, because the sentence that used to sit here said to
 re-copy this file from the engine folder, which would have silently reverted
 three fixes. The engine copy is marked superseded; edit this one.
 """
-import json, os, sys, collections, urllib.parse
+import json, os, sys, collections, urllib.parse, subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
@@ -542,6 +542,8 @@ def main():
     }
     with open(os.path.join(REPO, "data", "coverage-ledger.json"), "w") as f:
         json.dump(out, f, indent=1)
+    subprocess.run([sys.executable, os.path.join(HERE, "stamp_notice.py")], check=True,
+                   cwd=REPO)
 
     c = out["counts"]
     md = ["# Differentiator coverage ledger", "",

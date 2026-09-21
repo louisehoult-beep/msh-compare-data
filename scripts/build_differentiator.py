@@ -36,7 +36,7 @@ honest empty state, never a loosened threshold.
 Usage:  python3 scripts/build_differentiator.py
 Writes: data/differentiator.json
 """
-import json, os, re, sys, collections
+import json, os, re, sys, collections, subprocess
 
 # Moved into msh-compare-data itself 03/09/2026 (was a sibling Hub/company-aliases/);
 # this file is at <repo>/scripts, so company-aliases is just "../company-aliases".
@@ -192,6 +192,7 @@ def main():
 
     products, held = [], []
     hcount = collections.Counter()
+    seen_own = set()  # (supplier, name, cat) — dedup across divisions ^o574
     for co, rec in own.items():
         domain = rec.get("domain")
         for p in rec.get("products") or []:
@@ -292,6 +293,10 @@ def main():
                                     "manufacturer's own page nor NHSSC"})
                 continue
             for c in cats:
+                dk = (norm(co), norm(name), c)
+                if dk in seen_own:
+                    continue
+                seen_own.add(dk)
                 products.append(dict(base_row, cat=c))
 
     # ------------------------------------------------------------------
@@ -622,6 +627,7 @@ def main():
              c["held"]))
     print("  sources: both %d | manufacturer only %d | NHSSC only %d"
           % (c["withBothSources"], c["manufacturerOnly"], c["nhsscOnly"]))
+    subprocess.run([sys.executable, "scripts/stamp_notice.py"], check=True)
 
 
 if __name__ == "__main__":
