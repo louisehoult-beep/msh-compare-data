@@ -447173,6 +447173,152 @@
      "category": ""
     }
    ]
+  },
+  "Symbios": {
+   "domain": "symbios.ch",
+   "verified": "2026-09-21",
+   "source": "symbios.ch product catalogue (WordPress REST API), read this run",
+   "postTypes": [
+    "products"
+   ],
+   "structureFrom": "the company's own product category taxonomy",
+   "hasDivisions": true,
+   "partialRead": false,
+   "siteDeclaredProducts": 10,
+   "structure": "The company's own top-level product categories.",
+   "filingRule": "Grouping MIRRORS the manufacturer's own filing. Where a product sits under a category that reads oddly clinically, that is where the company files it, and a rep searching the company's way will find it there.",
+   "divisions": [
+    {
+     "name": "Hanche",
+     "products": 5
+    },
+    {
+     "name": "Technologies",
+     "products": 3
+    },
+    {
+     "name": "Uncategorised",
+     "products": 1
+    },
+    {
+     "name": "Genou",
+     "products": 1
+    }
+   ],
+   "products": [
+    {
+     "n": "test product",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "ORIGIN®",
+     "division": "Genou",
+     "category": "Genou"
+    },
+    {
+     "n": "SERENITY®",
+     "division": "Hanche",
+     "category": "Hanche"
+    },
+    {
+     "n": "APRIL®",
+     "division": "Hanche",
+     "category": "Hanche"
+    },
+    {
+     "n": "HARMONY®",
+     "division": "Hanche",
+     "category": "Hanche"
+    },
+    {
+     "n": "SPS®",
+     "division": "Hanche",
+     "category": "Hanche"
+    },
+    {
+     "n": "INDIVIDUAL HIP®",
+     "division": "Hanche",
+     "category": "Hanche"
+    },
+    {
+     "n": "Symbios Connect",
+     "division": "Technologies",
+     "category": "Technologies"
+    },
+    {
+     "n": "KNEE-PLAN®",
+     "division": "Technologies",
+     "category": "Technologies"
+    },
+    {
+     "n": "HIP-PLAN®",
+     "division": "Technologies",
+     "category": "Technologies"
+    }
+   ]
+  },
+  "Sovereign Medical": {
+   "domain": "sovereignmedical.co.uk",
+   "verified": "2026-09-21",
+   "source": "sovereignmedical.co.uk Wix storefront, each product page's own JSON-LD, read this run",
+   "structureFrom": "Wix product pages' own JSON-LD Product blocks (no bulk endpoint, one request per product)",
+   "hasDivisions": false,
+   "structure": "No usable grouping — Wix's JSON-LD Product block carries no category or additionalProperty field on any product checked, and the site's real categories are JS-rendered pages with no server-side membership list a plain fetch can read. Listed as one flat range.",
+   "filingRule": "Read from each product's own JSON-LD record on its Wix product page, so names, SKUs and descriptions are exact. Wix's Product schema carries no division field on this site — checked against several live product pages, not assumed — so every item is listed by name below rather than grouped, because a fabricated grouping would misrepresent the company's own filing. A future mapping pass may still assign a Hub category per product from its description text (the same rule build_differentiator.py already applies to NHS Supply Chain rows); this crawl does not attempt that.",
+   "divisions": [
+    {
+     "name": "Uncategorised",
+     "products": 9
+    }
+   ],
+   "products": [
+    {
+     "n": "ABDOBACK® Abdominal belt",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "ABDOHIP® Abdominal belt",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "ANKLEFREEZ® Cryotherapy",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "HANDFREEZ® Cryotherapy wrist brace",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "KNEEFREEZ® Cryotherapy knee brace",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Madglove Assist",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "Madglove Custom Kits",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "PRESSORELAX®",
+     "division": "Uncategorised",
+     "category": ""
+    },
+    {
+     "n": "SHOULDERFREEZ® Cryotherapy shoulder brace",
+     "division": "Uncategorised",
+     "category": ""
+    }
+   ]
   }
  },
  "refusals": {
@@ -449770,6 +449916,51 @@
    "domain": "www.esperehealth.co.uk",
    "reason": "the site's WordPress API returned HTTP 522; the WooCommerce Store API returned HTTP 522; gave up while reading the sitemap — the site answers too slowly to crawl inside its budget; no readable /sitemap.xml (The read operation timed out)",
    "checked": "2026-09-20"
+  },
+  "Innovate Orthopaedics Ltd": {
+   "domain": "innovateortho.co.uk",
+   "reason": "robots.txt disallows automated reading of this site",
+   "checked": "2026-09-21"
+  },
+  "Leda Orthopaedics Ltd": {
+   "domain": "ledaortho.com",
+   "reason": "the site's WordPress API returned HTTP 307; the WooCommerce Store API returned HTTP 307; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+   "checked": "2026-09-21"
+  },
+  "Ortho Solutions UK Ltd": {
+   "domain": "orthosol.com",
+   "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+   "checked": "2026-09-21"
+  },
+  "OrthoAccess Ltd": {
+   "domain": "orthoaccess.co.uk",
+   "reason": "robots.txt disallows automated reading of this site",
+   "checked": "2026-09-21"
+  },
+  "Osteon Medical Ltd": {
+   "domain": "osteonmedical.co.uk",
+   "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+   "checked": "2026-09-21"
+  },
+  "United Orthopaedic Corporation UK Limited": {
+   "domain": "uk.unitedorthopedic.com",
+   "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap — the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+   "checked": "2026-09-21"
+  },
+  "Neptune Medical Limited": {
+   "domain": "neptunemedical.co.uk",
+   "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+   "checked": "2026-09-21"
+  },
+  "Metaphysis LLP": {
+   "domain": "intelligent-orthopaedics.com",
+   "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+   "checked": "2026-09-21"
+  },
+  "Biomet 3i UK, Ltd (ZimVie)": {
+   "domain": "zimvie.com",
+   "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+   "checked": "2026-09-21"
   }
  }
 }

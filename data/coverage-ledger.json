@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-16",
-  "differentiator.json published": 35732,
-  "differentiator.json held": 52429
+  "differentiator.json published": 35733,
+  "differentiator.json held": 52447
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 429,
-  "inScopeSuppliersNeedingCrawl": 360,
-  "inScopeSuppliersNeedingDomain": 328,
-  "suppliersRefused": 462,
+  "inScopeSuppliersNeedingCrawl": 350,
+  "inScopeSuppliersNeedingDomain": 317,
+  "suppliersRefused": 471,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 2,
@@ -2476,8 +2476,8 @@
    "category": "Medical Technology",
    "ends": "30 January 2028",
    "suppliersAwarded": 101,
-   "suppliersPublished": 24,
-   "coverage": 23.8,
+   "suppliersPublished": 25,
+   "coverage": 24.8,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -2495,8 +2495,12 @@
      "domain": "nsk-shop.co.uk"
     },
     {
-     "supplier": "Paragon 28",
-     "domain": "paragon28.com"
+     "supplier": "Sovereign Medical",
+     "domain": "sovereignmedical.co.uk"
+    },
+    {
+     "supplier": "Symbios",
+     "domain": "symbios.ch"
     },
     {
      "supplier": "3D Metal Printing Ltd",
@@ -2508,10 +2512,6 @@
     },
     {
      "supplier": "Biedermann Motech International LTD",
-     "domain": null
-    },
-    {
-     "supplier": "Biomet 3i UK, Ltd (ZimVie)",
      "domain": null
     },
     {
@@ -2551,19 +2551,11 @@
      "domain": null
     },
     {
-     "supplier": "Innovate Orthopaedics Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Kaiser Medical Technology Ltd",
      "domain": null
     },
     {
      "supplier": "Lavender Medical",
-     "domain": null
-    },
-    {
-     "supplier": "Leda Orthopaedics Ltd",
      "domain": null
     },
     {
@@ -2575,23 +2567,7 @@
      "domain": null
     },
     {
-     "supplier": "Metaphysis LLP",
-     "domain": null
-    },
-    {
-     "supplier": "Neptune Medical Limited",
-     "domain": null
-    },
-    {
      "supplier": "Open Medical Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Ortho Solutions UK Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "OrthoAccess Ltd",
      "domain": null
     },
     {
@@ -2599,27 +2575,11 @@
      "domain": null
     },
     {
-     "supplier": "Osteon Medical Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Permedica UK Limited",
      "domain": null
     },
     {
-     "supplier": "Sovereign Medical",
-     "domain": null
-    },
-    {
      "supplier": "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)",
-     "domain": null
-    },
-    {
-     "supplier": "Symbios",
-     "domain": null
-    },
-    {
-     "supplier": "United Orthopaedic Corporation UK Limited",
      "domain": null
     }
    ],
@@ -2628,7 +2588,6 @@
     "Advita Ortho UK Limited",
     "Arthro Dynamik Ltd",
     "Biedermann Motech International LTD",
-    "Biomet 3i UK, Ltd (ZimVie)",
     "Bioventus Cooperatief U.A",
     "Cenobiologics Ltd",
     "Contura Orthopaedics Ltd",
@@ -2637,24 +2596,14 @@
     "Greenbone Spa",
     "Hospital Innovations",
     "Ideal Med",
-    "Innovate Orthopaedics Ltd",
     "Kaiser Medical Technology Ltd",
     "Lavender Medical",
-    "Leda Orthopaedics Ltd",
     "M.D.M Medical Ltd",
     "Marquardt UK",
-    "Metaphysis LLP",
-    "Neptune Medical Limited",
     "Open Medical Ltd",
-    "Ortho Solutions UK Ltd",
-    "OrthoAccess Ltd",
     "Orthopediatrics EU Limited",
-    "Osteon Medical Ltd",
     "Permedica UK Limited",
-    "Sovereign Medical",
-    "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)",
-    "Symbios",
-    "United Orthopaedic Corporation UK Limited"
+    "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -2677,6 +2626,13 @@
      "domain": "www.baxterhealthcare.co.uk",
      "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Biomet 3i UK, Ltd (ZimVie)",
+     "domain": "zimvie.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
      "bucket": "refused"
     },
     {
@@ -2764,6 +2720,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Innovate Orthopaedics Ltd",
+     "domain": "innovateortho.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Integra LifeSciences (Integra Neurosciences)",
      "domain": "www.integralife.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -2796,6 +2759,13 @@
      "domain": "klsmartin.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-19",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Leda Orthopaedics Ltd",
+     "domain": "ledaortho.com",
+     "reason": "the site's WordPress API returned HTTP 307; the WooCommerce Store API returned HTTP 307; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
      "bucket": "refused"
     },
     {
@@ -2834,6 +2804,20 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Metaphysis LLP",
+     "domain": "intelligent-orthopaedics.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Neptune Medical Limited",
+     "domain": "neptunemedical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
      "supplier": "NuVasive UK Ltd",
      "domain": "nuvasive.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -2841,10 +2825,31 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Ortho Solutions UK Ltd",
+     "domain": "orthosol.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "OrthoAccess Ltd",
+     "domain": "orthoaccess.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Orthofix Limited",
      "domain": "orthofix.com",
      "reason": "the site's WordPress API returned HTTP 401; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-19",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Osteon Medical Ltd",
+     "domain": "osteonmedical.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
      "bucket": "refused"
     },
     {
@@ -2901,6 +2906,13 @@
      "domain": "sighltd.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-04",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "United Orthopaedic Corporation UK Limited",
+     "domain": "uk.unitedorthopedic.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
      "bucket": "refused"
     },
     {
@@ -3005,11 +3017,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 4,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 31
+    "needDomain": 20
    },
    "published": [
     "Acumed Ltd",
@@ -3032,6 +3044,7 @@
     "Microport Scientific Ltd",
     "Orthomotion Medical Ltd",
     "Osteotec Ltd",
+    "Paragon 28",
     "Smith+Nephew",
     "Stryker",
     "Summit Medical UK",
@@ -3049,14 +3062,14 @@
    "heldOnly": [
     "Macromed UK Ltd",
     "NSK United Kingdom Limited",
-    "Paragon 28"
+    "Sovereign Medical",
+    "Symbios"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
     "3D Metal Printing Ltd",
     "Arthro Dynamik Ltd",
     "Biedermann Motech International LTD",
-    "Biomet 3i UK, Ltd (ZimVie)",
     "Bioventus Cooperatief U.A",
     "Cenobiologics Ltd",
     "Contura Orthopaedics Ltd",
@@ -3066,29 +3079,20 @@
     "Greenbone Spa",
     "Hospital Innovations",
     "Ideal Med",
-    "Innovate Orthopaedics Ltd",
     "Kaiser Medical Technology Ltd",
     "Lavender Medical",
-    "Leda Orthopaedics Ltd",
     "M.D.M Medical Ltd",
     "Marquardt UK",
-    "Metaphysis LLP",
-    "Neptune Medical Limited",
     "Open Medical Ltd",
-    "Ortho Solutions UK Ltd",
-    "OrthoAccess Ltd",
     "Orthopediatrics EU Limited",
-    "Osteon Medical Ltd",
     "Permedica UK Limited",
-    "Sovereign Medical",
-    "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)",
-    "Symbios",
-    "United Orthopaedic Corporation UK Limited"
+    "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)"
    ],
    "refused": [
     "3D LifePrints UK Ltd",
     "Adler Ortho UK Limited",
     "Baxter Healthcare Ltd",
+    "Biomet 3i UK, Ltd (ZimVie)",
     "Bonesupport",
     "Braun and Company Limited",
     "De Soutter Medical Ltd",
@@ -3101,18 +3105,25 @@
     "GS Medical Healthcare Ltd",
     "IGEA S.p.A. Branch UK",
     "implantcast UK",
+    "Innovate Orthopaedics Ltd",
     "Integra LifeSciences (Integra Neurosciences)",
     "joimax UK",
     "JRI Orthopaedics Ltd",
     "Karl Storz UK",
     "KLS Martin UK Limited",
+    "Leda Orthopaedics Ltd",
     "Lima Orthopaedics UK Ltd",
     "Link Orthopaedics UK Ltd",
     "Materialise",
     "Medartis Ltd",
     "Mercian Surgical Supply Company Limited",
+    "Metaphysis LLP",
+    "Neptune Medical Limited",
     "NuVasive UK Ltd",
+    "Ortho Solutions UK Ltd",
+    "OrthoAccess Ltd",
     "Orthofix Limited",
+    "Osteon Medical Ltd",
     "Ovidius Medical Ltd",
     "Ovidius Solutions Ltd",
     "Platts & Nisbett Ltd",
@@ -3121,10 +3132,11 @@
     "Spineart UK Ltd",
     "Surgical Holdings Limited",
     "Surgical Instrument Group Holdings Ltd",
+    "United Orthopaedic Corporation UK Limited",
     "Venturis Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 41,
+   "actionableTotal": 31,
    "blockedReason": null,
    "deferred": null
   },
