@@ -1892,6 +1892,30 @@ def sitemap_products(domain, deadline=None, product_paths=None):
         core = rest
         if len(core) > 1 and core[0].lower() in CONTAINER_PATH_WORDS:
             core = core[1:]
+        # AN ALL-DIGITS SEGMENT IS A RECORD ID, NEVER A DIVISION (21/09/2026,
+        # ^o564). Same shape as the container-word strip above — the platform's
+        # own plumbing sitting where a division would be, not something the
+        # company chose to call a group. Confirmed live on
+        # www.crestmedical.co.uk: every product sits at
+        # /product/<id>/<slug> (/product/285/blue-dot-small-first-aid-kit-in-
+        # pouch), and the site publishes its REAL taxonomy separately at
+        # /categories/<id>/<slug> ("Tapes", "Microporous Tape"), which the
+        # product URL never names. Reading rest[0] the normal way filed all 872
+        # products under 872 "divisions" called "285", "286", "287" — and
+        # supplier-search.js groups a supplier's range by division, so a member
+        # saw "518234" as a shelf label. Oticon (www.oticon.co.uk) has the same
+        # shape on 43 of its 46 divisions, mixed in beside three real ones
+        # ("Hearing Aids", "Accessories"), which this strip leaves untouched.
+        #
+        # Stripping it is the honest read, not a downgrade: there is no division
+        # in that URL to recover, so the product falls through to
+        # "Uncategorised" two lines below and `hasDivisions`/`captureCaveat`
+        # say so in words. Inventing a grouping from the numeric id is the one
+        # thing that must not happen. ASCII digits only, and never the leaf —
+        # a product legitimately slugged "3m-micropore" or a numeric leaf id
+        # (Swann Morton, handled by numeric_slug_products above) is untouched.
+        while len(core) > 1 and re.fullmatch(r"[0-9]+", core[0]):
+            core = core[1:]
         div = (name if promoted else
                core[0].replace("-", " ").strip().title() if len(core) > 1 else "Uncategorised")
         if promoted:
