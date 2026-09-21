@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-16",
-  "differentiator.json published": 35734,
-  "differentiator.json held": 52451
+  "differentiator.json published": 35748,
+  "differentiator.json held": 52448
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 427,
-  "inScopeSuppliersNeedingCrawl": 338,
-  "inScopeSuppliersNeedingDomain": 307,
-  "suppliersRefused": 482,
+  "inScopeSuppliersNeedingCrawl": 332,
+  "inScopeSuppliersNeedingDomain": 302,
+  "suppliersRefused": 486,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 2,
   "suppliersDuplicateOfCaptured": 2,
@@ -2468,8 +2468,8 @@
    "category": "Medical Technology",
    "ends": "30 January 2028",
    "suppliersAwarded": 101,
-   "suppliersPublished": 25,
-   "coverage": 24.8,
+   "suppliersPublished": 27,
+   "coverage": 26.7,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -2487,19 +2487,7 @@
      "domain": "nsk-shop.co.uk"
     },
     {
-     "supplier": "Symbios",
-     "domain": "symbios.ch"
-    },
-    {
-     "supplier": "3D Metal Printing Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Contura Orthopaedics Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Edge Medical Ltd",
      "domain": null
     },
     {
@@ -2515,14 +2503,6 @@
      "domain": null
     },
     {
-     "supplier": "Ideal Med",
-     "domain": null
-    },
-    {
-     "supplier": "Kaiser Medical Technology Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Lavender Medical",
      "domain": null
     },
@@ -2532,10 +2512,6 @@
     },
     {
      "supplier": "Marquardt UK",
-     "domain": null
-    },
-    {
-     "supplier": "Open Medical Ltd",
      "domain": null
     },
     {
@@ -2552,18 +2528,13 @@
     }
    ],
    "domainsMissing": [
-    "3D Metal Printing Ltd",
     "Advita Ortho UK Limited",
     "Contura Orthopaedics Ltd",
-    "Edge Medical Ltd",
     "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
     "Hospital Innovations",
-    "Ideal Med",
-    "Kaiser Medical Technology Ltd",
     "Lavender Medical",
     "M.D.M Medical Ltd",
     "Marquardt UK",
-    "Open Medical Ltd",
     "Orthopediatrics EU Limited",
     "Permedica UK Limited",
     "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)"
@@ -2575,6 +2546,13 @@
      "domain": "insightsurgery.com",
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-25",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "3D Metal Printing Ltd",
+     "domain": "orthoscape.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
      "bucket": "refused"
     },
     {
@@ -2669,6 +2647,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Edge Medical Ltd",
+     "domain": "edgemedical.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Eurospine",
      "domain": "eurospine.com",
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -2746,6 +2731,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Kaiser Medical Technology Ltd",
+     "domain": "www.kaisermedicaltech.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Karl Storz UK",
      "domain": "karlstorz.com",
      "reason": "the site's WordPress API could not be read (Expecting value: line 2 column 1 (char 1)); not a readable WooCommerce Store API (Expecting value: line 2 column 1 (char 1)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -2820,6 +2812,13 @@
      "domain": "nuvasive.com",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-09-19",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Open Medical Ltd",
+     "domain": "www.openmedical.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
      "bucket": "refused"
     },
     {
@@ -3015,11 +3014,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 1,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 15
+    "needDomain": 10
    },
    "published": [
     "Acumed Ltd",
@@ -3032,6 +3031,7 @@
     "FH Ortho Ltd",
     "Globus Medical UK Ltd",
     "Heraeus Medical UK",
+    "Ideal Med",
     "Joint Operations",
     "Judd Medical Ltd",
     "Lindare Medical Ltd",
@@ -3046,6 +3046,7 @@
     "Smith+Nephew",
     "Stryker",
     "Summit Medical UK",
+    "Symbios",
     "Zimmer Biomet"
    ],
    "publishedElsewhere": [
@@ -3059,31 +3060,26 @@
    ],
    "heldOnly": [
     "Macromed UK Ltd",
-    "NSK United Kingdom Limited",
-    "Symbios"
+    "NSK United Kingdom Limited"
    ],
    "capturedNothingCounted": [
     "Sovereign Medical"
    ],
    "notCrawled": [
-    "3D Metal Printing Ltd",
     "Contura Orthopaedics Ltd",
-    "Edge Medical Ltd",
     "Advita Ortho UK Limited",
     "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
     "Hospital Innovations",
-    "Ideal Med",
-    "Kaiser Medical Technology Ltd",
     "Lavender Medical",
     "M.D.M Medical Ltd",
     "Marquardt UK",
-    "Open Medical Ltd",
     "Orthopediatrics EU Limited",
     "Permedica UK Limited",
     "Surgalign UK Ltd (Formerly Pioneer Surgical Technology B.V. or RTI Surgical)"
    ],
    "refused": [
     "3D LifePrints UK Ltd",
+    "3D Metal Printing Ltd",
     "Adler Ortho UK Limited",
     "Arthro Dynamik Ltd",
     "Baxter Healthcare Ltd",
@@ -3097,6 +3093,7 @@
     "Delta Surgical",
     "D.P. Medical Systems Limited",
     "Eakin Surgical Limited",
+    "Edge Medical Ltd",
     "Eurospine",
     "Freelance Surgical Limited",
     "GenX MediCare Ltd",
@@ -3108,6 +3105,7 @@
     "Integra LifeSciences (Integra Neurosciences)",
     "joimax UK",
     "JRI Orthopaedics Ltd",
+    "Kaiser Medical Technology Ltd",
     "Karl Storz UK",
     "KLS Martin UK Limited",
     "Leda Orthopaedics Ltd",
@@ -3119,6 +3117,7 @@
     "Metaphysis LLP",
     "Neptune Medical Limited",
     "NuVasive UK Ltd",
+    "Open Medical Ltd",
     "Ortho Solutions UK Ltd",
     "OrthoAccess Ltd",
     "Orthofix Limited",
@@ -3135,7 +3134,7 @@
     "Venturis Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 26,
+   "actionableTotal": 20,
    "blockedReason": null,
    "deferred": null
   },
