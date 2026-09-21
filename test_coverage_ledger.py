@@ -31,6 +31,10 @@ import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SCRIPT = os.path.join(HERE, "scripts", "build_coverage_ledger.py")
+# build_coverage_ledger.py shells out to stamp_notice.py on every run
+# (builders auto-stamp the ownership notice, f2de6e9), so the throwaway
+# repo needs that script too or the build dies before writing the ledger.
+STAMP = os.path.join(HERE, "scripts", "stamp_notice.py")
 ALIASES = os.path.join(HERE, "company-aliases")
 
 # Real canonical names, so the alias registry resolves them exactly as it does
@@ -58,6 +62,7 @@ def build(frameworks, refused=(), published=(), held=None):
     os.makedirs(os.path.join(repo, "data"))
     os.makedirs(os.path.join(repo, "docs"))
     shutil.copy(SCRIPT, os.path.join(repo, "scripts"))
+    shutil.copy(STAMP, os.path.join(repo, "scripts"))
     os.symlink(ALIASES, os.path.join(repo, "company-aliases"))
 
     def w(name, doc):
