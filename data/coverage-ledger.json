@@ -13,7 +13,7 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-16",
-  "differentiator.json published": 35733,
+  "differentiator.json published": 35734,
   "differentiator.json held": 52451
  },
  "counts": {
@@ -25,11 +25,11 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 427,
-  "inScopeSuppliersNeedingCrawl": 339,
+  "inScopeSuppliersNeedingCrawl": 338,
   "inScopeSuppliersNeedingDomain": 307,
   "suppliersRefused": 482,
   "suppliersRefusedButPublishingElsewhere": 104,
-  "suppliersCapturedNothingCounted": 1,
+  "suppliersCapturedNothingCounted": 2,
   "suppliersDuplicateOfCaptured": 2,
   "blockedFrameworks": 1,
   "deferredFrameworks": 3
@@ -2487,10 +2487,6 @@
      "domain": "nsk-shop.co.uk"
     },
     {
-     "supplier": "Sovereign Medical",
-     "domain": "sovereignmedical.co.uk"
-    },
-    {
      "supplier": "Symbios",
      "domain": "symbios.ch"
     },
@@ -3019,8 +3015,8 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 4,
-    "capturedNothingCounted": 0,
+    "heldNeedingCategory": 3,
+    "capturedNothingCounted": 1,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
     "needDomain": 15
@@ -3064,10 +3060,11 @@
    "heldOnly": [
     "Macromed UK Ltd",
     "NSK United Kingdom Limited",
-    "Sovereign Medical",
     "Symbios"
    ],
-   "capturedNothingCounted": [],
+   "capturedNothingCounted": [
+    "Sovereign Medical"
+   ],
    "notCrawled": [
     "3D Metal Printing Ltd",
     "Contura Orthopaedics Ltd",
@@ -9087,8 +9084,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "30 September 2026",
    "suppliersAwarded": 27,
-   "suppliersPublished": 9,
-   "coverage": 33.3,
+   "suppliersPublished": 10,
+   "coverage": 37.0,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9192,13 +9189,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Fresenius Kabi Ltd",
-     "domain": "www.fresenius-kabi.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "GBUK Group",
      "domain": null,
      "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
@@ -9225,6 +9215,13 @@
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-26",
      "bucket": "published"
+    },
+    {
+     "supplier": "Fresenius Kabi Ltd",
+     "domain": "www.fresenius-kabi.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "published"
     }
    ],
    "route": "NHSSC framework",
@@ -9236,7 +9233,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 7,
+    "publishedElsewhereNeedingCategory": 6,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -9248,6 +9245,7 @@
     "BD \u2014 Becton, Dickinson",
     "BMS Critical Care Ltd",
     "CODAN Limited",
+    "Fresenius Kabi Ltd",
     "ICU Medical (incl. Smiths Medical)",
     "Inspiration Healthcare",
     "ICU Medical (incl. Smiths Medical)",
@@ -9259,7 +9257,6 @@
     "Mediq Healthcare UK Ltd",
     "Crest Medical Ltd",
     "Fannin (UK) Limited",
-    "Fresenius Kabi Ltd",
     "GBUK Group",
     "Reliance Medical"
    ],
@@ -9281,7 +9278,7 @@
     "TLB Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 8,
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },

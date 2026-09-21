@@ -116,6 +116,17 @@
    "workedExample": "Healthcare 25 Ltd's twelve 'products' are the site's own nav labels, and Crest Medical holds 872 of 872 URL record ids as division names, which members saw rendered as '518234'. Both are failed captures: held, reported, queued for a real product-path crawl.",
    "decidedOn": "2026-09-20",
    "decidedBy": "Engineering default, not a Lou ruling"
+  },
+  "duplicate-product-same-supplier-site": {
+   "title": "Same product, two URLs on the same supplier's site — keep the canonical one, drop the duplicate",
+   "shape": "A supplier's own-site crawl captures the same product NAME twice under the same supplier, because two different URLs on that supplier's own site resolve to the same product (a genuine catalogue/division page, and a second location — commonly the crawler's generic 'Uncategorised' catch-all bucket, a redirect, or a cross-listed nav path).",
+   "ruling": "Treat the two captures as ONE product, not two. Keep the copy filed under the more specific, genuinely-named division — the one that reflects the supplier's own real site structure — and drop the copy filed under the generic/artefact bucket (typically 'Uncategorised', or any division this policy file's own nav-labels-are-not-products policy would flag). Where neither copy sits in an artefact bucket and both are equally specific, keep the one with the more complete product detail (description/features/image) and record which was dropped and why. This is a standing authority: no per-case escalation is required.",
+   "guard": "Never used to silently drop a product that is NOT a genuine duplicate — the match is on IDENTICAL product name under the SAME supplier only; two different products that merely share a word are not this shape. Never used to prefer a generic bucket over a named division: 'Uncategorised' (or any nav-artefact division) is dropped in favour of the real one, never the reverse. The category/mapping decision itself is untouched by this policy — it only decides which physical capture survives, not what category it publishes under.",
+   "appliesTo": [
+    "^o576"
+   ],
+   "workedExample": "Sela Medical UK Ltd's own site returns 'Glutack' twice: once filed under the genuine 'Surgical Division' page, once filed under the crawler's generic 'Uncategorised' bucket (a known crawler artefact, per the nav-labels-are-not-products policy). Both resolve to the same atraumatic mesh-fixation device already mapped to mis:instruments. The 'Uncategorised' capture is dropped; the 'Surgical Division' capture is the one that publishes.",
+   "decidedOn": "2026-09-21"
   }
  }
 }
