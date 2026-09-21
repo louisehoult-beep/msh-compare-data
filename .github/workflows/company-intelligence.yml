@@ -177,13 +177,49 @@ jobs:
             # the ^o96/^o478 class of data-loss bug on this file.
             git fetch origin
             python3 scripts/merge_seed_on_retry.py || { echo "SEED MERGE FAILED - refusing to push"; exit 1; }
+            # merge_seed_on_retry.py writes the merged seed into the WORKING TREE, and
+            # it has to be COMMITTED before the rebase, not just staged. `git add` on
+            # its own leaves the index dirty and git rebase then refuses outright
+            # ("cannot rebase: Your index contains uncommitted changes"). That is how
+            # the 21/09/2026 08:49 run died after an hour of real work, and it would
+            # have taken every retry with it. Amend rather than add a second commit:
+            # this run is one commit, and the merged seed belongs in it.
+            merged_seed="${RUNNER_TEMP:-/tmp}/merged-supplier-seed.json"
+            cp data/supplier-seed.json "$merged_seed"
+            git add data/supplier-seed.json
+            if ! git diff --cached --quiet; then
+              if [ "$(git rev-list --count origin/main..HEAD)" -gt 0 ]; then
+                git commit --amend --no-edit
+              else
+                git commit -m "company intelligence: seed merge $(date -u +'%F')"
+              fi
+            fi
             # Rebase everything else onto origin/main without a strategy flag —
             # if another file conflicts we want a loud failure, not a silent wrong merge.
-            # supplier-seed.json is excluded because we just merged it above.
-            git add data/supplier-seed.json
             if ! git rebase origin/main; then
-              echo "REBASE CONFLICT on a non-seed file - refusing to push. Abort and re-run."
-              exit 1
+              # supplier-seed.json is the one file already merged properly, field by
+              # field, against the origin/main we fetched seconds ago. Our commit's
+              # diff for it is written against the OLD seed, so git will conflict on
+              # it whenever a peer touched it too — and on a single-line JSON file
+              # that is every time. If it is the ONLY file in conflict, the merge we
+              # just computed is by construction the right answer, so take it. Any
+              # other conflicting file is a real one and still stops the run.
+              conflicts="$(git diff --name-only --diff-filter=U)"
+              if [ "$conflicts" = "data/supplier-seed.json" ]; then
+                echo "seed-only rebase conflict - taking the field-level merge computed against this origin/main"
+                cp "$merged_seed" data/supplier-seed.json
+                git add data/supplier-seed.json
+                if ! GIT_EDITOR=true git rebase --continue; then
+                  echo "REBASE could not continue after the seed merge - refusing to push."
+                  git rebase --abort 2>/dev/null || true
+                  exit 1
+                fi
+              else
+                echo "REBASE CONFLICT on a non-seed file - refusing to push. Abort and re-run."
+                echo "conflicting files: $conflicts"
+                git rebase --abort 2>/dev/null || true
+                exit 1
+              fi
             fi
             python3 verify.py || { echo "GATE FAILED after merge/rebase - refusing to push"; exit 1; }
             sleep 5

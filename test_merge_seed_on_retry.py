@@ -212,5 +212,169 @@ class FullScriptTest(unittest.TestCase):
                          "CI-confirmed company number must survive the merge")
 
 
+WORKFLOW = os.path.join(os.path.dirname(__file__), ".github", "workflows",
+                        "company-intelligence.yml")
+
+
+def _extract_retry_block():
+    """Pull the real push/retry shell out of company-intelligence.yml.
+
+    Read from the workflow rather than copying it here on purpose: a copy would
+    drift, and then this test would be proving something the workflow no longer
+    does. Plain text parsing, not PyYAML — the unit-tests job runs a clean
+    setup-python with no pip install, so only the standard library is available.
+    """
+    with open(WORKFLOW, encoding="utf-8") as fh:
+        lines = fh.read().splitlines()
+    start = next(i for i, l in enumerate(lines) if l.strip() == "pushed=0")
+    indent = len(lines[start]) - len(lines[start].lstrip())
+    out = []
+    for l in lines[start:]:
+        if l.strip() and not l.startswith(" " * indent):
+            break
+        out.append(l[indent:] if l.strip() else "")
+    return "\n".join(out)
+
+
+class RetryPushTest(unittest.TestCase):
+    """The retry path must survive a lost push race and actually land the work.
+
+    On 21/09/2026 the 08:49 company-intelligence run spent an hour fetching
+    Companies House data, lost the push race to another writer, ran the seed
+    merge correctly — and then died on `git rebase` with "cannot rebase: Your
+    index contains uncommitted changes", because the merged seed had been
+    staged with `git add` and never committed. The whole run's work was thrown
+    away. Nothing tested the shell, so nothing caught it.
+    """
+
+    def setUp(self):
+        self.root = tempfile.mkdtemp()
+        self.origin = os.path.join(self.root, "origin.git")
+        self.work = os.path.join(self.root, "work")
+        subprocess.check_call(["git", "init", "-q", "--bare", "-b", "main", self.origin])
+        self._seed_origin()
+        subprocess.check_call(["git", "clone", "-q", self.origin, self.work])
+        self._git(self.work, "config", "user.email", "test@example.com")
+        self._git(self.work, "config", "user.name", "test")
+
+    def _git(self, cwd, *args):
+        return subprocess.check_output(["git"] + list(args), cwd=cwd, text=True,
+                                       stderr=subprocess.STDOUT)
+
+    def _seed_origin(self):
+        boot = os.path.join(self.root, "boot")
+        subprocess.check_call(["git", "clone", "-q", self.origin, boot])
+        self._git(boot, "config", "user.email", "test@example.com")
+        self._git(boot, "config", "user.name", "test")
+        os.makedirs(os.path.join(boot, "data"))
+        os.makedirs(os.path.join(boot, "scripts"))
+        import shutil
+        shutil.copy(os.path.join(os.path.dirname(__file__), "scripts",
+                                 "merge_seed_on_retry.py"),
+                    os.path.join(boot, "scripts", "merge_seed_on_retry.py"))
+        # The gate is stubbed to pass. What is under test here is whether the
+        # retry path reaches the gate at all and lands the commit — not the gate.
+        with open(os.path.join(boot, "verify.py"), "w") as fh:
+            fh.write("import sys\nsys.exit(0)\n")
+        self._write_seed(boot, [{"name": "Acme Medical Ltd", "links": [],
+                                 "companyNumber": None}])
+        with open(os.path.join(boot, "data", "frameworks.json"), "w") as fh:
+            fh.write("{}\n")
+        self._git(boot, "add", "-A")
+        self._git(boot, "commit", "-qm", "base")
+        self._git(boot, "push", "-q", "origin", "main")
+
+    def _write_seed(self, repo, suppliers):
+        # One line, no trailing newline: supplier-seed.json really is written
+        # this way, and that is exactly why git cannot text-merge it.
+        with open(os.path.join(repo, "data", "supplier-seed.json"), "w") as fh:
+            json.dump({"_notice": {"owner": "test"}, "note": "test",
+                       "suppliers": suppliers}, fh)
+
+    def _read_origin_seed(self):
+        blob = subprocess.check_output(
+            ["git", "show", "main:data/supplier-seed.json"],
+            cwd=self.origin, text=True)
+        return json.loads(blob)
+
+    def _peer_lands(self, touch_seed):
+        """Another writer pushes first, so our push is rejected."""
+        peer = os.path.join(self.root, "peer")
+        subprocess.check_call(["git", "clone", "-q", self.origin, peer])
+        self._git(peer, "config", "user.email", "peer@example.com")
+        self._git(peer, "config", "user.name", "peer")
+        if touch_seed:
+            # A curated link — the exact thing the 15/09/2026 bug discarded.
+            self._write_seed(peer, [{
+                "name": "Acme Medical Ltd",
+                "links": [{"url": "https://acme.example", "evidence": "curated"}],
+                "companyNumber": None}])
+        with open(os.path.join(peer, "data", "peer-file.json"), "w") as fh:
+            fh.write('{"peer": true}\n')
+        self._git(peer, "add", "-A")
+        self._git(peer, "commit", "-qm", "peer work")
+        self._git(peer, "push", "-q", "origin", "main")
+
+    def _run_retry(self):
+        """Our run commits its work, then executes the workflow's retry shell."""
+        self._write_seed(self.work, [{"name": "Acme Medical Ltd", "links": [],
+                                      "companyNumber": "12345678"}])
+        self._git(self.work, "add", "data/supplier-seed.json")
+        self._git(self.work, "commit", "-qm", "company intelligence: test run")
+        script = "set -e\n" + _extract_retry_block()
+        return subprocess.run(["bash", "-c", script], cwd=self.work,
+                              capture_output=True, text=True)
+
+    def test_retry_lands_the_work_when_a_peer_did_not_touch_the_seed(self):
+        self._peer_lands(touch_seed=False)
+        r = self._run_retry()
+        self.assertEqual(r.returncode, 0,
+                         "retry path failed:\n" + r.stdout + r.stderr)
+        seed = self._read_origin_seed()
+        acme = next(s for s in seed["suppliers"] if s["name"] == "Acme Medical Ltd")
+        self.assertEqual(acme["companyNumber"], "12345678",
+                         "this run's work was thrown away by the retry")
+        self.assertIn("peer-file.json",
+                      self._git(self.origin, "ls-tree", "--name-only", "main", "data/"),
+                      "the peer's commit was lost")
+
+    def test_retry_keeps_a_curated_link_a_peer_landed_on_the_seed(self):
+        self._peer_lands(touch_seed=True)
+        r = self._run_retry()
+        self.assertEqual(r.returncode, 0,
+                         "retry path failed on a seed conflict:\n" + r.stdout + r.stderr)
+        seed = self._read_origin_seed()
+        acme = next(s for s in seed["suppliers"] if s["name"] == "Acme Medical Ltd")
+        self.assertEqual(acme["companyNumber"], "12345678",
+                         "this run's company number was lost")
+        self.assertEqual(acme["links"],
+                         [{"url": "https://acme.example", "evidence": "curated"}],
+                         "the peer's curated link was discarded - this is the "
+                         "^o478 data-loss bug coming back")
+
+    def test_a_real_conflict_on_another_file_still_refuses_to_push(self):
+        """The loud failure must stay loud. Only the seed may be auto-resolved."""
+        self._peer_lands(touch_seed=False)
+        # Both sides change frameworks.json differently: a genuine conflict.
+        peer2 = os.path.join(self.root, "peer2")
+        subprocess.check_call(["git", "clone", "-q", self.origin, peer2])
+        self._git(peer2, "config", "user.email", "peer@example.com")
+        self._git(peer2, "config", "user.name", "peer")
+        with open(os.path.join(peer2, "data", "frameworks.json"), "w") as fh:
+            fh.write('{"theirs": 1}\n')
+        self._git(peer2, "add", "-A")
+        self._git(peer2, "commit", "-qm", "peer frameworks")
+        self._git(peer2, "push", "-q", "origin", "main")
+
+        with open(os.path.join(self.work, "data", "frameworks.json"), "w") as fh:
+            fh.write('{"ours": 1}\n')
+        self._git(self.work, "add", "data/frameworks.json")
+        self._git(self.work, "commit", "-qm", "our frameworks")
+        r = self._run_retry()
+        self.assertNotEqual(r.returncode, 0,
+                            "a real conflict on a non-seed file must stop the run")
+        self.assertIn("REBASE CONFLICT on a non-seed file", r.stdout + r.stderr)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
