@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 427,
-  "inScopeSuppliersNeedingCrawl": 344,
-  "inScopeSuppliersNeedingDomain": 312,
-  "suppliersRefused": 477,
+  "inScopeSuppliersNeedingCrawl": 339,
+  "inScopeSuppliersNeedingDomain": 307,
+  "suppliersRefused": 482,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 2,
@@ -2499,22 +2499,6 @@
      "domain": null
     },
     {
-     "supplier": "Arthro Dynamik Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Biedermann Motech International LTD",
-     "domain": null
-    },
-    {
-     "supplier": "Bioventus Cooperatief U.A",
-     "domain": null
-    },
-    {
-     "supplier": "Cenobiologics Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Contura Orthopaedics Ltd",
      "domain": null
     },
@@ -2528,10 +2512,6 @@
     },
     {
      "supplier": "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
-     "domain": null
-    },
-    {
-     "supplier": "Greenbone Spa",
      "domain": null
     },
     {
@@ -2578,14 +2558,9 @@
    "domainsMissing": [
     "3D Metal Printing Ltd",
     "Advita Ortho UK Limited",
-    "Arthro Dynamik Ltd",
-    "Biedermann Motech International LTD",
-    "Bioventus Cooperatief U.A",
-    "Cenobiologics Ltd",
     "Contura Orthopaedics Ltd",
     "Edge Medical Ltd",
     "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
-    "Greenbone Spa",
     "Hospital Innovations",
     "Ideal Med",
     "Kaiser Medical Technology Ltd",
@@ -2614,6 +2589,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Arthro Dynamik Ltd",
+     "domain": "arthrodynamik.com",
+     "reason": "only 0 product records on the site's API \u2014 that is a landing page, not a catalogue; the WooCommerce Store API returned 0 product(s), too few to be a catalogue; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Baxter Healthcare Ltd",
      "domain": "www.baxterhealthcare.co.uk",
      "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -2621,9 +2603,23 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Biedermann Motech International LTD",
+     "domain": "www.biedermann.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Biomet 3i UK, Ltd (ZimVie)",
      "domain": "zimvie.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Bioventus Cooperatief U.A",
+     "domain": "www.bioventus.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-21",
      "bucket": "refused"
     },
@@ -2639,6 +2635,13 @@
      "domain": "www.brauninternational.com",
      "reason": "neither www.brauninternational.com nor www.www.brauninternational.com answered \u2014 the domain does not resolve or serves no usable certificate",
      "checked": "2026-09-14",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Cenobiologics Ltd",
+     "domain": "cenobiologics.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-21",
      "bucket": "refused"
     },
     {
@@ -2688,6 +2691,13 @@
      "domain": "genxmedicare.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Greenbone Spa",
+     "domain": "greenbone.it",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
      "bucket": "refused"
     },
     {
@@ -3013,7 +3023,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 20
+    "needDomain": 15
    },
    "published": [
     "Acumed Ltd",
@@ -3060,15 +3070,10 @@
    "capturedNothingCounted": [],
    "notCrawled": [
     "3D Metal Printing Ltd",
-    "Arthro Dynamik Ltd",
-    "Biedermann Motech International LTD",
-    "Bioventus Cooperatief U.A",
-    "Cenobiologics Ltd",
     "Contura Orthopaedics Ltd",
     "Edge Medical Ltd",
     "Advita Ortho UK Limited",
     "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
-    "Greenbone Spa",
     "Hospital Innovations",
     "Ideal Med",
     "Kaiser Medical Technology Ltd",
@@ -3083,10 +3088,14 @@
    "refused": [
     "3D LifePrints UK Ltd",
     "Adler Ortho UK Limited",
+    "Arthro Dynamik Ltd",
     "Baxter Healthcare Ltd",
+    "Biedermann Motech International LTD",
     "Biomet 3i UK, Ltd (ZimVie)",
+    "Bioventus Cooperatief U.A",
     "Bonesupport",
     "Braun and Company Limited",
+    "Cenobiologics Ltd",
     "De Soutter Medical Ltd",
     "Delta Surgical",
     "D.P. Medical Systems Limited",
@@ -3094,6 +3103,7 @@
     "Eurospine",
     "Freelance Surgical Limited",
     "GenX MediCare Ltd",
+    "Greenbone Spa",
     "GS Medical Healthcare Ltd",
     "IGEA S.p.A. Branch UK",
     "implantcast UK",
@@ -3128,7 +3138,7 @@
     "Venturis Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 31,
+   "actionableTotal": 26,
    "blockedReason": null,
    "deferred": null
   },
