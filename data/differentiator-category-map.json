@@ -135841,6 +135841,36 @@
       "hub": null,
       "notTaxonomy": false,
       "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+    },
+    {
+      "kind": "product-override",
+      "supplier": "VWS (UK) Ltd",
+      "division": "Hemoro 4 One Home Hemodialysis Machine",
+      "products": 1,
+      "categories": [],
+      "examples": [
+        "Hemoro 4 One Home Hemodialysis Machine"
+      ],
+      "hub": "renal:hd",
+      "notTaxonomy": false,
+      "evidence": "the supplier's own site filing (veoliawatertechnologies.co.uk sitemap, read 29/08/2026), read by scripts/crawl_supplier_site.py",
+      "why": "Product name states \"Home Hemodialysis Machine\" outright — unambiguous haemodialysis equipment, distinct from the rest of the company's flat 'Uncategorised' division of general/industrial water-treatment products (nav-labels-are-not-products / mixed-division-mapping: mapped at product level only, name is self-identifying).",
+      "decidedIn": "framework-coverage-batch-2109, Renal Replacement Therapies Services, Technologies and Consumables, 21/09/2026"
+    },
+    {
+      "kind": "product-override",
+      "supplier": "VWS (UK) Ltd",
+      "division": "Nephro Safe",
+      "products": 1,
+      "categories": [],
+      "examples": [
+        "Nephro Safe"
+      ],
+      "hub": "renal:water",
+      "notTaxonomy": false,
+      "evidence": "the supplier's own site filing (veoliawatertechnologies.co.uk sitemap, read 29/08/2026), read by scripts/crawl_supplier_site.py",
+      "why": "Product name carries the clinical \"Nephro-\" (kidney) root and the supplier is a water-treatment company — a renal dialysis-water safety/disinfection system, mapped to the existing renal:water (\"Water treatment & managed service\") type rather than a therapy-modality type (hd/pd/crrt), since it is ancillary water infrastructure, not a dialysis machine or consumable itself.",
+      "decidedIn": "framework-coverage-batch-2109, Renal Replacement Therapies Services, Technologies and Consumables, 21/09/2026"
     }
   ],
   "kinds": {

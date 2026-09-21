@@ -61,7 +61,7 @@ the decision each waits on; delete the entry once that decision is made.
 | General Wound Care | wound | 28 | 11 | 39.3% | 5 | 23 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 9 | 33.3% | 8 | 17 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 7 | 28.0% | 12 | 8 | STARTED |
-| Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 6 | 24.0% | 14 | 11 | STARTED |
+| Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | 7 | 17 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 5 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 6 | 27.3% | 10 | 11 | STARTED |
 | Intravenous Cannula and Associated Products | vascular | 21 | 10 | 47.6% | 6 | 11 | STARTED |

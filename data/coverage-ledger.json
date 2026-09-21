@@ -24,10 +24,10 @@
   "unmapped": 48,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 429,
-  "inScopeSuppliersNeedingCrawl": 350,
-  "inScopeSuppliersNeedingDomain": 317,
-  "suppliersRefused": 471,
+  "supplierNamesUnresolved": 427,
+  "inScopeSuppliersNeedingCrawl": 345,
+  "inScopeSuppliersNeedingDomain": 313,
+  "suppliersRefused": 476,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 2,
@@ -1581,14 +1581,6 @@
   ],
   [
    "Reflex Medical Ltd (New)",
-   1
-  ],
-  [
-   "Vantive Limited (formerly part of Baxter Healthcare Ltd)",
-   1
-  ],
-  [
-   "VWS (UK) Ltd Trading As Veolia Water Technologies",
    1
   ],
   [
@@ -9467,8 +9459,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "27 March 2028",
    "suppliersAwarded": 25,
-   "suppliersPublished": 6,
-   "coverage": 24.0,
+   "suppliersPublished": 7,
+   "coverage": 28.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9478,31 +9470,11 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "CytoSorbents Medical UK",
-     "domain": null
-    },
-    {
-     "supplier": "Maltron International Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Medica Advanced Technologies Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Nikkiso Medical",
-     "domain": "nikkisomedical.eu"
-    },
-    {
-     "supplier": "Nikkiso Medical",
-     "domain": "nikkisomedical.eu"
+     "supplier": "VWS (UK) Ltd",
+     "domain": "veoliawatertechnologies.co.uk"
     },
     {
      "supplier": "Nipro Medical UK Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Terumo BCT",
      "domain": null
     },
     {
@@ -9511,11 +9483,7 @@
     }
    ],
    "domainsMissing": [
-    "CytoSorbents Medical UK",
-    "Maltron International Ltd",
-    "Medica Advanced Technologies Ltd",
     "Nipro Medical UK Ltd",
-    "Terumo BCT",
     "Xtra-Med"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -9535,6 +9503,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "CytoSorbents Medical UK",
+     "domain": "cytosorbents.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
      "supplier": "InBody",
      "domain": "uk.inbody.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -9549,10 +9524,45 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Maltron International Ltd",
+     "domain": "maltronint.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Medica Advanced Technologies Ltd",
+     "domain": "uk.medica-spa.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Medical Access Ltd",
      "domain": "www.medicalaccess.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Nikkiso Medical",
+     "domain": "nikkisomedical.eu",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Nikkiso Medical",
+     "domain": "nikkisomedical.eu",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-21",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Terumo BCT",
+     "domain": "terumobct.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-21",
      "bucket": "refused"
     },
     {
@@ -9605,13 +9615,13 @@
     "renal:pd"
    ],
    "actionable": {
-    "unresolvedNames": 2,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 4,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 2,
-    "needDomain": 6
+    "crawlable": 0,
+    "needDomain": 2
    },
    "published": [
     "B. Braun Medical",
@@ -9619,7 +9629,8 @@
     "Kimal PLC",
     "Medtronic",
     "U-drain Ltd",
-    "Valiant Medical Ltd"
+    "Valiant Medical Ltd",
+    "Vantive"
    ],
    "publishedElsewhere": [
     "Acime UK Ltd",
@@ -9627,30 +9638,29 @@
     "LINC Medical",
     "MedScience Distribution"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "VWS (UK) Ltd"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "CytoSorbents Medical UK",
-    "Maltron International Ltd",
-    "Medica Advanced Technologies Ltd",
-    "Nikkiso Medical",
-    "Nikkiso Medical",
     "Nipro Medical UK Ltd",
-    "Terumo BCT",
     "Xtra-Med"
    ],
    "refused": [
     "Andrac Ltd",
     "Bodystat",
+    "CytoSorbents Medical UK",
     "InBody",
     "Leib Medical Ltd",
-    "Medical Access Ltd"
+    "Maltron International Ltd",
+    "Medica Advanced Technologies Ltd",
+    "Medical Access Ltd",
+    "Nikkiso Medical",
+    "Nikkiso Medical",
+    "Terumo BCT"
    ],
-   "unknown": [
-    "Vantive Limited (formerly part of Baxter Healthcare Ltd)",
-    "VWS (UK) Ltd Trading As Veolia Water Technologies"
-   ],
-   "actionableTotal": 14,
+   "unknown": [],
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
