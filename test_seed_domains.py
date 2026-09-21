@@ -386,6 +386,82 @@ check("the scope is applied AFTER the --write guard, not instead of it",
       SRC.index("if not a.write:")
       < SRC.index("proven, out_of_scope = apply_write_scope("))
 
+# ---------------------------------------------------------------------------
+# THE SEED'S BYTE FORMAT (`^o584`, 21/09/2026)
+#
+# Six scripts write data/supplier-seed.json. Five of them hardcoded "minified,
+# one line" and two carried a comment calling that "the file's own format"; the
+# sixth wrote indent=2 and, running on every push race, is what actually put
+# main into indent=2. So on 21/09/2026 running seed_supplier_domains.py --write
+# to add two fields would have rewritten all 110,172 lines as one.
+#
+# A push to main is a live publish and the diff is the only review there is, so
+# a whole-file diff is not cosmetic — it is the review disappearing. These
+# checks assert the writers READ the format instead of asserting one.
+# ---------------------------------------------------------------------------
+print()
+print("seed byte format")
+import seed_format  # noqa: E402
+
+RAW = open("data/supplier-seed.json", "rb").read()
+_out, _fmt, _round_trips = seed_format.dumps_like(json.loads(RAW.decode("utf-8")), RAW)
+
+check("the seed on disk round-trips in the format detected from its own bytes",
+      _round_trips, "detected %s but re-serialising did not reproduce the file" % _fmt)
+check("re-writing the seed unchanged is a zero-byte diff",
+      _out == RAW, "detected %s" % _fmt)
+
+# Every shape this file has actually been seen in — detection must survive all
+# of them, because which one is on main depends on who wrote it last.
+SHAPES = {
+    "minified, no trailing newline":
+        json.dumps({"a": [1, 2], "b": {"c": "\u00e9"}}, ensure_ascii=False,
+                   separators=(",", ":")).encode("utf-8"),
+    "minified, trailing newline":
+        (json.dumps({"a": [1, 2], "b": {"c": "\u00e9"}}, ensure_ascii=False,
+                    separators=(",", ":")) + "\n").encode("utf-8"),
+    "indent 1, trailing newline":
+        (json.dumps({"a": [1, 2], "b": {"c": "\u00e9"}}, ensure_ascii=False,
+                    indent=1) + "\n").encode("utf-8"),
+    "indent 2, trailing newline":
+        (json.dumps({"a": [1, 2], "b": {"c": "\u00e9"}}, ensure_ascii=False,
+                    indent=2) + "\n").encode("utf-8"),
+    "indent 2, no trailing newline":
+        json.dumps({"a": [1, 2], "b": {"c": "\u00e9"}}, ensure_ascii=False,
+                   indent=2).encode("utf-8"),
+}
+for _label, _raw in SHAPES.items():
+    _bytes, _f, _rt = seed_format.dumps_like(json.loads(_raw.decode("utf-8")), _raw)
+    check("unchanged write is byte-identical — %s" % _label,
+          _bytes == _raw and _rt, "detected %s" % _f)
+
+# A real edit changes the edited value and nothing else about the layout.
+_edited = json.loads(SHAPES["indent 2, trailing newline"].decode("utf-8"))
+_edited["b"]["c"] = "changed"
+_bytes, _f, _ = seed_format.dumps_like(_edited, SHAPES["indent 2, trailing newline"])
+check("an edit keeps the layout and changes only the value",
+      _bytes.decode("utf-8").count("\n") ==
+      SHAPES["indent 2, trailing newline"].decode("utf-8").count("\n")
+      and b"changed" in _bytes)
+
+# The regression, stated as the failure it was: the old hardcoded write.
+_old_style = json.dumps(json.loads(SHAPES["indent 2, trailing newline"].decode("utf-8")),
+                        ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+check("the pre-21/09 hardcoded write would have reformatted the whole file",
+      _old_style != SHAPES["indent 2, trailing newline"])
+
+# A helper nothing calls is worse than no helper. Assert the WIRING: no seed
+# writer may hardcode a serialisation again.
+SEED_WRITERS = ["seed_supplier_domains.py", "verify_name_proofs.py",
+                "confirm_company_numbers.py", "confirm_from_catalogue.py",
+                "refresh_brand_colours.py", "merge_seed_on_retry.py"]
+for _name in SEED_WRITERS:
+    _src = open(os.path.join(REPO, "scripts", _name), encoding="utf-8").read()
+    check("%s writes the seed through seed_format.write_like" % _name,
+          "write_like(SEED" in _src)
+    check("%s no longer hardcodes a seed serialisation" % _name,
+          'json.dump(seed, f' not in _src and 'json.dump(out, f' not in _src)
+
 print()
 if failures:
     print("FAILED: %d check(s) — %s" % (len(failures), ", ".join(failures)))

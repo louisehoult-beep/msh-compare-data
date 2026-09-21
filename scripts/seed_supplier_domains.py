@@ -101,6 +101,12 @@ import time
 import urllib.parse
 import urllib.error
 import urllib.request
+# seed_format lives beside this script. Imported this way because these scripts
+# are also loaded by tests via spec_from_file_location, which does not put the
+# script's own directory on sys.path the way running it directly does.
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from seed_format import write_like, describe
 
 SEED = "data/supplier-seed.json"
 INDEX = "data/supplier-index.json"
@@ -1123,13 +1129,14 @@ def main():
             "route": r["proof"],
             "source": source})
         added += 1
-    # MATCH THE FILE'S OWN FORMAT. supplier-seed.json is stored minified on a
-    # single line with no trailing newline. Writing it back pretty-printed is a
-    # 35,000-line diff for 25 added links, which buries the actual change and
-    # makes every future diff of this file useless. Byte-format is not cosmetic
-    # in a repo where a push is a live publish and the diff is the only review.
-    with open(SEED, "w", encoding="utf-8") as f:
-        json.dump(seed, f, ensure_ascii=False, separators=(",", ":"))
+    # MATCH THE FILE'S OWN FORMAT — read it, do not assert it. This used to
+    # hardcode minified-on-one-line as "the file's own format"; on 21/09/2026 the
+    # file on main was pretty-printed at indent 2, so the hardcoded write would
+    # have turned two added fields into a 110,172-line diff (`^o584`). Byte
+    # format is not cosmetic in a repo where a push is a live publish and the
+    # diff is the only review there is.
+    fmt, round_trips = write_like(SEED, seed)
+    print(describe(SEED, fmt, round_trips))
     print("\nseeded %d website(s) into %s" % (added, SEED))
     if blocked:
         print("  %d title proof(s) BLOCKED — second-sourced and REFUSED in %s. "

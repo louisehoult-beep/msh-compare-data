@@ -87,6 +87,12 @@ USAGE
 import json
 import re
 import sys
+# seed_format lives beside this script. Imported this way because these scripts
+# are also loaded by tests via spec_from_file_location, which does not put the
+# script's own directory on sys.path the way running it directly does.
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from seed_format import write_like, describe
 
 SEED = "data/supplier-seed.json"
 FIN = "data/company-financials.json"
@@ -255,9 +261,10 @@ def main():
         log("nothing changed; %s left alone" % SEED)
         return 0
 
-    with open(SEED, "w", encoding="utf-8") as f:
-        json.dump(seed, f, ensure_ascii=False, separators=(",", ":"))
-    log("wrote %s" % SEED)
+    # Keep the file's existing byte format rather than asserting one — see
+    # scripts/seed_format.py and `^o584`.
+    fmt, round_trips = write_like(SEED, seed)
+    log(describe(SEED, fmt, round_trips))
     log("")
     log("These become `confirmed` on the next run of scripts/refresh_companies_house.py,")
     log("which needs COMPANIES_HOUSE_KEY and so runs in the company-intelligence workflow.")

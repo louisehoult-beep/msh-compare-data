@@ -39,6 +39,12 @@ or 1 on any error (caller should abort rather than push a possibly-corrupt file)
 No arguments. Reads from the working tree and from git's object database.
 """
 import json, subprocess, sys
+# seed_format lives beside this script. Imported this way because these scripts
+# are also loaded by tests via spec_from_file_location, which does not put the
+# script's own directory on sys.path the way running it directly does.
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from seed_format import write_like, describe
 
 
 SEED = "data/supplier-seed.json"
@@ -158,8 +164,12 @@ def run():
     out = dict(main)
     out["suppliers"] = result_suppliers
 
-    with open(SEED, "w") as f:
-        json.dump(out, f, indent=2, ensure_ascii=False)
+    # Keep the file's existing byte format rather than asserting one. This
+    # hardcoded indent=2, and because it runs on every push race it is what put
+    # main's seed into indent=2 while five other writers still believed it was
+    # minified (`^o584`). See scripts/seed_format.py.
+    fmt, round_trips = write_like(SEED, out)
+    print(describe(SEED, fmt, round_trips))
 
     print(
         "[merge_seed_on_retry] wrote %s: %d merged, %d preserved from origin/main, "

@@ -150,6 +150,13 @@ class FullScriptTest(unittest.TestCase):
         os.makedirs(os.path.join(self.tmpdir, "scripts"), exist_ok=True)
         # Copy the script into the tmp repo
         import shutil
+        # seed_format.py travels with it: merge_seed_on_retry.py imports it to
+        # write the seed back in whatever byte format the file already has
+        # (`^o584`), so a mini-repo without it is not a runnable mini-repo.
+        shutil.copy(
+            os.path.join(os.path.dirname(__file__), "scripts", "seed_format.py"),
+            os.path.join(self.tmpdir, "scripts", "seed_format.py"),
+        )
         shutil.copy(
             os.path.join(os.path.dirname(__file__), "scripts", "merge_seed_on_retry.py"),
             os.path.join(self.tmpdir, "scripts", "merge_seed_on_retry.py"),
@@ -272,6 +279,10 @@ class RetryPushTest(unittest.TestCase):
         shutil.copy(os.path.join(os.path.dirname(__file__), "scripts",
                                  "merge_seed_on_retry.py"),
                     os.path.join(boot, "scripts", "merge_seed_on_retry.py"))
+        # Its helper has to come too — see the note in FullScriptTest.setUp.
+        shutil.copy(os.path.join(os.path.dirname(__file__), "scripts",
+                                 "seed_format.py"),
+                    os.path.join(boot, "scripts", "seed_format.py"))
         # The gate is stubbed to pass. What is under test here is whether the
         # retry path reaches the gate at all and lands the commit — not the gate.
         with open(os.path.join(boot, "verify.py"), "w") as fh:

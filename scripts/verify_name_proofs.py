@@ -55,6 +55,12 @@ import sys
 
 sys.path.insert(0, "scripts")
 import seed_supplier_domains as S   # reuse fetch/prove/text_of — same bar, same code
+# seed_format lives beside this script. Imported this way because these scripts
+# are also loaded by tests via spec_from_file_location, which does not put the
+# script's own directory on sys.path the way running it directly does.
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from seed_format import write_like, describe
 
 REPORT = "state/domain-seeding-report.json"
 OUT = "state/name-proof-verification.json"
@@ -246,11 +252,13 @@ def main():
             "source": "Proved %s by registration number on %s: %s" % (
                 r["domain"], r["checked"], r["evidence"])})
         n += 1
-    # Minified, single line, no trailing newline — the file's own format. A
-    # pretty-printed rewrite is a 35,000-line diff that buries the real change,
-    # and in this repo the diff is the only review before a live publish.
-    with open(SEED, "w", encoding="utf-8") as f:
-        json.dump(seed, f, ensure_ascii=False, separators=(",", ":"))
+    # Keep whatever format the file already has — read the bytes, never assert
+    # them. This hardcoded minified-on-one-line until 21/09/2026, by which time
+    # the file on main was pretty-printed at indent 2 (`^o584`); a rewrite in the
+    # wrong shape is a whole-file diff that buries the real change, and in this
+    # repo the diff is the only review before a live publish.
+    fmt, round_trips = write_like(SEED, seed)
+    print(describe(SEED, fmt, round_trips))
     print("\nseeded %d website(s) into %s" % (n, SEED))
     print("next: python3 build_supplier_index.py, then python3 verify.py")
 

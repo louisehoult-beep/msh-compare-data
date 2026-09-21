@@ -50,6 +50,12 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+# seed_format lives beside this script. Imported this way because these scripts
+# are also loaded by tests via spec_from_file_location, which does not put the
+# script's own directory on sys.path the way running it directly does.
+import os as _os, sys as _sys
+_sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
+from seed_format import write_like, describe
 
 SEED = "data/supplier-seed.json"
 CACHE = "data/nhssc-cache.json"
@@ -227,9 +233,10 @@ def main():
         print("  OK %-32s %s  %s" % (name[:32], number, registered[:40]))
 
     if not dry:
-        with open(SEED, "w", encoding="utf-8") as f:
-            json.dump(seed, f, ensure_ascii=False, separators=(",", ":"))
-            f.write("\n")
+        # Keep the file's existing byte format rather than asserting one — see
+        # scripts/seed_format.py and `^o584`.
+        fmt, round_trips = write_like(SEED, seed)
+        print(describe(SEED, fmt, round_trips))
 
     print("\n%d confirmed by catalogue legal name, %d left probable.%s"
           % (len(confirmed), len(refused), "  (dry run: nothing written)" if dry else ""))
