@@ -431736,102 +431736,526 @@
    ]
   },
   "PHC Europe / PHCbi": {
-   "domain": "phchd.com",
-   "verified": "2026-09-16",
-   "source": "phchd.com, each product's own page read this run",
-   "structureFrom": "sitemap products, each page's own name and breadcrumb division (per-page fallback)",
-   "partialRead": false,
+   "domain": "phchd.com/eu/biomedical",
+   "verified": "2026-09-21",
+   "source": "phchd.com/eu/biomedical XML sitemap, read this run",
+   "structureFrom": "sitemap",
    "hasDivisions": true,
-   "landingPagesDropped": 0,
+   "landingPagesDropped": 29,
    "furniturePagesDropped": 0,
-   "duplicateUrlsDropped": 0,
+   "duplicateUrlsDropped": 4,
+   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 29 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation.",
+   "structure": "Grouped by the company's own URL structure.",
    "droppedCategoryPages": 0,
-   "captureCaveat": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 14 page(s) could not be read and fall back to their URL slug.",
-   "structure": "The company's own division for each product, read from its own breadcrumb trail.",
-   "filingRule": "Grouping MIRRORS the manufacturer's own filing, read from each product's own breadcrumb trail because the site's URLs carry no division segment of their own.",
+   "filingRule": "Read from the sitemap, so product NAMES come from URL slugs and the grouping is the company's own URL structure, not a product record. Treat names as the company's own wording tidied for display, and expect no category detail below the top level.",
    "divisions": [
     {
-     "name": "PHC Corporation, Biomedical Division",
+     "name": "Ultra Low Freezers",
+     "products": 20
+    },
+    {
+     "name": "Product Technology",
+     "products": 18
+    },
+    {
+     "name": "Pharmaceutical Refrigerators",
+     "products": 14
+    },
+    {
+     "name": "Co2Incubators",
+     "products": 11
+    },
+    {
+     "name": "Liquid Nitrogen Cryopreservation",
      "products": 7
     },
     {
-     "name": "Uncategorised",
-     "products": 6
+     "name": "Biomedical Freezers",
+     "products": 5
     },
     {
-     "name": "PHC Europe, a Member of PHC Group",
+     "name": "Multi Gas Incubators",
+     "products": 4
+    },
+    {
+     "name": "Nitrogen Generators",
+     "products": 3
+    },
+    {
+     "name": "Cooled Incubators",
+     "products": 3
+    },
+    {
+     "name": "Heated Incubators",
+     "products": 2
+    },
+    {
+     "name": "Mlr Climatic Test Chambers",
+     "products": 2
+    },
+    {
+     "name": "Blood Bank Refrigerators",
+     "products": 1
+    },
+    {
+     "name": "",
      "products": 1
     }
    ],
    "products": [
     {
-     "n": "診察券発行機（Medicom-HRシリーズ限定） | メディコム | ウィーメックス株式会社（旧PHC株式会社）",
-     "division": "Uncategorised",
+     "n": "Mdf Du303Vxh",
+     "division": "Ultra Low Freezers",
      "category": ""
     },
     {
-     "n": "導入事例 | メディコム | ウィーメックス株式会社（旧PHC株式会社）",
-     "division": "Uncategorised",
+     "n": "Energy Efficient",
+     "division": "Product Technology",
      "category": ""
     },
     {
-     "n": "オリジナルサポート | 医院・クリニック開業 医師開業の手順・支援 | メディコム | ウィーメックス株式会社（旧PHC株式会社）",
-     "division": "Uncategorised",
+     "n": "Inverter Technology",
+     "division": "Product Technology",
      "category": ""
     },
     {
-     "n": "オリジナルサポート | 医院・クリニック開業 医師開業の手順・支援 | メディコム | ウィーメックス株式会社（旧PHC株式会社）",
-     "division": "Uncategorised",
+     "n": "Dual Cooling System",
+     "division": "Product Technology",
      "category": ""
     },
     {
-     "n": "オリジナルサポート | 医院・クリニック開業 医師開業の手順・支援 | メディコム | ウィーメックス株式会社（旧PHC株式会社）",
-     "division": "Uncategorised",
+     "n": "Patented Vip Vacuum",
+     "division": "Product Technology",
      "category": ""
     },
     {
-     "n": "オリジナルサポート | 医院・クリニック開業 医師開業の手順・支援 | メディコム | ウィーメックス株式会社（旧PHC株式会社）",
-     "division": "Uncategorised",
+     "n": "Cryopreservation",
+     "division": "Product Technology",
      "category": ""
     },
     {
-     "n": "PRODUCTS Comparative Chart",
-     "division": "PHC Europe, a Member of PHC Group",
+     "n": "Medical Device Certification",
+     "division": "Product Technology",
      "category": ""
     },
     {
-     "n": "PRODUCTS Comparative Chart",
-     "division": "PHC Corporation, Biomedical Division",
+     "n": "Hydrocarbon Refrigerants",
+     "division": "Product Technology",
      "category": ""
     },
     {
-     "n": "PRODUCTS Comparative Chart",
-     "division": "PHC Corporation, Biomedical Division",
+     "n": "Hybrid Water Cooling",
+     "division": "Product Technology",
      "category": ""
     },
     {
-     "n": "PRODUCTS Comparative Chart",
-     "division": "PHC Corporation, Biomedical Division",
+     "n": "Mco 50Aic",
+     "division": "Co2Incubators",
      "category": ""
     },
     {
-     "n": "PRODUCTS Comparative Chart",
-     "division": "PHC Corporation, Biomedical Division",
+     "n": "Mco 170Ac",
+     "division": "Co2Incubators",
      "category": ""
     },
     {
-     "n": "PRODUCTS Comparative Chart",
-     "division": "PHC Corporation, Biomedical Division",
+     "n": "Mco 230Aic",
+     "division": "Co2Incubators",
      "category": ""
     },
     {
-     "n": "PRODUCTS Comparative Chart",
-     "division": "PHC Corporation, Biomedical Division",
+     "n": "Mco 230Aicuv",
+     "division": "Co2Incubators",
      "category": ""
     },
     {
-     "n": "PRODUCTS Comparative Chart",
-     "division": "PHC Corporation, Biomedical Division",
+     "n": "Mco 173Aic",
+     "division": "Co2Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mco 173Aicuv",
+     "division": "Co2Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mco 173Aicuvh",
+     "division": "Co2Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mco 171Aicd",
+     "division": "Co2Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mco 171Aicuvd",
+     "division": "Co2Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mco 230Aicuvh",
+     "division": "Co2Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mco 80Ic",
+     "division": "Co2Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mco 50M",
+     "division": "Multi Gas Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mco 170M",
+     "division": "Multi Gas Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mco 170Muv",
+     "division": "Multi Gas Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mco 170Muvh",
+     "division": "Multi Gas Incubators",
+     "category": ""
+    },
+    {
+     "n": "Hf30N",
+     "division": "Nitrogen Generators",
+     "category": ""
+    },
+    {
+     "n": "Hf30A",
+     "division": "Nitrogen Generators",
+     "category": ""
+    },
+    {
+     "n": "Hf30P",
+     "division": "Nitrogen Generators",
+     "category": ""
+    },
+    {
+     "n": "Mir H163",
+     "division": "Heated Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mir H263",
+     "division": "Heated Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mir 154",
+     "division": "Cooled Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mir 254",
+     "division": "Cooled Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mir 554",
+     "division": "Cooled Incubators",
+     "category": ""
+    },
+    {
+     "n": "Mlr 352",
+     "division": "Mlr Climatic Test Chambers",
+     "category": ""
+    },
+    {
+     "n": "Mlr 352H",
+     "division": "Mlr Climatic Test Chambers",
+     "category": ""
+    },
+    {
+     "n": "Mdf 1156",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf C2156Van",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Du503Vxh",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Du703Vxh",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Dc500Vx",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Dc700Vx",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Dc102Vh",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Dc202Vh",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Du503Vh",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Du703Vh",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Du502Vh",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Du702Vh",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Du901Vhl Pe",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Du500Zh",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Du700Zh",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Du300H",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Du502Vhw",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf C2156Vanw",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Mu339Hl",
+     "division": "Biomedical Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Mu539Hl",
+     "division": "Biomedical Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf U731M",
+     "division": "Biomedical Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mdf Mu549Dh",
+     "division": "Biomedical Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mpr 722",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mpr 722R",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mpr 1412",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mpr 1412R",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mpr N250Fh",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mpr N450Fh",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mpr 715F",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mpr S150H",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mpr S300H",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mpr S500H",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mpr S500Rh",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mpr S1201Xh",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mbr 705Gr",
+     "division": "Blood Bank Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "2101_Controlled_Rate_Freezer",
+     "division": "Liquid Nitrogen Cryopreservation",
+     "category": ""
+    },
+    {
+     "n": "Intellirate I67C",
+     "division": "Liquid Nitrogen Cryopreservation",
+     "category": ""
+    },
+    {
+     "n": "V 1500Ab St",
+     "division": "Liquid Nitrogen Cryopreservation",
+     "category": ""
+    },
+    {
+     "n": "V 3000Ab St",
+     "division": "Liquid Nitrogen Cryopreservation",
+     "category": ""
+    },
+    {
+     "n": "V 5000Ab St",
+     "division": "Liquid Nitrogen Cryopreservation",
+     "category": ""
+    },
+    {
+     "n": "V 5000Abeh St",
+     "division": "Liquid Nitrogen Cryopreservation",
+     "category": ""
+    },
+    {
+     "n": "Cryokit Glove 401",
+     "division": "Liquid Nitrogen Cryopreservation",
+     "category": ""
+    },
+    {
+     "n": "Active Background",
+     "division": "Product Technology",
+     "category": ""
+    },
+    {
+     "n": "Cleanroom Classification",
+     "division": "Product Technology",
+     "category": ""
+    },
+    {
+     "n": "Dual Heat Sterilisation",
+     "division": "Product Technology",
+     "category": ""
+    },
+    {
+     "n": "Exceptional Co2",
+     "division": "Product Technology",
+     "category": ""
+    },
+    {
+     "n": "Incu Safe Construction",
+     "division": "Product Technology",
+     "category": ""
+    },
+    {
+     "n": "Zirconia Sensor",
+     "division": "Product Technology",
+     "category": ""
+    },
+    {
+     "n": "Direct Heat",
+     "division": "Product Technology",
+     "category": ""
+    },
+    {
+     "n": "Dual Ir Sensor",
+     "division": "Product Technology",
+     "category": ""
+    },
+    {
+     "n": "H2O2 Decontamination",
+     "division": "Product Technology",
+     "category": ""
+    },
+    {
+     "n": "Patented Safecell Uv",
+     "division": "Product Technology",
+     "category": ""
+    },
+    {
+     "n": "Mdf Du702Vhw",
+     "division": "Ultra Low Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mpr S1201Rxh",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mpr 1014",
+     "division": "Pharmaceutical Refrigerators",
+     "category": ""
+    },
+    {
+     "n": "Mdf U443",
+     "division": "Biomedical Freezers",
+     "category": ""
+    },
+    {
+     "n": "Mbr 705Gr",
+     "division": "",
      "category": ""
     }
    ]

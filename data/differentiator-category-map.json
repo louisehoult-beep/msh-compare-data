@@ -370,11 +370,11 @@
   }
  },
  "counts": {
-  "pairs": 6062,
-  "mapped": 5083,
+  "pairs": 8143,
+  "mapped": 7160,
   "notTaxonomy": 193,
-  "products": 98682,
-  "productsMapped": 64234
+  "products": 100950,
+  "productsMapped": 66832
  },
  "entries": [
   {
@@ -4412,9 +4412,11 @@
     "Touchclave Systems Autoclave",
     "Environmental Rooms"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": true,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the site has no division structure, but every listed line is laboratory decontamination/sterilisation equipment (autoclaves, sterilizers, washer-disinfectors, ovens, incubators, biological safety cabinets, laminar flow cabinets, fume cupboards, environmental chambers) or its servicing — checked against the full 51-item product list, no other speciality present",
+   "decidedIn": "LTE-Scientific-Limited.json"
   },
   {
    "supplier": "Scala Surgical Ltd",
@@ -30719,9 +30721,11 @@
     "ISO Elbows",
     "RPS 1001-301 Roots Pumping System"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "vacuum pumps and pumping systems supporting the GC-MS/mass-spec analyser range — laboratory analyser equipment, consistent with the rest of Agilent's mapped divisions on this worklist",
+   "decidedIn": "Agilent-Technologies-UK--vacuum.json"
   },
   {
    "supplier": "Agilent Technologies UK",
@@ -97397,9 +97401,11 @@
     "Microvue Creatinine Eia",
     "Microvue C1 Inhibitor Plus Eia"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Microvue EIA (enzyme immunoassay) test kits — lab-run reagent kits, laboratory consumables",
+   "decidedIn": "QuidelOrtho-Ortho-Clinical-Diagnostics-UK.json"
   },
   {
    "supplier": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
@@ -97427,9 +97433,11 @@
     "Quickvue H Pylori Test",
     "Quickvue Hcg Combo Test"
    ],
-   "hub": null,
+   "hub": "pathology:poct",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "QuickVue rapid lateral-flow tests (Strep A, hCG, H. pylori, adenoviral conjunctivitis) are bedside/near-patient rapid tests — point of care testing",
+   "decidedIn": "QuidelOrtho-Ortho-Clinical-Diagnostics-UK.json"
   },
   {
    "supplier": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
@@ -97442,9 +97450,11 @@
     "D Double Duet Dfa Respiratory Virus Screening Id Kit",
     "D Ultra 8 Dfa Respiratory Virus Screening And Id Kit"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "D3 DFA (direct fluorescent antibody) respiratory virus screening/ID kits are lab-run reagent kits, not bedside tests — laboratory consumables, checked against the product list on record",
+   "decidedIn": "QuidelOrtho-Ortho-Clinical-Diagnostics-UK.json"
   },
   {
    "supplier": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
@@ -97457,9 +97467,11 @@
     "Bes Flex Bulk Loader",
     "Centrifuge0"
    ],
-   "hub": null,
+   "hub": "pathology:equip",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "pre-analytical/automation accessories for the Vitros platform (tube entry, rack loader, centrifuge, decapper, aliquoter/labeler) — laboratory analyser/automation equipment",
+   "decidedIn": "QuidelOrtho-Ortho-Clinical-Diagnostics-UK.json"
   },
   {
    "supplier": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
@@ -97472,9 +97484,14 @@
     "Solana Gas Assay",
     "Solana Gbs Assay"
    ],
-   "hub": null,
+   "hub": [
+    "pathology:equip",
+    "pathology:consum"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division's own evidence spans both: 'Solana Instrument' is the analyser (equipment), while the named assays and control sets (C. difficile, GBS, HSV, influenza, RSV/hMPV, SARS-CoV-2) are lab-run molecular reagent kits (laboratory consumables)",
+   "decidedIn": "QuidelOrtho-Ortho-Clinical-Diagnostics-UK.json"
   },
   {
    "supplier": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
@@ -97487,9 +97504,14 @@
     "Sofia Lyme Fia",
     "Sofia Rsv Fia"
    ],
-   "hub": null,
+   "hub": [
+    "pathology:equip",
+    "pathology:poct"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division's own evidence spans both: 'Sofia 2 Instrument' is the fluorescent immunoassay reader (equipment), while the FIA cassette tests (Influenza, RSV, Strep A, SARS antigen) are CLIA-waived near-patient rapid tests run on it (point of care)",
+   "decidedIn": "QuidelOrtho-Ortho-Clinical-Diagnostics-UK.json"
   },
   {
    "supplier": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
@@ -97502,9 +97524,11 @@
     "Quidel Triage Cardio3 Panel",
     "Quidel Triage D Dimer Test"
    ],
-   "hub": null,
+   "hub": "pathology:poct",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Triage MeterPro cardiac marker panels (D-Dimer, NT-proBNP, cardiac panel) are near-patient/ED bedside tests run on the Triage analyser — point of care testing, consistent with Radiometer UK's 'Immunoassay Testing' precedent",
+   "decidedIn": "QuidelOrtho-Ortho-Clinical-Diagnostics-UK.json"
   },
   {
    "supplier": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
@@ -97517,9 +97541,11 @@
     "Lyra Parainfluenza Virus Assay",
     "Lyra Rsv Hmpv Assay"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Lyra molecular (PCR) assay kits for infectious disease targets — lab-run reagent kits, laboratory consumables",
+   "decidedIn": "QuidelOrtho-Ortho-Clinical-Diagnostics-UK.json"
   },
   {
    "supplier": "PHC Europe / PHCbi",
@@ -97562,9 +97588,11 @@
     "H V Mix Mixed Freshcells",
     "R Mix And R Mix Too Mixed Freshcells"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "ready-to-use cell culture products for viral isolation — laboratory consumables",
+   "decidedIn": "QuidelOrtho-Ortho-Clinical-Diagnostics-UK.json"
   },
   {
    "supplier": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
@@ -97592,9 +97620,11 @@
     "Super E Mix Readycells",
     "R Mix And R Mix Too Readycells"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "ready-to-use cell cultures for rapid virus isolation — laboratory consumables",
+   "decidedIn": "QuidelOrtho-Ortho-Clinical-Diagnostics-UK.json"
   },
   {
    "supplier": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
@@ -97620,9 +97650,14 @@
     "Savanna Instrument",
     "Savannna Hsv 1 2 Vzv Assay"
    ],
-   "hub": null,
+   "hub": [
+    "pathology:equip",
+    "pathology:consum"
+   ],
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division's own evidence spans both: 'Savanna Instrument' is the analyser (equipment), while the respiratory viral panel and HSV/VZV assay are lab-run molecular reagent kits (laboratory consumables)",
+   "decidedIn": "QuidelOrtho-Ortho-Clinical-Diagnostics-UK.json"
   },
   {
    "supplier": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
@@ -97634,9 +97669,11 @@
     "Thyretain Tsi Stimulating Reporter Bioassay",
     "Thyretain Turbo Tsi Stimulating Reporter Bioassay"
    ],
-   "hub": null,
+   "hub": "pathology:consum",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "Thyretain TBI/TSI reporter bioassay kits are lab-run reagent kits — laboratory consumables",
+   "decidedIn": "QuidelOrtho-Ortho-Clinical-Diagnostics-UK.json"
   },
   {
    "supplier": "PHC Europe / PHCbi",
@@ -135308,6 +135345,494 @@
    "evidence": "NHS Supply Chain public catalogue, cached by scripts/refresh_nhssc_cache.py",
    "why": "A reusable silicone resuscitation/anaesthesia mask is a general theatre consumable used during surgery for airway management; no more specific theatres type applies. Supplier field matches the cache record's own rec-level supplier string so the exact-match nhssc-term lookup fires; resolves to canonical \"Draeger Medical UK\" via the company alias registry.",
    "decidedIn": "framework-coverage-batch 20/09/2026 (Operating Theatres Equipment and Related Accessories and Services)"
+  },
+  {
+   "supplier": "Paragon 28",
+   "division": "Plating Systems",
+   "products": 49,
+   "categories": [],
+   "examples": [
+    "Gorilla® Universal HEvans® Plate",
+    "Gorilla® Universal Dogbone Plate",
+    "Gorilla® Universal 28 Plates",
+    "Gorilla® Universal T-Plates"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "Ultra Low Freezers",
+   "products": 20,
+   "categories": [],
+   "examples": [
+    "Mdf Du303Vxh",
+    "Mdf 1156",
+    "Mdf C2156Van",
+    "Mdf Du503Vxh"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "laboratory ultra-low-temperature freezers (MDF series) for sample/specimen storage — lab analyser/storage equipment, checked against the product list on the recrawled biomedical.phchd.com/eu/biomedical sitemap",
+   "decidedIn": "PHC-Europe-PHCbi.json"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "Product Technology",
+   "products": 18,
+   "categories": [],
+   "examples": [
+    "Energy Efficient",
+    "Inverter Technology",
+    "Dual Cooling System",
+    "Patented Vip Vacuum"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Paragon 28",
+   "division": "Biologics",
+   "products": 17,
+   "categories": [],
+   "examples": [
+    "MgNum™ BVF",
+    "PRESERVE™ Bone and Biologic Solutions",
+    "PRESERVE™ Evans Lateral Column Lengthening Graft",
+    "PRESERVE™ Cotton Plantarflexing Osteotomy Graft"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "Wound Care",
+   "products": 16,
+   "categories": [],
+   "examples": [
+    "SkinResQ™ Film Island Dressing 80mm x 60mm",
+    "SkinResQ™ Film Island Dressing 120mm x 85mm",
+    "SkinResQ™ Film Island Dressing 180mm x 80mm",
+    "SkinResQ™ Wound Closure Strips 3mm x 75mm (9 strips)"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "Pharmaceutical Refrigerators",
+   "products": 14,
+   "categories": [],
+   "examples": [
+    "Mpr 722",
+    "Mpr 722R",
+    "Mpr 1412",
+    "Mpr 1412R"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "laboratory/pharmacy refrigeration units (MPR series) used for reagent and specimen storage — lab equipment",
+   "decidedIn": "PHC-Europe-PHCbi.json"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "Co2Incubators",
+   "products": 11,
+   "categories": [],
+   "examples": [
+    "Mco 50Aic",
+    "Mco 170Ac",
+    "Mco 230Aic",
+    "Mco 230Aicuv"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "CO2 cell-culture incubators (MCO series) — laboratory analyser/culture equipment",
+   "decidedIn": "PHC-Europe-PHCbi.json"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "Electrosurgical Accessories",
+   "products": 9,
+   "categories": [],
+   "examples": [
+    "ThermoBlue™ Reusable Electrosurgical Adaptor",
+    "ThermoBlue™ Hand Controlled Electrosurgical Pen",
+    "ThermoBlue™ Electrosurgical Gel Patient Plate (Dual Element)",
+    "ThermoBlue™ Electrosurgical Gel Patient Plate (Single Element)"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "Liquid Nitrogen Cryopreservation",
+   "products": 7,
+   "categories": [],
+   "examples": [
+    "2101_Controlled_Rate_Freezer",
+    "Intellirate I67C",
+    "V 1500Ab St",
+    "V 3000Ab St"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "liquid-nitrogen cryopreservation freezers and controlled-rate freezers for sample storage — laboratory equipment",
+   "decidedIn": "PHC-Europe-PHCbi.json"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "Ultrasound",
+   "products": 5,
+   "categories": [],
+   "examples": [
+    "UltraGel™ UG-50 300ml Clear Bottle",
+    "UltraGel™ UG-50 5L Jerry Can",
+    "UltraGel™ UG-50 5L Flexi Bag",
+    "UltraGel™ UG-50 5L Stand-Up Pouch"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "Biomedical Freezers",
+   "products": 5,
+   "categories": [],
+   "examples": [
+    "Mdf Mu339Hl",
+    "Mdf Mu539Hl",
+    "Mdf U731M",
+    "Mdf Mu549Dh"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "biomedical/plasma freezers (MDF-MU/U series) for sample storage — same category as the Ultra Low Freezers division on the same product line",
+   "decidedIn": "PHC-Europe-PHCbi.json"
+  },
+  {
+   "supplier": "Paragon 28",
+   "division": "Screw Systems",
+   "products": 5,
+   "categories": [],
+   "examples": [
+    "Gorilla® R3CON Plating Screws",
+    "Monster® Hindfoot Screw System",
+    "Mini-Monster® Screw System",
+    "HammerTube™ Hammertoe System"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Paragon 28",
+   "division": "Syndesmosis / Soft Tissue",
+   "products": 5,
+   "categories": [],
+   "examples": [
+    "R3LEASE™ Stabilization System",
+    "TenoTac® 2.0 Soft Tissue Fixation System",
+    "Grappler™ Interference Screw System",
+    "Grappler® Suture Anchors - Titanium"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "Multi Gas Incubators",
+   "products": 4,
+   "categories": [],
+   "examples": [
+    "Mco 50M",
+    "Mco 170M",
+    "Mco 170Muv",
+    "Mco 170Muvh"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "multi-gas cell-culture incubators (MCO-M series) — same laboratory equipment line as the CO2 incubators division",
+   "decidedIn": "PHC-Europe-PHCbi.json"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "ECG Electrodes",
+   "products": 3,
+   "categories": [],
+   "examples": [
+    "VitaTrode™ Midi-ACF (36mm diameter) [Radiolucent]",
+    "VitaTrode™ Maxi-ASF [Radiolucent]",
+    "VitaTrode™ Mini-GP [Radiolucent]"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "Nitrogen Generators",
+   "products": 3,
+   "categories": [],
+   "examples": [
+    "Hf30N",
+    "Hf30A",
+    "Hf30P"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "nitrogen gas generators (HF30 series) supplying the cryopreservation/lab equipment line — laboratory equipment",
+   "decidedIn": "PHC-Europe-PHCbi.json"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "Cooled Incubators",
+   "products": 3,
+   "categories": [],
+   "examples": [
+    "Mir 154",
+    "Mir 254",
+    "Mir 554"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "cooled laboratory incubators (MIR series) — laboratory equipment",
+   "decidedIn": "PHC-Europe-PHCbi.json"
+  },
+  {
+   "supplier": "Paragon 28",
+   "division": "Nail Systems",
+   "products": 3,
+   "categories": [],
+   "examples": [
+    "Phantom® Intramedullary Nail",
+    "Phantom® Hindfoot TTC/TC System",
+    "Phantom® ActivCore™ Nail"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "Lubricating Gel",
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "LubriPro™ 50g Sterile Tube",
+    "LubriPro™ 2.5g Sterile Sachet"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "Sexual Intimacy Gel",
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "LubriPlay™ Water-based 250ml Bottle Original",
+    "LubriPlay™ Water-based 250ml Bottle Strawberry"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "Cosmetic Gel",
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Cosmetic Gel™ Aloe-Infused IPL & Beauty Gel 300ml Bottle",
+    "Cosmetic Gel™ Aloe-Infused IPL & Beauty Gel 5L Standup Pouch"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "Chest Seals & Trauma Care",
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Pneumo SOS™ Vented Chest Seal",
+    "Pneumo SOS™ Non-vented Chest Seal"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "Heated Incubators",
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Mir H163",
+    "Mir H263"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "heated laboratory incubators (MIR-H series) — laboratory equipment",
+   "decidedIn": "PHC-Europe-PHCbi.json"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "Mlr Climatic Test Chambers",
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Mlr 352",
+    "Mlr 352H"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "climatic/stability test chambers (MLR series) used in lab and QC testing — laboratory equipment",
+   "decidedIn": "PHC-Europe-PHCbi.json"
+  },
+  {
+   "supplier": "Paragon 28",
+   "division": "Staple Systems",
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "JAWS™ Nitinol Staple System",
+    "JAWS™ Great White Staple System"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Paragon 28",
+   "division": "Wedge Systems",
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "TITAN 3-D™ Evans Lateral Column Lengthening Wedge",
+    "TITAN 3-D™ Cotton Plantarflexing Osteotomy Wedge"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "Hot Cold Packs",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "ThermoGel™ Hot & Cold Pack"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Electro Spyres Healthcare Limited",
+   "division": "Conductive Gel",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "ElectroGel™ Ionically Conductive Gel 300ml"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "Blood Bank Refrigerators",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Mbr 705Gr"
+   ],
+   "hub": "pathology:equip",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "blood-bank refrigerator (MBR-705GR) for blood component storage in the lab/transfusion pathway — lab equipment",
+   "decidedIn": "PHC-Europe-PHCbi.json"
+  },
+  {
+   "supplier": "PHC Europe / PHCbi",
+   "division": "",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Mbr 705Gr"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Paragon 28",
+   "division": "TAR",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "APEX 3D™ Total Ankle Replacement System"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Paragon 28",
+   "division": "External Fixation Systems",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Monkey Bars™ Pin to Bar External Fixation System"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Paragon 28",
+   "division": "Ankle Fracture Systems",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Phantom® Fibula Nail System"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+  },
+  {
+   "supplier": "Paragon 28",
+   "division": "Hindfoot",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Phantom® Curved Hindfoot Fusion Nail"
+   ],
+   "hub": null,
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
   }
  ],
  "kinds": {
