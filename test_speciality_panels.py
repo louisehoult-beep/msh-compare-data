@@ -2560,8 +2560,21 @@ check("Nikkiso shows both NHSSC spellings",
       len(_rn_nik) == 1 and len(_rn_nik[0]["variants"]) == 2, str(_rn_nik))
 check("supplier count is the framework's 25 names less the one merge",
       rn["counts"]["suppliers"] == 24, str(rn["counts"]["suppliers"]))
-check("unresolved supplier names are flagged, not silently merged",
-      rn["counts"]["suppliersUnresolved"] >= 1)
+# Until 21/09/2026 this panel carried two names the registry could not resolve, and
+# the check here asserted >= 1 so the refusal could not be papered over. Both were
+# then resolved on evidence (e5c2bb9): the framework writes "Vantive Limited
+# (formerly part of Baxter Healthcare Ltd)" and "VWS (UK) Ltd Trading As Veolia
+# Water Technologies", each one alias short of an existing fully-verified seed
+# record — Vantive (Companies House 14981842) and VWS (UK) Ltd (00327847). The
+# exact award-source strings were added as aliases on those records; no supplier
+# was created and none was merged away, which is why the count above still reads
+# 24. So the correct expectation is now nought outstanding, not at least one, and
+# a name that stops resolving here should turn this red for a curator to look at.
+# "Not silently merged" is carried by the three checks above: Nikkiso appears once,
+# shows both NHSSC spellings, and the total is the framework's 25 less that merge.
+check("every supplier name resolves, and none was silently merged to get there",
+      rn["counts"]["suppliersUnresolved"] == 0,
+      "unresolved: %s" % [s["name"] for s in rn["suppliers"] if not s.get("resolved")])
 
 print("  the derived claims carry their rule and their limits (rules 14a, 14c)")
 for k in ["frameworks", "suppliers", "awards", "openTenders", "drugTariff"]:
