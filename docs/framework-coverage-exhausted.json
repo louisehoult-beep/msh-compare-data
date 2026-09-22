@@ -1,0 +1,32 @@
+{
+  "_purpose": "Internal work-tracking only, for the differentiator-framework-coverage scheduled task's own picker. Not read by any pipeline script and not member-facing data. A framework listed here is skipped by the routine WITHOUT re-investigation as long as neither its awarded-supplier set nor its refused-crawl list has changed since 'checkedOn'. A new award, a newly unresolved name, or a newly refused/reopened crawl on any listed supplier means the entry is stale and the framework should be re-investigated (and this entry updated or removed) rather than trusted blindly.",
+  "frameworks": [
+    {
+      "framework": "Ultrasound Scanners and Associated Options and Related Services",
+      "checkedOn": "2026-09-22",
+      "coverageAtCheck": "23.8% (5/21)",
+      "suppliersChecked": [
+        "BioSpectrum Ltd",
+        "Celtic SMR Ltd",
+        "Hologic UK",
+        "Philips",
+        "ProSys International Ltd",
+        "Siemens Healthineers"
+      ],
+      "reason": "All 6 remaining suppliers checked independently today, confirming docs/framework-coverage-findings-2026-09-21-ultrasound-scanners.md unchanged: BioSpectrum/Hologic UK crawled with real catalogues containing no genuine ultrasound-scanner line; Philips/Siemens Healthineers/ProSys International Ltd crawl-refused with only unrelated NHSSC-cache stub products. Celtic SMR Ltd genuinely sells human diagnostic ultrasound (SonoScape E2/X3/E11/P25 Elite/P60/S80 Elite) but every model page is a CMS 'page-components' artefact mixed in the same sitemap section as marketing/FAQ pages — differentiator-category-map.json maps by (supplier, division) not by product name, so mapping the division would also publish 'Calendly Form' and 'Who Are We Celticsmr' as ultrasound products. This is the nav-labels-are-not-products shape (data/identity-vocabulary-policy.json) — held is correct, no ruling needed, and no route exists without a script change (a per-product override capability, or a smarter component-page filter) that is out of scope for a data batch.",
+      "wouldReopenIf": "A code change adds a per-product override route for sitemap-only captures, or a smarter component-page filter for celticsmr.co.uk; or any of the 6 suppliers gets a new/changed crawl result."
+    },
+    {
+      "framework": "CT Scanners and Associated Options and Related Services",
+      "checkedOn": "2026-09-22",
+      "coverageAtCheck": "25.0% (2/8)",
+      "suppliersChecked": [
+        "Philips",
+        "Siemens Healthineers",
+        "Stryker"
+      ],
+      "reason": "Same structural shape as Ultrasound Scanners (docs/framework-coverage-findings-2026-09-21-ultrasound-scanners.md already checked this framework 21/09 with the same result, reconfirmed today via the ledger's refusedSuppliers block): Philips and Siemens Healthineers carry only unrelated NHSSC-cache stub products (CPAP masks, pathology analysers) with their own sites uncrawlable; Stryker's own crawled range is real but genuinely not CT-scanner equipment. No permitted route left.",
+      "wouldReopenIf": "Any of the 3 suppliers gets a new/changed crawl result, or a new supplier is awarded on this framework."
+    }
+  ]
+}
