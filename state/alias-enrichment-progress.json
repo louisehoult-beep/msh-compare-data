@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-21",
+ "lastRun": "2026-09-22",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -413,7 +413,19 @@
   "Ovidius Solutions Ltd",
   "Owens and Minor Halyard Ltd",
   "P&S Healthcare Ltd",
-  "P.W.Coole & Son Limited T/A Surgical Holdings"
+  "P.W.Coole & Son Limited T/A Surgical Holdings",
+  "Parc Global Supplies",
+  "PCByVoice",
+  "PD Neurotechnology Ltd",
+  "Peak Medical Ltd",
+  "Pentland Medical Ltd",
+  "Permedica UK Limited",
+  "PFF Plastics",
+  "Philips Healthcare / Philips Respironics",
+  "Philips Respironics",
+  "Phoenix Dosimetry Ltd",
+  "Phonak/Sonova UK",
+  "Pioneer Medical Europe Limited"
  ],
  "refusals": [
   {
@@ -935,6 +947,36 @@
    "name": "P.W.Coole & Son Limited T/A Surgical Holdings",
    "reason": "This seed already carries a SEPARATE, well-developed record, \"Surgical Holdings Limited\", at the SAME Companies House number (03090951) and already carrying \"P.W. COOLE & SON LIMITED\" as one of its own aliases (proved on its own website's contact page, reg 3090951, 07/09/2026). Companies House filing history additionally shows this company changed its own registered name FROM \"P.W. COOLE & SON LIMITED\" TO \"SURGICAL HOLDINGS LIMITED\" on 27/08/2025, so this record's own display name is now the company's PREVIOUS legal name. Adding \"Surgical Holdings\" or \"Surgical Holdings Limited\" as aliases here would trip verify.py's alias_steals_name hard fail (both are the other record's own name/alias) and hand this record every lookup meant for that one. Needs Lou's call on merging the two records; the display name here is also stale and worth a rename once merged.",
    "date": "2026-09-21"
+  },
+  {
+   "name": "Peak Medical Ltd",
+   "reason": "Own website (peakmedical.co.uk) footer states only \"Peak Medical Ltd\", identical to the seed display name. Companies House 05703827 confirms current name \"PEAK MEDICAL LTD\" with no previous names listed. No other verifiable name form found.",
+   "date": "2026-09-22"
+  },
+  {
+   "name": "Pentland Medical Ltd",
+   "reason": "Own website (pentlandmedical.co.uk) footer/logo state \"Pentland Medical\" / \"Pentland Medical Ltd.\", identical to the seed display name (no company registration number published on site). Companies House SC223422 confirms current name \"PENTLAND MEDICAL LTD.\" with no previous names listed. No other verifiable name form found.",
+   "date": "2026-09-22"
+  },
+  {
+   "name": "Permedica UK Limited",
+   "reason": "Companies House 14736672 confirms current name \"PERMEDICA UK LIMITED\" with no previous names listed; sole director is Italian and correspondence-address-only, consistent with this being the UK arm of Italian parent Permedica S.p.A. (Merate, Italy) — excluded as a parent/subsidiary name per rule 4. No standalone UK company website found to check for a distinct UK trading name.",
+   "date": "2026-09-22"
+  },
+  {
+   "name": "Philips Healthcare / Philips Respironics",
+   "reason": "\"Philips\" alone is a single token shared by a vast global consumer-electronics/lighting/healthcare conglomerate and fails the distinctiveness rule (it does not stand for the whole canonical name). UK-registered entities historically tied to the Respironics brand were checked at Companies House this session: RESPIRONICS LTD (02900082) is now a DORMANT company, and RESPIRONICS (UK) LTD (01314118, formerly Medic-Aid Limited / Profile Respiratory Systems Limited) is not confirmed on any source this session as the current operating entity trading as \"Philips Respironics\" in the UK. No alias added without a fresher, more specific check. This record also appears to duplicate the same underlying brand as the separate \"Philips Respironics\" seed record (sourced from a different NHS Supply Chain framework brief) — flagged for a possible merge review, the same shape as the previously-flagged Halyard pair (see refusals for O&M Halyard Uk Limited / Owens and Minor Halyard Ltd, 2026-09-20/21).",
+   "date": "2026-09-22"
+  },
+  {
+   "name": "Philips Respironics",
+   "reason": "Same reasoning as \"Philips Healthcare / Philips Respironics\" (processed in the same run): \"Philips\" alone is too ambiguous a single token, and the Companies House entities historically carrying the Respironics name (02900082, dormant; 01314118, unconfirmed as the current operating entity) do not meet this task's verification bar. Flagged as a likely duplicate of the \"Philips Healthcare / Philips Respironics\" record for a possible merge review.",
+   "date": "2026-09-22"
+  },
+  {
+   "name": "Pioneer Medical Europe Limited",
+   "reason": "Own website (pioneermedicaleurope.co.uk) footer states \"Pioneer Medical Europe\" (drops \"Limited\", not a new form) with no registration number published. Companies House 07182977 confirms current name \"PIONEER MEDICAL EUROPE LIMITED\" with no previous names listed. No other verifiable name form found.",
+   "date": "2026-09-22"
   }
  ],
  "sources": {
@@ -2574,6 +2616,70 @@
    ],
    "specialities": [],
    "evidence": "Companies House 02842567, read 17/09/2026: registered name \"METSA TISSUE LIMITED\", active, incorporated 05/08/1993 (previous names METSA-SERLA TISSUE LIMITED, SPEED 3731 LIMITED - not added, historic only). This is the UK tissue-products entity whose business (tissue/paper hygiene products, per metsagroup.com) matches the NHS Supply Chain Paper Hygiene framework this seed record carries, distinguishing it from the unrelated \"Metsa Board\" and \"Metsa Wood\" UK entities found in the same Companies House search, which were NOT used. No plain statement of clinical/facilities scope found on metsagroup.com beyond tissue paper manufacturing, which does not match any speciality string already used elsewhere in this seed, so specialities was left empty rather than guessed."
+  },
+  {
+   "name": "Parc Global Supplies",
+   "date": "2026-09-22",
+   "aliases": [
+    "Parc Supplies Ltd",
+    "Parc Global"
+   ],
+   "specialities": [
+    "Infection prevention and PPE"
+   ],
+   "evidence": "The company's own website parcglobal.com/about-parc/, read 22/09/2026: footer \"© 2022 Parc Supplies Ltd, registered in England no. 09630322\". Companies House 09630322 confirms current name \"PARC SUPPLIES LTD\" (active). \"Parc Supplies Ltd\" (the registered legal name) and \"Parc Global\" (the trading brand used throughout the site's masthead, navigation and page titles, e.g. \"Leading Cleaning Supplier In Leeds | Parc Global\") were both added as two-token forms. parcglobal.com/sectors/, read 22/09/2026, states \"Healthcare settings protect millions of people every day\" and lists \"Medical\" as a sector, with hygiene/PPE product language (\"Hygiene products and facilities management services from Parc can help prevent communicable diseases\"), matching the seed's Paper Hygiene framework; speciality added from that plain statement using the vocabulary already in this seed."
+  },
+  {
+   "name": "PCByVoice",
+   "date": "2026-09-22",
+   "aliases": [
+    "PCbyVoice Ltd"
+   ],
+   "specialities": [],
+   "evidence": "The company's own website pcbyvoice.com, read 22/09/2026: footer \"© PCbyVoice Ltd 2010 - 2026\". Companies House 07251002 confirms current name \"PCBYVOICE LTD\" (active), matching the already-recorded registered-address proof in this record's own link. Two-token form \"PCbyVoice Ltd\" added. The site's own text \"Visit our sister company at speechcomputing.com\" names Speech Computing as an explicitly separate sister company, so it was NOT added. No plain single statement of clinical scope found beyond assistive/environmental-control technology, which does not match any speciality string already used elsewhere in this seed closely enough to use without guessing, so specialities was left empty."
+  },
+  {
+   "name": "PD Neurotechnology Ltd",
+   "date": "2026-09-22",
+   "aliases": [
+    "PD Neurotechnology Limited"
+   ],
+   "specialities": [
+    "Neurosciences"
+   ],
+   "evidence": "Companies House 09801981, read 22/09/2026: registered name \"PD NEUROTECHNOLOGY LIMITED\" (active), differing from the seed's own \"Ltd\" abbreviation. Full-word \"Limited\" form added as a genuine alternate token sequence. The company's own website pdneurotechnology.com, read 22/09/2026, describes itself as \"a medical device company founded in 2015\" whose product \"PDMonitor®\" is \"a medical device for monitoring Parkinson's disease\" (a movement/neurological disorder); speciality \"Neurosciences\" added from that plain statement using the vocabulary already in this seed."
+  },
+  {
+   "name": "PFF Plastics",
+   "date": "2026-09-22",
+   "aliases": [
+    "PFF Packaging (North East)"
+   ],
+   "specialities": [
+    "Infection prevention and PPE"
+   ],
+   "evidence": "The company's own website pff.uk.com/about-us/, read 22/09/2026, states in its own company timeline that the business \"acquired Thermopak in Gateshead, Tyne & Wear, which became PFF Packaging (North East)\", the named division that supplies NHS aprons from this same site's own NHS Supply Chain page (\"Supplying Aprons for Use Within the NHS\"). This corroborates the framework-coverage run's earlier note (06/09/2026) that Find a Tender notice 2023/S 000-014652 (Polymer Aprons 2022) names the contractor as \"PFF Packaging (North East) Limited\"; Find a Tender itself returned HTTP 403 to a direct re-fetch this session, so only the site-confirmed short form \"PFF Packaging (North East)\" (without \"Limited\") was added, as that is the form actually seen on a source read this session. Speciality \"Infection prevention and PPE\" added from the site's own plain statement of its NHS apron/PPE manufacturing scope, using the vocabulary already in this seed."
+  },
+  {
+   "name": "Phonak/Sonova UK",
+   "date": "2026-09-22",
+   "aliases": [
+    "Sonova UK Limited",
+    "Phonak UK Limited"
+   ],
+   "specialities": [
+    "Audiology and hearing"
+   ],
+   "evidence": "Companies House 03417253, read 22/09/2026: current name \"SONOVA UK LIMITED\", with previous-names history \"BROOMCO (1350) LIMITED\" (1997) → \"PHONAK UK LIMITED\" (1997-2003) → \"PHONAK GROUP LIMITED\" (2003-2016) → \"SONOVA UK LIMITED\" (2016 onwards) — the same single legal entity across both brand names the seed's own display name already combines. \"Sonova UK Limited\" (current) and \"Phonak UK Limited\" (former, still the name used in NHS Supply Chain's own framework naming) both added as genuine multi-token forms of the same entity; \"Phonak Group Limited\" was not added as it is a less current, less-used intermediate name. Speciality \"Audiology and hearing\" added to match the seed's own \"Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories\" framework, the plain and only business this entity is described as doing."
+  },
+  {
+   "name": "Phoenix Dosimetry Ltd",
+   "date": "2026-09-22",
+   "aliases": [],
+   "specialities": [
+    "Oncology / radiotherapy"
+   ],
+   "evidence": "No alias added: the company's own website phoenix-dosimetry.co.uk, read 22/09/2026, footer states only \"Phoenix Dosimetry Ltd\", identical to the seed display name, and the site's news section states \"Phoenix Dosimetry Limited is now officially part of the HTSL Group\" — HTSL Group is the parent, excluded as a parent/subsidiary name per rule 4. Speciality added: the same site states \"Phoenix Dosimetry Limited is a company dedicated to providing personal radiation dosimeters, radiation monitoring equipment, peripherals and service support for Dosimetry Services and Hospitals\" and offers \"QA equipment for Radiotherapy departments\" under a dedicated \"Radiotherapy Dosimetry\" section, matching the seed's own Radiotherapy Ancillary Devices framework; \"Oncology / radiotherapy\" added from that plain statement using the vocabulary already in this seed."
   }
  ]
 }
