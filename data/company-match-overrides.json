@@ -112,12 +112,18 @@
     "16540209"
    ],
    "excludedName": "EXACTECH (UK) 2 LIMITED",
-   "reason": "EXACTECH (UK) 2 LIMITED was incorporated 2025-06-25, after the 2024 framework. The seed already records that EXACTECH (UK) LIMITED now files as ADVITA ORTHO UK LIMITED; this is a third entity.",
+   "reason": "EXACTECH (UK) 2 LIMITED was incorporated 2025-06-25, after the 2024 framework. The seed already records that EXACTECH (UK) LIMITED now files as ADVITA ORTHO UK LIMITED; this is a third entity. The supplier itself is ADVITA ORTHO UK LIMITED (05316864), recorded here against the two independent sources listed in correctSources. That identity was established on 18/09/2026 and written straight into data/company-financials.json; the 22/09 nightly refresh rebuilt that file from scratch and re-attached the same number by bare name search at 'probable', which is the exact recurrence ^o96 exists to stop. It is recorded here so the correction stops undoing itself overnight. The seed's own companyNumberProof cannot carry it: website_proof() accepts route 'website-registration' only, and Advita publishes no UK registration number on its own site.",
    "evidence": "https://find-and-update.company-information.service.gov.uk/company/16540209",
    "decidedOn": "2026-09-03",
    "rekeyedFrom": "Exactech",
    "rekeyedOn": "2026-09-19",
-   "rekeyedBecause": "Rekeyed 19/09/2026. override_for() looks the entry up by the supplier's canonical name only, with no alias fallback, so this exclusion had stopped protecting anything. The supplier is now seeded as 'Advita Ortho UK Limited' and carries 'Exactech' as an alias; this entry's own reason already records that EXACTECH (UK) LIMITED files as ADVITA ORTHO UK LIMITED. The decision is unchanged — only the key it hangs on."
+   "rekeyedBecause": "Rekeyed 19/09/2026. override_for() looks the entry up by the supplier's canonical name only, with no alias fallback, so this exclusion had stopped protecting anything. The supplier is now seeded as 'Advita Ortho UK Limited' and carries 'Exactech' as an alias; this entry's own reason already records that EXACTECH (UK) LIMITED files as ADVITA ORTHO UK LIMITED. The decision is unchanged — only the key it hangs on.",
+   "correct": "05316864",
+   "correctSources": [
+    "https://find-and-update.company-information.service.gov.uk/company/05316864 — ADVITA ORTHO UK LIMITED, active, incorporated 20 December 2004, registered office Prospect House, Fishing Line Road, Redditch, Worcestershire B97 6EW. Its previous company names list gives 'EXACTECH (UK) LIMITED, 20 Dec 2004 - 18 Feb 2026' — the same legal entity under its former name, which is the name NHS Supply Chain's TOS3 brief lists this supplier under. Read 22/09/2026.",
+    "https://advita.com/advita-ortho-launches-to-advance-patient-lives-through-orthopedic-innovation/ — Advita Ortho's own launch release (November 2025): 'Advita acquired these assets, and a dedicated team of employees, from Exactech in conjunction with Exactech's restructuring.' The company itself, independently of the register, states that it is the successor to the Exactech orthopaedic business. Read 22/09/2026."
+   ],
+   "correctDecidedOn": "2026-09-22"
   },
   "Farla Medical": {
    "exclude": [
