@@ -13,7 +13,7 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-16",
-  "differentiator.json published": 35748,
+  "differentiator.json published": 35778,
   "differentiator.json held": 52448
  },
  "counts": {
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 427,
-  "inScopeSuppliersNeedingCrawl": 332,
-  "inScopeSuppliersNeedingDomain": 302,
-  "suppliersRefused": 486,
+  "inScopeSuppliersNeedingCrawl": 330,
+  "inScopeSuppliersNeedingDomain": 300,
+  "suppliersRefused": 487,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 2,
   "suppliersDuplicateOfCaptured": 2,
@@ -1751,8 +1751,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "11 March 2028",
    "suppliersAwarded": 122,
-   "suppliersPublished": 31,
-   "coverage": 25.4,
+   "suppliersPublished": 32,
+   "coverage": 26.2,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -1890,10 +1890,6 @@
      "domain": null
     },
     {
-     "supplier": "HORIBA UK",
-     "domain": null
-    },
-    {
      "supplier": "Hygeco",
      "domain": null
     },
@@ -1915,10 +1911,6 @@
     },
     {
      "supplier": "Matrix Diagnostics",
-     "domain": null
-    },
-    {
-     "supplier": "Medical Wire & Equipment (MWE)",
      "domain": null
     },
     {
@@ -2039,7 +2031,6 @@
     "Genetic Signatures",
     "Genmed",
     "Glen Dimplex Home Appliances",
-    "HORIBA UK",
     "Hawksley & Sons",
     "Helena Biosciences",
     "Home Health (UK)",
@@ -2049,7 +2040,6 @@
     "Launch Diagnostics",
     "LumiraDx",
     "Matrix Diagnostics",
-    "Medical Wire & Equipment (MWE)",
     "Medline Scientific",
     "Msoft eSolutions",
     "Nova Biomedical",
@@ -2150,6 +2140,13 @@
      "domain": "www.haierbiomedical.com",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-25",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "HORIBA UK",
+     "domain": "www.horiba.com",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-22",
      "bucket": "refused"
     },
     {
@@ -2321,7 +2318,7 @@
     "capturedNothingCounted": 1,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 61
+    "needDomain": 59
    },
    "published": [
     "Abbott Diagnostics",
@@ -2342,6 +2339,7 @@
     "Thermo Fisher Scientific UK",
     "LTE Scientific Limited",
     "Mast Group",
+    "Medical Wire & Equipment (MWE)",
     "MedScience Distribution",
     "PHC Europe / PHCbi",
     "QIAGEN UK",
@@ -2404,14 +2402,12 @@
     "Hawksley & Sons",
     "Helena Biosciences",
     "Home Health (UK)",
-    "HORIBA UK",
     "Hygeco",
     "Immucor (IBG Immucor)",
     "International Scientific Supplies",
     "Launch Diagnostics",
     "LumiraDx",
     "Matrix Diagnostics",
-    "Medical Wire & Equipment (MWE)",
     "Medline Scientific",
     "Sterilab Services",
     "Msoft eSolutions",
@@ -2447,6 +2443,7 @@
     "Fujifilm Healthcare UK",
     "Grifols UK Ltd",
     "Haier Biomedical",
+    "HORIBA UK",
     "Kinetik Medical Devices",
     "Labcold",
     "Medecon Healthcare UK",
@@ -2458,7 +2455,7 @@
     "Williams Medical Supplies"
    ],
    "unknown": [],
-   "actionableTotal": 71,
+   "actionableTotal": 69,
    "blockedReason": null,
    "deferred": null
   },
