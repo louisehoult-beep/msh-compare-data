@@ -595,9 +595,18 @@ for bad in ["lectures theatre", "roofing", "re-surface", "water treatment", "cpa
     check("excluded: %s" % bad, bad not in htitles)
 for good in ["minimally invasive surgery", "anaesthetic machines", "airway management",
              "procedure packs", "surgical gloves", "washer disinfector",
-             "video laryngoscope", "diathermy", "surgical robot", "operating table",
-             "decontamination unit"]:
+             "video laryngoscope", "diathermy", "surgical robot", "operating table"]:
     check("present: %s" % good, good in htitles)
+# "decontamination unit" moved to the MATCHED set, 22/09/2026. "Hire of Mobile EDU
+# Decontamination Unit" (The Queen Elizabeth Hospital King's Lynn, 06/05/2026) is
+# still admitted by the rule, but this patch now matches 100 awards against an
+# AWARD_CAP of 40 and the cap line has moved forward to 28/05/2026 — so a true
+# statement about the data became a failing test about the display, and took the
+# nightly panels rebuild and the publish gate red with it. Same class as the
+# cardiology "Blood Cardioplegia Sets" move on 19/09: nothing lost, nothing
+# loosened, the rule still admits the row.
+check("the mobile decontamination unit row is matched by the rule",
+      "decontamination unit" in matched_titles(THEATRES))
 check("every award shown is one the matcher still admits",
       all(B.match_title(hrx, a["title"]) for a in h["awards"]))
 
@@ -1074,11 +1083,19 @@ print("\nTHE CLINICAL VOCABULARY IS MOSTLY ABSENT FROM THE DATA, AND SAID SO")
 # award on this patch and the panel is right to publish it. The word is now
 # asserted PRESENT rather than absent, because leaving it in the absent list
 # would make a correctly working filter look like a broken one on every run.
-for word in ["frailty", "geriatric", "delirium",
+for word in ["geriatric", "delirium",
              "urgent community response", "discharge to assess"]:
     check("nothing published on '%s' today" % word, word not in ftitles)
 check("reablement is published now that a real notice exists for it",
       "reablement" in ftitles)
+# FRAILTY MOVED, 22/09/2026, exactly the way reablement moved on 10/09 and for the
+# same reason. "Proactive Care (Berkshire West) - Frailty" (Berkshire Healthcare
+# NHS Foundation Trust, 22/09/2026) is a genuine award on this patch and the panel
+# is right to publish it. Asserted PRESENT now: leaving the speciality's own name
+# in the absent list would make a correctly working filter look like a broken one
+# on every run from today onwards.
+check("frailty is published now that a real notice exists for it",
+      "frailty" in ftitles)
 check("the include still carries the speciality's own vocabulary",
       all(w in B.SPECIALITY_RULES[FRAILTY]["include"]
           for w in ["frailty", "geriatric", "delirium", "reablement"]))
@@ -1356,10 +1373,17 @@ check("FFR is not matched, because it matches DIFFRACTOMETER",
 
 print("\nTRUE POSITIVES — awards that must be on this patch")
 for want in ["cardiac rhythm management", "structural heart", "impella",
-             "heart valves", "pacemakers", "cath lab",
+             "heart valves", "cath lab",
              "perfusion heart lung", "echocardiogram", "ecg",
              "aortic root", "cardiology stents"]:
     check("present: %s" % want, want in catitles)
+# "pacemakers" moved to the MATCHED set, 22/09/2026 — the time bomb the note below
+# named, going off. "Purchase of Pacemakers, ICD's & CRT's" (NHS National Services
+# Scotland, 18/12/2024) is still admitted by the rule; the matched total grew to 63
+# and the cap line moved past 18/12/2024 to 17/01/2025, so the row left the
+# published forty. Nothing lost, nothing loosened.
+check("the pacemaker row is matched by the rule",
+      "pacemakers" in matched_titles(CARDIAC))
 # Checked against the rule, not against the panel, because AWARD_CAP shows the 40
 # most recent of the 62 matched and these sit below that line today. The invariant
 # is that the rule admits them, which is what would break if a pattern were lost.
