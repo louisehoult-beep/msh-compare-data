@@ -33,6 +33,10 @@ WHAT IS REAL AND WHAT IS STUBBED
   would drift from the workflow silently, which is the whole failure mode here.
   Real: git, and a real lost push race against a real (local, bare) origin.
 
+  Stdlib only, including the YAML block-scalar read: the "Repo unit tests" job
+  installs no packages, so a third-party import here turns that job red rather
+  than testing anything (it did, on 22/09/2026).
+
   Stubbed: scripts/merge_seed_on_retry.py and verify.py. This test is about the
   GIT SEQUENCE around them, not about either one — merge_seed_on_retry.py has
   its own suite in test_merge_seed_on_retry.py, and verify.py has test_verify.py.
@@ -51,8 +55,6 @@ import shutil
 import subprocess
 import sys
 import tempfile
-
-import yaml
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 WORKFLOW = os.path.join(REPO, ".github", "workflows", "company-intelligence.yml")
@@ -101,16 +103,68 @@ def run(cmd, cwd, check=True, env=None):
                           text=True, env=full)
 
 
+# Markers that must appear in whatever we extract. The danger with pulling text
+# out of a file is not a loud parse error, it is quietly extracting the WRONG
+# text and then proving nothing about the real workflow. If the step is renamed,
+# restructured, or the extractor drifts, these turn that into a failure.
+EXPECTED_IN_SCRIPT = [
+    "pushed=0",
+    "scripts/merge_seed_on_retry.py",
+    "git rebase origin/main",
+    "git add data/supplier-seed.json",
+]
+
+
 def commit_script():
-    """The 'Commit updates' step's shell, straight out of the workflow YAML."""
-    with open(WORKFLOW) as fh:
-        doc = yaml.safe_load(fh)
-    for step in doc["jobs"]["refresh"]["steps"]:
-        if step.get("name") == STEP_NAME:
-            return step["run"]
-    raise AssertionError(
-        "no %r step in %s — the step was renamed and this test now proves "
-        "nothing. Point it at the new name." % (STEP_NAME, WORKFLOW))
+    """The 'Commit updates' step's shell, straight out of the workflow YAML.
+
+    Hand-rolled rather than pyyaml on purpose. The "Repo unit tests" job in
+    verify.yml installs nothing — it is checkout, setup-python, run — so every
+    test here is stdlib-only. Adding a pip step to a 45-second job for one
+    import is the wrong trade, and on 22/09/2026 importing yaml here turned that
+    job red on main and fired the phone alert. All this needs is one `run: |`
+    block scalar, which is a dozen lines of indentation handling.
+    """
+    with open(WORKFLOW, encoding="utf-8") as fh:
+        lines = fh.read().split("\n")
+
+    # Find the step, then its `run: |` key.
+    i = next((n for n, l in enumerate(lines)
+              if l.strip() == "- name: %s" % STEP_NAME), None)
+    if i is None:
+        raise AssertionError(
+            "no %r step in %s — the step was renamed and this test now proves "
+            "nothing. Point it at the new name." % (STEP_NAME, WORKFLOW))
+    run_at = next((n for n in range(i, len(lines))
+                   if lines[n].strip() in ("run: |", "run: |-", "run: |+")), None)
+    if run_at is None:
+        raise AssertionError(
+            "the %r step no longer holds a `run: |` block in %s. Whatever it "
+            "runs now is untested by this file." % (STEP_NAME, WORKFLOW))
+
+    # A block scalar's body is every following line indented deeper than the
+    # first body line's indent; blank lines belong to it whatever their width.
+    body = lines[run_at + 1:]
+    first = next((l for l in body if l.strip()), "")
+    indent = len(first) - len(first.lstrip(" "))
+    out = []
+    for line in body:
+        if not line.strip():
+            out.append("")
+            continue
+        if len(line) - len(line.lstrip(" ")) < indent:
+            break
+        out.append(line[indent:])
+    script = "\n".join(out).rstrip("\n") + "\n"
+
+    missing = [m for m in EXPECTED_IN_SCRIPT if m not in script]
+    if missing:
+        raise AssertionError(
+            "extracted the %r step but it is missing %s. Either the step "
+            "changed shape or this extractor is picking up the wrong text — "
+            "either way this test is no longer checking the retry loop."
+            % (STEP_NAME, ", ".join(repr(m) for m in missing)))
+    return script
 
 
 def build_race(root, script):
