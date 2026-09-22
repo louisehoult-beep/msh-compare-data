@@ -82,8 +82,19 @@ ELSEWHERE = {
 # reached the Hub. Run against clean main on 20/09 (green, 0.05s, leaves the
 # tree clean) and registered here the same evening. It runs in no workflow of
 # its own, so RUN is where it belongs.
+#
+# test_company_intelligence_push_retry.py (22/09/2026) is the first test here
+# that checks WORKFLOW YAML rather than Python. It had to be: the 21/09 bug that
+# threw away an hour of company-intelligence work lived in a shell block in
+# .github/workflows/company-intelligence.yml, where not one of the other
+# twenty-five tests could see it. It reads that step's `run:` script out of the
+# YAML at test time and executes it against a synthetic lost push race, so it
+# cannot drift from the workflow the way a copied-out snippet would. Offline,
+# ~7s, nearly all of it the loop's own `sleep 5`. RUN, not ELSEWHERE — it has no
+# workflow of its own.
 RUN = [
     "test_breadcrumb_division.py",
+    "test_company_intelligence_push_retry.py",
     "test_company_match_overrides.py",
     "test_company_press_story_links.py",
     "test_company_tiers.py",
