@@ -12,9 +12,9 @@
  },
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
-  "frameworks.json": "2026-09-16",
-  "differentiator.json published": 36002,
-  "differentiator.json held": 52220
+  "frameworks.json": "2026-09-22",
+  "differentiator.json published": 36009,
+  "differentiator.json held": 52213
  },
  "counts": {
   "frameworks": 122,
@@ -3531,8 +3531,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "9 August 2028",
    "suppliersAwarded": 60,
-   "suppliersPublished": 15,
-   "coverage": 25.0,
+   "suppliersPublished": 18,
+   "coverage": 30.0,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3790,13 +3790,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "M\u00f6lnlycke",
-     "domain": "molnlycke.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-08",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Stryker",
      "domain": "stryker.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -3832,6 +3825,13 @@
      "bucket": "published"
     },
     {
+     "supplier": "M\u00f6lnlycke",
+     "domain": "molnlycke.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-08",
+     "bucket": "published"
+    },
+    {
      "supplier": "TFX Group Ltd (Teleflex Medical)",
      "domain": "www.teleflex.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -3851,7 +3851,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 12,
+    "publishedElsewhereNeedingCategory": 9,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -3864,15 +3864,18 @@
     "Conmed UK Ltd",
     "HC21 (UK) Ltd",
     "Healthium Medtech UK",
+    "Hologic UK",
     "Ideal Medical Solutions",
     "Johnson & Johnson MedTech",
     "Olympus (KeyMed)",
     "MedScience Distribution",
     "Medtronic",
     "Meril UK Pvt Ltd",
+    "M\u00f6lnlycke",
     "Purple Surgical",
     "Schultz Medical (UK) Limited",
     "Sela Medical UK Ltd",
+    "Starkstrom Limited",
     "TFX Group Ltd (Teleflex Medical)"
    ],
    "publishedElsewhere": [
@@ -3880,12 +3883,9 @@
     "B. Braun Medical",
     "Bolton Surgical Limited",
     "Fannin (UK) Limited",
-    "Hologic UK",
     "Kebomed UK Ltd",
     "Medline Industries",
-    "M\u00f6lnlycke",
     "Reflex Medical Limited",
-    "Starkstrom Limited",
     "Stryker",
     "W.L. Gore & Associates"
    ],
@@ -3929,7 +3929,7 @@
     "Winners First Trading Limited"
    ],
    "unknown": [],
-   "actionableTotal": 13,
+   "actionableTotal": 10,
    "blockedReason": null,
    "deferred": null
   },
