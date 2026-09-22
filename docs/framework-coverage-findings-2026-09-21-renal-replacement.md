@@ -62,7 +62,9 @@ overturn either).
   Hemodialysis Machine" --product "Nephro Safe"` came back "sitemap carries
   no product URLs to match against" for both, and no NHSSC cache entry
   exists for this supplier. Same capture-route shape as Electro Spyres
-  (^o551) and QuidelOrtho (^o570) — a source-gap, not a mapping decision.
+  (^o551) — a source-gap, not a mapping decision. (QuidelOrtho, cited here as
+  the same shape, was NOT: its premise was wrong and its 309 rows published on
+  22/09/2026 with no code change — see framework-coverage-findings-2026-09-21.md.)
   The two decisions are banked in the category map and will publish
   automatically the moment either source becomes available.
 - **Domain lookups, all refused on crawl (genuine attempts, not left

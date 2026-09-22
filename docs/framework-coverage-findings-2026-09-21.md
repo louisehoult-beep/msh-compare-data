@@ -34,14 +34,45 @@ Managed Services** (`pathology` speciality). Coverage 23.8% → 25.4% (29 → 31
   with "Redirect —" URL-redirect artifacts and service listings — a nav-label
   capture-quality problem, not a vocabulary gap), "Nulexa System" and "Ortho
   Summit System" (3–4 products each, ambiguous/generic names, too thin to
-  call). **Still does not publish anything**: `quidelortho.com`'s sitemap
-  files real products under `/gb/en/laboratory-professionals/...` deep
-  taxonomy paths, not `/product/`-style slugs, so
-  `crawl_supplier_product_detail.py`'s slug matcher (and the default
-  `--product-path` list) cannot place any of them — needs its own
-  `--product-path` investigation of that taxonomy before a detail crawl can
-  populate sources. Left for a future run rather than guessing paths against a
-  322-product site inside this session's budget.
+  call).
+
+  **CORRECTED 22/09/2026 — the paragraph that stood here was wrong, and
+  `^o570` carried the error for a day.** It said `quidelortho.com` files its
+  real products under `/gb/en/laboratory-professionals/...` deep taxonomy
+  paths that the slug matcher and the default `--product-path` list cannot
+  place, and that the supplier therefore needed a `--product-path`
+  investigation before any detail crawl could work. Measured against the
+  site's own sitemap index on 22/09/2026, that is not what the site does.
+  Its GB sitemap holds 741 URLs, of which **310 sit under `/gb/en/products/`**
+  and only 76 under `/gb/en/laboratory-professionals/` (mostly resource and
+  landing pages). `products` is already in `find_product_url()`'s default
+  segment list, the pattern matches anywhere in the path, and the product's
+  own slug is the last segment — so the default matcher places these products
+  exactly as it is, on `/global/en/products/<family>/<slug>`. No
+  `--product-path` flag was needed and none was used.
+
+  **The real constraint was run time, not path shape.** `SITE_BUDGET_S` is 60
+  seconds per supplier and the sitemap-index build alone consumed most of it,
+  so each default-budget run reached one product. Re-run as
+  `--supplier "QuidelOrtho (Ortho Clinical Diagnostics UK)" --products-limit
+  200 --site-budget 480` — the flag that exists for exactly this case — it
+  captured **306 of 322 products**, and QuidelOrtho went from **0 to 309
+  published rows** (repo total 36,009 → 36,318, nothing else moved).
+  `verify.py` exit 0, 19 warnings, identical to the baseline measured on the
+  unmodified tree in the same session.
+
+  **One real fault was found on the way, and is NOT fixed here.** Two of the
+  five runs against this site aborted with "robots.txt disallows automated
+  reading — skipped entirely" and captured nothing, while
+  `quidelortho.com/robots.txt` reads `User-agent: * / Allow: /` and
+  `base.allowed("quidelortho.com")` returns `True` when called directly,
+  before and after each aborted run. The refusal is transient — most likely a
+  burst-triggered 403 on `/robots.txt`, which `allowed()` deliberately treats
+  as a site-wide refusal. Changing that rule is a behaviour change affecting
+  every supplier, so it was not made unattended; it is raised as its own
+  OUTSTANDING item instead. Until it is decided, a run that reports this
+  refusal should simply be re-run before the supplier is believed to be
+  refusing.
 - **LTE Scientific Limited** — 51 products, single flat "Uncategorised"
   division (site has no navigation structure), all genuinely laboratory
   decontamination/sterilisation equipment (autoclaves, washer-disinfectors,
