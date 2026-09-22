@@ -10,20 +10,20 @@
   "ref": "ETH-D503B3895",
   "contact": "contact@elevateandthrive.uk"
  },
- "generatedOn": "2026-09-15",
+ "generatedOn": "2026-09-22",
  "firstRun": true,
  "rule": "A careers page URL is recorded on the company's own link or a conventional path answering from its own domain. A role COUNT is recorded only where each role was read as a discrete record — an applicant tracking system's public API, or schema.org JobPosting structured data. Layouts are never pattern-counted. Everything else is refused, with the reason kept.",
  "scope": "UK ROLES ONLY. Where the source can filter by its own country facet, ukRoleCount is the company's own UK total and ukCountFrom says 'source'. Otherwise the whole board is read and UK roles are picked out from the locations the company published; roles it published with NO location are EXCLUDED and counted in rolesUnplaceable, because folding them in either direction would invent a number. totalRolesAllLocations, where present, is the source's own worldwide figure — context, never the headline.",
  "roleFlagRule": "commercial/clinical are matched from the job title against a fixed vocabulary in the script. A filing aid, not a claim about the role.",
  "ukRule": "uk is true only where the company's own published location names a UK nation, city or region; false where it names somewhere else; null where no location was published. rolesWithoutLocation gives the denominator a UK count must be read against.",
  "counts": {
-  "checked": 165,
-  "withCareersPage": 82,
-  "withRoleCount": 9,
-  "refused": 156,
-  "ukRoles": 277,
-  "completeBreakdowns": 9,
-  "rolesUnplaceable": 242
+  "checked": 172,
+  "withCareersPage": 90,
+  "withRoleCount": 10,
+  "refused": 162,
+  "ukRoles": 279,
+  "completeBreakdowns": 10,
+  "rolesUnplaceable": 330
  },
  "suppliers": [
   {
@@ -39,6 +39,14 @@
    "domain": "insightsurgery.com",
    "checkedOn": "2026-09-01",
    "careersUrl": "https://insightsurgery.com/about/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "3D Metal Printing Ltd",
+   "domain": "orthoscape.uk",
+   "checkedOn": "2026-09-22",
+   "careersUrl": "https://orthoscape.uk/careers/",
    "careersUrlFoundBy": "nav",
    "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
   },
@@ -2743,10 +2751,26 @@
    "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
   },
   {
+   "name": "Beaver Visitec International Sales Ltd",
+   "domain": "www.bvimedical.com",
+   "checkedOn": "2026-09-22",
+   "careersUrl": "https://www.bvimedical.com/careers/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
    "name": "Benmor Medical",
    "domain": "www.benmormedical.co.uk",
    "checkedOn": "2026-09-01",
    "careersUrl": "https://www.benmormedical.co.uk/current-vacancies-at-benmor-medical/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Biedermann Motech International LTD",
+   "domain": "www.biedermann.com",
+   "checkedOn": "2026-09-22",
+   "careersUrl": "https://www.biedermann.com/career/",
    "careersUrlFoundBy": "nav",
    "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
   },
@@ -2757,6 +2781,23 @@
    "careersUrl": "https://biocomposites.com/about/careers-at-biocomposites/",
    "careersUrlFoundBy": "nav",
    "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Biomet 3i UK, Ltd (ZimVie)",
+   "domain": "www.zimvie.com",
+   "checkedOn": "2026-09-22",
+   "careersUrl": "https://www.zimvie.com/en/careers.html",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Bioventus Cooperatief U.A",
+   "domain": "www.bioventus.com",
+   "checkedOn": "2026-09-22",
+   "careersUrl": "https://www.bioventus.com/careers/",
+   "careersUrlFoundBy": "nav",
+   "ats": "workday",
+   "refused": "workday detected (account https://osv-bioventus.wd501.myworkdayjobs.com/External) but its public API did not answer (HTTPError)"
   },
   {
    "name": "Birmingham Optical Group",
@@ -2799,11 +2840,55 @@
    "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
   },
   {
+   "name": "Bracco UK Limited",
+   "domain": "www.bracco.com",
+   "checkedOn": "2026-09-22",
+   "careersUrl": "https://www.bracco.com/careers",
+   "careersUrlFoundBy": "nav",
+   "ats": "workday",
+   "atsAccount": "bracco",
+   "countMethod": "ats",
+   "totalRolesAllLocations": 141,
+   "ukCountFrom": "location strings published by the company",
+   "rolesUnplaceable": 88,
+   "ukRoleCount": 2,
+   "rolesRetrieved": 2,
+   "complete": true,
+   "commercialRoles": 1,
+   "clinicalRoles": 0,
+   "roles": [
+    {
+     "title": "Sales Operations Admin - Pricing & Contracts Lead",
+     "location": "GBR - Oxford (BUK)",
+     "uk": true,
+     "url": "https://bracco.wd103.myworkdayjobs.com/BraccoCareers/job/GBR---Oxford-BUK/Sales-Operations---Business-Support-Analyst_JR100209",
+     "commercial": true,
+     "clinical": false
+    },
+    {
+     "title": "VP, Research & Development",
+     "location": "GBR - Oxford (BED)",
+     "uk": true,
+     "url": "https://bracco.wd103.myworkdayjobs.com/BraccoCareers/job/GBR---Oxford-BED/VP--Research---Development_JR100289",
+     "commercial": false,
+     "clinical": false
+    }
+   ]
+  },
+  {
    "name": "Brainlab Ltd",
    "domain": "www.brainlab.com",
    "checkedOn": "2026-09-15",
    "careersUrl": "https://www.brainlab.com/career/",
    "careersUrlFoundBy": "path",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
+  },
+  {
+   "name": "Brandon Medical Company Ltd",
+   "domain": "www.brandon-medical.com",
+   "checkedOn": "2026-09-22",
+   "careersUrl": "https://www.brandon-medical.com/about-brandon-medical/careers/",
+   "careersUrlFoundBy": "nav",
    "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
   },
   {
@@ -2889,6 +2974,14 @@
      "clinical": false
     }
    ]
+  },
+  {
+   "name": "Cargo Services Far East Limited",
+   "domain": "cargofe.com",
+   "checkedOn": "2026-09-22",
+   "careersUrl": "https://www.cargofe.com/human-resources/career-opportunities/",
+   "careersUrlFoundBy": "nav",
+   "refused": "the page publishes no role records (no applicant tracking system and no JobPosting structured data), so no count is stated"
   },
   {
    "name": "Carl Zeiss Ltd",
