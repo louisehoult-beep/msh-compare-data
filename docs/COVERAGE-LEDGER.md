@@ -38,13 +38,13 @@ the decision each waits on; delete the entry once that decision is made.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
-| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 32 | 26.2% | 68 | 35 | STARTED |
+| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 33 | 27.0% | 67 | 35 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 27 | 26.7% | 20 | 66 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 17 | 27.0% | 31 | 24 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 10 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 16 | 27.6% | 27 | 26 | STARTED |
-| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 15 | 26.3% | 20 | 31 | STARTED |
-| Urology and Bowel Management | continence | 57 | 17 | 29.8% | 29 | 33 | STARTED |
+| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 16 | 28.1% | 18 | 32 | STARTED |
+| Urology and Bowel Management | continence | 57 | 17 | 29.8% | 28 | 34 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 17 | 40 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 43 | STARTED · DEFERRED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 15 | 28.3% | 15 | 29 | STARTED |
@@ -52,7 +52,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 18 | 24 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 11 | 25.6% | 13 | 27 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 12 | 32.4% | 6 | 27 | STARTED |
-| Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 18 | 16 | STARTED |
+| Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 17 | 17 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 11 | 31.4% | 8 | 21 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 10 | 30.3% | 12 | 19 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 13 | 11 | STARTED |
@@ -60,7 +60,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 13 | 19 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 5 | 23 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 10 | 37.0% | 7 | 17 | STARTED |
-| Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 7 | 28.0% | 12 | 8 | STARTED |
+| Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 8 | 32.0% | 11 | 8 | STARTED |
 | Renal Replacement Therapies Services, Technologies and Consumables | renal | 25 | 7 | 28.0% | 7 | 17 | STARTED |
 | Neuromodulation Devices and Associated Products | neuro | 23 | 12 | 52.2% | 5 | 16 | STARTED |
 | Physiotherapy and Occupational Therapy | rehab | 22 | 6 | 27.3% | 10 | 11 | STARTED |
@@ -96,7 +96,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 37 | 25 | UNMAPPED |
 | Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 27 | 23 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 29 | 18 | UNMAPPED |
-| Procedure Packs | — | 29 | 0 | 0.0% | 18 | 17 | UNMAPPED |
+| Procedure Packs | — | 29 | 0 | 0.0% | 17 | 18 | UNMAPPED |
 | Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics | — | 28 | 0 | 0.0% | 24 | 7 | UNMAPPED |
 | Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 23 | 8 | UNMAPPED |
 | Cardiac and Pulmonary Diagnostics and Exercise (Stress) Testing Solutions | — | 25 | 0 | 0.0% | 16 | 11 | UNMAPPED |

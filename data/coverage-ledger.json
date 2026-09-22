@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 36009,
-  "differentiator.json held": 52213
+  "differentiator.json published": 36378,
+  "differentiator.json held": 51906
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 427,
-  "inScopeSuppliersNeedingCrawl": 327,
+  "inScopeSuppliersNeedingCrawl": 324,
   "inScopeSuppliersNeedingDomain": 297,
-  "suppliersRefused": 488,
+  "suppliersRefused": 489,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 2,
   "suppliersDuplicateOfCaptured": 2,
@@ -1751,8 +1751,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "11 March 2028",
    "suppliersAwarded": 122,
-   "suppliersPublished": 32,
-   "coverage": 26.2,
+   "suppliersPublished": 33,
+   "coverage": 27.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -1761,10 +1761,6 @@
     "pathology"
    ],
    "crawlWorklist": [
-    {
-     "supplier": "QuidelOrtho (Ortho Clinical Diagnostics UK)",
-     "domain": "quidelortho.com"
-    },
     {
      "supplier": "1 Stop Medical Supplies",
      "domain": null
@@ -2316,7 +2312,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 8,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 1,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -2343,6 +2339,7 @@
     "Mast Group",
     "Medical Wire & Equipment (MWE)",
     "MedScience Distribution",
+    "QuidelOrtho (Ortho Clinical Diagnostics UK)",
     "PHC Europe / PHCbi",
     "QIAGEN UK",
     "Radiometer UK",
@@ -2366,9 +2363,7 @@
     "Pasante Healthcare",
     "Sychem"
    ],
-   "heldOnly": [
-    "QuidelOrtho (Ortho Clinical Diagnostics UK)"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [
     "Agilent Technologies UK"
    ],
@@ -2457,7 +2452,7 @@
     "Wolf Laboratories"
    ],
    "unknown": [],
-   "actionableTotal": 68,
+   "actionableTotal": 67,
    "blockedReason": null,
    "deferred": null
   },
@@ -4328,8 +4323,8 @@
    "category": "Rehabilitation and Community",
    "ends": "30 June 2027",
    "suppliersAwarded": 57,
-   "suppliersPublished": 15,
-   "coverage": 26.3,
+   "suppliersPublished": 16,
+   "coverage": 28.1,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -4339,16 +4334,8 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Croyde Medical",
-     "domain": "croydemedical.co.uk"
-    },
-    {
      "supplier": "Organon UK",
      "domain": "organon.com"
-    },
-    {
-     "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
-     "domain": "penninehealthcare.co.uk"
     }
    ],
    "domainsMissing": [],
@@ -4401,6 +4388,13 @@
      "domain": "henryschein.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-12",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
+     "domain": "penninehealthcare.co.uk",
+     "reason": "the site's WordPress API returned HTTP 401; the WooCommerce Store API returned HTTP 401; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-22",
      "bucket": "refused"
     },
     {
@@ -4584,16 +4578,17 @@
    "actionable": {
     "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 15,
-    "heldNeedingCategory": 3,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 1,
+    "crawlable": 0,
     "needDomain": 0
    },
    "published": [
     "Argon Medical Devices UK Ltd",
     "Bodywise (UK) Ltd",
     "Bridea Medical B.V",
+    "Croyde Medical",
     "Pelvic Relief",
     "Farla Medical",
     "iMEDicare Ltd",
@@ -4625,14 +4620,11 @@
     "Medichill UK Ltd"
    ],
    "heldOnly": [
-    "Croyde Medical",
     "Healthcare 25 Ltd",
     "Organon UK"
    ],
    "capturedNothingCounted": [],
-   "notCrawled": [
-    "Pennine Healthcare (Ivor Shaw Ltd)"
-   ],
+   "notCrawled": [],
    "refused": [
     "Ceannaire Medical",
     "Dpek Healthcare Ltd",
@@ -4641,6 +4633,7 @@
     "Eurosurgical Ltd",
     "GenX MediCare Ltd",
     "Henry Schien Medical",
+    "Pennine Healthcare (Ivor Shaw Ltd)",
     "LTC Healthcare (Leeds Trading Company)",
     "Lil-Lets UK Limited",
     "Medical Devices Technology Inter Ltd",
@@ -4660,7 +4653,7 @@
    "unknown": [
     "Kimal Renal Care"
    ],
-   "actionableTotal": 20,
+   "actionableTotal": 18,
    "blockedReason": null,
    "deferred": null
   },
@@ -4699,10 +4692,6 @@
     {
      "supplier": "Key Health Solutions",
      "domain": null
-    },
-    {
-     "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
-     "domain": "penninehealthcare.co.uk"
     },
     {
      "supplier": "Redland embh Group Limited",
@@ -4776,6 +4765,13 @@
      "domain": "peakmedical.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
+     "domain": "penninehealthcare.co.uk",
+     "reason": "the site's WordPress API returned HTTP 401; the WooCommerce Store API returned HTTP 401; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-22",
      "bucket": "refused"
     },
     {
@@ -4977,7 +4973,7 @@
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 1,
+    "crawlable": 0,
     "needDomain": 8
    },
    "published": [
@@ -5028,7 +5024,6 @@
     "C&P Medical Trading Ltd",
     "E&E MEDICAL SUPPLIES LIMITED",
     "Key Health Solutions",
-    "Pennine Healthcare (Ivor Shaw Ltd)",
     "Redland embh Group Limited",
     "UNOQUIP GMBH",
     "Venture Healthcare Ltd"
@@ -5041,6 +5036,7 @@
     "Flexicare Medical",
     "GenX MediCare Ltd",
     "Peak Medical Ltd",
+    "Pennine Healthcare (Ivor Shaw Ltd)",
     "RB Medical Engineering Ltd",
     "Rocialle Healthcare",
     "Sharon Services (UK) Ltd",
@@ -5050,7 +5046,7 @@
     "KCI Medical Limited (3m)",
     "Salts Healthcare (Ostomy)"
    ],
-   "actionableTotal": 29,
+   "actionableTotal": 28,
    "blockedReason": null,
    "deferred": null
   },
@@ -6241,10 +6237,6 @@
      "domain": "apollo-ht.co.uk"
     },
     {
-     "supplier": "Croyde Medical",
-     "domain": "croydemedical.co.uk"
-    },
-    {
      "supplier": "Wealden Rehab",
      "domain": "wealdenrehab.com"
     }
@@ -6448,8 +6440,8 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 10,
-    "heldNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 11,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -6485,6 +6477,7 @@
    ],
    "publishedElsewhere": [
     "BES Healthcare",
+    "Croyde Medical",
     "Drive DeVilbiss Healthcare UK",
     "Fannin (UK) Limited",
     "Baxter / Hillrom",
@@ -6497,7 +6490,6 @@
    ],
    "heldOnly": [
     "Apollo Healthcare Technologies",
-    "Croyde Medical",
     "Wealden Rehab"
    ],
    "capturedNothingCounted": [],
@@ -7430,10 +7422,6 @@
      "domain": null
     },
     {
-     "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
-     "domain": "penninehealthcare.co.uk"
-    },
-    {
      "supplier": "Philips Respironics",
      "domain": null
     },
@@ -7491,6 +7479,13 @@
      "domain": "kinetikwellbeing.com",
      "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 403: Forbidden)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
+     "domain": "penninehealthcare.co.uk",
+     "reason": "the site's WordPress API returned HTTP 401; the WooCommerce Store API returned HTTP 401; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-22",
      "bucket": "refused"
     },
     {
@@ -7577,7 +7572,7 @@
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 1,
+    "crawlable": 0,
     "needDomain": 5
    },
    "published": [
@@ -7615,7 +7610,6 @@
     "Aquilant Critical Care",
     "B.N.O.S Meditech Ltd",
     "Gce Group Ltd",
-    "Pennine Healthcare (Ivor Shaw Ltd)",
     "Philips Respironics",
     "Syringa Wholesale Distributor"
    ],
@@ -7626,10 +7620,11 @@
     "GE HealthCare",
     "GenX MediCare Ltd",
     "Kinetik Medical Devices",
+    "Pennine Healthcare (Ivor Shaw Ltd)",
     "Schiller UK Limited"
    ],
    "unknown": [],
-   "actionableTotal": 18,
+   "actionableTotal": 17,
    "blockedReason": null,
    "deferred": null
   },
@@ -9276,8 +9271,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "28 February 2029",
    "suppliersAwarded": 25,
-   "suppliersPublished": 7,
-   "coverage": 28.0,
+   "suppliersPublished": 8,
+   "coverage": 32.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9287,10 +9282,6 @@
     "neonatal"
    ],
    "crawlWorklist": [
-    {
-     "supplier": "Croyde Medical",
-     "domain": "croydemedical.co.uk"
-    },
     {
      "supplier": "Atom Medical Corporation UK ltd",
      "domain": null
@@ -9399,13 +9390,14 @@
    "actionable": {
     "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 3,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
     "needDomain": 7
    },
    "published": [
+    "Croyde Medical",
     "Draeger Medical UK",
     "Hamilton Medical UK",
     "Henleys Medical Supplies Limited",
@@ -9419,9 +9411,7 @@
     "Penlon",
     "Philips"
    ],
-   "heldOnly": [
-    "Croyde Medical"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Atom Medical Corporation UK ltd",
@@ -9443,7 +9433,7 @@
    "unknown": [
     "Scott Medical Ltd"
    ],
-   "actionableTotal": 12,
+   "actionableTotal": 11,
    "blockedReason": null,
    "deferred": null
   },
@@ -14484,10 +14474,6 @@
      "domain": null
     },
     {
-     "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
-     "domain": "penninehealthcare.co.uk"
-    },
-    {
      "supplier": "Plasmic Healthsciences Uk Limited",
      "domain": null
     },
@@ -14544,6 +14530,13 @@
      "domain": "oscartech-uk.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Pennine Healthcare (Ivor Shaw Ltd)",
+     "domain": "penninehealthcare.co.uk",
+     "reason": "the site's WordPress API returned HTTP 401; the WooCommerce Store API returned HTTP 401; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-22",
      "bucket": "refused"
     },
     {
@@ -14632,7 +14625,7 @@
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 1,
+    "crawlable": 0,
     "needDomain": 4
    },
    "published": [],
@@ -14657,7 +14650,6 @@
    "notCrawled": [
     "Accrington Surgical Inst. Suppliers",
     "O&M Halyard Uk Limited",
-    "Pennine Healthcare (Ivor Shaw Ltd)",
     "Plasmic Healthsciences Uk Limited",
     "Vascular Perspectives Ltd"
    ],
@@ -14668,6 +14660,7 @@
     "H & R Healthcare Ltd",
     "IMS Euro Ltd",
     "OscarTech UK",
+    "Pennine Healthcare (Ivor Shaw Ltd)",
     "Prosum Medical Ltd",
     "Richardson Healthcare",
     "Rocialle Healthcare",
@@ -14675,7 +14668,7 @@
     "Unisurge International Limited"
    ],
    "unknown": [],
-   "actionableTotal": 18,
+   "actionableTotal": 17,
    "blockedReason": null,
    "deferred": null
   },
@@ -19808,10 +19801,6 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "Croyde Medical",
-     "domain": "croydemedical.co.uk"
-    },
-    {
      "supplier": "Wealden Rehab",
      "domain": "wealdenrehab.com"
     },
@@ -19891,8 +19880,8 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 27,
-    "publishedElsewhereNeedingCategory": 14,
-    "heldNeedingCategory": 2,
+    "publishedElsewhereNeedingCategory": 15,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -19904,6 +19893,7 @@
     "Acime UK Ltd",
     "Agile Medical",
     "Anetic Aid Ltd",
+    "Croyde Medical",
     "Drive DeVilbiss Healthcare UK",
     "Felgains",
     "Hospital Services Limited",
@@ -19916,7 +19906,6 @@
     "Sychem"
    ],
    "heldOnly": [
-    "Croyde Medical",
     "Wealden Rehab"
    ],
    "capturedNothingCounted": [],

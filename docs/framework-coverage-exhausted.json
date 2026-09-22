@@ -27,6 +27,29 @@
       ],
       "reason": "Same structural shape as Ultrasound Scanners (docs/framework-coverage-findings-2026-09-21-ultrasound-scanners.md already checked this framework 21/09 with the same result, reconfirmed today via the ledger's refusedSuppliers block): Philips and Siemens Healthineers carry only unrelated NHSSC-cache stub products (CPAP masks, pathology analysers) with their own sites uncrawlable; Stryker's own crawled range is real but genuinely not CT-scanner equipment. No permitted route left.",
       "wouldReopenIf": "Any of the 3 suppliers gets a new/changed crawl result, or a new supplier is awarded on this framework."
+    },
+    {
+      "framework": "Operating Theatres Equipment and Related Accessories and Services",
+      "checkedOn": "2026-09-22",
+      "coverageAtCheck": "25.6% (11/43)",
+      "suppliersChecked": [
+        "Acime UK Ltd", "Arjo", "Boston Scientific", "Coloplast", "Cook Medical",
+        "Felgains", "Baxter / Hillrom", "Howard Wright Europe",
+        "Ideal Medical Solutions", "Olympus (KeyMed)", "LINET UK", "Promed Limited",
+        "Ingles Ltd"
+      ],
+      "reason": "All 13 remaining suppliers checked. The 12 publishedElsewhere suppliers' captured product ranges are real and already correctly categorised, none of it theatre equipment: Acime (handling:furniture/rehab:stand), Arjo (handling:hoist/mattress/bed, rehab:bath), Boston Scientific/Cook Medical (vascular/endourology stents), Coloplast (wound/ostomy/continence), Felgains (rehab:chair, handling:bed), Baxter/Hillrom (monitoring, ENT), Howard Wright (handling:furniture/bed/mattress), Ideal Medical Solutions/Olympus KeyMed (mis:instruments/energy), LINET UK (handling:bed, rehab:chair), Promed (endourology:laser). Four of the twelve (Boston Scientific, Coloplast, Cook Medical, Baxter/Hillrom, Olympus) are also recorded crawl-refusals for this framework, so re-crawling them is forbidden by the brief's own rule; the other seven have genuine, unrelated multi-division catalogues already crawled with no held theatre-equipment items hiding behind an unmapped division (checked heldBySupplier for Acime/Felgains/Ideal Medical Solutions/Promed — nothing theatre-related). The 13th, Ingles Ltd, is `needDomain`: no domain exists because identity is genuinely unconfirmed (companyNumberNote: 'every Companies House hit is an accountancy or advisory firm, no medical company of this name') — inventing a domain to crawl would violate the never-fuzzy-match rule, and the record is already correctly published as identityUnconfirmed. No permitted route left on any of the 13.",
+      "wouldReopenIf": "Any of the 12 mapped-elsewhere suppliers gets a new/changed crawl result revealing a theatre-equipment range, or Ingles Ltd's identity is confirmed from a primary source (giving it a crawlable domain), or a new supplier is awarded on this framework."
+    },
+    {
+      "framework": "Polymer Aprons",
+      "checkedOn": "2026-09-22",
+      "coverageAtCheck": "25.0% (2/8)",
+      "suppliersChecked": [
+        "GBUK Group"
+      ],
+      "reason": "The only actionable item left (1) is GBUK Group's stub record, already diagnosed as the GBUK Ltd/GBUK Group duplicate-identity merge (OUTSTANDING ^o333, 07/09/2026) — an identity decision reserved for Lou, not a crawl (the stub's own note already confirms gbukgroup.com returns 0 results for 'apron' and carries no PPE category, so crawling it would not even reach the awarded range). Polystar Plastics Ltd's separate stub/merge (^o334) is already bucketed 'published' and not counted in Left. No new investigation needed; this restates the existing escalation rather than re-deciding it.",
+      "wouldReopenIf": "Lou rules on OUTSTANDING ^o333/^o334, or a new supplier is awarded on this framework, or GBUK Group's own crawl changes."
     }
   ]
 }
