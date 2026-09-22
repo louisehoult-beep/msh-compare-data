@@ -56,7 +56,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 11 | 31.4% | 8 | 21 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 10 | 30.3% | 12 | 19 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 13 | 11 | STARTED |
-| Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 8 | 25.8% | 8 | 21 | STARTED |
+| Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 6 | 21 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 13 | 19 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 5 | 23 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 10 | 37.0% | 7 | 17 | STARTED |
