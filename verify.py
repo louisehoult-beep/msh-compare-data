@@ -5415,8 +5415,18 @@ def check_awareness(doc):
                 if not re.match(r"^\d{4}-\d{2}-\d{2}$", start):
                     FAIL("awareness", "%s: occurrence start '%s' is not an ISO date."
                                       % (eid, start))
-                if start > newest:
-                    newest = start
+                end = (o.get("end") or "")
+                if end and not re.match(r"^\d{4}-\d{2}-\d{2}$", end):
+                    FAIL("awareness", "%s: occurrence end '%s' is not an ISO date."
+                                      % (eid, end))
+                # A multi-day occurrence (e.g. an NHS "awareness week") is judged by
+                # when it ENDS, not when it starts — comparing `start` alone marked a
+                # currently-running, freshly-verified week as stale on its first day
+                # (Organ Donation Week 2026, 21-27 Sept, found 22/09/2026). `end`
+                # falls back to `start` for a single-day entry, unchanged from before.
+                last_day = end or start
+                if last_day > newest:
+                    newest = last_day
             # The annual-review teeth. An announced date the owner has not restated is
             # the exact thing that goes stale, so an entry whose newest stated occurrence
             # has passed must be re-read, not left sitting there looking current.
