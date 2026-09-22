@@ -46,7 +46,11 @@ WHAT IS REAL AND WHAT IS STUBBED
   computed.
 
 Offline. No network, no API keys. ~7s, nearly all of it the loop's own
-`sleep 5`. Leaves the tree clean: everything happens under a temp dir.
+`sleep 5`. Leaves the tree clean: everything happens under a temp dir. It also
+pins everything it can that differs between this laptop and a GitHub runner —
+the initial branch name most of all — because a test that only passes on the
+machine it was written on is worse than no test: it turns the job red on main
+and fires the phone alert for a fault in itself.
 """
 
 import json
@@ -175,7 +179,14 @@ def build_race(root, script):
     origin/main has since moved on with a peer's curated edit to the seed.
     """
     origin = os.path.join(root, "origin.git")
-    run(["git", "init", "-q", "--bare", origin], cwd=root)
+    # -b main, not the ambient default. `git init --bare` takes its branch name
+    # from init.defaultBranch, which is "main" on this laptop and "master" on a
+    # GitHub runner. With a master HEAD and a main branch pushed into it, the
+    # runner clone below checks out NOTHING — clone succeeds, working tree is
+    # empty — and the test dies on a missing data/ for a reason that has nothing
+    # to do with what it is testing. That is how this file went red on main on
+    # 22/09/2026 while passing locally.
+    run(["git", "init", "-q", "--bare", "-b", "main", origin], cwd=root)
 
     # --- the starting point both sides share -----------------------------
     seed = os.path.join(root, "seed")
@@ -206,6 +217,14 @@ def build_race(root, script):
     # --- the runner: an hour of work, committed, not yet pushed ----------
     runner = os.path.join(root, "runner")
     run(["git", "clone", "-q", origin, runner], cwd=root)
+    # A clone whose working tree came out empty is a harness fault, not a
+    # finding. Say so here rather than letting it surface as a FileNotFoundError
+    # on some file three steps later.
+    if not os.path.isdir(os.path.join(runner, "data")):
+        raise AssertionError(
+            "the runner clone has no data/ — its working tree came out empty. "
+            "Check the bare origin's HEAD matches the branch that was pushed "
+            "(git init --bare -b main), rather than init.defaultBranch.")
     run(["git", "config", "user.email", "t@example.invalid"], cwd=runner)
     run(["git", "config", "user.name", "t"], cwd=runner)
     for path in TRACKED:
