@@ -171,6 +171,23 @@ class StoreTests(unittest.TestCase):
         self.assertTrue(calls[1][1].endswith("?id=eq.1"))
 
 
+class StoreErrorTests(unittest.TestCase):
+    def test_http_error_carries_supabase_body_and_hint(self):
+        import io
+        import urllib.error
+        def opener(req, data, timeout):
+            raise urllib.error.HTTPError(req.full_url, 404, "Not Found", {},
+                                         io.BytesIO(b'{"code":"PGRST205","message":"Could not find the table"}'))
+        st = pa.Store("https://x.supabase.co", "SERVICE", opener=opener)
+        with self.assertRaises(pa.SupabaseError) as cm:
+            st.subscriptions()
+        msg = str(cm.exception)
+        self.assertIn("HTTP 404", msg)
+        self.assertIn("PGRST205", msg)
+        self.assertIn("docs/PUSH-ALERTS.md", msg)
+        self.assertNotIn("SERVICE", msg)
+
+
 class ConfigTests(unittest.TestCase):
     def test_config_carries_only_public_values(self):
         news = {"stroke": [], "urology": []}

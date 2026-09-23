@@ -231,6 +231,19 @@ def build_message(new_by_slug: dict[str, list[dict]], wanted: list[str] | None,
 # --------------------------------------------------------------------------
 # Supabase (plain REST, service-role key)
 # --------------------------------------------------------------------------
+class SupabaseError(RuntimeError):
+    pass
+
+
+_HINTS = {
+    404: ("\nHint: the push_subscriptions table is not in the project SUPABASE_URL points at. "
+          "Run the SQL in docs/PUSH-ALERTS.md in THAT project, and check SUPABASE_URL is just "
+          "https://<project-ref>.supabase.co with nothing after it."),
+    401: "\nHint: SUPABASE_SERVICE_KEY is not a valid key for this project.",
+    403: "\nHint: the key has no access to push_subscriptions; SUPABASE_SERVICE_KEY must be the service_role/secret key.",
+}
+
+
 class Store:
     def __init__(self, url: str, service_key: str, opener=None):
         self.base = url.rstrip("/") + "/rest/v1/" + TABLE
@@ -248,8 +261,21 @@ class Store:
         if body is not None:
             data = json.dumps(body).encode("utf-8")
             req.add_header("Content-Type", "application/json")
-        with self._open(req, data, timeout=30) as resp:
-            raw = resp.read()
+        try:
+            with self._open(req, data, timeout=30) as resp:
+                raw = resp.read()
+        except urllib.error.HTTPError as exc:
+            # Say what Supabase said. A bare "HTTP Error 404" (23/09/2026) could
+            # mean a missing table, a wrong project or a wrong URL; the body
+            # (e.g. PGRST205 "Could not find the table") tells them apart.
+            # The body never contains the key; the URL is the table's path.
+            try:
+                body = exc.read().decode("utf-8", "replace")[:400]
+            except Exception:
+                body = ""
+            raise SupabaseError("Supabase %s %s returned HTTP %s: %s%s" % (
+                method, self.base.split("/rest/v1/")[-1] + query.split("&")[0], exc.code, body,
+                _HINTS.get(exc.code, ""))) from None
         return json.loads(raw) if raw else None
 
     def subscriptions(self) -> list[dict]:
