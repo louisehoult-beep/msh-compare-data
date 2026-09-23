@@ -53,6 +53,30 @@ grant insert on public.push_subscriptions to anon;
 The sender uses the **service-role** key, which bypasses row-level security,
 to read the table and delete rows whose push service answers 404/410.
 
+**Diagnostics table (added 23/09/2026).** The page logs where a phone got
+stuck (iPhone not opened from the Home Screen, permission refused, save
+failed) so nobody has to ask a member to read out an error. Insert-only for
+anon, same as the subscriptions table; nothing personal beyond the browser's
+user-agent string.
+
+```sql
+create table if not exists public.push_events (
+  id          bigint generated always as identity primary key,
+  stage       text not null,        -- subscribed | fail-permission | fail-subscribe | fail-save | fail-resave | ios-not-home-screen | unsupported | fail-boot
+  detail      text,
+  standalone  boolean,
+  permission  text,
+  user_agent  text,
+  created_at  timestamptz not null default now()
+);
+alter table public.push_events enable row level security;
+create policy "anon may log" on public.push_events for insert to anon with check (true);
+grant insert on public.push_events to anon;
+```
+
+Read it in the Supabase SQL editor:
+`select * from push_events order by created_at desc limit 50;`
+
 Changing specialities on the page = the browser drops its old push address
 and takes a new one, then inserts a new row. The old row is pruned on the
 next send. So the anon role never needs update or delete.
@@ -107,17 +131,32 @@ replaces the notification on the lock screen rather than stacking a second.
 
 * Dry run: Actions, "Phone alerts (web push)…", Run workflow, tick dry run.
   Prints the messages that would go out; changes nothing.
+* Real test to every subscribed phone: Run workflow, tick **test alert**.
+  Sends "Test alert: phone alerts are working" to every row now; the news
+  seen-set is untouched, so the next morning's digest is unaffected.
 * Locally: `python3 scripts/push_alerts.py send --dry-run`.
 * Unit tests: `python3 test_push_alerts.py` (registered in
   `scripts/run_unit_tests.py`).
 * A member can tap "Show me what an alert looks like" on the page: that is a
-  local notification from the service worker, no server involved.
+  local notification from the service worker, no server involved. It proves
+  nothing about delivery; the page says so under the button.
+* The page only says "Alerts are on" once Supabase has the row. Every visit
+  re-saves the phone's subscription (a 409 means it is already on file), so a
+  signup whose save never landed repairs itself when the page is next opened.
+  Found 23/09/2026: Lou's iPhone showed the test button and "on" while the
+  table held no iPhone row at all, because "on" was read from the phone's
+  own state.
 
 ## Phones
 
 * Android (Chrome, Edge, Samsung Internet, Firefox): works from the page directly.
-* iPhone/iPad: iOS 16.4+ only, and only once the page is added to the Home
-  Screen (Safari rule, not ours). The page detects iOS and says so.
+* iPhone/iPad: iOS 16.4+ only, and only from the page's OWN Home Screen icon
+  (Safari rule, not ours). Anywhere else on iOS the page hides the button and
+  shows three steps instead. The trap: a member who has the **Hub** saved to
+  their Home Screen and taps the alerts link from inside it gets the alerts
+  page in a pop-over sheet, which can never get permission; it flashes and
+  drops back to the Hub. They must open the link in Safari and add the
+  alerts page itself.
 * Desktop browsers work too; the alert appears as a system notification.
 
 ## Rotating the VAPID key

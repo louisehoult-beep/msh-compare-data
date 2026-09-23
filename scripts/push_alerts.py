@@ -13,11 +13,12 @@ data/speciality-news/<slug>.json are new since the last run, and sends each
 subscriber ONE notification covering the specialities they chose. Tapping it
 opens the speciality page on the Hub.
 
-Three subcommands:
+Four subcommands:
 
   keys           mint a VAPID key pair (once; the private half is a secret)
   build-config   write alerts/config.json from the news slugs + the secrets
   send           send the digest; --dry-run prints instead of sending
+  test           send a fixed test alert to every subscriber now (state untouched)
 
 WHY THE SHAPE IS WHAT IT IS
 ---------------------------
@@ -498,6 +499,45 @@ def cmd_send(args) -> int:
     return 0
 
 
+TEST_MESSAGE = {
+    "title": "Medical Sales Intelligence Hub",
+    "body": "Test alert: phone alerts are working. Your first real one arrives the next morning there is news.",
+    "url": HUB_HOME,
+    "tag": "msh-test",
+}
+
+
+def cmd_test(_args) -> int:
+    """Send TEST_MESSAGE to every subscriber now. Never touches the seen-set."""
+    url = os.environ.get("SUPABASE_URL", "").strip()
+    svc = os.environ.get("SUPABASE_SERVICE_KEY", "").strip()
+    priv = os.environ.get("VAPID_PRIVATE_KEY", "").strip()
+    missing = [n for n, v in (("SUPABASE_URL", url), ("SUPABASE_SERVICE_KEY", svc),
+                              ("VAPID_PRIVATE_KEY", priv)) if not v]
+    if missing:
+        print("test: NOT CONFIGURED — missing %s" % ", ".join(missing))
+        return 1
+    store = Store(url, svc)
+    rows = store.subscriptions()
+    print("test: %d subscription(s) on file" % len(rows))
+    send = pywebpush_sender(priv)
+    counts = {"subscribers": len(rows), "sent": 0, "failed": 0, "pruned": 0}
+    for row in rows:
+        ok, gone, detail = send(row, TEST_MESSAGE)
+        if ok:
+            counts["sent"] += 1
+            print("  sent   %s" % _host(row["endpoint"]))
+        elif gone:
+            counts["pruned"] += 1
+            store.delete(row["id"])
+            print("  pruned %s (%s)" % (_host(row["endpoint"]), detail))
+        else:
+            counts["failed"] += 1
+            print("  FAILED %s (%s)" % (_host(row["endpoint"]), detail))
+    print("test: %s" % json.dumps(counts))
+    return 1 if counts["failed"] else 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -511,6 +551,7 @@ def main(argv=None) -> int:
     s.add_argument("--state", default=STATE_PATH)
     s.add_argument("--dry-run", action="store_true")
     s.set_defaults(fn=cmd_send)
+    sub.add_parser("test", help="send a test alert to every subscriber now").set_defaults(fn=cmd_test)
     args = ap.parse_args(argv)
     return args.fn(args)
 

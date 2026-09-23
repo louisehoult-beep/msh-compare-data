@@ -41,6 +41,8 @@
   .all { background:#f3f5f8; border-radius:8px; padding:8px 10px; margin-bottom:6px; font-weight:700; }
   .tiny { font-size:12px; color:var(--dim); margin-top:10px; }
   .ios { display:none; }
+  .steps { margin:0; padding-left:20px; }
+  .steps li { margin-bottom:8px; }
   a { color:var(--navy); }
 </style>
 </head>
@@ -56,8 +58,13 @@
   </div>
 
   <div class="card ios" id="ios">
-    <h2>iPhone or iPad? One step first</h2>
-    <p>Safari only allows alerts from pages saved to your Home Screen. Tap the <strong>Share</strong> button, choose <strong>Add to Home Screen</strong>, then open <strong>Hub alerts</strong> from there and come back to this screen.</p>
+    <h2>On iPhone, three quick steps</h2>
+    <p>iPhone only allows alerts from the <strong>Hub alerts</strong> icon on your Home Screen, so:</p>
+    <ol class="steps">
+      <li>Make sure this page is open in <strong>Safari</strong>. If you tapped the link inside another app, use its menu to <strong>Open in Safari</strong>.</li>
+      <li>Tap <strong>Share</strong> (the square with an arrow), then <strong>Add to Home Screen</strong>, then <strong>Add</strong>.</li>
+      <li>Close Safari, tap the new <strong>Hub alerts</strong> icon on your Home Screen, and turn alerts on there.</li>
+    </ol>
   </div>
 
   <div class="card" id="pick">
@@ -69,9 +76,10 @@
     <p class="tiny">Changing your choice later? Just tick differently and tap Save.</p>
   </div>
 
-  <div class="card">
+  <div class="card" id="act">
     <button class="primary" id="go" disabled>Loading…</button>
     <button class="ghost" id="test" style="display:none">Show me what an alert looks like</button>
+    <p class="tiny" id="testnote" style="display:none">That is a preview made by this phone. Real alerts come from the Hub each morning there is news.</p>
     <button class="ghost" id="off" style="display:none">Turn alerts off on this phone</button>
     <div id="status"></div>
     <p class="tiny">Alerts are sent by Elevate and Thrive Ltd for the Medical Sales Intelligence Hub. Your phone's push address is stored so we can send to it, and deleted when you turn alerts off. Nothing else is collected. <a href="https://medsalesintelligencehub.co.uk/terms/">Terms</a>.</p>
@@ -128,6 +136,29 @@
     document.querySelectorAll('#specs input').forEach(function (i) { i.disabled = $('all').checked; });
   }
 
+  // Best effort: tells the Hub where a phone got stuck, so nobody has to
+  // describe an error message. Never blocks or changes what the member sees.
+  function report(stage, detail) {
+    try {
+      if (!cfg || !cfg.supabaseUrl || !cfg.supabaseAnonKey) { return; }
+      fetch(cfg.supabaseUrl + '/rest/v1/push_events', {
+        method: 'POST', keepalive: true,
+        headers: { 'apikey': cfg.supabaseAnonKey, 'Authorization': 'Bearer ' + cfg.supabaseAnonKey,
+                   'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+        body: JSON.stringify({ stage: stage, detail: String(detail || '').slice(0, 300),
+                               standalone: standalone, permission: ('Notification' in window) ? Notification.permission : 'none',
+                               user_agent: navigator.userAgent.slice(0, 200) })
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
+  function showOn(specs) {
+    $('go').textContent = 'Save changes'; $('go').disabled = false;
+    $('off').style.display = ''; $('test').style.display = '';
+    status('ok', 'Alerts are on for this phone.\nYou will hear from us the next morning there is something new' +
+      (specs && specs.length ? ' in your ' + specs.length + ' chosen specialit' + (specs.length === 1 ? 'y.' : 'ies.') : '.'));
+  }
+
   function post(sub, specs) {
     var json = sub.toJSON();
     var body = {
@@ -152,8 +183,10 @@
     var specs = chosen();
     if (!$('all').checked && specs.length === 0) { status('warn', 'Tick at least one speciality, or "All specialities".'); return; }
     $('go').disabled = true; status('info', 'Asking your phone for permission…');
+    var stage = 'permission';
     Notification.requestPermission().then(function (perm) {
-      if (perm !== 'granted') { throw new Error('Permission was not given. You can allow notifications for this page in your phone settings and try again.'); }
+      if (perm !== 'granted') { throw new Error('Notifications are switched off for Hub alerts. Turn them on in your phone Settings (Notifications, Hub alerts) and tap the button again.'); }
+      stage = 'subscribe';
       return reg.pushManager.getSubscription();
     }).then(function (old) {
       // A subscription is one endpoint with one set of specialities. To change
@@ -163,14 +196,15 @@
     }).then(function () {
       return reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToBytes(cfg.vapidPublicKey) });
     }).then(function (sub) {
+      stage = 'save';
       return post(sub, specs);
     }).then(function () {
       remember({ specs: specs, at: new Date().toISOString() });
-      status('ok', 'Alerts are on for this phone.\nYou will hear from us the next morning there is something new' + (specs.length ? ' in your ' + specs.length + ' chosen specialit' + (specs.length === 1 ? 'y.' : 'ies.') : '.'));
-      $('go').textContent = 'Save changes'; $('go').disabled = false;
-      $('off').style.display = ''; $('test').style.display = '';
+      report('subscribed', specs.length ? specs.join(',') : 'all');
+      showOn(specs);
     }).catch(function (err) {
-      status('bad', String(err.message || err)); $('go').disabled = false;
+      report('fail-' + stage, err && (err.message || err));
+      status('bad', 'Alerts are not on yet. ' + String(err.message || err)); $('go').disabled = false;
     });
   }
 
@@ -187,6 +221,7 @@
   }
 
   function testNotification() {
+    $('testnote').style.display = '';
     reg.showNotification('Vascular Access and IV Therapy: 2 new items', {
       body: 'This is what an alert looks like. Tap one and you land on the speciality page.',
       icon: 'icon-192.png', tag: 'msh-test', data: { url: cfg.hubOrigin + '/medical-sales-hub/' }
@@ -194,15 +229,23 @@
   }
 
   function boot() {
-    if (isIOS) { $('ios').style.display = 'block'; }
     fetch('config.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (c) {
       cfg = c;
       var pre = saved();
       renderSpecs(c.specialities || [], pre ? pre.specs : []);
+      // iPhone only grants push to the Home Screen icon. Anywhere else (a
+      // Safari tab, an in-app browser, a sheet opened from another Home
+      // Screen app) show the three steps and nothing that can fail.
+      if (isIOS && !standalone) {
+        $('ios').style.display = 'block'; $('pick').style.display = 'none'; $('act').style.display = 'none';
+        report('ios-not-home-screen', '');
+        return;
+      }
       if (!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)) {
         $('go').textContent = 'Not available in this browser';
-        if (isIOS && !standalone) { status('warn', 'On iPhone, add this page to your Home Screen first (see above), then open it from there.'); }
-        else { status('warn', 'This browser cannot receive web push alerts. On Android use Chrome; on iPhone add the page to your Home Screen.'); }
+        status('warn', isIOS ? 'This iPhone needs iOS 16.4 or later for alerts (Settings, General, Software Update).'
+                             : 'This browser cannot receive alerts. On Android, open this page in Chrome.');
+        report('unsupported', '');
         return;
       }
       if (!c.vapidPublicKey || !c.supabaseUrl || !c.supabaseAnonKey) {
@@ -216,21 +259,28 @@
       }).then(function () {
         return reg.pushManager.getSubscription();
       }).then(function (sub) {
-        if (sub && Notification.permission === 'granted') {
-          $('go').textContent = 'Save changes';
-          $('off').style.display = ''; $('test').style.display = '';
-          status('ok', 'Alerts are on for this phone' + (pre && pre.at ? ' (since ' + new Date(pre.at).toLocaleDateString('en-GB') + ').' : '.'));
-        } else {
-          $('go').textContent = 'Turn on alerts';
-        }
-        $('go').disabled = false;
         $('go').addEventListener('click', subscribe);
         $('off').addEventListener('click', unsubscribe);
         $('test').addEventListener('click', testNotification);
+        if (!(sub && Notification.permission === 'granted')) {
+          $('go').textContent = 'Turn on alerts'; $('go').disabled = false;
+          return;
+        }
+        // The phone thinks it is subscribed. Only say "on" once the Hub has
+        // it on file: re-save every visit (409 = already there), so a signup
+        // whose save never landed repairs itself just by opening the page.
+        status('info', 'Checking your alerts…');
+        var specs = pre && pre.specs ? pre.specs : [];
+        return post(sub, specs).then(function () { showOn(specs); }, function (err) {
+          report('fail-resave', err && (err.message || err));
+          $('go').textContent = 'Turn on alerts'; $('go').disabled = false;
+          status('bad', 'Alerts are not on yet. Tap Turn on alerts to try again.');
+        });
       });
     }).catch(function (err) {
       $('go').textContent = 'Something went wrong';
       status('bad', 'Could not load the alerts settings: ' + String(err.message || err));
+      report('fail-boot', err && (err.message || err));
     });
   }
   boot();

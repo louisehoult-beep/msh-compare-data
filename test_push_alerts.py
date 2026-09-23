@@ -255,6 +255,43 @@ class CliTests(unittest.TestCase):
         self.assertEqual(pa.main(["build-config", "--news-dir", tmp, "--config", cfg]), 0)
         self.assertEqual(json.load(open(cfg))["generatedAt"], first["generatedAt"])
 
+    def test_test_alert_goes_to_every_row_and_prunes_gone(self):
+        rows = [{"id": 1, "endpoint": "https://fcm.googleapis.com/a", "p256dh": "k", "auth": "a"},
+                {"id": 2, "endpoint": "https://web.push.apple.com/b", "p256dh": "k", "auth": "a"}]
+        sent, deleted = [], []
+
+        class FakeStore:
+            def __init__(self, *a): pass
+            def subscriptions(self): return rows
+            def delete(self, rid): deleted.append(rid)
+
+        def fake_sender(_priv):
+            def send(row, msg):
+                sent.append((row["id"], msg["tag"]))
+                return (row["id"] == 1), (row["id"] == 2), "x"
+            return send
+
+        env = {"SUPABASE_URL": "https://p.supabase.co", "SUPABASE_SERVICE_KEY": "s", "VAPID_PRIVATE_KEY": "v"}
+        old = (pa.Store, pa.pywebpush_sender, {k: os.environ.get(k) for k in env})
+        pa.Store, pa.pywebpush_sender = FakeStore, fake_sender
+        os.environ.update(env)
+        try:
+            self.assertEqual(pa.main(["test"]), 0)
+        finally:
+            pa.Store, pa.pywebpush_sender = old[0], old[1]
+            for k, v in old[2].items():
+                if v is None:
+                    os.environ.pop(k, None)
+                else:
+                    os.environ[k] = v
+        self.assertEqual(sent, [(1, "msh-test"), (2, "msh-test")])
+        self.assertEqual(deleted, [2])
+
+    def test_test_alert_unconfigured_fails_loudly(self):
+        for k in ("SUPABASE_URL", "SUPABASE_SERVICE_KEY", "VAPID_PRIVATE_KEY"):
+            os.environ.pop(k, None)
+        self.assertEqual(pa.main(["test"]), 1)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=1)
