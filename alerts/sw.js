@@ -33,8 +33,32 @@ self.addEventListener('push', function (event) {
     renotify: true,
     data: { url: data.url || HUB_HOME }
   };
-  event.waitUntil(self.registration.showNotification(title, options));
+  // Show first (iOS requires every push to put a notification up), then log
+  // that this phone received and showed it. Added 23/09/2026: Apple accepted
+  // a test for Lou's iPhone but nothing appeared, and without this there was
+  // no way to tell "never arrived" from "arrived, not shown" (Focus, settings).
+  event.waitUntil(
+    self.registration.showNotification(title, options)
+      .then(function () { return logEvent('received-shown', options.tag); },
+            function (err) { return logEvent('received-show-failed', String(err && (err.message || err))); })
+  );
 });
+
+// Best effort, never throws: one row in the Supabase push_events table, using
+// the same public anon key the sign-up page uses (insert-only).
+function logEvent(stage, detail) {
+  return fetch('config.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (c) {
+    if (!c.supabaseUrl || !c.supabaseAnonKey) { return; }
+    return fetch(c.supabaseUrl + '/rest/v1/push_events', {
+      method: 'POST',
+      headers: { 'apikey': c.supabaseAnonKey, 'Authorization': 'Bearer ' + c.supabaseAnonKey,
+                 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ stage: stage, detail: String(detail || '').slice(0, 300),
+                             permission: (self.Notification && Notification.permission) || null,
+                             user_agent: String(self.navigator && navigator.userAgent || '').slice(0, 200) })
+    });
+  }).catch(function () {});
+}
 
 self.addEventListener('notificationclick', function (event) {
   event.notification.close();
