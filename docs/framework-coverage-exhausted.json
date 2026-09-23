@@ -50,6 +50,33 @@
       ],
       "reason": "The only actionable item left (1) is GBUK Group's stub record, already diagnosed as the GBUK Ltd/GBUK Group duplicate-identity merge (OUTSTANDING ^o333, 07/09/2026) — an identity decision reserved for Lou, not a crawl (the stub's own note already confirms gbukgroup.com returns 0 results for 'apron' and carries no PPE category, so crawling it would not even reach the awarded range). Polystar Plastics Ltd's separate stub/merge (^o334) is already bucketed 'published' and not counted in Left. No new investigation needed; this restates the existing escalation rather than re-deciding it.",
       "wouldReopenIf": "Lou rules on OUTSTANDING ^o333/^o334, or a new supplier is awarded on this framework, or GBUK Group's own crawl changes."
+    },
+    {
+      "framework": "Surgical Instruments",
+      "checkedOn": "2026-09-23",
+      "coverageAtCheck": "26.0% (13/50)",
+      "suppliersChecked": [
+        "Decree Thermo", "Scientific Medical Clinical Limited", "U.K. Medical Limited",
+        "Steris IMS Ltd", "Avicenna Surgical Limited", "B. Braun Medical",
+        "Beaver Visitec International Sales Ltd", "BioSpectrum Ltd",
+        "Fannin (UK) Limited", "GBUK Group", "HC21 (UK) Ltd",
+        "Henry Schein UK Holdings", "Kebomed UK Ltd", "ProSys International Ltd",
+        "Daniels Health (Sharpsmart)", "Sheffmed Limited", "Timesco Healthcare Ltd",
+        "Vernacare"
+      ],
+      "reason": "All 18 remaining suppliers checked. The 3 needDomain suppliers were freshly re-searched: U.K. Medical Limited's own candidate domain uk-medical.co.uk does not resolve at all (DNS failure); Decree Thermo's candidate domain decreethermo.com resolves but serves only a Plesk hosting default-page stub (no site behind it, expired TLS cert); Scientific Medical Clinical Limited (NI041931, Belfast) has no discoverable website by any search route. None is a confirmable domain — inventing one would breach the never-guess rule. Steris IMS Ltd's 69 held products are a real crawl (Endoscopy Devices, Endoscope/Instrument Cleaning, Sterility Assurance, Decontamination, Surgical Lighting) but none of it is a surgical:bone/clamp/curette/elev/forceps/knife/needle/probe/retract/scissor/spec/suction item — Steris IMS's real business on this site is decontamination/endoscopy-reprocessing equipment, a different speciality, correctly held. The 14 publishedElsewhere suppliers' captured ranges were checked product-by-product: Avicenna's only borderline line (mis:instruments, 'Reusable/Single Use Bipolar Forceps') is electrosurgery energy-device consumables, correctly filed under mis:instruments not surgical:forceps; the rest (B. Braun vascular/wound/renal/continence, Beaver Visitec ophthalmology, BioSpectrum endourology/gynae/ENT, GBUK's 251 products across nutrition/handling/wound/vascular, HC21 theatre/cardiology/rehab, Henry Schein dental, Kebomed nutrition, ProSys continence, Daniels Health sharps bins, Sheffmed ENT, Timesco respiratory/monitoring/ortho, Vernacare hygiene/CSSD) carry no surgical hand-instrument line at all. No permitted route left on any of the 18.",
+      "wouldReopenIf": "Any of the 3 needDomain suppliers gets a working, confirmable website; any of the 14 publishedElsewhere/1 held supplier gets a new/changed crawl result revealing a real surgical-instrument line; or a new supplier is awarded on this framework."
+    },
+    {
+      "framework": "Examination Gloves",
+      "checkedOn": "2026-09-23",
+      "coverageAtCheck": "26.3% (5/19)",
+      "suppliersChecked": [
+        "Globus (Shetland) Ltd", "ORN International T/A Spectra Corporate",
+        "Abena UK Limited", "Medline Industries", "Reliance Medical", "Vernacare"
+      ],
+      "reason": "All 6 remaining suppliers checked. ORN International T/A Spectra Corporate's only candidate domain (spectracorporate.com, found via web search) does not resolve at all (DNS failure) — no confirmable domain exists. Globus (Shetland) Ltd's held capture (881 products, globusgroup.com) is a FAILED capture under the nav-labels-are-not-products policy shape (data/identity-vocabulary-policy.json): 848 of 881 entries are industry-sector/brand navigation labels ('Construction', 'Automotive', 'Healthcare', 'Showa', 'Skytec'), and the 15-item 'Hand Protection' division is itself navigation sub-labels ('Chemical Protection', 'Multi Purpose', 'Medium Cut Protection') rather than real product names — held is correct per that standing policy, no ruling needed, and no route exists without a targeted recrawl of real product pages (out of scope for a data batch). The 4 publishedElsewhere suppliers carry no glove line in their captured ranges: Abena (continence pads only), Medline (1 NHSSC-stub respiratory item), Reliance Medical (first aid), Vernacare (hygiene/ENT/CSSD). No permitted route left on any of the 6.",
+      "wouldReopenIf": "ORN International/Spectra Corporate gets a working, confirmable website; Globus (Shetland) Ltd gets a recrawl that reaches real product pages instead of navigation labels; any of the 4 publishedElsewhere suppliers gets a new/changed crawl result revealing a glove line; or a new supplier is awarded on this framework."
     }
   ]
 }
