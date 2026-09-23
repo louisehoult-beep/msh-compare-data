@@ -131,10 +131,14 @@ themselves, and the offer is "your candidates arrive prepared".
 ## What limits the lists today
 
 * Careers coverage is thin: 5 companies with readable role records out of 90
-  with a careers page, because 63 publish no structured roles and the
-  SuccessFactors and Teamtailor boards render in the browser. Reading those two
-  platforms' public listing endpoints is the single biggest lever for lists 2 to 4.
-  Not verified: whether each company's board exposes one.
+  with a careers page, because 63 publish no structured roles and, until
+  23/09/2026, SuccessFactors and Teamtailor boards were detect-only. The
+  careers script now reads both by following the listing to each job page and
+  taking that page's JobPosting record (the same evidence bar as the jsonld
+  route; a link with no record behind it counts nothing). Seven suppliers on
+  the 22/09 rows sat on those platforms. Not verified live: this was written
+  offline against fixtures (`test_careers_jobpages.py`) because the build
+  container cannot reach those hosts. The Tuesday careers run is the proof.
 * Employee counts exist for 216 of 1,133 companies. A company with no count
   scores as "unknown" and is not penalised, so large groups appear alongside
   the target band. Read the size band before sending.
