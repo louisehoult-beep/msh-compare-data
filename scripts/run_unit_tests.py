@@ -105,6 +105,7 @@ RUN = [
     "test_hospital_prescribing_resources.py",
     "test_identity_policy.py",
     "test_merge_seed_on_retry.py",
+    "test_my_hub_catalogue.py",
     "test_numeric_id_division.py",
     "test_numeric_slug_detail.py",
     "test_product_detail_cursor.py",
