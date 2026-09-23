@@ -572,7 +572,7 @@ SPECIALITY_RULES = {
             r"robotic surger\w*|surgical robot\w*|perioperative|peri-operative|"
             r"smoke evacuat\w*|surgical light\w*)\b"
         ),
-        # Seven patterns. Every one matched a real row, was read, and was rejected:
+        # Eight patterns. Every one matched a real row, was read, and was rejected:
         #   lecture theatre     -> "DN720 Roofing Works: The Lectures Theatre at
         #                          Willerby Hill", Humber Teaching NHS FT. Roofing on
         #                          a lecture theatre, CPV 44112500. A building, not an
@@ -622,9 +622,20 @@ SPECIALITY_RULES = {
         #                          "decontamination" is never used on the framework
         #                          pattern. It is the only row in this data carrying the
         #                          word, and asbestos can never mean sterile services.
+        #   theatre ventilation,
+        #   laminar flow        -> "PAHT - UCV Theatres Ventilation & Laminar Flow
+        #                          Maintenance", The Princess Alexandra Hospital NHS
+        #                          Trust, 22/09/2026. Ultra-clean ventilation plant
+        #                          servicing, caught on bare "theatres". Estates HVAC,
+        #                          the same class as the water treatment and asbestos
+        #                          rows above. Checked 23/09/2026 against every title in
+        #                          the feeds: the only other rows carrying "ventilat" on
+        #                          this rule are anaesthetic machines and ventilators,
+        #                          and neither contains either phrase.
         "exclude": (
             r"\b(lectures? theatre|road re-?surfac\w*|water treatment|asbestos|"
-            r"positive airway pressure|cpap|medicines|coagulation products)\b"
+            r"positive airway pressure|cpap|medicines|coagulation products|"
+            r"theatres? ventilation|laminar flow)\b"
         ),
         # Seven CPV families that really are this patch, read off the notices that
         # matched: 33161 electrosurgical units, 33162 operating theatre devices and

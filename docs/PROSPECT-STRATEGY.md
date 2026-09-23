@@ -119,14 +119,39 @@ for the same interview in the same fortnight.
   subscribers, 47% open rate) for referrals: every member knows a colleague who
   is thinking about it.
 
-## Product 4: Kirkham Young member area
+## Product 4: Clinical to Commercial, licensed to recruiters
 
-This is a partner channel, not a direct sale. The prospect is the next partner:
-a recruiter or an employer's talent team that wants the same member area for
-its own candidates. Not verified in this repo: what the Kirkham Young arrangement
-covers commercially. Until that is written down, the list is the recruiters that
-post the roles in `training-candidate-intents.csv`, found on the adverts
-themselves, and the offer is "your candidates arrive prepared".
+**The model, proven once.** A specialist recruiter licenses the Clinical to
+Commercial package for its own candidates, for a year, as a flat fee. Kirkham
+Young was the first. The candidates get the preparation; the recruiter gets
+candidates who interview better and a reason for clinicians to register with
+them rather than a rival. Commercial terms are kept out of this public file.
+
+**Ideal fit.** A recruitment agency that places clinicians into first
+commercial roles: clinical specialist, associate territory manager, nurse
+advisor. Small enough that it has no training arm of its own, busy enough to
+place a steady flow of clinicians each year. Second fit: an employer's talent
+or early-careers team running a graduate or associate intake.
+
+**How they are found.** No LinkedIn needed:
+
+* The adverts. Agencies put their own name on the medical sales roles they
+  advertise on public job boards. Every agency that has advertised a
+  clinical-to-commercial role in the last three months is a prospect.
+* The Recruitment and Employment Confederation member directory, filtered to
+  healthcare and life sciences.
+* The employers in `training-employers.csv`: a company running an associate
+  intake is the second fit, and its careers page names who runs it.
+* Referral. The first licensee knows its competitors better than any list does.
+
+Not verified: how many agencies meet the fit today. The first job is to build
+that list from the adverts and count it.
+
+**How they are reached.** Lead with the outcome, not the course. "Your
+clinicians arrive at interview knowing how the NHS buys, with a ninety-day plan
+that names hospitals." Offer the recruiter a free look at the member area for
+one candidate they are placing now, so the first proof is their own placement.
+Naming Kirkham Young as the first licensee needs their permission first.
 
 ## What limits the lists today
 
