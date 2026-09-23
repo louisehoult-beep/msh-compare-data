@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 36488,
-  "differentiator.json held": 51879
+  "differentiator.json published": 36512,
+  "differentiator.json held": 52122
  },
  "counts": {
   "frameworks": 122,
@@ -24,13 +24,13 @@
   "unmapped": 48,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 427,
-  "inScopeSuppliersNeedingCrawl": 323,
+  "supplierNamesUnresolved": 424,
+  "inScopeSuppliersNeedingCrawl": 322,
   "inScopeSuppliersNeedingDomain": 295,
-  "suppliersRefused": 490,
+  "suppliersRefused": 491,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 2,
-  "suppliersDuplicateOfCaptured": 2,
+  "suppliersDuplicateOfCaptured": 3,
   "blockedFrameworks": 1,
   "deferredFrameworks": 3
  },
@@ -573,10 +573,6 @@
   ],
   [
    "Orange Technology Ltd",
-   1
-  ],
-  [
-   "Parc Supplies",
    1
   ],
   [
@@ -1548,15 +1544,7 @@
    1
   ],
   [
-   "Prestige Healthcare (London) Ltd",
-   1
-  ],
-  [
    "Reed Medical Ltd",
-   1
-  ],
-  [
-   "Thesis Technology Products Ltd",
    1
   ],
   [
@@ -3139,8 +3127,8 @@
    "category": "Rehabilitation and Community",
    "ends": "2 March 2027",
    "suppliersAwarded": 63,
-   "suppliersPublished": 17,
-   "coverage": 27.0,
+   "suppliersPublished": 18,
+   "coverage": 28.6,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3224,10 +3212,6 @@
     {
      "supplier": "Prestige Health Footwear Ltd",
      "domain": null
-    },
-    {
-     "supplier": "Darco UK Ltd (formerly V-M Orthotics Ltd)",
-     "domain": "darcouk.com"
     }
    ],
    "domainsMissing": [
@@ -3250,7 +3234,13 @@
     "Podopro UK Ltd",
     "Prestige Health Footwear Ltd"
    ],
-   "duplicateOfCapturedSupplier": [],
+   "duplicateOfCapturedSupplier": [
+    {
+     "supplier": "Thesis Technology Products Ltd",
+     "domain": "limboproducts.co.uk",
+     "alreadyCapturedAs": "Thesis (LimbO)"
+    }
+   ],
    "refusedSuppliers": [
     {
      "supplier": "Algeo",
@@ -3351,6 +3341,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Darco UK Ltd (formerly V-M Orthotics Ltd)",
+     "domain": "darcouk.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-23",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Walters Medical Ltd",
      "domain": "www.waltersmedical.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
@@ -3435,12 +3432,12 @@
     "orthotics:upper"
    ],
    "actionable": {
-    "unresolvedNames": 3,
+    "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 8,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
-    "crawlable": 1,
+    "crawlable": 0,
     "needDomain": 18
    },
    "published": [
@@ -3457,6 +3454,7 @@
     "Medalin Limited",
     "medi UK",
     "Performance Health International Limited",
+    "Prestige Healthcare (London) Ltd",
     "Promedics Orthopaedics Ltd",
     "Talarmade Limited",
     "Thuasne UK Ltd",
@@ -3473,7 +3471,8 @@
     "Win Health Medical Ltd"
    ],
    "heldOnly": [
-    "Footlabs Ltd"
+    "Footlabs Ltd",
+    "Thesis Technology Products Ltd"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -3494,8 +3493,7 @@
     "Medezine Ltd",
     "Medfac UK Ltd",
     "Piedro Ltd",
-    "Prestige Health Footwear Ltd",
-    "Darco UK Ltd (formerly V-M Orthotics Ltd)"
+    "Prestige Health Footwear Ltd"
    ],
    "refused": [
     "Algeo",
@@ -3512,14 +3510,13 @@
     "Repton Medical Ltd",
     "Steroplast Healthcare Ltd",
     "TayCare Medical Ltd",
+    "Darco UK Ltd (formerly V-M Orthotics Ltd)",
     "Walters Medical Ltd"
    ],
    "unknown": [
-    "Prestige Healthcare (London) Ltd",
-    "Reed Medical Ltd",
-    "Thesis Technology Products Ltd"
+    "Reed Medical Ltd"
    ],
-   "actionableTotal": 31,
+   "actionableTotal": 29,
    "blockedReason": null,
    "deferred": null
   },
@@ -19622,11 +19619,16 @@
    ],
    "crawlWorklist": [
     {
+     "supplier": "Parc Global Supplies",
+     "domain": null
+    },
+    {
      "supplier": "Premium Wipes & Textiles Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
+    "Parc Global Supplies",
     "Premium Wipes & Textiles Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -19703,13 +19705,13 @@
     "facilities:washroom"
    ],
    "actionable": {
-    "unresolvedNames": 42,
+    "unresolvedNames": 41,
     "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 2
    },
    "published": [
     "Crest Medical Ltd",
@@ -19727,6 +19729,7 @@
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
+    "Parc Global Supplies",
     "Premium Wipes & Textiles Ltd"
    ],
    "refused": [
@@ -19767,7 +19770,6 @@
     "Nilfisk Ltd",
     "Numatic International Ltd",
     "Orange Technology Ltd",
-    "Parc Supplies",
     "Pattersons (Bristol) Ltd",
     "Primeline Sales & Marketing UK",
     "PVA Hygiene",
