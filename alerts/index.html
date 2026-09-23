@@ -58,13 +58,9 @@
   </div>
 
   <div class="card ios" id="ios">
-    <h2>On iPhone, three quick steps</h2>
-    <p>iPhone only allows alerts from the <strong>Hub alerts</strong> icon on your Home Screen, so:</p>
-    <ol class="steps">
-      <li>Make sure this page is open in <strong>Safari</strong>. If you tapped the link inside another app, use its menu to <strong>Open in Safari</strong>.</li>
-      <li>Tap <strong>Share</strong> (the square with an arrow), then <strong>Add to Home Screen</strong>, then <strong>Add</strong>.</li>
-      <li>Close Safari, tap the new <strong>Hub alerts</strong> icon on your Home Screen, and turn alerts on there.</li>
-    </ol>
+    <h2>On iPhone, one quick setup</h2>
+    <p>iPhone only allows alerts from the <strong>Hub alerts</strong> icon on your Home Screen. It takes about 20 seconds, once:</p>
+    <ol class="steps" id="iossteps"></ol>
   </div>
 
   <div class="card" id="pick">
@@ -228,6 +224,29 @@
     }).catch(function (err) { status('bad', String(err.message || err)); });
   }
 
+  // The Home Screen step for the browser the member is actually in. Chrome,
+  // Edge and Firefox on iPhone can all add a web app to the Home Screen since
+  // iOS 16.4, and push then works; telling everyone to use Safari (23/09/2026)
+  // sent Lou, a Chrome user, to a browser she does not use, five times.
+  function iosSteps() {
+    var ua = navigator.userAgent;
+    var share;
+    if (/CriOS/.test(ua)) {
+      share = 'In Chrome, tap the <strong>Share</strong> icon (a square with an arrow) at the right of the address bar, then <strong>Add to Home Screen</strong>, then <strong>Add</strong>.';
+    } else if (/EdgiOS/.test(ua)) {
+      share = 'In Edge, tap the <strong>menu</strong> (three lines), then <strong>Share</strong>, then <strong>Add to Home Screen</strong>, then <strong>Add</strong>.';
+    } else if (/FxiOS/.test(ua)) {
+      share = 'In Firefox, tap the <strong>menu</strong> (three lines), then <strong>Share</strong>, then <strong>Add to Home Screen</strong>, then <strong>Add</strong>.';
+    } else if (/Safari\//.test(ua) && !/(FBAN|FBAV|Instagram|LinkedInApp|GSA|Line\/)/.test(ua)) {
+      share = 'In Safari, tap <strong>Share</strong> (a square with an arrow; on newer iPhones it is under the <strong>&middot;&middot;&middot;</strong> button), then <strong>Add to Home Screen</strong>, then <strong>Add</strong>.';
+    } else {
+      return '<li>This page is open inside another app, which cannot add it to your Home Screen. Tap that app\'s menu and choose <strong>Open in browser</strong> (Chrome or Safari), then come back to these steps.</li>';
+    }
+    return '<li>' + share + '</li>' +
+      '<li>Go to your Home Screen and tap the new <strong>Hub alerts</strong> icon.</li>' +
+      '<li>Pick your specialities and tap <strong>Turn on alerts</strong>, then <strong>Allow</strong>.</li>';
+  }
+
   function boot() {
     fetch('config.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (c) {
       cfg = c;
@@ -237,6 +256,7 @@
       // Safari tab, an in-app browser, a sheet opened from another Home
       // Screen app) show the three steps and nothing that can fail.
       if (isIOS && !standalone) {
+        $('iossteps').innerHTML = iosSteps();
         $('ios').style.display = 'block'; $('pick').style.display = 'none'; $('act').style.display = 'none';
         report('ios-not-home-screen', '');
         return;
