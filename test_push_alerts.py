@@ -293,5 +293,36 @@ class CliTests(unittest.TestCase):
         self.assertEqual(pa.main(["test"]), 1)
 
 
+class DiagnoseTests(unittest.TestCase):
+    def test_device_labels(self):
+        ios_chrome = ("Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 "
+                      "(KHTML, like Gecko) CriOS/140.0 Mobile/15E148 Safari/604.1")
+        ios_app = ("Mozilla/5.0 (iPhone; CPU iPhone OS 18_6 like Mac OS X) AppleWebKit/605.1.15 "
+                   "(KHTML, like Gecko) Mobile/15E148")
+        android = ("Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) "
+                   "Chrome/140.0 Mobile Safari/537.36")
+        self.assertEqual(pa._device(ios_chrome), "iPhone iOS 18.6 Chrome")
+        self.assertEqual(pa._device(ios_app), "iPhone iOS 18.6 ?")
+        self.assertEqual(pa._device(android), "Android Chrome")
+        self.assertEqual(pa._device(None), "other ?")
+
+    def test_events_reads_push_events_and_restores_table(self):
+        urls = []
+        class Resp:
+            def __init__(self, body): self.body = body
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+            def read(self): return self.body
+        def opener(req, data, timeout):
+            urls.append(req.full_url)
+            return Resp(b'[{"stage": "ios-not-home-screen"}]')
+        st = pa.Store("https://x.supabase.co", "SERVICE", opener=opener)
+        self.assertEqual(st.events(5), [{"stage": "ios-not-home-screen"}])
+        self.assertIn("/rest/v1/push_events?", urls[0])
+        self.assertIn("limit=5", urls[0])
+        st.subscriptions()
+        self.assertIn("/rest/v1/push_subscriptions?", urls[1])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=1)
