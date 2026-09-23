@@ -286,6 +286,255 @@
     return out.slice(0, 10);
   }
 
+  /* ---------------------------------------------------------------- planner
+   * "WHAT DO YOU WANT TO DO TODAY?" ANSWERED AS A PLAN, NOT JUST A SEARCH.
+   * Added 23/09/2026. A member types a goal in their own words ("meeting with
+   * the tissue viability lead at Leeds about Molnlycke on Thursday") and gets
+   * an ordered route through the Hub tools that fit it, above the ordinary
+   * search results.
+   *
+   * COST: none, same as the search. This is keyword rules plus the supplier
+   * names already in the index, run in the member's browser. No AI service,
+   * no API key, no per-member charge. It must stay that way: a paid model
+   * here would bill Lou for every member keystroke.
+   *
+   * It only ever suggests pages that exist. If nothing in the goal is
+   * recognised, no plan is shown and the search results stand alone. */
+  var GOALS = [
+    { id: 'meeting', words: ['meeting', 'meet', 'call', 'visit', 'appointment', 'pitch', 'present',
+        'presentation', 'demo', 'introduce', 'intro', 'catch up with', 'seeing'],
+      steps: [
+        ['Prepare for the meeting', '/medical-sales-hub/med-sales-tools/#tool-prep',
+         'Builds your brief for the customer and the product in front of them.'],
+        ['Map who else is in the room', '/medical-sales-hub/med-sales-tools/#sec-map',
+         'Who decides, who influences, who signs.']
+      ] },
+    { id: 'compare', words: ['compare', 'competitor', 'competitors', 'competition', 'versus', 'vs',
+        'against', 'rival', 'switch', 'convert', 'conversion', 'displace'],
+      steps: [
+        ['Compare against the competitor', '/medical-sales-hub/med-sales-tools/#tool-compare',
+         'Side by side, with open recalls and supply gaps flagged.'],
+        ['See who else sells in this area', '/medical-sales-hub/who-are-the-competitors/', '']
+      ] },
+    { id: 'tender', words: ['tender', 'tenders', 'framework', 'frameworks', 'contract', 'contracts',
+        'award', 'awards', 'bid', 'renewal', 'procurement', 'itt', 'pqq'],
+      steps: [
+        ['Check the framework or tender route', '/medical-sales-hub/frameworks/#fw-nhssc', ''],
+        ['Check renewal dates', '/medical-sales-hub/frameworks/#fw-renewal',
+         'Know when the window opens before your competitor does.'],
+        ['Look up past awards and tenders', '/medical-sales-hub/tender-history/', '']
+      ] },
+    { id: 'people', words: ['stakeholder', 'stakeholders', 'decision maker', 'decision makers',
+        'buyer', 'buyers', 'who buys', 'who decides', 'budget holder', 'org chart', 'map'],
+      steps: [
+        ['Map the stakeholders', '/medical-sales-hub/med-sales-tools/#sec-map', ''],
+        ['See how the NHS fits together', '/medical-sales-hub/nhs-structure-map/',
+         'Trust, ICB and national roles in one view.']
+      ] },
+    { id: 'price', words: ['price', 'prices', 'pricing', 'cost', 'costs', 'cheaper', 'expensive',
+        'saving', 'savings', 'value', 'budget'],
+      steps: [
+        ['Check price intelligence', '/medical-sales-hub/price-intelligence/', ''],
+        ['Build the value case', '/medical-sales-hub/med-sales-tools/value-equation/', ''],
+        ['Value-based procurement explained', '/medical-sales-hub/value-based-procurement/', '']
+      ] },
+    { id: 'supply', words: ['recall', 'recalls', 'shortage', 'shortages', 'supply', 'out of stock',
+        'alert', 'alerts', 'fsn', 'delisted', 'delisting', 'discontinued', 'mhra'],
+      steps: [
+        ['Check the Supply Disruption Tracker', '/medical-sales-hub/supply-disruption-tracker/', ''],
+        ['Check the MHRA Regulatory Desk', '/medical-sales-hub/mhra-regulatory-desk/', '']
+      ] },
+    { id: 'career', words: ['interview', 'interviews', 'job', 'jobs', 'cv', 'career', 'role',
+        'hired', 'hiring', 'application', 'apply', 'first sales', 'break into', 'get into'],
+      steps: [
+        ['Prepare for the interview', '/medical-sales-hub/interview-prep/', ''],
+        ['Visit the Career Centre', '/medical-sales-hub/careers/', ''],
+        ['Clinical to commercial routes', '/medical-sales-hub/clinical-to-commercial-routes/', '']
+      ] },
+    { id: 'territory', words: ['new territory', 'territory', 'patch', 'new to', 'prospect',
+        'prospects', 'prospecting', 'target', 'targets', 'where to start', 'new area', 'new role'],
+      steps: [
+        ['Find your speciality', '/medical-sales-hub/find-your-speciality/', ''],
+        ['Check the Sales Triggers Desk', '/medical-sales-hub/sales-triggers/',
+         'Events that open a door this week.'],
+        ['See capital and estates spend', '/medical-sales-hub/capital-estates-watch/', '']
+      ] },
+    // Not "today" or "this week": they ride along on almost any goal.
+    { id: 'news', words: ['news', 'latest', 'whats new', 'what s new', 'catch up', 'catching up',
+        'headlines'],
+      steps: [
+        ['Start at the Live Desk', '/medical-sales-hub/', 'Today’s headlines for reps.'],
+        ['Check the Sales Triggers Desk', '/medical-sales-hub/sales-triggers/', ''],
+        ['See what’s coming up', '/medical-sales-hub/calendar/', '']
+      ] },
+    { id: 'learn', words: ['learn', 'understand', 'explain', 'course', 'courses', 'cpd', 'training',
+        'glossary', 'acronym'],
+      steps: [
+        ['Look it up in the Glossary', '/medical-sales-hub/glossary/', ''],
+        ['Browse Courses and CPD', '/medical-sales-hub/courses/', '']
+      ] }
+  ];
+
+  // Words a rep uses for a speciality, mapped to its Hub page. Whole-word match.
+  var SPECS = [
+    ['wound', '/medical-sales-hub/tissue-viability-and-wound-care/', 'Tissue Viability and Wound Care'],
+    ['wounds', '/medical-sales-hub/tissue-viability-and-wound-care/', 'Tissue Viability and Wound Care'],
+    ['tissue viability', '/medical-sales-hub/tissue-viability-and-wound-care/', 'Tissue Viability and Wound Care'],
+    ['dressing', '/medical-sales-hub/tissue-viability-and-wound-care/', 'Tissue Viability and Wound Care'],
+    ['dressings', '/medical-sales-hub/tissue-viability-and-wound-care/', 'Tissue Viability and Wound Care'],
+    ['stroke', '/medical-sales-hub/stroke/', 'Stroke'],
+    ['theatre', '/medical-sales-hub/theatres-and-surgical/', 'Theatres and Surgical'],
+    ['theatres', '/medical-sales-hub/theatres-and-surgical/', 'Theatres and Surgical'],
+    ['surgical', '/medical-sales-hub/theatres-and-surgical/', 'Theatres and Surgical'],
+    ['ortho', '/medical-sales-hub/orthopaedics-and-trauma/', 'Orthopaedics and Trauma'],
+    ['orthopaedic', '/medical-sales-hub/orthopaedics-and-trauma/', 'Orthopaedics and Trauma'],
+    ['orthopaedics', '/medical-sales-hub/orthopaedics-and-trauma/', 'Orthopaedics and Trauma'],
+    ['trauma', '/medical-sales-hub/orthopaedics-and-trauma/', 'Orthopaedics and Trauma'],
+    ['neuro', '/medical-sales-hub/neurology-and-neurosurgery/', 'Neurology and Neurosurgery'],
+    ['neurology', '/medical-sales-hub/neurology-and-neurosurgery/', 'Neurology and Neurosurgery'],
+    ['cardiology', '/medical-sales-hub/cardiology-and-cardiac-surgery/', 'Cardiology and Cardiac Surgery'],
+    ['cardiac', '/medical-sales-hub/cardiology-and-cardiac-surgery/', 'Cardiology and Cardiac Surgery'],
+    ['vascular', '/medical-sales-hub/vascular-surgery-and-pad/', 'Vascular Surgery and PAD'],
+    ['urology', '/medical-sales-hub/urology/', 'Urology'],
+    ['critical care', '/medical-sales-hub/critical-care/', 'Critical Care'],
+    ['icu', '/medical-sales-hub/critical-care/', 'Critical Care'],
+    ['itu', '/medical-sales-hub/critical-care/', 'Critical Care'],
+    ['pathology', '/medical-sales-hub/pathology-and-laboratory-medicine/', 'Pathology and Laboratory Medicine'],
+    ['lab', '/medical-sales-hub/pathology-and-laboratory-medicine/', 'Pathology and Laboratory Medicine'],
+    ['endoscopy', '/medical-sales-hub/colorectal-gi-and-endoscopy/', 'Colorectal, GI and Endoscopy'],
+    ['colorectal', '/medical-sales-hub/colorectal-gi-and-endoscopy/', 'Colorectal, GI and Endoscopy'],
+    ['stoma', '/medical-sales-hub/colorectal-gi-and-endoscopy/', 'Colorectal, GI and Endoscopy'],
+    ['ophthalmology', '/medical-sales-hub/ophthalmology/', 'Ophthalmology'],
+    ['eye', '/medical-sales-hub/ophthalmology/', 'Ophthalmology'],
+    ['ent', '/medical-sales-hub/ent-and-head-and-neck/', 'ENT and Head and Neck'],
+    ['gynaecology', '/medical-sales-hub/gynaecology-and-womens-health/', 'Gynaecology and Women’s Health'],
+    ['plastics', '/medical-sales-hub/plastics-burns-and-reconstruction/', 'Plastics, Burns and Reconstruction'],
+    ['burns', '/medical-sales-hub/plastics-burns-and-reconstruction/', 'Plastics, Burns and Reconstruction'],
+    ['interventional radiology', '/medical-sales-hub/interventional-radiology/', 'Interventional Radiology'],
+    ['respiratory', '/medical-sales-hub/respiratory/', 'Respiratory'],
+    ['diabetes', '/medical-sales-hub/diabetes-and-endocrinology/', 'Diabetes and Endocrinology'],
+    ['renal', '/medical-sales-hub/renal/', 'Renal'],
+    ['dialysis', '/medical-sales-hub/renal/', 'Renal'],
+    ['oncology', '/medical-sales-hub/oncology-and-sact/', 'Oncology and SACT'],
+    ['cancer', '/medical-sales-hub/oncology-and-sact/', 'Oncology and SACT'],
+    ['haematology', '/medical-sales-hub/haematology-and-patient-blood-management/', 'Haematology and Patient Blood Management'],
+    ['pain', '/medical-sales-hub/pain-management/', 'Pain Management'],
+    ['maternity', '/medical-sales-hub/maternity-and-neonatal/', 'Maternity and Neonatal'],
+    ['neonatal', '/medical-sales-hub/maternity-and-neonatal/', 'Maternity and Neonatal'],
+    ['rehab', '/medical-sales-hub/rehabilitation-prosthetics-and-orthotics/', 'Rehabilitation, Prosthetics and Orthotics'],
+    ['continence', '/medical-sales-hub/continence-bladder-and-bowel/', 'Continence, Bladder and Bowel'],
+    ['catheter', '/medical-sales-hub/continence-bladder-and-bowel/', 'Continence, Bladder and Bowel'],
+    ['nutrition', '/medical-sales-hub/nutrition-and-dietetics/', 'Nutrition and Dietetics'],
+    ['iv', '/medical-sales-hub/vascular-access-and-iv-therapy/', 'Vascular Access and IV Therapy'],
+    ['vascular access', '/medical-sales-hub/vascular-access-and-iv-therapy/', 'Vascular Access and IV Therapy'],
+    ['patient handling', '/medical-sales-hub/patient-handling/', 'Patient Moving and Handling'],
+    ['infection', '/medical-sales-hub/infection-prevention-and-control/', 'Infection Prevention and Control'],
+    ['ipc', '/medical-sales-hub/infection-prevention-and-control/', 'Infection Prevention and Control'],
+    ['radiology', '/medical-sales-hub/radiology-and-imaging/', 'Radiology and Imaging'],
+    ['imaging', '/medical-sales-hub/radiology-and-imaging/', 'Radiology and Imaging'],
+    ['pharmacy', '/medical-sales-hub/pharmacy-and-medicines/', 'Pharmacy and Medicines'],
+    ['audiology', '/medical-sales-hub/audiology-and-hearing/', 'Audiology and Hearing'],
+    ['gp', '/medical-sales-hub/primary-care-and-general-practice/', 'Primary Care and General Practice'],
+    ['primary care', '/medical-sales-hub/primary-care-and-general-practice/', 'Primary Care and General Practice'],
+    ['digital', '/medical-sales-hub/digital-and-medical-it/', 'Digital and Medical IT'],
+    ['sepsis', '/medical-sales-hub/sepsis-and-the-deteriorating-patient/', 'Sepsis and the Deteriorating Patient'],
+    ['frailty', '/medical-sales-hub/frailty-and-older-people/', 'Frailty and Older People'],
+    ['falls', '/medical-sales-hub/fall-prevention-medical-sales-market-insights/', 'Fall Prevention'],
+    ['emergency', '/medical-sales-hub/emergency-and-urgent-care/', 'Emergency and Urgent Care'],
+    ['mental health', '/medical-sales-hub/mental-health/', 'Mental Health'],
+    ['palliative', '/medical-sales-hub/palliative-and-end-of-life-care/', 'Palliative and End-of-Life Care'],
+    ['dermatology', '/medical-sales-hub/dermatology/', 'Dermatology'],
+    ['paediatrics', '/medical-sales-hub/paediatrics/', 'Paediatrics'],
+    ['paediatric', '/medical-sales-hub/paediatrics/', 'Paediatrics'],
+    ['obesity', '/medical-sales-hub/obesity-and-weight-management/', 'Obesity and Weight Management']
+  ];
+
+  function has(hay, phrase) { return hay.indexOf(' ' + phrase + ' ') !== -1; }
+
+  /* A supplier is recognised only when its full name appears as whole words in
+   * the goal. Names shorter than four letters are skipped: "BD" or "3M" as a
+   * bare token collides with ordinary words too easily, and a wrong company in
+   * a plan is worse than none (the search results below still find them).
+   * Longest name wins, so "Smith & Nephew" beats a shorter partial. */
+  // Supplier names in the index that are also ordinary words or place names.
+  var NOT_NAMES = ' banner bray formal instinctive liberator mast medi northwood possum southgate ';
+
+  function findSupplier(hay) {
+    var best = null, i, r, n;
+    if (!DATA) { return null; }
+    for (i = 0; i < DATA.records.length; i++) {
+      r = DATA.records[i];
+      n = r._n;
+      if (n === undefined) {
+        n = r._n = clean(String(r.t).replace(/\b(ltd|limited|plc|uk|group|inc|llc|gmbh)\b\.?/gi, ' '));
+      }
+      if (n.length < 4 || NOT_NAMES.indexOf(' ' + n + ' ') !== -1) { continue; }
+      if (has(hay, n) && (!best || n.length > best._n.length)) { best = r; }
+    }
+    return best;
+  }
+
+  function plan(q) {
+    var hay = ' ' + clean(q) + ' ', steps = [], seen = {}, i, j, g, sp = null, sup;
+
+    function add(title, href, why) {
+      if (seen[href]) { return; }
+      seen[href] = 1;
+      steps.push([title, href, why || '']);
+    }
+
+    for (i = 0; i < SPECS.length; i++) {
+      if (has(hay, SPECS[i][0])) { sp = SPECS[i]; break; }
+    }
+    sup = findSupplier(hay);
+
+    var goals = [];
+    for (i = 0; i < GOALS.length; i++) {
+      g = GOALS[i];
+      for (j = 0; j < g.words.length; j++) {
+        if (has(hay, clean(g.words[j]))) { goals.push(g); break; }
+      }
+    }
+    if (!goals.length && !sp && !sup) { return null; }
+
+    // First step of each goal, in the order the goals are listed, then the rest.
+    for (i = 0; i < goals.length; i++) { add.apply(null, goals[i].steps[0]); }
+    if (sup) {
+      add('Open the ' + sup.t + ' company report',
+          '/medical-sales-hub/company-report/?company=' + encodeURIComponent(sup.t),
+          'Products, frameworks, awards and news in one place.');
+    }
+    if (sp) {
+      add('Read the ' + sp[2] + ' page', sp[1], 'Pathway, buyers and suppliers for this area.');
+    }
+    for (i = 0; i < goals.length; i++) {
+      for (j = 1; j < goals[i].steps.length; j++) { add.apply(null, goals[i].steps[j]); }
+    }
+    if (sp || sup) {
+      add('Check for recalls and supply gaps', '/medical-sales-hub/supply-disruption-tracker/',
+          'Worth knowing before anyone raises it with you.');
+    }
+    return steps.slice(0, 5);
+  }
+
+  function planHtml(steps) {
+    var html = '<div style="padding:12px 14px 6px;color:' + GOLD + ';font-size:11px;letter-spacing:1.2px;' +
+               'font-weight:700;text-transform:uppercase;">Your plan for today</div>', i, s;
+    for (i = 0; i < steps.length; i++) {
+      s = steps[i];
+      html += '<a href="' + esc(s[1]) + '" style="display:flex;gap:12px;align-items:flex-start;padding:10px 14px;' +
+              'color:' + TEXT + ';text-decoration:none;border-top:1px solid ' + RULE + ';">' +
+              '<span style="flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:' + GOLD + ';' +
+              'color:' + NAVY + ';font-size:13px;font-weight:700;display:inline-flex;align-items:center;' +
+              'justify-content:center;">' + (i + 1) + '</span>' +
+              '<span><span style="display:block;font-size:14px;font-weight:600;">' + esc(s[0]) + '</span>' +
+              (s[2] ? '<span style="display:block;color:#a8b3c4;font-size:12.5px;line-height:1.5;margin-top:2px;">' +
+                      esc(s[2]) + '</span>' : '') +
+              '</span></a>';
+    }
+    return html + '<div style="height:10px;border-bottom:2px solid ' + LINE + ';"></div>';
+  }
+
   // ------------------------------------------------------------------ render
   function shell() {
     var chips = TASKS.map(function (t) {
@@ -311,7 +560,7 @@
       '<div id="ethHubBody" style="display:none;margin-top:14px;">' +
       '<div style="display:flex;gap:10px;margin:0 0 8px;width:100%;">' +
         '<input id="ethHubInput" type="search" autocomplete="off" aria-label="Search the Hub" ' +
-        'placeholder="Search every Hub page — a supplier, a framework, a term, a question" ' +
+        'placeholder="Tell me your goal, e.g. meeting with a wound care lead about Molnlycke" ' +
         'style="flex:1;min-width:0;padding:13px 16px;border-radius:8px;border:1px solid ' + LINE + ';' +
         'background:' + PANEL + ';color:#fff;font-size:14.5px;font-family:inherit;box-sizing:border-box;">' +
         '<button type="button" id="ethHubGo" style="padding:13px 28px;border-radius:8px;border:none;' +
@@ -321,7 +570,8 @@
       '<div id="ethHubResults" style="display:none;background:' + PANEL + ';border:1px solid ' + LINE + ';' +
       'border-radius:8px;margin:0 0 12px;overflow:hidden;max-height:60vh;overflow-y:auto;"></div>' +
       '<p id="ethHubHint" style="margin:0 0 16px;color:' + DIM + ';font-size:12.5px;">' +
-      'Searches inside every Hub page, not just the titles. Or jump straight to a task.</p>' +
+      'Type what you\u2019re working on and get a step-by-step plan, or search inside every Hub page. ' +
+      'Or jump straight to a task.</p>' +
       '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:9px;width:100%;">' +
       chips + '</div>' +
       '</div>';
@@ -375,17 +625,18 @@
       return;
     }
 
-    var toks = tokenise(q), res = rank(q), i, r, html, href, kicker;
+    var toks = tokenise(q), res = rank(q), steps = plan(q), i, r, html, href, kicker;
+    var top = steps ? planHtml(steps) : '';
 
     if (!res.length) {
-      box.innerHTML = note('Nothing on the Hub matches that. ' +
+      box.innerHTML = top + note('Nothing on the Hub matches that. ' +
         '<a href="/?s=' + encodeURIComponent(q) + '" style="color:' + GOLD + ';font-weight:700;">' +
         'Search every page and post instead</a>, or try a broader word such as framework, ' +
         'tender, pricing, pathway or glossary.');
       return;
     }
 
-    html = '<div style="padding:8px 14px 4px;color:' + DIM + ';font-size:11px;letter-spacing:1.2px;' +
+    html = top + '<div style="padding:8px 14px 4px;color:' + DIM + ';font-size:11px;letter-spacing:1.2px;' +
            'font-weight:700;text-transform:uppercase;">' + res.length +
            (res.length === 1 ? ' match' : ' matches') + ' on the Hub</div>';
 
@@ -488,4 +739,7 @@
   if (window.MSH_HUB_SEARCH_INDEX) {
     DATA = prepare(window.MSH_HUB_SEARCH_INDEX);
   }
+
+  // Harness hook: lets a test call the planner directly. Carries no data.
+  window.MSH_HUB_PLAN = plan;
 })();
