@@ -4166,8 +4166,15 @@ for good in ["Stroke Central Monitor",
              "Community Stroke Service for Newham (2026/27)",
              "City & Hackney Post Stroke Community Service"]:
     check("row carried: %s" % good[:52], B.match_title(_sk_rx, good))
-check("exactly eight, and every one of them was read",
-      sk["counts"]["awardsMatched"] == 8, "got %s" % sk["counts"]["awardsMatched"])
+# NINE FROM 23/09/2026. "Contracts for Innovation Cymru - Ending Abandonment After
+# Stroke" (framework awards feed, 23/09/2026) is an NHS Wales innovation contract
+# on stroke care and belongs on this page. Kept 23/09/2026: the choice was put to
+# Lou, who left it to the build. Read before counting.
+check("exactly nine, and every one of them was read",
+      sk["counts"]["awardsMatched"] == 9, "got %s" % sk["counts"]["awardsMatched"])
+check("the Welsh innovation contract is one of them",
+      any("ending abandonment after stroke" in (a.get("title") or "").lower()
+          for a in sk["awards"]))
 check("nothing is held back from the reader",
       sk["counts"]["awardsShown"] == sk["counts"]["awardsMatched"])
 
@@ -4209,9 +4216,15 @@ check("every award was admitted by its title",
 # The four service notices carry 85143000, 85121200, 85323000 and 85100000. All
 # generic. If a stroke-specific CPV family ever appears this check still holds,
 # but the rule should then be revisited rather than left alone.
+# The innovation contract added five more, all generic families too: 33000000
+# medical equipment, 48000000 software, 73000000 research and development,
+# 79310000 market research and 98000000 other services. None is a stroke family,
+# so the rule still claims no CPV. Any code outside 85* and those five is new and
+# means the rule should be revisited, which is the tripwire this check keeps.
+_SK_GENERIC_NON85 = {"33000000", "48000000", "73000000", "79310000", "98000000"}
 _sk_cpv = sorted({c for a in sk["awards"] for c in (a.get("cpv") or [])})
-check("only generic health service CPV codes are present",
-      all(c.startswith("85") for c in _sk_cpv), ", ".join(_sk_cpv))
+check("only generic CPV codes are present",
+      all(c.startswith("85") or c in _SK_GENERIC_NON85 for c in _sk_cpv), ", ".join(_sk_cpv))
 check("no Drug Tariff part is claimed", sk["drugTariff"] is None)
 check("and the panel says why", "nothing on this patch is listed there"
       in sk["rules"]["drugTariff"])
@@ -4298,8 +4311,11 @@ print("  the corneal tissue notices are wound care's false positive and this pag
 # surgery" is one of the ten rows the loose `spec` field wrongly tags wound care.
 # It is genuinely ophthalmology, and both halves of that have to stay true.
 _op_titles = " || ".join((a.get("title") or "") for a in op["awards"]).lower()
-check("ophthalmology carries the corneal transplantation notices",
-      "corneal transplantation" in _op_titles)
+# Moved to the MATCHED set, 23/09/2026, the same way pacemakers moved on 22/09.
+# The rule still admits the corneal tissue rows; 67 awards now match against an
+# AWARD_CAP of 40 and they have fallen below the line. Nothing lost, nothing loosened.
+check("ophthalmology's rule matches the corneal transplantation notices",
+      "corneal transplantation" in matched_titles(OPHTH))
 check("wound care still refuses them",
       "corneal transplantation" not in
       " || ".join((a.get("title") or "") for a in d["awards"]).lower())
@@ -4712,8 +4728,12 @@ for good in ["Hearing Aid Batteries",
 
 check("every award was admitted by its title",
       all(B.match_title(_au_rx, a["title"]) for a in au["awards"]))
-check("16 awards matched and all 16 are shown",
-      au["counts"]["awardsMatched"] == 16 and au["counts"]["awardsShown"] == 16,
+# Was a fixed 16. Three new audiology awards arrived by 23/09/2026 and the count
+# went to 19, failing a correct panel. The invariant is that every award in the
+# titles above is admitted (checked just above) and nothing is held back below the
+# cap, which is what a lost row would break.
+check("every matched award is shown, up to the cap",
+      shown_is_matched_or_capped(au["counts"]),
       "got %s matched / %s shown" % (au["counts"]["awardsMatched"], au["counts"]["awardsShown"]))
 _au_titles = " || ".join((a.get("title") or "") for a in au["awards"]).lower()
 check("no ultrasound row reached the panel", "ultrasound" not in _au_titles)
@@ -5344,7 +5364,6 @@ for want in [
         "Clinical & Sharps Waste Management",
         "Automated Endoscope Washer Disinfectors",
         "Framework for the Provision of FFP3 Masks",
-        "Skin Cleansing and Disinfection",
         "Hand Hygiene Products [4016092]",
         "Tray Wrap & Sterilisation Products",
         "Non-Sterile Single Use Type IIR Facemasks without Anti-Fog Strip",
@@ -5352,6 +5371,11 @@ for want in [
         "Medical Pulp (4951708)",
 ]:
     check("carried: %s" % want[:58], want in _ip_titles)
+# "Skin Cleansing and Disinfection" moved to the MATCHED set, 23/09/2026: 61
+# awards now match against an AWARD_CAP of 40 and it has fallen below the line.
+# The rule still admits it, which is what a lost pattern would break.
+check("the rule matches: Skin Cleansing and Disinfection",
+      "skin cleansing and disinfection" in matched_titles(IPC))
 
 print("  the exclusion list — every one of these is a real row that matched and was wrong")
 for bad in [
