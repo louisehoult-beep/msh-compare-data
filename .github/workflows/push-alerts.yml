@@ -32,6 +32,10 @@ on:
         description: "Send a test alert to every subscribed phone now (news state untouched)"
         type: boolean
         default: false
+      diagnose:
+        description: "Read-only: list subscribed phones by type and where recent sign-ups got stuck"
+        type: boolean
+        default: false
 
 # Same writer group as every other job that commits here (weekly-refresh.yml's
 # comment, 26/07/2026 incident): queue behind another writer, never race it.
@@ -51,6 +55,8 @@ jobs:
       CONFIGURED: ${{ secrets.SUPABASE_URL != '' && secrets.SUPABASE_ANON_KEY != '' && secrets.SUPABASE_SERVICE_KEY != '' && secrets.VAPID_PRIVATE_KEY != '' }}
       DRY_RUN: ${{ inputs.dry_run == true }}
       TEST_ALERT: ${{ inputs.test_alert == true }}
+      # Diagnose reads and prints only, so it skips the gate and the commit as a dry run does.
+      DIAGNOSE: ${{ inputs.diagnose == true }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -82,7 +88,9 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
-          if [ "$TEST_ALERT" = "true" ]; then
+          if [ "$DIAGNOSE" = "true" ]; then
+            python3 scripts/push_alerts.py diagnose
+          elif [ "$TEST_ALERT" = "true" ]; then
             python3 scripts/push_alerts.py test
           elif [ "$DRY_RUN" = "true" ]; then
             python3 scripts/push_alerts.py send --dry-run
@@ -91,11 +99,11 @@ jobs:
           fi
 
       - name: Publish gate — nothing commits until this passes
-        if: env.DRY_RUN != 'true'
+        if: env.DRY_RUN != 'true' && env.DIAGNOSE != 'true'
         run: python3 verify.py
 
       - name: Commit state and config
-        if: env.DRY_RUN != 'true'
+        if: env.DRY_RUN != 'true' && env.DIAGNOSE != 'true'
         run: |
           git config user.name "hub-bot"
           git config user.email "contact@elevateandthrive.uk"

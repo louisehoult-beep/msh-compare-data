@@ -286,6 +286,16 @@ class Store:
     def delete(self, row_id) -> None:
         self._req("DELETE", "?id=eq.%s" % row_id, prefer="return=minimal")
 
+    def events(self, limit: int = 60) -> list[dict]:
+        """Newest rows of push_events: where a phone got stuck on the page."""
+        base = self.base
+        self.base = base[: -len(TABLE)] + "push_events"
+        try:
+            return self._req("GET", "?select=created_at,stage,detail,standalone,permission,user_agent"
+                                    "&order=created_at.desc&limit=%d" % limit) or []
+        finally:
+            self.base = base
+
 
 # --------------------------------------------------------------------------
 # sending
@@ -538,6 +548,49 @@ def cmd_test(_args) -> int:
     return 1 if counts["failed"] else 0
 
 
+def _device(ua: str) -> str:
+    """A short, human label for a user-agent string (no personal data)."""
+    ua = ua or ""
+    os_ = ("iPhone" if "iPhone" in ua else "iPad" if "iPad" in ua else
+           "Android" if "Android" in ua else "Mac" if "Macintosh" in ua else
+           "Windows" if "Windows" in ua else "other")
+    br = ("Chrome" if ("CriOS" in ua or ("Chrome" in ua and "Edg" not in ua)) else
+          "Edge" if ("EdgiOS" in ua or "Edg/" in ua) else
+          "Firefox" if ("FxiOS" in ua or "Firefox" in ua) else
+          "Safari" if "Safari" in ua else "?")
+    m = re.search(r"OS (\d+)[_.](\d+)", ua)
+    ver = " iOS %s.%s" % m.groups() if m and os_ in ("iPhone", "iPad") else ""
+    return "%s%s %s" % (os_, ver, br)
+
+
+def cmd_diagnose(_args) -> int:
+    """Read-only: who is subscribed (by push service) and where phones got stuck."""
+    url = os.environ.get("SUPABASE_URL", "").strip()
+    svc = os.environ.get("SUPABASE_SERVICE_KEY", "").strip()
+    if not (url and svc):
+        print("diagnose: NOT CONFIGURED — SUPABASE_URL and SUPABASE_SERVICE_KEY are needed")
+        return 1
+    store = Store(url, svc)
+    rows = store.subscriptions()
+    hosts: dict[str, int] = {}
+    for r in rows:
+        hosts[_host(r["endpoint"])] = hosts.get(_host(r["endpoint"]), 0) + 1
+    print("diagnose: %d subscription(s): %s" % (len(rows), json.dumps(hosts)))
+    print("  (web.push.apple.com = iPhone/iPad/Safari; fcm.googleapis.com = Chrome/Android; "
+          "updates.push.services.mozilla.com = Firefox)")
+    try:
+        ev = store.events()
+    except SupabaseError as exc:
+        print("diagnose: could not read push_events: %s" % exc)
+        return 1
+    print("diagnose: last %d page event(s), newest first:" % len(ev))
+    for e in ev:
+        print("  %s  %-20s standalone=%-5s permission=%-8s %-24s %s" % (
+            (e.get("created_at") or "")[:19], e.get("stage"), e.get("standalone"),
+            e.get("permission"), _device(e.get("user_agent")), _clip(e.get("detail") or "", 90)))
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -552,6 +605,8 @@ def main(argv=None) -> int:
     s.add_argument("--dry-run", action="store_true")
     s.set_defaults(fn=cmd_send)
     sub.add_parser("test", help="send a test alert to every subscriber now").set_defaults(fn=cmd_test)
+    sub.add_parser("diagnose", help="read-only: subscribers by push service, and recent page events"
+                   ).set_defaults(fn=cmd_diagnose)
     args = ap.parse_args(argv)
     return args.fn(args)
 

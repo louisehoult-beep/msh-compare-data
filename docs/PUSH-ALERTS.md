@@ -151,12 +151,16 @@ replaces the notification on the lock screen rather than stacking a second.
 
 * Android (Chrome, Edge, Samsung Internet, Firefox): works from the page directly.
 * iPhone/iPad: iOS 16.4+ only, and only from the page's OWN Home Screen icon
-  (Safari rule, not ours). Anywhere else on iOS the page hides the button and
-  shows three steps instead. The trap: a member who has the **Hub** saved to
+  (Apple's rule, not ours). The icon can be added from Safari, Chrome, Edge or
+  Firefox; the page detects which one and shows that browser's own steps
+  (in-app browsers such as Instagram are told to open Chrome or Safari first).
+  Until 23/09/2026 it told everyone to use Safari, which stopped Lou, a Chrome
+  user, five times. Anywhere else on iOS the page hides the button and shows
+  the steps instead. The trap: a member who has the **Hub** saved to
   their Home Screen and taps the alerts link from inside it gets the alerts
   page in a pop-over sheet, which can never get permission; it flashes and
-  drops back to the Hub. They must open the link in Safari and add the
-  alerts page itself.
+  drops back to the Hub. They must open the link in their browser and add
+  the alerts page itself.
 * Desktop browsers work too; the alert appears as a system notification.
 
 ## Rotating the VAPID key
