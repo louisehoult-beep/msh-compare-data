@@ -1,0 +1,32 @@
+<!-- My Hub (page 4404, /medical-sales-hub/my-hub/). Paste as the whole page
+     body in a Custom HTML block. Everything the member sees is rendered by
+     app/my-hub.js; edit it there, not here. Source: hub/pages/my-hub.html. -->
+<div style="background:#0b1220;border-bottom:1px solid #1e293b;padding:8px 18px;font-family:Inter,-apple-system,Segoe UI,Arial,sans-serif;"><a href="https://medsalesintelligencehub.co.uk/" style="color:#94a3b8;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:.02em;">&larr; Back to main site</a></div>
+<div class="msh"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body .wp-site-blocks > header,body header.wp-block-template-part,body .site-header,body #masthead{display:none!important}body .wp-site-blocks > footer,body footer.wp-block-template-part,body .site-footer,body #colophon{display:none!important}body h1.wp-block-post-title,body .entry-title{display:none!important}body main,body .wp-site-blocks main,body .wp-block-post-content,body .entry-content{max-width:none!important;margin:0!important;padding:0!important}body .entry-content>*{max-width:none!important}body{background:#f7f4ee}
+.msh{--bg:#f7f4ee;--panel:#ffffff;--panel2:#fdfcf9;--border:#e6e0d4;--ink:#1d2733;--dim:#75808d;--gold:#a8842c;--green:#2e7d5b;--blue:#39689e;}
+.msh *{margin:0;padding:0;box-sizing:border-box;}
+.msh{background:var(--bg);color:var(--ink);font-family:'Inter',-apple-system,'Segoe UI',system-ui,sans-serif;font-size:14.5px;-webkit-font-smoothing:antialiased;}
+.msh a{color:inherit;text-decoration:none;}.msh a:hover{color:var(--gold);}
+.msh header{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;border-bottom:1px solid var(--border);background:#fff;flex-wrap:wrap;gap:10px;box-shadow:0 1px 2px rgba(29,39,51,.04);}
+.msh .logo{font-weight:700;font-size:19px;letter-spacing:.4px;color:var(--ink);}.msh .logo span{color:var(--gold);}
+.msh footer{padding:16px 26px;color:var(--dim);font-size:11.5px;border-top:1px solid var(--border);line-height:1.7;margin-top:12px;}.msh footer b{color:var(--ink);}
+.msh .myh-hero{width:100%;min-height:150px;background:linear-gradient(100deg,#0b1220 0%,#1d2733 100%);display:flex;align-items:center;padding:0 26px;}
+.msh .myh-hero span{color:#fff;font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;}
+.msh .myh-head{padding:26px 26px 6px;text-align:center;}
+.msh .myh-head h1{font-size:22px;letter-spacing:1px;font-weight:700;}
+.msh .myh-head p{color:var(--dim);margin:8px auto 0;max-width:640px;line-height:1.65;}
+.msh .myh-wrap{max-width:980px;margin:0 auto;padding:20px 16px 40px;}</style>
+<header><div class="logo">MEDICAL SALES <span>HUB</span></div><nav></nav></header>
+<div class="myh-hero"><span>Your account, your page</span></div>
+<div class="myh-head">
+<h1>My Hub</h1>
+<p>Choose the Hub pages you want in front of you: your specialities, the desks you check, the tools you use. They sit here in your order, with the latest news from your specialities. Everything else on the Hub stays where it is.</p>
+</div>
+<div class="myh-wrap"><div id="msh-my-hub"></div></div>
+<footer><b>How this page stays honest.</b> You can only pick pages that are built and live on the Hub. News lines come from the same daily feed as each speciality page, and every line names its source. Not sure which speciality you&rsquo;re in? Try <a href="/medical-sales-hub/find-your-speciality/" style="color:var(--gold);">Find Your Speciality</a>, or ask via <a href="/medical-sales-hub/ask/" style="color:var(--gold);">Ask the Desk</a>.</footer>
+<script>/*ETH-MY-HUB-LOADER*/(function(){
+function go(){fetch('https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/app/my-hub.js',{cache:'no-cache'}).then(function(r){return r.text();}).then(function(s){(new Function(s))();}).catch(function(){var m=document.getElementById('msh-my-hub');if(m){m.innerHTML='<p style="color:#75808d;">My Hub couldn&rsquo;t load just now. Everything is still on the <a href="/medical-sales-hub/" style="color:#a8842c;">Live Desk</a>.</p>';}});}
+if(document.readyState==='complete'){go();}else{window.addEventListener('load',go);}
+})();</script>
+</div>

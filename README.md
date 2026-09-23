@@ -212,6 +212,8 @@ can amend; automation in THIS repo still never writes 'use' lines itself.
 - Member phone alerts (web push) on new speciality news: `alerts/` (GitHub Pages),
   `scripts/push_alerts.py`, `.github/workflows/push-alerts.yml`. Set-up and runbook:
   `docs/PUSH-ALERTS.md`.
+- My Hub, the member-built front page: `app/my-hub.js`, `hub/my-hub-catalogue.json`,
+  `hub/`. Set-up and runbook: `docs/MY-HUB.md`.
 
 ## Stakeholder Mapper — trust level (added 24/07/2026)
 `app/mst-logic.js` drills below the ICB to the individual trust. It injects its
