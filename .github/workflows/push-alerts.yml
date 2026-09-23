@@ -1,0 +1,121 @@
+name: Phone alerts (web push) on new speciality news
+
+# Added 23/09/2026. Members subscribe on alerts/index.html (GitHub Pages, this
+# repo); their subscriptions live in a Supabase table; this job sends ONE web
+# push per subscriber covering the specialities they chose, whenever the daily
+# "Speciality news refresh" has landed something new. Design, table SQL and the
+# runbook: docs/PUSH-ALERTS.md. The logic: scripts/push_alerts.py.
+#
+# Triggered by workflow_run rather than `on: push`: the news job commits with
+# GITHUB_TOKEN, and pushes made with that token never fire push-triggered
+# workflows (GitHub's recursion guard). workflow_run fires from a scheduled
+# run just fine, and only from the default branch — which is the only branch
+# that publishes anyway.
+#
+# UNCONFIGURED IS NOT AN ERROR, BUT IT IS NOT SILENT EITHER. Until the four
+# secrets exist the script sends nothing, marks the day's items seen (there
+# are no subscribers to miss them) and this job prints a warning every run.
+# Once the secrets exist, any failure is red and phones Lou, the same as
+# every other writer here. There is no state in which this quietly stops.
+
+on:
+  workflow_run:
+    workflows: ["Speciality news refresh"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print what would be sent, send nothing, change nothing"
+        type: boolean
+        default: false
+
+# Same writer group as every other job that commits here (weekly-refresh.yml's
+# comment, 26/07/2026 incident): queue behind another writer, never race it.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  push:
+    # A failed news build has nothing new to announce; a dispatch always runs.
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CONFIGURED: ${{ secrets.SUPABASE_URL != '' && secrets.SUPABASE_ANON_KEY != '' && secrets.SUPABASE_SERVICE_KEY != '' && secrets.VAPID_PRIVATE_KEY != '' }}
+      DRY_RUN: ${{ inputs.dry_run == true }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Not configured yet (says so, every run, until the secrets exist)
+        if: env.CONFIGURED != 'true'
+        run: |
+          echo "::warning::Phone alerts are NOT configured: one or more of SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_KEY, VAPID_PRIVATE_KEY is missing. Nothing will be sent. See docs/PUSH-ALERTS.md."
+
+      - name: Install web push library
+        run: python3 -m pip install --quiet pywebpush
+
+      - name: Build alerts/config.json (public values only)
+        env:
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: python3 scripts/push_alerts.py build-config
+
+      - name: Send the digest
+        env:
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            python3 scripts/push_alerts.py send --dry-run
+          else
+            python3 scripts/push_alerts.py send
+          fi
+
+      - name: Publish gate — nothing commits until this passes
+        if: env.DRY_RUN != 'true'
+        run: python3 verify.py
+
+      - name: Commit state and config
+        if: env.DRY_RUN != 'true'
+        run: |
+          git config user.name "hub-bot"
+          git config user.email "contact@elevateandthrive.uk"
+          git add state/push-alerts.json alerts/config.json
+          git diff --cached --quiet || git commit -m "phone alerts: digest run $(date -u +'%F %H:%M')"
+          pushed=0
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              echo "pushed on attempt $attempt"
+              pushed=1
+              break
+            fi
+            echo "push rejected (attempt $attempt) — rebasing and re-gating"
+            git fetch origin
+            git rebase origin/main
+            python3 verify.py
+          done
+          if [ "$pushed" != "1" ]; then
+            # The pushes to phones already went out. Losing the state commit
+            # means tomorrow re-sends today's items — that is worth failing for.
+            echo "state push still rejected after 5 attempts — failing so this is seen"
+            exit 1
+          fi
+
+      - name: Phone alert on failure (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Med Sales Hub - PHONE ALERTS job FAILED" -H "Priority: high" -H "Tags: warning" \
+            -d "push-alerts.yml failed. Members may have missed this morning's news alert, or (if the state commit failed) may get today's items again tomorrow. Run: github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+            ntfy.sh/eth-hub-lou-4437

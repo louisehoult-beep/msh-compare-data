@@ -108,6 +108,7 @@ RUN = [
     "test_numeric_slug_detail.py",
     "test_product_detail_cursor.py",
     "test_product_types.py",
+    "test_push_alerts.py",
     "test_product_dossiers.py",
     "test_product_specs.py",
     "test_previous_names.py",
