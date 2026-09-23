@@ -137,9 +137,9 @@ replaces the notification on the lock screen rather than stacking a second.
 * Locally: `python3 scripts/push_alerts.py send --dry-run`.
 * Unit tests: `python3 test_push_alerts.py` (registered in
   `scripts/run_unit_tests.py`).
-* A member can tap "Show me what an alert looks like" on the page: that is a
-  local notification from the service worker, no server involved. It proves
-  nothing about delivery; the page says so under the button.
+* There is no on-page preview button. "Show me what an alert looks like" was
+  removed on 23/09/2026: it did not work on Lou's iPhone and proved nothing
+  about delivery anyway. Use the workflow's **test alert** instead.
 * The page only says "Alerts are on" once Supabase has the row. Every visit
   re-saves the phone's subscription (a 409 means it is already on file), so a
   signup whose save never landed repairs itself when the page is next opened.
