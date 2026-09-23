@@ -45,10 +45,12 @@ not equally knowable.
   number, every time. Publishing nothing is the correct output when the evidence
   is thin.
 
-  Where an ATS is detected but cannot be read as records (Workday, Ashby,
-  Teamtailor, Personio all render client-side or gate their API), that is a
-  refusal WITH the ATS named and the URL kept — a human can click it. It is not
-  dressed up as a zero.
+  Where an ATS is detected but cannot be read as records (Ashby, Personio,
+  iCIMS, Taleo render client-side or gate their API), that is a refusal WITH
+  the ATS named and the URL kept — a human can click it. It is not dressed up
+  as a zero. Workday is read through its own JSON endpoint; Teamtailor and
+  SuccessFactors (from 23/09/2026) through the JobPosting record on each job
+  page, the listing serving only to find those pages.
 
 UK ROLES. Every role keeps the location string the company published. `uk` is
 true only where that string names a UK nation, a UK city, or a UK postcode area;
@@ -545,6 +547,122 @@ ATS_READABLE = [
     ("workday",         re.compile(r"(https?://[a-z0-9-]+\.wd\d+\.myworkdayjobs\.com/[^\s\"'<>\\]*)", re.I), _workday),
 ]
 
+
+# ------------------------------------------------- job-page record routes
+#
+# Two platforms render their LISTING in the browser but publish a schema.org
+# JobPosting record on EVERY job page: Teamtailor career sites and SAP
+# SuccessFactors Career Site Builder ("careers.<company>.com/search/"). The
+# listing is only used to find the job pages; nothing is counted from it. Each
+# role is then read from its own page's JSON-LD, which is the same evidence bar
+# as the jsonld route below — one record per role, published by the company
+# for machines to read. Layouts are still never pattern-counted: a listing
+# with a job link but no JobPosting record behind it yields no role.
+#
+# The listing's link count is reported as the board total, so a run that hits
+# the site budget part-way is refused by run_one as a partial board rather
+# than published as a count. Added 23/09/2026; the two platforms sat in the
+# detect-only list before that (Abilia, Agfa, Arjo, Arthrex, Bausch & Lomb,
+# Coloplast, Advanced Bionics on the 22/09 rows).
+
+JOBPAGE_CAP = 40   # job pages fetched per company, inside SITE_BUDGET_S
+
+_TT_HOST = re.compile(r"https?://([a-z0-9_-]+\.teamtailor\.com)", re.I)
+_TT_JOB = re.compile(r"href=[\"'](?:https?://[a-z0-9_.-]+\.teamtailor\.com)?(/jobs/\d+[^\"'?#\s]*)", re.I)
+_SF_JOB = re.compile(r"href=[\"']((?:https?://[a-z0-9.-]+)?/job/[^\"'?#\s]+?/\d{5,}/?)[\"']", re.I)
+_SF_SEARCH = re.compile(r"href=[\"'](https?://[a-z0-9.-]+/search/?[^\"'\s]*)[\"']", re.I)
+_SF_NEXT = re.compile(r"href=[\"']([^\"']*[?&]startrow=\d+[^\"']*)[\"']", re.I)
+
+
+def _absolute(link, base):
+    return urllib.parse.urljoin(base, H.unescape(link))
+
+
+def _records_from_pages(links, deadline):
+    """Read each job page's JobPosting record. Returns (roles, pages_read)."""
+    roles, read = [], 0
+    for link in links[:JOBPAGE_CAP]:
+        if time.time() > deadline:
+            break
+        try:
+            body, final = get(link, timeout=20)
+        except Exception:
+            read += 1
+            continue
+        read += 1
+        got = jsonld_roles(body, final)
+        if got:
+            r = got[0]
+            if not r.get("url") or r["url"] == final:
+                r["url"] = link
+            roles.append(r)
+    return roles, read
+
+
+def _teamtailor_pages(host, deadline):
+    """Teamtailor: /jobs lists every role as a link to /jobs/<id>-<slug>; each
+    job page carries a JobPosting record. The list is paged with ?page=N."""
+    base = "https://%s" % host
+    links, seen_pages = [], 0
+    for page in range(1, 11):
+        url = base + "/jobs" + ("" if page == 1 else "?page=%d" % page)
+        body, final = get(url, timeout=20)
+        seen_pages += 1
+        found = [_absolute(m, final) for m in _TT_JOB.findall(body)]
+        new = [u for u in dict.fromkeys(found) if u not in links]
+        if not new:
+            break
+        links.extend(new)
+        if time.time() > deadline:
+            break
+    roles, _ = _records_from_pages(links, deadline)
+    return {"roles": roles, "ukTotal": None, "serverFilteredUK": False,
+            "totalAllLocations": len(links)}
+
+
+def _successfactors_pages(search_url, deadline):
+    """SAP SuccessFactors Career Site Builder: a /search/ page lists roles as
+    links to /job/<slug>/<id>/, paged with ?startrow=N; each job page carries a
+    JobPosting record."""
+    links, visited = [], set()
+    queue = [search_url]
+    while queue and len(visited) < 8:
+        url = queue.pop(0)
+        if url in visited:
+            continue
+        visited.add(url)
+        body, final = get(url, timeout=20)
+        for m in _SF_JOB.findall(body):
+            u = _absolute(m, final)
+            if u not in links:
+                links.append(u)
+        for m in _SF_NEXT.findall(body):
+            u = _absolute(m, final)
+            if u not in visited and u not in queue:
+                queue.append(u)
+        if time.time() > deadline:
+            break
+    roles, _ = _records_from_pages(links, deadline)
+    return {"roles": roles, "ukTotal": None, "serverFilteredUK": False,
+            "totalAllLocations": len(links)}
+
+
+def _sf_search_page(body, final):
+    """The Career Site Builder search page: this page if it lists jobs, else the
+    first /search/ link it carries (a company site handing off to its CSB host)."""
+    if _SF_JOB.search(body):
+        return final
+    for m in _SF_SEARCH.findall(body):
+        return _absolute(m, final)
+    return None
+
+
+def _host_token(url):
+    m = re.match(r"https?://([a-z0-9.-]+)", url or "", re.I)
+    host = (m.group(1) if m else "").lower()
+    host = re.sub(r"^(www|jobs|careers?|career\d*)\.", "", host)
+    return host.split(".")[0] if host else ""
+
 # Detected but NOT readable as records. These render their listings client-side
 # or gate the API behind a key. Naming them is honest and useful — a human can
 # click through — and it is emphatically not reported as "0 roles".
@@ -554,9 +672,7 @@ ATS_DETECT_ONLY = [
     # which exposes no such endpoint.
     ("workday",     re.compile(r"workday\.com/[a-z-]+/careers", re.I)),
     ("ashby",       re.compile(r"jobs\.ashbyhq\.com", re.I)),
-    ("teamtailor",  re.compile(r"[a-z0-9_-]+\.teamtailor\.com", re.I)),
     ("personio",    re.compile(r"[a-z0-9_-]+\.jobs\.personio\.(?:de|com)", re.I)),
-    ("successfactors", re.compile(r"successfactors\.(?:eu|com)|career\d*\.sap", re.I)),
     ("icims",       re.compile(r"\.icims\.com", re.I)),
     ("taleo",       re.compile(r"\.taleo\.net", re.I)),
 ]
@@ -748,6 +864,42 @@ def read_roles(careers_url, deadline, ident, _depth=0):
         return {"roles": roles, "ukTotal": None, "serverFilteredUK": False,
                 "totalAllLocations": len(roles), "atsAccount": None}, \
             "jsonld", None, None, final
+
+    # Job-page record routes (Teamtailor, SuccessFactors CSB): the listing only
+    # finds the pages, every role is its own page's JobPosting record.
+    tt = _TT_HOST.search(body) or _TT_HOST.search(final or "")
+    sf = _sf_search_page(body, final) if (
+        re.search(r"successfactors\.(?:eu|com)|career\d*\.sap|jobTitle-link|/job/[^\"']+/\d{5,}/", body, re.I)
+        or "/search/" in (final or "")) else None
+    for name, key, reader in (("teamtailor", tt.group(1).lower() if tt else None, _teamtailor_pages),
+                              ("successfactors", sf, _successfactors_pages)):
+        if not key:
+            continue
+        token = _host_token("https://" + key if name == "teamtailor" else key)
+        if not tenant_matches(token, ident[0], ident[1]):
+            return None, None, name, (
+                "the careers page hands off to a %s site named \u201c%s\u201d, which does not "
+                "carry this company's own identity \u2014 a parent or group careers site. Its roles "
+                "are not this company's, so no count is stated. The page is linked."
+                % (name, token)), None
+        if time.time() > deadline:
+            return None, None, name, "%s detected but the site budget ran out before reading it" % name, None
+        try:
+            fetched = reader(key, deadline)
+        except Exception as e:
+            return None, None, name, ("%s detected (%s) but its job pages could not be read (%s)"
+                                      % (name, key, type(e).__name__)), None
+        if not fetched.get("totalAllLocations"):
+            # The listing named no job pages at all. That is not "0 roles": it is
+            # a page that turned out not to be this platform's listing (a site
+            # search, a marketing page). Fall through to the other routes.
+            continue
+        if not fetched.get("roles"):
+            return None, None, name, ("%s listing links %d job pages but none carries a JobPosting "
+                                      "record, so no count is stated. The page is linked."
+                                      % (name, fetched["totalAllLocations"])), None
+        fetched["atsAccount"] = token
+        return fetched, "jsonld", name, None, final
 
     for name, rx in ATS_DETECT_ONLY:
         if rx.search(body):
