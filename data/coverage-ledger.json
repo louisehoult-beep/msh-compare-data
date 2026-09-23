@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 36512,
-  "differentiator.json held": 52122
+  "differentiator.json published": 36561,
+  "differentiator.json held": 52378
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 424,
-  "inScopeSuppliersNeedingCrawl": 322,
-  "inScopeSuppliersNeedingDomain": 295,
-  "suppliersRefused": 491,
+  "inScopeSuppliersNeedingCrawl": 318,
+  "inScopeSuppliersNeedingDomain": 291,
+  "suppliersRefused": 493,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 2,
   "suppliersDuplicateOfCaptured": 3,
@@ -9857,8 +9857,8 @@
    "category": "Rehabilitation and Community",
    "ends": "30 October 2028",
    "suppliersAwarded": 22,
-   "suppliersPublished": 6,
-   "coverage": 27.3,
+   "suppliersPublished": 9,
+   "coverage": 40.9,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9868,32 +9868,12 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Brighthedge Ltd T/A Summit Medical and Scientific",
-     "domain": null
-    },
-    {
-     "supplier": "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
-     "domain": null
-    },
-    {
-     "supplier": "Medinox (London) Limited",
-     "domain": null
-    },
-    {
      "supplier": "Phoenix Medical Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Thera Trainer UK Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Brighthedge Ltd T/A Summit Medical and Scientific",
-    "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
-    "Medinox (London) Limited",
-    "Phoenix Medical Ltd",
-    "Thera Trainer UK Ltd"
+    "Phoenix Medical Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -9933,10 +9913,24 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
+     "domain": "kinetecuk.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-23",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Physiolab Technologies Limited",
      "domain": "physiolab.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Thera Trainer UK Ltd",
+     "domain": "thera-trainer.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-23",
      "bucket": "refused"
     },
     {
@@ -9977,42 +9971,42 @@
    ],
    "route": "NHSSC framework",
    "catsInScope": [
+    "rehab:bath",
     "rehab:chair",
     "rehab:hygiene",
-    "rehab:therapy"
+    "rehab:therapy",
+    "rehab:walk"
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 5,
+    "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 5
+    "needDomain": 1
    },
    "published": [
+    "Brighthedge Ltd T/A Summit Medical and Scientific",
     "Crest Medical Ltd",
     "Essity UK Limited",
     "Medichill UK Ltd",
+    "Medinox (London) Limited",
     "Meglio Ltd",
     "Performance Health International Limited",
+    "Praxis Medical Ltd",
     "Promedics Orthopaedics Ltd"
    ],
    "publishedElsewhere": [
     "DJO UK Ltd (Enovis)",
     "Medline Industries",
     "Orca Medical Ltd",
-    "Praxis Medical Ltd",
     "Reliance Medical"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Brighthedge Ltd T/A Summit Medical and Scientific",
-    "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
-    "Medinox (London) Limited",
-    "Phoenix Medical Ltd",
-    "Thera Trainer UK Ltd"
+    "Phoenix Medical Ltd"
    ],
    "refused": [
     "Algeo",
@@ -10020,10 +10014,12 @@
     "Eureka Physiocare Ltd",
     "Kinetik Medical Devices",
     "Koolpak Ltd",
-    "Physiolab Technologies Limited"
+    "Medfac UK Ltd (previously Kinetec Medical Products UK Ltd)",
+    "Physiolab Technologies Limited",
+    "Thera Trainer UK Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 10,
+   "actionableTotal": 5,
    "blockedReason": null,
    "deferred": null
   },
