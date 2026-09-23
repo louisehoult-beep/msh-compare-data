@@ -74,8 +74,6 @@
 
   <div class="card" id="act">
     <button class="primary" id="go" disabled>Loading…</button>
-    <button class="ghost" id="test" style="display:none">Show me what an alert looks like</button>
-    <p class="tiny" id="testnote" style="display:none">That is a preview made by this phone. Real alerts come from the Hub each morning there is news.</p>
     <button class="ghost" id="off" style="display:none">Turn alerts off on this phone</button>
     <div id="status"></div>
     <p class="tiny">Alerts are sent by Elevate and Thrive Ltd for the Medical Sales Intelligence Hub. Your phone's push address is stored so we can send to it, and deleted when you turn alerts off. Nothing else is collected. <a href="https://medsalesintelligencehub.co.uk/terms/">Terms</a>.</p>
@@ -150,7 +148,7 @@
 
   function showOn(specs) {
     $('go').textContent = 'Save changes'; $('go').disabled = false;
-    $('off').style.display = ''; $('test').style.display = '';
+    $('off').style.display = '';
     status('ok', 'Alerts are on for this phone.\nYou will hear from us the next morning there is something new' +
       (specs && specs.length ? ' in your ' + specs.length + ' chosen specialit' + (specs.length === 1 ? 'y.' : 'ies.') : '.'));
   }
@@ -211,17 +209,9 @@
     }).then(function () {
       remember(null);
       status('ok', 'Alerts are off on this phone. Your push address will be removed on the next send.');
-      $('go').textContent = 'Turn on alerts'; $('off').style.display = 'none'; $('test').style.display = 'none';
+      $('go').textContent = 'Turn on alerts'; $('off').style.display = 'none';
       $('off').disabled = false;
     }).catch(function (err) { status('bad', String(err.message || err)); $('off').disabled = false; });
-  }
-
-  function testNotification() {
-    $('testnote').style.display = '';
-    reg.showNotification('Vascular Access and IV Therapy: 2 new items', {
-      body: 'This is what an alert looks like. Tap one and you land on the speciality page.',
-      icon: 'icon-192.png', tag: 'msh-test', data: { url: cfg.hubOrigin + '/medical-sales-hub/' }
-    }).catch(function (err) { status('bad', String(err.message || err)); });
   }
 
   // The Home Screen step for the browser the member is actually in. Chrome,
@@ -281,7 +271,6 @@
       }).then(function (sub) {
         $('go').addEventListener('click', subscribe);
         $('off').addEventListener('click', unsubscribe);
-        $('test').addEventListener('click', testNotification);
         if (!(sub && Notification.permission === 'granted')) {
           $('go').textContent = 'Turn on alerts'; $('go').disabled = false;
           return;
