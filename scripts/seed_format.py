@@ -44,25 +44,41 @@ import os
 MINIFIED = "minified"
 
 
-class Format:
-    """How a JSON file is laid out on disk: indent, and trailing newline or not."""
+# A single-line file is not automatically a COMPACT one. json.dumps with no
+# indent and no separators argument puts a space after every comma and colon,
+# and that is still one line. Both shapes have been on main (the spaced one
+# arrived 23/09/2026), so detection has to tell them apart instead of assuming.
+COMPACT = (",", ":")
+SPACED = (", ", ": ")
+SINGLE_LINE_SEPARATORS = (COMPACT, SPACED)
 
-    def __init__(self, indent, trailing_newline):
-        self.indent = indent                      # None == minified
+
+class Format:
+    """How a JSON file is laid out on disk: indent, separators, trailing newline."""
+
+    def __init__(self, indent, trailing_newline, separators=None):
+        self.indent = indent                      # None == single line
         self.trailing_newline = trailing_newline
+        # Only meaningful when indent is None; json.dumps fixes the separators
+        # itself once an indent is given.
+        self.separators = separators or COMPACT
 
     def __repr__(self):
-        shape = MINIFIED if self.indent is None else "indent=%d" % self.indent
+        if self.indent is None:
+            shape = MINIFIED if self.separators == COMPACT else "single line, spaced"
+        else:
+            shape = "indent=%d" % self.indent
         return "%s%s" % (shape, ", trailing newline" if self.trailing_newline else ", no trailing newline")
 
     def __eq__(self, other):
         return (isinstance(other, Format)
                 and self.indent == other.indent
-                and self.trailing_newline == other.trailing_newline)
+                and self.trailing_newline == other.trailing_newline
+                and self.separators == other.separators)
 
     def dumps(self, doc):
         if self.indent is None:
-            text = json.dumps(doc, ensure_ascii=False, separators=(",", ":"))
+            text = json.dumps(doc, ensure_ascii=False, separators=self.separators)
         else:
             text = json.dumps(doc, ensure_ascii=False, indent=self.indent)
         return (text + "\n" if self.trailing_newline else text).encode("utf-8")
@@ -79,13 +95,35 @@ def detect(raw):
     body = text[:-1] if trailing else text
     lines = body.split("\n")
     if len(lines) < 2:
-        return Format(None, trailing)
+        return Format(None, trailing, _single_line_separators(raw, trailing))
     second = lines[1]
     indent = len(second) - len(second.lstrip(" "))
     # A pretty-printed file always indents its second line. Zero means something
     # else produced it (tabs, or a hand edit) — treat it as minified rather than
     # inventing indent=0, which json.dumps renders as newlines with no indent.
-    return Format(indent if indent > 0 else None, trailing)
+    if indent > 0:
+        return Format(indent, trailing)
+    return Format(None, trailing, _single_line_separators(raw, trailing))
+
+
+def _single_line_separators(raw, trailing):
+    """Which separators a one-line file uses — proved, not sniffed.
+
+    Re-serialise the document the file already holds with each candidate pair
+    and keep the one that reproduces the bytes exactly. Guessing from the text
+    cannot work: a supplier note containing ", " is indistinguishable from a
+    separator. If neither reproduces the file (a hand edit, or a shape nothing
+    here writes) fall back to compact, which is what this repo's writers used
+    before 23/09/2026 — and dumps_like() will report round_trips False so the
+    caller says so out loud."""
+    try:
+        doc = json.loads(raw.decode("utf-8"))
+    except ValueError:
+        return COMPACT
+    for seps in SINGLE_LINE_SEPARATORS:
+        if Format(None, trailing, seps).dumps(doc) == raw:
+            return seps
+    return COMPACT
 
 
 def dumps_like(doc, raw):

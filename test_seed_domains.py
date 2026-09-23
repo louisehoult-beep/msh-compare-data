@@ -420,6 +420,18 @@ SHAPES = {
     "minified, trailing newline":
         (json.dumps({"a": [1, 2], "b": {"c": "\u00e9"}}, ensure_ascii=False,
                     separators=(",", ":")) + "\n").encode("utf-8"),
+    # Added 23/09/2026: json.dumps with no indent and no separators argument is
+    # still ONE line, but spaces every comma and colon. main was written this
+    # way by the TOS3 coverage run and the compact-only detector could not
+    # reproduce it. The payload deliberately contains ", " and ": " inside a
+    # string value, because that is what makes sniffing the text impossible and
+    # proving the round-trip the only honest test.
+    "single line, spaced, no trailing newline":
+        json.dumps({"a": [1, 2], "b": {"c": "\u00e9, one: two"}},
+                   ensure_ascii=False).encode("utf-8"),
+    "single line, spaced, trailing newline":
+        (json.dumps({"a": [1, 2], "b": {"c": "\u00e9, one: two"}},
+                    ensure_ascii=False) + "\n").encode("utf-8"),
     "indent 1, trailing newline":
         (json.dumps({"a": [1, 2], "b": {"c": "\u00e9"}}, ensure_ascii=False,
                     indent=1) + "\n").encode("utf-8"),
