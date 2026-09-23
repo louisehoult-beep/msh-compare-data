@@ -14,7 +14,7 @@
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
   "differentiator.json published": 36378,
-  "differentiator.json held": 51906
+  "differentiator.json held": 51989
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 427,
-  "inScopeSuppliersNeedingCrawl": 324,
-  "inScopeSuppliersNeedingDomain": 297,
-  "suppliersRefused": 489,
+  "inScopeSuppliersNeedingCrawl": 323,
+  "inScopeSuppliersNeedingDomain": 295,
+  "suppliersRefused": 490,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 2,
   "suppliersDuplicateOfCaptured": 2,
@@ -2473,6 +2473,10 @@
    ],
    "crawlWorklist": [
     {
+     "supplier": "Hospital Innovations",
+     "domain": "hospitalinnovations.com"
+    },
+    {
      "supplier": "Macromed UK Ltd",
      "domain": "macromed.co.uk"
     },
@@ -2490,14 +2494,6 @@
     },
     {
      "supplier": "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
-     "domain": null
-    },
-    {
-     "supplier": "Hospital Innovations",
-     "domain": null
-    },
-    {
-     "supplier": "Lavender Medical",
      "domain": null
     },
     {
@@ -2525,8 +2521,6 @@
     "Advita Ortho UK Limited",
     "Contura Orthopaedics Ltd",
     "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
-    "Hospital Innovations",
-    "Lavender Medical",
     "M.D.M Medical Ltd",
     "Marquardt UK",
     "Orthopediatrics EU Limited",
@@ -2743,6 +2737,13 @@
      "domain": "klsmartin.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-19",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Lavender Medical",
+     "domain": "lavendermedical.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-23",
      "bucket": "refused"
     },
     {
@@ -3008,11 +3009,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 3,
     "capturedNothingCounted": 1,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 10
+    "needDomain": 8
    },
    "published": [
     "Acumed Ltd",
@@ -3053,6 +3054,7 @@
     "TRB Chemedica (UK) Ltd"
    ],
    "heldOnly": [
+    "Hospital Innovations",
     "Macromed UK Ltd",
     "NSK United Kingdom Limited"
    ],
@@ -3063,8 +3065,6 @@
     "Contura Orthopaedics Ltd",
     "Advita Ortho UK Limited",
     "Future Health Works Ltd. (t/a myrecovery & msk.ai)",
-    "Hospital Innovations",
-    "Lavender Medical",
     "M.D.M Medical Ltd",
     "Marquardt UK",
     "Orthopediatrics EU Limited",
@@ -3102,6 +3102,7 @@
     "Kaiser Medical Technology Ltd",
     "Karl Storz UK",
     "KLS Martin UK Limited",
+    "Lavender Medical",
     "Leda Orthopaedics Ltd",
     "Lima Orthopaedics UK Ltd",
     "Link Orthopaedics UK Ltd",
@@ -3128,7 +3129,7 @@
     "Venturis Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 20,
+   "actionableTotal": 19,
    "blockedReason": null,
    "deferred": null
   },
