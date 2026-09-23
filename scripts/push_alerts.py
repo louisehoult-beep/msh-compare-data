@@ -310,7 +310,7 @@ def pywebpush_sender(private_key: str):
             webpush(subscription_info=info, data=json.dumps(message),
                     vapid_private_key=private_key,
                     vapid_claims={"sub": VAPID_SUBJECT},
-                    ttl=TTL_SECONDS, headers={"Urgency": "normal"})
+                    ttl=TTL_SECONDS, headers={"Urgency": "high"})
             return True, False, "sent"
         except WebPushException as exc:
             status = getattr(getattr(exc, "response", None), "status_code", None)
