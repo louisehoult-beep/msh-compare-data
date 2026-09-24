@@ -41,10 +41,19 @@
   var NAVY = '#0B1C33', GOLD = '#C49B5C', PANEL = '#0f172a',
       LINE = '#33415a', RULE = '#1e293b', TEXT = '#e2e8f0', DIM = '#94a3b8';
 
+  /* TWO PLACES THIS CAN MOUNT (24/09/2026).
+   * #ethHubSearch is the original full-width bar. The Live Desk masthead
+   * rebuild now hides it (display:none) and draws its own small "What do you
+   * want to do today?" box, .msh .qsearch, as a plain form posting to /?s=.
+   * On this site /?s= is intercepted by Jetpack Instant Search, so members
+   * typing a goal there got Jetpack's AI overlay instead of the Hub planner.
+   * Both are bound here: whichever one the page shows is the one that works. */
   var MOUNT = document.getElementById('ethHubSearch');
-  if (!MOUNT) { return; }
-  if (MOUNT.getAttribute('data-eth-bound') === 'v7') { return; }
-  MOUNT.setAttribute('data-eth-bound', 'v7');
+  var MAST = document.querySelector('.msh .qsearch');
+  if (!MOUNT && !MAST) { return; }
+  var ROOT = document.documentElement;
+  if (ROOT.getAttribute('data-eth-hubsearch') === 'v8') { return; }
+  ROOT.setAttribute('data-eth-hubsearch', 'v8');
 
   // Words that carry no signal in a query. A rep types "what does ICB stand
   // for"; only "icb" narrows anything.
@@ -627,6 +636,8 @@
 
     var toks = tokenise(q), res = rank(q), steps = plan(q), i, r, html, href, kicker;
     var top = steps ? planHtml(steps) : '';
+    // With a plan on screen the matches are supporting reading, not the answer.
+    if (steps) { res = res.slice(0, 4); }
 
     if (!res.length) {
       box.innerHTML = top + note('Nothing on the Hub matches that. ' +
@@ -638,7 +649,7 @@
 
     html = top + '<div style="padding:8px 14px 4px;color:' + DIM + ';font-size:11px;letter-spacing:1.2px;' +
            'font-weight:700;text-transform:uppercase;">' + res.length +
-           (res.length === 1 ? ' match' : ' matches') + ' on the Hub</div>';
+           (res.length === 1 ? ' match' : ' matches') + (steps ? ' to read next' : ' on the Hub') + '</div>';
 
     for (i = 0; i < res.length; i++) {
       r = res[i];
@@ -703,37 +714,131 @@
   }
 
   // -------------------------------------------------------------------- wire
-  shell();
-
   var timer = null;
   function schedule() {
     if (timer) { clearTimeout(timer); }
     timer = setTimeout(render, 90);
   }
 
-  // The index is fetched on first contact with the box, never on page load, so
-  // the Live Desk is not made slower for the members who never search.
-  input.addEventListener('focus', load);
-  input.addEventListener('input', function () { load(); schedule(); });
-  input.addEventListener('keydown', function (e) {
-    if (e.key !== 'Enter') { return; }
-    e.preventDefault();
-    var first = box.querySelector('a[href]');
-    if (first && box.style.display !== 'none') { window.location.assign(first.getAttribute('href')); }
-  });
-  toggle.addEventListener('click', function () { setOpen(!isOpen()); });
-  toggle.addEventListener('keydown', function (e) {
-    if (e.key !== 'Enter' && e.key !== ' ') { return; }
-    e.preventDefault();
-    setOpen(!isOpen());
-  });
+  // render() draws into whichever input/box pair the member is using. Each
+  // place calls use() before it renders, so the two never draw into each other.
+  function use(i, b) { input = i; box = b; }
 
-  document.getElementById('ethHubGo').addEventListener('click', function () {
-    var first = box.querySelector('a[href]');
-    if (first && box.style.display !== 'none') { window.location.assign(first.getAttribute('href')); return; }
-    var q = input.value ? input.value.trim() : '';
-    if (q) { window.location.assign('/?s=' + encodeURIComponent(q)); }
-  });
+  // Enter opens the first plan step or match. It never falls through to /?s=
+  // on its own: that URL opens Jetpack's overlay, which is exactly what this
+  // box exists to replace. The "search every page" link stays for a member who
+  // chooses it.
+  function goFirst(i, b) {
+    var links = b.style.display !== 'none' ? b.querySelectorAll('a[href]') : [], k, h;
+    for (k = 0; k < links.length; k++) {
+      h = links[k].getAttribute('href');
+      if (h.indexOf('/?s=') !== 0) { window.location.assign(h); return; }
+    }
+  }
+
+  if (MOUNT) {
+    shell();
+    var barInput = input, barBox = box;
+
+    // The index is fetched on first contact with the box, never on page load, so
+    // the Live Desk is not made slower for the members who never search.
+    barInput.addEventListener('focus', function () { use(barInput, barBox); load(); });
+    barInput.addEventListener('input', function () { use(barInput, barBox); load(); schedule(); });
+    barInput.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter') { return; }
+      e.preventDefault();
+      use(barInput, barBox);
+      var first = barBox.querySelector('a[href]');
+      if (first && barBox.style.display !== 'none') { window.location.assign(first.getAttribute('href')); }
+    });
+    toggle.addEventListener('click', function () { use(barInput, barBox); setOpen(!isOpen()); });
+    toggle.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') { return; }
+      e.preventDefault();
+      use(barInput, barBox);
+      setOpen(!isOpen());
+    });
+
+    document.getElementById('ethHubGo').addEventListener('click', function () {
+      use(barInput, barBox);
+      goFirst(barInput, barBox);
+    });
+  }
+
+  /* ------------------------------------------------------- masthead box
+   * The masthead box is 300px wide, so results cannot sit inside it. They open
+   * in a panel under it, fixed to the viewport rather than absolute inside the
+   * masthead: the masthead carries a background photo and overlay, and a panel
+   * positioned inside it would be clipped or sit under the overlay.
+   *
+   * The page's <form> is REPLACED, not just listened to. Jetpack Instant Search
+   * binds to search inputs (name="s") when the page loads and opens its own
+   * overlay on submit. A fresh form with no name="s" carries none of Jetpack's
+   * listeners and matches none of its selectors, and submit is stopped in the
+   * capture phase as a second guard. With JavaScript off, the page's original
+   * form is untouched and still falls back to site search. */
+  function bindMast(q) {
+    var old = q.querySelector('form');
+    if (!old) { return; }
+
+    var form = document.createElement('form');
+    form.setAttribute('role', 'presentation');
+    form.setAttribute('autocomplete', 'off');
+    form.innerHTML =
+      '<input type="text" aria-label="Tell the Hub what you want to do today" autocomplete="off" ' +
+      'spellcheck="false" placeholder="e.g. meeting about Molnlycke">' +
+      '<button type="submit">Plan</button>';
+    old.parentNode.replaceChild(form, old);
+
+    var mInput = form.querySelector('input'), mBox = document.createElement('div');
+    mBox.setAttribute('role', 'region');
+    mBox.setAttribute('aria-label', 'Your plan and matching Hub pages');
+    mBox.style.cssText = 'display:none;position:fixed;z-index:2147483000;background:' + NAVY + ';' +
+      'border:1px solid ' + LINE + ';border-top:3px solid ' + GOLD + ';border-radius:10px;' +
+      'box-shadow:0 18px 48px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.3);overflow-y:auto;' +
+      'font-family:Inter,-apple-system,"Segoe UI",Arial,sans-serif;text-align:left;' +
+      '-webkit-font-smoothing:antialiased;';
+    document.body.appendChild(mBox);
+
+    // Under the box, right edges aligned, wide enough to read, never off-screen.
+    function place() {
+      var r = q.getBoundingClientRect(), vw = window.innerWidth, vh = window.innerHeight;
+      var w = Math.min(600, vw - 32), left = Math.min(r.right - w, vw - w - 16);
+      if (left < 16) { left = 16; }
+      mBox.style.width = w + 'px';
+      mBox.style.left = left + 'px';
+      mBox.style.top = (r.bottom + 8) + 'px';
+      mBox.style.maxHeight = Math.max(220, vh - r.bottom - 24) + 'px';
+    }
+    function refresh() { use(mInput, mBox); render(); if (mBox.style.display !== 'none') { place(); } }
+    function close() { mBox.style.display = 'none'; }
+
+    mInput.addEventListener('focus', function () { use(mInput, mBox); load(); if (mInput.value.trim().length > 1) { refresh(); } });
+    mInput.addEventListener('input', function () {
+      use(mInput, mBox); load();
+      if (timer) { clearTimeout(timer); }
+      timer = setTimeout(refresh, 90);
+    });
+    mInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { close(); mInput.blur(); }
+    });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      use(mInput, mBox);
+      goFirst(mInput, mBox);
+    }, true);
+
+    document.addEventListener('mousedown', function (e) {
+      if (mBox.style.display === 'none') { return; }
+      if (mBox.contains(e.target) || q.contains(e.target)) { return; }
+      close();
+    });
+    window.addEventListener('resize', function () { if (mBox.style.display !== 'none') { place(); } });
+    window.addEventListener('scroll', function () { if (mBox.style.display !== 'none') { place(); } }, true);
+  }
+
+  if (MAST) { bindMast(MAST); }
 
   // Lets the page, or a test harness, supply the index directly.
   if (window.MSH_HUB_SEARCH_INDEX) {
