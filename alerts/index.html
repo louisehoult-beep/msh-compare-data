@@ -53,8 +53,16 @@
 </header>
 <main>
   <div class="card">
-    <p>One alert a morning, only when there is something new for the specialities you pick. Tap it and you land on that speciality's page on the Hub.</p>
-    <p class="dim">No app, no email, no account: your phone is the subscriber. Turn it off any time on this page or in your phone's notification settings.</p>
+    <p>One alert a morning, only when there is something new for the specialities you pick. Tap it to see the headlines, with a link to each speciality's page on the Hub.</p>
+    <p class="dim">For Hub members. No app and no email: your phone is the subscriber. Turn it off any time on this page or in your phone's notification settings.</p>
+  </div>
+
+  <div class="card" id="member" style="display:none">
+    <h2>Start from the Hub</h2>
+    <p id="membermsg">Phone alerts are for Hub members. Log in to the Hub, open <strong>Phone alerts</strong> and tap <strong>Turn on phone alerts</strong>. That brings you back here, ready to go.</p>
+    <p><a href="https://medsalesintelligencehub.co.uk/medical-sales-hub/phone-alerts/" style="font-weight:700">Open Phone alerts on the Hub &rarr;</a></p>
+    <p class="tiny">Already on the Hub page and sent here from an app icon? Tap <strong>Copy my alerts code</strong> there, then paste it here:</p>
+    <div class="row"><input id="code" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste your alerts code" style="flex:1;min-width:0;font:inherit;padding:10px;border:1px solid var(--border);border-radius:8px"><button class="ghost" id="usecode" style="margin-top:0">Use code</button></div>
   </div>
 
   <div class="card ios" id="ios">
@@ -87,6 +95,23 @@
   var $ = function (id) { return document.getElementById(id); };
   var cfg = null, reg = null;
   var LS = 'msh-alerts-v1';
+  var HUB_ALERTS = 'https://medsalesintelligencehub.co.uk/medical-sales-hub/phone-alerts/';
+
+  // The member pass. The Hub's Phone alerts page (members only) asks
+  // WordPress for it and sends the member here with it after "#m=". It is
+  // moved into the query string so that an iPhone's Add to Home Screen, which
+  // saves the address as it stands, carries it into the Home Screen app (the
+  // manifest has no start_url for this reason). Only the Edge Function
+  // alerts-subscribe can check it; the page just passes it on.
+  function readPass() {
+    var m = /[#&?]m=([A-Za-z0-9_.-]+)/.exec(location.hash) || /[?&]m=([A-Za-z0-9_.-]+)/.exec(location.search);
+    return m ? m[1] : '';
+  }
+  function keepPass(p) {
+    try { history.replaceState(null, '', location.pathname + (p ? '?m=' + p : '')); } catch (e) {}
+  }
+  var pass = readPass();
+  if (pass) { keepPass(pass); }
 
   function status(kind, text) {
     var el = $('status'); el.className = kind; el.textContent = text;
@@ -154,24 +179,42 @@
       (specs && specs.length ? ' in your ' + specs.length + ' chosen specialit' + (specs.length === 1 ? 'y.' : 'ies.') : '.'));
   }
 
+  // Every save goes through the Edge Function, which checks the member pass
+  // and upserts, so changed specialities are really saved. The anon key can
+  // no longer write the table (24/09/2026, members only).
+  function fn(body) {
+    return fetch(cfg.supabaseUrl + '/functions/v1/alerts-subscribe', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (r.ok && j.ok) { return j; }
+        var err = new Error(j.why === 'member' || j.why === 'pass' ? 'member' : 'Could not save (' + r.status + (j.why ? ', ' + j.why : '') + ').');
+        err.why = j.why || ''; throw err;
+      });
+    });
+  }
   function post(sub, specs) {
     var json = sub.toJSON();
-    var body = {
+    return fn({
+      action: 'on',
+      pass: pass || undefined,
       endpoint: json.endpoint,
       p256dh: json.keys.p256dh,
       auth: json.keys.auth,
       specialities: specs,
       user_agent: navigator.userAgent.slice(0, 200)
-    };
-    return fetch(cfg.supabaseUrl + '/rest/v1/' + (cfg.table || 'push_subscriptions'), {
-      method: 'POST',
-      headers: { 'apikey': cfg.supabaseAnonKey, 'Authorization': 'Bearer ' + cfg.supabaseAnonKey,
-                 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-      body: JSON.stringify(body)
-    }).then(function (r) {
-      if (r.status === 201 || r.status === 409) { return true; }   // 409 = this phone is already on file
-      return r.text().then(function (t) { throw new Error('Could not save (' + r.status + '): ' + t.slice(0, 160)); });
     });
+  }
+
+  // Not a member, or the Hub link has expired: say so, and show the way in.
+  function needMember(why) {
+    $('membermsg').innerHTML = why === 'pass'
+      ? 'Your link from the Hub has expired. Open <strong>Phone alerts</strong> on the Hub again and tap <strong>Turn on phone alerts</strong>, or paste a fresh code below.'
+      : why === 'lapsed'
+      ? 'Phone alerts now need your Hub login, so this phone has to be turned on again once. Open <strong>Phone alerts</strong> on the Hub and tap <strong>Turn on phone alerts</strong>.'
+      : 'Phone alerts are for Hub members. Log in to the Hub, open <strong>Phone alerts</strong> and tap <strong>Turn on phone alerts</strong>. That brings you back here, ready to go.';
+    $('member').style.display = 'block'; $('pick').style.display = 'none'; $('act').style.display = 'none';
+    $('ios').style.display = 'none';
   }
 
   function subscribe() {
@@ -184,12 +227,11 @@
       stage = 'subscribe';
       return reg.pushManager.getSubscription();
     }).then(function (old) {
-      // A subscription is one endpoint with one set of specialities. To change
-      // the specialities we take a fresh endpoint; the old row is pruned the
-      // first time the sender hears 410 from it.
-      return old ? old.unsubscribe().then(function () { return null; }) : null;
-    }).then(function () {
-      return reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToBytes(cfg.vapidPublicKey) });
+      // Keep the phone's existing push address: the function updates its
+      // specialities in place. (Until 24/09/2026 a change took a fresh
+      // address, and a phone Apple handed the same one back got a 409 and
+      // kept its old specialities.)
+      return old || reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64ToBytes(cfg.vapidPublicKey) });
     }).then(function (sub) {
       stage = 'save';
       return post(sub, specs);
@@ -198,18 +240,26 @@
       report('subscribed', specs.length ? specs.join(',') : 'all');
       showOn(specs);
     }).catch(function (err) {
+      $('go').disabled = false;
+      if (err && err.message === 'member') {
+        report('fail-member', err.why);
+        needMember(err.why);
+        return;
+      }
       report('fail-' + stage, err && (err.message || err));
-      status('bad', 'Alerts are not on yet. ' + String(err.message || err)); $('go').disabled = false;
+      status('bad', 'Alerts are not on yet. ' + String(err.message || err));
     });
   }
 
   function unsubscribe() {
     $('off').disabled = true;
     reg.pushManager.getSubscription().then(function (sub) {
-      return sub ? sub.unsubscribe() : true;
+      if (!sub) { return true; }
+      // Remove it from the list now; if that fails, the next send prunes it.
+      return fn({ action: 'off', endpoint: sub.endpoint }).catch(function () {}).then(function () { return sub.unsubscribe(); });
     }).then(function () {
       remember(null);
-      status('ok', 'Alerts are off on this phone. Your push address will be removed on the next send.');
+      status('ok', 'Alerts are off on this phone and its push address has been removed.');
       $('go').textContent = 'Turn on alerts'; $('off').style.display = 'none';
       $('off').disabled = false;
     }).catch(function (err) { status('bad', String(err.message || err)); $('off').disabled = false; });
@@ -239,10 +289,23 @@
   }
 
   function boot() {
+    $('usecode').addEventListener('click', function () {
+      var v = ($('code').value || '').trim().replace(/^.*[#?&]m=/, '');
+      if (!/^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(v)) { $('code').focus(); return; }
+      pass = v; keepPass(pass); location.reload();
+    });
     fetch('config.json', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (c) {
       cfg = c;
       var pre = saved();
       renderSpecs(c.specialities || [], pre ? pre.specs : []);
+      // No pass and not an app that was set up before: nothing here can work
+      // yet, so send them to the Hub first (on iPhone, before the Home Screen
+      // steps, so the icon they add carries the pass).
+      if (!pass && !(pre && (standalone || !isIOS))) {
+        needMember('');
+        report('no-pass', '');
+        return;
+      }
       // iPhone only grants push to the Home Screen icon. Anywhere else (a
       // Safari tab, an in-app browser, a sheet opened from another Home
       // Screen app) show the three steps and nothing that can fail.
@@ -282,7 +345,8 @@
         status('info', 'Checking your alerts…');
         var specs = pre && pre.specs ? pre.specs : [];
         return post(sub, specs).then(function () { showOn(specs); }, function (err) {
-          report('fail-resave', err && (err.message || err));
+          report('fail-resave', err && (err.message === 'member' ? 'member:' + err.why : err.message || err));
+          if (err && err.message === 'member') { needMember(pass ? 'pass' : 'lapsed'); return; }
           $('go').textContent = 'Turn on alerts'; $('go').disabled = false;
           status('bad', 'Alerts are not on yet. Tap Turn on alerts to try again.');
         });

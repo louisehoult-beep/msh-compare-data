@@ -19,13 +19,22 @@ Writes:
   alerts/apple-touch-icon.png  180x180  iPhone Home Screen
   alerts/icon-192.png          192x192  manifest, favicon, notification icon
   alerts/icon-512.png          512x512  manifest, Android splash
+  alerts/badge-96.png           96x96   Android status-bar badge
+
+The badge is drawn here, not taken from the logo. Android paints a badge
+from its transparency alone, in white, at about 24 pixels: the logo there is
+a blank square (what members saw until 24/09/2026) and its lettering would
+be mush. It is the logo's rising bars and arrow as a white silhouette.
+Rebuild just the badge with:
+
+    python3 scripts/make_alert_icons.py --badge
 """
 import io
 import os
 import sys
 import urllib.request
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 NAVY = (0x0B, 0x1C, 0x33)
 MARGIN = 0.12          # each side, as a share of the icon, for transparent logos
@@ -66,7 +75,34 @@ def square_master(img, size=1024):
     return canvas.convert("RGB")
 
 
+def badge(px=96, ss=8):
+    """White bars-and-arrow silhouette on transparent, drawn large and scaled
+    down so the edges are smooth."""
+    n = px * ss
+    u = n / 96.0
+    img = Image.new("RGBA", (n, n), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    white = (255, 255, 255, 255)
+    base = 88 * u
+    for i, top in enumerate((66, 56, 44, 30)):          # four rising bars
+        x = (10 + i * 20) * u
+        d.rounded_rectangle((x, top * u, x + 14 * u, base), radius=3 * u, fill=white)
+    d.line(((8 * u, 50 * u), (40 * u, 34 * u), (76 * u, 12 * u)), fill=white,
+           width=round(6 * u), joint="curve")               # the arrow's shaft
+    d.polygon(((88 * u, 4 * u), (64 * u, 6 * u), (80 * u, 26 * u)), fill=white)
+    return img.resize((px, px), Image.LANCZOS)
+
+
+def write_badge():
+    path = os.path.normpath(os.path.join(OUT_DIR, "badge-96.png"))
+    badge().save(path, "PNG", optimize=True)
+    print("wrote", path, "96x96")
+
+
 def main(argv):
+    if len(argv) == 2 and argv[1] == "--badge":
+        write_badge()
+        return
     if len(argv) != 2:
         sys.exit(__doc__)
     master = square_master(load(argv[1]))
@@ -74,6 +110,7 @@ def main(argv):
         path = os.path.normpath(os.path.join(OUT_DIR, name))
         master.resize((px, px), Image.LANCZOS).save(path, "PNG", optimize=True)
         print("wrote", path, "%dx%d" % (px, px))
+    write_badge()
 
 
 if __name__ == "__main__":

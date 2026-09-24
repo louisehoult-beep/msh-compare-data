@@ -21,6 +21,10 @@ var LATEST = 'latest.html';
 var STORE = 'msh-alerts';
 var STORE_KEY = 'latest-alert.json';
 var ICON = 'icon-192.png';
+// Android draws the badge (the small status-bar icon) from its transparency
+// alone, so a full-colour square shows as a blank white block. This one is a
+// white silhouette on transparent (scripts/make_alert_icons.py). iOS ignores it.
+var BADGE = 'badge-96.png';
 
 self.addEventListener('install', function () { self.skipWaiting(); });
 self.addEventListener('activate', function (e) { e.waitUntil(self.clients.claim()); });
@@ -34,7 +38,7 @@ self.addEventListener('push', function (event) {
   var options = {
     body: data.body || 'New items on the Hub.',
     icon: ICON,
-    badge: ICON,
+    badge: BADGE,
     tag: data.tag || 'msh-news',
     renotify: true,
     data: { url: new URL(data.url || LATEST, self.registration.scope).href }

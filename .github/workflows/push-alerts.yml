@@ -72,8 +72,11 @@ jobs:
         run: |
           echo "::warning::Phone alerts are NOT configured: one or more of SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_KEY, VAPID_PRIVATE_KEY is missing. Nothing will be sent. See docs/PUSH-ALERTS.md."
 
+      # Pinned (24/09/2026): an unpinned install picks up whatever was
+      # released overnight, and a breaking pywebpush release would take the
+      # morning alerts down with nothing changed here. Bump it deliberately.
       - name: Install web push library
-        run: python3 -m pip install --quiet pywebpush
+        run: python3 -m pip install --quiet "pywebpush==2.5.0"
 
       - name: Build alerts/config.json (public values only)
         env:

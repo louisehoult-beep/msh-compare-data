@@ -36,6 +36,10 @@ WHY THE SHAPE IS WHAT IT IS
   repo is public. The browser inserts with the anon key under a row-level
   policy that allows INSERT only; this script reads and prunes with the
   service-role key, which lives in a GitHub secret.
+* Members only (24/09/2026). The page cannot write the table: the Edge
+  Function alerts-subscribe saves a phone only with a member pass from the
+  Hub, and records the member's WordPress user id in member_id. This script
+  sends only to rows that have one; older rows are skipped, never sent to.
 * A push service answering 404 or 410 means the member unsubscribed or the
   browser dropped the subscription: the row is deleted, not retried.
 * Runtime dependency on pywebpush (RFC 8291 encryption + RFC 8292 VAPID) is
@@ -295,8 +299,15 @@ class Store:
         return json.loads(raw) if raw else None
 
     def subscriptions(self) -> list[dict]:
-        rows = self._req("GET", "?select=id,endpoint,p256dh,auth,specialities&limit=%d" % MAX_PER_RUN)
-        return [r for r in (rows or []) if r.get("endpoint") and r.get("p256dh") and r.get("auth")]
+        """Members' phones only: rows saved through alerts-subscribe with a member pass."""
+        rows = self._req("GET", "?select=id,endpoint,p256dh,auth,specialities,member_id"
+                                "&member_id=not.is.null&limit=%d" % MAX_PER_RUN)
+        return members_only(rows)
+
+    def unverified(self) -> list[dict]:
+        """Rows from before the members-only rule. Never sent to."""
+        return self._req("GET", "?select=id,endpoint,user_agent,created_at&member_id=is.null"
+                                "&order=created_at.desc&limit=%d" % MAX_PER_RUN) or []
 
     def delete(self, row_id) -> None:
         self._req("DELETE", "?id=eq.%s" % row_id, prefer="return=minimal")
@@ -310,6 +321,14 @@ class Store:
                                     "&order=created_at.desc&limit=%d" % limit) or []
         finally:
             self.base = base
+
+
+def members_only(rows) -> list[dict]:
+    """Sendable rows: complete, and saved by a member (member_id set). The
+    query already filters on member_id; this is the second lock, so a changed
+    query can never widen who gets alerts."""
+    return [r for r in (rows or [])
+            if r.get("endpoint") and r.get("p256dh") and r.get("auth") and r.get("member_id")]
 
 
 # --------------------------------------------------------------------------
@@ -593,9 +612,25 @@ def cmd_diagnose(_args) -> int:
     hosts: dict[str, int] = {}
     for r in rows:
         hosts[_host(r["endpoint"])] = hosts.get(_host(r["endpoint"]), 0) + 1
-    print("diagnose: %d subscription(s): %s" % (len(rows), json.dumps(hosts)))
+    print("diagnose: %d member subscription(s): %s" % (len(rows), json.dumps(hosts)))
     print("  (web.push.apple.com = iPhone/iPad/Safari; fcm.googleapis.com = Chrome/Android; "
           "updates.push.services.mozilla.com = Firefox)")
+    by_member: dict = {}
+    for r in rows:
+        by_member.setdefault(r["member_id"], []).append(_host(r["endpoint"]))
+    for m, hs in sorted(by_member.items()):
+        if len(hs) > 1:
+            print("  member %s has %d phones/browsers on file: %s" % (m, len(hs), ", ".join(hs)))
+    try:
+        old = store.unverified()
+    except SupabaseError as exc:
+        print("diagnose: could not read unverified rows: %s" % exc)
+        old = []
+    print("diagnose: %d row(s) from before the members-only rule (never sent to)%s" % (
+        len(old), ":" if old else ""))
+    for r in old:
+        print("  id %-5s %s  %-8s %s" % (r.get("id"), (r.get("created_at") or "")[:19],
+                                        _host(r.get("endpoint")), _device(r.get("user_agent"))))
     try:
         ev = store.events()
     except SupabaseError as exc:

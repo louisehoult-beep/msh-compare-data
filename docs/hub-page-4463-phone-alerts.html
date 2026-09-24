@@ -1,0 +1,71 @@
+<!-- wp:heading {"level":2} -->
+<h2 class="wp-block-heading">Phone alerts for new news</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>One alert a morning, only when something new has landed for the specialities you pick. Tap it to see the headlines, each linking to its source, with a link to that speciality's page here on the Hub. No app to install and no email: your phone is the subscriber, and you can turn it off any time.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<div id="msh-alerts" style="margin:18px 0">
+<a id="msh-alerts-go" class="wp-block-button__link wp-element-button" href="https://louisehoult-beep.github.io/msh-compare-data/alerts/" style="display:inline-block">Turn on phone alerts</a>
+<p id="msh-alerts-note" style="display:none;margin:12px 0 0;font-size:15px"></p>
+<p style="margin:14px 0 0;font-size:14px"><a href="#" id="msh-alerts-copy">Copy my alerts code</a> (only needed if the alerts page asks you for one)</p>
+<input id="msh-alerts-code" type="text" readonly style="display:none;width:100%;margin-top:8px;padding:8px;font-size:13px">
+</div>
+<script>
+(function () {
+  /* Phone alerts are for members only (24/09/2026). This asks WordPress for
+     the signed member pass (WPCode snippet 4510, the same pass Ask the Hub
+     uses) and hands it to the alerts page, whose Supabase function checks it
+     before saving the phone. Source: msh-compare-data docs/hub-page-4463-phone-alerts.html.
+     No double ampersands anywhere in this script: WordPress mangles them. */
+  var ALERTS = 'https://louisehoult-beep.github.io/msh-compare-data/alerts/';
+  var go = document.getElementById('msh-alerts-go');
+  var note = document.getElementById('msh-alerts-note');
+  var copy = document.getElementById('msh-alerts-copy');
+  var box = document.getElementById('msh-alerts-code');
+  if (!go) { return; }
+  function say(t) { note.textContent = t; note.style.display = 'block'; }
+  function getPass() {
+    return fetch('/wp-admin/admin-ajax.php?action=msh_ask_pass', { credentials: 'same-origin', cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.ok) { throw new Error(j ? j.why : 'member'); }
+        return j.pass;
+      });
+  }
+  function refused(err) {
+    var why = String(err ? err.message : '');
+    say(why === 'login' ? 'Please log in to the Hub again, then tap the button.'
+                        : 'Phone alerts are part of Hub membership. If you are a member and see this, please contact us.');
+  }
+  go.addEventListener('click', function (e) {
+    e.preventDefault();
+    go.textContent = 'Opening...';
+    getPass().then(function (p) {
+      window.location.href = ALERTS + '#m=' + p;
+    }, function (err) {
+      go.textContent = 'Turn on phone alerts';
+      refused(err);
+    });
+  });
+  copy.addEventListener('click', function (e) {
+    e.preventDefault();
+    getPass().then(function (p) {
+      box.value = p; box.style.display = 'block'; box.focus(); box.select();
+      var done = function () { say('Code copied. It works for 24 hours: paste it into the alerts page.'); };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(p).then(done, function () { say('Press and hold the code above, choose Copy, then paste it into the alerts page.'); });
+      } else {
+        say('Press and hold the code above, choose Copy, then paste it into the alerts page.');
+      }
+    }, refused);
+  });
+})();
+</script>
+<!-- /wp:html -->
+
+<!-- wp:paragraph {"fontSize":"small"} -->
+<p class="has-small-font-size">Android phones: tick your specialities on the alerts page and turn alerts on. iPhone: alerts only work from a Home Screen icon. Open the alerts page from the button above in Safari or Chrome, tap Share, then Add to Home Screen, then open the new Hub alerts icon and turn alerts on there. To change your specialities later, open the Hub alerts icon and tick differently.</p>
+<!-- /wp:paragraph -->

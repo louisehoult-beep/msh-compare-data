@@ -40,9 +40,12 @@ function sameString(a: string, b: string): boolean {
   return d === 0;
 }
 
-/** The WordPress user id the pass was issued to, or null for anything else. */
+/** The WordPress user id the pass was issued to, or null for anything else.
+ *  grace: seconds past expiry a pass is still honoured. 0 for Ask the Hub.
+ *  Phone alerts pass a day, because an iPhone member has to add the alerts
+ *  page to the Home Screen and open it from there before the pass is used. */
 export async function verifyPass(
-  pass: unknown, secret: string, now = Math.floor(Date.now() / 1000),
+  pass: unknown, secret: string, now = Math.floor(Date.now() / 1000), grace = 0,
 ): Promise<number | null> {
   if (typeof pass !== "string" || !secret || secret.length < 32) return null;
   const parts = pass.split(".");
@@ -52,7 +55,7 @@ export async function verifyPass(
   try { claims = JSON.parse(fromB64url(parts[0])); } catch { return null; }
   if (claims.v !== 1) return null;
   if (typeof claims.u !== "number" || !Number.isInteger(claims.u) || claims.u <= 0) return null;
-  if (typeof claims.e !== "number" || claims.e <= now || claims.e > now + MAX_LIFE) return null;
+  if (typeof claims.e !== "number" || claims.e <= now - grace || claims.e > now + MAX_LIFE) return null;
   return claims.u;
 }
 
