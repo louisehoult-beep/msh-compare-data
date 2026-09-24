@@ -172,6 +172,21 @@ replaces the notification on the lock screen rather than stacking a second.
   the alerts page itself.
 * Desktop browsers work too; the alert appears as a system notification.
 
+## The app icon
+
+`alerts/apple-touch-icon.png` (180, iPhone Home Screen), `icon-192.png` and
+`icon-512.png` are built from one logo by `scripts/make_alert_icons.py`.
+Since 24/09/2026 that's the Elevate and Thrive Gold logo (Hub media 2237);
+the first icons were a plain navy square that read as black on an iPhone.
+To change it: Actions, "Phone alerts app icons", Run workflow, paste the new
+logo's URL. A logo with transparency is laid on the Hub navy with a margin,
+because iOS fills transparent pixels with black.
+
+iPhones keep the icon they had when the page was added to the Home Screen.
+After a change, remove the **Hub alerts** icon, add it again from the alerts
+page and turn alerts back on. Members who already have it keep the old icon
+until they do the same; their alerts keep working either way.
+
 ## Rotating the VAPID key
 
 Every existing subscription is bound to the public key. Rotating it means
