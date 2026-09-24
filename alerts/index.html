@@ -53,7 +53,7 @@
 </header>
 <main>
   <div class="card">
-    <p>One alert a morning, only when there is something new for the specialities you pick. Tap it to see the headlines, with a link to each speciality's page on the Hub.</p>
+    <p>Alerts at 9am, 12 noon and 4pm, only when something new has gone live on the Hub for the specialities you pick. Tap it to see the headlines, with a link to each speciality's page on the Hub.</p>
     <p class="dim">For Hub members. No app and no email: your phone is the subscriber. Turn it off any time on this page or in your phone's notification settings.</p>
   </div>
 
@@ -175,7 +175,7 @@
   function showOn(specs) {
     $('go').textContent = 'Save changes'; $('go').disabled = false;
     $('off').style.display = '';
-    status('ok', 'Alerts are on for this phone.\nYou will hear from us the next morning there is something new' +
+    status('ok', 'Alerts are on for this phone.\nYou will hear from us at 9am, 12 noon or 4pm when there is something new' +
       (specs && specs.length ? ' in your ' + specs.length + ' chosen specialit' + (specs.length === 1 ? 'y.' : 'ies.') : '.'));
   }
 

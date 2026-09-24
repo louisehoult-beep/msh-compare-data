@@ -22,8 +22,15 @@ Four subcommands:
 
 WHY THE SHAPE IS WHAT IT IS
 ---------------------------
+* THREE SLOTS A DAY (Lou, 24/09/2026): 09:00, 12:00 and 16:00 London time.
+  Each slot bundles what went live since the last one. `send --slot` sends
+  only inside a slot's window and only once per slot (state lastSlot), so a
+  late, repeated or backup-cron run can never buzz a phone off-slot or twice.
+  Lou's Mac triggers each slot on time (LaunchAgent
+  uk.co.elevateandthrive.hub-alert-send); GitHub's own cron is the backup,
+  because it runs hours late on this repo.
 * ONE push per member per run, never one per item. The news build can add
-  thirty items across ten specialities in a morning; thirty buzzes is how a
+  thirty items across ten specialities in a day; thirty buzzes is how a
   member turns alerts off for good.
 * "New" means "not seen by THIS script before", tracked in
   state/push-alerts.json, not "published in the last 24 hours". Feeds
@@ -83,6 +90,8 @@ LATEST_PAGE = "latest.html"  # opened on tap, relative to the alerts web app's s
 MAX_ITEMS = 12
 PAYLOAD_MAX = 3000           # bytes of JSON; the encrypted web push limit is 4096
 MAX_PER_RUN = 5000          # sanity cap on rows pulled per run
+SLOTS = (9, 12, 16)         # London hours; Lou, 24/09/2026
+SLOT_GRACE = 120            # minutes a slot stays open for a late trigger (a Mac waking up)
 
 
 # --------------------------------------------------------------------------
@@ -114,6 +123,28 @@ def label_for(slug: str, panels_dir: str = PANELS_DIR) -> str:
         pass
     words = slug.split("-")
     return " ".join(w if w in ("and", "the", "of") else w.capitalize() for w in words)
+
+
+def london_now(now=None):
+    from zoneinfo import ZoneInfo
+    now = now or _dt.datetime.now(_dt.timezone.utc)
+    return now.astimezone(ZoneInfo("Europe/London"))
+
+
+def current_slot(now=None) -> str | None:
+    """'YYYY-MM-DD-HH' for the send slot open right now, or None.
+
+    A slot opens on the hour and stays open SLOT_GRACE minutes, never past
+    the next slot. London time, so the slots follow BST and GMT."""
+    ldn = london_now(now)
+    for i in range(len(SLOTS) - 1, -1, -1):
+        start = ldn.replace(hour=SLOTS[i], minute=0, second=0, microsecond=0)
+        if start <= ldn:
+            end = start + _dt.timedelta(minutes=SLOT_GRACE)
+            if i + 1 < len(SLOTS):
+                end = min(end, start.replace(hour=SLOTS[i + 1]))
+            return start.strftime("%Y-%m-%d-%H") if ldn < end else None
+    return None
 
 
 def hub_page(slug: str) -> str:
@@ -235,7 +266,9 @@ def build_message(new_by_slug: dict[str, list[dict]], wanted: list[str] | None,
         "title": title,
         "body": body,
         "url": LATEST_PAGE,
-        "tag": "msh-news-" + _dt.datetime.now(_dt.timezone.utc).strftime("%Y%m%d"),
+        # One tag per slot: a re-run of the same slot replaces its own
+        # notification, but 12:00 does not wipe 09:00 off the lock screen.
+        "tag": "msh-news-" + london_now().strftime("%Y%m%d-%H"),
         "hub": [{"l": labels(s), "u": hub_page(s)} for s in slugs],
         "items": [{"t": _clip(it.get("title") or "", 140), "u": it.get("link") or "",
                    "s": it.get("source") or "", "sp": labels(s)}
@@ -479,12 +512,27 @@ def cmd_build_config(args) -> int:
 
 
 def cmd_send(args) -> int:
+    slot = None
+    if getattr(args, "slot", False):
+        slot = current_slot()
+        if slot is None:
+            print("send: outside the 09:00 / 12:00 / 16:00 London slots (now %s) — nothing sent, "
+                  "state untouched" % london_now().strftime("%H:%M"))
+            return 0
+        prev = load_state(args.state)
+        if prev and prev.get("lastSlot") == slot:
+            print("send: slot %s already sent — nothing to do" % slot)
+            return 0
+        print("send: slot %s" % slot)
     news = load_news(args.news_dir)
     if not news:
         print("send: no speciality-news files found — nothing to do")
         return 0
     state = load_state(args.state)
     new_by_slug, next_state = diff_news(news, state)
+    last = slot or (state or {}).get("lastSlot")
+    if last:
+        next_state["lastSlot"] = last
     total_new = sum(len(v) for v in new_by_slug.values())
 
     if state is None:
@@ -545,7 +593,7 @@ def cmd_send(args) -> int:
 
 TEST_MESSAGE = {
     "title": "Medical Sales Intelligence Hub",
-    "body": "Test alert: phone alerts are working. Your first real one arrives the next morning there is news.",
+    "body": "Test alert: phone alerts are working. Real ones come at 9am, 12 noon and 4pm when there is news in your specialities.",
     "url": LATEST_PAGE,
     "tag": "msh-test",
     "hub": [{"l": "Live Desk", "u": HUB_HOME}],
@@ -656,6 +704,8 @@ def main(argv=None) -> int:
     s.add_argument("--news-dir", default=NEWS_DIR)
     s.add_argument("--state", default=STATE_PATH)
     s.add_argument("--dry-run", action="store_true")
+    s.add_argument("--slot", action="store_true",
+                   help="send only inside a 09:00/12:00/16:00 London slot, once per slot")
     s.set_defaults(fn=cmd_send)
     sub.add_parser("test", help="send a test alert to every subscriber now").set_defaults(fn=cmd_test)
     sub.add_parser("diagnose", help="read-only: subscribers by push service, and recent page events"
