@@ -19,7 +19,24 @@ page reps work from"). Full width with side margins, top to bottom:
    * Safety alerts: MHRA device and patient safety alerts (`data/mhra-alerts.json`, MHRA Regulatory Desk).
    * Procurement deadlines: framework and contract dates, next 180 days (`data/hub-calendar.json`, Frameworks and tenders).
    Every row expands in place to show its detail, the rep angle and source links.
-3. **Your pages.** The member's chosen tiles, in their order.
+3. **Your pages.** The member's chosen tiles, in their order, each with its
+   group's icon.
+
+Redesigned again 24/09/2026 (Lou: "it needs a tools button for all the tools,
+make it more user friendly and visual, it's too wordy"):
+
+* **Tools button** (gold, in the sticky bar beside Customise, kept on phones)
+  opens the tools launcher: every catalogue group except specialities, as
+  icon tiles under group headings, with a filter box and group chips. Built
+  from the catalogue each time it opens, so a new page appears with no code
+  change; a page with no icon of its own gets its group's icon.
+* **Quick tools row** under the bar: Med Sales Tools, Live Desk, The Calendar,
+  Framework Hub, MHRA Regulatory Desk, Suppliers, Company Intelligence
+  Reports, Ask the Desk, plus "All tools". Only shown if the id is in the
+  catalogue.
+* **Copy cut to the bone:** short masthead line, 2-3 word briefing labels, no
+  section intro lines, one-line footer. Icons, counts and badges carry the
+  meaning instead.
 
 A "Your specialities / Whole Hub" switch narrows news, events and procurement
 to the specialities the member pinned (remembered per browser). MHRA alerts
