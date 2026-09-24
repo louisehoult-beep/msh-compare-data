@@ -1137,7 +1137,12 @@
     tlGroups().forEach(function (g) {
       if (tlG && tlG !== g) { return; }
       var gl = groupLabel(g) + ' ' + groupShort(g);
-      var rows = CAT.items.filter(function (it) { return it.group === g && (!q || wordAt(it.label, q) !== -1 || wordAt(gl, q) !== -1); });
+      /* A tile's own name wins: "frame" shows the two Framework tiles, not the
+         whole of "Procurement and frameworks". The group name only matters
+         when no tile name in the group matches. */
+      var inG = CAT.items.filter(function (it) { return it.group === g; });
+      var rows = !q ? inG : inG.filter(function (it) { return wordAt(it.label, q) !== -1; });
+      if (q && !rows.length && wordAt(gl, q) !== -1) { rows = inG; }
       if (!rows.length) { return; }
       h += '<section class="grp"><div class="gh"><span class="ga g-' + esc(g) + '">' + icon((GROUP_UI[g] || {}).ic) + '</span><h3 class="gt">' + esc(groupShort(g)) + '</h3><span class="c">' + rows.length + '</span></div><div class="gg">'
         + rows.map(function (it) {
