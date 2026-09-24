@@ -77,15 +77,22 @@ function logEvent(stage, detail) {
 self.addEventListener('notificationclick', function (event) {
   event.notification.close();
   var url = (event.notification.data && event.notification.data.url) || new URL(LATEST, self.registration.scope).href;
+  // openWindow first: it is what reliably brings the app forward on iPhone.
+  // 24/09/2026: navigating an already-open app window instead did nothing at
+  // all on Lou's iPhone when she tapped. If openWindow is refused, fall back
+  // to focusing any open app window. Every tap is logged either way.
   event.waitUntil(
-    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (list) {
-      for (var i = 0; i < list.length; i++) {
-        var c = list[i];
-        if (c.url.indexOf(self.registration.scope) === 0 && 'navigate' in c) {
-          return c.navigate(url).then(function (w) { return (w || c).focus(); });
-        }
-      }
-      return self.clients.openWindow(url);
+    self.clients.openWindow(url).then(function (w) {
+      return logEvent(w ? 'tap-opened' : 'tap-opened-null', url);
+    }).catch(function (err) {
+      return self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (list) {
+        var c = list.filter(function (x) { return x.url.indexOf(self.registration.scope) === 0; })[0];
+        return (c ? c.focus() : null);
+      }).then(function () {
+        return logEvent('tap-open-failed', String(err && (err.message || err)));
+      }, function (err2) {
+        return logEvent('tap-open-failed', String(err && (err.message || err)) + ' / ' + String(err2));
+      });
     })
   );
 });
