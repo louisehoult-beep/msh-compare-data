@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-22",
+ "lastRun": "2026-09-24",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -425,7 +425,19 @@
   "Philips Respironics",
   "Phoenix Dosimetry Ltd",
   "Phonak/Sonova UK",
-  "Pioneer Medical Europe Limited"
+  "Pioneer Medical Europe Limited",
+  "Pioneer Wound Telehealth",
+  "Platts & Nisbett Ltd",
+  "Precision Dynamics Corporation",
+  "Premium Wipes & Textiles Ltd",
+  "Prestige Health Footwear Ltd",
+  "Pro Health Solutions Limited",
+  "Proact Medical Ltd",
+  "Procept Biorobotics",
+  "Procotech Limited",
+  "Prospect Diagnostics Ltd",
+  "Prosum Medical Ltd",
+  "PTP Healthcare Ltd"
  ],
  "refusals": [
   {
@@ -977,6 +989,36 @@
    "name": "Pioneer Medical Europe Limited",
    "reason": "Own website (pioneermedicaleurope.co.uk) footer states \"Pioneer Medical Europe\" (drops \"Limited\", not a new form) with no registration number published. Companies House 07182977 confirms current name \"PIONEER MEDICAL EUROPE LIMITED\" with no previous names listed. No other verifiable name form found.",
    "date": "2026-09-22"
+  },
+  {
+   "name": "Pioneer Wound Telehealth",
+   "reason": "No confirmed own website found this session. A domain guess (pioneerwoundcare.com) resolves to a page calling itself \"Pioneer Wound Care\" (not \"Pioneer Wound Telehealth\") with copyright held by \"IconicTek\", a third-party template/build credit, not the supplier — insufficient to confirm this is the supplier's own site. The seed record's own note already flags every field as UNVERIFIED (former supplier-directory wording, not checked against a company website, regulator record or filing). No Companies House match attempted without a confirmed trading name to search on.",
+   "date": "2026-09-24"
+  },
+  {
+   "name": "Precision Dynamics Corporation",
+   "reason": "www.precisiondynamics.com's TLS certificate resolves to Brady Corporation domains (bradyeurope.com / bradypromotions.com), consistent with Precision Dynamics/PDC Healthcare now trading under the Brady group — but per rule 4 a parent's name is never added as an alias of the subsidiary, and no standalone UK entity page was reached to check for a distinct current UK trading name. Companies House search for \"Precision Dynamics\" returns no confident match: PRECISION DYNAMICS LTD (16743691, incorporated Sept 2025), PRECISION DYNAMICS ENGINEERING LTD (10335416), TRANSMISSION DYNAMICS LIMITED (08026890, formerly \"Precision Dynamics Limited\") and a dissolved PRECISION DYNAMICS LIMITED (13489136) are all plausible unrelated companies, none confirmable as this NHS Supply Chain-listed entity.",
+   "date": "2026-09-24"
+  },
+  {
+   "name": "Premium Wipes & Textiles Ltd",
+   "reason": "No confirmed own website found this session; the seed record carries no website link and a guessed domain (premiumwipes.co.uk) does not resolve (DNS failure). No other named source available to check for a real extra alias form.",
+   "date": "2026-09-24"
+  },
+  {
+   "name": "Prestige Health Footwear Ltd",
+   "reason": "No confirmed own website found this session; the seed record carries no website link and a guessed domain (prestigehealthfootwear.com) redirects to an unrelated site (ydauk.com) with no connection to this supplier visible. No other named source available.",
+   "date": "2026-09-24"
+  },
+  {
+   "name": "Pro Health Solutions Limited",
+   "reason": "No confirmed own website found this session; the seed record carries no website link and a guessed domain (prohealthsolutions.co.uk) does not resolve (DNS failure). No other named source available.",
+   "date": "2026-09-24"
+  },
+  {
+   "name": "PTP Healthcare Ltd",
+   "reason": "No confirmed own website found this session; the seed record carries no website link and guessed domains (ptphealthcare.co.uk, ptp-healthcare.com) do not resolve (DNS failure). No other named source available.",
+   "date": "2026-09-24"
   }
  ],
  "sources": {
