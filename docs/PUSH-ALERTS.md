@@ -117,12 +117,21 @@ button simply links to the Pages URL above.
 2. `build-config` rewrites `alerts/config.json` if anything changed.
 3. `send` diffs every `data/speciality-news/<slug>.json` against the seen-set,
    pulls the subscriber rows, and sends each phone one message:
-   * one speciality with news: **"Stroke: 2 new items"** / headline — source, opens the Stroke page;
-   * several: **"Hub news: 5 new items across 3 specialities"** / "Stroke (2) · Urology (2) · …", opens the Hub;
+   * one speciality with news: **"Stroke: 2 new items"** / headline — source;
+   * several: **"Hub news: 5 new items across 3 specialities"** / "Stroke (2) · Urology (2) · …";
    * nothing in their specialities: no push.
 4. Rows whose push service says 404 or 410 are deleted. Other failures are
    logged and counted, never retried (a lost buzz beats a duplicate).
 5. `verify.py` gates, then the state and config are committed.
+
+**What a tap opens (changed 24/09/2026).** `alerts/latest.html`, inside the
+alerts app: the headlines the push carried (up to 12, each linking to the
+source article) and an "Open <speciality> on the Hub" link per speciality.
+It used to open the Hub page directly, but a tap opens inside the alerts
+app's own walled-off browser, which has no Hub login, so members landed on a
+login screen and then the Live Desk. The items travel in the push payload
+(kept under 3 KB) and the service worker saves them to the phone's cache, so
+the list is there the moment the alert is tapped, with no deploy to wait for.
 
 Same-day tag (`msh-news-YYYYMMDD`) means a manual re-run the same morning
 replaces the notification on the lock screen rather than stacking a second.
