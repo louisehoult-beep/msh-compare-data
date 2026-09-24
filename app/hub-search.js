@@ -353,7 +353,8 @@
         ['Check the Supply Disruption Tracker', '/medical-sales-hub/supply-disruption-tracker/', ''],
         ['Check the MHRA Regulatory Desk', '/medical-sales-hub/mhra-regulatory-desk/', '']
       ] },
-    { id: 'career', words: ['interview', 'interviews', 'job', 'jobs', 'cv', 'career', 'role',
+    // Not a bare "role": "the ICB role in formulary" is not a job hunt.
+    { id: 'career', words: ['interview', 'interviews', 'job', 'jobs', 'cv', 'career', 'new job',
         'hired', 'hiring', 'application', 'apply', 'first sales', 'break into', 'get into'],
       steps: [
         ['Prepare for the interview', '/medical-sales-hub/interview-prep/', ''],
@@ -544,6 +545,28 @@
     return html + '<div style="height:10px;border-bottom:2px solid ' + LINE + ';"></div>';
   }
 
+  /* THE PLAN AND JETPACK'S AI, SIDE BY SIDE (24/09/2026).
+   * The plan is rules over pages Lou has checked. Jetpack's AI answer writes
+   * prose from the site's content, which reads well but is generated: on its
+   * first test it stated framework numbers and expiry dates nobody had checked.
+   * So the two sit together but never blend. The plan and matches come first
+   * and Enter still opens plan step 1; the AI is one clearly labelled card
+   * that hands the same question to Jetpack (/?s= opens its overlay), with
+   * the check-the-facts line on the card itself. Nothing Jetpack writes is
+   * copied into this panel. */
+  function aiCard(q) {
+    return '<a href="/?s=' + encodeURIComponent(q) + '" style="display:flex;gap:12px;align-items:center;' +
+           'margin:10px 14px;padding:11px 13px;border:1px solid ' + GOLD + ';border-radius:8px;' +
+           'background:rgba(196,155,92,.08);color:' + TEXT + ';text-decoration:none;">' +
+           '<span style="flex:0 0 auto;padding:3px 7px;border-radius:5px;background:' + GOLD + ';color:' + NAVY + ';' +
+           'font-size:10.5px;font-weight:800;letter-spacing:.08em;">AI</span>' +
+           '<span style="flex:1;min-width:0;"><span style="display:block;font-size:14px;font-weight:600;">' +
+           'Get a written answer from the Hub AI</span>' +
+           '<span style="display:block;color:#a8b3c4;font-size:12px;line-height:1.45;margin-top:2px;">' +
+           'AI-generated from Hub content. Check key facts on the pages it links before you use them.</span></span>' +
+           '<span style="flex:0 0 auto;color:' + GOLD + ';font-size:16px;">\u2192</span></a>';
+  }
+
   // ------------------------------------------------------------------ render
   function shell() {
     var chips = TASKS.map(function (t) {
@@ -623,9 +646,7 @@
     box.style.display = 'block';
 
     if (FAILED) {
-      box.innerHTML = note('Hub search cannot reach its index right now. ' +
-        '<a href="/?s=' + encodeURIComponent(q) + '" style="color:' + GOLD + ';font-weight:700;">' +
-        'Search every page and post instead</a>.');
+      box.innerHTML = note('Hub search cannot reach its index right now.') + aiCard(q);
       return;
     }
     if (!DATA) {
@@ -635,15 +656,13 @@
     }
 
     var toks = tokenise(q), res = rank(q), steps = plan(q), i, r, html, href, kicker;
-    var top = steps ? planHtml(steps) : '';
+    var top = (steps ? planHtml(steps) : '') + aiCard(q);
     // With a plan on screen the matches are supporting reading, not the answer.
     if (steps) { res = res.slice(0, 4); }
 
     if (!res.length) {
-      box.innerHTML = top + note('Nothing on the Hub matches that. ' +
-        '<a href="/?s=' + encodeURIComponent(q) + '" style="color:' + GOLD + ';font-weight:700;">' +
-        'Search every page and post instead</a>, or try a broader word such as framework, ' +
-        'tender, pricing, pathway or glossary.');
+      box.innerHTML = top + note('No Hub page matches those words. Ask the AI above, or try a ' +
+        'broader word such as framework, tender, pricing, pathway or glossary.');
       return;
     }
 
@@ -673,10 +692,6 @@
         }
       }
     }
-
-    html += '<div style="padding:9px 14px;border-top:1px solid ' + RULE + ';">' +
-            '<a href="/?s=' + encodeURIComponent(q) + '" style="color:' + DIM + ';font-size:12px;' +
-            'text-decoration:none;">Not what you wanted? Search every page and post →</a></div>';
 
     box.innerHTML = html;
   }
