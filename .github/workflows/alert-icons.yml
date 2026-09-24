@@ -1,0 +1,73 @@
+name: Phone alerts app icons
+
+# Added 24/09/2026. Rebuilds alerts/apple-touch-icon.png, icon-192.png and
+# icon-512.png from one logo with scripts/make_alert_icons.py, and commits
+# them. Runs on a GitHub runner because the logo lives on the Hub site, which
+# the build sessions cannot reach. Run it by hand only when the logo changes.
+#
+# iPhones keep the icon they had when the page was added to the Home Screen.
+# After a change, remove the "Hub alerts" icon, add it again from the alerts
+# page, and turn alerts back on.
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_url:
+        description: "Logo to build the icons from (https PNG or JPG, ideally 1024x1024)"
+        type: string
+        default: "https://medsalesintelligencehub.co.uk/wp-content/uploads/2026/07/Elevate-and-Thrive-Logo-Gold-2026.png"
+
+# Same writer group as every other job that commits here.
+concurrency:
+  group: msh-compare-data-writer
+  cancel-in-progress: false
+permissions:
+  contents: write
+
+jobs:
+  icons:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install Pillow
+        run: python3 -m pip install --quiet pillow
+
+      - name: Build the icons
+        env:
+          SOURCE_URL: ${{ inputs.source_url }}
+        run: python3 scripts/make_alert_icons.py "$SOURCE_URL"
+
+      - name: Publish gate — nothing commits until this passes
+        run: python3 verify.py
+
+      - name: Commit the icons
+        run: |
+          git config user.name "hub-bot"
+          git config user.email "contact@elevateandthrive.uk"
+          git add alerts/apple-touch-icon.png alerts/icon-192.png alerts/icon-512.png
+          if git diff --cached --quiet; then echo "icons unchanged"; exit 0; fi
+          git commit -m "phone alerts: app icons rebuilt from logo"
+          for attempt in 1 2 3 4 5; do
+            if git push; then echo "pushed on attempt $attempt"; exit 0; fi
+            echo "push rejected (attempt $attempt) — rebasing"
+            git fetch origin
+            git rebase origin/main
+          done
+          echo "icon push still rejected after 5 attempts"
+          exit 1
+
+      - name: Phone alert on failure (ntfy)
+        if: failure()
+        run: |
+          curl -s -H "Title: Med Sales Hub - alert ICONS job FAILED" -H "Tags: warning" \
+            -d "alert-icons.yml failed. The alerts app icon was not changed. Run: github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+            ntfy.sh/eth-hub-lou-4437
