@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 36584,
-  "differentiator.json held": 52437
+  "differentiator.json published": 36606,
+  "differentiator.json held": 52507
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 423,
-  "inScopeSuppliersNeedingCrawl": 317,
-  "inScopeSuppliersNeedingDomain": 291,
-  "suppliersRefused": 493,
+  "inScopeSuppliersNeedingCrawl": 314,
+  "inScopeSuppliersNeedingDomain": 288,
+  "suppliersRefused": 495,
   "suppliersRefusedButPublishingElsewhere": 104,
   "suppliersCapturedNothingCounted": 2,
   "suppliersDuplicateOfCaptured": 3,
@@ -11420,8 +11420,8 @@
    "category": "Rehabilitation and Community",
    "ends": null,
    "suppliersAwarded": 18,
-   "suppliersPublished": 5,
-   "coverage": 27.8,
+   "suppliersPublished": 6,
+   "coverage": 33.3,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -11435,27 +11435,12 @@
      "domain": null
     },
     {
-     "supplier": "Lifeline 24",
-     "domain": null
-    },
-    {
-     "supplier": "Mounts & More Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Orbis Protect",
-     "domain": null
-    },
-    {
      "supplier": "Tobii Dynavox Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
     "Jabbla UK Ltd",
-    "Lifeline 24",
-    "Mounts & More Ltd",
-    "Orbis Protect",
     "Tobii Dynavox Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -11479,6 +11464,20 @@
      "domain": "www.legrand.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-29",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Mounts & More Ltd",
+     "domain": "www.aacmounts.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-24",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Orbis Protect",
+     "domain": "www.orbisprotect.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-24",
      "bucket": "refused"
     },
     {
@@ -11522,11 +11521,12 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 5
+    "needDomain": 2
    },
    "published": [
     "Abilia Ltd",
     "Liberator Ltd",
+    "Lifeline 24",
     "Possum Ltd",
     "Sensory Guru Ltd",
     "Skyguard Ltd T/A Peoplesafe"
@@ -11538,22 +11538,21 @@
    "capturedNothingCounted": [],
    "notCrawled": [
     "Jabbla UK Ltd",
-    "Lifeline 24",
-    "Mounts & More Ltd",
-    "Orbis Protect",
     "Tobii Dynavox Ltd"
    ],
    "refused": [
     "Baywater Healthcare UK Ltd",
     "DH2 Solutions Ltd",
     "Legrand Electric Ltd",
+    "Mounts & More Ltd",
+    "Orbis Protect",
     "PCByVoice",
     "Relianace High -Tech Ltd",
     "Smartbox Assistive Technology",
     "Total Mobile"
    ],
    "unknown": [],
-   "actionableTotal": 6,
+   "actionableTotal": 3,
    "blockedReason": null,
    "deferred": null
   },
