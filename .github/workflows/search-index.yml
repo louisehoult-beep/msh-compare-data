@@ -109,6 +109,29 @@ jobs:
           WPCOM_TOKEN: ${{ secrets.WPCOM_TOKEN }}
         run: python3 build_search_index.py --stats
 
+      # ASK THE HUB (24/09/2026). The same pages, cut into readable passages and
+      # sent straight to the private Supabase table hub_passages. Nothing is
+      # written into this repo or uploaded as an artifact: the passages are the
+      # Hub's paid text and this repo is public (ruled 06/08/2026).
+      # continue-on-error so a failed load cannot stop the search index
+      # publishing; yesterday's passages keep serving (the load swaps builds in
+      # one transaction), and the step below sends a phone alert.
+      - name: Load Ask the Hub passages (private store, not this repo)
+        id: ask
+        if: inputs.dry_run != true
+        continue-on-error: true
+        env:
+          WPCOM_TOKEN: ${{ secrets.WPCOM_TOKEN }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: python3 build_ask_passages.py
+      - name: Phone alert if the Ask the Hub load failed (ntfy)
+        if: steps.ask.outcome == 'failure'
+        run: |
+          curl -s -H "Title: Medical Sales Hub - Ask the Hub passages NOT refreshed" -H "Priority: default" -H "Tags: warning" \
+            -d "Today's Ask the Hub passage load failed. Ask the Hub keeps answering from yesterday's passages. github.com/louisehoult-beep/msh-compare-data/actions" \
+            ntfy.sh/eth-hub-lou-4437
+
       # The build writes a fresh file every run, so it drops the ownership
       # notice every run. Re-stamp BEFORE the gate; the gate then refuses to
       # publish anything unmarked.

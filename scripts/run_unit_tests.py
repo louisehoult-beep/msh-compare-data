@@ -93,6 +93,7 @@ ELSEWHERE = {
 # ~7s, nearly all of it the loop's own `sleep 5`. RUN, not ELSEWHERE — it has no
 # workflow of its own.
 RUN = [
+    "test_ask_passages.py",
     "test_breadcrumb_division.py",
     "test_careers_jobpages.py",
     "test_company_intelligence_push_retry.py",
