@@ -88,7 +88,8 @@
     news: '/medical-sales-hub/news/',
     calendar: '/medical-sales-hub/calendar/',
     mhra: '/medical-sales-hub/mhra-regulatory-desk/',
-    procurement: '/medical-sales-hub/tender-history/'
+    procurement: '/medical-sales-hub/tender-history/',
+    jobs: '/medical-sales-hub/clinical-jobs/'
   };
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -381,6 +382,7 @@
       '#msh-my-hub .mh-tag.aw,#msh-my-hub .mh-tag.fw{background:#F3ECDC;color:#6B5418;}',
       '#msh-my-hub .mh-tag.np{background:#A12B2B;color:#FFFFFF;}',
       '#msh-my-hub .mh-tag.on{background:#0B1C33;color:#E0BE8E;}',
+      '#msh-my-hub .mh-tag.jb{background:#F3E4E1;color:#7A4A44;border:1px solid #e3c3bd;}',
       '#msh-my-hub .mh-ref{font-family:' + MONO + ';font-size:11px;color:#5B6573;letter-spacing:.2px;}',
 
       /* ---- rows (headlines, events, alerts, procurement) ---- */
@@ -425,7 +427,10 @@
       /* ---- the desk: three panels ---- */
       '#msh-my-hub .mh-desk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start;}',
       '@media(max-width:1280px){#msh-my-hub .mh-desk{grid-template-columns:repeat(2,minmax(0,1fr));}#msh-my-hub .mh-desk > #mh-proc{grid-column:1 / -1;}}',
-      '@media(max-width:820px){#msh-my-hub .mh-desk{grid-template-columns:minmax(0,1fr);}}',
+      '#msh-my-hub .mh-desk.four{grid-template-columns:repeat(2,minmax(0,1fr));}',
+      '#msh-my-hub .mh-desk.four > #mh-proc{grid-column:auto;}',
+      '@media(min-width:1800px){#msh-my-hub .mh-desk.four{grid-template-columns:repeat(4,minmax(0,1fr));}}',
+      '@media(max-width:820px){#msh-my-hub .mh-desk,#msh-my-hub .mh-desk.four{grid-template-columns:minmax(0,1fr);}}',
       '#msh-my-hub .mh-panel{position:relative;padding:22px 22px 18px;scroll-margin-top:84px;overflow:hidden;}',
       '#msh-my-hub .mh-desk > .mh-panel:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(115deg,#8C6A1C 0%,#C9A227 45%,#8C6A1C 100%);}',
       '#msh-my-hub .mh-desk > .mh-panel:nth-child(even):before{background:#6B2A34;}',
@@ -749,10 +754,31 @@
 
   /* ---------- the lists, shared by panels, briefing and section bar ----------
      Each returns null while loading, false if the feed failed, else an array. */
+  /* Job adverts ride in on some society feeds (BAPO posts "Job Advert –
+     Employer – Role"). They are jobs, not news: Lou, 24/09/2026 "Jobs need to
+     show as jobs". The builder tags them kind:"job"; the title test covers a
+     file written before that. */
+  function isJob(it) { return it.kind === 'job' || /^\s*(job advert|vacancy)\b/i.test(String(it.title || '')); }
+  /* Feeds hand over a summary cut at a fixed length, often mid-word. End it on
+     the last full sentence, or failing that the last whole word and an
+     ellipsis. A summary that already ends properly is left alone. */
+  function tidy(s) {
+    s = String(s || '').replace(/\s*The post .{0,200}? appeared first on .*$/i, '').replace(/\s*(\[(…|\.\.\.)\]|\[\s*\]|…)\s*$/, '').trim();
+    if (!s || /[.!?”"’')\]]$/.test(s)) { return s; }
+    var dot = Math.max(s.lastIndexOf('. '), s.lastIndexOf('? '), s.lastIndexOf('! '));
+    if (dot >= 80) { return s.slice(0, dot + 1); }
+    var sp = s.lastIndexOf(' ');
+    return (sp > 40 ? s.slice(0, sp) : s).replace(/[\s,;:–-]+$/, '') + '…';
+  }
   function newsList() {
     var l = FEED.news;
     if (!l) { return l; }
-    return spread(l.filter(function (g) { return specMatch([g.spec]); }));
+    return spread(l.filter(function (g) { return !isJob(g.it) && specMatch([g.spec]); }));
+  }
+  function jobsList() {
+    var l = FEED.news;
+    if (!l) { return l; }
+    return l.filter(function (g) { return isJob(g.it) && specMatch([g.spec]); });
   }
   function eventsList() {
     var cal = FEED.cal;
@@ -842,7 +868,7 @@
     h += '<div class="mh-fp"><div class="a-lead"><article class="mh-lead">'
       + '<span class="k">' + (it.opportunity ? '<span class="mh-opp">Opportunity</span>' : '') + '<span>Lead story</span><span class="dot"></span><span>' + esc(spec.label) + '</span></span>'
       + '<h3 class="t"><a href="' + esc(it.link) + '" target="_blank" rel="noopener">' + esc(it.title) + '</a></h3>'
-      + (it.summary ? '<p class="s">' + esc(it.summary) + '</p>' : '')
+      + (it.summary ? '<p class="s">' + esc(tidy(it.summary)) + '</p>' : '')
       + '<span class="m">' + esc([ls.label, it.source].filter(Boolean).join(' · ')) + '</span>'
       + '<div class="acts"><a href="' + esc(it.link) + '" target="_blank" rel="noopener">Read story' + EXT + '</a>'
       + '<a class="sec" href="' + esc(spec.url) + '">' + esc(spec.label) + ARR + '</a></div></article></div>';
@@ -853,7 +879,7 @@
       h += '<div class="a-s' + (i + 1) + '">' + (i === 0 ? '<div class="mh-colh"><span>Also leading</span></div>' : '<div class="mh-colh mh-colh2"><span>Also leading</span></div>')
         + '<article class="mh-s"><span class="kk">' + (s.opportunity ? '<span class="mh-opp">Opportunity</span> ' : '') + esc(sp.label) + '</span>'
         + '<h3 class="t"><a href="' + esc(s.link) + '" target="_blank" rel="noopener">' + esc(s.title) + '</a></h3>'
-        + (s.summary ? '<p class="s">' + esc(s.summary) + '</p>' : '')
+        + (s.summary ? '<p class="s">' + esc(tidy(s.summary)) + '</p>' : '')
         + '<span class="m">' + esc([st.label, s.source].filter(Boolean).join(' · ')) + '</span>'
         + links([{ label: 'Full story', url: s.link }, { label: sp.label, url: sp.url }]) + '</article></div>';
     });
@@ -894,7 +920,7 @@
     var head = '<span class="kk">' + (it.opportunity ? '<span class="mh-opp">Opportunity</span>' : '') + '<span>' + esc(spec.label) + '</span><span class="tm">' + esc(st.label) + '</span></span>'
       + '<span class="tt serif">' + esc(it.title) + '</span>'
       + (it.source ? '<span class="mm">' + esc(it.source) + '</span>' : '');
-    var det = (it.summary ? '<p>' + esc(it.summary) + '</p>' : '')
+    var det = (it.summary ? '<p>' + esc(tidy(it.summary)) + '</p>' : '')
       + links([{ label: 'Read story', url: it.link }, { label: spec.label, url: spec.url }]);
     return row('n:' + it.link, head, det);
   }
@@ -992,9 +1018,33 @@
     return h + '<ul class="mh-list mh-withchip">' + body + '</ul>' + moreBtn('proc', list.length, PANEL_TOP, 'dates') + '</div>';
   }
 
+  /* ---------- jobs: adverts from the speciality feeds, shown as jobs ---------- */
+  function jobParts(title) {
+    var p = String(title || '').replace(/^\s*(job advert|vacancy)\s*[–:-]?\s*/i, '').split(/\s+[–-]\s+/);
+    return p.length > 1 ? { employer: p[0], role: p.slice(1).join(', ') } : { employer: '', role: p[0] };
+  }
+  function jobsPanel(list) {
+    var h = '<div class="mh-card mh-panel" id="mh-jobs">' + panelHead('mh-jobs', 'career', 'Jobs', list.length,
+      'From the speciality feeds', PAGES.jobs, 'Jobs board', 'ox');
+    var shown = openPanels.jobs ? list : list.slice(0, PANEL_TOP);
+    var body = shown.map(function (g) {
+      var it = g.it, spec = BYID[g.spec], jp = jobParts(it.title), st = newsStamp(it.published);
+      var head = '<span class="kk"><span class="mh-tag jb">Job</span><span>' + esc(spec.label) + '</span><span class="tm">' + esc(st.label) + '</span></span>'
+        + '<span class="tt">' + esc(jp.role) + '</span>'
+        + '<span class="mm">' + esc(jp.employer || it.source || '') + '</span>';
+      var det = (it.summary ? '<p>' + esc(tidy(it.summary)) + '</p>' : '')
+        + (it.source ? '<p>Posted by ' + esc(it.source) + '</p>' : '')
+        + links([{ label: 'View the advert', url: it.link }, { label: spec.label, url: spec.url }]);
+      return row('j:' + it.link, head, det);
+    }).join('');
+    return h + '<ul class="mh-list">' + body + '</ul>' + moreBtn('jobs', list.length, PANEL_TOP, 'jobs') + '</div>';
+  }
+
   function deskSection() {
+    var jobs = jobsList();
+    var withJobs = !!(jobs && jobs.length);
     return '<section class="mh-sec mh-band ox" id="mh-desk">' + secHead('bell', 'On the desk', null, '', '')
-      + '<div class="mh-desk">' + eventsPanel() + alertsPanel() + procPanel() + '</div></section>';
+      + '<div class="mh-desk' + (withJobs ? ' four' : '') + '">' + eventsPanel() + alertsPanel() + procPanel() + (withJobs ? jobsPanel(jobs) : '') + '</div></section>';
   }
 
   /* ---------- today's briefing: four counts, all from the live feeds ---------- */

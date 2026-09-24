@@ -51,7 +51,8 @@
          Dark ink on gold, never gold on gold (see the fcal-ev-links incident). */
       '.msh .news-opp{display:inline-block;margin-right:6px;padding:1px 6px;border-radius:3px;',
       'background:#E0BE8E;color:#0B1C33;font-size:9px;font-weight:800;letter-spacing:1px;',
-      'text-transform:uppercase;vertical-align:1px;}'
+      'text-transform:uppercase;vertical-align:1px;}',
+      '.msh .news-opp.news-job{background:#F3E4E1;color:#7A4A44;border:1px solid #e3c3bd;}'
     ].join('');
     document.head.appendChild(st);
   }
@@ -70,6 +71,19 @@
     return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
   }
 
+  // Lou, 24/09/2026: "Jobs need to show as jobs" and no summaries cut mid-word.
+  // Same rules as app/my-hub.js; the builder now does both at source, these
+  // cover a file written before it did.
+  function isJob(it) { return it.kind === 'job' || /^\s*(job advert|vacancy)\b/i.test(String(it.title || '')); }
+  function tidy(s) {
+    s = String(s || '').replace(/\s*The post .{0,200}? appeared first on .*$/i, '').replace(/\s*(\[(…|\.\.\.)\]|\[\s*\]|…)\s*$/, '').trim();
+    if (!s || /[.!?”"’')\]]$/.test(s)) { return s; }
+    var dot = Math.max(s.lastIndexOf('. '), s.lastIndexOf('? '), s.lastIndexOf('! '));
+    if (dot >= 80) { return s.slice(0, dot + 1); }
+    var sp = s.lastIndexOf(' ');
+    return (sp > 40 ? s.slice(0, sp) : s).replace(/[\s,;:–-]+$/, '') + '…';
+  }
+
   function render(mount, doc) {
     var items = (doc && doc.items) || [];
     if (!items.length) { return; }   // additive only — nothing to add, so add nothing
@@ -84,8 +98,9 @@
         + '<div>'
         + '<div class="news-t">'
         + (it.opportunity ? '<span class="news-opp">Opportunity</span>' : '')
+        + (isJob(it) ? '<span class="news-opp news-job">Job</span>' : '')
         + '<a href="' + esc(it.link) + '" target="_blank" rel="noopener">' + esc(it.title) + '</a></div>'
-        + (it.summary ? '<div class="news-b">' + esc(it.summary) + '</div>' : '')
+        + (it.summary ? '<div class="news-b">' + esc(tidy(it.summary)) + '</div>' : '')
         + '<div class="news-src">' + esc(it.source) + '</div>'
         + '</div></div>';
     }

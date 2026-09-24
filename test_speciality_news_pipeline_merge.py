@@ -88,8 +88,9 @@ class PipelineEntry(unittest.TestCase):
         self.assertIsNone(e["published"])
 
     def test_summary_is_capped_like_an_rss_item(self):
-        e = N.pipeline_entry({"title": "t", "url": "https://x", "summary": "x" * 500})
-        self.assertEqual(len(e["summary"]), 220)
+        e = N.pipeline_entry({"title": "t", "url": "https://x", "summary": "word " * 100})
+        self.assertLessEqual(len(e["summary"]), N.SUMMARY_MAX + 1)
+        self.assertTrue(e["summary"].endswith("word…"))
 
 
 class FetchPipelineIntel(unittest.TestCase):

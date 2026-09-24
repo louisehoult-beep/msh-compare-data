@@ -183,6 +183,40 @@ def log(msg):
     print(msg, file=sys.stderr)
 
 
+SUMMARY_MAX = 320
+JOB_TITLE = re.compile(r"^\s*(job advert|vacancy)\b", re.I)
+
+
+def clip_summary(s, limit=SUMMARY_MAX):
+    """Shorten a summary without cutting a word in half.
+
+    Until 24/09/2026 every summary was sliced at a flat 220 characters, so most
+    ended mid-word ("...cardiopulmonary support w") on My Hub and the
+    speciality pages. Now: drop WordPress's "The post X appeared first on Y"
+    footer and any trailing [...], keep the text whole if it fits, else end on
+    the last full sentence, else on the last whole word plus an ellipsis.
+    Several feeds hand over an excerpt already cut mid-word, under the limit,
+    so a summary with no closing punctuation is tidied whatever its length."""
+    s = re.sub(r"\s*The post .{0,200}? appeared first on .*$", "", s or "", flags=re.I | re.S)
+    s = re.sub(r"\s*(\[(…|\.\.\.)\]|\[\s*\]|…)\s*$", "", s).strip()
+    if len(s) <= limit and (not s or re.search(r"[.!?\u201d\"\u2019')\]]$", s)):
+        return s
+    # Too long, or the feed itself already cut it off mid-sentence.
+    head = s[:limit]
+    dot = max(head.rfind(". "), head.rfind("? "), head.rfind("! "))
+    if dot >= 80:
+        return head[:dot + 1]
+    sp = head.rfind(" ")
+    return (head[:sp] if sp > 40 else head).rstrip(" ,;:–-") + "…"
+
+
+def is_job(title):
+    """A job advert that rides in on a society feed (BAPO: "Job Advert –
+    Employer – Role"). Tagged kind="job" so the pages show it as a job, not
+    news; Lou, 24/09/2026."""
+    return bool(JOB_TITLE.search(title or ""))
+
+
 def strip_tags(s):
     s = re.sub(r"<[^>]+>", " ", s or "")
     s = html.unescape(s)
@@ -261,7 +295,7 @@ def parse_feed(raw_bytes, source_name):
             summary = strip_tags(_child_text(it, "description", "summary"))
             if title and link:
                 items.append({"title": title, "link": link,
-                              "published": dt.isoformat() if dt else None, "summary": summary[:220]})
+                              "published": dt.isoformat() if dt else None, "summary": clip_summary(summary)})
         elif tag == "entry":
             title = strip_tags(_child_text(it, "title"))
             link = ""
@@ -274,7 +308,7 @@ def parse_feed(raw_bytes, source_name):
             summary = strip_tags(_child_text(it, "summary", "content"))
             if title and link:
                 items.append({"title": title, "link": link,
-                          "published": dt.isoformat() if dt else None, "summary": summary[:220]})
+                          "published": dt.isoformat() if dt else None, "summary": clip_summary(summary)})
     return items
 
 
@@ -289,7 +323,7 @@ def pipeline_entry(row):
         "title": row.get("title", ""),
         "link": row.get("url", ""),
         "published": row.get("date") or None,
-        "summary": (row.get("summary") or "")[:220],
+        "summary": clip_summary(row.get("summary") or ""),
         "source": PIPELINE_LABEL,
         "verified": True,
         "opportunity": bool(row.get("opportunity")),
@@ -373,6 +407,8 @@ def build(only_id=None, dry_run=False, pause=0.6):
                 continue
             entry = dict(it)
             entry["source"] = src["name"]
+            if is_job(entry.get("title")):
+                entry["kind"] = "job"
             for slug in src["specialities"]:
                 by_speciality.setdefault(slug, []).append(entry)
             kept += 1

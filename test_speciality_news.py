@@ -145,5 +145,38 @@ class Sources(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)), "duplicate source id in SOURCES")
 
 
+class ClipSummary(unittest.TestCase):
+    """Summaries end on a sentence or a whole word, never mid-word (24/09/2026)."""
+
+    def test_short_summary_untouched(self):
+        self.assertEqual(N.clip_summary("A short summary."), "A short summary.")
+
+    def test_long_summary_ends_on_sentence(self):
+        s = "First sentence is here and runs on for a while so it counts. " * 3 + "x" * 300
+        out = N.clip_summary(s)
+        self.assertTrue(out.endswith("counts."))
+        self.assertLessEqual(len(out), N.SUMMARY_MAX)
+
+    def test_no_sentence_ends_on_whole_word(self):
+        out = N.clip_summary("alpha " * 100)
+        self.assertTrue(out.endswith("alpha…"))
+
+    def test_feed_cut_short_upstream_is_tidied(self):
+        out = N.clip_summary("Figures show a drop of more than 10% in the week follow")
+        self.assertEqual(out, "Figures show a drop of more than 10% in the week…")
+
+    def test_wordpress_footer_dropped(self):
+        out = N.clip_summary("Real text. The post Thing appeared first on Some Site.")
+        self.assertEqual(out, "Real text.")
+
+
+class Jobs(unittest.TestCase):
+    def test_job_advert_detected(self):
+        self.assertTrue(N.is_job("Job Advert – Buchanan Orthotics – Orthotist"))
+
+    def test_advertising_is_not_a_job(self):
+        self.assertFalse(N.is_job("Response submitted to Government consultation on food advertising"))
+
+
 if __name__ == "__main__":
     unittest.main()
