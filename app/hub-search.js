@@ -25,8 +25,10 @@
  * to change how search behaves ever again. Same pattern as comptab.js and
  * supplier-search.js.
  *
- * COST: none. The index is a static file on GitHub, the search runs in the
- * member's browser, and nothing calls any paid service. There is no AI here.
+ * COST: none for search. The index is a static file on GitHub and the search
+ * runs in the member's browser. The one paid part is the Ask the Hub card
+ * (24/09/2026), which calls a capped service only when the member presses its
+ * button. See the note above askCard().
  *
  * FAILURE MODE: if the index cannot be fetched, the box says so and offers
  * WordPress core search. The page 675 block also renders a plain working form
@@ -548,15 +550,13 @@
     return html + '<div style="height:10px;border-bottom:2px solid ' + LINE + ';"></div>';
   }
 
-  /* THE PLAN AND JETPACK'S AI, SIDE BY SIDE (24/09/2026).
-   * The plan is rules over pages Lou has checked. Jetpack's AI answer writes
-   * prose from the site's content, which reads well but is generated: on its
-   * first test it stated framework numbers and expiry dates nobody had checked.
-   * So the two sit together but never blend. The plan and matches come first
-   * and Enter still opens plan step 1; the AI is one clearly labelled card
-   * that hands the same question to Jetpack (/?s= opens its overlay), with
-   * the check-the-facts line on the card itself. Nothing Jetpack writes is
-   * copied into this panel. */
+  /* THE PLAN AND THE AI ANSWER NEVER BLEND (24/09/2026).
+   * The plan is rules over pages Lou has checked; the AI answer is generated.
+   * The plan and matches come first and Enter still opens plan step 1; the AI
+   * is one clearly labelled card. Its first version handed the question to
+   * Jetpack (/?s=), which stated framework numbers and dates nobody had
+   * checked, so it was replaced the same day by Ask the Hub (see askCard()),
+   * which answers only from Hub passages with a source on every point. */
   /* ------------------------------------------------------------ quick answer
    * A named supplier gets its answer IN the panel, not behind another click:
    * the frameworks it is confirmed on, with dates, and its key products, read
@@ -649,17 +649,158 @@
     return html + '<div style="border-bottom:2px solid ' + LINE + ';"></div>';
   }
 
-  function aiCard(q) {
-    return '<a href="/?s=' + encodeURIComponent(q) + '" style="display:flex;gap:12px;align-items:center;' +
-           'margin:10px 14px;padding:11px 13px;border:1px solid ' + GOLD + ';border-radius:8px;' +
-           'background:rgba(196,155,92,.08);color:' + TEXT + ';text-decoration:none;">' +
-           '<span style="flex:0 0 auto;padding:3px 7px;border-radius:5px;background:' + GOLD + ';color:' + NAVY + ';' +
-           'font-size:10.5px;font-weight:800;letter-spacing:.08em;">AI</span>' +
-           '<span style="flex:1;min-width:0;"><span style="display:block;font-size:14px;font-weight:600;">' +
-           'Get a written answer from the Hub AI</span>' +
-           '<span style="display:block;color:#a8b3c4;font-size:12px;line-height:1.45;margin-top:2px;">' +
-           'AI-generated from Hub content. Check key facts on the pages it links before you use them.</span></span>' +
-           '<span style="flex:0 0 auto;color:' + GOLD + ';font-size:16px;">\u2192</span></a>';
+  /* ------------------------------------------------------------ ask the hub
+   * ASK THE HUB (24/09/2026) replaces the Jetpack AI card that sat here.
+   * Jetpack's answer wrote prose from the site and, on its first test, stated
+   * framework numbers and dates nobody had checked. Ask the Hub answers ONLY
+   * from the Hub's own passages and every point carries the link to the Hub
+   * section it came from; a point without a source never reaches the member,
+   * because the service drops it before replying.
+   *
+   * WHERE IT RUNS: the Supabase Edge Function ask-the-hub (source in this repo,
+   * supabase/functions/ask-the-hub/). The Hub text it reads is in a private
+   * Supabase table, never in this public repo (ruled 06/08/2026). The API key
+   * is a function secret and never reaches the browser.
+   *
+   * COST: this is the one part of this file that costs money, so it runs only
+   * when the member presses the button, never per keystroke, and the service
+   * caps each member per day. Everything else here is still free.
+   *
+   * LOGIN: WordPress issues a 10-minute signed pass (WPCode snippet "Hub - Ask
+   * the Hub member pass") only to a member whose plan opens the Live Desk. The
+   * service refuses anything without one. */
+  var ASK_URL = 'https://vbthumugbzyqndirmyns.supabase.co/functions/v1/ask-the-hub';
+  var PASS_URL = '/wp-admin/admin-ajax.php?action=msh_ask_pass';
+  var ASK = { q: '', state: '', data: null, msg: '' }, PASS = null;
+
+  function getPass() {
+    var now = Math.floor(Date.now() / 1000);
+    if (PASS && PASS.exp - now > 60) { return Promise.resolve(PASS.pass); }
+    return fetch(PASS_URL, { credentials: 'same-origin', cache: 'no-store' })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok || !j.ok) {
+            var e = new Error('pass');
+            e.msg = j.why === 'login' ? 'Log in to the Hub to ask a question.'
+                  : 'Ask the Hub is part of Hub membership.';
+            throw e;
+          }
+          PASS = { pass: j.pass, exp: j.exp };
+          return j.pass;
+        });
+      });
+  }
+
+  function ask(q, redraw) {
+    if (ASK.state === 'loading') { return; }
+    ASK = { q: q, state: 'loading', data: null, msg: '' };
+    redraw();
+    getPass()
+      .then(function (pass) {
+        return fetch(ASK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ q: q, pass: pass })
+        }).then(function (r) {
+          return r.json().catch(function () { return {}; }).then(function (j) {
+            if (r.status === 401) { PASS = null; }
+            if (!r.ok) {
+              var e = new Error('ask');
+              e.msg = j.message || 'Ask the Hub couldn\u2019t answer just now. Try again in a minute.';
+              throw e;
+            }
+            return j;
+          });
+        });
+      })
+      .then(function (j) { if (ASK.q === q) { ASK.state = 'done'; ASK.data = j; redraw(); } })
+      .catch(function (e) {
+        if (ASK.q !== q) { return; }
+        ASK.state = 'error';
+        ASK.msg = e.msg || 'Ask the Hub couldn\u2019t be reached. Check your connection and try again.';
+        redraw();
+      });
+  }
+
+  var ASK_HEAD = '<div style="display:flex;align-items:center;gap:8px;padding:0 0 8px;">' +
+    '<span style="padding:3px 7px;border-radius:5px;background:' + GOLD + ';color:' + NAVY + ';' +
+    'font-size:10.5px;font-weight:800;letter-spacing:.08em;">AI</span>' +
+    '<span style="color:' + GOLD + ';font-size:11px;letter-spacing:1.2px;font-weight:700;' +
+    'text-transform:uppercase;">Ask the Hub</span></div>';
+
+  function askBox(inner) {
+    return '<div style="margin:10px 14px;padding:12px 13px;border:1px solid ' + GOLD + ';border-radius:8px;' +
+           'background:rgba(196,155,92,.08);color:' + TEXT + ';">' + ASK_HEAD + inner + '</div>';
+  }
+
+  function askAnswer(d) {
+    var html = '', i, j, pt, s, links;
+    if (!d.covered) {
+      return '<div style="font-size:14px;line-height:1.55;">The Hub doesn\u2019t cover this yet.</div>' +
+             '<div style="color:#a8b3c4;font-size:12.5px;line-height:1.5;margin-top:4px;">' +
+             (d.refused ? 'Try asking it a different way.'
+                        : 'Your question has been passed on so it can be considered for the Hub.') + '</div>';
+    }
+    for (i = 0; i < d.points.length; i++) {
+      pt = d.points[i];
+      links = [];
+      for (j = 0; j < pt.sources.length; j++) {
+        s = pt.sources[j];
+        links.push('<a href="' + esc(s.url) + '" style="color:' + GOLD + ';text-decoration:underline;">' +
+                   esc(s.title) + (s.section && s.section !== s.title ? ' \u203a ' + esc(s.section) : '') + '</a>');
+      }
+      html += '<div style="padding:7px 0;border-top:1px solid ' + RULE + ';">' +
+              '<div style="font-size:14px;line-height:1.55;">' + esc(pt.text) + '</div>' +
+              '<div style="color:#a8b3c4;font-size:12px;line-height:1.5;margin-top:3px;">Source: ' +
+              links.join(' \u00b7 ') + '</div></div>';
+    }
+    if (d.missing) {
+      html += '<div style="padding:7px 0 0;border-top:1px solid ' + RULE + ';color:#a8b3c4;font-size:12.5px;' +
+              'line-height:1.5;">Not covered on the Hub yet: ' + esc(d.missing) + '</div>';
+    }
+    return html;
+  }
+
+  function askCard(q) {
+    var inner, left = '';
+    if (ASK.q === q && ASK.state === 'loading') {
+      inner = '<div style="color:#a8b3c4;font-size:13px;">Reading the Hub for your answer\u2026</div>';
+    } else if (ASK.q === q && ASK.state === 'error') {
+      inner = '<div style="font-size:13.5px;line-height:1.5;">' + esc(ASK.msg) + '</div>';
+    } else if (ASK.q === q && ASK.state === 'done') {
+      if (typeof ASK.data.left === 'number') {
+        left = (ASK.data.covered ? ' ' : '') + ASK.data.left + (ASK.data.left === 1 ? ' question' : ' questions') + ' left today.';
+      }
+      inner = askAnswer(ASK.data) +
+              '<div style="color:' + DIM + ';font-size:11.5px;line-height:1.45;margin-top:8px;">' +
+              (ASK.data.covered ? 'AI answer written only from Hub pages. Open the source before you rely on a point.' : '') +
+              left + '</div>';
+    } else {
+      inner = '<button type="button" data-ask="1" style="display:block;width:100%;text-align:left;cursor:pointer;' +
+              'padding:0;border:0;background:none;color:' + TEXT + ';font-family:inherit;">' +
+              '<span style="display:block;font-size:14px;font-weight:600;">Ask the Hub this question \u2192</span>' +
+              '<span style="display:block;color:#a8b3c4;font-size:12px;line-height:1.45;margin-top:2px;">' +
+              'A written answer from Hub pages only, with the source linked on every point.</span></button>';
+    }
+    return askBox(inner);
+  }
+
+  // One listener per results box. innerHTML is redrawn on every keystroke, so
+  // the button is found by delegation rather than bound directly.
+  function wireAsk(i, b, redraw) {
+    b.addEventListener('click', function (e) {
+      var t = e.target;
+      while (t && t !== b) {
+        if (t.getAttribute && t.getAttribute('data-ask')) {
+          e.preventDefault();
+          use(i, b);
+          var q = i.value ? i.value.trim() : '';
+          if (q.length > 3) { ask(q, redraw); }
+          return;
+        }
+        t = t.parentNode;
+      }
+    });
   }
 
   // ------------------------------------------------------------------ render
@@ -741,7 +882,7 @@
     box.style.display = 'block';
 
     if (FAILED) {
-      box.innerHTML = note('Hub search cannot reach its index right now.') + aiCard(q);
+      box.innerHTML = note('Hub search cannot reach its index right now.') + askCard(q);
       return;
     }
     if (!DATA) {
@@ -751,12 +892,12 @@
     }
 
     var toks = tokenise(q), res = rank(q), steps = plan(q), i, r, html, href, kicker;
-    var top = (steps ? planHtml(steps) : '') + (steps && steps.sup ? quickHtml(steps.sup, steps.spec) : '') + aiCard(q);
+    var top = (steps ? planHtml(steps) : '') + (steps && steps.sup ? quickHtml(steps.sup, steps.spec) : '') + askCard(q);
     // With a plan on screen the matches are supporting reading, not the answer.
     if (steps) { res = res.slice(0, 4); }
 
     if (!res.length) {
-      box.innerHTML = top + note('No Hub page matches those words. Ask the AI above, or try a ' +
+      box.innerHTML = top + note('No Hub page matches those words. Ask the Hub above, or try a ' +
         'broader word such as framework, tender, pricing, pathway or glossary.');
       return;
     }
@@ -861,6 +1002,7 @@
       var first = barBox.querySelector('a[href]');
       if (first && barBox.style.display !== 'none') { window.location.assign(first.getAttribute('href')); }
     });
+    wireAsk(barInput, barBox, function () { use(barInput, barBox); render(); });
     toggle.addEventListener('click', function () { use(barInput, barBox); setOpen(!isOpen()); });
     toggle.addEventListener('keydown', function (e) {
       if (e.key !== 'Enter' && e.key !== ' ') { return; }
@@ -922,6 +1064,7 @@
     }
     function refresh() { use(mInput, mBox); render(); if (mBox.style.display !== 'none') { place(); } }
     function close() { mBox.style.display = 'none'; }
+    wireAsk(mInput, mBox, refresh);
 
     mInput.addEventListener('focus', function () { use(mInput, mBox); load(); if (mInput.value.trim().length > 1) { refresh(); } });
     mInput.addEventListener('input', function () {

@@ -194,13 +194,16 @@ Deno.serve(async (req) => {
     // Server-side enforcement of "a source link on every point": a point whose
     // citations do not name a passage it was actually given is dropped here,
     // whatever the model said.
+    // Two passages cut from one long section share a link, so sources are
+    // de-duplicated by link, not by passage number.
     const points = (out.points || []).map((pt) => {
-      const seen = new Set<number>();
+      const seen = new Set<string>();
       const sources = (pt.sources || [])
-        .filter((n) => Number.isInteger(n) && n >= 1 && n <= found.length && !seen.has(n) && seen.add(n))
-        .map((n) => ({ title: found[n - 1].page_title, section: found[n - 1].heading, url: found[n - 1].url }));
+        .filter((n) => Number.isInteger(n) && n >= 1 && n <= found.length)
+        .map((n) => ({ title: found[n - 1].page_title, section: found[n - 1].heading, url: found[n - 1].url }))
+        .filter((s) => !seen.has(s.url) && seen.add(s.url));
       return { text: String(pt.text || "").trim(), sources };
-    }).filter((pt) => pt.text && pt.sources.length);
+    }).filter((pt) => pt.text && pt.sources.length).slice(0, 6);
 
     const covered = out.covered === true && points.length > 0;
     const missing = covered ? String(out.missing || "").trim() : "";
