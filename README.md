@@ -247,6 +247,11 @@ state, so **deleting them is a valid way to switch the feature off.** To drop
 one person on request, remove their entry from `data/trust-contacts.json` and
 add them to the harvester's skip handling — the next run must not re-add them.
 
+## app/mobile-app.js
+The Hub phone app: one members-only Hub page, five tools in a bottom tab bar,
+installable to the home screen. It loads the existing tool files, so there is
+nothing to keep in step. Setup and the loader snippet: `docs/MOBILE-APP.md`.
+
 ## app/comptab.js
 The Compare tab's full client-side code. The WordPress page (1109, block
 MST-COMPARE-LOADER) contains only a tiny loader that fetches and runs this
