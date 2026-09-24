@@ -353,7 +353,8 @@
         ['Check the Supply Disruption Tracker', '/medical-sales-hub/supply-disruption-tracker/', ''],
         ['Check the MHRA Regulatory Desk', '/medical-sales-hub/mhra-regulatory-desk/', '']
       ] },
-    { id: 'career', words: ['interview', 'interviews', 'job', 'jobs', 'cv', 'career', 'role',
+    // Not a bare "role": "the ICB role in formulary" is not a job hunt.
+    { id: 'career', words: ['interview', 'interviews', 'job', 'jobs', 'cv', 'career', 'new job',
         'hired', 'hiring', 'application', 'apply', 'first sales', 'break into', 'get into'],
       steps: [
         ['Prepare for the interview', '/medical-sales-hub/interview-prep/', ''],
@@ -523,7 +524,10 @@
       add('Check for recalls and supply gaps', '/medical-sales-hub/supply-disruption-tracker/',
           'Worth knowing before anyone raises it with you.');
     }
-    return steps.slice(0, 5);
+    steps = steps.slice(0, 5);
+    if (sup) { steps.sup = sup.t; }
+    if (sp) { steps.spec = sp[2]; }
+    return steps;
   }
 
   function planHtml(steps) {
@@ -542,6 +546,120 @@
               '</span></a>';
     }
     return html + '<div style="height:10px;border-bottom:2px solid ' + LINE + ';"></div>';
+  }
+
+  /* THE PLAN AND JETPACK'S AI, SIDE BY SIDE (24/09/2026).
+   * The plan is rules over pages Lou has checked. Jetpack's AI answer writes
+   * prose from the site's content, which reads well but is generated: on its
+   * first test it stated framework numbers and expiry dates nobody had checked.
+   * So the two sit together but never blend. The plan and matches come first
+   * and Enter still opens plan step 1; the AI is one clearly labelled card
+   * that hands the same question to Jetpack (/?s= opens its overlay), with
+   * the check-the-facts line on the card itself. Nothing Jetpack writes is
+   * copied into this panel. */
+  /* ------------------------------------------------------------ quick answer
+   * A named supplier gets its answer IN the panel, not behind another click:
+   * the frameworks it is confirmed on, with dates, and its key products, read
+   * from data/supplier-index.json (the file the Suppliers page and the company
+   * report already use). Added 24/09/2026 after Lou asked for answers, not just
+   * links.
+   *
+   * CONFIRMED FACTS ONLY. A framework is listed only when the record carries
+   * the URL of its source notice; the index also holds references carried over
+   * from the retired directory ("verify at source"), and those are never shown
+   * here as fact. Every framework line links to its source.
+   *
+   * The index is large, so it is fetched only when a goal names a supplier,
+   * once per page, and the daily cache-buster lets the browser keep it. */
+  var SUP_URL = 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/supplier-index.json';
+  var SUPS = null, SUPS_LOADING = false, SUPS_FAILED = false;
+
+  function loadSups() {
+    if (SUPS || SUPS_LOADING || SUPS_FAILED) { return; }
+    SUPS_LOADING = true;
+    fetch(SUP_URL + '?cb=' + new Date().toISOString().slice(0, 10))
+      .then(function (r) { if (!r.ok) { throw new Error('HTTP ' + r.status); } return r.json(); })
+      .then(function (doc) {
+        var map = {}, list = (doc && doc.suppliers) || [], i, j, rec, names;
+        for (i = 0; i < list.length; i++) {
+          rec = list[i];
+          names = [rec.name].concat(rec.aliases || []);
+          for (j = 0; j < names.length; j++) {
+            if (names[j] && !map[clean(names[j])]) { map[clean(names[j])] = rec; }
+          }
+        }
+        SUPS = map; SUPS_LOADING = false; render();
+      })
+      .catch(function () { SUPS_LOADING = false; SUPS_FAILED = true; render(); });
+  }
+
+  function cut(t, n) { t = String(t || ''); return t.length > n ? t.slice(0, n - 1).replace(/\s+\S*$/, '') + '\u2026' : t; }
+
+  function quickHtml(name, spec) {
+    var head = '<div style="padding:12px 14px 6px;color:' + GOLD + ';font-size:11px;letter-spacing:1.2px;' +
+               'font-weight:700;text-transform:uppercase;">' + esc(name) + ' at a glance</div>';
+    if (SUPS_FAILED) { return ''; }
+    if (!SUPS) {
+      loadSups();
+      return head + note('Loading the Hub\u2019s record for ' + esc(name) + '\u2026');
+    }
+    var rec = SUPS[clean(name)];
+    if (!rec) { return ''; }
+
+    var fws = (rec.frameworks || []).filter(function (f) { return f && f.url && f.name; }), i, f, html = head;
+    // Frameworks whose name shares a word with the goal lead ("wound care"
+    // puts the wound frameworks first); the rest keep their record order.
+    var toks = tokenise((input && input.value || '') + ' ' + (spec || ''));
+    function rel(fw) {
+      var h = ' ' + clean(fw.name) + ' ', n = 0, k;
+      for (k = 0; k < toks.length; k++) { if (toks[k].length > 2 && hits(h, toks[k])) { n++; } }
+      return n;
+    }
+    fws = fws.map(function (fw, k) { return { f: fw, r: rel(fw), k: k }; })
+             .sort(function (a, b) { return (b.r - a.r) || (a.k - b.k); })
+             .map(function (x) { return x.f; });
+    if (fws.length) {
+      html += '<div style="padding:2px 14px 4px;color:' + DIM + ';font-size:12px;">Confirmed on ' +
+              fws.length + (fws.length === 1 ? ' framework' : ' frameworks') + ' (source notice linked)</div>';
+      for (i = 0; i < fws.length && i < 4; i++) {
+        f = fws[i];
+        html += '<a href="' + esc(f.url) + '" target="_blank" rel="noopener" style="display:block;padding:6px 14px;' +
+                'color:' + TEXT + ';text-decoration:none;font-size:13.5px;line-height:1.45;">' +
+                '<span style="color:' + GOLD + ';">\u25B8</span> ' + esc(f.name) +
+                (f.dates ? '<span style="color:#a8b3c4;"> \u00b7 ' + esc(f.dates) + '</span>' : '') + '</a>';
+      }
+      if (fws.length > 4) {
+        html += '<div style="padding:2px 14px 4px 30px;color:' + DIM + ';font-size:12px;">+ ' +
+                (fws.length - 4) + ' more in the company report</div>';
+      }
+    } else {
+      html += '<div style="padding:4px 14px;color:' + DIM + ';font-size:12.5px;">No framework place confirmed ' +
+              'from a source notice in the Hub\u2019s record yet.</div>';
+    }
+    if (rec.products && rec.products.length) {
+      html += '<div style="padding:8px 14px 2px;color:' + DIM + ';font-size:12px;">Key products</div>';
+      for (i = 0; i < rec.products.length && i < 3; i++) {
+        html += '<div style="padding:3px 14px 3px 30px;color:' + TEXT + ';font-size:13px;line-height:1.45;">' +
+                esc(cut(rec.products[i], 120)) + '</div>';
+      }
+    }
+    html += '<a href="/medical-sales-hub/company-report/?company=' + encodeURIComponent(name) + '" ' +
+            'style="display:block;padding:8px 14px 12px;color:' + GOLD + ';font-size:12.5px;font-weight:700;' +
+            'text-decoration:none;">Full company report \u2192</a>';
+    return html + '<div style="border-bottom:2px solid ' + LINE + ';"></div>';
+  }
+
+  function aiCard(q) {
+    return '<a href="/?s=' + encodeURIComponent(q) + '" style="display:flex;gap:12px;align-items:center;' +
+           'margin:10px 14px;padding:11px 13px;border:1px solid ' + GOLD + ';border-radius:8px;' +
+           'background:rgba(196,155,92,.08);color:' + TEXT + ';text-decoration:none;">' +
+           '<span style="flex:0 0 auto;padding:3px 7px;border-radius:5px;background:' + GOLD + ';color:' + NAVY + ';' +
+           'font-size:10.5px;font-weight:800;letter-spacing:.08em;">AI</span>' +
+           '<span style="flex:1;min-width:0;"><span style="display:block;font-size:14px;font-weight:600;">' +
+           'Get a written answer from the Hub AI</span>' +
+           '<span style="display:block;color:#a8b3c4;font-size:12px;line-height:1.45;margin-top:2px;">' +
+           'AI-generated from Hub content. Check key facts on the pages it links before you use them.</span></span>' +
+           '<span style="flex:0 0 auto;color:' + GOLD + ';font-size:16px;">\u2192</span></a>';
   }
 
   // ------------------------------------------------------------------ render
@@ -623,9 +741,7 @@
     box.style.display = 'block';
 
     if (FAILED) {
-      box.innerHTML = note('Hub search cannot reach its index right now. ' +
-        '<a href="/?s=' + encodeURIComponent(q) + '" style="color:' + GOLD + ';font-weight:700;">' +
-        'Search every page and post instead</a>.');
+      box.innerHTML = note('Hub search cannot reach its index right now.') + aiCard(q);
       return;
     }
     if (!DATA) {
@@ -635,15 +751,13 @@
     }
 
     var toks = tokenise(q), res = rank(q), steps = plan(q), i, r, html, href, kicker;
-    var top = steps ? planHtml(steps) : '';
+    var top = (steps ? planHtml(steps) : '') + (steps && steps.sup ? quickHtml(steps.sup, steps.spec) : '') + aiCard(q);
     // With a plan on screen the matches are supporting reading, not the answer.
     if (steps) { res = res.slice(0, 4); }
 
     if (!res.length) {
-      box.innerHTML = top + note('Nothing on the Hub matches that. ' +
-        '<a href="/?s=' + encodeURIComponent(q) + '" style="color:' + GOLD + ';font-weight:700;">' +
-        'Search every page and post instead</a>, or try a broader word such as framework, ' +
-        'tender, pricing, pathway or glossary.');
+      box.innerHTML = top + note('No Hub page matches those words. Ask the AI above, or try a ' +
+        'broader word such as framework, tender, pricing, pathway or glossary.');
       return;
     }
 
@@ -673,10 +787,6 @@
         }
       }
     }
-
-    html += '<div style="padding:9px 14px;border-top:1px solid ' + RULE + ';">' +
-            '<a href="/?s=' + encodeURIComponent(q) + '" style="color:' + DIM + ';font-size:12px;' +
-            'text-decoration:none;">Not what you wanted? Search every page and post →</a></div>';
 
     box.innerHTML = html;
   }
