@@ -34,6 +34,14 @@ make it more user friendly and visual, it's too wordy"):
   Framework Hub, MHRA Regulatory Desk, Suppliers, Company Intelligence
   Reports, Ask the Desk, plus "All tools". Only shown if the id is in the
   catalogue.
+* **Jobs panel** (fourth panel in "On the desk", only when there are any):
+  job adverts that arrive on the speciality feeds (e.g. BAPO "Job Advert –
+  Employer – Role"). The builder tags them `kind: "job"`; they are kept out
+  of Key news and the news counts, and badged "Job" on speciality pages.
+  Links to the advert and to the Jobs board. Follows the scope switch.
+* **Summaries** end on a full sentence or a whole word with "…", never
+  mid-word (`clip_summary` in `scripts/build_speciality_news.py`, with the
+  same rule in the page code for older data).
 * **Copy cut to the bone:** short masthead line, 2-3 word briefing labels, no
   section intro lines, one-line footer. Icons, counts and badges carry the
   meaning instead.
