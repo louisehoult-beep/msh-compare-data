@@ -259,7 +259,15 @@ def api_get(url, token, timeout=45, tries=3):
 # 25 is deliberately well under the boundary rather than just inside it: the
 # cost of being wrong is the whole index build dying, and the cost of being
 # conservative is a handful of extra requests at 0.4s apart.
-PER_PAGE = 25
+#
+# 24/09/2026: 25 stopped being safe. Two runs that afternoon died on the same
+# proxy 500 after api_get's three tries. Measured the same day through the
+# site's own REST API (cookie auth, context=edit, 25 per page): batches took
+# 6.6s, 6.8s, 11.0s, 14.9s and 18.4s, climbing with page id as the newer,
+# heavier pages come in, and the WordPress.com proxy adds its own time on top
+# of that before its 30-second cut-off. 10 keeps every batch at well under
+# half the ceiling for a handful more requests.
+PER_PAGE = 10
 
 
 def fetch_pages(token):
