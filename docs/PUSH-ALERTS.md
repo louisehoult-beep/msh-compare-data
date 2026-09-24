@@ -1,8 +1,8 @@
 # Phone alerts (web push) for members — set-up and runbook
 
-Added 23/09/2026. Members get one phone notification a morning, only when the
-daily speciality-news build has landed something new in the specialities they
-chose. Tapping it opens that speciality's page on the Hub.
+Added 23/09/2026. Members get a phone notification at 9am, 12 noon and 4pm
+(London time; three slots since 24/09/2026, one a morning before), only when
+something new has landed in the specialities they chose since the last slot. Tapping it opens that speciality's page on the Hub.
 
 ## The parts
 
@@ -178,8 +178,27 @@ login screen and then the Live Desk. The items travel in the push payload
 (kept under 3 KB) and the service worker saves them to the phone's cache, so
 the list is there the moment the alert is tapped, with no deploy to wait for.
 
-Same-day tag (`msh-news-YYYYMMDD`) means a manual re-run the same morning
-replaces the notification on the lock screen rather than stacking a second.
+Per-slot tag (`msh-news-YYYYMMDD-HH`): a re-run of the same slot replaces its
+notification on the lock screen rather than stacking a second.
+
+## The three slots (24/09/2026)
+
+Lou's choice: 09:00, 12:00 and 16:00 London time. GitHub's own cron is hours
+late on this repo (the news refresh set for 05:15 UTC starts around 10:00
+UTC), so Lou's Mac drives the timing with two LaunchAgents (plists in
+`ops/launchagents/`, installed in `~/Library/LaunchAgents/`):
+
+* `uk.co.elevateandthrive.hub-news-refresh`: 08:15, 11:15, 15:15, dispatches
+  "Speciality news refresh" so each slot carries what has just gone live;
+* `uk.co.elevateandthrive.hub-alert-send`: 09:00, 12:00, 16:00, dispatches this
+  workflow with **slot** ticked.
+
+`push-alerts.yml` also has its own cron at those hours as a backup. Every slot
+run is `send --slot`: it sends only between the slot's hour and two hours
+after (never past the next slot), and only once per slot (`lastSlot` in
+`state/push-alerts.json`). A Mac asleep at 9 and woken at 10:30 still sends the
+9am slot; woken at 11:30, the slot is skipped and 12:00 carries it all.
+Logs: `~/Library/Logs/hub-alert-slots.log`.
 
 ## Checking it
 

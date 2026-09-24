@@ -5,9 +5,10 @@
    notification a push carries, and open the page it points at when tapped.
 
    The payload is the JSON built by scripts/push_alerts.py build_message():
-     { "title": "...", "body": "...", "url": "https://...", "tag": "msh-news-YYYYMMDD" }
-   The tag means a second push on the same day REPLACES the first on the
-   lock screen rather than stacking — one line per day, never a pile.
+     { "title": "...", "body": "...", "url": "https://...", "tag": "msh-news-YYYYMMDD-HH" }
+   The tag is per slot (msh-news-YYYYMMDD-HH, three slots a day since
+   24/09/2026): a re-run of the same slot REPLACES its notification rather
+   than stacking, while each slot keeps its own line on the lock screen.
 
    No caching, no fetch handler, no offline anything: this worker exists for
    push and nothing else, so it can never serve a stale page. */

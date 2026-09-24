@@ -7,6 +7,7 @@ to be installed; the digest logic (what is new, who gets what, what it says,
 what gets pruned) is what these tests pin down, because that is where a bug
 becomes thirty buzzes on a member's phone.
 """
+import datetime as _dt
 import json
 import os
 import sys
@@ -191,6 +192,50 @@ class StoreTests(unittest.TestCase):
         self.assertEqual(calls[0][2]["Apikey"], "SERVICE")
         self.assertEqual(calls[1][0], "DELETE")
         self.assertTrue(calls[1][1].endswith("?id=eq.1"))
+
+
+class SlotTests(unittest.TestCase):
+    """Lou, 24/09/2026: alerts at 09:00, 12:00 and 16:00 London time only."""
+    def at(self, y, mo, d, h, mi):
+        return pa.current_slot(_dt.datetime(y, mo, d, h, mi, tzinfo=_dt.timezone.utc))
+
+    def test_bst_slots_are_an_hour_earlier_in_utc(self):
+        self.assertEqual(self.at(2026, 9, 24, 8, 0), "2026-09-24-09")    # 09:00 BST
+        self.assertEqual(self.at(2026, 9, 24, 11, 5), "2026-09-24-12")
+        self.assertEqual(self.at(2026, 9, 24, 15, 59), "2026-09-24-16")
+
+    def test_gmt_slots(self):
+        self.assertEqual(self.at(2026, 12, 1, 9, 0), "2026-12-01-09")
+        self.assertIsNone(self.at(2026, 12, 1, 8, 30))                   # 08:30 GMT, before 9
+
+    def test_outside_every_slot_sends_nothing(self):
+        for h, mi in ((5, 0), (7, 59), (10, 0), (13, 30), (18, 0), (22, 0)):
+            self.assertIsNone(self.at(2026, 9, 24, h, mi), (h, mi))
+
+    def test_a_late_trigger_still_counts_inside_the_window(self):
+        self.assertEqual(self.at(2026, 9, 24, 9, 45), "2026-09-24-09")   # 10:45 BST, Mac woke late
+
+    def test_send_slot_runs_once_per_slot(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            news, state = os.path.join(d, "news"), os.path.join(d, "state.json")
+            os.makedirs(news)
+            with open(os.path.join(news, "stroke.json"), "w") as fh:
+                json.dump({"speciality": "stroke", "items": [{"link": "https://a/1", "title": "A"}]}, fh)
+            orig = pa.current_slot
+            try:
+                pa.current_slot = lambda now=None: "2026-09-24-09"
+                pa.main(["send", "--slot", "--news-dir", news, "--state", state])   # seeds, marks slot
+                self.assertEqual(pa.load_state(state)["lastSlot"], "2026-09-24-09")
+                with open(os.path.join(news, "stroke.json"), "w") as fh:
+                    json.dump({"speciality": "stroke", "items": [{"link": "https://a/2", "title": "B"}]}, fh)
+                pa.main(["send", "--slot", "--news-dir", news, "--state", state])   # same slot: skipped
+                self.assertIn("https://a/1", pa.load_state(state)["seen"]["stroke"])
+                pa.current_slot = lambda now=None: None
+                pa.main(["send", "--slot", "--news-dir", news, "--state", state])   # off-slot: skipped
+                self.assertNotIn("https://a/2", pa.load_state(state)["seen"]["stroke"])
+            finally:
+                pa.current_slot = orig
 
 
 class MembersOnlyTests(unittest.TestCase):
