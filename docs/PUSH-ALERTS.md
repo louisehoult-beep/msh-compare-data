@@ -8,7 +8,9 @@ chose. Tapping it opens that speciality's page on the Hub.
 
 | Part | Where | Job |
 |---|---|---|
+| Hub page 4463 "Phone Alerts (Subscribers only)" | The Hub, members only | "Turn on phone alerts" asks WordPress for a member pass and opens the alerts page with it. Source: `docs/hub-page-4463-phone-alerts.html`. |
 | `alerts/index.html` | GitHub Pages, this repo | The member page: pick specialities, "Turn on alerts", "Turn off". |
+| `supabase/functions/alerts-subscribe/` | Supabase Edge Function | The only writer of `push_subscriptions`. Saves a phone only with a valid member pass; turns a phone off. |
 | `alerts/sw.js` | GitHub Pages | Service worker: shows the notification, opens the page on tap. |
 | `alerts/config.json` | Generated, committed | Public values only: VAPID public key, Supabase URL + anon key, speciality list. |
 | Supabase table `push_subscriptions` | Lou's Supabase project | Where the browser stores each phone's push address. Not in this repo: a push address lets its holder buzz that phone. |
@@ -53,6 +55,11 @@ grant insert on public.push_subscriptions to anon;
 The sender uses the **service-role** key, which bypasses row-level security,
 to read the table and delete rows whose push service answers 404/410.
 
+**Superseded 24/09/2026: members only.** The anon insert policy above is
+dropped and every anon grant revoked by
+`supabase/migrations/20260924160000_alerts_members_only.sql`, which also adds
+`member_id`, `verified_at` and `updated_at`. See "Members only" below.
+
 **Diagnostics table (added 23/09/2026).** The page logs where a phone got
 stuck (iPhone not opened from the Home Screen, permission refused, save
 failed) so nobody has to ask a member to read out an error. Insert-only for
@@ -77,9 +84,10 @@ grant insert on public.push_events to anon;
 Read it in the Supabase SQL editor:
 `select * from push_events order by created_at desc limit 50;`
 
-Changing specialities on the page = the browser drops its old push address
-and takes a new one, then inserts a new row. The old row is pruned on the
-next send. So the anon role never needs update or delete.
+Changing specialities keeps the phone's push address and updates its row in
+place through `alerts-subscribe` (since 24/09/2026; until then it took a new
+address, and a phone that got the same one back hit a 409 and kept its old
+specialities).
 
 ### 2. GitHub secrets (repo Settings, Secrets and variables, Actions)
 
@@ -110,6 +118,43 @@ page). Notifications then show the Hub's own domain instead of github.io.
 A draft page "Phone Alerts (Subscribers only)" under page 675 was created in
 the session that built this; publish it and add it to the member menu. The
 button simply links to the Pages URL above.
+
+## Members only (24/09/2026)
+
+Lou: only paying members can subscribe. Before this the page wrote to the
+table with the public anon key, so anyone who found the page could sign up.
+
+1. Hub page 4463 is members-only. Its button calls
+   `admin-ajax.php?action=msh_ask_pass`, the pass WPCode snippet 4510 already
+   issues for Ask the Hub: signed with `MSH_ASK_SECRET`, given **only** to a
+   member whose plan opens the Live Desk (page 675), or an admin.
+2. It opens the alerts page with the pass after `#m=`. The page moves it into
+   the query string so an iPhone's Add to Home Screen keeps it (the manifest
+   has no `start_url` for that reason).
+3. The page sends the subscription and the pass to the Edge Function
+   `alerts-subscribe`. It checks the pass with the same `pass.ts` as Ask the
+   Hub, allowing 24 hours past the pass's expiry for the Home Screen step, and
+   upserts the row with the member's WordPress user id in `member_id`.
+4. Without a pass, a phone already saved by a member may change its
+   specialities or turn off. Anything else gets 403 and the page sends them
+   to the Hub.
+5. `push_alerts.py` sends only to rows with a `member_id` (the query filters,
+   and `members_only()` checks again).
+
+Not covered yet: a member who **lapses** keeps their row until they turn
+alerts off. Removing lapsed members needs WordPress to answer "is user N
+still a member?" for the sender; not built.
+
+Rows saved before 24/09/2026 have no `member_id` and are never sent to. Those
+phones must turn alerts on again once, from the Hub page. The diagnose run
+lists them. Delete them in the SQL editor once nobody needs them:
+`delete from push_subscriptions where member_id is null;`
+
+Deploying the function (verify_jwt off: the pass is the check):
+
+    supabase functions deploy alerts-subscribe --no-verify-jwt --project-ref vbthumugbzyqndirmyns
+
+Tests: `deno test supabase/functions/alerts-subscribe/rules_test.ts supabase/functions/ask-the-hub/pass_test.ts`.
 
 ## How a run goes
 
@@ -150,8 +195,8 @@ replaces the notification on the lock screen rather than stacking a second.
   removed on 23/09/2026: it did not work on Lou's iPhone and proved nothing
   about delivery anyway. Use the workflow's **test alert** instead.
 * The page only says "Alerts are on" once Supabase has the row. Every visit
-  re-saves the phone's subscription (a 409 means it is already on file), so a
-  signup whose save never landed repairs itself when the page is next opened.
+  re-saves the phone's subscription through `alerts-subscribe`, so a signup
+  whose save never landed repairs itself when the page is next opened.
   Found 23/09/2026: Lou's iPhone showed the test button and "on" while the
   table held no iPhone row at all, because "on" was read from the phone's
   own state.
@@ -171,6 +216,18 @@ replaces the notification on the lock screen rather than stacking a second.
   drops back to the Hub. They must open the link in their browser and add
   the alerts page itself.
 * Desktop browsers work too; the alert appears as a system notification.
+
+## The badge
+
+Android draws the small status-bar badge from its transparency only, in
+white. The full-colour app icon showed there as a blank square. Since
+24/09/2026 `sw.js` uses `alerts/badge-96.png`, a white bars-and-arrow
+silhouette drawn by `scripts/make_alert_icons.py --badge`. iOS ignores it.
+
+## pywebpush
+
+Pinned in `push-alerts.yml` (`pywebpush==2.5.0`, 24/09/2026). Bump it on
+purpose, after a dry run, never by default.
 
 ## The app icon
 

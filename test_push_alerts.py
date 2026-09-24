@@ -176,8 +176,9 @@ class StoreTests(unittest.TestCase):
             calls.append((req.get_method(), req.full_url, req.headers, data))
             if req.get_method() == "GET":
                 return Resp(json.dumps([
-                    {"id": 1, "endpoint": "e", "p256dh": "p", "auth": "a", "specialities": []},
-                    {"id": 2, "endpoint": "e2", "p256dh": None, "auth": "a"},   # unusable row
+                    {"id": 1, "endpoint": "e", "p256dh": "p", "auth": "a", "specialities": [], "member_id": 9},
+                    {"id": 2, "endpoint": "e2", "p256dh": None, "auth": "a", "member_id": 9},   # unusable row
+                    {"id": 3, "endpoint": "e3", "p256dh": "p", "auth": "a", "member_id": None},  # pre-rule row
                 ]).encode())
             return Resp(b"")
         st = pa.Store("https://x.supabase.co/", "SERVICE", opener=opener)
@@ -186,9 +187,25 @@ class StoreTests(unittest.TestCase):
         st.delete(1)
         self.assertEqual(calls[0][0], "GET")
         self.assertTrue(calls[0][1].startswith("https://x.supabase.co/rest/v1/push_subscriptions?select="))
+        self.assertIn("&member_id=not.is.null", calls[0][1])
         self.assertEqual(calls[0][2]["Apikey"], "SERVICE")
         self.assertEqual(calls[1][0], "DELETE")
         self.assertTrue(calls[1][1].endswith("?id=eq.1"))
+
+
+class MembersOnlyTests(unittest.TestCase):
+    """Lou, 24/09/2026: only paying members get alerts. Both halves: a
+    member's phone IS sendable, and a row without a member never is."""
+    ROW = {"id": 1, "endpoint": "https://fcm.googleapis.com/x", "p256dh": "p", "auth": "a"}
+
+    def test_a_members_phone_is_sent_to(self):
+        self.assertEqual(len(pa.members_only([dict(self.ROW, member_id=42)])), 1)
+
+    def test_rows_without_a_member_are_never_sent_to(self):
+        for mid in (None, 0, ""):
+            self.assertEqual(pa.members_only([dict(self.ROW, member_id=mid)]), [])
+        self.assertEqual(pa.members_only([dict(self.ROW)]), [])
+        self.assertEqual(pa.members_only(None), [])
 
 
 class StoreErrorTests(unittest.TestCase):

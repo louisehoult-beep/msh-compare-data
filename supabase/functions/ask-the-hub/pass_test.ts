@@ -38,3 +38,12 @@ Deno.test("junk, empty, publishable-key-shaped and missing secret are rejected",
 Deno.test("user id must be a positive integer", async () => {
   assertEquals(await verifyPass(await makePass(S, 0, NOW + 600), S, NOW), null);
 });
+Deno.test("grace honours a recently expired pass, and only for as long as asked", async () => {
+  const p = await makePass(S, 42, NOW - 3600);
+  assertEquals(await verifyPass(p, S, NOW), null);
+  assertEquals(await verifyPass(p, S, NOW, 86400), 42);
+  assertEquals(await verifyPass(p, S, NOW, 3600), null);
+});
+Deno.test("grace does not stretch the upper limit", async () => {
+  assertEquals(await verifyPass(await makePass(S, 42, NOW + MAX_LIFE + 60), S, NOW, 86400), null);
+});
