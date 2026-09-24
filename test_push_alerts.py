@@ -75,22 +75,42 @@ class MessageTests(unittest.TestCase):
         "urology": [item("https://b/2", "New stent")],
     }
 
-    def test_single_speciality_leads_with_the_headline_and_deep_links(self):
+    def test_single_speciality_leads_with_the_headline_and_carries_its_items(self):
         m = pa.build_message(self.NEW, ["stroke"], labels=LBL)
         self.assertEqual(m["title"], "Stroke: 2 new items")
         self.assertEqual(m["body"], "Thrombectomy trial reports — Neuro News")
-        self.assertEqual(m["url"], "https://medsalesintelligencehub.co.uk/medical-sales-hub/stroke/")
+        # A tap opens the in-app list, never the Hub (which needs a login there).
+        self.assertEqual(m["url"], pa.LATEST_PAGE)
+        self.assertEqual(m["hub"], [{"l": "Stroke",
+                                     "u": "https://medsalesintelligencehub.co.uk/medical-sales-hub/stroke/"}])
+        self.assertEqual([i["u"] for i in m["items"]], ["https://a/3", "https://a/4"])
+        self.assertEqual(m["items"][0], {"t": "Thrombectomy trial reports", "u": "https://a/3",
+                                         "s": "Neuro News", "sp": "Stroke"})
+        self.assertEqual(m["more"], 0)
         self.assertTrue(m["tag"].startswith("msh-news-"))
 
     def test_multiple_specialities_summarise_and_link_home(self):
         m = pa.build_message(self.NEW, [], labels=LBL)
         self.assertEqual(m["title"], "Hub news: 3 new items across 2 specialities")
         self.assertEqual(m["body"], "Stroke (2) · Urology (1)")
-        self.assertEqual(m["url"], pa.HUB_HOME)
+        self.assertEqual(m["url"], pa.LATEST_PAGE)
+        self.assertEqual([h["l"] for h in m["hub"]], ["Stroke", "Urology"])
+        self.assertEqual(len(m["items"]), 3)
 
     def test_nothing_for_their_specialities_means_no_message(self):
         self.assertIsNone(pa.build_message(self.NEW, ["respiratory"], labels=LBL))
         self.assertIsNone(pa.build_message({}, [], labels=LBL))
+
+    def test_payload_stays_under_the_web_push_limit(self):
+        many = {"stroke": [item("https://a/%d/%s" % (n, "p" * 150), "t" * 300, "Source") for n in range(40)]}
+        m = pa.build_message(many, [], labels=LBL)
+        self.assertLessEqual(len(json.dumps(m, ensure_ascii=False).encode("utf-8")), pa.PAYLOAD_MAX)
+        self.assertLessEqual(len(m["items"]), pa.MAX_ITEMS)
+        self.assertEqual(m["more"], 40 - len(m["items"]))
+        self.assertTrue(all(len(i["t"]) <= 140 for i in m["items"]))
+
+    def test_test_alert_opens_the_in_app_page(self):
+        self.assertEqual(pa.TEST_MESSAGE["url"], pa.LATEST_PAGE)
 
     def test_body_is_clipped(self):
         long = {"stroke": [item("https://a/1", "x" * 400, "S")]}

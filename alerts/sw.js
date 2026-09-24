@@ -14,6 +14,12 @@
 'use strict';
 
 var HUB_HOME = 'https://medsalesintelligencehub.co.uk/medical-sales-hub/';
+// A tap opens this page INSIDE the alerts app. It lists the items the push
+// carried, read back from the cache below, so no Hub login is needed to see
+// them (24/09/2026: opening the Hub from a tap landed on a login screen).
+var LATEST = 'latest.html';
+var STORE = 'msh-alerts';
+var STORE_KEY = 'latest-alert.json';
 var ICON = 'icon-192.png';
 
 self.addEventListener('install', function () { self.skipWaiting(); });
@@ -31,18 +37,26 @@ self.addEventListener('push', function (event) {
     badge: ICON,
     tag: data.tag || 'msh-news',
     renotify: true,
-    data: { url: data.url || HUB_HOME }
+    data: { url: new URL(data.url || LATEST, self.registration.scope).href }
   };
   // Show first (iOS requires every push to put a notification up), then log
   // that this phone received and showed it. Added 23/09/2026: Apple accepted
   // a test for Lou's iPhone but nothing appeared, and without this there was
   // no way to tell "never arrived" from "arrived, not shown" (Focus, settings).
+  data.receivedAt = new Date().toISOString();
   event.waitUntil(
-    self.registration.showNotification(title, options)
+    keep(data).then(function () { return self.registration.showNotification(title, options); })
       .then(function () { return logEvent('received-shown', options.tag); },
             function (err) { return logEvent('received-show-failed', String(err && (err.message || err))); })
   );
 });
+
+// Save the alert so latest.html can show its items. Never blocks the notification.
+function keep(data) {
+  return caches.open(STORE).then(function (c) {
+    return c.put(STORE_KEY, new Response(JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } }));
+  }).catch(function () {});
+}
 
 // Best effort, never throws: one row in the Supabase push_events table, using
 // the same public anon key the sign-up page uses (insert-only).
@@ -62,11 +76,14 @@ function logEvent(stage, detail) {
 
 self.addEventListener('notificationclick', function (event) {
   event.notification.close();
-  var url = (event.notification.data && event.notification.data.url) || HUB_HOME;
+  var url = (event.notification.data && event.notification.data.url) || new URL(LATEST, self.registration.scope).href;
   event.waitUntil(
     self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (list) {
       for (var i = 0; i < list.length; i++) {
-        if (list[i].url === url && 'focus' in list[i]) { return list[i].focus(); }
+        var c = list[i];
+        if (c.url.indexOf(self.registration.scope) === 0 && 'navigate' in c) {
+          return c.navigate(url).then(function (w) { return (w || c).focus(); });
+        }
       }
       return self.clients.openWindow(url);
     })

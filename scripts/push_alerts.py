@@ -75,6 +75,9 @@ TABLE = "push_subscriptions"
 
 TTL_SECONDS = 24 * 3600     # a phone off overnight still gets the morning digest
 BODY_MAX = 160              # Android truncates around here; iOS a little earlier
+LATEST_PAGE = "latest.html"  # opened on tap, relative to the alerts web app's scope
+MAX_ITEMS = 12
+PAYLOAD_MAX = 3000           # bytes of JSON; the encrypted web push limit is 4096
 MAX_PER_RUN = 5000          # sanity cap on rows pulled per run
 
 
@@ -215,18 +218,30 @@ def build_message(new_by_slug: dict[str, list[dict]], wanted: list[str] | None,
         lead = items[0].get("title") or ""
         src = items[0].get("source") or ""
         body = _clip(lead + (" — " + src if src else ""), BODY_MAX)
-        url = hub_page(slug)
     else:
         title = "Hub news: %d new items across %d specialities" % (total, len(slugs))
         parts = ["%s (%d)" % (labels(s), len(new_by_slug[s])) for s in slugs]
         body = _clip(" · ".join(parts), BODY_MAX)
-        url = HUB_HOME
-    return {
+    # Tapping opens latest.html INSIDE the alerts web app, which lists the
+    # items carried in this payload. Opening the Hub straight from a
+    # notification drops the member into a separate in-app browser with no
+    # Hub login, so they hit the paywall (Lou, 24/09/2026). The Hub pages are
+    # still offered on latest.html, one tap further, for members who want them.
+    msg = {
         "title": title,
         "body": body,
-        "url": url,
+        "url": LATEST_PAGE,
         "tag": "msh-news-" + _dt.datetime.now(_dt.timezone.utc).strftime("%Y%m%d"),
+        "hub": [{"l": labels(s), "u": hub_page(s)} for s in slugs],
+        "items": [{"t": _clip(it.get("title") or "", 140), "u": it.get("link") or "",
+                   "s": it.get("source") or "", "sp": labels(s)}
+                  for s in slugs for it in new_by_slug[s]][:MAX_ITEMS],
     }
+    # Web push payloads are capped at 4 KB after encryption; stay well under.
+    while msg["items"] and len(json.dumps(msg, ensure_ascii=False).encode("utf-8")) > PAYLOAD_MAX:
+        msg["items"].pop()
+    msg["more"] = total - len(msg["items"])
+    return msg
 
 
 # --------------------------------------------------------------------------
@@ -512,8 +527,11 @@ def cmd_send(args) -> int:
 TEST_MESSAGE = {
     "title": "Medical Sales Intelligence Hub",
     "body": "Test alert: phone alerts are working. Your first real one arrives the next morning there is news.",
-    "url": HUB_HOME,
+    "url": LATEST_PAGE,
     "tag": "msh-test",
+    "hub": [{"l": "Live Desk", "u": HUB_HOME}],
+    "items": [],
+    "more": 0,
 }
 
 
