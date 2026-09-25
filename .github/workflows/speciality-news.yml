@@ -39,8 +39,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      # ref: main, not the default (the dispatch sha). A run queued behind
+      # another writer in the concurrency group otherwise builds on the sha it
+      # was dispatched at, then conflicts on rebase against the writer that
+      # landed while it waited (25/09/2026: a 10:15 dispatch queued behind the
+      # 10:14 scheduled run, built on c92687e, conflicted on all 29 files).
       - uses: actions/checkout@v5
         with:
+          ref: main
           fetch-depth: 0
           persist-credentials: true
       - uses: actions/setup-python@v6
