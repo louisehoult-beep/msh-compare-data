@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-24",
+ "lastRun": "2026-09-25",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -437,7 +437,19 @@
   "Procotech Limited",
   "Prospect Diagnostics Ltd",
   "Prosum Medical Ltd",
-  "PTP Healthcare Ltd"
+  "PTP Healthcare Ltd",
+  "Omnimed Limited",
+  "PTW-UK Ltd",
+  "Puretone",
+  "Q Medical Technologies Ltd",
+  "Qualasept Ltd t/a Bath ASU",
+  "R&D Surgical Ltd",
+  "Radiobotics ApS",
+  "Raise Healthcare Pvt Ltd",
+  "Raysearch UK Ltd",
+  "Regent’s Park Healthcare",
+  "Remserve Medical Supplies Ltd",
+  "Repton Medical Ltd"
  ],
  "refusals": [
   {
@@ -1019,6 +1031,21 @@
    "name": "PTP Healthcare Ltd",
    "reason": "No confirmed own website found this session; the seed record carries no website link and guessed domains (ptphealthcare.co.uk, ptp-healthcare.com) do not resolve (DNS failure). No other named source available.",
    "date": "2026-09-24"
+  },
+  {
+   "name": "R&D Surgical Ltd",
+   "reason": "No website link in the record and none found under this exact name. Companies House search for \"R&D Surgical\" / \"RD Surgical\" returns only \"RD SURGICAL LTD\" (no ampersand), company 15539790, incorporated 04/03/2024, Manchester -- too recent and too uncertain a name match to the seed's \"R&D Surgical Ltd\" to record as the same entity's alias. No verifiable extra name form.",
+   "date": "2026-09-25"
+  },
+  {
+   "name": "Radiobotics ApS",
+   "reason": "Already fully investigated (see record's own note, 07/09/2026 and 10/09/2026): own site radiobotics.com states the exact legal name \"Radiobotics ApS\" on its terms page and no other form. Danish ApS, no UK Companies House record expected. No extra name form to add.",
+   "date": "2026-09-25"
+  },
+  {
+   "name": "Raise Healthcare Pvt Ltd",
+   "reason": "Companies House confirms an exact match, RAISE HEALTHCARE PVT LTD, company 08438030, registered office Unit 4b The Courtyard, Reddicap Trading Estate, Sutton Coldfield B75 7BU -- identical to the seed name, no previous names. Own site raisehealthcare.co.uk shows no additional legal or trading name. No verifiable extra name form; speciality (Wound care) already filled.",
+   "date": "2026-09-25"
   }
  ],
  "sources": {
