@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 36730,
-  "differentiator.json held": 52437
+  "differentiator.json published": 36741,
+  "differentiator.json held": 52426
  },
  "counts": {
   "frameworks": 122,
@@ -24,14 +24,14 @@
   "unmapped": 48,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 422,
-  "inScopeSuppliersNeedingCrawl": 307,
+  "supplierNamesUnresolved": 420,
+  "inScopeSuppliersNeedingCrawl": 306,
   "inScopeSuppliersNeedingDomain": 285,
-  "suppliersRefused": 501,
+  "suppliersRefused": 503,
   "suppliersRefusedButPublishingElsewhere": 106,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 3,
-  "blockedFrameworks": 1,
+  "blockedFrameworks": 2,
   "deferredFrameworks": 3
  },
  "unresolvedSupplierNames": [
@@ -1564,14 +1564,6 @@
    1
   ],
   [
-   "Grundon Waste Management Ltd",
-   1
-  ],
-  [
-   "SRCL Ltd, trading as Stericycle",
-   1
-  ],
-  [
    "Emmat Medical",
    1
   ],
@@ -2448,8 +2440,8 @@
    "category": "Medical Technology",
    "ends": "30 January 2028",
    "suppliersAwarded": 101,
-   "suppliersPublished": 29,
-   "coverage": 28.7,
+   "suppliersPublished": 30,
+   "coverage": 29.7,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -2458,10 +2450,6 @@
     "ortho"
    ],
    "crawlWorklist": [
-    {
-     "supplier": "Hospital Innovations",
-     "domain": "hospitalinnovations.com"
-    },
     {
      "supplier": "NSK United Kingdom Limited",
      "domain": "nsk-shop.co.uk"
@@ -2991,7 +2979,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 6,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 1,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -3008,6 +2996,7 @@
     "FH Ortho Ltd",
     "Globus Medical UK Ltd",
     "Heraeus Medical UK",
+    "Hospital Innovations",
     "Ideal Med",
     "Johnson & Johnson MedTech",
     "Joint Operations",
@@ -3037,7 +3026,6 @@
     "TRB Chemedica (UK) Ltd"
    ],
    "heldOnly": [
-    "Hospital Innovations",
     "NSK United Kingdom Limited"
    ],
    "capturedNothingCounted": [
@@ -3111,7 +3099,7 @@
     "Venturis Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 17,
+   "actionableTotal": 16,
    "blockedReason": null,
    "deferred": null
   },
@@ -12849,13 +12837,28 @@
    "crawlWorklist": [],
    "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
-   "refusedSuppliers": [],
+   "refusedSuppliers": [
+    {
+     "supplier": "Grundon Waste Management Ltd",
+     "domain": "grundon.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-25",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "SRCL Ltd, trading as Stericycle",
+     "domain": "stericycle.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-25",
+     "bucket": "refused"
+    }
+   ],
    "route": "NHSSC framework",
    "catsInScope": [
     "infection:sharps"
    ],
    "actionable": {
-    "unresolvedNames": 2,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 0,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -12870,13 +12873,13 @@
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [],
-   "refused": [],
-   "unknown": [
+   "refused": [
     "Grundon Waste Management Ltd",
     "SRCL Ltd, trading as Stericycle"
    ],
-   "actionableTotal": 2,
-   "blockedReason": null,
+   "unknown": [],
+   "actionableTotal": 0,
+   "blockedReason": "every awarded supplier not yet published has been read and refused (2 recorded refusal(s)) \u2014 no permitted route left to the rest of this framework, so its coverage cannot rise without a new route",
    "deferred": null
   },
   {

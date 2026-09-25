@@ -28,7 +28,7 @@ A refusal is listed for every awarded supplier that carries one, including
 suppliers counted under Left because they publish outside this speciality:
 the two facts are separate, and the refusal used to be invisible for any
 supplier publishing anything anywhere.
-**1 framework(s) have nothing left by a permitted route** —
+**2 framework(s) have nothing left by a permitted route** —
 low coverage there means exhausted, not neglected.
 **3 framework(s) are DEFERRED** — their Left is real and
 counted here, but every supplier in it is waiting on a ruling only Lou can
@@ -39,7 +39,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 33 | 27.0% | 66 | 36 | STARTED |
-| Total Orthopaedic Solutions 3 | ortho | 101 | 29 | 28.7% | 17 | 67 | STARTED |
+| Total Orthopaedic Solutions 3 | ortho | 101 | 30 | 29.7% | 16 | 67 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 19 | 30.2% | 26 | 27 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 10 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 17 | 29.3% | 26 | 26 | STARTED |
@@ -85,7 +85,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Polymer Aprons | infection | 8 | 2 | 25.0% | 1 | 7 | STARTED |
 | Contrast Injectors, Consumables and Associated Options and Related Services | imaging | 5 | 1 | 20.0% | 0 | 4 | STARTED · BLOCKED |
 | Polymer Products | infection | 5 | 2 | 40.0% | 3 | 1 | STARTED |
-| Reusable Clinical and Sharps Waste Management Service | infection | 3 | 1 | 33.3% | 2 | 0 | STARTED |
+| Reusable Clinical and Sharps Waste Management Service | infection | 3 | 1 | 33.3% | 0 | 2 | STARTED · BLOCKED |
 | Brachytherapy Seeds and Associated Accessories | oncology | 2 | 1 | 50.0% | 1 | 1 | STARTED |
 | Ear, Nose and Throat (ENT) Endoscopes and Associated Options and Related Services | ent | 7 | 0 | 0.0% | 3 | 5 | NOT STARTED |
 | Nuclear Medicine Imaging and Associated Options and Related Services | nuclear | 4 | 0 | 0.0% | 4 | 1 | NOT STARTED |
