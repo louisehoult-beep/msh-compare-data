@@ -38,7 +38,7 @@ the decision each waits on; delete the entry once that decision is made.
 
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
-| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 33 | 27.0% | 67 | 35 | STARTED |
+| Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 33 | 27.0% | 66 | 36 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 29 | 28.7% | 17 | 67 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 18 | 28.6% | 29 | 25 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 10 | 42 | STARTED |
@@ -73,7 +73,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Central Venous Catheters and Associated Products | vascular | 18 | 7 | 38.9% | 7 | 9 | STARTED |
 | Infant Feeding and Accessories | neonatal | 18 | 6 | 33.3% | 2 | 13 | STARTED |
 | Patient Temperature Management | theatres | 18 | 8 | 44.4% | 6 | 9 | STARTED |
-| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 3 | 9 | STARTED |
+| Technology Enabled Care, Electronic Assistive Technology and Lone Worker Devices | digital | 18 | 6 | 33.3% | 3 | 10 | STARTED |
 | Audiological Diagnostics Implantable Devices and Services | audiology | 15 | 9 | 60.0% | 5 | 6 | STARTED |
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 4 | 11 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
@@ -95,7 +95,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 38 | 27 | UNMAPPED |
 | Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 37 | 25 | UNMAPPED |
 | Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 27 | 23 | UNMAPPED |
-| Wound Closure | — | 39 | 0 | 0.0% | 29 | 18 | UNMAPPED |
+| Wound Closure | — | 39 | 0 | 0.0% | 29 | 19 | UNMAPPED |
 | Procedure Packs | — | 29 | 0 | 0.0% | 17 | 18 | UNMAPPED |
 | Non Invasive Ventilation, Sleep Therapy, CPAP and Sleep Monitoring Diagnostics | — | 28 | 0 | 0.0% | 24 | 7 | UNMAPPED |
 | Pulse Oximetry, Capnography and Related Monitoring Technologies | — | 26 | 0 | 0.0% | 23 | 8 | UNMAPPED |

@@ -64382,10 +64382,12 @@
   },
   "AM Healthcare Group": {
    "domain": "amhealthcaregroup.com",
-   "verified": "2026-08-15",
+   "verified": "2026-09-25",
    "source": "amhealthcaregroup.com XML sitemap, read this run",
    "structureFrom": "sitemap",
+   "hasDivisions": true,
    "landingPagesDropped": 7,
+   "furniturePagesDropped": 0,
    "duplicateUrlsDropped": 0,
    "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 7 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation.",
    "structure": "Grouped by the company's own URL structure.",
@@ -67921,12 +67923,14 @@
    ]
   },
   "MEDACX Limited": {
-   "domain": "www.medacx.co.uk",
-   "verified": "2026-08-15",
-   "source": "www.medacx.co.uk XML sitemap, read this run",
+   "domain": "medacx.co.uk",
+   "verified": "2026-09-25",
+   "source": "medacx.co.uk XML sitemap, read this run",
    "structureFrom": "sitemap",
+   "hasDivisions": true,
    "landingPagesDropped": 5,
-   "duplicateUrlsDropped": 11,
+   "furniturePagesDropped": 0,
+   "duplicateUrlsDropped": 10,
    "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 5 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation.",
    "structure": "Grouped by the company's own URL structure.",
    "droppedCategoryPages": 0,
@@ -68062,6 +68066,11 @@
      "category": ""
     },
     {
+     "n": "Marie Capnograph",
+     "division": "Medical Devices",
+     "category": ""
+    },
+    {
      "n": "Stephan Eve Neo Neonateinfant",
      "division": "Medical Devices",
      "category": ""
@@ -68078,11 +68087,6 @@
     },
     {
      "n": "Stephan Eve Tr2 Military Transport",
-     "division": "Medical Devices",
-     "category": ""
-    },
-    {
-     "n": "Emmar Capnograph",
      "division": "Medical Devices",
      "category": ""
     },
@@ -148345,17 +148349,19 @@
    ]
   },
   "Ambu UK": {
-   "domain": "www.ambu.com",
-   "verified": "2026-08-25",
-   "source": "www.ambu.com XML sitemap, read this run",
-   "structureFrom": "sitemap",
+   "domain": "ambu.com",
+   "verified": "2026-09-25",
+   "source": "ambu.com, each product's own page read this run",
+   "structureFrom": "sitemap products, each page's own name and breadcrumb division (per-page fallback)",
+   "partialRead": false,
    "hasDivisions": false,
    "landingPagesDropped": 0,
+   "furniturePagesDropped": 0,
    "duplicateUrlsDropped": 0,
-   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 0 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping.",
-   "structure": "No division structure found in the URLs — listed as one flat range.",
    "droppedCategoryPages": 0,
-   "filingRule": "Read from the sitemap, so product NAMES come from URL slugs. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping — every item is listed by name below rather than grouped, because a flat list is honest and a fabricated grouping would not be.",
+   "captureCaveat": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 8 page(s) could not be read and fall back to their URL slug.",
+   "structure": "No usable breadcrumb division on this site — listed as one flat range.",
+   "filingRule": "Names and divisions are read from each product's own page — schema.org product markup for the name, the page's own breadcrumb trail for the division — because the product URLs carry no path segment between the product-path segment and the product's own slug for this route to read a division from. 0 of 8 page(s) could not be read and fall back to their URL slug. Every item is listed by name below rather than grouped, because a fabricated grouping would misrepresent the company's own filing.",
    "divisions": [
     {
      "name": "Uncategorised",
@@ -148364,7 +148370,7 @@
    ],
    "products": [
     {
-     "n": "By Area Of Use",
+     "n": "Single-use devices for inside and outside hospitals",
      "division": "Uncategorised",
      "category": ""
     },
@@ -148389,7 +148395,7 @@
      "category": ""
     },
     {
-     "n": "Aid And Military Organizations",
+     "n": "Aid and Military Organizations",
      "division": "Uncategorised",
      "category": ""
     },
@@ -221786,131 +221792,143 @@
   },
   "Sefam Medical Ltd": {
    "domain": "sefam.co.uk",
-   "verified": "2026-08-25",
-   "source": "sefam.co.uk XML sitemap, read this run",
-   "structureFrom": "sitemap",
-   "hasDivisions": false,
-   "landingPagesDropped": 0,
-   "duplicateUrlsDropped": 0,
-   "captureCaveat": "Names are derived from the last segment of each product URL, not read from a product record, so they carry no category and read as title-cased slugs. 0 category landing page(s) were dropped by the prefix test — a path that is a strict prefix of other paths is a page you pass through, not a product. A leaf URL that is not a product cannot be detected structurally and a few may remain, so treat this range as the shape of the catalogue rather than an exact product list. A WordPress REST capture (structureFrom: 'wp-rest') does not have this limitation. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping.",
-   "structure": "No division structure found in the URLs — listed as one flat range.",
-   "droppedCategoryPages": 0,
-   "filingRule": "Read from the sitemap, so product NAMES come from URL slugs. the sitemap's product URLs are flat, so they carry no division structure — shown as one unsorted list, not the company's own filed grouping — every item is listed by name below rather than grouped, because a flat list is honest and a fabricated grouping would not be.",
+   "verified": "2026-09-25",
+   "source": "sefam.co.uk Shopify storefront product records, read this run",
+   "structureFrom": "the company's own collections (its published browse structure)",
+   "hasDivisions": true,
+   "structure": "The company's own product filing, as published on its storefront.",
+   "filingRule": "Grouping MIRRORS the manufacturer's own filing, read from the company's own collections (its published browse structure). Where a product sits under a heading that reads oddly clinically, that is where the company files it, and a rep searching the company's way will find it there.",
    "divisions": [
     {
-     "name": "Uncategorised",
-     "products": 22
+     "name": "S.Box Accessories",
+     "products": 6
+    },
+    {
+     "name": "Featured Masks",
+     "products": 4
+    },
+    {
+     "name": "Néa Accessories",
+     "products": 4
+    },
+    {
+     "name": "Face Masks",
+     "products": 4
+    },
+    {
+     "name": "Clearance",
+     "products": 4
     }
    ],
    "products": [
     {
-     "n": "Humidifier",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Heated Tube",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sbox Filter",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Cigarette Cable",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Breeze Zen",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Breeze Facial Comfort",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Breeze Pillows",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Replacement Mask Cushions Inserts",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Breeze Nasal Comfort",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "15Mm Hose Grey",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Nea Heated Humidifier",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sefam Nea Air Inlet Filter",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Yuwell Yf 02 Full Face Mask",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Yuwell Yf 01 Full Face Mask",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Yuwell Yp 01 Pillows Mask",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Yuwell Yn 02 Nasal Mask",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Yuwell Yn 03 Nasal Mask",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Nea 12 24V Adaptor",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Yuwell Replacement Mask Cushions Inserts",
-     "division": "Uncategorised",
-     "category": ""
-    },
-    {
-     "n": "Sefam S Box Humidifier Chamber",
-     "division": "Uncategorised",
+     "n": "Yuwell YF-06 Hybrid Mask",
+     "division": "Featured Masks",
      "category": ""
     },
     {
      "n": "Sefam Nea Humidifier Chamber",
-     "division": "Uncategorised",
+     "division": "Néa Accessories",
      "category": ""
     },
     {
-     "n": "Yuwell Yf 06 Hybrid Mask",
-     "division": "Uncategorised",
+     "n": "Sefam S.Box Humidifier Chamber",
+     "division": "S.Box Accessories",
+     "category": ""
+    },
+    {
+     "n": "Yuwell Replacement Mask Cushions (Inserts)",
+     "division": "Face Masks",
+     "category": ""
+    },
+    {
+     "n": "Néa 12-24v Adaptor",
+     "division": "Néa Accessories",
+     "category": ""
+    },
+    {
+     "n": "Yuwell YF-02 Full Face Mask",
+     "division": "Featured Masks",
+     "category": ""
+    },
+    {
+     "n": "Yuwell YF-01 Full Face Mask",
+     "division": "Face Masks",
+     "category": ""
+    },
+    {
+     "n": "Yuwell YP-01 Pillows Mask",
+     "division": "Featured Masks",
+     "category": ""
+    },
+    {
+     "n": "Yuwell YN-02 Nasal Mask",
+     "division": "Face Masks",
+     "category": ""
+    },
+    {
+     "n": "Yuwell YN-03 Nasal Mask",
+     "division": "Featured Masks",
+     "category": ""
+    },
+    {
+     "n": "Sefam Néa Air Inlet Filter",
+     "division": "Néa Accessories",
+     "category": ""
+    },
+    {
+     "n": "Néa Heated Humidifier",
+     "division": "Néa Accessories",
+     "category": ""
+    },
+    {
+     "n": "15mm Hose (Grey)",
+     "division": "S.Box Accessories",
+     "category": ""
+    },
+    {
+     "n": "Breeze Nasal Comfort",
+     "division": "Clearance",
+     "category": ""
+    },
+    {
+     "n": "Sefam Breeze Replacement Mask Cushions (Inserts)",
+     "division": "Face Masks",
+     "category": ""
+    },
+    {
+     "n": "Breeze Pillows",
+     "division": "Clearance",
+     "category": ""
+    },
+    {
+     "n": "Breeze Facial Comfort",
+     "division": "Clearance",
+     "category": ""
+    },
+    {
+     "n": "Breeze Zen",
+     "division": "Clearance",
+     "category": ""
+    },
+    {
+     "n": "Sefam S.Box Cigarette Cable (24V)",
+     "division": "S.Box Accessories",
+     "category": ""
+    },
+    {
+     "n": "Sefam S.Box Air Inlet Filter",
+     "division": "S.Box Accessories",
+     "category": ""
+    },
+    {
+     "n": "Sefam Heated Tube",
+     "division": "S.Box Accessories",
+     "category": ""
+    },
+    {
+     "n": "Sefam S.Box Humidifier",
+     "division": "S.Box Accessories",
      "category": ""
     }
    ]
@@ -455207,6 +455225,21 @@
    "domain": "www.aacmounts.com",
    "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
    "checked": "2026-09-24"
+  },
+  "Anser Medical": {
+   "domain": "ansermedical.com",
+   "reason": "robots.txt disallows automated reading of this site",
+   "checked": "2026-09-25"
+  },
+  "Abilia Ltd": {
+   "domain": "www.abilia.com",
+   "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
+   "checked": "2026-09-25"
+  },
+  "Agilent Technologies UK": {
+   "domain": "www.agilent.com",
+   "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; gave up while reading the sitemap — the site answers too slowly to crawl inside its budget; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+   "checked": "2026-09-25"
   }
  }
 }

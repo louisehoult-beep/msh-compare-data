@@ -25,11 +25,11 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 423,
-  "inScopeSuppliersNeedingCrawl": 314,
+  "inScopeSuppliersNeedingCrawl": 313,
   "inScopeSuppliersNeedingDomain": 288,
-  "suppliersRefused": 495,
-  "suppliersRefusedButPublishingElsewhere": 104,
-  "suppliersCapturedNothingCounted": 2,
+  "suppliersRefused": 498,
+  "suppliersRefusedButPublishingElsewhere": 106,
+  "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 3,
   "blockedFrameworks": 1,
   "deferredFrameworks": 3
@@ -2055,6 +2055,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Agilent Technologies UK",
+     "domain": "www.agilent.com",
+     "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-25",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Andrac Ltd",
      "domain": "www.andrac.com",
      "reason": "only 0 product records on the site's API \u2014 that is a landing page, not a catalogue; the WooCommerce Store API returned 4 product(s), too few to be a catalogue; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -2297,7 +2304,7 @@
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 8,
     "heldNeedingCategory": 0,
-    "capturedNothingCounted": 1,
+    "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
     "needDomain": 58
@@ -2348,9 +2355,7 @@
     "Sychem"
    ],
    "heldOnly": [],
-   "capturedNothingCounted": [
-    "Agilent Technologies UK"
-   ],
+   "capturedNothingCounted": [],
    "notCrawled": [
     "1 Stop Medical Supplies",
     "Abbott Toxicology",
@@ -2414,6 +2419,7 @@
    "refused": [
     "2San Global",
     "AB Scientific",
+    "Agilent Technologies UK",
     "Andrac Ltd",
     "Bio-Rad Laboratories UK",
     "CellPath",
@@ -2436,7 +2442,7 @@
     "Wolf Laboratories"
    ],
    "unknown": [],
-   "actionableTotal": 67,
+   "actionableTotal": 66,
    "blockedReason": null,
    "deferred": null
   },
@@ -11507,6 +11513,13 @@
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-05",
      "bucket": "refused"
+    },
+    {
+     "supplier": "Abilia Ltd",
+     "domain": "www.abilia.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-25",
+     "bucket": "published"
     }
    ],
    "route": "NHSSC framework",
@@ -14195,10 +14208,6 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "Anser Medical",
-     "domain": "ansermedical.com"
-    },
-    {
      "supplier": "Artivion UK Ltd",
      "domain": null
     },
@@ -14358,6 +14367,13 @@
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
      "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Anser Medical",
+     "domain": "ansermedical.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-25",
+     "bucket": "heldOnly"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
