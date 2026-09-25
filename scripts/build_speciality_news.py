@@ -330,6 +330,17 @@ def pipeline_entry(row):
     }
 
 
+class PipelineIntel(dict):
+    """{slug: [entry, ...]} from a fetch that actually succeeded.
+
+    A plain {} means "no token, fetch failed, or the body was wrong", and says
+    nothing about which slugs are empty. A PipelineIntel, even an empty one,
+    means the handoff was read and is authoritative for every slug it does NOT
+    list: build() may then rewrite a pipeline-only file to empty. Added
+    25/09/2026, see "PIPELINE-ONLY FILES" in build()."""
+    ok = True
+
+
 def fetch_pipeline_intel(token=None):
     """Fetch the cloud-pipeline handoff. Returns {slug: [entry, ...]}.
 
@@ -364,7 +375,7 @@ def fetch_pipeline_intel(token=None):
             "Trade press only this run.")
         return {}
 
-    out = {}
+    out = PipelineIntel()
     for slug, rows in data.items():
         if not isinstance(rows, list):
             continue
@@ -436,6 +447,23 @@ def build(only_id=None, dry_run=False, pause=0.6):
     else:
         slugs = {s for src in SOURCES for s in src["specialities"]}
         slugs |= set(pipeline)
+        # PIPELINE-ONLY FILES (25/09/2026). A slug with no RSS source gets its
+        # file ONLY from the pipeline, so when the pipeline stops listing it the
+        # file used to be left as it was, still carrying the old rows.
+        # radiology-and-imaging.json kept a dead Yahoo link that way. After a
+        # SUCCESSFUL pipeline read, every existing file for a slug no RSS source
+        # covers is rewritten, to empty if the pipeline has nothing for it.
+        # Never on a failed read (that would wipe verified rows over an outage)
+        # and never widened to RSS-tagged slugs: a failed RSS fetch must keep
+        # that slug's file, which is the fetch_errors path below.
+        if getattr(pipeline, "ok", False):
+            rss_slugs = {s for src in SOURCES for s in src["specialities"]}
+            if os.path.isdir(OUT_DIR):
+                for name in os.listdir(OUT_DIR):
+                    if name.endswith(".json"):
+                        slug = name[:-len(".json")]
+                        if slug not in rss_slugs:
+                            slugs.add(slug)
 
     if dry_run:
         for slug in sorted(slugs):

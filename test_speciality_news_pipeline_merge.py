@@ -242,5 +242,53 @@ class BuildMerge(unittest.TestCase):
         self.assertTrue(all(not i.get("verified") for i in items))
 
 
+    def _seed(self, slug, title="Old pipeline row"):
+        with open(os.path.join(self._tmp, "%s.json" % slug), "w", encoding="utf-8") as fh:
+            json.dump({"speciality": slug, "items": [{"title": title, "link": "https://dead.example"}]}, fh)
+
+    def test_pipeline_only_file_is_emptied_when_pipeline_drops_it(self):
+        # radiology-and-imaging.json, 24/09/2026: no RSS source, pipeline stopped
+        # listing the item, file never rewritten, dead link stayed live.
+        self._rss(1, slug="urology")
+        self._seed("radiology-and-imaging")
+        N.fetch_pipeline_intel = lambda token=None: N.PipelineIntel()
+        N.build(pause=0)
+        self.assertEqual(self._read("radiology-and-imaging")["items"], [])
+
+    def test_pipeline_only_file_is_kept_when_pipeline_read_fails(self):
+        # A failed read is {} (not a PipelineIntel): an outage must not wipe
+        # a page's verified rows.
+        self._rss(1, slug="urology")
+        self._seed("radiology-and-imaging")
+        N.fetch_pipeline_intel = lambda token=None: {}
+        N.build(pause=0)
+        self.assertEqual(self._read("radiology-and-imaging")["items"][0]["title"], "Old pipeline row")
+
+    def test_rss_slug_keeps_trade_press_when_pipeline_has_nothing_for_it(self):
+        # The rule is for slugs with NO RSS source. urology has one, so an
+        # authoritative-but-empty pipeline read must not blank its trade press.
+        self._rss(2, slug="urology")
+        N.fetch_pipeline_intel = lambda token=None: N.PipelineIntel()
+        N.build(pause=0)
+        self.assertEqual(len(self._read("urology")["items"]), 2)
+
+    def test_only_run_does_not_empty_pipeline_only_files(self):
+        self._rss(1, slug="urology")
+        self._seed("radiology-and-imaging")
+        N.fetch_pipeline_intel = lambda token=None: N.PipelineIntel()
+        N.build(only_id="fake", pause=0)
+        self.assertEqual(self._read("radiology-and-imaging")["items"][0]["title"], "Old pipeline row")
+
+    def test_successful_fetch_is_marked_ok_and_failure_is_not(self):
+        real = N.urllib.request.urlopen
+        N.urllib.request.urlopen = _stub_urlopen(json.dumps({"specialities": {}}).encode())
+        try:
+            got = N.fetch_pipeline_intel(token="tok")
+        finally:
+            N.urllib.request.urlopen = real
+        self.assertEqual(got, {})
+        self.assertTrue(getattr(got, "ok", False))
+        self.assertFalse(getattr(N.fetch_pipeline_intel(token=""), "ok", False))
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
