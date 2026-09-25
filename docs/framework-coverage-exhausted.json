@@ -1,159 +1,158 @@
 {
-  "_purpose": "Internal work-tracking only, for the differentiator-framework-coverage scheduled task's own picker. Not read by any pipeline script and not member-facing data. A framework listed here is skipped by the routine WITHOUT re-investigation as long as neither its awarded-supplier set nor its refused-crawl list has changed since 'checkedOn'. A new award, a newly unresolved name, or a newly refused/reopened crawl on any listed supplier means the entry is stale and the framework should be re-investigated (and this entry updated or removed) rather than trusted blindly.",
-  "frameworks": [
-    {
-      "framework": "Ultrasound Scanners and Associated Options and Related Services",
-      "checkedOn": "2026-09-22",
-      "coverageAtCheck": "23.8% (5/21)",
-      "suppliersChecked": [
-        "BioSpectrum Ltd",
-        "Celtic SMR Ltd",
-        "Hologic UK",
-        "Philips",
-        "ProSys International Ltd",
-        "Siemens Healthineers"
-      ],
-      "reason": "All 6 remaining suppliers checked independently today, confirming docs/framework-coverage-findings-2026-09-21-ultrasound-scanners.md unchanged: BioSpectrum/Hologic UK crawled with real catalogues containing no genuine ultrasound-scanner line; Philips/Siemens Healthineers/ProSys International Ltd crawl-refused with only unrelated NHSSC-cache stub products. Celtic SMR Ltd genuinely sells human diagnostic ultrasound (SonoScape E2/X3/E11/P25 Elite/P60/S80 Elite) but every model page is a CMS 'page-components' artefact mixed in the same sitemap section as marketing/FAQ pages — differentiator-category-map.json maps by (supplier, division) not by product name, so mapping the division would also publish 'Calendly Form' and 'Who Are We Celticsmr' as ultrasound products. This is the nav-labels-are-not-products shape (data/identity-vocabulary-policy.json) — held is correct, no ruling needed, and no route exists without a script change (a per-product override capability, or a smarter component-page filter) that is out of scope for a data batch.",
-      "wouldReopenIf": "A code change adds a per-product override route for sitemap-only captures, or a smarter component-page filter for celticsmr.co.uk; or any of the 6 suppliers gets a new/changed crawl result."
-    },
-    {
-      "framework": "CT Scanners and Associated Options and Related Services",
-      "checkedOn": "2026-09-22",
-      "coverageAtCheck": "25.0% (2/8)",
-      "suppliersChecked": [
-        "Philips",
-        "Siemens Healthineers",
-        "Stryker"
-      ],
-      "reason": "Same structural shape as Ultrasound Scanners (docs/framework-coverage-findings-2026-09-21-ultrasound-scanners.md already checked this framework 21/09 with the same result, reconfirmed today via the ledger's refusedSuppliers block): Philips and Siemens Healthineers carry only unrelated NHSSC-cache stub products (CPAP masks, pathology analysers) with their own sites uncrawlable; Stryker's own crawled range is real but genuinely not CT-scanner equipment. No permitted route left.",
-      "wouldReopenIf": "Any of the 3 suppliers gets a new/changed crawl result, or a new supplier is awarded on this framework."
-    },
-    {
-      "framework": "Operating Theatres Equipment and Related Accessories and Services",
-      "checkedOn": "2026-09-22",
-      "coverageAtCheck": "25.6% (11/43)",
-      "suppliersChecked": [
-        "Acime UK Ltd",
-        "Arjo",
-        "Boston Scientific",
-        "Coloplast",
-        "Cook Medical",
-        "Felgains",
-        "Baxter / Hillrom",
-        "Howard Wright Europe",
-        "Ideal Medical Solutions",
-        "Olympus (KeyMed)",
-        "LINET UK",
-        "Promed Limited",
-        "Ingles Ltd"
-      ],
-      "reason": "All 13 remaining suppliers checked. The 12 publishedElsewhere suppliers' captured product ranges are real and already correctly categorised, none of it theatre equipment: Acime (handling:furniture/rehab:stand), Arjo (handling:hoist/mattress/bed, rehab:bath), Boston Scientific/Cook Medical (vascular/endourology stents), Coloplast (wound/ostomy/continence), Felgains (rehab:chair, handling:bed), Baxter/Hillrom (monitoring, ENT), Howard Wright (handling:furniture/bed/mattress), Ideal Medical Solutions/Olympus KeyMed (mis:instruments/energy), LINET UK (handling:bed, rehab:chair), Promed (endourology:laser). Four of the twelve (Boston Scientific, Coloplast, Cook Medical, Baxter/Hillrom, Olympus) are also recorded crawl-refusals for this framework, so re-crawling them is forbidden by the brief's own rule; the other seven have genuine, unrelated multi-division catalogues already crawled with no held theatre-equipment items hiding behind an unmapped division (checked heldBySupplier for Acime/Felgains/Ideal Medical Solutions/Promed — nothing theatre-related). The 13th, Ingles Ltd, is `needDomain`: no domain exists because identity is genuinely unconfirmed (companyNumberNote: 'every Companies House hit is an accountancy or advisory firm, no medical company of this name') — inventing a domain to crawl would violate the never-fuzzy-match rule, and the record is already correctly published as identityUnconfirmed. No permitted route left on any of the 13.",
-      "wouldReopenIf": "Any of the 12 mapped-elsewhere suppliers gets a new/changed crawl result revealing a theatre-equipment range, or Ingles Ltd's identity is confirmed from a primary source (giving it a crawlable domain), or a new supplier is awarded on this framework."
-    },
-    {
-      "framework": "Polymer Aprons",
-      "checkedOn": "2026-09-22",
-      "coverageAtCheck": "25.0% (2/8)",
-      "suppliersChecked": [
-        "GBUK Group"
-      ],
-      "reason": "The only actionable item left (1) is GBUK Group's stub record, already diagnosed as the GBUK Ltd/GBUK Group duplicate-identity merge (OUTSTANDING ^o333, 07/09/2026) — an identity decision reserved for Lou, not a crawl (the stub's own note already confirms gbukgroup.com returns 0 results for 'apron' and carries no PPE category, so crawling it would not even reach the awarded range). Polystar Plastics Ltd's separate stub/merge (^o334) is already bucketed 'published' and not counted in Left. No new investigation needed; this restates the existing escalation rather than re-deciding it.",
-      "wouldReopenIf": "Lou rules on OUTSTANDING ^o333/^o334, or a new supplier is awarded on this framework, or GBUK Group's own crawl changes."
-    },
-    {
-      "framework": "Surgical Instruments",
-      "checkedOn": "2026-09-23",
-      "coverageAtCheck": "26.0% (13/50)",
-      "suppliersChecked": [
-        "Decree Thermo",
-        "Scientific Medical Clinical Limited",
-        "U.K. Medical Limited",
-        "Steris IMS Ltd",
-        "Avicenna Surgical Limited",
-        "B. Braun Medical",
-        "Beaver Visitec International Sales Ltd",
-        "BioSpectrum Ltd",
-        "Fannin (UK) Limited",
-        "GBUK Group",
-        "HC21 (UK) Ltd",
-        "Henry Schein UK Holdings",
-        "Kebomed UK Ltd",
-        "ProSys International Ltd",
-        "Daniels Health (Sharpsmart)",
-        "Sheffmed Limited",
-        "Timesco Healthcare Ltd",
-        "Vernacare"
-      ],
-      "reason": "All 18 remaining suppliers checked. The 3 needDomain suppliers were freshly re-searched: U.K. Medical Limited's own candidate domain uk-medical.co.uk does not resolve at all (DNS failure); Decree Thermo's candidate domain decreethermo.com resolves but serves only a Plesk hosting default-page stub (no site behind it, expired TLS cert); Scientific Medical Clinical Limited (NI041931, Belfast) has no discoverable website by any search route. None is a confirmable domain — inventing one would breach the never-guess rule. Steris IMS Ltd's 69 held products are a real crawl (Endoscopy Devices, Endoscope/Instrument Cleaning, Sterility Assurance, Decontamination, Surgical Lighting) but none of it is a surgical:bone/clamp/curette/elev/forceps/knife/needle/probe/retract/scissor/spec/suction item — Steris IMS's real business on this site is decontamination/endoscopy-reprocessing equipment, a different speciality, correctly held. The 14 publishedElsewhere suppliers' captured ranges were checked product-by-product: Avicenna's only borderline line (mis:instruments, 'Reusable/Single Use Bipolar Forceps') is electrosurgery energy-device consumables, correctly filed under mis:instruments not surgical:forceps; the rest (B. Braun vascular/wound/renal/continence, Beaver Visitec ophthalmology, BioSpectrum endourology/gynae/ENT, GBUK's 251 products across nutrition/handling/wound/vascular, HC21 theatre/cardiology/rehab, Henry Schein dental, Kebomed nutrition, ProSys continence, Daniels Health sharps bins, Sheffmed ENT, Timesco respiratory/monitoring/ortho, Vernacare hygiene/CSSD) carry no surgical hand-instrument line at all. No permitted route left on any of the 18.",
-      "wouldReopenIf": "Any of the 3 needDomain suppliers gets a working, confirmable website; any of the 14 publishedElsewhere/1 held supplier gets a new/changed crawl result revealing a real surgical-instrument line; or a new supplier is awarded on this framework."
-    },
-    {
-      "framework": "Examination Gloves",
-      "checkedOn": "2026-09-23",
-      "coverageAtCheck": "26.3% (5/19)",
-      "suppliersChecked": [
-        "Globus (Shetland) Ltd",
-        "ORN International T/A Spectra Corporate",
-        "Abena UK Limited",
-        "Medline Industries",
-        "Reliance Medical",
-        "Vernacare"
-      ],
-      "reason": "All 6 remaining suppliers checked. ORN International T/A Spectra Corporate's only candidate domain (spectracorporate.com, found via web search) does not resolve at all (DNS failure) — no confirmable domain exists. Globus (Shetland) Ltd's held capture (881 products, globusgroup.com) is a FAILED capture under the nav-labels-are-not-products policy shape (data/identity-vocabulary-policy.json): 848 of 881 entries are industry-sector/brand navigation labels ('Construction', 'Automotive', 'Healthcare', 'Showa', 'Skytec'), and the 15-item 'Hand Protection' division is itself navigation sub-labels ('Chemical Protection', 'Multi Purpose', 'Medium Cut Protection') rather than real product names — held is correct per that standing policy, no ruling needed, and no route exists without a targeted recrawl of real product pages (out of scope for a data batch). The 4 publishedElsewhere suppliers carry no glove line in their captured ranges: Abena (continence pads only), Medline (1 NHSSC-stub respiratory item), Reliance Medical (first aid), Vernacare (hygiene/ENT/CSSD). No permitted route left on any of the 6.",
-      "wouldReopenIf": "ORN International/Spectra Corporate gets a working, confirmable website; Globus (Shetland) Ltd gets a recrawl that reaches real product pages instead of navigation labels; any of the 4 publishedElsewhere suppliers gets a new/changed crawl result revealing a glove line; or a new supplier is awarded on this framework."
-    },
-    {
-      "framework": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
-      "checkedOn": "2026-09-23",
-      "coverageAtCheck": "27.0% (33/122)",
-      "suppliersChecked": [
-        "all 58 needDomain suppliers (see below)",
-        "AttoLife",
-        "International Scientific Supplies",
-        "Agilent Technologies UK"
-      ],
-      "reason": "All 67 Left items checked (58 needDomain + 8 mapped-elsewhere + 1 captured-uncounted). The 58 needDomain: 56 of 58 were already in state/domain-seeding-report.json, checked and REFUSED by scripts/seed_supplier_domains.py's own registration-number bar (many between 14/08 and 22/09/2026) — re-verified a sample by hand (Promega UK Ltd, Thriva Ltd, Twist Bioscience) against their real, correct domains and confirmed none publishes the Companies House number the seed already records, so the refusal stands; DiaSorin/Exact Sciences/LumiraDx/Twist Bioscience/Promega/Thriva additionally carry a REFUSED verdict in state/name-proof-verification.json, which is a one-way door the tool itself will not reopen without a registration-number match. Bruker UK/Nova Biomedical/Revvity/VWR(Avantor)'s correct real domains (bruker.com, novabiomedical.com, revvity.com) could not even be fetched from this environment (large corporate sites, likely bot-blocked) — genuinely unreachable, not just unproven. Of the 2 never-attempted names: International Scientific Supplies found no candidate that identifies itself as the company. AttoLife's domain (attolife.co.uk) matches the name, but the site itself states it is now run by 'Sentinel Newco 1 Limited (formerly trading business of AttoLife Limited)', company number 17385754 — NOT the 05061695 already recorded against 'AttoLife' in company-financials.json (status: administration). That mismatch is a genuine identity question (administration/successor, not one of the 5 ruled shapes in data/identity-vocabulary-policy.json) and is not resolved here — written to OUTSTANDING.md, domain NOT written to the seed. The 1 captured-uncounted, Agilent Technologies UK, already has all 22 of its divisions correctly mapped in differentiator-category-map.json (pathology:histo/equip/consum, digital:sw) from an earlier run, but its capture is a representative sitemap sample (58 of a true 3609) with no per-product detail/source record and no NHSSC match, so build_differentiator.py's `if not sources` gate holds every one of its products — and because that specific held-reason is never added to `hcount`, Agilent never reaches heldBySupplier either, exactly the already-documented ^o385 class (see build_coverage_ledger.py's own comment). Confirmed by direct trace, not assumed. Fixing it needs a source-attribution or detail-crawl pipeline change, out of scope for a data batch. The 8 publishedElsewhere suppliers (A. Menarini Diagnostics Ltd, Abbott Laboratories Limited, Coolmed, Greiner Bio-One Ltd, Haemonetics, Henry Schein UK Holdings, Pasante Healthcare, Sychem) are already correctly filed under other specialities from their own real, crawled ranges. No permitted route left on any of the 67.",
-      "wouldReopenIf": "Lou rules on the AttoLife/Sentinel Newco 1 identity question (OUTSTANDING, added 23/09/2026); a source-attribution or per-product detail-crawl fix lands for sitemap-only captures like Agilent's; any of the needDomain suppliers' real site becomes fetchable and publishes its Companies House number; or a new supplier is awarded on this framework."
-    },
-    {
-      "framework": "Renal Replacement Therapies Services, Technologies and Consumables",
-      "checkedOn": "2026-09-24",
-      "coverageAtCheck": "32.0% (8/25), up from 28.0% (7/25) this run",
-      "suppliersChecked": [
-        "MedScience Distribution",
-        "BD — Becton, Dickinson",
-        "LINC Medical",
-        "Acime UK Ltd",
-        "VWS (UK) Ltd",
-        "Nipro Medical UK Ltd",
-        "Xtra-Med"
-      ],
-      "reason": "Worked all 7 actionable items this run. MedScience Distribution published: its \"Fistula & Renal Procedure Packs – Sterile, Ready-to-Use Dialysis & Access Care Kits\" product, filed under a generic \"Dressing Packs\" division, is an unambiguous haemodialysis vascular-access pack and was added as a product-override -> renal:hd (scripts/_seed_medscience_renal_override_0924.py). The other 3 publishedElsewhereNeedingCategory suppliers (BD, LINC Medical, Acime UK Ltd) were checked product-by-product (54, 4 and 25 captured products respectively) and none carries a genuine renal/dialysis/CRRT/peritoneal item — BD's captured NHSSC-cache range is vascular/blood-transfusion/continence, LINC is drainage, Acime is furniture/rehab; correctly mapped elsewhere, nothing to move. VWS (UK) Ltd (heldNeedingCategory) crawls as a flat 53-product list of Veolia water-treatment process names (Actiflo, Anoxkaldnes MBBR, etc.) with no medical/dialysis indication in any product name — mixed-division-mapping policy applies, correctly held, no unambiguous product to promote even though renal:water exists as a category. The 2 needDomain suppliers were searched for a primary-source domain: Xtra-Med's own site (xtra-med.com) prints an address (Thorneycroft Farm, Kettleshulme) that does NOT match XTRA MED LIMITED's Companies House registered office (57 High Street, Rowley Regis) and no registration number anywhere on the site — domain-proof-tier policy near-miss, refused, same shape as Carleton Medical. Nipro Medical UK Ltd's only findable site (nipro-group.com, the global group site) prints no UK address or registration number on any page checked — no proof route. Neither domain recorded.",
-      "wouldReopenIf": "A new award changes the supplier list; VWS's captured range is re-crawled with different/more specific product names; a registration-number or matching-address proof surfaces for Nipro Medical UK Ltd or Xtra-Med; or BD/LINC/Acime are re-crawled with a wider product set that includes genuine renal items."
-    },
-    {
-      "framework": "Complete Ophthalmology Solutions 3",
-      "checkedOn": "2026-09-25",
-      "coverageAtCheck": "34.0% (18/53), up from 28.3% (15/53) this run",
-      "suppliersChecked": [
-        "Altomed Limited",
-        "Andersen Caledonia Ltd",
-        "Johnson & Johnson Surgical Vision",
-        "Scope Ophthalmics",
-        "Vision Matrix",
-        "Duckworth & Kent Ltd",
-        "OSI INC. Ltd",
-        "Clonallon Laboratories Limited",
-        "DTR Medical Ltd",
-        "Joint Operations",
-        "Leica Microsystems (UK)",
-        "MedScience Distribution",
-        "Mölnlycke",
-        "Optelec UK",
-        "Vernacare"
-      ],
-      "reason": "Worked all 15 remaining suppliers this run, publishing 3 (Andersen Caledonia Ltd, Scope Ophthalmics, Vision Matrix) and category-mapping a 4th (Altomed Limited) that still cannot publish. Scope Ophthalmics: 4 divisions (OPTASE, HYLO, Hycosan, EvoTears — 34 products) mapped to ophthalmology:dryeye as genuine lubricant eye drops/eyelid-hygiene products (data/differentiator-map-parts/Scope-Ophthalmics.json); oral supplement divisions (Eyetamins, Omega Vision, Optase Life, ACTASE) left unmapped as not clearly 'lubricant eye drops and gels'. Vision Matrix: 15 divisions (IOLs, capsular tension rings, glaucoma implants, viscoelastics, vitreoretinal/oculoplastic/corneal consumables — 54 products) mapped to ophthalmology:iol/glauc/cons (data/differentiator-map-parts/Vision-Matrix.json); Veterinary Products correctly excluded (not human/NHS), and the CMS-junk 'All Products'/'Instruments'/'Calculators & A Constants'/'Clinical Papers'/'Dry Eye' (single ambiguous forceps) divisions left held. Andersen Caledonia Ltd: one product-override, 'IVT Surgical Pack' (intravitreal injection pack) -> ophthalmology:cons; the rest of its Procedure Packs/Surgical Supplies divisions are genuinely non-ophthalmic (podiatry/dental/gynae/general-surgery packs and generic surgical:* instruments, several already product-overridden to surgical:* in an earlier run) — 'Strabismus Scissors' left as its existing surgical:scissor decision (^o516), not overridden. Altomed Limited: 4 more divisions (Surgical Instruments -> ophthalmology:equip, Lenses & Accessories -> ophthalmology:optom, Implants -> ophthalmology:cons, Equipment -> ophthalmology:equip; ~700 products, named ophthalmic microsurgery instruments/lenses/implants confirmed by product name sampling) correctly mapped alongside its existing Consumables mapping, but NONE of Altomed's products — old or new — can publish: altomed.com's robots.txt forbids scripts/crawl_supplier_product_detail.py entirely, so no per-product source record is possible by any permitted route and every product stays held regardless of category (build_differentiator.py's own-source gate). Johnson & Johnson Surgical Vision: 2 ACUVUE contact-lens divisions -> ophthalmology:optom, plus 16 named product-overrides (glaucoma implant, femtosecond lasers, viscoelastics, phaco handpieces/packs, IOLs — ophthalmology:glauc/equip/cons/iol) found as URL-slug names inside its 'Uncategorised' division on jnjvisionpro.com; none can publish today — the site's product pages fail scripts/crawl_supplier_product_detail.py's structured-content extraction ('could not isolate usable product content from navigation/boilerplate'), and no NHSSC-catalogue match exists under this exact canonical name (only under the separate 'Johnson & Johnson MedTech'/'DePuy Synthes' entities). Duckworth & Kent Ltd: its own verified website (duckworth-and-kent.com, already recorded in _aliasesEvidence but never wired into links[]) was added to supplier-seed.json and crawled; the crawler refused it (297 product records carry only 69 distinct names — repeated page titles, not a real per-product range) — moved from needDomain to a documented refusal, no products gained. OSI INC. Ltd: web search found no confirmable UK site for this exact entity (candidates — Ocular Systems Inc (US), a South African 'OSI' ophthalmic supplier — do not match); Companies House candidate 11611660 is an exact name match but unverified against a company-published source; left needDomain. The 8 publishedElsewhere suppliers were re-checked against their current (correctly-categorised, real) captured ranges and carry no ophthalmology product: Clonallon (dental/theatre/surgical instruments), DTR Medical (generic surgical instruments), Joint Operations (orthopaedic implants only), Leica Microsystems/MedScience Distribution/Mölnlycke/Vernacare are also recorded crawl-refusals so re-crawling is forbidden, and Optelec UK's 21 products are correctly filed under rehab:vision (low-vision assistive technology, a different market from clinical ophthalmology equipment) not ophthalmology. No permitted route left on any of the 11 remaining actionable items (2 heldOnly, 8 publishedElsewhere, 1 needDomain).",
-      "wouldReopenIf": "Altomed Limited's robots.txt is lifted or a non-robots-gated detail route is found; Johnson & Johnson Surgical Vision's product pages become extractable by a smarter parser, or an NHSSC catalogue term is confirmed under its exact canonical name; a confirmable domain surfaces for OSI INC. Ltd; any of the 8 publishedElsewhere suppliers gets a new/changed crawl result revealing a genuine ophthalmology item; or a new supplier is awarded on this framework."
-    }
-  ]
+ "_purpose": "Internal work-tracking only, for the differentiator-framework-coverage scheduled task's own picker. Not read by any pipeline script and not member-facing data. A framework listed here is skipped by the routine WITHOUT re-investigation as long as neither its awarded-supplier set nor its refused-crawl list has changed since 'checkedOn'. A new award, a newly unresolved name, or a newly refused/reopened crawl on any listed supplier means the entry is stale and the framework should be re-investigated (and this entry updated or removed) rather than trusted blindly.",
+ "frameworks": [
+  {
+   "framework": "Ultrasound Scanners and Associated Options and Related Services",
+   "checkedOn": "2026-09-25",
+   "coverageAtCheck": "28.6% (6/21)",
+   "suppliersChecked": [
+    "BioSpectrum Ltd",
+    "Hologic UK",
+    "Philips",
+    "ProSys International Ltd",
+    "Siemens Healthineers"
+   ],
+   "reason": "Celtic SMR Ltd RESOLVED 25/09/2026 (no longer in this exhausted list): the per-product override route this record said was missing already existed in the codebase (kind=\"product-override\" in differentiator-category-map.json, in use since 07/09/2026 for other suppliers) — this 22/09 record failed to notice it. Added 4 product-override mappings (E11, P25 Elite, P60, S80 Elite -> ultrasound:port, confirmed against celticsmr.co.uk and sonoscape.com's own product filing) plus 4 supplier-product-detail.json entries (the sitemap-route capture had no per-product detail, so the overrides would have stayed HELD as 'no source' without them). Coverage 23.8%->28.6%. The remaining 5 suppliers re-checked live 25/09, unchanged from the 22/09 finding: BioSpectrum Ltd and Hologic UK crawl to real catalogues with no genuine ultrasound-scanner line (BioSpectrum's own site nav lists only Urology/General Surgery/Gynaecology/ENT; Hologic UK's has no ultrasound or Aixplorer line at all); Philips, Siemens Healthineers and ProSys International Ltd remain crawl-refused with only unrelated NHSSC-cache stub products (Respironics, Atellica, Secco) and no ultrasound NHSSC term. OUTSTANDING ^o617 (25/09) flags this remainder for Lou's awareness.",
+   "wouldReopenIf": "Any of the 5 remaining suppliers (BioSpectrum Ltd, Hologic UK, Philips, ProSys International Ltd, Siemens Healthineers) gets a new or changed crawl result, or a new ultrasound scanner award appears against them."
+  },
+  {
+   "framework": "CT Scanners and Associated Options and Related Services",
+   "checkedOn": "2026-09-22",
+   "coverageAtCheck": "25.0% (2/8)",
+   "suppliersChecked": [
+    "Philips",
+    "Siemens Healthineers",
+    "Stryker"
+   ],
+   "reason": "Same structural shape as Ultrasound Scanners (docs/framework-coverage-findings-2026-09-21-ultrasound-scanners.md already checked this framework 21/09 with the same result, reconfirmed today via the ledger's refusedSuppliers block): Philips and Siemens Healthineers carry only unrelated NHSSC-cache stub products (CPAP masks, pathology analysers) with their own sites uncrawlable; Stryker's own crawled range is real but genuinely not CT-scanner equipment. No permitted route left.",
+   "wouldReopenIf": "Any of the 3 suppliers gets a new/changed crawl result, or a new supplier is awarded on this framework."
+  },
+  {
+   "framework": "Operating Theatres Equipment and Related Accessories and Services",
+   "checkedOn": "2026-09-22",
+   "coverageAtCheck": "25.6% (11/43)",
+   "suppliersChecked": [
+    "Acime UK Ltd",
+    "Arjo",
+    "Boston Scientific",
+    "Coloplast",
+    "Cook Medical",
+    "Felgains",
+    "Baxter / Hillrom",
+    "Howard Wright Europe",
+    "Ideal Medical Solutions",
+    "Olympus (KeyMed)",
+    "LINET UK",
+    "Promed Limited",
+    "Ingles Ltd"
+   ],
+   "reason": "All 13 remaining suppliers checked. The 12 publishedElsewhere suppliers' captured product ranges are real and already correctly categorised, none of it theatre equipment: Acime (handling:furniture/rehab:stand), Arjo (handling:hoist/mattress/bed, rehab:bath), Boston Scientific/Cook Medical (vascular/endourology stents), Coloplast (wound/ostomy/continence), Felgains (rehab:chair, handling:bed), Baxter/Hillrom (monitoring, ENT), Howard Wright (handling:furniture/bed/mattress), Ideal Medical Solutions/Olympus KeyMed (mis:instruments/energy), LINET UK (handling:bed, rehab:chair), Promed (endourology:laser). Four of the twelve (Boston Scientific, Coloplast, Cook Medical, Baxter/Hillrom, Olympus) are also recorded crawl-refusals for this framework, so re-crawling them is forbidden by the brief's own rule; the other seven have genuine, unrelated multi-division catalogues already crawled with no held theatre-equipment items hiding behind an unmapped division (checked heldBySupplier for Acime/Felgains/Ideal Medical Solutions/Promed — nothing theatre-related). The 13th, Ingles Ltd, is `needDomain`: no domain exists because identity is genuinely unconfirmed (companyNumberNote: 'every Companies House hit is an accountancy or advisory firm, no medical company of this name') — inventing a domain to crawl would violate the never-fuzzy-match rule, and the record is already correctly published as identityUnconfirmed. No permitted route left on any of the 13.",
+   "wouldReopenIf": "Any of the 12 mapped-elsewhere suppliers gets a new/changed crawl result revealing a theatre-equipment range, or Ingles Ltd's identity is confirmed from a primary source (giving it a crawlable domain), or a new supplier is awarded on this framework."
+  },
+  {
+   "framework": "Polymer Aprons",
+   "checkedOn": "2026-09-22",
+   "coverageAtCheck": "25.0% (2/8)",
+   "suppliersChecked": [
+    "GBUK Group"
+   ],
+   "reason": "The only actionable item left (1) is GBUK Group's stub record, already diagnosed as the GBUK Ltd/GBUK Group duplicate-identity merge (OUTSTANDING ^o333, 07/09/2026) — an identity decision reserved for Lou, not a crawl (the stub's own note already confirms gbukgroup.com returns 0 results for 'apron' and carries no PPE category, so crawling it would not even reach the awarded range). Polystar Plastics Ltd's separate stub/merge (^o334) is already bucketed 'published' and not counted in Left. No new investigation needed; this restates the existing escalation rather than re-deciding it.",
+   "wouldReopenIf": "Lou rules on OUTSTANDING ^o333/^o334, or a new supplier is awarded on this framework, or GBUK Group's own crawl changes."
+  },
+  {
+   "framework": "Surgical Instruments",
+   "checkedOn": "2026-09-23",
+   "coverageAtCheck": "26.0% (13/50)",
+   "suppliersChecked": [
+    "Decree Thermo",
+    "Scientific Medical Clinical Limited",
+    "U.K. Medical Limited",
+    "Steris IMS Ltd",
+    "Avicenna Surgical Limited",
+    "B. Braun Medical",
+    "Beaver Visitec International Sales Ltd",
+    "BioSpectrum Ltd",
+    "Fannin (UK) Limited",
+    "GBUK Group",
+    "HC21 (UK) Ltd",
+    "Henry Schein UK Holdings",
+    "Kebomed UK Ltd",
+    "ProSys International Ltd",
+    "Daniels Health (Sharpsmart)",
+    "Sheffmed Limited",
+    "Timesco Healthcare Ltd",
+    "Vernacare"
+   ],
+   "reason": "All 18 remaining suppliers checked. The 3 needDomain suppliers were freshly re-searched: U.K. Medical Limited's own candidate domain uk-medical.co.uk does not resolve at all (DNS failure); Decree Thermo's candidate domain decreethermo.com resolves but serves only a Plesk hosting default-page stub (no site behind it, expired TLS cert); Scientific Medical Clinical Limited (NI041931, Belfast) has no discoverable website by any search route. None is a confirmable domain — inventing one would breach the never-guess rule. Steris IMS Ltd's 69 held products are a real crawl (Endoscopy Devices, Endoscope/Instrument Cleaning, Sterility Assurance, Decontamination, Surgical Lighting) but none of it is a surgical:bone/clamp/curette/elev/forceps/knife/needle/probe/retract/scissor/spec/suction item — Steris IMS's real business on this site is decontamination/endoscopy-reprocessing equipment, a different speciality, correctly held. The 14 publishedElsewhere suppliers' captured ranges were checked product-by-product: Avicenna's only borderline line (mis:instruments, 'Reusable/Single Use Bipolar Forceps') is electrosurgery energy-device consumables, correctly filed under mis:instruments not surgical:forceps; the rest (B. Braun vascular/wound/renal/continence, Beaver Visitec ophthalmology, BioSpectrum endourology/gynae/ENT, GBUK's 251 products across nutrition/handling/wound/vascular, HC21 theatre/cardiology/rehab, Henry Schein dental, Kebomed nutrition, ProSys continence, Daniels Health sharps bins, Sheffmed ENT, Timesco respiratory/monitoring/ortho, Vernacare hygiene/CSSD) carry no surgical hand-instrument line at all. No permitted route left on any of the 18.",
+   "wouldReopenIf": "Any of the 3 needDomain suppliers gets a working, confirmable website; any of the 14 publishedElsewhere/1 held supplier gets a new/changed crawl result revealing a real surgical-instrument line; or a new supplier is awarded on this framework."
+  },
+  {
+   "framework": "Examination Gloves",
+   "checkedOn": "2026-09-23",
+   "coverageAtCheck": "26.3% (5/19)",
+   "suppliersChecked": [
+    "Globus (Shetland) Ltd",
+    "ORN International T/A Spectra Corporate",
+    "Abena UK Limited",
+    "Medline Industries",
+    "Reliance Medical",
+    "Vernacare"
+   ],
+   "reason": "All 6 remaining suppliers checked. ORN International T/A Spectra Corporate's only candidate domain (spectracorporate.com, found via web search) does not resolve at all (DNS failure) — no confirmable domain exists. Globus (Shetland) Ltd's held capture (881 products, globusgroup.com) is a FAILED capture under the nav-labels-are-not-products policy shape (data/identity-vocabulary-policy.json): 848 of 881 entries are industry-sector/brand navigation labels ('Construction', 'Automotive', 'Healthcare', 'Showa', 'Skytec'), and the 15-item 'Hand Protection' division is itself navigation sub-labels ('Chemical Protection', 'Multi Purpose', 'Medium Cut Protection') rather than real product names — held is correct per that standing policy, no ruling needed, and no route exists without a targeted recrawl of real product pages (out of scope for a data batch). The 4 publishedElsewhere suppliers carry no glove line in their captured ranges: Abena (continence pads only), Medline (1 NHSSC-stub respiratory item), Reliance Medical (first aid), Vernacare (hygiene/ENT/CSSD). No permitted route left on any of the 6.",
+   "wouldReopenIf": "ORN International/Spectra Corporate gets a working, confirmable website; Globus (Shetland) Ltd gets a recrawl that reaches real product pages instead of navigation labels; any of the 4 publishedElsewhere suppliers gets a new/changed crawl result revealing a glove line; or a new supplier is awarded on this framework."
+  },
+  {
+   "framework": "Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services",
+   "checkedOn": "2026-09-23",
+   "coverageAtCheck": "27.0% (33/122)",
+   "suppliersChecked": [
+    "all 58 needDomain suppliers (see below)",
+    "AttoLife",
+    "International Scientific Supplies",
+    "Agilent Technologies UK"
+   ],
+   "reason": "All 67 Left items checked (58 needDomain + 8 mapped-elsewhere + 1 captured-uncounted). The 58 needDomain: 56 of 58 were already in state/domain-seeding-report.json, checked and REFUSED by scripts/seed_supplier_domains.py's own registration-number bar (many between 14/08 and 22/09/2026) — re-verified a sample by hand (Promega UK Ltd, Thriva Ltd, Twist Bioscience) against their real, correct domains and confirmed none publishes the Companies House number the seed already records, so the refusal stands; DiaSorin/Exact Sciences/LumiraDx/Twist Bioscience/Promega/Thriva additionally carry a REFUSED verdict in state/name-proof-verification.json, which is a one-way door the tool itself will not reopen without a registration-number match. Bruker UK/Nova Biomedical/Revvity/VWR(Avantor)'s correct real domains (bruker.com, novabiomedical.com, revvity.com) could not even be fetched from this environment (large corporate sites, likely bot-blocked) — genuinely unreachable, not just unproven. Of the 2 never-attempted names: International Scientific Supplies found no candidate that identifies itself as the company. AttoLife's domain (attolife.co.uk) matches the name, but the site itself states it is now run by 'Sentinel Newco 1 Limited (formerly trading business of AttoLife Limited)', company number 17385754 — NOT the 05061695 already recorded against 'AttoLife' in company-financials.json (status: administration). That mismatch is a genuine identity question (administration/successor, not one of the 5 ruled shapes in data/identity-vocabulary-policy.json) and is not resolved here — written to OUTSTANDING.md, domain NOT written to the seed. The 1 captured-uncounted, Agilent Technologies UK, already has all 22 of its divisions correctly mapped in differentiator-category-map.json (pathology:histo/equip/consum, digital:sw) from an earlier run, but its capture is a representative sitemap sample (58 of a true 3609) with no per-product detail/source record and no NHSSC match, so build_differentiator.py's `if not sources` gate holds every one of its products — and because that specific held-reason is never added to `hcount`, Agilent never reaches heldBySupplier either, exactly the already-documented ^o385 class (see build_coverage_ledger.py's own comment). Confirmed by direct trace, not assumed. Fixing it needs a source-attribution or detail-crawl pipeline change, out of scope for a data batch. The 8 publishedElsewhere suppliers (A. Menarini Diagnostics Ltd, Abbott Laboratories Limited, Coolmed, Greiner Bio-One Ltd, Haemonetics, Henry Schein UK Holdings, Pasante Healthcare, Sychem) are already correctly filed under other specialities from their own real, crawled ranges. No permitted route left on any of the 67.",
+   "wouldReopenIf": "Lou rules on the AttoLife/Sentinel Newco 1 identity question (OUTSTANDING, added 23/09/2026); a source-attribution or per-product detail-crawl fix lands for sitemap-only captures like Agilent's; any of the needDomain suppliers' real site becomes fetchable and publishes its Companies House number; or a new supplier is awarded on this framework."
+  },
+  {
+   "framework": "Renal Replacement Therapies Services, Technologies and Consumables",
+   "checkedOn": "2026-09-24",
+   "coverageAtCheck": "32.0% (8/25), up from 28.0% (7/25) this run",
+   "suppliersChecked": [
+    "MedScience Distribution",
+    "BD — Becton, Dickinson",
+    "LINC Medical",
+    "Acime UK Ltd",
+    "VWS (UK) Ltd",
+    "Nipro Medical UK Ltd",
+    "Xtra-Med"
+   ],
+   "reason": "Worked all 7 actionable items this run. MedScience Distribution published: its \"Fistula & Renal Procedure Packs – Sterile, Ready-to-Use Dialysis & Access Care Kits\" product, filed under a generic \"Dressing Packs\" division, is an unambiguous haemodialysis vascular-access pack and was added as a product-override -> renal:hd (scripts/_seed_medscience_renal_override_0924.py). The other 3 publishedElsewhereNeedingCategory suppliers (BD, LINC Medical, Acime UK Ltd) were checked product-by-product (54, 4 and 25 captured products respectively) and none carries a genuine renal/dialysis/CRRT/peritoneal item — BD's captured NHSSC-cache range is vascular/blood-transfusion/continence, LINC is drainage, Acime is furniture/rehab; correctly mapped elsewhere, nothing to move. VWS (UK) Ltd (heldNeedingCategory) crawls as a flat 53-product list of Veolia water-treatment process names (Actiflo, Anoxkaldnes MBBR, etc.) with no medical/dialysis indication in any product name — mixed-division-mapping policy applies, correctly held, no unambiguous product to promote even though renal:water exists as a category. The 2 needDomain suppliers were searched for a primary-source domain: Xtra-Med's own site (xtra-med.com) prints an address (Thorneycroft Farm, Kettleshulme) that does NOT match XTRA MED LIMITED's Companies House registered office (57 High Street, Rowley Regis) and no registration number anywhere on the site — domain-proof-tier policy near-miss, refused, same shape as Carleton Medical. Nipro Medical UK Ltd's only findable site (nipro-group.com, the global group site) prints no UK address or registration number on any page checked — no proof route. Neither domain recorded.",
+   "wouldReopenIf": "A new award changes the supplier list; VWS's captured range is re-crawled with different/more specific product names; a registration-number or matching-address proof surfaces for Nipro Medical UK Ltd or Xtra-Med; or BD/LINC/Acime are re-crawled with a wider product set that includes genuine renal items."
+  },
+  {
+   "framework": "Complete Ophthalmology Solutions 3",
+   "checkedOn": "2026-09-25",
+   "coverageAtCheck": "34.0% (18/53), up from 28.3% (15/53) this run",
+   "suppliersChecked": [
+    "Altomed Limited",
+    "Andersen Caledonia Ltd",
+    "Johnson & Johnson Surgical Vision",
+    "Scope Ophthalmics",
+    "Vision Matrix",
+    "Duckworth & Kent Ltd",
+    "OSI INC. Ltd",
+    "Clonallon Laboratories Limited",
+    "DTR Medical Ltd",
+    "Joint Operations",
+    "Leica Microsystems (UK)",
+    "MedScience Distribution",
+    "Mölnlycke",
+    "Optelec UK",
+    "Vernacare"
+   ],
+   "reason": "Worked all 15 remaining suppliers this run, publishing 3 (Andersen Caledonia Ltd, Scope Ophthalmics, Vision Matrix) and category-mapping a 4th (Altomed Limited) that still cannot publish. Scope Ophthalmics: 4 divisions (OPTASE, HYLO, Hycosan, EvoTears — 34 products) mapped to ophthalmology:dryeye as genuine lubricant eye drops/eyelid-hygiene products (data/differentiator-map-parts/Scope-Ophthalmics.json); oral supplement divisions (Eyetamins, Omega Vision, Optase Life, ACTASE) left unmapped as not clearly 'lubricant eye drops and gels'. Vision Matrix: 15 divisions (IOLs, capsular tension rings, glaucoma implants, viscoelastics, vitreoretinal/oculoplastic/corneal consumables — 54 products) mapped to ophthalmology:iol/glauc/cons (data/differentiator-map-parts/Vision-Matrix.json); Veterinary Products correctly excluded (not human/NHS), and the CMS-junk 'All Products'/'Instruments'/'Calculators & A Constants'/'Clinical Papers'/'Dry Eye' (single ambiguous forceps) divisions left held. Andersen Caledonia Ltd: one product-override, 'IVT Surgical Pack' (intravitreal injection pack) -> ophthalmology:cons; the rest of its Procedure Packs/Surgical Supplies divisions are genuinely non-ophthalmic (podiatry/dental/gynae/general-surgery packs and generic surgical:* instruments, several already product-overridden to surgical:* in an earlier run) — 'Strabismus Scissors' left as its existing surgical:scissor decision (^o516), not overridden. Altomed Limited: 4 more divisions (Surgical Instruments -> ophthalmology:equip, Lenses & Accessories -> ophthalmology:optom, Implants -> ophthalmology:cons, Equipment -> ophthalmology:equip; ~700 products, named ophthalmic microsurgery instruments/lenses/implants confirmed by product name sampling) correctly mapped alongside its existing Consumables mapping, but NONE of Altomed's products — old or new — can publish: altomed.com's robots.txt forbids scripts/crawl_supplier_product_detail.py entirely, so no per-product source record is possible by any permitted route and every product stays held regardless of category (build_differentiator.py's own-source gate). Johnson & Johnson Surgical Vision: 2 ACUVUE contact-lens divisions -> ophthalmology:optom, plus 16 named product-overrides (glaucoma implant, femtosecond lasers, viscoelastics, phaco handpieces/packs, IOLs — ophthalmology:glauc/equip/cons/iol) found as URL-slug names inside its 'Uncategorised' division on jnjvisionpro.com; none can publish today — the site's product pages fail scripts/crawl_supplier_product_detail.py's structured-content extraction ('could not isolate usable product content from navigation/boilerplate'), and no NHSSC-catalogue match exists under this exact canonical name (only under the separate 'Johnson & Johnson MedTech'/'DePuy Synthes' entities). Duckworth & Kent Ltd: its own verified website (duckworth-and-kent.com, already recorded in _aliasesEvidence but never wired into links[]) was added to supplier-seed.json and crawled; the crawler refused it (297 product records carry only 69 distinct names — repeated page titles, not a real per-product range) — moved from needDomain to a documented refusal, no products gained. OSI INC. Ltd: web search found no confirmable UK site for this exact entity (candidates — Ocular Systems Inc (US), a South African 'OSI' ophthalmic supplier — do not match); Companies House candidate 11611660 is an exact name match but unverified against a company-published source; left needDomain. The 8 publishedElsewhere suppliers were re-checked against their current (correctly-categorised, real) captured ranges and carry no ophthalmology product: Clonallon (dental/theatre/surgical instruments), DTR Medical (generic surgical instruments), Joint Operations (orthopaedic implants only), Leica Microsystems/MedScience Distribution/Mölnlycke/Vernacare are also recorded crawl-refusals so re-crawling is forbidden, and Optelec UK's 21 products are correctly filed under rehab:vision (low-vision assistive technology, a different market from clinical ophthalmology equipment) not ophthalmology. No permitted route left on any of the 11 remaining actionable items (2 heldOnly, 8 publishedElsewhere, 1 needDomain).",
+   "wouldReopenIf": "Altomed Limited's robots.txt is lifted or a non-robots-gated detail route is found; Johnson & Johnson Surgical Vision's product pages become extractable by a smarter parser, or an NHSSC catalogue term is confirmed under its exact canonical name; a confirmable domain surfaces for OSI INC. Ltd; any of the 8 publishedElsewhere suppliers gets a new/changed crawl result revealing a genuine ophthalmology item; or a new supplier is awarded on this framework."
+  }
+ ]
 }
