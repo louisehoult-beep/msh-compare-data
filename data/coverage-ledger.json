@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 36617,
-  "differentiator.json held": 52496
+  "differentiator.json published": 36663,
+  "differentiator.json held": 52442
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 423,
-  "inScopeSuppliersNeedingCrawl": 313,
-  "inScopeSuppliersNeedingDomain": 288,
-  "suppliersRefused": 498,
+  "inScopeSuppliersNeedingCrawl": 309,
+  "inScopeSuppliersNeedingDomain": 287,
+  "suppliersRefused": 499,
   "suppliersRefusedButPublishingElsewhere": 106,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 3,
@@ -5871,8 +5871,8 @@
    "category": "Medical Technology",
    "ends": "2 November 2027",
    "suppliersAwarded": 53,
-   "suppliersPublished": 15,
-   "coverage": 28.3,
+   "suppliersPublished": 18,
+   "coverage": 34.0,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -5886,24 +5886,8 @@
      "domain": "altomed.com"
     },
     {
-     "supplier": "Andersen Caledonia Ltd",
-     "domain": "andersencaledonia.com"
-    },
-    {
      "supplier": "Johnson & Johnson Surgical Vision",
      "domain": "jnjvisionpro.com"
-    },
-    {
-     "supplier": "Scope Ophthalmics",
-     "domain": "scopeeyecare.com"
-    },
-    {
-     "supplier": "Vision Matrix",
-     "domain": "visionmatrix.co.uk"
-    },
-    {
-     "supplier": "Duckworth & Kent Ltd",
-     "domain": null
     },
     {
      "supplier": "OSI INC. Ltd",
@@ -5911,7 +5895,6 @@
     }
    ],
    "domainsMissing": [
-    "Duckworth & Kent Ltd",
     "OSI INC. Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -5963,6 +5946,13 @@
      "domain": "www.daybreakmedical.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
      "checked": "2026-09-17",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Duckworth & Kent Ltd",
+     "domain": "duckworth-and-kent.com",
+     "reason": "297 product record(s) carry only 69 distinct name(s) (aspiration handpiece, blade marker, cannula) \u2014 a repeated page title, not a product range",
+     "checked": "2026-09-25",
      "bucket": "refused"
     },
     {
@@ -6123,6 +6113,7 @@
    "route": "NHSSC framework",
    "catsInScope": [
     "ophthalmology:cons",
+    "ophthalmology:dryeye",
     "ophthalmology:equip",
     "ophthalmology:glauc",
     "ophthalmology:iol",
@@ -6131,14 +6122,15 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 8,
-    "heldNeedingCategory": 5,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [
     "Alcon Eye Care UK",
+    "Andersen Caledonia Ltd",
     "Bausch & Lomb UK",
     "Beaver Visitec International Sales Ltd",
     "Birmingham Optical Group",
@@ -6150,8 +6142,10 @@
     "Litechnica Ltd",
     "Rayner Intraocular Lenses",
     "Rudolf Riester GmbH",
+    "Scope Ophthalmics",
     "Sense Medical Limited",
     "Veni Vidi Medical Limited",
+    "Vision Matrix",
     "Vision Pharmaceuticals Ltd T/A Spectrum"
    ],
    "publishedElsewhere": [
@@ -6166,14 +6160,10 @@
    ],
    "heldOnly": [
     "Altomed Limited",
-    "Andersen Caledonia Ltd",
-    "Johnson & Johnson Surgical Vision",
-    "Scope Ophthalmics",
-    "Vision Matrix"
+    "Johnson & Johnson Surgical Vision"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Duckworth & Kent Ltd",
     "OSI INC. Ltd"
    ],
    "refused": [
@@ -6184,6 +6174,7 @@
     "Core Surgical Limited",
     "D.O.R.C.",
     "Daybreak Medical Ltd",
+    "Duckworth & Kent Ltd",
     "EziDrops Ltd",
     "Hanson Instruments Ltd",
     "Innovant Healthcare Limited",
@@ -6202,7 +6193,7 @@
     "Unisurge International Limited"
    ],
    "unknown": [],
-   "actionableTotal": 15,
+   "actionableTotal": 11,
    "blockedReason": null,
    "deferred": null
   },
@@ -14457,10 +14448,6 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "Andersen Caledonia Ltd",
-     "domain": "andersencaledonia.com"
-    },
-    {
      "supplier": "Accrington Surgical Inst. Suppliers",
      "domain": null
     },
@@ -14616,8 +14603,8 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 12,
-    "heldNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 13,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -14625,6 +14612,7 @@
    },
    "published": [],
    "publishedElsewhere": [
+    "Andersen Caledonia Ltd",
     "Avicenna Surgical Limited",
     "B. Braun Medical",
     "Fannin (UK) Limited",
@@ -14638,9 +14626,7 @@
     "Vernacare",
     "Vygon (UK)"
    ],
-   "heldOnly": [
-    "Andersen Caledonia Ltd"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Accrington Surgical Inst. Suppliers",
