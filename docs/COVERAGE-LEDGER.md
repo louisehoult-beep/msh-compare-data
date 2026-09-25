@@ -42,7 +42,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Total Orthopaedic Solutions 3 | ortho | 101 | 30 | 29.7% | 16 | 67 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 19 | 30.2% | 26 | 27 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 10 | 42 | STARTED |
-| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 17 | 29.3% | 26 | 26 | STARTED |
+| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 17 | 29.3% | 25 | 27 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 17 | 29.8% | 17 | 32 | STARTED |
 | Urology and Bowel Management | continence | 57 | 17 | 29.8% | 28 | 34 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 17 | 40 | STARTED |

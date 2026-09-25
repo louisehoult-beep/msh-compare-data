@@ -14,7 +14,7 @@
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
   "differentiator.json published": 36741,
-  "differentiator.json held": 52426
+  "differentiator.json held": 53673
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 420,
-  "inScopeSuppliersNeedingCrawl": 306,
-  "inScopeSuppliersNeedingDomain": 285,
-  "suppliersRefused": 503,
+  "inScopeSuppliersNeedingCrawl": 305,
+  "inScopeSuppliersNeedingDomain": 282,
+  "suppliersRefused": 504,
   "suppliersRefusedButPublishingElsewhere": 106,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 3,
@@ -3933,8 +3933,12 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "APR Medtech Limited",
-     "domain": null
+     "supplier": "GI UK Medical Ltd (Duomed)",
+     "domain": "duomed.com"
+    },
+    {
+     "supplier": "Micro-Tech (UK) Ltd",
+     "domain": "micro-tech-uk.com"
     },
     {
      "supplier": "Aquilant Endoscopy Limited",
@@ -3942,10 +3946,6 @@
     },
     {
      "supplier": "GAP Medical Solutions Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "GI UK Medical Ltd (Duomed)",
      "domain": null
     },
     {
@@ -3962,10 +3962,6 @@
     },
     {
      "supplier": "Ingles Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Micro-Tech (UK) Ltd",
      "domain": null
     },
     {
@@ -3994,15 +3990,12 @@
     }
    ],
    "domainsMissing": [
-    "APR Medtech Limited",
     "Aquilant Endoscopy Limited",
     "GAP Medical Solutions Ltd",
-    "GI UK Medical Ltd (Duomed)",
     "GTA (UK) Ltd",
     "H4 Medical Ltd",
     "HistoSonics",
     "Ingles Ltd",
-    "Micro-Tech (UK) Ltd",
     "Newtons Medical Supplies Ltd",
     "Pentax Medical",
     "Rocamed France",
@@ -4012,6 +4005,13 @@
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "APR Medtech Limited",
+     "domain": "aprmedtech.com",
+     "reason": "40 product record(s) carry only 2 distinct name(s) (blog archives, products) \u2014 a repeated page title, not a product range",
+     "checked": "2026-09-25",
+     "bucket": "refused"
+    },
     {
      "supplier": "Aquilant Limited",
      "domain": "aquilantservices.com",
@@ -4215,11 +4215,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 11,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 15
+    "needDomain": 12
    },
    "published": [
     "Ambu UK",
@@ -4253,18 +4253,18 @@
     "Terumo UK",
     "Uniplex"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "GI UK Medical Ltd (Duomed)",
+    "Micro-Tech (UK) Ltd"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "APR Medtech Limited",
     "Aquilant Endoscopy Limited",
     "GAP Medical Solutions Ltd",
-    "GI UK Medical Ltd (Duomed)",
     "GTA (UK) Ltd",
     "H4 Medical Ltd",
     "HistoSonics",
     "Ingles Ltd",
-    "Micro-Tech (UK) Ltd",
     "Newtons Medical Supplies Ltd",
     "Pentax Medical",
     "Rocamed France",
@@ -4273,6 +4273,7 @@
     "Varian (Siemens Healthineers)"
    ],
    "refused": [
+    "APR Medtech Limited",
     "Aquilant Limited",
     "BVM Medical Ltd",
     "CJ Medical",
@@ -4290,7 +4291,7 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
    "unknown": [],
-   "actionableTotal": 26,
+   "actionableTotal": 25,
    "blockedReason": null,
    "deferred": null
   },
