@@ -13,7 +13,7 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 36668,
+  "differentiator.json published": 36730,
   "differentiator.json held": 52437
  },
  "counts": {
@@ -24,10 +24,10 @@
   "unmapped": 48,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 423,
-  "inScopeSuppliersNeedingCrawl": 309,
-  "inScopeSuppliersNeedingDomain": 287,
-  "suppliersRefused": 499,
+  "supplierNamesUnresolved": 422,
+  "inScopeSuppliersNeedingCrawl": 307,
+  "inScopeSuppliersNeedingDomain": 285,
+  "suppliersRefused": 501,
   "suppliersRefusedButPublishingElsewhere": 106,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 3,
@@ -1537,10 +1537,6 @@
   ],
   [
    "UK Laser Supplies Ltd",
-   1
-  ],
-  [
-   "Reed Medical Ltd",
    1
   ],
   [
@@ -3125,8 +3121,8 @@
    "category": "Rehabilitation and Community",
    "ends": "2 March 2027",
    "suppliersAwarded": 63,
-   "suppliersPublished": 18,
-   "coverage": 28.6,
+   "suppliersPublished": 19,
+   "coverage": 30.2,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3138,10 +3134,6 @@
     {
      "supplier": "Footlabs Ltd",
      "domain": "footlabs.co.uk"
-    },
-    {
-     "supplier": "Arden Orthotics Ltd",
-     "domain": null
     },
     {
      "supplier": "Beagle Orthopaedic Ltd",
@@ -3173,10 +3165,6 @@
     },
     {
      "supplier": "Dacey LTD",
-     "domain": null
-    },
-    {
-     "supplier": "Daylong Direct",
      "domain": null
     },
     {
@@ -3213,7 +3201,6 @@
     }
    ],
    "domainsMissing": [
-    "Arden Orthotics Ltd",
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
     "Birmingham Orthotic Services",
@@ -3222,7 +3209,6 @@
     "Canonbury Products Limited",
     "Chaneco",
     "Dacey LTD",
-    "Daylong Direct",
     "Dynamic Metrics Ltd",
     "Firefly Orthoses NI Limited",
     "Ken Hall Ltd",
@@ -3255,6 +3241,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Arden Orthotics Ltd",
+     "domain": "ardenorthotics.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-25",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Bespoke Prosthetics & Orthotics Ltd",
      "domain": "bpoclinic.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -3280,6 +3273,13 @@
      "domain": "www.cuxsongerrard.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Daylong Direct",
+     "domain": "daylongdirect.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-25",
      "bucket": "refused"
     },
     {
@@ -3430,13 +3430,13 @@
     "orthotics:upper"
    ],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 8,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 18
+    "needDomain": 16
    },
    "published": [
     "Allard Support UK Limited",
@@ -3454,6 +3454,7 @@
     "Performance Health International Limited",
     "Prestige Healthcare (London) Ltd",
     "Promedics Orthopaedics Ltd",
+    "Reed Medical Ltd",
     "Talarmade Limited",
     "Thuasne UK Ltd",
     "Trulife Limited"
@@ -3474,7 +3475,6 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Arden Orthotics Ltd",
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
     "Birmingham Orthotic Services",
@@ -3483,7 +3483,6 @@
     "Canonbury Products Limited",
     "Chaneco",
     "Dacey LTD",
-    "Daylong Direct",
     "Dynamic Metrics Ltd",
     "Podopro UK Ltd",
     "Firefly Orthoses NI Limited",
@@ -3496,10 +3495,12 @@
    "refused": [
     "Algeo",
     "Apos Medical UK Ltd",
+    "Arden Orthotics Ltd",
     "Bespoke Prosthetics & Orthotics Ltd",
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
     "Critical Healthcare",
     "Cuxson Gerrard & Company Limited",
+    "Daylong Direct",
     "Eureka Physiocare Ltd",
     "Fenton Pharmaceuticals Limited",
     "Hugh Steeper Limited",
@@ -3511,10 +3512,8 @@
     "Darco UK Ltd (formerly V-M Orthotics Ltd)",
     "Walters Medical Ltd"
    ],
-   "unknown": [
-    "Reed Medical Ltd"
-   ],
-   "actionableTotal": 29,
+   "unknown": [],
+   "actionableTotal": 26,
    "blockedReason": null,
    "deferred": null
   },
