@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-25",
+ "lastRun": "2026-09-26",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -449,7 +449,19 @@
   "Raysearch UK Ltd",
   "Regent’s Park Healthcare",
   "Remserve Medical Supplies Ltd",
-  "Repton Medical Ltd"
+  "Repton Medical Ltd",
+  "ResMed",
+  "Richard Wolf UK",
+  "Richardson Healthcare",
+  "Rocamed France",
+  "Room Twelve Limited",
+  "Rosenfield Health Tech Ltd",
+  "Ross Auto Engineering Limited",
+  "Rudolf Riester GmbH",
+  "Ryna Medical Uk Limited",
+  "S-Med Ltd",
+  "SAI Medical Solutions Ltd",
+  "Sai Quality Fruits And Veg Limited"
  ],
  "refusals": [
   {
@@ -1046,6 +1058,31 @@
    "name": "Raise Healthcare Pvt Ltd",
    "reason": "Companies House confirms an exact match, RAISE HEALTHCARE PVT LTD, company 08438030, registered office Unit 4b The Courtyard, Reddicap Trading Estate, Sutton Coldfield B75 7BU -- identical to the seed name, no previous names. Own site raisehealthcare.co.uk shows no additional legal or trading name. No verifiable extra name form; speciality (Wound care) already filled.",
    "date": "2026-09-25"
+  },
+  {
+   "name": "Richardson Healthcare",
+   "reason": "Own site link on record (directmedimaging.com) states \"Richardson Healthcare is Now DirectMed Imaging\" following a 2025 acquisition by Tri-Imaging Solutions -- a US-facing rebrand story. Companies House separately shows a UK entity \"RICHARDSON HEALTHCARE LIMITED\" (04190638, London NW9 9HE) that could be the NHS framework awardee, but no source found this session ties that UK entity to the US directmedimaging.com rebrand, so adding \"DirectMed Imaging\" as an alias risks crediting another company's press to this record (root rule 8). No verifiable extra name form. Specialities left empty: the fetched page describes the US rebrand, not this record's own clinical scope.",
+   "date": "2026-09-26"
+  },
+  {
+   "name": "Ross Auto Engineering Limited",
+   "reason": "Companies House confirms an exact match, ROSS AUTO ENGINEERING LIMITED, company 00469301, incorporated 3 June 1949, Unit 2 Summit Centre Skyport Drive, Harmondsworth -- identical to the seed name, no previous names shown. No own website reachable this session (rossautoengineering.co.uk and other guessed domains did not resolve/timed out). No verifiable extra name form; specialities left empty as no clinical-scope source was reachable.",
+   "date": "2026-09-26"
+  },
+  {
+   "name": "Ryna Medical Uk Limited",
+   "reason": "Own site (rynamedical.co.uk, read 2026-09-26) confirms the exact company name \"Ryna Medical UK Limited\" already recorded, with no additional legal or trading name form. No verifiable extra alias. Speciality (Surgical & critical care) filled this session from the site's own stated product range: Operating Theatre, ITU and CCU equipment (operating lights, tables, trolleys, diathermy, patient positioners).",
+   "date": "2026-09-26"
+  },
+  {
+   "name": "SAI Medical Solutions Ltd",
+   "reason": "No own website found this session (saimedicalsolutions.co.uk and .com do not resolve). Companies House (search \"Sai Quality Fruits\", 2026-09-26) shows the only close match is SAI MEDICAL SOLUTIONS LTD, company 12347370, registered office 71-75 Shelton Street, Covent Garden (a mass company-formation address), previous name \"SAI QUALITY VEG & FRUITS\". This raises an unresolved data-integrity question -- a second, separately-named supplier-seed.json record, \"Sai Quality Fruits And Veg Limited\", already exists with its own NHS framework award and appears to be the SAME entity under its former name. No policy shape in identity-vocabulary-policy.json covers two seed records that may be one Companies House entity under a former/current name pair, so no alias was added linking them (adding either name to the other record's aliases would re-route award/press attribution between two live seed records on an unconfirmed identity). Escalated separately as a new SHAPE; not resolved by this run.",
+   "date": "2026-09-26"
+  },
+  {
+   "name": "Sai Quality Fruits And Veg Limited",
+   "reason": "Companies House (search \"Sai Quality Fruits\", 2026-09-26) returns no company under this exact name. The only near match is SAI MEDICAL SOLUTIONS LTD (12347370), whose recorded previous name is \"SAI QUALITY VEG & FRUITS\" -- word-order differs from the seed's \"Sai Quality Fruits And Veg Limited\" so identity is not certain, but the seed already carries a separate record for \"SAI Medical Solutions Ltd\" with its own framework awards. No verifiable extra alias added pending resolution of whether these are the same entity (see linked refusal on SAI Medical Solutions Ltd). Escalated as a new SHAPE, not resolved by this run.",
+   "date": "2026-09-26"
   }
  ],
  "sources": {
