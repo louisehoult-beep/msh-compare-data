@@ -1378,7 +1378,7 @@ check("FFR is not matched, because it matches DIFFRACTOMETER",
       not cax["inc"].search("Supply of an X-ray Diffractometer"))
 
 print("\nTRUE POSITIVES — awards that must be on this patch")
-for want in ["cardiac rhythm management", "structural heart", "impella",
+for want in ["cardiac rhythm management", "structural heart",
              "heart valves", "cath lab",
              "perfusion heart lung", "echocardiogram", "ecg",
              "aortic root", "cardiology stents"]:
@@ -1388,6 +1388,10 @@ for want in ["cardiac rhythm management", "structural heart", "impella",
 # Scotland, 18/12/2024) is still admitted by the rule; the matched total grew to 63
 # and the cap line moved past 18/12/2024 to 17/01/2025, so the row left the
 # published forty. Nothing lost, nothing loosened.
+# "impella" moved to the rule-admits list below, 26/09/2026, for the same reason:
+# the matched total went from 63 to 64 and the cap line moved from 17/01/2025 to
+# 14/02/2025, so "Impella Heart Pumps" (Newcastle upon Tyne Hospitals, 17/01/2025)
+# left the published forty. The rule still admits it.
 check("the pacemaker row is matched by the rule",
       "pacemakers" in matched_titles(CARDIAC))
 # Checked against the rule, not against the panel, because AWARD_CAP shows the 40
@@ -1409,6 +1413,7 @@ for want in ["Blood Cardioplegia Sets",
              "Aortic Prosthesis with Valsalva Graft",
              "Atriclip Gillinov-Cosgrove:  Left Atrial Appendage Exclusion System Device",
              "Percutaneous Catheter Delivered Heart Pumps",
+             "Impella Heart Pumps",
              "Cardiopulmonary Bypass Oxygenators with Customised Tubing Pack [2339172]",
              "Cardiac Surgery Consumables [4152960]",
              "Purchase of ECMO Trolley",
@@ -4179,8 +4184,15 @@ for good in ["Stroke Central Monitor",
 # Stroke" (framework awards feed, 23/09/2026) is an NHS Wales innovation contract
 # on stroke care and belongs on this page. Kept 23/09/2026: the choice was put to
 # Lou, who left it to the build. Read before counting.
-check("exactly nine, and every one of them was read",
-      sk["counts"]["awardsMatched"] == 9, "got %s" % sk["counts"]["awardsMatched"])
+# TEN FROM 26/09/2026. "ECCH - Enhanced Community Stroke Services" (NHS Norfolk and
+# Suffolk ICB to East Coast Community Healthcare CIC, 25/09/2026, Find a Tender
+# 091010-2026, read via the OCDS API 26/09/2026) is a commissioned community stroke
+# service, the same kind of row as Newham and City & Hackney above. Kept.
+check("exactly ten, and every one of them was read",
+      sk["counts"]["awardsMatched"] == 10, "got %s" % sk["counts"]["awardsMatched"])
+check("the Norfolk and Suffolk community stroke service is one of them",
+      any("enhanced community stroke services" in (a.get("title") or "").lower()
+          for a in sk["awards"]))
 check("the Welsh innovation contract is one of them",
       any("ending abandonment after stroke" in (a.get("title") or "").lower()
           for a in sk["awards"]))
