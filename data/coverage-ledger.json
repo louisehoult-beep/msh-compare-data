@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 36804,
-  "differentiator.json held": 54067
+  "differentiator.json published": 36946,
+  "differentiator.json held": 54174
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 418,
-  "inScopeSuppliersNeedingCrawl": 289,
-  "inScopeSuppliersNeedingDomain": 263,
-  "suppliersRefused": 516,
+  "inScopeSuppliersNeedingCrawl": 286,
+  "inScopeSuppliersNeedingDomain": 260,
+  "suppliersRefused": 518,
   "suppliersRefusedButPublishingElsewhere": 106,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -3104,8 +3104,8 @@
    "category": "Rehabilitation and Community",
    "ends": "2 March 2027",
    "suppliersAwarded": 63,
-   "suppliersPublished": 19,
-   "coverage": 30.2,
+   "suppliersPublished": 20,
+   "coverage": 31.7,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3124,14 +3124,6 @@
     },
     {
      "supplier": "Benefoot UK Ltd trading as BeneCare Medical",
-     "domain": null
-    },
-    {
-     "supplier": "Birmingham Orthotic Services",
-     "domain": null
-    },
-    {
-     "supplier": "C&S Footwear Adaptions Ltd",
      "domain": null
     },
     {
@@ -3171,10 +3163,6 @@
      "domain": null
     },
     {
-     "supplier": "Piedro Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Prestige Health Footwear Ltd",
      "domain": null
     }
@@ -3182,8 +3170,6 @@
    "domainsMissing": [
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
-    "Birmingham Orthotic Services",
-    "C&S Footwear Adaptions Ltd",
     "Canonbury Products Limited",
     "Chaneco",
     "Dacey LTD",
@@ -3192,7 +3178,6 @@
     "Ken Hall Ltd",
     "Medezine Ltd",
     "Medfac UK Ltd",
-    "Piedro Ltd",
     "Podopro UK Ltd",
     "Prestige Health Footwear Ltd"
    ],
@@ -3233,9 +3218,23 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Birmingham Orthotic Services",
+     "domain": "birminghamorthotics.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-26",
+     "bucket": "refused"
+    },
+    {
      "supplier": "C&P Medical Trading Ltd",
      "domain": "c-pmedical.com",
      "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-26",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "C&S Footwear Adaptions Ltd",
+     "domain": "www.candsfootwear.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-26",
      "bucket": "refused"
     },
@@ -3405,6 +3404,7 @@
    "catsInScope": [
     "orthotics:afo",
     "orthotics:brace",
+    "orthotics:footwear",
     "orthotics:hosiery",
     "orthotics:insole",
     "orthotics:materials",
@@ -3421,7 +3421,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 15
+    "needDomain": 12
    },
    "published": [
     "Allard Support UK Limited",
@@ -3437,6 +3437,7 @@
     "Medalin Limited",
     "medi UK",
     "Performance Health International Limited",
+    "Piedro Ltd",
     "Prestige Healthcare (London) Ltd",
     "Promedics Orthopaedics Ltd",
     "Reed Medical Ltd",
@@ -3462,8 +3463,6 @@
    "notCrawled": [
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
-    "Birmingham Orthotic Services",
-    "C&S Footwear Adaptions Ltd",
     "Canonbury Products Limited",
     "Chaneco",
     "Dacey LTD",
@@ -3473,7 +3472,6 @@
     "Ken Hall Ltd",
     "Medezine Ltd",
     "Medfac UK Ltd",
-    "Piedro Ltd",
     "Prestige Health Footwear Ltd"
    ],
    "refused": [
@@ -3481,7 +3479,9 @@
     "Apos Medical UK Ltd",
     "Arden Orthotics Ltd",
     "Bespoke Prosthetics & Orthotics Ltd",
+    "Birmingham Orthotic Services",
     "C&P Medical Trading Ltd",
+    "C&S Footwear Adaptions Ltd",
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
     "Critical Healthcare",
     "Cuxson Gerrard & Company Limited",
@@ -3498,7 +3498,7 @@
     "Walters Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 25,
+   "actionableTotal": 22,
    "blockedReason": null,
    "deferred": null
   },

@@ -40,7 +40,7 @@ the decision each waits on; delete the entry once that decision is made.
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 33 | 27.0% | 66 | 36 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 31 | 30.7% | 13 | 69 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 19 | 30.2% | 25 | 28 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 20 | 31.7% | 22 | 30 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 10 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 18 | 31.0% | 19 | 32 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 18 | 31.6% | 16 | 32 | STARTED |

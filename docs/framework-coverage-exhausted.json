@@ -2,6 +2,25 @@
  "_purpose": "Internal work-tracking only, for the differentiator-framework-coverage scheduled task's own picker. Not read by any pipeline script and not member-facing data. A framework listed here is skipped by the routine WITHOUT re-investigation as long as neither its awarded-supplier set nor its refused-crawl list has changed since 'checkedOn'. A new award, a newly unresolved name, or a newly refused/reopened crawl on any listed supplier means the entry is stale and the framework should be re-investigated (and this entry updated or removed) rather than trusted blindly.",
  "frameworks": [
   {
+   "framework": "Minimally Invasive Surgery, Related Equipment and Accessories",
+   "checkedOn": "2026-09-26",
+   "coverageAtCheck": "30.0% (18/60)",
+   "suppliersChecked": [
+    "Advanced Medical Solutions (AMS)",
+    "B. Braun Medical",
+    "Bolton Surgical Limited",
+    "Fannin (UK) Limited",
+    "Kebomed UK Ltd",
+    "Medline Industries",
+    "Reflex Medical Limited",
+    "Stryker",
+    "W.L. Gore & Associates",
+    "Healthcare 25 Ltd"
+   ],
+   "reason": "All 10 remaining actionable items checked (9 publishedElsewhere, 1 heldOnly). B. Braun Medical, Fannin (UK) Limited, Medline Industries and Stryker are already recorded crawl-refusals for this framework, so re-crawling them is forbidden by the brief's own rule; their captured NHSSC-cache ranges (vascular/renal/ortho/cardiology/monitoring for Stryker; ECG for Fannin; respiratory for Medline; anaesthesia/renal/vascular/wound for B. Braun) carry nothing MIS-shaped. The other 5 publishedElsewhere suppliers were checked product-by-product against their real, crawled ranges: Advanced Medical Solutions (wound/gastro/skin-prep), Kebomed UK Ltd (nutrition devices), Reflex Medical Limited (761 held products checked via the raw crawl — first-aid/AED/patient-monitoring/PPE, none surgical), Bolton Surgical Limited (418 held products checked — traditional open-surgery hand instruments organised by department: ENT, orthopaedic/neuro, plastic, GU/gynae, colorectal, dental, cardiothoracic; none laparoscopic/MIS), W.L. Gore & Associates (31 held products checked — vascular grafts/stents, hernia mesh (Dualmesh, Soft Tissue Patch) and staple-line reinforcement (Seamguard); Seamguard is used alongside surgical staplers but is not itself an MIS instrument/clip/trocar/kit and its fit to any one of the framework's 7 in-scope categories is not unambiguous from the product name alone — correctly held per the mixed-division-mapping policy guard, not forced). Healthcare 25 Ltd's 1 heldOnly item is an already-documented nav-labels-are-not-products case (12 captured names are the site's own clinical-speciality navigation headings with no products beneath them) — correctly held, no ruling needed. No permitted route left on any of the 10.",
+   "wouldReopenIf": "Any of the 9 publishedElsewhere suppliers gets a new/changed crawl result revealing a genuine laparoscopic/MIS instrument, clip, trocar, stapler or energy-device line; Healthcare 25 Ltd's site is recrawled and reaches real product pages instead of navigation labels; or a new supplier is awarded on this framework."
+  },
+  {
    "framework": "Ultrasound Scanners and Associated Options and Related Services",
    "checkedOn": "2026-09-25",
    "coverageAtCheck": "28.6% (6/21)",
