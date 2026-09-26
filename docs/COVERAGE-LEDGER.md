@@ -39,7 +39,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Framework | Speciality | Awarded | Published | Coverage | Left | Refused | State |
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 33 | 27.0% | 66 | 36 | STARTED |
-| Total Orthopaedic Solutions 3 | ortho | 101 | 30 | 29.7% | 16 | 67 | STARTED |
+| Total Orthopaedic Solutions 3 | ortho | 101 | 31 | 30.7% | 13 | 69 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 19 | 30.2% | 26 | 27 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 10 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 18 | 31.0% | 19 | 32 | STARTED |
