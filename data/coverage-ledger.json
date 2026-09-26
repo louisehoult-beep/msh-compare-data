@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 36741,
-  "differentiator.json held": 53673
+  "differentiator.json published": 36765,
+  "differentiator.json held": 53971
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 420,
-  "inScopeSuppliersNeedingCrawl": 305,
-  "inScopeSuppliersNeedingDomain": 282,
-  "suppliersRefused": 504,
+  "inScopeSuppliersNeedingCrawl": 299,
+  "inScopeSuppliersNeedingDomain": 273,
+  "suppliersRefused": 509,
   "suppliersRefusedButPublishingElsewhere": 106,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 3,
@@ -3919,8 +3919,8 @@
    "category": "Medical Technology",
    "ends": "30 September 2027",
    "suppliersAwarded": 58,
-   "suppliersPublished": 17,
-   "coverage": 29.3,
+   "suppliersPublished": 18,
+   "coverage": 31.0,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3941,47 +3941,23 @@
      "domain": "micro-tech-uk.com"
     },
     {
+     "supplier": "Newtons Medical Supplies Ltd",
+     "domain": "newtonsmedicalsupplies.co.uk"
+    },
+    {
+     "supplier": "Pentax Medical",
+     "domain": "pentaxmedical.com"
+    },
+    {
+     "supplier": "TSC Endovision",
+     "domain": "tsc-life.com"
+    },
+    {
      "supplier": "Aquilant Endoscopy Limited",
      "domain": null
     },
     {
-     "supplier": "GAP Medical Solutions Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "GTA (UK) Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "H4 Medical Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "HistoSonics",
-     "domain": null
-    },
-    {
      "supplier": "Ingles Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Newtons Medical Supplies Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Pentax Medical",
-     "domain": null
-    },
-    {
-     "supplier": "Rocamed France",
-     "domain": null
-    },
-    {
-     "supplier": "Synectics Medical T/A SynMed",
-     "domain": null
-    },
-    {
-     "supplier": "TSC Endovision",
      "domain": null
     },
     {
@@ -3991,16 +3967,7 @@
    ],
    "domainsMissing": [
     "Aquilant Endoscopy Limited",
-    "GAP Medical Solutions Ltd",
-    "GTA (UK) Ltd",
-    "H4 Medical Ltd",
-    "HistoSonics",
     "Ingles Ltd",
-    "Newtons Medical Supplies Ltd",
-    "Pentax Medical",
-    "Rocamed France",
-    "Synectics Medical T/A SynMed",
-    "TSC Endovision",
     "Varian (Siemens Healthineers)"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -4048,10 +4015,38 @@
      "bucket": "refused"
     },
     {
+     "supplier": "GAP Medical Solutions Ltd",
+     "domain": "gapmedicalsolutions.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-26",
+     "bucket": "refused"
+    },
+    {
      "supplier": "GenX MediCare Ltd",
      "domain": "genxmedicare.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "GTA (UK) Ltd",
+     "domain": "gta-uk.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-26",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "H4 Medical Ltd",
+     "domain": "h4medical.co.uk",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-26",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "HistoSonics",
+     "domain": "histosonics.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-26",
      "bucket": "refused"
     },
     {
@@ -4108,6 +4103,13 @@
      "domain": "richard-wolf.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-13",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Rocamed France",
+     "domain": "rocamed.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-26",
      "bucket": "refused"
     },
     {
@@ -4215,11 +4217,11 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 11,
-    "heldNeedingCategory": 2,
+    "heldNeedingCategory": 5,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 12
+    "needDomain": 3
    },
    "published": [
     "Ambu UK",
@@ -4238,6 +4240,7 @@
     "Omnimed Limited",
     "Promed Limited",
     "Steris",
+    "Synectics Medical T/A SynMed",
     "TFX Group Ltd (Teleflex Medical)"
    ],
    "publishedElsewhere": [
@@ -4255,21 +4258,15 @@
    ],
    "heldOnly": [
     "GI UK Medical Ltd (Duomed)",
-    "Micro-Tech (UK) Ltd"
+    "Micro-Tech (UK) Ltd",
+    "Newtons Medical Supplies Ltd",
+    "Pentax Medical",
+    "TSC Endovision"
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Aquilant Endoscopy Limited",
-    "GAP Medical Solutions Ltd",
-    "GTA (UK) Ltd",
-    "H4 Medical Ltd",
-    "HistoSonics",
     "Ingles Ltd",
-    "Newtons Medical Supplies Ltd",
-    "Pentax Medical",
-    "Rocamed France",
-    "Synectics Medical T/A SynMed",
-    "TSC Endovision",
     "Varian (Siemens Healthineers)"
    ],
    "refused": [
@@ -4279,7 +4276,11 @@
     "CJ Medical",
     "Erbe Medical UK Ltd",
     "Fairmont Medical Products Limited",
+    "GAP Medical Solutions Ltd",
     "GenX MediCare Ltd",
+    "GTA (UK) Ltd",
+    "H4 Medical Ltd",
+    "HistoSonics",
     "IGEA S.p.A. Branch UK",
     "Karl Storz UK",
     "Leib Medical Ltd",
@@ -4288,10 +4289,11 @@
     "Partners for Endoscopy Limited",
     "RB Medical Engineering Ltd",
     "Richard Wolf UK",
+    "Rocamed France",
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
    "unknown": [],
-   "actionableTotal": 25,
+   "actionableTotal": 19,
    "blockedReason": null,
    "deferred": null
   },
@@ -12962,17 +12964,16 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Aquilant Endoscopy Limited",
-     "domain": null
+     "supplier": "Pentax Medical",
+     "domain": "pentaxmedical.com"
     },
     {
-     "supplier": "Pentax Medical",
+     "supplier": "Aquilant Endoscopy Limited",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Aquilant Endoscopy Limited",
-    "Pentax Medical"
+    "Aquilant Endoscopy Limited"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -13017,21 +13018,22 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 1,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [],
    "publishedElsewhere": [
     "Olympus (KeyMed)"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "Pentax Medical"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Aquilant Endoscopy Limited",
-    "Pentax Medical"
+    "Aquilant Endoscopy Limited"
    ],
    "refused": [
     "D.P. Medical Systems Limited",
@@ -16291,17 +16293,16 @@
    "speciality": [],
    "crawlWorklist": [
     {
-     "supplier": "G S Medical",
-     "domain": null
+     "supplier": "Pentax Medical",
+     "domain": "pentaxmedical.com"
     },
     {
-     "supplier": "Pentax Medical",
+     "supplier": "G S Medical",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "G S Medical",
-    "Pentax Medical"
+    "G S Medical"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -16409,11 +16410,11 @@
    "actionable": {
     "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 7,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [],
    "publishedElsewhere": [
@@ -16425,11 +16426,12 @@
     "Smith+Nephew",
     "Stryker"
    ],
-   "heldOnly": [],
+   "heldOnly": [
+    "Pentax Medical"
+   ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "G S Medical",
-    "Pentax Medical"
+    "G S Medical"
    ],
    "refused": [
     "Aquilant Limited",
@@ -18958,12 +18960,10 @@
    "crawlWorklist": [
     {
      "supplier": "Pentax Medical",
-     "domain": null
+     "domain": "pentaxmedical.com"
     }
    ],
-   "domainsMissing": [
-    "Pentax Medical"
-   ],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
@@ -19000,21 +19000,21 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 1,
-    "heldNeedingCategory": 0,
+    "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 0
    },
    "published": [],
    "publishedElsewhere": [
     "Olympus (KeyMed)"
    ],
-   "heldOnly": [],
-   "capturedNothingCounted": [],
-   "notCrawled": [
+   "heldOnly": [
     "Pentax Medical"
    ],
+   "capturedNothingCounted": [],
+   "notCrawled": [],
    "refused": [
     "Fujifilm Healthcare UK",
     "Karl Storz UK",
