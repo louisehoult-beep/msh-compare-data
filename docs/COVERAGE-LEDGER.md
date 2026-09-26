@@ -40,11 +40,11 @@ the decision each waits on; delete the entry once that decision is made.
 |---|---|---|---|---|---|---|---|
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 33 | 27.0% | 66 | 36 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 31 | 30.7% | 13 | 69 | STARTED |
-| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 19 | 30.2% | 26 | 27 | STARTED |
+| Orthotics, Podiatry and Immobilisation | orthotics | 63 | 19 | 30.2% | 25 | 28 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 10 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 18 | 31.0% | 19 | 32 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 18 | 31.6% | 16 | 32 | STARTED |
-| Urology and Bowel Management | continence | 57 | 17 | 29.8% | 28 | 34 | STARTED |
+| Urology and Bowel Management | continence | 57 | 19 | 33.3% | 20 | 40 | STARTED |
 | Advanced Wound Care | wound | 56 | 17 | 30.4% | 17 | 40 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 43 | STARTED · DEFERRED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 11 | 30 | STARTED |
@@ -108,7 +108,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Instrument Decontamination and Accessories | — | 20 | 0 | 0.0% | 17 | 9 | UNMAPPED |
 | Intravenous Accessories and Pressure Monitoring Accessories | — | 20 | 0 | 0.0% | 11 | 13 | UNMAPPED |
 | Rigid Endoscopy and Associated Options and Related Services | — | 18 | 0 | 0.0% | 10 | 14 | UNMAPPED |
-| Needlefree Connection Systems and Associated Products | — | 16 | 0 | 0.0% | 13 | 7 | UNMAPPED |
+| Needlefree Connection Systems and Associated Products | — | 16 | 0 | 0.0% | 12 | 8 | UNMAPPED |
 | Angiography, Hybrid Theatres, Capital Equipment, Related Accessories and Services | — | 14 | 0 | 0.0% | 11 | 6 | UNMAPPED |
 | Mobile X-Ray Systems and Associated Option and Related Services | — | 14 | 0 | 0.0% | 6 | 10 | UNMAPPED |
 | Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories | — | 13 | 0 | 0.0% | 13 | 1 | UNMAPPED |

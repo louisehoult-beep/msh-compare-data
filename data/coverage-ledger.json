@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 36778,
-  "differentiator.json held": 53985
+  "differentiator.json published": 36804,
+  "differentiator.json held": 54067
  },
  "counts": {
   "frameworks": 122,
@@ -24,10 +24,10 @@
   "unmapped": 48,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 420,
-  "inScopeSuppliersNeedingCrawl": 296,
-  "inScopeSuppliersNeedingDomain": 270,
-  "suppliersRefused": 511,
+  "supplierNamesUnresolved": 418,
+  "inScopeSuppliersNeedingCrawl": 289,
+  "inScopeSuppliersNeedingDomain": 263,
+  "suppliersRefused": 516,
   "suppliersRefusedButPublishingElsewhere": 106,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -125,10 +125,6 @@
   ],
   [
    "Emergent Crown Contract Office Furnishings Limited",
-   2
-  ],
-  [
-   "KCI Medical Limited (3m)",
    2
   ],
   [
@@ -1684,10 +1680,6 @@
    1
   ],
   [
-   "Salts Healthcare (Ostomy)",
-   1
-  ],
-  [
    "crxcompression.com",
    1
   ],
@@ -3139,10 +3131,6 @@
      "domain": null
     },
     {
-     "supplier": "C&P Medical Trading Ltd",
-     "domain": null
-    },
-    {
      "supplier": "C&S Footwear Adaptions Ltd",
      "domain": null
     },
@@ -3195,7 +3183,6 @@
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
     "Birmingham Orthotic Services",
-    "C&P Medical Trading Ltd",
     "C&S Footwear Adaptions Ltd",
     "Canonbury Products Limited",
     "Chaneco",
@@ -3243,6 +3230,13 @@
      "domain": "bpoclinic.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "C&P Medical Trading Ltd",
+     "domain": "c-pmedical.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-26",
      "bucket": "refused"
     },
     {
@@ -3427,7 +3421,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 16
+    "needDomain": 15
    },
    "published": [
     "Allard Support UK Limited",
@@ -3469,7 +3463,6 @@
     "Beagle Orthopaedic Ltd",
     "Benefoot UK Ltd trading as BeneCare Medical",
     "Birmingham Orthotic Services",
-    "C&P Medical Trading Ltd",
     "C&S Footwear Adaptions Ltd",
     "Canonbury Products Limited",
     "Chaneco",
@@ -3488,6 +3481,7 @@
     "Apos Medical UK Ltd",
     "Arden Orthotics Ltd",
     "Bespoke Prosthetics & Orthotics Ltd",
+    "C&P Medical Trading Ltd",
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)",
     "Critical Healthcare",
     "Cuxson Gerrard & Company Limited",
@@ -3504,7 +3498,7 @@
     "Walters Medical Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 26,
+   "actionableTotal": 25,
    "blockedReason": null,
    "deferred": null
   },
@@ -4641,8 +4635,8 @@
    "category": "Rehabilitation and Community",
    "ends": "20 February 2027",
    "suppliersAwarded": 57,
-   "suppliersPublished": 17,
-   "coverage": 29.8,
+   "suppliersPublished": 19,
+   "coverage": 33.3,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -4652,50 +4646,22 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "AQLANE Medical BV",
-     "domain": null
-    },
-    {
-     "supplier": "Astric Medical Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "C&P Medical Trading Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "E&E MEDICAL SUPPLIES LIMITED",
-     "domain": null
-    },
-    {
-     "supplier": "Key Health Solutions",
-     "domain": null
-    },
-    {
      "supplier": "Redland embh Group Limited",
-     "domain": null
-    },
-    {
-     "supplier": "UNOQUIP GMBH",
-     "domain": null
-    },
-    {
-     "supplier": "Venture Healthcare Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "AQLANE Medical BV",
-    "Astric Medical Ltd",
-    "C&P Medical Trading Ltd",
-    "E&E MEDICAL SUPPLIES LIMITED",
-    "Key Health Solutions",
-    "Redland embh Group Limited",
-    "UNOQUIP GMBH",
-    "Venture Healthcare Ltd"
+    "Redland embh Group Limited"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
+    {
+     "supplier": "AQLANE Medical BV",
+     "domain": "aqlanemedical.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-26",
+     "bucket": "refused"
+    },
     {
      "supplier": "Ardo medical Limited",
      "domain": "www.ardomedical.co.uk",
@@ -4704,10 +4670,24 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Astric Medical Ltd",
+     "domain": "astricmedical.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-26",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Baxter Healthcare Ltd",
      "domain": "www.baxterhealthcare.co.uk",
      "reason": "the site's WordPress API returned HTTP 403; the WooCommerce Store API returned HTTP 403; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "C&P Medical Trading Ltd",
+     "domain": "c-pmedical.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-26",
      "bucket": "refused"
     },
     {
@@ -4736,6 +4716,20 @@
      "domain": "genxmedicare.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Key Health Solutions",
+     "domain": "keyhealthsolutions.co.uk",
+     "reason": "the crawl attempt hung for 11+ minutes with no response and no error, and was killed by the operator; the site could not be read in any reasonable time budget",
+     "checked": "2026-09-26",
      "bucket": "refused"
     },
     {
@@ -4771,6 +4765,13 @@
      "domain": "sharonservices.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Venture Healthcare Ltd",
+     "domain": "venhealth.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-26",
      "bucket": "refused"
     },
     {
@@ -4946,13 +4947,13 @@
     "continence:urinal"
    ],
    "actionable": {
-    "unresolvedNames": 2,
-    "publishedElsewhereNeedingCategory": 17,
+    "unresolvedNames": 0,
+    "publishedElsewhereNeedingCategory": 18,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 8
+    "needDomain": 1
    },
    "published": [
     "Abena UK Limited",
@@ -4964,6 +4965,7 @@
     "Clinisupplies",
     "Coloplast",
     "Convatec",
+    "E&E MEDICAL SUPPLIES LIMITED",
     "Essity UK Limited",
     "GBUK Group",
     "iMEDicare Ltd",
@@ -4971,6 +4973,7 @@
     "Mediplus Ltd",
     "Paramount Medical Solutions Ltd",
     "ProSys International Ltd",
+    "UNOQUIP GMBH",
     "Wellspect"
    ],
    "publishedElsewhere": [
@@ -4987,6 +4990,7 @@
     "Optimum Medical",
     "Eakin Ostomy (Pelican Healthcare)",
     "Rhodes Pharma Ltd",
+    "Salts Healthcare",
     "Smith+Nephew",
     "TFX Group Ltd (Teleflex Medical)",
     "Trion Pharma Limited",
@@ -4997,34 +5001,30 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "AQLANE Medical BV",
-    "Astric Medical Ltd",
-    "C&P Medical Trading Ltd",
-    "E&E MEDICAL SUPPLIES LIMITED",
-    "Key Health Solutions",
-    "Redland embh Group Limited",
-    "UNOQUIP GMBH",
-    "Venture Healthcare Ltd"
+    "Redland embh Group Limited"
    ],
    "refused": [
+    "AQLANE Medical BV",
     "Ardo medical Limited",
+    "Astric Medical Ltd",
     "Baxter Healthcare Ltd",
+    "C&P Medical Trading Ltd",
     "Class Medical Ltd",
     "Fairmont Medical Products Limited",
     "Flexicare Medical",
     "GenX MediCare Ltd",
+    "Solventum (3M Health Care)",
+    "Key Health Solutions",
     "Peak Medical Ltd",
     "Pennine Healthcare (Ivor Shaw Ltd)",
     "RB Medical Engineering Ltd",
     "Rocialle Healthcare",
     "Sharon Services (UK) Ltd",
+    "Venture Healthcare Ltd",
     "Sinapi Biomedical UK"
    ],
-   "unknown": [
-    "KCI Medical Limited (3m)",
-    "Salts Healthcare (Ostomy)"
-   ],
-   "actionableTotal": 28,
+   "unknown": [],
+   "actionableTotal": 20,
    "blockedReason": null,
    "deferred": null
   },
@@ -16492,6 +16492,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Solventum (3M Health Care)",
+     "domain": "solventum.com",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "refused"
+    },
+    {
      "supplier": "RPG Medical Limited",
      "domain": "rpgmedical.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
@@ -16530,7 +16537,7 @@
    "route": "no Hub speciality mapped to this framework",
    "catsInScope": [],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 10,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -16560,12 +16567,11 @@
    "refused": [
     "Balmung Medical Handel GmbH",
     "Baxter Healthcare Ltd",
+    "Solventum (3M Health Care)",
     "RPG Medical Limited"
    ],
-   "unknown": [
-    "KCI Medical Limited (3m)"
-   ],
-   "actionableTotal": 13,
+   "unknown": [],
+   "actionableTotal": 12,
    "blockedReason": null,
    "deferred": null
   },
