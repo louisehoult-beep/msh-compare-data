@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 37079,
-  "differentiator.json held": 54040
+  "differentiator.json published": 37091,
+  "differentiator.json held": 54028
  },
  "counts": {
   "frameworks": 122,
@@ -24,10 +24,10 @@
   "unmapped": 48,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 416,
-  "inScopeSuppliersNeedingCrawl": 286,
-  "inScopeSuppliersNeedingDomain": 260,
-  "suppliersRefused": 519,
+  "supplierNamesUnresolved": 415,
+  "inScopeSuppliersNeedingCrawl": 284,
+  "inScopeSuppliersNeedingDomain": 258,
+  "suppliersRefused": 521,
   "suppliersRefusedButPublishingElsewhere": 106,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -130,10 +130,6 @@
   [
    "KCI Medical Ltd (previously 3M United Kingdom PLC)",
    2
-  ],
-  [
-   "Brightwake Limited (trading as Advancis Medical)",
-   1
   ],
   [
    "The Helping Hand Company",
@@ -5026,8 +5022,8 @@
    "category": "Rehabilitation and Community",
    "ends": "31 August 2027",
    "suppliersAwarded": 56,
-   "suppliersPublished": 17,
-   "coverage": 30.4,
+   "suppliersPublished": 20,
+   "coverage": 35.7,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -5037,15 +5033,7 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Clarity Pharma",
-     "domain": null
-    },
-    {
      "supplier": "ClearHeal LTD",
-     "domain": null
-    },
-    {
-     "supplier": "Firstkind Ltd",
      "domain": null
     },
     {
@@ -5058,9 +5046,7 @@
     }
    ],
    "domainsMissing": [
-    "Clarity Pharma",
     "ClearHeal LTD",
-    "Firstkind Ltd",
     "Oswell Penda",
     "Phoenix Medical Ltd"
    ],
@@ -5078,6 +5064,13 @@
      "domain": "aotinc.net",
      "reason": "the site's WordPress API exposes no product post type; the sitemap carries 0 product URLs, too few to call a catalogue",
      "checked": "2026-08-26",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Clarity Pharma",
+     "domain": "clarity-pharma.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-27",
      "bucket": "refused"
     },
     {
@@ -5113,6 +5106,13 @@
      "domain": "eurosurgical.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-06",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Firstkind Ltd",
+     "domain": "www.gekodevices.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-27",
      "bucket": "refused"
     },
     {
@@ -5356,17 +5356,18 @@
     "wound:iv"
    ],
    "actionable": {
-    "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 10,
+    "unresolvedNames": 0,
+    "publishedElsewhereNeedingCategory": 8,
     "heldNeedingCategory": 1,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 5
+    "needDomain": 3
    },
    "published": [
     "Advanced Medical Solutions (AMS)",
     "B. Braun Medical",
+    "Advancis Medical (Brightwake)",
     "Clinisupplies",
     "Coloplast",
     "Convatec",
@@ -5374,7 +5375,9 @@
     "Essity UK Limited",
     "Flen Health UK Ltd",
     "GBUK Group",
+    "Griffiths and Nielsen Ltd",
     "Paul Hartmann (HARTMANN)",
+    "Ideal Medical Solutions",
     "L&R Medical / Activa (Lohmann & Rauscher)",
     "medi UK",
     "Mediq Healthcare UK Ltd",
@@ -5387,8 +5390,6 @@
     "BD \u2014 Becton, Dickinson",
     "CliniMed",
     "Frontier Therapeutics",
-    "Griffiths and Nielsen Ltd",
-    "Ideal Medical Solutions",
     "Joint Operations",
     "Medline Industries",
     "Schulke & Mayr UK Ltd",
@@ -5400,20 +5401,20 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Clarity Pharma",
     "ClearHeal LTD",
-    "Firstkind Ltd",
     "Oswell Penda",
     "Phoenix Medical Ltd"
    ],
    "refused": [
     "Absorbest AB",
     "AOTI",
+    "Clarity Pharma",
     "Creed Medical Ltd",
     "Dot Medical Limited",
     "Ennogen Healthcare",
     "Esp\u00e8re Healthcare Ltd",
     "Eurosurgical Ltd",
+    "Firstkind Ltd",
     "Gentell UK Ltd",
     "Global Health and Safety Ltd",
     "GS Medical Healthcare Ltd",
@@ -5430,10 +5431,8 @@
     "Unisurge International Limited",
     "Willingsford Limited"
    ],
-   "unknown": [
-    "Brightwake Limited (trading as Advancis Medical)"
-   ],
-   "actionableTotal": 17,
+   "unknown": [],
+   "actionableTotal": 12,
    "blockedReason": null,
    "deferred": null
   },

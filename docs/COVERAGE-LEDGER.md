@@ -45,7 +45,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 18 | 31.0% | 19 | 32 | STARTED |
 | Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 18 | 31.6% | 16 | 32 | STARTED |
 | Urology and Bowel Management | continence | 57 | 19 | 33.3% | 20 | 40 | STARTED |
-| Advanced Wound Care | wound | 56 | 17 | 30.4% | 17 | 40 | STARTED |
+| Advanced Wound Care | wound | 56 | 20 | 35.7% | 12 | 42 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 43 | STARTED · DEFERRED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 11 | 30 | STARTED |
 | Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 14 | 26 | STARTED |
