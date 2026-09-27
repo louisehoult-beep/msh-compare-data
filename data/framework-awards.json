@@ -13,22 +13,59 @@
  "source": "Find a Tender Service (OCDS 1.1)",
  "source_url": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages",
  "licence": "Open Government Licence",
- "generated": "2026-09-26T11:25:17+00:00",
+ "generated": "2026-09-27T11:58:37+00:00",
  "window_last_run": {
-  "from": "2026-09-23",
-  "to": "2026-09-26"
+  "from": "2026-09-24",
+  "to": "2026-09-27"
  },
  "health_relevance_rule": "Kept if the buyer name matches NHS / Integrated Care Board / Health Board, or any CPV code begins 33 (medical equipment and pharmaceuticals) or 851 (health services). Bare 'Trust' is not a match (academy and housing trusts would flood the feed). CPV 852 (veterinary) and 853 (social work) excluded.",
  "evidence_caveat": "A supplier named on a framework award is evidence they CAN supply through that framework. It is NOT evidence of uptake, volume or market share at any trust. Do not convert these records into share-of-market claims.",
  "counts": {
-  "awards": 2208,
+  "awards": 2209,
   "framework_awards": 151,
-  "with_named_suppliers": 1578,
-  "with_contract_end_date": 783,
+  "with_named_suppliers": 1579,
+  "with_contract_end_date": 784,
   "with_max_extent_date": 132,
   "distinct_buyers": 536
  },
  "awards": [
+  {
+   "ocid": "ocds-h6vhtk-077b08",
+   "notice_id": "091208-2026",
+   "tag": [
+    "award",
+    "contract"
+   ],
+   "published": "2026-09-26",
+   "title": "CBC-2156-W-26113-SM Employment Support Services",
+   "buyer": {
+    "name": "Central Bedfordshire Council",
+    "ppon": "PVNH-1137-QJBX"
+   },
+   "is_framework": false,
+   "suppliers": [
+    {
+     "name": "Waythrough",
+     "companies_house": "01820492"
+    }
+   ],
+   "supplier_count": 1,
+   "contracts": [
+    {
+     "start": "2026-04-01",
+     "end": "2027-03-31",
+     "max_extent": null,
+     "signed": "2026-03-31",
+     "value": 53463,
+     "currency": "GBP"
+    }
+   ],
+   "cpv": [
+    "85100000"
+   ],
+   "matched_by": "cpv_851_health_services",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091208-2026"
+  },
   {
    "ocid": "ocds-h6vhtk-06f7e8",
    "notice_id": "090893-2026",
