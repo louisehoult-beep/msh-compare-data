@@ -110,6 +110,14 @@
   .schedule .n { font-family: "Lexend", system-ui, sans-serif; background: var(--accent); color: #fff; width: 1.8rem; height: 1.8rem; border-radius: 50%; display: grid; place-items: center; font-size: .95rem; }
   .note { margin: 0; font-size: 1.08rem; }
 
+  .icons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .icons li { border: 2px solid var(--wall2); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-size: 1.02rem; line-height: 1.3; }
+  .icons svg { width: 100%; max-width: 110px; height: auto; }
+  .firstthen { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .firstthen > div { border: 3px solid var(--accent); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 1.15rem; }
+  .firstthen b { font-family: "Lexend", system-ui, sans-serif; font-size: 1.5rem; color: var(--accent); }
+  .firstthen svg, .firstthen .blank { width: 120px; height: 120px; }
+  .firstthen .blank { border: 2px dashed #9aa7b0; border-radius: 10px; }
   .cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
   .cards li { border: 2px dashed #9aa7b0; border-radius: 12px; padding: 12px 8px; display: flex; flex-direction: column; align-items: center; gap: 6px; font-family: "Lexend", system-ui, sans-serif; font-weight: 700; font-size: 1.05rem; text-align: center; background: #fff; }
   .cards svg { width: 88px; height: auto; }
@@ -133,7 +141,7 @@
 
   @media (max-width: 600px) {
     body { font-size: 1.1rem; }
-    .schedule, .cards { grid-template-columns: repeat(2, 1fr); }
+    .schedule, .cards, .icons { grid-template-columns: repeat(2, 1fr); }
     .scale { grid-template-columns: repeat(5, 1fr); }
     .words { padding: 16px 18px 20px; }
   }
@@ -350,11 +358,10 @@
       <text x="327" y="137" text-anchor="middle" class="lbl-s" style="font-size:8px">Ready</text>
       <use href="#virus" x="60" y="60" width="90" height="90"/>
       <use href="#virus" x="150" y="170" width="54" height="54"/>
-      <path class="ln f-none" style="stroke-dasharray:4 8" d="M160 110 Q230 110 250 170"/>
     </svg>
     <div class="titles">
       <h1>Sam and the <span>Flu Spray</span></h1>
-      <p>A guide about the nasal flu vaccine, for young people who understand a lot and sometimes find talking hard.</p>
+      <p>An autism-friendly guide to the nasal flu vaccine, for young people who understand a lot and sometimes find talking hard.</p>
     </div>
   </header>
 
@@ -372,7 +379,7 @@
       <h2>This is me</h2>
       <p>My name is Sam. I go to school every day.</p>
       <p>I understand a lot. Talking can be hard for me, so I use my tablet and my cards to show people what I mean.</p>
-      <p>People can wait for my answer. I'll get there.</p>
+      <p>It can take me some time to answer. People can wait for me.</p>
       <span class="pno">1</span>
     </div>
   </article>
@@ -421,7 +428,7 @@
     <div class="words">
       <h2>What is the flu spray?</h2>
       <p>Every year, schools offer a flu vaccine. For most young people it's a nasal spray.</p>
-      <p>That means a quick spray inside my nose. <strong>One spray in each nostril.</strong> It isn't a needle. It takes a few seconds.</p>
+      <p>That means a spray inside my nose. <strong>One spray in each nostril.</strong> It is not a needle. It usually takes less than 10 seconds.</p>
       <span class="pno">3</span>
     </div>
   </article>
@@ -457,6 +464,21 @@
     </div>
   </article>
 
+
+  <article class="page">
+    <div class="words">
+      <h2>Things that might be different</h2>
+      <p>Sometimes plans change. This is OK.</p>
+      <ul class="icons">
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-white" cx="60" cy="44" r="32"/><path class="ln f-none" d="M60 24 V44 L74 54"/></svg>I might wait a short time or a long time.</li>
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><rect class="ln f-wall2" x="34" y="8" width="52" height="76"/><circle class="ln f-white" cx="76" cy="48" r="4"/></svg>The room might be different from last time.</li>
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-skin" cx="60" cy="30" r="16"/><path class="ln f-nurse" d="M32 86 Q32 52 60 52 Q88 52 88 86 Z"/></svg>A different nurse might do my spray.</li>
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-skin" cx="60" cy="30" r="16"/><path class="ln f-hoodie" d="M32 86 Q32 52 60 52 Q88 52 88 86 Z"/><rect class="ln f-white" x="74" y="8" width="40" height="26" rx="6"/><path class="ln-t" d="M82 17 H106 M82 25 H98"/></svg>If something changes, a member of staff will tell me.</li>
+      </ul>
+      <span class="pno">5</span>
+    </div>
+  </article>
+
   <article class="page">
     <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="Sam waiting on a chair wearing headphones, next to a friend">
       <rect class="f-wall" width="600" height="320"/>
@@ -477,29 +499,26 @@
       <h2>Waiting my turn</h2>
       <p>On the day, I wait my turn. I might wait with my class or with a member of staff I know.</p>
       <p>I can bring something that helps me feel calm, like my headphones.</p>
-      <span class="pno">5</span>
+      <span class="pno">6</span>
     </div>
   </article>
 
   <article class="page">
-    <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="Nurse Lou joking with Sam, who answers on the tablet">
+    <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="Nurse Lou saying hello to Sam">
       <rect class="f-wall" width="600" height="320"/>
       <rect class="ln f-floor" x="-5" y="292" width="610" height="40"/>
       <use href="#nurse" x="60" y="-18" width="160" height="330"/>
       <use href="#sam" x="360" y="-14" width="160" height="320"/>
       <path class="ln f-white" d="M190 26 H352 Q362 26 362 36 V92 Q362 102 352 102 H214 L196 118 L200 102 H190 Q180 102 180 92 V36 Q180 26 190 26 Z"/>
-      <text x="271" y="54" text-anchor="middle" class="lbl-s" style="font-size:13px">200 noses today.</text>
-      <text x="271" y="78" text-anchor="middle" class="lbl-s" style="font-size:13px">Yours is my favourite.</text>
-      <path class="ln f-white" d="M470 190 H578 Q588 190 588 200 V240 Q588 250 578 250 H480 Q470 250 470 240 V214 L456 204 L470 202 Z"/>
-      <text x="529" y="216" text-anchor="middle" class="lbl-s" style="font-size:11px">Only because it's</text>
-      <text x="529" y="236" text-anchor="middle" class="lbl-s" style="font-size:11px">the last one?</text>
+      <text x="271" y="54" text-anchor="middle" class="lbl-s" style="font-size:14px">Hello, Sam.</text>
+      <text x="271" y="78" text-anchor="middle" class="lbl-s" style="font-size:14px">I'm Nurse Lou.</text>
     </svg>
     <div class="words">
       <h2>Meeting Nurse Lou</h2>
       <p>Nurse Lou works with the school immunisation team. She tells me what she's going to do before she does it.</p>
       <p>I can show her my <strong>Ready</strong> card or my <strong>Wait please</strong> card.</p>
-      <p>"I've done 200 noses today," said Nurse Lou. "Yours is my favourite." I typed: "Only because it's the last one?" She laughed.</p>
-      <span class="pno">6</span>
+      <p>Nurse Lou might make a joke to help me feel relaxed. I don't have to laugh or answer. I can just listen.</p>
+      <span class="pno">7</span>
     </div>
   </article>
 
@@ -519,9 +538,25 @@
     <div class="words">
       <h2>The spray</h2>
       <p>I sit up straight on the chair. I breathe normally. I don't need to sniff.</p>
-      <p>Spray one. Spray two. It can feel cold or tickly. If I sneeze, that's OK.</p>
-      <p>That's it. Done.</p>
-      <span class="pno">7</span>
+      <p>Nurse Lou says "Spray one" and sprays one side. Then she says "Spray two" and sprays the other side.</p>
+      <p>If I sneeze, that is OK. I do not need to have it again.</p>
+      <p>Then it is finished.</p>
+      <span class="pno">8</span>
+    </div>
+  </article>
+
+
+  <article class="page">
+    <div class="words">
+      <h2>What I might notice</h2>
+      <p>These are things I might see, hear and feel. Everyone is different.</p>
+      <ul class="icons">
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><path class="ln f-skin" d="M52 12 Q84 10 84 42 Q84 60 70 66 Q66 80 54 80 Q44 80 44 70"/><path class="ln f-none" d="M62 30 Q70 34 66 44"/><path class="ln-t" d="M96 34 Q102 44 96 54 M104 26 Q114 44 104 62"/></svg>Sounds: people talking, chairs moving, doors opening.</li>
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-sticker" cx="60" cy="44" r="16"/><path class="ln f-none" d="M60 12 V20 M60 68 V76 M28 44 H36 M84 44 H92 M38 22 L44 28 M76 60 L82 66 M82 22 L76 28 M44 60 L38 66"/></svg>The room might be bright.</li>
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><path class="ln f-skin2" d="M60 6 Q52 42 40 58 Q34 72 48 76 Q60 80 72 76 Q86 72 80 58 Q68 42 60 6 Z"/><ellipse class="f-ink" cx="50" cy="70" rx="5" ry="3"/><ellipse class="f-ink" cx="70" cy="70" rx="5" ry="3"/><path class="ln-t" d="M92 30 L100 24 M94 42 H104 M92 54 L100 60"/></svg>The spray might feel cold, wet or tickly inside my nose.</li>
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-skin" cx="44" cy="44" r="12"/><path class="ln f-nurse" d="M26 86 Q26 62 44 62 Q62 62 62 86 Z"/><path class="ln f-skin" d="M58 64 L80 44"/><circle class="ln f-skin" cx="82" cy="42" r="6"/></svg>Nurse Lou will be close to my face for a few seconds. She will tell me first.</li>
+      </ul>
+      <span class="pno">9</span>
     </div>
   </article>
 
@@ -538,9 +573,9 @@
     </svg>
     <div class="words">
       <h2>Afterwards</h2>
-      <p>My nose might be runny or blocked for a day or two. I might feel a bit tired. That's normal and it soon passes.</p>
+      <p>My nose might be runny or blocked for a day or two. I might feel a bit tired. This is normal. It usually stops after a day or two.</p>
       <p>Then I go back to class.</p>
-      <span class="pno">8</span>
+      <span class="pno">10</span>
     </div>
   </article>
 
@@ -560,15 +595,15 @@
       <h2>Why it matters</h2>
       <p>Having the flu spray makes me less likely to catch flu. It also makes me less likely to pass it on.</p>
       <p>That helps protect Nan, baby Ava and my friends.</p>
-      <p>Nan says she'll bake a cake to celebrate. Nan will bake a cake for anything.</p>
-      <span class="pno">9</span>
+      <p>Nan likes baking. She said she will bake a cake after my flu spray.</p>
+      <span class="pno">11</span>
     </div>
   </article>
 
   <article class="page moral">
     <div class="words">
-      <h2>A few seconds for me. A healthier winter for everyone I care about.</h2>
-      <p>Being brave doesn't mean not feeling worried. It means doing it anyway, with the right support.</p>
+      <h2>The flu spray takes a few seconds. It helps protect me and the people I care about.</h2>
+      <p>It is OK to feel worried. I can use my cards, my tablet and the things that help me.</p>
     </div>
   </article>
 
@@ -588,6 +623,35 @@
       <li><span class="n">8</span><svg viewBox="0 0 120 100" aria-hidden="true"><rect class="ln f-board" x="14" y="16" width="92" height="60" rx="4"/><path class="ln-t" d="M26 34 H90 M26 50 H80 M26 64 H94"/></svg>Back to class</li>
     </ol>
     <p class="note">Some young people have the flu vaccine as an injection instead. That's OK too. It protects in the same way.</p>
+  </section>
+
+
+  <section class="panel" aria-labelledby="helps-h">
+    <div class="section-head">
+      <h2 id="helps-h">Things that can help me</h2>
+      <p>Tick the ones that help. Choose one or two to use on the day.</p>
+    </div>
+    <ul class="icons">
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><path class="ln f-none" style="stroke-width:6" d="M34 58 Q34 14 60 14 Q86 14 86 58"/><rect class="ln f-device" x="26" y="50" width="16" height="28" rx="6"/><rect class="ln f-device" x="78" y="50" width="16" height="28" rx="6"/></svg>Headphones</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-virus2" cx="60" cy="46" r="26"/><circle class="ln f-white" cx="52" cy="40" r="5"/><circle class="ln f-white" cx="68" cy="40" r="5"/><circle class="ln f-white" cx="52" cy="56" r="5"/><circle class="ln f-white" cx="68" cy="56" r="5"/></svg>Something to hold or fiddle with</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><text x="60" y="56" text-anchor="middle" class="lbl" style="font-size:26px">1 2 3 4 5</text></svg>Slow breaths while I count to 5</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-skin" cx="60" cy="30" r="16"/><path class="ln f-hoodie2" d="M32 86 Q32 52 60 52 Q88 52 88 86 Z"/></svg>A member of staff I know</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><rect class="ln f-white" x="34" y="14" width="52" height="62" rx="8"/><rect class="ln f-white" x="46" y="28" width="8" height="30" rx="2"/><rect class="ln f-white" x="64" y="28" width="8" height="30" rx="2"/></svg>My break card</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><rect class="ln f-device" x="30" y="16" width="60" height="58" rx="6"/><rect class="ln f-screen" x="36" y="22" width="48" height="46" rx="2"/></svg>My tablet</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-white" cx="60" cy="44" r="30"/><path class="ln f-none" d="M60 22 V44 L76 44"/></svg>Knowing how long I will wait</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><rect class="ln f-white" x="24" y="14" width="72" height="62" rx="6"/><path class="ln-t" d="M36 32 H84 M36 46 H84 M36 60 H66"/></svg>Something else: ________</li>
+    </ul>
+  </section>
+
+  <section class="panel" aria-labelledby="ft-h">
+    <div class="section-head">
+      <h2 id="ft-h">First, then</h2>
+      <p>Write or draw what happens after the spray.</p>
+    </div>
+    <div class="firstthen">
+      <div><b>First</b><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#sprayer" x="36" y="6" width="48" height="108"/></svg><span>Flu spray</span></div>
+      <div><b>Then</b><div class="blank"></div><span>______________</span></div>
+    </div>
   </section>
 
   <section class="panel" aria-labelledby="cards-h">
@@ -746,6 +810,8 @@
       <li>Afterwards some young people get a runny or blocked nose, a headache, tiredness or a smaller appetite for a short time.</li>
       <li>Some are offered an injection instead, for example if the nasal spray isn't suitable for them.</li>
       <li>Vaccination lowers the chance of catching flu and helps stop it spreading to babies, older people and people with long-term conditions. It doesn't guarantee someone won't catch flu.</li>
+      <li>Use literal language and say what will happen before it happens. Avoid "it won't hurt a bit" type phrases; say "it might feel cold or tickly".</li>
+      <li>Tell the young person about changes as early as possible, such as a new time, room or nurse.</li>
       <li>Give processing time. Offer the communication cards and the feelings scale before, during and after. Accept a card as a full answer.</li>
       <li>Share the "About me" page with the immunisation team. Ask if a quieter space or a first or last slot is possible.</li>
       <li>Questions? Ask the school immunisation team, your GP practice or a pharmacist.</li>
