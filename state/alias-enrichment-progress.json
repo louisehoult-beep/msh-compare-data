@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-26",
+ "lastRun": "2026-09-27",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -461,7 +461,19 @@
   "Ryna Medical Uk Limited",
   "S-Med Ltd",
   "SAI Medical Solutions Ltd",
-  "Sai Quality Fruits And Veg Limited"
+  "Sai Quality Fruits And Veg Limited",
+  "Saraco Industries",
+  "Scala Surgical Ltd",
+  "Schuco International (London) Ltd",
+  "Schultz Medical (UK) Limited",
+  "Scope Ophthalmics",
+  "Scotmas Biosecurity Limited",
+  "Scottmed Distribution (UK) Ltd",
+  "Sectra Limited",
+  "Sefam Medical Ltd",
+  "Sela Medical UK Ltd",
+  "Semperit Investments Asia",
+  "Sense Medical Limited"
  ],
  "refusals": [
   {
@@ -1083,6 +1095,31 @@
    "name": "Sai Quality Fruits And Veg Limited",
    "reason": "Companies House (search \"Sai Quality Fruits\", 2026-09-26) returns no company under this exact name. The only near match is SAI MEDICAL SOLUTIONS LTD (12347370), whose recorded previous name is \"SAI QUALITY VEG & FRUITS\" -- word-order differs from the seed's \"Sai Quality Fruits And Veg Limited\" so identity is not certain, but the seed already carries a separate record for \"SAI Medical Solutions Ltd\" with its own framework awards. No verifiable extra alias added pending resolution of whether these are the same entity (see linked refusal on SAI Medical Solutions Ltd). Escalated as a new SHAPE, not resolved by this run.",
    "date": "2026-09-26"
+  },
+  {
+   "name": "Saraco Industries",
+   "reason": "No company website on record in supplier-seed.json links and none found this session. Companies House search is JS-only and not fetchable from here; no other named source (NHS Supply Chain framework brief) gives an additional name form beyond \"Saraco Industries\" as already recorded. No verifiable extra alias or speciality added.",
+   "date": "2026-09-27"
+  },
+  {
+   "name": "Schuco International (London) Ltd",
+   "reason": "No company website on record in supplier-seed.json links and none found this session. Companies House search is JS-only and not fetchable from here; the NHS Supply Chain framework brief names only \"Schuco International (London) Ltd\", matching the record already held. No verifiable extra alias or speciality added.",
+   "date": "2026-09-27"
+  },
+  {
+   "name": "Scotmas Biosecurity Limited",
+   "reason": "No company website on record in supplier-seed.json links and none found this session. Companies House search is JS-only and not fetchable from here; the NHS Supply Chain framework brief names only \"Scotmas Biosecurity Limited\", matching the record already held. No verifiable extra alias or speciality added.",
+   "date": "2026-09-27"
+  },
+  {
+   "name": "Scottmed Distribution (UK) Ltd",
+   "reason": "No company website on record in supplier-seed.json links and none found this session. Companies House search is JS-only and not fetchable from here; the NHS Supply Chain framework briefs name only \"Scottmed Distribution (UK) Ltd\", matching the record already held. No verifiable extra alias or speciality added.",
+   "date": "2026-09-27"
+  },
+  {
+   "name": "Semperit Investments Asia",
+   "reason": "The recorded own-site link (sempermed.com) now returns a 301 redirect to an unrelated domain (harpsglobal.com), so the company's current own site cannot be read this session to confirm a Sempermed trading-name alias. Speciality (Infection prevention and PPE) was already filled from an earlier session, so left unchanged. No verifiable extra alias added; the stale redirect is a data-quality issue for the link field, not resolved by this run.",
+   "date": "2026-09-27"
   }
  ],
  "sources": {
