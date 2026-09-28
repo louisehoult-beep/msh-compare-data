@@ -426,8 +426,20 @@ def main():
             # as the division map outranks inference on the own-site side.
             # Illegal categories are dropped rather than trusted, so a typo in
             # the map cannot publish a category the Compare tab cannot render.
-            if mapped_cats:
-                good = [c for c in mapped_cats if c in legal]
+            # A kind="product-override" entry keyed on this exact NHSSC item
+            # name outranks the (supplier, term) map for that one line — added
+            # 28/09/2026. A catalogue search term can group lines of different
+            # types (HARTMANN's Cosmopor term holds adhesive island dressings
+            # AND IV/film dressings), and without this the whole term had to
+            # share one category. Opt-in only, exactly as on the own-site side:
+            # nothing populates it except an entry explicitly tagged
+            # product-override, so no existing row can change unless named.
+            item_cats = mapped_cats
+            ov = product_override.get((co, name))
+            if ov:
+                item_cats = ov if isinstance(ov, list) else [ov]
+            if item_cats:
+                good = [c for c in item_cats if c in legal]
                 if good:
                     for cat in good:
                         nhssc_added += 1
@@ -455,7 +467,7 @@ def main():
                 held.append({"supplier": co, "name": name,
                              "division": "(NHS Supply Chain only)",
                              "why": "the recorded NHSSC map entry names %s, which is not in "
-                                    "the gated vocabulary" % ", ".join(mapped_cats)})
+                                    "the gated vocabulary" % ", ".join(item_cats)})
                 continue
 
             candidates = []  # (cat, why)
