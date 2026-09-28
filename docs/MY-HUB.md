@@ -77,6 +77,8 @@ empty panel.
 
 1. Hub account (`msh_hub_pins`). Follows the member across devices.
 2. If the account can't be reached: this browser only, and the page says so.
+   The next visit that reaches an account with nothing saved moves the
+   browser copy into the account.
 
 The existing `/wp-json/msh/v1/prefs` endpoint is only read, never written, and
 is left as it is.
