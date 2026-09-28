@@ -182,6 +182,7 @@ HTML = r"""<title>Sam and the Flu Spray</title>
   .cover p { margin: 0; color: var(--soft); font-size: 1.1rem; }
   .page { background: var(--paper); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
   svg.scene { display: block; width: 100%; height: auto; }
+  img.scene.photo { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
   .words { padding: 20px 26px 24px; display: flex; flex-direction: column; gap: 10px; }
   .words h2 { font-size: 1.45rem; font-weight: 700; color: var(--accent); }
   .words p { margin: 0; max-width: 36em; }
@@ -425,7 +426,7 @@ HTML = r"""<title>Sam and the Flu Spray</title>
     </svg>
     <div class="titles">
       <h1>Sam and the <span>Flu Spray</span></h1>
-      <p>An autism-friendly guide to the nasal flu vaccine, for young people who understand a lot and sometimes find talking hard.</p>
+      <p>A clear, step-by-step guide to the nasal flu vaccine, for young people who understand a lot and sometimes find talking hard.</p>
     </div>
   </header>
 
@@ -749,8 +750,8 @@ HTML = r"""<title>Sam and the Flu Spray</title>
   </section>
 
   <div class="section-head">
-    <h2>Colouring pages</h2>
-    <p>Four pages to colour. Take your time.</p>
+    <h2>Mindful colouring</h2>
+    <p>Colouring can help some people feel calm while they wait.</p>
   </div>
 
   <section class="colour colour-in" aria-label="Colouring page: Sam">
@@ -815,6 +816,34 @@ HTML = r"""<title>Sam and the Flu Spray</title>
 """
 
 
+# Photo-style images (generated in Canva). When a file exists in photos/, it
+# replaces the drawn scene whose aria-label starts with the given text.
+PHOTOS = [
+    ("Sam, a teenager holding a tablet, next to Nurse Lou", "01-cover.jpg", "Nurse Lou saying hello to Sam in the school medical room"),
+    ("Sam holding a tablet that says", "02-this-is-me.jpg", "Sam sitting on a chair holding his tablet"),
+    ("Flu viruses shown as if under a microscope", "03-flu-virus.jpg", "A flu virus as seen under a microscope"),
+    ("Close up of a face with the spray", "04-nasal-spray.jpg", "A small nasal spray on a tray"),
+    ("A letter and consent form", "05-consent-form.jpg", "A parent signing the consent form at home"),
+    ("Sam waiting on a chair wearing headphones", "06-waiting.jpg", "Sam waiting in the corridor wearing headphones"),
+    ("Nurse Lou saying hello to Sam", "07-meeting-nurse.jpg", "Nurse Lou saying hello to Sam"),
+    ("Sam sitting up straight while Nurse Lou gives the spray", "08-the-spray.jpg", "Nurse Lou giving Sam the nasal spray while he sits up straight"),
+    ("Sam back in class", "09-afterwards.jpg", "Sam back in class with a sticker on his hoodie"),
+    ("Sam with Nan", "10-why-it-matters.jpg", "Sam with Nan, who is holding baby Ava, and a cake"),
+]
+
+
+def swap_in_photos(html):
+    import re
+    photo_dir = Path(__file__).with_name("photos")
+    for label, name, alt in PHOTOS:
+        if not (photo_dir / name).exists():
+            continue
+        pat = re.compile(r'<svg class="scene"[^>]*aria-label="' + re.escape(label) + r'[^"]*".*?</svg>', re.S)
+        html, n = pat.subn(f'<img class="scene photo" src="photos/{name}" alt="{alt}">', html, count=1)
+        assert n == 1, label
+    return html
+
+
 def build():
     html = (
         HTML.replace("VIRUS_SPIKES", virus_spikes())
@@ -822,6 +851,7 @@ def build():
         .replace("FEELINGS_HTML", feelings_html())
         .replace("PATTERN", pattern_page())
     )
+    html = swap_in_photos(html)
     OUT.write_text(html, encoding="utf-8")
     print(f"wrote {OUT}")
 
