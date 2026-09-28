@@ -49,3 +49,29 @@ It is not evidence of a non-deterministic build, and it is not a reason to avoid
 The 14/09 observation's own cause could not be reconstructed from the record (no detail file
 was written for `^o468`, and the clones it was seen in are gone). Rather than invent one, this
 note states what was tested and what it showed.
+
+## A second occurrence, 27/09/2026 (`^o623`)
+
+Moved out of `OUTSTANDING.md` 28/09/2026 (over the 400-char line limit) by
+`out-of-hours-backlog-clearer` — content unchanged, just relocated.
+
+A fresh `build_differentiator.py` run (framework-coverage batch, Surgical
+Instruments/Decree Thermo, no source-data change intended beyond that supplier's seed
+record) dropped 11 NHSSC-catalogue-only product records present in the committed
+`data/differentiator.json`, all unrelated to the batch's own edit (BD / LIFESTENT, Cook
+Medical / HCTED ZENITH TX2 + CMD, Essity / TENA range x7, Kimal PLC / Altius Pro+ x2).
+`land.sh`'s record-level no-loss check caught it and the rebuild was reverted rather than
+published — only the seed/refusal fix and a ledger-only regen landed.
+
+This directly contradicts the "cannot be non-deterministic" finding above (no clock, no
+randomness, no network read by the build script itself) — unless the true cause is one
+step earlier than the build: something the build reads (an NHSSC catalogue cache file,
+per this item's own leading suspicion of "a live NHSSC catalogue fetch returning
+different rows between runs") changing between the two runs, which `build_differentiator.py`
+would then deterministically reflect. Not yet investigated to a conclusion — left open,
+not resolved by assumption.
+
+**RECOMMEND:** investigate why two consecutive `build_differentiator.py` runs against the
+same committed inputs produced a different NHSSC-catalogue product set, starting from
+whether `data/nhssc-cache.json` (or any other input the build reads but does not commit
+alongside its own output) actually changed between the two runs.
