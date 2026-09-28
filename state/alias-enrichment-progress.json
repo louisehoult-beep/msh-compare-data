@@ -1,6 +1,6 @@
 {
  "_notice": "Progress ledger for the supplier-alias-enrichment scheduled task. A name in `done` is never revisited. A refusal counts as done for 90 days from its date, then becomes eligible again.",
- "lastRun": "2026-09-27",
+ "lastRun": "2026-09-28",
  "done": [
   "365 Healthcare",
   "3D LifePrints UK Ltd",
@@ -473,7 +473,19 @@
   "Sefam Medical Ltd",
   "Sela Medical UK Ltd",
   "Semperit Investments Asia",
-  "Sense Medical Limited"
+  "Sense Medical Limited",
+  "Sensory Guru Ltd",
+  "Sentec Medical Ltd",
+  "Serosep UK",
+  "Sharon Services (UK) Ltd",
+  "Sight Sciences UK Ltd",
+  "Silimed UK Limited",
+  "Silony Medical Ltd",
+  "Sim & Skills Ltd",
+  "SIM&CURE",
+  "Simulaids Ltd",
+  "Simulation Man",
+  "Sir Jacob Behrens"
  ],
  "refusals": [
   {
@@ -1120,6 +1132,36 @@
    "name": "Semperit Investments Asia",
    "reason": "The recorded own-site link (sempermed.com) now returns a 301 redirect to an unrelated domain (harpsglobal.com), so the company's current own site cannot be read this session to confirm a Sempermed trading-name alias. Speciality (Infection prevention and PPE) was already filled from an earlier session, so left unchanged. No verifiable extra alias added; the stale redirect is a data-quality issue for the link field, not resolved by this run.",
    "date": "2026-09-27"
+  },
+  {
+   "name": "Sentec Medical Ltd",
+   "reason": "Companies House 12131261 (SENTEC MEDICAL LTD, inc. 31/07/2019) is identical to the seed display name, no previous names. sentec.com (global corporate site) carries no UK-entity naming and no alternate form. 'Sentec' alone is ambiguous (also matches the distinct company SENTEC LTD 03452194) so barred by rule 2. No verifiable extra name form.",
+   "date": "2026-09-28"
+  },
+  {
+   "name": "Sight Sciences UK Ltd",
+   "reason": "sightsciences.com is a global region-select landing page with no UK-specific naming beyond what the record already carries ('Sight Sciences UK, Ltd'). No new verifiable name form found this session.",
+   "date": "2026-09-28"
+  },
+  {
+   "name": "Silimed UK Limited",
+   "reason": "Companies House 15167834 (SILIMED UK LIMITED, inc. 27/09/2023) is identical to the seed display name. silimed.com is the Brazilian parent's site with no UK-entity naming. A separate dissolved company (J.Hueser Invest. Limited, 03231178, ex-Polytech Silimed UK) is a different legal entity, not this supplier. No verifiable extra name form.",
+   "date": "2026-09-28"
+  },
+  {
+   "name": "Silony Medical Ltd",
+   "reason": "silonyspine.com footer names only the German parent, 'Silony Medical GMBH', copyright 2025. Per the never-add-a-parent's-name rule, this cannot be recorded as an alias of the UK subsidiary. No other name form found on the site.",
+   "date": "2026-09-28"
+  },
+  {
+   "name": "SIM&CURE",
+   "reason": "sim-and-cure.com (the company's own site) failed to load in this session (HTTP 500, twice). The record's existing evidence already names 'SIM&CURE' from the same site's footer, identical to the current alias. Companies House has no UK registration (French SAS). No new verifiable form found this session.",
+   "date": "2026-09-28"
+  },
+  {
+   "name": "Simulation Man",
+   "reason": "No Companies House match for 'Simulation Man' under any spelling. No company website found. No verifiable extra name form; possibly a product/brand name rather than a distinct registered company, but not confirmable either way from a named source this session.",
+   "date": "2026-09-28"
   }
  ],
  "sources": {
