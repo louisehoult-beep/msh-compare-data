@@ -48,7 +48,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Advanced Wound Care | wound | 56 | 20 | 35.7% | 12 | 42 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 43 | STARTED · DEFERRED |
 | Complete Ophthalmology Solutions 3 | ophthalmology | 53 | 18 | 34.0% | 11 | 30 | STARTED |
-| Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 14 | 26 | STARTED |
+| Pressure Area Care and Patient Handling | handling | 53 | 26 | 49.1% | 14 | 27 | STARTED |
 | Surgical Instruments | surgical | 50 | 13 | 26.0% | 17 | 25 | STARTED |
 | Operating Theatres Equipment and Related Accessories and Services | theatres | 43 | 12 | 27.9% | 12 | 27 | STARTED |
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 12 | 32.4% | 6 | 27 | STARTED |
@@ -56,7 +56,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 11 | 31.4% | 8 | 21 | STARTED |
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 8 | 21 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 13 | 11 | STARTED |
-| Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 6 | 21 | STARTED |
+| Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 6 | 22 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 13 | 19 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 5 | 23 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 10 | 37.0% | 7 | 17 | STARTED |

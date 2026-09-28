@@ -27,8 +27,8 @@
   "supplierNamesUnresolved": 415,
   "inScopeSuppliersNeedingCrawl": 283,
   "inScopeSuppliersNeedingDomain": 257,
-  "suppliersRefused": 522,
-  "suppliersRefusedButPublishingElsewhere": 106,
+  "suppliersRefused": 523,
+  "suppliersRefusedButPublishingElsewhere": 107,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
   "blockedFrameworks": 2,
@@ -6297,6 +6297,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "BES Healthcare",
+     "domain": "www.beshealthcare.net",
+     "reason": "neither www.beshealthcare.net nor www.www.beshealthcare.net answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-28",
+     "bucket": "publishedElsewhere"
+    },
+    {
      "supplier": "Fannin (UK) Limited",
      "domain": "fannin.eu",
      "reason": "robots.txt disallows automated reading of this site",
@@ -8431,6 +8438,13 @@
      "reason": "domain found 15/09/2026 (not previously recorded) via web search \u2014 williamdaviescare.com, described independently as 'a trusted provider of medical consumables to NHS Trusts across the UK', matching its own 4 NHS Supply Chain framework awards (Airway Management, IV Accessories, IV Cannula, Wheelchairs) and Companies House company 12023351 (active, SIC 32500 Manufacture of medical and dental instruments and supplies). This is a genuine supplier, NOT a non-manufacturer \u2014 but the site itself could not be read: every path tried (/, /products-2/, /wp-json/, /wp-json/wp/v2/types, /sitemap.xml) returned HTTP 200 with a zero-byte body to both a plain HTTP fetch and a headless Chromium render (networkidle), despite robots.txt allowing all crawlers. robots.txt itself carries a third, malformed sitemap entry ('http://williamdaviescare.com/savep.php?sitemap.xml') suggesting the site is compromised or misconfigured rather than deliberately blocking. Domain now recorded so a future crawl attempt does not have to be re-discovered from scratch.",
      "checked": "2026-09-15",
      "bucket": "refused"
+    },
+    {
+     "supplier": "BES Healthcare",
+     "domain": "www.beshealthcare.net",
+     "reason": "neither www.beshealthcare.net nor www.www.beshealthcare.net answered \u2014 the domain does not resolve or serves no usable certificate",
+     "checked": "2026-09-28",
+     "bucket": "publishedElsewhere"
     },
     {
      "supplier": "Blatchford Limited",
