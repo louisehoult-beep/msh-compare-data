@@ -47,7 +47,7 @@ jobs:
         run: python3 scripts/make_alert_icons.py "$SOURCE_URL"
 
       - name: Publish gate — nothing commits until this passes
-        run: python3 verify.py
+        run: bash scripts/gate.sh
 
       - name: Commit the icons
         run: |

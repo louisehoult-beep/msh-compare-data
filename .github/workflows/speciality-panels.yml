@@ -63,7 +63,7 @@ jobs:
         # same output, and this checkout is thrown away.
         run: python3 test_speciality_panels.py
       - name: Publish gate — nothing commits until this passes
-        run: python3 verify.py
+        run: bash scripts/gate.sh
       - name: Commit and push
         run: |
           git config user.name "hub-bot"
@@ -80,7 +80,7 @@ jobs:
             echo "push rejected (attempt $attempt) — rebasing and re-gating"
             git fetch origin
             git rebase origin/main
-            python3 verify.py
+            bash scripts/gate.sh
           done
           if [ "$pushed" != "1" ]; then
             echo "push still rejected after 5 attempts — next scheduled run will carry it"

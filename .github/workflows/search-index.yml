@@ -156,7 +156,7 @@ jobs:
       - name: Publish gate — nothing commits until this passes
         run: |
           python3 scripts/prune_calendar.py
-          python3 verify.py --no-links
+          bash scripts/gate.sh --no-links
       - name: Commit if changed
         if: inputs.dry_run != true
         run: |
@@ -182,7 +182,7 @@ jobs:
             # gone wrong that a merge strategy should not paper over. Let the
             # rebase stop and fail the run rather than pick a winner silently.
             git pull --rebase --autostash
-            python3 verify.py --no-links || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            bash scripts/gate.sh --no-links || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
             sleep 5
           done
           if [ "$pushed" -ne 1 ]; then

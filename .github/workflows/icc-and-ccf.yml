@@ -104,7 +104,7 @@ jobs:
       - name: Publish gate — nothing commits until this passes
         run: |
           python3 scripts/prune_calendar.py
-          python3 verify.py
+          bash scripts/gate.sh
       - name: Commit if changed
         run: |
           git config user.name "icc-ccf-bot"
@@ -124,7 +124,7 @@ jobs:
             ICC_LIBRARY="${{ runner.temp }}/icc-library" python3 scripts/refresh_icc.py
             python3 scripts/refresh_ccf_reference.py
             python3 scripts/stamp_notice.py
-            python3 verify.py || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
+            bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
             git add data/icc-catalogue.json data/icc-matrices.json data/ccf-reference.json
             git diff --cached --quiet || git commit -m "ICC matrices and CCF reference $(date -u +%F) (retry)"
             sleep 5

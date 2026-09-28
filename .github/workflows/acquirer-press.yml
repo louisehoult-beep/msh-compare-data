@@ -87,7 +87,7 @@ jobs:
       - name: Sanity check — nothing else in the repo broke
         run: |
           python3 scripts/prune_calendar.py
-          python3 verify.py
+          bash scripts/gate.sh
       - name: Commit if changed
         run: |
           git config user.name "acquirer-press-bot"
@@ -109,7 +109,7 @@ jobs:
             else
               python3 scripts/refresh_acquirer_press.py
             fi
-            python3 verify.py || { echo "GATE FAILED after re-run — refusing to push"; exit 1; }
+            bash scripts/gate.sh || { echo "GATE FAILED after re-run — refusing to push"; exit 1; }
             git add state/pending-acquirer-matches.json state/acquirer-press-rotation.json
             git diff --cached --quiet || git commit -m "Acquirer press sweep $(date -u +%F) (re-run)"
             sleep 5

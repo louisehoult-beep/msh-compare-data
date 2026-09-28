@@ -110,7 +110,7 @@ jobs:
 
       - name: Publish gate — nothing commits until this passes
         if: env.DRY_RUN != 'true' && env.DIAGNOSE != 'true'
-        run: python3 verify.py
+        run: bash scripts/gate.sh
 
       - name: Commit state and config
         if: env.DRY_RUN != 'true' && env.DIAGNOSE != 'true'
@@ -129,7 +129,7 @@ jobs:
             echo "push rejected (attempt $attempt) — rebasing and re-gating"
             git fetch origin
             git rebase origin/main
-            python3 verify.py
+            bash scripts/gate.sh
           done
           if [ "$pushed" != "1" ]; then
             # The pushes to phones already went out. Losing the state commit

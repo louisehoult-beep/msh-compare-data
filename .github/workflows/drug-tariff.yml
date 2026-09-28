@@ -80,7 +80,7 @@ jobs:
       - name: Publish gate — the same one every other writer runs
         run: |
           python3 scripts/prune_calendar.py
-          python3 verify.py
+          bash scripts/gate.sh
       - name: Commit if changed
         run: |
           git config user.name "drug-tariff-bot"
@@ -99,7 +99,7 @@ jobs:
             git reset --hard origin/main
             python3 scripts/refresh_drug_tariff_part_ix.py --out data/drug-tariff-part-ix.json
             python3 scripts/stamp_notice.py
-            python3 verify.py || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
+            bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
             git add data/drug-tariff-part-ix.json
             git diff --cached --quiet || git commit -m "Drug Tariff Part IX $(date -u +%F) (retry)"
             sleep 5

@@ -112,7 +112,7 @@ jobs:
       - name: Publish gate — nothing commits until this passes
         run: |
           python3 scripts/prune_calendar.py
-          python3 verify.py
+          bash scripts/gate.sh
       - name: Commit if changed
         run: |
           git config user.name "supplier-product-detail-bot"
@@ -134,7 +134,7 @@ jobs:
             fi
             echo "push rejected (another writer landed first). Rebasing and re-running the gate, attempt $attempt of 5."
             git pull --rebase --autostash
-            python3 verify.py || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            bash scripts/gate.sh || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
             sleep 5
           done
           if [ "$pushed" -ne 1 ]; then

@@ -61,7 +61,7 @@ jobs:
         run: |
           python3 scripts/prune_calendar.py
           set -o pipefail
-          python3 verify.py 2>&1 | tee /tmp/gate.log
+          bash scripts/gate.sh 2>&1 | tee /tmp/gate.log
       - name: Commit if changed
         run: |
           git config user.name "compare-refresh-bot"
@@ -87,7 +87,7 @@ jobs:
             # non-conflicting changes are kept. Without it a conflict stops the rebase and
             # the whole run's work is thrown away (11/08/2026, company-intelligence #2).
             git pull --rebase -X theirs --autostash
-            python3 verify.py || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
+            bash scripts/gate.sh || { echo "GATE FAILED after rebase - refusing to push"; exit 1; }
             sleep 5
           done
           if [ "$pushed" -ne 1 ]; then
