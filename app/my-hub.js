@@ -1480,7 +1480,14 @@
       var local = lsGet();
       getJSON(API).then(function (d) {
         if (d && d.saved) { pins = d.pins || []; where = 'account'; renderView(); return; }
-        if (local && local.length) { pins = local; where = 'device'; renderView(); return; }
+        if (local && local.length) { // saved on this device while the account was unreachable: move it to the account now
+          pins = local; where = 'device'; renderView();
+          fetch(API, { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': nonce() }, body: JSON.stringify({ pins: local }) })
+            .then(function (r) { if (r.ok) { where = 'account'; } })
+            .catch(function () {})
+            .then(function () { if (!draft) { renderView(); } });
+          return;
+        }
         return getJSON(PREFS).then(function (p) {
           pins = fromInterests(p && p.interests); seeded = pins.length > 0; renderView();
         });
