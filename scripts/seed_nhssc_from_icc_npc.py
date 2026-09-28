@@ -43,53 +43,14 @@ import asyncio
 import sys
 import time
 from playwright.async_api import async_playwright
+# Cards are read by field, never by position — the parser is shared with
+# refresh_nhssc_cache.py so the two cannot drift apart (28/09/2026).
+from nhssc_card import EXTRACT_JS, parse_card
 
 ICC_PATH = "data/icc-matrices.json"
 CACHE_PATH = "data/nhssc-cache.json"
 CONC = 5
 NPC_RE = re.compile(r"^[A-Z]{3}\d{2,5}$")
-
-EXTRACT_JS = r"""
-() => Array.from(document.querySelectorAll('div.cardWrapper')).map(card => {
-  const img = card.querySelector('img[src*="media.supplychain"]');
-  const lines = (card.innerText||'').split('\n').map(s=>s.trim()).filter(Boolean)
-    .filter(s => !/^Pilot User Login$|^Add to compare$|^\d+ \/ \d+$|^Compare$|^Show more$/.test(s));
-  let npc = '';
-  const prev = card.querySelector('[class*="product-card-prev-"]');
-  if (prev) { const m = String(prev.className).match(/product-card-prev-([A-Z0-9]+)/); if (m) npc = m[1]; }
-  let mpc = '';
-  const mel = card.querySelector('[class*="product-card_mpc"]');
-  if (mel) { const t = (mel.textContent||'').trim(); if (t) mpc = t.split(/\s+/)[0]; }
-  return { lines, img: img ? img.src : '', npc, mpc };
-})
-"""
-
-
-def parse_card(c):
-    lines = c.get('lines', [])
-    if len(lines) < 3:
-        return None
-    name, supplier, desc = lines[0], lines[1], lines[2]
-    npc = c.get('npc', '') or ''
-    mpc = c.get('mpc', '') or ''
-    status = pack = ''
-    codeish = []
-    for ln in lines[3:]:
-        if ln.startswith('Sold in'):
-            pack = ln.replace('Sold in', '').strip()
-        elif re.fullmatch(r'[A-Z0-9]{4,10}', ln) and not ln.isalpha():
-            codeish.append(ln)
-        elif re.fullmatch(r'[A-Z][A-Z ]{4,}', ln) and 'SOLD' not in ln and not status and ln != supplier:
-            status = ln.title()
-    if not npc and len(codeish) >= 2:
-        npc = codeish[1]
-    if not mpc and codeish:
-        mpc = codeish[0]
-    if not npc and len(codeish) == 1:
-        npc = codeish[0]
-    return {'name': name, 'supplier': supplier, 'desc': desc, 'npc': npc, 'mpc': mpc,
-            'status': status, 'pack': pack, 'img': c.get('img', '')}
-
 
 def icc_npcs():
     """Every distinct NPC the ICC matrices carry, with one product label each

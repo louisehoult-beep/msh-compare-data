@@ -10,6 +10,10 @@ Rules (why this never degrades the cache):
 - For a NEW seed product: strict name + seed-supplier matching (never guess).
 - A product whose re-scrape finds nothing KEEPS its previous entry (codes
   rarely vanish; a stale status beats losing 200 verified products).
+- A product whose re-scrape finds lines MERGES them into its previous entry by
+  NPC (merge_items): fresh values win for a line seen again, and a previously
+  cached line this week's page did not return is carried forward, not dropped.
+- Cards are read by field through scripts/nhssc_card.py, never by position.
 - The agent-verified notCatalogue map is preserved, minus any product that now
   has live codes.
 - The "NPC:<code>" entries written by scripts/seed_nhssc_from_icc_npc.py are
@@ -20,7 +24,10 @@ Rules (why this never degrades the cache):
 Runs in GitHub Actions (Playwright chromium). ~30–40 min for ~900 products.
 """
 import argparse, json, re, asyncio, time
-from playwright.async_api import async_playwright
+from nhssc_card import EXTRACT_JS, parse_card
+# playwright is imported inside main(), not here, so merge_items() and the other
+# pure helpers can be imported by test_refresh_nhssc_cache.py in the unit-test
+# job, which has no browser installed.
 
 SEED_PATH = "data/supplier-seed.json"
 CACHE_PATH = "data/nhssc-cache.json"
@@ -45,21 +52,6 @@ def off_category_mismatch(job_supplier_raw, card_supplier):
     bad = (card_words & OFF_CATEGORY) - job_words
     return bool(bad)
 
-EXTRACT_JS = r"""
-() => Array.from(document.querySelectorAll('div.cardWrapper')).map(card => {
-  const img = card.querySelector('img[src*="media.supplychain"]');
-  const lines = (card.innerText||'').split('\n').map(s=>s.trim()).filter(Boolean)
-    .filter(s => !/^Pilot User Login$|^Add to compare$|^\d+ \/ \d+$|^Compare$|^Show more$/.test(s));
-  let npc = '';
-  const prev = card.querySelector('[class*="product-card-prev-"]');
-  if (prev) { const m = String(prev.className).match(/product-card-prev-([A-Z0-9]+)/); if (m) npc = m[1]; }
-  let mpc = '';
-  const mel = card.querySelector('[class*="product-card_mpc"]');
-  if (mel) { const t = (mel.textContent||'').trim(); if (t) mpc = t.split(/\s+/)[0]; }
-  return { lines, img: img ? img.src : '', npc, mpc };
-})
-"""
-
 def norm(*strs):
     s = ' '.join(x for x in strs if x)
     return set(w for w in re.findall(r'[a-z0-9]{4,}', s.lower()) if w not in STOP)
@@ -74,21 +66,36 @@ def candidates(name):
         if q.lower() not in seen: seen.add(q.lower()); uniq.append(q)
     return uniq
 
-def parse_card(c):
-    lines = c.get('lines', [])
-    if len(lines) < 3: return None
-    name, supplier, desc = lines[0], lines[1], lines[2]
-    npc = c.get('npc','') or ''; mpc = c.get('mpc','') or ''
-    status = pack = ''; codeish = []
-    for ln in lines[3:]:
-        if ln.startswith('Sold in'): pack = ln.replace('Sold in','').strip()
-        elif re.fullmatch(r'[A-Z0-9]{4,10}', ln) and not ln.isalpha(): codeish.append(ln)
-        elif re.fullmatch(r'[A-Z][A-Z ]{4,}', ln) and 'SOLD' not in ln and not status and ln != supplier: status = ln.title()
-    if not npc and len(codeish) >= 2: npc = codeish[1]
-    if not mpc and codeish: mpc = codeish[0]
-    if not npc and len(codeish) == 1: npc = codeish[0]
-    return {'name': name, 'supplier': supplier, 'desc': desc, 'npc': npc, 'mpc': mpc,
-            'status': status, 'pack': pack, 'img': c.get('img','')}
+def merge_items(prev_items, fresh_items):
+    """A term's refreshed item list: every fresh card, then every previously
+    cached line the fresh search did not return, deduplicated by NPC.
+
+    Replaces the old rule (28/09/2026), which kept the previous list only when
+    it was LONGER than the fresh one and otherwise replaced it wholesale. A
+    search page's result set shifts week to week, so a same-sized or larger
+    fresh set still dropped lines that were never delisted: EKH112 (Biatain
+    Contact), ELA451 (Biatain Silicone) and ELA838 (ActivHeal) all fell out
+    that way and had to be re-added by hand. A line not returned this week is
+    not proof it has gone, so it is carried forward; a line that IS returned
+    takes this week's values (status, pack, image) because they are newer.
+    An item with no NPC cannot be matched, so it is kept as it was.
+    """
+    out, seen = [], set()
+    for it in fresh_items or []:
+        k = (it.get('npc') or '').strip()
+        if k:
+            if k in seen:
+                continue
+            seen.add(k)
+        out.append(it)
+    for it in prev_items or []:
+        k = (it.get('npc') or '').strip()
+        if k and k in seen:
+            continue
+        if k:
+            seen.add(k)
+        out.append(it)
+    return out
 
 def name_ok(key, card_name):
     qn = re.sub(r'[^a-z0-9]', '', re.sub(r'\(.*', '', key).lower())
@@ -162,13 +169,12 @@ async def worker(browser, batch, results, counter, total):
             # Hartmann and 97 others), so discarding their lines was the single
             # biggest self-inflicted coverage gap in the Differentiator.
             NHSSC_ITEM_CAP = 60
-            fresh = {'supplier': job['supplier'], 'query': used_q, 'items': keep[:NHSSC_ITEM_CAP]}
-            if prev_is_sound and len(prev.get('items') or []) > len(fresh['items']):
-                prev_keep = dict(prev)
-                prev_keep['query'] = prev.get('query') or used_q
-                results[job['key']] = prev_keep
-            else:
-                results[job['key']] = fresh
+            fresh_items = keep[:NHSSC_ITEM_CAP]
+            # MERGE BY NPC, never compare counts (28/09/2026) — see merge_items().
+            # The cap above limits what one search page adds, not what the
+            # term keeps: a merged list may exceed it, same as never-shrink.
+            items = merge_items(prev.get('items') if prev_is_sound else [], fresh_items)
+            results[job['key']] = {'supplier': job['supplier'], 'query': used_q, 'items': items}
         elif prev_is_sound:
             results[job['key']] = prev  # keep the verified previous entry
         # else: nothing found this run, and the previously-cached entry itself
@@ -214,6 +220,7 @@ async def main(supplier_filter=None):
               "Add product names to data/supplier-seed.json first.")
         return
     results, counter = {}, [0]
+    from playwright.async_api import async_playwright
     shards = [jobs[i::CONC] for i in range(CONC)]
     async with async_playwright() as pw:
         b = await pw.chromium.launch(headless=True)

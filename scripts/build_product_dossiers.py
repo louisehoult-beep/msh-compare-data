@@ -450,13 +450,16 @@ class Builder:
                 d = self.by_npc.get(npc)
                 if not d:
                     continue
-                # A column-shifted card, not a catalogue line. The cache's card
-                # parser reads fields by position, so a "SUSPENDED" badge above
-                # the name, or a card with no brand line, slides every field one
-                # place: ELA679 published "ESSITY UK TENA HM" as Cuticell
-                # Contact's description, FDQ3419 an MPC as Draeger's. Both shapes
-                # are unmistakable (a description is words, never one token), so
-                # the row is dropped rather than repaired by guesswork.
+                # A column-shifted card, not a catalogue line. Until 28/09/2026
+                # the cache's card parser read fields by position, so a
+                # "SUSPENDED" badge above the name, or a card with no brand line,
+                # slid every field one place: ELA679 published "ESSITY UK TENA
+                # HM" as Cuticell Contact's description, FDQ3419 an MPC as
+                # Draeger's. scripts/nhssc_card.py now reads each field from its
+                # own element and repair_nhssc_cache_rows.py re-read the old
+                # rows; this guard stays as the backstop for any row that could
+                # not be re-read. Both shapes are unmistakable (a description is
+                # words, never one token), so the row is dropped, not guessed at.
                 desc = (item.get("desc") or "").strip()
                 if item.get("name") in STATUS_BADGES or " " not in desc:
                     self.stats["catalogue_rows_shifted_skipped"] += 1
