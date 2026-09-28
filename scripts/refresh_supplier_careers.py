@@ -950,6 +950,232 @@ def role_key(r):
     return r.get("url") or ("%s|%s" % (r.get("title", ""), r.get("location", "")))
 
 
+# ------------------------------------------------ one role, one supplier
+#
+# ADDED 28/09/2026 (Lou, OUTSTANDING ^o190: "make rule so not shown 4 times,
+# only once"). Policy `shared-careers-site-role-attribution` in
+# data/identity-vocabulary-policy.json is the rule; this is its implementation.
+#
+# Several seed records can be one group's entities on ONE careers site. Abbott
+# Diabetes Care, Abbott Diagnostics, Abbott Laboratories Limited and Abbott
+# Medical U.K. Ltd all resolve to the same Abbott Workday board, so each of its
+# 67 UK roles was collected four times and the file read 279 UK roles when there
+# were 78. A Careers panel built on that reads "Abbott, Abbott, Abbott, Abbott".
+#
+# So every role URL is attributed ONCE, to one record chosen deterministically:
+#   1. the record whose own domain IS the careers site's domain;
+#   2. otherwise the group's parent/umbrella record — one that every other
+#      member's own `ownership` text names;
+#   3. otherwise the lowest record by name (the seed carries no numeric supplier
+#      id, so the name, case-folded, is the stable tie-break).
+# The other records do not repeat the role. A record left holding none of its own
+# states no count and says where its roles are attributed instead — never a zero.
+
+SHARED_ROLE_RULE = (
+    "Each role URL is attributed once. Where several supplier records share one "
+    "careers site (e.g. four Abbott entities on one Abbott board), the role is held "
+    "by one record chosen deterministically — the record whose own domain is the "
+    "careers site's domain; otherwise the group's parent record; otherwise the "
+    "lowest record by name — and the others do not repeat it. Identity policy "
+    "shared-careers-site-role-attribution (Lou, 28/09/2026).")
+
+# Fields that only describe a count. Removed together when a record's roles are
+# all attributed elsewhere, so no half of a count is left behind to read as one.
+COUNT_FIELDS = ("ukRoleCount", "rolesRetrieved", "complete", "commercialRoles",
+                "clinicalRoles", "newRoles", "roles", "ukCountFrom",
+                "rolesUnplaceable", "breakdownWithheld", "countMethod")
+
+
+def _bare_host(url_or_host):
+    s = str(url_or_host or "").strip().lower()
+    m = re.match(r"^[a-z]+://([^/?#]+)", s)
+    host = m.group(1) if m else s.split("/")[0]
+    host = host.split(":")[0]
+    return re.sub(r"^www\.", "", host)
+
+
+def _own_domains(row, rec):
+    out = {_bare_host(row.get("domain"))}
+    if rec and rec.get("domain"):
+        out.add(_bare_host(rec["domain"]))
+    return {d for d in out if d}
+
+
+def _is_umbrella(name, rec, group, seed_by_name):
+    """True where every OTHER member's own ownership text names this record."""
+    names = {name.lower()} | {a.lower() for a in ((rec or {}).get("aliases") or [])
+                              if isinstance(a, str) and len(a) >= 4}
+    others = [g for g in group if g.get("name") != name]
+    if not others:
+        return False
+    for g in others:
+        own = str((seed_by_name.get(g.get("name")) or {}).get("ownership") or "").lower()
+        if not own or not any(n in own for n in names):
+            return False
+    return True
+
+
+def rank_group(group, seed_by_name):
+    """Order the records sharing a careers site, best claimant first.
+
+    Returns [(row, basis)], basis naming which tier placed the record, so the
+    file can say WHY a role sits where it does."""
+    seed_by_name = seed_by_name or {}
+    hosts = set()
+    for g in group:
+        for k in ("careersUrl", "rolesUrl"):
+            if g.get(k):
+                hosts.add(_bare_host(g[k]))
+
+    def tier(g):
+        rec = seed_by_name.get(g.get("name"))
+        doms = _own_domains(g, rec)
+        if any(h == d or h.endswith("." + d) for h in hosts for d in doms):
+            return 0, "own domain is the careers site's domain"
+        if _is_umbrella(g.get("name") or "", rec, group, seed_by_name):
+            return 1, "parent record of the group"
+        return 2, "lowest record by name (no domain match, no parent record)"
+
+    ranked = []
+    for g in group:
+        t, basis = tier(g)
+        ranked.append((t, (g.get("name") or "").casefold(), g, basis))
+    ranked.sort(key=lambda x: (x[0], x[1]))
+    return [(g, basis) for _, _, g, basis in ranked]
+
+
+def attribute_shared_roles(rows, seed_by_name=None):
+    """Hold each role URL under one record only. Mutates and returns `rows`.
+
+    Idempotent: a record whose roles were attributed away on an earlier run holds
+    none, so it takes no part, and running this twice changes nothing."""
+    holders = {}
+    for i, r in enumerate(rows):
+        for x in (r.get("roles") or []):
+            u = x.get("url")
+            if u:
+                holders.setdefault(u, set()).add(i)
+
+    # Records sharing any role URL form one group (union-find over the URLs).
+    parent = list(range(len(rows)))
+
+    def find(a):
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return a
+
+    for idx in holders.values():
+        idx = sorted(idx)
+        for j in idx[1:]:
+            parent[find(j)] = find(idx[0])
+    groups = {}
+    for idx in holders.values():
+        if len(idx) > 1:
+            groups.setdefault(find(min(idx)), set()).update(idx)
+
+    for members in groups.values():
+        group = [rows[i] for i in sorted(members)]
+        ranked = rank_group(group, seed_by_name)
+        # Each URL goes to the best-ranked record that actually holds it.
+        owner_of = {}
+        for g, _ in ranked:
+            for x in (g.get("roles") or []):
+                u = x.get("url")
+                if u and u not in owner_of:
+                    owner_of[u] = g
+        shared = {u for u, idx in holders.items() if len(idx) > 1 and u in owner_of}
+        for g, basis in ranked:
+            lost = {}
+            kept_shared = False
+            for x in (g.get("roles") or []):
+                u = x.get("url")
+                if not u:
+                    continue
+                if owner_of.get(u) is g:
+                    kept_shared = kept_shared or u in shared
+                else:
+                    lost[owner_of[u]["name"]] = lost.get(owner_of[u]["name"], 0) + 1
+            if kept_shared:
+                g["sharedRolesAttributedHere"] = basis
+            if lost:
+                _drop_attributed(g, owner_of, lost)
+    return rows
+
+
+def _drop_attributed(row, owner_of, lost):
+    to = sorted(lost)
+    keep = [x for x in (row.get("roles") or [])
+            if not x.get("url") or owner_of.get(x["url"]) is row]
+    row["rolesAttributedElsewhere"] = [{"to": n, "roles": lost[n]} for n in to]
+    if row.get("complete") and keep:
+        # Every role this record held is known, so the count is simply what is
+        # left once the shared ones are attributed to the other record.
+        row["roles"] = keep
+        row["ukRoleCount"] = len(keep)
+        row["rolesRetrieved"] = len(keep)
+        row["commercialRoles"] = sum(1 for x in keep if x.get("commercial"))
+        row["clinicalRoles"] = sum(1 for x in keep if x.get("clinical"))
+        if "newRoles" in row:
+            row["newRoles"] = sum(1 for x in keep if x.get("new"))
+        return
+    # Nothing of its own left — or an incomplete fetch, whose stated total holds
+    # roles we never saw and so cannot be split between the records. No count is
+    # stated; the record says where its roles are held instead.
+    for f in COUNT_FIELDS:
+        row.pop(f, None)
+    row.pop("sharedRolesAttributedHere", None)
+    row["rolesAttributedTo"] = to[0] if len(to) == 1 else to
+    row["attributionNote"] = (
+        "This record shares its careers site with %s. Each role there is counted "
+        "once, under that record, so no separate count is stated here."
+        % " and ".join(to))
+
+
+def settle_orphaned_attributions(rows):
+    """A record pointing at a record that no longer holds a count is refused.
+
+    On a rotating run the owning record can come back refused (a failed fetch)
+    while the others still say "counted under X". Pointing at nothing would be an
+    empty state that does not say why; so the record says so plainly and waits
+    for its own next re-read."""
+    counted = {r.get("name") for r in rows if r.get("ukRoleCount") is not None}
+    for r in rows:
+        to = r.get("rolesAttributedTo")
+        if not to:
+            continue
+        targets = [to] if isinstance(to, str) else list(to)
+        if all(t in counted for t in targets):
+            continue
+        r["refused"] = (
+            "its roles were last attributed to %s, which holds no readable count on "
+            "this run, so no count is stated until this record is re-read."
+            % " and ".join(targets))
+        r.pop("rolesAttributedTo", None)
+        r.pop("attributionNote", None)
+    return rows
+
+
+def summary_counts(out):
+    """The file's counts block, derived from the rows as they will be written."""
+    # Keyed on the count being PRESENT, not on the absence of a refusal: a merged
+    # row from an older run may carry neither, and summing roleCount over it would
+    # crash the run that was meant to be routine.
+    counted = [r for r in out if r.get("ukRoleCount") is not None]
+    urls = {x.get("url") for r in counted for x in (r.get("roles") or []) if x.get("url")}
+    return {
+        "checked": len(out),
+        "withCareersPage": sum(1 for r in out if r.get("careersUrl")),
+        "withRoleCount": len(counted),
+        "refused": sum(1 for r in out if r.get("refused")),
+        "ukRoles": sum(r["ukRoleCount"] for r in counted),
+        "distinctRoleUrls": len(urls),
+        "attributedToAnotherRecord": sum(1 for r in out if r.get("rolesAttributedTo")),
+        "completeBreakdowns": sum(1 for r in counted if r.get("complete")),
+        "rolesUnplaceable": sum(r.get("rolesUnplaceable", 0) for r in counted),
+    }
+
+
 def existing_rows(path):
     """Rows from a previous run, by supplier name."""
     try:
@@ -1070,6 +1296,39 @@ def run_one(name, domain, prev):
     return row
 
 
+def reattribute(seed_by_name):
+    """Apply the one-role-one-supplier rule to the files already on disk."""
+    for path in (OUT, REPORT):
+        try:
+            with open(path) as f:
+                doc = json.load(f)
+        except FileNotFoundError:
+            continue
+        rows = doc.get("suppliers") or []
+        refused_before = sum(1 for r in rows if r.get("refused"))
+        attribute_shared_roles(rows, seed_by_name)
+        settle_orphaned_attributions(rows)
+        doc["sharedRoleRule"] = SHARED_ROLE_RULE
+        counts = summary_counts(rows)
+        if path == OUT:
+            # The published file holds only rows with a careers page, but its
+            # `checked` and `refused` were written over every row checked. Keep
+            # those, moving `refused` only by what this pass itself changed.
+            old = doc.get("counts") or {}
+            counts["checked"] = old.get("checked", counts["checked"])
+            counts["refused"] = (old.get("refused", refused_before)
+                                 + counts["refused"] - refused_before)
+        doc["counts"] = counts
+        with open(path, "w") as f:
+            json.dump(doc, f, indent=1, ensure_ascii=False)
+            f.write("\n")
+        print("%s: %d UK role(s), %d distinct role URL(s), %d record(s) counted, "
+              "%d attributed to another record"
+              % (path, counts["ukRoles"], counts["distinctRoleUrls"],
+                 counts["withRoleCount"], counts["attributedToAnotherRecord"]))
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--supplier", help="run one supplier, or several: a comma-separated "
@@ -1085,10 +1344,19 @@ def main():
     ap.add_argument("--write", action="store_true",
                     help="ALSO write data/supplier-careers.json, which the Hub serves. "
                          "A push to this repo is a publish — read the report first.")
+    ap.add_argument("--reattribute", action="store_true",
+                    help="fetch nothing: re-apply the one-role-one-supplier rule "
+                         "(identity policy shared-careers-site-role-attribution) to "
+                         "the existing data/supplier-careers.json and state/"
+                         "careers-report.json, and recompute their counts.")
     a = ap.parse_args()
 
     seed = json.load(open(SEED))
     rows = seed["suppliers"]
+    seed_by_name = {rec.get("name"): rec for rec in rows}
+
+    if a.reattribute:
+        return reattribute(seed_by_name)
 
     targets = []
     for rec in rows:
@@ -1152,10 +1420,12 @@ def main():
         out = sorted(merged.values(), key=lambda r: r.get("name") or "")
         print("\nmerged %d checked row(s) into %d total." % (len(targets), len(out)))
 
-    # Keyed on the count being PRESENT, not on the absence of a refusal: a merged
-    # row from an older run may carry neither, and summing roleCount over it would
-    # crash the run that was meant to be routine.
-    counted = [r for r in out if r.get("ukRoleCount") is not None]
+    # ONE ROLE, ONE SUPPLIER (Lou, 28/09/2026). Applied to the MERGED rows, so a
+    # record checked today is de-duplicated against records checked weeks ago on
+    # the same careers site, not only against those in this run's slice.
+    attribute_shared_roles(out, seed_by_name)
+    settle_orphaned_attributions(out)
+
     report = {
         "_notice": "Working report for scripts/refresh_supplier_careers.py. "
                    "No consumer reads this file.",
@@ -1182,15 +1452,8 @@ def main():
                   "UK nation, city or region; false where it names somewhere else; "
                   "null where no location was published. rolesWithoutLocation gives "
                   "the denominator a UK count must be read against.",
-        "counts": {
-            "checked": len(out),
-            "withCareersPage": sum(1 for r in out if r.get("careersUrl")),
-            "withRoleCount": len(counted),
-            "refused": sum(1 for r in out if r.get("refused")),
-            "ukRoles": sum(r["ukRoleCount"] for r in counted),
-            "completeBreakdowns": sum(1 for r in counted if r.get("complete")),
-            "rolesUnplaceable": sum(r.get("rolesUnplaceable", 0) for r in counted),
-        },
+        "sharedRoleRule": SHARED_ROLE_RULE,
+        "counts": summary_counts(out),
         "suppliers": out,
     }
     with open(REPORT, "w") as f:

@@ -129,6 +129,18 @@
    ],
    "workedExample": "Sela Medical UK Ltd's own site returns 'Glutack' twice: once filed under the genuine 'Surgical Division' page, once filed under the crawler's generic 'Uncategorised' bucket (a known crawler artefact, per the nav-labels-are-not-products policy). Both resolve to the same atraumatic mesh-fixation device already mapped to mis:instruments. The 'Uncategorised' capture is dropped; the 'Surgical Division' capture is the one that publishes.",
    "decidedOn": "2026-09-21"
+  },
+  "shared-careers-site-role-attribution": {
+   "title": "A role on a careers site shared by several supplier records is shown once, not once per record",
+   "shape": "Several supplier records — typically sibling legal entities or divisions of one group — resolve to the SAME careers site or applicant tracking board, so the careers collector reads the same role URLs under each record and the hiring signal repeats every role once per record (four Abbott records on one Abbott Workday board: each of 67 UK roles collected four times, 279 'UK roles' where there were 78).",
+   "ruling": "Each distinct role URL is counted and shown ONCE. It is attributed to one record chosen deterministically: (1) the record whose own verified domain is the careers site's domain; otherwise (2) the group's parent/umbrella record — the record every other member's own ownership evidence names; otherwise (3) the lowest record in stable order (the seed carries no numeric supplier id, so the record name, case-folded, is the tie-break). The other records do not repeat the role: a record left with none of its own states no count and names the record its roles are held under; a record with some roles of its own keeps only those. Applied by scripts/refresh_supplier_careers.py on every run, and enforced by verify.py check_supplier_careers(), which refuses any role URL held under more than one supplier. This is a standing authority: no per-case escalation is required.",
+   "guard": "Never used to merge, alias or de-list the supplier records themselves — they stay separate records with their own frameworks and identities; only the role attribution is de-duplicated (Policy parent-subsidiary-award-credit and the no-aliasing ruling of 28/09/2026 are untouched). Never used to show a record that gave its roles away as having zero roles: it states no count and says where the roles are held. Never used to credit a parent group's careers board to a company whose own identity the ATS account does not carry — the Acumed/Marmon tenant guard still applies first. The match is on the identical role URL only; two roles that merely share a title are not this shape. Choosing the holding record is presentation, not a finding about which entity employs the person.",
+   "appliesTo": [
+    "^o190"
+   ],
+   "workedExample": "Abbott Diabetes Care, Abbott Diagnostics, Abbott Laboratories Limited and Abbott Medical U.K. Ltd all reach the Abbott Workday board (atsAccount 'abbott', careers site www.abbott.com). None carries abbott.com as its own domain and no seed record is marked as the group's parent, so tier 3 applies: all 67 UK roles are held once under Abbott Diabetes Care, and the other three records state no count and name Abbott Diabetes Care. data/supplier-careers.json went from 279 UK role rows to 78, one per distinct role URL.",
+   "decidedOn": "2026-09-28",
+   "decidedBy": "Louise Hoult, in chat 28/09/2026 (\"make rule so not shown 4 times, only once\")"
   }
  }
 }

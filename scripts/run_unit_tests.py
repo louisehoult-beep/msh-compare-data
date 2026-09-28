@@ -96,6 +96,7 @@ RUN = [
     "test_ask_passages.py",
     "test_breadcrumb_division.py",
     "test_careers_jobpages.py",
+    "test_careers_shared_roles.py",
     "test_company_intelligence_push_retry.py",
     "test_company_match_overrides.py",
     "test_company_press_story_links.py",

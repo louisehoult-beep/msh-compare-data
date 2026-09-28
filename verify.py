@@ -5618,8 +5618,43 @@ def check_supplier_careers(doc):
             FAIL(C, "counts.%s states %s but the rows hold %s."
                     % (key, stated[key], actual))
 
+    # (i) ONE ROLE, ONE SUPPLIER (Lou, 28/09/2026, ^o190; identity policy
+    #     shared-careers-site-role-attribution). Four Abbott records resolve to
+    #     one Abbott board, and every one of its 67 UK roles sat in this file four
+    #     times — 279 "UK roles" where there were 78. A role URL is held by one
+    #     record only; the others say where it is held instead of repeating it.
+    by_url = {}
+    for r in rows:
+        for x in (r.get("roles") or []):
+            if x.get("url"):
+                by_url.setdefault(x["url"], []).append(r.get("name") or "(unnamed)")
+    shared = {u: n for u, n in by_url.items() if len(n) > 1}
+    if shared:
+        u, names = sorted(shared.items())[0]
+        FAIL(C, "%d role URL(s) are held under more than one supplier — e.g. %s under "
+                "%s. Each role is attributed once (identity policy "
+                "shared-careers-site-role-attribution); run "
+                "refresh_supplier_careers.py --reattribute."
+                % (len(shared), u, ", ".join(sorted(set(names)))))
+    counted_names = {r.get("name") for r in rows if r.get("ukRoleCount") is not None}
+
     for r in rows:
         who = r.get("name") or "(unnamed)"
+
+        # (j) A RECORD WHOSE ROLES ARE HELD ELSEWHERE must name a record that
+        #     actually holds a count, or it is an empty state pointing at nothing.
+        to = r.get("rolesAttributedTo")
+        if to is not None:
+            targets = [to] if isinstance(to, str) else list(to or [])
+            if r.get("ukRoleCount") is not None:
+                FAIL(C, "%s: states a count and also says its roles are held by %s."
+                        % (who, to))
+            if not targets:
+                FAIL(C, "%s: rolesAttributedTo is empty." % who)
+            for t in targets:
+                if t not in counted_names:
+                    FAIL(C, "%s: says its roles are held by %r, which states no role "
+                            "count in this file." % (who, t))
 
         url = r.get("careersUrl")
         if url and not str(url).startswith("https://"):
@@ -5629,7 +5664,9 @@ def check_supplier_careers(doc):
 
         n = r.get("ukRoleCount")
         if n is None:
-            if not str(r.get("refused") or "").strip():
+            # A record whose roles are counted under another record (check (j)
+            # proves that record holds a count) has said why it is empty.
+            if not str(r.get("refused") or "").strip() and not r.get("rolesAttributedTo"):
                 FAIL(C, "%s: no role count and no reason. An empty state must say "
                         "why it is empty, or it reads as broken." % who)
             continue
