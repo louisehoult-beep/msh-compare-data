@@ -174,6 +174,7 @@ NON_UK_RE = re.compile(
     r"\b(usa|u\.s\.|united states|germany|deutschland|france|netherlands|"
     r"belgium|spain|italy|poland|sweden|denmark|norway|finland|ireland|dublin|"
     r"switzerland|austria|australia|canada|india|china|japan|singapore|"
+    r"new zealand|new plymouth|auckland|christchurch|"
     r"new york|boston|chicago|paris|berlin|munich|amsterdam|madrid|milan)\b", re.I)
 
 COMMERCIAL_RE = re.compile(
@@ -266,6 +267,12 @@ def uk_flag(loc):
     An explicit non-UK signal (a named country, "New York", or a two-letter
     US/Canadian state code) is stronger evidence than a bare city-name
     substring collision, so it wins. Found live in AOTI's data 09/09/2026.
+    The same collision again 28/09/2026: CardioScan's "New Plymouth, Central"
+    (Taranaki, New Zealand) matched UK_RE's "plymouth". NON_UK_RE now names
+    New Zealand and its places that collide with, or are, cities a UK board
+    would never list ("Wellington" and "Hamilton" are left out: both are also
+    UK towns). verify.py check (k) calls this function, so there is one
+    definition of a UK place.
     """
     if not loc or not loc.strip():
         return None
@@ -1255,6 +1262,35 @@ def update_rotation(state, rows):
     return state
 
 
+def holds_roles(row):
+    """True where a published row puts roles on the Hub's careers page.
+
+    A row holds roles if it states a count (zero included: a board read and
+    found empty is still a statement about today) or if its roles are held
+    under another record by one-role-one-supplier attribution (the Abbott
+    entities pointing at Abbott Diabetes Care). Either way, what the page
+    shows for it is only as fresh as its last read."""
+    return row.get("ukRoleCount") is not None or bool(row.get("rolesAttributedTo"))
+
+
+def rotation_targets(targets, rows, known, n):
+    """This sweep's targets: EVERY role holder, plus the N oldest of the rest.
+
+    ADDED 28/09/2026. The slice alone put never-checked suppliers first, so a
+    supplier that actually held roles waited for the whole list to cycle
+    (about six weeks) before it was read again. Abbott was last read 01/09 and
+    by 28/09 7 of its 19 listed roles had closed at source. Role holders are
+    now re-read on every sweep ON TOP of the slice, so no role on the page is
+    more than a week old, and a closed role drops off the next Tuesday. The
+    slice is taken from the non-holders only, so it still cycles the list at
+    the same pace."""
+    holders = {name for name, r in rows.items() if holds_roles(r)}
+    keep = [t for t in targets if t[0] in holders]
+    rest = sorted((t for t in targets if t[0] not in holders),
+                  key=lambda t: (known.get(t[0]) or ""))
+    return keep + rest[:n]
+
+
 def previous_keys():
     """Roles seen on the last check, per supplier. Used only to mark `new`.
 
@@ -1453,14 +1489,16 @@ def main():
     if a.rotate:
         # Oldest first, never-checked before ever-checked. A supplier whose row
         # is stale is more useful to re-read than one checked yesterday.
-        known = {n: r.get("checkedOn") for n, r in
-                 (existing_rows(OUT) or existing_rows(REPORT)).items()}
+        existing = existing_rows(OUT) or existing_rows(REPORT)
+        known = {n: r.get("checkedOn") for n, r in existing.items()}
         # The committed rotation state wins: it is the only record of a check
         # that was refused, which the published file drops.
         known.update({n: e.get("checkedOn") for n, e in load_rotation().items()
                       if isinstance(e, dict)})
-        targets.sort(key=lambda t: (known.get(t[0]) or ""))
-        targets = targets[:a.rotate]
+        targets = rotation_targets(targets, existing, known, a.rotate)
+        held = sum(1 for t in targets if holds_roles(existing.get(t[0]) or {}))
+        print("re-checking %d supplier(s) that hold roles, plus %d from the rotation."
+              % (held, len(targets) - held))
 
     if not a.supplier and not a.auto and not a.rotate:
         print("%d suppliers carry an official website link in the seed." % len(targets))
@@ -1501,10 +1539,13 @@ def main():
     for r in out:
         r.pop(ALL_KEYS_FIELD, None)
 
-    if a.rotate:
+    if a.rotate or a.supplier:
         # MERGE, never replace. A rotating run touches a slice of the list; the
         # rows it did not visit must survive it untouched, carrying their own
         # older checkedOn date so a reader can see how stale each one is.
+        # `--supplier` merges too (28/09/2026): it used to replace the file with
+        # only the named rows, so a targeted `--supplier X --write` would have
+        # unpublished every other supplier's roles.
         merged = existing_rows(OUT) or existing_rows(REPORT)
         for r in out:
             merged[r["name"]] = r

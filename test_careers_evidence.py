@@ -69,6 +69,17 @@ check("New York is not the UK, despite containing 'York'",
 check("a York, England location is still the UK",
       rc.uk_flag("York, England"), True)
 
+# 3c. A NEW ZEALAND PLACE NAME THAT CONTAINS A UK ONE MUST NOT READ AS THE UK.
+#     Live bug found in CardioScan's data 28/09/2026: "New Plymouth, Central"
+#     (Taranaki, New Zealand) published as uk: true because UK_RE's bare
+#     "plymouth" matched inside it. Same shape as "New York" above.
+check("New Plymouth is not the UK, despite containing 'Plymouth'",
+      rc.uk_flag("New Plymouth, Central"), False)
+check("a named New Zealand location is not the UK",
+      rc.uk_flag("Auckland, New Zealand"), False)
+check("a Plymouth, England location is still the UK",
+      rc.uk_flag("Plymouth, Devon, England"), True)
+
 # 4. A LAYOUT IS NEVER COUNTED. A careers page with no applicant tracking system
 #    and no JobPosting data must yield NO roles — not a count scraped off list
 #    markup. "No vacancies right now" above a six-item footer is six roles to a

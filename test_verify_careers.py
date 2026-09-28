@@ -177,6 +177,18 @@ must_fail("a uk=true role whose location names a non-UK place is rejected",
                                 "location": "Remote - New York", "uk": True}])]),
           "names a place outside the UK")
 
+# 12b. The same, for New Zealand. CardioScan's "Admin Assistant", location
+#      "New Plymouth, Central", sat in the published file as uk=true from
+#      08/09/2026: UK_RE's bare "plymouth" matched inside "New Plymouth".
+must_fail("a uk=true role located in New Plymouth, New Zealand is rejected",
+          wrap([variant(name="CardioScan Ltd", domain="www.cardioscan.co",
+                        atsAccount="cardioscan", ukRoleCount=1, rolesRetrieved=1,
+                        commercialRoles=0, clinicalRoles=0,
+                        ukCountFrom="location strings published by the company",
+                        roles=[{"title": "Admin Assistant",
+                                "location": "New Plymouth, Central", "uk": True}])]),
+          "names a place outside the UK")
+
 must_pass("a uk=true role with an unplaceable multi-site location still passes "
           "(the source's own country filter placed it)",
           wrap([variant(roles=[{"title": "Sales Representative", "location": "4 Locations",

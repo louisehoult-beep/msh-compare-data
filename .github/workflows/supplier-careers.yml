@@ -19,6 +19,12 @@ name: Supplier careers (hiring signal)
 # takes the 90 least-recently-checked suppliers and MERGES them into the existing
 # rows. The whole list cycles in about six weeks, and every row carries its own
 # checkedOn date so a reader can see how stale it is.
+#
+# ROLE HOLDERS EVERY WEEK (28/09/2026). On top of the 90, every supplier whose
+# published row states a count or holds roles by attribution is re-read on
+# every run, so no role on the Career Centre panel is more than a week old and
+# a role closed at source drops off the next Tuesday. Abbott went 01/09-28/09
+# unread while 7 of its 19 listed roles closed. See rotation_targets().
 
 on:
   schedule:
