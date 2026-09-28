@@ -54,6 +54,11 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      - name: Re-check the hand-curated local sources (formularies, contracts, papers)
+        # Records lastCheck on each item in data/speciality-local-intel.json. An item
+        # whose source is gone (404/410 twice) is withheld from the panel by the build
+        # below. Never fails the job: a check outage must not stop the daily rebuild.
+        run: python3 scripts/check_speciality_local_intel.py
       - name: Rebuild the speciality panels
         run: python3 scripts/build_speciality_panels.py
       - name: Panel invariants — the wound care panel cannot start showing X-ray cabinets

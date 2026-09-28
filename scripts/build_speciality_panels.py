@@ -8207,6 +8207,7 @@ def build(slug, sources):
     awards, award_total, awards_withheld = build_awards(rx, rule, th_doc, fa_doc)
     open_tenders = build_open_tenders(rx, slug, ot_doc)
     tariff = build_tariff(rule, dt_doc)
+    local_intel = build_local_intel(slug, sources.get("local_intel") or {})
 
     note = rule.get("coverageNote")
     qualify = (lambda text: (text + " " + note) if note else text)
@@ -8223,8 +8224,18 @@ def build(slug, sources):
             "frameworkAwards": fa_doc.get("generated"),
             "openTenders": ot_doc.get("dataAsOf"),
             "drugTariff": dt_doc.get("dataAsOf"),
+            "localIntel": (sources.get("local_intel") or {}).get("checkedOn"),
         },
         "rules": {
+            "localIntel": (
+                "Hand-curated from primary sources: each item was read at its own source on "
+                "the date shown, states only what that source says, and quotes it where a "
+                "quote is given. Where a source does not settle something (a winner, an end "
+                "date) the item says not verified. Every link is re-checked on each daily "
+                "build; an item whose source has gone is withdrawn until it is re-sourced. "
+                "This is not a census: it lists the contracts, formularies and papers found "
+                "and read, not every one that exists."
+            ),
             "frameworks": qualify(
                 (rule.get("frameworksFinding") or {}).get("frameworks")
                 if rule["frameworks"] is None and rule.get("frameworksFinding") else
@@ -8332,13 +8343,34 @@ def build(slug, sources):
             "awardsMatched": award_total,
             "awardsWithheldByBuyerCap": awards_withheld,
             "openTenders": len(open_tenders),
+            "localIntel": len(local_intel),
         },
         "frameworks": frameworks,
         "suppliers": suppliers,
         "awards": awards,
         "openTenders": open_tenders,
         "drugTariff": tariff,
+        "localIntel": local_intel,
+        "localIntelGroups": (sources.get("local_intel") or {}).get("groups") or {},
     }
+
+
+def build_local_intel(slug, li_doc):
+    """This speciality's hand-curated local sources (data/speciality-local-intel.json).
+
+    Copied through as curated, minus any item whose last link check found the source
+    gone (404/410): a dead link on a paid page is member-facing damage, so it is held
+    back until someone re-sources or removes it. `unreachable` (403, 429, 5xx) is
+    kept, because Find a Tender and several NHS sites refuse scripted fetches.
+    """
+    out = []
+    for it in (li_doc.get("specialities") or {}).get(slug) or []:
+        if (it.get("lastCheck") or {}).get("status") == "gone":
+            continue
+        out.append({k: it.get(k) for k in (
+            "id", "group", "kind", "nation", "org", "title", "date", "ends", "fact",
+            "quote", "use", "names", "url", "verifiedOn", "lastCheck") if it.get(k) not in (None, "", [])})
+    return out
 
 
 def main():
@@ -8349,6 +8381,15 @@ def main():
         "open_tenders": load("open-tenders.json"),
         "drug_tariff": load("drug-tariff-part-ix.json"),
     }
+    li_path = os.path.join(DATA, "speciality-local-intel.json") if "DATA" in globals() else \
+        os.path.join("data", "speciality-local-intel.json")
+    if os.path.exists(li_path):
+        with open(li_path, encoding="utf-8") as fh:
+            li = json.load(fh)
+        checks = [(it.get("lastCheck") or {}).get("date")
+                  for items in (li.get("specialities") or {}).values() for it in items]
+        li["checkedOn"] = max([c for c in checks if c] or [None]) if any(checks) else None
+        sources["local_intel"] = li
     # The licence and database-right wording is the house notice, carried verbatim.
     # The `ref` is NOT: a marker ref identifies one file, and reusing another file's
     # would defeat the traceability it exists for. stamp_notice.py only walks

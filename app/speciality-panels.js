@@ -49,7 +49,20 @@
       '.msh .sp-find{width:100%;max-width:340px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13.5px;background:var(--panel);color:var(--ink);margin-bottom:14px;}',
       '.msh .sp-sec{margin-top:26px;}',
       '.msh .sp-sec:first-child{margin-top:0;}',
-      '.msh .sp-alt{font-size:11px;color:var(--dim);font-weight:400;margin-top:3px;line-height:1.45;}'
+      '.msh .sp-alt{font-size:11px;color:var(--dim);font-weight:400;margin-top:3px;line-height:1.45;}',
+      '.msh .sp-li-g{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:var(--dim);margin:16px 0 8px;}',
+      '.msh .sp-li{overflow-wrap:anywhere;min-width:0;border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:8px;background:var(--panel);padding:11px 14px;margin-bottom:9px;}',
+      '.msh .sp-li-h{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;justify-content:space-between;}',
+      '.msh .sp-li-t{font-size:14px;font-weight:700;line-height:1.35;}',
+      '.msh .sp-li-t a{color:var(--gold);text-decoration:none;}',
+      '.msh .sp-li-t a:hover{text-decoration:underline;}',
+      '.msh .sp-li-d{font-size:11.5px;color:var(--dim);}',
+      '.msh .sp-li-o{font-size:12px;color:var(--dim);margin-top:2px;}',
+      '.msh .sp-li p{font-size:13px;line-height:1.55;margin:7px 0 0;}',
+      '.msh .sp-li q{display:block;font-style:italic;font-size:12.5px;margin-top:6px;padding-left:10px;border-left:2px solid var(--border);color:var(--ink);}',
+      '.msh .sp-li-u{font-size:12.5px;margin-top:6px;}',
+      '.msh .sp-li-u b{color:var(--navy);}',
+      '.msh .sp-li-m{font-size:11px;color:var(--dim);margin-top:7px;}'
     ].join('');
     document.head.appendChild(st);
   }
@@ -130,6 +143,39 @@
     }
     h += '</div>';
 
+    /* LOCAL CONTRACTS, FORMULARIES AND POLICY — hand-curated from primary sources in
+       data/speciality-local-intel.json. Every item names its source and the date it
+       was read; an item whose link check found the source gone is withheld by the
+       builder, not here. Absent entirely on specialities nobody has curated yet. */
+    if (d.localIntel && d.localIntel.length) {
+      var groups = d.localIntelGroups || {};
+      var order = ['routes', 'local', 'formulary', 'nations', 'policy', 'data'];
+      h += '<div class="sp-sec"><h3 class="sub-h3">Local contracts, formularies and policy</h3>';
+      h += '<p style="font-size:13px;line-height:1.6;margin:0 0 4px;">Contracts, formularies, board papers and national routes on this patch, each read at its own source. Who holds a contract and when it ends is the call-planning fact; the quote is the source\'s own words.</p>';
+      for (var g = 0; g < order.length; g++) {
+        var rows = [];
+        for (i = 0; i < d.localIntel.length; i++) {
+          if (d.localIntel[i].group === order[g]) { rows.push(d.localIntel[i]); }
+        }
+        if (!rows.length) { continue; }
+        h += '<div class="sp-li-g">' + esc(groups[order[g]] || order[g]) + '</div>';
+        for (i = 0; i < rows.length; i++) {
+          var x = rows[i];
+          h += '<div class="sp-li"><div class="sp-li-h"><div class="sp-li-t">' +
+               (x.url ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.title) + '</a>' : esc(x.title)) +
+               '</div><div class="sp-li-d">' + esc(x.date || '') + (x.ends ? ' &middot; ' + (/^\d/.test(x.ends) ? 'ends ' : '') + esc(x.ends) : '') + '</div></div>';
+          h += '<div class="sp-li-o">' + esc(x.org) + ' &middot; ' + esc(x.kind) + ' &middot; ' + esc(x.nation) + '</div>';
+          h += '<p>' + esc(x.fact) + '</p>';
+          if (x.quote) { h += '<q>' + esc(x.quote) + '</q>'; }
+          if (x.use) { h += '<div class="sp-li-u"><b>For a rep:</b> ' + esc(x.use) + '</div>'; }
+          h += '<div class="sp-li-m">Read at source ' + esc(x.verifiedOn) +
+               (x.lastCheck && x.lastCheck.status === 'ok' ? ' &middot; link checked ' + esc(x.lastCheck.date) : '') + '</div>';
+          h += '</div>';
+        }
+      }
+      h += '</div>';
+    }
+
     /* AWARDS */
     h += '<div class="sp-sec"><h3 class="sub-h3">Awarded contracts</h3>';
     if (!d.awards.length) {
@@ -170,7 +216,7 @@
     h += '<div class="sp-meta">Frameworks as at ' + esc(d.dataAsOf.frameworks || 'not stated') +
          ' &middot; awards as at ' + esc(d.dataAsOf.tenderHistory || 'not stated') +
          ' &middot; Drug Tariff as at ' + esc(d.dataAsOf.drugTariff || 'not stated') + '.</div>';
-    h += ruleBlock(d.rules, ['frameworks', 'awards', 'openTenders', 'drugTariff']);
+    h += ruleBlock(d.rules, ['frameworks', 'awards', 'openTenders', 'drugTariff', 'localIntel']);
     FW.innerHTML = h;
   }
 

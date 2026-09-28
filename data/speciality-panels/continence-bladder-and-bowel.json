@@ -19,9 +19,11 @@
   "tenderHistory": "2026-08-20",
   "frameworkAwards": "2026-09-28T13:48:31+00:00",
   "openTenders": "28/09/2026",
-  "drugTariff": "2026-09-28"
+  "drugTariff": "2026-09-28",
+  "localIntel": "2026-09-28"
  },
  "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
   "frameworks": "NHS Supply Chain framework names matching /\\b(continence|urology and bowel)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This is a framework membership list, not a market share and not the whole buying picture. The larger part of this patch is bought in the community on prescription, through NHSBSA Drug Tariff Part IX and the dispensing appliance contractors, a route with no NHS Supply Chain framework page at all; the Drug Tariff summary is where that route appears, and the page's Market intelligence section sizes the two populations separately. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This is a framework membership list, not a market share and not the whole buying picture. The larger part of this patch is bought in the community on prescription, through NHSBSA Drug Tariff Part IX and the dispensing appliance contractors, a route with no NHS Supply Chain framework page at all; the Drug Tariff summary is where that route appears, and the page's Market intelligence section sizes the two populations separately. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market.",
   "awards": "Award-stage notices whose TITLE matches /\\b(continence|incontinen\\w*|urinary catheters?|urethral catheters?|indwelling catheters?|intermittent catheters?|foley|suprapubic|catheterisation|catheterization|urinary drainage|drainage bags?|leg bags?|night bags?|catheter valves?|catheter maintenance|urine meters?|urine collection|urine bags?|penile sheaths?|urinary sheaths?|uridome|stomas?|ostomy|colostomy|ileostomy|urostomy|bowel management|bowel care|faecal management|fecal management|anal irrigation|trans[- ]?anal irrigation|rectal irrigation|bladder washout|bladder irrigation|pelvic floor|continence pads?|absorbent pads?|pads and garments|commodes?|enuresis|nocturia)\\b/i and does not match /\\b(blood collection|catheterisation lab|surgical mesh)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
@@ -35,7 +37,8 @@
   "awardsShown": 17,
   "awardsMatched": 17,
   "awardsWithheldByBuyerCap": 0,
-  "openTenders": 0
+  "openTenders": 0,
+  "localIntel": 22
  },
  "frameworks": [
   {
@@ -1021,5 +1024,501 @@
   ],
   "priceMin": 0.94,
   "priceMax": 200.21
+ },
+ "localIntel": [
+  {
+   "id": "cont-nhssc-lots",
+   "group": "routes",
+   "kind": "Framework award",
+   "nation": "England",
+   "org": "NHS Supply Chain (SCCL)",
+   "title": "Disposable and Washable Continence Care: suppliers by lot",
+   "date": "16/03/2026",
+   "ends": "23/08/2028 (max 23/08/2030)",
+   "fact": "Four lots. Lot 1 pants and shaped pads: Abena, Attends, Essity, Forma-Care, Healthcare 25, Paul Hartmann, Ontex. Lot 2 other disposables: the Lot 1 seven plus Meditrade UK and Sharon Services. Lot 3 washables: Abena, Attends, Essity, Forma-Care, GBUK, iMEDicare, P&S Healthcare, Sharon Services. Lot 4 sensor technology: Abena and Ontex only. £335m ex VAT. Bids received per lot: 9, 14, 9 and 2.",
+   "use": "Which lots each competitor can sell on. This settles the launch brief's own four-versus-seven lot contradiction: the award record has four.",
+   "names": [
+    "Abena",
+    "Attends",
+    "Essity",
+    "Forma-Care",
+    "Healthcare 25",
+    "Paul Hartmann",
+    "Ontex",
+    "Meditrade UK",
+    "Sharon Services",
+    "GBUK",
+    "iMEDicare",
+    "P&S Healthcare"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/031173-2026",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-sbs10525",
+   "group": "routes",
+   "kind": "Framework tender",
+   "nation": "England",
+   "org": "NHS Shared Business Services",
+   "title": "SBS10525 (successor to SBS10015): Lot 5 continence products home delivery",
+   "date": "03/03/2026 (update)",
+   "ends": "Award est. 11/11/2026; framework 04/01/2027 to 03/01/2031",
+   "fact": "Lot 5 is 'Continence Products Home Delivery Service' (5a adult/bariatric, 5b paediatric). Estimated framework value £500m ex VAT across all lots. Tender closed 27/03/2026. SBS10015, the route almost every current England home-delivery award uses, expires 31/12/2026.",
+   "use": "Decides which suppliers trusts and ICBs can directly award home-delivery contracts to from 2027.",
+   "url": "https://www.find-tender.service.gov.uk/Notice/010151-2026",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-hte",
+   "group": "routes",
+   "kind": "Framework award",
+   "nation": "UK",
+   "org": "HealthTrust Europe",
+   "title": "Continence Goods and Services 2024",
+   "date": "20/03/2025",
+   "ends": "Four-year framework from 01/03/2025",
+   "fact": "£100m total, £20m per lot. Lot 1 bulk: Abena, Critical Healthcare, iMEDicare, Medline, Essity, Vernacare, Ontex. Lot 2 home delivery: iMEDicare, Abena, Essity, Ontex.",
+   "use": "The second national route besides NHS SBS. NHS Wales used it for its 2025/26 direct award.",
+   "names": [
+    "Abena",
+    "Critical Healthcare",
+    "iMEDicare",
+    "Medline",
+    "Essity",
+    "Vernacare",
+    "Ontex"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/010389-2025",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-cpft",
+   "group": "local",
+   "kind": "Contract award",
+   "nation": "England",
+   "org": "Cambridgeshire & Peterborough NHS FT",
+   "title": "Continence and home delivery (via SBS10015)",
+   "date": "19/08/2026",
+   "ends": "06/07/2029",
+   "fact": "Awarded to Essity UK Ltd, £13,805,136, 06/07/2026 to 06/07/2029.",
+   "quote": "ESSITY Continence and Home Delivery - SBS10015",
+   "use": "Incumbent and end date: when this contract comes back round.",
+   "names": [
+    "Essity"
+   ],
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/8168996b-342a-4248-bab7-b89dcb3ecd42",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-cddft",
+   "group": "local",
+   "kind": "Contract award",
+   "nation": "England",
+   "org": "County Durham & Darlington NHS FT",
+   "title": "Continence home delivery (SBS framework further competition, Lot 2)",
+   "date": "12/09/2025",
+   "ends": "20/08/2027 (+24 months option)",
+   "fact": "Awarded to Essity, £4,318,828.03, 21/08/2025 to 20/08/2027.",
+   "quote": "further competition utilising Shared Business Services Framework … Lot 2 Continence Home Delivery Provision",
+   "use": "Incumbent and end date.",
+   "names": [
+    "Essity"
+   ],
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/46489f7f-d659-4052-bcff-44286730e207",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-sussex",
+   "group": "local",
+   "kind": "Contract award",
+   "nation": "England",
+   "org": "Sussex Community NHS FT",
+   "title": "Continence products and home delivery",
+   "date": "12/12/2024",
+   "ends": "30/11/2026",
+   "fact": "Awarded to Essity UK Ltd, £5,756,406, 01/12/2023 to 30/11/2026.",
+   "use": "Ends within months: watch for the re-procurement notice.",
+   "names": [
+    "Essity"
+   ],
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/ecf72dc0-41cb-4c0e-a39f-4640130c8cdb",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-rdash",
+   "group": "local",
+   "kind": "Direct award",
+   "nation": "England",
+   "org": "Rotherham Doncaster & South Humber NHS FT (RDaSH)",
+   "title": "Continence home delivery, direct award on SBS framework",
+   "date": "28/05/2025",
+   "ends": "31/05/2027",
+   "fact": "Essity UK Ltd, £1,873,044.76 ex VAT, 01/06/2025 to 31/05/2027.",
+   "quote": "Risk to patients changing the products they use",
+   "use": "The switching risk the trust itself names: the objection a challenger has to answer.",
+   "names": [
+    "Essity"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/028000-2025",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-ncumbria",
+   "group": "local",
+   "kind": "Contract extension (VEAT)",
+   "nation": "England",
+   "org": "North Cumbria Integrated Care NHS FT",
+   "title": "Continence products: Abena contract extended ahead of a joint mini-competition",
+   "date": "08/09/2025",
+   "ends": "30/04/2026",
+   "fact": "Originally awarded to Abena UK Limited in December 2017, extended to 30/04/2026 (£607,547 ex VAT). A joint procurement with the South Cumbria and Lancashire Provider Collaborative Board, by mini-competition on SBS10015, was planned for Q1 2026/27. Its outcome is not verified.",
+   "use": "A live or just-closed opportunity in the North West.",
+   "names": [
+    "Abena"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/054489-2025",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-solent",
+   "group": "local",
+   "kind": "Contract award",
+   "nation": "England",
+   "org": "Solent NHS Trust",
+   "title": "Continence products (historical)",
+   "date": "14/02/2024",
+   "ends": "31/10/2024",
+   "fact": "Essity UK Ltd, £1,851,091, 01/11/2023 to 31/10/2024.",
+   "use": "History of who held the contract.",
+   "names": [
+    "Essity"
+   ],
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/03f4f934-90a4-443f-8e5c-2308917b1098",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-southern",
+   "group": "local",
+   "kind": "Contract award",
+   "nation": "England",
+   "org": "Southern Health NHS FT",
+   "title": "Continence products (historical)",
+   "date": "06/12/2021",
+   "ends": "16/01/2025",
+   "fact": "Ontex Healthcare (UK) Ltd, £9,000,000, 17/01/2022 to 16/01/2025.",
+   "use": "History of who held the contract.",
+   "names": [
+    "Ontex"
+   ],
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/39dd32c6-d43e-492a-8a74-8a9b1f51869c",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-calderdale",
+   "group": "local",
+   "kind": "Contract award",
+   "nation": "England",
+   "org": "Calderdale & Huddersfield Solutions",
+   "title": "Continence products and managed home delivery (historical)",
+   "date": "04/04/2023",
+   "ends": "30/09/2023",
+   "fact": "Paul Hartmann Ltd, £225,000, 01/04/2023 to 30/09/2023.",
+   "quote": "Supply of continence products in the community and a managed delivery service to homes and care homes",
+   "use": "History of who held the contract.",
+   "names": [
+    "Paul Hartmann"
+   ],
+   "url": "https://www.contractsfinder.service.gov.uk/Notice/854a6418-e124-40e8-8c66-db7bb5ea5991",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-nss",
+   "group": "nations",
+   "kind": "National contract",
+   "nation": "Scotland",
+   "org": "NHS National Services Scotland",
+   "title": "NP571/22 Supply and Delivery of Continence Products",
+   "date": "08/02/2024 (notice); signed 12/06/2023",
+   "ends": "Not stated in the notice",
+   "fact": "Lot 1 continence products and Lot 2 washable garments both awarded to Ontex Healthcare UK Ltd, £15.2m per lot. The previous contract, NP571/17, was held by Paul Hartmann Ltd, Ontex and SCA Hygiene (now Essity).",
+   "quote": "based on prescription data received via the Community Continence Nursing Service",
+   "use": "Scotland is a single-supplier national contract: one award decides the whole country.",
+   "names": [
+    "Ontex",
+    "Paul Hartmann",
+    "Essity"
+   ],
+   "url": "https://www.find-tender.service.gov.uk/Notice/004147-2024",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-wales",
+   "group": "nations",
+   "kind": "Direct award",
+   "nation": "Wales",
+   "org": "NHS Wales (Hywel Dda UHB board paper)",
+   "title": "All Wales continence products contract",
+   "date": "31/07/2025",
+   "ends": "31/05/2026 (long-term award not verified)",
+   "fact": "The All Wales contract expired 31/05/2025. A 12-month direct award went to Ontex Healthcare UK Ltd on the HealthTrust Europe framework, 01/06/2025 to 31/05/2026, while a mini-competition ran for the long-term requirement. Hywel Dda's share is £988,043.42 ex VAT a year. The paper puts raw material cost increases at about 3.4%.",
+   "use": "Wales buys nationally too. Who won from June 2026 is not verified; a Sell2Wales award notice would settle it.",
+   "names": [
+    "Ontex"
+   ],
+   "url": "https://hduhb.nhs.wales/about-us/your-health-board/board-meetings-2025/board-agenda-and-papers-31-july-2025/board-agenda-and-papers-31-july-2025/21-1-procurement-report-pdf/",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-whc",
+   "group": "policy",
+   "kind": "National policy",
+   "nation": "Wales",
+   "org": "Welsh Government",
+   "title": "WHC/2022/003 Adult continence products",
+   "date": "31/10/2022",
+   "fact": "Welsh Health Circular setting the all-Wales approach to adult continence product provision.",
+   "quote": "should not normally need to exceed 4 in 24",
+   "use": "The rationing rule a rep meets in every Welsh health board.",
+   "url": "https://www.gov.wales/adult-continence-products-whc2022003",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-hse",
+   "group": "nations",
+   "kind": "Patient route and tender",
+   "nation": "Ireland",
+   "org": "HSE",
+   "title": "Incontinence products: free after public health nurse assessment",
+   "fact": "HSE supplies incontinence products free of charge after assessment by the patient's public health nurse. The national storage and distribution tender (HSE 23739, €25m estimate, 2024) is on eTenders; who won it is not verified.",
+   "use": "The Republic of Ireland route is PHN-assessed, not prescribed.",
+   "url": "https://www2.hse.ie/conditions/urinary-incontinence/incontinence-products/",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-bradford",
+   "group": "policy",
+   "kind": "Service consultation",
+   "nation": "England",
+   "org": "Bradford District Care NHS FT",
+   "title": "Continence pads provision consultation",
+   "date": "25/09/2025",
+   "ends": "Final decision not verified",
+   "fact": "Spend on continence pads was about £2.1m against a budget of about £1.3m. Proposals: stop supplying lower-absorbency pads such as TENA Comfort Mini Super, move to a 16-week delivery cycle, and cut four pads to three per 24 hours.",
+   "quote": "readily available online and in a variety of stores",
+   "use": "Primary evidence that NHS rationing is pushing light incontinence into private pay.",
+   "names": [
+    "Essity"
+   ],
+   "url": "https://www.bdct.nhs.uk/continence-pads-provision/",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-lscft",
+   "group": "local",
+   "kind": "Service page",
+   "nation": "England",
+   "org": "Lancashire & South Cumbria NHS FT",
+   "title": "Containment product home delivery service",
+   "fact": "Names TENA as the product brand and NHS Supply Chain as the distributor, on a 20-week delivery cycle.",
+   "quote": "NHS Supply Chain are the distributor",
+   "use": "A trust using the NHS Supply Chain home-delivery route rather than a SBS contract.",
+   "names": [
+    "Essity"
+   ],
+   "url": "https://www.lscft.nhs.uk/our-services/service-finder-z/continence-service/containment-product-home-delivery-service",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-bsmhft",
+   "group": "local",
+   "kind": "Formulary (FOI release)",
+   "nation": "England",
+   "org": "Birmingham & Solihull Mental Health NHS FT",
+   "title": "Continence Resource Folder, July 2024",
+   "date": "July 2024",
+   "fact": "Inpatient pad formulary of TENA (Comfort, Flex, Pants, Men) and Attends Stretch Pants, with NHS order codes and a working price per piece, e.g. TENA Comfort Normal CFP2146 at 11p and Attends Stretch Pants Medium CFP1563 at 29p. Prices are July 2024 and not necessarily today's.",
+   "use": "A published per-piece reference price on the ward route.",
+   "names": [
+    "Essity",
+    "Attends"
+   ],
+   "url": "https://www.bsmhft.nhs.uk/wp-content/uploads/2025/01/FOI-0294_2024-Continence-Resource.pdf",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-tayside",
+   "group": "nations",
+   "kind": "Formulary",
+   "nation": "Scotland",
+   "org": "NHS Tayside",
+   "title": "Continence Product Formulary: Adult Community",
+   "date": "24/04/2024 (file date)",
+   "fact": "Lists iD (Ontex) products only, consistent with the single-supplier national contract.",
+   "names": [
+    "Ontex"
+   ],
+   "url": "https://www.nhstaysideadtc.scot.nhs.uk/Continence%20Formulary/Continence%20Product%20Formulary%20-%20Adult%20Community%20Formulary.pdf",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  },
+  {
+   "id": "cont-qs77",
+   "group": "policy",
+   "kind": "NICE quality standard",
+   "nation": "England",
+   "org": "NICE",
+   "title": "QS77 Urinary incontinence in women",
+   "date": "Updated 09/12/2021",
+   "fact": "Statement 3: containment products only as a temporary coping strategy, or as long-term management if treatment is unsuccessful.",
+   "quote": "only offered containment products as a temporary coping strategy",
+   "use": "The national basis behind local rationing.",
+   "url": "https://www.nice.org.uk/guidance/qs77",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "unreachable",
+    "http": 500
+   }
+  },
+  {
+   "id": "cont-qs54",
+   "group": "policy",
+   "kind": "NICE quality standard",
+   "nation": "England",
+   "org": "NICE",
+   "title": "QS54 Faecal incontinence in adults",
+   "date": "06/02/2014",
+   "fact": "Statement 3: adults are offered a choice of appropriate products for as long as they experience episodes.",
+   "quote": "a choice of appropriate products",
+   "use": "A counter-argument to single-brand pad contracts.",
+   "url": "https://www.nice.org.uk/guidance/qs54",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "unreachable",
+    "http": 500
+   }
+  },
+  {
+   "id": "cont-ons",
+   "group": "policy",
+   "kind": "Official statistics",
+   "nation": "England",
+   "org": "Office for National Statistics",
+   "title": "Care homes and estimating the self-funding population, 2022 to 2023",
+   "date": "06/07/2023",
+   "fact": "About 137,480 care home residents (37.0%) were self-funders.",
+   "quote": "approximately, 137,480 (37.0%) of care home residents were classified as self-funders",
+   "use": "The only official private-pay care home indicator found.",
+   "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/socialcare/articles/carehomesandestimatingtheselffundingpopulationengland/2022to2023",
+   "verifiedOn": "2026-09-28",
+   "lastCheck": {
+    "date": "2026-09-28",
+    "status": "ok",
+    "http": 200
+   }
+  }
+ ],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
  }
 }

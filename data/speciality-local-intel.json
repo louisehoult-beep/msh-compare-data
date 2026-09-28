@@ -1,0 +1,870 @@
+{
+ "_notice": {
+  "owner": "Elevate and Thrive Ltd, company number 17154474, England and Wales",
+  "copyright": "© Elevate and Thrive Ltd 2026. All rights reserved.",
+  "databaseRight": "Database right asserted. Elevate and Thrive Ltd has made, and continues to make, substantial investment in obtaining, verifying and presenting these records.",
+  "published": "Published solely to serve the Medical Sales Intelligence Hub. Public accessibility of this file is a technical consequence of how the Hub loads it and is not a licence to use it.",
+  "prohibited": "Extraction or re-utilisation of all or a substantial part of this dataset; repeated or systematic extraction of insubstantial parts; redistribution, resale or syndication; use as training, fine-tuning, evaluation or retrieval data for any AI or machine-learning system; and use to design, build, populate, benchmark, launch, operate or improve any competing product or service.",
+  "terms": "https://medsalesintelligencehub.co.uk/terms/",
+  "traceability": "This file carries identifying characteristics that establish the origin of any copy. They must not be detected, altered, stripped or defeated.",
+  "ref": "ETH-D4E13C0A6",
+  "contact": "contact@elevateandthrive.uk"
+ },
+ "note": "Local contracts, formularies, national and devolved routes and policy for each speciality, curated by hand from primary sources. HUMAN-CURATED: automation may only update lastCheck. Every item was read at its source on verifiedOn; `fact` states only what the source says, `quote` is copied from it, and anything the source does not settle says 'not verified'. scripts/check_speciality_local_intel.py re-checks every URL and records lastCheck; an item whose source is gone (404/410) is hidden by the renderer until it is re-sourced or removed. build_speciality_panels.py copies each speciality's list into its panel.",
+ "groups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ },
+ "specialities": {
+  "continence-bladder-and-bowel": [
+   {
+    "id": "cont-nhssc-lots",
+    "group": "routes",
+    "kind": "Framework award",
+    "nation": "England",
+    "org": "NHS Supply Chain (SCCL)",
+    "title": "Disposable and Washable Continence Care: suppliers by lot",
+    "date": "16/03/2026",
+    "ends": "23/08/2028 (max 23/08/2030)",
+    "fact": "Four lots. Lot 1 pants and shaped pads: Abena, Attends, Essity, Forma-Care, Healthcare 25, Paul Hartmann, Ontex. Lot 2 other disposables: the Lot 1 seven plus Meditrade UK and Sharon Services. Lot 3 washables: Abena, Attends, Essity, Forma-Care, GBUK, iMEDicare, P&S Healthcare, Sharon Services. Lot 4 sensor technology: Abena and Ontex only. £335m ex VAT. Bids received per lot: 9, 14, 9 and 2.",
+    "use": "Which lots each competitor can sell on. This settles the launch brief's own four-versus-seven lot contradiction: the award record has four.",
+    "names": [
+     "Abena",
+     "Attends",
+     "Essity",
+     "Forma-Care",
+     "Healthcare 25",
+     "Paul Hartmann",
+     "Ontex",
+     "Meditrade UK",
+     "Sharon Services",
+     "GBUK",
+     "iMEDicare",
+     "P&S Healthcare"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/031173-2026",
+    "checkUrl": "https://www.find-tender.service.gov.uk/api/1.0/ocdsRecordPackages/ocds-h6vhtk-051dd5",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-sbs10525",
+    "group": "routes",
+    "kind": "Framework tender",
+    "nation": "England",
+    "org": "NHS Shared Business Services",
+    "title": "SBS10525 (successor to SBS10015): Lot 5 continence products home delivery",
+    "date": "03/03/2026 (update)",
+    "ends": "Award est. 11/11/2026; framework 04/01/2027 to 03/01/2031",
+    "fact": "Lot 5 is 'Continence Products Home Delivery Service' (5a adult/bariatric, 5b paediatric). Estimated framework value £500m ex VAT across all lots. Tender closed 27/03/2026. SBS10015, the route almost every current England home-delivery award uses, expires 31/12/2026.",
+    "use": "Decides which suppliers trusts and ICBs can directly award home-delivery contracts to from 2027.",
+    "url": "https://www.find-tender.service.gov.uk/Notice/010151-2026",
+    "checkUrl": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/010151-2026",
+    "verifiedOn": "2026-09-28",
+    "names": [],
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-hte",
+    "group": "routes",
+    "kind": "Framework award",
+    "nation": "UK",
+    "org": "HealthTrust Europe",
+    "title": "Continence Goods and Services 2024",
+    "date": "20/03/2025",
+    "ends": "Four-year framework from 01/03/2025",
+    "fact": "£100m total, £20m per lot. Lot 1 bulk: Abena, Critical Healthcare, iMEDicare, Medline, Essity, Vernacare, Ontex. Lot 2 home delivery: iMEDicare, Abena, Essity, Ontex.",
+    "use": "The second national route besides NHS SBS. NHS Wales used it for its 2025/26 direct award.",
+    "names": [
+     "Abena",
+     "Critical Healthcare",
+     "iMEDicare",
+     "Medline",
+     "Essity",
+     "Vernacare",
+     "Ontex"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/010389-2025",
+    "checkUrl": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/010389-2025",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-cpft",
+    "group": "local",
+    "kind": "Contract award",
+    "nation": "England",
+    "org": "Cambridgeshire & Peterborough NHS FT",
+    "title": "Continence and home delivery (via SBS10015)",
+    "date": "19/08/2026",
+    "ends": "06/07/2029",
+    "fact": "Awarded to Essity UK Ltd, £13,805,136, 06/07/2026 to 06/07/2029.",
+    "quote": "ESSITY Continence and Home Delivery - SBS10015",
+    "use": "Incumbent and end date: when this contract comes back round.",
+    "names": [
+     "Essity"
+    ],
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/8168996b-342a-4248-bab7-b89dcb3ecd42",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-cddft",
+    "group": "local",
+    "kind": "Contract award",
+    "nation": "England",
+    "org": "County Durham & Darlington NHS FT",
+    "title": "Continence home delivery (SBS framework further competition, Lot 2)",
+    "date": "12/09/2025",
+    "ends": "20/08/2027 (+24 months option)",
+    "fact": "Awarded to Essity, £4,318,828.03, 21/08/2025 to 20/08/2027.",
+    "quote": "further competition utilising Shared Business Services Framework … Lot 2 Continence Home Delivery Provision",
+    "use": "Incumbent and end date.",
+    "names": [
+     "Essity"
+    ],
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/46489f7f-d659-4052-bcff-44286730e207",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-sussex",
+    "group": "local",
+    "kind": "Contract award",
+    "nation": "England",
+    "org": "Sussex Community NHS FT",
+    "title": "Continence products and home delivery",
+    "date": "12/12/2024",
+    "ends": "30/11/2026",
+    "fact": "Awarded to Essity UK Ltd, £5,756,406, 01/12/2023 to 30/11/2026.",
+    "use": "Ends within months: watch for the re-procurement notice.",
+    "names": [
+     "Essity"
+    ],
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/ecf72dc0-41cb-4c0e-a39f-4640130c8cdb",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-rdash",
+    "group": "local",
+    "kind": "Direct award",
+    "nation": "England",
+    "org": "Rotherham Doncaster & South Humber NHS FT (RDaSH)",
+    "title": "Continence home delivery, direct award on SBS framework",
+    "date": "28/05/2025",
+    "ends": "31/05/2027",
+    "fact": "Essity UK Ltd, £1,873,044.76 ex VAT, 01/06/2025 to 31/05/2027.",
+    "quote": "Risk to patients changing the products they use",
+    "use": "The switching risk the trust itself names: the objection a challenger has to answer.",
+    "names": [
+     "Essity"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/028000-2025",
+    "checkUrl": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/028000-2025",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-ncumbria",
+    "group": "local",
+    "kind": "Contract extension (VEAT)",
+    "nation": "England",
+    "org": "North Cumbria Integrated Care NHS FT",
+    "title": "Continence products: Abena contract extended ahead of a joint mini-competition",
+    "date": "08/09/2025",
+    "ends": "30/04/2026",
+    "fact": "Originally awarded to Abena UK Limited in December 2017, extended to 30/04/2026 (£607,547 ex VAT). A joint procurement with the South Cumbria and Lancashire Provider Collaborative Board, by mini-competition on SBS10015, was planned for Q1 2026/27. Its outcome is not verified.",
+    "use": "A live or just-closed opportunity in the North West.",
+    "names": [
+     "Abena"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/054489-2025",
+    "checkUrl": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/054489-2025",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-solent",
+    "group": "local",
+    "kind": "Contract award",
+    "nation": "England",
+    "org": "Solent NHS Trust",
+    "title": "Continence products (historical)",
+    "date": "14/02/2024",
+    "ends": "31/10/2024",
+    "fact": "Essity UK Ltd, £1,851,091, 01/11/2023 to 31/10/2024.",
+    "use": "History of who held the contract.",
+    "names": [
+     "Essity"
+    ],
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/03f4f934-90a4-443f-8e5c-2308917b1098",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-southern",
+    "group": "local",
+    "kind": "Contract award",
+    "nation": "England",
+    "org": "Southern Health NHS FT",
+    "title": "Continence products (historical)",
+    "date": "06/12/2021",
+    "ends": "16/01/2025",
+    "fact": "Ontex Healthcare (UK) Ltd, £9,000,000, 17/01/2022 to 16/01/2025.",
+    "use": "History of who held the contract.",
+    "names": [
+     "Ontex"
+    ],
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/39dd32c6-d43e-492a-8a74-8a9b1f51869c",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-calderdale",
+    "group": "local",
+    "kind": "Contract award",
+    "nation": "England",
+    "org": "Calderdale & Huddersfield Solutions",
+    "title": "Continence products and managed home delivery (historical)",
+    "date": "04/04/2023",
+    "ends": "30/09/2023",
+    "fact": "Paul Hartmann Ltd, £225,000, 01/04/2023 to 30/09/2023.",
+    "quote": "Supply of continence products in the community and a managed delivery service to homes and care homes",
+    "use": "History of who held the contract.",
+    "names": [
+     "Paul Hartmann"
+    ],
+    "url": "https://www.contractsfinder.service.gov.uk/Notice/854a6418-e124-40e8-8c66-db7bb5ea5991",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-nss",
+    "group": "nations",
+    "kind": "National contract",
+    "nation": "Scotland",
+    "org": "NHS National Services Scotland",
+    "title": "NP571/22 Supply and Delivery of Continence Products",
+    "date": "08/02/2024 (notice); signed 12/06/2023",
+    "ends": "Not stated in the notice",
+    "fact": "Lot 1 continence products and Lot 2 washable garments both awarded to Ontex Healthcare UK Ltd, £15.2m per lot. The previous contract, NP571/17, was held by Paul Hartmann Ltd, Ontex and SCA Hygiene (now Essity).",
+    "quote": "based on prescription data received via the Community Continence Nursing Service",
+    "use": "Scotland is a single-supplier national contract: one award decides the whole country.",
+    "names": [
+     "Ontex",
+     "Paul Hartmann",
+     "Essity"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/004147-2024",
+    "checkUrl": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/004147-2024",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-wales",
+    "group": "nations",
+    "kind": "Direct award",
+    "nation": "Wales",
+    "org": "NHS Wales (Hywel Dda UHB board paper)",
+    "title": "All Wales continence products contract",
+    "date": "31/07/2025",
+    "ends": "31/05/2026 (long-term award not verified)",
+    "fact": "The All Wales contract expired 31/05/2025. A 12-month direct award went to Ontex Healthcare UK Ltd on the HealthTrust Europe framework, 01/06/2025 to 31/05/2026, while a mini-competition ran for the long-term requirement. Hywel Dda's share is £988,043.42 ex VAT a year. The paper puts raw material cost increases at about 3.4%.",
+    "use": "Wales buys nationally too. Who won from June 2026 is not verified; a Sell2Wales award notice would settle it.",
+    "names": [
+     "Ontex"
+    ],
+    "url": "https://hduhb.nhs.wales/about-us/your-health-board/board-meetings-2025/board-agenda-and-papers-31-july-2025/board-agenda-and-papers-31-july-2025/21-1-procurement-report-pdf/",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-whc",
+    "group": "policy",
+    "kind": "National policy",
+    "nation": "Wales",
+    "org": "Welsh Government",
+    "title": "WHC/2022/003 Adult continence products",
+    "date": "31/10/2022",
+    "ends": "",
+    "fact": "Welsh Health Circular setting the all-Wales approach to adult continence product provision.",
+    "quote": "should not normally need to exceed 4 in 24",
+    "use": "The rationing rule a rep meets in every Welsh health board.",
+    "url": "https://www.gov.wales/adult-continence-products-whc2022003",
+    "verifiedOn": "2026-09-28",
+    "names": [],
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-hse",
+    "group": "nations",
+    "kind": "Patient route and tender",
+    "nation": "Ireland",
+    "org": "HSE",
+    "title": "Incontinence products: free after public health nurse assessment",
+    "date": "",
+    "ends": "",
+    "fact": "HSE supplies incontinence products free of charge after assessment by the patient's public health nurse. The national storage and distribution tender (HSE 23739, €25m estimate, 2024) is on eTenders; who won it is not verified.",
+    "use": "The Republic of Ireland route is PHN-assessed, not prescribed.",
+    "url": "https://www2.hse.ie/conditions/urinary-incontinence/incontinence-products/",
+    "verifiedOn": "2026-09-28",
+    "names": [],
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-bradford",
+    "group": "policy",
+    "kind": "Service consultation",
+    "nation": "England",
+    "org": "Bradford District Care NHS FT",
+    "title": "Continence pads provision consultation",
+    "date": "25/09/2025",
+    "ends": "Final decision not verified",
+    "fact": "Spend on continence pads was about £2.1m against a budget of about £1.3m. Proposals: stop supplying lower-absorbency pads such as TENA Comfort Mini Super, move to a 16-week delivery cycle, and cut four pads to three per 24 hours.",
+    "quote": "readily available online and in a variety of stores",
+    "use": "Primary evidence that NHS rationing is pushing light incontinence into private pay.",
+    "names": [
+     "Essity"
+    ],
+    "url": "https://www.bdct.nhs.uk/continence-pads-provision/",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-lscft",
+    "group": "local",
+    "kind": "Service page",
+    "nation": "England",
+    "org": "Lancashire & South Cumbria NHS FT",
+    "title": "Containment product home delivery service",
+    "date": "",
+    "ends": "",
+    "fact": "Names TENA as the product brand and NHS Supply Chain as the distributor, on a 20-week delivery cycle.",
+    "quote": "NHS Supply Chain are the distributor",
+    "use": "A trust using the NHS Supply Chain home-delivery route rather than a SBS contract.",
+    "names": [
+     "Essity"
+    ],
+    "url": "https://www.lscft.nhs.uk/our-services/service-finder-z/continence-service/containment-product-home-delivery-service",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-bsmhft",
+    "group": "local",
+    "kind": "Formulary (FOI release)",
+    "nation": "England",
+    "org": "Birmingham & Solihull Mental Health NHS FT",
+    "title": "Continence Resource Folder, July 2024",
+    "date": "July 2024",
+    "ends": "",
+    "fact": "Inpatient pad formulary of TENA (Comfort, Flex, Pants, Men) and Attends Stretch Pants, with NHS order codes and a working price per piece, e.g. TENA Comfort Normal CFP2146 at 11p and Attends Stretch Pants Medium CFP1563 at 29p. Prices are July 2024 and not necessarily today's.",
+    "use": "A published per-piece reference price on the ward route.",
+    "names": [
+     "Essity",
+     "Attends"
+    ],
+    "url": "https://www.bsmhft.nhs.uk/wp-content/uploads/2025/01/FOI-0294_2024-Continence-Resource.pdf",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-tayside",
+    "group": "nations",
+    "kind": "Formulary",
+    "nation": "Scotland",
+    "org": "NHS Tayside",
+    "title": "Continence Product Formulary: Adult Community",
+    "date": "24/04/2024 (file date)",
+    "ends": "",
+    "fact": "Lists iD (Ontex) products only, consistent with the single-supplier national contract.",
+    "names": [
+     "Ontex"
+    ],
+    "url": "https://www.nhstaysideadtc.scot.nhs.uk/Continence%20Formulary/Continence%20Product%20Formulary%20-%20Adult%20Community%20Formulary.pdf",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "cont-qs77",
+    "group": "policy",
+    "kind": "NICE quality standard",
+    "nation": "England",
+    "org": "NICE",
+    "title": "QS77 Urinary incontinence in women",
+    "date": "Updated 09/12/2021",
+    "ends": "",
+    "fact": "Statement 3: containment products only as a temporary coping strategy, or as long-term management if treatment is unsuccessful.",
+    "quote": "only offered containment products as a temporary coping strategy",
+    "use": "The national basis behind local rationing.",
+    "url": "https://www.nice.org.uk/guidance/qs77",
+    "verifiedOn": "2026-09-28",
+    "names": [],
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "unreachable",
+     "http": 500
+    }
+   },
+   {
+    "id": "cont-qs54",
+    "group": "policy",
+    "kind": "NICE quality standard",
+    "nation": "England",
+    "org": "NICE",
+    "title": "QS54 Faecal incontinence in adults",
+    "date": "06/02/2014",
+    "ends": "",
+    "fact": "Statement 3: adults are offered a choice of appropriate products for as long as they experience episodes.",
+    "quote": "a choice of appropriate products",
+    "use": "A counter-argument to single-brand pad contracts.",
+    "url": "https://www.nice.org.uk/guidance/qs54",
+    "verifiedOn": "2026-09-28",
+    "names": [],
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "unreachable",
+     "http": 500
+    }
+   },
+   {
+    "id": "cont-ons",
+    "group": "policy",
+    "kind": "Official statistics",
+    "nation": "England",
+    "org": "Office for National Statistics",
+    "title": "Care homes and estimating the self-funding population, 2022 to 2023",
+    "date": "06/07/2023",
+    "ends": "",
+    "fact": "About 137,480 care home residents (37.0%) were self-funders.",
+    "quote": "approximately, 137,480 (37.0%) of care home residents were classified as self-funders",
+    "use": "The only official private-pay care home indicator found.",
+    "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/healthandsocialcare/socialcare/articles/carehomesandestimatingtheselffundingpopulationengland/2022to2023",
+    "verifiedOn": "2026-09-28",
+    "names": [],
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   }
+  ],
+  "tissue-viability-and-wound-care": [
+   {
+    "id": "wc-glos",
+    "group": "formulary",
+    "kind": "Formulary",
+    "nation": "England",
+    "org": "Gloucestershire (ICB joint formulary)",
+    "title": "Wound Care Management Joint Formulary 2025",
+    "date": "April 2025 (change log to 18/12/2025)",
+    "ends": "Annual relaunch",
+    "fact": "The change log records Zetuvit and Eclypse removed and replaced with ConvaMax. HydroClean Advance and Atrauman remain listed.",
+    "quote": "Removal of Zetuvits and Eclypse dressings to be replaced with Convamax",
+    "use": "A named formulary switch between competitors.",
+    "names": [
+     "Paul Hartmann",
+     "Convatec"
+    ],
+    "url": "https://www.gloshospitals.nhs.uk/documents/11910/Gloucestershire_Wound_Care_Management_Joint_Formulary_2025.pdf",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-oxford",
+    "group": "formulary",
+    "kind": "Formulary",
+    "nation": "England",
+    "org": "Oxford Health NHS FT",
+    "title": "Wound Care Formulary, September 2025",
+    "date": "August 2025 edition",
+    "ends": "About every six months",
+    "fact": "Lists RespoSorb Silicone Border in seven sizes with NHS Supply Chain codes (e.g. EJA254), Atrauman and Cosmopor. Under compression it names Kliniderm Superabsorbent and RespoSorb Silicone Border.",
+    "quote": "This August 2025 edition replaces the previous February",
+    "use": "Which brands are on formulary, with order codes.",
+    "names": [
+     "Paul Hartmann",
+     "Mediq"
+    ],
+    "url": "https://oxfordhealth.nhs.uk/wp-content/uploads/sites/51/2025/09/FINAL-Wound-Care-Formulary-September-2025.pdf",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-oxford-ouh",
+    "group": "formulary",
+    "kind": "Formulary comparison",
+    "nation": "England",
+    "org": "Oxford Health NHS FT and Oxford University Hospitals",
+    "title": "Wound Formulary Comparison Guidance V2, November 2025",
+    "date": "November 2025",
+    "ends": "",
+    "fact": "Maps community products to their acute equivalents, e.g. community Kliniderm Foam Silicone Border against acute RespoSorb Silicone Border. Zetuvit Plus, Atrauman and Cosmopor E also appear.",
+    "use": "Shows where a patient's dressing changes between hospital and community in one ICB.",
+    "names": [
+     "Paul Hartmann",
+     "Mediq"
+    ],
+    "url": "https://oxfordhealth.nhs.uk/wp-content/uploads/sites/51/2026/04/OHFT-OUH-Wound-Formulary-Comparison-Guidance-V2Nov25.pdf",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-kent",
+    "group": "formulary",
+    "kind": "Formulary",
+    "nation": "England",
+    "org": "Kent & Medway primary care",
+    "title": "Wound Care Formulary by setting (webinar pack, July 2025)",
+    "date": "July 2025",
+    "ends": "Not stated",
+    "fact": "Split by setting (GP, community nursing, care homes, tissue viability specialists). Zetuvit E is the basic absorbent in all four; RespoSorb Silicone and Zetuvit Plus appear in the tissue viability specialist column. HydroClean Advance, Atrauman and Cosmopor E are listed.",
+    "use": "Shows which products are specialist-gated.",
+    "names": [
+     "Paul Hartmann"
+    ],
+    "url": "https://kmpctraininghub.nhs.uk/wp-content/uploads/2025/07/dressing-webinars.pdf",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-cornwall",
+    "group": "formulary",
+    "kind": "Formulary",
+    "nation": "England",
+    "org": "Cornwall community",
+    "title": "Community Dressing Formulary 2025 V3",
+    "date": "October 2025",
+    "ends": "Review 2027",
+    "fact": "Lists RespoSorb Silicone (and Border), Zetuvit, Zetuvit Plus Silicone, Atrauman Ag, Cosmopor E and HydroClean.",
+    "quote": "Approved by Tissue Viability October 2025 – Review 2027",
+    "names": [
+     "Paul Hartmann"
+    ],
+    "url": "https://www.eclipsesolutions.org/UploadedFiles/918_Community%20wound%20care%20formualry%202025%20V3.pdf",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-forth",
+    "group": "formulary",
+    "kind": "Formulary",
+    "nation": "Scotland",
+    "org": "NHS Forth Valley",
+    "title": "Wound Management Formulary V6.1",
+    "date": "03/07/2025",
+    "ends": "Review 30/10/2026",
+    "fact": "Lists HydroClean Advance debridement dressing and Atrauman (HARTMANN) with PIP codes. Kliniderm is named throughout.",
+    "quote": "Current Issue Date 03/07/2025",
+    "use": "Review due within weeks: the moment to be in front of the formulary group.",
+    "names": [
+     "Paul Hartmann",
+     "Mediq"
+    ],
+    "url": "https://nhsforthvalley.com/wp-content/uploads/2024/12/Wound-Management-Formulary.pdf",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-grampian",
+    "group": "formulary",
+    "kind": "Formulary",
+    "nation": "Scotland",
+    "org": "NHS Grampian",
+    "title": "Joint Wound Care Formulary",
+    "date": "August 2026",
+    "ends": "Review August 2027",
+    "fact": "Atrauman is the only HARTMANN line. The superabsorbent is KerraMax Care.",
+    "names": [
+     "Paul Hartmann"
+    ],
+    "url": "https://www.nhsgrampian.org/globalassets/foidocument/foi-public-documents1---all-documents/wcf_qrg.pdf",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-highland",
+    "group": "formulary",
+    "kind": "Formulary",
+    "nation": "Scotland",
+    "org": "NHS Highland",
+    "title": "Wound Management Guidelines and Formulary v2.7",
+    "date": "12/02/2026",
+    "ends": "",
+    "fact": "Names Kliniderm Super Absorbent as first-line choice. No HARTMANN product named.",
+    "quote": "Kliniderm Super Absorbent",
+    "names": [
+     "Mediq"
+    ],
+    "url": "https://www.rightdecisions.scot.nhs.uk/tam-treatments-and-medicines-nhs-highland/formularies/ancillary-formularies/wound-management-guidelines-and-formulary-formularies/",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-sbs10518",
+    "group": "routes",
+    "kind": "Planned procurement",
+    "nation": "England",
+    "org": "NHS Shared Business Services with NHS Supply Chain",
+    "title": "SBS10518 Distribution of Advanced Wound Care",
+    "date": "25/11/2025",
+    "ends": "Planned 04/01/2027 to 03/01/2031",
+    "fact": "A joint NHS SBS and NHS Supply Chain procurement renewing part of the Advanced Wound Care and Lymphoedema agreement (SBS10142). £91,000,000 ex VAT. Tender period ended 24/04/2026. Award not yet verified.",
+    "quote": "This is a renewal of part of an existing NHS SBS agreement",
+    "use": "Decides how advanced wound care products reach community settings from 2027.",
+    "url": "https://www.find-tender.service.gov.uk/Notice/076843-2025",
+    "checkUrl": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/076843-2025",
+    "verifiedOn": "2026-09-28",
+    "names": [],
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-sbs10142-mod",
+    "group": "routes",
+    "kind": "Framework modification",
+    "nation": "England",
+    "org": "NHS Shared Business Services",
+    "title": "SBS10142 Advanced Wound Care and Lymphoedema: extension",
+    "date": "15/05/2025",
+    "ends": "01/08/2026 per this notice; NHS SBS's own page says 01/08/2027",
+    "fact": "A 12-month extension on existing terms to 01/08/2026, while NHS SBS collaborates with other framework hosts on the next generation of the agreement. No Find a Tender notice for a further year to 2027 was found.",
+    "quote": "a 12 month extension on existing terms, bringing the end date to 1 August 2026",
+    "use": "Why the SBS renewal is late, and why the end date needs checking before quoting.",
+    "url": "https://www.find-tender.service.gov.uk/Notice/021963-2025",
+    "checkUrl": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/021963-2025",
+    "verifiedOn": "2026-09-28",
+    "names": [],
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-nhssc-award",
+    "group": "routes",
+    "kind": "Framework award",
+    "nation": "England",
+    "org": "NHS Supply Chain (SCCL)",
+    "title": "Advanced Wound Care award",
+    "date": "08/07/2025",
+    "ends": "31/08/2027",
+    "fact": "Two lots: 30 suppliers on Lot 1 and 56 on Lot 2, which is 59 distinct names. Absorbest, Advanced Medical Solutions and GBUK appear only in Lot 1. Paul Hartmann Ltd is awarded. The launch brief states 56 suppliers, which does not reconcile with the 59 distinct names on this award notice.",
+    "use": "Reconciles the supplier count: 59 distinct companies across both lots.",
+    "names": [
+     "Paul Hartmann",
+     "Advanced Medical Solutions",
+     "GBUK"
+    ],
+    "url": "https://www.find-tender.service.gov.uk/Notice/038124-2025",
+    "checkUrl": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/038124-2025",
+    "verifiedOn": "2026-09-28",
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-belfast",
+    "group": "nations",
+    "kind": "Tender",
+    "nation": "Northern Ireland",
+    "org": "Belfast HSC Trust",
+    "title": "Surgical Dressings",
+    "date": "12/12/2025",
+    "ends": "Existing framework extended to 31/07/2026",
+    "fact": "£56.1m ex VAT across 11 lots, e.g. Securement & Dressings £14,584,364 and single-use NPWT systems £6,977,241. Who won is not verified.",
+    "use": "Northern Ireland market size by lot.",
+    "url": "https://www.find-tender.service.gov.uk/Notice/082441-2025",
+    "checkUrl": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/082441-2025",
+    "verifiedOn": "2026-09-28",
+    "names": [],
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-wales",
+    "group": "nations",
+    "kind": "Tender",
+    "nation": "Wales",
+    "org": "NHS Wales Shared Services Partnership",
+    "title": "Wound Management framework",
+    "date": "04/10/2024",
+    "ends": "",
+    "fact": "£28,339,827 estimated, with lots including alginates, hydrogels, hydrocolloids and absorbent fibre. No award notice found on Find a Tender; winners not verified.",
+    "use": "The all-Wales route for dressings.",
+    "url": "https://www.find-tender.service.gov.uk/Notice/031464-2024",
+    "checkUrl": "https://www.find-tender.service.gov.uk/api/1.0/ocdsReleasePackages/031464-2024",
+    "verifiedOn": "2026-09-28",
+    "names": [],
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-wave2",
+    "group": "data",
+    "kind": "Categorisation file",
+    "nation": "England",
+    "org": "NHSBSA",
+    "title": "Drug Tariff Part IX categorisation, Wave 2 (Wound and skin care) v2.0",
+    "date": "September 2026",
+    "ends": "Draft",
+    "fact": "Assigns every wound product to a cluster for the Wave 2 review, e.g. 'Superabsorbent dressing, with silicone wound contact layer, adhesive', 'Hydro-responsive dressing' and 'Low adherent silicone permeable wound contact layer'.",
+    "quote": "Newly added clusters are highlighted yellow",
+    "use": "Tells a supplier which cluster each product will be benchmarked in when Wave 2 renewals open.",
+    "url": "https://www.nhsbsa.nhs.uk/sites/default/files/2026-09/Part%20IX%20categorisation%20%28Wave%202%20Wound%20and%20skin%20care%29_v2.0.xlsx",
+    "verifiedOn": "2026-09-28",
+    "names": [],
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   },
+   {
+    "id": "wc-leeds",
+    "group": "data",
+    "kind": "Spend over £25k",
+    "nation": "England",
+    "org": "Leeds Teaching Hospitals NHS Trust",
+    "title": "Spend over £25,000, 2026 (January to August)",
+    "date": "Monthly",
+    "ends": "",
+    "fact": "Across 3,888 rows, 154 payments to NHS Supply Chain total about £72.5m (all categories). There is no Paul Hartmann payment at £25k or more, and one TJ Smith & Nephew line (£28,572.89, February 2026).",
+    "use": "Acute dressing spend flows through NHS Supply Chain, so trust spend files understate each manufacturer's acute share.",
+    "url": "https://www.leedsth.nhs.uk/about/information-governance/foi/publication-scheme/lists-and-registers/publication-of-spend-over-25000/spend-over-25000-2026/",
+    "verifiedOn": "2026-09-28",
+    "names": [],
+    "lastCheck": {
+     "date": "2026-09-28",
+     "status": "ok",
+     "http": 200
+    }
+   }
+  ]
+ }
+}
