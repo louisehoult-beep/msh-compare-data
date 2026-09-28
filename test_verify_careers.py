@@ -161,6 +161,29 @@ must_fail("a file with no stated scope is rejected",
            "suppliers": [variant()]},
           "states no scope")
 
+# 12. A ROLE FLAGGED UK WHOSE OWN LOCATION NAMES SOMEWHERE ELSE. Alcon's
+#     "Field Service Engineer- Long Island New York", location "Remote - New
+#     York", sat in the published file as uk=true from 01/09/2026. The collector's
+#     uk_flag() already read it as not-UK from 09/09/2026, but the row was never
+#     re-checked (the rotation was stuck) and the gate only asked whether `uk`
+#     was true, not whether the location allowed it to be. The gate now re-reads
+#     every role's own published location with the collector's uk_flag().
+must_fail("a uk=true role whose location names a non-UK place is rejected",
+          wrap([variant(name="Alcon Eye Care UK", domain="www.alcon.com",
+                        atsAccount="alcon", ukRoleCount=1, rolesRetrieved=1,
+                        commercialRoles=0, clinicalRoles=0,
+                        ukCountFrom="location strings published by the company",
+                        roles=[{"title": "Field Service Engineer- Long Island New York",
+                                "location": "Remote - New York", "uk": True}])]),
+          "names a place outside the UK")
+
+must_pass("a uk=true role with an unplaceable multi-site location still passes "
+          "(the source's own country filter placed it)",
+          wrap([variant(roles=[{"title": "Sales Representative", "location": "4 Locations",
+                                "uk": True},
+                               {"title": "Senior Supply Planner",
+                                "location": "Belfast, United Kingdom", "uk": True}])]))
+
 # 11. A NO-OP UNTIL THE FILE EXISTS.
 must_pass("an absent file is a no-op, not a failure", None)
 

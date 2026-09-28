@@ -112,6 +112,53 @@ check("the match is anchored, so a longer name does not slip through",
       bool(rc.UK_COUNTRY_RE.match("United Kingdom Overseas")), False)
 check("another country is not the UK", bool(rc.UK_COUNTRY_RE.match("Ireland")), False)
 
+# 7b. THE SOURCE'S COUNTRY FILTER DOES NOT OVERRIDE A LOCATION THAT NAMES
+#     SOMEWHERE ELSE. A role that Workday's UK facet returns is placed uk=True on
+#     the source's judgement, which is right for "4 Locations" (unplaceable by a
+#     string) but wrong for "Remote - New York", which the company itself says is
+#     not here. That role is dropped from the UK list and out of the UK total,
+#     and the number dropped is kept. Offline: Workday's API is replaced by a stub.
+import io
+import json as _json
+
+_WD_PAGES = {
+    "{}": {"total": 12, "facets": [{"facetParameter": "Location_Country", "values": [
+        {"descriptor": "United Kingdom", "id": "gb1", "count": 3},
+        {"descriptor": "United States of America", "id": "us1", "count": 9}]}],
+        "jobPostings": []},
+    "gb1": {"total": 3, "jobPostings": [
+        {"title": "Product Manager", "locationsText": "Watchmoor Park, United Kingdom",
+         "externalPath": "/job/a"},
+        {"title": "Account Manager", "locationsText": "4 Locations",
+         "externalPath": "/job/b"},
+        {"title": "Field Service Engineer- Long Island New York",
+         "locationsText": "Remote - New York", "externalPath": "/job/c"}]},
+}
+
+
+def _stub_urlopen(req, timeout=None):
+    body = _json.loads(req.data.decode())
+    ids = (body.get("appliedFacets") or {}).get("Location_Country") or []
+    doc = _WD_PAGES[ids[0] if ids else "{}"] if body.get("offset", 0) == 0 else {
+        "total": 0, "jobPostings": []}
+    return io.BytesIO(_json.dumps(doc).encode())
+
+
+_real_urlopen, _real_sleep = rc.urllib.request.urlopen, rc.time.sleep
+rc.urllib.request.urlopen, rc.time.sleep = _stub_urlopen, (lambda s: None)
+try:
+    wd = rc._workday("https://alcon.wd5.myworkdayjobs.com/careers_alcon")
+finally:
+    rc.urllib.request.urlopen, rc.time.sleep = _real_urlopen, _real_sleep
+check("a UK-facet role located 'Remote - New York' is not held as a UK role",
+      [r["location"] for r in wd["roles"]],
+      ["Watchmoor Park, United Kingdom", "4 Locations"])
+check("the UK total drops by the role the location places elsewhere",
+      wd["ukTotal"], 2)
+check("the number dropped is kept, so the doubt is visible",
+      wd.get("excludedNonUK"), 1)
+check("every role held is uk=True", all(r["uk"] is True for r in wd["roles"]), True)
+
 # 8. A PAGINATED SOURCE MUST NOT BE COUNTED BY WHERE THE LOOP STOPPED.
 #    Workday reports the real total on page 1 and 0 on every page after it.
 #    Re-reading it each page made the loop halt at 40, so Stryker — 1,184 open

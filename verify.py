@@ -5581,6 +5581,22 @@ def _careers_cores(name, domain):
     return core
 
 
+_CAREERS_COLLECTOR = None
+
+
+def _careers_uk_flag(loc):
+    """The collector's own uk_flag(), loaded once. One definition of a UK place."""
+    global _CAREERS_COLLECTOR
+    if _CAREERS_COLLECTOR is None:
+        import importlib.util
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "scripts", "refresh_supplier_careers.py")
+        spec = importlib.util.spec_from_file_location("_careers_collector", path)
+        _CAREERS_COLLECTOR = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(_CAREERS_COLLECTOR)
+    return _CAREERS_COLLECTOR.uk_flag(loc)
+
+
 def check_supplier_careers(doc):
     """A no-op until data/supplier-careers.json exists.
 
@@ -5749,6 +5765,18 @@ def check_supplier_careers(doc):
             if x.get("uk") is not True:
                 FAIL(C, "%s: role %r is held in a UK-only file with uk=%r."
                         % (who, x.get("title"), x.get("uk")))
+            # (k) ...AND ITS OWN LOCATION MUST ALLOW IT. Alcon's "Remote - New
+            #     York" role sat here as uk=true from 01/09/2026: the collector's
+            #     uk_flag() was fixed on 09/09 but the row was never re-checked,
+            #     and (h) only asks whether the flag is true. Re-read with the
+            #     collector's own uk_flag(), so the gate and the collector cannot
+            #     disagree about what a UK place is. An unplaceable location
+            #     ("4 Locations") is not refused: the source's country filter
+            #     placed it. Only a location naming somewhere else is.
+            elif _careers_uk_flag(x.get("location")) is False:
+                FAIL(C, "%s: role %r is flagged uk=true but its own published "
+                        "location %r names a place outside the UK."
+                        % (who, x.get("title"), x.get("location")))
 
 
 # --------------------------------------------------------------------------

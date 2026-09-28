@@ -102,6 +102,12 @@ socket.setdefaulttimeout(45)
 SEED = "data/supplier-seed.json"
 REPORT = "state/careers-report.json"
 OUT = "data/supplier-careers.json"
+# COMMITTED by the workflow, unlike REPORT. See "ROTATION STATE" below.
+ROTATION = "state/careers-rotation.json"
+# Every UK role key a check read, before the fetch cap trimmed `roles` and before
+# one-role-one-supplier attribution moved roles to another record. Carried on a
+# row only in memory, into ROTATION; stripped before any file is written.
+ALL_KEYS_FIELD = "_allRoleKeys"
 
 UA_STR = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
           "(KHTML, like Gecko) Chrome/120 Safari/537.36")
@@ -496,7 +502,7 @@ def _workday(url):
                 "totalAllLocations": stated if stated is not None else len(out)}
 
     facets = {"Location_Country": [uk_id]}
-    out, offset, doc = [], 0, page(0, facets)
+    out, offset, doc, excluded = [], 0, page(0, facets), 0
     # WHAT COMES BACK THROUGH THE COUNTRY FILTER IS PLACED BY THE COMPANY, and
     # that beats reading its location string. Workday writes multi-site postings
     # as "4 Locations", which no string matcher can place — but the company's own
@@ -512,15 +518,28 @@ def _workday(url):
             r = role(j.get("title"), j.get("locationsText"),
                      base + path if path.startswith("/") else None,
                      j.get("startDate"))
-            if r:
-                r["uk"] = True
-                out.append(r)
+            if not r:
+                continue
+            # ...EXCEPT where the company's own location string names somewhere
+            # else. "4 Locations" cannot be placed by a string, so the facet's
+            # judgement stands; "Remote - New York" (Alcon, 28/09/2026) is the
+            # company saying the role is not here, and that beats the facet.
+            # Dropped from the UK list AND the UK total, and counted, so the
+            # doubt stays visible rather than silently shrinking the figure.
+            if r["uk"] is False:
+                excluded += 1
+                continue
+            r["uk"] = True
+            out.append(r)
         offset += 20
-        if not rows or len(out) >= uk_total or len(out) >= WORKDAY_CAP:
+        if not rows or len(out) + excluded >= uk_total or len(out) >= WORKDAY_CAP:
             break
         doc = page(offset, facets)
-    return {"roles": out, "ukTotal": uk_total, "serverFilteredUK": True,
-            "totalAllLocations": total_all}
+    res = {"roles": out, "ukTotal": uk_total - excluded, "serverFilteredUK": True,
+           "totalAllLocations": total_all}
+    if excluded:
+        res["excludedNonUK"] = excluded
+    return res
 
 
 
@@ -1185,14 +1204,72 @@ def existing_rows(path):
         return {}
 
 
+# ROTATION STATE — fixed 28/09/2026 (^o190 follow-on).
+#
+# The workflow runs on a fresh checkout every Tuesday, so it only ever sees what
+# git holds. data/supplier-careers.json keeps only rows WITH a careers page, and
+# state/careers-report.json was never committed. A supplier that was checked and
+# refused therefore left no trace, sorted as never-checked, and was re-picked
+# ahead of the rest of the alphabet every week: four sweeps (01-22/09/2026) all
+# sat between "2San Global" and "Cortrium". The same missing report meant
+# previous_keys() found nothing, so `firstRun` stayed true and no role was ever
+# `new`.
+#
+# This file is small, committed by the workflow beside the published file, and
+# holds for EVERY supplier checked — refusals included — the date it was last
+# checked, and (only where the check read roles) the UK role keys it read. Keys
+# are recorded before one-role-one-supplier attribution, so a record whose roles
+# are published under another record still diffs against what it actually saw.
+
+def load_rotation():
+    try:
+        with open(ROTATION) as f:
+            return (json.load(f).get("suppliers") or {})
+    except Exception:
+        return {}
+
+
+def save_rotation(state):
+    doc = {
+        "_notice": "Rotation state for scripts/refresh_supplier_careers.py, committed "
+                   "by .github/workflows/supplier-careers.yml. Per supplier: the date "
+                   "it was last checked (refusals included), and the UK role keys "
+                   "that check read, for marking `new` next time. Not a Hub feed.",
+        "suppliers": {k: state[k] for k in sorted(state)},
+    }
+    with open(ROTATION, "w") as f:
+        json.dump(doc, f, indent=1, ensure_ascii=False, sort_keys=False)
+        f.write("\n")
+
+
+def update_rotation(state, rows):
+    """Record this run's checks. Mutates and returns `state`."""
+    for r in rows:
+        entry = {"checkedOn": r.get("checkedOn")}
+        keys = r.get(ALL_KEYS_FIELD)
+        if keys is None and r.get("ukRoleCount") is not None:
+            keys = [role_key(x) for x in (r.get("roles") or [])]
+        if keys is not None:
+            entry["roleKeys"] = sorted(set(keys))
+        state[r["name"]] = entry
+    return state
+
+
 def previous_keys():
-    """Roles seen on the last run, per supplier. Used only to mark `new`."""
+    """Roles seen on the last check, per supplier. Used only to mark `new`.
+
+    From the committed rotation state; the uncommitted working report only as a
+    fallback for a local run. A supplier whose last check read no roles (refused)
+    is absent, so its roles are neither new nor old — there is nothing to diff."""
+    seen = {n: set(e["roleKeys"]) for n, e in load_rotation().items()
+            if isinstance(e, dict) and e.get("roleKeys") is not None}
+    if seen:
+        return seen
     try:
         with open(REPORT) as f:
             old = json.load(f)
     except Exception:
         return None
-    seen = {}
     for row in (old.get("suppliers") or []):
         seen[row.get("name")] = {role_key(r) for r in (row.get("roles") or [])}
     return seen or None
@@ -1242,6 +1319,8 @@ def run_one(name, domain, prev):
         uk_total = result["ukTotal"]
         row["ukCountFrom"] = "source"
         row["rolesUnplaceable"] = 0
+        if result.get("excludedNonUK"):
+            row["rolesExcludedNonUK"] = result["excludedNonUK"]
     else:
         # The whole board came back and UK roles are picked out of it here. Roles
         # the company published with NO location are counted separately and
@@ -1277,6 +1356,7 @@ def run_one(name, domain, prev):
 
     row["ukRoleCount"] = uk_total
     row["rolesRetrieved"] = len(uk_roles)
+    row[ALL_KEYS_FIELD] = [role_key(r) for r in uk_roles]
     row["complete"] = len(uk_roles) >= uk_total
 
     if not row["complete"]:
@@ -1373,8 +1453,13 @@ def main():
     if a.rotate:
         # Oldest first, never-checked before ever-checked. A supplier whose row
         # is stale is more useful to re-read than one checked yesterday.
-        known = existing_rows(OUT) or existing_rows(REPORT)
-        targets.sort(key=lambda t: (known.get(t[0], {}).get("checkedOn") or ""))
+        known = {n: r.get("checkedOn") for n, r in
+                 (existing_rows(OUT) or existing_rows(REPORT)).items()}
+        # The committed rotation state wins: it is the only record of a check
+        # that was refused, which the published file drops.
+        known.update({n: e.get("checkedOn") for n, e in load_rotation().items()
+                      if isinstance(e, dict)})
+        targets.sort(key=lambda t: (known.get(t[0]) or ""))
         targets = targets[:a.rotate]
 
     if not a.supplier and not a.auto and not a.rotate:
@@ -1409,6 +1494,12 @@ def main():
                       % (row["ukRoleCount"], row["countMethod"], row["rolesRetrieved"],
                          row["careersUrl"]))
         out.append(row)
+
+    # Before attribution moves roles between records, and before the private
+    # all-keys field is stripped: what each check actually read.
+    save_rotation(update_rotation(load_rotation(), out))
+    for r in out:
+        r.pop(ALL_KEYS_FIELD, None)
 
     if a.rotate:
         # MERGE, never replace. A rotating run touches a slice of the list; the

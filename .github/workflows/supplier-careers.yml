@@ -83,7 +83,13 @@ jobs:
           # Stage by path. A bare `git add -a` in this shared checkout sweeps up
           # whatever another session left uncommitted — that is how the Delta
           # Surgical record was destroyed on 26/08/2026.
-          git add data/supplier-careers.json
+          #
+          # state/careers-rotation.json is committed WITH the published file
+          # (28/09/2026). It is the only record of a supplier that was checked and
+          # refused, and of the role keys each check read. Without it every
+          # Tuesday's fresh runner re-picked the same refused A-C suppliers and
+          # could never mark a role `new` (four sweeps 01-22/09/2026, all stuck).
+          git add data/supplier-careers.json state/careers-rotation.json
           git diff --cached --quiet && { echo "nothing changed"; exit 0; }
           git commit -m "supplier careers: rotating refresh $(date -u +'%F')"
 
@@ -103,13 +109,15 @@ jobs:
           # right resolution is not a merge at all: keep OUR copy verbatim, then
           # re-run the gate over the combined tree.
           cp data/supplier-careers.json /tmp/ours.json
+          cp state/careers-rotation.json /tmp/ours-rotation.json
           pushed=0
           for attempt in 1 2 3 4 5; do
             if git push; then echo "pushed on attempt $attempt"; pushed=1; break; fi
             echo "push rejected (another writer landed first) — attempt $attempt of 5"
             git pull --rebase --autostash || true
             cp /tmp/ours.json data/supplier-careers.json
-            git add data/supplier-careers.json
+            cp /tmp/ours-rotation.json state/careers-rotation.json
+            git add data/supplier-careers.json state/careers-rotation.json
             git diff --cached --quiet || git commit --amend --no-edit
             python3 verify.py || { echo "GATE FAILED after rebase — refusing to push"; exit 1; }
             sleep 5
