@@ -957,6 +957,9 @@ def capture_one(domain, name, id_index, deadline, ptype="product"):
     return None, "; ".join(reasons)
 
 
+CURATED_FIELDS = ("specs", "category")
+
+
 def record_capture(products_store, supplier, name, entry):
     """Shared by every route (A, B and the Shopify bulk route): builds the
     stored entry, diffs it against whatever this product held last time, and
@@ -986,6 +989,15 @@ def record_capture(products_store, supplier, name, entry):
             is_change = True
         elif old.get("changedSince"):
             new_entry["changedSince"] = old["changedSince"]
+        # Hand-captured fields the crawler never writes. Until 28/09/2026 this
+        # function replaced the whole entry, so the 08/09 image backfill re-crawl
+        # silently wiped 51 products' specs (Essity 33, L&R 11, Convatec 7) and
+        # the specs layer fell from 131 products to 80 unnoticed for three weeks.
+        # specs carries its own _sourceUrl and _capturedDate, so it stays
+        # correctly attributed even when the crawl finds the page at a new URL.
+        for f in CURATED_FIELDS:
+            if old.get(f) is not None:
+                new_entry[f] = old[f]
 
     products_store[key] = new_entry
     return is_change

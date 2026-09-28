@@ -133,8 +133,56 @@ def test_no_silent_merge():
     check(e is f, "the same NPC must join two records")
 
 
+def with_store(name, store, fn):
+    """Run fn with B.load returning `store` for one data file."""
+    real = B.load
+    B.load = lambda n, default=None: store if n == name else real(n, default)
+    try:
+        fn()
+    finally:
+        B.load = real
+
+
+def test_alert_needs_a_product_word():
+    """An MHRA alert must name the product, not just the company. Until
+    28/09/2026 the word "resmed" alone put the Astral ventilator NatPSA on the
+    ResMed AirSense 11 AutoSet dossier."""
+    b = B.Builder("respiratory")
+    supplier, _ = b.resolve_supplier("ResMed")
+    airsense = b.dossier_for(supplier, "ResMed AirSense 11 AutoSet")
+    astral = b.dossier_for(supplier, "ResMed Astral 150")
+    alert = {"company": "ResMed", "url": "https://www.gov.uk/x", "issuedDate": "2026-08-17",
+             "title": "ResMed Astral 100 and 150 ventilators: interruption of ventilation"}
+    with_store("mhra-alerts.json", {"alerts": [alert]}, b.add_regulatory)
+    check(not any(s.startswith("mhra") for s in airsense.sources),
+          "an alert naming only the company attached to a product it never names")
+    check(any(s.startswith("mhra") for s in astral.sources),
+          "an alert naming the product failed to attach to it")
+
+
+def test_shifted_catalogue_row_skipped():
+    """A column-shifted catalogue card must not publish a supplier name or an
+    MPC as a product description (ELA679, FDQ3419 on 28/09/2026)."""
+    b = B.Builder("wound")
+    d = b.dossier_for("ACME", "Cuticell Contact", npc="ELA679")
+    good = b.dossier_for("ACME", "Other", npc="ELA838")
+    rows = [
+        {"name": "SUSPENDED", "supplier": "Cuticell Contact", "desc": "ESSITY UK TENA HM",
+         "npc": "ELA679", "mpc": "ELA679", "pack": "Pack of 5"},
+        {"name": "DRAEGER MEDICAL", "supplier": "Facemask anaesthetic", "desc": "MP01514",
+         "npc": "ELA679", "mpc": "ELA679", "pack": "Box of 20"},
+        {"name": "ActivHeal", "supplier": "ADVANCED MEDICAL SOLUTIONS (PLYMOUTH)LTD",
+         "desc": "Foam dressing silicone including adhesive border 10cm x 10cm",
+         "npc": "ELA838", "mpc": "10012556", "pack": "Carton of 10"},
+    ]
+    with_store("nhssc-cache.json", {"products": {"q": {"items": rows}}}, b.add_catalogue)
+    check("nhssc" not in d.sources, "a column-shifted catalogue row reached a dossier")
+    check("nhssc" in good.sources, "a well-formed catalogue row was dropped")
+
+
 for fn in (test_size_stripping, test_longest_family_wins,
-           test_published_store, test_no_silent_merge):
+           test_published_store, test_no_silent_merge,
+           test_alert_needs_a_product_word, test_shifted_catalogue_row_skipped):
     try:
         fn()
     except Exception as exc:                                        # noqa: BLE001

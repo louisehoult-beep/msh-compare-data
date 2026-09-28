@@ -120,6 +120,10 @@ def nk(s):
 
 NPC_RE = re.compile(r"^[A-Z]{3}\d{2,5}$")
 
+# Listing-status badges NHS Supply Chain prints above a card's product name.
+# When one lands in a cached row's "name" the row is column-shifted.
+STATUS_BADGES = {"SUSPENDED", "DISCONTINUED", "WITHDRAWN"}
+
 # A trailing dimension on a Drug Tariff appliance name is the PACK, not part of
 # the product's identity: "Tegaderm Foam dressing (adhesive) 10cm x 11cm oval"
 # is the same product as the 14.3cm one. Stripping it is not fuzzy matching -
@@ -446,6 +450,17 @@ class Builder:
                 d = self.by_npc.get(npc)
                 if not d:
                     continue
+                # A column-shifted card, not a catalogue line. The cache's card
+                # parser reads fields by position, so a "SUSPENDED" badge above
+                # the name, or a card with no brand line, slides every field one
+                # place: ELA679 published "ESSITY UK TENA HM" as Cuticell
+                # Contact's description, FDQ3419 an MPC as Draeger's. Both shapes
+                # are unmistakable (a description is words, never one token), so
+                # the row is dropped rather than repaired by guesswork.
+                desc = (item.get("desc") or "").strip()
+                if item.get("name") in STATUS_BADGES or " " not in desc:
+                    self.stats["catalogue_rows_shifted_skipped"] += 1
+                    continue
                 d.add_source(sid, block)
                 d.npcs.setdefault(npc, set()).add(sid)
                 if item.get("mpc"):
@@ -554,6 +569,13 @@ class Builder:
                 continue
             hay = ((alert.get("title") or "") + " " + (alert.get("description") or "")).lower()
             hay_words = set(re.findall(r"[a-z0-9]{4,}", hay))
+            # The company's own name is not the product's name. "ResMed AirSense
+            # 11 AutoSet" shares only "resmed" with an Astral ventilator alert,
+            # and until 28/09/2026 that one word published the Astral NatPSA on
+            # the AirSense dossier. Rule (b) needs a word MHRA used for the
+            # PRODUCT, so words of the company name are taken out of both sides.
+            company_words = set(re.findall(r"[a-z0-9]{4,}", nk(company) + " " + nk(raw_company)))
+            hay_words -= company_words
             sid = "%s-%d" % (sid_base, n)
             block = {
                 "id": sid,
@@ -565,7 +587,7 @@ class Builder:
                 "authority": "MHRA field safety notice or alert.",
             }
             for d in candidates:
-                name_words = set(re.findall(r"[a-z0-9]{4,}", nk(d.name)))
+                name_words = set(re.findall(r"[a-z0-9]{4,}", nk(d.name))) - company_words
                 if not (name_words & hay_words):
                     continue
                 d.add_source(sid, block)

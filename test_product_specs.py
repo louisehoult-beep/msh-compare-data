@@ -196,6 +196,33 @@ def check_renderer_carries_attribution():
              "page, not an absence of the feature.")
 
 
+# ---------------------------------------------------------------- check 4
+def check_recrawl_keeps_specs():
+    """A re-crawl must never erase a hand-captured specs block or category.
+
+    The 08/09/2026 image backfill re-crawled every supplier through record_capture,
+    which rebuilt each entry from scratch and dropped 51 products' specs. Nothing
+    failed; the specs layer just shrank from 131 products to 80. This runs the
+    crawler's own write function over a spec'd record and checks both survive."""
+    sys.path.insert(0, os.path.join(HERE, "scripts"))
+    import crawl_supplier_product_detail as crawler
+    specs = {"wearTime": "up to 7 days", "_sourceUrl": "https://e.org/old",
+             "_capturedDate": "2026-08-27"}
+    store = {"S|p": {"supplier": "S", "product": "P", "sourceUrl": "https://e.org/old",
+                     "capturedDate": "2026-08-27", "parsed": "structured",
+                     "description": "old", "features": [], "image": None,
+                     "category": "wound-care-dressings", "specs": specs}}
+    crawler.record_capture(store, "S", "P", {"sourceUrl": "https://e.org/new",
+                                             "parsed": "heuristic",
+                                             "description": "new", "image": "i.png"})
+    rec = store["S|p"]
+    if rec.get("specs") != specs or rec.get("category") != "wound-care-dressings":
+        fail("recrawl-keeps-specs",
+             "crawl_supplier_product_detail.record_capture dropped a hand-captured "
+             "specs block or category on re-crawl. A crawl refreshes what it reads; it "
+             "must never erase what a person read off the supplier's page.")
+
+
 # ---------------------------------------------------------------- self-test
 def self_test():
     """Prove each check fires on a case that should fail it."""
@@ -263,6 +290,7 @@ def main():
 
     check_no_writer_derives_category_from_npc()
     check_renderer_carries_attribution()
+    check_recrawl_keeps_specs()
 
     if FAILURES:
         print("\n%d FAILURE(S):\n" % len(FAILURES))
