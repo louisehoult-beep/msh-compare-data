@@ -57,7 +57,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 8 | 21 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 13 | 11 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 6 | 22 | STARTED |
-| Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 9 | 31.0% | 13 | 19 | STARTED |
+| Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 7 | 23 | STARTED |
 | General Wound Care | wound | 28 | 11 | 39.3% | 5 | 23 | STARTED |
 | Infusion Pumps and Administration Sets and Associated Products | bloodtx | 27 | 10 | 37.0% | 7 | 17 | STARTED |
 | Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems, Related Accessories and Services | anaesthesia, neonatal | 25 | 8 | 32.0% | 11 | 8 | STARTED |
@@ -93,7 +93,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Male Intra-Urethral Catheter with Magnet Control | continence | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Non-Imaging Vibration Controlled Ultrasound System | ultrasound | 1 | 0 | 0.0% | 1 | 0 | NOT STARTED |
 | Airway Management Products and Associated Equipment | — | 54 | 0 | 0.0% | 38 | 27 | UNMAPPED |
-| Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 37 | 25 | UNMAPPED |
+| Syringes, Needles and Associated Products | — | 52 | 0 | 0.0% | 36 | 26 | UNMAPPED |
 | Total Patient Assessment Device Solutions | — | 40 | 0 | 0.0% | 27 | 23 | UNMAPPED |
 | Wound Closure | — | 39 | 0 | 0.0% | 29 | 19 | UNMAPPED |
 | Procedure Packs | — | 29 | 0 | 0.0% | 17 | 18 | UNMAPPED |
@@ -113,7 +113,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Mobile X-Ray Systems and Associated Option and Related Services | — | 14 | 0 | 0.0% | 6 | 10 | UNMAPPED |
 | Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories | — | 13 | 0 | 0.0% | 13 | 1 | UNMAPPED |
 | Static X-Ray and Associated Options and Related Services | — | 13 | 0 | 0.0% | 6 | 9 | UNMAPPED |
-| Wipes for Surface Cleaning and Disinfection | — | 13 | 0 | 0.0% | 10 | 6 | UNMAPPED |
+| Wipes for Surface Cleaning and Disinfection | — | 13 | 0 | 0.0% | 9 | 7 | UNMAPPED |
 | Disposable and Washable Continence Care | — | 12 | 0 | 0.0% | 9 | 8 | UNMAPPED |
 | Finance Solutions | — | 12 | 0 | 0.0% | 9 | 4 | UNMAPPED |
 | Bladder Scanners and Associated Options and Related Services | — | 11 | 0 | 0.0% | 7 | 5 | UNMAPPED |
@@ -124,7 +124,7 @@ the decision each waits on; delete the entry once that decision is made.
 | External Breast Prosthesis and Chest Support | — | 9 | 0 | 0.0% | 5 | 5 | UNMAPPED |
 | Perfusion Devices, Consumables and Associated Equipment | — | 9 | 0 | 0.0% | 7 | 5 | UNMAPPED |
 | Medical Hollowware | — | 8 | 0 | 0.0% | 6 | 4 | UNMAPPED |
-| Pressure Infusers and Associated Products | — | 8 | 0 | 0.0% | 7 | 3 | UNMAPPED |
+| Pressure Infusers and Associated Products | — | 8 | 0 | 0.0% | 6 | 4 | UNMAPPED |
 | Tray Wrap and Sterilisation Equipment | — | 8 | 0 | 0.0% | 8 | 2 | UNMAPPED |
 | Magnetic Resonance Imaging Scanners and Associated Option and Related Services | — | 7 | 0 | 0.0% | 4 | 5 | UNMAPPED |
 | Mammography Imaging Systems and Associated Options and Related Services | — | 7 | 0 | 0.0% | 4 | 4 | UNMAPPED |
@@ -141,7 +141,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Reusable Plastic Medical Hollowware | — | 4 | 0 | 0.0% | 2 | 3 | UNMAPPED |
 | Obstetrics and Vinyl Pessaries | — | 3 | 0 | 0.0% | 3 | 0 | UNMAPPED |
 | Fresh Food DPS | — | 97 | 0 | 0.0% | 97 | 0 | OUT OF SCOPE |
-| Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 7 | 11.7% | 45 | 9 | OUT OF SCOPE |
+| Cleaning Equipment, Supplies and Associated Products | facilities | 60 | 7 | 11.7% | 44 | 10 | OUT OF SCOPE |
 | Medical Healthcare Furniture | — | 51 | 0 | 0.0% | 45 | 8 | OUT OF SCOPE |
 | Beverages, Confectionary and Snacks | — | 44 | 0 | 0.0% | 42 | 2 | OUT OF SCOPE |
 | Textiles and Associated Products | workwear | 32 | 2 | 6.2% | 23 | 10 | OUT OF SCOPE |

@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 37106,
-  "differentiator.json held": 54008
+  "differentiator.json published": 37080,
+  "differentiator.json held": 54180
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 415,
-  "inScopeSuppliersNeedingCrawl": 283,
-  "inScopeSuppliersNeedingDomain": 257,
-  "suppliersRefused": 523,
+  "inScopeSuppliersNeedingCrawl": 277,
+  "inScopeSuppliersNeedingDomain": 251,
+  "suppliersRefused": 527,
   "suppliersRefusedButPublishingElsewhere": 107,
   "suppliersCapturedNothingCounted": 0,
   "suppliersDuplicateOfCaptured": 3,
@@ -8559,8 +8559,8 @@
    "category": "Medical and Surgical Consumables",
    "ends": "15 February 2028",
    "suppliersAwarded": 29,
-   "suppliersPublished": 9,
-   "coverage": 31.0,
+   "suppliersPublished": 11,
+   "coverage": 37.9,
    "nhsscCategory": "Medical and Surgical Consumables",
    "inScope": true,
    "outOfScopeReason": null,
@@ -8568,40 +8568,8 @@
    "speciality": [
     "skin-prep"
    ],
-   "crawlWorklist": [
-    {
-     "supplier": "PAL International Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Premium Wipes & Textiles Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Procotech Limited",
-     "domain": null
-    },
-    {
-     "supplier": "PTP Healthcare Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Saraco Industries",
-     "domain": null
-    },
-    {
-     "supplier": "TerraMed Limited",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "PAL International Ltd",
-    "PTP Healthcare Ltd",
-    "Premium Wipes & Textiles Ltd",
-    "Procotech Limited",
-    "Saraco Industries",
-    "TerraMed Limited"
-   ],
+   "crawlWorklist": [],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
@@ -8640,10 +8608,38 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Premium Wipes & Textiles Ltd",
+     "domain": "pwt-uk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-28",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Procotech Limited",
+     "domain": "procotech.com",
+     "reason": "the site's WordPress API exposes no product catalogue \u2014 its only product-named post types are document libraries (jp_pay_product), which hold manuals and leaflets, not a product range; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-28",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Saraco Industries",
+     "domain": "www.saraco-industries.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-28",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Sharon Services (UK) Ltd",
      "domain": "sharonservices.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "TerraMed Limited",
+     "domain": "www.terramed.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
+     "checked": "2026-09-28",
      "bucket": "refused"
     },
     {
@@ -8752,7 +8748,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 6
+    "needDomain": 0
    },
    "published": [
     "B. Braun Medical",
@@ -8762,7 +8758,9 @@
     "GAMA Healthcare",
     "Mediq Healthcare UK Ltd",
     "M\u00f6lnlycke",
+    "PAL International Ltd",
     "PDI (EMEA)",
+    "PTP Healthcare Ltd",
     "Schulke & Mayr UK Ltd"
    ],
    "publishedElsewhere": [
@@ -8776,25 +8774,22 @@
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
-   "notCrawled": [
-    "PAL International Ltd",
-    "Premium Wipes & Textiles Ltd",
-    "Procotech Limited",
-    "PTP Healthcare Ltd",
-    "Saraco Industries",
-    "TerraMed Limited"
-   ],
+   "notCrawled": [],
    "refused": [
     "Banner Group Limited",
     "Cambridge Sensors Ltd",
     "Solventum (3M Health Care)",
     "Lyreco UK Limited",
     "Polyco",
+    "Premium Wipes & Textiles Ltd",
+    "Procotech Limited",
+    "Saraco Industries",
     "Sharon Services (UK) Ltd",
+    "TerraMed Limited",
     "Valley Northern Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 13,
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
@@ -13654,10 +13649,6 @@
     {
      "supplier": "Scottmed Distribution (UK) Ltd",
      "domain": null
-    },
-    {
-     "supplier": "TerraMed Limited",
-     "domain": null
     }
    ],
    "domainsMissing": [
@@ -13667,7 +13658,6 @@
     "Neon Diagnostics Ltd",
     "Pajunk UK Medical Products Limited",
     "Scottmed Distribution (UK) Ltd",
-    "TerraMed Limited",
     "embecta UK Limited"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -13747,6 +13737,13 @@
      "domain": "rpgmedical.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "TerraMed Limited",
+     "domain": "www.terramed.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
+     "checked": "2026-09-28",
      "bucket": "refused"
     },
     {
@@ -13857,7 +13854,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 8
+    "needDomain": 7
    },
    "published": [],
    "publishedElsewhere": [
@@ -13899,8 +13896,7 @@
     "Mediworld Ltd",
     "Neon Diagnostics Ltd",
     "Pajunk UK Medical Products Limited",
-    "Scottmed Distribution (UK) Ltd",
-    "TerraMed Limited"
+    "Scottmed Distribution (UK) Ltd"
    ],
    "refused": [
     "Aquilant Limited",
@@ -13914,6 +13910,7 @@
     "Prosum Medical Ltd",
     "Rocialle Healthcare",
     "RPG Medical Limited",
+    "TerraMed Limited",
     "Unisurge International Limited",
     "Valley Northern Ltd",
     "IMS Euro Ltd",
@@ -13922,7 +13919,7 @@
    "unknown": [
     "Apollo Medical Technologies Ltd"
    ],
-   "actionableTotal": 37,
+   "actionableTotal": 36,
    "blockedReason": null,
    "deferred": null
   },
@@ -17089,20 +17086,8 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
-   "crawlWorklist": [
-    {
-     "supplier": "PAL International Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Saraco Industries",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "PAL International Ltd",
-    "Saraco Industries"
-   ],
+   "crawlWorklist": [],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
@@ -17117,6 +17102,13 @@
      "domain": "why.lyreco.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Saraco Industries",
+     "domain": "www.saraco-industries.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-28",
      "bucket": "refused"
     },
     {
@@ -17152,38 +17144,37 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 2,
-    "publishedElsewhereNeedingCategory": 6,
+    "publishedElsewhereNeedingCategory": 7,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 0
    },
    "published": [],
    "publishedElsewhere": [
     "GAMA Healthcare",
     "HC Innovations",
     "LINC Medical",
+    "PAL International Ltd",
     "PDI (EMEA)",
     "Schulke & Mayr UK Ltd",
     "Vernacare"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
-   "notCrawled": [
-    "PAL International Ltd",
-    "Saraco Industries"
-   ],
+   "notCrawled": [],
    "refused": [
     "Arrow County Supplies",
     "Lyreco UK Limited",
+    "Saraco Industries",
     "Valley Northern Ltd"
    ],
    "unknown": [
     "Guest Medical Limited",
     "Nuvik UK Ltd"
    ],
-   "actionableTotal": 10,
+   "actionableTotal": 9,
    "blockedReason": null,
    "deferred": null
   },
@@ -18242,15 +18233,8 @@
    "outOfScopeReason": null,
    "state": "UNMAPPED",
    "speciality": [],
-   "crawlWorklist": [
-    {
-     "supplier": "TerraMed Limited",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "TerraMed Limited"
-   ],
+   "crawlWorklist": [],
+   "domainsMissing": [],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
@@ -18258,6 +18242,13 @@
      "domain": "sharonservices.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "TerraMed Limited",
+     "domain": "www.terramed.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; a Wix storefront, but its sitemap.xml lists no products sitemap",
+     "checked": "2026-09-28",
      "bucket": "refused"
     },
     {
@@ -18284,7 +18275,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 1
+    "needDomain": 0
    },
    "published": [],
    "publishedElsewhere": [
@@ -18297,14 +18288,13 @@
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
-   "notCrawled": [
+   "notCrawled": [],
+   "refused": [
+    "Sharon Services (UK) Ltd",
     "TerraMed Limited"
    ],
-   "refused": [
-    "Sharon Services (UK) Ltd"
-   ],
    "unknown": [],
-   "actionableTotal": 7,
+   "actionableTotal": 6,
    "blockedReason": null,
    "deferred": null
   },
@@ -19632,15 +19622,10 @@
     {
      "supplier": "Parc Global Supplies",
      "domain": null
-    },
-    {
-     "supplier": "Premium Wipes & Textiles Ltd",
-     "domain": null
     }
    ],
    "domainsMissing": [
-    "Parc Global Supplies",
-    "Premium Wipes & Textiles Ltd"
+    "Parc Global Supplies"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -19701,6 +19686,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Premium Wipes & Textiles Ltd",
+     "domain": "pwt-uk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-28",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Diversey",
      "domain": "solenis.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -19722,7 +19714,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [
     "Crest Medical Ltd",
@@ -19740,8 +19732,7 @@
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Parc Global Supplies",
-    "Premium Wipes & Textiles Ltd"
+    "Parc Global Supplies"
    ],
    "refused": [
     "Arrow County Supplies",
@@ -19751,7 +19742,8 @@
     "Central Management Catalogue Agency UK Ltd T/A CMCA(UK)",
     "Lyreco UK Limited",
     "Nobisco",
-    "Polyco"
+    "Polyco",
+    "Premium Wipes & Textiles Ltd"
    ],
    "unknown": [
     "2 San Global",
@@ -19796,7 +19788,7 @@
     "Tennant UK",
     "Thomas Stoner Supplies Ltd"
    ],
-   "actionableTotal": 45,
+   "actionableTotal": 44,
    "blockedReason": null,
    "deferred": null
   },
@@ -20085,16 +20077,11 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "PTP Healthcare Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Valmy SAS Ltd",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "PTP Healthcare Ltd",
     "Valmy SAS Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -20177,12 +20164,12 @@
    ],
    "actionable": {
     "unresolvedNames": 18,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 2
+    "needDomain": 1
    },
    "published": [
     "Gailarde Ltd",
@@ -20191,12 +20178,12 @@
    "publishedElsewhere": [
     "Fannin (UK) Limited",
     "GBUK Group",
-    "Medline Industries"
+    "Medline Industries",
+    "PTP Healthcare Ltd"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "PTP Healthcare Ltd",
     "Valmy SAS Ltd"
    ],
    "refused": [
