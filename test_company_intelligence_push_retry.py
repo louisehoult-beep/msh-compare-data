@@ -208,6 +208,14 @@ def build_race(root, script):
     os.chmod(merge, 0o755)
     with open(os.path.join(seed, "verify.py"), "w") as fh:
         fh.write(VERIFY_STUB)
+    # The workflow gates through scripts/gate.sh (prune, then verify.py) since
+    # ^o221. The real wrapper comes across; the calendar pruner is stubbed, as
+    # it has its own suite in test_prune_calendar.py.
+    shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "scripts", "gate.sh"),
+                os.path.join(seed, "scripts", "gate.sh"))
+    with open(os.path.join(seed, "scripts", "prune_calendar.py"), "w") as fh:
+        fh.write("import sys\nsys.exit(0)\n")
 
     run(["git", "add", "-A"], cwd=seed)
     run(["git", "commit", "-qm", "base"], cwd=seed)
