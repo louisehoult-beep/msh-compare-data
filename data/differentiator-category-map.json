@@ -49,7 +49,8 @@
    "vent": "Ventilators",
    "neo": "Neonatal",
    "photo": "Phototherapy",
-   "reg": "Regional anaesthesia & pain management kits"
+   "reg": "Regional anaesthesia & pain management kits",
+   "airway": "Airway management (laryngoscopes, tracheal intubation equipment, endotracheal tubes, supraglottic airways and airway adjuncts; not intubating endoscopes or breathing circuits)"
   },
   "respiratory": {
    "o2": "Oxygen therapy",
@@ -374,27 +375,12 @@
  },
  "counts": {
   "pairs": 8706,
-  "mapped": 7646,
+  "mapped": 7691,
   "notTaxonomy": 208,
   "products": 104195,
-  "productsMapped": 68871
+  "productsMapped": 68757
  },
  "entries": [
-  {
-   "supplier": "Emmat Medical Ltd",
-   "division": "Uncategorised",
-   "products": 3824,
-   "categories": [],
-   "examples": [
-    "790-341U CONSISTING OF:",
-    "RESECTOSCOPE INNER SHEATH, 22CHARR.",
-    "RESECTOSCOPE OUTER SHEATH, 22CHARR. WITH",
-    "BIOPSY FORCEPS, FLEXIBLE, SINGLE ACTION,"
-   ],
-   "hub": null,
-   "notTaxonomy": true,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
-  },
   {
    "supplier": "Scala Surgical Ltd",
    "division": "Uncategorised",
@@ -1155,25 +1141,6 @@
    "hub": null,
    "notTaxonomy": true,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
-  },
-  {
-   "supplier": "Emmat Medical Ltd",
-   "division": "Laparoscopic instruments and Scopes",
-   "products": 170,
-   "categories": [
-    "Laparoscopy"
-   ],
-   "examples": [
-    "HOOK FORCEPS 1X1 COMPLETE (WITH TIE ROD)",
-    "TENACULUM FORCEPS 45CM, 10MM,",
-    "TENACULUM FORCEPS 25CM, 10MM,",
-    "775-5253-25 CS CONSISTING OF:"
-   ],
-   "hub": "mis:instruments",
-   "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
-   "why": "Hook Forceps, Tenaculum Forceps, and related laparoscopic surgical instruments are MIS instruments and consumables",
-   "decidedIn": "Emmat Medical Ltd.json"
   },
   {
    "supplier": "Renray Healthcare",
@@ -23539,28 +23506,6 @@
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
    "why": "the division's own products are uterine, vaginal or pelvic examination and procedure instruments",
    "decidedIn": "Scala Surgical Ltd.json"
-  },
-  {
-   "supplier": "Emmat Medical Ltd",
-   "division": "Endoscopic gynae and urology",
-   "products": 6,
-   "categories": [
-    "Laparoscopy"
-   ],
-   "examples": [
-    "775-5253-45 C CONSISTING OF:",
-    "775-5253-45 CS CONSISTING OF:",
-    "775-5253-25 C CONSISTING OF:",
-    "775-5253 C CONSISTING OF:"
-   ],
-   "hub": [
-    "mis:gynae",
-    "endoscopy:uro"
-   ],
-   "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
-   "why": "Division covers gynaecological endoscopy instruments (hysteroscopy) and endoscopic urology instruments (cystoscopy)",
-   "decidedIn": "Emmat Medical Ltd.json"
   },
   {
    "supplier": "Appleton Woods",
@@ -87770,9 +87715,11 @@
     "Gynecological Skirt",
     "Examination Underpants"
    ],
-   "hub": null,
+   "hub": "workwear:linen",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division's own products are patient gowns, medical gowns, a gynaecological skirt and examination underpants: patient clothing, which the existing workwear:linen type (bedding, gowns & hospital linen) already carries for other suppliers' patient gowns, hospital pyjamas and disposable underwear. Mapped there rather than adding a new type, per the vocabulary-gap policy's no-duplicate guard (^o285, 28/09/2026)",
+   "decidedIn": "Avicenna Surgical Limited.json"
   },
   {
    "supplier": "DTR Medical Ltd",
@@ -87911,9 +87858,11 @@
     "Laryngeal Accessories",
     "Endotracheal Accessories"
    ],
-   "hub": null,
+   "hub": "anaesthesia:airway",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division's own products are laryngoscope blades, reusable laryngoscope handles, laryngeal accessories and endotracheal accessories: airway management products as NHS Supply Chain's Airway Management framework Lots 1-2 define them. anaesthesia:airway was added 28/09/2026 under the vocabulary-gap policy for this range (^o285); see scripts/_add_vocab_type_anaes_airway_0928.py",
+   "decidedIn": "Avicenna Surgical Limited.json"
   },
   {
    "supplier": "DTR Medical Ltd",
@@ -140783,21 +140732,6 @@
    ],
    "hub": null,
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
-  },
-  {
-   "supplier": "Gemini Surgical UK",
-   "division": "Uncategorised",
-   "products": 12,
-   "categories": [],
-   "examples": [
-    "Personal Hygiene",
-    "Surgical Instruments",
-    "Urology",
-    "Urogynaecology"
-   ],
-   "hub": null,
-   "notTaxonomy": true,
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
   },
   {

@@ -1215,13 +1215,20 @@ def _(tmp):
     #
     # Strip the partial marker and the record becomes exactly what shipped
     # before the fix: a slice presented as the range. The gate must refuse it.
+    #
+    # 28/09/2026: Emmat's record was dropped (^o204, company dissolved), so the
+    # case falls back to Surtex, the other site registered in
+    # CAPPED_CATALOGUE_SITES, rather than skipping and leaving the gate untested.
     d = json.load(open("data/supplier-products.json"))
-    rec = (d.get("suppliers") or {}).get("Emmat Medical Ltd")
+    sup = d.get("suppliers") or {}
+    rec, declared = sup.get("Emmat Medical Ltd"), 23877
+    if not rec:
+        rec, declared = sup.get("Surtex Instruments Ltd"), 4938
     if not rec:
         return None                      # supplier not in the file — nothing to test
     rec["partialRead"] = False
     json.dump(d, open("data/supplier-products.json", "w"))
-    return "publishes 23877 products on its own API"
+    return "publishes %d products on its own API" % declared
 
 
 @case("a partial read that still concludes the company files nothing")
