@@ -1,0 +1,830 @@
+"""Builds sam-and-the-flu-spray.html: the older-SEN version of the flu spray story.
+
+Drawings are SVG symbols coloured through CSS variables, so the same drawing
+works in full colour and as a colouring page (.colour-in turns fills white).
+Run: python3 build_sam.py
+"""
+import math
+from pathlib import Path
+
+OUT = Path(__file__).with_name("sam-and-the-flu-spray.html")
+
+
+def virus_spikes(cx=50, cy=50, r=27, n=14, length=11):
+    parts = []
+    for i in range(n):
+        a = 2 * math.pi * i / n
+        x1, y1 = cx + r * math.cos(a), cy + r * math.sin(a)
+        x2, y2 = cx + (r + length) * math.cos(a), cy + (r + length) * math.sin(a)
+        parts.append(f'<path class="f-none" d="M{x1:.1f} {y1:.1f} L{x2:.1f} {y2:.1f}"/>')
+        parts.append(f'<circle class="f-virus2" cx="{x2:.1f}" cy="{y2:.1f}" r="3.6"/>')
+    return "\n        ".join(parts)
+
+
+def pattern_page():
+    """Geometric colouring pattern: rings of petals around a shield."""
+    out = []
+    cx, cy = 300, 320
+    for ring, (rad, count, size) in enumerate([(250, 24, 19), (197, 18, 19), (145, 12, 17)]):
+        for i in range(count):
+            a = 2 * math.pi * i / count + ring * 0.13
+            x, y = cx + rad * math.cos(a), cy + rad * math.sin(a)
+            deg = math.degrees(a) + 90
+            out.append(
+                f'<ellipse class="ln f-white" cx="{x:.1f}" cy="{y:.1f}" rx="{size*0.45:.1f}" ry="{size:.1f}" '
+                f'transform="rotate({deg:.1f} {x:.1f} {y:.1f})"/>'
+            )
+    for rad in (274, 223, 170, 118):
+        out.append(f'<circle class="ln f-none" cx="{cx}" cy="{cy}" r="{rad}"/>')
+    out.append(
+        f'<path class="ln f-white" d="M{cx} {cy-92} L{cx+78} {cy-62} Q{cx+76} {cy+44} {cx} {cy+96} '
+        f'Q{cx-76} {cy+44} {cx-78} {cy-62} Z"/>'
+    )
+    out.append(
+        f'<path class="ln f-none" d="M{cx} {cy-62} L{cx+50} {cy-42} Q{cx+48} {cy+28} {cx} {cy+62} '
+        f'Q{cx-48} {cy+28} {cx-50} {cy-42} Z"/>'
+    )
+    out.append(f'<path class="ln f-none" style="stroke-width:6" d="M{cx-26} {cy+2} L{cx-6} {cy+24} L{cx+30} {cy-22}"/>')
+    return "\n      ".join(out)
+
+
+CARDS = [
+    ("Ready", '<path class="ln f-white" d="M30 58 V34 Q30 28 36 28 L40 28 L46 12 Q52 10 54 16 L52 28 H66 Q72 28 71 35 L68 54 Q67 60 60 60 H36 Q30 60 30 58 Z"/><rect class="ln f-white" x="18" y="30" width="12" height="30" rx="3"/>'),
+    ("Wait please", '<circle class="ln f-white" cx="44" cy="38" r="24"/><path class="ln f-none" d="M44 24 V38 L54 46"/>'),
+    ("I need a break", '<rect class="ln f-white" x="26" y="16" width="12" height="44" rx="3"/><rect class="ln f-white" x="50" y="16" width="12" height="44" rx="3"/>'),
+    ("I'm worried", '<circle class="ln f-white" cx="44" cy="38" r="24"/><circle class="f-ink" cx="36" cy="34" r="2.6"/><circle class="f-ink" cx="52" cy="34" r="2.6"/><path class="ln f-none" d="M30 26 L38 29 M58 26 L50 29 M35 50 Q44 44 53 50"/>'),
+    ("Yes", '<circle class="ln f-white" cx="44" cy="38" r="24"/><path class="ln f-none" style="stroke-width:5" d="M32 38 L41 48 L57 28"/>'),
+    ("No", '<circle class="ln f-white" cx="44" cy="38" r="24"/><path class="ln f-none" style="stroke-width:5" d="M34 28 L54 48 M54 28 L34 48"/>'),
+    ("All done", '<path class="ln f-none" d="M30 62 V12"/><path class="ln f-white" d="M30 14 H62 L54 24 L62 34 H30 Z"/>'),
+    ("Help", '<path class="ln f-white" d="M34 62 V30 Q34 25 38 25 Q42 25 42 30 V22 Q42 17 46 17 Q50 17 50 22 V26 Q50 21 54 21 Q58 21 58 26 V32 Q58 28 62 28 Q66 28 66 33 V48 Q66 62 52 62 Z"/>'),
+]
+
+
+def cards_html():
+    items = []
+    for label, icon in CARDS:
+        items.append(
+            f'<li><svg viewBox="0 0 88 72" aria-hidden="true">{icon}</svg><span>{label}</span></li>'
+        )
+    return "\n      ".join(items)
+
+
+FEELINGS = [
+    ("1", "Calm", "M34 46 Q44 54 54 46"),
+    ("2", "OK", "M34 48 Q44 51 54 48"),
+    ("3", "Unsure", "M34 49 L54 47"),
+    ("4", "Worried", "M34 51 Q44 45 54 51"),
+    ("5", "Very worried", "M34 53 Q44 42 54 53"),
+]
+
+
+def feelings_html():
+    items = []
+    for n, label, mouth in FEELINGS:
+        items.append(
+            f'<li><svg viewBox="0 0 88 76" aria-hidden="true"><circle class="ln f-white" cx="44" cy="40" r="26"/>'
+            f'<circle class="f-ink" cx="35" cy="35" r="2.6"/><circle class="f-ink" cx="53" cy="35" r="2.6"/>'
+            f'<path class="ln f-none" d="{mouth}"/></svg><b>{n}</b><span>{label}</span></li>'
+        )
+    return "\n      ".join(items)
+
+
+HTML = r"""<title>Sam and the Flu Spray</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@500;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --page: #eef1f0;
+    --paper: #ffffff;
+    --ink: #1d2b36;
+    --soft: #4f5d68;
+    --accent: #1f7a78;
+    --accent-soft: #d6ebe8;
+    --coral: #d9694c;
+    --wall: #e6ecee;
+    --wall2: #d8e3e6;
+    --floor: #cbbba2;
+    --sky: #dbe9ef;
+    --grass: #a7c28f;
+    --skin: #eab893;
+    --skin2: #9a6644;
+    --skin3: #f0c9a9;
+    --hair: #2a1d17;
+    --hair2: #7a4b2c;
+    --grey: #cfd2d6;
+    --hoodie: #3d6f8e;
+    --hoodie2: #2f5872;
+    --jeans: #3a4a5c;
+    --shoe: #f4f4f2;
+    --nurse: #2b4c7e;
+    --trousers: #22324d;
+    --cardi: #8e6480;
+    --skirt: #56617a;
+    --blanket: #f2d6ae;
+    --virus: #d9745b;
+    --virus2: #f0b39f;
+    --device: #2a2f36;
+    --screen: #dff3f1;
+    --spray: #f2f3f4;
+    --paperwhite: #ffffff;
+    --chair: #6f8f86;
+    --board: #f7f7f2;
+    --cake: #efb9c2;
+    --cake2: #f6e5ad;
+    --sticker: #f2c94c;
+    --heart: #d9694c;
+    --shade: rgba(20, 30, 45, .12);
+    --line: #1d2b36;
+    --lw: 2.4;
+    --fill-ink: #1d2b36;
+  }
+  .colour-in {
+    --wall: #fff; --wall2: #fff; --floor: #fff; --sky: #fff; --grass: #fff;
+    --skin: #fff; --skin2: #fff; --skin3: #fff; --hair: #fff; --hair2: #fff; --grey: #fff;
+    --hoodie: #fff; --hoodie2: #fff; --jeans: #fff; --shoe: #fff; --nurse: #fff; --trousers: #fff;
+    --cardi: #fff; --skirt: #fff; --blanket: #fff; --virus: #fff; --virus2: #fff;
+    --device: #fff; --screen: #fff; --spray: #fff; --chair: #fff; --board: #fff;
+    --cake: #fff; --cake2: #fff; --sticker: #fff; --heart: #fff;
+    --shade: transparent; --line: #111; --lw: 2.8; --fill-ink: #111;
+  }
+  .f-wall{fill:var(--wall)} .f-wall2{fill:var(--wall2)} .f-floor{fill:var(--floor)} .f-sky{fill:var(--sky)} .f-grass{fill:var(--grass)}
+  .f-skin{fill:var(--skin)} .f-skin2{fill:var(--skin2)} .f-skin3{fill:var(--skin3)}
+  .f-hair{fill:var(--hair)} .f-hair2{fill:var(--hair2)} .f-grey{fill:var(--grey)}
+  .f-hoodie{fill:var(--hoodie)} .f-hoodie2{fill:var(--hoodie2)} .f-jeans{fill:var(--jeans)} .f-shoe{fill:var(--shoe)}
+  .f-nurse{fill:var(--nurse)} .f-trousers{fill:var(--trousers)} .f-cardi{fill:var(--cardi)} .f-skirt{fill:var(--skirt)}
+  .f-blanket{fill:var(--blanket)} .f-virus{fill:var(--virus)} .f-virus2{fill:var(--virus2)}
+  .f-device{fill:var(--device)} .f-screen{fill:var(--screen)} .f-spray{fill:var(--spray)} .f-white{fill:var(--paperwhite)}
+  .f-chair{fill:var(--chair)} .f-board{fill:var(--board)} .f-cake{fill:var(--cake)} .f-cake2{fill:var(--cake2)}
+  .f-sticker{fill:var(--sticker)} .f-heart{fill:var(--heart)} .f-shade{fill:var(--shade);stroke:none}
+  .f-ink{fill:var(--fill-ink)} .f-none{fill:none}
+  .ln{stroke:var(--line);stroke-width:var(--lw);stroke-linejoin:round;stroke-linecap:round}
+  .ln-t{stroke:var(--line);stroke-width:calc(var(--lw) * .6);stroke-linecap:round;fill:none}
+  .lbl{font-family:"Lexend",system-ui,sans-serif;font-weight:700;fill:var(--fill-ink)}
+  .lbl-s{font-family:"Atkinson Hyperlegible",system-ui,sans-serif;font-weight:700;fill:var(--fill-ink)}
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: "Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+    font-size: 1.22rem;
+    line-height: 1.55;
+    padding-inline: 16px;
+    padding-block: 28px 56px;
+  }
+  .book { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+  h1, h2, h3 { font-family: "Lexend", system-ui, sans-serif; line-height: 1.15; text-wrap: balance; margin: 0; }
+  .cover { background: var(--paper); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .cover .titles { padding: 22px 26px 26px; display: flex; flex-direction: column; gap: 6px; }
+  .cover h1 { font-size: clamp(2.2rem, 7vw, 3.4rem); font-weight: 700; }
+  .cover h1 span { color: var(--accent); }
+  .cover p { margin: 0; color: var(--soft); font-size: 1.1rem; }
+  .page { background: var(--paper); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  svg.scene { display: block; width: 100%; height: auto; }
+  .words { padding: 20px 26px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .words h2 { font-size: 1.45rem; font-weight: 700; color: var(--accent); }
+  .words p { margin: 0; max-width: 36em; }
+  .pno { font-family: "Lexend", system-ui, sans-serif; font-size: .85rem; color: var(--soft); }
+  .moral { background: var(--accent); color: #fff; }
+  .moral .words h2 { color: #fff; font-size: clamp(1.6rem, 5vw, 2.1rem); }
+  .moral .words p { color: #eaf5f3; }
+
+  .section-head { display: flex; flex-direction: column; gap: 6px; padding-top: 10px; }
+  .section-head h2 { font-size: 1.9rem; font-weight: 700; }
+  .section-head p { margin: 0; color: var(--soft); font-size: 1.05rem; }
+
+  .panel { background: var(--paper); border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
+  .schedule { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .schedule li { border: 2px solid var(--wall2); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-weight: 700; font-size: 1.02rem; line-height: 1.25; }
+  .schedule svg { width: 100%; max-width: 120px; height: auto; }
+  .schedule .n { font-family: "Lexend", system-ui, sans-serif; background: var(--accent); color: #fff; width: 1.8rem; height: 1.8rem; border-radius: 50%; display: grid; place-items: center; font-size: .95rem; }
+  .note { margin: 0; font-size: 1.08rem; }
+
+  .icons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .icons li { border: 2px solid var(--wall2); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-size: 1.02rem; line-height: 1.3; }
+  .icons svg { width: 100%; max-width: 110px; height: auto; }
+  .firstthen { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .firstthen > div { border: 3px solid var(--accent); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 1.15rem; }
+  .firstthen b { font-family: "Lexend", system-ui, sans-serif; font-size: 1.5rem; color: var(--accent); }
+  .firstthen svg, .firstthen .blank { width: 120px; height: 120px; }
+  .firstthen .blank { border: 2px dashed #9aa7b0; border-radius: 10px; }
+  .cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .cards li { border: 2px dashed #9aa7b0; border-radius: 12px; padding: 12px 8px; display: flex; flex-direction: column; align-items: center; gap: 6px; font-family: "Lexend", system-ui, sans-serif; font-weight: 700; font-size: 1.05rem; text-align: center; background: #fff; }
+  .cards svg { width: 88px; height: auto; }
+  .scale { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .scale li { display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; font-size: .98rem; }
+  .scale li b { font-family: "Lexend", system-ui, sans-serif; font-size: 1.2rem; }
+  .scale svg { width: 100%; max-width: 88px; height: auto; }
+
+  .aboutme { display: grid; gap: 14px; }
+  .aboutme div { display: flex; flex-direction: column; gap: 4px; }
+  .aboutme label { font-weight: 700; }
+  .aboutme .lines { height: 64px; background: repeating-linear-gradient(to bottom, transparent 0 30px, #9aa7b0 30px 32px); }
+
+  .colour { background: #fff; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 10px; border: 2px dashed #9aa7b0; }
+  .colour h3 { font-size: 1.6rem; font-weight: 700; text-align: center; }
+  .colour svg { width: 100%; height: auto; display: block; }
+
+  .adults { background: var(--paper); border-radius: 14px; padding: 22px 24px; font-size: 1.02rem; display: flex; flex-direction: column; gap: 8px; }
+  .adults h2 { font-size: 1.5rem; }
+  .adults ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
+
+  @media (max-width: 600px) {
+    body { font-size: 1.1rem; }
+    .schedule, .cards, .icons { grid-template-columns: repeat(2, 1fr); }
+    .scale { grid-template-columns: repeat(5, 1fr); }
+    .words { padding: 16px 18px 20px; }
+  }
+  @media print {
+    @page { size: A4; margin: 12mm; }
+    body { background: #fff; padding: 0; }
+    .book { gap: 0; max-width: none; }
+    .page, .cover, .colour, .adults, .panel { break-inside: avoid; break-after: page; border-radius: 0; }
+    .colour { border: none; padding: 0; }
+    .colour svg { max-height: 235mm; }
+  }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Sam: teenager, holds a tablet used to communicate -->
+    <symbol id="sam" viewBox="0 0 160 320">
+      <g class="ln">
+        <ellipse class="f-shade" cx="80" cy="312" rx="44" ry="5"/>
+        <path class="f-jeans" d="M56 192 L53 298 L75 298 L80 206 L85 298 L107 298 L104 192 Z"/>
+        <path class="ln-t" d="M80 206 V230"/>
+        <path class="f-shoe" d="M48 298 H76 Q80 298 80 304 V308 H44 Q44 298 48 298 Z"/>
+        <path class="f-shoe" d="M84 298 H112 Q116 298 116 308 H80 V304 Q80 298 84 298 Z"/>
+        <path class="ln-t" d="M44 304 H80 M80 304 H116"/>
+        <path class="f-hoodie" d="M46 102 Q80 90 114 102 L120 200 Q80 208 40 200 Z"/>
+        <path class="f-shade" d="M44 186 Q80 196 118 186 L120 200 Q80 208 40 200 Z"/>
+        <path class="ln-t" d="M58 176 H102 L108 196 H52 Z"/>
+        <path class="f-hoodie2" d="M56 100 Q80 118 104 100 Q100 86 80 86 Q60 86 56 100 Z"/>
+        <path class="f-hoodie" d="M46 102 Q32 128 50 152 L62 146 Q52 128 58 112 Z"/>
+        <path class="f-hoodie" d="M114 102 Q128 128 110 152 L98 146 Q108 128 102 112 Z"/>
+        <rect class="f-device" x="54" y="130" width="52" height="36" rx="5"/>
+        <rect class="f-screen" x="58" y="134" width="44" height="28" rx="2"/>
+        <circle class="f-skin2" cx="58" cy="150" r="7"/>
+        <circle class="f-skin2" cx="102" cy="150" r="7"/>
+        <path class="ln-t" d="M72 104 L70 126 M88 104 L90 126"/>
+        <rect class="f-skin2" x="72" y="76" width="16" height="16" rx="3"/>
+        <ellipse class="f-skin2" cx="61" cy="60" rx="4" ry="6"/>
+        <ellipse class="f-skin2" cx="99" cy="60" rx="4" ry="6"/>
+        <ellipse class="f-skin2" cx="80" cy="56" rx="20" ry="24"/>
+        <path class="f-hair" d="M60 54 Q56 28 80 28 Q104 28 100 54 Q98 42 90 42 Q84 36 76 40 Q66 38 60 54 Z"/>
+        <circle class="f-ink" cx="72" cy="58" r="2.2" style="stroke:none"/>
+        <circle class="f-ink" cx="88" cy="58" r="2.2" style="stroke:none"/>
+        <path class="ln-t" d="M67 51 Q72 49 76 51 M84 51 Q88 49 93 51 M80 60 Q77 66 81 67 M74 71 Q80 75 86 71"/>
+      </g>
+    </symbol>
+
+    <!-- Sam sitting -->
+    <symbol id="samsit" viewBox="0 0 160 260">
+      <g class="ln">
+        <ellipse class="f-shade" cx="80" cy="254" rx="44" ry="5"/>
+        <path class="f-jeans" d="M44 190 H116 L118 214 H42 Z"/>
+        <path class="f-jeans" d="M46 212 L50 244 H72 L74 212 Z M86 212 L88 244 H110 L114 212 Z"/>
+        <path class="f-shoe" d="M46 244 H74 V252 H42 Q42 244 46 244 Z M86 244 H114 Q118 244 118 252 H86 Z"/>
+        <path class="f-hoodie" d="M46 102 Q80 90 114 102 L118 196 Q80 202 42 196 Z"/>
+        <path class="f-hoodie2" d="M56 100 Q80 118 104 100 Q100 86 80 86 Q60 86 56 100 Z"/>
+        <path class="f-hoodie" d="M46 102 Q32 128 50 152 L62 146 Q52 128 58 112 Z"/>
+        <path class="f-hoodie" d="M114 102 Q128 128 110 152 L98 146 Q108 128 102 112 Z"/>
+        <rect class="f-device" x="54" y="130" width="52" height="36" rx="5"/>
+        <rect class="f-screen" x="58" y="134" width="44" height="28" rx="2"/>
+        <circle class="f-skin2" cx="58" cy="150" r="7"/>
+        <circle class="f-skin2" cx="102" cy="150" r="7"/>
+        <path class="ln-t" d="M72 104 L70 126 M88 104 L90 126"/>
+        <rect class="f-skin2" x="72" y="76" width="16" height="16" rx="3"/>
+        <ellipse class="f-skin2" cx="61" cy="60" rx="4" ry="6"/>
+        <ellipse class="f-skin2" cx="99" cy="60" rx="4" ry="6"/>
+        <ellipse class="f-skin2" cx="80" cy="56" rx="20" ry="24"/>
+        <path class="f-hair" d="M60 54 Q56 28 80 28 Q104 28 100 54 Q98 42 90 42 Q84 36 76 40 Q66 38 60 54 Z"/>
+        <circle class="f-ink" cx="72" cy="58" r="2.2" style="stroke:none"/>
+        <circle class="f-ink" cx="88" cy="58" r="2.2" style="stroke:none"/>
+        <path class="ln-t" d="M67 51 Q72 49 76 51 M84 51 Q88 49 93 51 M80 60 Q77 66 81 67 M74 71 Q80 75 86 71"/>
+      </g>
+    </symbol>
+
+    <!-- Nurse Lou: holds the nasal spray up -->
+    <symbol id="nurse" viewBox="0 0 160 330">
+      <g class="ln">
+        <ellipse class="f-shade" cx="80" cy="322" rx="42" ry="5"/>
+        <path class="f-trousers" d="M56 204 L55 308 L76 308 L80 216 L84 308 L105 308 L104 204 Z"/>
+        <path class="f-ink" d="M52 308 H77 V316 H48 Q48 308 52 308 Z M83 308 H108 Q112 308 112 316 H83 Z"/>
+        <path class="f-nurse" d="M46 102 Q80 92 114 102 L120 212 L40 212 Z"/>
+        <path class="ln-t" d="M68 96 L80 116 L92 96"/>
+        <rect class="ln-t" x="52" y="170" width="20" height="18" rx="2"/>
+        <rect class="ln-t" x="88" y="170" width="20" height="18" rx="2"/>
+        <path class="ln-t" d="M66 98 L72 138 M94 98 L88 138"/>
+        <rect class="f-white" x="70" y="136" width="20" height="24" rx="2"/>
+        <path class="ln-t" d="M74 150 H86 M74 155 H83"/>
+        <circle class="f-skin" cx="80" cy="144" r="3.5"/>
+        <circle class="f-white" cx="102" cy="126" r="5"/>
+        <path class="f-nurse" d="M46 102 Q36 112 34 130 L48 134 Q50 118 54 110 Z"/>
+        <path class="f-skin" d="M34 130 Q31 160 37 188 L48 188 Q46 160 48 134 Z"/>
+        <circle class="f-skin" cx="42" cy="192" r="7"/>
+        <path class="f-nurse" d="M114 102 Q126 108 131 122 L118 128 Q116 116 108 110 Z"/>
+        <path class="f-skin" d="M131 122 L146 82 L135 77 L118 128 Z"/>
+        <rect class="f-spray" x="136" y="36" width="10" height="32" rx="3"/>
+        <rect class="f-white" x="137.5" y="26" width="7" height="12" rx="3.5"/>
+        <rect class="f-spray" x="130" y="54" width="22" height="5" rx="2.5"/>
+        <circle class="f-skin" cx="141" cy="74" r="8"/>
+        <rect class="f-skin" x="72" y="76" width="16" height="18" rx="3"/>
+        <circle class="f-hair2" cx="101" cy="44" r="9"/>
+        <ellipse class="f-skin" cx="80" cy="54" rx="20" ry="24"/>
+        <path class="f-hair2" d="M59 58 Q56 28 80 28 Q104 28 101 58 Q99 42 86 40 Q72 38 66 44 Q61 48 59 58 Z"/>
+        <circle class="f-ink" cx="72" cy="56" r="2.2" style="stroke:none"/>
+        <circle class="f-ink" cx="88" cy="56" r="2.2" style="stroke:none"/>
+        <path class="ln-t" d="M67 50 Q72 48 76 50 M84 50 Q88 48 93 50 M80 58 Q77 64 81 65 M73 69 Q80 75 87 69"/>
+        <circle class="f-white" cx="60" cy="62" r="1.8"/>
+      </g>
+    </symbol>
+
+    <!-- Nan holding baby Ava -->
+    <symbol id="nan" viewBox="0 0 160 300">
+      <g class="ln">
+        <ellipse class="f-shade" cx="80" cy="294" rx="40" ry="5"/>
+        <rect class="f-skin3" x="62" y="240" width="14" height="44" rx="4"/>
+        <rect class="f-skin3" x="84" y="240" width="14" height="44" rx="4"/>
+        <path class="f-ink" d="M58 284 H78 V291 H54 Q54 284 58 284 Z M82 284 H102 Q106 284 106 291 H82 Z"/>
+        <path class="f-skirt" d="M50 190 H110 L116 246 H44 Z"/>
+        <path class="f-cardi" d="M46 106 Q80 96 114 106 L116 198 H44 Z"/>
+        <path class="ln-t" d="M80 106 V198"/>
+        <circle class="f-white" cx="86" cy="180" r="2.4"/><circle class="f-white" cx="86" cy="190" r="2.4"/>
+        <ellipse class="f-blanket" cx="80" cy="152" rx="32" ry="19"/>
+        <path class="ln-t" d="M58 146 Q80 160 106 146"/>
+        <circle class="f-skin3" cx="62" cy="146" r="11"/>
+        <path class="f-white" d="M52 142 Q54 132 64 132 Q72 134 72 142 Z"/>
+        <path class="ln-t" d="M58 148 Q60 150 62 148 M64 148 Q66 150 68 148"/>
+        <path class="f-cardi" d="M46 106 Q32 140 56 164 L64 154 Q50 136 56 118 Z"/>
+        <path class="f-cardi" d="M114 106 Q128 140 104 166 L96 156 Q110 136 104 118 Z"/>
+        <circle class="f-skin3" cx="62" cy="160" r="7"/>
+        <circle class="f-skin3" cx="98" cy="162" r="7"/>
+        <rect class="f-skin3" x="72" y="82" width="16" height="16" rx="3"/>
+        <ellipse class="f-skin3" cx="80" cy="64" rx="20" ry="23"/>
+        <path class="f-grey" d="M58 74 Q52 36 80 36 Q108 36 102 74 L98 80 Q100 52 80 50 Q60 52 62 80 Z"/>
+        <circle class="f-none" cx="72" cy="66" r="6"/><circle class="f-none" cx="88" cy="66" r="6"/>
+        <path class="ln-t" d="M78 66 H82"/>
+        <circle class="f-ink" cx="72" cy="66" r="2" style="stroke:none"/>
+        <circle class="f-ink" cx="88" cy="66" r="2" style="stroke:none"/>
+        <path class="ln-t" d="M80 70 Q78 75 81 76 M73 80 Q80 86 87 80"/>
+      </g>
+    </symbol>
+
+    <!-- Flu virus, as it might look under a microscope -->
+    <symbol id="virus" viewBox="0 0 100 100">
+      <g class="ln">
+        VIRUS_SPIKES
+        <circle class="f-virus" cx="50" cy="50" r="27"/>
+        <circle class="f-shade" cx="42" cy="42" r="5"/><circle class="f-shade" cx="58" cy="56" r="6"/>
+        <circle class="f-shade" cx="44" cy="62" r="3.5"/><circle class="f-shade" cx="60" cy="38" r="3"/>
+      </g>
+    </symbol>
+
+    <symbol id="sprayer" viewBox="0 0 40 100">
+      <g class="ln">
+        <rect class="f-spray" x="17" y="80" width="6" height="12"/>
+        <rect class="f-spray" x="11" y="91" width="18" height="6" rx="2"/>
+        <rect class="f-spray" x="13" y="22" width="14" height="58" rx="4"/>
+        <rect class="f-white" x="14" y="6" width="12" height="18" rx="6"/>
+        <rect class="f-spray" x="5" y="58" width="30" height="7" rx="3.5"/>
+      </g>
+    </symbol>
+
+    <symbol id="chair" viewBox="0 0 100 130">
+      <g class="ln">
+        <rect class="f-chair" x="20" y="6" width="60" height="50" rx="6"/>
+        <rect class="f-chair" x="14" y="60" width="72" height="12" rx="4"/>
+        <path class="f-none" d="M22 72 L18 126 M78 72 L82 126 M28 56 V60 M72 56 V60"/>
+      </g>
+    </symbol>
+
+    <symbol id="puff" viewBox="0 0 100 70">
+      <path class="ln f-white" style="stroke-dasharray:5 5" d="M22 58 Q4 58 8 42 Q6 26 24 26 Q28 8 48 12 Q62 2 74 16 Q94 16 92 36 Q98 54 80 58 Z"/>
+    </symbol>
+
+    <symbol id="heart" viewBox="0 0 100 90">
+      <path class="ln f-heart" d="M50 82 C10 55 6 30 18 18 C30 6 46 12 50 26 C54 12 70 6 82 18 C94 30 90 55 50 82 Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="book">
+
+  <header class="cover">
+    <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="Sam, a teenager holding a tablet, next to Nurse Lou">
+      <rect class="f-wall" width="600" height="320"/>
+      <circle class="f-wall2" cx="430" cy="150" r="150"/>
+      <rect class="ln f-floor" x="-5" y="292" width="610" height="40"/>
+      <use href="#nurse" x="260" y="-12" width="160" height="330" transform="translate(840 0) scale(-1 1)"/>
+      <use href="#sam" x="250" y="-10" width="155" height="310"/>
+      <text x="327" y="137" text-anchor="middle" class="lbl-s" style="font-size:8px">Ready</text>
+      <use href="#virus" x="60" y="60" width="90" height="90"/>
+      <use href="#virus" x="150" y="170" width="54" height="54"/>
+    </svg>
+    <div class="titles">
+      <h1>Sam and the <span>Flu Spray</span></h1>
+      <p>An autism-friendly guide to the nasal flu vaccine, for young people who understand a lot and sometimes find talking hard.</p>
+    </div>
+  </header>
+
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="Sam holding a tablet that says Hi, I'm Sam">
+      <rect class="f-wall" width="600" height="320"/>
+      <rect class="ln f-board" x="330" y="40" width="220" height="150" rx="6"/>
+      <path class="ln-t" d="M350 70 H500 M350 95 H470 M350 120 H520 M350 145 H440"/>
+      <rect class="ln f-floor" x="-5" y="292" width="610" height="40"/>
+      <use href="#sam" x="120" y="-6" width="160" height="320"/>
+      <path class="ln f-white" d="M250 120 H392 Q402 120 402 130 V170 Q402 180 392 180 H276 L262 194 L264 180 H250 Q240 180 240 170 V130 Q240 120 250 120 Z"/>
+      <text x="321" y="156" text-anchor="middle" class="lbl" style="font-size:20px">Hi, I'm Sam.</text>
+    </svg>
+    <div class="words">
+      <h2>This is me</h2>
+      <p>My name is Sam. I go to school every day.</p>
+      <p>I understand a lot. Talking can be hard for me, so I use my tablet and my cards to show people what I mean.</p>
+      <p>It can take me some time to answer. People can wait for me.</p>
+      <span class="pno">1</span>
+    </div>
+  </article>
+
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="Flu viruses shown as if under a microscope">
+      <rect class="f-wall" width="600" height="320"/>
+      <circle class="ln f-white" cx="220" cy="160" r="130"/>
+      <circle class="ln-t" cx="220" cy="160" r="118"/>
+      <use href="#virus" x="120" y="60" width="200" height="200"/>
+      <use href="#virus" x="420" y="50" width="90" height="90"/>
+      <use href="#virus" x="470" y="180" width="70" height="70"/>
+      <use href="#virus" x="380" y="210" width="50" height="50"/>
+      <text x="220" y="308" text-anchor="middle" class="lbl-s" style="font-size:15px">Flu virus, seen through a microscope</text>
+    </svg>
+    <div class="words">
+      <h2>What is flu?</h2>
+      <p>Flu is caused by a virus. A virus is far too small to see.</p>
+      <p>Flu can give you a high temperature, aches, a sore throat and make you very tired. Most people my age get better in about a week.</p>
+      <p>For some people, like my Nan and my baby cousin Ava, flu can be much more serious.</p>
+      <span class="pno">2</span>
+    </div>
+  </article>
+
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="Close up of a face with the spray going into each nostril, labelled 1 and 2">
+      <rect class="f-wall" width="600" height="320"/>
+      <g class="ln">
+        <ellipse class="f-skin2" cx="230" cy="190" rx="130" ry="160"/>
+        <path class="f-hair" d="M100 150 Q96 20 230 22 Q364 20 360 150 Q352 80 300 76 Q250 60 200 72 Q130 74 100 150 Z"/>
+        <circle class="f-ink" cx="180" cy="160" r="7" style="stroke:none"/>
+        <circle class="f-ink" cx="280" cy="160" r="7" style="stroke:none"/>
+        <path class="f-none" d="M160 132 Q180 124 198 132 M262 132 Q280 124 300 132"/>
+        <path class="f-none" d="M230 170 Q218 220 206 238 Q214 256 230 254 Q246 256 254 238 Q242 220 230 170"/>
+        <ellipse class="f-ink" cx="218" cy="246" rx="6" ry="4"/>
+        <ellipse class="f-ink" cx="242" cy="246" rx="6" ry="4"/>
+      </g>
+      <use href="#sprayer" x="0" y="0" width="40" height="100" transform="translate(330 170) rotate(-112 20 50)"/>
+      <use href="#puff" x="150" y="250" width="60" height="42"/>
+      <use href="#puff" x="252" y="258" width="60" height="42"/>
+      <circle class="ln f-white" cx="110" cy="292" r="20"/><text x="110" y="300" text-anchor="middle" class="lbl" style="font-size:22px">1</text>
+      <circle class="ln f-white" cx="352" cy="292" r="20"/><text x="352" y="300" text-anchor="middle" class="lbl" style="font-size:22px">2</text>
+      <text x="505" y="60" text-anchor="middle" class="lbl" style="font-size:20px">One spray</text>
+      <text x="505" y="86" text-anchor="middle" class="lbl" style="font-size:20px">each side</text>
+    </svg>
+    <div class="words">
+      <h2>What is the flu spray?</h2>
+      <p>Every year, schools offer a flu vaccine. For most young people it's a nasal spray.</p>
+      <p>That means a spray inside my nose. <strong>One spray in each nostril.</strong> It is not a needle. It usually takes less than 10 seconds.</p>
+      <span class="pno">3</span>
+    </div>
+  </article>
+
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="A letter and consent form, and Sam's I'm worried card">
+      <rect class="f-wall" width="600" height="320"/>
+      <rect class="ln f-floor" x="-5" y="292" width="610" height="40"/>
+      <g transform="rotate(-6 170 170)">
+        <rect class="ln f-white" x="80" y="60" width="180" height="230" rx="4"/>
+        <text x="100" y="94" class="lbl" style="font-size:15px">Flu vaccine</text>
+        <text x="100" y="112" class="lbl-s" style="font-size:11px">Consent form</text>
+        <path class="ln-t" d="M100 136 H240 M100 156 H230 M100 176 H240"/>
+        <rect class="ln f-white" x="100" y="200" width="14" height="14" rx="2"/>
+        <path class="ln f-none" d="M102 207 L106 212 L113 202"/>
+        <path class="ln-t" d="M124 208 H220"/>
+        <rect class="ln f-white" x="100" y="230" width="14" height="14" rx="2"/>
+        <path class="ln-t" d="M124 238 H200"/>
+      </g>
+      <g transform="rotate(5 420 170)">
+        <rect class="ln f-white" x="340" y="80" width="160" height="170" rx="12" style="stroke-dasharray:8 6"/>
+        <circle class="ln f-white" cx="420" cy="150" r="42"/>
+        <circle class="f-ink" cx="406" cy="142" r="4"/><circle class="f-ink" cx="434" cy="142" r="4"/>
+        <path class="ln f-none" d="M398 128 L410 133 M442 128 L430 133 M404 172 Q420 160 436 172"/>
+        <text x="420" y="228" text-anchor="middle" class="lbl" style="font-size:20px">I'm worried</text>
+      </g>
+    </svg>
+    <div class="words">
+      <h2>Before the day</h2>
+      <p>A letter comes home. My parent or carer fills in a form to say yes.</p>
+      <p>I can use my cards to tell staff how I'm feeling about it. It's OK to feel worried. Lots of people do.</p>
+      <span class="pno">4</span>
+    </div>
+  </article>
+
+
+  <article class="page">
+    <div class="words">
+      <h2>Things that might be different</h2>
+      <p>Sometimes plans change. This is OK.</p>
+      <ul class="icons">
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-white" cx="60" cy="44" r="32"/><path class="ln f-none" d="M60 24 V44 L74 54"/></svg>I might wait a short time or a long time.</li>
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><rect class="ln f-wall2" x="34" y="8" width="52" height="76"/><circle class="ln f-white" cx="76" cy="48" r="4"/></svg>The room might be different from last time.</li>
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-skin" cx="60" cy="30" r="16"/><path class="ln f-nurse" d="M32 86 Q32 52 60 52 Q88 52 88 86 Z"/></svg>A different nurse might do my spray.</li>
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-skin" cx="60" cy="30" r="16"/><path class="ln f-hoodie" d="M32 86 Q32 52 60 52 Q88 52 88 86 Z"/><rect class="ln f-white" x="74" y="8" width="40" height="26" rx="6"/><path class="ln-t" d="M82 17 H106 M82 25 H98"/></svg>If something changes, a member of staff will tell me.</li>
+      </ul>
+      <span class="pno">5</span>
+    </div>
+  </article>
+
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="Sam waiting on a chair wearing headphones, next to a friend">
+      <rect class="f-wall" width="600" height="320"/>
+      <rect class="ln f-wall2" x="440" y="30" width="120" height="262"/>
+      <circle class="ln f-white" cx="540" cy="170" r="6"/>
+      <rect class="ln f-white" x="456" y="60" width="88" height="40" rx="4"/>
+      <text x="500" y="85" text-anchor="middle" class="lbl-s" style="font-size:11px">Vaccinations</text>
+      <rect class="ln f-floor" x="-5" y="292" width="610" height="40"/>
+      <use href="#chair" x="40" y="128" width="170" height="221"/>
+      <use href="#chair" x="200" y="128" width="170" height="221"/>
+      <use href="#samsit" x="45" y="40" width="160" height="260" style="--hoodie:#7a8f5a;--hoodie2:#65784a;--skin2:#e9c19f;--hair:#b98446"/>
+      <use href="#samsit" x="205" y="40" width="160" height="260"/>
+      <path class="ln f-none" style="stroke-width:6" d="M263 98 Q264 60 285 60 Q306 60 307 98"/>
+      <rect class="ln f-device" x="259" y="90" width="12" height="20" rx="5"/>
+      <rect class="ln f-device" x="299" y="90" width="12" height="20" rx="5"/>
+    </svg>
+    <div class="words">
+      <h2>Waiting my turn</h2>
+      <p>On the day, I wait my turn. I might wait with my class or with a member of staff I know.</p>
+      <p>I can bring something that helps me feel calm, like my headphones.</p>
+      <span class="pno">6</span>
+    </div>
+  </article>
+
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="Nurse Lou saying hello to Sam">
+      <rect class="f-wall" width="600" height="320"/>
+      <rect class="ln f-floor" x="-5" y="292" width="610" height="40"/>
+      <use href="#nurse" x="60" y="-18" width="160" height="330"/>
+      <use href="#sam" x="360" y="-14" width="160" height="320"/>
+      <path class="ln f-white" d="M190 26 H352 Q362 26 362 36 V92 Q362 102 352 102 H214 L196 118 L200 102 H190 Q180 102 180 92 V36 Q180 26 190 26 Z"/>
+      <text x="271" y="54" text-anchor="middle" class="lbl-s" style="font-size:14px">Hello, Sam.</text>
+      <text x="271" y="78" text-anchor="middle" class="lbl-s" style="font-size:14px">I'm Nurse Lou.</text>
+    </svg>
+    <div class="words">
+      <h2>Meeting Nurse Lou</h2>
+      <p>Nurse Lou works with the school immunisation team. She tells me what she's going to do before she does it.</p>
+      <p>I can show her my <strong>Ready</strong> card or my <strong>Wait please</strong> card.</p>
+      <p>Nurse Lou might make a joke to help me feel relaxed. I don't have to laugh or answer. I can just listen.</p>
+      <span class="pno">7</span>
+    </div>
+  </article>
+
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="Sam sitting up straight while Nurse Lou gives the spray">
+      <rect class="f-wall" width="600" height="320"/>
+      <rect class="ln f-floor" x="-5" y="292" width="610" height="40"/>
+      <use href="#chair" x="90" y="134" width="170" height="221"/>
+      <use href="#samsit" x="95" y="46" width="160" height="260"/>
+      <use href="#nurse" x="0" y="0" width="160" height="330" transform="translate(430 -12) scale(-1 1)"/>
+      <use href="#puff" x="186" y="96" width="44" height="31"/>
+      <text x="20" y="30" class="lbl" style="font-size:17px">Sit up straight.</text>
+      <text x="20" y="54" class="lbl" style="font-size:17px">Breathe normally.</text>
+      <text x="470" y="200" class="lbl" style="font-size:30px">1, 2.</text>
+      <text x="470" y="236" class="lbl" style="font-size:22px">Done.</text>
+    </svg>
+    <div class="words">
+      <h2>The spray</h2>
+      <p>I sit up straight on the chair. I breathe normally. I don't need to sniff.</p>
+      <p>Nurse Lou says "Spray one" and sprays one side. Then she says "Spray two" and sprays the other side.</p>
+      <p>If I sneeze, that is OK. I do not need to have it again.</p>
+      <p>Then it is finished.</p>
+      <span class="pno">8</span>
+    </div>
+  </article>
+
+
+  <article class="page">
+    <div class="words">
+      <h2>What I might notice</h2>
+      <p>These are things I might see, hear and feel. Everyone is different.</p>
+      <ul class="icons">
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><path class="ln f-skin" d="M52 12 Q84 10 84 42 Q84 60 70 66 Q66 80 54 80 Q44 80 44 70"/><path class="ln f-none" d="M62 30 Q70 34 66 44"/><path class="ln-t" d="M96 34 Q102 44 96 54 M104 26 Q114 44 104 62"/></svg>Sounds: people talking, chairs moving, doors opening.</li>
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-sticker" cx="60" cy="44" r="16"/><path class="ln f-none" d="M60 12 V20 M60 68 V76 M28 44 H36 M84 44 H92 M38 22 L44 28 M76 60 L82 66 M82 22 L76 28 M44 60 L38 66"/></svg>The room might be bright.</li>
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><path class="ln f-skin2" d="M60 6 Q52 42 40 58 Q34 72 48 76 Q60 80 72 76 Q86 72 80 58 Q68 42 60 6 Z"/><ellipse class="f-ink" cx="50" cy="70" rx="5" ry="3"/><ellipse class="f-ink" cx="70" cy="70" rx="5" ry="3"/><path class="ln-t" d="M92 30 L100 24 M94 42 H104 M92 54 L100 60"/></svg>The spray might feel cold, wet or tickly inside my nose.</li>
+        <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-skin" cx="44" cy="44" r="12"/><path class="ln f-nurse" d="M26 86 Q26 62 44 62 Q62 62 62 86 Z"/><path class="ln f-skin" d="M58 64 L80 44"/><circle class="ln f-skin" cx="82" cy="42" r="6"/></svg>Nurse Lou will be close to my face for a few seconds. She will tell me first.</li>
+      </ul>
+      <span class="pno">9</span>
+    </div>
+  </article>
+
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="Sam back in class with a sticker and a tablet that says Done">
+      <rect class="f-wall" width="600" height="320"/>
+      <rect class="ln f-board" x="40" y="40" width="250" height="160" rx="6"/>
+      <path class="ln-t" d="M60 76 H250 M60 106 H220 M60 136 H260 M60 166 H200"/>
+      <rect class="ln f-floor" x="-5" y="292" width="610" height="40"/>
+      <use href="#sam" x="330" y="-6" width="160" height="320"/>
+      <text x="410" y="146" text-anchor="middle" class="lbl-s" style="font-size:8px">Done &#10003;</text>
+      <circle class="ln f-sticker" cx="436" cy="116" r="11"/>
+      <path class="ln f-none" d="M431 116 L435 120 L442 111"/>
+    </svg>
+    <div class="words">
+      <h2>Afterwards</h2>
+      <p>My nose might be runny or blocked for a day or two. I might feel a bit tired. This is normal. It usually stops after a day or two.</p>
+      <p>Then I go back to class.</p>
+      <span class="pno">10</span>
+    </div>
+  </article>
+
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 320" role="img" aria-label="Sam with Nan, who is holding baby Ava, and a cake on the table">
+      <rect class="f-wall" width="600" height="320"/>
+      <rect class="ln f-floor" x="-5" y="292" width="610" height="40"/>
+      <rect class="ln f-chair" x="240" y="210" width="130" height="12" rx="4"/>
+      <path class="ln f-none" d="M252 222 V292 M358 222 V292"/>
+      <rect class="ln f-cake" x="262" y="170" width="86" height="40" rx="6"/>
+      <path class="ln f-cake2" d="M262 178 Q262 170 270 170 H340 Q348 170 348 178 V182 Q340 192 332 182 Q324 192 316 182 Q308 192 300 182 Q292 192 284 182 Q276 192 268 182 Q264 186 262 182 Z"/>
+      <use href="#sam" x="70" y="-6" width="160" height="320"/>
+      <use href="#nan" x="390" y="16" width="160" height="300"/>
+      <use href="#heart" x="290" y="96" width="34" height="31"/>
+    </svg>
+    <div class="words">
+      <h2>Why it matters</h2>
+      <p>Having the flu spray makes me less likely to catch flu. It also makes me less likely to pass it on.</p>
+      <p>That helps protect Nan, baby Ava and my friends.</p>
+      <p>Nan likes baking. She said she will bake a cake after my flu spray.</p>
+      <span class="pno">11</span>
+    </div>
+  </article>
+
+  <article class="page moral">
+    <div class="words">
+      <h2>The flu spray takes a few seconds. It helps protect me and the people I care about.</h2>
+      <p>It is OK to feel worried. I can use my cards, my tablet and the things that help me.</p>
+    </div>
+  </article>
+
+  <section class="panel" aria-labelledby="sched-h">
+    <div class="section-head">
+      <h2 id="sched-h">My flu spray schedule</h2>
+      <p>Go through it together before the day. Point to each step as it happens.</p>
+    </div>
+    <ol class="schedule">
+      <li><span class="n">1</span><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#chair" x="6" y="8" width="54" height="70"/><use href="#chair" x="60" y="8" width="54" height="70"/></svg>Wait my turn</li>
+      <li><span class="n">2</span><svg viewBox="0 0 120 100" aria-hidden="true"><path class="ln f-white" d="M44 90 V44 Q44 38 50 38 Q56 38 56 44 V30 Q56 24 62 24 Q68 24 68 30 V34 Q68 28 74 28 Q80 28 80 34 V42 Q80 36 86 36 Q92 36 92 42 V66 Q92 90 70 90 Z"/><path class="ln-t" d="M26 30 Q20 40 26 50 M16 24 Q6 40 16 56"/></svg>Say hello to the nurse</li>
+      <li><span class="n">3</span><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#chair" x="30" y="4" width="60" height="78"/><path class="ln f-none" d="M100 20 V80 M94 28 L100 20 L106 28"/></svg>Sit up straight</li>
+      <li><span class="n">4</span><svg viewBox="0 0 120 100" aria-hidden="true"><path class="ln f-none" d="M16 40 Q36 26 56 40 T96 40 M16 64 Q36 50 56 64 T96 64"/><text x="60" y="94" text-anchor="middle" class="lbl-s" style="font-size:13px">in and out</text></svg>Breathe normally</li>
+      <li><span class="n">5</span><svg viewBox="0 0 120 100" aria-hidden="true"><path class="ln f-skin2" d="M60 8 Q52 48 40 64 Q34 78 48 82 Q60 86 72 82 Q86 78 80 64 Q68 48 60 8 Z"/><ellipse class="f-ink" cx="50" cy="76" rx="5" ry="3"/><ellipse class="ln f-none" cx="70" cy="76" rx="5" ry="3"/><use href="#puff" x="6" y="70" width="36" height="25"/></svg>Spray one side</li>
+      <li><span class="n">6</span><svg viewBox="0 0 120 100" aria-hidden="true"><path class="ln f-skin2" d="M60 8 Q52 48 40 64 Q34 78 48 82 Q60 86 72 82 Q86 78 80 64 Q68 48 60 8 Z"/><ellipse class="ln f-none" cx="50" cy="76" rx="5" ry="3"/><ellipse class="f-ink" cx="70" cy="76" rx="5" ry="3"/><use href="#puff" x="78" y="70" width="36" height="25"/></svg>Spray the other side</li>
+      <li><span class="n">7</span><svg viewBox="0 0 120 100" aria-hidden="true"><circle class="ln f-sticker" cx="60" cy="48" r="34"/><path class="ln f-none" style="stroke-width:5" d="M44 48 L56 60 L78 36"/></svg>All done</li>
+      <li><span class="n">8</span><svg viewBox="0 0 120 100" aria-hidden="true"><rect class="ln f-board" x="14" y="16" width="92" height="60" rx="4"/><path class="ln-t" d="M26 34 H90 M26 50 H80 M26 64 H94"/></svg>Back to class</li>
+    </ol>
+    <p class="note">Some young people have the flu vaccine as an injection instead. That's OK too. It protects in the same way.</p>
+  </section>
+
+
+  <section class="panel" aria-labelledby="helps-h">
+    <div class="section-head">
+      <h2 id="helps-h">Things that can help me</h2>
+      <p>Tick the ones that help. Choose one or two to use on the day.</p>
+    </div>
+    <ul class="icons">
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><path class="ln f-none" style="stroke-width:6" d="M34 58 Q34 14 60 14 Q86 14 86 58"/><rect class="ln f-device" x="26" y="50" width="16" height="28" rx="6"/><rect class="ln f-device" x="78" y="50" width="16" height="28" rx="6"/></svg>Headphones</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-virus2" cx="60" cy="46" r="26"/><circle class="ln f-white" cx="52" cy="40" r="5"/><circle class="ln f-white" cx="68" cy="40" r="5"/><circle class="ln f-white" cx="52" cy="56" r="5"/><circle class="ln f-white" cx="68" cy="56" r="5"/></svg>Something to hold or fiddle with</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><text x="60" y="56" text-anchor="middle" class="lbl" style="font-size:26px">1 2 3 4 5</text></svg>Slow breaths while I count to 5</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-skin" cx="60" cy="30" r="16"/><path class="ln f-hoodie2" d="M32 86 Q32 52 60 52 Q88 52 88 86 Z"/></svg>A member of staff I know</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><rect class="ln f-white" x="34" y="14" width="52" height="62" rx="8"/><rect class="ln f-white" x="46" y="28" width="8" height="30" rx="2"/><rect class="ln f-white" x="64" y="28" width="8" height="30" rx="2"/></svg>My break card</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><rect class="ln f-device" x="30" y="16" width="60" height="58" rx="6"/><rect class="ln f-screen" x="36" y="22" width="48" height="46" rx="2"/></svg>My tablet</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><circle class="ln f-white" cx="60" cy="44" r="30"/><path class="ln f-none" d="M60 22 V44 L76 44"/></svg>Knowing how long I will wait</li>
+      <li><svg viewBox="0 0 120 90" aria-hidden="true"><rect class="ln f-white" x="24" y="14" width="72" height="62" rx="6"/><path class="ln-t" d="M36 32 H84 M36 46 H84 M36 60 H66"/></svg>Something else: ________</li>
+    </ul>
+  </section>
+
+  <section class="panel" aria-labelledby="ft-h">
+    <div class="section-head">
+      <h2 id="ft-h">First, then</h2>
+      <p>Write or draw what happens after the spray.</p>
+    </div>
+    <div class="firstthen">
+      <div><b>First</b><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#sprayer" x="36" y="6" width="48" height="108"/></svg><span>Flu spray</span></div>
+      <div><b>Then</b><div class="blank"></div><span>______________</span></div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="cards-h">
+    <div class="section-head">
+      <h2 id="cards-h">My communication cards</h2>
+      <p>Print and cut out. Point to a card to tell staff what you need.</p>
+    </div>
+    <ul class="cards">
+      CARDS_HTML
+    </ul>
+    <div class="section-head">
+      <h2 style="font-size:1.4rem">How I feel right now</h2>
+    </div>
+    <ul class="scale">
+      FEELINGS_HTML
+    </ul>
+  </section>
+
+  <section class="panel" aria-labelledby="about-h">
+    <div class="section-head">
+      <h2 id="about-h">About me, for the nurse</h2>
+      <p>Fill this in together and give it to the immunisation team on the day.</p>
+    </div>
+    <div class="aboutme">
+      <div><label>My name is</label><div class="lines"></div></div>
+      <div><label>The best way to communicate with me is</label><div class="lines"></div></div>
+      <div><label>Things that help me stay calm</label><div class="lines"></div></div>
+      <div><label>Please don't</label><div class="lines"></div></div>
+      <div><label>After the spray, I'd like</label><div class="lines"></div></div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>Colouring pages</h2>
+    <p>Four pages to colour. Take your time.</p>
+  </div>
+
+  <section class="colour colour-in" aria-label="Colouring page: Sam">
+    <h3>Sam</h3>
+    <svg viewBox="0 0 600 640" role="img" aria-label="Outline of Sam holding a tablet">
+      <rect class="f-wall" width="600" height="640"/>
+      <rect class="ln f-board" x="330" y="80" width="220" height="150" rx="6"/>
+      <path class="ln-t" d="M350 110 H500 M350 135 H470 M350 160 H520 M350 185 H440"/>
+      <rect class="ln f-floor" x="-5" y="600" width="610" height="50"/>
+      <use href="#sam" x="40" y="0" width="300" height="600"/>
+    </svg>
+  </section>
+
+  <section class="colour colour-in" aria-label="Colouring page: a shield pattern">
+    <h3>Protected</h3>
+    <svg viewBox="0 0 600 640" role="img" aria-label="A geometric pattern of petals around a shield with a tick">
+      <rect class="f-wall" width="600" height="640"/>
+      PATTERN
+    </svg>
+  </section>
+
+  <section class="colour colour-in" aria-label="Colouring page: Nurse Lou and Sam">
+    <h3>Nurse Lou and Sam</h3>
+    <svg viewBox="0 0 600 640" role="img" aria-label="Outline of Nurse Lou and Sam">
+      <rect class="f-wall" width="600" height="640"/>
+      <rect class="ln f-floor" x="-5" y="600" width="610" height="50"/>
+      <use href="#nurse" x="40" y="64" width="260" height="536"/>
+      <use href="#sam" x="300" y="60" width="270" height="540"/>
+    </svg>
+  </section>
+
+  <section class="colour colour-in" aria-label="Colouring page: Nan and baby Ava">
+    <h3>Nan and baby Ava</h3>
+    <svg viewBox="0 0 600 640" role="img" aria-label="Outline of Nan holding baby Ava, with a cake">
+      <rect class="f-wall" width="600" height="640"/>
+      <rect class="ln f-floor" x="-5" y="600" width="610" height="50"/>
+      <use href="#nan" x="40" y="38" width="300" height="562"/>
+      <rect class="ln f-chair" x="340" y="440" width="220" height="16" rx="5"/>
+      <path class="ln f-none" d="M356 456 V600 M544 456 V600"/>
+      <rect class="ln f-cake" x="370" y="360" width="160" height="80" rx="10"/>
+      <path class="ln f-cake2" d="M370 376 Q370 360 386 360 H514 Q530 360 530 376 V382 Q518 398 506 382 Q494 398 482 382 Q470 398 458 382 Q446 398 434 382 Q422 398 410 382 Q398 398 386 382 Q376 392 370 382 Z"/>
+      <use href="#heart" x="420" y="280" width="60" height="54"/>
+    </svg>
+  </section>
+
+  <aside class="adults" aria-labelledby="adults-h">
+    <h2 id="adults-h">For parents, carers and staff</h2>
+    <ul>
+      <li>The children's flu vaccine is usually a nasal spray: one spray into each nostril. It's quick and doesn't hurt. The young person doesn't need to sniff.</li>
+      <li>Afterwards some young people get a runny or blocked nose, a headache, tiredness or a smaller appetite for a short time.</li>
+      <li>Some are offered an injection instead, for example if the nasal spray isn't suitable for them.</li>
+      <li>Vaccination lowers the chance of catching flu and helps stop it spreading to babies, older people and people with long-term conditions. It doesn't guarantee someone won't catch flu.</li>
+      <li>Use literal language and say what will happen before it happens. Avoid "it won't hurt a bit" type phrases; say "it might feel cold or tickly".</li>
+      <li>Tell the young person about changes as early as possible, such as a new time, room or nurse.</li>
+      <li>Give processing time. Offer the communication cards and the feelings scale before, during and after. Accept a card as a full answer.</li>
+      <li>Share the "About me" page with the immunisation team. Ask if a quieter space or a first or last slot is possible.</li>
+      <li>Questions? Ask the school immunisation team, your GP practice or a pharmacist.</li>
+    </ul>
+  </aside>
+
+</main>
+"""
+
+
+def build():
+    html = (
+        HTML.replace("VIRUS_SPIKES", virus_spikes())
+        .replace("CARDS_HTML", cards_html())
+        .replace("FEELINGS_HTML", feelings_html())
+        .replace("PATTERN", pattern_page())
+    )
+    OUT.write_text(html, encoding="utf-8")
+    print(f"wrote {OUT}")
+
+
+if __name__ == "__main__":
+    build()

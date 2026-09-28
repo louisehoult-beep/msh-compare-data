@@ -1,0 +1,667 @@
+<title>Ellie's Tickly Trunk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --page: #eef6fb;
+    --paper: #ffffff;
+    --ink: #1f2a44;
+    --soft: #52607d;
+    --sun: #ffd34e;
+    --berry: #d6336c;
+    --sky: #cfe8f7;
+    --grass: #9bd17a;
+    --wall: #fdf1d8;
+    --floor: #e4c79a;
+    --ele: #a9bfdc;
+    --ele2: #8fa8c9;
+    --pink: #f6a7b8;
+    --bug: #8fd16a;
+    --bug2: #f28c28;
+    --tort: #9cc87a;
+    --shell: #c98f4f;
+    --shell2: #a8713a;
+    --cap: #5b7bb5;
+    --glass: #e8f6ff;
+    --nurse: #3f7fd1;
+    --trousers: #2d5da3;
+    --skin: #f1c6a0;
+    --hair: #6b4226;
+    --white: #ffffff;
+    --spray: #f4f4f4;
+    --mist: #ffffff;
+    --cake: #ffb3c7;
+    --cake2: #fff0a8;
+    --icing: #ffffff;
+    --candle: #7cc4f0;
+    --flame: #ffb020;
+    --can: #43b5a0;
+    --hose: #e2463c;
+    --chair: #f2994a;
+    --star: #ffd34e;
+    --flag1: #f28c28;
+    --flag2: #3f7fd1;
+    --flag3: #d6336c;
+    --heart: #ef5a7a;
+    --line: #1f2a44;
+    --lw: 3;
+    --fill-ink: #1f2a44;
+  }
+  /* Colouring pages: every fill turns white, lines go black and a touch thicker */
+  .colour-in {
+    --sky: #fff; --grass: #fff; --wall: #fff; --floor: #fff;
+    --ele: #fff; --ele2: #fff; --pink: #fff; --bug: #fff; --bug2: #fff;
+    --tort: #fff; --shell: #fff; --shell2: #fff; --cap: #fff; --glass: #fff;
+    --nurse: #fff; --trousers: #fff; --skin: #fff; --hair: #fff; --spray: #fff;
+    --cake: #fff; --cake2: #fff; --candle: #fff; --flame: #fff; --can: #fff;
+    --hose: #fff; --chair: #fff; --star: #fff; --flag1: #fff; --flag2: #fff;
+    --flag3: #fff; --heart: #fff; --sun: #fff;
+    --line: #111; --lw: 3.6; --fill-ink: #111;
+  }
+  .f-sky{fill:var(--sky)} .f-grass{fill:var(--grass)} .f-wall{fill:var(--wall)} .f-floor{fill:var(--floor)}
+  .f-ele{fill:var(--ele)} .f-ele2{fill:var(--ele2)} .f-pink{fill:var(--pink)}
+  .f-bug{fill:var(--bug)} .f-bug2{fill:var(--bug2)} .f-tort{fill:var(--tort)}
+  .f-shell{fill:var(--shell)} .f-shell2{fill:var(--shell2)} .f-cap{fill:var(--cap)} .f-glass{fill:var(--glass)}
+  .f-nurse{fill:var(--nurse)} .f-trousers{fill:var(--trousers)} .f-skin{fill:var(--skin)} .f-hair{fill:var(--hair)}
+  .f-white{fill:var(--white)} .f-spray{fill:var(--spray)} .f-mist{fill:var(--mist)}
+  .f-cake{fill:var(--cake)} .f-cake2{fill:var(--cake2)} .f-icing{fill:var(--icing)}
+  .f-candle{fill:var(--candle)} .f-flame{fill:var(--flame)} .f-can{fill:var(--can)} .f-hose{fill:var(--hose)}
+  .f-chair{fill:var(--chair)} .f-star{fill:var(--star)} .f-sun{fill:var(--sun)} .f-heart{fill:var(--heart)}
+  .f-flag1{fill:var(--flag1)} .f-flag2{fill:var(--flag2)} .f-flag3{fill:var(--flag3)}
+  .f-ink{fill:var(--fill-ink)} .f-none{fill:none}
+  .ln{stroke:var(--line);stroke-width:var(--lw);stroke-linejoin:round;stroke-linecap:round}
+  .no-ln{stroke:none}
+  .say{font-family:"Baloo 2","Comic Sans MS",system-ui,sans-serif;font-weight:800;fill:var(--fill-ink)}
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: "Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+    font-size: 1.3rem;
+    line-height: 1.55;
+    padding-inline: 16px;
+    padding-block: 28px 56px;
+  }
+  .book { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+  h1, h2, h3 { font-family: "Baloo 2", "Comic Sans MS", system-ui, sans-serif; line-height: 1.1; text-wrap: balance; margin: 0; }
+  .cover { background: var(--paper); border-radius: 28px; padding: 28px 24px; text-align: center; display: flex; flex-direction: column; gap: 10px; border: 4px solid var(--ink); }
+  .cover h1 { font-size: clamp(2.6rem, 9vw, 4.4rem); font-weight: 800; color: var(--ink); }
+  .cover h1 span { color: var(--berry); }
+  .cover .sub { font-size: 1.25rem; color: var(--soft); margin: 0; }
+  .page { background: var(--paper); border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 3px 0 #c9dbe8; }
+  .page svg.scene { display: block; width: 100%; height: auto; }
+  .words { padding: 20px 26px 26px; display: flex; flex-direction: column; gap: 12px; }
+  .words p { margin: 0; max-width: 34em; }
+  .words .big { font-family: "Baloo 2", system-ui, sans-serif; font-weight: 800; font-size: 1.7rem; color: var(--berry); line-height: 1.15; }
+  .pno { font-family: "Baloo 2", system-ui, sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--soft); }
+  .moral { background: var(--sun); border: 4px solid var(--ink); }
+  .moral .words .big { color: var(--ink); font-size: clamp(1.8rem, 6vw, 2.4rem); }
+
+  .section-head { display: flex; flex-direction: column; gap: 6px; padding-top: 12px; }
+  .section-head h2 { font-size: 2.2rem; font-weight: 800; }
+  .section-head p { margin: 0; color: var(--soft); font-size: 1.1rem; }
+
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .steps li { background: var(--paper); border-radius: 18px; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; font-weight: 700; font-size: 1.15rem; line-height: 1.25; }
+  .steps svg { width: 100%; max-width: 140px; height: auto; }
+  .steps .n { font-family: "Baloo 2", system-ui, sans-serif; font-weight: 800; background: var(--ink); color: #fff; width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; font-size: 1.1rem; }
+  .also { background: var(--paper); border-radius: 18px; padding: 16px 20px; margin: 0; font-size: 1.15rem; }
+
+  .colour { background: #fff; border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 10px; border: 3px dashed #9fb3c8; }
+  .colour h3 { font-size: 1.9rem; font-weight: 800; text-align: center; }
+  .colour svg { width: 100%; height: auto; display: block; }
+  .colour .name { font-size: 1.2rem; margin: 0; }
+
+  .adults { background: var(--paper); border-radius: 18px; padding: 22px 24px; font-size: 1.05rem; display: flex; flex-direction: column; gap: 8px; }
+  .adults h2 { font-size: 1.6rem; }
+  .adults ul { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
+
+  @media (max-width: 560px) {
+    body { font-size: 1.15rem; }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .words { padding: 16px 18px 20px; }
+  }
+  @media print {
+    @page { size: A4; margin: 12mm; }
+    body { background: #fff; padding: 0; }
+    .book { gap: 0; max-width: none; }
+    .page, .cover, .colour, .adults, .steps-wrap { break-inside: avoid; break-after: page; box-shadow: none; border-radius: 0; }
+    .colour { border: none; padding: 0; }
+    .colour svg { max-height: 235mm; }
+  }
+</style>
+
+<!-- Shared drawings. Colours come from CSS variables so the same drawing works in colour and as a colouring page. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="ellie" viewBox="0 0 220 200">
+      <g class="ln">
+        <rect class="f-ele2" x="66" y="138" width="22" height="50" rx="9"/>
+        <rect class="f-ele2" x="120" y="138" width="22" height="50" rx="9"/>
+        <path class="f-none" d="M40 118 Q26 128 30 146"/>
+        <circle class="f-ink" cx="30" cy="148" r="4"/>
+        <ellipse class="f-ele" cx="95" cy="124" rx="58" ry="45"/>
+        <rect class="f-ele" x="46" y="145" width="25" height="46" rx="10"/>
+        <rect class="f-ele" x="100" y="148" width="25" height="44" rx="10"/>
+        <path class="f-none" d="M52 186 h13 M106 186 h13"/>
+        <path class="f-none" style="stroke-width:24" d="M174 96 C198 106 206 140 194 158 C188 168 197 176 205 166"/>
+        <path class="f-none" style="stroke:var(--ele);stroke-width:17" d="M174 96 C198 106 206 140 194 158 C188 168 197 176 205 166"/>
+        <circle class="f-ele" cx="150" cy="80" r="42"/>
+        <ellipse class="f-ele" cx="116" cy="84" rx="30" ry="40"/>
+        <ellipse class="f-pink" cx="117" cy="86" rx="18" ry="26"/>
+        <circle class="f-ink" cx="160" cy="70" r="6" style="stroke:none"/>
+        <circle class="f-white" cx="162" cy="67.5" r="2" style="stroke:none"/>
+        <path class="f-none" d="M153 58 Q161 53 168 58"/>
+        <circle class="f-pink" cx="170" cy="92" r="7" style="stroke:none;opacity:.8"/>
+        <path class="f-none" d="M146 101 Q156 111 166 104"/>
+      </g>
+    </symbol>
+
+    <symbol id="bug" viewBox="0 0 100 100">
+      <g class="ln">
+        <path class="f-none" d="M50 27 V16 M69.8 35.2 L78.3 26.7 M30.2 35.2 L21.7 26.7 M78 55 H89 M22 55 H11"/>
+        <circle class="f-bug2" cx="50" cy="13" r="4.5"/>
+        <circle class="f-bug2" cx="80.5" cy="24.5" r="4.5"/>
+        <circle class="f-bug2" cx="19.5" cy="24.5" r="4.5"/>
+        <circle class="f-bug2" cx="91.5" cy="55" r="4.5"/>
+        <circle class="f-bug2" cx="8.5" cy="55" r="4.5"/>
+        <ellipse class="f-bug" cx="40" cy="86" rx="7" ry="4"/>
+        <ellipse class="f-bug" cx="60" cy="86" rx="7" ry="4"/>
+        <circle class="f-bug" cx="50" cy="55" r="28"/>
+        <circle class="f-white" cx="40" cy="51" r="7.5"/>
+        <circle class="f-white" cx="60" cy="51" r="7.5"/>
+        <circle class="f-ink" cx="41.5" cy="53" r="3.5" style="stroke:none"/>
+        <circle class="f-ink" cx="58.5" cy="53" r="3.5" style="stroke:none"/>
+        <path class="f-none" d="M31 39 L46 44 M69 39 L54 44"/>
+        <path class="f-none" d="M41 71 Q50 64 59 71"/>
+      </g>
+    </symbol>
+
+    <symbol id="tortoise" viewBox="0 0 220 160">
+      <g class="ln">
+        <rect class="f-tort" x="66" y="112" width="24" height="34" rx="9"/>
+        <rect class="f-tort" x="156" y="112" width="24" height="34" rx="9"/>
+        <path class="f-tort" d="M195 110 L214 118 L195 124 Z"/>
+        <path class="f-tort" d="M44 86 L80 108 L66 124 L34 100 Z"/>
+        <circle class="f-tort" cx="38" cy="80" r="25"/>
+        <path class="f-cap" d="M12 64 Q24 38 54 50 Q62 54 66 62 Z"/>
+        <circle class="f-glass" cx="30" cy="78" r="8"/>
+        <circle class="f-glass" cx="48" cy="78" r="8"/>
+        <path class="f-none" d="M38 78 H40"/>
+        <circle class="f-ink" cx="30" cy="79" r="2.8" style="stroke:none"/>
+        <circle class="f-ink" cx="48" cy="79" r="2.8" style="stroke:none"/>
+        <path class="f-none" d="M28 92 Q37 99 46 92"/>
+        <path class="f-shell" d="M58 120 Q58 38 126 38 Q194 38 194 120 Z"/>
+        <path class="f-none" d="M111 64 L141 64 L151 84 L141 104 L111 104 L101 84 Z M111 64 L100 44 M141 64 L152 44 M101 84 L62 92 M151 84 L190 92 M111 104 L104 120 M141 104 L148 120"/>
+        <rect class="f-shell2" x="50" y="112" width="152" height="15" rx="7.5"/>
+      </g>
+    </symbol>
+
+    <symbol id="nurse" viewBox="0 0 170 250">
+      <g class="ln">
+        <rect class="f-trousers" x="57" y="170" width="20" height="62" rx="6"/>
+        <rect class="f-trousers" x="84" y="170" width="20" height="62" rx="6"/>
+        <ellipse class="f-ink" cx="64" cy="234" rx="14" ry="7"/>
+        <ellipse class="f-ink" cx="98" cy="234" rx="14" ry="7"/>
+        <rect class="f-nurse" x="26" y="94" width="17" height="64" rx="8.5" transform="rotate(8 34 96)"/>
+        <circle class="f-skin" cx="30" cy="160" r="9"/>
+        <rect class="f-skin" x="72" y="70" width="17" height="16"/>
+        <path class="f-nurse" d="M42 92 Q80 80 118 92 L126 180 L34 180 Z"/>
+        <path class="f-none" d="M68 86 L80 104 L92 86"/>
+        <rect class="f-none" x="92" y="124" width="20" height="17" rx="2"/>
+        <path class="f-none" d="M98 124 V116"/>
+        <rect class="f-white" x="50" y="112" width="22" height="13" rx="3"/>
+        <path class="f-none" d="M55 118.5 H67"/>
+        <rect class="f-nurse" x="112" y="92" width="17" height="44" rx="8.5" transform="rotate(-130 120 96)"/>
+        <rect class="f-spray" x="147" y="30" width="10" height="34" rx="3"/>
+        <rect class="f-white" x="147.5" y="20" width="9" height="12" rx="4.5"/>
+        <rect class="f-spray" x="141" y="50" width="22" height="6" rx="3"/>
+        <circle class="f-skin" cx="151" cy="68" r="9"/>
+        <circle class="f-skin" cx="80" cy="50" r="26"/>
+        <path class="f-hair" d="M53 52 Q54 22 80 22 Q107 22 107 52 Q100 34 80 34 Q62 34 53 52 Z"/>
+        <circle class="f-hair" cx="80" cy="18" r="9"/>
+        <circle class="f-ink" cx="71" cy="52" r="3" style="stroke:none"/>
+        <circle class="f-ink" cx="89" cy="52" r="3" style="stroke:none"/>
+        <circle class="f-pink" cx="64" cy="61" r="5" style="stroke:none;opacity:.8"/>
+        <circle class="f-pink" cx="96" cy="61" r="5" style="stroke:none;opacity:.8"/>
+        <path class="f-none" d="M71 63 Q80 71 89 63"/>
+      </g>
+    </symbol>
+
+    <symbol id="sprayer" viewBox="0 0 40 100">
+      <g class="ln">
+        <rect class="f-spray" x="17" y="80" width="6" height="12"/>
+        <rect class="f-spray" x="11" y="91" width="18" height="6" rx="2"/>
+        <rect class="f-spray" x="13" y="22" width="14" height="58" rx="4"/>
+        <rect class="f-white" x="14" y="6" width="12" height="18" rx="6"/>
+        <rect class="f-spray" x="5" y="58" width="30" height="7" rx="3.5"/>
+      </g>
+    </symbol>
+
+    <symbol id="cake" viewBox="0 0 200 170">
+      <g class="ln">
+        <ellipse class="f-white" cx="100" cy="160" rx="92" ry="9"/>
+        <rect class="f-cake" x="24" y="98" width="152" height="60" rx="8"/>
+        <path class="f-icing" d="M24 106 Q24 98 32 98 H168 Q176 98 176 106 V110 Q164 124 152 110 Q140 124 128 110 Q116 124 104 110 Q92 124 80 110 Q68 124 56 110 Q44 124 32 110 Q26 116 24 110 Z"/>
+        <rect class="f-cake2" x="50" y="60" width="100" height="40" rx="8"/>
+        <g>
+          <rect class="f-candle" x="60" y="38" width="6" height="22" rx="2"/>
+          <rect class="f-candle" x="74" y="38" width="6" height="22" rx="2"/>
+          <rect class="f-candle" x="88" y="38" width="6" height="22" rx="2"/>
+          <rect class="f-candle" x="106" y="38" width="6" height="22" rx="2"/>
+          <rect class="f-candle" x="120" y="38" width="6" height="22" rx="2"/>
+          <rect class="f-candle" x="134" y="38" width="6" height="22" rx="2"/>
+          <path class="f-flame" d="M63 36 Q57 28 63 20 Q69 28 63 36 Z"/>
+          <path class="f-flame" d="M77 36 Q71 28 77 20 Q83 28 77 36 Z"/>
+          <path class="f-flame" d="M91 36 Q85 28 91 20 Q97 28 91 36 Z"/>
+          <path class="f-flame" d="M109 36 Q103 28 109 20 Q115 28 109 36 Z"/>
+          <path class="f-flame" d="M123 36 Q117 28 123 20 Q129 28 123 36 Z"/>
+          <path class="f-flame" d="M137 36 Q131 28 137 20 Q143 28 137 36 Z"/>
+        </g>
+        <text x="100" y="147" text-anchor="middle" class="say" style="font-size:30px;stroke:none">103</text>
+      </g>
+    </symbol>
+
+    <symbol id="star" viewBox="0 0 100 100">
+      <path class="ln f-star" d="M50 10 L60 36.25 L88.04 37.64 L66.17 55.25 L73.51 82.36 L50 67 L26.49 82.36 L33.83 55.25 L11.96 37.64 L40 36.25 Z"/>
+    </symbol>
+
+    <symbol id="heart" viewBox="0 0 100 90">
+      <path class="ln f-heart" d="M50 82 C10 55 6 30 18 18 C30 6 46 12 50 26 C54 12 70 6 82 18 C94 30 90 55 50 82 Z"/>
+    </symbol>
+
+    <symbol id="puff" viewBox="0 0 100 70">
+      <g class="ln f-mist" style="stroke-dasharray:6 6">
+        <path d="M22 58 Q4 58 8 42 Q6 26 24 26 Q28 8 48 12 Q62 2 74 16 Q94 16 92 36 Q98 54 80 58 Z"/>
+      </g>
+    </symbol>
+
+    <symbol id="can" viewBox="0 0 130 100">
+      <g class="ln">
+        <path class="f-none" style="stroke-width:7" d="M36 42 Q58 2 80 42"/>
+        <path class="f-can" d="M88 70 L116 30 L122 35 L94 80 Z"/>
+        <ellipse class="f-can" cx="120" cy="30" rx="9" ry="6" transform="rotate(-35 120 30)"/>
+        <rect class="f-can" x="24" y="40" width="68" height="52" rx="7"/>
+      </g>
+    </symbol>
+
+    <symbol id="hose" viewBox="0 0 130 100">
+      <g class="ln">
+        <path class="f-none" style="stroke-width:12" d="M78 58 Q108 58 110 30"/>
+        <path class="f-none" style="stroke:var(--hose);stroke-width:7" d="M78 58 Q108 58 110 30"/>
+        <rect class="f-spray" x="102" y="10" width="16" height="22" rx="3"/>
+        <circle class="f-hose" cx="48" cy="58" r="36"/>
+        <circle class="f-none" cx="48" cy="58" r="25"/>
+        <circle class="f-none" cx="48" cy="58" r="13"/>
+        <circle class="f-spray" cx="48" cy="58" r="5"/>
+      </g>
+    </symbol>
+
+    <symbol id="chair" viewBox="0 0 100 110">
+      <g class="ln">
+        <rect class="f-chair" x="20" y="8" width="60" height="42" rx="6"/>
+        <rect class="f-chair" x="14" y="52" width="72" height="12" rx="4"/>
+        <rect class="f-chair" x="20" y="64" width="9" height="42" rx="3"/>
+        <rect class="f-chair" x="71" y="64" width="9" height="42" rx="3"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="book">
+
+  <header class="cover">
+    <svg class="scene" viewBox="0 0 600 300" role="img" aria-label="Ellie the elephant smiling, with a sticker star and a little puff of mist by her trunk">
+      <circle class="ln f-sun" cx="520" cy="70" r="40"/>
+      <use href="#puff" x="395" y="175" width="110" height="77"/>
+      <use href="#ellie" x="150" y="40" width="286" height="260"/>
+      <use href="#star" x="60" y="40" width="70" height="70"/>
+      <use href="#star" x="90" y="170" width="44" height="44"/>
+    </svg>
+    <h1>Ellie's <span>Tickly</span> Trunk</h1>
+    <p class="sub">A story about the flu spray, and keeping everybody safe</p>
+  </header>
+
+  <!-- 1 -->
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 340" role="img" aria-label="Ellie the elephant, her baby brother Pip, and Grandad Tortoise in a sunny garden">
+      <rect class="f-sky" width="600" height="340"/>
+      <circle class="ln f-sun" cx="540" cy="58" r="36"/>
+      <path class="ln f-grass" d="M-5 290 Q150 268 300 288 T605 284 V345 H-5 Z"/>
+      <use href="#ellie" x="20" y="72" width="264" height="240"/>
+      <use href="#ellie" x="250" y="232" width="99" height="90"/>
+      <use href="#tortoise" x="365" y="178" width="220" height="160"/>
+    </svg>
+    <div class="words">
+      <p>This is Ellie. Ellie is an elephant.</p>
+      <p>She has big flappy ears, a waggly tail and a very, very, <strong>very</strong> long nose. It's called a trunk.</p>
+      <p>Ellie lives with Mum and her baby brother, Pip. Next door lives Grandad Tortoise. He is 102 years old. He is very slow, very wise, and he makes the best jam sandwiches in Sunny Lane.</p>
+      <span class="pno">1</span>
+    </div>
+  </article>
+
+  <!-- 2 -->
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 340" role="img" aria-label="Three grumpy green Flu Bugs, one seen through a magnifying glass">
+      <rect class="f-sky" width="600" height="340"/>
+      <rect class="ln f-shell2" x="372" y="232" width="34" height="110" rx="12" transform="rotate(-40 389 232)"/>
+      <circle class="ln f-glass" cx="300" cy="160" r="112" style="stroke-width:9"/>
+      <use href="#bug" x="215" y="75" width="170" height="170"/>
+      <use href="#bug" x="60" y="60" width="70" height="70" transform="rotate(-15 95 95)"/>
+      <use href="#bug" x="480" y="190" width="64" height="64" transform="rotate(14 512 222)"/>
+      <path class="ln f-none" d="M130 130 Q160 70 200 100" style="stroke-dasharray:4 9"/>
+      <path class="ln f-none" d="M470 205 Q440 150 405 190" style="stroke-dasharray:4 9"/>
+      <text x="92" y="175" text-anchor="middle" class="say" style="font-size:24px">hop!</text>
+      <text x="520" y="290" text-anchor="middle" class="say" style="font-size:24px">hop!</text>
+    </svg>
+    <div class="words">
+      <p>But in Sunny Lane lived some little troublemakers. The <strong>Flu Bugs</strong>!</p>
+      <p>Flu Bugs are too tiny to see. They love hopping from nose to nose. If they get in, they make you hot, achy, sneezy and very tired.</p>
+      <p>Most children feel better in about a week. But babies, grandads and grannies can get really, really poorly.</p>
+      <span class="pno">2</span>
+    </div>
+  </article>
+
+  <!-- 3 -->
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 340" role="img" aria-label="Ellie holding a letter in her trunk, looking worried">
+      <rect class="f-wall" width="600" height="340"/>
+      <rect class="ln f-floor" x="-5" y="292" width="610" height="60"/>
+      <rect class="ln f-glass" x="40" y="40" width="130" height="110" rx="6"/>
+      <path class="ln f-none" d="M105 40 V150 M40 95 H170"/>
+      <use href="#ellie" x="110" y="52" width="286" height="260"/>
+      <g transform="rotate(-10 440 262)">
+        <rect class="ln f-white" x="385" y="230" width="112" height="72" rx="4"/>
+        <path class="ln f-none" d="M385 230 L441 272 L497 230"/>
+      </g>
+      <text x="345" y="92" class="say" style="font-size:72px">?</text>
+      <text x="500" y="74" text-anchor="middle" class="say" style="font-size:22px">Flu Spray Day</text>
+      <text x="500" y="100" text-anchor="middle" class="say" style="font-size:22px">on Tuesday!</text>
+    </svg>
+    <div class="words">
+      <p>One day, Ellie brought a letter home from school.</p>
+      <p>"It's Flu Spray Day on Tuesday!" said Mum.</p>
+      <p>Ellie's ears drooped. "Is it a needle?" she whispered.</p>
+      <p>"No," said Mum. "It's a tiny squirt up your nose. <strong>One squirt up each side.</strong> That's all."</p>
+      <span class="pno">3</span>
+    </div>
+  </article>
+
+  <!-- 4 -->
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 340" role="img" aria-label="Ellie imagining a giant watering can and a fire hose soaking everyone">
+      <rect class="f-sky" width="600" height="340"/>
+      <path class="ln f-grass" d="M-5 300 Q200 284 400 298 T605 292 V345 H-5 Z"/>
+      <use href="#ellie" x="10" y="150" width="198" height="180"/>
+      <circle class="ln f-white" cx="180" cy="160" r="9"/>
+      <circle class="ln f-white" cx="205" cy="132" r="14"/>
+      <ellipse class="ln f-white" cx="400" cy="130" rx="190" ry="112"/>
+      <use href="#can" x="245" y="45" width="150" height="115"/>
+      <use href="#hose" x="400" y="45" width="150" height="115"/>
+      <path class="ln f-none" d="M395 80 q6 12 0 20 M410 90 q6 12 0 20 M540 60 q10 10 6 22 M556 72 q10 10 6 22"/>
+      <text x="400" y="210" text-anchor="middle" class="say" style="font-size:44px">SPLOOSH!</text>
+    </svg>
+    <div class="words">
+      <p>Ellie had a think. A squirt up the nose?</p>
+      <p>Would it be a <strong>WATERING CAN</strong>? Would it be a <strong>FIRE HOSE</strong>? Ellie pictured the whole school getting soaked. SPLOOSH!</p>
+      <p>Mum laughed so much she snorted. "It's much smaller than that," she said. "It's like a teeny puff of mist."</p>
+      <span class="pno">4</span>
+    </div>
+  </article>
+
+  <!-- 5 -->
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 340" role="img" aria-label="Nurse Lou smiling with the flu spray, and Ellie next to a small chair that creaks">
+      <rect class="f-wall" width="600" height="340"/>
+      <rect class="ln f-floor" x="-5" y="292" width="610" height="60"/>
+      <use href="#nurse" x="40" y="48" width="170" height="250"/>
+      <use href="#chair" x="250" y="195" width="100" height="110"/>
+      <use href="#ellie" x="560" y="68" width="264" height="240" transform="scale(-1 1) translate(-1150 0)"/>
+      <path class="ln f-none" d="M258 175 l8 10 M300 168 v12 M342 175 l-8 10"/>
+      <text x="300" y="160" text-anchor="middle" class="say" style="font-size:30px">creak?</text>
+    </svg>
+    <div class="words">
+      <p>On Tuesday, Nurse Lou came to school with a big smile and a box of little sprays.</p>
+      <p>"Sit on the chair," she said. "Just breathe normally. You don't need to sniff."</p>
+      <p>Ellie looked at the chair. The chair looked at Ellie. She sat down very, very carefully.</p>
+      <p class="big">CREEEAK!</p>
+      <span class="pno">5</span>
+    </div>
+  </article>
+
+  <!-- 6 -->
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 340" role="img" aria-label="Close up of Ellie's trunk with two nostrils, and the flu spray making a puff of mist in each side">
+      <rect class="f-sky" width="600" height="340"/>
+      <path class="ln f-none" style="stroke-width:92" d="M-40 262 C140 262 250 230 318 142"/>
+      <path class="f-none" style="stroke:var(--ele);stroke-width:84;stroke-linecap:round" d="M-40 262 C140 262 250 230 318 142"/>
+      <path class="ln f-none" d="M40 240 q8 16 0 32 M110 236 q8 18 0 36 M180 226 q8 18 0 36"/>
+      <ellipse class="ln f-ink" cx="310" cy="118" rx="8" ry="12" transform="rotate(38 310 118)"/>
+      <ellipse class="ln f-ink" cx="343" cy="146" rx="8" ry="12" transform="rotate(38 343 146)"/>
+      <use href="#sprayer" x="0" y="0" width="40" height="100" transform="translate(400 40) rotate(-128 20 50)"/>
+      <use href="#puff" x="352" y="126" width="64" height="45"/>
+      <use href="#puff" x="252" y="64" width="62" height="43"/>
+      <text x="250" y="50" text-anchor="middle" class="say" style="font-size:28px">Squirt 1!</text>
+      <text x="470" y="215" text-anchor="middle" class="say" style="font-size:28px">Squirt 2!</text>
+      <rect class="ln f-white" x="370" y="252" width="216" height="64" rx="32"/>
+      <text x="478" y="292" text-anchor="middle" class="say" style="font-size:22px">Ooh, it tickles!</text>
+    </svg>
+    <div class="words">
+      <p>Nurse Lou looked at Ellie's trunk. She looked all the way down it. Then all the way back up again.</p>
+      <p>"Goodness me," she said. "That's the longest nose in the whole school!" Everyone giggled. Even Ellie.</p>
+      <p><strong>Squirt!</strong> Up one side. <strong>Squirt!</strong> Up the other side.</p>
+      <p>"Ooh, that tickles!" said Ellie. And that was it. All done.</p>
+      <span class="pno">6</span>
+    </div>
+  </article>
+
+  <!-- 7 -->
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 340" role="img" aria-label="Ellie proudly wearing a big star sticker that says I was brave">
+      <rect class="f-sky" width="600" height="340"/>
+      <path class="ln f-grass" d="M-5 294 Q150 280 300 294 T605 288 V345 H-5 Z"/>
+      <use href="#ellie" x="150" y="60" width="286" height="260"/>
+      <use href="#star" x="186" y="150" width="96" height="96"/>
+      <use href="#star" x="470" y="40" width="50" height="50"/>
+      <use href="#star" x="60" y="70" width="40" height="40"/>
+      <use href="#star" x="90" y="200" width="30" height="30"/>
+      <rect class="ln f-white" x="436" y="112" width="148" height="52" rx="10"/>
+      <text x="510" y="145" text-anchor="middle" class="say" style="font-size:18px">I WAS BRAVE</text>
+    </svg>
+    <div class="words">
+      <p>Ellie got a shiny sticker. It said <strong>I WAS BRAVE</strong>.</p>
+      <p>Her trunk felt a bit tickly and runny for a day. That's OK. It soon stopped.</p>
+      <p>Ellie wore her sticker to bed. And to breakfast. And in the bath. (It fell off in the bath.)</p>
+      <span class="pno">7</span>
+    </div>
+  </article>
+
+  <!-- 8 -->
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 340" role="img" aria-label="Flu Bugs bouncing off Ellie with a BOING">
+      <rect class="f-sky" width="600" height="340"/>
+      <path class="ln f-grass" d="M-5 294 Q150 280 300 294 T605 288 V345 H-5 Z"/>
+      <circle class="ln f-none" cx="300" cy="200" r="150" style="stroke-dasharray:3 14;stroke-width:5"/>
+      <use href="#ellie" x="158" y="80" width="264" height="240"/>
+      <use href="#bug" x="470" y="40" width="80" height="80" transform="rotate(25 510 80)"/>
+      <use href="#bug" x="40" y="60" width="74" height="74" transform="rotate(-30 77 97)"/>
+      <use href="#bug" x="490" y="210" width="60" height="60" transform="rotate(50 520 240)"/>
+      <path class="ln f-none" d="M462 108 l-16 8 M470 124 l-18 0 M132 118 l16 8 M128 138 l18 -2"/>
+      <text x="505" y="30" text-anchor="middle" class="say" style="font-size:30px">BOING!</text>
+      <text x="80" y="180" text-anchor="middle" class="say" style="font-size:30px">BOING!</text>
+      <text x="495" y="328" text-anchor="middle" class="say" style="font-size:20px">This is rubbish!</text>
+    </svg>
+    <div class="words">
+      <p>That week, the Flu Bugs came hopping down Sunny Lane.</p>
+      <p>They tried to jump up Ellie's trunk. <strong>BOING!</strong> They bounced right off.</p>
+      <p>They tried all her friends at school. <strong>BOING! BOING! BOING!</strong> Everyone had had their flu spray.</p>
+      <p>The Flu Bugs couldn't get to baby Pip. They couldn't get to Grandad Tortoise. "This is rubbish," they grumbled, and off they went.</p>
+      <span class="pno">8</span>
+    </div>
+  </article>
+
+  <!-- 9 -->
+  <article class="page">
+    <svg class="scene" viewBox="0 0 600 340" role="img" aria-label="Grandad Tortoise's birthday party with a big cake that says 103">
+      <rect class="f-wall" width="600" height="340"/>
+      <rect class="ln f-floor" x="-5" y="300" width="610" height="50"/>
+      <path class="ln f-none" d="M0 20 Q150 70 300 30 Q450 70 600 20"/>
+      <path class="ln f-flag1" d="M40 30 L70 38 L50 70 Z"/>
+      <path class="ln f-flag2" d="M110 46 L142 52 L122 86 Z"/>
+      <path class="ln f-flag3" d="M185 52 L218 50 L204 88 Z"/>
+      <path class="ln f-flag1" d="M262 38 L294 32 L282 70 Z"/>
+      <path class="ln f-flag2" d="M335 38 L366 46 L346 78 Z"/>
+      <path class="ln f-flag3" d="M410 52 L442 54 L424 88 Z"/>
+      <path class="ln f-flag1" d="M485 46 L516 40 L504 76 Z"/>
+      <path class="ln f-flag2" d="M556 30 L586 22 L578 58 Z"/>
+      <use href="#ellie" x="10" y="118" width="198" height="180"/>
+      <use href="#cake" x="205" y="140" width="190" height="162"/>
+      <use href="#tortoise" x="400" y="178" width="190" height="138"/>
+    </svg>
+    <div class="words">
+      <p>On Saturday it was Grandad Tortoise's birthday. He was 103!</p>
+      <p>Nobody was poorly, so everybody came to the party.</p>
+      <p>There were 103 candles on the cake. Grandad Tortoise blew and blew and blew. It took him until teatime.</p>
+      <span class="pno">9</span>
+    </div>
+  </article>
+
+  <!-- Moral -->
+  <article class="page moral">
+    <svg class="scene" viewBox="0 0 600 300" role="img" aria-label="Ellie, Pip and Grandad Tortoise together with hearts">
+      <use href="#heart" x="270" y="20" width="60" height="54"/>
+      <use href="#heart" x="215" y="70" width="36" height="32"/>
+      <use href="#heart" x="350" y="68" width="40" height="36"/>
+      <use href="#ellie" x="30" y="60" width="242" height="220"/>
+      <use href="#ellie" x="240" y="196" width="88" height="80"/>
+      <use href="#tortoise" x="340" y="140" width="210" height="153"/>
+    </svg>
+    <div class="words">
+      <p class="big">A little tickle for me keeps everybody safe.</p>
+      <p>Having your flu spray is a small, brave thing. It helps keep your friends, your family, the babies and the grandads and grannies safe from flu too.</p>
+    </div>
+  </article>
+
+  <!-- What happens -->
+  <section class="steps-wrap" aria-labelledby="steps-h" style="display:flex;flex-direction:column;gap:16px">
+    <div class="section-head">
+      <h2 id="steps-h">What happens on Flu Spray Day</h2>
+      <p>Read this together before the day. You can point at each picture as you go.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="n">1</span>
+        <svg viewBox="0 0 120 100" aria-hidden="true"><circle class="ln f-skin" cx="30" cy="40" r="14"/><circle class="ln f-skin" cx="62" cy="40" r="14"/><circle class="ln f-skin" cx="94" cy="40" r="14"/><path class="ln f-nurse" d="M16 90 Q16 58 30 58 Q44 58 44 90 Z M48 90 Q48 58 62 58 Q76 58 76 90 Z M80 90 Q80 58 94 58 Q108 58 108 90 Z"/></svg>
+        Wait for your turn</li>
+      <li><span class="n">2</span>
+        <svg viewBox="0 0 120 100" aria-hidden="true"><use href="#chair" x="20" y="0" width="80" height="88"/></svg>
+        Sit on the chair</li>
+      <li><span class="n">3</span>
+        <svg viewBox="0 0 120 100" aria-hidden="true"><use href="#puff" x="10" y="20" width="100" height="70"/><text x="60" y="64" text-anchor="middle" class="say" style="font-size:14px">in... out...</text></svg>
+        Breathe normally. No big sniff.</li>
+      <li><span class="n">4</span>
+        <svg viewBox="0 0 120 100" aria-hidden="true"><path class="ln f-skin" d="M60 10 Q52 50 40 66 Q34 80 48 84 Q60 88 72 84 Q86 80 80 66 Q68 50 60 10 Z"/><ellipse class="f-ink" cx="50" cy="78" rx="5" ry="3"/><ellipse class="ln f-none" cx="70" cy="78" rx="5" ry="3"/><use href="#puff" x="4" y="74" width="36" height="25"/></svg>
+        A squirt up one side</li>
+      <li><span class="n">5</span>
+        <svg viewBox="0 0 120 100" aria-hidden="true"><path class="ln f-skin" d="M60 10 Q52 50 40 66 Q34 80 48 84 Q60 88 72 84 Q86 80 80 66 Q68 50 60 10 Z"/><ellipse class="ln f-none" cx="50" cy="78" rx="5" ry="3"/><ellipse class="f-ink" cx="70" cy="78" rx="5" ry="3"/><use href="#puff" x="80" y="74" width="36" height="25"/></svg>
+        A squirt up the other side</li>
+      <li><span class="n">6</span>
+        <svg viewBox="0 0 120 100" aria-hidden="true"><use href="#star" x="18" y="4" width="84" height="84"/></svg>
+        All done! Sticker time.</li>
+    </ol>
+    <p class="also">It might feel cold and tickly. That's OK. Some children have their flu vaccine as a little injection instead. That's OK too. It keeps everyone safe in just the same way.</p>
+  </section>
+
+  <!-- Colouring pages -->
+  <div class="section-head">
+    <h2>Colour me in!</h2>
+    <p>Five pictures to colour. Print them out, or colour them on a tablet.</p>
+  </div>
+
+  <section class="colour colour-in" aria-label="Colouring page: Ellie with her I was brave sticker">
+    <h3>Ellie was brave!</h3>
+    <svg viewBox="0 0 600 640" role="img" aria-label="Outline of Ellie wearing a big star sticker">
+      <rect class="f-sky" width="600" height="640"/>
+      <path class="ln f-grass" d="M-5 560 Q150 540 300 560 T605 552 V645 H-5 Z"/>
+      <circle class="ln f-sun" cx="520" cy="80" r="46"/>
+      <use href="#ellie" x="40" y="150" width="462" height="420"/>
+      <use href="#star" x="100" y="300" width="140" height="140"/>
+      <use href="#star" x="60" y="40" width="80" height="80"/>
+      <use href="#star" x="330" y="50" width="60" height="60"/>
+    </svg>
+    <p class="name">My name is ______________________</p>
+  </section>
+
+  <section class="colour colour-in" aria-label="Colouring page: a Flu Bug bouncing off">
+    <h3>BOING! Off you go, Flu Bug!</h3>
+    <svg viewBox="0 0 600 640" role="img" aria-label="Outline of a big grumpy Flu Bug">
+      <rect class="f-sky" width="600" height="640"/>
+      <use href="#bug" x="90" y="110" width="420" height="420"/>
+      <use href="#bug" x="30" y="30" width="110" height="110" transform="rotate(-20 85 85)"/>
+      <use href="#bug" x="470" y="480" width="100" height="100" transform="rotate(25 520 530)"/>
+      <path class="ln f-none" d="M150 560 q20 -30 40 0 q20 30 40 0 M420 90 q20 -30 40 0 q20 30 40 0"/>
+    </svg>
+    <p class="name">My name is ______________________</p>
+  </section>
+
+  <section class="colour colour-in" aria-label="Colouring page: Nurse Lou with the flu spray">
+    <h3>Nurse Lou and the tiny spray</h3>
+    <svg viewBox="0 0 600 640" role="img" aria-label="Outline of Nurse Lou holding the flu spray, with a chair">
+      <rect class="f-sky" width="600" height="640"/>
+      <rect class="ln f-floor" x="-5" y="560" width="610" height="90"/>
+      <use href="#nurse" x="50" y="140" width="289" height="425"/>
+      <use href="#chair" x="370" y="380" width="170" height="187"/>
+      <use href="#puff" x="300" y="80" width="140" height="98"/>
+      <use href="#sprayer" x="480" y="100" width="70" height="175"/>
+    </svg>
+    <p class="name">My name is ______________________</p>
+  </section>
+
+  <section class="colour colour-in" aria-label="Colouring page: Grandad Tortoise's birthday cake">
+    <h3>Happy 103rd birthday, Grandad Tortoise!</h3>
+    <svg viewBox="0 0 600 640" role="img" aria-label="Outline of Grandad Tortoise with a birthday cake">
+      <rect class="f-sky" width="600" height="640"/>
+      <rect class="ln f-floor" x="-5" y="570" width="610" height="80"/>
+      <path class="ln f-none" d="M0 30 Q150 90 300 40 Q450 90 600 30"/>
+      <path class="ln f-flag1" d="M50 42 L90 52 L64 96 Z"/>
+      <path class="ln f-flag2" d="M150 62 L192 66 L168 112 Z"/>
+      <path class="ln f-flag3" d="M250 50 L292 44 L278 92 Z"/>
+      <path class="ln f-flag1" d="M340 50 L382 58 L356 102 Z"/>
+      <path class="ln f-flag2" d="M440 64 L482 60 L466 108 Z"/>
+      <path class="ln f-flag3" d="M530 46 L570 36 L562 84 Z"/>
+      <use href="#cake" x="40" y="170" width="320" height="272"/>
+      <use href="#tortoise" x="300" y="380" width="280" height="204"/>
+    </svg>
+    <p class="name">My name is ______________________</p>
+  </section>
+
+  <section class="colour colour-in" aria-label="Colouring page: I had my flu spray badge">
+    <h3>I had my flu spray!</h3>
+    <svg viewBox="0 0 600 640" role="img" aria-label="Outline of a big round badge with Ellie in the middle">
+      <rect class="f-sky" width="600" height="640"/>
+      <path class="ln f-flag3" d="M220 470 L190 620 L240 590 L270 630 L290 480 Z"/>
+      <path class="ln f-flag2" d="M380 470 L410 620 L360 590 L330 630 L310 480 Z"/>
+      <circle class="ln f-star" cx="300" cy="300" r="240"/>
+      <circle class="ln f-white" cx="300" cy="300" r="190"/>
+      <use href="#ellie" x="172" y="140" width="250" height="227"/>
+      <text x="300" y="425" text-anchor="middle" class="say" style="font-size:34px">I WAS BRAVE</text>
+      <use href="#heart" x="120" y="120" width="50" height="45"/>
+      <use href="#heart" x="430" y="120" width="50" height="45"/>
+    </svg>
+    <p class="name">My name is ______________________</p>
+  </section>
+
+  <aside class="adults" aria-labelledby="adults-h">
+    <h2 id="adults-h">For grown-ups</h2>
+    <ul>
+      <li>The children's flu vaccine is a nasal spray: one spray into each nostril. It's quick and doesn't hurt. Your child doesn't need to sniff.</li>
+      <li>Afterwards some children get a runny or blocked nose, a headache, tiredness or a smaller appetite for a short time.</li>
+      <li>Some children are offered an injection instead, for example if the nasal spray isn't suitable for them.</li>
+      <li>Vaccinating children lowers their chance of getting flu and helps stop it spreading to babies, older people and people with long-term conditions. It doesn't guarantee a child won't catch flu.</li>
+      <li>For children with additional needs: read the story a few times before the day, practise sitting on a chair and breathing normally, and let school know what helps your child feel calm.</li>
+      <li>Questions? Ask the school immunisation team, your GP practice or a pharmacist.</li>
+    </ul>
+  </aside>
+
+</main>
