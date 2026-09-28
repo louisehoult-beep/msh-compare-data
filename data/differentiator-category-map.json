@@ -374,11 +374,11 @@
   }
  },
  "counts": {
-  "pairs": 8706,
-  "mapped": 7707,
+  "pairs": 8763,
+  "mapped": 7714,
   "notTaxonomy": 208,
   "products": 104195,
-  "productsMapped": 68757
+  "productsMapped": 68990
  },
  "entries": [
   {
@@ -100751,9 +100751,11 @@
     "VedSnare™ CS",
     "VedNeedle™"
    ],
-   "hub": null,
+   "hub": "endoscopy:endo",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own genuine site division is named 'Endoscopy' and carries 18 unambiguous GI endoscopy consumables (VedBite biopsy forceps, VedSnare snares, VedClip clips, VedKnife ESD knives, VedNeedle injection needles, Vedkang biopsy valve caps/bougie dilators, VedVision) -> endoscopy:endo, following the same-shape precedent already mapped for HC21 (UK) Ltd's and Hospital Services Limited's own 'Endoscopy' divisions.",
+   "decidedIn": "Penlon--framework-coverage-0928.json"
   },
   {
    "supplier": "Penlon",
@@ -143416,9 +143418,17 @@
     "EyeMAX Distal Caps",
     "EyeMAX Stone Extraction Basket"
    ],
-   "hub": null,
+   "hub": [
+    "endoscopy:endo",
+    "endoscopy:access",
+    "endourology:stone",
+    "gastro:snare",
+    "gastro:haem"
+   ],
    "notTaxonomy": true,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the site's own product taxonomy puts every product in one 'Uncategorised' bucket (no division structure), but the 56 named products (read from the site's own product records, so names are exact) are unambiguously GI endoscopy accessories spanning several of the gated types at once: general endoscopy consumables (biopsy forceps, guidewires, dilation balloons), access & retrieval devices (foreign body forceps, retrieval nets), endourology stone retrieval (stone extraction baskets/balloons), snares & resection (DailySnare, Coldsnare, ENDOx Polypectome), and haemostasis clips (Lockado Haemostasis Clip, coagulation forceps) -> list mapping per Lou's 25/08/2026 rule, same shape already applied to Croyde Medical's own 'Uncategorised' division.",
+   "decidedIn": "Micro-Tech-UK-Ltd--framework-coverage-0928.json"
   },
   {
    "supplier": "Newtons Medical Supplies Ltd",
@@ -143684,9 +143694,11 @@
     "BP Powder – British Premium Haemostatic Powder – Box of 2g",
     "BP Powder – British Premium Haemostatic Powder – Box of 1g"
    ],
-   "hub": null,
+   "hub": "endoscopy:endo",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own genuine site division is named 'Endoscopy' (not a crawler catch-all) and carries endoscopy-unit consumables (haemostatic powder, distal protection sponges, disposable endoscopy valve/mouthguard/dignity-shorts items, cleaning brushes, ETO caps) -> endoscopy:endo, following the same-shape precedent already mapped for HC21 (UK) Ltd's and Hospital Services Limited's own 'Endoscopy' divisions.",
+   "decidedIn": "Newtons-Medical-Supplies-Ltd--framework-coverage-0928.json"
   },
   {
    "supplier": "Newtons Medical Supplies Ltd",
@@ -143786,9 +143798,11 @@
     "Eus J10",
     "I10C"
    ],
-   "hub": null,
+   "hub": "endoscopy:endo",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division's own 8 products (Dec Duodenoscopes, Eb J10, Eus J10, I10C, I20C, Magniview, Vivideo, Vnl J10) are named endoscope models on the manufacturer's own site filing -> core endoscopy equipment, endoscopy:endo.",
+   "decidedIn": "Pentax-Medical--framework-coverage-0928.json"
   },
   {
    "supplier": "E&E MEDICAL SUPPLIES LIMITED",
@@ -143852,9 +143866,11 @@
     "Inspira",
     "I Scan"
    ],
-   "hub": null,
+   "hub": "endoscopy:endo",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division's 5 products (Defina, Imagina, Inspira, I Scan, Optivista Plus) are Pentax's endoscopic video-imaging processor units, the companion capital kit to the Endoscopes division on the same site filing -> endoscopy:endo.",
+   "decidedIn": "Pentax-Medical--framework-coverage-0928.json"
   },
   {
    "supplier": "Synectics Medical T/A SynMed",
@@ -144188,9 +144204,11 @@
    "examples": [
     "Stella Line"
    ],
-   "hub": null,
+   "hub": "endoscopy:endo",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the division's product, Stella Line, is confirmed (pentaxmedical.com product literature, via web search 28/09/2026) as PENTAX Medical's single-use standard endoscopy accessories line for hemostasis, injection treatment and tissue sampling in the GI tract -> general endoscopy consumables, endoscopy:endo.",
+   "decidedIn": "Pentax-Medical--framework-coverage-0928.json"
   },
   {
    "supplier": "Synectics Medical T/A SynMed",
@@ -145192,6 +145210,23 @@
    "evidence": "the product's own page on pentlandmedical.co.uk, read 28/09/2026: the Otiom system is a GPS monitoring device for people with dementia (tag, home bases, charger); the site files it in one 'Medical Supplies' category with a tourniquet",
    "why": "an Otiom tag, home base, charger or kit is part of a dementia wander-monitoring system — technology-enabled care, not first aid",
    "decidedIn": "_seed_pentland_otiom_tec_override_0928.py"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "TSC Endovision",
+   "division": "Cystoflex",
+   "products": 1,
+   "categories": [
+    "Uncategorised"
+   ],
+   "examples": [
+    "Cystoflex"
+   ],
+   "hub": "endoscopy:uro",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py, under the 'Uncategorised' division; confirmed via tsc-life.com/products/cystoflex/ (web search 28/09/2026) as TSC Life's single-use cystoscope.",
+   "why": "a single-use cystoscope is endourology diagnostic/therapeutic equipment -> endoscopy:uro, per mixed-division-mapping policy (product-level mapping inside a flat 'Uncategorised' division that also holds unrelated bronchoscopy, infusion and patient-warming lines).",
+   "decidedIn": "_seed_tsc_endovision_cystoflex_override_0928.py"
   }
  ],
  "kinds": {

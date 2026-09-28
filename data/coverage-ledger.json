@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 37080,
-  "differentiator.json held": 54180
+  "differentiator.json published": 37068,
+  "differentiator.json held": 50139
  },
  "counts": {
   "frameworks": 122,
@@ -25,11 +25,11 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 415,
-  "inScopeSuppliersNeedingCrawl": 277,
+  "inScopeSuppliersNeedingCrawl": 276,
   "inScopeSuppliersNeedingDomain": 251,
   "suppliersRefused": 527,
-  "suppliersRefusedButPublishingElsewhere": 107,
-  "suppliersCapturedNothingCounted": 0,
+  "suppliersRefusedButPublishingElsewhere": 106,
+  "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 3,
   "blockedFrameworks": 2,
   "deferredFrameworks": 3
@@ -3595,6 +3595,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Healthcare 25 Ltd",
+     "domain": "healthcare25.co.uk",
+     "reason": "the sitemap's product-path URLs are the site's clinical speciality navigation, not a product list \u2014 all 12 captured names are category headings (Personal Hygiene, Surgical Instruments, Urology, Urogynaecology, PPE, Paediatric Health, Cardiothoracic, Head & Neck Surgery, ENT, Women's Health, General Surgery, Plastic & Cosmetic Surgery) with no product beneath them in the capture, so publishing them would state 12 products where the capture read none; RE-CHECKED 28/09/2026 (^o289): there is no real product path to re-crawl against. The site's own sitemap index (Yoast) carries only post, page, events and category sitemaps; its WordPress REST API exposes no product post type; and every /products/<speciality>/ page is a category page listing product-line headings as text (e.g. /products/urology/: Monopolar Resectoscopes, Bipolar Resectoscopes, Cystoscopy Instruments) with no individual product URLs beneath them. The 12 nav-label rows held under the range key 'Gemini Surgical UK' were therefore removed from supplier-products.json, supplier-product-detail.json and the differentiator category map on 28/09/2026: since 'Gemini Surgical UK' became an alias of Healthcare 25 Ltd (18/09/2026, ^o535) that key matched a live index record, so the failed capture was no longer safely held. The 12 labels are preserved in this refusal. Re-crawl only if the site gains product-level pages.",
+     "checked": "2026-09-28",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Integra LifeSciences (Integra Neurosciences)",
      "domain": "www.integralife.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -3763,13 +3770,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Healthcare 25 Ltd",
-     "domain": "healthcare25.co.uk",
-     "reason": "the sitemap's product-path URLs are the site's clinical speciality navigation, not a product list \u2014 all 12 captured names are category headings (Personal Hygiene, Surgical Instruments, Urology, Urogynaecology, PPE, Paediatric Health, Cardiothoracic, Head & Neck Surgery, ENT, Women's Health, General Surgery, Plastic & Cosmetic Surgery) with no product beneath them in the capture, so publishing them would state 12 products where the capture read none",
-     "checked": "2026-09-06",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Olympus (KeyMed)",
      "domain": "www.olympus.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
@@ -3818,7 +3818,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 9,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -3855,9 +3855,7 @@
     "Stryker",
     "W.L. Gore & Associates"
    ],
-   "heldOnly": [
-    "Healthcare 25 Ltd"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [],
    "refused": [
@@ -3873,6 +3871,7 @@
     "Genmed Enterprises Ltd",
     "GS Medical Healthcare Ltd",
     "Harris-Jones Medical Ltd",
+    "Healthcare 25 Ltd",
     "Integra LifeSciences (Integra Neurosciences)",
     "June Medical Ltd",
     "Karl Storz UK",
@@ -3895,7 +3894,7 @@
     "Winners First Trading Limited"
    ],
    "unknown": [],
-   "actionableTotal": 10,
+   "actionableTotal": 9,
    "blockedReason": null,
    "deferred": null
   },
@@ -3905,8 +3904,8 @@
    "category": "Medical Technology",
    "ends": "30 September 2027",
    "suppliersAwarded": 58,
-   "suppliersPublished": 18,
-   "coverage": 31.0,
+   "suppliersPublished": 19,
+   "coverage": 32.8,
    "nhsscCategory": "Medical Technology",
    "inScope": true,
    "outOfScopeReason": null,
@@ -3921,10 +3920,6 @@
     {
      "supplier": "GI UK Medical Ltd (Duomed)",
      "domain": "duomed.com"
-    },
-    {
-     "supplier": "Micro-Tech (UK) Ltd",
-     "domain": "micro-tech-uk.com"
     },
     {
      "supplier": "Newtons Medical Supplies Ltd",
@@ -4202,9 +4197,9 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 11,
-    "heldNeedingCategory": 5,
-    "capturedNothingCounted": 0,
+    "publishedElsewhereNeedingCategory": 10,
+    "heldNeedingCategory": 4,
+    "capturedNothingCounted": 1,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
     "needDomain": 3
@@ -4224,6 +4219,7 @@
     "Laborie Medical Technologies UK Ltd",
     "Medtronic",
     "Omnimed Limited",
+    "Penlon",
     "Promed Limited",
     "Steris",
     "Synectics Medical T/A SynMed",
@@ -4237,19 +4233,19 @@
     "Olympus (KeyMed)",
     "Macromed UK Ltd",
     "Merit Medical UK Ltd",
-    "Penlon",
     "Pennamed Limited",
     "Terumo UK",
     "Uniplex"
    ],
    "heldOnly": [
     "GI UK Medical Ltd (Duomed)",
-    "Micro-Tech (UK) Ltd",
     "Newtons Medical Supplies Ltd",
     "Pentax Medical",
     "TSC Endovision"
    ],
-   "capturedNothingCounted": [],
+   "capturedNothingCounted": [
+    "Micro-Tech (UK) Ltd"
+   ],
    "notCrawled": [
     "Aquilant Endoscopy Limited",
     "Ingles Ltd",
@@ -4279,7 +4275,7 @@
     "Uniphar Medtech UK Ltd (Cardiac Services / Synapse Medical)"
    ],
    "unknown": [],
-   "actionableTotal": 19,
+   "actionableTotal": 18,
    "blockedReason": null,
    "deferred": null
   },
@@ -4335,6 +4331,13 @@
      "domain": "eurosurgical.co.uk",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 1 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-09-06",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Healthcare 25 Ltd",
+     "domain": "healthcare25.co.uk",
+     "reason": "the sitemap's product-path URLs are the site's clinical speciality navigation, not a product list \u2014 all 12 captured names are category headings (Personal Hygiene, Surgical Instruments, Urology, Urogynaecology, PPE, Paediatric Health, Cardiothoracic, Head & Neck Surgery, ENT, Women's Health, General Surgery, Plastic & Cosmetic Surgery) with no product beneath them in the capture, so publishing them would state 12 products where the capture read none; RE-CHECKED 28/09/2026 (^o289): there is no real product path to re-crawl against. The site's own sitemap index (Yoast) carries only post, page, events and category sitemaps; its WordPress REST API exposes no product post type; and every /products/<speciality>/ page is a category page listing product-line headings as text (e.g. /products/urology/: Monopolar Resectoscopes, Bipolar Resectoscopes, Cystoscopy Instruments) with no individual product URLs beneath them. The 12 nav-label rows held under the range key 'Gemini Surgical UK' were therefore removed from supplier-products.json, supplier-product-detail.json and the differentiator category map on 28/09/2026: since 'Gemini Surgical UK' became an alias of Healthcare 25 Ltd (18/09/2026, ^o535) that key matched a live index record, so the failed capture was no longer safely held. The 12 labels are preserved in this refusal. Re-crawl only if the site gains product-level pages.",
+     "checked": "2026-09-28",
      "bucket": "refused"
     },
     {
@@ -4513,13 +4516,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Healthcare 25 Ltd",
-     "domain": "healthcare25.co.uk",
-     "reason": "the sitemap's product-path URLs are the site's clinical speciality navigation, not a product list \u2014 all 12 captured names are category headings (Personal Hygiene, Surgical Instruments, Urology, Urogynaecology, PPE, Paediatric Health, Cardiothoracic, Head & Neck Surgery, ENT, Women's Health, General Surgery, Plastic & Cosmetic Surgery) with no product beneath them in the capture, so publishing them would state 12 products where the capture read none",
-     "checked": "2026-09-06",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Medicare Colgate Ltd (Sterifeed)",
      "domain": "www.sterifeed.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -4539,7 +4535,7 @@
    "actionable": {
     "unresolvedNames": 1,
     "publishedElsewhereNeedingCategory": 14,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -4581,9 +4577,7 @@
     "Vygon (UK)",
     "Medichill UK Ltd"
    ],
-   "heldOnly": [
-    "Healthcare 25 Ltd"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [],
    "refused": [
@@ -4592,6 +4586,7 @@
     "Elemental Healthcare Ltd",
     "Esp\u00e8re Healthcare Ltd",
     "Eurosurgical Ltd",
+    "Healthcare 25 Ltd",
     "GenX MediCare Ltd",
     "Henry Schien Medical",
     "Pennine Healthcare (Ivor Shaw Ltd)",
@@ -4614,7 +4609,7 @@
    "unknown": [
     "Kimal Renal Care"
    ],
-   "actionableTotal": 16,
+   "actionableTotal": 15,
    "blockedReason": null,
    "deferred": null
   },
@@ -7919,6 +7914,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Healthcare 25 Ltd",
+     "domain": "healthcare25.co.uk",
+     "reason": "the sitemap's product-path URLs are the site's clinical speciality navigation, not a product list \u2014 all 12 captured names are category headings (Personal Hygiene, Surgical Instruments, Urology, Urogynaecology, PPE, Paediatric Health, Cardiothoracic, Head & Neck Surgery, ENT, Women's Health, General Surgery, Plastic & Cosmetic Surgery) with no product beneath them in the capture, so publishing them would state 12 products where the capture read none; RE-CHECKED 28/09/2026 (^o289): there is no real product path to re-crawl against. The site's own sitemap index (Yoast) carries only post, page, events and category sitemaps; its WordPress REST API exposes no product post type; and every /products/<speciality>/ page is a category page listing product-line headings as text (e.g. /products/urology/: Monopolar Resectoscopes, Bipolar Resectoscopes, Cystoscopy Instruments) with no individual product URLs beneath them. The 12 nav-label rows held under the range key 'Gemini Surgical UK' were therefore removed from supplier-products.json, supplier-product-detail.json and the differentiator category map on 28/09/2026: since 'Gemini Surgical UK' became an alias of Healthcare 25 Ltd (18/09/2026, ^o535) that key matched a live index record, so the failed capture was no longer safely held. The 12 labels are preserved in this refusal. Re-crawl only if the site gains product-level pages.",
+     "checked": "2026-09-28",
+     "bucket": "refused"
+    },
+    {
      "supplier": "J & M Medical",
      "domain": "www.jmmedical.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
@@ -8003,13 +8005,6 @@
      "bucket": "publishedElsewhere"
     },
     {
-     "supplier": "Healthcare 25 Ltd",
-     "domain": "healthcare25.co.uk",
-     "reason": "the sitemap's product-path URLs are the site's clinical speciality navigation, not a product list \u2014 all 12 captured names are category headings (Personal Hygiene, Surgical Instruments, Urology, Urogynaecology, PPE, Paediatric Health, Cardiothoracic, Head & Neck Surgery, ENT, Women's Health, General Surgery, Plastic & Cosmetic Surgery) with no product beneath them in the capture, so publishing them would state 12 products where the capture read none",
-     "checked": "2026-09-06",
-     "bucket": "heldOnly"
-    },
-    {
      "supplier": "Medtronic",
      "domain": "medtronic.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -8044,7 +8039,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 5,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -8071,9 +8066,7 @@
     "NISSHA Medical Technologies",
     "Sela Medical UK Ltd"
    ],
-   "heldOnly": [
-    "Healthcare 25 Ltd"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Sterimed Medical Implants UK Ltd",
@@ -8085,6 +8078,7 @@
     "Elemental Healthcare Ltd",
     "Erbe Medical UK Ltd",
     "Eurosurgical Ltd",
+    "Healthcare 25 Ltd",
     "J & M Medical",
     "Solventum (3M Health Care)",
     "OscarTech UK",
@@ -8095,7 +8089,7 @@
     "Unisurge International Limited"
    ],
    "unknown": [],
-   "actionableTotal": 8,
+   "actionableTotal": 7,
    "blockedReason": null,
    "deferred": null
   },
@@ -17220,6 +17214,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Healthcare 25 Ltd",
+     "domain": "healthcare25.co.uk",
+     "reason": "the sitemap's product-path URLs are the site's clinical speciality navigation, not a product list \u2014 all 12 captured names are category headings (Personal Hygiene, Surgical Instruments, Urology, Urogynaecology, PPE, Paediatric Health, Cardiothoracic, Head & Neck Surgery, ENT, Women's Health, General Surgery, Plastic & Cosmetic Surgery) with no product beneath them in the capture, so publishing them would state 12 products where the capture read none; RE-CHECKED 28/09/2026 (^o289): there is no real product path to re-crawl against. The site's own sitemap index (Yoast) carries only post, page, events and category sitemaps; its WordPress REST API exposes no product post type; and every /products/<speciality>/ page is a category page listing product-line headings as text (e.g. /products/urology/: Monopolar Resectoscopes, Bipolar Resectoscopes, Cystoscopy Instruments) with no individual product URLs beneath them. The 12 nav-label rows held under the range key 'Gemini Surgical UK' were therefore removed from supplier-products.json, supplier-product-detail.json and the differentiator category map on 28/09/2026: since 'Gemini Surgical UK' became an alias of Healthcare 25 Ltd (18/09/2026, ^o535) that key matched a live index record, so the failed capture was no longer safely held. The 12 labels are preserved in this refusal. Re-crawl only if the site gains product-level pages.",
+     "checked": "2026-09-28",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Meditrade UK Ltd",
      "domain": "meditradeuk.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
@@ -17260,13 +17261,6 @@
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-26",
      "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Healthcare 25 Ltd",
-     "domain": "healthcare25.co.uk",
-     "reason": "the sitemap's product-path URLs are the site's clinical speciality navigation, not a product list \u2014 all 12 captured names are category headings (Personal Hygiene, Surgical Instruments, Urology, Urogynaecology, PPE, Paediatric Health, Cardiothoracic, Head & Neck Surgery, ENT, Women's Health, General Surgery, Plastic & Cosmetic Surgery) with no product beneath them in the capture, so publishing them would state 12 products where the capture read none",
-     "checked": "2026-09-06",
-     "bucket": "heldOnly"
     }
    ],
    "route": "no Hub speciality mapped to this framework",
@@ -17274,7 +17268,7 @@
    "actionable": {
     "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 5,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
@@ -17288,9 +17282,7 @@
     "iMEDicare Ltd",
     "Paul Hartmann (HARTMANN)"
    ],
-   "heldOnly": [
-    "Healthcare 25 Ltd"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
     "Forma-Care (UK) Ltd",
@@ -17299,11 +17291,12 @@
    ],
    "refused": [
     "Attends Ltd",
+    "Healthcare 25 Ltd",
     "Meditrade UK Ltd",
     "Sharon Services (UK) Ltd"
    ],
    "unknown": [],
-   "actionableTotal": 9,
+   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },

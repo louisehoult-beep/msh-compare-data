@@ -41,9 +41,9 @@ the decision each waits on; delete the entry once that decision is made.
 | Laboratory Diagnostics, Point of Care Testing and Pathology Managed Services | pathology | 122 | 33 | 27.0% | 66 | 36 | STARTED |
 | Total Orthopaedic Solutions 3 | ortho | 101 | 34 | 33.7% | 10 | 69 | STARTED |
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 20 | 31.7% | 22 | 30 | STARTED |
-| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 10 | 42 | STARTED |
-| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 18 | 31.0% | 19 | 32 | STARTED |
-| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 18 | 31.6% | 16 | 32 | STARTED |
+| Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 9 | 42 | STARTED |
+| Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 19 | 32.8% | 18 | 32 | STARTED |
+| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 18 | 31.6% | 15 | 32 | STARTED |
 | Urology and Bowel Management | continence | 57 | 19 | 33.3% | 20 | 40 | STARTED |
 | Advanced Wound Care | wound | 56 | 20 | 35.7% | 12 | 42 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 43 | STARTED · DEFERRED |
@@ -54,7 +54,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Electrodes, Ultrasound Gels, Defibrillation and Related Consumables | cardiology | 37 | 12 | 32.4% | 6 | 27 | STARTED |
 | Respiratory Solutions | respiratory | 37 | 12 | 32.4% | 17 | 17 | STARTED |
 | Patient Monitoring Equipment, Bedside Equipment Alarm Monitoring Systems, Related Products and Services | monitoring | 35 | 11 | 31.4% | 8 | 21 | STARTED |
-| Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 8 | 21 | STARTED |
+| Electrosurgical Consumables and Related Accessories | theatres | 33 | 12 | 36.4% | 7 | 21 | STARTED |
 | Aids for Daily Living | rehab | 31 | 13 | 41.9% | 13 | 11 | STARTED |
 | Wheelchairs, Specialist Seating and Related Services | rehab | 31 | 10 | 32.3% | 6 | 22 | STARTED |
 | Skin Cleansing, Disinfection and Hygiene | skin-prep | 29 | 11 | 37.9% | 7 | 23 | STARTED |
@@ -114,7 +114,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Hearing Aids, Hearing Aid Batteries, Custom Ear Moulds and Hearing Aid Accessories | — | 13 | 0 | 0.0% | 13 | 1 | UNMAPPED |
 | Static X-Ray and Associated Options and Related Services | — | 13 | 0 | 0.0% | 6 | 9 | UNMAPPED |
 | Wipes for Surface Cleaning and Disinfection | — | 13 | 0 | 0.0% | 9 | 7 | UNMAPPED |
-| Disposable and Washable Continence Care | — | 12 | 0 | 0.0% | 9 | 8 | UNMAPPED |
+| Disposable and Washable Continence Care | — | 12 | 0 | 0.0% | 8 | 8 | UNMAPPED |
 | Finance Solutions | — | 12 | 0 | 0.0% | 9 | 4 | UNMAPPED |
 | Bladder Scanners and Associated Options and Related Services | — | 11 | 0 | 0.0% | 7 | 5 | UNMAPPED |
 | Fluoroscopy and Associated Options and Related Services | — | 11 | 0 | 0.0% | 6 | 7 | UNMAPPED |
