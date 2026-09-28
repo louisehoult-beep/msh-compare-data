@@ -263,6 +263,12 @@
       '.msh #msh-my-hub button{font-family:' + SANS + ';}',
       '.msh #msh-my-hub :focus-visible{outline:2px solid #A8842C;outline-offset:2px;border-radius:4px;}',
 
+      /* ---- masthead: title block centred, the date stacked under it ---- */
+      '.msh .myh-mast .myh-top{flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;gap:14px!important;}',
+      '.msh .myh-mast .myh-top .k{justify-content:center!important;}',
+      '.msh div.myh-mast p.myh-s{margin-left:auto!important;margin-right:auto!important;}',
+      '.msh div.myh-mast .myh-meta{text-align:center!important;}',
+
       /* ---- briefing strip (sits on navy) ---- */
       '#myh-brief{font-family:' + SANS + ';}',
       '#myh-brief .mh-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid rgba(224,190,142,.28);}',
@@ -1464,10 +1470,23 @@
       + '<div class="a-s1">' + skRows(1) + '</div><div class="a-s2">' + skRows(1) + '</div><div class="a-list">' + skRows(4) + '</div></div></div></div></div>';
   }
 
+  /* "Hello Lou, here's ..." in the masthead line. First name from the member's
+     own profile; display name only when it isn't an email address; else no name. */
+  function greet() {
+    var s = document.querySelector('.myh-mast .myh-s');
+    if (!s || !nonce()) { return; }
+    getJSON('/wp-json/wp/v2/users/me?context=edit&_fields=first_name,name').then(function (u) {
+      var n = String((u && u.first_name) || '').trim();
+      if (!n && u && u.name && u.name.indexOf('@') === -1) { n = String(u.name).trim().split(/\s+/)[0]; }
+      s.textContent = (n ? 'Hello ' + n + ', here’s' : 'Hello, here’s') + ' today’s news, alerts and deadlines.';
+    }).catch(function () {});
+  }
+
   function start() {
     css();
     mount.innerHTML = skeletonPage();
     paintBrief();
+    greet();
     fetch(CAT_URL, { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (cat) {
       CAT = cat;
       (cat.items || []).forEach(function (it) { BYID[it.id] = it; });
