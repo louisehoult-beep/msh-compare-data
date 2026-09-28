@@ -153,7 +153,7 @@ while :; do
   fi
 
   echo "==> 7/7 gate, then push"
-  python3 verify.py || {
+  bash scripts/gate.sh || {
     echo "REFUSING: verify.py failed after the rebase. Root rule 13 — if the gate" >&2
     echo "and the data disagree, the data is wrong. Never loosen a check to get a" >&2
     echo "push through. Your commit is on the branch; fix and re-gate." >&2

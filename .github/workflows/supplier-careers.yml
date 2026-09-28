@@ -75,7 +75,7 @@ jobs:
       - name: Publish gate — nothing commits until this passes
         run: |
           python3 scripts/prune_calendar.py
-          python3 verify.py
+          bash scripts/gate.sh
       - name: Commit and push
         run: |
           git config user.name "hub-bot"
@@ -119,7 +119,7 @@ jobs:
             cp /tmp/ours-rotation.json state/careers-rotation.json
             git add data/supplier-careers.json state/careers-rotation.json
             git diff --cached --quiet || git commit --amend --no-edit
-            python3 verify.py || { echo "GATE FAILED after rebase — refusing to push"; exit 1; }
+            bash scripts/gate.sh || { echo "GATE FAILED after rebase — refusing to push"; exit 1; }
             sleep 5
           done
           if [ "$pushed" -ne 1 ]; then

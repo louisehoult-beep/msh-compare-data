@@ -98,7 +98,7 @@ jobs:
       - name: Publish gate — nothing commits until this passes
         run: |
           python3 scripts/prune_calendar.py
-          python3 verify.py
+          bash scripts/gate.sh
       - name: Commit if changed
         run: |
           git config user.name "company-press-bot"
@@ -132,7 +132,7 @@ jobs:
               --merge /tmp/ours-company-press.json \
               --out data/company-press.json
             python3 scripts/stamp_notice.py
-            python3 verify.py || { echo "GATE FAILED after re-merge - refusing to push"; exit 1; }
+            bash scripts/gate.sh || { echo "GATE FAILED after re-merge - refusing to push"; exit 1; }
             git add data/company-press.json state/company-press-rotation.json
             git diff --cached --quiet || git commit -m "Company press sweep $(date -u +%F) (re-merged)"
             sleep 5

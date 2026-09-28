@@ -69,7 +69,7 @@ jobs:
       - name: Publish gate — nothing commits until this passes
         run: |
           python3 scripts/prune_calendar.py
-          python3 verify.py
+          bash scripts/gate.sh
       - name: Commit if changed
         run: |
           git config user.name "atamis-bot"
@@ -92,7 +92,7 @@ jobs:
             git reset --hard origin/main
             python3 scripts/refresh_atamis.py
             python3 scripts/stamp_notice.py
-            python3 verify.py || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
+            bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
             git add data/atamis-opportunities.json
             git diff --cached --quiet || git commit -m "Atamis opportunities $(date -u +%F) (retry)"
             sleep 5
