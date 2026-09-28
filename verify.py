@@ -5096,6 +5096,28 @@ def check_hospital_prescribing(doc):
 # every measure rather than a product that was never comparable. So the category
 # lock is the check: one category per product, from the vocabulary the Compare
 # tab already gates, and nothing published without it.
+_DIFF_UUID_NAME = re.compile(r"^[0-9a-f]{8}[- ][0-9a-f]{4}[- ][0-9a-f]{4}[- ][0-9a-f]{4}[- ][0-9a-f]{12}$", re.I)
+_DIFF_LOGIN_SLOT = re.compile(r"^\s*(?:true|false)\s+/\S*(?:signin|sign-in|login|oidc)\S*", re.I)
+# Same list and rule as crawl_supplier_product_detail.looks_like_site_chrome():
+# five distinct whole-word country/language endonyms is a region picker.
+_DIFF_PICKER_NAMES = (
+    "България", "Česko", "Danmark", "Österreich", "Deutschland", "Schweiz", "Suisse",
+    "Ελλάδα", "España", "Eesti", "Suomi", "France", "Hrvatska", "Magyarország", "Ísland",
+    "Italia", "Lietuva", "Latvija", "Norge", "België", "Nederland", "Polska", "Portugal",
+    "România", "Slovensko", "Slovenija", "Srbija", "Sverige", "Türkiye", "Україна",
+    "Brasil", "México", "日本", "대한민국", "Việt Nam", "Deutsch", "Français", "Español",
+    "Italiano", "Nederlands", "Português", "Svenska", "Dansk", "Norsk", "Polski",
+    "Čeština", "Magyar", "Türkçe", "Русский", "中文", "日本語", "한국어",
+)
+_DIFF_PICKER_RE = re.compile(r"(?<!\w)(%s)(?!\w)" % "|".join(re.escape(n) for n in _DIFF_PICKER_NAMES))
+
+
+def _diff_site_chrome(text):
+    if _DIFF_LOGIN_SLOT.match(text or ""):
+        return True
+    return len(set(_DIFF_PICKER_RE.findall(text or ""))) >= 5
+
+
 def check_differentiator(doc, vocab):
     if not doc:
         return
@@ -5165,6 +5187,32 @@ def check_differentiator(doc, vocab):
             FAIL("differentiator", "%d product category/ies are not in the gated vocabulary: %s. "
                                    "A category the Compare tab cannot render is a category no "
                                    "member can filter to." % (len(stray), ", ".join(stray[:5])))
+
+    # A RECORD ID IS NOT A PRODUCT NAME, AND SITE CHROME IS NOT A DESCRIPTION
+    # (28/09/2026). 13 Convatec rows published under names like "1B845Cb1 2F05
+    # 476D Bc85 E40Feb9Bb7A2" (a CMS GUID title-cased from the URL), and 27
+    # carried the site's language picker ("False /oidc-signin/en-gb/ България
+    # Bosna i Hercegovina ...") as the product description. The crawlers now
+    # refuse both shapes (crawl_supplier_site.UUID_RE, crawl_supplier_product_
+    # detail.looks_like_site_chrome); this is the gate if another route lets
+    # one through.
+    uuid_named = [p for p in prods if _DIFF_UUID_NAME.match((p.get("name") or "").strip())]
+    if uuid_named:
+        FAIL("differentiator", "%d published product(s) are named by a CMS record id, not a "
+                               "product name, starting with %s. Re-crawl the range: the name is "
+                               "on the product's own page, not in its URL."
+                               % (len(uuid_named),
+                                  ", ".join("%s / %s" % (p.get("supplier"), p.get("name"))
+                                            for p in uuid_named[:3])))
+    chrome = [p for p in prods if _diff_site_chrome(((p.get("detail") or {}).get("description")) or "")]
+    if chrome:
+        FAIL("differentiator", "%d published product(s) carry the supplier site's own header "
+                               "(language picker / login slot) as their description, starting "
+                               "with %s. Re-capture the detail with the fixed crawler, or drop "
+                               "the description."
+                               % (len(chrome),
+                                  ", ".join("%s / %s" % (p.get("supplier"), p.get("name"))
+                                            for p in chrome[:3])))
 
     sourceless = [p for p in prods if not (p.get("sources") or [])]
     if sourceless:

@@ -722,9 +722,30 @@ def find_product_url(domain, name, deadline):
     return None, "no sitemap URL's slug matches this product's name"
 
 
+# A TAG NAME ENDS AT WHITESPACE, ">" OR "/", NOT AT A WORD BREAK (28/09/2026).
+# These patterns used "<main\b", and a hyphen is a word break, so "<main\b"
+# also matches a custom element such as convatec.com's <main-nav>. That page's
+# real <main> sits ~95KB further down; the lazy match started at <main-nav> in
+# the site header and ran to the real </main>, so "the main content" was the
+# header, the login-status flag and the 60-country language picker. 37
+# Convatec records carried "False /oidc-signin/en-gb/ България Bosna i
+# Hercegovina ..." as their product description, 27 of them in front of members.
+_TAG_END = r"(?=[\s>/])"
+
+
 def strip_boilerplate(html_doc):
-    html_doc = re.sub(r"<(script|style|nav|header|footer)\b[^>]*>.*?</\1>", " ", html_doc,
-                      flags=re.I | re.S)
+    html_doc = re.sub(r"<(script|style|nav|header|footer|form|button)" + _TAG_END + r"[^>]*>.*?</\1>",
+                      " ", html_doc, flags=re.I | re.S)
+    # Custom elements that name themselves navigation (convatec.com's <main-nav>,
+    # <global-nav>, <pim-subnav>, <footer-nav>), and a "Search ..." heading, are
+    # site furniture wherever they sit — convatec.com puts its product-category
+    # search ("Search Products by Category" + <pim-subnav>) INSIDE <main>, and
+    # its sample-request <form> after the copy (28/09/2026).
+    for tag in set(t.lower() for t in re.findall(r"<([a-zA-Z][\w]*-[\w-]+)", html_doc)):
+        if "nav" in tag:
+            html_doc = re.sub(r"<%s" % re.escape(tag) + _TAG_END + r"[^>]*>.*?</%s>" % re.escape(tag),
+                              " ", html_doc, flags=re.I | re.S)
+    html_doc = re.sub(r"<h([1-6])\b[^>]*>\s*Search\b[^<]{0,80}</h\1>", " ", html_doc, flags=re.I)
     html_doc = re.sub(r'<(div|section)[^>]*class="[^"]*(cookie|consent|gdpr|banner)[^"]*"[^>]*>.*?</\1>',
                       " ", html_doc, flags=re.I | re.S)
     # Breadcrumb trails ("Home > Our Products > X") are frequently marked up as
@@ -736,16 +757,72 @@ def strip_boilerplate(html_doc):
     return html_doc
 
 
+# A "MAIN CONTENT" MARKER WITH NO <main> AROUND IT (28/09/2026). steris.com has
+# no <main>, <article> or id="content": the product copy starts at
+# <div class="main-content-wrapper"> after a mega-menu and region picker that
+# sit in plain <div>s, not <nav>. Falling back to the whole body published that
+# menu ("You are using an outdated browser... Select Your Region United States
+# Canada (EN) Deutschland España...") as the description of 685 Steris products.
+# A div that names itself the main content marks where the copy BEGINS; its
+# closing tag cannot be found by regex, so everything from the marker onward is
+# read (the footer is already stripped).
+_MAIN_MARKER = re.compile(r'<div\b[^>]*(?:id|class)=["\'][^"\']*\bmain-content(?:-wrapper)?\b[^"\']*["\'][^>]*>',
+                          re.I)
+
+
 def main_content_fragment(html_doc):
     body = strip_boilerplate(html_doc)
-    for pat in (r"<main\b[^>]*>(.*?)</main>",
-               r"<article\b[^>]*>(.*?)</article>",
+    if not re.search(r"<(?:main|article)" + _TAG_END, body, re.I):
+        m = _MAIN_MARKER.search(body)
+        if m:
+            return body[m.end():]
+    for pat in (r"<main" + _TAG_END + r"[^>]*>(.*?)</main>",
+               r"<article" + _TAG_END + r"[^>]*>(.*?)</article>",
                r'<div[^>]*id="content"[^>]*>(.*?)</div>',
                r'<div[^>]*class="[^"]*(?:product-detail|product-info|entry-content|product-description)[^"]*"[^>]*>(.*?)</div>'):
         m = re.search(pat, body, re.I | re.S)
         if m:
             return m.group(1)
     return body
+
+
+# SITE CHROME IS NEVER A PRODUCT DESCRIPTION (28/09/2026). The tag fix above
+# closes the route by which Convatec's header reached a description, but the
+# same shape can arrive by another one (a theme with no <main> at all, a
+# language picker inside <main>). A country/language selector is recognisable
+# by what it lists: many country or language names in their own language,
+# side by side. A real product description names a country or two at most.
+# Endonyms, as selectors print them; a description carrying CHROME_MIN of these
+# is refused, not trimmed, because nothing marks where the chrome ends and the
+# product copy begins.
+LANGUAGE_PICKER_NAMES = (
+    "България", "Česko", "Danmark", "Österreich", "Deutschland", "Schweiz", "Suisse",
+    "Ελλάδα", "España", "Eesti", "Suomi", "France", "Hrvatska", "Magyarország", "Ísland",
+    "Italia", "Lietuva", "Latvija", "Norge", "België", "Nederland", "Polska", "Portugal",
+    "România", "Slovensko", "Slovenija", "Srbija", "Sverige", "Türkiye", "Україна",
+    "Brasil", "México", "日本", "대한민국", "Việt Nam", "Deutsch", "Français", "Español",
+    "Italiano", "Nederlands", "Português", "Svenska", "Dansk", "Norsk", "Polski",
+    "Čeština", "Magyar", "Türkçe", "Русский", "中文", "日本語", "한국어",
+)
+# Whole words, each name counted once: "Deutsch" must not count again inside
+# "Deutschland". Five distinct endonyms is a picker — steris.com's region list
+# (Deutschland, España, France, Italia, 日本, Brasil, México) and convatec.com's
+# 60-country list both clear it; UK product copy naming a country or two does not.
+_PICKER_RE = re.compile(r"(?<!\w)(%s)(?!\w)" % "|".join(re.escape(n) for n in LANGUAGE_PICKER_NAMES))
+CHROME_MIN = 5
+# A login-status slot rendered as text ("False /oidc-signin/...", "True /login")
+# at the very start of a description is the page's header, not its copy.
+_LOGIN_SLOT_RE = re.compile(r"^\s*(?:true|false)\s+/\S*(?:signin|sign-in|login|oidc)\S*", re.I)
+
+
+def looks_like_site_chrome(text):
+    """True when a captured description is the site's own furniture — a
+    language/country picker or a login-status slot — rather than product copy.
+    verify.py's _diff_site_chrome() is the same test; keep them identical."""
+    t = text or ""
+    if _LOGIN_SLOT_RE.match(t):
+        return True
+    return len(set(_PICKER_RE.findall(t))) >= CHROME_MIN
 
 
 def extract_jsonld_product(html_doc):
@@ -900,6 +977,8 @@ def _detail_from_html(url, html_doc):
             for p in ap:
                 if isinstance(p, dict) and p.get("name") and p.get("value") is not None:
                     features.append("%s: %s" % (p["name"], p["value"]))
+        if looks_like_site_chrome(desc):
+            desc = ""
         if not desc and not features and not img:
             return None, "a JSON-LD Product block was present but carried no usable description, image or property"
         return {
@@ -917,6 +996,10 @@ def _detail_from_html(url, html_doc):
 
     frag = main_content_fragment(html_doc)
     desc = base.clean(frag)
+    if looks_like_site_chrome(desc):
+        return None, ("the text found where the product copy should be is the site's own "
+                      "header (language picker / login slot) — refusing to publish it as a "
+                      "description")
     if len(desc) < 40:
         return None, ("fetched the page but could not isolate usable product content from "
                       "navigation/boilerplate — refusing to guess")
@@ -929,6 +1012,11 @@ def _detail_from_html(url, html_doc):
 
 def capture_one(domain, name, id_index, deadline, ptype="product"):
     """Try route A, then route B. Returns (entry-fields dict, None) or (None, why)."""
+    if base.is_uuid_slug(name) or base.is_uuid_slug(re.sub(r"\s+", "-", (name or "").strip())):
+        # 28/09/2026: a range row named by a CMS record id is a range-crawl
+        # fault (see UUID_RE in crawl_supplier_site.py). Capturing a page for
+        # it would publish the id as the product's name.
+        return None, "the product name is a CMS record id (UUID), not a name — re-crawl the range"
     reasons = []
     if id_index is not None:
         try:

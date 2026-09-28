@@ -1101,7 +1101,55 @@ PRODUCT_SUBPAGE_WORDS = {
     "specifications", "physician-resources", "mri-safety", "clinical-data",
     "case-studies", "case-study", "safety-notices", "safety-notice",
     "urgent-safety-notifications", "value-summary",
+    # 28/09/2026: lohmann-rauscher.co.uk files the NICE MedTech guidance page
+    # for Debrisoft at /products/woundcare/debrisoft/nice-guidance — an
+    # evidence page beside the product, published as an L&R "product" called
+    # "Nice Guidance" until this was added.
+    "nice-guidance",
 }
+
+# A LEAF THAT IS A DOWNLOAD PAGE IS A BROCHURE, NOT A PRODUCT (28/09/2026).
+# molnlycke.com's Belgian locales file their range brochures under the product
+# path, beside real products: /nl-nl/be/products/wound-care/download-ons-
+# wondassortimentsboekje/, /fr-be/be/products/wound-care/telechargez-le-livret-
+# d-assortiment-soins-des-plaies/, /nl-nl/be/products/or-solutions/
+# productcataloog-downloaden/, /fr-be/be/products/or-solutions/telecharger-
+# catalogue-produit/. All four were published in the Differentiator as wound
+# dressings and theatre consumables. The test is a download VERB as a whole
+# word of the leaf slug, in the languages these sites actually publish — never
+# a noun like "brochure" alone, which a real product could carry in its name.
+DOWNLOAD_LEAF_WORDS = {
+    "download", "downloaden", "downloads", "telechargez", "telecharger",
+    "herunterladen", "descargar", "scarica", "scaricare",
+}
+
+# A LEAF THAT IS THE SITE'S OWN TAXONOMY INDEX IS NOT A PRODUCT (28/09/2026).
+# convatec.com files products under facet pages — /products/stoma-care/
+# product-names/<facet>/<product> — and publishes the facet index itself at
+# /products/continence-care/product-names/ with nothing nested under it in
+# the sitemap, so the prefix test cannot see it is a page you pass through.
+# It was published as a Convatec intermittent catheter called "Product
+# Names". Exact slugs only, each one a Convatec facet word seen live.
+TAXONOMY_INDEX_LEAVES = {
+    "product-names", "product-type", "product-category", "brand-names",
+    "wound-type", "surgery-type", "product-length",
+}
+
+# A UUID IS A CMS RECORD ID, NEVER A PRODUCT NAME (28/09/2026). convatec.com
+# publishes some products at a bare GUID leaf — /products/advanced-wound-care/
+# wound-type/pc-wound-open-surgical-wounds/1b845cb1-2f05-476d-bc85-e40feb9bb7a2
+# is AQUACEL Ribbon Dressing with Strengthening Fiber — and title-casing the
+# slug published 42 Convatec products called "1B845Cb1 2F05 476D Bc85
+# E40Feb9Bb7A2". The name is on the page (<h1>, og:title), never in the URL.
+UUID_RE = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", re.I)
+
+
+def is_uuid_slug(s):
+    return bool(UUID_RE.match((s or "").strip()))
+
+
+def is_download_leaf(slug):
+    return any(w in DOWNLOAD_LEAF_WORDS for w in re.split(r"[-_]+", (slug or "").lower()))
 
 # A LITERAL "category" OR "catalog" PATH SEGMENT IS THE PLATFORM'S OWN FILING
 # WORD, NOT A DIVISION (05/09/2026) — see the comment where this is used, in
@@ -1237,6 +1285,29 @@ def _page_title(body):
     # product's.
     t = re.sub(r"\.\s*[A-Z][\w&-]*(?:\s+[A-Z][\w&-]*){0,3}\s*\.?$", "", t).strip()
     return t or None
+
+
+def uuid_page_name(url):
+    """The real name of a product whose URL leaf is a UUID, read from its own
+    page by _page_title(), or None. None is the answer whenever the page cannot
+    be read or itself only offers the id back — the caller then drops the row
+    rather than publish a record id as a product name."""
+    if not url:
+        return None
+    try:
+        body, _ = get(url, timeout=20)
+    except Exception:
+        return None
+    name = _page_title(body or "")
+    if name:
+        # og:title / <title> carry a " - Wound | ConvaTec" style tail; <h1>
+        # does not, and _page_title reads <h1> first. A name that is still
+        # only an id is no name.
+        # clean() turns <sup>&#174;</sup> into " ®" — close the gap.
+        name = re.sub(r"\s+([®™©])", r"\1", re.sub(r"\s+", " ", name)).strip()
+    if not name or is_uuid_slug(name.replace(" ", "-")) or is_uuid_slug(name):
+        return None
+    return name
 
 
 def _jsonld_breadcrumb_division(body, root_host=None):
@@ -1464,10 +1535,12 @@ def numeric_slug_products(domain, prod_urls, reason=None, fallback_label=None):
     deadline = started + NUMERIC_SLUG_BUDGET_S
     rows, unread, out_of_budget = [], 0, 0
     from_kicker = 0
+    reached = 0
     for u in prod_urls:
         if time.time() > deadline:
-            out_of_budget = len(prod_urls) - len(rows)
+            out_of_budget = len(prod_urls) - reached
             break
+        reached += 1
         try:
             body, _ = get(u, timeout=20)
         except Exception:
@@ -1485,15 +1558,20 @@ def numeric_slug_products(domain, prod_urls, reason=None, fallback_label=None):
             leaf = urllib.parse.urlparse(u).path.rstrip("/").rsplit("/", 1)[-1]
             name = re.sub(r"\.[a-zA-Z0-9]{1,5}$", "", leaf)
             unread += 1
+            if is_uuid_slug(name):
+                # A record id is never a fallback name (28/09/2026) — see UUID_RE.
+                continue
         rows.append({"n": name, "division": division or "Uncategorised", "category": ""})
 
     # Any URL never reached keeps its own slug as a fallback row too, exactly
     # like a page that answered but carried no name — so a partial read still
     # returns one row per product the sitemap declared, never a short count.
-    for u in prod_urls[len(rows):]:
+    for u in prod_urls[reached:]:
         leaf = urllib.parse.urlparse(u).path.rstrip("/").rsplit("/", 1)[-1]
         name = re.sub(r"\.[a-zA-Z0-9]{1,5}$", "", leaf)
         unread += 1
+        if is_uuid_slug(name):
+            continue
         rows.append({"n": name, "division": "Uncategorised", "category": ""})
 
     if len(rows) < MIN_PRODUCTS:
@@ -1770,6 +1848,7 @@ def sitemap_products(domain, deadline=None, product_paths=None):
         # Enrichment itself failed (site stopped answering) — fall through to
         # the normal path-based read below rather than refusing outright.
 
+    url_for = {tuple(rest): u for _, rest, u in paths}
     paths = [rest for _, rest, u in paths]
     prefixes = {tuple(r[:k]) for r in paths for k in range(1, len(r))}
 
@@ -1839,6 +1918,8 @@ def sitemap_products(domain, deadline=None, product_paths=None):
     divisions, plist = {}, []
     landing = 0
     furniture = 0
+    non_product = 0
+    uuid_named = uuid_unread = 0
     promoted_count = 0
     promoted_names = set()
     for rest in paths:
@@ -1851,13 +1932,35 @@ def sitemap_products(domain, deadline=None, product_paths=None):
             furniture += 1
             continue
         if trest in prefixes:
-            if not promoted:
+            # A NESTED PAGE WHOSE ONLY CHILDREN ARE FURNITURE IS STILL A PRODUCT
+            # (28/09/2026). promoted_roots above covers this for a top-level
+            # page only. lohmann-rauscher.co.uk files Debrisoft at
+            # /products/woundcare/debrisoft with a single child,
+            # .../debrisoft/nice-guidance — so the prefix test dropped Debrisoft
+            # as a category page and published the guidance page instead.
+            # Unlike a promoted root, this keeps its ordinary division
+            # (Woundcare): it has a real division segment above it to read.
+            kids = children_by_prefix.get(trest, [])
+            nested_product = (len(rest) > 1 and kids and
+                              all(is_furniture_tail(k) for k in kids))
+            if not promoted and not nested_product:
                 landing += 1
                 continue
         elif is_furniture_tail(rest):
             furniture += 1
             continue
-        name = rest[-1].replace("-", " ").strip().title()
+        leaf = rest[-1]
+        if is_download_leaf(leaf) or leaf.lower() in TAXONOMY_INDEX_LEAVES:
+            non_product += 1
+            continue
+        if is_uuid_slug(leaf):
+            name = uuid_page_name(url_for.get(trest))
+            if not name:
+                uuid_unread += 1
+                continue
+            uuid_named += 1
+        else:
+            name = leaf.replace("-", " ").strip().title()
         if not name or len(name) < 3:
             continue
         # A PROMOTED PRODUCT IS ITS OWN DIVISION, NOT "UNCATEGORISED". It was
@@ -1935,6 +2038,13 @@ def sitemap_products(domain, deadline=None, product_paths=None):
     if landing:
         print("      dropped %d category landing page(s) that are a prefix of other product URLs"
               % landing, flush=True)
+    if non_product:
+        print("      dropped %d download/brochure or taxonomy-index page(s) filed under the "
+              "product path" % non_product, flush=True)
+    if uuid_named or uuid_unread:
+        print("      %d product URL(s) end in a CMS record id (UUID): %d named from the page's "
+              "own record, %d dropped because the page gave no name"
+              % (uuid_named + uuid_unread, uuid_named, uuid_unread), flush=True)
     if furniture:
         print("      dropped %d product sub-page(s) (specifications/physician-resources/"
               "mri-safety/clinical-data/case-studies/safety-notices/value-summary/"
@@ -2027,6 +2137,10 @@ def sitemap_products(domain, deadline=None, product_paths=None):
                               "value-summary, urgent-safety-notifications) were dropped — the same "
                               "word recurring beside many different products, not a product name."
                               % furniture) if furniture else "")
+                          + ((" %d product(s) filed at a bare CMS record id (UUID) were named from "
+                              "their own page's record instead, and %d whose page gave no name were "
+                              "dropped rather than published under the id."
+                              % (uuid_named, uuid_unread)) if (uuid_named or uuid_unread) else "")
                           + " A leaf URL that is not a product cannot be detected "
                           "structurally and a few may remain, so treat this range as the shape of "
                           "the catalogue rather than an exact product list. A WordPress REST "
