@@ -287,6 +287,12 @@ class RetryPushTest(unittest.TestCase):
         # retry path reaches the gate at all and lands the commit — not the gate.
         with open(os.path.join(boot, "verify.py"), "w") as fh:
             fh.write("import sys\nsys.exit(0)\n")
+        # The workflow gates through scripts/gate.sh since ^o221: bring the
+        # real wrapper and stub the calendar pruner (tested in its own suite).
+        shutil.copy(os.path.join(os.path.dirname(__file__), "scripts", "gate.sh"),
+                    os.path.join(boot, "scripts", "gate.sh"))
+        with open(os.path.join(boot, "scripts", "prune_calendar.py"), "w") as fh:
+            fh.write("import sys\nsys.exit(0)\n")
         self._write_seed(boot, [{"name": "Acme Medical Ltd", "links": [],
                                  "companyNumber": None}])
         with open(os.path.join(boot, "data", "frameworks.json"), "w") as fh:
