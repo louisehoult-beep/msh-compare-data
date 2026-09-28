@@ -98,6 +98,7 @@ RUN = [
     "test_careers_jobpages.py",
     "test_careers_rotation.py",
     "test_careers_shared_roles.py",
+    "test_careers_relevance.py",
     "test_company_intelligence_push_retry.py",
     "test_company_match_overrides.py",
     "test_company_press_story_links.py",
