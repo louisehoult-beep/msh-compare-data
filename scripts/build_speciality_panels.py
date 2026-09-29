@@ -384,7 +384,7 @@ SPECIALITY_RULES = {
         #   Disposable and Washable Continence Care (2026/S 000-031173) — the
         #     containment route, 12 suppliers, live from 24 Aug 2026 to 23 Aug 2028.
         #   Urology and Bowel Management (2023/S 000-011173) — catheters, sheaths
-        #     and drainage bags, 57 suppliers, expiring 20 Feb 2027.
+        #     and drainage bags, 57 suppliers, expiring 20 Feb 2028.
         # "Bladder Scanners and Associated Options and Related Services" is NOT
         # matched: it is a Diagnostic Equipment CBU capital route, and adding it
         # would contradict the page's sourced statement that two national frameworks
@@ -4114,7 +4114,7 @@ SPECIALITY_RULES = {
         # framework tables, and all nine were matched back against the 121 names in
         # frameworks.json on 10/09/2026:
         #   Urology and Bowel Management (2023/S 000-011173, 57 suppliers, ends
-        #     20/02/2027) — the only agreement in the whole NHSSC portfolio named after
+        #     20/02/2028) — the only agreement in the whole NHSSC portfolio named after
         #     this speciality. Lot 1 internal urinary catheters, Lot 2 external
         #     catheters and sheaths, Lot 3 urine drainage bags, Lot 4 urine flow
         #     monitoring, Lot 6 bladder washout, Lot 15 urodynamics and surgery, Lot 18
@@ -5898,7 +5898,7 @@ SPECIALITY_RULES = {
         #     services, so it is genuinely half this patch and half theatres, and it
         #     is claimed with that shared ownership stated rather than implied.
         #   "Urology and Bowel Management" (2023/S 000-011173, 21 February 2024 to 20
-        #     February 2027, 57 suppliers, 18 lots) is the stoma route, and the page
+        #     February 2028, 57 suppliers, 18 lots) is the stoma route, and the page
         #     names it as the fifth agreement while saying plainly that most of the
         #     money does not go through it: Lot 10 Bowel and Faecal Management, Lot 11
         #     Enema Accessories, Lot 12 Stoma Appliances, Lot 13 Stoma Accessories,
@@ -6118,7 +6118,7 @@ SPECIALITY_RULES = {
             "Oncology Ablation Consumables (58), Decontamination Capital Equipment "
             "(20) and Urology and Bowel Management (57) all state their own totals "
             "and all three match. THE CONTRACT DATES MATTER MORE HERE THAN ON MOST "
-            "PAGES. Urology and Bowel Management ends 20 February 2027, "
+            "PAGES. Urology and Bowel Management ends 20 February 2028, "
             "Decontamination Capital Equipment 18 February 2027 and Endoscopy, "
             "Endourology and Oncology Ablation Consumables 30 September 2027, and "
             "the two scope agreements share one reference, 2021/S 000-007768, and "
