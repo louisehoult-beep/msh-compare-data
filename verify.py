@@ -5741,11 +5741,19 @@ def check_supplier_careers(doc):
     shared = {u: n for u, n in by_url.items() if len(n) > 1}
     if shared:
         u, names = sorted(shared.items())[0]
-        FAIL(C, "%d role URL(s) are held under more than one supplier — e.g. %s under "
-                "%s. Each role is attributed once (identity policy "
-                "shared-careers-site-role-attribution); run "
-                "refresh_supplier_careers.py --reattribute."
-                % (len(shared), u, ", ".join(sorted(set(names)))))
+        if len(set(names)) == 1:
+            # The same record holds one URL twice: a fetch that read past the
+            # end of a board and got it served again (Abbott, 29/09/2026), not
+            # a shared-site attribution — --reattribute would not touch it.
+            FAIL(C, "%d role URL(s) are held more than once by the same supplier — "
+                    "e.g. %s, %d times under %s. A board was read past its end; "
+                    "re-read the supplier." % (len(shared), u, len(names), names[0]))
+        else:
+            FAIL(C, "%d role URL(s) are held under more than one supplier — e.g. %s "
+                    "under %s. Each role is attributed once (identity policy "
+                    "shared-careers-site-role-attribution); run "
+                    "refresh_supplier_careers.py --reattribute."
+                    % (len(shared), u, ", ".join(sorted(set(names)))))
     counted_names = {r.get("name") for r in rows if r.get("ukRoleCount") is not None}
 
     for r in rows:

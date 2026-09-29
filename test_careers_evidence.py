@@ -170,6 +170,57 @@ check("the number dropped is kept, so the doubt is visible",
       wd.get("excludedNonUK"), 1)
 check("every role held is uk=True", all(r["uk"] is True for r in wd["roles"]), True)
 
+# 7c. A BOARD IS READ TO ITS STATED END AND NEVER ONE PAGE PAST IT. Abbott's UK
+#     board (29/09/2026) stated 53 and served 53, one of them a blank posting: no
+#     title, no location, no path. Skipped uncounted, it left the loop one short
+#     of 53, so the loop asked for offset 60 — and Workday, asked for a page past
+#     its end, WRAPS and serves the board again from the top. 71 roles held, 19 of
+#     them twice, under a stated 53; the gate refused the run. A blank row is one
+#     of the source's rows: counted, dropped from the total, and published as
+#     such. Offline: the stub wraps exactly as Workday does.
+_WRAP_PAGES = {
+    "{}": {"total": 40, "facets": [{"facetParameter": "Location_Country", "values": [
+        {"descriptor": "United Kingdom", "id": "gb2", "count": 3}]}],
+        "jobPostings": []},
+    "gb2": {"total": 3, "jobPostings": [
+        {"title": "Territory Manager", "locationsText": "United Kingdom - Witney",
+         "externalPath": "/job/a"},
+        {"title": None, "locationsText": None, "externalPath": None},
+        {"title": "Clinical Specialist", "locationsText": "United Kingdom - Maidenhead",
+         "externalPath": "/job/c"}]},
+}
+_asked = []
+
+
+def _wrap_urlopen(req, timeout=None):
+    body = _json.loads(req.data.decode())
+    ids = (body.get("appliedFacets") or {}).get("Location_Country") or []
+    key = ids[0] if ids else "{}"
+    if ids:
+        _asked.append(body.get("offset", 0))
+    doc = dict(_WRAP_PAGES[key])
+    if body.get("offset", 0) > 0:
+        # Past the end, Workday serves the top of the board again with total 0.
+        doc = {"total": 0, "jobPostings": list(_WRAP_PAGES[key]["jobPostings"])}
+    return io.BytesIO(_json.dumps(doc).encode())
+
+
+rc.urllib.request.urlopen, rc.time.sleep = _wrap_urlopen, (lambda s: None)
+try:
+    wd = rc._workday("https://abbott.wd5.myworkdayjobs.com/abbottcareers")
+finally:
+    rc.urllib.request.urlopen, rc.time.sleep = _real_urlopen, _real_sleep
+check("a blank posting is not held as a role",
+      [r["url"] for r in wd["roles"]],
+      ["https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/a",
+       "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/c"])
+check("the UK total drops by the blank row, so retrieved equals stated",
+      wd["ukTotal"], len(wd["roles"]))
+check("the blank row is counted, so the drop is visible", wd.get("excludedBlank"), 1)
+check("no role URL is held twice",
+      len({r["url"] for r in wd["roles"]}), len(wd["roles"]))
+check("no page past the stated end was requested", _asked, [0])
+
 # 8. A PAGINATED SOURCE MUST NOT BE COUNTED BY WHERE THE LOOP STOPPED.
 #    Workday reports the real total on page 1 and 0 on every page after it.
 #    Re-reading it each page made the loop halt at 40, so Stryker — 1,184 open

@@ -128,6 +128,9 @@ SITE_BUDGET_S = 60
 # (1,184) still exceeds it and still withholds, which is the proof that raising
 # the cap did not quietly turn into tuning until a number appears.
 WORKDAY_CAP = 500
+# Rows per Workday page. The loop stops at the stated total in whole pages of
+# this size, because an offset past the end makes Workday wrap (29/09/2026).
+WORKDAY_PAGE = 20
 TODAY = dt.date.today().isoformat()
 
 # Paths a company files its careers page under, tried in order, only after the
@@ -461,7 +464,7 @@ def _workday(url):
     base = "https://%s.%s.myworkdayjobs.com/%s" % (tenant, wd, site)
 
     def page(offset, facets):
-        payload = json.dumps({"appliedFacets": facets, "limit": 20,
+        payload = json.dumps({"appliedFacets": facets, "limit": WORKDAY_PAGE,
                               "offset": offset, "searchText": ""}).encode()
         req = urllib.request.Request(
             api, data=payload,
@@ -492,24 +495,40 @@ def _workday(url):
     if uk_id is None:
         # No country facet at all. Fall back to reading everything and placing
         # roles from their location strings, which the fetch cap still bounds.
-        out, offset, stated = [], 0, total_all
+        out, offset, stated, blank = [], 0, total_all, 0
+        seen_paths = set()
         doc = first
         while True:
             rows = doc.get("jobPostings") or []
             for j in rows:
                 path = j.get("externalPath") or ""
-                out.append(role(j.get("title"), j.get("locationsText"),
-                                base + path if path.startswith("/") else None,
-                                j.get("startDate")))
-            offset += 20
-            if not rows or (stated is not None and len(out) >= stated) or len(out) >= WORKDAY_CAP:
+                r = role(j.get("title"), j.get("locationsText"),
+                         base + path if path.startswith("/") else None,
+                         j.get("startDate"))
+                # Same rules as the UK-facet read below: a blank posting or a
+                # repeated one is one of the source's rows, counted and dropped,
+                # so the loop reaches the stated end without walking past it.
+                if not r or (path and path in seen_paths):
+                    blank += 1
+                    continue
+                if path:
+                    seen_paths.add(path)
+                out.append(r)
+            offset += WORKDAY_PAGE
+            if (not rows or len(rows) < WORKDAY_PAGE
+                    or (stated is not None and (offset >= stated or len(out) + blank >= stated))
+                    or len(out) >= WORKDAY_CAP):
                 break
             doc = page(offset, {})
-        return {"roles": out, "ukTotal": None, "serverFilteredUK": False,
-                "totalAllLocations": stated if stated is not None else len(out)}
+        res = {"roles": out, "ukTotal": None, "serverFilteredUK": False,
+               "totalAllLocations": stated - blank if stated is not None else len(out)}
+        if blank:
+            res["excludedBlank"] = blank
+        return res
 
     facets = {"Location_Country": [uk_id]}
-    out, offset, doc, excluded = [], 0, page(0, facets), 0
+    out, offset, doc, excluded, blank = [], 0, page(0, facets), 0, 0
+    seen_paths = set()
     # WHAT COMES BACK THROUGH THE COUNTRY FILTER IS PLACED BY THE COMPANY, and
     # that beats reading its location string. Workday writes multi-site postings
     # as "4 Locations", which no string matcher can place — but the company's own
@@ -526,7 +545,23 @@ def _workday(url):
                      base + path if path.startswith("/") else None,
                      j.get("startDate"))
             if not r:
+                # A BLANK POSTING IS STILL ONE OF THE SOURCE'S ROWS. Abbott's UK
+                # board (29/09/2026) stated 53 and served 53, one of them with no
+                # title, no location and no path. Skipping it uncounted left the
+                # loop one short of the stated total, so it asked for offset 60 —
+                # past the end — and Workday answered by WRAPPING to the top of
+                # the board: 71 roles held, 19 of them twice, under a stated 53,
+                # and the gate refused the run. Counted here, like a non-UK row,
+                # and taken out of the total: it is not a role a member can open.
+                blank += 1
                 continue
+            if path and path in seen_paths:
+                # The same posting served twice is held once. Counted, so a
+                # board that repeats itself still reads to its stated end.
+                blank += 1
+                continue
+            if path:
+                seen_paths.add(path)
             # ...EXCEPT where the company's own location string names somewhere
             # else. "4 Locations" cannot be placed by a string, so the facet's
             # judgement stands; "Remote - New York" (Alcon, 28/09/2026) is the
@@ -538,14 +573,20 @@ def _workday(url):
                 continue
             r["uk"] = True
             out.append(r)
-        offset += 20
-        if not rows or len(out) + excluded >= uk_total or len(out) >= WORKDAY_CAP:
+        offset += WORKDAY_PAGE
+        # Stop at the board's END, never one page past it: an offset at or beyond
+        # the stated total makes Workday wrap round and serve the board again
+        # from the top. A short page is the last page for the same reason.
+        if (not rows or len(rows) < WORKDAY_PAGE or offset >= uk_total
+                or len(out) + excluded + blank >= uk_total or len(out) >= WORKDAY_CAP):
             break
         doc = page(offset, facets)
-    res = {"roles": out, "ukTotal": uk_total - excluded, "serverFilteredUK": True,
+    res = {"roles": out, "ukTotal": uk_total - excluded - blank, "serverFilteredUK": True,
            "totalAllLocations": total_all}
     if excluded:
         res["excludedNonUK"] = excluded
+    if blank:
+        res["excludedBlank"] = blank
     return res
 
 
@@ -1346,6 +1387,12 @@ def run_one(name, domain, prev):
         # Context only, and always the source's own figure. Never the headline:
         # Stryker's 1,187 worldwide roles tell a UK rep nothing.
         row["totalRolesAllLocations"] = result["totalAllLocations"]
+
+    if result.get("excludedBlank"):
+        # Rows the source served that were not a role (blank, or a repeat of one
+        # already held). Taken out of the stated total, and published, so the
+        # figure a member sees says what was left out of it (29/09/2026).
+        row["rolesExcludedBlank"] = result["excludedBlank"]
 
     if result.get("serverFilteredUK"):
         # BEST CASE: the source filtered by its own country facet, so this is the
