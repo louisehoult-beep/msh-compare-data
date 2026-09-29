@@ -10,22 +10,23 @@
   "ref": "ETH-D503B3895",
   "contact": "contact@elevateandthrive.uk"
  },
- "generatedOn": "2026-09-22",
- "firstRun": true,
+ "generatedOn": "2026-09-29",
+ "firstRun": false,
  "rule": "A careers page URL is recorded on the company's own link or a conventional path answering from its own domain. A role COUNT is recorded only where each role was read as a discrete record — an applicant tracking system's public API, or schema.org JobPosting structured data. Layouts are never pattern-counted. Everything else is refused, with the reason kept.",
  "scope": "UK ROLES ONLY. Where the source can filter by its own country facet, ukRoleCount is the company's own UK total and ukCountFrom says 'source'. Otherwise the whole board is read and UK roles are picked out from the locations the company published; roles it published with NO location are EXCLUDED and counted in rolesUnplaceable, because folding them in either direction would invent a number. totalRolesAllLocations, where present, is the source's own worldwide figure — context, never the headline.",
  "roleFlagRule": "commercial/clinical are matched from the job title against a fixed vocabulary in the script. A filing aid, not a claim about the role.",
  "ukRule": "uk is true only where the company's own published location names a UK nation, city or region; false where it names somewhere else; null where no location was published. rolesWithoutLocation gives the denominator a UK count must be read against.",
+ "sharedRoleRule": "Each role URL is attributed once. Where several supplier records share one careers site (e.g. four Abbott entities on one Abbott board), the role is held by one record chosen deterministically — the record whose own domain is the careers site's domain; otherwise the group's parent record; otherwise the lowest record by name — and the others do not repeat it. Identity policy shared-careers-site-role-attribution (Lou, 28/09/2026).",
  "counts": {
-  "checked": 172,
+  "checked": 91,
   "withCareersPage": 90,
   "withRoleCount": 7,
-  "refused": 162,
-  "ukRoles": 76,
-  "distinctRoleUrls": 76,
+  "refused": 81,
+  "ukRoles": 60,
+  "distinctRoleUrls": 60,
   "attributedToAnotherRecord": 3,
   "completeBreakdowns": 7,
-  "rolesUnplaceable": 330
+  "rolesUnplaceable": 370
  },
  "suppliers": [
   {
@@ -71,25 +72,26 @@
   {
    "name": "AOTI",
    "domain": "aotinc.net",
-   "checkedOn": "2026-09-01",
+   "checkedOn": "2026-09-29",
    "careersUrl": "https://aotinc.net/careers/",
    "careersUrlFoundBy": "nav",
    "ats": "greenhouse",
    "atsAccount": "aoti",
    "countMethod": "ats",
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 4,
+   "rolesUnplaceable": 5,
    "ukRoleCount": 0,
    "rolesRetrieved": 0,
    "complete": true,
    "commercialRoles": 0,
    "clinicalRoles": 0,
+   "newRoles": 0,
    "roles": []
   },
   {
    "name": "Abbott Diabetes Care",
    "domain": "www.abbott.co.uk",
-   "checkedOn": "2026-09-01",
+   "checkedOn": "2026-09-29",
    "careersUrl": "https://www.abbott.com/en-us/careers",
    "careersUrlFoundBy": "path",
    "ats": "workday",
@@ -98,75 +100,174 @@
    "totalRolesAllLocations": 2000,
    "ukCountFrom": "source",
    "rolesUnplaceable": 0,
-   "ukRoleCount": 67,
-   "rolesRetrieved": 67,
+   "ukRoleCount": 52,
+   "rolesRetrieved": 52,
    "complete": true,
-   "commercialRoles": 15,
-   "clinicalRoles": 5,
+   "commercialRoles": 10,
+   "clinicalRoles": 3,
+   "newRoles": 18,
    "roles": [
-    {
-     "title": "(Senior) Territory Manager Electrophysiology - South Coast",
-     "location": "4 Locations",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/XMLNAME--Senior--Territory-Manager-Electrophysiology---South-Coast_31157153",
-     "commercial": true,
-     "clinical": false
-    },
-    {
-     "title": "Associate Brand Manager - Abbott Marketing UK & I",
-     "location": "United Kingdom - Maidenhead",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Associate-Brand-Manager---Abbott-Marketing-UK---I_31156579",
-     "commercial": true,
-     "clinical": false
-    },
-    {
-     "title": "Associate Technical Service Specialist **Graduate Opportunity Midlands**",
-     "location": "4 Locations",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Birmingham/Associate-Technical-Service-Specialist---Graduate-Opportunity-Midlands--_31159366-1",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Associate Territory Manager (ADC) Field based North",
-     "location": "United Kingdom - Maidenhead",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Associate-Territory-Manager--ADC--Field-based-North_31156787",
-     "commercial": true,
-     "clinical": false
-    },
-    {
-     "title": "Audit Program Manager",
-     "location": "8 Locations",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/Ireland---Longford/Audit-Program-Manager_31157245",
-     "commercial": false,
-     "clinical": false
-    },
     {
      "title": "Business Development Manager Rapid Diagnostics - North West",
      "location": "6 Locations",
      "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Business-Development-Manager-Rapid-Diagnostics---North-West_31152507",
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Business-Development-Manager-Rapid-Diagnostics---North-West_31162529",
      "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": true
     },
     {
-     "title": "Business Support Administrator",
-     "location": "United Kingdom - Witney",
+     "title": "Clinical Development Specialist Electrophysiology London/South East UK",
+     "location": "United Kingdom-London",
      "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Business-Support-Administrator_31156816",
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom-London/Clinical-Development-Specialist-Electrophysiology-London-South-East-UK_31160099",
      "commercial": false,
-     "clinical": false
+     "clinical": true,
+     "new": true
     },
     {
-     "title": "Business Support Manager",
+     "title": "Clinical Specialist NMD - North",
+     "location": "4 Locations",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Clinical-Specialist-NMD---North_31162850",
+     "commercial": false,
+     "clinical": true,
+     "new": true
+    },
+    {
+     "title": "Collecting Officer",
+     "location": "United Kingdom > Abingdon : Remote",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Abingdon--Remote/Collecting-Officer_31154353",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "EMEA Head of Retail & E-Comm CoE",
+     "location": "United Kingdom - Maidenhead",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/EMEA-Head-of-Retail---E-Comm-CoE_31161985-1",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Field Service Engineer / Jr. Field Service Engineer - East Midlands based (with UK/I + EU Travel)",
+     "location": "United Kingdom > Maidenhead : Remote",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Maidenhead--Remote/Field-Service-Engineer---Jr-Field-Service-Engineer---East-Midlands-based--with-UK-I---EU-Travel-_31161229",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Occupational Health Advisor - Croydon and Enfield",
+     "location": "United Kingdom > Abingdon : Remote",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Abingdon--Remote/Occupational-Health-Advisor---Croydon-and-Enfield_31162475",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Operational Excellence Specialist",
      "location": "United Kingdom - Witney",
      "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Business-Support-Manager_31157640",
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Operational-Excellence-Specialist_31162611",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Operations Scientist II - Test Method Specialist",
+     "location": "United Kingdom - Witney",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Operations-Scientist-II---Test-Method-Specialist_31159650-1",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Payroll Processing and Administrative Assistant",
+     "location": "United Kingdom - Abingdon",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Abingdon/Payroll-Processing-and-Administrative-Assistant_31161509",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Product Inspection Shift Lead (Nights, 4 on 4 off)",
+     "location": "United Kingdom - Witney",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/STARS-Senior-Technician_31153727",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Product Returns Team Lead",
+     "location": "United Kingdom - Witney",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Product-Returns-Team-Lead_31161057",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "R&D Laboratory Coordinator",
+     "location": "United Kingdom - Witney",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/R-D-Laboratory-Coordinator_31162277",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Regional Business Manager North UK & Ireland",
+     "location": "5 Locations",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Regional-Business-Manager---North-West_31162194",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Senior Team Manager, Analytical Chemistry",
+     "location": "United Kingdom - Witney",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Senior-Team-Manager--Analytical-Chemistry_31162299",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Service Centre Medical Device Manager",
+     "location": "United Kingdom - Sittingbourne",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Sittingbourne/Service-Centre-Medical-Device-Manager_31161961",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Site EHS Manager",
+     "location": "United Kingdom - Witney",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Site-EHS-Manager_31162748",
+     "commercial": false,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Support Engineer II",
+     "location": "United Kingdom - Witney",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Support-Engineer-II_31159892",
+     "commercial": false,
+     "clinical": false,
+     "new": true
     },
     {
      "title": "Chief Medical Officer",
@@ -174,15 +275,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Abingdon/Chief-Medical-Officer_31142666",
      "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Clinical Specialist Cardiac Rhythm Management - South England",
-     "location": "6 Locations",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Maidenhead--Remote/Clinical-Specialist-Cardiac-Rhythm-Management---South-England_31156635",
-     "commercial": false,
-     "clinical": true
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Clinical Specialist Chronic Pain Therapies & Deep Brain Stimulation (London, Surrey, Berkshire)",
@@ -190,15 +284,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Clinical-Specialist-Chronic-Pain-Therapies---Deep-Brain-Stimulation--London--Surrey--Berkshire-_31160003",
      "commercial": false,
-     "clinical": true
-    },
-    {
-     "title": "Collecting Officer",
-     "location": "United Kingdom > Loughton : Remote",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Loughton--Remote/Collecting-Officer_31154353",
-     "commercial": false,
-     "clinical": false
+     "clinical": true,
+     "new": false
     },
     {
      "title": "Collectors (Drug & Alcohol testing) – various locations nationwide",
@@ -206,47 +293,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Loughton--Remote/Collectors--Drug---Alcohol-testing----various-locations-nationwide_31107882",
      "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Combination Device Development Manager",
-     "location": "United Kingdom - Witney",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Combination-Device-Development-Manager_31147463",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Commercial Manager Cardiac Rhythm Management (Central & North UK)",
-     "location": "4 Locations",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Commercial-Manager-Cardiac-Rhythm-Management--Central---North-UK-_31156708-1",
-     "commercial": true,
-     "clinical": false
-    },
-    {
-     "title": "Director of Public Affairs, UK",
-     "location": "United Kingdom - Maidenhead",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Director-of-Public-Affairs--UK_31155506",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Dispensing Operator I",
-     "location": "United Kingdom-Dundee",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom-Dundee/Dispensing-Operator-I_31158974-1",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "EMEA Area Demand & Supply Manager",
-     "location": "United Kingdom - Maidenhead",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/EMEA-Area-Demand---Supply-Manager_31155499",
-     "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "EMEA Content Manager - Nutrition",
@@ -254,23 +302,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/EMEA-Content-Excellence-Manager---Nutrition_31158452",
      "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "EMEA Revenue Growth Manager – Nutrition",
-     "location": "2 Locations",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/EMEA-Revenue-Growth-Manager---Nutrition_31158464-1",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Field Service Engineer",
-     "location": "United Kingdom - Maidenhead",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Field-Service-Engineer_31154096",
-     "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "HR Business Partner",
@@ -278,7 +311,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Dundee--17-Luna-Place/HR-Business-Partner_31158955",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Inspection Quality Assurance (IQA) Operative I",
@@ -286,7 +320,17 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom-Dundee/Inspection-Quality-Assurance--IQA--Operative-I_31158675-1",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
+    },
+    {
+     "title": "Internal Communications Manager",
+     "location": "United Kingdom - Witney",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Business-Support-Manager_31157640",
+     "commercial": false,
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Join the Talent Pipeline at Abbott Nutrition UK & Ireland",
@@ -294,7 +338,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Join-the-Talent-Pipeline-at-Abbott-Nutrition-UK---Ireland_31129499",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Key Account Manager Cardiometabolics Field based Central Region",
@@ -302,7 +347,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Key-Account-Manager-Cardiometabolics-Field-based-Central-Region_31158286",
      "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Key Account Manager Rapid Diagnostics (Scotland)",
@@ -310,7 +356,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Dundee--Remote/Key-Account-Manager-Rapid-Diagnostics--Scotland-_31156544",
      "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Key Account Manager; Cardiometabolics; Field Based North Region",
@@ -318,7 +365,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Key-Account-Manager--Cardiometabolics--Field-Based-North-Region_31158287",
      "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Laboratory Project and Change Manager",
@@ -326,7 +374,17 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Abingdon/Laboratory-Project-and-Change-Manager_31155744",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
+    },
+    {
+     "title": "Medical Device Inventory Coordinator",
+     "location": "United Kingdom - Witney",
+     "uk": true,
+     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/STARS-Retains-Technician_31155486",
+     "commercial": false,
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Multi-Skilled Maintenance Engineer",
@@ -334,7 +392,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/England---Witney/Multi-Skilled-Maintenance-Engineer_31155415",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Multi-Skilled Maintenance Technician",
@@ -342,7 +401,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/England---Witney/Multi-Skilled-Maintenance-Technician_31158319",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Occupational Health Advisor based in Crewe",
@@ -350,7 +410,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Abingdon--Remote/Occupational-Health-Advisor-based-in-Crewe_31159901",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Occupational Health Advisors (Pipeline for current and future openings in the UK)",
@@ -358,31 +419,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Loughton--Remote/Occupational-Health-Advisors--Pipeline-for-current-and-future-openings-in-the-UK-_31078872",
      "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Occupational Health Technician - Prestwick Site",
-     "location": "United Kingdom > Loughton : Remote",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Loughton--Remote/Occupational-Health-Technician---Prestwick-Site_31155393-1",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Operations Program Manager",
-     "location": "3 Locations",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/Ireland--Donegal-Town--R267/Operations-Program-Manager_31154864-1",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Operations Scientist - Analytical Method Validation",
-     "location": "United Kingdom - Witney",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Operations-Scientist---Analytical-Method-Validation_31156033-1",
-     "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Planning Project Lead - Manufacturing",
@@ -390,7 +428,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Planning-Project-Lead---Manufacturing_31156187",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Product Returns Shift Manager",
@@ -398,23 +437,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Product-Returns-Shift-Manager_31160434",
      "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Product Support Investigator",
-     "location": "United Kingdom-Dundee",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom-Dundee/Product-Support-Investigator_31157262",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Scientist",
-     "location": "United Kingdom-Dundee",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom-Dundee/Scientist_31157674",
-     "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Scientist Supervisor",
@@ -422,15 +446,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom-Dundee/Scientist-IV_31156475",
      "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Senior Brand Manager - HCP",
-     "location": "United Kingdom - Maidenhead",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Senior-Brand-Manager---HCP_31152781-2",
-     "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Senior Buyer",
@@ -438,7 +455,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom-Dundee/Senior-Buyer_31156432",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Senior Control Systems Engineer I - Automation / PLC",
@@ -446,15 +464,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Senior-Control-Systems-Engineer-I---Automation---PLC_31160011",
      "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Senior EHS Specialist",
-     "location": "United Kingdom - Witney",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Senior-EHS-Specialist_31157257",
-     "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Senior Project Engineer - Production Equipment Validation",
@@ -462,7 +473,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Project-Engineer-2---Production-Equipment-Validation_31154395",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Senior Regulatory Affairs Specialist",
@@ -470,39 +482,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Senior-Regulatory-Affairs-Specialist_31152152",
      "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Senior Scientist I – Biocompatibility",
-     "location": "United Kingdom - Witney",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Senior-Scientist-1_31155298-1",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Senior Software Developer",
-     "location": "United Kingdom - Witney",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Senior-Software-Developer_31160404",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "STARS Retains Technician",
-     "location": "United Kingdom - Witney",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/STARS-Retains-Technician_31155486",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "STARS Technician - Product Quality Inspection",
-     "location": "United Kingdom - Witney",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/STARS-Technician---Product-Quality-Inspection_31152338",
-     "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Statistics & Analysis Manager",
@@ -510,7 +491,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Statistics---Analysis-Manager_31157639",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Supply Chain Executive (Diagnostics) - Glasgow",
@@ -518,7 +500,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom-Glasgow/Supply-Chain-Executive--Diagnostics----Glasgow_31159356",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Support / Maintenance Engineer (Mechanical Bias or Multi-skilled) - Commutable from Oxford, Swindon, Cheltenham, Banbury - Various shifts",
@@ -526,39 +509,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/England---Witney/Support---Maintenance-Engineer--Mechanical-Bias-or-Multi-skilled----Commutable-from-Oxford--Swindon--Cheltenham--Banbury---Various-shifts_31156305",
      "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Support Engineer II",
-     "location": "United Kingdom - Witney",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Witney/Support-Engineer-II_31159226-1",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Talent Acquisition Specialist - Commercial - temporary position based in Maidenhead",
-     "location": "United Kingdom - Maidenhead",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Talent-Acquisition-Specialist---Commercial---temporary-position-based-in-Maidenhead_31154917",
-     "commercial": true,
-     "clinical": false
-    },
-    {
-     "title": "Tax Accountant",
-     "location": "United Kingdom - Sittingbourne",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Sittingbourne/Tax-Accountant_31148732",
-     "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Technical Application Specialist (Ideal role for a Biomedical Scientist)",
-     "location": "United Kingdom - Remote",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Remote/Technical-Application-Specialist--Ideal-role-for-a-Biomedical-Scientist-_31154764",
-     "commercial": false,
-     "clinical": true
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Technical Service Specialist/Engineer - Midlands",
@@ -566,7 +518,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/England---Birmingham/Technical-Service-Specialist-Engineer---Midlands_31159374",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Territory Manager Electrophysiology (Central London)",
@@ -574,7 +527,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Territory-Manager-Electrophysiology--Central-London-_31159965-1",
      "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Territory Manager Endovascular (London & South East)",
@@ -582,7 +536,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Territory-Manager-Endovascular--London---South-East-_31159811",
      "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Territory Manager Endovascular (Scotland)",
@@ -590,7 +545,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom--Maidenhead--Remote/Territory-Manager-Endovascular--Scotland-_31160114",
      "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Territory Manager MCS, Heart Failure - North UK",
@@ -598,7 +554,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Territory-Manager-MCS--Heart-Failure---North-UK_31150377",
      "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Territory Manager Radiofrequency Ablation (RF) - South West",
@@ -606,7 +563,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Territory-Manager-Radiofrequency-Ablation--RF----South-West_31158541",
      "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Territory Manager, Structural Heart; Field Based Midlands",
@@ -614,31 +572,8 @@
      "uk": true,
      "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Territory-Manager--Structural-Heart--Field-Based-Midlands_31154483",
      "commercial": true,
-     "clinical": false
-    },
-    {
-     "title": "Trainee/Associate Clinical Specialists Cardiovascular - Graduate opportunities within Abbott Medical Devices (UK Locations)",
-     "location": "United Kingdom - Maidenhead",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Trainee-Associate-Clinical-Specialists-Cardiovascular---Graduate-opportunities-within-Abbott-Medical-Devices--UK-Locations-_31160572",
-     "commercial": false,
-     "clinical": true
-    },
-    {
-     "title": "Trainee/Associate Clinical Specialists Electrophysiology x 3 - great graduate opportunities within medical devices (1 South West /1 Midlands/1 North West)",
-     "location": "3 Locations",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Solihull--Remote/Trainee-Associate-Clinical-Specialists-Electrophysiology-x-2----great-graduate-opportunities-within-medical-devices--1-South-West--1-Midlands-_31151855",
-     "commercial": false,
-     "clinical": true
-    },
-    {
-     "title": "Training & Engagement Specialist North UK (Cardiometabolics)",
-     "location": "6 Locations",
-     "uk": true,
-     "url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-Kingdom---Maidenhead/Training---Engagement-Manager-North-UK--Cardiometabolics-_31153377",
-     "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     }
    ],
    "sharedRolesAttributedHere": "lowest record by name (no domain match, no parent record)"
@@ -646,7 +581,7 @@
   {
    "name": "Abbott Diagnostics",
    "domain": "www.diagnostics.abbott",
-   "checkedOn": "2026-09-01",
+   "checkedOn": "2026-09-29",
    "careersUrl": "https://www.abbott.com/careers.html",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
@@ -656,7 +591,7 @@
    "rolesAttributedElsewhere": [
     {
      "to": "Abbott Diabetes Care",
-     "roles": 67
+     "roles": 52
     }
    ],
    "rolesAttributedTo": "Abbott Diabetes Care",
@@ -665,7 +600,7 @@
   {
    "name": "Abbott Laboratories Limited",
    "domain": "www.abbott.co.uk",
-   "checkedOn": "2026-09-01",
+   "checkedOn": "2026-09-29",
    "careersUrl": "https://www.abbott.com/en-us/careers",
    "careersUrlFoundBy": "path",
    "ats": "workday",
@@ -674,7 +609,7 @@
    "rolesAttributedElsewhere": [
     {
      "to": "Abbott Diabetes Care",
-     "roles": 67
+     "roles": 52
     }
    ],
    "rolesAttributedTo": "Abbott Diabetes Care",
@@ -683,7 +618,7 @@
   {
    "name": "Abbott Medical U.K. Ltd",
    "domain": "www.abbott.co.uk",
-   "checkedOn": "2026-09-01",
+   "checkedOn": "2026-09-29",
    "careersUrl": "https://www.abbott.com/en-us/careers",
    "careersUrlFoundBy": "path",
    "ats": "workday",
@@ -692,7 +627,7 @@
    "rolesAttributedElsewhere": [
     {
      "to": "Abbott Diabetes Care",
-     "roles": 67
+     "roles": 52
     }
    ],
    "rolesAttributedTo": "Abbott Diabetes Care",
@@ -726,19 +661,20 @@
   {
    "name": "Accora",
    "domain": "accora.care",
-   "checkedOn": "2026-09-01",
+   "checkedOn": "2026-09-29",
    "careersUrl": "https://accora.care/careers",
    "careersUrlFoundBy": "nav",
    "ats": "workable",
    "atsAccount": "accora",
    "countMethod": "ats",
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 3,
+   "rolesUnplaceable": 4,
    "ukRoleCount": 0,
    "rolesRetrieved": 0,
    "complete": true,
    "commercialRoles": 0,
    "clinicalRoles": 0,
+   "newRoles": 0,
    "roles": []
   },
   {
@@ -836,36 +772,48 @@
   {
    "name": "Alcon Eye Care UK",
    "domain": "www.alcon.com",
-   "checkedOn": "2026-09-01",
+   "checkedOn": "2026-09-29",
    "careersUrl": "https://www.alcon.com/careers/",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "alcon",
    "countMethod": "ats",
-   "totalRolesAllLocations": 334,
+   "totalRolesAllLocations": 370,
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 226,
-   "ukRoleCount": 3,
-   "rolesRetrieved": 3,
+   "rolesUnplaceable": 258,
+   "ukRoleCount": 4,
+   "rolesRetrieved": 4,
    "complete": true,
-   "commercialRoles": 3,
+   "commercialRoles": 4,
    "clinicalRoles": 0,
+   "newRoles": 2,
    "roles": [
+    {
+     "title": "Business Development Manager - Essex & Suffolk",
+     "location": "Remote - England",
+     "uk": true,
+     "url": "https://alcon.wd5.myworkdayjobs.com/careers_alcon/job/Remote---England/Business-Development-Manager---Essex---Suffolk_R-2026-49633-1",
+     "commercial": true,
+     "clinical": false,
+     "new": true
+    },
+    {
+     "title": "Valeda Practice Activation Manager - Surgical Sales",
+     "location": "Remote - England",
+     "uk": true,
+     "url": "https://alcon.wd5.myworkdayjobs.com/careers_alcon/job/Remote---England/Valeda-Practice-Activation-Manager---Surgical-Sales_R-2026-49532",
+     "commercial": true,
+     "clinical": false,
+     "new": true
+    },
     {
      "title": "Marketing Director - UK&Ireland",
      "location": "Watchmoor Park, United Kingdom",
      "uk": true,
      "url": "https://alcon.wd5.myworkdayjobs.com/careers_alcon/job/Watchmoor-Park-United-Kingdom/Marketing-Director---UK-Ireland_R-2026-49229",
      "commercial": true,
-     "clinical": false
-    },
-    {
-     "title": "Product Manager",
-     "location": "Watchmoor Park, United Kingdom",
-     "uk": true,
-     "url": "https://alcon.wd5.myworkdayjobs.com/careers_alcon/job/Watchmoor-Park-United-Kingdom/Product-Manager_R-2026-48941-1",
-     "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "Trade Marketing Manager",
@@ -873,7 +821,8 @@
      "uk": true,
      "url": "https://alcon.wd5.myworkdayjobs.com/careers_alcon/job/Watchmoor-Park-United-Kingdom/Trade-Marketing-Manager_R-2026-48945-1",
      "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     }
    ]
   },
@@ -979,7 +928,7 @@
   {
    "name": "Armstrong Medical (Eakin Respiratory)",
    "domain": "eakinrespiratory.com",
-   "checkedOn": "2026-09-01",
+   "checkedOn": "2026-09-29",
    "careersUrl": "https://www.eakinrespiratory.com/careers-jobs/",
    "careersUrlFoundBy": "nav",
    "ats": "bamboohr",
@@ -987,27 +936,21 @@
    "countMethod": "ats",
    "ukCountFrom": "location strings published by the company",
    "rolesUnplaceable": 3,
-   "ukRoleCount": 4,
-   "rolesRetrieved": 4,
+   "ukRoleCount": 2,
+   "rolesRetrieved": 2,
    "complete": true,
-   "commercialRoles": 1,
+   "commercialRoles": 0,
    "clinicalRoles": 0,
+   "newRoles": 1,
    "roles": [
     {
-     "title": "Customer Service Advisor",
-     "location": "London, Greater London",
+     "title": "Process Engineer",
+     "location": "Cardiff, Cardiff",
      "uk": true,
-     "url": "https://eakinhealthcare.bamboohr.com/careers/205",
+     "url": "https://eakinhealthcare.bamboohr.com/careers/199",
      "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Customer Service Advisor",
-     "location": "Manchester, Greater Manchester",
-     "uk": true,
-     "url": "https://eakinhealthcare.bamboohr.com/careers/206",
-     "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": true
     },
     {
      "title": "Lean Specialist",
@@ -1015,15 +958,8 @@
      "uk": true,
      "url": "https://eakinhealthcare.bamboohr.com/careers/209",
      "commercial": false,
-     "clinical": false
-    },
-    {
-     "title": "Product Manager",
-     "location": "Cardiff, Cardiff",
-     "uk": true,
-     "url": "https://eakinhealthcare.bamboohr.com/careers/203",
-     "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     }
    ]
   },
@@ -1223,20 +1159,21 @@
   {
    "name": "Bracco UK Limited",
    "domain": "www.bracco.com",
-   "checkedOn": "2026-09-22",
+   "checkedOn": "2026-09-29",
    "careersUrl": "https://www.bracco.com/careers",
    "careersUrlFoundBy": "nav",
    "ats": "workday",
    "atsAccount": "bracco",
    "countMethod": "ats",
-   "totalRolesAllLocations": 141,
+   "totalRolesAllLocations": 145,
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 88,
+   "rolesUnplaceable": 93,
    "ukRoleCount": 2,
    "rolesRetrieved": 2,
    "complete": true,
    "commercialRoles": 1,
    "clinicalRoles": 0,
+   "newRoles": 0,
    "roles": [
     {
      "title": "Sales Operations Admin - Pricing & Contracts Lead",
@@ -1244,7 +1181,8 @@
      "uk": true,
      "url": "https://bracco.wd103.myworkdayjobs.com/BraccoCareers/job/GBR---Oxford-BUK/Sales-Operations---Business-Support-Analyst_JR100209",
      "commercial": true,
-     "clinical": false
+     "clinical": false,
+     "new": false
     },
     {
      "title": "VP, Research & Development",
@@ -1252,7 +1190,8 @@
      "uk": true,
      "url": "https://bracco.wd103.myworkdayjobs.com/BraccoCareers/job/GBR---Oxford-BED/VP--Research---Development_JR100289",
      "commercial": false,
-     "clinical": false
+     "clinical": false,
+     "new": false
     }
    ]
   },
@@ -1332,19 +1271,20 @@
   {
    "name": "CardioScan Ltd",
    "domain": "www.cardioscan.co",
-   "checkedOn": "2026-09-08",
+   "checkedOn": "2026-09-29",
    "careersUrl": "https://www.cardioscan.co/careers",
    "careersUrlFoundBy": "nav",
    "ats": "bamboohr",
    "atsAccount": "cardioscan",
    "countMethod": "ats",
    "ukCountFrom": "location strings published by the company",
-   "rolesUnplaceable": 6,
+   "rolesUnplaceable": 7,
    "ukRoleCount": 0,
    "rolesRetrieved": 0,
    "complete": true,
    "commercialRoles": 0,
    "clinicalRoles": 0,
+   "newRoles": 0,
    "roles": []
   },
   {
@@ -1486,6 +1426,5 @@
    "careersUrlFoundBy": "nav",
    "refused": "careers page returned HTTP 403"
   }
- ],
- "sharedRoleRule": "Each role URL is attributed once. Where several supplier records share one careers site (e.g. four Abbott entities on one Abbott board), the role is held by one record chosen deterministically — the record whose own domain is the careers site's domain; otherwise the group's parent record; otherwise the lowest record by name — and the others do not repeat it. Identity policy shared-careers-site-role-attribution (Lou, 28/09/2026)."
+ ]
 }
