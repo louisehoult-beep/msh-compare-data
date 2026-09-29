@@ -244,6 +244,24 @@ class NonProductLeaves(unittest.TestCase):
             self.assertNotIn(bad, names)
         self.assertEqual(len(res["products"]), len(BASE))
 
+    def test_a_locator_page_is_not_a_product(self):
+        (res, err), _ = _crawl(BASE + [_u("products/wound-care/trufreeze-facility-finder")])
+        self.assertIsNone(err)
+        self.assertNotIn("Trufreeze Facility Finder", [p["n"] for p in res["products"]])
+        self.assertFalse(cs.is_locator_leaf("pathfinder-guidewire"))
+        self.assertFalse(cs.is_locator_leaf("finder-probe"))
+
+    def test_a_product_that_is_a_download_cable_or_software_survives(self):
+        for slug in ("nonin-data-download-cable-for-7500-pulse-oximeters",
+                     "iem-mobil-o-graph-usb-download-cable", "visi-download",
+                     "aed-plus-software-download"):
+            self.assertFalse(cs.is_download_leaf(slug), slug)
+        for slug in ("download-ons-wondassortimentsboekje", "productcataloog-downloaden",
+                     "telechargez-le-livret-d-assortiment-soins-des-plaies",
+                     "telecharger-catalogue-produit", "brochure-download", "downloads",
+                     "download_new_"):
+            self.assertTrue(cs.is_download_leaf(slug), slug)
+
     def test_a_product_named_with_download_as_a_substring_survives(self):
         (res, err), _ = _crawl(BASE + [_u("products/wound-care/downloadable-dressing-guide-x")])
         self.assertIn("Downloadable Dressing Guide X", [p["n"] for p in res["products"]])
@@ -261,6 +279,23 @@ class NonProductLeaves(unittest.TestCase):
         # /products/wound-care/ has real product children: never a product.
         (res, err), _ = _crawl(BASE + [_u("products/wound-care")])
         self.assertNotIn("Wound Care", [p["n"] for p in res["products"]])
+
+
+class UkCatalogueWins(unittest.TestCase):
+    def test_uk_prefixed_copy_beats_an_unprefixed_other_market(self):
+        us = [_u("products/ostomy-care/pouch-%s-us" % c) for c in "abcdefghij"]
+        gb = [_u("en-gb/products/stoma-care/pouch-%s" % c) for c in "abcdefghij"]
+        de = [_u("de-de/products/stomaversorgung/beutel-%s" % c) for c in "abcdefghij"]
+        (res, err), _ = _crawl(us + gb + de)
+        self.assertIsNone(err)
+        self.assertEqual({p["division"] for p in res["products"]}, {"Stoma Care"})
+        self.assertEqual(len(res["products"]), 10)
+
+    def test_a_site_with_no_uk_copy_keeps_its_root(self):
+        root = [_u("products/beds/bed-%s" % c) for c in "abcdefghij"]
+        da = [_u("da/products/senge/seng-%s" % c) for c in "abcdefghij"]
+        (res, err), _ = _crawl(root + da)
+        self.assertEqual({p["division"] for p in res["products"]}, {"Beds"})
 
 
 class PublishGate(unittest.TestCase):

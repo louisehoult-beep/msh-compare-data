@@ -1251,8 +1251,11 @@
                       note: 'What NHS Supply Chain lists and how it is packed — a fact about the listing, not a measurement.' },
       tariff:       { label: 'Drug Tariff',   c: '#6B4A2A', bg: '#f6f1ea',
                       note: 'NHSBSA Part IX — what is reimbursable in primary care and at what price.' },
-      manufacturer: { label: 'Manufacturer',  c: '#6B2A34', bg: '#fbf3f4',
-                      note: 'The supplier’s own words about its own product. Not independently verified.' },
+      // 'Supplier's page', not 'Manufacturer' (29/09/2026): resellers such as
+      // Farla Medical and Intus publish other makers' products (IV3000, Tegaderm,
+      // DreamStation), and nothing on record marks which supplier resells.
+      manufacturer: { label: 'Supplier’s page', c: '#6B2A34', bg: '#fbf3f4',
+                      note: 'The supplier’s own product page: the manufacturer’s words where it makes the product, a reseller’s where it sells another maker’s. Not independently verified.' },
       regulatory:   { label: 'MHRA',          c: '#7a5b14', bg: '#f7f5ef',
                       note: 'MHRA field safety notices and alerts.' }
     };

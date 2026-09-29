@@ -118,6 +118,21 @@ def nk(s):
     return re.sub(r"\s+", " ", s).strip()
 
 
+def pounds_from_pence(raw):
+    """A Drug Tariff price as members read it. NHSBSA publishes Part IX prices IN
+    PENCE ("Price (in pence) listed in the Drug Tariff", dm+d browser glossary;
+    Silverlon Flex 10cm x 10cm is 666 in both the Part IX CSV and dm+d, i.e.
+    £6.66). Until 29/09/2026 this file printed the raw figure after a pound
+    sign, so every one of the 467 tariff prices in the wound dossiers read a
+    hundred times too high ("£666"). build_speciality_panels.py made and fixed
+    the same mistake on 10/09/2026. None for a blank or unreadable price."""
+    try:
+        pence = float(str(raw).strip())
+    except (TypeError, ValueError):
+        return None
+    return "£%.2f" % (pence / 100.0)
+
+
 NPC_RE = re.compile(r"^[A-Z]{3}\d{2,5}$")
 
 # Listing-status badges NHS Supply Chain prints above a card's product name.
@@ -380,7 +395,13 @@ class Builder:
         store = load("supplier-product-detail.json", {"products": {}})
         wanted = self.wound_manufacturer_keys()
         for key, rec in (store.get("products") or {}).items():
-            if key not in wanted:
+            # Matched on nk() of the record's own supplier and product, the same
+            # normalisation wound_manufacturer_keys() applies. Until 29/09/2026
+            # this compared the STORE key, which keeps ®, ™, hyphens and
+            # brackets ("Convatec|aquacel® foam pro"), so any product whose name
+            # carried one never reached a dossier: 741 wound and 410
+            # respiratory products the Differentiator publishes had none.
+            if "%s|%s" % (rec.get("supplier"), nk(rec.get("product"))) not in wanted:
                 continue
             sid = "manufacturer:" + (rec.get("supplier") or "")
             d = self.dossier_for(rec.get("supplier"), rec.get("product"))
@@ -392,8 +413,14 @@ class Builder:
                 "detail": "the supplier's own product page",
                 "captured": rec.get("capturedDate"),
                 "url": rec.get("sourceUrl"),
-                "authority": ("The manufacturer's own words about its own product. "
-                              "Not independently verified."),
+                # Not "the manufacturer's own words" (29/09/2026): several suppliers
+                # here resell other makers' products — Farla Medical's pages are
+                # Smith+Nephew IV3000, 3M Tegaderm, Molnlycke Tubifast; Intus sells
+                # Philips and ResMed — and nothing on record says which supplier is
+                # which. This wording is true for both.
+                "authority": ("The supplier's own product page: the manufacturer's words "
+                              "where the supplier makes the product, a reseller's where "
+                              "it sells another maker's. Not independently verified."),
             })
             d.observe(sid, "Description", rec.get("description"))
             for f in (rec.get("features") or [])[:12]:
@@ -525,9 +552,9 @@ class Builder:
                 continue
             label = " ".join(x for x in (base, variant) if x)
             d.add_source(sid, block)
-            if row[i_price]:
-                d.observe(sid, "Drug Tariff price", "£%s" % row[i_price],
-                          scope=scope, variant=label)
+            price = pounds_from_pence(row[i_price])
+            if price:
+                d.observe(sid, "Drug Tariff price", price, scope=scope, variant=label)
             d.observe(sid, "Drug Tariff pack", "%s %s" % (row[i_qty], row[i_uom]),
                       scope=scope, variant=label)
             self.stats["tariff_rows"] += 1
@@ -666,8 +693,9 @@ class Builder:
                 "sources disagree, both are published with their own attribution — the "
                 "disagreement is the intelligence. Only the 'independent' source (NHS "
                 "Supply Chain's Information for Clinical Choice) measures every supplier "
-                "the same way; 'manufacturer' is each supplier's own words about its own "
-                "product."
+                "the same way; 'manufacturer' is the supplier's own product page — the "
+                "manufacturer's words where it makes the product, a reseller's where it "
+                "sells another maker's."
             ),
             "counts": {
                 "dossiers": len(dossiers),

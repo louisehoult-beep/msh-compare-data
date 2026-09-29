@@ -180,7 +180,33 @@ def test_shifted_catalogue_row_skipped():
     check("nhssc" in good.sources, "a well-formed catalogue row was dropped")
 
 
-for fn in (test_size_stripping, test_longest_family_wins,
+def test_tariff_price_is_pounds():
+    """NHSBSA publishes Part IX prices in pence (dm+d glossary). 666 is £6.66,
+    never "£666" - the hundredfold overstatement this pins."""
+    check(B.pounds_from_pence("666") == "£6.66", "666p must read £6.66")
+    check(B.pounds_from_pence("17") == "£0.17", "17p must read £0.17")
+    check(B.pounds_from_pence("") is None, "a blank price must publish nothing")
+    path = os.path.join(REPO, "data", "product-dossiers-wound.json")
+    tariff = json.load(open(os.path.join(REPO, "data", "drug-tariff-part-ix.json")))
+    ix = {n: i for i, n in enumerate(tariff["schema"])}
+    raw = {}
+    for r in tariff["rows"]:                  # one AMP can list several pack sizes
+        if r[ix["price"]]:
+            raw.setdefault(r[ix["amp"]], set()).add(B.pounds_from_pence(r[ix["price"]]))
+    seen = 0
+    for d in json.load(open(path)).get("dossiers") or []:
+        for ob in d["fields"].get("Drug Tariff price", []):
+            amp = ob.get("variant") or ""
+            if amp in raw:
+                seen += 1
+                if not check(ob["value"] in raw[amp],
+                             "%s: tariff price %s for %r, the tariff lists %s"
+                             % (d["key"], ob["value"], amp, sorted(raw[amp]))):
+                    return
+    check(seen > 0, "no published tariff price could be matched back to its tariff row")
+
+
+for fn in (test_size_stripping, test_longest_family_wins, test_tariff_price_is_pounds,
            test_published_store, test_no_silent_merge,
            test_alert_needs_a_product_word, test_shifted_catalogue_row_skipped):
     try:

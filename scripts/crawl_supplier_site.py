@@ -1148,8 +1148,43 @@ def is_uuid_slug(s):
     return bool(UUID_RE.match((s or "").strip()))
 
 
+# A download VERB alone is not enough (29/09/2026): real products carry it —
+# Proact's "Nonin Data Download Cable", Numed's "USB Download Cable", Stowood's
+# "Visi Download" software. A leaf is a brochure page only when the verb comes
+# with a document noun, or when the slug is nothing but the verb ("downloads",
+# "download-new").
+DOCUMENT_NOUN_STEMS = ("brochure", "catalog", "catalogue", "cataloog", "livret",
+                       "boekje", "leaflet", "assortiment")
+_EMPTY_WORDS = {"new", "ons", "le", "la", "d", "de", "our", "the", "here", "page"}
+
+
+UK_LOCALE_SEGMENTS = {"en-gb", "en_gb", "en-uk", "uk", "gb"}
+
+
 def is_download_leaf(slug):
-    return any(w in DOWNLOAD_LEAF_WORDS for w in re.split(r"[-_]+", (slug or "").lower()))
+    words = [w for w in re.split(r"[-_\s]+", (slug or "").lower()) if w]
+    if not any(w in DOWNLOAD_LEAF_WORDS for w in words):
+        return False
+    if all(w in DOWNLOAD_LEAF_WORDS or w in _EMPTY_WORDS for w in words):
+        return True
+    return any(stem in w for w in words for stem in DOCUMENT_NOUN_STEMS)
+
+
+# A LOCATOR PAGE IS NOT A PRODUCT (29/09/2026). steris.com files "Find a
+# Facility Offering truFreeze Spray Cryotherapy" — a US state-by-state list of
+# hospitals — at .../trufreeze-spray-cryotherapy-system/trufreeze-facility-finder,
+# under the product path, and it published as a GI energy device called
+# "Trufreeze Facility Finder". Exact multi-word phrases only, as whole runs of
+# the slug: a phrase, never a lone word like "finder" a product could carry.
+LOCATOR_LEAF_PHRASES = (
+    "facility-finder", "find-a-facility", "store-locator", "stockist-locator",
+    "where-to-buy", "find-a-stockist", "find-a-distributor", "find-a-rep",
+)
+
+
+def is_locator_leaf(slug):
+    s = "-" + re.sub(r"[_\s]+", "-", (slug or "").lower()) + "-"
+    return any("-%s-" % p in s for p in LOCATOR_LEAF_PHRASES)
 
 # A LITERAL "category" OR "catalog" PATH SEGMENT IS THE PLATFORM'S OWN FILING
 # WORD, NOT A DIVISION (05/09/2026) — see the comment where this is used, in
@@ -1680,7 +1715,14 @@ def sitemap_products(domain, deadline=None, product_paths=None):
                                       "distributor", "bitforms", "home-slider")
             candidates = [l for l in locs if "sitemap" in l.lower()
                           and not any(h in l.lower() for h in EXCLUDE_SITEMAP_HINTS)]
-            candidates.sort(key=lambda l: 0 if "product" in l.lower() else 1)
+            # UK-locale sitemaps first (29/09/2026): convatec.com's index lists
+            # 197 per-locale sitemaps and only 8 are read, so "product" first
+            # meant eight OTHER countries' product sitemaps and never
+            # /en-gb/sitemap-Page.xml, where its GentleCath and Cure catheter
+            # pages live. This Hub is for UK members.
+            candidates.sort(key=lambda l: (
+                0 if any("/%s/" % seg in l.lower() for seg in UK_LOCALE_SEGMENTS) else 1,
+                0 if "product" in l.lower() else 1))
             to_read.extend(candidates[:8])
             continue
         urls.extend(locs)
@@ -1789,12 +1831,28 @@ def sitemap_products(domain, deadline=None, product_paths=None):
     # exist for this site — sites that nest EVERYTHING under one locale
     # (e.g. always /uk/products/…) never trip `has_root` and fall through to
     # the unchanged behaviour below.
+    #
+    # BUT THE UNPREFIXED CATALOGUE IS NOT ALWAYS THE UK ONE (29/09/2026). On
+    # convatec.com the plain /products/… range is the US site: a 28/09 re-crawl
+    # kept it and threw away /en-gb/… as a "duplicate", and came back with US
+    # names ("Esteem One Piece Moldable Drainable Pouch Us"), US-only lines
+    # (ostomy underwear) and the US division word "Ostomy Care" for all 123
+    # stoma products. This Hub serves UK members, so where a UK-prefixed copy
+    # exists it is the catalogue that is kept, and the root and every other
+    # locale are the duplicates. A site with no UK copy is unchanged.
     dropped_locale = 0
-    if has_root:
+    uk = [(pre, rest, u) for pre, rest, u in paths
+          if any(seg.lower() in UK_LOCALE_SEGMENTS for seg in pre)]
+    if has_root and uk:
+        dropped_locale = len(paths) - len(uk)
+        paths = [([], rest, u) for pre, rest, u in uk]
+        print("      kept the UK-prefixed catalogue (%d URLs) over the site's unprefixed "
+              "one, which is another market's" % len(paths), flush=True)
+    elif has_root:
         kept = [(pre, rest, u) for pre, rest, u in paths if not pre]
         dropped_locale = len(paths) - len(kept)
         paths = kept
-    if dropped_locale:
+    if dropped_locale and not (has_root and uk):
         print("      dropped %d locale-prefixed duplicate URL(s) — a plain, unprefixed "
               "catalogue exists for this site so the country/language-prefixed copies "
               "are not counted as extra products" % dropped_locale, flush=True)
@@ -1950,7 +2008,7 @@ def sitemap_products(domain, deadline=None, product_paths=None):
             furniture += 1
             continue
         leaf = rest[-1]
-        if is_download_leaf(leaf) or leaf.lower() in TAXONOMY_INDEX_LEAVES:
+        if is_download_leaf(leaf) or is_locator_leaf(leaf) or leaf.lower() in TAXONOMY_INDEX_LEAVES:
             non_product += 1
             continue
         if is_uuid_slug(leaf):
