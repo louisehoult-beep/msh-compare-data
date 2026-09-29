@@ -13,15 +13,17 @@
  "slug": "rehabilitation-prosthetics-and-orthotics",
  "label": "Rehabilitation, Prosthetics and Orthotics",
  "defined": true,
- "generated": "2026-09-28",
+ "generated": "2026-09-29",
  "dataAsOf": {
   "frameworks": "2026-09-22",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-28T13:48:31+00:00",
-  "openTenders": "28/09/2026",
-  "drugTariff": "2026-09-28"
+  "frameworkAwards": "2026-09-29T12:48:24+00:00",
+  "openTenders": "29/09/2026",
+  "drugTariff": "2026-09-29",
+  "localIntel": "2026-09-29"
  },
  "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
   "frameworks": "NHS Supply Chain framework names matching /(orthotic|orthoses|podiatry and immobilisation|prosthetic components|artificial limb|wheelchairs?|specialist seating|physiotherapy and occupational therapy|technology enabled care|electronic assistive technology|external breast prosthes)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. This patch is three services that share a commissioner and little else, and the frameworks above reflect that: two are its own (Orthotics, Podiatry and Immobilisation; Prosthetic Components and Associated Products), two are shared with the Patient Moving and Handling page (Wheelchairs, Specialist Seating and Related Services; Physiotherapy and Occupational Therapy), and the supplier counts on the shared ones are therefore borrowed rather than exclusive. No Drug Tariff panel is published here, and that is a finding rather than a gap: aggregating the whole of NHSBSA Prescription Cost Analysis for 2025/26 on 11/09/2026 returned £2,254 of prosthetic adhesives on 143 items, £25,707 of chiropody appliances and £9,863 of trusses across England for a full year. Prosthetics and orthotics are not reimbursed in the community; they are issued by a service against a framework. The compression and lymphoedema lines that do sit in Part IXA belong to the Tissue Viability and Wound Care page, which claims that part.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. This patch is three services that share a commissioner and little else, and the frameworks above reflect that: two are its own (Orthotics, Podiatry and Immobilisation; Prosthetic Components and Associated Products), two are shared with the Patient Moving and Handling page (Wheelchairs, Specialist Seating and Related Services; Physiotherapy and Occupational Therapy), and the supplier counts on the shared ones are therefore borrowed rather than exclusive. No Drug Tariff panel is published here, and that is a finding rather than a gap: aggregating the whole of NHSBSA Prescription Cost Analysis for 2025/26 on 11/09/2026 returned £2,254 of prosthetic adhesives on 143 items, £25,707 of chiropody appliances and £9,863 of trusses across England for a full year. Prosthetics and orthotics are not reimbursed in the community; they are issued by a service against a framework. The compression and lymphoedema lines that do sit in Part IXA belong to the Tissue Viability and Wound Care page, which claims that part.",
   "awards": "Award-stage notices whose TITLE matches /\\b(prosthetic(?:s)?|prosthes[ei]s|orthotic(?:s)?|orthos(?:is|es)|artificial limb(?:s)?|amputee(?:s)?|wheelchair(?:s)?|specialist seating|postural (?:seating|management|supports?|services?)|electronic assistive technology)\\b/i and does not match /\\b(aortic|mitral|heart valve|surgically implanted breast|wheelchair lift(?:s)?)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 331931 or 331932 or 33183 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
@@ -35,7 +37,8 @@
   "awardsShown": 40,
   "awardsMatched": 44,
   "awardsWithheldByBuyerCap": 0,
-  "openTenders": 0
+  "openTenders": 0,
+  "localIntel": 0
  },
  "frameworks": [
   {
@@ -1950,5 +1953,14 @@
   }
  ],
  "openTenders": [],
- "drugTariff": null
+ "drugTariff": null,
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ }
 }

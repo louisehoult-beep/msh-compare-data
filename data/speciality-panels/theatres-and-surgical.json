@@ -13,15 +13,17 @@
  "slug": "theatres-and-surgical",
  "label": "Theatres and Surgical",
  "defined": true,
- "generated": "2026-09-28",
+ "generated": "2026-09-29",
  "dataAsOf": {
   "frameworks": "2026-09-22",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-28T13:48:31+00:00",
-  "openTenders": "28/09/2026",
-  "drugTariff": "2026-09-28"
+  "frameworkAwards": "2026-09-29T12:48:24+00:00",
+  "openTenders": "29/09/2026",
+  "drugTariff": "2026-09-29",
+  "localIntel": "2026-09-29"
  },
  "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
   "frameworks": "NHS Supply Chain framework names matching /\\b(airway management|anaesthesia machines|decontamination capital|instrument decontamination|electrosurgical|minimally invasive surgery|operating theatres|procedure packs|robotic medical equipment|surgical gloves|surgical instruments|tray wrap|wound closure)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This patch has no single framework and no single market-share figure: spend sits across at least thirteen separate NHS Supply Chain frameworks, each a different product category with its own buying cycle, and none publishes a unit share breakdown. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market. NHS Supply Chain is also only one route here: the award record below shows theatre consumables bought through NHS Wales Shared Services, National Procurement in Scotland, HealthTrust Europe, the Collaborative Procurement Partnership and trusts' own direct awards, none of which appears in the framework list above.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This patch has no single framework and no single market-share figure: spend sits across at least thirteen separate NHS Supply Chain frameworks, each a different product category with its own buying cycle, and none publishes a unit share breakdown. Being named on a framework is not evidence of volume, and being absent from one is not evidence of absence from the market. NHS Supply Chain is also only one route here: the award record below shows theatre consumables bought through NHS Wales Shared Services, National Procurement in Scotland, HealthTrust Europe, the Collaborative Procurement Partnership and trusts' own direct awards, none of which appears in the framework list above.",
   "awards": "Award-stage notices whose TITLE matches /\\b(theatres?|operating table|anaesthe\\w*|anesthe\\w*|airway|laryngoscop\\w*|laryngeal mask|endotracheal|tracheal tube|breathing (?:system|circuit)|catheter mount|sterile services|sterilis\\w*|steriliz\\w*|decontaminat\\w*|washer disinfector|tray wrap|surgical instrument\\w*|instrument set\\w*|scalpel|diatherm\\w*|electrosurg\\w*|suture\\w*|wound closure|surgical stapler\\w*|skin stapler\\w*|linear stapler\\w*|circular stapler\\w*|stapling device\\w*|tissue adhesive|skin adhesive|haemostat\\w*|hemostat\\w*|procedure pack\\w*|surgical drape\\w*|surgical gown\\w*|surgical glove\\w*|scrub suit\\w*|laparoscop\\w*|minimally invasive|trocar\\w*|robotic surger\\w*|surgical robot\\w*|perioperative|peri-operative|smoke evacuat\\w*|surgical light\\w*)\\b/i and does not match /\\b(lectures? theatre|road re-?surfac\\w*|water treatment|asbestos|positive airway pressure|cpap|medicines|coagulation products|theatres? ventilation|laminar flow)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33161 or 33162 or 33169 or 33171 or 33172 or 33191 or 3314112 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
@@ -33,9 +35,10 @@
   "suppliers": 263,
   "suppliersUnresolved": 7,
   "awardsShown": 40,
-  "awardsMatched": 107,
+  "awardsMatched": 109,
   "awardsWithheldByBuyerCap": 0,
-  "openTenders": 1
+  "openTenders": 1,
+  "localIntel": 0
  },
  "frameworks": [
   {
@@ -3208,6 +3211,36 @@
  ],
  "awards": [
   {
+   "title": "AIRWAY MANAGEMENT",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091799-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Authorising Engineer (AE) – Decontamination",
+   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
+   "supplier": "Posillipo Consulting Services",
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091790-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "71315200"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
    "title": "Single Use Surgical Instruments 4222497",
    "buyer": "Procurement and Logistics Service",
    "supplier": null,
@@ -3790,26 +3823,6 @@
    "value": 150000,
    "periodEnd": "2030-07-31",
    "source": "tender-history"
-  },
-  {
-   "title": "Procedure Packs",
-   "buyer": "Nottingham University Hospital NHS Trust",
-   "supplier": "Unisurge",
-   "date": "2026-07-28",
-   "url": "https://www.contractsfinder.service.gov.uk/Notice/075ccafe-9e90-41ae-8738-e0aa17a509b1",
-   "value": 62587,
-   "periodEnd": "2027-06-21",
-   "source": "tender-history"
-  },
-  {
-   "title": "WSFT - Theatres - Surgical Robot purchase (MyWish Charity)",
-   "buyer": "West Suffolk NHS Foundation Trust",
-   "supplier": "CMR SURGICAL LIMITED",
-   "date": "2026-07-15",
-   "url": "https://www.contractsfinder.service.gov.uk/Notice/303d28e4-7dad-4a8c-b8cd-619cf6c72a19",
-   "value": 1340000,
-   "periodEnd": "2033-03-31",
-   "source": "tender-history"
   }
  ],
  "openTenders": [
@@ -3824,5 +3837,14 @@
    "source": "Find a Tender"
   }
  ],
- "drugTariff": null
+ "drugTariff": null,
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ }
 }

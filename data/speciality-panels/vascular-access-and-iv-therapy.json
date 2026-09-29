@@ -13,15 +13,17 @@
  "slug": "vascular-access-and-iv-therapy",
  "label": "Vascular Access and IV Therapy",
  "defined": true,
- "generated": "2026-09-28",
+ "generated": "2026-09-29",
  "dataAsOf": {
   "frameworks": "2026-09-22",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-28T13:48:31+00:00",
-  "openTenders": "28/09/2026",
-  "drugTariff": "2026-09-28"
+  "frameworkAwards": "2026-09-29T12:48:24+00:00",
+  "openTenders": "29/09/2026",
+  "drugTariff": "2026-09-29",
+  "localIntel": "2026-09-29"
  },
  "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
   "frameworks": "NHS Supply Chain framework names matching /\\b(central venous catheter|intravenous (?:cannula|accessories)|needlefree connection|infusion pumps and administration sets|extension sets and lines)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry.",
   "awards": "Award-stage notices whose TITLE matches /\\b(vascular access|picc\\b|peripherally inserted central|midline catheter|central venous (?:catheter|access|line)|central line|intravenous|iv\\b|cannulae?\\b|cannulation|infusion pump|syringe driver|syringe pump|administration set|giving set|needle[- ]?free|venepunctur|venipunctur|phlebotom|port-?a-?cath|implantable port|totally implantable venous|tivad|hickman|groshong|broviac|arterial line|arterial catheter|extension set|catheter securement|opat\\b|outpatient parenteral|infusion therapy)/i and does not match /\\b(nasal cannula|\\w+mab\\b|fluids?\\b|irrigation|insulin|glucose|erythropoietin|immunoglobulin|antibiotics?\\b|\\d+\\s?m(?:g|l|cg)\\b|vials?\\b|concentrate for|powder for|solution for (?:infusion|injection)|pre-?filled)/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33141220 or 331941 or 33141624 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
@@ -32,10 +34,11 @@
   "frameworks": 6,
   "suppliers": 63,
   "suppliersUnresolved": 1,
-  "awardsShown": 24,
-  "awardsMatched": 24,
+  "awardsShown": 25,
+  "awardsMatched": 25,
   "awardsWithheldByBuyerCap": 0,
-  "openTenders": 0
+  "openTenders": 0,
+  "localIntel": 0
  },
  "frameworks": [
   {
@@ -905,6 +908,21 @@
  ],
  "awards": [
   {
+   "title": "CDC Phlebotomy Service",
+   "buyer": "East Suffolk and North Essex NHS Foundation Trust",
+   "supplier": null,
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091826-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "85111000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
    "title": "Contract for the provision of Domiciliary Phlebotomy service in Waltham Forest",
    "buyer": "North East London NHS Foundation Trust",
    "supplier": "WF Federated GP Network Limited",
@@ -1193,5 +1211,14 @@
   }
  ],
  "openTenders": [],
- "drugTariff": null
+ "drugTariff": null,
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ }
 }

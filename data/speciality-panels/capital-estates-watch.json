@@ -13,15 +13,17 @@
  "slug": "capital-estates-watch",
  "label": "Capital and Estates Watch",
  "defined": true,
- "generated": "2026-09-28",
+ "generated": "2026-09-29",
  "dataAsOf": {
   "frameworks": "2026-09-22",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-28T13:48:31+00:00",
-  "openTenders": "28/09/2026",
-  "drugTariff": "2026-09-28"
+  "frameworkAwards": "2026-09-29T12:48:24+00:00",
+  "openTenders": "29/09/2026",
+  "drugTariff": "2026-09-29",
+  "localIntel": "2026-09-29"
  },
  "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
   "frameworks": "NHS Supply Chain framework names matching /(batteries, lighting, tools)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. Read this panel differently from every other speciality's. NHS Supply Chain barely reaches this patch: it has exactly one agreement here, for batteries, lighting, tools, FM consumables and EV charging, and it buys none of the plant, works or construction the rest of the page is about. The real routes are Government Commercial Agency agreements RM6267 CWAS2 / NHS ProCure23 and RM6088 CWAS, which both expire on 31 March 2027 with all contracts awarded by that date; NHS Shared Business Services Hard Facilities Management 3, awarded 1 September 2026 with 28 lots and 185 suppliers, running from 20 October 2026; NHS SBS Public Sector Construction Works 2, still only a planned procurement notice with its tender delayed to mid-to-late November 2026; the New Hospital Programme's own Hospital 2.0 Alliance of ten construction firms; and, increasingly, dynamic markets opened by individual trusts under the Procurement Act 2023, which admit new suppliers at any time. None of those five is an NHS Supply Chain framework, so none appears in the Frameworks list above however large it is. One award row below is not NHS at all: “16_26 Flooring (Supply, Fit and Refurbishment)” was bought by Leicestershire County Council and is left in rather than blinding the rule to the word “flooring”, which NHS trusts also buy.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. Read this panel differently from every other speciality's. NHS Supply Chain barely reaches this patch: it has exactly one agreement here, for batteries, lighting, tools, FM consumables and EV charging, and it buys none of the plant, works or construction the rest of the page is about. The real routes are Government Commercial Agency agreements RM6267 CWAS2 / NHS ProCure23 and RM6088 CWAS, which both expire on 31 March 2027 with all contracts awarded by that date; NHS Shared Business Services Hard Facilities Management 3, awarded 1 September 2026 with 28 lots and 185 suppliers, running from 20 October 2026; NHS SBS Public Sector Construction Works 2, still only a planned procurement notice with its tender delayed to mid-to-late November 2026; the New Hospital Programme's own Hospital 2.0 Alliance of ten construction firms; and, increasingly, dynamic markets opened by individual trusts under the Procurement Act 2023, which admit new suppliers at any time. None of those five is an NHS Supply Chain framework, so none appears in the Frameworks list above however large it is. One award row below is not NHS at all: “16_26 Flooring (Supply, Fit and Refurbishment)” was bought by Leicestershire County Council and is left in rather than blinding the rule to the word “flooring”, which NHS trusts also buy.",
   "awards": "Award-stage notices whose TITLE matches /\\b(backlog maintenance|estates?|capital works?|refurbishment|refurbish\\w*|ventilation|air handling|boiler|chiller|electrical infrastructure|fire (?:safety|alarm|compartmentation|stopping|damper)|roof\\w*|water (?:hygiene|safety|treatment)|legionella|decarbonisation|heat pump|modular (?:building|ward|theatre)|demolition|asbestos|RAAC|hard fm|soft fm|facilities management|building management system|lift replacement|standby generator|medical gas|construction works?|new build|main contractor|design and build)\\b/i and does not match /\\b(wheelchair (?:maintenance|servicing|repairs?)|equipment refurbishment|non[- ]?invasive ventilation|graduate management training)\\b/i. Four titles matched the include and are excluded by name, each read in full on 11 September 2026: a wheelchair maintenance and refurbishment contract (rehabilitation's patch, while a wheelchair LIFT stays here because it is estates), an Olympus endoscopy stack refurbishment at NHS Grampian, an NHS Supply Chain non-invasive ventilation and CPAP framework (respiratory - the one place where “ventilation” means a machine breathing for a patient rather than air handling), and the NHS Graduate Management Training Scheme engineering stream. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
@@ -33,9 +35,10 @@
   "suppliers": 16,
   "suppliersUnresolved": 13,
   "awardsShown": 40,
-  "awardsMatched": 106,
+  "awardsMatched": 107,
   "awardsWithheldByBuyerCap": 0,
-  "openTenders": 0
+  "openTenders": 0,
+  "localIntel": 0
  },
  "frameworks": [
   {
@@ -263,6 +266,21 @@
    "periodEnd": null,
    "cpv": [
     "50421000"
+   ],
+   "isFramework": false,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
+   "title": "Conway Road Decarbonisation & Drainage at Conway Road Health Centre",
+   "buyer": "NHS Property Services Limited",
+   "supplier": "NU Construction Ltd",
+   "date": "2026-09-28",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091595-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "45210000"
    ],
    "isFramework": false,
    "source": "framework-awards",
@@ -837,33 +855,17 @@
    "isFramework": false,
    "source": "framework-awards",
    "cpvCorroborates": false
-  },
-  {
-   "title": "Minor Works, Repairs and Refurbishment Framework",
-   "buyer": "United Lincolnshire Teaching Hospitals NHS Trust",
-   "supplier": "East Kirkby Engineering Company Limited, Gelder Ltd, H.C.G.Heating Construction Limited, Irwin M&E Limited, MTX Contracts Limited, Pipework Services Limited, Selmec (Lincoln) Ltd, Sleaford Building Services, Sureserve Compliance Central Limited, Thermatic Technical FM, Brook and Mayo Limited, GRS Electrical Services Ltd, G-Tech Electrical Contractors Ltd, Storage Display Equipment Electrical Limited, Sudlows Enterprise Services, BM Construction, Fenax Developments Ltd t/a FDL Contractors, Lindum Group Ltd, M & J Group (Construction & Roofing) Ltd, Rocare Building Services Ltd, Ron Gale & Sons Ltd, Alfred Bagnall & Sons, Ian Williams Limited, NSS Maintenance Ltd, Dalrod UK Limited, Lanes Group Limited, Metro Rod Ltd, HAYLEY DEXIS – Hayley Group Limited, JC Watson Mechanical Ltd, Playfords Ltd, Safecontrol Limited",
-   "date": "2026-09-09",
-   "url": "https://www.find-tender.service.gov.uk/Notice/085354-2026",
-   "value": null,
-   "periodEnd": null,
-   "cpv": [
-    "45113000",
-    "45210000",
-    "45232450",
-    "45232451",
-    "45310000",
-    "45430000",
-    "45440000",
-    "45441000",
-    "45453100",
-    "50700000",
-    "50712000"
-   ],
-   "isFramework": true,
-   "source": "framework-awards",
-   "cpvCorroborates": false
   }
  ],
  "openTenders": [],
- "drugTariff": null
+ "drugTariff": null,
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ }
 }

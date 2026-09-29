@@ -13,15 +13,17 @@
  "slug": "diabetes-and-endocrinology",
  "label": "Diabetes and Endocrinology",
  "defined": true,
- "generated": "2026-09-28",
+ "generated": "2026-09-29",
  "dataAsOf": {
   "frameworks": "2026-09-22",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-28T13:48:31+00:00",
-  "openTenders": "28/09/2026",
-  "drugTariff": "2026-09-28"
+  "frameworkAwards": "2026-09-29T12:48:24+00:00",
+  "openTenders": "29/09/2026",
+  "drugTariff": "2026-09-29",
+  "localIntel": "2026-09-29"
  },
  "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
   "frameworks": "NHS Supply Chain framework names matching /\\b(insulin pump|continuous glucose|hybrid closed loop)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch has ONE NHS Supply Chain framework and it covers only half the market. Pumps, acute continuous glucose monitoring and the algorithms that join them are bought on framework 2025/S 000-4043, which expires on 31 May 2027. Community sensors and testing strips never touch it: they are prescribed on FP10 and reimbursed at the Drug Tariff Part IX listed price, which is a monthly reimbursement list and not a contract price. Quoting one as though it were the other is the single most common mistake on this patch. THE ENDOCRINOLOGY HALF OF THIS PAGE'S NAME HAS NO PROCUREMENT OF ITS OWN IN THIS DATA: no NHS Supply Chain framework name carries it, and every award title matching an endocrine or thyroid term turned out to be oncology, pharmacy or newborn screening, so the panel claims none of them. The insulin and GLP-1 medicines themselves - semaglutide, tirzepatide, the insulin analogues - are BNF Chapter 6 prescribing and appear in no framework and no Part IX line here; they are pharmacy's and obesity's. The awards list is also unusually service-heavy: the six rows from the framework-awards feed are eye screening, community diabetes services and digital prevention programmes, not device buys. Two rows are named rather than hidden because the product is exactly what this patch sells even though the buyer is not a trust: a portable glucometer contract bought by Leidos Supply for defence, and the Northern Ireland insulin pen needle contract. Being named on the framework is not evidence of volume, and being absent from it is not evidence of absence from the market.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. This patch has ONE NHS Supply Chain framework and it covers only half the market. Pumps, acute continuous glucose monitoring and the algorithms that join them are bought on framework 2025/S 000-4043, which expires on 31 May 2027. Community sensors and testing strips never touch it: they are prescribed on FP10 and reimbursed at the Drug Tariff Part IX listed price, which is a monthly reimbursement list and not a contract price. Quoting one as though it were the other is the single most common mistake on this patch. THE ENDOCRINOLOGY HALF OF THIS PAGE'S NAME HAS NO PROCUREMENT OF ITS OWN IN THIS DATA: no NHS Supply Chain framework name carries it, and every award title matching an endocrine or thyroid term turned out to be oncology, pharmacy or newborn screening, so the panel claims none of them. The insulin and GLP-1 medicines themselves - semaglutide, tirzepatide, the insulin analogues - are BNF Chapter 6 prescribing and appear in no framework and no Part IX line here; they are pharmacy's and obesity's. The awards list is also unusually service-heavy: the six rows from the framework-awards feed are eye screening, community diabetes services and digital prevention programmes, not device buys. Two rows are named rather than hidden because the product is exactly what this patch sells even though the buyer is not a trust: a portable glucometer contract bought by Leidos Supply for defence, and the Northern Ireland insulin pen needle contract. Being named on the framework is not evidence of volume, and being absent from it is not evidence of absence from the market.",
   "awards": "Award-stage notices whose TITLE matches /\\b(diabet\\w*|insulin|glucose|glucometer|glycaem\\w*|glycem\\w*|hb\\s?a1c|cgm|continuous glucose|closed[- ]loop|ketone|hypoglyc\\w*|hyperglyc\\w*)\\b/i and does not match /\\bglucose\\s+\\d/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
@@ -35,7 +37,8 @@
   "awardsShown": 29,
   "awardsMatched": 29,
   "awardsWithheldByBuyerCap": 0,
-  "openTenders": 0
+  "openTenders": 0,
+  "localIntel": 0
  },
  "frameworks": [
   {
@@ -528,10 +531,12 @@
    "IXA",
    "IXR"
   ],
+  "bnfFilter": null,
+  "bnfCount": null,
   "vmpFilter": "insulin|glucose|ketone|lancet|neuropathy sweat|diabetic",
   "vmpCount": 100,
   "effectiveMonth": "2026-09",
-  "dataAsOf": "2026-09-28",
+  "dataAsOf": "2026-09-29",
   "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
   "lineCount": 434,
   "supplierCount": 63,
@@ -619,5 +624,14 @@
   ],
   "priceMin": 1.23,
   "priceMax": 230.0
+ },
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
  }
 }

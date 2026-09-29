@@ -13,15 +13,17 @@
  "slug": "sepsis-and-the-deteriorating-patient",
  "label": "Sepsis and the Deteriorating Patient",
  "defined": true,
- "generated": "2026-09-28",
+ "generated": "2026-09-29",
  "dataAsOf": {
   "frameworks": "2026-09-22",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-28T13:48:31+00:00",
-  "openTenders": "28/09/2026",
-  "drugTariff": "2026-09-28"
+  "frameworkAwards": "2026-09-29T12:48:24+00:00",
+  "openTenders": "29/09/2026",
+  "drugTariff": "2026-09-29",
+  "localIntel": "2026-09-29"
  },
  "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
   "frameworks": "NHS Supply Chain framework names matching /(laboratory diagnostics|infusion pumps and administration sets|intravenous cannula|pressure infusers)/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Sepsis is a pathway, not a product category, and every number in this panel is borrowed from an agreement bought for something broader. All four frameworks here are shared: the Laboratory Diagnostics agreement is counted on the pathology page, the infusion pumps agreement on the critical care and palliative care pages, and all four are used across wards that have nothing to do with deterioration. A supplier counted here is a supplier on an agreement this pathway buys through, never a measure of its sepsis business. Three things this count cannot reach at all. Antimicrobials, which are the single largest recurring spend on the Sepsis Six, sit on no framework here and go through pharmacy and the local formulary. E-observation and deterioration software, which is what NHS England's Sepsis modern service framework actually commits to standardising, is on no NHS Supply Chain framework at all and is bought trust by trust through digital procurement with a clinical safety case. And NHS Supply Chain's Pulse Oximetry, Capnography and Related Monitoring Technologies framework, which no speciality page yet claims, is refused here rather than swept up by whichever page happened to be built last. One field is published as the source holds it and not as the speciality page states it: frameworks.json carries no end date for the Pressure Infusers agreement, where NHS Supply Chain's own contract launch brief says 31 August 2028. Four of the fifteen awards below are Department of Health and Social Care pandemic-preparedness stockpile buys rather than trust purchases, and they are kept deliberately: the product in each is intravenous cannulae or intravenous giving sets, which is exactly what two of the frameworks above carry. Read them as national stockpiling, not as a trust opening a conversation.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Sepsis is a pathway, not a product category, and every number in this panel is borrowed from an agreement bought for something broader. All four frameworks here are shared: the Laboratory Diagnostics agreement is counted on the pathology page, the infusion pumps agreement on the critical care and palliative care pages, and all four are used across wards that have nothing to do with deterioration. A supplier counted here is a supplier on an agreement this pathway buys through, never a measure of its sepsis business. Three things this count cannot reach at all. Antimicrobials, which are the single largest recurring spend on the Sepsis Six, sit on no framework here and go through pharmacy and the local formulary. E-observation and deterioration software, which is what NHS England's Sepsis modern service framework actually commits to standardising, is on no NHS Supply Chain framework at all and is bought trust by trust through digital procurement with a clinical safety case. And NHS Supply Chain's Pulse Oximetry, Capnography and Related Monitoring Technologies framework, which no speciality page yet claims, is refused here rather than swept up by whichever page happened to be built last. One field is published as the source holds it and not as the speciality page states it: frameworks.json carries no end date for the Pressure Infusers agreement, where NHS Supply Chain's own contract launch brief says 31 August 2028. Four of the fifteen awards below are Department of Health and Social Care pandemic-preparedness stockpile buys rather than trust purchases, and they are kept deliberately: the product in each is intravenous cannulae or intravenous giving sets, which is exactly what two of the frameworks above carry. Read them as national stockpiling, not as a trust opening a conversation.",
   "awards": "Award-stage notices whose TITLE matches /\\b(sepsis|septic shock|septic(?:a|ae)mia|deteriorating patient|early warning score|news2|track and trigger|e-?observations?|critical care outreach|rapid response team|procalcitonin|blood culture|blood gas analys\\w*|lactate analys\\w*|vital signs? monitors?|pressure infus(?:er|or)\\w*|(?:iv|intravenous) cannulae?|infusion pumps?|administration sets?)\\b/i and does not match /\\b(insulin|syringe drivers?|rapid infuser)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33194 or 3314122 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
@@ -35,7 +37,8 @@
   "awardsShown": 16,
   "awardsMatched": 16,
   "awardsWithheldByBuyerCap": 0,
-  "openTenders": 0
+  "openTenders": 0,
+  "localIntel": 0
  },
  "frameworks": [
   {
@@ -1979,5 +1982,14 @@
   }
  ],
  "openTenders": [],
- "drugTariff": null
+ "drugTariff": null,
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ }
 }

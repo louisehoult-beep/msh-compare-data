@@ -13,15 +13,17 @@
  "slug": "vascular-surgery-and-pad",
  "label": "Vascular Surgery and Peripheral Arterial Disease",
  "defined": true,
- "generated": "2026-09-28",
+ "generated": "2026-09-29",
  "dataAsOf": {
   "frameworks": "2026-09-22",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-28T13:48:31+00:00",
-  "openTenders": "28/09/2026",
-  "drugTariff": "2026-09-28"
+  "frameworkAwards": "2026-09-29T12:48:24+00:00",
+  "openTenders": "29/09/2026",
+  "drugTariff": "2026-09-29",
+  "localIntel": "2026-09-29"
  },
  "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
   "frameworks": "NHS Supply Chain framework names matching /\\b(vascular therapy|angiography|endovascular|aortic|peripheral vascular)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. The framework this patch buys its implants through — NHS Supply Chain's Interventional Cardiology and Interventional Radiology framework, 2021/S 000-017565 Lot 1, which carries the endovascular stent grafts, peripheral vascular stents, carotid, iliac and renal stents and aneurysm coils — is not in the Hub's framework dataset, so its twelve suppliers are not counted below. Aortic and peripheral implants also travel through NHS England's Specialised Services Devices Programme, a central supply route with no NHS Supply Chain framework page at all. What follows is therefore the compression and capital-equipment end of this patch, which is what the record holds, not the whole buying picture. The page's Deep dive covers the IC/IR route.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMIT, STATED RATHER THAN HIDDEN. The framework this patch buys its implants through — NHS Supply Chain's Interventional Cardiology and Interventional Radiology framework, 2021/S 000-017565 Lot 1, which carries the endovascular stent grafts, peripheral vascular stents, carotid, iliac and renal stents and aneurysm coils — is not in the Hub's framework dataset, so its twelve suppliers are not counted below. Aortic and peripheral implants also travel through NHS England's Specialised Services Devices Programme, a central supply route with no NHS Supply Chain framework page at all. What follows is therefore the compression and capital-equipment end of this patch, which is what the record holds, not the whole buying picture. The page's Deep dive covers the IC/IR route.",
   "awards": "Award-stage notices whose TITLE matches /\\b(vascular|endovascular|evar|tevar|fevar|bevar|aneurysm|abdominal aortic|thoraco[- ]?abdominal|aortic dissection|aortic arch|aortic aneurysm|aortic stent|aortic graft|aortic endograft|peripheral arter\\w*|claudication|critical limb|limb ischaem\\w*|limb salvage|angioplasty|atherectomy|stent graft|endograft|carotid|endarterectomy|varicose|sclerotherapy|arteriovenous fistula|angiograph\\w*|angiogram|interventional radiolog\\w*|ankle brachial|abpi|amputation)\\b/i and does not match /\\b(retinal|vascular access|neuro[- ]?vascular)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. No CPV family corroborates this speciality: not one matching notice in this data carries a CPV code specific to it, so none is claimed. A CPV code could never admit a notice on its own in any case, because a notice carrying a basket of them is filed under all and bought under one. Buyer names are never matched on.",
@@ -35,7 +37,8 @@
   "awardsShown": 11,
   "awardsMatched": 11,
   "awardsWithheldByBuyerCap": 0,
-  "openTenders": 0
+  "openTenders": 0,
+  "localIntel": 0
  },
  "frameworks": [
   {
@@ -585,5 +588,14 @@
   }
  ],
  "openTenders": [],
- "drugTariff": null
+ "drugTariff": null,
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
+ }
 }

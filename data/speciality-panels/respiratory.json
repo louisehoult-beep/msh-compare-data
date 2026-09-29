@@ -13,15 +13,17 @@
  "slug": "respiratory",
  "label": "Respiratory",
  "defined": true,
- "generated": "2026-09-28",
+ "generated": "2026-09-29",
  "dataAsOf": {
   "frameworks": "2026-09-22",
   "tenderHistory": "2026-08-20",
-  "frameworkAwards": "2026-09-28T13:48:31+00:00",
-  "openTenders": "28/09/2026",
-  "drugTariff": "2026-09-28"
+  "frameworkAwards": "2026-09-29T12:48:24+00:00",
+  "openTenders": "29/09/2026",
+  "drugTariff": "2026-09-29",
+  "localIntel": "2026-09-29"
  },
  "rules": {
+  "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
   "frameworks": "NHS Supply Chain framework names matching /\\b(respiratory solutions|non invasive ventilation|airway management|anaesthesia machines)\\b/i. NHSSC names a framework after its clinical category, so the name is the key; the CBU category field is far too broad to filter on. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the four agreements above are shared routes rather than respiratory ones: Airway Management Products is categorised by NHS Supply Chain under Medical and Surgical Consumables and is claimed by theatres and surgical, and Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems is claimed by theatres and surgical and by maternity and neonatal, with this page claiming only the ventilator half. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. The supplier list is built from the four frameworks, so it counts airway and anaesthesia houses alongside respiratory ones; the page's own overlap analysis is the better guide to who is really on this patch, and it finds one supplier on all four lists and five on three. Home oxygen is the largest gap and it is a real one: it is bought through regional Home Oxygen Service contracts, not through any national NHS Supply Chain framework, so it appears in awards and tenders and nowhere else. The community medicines half of this patch — the larger half by money — is FP10 prescribing under BNF Chapter 3 and has no framework and no Drug Tariff Part IX presence at all.",
   "suppliers": "Every supplier NHS Supply Chain names on the frameworks above, resolved to one name per company through the Hub's alias registry, and ordered by how many of this speciality's frameworks they appear on. That count is the only claim made. It is not a ranking of size or share. Where NHS Supply Chain spelled a company two ways across its own pages, both spellings are shown against the one entry. COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the four agreements above are shared routes rather than respiratory ones: Airway Management Products is categorised by NHS Supply Chain under Medical and Surgical Consumables and is claimed by theatres and surgical, and Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy Systems is claimed by theatres and surgical and by maternity and neonatal, with this page claiming only the ventilator half. Being named on a framework is not evidence of volume on this patch, and being absent from one is not evidence of absence from the market. The supplier list is built from the four frameworks, so it counts airway and anaesthesia houses alongside respiratory ones; the page's own overlap analysis is the better guide to who is really on this patch, and it finds one supplier on all four lists and five on three. Home oxygen is the largest gap and it is a real one: it is bought through regional Home Oxygen Service contracts, not through any national NHS Supply Chain framework, so it appears in awards and tenders and nowhere else. The community medicines half of this patch — the larger half by money — is FP10 prescribing under BNF Chapter 3 and has no framework and no Drug Tariff Part IX presence at all.",
   "awards": "Award-stage notices whose TITLE matches /\\b(respirator\\w*|pulmonary function\\w*|pulmonary diagnostic\\w*|pulmonary rehabilitation|lung function|lung volume|asthma|copd|chronic obstructive pulmonary|bronchoscop\\w*|bronchodilat\\w*|bronchiectasis|spirometr\\w*|spirometer\\w*|peak flow|feno|fractional exhaled nitric oxide|nitric oxide|oxygen|nebulis\\w*|nebuliz\\w*|inhaler\\w*|ventilator\\w*|(?:non-?invasive|mechanical|home|nasal|neonatal|infant|patient|jet|transport|critical care) ventilation|cpap|bipap|continuous positive airway pressure|sleep (?:apnoea|apnea|therapy|monitoring|diagnostic\\w*|stud\\w*)|apnoea|apnea|polysomnograph\\w*|airway\\w*|intubat\\w*|laryngoscop\\w*|tracheostom\\w*|tracheotom\\w*|tracheal|endotracheal|breathing circuit\\w*|breathing system\\w*|cystic fibrosis|pleural|chest drain\\w*|pneumothorax|pneumonia|cough assist|high[- ]flow nasal)\\b/i and does not match /\\b(hyperbaric|epoc devices?|newborn screening)\\b/i. The exclusion list exists because every pattern in it matched a real notice that was not this speciality. A CPV code beginning 33157 is recorded as corroboration where the feed carries one, but never admits a notice on its own: a notice carrying a basket of CPV codes is filed under all of them and bought under one. Buyer names are never matched on.",
@@ -33,9 +35,10 @@
   "suppliers": 108,
   "suppliersUnresolved": 2,
   "awardsShown": 40,
-  "awardsMatched": 93,
+  "awardsMatched": 94,
   "awardsWithheldByBuyerCap": 0,
-  "openTenders": 0
+  "openTenders": 0,
+  "localIntel": 0
  },
  "frameworks": [
   {
@@ -1288,6 +1291,21 @@
  ],
  "awards": [
   {
+   "title": "AIRWAY MANAGEMENT",
+   "buyer": "NHS Wales Shared Services Partnership-Procurement Services (hosted by Velindre University NHS Trust)",
+   "supplier": null,
+   "date": "2026-09-29",
+   "url": "https://www.find-tender.service.gov.uk/Notice/091799-2026",
+   "value": null,
+   "periodEnd": null,
+   "cpv": [
+    "33140000"
+   ],
+   "isFramework": true,
+   "source": "framework-awards",
+   "cpvCorroborates": false
+  },
+  {
    "title": "KGH-ULTRASOUND BRONCHOSCOPE MAINTENANCE",
    "buyer": "Kettering General Hospital NHS Foundation Trust",
    "supplier": "Ergea UK and Ireland Limited",
@@ -1811,16 +1829,6 @@
    "value": null,
    "periodEnd": null,
    "source": "tender-history"
-  },
-  {
-   "title": "Robotic Bronchoscopy System",
-   "buyer": "NHS Golden Jubilee",
-   "supplier": "",
-   "date": "2025-02-21",
-   "url": "https://www.find-tender.service.gov.uk/Notice/006884-2025",
-   "value": null,
-   "periodEnd": null,
-   "source": "tender-history"
   }
  ],
  "openTenders": [],
@@ -1828,10 +1836,12 @@
   "parts": [
    "IXA"
   ],
+  "bnfFilter": null,
+  "bnfCount": null,
   "vmpFilter": "peak flow meter|tracheostomy (?:breathing aid|tube holder|cleaning device)|tracheostomy and laryngectomy protector",
   "vmpCount": 7,
   "effectiveMonth": "2026-09",
-  "dataAsOf": "2026-09-28",
+  "dataAsOf": "2026-09-29",
   "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-contractors/drug-tariff/drug-tariff-part-ix",
   "lineCount": 608,
   "supplierCount": 23,
@@ -1919,5 +1929,14 @@
   ],
   "priceMin": 0.38,
   "priceMax": 174.18
+ },
+ "localIntel": [],
+ "localIntelGroups": {
+  "routes": "National and framework routes",
+  "local": "Who holds the contract where",
+  "formulary": "Where the formulary sits",
+  "nations": "Scotland, Wales, Northern Ireland and Ireland",
+  "policy": "Policy and demand signals",
+  "data": "Data sources"
  }
 }
