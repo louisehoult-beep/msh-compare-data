@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 37068,
-  "differentiator.json held": 50139
+  "differentiator.json published": 37081,
+  "differentiator.json held": 50203
  },
  "counts": {
   "frameworks": 122,
@@ -25,10 +25,10 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 415,
-  "inScopeSuppliersNeedingCrawl": 276,
-  "inScopeSuppliersNeedingDomain": 251,
-  "suppliersRefused": 527,
-  "suppliersRefusedButPublishingElsewhere": 106,
+  "inScopeSuppliersNeedingCrawl": 273,
+  "inScopeSuppliersNeedingDomain": 249,
+  "suppliersRefused": 529,
+  "suppliersRefusedButPublishingElsewhere": 107,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 3,
   "blockedFrameworks": 2,
@@ -7599,8 +7599,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "7 June 2028",
    "suppliersAwarded": 35,
-   "suppliersPublished": 11,
-   "coverage": 31.4,
+   "suppliersPublished": 12,
+   "coverage": 34.3,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -7610,25 +7610,11 @@
    ],
    "crawlWorklist": [
     {
-     "supplier": "Deltex Medical Ltd",
-     "domain": "deltexmedical.com"
-    },
-    {
-     "supplier": "Nihon Koden",
-     "domain": null
-    },
-    {
-     "supplier": "Optima Medical Ltd",
-     "domain": null
-    },
-    {
      "supplier": "Pro Health Solutions Limited",
      "domain": null
     }
    ],
    "domainsMissing": [
-    "Nihon Koden",
-    "Optima Medical Ltd",
     "Pro Health Solutions Limited"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -7711,6 +7697,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Optima Medical Ltd",
+     "domain": "natus.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-29",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Schiller UK Limited",
      "domain": "www.schiller-medical.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -7760,6 +7753,13 @@
      "bucket": "publishedElsewhere"
     },
     {
+     "supplier": "Deltex Medical Ltd",
+     "domain": "deltexmedical.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-29",
+     "bucket": "heldOnly"
+    },
+    {
      "supplier": "Masimo Europe",
      "domain": "www.masimo.co.uk",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
@@ -7794,7 +7794,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 3
+    "needDomain": 1
    },
    "published": [
     "HC21 (UK) Ltd",
@@ -7803,6 +7803,7 @@
     "Medtronic",
     "Mindray UK",
     "Neurogen Ltd",
+    "Nihon Koden",
     "Penlon",
     "Rudolf Riester GmbH",
     "Spacelabs Healthcare Ltd",
@@ -7820,8 +7821,6 @@
    ],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Nihon Koden",
-    "Optima Medical Ltd",
     "Pro Health Solutions Limited"
    ],
    "refused": [
@@ -7836,6 +7835,7 @@
     "GE HealthCare",
     "Medevolve Limited",
     "Neoventa Medical Limited",
+    "Optima Medical Ltd",
     "Schiller UK Limited",
     "TBG Solutions Limited",
     "UNEEG Medical UK Ltd",
@@ -7843,7 +7843,7 @@
     "Wardray Premise Limited"
    ],
    "unknown": [],
-   "actionableTotal": 8,
+   "actionableTotal": 6,
    "blockedReason": null,
    "deferred": null
   },
@@ -9282,10 +9282,6 @@
      "domain": null
     },
     {
-     "supplier": "Nihon Koden",
-     "domain": null
-    },
-    {
      "supplier": "@SimulationMan Ltd",
      "domain": null
     }
@@ -9296,7 +9292,6 @@
     "Charter Kontron Limited",
     "L\u00f6wenstein Medical UK",
     "Mieka Ltd",
-    "Nihon Koden",
     "mOm Incubators Ltd"
    ],
    "duplicateOfCapturedSupplier": [],
@@ -9368,12 +9363,12 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 3,
+    "publishedElsewhereNeedingCategory": 4,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 7
+    "needDomain": 6
    },
    "published": [
     "Croyde Medical",
@@ -9387,6 +9382,7 @@
    ],
    "publishedElsewhere": [
     "Getinge",
+    "Nihon Koden",
     "Penlon",
     "Philips"
    ],
@@ -9398,7 +9394,6 @@
     "L\u00f6wenstein Medical UK",
     "Mieka Ltd",
     "mOm Incubators Ltd",
-    "Nihon Koden",
     "@SimulationMan Ltd"
    ],
    "refused": [
@@ -14707,10 +14702,6 @@
      "domain": null
     },
     {
-     "supplier": "Nihon Koden",
-     "domain": null
-    },
-    {
      "supplier": "Nowus Healthcare",
      "domain": null
     },
@@ -14740,7 +14731,6 @@
     "Cavagna Group UK",
     "Independent Physiological Diagnostics Ltd",
     "L\u00f6wenstein Medical UK",
-    "Nihon Koden",
     "Nowus Healthcare",
     "Philips Healthcare / Philips Respironics",
     "Remserve Medical Supplies Ltd",
@@ -14804,12 +14794,12 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 11,
+    "publishedElsewhereNeedingCategory": 12,
     "heldNeedingCategory": 2,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 11
+    "needDomain": 10
    },
    "published": [],
    "publishedElsewhere": [
@@ -14820,6 +14810,7 @@
     "Intersurgical",
     "Intus Healthcare",
     "Medicina Limited",
+    "Nihon Koden",
     "Radiometer UK",
     "Reflex Medical Limited",
     "ResMed",
@@ -14835,7 +14826,6 @@
     "Cavagna Group UK",
     "Independent Physiological Diagnostics Ltd",
     "L\u00f6wenstein Medical UK",
-    "Nihon Koden",
     "Nowus Healthcare",
     "Philips Healthcare / Philips Respironics",
     "Remserve Medical Supplies Ltd",
@@ -15538,10 +15528,6 @@
      "domain": null
     },
     {
-     "supplier": "Nihon Koden",
-     "domain": null
-    },
-    {
      "supplier": "Ortivus",
      "domain": null
     },
@@ -15559,7 +15545,6 @@
     "CorMed-DX",
     "Imperartive Training",
     "Martek Lifecare",
-    "Nihon Koden",
     "Ortivus",
     "Tamaki Group",
     "Wel Medical Ltd"
@@ -15627,18 +15612,19 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 7,
+    "publishedElsewhereNeedingCategory": 8,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 8
+    "needDomain": 7
    },
    "published": [],
    "publishedElsewhere": [
     "Aero Healthcare Ltd",
     "Crest Medical Ltd",
     "Mindray UK",
+    "Nihon Koden",
     "Philips",
     "Reliance Medical",
     "Stryker",
@@ -15651,7 +15637,6 @@
     "CorMed-DX",
     "Imperartive Training",
     "Martek Lifecare",
-    "Nihon Koden",
     "Ortivus",
     "Tamaki Group",
     "Wel Medical Ltd"
