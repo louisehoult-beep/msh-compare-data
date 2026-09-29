@@ -5451,6 +5451,11 @@ SPECIALITY_RULES = {
         # Part IXA is 56,833 lines of appliances. Inside it sits the whole community
         # ocular surface range: 223 lines, 89 virtual medicinal products, 36
         # suppliers, reimbursed from £0.61 to £25.25. Every one of the 89 was read.
+        # (Those were the figures under the "\beye" pattern. Under BNF 21.30, from
+        # 29/09/2026, it is 223 lines, 90 products and 35 suppliers in the September
+        # 2026 file, and the top of the range is £230.00: the Noctura 400 Sleep Mask,
+        # a light-therapy device for diabetic retinopathy, is the one line far above
+        # the lubricants. The panel file carries the current figures.)
         # They are the ocular lubricants (sodium hyaluronate, carmellose,
         # hypromellose, carbomer and polyvinyl alcohol eye drops, gels and
         # ointments, preserved and preservative free), the lid hygiene range
@@ -5474,6 +5479,16 @@ SPECIALITY_RULES = {
         # and is also inside the Part IXA range that tissue viability and wound care
         # claims whole. It is counted on both pages and that is correct: it is one
         # product with two clinical homes, not a double count of two things.
+        # NHSBSA'S BNF 21.30 DECIDES, "\beye" IS NOW THE FALLBACK (29/09/2026). Read
+        # against NHSBSA's own classification the pattern was wrong in both directions,
+        # by two lines each way. It admitted "Silk eye mask" twice (DermaSilk,
+        # DreamSkin), which NHSBSA files as specialist garments under 20.20, not under
+        # the eye section, so "selects nothing that is not ophthalmic" above was not
+        # true. And it missed Thea's "Generic Lid-Care wipes" (Blephaclean), a lid
+        # hygiene line whose virtual name does not say eye, and PolyPhotonix's
+        # "Diabetic retinopathy treatment device" (Noctura 400 Sleep Mask), both of
+        # which NHSBSA files under 21.30. Same count, 223 lines; different lines.
+        "tariffBnf": ("2130",),
         "tariffParts": ("IXA",),
         "tariffVmp": r"\beye",
         "coverageNote": (
@@ -6223,8 +6238,9 @@ SPECIALITY_RULES = {
                 "of forty patient assessment device suppliers or twenty-five anaesthesia "
                 "and neonatal suppliers would name the wrong market. THE SUPPLIER "
                 "ANSWER ON THIS PATCH IS THE DRUG TARIFF, NOT A FRAMEWORK. The "
-                "reimbursed emollient range below names nineteen companies and they are "
-                "the firms a dermatology conversation is actually had with. This panel "
+                "reimbursed emollient range below, every line NHSBSA files under BNF "
+                "21.22 including the brands it lists only as 'Generic <brand>', names "
+                "the companies a dermatology conversation is actually had with. This panel "
                 "will not fall back to a keyword guess against the supplier directory."
             ),
         },
@@ -6361,15 +6377,17 @@ SPECIALITY_RULES = {
         "cpv": ("85121282",),
         # PART IXA, NARROWED TO THE EMOLLIENT RANGE, AND THE NARROWING IS THE POINT.
         # Part IXA whole is 56,833 lines of dressings and elastic hosiery and belongs to
-        # the tissue viability page, which claims it whole. Inside it sit 87 lines from
-        # 28 virtual medicinal products and 19 companies which are emollients: the
-        # reimbursed creams, ointments, gels and bath additives that are the largest
-        # single line in the dermatology prescribing bill this page is about. Claiming
-        # the part whole would have put Juzo and Sigvaris compression hosiery at the top
-        # of a dermatology panel, which is the gynaecology pessary problem exactly.
-        # Thornton & Ross leads on 25 lines (Cetraben, Zerobase, Zeroderm, Zerocream,
-        # Zerolatum, Flexitol), then Alliance Pharmaceuticals and Ennogen on 8, Aspire
-        # on 7, Fontus on 6 and Dermatonics on 5. Reimbursement runs £1.12 to £15.77.
+        # the tissue viability page, which claims it whole. Inside it sit the lines
+        # NHSBSA files under BNF 21.22: 176 lines from 73 virtual medicinal products
+        # and 35 companies in the September 2026 file, the reimbursed creams,
+        # ointments, gels, washes and bath additives that are the largest single line
+        # in the dermatology prescribing bill this page is about. Claiming the part
+        # whole would have put Juzo and Sigvaris compression hosiery at the top of a
+        # dermatology panel, which is the gynaecology pessary problem exactly.
+        # Thornton & Ross leads on 34 lines, then Aspire on 15, Ennogen on 13,
+        # Alliance on 12, Fontus and TriOn on 10, Molnlycke on 9, and Ego
+        # Pharmaceuticals (QV) on 5. Reimbursement runs £0.82 to £21.58. Those are the
+        # September 2026 figures; the panel file carries the current ones.
         # WHAT THE PATTERN DELIBERATELY DOES NOT REACH:
         #   "Paraffin gauze dressing sterile" (Jelonet, Cuticell, Neotulle, Zelaffin) is
         #     a wound contact layer, not an emollient, which is why bare "paraffin" is
@@ -6393,6 +6411,27 @@ SPECIALITY_RULES = {
         #     it is the trap an unanchored pattern falls into: "Curea" ends in the
         #     letters u-r-e-a, so a bare "urea" matches all thirteen of its lines. The
         #     pattern uses "\burea \d" - word boundary, then a percentage.
+        # NHSBSA'S BNF 21.22 DECIDES, THE PATTERN ABOVE IS NOW THE FALLBACK (29/09/2026).
+        # The pattern reads the virtual name, and NHSBSA lists many emollient brands as
+        # "Generic <brand>": "Generic QV cream", "Generic Adex gel", "Generic Balneum
+        # Intensiv cream", "Generic Epaderm cream", "Generic Doublebase Once gel". None
+        # names what it is, so the pattern counted 87 lines from 19 suppliers and left
+        # out Ego Pharmaceuticals (QV) entirely, 0 of 5 lines, along with Molnlycke's
+        # Epaderm, Dermal's Doublebase and Adex, Derma UK's Ultrabase and Pierre
+        # Fabre's Dexeryl, while Cetraben and Hydromol mostly showed because their
+        # virtual names happen to name the paraffin. A false picture of the market.
+        # NHSBSA files every line of the emollient range under BNF 21.22, the section
+        # the hospital prescribing data also groups Hydromol, Cetraben and QV under
+        # (substance 212200002). Checked against the September 2026 file before this
+        # was switched: every one of the 87 lines the pattern reached is inside 21.22,
+        # so nothing is lost, and 21.22 reaches none of the refusals listed above
+        # (paraffin gauze, Curea, Dermatix, Regelle, Full Marks, Part IXC skin
+        # protectives). What 21.22 adds beyond the plain emollients, and keeps because
+        # NHSBSA classifies it there: menthol in aqueous cream (Arjun, AquaSoothe,
+        # MenthAq, AAA), aqueous and cetomacrogol creams, emulsifying ointments,
+        # Linovera oil, Flamigel RT, ViraSoothe, and the Allpresan and Footmender
+        # diabetic foot creams alongside the heel and callus lines already counted.
+        "tariffBnf": ("2122",),
         "tariffParts": ("IXA",),
         "tariffVmp": (
             r"emollient|emulsifying wax|"
@@ -6424,14 +6463,17 @@ SPECIALITY_RULES = {
             "the title, not because the whole award is this patch: NHS National Services "
             "Scotland's 'ENT, Ophthalmology & Skin Medicines/Medical Devices', 2022 and "
             "2024. Read them as a route in, not as a dermatology contract value. THE "
-            "DRUG TARIFF SLICE IS EMOLLIENTS AND NOTHING ELSE. It is the reimbursed "
-            "emollient range inside Part IXA and it is the honest supplier list for this "
+            "DRUG TARIFF SLICE IS THE EMOLLIENT RANGE, AS NHSBSA ITSELF CLASSIFIES IT. "
+            "It is every Part IXA line NHSBSA files under BNF 21.22: the emollient "
+            "creams, ointments, gels, washes and bath additives, the menthol-in-aqueous "
+            "and other antipruritic creams, and the heel, callus and diabetic foot "
+            "creams filed with them. It is the honest supplier list for this "
             "patch, but it is not the whole dermatology prescribing bill: topical "
             "corticosteroids, topical retinoids, antifungals, isotretinoin and every "
             "biologic NICE has appraised for atopic dermatitis, psoriasis, prurigo "
             "nodularis and hidradenitis suppurativa are Part VIII medicines, not Part IX "
             "appliances, and no part of the Drug Tariff in this dataset carries them. "
-            "THESE 87 LINES ALSO SIT INSIDE THE PART IXA TOTAL THE TISSUE VIABILITY AND "
+            "THESE LINES ALSO SIT INSIDE THE PART IXA TOTAL THE TISSUE VIABILITY AND "
             "WOUND CARE PAGE CARRIES WHOLE, which is stated so nobody reads the two "
             "panels as counting different things. WHAT IS NOT HERE: wigs, which most "
             "often serve chemotherapy alopecia and which NHS Supply Chain buys under an "
@@ -6439,8 +6481,10 @@ SPECIALITY_RULES = {
             "melanoma and cutaneous squamous cell carcinoma therapy, which is the "
             "oncology patch; skin graft, skin substitute and cryopreserved allograft, "
             "which are plastics, burns and reconstruction's; peristomal barrier creams, "
-            "which are Part IXC and the stoma pages'; skin cleansing and disinfection, "
-            "which is infection prevention's; and the AI skin lesion triage NICE names "
+            "which are Part IXC and the stoma pages'; antiseptic skin cleansing and "
+            "disinfection, which is infection prevention's (the emollient washes and "
+            "soap substitutes NHSBSA files under 21.22, such as QV Gentle wash and "
+            "Aquamax wash, are counted here); and the AI skin lesion triage NICE names "
             "in HTG746, which is a per-referral licence bought by an individual "
             "teledermatology service and has no framework at all, so no panel can carry "
             "it."
@@ -8142,10 +8186,36 @@ def build_tariff(rule, dt_doc):
     # description says nothing about children. Searching the virtual name alone
     # returns 258 of its 473 lines and loses Part IXC's paediatric stoma range whole.
     fields = tuple(rule.get("tariffFields") or ("vmp",))
-    if vmp_pattern:
-        vrx = re.compile(vmp_pattern, re.I)
+    # NHSBSA'S OWN BNF SECTION, WHERE A RULE NAMES ONE, DECIDES. A name pattern cannot
+    # see a branded generic: NHSBSA lists Ego Pharmaceuticals' QV range as "Generic QV
+    # cream", "Generic QV Gentle wash" and "Generic QV Intensive ointment", none of
+    # which says emollient, so until 29/09/2026 Ego was absent from the dermatology
+    # panel entirely (0 of 5 lines) while Cetraben and Hydromol showed, because their
+    # descriptions happen to name the paraffin. NHSBSA files every one of those lines
+    # under BNF 21.22, the same section as Cetraben, so the section is the honest test
+    # and the pattern is not. It also cuts the other way: ophthalmology's "\beye"
+    # admitted two "Silk eye mask" lines that NHSBSA files as specialist garments
+    # (20.20), not under the eye section (21.30).
+    # When `tariffBnf` is set, a line with a BNF code is in or out on that code alone.
+    # The name pattern is kept only for a line that arrives WITHOUT a code, so a gap
+    # in NHSBSA's coding narrows to the old behaviour rather than dropping the line.
+    bnf_prefixes = tuple(rule.get("tariffBnf") or ())
+    if bnf_prefixes and rows and "bnf" not in ix:
+        raise SystemExit(
+            "tariffBnf is set but data/drug-tariff-part-ix.json has no 'bnf' column. "
+            "Re-run scripts/refresh_drug_tariff_part_ix.py; refusing to fall back to "
+            "the name pattern silently, which is the view that hid Ego's QV range.")
+    vrx = re.compile(vmp_pattern, re.I) if vmp_pattern else None
+
+    def by_name(r):
+        return vrx.search(" ".join((r[ix[f]] or "") for f in fields))
+
+    if bnf_prefixes:
         rows = [r for r in rows
-                if vrx.search(" ".join((r[ix[f]] or "") for f in fields))]
+                if (r[ix["bnf"]].startswith(bnf_prefixes) if r[ix["bnf"]]
+                    else (vrx is not None and by_name(r)))]
+    elif vrx is not None:
+        rows = [r for r in rows if by_name(r)]
     if not rows:
         return None
     by_sup = {}
@@ -8169,8 +8239,11 @@ def build_tariff(rule, dt_doc):
     top = sorted(by_sup.items(), key=lambda kv: (-kv[1], kv[0]))[:20]
     return {
         "parts": list(parts),
+        "bnfFilter": list(bnf_prefixes) or None,
+        "bnfCount": (sum(1 for r in rows if r[ix["bnf"]]) if bnf_prefixes else None),
         "vmpFilter": vmp_pattern,
-        "vmpCount": len({r[ix["vmp"]] for r in rows}) if vmp_pattern else None,
+        "vmpCount": (len({r[ix["vmp"]] for r in rows})
+                     if (vmp_pattern or bnf_prefixes) else None),
         "effectiveMonth": dt_doc.get("effectiveMonth"),
         "dataAsOf": dt_doc.get("dataAsOf"),
         "sourcePage": dt_doc.get("sourcePage"),
@@ -8296,6 +8369,23 @@ def build(slug, sources):
                 "open notice on this patch today, not that none was looked for."
             ),
             "drugTariff": (
+                ("NHSBSA Drug Tariff Part %s for the stated effective month, narrowed to the "
+                 "lines NHSBSA itself files under BNF %s, and then summarised. The BNF code "
+                 "is NHSBSA's own classification of each line and is used in preference to "
+                 "matching the product name, because a name cannot see a branded product: "
+                 "NHSBSA lists many brands as \"Generic <brand name>\", which says nothing "
+                 "about what the product is. A line published without a BNF code is counted "
+                 "only if its virtual medicinal product description matches /%s/i. The part "
+                 "is sliced rather than claimed whole because the part is not this "
+                 "speciality: Part IXA is some 56,800 lines, most of them dressings and "
+                 "elastic hosiery, which are the tissue viability page's. Every count and "
+                 "price below is taken from the lines selected. Prices are the reimbursement "
+                 "price at publication, converted from the pence NHSBSA publishes, and are "
+                 "not necessarily today's."
+                 % ("/".join(rule["tariffParts"]),
+                    " or ".join("%s.%s" % (b[:2], b[2:]) for b in rule["tariffBnf"]),
+                    rule.get("tariffVmp") or "(none)"))
+                if rule.get("tariffParts") and rule.get("tariffBnf") else
                 ("NHSBSA Drug Tariff Part %s for the stated effective month, narrowed to the "
                  "lines whose virtual medicinal product description or brand name matches "
                  "/%s/i, and then summarised. Both names are read because on this patch the "

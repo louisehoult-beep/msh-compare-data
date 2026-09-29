@@ -595,8 +595,14 @@ for bad in ["lectures theatre", "roofing", "re-surface", "water treatment", "cpa
     check("excluded: %s" % bad, bad not in htitles)
 for good in ["minimally invasive surgery", "anaesthetic machines", "airway management",
              "procedure packs", "washer disinfector",
-             "video laryngoscope", "diathermy", "surgical robot", "operating table"]:
+             "video laryngoscope", "diathermy", "operating table"]:
     check("present: %s" % good, good in htitles)
+# "surgical robot" moved to the MATCHED set, 29/09/2026, for the same reason as the
+# gloves below: that day's framework-awards refresh pushed the WSFT surgical robot
+# purchase behind the AWARD_CAP line. The rule still matches four robot awards;
+# nothing lost, nothing loosened.
+check("the surgical robot awards are matched by the rule",
+      "surgical robot" in matched_titles(THEATRES))
 # "surgical gloves" moved to the MATCHED set, 24/09/2026. Same class as the
 # decontamination unit move below: the 24/09 framework-awards refresh took this
 # patch to 56 matched awards against an AWARD_CAP of 40, and the gloves award
@@ -3537,11 +3543,17 @@ for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if not _t:
         continue
     _rows = [r for r in _dt_doc["rows"] if r[_dt_ix["part"]] in tuple(_r["tariffParts"])]
-    if _r.get("tariffVmp"):
-        _f = tuple(_r.get("tariffFields") or ("vmp",))
-        _rx2 = __import__("re").compile(_r["tariffVmp"], __import__("re").I)
+    _f = tuple(_r.get("tariffFields") or ("vmp",))
+    _rx2 = (__import__("re").compile(_r["tariffVmp"], __import__("re").I)
+            if _r.get("tariffVmp") else None)
+    _by_name = (lambda r: bool(_rx2.search(" ".join((r[_dt_ix[k]] or "") for k in _f))))
+    if _r.get("tariffBnf"):
+        # NHSBSA's BNF code decides; the name pattern only for a line with no code.
         _rows = [r for r in _rows
-                 if _rx2.search(" ".join((r[_dt_ix[k]] or "") for k in _f))]
+                 if (r[_dt_ix["bnf"]].startswith(tuple(_r["tariffBnf"])) if r[_dt_ix["bnf"]]
+                     else (_rx2 is not None and _by_name(r)))]
+    elif _rx2 is not None:
+        _rows = [r for r in _rows if _by_name(r)]
     _raw = [float(r[_dt_ix["price"]]) for r in _rows
             if str(r[_dt_ix["price"]]).strip() not in ("", "None")]
     check("%s publishes the tariff range in pounds" % _slug,
@@ -3575,8 +3587,11 @@ for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
 # purpose and stated in both files), plus the voice prosthesis cleaning brushes,
 # tracheostomy dressings, ear drops, nasal preparations and the one auto
 # inflation device that no other page reaches.
-# Dermatology, added 11/09/2026, takes 87 Part IXA lines: the reimbursed emollient
-# range, 28 virtual medicinal products from 19 companies. It is the sixth slice and
+# Dermatology, added 11/09/2026, took 87 Part IXA lines by name pattern; since
+# 29/09/2026 it takes the lines NHSBSA itself files under BNF 21.22, 176 of them from
+# 35 companies in the September 2026 file, because the pattern could not see branded
+# generics and left Ego Pharmaceuticals' QV range out entirely. Ophthalmology moved to
+# BNF 21.30 the same day. It is the sixth slice and
 # the one whose page has no framework at all, so the tariff IS its supplier list.
 # The pattern never uses bare "paraffin", because "Paraffin gauze dressing sterile"
 # is a wound contact layer and tissue viability's, and it anchors "urea" on a word
@@ -3603,6 +3618,13 @@ _TARIFF_FILTER_EARNED = {GYNAE, PAEDS, UROLOGY, RESP, OPHTH, ENT, DERM, DIAB}
 for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
     if _r.get("tariffVmp") and _slug not in _TARIFF_FILTER_EARNED:
         check("%s must not have grown a tariff filter unnoticed" % _slug, False)
+# A BNF section is a claim about what NHSBSA says a line IS, and each one is chosen:
+# dermatology 21.22 (emollients) and ophthalmology 21.30 (the eye section).
+_TARIFF_BNF_EARNED = {DERM: ("2122",), OPHTH: ("2130",)}
+for _slug, _r in sorted(B.SPECIALITY_RULES.items()):
+    if _r.get("tariffBnf"):
+        check("%s's BNF tariff section is the one chosen for it" % _slug,
+              tuple(_r["tariffBnf"]) == _TARIFF_BNF_EARNED.get(_slug))
 
 
 # ---------------------------------------------------------------------------
@@ -4373,8 +4395,26 @@ check("the ocular surface range is present in full",
       op["drugTariff"]["vmpCount"] >= 80, "got %s" % op["drugTariff"]["vmpCount"])
 check("over more than 200 reimbursement lines",
       op["drugTariff"]["lineCount"] >= 200, "got %s" % op["drugTariff"]["lineCount"])
+# Under 1000, not under 100: since the slice moved to BNF 21.30 on 29/09/2026 it
+# includes the Noctura 400 Sleep Mask, a diabetic retinopathy light-therapy device
+# NHSBSA reimburses at 23000 pence, £230.00. A pence value slipping through would
+# read in the thousands.
 check("prices are in pounds, not the pence NHSBSA publishes",
-      op["drugTariff"]["priceMax"] < 100, "got %s" % op["drugTariff"]["priceMax"])
+      op["drugTariff"]["priceMax"] < 1000, "got %s" % op["drugTariff"]["priceMax"])
+print("  NHSBSA's BNF 21.30 decides which lines are the eye range")
+check("the rule classifies by BNF 21.30", tuple(_op_rule.get("tariffBnf") or ()) == ("2130",))
+check("the published file says so", op["drugTariff"].get("bnfFilter") == ["2130"])
+_op_dt = B.load("drug-tariff-part-ix.json")
+_op_ix = {k: i for i, k in enumerate(_op_dt["schema"])}
+_op_ixa = [r for r in _op_dt["rows"] if r[_op_ix["part"]] == "IXA"]
+# "\beye" admitted these; NHSBSA files them as specialist garments (20.20).
+_op_masks = [r for r in _op_ixa if r[_op_ix["vmp"]] == "Silk eye mask"]
+check("silk eye masks are not eye-section lines",
+      bool(_op_masks) and not any(r[_op_ix["bnf"]].startswith("2130") for r in _op_masks))
+# "\beye" missed this lid hygiene line; NHSBSA files it under 21.30.
+_op_lid = [r for r in _op_ixa if r[_op_ix["vmp"]] == "Generic Lid-Care wipes"]
+check("Thea's Lid-Care wipes are eye-section lines",
+      bool(_op_lid) and all(r[_op_ix["bnf"]].startswith("2130") for r in _op_lid))
 # The prefix form of the pattern exists for these two and nothing else.
 _op_vmp = B.re.compile(_op_rule["tariffVmp"], B.re.I)
 for good in ["Generic AccuSoft eyelid wipes", "Generic Blepha EyeBag",
@@ -5301,6 +5341,29 @@ for want in [
         "Generic Dermatonics Once Callus Removing Balm",
 ]:
     check("tariff counts: %s" % want[:52], bool(_de_vrx.search(want)))
+
+print("  branded emollients count, by NHSBSA's own BNF 21.22, not by their name")
+# NHSBSA lists Ego Pharmaceuticals' QV range as "Generic QV cream" and the like,
+# which no name pattern can see. Until 29/09/2026 Ego was absent from this panel,
+# 0 of 5 lines. Checked against the live September 2026 file, not a fixture.
+check("the rule classifies by BNF 21.22", tuple(_de_rule.get("tariffBnf") or ()) == ("2122",))
+check("the published file says so", _de_t.get("bnfFilter") == ["2122"])
+_de_sup = {x["name"]: x["lines"] for x in _de_t["topSuppliers"]}
+check("Ego Pharmaceuticals (QV) is on the panel", _de_sup.get("Ego Pharmaceuticals", 0) >= 1,
+      "topSuppliers: %s" % sorted(_de_sup))
+_de_ix = _dt_ix
+_de_live = [r for r in _dt_doc["rows"] if r[_de_ix["part"]] == "IXA"]
+for _vmp in ("Generic QV cream", "Generic QV Gentle wash", "Generic QV Intensive ointment"):
+    _hits = [r for r in _de_live if r[_de_ix["vmp"]] == _vmp]
+    check("live tariff files %s under 21.22" % _vmp,
+          bool(_hits) and all(r[_de_ix["bnf"]].startswith("2122") for r in _hits))
+# The traps the pattern was written around stay out under the BNF rule as well.
+for _bad in ("Paraffin gauze dressing sterile", "Generic Curea P1", "Silicone gel sheet",
+             "Vaginal moisturisers", "Cyclomethicone 50% / Isopropyl myristate 50% solution"):
+    _hits = [r for r in _de_live if r[_de_ix["vmp"]].startswith(_bad)]
+    check("21.22 never reaches: %s" % _bad[:52],
+          bool(_hits) and not any(r[_de_ix["bnf"]].startswith("2122") for r in _hits),
+          "%d live lines" % len(_hits))
 
 print("  open tenders — empty is the honest answer, not a miss")
 check("no open notice on this patch today", de["openTenders"] == [])

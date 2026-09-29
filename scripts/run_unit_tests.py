@@ -132,6 +132,7 @@ RUN = [
     "test_stale_brief_rows.py",
     "test_supplier_index_awards.py",
     "test_supplier_index_framework_dedupe.py",
+    "test_tariff_bnf_filter.py",
     "test_vocabulary_duplicates.py",
 ]
 

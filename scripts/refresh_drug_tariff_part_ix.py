@@ -35,8 +35,18 @@ Array-of-arrays, not array-of-objects — cuts JSON size by ~25% by not repeatin
 names on every one of 66k+ rows (verified 02/09/2026: 12.95MB vs 16.73MB for the same
 data). gzip (which GitHub raw serves automatically) takes the array form to ~290KB over
 the wire. Columns kept: DT Part, Supplier, VMP name (generic), AMP name (brand), size,
-qty, unit of measure, price. SNOMED/GTIN/product-order-number codes are dropped — not
-useful for a rep searching by product or supplier, and they roughly double row size.
+qty, unit of measure, price, and NHSBSA's own BNF code for the line. SNOMED/GTIN/
+product-order-number codes are dropped — not useful for a rep searching by product or
+supplier, and they roughly double row size.
+
+WHY THE BNF CODE IS KEPT (added 29/09/2026). It is NHSBSA's own classification of each
+line, and it is the only field that says what a branded line IS. The speciality panels
+used to narrow Part IXA by a regex on the VMP name, which cannot see a branded generic:
+"Generic QV cream" says nothing about being an emollient, so Ego Pharmaceuticals was
+missing from the dermatology panel entirely while NHSBSA files all five of its lines
+under BNF 21.22 alongside Cetraben and Hydromol. The column is appended LAST so any
+reader that indexes rows by position (page 3198's Part IX lookup reads r[0]..r[7])
+is unaffected.
 
 Run: python3 scripts/refresh_drug_tariff_part_ix.py [--out PATH] [--month YYYY-MM]
 """
@@ -126,6 +136,7 @@ def main():
             (row.get("QTY") or "").strip(),
             (row.get("UOM QTY") or "").strip(),
             (row.get("Price") or "").strip(),
+            (row.get("BNF 15") or "").strip(),
         ])
 
     doc = {
@@ -134,7 +145,7 @@ def main():
         "source": url,
         "sourcePage": "https://www.nhsbsa.nhs.uk/pharmacies-gp-practices-and-appliance-"
                       "contractors/drug-tariff/drug-tariff-part-ix",
-        "schema": ["part", "supplier", "vmp", "amp", "size", "qty", "uom", "price"],
+        "schema": ["part", "supplier", "vmp", "amp", "size", "qty", "uom", "price", "bnf"],
         "rowCount": len(rows),
         "note": "Every Part IX line NHSBSA publishes for this effective month, verbatim. "
                 "Price is the Drug Tariff reimbursement price at publication, not necessarily "

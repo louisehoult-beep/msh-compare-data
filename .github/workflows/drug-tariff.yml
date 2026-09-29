@@ -70,10 +70,11 @@ jobs:
           python3 -c "
           import json, sys
           d = json.load(open('data/drug-tariff-part-ix.json'))
-          assert d.get('schema') == ['part','supplier','vmp','amp','size','qty','uom','price'], 'schema drifted'
+          assert d.get('schema') == ['part','supplier','vmp','amp','size','qty','uom','price','bnf'], 'schema drifted'
           n = d.get('rowCount', 0)
           assert n == len(d.get('rows', [])), 'rowCount does not match rows length'
           assert n >= 50000, 'row count %d implausibly low for a Part IX file — refusing to publish' % n
+          assert sum(1 for r in d['rows'] if r[8]) >= 0.95 * n, 'BNF codes missing from most rows — the speciality panels classify by them'
           print('gate passed:', n, 'rows,', d.get('effectiveMonth'))
           "
 
