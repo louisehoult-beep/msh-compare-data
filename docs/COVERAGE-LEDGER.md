@@ -30,7 +30,7 @@ the two facts are separate, and the refusal used to be invisible for any
 supplier publishing anything anywhere.
 **2 framework(s) have nothing left by a permitted route** —
 low coverage there means exhausted, not neglected.
-**3 framework(s) are DEFERRED** — their Left is real and
+**2 framework(s) are DEFERRED** — their Left is real and
 counted here, but every supplier in it is waiting on a ruling only Lou can
 give, so `differentiator-framework-coverage` skips them when it picks a
 framework to work. They are listed in `data/coverage-deferrals.json` with
@@ -78,7 +78,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Clinical and Sharps Waste Management | infection | 14 | 4 | 28.6% | 4 | 11 | STARTED |
 | Radiotherapy Ancillary Devices incl Dosimetry Patient Positioning and QA Devices | imaging, oncology | 13 | 4 | 30.8% | 1 | 9 | STARTED · DEFERRED |
 | Radiotherapy Treatment Systems and Associated Options and Related Services | oncology | 13 | 4 | 30.8% | 4 | 7 | STARTED |
-| Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 3 | 9 | STARTED · DEFERRED |
+| Insulin Pumps, Continuous Glucose Monitoring, Products Contributing to the Delivery of Hybrid Closed Loop Pathways and Associated Products | diabetes | 12 | 2 | 16.7% | 3 | 9 | STARTED |
 | Prosthetic Components and Associated Products | orthotics | 12 | 5 | 41.7% | 1 | 7 | STARTED |
 | Surgical Gloves | theatres | 9 | 3 | 33.3% | 4 | 6 | STARTED |
 | CT Scanners and Associated Options and Related Services | imaging | 8 | 2 | 25.0% | 3 | 6 | STARTED |

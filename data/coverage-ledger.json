@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 37081,
-  "differentiator.json held": 50203
+  "differentiator.json published": 37077,
+  "differentiator.json held": 50170
  },
  "counts": {
   "frameworks": 122,
@@ -32,7 +32,7 @@
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 3,
   "blockedFrameworks": 2,
-  "deferredFrameworks": 3
+  "deferredFrameworks": 2
  },
  "unresolvedSupplierNames": [
   [
@@ -12217,12 +12217,7 @@
    "unknown": [],
    "actionableTotal": 3,
    "blockedReason": null,
-   "deferred": {
-    "reason": "All three remaining suppliers are parent/division identity questions, not crawl or mapping work. Abbott Laboratories Limited (CH 00329102, nutrition-only, confirmed) vs. Abbott Diabetes Care (CH 02548046, FreeStyle Libre/CGM, already claims this framework in its own record) \u2014 NHSSC's brief names \"Abbott Laboratories Ltd\" as the awarded supplier, which resolves via the alias registry to the nutrition entity, not the diabetes one. Medtronic (specialities still list Diabetes/CGM despite a 20/07/2026 note saying those tags should have been removed) vs. MiniMed Group, Inc. (already a separate Hub record, already claims this same framework) \u2014 NHSSC's brief still names \"Medtronic Ltd\", not MiniMed Group. Urathon Europe Ltd's CGM award (Yuwell Anytime, May 2025) is sourced only to Urathon's own site and was crawled fresh 15/09/2026 (104 products across 5 divisions) with no CGM item surfacing on the crawlable catalogue at all.",
-    "queuedIn": "02-Elevate-and-Thrive/Hub/identity-vocab-decision-queue.md",
-    "decisionRef": "^o527",
-    "addedOn": "2026-09-18"
-   }
+   "deferred": null
   },
   {
    "framework": "Prosthetic Components and Associated Products",
