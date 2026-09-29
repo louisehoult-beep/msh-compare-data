@@ -166,6 +166,21 @@ def _tidy(text: str) -> str:
     return text
 
 
+# A number the text itself labels as a company/registration identifier is not a
+# contact route. Without this, "registration number 0450787886" (a corporate
+# officer's note) became "[phone withheld]" on every supplier-index rebuild,
+# because a leading 0 is all PHONE_RE needs (29/09/2026, test_redact_personal.py).
+_ID_LABEL_RE = re.compile(
+    r"(?:registration|registered|company|companies house|charity)\s+(?:number|no\.?)\s*[:.]?\s*$",
+    re.I,
+)
+
+
+def _phone_unless_labelled_id(m):
+    before = m.string[max(0, m.start() - 40):m.start()]
+    return m.group(0) if _ID_LABEL_RE.search(before) else "[phone withheld]"
+
+
 def redact_text(text, strip_all_phones: bool = False):
     """Remove person-shaped emails (and the phone that follows one). With
     strip_all_phones, every phone number goes too — use for text that is
@@ -179,7 +194,7 @@ def redact_text(text, strip_all_phones: bool = False):
     out = EMAIL_RE.sub(_sub, text)
     out = _TRAILING_PHONE_RE.sub(lambda m: "[email withheld], [phone withheld]", out)
     if strip_all_phones:
-        out = PHONE_RE.sub("[phone withheld]", out)
+        out = PHONE_RE.sub(_phone_unless_labelled_id, out)
     return _tidy(out) if "[" in out else out
 
 

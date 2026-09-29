@@ -117,6 +117,7 @@ RUN = [
     "test_product_detail_cursor.py",
     "test_product_types.py",
     "test_push_alerts.py",
+    "test_redact_personal.py",
     "test_refresh_nhssc_cache.py",
     "test_repair_nhssc_cache_rows.py",
     "test_product_dossiers.py",
