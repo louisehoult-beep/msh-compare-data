@@ -69,6 +69,11 @@ CSV_URL = (
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(REPO, "data")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# Tender descriptions name the buyer's site-visit contact with a personal
+# nhs.net address. This repo is public, so the address is withheld at capture
+# (29/09/2026); the role and organisation stay, and the notice URL is kept.
+from redact_personal import redact_text
 OUT = os.path.join(DATA, "atamis-opportunities.json")
 OUT_LIVE = os.path.join(DATA, "atamis-opportunities-live.json")
 
@@ -218,7 +223,7 @@ def main() -> int:
         if not ref:
             continue
         name = r.get("Name", "").strip()
-        desc = r.get("Description", "").strip()
+        desc = redact_text(r.get("Description", "").strip())
         route = r.get("Procurement Route", "").strip()
         labels = classify(name, desc, route)
         rec = {

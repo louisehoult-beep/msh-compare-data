@@ -19,6 +19,15 @@ regenerated per run for queried suppliers only; graceful degradation; exit 0.
 Stdlib only.
 """
 import json, re, sys, time, html, unicodedata, urllib.request, urllib.parse, datetime, pathlib
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent / "scripts"))
+try:
+    from redact_personal import redact_obj  # public repo: last pass, no named individual's contact details
+except ImportError:
+    # test_supplier_index_awards.py copies this file alone into a temp dir. The
+    # real run always has scripts/ beside it, and verify.py's personal-contact
+    # gate refuses an index that still carries a person's address regardless.
+    print("[supplier-index] WARNING scripts/redact_personal.py not found — no redaction pass", file=sys.stderr)
+    redact_obj = lambda o: o
 
 DATA_DIR = pathlib.Path("data")
 SEED   = DATA_DIR / "supplier-seed.json"
@@ -528,6 +537,7 @@ def main():
            "generated": datetime.datetime.utcnow().isoformat() + "Z",
            "note": "Curated core + auto-detected medical award winners (Contracts Finder CPV 33*) + live recalls + news corroborated by >=2 reputable sources. Auto items: verify at source.",
            "suppliers": sorted(by_name.values(), key=lambda s: s["name"].lower())}
+    redact_obj(out)
     INDEX.write_text(json.dumps(out, ensure_ascii=False, indent=1))
     STATE.parent.mkdir(exist_ok=True)
     STATE.write_text(json.dumps({"ran": out["generated"], "suppliers": len(out["suppliers"]),

@@ -66,6 +66,9 @@ import urllib.request
 import zipfile
 
 import icc_pdf_matrix
+# Public repo: a support document's contact block names NHS Supply Chain staff
+# with their work emails. The narrative is kept; the addresses are not (29/09/2026).
+from redact_personal import redact_text
 
 ICC_URL = "https://www.supplychain.nhs.uk/savings/information-for-clinical-choice/"
 
@@ -534,7 +537,7 @@ def main() -> int:
                 log("  MATRIX  %-42s %3d products, %2d columns"
                     % (label[:42], len(parsed["products"]), len(parsed["columns"])))
         else:
-            summary = pdf_text(dest, limit=4000)
+            summary = redact_text(pdf_text(dest, limit=4000))
             entry["summary"] = summary
             entry["has_text"] = bool(summary)
 

@@ -107,6 +107,9 @@ import urllib.request
 import os as _os, sys as _sys
 _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
 from seed_format import write_like, describe
+# The evidence snippet is a slice of the supplier's page and can catch a named
+# employee's address next to the registration number. Public repo: withhold it.
+from redact_personal import redact_text
 
 SEED = "data/supplier-seed.json"
 INDEX = "data/supplier-index.json"
@@ -675,7 +678,7 @@ def try_supplier(rec, ch_number, max_candidates):
             if kind:
                 return {"name": name, "proof": kind, "foundBy": how,
                         "domain": re.sub(r"^https?://", "", final).split("/")[0],
-                        "url": url, "evidence": ev,
+                        "url": url, "evidence": redact_text(ev),
                         "companyNumber": num,
                         "checked": dt.date.today().isoformat()}
             tried.append((d, ev))

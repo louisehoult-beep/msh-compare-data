@@ -141,7 +141,7 @@ RUN = [
 # Emptied 18/09/2026. test_previous_names.py was the last entry — it forbade the
 # Gemini Surgical UK / Healthcare 25 Ltd merge until rename-versus-sale was
 # settled. Find a Tender 2025/S 000-077817 settled it (one supplier party, legal
-# name Healthcare 25 Ltd, contact Paula@geminisurgical.co.uk, awarded after the
+# name Healthcare 25 Ltd, contact tender-contact@example.invalid, awarded after the
 # rename), Lou confirmed, and the test was rewritten to assert the merge and
 # moved into RUN (^o535). The Lowenstein/Löwenstein duplicate it also caught was
 # merged the same day.

@@ -14,7 +14,15 @@ width reformats the whole file and makes the diff unreviewable.
 """
 import argparse
 import json
+import os
 import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# A profile is written from the trust's own pages and often copies a named
+# buyer's email and direct line into people[].note or structure. The repo is
+# public, so contact details are withheld at merge time (29/09/2026); the
+# person's name, role and source URL are kept.
+from redact_personal import redact_obj
 
 CONFIG_PATH = "data/prep-config.json"
 EXPECTED_KEYS = ["name", "code", "region", "context", "news", "structure", "reportFacts", "people", "voices"]
@@ -45,6 +53,8 @@ def main():
         except FileNotFoundError:
             print(f"REFUSED: no profile file at {profile_path}")
             sys.exit(1)
+
+        redact_obj(profile)
 
         if list(profile.keys()) != EXPECTED_KEYS:
             print(f"REFUSED: {code} has wrong key order/set: {list(profile.keys())}")

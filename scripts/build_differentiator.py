@@ -41,6 +41,8 @@ import json, os, re, sys, collections, subprocess
 # Moved into msh-compare-data itself 03/09/2026 (was a sibling Hub/company-aliases/);
 # this file is at <repo>/scripts, so company-aliases is just "../company-aliases".
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "company-aliases"))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from redact_personal import redact_text  # public repo: product copy must not carry a named person's email
 
 OUT = "data/differentiator.json"
 
@@ -261,8 +263,8 @@ def main():
             base_row = {
                 "supplier": co, "name": name, "domain": domain,
                 "division": div, "mfrCategory": p.get("category"),
-                "detail": ({"description": d.get("description"),
-                            "features": d.get("features"),
+                "detail": ({"description": redact_text(d.get("description")),
+                            "features": [redact_text(f) for f in (d.get("features") or [])] if d.get("features") is not None else None,
                             "image": d.get("image")} if d else None),
                 "nhssc": n_items or None,
                 "nhsscRange": matched_range,

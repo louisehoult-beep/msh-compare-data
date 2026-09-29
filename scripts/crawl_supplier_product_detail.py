@@ -89,6 +89,7 @@ import urllib.parse
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import crawl_supplier_site as base  # reuses get(), allowed(), clean(), UA_STR, socket timeout
+from redact_personal import redact_text  # public repo: no named individual's email in a product record
 
 OUT = "data/supplier-product-detail.json"
 RANGE = "data/supplier-products.json"
@@ -1062,8 +1063,8 @@ def record_capture(products_store, supplier, name, entry):
         "sourceUrl": entry["sourceUrl"],
         "capturedDate": time.strftime("%Y-%m-%d"),
         "parsed": entry["parsed"],
-        "description": entry.get("description") or "",
-        "features": entry.get("features") or [],
+        "description": redact_text(entry.get("description") or ""),
+        "features": [redact_text(f) for f in (entry.get("features") or [])],
         "image": entry.get("image") or None,
     }
 

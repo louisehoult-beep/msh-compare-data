@@ -682,6 +682,52 @@ def check_no_personal_data_reintroduction():
 
 
 # --------------------------------------------------------------------------
+# 5c. NO NAMED INDIVIDUAL'S CONTACT DETAILS IN THE PUBLIC FILES
+# --------------------------------------------------------------------------
+def check_no_person_contact_details():
+    """Added 29/09/2026. The two-file guard above catches the files that were
+    published by accident; it does not catch the same class of data arriving
+    a sentence at a time. An independent review that day found 92 distinct
+    person-shaped work emails (NHS buyers, NHS Supply Chain category managers,
+    tender site-visit contacts, one supplier employee) and their direct lines
+    across eleven data files, copied verbatim from tender descriptions, ICC
+    support-document text, supplier page snippets and trust profiles. Lou's
+    rule the same day: no personal data in the public repo.
+
+    Every generator now passes its text through scripts/redact_personal.py.
+    This is the gate behind that: any tracked JSON under data/ or state/ that
+    still carries a person-shaped address (first.last, f.last or a bare first
+    name at any domain — see is_person_email for the exact rule; generic role
+    mailboxes like procurement@ or NEY.Maintenance@ are allowed) fails the
+    push. Fix the generator, never the gate."""
+    sys.path.insert(0, os.path.join(REPO_DIR, "scripts"))
+    try:
+        from redact_personal import find_person_emails
+    except Exception as e:  # pragma: no cover
+        FAIL("personal-contact", "cannot import scripts/redact_personal.py (%s) — the gate "
+                                 "cannot confirm no named individual's address is about to "
+                                 "be published." % e)
+        return
+    tracked = subprocess.run(
+        ["git", "ls-files", "--", "data/*.json", "state/*.json"],
+        cwd=REPO_DIR, capture_output=True, text=True, timeout=30,
+    ).stdout.split()
+    for rel in tracked:
+        try:
+            with open(os.path.join(REPO_DIR, rel), encoding="utf-8", errors="replace") as fh:
+                hits = find_person_emails(fh.read())
+        except OSError:
+            continue
+        if hits:
+            FAIL("personal-contact",
+                 "%s carries %d person-shaped email address(es) (%s%s). This repo is "
+                 "public: a named individual's contact details do not go in it. Run "
+                 "the text through scripts/redact_personal.py in the generator that "
+                 "wrote this file, then regenerate."
+                 % (rel, len(hits), ", ".join(hits[:4]), ", …" if len(hits) > 4 else ""))
+
+
+# --------------------------------------------------------------------------
 # 6. SHRINK GUARD
 # --------------------------------------------------------------------------
 def check_shrink():
@@ -6202,6 +6248,7 @@ def main():
     os.chdir(root)
 
     check_no_personal_data_reintroduction()
+    check_no_person_contact_details()
 
     optout = load("contacts-optout.json") or {}
     blocked = {n.strip().lower() for n in optout.get("names", []) if n.strip()}

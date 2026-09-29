@@ -61,6 +61,7 @@ import seed_supplier_domains as S   # reuse fetch/prove/text_of — same bar, sa
 import os as _os, sys as _sys
 _sys.path.insert(0, _os.path.dirname(_os.path.abspath(__file__)))
 from seed_format import write_like, describe
+from redact_personal import redact_text
 
 REPORT = "state/domain-seeding-report.json"
 OUT = "state/name-proof-verification.json"
@@ -250,7 +251,7 @@ def main():
             "label": "Company website",
             "url": "https://" + r["domain"],
             "source": "Proved %s by registration number on %s: %s" % (
-                r["domain"], r["checked"], r["evidence"])})
+                r["domain"], r["checked"], redact_text(r["evidence"]))})
         n += 1
     # Keep whatever format the file already has — read the bytes, never assert
     # them. This hardcoded minified-on-one-line until 21/09/2026, by which time

@@ -22,7 +22,7 @@ decision pack itself nominated as the check that would close it:
   Find a Tender award notice 2025/S 000-077817, OCDS ocds-h6vhtk-051753,
   read 18/09/2026. Lot 1's award names ONE supplier party — legal name
   "Healthcare 25 Ltd", PPON GB-PPON-PNTQ-6715-JVMV, registered office 128 City
-  Road EC1V 2NX, contactPoint.email Paula@geminisurgical.co.uk. The notice PAGE
+  Road EC1V 2NX, contactPoint.email tender-contact@example.invalid. The notice PAGE
   renders the trading name "Gemini Surgical UK" over that same party. The award
   was decided 10/09/2025, nearly two months AFTER 11241419 was renamed
   HEALTHCARE 25 LTD on 18/07/2025.
@@ -140,7 +140,7 @@ class PreviousNamesAreNotAMerge(unittest.TestCase):
 
         Settled 18/09/2026 against Find a Tender 2025/S 000-077817 (see the
         module docstring): one supplier party, legal name Healthcare 25 Ltd,
-        contact Paula@geminisurgical.co.uk, awarded after the 18/07/2025
+        contact tender-contact@example.invalid, awarded after the 18/07/2025
         rename. Rename, not sale — so ONE record, carrying both names.
 
         This asserts the surviving shape, not the reasoning: exactly one record
