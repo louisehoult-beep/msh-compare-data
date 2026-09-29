@@ -791,13 +791,17 @@ def _wp_read_type(base, ptype, taxes, deadline=None):
     # newest block, which happens to be the uncategorised one — so the report
     # asserted "No usable category structure in the site's own taxonomy" about a
     # company publishing 82 non-empty terms of its own.
+    # READ ORDER (^o203, 29/09/2026 onward): OLDEST FIRST (orderby=date&order=asc).
+    # A truncated read used to be the newest 4,000, which for Emmat was the
+    # uncategorised block. Oldest-first reaches the categorised catalogue; the
+    # partialRead marking still applies to any capped read.
     declared, products, page, capped = None, [], 1, False
     while page <= MAX_PAGES:
         if deadline and time.time() > deadline:
             capped = True               # keep what has been read, stop fetching
             break
         try:
-            items, hdrs = get("%s/%s?per_page=100&page=%d&_fields=id,title,%s"
+            items, hdrs = get("%s/%s?per_page=100&page=%d&orderby=date&order=asc&_fields=id,title,%s"
                               % (base, ptype, page, ",".join(read_taxes) or "id"), as_json=True)
         except urllib.error.HTTPError as e:
             if e.code == 400:
@@ -2423,7 +2427,7 @@ def _wc_store_paged(domain, deadline=None, cap=MAX_PAGES):
     while page <= cap:
         if deadline and time.time() > deadline:
             raise RuntimeError("budget exhausted after %d page(s)" % (page - 1))
-        items, _ = get("https://%s/wp-json/wc/store/v1/products?per_page=100&page=%d"
+        items, _ = get("https://%s/wp-json/wc/store/v1/products?per_page=100&page=%d&orderby=date&order=asc"
                        % (domain, page), as_json=True)
         if not isinstance(items, list):
             raise RuntimeError("Store API returned a non-list response")
