@@ -130,6 +130,7 @@ RUN = [
     "test_speciality_panels.py",
     "test_stale_brief_rows.py",
     "test_supplier_index_awards.py",
+    "test_supplier_index_framework_dedupe.py",
     "test_vocabulary_duplicates.py",
 ]
 

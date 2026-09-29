@@ -244,6 +244,46 @@ def cpvs(rel):
             if ac.get("id"): out.add(str(ac["id"]))
     return out
 
+_FW_CORE = ("dates", "supplierCount", "category", "url")
+
+def _fw_key(x):
+    ref = (x.get("reference") or "").strip()
+    nm = re.sub(r"[^a-z0-9]+", " ", (x.get("name") or "").lower()).strip()
+    return (ref, nm) if ref and nm else None
+
+def dedupe_frameworks(fws):
+    """Collapse a framework named twice under one reference into one entry.
+
+    Find a Tender and the NHS Supply Chain launch brief both name the same award,
+    and the seed keeps both, so supplier-search.js drew a row for each (^o206).
+    Two entries are the same framework only when they share a non-empty contract
+    reference AND the same name once punctuation and case are stripped. A reference
+    can legitimately cover several lots under different names, so reference alone
+    is never enough. The first entry keeps its place and takes any field it lacks
+    from the duplicate. If the two disagree on a core field (dates, supplier
+    count, category, url) nothing is merged: which one is right is not ours to
+    guess, so both stay and the gate/human sees the conflict.
+    Non-dict entries pass through untouched. Returns (new_list, merged_count).
+    """
+    out, seen, merged = [], {}, 0
+    for x in fws or []:
+        k = _fw_key(x) if isinstance(x, dict) else None
+        if k is None or k not in seen:
+            out.append(x)
+            if k is not None:
+                seen[k] = x
+            continue
+        keep = seen[k]
+        if any(keep.get(f) and x.get(f) and keep.get(f) != x.get(f) for f in _FW_CORE):
+            out.append(x)
+            continue
+        for f, v in x.items():
+            if v not in (None, "", [], {}) and keep.get(f) in (None, "", [], {}):
+                keep[f] = v
+        merged += 1
+    return out, merged
+
+
 def main():
     seed = load(SEED, {"suppliers": []})
     prev = load(INDEX, {"suppliers": []})
@@ -475,6 +515,12 @@ def main():
         if nm not in queried:
             rec["news"] = merge_news(prev_news.get(nm, []) or rec.get("news", []), [])
 
+    fw_merged = 0
+    for rec in by_name.values():
+        rec["frameworks"], m = dedupe_frameworks(rec.get("frameworks"))
+        fw_merged += m
+    if fw_merged:
+        print("collapsed %d duplicate framework entr(ies) (same reference and name)" % fw_merged)
     for rec in by_name.values():
         rec["alerts"].sort(key=lambda a: a.get("date", "") if isinstance(a, dict) else "", reverse=True)
         rec["awards"].sort(key=lambda a: a.get("date", "") if isinstance(a, dict) else "", reverse=True)
