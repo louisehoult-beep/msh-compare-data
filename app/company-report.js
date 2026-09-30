@@ -550,6 +550,33 @@
      value it wins; a supplier present only in the seed is unioned in so a new
      entry shows immediately, independent of the refresh cadence.
      --------------------------------------------------------------------- */
+  /* member-text:start
+     A supplier record's `note` is where curators have always written their
+     working record: which script merged what, whose decision it was, which
+     decision pack and which data file a correction came from. On 30/09/2026 a
+     live QA found the Essity report printing all of that under Company
+     information ("Merged 25/08/2026 by merge_duplicates.py", "Lou's decision",
+     a path into the Cowork-OS folders), and 169 records carried the same kind
+     of text. A note that names any of these is a curator's record, not member
+     copy, so it is not rendered at all; cutting sentences out of it would leave
+     half a provenance log behind. A note with none of them renders as before.
+     Curator record-keeping belongs in `_curatorNotes`, which nothing renders. */
+  /* Case-sensitive on purpose: "TODO" is a marker, "Todo Drive" is a product. */
+  var INTERNAL_TEXT = new RegExp([
+    'merge_duplicates', "\\bLou(?:'s)?\\b", '\\b[\\w\\-/]+\\.(?:json|md|py|toml)\\b',
+    '02-Elevate-and-Thrive', 'Identity Decision Pack', '\\b[Cc]urator', '\\bTODO\\b',
+    '\\^o\\d+', 'E&T client', 'alias-overlay', '[Cc]loud routine',
+    '\\b[a-z]+(?:-[a-z]+){2,} (?:run|routine)\\b'
+  ].join('|'));
+  function isInternalText(t) {
+    return INTERNAL_TEXT.test(String(t == null ? '' : t));
+  }
+  function memberNote(t) {
+    var str = String(t == null ? '' : t).trim();
+    return (str && !isInternalText(str)) ? str : '';
+  }
+  /* member-text:end */
+
   function mergeSuppliers(index, seed) {
     var suppliers = (index && index.suppliers) ? index.suppliers.slice() : [];
     var seedList = (seed && seed.suppliers) || [];
@@ -693,7 +720,7 @@
     var h = '<div style="display:flex;gap:13px;align-items:flex-start;">' + thumb + '<div><div style="font-size:21px;font-weight:700;color:' + INK + ';line-height:1.25;">' + esc(s.name) +
       (s.autoDetected ? ' <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#7a5b14;background:#f3e8cf;border-radius:99px;padding:2px 8px;vertical-align:3px;">AUTO — VERIFY AT SOURCE</span>' : '') +
       (s.identityUnconfirmed ? ' <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#8a2b2b;background:#fdeaea;border:1px solid #f0c4c4;border-radius:99px;padding:2px 8px;vertical-align:3px;" title="This name is exactly as the awarding source wrote it. No search confirms it as a specific registered company — no company number, financials, domain or logo are attached.">IDENTITY UNCONFIRMED</span>' : '') + '</div>' +
-      (s.note ? '<p style="margin:5px 0 0;font-size:13.5px;color:#37485a;line-height:1.55;">' + esc(s.note) + '</p>' : '') +
+      (memberNote(s.note) ? '<p style="margin:5px 0 0;font-size:13.5px;color:#37485a;line-height:1.55;">' + esc(memberNote(s.note)) + '</p>' : '') +
       '</div></div>';
 
     if (s.specialities && s.specialities.length) {
@@ -2280,6 +2307,45 @@
      where one was sampled, is the 5px edge along the top and nothing else —
      so the 86% of companies with no sampled colour get the intended design
      rather than something that reads as a missing asset. */
+  /* header-links:start
+     Header link pills (30/09/2026, found on a live QA of the HARTMANN report,
+     which showed two buttons both labelled "Website"). Deep-dive links first,
+     then the supplier record's. De-duplicated on the URL with the scheme,
+     "www." and trailing slash ignored (admedsol.com and www.admedsol.com are
+     one site). Where two different URLs carry the same label: a second link on
+     the same host is dropped (the UK page and the site root are one website to
+     a reader), and one on a different host keeps its place but is labelled
+     with that host, so no two pills in a header ever read the same. */
+  function headerLinks(first, second) {
+    function host(u) {
+      var m = /^[a-z]+:\/\/([^\/?#]+)/i.exec(String(u || '').trim());
+      return m ? m[1].toLowerCase().replace(/^www\./, '') : '';
+    }
+    function urlKey(u) {
+      return String(u || '').trim().toLowerCase().replace(/^[a-z]+:\/\//, '').replace(/^www\./, '').replace(/\/+$/, '');
+    }
+    var out = [], seenUrl = {}, byLabel = {};
+    [].concat(first || [], second || []).forEach(function (l) {
+      if (!l || !l.url || !l.label) return;
+      var k = urlKey(l.url);
+      if (seenUrl[k]) return;
+      seenUrl[k] = 1;
+      var lab = String(l.label).trim();
+      var lk = lab.toLowerCase();
+      var h = host(l.url);
+      if (byLabel[lk]) {
+        if (byLabel[lk].indexOf(h) !== -1) return;
+        byLabel[lk].push(h);
+        out.push({ label: lab + ' (' + h + ')', url: l.url });
+        return;
+      }
+      byLabel[lk] = [h];
+      out.push({ label: lab, url: l.url });
+    });
+    return out;
+  }
+  /* header-links:end */
+
   function masthead(s, ctx, stamp) {
     var d = deepFor(s);
     /* Links come from two places: the deep-dive record (10 suppliers) and the
@@ -2287,15 +2353,7 @@
        ever rendered, so a company's own website and Companies House entry sat
        in the data and never reached the page. Merge both, deep dive first,
        de-duplicated on the URL. */
-    var links = [];
-    var seenLink = {};
-    [].concat((d && d.links) || [], s.links || []).forEach(function (l) {
-      if (!l || !l.url || !l.label) return;
-      var key = String(l.url).replace(/\/+$/, '').toLowerCase();
-      if (seenLink[key]) return;
-      seenLink[key] = 1;
-      links.push(l);
-    });
+    var links = headerLinks((d && d.links) || [], s.links || []);
     var meta = [];
     if (stamp) meta.push('Prepared <b>' + esc(stamp) + '</b>');
     if (ctx && ctx.asOf) meta.push('supplier index as of <b>' + esc(dateUK(ctx.asOf)) + '</b>');
@@ -2886,8 +2944,8 @@
     h += part('1', 'The company',
       'Who they are, what the public register holds on them, and what the filed accounts show. Everything here is read from a source and linked to it.');
     var info = statGrid(sub);
-    if (sub.note) {
-      info += '<div style="font-size:13.5px;color:#37485a;line-height:1.6;margin:14px 0 0;">' + esc(sub.note) + '</div>';
+    if (memberNote(sub.note)) {
+      info += '<div style="font-size:13.5px;color:#37485a;line-height:1.6;margin:14px 0 0;">' + esc(memberNote(sub.note)) + '</div>';
     }
     if (sub.voice && (sub.voice.line || sub.voice.angle)) {
       info += '<div style="font-size:13px;color:#37485a;line-height:1.6;margin:10px 0 0;"><b style="color:' + INK + ';">How they sell' + (sub.voice.angle ? ' — ' + esc(sub.voice.angle) : '') + '.</b> ' + esc(sub.voice.line || '') + '</div>';

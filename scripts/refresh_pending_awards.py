@@ -353,8 +353,8 @@ def assemble(records, seed, fw_doc, discovery_note, discovery_ok):
                 "days of this award's own contract start, because NHSSC reuses a "
                 "framework's name across generations and name alone would falsely "
                 "match a predecessor or successor brief. The moment the matching "
-                "brief exists in data/frameworks.json, this entry is retired here on "
-                "this script's next run — the confirmed FRAMEWORKS panel is always "
+                "brief is captured in the Hub's framework brief record, this entry is "
+                "retired here at the next refresh — the confirmed FRAMEWORKS panel is always "
                 "the one to trust once both exist."),
         "matchRule": company_match.RULE,
         "discovery": {

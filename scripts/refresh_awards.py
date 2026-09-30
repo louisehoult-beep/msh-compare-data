@@ -553,11 +553,12 @@ def assemble(rows, seed, existing, window, notes, complete, history=None):
             "note": hcov.get("note"),
         }
         coverage["note"] = (
-            "Awards are indexed from (1) the award history in %s (data as of %s), "
+            "Awards are indexed from (1) the Hub's tender and award history, drawn from "
+            "Find a Tender and Contracts Finder (data as of %s), "
             "covering notices published from %s — %s — and (2) %s. Coverage is "
             "INCOMPLETE before %s. %s An absence here is a "
             "statement about this index, never about the company."
-            % (HISTORY_PATH, history.get("dataAsOf") or "not stated", floor or "not stated",
+            % (history.get("dataAsOf") or "not stated", floor or "not stated",
                "earlier notices are not fetched on either feed",
                feeds_note, floor or "the history's floor",
                ("%d supplier name(s) that the history export cut off at %d characters "
@@ -577,7 +578,7 @@ def assemble(rows, seed, existing, window, notes, complete, history=None):
         "source": ("Find a Tender and Contracts Finder award-stage OCDS notices, "
                    "Open Government Licence v3" +
                    (" — the weekly walk of both feeds, plus the award history of the "
-                    "same two feeds held in data/tender-history.json" if history else "")),
+                    "same two feeds, held as the Hub's tender and award history" if history else "")),
         "sourceUrls": {
             "Find a Tender": "https://www.find-tender.service.gov.uk/",
             "Contracts Finder": "https://www.contractsfinder.service.gov.uk/",

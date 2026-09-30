@@ -2380,7 +2380,7 @@ def wix_products(domain, deadline=None):
                       "not assumed — so every item is listed by name below rather than grouped, "
                       "because a fabricated grouping would misrepresent the company's own filing. "
                       "A future mapping pass may still assign a Hub category per product from its "
-                      "description text (the same rule build_differentiator.py already applies to "
+                      "description text (the same rule the Hub already applies to "
                       "NHS Supply Chain rows); this crawl does not attempt that."),
         "divisions": [{"name": "Uncategorised", "products": len(plist)}],
         "products": plist,

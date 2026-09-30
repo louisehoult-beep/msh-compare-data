@@ -403,5 +403,207 @@ class CompanyReportNeverHiddenByScrollReveal(unittest.TestCase):
         self.assertNotIn("new MutationObserver(", self.src)
 
 
+
+# ---------------------------------------------------------------------------
+# Member-visible text found on a live QA of the Essity and HARTMANN reports,
+# 30/09/2026: curator notes printed under Company information, an advice
+# sentence closing a summary, two "Website" pills, and internal file names in
+# method text. Each class below holds one of those fixes in place.
+# ---------------------------------------------------------------------------
+import re
+
+# The markers the QA named, plus the Cowork-OS ones the same sweep found.
+INTERNAL = re.compile(
+    r"merge_duplicates|\bLou(?:'s)?\b|02-Elevate-and-Thrive|Identity Decision Pack"
+    r"|\b[Cc]urator|\bTODO\b|\^o\d+|E&T client|alias-overlay"
+    r"|(?<![/\w])[\w\-]+(?:/[\w\-]+)*\.(?:json|md|py|toml)\b")
+# A path on a company's own public site ("/collections/all/products.json") is a
+# cited source, not an internal file, so a leading "/" is allowed above.
+
+
+def load(rel):
+    with open(os.path.join(HERE, rel), encoding="utf-8") as f:
+        return json.load(f)
+
+
+def block(src, start, end):
+    return src.split(start)[1].split(end)[0]
+
+
+NODE_EVAL = r"""
+const fs = require('fs');
+const A = process.argv.slice(-3);
+const src = fs.readFileSync(A[0], 'utf8');
+const [start, end, fn] = JSON.parse(A[1]);
+const blk = src.split(start)[1].split(end)[0];
+const f = new Function('/*' + blk + '; return ' + fn + ';')();
+const args = JSON.parse(fs.readFileSync(A[2], 'utf8'));
+process.stdout.write(JSON.stringify(args.map(a => f.apply(null, a))));
+"""
+
+
+def node_map(start, end, fn, arglists):
+    node = shutil.which("node")
+    if not node:
+        raise unittest.SkipTest("node not installed; renderer block not exercised")
+    import tempfile
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as t:
+        json.dump(arglists, t)
+        tmp = t.name
+    try:
+        r = subprocess.run([node, "-e", NODE_EVAL, os.path.join(HERE, "app", "company-report.js"),
+                            json.dumps([start, end, fn]), tmp],
+                           capture_output=True, text=True, timeout=120)
+    finally:
+        os.unlink(tmp)
+    if r.returncode != 0:
+        raise RuntimeError("node run failed: " + r.stderr)
+    return json.loads(r.stdout)
+
+
+def all_suppliers():
+    """Every supplier the report can open: index merged with seed, seed wins."""
+    seed = {s["name"]: s for s in load("data/supplier-seed.json")["suppliers"]}
+    out = {}
+    for s in load("data/supplier-index.json")["suppliers"]:
+        out[s["name"]] = seed.get(s["name"], s)
+    for n, s in seed.items():
+        out.setdefault(n, s)
+    return out
+
+
+class CompanyReportNeverRendersCuratorNotes(unittest.TestCase):
+    """`note` is the curators' working record. A note carrying an internal
+    marker is not rendered; the Essity note was the one found live."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.sup = all_suppliers()
+        cls.names = [n for n, s in cls.sup.items() if s.get("note")]
+        cls.out = dict(zip(cls.names, node_map(
+            "/* member-text:start", "/* member-text:end */", "memberNote",
+            [[cls.sup[n]["note"]] for n in cls.names])))
+
+    def test_essity_note_is_not_rendered(self):
+        self.assertTrue(self.sup["Essity UK Limited"]["note"])
+        self.assertEqual(self.out["Essity UK Limited"], "")
+
+    def test_no_rendered_note_carries_an_internal_marker(self):
+        leaks = [n for n, t in self.out.items() if t and INTERNAL.search(t)]
+        self.assertEqual(leaks, [], "notes that would render internal text: %s" % leaks[:10])
+
+    def test_a_plain_note_still_renders(self):
+        job = re.compile(r"\b[a-z]+(?:-[a-z]+){2,} (?:run|routine)\b|[Cc]loud routine")
+        plain = [n for n in self.names
+                 if not INTERNAL.search(self.sup[n]["note"]) and not job.search(self.sup[n]["note"])]
+        self.assertGreater(len(plain), 800)
+        for n in plain:
+            self.assertEqual(self.out[n], self.sup[n]["note"].strip(), n)
+
+    def test_both_note_sites_go_through_the_gate(self):
+        src = read("app/company-report.js")
+        self.assertNotIn("esc(sub.note)", src)
+        self.assertNotIn("esc(s.note)", src)
+        self.assertEqual(src.count("esc(memberNote("), 2)
+
+
+class CompanyReportSummariesAreInformationNotAdvice(unittest.TestCase):
+    """HUB-VERIFICATION-STANDARD rule 14: the summary (deepDive.lede) states
+    facts; it never tells the reader what to do."""
+
+    ADVICE = re.compile(
+        r"\byou should\b|\bwe recommend\b|\bmake sure\b|\bour advice\b"
+        r"|\b(?:A|An|Any|Anyone|Buyers?|Reps?|Candidates?)\b[^.]{0,80}?\bshould\b", re.I)
+
+    def test_hartmann_summary(self):
+        lede = all_suppliers()["Paul Hartmann (HARTMANN)"]["deepDive"]["lede"]
+        self.assertNotIn("should", lede)
+        self.assertIn("shift away from lower-margin NHS tender business toward private pay "
+                      "and formulary-listed wound care.", lede)
+
+    def test_no_summary_gives_the_reader_advice(self):
+        for f in ("data/supplier-seed.json", "data/supplier-index.json"):
+            bad = []
+            for s in load(f)["suppliers"]:
+                lede = (s.get("deepDive") or {}).get("lede") or ""
+                m = self.ADVICE.search(lede)
+                if m:
+                    bad.append((s["name"], m.group(0)))
+            self.assertEqual(bad, [], f)
+
+
+class CompanyReportHeaderLinksAreDistinct(unittest.TestCase):
+    """HARTMANN's header showed two "Website" pills (hartmann.co.uk redirects
+    to www.hartmann.info/en-GB). No header may show two pills that read the same."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.sup = all_suppliers()
+        cls.names = sorted(cls.sup)
+        cls.out = dict(zip(cls.names, node_map(
+            "/* header-links:start", "/* header-links:end */", "headerLinks",
+            [[(cls.sup[n].get("deepDive") or {}).get("links") or [], cls.sup[n].get("links") or []]
+             for n in cls.names])))
+
+    def test_hartmann_has_one_website_pill(self):
+        labels = [l["label"] for l in self.out["Paul Hartmann (HARTMANN)"]]
+        self.assertEqual(labels.count("Website"), 1, labels)
+        self.assertEqual([l for l in labels if l.startswith("Website")], ["Website"])
+
+    def test_no_company_has_two_pills_with_one_label(self):
+        dup = {n: [l["label"] for l in ls] for n, ls in self.out.items()
+               if len({l["label"].lower() for l in ls}) != len(ls)}
+        self.assertEqual(dup, {})
+
+    def test_same_site_twice_is_one_pill(self):
+        (a, b) = node_map("/* header-links:start", "/* header-links:end */", "headerLinks",
+                          [[[{"label": "Website", "url": "https://example.com/"}],
+                            [{"label": "Website", "url": "https://www.example.com"}]],
+                           [[{"label": "Website", "url": "https://a.example.com/uk"}],
+                            [{"label": "Website", "url": "https://b.example.org"}]]])
+        self.assertEqual(len(a), 1)
+        self.assertEqual([l["label"] for l in b], ["Website", "Website (b.example.org)"])
+
+
+class CompanyReportNamesNoInternalFiles(unittest.TestCase):
+    """Method and source text a member reads names the source, never a repo
+    file, script or curator. The award method text named data/tender-history.json."""
+
+    def test_award_method_text(self):
+        aw = load("data/company-awards.json")
+        for k in ("source", "sectionRule", "matchRule"):
+            self.assertIsNone(INTERNAL.search(aw.get(k) or ""), k)
+        self.assertIsNone(INTERNAL.search((aw.get("coverage") or {}).get("note") or ""))
+        self.assertIn("the Hub's tender and award history", aw["source"])
+
+    def test_award_generator_does_not_write_the_file_name(self):
+        src = read("scripts/refresh_awards.py")
+        self.assertNotIn('"same two feeds held in data/tender-history.json"', src)
+        self.assertNotIn('"Awards are indexed from (1) the award history in %s', src)
+
+    def test_rendered_deep_dive_and_background_prose(self):
+        bad = []
+        for n, s in all_suppliers().items():
+            d = s.get("deepDive") or {}
+            texts = [d.get(k) for k in ("lede", "sources", "peopleNote", "interview", "tagline")]
+            texts += list(d.get("marketPosition") or []) + list(d.get("ownership") or [])
+            texts += [st.get("n") for st in d.get("stats") or [] if isinstance(st, dict)]
+            texts += [b.get("text") for b in s.get("background") or [] if isinstance(b, dict)]
+            for t in texts:
+                if isinstance(t, str) and INTERNAL.search(t):
+                    bad.append((n, INTERNAL.search(t).group(0)))
+        self.assertEqual(bad, [])
+
+    def test_register_pending_and_range_text(self):
+        fin = load("data/company-financials.json")["companies"]
+        bad = [n for n, r in fin.items() if INTERNAL.search(str(r.get("matchedOn") or ""))]
+        self.assertEqual(bad, [])
+        self.assertIsNone(INTERNAL.search(load("data/pending-awards.json").get("rule") or ""))
+        sp = load("data/supplier-products.json")["suppliers"]
+        bad = [(n, k) for n, r in sp.items() for k in ("filingRule", "notSold")
+               if INTERNAL.search(str(r.get(k) or ""))]
+        self.assertEqual(bad, [])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

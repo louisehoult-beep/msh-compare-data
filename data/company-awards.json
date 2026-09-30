@@ -12,7 +12,7 @@
  },
  "dataAsOf": "30/09/2026",
  "generated": "2026-09-30",
- "source": "Find a Tender and Contracts Finder award-stage OCDS notices, Open Government Licence v3 — the weekly walk of both feeds, plus the award history of the same two feeds held in data/tender-history.json",
+ "source": "Find a Tender and Contracts Finder award-stage OCDS notices, Open Government Licence v3 — the weekly walk of both feeds, plus the award history of the same two feeds, held as the Hub's tender and award history",
  "sourceUrls": {
   "Find a Tender": "https://www.find-tender.service.gov.uk/",
   "Contracts Finder": "https://www.contractsfinder.service.gov.uk/"
@@ -36,7 +36,7 @@
    "complete": false,
    "note": "Find a Tender is walked back to a probed floor of 2021-01-01. Contracts Finder is fetched in per-day publishedFrom/publishedTo date-time windows, each split further if it would hit the feed's 20-page cursor cap (walked this way 2021-01-01 to 2026-09-29, 318919 releases read, none unreachable); both feeds are therefore walked for notices published from 2021-01-01, and notices published before that are not fetched on either feed, so this is a known limit, not a claim of completeness. An absence here is a statement about this index, never about the buyer or the market."
   },
-  "note": "Awards are indexed from (1) the award history in data/tender-history.json (data as of 2026-09-29), covering notices published from 2021-01-01 — earlier notices are not fetched on either feed — and (2) the weekly walk of both feeds over the windows listed. Coverage is INCOMPLETE before 2021-01-01. Supplier names are exported in full, uncut. An absence here is a statement about this index, never about the company."
+  "note": "Awards are indexed from (1) the Hub's tender and award history, drawn from Find a Tender and Contracts Finder (data as of 2026-09-29), covering notices published from 2021-01-01 — earlier notices are not fetched on either feed — and (2) the weekly walk of both feeds over the windows listed. Coverage is INCOMPLETE before 2021-01-01. Supplier names are exported in full, uncut. An absence here is a statement about this index, never about the company."
  },
  "counts": {
   "companies": 991,

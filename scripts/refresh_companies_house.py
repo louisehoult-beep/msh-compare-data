@@ -578,9 +578,9 @@ def cleared_record(decided_on=None):
         "companyNumber": None, "registeredName": None,
         "matchConfidence": "probable",
         "matchedOn": ("no company is attached to this supplier. The previous match was cleared on %s "
-                      "as the wrong company — see %s for the evidence. Nothing is asserted here until "
+                      "as the wrong company. Nothing is asserted here until "
                       "a match is confirmed against two independent sources."
-                      % (decided_on or "03/09/2026", OVERRIDES)),
+                      % (decided_on or "03/09/2026",)),
         "status": None, "incorporated": None, "sic": None,
         "accountsCategory": None, "accountsCategoryRaw": None,
         "accountsCategoryNote": None, "accountsMadeUpTo": None,
@@ -947,8 +947,7 @@ def record_for(supplier, number, confirmed_source, key):
             "Companies House record — %s, read %s"
             % (confirmed_source["url"], confirmed_source.get("checkedOn") or "on an unrecorded date"))
     else:
-        confidence, matched_on = "confirmed", ("company number recorded by a curator in the supplier's own "
-                                                "seed record (alerts, background or note)")
+        confidence, matched_on = "confirmed", ("company number recorded in the Hub's own supplier record")
 
     return {
         "companyNumber": profile.get("company_number") or number,
