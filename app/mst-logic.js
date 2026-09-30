@@ -1400,6 +1400,84 @@
       +'expecting a welcome, not an apology.</div></div>';
   }
 
+  /* VALUE-CASE-CLARITY 30-09-2026. Explanation only: plain-English help under each
+     calculator input, an optional published district nurse contact cost, and a
+     "How this is worked out" panel that replays calc() with the user's own numbers.
+     Reads lastCalc after calc() has run; never changes any figure calc() produces.
+     Prompted by the HARTMANN UK demo on 30/09/2026 ("what's the directness?"). */
+  var VC_DN={cost:60,label:'District nurse, adult, face-to-face contact',year:'2024/25 prices',src:'Unit Costs of Health and Social Care 2025, Table 6.2.1 (Care and Outcomes Research Centre, University of Kent, formerly the Personal Social Services Research Unit (PSSRU), with the Centre for Health Economics, University of York), drawn from the NHS England National Cost Collection 2024/25',url:'https://kar.kent.ac.uk/115569/',short:'Unit Costs of Health and Social Care 2025, Table 6.2.1 (University of Kent and University of York), from the NHS England National Cost Collection 2024/25'};
+  var VC_BIO={cite:'Yock PG, Zenios S, Makower J and others. Biodesign: The Process of Innovating Medical Technologies. 2nd edition. Cambridge University Press, 2015.',url:'https://doi.org/10.1017/CBO9781316095843'};
+  var vcUsedPublished=false;
+  function vcPct(x){var v=Math.round(x*1000)/10;return (v%1===0?v.toFixed(0):v.toFixed(1))+'%';}
+  function vcEsc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function vcCSS(){if($('vc-css'))return;var s=document.createElement('style');s.id='vc-css';s.textContent=[
+    '.mst .vc-help{display:block;font-size:12.5px;line-height:1.5;color:#37485A !important;margin:2px 0 8px;font-weight:400;}',
+    '.mst .vc-help b{color:#1D2733 !important;}',
+    '.mst .mst__row > .vc-help{grid-column:1 / -1;}',
+    '.mst .vc-eg{display:block;margin-top:5px;padding:6px 9px;background:#F4F6F9;border-left:3px solid #A8842C;border-radius:0 6px 6px 0;color:#37485A !important;}',
+    '.mst .vc-pub{display:inline-block;margin-top:6px;padding:7px 11px;border:0;border-radius:8px;background:#14304F;color:#FFFFFF !important;font-size:12.5px;font-weight:600;cursor:pointer;line-height:1.35;text-align:left;}',
+    '.mst .vc-pub:hover,.mst .vc-pub:focus{background:#0B1C33;outline:2px solid #A8842C;outline-offset:2px;}',
+    '.mst .vc-srcnote{display:block;margin-top:5px;font-size:11.5px;color:#4A5563 !important;}',
+    '.mst .vc-srcnote a,.mst .vc-help a{color:#14304F !important;text-decoration:underline;}',
+    '.mst .vc-work{background:#0B1C33;color:#EDE7DC !important;border-radius:12px;padding:16px 18px;margin-top:16px;}',
+    '.mst .vc-work .vc-h{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#E0BE8E !important;margin:0 0 4px;}',
+    '.mst .vc-work .vc-f{font-size:13px;color:#FFFFFF !important;margin:0 0 8px;font-weight:600;}',
+    '.mst .vc-step{border-top:1px solid rgba(224,190,142,.28);padding:8px 0;}',
+    '.mst .vc-lab{display:block;font-size:12px;font-weight:700;color:#E0BE8E !important;}',
+    '.mst .vc-sum{display:block;font-size:13.5px;color:#FFFFFF !important;font-variant-numeric:tabular-nums;margin-top:2px;}',
+    '.mst .vc-why{display:block;font-size:12px;color:#DBE3EE !important;margin-top:2px;}',
+    '.mst .vc-ref{border-top:1px solid rgba(224,190,142,.28);margin-top:6px;padding-top:9px;font-size:11.5px;color:#DBE3EE !important;line-height:1.5;}',
+    '.mst .vc-ref a{color:#E0BE8E !important;text-decoration:underline;}',
+    '.mst .vc-empty{font-size:12.5px;color:#DBE3EE !important;}'
+  ].join('');document.head.appendChild(s);}
+  var VC_HELP={
+    'c-cost':'<b>What it means:</b> what one occurrence of the problem costs the NHS, for example one district nurse visit or one extra bed-day. Use the trust or community provider’s own figure where you have it, and note where it came from.',
+    'c-vol':'<b>What it means:</b> how many times the problem happens in a year in this account.<span class="vc-eg">Dressing example: the number of district nurse visits a year for dressing changes across the caseload, from the provider’s own activity data where you can get it.</span>',
+    'c-eff':'<b>What it means:</b> of all the times the problem happens, what share would your product genuinely prevent?<span class="vc-eg">Dressing example (illustrative arithmetic): if a longer-wear dressing takes dressing changes from 3 district nurse visits a week to 2, efficacy is (3 − 2) ÷ 3 = 33%.</span><b>Pick it conservatively:</b> use published evidence first and manufacturer data second, say which, and take the lower figure of any range.',
+    'c-dir':'<b>What it means:</b> of the saving left after efficacy, how much can fairly be credited to your product alone, rather than to everything else that changed at the same time.<span class="vc-eg">Dressing example: of the district nurse visits avoided, how many can fairly be credited to the dressing, rather than to a new wound care formulary, extra training or a change in who does the dressing changes?</span><b>Quick test:</b> nothing else changed and a local before-and-after audit shows the saving: 60 to 80%. Other changes made at the same time, or the saving is nurse time rather than cash: 40 to 60%. The result depends mostly on how staff use it: under 40%.<br><b>Agree it, do not assert it:</b> start at the lower end of the band, write down why, and agree the figure with the clinician (for wounds, the tissue viability nurse) and procurement before it goes into a business case. If they would challenge it, lower it.',
+    'c-cash':'<b>What it means:</b> the share of the saving that is money actually leaving the budget (cash-releasing), rather than staff time freed for other work (capacity). Nurse time freed up is capacity: it only becomes cash if the service is redesigned around it, for example fewer bank or agency shifts. If unsure, enter a low figure and say so.',
+    'c-price':'<b>What it means:</b> the price the account pays per unit of your product.',
+    'c-units':'<b>What it means:</b> how many units the account would use in a year. For a dressing, count dressings, not patients.'
+  };
+  function vcHelpEl(id){var d=document.createElement('span');d.className='vc-help';d.id=id+'-help';d.innerHTML=VC_HELP[id];return d;}
+  function vcMount(){
+    if($('vc-working'))return;vcCSS();
+    var rows=[['c-cost','c-vol'],['c-eff','c-dir'],['c-price','c-units']];
+    rows.forEach(function(pair){var a=$(pair[0]);if(!a)return;var lab=a.closest('label'),row=lab?lab.parentNode:null;if(!row)return;
+      pair.forEach(function(id){var el=$(id);if(!el)return;var h=vcHelpEl(id);row.appendChild(h);el.setAttribute('aria-describedby',h.id);});});
+    var cash=$('c-cash');if(cash){var cl=cash.closest('label');var ch=vcHelpEl('c-cash');cl.parentNode.insertBefore(ch,cl.nextSibling);cash.setAttribute('aria-describedby',ch.id);}
+    var ch2=$('c-cost-help');if(ch2){var b=document.createElement('button');b.type='button';b.className='vc-pub';b.id='vc-pub';
+      b.innerHTML='Use the published figure: \u00a3'+VC_DN.cost+' per face-to-face district nurse contact ('+VC_DN.year+')';
+      var n=document.createElement('span');n.className='vc-srcnote';n.innerHTML='Source: '+vcEsc(VC_DN.short)+'. <a href="'+VC_DN.url+'" target="_blank" rel="noopener">Read the manual</a>. This is a national average: a local figure beats it.';
+      ch2.appendChild(document.createElement('br'));ch2.appendChild(b);ch2.appendChild(n);
+      b.addEventListener('click',function(){var c=$('c-cost');c.value=VC_DN.cost;vcUsedPublished=true;c.dispatchEvent(new Event('input',{bubbles:true}));});}
+    var out=document.querySelector('.mst__card--out');if(out){var w=document.createElement('div');w.className='vc-work';w.id='vc-working';w.setAttribute('aria-live','polite');out.appendChild(w);}
+  }
+  function vcRender(){
+    var w=$('vc-working');if(!w)return;var o=lastCalc;
+    var head='<div class="vc-h">How this is worked out</div><div class="vc-f">Value = cost of the problem × how often it happens × efficacy × directness factor</div>';
+    var ref='<div class="vc-ref"><b>Where the method comes from:</b> this is the value case method taught in Module 7 of the Medical Sales Accelerator. It follows the needs-first approach of Stanford Biodesign: start from the cost of the problem, not the product. '+vcEsc(VC_BIO.cite)+' <a href="'+VC_BIO.url+'" target="_blank" rel="noopener">Book record</a>.';
+    var c=$('c-cost')?parseFloat($('c-cost').value):NaN;
+    if(vcUsedPublished&&c===VC_DN.cost){ref+='<br><b>Cost per instance:</b> '+gbp(VC_DN.cost)+', '+vcEsc(VC_DN.label.toLowerCase())+', '+VC_DN.year+'. '+vcEsc(VC_DN.src)+'. <a href="'+VC_DN.url+'" target="_blank" rel="noopener">Source</a>.';}
+    else{vcUsedPublished=false;ref+='<br><b>Cost per instance:</b> your own figure. Note where it came from before you share the case.';}
+    ref+='</div>';
+    if(!o||!(o.gross>0)){w.innerHTML=head+'<div class="vc-empty">Enter the cost per instance and instances a year to see the working, step by step, with your own numbers.</div>'+ref;return;}
+    var step=function(lab,sum,why){return '<div class="vc-step"><span class="vc-lab">'+lab+'</span><span class="vc-sum">'+sum+'</span>'+(why?'<span class="vc-why">'+why+'</span>':'')+'</div>';};
+    var afterEff=o.gross*o.eff;var h=head;
+    h+=step('Step 1. Gross annual cost of the problem',gbp(o.cost)+' per instance × '+o.vol.toLocaleString('en-GB')+' a year = <b>'+gbp(o.gross)+'</b>','What the problem costs this account each year before your product.');
+    h+=step('Step 2. Efficacy: the share your product prevents',gbp(o.gross)+' × '+vcPct(o.eff)+' = <b>'+gbp(afterEff)+'</b>','The cost of the instances your product would stop.');
+    h+=step('Step 3. Directness: the share fairly credited to your product',gbp(afterEff)+' × '+vcPct(o.dir)+' = <b>'+gbp(o.save)+'</b> conservative annual saving','The part of the saving you can defend in front of finance.');
+    var rawCash=$('c-cash')?$('c-cash').value.trim():'';var cashNote=(rawCash===''||parseFloat(rawCash)===0)?' Cash-releasing share is blank or 0, so the calculator uses 60%: enter your own figure.':'';
+    h+=step('Step 4. Cash or capacity',gbp(o.save)+' × '+vcPct(o.cashShare)+' = <b>'+gbp(o.save*o.cashShare)+'</b> cash-releasing; the remaining <b>'+gbp(o.save*(1-o.cashShare))+'</b> is capacity','Cash leaves the budget; capacity is staff time freed for other work.'+cashNote);
+    if(o.pc>0){var pr=num('c-price'),un=num('c-units');
+      h+=step('Step 5. Annual product cost',gbp(pr)+' × '+un.toLocaleString('en-GB')+' units = <b>'+gbp(o.pc)+'</b>','');
+      h+=step('Step 6. Net annual benefit',gbp(o.save)+' − '+gbp(o.pc)+' = <b>'+gbp(o.net)+'</b>','Conservative saving minus what the product costs.');
+      if(o.roi!==null)h+=step('Step 7. Return on investment (ROI)',gbp(o.net)+' ÷ '+gbp(o.pc)+' × 100 = <b>'+Math.round(o.roi)+'%</b>','');
+      if(o.pb!==null)h+=step('Step 8. Payback period',gbp(o.pc)+' ÷ '+gbp(o.save)+' × 12 months = <b>'+(o.pb<1?'under 1 month':o.pb.toFixed(1)+' months')+'</b>','How long the saving takes to cover a year of product cost.');
+    }else{h+=step('Steps 5 to 8. Product cost, net benefit, return and payback','Add a unit price and units a year to see these.','');}
+    w.innerHTML=h+ref;
+  }
+
   $('m-spec').addEventListener('change',function(){state.spec=this.value;state.prodIdx=0;fillProd();render();});
   $('m-prod').addEventListener('change',function(){state.prodIdx=parseInt(this.value,10);render();});
   $('m-geo').addEventListener('change',function(){fillTrust();render();});
@@ -1409,5 +1487,7 @@
   $('tab-calc').addEventListener('click',function(){showTab('calc');calc();});
   ['c-prob','c-cost','c-vol','c-eff','c-dir','c-price','c-units','c-cash'].forEach(function(id){$(id).addEventListener('input',calc);});
   $('c-copy').addEventListener('click',copy);
-  injectCSS();fillGeo();fillSpec();fillProd();ensureMounts();render();calc();loadTrustData();
+  ['c-prob','c-cost','c-vol','c-eff','c-dir','c-price','c-units','c-cash'].forEach(function(id){$(id).addEventListener('input',vcRender);});
+  $('tab-calc').addEventListener('click',vcRender);
+  injectCSS();fillGeo();fillSpec();fillProd();ensureMounts();render();calc();vcMount();vcRender();loadTrustData();
 })();
