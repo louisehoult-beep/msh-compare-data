@@ -207,12 +207,115 @@ class ComparisonAntimicrobial(unittest.TestCase):
         self.assertEqual(k, of)
 
     def test_product_level_claim_needs_every_line(self):
-        self.assertIn("if (amN && amN === d2.items.length) a.silver = true;", self.src)
+        self.assertIn("return productAttrs(d2.items, p.name);", self.src)
         self.assertNotIn("\\bsilver\\b/.test(txt)) a.silver = true", self.src)
-        # a comparative claim ("theirs does not mention") only on a whole-product yes
-        self.assertIn("myA0.silver === true && !theirA0.silver", self.src)
-        self.assertIn("theirA0.silver === true && !myA0.silver", self.src)
-        self.assertIn("myA0 && myA0.silver === true && theirA0 && !theirA0.silver", self.src)
+        # a comparative claim ("theirs does not mention") only on a whole-product
+        # yes, and only against an entry with no line stating it at all
+        self.assertIn("myA0.silver === true && !shownAttr(theirA0, 'silver')", self.src)
+        self.assertIn("theirA0.silver === true && !shownAttr(myA0, 'silver')", self.src)
+        self.assertIn("myA0 && myA0.silver === true && theirA0 && !shownAttr(theirA0, 'silver')", self.src)
+
+
+ATTRS_SCRIPT = r"""
+const fs = require('fs');
+const A = process.argv.slice(-2);
+const src = fs.readFileSync(A[0], 'utf8');
+const b1 = src.split('/* antimicrobial-line:start')[1].split('/* antimicrobial-line:end */')[0];
+const b2 = src.split('/* catalogue-attrs:start')[1].split('/* catalogue-attrs:end */')[0];
+const F = new Function('/*' + b1 + '/*' + b2 + '; return {lineAttrs, productAttrs, shownAttr};')();
+const q = JSON.parse(A[1]);
+const out = {lines: q.lines.map(l => F.lineAttrs({name: l[0], desc: l[1]}, '')),
+             products: q.products.map(ls => { const a = F.productAttrs(ls.map(l => ({name: l[0], desc: l[1]})), '');
+               const shown = {}; ['material','form','reg','latex','silver','bloodctl','needlefree','tint','dehp','dehpfree']
+                 .forEach(k => { const v = F.shownAttr(a, k); if (v !== null) shown[k] = v; });
+               return {whole: Object.fromEntries(Object.entries(a).filter(([k]) => k !== 'part' && k !== 'packs')), shown}; })};
+process.stdout.write(JSON.stringify(out));
+"""
+
+
+class ComparisonCatalogueAttributes(unittest.TestCase):
+    """The whole-product rule applied to every attribute in the aligned table
+    (30/09/2026), and the non-attribute readings that were live: "powder free"
+    read as a powder, "non-latex" as latex, "DEHP-free" as DEHP present,
+    "prothrombin time" as a biologic, "adhesive border" as a sealant."""
+
+    LINES = [
+        # [name, desc, attribute, expected value or None]
+        ["Gammex Non-Latex", "Surgeons gloves synthetic latex free powder free sterile", "form", None],
+        ["Gammex Non-Latex PI", "Surgeons gloves polyisoprene sterile", "latex", "latex-free"],
+        ["Gammex Latex", "Surgeons gloves latex powder free sterile", "latex", "natural rubber latex"],
+        ["Alaris", "Infusion set 3mm id dehp-free pvc", "dehp", None],
+        ["Alaris", "Infusion set 3mm id dehp-free pvc", "dehpfree", True],
+        ["Unoquip", "Urine meter hanger straps dehp/phthalate-free latex free", "dehp", None],
+        ["Codan", "Gravity solution set no dehp tubing", "dehp", None],
+        ["Polymed", "Extension set rotating luer non- dehp tubing", "dehp", None],
+        ["Surflo", "Metal needle winged device with extension 30cm tube dehp", "dehp", True],
+        ["CoaguChek", "Prothrombin time test strips", "material", None],
+        ["Surgiflo", "Haemostat flowable haemostatic matrix (without thrombin)", "material", None],
+        ["Surgiflo", "Haemostat flowable matrix with thrombin", "material", "biologic (fibrin/thrombin)"],
+        ["ActivHeal", "Foam dressing silicone including adhesive border 10cm x 10cm", "form", None],
+        ["ChloraPrep", "Skin disinfectant medicinal product 26ml sterile applicator 2% chlorhexidine", "form", None],
+        ["ChloraPrep", "Skin disinfectant medicinal product 26ml sterile applicator 2% chlorhexidine", "reg", "a licensed medicinal product"],
+        ["Floseal", "Haemostat product laparoscopic applicator", "form", "flowable matrix (applicator)"],
+        ["Prevantics", "Brush scrub pre operative integral sponge iodine and nail pick", "form", None],
+        ["Gown", "Surgical gown medium sterile sms and knitted cuffs", "form", None],
+        ["Surgicel Nu-Knit", "Haemostatic fabrics 75 x 100mm", "form", "knitted fabric"],
+        ["Nexiva", "Closed IV catheter 20g x 32mm with blood control technology", "bloodctl", True],
+    ]
+
+    PRODUCTS = [
+        # every line: whole-product value
+        [["X", "IV cannula 20g with blood control"], ["X", "IV cannula 22g with blood control"]],
+        # some lines: never whole, says how many
+        [["X", "IV cannula 20g with blood control"], ["X", "IV cannula 22g"], ["X", "IV cannula 24g"]],
+        # lines disagree: says so, never picks one
+        [["S", "Haemostat absorbable gelatin porcine 1g"], ["S", "Haemostat absorbable gelatin 80 x 30mm"]],
+    ]
+
+    @classmethod
+    def setUpClass(cls):
+        cls.node = shutil.which("node")
+        if not cls.node:
+            return
+        q = {"lines": [l[:2] for l in cls.LINES], "products": cls.PRODUCTS}
+        r = subprocess.run([cls.node, "-e", ATTRS_SCRIPT, os.path.join(HERE, "app", "comparison.js"),
+                            json.dumps(q)], capture_output=True, text=True, timeout=60)
+        if r.returncode != 0:
+            raise RuntimeError("node attrs run failed: " + r.stderr)
+        cls.res = json.loads(r.stdout)
+
+    def setUp(self):
+        if not self.node:
+            self.skipTest("node not installed; comparison.js not exercised")
+
+    def test_each_line_read_in_its_attribute_sense_only(self):
+        for (name, desc, key, want), got in zip(self.LINES, self.res["lines"]):
+            self.assertEqual(got.get(key), want, "%s | %s -> %s" % (name, desc, key))
+
+    def test_every_line_gives_a_whole_product_value(self):
+        p = self.res["products"][0]
+        self.assertIs(p["whole"].get("bloodctl"), True)
+        self.assertIs(p["shown"].get("bloodctl"), True)
+
+    def test_some_lines_never_become_the_product(self):
+        p = self.res["products"][1]
+        self.assertNotIn("bloodctl", p["whole"])
+        self.assertEqual(p["shown"]["bloodctl"], "Stated on 1 of 3 catalogue pack lines only")
+
+    def test_disagreeing_lines_are_reported_not_resolved(self):
+        p = self.res["products"][2]
+        self.assertNotIn("material", p["whole"])
+        self.assertEqual(p["shown"]["material"], "varies by pack line: porcine gelatin (1), gelatin (1)")
+        self.assertEqual(p["whole"].get("form"), None)
+
+    def test_does_not_mention_claims_need_whole_product_and_silence(self):
+        src = read("app/comparison.js")
+        for k in ("bloodctl", "needlefree", "tint", "silver"):
+            self.assertIn("myA0.%s === true && !shownAttr(theirA0, '%s')" % (k, k), src)
+        for k in ("bloodctl", "tint", "silver", "dehp"):
+            self.assertIn("theirA0.%s === true && !shownAttr(myA0, '%s')" % (k, k), src)
+        # a partly-stated range is never a like-for-like swap
+        self.assertIn("if (myA0.part[ks[q]] || pa.part[ks[q]]) return false;", src)
 
 
 class CompanyReportDownload(unittest.TestCase):

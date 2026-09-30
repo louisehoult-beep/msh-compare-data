@@ -97,6 +97,94 @@
   }
   /* antimicrobial-line:end */
 
+  /* catalogue-attrs:start
+     EVERY CATALOGUE ATTRIBUTE, READ ONE LINE AT A TIME (30/09/2026).
+     The antimicrobial fix above, applied to the rest of the aligned table.
+     Each value comes from ONE catalogue line's own name and description; a
+     product carries it only when every line does (see attrsOf), and a range
+     where some lines do says so in words. The patterns below were checked
+     against the whole NHSSC cache for readings in a non-attribute sense, and
+     each exclusion is one that was live:
+       powder   "powder free" on every glove was read as the format "powder"
+       latex    "non-latex" gloves were read as natural rubber latex
+       dehp     every "DEHP-free" / "dehp/phthalate-free" / "no DEHP" line was
+                read as DEHP PRESENT
+       thrombin "prothrombin time" test strips and Surgiflo's "(without
+                thrombin)" were read as a biologic fibrin/thrombin material
+       adhesive "adhesive border" foam dressings were read as the format
+                "sealant/adhesive"
+       applicator ChloraPrep's "sterile applicator" was read as a flowable
+                haemostatic matrix
+       sponge   scrub brushes' "integral sponge", "sponge forceps" and a
+                swab "sponge counter bag" were read as a haemostatic sponge
+       patch    an IO training model's "skin patch" was read as a patch
+       knit     a gown's "knitted cuffs" was read as a knitted fabric */
+  function lineAttrs(it, fallbackName){
+    var t = (((it && it.name) || fallbackName || '') + ' | ' + ((it && it.desc) || '')).toLowerCase();
+    var a = {};
+    var haem = /haemosta|hemosta|sealant/.test(t);
+    var noThr = t.replace(/without thrombin|prothrombin/g, ' ');
+    if (/oxidised|oxidized|regenerated cellulose|\borc\b/.test(t)) a.material = 'oxidised regenerated cellulose (plant-derived)';
+    else if (/gelatin/.test(t)) a.material = /porcine/.test(t) ? 'porcine gelatin' : 'gelatin';
+    else if (/collagen/.test(t)) a.material = 'collagen (animal-derived)';
+    else if (/\bfibrin\b|\bthrombin\b/.test(noThr)) a.material = 'biologic (fibrin/thrombin)';
+    else if (/chitosan/.test(t)) a.material = 'chitosan';
+    var noPf = t.replace(/powder.?free/g, ' ').replace(/knitted cuffs?/g, ' ');
+    if (/fibrillar/.test(t)) a.form = 'fibrillar fabric';
+    else if (/knit/.test(noPf)) a.form = 'knitted fabric';
+    else if (/non.?woven/.test(t)) a.form = 'non-woven fabric';
+    else if (/fabric/.test(t)) a.form = 'fabric';
+    else if (/powder/.test(noPf)) a.form = 'powder';
+    else if (/flowable|\bmatrix\b/.test(t) || (haem && /applicator/.test(t))) a.form = 'flowable matrix (applicator)';
+    else if (haem && /patch/.test(t)) a.form = 'patch';
+    else if ((haem || /gelatin/.test(t)) && /sponge/.test(t)) a.form = 'sponge';
+    else if (/\bsealant\b|tissue adhesive|surgical adhesive|skin adhesive/.test(t)) a.form = 'sealant/adhesive';
+    if (/medicinal product/.test(t)) a.reg = 'a licensed medicinal product';
+    else if (/biocide/.test(t)) a.reg = 'a biocide (not a licensed medicine)';
+    if (/latex.?free|non.?latex|free from latex|no latex/.test(t)) a.latex = 'latex-free';
+    else if (/\blatex\b/.test(t)) a.latex = 'natural rubber latex';
+    if (lineAntimicrobial(it, fallbackName)) a.silver = true;
+    if (/blood control/.test(t)) a.bloodctl = true;
+    if (/needle.?free/.test(t)) a.needlefree = true;
+    if (/\btint/.test(t)) a.tint = true;
+    var dehpFree = /dehp(?:\s*\/\s*phthalate)?.?free|non.?-?\s?dehp|no dehp|free (?:from|of) dehp|without dehp/;
+    if (dehpFree.test(t)) a.dehpfree = true;
+    else if (/\bdehp\b/.test(t)) a.dehp = true;
+    return a;
+  }
+  /* Whole product from its lines: a value stands for the product only when
+     EVERY line states that same value. Otherwise, where any line states
+     something, `part[k]` holds a sentence saying exactly how much of the range
+     it covers. Whole-product values drive every claim; `part` is display only. */
+  var ATTR_KEYS = ['material','form','reg','latex','silver','bloodctl','needlefree','tint','dehp','dehpfree'];
+  function productAttrs(items, fallbackName){
+    var n = items.length, per = items.map(function(it){ return lineAttrs(it, fallbackName); });
+    var a = { packs: n, part: {} };
+    ATTR_KEYS.forEach(function(k){
+      var counts = {}, order = [], stated = 0;
+      per.forEach(function(l){
+        if (l[k] === undefined) return;
+        stated++;
+        var v = String(l[k]);
+        if (!counts[v]){ counts[v] = 0; order.push(v); }
+        counts[v]++;
+      });
+      if (!stated) return;
+      if (stated === n && order.length === 1){ a[k] = per[0][k]; return; }
+      var tail = 'on ' + stated + ' of ' + n + ' catalogue pack lines only';
+      if (order.length === 1){
+        a.part[k] = order[0] === 'true' ? 'Stated ' + tail : order[0] + ' \u2014 ' + tail;
+      } else {
+        a.part[k] = 'varies by pack line: ' + order.map(function(v){ return (v === 'true' ? 'stated' : v) + ' (' + counts[v] + ')'; }).join(', ')
+          + (stated < n ? ', not stated (' + (n - stated) + ')' : '');
+      }
+    });
+    return a;
+  }
+  /* What a row shows: the whole-product value, else the partial-range sentence. */
+  function shownAttr(A, k){ return A ? (A[k] !== undefined ? A[k] : (A.part && A.part[k]) || null) : null; }
+  /* catalogue-attrs:end */
+
   // Baked-in fallback only — overwritten from data/product-types.json once that
   // fetch resolves (see the Promise.all below). Keep this in step with the JSON
   // file's own `types` array; verify.py's check_product_types() fails the
@@ -1213,7 +1301,8 @@
       { k: 'bloodctl',   label: 'Blood control',         bool: true },
       { k: 'needlefree', label: 'Needle-free connector',  bool: true },
       { k: 'tint',       label: 'Tinted',                 bool: true },
-      { k: 'dehp',       label: 'DEHP present',           bool: true }
+      { k: 'dehp',       label: 'DEHP present',           bool: true },
+      { k: 'dehpfree',   label: 'DEHP-free',              bool: true }
     ];
     var NOTSTATED = '<span style="color:#8a8778;font-style:italic;">not stated in the catalogue entry</span>';
 
@@ -1554,7 +1643,7 @@
       var rows = '';
       for (var i = 0; i < ATTRS.length; i++){
         var a = ATTRS[i];
-        var mv = myA ? myA[a.k] : null, tv = theirA ? theirA[a.k] : null;
+        var mv = shownAttr(myA, a.k), tv = shownAttr(theirA, a.k);
         if (!mv && !tv) continue;
         var mTxt, tTxt;
         if (a.bool){
@@ -1566,6 +1655,7 @@
         } else {
           mTxt = mv ? esc(mv) : NOTSTATED;
           tTxt = tv ? esc(tv) : NOTSTATED;
+          /* (a partial range already reads "X — on N of M catalogue pack lines only") */
         }
         var differs = !!mv && !!tv && mv !== tv;
         var bg = differs ? 'background:#fbf6ec;' : '';
@@ -1712,41 +1802,10 @@
 
       var dMine = detailFor(mine);
       function attrsOf(p){
-        var d2 = detailFor(p); if (!d2) return null;
-        var txt = (p.name + ' | ' + d2.items.map(function(it){ return it.desc || ''; }).join(' | ')).toLowerCase();
-        var a = { packs: d2.items.length };
-        if (/oxidised|oxidized|regenerated cellulose|\borc\b/.test(txt)) a.material = 'oxidised regenerated cellulose (plant-derived)';
-        else if (/gelatin/.test(txt)) a.material = /porcine/.test(txt) ? 'porcine gelatin' : 'gelatin';
-        else if (/collagen/.test(txt)) a.material = 'collagen (animal-derived)';
-        else if (/fibrin|thrombin/.test(txt)) a.material = 'biologic (fibrin/thrombin)';
-        else if (/chitosan/.test(txt)) a.material = 'chitosan';
-        if (/fibrillar/.test(txt)) a.form = 'fibrillar fabric';
-        /* "fabric" alone is not "knitted": Cosmopor E is catalogued as "non
-           woven fabric" and was being shown as knitted (30/09/2026). Say only
-           what the catalogue text says. */
-        else if (/knit/.test(txt)) a.form = 'knitted fabric';
-        else if (/non.?woven/.test(txt)) a.form = 'non-woven fabric';
-        else if (/fabric/.test(txt)) a.form = 'fabric';
-        else if (/powder/.test(txt)) a.form = 'powder';
-        else if (/matrix|applicator|flowable/.test(txt)) a.form = 'flowable matrix (applicator)';
-        else if (/patch/.test(txt)) a.form = 'patch';
-        else if (/sponge/.test(txt)) a.form = 'sponge';
-        else if (/sealant|adhesive/.test(txt)) a.form = 'sealant/adhesive';
-        if (/medicinal product/.test(txt)) a.reg = 'a licensed medicinal product';
-        else if (/biocide/.test(txt)) a.reg = 'a biocide (not a licensed medicine)';
-        if (/latex.?free/.test(txt)) a.latex = 'latex-free';
-        else if (/\blatex\b/.test(txt)) a.latex = 'natural rubber latex';
-        /* true only when EVERY catalogue line carries it; a range where only
-           some lines do says so in words (lineAntimicrobial, top of file). */
-        var amN = 0;
-        d2.items.forEach(function(it){ if (lineAntimicrobial(it, p.name)) amN++; });
-        if (amN && amN === d2.items.length) a.silver = true;
-        else if (amN) a.silver = 'Stated on ' + amN + ' of ' + d2.items.length + ' catalogue pack lines only';
-        if (/blood control/.test(txt)) a.bloodctl = true;
-        if (/needle.?free/.test(txt)) a.needlefree = true;
-        if (/\btint/.test(txt)) a.tint = true;
-        if (/\bdehp\b/.test(txt)) a.dehp = true;
-        return a;
+        var d2 = detailFor(p); if (!d2 || !d2.items || !d2.items.length) return null;
+        /* One catalogue line at a time, whole product only when every line
+           agrees (productAttrs, top of file). */
+        return productAttrs(d2.items, p.name);
       }
       function sameSteps(p){
         // "Like-for-like" is only ever true when both products carry the SAME
@@ -1757,6 +1816,9 @@
         if (!mine.type || !p.type || mine.type !== p.type) return false;
         var pa = attrsOf(p);
         if (!myA0 || !pa || !myA0.form || !pa.form || myA0.form !== pa.form) return false;
+        // a range that is only partly stated on any of these is not a straight swap
+        var ks = ['form','material','reg','latex'];
+        for (var q = 0; q < ks.length; q++){ if (myA0.part[ks[q]] || pa.part[ks[q]]) return false; }
         // same format = same steps; a KNOWN material difference breaks it
         if (myA0.material && pa.material && myA0.material !== pa.material) return false;
         // a regulatory-status or latex difference also breaks a "straight swap"
@@ -1785,23 +1847,25 @@
           diffPts.push('<strong>Format:</strong> their format is ' + esc(theirA0.form) + ', yours is ' + esc(myA0.form) + '.'
             + (/flowable/.test(theirA0.form) && /fabric|sponge|patch/.test(myA0.form) ? ' <em>Why it matters:</em> a flowable needs an applicator and prep at the table; a fabric is open-and-apply.' : ''));
         }
-        if ((myA0.reg || theirA0.reg) && myA0.reg !== theirA0.reg){
-          diffPts.push('<strong>Regulatory status:</strong> the catalogue lists yours as ' + esc(myA0.reg || 'unstated') + ' and theirs as ' + esc(theirA0.reg || 'unstated') + '.'
+        var sRegM = shownAttr(myA0, 'reg'), sRegT = shownAttr(theirA0, 'reg');
+        if ((myA0.reg || theirA0.reg) && sRegM !== sRegT){
+          diffPts.push('<strong>Regulatory status:</strong> the catalogue lists yours as ' + esc(sRegM || 'unstated') + ' and theirs as ' + esc(sRegT || 'unstated') + '.'
             + (myA0.reg && /licensed/.test(myA0.reg) && theirA0.reg && /biocide/.test(theirA0.reg) ? ' <em>Why it matters:</em> for skin prep before invasive procedures, medicines and IPC policies generally require a licensed medicine with that indication — a biocide is for general skin disinfection. This is the difference that wins the meeting; verify both SmPCs/labels first.' : '')
             + (myA0.reg && /biocide/.test(myA0.reg) && theirA0.reg && /licensed/.test(theirA0.reg) ? ' <em>Why it matters:</em> expect the licensing question if the use is pre-procedure skin prep — prepare your regulatory answer before the meeting.' : ''));
         }
-        if ((myA0.latex || theirA0.latex) && myA0.latex !== theirA0.latex){
-          diffPts.push('<strong>Latex:</strong> yours is ' + esc(myA0.latex || 'unstated') + ', theirs is ' + esc(theirA0.latex || 'unstated') + '.'
+        var sLxM = shownAttr(myA0, 'latex'), sLxT = shownAttr(theirA0, 'latex');
+        if ((myA0.latex || theirA0.latex) && sLxM !== sLxT){
+          diffPts.push('<strong>Latex:</strong> yours is ' + esc(sLxM || 'unstated') + ', theirs is ' + esc(sLxT || 'unstated') + '.'
             + (myA0.latex === 'latex-free' && theirA0.latex === 'natural rubber latex' ? ' <em>Why it matters:</em> latex allergy (patients and staff) makes latex-free the default in many trust policies.' : ''));
         }
-        if (myA0.silver === true && !theirA0.silver) diffPts.push('<strong>Antimicrobial element:</strong> your entry carries a silver/antimicrobial element theirs does not mention — an infection-prevention angle (confirm against your IFU before quoting clinically).');
-        if (theirA0.silver === true && !myA0.silver) diffPts.push('<strong>Antimicrobial element:</strong> their entry carries a silver/antimicrobial element yours does not — be ready to answer the infection-prevention question.');
-        if (myA0.bloodctl && !theirA0.bloodctl) diffPts.push('<strong>Blood control:</strong> your entry specifies blood-control technology theirs does not mention — a sharps/exposure-safety angle (the 2013 Sharps Regulations make exposure reduction a legal duty).');
-        if (theirA0.bloodctl && !myA0.bloodctl) diffPts.push('<strong>Blood control:</strong> their entry specifies blood-control technology yours does not — know your answer on exposure safety.');
-        if (myA0.needlefree && !theirA0.needlefree) diffPts.push('<strong>Connector:</strong> your entry includes an integrated needle-free connector theirs does not mention — fewer parts to order and fewer connections to break.');
-        if (myA0.tint && !theirA0.tint) diffPts.push('<strong>Visibility:</strong> your range includes a tinted option and theirs does not mention one — clinicians can see exactly where skin has been prepped.');
-        if (theirA0.tint && !myA0.tint) diffPts.push('<strong>Visibility:</strong> their range includes a tinted option and yours does not mention one — be ready for the visible-coverage point.');
-        if (theirA0.dehp && !myA0.dehp) diffPts.push('<strong>DEHP:</strong> their entry notes DEHP and yours does not mention it — if your product is DEHP-free, that supports the safety and sustainability conversation (verify before claiming).');
+        if (myA0.silver === true && !shownAttr(theirA0, 'silver')) diffPts.push('<strong>Antimicrobial element:</strong> your entry carries a silver/antimicrobial element theirs does not mention — an infection-prevention angle (confirm against your IFU before quoting clinically).');
+        if (theirA0.silver === true && !shownAttr(myA0, 'silver')) diffPts.push('<strong>Antimicrobial element:</strong> their entry carries a silver/antimicrobial element yours does not — be ready to answer the infection-prevention question.');
+        if (myA0.bloodctl === true && !shownAttr(theirA0, 'bloodctl')) diffPts.push('<strong>Blood control:</strong> your entry specifies blood-control technology theirs does not mention — a sharps/exposure-safety angle (the 2013 Sharps Regulations make exposure reduction a legal duty).');
+        if (theirA0.bloodctl === true && !shownAttr(myA0, 'bloodctl')) diffPts.push('<strong>Blood control:</strong> their entry specifies blood-control technology yours does not — know your answer on exposure safety.');
+        if (myA0.needlefree === true && !shownAttr(theirA0, 'needlefree')) diffPts.push('<strong>Connector:</strong> your entry includes an integrated needle-free connector theirs does not mention — fewer parts to order and fewer connections to break.');
+        if (myA0.tint === true && !shownAttr(theirA0, 'tint')) diffPts.push('<strong>Visibility:</strong> your range includes a tinted option and theirs does not mention one — clinicians can see exactly where skin has been prepped.');
+        if (theirA0.tint === true && !shownAttr(myA0, 'tint')) diffPts.push('<strong>Visibility:</strong> their range includes a tinted option and yours does not mention one — be ready for the visible-coverage point.');
+        if (theirA0.dehp === true && !shownAttr(myA0, 'dehp')) diffPts.push('<strong>DEHP:</strong> their entry notes DEHP and yours does not mention it' + (myA0.dehpfree === true ? ' — yours is catalogued as DEHP-free, which supports the safety and sustainability conversation.' : ' — if your product is DEHP-free, that supports the safety and sustainability conversation (verify before claiming).'));
         if (!diffPts.length && (myA0.material || myA0.form) && theirA0.packs !== myA0.packs) diffPts.push('Closest match in material and format — the differences are pack range (' + myA0.packs + ' vs ' + theirA0.packs + '), price and service, so your edge carries the argument.');
       }
       var diffHtml;
@@ -1867,7 +1931,7 @@
       if (myA0 && theirA0 && myA0.latex === 'latex-free' && theirA0.latex === 'natural rubber latex'){
         reasons.push('<strong>Latex-free:</strong> ' + esc(theirs.name) + ' is natural rubber latex on the catalogue listing; yours is latex-free — latex allergy affects patients <em>and</em> staff, and many trust policies now default to latex-free. A genuine clinical-choice reason.');
       }
-      if (myA0 && myA0.silver === true && theirA0 && !theirA0.silver){
+      if (myA0 && myA0.silver === true && theirA0 && !shownAttr(theirA0, 'silver')){
         reasons.push('<strong>Antimicrobial element:</strong> your catalogue entry carries a silver/antimicrobial component ' + esc(theirs.name) + '’s entry does not mention — infection prevention is a scored, board-level priority. Confirm the claim wording against your IFU before quoting it clinically.');
       }
       reasons.push('<strong>Sustainability (not checked here):</strong> this comparison has not assessed either product’s sustainability — the catalogue doesn’t carry that data. Carbon and social value are scored at tender (Evergreen from Apr 2026), so if you think your product, packaging or logistics might carry a sustainability benefit for the trust, work it up in the Carbon Saving Calculator on this page.');
