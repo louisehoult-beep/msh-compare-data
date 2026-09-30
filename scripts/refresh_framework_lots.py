@@ -640,11 +640,15 @@ def build_one(fw, h, to_company, cache, fts_releases, previous):
     # matrix) win. The award notice is read only where they name no lots, so
     # two lot numbering schemes are never mixed on one card (Renal: the matrix
     # numbers Lot 1.1-1.3, 2, 3; the 2023 award notice numbers Lot 1-3).
+    # An --fts file carries only the procurements it was collected for. A framework
+    # it does not contain falls through to the carried-forward read below, so a
+    # partial file can add awards without silently dropping every other one
+    # (30/09/2026: 15 new awards would otherwise have wiped the 29 already held).
+    tid = tender_notice_id(fw)
+    entry = fts_releases.get(tid) if (fts_releases is not None and tid) else None
     if lots:
         pass
-    elif fts_releases is not None:
-        tid = tender_notice_id(fw)
-        entry = fts_releases.get(tid) if tid else None
+    elif entry is not None:
         rels = fts_award_releases(entry, rec["lotTitles"])
         src, ids = parse_fts_awards(rels, rec["lotTitles"])
         if src:

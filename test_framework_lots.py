@@ -139,6 +139,20 @@ class FindATender(unittest.TestCase):
                                                               "awards": [[["1"], ["A Ltd", "B Ltd"], "active", "a"]]}]}
         self.assertEqual(L.parse_fts_awards(L.fts_award_releases(entry, {}), {}), ({}, []))
 
+    def test_partial_fts_file_keeps_an_award_it_does_not_contain(self):
+        # 30/09/2026: an --fts file holding only NEW awards used to drop every award
+        # already read, because a framework missing from the file never reached the
+        # carry-forward branch.
+        fw = {"name": "Urology", "url": "u", "reference": "2023/S 000-032330",
+              "suppliers": ["Hollister Limited"]}
+        prev = {"lotTitles": {"Lot 12": "Stoma Appliances"},
+                "sources": [{"kind": "fts-award", "url": "x", "label": "award",
+                             "coversLots": ["Lot 12"], "suppliersWithLots": 1}],
+                "lotsBySource": {"fts-award": {"Hollister Limited": ["Lot 12"]}}}
+        rec = L.build_one(fw, "", lambda n: None, None, {"999999-2025": {}}, prev)
+        self.assertEqual(rec["supplierLots"], {"Hollister Limited": ["Lot 12"]})
+        self.assertEqual(rec["status"], "published")
+
 
 def run_gate(fw, lots_doc, js="function fwLotLine(){} lot not published by"):
     verify.fails.clear()
