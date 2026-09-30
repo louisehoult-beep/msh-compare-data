@@ -124,9 +124,13 @@ for bad in ["seed viability", "corneal", "eye tissue", "toilet tissue",
     check("excluded: %s" % bad, bad not in titles)
 
 print("\nTRUE POSITIVES — awards that must be on this patch")
+# Checked against the MATCHED set from 30/09/2026 (^o537's rule: coverage belongs
+# against what the rule admits; the 40-row cap is a display rule). The Contracts
+# Finder backfill to 2021 brought enough newer awards to push these below the cap.
+_wound_matched = matched_titles(WOUND)
 for good in ["negative pressure wound therapy", "wound closure", "dressings",
              "lymphoedema", "debridement"]:
-    check("present: %s" % good, good in titles)
+    check("present: %s" % good, good in _wound_matched)
 
 print("\nFRAMEWORKS")
 names = [f["name"] for f in d["frameworks"]]
@@ -209,11 +213,15 @@ check("excluded: sports physiotherapy", "sports physiotherapy" not in htitles)
 check("excluded: employer physiotherapy services contracts",
       "physiotherapy services" not in htitles)
 
+# Checked against the MATCHED set from 30/09/2026 (^o537's rule: coverage belongs
+# against what the rule admits; the 40-row cap is a display rule). The Contracts
+# Finder backfill to 2021 brought enough newer awards to push these below the cap.
+_handling_matched = matched_titles(HANDLING)
 print("\nTRUE POSITIVES — awards that must be on this patch")
 for good in ["pressure area care and patient handling", "hoist", "bariatric",
              "aids for daily living", "wheelchair", "mattress", "specialist seating",
              "falls prevention", "postural support"]:
-    check("present: %s" % good, good in htitles)
+    check("present: %s" % good, good in _handling_matched)
 
 print("\nFRAMEWORKS")
 hnames = [f["name"] for f in h["frameworks"]]
@@ -593,10 +601,14 @@ for bad in ["lectures theatre", "roofing", "re-surface", "water treatment", "cpa
             "autoclave", "laminar flow", "insufflator", "examination gloves",
             "milk bottles", "boot swab", "radiopharmaceutical"]:
     check("excluded: %s" % bad, bad not in htitles)
+# Checked against the MATCHED set from 30/09/2026 (^o537's rule: coverage belongs
+# against what the rule admits; the 40-row cap is a display rule). The Contracts
+# Finder backfill to 2021 brought enough newer awards to push these below the cap.
+_theatres_matched = matched_titles(THEATRES)
 for good in ["minimally invasive surgery", "anaesthetic machines", "airway management",
              "procedure packs", "washer disinfector",
              "video laryngoscope", "diathermy", "operating table"]:
-    check("present: %s" % good, good in htitles)
+    check("present: %s" % good, good in _theatres_matched)
 # "surgical robot" moved to the MATCHED set, 29/09/2026, for the same reason as the
 # gloves below: that day's framework-awards refresh pushed the WSFT surgical robot
 # purchase behind the AWARD_CAP line. The rule still matches four robot awards;
@@ -774,10 +786,14 @@ for bad in ["orthotic", "orthoses", "podiatr", "prosthes", "epidural", "spinal c
             "medicines", "sexual abuse", "zolgensma", "bone conduction",
             "neuromodulation", "breast"]:
     check("excluded: %s" % bad, bad not in otitles)
+# Checked against the MATCHED set from 30/09/2026 (^o537's rule: coverage belongs
+# against what the rule admits; the 40-row cap is a display rule). The Contracts
+# Finder backfill to 2021 brought enough newer awards to push these below the cap.
+_ortho_matched = matched_titles(ORTHO)
 for good in ["orthopaedic power tools", "trauma implants", "spinal implants",
              "arthroscopy", "knee", "bone prep", "total orthopaedic solutions 4",
              "internal/external fixation", "tourniquet"]:
-    check("present: %s" % good, good in otitles)
+    check("present: %s" % good, good in _ortho_matched)
 check("every award shown is one the matcher still admits",
       all(B.match_title(orx, a["title"]) for a in o["awards"]))
 
@@ -1232,19 +1248,23 @@ for other in [
 ]:
     check("not claimed: %s" % other[:52], not B.match_title(irx, other))
 
+# Checked against the MATCHED set from 30/09/2026 (^o537's rule: coverage belongs
+# against what the rule admits; the 40-row cap is a display rule). The Contracts
+# Finder backfill to 2021 brought enough newer awards to push these below the cap.
+_ir_matched = matched_titles(IR)
 print("\nTRUE POSITIVES — awards that must be on this patch")
 for good in ["interventional radiology products",
              "np68424 interventional radiology",
              "contrast media",
              "lipiodol",
              "percutaneous instrument insertion"]:
-    check("present: %s" % good, good in irtitles)
+    check("present: %s" % good, good in _ir_matched)
 # The headline framework award and the July 2026 biopsy move, both named on the
 # page's own Buying route section.
 check("the NHS Supply Chain IC/IR/INR framework award is on the panel",
-      "interventional neuroradiology" in irtitles)
+      "interventional neuroradiology" in _ir_matched)
 check("the framework the biopsy codes moved to on 01/07/2026 is on the panel",
-      "needles including biopsy" in irtitles)
+      "needles including biopsy" in _ir_matched)
 
 print("\nSCOPE DECISION, TESTED SO IT CANNOT DRIFT SILENTLY")
 # INR is admitted because the page publishes it (a section headed "Thrombectomy and
@@ -1253,8 +1273,8 @@ print("\nSCOPE DECISION, TESTED SO IT CANNOT DRIFT SILENTLY")
 # own framework title carries the word NEURORADIOLOGY, so excluding it would drop
 # this patch's headline framework award — the same trap the vascular rule records.
 check("the two Scottish INR awards are admitted",
-      "inr and thrombectomy consumables" in irtitles
-      and "interventional neuro radiology and thrombectomy" in irtitles)
+      "inr and thrombectomy consumables" in _ir_matched
+      and "interventional neuro radiology and thrombectomy" in _ir_matched)
 check("no neuroradiology exclusion, which would drop the headline framework",
       "neuroradiolog" not in B.SPECIALITY_RULES[IR]["exclude"].lower())
 
@@ -1383,12 +1403,16 @@ check("VAD is not matched, because VAD is also a vascular access device",
 check("FFR is not matched, because it matches DIFFRACTOMETER",
       not cax["inc"].search("Supply of an X-ray Diffractometer"))
 
+# Checked against the MATCHED set from 30/09/2026 (^o537's rule: coverage belongs
+# against what the rule admits; the 40-row cap is a display rule). The Contracts
+# Finder backfill to 2021 brought enough newer awards to push these below the cap.
+_cardiac_matched = matched_titles(CARDIAC)
 print("\nTRUE POSITIVES — awards that must be on this patch")
 for want in ["cardiac rhythm management", "structural heart",
              "heart valves", "cath lab",
              "perfusion heart lung", "echocardiogram", "ecg",
              "aortic root", "cardiology stents"]:
-    check("present: %s" % want, want in catitles)
+    check("present: %s" % want, want in _cardiac_matched)
 # "pacemakers" moved to the MATCHED set, 22/09/2026 — the time bomb the note below
 # named, going off. "Purchase of Pacemakers, ICD's & CRT's" (NHS National Services
 # Scotland, 18/12/2024) is still admitted by the rule; the matched total grew to 63
@@ -1571,17 +1595,23 @@ for bad in ["endocrine", "asparaginase", "cpd courses", "non-parenteral", "vitam
             "serum and milk", "breast pump", "sterile milk bottles", "ambient food"]:
     check("absent from the published panel: %s" % bad, bad not in nutitles)
 
+# Checked against the MATCHED set from 30/09/2026 (^o537's rule: coverage belongs
+# against what the rule admits; the 40-row cap is a display rule). The Contracts
+# Finder backfill to 2021 brought enough newer awards to push these below the cap.
+_nu_matched = matched_titles(NUTRITION)
 print("\nTRUE POSITIVES — awards that must be on this patch")
 for good in ["enteral feeding, bile bags and associated products",
              "home parenteral nutrition", "unlicensed parenteral nutrition",
              "enteral feeds", "nutritional supplies", "enteral feeding pumps",
              "parenteral nutrition formulation bags for neo nates"]:
-    check("present: %s" % good, good in nutitles)
+    check("present: %s" % good, good in _nu_matched)
 # Was "== 26". The 24/09/2026 awards refresh matched 30, all 30 published. The
 # property under test is that shown equals matched; the floor keeps a collapse
 # to a handful from passing silently.
+# 30/09/2026: 56 matched after the Contracts Finder backfill, so the 40-row cap now
+# applies; shown must still be every matched award up to the cap, and the floor stays.
 check("nothing was lost to the exclusion list: every matched award is published",
-      nu["counts"]["awardsShown"] == nu["counts"]["awardsMatched"] >= 26,
+      shown_is_matched_or_capped(nu["counts"]) and nu["counts"]["awardsMatched"] >= 26,
       "shown=%s matched=%s" % (nu["counts"]["awardsShown"], nu["counts"]["awardsMatched"]))
 
 print("\nFRAMEWORKS")
@@ -1860,7 +1890,10 @@ check("the rehabilitation guard does not throw away a genuine neurophysiology ro
       B.match_title(nex, "Neurophysiology Insourced Services"))
 
 print("\nTRUE POSITIVES — rows that must be on this patch")
-net = " || ".join((a.get("title") or "") for a in ne["awards"]).lower()
+# Checked against the MATCHED set from 30/09/2026 (^o537's rule: coverage belongs
+# against what the rule admits; the 40-row cap is a display rule). The Contracts
+# Finder backfill to 2021 brought enough newer awards to push these below the cap.
+net = matched_titles(NEURO)
 for good in ["neurosurgery consumables", "provision of cranioplasties",
              "dural repair patches", "external ventricular drainage",
              "intracranial pressure monitoring kits", "nerve conduction studies",
@@ -4210,8 +4243,15 @@ for good in ["Stroke Central Monitor",
 # Suffolk ICB to East Coast Community Healthcare CIC, 25/09/2026, Find a Tender
 # 091010-2026, read via the OCDS API 26/09/2026) is a commissioned community stroke
 # service, the same kind of row as Newham and City & Hackney above. Kept.
-check("exactly ten, and every one of them was read",
-      sk["counts"]["awardsMatched"] == 10, "got %s" % sk["counts"]["awardsMatched"])
+# THIRTEEN FROM 30/09/2026, after the Contracts Finder backfill to 2021, each read:
+# "Interventional Neuro Radiology NPM" (Leeds Teaching Hospitals, 10/03/2026),
+# "Vesalic Neva Thrombectomy" (Nottingham City Hospital, 01/12/2022) and the NHS
+# Supply Chain IC/IR/INR/CRM/EP framework award as Contracts Finder also published it
+# (28/10/2022; the buyer name differs from the Find a Tender copy, so it is a separate
+# notice, not a republication). All three are thrombectomy or INR, this patch.
+# "Microtome ER System with flexible long stroke" matched too and is excluded by rule.
+check("exactly thirteen, and every one of them was read",
+      sk["counts"]["awardsMatched"] == 13, "got %s" % sk["counts"]["awardsMatched"])
 check("the Norfolk and Suffolk community stroke service is one of them",
       any("enhanced community stroke services" in (a.get("title") or "").lower()
           for a in sk["awards"]))
@@ -5025,8 +5065,9 @@ _co_titles = " || ".join((a.get("title") or "") for a in co["awards"]).lower()
 for gone in ["vessel harvesting", "craniofacial", "transnasal", "wigs", "flooring",
              "faecal management", "hysteroscopy"]:
     check("no %s row reached the panel" % gone, gone not in _co_titles)
+# Matched set from 30/09/2026: newer awards pushed it below the 40-row cap (^o537).
 check("the rigid scope award DID reach it",
-      "rigid endoscopy equipment, accessories" in _co_titles)
+      "rigid endoscopy equipment, accessories" in matched_titles(COLO))
 
 print("  CPV corroborates and never admits")
 # 33168000 and 33168100 are the endoscopy and endoscope codes, and across the
@@ -5443,6 +5484,7 @@ for bad in [
 
 print("  the true positives — every award title in the slice was read before publishing")
 _ip_titles = [a["title"] for a in ip["awards"]]
+_ip_matched = matched_titles(IPC)
 for want in [
         "Community Infection Prevention and Control (IPC) Services",
         "Clinical & Sharps Waste Management",
@@ -5454,7 +5496,8 @@ for want in [
         "Sitewide Macerator upgrade",
         "Medical Pulp (4951708)",
 ]:
-    check("carried: %s" % want[:58], want in _ip_titles)
+    # Matched set from 30/09/2026 (^o537): the backfill pushed three below the cap.
+    check("carried: %s" % want[:58], want.lower() in _ip_matched)
 # "Skin Cleansing and Disinfection" moved to the MATCHED set, 23/09/2026: 61
 # awards now match against an AWARD_CAP of 40 and it has fallen below the line.
 # The rule still admits it, which is what a lost pattern would break.

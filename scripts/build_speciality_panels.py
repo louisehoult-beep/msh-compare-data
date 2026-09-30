@@ -760,7 +760,11 @@ SPECIALITY_RULES = {
         #                          platform for a gene therapy. Neurology, and software.
         "exclude": (
             r"\b(medicines|spinal cord stimulat\w*|epidural|"
-            r"fgm|sexual abuse|spinal muscular atrophy)\b"
+            r"fgm|sexual abuse|spinal muscular atrophy|"
+            # 30/09/2026: "Beagle Orthopaedics Orthotic Consumables" (Norfolk and
+            # Norwich, 25/09/2026) matched on the supplier's name. Orthotics are
+            # rehabilitation's patch, which carries it; no other row is removed.
+            r"orthotic\w*|orthos[ei]s)\b"
         ),
         # The three CPV families the matching notices actually carry, read off them
         # rather than assumed: 331417 orthopaedic supplies (fracture devices, pins and
@@ -1535,7 +1539,19 @@ SPECIALITY_RULES = {
             r"preclinical|pre[- ]clinical|in[- ]vivo|micro[- ]?ct|micro[- ]?pet|"
             r"micro[- ]?ultrasound|equine|veterinar\w*|functional ultrasound|"
             r"scanner design|simulators?|non[- ]?imaging|invicro|mri planet|"
-            r"in[- ]service support)\b"
+            r"in[- ]service support|focused ultrasound|"
+            # "focused ultrasound" added 30/09/2026: "Transcranial MR guided brain
+            # focused ultrasound system" (Walton Centre) is a therapeutic device, the
+            # same call as the HIFU rows above; it is the only row this removes.
+            # 30/09/2026, Contracts Finder backfill to 2021: 13 research/heritage/
+            # industrial instruments matched "x-ray", "radiograph", "CT" or "magnetic
+            # resonance" and every one was read: X-ray diffraction and scattering
+            # systems, X-ray sources and generators for UKRI beamlines, NMR probes and
+            # spectrometers, Dstl's industrial CT, a seed-imaging radiography rig and a
+            # nuclear decommissioning radiography study. None is clinical imaging.
+            r"x[- ]?ray diffraction|x[- ]?ray (?:sources?|generators?|focusing|fluorescence)|"
+            r"analytical x[- ]?ray|nuclear magnetic resonance|nmr|industrial ct|"
+            r"wide angle x[- ]?ray|seed imaging|radiography feasibility)\b"
         ),
         # THREE CPV FAMILIES, all of which fire on rows this rule already admits:
         # 3311 is the imaging-equipment family (33110000 imaging equipment, 33111000
@@ -1741,7 +1757,10 @@ SPECIALITY_RULES = {
         #                       cardiac physiology maintenance award and must survive.
         "exclude": (
             r"\b(medicines|ophthalm\w*|lifeport|static perfusion|perfusion fluid|"
-            r"anaesthe\w*|principal designer|training programme)\b"
+            r"anaesthe\w*|principal designer|training programme|"
+            # 30/09/2026: two university cell-physiology research rigs (a Port-a-Patch
+            # patch-clamp and an IonOptix cardiomyocyte system), read and excluded.
+            r"cardiomyocyte|port-a-patch)\b"
         ),
         # FOUR CPV prefixes, and every one of them actually fires on a matching notice
         # in this data. A family that corroborates nothing is not claimed. All four
@@ -2401,7 +2420,9 @@ SPECIALITY_RULES = {
         # this speciality's. That is a match that has been read in this data and found
         # to be wrong, which is the standard, and it is the only pattern here: nothing
         # is carried on a guess.
-        "exclude": r"\bstroke volumes?\b",
+        # "long stroke" added 30/09/2026: "Microtome ER System with flexible long
+        # stroke" (a histology microtome's travel) is the only row it removes.
+        "exclude": r"\b(stroke volumes?|long stroke)\b",
         "excludeFinding": (
             "THE ONE EXCLUSION, AND WHERE ITS EVIDENCE CAME FROM. No award title in this "
             "data carries the phrase \"stroke volume\", so unlike every other speciality's "
@@ -2687,7 +2708,15 @@ SPECIALITY_RULES = {
             r"biomarker assay|tissue culture|cooling system|visual field|ocular analys\w*|"
             r"electrosurgical|cut & coagulation|quanti[- ]?tray|coliert|colilert|"
             r"water treatment|fleming fund|endoscopy|point of care ultrasound|\bpocus\b|"
-            r"haemostatic|hemostatic)"
+            r"haemostatic|hemostatic|"
+            # 30/09/2026, Contracts Finder backfill to 2021: 11 rows read one by one, all
+            # veterinary, fisheries, police or heritage laboratory work, none NHS or
+            # human diagnostics: APHA/Defra cattle-TB kits (Bovigam, VetTB for cervids,
+            # DIVA reagent), five Cefas fisheries-lab reagent contracts, roadside drug-
+            # driving kits for the police, and two elemental analysers (LIBS at Teesside,
+            # XRF for museum artefacts).
+            r"bovigam|vettb|cervids?|cattle|bovine|\bdiva\b|\bcefas\w*|"
+            r"x[- ]?ray fluorescence|laser induced breakdown|drug driving)"
         ),
         # CPV CORROBORATES, IT NEVER ADMITS, and on this patch the classification is
         # unusually clean because laboratory medicine has its own families: 33696*
@@ -5436,7 +5465,11 @@ SPECIALITY_RULES = {
         #                     NHS Golden Jubilee. Intravascular OCT is a coronary
         #                     imaging catheter. Same three letters, different organ;
         #                     it belongs to cardiology.
-        "exclude": r"\b(eye protection|small animal|intravascular)\b",
+        # Three added 30/09/2026 from the Contracts Finder backfill, each read: staff
+        # eye-test vouchers for Acas, prescription safety eyewear for a fire service,
+        # and a university's eye-tracking research rig.
+        "exclude": (r"\b(eye protection|small animal|intravascular|"
+                    r"prescription eye ?wear|eye tracking|acas eye care)\b"),
         # THE THREE OPHTHALMOLOGY-SPECIFIC CPV CODES SEEN ON GENUINE NOTICES IN THIS
         # DATA: 33122000 on the orthoptic device replacement, the Wales
         # Ophthalmology and Vision Care consumables award and the corneal topography
@@ -7305,7 +7338,15 @@ SPECIALITY_RULES = {
             r"veterinary|gambia|in[- ]orbit|postcards?|syringes and needles|"
             r"staff (?:flu|winter|influenza|vaccinat)\w*|staff vaccinat\w*|"
             r"workforce influenza|flu vaccination campaign|vaccine vouchers|"
-            r"occupational health services?|immunisation services?)\b"
+            r"occupational health services?|immunisation services?|"
+            # 30/09/2026, Contracts Finder backfill to 2021: 13 rows read, none a human
+            # medicines purchase: cattle BCG, lumpy skin disease and African swine fever
+            # vaccine work for Defra, a university's preclinical study, police drug-
+            # driving test kits, three on-site staff flu jab programmes (the same kind
+            # the staff-flu terms above already exclude) and "Covid 19 Vaccinations
+            # Programme - Supply of AEDs" (defibrillators, three notices).
+            r"cattle|bovine|lumpy skin|asfv|african swine|drug driving|"
+            r"supply of aeds?|on[- ]site flu vaccination)\b"
         ),
         # 33600000 pharmaceutical products and 33651600 vaccines. Nothing wider: a bare
         # "336" prefix would reach 33696xxx laboratory reagents, which is pathology's,
@@ -7632,7 +7673,12 @@ SPECIALITY_RULES = {
         #                        the title and would otherwise be lost.
         "exclude": (
             r"\b(education(?:al)? psycholog\w*|psychology services group|"
-            r"forensic (?:vacuum|science)|dna profiling)\b"
+            r"forensic (?:vacuum|science)|dna profiling|"
+            # 30/09/2026, Contracts Finder backfill to 2021: six police forensic-science
+            # contracts matched "forensic" (property marking, DNA consumables, pay-as-
+            # you-go forensic services, lab glass washers). Forensic mental health
+            # services keep matching: none of these words appears in their titles.
+            r"forensic property|forensic consumables|pay as you go forensic|glass washers)\b"
         ),
         "excludeFinding": (
             "The exclusion list exists because every pattern in it matched a real notice "
