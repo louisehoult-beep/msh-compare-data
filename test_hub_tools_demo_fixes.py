@@ -120,5 +120,43 @@ class CompanyReportDownload(unittest.TestCase):
         self.assertIn("exportStamp(ctx, stamp) +", self.src)
 
 
+class ComparisonHonoursTheirCompany(unittest.TestCase):
+    """30/09/2026: Cosmopor E with "Their company" = Coloplast auto-picked
+    Leukomed (Essity), because the auto-pick never read the chosen company.
+    Reproduced in a harness against the published data with Coloplast listed
+    as a real option (ten Coloplast dressings tracked)."""
+
+    def setUp(self):
+        self.src = read("app/comparison.js")
+
+    def test_filter_applies_before_ranking_and_cut(self):
+        self.assertIn("function competitorsOf(mine, supFilter){", self.src)
+        self.assertIn("p.type === mine.type && (!supFilter || p.supplier === supFilter)", self.src)
+
+    def test_auto_pick_uses_the_chosen_company(self):
+        self.assertIn("var comps0 = competitorsOf(mine, selSup2.sel.value);", self.src)
+        self.assertNotIn("var comps0 = competitorsOf(mine);", self.src)
+
+    def test_honest_message_when_company_has_no_match(self):
+        self.assertIn("if (chosenSupTheirs){", self.src)
+        self.assertIn("so there is nothing honest to put beside it", self.src)
+
+
+class CompanyReportMastheadNotAHeader(unittest.TestCase):
+    """30/09/2026: the report mounts inside div.msh, and the Hub nav CSS paints
+    `.msh header` with a gold gradient (!important). The masthead was a
+    <header>, so it lost its navy ground and its text fell under 1.7:1."""
+
+    def setUp(self):
+        self.src = read("app/company-report.js")
+
+    def test_masthead_is_a_div(self):
+        self.assertIn("return '<div class=\"mcr-mast\">' +", self.src)
+        self.assertNotIn('<header class="mcr-mast">', self.src)
+
+    def test_navy_ground_is_important(self):
+        self.assertIn("#1B3A5F 100%)!important;", self.src)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

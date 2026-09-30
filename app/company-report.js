@@ -246,7 +246,7 @@
     'border-radius:14px;background:#fdfcf9;overflow:hidden;',
     'box-shadow:0 2px 16px rgba(11,28,51,.07);}',
     '.mcr .mcr-mast{position:relative;padding:30px 34px 24px;',
-    'background:linear-gradient(135deg,#0B1C33 0%,#132B4A 55%,#1B3A5F 100%);',
+    'background:linear-gradient(135deg,#0B1C33 0%,#132B4A 55%,#1B3A5F 100%)!important;',
     '-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
     '.mcr .mcr-mast:before{content:"";position:absolute;left:0;right:0;top:0;height:5px;',
     'background:var(--mcr-accent);-webkit-print-color-adjust:exact;print-color-adjust:exact;}',
@@ -2281,7 +2281,17 @@
     if (ctx && ctx.fwDoc && ctx.fwDoc.dataAsOf) meta.push('framework briefs captured <b>' + esc(dateUK(ctx.fwDoc.dataAsOf)) + '</b>');
     if (ctx && ctx.fin && ctx.fin.dataAsOf) meta.push('Companies House read <b>' + esc(dateUK(ctx.fin.dataAsOf)) + '</b>');
 
-    return '<header class="mcr-mast">' +
+    /* A <div>, never a <header>, and that is load-bearing (30/09/2026). The
+       report mounts inside div.msh, and the Hub nav's chrome CSS (WPCode
+       snippet 1331) styles `.msh header` with the nav's GOLD gradient,
+       display:flex row and its own padding, all !important, because the nav
+       mount is `<div class="msh"><header><nav>`. As a <header> this masthead
+       matched that rule, lost its navy ground to the gold band (lightest stop
+       #E3C583), and every line on it fell under 1.7:1 (eyebrow 1.05, title
+       1.67, meta 1.33). On the navy's lightest stop #1B3A5F they measure
+       eyebrow 6.56, title 11.56, meta 5.22, tagline 7.41, link pills 7.57. The navy ground below is also !important, so no
+       other element-level rule can repaint it. */
+    return '<div class="mcr-mast">' +
       '<div class="mcr-mast-row">' +
         '<span class="mcr-logo">' + logoImg(s, 74) + '</span>' +
         '<div style="min-width:210px;">' +
@@ -2295,7 +2305,7 @@
       '</div>' +
       (meta.length ? '<div class="mcr-mast-meta">' + meta.join(' &middot; ') +
         '<br>Every derived panel prints the rule it was computed under. Every empty panel says what is missing.</div>' : '') +
-      '</header>';
+      '</div>';
   }
 
   /* A part divider. The report runs long, and an unbroken run of cards gives a

@@ -597,7 +597,7 @@
     function updateSuggestPlaceholder(){
       var mine = resolveMine();
       if (mine){
-        var comps = competitorsOf(mine);
+        var comps = competitorsOf(mine, selSup2.sel.value);
         inp2.placeholder = comps.length ? ('e.g. ' + comps[0].name + '  ·  ' + comps[0].supplier) : 'type a specific rival product or code';
       } else {
         inp2.placeholder = 'type a specific rival product or code (optional — we’ll suggest one)';
@@ -674,7 +674,7 @@
     });
     selType.sel.addEventListener('change', function(){ refreshList(); refreshList2(); updateSuggestPlaceholder(); });
     inp.addEventListener('input', function(){ refreshList2(); updateSuggestPlaceholder(); });
-    selSup2.sel.addEventListener('change', refreshList2);
+    selSup2.sel.addEventListener('change', function(){ refreshList2(); updateSuggestPlaceholder(); });
     refreshList();
     refreshList2();
     updateSuggestPlaceholder();
@@ -1029,7 +1029,7 @@
           theirs = resolveByCodeOrName(typedTheirs, pool2);
         }
         if (!theirs && !typedTheirs){
-          var comps0 = competitorsOf(mine);
+          var comps0 = competitorsOf(mine, selSup2.sel.value);
           if (comps0.length){ theirs = comps0[0]; autoSuggested = true; }
         }
       }
@@ -1063,11 +1063,17 @@
     // Like-for-like: same device TYPE (category) only. Speciality is used to RANK
     // within the same type, never to pull in unrelated categories. If the product
     // has no recognised type, fall back to a shared distinctive product-name word.
-    function competitorsOf(mine){
+    /* supFilter: the company chosen under "Their company". It is applied
+       BEFORE ranking and the cut to 12, never after (30/09/2026). Before this
+       the auto-pick ignored the choice entirely: Cosmopor E with Coloplast
+       chosen came back as Leukomed (Essity), although ten Coloplast dressings
+       are tracked. Filtering after the slice would lose the chosen company
+       whenever it ranked 13th or lower. */
+    function competitorsOf(mine, supFilter){
       var seen = {}, out = [];
-      function add(p){ var k = p.name + '|' + p.supplier; if (p.supplier !== mine.supplier && !seen[k]){ seen[k] = 1; out.push(p); } }
+      function add(p){ var k = p.name + '|' + p.supplier; if (p.supplier !== mine.supplier && (!supFilter || p.supplier === supFilter) && !seen[k]){ seen[k] = 1; out.push(p); } }
       if (mine.type){
-        var same = PRODUCTS.filter(function(p){ return p.supplier !== mine.supplier && p.type === mine.type; });
+        var same = PRODUCTS.filter(function(p){ return p.supplier !== mine.supplier && p.type === mine.type && (!supFilter || p.supplier === supFilter); });
         // Rank the closest like-for-like first: overlap of 8-char word stems from the
         // product name + its live catalogue description (e.g. Pahacel [ORC] ranks
         // Surgicel [ORC] above a flowable matrix), then cached detail, then speciality.
@@ -1631,6 +1637,10 @@
         return '<div style="color:#8a6d00;font-size:14px;padding:8px 0;">Type your product above (start typing to pick from the list) and press Compare.</div>';
       }
 
+      /* allComps stays market-wide: it sizes the category for the
+         standardisation signal below, which is about the whole market, not the
+         one company chosen. The "other products" line uses the chosen
+         company's range when one is set. */
       var allComps = competitorsOf(mine);
 
       if (!theirs){
@@ -1646,6 +1656,11 @@
             + '<span style="font-size:12.5px;color:#8a8778;margin-left:10px;">it goes through the same verification and is usually live within a working day</span></div></div>'
             + selfCard;
         }
+        if (chosenSupTheirs){
+          return '<div style="font-size:13px;color:#6b7684;margin:6px 0 4px;">Your product: <strong>' + esc(mine.name) + '</strong> (' + esc(mine.supplier) + ')</div>'
+            + '<div style="color:#8a6d00;font-size:14px;padding:12px 14px;background:#fbf3df;border:1px solid #e8d5a8;border-radius:10px;">We don’t track a ' + esc(mine.type || 'comparable product') + ' from <strong>' + esc(chosenSupTheirs) + '</strong> that compares with ' + esc(mine.name) + ', so there is nothing honest to put beside it. Set &ldquo;Their company&rdquo; back to any competitor for the closest match from another company, or type a specific product.</div>'
+            + selfCard;
+        }
         return '<div style="font-size:13px;color:#6b7684;margin:6px 0 4px;">Your product: <strong>' + esc(mine.name) + '</strong> (' + esc(mine.supplier) + ')</div>'
           + '<div style="color:#8a6d00;font-size:14px;padding:12px 14px;background:#fbf3df;border:1px solid #e8d5a8;border-radius:10px;">No tracked competitor products found for this product yet — type a specific rival above, or check the Supplier Intelligence search.</div>'
           + selfCard;
@@ -1653,7 +1668,7 @@
 
       var h = '<div style="font-size:13px;color:#6b7684;margin:6px 0 2px;">Comparing <strong>' + esc(mine.name) + '</strong> (' + esc(mine.supplier) + ') against <strong>' + esc(theirs.name) + '</strong> (' + esc(theirs.supplier) + ')' + (mine.type ? ' · type: ' + esc(mine.type) : '') + '</div>';
       if (autoSuggested){
-        h += '<div style="font-size:12.5px;color:#8a6d00;background:#fbf3df;border:1px solid #e8d5a8;border-radius:8px;padding:8px 12px;margin:4px 0 8px;">We picked <strong>' + esc(theirs.name) + '</strong> as your closest tracked match. Know exactly who you’re up against? Type their product into &ldquo;Compare against&rdquo; above and press Compare again.</div>';
+        h += '<div style="font-size:12.5px;color:#8a6d00;background:#fbf3df;border:1px solid #e8d5a8;border-radius:8px;padding:8px 12px;margin:4px 0 8px;">We picked <strong>' + esc(theirs.name) + '</strong> as your closest tracked match' + (chosenSupTheirs ? ' from ' + esc(chosenSupTheirs) : '') + '. Know exactly who you’re up against? Type their product into &ldquo;Compare against&rdquo; above and press Compare again.</div>';
       }
 
       /* THE DIFFERENTIAL — the primary output. Side by side, pictured, with each
@@ -1950,9 +1965,9 @@
       // Other tracked products in the same category — a quick way to switch who
       // you're compared against without retyping, kept secondary to the main
       // head-to-head above (the rep asked for ONE clear comparison, not a list).
-      var others = allComps.filter(function(p){ return p !== theirs; }).slice(0, 5);
+      var others = (chosenSupTheirs ? competitorsOf(mine, chosenSupTheirs) : allComps).filter(function(p){ return p !== theirs; }).slice(0, 5);
       if (others.length){
-        h += '<div style="margin:14px 0 0;font-size:12.5px;color:#75808d;">Other tracked products in this category: ' + others.map(function(p){ return '<a href="#" class="msh-cmp-other" data-name="' + esc(p.name) + '" data-supplier="' + esc(p.supplier) + '" style="color:' + GOLD + ';font-weight:600;">' + esc(p.name) + ' (' + esc(p.supplier) + ')</a>'; }).join(', ') + ' — click one to compare against that instead.</div>';
+        h += '<div style="margin:14px 0 0;font-size:12.5px;color:#75808d;">Other tracked products in this category' + (chosenSupTheirs ? ' from ' + esc(chosenSupTheirs) : '') + ': ' + others.map(function(p){ return '<a href="#" class="msh-cmp-other" data-name="' + esc(p.name) + '" data-supplier="' + esc(p.supplier) + '" style="color:' + GOLD + ';font-weight:600;">' + esc(p.name) + ' (' + esc(p.supplier) + ')</a>'; }).join(', ') + ' — click one to compare against that instead.</div>';
       }
 
       // optional angle
