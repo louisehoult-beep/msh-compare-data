@@ -375,10 +375,10 @@
  },
  "counts": {
   "pairs": 9076,
-  "mapped": 7716,
+  "mapped": 7734,
   "notTaxonomy": 208,
   "products": 100943,
-  "productsMapped": 69016
+  "productsMapped": 69035
  },
  "entries": [
   {
@@ -90066,9 +90066,11 @@
     "IPC22 Cover for IP22",
     "IP22 Cool Cubes - Small 15x6cm 100 Pack"
    ],
-   "hub": null,
+   "hub": "womens:mat",
    "notTaxonomy": false,
-   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py"
+   "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py",
+   "why": "the supplier's own site groups this 2-product division under medichill.co.uk/collections/4-maternity; its own product page for the IP22 Cool Cubes (medichill.co.uk/products/medichill-cool-cubes-small-15x6cm) describes them as 'the choice for maternity wards and midwives worldwide', 'designed for perineal relief post-childbirth' — postpartum perineal cold therapy, not general cold therapy like the supplier's other Cool Cubes ranges.",
+   "decidedIn": "Medichill UK Ltd.json"
   },
   {
    "supplier": "Medichill UK Ltd",
@@ -149340,6 +149342,36 @@
    "evidence": "the supplier's own site filing, read by scripts/crawl_supplier_site.py; product detail captured 29/09/2026 via scripts/crawl_supplier_product_detail.py (structured, reflexmedical.co.uk); found under the 'Patient Monitoring' division, a genuine mixed catch-all (ECG/monitoring, blood glucose, cuffs, thermometers AND blood collection) correctly left unmapped as a whole",
    "why": "A single-use safety lancet for capillary sampling — the vocabulary's 'Lancets & capillary' type, by name.",
    "decidedIn": "framework-coverage batch, Blood Collection Devices, 29/09/2026 (mixed-division-mapping policy, standing authority since 20/09/2026)"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Medichill UK Ltd",
+   "division": "Perineal Ice Packs & Covers",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Perineal Ice Packs & Covers"
+   ],
+   "hub": "womens:mat",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing (medichill.co.uk), read by scripts/crawl_supplier_site.py",
+   "why": "Same IP22 perineal cold-compress product line as the supplier's 'Maternity' division (medichill.co.uk/products/perineal-cool-pads-covers) -- postpartum perineal cold therapy, womens:mat. Sits inside the supplier's 'Personal Use' division alongside Cold Eye Compress, which is unrelated general cold therapy and stays unmapped.",
+   "decidedIn": "Medichill UK Ltd.json"
+  },
+  {
+   "kind": "product-override",
+   "supplier": "Optimum Medical",
+   "division": "Optilube Lubrication Gynaecology",
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Optilube Lubrication Gynaecology"
+   ],
+   "hub": "womens:gyn",
+   "notTaxonomy": false,
+   "evidence": "the supplier's own site filing (optimummedical.co.uk), read by scripts/crawl_supplier_site.py; product page optimummedical.co.uk/products/optilube-lubrication-gynaecology/ read 30/09/2026",
+   "why": "The supplier's own product page names this specific OptiLube line for gynaecological procedures, vaginal lubrication and digital/instrument examinations -- womens:gyn. Sits inside the supplier's mixed 88-product Uncategorised division alongside Optilube Lubrication Gastroenterology, Optilube Zero, Optilube Active and plain Optilube, which are lubricant formats/ranges for other specialisms or general use and stay unmapped.",
+   "decidedIn": "Optimum Medical.json"
   }
  ],
  "kinds": {

@@ -48,8 +48,8 @@
   },
   {
    "framework": "Operating Theatres Equipment and Related Accessories and Services",
-   "checkedOn": "2026-09-22",
-   "coverageAtCheck": "25.6% (11/43)",
+   "checkedOn": "2026-09-30",
+   "coverageAtCheck": "27.9% (12/43)",
    "suppliersChecked": [
     "Acime UK Ltd",
     "Arjo",
@@ -59,14 +59,13 @@
     "Felgains",
     "Baxter / Hillrom",
     "Howard Wright Europe",
-    "Ideal Medical Solutions",
     "Olympus (KeyMed)",
     "LINET UK",
     "Promed Limited",
     "Ingles Ltd"
    ],
-   "reason": "All 13 remaining suppliers checked. The 12 publishedElsewhere suppliers' captured product ranges are real and already correctly categorised, none of it theatre equipment: Acime (handling:furniture/rehab:stand), Arjo (handling:hoist/mattress/bed, rehab:bath), Boston Scientific/Cook Medical (vascular/endourology stents), Coloplast (wound/ostomy/continence), Felgains (rehab:chair, handling:bed), Baxter/Hillrom (monitoring, ENT), Howard Wright (handling:furniture/bed/mattress), Ideal Medical Solutions/Olympus KeyMed (mis:instruments/energy), LINET UK (handling:bed, rehab:chair), Promed (endourology:laser). Four of the twelve (Boston Scientific, Coloplast, Cook Medical, Baxter/Hillrom, Olympus) are also recorded crawl-refusals for this framework, so re-crawling them is forbidden by the brief's own rule; the other seven have genuine, unrelated multi-division catalogues already crawled with no held theatre-equipment items hiding behind an unmapped division (checked heldBySupplier for Acime/Felgains/Ideal Medical Solutions/Promed — nothing theatre-related). The 13th, Ingles Ltd, is `needDomain`: no domain exists because identity is genuinely unconfirmed (companyNumberNote: 'every Companies House hit is an accountancy or advisory firm, no medical company of this name') — inventing a domain to crawl would violate the never-fuzzy-match rule, and the record is already correctly published as identityUnconfirmed. No permitted route left on any of the 13.",
-   "wouldReopenIf": "Any of the 12 mapped-elsewhere suppliers gets a new/changed crawl result revealing a theatre-equipment range, or Ingles Ltd's identity is confirmed from a primary source (giving it a crawlable domain), or a new supplier is awarded on this framework."
+   "reason": "Re-checked 30/09/2026 after this run found the recorded 22/09 snapshot (25.6%, 11/43) was stale: Ideal Medical Solutions had since moved from publishedElsewhere to fully published (its THOR Electrodes/Bipolar Forceps products were correctly mapped to theatres:electro by a prior, unrelated run), exactly the wouldReopenIf condition below firing -- so it is no longer one of the remaining suppliers and coverage is 12/43, not 11/43. Re-examined the other 11 publishedElsewhere suppliers' held/uncategorised divisions for the same pattern (a genuine theatre item hiding behind an unmapped division) and found nothing: Acime (Treatment Chairs/Resting Chairs -- clinical/rehab chairs, no fit, already held unmapped with reason), Arjo/Felgains/Howard Wright/LINET UK (handling/rehab -- correctly elsewhere), Boston Scientific/Coloplast/Cook Medical/Baxter-Hillrom/Olympus (vascular/wound/ostomy/monitoring/ENT/MIS -- correctly elsewhere, four of these five also recorded crawl-refusals for this framework so re-crawling is forbidden), Promed (Single Use Videoscope/Accessories -- endourology scope/laser accessories, no theatres fit, already held unmapped with reason). Ingles Ltd remains `needDomain`: re-searched 30/09/2026, still no primary source for its identity (Companies House hits are still only accountancy/advisory firms) -- inventing a domain would violate the never-fuzzy-match rule. No permitted route left on any of the 12.",
+   "wouldReopenIf": "Any of the 11 mapped-elsewhere suppliers gets a new/changed crawl result revealing a theatre-equipment range, or Ingles Ltd's identity is confirmed from a primary source (giving it a crawlable domain), or a new supplier is awarded on this framework."
   },
   {
    "framework": "Polymer Aprons",

@@ -43,7 +43,7 @@ the decision each waits on; delete the entry once that decision is made.
 | Orthotics, Podiatry and Immobilisation | orthotics | 63 | 20 | 31.7% | 22 | 30 | STARTED |
 | Minimally Invasive Surgery, Related Equipment and Accessories | mis | 60 | 18 | 30.0% | 9 | 42 | STARTED |
 | Endoscopy, Endourology and Oncology Ablation Consumables and Associated Products | endoscopy, gastro, endourology, oncology | 58 | 19 | 32.8% | 18 | 32 | STARTED |
-| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 18 | 31.6% | 15 | 32 | STARTED |
+| Maternity, Obstetrics, Gynaecology and Sexual Health Products | womens | 57 | 21 | 36.8% | 12 | 32 | STARTED |
 | Urology and Bowel Management | continence | 57 | 19 | 33.3% | 20 | 40 | STARTED |
 | Advanced Wound Care | wound | 56 | 20 | 35.7% | 12 | 42 | STARTED |
 | Digital Diagnostic Solutions | digital | 54 | 11 | 20.4% | 7 | 44 | STARTED · DEFERRED |
