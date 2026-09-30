@@ -135,6 +135,23 @@ def pounds_from_pence(raw):
 
 NPC_RE = re.compile(r"^[A-Z]{3}\d{2,5}$")
 
+# An antimicrobial agent named in a product's own name (after nk()). Used to keep
+# brand families honest: "Exufiber Ag+", "Durafiber Ag", "ActivHeal PHMB" and
+# "Biatain Silicone Ag" all BEGIN with a plain family's name, and until
+# 30/09/2026 the longest-prefix rule filed them under it, so a plain dressing's
+# dossier carried the silver/PHMB variant's Drug Tariff lines (and a silver
+# product could inherit a plain one's NHS-authored measurements). The same
+# fault, in the comparison tool's grouping, credited plain Atrauman with an
+# antimicrobial element on a HARTMANN prospect's own product.
+ANTIMICROBIAL_MARK = re.compile(
+    r"\b(ag|silver|phmb|polyhexanide|polihexanide|iodine|cadexomer|povidone|honey|"
+    r"medihoney|octenidine|chlorhexidine|antimicrobial|antibacterial|dacc)\b")
+
+
+def names_antimicrobial(name):
+    """True when the product's own name names an antimicrobial agent."""
+    return bool(ANTIMICROBIAL_MARK.search(nk(name)))
+
 # Listing-status badges NHS Supply Chain prints above a card's product name.
 # When one lands in a cached row's "name" the row is column-shifted.
 STATUS_BADGES = {"SUSPENDED", "DISCONTINUED", "WITHDRAWN"}
@@ -324,6 +341,14 @@ class Builder:
         for brand in self.families.get(supplier, []):
             b = nk(brand)
             if b and (n == b or n.startswith(b + " ")):
+                # "Exufiber Ag+ dressing" begins with "Exufiber" but is not in
+                # that family: the words after the family name add an
+                # antimicrobial agent the family does not have. Never file a
+                # silver/PHMB/iodine/honey variant under the plain range, or the
+                # plain range under it - no family is better than the wrong one.
+                if (ANTIMICROBIAL_MARK.search(n[len(b):])
+                        and not ANTIMICROBIAL_MARK.search(b)):
+                    continue
                 return brand
         return None
 

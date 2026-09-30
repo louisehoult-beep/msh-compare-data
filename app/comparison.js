@@ -71,6 +71,32 @@
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
   function nk(s){ return String(s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
 
+  /* antimicrobial-line:start
+     ANTIMICROBIAL ELEMENT, READ ONE CATALOGUE LINE AT A TIME (30/09/2026).
+     Found on a HARTMANN prospect's own product: plain Atrauman (a non-medicated
+     ointment wound contact layer, no silver) was shown carrying an
+     "Antimicrobial element", because the seed product was the search term
+     "Atrauman / Atrauman Silicone / Atrauman Ag" and the attribute was read off
+     the text of EVERY line that term returned, Atrauman AG's included. Any
+     grouping, now or later, does the same thing if the product-level attribute
+     is "some line said silver", so the rule lives here, not in the grouping:
+     a line carries the element only on its own NHS Supply Chain name and
+     description, and a PRODUCT carries it only when every one of its lines
+     does (see attrsOf). A partial range is reported as partial, never as yes.
+     Silver counts only where the line is a dressing/catheter-type use of it:
+     the cache also says SILVER for a hearing-aid colour, an instrument-tray
+     lid, an archwire finish and an ECG electrode's silver/silver-chloride
+     sensor, none of which is antimicrobial. The catalogue's own word
+     ("antimicrobial", "anti-infective", "antibacterial") always counts. */
+  function lineAntimicrobial(it, fallbackName){
+    var t = (((it && it.name) || fallbackName || '') + ' | ' + ((it && it.desc) || '')).toLowerCase();
+    if (/anti.?microbial|anti.?infective|antibacterial/.test(t)) return true;
+    if (!/silver alloy|silver.?coated|\bsilver\b/.test(t)) return false;
+    if (/silver\s*\/\s*silver chloride|silver chloride|silver sensor/.test(t)) return false;
+    return /impregnat|alloy|coated|dressing|wound contact|alginate|gelling|catheter|sulfadiazine|ionic|nanocrystal/.test(t);
+  }
+  /* antimicrobial-line:end */
+
   // Baked-in fallback only — overwritten from data/product-types.json once that
   // fetch resolves (see the Promise.all below). Keep this in step with the JSON
   // file's own `types` array; verify.py's check_product_types() fails the
@@ -1532,8 +1558,11 @@
         if (!mv && !tv) continue;
         var mTxt, tTxt;
         if (a.bool){
-          mTxt = mv ? 'Stated' : NOTSTATED;
-          tTxt = tv ? 'Stated' : NOTSTATED;
+          /* A bool attribute may carry a partial-range sentence instead of true
+             (the antimicrobial element: attrsOf). Show that sentence, never
+             a bare "Stated", so a range is never read as the whole product. */
+          mTxt = mv === true ? 'Stated' : (mv ? esc(mv) : NOTSTATED);
+          tTxt = tv === true ? 'Stated' : (tv ? esc(tv) : NOTSTATED);
         } else {
           mTxt = mv ? esc(mv) : NOTSTATED;
           tTxt = tv ? esc(tv) : NOTSTATED;
@@ -1707,7 +1736,12 @@
         else if (/biocide/.test(txt)) a.reg = 'a biocide (not a licensed medicine)';
         if (/latex.?free/.test(txt)) a.latex = 'latex-free';
         else if (/\blatex\b/.test(txt)) a.latex = 'natural rubber latex';
-        if (/silver alloy|silver.?coated|\bsilver\b/.test(txt)) a.silver = true;
+        /* true only when EVERY catalogue line carries it; a range where only
+           some lines do says so in words (lineAntimicrobial, top of file). */
+        var amN = 0;
+        d2.items.forEach(function(it){ if (lineAntimicrobial(it, p.name)) amN++; });
+        if (amN && amN === d2.items.length) a.silver = true;
+        else if (amN) a.silver = 'Stated on ' + amN + ' of ' + d2.items.length + ' catalogue pack lines only';
         if (/blood control/.test(txt)) a.bloodctl = true;
         if (/needle.?free/.test(txt)) a.needlefree = true;
         if (/\btint/.test(txt)) a.tint = true;
@@ -1760,8 +1794,8 @@
           diffPts.push('<strong>Latex:</strong> yours is ' + esc(myA0.latex || 'unstated') + ', theirs is ' + esc(theirA0.latex || 'unstated') + '.'
             + (myA0.latex === 'latex-free' && theirA0.latex === 'natural rubber latex' ? ' <em>Why it matters:</em> latex allergy (patients and staff) makes latex-free the default in many trust policies.' : ''));
         }
-        if (myA0.silver && !theirA0.silver) diffPts.push('<strong>Antimicrobial element:</strong> your entry carries a silver/antimicrobial element theirs does not mention — an infection-prevention angle (confirm against your IFU before quoting clinically).');
-        if (theirA0.silver && !myA0.silver) diffPts.push('<strong>Antimicrobial element:</strong> their entry carries a silver/antimicrobial element yours does not — be ready to answer the infection-prevention question.');
+        if (myA0.silver === true && !theirA0.silver) diffPts.push('<strong>Antimicrobial element:</strong> your entry carries a silver/antimicrobial element theirs does not mention — an infection-prevention angle (confirm against your IFU before quoting clinically).');
+        if (theirA0.silver === true && !myA0.silver) diffPts.push('<strong>Antimicrobial element:</strong> their entry carries a silver/antimicrobial element yours does not — be ready to answer the infection-prevention question.');
         if (myA0.bloodctl && !theirA0.bloodctl) diffPts.push('<strong>Blood control:</strong> your entry specifies blood-control technology theirs does not mention — a sharps/exposure-safety angle (the 2013 Sharps Regulations make exposure reduction a legal duty).');
         if (theirA0.bloodctl && !myA0.bloodctl) diffPts.push('<strong>Blood control:</strong> their entry specifies blood-control technology yours does not — know your answer on exposure safety.');
         if (myA0.needlefree && !theirA0.needlefree) diffPts.push('<strong>Connector:</strong> your entry includes an integrated needle-free connector theirs does not mention — fewer parts to order and fewer connections to break.');
@@ -1833,7 +1867,7 @@
       if (myA0 && theirA0 && myA0.latex === 'latex-free' && theirA0.latex === 'natural rubber latex'){
         reasons.push('<strong>Latex-free:</strong> ' + esc(theirs.name) + ' is natural rubber latex on the catalogue listing; yours is latex-free — latex allergy affects patients <em>and</em> staff, and many trust policies now default to latex-free. A genuine clinical-choice reason.');
       }
-      if (myA0 && myA0.silver && theirA0 && !theirA0.silver){
+      if (myA0 && myA0.silver === true && theirA0 && !theirA0.silver){
         reasons.push('<strong>Antimicrobial element:</strong> your catalogue entry carries a silver/antimicrobial component ' + esc(theirs.name) + '’s entry does not mention — infection prevention is a scored, board-level priority. Confirm the claim wording against your IFU before quoting it clinically.');
       }
       reasons.push('<strong>Sustainability (not checked here):</strong> this comparison has not assessed either product’s sustainability — the catalogue doesn’t carry that data. Carbon and social value are scored at tender (Evergreen from Apr 2026), so if you think your product, packaging or logistics might carry a sustainability benefit for the trust, work it up in the Carbon Saving Calculator on this page.');

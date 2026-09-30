@@ -120,6 +120,56 @@ def test_published_store():
           "only %d dossiers — the speciality filter has narrowed" % len(dossiers))
 
 
+def test_antimicrobial_variant_never_joins_plain_family():
+    """Exufiber Ag+, Durafiber Ag, ActivHeal PHMB, Biatain Silicone Ag, Mepitel
+    Ag, Urgotul Ag, UrgoClean Ag and ActivHeal Aquafiber Ag all begin with a
+    plain range's name. Until 30/09/2026 the longest-prefix rule filed them
+    under it, so the plain range's dossier carried the antimicrobial variant's
+    tariff lines and the variant inherited the plain range's NHS measurements.
+    The same fault in the comparison tool credited plain Atrauman with an
+    antimicrobial element on a HARTMANN prospect's own product."""
+    b = B.Builder("wound")
+    b.note_family("ACME", "Exufiber")
+    b.note_family("ACME", "Atrauman")
+    b.note_family("ACME", "Atrauman AG")
+    b.note_family("ACME", "ActivHeal")
+    check(b.family_of("ACME", "Exufiber Ag+ dressing") is None,
+          "a silver variant was filed under the plain family")
+    check(b.family_of("ACME", "ActivHeal PHMB Foam Non-Adhesive dressing") is None,
+          "a PHMB variant was filed under the plain family")
+    check(b.family_of("ACME", "Exufiber dressing") == "Exufiber",
+          "the plain variant lost its own family")
+    check(b.family_of("ACME", "Atrauman Ag dressing") == "Atrauman AG",
+          "the silver variant did not reach its own silver family")
+    check(b.family_of("ACME", "Atrauman dressing") == "Atrauman",
+          "plain Atrauman did not reach the plain family")
+    check(B.names_antimicrobial("Mepilex Border Ag") and not B.names_antimicrobial("Mepilex Border"),
+          "names_antimicrobial must read Ag as a word, not a letter pair")
+    check(not B.names_antimicrobial("Algivon Plus") and not B.names_antimicrobial("Aglet"),
+          "names_antimicrobial must not fire inside a word")
+
+    # The published stores: no dossier mixes antimicrobial and plain through its
+    # family, in either direction.
+    for spec in ("wound", "respiratory"):
+        path = os.path.join(REPO, "data", "product-dossiers-%s.json" % spec)
+        if not os.path.exists(path):
+            continue
+        for d in json.load(open(path)).get("dossiers") or []:
+            fam = d.get("family") or ""
+            own = B.names_antimicrobial(d["name"]) or B.names_antimicrobial(fam)
+            if fam and not check(
+                    not (B.names_antimicrobial(d["name"]) and not B.names_antimicrobial(fam)),
+                    "%s: an antimicrobial product sits in plain family %r" % (d["key"], fam)):
+                return
+            for field, obs in d["fields"].items():
+                for ob in obs:
+                    if ob.get("scope") == "family" and not own and not check(
+                            not B.names_antimicrobial(ob.get("variant") or ""),
+                            "%s/%s: plain product carries antimicrobial variant %r"
+                            % (d["key"], field, ob.get("variant"))):
+                        return
+
+
 def test_no_silent_merge():
     """Self-test: two same-supplier products whose names share a prefix must
     stay two dossiers, however tempting the prefix looks."""
@@ -208,6 +258,7 @@ def test_tariff_price_is_pounds():
 
 for fn in (test_size_stripping, test_longest_family_wins, test_tariff_price_is_pounds,
            test_published_store, test_no_silent_merge,
+           test_antimicrobial_variant_never_joins_plain_family,
            test_alert_needs_a_product_word, test_shifted_catalogue_row_skipped):
     try:
         fn()

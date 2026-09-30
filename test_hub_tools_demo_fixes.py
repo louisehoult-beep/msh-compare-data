@@ -106,6 +106,115 @@ class ComparisonBrandLines(unittest.TestCase):
         self.assertIn("a.form = 'non-woven fabric'", self.src)
 
 
+LINE_SCRIPT = r"""
+const fs = require('fs');
+const A = process.argv.slice(-2);
+const src = fs.readFileSync(A[0], 'utf8');
+const blk = src.split('/* antimicrobial-line:start')[1].split('/* antimicrobial-line:end */')[0];
+const f = new Function('/*' + blk + '; return lineAntimicrobial;')();
+const lines = JSON.parse(A[1]);
+process.stdout.write(JSON.stringify(lines.map(l => f({name: l[0], desc: l[1]}, ''))));
+"""
+
+# Runs the real comparison.js against the real data files with a stub browser,
+# stops it once PRODUCTS is built, and reports every catalogue-backed product's
+# antimicrobial line count. That is the grouping a member actually sees.
+PRODUCTS_SCRIPT = r"""
+const fs = require('fs'), path = require('path');
+const root = process.argv[process.argv.length - 1];
+let src = fs.readFileSync(path.join(root, 'app/comparison.js'), 'utf8');
+const blk = src.split('/* antimicrobial-line:start')[1].split('/* antimicrobial-line:end */')[0];
+const lineAM = new Function('/*' + blk + '; return lineAntimicrobial;')();
+const marker = '    function kp(prod){';
+if (src.indexOf(marker) === -1) { process.stderr.write('kp() marker gone'); process.exit(3); }
+src = src.replace(marker, "globalThis.__P = PRODUCTS; globalThis.__D = detailFor; throw 'STOP';\n" + marker);
+const anyEl = () => new Proxy(function(){}, {get: (t, k) => k === 'style' ? {} : anyEl(), set: () => true, apply: () => anyEl()});
+globalThis.document = {getElementById: () => ({innerHTML: '', appendChild(){}}), createElement: () => anyEl()};
+globalThis.fetch = (u) => { const rel = u.split('/main/')[1].split('?')[0];
+  return Promise.resolve({json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8')))}); };
+eval(src);
+let waited = 0;
+(function poll(){
+  if (!globalThis.__P) { if ((waited += 100) > 60000) { process.stderr.write('PRODUCTS never built'); process.exit(4); } return setTimeout(poll, 100); }
+  const out = [];
+  for (const p of globalThis.__P) {
+    const d = globalThis.__D(p);
+    if (!d || !d.items || !d.items.length) continue;
+    out.push([p.supplier, p.name, d.items.filter(it => lineAM(it, p.name)).length, d.items.length]);
+  }
+  process.stdout.write(JSON.stringify(out));
+})();
+"""
+
+
+class ComparisonAntimicrobial(unittest.TestCase):
+    """Plain Atrauman was shown with an "Antimicrobial element" on a HARTMANN
+    prospect's own product (30/09/2026): the attribute was read off every line
+    a grouped search term returned, Atrauman AG's silver lines included. The
+    element is now read one catalogue line at a time and a product carries it
+    only when every line does."""
+
+    LINES = [
+        ["Atrauman", "Wound contact layer impregnated polymer dressing 7.5cm x 10cm", False],
+        ["Atrauman silicone", "Wound contact layer silicone dressing two sided 7.5cm x 10cm", False],
+        ["Atrauman AG", "Wound contact layer antimicrobial silver dressing 10cm x 20cm", True],
+        ["Mepilex Ag", "Foam dressing antimicrobial silicone non bordered 15cmx15cm silver impregnated", True],
+        ["Biatain Ag", "Foam dressing antimicrobial non bordered 10cm x 10cm", True],
+        ["Inadine", "Wound contact layer antimicrobial iodine dressing 5cm x 5cm", True],
+        ["Polymem Silver Adhesive", "Polymeric membrane dressing with surfactant Oval 3", True],
+        # "silver" as a colour or a conductor is not an antimicrobial element
+        ["Cochlear", "Cochlear Implant Sound Processor NUCLEUS 8 NEXA UNILATERAL PAEDIATRIC 8CM SILVER", False],
+        ["Aesculap", "Surgical Instrument Accessories Reusable PRIMELINE PRO 3/4 LID SILVER", False],
+        ["HI-Q", "Orthodontic Archwire - Stainless Steel Euro Upper .020in Bgt Silver", False],
+        ["Philips", "ECG Monitoring Electrodes Wet Gel Electrode Disposable High performance snap Silver/silver chloride", False],
+        ["Philips", "ECG Monitoring Electrodes Wet Gel Adult foam round silver sensor 54mm", False],
+    ]
+
+    @classmethod
+    def setUpClass(cls):
+        cls.node = shutil.which("node")
+        cls.src = read("app/comparison.js")
+        if not cls.node:
+            return
+        r = subprocess.run([cls.node, "-e", LINE_SCRIPT, os.path.join(HERE, "app", "comparison.js"),
+                            json.dumps([l[:2] for l in cls.LINES])],
+                           capture_output=True, text=True, timeout=60)
+        if r.returncode != 0:
+            raise RuntimeError("node line run failed: " + r.stderr)
+        cls.line_res = json.loads(r.stdout)
+        r = subprocess.run([cls.node, "-e", PRODUCTS_SCRIPT, HERE],
+                           capture_output=True, text=True, timeout=180)
+        if r.returncode != 0:
+            raise RuntimeError("node product build failed: " + r.stderr)
+        cls.products = {(s, n): (k, of) for s, n, k, of in json.loads(r.stdout)}
+
+    def setUp(self):
+        if not self.node:
+            self.skipTest("node not installed; comparison.js not exercised")
+
+    def test_each_line_read_on_its_own_words(self):
+        for (name, desc, want), got in zip(self.LINES, self.line_res):
+            self.assertEqual(got, want, "%s | %s" % (name, desc))
+
+    def test_plain_atrauman_carries_no_antimicrobial_line(self):
+        k, of = self.products[("Paul Hartmann (HARTMANN)", "Atrauman")]
+        self.assertGreater(of, 0)
+        self.assertEqual(k, 0, "plain Atrauman carries %d antimicrobial lines" % k)
+
+    def test_atrauman_ag_still_does(self):
+        k, of = self.products[("Paul Hartmann (HARTMANN)", "Atrauman AG")]
+        self.assertGreater(of, 0)
+        self.assertEqual(k, of)
+
+    def test_product_level_claim_needs_every_line(self):
+        self.assertIn("if (amN && amN === d2.items.length) a.silver = true;", self.src)
+        self.assertNotIn("\\bsilver\\b/.test(txt)) a.silver = true", self.src)
+        # a comparative claim ("theirs does not mention") only on a whole-product yes
+        self.assertIn("myA0.silver === true && !theirA0.silver", self.src)
+        self.assertIn("theirA0.silver === true && !myA0.silver", self.src)
+        self.assertIn("myA0 && myA0.silver === true && theirA0 && !theirA0.silver", self.src)
+
+
 class CompanyReportDownload(unittest.TestCase):
     def setUp(self):
         self.src = read("app/company-report.js")
