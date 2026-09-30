@@ -453,6 +453,12 @@ def check_icb_watch(doc, today_iso=None):
     elif gen and (as_date(gen) and (as_date(today_iso) - as_date(gen)).days > 10):
         WARN("icb-watch", "data/icb-watch.json was last refreshed %s — icb-watch.yml may have "
                           "stopped running." % gen)
+    for label, when in (("NHS England's list of ICB leaders", doc.get("leadersCheckedOn")),
+                        ("NHS England's merger statement",
+                         (doc.get("nationalStatement") or {}).get("checkedOn"))):
+        if when and as_date(when) and (as_date(today_iso) - as_date(when)).days > 10:
+            WARN("icb-watch", "%s was last read %s; the refresh has been keeping the stored "
+                              "copy (sourceErrors: %s)." % (label, when, doc.get("sourceErrors")))
     st = doc.get("nationalStatement") or {}
     if not str(st.get("url", "")).startswith("https://www.england.nhs.uk/") or not st.get("text"):
         FAIL("icb-watch", "the national merger statement has no NHS England source or no text.")

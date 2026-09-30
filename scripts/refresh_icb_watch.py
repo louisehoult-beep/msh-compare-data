@@ -194,6 +194,17 @@ def ods_icbs():
 LEADER_RE = re.compile(r"^(Interim |Acting )?(Chair|CEO|Chief Executive)\s*:\s*(.+)$", re.I)
 
 
+class SourceUnavailable(Exception):
+    """An NHS England page did not come back in the shape it is parsed in. The
+    run keeps the stored values for that source (never guesses), records why,
+    and verify.py warns once the stored copy is more than 10 days old."""
+
+
+def _diag(raw):
+    title = re.search(r"(?is)<title>(.*?)</title>", raw or "")
+    return "%d bytes, title %r" % (len(raw or ""), (title.group(1).strip()[:80] if title else None))
+
+
 def nhse_leaders():
     raw = fetch(NHSE_LEADERS)
     lines = page_lines(raw)
@@ -206,8 +217,8 @@ def nhse_leaders():
     try:
         start = next(i for i, ln in enumerate(lines) if "Find your local integrated care system" in ln)
     except StopIteration:
-        raise SystemExit("NHS England leaders page changed shape — no 'Find your local integrated "
-                         "care system leadership' heading. Refusing to guess.")
+        raise SourceUnavailable("NHS England leaders page has no 'Find your local integrated care "
+                                "system leadership' heading (%s)." % _diag(raw))
     blocks, cur = {}, None
     for ln in lines[start:]:
         m = re.match(r"^(?:NHS )?(.+?) (?:ICB|Integrated Care Board)$", ln)
@@ -228,14 +239,15 @@ def nhse_leaders():
         elif ln.startswith("Clustering with"):
             blocks[cur]["clusterNote"] = ln.rstrip(".") + "."
     if len(blocks) < 30:
-        raise SystemExit("NHS England leaders page parsed to only %d ICB blocks — refusing."
-                         % len(blocks))
+        raise SourceUnavailable("NHS England leaders page parsed to only %d ICB blocks (%s)."
+                                % (len(blocks), _diag(raw)))
     return blocks, updated
 
 
 # ---------------------------------------------------------------- 3. NHSE statement
 def nhse_statement():
-    lines = page_lines(fetch(NHSE_AREA))
+    raw = fetch(NHSE_AREA)
+    lines = page_lines(raw)
     keep = [ln for ln in lines if not ln.lower().startswith("outlines") and re.search(
         r"new ICBs were established|clustering arrangements|future decisions on ICB footprints|"
         r"clustering ICBs remain separate", ln, re.I)]
@@ -243,8 +255,8 @@ def nhse_statement():
     text = " ".join(keep)
     text = re.sub(r"\s+", " ", text).strip()
     if "Six new ICBs" not in text and "future decisions" not in text:
-        raise SystemExit("NHS England 'integrated care in your area' wording not found — refusing "
-                         "to publish a merger statement that was not read.")
+        raise SourceUnavailable("NHS England 'integrated care in your area' wording not found (%s)."
+                                % _diag(raw))
     return {"url": NHSE_AREA, "text": text,
             "hash": hashlib.sha256(text.encode()).hexdigest()[:16]}
 
@@ -389,13 +401,37 @@ def main():
 
     prev = load_json(OUT, {})
     live, ended = ods_icbs()
-    leaders, leaders_updated = nhse_leaders()
-    statement = nhse_statement()
+    errors = []
+    try:
+        leaders, leaders_updated = nhse_leaders()
+        leaders_checked = iso(today())
+    except (SourceUnavailable, OSError) as e:
+        # Keep what is stored, keyed the same way, so nothing reads as a change.
+        errors.append("leaders: %s" % e)
+        leaders = {norm_icb_name(i["name"]): {"leaders": i.get("leaders", []),
+                                              "clusterNote": i.get("cluster")}
+                   for i in prev.get("icbs", [])}
+        leaders_updated = prev.get("leadersUpdated")
+        leaders_checked = prev.get("leadersCheckedOn")
+        if not leaders:
+            raise SystemExit("No stored leaders to fall back on: %s" % e)
+    try:
+        statement = nhse_statement()
+    except (SourceUnavailable, OSError) as e:
+        errors.append("statement: %s" % e)
+        statement = dict(prev.get("nationalStatement") or {})
+        if not statement.get("text"):
+            raise SystemExit("No stored merger statement to fall back on: %s" % e)
+        statement["_kept"] = True
+    for e in errors:
+        print("icb-watch: kept stored values —", e)
     page_cfg = load_json(PAGES_CFG, {"icbs": {}})
     own = None if args.no_pages else own_site_people(page_cfg)
     curated = load_json(CURATED_CFG, {"events": []}).get("events", [])
     doc, new_count = build(prev, live, ended, leaders, leaders_updated, statement, own,
                            curated, today())
+    doc["leadersCheckedOn"] = leaders_checked
+    doc["sourceErrors"] = errors
     with open(OUT, "w", encoding="utf-8") as fh:
         json.dump(doc, fh, ensure_ascii=False, indent=1)
         fh.write("\n")
@@ -531,7 +567,9 @@ def build(prev, live, ended, leaders, leaders_updated, statement, own, curated, 
         new_events.append(event(tiso, None, "national",
             "NHS England has changed its published statement on ICB mergers",
             "New wording: “%s”" % statement["text"][:600], [NHSE_AREA]))
-    statement["checkedOn"] = tiso
+    kept = statement.pop("_kept", False)
+    if not kept:
+        statement["checkedOn"] = tiso
     statement["firstSeen"] = (old_stmt.get("firstSeen") if old_stmt.get("hash") == statement["hash"]
                               else tiso)
 

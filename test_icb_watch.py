@@ -170,6 +170,42 @@ class ChangeDetection(unittest.TestCase):
         self.assertEqual([e["kind"] for e in d2["events"]], ["national"])
 
 
+class BlockedSource(unittest.TestCase):
+    """30/09/2026: NHS England's leaders page did not parse from the GitHub
+    runner. The run must keep the stored leaders, change nothing, and say why."""
+
+    def test_blocked_leaders_page_keeps_stored_values(self):
+        import json, tempfile
+        base = run({}, D1)
+        base["nationalStatement"]["checkedOn"] = "2026-09-28"
+        tmp = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
+        json.dump(base, tmp); tmp.close()
+        saved = (w.OUT, w.ods_icbs, w.nhse_leaders, w.nhse_statement, w.own_site_people,
+                 w.today, sys.argv)
+        def blocked():
+            raise w.SourceUnavailable("challenge page")
+        try:
+            w.OUT = tmp.name
+            w.ods_icbs = lambda: (live_rows(), [])
+            w.nhse_leaders = blocked
+            w.nhse_statement = blocked
+            w.own_site_people = lambda cfg: {}
+            w.today = lambda: D2
+            sys.argv = ["refresh_icb_watch.py"]
+            w.main()
+            doc = json.load(open(tmp.name))
+        finally:
+            (w.OUT, w.ods_icbs, w.nhse_leaders, w.nhse_statement, w.own_site_people,
+             w.today, sys.argv) = saved
+            os.unlink(tmp.name)
+        self.assertEqual(len(doc["sourceErrors"]), 2)
+        self.assertFalse([e for e in doc["events"] if e["kind"] != "curated"])
+        qop = next(i for i in doc["icbs"] if i["code"] == "QOP")
+        self.assertEqual(qop["leaders"][1]["name"], "Ceo QOP")
+        self.assertEqual(doc["nationalStatement"]["checkedOn"], "2026-09-28")
+        self.assertEqual(doc["clusters"], [["QHL", "QUA"]])
+
+
 class Gate(unittest.TestCase):
     def setUp(self):
         v.fails[:] = []
