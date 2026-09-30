@@ -782,5 +782,121 @@ class InterviewPrepHartmannLabels(unittest.TestCase):
         self.assertFalse([p for p in pr if ";" in p or "Drug Tariff" in p or "Tracheostomy" in p])
 
 
+# ---------------------------------------------------------------------------
+# MoliCare and HARTMANN's other non-wound products typed (30/09/2026). Since
+# 75ac80e split MoliCare into 25 untyped catalogue lines, untyped products
+# passed the Wound care type filter and HARTMANN's continence range showed
+# under Wound care. Bed Mat 5D was typed "bed" and offered hospital beds.
+# ---------------------------------------------------------------------------
+
+SPEC_SCRIPT = r"""
+const fs = require('fs'), path = require('path');
+const root = process.argv[process.argv.length - 1];
+let src = fs.readFileSync(path.join(root, 'app/comparison.js'), 'utf8');
+const marker = '    function refreshList(){';
+if (src.indexOf(marker) === -1) { process.stderr.write('refreshList() marker gone'); process.exit(3); }
+const gw = src.split('\n').filter(l => l.trim().indexOf('var GENERIC_WORDS = ') === 0)[0].trim();
+src = src.replace(marker, gw + "\nglobalThis.__X = {P: PRODUCTS, inSpec: inSpec, SPECMAP: SPECMAP, specExcludes: specExcludes, comp: competitorsOf}; throw 'STOP';\n" + marker);
+const anyEl = () => new Proxy(function(){}, {get: (t, k) => k === 'style' ? {} : (k === 'value' ? '' : anyEl()), set: () => true, apply: () => anyEl()});
+globalThis.document = {getElementById: () => ({innerHTML: '', appendChild(){}}), createElement: () => anyEl()};
+globalThis.fetch = (u) => { const rel = u.split('/main/')[1].split('?')[0];
+  return Promise.resolve({json: () => Promise.resolve(JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8')))}); };
+eval(src);
+let waited = 0;
+(function poll(){
+  if (!globalThis.__X) { if ((waited += 100) > 60000) { process.stderr.write('PRODUCTS never built'); process.exit(4); } return setTimeout(poll, 100); }
+  const X = globalThis.__X, H = 'Paul Hartmann (HARTMANN)';
+  // subset() as the form runs it with a speciality and company picked, no type
+  function shown(spec){
+    const allowed = X.SPECMAP[spec.toLowerCase()] || null;
+    return X.P.filter(p => p.supplier === H && X.inSpec(p, spec)
+      && !(allowed && p.type && allowed.indexOf(p.type) === -1)
+      && !X.specExcludes(spec.toLowerCase(), p)).map(p => [p.name, p.type]);
+  }
+  const mine = X.P.filter(p => p.supplier === H);
+  const bm = mine.filter(p => p.name === 'MoliCare Premium Bed Mat 5D')[0];
+  process.stdout.write(JSON.stringify({
+    types: mine.map(p => [p.name, p.type]),
+    wound: shown('Wound care'),
+    continence: shown('Continence & urology'),
+    bedMatRivals: bm ? X.comp(bm).map(p => [p.name, p.type, p.supplier]) : null
+  }));
+  process.exit(0);
+})();
+"""
+
+
+class HartmannNonWoundTyped(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.node = shutil.which("node")
+        cls.out = None
+        if cls.node:
+            r = subprocess.run([cls.node, "-e", SPEC_SCRIPT, HERE], capture_output=True, text=True, timeout=240)
+            if r.returncode != 0:
+                raise RuntimeError("node speciality run failed: " + r.stderr)
+            cls.out = json.loads(r.stdout)
+
+    def setUp(self):
+        if not self.node:
+            self.skipTest("node not installed; comparison.js not exercised")
+
+    NON_WOUND = re.compile(r"molicare|sicsac|vala|stellisept|sterillium|baktol|dispenser|peha-soft", re.I)
+
+    def test_wound_care_shows_no_continence_or_hygiene(self):
+        bad = [n for n, t in self.out["wound"] if self.NON_WOUND.search(n)]
+        self.assertEqual(bad, [])
+
+    def test_wound_care_keeps_the_wound_range(self):
+        w = self.out["wound"]
+        self.assertEqual(sum(1 for n, t in w if t == "dressing"), 26)
+        names = [n for n, t in w]
+        for n in ("Mullro (tissue gauze and cotton)", "Tamponadebinde (absorbent ribbon gauze)",
+                  "ES Gauze (gauze swabs)", "Omnistrip (sterile skin closure strips)", "Varolast Plus (zinc paste bandage)"):
+            self.assertIn(n, names)
+
+    def test_every_molicare_line_is_typed_from_its_catalogue_description(self):
+        t = dict(self.out["types"])
+        molicare = {n: v for n, v in t.items() if n.startswith("MoliCare")}
+        self.assertEqual(len(molicare), 25)
+        self.assertFalse([n for n, v in molicare.items() if not v])
+        self.assertEqual(t["MoliCare Premium Bed Mat 5D"], "underpad")
+        self.assertEqual(t["MoliCare Premium Elastic 6D"], "all-in-one pad")
+        self.assertEqual(t["MoliCare Premium Slip Extra Plus"], "all-in-one pad")
+        self.assertEqual(t["MoliCare Premium Form 5D"], "shaped pad")
+        self.assertEqual(t["MoliCare Premium Men Pad 4D"], "shaped pad")
+        self.assertEqual(t["MoliCare Rectangular 3D"], "rectangular pad")
+        self.assertEqual(t["MoliCare Premium Mobile 6D"], "pull up pants")
+        self.assertEqual(t["MoliCare Fixpants"], "fixation pants")
+        self.assertEqual(t["HARTMANN hand hygiene dispensers and single-use pumps"], "dispenser")
+        self.assertEqual(t["Baktolin (hand wash)"], "hand wash")
+        self.assertEqual(t["Baktolan (skin care cream)"], "moisturiser")
+        for n in ("SicSac (disposable sick bag)", "Stellisept med (antimicrobial body wash)",
+                  "Vala disposable care range (bibs, towels, washing mitts, sheets)"):
+            self.assertTrue(t[n], n)
+
+    def test_continence_shows_the_molicare_range(self):
+        c = dict(self.out["continence"])
+        self.assertEqual(len([n for n in c if n.startswith("MoliCare")]), 25)
+
+    def test_bed_mat_rivals_are_bed_protection_not_beds(self):
+        r = self.out["bedMatRivals"]
+        self.assertTrue(r)
+        self.assertFalse([x for x in r if x[1] in ("bed", "mattress")])
+        self.assertGreaterEqual(sum(1 for x in r if x[1] == "underpad"), len(r) - 1)
+
+    def test_type_alias_and_override_come_from_the_data_file(self):
+        pt = json.loads(read("data/product-types.json"))
+        self.assertEqual(pt["type_alias"]["bed mat"], "underpad")
+        self.assertEqual(pt["generic_type_override"]["pump"], "dispenser")
+        src = read("app/comparison.js")
+        self.assertIn("if (PT && PT.type_alias) TYPE_ALIAS = PT.type_alias;", src)
+        # the render-scope `var` copies shadowed the JSON-loaded maps
+        body = src.split("function render(index, cfg, seed, nhssc){", 1)[1]
+        self.assertNotIn("var GENERIC_TYPE_OVERRIDE", body)
+        self.assertNotIn("var CANNULA_DISQUALIFIERS", body)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -197,10 +197,13 @@
   // fetch resolves (see the Promise.all below). Keep this in step with the JSON
   // file's own `types` array; verify.py's check_product_types() fails the
   // publish if this literal is ever restored as the tool's SOLE source again.
-  var TYPES = ['antisepsis','antiseptic','chlorhexidine','skin prep','skin disinfect','disinfectant','applicator','swabstick','swab','tourniquet','blood culture','cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','tape','plaster','npwt','negative pressure','wound','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','tracheostomy','tracheal','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','lancet','connector','stopcock','extension set','giving set','iv set','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct scan','x-ray','mammography','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','warming','securement','ostomy','urostomy','stoma','nephrostomy','foley','feeding','enteral','feeding tube','peg tube','slide sheet','glucose','sensor','test strip','electrode','scalpel','blade','forceps','retractor','trocar','clip','clamp','specimen','drainage','chest drain','suction','mask','circuit','cpap','oxygen','nebuliser','filter','lubricant','bouffant','theatre cap','cap theatre','surgical cap','shoe cover','overshoe','coverall','apron','visor','face shield','respirator','scrub','incontinence pad','underpad','commode','bedpan','urinal','nutritional supplement','enteral feed','oral nutrition'];
+  var TYPES = ['antisepsis','antiseptic','chlorhexidine','skin prep','skin disinfect','disinfectant','applicator','swabstick','swab','tourniquet','blood culture','cannula','picc','midline','catheter','iol','intraocular','phaco','hearing aid','cochlear','stent','balloon','guidewire','sheath','mesh','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue','haemostat','sealant','dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','tape','plaster','npwt','negative pressure','wound','glove','gown','drape','wipe','sanitiser','irrigation','ventilator','anaesthesia','laryngoscope','airway','tracheostomy','tracheal','bronchoscope','endoscope','colonoscope','gastroscope','scope','infusion pump','syringe pump','pump','syringe','needle','lancet','connector','stopcock','extension set','giving set','iv set','flush','implant','knee','hip','shoulder','robot','freezer','refrigerator','incubator','analyser','sequencer','defibrillator','monitor','ultrasound','mri','ct scan','x-ray','mammography','bed mat ','bed pad','bed protector','bed','mattress','hoist','sling','wheelchair','cushion','dialyser','dialysis','apheresis','linac','brachytherapy','pacemaker','ablation','tavi','biopsy','warmer','warming','securement','ostomy','urostomy','stoma','nephrostomy','foley','feeding','enteral','feeding tube','peg tube','slide sheet','glucose','sensor','test strip','electrode','scalpel','blade','forceps','retractor','trocar','clip','clamp','specimen','drainage','chest drain','suction','mask','circuit','cpap','oxygen','nebuliser','filter','lubricant','bouffant','theatre cap','cap theatre','surgical cap','shoe cover','overshoe','coverall','apron','visor','face shield','respirator','scrub','incontinence pad','underpad','commode','bedpan','urinal','nutritional supplement','enteral feed','oral nutrition','all-in-one pad','shaped pad','rectangular pad','pull up pants','fixation pants','hand wash ','moisturiser','antimicrobial body wash','sick bag','disposable care'];
   // Also baked-in fallbacks for the same reason — see PTYPESURL note above.
-  var GENERIC_TYPE_OVERRIDE = { catheter: 'cannula', wound: 'dressing', foam: 'dressing', stoma: 'ostomy', iol: 'intraocular', sealant: 'haemostat' };
+  var GENERIC_TYPE_OVERRIDE = { catheter: 'cannula', wound: 'dressing', foam: 'dressing', stoma: 'ostomy', iol: 'intraocular', sealant: 'haemostat', pump: 'dispenser' };
   var CANNULA_DISQUALIFIERS = ['picc', 'central venous', 'central line'];
+  /* One type for one kind of product: a matched keyword on the left is reported
+     as the type on the right (data/product-types.json `type_alias`). */
+  var TYPE_ALIAS = { 'bed mat': 'underpad', 'bed pad': 'underpad', 'bed protector': 'underpad' };
   var KEYPOINTS = {
     'BD — Becton, Dickinson': { 'nexiva': 'Closed IV system — fewer blood exposures/disconnections vs an open cannula', 'chloraprep': 'Licensed medicinal product (UK marketing authorisation) — 2% CHG / 70% IPA sterile applicator, indicated for skin disinfection before invasive procedures' },
     'GAMA Healthcare': { 'hexi-prep': 'Licensed medicine (PL 40867/0002) — sterile 2% CHG / 70% IPA pad; its indication covers invasive procedures NOT requiring a clean-air environment (vascular access focus, per GAMA\u2019s prescribing information)' },
@@ -251,6 +254,7 @@
     if (PT && Array.isArray(PT.types) && PT.types.length) TYPES = PT.types;
     if (PT && PT.generic_type_override) GENERIC_TYPE_OVERRIDE = PT.generic_type_override;
     if (PT && Array.isArray(PT.cannula_disqualifiers) && PT.cannula_disqualifiers.length) CANNULA_DISQUALIFIERS = PT.cannula_disqualifiers;
+    if (PT && PT.type_alias) TYPE_ALIAS = PT.type_alias;
     render(res[0], res[1], res[2], res[3]);
   })
     .catch(function(){ MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;">Comparison tool temporarily unavailable — please try again shortly.</div>'; });
@@ -306,8 +310,11 @@
     // "Comparison tool temporarily unavailable" for every member, every time. Assigning
     // here, before first use, and leaving the later statements as harmless re-assigns
     // next to the documentation they belong with.
-    var GENERIC_TYPE_OVERRIDE = { catheter: 'cannula', wound: 'dressing', foam: 'dressing', stoma: 'ostomy', iol: 'intraocular', sealant: 'haemostat' };
-    var CANNULA_DISQUALIFIERS = ['picc', 'central venous', 'central line'];
+    // 30/09/2026: those two statements were `var` re-declarations, so inside
+    // render() they SHADOWED the module-scope maps that data/product-types.json
+    // overwrites at load: the JSON's generic_type_override and
+    // cannula_disqualifiers never reached a member. The module-scope values
+    // (JSON when fetched, the baked-in literals otherwise) are used as they are.
     // Products verified as NOT catalogue lines (capital equipment, software,
     // medicines-route etc.) — shown honestly instead of a dead-end lookup link.
     var NOTCAT = {}; var ncp = (nhssc && nhssc.notCatalogue) || {};
@@ -508,9 +515,10 @@
     function leadType(desc){
       var d = String(desc || '').toLowerCase().replace(/^\s+/, ''), best = '';
       for (var i = 0; i < TYPES.length; i++){ var t = TYPES[i].trim(); if (t && d.indexOf(t) === 0 && t.length > best.length) best = t; }
-      return best;
+      return aliasType(best);
     }
-    function typeOf(n){ n = (n||'').toLowerCase(); for (var i=0;i<TYPES.length;i++){ if (n.indexOf(TYPES[i]) !== -1) return TYPES[i].trim(); } return ''; }
+    function typeOf(n){ n = (n||'').toLowerCase(); for (var i=0;i<TYPES.length;i++){ if (n.indexOf(TYPES[i]) !== -1) return aliasType(TYPES[i].trim()); } return ''; }
+    function aliasType(t){ return (t && TYPE_ALIAS && typeof TYPE_ALIAS[t] === 'string') ? TYPE_ALIAS[t] : t; }
     // Type from the product name; if the name has no category word, fall back to the
     // real NHS Supply Chain catalogue description (e.g. "Intermittent Catheter…",
     // "IV Cannula…") so cached products still match like-for-like.
@@ -587,8 +595,8 @@
       'wound care': ['dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','npwt','negative pressure','wound','tape','plaster','sealant','swab','skin closure','wound closure'],
       'surgical haemostasis': ['haemostat','sealant','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue'],
       'enteral feeding': ['enteral','feeding','feeding tube','peg tube','syringe','connector'],
-      'patient handling': ['slide sheet','sling','hoist','bed','mattress','cushion','wheelchair'],
-      'continence': ['catheter','ostomy','urostomy','stoma','foley','nephrostomy','drainage'],
+      'patient handling': ['slide sheet','sling','hoist','bed','mattress','cushion','wheelchair','underpad'],
+      'continence': ['catheter','ostomy','urostomy','stoma','foley','nephrostomy','drainage','incontinence pad','all-in-one pad','shaped pad','rectangular pad','pull up pants','fixation pants','underpad'],
       'ophthalmology': ['iol','intraocular','phaco'],
       'diabetes': ['glucose','sensor','test strip','lancet','needle','pump'],
       'surgery / theatres': ['suture','stapler','staple','haemostat','sealant','drape','gown','glove','scalpel','blade','forceps','retractor','trocar','clip','clamp','mesh','skin closure','tissue adhesive','electrode','suction','warming','warmer','scope','endoscope']
