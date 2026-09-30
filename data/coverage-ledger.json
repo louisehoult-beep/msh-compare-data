@@ -13,24 +13,24 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 37152,
-  "differentiator.json held": 50119
+  "differentiator.json published": 37208,
+  "differentiator.json held": 50115
  },
  "counts": {
   "frameworks": 122,
   "done": 0,
-  "started": 49,
+  "started": 51,
   "notStarted": 5,
-  "unmapped": 48,
+  "unmapped": 46,
   "outOfScope": 20,
   "inScope": 102,
-  "supplierNamesUnresolved": 414,
-  "inScopeSuppliersNeedingCrawl": 265,
-  "inScopeSuppliersNeedingDomain": 243,
+  "supplierNamesUnresolved": 412,
+  "inScopeSuppliersNeedingCrawl": 266,
+  "inScopeSuppliersNeedingDomain": 244,
   "suppliersRefused": 537,
   "suppliersRefusedButPublishingElsewhere": 110,
   "suppliersCapturedNothingCounted": 1,
-  "suppliersDuplicateOfCaptured": 2,
+  "suppliersDuplicateOfCaptured": 1,
   "blockedFrameworks": 2,
   "deferredFrameworks": 2
  },
@@ -469,10 +469,6 @@
   ],
   [
    "Stephens Catering Equipment Co Ltd",
-   1
-  ],
-  [
-   "2 San Global",
    1
   ],
   [
@@ -1197,10 +1193,6 @@
   ],
   [
    "Ecohydra Technologies Ltd",
-   1
-  ],
-  [
-   "Babease Limited",
    1
   ],
   [
@@ -10010,6 +10002,171 @@
    "deferred": null
   },
   {
+   "framework": "Hand Hygiene and Associated Products and Services",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/hand-hygiene-and-associated-products-and-services/",
+   "category": "Medical and Surgical Consumables",
+   "ends": "11 June 2027",
+   "suppliersAwarded": 21,
+   "suppliersPublished": 2,
+   "coverage": 9.5,
+   "nhsscCategory": "Medical and Surgical Consumables",
+   "inScope": true,
+   "outOfScopeReason": null,
+   "state": "STARTED",
+   "speciality": [
+    "infection"
+   ],
+   "crawlWorklist": [
+    {
+     "supplier": "Abbliss Ltd",
+     "domain": null
+    },
+    {
+     "supplier": "GDP Compliance Ltd",
+     "domain": null
+    },
+    {
+     "supplier": "SC Johnson Ltd",
+     "domain": null
+    }
+   ],
+   "domainsMissing": [
+    "Abbliss Ltd",
+    "GDP Compliance Ltd",
+    "SC Johnson Ltd"
+   ],
+   "duplicateOfCapturedSupplier": [],
+   "refusedSuppliers": [
+    {
+     "supplier": "Banner Group Limited",
+     "domain": "www.banneruk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Biotechnics Ltd",
+     "domain": "endurocide.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Creed Medical Ltd",
+     "domain": "creedhealth.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Cuxson Gerrard & Company Limited",
+     "domain": "www.cuxsongerrard.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-05",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Fenton Pharmaceuticals Limited",
+     "domain": "fentonpharmaceuticals.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Lyreco UK Limited",
+     "domain": "why.lyreco.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "B. Braun Medical",
+     "domain": "bbraun.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-08",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Diversey",
+     "domain": "solenis.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Essity UK Limited",
+     "domain": "medical.essity.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Paul Hartmann (HARTMANN)",
+     "domain": "hartmann.info",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-26",
+     "bucket": "publishedElsewhere"
+    },
+    {
+     "supplier": "Schulke & Mayr UK Ltd",
+     "domain": "www.schuelke.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-08-31",
+     "bucket": "publishedElsewhere"
+    }
+   ],
+   "route": "NHSSC framework",
+   "catsInScope": [
+    "infection:air",
+    "infection:ppe"
+   ],
+   "actionable": {
+    "unresolvedNames": 3,
+    "publishedElsewhereNeedingCategory": 7,
+    "heldNeedingCategory": 0,
+    "capturedNothingCounted": 0,
+    "duplicateOfCapturedSupplier": 0,
+    "crawlable": 0,
+    "needDomain": 3
+   },
+   "published": [
+    "GAMA Healthcare",
+    "Nine Group International"
+   ],
+   "publishedElsewhere": [
+    "B. Braun Medical",
+    "Diversey",
+    "Ecolab",
+    "Essity UK Limited",
+    "Paul Hartmann (HARTMANN)",
+    "PDI (EMEA)",
+    "Schulke & Mayr UK Ltd"
+   ],
+   "heldOnly": [],
+   "capturedNothingCounted": [],
+   "notCrawled": [
+    "Abbliss Ltd",
+    "GDP Compliance Ltd",
+    "SC Johnson Ltd"
+   ],
+   "refused": [
+    "Banner Group Limited",
+    "Biotechnics Ltd",
+    "Creed Medical Ltd",
+    "Cuxson Gerrard & Company Limited",
+    "Fenton Pharmaceuticals Limited",
+    "Lyreco UK Limited"
+   ],
+   "unknown": [
+    "Alliance Disposables Ltd",
+    "Bioguard Hygiene Solutions",
+    "Ecohydra Technologies Ltd"
+   ],
+   "actionableTotal": 13,
+   "blockedReason": null,
+   "deferred": null
+  },
+  {
    "framework": "Intravenous Cannula and Associated Products",
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/intravenous-cannula-and-associated-products/",
    "category": "Medical and Surgical Consumables",
@@ -11120,8 +11277,8 @@
    "category": "Rehabilitation and Community",
    "ends": "28 February 2028",
    "suppliersAwarded": 18,
-   "suppliersPublished": 6,
-   "coverage": 33.3,
+   "suppliersPublished": 7,
+   "coverage": 38.9,
    "nhsscCategory": "Rehabilitation and Community",
    "inScope": true,
    "outOfScopeReason": null,
@@ -11129,15 +11286,16 @@
    "speciality": [
     "neonatal"
    ],
-   "crawlWorklist": [],
-   "domainsMissing": [],
-   "duplicateOfCapturedSupplier": [
+   "crawlWorklist": [
     {
-     "supplier": "Danone Nutricia Early Life Nutrition",
-     "domain": "nutricia.co.uk",
-     "alreadyCapturedAs": "Nutricia Ltd"
+     "supplier": "Babease Limited",
+     "domain": null
     }
    ],
+   "domainsMissing": [
+    "Babease Limited"
+   ],
+   "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
      "supplier": "Alcado Limited",
@@ -11239,15 +11397,16 @@
     "neonatal:resp"
    ],
    "actionable": {
-    "unresolvedNames": 1,
+    "unresolvedNames": 0,
     "publishedElsewhereNeedingCategory": 0,
-    "heldNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 0
+    "needDomain": 1
    },
    "published": [
+    "Danone Nutricia Early Life Nutrition",
     "GBUK Group",
     "Inspiration Healthcare",
     "Kendal Nutricare",
@@ -11256,11 +11415,11 @@
     "Medicare Colgate Ltd (Sterifeed)"
    ],
    "publishedElsewhere": [],
-   "heldOnly": [
-    "Danone Nutricia Early Life Nutrition"
-   ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
-   "notCrawled": [],
+   "notCrawled": [
+    "Babease Limited"
+   ],
    "refused": [
     "Alcado Limited",
     "Ardo medical Limited",
@@ -11273,10 +11432,8 @@
     "Sharon Services (UK) Ltd",
     "Sinapi Biomedical UK"
    ],
-   "unknown": [
-    "Babease Limited"
-   ],
-   "actionableTotal": 2,
+   "unknown": [],
+   "actionableTotal": 1,
    "blockedReason": null,
    "deferred": null
   },
@@ -12106,6 +12263,142 @@
     "Oncology Systems Ltd (OSL)",
     "Sirtex Medical",
     "Vertec Scientific"
+   ],
+   "unknown": [],
+   "actionableTotal": 3,
+   "blockedReason": null,
+   "deferred": null
+  },
+  {
+   "framework": "Disposable and Washable Continence Care",
+   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
+   "category": "Rehabilitation and Community",
+   "ends": "23 August 2028",
+   "suppliersAwarded": 12,
+   "suppliersPublished": 5,
+   "coverage": 41.7,
+   "nhsscCategory": "Rehabilitation and Community",
+   "inScope": true,
+   "outOfScopeReason": null,
+   "state": "STARTED",
+   "speciality": [
+    "continence"
+   ],
+   "crawlWorklist": [
+    {
+     "supplier": "Forma-Care (UK) Ltd",
+     "domain": null
+    },
+    {
+     "supplier": "Ontex Healthcare UK Ltd",
+     "domain": null
+    },
+    {
+     "supplier": "P&S Healthcare Ltd",
+     "domain": null
+    }
+   ],
+   "domainsMissing": [
+    "Forma-Care (UK) Ltd",
+    "Ontex Healthcare UK Ltd",
+    "P&S Healthcare Ltd"
+   ],
+   "duplicateOfCapturedSupplier": [],
+   "refusedSuppliers": [
+    {
+     "supplier": "Attends Ltd",
+     "domain": "www.attends.co.uk",
+     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Healthcare 25 Ltd",
+     "domain": "healthcare25.co.uk",
+     "reason": "the sitemap's product-path URLs are the site's clinical speciality navigation, not a product list \u2014 all 12 captured names are category headings (Personal Hygiene, Surgical Instruments, Urology, Urogynaecology, PPE, Paediatric Health, Cardiothoracic, Head & Neck Surgery, ENT, Women's Health, General Surgery, Plastic & Cosmetic Surgery) with no product beneath them in the capture, so publishing them would state 12 products where the capture read none; RE-CHECKED 28/09/2026 (^o289): there is no real product path to re-crawl against. The site's own sitemap index (Yoast) carries only post, page, events and category sitemaps; its WordPress REST API exposes no product post type; and every /products/<speciality>/ page is a category page listing product-line headings as text (e.g. /products/urology/: Monopolar Resectoscopes, Bipolar Resectoscopes, Cystoscopy Instruments) with no individual product URLs beneath them. The 12 nav-label rows held under the range key 'Gemini Surgical UK' were therefore removed from supplier-products.json, supplier-product-detail.json and the differentiator category map on 28/09/2026: since 'Gemini Surgical UK' became an alias of Healthcare 25 Ltd (18/09/2026, ^o535) that key matched a live index record, so the failed capture was no longer safely held. The 12 labels are preserved in this refusal. Re-crawl only if the site gains product-level pages.",
+     "checked": "2026-09-28",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Meditrade UK Ltd",
+     "domain": "meditradeuk.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-11",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Sharon Services (UK) Ltd",
+     "domain": "sharonservices.co.uk",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Abena UK Limited",
+     "domain": "www.abena.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Essity UK Limited",
+     "domain": "medical.essity.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
+     "checked": "2026-08-26",
+     "bucket": "published"
+    },
+    {
+     "supplier": "GBUK Group",
+     "domain": null,
+     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
+     "checked": "2026-09-07",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Paul Hartmann (HARTMANN)",
+     "domain": "hartmann.info",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-08-26",
+     "bucket": "published"
+    }
+   ],
+   "route": "NHSSC framework",
+   "catsInScope": [
+    "continence:bowel",
+    "continence:dr",
+    "continence:ic",
+    "continence:pads",
+    "continence:sh"
+   ],
+   "actionable": {
+    "unresolvedNames": 0,
+    "publishedElsewhereNeedingCategory": 0,
+    "heldNeedingCategory": 0,
+    "capturedNothingCounted": 0,
+    "duplicateOfCapturedSupplier": 0,
+    "crawlable": 0,
+    "needDomain": 3
+   },
+   "published": [
+    "Abena UK Limited",
+    "Essity UK Limited",
+    "GBUK Group",
+    "iMEDicare Ltd",
+    "Paul Hartmann (HARTMANN)"
+   ],
+   "publishedElsewhere": [],
+   "heldOnly": [],
+   "capturedNothingCounted": [],
+   "notCrawled": [
+    "Forma-Care (UK) Ltd",
+    "Ontex Healthcare UK Ltd",
+    "P&S Healthcare Ltd"
+   ],
+   "refused": [
+    "Attends Ltd",
+    "Healthcare 25 Ltd",
+    "Meditrade UK Ltd",
+    "Sharon Services (UK) Ltd"
    ],
    "unknown": [],
    "actionableTotal": 3,
@@ -15693,165 +15986,6 @@
    "deferred": null
   },
   {
-   "framework": "Hand Hygiene and Associated Products and Services",
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/hand-hygiene-and-associated-products-and-services/",
-   "category": "Medical and Surgical Consumables",
-   "ends": "11 June 2027",
-   "suppliersAwarded": 21,
-   "suppliersPublished": 0,
-   "coverage": 0.0,
-   "nhsscCategory": "Medical and Surgical Consumables",
-   "inScope": true,
-   "outOfScopeReason": null,
-   "state": "UNMAPPED",
-   "speciality": [],
-   "crawlWorklist": [
-    {
-     "supplier": "Abbliss Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "GDP Compliance Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "SC Johnson Ltd",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Abbliss Ltd",
-    "GDP Compliance Ltd",
-    "SC Johnson Ltd"
-   ],
-   "duplicateOfCapturedSupplier": [],
-   "refusedSuppliers": [
-    {
-     "supplier": "Banner Group Limited",
-     "domain": "www.banneruk.com",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Biotechnics Ltd",
-     "domain": "endurocide.com",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Creed Medical Ltd",
-     "domain": "creedhealth.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-11",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Cuxson Gerrard & Company Limited",
-     "domain": "www.cuxsongerrard.com",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-09-05",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Fenton Pharmaceuticals Limited",
-     "domain": "fentonpharmaceuticals.com",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Lyreco UK Limited",
-     "domain": "why.lyreco.com",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-11",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "B. Braun Medical",
-     "domain": "bbraun.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-08",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Diversey",
-     "domain": "solenis.com",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Essity UK Limited",
-     "domain": "medical.essity.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Paul Hartmann (HARTMANN)",
-     "domain": "hartmann.info",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-26",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Schulke & Mayr UK Ltd",
-     "domain": "www.schuelke.com",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    }
-   ],
-   "route": "no Hub speciality mapped to this framework",
-   "catsInScope": [],
-   "actionable": {
-    "unresolvedNames": 3,
-    "publishedElsewhereNeedingCategory": 9,
-    "heldNeedingCategory": 0,
-    "capturedNothingCounted": 0,
-    "duplicateOfCapturedSupplier": 0,
-    "crawlable": 0,
-    "needDomain": 3
-   },
-   "published": [],
-   "publishedElsewhere": [
-    "B. Braun Medical",
-    "Diversey",
-    "Ecolab",
-    "Essity UK Limited",
-    "GAMA Healthcare",
-    "Nine Group International",
-    "Paul Hartmann (HARTMANN)",
-    "PDI (EMEA)",
-    "Schulke & Mayr UK Ltd"
-   ],
-   "heldOnly": [],
-   "capturedNothingCounted": [],
-   "notCrawled": [
-    "Abbliss Ltd",
-    "GDP Compliance Ltd",
-    "SC Johnson Ltd"
-   ],
-   "refused": [
-    "Banner Group Limited",
-    "Biotechnics Ltd",
-    "Creed Medical Ltd",
-    "Cuxson Gerrard & Company Limited",
-    "Fenton Pharmaceuticals Limited",
-    "Lyreco UK Limited"
-   ],
-   "unknown": [
-    "Alliance Disposables Ltd",
-    "Bioguard Hygiene Solutions",
-    "Ecohydra Technologies Ltd"
-   ],
-   "actionableTotal": 15,
-   "blockedReason": null,
-   "deferred": null
-  },
-  {
    "framework": "Surgical Mesh",
    "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/surgical-mesh/",
    "category": "Medical and Surgical Consumables",
@@ -17198,134 +17332,6 @@
     "Nuvik UK Ltd"
    ],
    "actionableTotal": 9,
-   "blockedReason": null,
-   "deferred": null
-  },
-  {
-   "framework": "Disposable and Washable Continence Care",
-   "url": "https://www.supplychain.nhs.uk/product-information/contract-launch-brief/disposable-and-washable-continence-care-and-associated-products/",
-   "category": "Rehabilitation and Community",
-   "ends": "23 August 2028",
-   "suppliersAwarded": 12,
-   "suppliersPublished": 0,
-   "coverage": 0.0,
-   "nhsscCategory": "Rehabilitation and Community",
-   "inScope": true,
-   "outOfScopeReason": null,
-   "state": "UNMAPPED",
-   "speciality": [],
-   "crawlWorklist": [
-    {
-     "supplier": "Forma-Care (UK) Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "Ontex Healthcare UK Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "P&S Healthcare Ltd",
-     "domain": null
-    }
-   ],
-   "domainsMissing": [
-    "Forma-Care (UK) Ltd",
-    "Ontex Healthcare UK Ltd",
-    "P&S Healthcare Ltd"
-   ],
-   "duplicateOfCapturedSupplier": [],
-   "refusedSuppliers": [
-    {
-     "supplier": "Attends Ltd",
-     "domain": "www.attends.co.uk",
-     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); not a readable WooCommerce Store API (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
-     "checked": "2026-08-31",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Healthcare 25 Ltd",
-     "domain": "healthcare25.co.uk",
-     "reason": "the sitemap's product-path URLs are the site's clinical speciality navigation, not a product list \u2014 all 12 captured names are category headings (Personal Hygiene, Surgical Instruments, Urology, Urogynaecology, PPE, Paediatric Health, Cardiothoracic, Head & Neck Surgery, ENT, Women's Health, General Surgery, Plastic & Cosmetic Surgery) with no product beneath them in the capture, so publishing them would state 12 products where the capture read none; RE-CHECKED 28/09/2026 (^o289): there is no real product path to re-crawl against. The site's own sitemap index (Yoast) carries only post, page, events and category sitemaps; its WordPress REST API exposes no product post type; and every /products/<speciality>/ page is a category page listing product-line headings as text (e.g. /products/urology/: Monopolar Resectoscopes, Bipolar Resectoscopes, Cystoscopy Instruments) with no individual product URLs beneath them. The 12 nav-label rows held under the range key 'Gemini Surgical UK' were therefore removed from supplier-products.json, supplier-product-detail.json and the differentiator category map on 28/09/2026: since 'Gemini Surgical UK' became an alias of Healthcare 25 Ltd (18/09/2026, ^o535) that key matched a live index record, so the failed capture was no longer safely held. The 12 labels are preserved in this refusal. Re-crawl only if the site gains product-level pages.",
-     "checked": "2026-09-28",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Meditrade UK Ltd",
-     "domain": "meditradeuk.com",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; sitemap URLs did not resolve into product names; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-09-11",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Sharon Services (UK) Ltd",
-     "domain": "sharonservices.co.uk",
-     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "refused"
-    },
-    {
-     "supplier": "Abena UK Limited",
-     "domain": "www.abena.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Essity UK Limited",
-     "domain": "medical.essity.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the sitemap carries 0 product URLs, too few to call a catalogue",
-     "checked": "2026-08-26",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "GBUK Group",
-     "domain": null,
-     "reason": "stub record pending a merge \u2014 do not crawl. Identity IS settled: Find a Tender notice 014652-2023, the same reference NHS Supply Chain cites for Polymer Aprons, names the contractor \"GBUK Ltd, Selby, United Kingdom\" (https://www.find-tender.service.gov.uk/Notice/014652-2023). \"GBUK Ltd\" is already an alias on the Hub's separate 'GBUK Group' record, which publishes 395 products crawled from gbukgroup.com. Crawling this stub would file that same catalogue a second time under a duplicate supplier name and count it twice in the coverage ledger. The outstanding step is the merge of this stub's two framework awards into GBUK Group \u2014 an identity decision reserved for Lou, recorded as OUTSTANDING ^o333 (07/09/2026) \u2014 not a crawl. Note gbukgroup.com returns 0 results for \"apron\" and carries no PPE category, so a crawl would not reach the awarded range in any case.",
-     "checked": "2026-09-07",
-     "bucket": "publishedElsewhere"
-    },
-    {
-     "supplier": "Paul Hartmann (HARTMANN)",
-     "domain": "hartmann.info",
-     "reason": "robots.txt disallows automated reading of this site",
-     "checked": "2026-08-26",
-     "bucket": "publishedElsewhere"
-    }
-   ],
-   "route": "no Hub speciality mapped to this framework",
-   "catsInScope": [],
-   "actionable": {
-    "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 5,
-    "heldNeedingCategory": 0,
-    "capturedNothingCounted": 0,
-    "duplicateOfCapturedSupplier": 0,
-    "crawlable": 0,
-    "needDomain": 3
-   },
-   "published": [],
-   "publishedElsewhere": [
-    "Abena UK Limited",
-    "Essity UK Limited",
-    "GBUK Group",
-    "iMEDicare Ltd",
-    "Paul Hartmann (HARTMANN)"
-   ],
-   "heldOnly": [],
-   "capturedNothingCounted": [],
-   "notCrawled": [
-    "Forma-Care (UK) Ltd",
-    "Ontex Healthcare UK Ltd",
-    "P&S Healthcare Ltd"
-   ],
-   "refused": [
-    "Attends Ltd",
-    "Healthcare 25 Ltd",
-    "Meditrade UK Ltd",
-    "Sharon Services (UK) Ltd"
-   ],
-   "unknown": [],
-   "actionableTotal": 8,
    "blockedReason": null,
    "deferred": null
   },
@@ -19666,6 +19672,13 @@
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
+     "supplier": "2San Global",
+     "domain": "2san.com",
+     "reason": "the site's WordPress API could not be read (Expecting value: line 1 column 1 (char 0)); the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-08-28",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Arrow County Supplies",
      "domain": "arrowcounty.com",
      "reason": "robots.txt disallows automated reading of this site",
@@ -19744,7 +19757,7 @@
     "facilities:washroom"
    ],
    "actionable": {
-    "unresolvedNames": 41,
+    "unresolvedNames": 40,
     "publishedElsewhereNeedingCategory": 2,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
@@ -19771,6 +19784,7 @@
     "Parc Global Supplies"
    ],
    "refused": [
+    "2San Global",
     "Arrow County Supplies",
     "Banner Group Limited",
     "Bates Office Services Ltd",
@@ -19782,7 +19796,6 @@
     "Premium Wipes & Textiles Ltd"
    ],
    "unknown": [
-    "2 San Global",
     "Ace Janitorial Supplies Ltd",
     "Alliance Disposables Ltd",
     "Bauer Consultants Ltd",
@@ -19824,7 +19837,7 @@
     "Tennant UK",
     "Thomas Stoner Supplies Ltd"
    ],
-   "actionableTotal": 44,
+   "actionableTotal": 43,
    "blockedReason": null,
    "deferred": null
   },
@@ -20538,13 +20551,7 @@
    "speciality": [],
    "crawlWorklist": [],
    "domainsMissing": [],
-   "duplicateOfCapturedSupplier": [
-    {
-     "supplier": "Danone Nutricia Early Life Nutrition",
-     "domain": "nutricia.co.uk",
-     "alreadyCapturedAs": "Nutricia Ltd"
-    }
-   ],
+   "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
     {
      "supplier": "Nestle Health Science UK",
@@ -20558,18 +20565,18 @@
    "catsInScope": [],
    "actionable": {
     "unresolvedNames": 25,
-    "publishedElsewhereNeedingCategory": 0,
-    "heldNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 1,
+    "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
     "needDomain": 0
    },
    "published": [],
-   "publishedElsewhere": [],
-   "heldOnly": [
+   "publishedElsewhere": [
     "Danone Nutricia Early Life Nutrition"
    ],
+   "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [],
    "refused": [
