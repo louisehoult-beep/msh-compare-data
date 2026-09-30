@@ -561,7 +561,13 @@
       if (sd.leadership) s.leadership = sd.leadership;
       if (sd.partnerships && sd.partnerships.length) s.partnerships = sd.partnerships;
       if (sd.frameworkTiming) s.frameworkTiming = sd.frameworkTiming;
-      if (sd.background && sd.background.length) s.background = sd.background;
+      /* Background (30/09/2026): the seed is authoritative even when it holds
+         none, so an entry moved out of the seed stops rendering at once rather
+         than surviving in a stale supplier-index.json copy until the nightly
+         rebuild. Curator record-keeping (verification passes, attribution
+         corrections, re-tagging, merges) lives in `_curatorNotes`, which this
+         merge never copies and no panel reads. */
+      s.background = (sd.background && sd.background.length) ? sd.background : [];
     });
     var have = {};
     suppliers.forEach(function (s) { have[s.name] = 1; });

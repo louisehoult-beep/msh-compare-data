@@ -287,6 +287,17 @@ def seed_supplier_plus(**fields):
     json.dump(d, open("data/supplier-seed.json", "w"))
 
 
+@case("curator record-keeping published as company background")
+def _(tmp):
+    # THE 30/09/2026 ERROR. GBUK's Company background panel showed members a
+    # "Product range verification" note: the report describing its own
+    # research pass. That belongs in _curatorNotes, which nothing renders.
+    seed_supplier_plus(background=[
+        {"heading": "Product range verification",
+         "text": "Full product-list spot-check came back accurate."}])
+    return "curator record-keeping"
+
+
 @case("a career claim about a named person with no source URL")
 def _(tmp):
     # The 24/07/2026 class of error with different names in it: a plausible,

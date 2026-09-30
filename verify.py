@@ -1555,6 +1555,16 @@ def check_migrated_prose_not_in_alerts(seed, index):
                      "(root rule 18)." % (s.get("name") or "(unnamed)", text[:90]))
 
 
+CURATOR_HEADINGS = {"product range verification", "product attribution correction",
+                    "speciality re-tagging", "duplicate and record merge"}
+CURATOR_HEADING_PREFIXES = ("duplicate merged", "third record folded", "awarded name ")
+
+
+def _is_curator_heading(h):
+    h = (h or "").strip().lower()
+    return h in CURATOR_HEADINGS or h.startswith(CURATOR_HEADING_PREFIXES)
+
+
 def check_seed_people_and_partners(seed):
     suppliers = seed.get("suppliers") if isinstance(seed, dict) else seed
     if isinstance(suppliers, dict):
@@ -1575,6 +1585,15 @@ def check_seed_people_and_partners(seed):
         for b in (s.get("background") or []):
             if not (b.get("text") or "").strip():
                 FAIL("seed-people", "%s: a background entry carries no text." % who)
+            # 30/09/2026: background renders to members. A note about OUR
+            # record-keeping (a verification pass, an attribution correction, a
+            # re-tag, a merge) is not company background: GBUK's "Product range
+            # verification" note was read by members as the report talking to
+            # itself. Its home is `_curatorNotes`, which nothing renders.
+            if _is_curator_heading(b.get("heading")):
+                FAIL("seed-people", "%s: background entry %r is curator record-keeping, not "
+                                    "company background; move it to _curatorNotes."
+                                    % (who, (b.get("heading") or "")[:60]))
             u = (b.get("url") or "").strip()
             if u and not u.startswith("https://"):
                 FAIL("seed-people", "%s: background entry %r cites a non-HTTPS source (%r)."

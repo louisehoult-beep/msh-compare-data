@@ -478,6 +478,11 @@ def free_text(supplier):
         parts.append(alert if isinstance(alert, str) else json.dumps(alert))
     for note in supplier.get("background", []) or []:
         parts.append(note if isinstance(note, str) else json.dumps(note))
+    # 30/09/2026: curator record-keeping moved out of background[] into
+    # `_curatorNotes` (not rendered). The same lesson as 121ed36: the company
+    # numbers typed into those notes must keep confirming the match.
+    for note in supplier.get("_curatorNotes", []) or []:
+        parts.append(note if isinstance(note, str) else json.dumps(note))
     parts.append(supplier.get("note") or "")
     return " ".join(parts)
 

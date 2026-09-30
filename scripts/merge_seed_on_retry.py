@@ -70,6 +70,7 @@ CURATED_FIELDS = {
     "aliases",
     "note",
     "background",
+    "_curatorNotes",
     "alerts",
     "companyNumberProof",
 }
