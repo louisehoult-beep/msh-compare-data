@@ -28,14 +28,14 @@
     }
    },
    "awareness": {
-    "published": 40,
+    "published": 49,
     "omitted": {
      "announced_year_not_stated": 2,
      "rule_unusable": 0
     }
    },
    "events": {
-    "published": 65,
+    "published": 72,
     "omitted": {
      "published_as_a_body": 40,
      "published_as_undated": 5,
@@ -44,12 +44,12 @@
     }
    },
    "contracts": {
-    "published": 85,
+    "published": 88,
     "omitted": {
-     "no_period_end": 1761,
-     "past": 61,
-     "below_value_floor": 61,
-     "no_speciality": 4
+     "no_period_end": 1787,
+     "past": 4554,
+     "below_value_floor": 494,
+     "no_speciality": 831
     }
    },
    "deadlines": {
@@ -77,13 +77,7 @@
    "contract-expiry",
    "action-deadline"
   ],
-  "undatedRule": "`bodies` and `undatedEvents` carry no date and are NOT part of the dated index. They are published so that a body or a recurring conference the Hub knows about is never silently dropped for the one reason it can never have - a date the owner has not stated.",
-  "lastPruned": "2026-09-30",
-  "lastPrunedCounts": {
-   "dropped": 1,
-   "flaggedPast": 0,
-   "remaining": 306
-  }
+  "undatedRule": "`bodies` and `undatedEvents` carry no date and are NOT part of the dated index. They are published so that a body or a recurring conference the Hub knows about is never silently dropped for the one reason it can never have - a date the owner has not stated."
  },
  "specialities": [
   {
@@ -358,6 +352,30 @@
    "source": "https://www.organdonation.nhs.uk/get-involved/organ-donation-campaigns/organ-donation-week/",
    "checked": "2026-09-28",
    "reason": "The owner's page states only the 2026 dates (\"Monday 21 to Sunday 27 September\"), re-read 28/09/2026, and that week has now passed (ended 27/09/2026). No 2027 date is announced on the page and no rule for setting the date (e.g. a fixed week number) is stated, so a future occurrence cannot be published from this source. Re-read the page once NHS Blood and Transplant announce the next date."
+  },
+  {
+   "id": "eczema-awareness-week",
+   "name": "Eczema Awareness Week",
+   "owner": "Eczema UK (formerly the National Eczema Society)",
+   "source": "https://www.eczema.org.uk/campaigns/eczema-awareness-week",
+   "checked": "2026-09-30",
+   "reason": "The owner's page states only the 2026 week ('Eczema Awareness Week - 12-19 September'), which has passed, and publishes no rule that sets the date. Re-read the page once Eczema UK announces 2027."
+  },
+  {
+   "id": "sun-awareness-week",
+   "name": "Sun Awareness Week",
+   "owner": "British Association of Dermatologists (BAD)",
+   "source": "https://www.skinhealthinfo.org.uk/sun-awareness/",
+   "checked": "2026-09-30",
+   "reason": "BAD's own page states only 'Sun Awareness Week 2026 will be from 11 May to 17 May', which has passed. The 2027 dates circulating on awareness-day directories are not on BAD's page. Re-read once BAD announces 2027."
+  },
+  {
+   "id": "hidradenitis-suppurativa-awareness-week",
+   "name": "Hidradenitis Suppurativa (HS) Awareness Week",
+   "owner": "Hidradenitis Suppurativa Foundation (US)",
+   "source": "https://www.hs-foundation.org/events",
+   "checked": "2026-09-30",
+   "reason": "No owner page states the dates. The HS Foundation's events page does not list the week, and the only dated statements found were third-party calendars and company social posts, which are not the owner."
   }
  ],
  "eventGaps": [
@@ -443,6 +461,76 @@
   }
  ],
  "entries": [
+  {
+   "id": "ev-hett-2026",
+   "type": "event",
+   "title": "HETT Show 2026",
+   "date": "2026-09-29",
+   "endDate": "2026-09-30",
+   "past": false,
+   "location": "ExCeL London",
+   "audience": "Digital health / NHS technology",
+   "owner": null,
+   "source": "https://www.hettshow.co.uk/",
+   "verified": "2026-07",
+   "rule": "Conference and exhibition dates as published by the organiser.",
+   "specialities": [
+    "digital-and-medical-it"
+   ],
+   "links": [
+    {
+     "label": "Digital and Medical IT",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/digital-and-medical-it/",
+     "kind": "hub"
+    },
+    {
+     "label": "The Calendar",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/calendar/",
+     "kind": "hub"
+    },
+    {
+     "label": "Event site",
+     "url": "https://www.hettshow.co.uk/",
+     "kind": "source"
+    }
+   ],
+   "note": "ExCeL London. Digital health / NHS technology"
+  },
+  {
+   "id": "ev-eadv-congress-2026",
+   "type": "event",
+   "title": "35th European Academy of Dermatology and Venereology (EADV) Congress 2026",
+   "date": "2026-09-30",
+   "endDate": "2026-10-03",
+   "past": false,
+   "location": "Austria Center Vienna, Austria",
+   "audience": "Dermatology and venereology",
+   "owner": "European Academy of Dermatology and Venereology (EADV)",
+   "source": "https://eadv.org/congress/",
+   "verified": "2026-09-30",
+   "rule": "Conference and exhibition dates as published by the organiser.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "The Calendar",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/calendar/",
+     "kind": "hub"
+    },
+    {
+     "label": "Event site",
+     "url": "https://eadv.org/congress/",
+     "kind": "source"
+    }
+   ],
+   "note": "Austria Center Vienna, Austria. Dermatology and venereology"
+  },
   {
    "id": "ct-r-service-gov-uk-notice-e1fc5e53-1b31-4aaf-8743-30c12227be2d",
    "type": "contract-expiry",
@@ -1014,6 +1102,41 @@
    "note": "Queen Elizabeth II Conference Centre, London. Neurosurgery, neurology, neuroradiology, neuro-anaesthesia and neuro-intensive care"
   },
   {
+   "id": "ev-bdng-annual-conference-2026",
+   "type": "event",
+   "title": "British Dermatological Nursing Group (BDNG) 35th Annual Conference",
+   "date": "2026-10-13",
+   "endDate": "2026-10-15",
+   "past": false,
+   "location": "Harrogate Convention Centre",
+   "audience": "Dermatology nursing",
+   "owner": "British Dermatological Nursing Group (BDNG)",
+   "source": "https://bdng.org.uk/annual-conference/",
+   "verified": "2026-09-30",
+   "rule": "Conference and exhibition dates as published by the organiser.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "The Calendar",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/calendar/",
+     "kind": "hub"
+    },
+    {
+     "label": "Event site",
+     "url": "https://bdng.org.uk/annual-conference/",
+     "kind": "source"
+    }
+   ],
+   "note": "Harrogate Convention Centre. Dermatology nursing"
+  },
+  {
    "id": "ev-healthcare-estates-2026",
    "type": "event",
    "title": "Healthcare Estates 2026 (IHEEM)",
@@ -1293,6 +1416,36 @@
     }
    ],
    "note": "Scottish Event Campus (SEC), Glasgow. Public sector procurement"
+  },
+  {
+   "id": "aw-world-psoriasis-day-2026",
+   "type": "awareness",
+   "title": "World Psoriasis Day",
+   "date": "2026-10-29",
+   "endDate": null,
+   "past": false,
+   "owner": "International Federation of Psoriasis Associations (IFPA)",
+   "source": "https://www.ifpa-pso.com/global-actions-overview/world-psoriasis-day",
+   "sourceQuote": "World Psoriasis Day has been celebrated on October 29th for more than a decade",
+   "verified": "2026-09-30",
+   "dateRule": "fixed",
+   "rule": "The owner states a fixed calendar date. Projected to each year from that date alone.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "International Federation of Psoriasis Associations (IFPA) (owner)",
+     "url": "https://www.ifpa-pso.com/global-actions-overview/world-psoriasis-day",
+     "kind": "source"
+    }
+   ],
+   "note": "In 2026 Psoriasis UK's Psoriasis Awareness Week runs from this day to 4 November. Dermatology and rheumatology (psoriatic arthritis) services are focused on psoriasis; a good window for phototherapy, topical and biologic-pathway conversations."
   },
   {
    "id": "ev-antt-conference-2026",
@@ -2716,6 +2869,41 @@
    "note": "Etihad Stadium, Ashton New Road, Manchester M11 3FF. Adult and paediatric bladder and bowel professionals"
   },
   {
+   "id": "ev-pcds-annual-conference-2027",
+   "type": "event",
+   "title": "Primary Care Dermatology Society (PCDS) Annual Conference 2027",
+   "date": "2027-03-12",
+   "endDate": "2027-03-13",
+   "past": false,
+   "location": "Harrogate",
+   "audience": "GPs and primary care dermatology",
+   "owner": "Primary Care Dermatology Society (PCDS)",
+   "source": "https://app.glueup.com/event/pcds-annual-conference-2027-173538/",
+   "verified": "2026-09-30",
+   "rule": "Conference and exhibition dates as published by the organiser.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "The Calendar",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/calendar/",
+     "kind": "hub"
+    },
+    {
+     "label": "Event site",
+     "url": "https://app.glueup.com/event/pcds-annual-conference-2027-173538/",
+     "kind": "source"
+    }
+   ],
+   "note": "Harrogate. GPs and primary care dermatology"
+  },
+  {
    "id": "aw-nutrition-and-hydration-week-2027",
    "type": "awareness",
    "title": "Nutrition and Hydration Week",
@@ -2890,6 +3078,41 @@
     }
    ],
    "note": "United Lincolnshire Teaching Hospitals NHS Trust awarded to Medtronic Limited. Expiry is the re-tender window."
+  },
+  {
+   "id": "ev-bsds-annual-surgery-workshop-2027",
+   "type": "event",
+   "title": "British Society for Dermatological Surgery (BSDS) 43rd Annual Surgery Workshop",
+   "date": "2027-03-22",
+   "endDate": "2027-03-24",
+   "past": false,
+   "location": "Bristol Anatomy Centre/Vesalius Training Centre, University of Bristol",
+   "audience": "Dermatological and skin surgery",
+   "owner": "British Society for Dermatological Surgery (BSDS)",
+   "source": "https://bsds.org.uk/events/41th-annual-surgery-workshop-2/",
+   "verified": "2026-09-30",
+   "rule": "Conference and exhibition dates as published by the organiser.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "The Calendar",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/calendar/",
+     "kind": "hub"
+    },
+    {
+     "label": "Event site",
+     "url": "https://bsds.org.uk/events/41th-annual-surgery-workshop-2/",
+     "kind": "source"
+    }
+   ],
+   "note": "Bristol Anatomy Centre/Vesalius Training Centre, University of Bristol. Dermatological and skin surgery"
   },
   {
    "id": "ev-naidex-2027",
@@ -3263,6 +3486,41 @@
     }
    ],
    "note": "Expiry date. Note it and work backwards."
+  },
+  {
+   "id": "ev-bsid-annual-meeting-2027",
+   "type": "event",
+   "title": "British Society for Investigative Dermatology (BSID) Annual Meeting 2027",
+   "date": "2027-04-05",
+   "endDate": "2027-04-06",
+   "past": false,
+   "location": "York",
+   "audience": "Dermatology research",
+   "owner": "British Society for Investigative Dermatology (BSID)",
+   "source": "https://www.bsid.org.uk/bsid-annual-meeting/",
+   "verified": "2026-09-30",
+   "rule": "Conference and exhibition dates as published by the organiser.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "The Calendar",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/calendar/",
+     "kind": "hub"
+    },
+    {
+     "label": "Event site",
+     "url": "https://www.bsid.org.uk/bsid-annual-meeting/",
+     "kind": "source"
+    }
+   ],
+   "note": "York. Dermatology research"
   },
   {
    "id": "aw-world-health-day-2027",
@@ -3689,6 +3947,36 @@
    "note": "Expiry date. Note it and work backwards."
   },
   {
+   "id": "aw-skin-cancer-awareness-month-2027",
+   "type": "awareness",
+   "title": "Skin Cancer Awareness Month",
+   "date": "2027-05-01",
+   "endDate": "2027-05-31",
+   "past": false,
+   "owner": "The Skin Cancer Foundation",
+   "source": "https://www.skincancer.org/get-involved/skin-cancer-awareness-month/",
+   "sourceQuote": "May Is Skin Cancer Awareness Month!",
+   "verified": "2026-09-30",
+   "dateRule": "fixed",
+   "rule": "The owner states a fixed calendar date. Projected to each year from that date alone.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "The Skin Cancer Foundation (owner)",
+     "url": "https://www.skincancer.org/get-involved/skin-cancer-awareness-month/",
+     "kind": "source"
+    }
+   ],
+   "note": "A US-led month that UK dermatology and skin cancer services also use. Skin cancer detection, dermoscopy and sun-protection education fit; the British Association of Dermatologists (BAD) runs its own Sun Awareness Week in May, but has not yet published the 2027 dates."
+  },
+  {
    "id": "ev-convenzis-endoscopy360-2027-the-nhs-endoscopy-conf",
    "type": "event",
    "title": "Endoscopy360 2027: The NHS Endoscopy Conference",
@@ -3807,6 +4095,41 @@
    "note": "Expiry date. Note it and work backwards."
   },
   {
+   "id": "ev-ids-world-congress-dermoscopy-2027",
+   "type": "event",
+   "title": "7th World Congress of the International Dermoscopy Society (IDS)",
+   "date": "2027-05-12",
+   "endDate": "2027-05-15",
+   "past": false,
+   "location": "Lyon, France",
+   "audience": "Dermoscopy and skin cancer detection",
+   "owner": "International Dermoscopy Society (IDS)",
+   "source": "https://dermoscopy-ids.org/event/7th-world-congress-of-dermoscopy-2027/",
+   "verified": "2026-09-30",
+   "rule": "Conference and exhibition dates as published by the organiser.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "The Calendar",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/calendar/",
+     "kind": "hub"
+    },
+    {
+     "label": "Event site",
+     "url": "https://dermoscopy-ids.org/event/7th-world-congress-of-dermoscopy-2027/",
+     "kind": "source"
+    }
+   ],
+   "note": "Lyon, France. Dermoscopy and skin cancer detection"
+  },
+  {
    "id": "ev-aca-conf",
    "type": "event",
    "title": "ACP Annual Conference and Networking Exhibition",
@@ -3840,6 +4163,41 @@
     }
    ],
    "note": "All Nations Centre, Cardiff. Continence"
+  },
+  {
+   "id": "ev-eadv-symposium-2027",
+   "type": "event",
+   "title": "European Academy of Dermatology and Venereology (EADV) Symposium 2027",
+   "date": "2027-05-20",
+   "endDate": "2027-05-22",
+   "past": false,
+   "location": "Messe Dresden, Germany",
+   "audience": "Dermatology and venereology",
+   "owner": "European Academy of Dermatology and Venereology (EADV)",
+   "source": "https://eadv.org/symposium/",
+   "verified": "2026-09-30",
+   "rule": "Conference and exhibition dates as published by the organiser.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "The Calendar",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/calendar/",
+     "kind": "hub"
+    },
+    {
+     "label": "Event site",
+     "url": "https://eadv.org/symposium/",
+     "kind": "source"
+    }
+   ],
+   "note": "Messe Dresden, Germany. Dermatology and venereology"
   },
   {
    "id": "ev-ewma",
@@ -4671,6 +5029,36 @@
    "note": "Coventry Building Society Arena. Clinical engineering / medical devices"
   },
   {
+   "id": "aw-world-vitiligo-day-2027",
+   "type": "awareness",
+   "title": "World Vitiligo Day",
+   "date": "2027-06-25",
+   "endDate": null,
+   "past": false,
+   "owner": "Vitiligo Research Foundation (VR Foundation)",
+   "source": "https://vrfoundation.org/wvd",
+   "sourceQuote": "June 25th is a day to celebrate the lives and strength of the vitiligo community",
+   "verified": "2026-09-30",
+   "dateRule": "fixed",
+   "rule": "The owner states a fixed calendar date. Projected to each year from that date alone.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "Vitiligo Research Foundation (VR Foundation) (owner)",
+     "url": "https://vrfoundation.org/wvd",
+     "kind": "source"
+    }
+   ],
+   "note": "Dermatology and phototherapy services use the day for patient information. A patient-facing day, so education and support material land better than a product pitch."
+  },
+  {
    "id": "ev-bomss-asm-2027",
    "type": "event",
    "title": "BOMSS Annual Scientific Meeting 2027",
@@ -4714,9 +5102,9 @@
    "past": false,
    "location": "ACC Liverpool",
    "audience": "Dermatology",
-   "owner": null,
+   "owner": "British Association of Dermatologists (BAD)",
    "source": "https://www.bad.org.uk/events/107th-annual-meeting-of-the-british-association-of-dermatologists",
-   "verified": "2026-08",
+   "verified": "2026-09-30",
    "rule": "Conference and exhibition dates as published by the organiser.",
    "specialities": [
     "dermatology"
@@ -5597,6 +5985,36 @@
    "note": "Expiry date. Note it and work backwards."
   },
   {
+   "id": "aw-world-atopic-eczema-day-2027",
+   "type": "awareness",
+   "title": "World Atopic Eczema Day",
+   "date": "2027-09-14",
+   "endDate": null,
+   "past": false,
+   "owner": "GlobalSkin (International Alliance of Dermatology Patient Organizations)",
+   "source": "https://globalskin.org/member-community-section/programs-and-funds/world-atopic-eczema-day",
+   "sourceQuote": "World Atopic Eczema Day on September 14, is a global moment to shine a light on atopic eczema",
+   "verified": "2026-09-30",
+   "dateRule": "fixed",
+   "rule": "The owner states a fixed calendar date. Projected to each year from that date alone.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "GlobalSkin (International Alliance of Dermatology Patient Organizations) (owner)",
+     "url": "https://globalskin.org/member-community-section/programs-and-funds/world-atopic-eczema-day",
+     "kind": "source"
+    }
+   ],
+   "note": "In 2026 it fell inside the UK's Eczema Awareness Week (12-19 September). Dermatology nurses, paediatric dermatology and community pharmacy are receptive to emollient, bandaging and treatment-pathway conversations."
+  },
+  {
    "id": "ev-medtech-expo-2027",
    "type": "event",
    "title": "Med-Tech Innovation Expo 2027",
@@ -6096,6 +6514,36 @@
     }
    ],
    "note": "Expiry date. Note it and work backwards."
+  },
+  {
+   "id": "aw-world-psoriasis-day-2027",
+   "type": "awareness",
+   "title": "World Psoriasis Day",
+   "date": "2027-10-29",
+   "endDate": null,
+   "past": false,
+   "owner": "International Federation of Psoriasis Associations (IFPA)",
+   "source": "https://www.ifpa-pso.com/global-actions-overview/world-psoriasis-day",
+   "sourceQuote": "World Psoriasis Day has been celebrated on October 29th for more than a decade",
+   "verified": "2026-09-30",
+   "dateRule": "fixed",
+   "rule": "The owner states a fixed calendar date. Projected to each year from that date alone.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "International Federation of Psoriasis Associations (IFPA) (owner)",
+     "url": "https://www.ifpa-pso.com/global-actions-overview/world-psoriasis-day",
+     "kind": "source"
+    }
+   ],
+   "note": "In 2026 Psoriasis UK's Psoriasis Awareness Week runs from this day to 4 November. Dermatology and rheumatology (psoriatic arthritis) services are focused on psoriasis; a good window for phototherapy, topical and biologic-pathway conversations."
   },
   {
    "id": "fw-framework-end-aids-for-daily-living",
@@ -7032,6 +7480,76 @@
    "note": "Expiry date. Note it and work backwards."
   },
   {
+   "id": "ct-r-service-gov-uk-notice-d565bf57-e45d-4b46-8066-97fd061914bc",
+   "type": "contract-expiry",
+   "title": "Contract expires: Integrated Community Equipment Loans Service (ICELS) Framework Agreement - Call-Off Order 1, Community Equipment - Adults",
+   "date": "2028-03-31",
+   "past": false,
+   "buyer": "Nottinghamshire County Council",
+   "supplier": "British Red Cross Society",
+   "value": 81000000,
+   "currency": "GBP",
+   "owner": "Nottinghamshire County Council",
+   "source": "https://www.contractsfinder.service.gov.uk/Notice/d565bf57-e45d-4b46-8066-97fd061914bc",
+   "rule": "The contract period end stated on the buyer's own award notice. Only notices above £100,000 that resolve to a Hub speciality page are shown; a notice below that is a purchase, not a category signal.",
+   "specialities": [
+    "patient-handling"
+   ],
+   "links": [
+    {
+     "label": "Patient Moving and Handling",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/patient-handling/",
+     "kind": "hub"
+    },
+    {
+     "label": "Understanding TR Reports",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/reference/tr-reports/",
+     "kind": "hub"
+    },
+    {
+     "label": "Award notice",
+     "url": "https://www.contractsfinder.service.gov.uk/Notice/d565bf57-e45d-4b46-8066-97fd061914bc",
+     "kind": "source"
+    }
+   ],
+   "note": "Nottinghamshire County Council awarded to British Red Cross Society. Expiry is the re-tender window."
+  },
+  {
+   "id": "ct-r-service-gov-uk-notice-7f474f56-d9b4-4467-a978-5ef5b6116cc6",
+   "type": "contract-expiry",
+   "title": "Contract expires: Integrated Community Equipment Loans Service (ICELS) Framework Agreement - Call-Off Order 2, Community Equipment - Children",
+   "date": "2028-03-31",
+   "past": false,
+   "buyer": "Nottinghamshire County Council",
+   "supplier": "British Red Cross",
+   "value": 16000000,
+   "currency": "GBP",
+   "owner": "Nottinghamshire County Council",
+   "source": "https://www.contractsfinder.service.gov.uk/Notice/7f474f56-d9b4-4467-a978-5ef5b6116cc6",
+   "rule": "The contract period end stated on the buyer's own award notice. Only notices above £100,000 that resolve to a Hub speciality page are shown; a notice below that is a purchase, not a category signal.",
+   "specialities": [
+    "patient-handling"
+   ],
+   "links": [
+    {
+     "label": "Patient Moving and Handling",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/patient-handling/",
+     "kind": "hub"
+    },
+    {
+     "label": "Understanding TR Reports",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/reference/tr-reports/",
+     "kind": "hub"
+    },
+    {
+     "label": "Award notice",
+     "url": "https://www.contractsfinder.service.gov.uk/Notice/7f474f56-d9b4-4467-a978-5ef5b6116cc6",
+     "kind": "source"
+    }
+   ],
+   "note": "Nottinghamshire County Council awarded to British Red Cross. Expiry is the re-tender window."
+  },
+  {
    "id": "fw-framework-end-bladder-scanners-and-associated-options-and-related-services",
    "type": "framework-end",
    "title": "Framework expires: Bladder Scanners and Associated Options and Related Services",
@@ -7865,6 +8383,36 @@
    "note": "Nottingham University Hospitals NHS Trust awarded to Endomagnetics Ltd. Expiry is the re-tender window."
   },
   {
+   "id": "aw-skin-cancer-awareness-month-2028",
+   "type": "awareness",
+   "title": "Skin Cancer Awareness Month",
+   "date": "2028-05-01",
+   "endDate": "2028-05-31",
+   "past": false,
+   "owner": "The Skin Cancer Foundation",
+   "source": "https://www.skincancer.org/get-involved/skin-cancer-awareness-month/",
+   "sourceQuote": "May Is Skin Cancer Awareness Month!",
+   "verified": "2026-09-30",
+   "dateRule": "fixed",
+   "rule": "The owner states a fixed calendar date. Projected to each year from that date alone.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "The Skin Cancer Foundation (owner)",
+     "url": "https://www.skincancer.org/get-involved/skin-cancer-awareness-month/",
+     "kind": "source"
+    }
+   ],
+   "note": "A US-led month that UK dermatology and skin cancer services also use. Skin cancer detection, dermoscopy and sun-protection education fit; the British Association of Dermatologists (BAD) runs its own Sun Awareness Week in May, but has not yet published the 2027 dates."
+  },
+  {
    "id": "aw-world-hand-hygiene-day-2028",
    "type": "awareness",
    "title": "World Hand Hygiene Day",
@@ -8013,6 +8561,36 @@
     }
    ],
    "note": "Expiry date. Note it and work backwards."
+  },
+  {
+   "id": "aw-world-vitiligo-day-2028",
+   "type": "awareness",
+   "title": "World Vitiligo Day",
+   "date": "2028-06-25",
+   "endDate": null,
+   "past": false,
+   "owner": "Vitiligo Research Foundation (VR Foundation)",
+   "source": "https://vrfoundation.org/wvd",
+   "sourceQuote": "June 25th is a day to celebrate the lives and strength of the vitiligo community",
+   "verified": "2026-09-30",
+   "dateRule": "fixed",
+   "rule": "The owner states a fixed calendar date. Projected to each year from that date alone.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "Vitiligo Research Foundation (VR Foundation) (owner)",
+     "url": "https://vrfoundation.org/wvd",
+     "kind": "source"
+    }
+   ],
+   "note": "Dermatology and phototherapy services use the day for patient information. A patient-facing day, so education and support material land better than a product pitch."
   },
   {
    "id": "ct-r-service-gov-uk-notice-ae60e3c7-5cce-455d-91d8-dbb30aad99f8",
@@ -8396,6 +8974,36 @@
    "note": "The sepsis lead is running education and is easier to reach than at any other point in the year. Blood culture, lactate, escalation and deteriorating-patient monitoring all have a natural opening. The Hub's Sepsis and the Deteriorating Patient page is the brief to read first."
   },
   {
+   "id": "aw-world-atopic-eczema-day-2028",
+   "type": "awareness",
+   "title": "World Atopic Eczema Day",
+   "date": "2028-09-14",
+   "endDate": null,
+   "past": false,
+   "owner": "GlobalSkin (International Alliance of Dermatology Patient Organizations)",
+   "source": "https://globalskin.org/member-community-section/programs-and-funds/world-atopic-eczema-day",
+   "sourceQuote": "World Atopic Eczema Day on September 14, is a global moment to shine a light on atopic eczema",
+   "verified": "2026-09-30",
+   "dateRule": "fixed",
+   "rule": "The owner states a fixed calendar date. Projected to each year from that date alone.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "GlobalSkin (International Alliance of Dermatology Patient Organizations) (owner)",
+     "url": "https://globalskin.org/member-community-section/programs-and-funds/world-atopic-eczema-day",
+     "kind": "source"
+    }
+   ],
+   "note": "In 2026 it fell inside the UK's Eczema Awareness Week (12-19 September). Dermatology nurses, paediatric dermatology and community pharmacy are receptive to emollient, bandaging and treatment-pathway conversations."
+  },
+  {
    "id": "aw-world-patient-safety-day-2028",
    "type": "awareness",
    "title": "World Patient Safety Day",
@@ -8637,6 +9245,36 @@
     }
    ],
    "note": "Expiry date. Note it and work backwards."
+  },
+  {
+   "id": "aw-world-psoriasis-day-2028",
+   "type": "awareness",
+   "title": "World Psoriasis Day",
+   "date": "2028-10-29",
+   "endDate": null,
+   "past": false,
+   "owner": "International Federation of Psoriasis Associations (IFPA)",
+   "source": "https://www.ifpa-pso.com/global-actions-overview/world-psoriasis-day",
+   "sourceQuote": "World Psoriasis Day has been celebrated on October 29th for more than a decade",
+   "verified": "2026-09-30",
+   "dateRule": "fixed",
+   "rule": "The owner states a fixed calendar date. Projected to each year from that date alone.",
+   "specialities": [
+    "dermatology"
+   ],
+   "links": [
+    {
+     "label": "Dermatology",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/dermatology/",
+     "kind": "hub"
+    },
+    {
+     "label": "International Federation of Psoriasis Associations (IFPA) (owner)",
+     "url": "https://www.ifpa-pso.com/global-actions-overview/world-psoriasis-day",
+     "kind": "source"
+    }
+   ],
+   "note": "In 2026 Psoriasis UK's Psoriasis Awareness Week runs from this day to 4 November. Dermatology and rheumatology (psoriatic arthritis) services are focused on psoriasis; a good window for phototherapy, topical and biologic-pathway conversations."
   },
   {
    "id": "fw-framework-end-external-breast-prosthesis-and-chest-support",
@@ -9821,6 +10459,41 @@
     }
    ],
    "note": "West Suffolk NHS Foundation Trust awarded to HELENA BIOSCIENCES EUROPE. Expiry is the re-tender window."
+  },
+  {
+   "id": "ct-r-service-gov-uk-notice-acc42f78-1aca-49da-8124-096d531159eb",
+   "type": "contract-expiry",
+   "title": "Contract expires: Servicing Community Equipment Service",
+   "date": "2031-01-07",
+   "past": false,
+   "buyer": "The Borough Council of Calderdale",
+   "supplier": "Simply Moving and Sleeping",
+   "value": 840000,
+   "currency": "GBP",
+   "owner": "The Borough Council of Calderdale",
+   "source": "https://www.contractsfinder.service.gov.uk/Notice/acc42f78-1aca-49da-8124-096d531159eb",
+   "rule": "The contract period end stated on the buyer's own award notice. Only notices above £100,000 that resolve to a Hub speciality page are shown; a notice below that is a purchase, not a category signal.",
+   "specialities": [
+    "patient-handling"
+   ],
+   "links": [
+    {
+     "label": "Patient Moving and Handling",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/patient-handling/",
+     "kind": "hub"
+    },
+    {
+     "label": "Understanding TR Reports",
+     "url": "https://medsalesintelligencehub.co.uk/medical-sales-hub/reference/tr-reports/",
+     "kind": "hub"
+    },
+    {
+     "label": "Award notice",
+     "url": "https://www.contractsfinder.service.gov.uk/Notice/acc42f78-1aca-49da-8124-096d531159eb",
+     "kind": "source"
+    }
+   ],
+   "note": "The Borough Council of Calderdale awarded to Simply Moving and Sleeping. Expiry is the re-tender window."
   },
   {
    "id": "ct-r-service-gov-uk-notice-b99f6b47-d3a4-4fb9-8cfe-08606f8895fb",
