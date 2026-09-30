@@ -398,6 +398,13 @@ def history_rows(history, index):
         i = col.get(name)
         return r[i] if i is not None and i < len(r) else None
 
+    # The export stopped cutting supplier names on 30/09/2026 (pipeline ab6801e).
+    # Read that from the file itself, not a date: if ANY supplier string runs past
+    # the old cap, the export that wrote this file did not cap, so no name in it is
+    # a fragment. Only a file whose longest name is <= the cap is treated as capped.
+    capped = all(len(str(f(r, "sup") or "")) <= HISTORY_SUPPLIER_CAP
+                 for r in history.get("rows") or [])
+    stats["capped"] = capped
     for r in history.get("rows") or []:
         stats["awards"] += 1
         url = str(f(r, "u") or "")
@@ -425,7 +432,7 @@ def history_rows(history, index):
             "periodEnd": f(r, "pe"),
             "origin": "tender-history",
         }
-        cut = len(sup) >= HISTORY_SUPPLIER_CAP
+        cut = capped and len(sup) >= HISTORY_SUPPLIER_CAP
         whole = sup.strip().rstrip(",;").strip()
         if not cut and company_match.resolve(whole, index)[1] == "confirmed":
             pieces = [whole]
@@ -546,13 +553,15 @@ def assemble(rows, seed, existing, window, notes, complete, history=None):
         coverage["note"] = (
             "Awards are indexed from (1) the award history in %s (data as of %s), "
             "covering notices published from %s — %s — and (2) %s. Coverage is "
-            "INCOMPLETE before %s. %d supplier name(s) that the history export cut off "
-            "at %d characters are quarantined, never matched. An absence here is a "
+            "INCOMPLETE before %s. %s An absence here is a "
             "statement about this index, never about the company."
             % (HISTORY_PATH, history.get("dataAsOf") or "not stated", floor or "not stated",
                "earlier notices are not fetched on either feed",
-               feeds_note, floor or "the history's floor", h_stats["truncated"],
-               HISTORY_SUPPLIER_CAP))
+               feeds_note, floor or "the history's floor",
+               ("%d supplier name(s) that the history export cut off at %d characters "
+                "are quarantined, never matched." % (h_stats["truncated"], HISTORY_SUPPLIER_CAP))
+               if h_stats.get("capped") else
+               "Supplier names are exported in full, uncut."))
     else:
         coverage["note"] = (
             "Awards indexed from %s. An absence here is a statement about this index, "

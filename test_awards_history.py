@@ -98,6 +98,19 @@ class HistoryIngest(unittest.TestCase):
         self.assertEqual([r["noticeSupplierName"] for r in cut], ["Organon Pharma (UK"])
         self.assertEqual(doc["counts"]["historySupplierCutOff"], 1)
 
+    def test_uncapped_export_never_marks_an_80_char_name_cut(self):
+        # 30/09/2026: the export stopped cutting names. When any supplier string in
+        # the file runs past 80 characters, the file is uncapped, so an exactly-80
+        # string is a whole name and is never quarantined as a fragment.
+        sup = "Lupin Healthcare UK Ltd, Morningside Pharmaceuticals Limited, Organon Pharma (UK"
+        long_sup = "A" * 120
+        doc = build(history([FTS + "org", "f", "Drugs", "NSS", sup, "2024-01-01", "x",
+                             None, None, None, None],
+                            [FTS + "long", "f", "Other", "NSS", long_sup, "2024-01-02", "x",
+                             None, None, None, None]))
+        self.assertEqual(doc["counts"]["historySupplierCutOff"], 0)
+        self.assertFalse([r for r in doc["unmatched"] if "cuts supplier names" in r["reason"]])
+
     def test_no_fuzzy_or_substring(self):
         doc = build(history([CF + "a1", "c", "Beds", "Trust", "Acme Medical Group Ltd",
                              "2024-01-01", "x", 10, None, None, None]))
