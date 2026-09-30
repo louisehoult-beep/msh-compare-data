@@ -75550,7 +75550,7 @@
   {
    "kind": "nhssc-term",
    "supplier": "Paul Hartmann (HARTMANN)",
-   "term": "Sterillium med / Stellisept med (hand disinfectants)",
+   "term": "Sterillium med (hand disinfectant)",
    "division": null,
    "products": 3,
    "categories": [],
@@ -75565,7 +75565,9 @@
    "why": "Examples are alcohol hand rub liquid in various bottle sizes - closest available skin/hand disinfectant category.",
    "decidedIn": "NHSSC map sprint 28/08/2026",
    "_renamedFrom": "Sterillium med / Stellisept med (hand disinfectants); MoliCare range (incontinence pads/pull-ups/fixation pants)",
-   "_renameNote": "Renamed 30/09/2026: the combined label named brands split out on 28/09/2026 (and Sorbalgon, which is not UK-marketed), so it read as a second listing of them on the Company Report. The catalogue query and every cached line are unchanged."
+   "_renameNote": "Renamed 30/09/2026: the combined label named brands split out on 28/09/2026 (and Sorbalgon, which is not UK-marketed), so it read as a second listing of them on the Company Report. The catalogue query and every cached line are unchanged.",
+   "_renamedFrom2": "Sterillium med / Stellisept med (hand disinfectants)",
+   "_splitNote": "30/09/2026: Stellisept med (antimicrobial body wash, no catalogue line) split out to its own product; this term keeps Sterillium Med's three lines and its category."
   },
   {
    "kind": "nhssc-term",
@@ -145072,27 +145074,6 @@
    "_splitNote": "Split from the combined term 'Zetuvit Plus (super absorber); HydroClean Advance; HydroTac (hydropolymer foam dressing); Sorbalgon/Ag (calcium alginate)' on 28/09/2026: refresh_nhssc_cache.py's candidate search only ever tried the first brand in that label, so this brand never got its own catalogue query (brand-split gap, 02-Elevate-and-Thrive/Hub/nhssc-term-brand-split-gap-2026-09-11.md, row 173 for the Sterillium term). Same method as the split accepted by Lou on 07/09/2026 (d417ead)."
   },
   {
-   "kind": "nhssc-term",
-   "supplier": "Paul Hartmann (HARTMANN)",
-   "term": "MoliCare (incontinence pads, pull-ups, fixation pants)",
-   "division": null,
-   "products": 61,
-   "categories": [],
-   "examples": [
-    "Fixation Pants for use with Pads with Legs Medium 60-100cm Basic (MoliCare Fixpants, CFP4334)",
-    "Rectangular pad absorbency band I7 60x20cm (PE Back Sheet) (MoliCare Rectangular 4D, CFP4263)",
-    "Absorbent Pull Up Pants D15 Medium 75-120cm (Textile Back Sheet) (MoliCare Premium Mobile 8D, CFP4247)",
-    "All-in-one pads absorbency band D15 Medium 70-125cm (Textile Back Sheet) (MoliCare Premium Elastic 5D, CFP4279)"
-   ],
-   "hub": "continence:pads",
-   "notTaxonomy": false,
-   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 28/09/2026; decision made on the catalogue's own item descriptions above",
-   "why": "Absorbent pads, pull-up pants, all-in-ones and fixation pants — continence containment products, filed continence:pads exactly as Essity's TENA and Abena's pad, pant and fixation terms are. The combined Sterillium term it was split from is skin-prep:disinfect, which is right for Sterillium and never applied to MoliCare (no MoliCare line was ever fetched under it).",
-   "decidedIn": "HARTMANN entry fixes 28/09/2026",
-   "_splitFrom": "Sterillium med / Stellisept med (hand disinfectants); MoliCare range (incontinence pads/pull-ups/fixation pants)",
-   "_splitNote": "Split from the combined term 'Sterillium med / Stellisept med (hand disinfectants); MoliCare range (incontinence pads/pull-ups/fixation pants)' on 28/09/2026: refresh_nhssc_cache.py's candidate search only ever tried the first brand in that label, so this brand never got its own catalogue query (brand-split gap, 02-Elevate-and-Thrive/Hub/nhssc-term-brand-split-gap-2026-09-11.md, row 173 for the Sterillium term). Same method as the split accepted by Lou on 07/09/2026 (d417ead)."
-  },
-  {
    "kind": "product-override",
    "supplier": "Pentland Medical Ltd",
    "division": "OTIOM – Monitoring Device for People With Dementia – For Private Homes",
@@ -149695,6 +149676,437 @@
    "evidence": "NHS Supply Chain public catalogue item EIJ85098, read 30/09/2026",
    "why": "An adhesive island dressing, not an IV or film dressing; the catalogue names it 'Cosmopor Sterile' (capital S), which the existing 'Cosmopor sterile' override does not match. Same decision as the other Cosmopor island dressings (Leukomed island precedent).",
    "decidedIn": "HARTMANN company entry 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Fixpants",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Fixation Pants for use with Pads with Legs Medium 60-100cm Basic (MoliCare Fixpants, CFP4334)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Fixpants Long Leg",
+   "division": null,
+   "products": 3,
+   "categories": [],
+   "examples": [
+    "Fixation Pants for use with Pads with Legs XL 100-160cm Basic (MoliCare Fixpants Long Leg, CFP4291)",
+    "Fixation Pants for use with Pads with Legs Large 80-120cm Basic (MoliCare Fixpants Long Leg, CFP4246)",
+    "Fixation Pants for use with Pads with Legs 2XL 140-180cm Basic (MoliCare Fixpants Long Leg, CXP85010)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Bed Mat 5D",
+   "division": null,
+   "products": 4,
+   "categories": [],
+   "examples": [
+    "Procedure Pad - Non Recycled Fluff 60x60cm without SAP (MoliCare Premium Bed Mat 5D, VMU627)",
+    "Procedure Pad - Non Recycled Fluff 60x90cm without SAP (MoliCare Premium Bed Mat 5D, VMU628)",
+    "Procedure Pad - Non Recycled Fluff 60x90cm without SAP (MoliCare Premium Bed Mat 5D, VMU571)",
+    "Procedure Pad - Non Recycled Fluff 60x60cm without SAP (MoliCare Premium Bed Mat 5D, VMU567)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Elastic 5D",
+   "division": null,
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "All-in-one pads absorbency band D15 Medium 70-125cm (Textile Back Sheet) (MoliCare Premium Elastic 5D, CFP4279)",
+    "All-in-one pads absorbency band D15 Medium 70-125cm (Textile Back Sheet) (MoliCare Premium Elastic 5D, CFP3481)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Elastic 6D",
+   "division": null,
+   "products": 4,
+   "categories": [],
+   "examples": [
+    "All-in-one pads absorbency band D16 Large 115-145cm (Textile Back Sheet) (MoliCare Premium Elastic 6D, CFP4255)",
+    "All-in-one pads absorbency band D16 Large 115-145cm (Textile Back Sheet) (MoliCare Premium Elastic 6D, CFP3457)",
+    "All-in-one pads absorbency band D17 XL 140-145cm (Textile Back Sheet) (MoliCare Premium Elastic 6D, CFP85417)",
+    "All-in-one pads absorbency band D17 XL 140-174cm (Textile Back Sheet) (MoliCare Premium Elastic 6D, CFP85076)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Elastic 7D",
+   "division": null,
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "All-in-one pads absorbency band D16 Medium 85-120cm (Textile Back Sheet) (MoliCare Premium Elastic 7D, CFP4313)",
+    "All-in-one pads absorbency band D17 Large 115-145cm (Textile Back Sheet) (MoliCare Premium Elastic 7D, CFP4264)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Elastic 8D",
+   "division": null,
+   "products": 4,
+   "categories": [],
+   "examples": [
+    "All-in-one pads absorbency band D16 Small 70-90cm (Textile Back Sheet) (MoliCare Premium Elastic 8D, CFP4268)",
+    "All-in-one pads absorbency band D19 XL 140-174cm (Textile Back Sheet) (MoliCare Premium Elastic 8D, CFP4310)",
+    "All-in-one pads absorbency band D18 Medium 70-125cm (Textile Back Sheet) (MoliCare Premium Elastic 8D, CFP4269)",
+    "All-in-one pads absorbency band D18 Large 115-145cm (Textile Back Sheet) (MoliCare Premium Elastic 8D, CFP4305)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Elastic 9D",
+   "division": null,
+   "products": 4,
+   "categories": [],
+   "examples": [
+    "All-in-one pads absorbency band D19 Medium 70-125cm (Textile Back Sheet) (MoliCare Premium Elastic 9D, CFP4294)",
+    "All-in-one pads absorbency band D20 Large 115-145cm (Textile Back Sheet) (MoliCare Premium Elastic 9D, CFP4331)",
+    "All-in-one pads absorbency band D17 Small 70-90cm (Textile Back Sheet) (MoliCare Premium Elastic 9D, CFP3462)",
+    "All-in-one pads absorbency band D20 XL 140-175cm (Textile Back Sheet) (MoliCare Premium Elastic 9D, CFP4297)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Elastic 10D",
+   "division": null,
+   "products": 3,
+   "categories": [],
+   "examples": [
+    "All-in-one pads absorbency band D20 Medium 70-125cm (Textile Back Sheet) (MoliCare Premium Elastic 10D, CFP4261)",
+    "All-in-one pads absorbency band D21 XL 140-175cm (Textile Back Sheet) (MoliCare Premium Elastic 10D, CFP4272)",
+    "All-in-one pads absorbency band D20 Large 115-145cm (Textile Back Sheet) (MoliCare Premium Elastic 10D, CFP4243)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Fixpant Long Leg",
+   "division": null,
+   "products": 3,
+   "categories": [],
+   "examples": [
+    "Fixation Pants for use with Pads with Legs 3XL 160-200cm Comfort (MoliCare Premium Fixpant Long Leg, CFP4270)",
+    "Fixation Pants for use with Pads with Legs XL 100-160cm Comfort (MoliCare Premium Fixpant Long Leg, CFP4338)",
+    "Fixation Pants for use with Pads with Legs Medium 60-100cm Comfort (MoliCare Premium Fixpant Long Leg, CFP4273)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Form 3D",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Shaped pad with absorbency band I9 (Textile Back Sheet) (MoliCare Premium Form 3D, CFP4435)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Form 4D",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Shaped pad with absorbency band I10 (Textile Back Sheet) (MoliCare Premium Form 4D, CFP4437)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Form 5D",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Shaped pad with absorbency band I11 (Textile Back Sheet) (MoliCare Premium Form 5D, CFP4434)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Form 6D",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Shaped pad with absorbency band I13 (Textile Back Sheet) (MoliCare Premium Form 6D, CFP4436)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Form 7D",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Shaped pad with absorbency band I14 (Textile Back Sheet) (MoliCare Premium Form 7D, CFP4433)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Form 8D",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Shaped pad with absorbency band I15 (Textile Back Sheet) (MoliCare Premium Form 8D, CFP4438)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Men Pad 4D",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Male shaped pad with absorbency band I6 (Textile Back Sheet) (MoliCare Premium Men Pad 4D, CFP4300)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Men Pad 5D",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Male shaped pad with absorbency band I7 (Textile Back Sheet) (MoliCare Premium Men Pad 5D, CFP4286)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Men Pad Pouch 2D",
+   "division": null,
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Male shaped pad with absorbency band I5 (Textile Back Sheet) (MoliCare Premium Men Pad Pouch 2D, CFP3397)",
+    "Male shaped pad with absorbency band I5 (Textile Back Sheet) (MoliCare Premium Men Pad Pouch 2D, CFP4266)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Mobile 5D",
+   "division": null,
+   "products": 4,
+   "categories": [],
+   "examples": [
+    "Absorbent Pull Up Pants D13 Small 60-90cm (Textile Back Sheet) (MoliCare Premium Mobile 5D, CFP4319)",
+    "Absorbent Pull Up Pants D13 Medium 75-120cm (Textile Back Sheet) (MoliCare Premium Mobile 5D, CFP4244)",
+    "Absorbent Pull Up Pants D13 XL 130-170cm (Textile Back Sheet) (MoliCare Premium Mobile 5D, CFP4339)",
+    "Absorbent Pull Up Pants D13 Large 100-150cm (Textile Back Sheet) (MoliCare Premium Mobile 5D, CFP4289)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Mobile 6D",
+   "division": null,
+   "products": 7,
+   "categories": [],
+   "examples": [
+    "Absorbent Pull Up Pants D14 XS 45-70cm (Textile Back Sheet) NON-RETURNABLE (MoliCare Premium Mobile 6D, CFP4288)",
+    "Absorbent Pull Up Pants D15 XL 130-170cm (Textile Back Sheet) (MoliCare Premium Mobile 6D, CFP4283)",
+    "Absorbent Pull Up Pants D14 Medium 75-120cm (Textile Back Sheet) (MoliCare Premium Mobile 6D, CFP4293)",
+    "Absorbent Pull Up Pants D14 XS 45-70cm (Textile Back Sheet) (MoliCare Premium Mobile 6D, CXP85288)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Mobile 8D",
+   "division": null,
+   "products": 6,
+   "categories": [],
+   "examples": [
+    "Absorbent Pull Up Pants D15 Small 60-90cm (Textile Back Sheet) (MoliCare Premium Mobile 8D, CFP4259)",
+    "Absorbent Pull Up Pants D15 Medium 75-120cm (Textile Back Sheet) (MoliCare Premium Mobile 8D, CFP4247)",
+    "Absorbent Pull Up Pants D16 Large 100-150cm (Textile Back Sheet) (MoliCare Premium Mobile 8D, CXP85181)",
+    "Absorbent Pull Up Pants D15 Small 60-90cm (Textile Back Sheet) (MoliCare Premium Mobile 8D, CFP3455)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Premium Slip Extra Plus",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "All-in-one pads absorbency band D14 XS 40-60cm (Textile Back Sheet) (MoliCare Premium Slip Extra Plus, CFP4395)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Rectangular 3D",
+   "division": null,
+   "products": 1,
+   "categories": [],
+   "examples": [
+    "Rectangular pad absorbency band I5 40x20cm (PE Back Sheet) (MoliCare Rectangular 3D, CFP3416)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
+  },
+  {
+   "kind": "nhssc-term",
+   "supplier": "Paul Hartmann (HARTMANN)",
+   "term": "MoliCare Rectangular 4D",
+   "division": null,
+   "products": 2,
+   "categories": [],
+   "examples": [
+    "Rectangular pad absorbency band I7 60x20cm (PE Back Sheet) (MoliCare Rectangular 4D, CFP4263)",
+    "Rectangular pad absorbency band I7 60x20cm (PE Back Sheet) (MoliCare Rectangular 4D, CFP3434)"
+   ],
+   "hub": "continence:pads",
+   "notTaxonomy": false,
+   "evidence": "NHS Supply Chain public catalogue (pilot.supplychain.nhs.uk search), read 30/09/2026; decision made on the catalogue's own item descriptions above",
+   "why": "One MoliCare brand line of the 'MoliCare (incontinence pads, pull-ups, fixation pants)' term, seeded on its own so Help me prepare can offer it; same decision as that term (28/09/2026): containment pads, pants, all-in-ones, underpads and fixation pants are continence:pads.",
+   "decidedIn": "HARTMANN non-wound reconciliation 30/09/2026"
   }
  ],
  "kinds": {
