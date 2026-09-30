@@ -165,6 +165,34 @@ EVIDENCE = {
  }
 }
 
+# Source 5 (Lou, 30/09/2026): NHS SBS publishes no supplier-by-lot list, so a public
+# body's own call-off notice that names the framework reference, the lot AND the supplier
+# may carry a lot, labelled with the buyer and notice. Keyed by (ref, SBS list spelling).
+# Each was read at source on 30/09/2026. A notice giving the framework's title but not its
+# reference (Essity, Gloucestershire Health & Care, CF 2b1d60c8) does not qualify.
+LOTS = {
+ ("SBS10142", "Healthy.io"): {
+  "lot": "Lot 7, Advanced Wound Care and Lymphoedema Digital Products",
+  "buyer": "Hywel Dda University Health Board",
+  "notice": "Sell2Wales contract award notice AUG533527, 07/08/2025",
+  "url": "https://www.sell2wales.gov.wales/search/search_switch.aspx?ID=154502"},
+ ("SBS10142", "Medi UK Ltd"): {
+  "lot": "Lot 2, Advanced Wound Care and Lymphoedema Compression Bandages and Hosiery",
+  "buyer": "County Durham and Darlington NHS Foundation Trust",
+  "notice": "Contracts Finder award notice, 12/09/2025",
+  "url": "https://www.contractsfinder.service.gov.uk/notice/8340efe5-e05d-470b-b3e0-df993b5feaae"},
+ ("SBS10142", "Haddenham Healthcare Ltd"): {
+  "lot": "Lot 2, Advanced Wound Care and Lymphoedema Compression Bandages and Hosiery",
+  "buyer": "County Durham and Darlington NHS Foundation Trust",
+  "notice": "Contracts Finder award notice, 12/09/2025",
+  "url": "https://www.contractsfinder.service.gov.uk/notice/95a24c44-b361-450e-84f4-c7556664dca4"},
+ ("SBS10142", "Alliance Healthcare"): {
+  "lot": "Lot 8, Delivery",
+  "buyer": "NHS Mid and South Essex (procured by Attain)",
+  "notice": "Contracts Finder award notice (North West Ostomy Service call-off), 31/10/2023",
+  "url": "https://www.contractsfinder.service.gov.uk/notice/e8c11519-e356-4cf5-b521-74b0ec9beb92"},
+}
+
 SEED = "data/supplier-seed.json"
 
 
@@ -177,7 +205,7 @@ def ref_of(name):
 
 def main():
     seed = json.load(open(SEED))
-    matched, unmatched, lots_removed = [], [], []
+    matched, unmatched, lots_removed, lotted = [], [], [], []
     for s in seed["suppliers"]:
         keys = {cm.key(n) for n in [s.get("name", "")] + list(s.get("aliases") or []) if n}
         for f in s.get("frameworks") or []:
@@ -194,6 +222,18 @@ def main():
                              "\u201c%s\u201d. NHS SBS publishes the framework's %d lots but "
                              "not which lot each supplier holds, so no lot is shown."
                              % (e["title"], ref, READ_ON, hit, e["lots"]))
+                lot = LOTS.get((ref, hit))
+                if lot:
+                    f["note"] = ("%s, per a call-off under this framework by %s (%s), which names "
+                                 "the framework reference, the lot and this supplier. NHS SBS "
+                                 "itself does not publish which lot each supplier holds; its own "
+                                 "supplier list for %s (%s), read %s, names this supplier as "
+                                 "\u201c%s\u201d." % (lot["lot"], lot["buyer"], lot["notice"],
+                                 e["title"], ref, READ_ON, hit))
+                    f["lotSourceUrl"] = lot["url"]
+                    lotted.append(s["name"])
+                else:
+                    f.pop("lotSourceUrl", None)
                 matched.append(s["name"])
             else:
                 f["note"] = ("Reference carried from the Hub's former supplier directory, "
@@ -208,6 +248,7 @@ def main():
     print("matched %d, not named %d" % (len(matched), len(unmatched)))
     print("not named:", sorted(unmatched))
     print("lot claims removed:", lots_removed)
+    print("call-off lots (source 5):", sorted(lotted))
 
 
 if __name__ == "__main__":
