@@ -730,6 +730,51 @@ def check_trust_pressures(doc, trust_codes):
                           % (days, doc.get("asOf")))
 
 
+def check_prep_speciality_units(prep, pressures):
+    """A speciality wait in a Meeting Prep profile must be in weeks, never a percentage.
+
+    Found 30/09/2026: thirteen trust profiles printed NHS England's median wait by
+    treatment function (weeks) with a "%" sign and a label naming another measure
+    ("21.5% within 18 weeks", "percentage of the total waiting list", "52-week breach
+    rates"). Every number was the trust's own speciality MEDIAN in weeks for June or
+    July 2026. Two profiles then read the shortest waits as the worst. The Hub holds no
+    per-speciality percentage at all: trust-pressures.json carries speciality figures
+    as median weeks only (fieldMeanings.spec), so a percentage attached to a treatment
+    function has no source in this repo and cannot be published.
+
+    The one percentage allowed beside a treatment function is the trust's own
+    whole-trust "% within 18 weeks" (a single-speciality trust says "all under Trauma &
+    Orthopaedics, with 97.0% seen within 18 weeks"), checked against trust-pressures.
+    Fix: scripts/fix_speciality_wait_units.py shows the corrected wording pattern.
+    """
+    if not prep:
+        return
+    fns = (r"Trauma (?:&|and) Orthopaedics|Orthopaedics|Ophthalmology|\bENT\b|Ear,? Nose"
+           r"|Urology|Cardiology|Gynaecology|General Surgery|Dermatology")
+    rx = re.compile(r"(?:%s)[^.;%%\d]{0,40}?(\d{1,3}(?:\.\d)?)\s?%%" % fns, re.I)
+    ptr = (pressures or {}).get("trusts") or {}
+    bad = []
+    for t in prep.get("trusts") or []:
+        code = t.get("code")
+        whole = (ptr.get(code) or {}).get("pct18")
+        for field in ("context", "news", "structure"):
+            txt = t.get(field)
+            if not isinstance(txt, str):
+                continue
+            for m in rx.finditer(txt):
+                v = float(m.group(1))
+                if whole is not None and abs(v - whole) <= 0.05:
+                    continue
+                bad.append("%s %s: %r" % (code, field, m.group(0)[:70]))
+    if bad:
+        FAIL("prep-units", "SPECIALITY WAIT AS %%: %d speciality figure(s) in Meeting Prep "
+                           "profiles carry a percentage (%s). The Hub's speciality figures are "
+                           "NHS England RTT median waits in WEEKS; there is no per-speciality "
+                           "percentage in trust-pressures.json to source one from. State the "
+                           "figure as 'N weeks (median wait by treatment function, NHS England "
+                           "RTT, <month>)'." % (len(bad), "; ".join(bad[:6])))
+
+
 # --------------------------------------------------------------------------
 # 5b. PERSONAL-DATA REINTRODUCTION GUARD
 # --------------------------------------------------------------------------
@@ -6707,6 +6752,7 @@ def main():
                 (load("trust-contacts.json") or {}).get("trusts", {}))
     check_privacy(n, retention, offline)
     check_trust_pressures(load("trust-pressures.json"), trust_codes)
+    check_prep_speciality_units(load("prep-config.json"), load("trust-pressures.json"))
     check_js()
     check_speciality_news_freshness()
     check_product_types(load("product-types.json"))

@@ -159,6 +159,17 @@ def verify_one(directory, code):
         if cqc_letters and not explains_null:
             problems.append(f"[{code}] asserts a CQC rating ({cqc_letters}) but layer1 cqc is null and no explanation given")
 
+    # A speciality wait is a median in WEEKS (layer1 pressures.spec). Thirteen profiles
+    # printed it as a percentage under another measure's name until 30/09/2026; the
+    # only percentage allowed beside a treatment function is the whole-trust 18-week %.
+    spec_pct = re.compile(
+        r"(?:Trauma (?:&|and) Orthopaedics|Orthopaedics|Ophthalmology|\bENT\b|Ear,? Nose|Urology"
+        r"|Cardiology|Gynaecology|General Surgery|Dermatology)[^.;%\d]{0,40}?(\d{1,3}(?:\.\d)?)\s?%", re.I)
+    for m in spec_pct.finditer(all_text):
+        if pct18 is None or abs(float(m.group(1)) - pct18) > 0.05:
+            problems.append(f"[{code}] speciality figure given as a percentage ({m.group(0)[:60]!r}); "
+                            "speciality waits are median weeks by treatment function, state them as 'N weeks'")
+
     ems = find_em_dashes(profile)
     if ems:
         problems.append(f"[{code}] em dash found at: {ems}")

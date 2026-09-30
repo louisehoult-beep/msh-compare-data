@@ -2881,6 +2881,21 @@ def _(tmp):
     return "2026/S 000-010151"
 
 
+@case("a speciality median wait printed as a percentage in a Meeting Prep profile")
+def _(tmp):
+    # 30/09/2026: thirteen profiles printed NHS England median waits by treatment
+    # function (weeks) as "21.5% within 18 weeks" and similar. Replay the exact
+    # original RXF wording onto the first profile and the gate must refuse it.
+    import json as _json
+    d = _json.load(open("data/prep-config.json"))
+    t = d["trusts"][0]
+    t["context"] = (t.get("context") or "") + (
+        " Its highest-pressure specialities on the 18-week measure are Trauma &"
+        " Orthopaedics (16.4%) and ENT (15.4%).")
+    _json.dump(d, open("data/prep-config.json", "w"), indent=1)
+    return "SPECIALITY WAIT AS %"
+
+
 
 
 # ---------------------------------------------------------------------------
