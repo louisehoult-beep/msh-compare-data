@@ -1752,11 +1752,33 @@
      linked to its own source. A claim with no source url does not reach
      this panel — verify.py refuses to publish one.
      --------------------------------------------------------------------- */
-  function panelLeadership(s) {
+  function panelLeadership(s, ctx) {
     var TITLE = 'Leadership';
     var L = s.leadership;
     if (!L || !L.people || !L.people.length) {
-      return sec(TITLE, gap('Not captured for this company yet.'));
+      /* Fallback (30/09/2026): no curated leadership record, so show the
+         current directors from the Companies House officers register, which
+         the Hub already holds. Register facts only: name, role, appointed
+         date. No prior-experience claims, because the register carries none. */
+      var rec = (ctx && ctx.fin) ? finRecFor(s, ctx.fin) : null;
+      var cur = rec && rec.officers && rec.officers.current;
+      if (!cur || !cur.length) {
+        return sec(TITLE, gap('Not captured for this company yet, and no current officers are held from the Companies House register.'));
+      }
+      var fb = rule('No curated leadership record for this company yet, so this lists the <b>current officers on the Companies House public register</b>. Register facts only: it does not say who runs the UK commercial team, which the register does not record.');
+      fb += cur.map(function (o) {
+        return '<div style="padding:10px 0;border-bottom:1px solid #f0ece3;">' +
+          '<b style="color:' + INK + ';font-size:14px;">' + esc(o.name) + '</b>' +
+          (o.role ? ' <span style="color:' + DIM + ';">&middot; ' + esc(o.role) + '</span>' : '') +
+          '<br><span style="color:' + GREEN + ';font-weight:700;">Companies House officer</span>' +
+          (o.appointed ? ' <span style="color:' + DIM + ';">&middot; appointed ' + esc(dateUK(o.appointed)) + '</span>' : '') +
+          '</div>';
+      }).join('');
+      if (rec.officers.sourceUrl) {
+        fb += srcLine('<a href="' + esc(rec.officers.sourceUrl) + '" target="_blank" rel="noopener">Officers register &#8599;</a>' +
+          (rec.officers.readOn ? ' &middot; ' + asOf('read ' + esc(dateUK(rec.officers.readOn))) : ''));
+      }
+      return sec(TITLE, fb);
     }
     var body = rule('Officer status — director or sole director, with an appointed date — is read from the <b>Companies House public register</b>. A person this record names who does not appear on that register is stated as an employee, never as an officer. Prior-experience claims are the named person&rsquo;s own published account, each linked to its own source; they are reported as claims, not independently verified beyond that the person made them.');
     body += L.people.map(function (p) {
@@ -2740,7 +2762,7 @@
     }
     h += sec('Company information', info || gap('Nothing curated for this company yet beyond the panels below.'));
     h += panelBackground(sub);
-    h += panelLeadership(sub);
+    h += panelLeadership(sub, ctx);
     h += panelCompanyFacts(sub, ctx);
     h += ownershipBlock(sub);
 
