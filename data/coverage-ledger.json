@@ -13,7 +13,7 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 37142,
+  "differentiator.json published": 37143,
   "differentiator.json held": 50128
  },
  "counts": {
@@ -11978,8 +11978,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "31 March 2028",
    "suppliersAwarded": 13,
-   "suppliersPublished": 4,
-   "coverage": 30.8,
+   "suppliersPublished": 5,
+   "coverage": 38.5,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -12044,16 +12044,16 @@
      "bucket": "refused"
     },
     {
-     "supplier": "Carl Zeiss Ltd",
-     "domain": "www.zeiss.co.uk",
-     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
-     "checked": "2026-08-31",
-     "bucket": "publishedElsewhere"
-    },
-    {
      "supplier": "Boston Scientific",
      "domain": "www.bostonscientific.com",
      "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-08-31",
+     "bucket": "published"
+    },
+    {
+     "supplier": "Carl Zeiss Ltd",
+     "domain": "www.zeiss.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
      "checked": "2026-08-31",
      "bucket": "published"
     }
@@ -12068,7 +12068,7 @@
    ],
    "actionable": {
     "unresolvedNames": 0,
-    "publishedElsewhereNeedingCategory": 1,
+    "publishedElsewhereNeedingCategory": 0,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
@@ -12077,13 +12077,12 @@
    },
    "published": [
     "Boston Scientific",
+    "Carl Zeiss Ltd",
     "Elekta",
     "Oncology Imaging Systems (OIS)",
     "Xstrahl"
    ],
-   "publishedElsewhere": [
-    "Carl Zeiss Ltd"
-   ],
+   "publishedElsewhere": [],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
@@ -12099,7 +12098,7 @@
     "Vertec Scientific"
    ],
    "unknown": [],
-   "actionableTotal": 4,
+   "actionableTotal": 3,
    "blockedReason": null,
    "deferred": null
   },
