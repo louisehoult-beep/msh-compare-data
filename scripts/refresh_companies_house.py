@@ -184,10 +184,15 @@ OVERRIDES = "data/company-match-overrides.json"
 # The human-readable guidance page (this is what goes in the file, because it is
 # what a member or Lou would open) and its Content API rendering, which is the
 # same document as machine-readable JSON.
+# GOV.UK moved this page on 25/09/2026 (from .../life-of-a-company-annual-
+# requirements/...), and the old Content API path then returned a `redirect`
+# document with no body — which aborted the 28/09/2026 weekly run. The new path
+# is pinned here, and read_thresholds() also follows a Content API redirect
+# within gov.uk so the next move does not stop the Companies House refresh.
 THRESHOLDS_PAGE = ("https://www.gov.uk/government/publications/"
-                   "life-of-a-company-annual-requirements/life-of-a-company-part-1-accounts")
+                   "filing-your-companies-house-accounts/life-of-a-company-part-1-accounts")
 THRESHOLDS_JSON = ("https://www.gov.uk/api/content/government/publications/"
-                   "life-of-a-company-annual-requirements/life-of-a-company-part-1-accounts")
+                   "filing-your-companies-house-accounts/life-of-a-company-part-1-accounts")
 
 UA = {"User-Agent": "Mozilla/5.0 (msh-compare-data; company-report; contact via repo)"}
 
@@ -352,9 +357,18 @@ def read_thresholds():
     Aborts rather than guesses. A wrong threshold on the page is a wrong fact in
     front of paying members, and there is no honest default to fall back on.
     """
-    req = urllib.request.Request(THRESHOLDS_JSON, headers=UA)
-    with urllib.request.urlopen(req, timeout=60) as r:
-        doc = json.loads(r.read().decode("utf-8", "replace"))
+    url = THRESHOLDS_JSON
+    for _hop in range(3):
+        req = urllib.request.Request(url, headers=UA)
+        with urllib.request.urlopen(req, timeout=60) as r:
+            doc = json.loads(r.read().decode("utf-8", "replace"))
+        dest = [x.get("destination") for x in (doc.get("redirects") or [])
+                if x.get("path") and url.endswith(x["path"])]
+        if doc.get("schema_name") != "redirect" or not dest or not str(dest[0]).startswith("/"):
+            break
+        print("[companies-house] thresholds page moved on GOV.UK -> %s (update THRESHOLDS_JSON)"
+              % dest[0], flush=True)
+        url = "https://www.gov.uk/api/content" + dest[0]
     body = (doc.get("details") or {}).get("body") or ""
     if not body:
         raise SystemExit("ABORT: GOV.UK Content API returned no body for the thresholds page.")
