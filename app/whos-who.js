@@ -31,6 +31,17 @@
     return true;
   }
 
+  // The ICB watch (app/icb-watch.js, 30/09/2026) rides on this loader: page 884
+  // already fetches this file from git, so the ICB panel needs no wp-admin edit.
+  // It places its own mount in section 2 and is a no-op on any other page.
+  if (/nhs-structure-map/.test(location.pathname) || document.getElementById('msh-icbwatch')) {
+    fetch('https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/app/icb-watch.js?cb='
+          + new Date().toISOString().slice(0, 10))
+      .then(function(r){ return r.text(); })
+      .then(function(t){ (new Function(t))(); })
+      .catch(function(){});
+  }
+
   if (!mount()){
     // Mount point may not be parsed yet depending on block order.
     var tries = 0;

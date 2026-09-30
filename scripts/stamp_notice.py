@@ -79,6 +79,7 @@ REFS = {
     "compare-issues.json":     "ETH-D6991A2E7",
     "compare-suppliers.json":  "ETH-D21869855",
     "contacts-optout.json":    "ETH-D12682420",
+    "icb-watch.json":                    "ETH-D8742806C",
     "differentiator-category-map.json": "ETH-D01E00B2A",
     "differentiator.json":          "ETH-D29A49944",
     "frameworks.json":         "ETH-DB4D6B772",

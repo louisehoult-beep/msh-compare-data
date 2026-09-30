@@ -417,6 +417,81 @@ def check_trust_map(tm):
 
 
 # --------------------------------------------------------------------------
+# 3b. ICB WATCH — the ICB count, clusters and leadership events (30/09/2026)
+# --------------------------------------------------------------------------
+# data/icb-watch.json feeds the NHS structure page (884) and the Live Desk's
+# NHS ENGLAND NEWS panel. Everything in it is about the structure of the NHS or
+# about NAMED ICB executives, so the same two failures the 24/07/2026 moves
+# incident taught are refused here: a claim about a named person without a
+# source, and a "change" that was not derived from a stored earlier state.
+ICB_EVENT_KINDS = {"leadership", "legal-end", "new-icb", "national", "curated"}
+
+
+def check_icb_watch(doc, today_iso=None):
+    today_iso = today_iso or today().isoformat()
+    if doc is None:
+        FAIL("icb-watch", "data/icb-watch.json is missing — the structure page's ICB watch and "
+                          "the Live Desk's ICB rows have nothing to read.")
+        return
+    icbs = doc.get("icbs") or []
+    codes = [i.get("code") for i in icbs]
+    if set(codes) != ICB_CODES:
+        extra = sorted(set(codes) - ICB_CODES)
+        gone = sorted(ICB_CODES - set(codes))
+        FAIL("icb-watch", "the live ICB list from ODS no longer matches the 36 in ICB_CODES "
+                          "(new: %s; missing: %s). If a merger round has landed, update ICB_CODES "
+                          "here, ICB in scripts/refresh_trusts.py and the structure page together; "
+                          "never publish a count nobody reconciled." % (extra or "none", gone or "none"))
+    if doc.get("count") != len(icbs):
+        FAIL("icb-watch", "count says %r but %d ICBs are listed." % (doc.get("count"), len(icbs)))
+    for c in doc.get("clusters") or []:
+        if len(c) < 2 or not set(c) <= set(codes):
+            FAIL("icb-watch", "cluster %r names an ICB that is not live, or has one member." % (c,))
+    gen = doc.get("generated") or ""
+    if gen > today_iso:
+        FAIL("icb-watch", "generated date %s is in the future." % gen)
+    elif gen and (as_date(gen) and (as_date(today_iso) - as_date(gen)).days > 10):
+        WARN("icb-watch", "data/icb-watch.json was last refreshed %s — icb-watch.yml may have "
+                          "stopped running." % gen)
+    st = doc.get("nationalStatement") or {}
+    if not str(st.get("url", "")).startswith("https://www.england.nhs.uk/") or not st.get("text"):
+        FAIL("icb-watch", "the national merger statement has no NHS England source or no text.")
+    for i in icbs:
+        who = i.get("name") or i.get("code")
+        for l in i.get("leaders") or []:
+            if l.get("name") and not str(i.get("leadersSource", "")).startswith("https://"):
+                FAIL("icb-watch", "%s: %s is named with no https source." % (who, l["name"]))
+        for e in i.get("execs") or []:
+            if not e.get("name") or not e.get("title"):
+                FAIL("icb-watch", "%s: an executive entry has no name or no title." % who)
+            if not str(e.get("url", "")).startswith("https://"):
+                FAIL("icb-watch", "%s: %r is named as %r with no https source."
+                     % (who, e.get("name"), e.get("title")))
+    for ev in doc.get("events") or []:
+        tag = (ev.get("headline") or "")[:70]
+        if ev.get("kind") not in ICB_EVENT_KINDS:
+            FAIL("icb-watch", "event %r has unknown kind %r." % (tag, ev.get("kind")))
+        if ev.get("icb") is not None and ev.get("icb") not in ICB_CODES:
+            FAIL("icb-watch", "event %r is about ICB %r, which is not live." % (tag, ev.get("icb")))
+        if not ev.get("date") or ev["date"] > today_iso:
+            FAIL("icb-watch", "event %r has no date or a future date (%r)." % (tag, ev.get("date")))
+        srcs = ev.get("sources") or []
+        if not srcs or not all(str(u).startswith("https://") for u in srcs):
+            FAIL("icb-watch", "event %r carries no https source. A claim about an ICB's "
+                              "leadership or structure must be traceable to where it was read."
+                              % tag)
+        if not ev.get("headline") or not ev.get("detail"):
+            FAIL("icb-watch", "event %r has no headline or no detail." % tag)
+        if ev.get("kind") == "curated" and not ev.get("verifiedOn"):
+            FAIL("icb-watch", "curated event %r has no verifiedOn date — nobody has recorded "
+                              "reading its source." % tag)
+        if ev.get("kind") == "leadership" and " (was " not in ev.get("headline", "") \
+                and "Previously listed" not in ev.get("detail", ""):
+            FAIL("icb-watch", "leadership event %r does not say what it replaced. A change is "
+                              "only publishable against a stored earlier observation." % tag)
+
+
+# --------------------------------------------------------------------------
 # 4. CONSENT GATE — personal data may not outrun its own privacy notice
 # --------------------------------------------------------------------------
 def check_privacy(contact_count, retention_months, offline):
@@ -6388,6 +6463,7 @@ def main():
     retention = None
 
     trust_codes = check_trust_map(load("trust-map.json"))
+    check_icb_watch(load("icb-watch.json"))
     n = check_contacts(load("trust-contacts.json"), trust_codes, blocked, retention) or 0
     check_tags(load("trust-contacts.json"), load("products.json"))
     check_moves(load("people-moves.json"), trust_codes, blocked,

@@ -98,6 +98,8 @@ ELSEWHERE = {
 # second; the matcher case needs node, which ubuntu-latest has. RUN: it has no
 # workflow of its own.
 RUN = [
+    # Added 30/09/2026 with scripts/refresh_icb_watch.py. Stdlib only, no network.
+    "test_icb_watch.py",
     "test_ask_passages.py",
     "test_hub_tools_demo_fixes.py",
     "test_breadcrumb_division.py",
