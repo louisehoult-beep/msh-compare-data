@@ -25,7 +25,7 @@
   "gpPrescribing": "2026-09-30",
   "mhraDsu": "2026-09-30",
   "drugTariffViiia": null,
-  "hospitalPrescribing": null
+  "hospitalPrescribing": "2026-09-30"
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -37,7 +37,8 @@
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: continence, ostomy). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 16 of the 22 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
   "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "MHRA does not tag Drug Safety Updates to this area: no GOV.UK therapeutic-area facet maps to this speciality. That is a fact about how GOV.UK files them, not a finding that there are no safety updates relevant to it.",
-  "drugTariffViiia": null
+  "drugTariffViiia": null,
+  "marketShare": "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY CARE: every item dispensed in England against a GP practice prescription, English Prescribing Dataset with SNOMED code, for the BNF codes named on each market (21.02), latest month 202607, with a 12-month total. SECONDARY CARE: NHS trust prescriptions dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's product label, so the products of one range are counted together; a label that names its supplier in brackets stays on its own, and every generic is one row. Share is share of ITEMS, never company share: the data does not name the company, and one company can own several brands. A change on a year earlier is printed only where that month had at least 25 items. An ICB's share is the brand's items as a share of that ICB's whole market in the same month."
  },
  "counts": {
   "frameworks": 2,
@@ -4776,5 +4777,1686 @@
   "roundupsExcluded": 0,
   "updates": []
  },
- "drugTariffViiia": null
+ "drugTariffViiia": null,
+ "marketShare": {
+  "markets": [
+   {
+    "id": "catheters",
+    "label": "Urinary catheters: BNF 21.02",
+    "bnf": [
+     "21.02"
+    ],
+    "primary": {
+     "basis": "items",
+     "latestPeriod": "202607",
+     "window12m": [
+      "202508",
+      "202607"
+     ],
+     "items": 138012,
+     "items12m": 1510348,
+     "brandCount": 66,
+     "topN": 12,
+     "brands": [
+      {
+       "brand": "SpeediCath",
+       "generic": false,
+       "products": [
+        "SpeediCath Compact catheter male one size",
+        "SpeediCath Compact catheter female",
+        "SpeediCath Flex catheter male",
+        "SpeediCath Compact Plus catheter female",
+        "SpeediCath catheter male"
+       ],
+       "items": 24608,
+       "share": 17.8,
+       "cost": 5851347,
+       "items12m": 287376,
+       "share12m": 19.0,
+       "yoy": -6.1,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 1626,
+         "shareOfIcb": 20.9
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 1398,
+         "shareOfIcb": 21.3
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 1391,
+         "shareOfIcb": 17.5
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 1382,
+         "shareOfIcb": 15.6
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 1218,
+         "shareOfIcb": 22.2
+        }
+       ]
+      },
+      {
+       "brand": "Prosys",
+       "generic": false,
+       "products": [
+        "Prosys all silicone catheter male",
+        "Prosys all silicone open ended catheter male",
+        "Prosys Vesica Community Catheterisation Pack",
+        "Prosys Vesica Community Catheterisation Pack LT",
+        "Prosys all silicone catheter female"
+       ],
+       "items": 16855,
+       "share": 12.2,
+       "cost": 306818,
+       "items12m": 170749,
+       "share12m": 11.3,
+       "yoy": 35.7,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 1517,
+         "shareOfIcb": 17.1
+        },
+        {
+         "icb": "QGH",
+         "name": "NHS Herefordshire and Worcestershire",
+         "items": 1089,
+         "shareOfIcb": 37.7
+        },
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 921,
+         "shareOfIcb": 18.3
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 823,
+         "shareOfIcb": 10.6
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 791,
+         "shareOfIcb": 14.4
+        }
+       ]
+      },
+      {
+       "brand": "Brillant",
+       "generic": false,
+       "products": [
+        "Brillant AquaFlate all silicone catheter male",
+        "Brillant AquaFlate all silicone catheter female",
+        "Brillant Plus AquaFlate all silicone catheter male"
+       ],
+       "items": 13211,
+       "share": 9.6,
+       "cost": 204395,
+       "items12m": 142448,
+       "share12m": 9.4,
+       "yoy": 4.6,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 1089,
+         "shareOfIcb": 13.7
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 1058,
+         "shareOfIcb": 17.6
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 945,
+         "shareOfIcb": 19.6
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 889,
+         "shareOfIcb": 11.4
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 855,
+         "shareOfIcb": 13.0
+        }
+       ]
+      },
+      {
+       "brand": "LoFric",
+       "generic": false,
+       "products": [
+        "LoFric Origo catheter male",
+        "LoFric Sense hydrophilic catheter female",
+        "LoFric Primo catheter male non PVC",
+        "LoFric Origo catheter male flexible",
+        "LoFric catheter male non PVC"
+       ],
+       "items": 12970,
+       "share": 9.4,
+       "cost": 2582717,
+       "items12m": 152541,
+       "share12m": 10.1,
+       "yoy": -6.4,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 824,
+         "shareOfIcb": 20.1
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 781,
+         "shareOfIcb": 13.0
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 779,
+         "shareOfIcb": 9.8
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 699,
+         "shareOfIcb": 11.7
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 679,
+         "shareOfIcb": 10.3
+        }
+       ]
+      },
+      {
+       "brand": "VaPro",
+       "generic": false,
+       "products": [
+        "VaPro Pocket No Touch hydrophilic catheter male",
+        "VaPro No Touch catheter male",
+        "VaPro Plus Pocket No Touch catheter male",
+        "VaPro F-Style No Touch catheter male",
+        "VaPro hydrophilic catheter male Tiemann tip"
+       ],
+       "items": 10750,
+       "share": 7.8,
+       "cost": 2549043,
+       "items12m": 116177,
+       "share12m": 7.7,
+       "yoy": 6.9,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 1021,
+         "shareOfIcb": 20.3
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 708,
+         "shareOfIcb": 9.1
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 592,
+         "shareOfIcb": 9.9
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 520,
+         "shareOfIcb": 10.7
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 512,
+         "shareOfIcb": 10.6
+        }
+       ]
+      },
+      {
+       "brand": "Luja",
+       "generic": false,
+       "products": [
+        "Luja catheter female",
+        "Luja catheter male",
+        "Luja pocket size catheter male"
+       ],
+       "items": 7283,
+       "share": 5.3,
+       "cost": 1682614,
+       "items12m": 73272,
+       "share12m": 4.9,
+       "yoy": 43.3,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 727,
+         "shareOfIcb": 9.4
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 493,
+         "shareOfIcb": 6.2
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 475,
+         "shareOfIcb": 7.2
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 461,
+         "shareOfIcb": 5.2
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 414,
+         "shareOfIcb": 6.9
+        }
+       ]
+      },
+      {
+       "brand": "Libra",
+       "generic": false,
+       "products": [
+        "Libra all slc cath + pfs of purified water for inflation & empty syrg for deflation male",
+        "Libra Cath Kit catheter male long tube",
+        "Libra Cath Kit catheter male short tube"
+       ],
+       "items": 6474,
+       "share": 4.7,
+       "cost": 167236,
+       "items12m": 68954,
+       "share12m": 4.6,
+       "yoy": 37.8,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 504,
+         "shareOfIcb": 12.8
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 503,
+         "shareOfIcb": 10.4
+        },
+        {
+         "icb": "QUY",
+         "name": "NHS Bristol, North Somerset and South Gloucestershire",
+         "items": 494,
+         "shareOfIcb": 18.4
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 477,
+         "shareOfIcb": 5.4
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 463,
+         "shareOfIcb": 5.8
+        }
+       ]
+      },
+      {
+       "brand": "Biocath",
+       "generic": false,
+       "products": [
+        "Biocath Aquamatic hydrogel coated pre-filled catheter male",
+        "Biocath Comprehensive Care Foley Tray catheter male medium",
+        "Biocath Comprehensive Care Foley Tray catheter male large",
+        "Biocath Comprehensive Care Foley Tray catheter male small",
+        "Biocath hydrogel coated catheter male"
+       ],
+       "items": 4900,
+       "share": 3.6,
+       "cost": 169810,
+       "items12m": 60082,
+       "share12m": 4.0,
+       "yoy": -15.4,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 613,
+         "shareOfIcb": 15.6
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 479,
+         "shareOfIcb": 9.2
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 353,
+         "shareOfIcb": 4.5
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 320,
+         "shareOfIcb": 3.6
+        },
+        {
+         "icb": "QR1",
+         "name": "NHS Gloucestershire",
+         "items": 275,
+         "shareOfIcb": 16.7
+        }
+       ]
+      },
+      {
+       "brand": "Actreen",
+       "generic": false,
+       "products": [
+        "Actreen Mini Cath catheter female",
+        "Actreen Mini set catheter female",
+        "Actreen Hi-Lite catheter male Tiemann tip",
+        "Actreen Hi-Lite catheter male",
+        "Actreen Hi-Lite catheter female"
+       ],
+       "items": 4509,
+       "share": 3.3,
+       "cost": 927018,
+       "items12m": 50588,
+       "share12m": 3.3,
+       "yoy": 4.8,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 1217,
+         "shareOfIcb": 13.7
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 476,
+         "shareOfIcb": 6.0
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 428,
+         "shareOfIcb": 8.2
+        },
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 295,
+         "shareOfIcb": 7.5
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 245,
+         "shareOfIcb": 6.0
+        }
+       ]
+      },
+      {
+       "brand": "LINC",
+       "generic": false,
+       "products": [
+        "LINC all silicone open tipped suprapubic cath + integral ball & glycerine filled syrg stnd",
+        "LINC all silicone open tipped suprapubic cath + integral balloon & water filled syrg stnd",
+        "LINC all silicone catheter with glycerine filled syringe male",
+        "LINC all silicone catheter with integral balloon and glycerine filled syringe standard",
+        "LINC all silicone catheter with integral balloon and glycerine filled syringe male"
+       ],
+       "items": 4473,
+       "share": 3.2,
+       "cost": 139691,
+       "items12m": 50952,
+       "share12m": 3.4,
+       "yoy": 10.4,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 383,
+         "shareOfIcb": 10.3
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 347,
+         "shareOfIcb": 5.3
+        },
+        {
+         "icb": "QUA",
+         "name": "NHS Black Country",
+         "items": 343,
+         "shareOfIcb": 10.5
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 312,
+         "shareOfIcb": 6.0
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 257,
+         "shareOfIcb": 5.3
+        }
+       ]
+      },
+      {
+       "brand": "Infyna",
+       "generic": false,
+       "products": [
+        "Infyna Chic hydrophilic catheter female",
+        "Infyna Plus hydrophilic catheter female",
+        "Infyna hydrophilic catheter female",
+        "Infyna hydrophilic catheter male"
+       ],
+       "items": 3450,
+       "share": 2.5,
+       "cost": 666230,
+       "items12m": 36196,
+       "share12m": 2.4,
+       "yoy": 15.6,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 242,
+         "shareOfIcb": 2.7
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 239,
+         "shareOfIcb": 4.0
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 209,
+         "shareOfIcb": 2.7
+        },
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 174,
+         "shareOfIcb": 3.5
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 173,
+         "shareOfIcb": 2.9
+        }
+       ]
+      },
+      {
+       "brand": "Liquick",
+       "generic": false,
+       "products": [
+        "Liquick X-treme catheter male",
+        "Liquick Base catheter male",
+        "Liquick Base catheter male Tiemann tip",
+        "Liquick X-treme Plus catheter male",
+        "Liquick X-treme catheter male Tiemann tip"
+       ],
+       "items": 3400,
+       "share": 2.5,
+       "cost": 608480,
+       "items12m": 35575,
+       "share12m": 2.4,
+       "yoy": 5.0,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 347,
+         "shareOfIcb": 4.5
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 342,
+         "shareOfIcb": 6.2
+        },
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 330,
+         "shareOfIcb": 7.8
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 329,
+         "shareOfIcb": 4.1
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 206,
+         "shareOfIcb": 2.3
+        }
+       ]
+      },
+      {
+       "brand": "Sympacath",
+       "generic": false,
+       "products": [
+        "Sympacath AquaFlate hydrogel coated latex catheter male",
+        "Sympacath AquaFlate hydrogel coated latex catheter female"
+       ],
+       "items": 3059,
+       "share": 2.2,
+       "cost": 51784,
+       "items12m": 35533,
+       "share12m": 2.4,
+       "yoy": -5.9,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 432,
+         "shareOfIcb": 6.6
+        },
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 429,
+         "shareOfIcb": 8.5
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 343,
+         "shareOfIcb": 6.3
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 242,
+         "shareOfIcb": 4.0
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 197,
+         "shareOfIcb": 3.8
+        }
+       ]
+      },
+      {
+       "brand": "Lubri-Sil",
+       "generic": false,
+       "products": [
+        "Lubri-Sil Comprehensive Care Foley Tray catheter male large",
+        "Lubri-Sil Aquafil hydrogel coated silicone catheter male",
+        "Lubri-Sil Comprehensive Care Foley Tray catheter male medium",
+        "Lubri-Sil Aquafil hydrogel coated silicone catheter female",
+        "Lubri-Sil Comprehensive Care Foley Tray catheter male small"
+       ],
+       "items": 2321,
+       "share": 1.7,
+       "cost": 88930,
+       "items12m": 25477,
+       "share12m": 1.7,
+       "yoy": 1.5,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 372,
+         "shareOfIcb": 7.1
+        },
+        {
+         "icb": "QUA",
+         "name": "NHS Black Country",
+         "items": 171,
+         "shareOfIcb": 5.2
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 159,
+         "shareOfIcb": 3.3
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 146,
+         "shareOfIcb": 2.4
+        },
+        {
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 134,
+         "shareOfIcb": 3.2
+        }
+       ]
+      },
+      {
+       "brand": "WyCath",
+       "generic": false,
+       "products": [
+        "WyCath H2O hydrophilic catheter male soft tip",
+        "WyCath hydrophilic meatal dilatation catheter male taper tip",
+        "WyCath H2O hydrophilic catheter male taper tip",
+        "WyCath H2O hydrophilic catheter male",
+        "WyCath uncoated catheter standard"
+       ],
+       "items": 2006,
+       "share": 1.5,
+       "cost": 216239,
+       "items12m": 21156,
+       "share12m": 1.4,
+       "yoy": 14.2,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 201,
+         "shareOfIcb": 2.3
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 159,
+         "shareOfIcb": 3.9
+        },
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 112,
+         "shareOfIcb": 2.6
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 108,
+         "shareOfIcb": 1.8
+        },
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 101,
+         "shareOfIcb": 2.6
+        }
+       ]
+      },
+      {
+       "brand": "Ugo",
+       "generic": false,
+       "products": [
+        "Ugo"
+       ],
+       "items": 1360,
+       "share": 1.0,
+       "cost": 18188,
+       "items12m": 11525,
+       "share12m": 0.8,
+       "yoy": 163.1,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 151,
+         "shareOfIcb": 1.9
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 146,
+         "shareOfIcb": 3.0
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 121,
+         "shareOfIcb": 1.5
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 80,
+         "shareOfIcb": 1.3
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 74,
+         "shareOfIcb": 1.1
+        }
+       ]
+      },
+      {
+       "brand": "iQ",
+       "generic": false,
+       "products": [
+        "iQ Cath hydrophilic catheter with sleeve male",
+        "iQ Cath integrated saline sachet hydrophilic catheter male",
+        "iQ Cath Gel+ catheter male",
+        "iQ Cath catheter male",
+        "iQ Cath hydrophilic catheter female"
+       ],
+       "items": 1317,
+       "share": 1.0,
+       "cost": 268932,
+       "items12m": 14460,
+       "share12m": 1.0,
+       "yoy": 1.5,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QVV",
+         "name": "NHS Dorset",
+         "items": 274,
+         "shareOfIcb": 10.8
+        },
+        {
+         "icb": "QJ2",
+         "name": "NHS Derby and Derbyshire",
+         "items": 130,
+         "shareOfIcb": 4.4
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 78,
+         "shareOfIcb": 1.3
+        },
+        {
+         "icb": "QOX",
+         "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+         "items": 69,
+         "shareOfIcb": 2.8
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 63,
+         "shareOfIcb": 1.7
+        }
+       ]
+      },
+      {
+       "brand": "Ugopro",
+       "generic": false,
+       "products": [
+        "Ugopro Catheterisation Procedure Pack"
+       ],
+       "items": 1283,
+       "share": 0.9,
+       "cost": 6240,
+       "items12m": 10908,
+       "share12m": 0.7,
+       "yoy": 62.6,
+       "icbsPrescribing": 35,
+       "topIcbs": [
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 260,
+         "shareOfIcb": 5.4
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 112,
+         "shareOfIcb": 1.4
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 109,
+         "shareOfIcb": 1.7
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 102,
+         "shareOfIcb": 1.3
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 98,
+         "shareOfIcb": 1.6
+        }
+       ]
+      },
+      {
+       "brand": "SensaCath",
+       "generic": false,
+       "products": [
+        "SensaCath hydrophilic catheter male",
+        "SensaCath Flex catheter male",
+        "SensaCath Aqua hydrophilic catheter male",
+        "SensaCath hydrophilic catheter female",
+        "SensaCath Aqua hydrophilic catheter female"
+       ],
+       "items": 1141,
+       "share": 0.8,
+       "cost": 141223,
+       "items12m": 11236,
+       "share12m": 0.7,
+       "yoy": 32.8,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 269,
+         "shareOfIcb": 6.3
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 148,
+         "shareOfIcb": 1.9
+        },
+        {
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 111,
+         "shareOfIcb": 4.0
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 74,
+         "shareOfIcb": 0.8
+        },
+        {
+         "icb": "QT1",
+         "name": "NHS Nottingham and Nottinghamshire",
+         "items": 50,
+         "shareOfIcb": 2.1
+        }
+       ]
+      },
+      {
+       "brand": "Bardex",
+       "generic": false,
+       "products": [
+        "Bardex I.C. silver alloy coated pre-filled catheter male",
+        "Bardex I.C. Bard Tray catheter male large",
+        "Bardex I.C. Bard Tray catheter male medium",
+        "Bardex I.C. Bard Tray catheter female large",
+        "Bardex I.C. Bard Tray catheter male small"
+       ],
+       "items": 945,
+       "share": 0.7,
+       "cost": 33959,
+       "items12m": 11048,
+       "share12m": 0.7,
+       "yoy": -3.8,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 88,
+         "shareOfIcb": 1.0
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 64,
+         "shareOfIcb": 1.2
+        },
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 63,
+         "shareOfIcb": 1.6
+        },
+        {
+         "icb": "QT6",
+         "name": "NHS Cornwall and the Isles of Scilly",
+         "items": 59,
+         "shareOfIcb": 3.6
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 58,
+         "shareOfIcb": 0.9
+        }
+       ]
+      },
+      {
+       "brand": "GC",
+       "generic": false,
+       "products": [
+        "GC Air catheter female V2.0",
+        "GC Air catheter male",
+        "GC Glide hydrophilic catheter male Tiemann tip",
+        "GC Air catheter male Tiemann tip",
+        "GC Glide hydrophilic catheter male"
+       ],
+       "items": 870,
+       "share": 0.6,
+       "cost": 151836,
+       "items12m": 5606,
+       "share12m": 0.4,
+       "yoy": 270.2,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 107,
+         "shareOfIcb": 1.2
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 70,
+         "shareOfIcb": 1.2
+        },
+        {
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 66,
+         "shareOfIcb": 1.6
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 51,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 46,
+         "shareOfIcb": 0.7
+        }
+       ]
+      },
+      {
+       "brand": "SpiritCare",
+       "generic": false,
+       "products": [
+        "SpiritCare all slc cath+pfs for ball inflation & supplementary syrg for ball deflation male",
+        "SpiritCare all slc cath + pfs for ball inflation & supp syrg for ball deflation female",
+        "SpiritCare hydrophilic catheter male",
+        "SpiritCare hydrophilic catheter female"
+       ],
+       "items": 783,
+       "share": 0.6,
+       "cost": 7822,
+       "items12m": 8057,
+       "share12m": 0.5,
+       "yoy": 12.8,
+       "icbsPrescribing": 9,
+       "topIcbs": [
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 560,
+         "shareOfIcb": 13.2
+        },
+        {
+         "icb": "QJ2",
+         "name": "NHS Derby and Derbyshire",
+         "items": 104,
+         "shareOfIcb": 3.5
+        },
+        {
+         "icb": "QT1",
+         "name": "NHS Nottingham and Nottinghamshire",
+         "items": 85,
+         "shareOfIcb": 3.5
+        },
+        {
+         "icb": "QWU",
+         "name": "NHS Coventry and Warwickshire",
+         "items": 3,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 2,
+         "shareOfIcb": 0.0
+        }
+       ]
+      },
+      {
+       "brand": "HydroSil",
+       "generic": false,
+       "products": [
+        "HydroSil gripper catheter male",
+        "HydroSil rose catheter female",
+        "HydroSil Silicone Hydrophilic Personal catheter female",
+        "HydroSil Silicone Hydrophilic Personal catheter male",
+        "HydroSil discreet catheter female"
+       ],
+       "items": 768,
+       "share": 0.6,
+       "cost": 138809,
+       "items12m": 9232,
+       "share12m": 0.6,
+       "yoy": -5.9,
+       "icbsPrescribing": 35,
+       "topIcbs": [
+        {
+         "icb": "QOX",
+         "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+         "items": 73,
+         "shareOfIcb": 3.0
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 49,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 48,
+         "shareOfIcb": 1.0
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 48,
+         "shareOfIcb": 0.7
+        },
+        {
+         "icb": "QPM",
+         "name": "NHS Northamptonshire",
+         "items": 43,
+         "shareOfIcb": 2.4
+        }
+       ]
+      },
+      {
+       "brand": "GentleCath",
+       "generic": false,
+       "products": [
+        "GentleCath Glide hydrophilic catheter male",
+        "GentleCath Glide hydrophilic catheter female"
+       ],
+       "items": 753,
+       "share": 0.5,
+       "cost": 96973,
+       "items12m": 6060,
+       "share12m": 0.4,
+       "yoy": 105.2,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 73,
+         "shareOfIcb": 0.8
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 63,
+         "shareOfIcb": 1.1
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 48,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 43,
+         "shareOfIcb": 1.0
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 40,
+         "shareOfIcb": 0.6
+        }
+       ]
+      },
+      {
+       "brand": "2",
+       "generic": false,
+       "products": [
+        "2 way foley all silicone catheter male open tip 14Ch-18Ch",
+        "2 way foy all slc cath+glyc filled syrg for inflation & empty syrg for deflation male 12Ch-24Ch",
+        "2 way foley all silicone catheter male 12Ch-18Ch",
+        "2 way foy all slc cath+glyc filled syrg for inflation&empty syrg for deflation Tiemann tip 12Ch-24Ch",
+        "2 way foley all silicone catheter female 12Ch-16Ch"
+       ],
+       "items": 744,
+       "share": 0.5,
+       "cost": 14585,
+       "items12m": 5865,
+       "share12m": 0.4,
+       "yoy": 74.6,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QT1",
+         "name": "NHS Nottingham and Nottinghamshire",
+         "items": 200,
+         "shareOfIcb": 8.3
+        },
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 66,
+         "shareOfIcb": 1.6
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 38,
+         "shareOfIcb": 0.6
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 34,
+         "shareOfIcb": 0.7
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 33,
+         "shareOfIcb": 0.7
+        }
+       ]
+      },
+      {
+       "brand": "Curan",
+       "generic": false,
+       "products": [
+        "Curan Lady catheter female",
+        "Curan Man catheter male",
+        "Curan Advantage catheter male",
+        "Curan Advantage catheter female",
+        "Curan Advantage catheter male Tiemann tip"
+       ],
+       "items": 715,
+       "share": 0.5,
+       "cost": 119921,
+       "items12m": 8229,
+       "share12m": 0.5,
+       "yoy": -0.4,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 87,
+         "shareOfIcb": 1.0
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 77,
+         "shareOfIcb": 1.4
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 66,
+         "shareOfIcb": 1.6
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 56,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 41,
+         "shareOfIcb": 0.8
+        }
+       ]
+      },
+      {
+       "brand": "The",
+       "generic": false,
+       "products": [
+        "The Ugobox Ugo"
+       ],
+       "items": 698,
+       "share": 0.5,
+       "cost": 20238,
+       "items12m": 6907,
+       "share12m": 0.5,
+       "yoy": 26.7,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 79,
+         "shareOfIcb": 1.3
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 59,
+         "shareOfIcb": 1.4
+        },
+        {
+         "icb": "QSL",
+         "name": "NHS Somerset",
+         "items": 58,
+         "shareOfIcb": 3.3
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 56,
+         "shareOfIcb": 1.1
+        },
+        {
+         "icb": "QR1",
+         "name": "NHS Gloucestershire",
+         "items": 54,
+         "shareOfIcb": 3.3
+        }
+       ]
+      },
+      {
+       "brand": "Conveen",
+       "generic": false,
+       "products": [
+        "Conveen EasiCath catheter male",
+        "Conveen EasiCath catheter female",
+        "Conveen EasiCath catheter male Tiemann tip"
+       ],
+       "items": 564,
+       "share": 0.4,
+       "cost": 99353,
+       "items12m": 7112,
+       "share12m": 0.5,
+       "yoy": -14.4,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 38,
+         "shareOfIcb": 0.4
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 35,
+         "shareOfIcb": 0.6
+        },
+        {
+         "icb": "QK1",
+         "name": "NHS Leicester, Leicestershire and Rutland",
+         "items": 33,
+         "shareOfIcb": 1.2
+        },
+        {
+         "icb": "QHL",
+         "name": "NHS Birmingham and Solihull",
+         "items": 28,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 25,
+         "shareOfIcb": 0.6
+        }
+       ]
+      },
+      {
+       "brand": "Foley",
+       "generic": false,
+       "products": [
+        "Foley all silicone catheter male",
+        "Foley catheter male",
+        "Foley catheter female"
+       ],
+       "items": 544,
+       "share": 0.4,
+       "cost": 14625,
+       "items12m": 6470,
+       "share12m": 0.4,
+       "yoy": -11.3,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 50,
+         "shareOfIcb": 1.0
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 39,
+         "shareOfIcb": 0.4
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 37,
+         "shareOfIcb": 0.6
+        },
+        {
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 34,
+         "shareOfIcb": 0.8
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 30,
+         "shareOfIcb": 0.6
+        }
+       ]
+      },
+      {
+       "brand": "UltraSmooth",
+       "generic": false,
+       "products": [
+        "UltraSmooth hydrophilic meatal dilatation catheter male taper tip",
+        "UltraSmooth meatal dilatation catheter male",
+        "UltraSmooth Aqua hydrophilic catheter male",
+        "UltraSmooth MCath4 catheter male",
+        "UltraSmooth Aqua hydrophilic catheter female"
+       ],
+       "items": 516,
+       "share": 0.4,
+       "cost": 44858,
+       "items12m": 6407,
+       "share12m": 0.4,
+       "yoy": -9.3,
+       "icbsPrescribing": 35,
+       "topIcbs": [
+        {
+         "icb": "QOX",
+         "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+         "items": 88,
+         "shareOfIcb": 3.6
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 47,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 41,
+         "shareOfIcb": 0.5
+        },
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 37,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 21,
+         "shareOfIcb": 0.4
+        }
+       ]
+      }
+     ],
+     "otherBrands": {
+      "count": 36,
+      "items": 4742,
+      "share": 3.4
+     }
+    },
+    "secondary": {
+     "basis": "items",
+     "window12m": [
+      "202508",
+      "202607"
+     ],
+     "items12m": 159,
+     "trusts": 28,
+     "brandCount": 24,
+     "brands": [
+      {
+       "brand": "Biocath",
+       "generic": false,
+       "items12m": 33,
+       "share12m": 20.8,
+       "yoy": null
+      },
+      {
+       "brand": "Sympacath",
+       "generic": false,
+       "items12m": 30,
+       "share12m": 18.9,
+       "yoy": null
+      },
+      {
+       "brand": "Prosys",
+       "generic": false,
+       "items12m": 22,
+       "share12m": 13.8,
+       "yoy": null
+      },
+      {
+       "brand": "SpeediCath",
+       "generic": false,
+       "items12m": 15,
+       "share12m": 9.4,
+       "yoy": null
+      },
+      {
+       "brand": "Libra",
+       "generic": false,
+       "items12m": 9,
+       "share12m": 5.7,
+       "yoy": null
+      },
+      {
+       "brand": "LoFric",
+       "generic": false,
+       "items12m": 7,
+       "share12m": 4.4,
+       "yoy": null
+      },
+      {
+       "brand": "VaPro",
+       "generic": false,
+       "items12m": 7,
+       "share12m": 4.4,
+       "yoy": null
+      },
+      {
+       "brand": "Brillant",
+       "generic": false,
+       "items12m": 4,
+       "share12m": 2.5,
+       "yoy": null
+      },
+      {
+       "brand": "Actreen",
+       "generic": false,
+       "items12m": 3,
+       "share12m": 1.9,
+       "yoy": null
+      },
+      {
+       "brand": "Bardex",
+       "generic": false,
+       "items12m": 3,
+       "share12m": 1.9,
+       "yoy": null
+      },
+      {
+       "brand": "Foley",
+       "generic": false,
+       "items12m": 3,
+       "share12m": 1.9,
+       "yoy": null
+      },
+      {
+       "brand": "LINC",
+       "generic": false,
+       "items12m": 3,
+       "share12m": 1.9,
+       "yoy": null
+      },
+      {
+       "brand": "Luja",
+       "generic": false,
+       "items12m": 3,
+       "share12m": 1.9,
+       "yoy": null
+      },
+      {
+       "brand": "UltraSmooth",
+       "generic": false,
+       "items12m": 3,
+       "share12m": 1.9,
+       "yoy": null
+      },
+      {
+       "brand": "Curan",
+       "generic": false,
+       "items12m": 2,
+       "share12m": 1.3,
+       "yoy": null
+      }
+     ],
+     "source": "NHSBSA Open Data — hospital prescribing dispensed in the community",
+     "sourceUrl": "https://opendata.nhsbsa.net/dataset/hospital-prescribing-dispensed-in-the-community",
+     "scope": "Items prescribed by an NHS trust in England and dispensed in a community pharmacy. Not in-hospital usage, and not GP prescribing."
+    },
+    "tariff": {
+     "effectiveMonth": "2026-09",
+     "lineCount": 1682,
+     "supplierCount": 30,
+     "bnfFilter": [
+      "2102"
+     ],
+     "topSuppliers": [
+      {
+       "name": "Teleflex",
+       "lines": 205
+      },
+      {
+       "name": "Bard Ltd",
+       "lines": 151
+      },
+      {
+       "name": "Coloplast Ltd",
+       "lines": 147
+      },
+      {
+       "name": "Charles S Bullen Stomacare Ltd",
+       "lines": 111
+      },
+      {
+       "name": "Wellspect HealthCare",
+       "lines": 111
+      },
+      {
+       "name": "Flexicare Medical Ltd",
+       "lines": 104
+      },
+      {
+       "name": "LINC Medical Systems Ltd",
+       "lines": 95
+      },
+      {
+       "name": "Hollister Ltd",
+       "lines": 87
+      },
+      {
+       "name": "B.Braun Medical Ltd",
+       "lines": 84
+      },
+      {
+       "name": "Hunter Urology Ltd",
+       "lines": 61
+      },
+      {
+       "name": "Clinisupplies Ltd",
+       "lines": 51
+      },
+      {
+       "name": "Peak Medical Ltd",
+       "lines": 50
+      }
+     ]
+    }
+   }
+  ],
+  "gpSource": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "gpSourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority."
+ }
 }

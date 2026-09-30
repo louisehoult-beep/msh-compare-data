@@ -8673,7 +8673,14 @@ GP_MARKETS = {
         {"id": "diabetes", "label": "Drugs used in diabetes: BNF 6.1", "prefixes": ["0601"],
          "note": "BNF 6.1 includes GLP-1 and GIP/GLP-1 medicines prescribed for weight "
                  "management; the dataset does not separate them by indication."},
-        {"id": "sensors", "label": "Interstitial fluid glucose sensors: BNF 21.48", "prefixes": ["2148"]},
+        {"id": "sensors", "label": "Interstitial fluid glucose sensors: BNF 21.48", "prefixes": ["2148"],
+         "brandShare": True},
+        # SHARE ONLY (30/09/2026): blood glucose testing strips are Drug Tariff Part IXR
+        # and NHSBSA files them in chapter 6, "Glucose blood testing reagents"
+        # (0601060D0), not in chapter 21. BNF 6.1 already sizes them inside "Drugs used
+        # in diabetes", so this entry feeds only the brand-share block.
+        {"id": "bg-strips", "label": "Blood glucose testing strips: BNF 0601060D0 glucose blood testing reagents",
+         "prefixes": ["0601060D0"], "brandShare": True, "shareOnly": True},
         {"id": "thyroid", "label": "Thyroid and antithyroid drugs: BNF 6.2", "prefixes": ["0602"]},
     ],
     "obesity-and-weight-management": [
@@ -8687,6 +8694,13 @@ GP_MARKETS = {
     "continence-bladder-and-bowel": [
         {"id": "continence", "label": "Catheters, catheter maintenance and incontinence appliances: BNF 21.02, 21.13 and chapter 22",
          "prefixes": ["2102", "2113", "22"]},
+        # SHARE ONLY (30/09/2026): catheters on their own. Chapter 22 labels include
+        # descriptions that are not brands ("Elasticated cotton leg strap") and a
+        # company name used as a brand ("Coloplast drainable night drainage bag"), so
+        # brand share is computed for the catheter section, where every leading label
+        # is a product range (SpeediCath, LoFric, VaPro, Prosys).
+        {"id": "catheters", "label": "Urinary catheters: BNF 21.02", "prefixes": ["2102"],
+         "brandShare": True, "shareOnly": True},
         {"id": "irrigation", "label": "Anal irrigation systems: BNF 21.28", "prefixes": ["2128"]},
     ],
     "urology": [
@@ -8696,10 +8710,17 @@ GP_MARKETS = {
     ],
     "colorectal-gi-and-endoscopy": [
         {"id": "stoma", "label": "Stoma appliances: BNF chapter 23", "prefixes": ["23"]},
+        # SHARE ONLY (30/09/2026): the bags. Across the whole of chapter 23 the largest
+        # "brands" are skin barrier creams and adhesive removers (Medi Derma-S, Cavilon,
+        # Brava), prescribed well beyond stoma care, so brand share is computed for the
+        # four bag sections, where the ranges are the stoma market itself.
+        {"id": "stoma-bags", "label": "Stoma bags: BNF 23.35 colostomy, 23.60 ileostomy, 23.94 two piece systems, 23.96 urostomy",
+         "prefixes": ["2335", "2360", "2394", "2396"], "brandShare": True, "shareOnly": True},
         {"id": "gi", "label": "Gastro-intestinal system: BNF chapter 1", "prefixes": ["01"]},
     ],
     "tissue-viability-and-wound-care": [
-        {"id": "dressings", "label": "Wound management and other dressings: BNF 20.03", "prefixes": ["2003"]},
+        {"id": "dressings", "label": "Wound management and other dressings: BNF 20.03", "prefixes": ["2003"],
+         "brandShare": True},
         {"id": "compression", "label": "Elastic hosiery, venous ulcer compression and lymphoedema garments: BNF 21.07, 21.20 and 21.27",
          "prefixes": ["2107", "2120", "2127"]},
     ],
@@ -8887,7 +8908,7 @@ def build_gp_prescribing(slug, gp):
                                  "prescribing market is sized here rather than borrowing "
                                  "a neighbouring page's."})
         return base
-    out = [m for m in (gp_market(mk, gp) for mk in markets) if m]
+    out = [m for m in (gp_market(mk, gp) for mk in markets if not mk.get("shareOnly")) if m]
     base.update({"defined": True, "markets": out})
     return base
 
@@ -9113,7 +9134,28 @@ def hp_brand_share(market, hp):
     }
 
 
-def build_market_share(slug, gp, hp, tariff):
+def market_tariff(market, dt_doc):
+    """Every Drug Tariff Part IX line NHSBSA files under the market's own BNF codes, in
+    any part. Until 30/09/2026 the block reused the panel's Part IX slice, which is the
+    same codes only for dermatology (IXA narrowed to 21.22). For continence the panel
+    slice is IXB and IXC, which holds no catheters (NHSBSA lists them in IXA) and does
+    hold every stoma line; for diabetes it is the whole pen needle, lancet and strip
+    range. The block says "Part IX lines listed for these codes", so it is built from
+    these codes."""
+    if not dt_doc or not dt_doc.get("rows"):
+        return None
+    ix = {k: i for i, k in enumerate(dt_doc["schema"])}
+    if "bnf" not in ix:
+        return None
+    pre = tuple(market["prefixes"])
+    rows = [r for r in dt_doc["rows"] if (r[ix["bnf"]] or "").startswith(pre)]
+    if not rows:
+        return None
+    parts = sorted({r[ix["part"]] for r in rows})
+    return summarise_tariff(rows, ix, parts, pre, None, dt_doc)
+
+
+def build_market_share(slug, gp, hp, tariff, dt_doc=None):
     """The computed 'who holds the market' block for each GP market marked brandShare."""
     if gp is None or gp.index is None:
         return None
@@ -9126,6 +9168,8 @@ def build_market_share(slug, gp, hp, tariff):
             continue
         sec = hp_brand_share(mk, hp)
         dt = None
+        if dt_doc is not None:
+            tariff = market_tariff(mk, dt_doc)
         if tariff and tariff.get("topSuppliers"):
             dt = {"effectiveMonth": tariff.get("effectiveMonth"),
                   "lineCount": tariff.get("lineCount"),
@@ -9145,25 +9189,29 @@ def build_market_share(slug, gp, hp, tariff):
 def market_share_rule(ms):
     if not ms:
         return None
-    m = ms["markets"][0]
-    p = m["primary"]
+    codes = []
+    for m in ms["markets"]:
+        for c in m["bnf"]:
+            if c not in codes:
+                codes.append(c)
+    p = ms["markets"][0]["primary"]
     return (
         "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY "
         "CARE: every item dispensed in England against a GP practice prescription, English "
-        "Prescribing Dataset with SNOMED code, for the BNF codes named on the market (%s), "
+        "Prescribing Dataset with SNOMED code, for the BNF codes named on each market (%s), "
         "latest month %s, with a 12-month total. SECONDARY CARE: NHS trust prescriptions "
         "dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the "
         "community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA "
-        "publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: this "
-        "panel's Part IX slice, counted in tariff lines per supplier, which measures what is "
-        "listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's "
+        "publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every "
+        "Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff "
+        "lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's "
         "product label, so the products of one range are counted together; a label that names "
         "its supplier in brackets stays on its own, and every generic is one row. Share is "
         "share of ITEMS, never company share: the data does not name the company, and one "
         "company can own several brands. A change on a year earlier is printed only where "
         "that month had at least 25 items. An ICB's share is the brand's items as a share "
         "of that ICB's whole market in the same month."
-        % (", ".join(m["bnf"]), p["latestPeriod"]))
+        % (", ".join(codes), p["latestPeriod"]))
 
 
 def build_mhra_dsu(slug, dsu_doc, limit=8):
@@ -9196,6 +9244,8 @@ def viiia_prefixes(slug):
     prefix already covered by a shorter one dropped."""
     cand = []
     for m in GP_MARKETS.get(slug) or []:
+        if m.get("shareOnly"):
+            continue
         for p in m["prefixes"]:
             if p[:2] not in ("20", "21", "22", "23") and p not in cand:
                 cand.append(p)
@@ -9495,7 +9545,7 @@ def build(slug, sources):
     gp = build_gp_prescribing(slug, sources.get("gp"))
     dsu = build_mhra_dsu(slug, sources.get("mhra_dsu"))
     viiia = build_viiia(slug, rule, sources.get("tariff_viiia"))
-    market_share = build_market_share(slug, sources.get("gp"), sources.get("hp"), tariff)
+    market_share = build_market_share(slug, sources.get("gp"), sources.get("hp"), tariff, dt_doc)
     check_absent_frameworks(slug, rule, fw_doc)
 
     ctx = {"slug": slug, "rule": rule, "frameworks": frameworks, "suppliers": suppliers,

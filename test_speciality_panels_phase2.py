@@ -258,6 +258,31 @@ class MarketShare(unittest.TestCase):
         self.assertEqual(B.brand_key("Urea", True)[0], "__generic__")
         self.assertEqual(B.brand_key("E45 cream", False)[1], "E45")
 
+    def test_appliance_markets_have_the_block(self):
+        """30/09/2026, Lou: the same block for stoma, continence, diabetes technology
+        and wound dressings. Each Drug Tariff view is built from the market's own BNF
+        codes, never from the panel's wider Part IX slice."""
+        want = {"colorectal-gi-and-endoscopy": ["stoma-bags"],
+                "continence-bladder-and-bowel": ["catheters"],
+                "diabetes-and-endocrinology": ["sensors", "bg-strips"],
+                "tissue-viability-and-wound-care": ["dressings"]}
+        dt = sources()["drug_tariff"]
+        ix = {k: i for i, k in enumerate(dt["schema"])}
+        for slug, ids in want.items():
+            d = panel(slug)
+            ms = d.get("marketShare")
+            self.assertEqual([m["id"] for m in ms["markets"]], ids, slug)
+            for m in ms["markets"]:
+                self.assertTrue(m["primary"]["brands"], (slug, m["id"]))
+                mk = next(x for x in B.GP_MARKETS[slug] if x["id"] == m["id"])
+                n = sum(1 for r in dt["rows"] if (r[ix["bnf"]] or "").startswith(tuple(mk["prefixes"])))
+                self.assertEqual(m["tariff"]["lineCount"], n, (slug, m["id"]))
+            # share-only markets feed the block, not the GP prescribing sizing
+            gp_ids = [x["id"] for x in d["gpPrescribing"]["markets"]]
+            for mk in B.GP_MARKETS[slug]:
+                if mk.get("shareOnly"):
+                    self.assertNotIn(mk["id"], gp_ids)
+
     def test_unmarked_speciality_has_no_block(self):
         self.assertNotIn("marketShare", panel("respiratory"))
 

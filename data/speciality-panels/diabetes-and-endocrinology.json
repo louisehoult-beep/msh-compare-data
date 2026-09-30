@@ -25,7 +25,7 @@
   "gpPrescribing": "2026-09-30",
   "mhraDsu": "2026-09-30",
   "drugTariffViiia": "2026-09-30",
-  "hospitalPrescribing": null
+  "hospitalPrescribing": "2026-09-30"
  },
  "rules": {
   "localIntel": "Hand-curated from primary sources: each item was read at its own source on the date shown, states only what that source says, and quotes it where a quote is given. Where a source does not settle something (a winner, an end date) the item says not verified. Every link is re-checked on each daily build; an item whose source has gone is withdrawn until it is re-sourced. This is not a census: it lists the contracts, formularies and papers found and read, not every one that exists.",
@@ -37,7 +37,8 @@
   "directorySuppliers": "Companies the Hub's own supplier directory files under this speciality, from the speciality labels on each company's directory record, resolved through speciality-label-map.json and speciality-map.json (Compare ids: diabetes). They are labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's range, not a procurement record: being listed here is not evidence of a contract or of volume, and the list is not a census of the market. A company that is also on this speciality's own frameworks is listed once, with the framework-named suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is not counted as this speciality's, it is still listed, with that framework named against it and linked, so it is not lost from the page. 6 of the 10 listed here carry such a note. Framework names and links come from NHS Supply Chain's own contract launch briefs as held in frameworks.json; an agreement the directory records from another buying organisation, such as an NHS Shared Business Services framework, is shown as the directory states it.",
   "gpPrescribing": "Items prescribed in primary care in England (GP practices and other prescribers NHSBSA attributes to a practice) and dispensed in the community, aggregated to ICB. Not hospital in-patient use, and not the trust-level hospital prescribing dataset. Source: NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code. Each market below is a set of BNF codes exactly as NHSBSA classifies them, named with the market. Figures are for the latest month in the dataset (202607) with a 12-month total; a change on the same month a year earlier is published only where that month had at least 25 items, and otherwise no percentage is printed. Share is share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a catch-all code holds several brands). It is product share, not company share: the dataset does not name the company, and one company can hold several products. An ICB's leaders are ranked within that ICB's own total for the same market and month. Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority.",
   "mhraDsu": "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and medicine recalls sent to healthcare professionals' roundup is left out (26 here). Newest first; the count is every tagged update in the archive, and the list shows the most recent. MHRA Drug Safety Update, GOV.UK, as at 2026-09-30.",
-  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-09: narrowed to the lines whose medicine NHSBSA prescribes under BNF 06.01 or 06.02. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,533 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first."
+  "drugTariffViiia": "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective month 2026-09: narrowed to the lines whose medicine NHSBSA prescribes under BNF 06.01 or 06.02. The BNF code is the one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing Dataset, the same classification-first approach as the Part IX slice, never a medicine-name pattern. 53 of the 3,533 lines in the file carry no BNF code because the medicine was not prescribed in primary care in the months read, so this slice can understate the range and does not overstate it. Every count and price is taken from the lines selected. Prices are the basic price at publication, converted from the pence NHSBSA publishes, and are not necessarily today's. The list shows at most 80 lines, Category M first.",
+  "marketShare": "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY CARE: every item dispensed in England against a GP practice prescription, English Prescribing Dataset with SNOMED code, for the BNF codes named on each market (21.48, 0601060D0), latest month 202607, with a 12-month total. SECONDARY CARE: NHS trust prescriptions dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: every Part IX line NHSBSA files under the same BNF codes, in any part, counted in tariff lines per supplier, which measures what is listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's product label, so the products of one range are counted together; a label that names its supplier in brackets stays on its own, and every generic is one row. Share is share of ITEMS, never company share: the data does not name the company, and one company can own several brands. A change on a year earlier is printed only where that month had at least 25 items. An ICB's share is the brand's items as a share of that ICB's whole market in the same month."
  },
  "counts": {
   "frameworks": 1,
@@ -5041,5 +5042,1984 @@
     "bnf": "0601012S0AAAEAE"
    }
   ]
+ },
+ "marketShare": {
+  "markets": [
+   {
+    "id": "sensors",
+    "label": "Interstitial fluid glucose sensors: BNF 21.48",
+    "bnf": [
+     "21.48"
+    ],
+    "primary": {
+     "basis": "items",
+     "latestPeriod": "202607",
+     "window12m": [
+      "202508",
+      "202607"
+     ],
+     "items": 449261,
+     "items12m": 4669248,
+     "brandCount": 6,
+     "topN": 12,
+     "brands": [
+      {
+       "brand": "FreeStyle",
+       "generic": false,
+       "products": [
+        "FreeStyle Libre"
+       ],
+       "items": 413604,
+       "share": 92.1,
+       "cost": 34284996,
+       "items12m": 4322060,
+       "share12m": 92.6,
+       "yoy": 13.8,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 27267,
+         "shareOfIcb": 93.6
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 23242,
+         "shareOfIcb": 93.7
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 21443,
+         "shareOfIcb": 92.4
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 21430,
+         "shareOfIcb": 90.7
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 19020,
+         "shareOfIcb": 95.1
+        }
+       ]
+      },
+      {
+       "brand": "Dexcom",
+       "generic": false,
+       "products": [
+        "Dexcom One+ Sensor"
+       ],
+       "items": 35501,
+       "share": 7.9,
+       "cost": 2666873,
+       "items12m": 346221,
+       "share12m": 7.4,
+       "yoy": 32.6,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 2192,
+         "shareOfIcb": 9.3
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 1838,
+         "shareOfIcb": 6.3
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 1748,
+         "shareOfIcb": 7.5
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 1690,
+         "shareOfIcb": 10.1
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 1629,
+         "shareOfIcb": 8.8
+        }
+       ]
+      },
+      {
+       "brand": "GlucoMen",
+       "generic": false,
+       "products": [
+        "GlucoMen iCan Sensor"
+       ],
+       "items": 54,
+       "share": 0.0,
+       "cost": 3427,
+       "items12m": 243,
+       "share12m": 0.0,
+       "yoy": null,
+       "icbsPrescribing": 12,
+       "topIcbs": [
+        {
+         "icb": "QT6",
+         "name": "NHS Cornwall and the Isles of Scilly",
+         "items": 17,
+         "shareOfIcb": 0.4
+        },
+        {
+         "icb": "QSL",
+         "name": "NHS Somerset",
+         "items": 15,
+         "shareOfIcb": 0.3
+        },
+        {
+         "icb": "QOC",
+         "name": "NHS Shropshire, Telford and Wrekin",
+         "items": 7,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 5,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 2,
+         "shareOfIcb": 0.0
+        }
+       ]
+      },
+      {
+       "brand": "Accu-Chek",
+       "generic": false,
+       "products": [
+        "Accu-Chek SmartGuide Sensor"
+       ],
+       "items": 52,
+       "share": 0.0,
+       "cost": 2661,
+       "items12m": 218,
+       "share12m": 0.0,
+       "yoy": null,
+       "icbsPrescribing": 19,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 11,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QT1",
+         "name": "NHS Nottingham and Nottinghamshire",
+         "items": 6,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 5,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 4,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QNC",
+         "name": "NHS Staffordshire and Stoke-on-trent",
+         "items": 4,
+         "shareOfIcb": 0.1
+        }
+       ]
+      },
+      {
+       "brand": "CareSens",
+       "generic": false,
+       "products": [
+        "CareSens Air Sensor"
+       ],
+       "items": 46,
+       "share": 0.0,
+       "cost": 2699,
+       "items12m": 438,
+       "share12m": 0.0,
+       "yoy": null,
+       "icbsPrescribing": 10,
+       "topIcbs": [
+        {
+         "icb": "QK1",
+         "name": "NHS Leicester, Leicestershire and Rutland",
+         "items": 23,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 14,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 2,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QGH",
+         "name": "NHS Herefordshire and Worcestershire",
+         "items": 1,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QHL",
+         "name": "NHS Birmingham and Solihull",
+         "items": 1,
+         "shareOfIcb": 0.0
+        }
+       ]
+      },
+      {
+       "brand": "GlucoRx",
+       "generic": false,
+       "products": [
+        "GlucoRx AiDEX Sensor"
+       ],
+       "items": 4,
+       "share": 0.0,
+       "cost": 208,
+       "items12m": 68,
+       "share12m": 0.0,
+       "yoy": null,
+       "icbsPrescribing": 4,
+       "topIcbs": [
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 1,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QKK",
+         "name": "NHS South East London",
+         "items": 1,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 1,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 1,
+         "shareOfIcb": 0.0
+        }
+       ]
+      }
+     ],
+     "otherBrands": {
+      "count": 0,
+      "items": 0,
+      "share": 0.0
+     }
+    },
+    "secondary": {
+     "basis": "items",
+     "window12m": [
+      "202508",
+      "202607"
+     ],
+     "items12m": 1888,
+     "trusts": 104,
+     "brandCount": 3,
+     "brands": [
+      {
+       "brand": "FreeStyle",
+       "generic": false,
+       "items12m": 1719,
+       "share12m": 91.0,
+       "yoy": 3.1
+      },
+      {
+       "brand": "Dexcom",
+       "generic": false,
+       "items12m": 168,
+       "share12m": 8.9,
+       "yoy": null
+      },
+      {
+       "brand": "GlucoMen",
+       "generic": false,
+       "items12m": 1,
+       "share12m": 0.1,
+       "yoy": null
+      }
+     ],
+     "source": "NHSBSA Open Data — hospital prescribing dispensed in the community",
+     "sourceUrl": "https://opendata.nhsbsa.net/dataset/hospital-prescribing-dispensed-in-the-community",
+     "scope": "Items prescribed by an NHS trust in England and dispensed in a community pharmacy. Not in-hospital usage, and not GP prescribing."
+    },
+    "tariff": {
+     "effectiveMonth": "2026-09",
+     "lineCount": 10,
+     "supplierCount": 8,
+     "bnfFilter": [
+      "2148"
+     ],
+     "topSuppliers": [
+      {
+       "name": "Abbott Laboratories Ltd",
+       "lines": 2
+      },
+      {
+       "name": "GlucoRx Ltd",
+       "lines": 2
+      },
+      {
+       "name": "A. Menarini Diagnostics Ltd",
+       "lines": 1
+      },
+      {
+       "name": "AgaMatrix Europe Ltd",
+       "lines": 1
+      },
+      {
+       "name": "Dexcom International Ltd",
+       "lines": 1
+      },
+      {
+       "name": "Roche Diagnostics Ltd",
+       "lines": 1
+      },
+      {
+       "name": "Shenzhen Sisensing Co., Ltd",
+       "lines": 1
+      },
+      {
+       "name": "Spirit Healthcare Ltd",
+       "lines": 1
+      }
+     ]
+    }
+   },
+   {
+    "id": "bg-strips",
+    "label": "Blood glucose testing strips: BNF 0601060D0 glucose blood testing reagents",
+    "bnf": [
+     "0601060D0"
+    ],
+    "primary": {
+     "basis": "items",
+     "latestPeriod": "202607",
+     "window12m": [
+      "202508",
+      "202607"
+     ],
+     "items": 432837,
+     "items12m": 5042751,
+     "brandCount": 45,
+     "topN": 12,
+     "brands": [
+      {
+       "brand": "GlucoRx",
+       "generic": false,
+       "products": [
+        "GlucoRx Q testing strips",
+        "GlucoRx Smart Glucose testing strips",
+        "GlucoRx X6 Glucose testing strips"
+       ],
+       "items": 119715,
+       "share": 27.7,
+       "cost": 1250079,
+       "items12m": 1395133,
+       "share12m": 27.7,
+       "yoy": -5.5,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 12533,
+         "shareOfIcb": 45.1
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 10731,
+         "shareOfIcb": 51.0
+        },
+        {
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 6778,
+         "shareOfIcb": 32.3
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 6755,
+         "shareOfIcb": 29.0
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 6248,
+         "shareOfIcb": 45.0
+        }
+       ]
+      },
+      {
+       "brand": "Contour",
+       "generic": false,
+       "products": [
+        "Contour Plus testing strips",
+        "Contour Next testing strips",
+        "Contour testing strips"
+       ],
+       "items": 69566,
+       "share": 16.1,
+       "cost": 761305,
+       "items12m": 761085,
+       "share12m": 15.1,
+       "yoy": 7.7,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 10271,
+         "shareOfIcb": 44.0
+        },
+        {
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 6504,
+         "shareOfIcb": 31.0
+        },
+        {
+         "icb": "QHL",
+         "name": "NHS Birmingham and Solihull",
+         "items": 5546,
+         "shareOfIcb": 31.1
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 5535,
+         "shareOfIcb": 23.5
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 3639,
+         "shareOfIcb": 14.6
+        }
+       ]
+      },
+      {
+       "brand": "GLUCOFIX",
+       "generic": false,
+       "products": [
+        "GLUCOFIX TECH Sensor testing stips"
+       ],
+       "items": 42063,
+       "share": 9.7,
+       "cost": 365539,
+       "items12m": 459030,
+       "share12m": 9.1,
+       "yoy": 9.8,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 4348,
+         "shareOfIcb": 15.7
+        },
+        {
+         "icb": "QUA",
+         "name": "NHS Black Country",
+         "items": 3921,
+         "shareOfIcb": 28.9
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 3277,
+         "shareOfIcb": 13.9
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 3016,
+         "shareOfIcb": 25.9
+        },
+        {
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 2571,
+         "shareOfIcb": 22.6
+        }
+       ]
+      },
+      {
+       "brand": "Finetest",
+       "generic": false,
+       "products": [
+        "Finetest Lite testing strips"
+       ],
+       "items": 32965,
+       "share": 7.6,
+       "cost": 248149,
+       "items12m": 376552,
+       "share12m": 7.5,
+       "yoy": -3.1,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QPM",
+         "name": "NHS Northamptonshire",
+         "items": 5687,
+         "shareOfIcb": 78.9
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 4340,
+         "shareOfIcb": 20.6
+        },
+        {
+         "icb": "QK1",
+         "name": "NHS Leicester, Leicestershire and Rutland",
+         "items": 4323,
+         "shareOfIcb": 38.5
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 3421,
+         "shareOfIcb": 12.3
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 2658,
+         "shareOfIcb": 22.2
+        }
+       ]
+      },
+      {
+       "brand": "CareSens",
+       "generic": false,
+       "products": [
+        "CareSens S testing strips",
+        "CareSens PRO testing strips",
+        "CareSens N testing strips"
+       ],
+       "items": 29172,
+       "share": 6.7,
+       "cost": 356360,
+       "items12m": 307462,
+       "share12m": 6.1,
+       "yoy": 12.7,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QUA",
+         "name": "NHS Black Country",
+         "items": 4016,
+         "shareOfIcb": 29.6
+        },
+        {
+         "icb": "QWU",
+         "name": "NHS Coventry and Warwickshire",
+         "items": 2700,
+         "shareOfIcb": 42.8
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 2612,
+         "shareOfIcb": 10.5
+        },
+        {
+         "icb": "QNC",
+         "name": "NHS Staffordshire and Stoke-on-trent",
+         "items": 2558,
+         "shareOfIcb": 22.4
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 2398,
+         "shareOfIcb": 18.2
+        }
+       ]
+      },
+      {
+       "brand": "WaveSense",
+       "generic": false,
+       "products": [
+        "WaveSense JAZZ testing strips"
+       ],
+       "items": 29054,
+       "share": 6.7,
+       "cost": 463551,
+       "items12m": 384336,
+       "share12m": 7.6,
+       "yoy": -26.6,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QNC",
+         "name": "NHS Staffordshire and Stoke-on-trent",
+         "items": 1945,
+         "shareOfIcb": 17.0
+        },
+        {
+         "icb": "QJ2",
+         "name": "NHS Derby and Derbyshire",
+         "items": 1855,
+         "shareOfIcb": 20.8
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 1819,
+         "shareOfIcb": 7.3
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 1711,
+         "shareOfIcb": 6.2
+        },
+        {
+         "icb": "QKK",
+         "name": "NHS South East London",
+         "items": 1538,
+         "shareOfIcb": 11.8
+        }
+       ]
+      },
+      {
+       "brand": "Instant",
+       "generic": false,
+       "products": [
+        "Instant testing strips"
+       ],
+       "items": 25512,
+       "share": 5.9,
+       "cost": 252895,
+       "items12m": 311471,
+       "share12m": 6.2,
+       "yoy": -16.6,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 4521,
+         "shareOfIcb": 34.3
+        },
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 3096,
+         "shareOfIcb": 39.8
+        },
+        {
+         "icb": "QHL",
+         "name": "NHS Birmingham and Solihull",
+         "items": 2553,
+         "shareOfIcb": 14.3
+        },
+        {
+         "icb": "QT1",
+         "name": "NHS Nottingham and Nottinghamshire",
+         "items": 2019,
+         "shareOfIcb": 19.2
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 1773,
+         "shareOfIcb": 7.5
+        }
+       ]
+      },
+      {
+       "brand": "4SURE",
+       "generic": false,
+       "products": [
+        "4SURE testing strips"
+       ],
+       "items": 16086,
+       "share": 3.7,
+       "cost": 212617,
+       "items12m": 174789,
+       "share12m": 3.5,
+       "yoy": 3.7,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 2026,
+         "shareOfIcb": 12.3
+        },
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 1795,
+         "shareOfIcb": 15.2
+        },
+        {
+         "icb": "QWE",
+         "name": "NHS South West London",
+         "items": 1661,
+         "shareOfIcb": 17.2
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 1388,
+         "shareOfIcb": 5.6
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 1328,
+         "shareOfIcb": 5.7
+        }
+       ]
+      },
+      {
+       "brand": "TEE2",
+       "generic": false,
+       "products": [
+        "TEE2 testing strips"
+       ],
+       "items": 11258,
+       "share": 2.6,
+       "cost": 127895,
+       "items12m": 158235,
+       "share12m": 3.1,
+       "yoy": -38.3,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 2704,
+         "shareOfIcb": 11.5
+        },
+        {
+         "icb": "QHL",
+         "name": "NHS Birmingham and Solihull",
+         "items": 1823,
+         "shareOfIcb": 10.2
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 1589,
+         "shareOfIcb": 12.1
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 1044,
+         "shareOfIcb": 7.9
+        },
+        {
+         "icb": "QUA",
+         "name": "NHS Black Country",
+         "items": 634,
+         "shareOfIcb": 4.7
+        }
+       ]
+      },
+      {
+       "brand": "Mobile",
+       "generic": false,
+       "products": [
+        "Mobile cassette"
+       ],
+       "items": 8775,
+       "share": 2.0,
+       "cost": 185126,
+       "items12m": 112443,
+       "share12m": 2.2,
+       "yoy": -24.8,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 686,
+         "shareOfIcb": 4.4
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 682,
+         "shareOfIcb": 2.9
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 586,
+         "shareOfIcb": 3.5
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 450,
+         "shareOfIcb": 2.1
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 367,
+         "shareOfIcb": 1.5
+        }
+       ]
+      },
+      {
+       "brand": "FreeStyle",
+       "generic": false,
+       "products": [
+        "FreeStyle Optium testing strips",
+        "FreeStyle Lite testing strips"
+       ],
+       "items": 8540,
+       "share": 2.0,
+       "cost": 282941,
+       "items12m": 102242,
+       "share12m": 2.0,
+       "yoy": -21.2,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 725,
+         "shareOfIcb": 3.1
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 545,
+         "shareOfIcb": 3.3
+        },
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 425,
+         "shareOfIcb": 3.5
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 399,
+         "shareOfIcb": 1.9
+        },
+        {
+         "icb": "QT1",
+         "name": "NHS Nottingham and Nottinghamshire",
+         "items": 361,
+         "shareOfIcb": 3.4
+        }
+       ]
+      },
+      {
+       "brand": "GlucoMen",
+       "generic": false,
+       "products": [
+        "GlucoMen areo Sensor testing strips"
+       ],
+       "items": 8280,
+       "share": 1.9,
+       "cost": 105145,
+       "items12m": 112507,
+       "share12m": 2.2,
+       "yoy": -34.6,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 1024,
+         "shareOfIcb": 4.4
+        },
+        {
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 871,
+         "shareOfIcb": 7.7
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 770,
+         "shareOfIcb": 3.1
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 537,
+         "shareOfIcb": 3.4
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 531,
+         "shareOfIcb": 1.9
+        }
+       ]
+      },
+      {
+       "brand": "True",
+       "generic": false,
+       "products": [
+        "True Metrix testing strips"
+       ],
+       "items": 5499,
+       "share": 1.3,
+       "cost": 39904,
+       "items12m": 61956,
+       "share12m": 1.2,
+       "yoy": 2.4,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 2684,
+         "shareOfIcb": 11.4
+        },
+        {
+         "icb": "QOX",
+         "name": "NHS Bath and North East Somerset, Swindon and Wiltshire",
+         "items": 1368,
+         "shareOfIcb": 21.6
+        },
+        {
+         "icb": "QR1",
+         "name": "NHS Gloucestershire",
+         "items": 365,
+         "shareOfIcb": 9.9
+        },
+        {
+         "icb": "QKK",
+         "name": "NHS South East London",
+         "items": 139,
+         "shareOfIcb": 1.1
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 100,
+         "shareOfIcb": 0.4
+        }
+       ]
+      },
+      {
+       "brand": "Performa",
+       "generic": false,
+       "products": [
+        "Performa testing strips"
+       ],
+       "items": 5210,
+       "share": 1.2,
+       "cost": 49685,
+       "items12m": 71583,
+       "share12m": 1.4,
+       "yoy": -34.3,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 810,
+         "shareOfIcb": 3.4
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 480,
+         "shareOfIcb": 2.9
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 431,
+         "shareOfIcb": 2.0
+        },
+        {
+         "icb": "QT1",
+         "name": "NHS Nottingham and Nottinghamshire",
+         "items": 381,
+         "shareOfIcb": 3.6
+        },
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 345,
+         "shareOfIcb": 2.9
+        }
+       ]
+      },
+      {
+       "brand": "palmdoc",
+       "generic": false,
+       "products": [
+        "palmdoc testing strips",
+        "palmdoc iCare Advanced testing strips",
+        "palmdoc iCare Advanced Solo testing strips"
+       ],
+       "items": 4230,
+       "share": 1.0,
+       "cost": 38623,
+       "items12m": 54772,
+       "share12m": 1.1,
+       "yoy": -24.3,
+       "icbsPrescribing": 29,
+       "topIcbs": [
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 1457,
+         "shareOfIcb": 5.2
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 1137,
+         "shareOfIcb": 4.6
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 436,
+         "shareOfIcb": 3.3
+        },
+        {
+         "icb": "QKK",
+         "name": "NHS South East London",
+         "items": 420,
+         "shareOfIcb": 3.2
+        },
+        {
+         "icb": "QUY",
+         "name": "NHS Bristol, North Somerset and South Gloucestershire",
+         "items": 231,
+         "shareOfIcb": 4.5
+        }
+       ]
+      },
+      {
+       "brand": "Aviva",
+       "generic": false,
+       "products": [
+        "Aviva testing strips"
+       ],
+       "items": 4151,
+       "share": 1.0,
+       "cost": 132412,
+       "items12m": 54703,
+       "share12m": 1.1,
+       "yoy": -31.2,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 269,
+         "shareOfIcb": 1.1
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 262,
+         "shareOfIcb": 1.2
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 221,
+         "shareOfIcb": 1.4
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 207,
+         "shareOfIcb": 0.8
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 202,
+         "shareOfIcb": 1.7
+        }
+       ]
+      },
+      {
+       "brand": "AgaMatrix",
+       "generic": false,
+       "products": [
+        "AgaMatrix Agile testing strips"
+       ],
+       "items": 3131,
+       "share": 0.7,
+       "cost": 24829,
+       "items12m": 32253,
+       "share12m": 0.6,
+       "yoy": 17.4,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QWE",
+         "name": "NHS South West London",
+         "items": 608,
+         "shareOfIcb": 6.3
+        },
+        {
+         "icb": "QKK",
+         "name": "NHS South East London",
+         "items": 403,
+         "shareOfIcb": 3.1
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 369,
+         "shareOfIcb": 3.2
+        },
+        {
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 197,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 177,
+         "shareOfIcb": 0.7
+        }
+       ]
+      },
+      {
+       "brand": "OneTouch",
+       "generic": false,
+       "products": [
+        "OneTouch Select Plus testing strips"
+       ],
+       "items": 2342,
+       "share": 0.5,
+       "cost": 50829,
+       "items12m": 31049,
+       "share12m": 0.6,
+       "yoy": -29.2,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 357,
+         "shareOfIcb": 1.5
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 283,
+         "shareOfIcb": 1.2
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 225,
+         "shareOfIcb": 0.9
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 130,
+         "shareOfIcb": 0.5
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 118,
+         "shareOfIcb": 0.9
+        }
+       ]
+      },
+      {
+       "brand": "Guide",
+       "generic": false,
+       "products": [
+        "Guide testing strips"
+       ],
+       "items": 1967,
+       "share": 0.5,
+       "cost": 64999,
+       "items12m": 23675,
+       "share12m": 0.5,
+       "yoy": -17.2,
+       "icbsPrescribing": 36,
+       "topIcbs": [
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 255,
+         "shareOfIcb": 1.2
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 153,
+         "shareOfIcb": 0.6
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 103,
+         "shareOfIcb": 0.4
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 101,
+         "shareOfIcb": 0.4
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 92,
+         "shareOfIcb": 0.7
+        }
+       ]
+      },
+      {
+       "brand": "Mylife",
+       "generic": false,
+       "products": [
+        "Mylife Pura testing strips",
+        "Mylife Unio testing strips",
+        "Mylife Aveo testing strips"
+       ],
+       "items": 1489,
+       "share": 0.3,
+       "cost": 26801,
+       "items12m": 20688,
+       "share12m": 0.4,
+       "yoy": -34.2,
+       "icbsPrescribing": 33,
+       "topIcbs": [
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 433,
+         "shareOfIcb": 1.7
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 206,
+         "shareOfIcb": 0.7
+        },
+        {
+         "icb": "S9B9J",
+         "name": "NHS Surrey and Sussex",
+         "items": 155,
+         "shareOfIcb": 1.0
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 105,
+         "shareOfIcb": 0.8
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 62,
+         "shareOfIcb": 0.3
+        }
+       ]
+      },
+      {
+       "brand": "Neon",
+       "generic": false,
+       "products": [
+        "Neon GK+ Glucose testing strips"
+       ],
+       "items": 1331,
+       "share": 0.3,
+       "cost": 9480,
+       "items12m": 4898,
+       "share12m": 0.1,
+       "yoy": null,
+       "icbsPrescribing": 26,
+       "topIcbs": [
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 333,
+         "shareOfIcb": 1.2
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 218,
+         "shareOfIcb": 1.0
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 158,
+         "shareOfIcb": 0.6
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 111,
+         "shareOfIcb": 0.5
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 98,
+         "shareOfIcb": 0.7
+        }
+       ]
+      },
+      {
+       "brand": "GluNEO",
+       "generic": false,
+       "products": [
+        "GluNEO testing strips"
+       ],
+       "items": 640,
+       "share": 0.1,
+       "cost": 8936,
+       "items12m": 7914,
+       "share12m": 0.2,
+       "yoy": -25.0,
+       "icbsPrescribing": 25,
+       "topIcbs": [
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 171,
+         "shareOfIcb": 0.7
+        },
+        {
+         "icb": "QUY",
+         "name": "NHS Bristol, North Somerset and South Gloucestershire",
+         "items": 73,
+         "shareOfIcb": 1.4
+        },
+        {
+         "icb": "T6Y0W",
+         "name": "NHS Norfolk and Suffolk",
+         "items": 67,
+         "shareOfIcb": 0.5
+        },
+        {
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 48,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QT6",
+         "name": "NHS Cornwall and the Isles of Scilly",
+         "items": 48,
+         "shareOfIcb": 1.1
+        }
+       ]
+      },
+      {
+       "brand": "GlucoLab",
+       "generic": false,
+       "products": [
+        "GlucoLab testing strips"
+       ],
+       "items": 635,
+       "share": 0.1,
+       "cost": 9272,
+       "items12m": 8909,
+       "share12m": 0.2,
+       "yoy": -40.9,
+       "icbsPrescribing": 26,
+       "topIcbs": [
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 173,
+         "shareOfIcb": 0.6
+        },
+        {
+         "icb": "QK1",
+         "name": "NHS Leicester, Leicestershire and Rutland",
+         "items": 141,
+         "shareOfIcb": 1.3
+        },
+        {
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 69,
+         "shareOfIcb": 0.3
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 58,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 55,
+         "shareOfIcb": 0.3
+        }
+       ]
+      },
+      {
+       "brand": "On-Call",
+       "generic": false,
+       "products": [
+        "On Call Extra testing strips",
+        "On-Call Advanced testing strips",
+        "On Call Sure testing strips"
+       ],
+       "items": 586,
+       "share": 0.1,
+       "cost": 4415,
+       "items12m": 6875,
+       "share12m": 0.1,
+       "yoy": -3.5,
+       "icbsPrescribing": 28,
+       "topIcbs": [
+        {
+         "icb": "QGH",
+         "name": "NHS Herefordshire and Worcestershire",
+         "items": 150,
+         "shareOfIcb": 3.7
+        },
+        {
+         "icb": "QJ2",
+         "name": "NHS Derby and Derbyshire",
+         "items": 114,
+         "shareOfIcb": 1.3
+        },
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 113,
+         "shareOfIcb": 0.4
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 60,
+         "shareOfIcb": 0.5
+        },
+        {
+         "icb": "S1Y5D",
+         "name": "NHS Central East",
+         "items": 26,
+         "shareOfIcb": 0.1
+        }
+       ]
+      },
+      {
+       "brand": "Element",
+       "generic": false,
+       "products": [
+        "Element testing strips"
+       ],
+       "items": 315,
+       "share": 0.1,
+       "cost": 4436,
+       "items12m": 4287,
+       "share12m": 0.1,
+       "yoy": -36.9,
+       "icbsPrescribing": 10,
+       "topIcbs": [
+        {
+         "icb": "QJM",
+         "name": "NHS Lincolnshire",
+         "items": 96,
+         "shareOfIcb": 1.4
+        },
+        {
+         "icb": "QHM",
+         "name": "NHS North East and North Cumbria",
+         "items": 94,
+         "shareOfIcb": 0.4
+        },
+        {
+         "icb": "QOQ",
+         "name": "NHS Humber and North Yorkshire",
+         "items": 80,
+         "shareOfIcb": 0.7
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 25,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QKS",
+         "name": "NHS Kent and Medway",
+         "items": 10,
+         "shareOfIcb": 0.1
+        }
+       ]
+      },
+      {
+       "brand": "Kinetik",
+       "generic": false,
+       "products": [
+        "Kinetik Wellbeing AG-607 testing strips",
+        "Kinetik Wellbeing BG-710/BG-710b testing strips"
+       ],
+       "items": 98,
+       "share": 0.0,
+       "cost": 1094,
+       "items12m": 1105,
+       "share12m": 0.0,
+       "yoy": -5.8,
+       "icbsPrescribing": 27,
+       "topIcbs": [
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 12,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 11,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 9,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 8,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QWO",
+         "name": "NHS West Yorkshire",
+         "items": 8,
+         "shareOfIcb": 0.0
+        }
+       ]
+      },
+      {
+       "brand": "ALLYbg",
+       "generic": false,
+       "products": [
+        "ALLYbg testing strips"
+       ],
+       "items": 62,
+       "share": 0.0,
+       "cost": 420,
+       "items12m": 63,
+       "share12m": 0.0,
+       "yoy": null,
+       "icbsPrescribing": 17,
+       "topIcbs": [
+        {
+         "icb": "QJM",
+         "name": "NHS Lincolnshire",
+         "items": 17,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QR1",
+         "name": "NHS Gloucestershire",
+         "items": 10,
+         "shareOfIcb": 0.3
+        },
+        {
+         "icb": "QSL",
+         "name": "NHS Somerset",
+         "items": 6,
+         "shareOfIcb": 0.2
+        },
+        {
+         "icb": "QJK",
+         "name": "NHS Devon",
+         "items": 5,
+         "shareOfIcb": 0.1
+        },
+        {
+         "icb": "QRL",
+         "name": "NHS Hampshire and Isle of Wight",
+         "items": 5,
+         "shareOfIcb": 0.0
+        }
+       ]
+      },
+      {
+       "brand": "Glucoflex-R",
+       "generic": false,
+       "products": [
+        "Glucoflex-R testing strips"
+       ],
+       "items": 61,
+       "share": 0.0,
+       "cost": 387,
+       "items12m": 636,
+       "share12m": 0.0,
+       "yoy": -3.2,
+       "icbsPrescribing": 24,
+       "topIcbs": [
+        {
+         "icb": "Z9B2Z",
+         "name": "NHS West and North London",
+         "items": 8,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QKK",
+         "name": "NHS South East London",
+         "items": 6,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QMF",
+         "name": "NHS North East London",
+         "items": 4,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QWE",
+         "name": "NHS South West London",
+         "items": 4,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 4,
+         "shareOfIcb": 0.0
+        }
+       ]
+      },
+      {
+       "brand": "Betachek",
+       "generic": false,
+       "products": [
+        "Betachek C50 cassette"
+       ],
+       "items": 46,
+       "share": 0.0,
+       "cost": 807,
+       "items12m": 617,
+       "share12m": 0.0,
+       "yoy": -34.3,
+       "icbsPrescribing": 24,
+       "topIcbs": [
+        {
+         "icb": "QOP",
+         "name": "NHS Greater Manchester",
+         "items": 5,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "S0E4D",
+         "name": "NHS Thames Valley",
+         "items": 5,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QE1",
+         "name": "NHS Lancashire and South Cumbria",
+         "items": 3,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QF7",
+         "name": "NHS South Yorkshire",
+         "items": 3,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QJ2",
+         "name": "NHS Derby and Derbyshire",
+         "items": 3,
+         "shareOfIcb": 0.0
+        }
+       ]
+      },
+      {
+       "brand": "VivaChek",
+       "generic": false,
+       "products": [
+        "VivaChek Ino testing strips"
+       ],
+       "items": 42,
+       "share": 0.0,
+       "cost": 502,
+       "items12m": 443,
+       "share12m": 0.0,
+       "yoy": 7.7,
+       "icbsPrescribing": 25,
+       "topIcbs": [
+        {
+         "icb": "QT1",
+         "name": "NHS Nottingham and Nottinghamshire",
+         "items": 3,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QYG",
+         "name": "NHS Cheshire and Merseyside",
+         "items": 3,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "D7T5G",
+         "name": "NHS Essex",
+         "items": 2,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QHL",
+         "name": "NHS Birmingham and Solihull",
+         "items": 2,
+         "shareOfIcb": 0.0
+        },
+        {
+         "icb": "QJ2",
+         "name": "NHS Derby and Derbyshire",
+         "items": 2,
+         "shareOfIcb": 0.0
+        }
+       ]
+      }
+     ],
+     "otherBrands": {
+      "count": 15,
+      "items": 16,
+      "share": 0.0
+     }
+    },
+    "secondary": {
+     "basis": "items",
+     "window12m": [
+      "202508",
+      "202607"
+     ],
+     "items12m": 2094,
+     "trusts": 96,
+     "brandCount": 18,
+     "brands": [
+      {
+       "brand": "Contour",
+       "generic": false,
+       "items12m": 630,
+       "share12m": 30.1,
+       "yoy": -42.3
+      },
+      {
+       "brand": "WaveSense",
+       "generic": false,
+       "items12m": 555,
+       "share12m": 26.5,
+       "yoy": -7.4
+      },
+      {
+       "brand": "GLUCOFIX",
+       "generic": false,
+       "items12m": 285,
+       "share12m": 13.6,
+       "yoy": null
+      },
+      {
+       "brand": "GlucoRx",
+       "generic": false,
+       "items12m": 219,
+       "share12m": 10.5,
+       "yoy": null
+      },
+      {
+       "brand": "Instant",
+       "generic": false,
+       "items12m": 110,
+       "share12m": 5.3,
+       "yoy": null
+      },
+      {
+       "brand": "AgaMatrix",
+       "generic": false,
+       "items12m": 94,
+       "share12m": 4.5,
+       "yoy": null
+      },
+      {
+       "brand": "CareSens",
+       "generic": false,
+       "items12m": 80,
+       "share12m": 3.8,
+       "yoy": null
+      },
+      {
+       "brand": "4SURE",
+       "generic": false,
+       "items12m": 36,
+       "share12m": 1.7,
+       "yoy": null
+      },
+      {
+       "brand": "Finetest",
+       "generic": false,
+       "items12m": 35,
+       "share12m": 1.7,
+       "yoy": null
+      },
+      {
+       "brand": "FreeStyle",
+       "generic": false,
+       "items12m": 15,
+       "share12m": 0.7,
+       "yoy": null
+      },
+      {
+       "brand": "palmdoc",
+       "generic": false,
+       "items12m": 10,
+       "share12m": 0.5,
+       "yoy": null
+      },
+      {
+       "brand": "Aviva",
+       "generic": false,
+       "items12m": 7,
+       "share12m": 0.3,
+       "yoy": null
+      },
+      {
+       "brand": "GlucoMen",
+       "generic": false,
+       "items12m": 7,
+       "share12m": 0.3,
+       "yoy": null
+      },
+      {
+       "brand": "TEE2",
+       "generic": false,
+       "items12m": 5,
+       "share12m": 0.2,
+       "yoy": null
+      },
+      {
+       "brand": "Guide",
+       "generic": false,
+       "items12m": 2,
+       "share12m": 0.1,
+       "yoy": null
+      }
+     ],
+     "source": "NHSBSA Open Data — hospital prescribing dispensed in the community",
+     "sourceUrl": "https://opendata.nhsbsa.net/dataset/hospital-prescribing-dispensed-in-the-community",
+     "scope": "Items prescribed by an NHS trust in England and dispensed in a community pharmacy. Not in-hospital usage, and not GP prescribing."
+    },
+    "tariff": {
+     "effectiveMonth": "2026-09",
+     "lineCount": 74,
+     "supplierCount": 33,
+     "bnfFilter": [
+      "0601060D0"
+     ],
+     "topSuppliers": [
+      {
+       "name": "GlucoRx Ltd",
+       "lines": 8
+      },
+      {
+       "name": "Neon Diagnostics Ltd",
+       "lines": 6
+      },
+      {
+       "name": "National Diagnostic Products",
+       "lines": 5
+      },
+      {
+       "name": "Roche Diabetes Care Ltd",
+       "lines": 5
+      },
+      {
+       "name": "Kinetik Medical Devices Ltd",
+       "lines": 4
+      },
+      {
+       "name": "Spirit Healthcare Ltd",
+       "lines": 4
+      },
+      {
+       "name": "AgaMatrix Europe Ltd",
+       "lines": 3
+      },
+      {
+       "name": "Ascensia Diabetes Care UK Ltd",
+       "lines": 3
+      },
+      {
+       "name": "Medisana Healthcare (UK) Ltd",
+       "lines": 3
+      },
+      {
+       "name": "Pikdare S.p.A.",
+       "lines": 3
+      },
+      {
+       "name": "A. Menarini Diagnostics Ltd",
+       "lines": 2
+      },
+      {
+       "name": "Abbott Laboratories Ltd",
+       "lines": 2
+      }
+     ]
+    }
+   }
+  ],
+  "gpSource": "NHSBSA Open Data: English Prescribing Dataset (EPD) with SNOMED code",
+  "gpSourceUrl": "https://opendata.nhsbsa.net/dataset/english-prescribing-dataset-epd-with-snomed-code",
+  "attribution": "Contains public sector information licensed under the Open Government Licence v3.0. Source: NHS Business Services Authority."
  }
 }
