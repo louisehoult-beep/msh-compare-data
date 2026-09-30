@@ -3860,6 +3860,93 @@ def check_no_clusters_on_tools(comptab_js):
             return
 
 
+def check_framework_lots(fwdoc, lotsdoc, report_js):
+    """Every framework card must say which lot(s) the company holds, or say
+    plainly that the owner does not publish it. Lou's standing rule, 30/09/2026:
+    "When they are on a framework I want the company profile to pull the lots too."
+
+    The lots are read by scripts/refresh_framework_lots.py into
+    data/framework-lots.json and attached to data/frameworks.json. This gate
+    fails when:
+      * a live framework has no lotStatus, or one outside the three states — a
+        card would then have nothing honest to say about the lot;
+      * data/framework-lots.json has no record for a live framework — the lot
+        source was never read for it;
+      * THE RULE ITSELF: a framework whose owner's source publishes lots (the
+        lots file holds a supplier-by-lot map for it, or the brief's own lot
+        table was parsed) but whose frameworks.json record carries none;
+      * a supplierLots key is not, verbatim, a supplier the brief names — the
+        report matches companies on that exact string, so a stray key is a lot
+        attached to nobody, or to the wrong somebody;
+      * a lot value is not a "Lot ..." label;
+      * the Company Report has lost the lot line or its honest empty state.
+    A source that publishes lots whose supplier names could not be tied to the
+    brief's own names is a WARN listing them: the fix is an alias in
+    data/supplier-seed.json, never a looser match.
+    """
+    if not isinstance(fwdoc, dict):
+        return
+    states = ("published", "notPublished", "noLots")
+    lots_by_url = (lotsdoc or {}).get("frameworks") or {} if isinstance(lotsdoc, dict) else {}
+    if not lots_by_url:
+        FAIL("framework-lots", "data/framework-lots.json is missing or empty, so no framework card "
+                               "can show a lot. Run scripts/refresh_framework_lots.py.")
+    no_status, unread, dropped, stray, badlab, unmatched = [], [], [], [], [], []
+    for f in fwdoc.get("frameworks") or []:
+        if not isinstance(f, dict):
+            continue
+        name = f.get("name") or "(unnamed)"
+        st = f.get("lotStatus")
+        if st not in states:
+            no_status.append(name)
+        rec = lots_by_url.get(f.get("url"))
+        if lots_by_url and rec is None:
+            unread.append(name)
+        published = bool(rec and rec.get("supplierLots")) or \
+            "lot table" in (f.get("supplierSource") or "")
+        if published and not f.get("supplierLots"):
+            dropped.append(name)
+        if published and st != "published":
+            dropped.append(name + " (lotStatus %r)" % st)
+        sups = set(f.get("suppliers") or [])
+        for k, v in (f.get("supplierLots") or {}).items():
+            if k not in sups:
+                stray.append("%s: %r" % (name, k))
+            if not v or any(not re.match(r"^Lot \S+", str(x)) for x in v):
+                badlab.append("%s: %r -> %r" % (name, k, v))
+        if rec and rec.get("unresolved"):
+            unmatched.append("%s (%d: %s)" % (name, len(rec["unresolved"]), ", ".join(
+                str(u.get("name")) for u in rec["unresolved"][:3])))
+    if no_status:
+        FAIL("framework-lots", "%d live framework(s) carry no lotStatus, so their card has nothing honest "
+                               "to say about the lot: %s. Run scripts/refresh_framework_lots.py --attach-only."
+             % (len(no_status), "; ".join(no_status[:6])))
+    if unread:
+        FAIL("framework-lots", "%d live framework(s) have no record in data/framework-lots.json — their lot "
+                               "source was never read: %s." % (len(unread), "; ".join(unread[:6])))
+    if dropped:
+        FAIL("framework-lots", "%d framework(s) whose owner's source publishes supplier-by-lot data carry no "
+                               "supplierLots in data/frameworks.json, so the card would say nothing about a "
+                               "lot NHS Supply Chain does publish: %s. Re-attach with "
+                               "scripts/refresh_framework_lots.py --attach-only."
+             % (len(dropped), "; ".join(dropped[:6])))
+    if stray:
+        FAIL("framework-lots", "%d supplierLots key(s) are not a supplier the brief names verbatim, so the lot "
+                               "would attach to nobody or the wrong company: %s." % (len(stray), "; ".join(stray[:6])))
+    if badlab:
+        FAIL("framework-lots", "%d supplierLots value(s) are not 'Lot ...' labels: %s."
+             % (len(badlab), "; ".join(badlab[:6])))
+    if unmatched:
+        WARN("framework-lots", "%d framework(s) publish lots under supplier names that do not match the brief's "
+                               "own spelling, so those suppliers show 'lot not confirmed'. Add the spelling as an "
+                               "alias in data/supplier-seed.json (via scripts/seed_format.py), never a looser "
+                               "match: %s." % (len(unmatched), "; ".join(unmatched[:5])))
+    if report_js and ("function fwLotLine" not in report_js or "lot not published by" not in report_js):
+        FAIL("framework-lots", "app/company-report.js no longer carries fwLotLine() and its honest empty state "
+                               "('lot not published by ...'). Every framework card must show the lot or say "
+                               "the owner does not publish it.")
+
+
 def check_no_expired_frameworks(fwdoc):
     """data/frameworks.json's `frameworks` list must hold only live routes.
 
@@ -6388,6 +6475,7 @@ def main():
     check_no_clusters_on_tools(comptab_js)
     check_compare_groups_by_ref(comptab_js)
     check_no_expired_frameworks(load("frameworks.json"))
+    check_framework_lots(load("frameworks.json"), load("framework-lots.json"), report_js)
     check_no_delisted_as_a_route(load("nhssc-launch-briefs.json"),
                                  load("frameworks.json"),
                                  load("supplier-seed.json"),

@@ -73,6 +73,15 @@ jobs:
       - name: Refresh frameworks from NHS Supply Chain contract launch briefs
         run: python3 scripts/refresh_frameworks.py
 
+      # Lou's standing rule, 30/09/2026: every framework card shows the company's
+      # lot(s), read from the owner's own source, or says the owner does not
+      # publish it. Re-reads each brief's lot lists and attached matrix; Find a
+      # Tender award reads are carried forward from data/framework-lots.json.
+      - name: Refresh framework lots (briefs + attached matrices)
+        run: |
+          python3 -m pip install --quiet openpyxl
+          python3 scripts/refresh_framework_lots.py
+
       - name: Backfill sourced frameworks into the index and seed
         run: python3 scripts/backfill_index_frameworks.py
 
@@ -146,7 +155,7 @@ jobs:
         run: |
           git config user.name "hub-bot"
           git config user.email "contact@elevateandthrive.uk"
-          git add data/frameworks.json data/company-financials.json \
+          git add data/frameworks.json data/framework-lots.json data/company-financials.json \
                   data/company-awards.json data/pending-awards.json \
                   data/supplier-index.json data/supplier-seed.json
           git diff --cached --quiet || git commit -m "company intelligence: frameworks + awards + Companies House $(date -u +'%F')"

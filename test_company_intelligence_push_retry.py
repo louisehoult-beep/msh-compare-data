@@ -64,10 +64,12 @@ REPO = os.path.dirname(os.path.abspath(__file__))
 WORKFLOW = os.path.join(REPO, ".github", "workflows", "company-intelligence.yml")
 STEP_NAME = "Commit updates"
 
-# The six files the step's `git add` names. They all have to exist in the
+# The seven files the step's `git add` names (data/framework-lots.json added
+# 30/09/2026 with the framework-lots step). They all have to exist in the
 # synthetic repo or the step dies on the add for the wrong reason.
 TRACKED = [
     "data/frameworks.json",
+    "data/framework-lots.json",
     "data/company-financials.json",
     "data/company-awards.json",
     "data/pending-awards.json",

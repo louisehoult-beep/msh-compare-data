@@ -1143,6 +1143,85 @@
       label + '</span>';
   }
 
+  /* LOTS ON EVERY FRAMEWORK CARD — Lou's standing rule, 30/09/2026: "When they
+     are on a framework I want the company profile to pull the lots too."
+
+     The lot comes ONLY from the framework owner's own publication for that
+     framework (data/framework-lots.json, built by scripts/refresh_framework_
+     lots.py): the contract launch brief's lot lists or lot table, the supplier
+     or product matrix attached to that brief, or the Find a Tender award
+     notice. Each lot line names the source it was read from. Where the owner
+     does not publish who holds which lot, the card says so in those words —
+     it never guesses a lot from product ranges or lot titles. Four states:
+       published + named    the lot(s), titled from the brief, with the source
+       published + unnamed  the source publishes lots but does not name this
+                            company under the brief's spelling: "lot not
+                            confirmed", never a guess
+       notPublished         "lot not published by NHS Supply Chain"
+       noLots               the brief does not split the framework into lots */
+  function fwLotName(f, lab) {
+    var t = f.lotTitles && f.lotTitles[lab];
+    return esc(lab) + (t ? ' <span style="color:' + DIM + ';">(' + esc(t) + ')</span>' : '');
+  }
+  function fwLotSources(f) {
+    return (f.lotSources || []).map(function (src) {
+      return '<a href="' + esc(src.url) + '" target="_blank" rel="noopener" style="color:' + G + ';">' + esc(src.label) + ' &#8599;</a>';
+    }).join('; ');
+  }
+  function fwLotLine(f, matched) {
+    var owner = f.lotOwner || 'NHS Supply Chain';
+    var st = f.lotStatus;
+    var lots = f.supplierLots || {};
+    var mine = [];
+    (matched || []).forEach(function (m) {
+      (lots[m] || []).forEach(function (l) { if (mine.indexOf(l) === -1) mine.push(l); });
+    });
+    var style = '<br><span class="mcr-fw-lot" style="font-size:12.5px;color:#37485a;">';
+    if (st === 'published' && mine.length) {
+      var gapNote = (f.lotsNotCovered && f.lotsNotCovered.length)
+        ? ' <span style="color:' + DIM + ';">&middot; that source covers only some lots; ' + f.lotsNotCovered.map(esc).join(', ') + ' not published by ' + esc(owner) + '</span>'
+        : '';
+      var spelled = [];
+      (matched || []).forEach(function (m) {
+        ((f.lotNamedAs || {})[m] || []).forEach(function (n) { if (spelled.indexOf(n) === -1) spelled.push(n); });
+      });
+      return style + '<b style="color:' + INK + ';">' + (mine.length > 1 ? 'Lots' : 'Lot') + ':</b> ' +
+        mine.map(function (l) { return fwLotName(f, l); }).join(', ') + gapNote +
+        (spelled.length ? ' <span style="color:' + DIM + ';">&middot; named there as &ldquo;' + spelled.map(esc).join('&rdquo;, &ldquo;') + '&rdquo;</span>' : '') +
+        '<br><span style="font-size:11.5px;color:' + DIM + ';">Lot read from ' + fwLotSources(f) + '</span></span>';
+    }
+    if (st === 'published') {
+      return style + '<b style="color:' + INK + ';">Lot:</b> not confirmed. ' + esc(owner) +
+        ' publishes who holds which lot (' + fwLotSources(f) + '), but it does not name this company there under the spelling the brief uses, so no lot is shown rather than a guess.</span>';
+    }
+    if (st === 'notPublished') {
+      var n = f.lotTitles ? Object.keys(f.lotTitles).length : 0;
+      return style + '<b style="color:' + INK + ';">Lot:</b> lot not published by ' + esc(owner) +
+        (n > 1 ? '. The brief splits this framework into ' + n + ' lots but names no supplier against a lot, so check the lot with the buyer before you use it in a call.' : '. Check the lot with the buyer before you use it in a call.') + '</span>';
+    }
+    if (st === 'noLots') {
+      return style + '<b style="color:' + INK + ';">Lot:</b> ' + (f.statedLotCount === 1
+        ? 'single-lot framework &mdash; the brief puts every supplier in one lot.'
+        : 'the brief does not split this framework into lots.') + '</span>';
+    }
+    return style + '<b style="color:' + INK + ';">Lot:</b> not yet read for this framework.</span>';
+  }
+
+  /* A seed row written by the brief backfill whose framework the card above
+     did not match (the brief spells the company in a way only the backfill's
+     alias table reaches, e.g. "GB UK Ltd") still gets its lot line, read from
+     the same framework record, keyed on the exact spelling the row quotes. */
+  function curatedBriefLot(f, ctx) {
+    if (!f || !f.url || !ctx.fwDoc ||
+        !(f.source === 'nhssc-brief' || /supplychain\.nhs\.uk\/product-information\/contract-launch-brief\//.test(f.url))) return '';
+    var fw = null;
+    (ctx.fwDoc.frameworks || []).forEach(function (x) { if (x.url === f.url) fw = x; });
+    if (!fw) return '';
+    var m = String(f.note || '').match(/as "([^"]+)"/);
+    var named = m && (fw.suppliers || []).indexOf(m[1]) !== -1 ? [m[1]] : [];
+    return fwLotLine(fw, named);
+  }
+
   function frameworks(s, ctx) {
     var hits = supplierFrameworks(s, ctx);
     var curated = (s.frameworks || []);
@@ -1184,9 +1263,6 @@
          note beside it in STYLE. */
       body += '<div class="mcr-fw-grid">' + hits.map(function (h) {
         var f = h.fw;
-        var lots = (f.supplierLots || {});
-        var myLots = [];
-        h.matched.forEach(function (m) { if (lots[m]) { myLots = myLots.concat(lots[m]); } });
         return '<div style="padding:9px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;line-height:1.55;">' +
           '<b>' + fwLinked(f.name, null, 'NHS Supply Chain') + '</b>' +
           ' <span style="color:' + DIM + ';">(as &ldquo;' + h.matched.map(esc).join('&rdquo;, &ldquo;') + '&rdquo;)</span>' +
@@ -1196,12 +1272,23 @@
           (f.starts ? esc(f.starts) : '') + (f.ends ? ' to ' + esc(f.ends) : '') + fwEnded(f.ends) +
           (f.supplyRoute ? ' &middot; ' + esc(f.supplyRoute) : '') +
           '</span>' +
+          fwLotLine(f, h.matched) +
           '<br><span style="font-size:12.5px;color:' + DIM + ';">' + f.supplierCount + ' suppliers on this framework' +
-          (myLots.length ? ' &middot; this company on ' + myLots.map(esc).join(', ') : '') +
           ' &middot; <a href="' + esc(f.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">contract launch brief &#8599;</a></span>' +
           '</div>';
       }).join('') + '</div>';
     }
+
+    /* A seed row the brief backfill wrote (source 'nhssc-brief') for a
+       framework already carded above is the same framework twice, and the
+       copy carries no lot line. Drop it here; the card above is the sourced
+       one and carries the lot (30/09/2026, framework-lots rule). */
+    var shownUrls = {};
+    hits.forEach(function (h) { shownUrls[h.fw.url] = 1; });
+    curated = curated.filter(function (f) {
+      return !(f && f.url && shownUrls[f.url] &&
+        (f.source === 'nhssc-brief' || /supplychain\.nhs\.uk\/product-information\/contract-launch-brief\//.test(f.url)));
+    });
 
     if (curated.length) {
       body += '<div style="font-size:12.5px;font-weight:700;color:' + INK + ';margin:14px 0 4px;">Also tracked by hand</div>' +
@@ -1210,7 +1297,12 @@
           return '<div style="padding:8px 0;border-bottom:1px solid #f0ece3;font-size:13.5px;line-height:1.55;"><b>' + fwLinked(f.name, f.key, '') + '</b>' +
             (f.value ? ' <span style="color:' + GREEN + ';font-weight:700;">' + esc(f.value) + '</span>' : '') +
             (f.dates ? ' <span style="color:' + DIM + ';">&middot; ' + esc(f.dates) + '</span>' : '') +
-            (f.note ? '<br><span style="color:#37485a;font-size:12.5px;">' + esc(f.note) + '</span>' : '') + '</div>';
+            (f.note ? '<br><span style="color:#37485a;font-size:12.5px;">' + esc(f.note) + '</span>' : '') +
+            (curatedBriefLot(f, ctx) ||
+             (/\blots?\b/i.test(String(f.note || '') + ' ' + String(f.name || ''))
+              ? ''
+              : '<br><span class="mcr-fw-lot" style="font-size:12.5px;color:#37485a;"><b style="color:' + INK + ';">Lot:</b> not yet read from the framework owner&rsquo;s own page for this hand-tracked entry, so no lot is shown.</span>')) +
+            '</div>';
         }).join('') + '</div>';
     }
     return sec('Frameworks', body);

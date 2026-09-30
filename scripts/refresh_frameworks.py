@@ -37,6 +37,7 @@ import argparse
 import html as H
 import datetime
 import json
+import os
 import re
 import sys
 import time
@@ -532,6 +533,22 @@ def main():
         "expired": expired,
         "unparsed": unparsed,
     }
+    # LOTS (Lou's standing rule, 30/09/2026: "When they are on a framework I
+    # want the company profile to pull the lots too"). Who holds which lot is
+    # read by scripts/refresh_framework_lots.py into data/framework-lots.json;
+    # re-attach it here so a rebuilt frameworks.json never silently drops the
+    # lots. A framework new to this run has no lots record yet and is left with
+    # lotStatus None, which verify.py's framework-lots gate fails until
+    # refresh_framework_lots.py has read it.
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import refresh_framework_lots
+        with open(refresh_framework_lots.LOTS_PATH, encoding="utf-8") as fh:
+            refresh_framework_lots.attach(doc, json.load(fh))
+    except (OSError, ValueError) as exc:
+        print("WARNING: lots not attached (%s). Run scripts/refresh_framework_lots.py." % exc,
+              file=sys.stderr)
+
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(doc, f, indent=1, ensure_ascii=False)
         f.write("\n")

@@ -107,6 +107,7 @@ RUN = [
     "test_crawl_junk_shapes.py",
     "test_crawl_site_concurrency.py",
     "test_dead_company_check.py",
+    "test_framework_lots.py",
     "test_hospital_prescribing_resources.py",
     "test_identity_policy.py",
     "test_merge_seed_on_retry.py",

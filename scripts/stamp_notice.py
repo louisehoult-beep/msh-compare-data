@@ -75,6 +75,7 @@ REFS = {
     "company-logos.json":      "ETH-D6F85FA5F",
     "eclass-category-map.json":         "ETH-D248D746A",
     "company-financials.json": "ETH-DCC5A9B31",
+    "framework-lots.json":               "ETH-D8F73B696",
     "compare-issues.json":     "ETH-D6991A2E7",
     "compare-suppliers.json":  "ETH-D21869855",
     "contacts-optout.json":    "ETH-D12682420",
