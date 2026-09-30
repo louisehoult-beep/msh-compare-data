@@ -114,6 +114,9 @@ REFS = {
     "npc-eclass.json":                 "ETH-D0981028F",
     "product-types.json":              "ETH-DFC98A3A8",
     "npc-category-overrides.json":     "ETH-D2AE91809",
+    # Added 30/09/2026: each product's Differentiator category, for Product
+    # Comparison's suggested rival. Minted with `stamp_notice.py --mint`.
+    "product-categories.json":         "ETH-D933F4DFD",
 }
 
 

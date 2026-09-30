@@ -21,6 +21,7 @@ skipped, loudly, where node is absent.
 """
 import json
 import os
+import re
 import shutil
 import subprocess
 import unittest
@@ -603,6 +604,182 @@ class CompanyReportNamesNoInternalFiles(unittest.TestCase):
         bad = [(n, k) for n, r in sp.items() for k in ("filingRule", "notSold")
                if INTERNAL.search(str(r.get(k) or ""))]
         self.assertEqual(bad, [])
+
+
+# ---------------------------------------------------------------------------
+# HARTMANN tool gaps left by the wound reconciliation (msh-compare-data 9a16a7c,
+# report hartmann-product-reconciliation-2026-09-30.md), closed 30/09/2026.
+# ---------------------------------------------------------------------------
+
+def js_regex(src, anchor):
+    """The JS regex literal that follows `anchor` in src, as a Python pattern."""
+    rest = src.split(anchor, 1)[1]
+    body = rest[rest.index("/") + 1:]
+    out, i = [], 0
+    while body[i] != "/":
+        if body[i] == "\\":
+            out.append(body[i:i + 2]); i += 2; continue
+        out.append(body[i]); i += 1
+    return re.compile("".join(out))
+
+
+class ComparisonWoundCareTypes(unittest.TestCase):
+    """ES Gauze (typed "swab") and Omnistrip ("skin closure") vanished once
+    Wound care was picked, because neither type was on the Wound care list.
+    Adding "swab" must not pull skin-prep or theatre swabs into Wound care."""
+
+    def setUp(self):
+        self.src = read("app/comparison.js")
+        line = [l for l in self.src.splitlines() if l.strip().startswith("'wound care': [")][0]
+        self.wound = re.findall(r"'([^']+)'", line.split(":", 1)[1])
+        self.rx = js_regex(self.src, "'wound care': { 'swab':")
+
+    def test_swab_and_closure_types_are_wound_care(self):
+        for t in ("swab", "skin closure", "wound closure", "dressing", "bandage", "tape"):
+            self.assertIn(t, self.wound)
+
+    def test_exclusion_is_applied_in_both_filters(self):
+        self.assertEqual(self.src.count("if (spec && specExcludes(spec.toLowerCase(), p))"), 2)
+
+    def test_skin_prep_and_theatre_swabs_stay_out(self):
+        for name in ("AEROWIPE 70% Isopropyl Alcohol Swab 3 x 3cm Box/100",
+                     "AEROWIPE 10% Povidone Iodine Swabs 60 x 33mm Box/100",
+                     "Preinjection Swabs Pack 100",
+                     "Abdominal Swabs Gauze", "Surgical Swabs Standard Nonwoven"):
+            self.assertTrue(self.rx.search(name.lower()), name)
+
+    def test_wound_swabs_stay_in(self):
+        for name in ("ES Gauze (gauze swabs)", "Blue Dot Sterile Gauze Swabs 5Cm X 5Cm Pack 5",
+                     "Cutimed Sorbact Swab", "Gauze Swab",
+                     "AEROSWAB Sterile White Non-Woven Swab 10 x 10cm (Packs of 3) Box/25"):
+            self.assertFalse(self.rx.search(name.lower()), name)
+
+
+class ComparisonRivalByCategory(unittest.TestCase):
+    """HydroClean Advance (Differentiator category wound:deb, Debridement &
+    irrigation) was offered honey, silver and contact-layer dressings as its
+    closest rivals, matched on generic words. The held category now drives the
+    suggestion first; the word match follows it as the fallback."""
+
+    def setUp(self):
+        self.src = read("app/comparison.js")
+
+    def test_category_lookup_is_loaded_and_fails_soft(self):
+        self.assertIn("var PCATURL = BASE + 'data/product-categories.json' + CB;", self.src)
+        self.assertIn("fetch(PCATURL).then(function(r){return r.json();}).catch(function(){return {categories:{}};})", self.src)
+
+    def test_same_category_first_then_word_match(self):
+        body = self.src.split("function competitorsOf(mine, supFilter){", 1)[1].split("return out.slice(0, 12);", 1)[0]
+        self.assertIn("var myCat = catOf(mine);", body)
+        self.assertIn("catOf(p) === myCat", body)
+        self.assertLess(body.index("var myCat = catOf(mine);"), body.index("if (mine.type){"))
+        self.assertIn("var mt = sigTokens(mine.name);", body)
+
+    def test_only_this_suppliers_lines_count(self):
+        self.assertIn("if (!it || (s && !lineIsSuppliers(it, s))) return;", self.src)
+
+    def test_lookup_is_derived_and_rebuilt_with_the_differentiator(self):
+        wf = read(".github/workflows/differentiator.yml")
+        self.assertIn("python3 scripts/build_product_categories.py", wf)
+        self.assertIn("git add data/differentiator.json data/product-categories.json", wf)
+        self.assertLess(wf.index("scripts/build_differentiator.py"), wf.index("scripts/build_product_categories.py"))
+
+    def test_hydroclean_lines_are_held_as_debridement(self):
+        cats = json.loads(read("data/product-categories.json"))["categories"]
+        deb = set(cats["wound:deb"]["npc"])
+        cache = json.loads(read("data/nhssc-cache.json"))["products"]
+        entry = [v for k, v in cache.items() if k.lower().startswith("hydroclean advance")][0]
+        npcs = {it["npc"] for it in entry["items"] if "HARTMANN" in (it.get("supplier") or "").upper()}
+        self.assertTrue(npcs)
+        self.assertTrue(npcs & deb, "no HydroClean Advance line is filed wound:deb")
+
+
+SPLIT_SCRIPT = r"""
+const fs = require('fs');
+const A = process.argv.slice(-4);
+const src = fs.readFileSync(A[0], 'utf8');
+const blk = src.split('    /* brand-lines:start')[1].split('/* brand-lines:end */')[0];
+const F = new Function('/*' + blk + '; return { splitSeedProduct: splitSeedProduct, ownFirstWords: ownFirstWords };')();
+const idx = JSON.parse(fs.readFileSync(A[1], 'utf8'));
+const seed = JSON.parse(fs.readFileSync(A[2], 'utf8'));
+const cache = JSON.parse(fs.readFileSync(A[3], 'utf8')).products;
+const nk = x => String(x || '').toLowerCase().replace(/\s+/g, ' ').trim();
+const C = {}; for (const k in cache) C[nk(k)] = cache[k];
+const s = idx.suppliers.filter(x => x.name === 'Paul Hartmann (HARTMANN)')[0];
+const sd = seed.suppliers.filter(x => x.name === s.name)[0];
+if (sd && sd.products && sd.products.length) s.products = sd.products;
+const of = F.ownFirstWords(s), out = [], seen = {};
+(s.products || []).forEach(p => {
+  const n = typeof p === 'string' ? p : p.name;
+  const parts = F.splitSeedProduct(n, C[nk(n)], s, of);
+  (parts ? parts.map(g => g.name) : [n]).forEach(x => { if (!seen[nk(x)]) { seen[nk(x)] = 1; out.push(x); } });
+});
+process.stdout.write(JSON.stringify(out));
+"""
+
+
+class HelpMePrepareSplitsLikeComparison(unittest.TestCase):
+    """Help me prepare listed HARTMANN's seed search terms verbatim ("Cosmopor
+    range (adhesive and film dressings)", "Atrauman range (...)") while Product
+    Comparison listed the catalogue brand lines. Both now run one splitting
+    block, carried byte for byte in both files."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.cmp = read("app/comparison.js")
+        cls.mp = read("app/meeting-prep.js")
+        cls.node = shutil.which("node")
+        cls.names = None
+        if cls.node:
+            r = subprocess.run(
+                [cls.node, "-e", SPLIT_SCRIPT, os.path.join(HERE, "app", "meeting-prep.js"),
+                 os.path.join(HERE, "data", "supplier-index.json"),
+                 os.path.join(HERE, "data", "supplier-seed.json"),
+                 os.path.join(HERE, "data", "nhssc-cache.json")],
+                capture_output=True, text=True, timeout=180)
+            if r.returncode != 0:
+                raise RuntimeError("node split run failed: " + r.stderr)
+            cls.names = json.loads(r.stdout)
+
+    @staticmethod
+    def block(src):
+        return src.split("/* brand-lines:start", 1)[1].split("/* brand-lines:end */", 1)[0]
+
+    def test_one_block_in_both_files(self):
+        self.assertEqual(self.block(self.cmp), self.block(self.mp))
+        self.assertIn("function splitSeedProduct(name, entry, s, ownFirst){", self.block(self.mp))
+
+    def test_both_tools_call_it(self):
+        self.assertIn("var parts = splitSeedProduct(name, entry, s, ownFirst);", self.cmp)
+        self.assertIn("var parts = splitSeedProduct(p.n, CACHE[nk(p.n)], co, ownFirst);", self.mp)
+        self.assertIn("return (verified || !co) ? norm : splitSeed(co, norm);", self.mp)
+        self.assertIn("var NHSSC = BASE + 'data/nhssc-cache.json' + CB;", self.mp)
+
+    def test_hartmann_lists_brand_lines_not_grouped_terms(self):
+        if not self.node:
+            self.skipTest("node not installed; split not exercised")
+        for n in ("Cosmopor E", "Cosmopor IV", "Atrauman Silicone", "Atrauman AG",
+                  "RespoSorb Silicone Border", "HydroTac-Comfort", "ES Gauze (gauze swabs)",
+                  "Omnistrip (sterile skin closure strips)"):
+            self.assertIn(n, self.names)
+        for n in ("Cosmopor range (adhesive and film dressings)", "Atrauman range (wound contact layers)",
+                  "HydroTac (hydropolymer foam dressing)"):
+            self.assertNotIn(n, self.names)
+        self.assertFalse([n for n in self.names if ";" in n])
+        low = [n.lower() for n in self.names]
+        self.assertEqual(len(low), len(set(low)))
+
+
+class InterviewPrepHartmannLabels(unittest.TestCase):
+    """Interview Prep (page 2672 reads data/interview-prep.json) still carried
+    HARTMANN's old grouped labels and the old PermaFoam routing sentence."""
+
+    def test_hartmann_record_rebuilt(self):
+        doc = json.loads(read("data/interview-prep.json"))
+        rec = [r for r in doc["co"] if r["n"] == "Paul Hartmann (HARTMANN)"][0]
+        pr = rec.get("pr") or []
+        self.assertIn("PermaFoam Classic (non-adhesive foam dressing)", pr)
+        self.assertFalse([p for p in pr if ";" in p or "Drug Tariff" in p or "Tracheostomy" in p])
 
 
 if __name__ == "__main__":

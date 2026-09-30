@@ -91,6 +91,13 @@ jobs:
       - name: Rebuild the Differentiator from the captured sources
         run: python3 scripts/build_differentiator.py
 
+      # Product Comparison reads each product's category from this small lookup
+      # instead of the 45 MB Differentiator (added 30/09/2026). It is derived
+      # from data/differentiator.json alone, so it is rebuilt in the same run and
+      # the two can never disagree.
+      - name: Rebuild the product category lookup for Product Comparison
+        run: python3 scripts/build_product_categories.py
+
       # The build writes a fresh file every run, so it drops the ownership
       # notice every run. Re-stamp BEFORE the gate; the gate then refuses to
       # publish anything unmarked.
@@ -112,7 +119,7 @@ jobs:
         run: |
           git config user.name "differentiator-bot"
           git config user.email "actions@github.com"
-          git add data/differentiator.json
+          git add data/differentiator.json data/product-categories.json
           # A day where no crawl moved anything is a NORMAL day, not a failure.
           # The notice is deliberately stable (no date, no run number), so an
           # unchanged rebuild really does produce an identical file. Stop here,

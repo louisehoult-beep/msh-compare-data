@@ -37,6 +37,11 @@
     }).then(function(r){ return r.ok ? r.json() : null; });
   }
   var PRESSURES = BASE + 'data/trust-pressures.json' + CB;
+  /* The NHS Supply Chain catalogue cache, read for one thing only: to list a
+     supplier's products the way Product Comparison does, one per catalogue
+     brand line, instead of the grouped seed search terms (30/09/2026). Fails
+     soft to the seed labels as they were. */
+  var NHSSC = BASE + 'data/nhssc-cache.json' + CB;
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
@@ -125,11 +130,12 @@
     fetch(SPECMAP).then(function(r){return r.json();}).catch(function(){return null;}),
     fetch(PRODUCTS).then(function(r){return r.json();}).catch(function(){return null;}),
     fetchGated('trust-contacts').catch(function(){return null;}),
-    fetch(PRESSURES).then(function(r){return r.json();}).catch(function(){return null;})
-  ]).then(function(res){ render(res[0], res[1], res[2], res[3], res[4], res[5], res[6]); })
+    fetch(PRESSURES).then(function(r){return r.json();}).catch(function(){return null;}),
+    fetch(NHSSC).then(function(r){return r.json();}).catch(function(){return null;})
+  ]).then(function(res){ render(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7]); })
     .catch(function(){ MOUNT.innerHTML = '<div style="font-family:Inter,system-ui,sans-serif;color:#8a6d00;">Meeting prep is temporarily unavailable — please try again shortly.</div>'; });
 
-  function render(index, cfg, seed, specMap, prodFile, contactFile, pressureFile){
+  function render(index, cfg, seed, specMap, prodFile, contactFile, pressureFile, nhsscFile){
     var CONTACT_BY_CODE = (contactFile && contactFile.trusts) || {};
     var CONTACTS_ASOF = (contactFile && contactFile.asOf) || '';
     var PRESS_BY_CODE = (pressureFile && pressureFile.trusts) || {};
@@ -308,6 +314,100 @@
     // via hand-off from Product Comparison, so anyone starting here had no way
     // to say what they sell. Repopulates whenever the company changes.
     var selPr = mkSelect('Product', ['']);
+    function nk(x){ return String(x || '').toLowerCase().replace(/\s+/g, ' ').trim(); }
+    var CACHE = {}; var cpx = (nhsscFile && nhsscFile.products) || {};
+    for (var ck in cpx){ CACHE[nk(ck)] = cpx[ck]; }
+    /* brand-lines:start
+       SHARED WITH app/meeting-prep.js, BYTE FOR BYTE (30/09/2026). Product
+       Comparison and Help me prepare must list a supplier's products the same
+       way, so this block is carried identically in both files and
+       test_hub_tools_demo_fixes.py fails if the two copies ever differ. Edit it
+       in one file, copy it to the other. It reads nothing outside itself: the
+       caller hands it the supplier record and the catalogue cache entry.
+       splitSeedProduct() returns null when the seed product stands as it is,
+       otherwise the pieces it becomes: one per NHS Supply Chain brand line of
+       THIS supplier ({ name, items, line: true }), then any part of a grouped
+       ";" term the catalogue returned nothing for ({ name, line: false }). */
+    var SUPSTOP = { ltd:1, limited:1, uk:1, plc:1, llp:1, inc:1, co:1, the:1, and:1, of:1, group:1, healthcare:1, health:1, care:1, medical:1, international:1, products:1, europe:1, gmbh:1, company:1 };
+    function supWords(x){
+      return String(x || '').toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/[^a-z0-9]+/g, ' ').split(' ')
+        .filter(function(w){ return w.length > 1 && !SUPSTOP[w]; });
+    }
+    function lineIsSuppliers(item, s){
+      var mine = {};
+      [s.name].concat(s.aliases || []).forEach(function(n){ supWords(n).forEach(function(w){ mine[w] = 1; }); });
+      return supWords(item && item.supplier).some(function(w){ return mine[w]; });
+    }
+    function firstWord(x){
+      var w = String(x || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(' ')[0] || '';
+      return w.length >= 3 ? w : '';
+    }
+    function brandLines(entry, s){
+      var groups = {}, order = [];
+      ((entry && entry.items) || []).forEach(function(it){
+        if (!it || !it.name || !lineIsSuppliers(it, s)) return;
+        var key = String(it.name).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+        if (!key) return;
+        if (!groups[key]){ groups[key] = { name: it.name, items: [] }; order.push(key); }
+        /* Keep the most capitalised spelling NHSSC uses for the line. */
+        var caps = function(t){ return (String(t).match(/[A-Z]/g) || []).length; };
+        if (caps(it.name) > caps(groups[key].name)) groups[key].name = it.name;
+        groups[key].items.push(it);
+      });
+      return order.map(function(k){ return groups[k]; });
+    }
+    /* How many of this supplier's own seed entries start with each word. */
+    function ownFirstWords(s){
+      var ownFirst = {};
+      (s.products || []).forEach(function(p){
+        var n = typeof p === 'string' ? p : (p && (p.name || p.n));
+        var w = firstWord(n);
+        if (w) ownFirst[w] = (ownFirst[w] || 0) + 1;
+      });
+      return ownFirst;
+    }
+    function splitSeedProduct(name, entry, s, ownFirst){
+      var lines = brandLines(entry, s);
+      /* Split when the catalogue returned two or more brand lines, or one brand
+         line for a term that names several products (";"). */
+      if (!(lines.length >= 2 || (lines.length === 1 && String(name).indexOf(';') !== -1))) return null;
+      var parts = [], covered = {};
+      lines.forEach(function(g){
+        covered[firstWord(g.name)] = 1;
+        parts.push({ name: g.name, items: g.items, line: true });
+      });
+      /* The rest of the term, in its own words. Skipped where another of
+         this supplier's own seed entries already starts with that word
+         (HydroClean Advance, HydroTac), so the list is not doubled. */
+      String(name).split(';').forEach(function(seg){
+        seg = seg.trim();
+        var w = firstWord(seg);
+        if (!seg || !w || covered[w]) return;
+        if (ownFirst[w] && firstWord(name) !== w) return;
+        parts.push({ name: seg, line: false });
+      });
+      return parts;
+    }
+    /* brand-lines:end */
+    /* A seed product that is really a grouped catalogue search term ("Cosmopor
+       range (adhesive and film dressings)", "RespoSorb Silicone (super
+       absorbent dressing)") is listed as the brand lines NHS Supply Chain holds
+       for it, named as the catalogue names them, exactly as Product Comparison
+       lists them, so the two tools offer the same products and a product handed
+       over from Comparison is found here. Only the seed fallback is split: a
+       verified range from supplier-products.json is already one entry per real
+       product. Each name is listed once. */
+    function splitSeed(co, list){
+      var ownFirst = ownFirstWords(co), seen = {}, out = [];
+      function push(n, sp){ if (!n || seen[nk(n)]) return; seen[nk(n)] = 1; out.push({ n: n, s: sp }); }
+      list.forEach(function(p){
+        var parts = splitSeedProduct(p.n, CACHE[nk(p.n)], co, ownFirst);
+        if (!parts){ push(p.n, p.s); return; }
+        seen[nk(p.n)] = 1;
+        parts.forEach(function(g){ push(g.name, p.s); });
+      });
+      return out;
+    }
     /* A product entry is either a plain string (legacy, untagged) or
        {n:'name', s:'Speciality'} once it has been speciality-tagged. Normalising
        here lets tagging roll out supplier by supplier without a flag day - a
@@ -315,9 +415,10 @@
     function normProducts(co){
       var verified = verifiedRangeFor(co && co.name);
       var list = verified ? verified.products : ((co && co.products) || []);
-      return list.map(function(p){
+      var norm = list.map(function(p){
         return typeof p === 'string' ? { n: p, s: '' } : { n: p.n || p.name || '', s: p.s || p.speciality || '' };
       }).filter(function(p){ return p.n; });
+      return (verified || !co) ? norm : splitSeed(co, norm);
     }
     function fillProducts(){
       var co = suppliers.filter(function(s){ return s.name === selCo.sel.value; })[0];

@@ -66,6 +66,14 @@
   var DOSSIERURL = BASE + 'data/product-dossiers-wound.json' + CB;
   var DOSSIERURL_RESPIRATORY = BASE + 'data/product-dossiers-respiratory.json' + CB;
   var DOSSIERS = {};
+  /* Each product's Differentiator category ("wound:deb", Debridement &
+     irrigation), keyed by NPC and by supplier + name. Built from
+     data/differentiator.json by scripts/build_product_categories.py, which the
+     Differentiator workflow runs in the same job. Drives the suggested rival
+     (see competitorsOf); on a failed fetch the maps stay empty and the rival is
+     found by the word match, as before 30/09/2026. */
+  var PCATURL = BASE + 'data/product-categories.json' + CB;
+  var PCAT_NPC = {}, PCAT_NAME = {};
 
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
@@ -225,8 +233,15 @@
     fetch(PTYPESURL).then(function(r){return r.json();}).catch(function(){return null;}),
     fetch(ICCURL).then(function(r){return r.json();}).catch(function(){return {matrices:{}};}),
     fetch(DOSSIERURL).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};}),
-    fetch(DOSSIERURL_RESPIRATORY).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};})
+    fetch(DOSSIERURL_RESPIRATORY).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};}),
+    fetch(PCATURL).then(function(r){return r.json();}).catch(function(){return {categories:{}};})
   ]).then(function(res){
+    var PC = (res[10] && res[10].categories) || {};
+    Object.keys(PC).forEach(function(c){
+      (PC[c].npc || []).forEach(function(n){ (PCAT_NPC[n] = PCAT_NPC[n] || []).push(c); });
+      var nm = PC[c].names || {};
+      Object.keys(nm).forEach(function(sup){ nm[sup].forEach(function(n){ var k = sup + '|' + n; (PCAT_NAME[k] = PCAT_NAME[k] || []).push(c); }); });
+    });
     RANGE = (res[4] && res[4].suppliers) || {};
     PDETAIL = (res[5] && res[5].products) || {};
     ICC = (res[7] && res[7].matrices) || {};
@@ -324,6 +339,17 @@
        supplier the search happened to return are never attributed to this one.
        Any part of the term the catalogue returned nothing for (Sorbalgon,
        Peha-soft) stays listed under its own words, so nothing is dropped. */
+    /* brand-lines:start
+       SHARED WITH app/meeting-prep.js, BYTE FOR BYTE (30/09/2026). Product
+       Comparison and Help me prepare must list a supplier's products the same
+       way, so this block is carried identically in both files and
+       test_hub_tools_demo_fixes.py fails if the two copies ever differ. Edit it
+       in one file, copy it to the other. It reads nothing outside itself: the
+       caller hands it the supplier record and the catalogue cache entry.
+       splitSeedProduct() returns null when the seed product stands as it is,
+       otherwise the pieces it becomes: one per NHS Supply Chain brand line of
+       THIS supplier ({ name, items, line: true }), then any part of a grouped
+       ";" term the catalogue returned nothing for ({ name, line: false }). */
     var SUPSTOP = { ltd:1, limited:1, uk:1, plc:1, llp:1, inc:1, co:1, the:1, and:1, of:1, group:1, healthcare:1, health:1, care:1, medical:1, international:1, products:1, europe:1, gmbh:1, company:1 };
     function supWords(x){
       return String(x || '').toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/[^a-z0-9]+/g, ' ').split(' ')
@@ -352,11 +378,43 @@
       });
       return order.map(function(k){ return groups[k]; });
     }
+    /* How many of this supplier's own seed entries start with each word. */
+    function ownFirstWords(s){
+      var ownFirst = {};
+      (s.products || []).forEach(function(p){
+        var n = typeof p === 'string' ? p : (p && (p.name || p.n));
+        var w = firstWord(n);
+        if (w) ownFirst[w] = (ownFirst[w] || 0) + 1;
+      });
+      return ownFirst;
+    }
+    function splitSeedProduct(name, entry, s, ownFirst){
+      var lines = brandLines(entry, s);
+      /* Split when the catalogue returned two or more brand lines, or one brand
+         line for a term that names several products (";"). */
+      if (!(lines.length >= 2 || (lines.length === 1 && String(name).indexOf(';') !== -1))) return null;
+      var parts = [], covered = {};
+      lines.forEach(function(g){
+        covered[firstWord(g.name)] = 1;
+        parts.push({ name: g.name, items: g.items, line: true });
+      });
+      /* The rest of the term, in its own words. Skipped where another of
+         this supplier's own seed entries already starts with that word
+         (HydroClean Advance, HydroTac), so the list is not doubled. */
+      String(name).split(';').forEach(function(seg){
+        seg = seg.trim();
+        var w = firstWord(seg);
+        if (!seg || !w || covered[w]) return;
+        if (ownFirst[w] && firstWord(name) !== w) return;
+        parts.push({ name: seg, line: false });
+      });
+      return parts;
+    }
+    /* brand-lines:end */
     suppliers.forEach(function(s){
       var fw = (s.frameworks && s.frameworks[0] && s.frameworks[0].name) || '';
       var fwD = (s.frameworks && s.frameworks[0] && s.frameworks[0].dates) || '';
-      var own = (s.products || []).map(function(p){ return typeof p === 'string' ? p : (p && p.name); }).filter(function(n){ return n; });
-      var ownFirst = {}; own.forEach(function(n){ var w = firstWord(n); if (w) ownFirst[w] = (ownFirst[w] || 0) + 1; });
+      var ownFirst = ownFirstWords(s);
       function add(name, code, extra){
         if (seenProd[s.name + '|' + nk(name)]) return;
         seenProd[s.name + '|' + nk(name)] = 1;
@@ -370,15 +428,12 @@
         var name = typeof p === 'string' ? p : (p && p.name);
         if (!name) return;
         var entry = CACHE[nk(name)];
-        var lines = brandLines(entry, s);
-        /* Split when the catalogue returned two or more brand lines, or one brand
-           line for a term that names several products (";"). */
-        if (!(lines.length >= 2 || (lines.length === 1 && String(name).indexOf(';') !== -1))){ add(name, p && p.code); return; }
+        var parts = splitSeedProduct(name, entry, s, ownFirst);
+        if (!parts){ add(name, p && p.code); return; }
         seenProd[s.name + '|' + nk(name)] = 1;
-        var covered = {};
-        lines.forEach(function(g){
+        parts.forEach(function(g){
+          if (!g.line){ add(g.name, '', { term: name }); return; }
           var gw = firstWord(g.name);
-          covered[gw] = 1;
           var made = add(g.name, '', { _detail: { supplier: entry.supplier, query: entry.query, items: g.items }, catalogueLine: true, term: name });
           /* Type. A brand line keeps the type the whole term had, as before,
              whenever its own name or catalogue text bears that type out. Where
@@ -403,16 +458,6 @@
               made.type = segT || ((nLeads === 1 && lead1) ? lead1 : '') || termT;
             }
           }
-        });
-        /* The rest of the term, in its own words. Skipped where another of
-           this supplier's own seed entries already starts with that word
-           (HydroClean Advance, HydroTac), so the list is not doubled. */
-        String(name).split(';').forEach(function(seg){
-          seg = seg.trim();
-          var w = firstWord(seg);
-          if (!seg || !w || covered[w]) return;
-          if (ownFirst[w] && firstWord(name) !== w) return;
-          add(seg, '', { term: name });
         });
       });
     });
@@ -539,7 +584,7 @@
     var SUPOBJ = {}; suppliers.forEach(function(s){ SUPOBJ[s.name] = s; });
     var SPECMAP = {
       'vascular access': ['cannula','picc','midline','catheter','connector','flush','securement','needle','syringe','extension set','giving set','iv set','stopcock','infusion pump','syringe pump','pump','antisepsis','antiseptic','skin prep','skin disinfect','applicator','swabstick','swab','tourniquet','blood culture'],
-      'wound care': ['dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','npwt','negative pressure','wound','tape','plaster','sealant'],
+      'wound care': ['dressing','foam','hydrocolloid','alginate','hydrofiber','silver','collagen','honey','barrier film','film dressing','bandage','compression','npwt','negative pressure','wound','tape','plaster','sealant','swab','skin closure','wound closure'],
       'surgical haemostasis': ['haemostat','sealant','suture','stapler','staple','skin closure','wound closure','tissue adhesive','glue'],
       'enteral feeding': ['enteral','feeding','feeding tube','peg tube','syringe','connector'],
       'patient handling': ['slide sheet','sling','hoist','bed','mattress','cushion','wheelchair'],
@@ -553,6 +598,27 @@
     // to match that exact string lower-cased, so the type-narrowing above still
     // fires for it, same list as the short 'patient handling' key.
     SPECMAP['patient handling and pressure area care'] = SPECMAP['patient handling'];
+    /* WOUND CARE NOW TAKES SWABS AND SKIN CLOSURE STRIPS (30/09/2026). HARTMANN's
+       ES Gauze (typed "swab") and Omnistrip (typed "skin closure") vanished the
+       moment a rep picked Wound care, because neither type was on the list.
+       Adding "swab" alone would also have pulled in every skin-prep wipe a wound
+       supplier sells, so a swab is kept out of Wound care when its own name or
+       catalogue text says it is a skin-prep or theatre swab. Checked on the
+       whole index the day it was added: the lines this keeps out are Aero's
+       alcohol and povidone-iodine wipes, Crest's pre-injection swabs and
+       Mölnlycke's abdominal and surgical (theatre) swabs; gauze and non-woven
+       wound swabs, Cutimed Sorbact Swab, and the skin closure and wound closure
+       strips of Crest, Aero and HARTMANN stay in. */
+    var SPEC_NOT = {
+      'wound care': { 'swab': /alcohol|isopropyl|\bipa\b|iodine|chlorhexidine|pre.?injection|abdominal|surgical swab|x.?ray/ }
+    };
+    function specExcludes(specKey, p){
+      var ex = SPEC_NOT[specKey] && SPEC_NOT[specKey][p.type];
+      if (!ex) return false;
+      var d = detailFor(p);
+      var txt = (p.name + ' ' + ((d && d.items) || []).map(function(it){ return it.desc || ''; }).join(' ')).toLowerCase();
+      return ex.test(txt);
+    }
     /* THE TWO SIDES, SIDE BY SIDE — in the form as well as the result.
        Lou, 06/08/2026: the form stacked "your product" above "compare against",
        so the two things being compared never sat alongside each other until
@@ -652,6 +718,7 @@
         if (!inSpec(p, spec)) return;
         if (!p.type) return;
         if (allowed && allowed.indexOf(p.type) === -1) return;
+        if (spec && specExcludes(spec.toLowerCase(), p)) return;
         if (!seenT[p.type]){ seenT[p.type] = 1; out.push(p.type); }
       });
       out.sort(); return out;
@@ -664,6 +731,7 @@
         if (!inSpec(p, spec)) return false;
         if (typ && p.type !== typ) return false;
         if (allowed && p.type && allowed.indexOf(p.type) === -1) return false;
+        if (spec && specExcludes(spec.toLowerCase(), p)) return false;
         return true;
       });
     }
@@ -1183,26 +1251,65 @@
        chosen came back as Leukomed (Essity), although ten Coloplast dressings
        are tracked. Filtering after the slice would lose the chosen company
        whenever it ranked 13th or lower. */
+    /* CATEGORY FIRST, THEN WORDS (30/09/2026). Found on HARTMANN's
+       HydroClean Advance, a debridement dressing: every suggested rival was a
+       dressing that merely shared generic words with it (honey, silver, contact
+       layers). Where the Differentiator holds the product's category, rivals
+       in that same category now come first, same product type ahead of the
+       rest, ranked by the word overlap below. The word-matched list follows
+       them unchanged, so a product with no held category, or a chosen company
+       with nothing in that category, is suggested exactly as before.
+       catsOf() reads the category of each of the product's own catalogue
+       lines (only this supplier's lines, never another company's line a
+       grouped search returned) and of its name. catOf() is the category most
+       of them carry, and a rival must have the same one: a row the
+       Differentiator also files in a second category does not qualify on the
+       second one (Aero's first-aid plasters and a GBUK luer needle carry
+       wound:deb as a second category, and came up for HydroClean Advance
+       when any category counted). */
+    function catsOf(p){
+      if (p._cats) return p._cats;
+      var tally = {}, d = detailFor(p), s = SUPOBJ[p.supplier];
+      ((d && d.items) || []).forEach(function(it){
+        if (!it || (s && !lineIsSuppliers(it, s))) return;
+        (PCAT_NPC[it.npc] || []).forEach(function(c){ tally[c] = (tally[c] || 0) + 1; });
+      });
+      (PCAT_NAME[p.supplier + '|' + nk(p.name)] || []).forEach(function(c){ tally[c] = (tally[c] || 0) + 1; });
+      p._cats = tally;
+      return tally;
+    }
+    function catOf(p){
+      var t = catsOf(p), best = '';
+      Object.keys(t).sort().forEach(function(c){ if (!best || t[c] > t[best]) best = c; });
+      return best;
+    }
     function competitorsOf(mine, supFilter){
       var seen = {}, out = [];
       function add(p){ var k = p.name + '|' + p.supplier; if (p.supplier !== mine.supplier && (!supFilter || p.supplier === supFilter) && !seen[k]){ seen[k] = 1; out.push(p); } }
+      // Rank the closest like-for-like first: overlap of 8-char word stems from the
+      // product name + its live catalogue description (e.g. Pahacel [ORC] ranks
+      // Surgicel [ORC] above a flowable matrix), then cached detail, then speciality.
+      function stems(p){
+        var d = detailFor(p);
+        var txt = p.name + ' ' + ((d && d.items && d.items[0] && d.items[0].desc) || '');
+        var o = {}; (txt.toLowerCase().match(/[a-z]{5,}/g) || []).forEach(function(w){ o[w.slice(0, 8)] = 1; });
+        return o;
+      }
+      var myStems = stems(mine);
+      function score(p){
+        var n = 0, s = stems(p);
+        for (var k in s){ if (myStems[k]) n++; }
+        return n * 10 + (detailFor(p) ? 5 : 0) + specOverlap(mine.specs, p.specs);
+      }
+      var myCat = catOf(mine);
+      if (myCat){
+        var inCat = PRODUCTS.filter(function(p){ return p.supplier !== mine.supplier && (!supFilter || p.supplier === supFilter) && catOf(p) === myCat; });
+        function rankC(p){ return (mine.type && p.type === mine.type ? 100000 : 0) + score(p); }
+        inCat.sort(function(a, b){ return rankC(b) - rankC(a); });
+        inCat.forEach(add);
+      }
       if (mine.type){
         var same = PRODUCTS.filter(function(p){ return p.supplier !== mine.supplier && p.type === mine.type && (!supFilter || p.supplier === supFilter); });
-        // Rank the closest like-for-like first: overlap of 8-char word stems from the
-        // product name + its live catalogue description (e.g. Pahacel [ORC] ranks
-        // Surgicel [ORC] above a flowable matrix), then cached detail, then speciality.
-        function stems(p){
-          var d = detailFor(p);
-          var txt = p.name + ' ' + ((d && d.items && d.items[0] && d.items[0].desc) || '');
-          var out = {}; (txt.toLowerCase().match(/[a-z]{5,}/g) || []).forEach(function(w){ out[w.slice(0, 8)] = 1; });
-          return out;
-        }
-        var myStems = stems(mine);
-        function score(p){
-          var n = 0, s = stems(p);
-          for (var k in s){ if (myStems[k]) n++; }
-          return n * 10 + (detailFor(p) ? 5 : 0) + specOverlap(mine.specs, p.specs);
-        }
         same.sort(function(a, b){ return score(b) - score(a); });
         same.forEach(add);
       } else {
