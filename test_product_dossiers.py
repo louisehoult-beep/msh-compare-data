@@ -256,10 +256,49 @@ def test_tariff_price_is_pounds():
     check(seen > 0, "no published tariff price could be matched back to its tariff row")
 
 
+def test_dermatology_tariff_anchor():
+    """Dermatology is anchored on the Drug Tariff (30/09/2026): every BNF 21.22
+    line reaches a dossier, the scope is NHSBSA's BNF section and never a
+    keyword, each dossier states it is an emollient, and every price names the
+    pack it belongs to (a 100g and a 500g price on one dossier are otherwise
+    indistinguishable)."""
+    path = os.path.join(REPO, "data", "product-dossiers-dermatology.json")
+    if not check(os.path.exists(path), "product-dossiers-dermatology.json is missing"):
+        return
+    store = json.load(open(path))
+    tariff = json.load(open(os.path.join(REPO, "data", "drug-tariff-part-ix.json")))
+    ix = {n: i for i, n in enumerate(tariff["schema"])}
+    rows = [r for r in tariff["rows"] if str(r[ix["bnf"]]).startswith("2122")]
+    check(len(rows) > 100, "only %d BNF 21.22 rows in the tariff copy" % len(rows))
+    want = {}
+    for r in rows:
+        label = "%s, %s %s" % (r[ix["amp"]], r[ix["qty"]], r[ix["uom"]])
+        want[label] = B.pounds_from_pence(r[ix["price"]])
+    got = {}
+    for d in store.get("dossiers") or []:
+        for ob in d["fields"].get("Drug Tariff price", []):
+            got[ob.get("variant")] = ob["value"]
+            if not check(d.get("productType") == "emollient",
+                         "%s carries a tariff price but no stated productType" % d["key"]):
+                return
+    missing = sorted(set(want) - set(got))
+    check(not missing, "%d BNF 21.22 tariff lines reached no dossier, e.g. %s"
+          % (len(missing), missing[:3]))
+    wrong = [k for k in want if k in got and got[k] != want[k]]
+    check(not wrong, "tariff price mismatch for %s" % wrong[:3])
+    extra = sorted(set(got) - set(want))
+    check(not extra, "a priced variant outside BNF 21.22 reached the emollient set: %s" % extra[:3])
+    # Scope is the BNF section: a row with an emollient-sounding name outside
+    # 21.22 (Fontus's AproDerm barrier cream is Part IXC ostomy) must stay out.
+    check(not any("barrier cream" in (k or "").lower() for k in got),
+          "an ostomy barrier cream was filed as an emollient")
+
+
 for fn in (test_size_stripping, test_longest_family_wins, test_tariff_price_is_pounds,
            test_published_store, test_no_silent_merge,
            test_antimicrobial_variant_never_joins_plain_family,
-           test_alert_needs_a_product_word, test_shifted_catalogue_row_skipped):
+           test_alert_needs_a_product_word, test_shifted_catalogue_row_skipped,
+           test_dermatology_tariff_anchor):
     try:
         fn()
     except Exception as exc:                                        # noqa: BLE001

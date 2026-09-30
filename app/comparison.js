@@ -65,6 +65,15 @@
      collision risk — a product belongs to one speciality in practice. */
   var DOSSIERURL = BASE + 'data/product-dossiers-wound.json' + CB;
   var DOSSIERURL_RESPIRATORY = BASE + 'data/product-dossiers-respiratory.json' + CB;
+  /* Dermatology, added 30/09/2026. Unlike wound and respiratory this set is
+     ANCHORED ON THE DRUG TARIFF: emollients have no NHS Supply Chain framework
+     and no ICC matrix, so each BNF 21.22 (emollient devices) tariff line makes
+     its own dossier, carrying its reimbursement price per pack and a stated
+     `productType` of "emollient". That type is what lets two emollients be
+     compared like for like: "Epimax original cream" carries no type word in
+     its name, so name-typing alone left every emollient untyped and the
+     Dermatology picker offered nothing to compare (Ego demo, 30/09/2026). */
+  var DOSSIERURL_DERMATOLOGY = BASE + 'data/product-dossiers-dermatology.json' + CB;
   var DOSSIERS = {};
   /* Each product's Differentiator category ("wound:deb", Debridement &
      irrigation), keyed by NPC and by supplier + name. Built from
@@ -78,6 +87,12 @@
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function el(tag, css, html){ var e = document.createElement(tag); if (css) e.style.cssText = css; if (html != null) e.innerHTML = html; return e; }
   function nk(s){ return String(s||'').toLowerCase().replace(/\s+/g,' ').trim(); }
+  /* The dossier builder's own normaliser (build_product_dossiers.py nk()):
+     '&' to 'and', every non-alphanumeric run to one space. Dossier keys are
+     written with it, so a product name carrying '%', ':', brackets or '&'
+     ("Zerobase 11% cream", "Hydromol Bath & Shower emollient") never matched
+     its dossier through nk() above. Looked up as a second key, never instead. */
+  function pk(s){ return String(s||'').toLowerCase().replace(/&/g,' and ').replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim(); }
 
   /* antimicrobial-line:start
      ANTIMICROBIAL ELEMENT, READ ONE CATALOGUE LINE AT A TIME (30/09/2026).
@@ -237,7 +252,8 @@
     fetch(ICCURL).then(function(r){return r.json();}).catch(function(){return {matrices:{}};}),
     fetch(DOSSIERURL).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};}),
     fetch(DOSSIERURL_RESPIRATORY).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};}),
-    fetch(PCATURL).then(function(r){return r.json();}).catch(function(){return {categories:{}};})
+    fetch(PCATURL).then(function(r){return r.json();}).catch(function(){return {categories:{}};}),
+    fetch(DOSSIERURL_DERMATOLOGY).then(function(r){return r.json();}).catch(function(){return {dossiers:[]};})
   ]).then(function(res){
     var PC = (res[10] && res[10].categories) || {};
     Object.keys(PC).forEach(function(c){
@@ -250,6 +266,8 @@
     ICC = (res[7] && res[7].matrices) || {};
     ((res[8] && res[8].dossiers) || []).forEach(function(d){ DOSSIERS[d.key] = d; });
     ((res[9] && res[9].dossiers) || []).forEach(function(d){ DOSSIERS[d.key] = d; });
+    // Never overwrites a wound/respiratory dossier: those carry richer sources.
+    ((res[11] && res[11].dossiers) || []).forEach(function(d){ if (!DOSSIERS[d.key]) DOSSIERS[d.key] = d; });
     var PT = res[6];
     if (PT && Array.isArray(PT.types) && PT.types.length) TYPES = PT.types;
     if (PT && PT.generic_type_override) GENERIC_TYPE_OVERRIDE = PT.generic_type_override;
@@ -427,7 +445,7 @@
         seenProd[s.name + '|' + nk(name)] = 1;
         var prod = { name: name, code: code || '', supplier: s.name, specs: s.specialities || [], framework: fw, fwDates: fwD, voice: s.voice, type: '' };
         if (extra) for (var x in extra) prod[x] = extra[x];
-        prod.type = typeForProduct(name, prod._detail);
+        prod.type = statedType(s.name, name) || typeForProduct(name, prod._detail);
         PRODUCTS.push(prod);
         return prod;
       }
@@ -560,6 +578,15 @@
        02/09/2026. GENERIC_TYPE_OVERRIDE and CANNULA_DISQUALIFIERS moved to
        module scope 07/09/2026 so data/product-types.json can override them
        once fetched — see PTYPESURL above. */
+    /* A product type STATED by its dossier (today: the Drug Tariff's BNF
+       21.22 emollient section) outranks one guessed from words in the name —
+       "GlucoRx Allpresan diabetic foam cream" is an emollient, not a foam
+       dressing. Only a dossier that carries productType answers; everything
+       else falls through to name-typing exactly as before. */
+    function statedType(supplier, name){
+      var d = DOSSIERS[supplier + '|' + nk(name)] || DOSSIERS[supplier + '|' + pk(name)];
+      return (d && d.productType) || '';
+    }
     function typeForProduct(name, dGiven){
       var t = typeOf(name);
       var override = GENERIC_TYPE_OVERRIDE[t];
@@ -598,6 +625,7 @@
       'patient handling': ['slide sheet','sling','hoist','bed','mattress','cushion','wheelchair','underpad'],
       'continence': ['catheter','ostomy','urostomy','stoma','foley','nephrostomy','drainage','incontinence pad','all-in-one pad','shaped pad','rectangular pad','pull up pants','fixation pants','underpad'],
       'ophthalmology': ['iol','intraocular','phaco'],
+      'dermatology / skin': ['emollient'],
       'diabetes': ['glucose','sensor','test strip','lancet','needle','pump'],
       'surgery / theatres': ['suture','stapler','staple','haemostat','sealant','drape','gown','glove','scalpel','blade','forceps','retractor','trocar','clip','clamp','mesh','skin closure','tissue adhesive','electrode','suction','warming','warmer','scope','endoscope']
     };
@@ -1608,7 +1636,7 @@
     };
 
     function dossierFor(p){
-      return DOSSIERS[p.supplier + '|' + nk(p.name)] || null;
+      return DOSSIERS[p.supplier + '|' + nk(p.name)] || DOSSIERS[p.supplier + '|' + pk(p.name)] || null;
     }
 
     function kindOf(dos, sid){

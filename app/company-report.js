@@ -1741,7 +1741,24 @@
     if (rec.incorporated) rows += fact('Incorporated', esc(dateUK(rec.incorporated)));
     if (rec.registeredOffice) rows += fact('Registered office', esc(rec.registeredOffice), true);
     if (rec.sic && rec.sic.length) rows += fact('SIC', rec.sic.map(esc).join(', '));
-    if (rec.accountsFilingVerbatim) rows += fact('Latest accounts', esc(rec.accountsFilingVerbatim), true);
+    /* LATEST ACCOUNTS — a register fact, shown whatever the match tier.
+       Until 30/09/2026 this row read only `accountsFilingVerbatim`, which no
+       script has ever written, so it rendered for none of the 1,084 companies
+       whose record carries `accountsMadeUpTo`. A member reading Aspire Pharma's
+       report in a customer demo was told nothing about its accounts, clicked
+       through, and found full accounts filed on 29/08/2026. Companies House's
+       own "last accounts made up to" date and category are shown with a link
+       to the filing history; they are a fact about the REGISTER record, so
+       they are safe to show beside the probable-match caveat, exactly like
+       status and incorporation date above. No figure is read from them here. */
+    if (rec.accountsFilingVerbatim) {
+      rows += fact('Latest accounts', esc(rec.accountsFilingVerbatim), true);
+    } else if (rec.accountsMadeUpTo) {
+      rows += fact('Latest accounts', 'made up to ' + esc(dateUK(rec.accountsMadeUpTo)) +
+        (rec.accountsCategory ? ' <span style="color:' + DIM + ';">· ' + esc(String(rec.accountsCategory)) + ' accounts</span>' : '') +
+        (rec.companyNumber ? ' &middot; <a href="https://find-and-update.company-information.service.gov.uk/company/' +
+          esc(rec.companyNumber) + '/filing-history" target="_blank" rel="noopener">filing history ↗</a>' : ''), true);
+    }
 
     /* Turnover has three honest states and they must not blur:
        a figure (with its made-up-to date), disclosed-but-not-extracted, or
@@ -2460,6 +2477,23 @@
     if (!(g && g.series && g.series.points && g.series.points.length)) {
       var frec = ctx.fin ? finRecFor(s, ctx.fin) : null;
       var why = frec && frec.turnoverNote;
+      /* Say WHY nothing was read when accounts are known to be filed. The old
+         wording ("the extraction step has not run here") read to a member as
+         "no accounts published" for a company with accounts on the register.
+         Figures are only read for a CONFIRMED identity, so a probable match
+         has filed accounts nobody here has opened — say exactly that. */
+      if (!why && frec && frec.accountsMadeUpTo && !isConfirmed(frec)) {
+        return sec('Growth', gap('Accounts made up to ' + esc(dateUK(frec.accountsMadeUpTo)) +
+          ' are filed at Companies House' + (frec.companyNumber ? ' (<a href="https://find-and-update.company-information.service.gov.uk/company/' +
+          esc(frec.companyNumber) + '/filing-history" target="_blank" rel="noopener">filing history ↗</a>)' : '') +
+          ', but no figure has been read from them: turnover is only extracted once this company\u2019s Companies House identity is confirmed against a second source, and it is not yet. A coverage gap, not missing accounts.'));
+      }
+      if (!why && frec && frec.accountsMadeUpTo) {
+        return sec('Growth', gap('Accounts made up to ' + esc(dateUK(frec.accountsMadeUpTo)) +
+          ' are filed at Companies House' + (frec.companyNumber ? ' (<a href="https://find-and-update.company-information.service.gov.uk/company/' +
+          esc(frec.companyNumber) + '/filing-history" target="_blank" rel="noopener">filing history ↗</a>)' : '') +
+          ', but no tagged turnover has been extracted from them yet. Turnover is read only from machine-tagged (iXBRL) filings, weekly; a filing newer than the last read, or a scanned-PDF filing, shows here as this gap. A coverage gap, not missing accounts.'));
+      }
       return sec('Growth', gap(why
         ? ('No turnover series can be shown for this company: ' + esc(why) +
            ' Turnover exists only inside the filed accounts, so where the accounts do not disclose it in a readable form there is nothing to chart. That is a fact about the filing, not about the company\u2019s size.')

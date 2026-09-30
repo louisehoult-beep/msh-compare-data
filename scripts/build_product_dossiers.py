@@ -236,6 +236,37 @@ SPECIALITIES = {
         "tariff_include": [],
         "tariff_exclude": [],
     },
+    # Added 30/09/2026 (Ego Pharmaceuticals demo). Emollients have no NHS Supply
+    # Chain framework, no ICC matrix and, for most suppliers, no crawlable
+    # product page (egopharm.com cannot be read by the product crawler), so the
+    # three sources the wound build starts from do not exist here. Their NHS
+    # route is community prescribing, and the one primary source that lists
+    # every reimbursable emollient, by supplier, at a price, is Drug Tariff
+    # Part IX. So for this speciality the TARIFF IS THE ANCHOR: each line
+    # creates its dossier rather than waiting to join one a richer source made.
+    #
+    # Scoped by NHSBSA's own classification, never by keyword: BNF section
+    # 21.22 ("emollient devices", BNF code prefix 2122) is the tariff's own
+    # grouping, so the set is exactly what NHSBSA files as an emollient - 176
+    # lines from 35 suppliers in the September 2026 tariff. A keyword sweep for
+    # "cream" would pull in barrier creams, scar gels and ostomy protectives.
+    "dermatology": {
+        "differentiator_prefix": "dermatology:",
+        "icc_categories": [],
+        "tariff_parts": ["IXA"],
+        "tariff_include": [],
+        "tariff_exclude": [],
+        "tariff_bnf_prefixes": ["2122"],
+        "tariff_creates": True,
+        # What a tariff-anchored dossier IS, so the comparison tool can put two
+        # of them side by side. Stated from the BNF section, not inferred from
+        # the product name ("Epimax original cream" carries no type word).
+        "product_type": "emollient",
+        # Several pack sizes of one product are separate tariff lines with
+        # separate prices; the variant label must carry the pack or a reader
+        # cannot tell which price is the 100g and which the 500g.
+        "variant_with_pack": True,
+    },
 }
 
 
@@ -253,6 +284,7 @@ class Dossier:
         self.sources = {}         # source id -> its provenance block
         self.candidates = set()   # near-name links, never merged
         self.categories = set()
+        self.product_type = None  # set only where the speciality states it
 
     @property
     def key(self):
@@ -300,6 +332,7 @@ class Dossier:
             "sources": self.sources,
             "fields": by_field,
             "familyMembers": sorted(self.candidates),
+            **({"productType": self.product_type} if self.product_type else {}),
         }
 
 
@@ -541,6 +574,15 @@ class Builder:
         parts = set(self.spec["tariff_parts"])
         inc = self.spec["tariff_include"]
         exc = self.spec["tariff_exclude"]
+        bnf = tuple(self.spec.get("tariff_bnf_prefixes") or ())
+        creates = bool(self.spec.get("tariff_creates"))
+        with_pack = bool(self.spec.get("variant_with_pack"))
+        try:
+            i_bnf = schema.index("bnf")
+        except ValueError:
+            i_bnf = None
+        if bnf and i_bnf is None:
+            return   # cannot apply the stated scope, so publish nothing
         sid = "drug-tariff"
         block = {
             "id": sid,
@@ -555,9 +597,14 @@ class Builder:
         for row in store.get("rows") or []:
             if row[i_part] not in parts:
                 continue
-            hay = (str(row[i_amp]) + " " + str(row[2] if len(row) > 2 else "")).lower()
-            if not any(t in hay for t in inc) or any(t in hay for t in exc):
-                continue
+            if bnf:
+                # The speciality is scoped by NHSBSA's BNF section, not by words.
+                if not str(row[i_bnf]).startswith(bnf):
+                    continue
+            else:
+                hay = (str(row[i_amp]) + " " + str(row[2] if len(row) > 2 else "")).lower()
+                if not any(t in hay for t in inc) or any(t in hay for t in exc):
+                    continue
             # Tariff lines carry no NPC, so they join by rule (b) or by brand
             # family. The pack size is stripped off the appliance name first -
             # it is the pack, not the product - and kept as the variant, so a
@@ -572,10 +619,22 @@ class Builder:
                 if fam:
                     d = self.by_key.get("%s|%s" % (supplier, nk(fam)))
                     scope = "family"
+            if d is None and creates:
+                # Tariff-anchored speciality: the tariff line IS the product
+                # record. Keyed by the resolved supplier and the appliance name
+                # without its pack, so a product's 100g and 500g lines land on
+                # one dossier with two priced variants.
+                d = self.dossier_for(row[i_sup], base)
+                if self.spec.get("product_type"):
+                    d.product_type = self.spec["product_type"]
+                d.categories.add("BNF %s" % str(row[i_bnf])[:4] if i_bnf is not None else "Drug Tariff")
+                self.stats["tariff_dossiers_created"] += 1
             if d is None:
                 self.stats["tariff_unmatched"] += 1
                 continue
             label = " ".join(x for x in (base, variant) if x)
+            if with_pack and not variant:
+                label = "%s, %s %s" % (label, row[i_qty], row[i_uom])
             d.add_source(sid, block)
             price = pounds_from_pence(row[i_price])
             if price:
