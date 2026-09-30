@@ -13,8 +13,8 @@
  "rule": "A framework counts as DONE only when every supplier awarded on it has at least one product published with a gated category in the Differentiator. Suppliers whose name will not resolve against the company alias registry are listed as unknown and never guessed.",
  "generatedFrom": {
   "frameworks.json": "2026-09-22",
-  "differentiator.json published": 37143,
-  "differentiator.json held": 50128
+  "differentiator.json published": 37152,
+  "differentiator.json held": 50119
  },
  "counts": {
   "frameworks": 122,
@@ -25,9 +25,9 @@
   "outOfScope": 20,
   "inScope": 102,
   "supplierNamesUnresolved": 414,
-  "inScopeSuppliersNeedingCrawl": 270,
-  "inScopeSuppliersNeedingDomain": 248,
-  "suppliersRefused": 532,
+  "inScopeSuppliersNeedingCrawl": 265,
+  "inScopeSuppliersNeedingDomain": 243,
+  "suppliersRefused": 537,
   "suppliersRefusedButPublishingElsewhere": 110,
   "suppliersCapturedNothingCounted": 1,
   "suppliersDuplicateOfCaptured": 2,
@@ -9250,8 +9250,8 @@
    "category": "Diagnostic Equipment and Services",
    "ends": "28 February 2029",
    "suppliersAwarded": 25,
-   "suppliersPublished": 8,
-   "coverage": 32.0,
+   "suppliersPublished": 9,
+   "coverage": 36.0,
    "nhsscCategory": "Diagnostic Equipment and Services",
    "inScope": true,
    "outOfScopeReason": null,
@@ -9264,35 +9264,10 @@
     {
      "supplier": "Atom Medical Corporation UK ltd",
      "domain": null
-    },
-    {
-     "supplier": "Charter Kontron Limited",
-     "domain": null
-    },
-    {
-     "supplier": "L\u00f6wenstein Medical UK",
-     "domain": null
-    },
-    {
-     "supplier": "Mieka Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "mOm Incubators Ltd",
-     "domain": null
-    },
-    {
-     "supplier": "@SimulationMan Ltd",
-     "domain": null
     }
    ],
    "domainsMissing": [
-    "@SimulationMan Ltd",
-    "Atom Medical Corporation UK ltd",
-    "Charter Kontron Limited",
-    "L\u00f6wenstein Medical UK",
-    "Mieka Ltd",
-    "mOm Incubators Ltd"
+    "Atom Medical Corporation UK ltd"
    ],
    "duplicateOfCapturedSupplier": [],
    "refusedSuppliers": [
@@ -9318,6 +9293,13 @@
      "bucket": "refused"
     },
     {
+     "supplier": "Charter Kontron Limited",
+     "domain": "charter-kontron.com",
+     "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; gave up while reading the sitemap \u2014 the site answers too slowly to crawl inside its budget; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-30",
+     "bucket": "refused"
+    },
+    {
      "supplier": "GE HealthCare",
      "domain": "gehealthcare.co.uk",
      "reason": "robots.txt disallows automated reading of this site",
@@ -9325,10 +9307,38 @@
      "bucket": "refused"
     },
     {
+     "supplier": "L\u00f6wenstein Medical UK",
+     "domain": "loewensteinmedical.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-30",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "Mieka Ltd",
+     "domain": "mieka.co.uk",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
+     "checked": "2026-09-30",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "mOm Incubators Ltd",
+     "domain": "momincubators.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-30",
+     "bucket": "refused"
+    },
+    {
      "supplier": "Ortus Technology Limited",
      "domain": "www.theortusgroup.com",
      "reason": "the site's WordPress API exposes no product post type; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; no readable /sitemap.xml (HTTP Error 404: Not Found)",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "@SimulationMan Ltd",
+     "domain": "simulationcollective.com",
+     "reason": "robots.txt disallows automated reading of this site",
+     "checked": "2026-09-30",
      "bucket": "refused"
     },
     {
@@ -9363,12 +9373,12 @@
    ],
    "actionable": {
     "unresolvedNames": 1,
-    "publishedElsewhereNeedingCategory": 4,
+    "publishedElsewhereNeedingCategory": 3,
     "heldNeedingCategory": 0,
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 6
+    "needDomain": 1
    },
    "published": [
     "Croyde Medical",
@@ -9378,36 +9388,36 @@
     "Inspiration Healthcare",
     "MEDACX Limited",
     "Mediprema",
-    "Mindray UK"
+    "Mindray UK",
+    "Penlon"
    ],
    "publishedElsewhere": [
     "Getinge",
     "Nihon Koden",
-    "Penlon",
     "Philips"
    ],
    "heldOnly": [],
    "capturedNothingCounted": [],
    "notCrawled": [
-    "Atom Medical Corporation UK ltd",
-    "Charter Kontron Limited",
-    "L\u00f6wenstein Medical UK",
-    "Mieka Ltd",
-    "mOm Incubators Ltd",
-    "@SimulationMan Ltd"
+    "Atom Medical Corporation UK ltd"
    ],
    "refused": [
     "Aquilant Limited",
     "Athrodax Healthcare International Ltd",
     "Central Medical Supplies",
+    "Charter Kontron Limited",
     "GE HealthCare",
+    "L\u00f6wenstein Medical UK",
+    "Mieka Ltd",
+    "mOm Incubators Ltd",
     "Ortus Technology Limited",
+    "@SimulationMan Ltd",
     "Walters Medical Ltd"
    ],
    "unknown": [
     "Scott Medical Ltd"
    ],
-   "actionableTotal": 11,
+   "actionableTotal": 5,
    "blockedReason": null,
    "deferred": null
   },
@@ -14716,10 +14726,6 @@
      "domain": null
     },
     {
-     "supplier": "L\u00f6wenstein Medical UK",
-     "domain": null
-    },
-    {
      "supplier": "Nowus Healthcare",
      "domain": null
     },
@@ -14748,7 +14754,6 @@
     "Breas Medical Ltd",
     "Cavagna Group UK",
     "Independent Physiological Diagnostics Ltd",
-    "L\u00f6wenstein Medical UK",
     "Nowus Healthcare",
     "Philips Healthcare / Philips Respironics",
     "Remserve Medical Supplies Ltd",
@@ -14777,6 +14782,13 @@
      "domain": "flexicare.com",
      "reason": "robots.txt disallows automated reading of this site",
      "checked": "2026-08-31",
+     "bucket": "refused"
+    },
+    {
+     "supplier": "L\u00f6wenstein Medical UK",
+     "domain": "loewensteinmedical.com",
+     "reason": "the site's WordPress API returned HTTP 404; the WooCommerce Store API returned HTTP 404; the sitemap carries 0 URLs under /product/, /products/, /our-products/, /range/, /ranges/, too few to call a catalogue; not a Wix storefront (sitemap.xml carries no Wix marker)",
+     "checked": "2026-09-30",
      "bucket": "refused"
     },
     {
@@ -14817,7 +14829,7 @@
     "capturedNothingCounted": 0,
     "duplicateOfCapturedSupplier": 0,
     "crawlable": 0,
-    "needDomain": 10
+    "needDomain": 9
    },
    "published": [],
    "publishedElsewhere": [
@@ -14843,7 +14855,6 @@
     "Breas Medical Ltd",
     "Cavagna Group UK",
     "Independent Physiological Diagnostics Ltd",
-    "L\u00f6wenstein Medical UK",
     "Nowus Healthcare",
     "Philips Healthcare / Philips Respironics",
     "Remserve Medical Supplies Ltd",
@@ -14855,10 +14866,11 @@
     "Acurable Limited",
     "Baywater Healthcare UK Ltd",
     "Flexicare Medical",
+    "L\u00f6wenstein Medical UK",
     "The Better Sleep Clinic"
    ],
    "unknown": [],
-   "actionableTotal": 24,
+   "actionableTotal": 23,
    "blockedReason": null,
    "deferred": null
   },
