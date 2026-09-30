@@ -3189,11 +3189,22 @@ def check_company_awards(doc, seed, report_js):
         # Nothing in the quarantine may be publishable. If it is, the file is
         # stale against a seed that has since gained the alias — which is a
         # coverage miss, not a false claim, so it WARNS.
-        stale = []
+        stale, cut_off = [], []
         for row in (doc.get("unmatched") or []) + (doc.get("ambiguous") or []):
             got, state, _ = company_match.resolve(row.get("noticeSupplierName") or "", index)
             if state == "confirmed":
-                stale.append((row.get("noticeSupplierName"), got))
+                # A name the award-history export cut off at its character limit
+                # is held back ON PURPOSE (scripts/refresh_awards.py): a fragment
+                # can equal a shorter, different company. --rematch cannot and
+                # must not publish it, so it is counted apart, not called stale.
+                (cut_off if row.get("cutOff") else stale).append(
+                    (row.get("noticeSupplierName"), got))
+        if cut_off:
+            WARN("company-awards", "%d award-history supplier name(s) were cut off by the "
+                                   "export's character limit and are held unmatched, though "
+                                   "the fragment alone would resolve (e.g. %s). Read the "
+                                   "notice to settle each; never match a cut-off name."
+                                   % (len(cut_off), ", ".join("%r -> %r" % s for s in cut_off[:3])))
         if stale:
             WARN("company-awards", "%d quarantined award(s) now resolve to a Hub company (e.g. "
                                    "%s), so the seed has gained an alias since this file was "

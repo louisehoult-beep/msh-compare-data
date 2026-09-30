@@ -2524,7 +2524,11 @@
       '<br><span style="font-size:12.5px;color:#37485a;">' + esc(a.buyer || 'buyer not named') +
       ' &middot; ' + esc(uk(a.date) || 'date not stated') + ' &middot; ' + value + period + '</span>' +
       '<br><span style="font-size:12.5px;color:' + DIM + ';">named on the notice as &ldquo;' +
-      esc(a.noticeSupplierName) + '&rdquo; &middot; ' +
+      esc(a.noticeSupplierName) + '&rdquo;' +
+      /* History rows join a multi-supplier award into one string; it is split
+         before matching, so say this company was one of several named. */
+      (a.noticeSupplierCount > 1 ? ', one of ' + (a.noticeSupplierString && a.noticeSupplierString.length >= 80 ? 'at least ' : '') +
+        esc(String(a.noticeSupplierCount)) + ' suppliers named' : '') + ' &middot; ' +
       '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">' +
       esc(a.source) + ' notice &#8599;</a>' +
       (a.hubUrl ? ' &middot; <a href="' + esc(a.hubUrl) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">Award Tracker &#8599;</a>' : '') +
@@ -2537,7 +2541,9 @@
     }
     if (!rows.length) {
       var cov = ctx.awards.coverage || {};
-      var from = (cov.window && cov.window.from) || (ctx.awards.windows && ctx.awards.windows.length ? ctx.awards.windows[0].from : '');
+      /* The award history's floor when the index carries one (see
+         scripts/refresh_awards.py), else the first weekly window walked. */
+      var from = cov.historyFrom || (cov.window && cov.window.from) || (ctx.awards.windows && ctx.awards.windows.length ? ctx.awards.windows[0].from : '');
       return sec(title, gap('Not captured for this company yet. ' + esc(blurb) +
         ' The index has been walked' + (from ? ' from ' + esc(uk(from) || from) : '') +
         ', and nothing in it names this company. Both feeds carry only the windows walked, and only notices the buyer classified under CPV division 33 — so this says what the index holds, not what the company has won.'));

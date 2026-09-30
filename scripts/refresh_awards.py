@@ -308,7 +308,169 @@ def fetch_cf(days, max_pages=MAX_PAGES):
     return rows, note, reached
 
 
+# ------------------------------------------------------- the award history
+#
+# ADDED 30/09/2026. The feeds above are walked over a rolling 8-day window, so on
+# its own this file only ever held a few weeks of awards (129 rows, 70
+# companies, Contracts Finder back to 14/09/2026). A company report showed no
+# awards for Hollister while data/tender-history.json — the same two statutory
+# feeds, walked back to 2021 by the pipeline's tender-history-refresh — held its
+# £1.98m Solent NHS Trust stoma care award and its place on NHS Scotland's
+# "Stoma Acute Patient" award. So every run now ALSO reads that history and
+# resolves it under exactly the same rule (company_match.resolve, unchanged).
+#
+# The history rows are re-derived from that file on every run, never copied into
+# `_rows`: the file is already in this repo, and copying it would double the
+# weight of a file the Company Report fetches on every page load.
+#
+# SUPPLIER STRINGS. The history export holds one supplier STRING per award, and a
+# multi-supplier award is joined with commas ("Clinimed Limited, Coloplast Ltd,
+# ConvaTec Ltd, Hollister Ltd, Peak Medical Ltd, "). So:
+#   1. The whole string is tried first, exactly as the notice wrote it. A legal
+#      name containing a comma ("Becton, Dickinson U.K. Limited") resolves here
+#      or not at all — it is never split into two companies.
+#   2. Otherwise it is split on commas and semicolons outside brackets. That is
+#      splitting only: every piece then faces the same exact-only resolve().
+#      A piece that is nothing but legal-form or territory words ("Inc.") is
+#      rejoined to the piece before it rather than tried as a name.
+#   3. The export cuts supplier strings at 80 characters. A string that long may
+#      end mid-name ("Organon Pharma (UK"), so its LAST piece is quarantined
+#      unmatched with that reason — a cut-off name is never tried against the
+#      seed, because a fragment can exactly equal a shorter, different company.
+HISTORY_PATH = "data/tender-history.json"
+HISTORY_SUPPLIER_CAP = 80
+HISTORY_SOURCE = {"f": "Find a Tender", "c": "Contracts Finder"}
+SECTION_FOR = {"Find a Tender": "tender-awards", "Contracts Finder": "contract-awards"}
+_BARE_FORM = re.compile(r"^(?:(?:%s|%s)\s*)+$"
+                        % (company_match.LEGAL_SUFFIX, company_match.TERRITORY))
+
+
+def split_suppliers(text):
+    """Split a joined supplier string on , and ; outside brackets. Pieces that
+    are only legal-form/territory words are rejoined to the previous piece."""
+    pieces, buf, depth = [], "", 0
+    for ch in text or "":
+        if ch in "([":
+            depth += 1
+        elif ch in ")]" and depth:
+            depth -= 1
+        if ch in ",;" and depth == 0:
+            pieces.append(buf)
+            buf = ""
+        else:
+            buf += ch
+    pieces.append(buf)
+    out = []
+    for p in (x.strip() for x in pieces):
+        if not p:
+            continue
+        if out and _BARE_FORM.match(company_match.norm(p)):
+            out[-1] = out[-1] + ", " + p
+        else:
+            out.append(p)
+    return out
+
+
+def history_source(url, code):
+    """Which statutory service published the notice. The URL host is the fact;
+    the export's source code is the fallback (legacy rows carry 'l')."""
+    if "find-tender.service.gov.uk" in (url or ""):
+        return "Find a Tender"
+    if "contractsfinder.service.gov.uk" in (url or ""):
+        return "Contracts Finder"
+    return HISTORY_SOURCE.get(code)
+
+
+def history_rows(history, index):
+    """(rows, quarantined, stats) from data/tender-history.json.
+
+    rows are award rows in this file's own shape, one per supplier piece, still
+    to be resolved. quarantined are pieces that must not be tried at all (cut
+    off by the export), already carrying their reason."""
+    schema = (history or {}).get("schema") or []
+    rows, quarantined = [], []
+    stats = {"awards": 0, "noSupplier": 0, "noSource": 0, "split": 0, "truncated": 0}
+    if not schema:
+        return rows, quarantined, stats
+    col = {name: i for i, name in enumerate(schema)}
+
+    def f(r, name):
+        i = col.get(name)
+        return r[i] if i is not None and i < len(r) else None
+
+    for r in history.get("rows") or []:
+        stats["awards"] += 1
+        url = str(f(r, "u") or "")
+        source = history_source(url, f(r, "s"))
+        sup = str(f(r, "sup") or "")
+        if not source:
+            stats["noSource"] += 1
+            continue
+        if not sup.strip():
+            stats["noSupplier"] += 1
+            continue
+        amount = f(r, "v")
+        if isinstance(amount, bool) or not isinstance(amount, (int, float)) or amount <= 0:
+            amount = None
+        base = {
+            "title": str(f(r, "t") or "").strip(),
+            "buyer": str(f(r, "b") or "").strip(),
+            "date": str(f(r, "d") or "")[:10],
+            "url": url,
+            "hubUrl": HUB_AWARD_TRACKER,
+            "source": source,
+            "section": SECTION_FOR[source],
+            "valueAmount": amount,
+            "valueCurrency": "GBP" if amount is not None else "",
+            "periodEnd": f(r, "pe"),
+            "origin": "tender-history",
+        }
+        cut = len(sup) >= HISTORY_SUPPLIER_CAP
+        whole = sup.strip().rstrip(",;").strip()
+        if not cut and company_match.resolve(whole, index)[1] == "confirmed":
+            pieces = [whole]
+        else:
+            pieces = split_suppliers(sup)
+        if len(pieces) > 1:
+            stats["split"] += 1
+        for n, piece in enumerate(pieces):
+            row = dict(base, noticeSupplierName=piece)
+            if len(pieces) > 1 or cut:
+                row["noticeSupplierString"] = sup
+                row["noticeSupplierCount"] = len(pieces)
+            if cut and n == len(pieces) - 1:
+                stats["truncated"] += 1
+                row["cutOff"] = True
+                row["reason"] = (
+                    "the award history export cuts supplier names at %d characters and "
+                    "this one reaches that limit, so \"%s\" may be the start of a longer "
+                    "name. A cut-off name is never matched; read the notice to settle it."
+                    % (HISTORY_SUPPLIER_CAP, piece))
+                quarantined.append(row)
+            else:
+                rows.append(row)
+    return rows, quarantined, stats
+
+
+def history_floor(history):
+    """The earliest publication date the history's walk covers, as the history
+    file itself states it. Falls back to its earliest award date."""
+    cov = (history or {}).get("coverage") or {}
+    m = re.search(r"published from (\d{4}-\d{2}-\d{2})", str(cov.get("note") or ""))
+    return m.group(1) if m else cov.get("awardsFrom")
+
+
 # ------------------------------------------------------------------ assembly
+
+def award_key(row):
+    """The same award seen twice: once on the weekly feed walk, once in the
+    history (which lists a republished award once, under its latest notice, so
+    the notice URL alone does not always line up)."""
+    return (company_match.key(row.get("noticeSupplierName", "")),
+            company_match.norm(row.get("title", "")),
+            row.get("date") or "",
+            row.get("valueAmount"))
+
 
 def dedup_key(row):
     """One award, one supplier. The notice link alone would collapse a
@@ -316,7 +478,7 @@ def dedup_key(row):
     return (row.get("url", ""), company_match.key(row.get("noticeSupplierName", "")))
 
 
-def assemble(rows, seed, existing, window, notes, complete):
+def assemble(rows, seed, existing, window, notes, complete, history=None):
     """Resolve every row and lay the file out. Pure — no network, no clock
     beyond today's date — so the gate and the tests can drive it directly."""
     index = company_match.build_index(seed)
@@ -328,8 +490,23 @@ def assemble(rows, seed, existing, window, notes, complete):
     for row in rows:
         kept[dedup_key(row)] = row
 
-    companies, unmatched, ambiguous = {}, [], []
-    for row in kept.values():
+    # The history, resolved under the same rule. A feed row already held wins
+    # over its history twin: it carries CPV, ocid and the contract start date.
+    h_rows, h_quarantined, h_stats = history_rows(history, index)
+    seen_url = set(kept)
+    seen_award = {award_key(r) for r in kept.values()}
+    to_resolve = list(kept.values())
+    h_dupes = 0
+    for row in h_rows:
+        if dedup_key(row) in seen_url or award_key(row) in seen_award:
+            h_dupes += 1
+            continue
+        seen_url.add(dedup_key(row))
+        seen_award.add(award_key(row))
+        to_resolve.append(row)
+
+    companies, unmatched, ambiguous = {}, list(h_quarantined), []
+    for row in to_resolve:
         company, state, reason = company_match.resolve(row["noticeSupplierName"], index)
         entry = dict(row)
         if state == "confirmed":
@@ -347,11 +524,49 @@ def assemble(rows, seed, existing, window, notes, complete):
     ambiguous.sort(key=lambda r: (r.get("date") or ""), reverse=True)
 
     matched_rows = sum(len(v) for v in companies.values())
+
+    feeds_note = ("the weekly walk of both feeds over the windows listed" if complete else
+                  "the weekly walk of both feeds over the windows listed, which is "
+                  "INCOMPLETE: at least one feed hit its page guard before the window "
+                  "was exhausted, so awards from that window are missing (re-run with a "
+                  "shorter window)")
+    coverage = {"complete": bool(complete), "feedsComplete": bool(complete),
+                "window": window, "notes": notes}
+    if history:
+        hcov = history.get("coverage") or {}
+        floor = history_floor(history)
+        coverage["complete"] = bool(complete) and hcov.get("complete") is True
+        coverage["historyFrom"] = floor
+        coverage["history"] = {
+            "file": HISTORY_PATH,
+            "dataAsOf": history.get("dataAsOf"),
+            "complete": hcov.get("complete"),
+            "note": hcov.get("note"),
+        }
+        coverage["note"] = (
+            "Awards are indexed from (1) the award history in %s (data as of %s), "
+            "covering notices published from %s — %s — and (2) %s. Coverage is "
+            "INCOMPLETE before %s. %d supplier name(s) that the history export cut off "
+            "at %d characters are quarantined, never matched. An absence here is a "
+            "statement about this index, never about the company."
+            % (HISTORY_PATH, history.get("dataAsOf") or "not stated", floor or "not stated",
+               "earlier notices are not fetched on either feed",
+               feeds_note, floor or "the history's floor", h_stats["truncated"],
+               HISTORY_SUPPLIER_CAP))
+    else:
+        coverage["note"] = (
+            "Awards indexed from %s. An absence here is a statement about this index, "
+            "never about the company." % feeds_note if complete else
+            "⚠️ INCOMPLETE — at least one feed hit its page guard before the window was "
+            "exhausted, so awards from this window are missing. Re-run with a shorter "
+            "window.")
     doc = {
         "dataAsOf": today.strftime("%d/%m/%Y"),
         "generated": today.isoformat(),
         "source": ("Find a Tender and Contracts Finder award-stage OCDS notices, "
-                   "Open Government Licence v3"),
+                   "Open Government Licence v3" +
+                   (" — the weekly walk of both feeds, plus the award history of the "
+                    "same two feeds held in data/tender-history.json" if history else "")),
         "sourceUrls": {
             "Find a Tender": "https://www.find-tender.service.gov.uk/",
             "Contracts Finder": "https://www.contractsfinder.service.gov.uk/",
@@ -370,23 +585,18 @@ def assemble(rows, seed, existing, window, notes, complete):
             "consumer notices are excluded even under a medical buyer."
         ),
         "matchRule": company_match.RULE,
-        "coverage": {
-            "complete": bool(complete),
-            "window": window,
-            "note": ("Awards indexed from the two statutory feeds over the windows "
-                     "listed. An absence here is a statement about this index, never "
-                     "about the company." if complete else
-                     "⚠️ INCOMPLETE — at least one feed hit its page guard before the "
-                     "window was exhausted, so awards from this window are missing. "
-                     "Re-run with a shorter window."),
-            "notes": notes,
-        },
+        "coverage": coverage,
         "counts": {
             "companies": len(companies),
             "awardRows": matched_rows,
             "unmatched": len(unmatched),
             "ambiguous": len(ambiguous),
             "rowsHeld": len(kept),
+            "historyAwardsRead": h_stats["awards"],
+            "historyAlreadyHeldFromFeeds": h_dupes,
+            "historySupplierNotNamed": h_stats["noSupplier"],
+            "historyMultiSupplierSplit": h_stats["split"],
+            "historySupplierCutOff": h_stats["truncated"],
         },
         "companies": companies,
         # QUARANTINE. Not published to any company, kept so the gap is countable
@@ -434,14 +644,20 @@ def main(argv=None):
 
     seed = load(SEED_PATH, {"suppliers": []})
     existing = load(OUT_PATH)
+    history = load(HISTORY_PATH)
 
     if args.rematch:
         if not existing:
             sys.exit("%s does not exist yet — nothing to re-match. Run without "
                      "--rematch first." % OUT_PATH)
+        # The feed notes still describe the stored rows, so they are carried.
+        kept_notes = [n for n in ((existing.get("coverage") or {}).get("notes") or [])
+                      if not str(n).startswith("re-matched")]
         doc = assemble([], seed, existing, None,
-                       ["re-matched from stored rows, no fetch"],
-                       (existing.get("coverage") or {}).get("complete", True))
+                       kept_notes + ["re-matched from stored rows, no fetch"],
+                       (existing.get("coverage") or {}).get("feedsComplete",
+                           (existing.get("coverage") or {}).get("complete", True)),
+                       history)
         write(doc)
         print("re-matched %d stored row(s): %d company/ies, %d unmatched, %d ambiguous"
               % (doc["counts"]["rowsHeld"], doc["counts"]["companies"],
@@ -458,7 +674,7 @@ def main(argv=None):
     print(" ", cf_note, flush=True)
 
     doc = assemble(fts_rows + cf_rows, seed, existing, window,
-                   [fts_note, cf_note], fts_ok and cf_ok)
+                   [fts_note, cf_note], fts_ok and cf_ok, history)
 
     print("\n%d row(s) held: %d attached to %d Hub company/ies, %d unmatched, "
           "%d ambiguous."
