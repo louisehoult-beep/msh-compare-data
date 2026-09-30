@@ -1939,9 +1939,186 @@
     {
       "s": "dermatology",
       "n": "Topical emollients and barrier preparations",
-      "p": "skin barrier breakdown and eczema flare admissions",
+      "p": "atopic eczema flares, and the GP, practice nurse and dermatology appointments and topical corticosteroid use that follow them",
       "set": "sp",
-      "t": "rx"
+      "t": "rx",
+      "vc": {
+        "intro": "Cost per instance: a GP, practice nurse or dermatology outpatient appointment. Instances per year: the flare-driven appointments in the population you are modelling, taken from local data wherever possible. Efficacy and directness are your own judgement, set against the evidence below.",
+        "figures": [
+          {
+            "label": "GP surgery consultation lasting 10 minutes",
+            "value": "£48",
+            "unit": "per consultation",
+            "num": 48,
+            "use": "cost",
+            "includes": "Includes direct care staff and qualification costs. Without qualification costs: £40. Earlier editions costed a 9.22-minute consultation.",
+            "source": "Unit Costs of Health and Social Care 2025, Table 9.4.2",
+            "edition": "2025 edition (University of Kent, deposited 05/06/2026), 2024/25 prices",
+            "url": "https://kar.kent.ac.uk/115569/",
+            "read": "30/09/2026"
+          },
+          {
+            "label": "Practice nurse (Agenda for Change Band 5), per hour",
+            "value": "£50",
+            "unit": "per hour",
+            "use": "context",
+            "includes": "£57 per hour with qualification costs. The source gives no per-consultation figure, so for a cost per appointment, multiply by your appointment length and state the length you assumed (a 15-minute appointment at £50 an hour is £12.50).",
+            "source": "Unit Costs of Health and Social Care 2025, Table 9.3.1",
+            "edition": "2025 edition, 2024/25 prices",
+            "url": "https://kar.kent.ac.uk/115569/",
+            "read": "30/09/2026"
+          },
+          {
+            "label": "Dermatology consultant-led outpatient attendance, first (face to face)",
+            "value": "£184.41",
+            "unit": "per attendance",
+            "num": 184.41,
+            "use": "cost",
+            "includes": "National average unit cost, currency WF01B, treatment function 330. The follow-up attendance (WF01A) is £172.82. These are costs; the 2026/27 NHS Payment Scheme prices differ (£197 first, £108 follow-up).",
+            "source": "NHS England National Cost Collection 2024/25",
+            "edition": "National schedule of NHS costs 2024/25, Outpatient Care workbook",
+            "url": "https://www.england.nhs.uk/costing-in-the-nhs/national-cost-collection/",
+            "read": "30/09/2026"
+          },
+          {
+            "label": "How often flares happen",
+            "value": "2 to 3",
+            "unit": "flares a month, at most",
+            "use": "context",
+            "includes": "NICE Clinical Knowledge Summaries (CKS) describe atopic eczema as \"an episodic disease of flares (exacerbations, which may occur as frequently as two or three times each month)\". CKS gives no figure for how often people consult.",
+            "source": "NICE CKS, Eczema - atopic",
+            "edition": "Last revised August 2026",
+            "url": "https://cks.nice.org.uk/topics/eczema-atopic/",
+            "read": "30/09/2026"
+          },
+          {
+            "label": "GP practice contacts per patient in one year (2017)",
+            "value": "5.57 vs 3.59",
+            "unit": "mild-to-moderate atopic dermatitis vs matched controls",
+            "use": "context",
+            "includes": "All-cause GP practice contacts, including home, nurse and telephone consultations, not eczema-specific visits. The gap of about 2 contacts a year is the Hub's arithmetic, not the paper's. Matched case-control study on a UK primary care database, sponsored by Pfizer.",
+            "source": "Toron F et al, Dermatol Ther (Heidelb) 2021",
+            "edition": "Published 2021, data 2013 to 2017",
+            "url": "https://doi.org/10.1007/s13555-021-00519-7",
+            "read": "30/09/2026"
+          },
+          {
+            "label": "Flares and topical corticosteroid use, moisturiser vs no moisturiser",
+            "value": "RR 0.40",
+            "unit": "relative risk (RR) of a flare",
+            "use": "context",
+            "includes": "Fewer flares with moisturisers (2 studies, 87 participants, 95% confidence interval 0.23 to 0.70) and 9.30 g less topical corticosteroid needed (2 studies, 222 participants). The authors rate this evidence low quality, and found no reliable evidence that one moisturiser is better than another.",
+            "source": "Cochrane review CD012119, van Zuuren et al 2017",
+            "edition": "CD012119.pub2, searches to December 2015",
+            "url": "https://doi.org/10.1002/14651858.CD012119.pub2",
+            "read": "30/09/2026"
+          },
+          {
+            "label": "NHS spend on emollients in England, 2025/26",
+            "value": "£49.10m + £66.06m",
+            "unit": "net ingredient cost",
+            "use": "context",
+            "includes": "£49.10m (5.67 million items) under British National Formulary (BNF) paragraph 13.2.1 and £66.06m (10.87 million items) under BNF 21.22 emollient devices, community dispensing in England. The combined £115.16m is the Hub's addition of the two rows.",
+            "source": "NHSBSA Prescription Cost Analysis 2025/26, summary tables",
+            "edition": "Published 04/06/2026",
+            "url": "https://www.nhsbsa.nhs.uk/statistical-collections/prescription-cost-analysis-england/prescription-cost-analysis-england-202526",
+            "read": "30/09/2026"
+          }
+        ],
+        "efficacy": "Efficacy here is the share of flare-driven appointments your emollient removes compared with what the patient would otherwise use, not compared with no emollient. The Cochrane flare reduction compares moisturiser with none. Between emollient types, the BEE trial (550 children, 77 English practices) found no difference in eczema severity over 16 weeks. So published evidence gives almost no efficacy gap between two emollients. Any efficacy you enter needs its own evidence, such as adherence or satisfaction data from your own study, stated with its method. Go lower than you think.",
+        "directness": "Flares have many drivers: triggers, infection, topical corticosteroid use, how much emollient is actually applied. Unless you have a controlled comparison, the saving is behaviour-dependent, which puts it in the calculator's lowest band (10 to 25%). When unsure, go lower.",
+        "cautions": [
+          "BEE trial (Ridd et al, Lancet Child and Adolescent Health 2022): no difference in eczema severity between lotion, cream, gel and ointment over 16 weeks (global p=0.77). The trial's own conclusion is that users need a range to choose from. This is evidence for choice, not for one product over another. https://doi.org/10.1016/S2352-4642(22)00146-8",
+          "BATHE trial (Santer et al, BMJ 2018): no clinical benefit from emollient bath additives, and NICE CG57 recommendation 1.5.1.11 now says do not offer them to children. Leave-on emollient is the product this case is about. https://doi.org/10.1136/bmj.k1332",
+          "MHRA fire risk: the advice applies to all emollients, paraffin-free included, so it does not separate one product from another. https://www.gov.uk/drug-safety-update/emollients-and-risk-of-severe-and-fatal-burns-new-resources-available",
+          "The GP contact figure is all-cause and industry-sponsored. Do not present it as eczema consultations."
+        ],
+        "yourData": [
+          "The number of patients on emollient repeat prescriptions in the Integrated Care Board (ICB), and the flare-driven appointment rate locally.",
+          "Your own adherence, satisfaction or switch-back data, with the method, sample and funder stated.",
+          "Your product's and the comparator's price per pack from the current month's Drug Tariff Part IX. Prices change monthly, so read it on the day."
+        ]
+      }
+    },
+    {
+      "s": "dermatology",
+      "n": "Emollient formulary choice (patient preference versus lowest price)",
+      "p": "emollient that patients do not use after a switch they did not choose, and the flares, appointments and re-prescribing that can follow",
+      "set": "p",
+      "t": "rx",
+      "vc": {
+        "intro": "This problem line is a hypothesis to test, not an established cost. No peer-reviewed UK study was found (search 30/09/2026) that measures non-adherence or unused emollient after a cost-driven switch. The figures below are what NICE and the trials do say, plus the unit costs you would price any avoided appointment at.",
+        "figures": [
+          {
+            "label": "GP surgery consultation lasting 10 minutes",
+            "value": "£48",
+            "unit": "per consultation",
+            "num": 48,
+            "use": "cost",
+            "includes": "Includes direct care staff and qualification costs (£40 without qualification costs).",
+            "source": "Unit Costs of Health and Social Care 2025, Table 9.4.2",
+            "edition": "2025 edition, 2024/25 prices",
+            "url": "https://kar.kent.ac.uk/115569/",
+            "read": "30/09/2026"
+          },
+          {
+            "label": "NICE CG57 on choice and on switching",
+            "value": "1.5.1.4 and 1.5.1.7",
+            "unit": "recommendations",
+            "use": "context",
+            "includes": "1.5.1.4: \"Offer children with atopic eczema a choice of unperfumed emollients to use every day\", and prescribe 250 g to 500 g of leave-on emollient weekly. 1.5.1.7: \"If their current emollient causes irritation or is not acceptable, offer a different way to apply it or offer an alternative emollient.\" Children under 12 only; most recommendations were last evidence-reviewed in 2007.",
+            "source": "NICE CG57, Atopic eczema in under 12s",
+            "edition": "Last updated 22/09/2025",
+            "url": "https://www.nice.org.uk/guidance/cg57/chapter/Recommendations",
+            "read": "30/09/2026"
+          },
+          {
+            "label": "NICE CKS on price-led prescribing",
+            "value": "\"false economy\"",
+            "unit": "CKS wording",
+            "use": "context",
+            "includes": "CKS: \"Prescribe an emollient according to the dryness of the skin, and individual preference/tolerance\" and \"it may be a false economy to prescribe solely on the basis of price.\" This is expert guidance, not trial data.",
+            "source": "NICE CKS, Eczema - atopic: emollients",
+            "edition": "Last revised August 2026",
+            "url": "https://cks.nice.org.uk/topics/eczema-atopic/prescribing-information/emollients/",
+            "read": "30/09/2026"
+          },
+          {
+            "label": "Parent satisfaction by emollient type (BEE trial secondary analysis)",
+            "value": "20.9 / 20.4 / 18.8 / 15.2",
+            "unit": "gel / lotion / cream / ointment, mean parent satisfaction score",
+            "use": "context",
+            "includes": "378 of 550 children analysed (P<0.001). Lotions and gels were favoured over creams and ointments. Effectiveness did not differ by type; acceptability did.",
+            "source": "Clin Exp Dermatol 2024, BEE trial",
+            "edition": "Published 2024",
+            "url": "https://doi.org/10.1093/ced/llad452",
+            "read": "30/09/2026"
+          },
+          {
+            "label": "What local formularies weigh",
+            "value": "60% / 58%",
+            "unit": "patient preference / cost as stated reasons",
+            "use": "context",
+            "includes": "Cross-sectional study of emollient formularies in England and Wales: \"Patient preference (60%) and/or cost (58%) were the most common reasons given for the recommendations.\" A later review (Amakye, Chan and Ridd 2022) found cost was more likely than patient choice to be recommended as the selection criterion.",
+            "source": "Le Roux et al, BMJ Open 2018",
+            "edition": "Published 2018",
+            "url": "https://doi.org/10.1136/bmjopen-2018-022009",
+            "read": "30/09/2026"
+          }
+        ],
+        "efficacy": "Efficacy here is the share of switched patients who stop using the emollient properly and go on to flare or re-consult, and that your product would keep on treatment. There is no published UK figure for it. Enter only a number from your own data, with its method, and go lower than you think.",
+        "directness": "Even with good adherence data, a flare or an appointment has several causes. This is a behaviour-dependent saving, the calculator's lowest band (10 to 25%). When unsure, go lower.",
+        "cautions": [
+          "BEE trial: no difference in eczema severity between emollient types. The case for a higher-priced emollient rests on acceptability and use, not on greater effect. https://doi.org/10.1016/S2352-4642(22)00146-8",
+          "\"Complete emollient therapy\" is not wording found in NICE CG57 as read on 30/09/2026. Do not attribute it to NICE.",
+          "NHS England's over-the-counter policy (B0447, updated 07/05/2026) covers mild dry skin but excepts eczema in an active stage needing treatment. https://www.england.nhs.uk/long-read/policy-guidance-conditions-for-which-over-the-counter-items-should-not-be-routinely-prescribed-in-primary-care/"
+        ],
+        "yourData": [
+          "Switch-back or re-prescribing rates after a formulary switch, from practice or Integrated Care Board (ICB) prescribing data.",
+          "Returned or unused emollient, if the ICB or a pharmacy has audited it.",
+          "Current price per pack for both products from this month's Drug Tariff Part IX, and the weekly quantity prescribed (NICE CG57 gives 250 g to 500 g for children)."
+        ]
+      }
     },
     {
       "s": "orthotics",

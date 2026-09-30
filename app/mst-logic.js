@@ -141,7 +141,7 @@
   function fillSpec(){$('m-spec').innerHTML='<option value="">Select\u2026</option>'+SPECS.map(function(s){return '<option value="'+s.id+'">'+s.label+'</option>';}).join('');$('m-spec').value=state.spec;}
   function fillProd(){if(!state.spec){$('m-prod').innerHTML='<option value="">\u2014</option>';return;}var list=productsFor(state.spec);$('m-prod').innerHTML=list.map(function(p,i){return '<option value="'+i+'">'+p.n+'</option>';}).join('');if(state.prodIdx>=list.length)state.prodIdx=0;$('m-prod').value=state.prodIdx;}
   function ensureSetting(){var p=currentProduct();var ss=settingsOf(p);if(ss.indexOf(state.setting)<0)state.setting=ss[0];var only=ss.length===1;$('m-sec').style.display=ss.indexOf('secondary')>=0?'':'none';$('m-pri').style.display=ss.indexOf('primary')>=0?'':'none';$('m-sec').classList.toggle('mst__segbtn--on',state.setting==='secondary');$('m-pri').classList.toggle('mst__segbtn--on',state.setting==='primary');$('m-setwrap').style.opacity=only?'.7':'1';}
-  function render(){if(!state.spec){$('m-problem').innerHTML='<b>Select your speciality above</b> to build the stakeholder map.';$('m-geoline').innerHTML='';$('m-intel').innerHTML='';$('m-path').innerHTML='';$('m-cards').innerHTML='';['m-diagram','m-contacts','m-sheet','m-territory'].forEach(function(id){if($(id))$(id).innerHTML='';});return;}var p=currentProduct();p.area=(SPECS.filter(function(x){return x.id===state.spec;})[0]||{}).label||state.spec;ensureSetting();var s=state.setting;var settingLabel=s==='secondary'?'Acute trust / hospital':'Primary care, community and ICB';$('m-problem').innerHTML='<b>Problem to anchor on:</b> '+p.p+'  · <b>Setting:</b> '+settingLabel;$('m-geoline').innerHTML='<b style="color:var(--ink)">'+$('m-geo').value+'</b> — identify the named '+(s==='primary'?'ICB / community':'trust')+' Payer, Decision-maker and IPC leads locally; org structures are real, individuals confirmed per target.';renderIntel(p,s);renderPath(p,s);var keys=stakeKeys(p,s);var html='';keys.forEach(function(k){var lib=L[k];if(!lib)return;var who=s==='primary'?(lib.whoPri||lib.whoSec):lib.whoSec;var spin='';if(lib.spin){var lab=['Situation','Problem','Implication','Need-payoff'];var pa={problem:p.p,area:p.area};var qs=lib.spin(pa,s);spin='<div class="mst__spin"><div class="mst__spinh">SPIN questions</div>'+qs.map(function(q,i){return '<div><span>'+lab[i]+':</span> '+q+'</div>';}).join('')+'</div>';}html+='<div class="mst__c"><div class="mst__chead"><div class="mst__ico">'+(ICON[lib.icon]||'')+'</div><div><div class="mst__role">'+lib.role+'</div><div class="mst__who">'+who+'</div></div></div>'+(lib.cares?'<div class="mst__f"><b>Cares about:</b> '+lib.cares+'</div>':'')+(lib.evidence?'<div class="mst__f"><b>Evidence they demand:</b> '+lib.evidence+'</div>':'')+(lib.hook?'<div class="mst__f"><b>Your hook:</b> '+lib.hook+'</div>':'')+spin+(lib.risk?'<div class="mst__risk"><b style="color:var(--ink)">Risk / uncertainty:</b> '+lib.risk+'</div>':'')+nameBlock(k,lib)+nameCapture(k,lib)+'</div>';});html+='<div class="mst__c" style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px"><div class="mst__f" style="margin:0"><b style="color:var(--ink)">Build the financial case for this product</b><br>Sends the problem above into the Value Case Calculator.</div><button class="mst__btn mst__btn--primary" id="m-tocalc" type="button">Open value calculator</button></div>';$('m-cards').innerHTML=sourcingNotes()+html;$('m-tocalc').addEventListener('click',function(){$('c-prob').value=p.p.charAt(0).toUpperCase()+p.p.slice(1);showTab('calc');calc();$('c-cost').focus();});renderTrustLine(s);ensureMounts();renderDiagram(p,s);renderContacts();renderToolbar(p,s);renderTerritory(p,s);wireCapture();}
+  function render(){if(!state.spec){$('m-problem').innerHTML='<b>Select your speciality above</b> to build the stakeholder map.';$('m-geoline').innerHTML='';$('m-intel').innerHTML='';$('m-path').innerHTML='';$('m-cards').innerHTML='';['m-diagram','m-contacts','m-sheet','m-territory'].forEach(function(id){if($(id))$(id).innerHTML='';});return;}var p=currentProduct();p.area=(SPECS.filter(function(x){return x.id===state.spec;})[0]||{}).label||state.spec;ensureSetting();var s=state.setting;var settingLabel=s==='secondary'?'Acute trust / hospital':'Primary care, community and ICB';$('m-problem').innerHTML='<b>Problem to anchor on:</b> '+p.p+'  · <b>Setting:</b> '+settingLabel;$('m-geoline').innerHTML='<b style="color:var(--ink)">'+$('m-geo').value+'</b> — identify the named '+(s==='primary'?'ICB / community':'trust')+' Payer, Decision-maker and IPC leads locally; org structures are real, individuals confirmed per target.';renderIntel(p,s);renderPath(p,s);var keys=stakeKeys(p,s);var html='';keys.forEach(function(k){var lib=L[k];if(!lib)return;var who=s==='primary'?(lib.whoPri||lib.whoSec):lib.whoSec;var spin='';if(lib.spin){var lab=['Situation','Problem','Implication','Need-payoff'];var pa={problem:p.p,area:p.area};var qs=lib.spin(pa,s);spin='<div class="mst__spin"><div class="mst__spinh">SPIN questions</div>'+qs.map(function(q,i){return '<div><span>'+lab[i]+':</span> '+q+'</div>';}).join('')+'</div>';}html+='<div class="mst__c"><div class="mst__chead"><div class="mst__ico">'+(ICON[lib.icon]||'')+'</div><div><div class="mst__role">'+lib.role+'</div><div class="mst__who">'+who+'</div></div></div>'+(lib.cares?'<div class="mst__f"><b>Cares about:</b> '+lib.cares+'</div>':'')+(lib.evidence?'<div class="mst__f"><b>Evidence they demand:</b> '+lib.evidence+'</div>':'')+(lib.hook?'<div class="mst__f"><b>Your hook:</b> '+lib.hook+'</div>':'')+spin+(lib.risk?'<div class="mst__risk"><b style="color:var(--ink)">Risk / uncertainty:</b> '+lib.risk+'</div>':'')+nameBlock(k,lib)+nameCapture(k,lib)+'</div>';});html+='<div class="mst__c" style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px"><div class="mst__f" style="margin:0"><b style="color:var(--ink)">Build the financial case for this product</b><br>Sends the problem above into the Value Case Calculator.</div><button class="mst__btn mst__btn--primary" id="m-tocalc" type="button">Open value calculator</button></div>';$('m-cards').innerHTML=sourcingNotes()+html;$('m-tocalc').addEventListener('click',function(){$('c-prob').value=p.p.charAt(0).toUpperCase()+p.p.slice(1);VCREF_SEL=(p.vc?P.indexOf(p):-1);showTab('calc');renderValueRefs();calc();$('c-cost').focus();});renderTrustLine(s);ensureMounts();renderDiagram(p,s);renderContacts();renderToolbar(p,s);renderTerritory(p,s);wireCapture();}
   var gbp=function(n){if(!isFinite(n))return '£0';return new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP',maximumFractionDigits:(Math.abs(n)>=1000?0:2)}).format(n);};
   var num=function(id){var v=parseFloat($(id).value);return isNaN(v)?0:v;};
   function mrow(l,v,hero){return '<div class="mst__metric"><span class="mst__ml">'+l+'</span><span class="mst__mv'+(hero?' mst__mv--hero':'')+'">'+v+'</span></div>';}
@@ -1478,16 +1478,100 @@
     w.innerHTML=h+ref;
   }
 
+  /* ==========================================================================
+     Sourced reference figures for the Value Case Calculator (added 30/09/2026).
+     A product row in data/products.json may carry a `vc` block:
+       {intro, figures:[{label,value,unit,includes,use,source,edition,url,read}],
+        efficacy, directness, cautions:[...], yourData:[...]}
+     This panel lists every row that has one, shows the figures with their
+     source, edition and the date they were read, and lets the member drop a
+     cost figure or the problem line into the calculator. It never fills
+     efficacy or directness: those stay the member's own judgement.
+     A row without `vc` changes nothing, so the other 200+ rows are untouched.
+     ========================================================================== */
+  var VCREF_SEL=-1;
+  function vcRefRows(){var out=[];P.forEach(function(p,i){if(p.vc&&p.vc.figures&&p.vc.figures.length){out.push(i);}});return out;}
+  function vcRefMount(){
+    var m=$('c-refs');if(m)return m;
+    var sec=$('sec-calc');if(!sec)return null;
+    var grid=sec.querySelector('.mst__grid2');if(!grid)return null;
+    m=document.createElement('div');m.id='c-refs';m.className='mst__card mst__vc';
+    grid.parentNode.insertBefore(m,grid);return m;
+  }
+  function specLabel(id){return (SPECS.filter(function(x){return x.id===id;})[0]||{}).label||id;}
+  function renderValueRefs(){
+    var m=vcRefMount();if(!m)return;var rows=vcRefRows();
+    if(!rows.length){m.hidden=true;m.innerHTML='';return;}
+    m.hidden=false;
+    if(VCREF_SEL<0){var cp=currentProduct();var ci=P.indexOf(cp);if(ci>=0&&P[ci].vc)VCREF_SEL=ci;}
+    var h='<h3 class="mst__h">Sourced reference figures (optional)</h3>'
+      +'<p class="mst__disc" style="margin:0 0 8px">Some problem lines carry published figures you can start from. Each shows its source, edition and the date the Hub read it. They are national or published averages, not your customer&rsquo;s numbers: replace them with local data wherever you have it.</p>'
+      +'<label class="mst__l" for="c-vcsel">Problem line with sourced figures<select class="mst__in" id="c-vcsel"><option value="-1">Choose one&hellip;</option>';
+    rows.forEach(function(i){h+='<option value="'+i+'"'+(i===VCREF_SEL?' selected':'')+'>'+esc(specLabel(P[i].s))+' &middot; '+esc(P[i].n)+'</option>';});
+    h+='</select></label>';
+    var p=VCREF_SEL>=0?P[VCREF_SEL]:null;
+    if(p){
+      var v=p.vc;
+      h+='<div class="mst__vcprob"><b>Problem:</b> '+esc(p.p)+' <button class="mst__btn" type="button" id="c-vcprob">Use this problem line</button></div>';
+      if(v.intro)h+='<p class="mst__vcintro">'+esc(v.intro)+'</p>';
+      h+='<div class="mst__vctable">';
+      v.figures.forEach(function(f,k){
+        h+='<div class="mst__vcrow"><div class="mst__vcfig"><b>'+esc(f.value)+'</b>'+(f.unit?' <span>'+esc(f.unit)+'</span>':'')+'</div>'
+          +'<div class="mst__vcbody"><div class="mst__vclabel">'+esc(f.label)+'</div>'
+          +(f.includes?'<div class="mst__vcinc">'+esc(f.includes)+'</div>':'')
+          +'<div class="mst__vcsrc"><a href="'+esc(f.url)+'" target="_blank" rel="noopener">'+esc(f.source)+'</a>'+(f.edition?' &middot; '+esc(f.edition):'')+(f.read?' &middot; read '+esc(f.read):'')+'</div>'
+          +(f.use==='cost'&&isFinite(parseFloat(f.num))?'<button class="mst__btn" type="button" data-vccost="'+k+'">Use as cost per instance</button>':'')
+          +'</div></div>';
+      });
+      h+='</div>';
+      if(v.efficacy||v.directness){
+        h+='<div class="mst__grid2" style="margin-top:10px">';
+        if(v.efficacy)h+='<div><div class="mst__gh">Efficacy: your input</div><p class="mst__gp">'+esc(v.efficacy)+'</p></div>';
+        if(v.directness)h+='<div><div class="mst__gh">Directness: your input</div><p class="mst__gp">'+esc(v.directness)+'</p></div>';
+        h+='</div>';
+      }
+      if(v.cautions&&v.cautions.length){h+='<div class="mst__vccaut"><b>Read before you quote it</b><ul>'+v.cautions.map(function(c){return '<li>'+esc(c)+'</li>';}).join('')+'</ul></div>';}
+      if(v.yourData&&v.yourData.length){h+='<div class="mst__vcown"><b>What only you (or your customer) can supply</b><ul>'+v.yourData.map(function(c){return '<li>'+esc(c)+'</li>';}).join('')+'</ul></div>';}
+    }
+    m.innerHTML=h;
+    var sel=$('c-vcsel');if(sel)sel.addEventListener('change',function(){VCREF_SEL=parseInt(this.value,10);renderValueRefs();});
+    var pb=$('c-vcprob');if(pb)pb.addEventListener('click',function(){var cp=$('c-prob');cp.value=p.p.charAt(0).toUpperCase()+p.p.slice(1);cp.dispatchEvent(new Event('input',{bubbles:true}));});
+    var bs=m.querySelectorAll('[data-vccost]');
+    for(var b=0;b<bs.length;b++){bs[b].addEventListener('click',function(){var f=p.vc.figures[parseInt(this.getAttribute('data-vccost'),10)];var cc=$('c-cost');cc.value=parseFloat(f.num);cc.dispatchEvent(new Event('input',{bubbles:true}));$('c-vol').focus();});}
+  }
+  function injectVcCSS(){
+    if(document.getElementById('mst-vc-css'))return;
+    var st=document.createElement('style');st.id='mst-vc-css';
+    st.textContent='.mst__vc{margin:0 0 14px}'
+      +'.mst__vcprob{font-size:13.5px;line-height:1.55;margin:10px 0 6px;color:var(--ink)}'
+      +'.mst__vcprob .mst__btn{margin-left:8px;font-size:12px;padding:4px 10px}'
+      +'.mst__vcintro{font-size:13px;line-height:1.55;color:var(--ink);margin:4px 0 10px}'
+      +'.mst__vcrow{display:flex;gap:14px;align-items:flex-start;border-top:1px solid rgba(0,0,0,.08);padding:10px 0}'
+      +'.mst__vcfig{flex:0 0 160px;font-size:13px;color:var(--ink)}'
+      +'.mst__vcfig b{display:block;font-size:17px;color:#14304F}'
+      +'.mst__vcfig span{font-size:11.5px;color:var(--muted)}'
+      +'.mst__vcbody{flex:1;font-size:13px;line-height:1.5;color:var(--ink)}'
+      +'.mst__vclabel{font-weight:600}'
+      +'.mst__vcinc{color:var(--muted);margin:2px 0}'
+      +'.mst__vcsrc{font-size:12px;color:var(--muted)}'
+      +'.mst__vcsrc a{color:#14304F;font-weight:600}'
+      +'.mst__vcbody .mst__btn{margin-top:6px;font-size:12px;padding:4px 10px}'
+      +'.mst__vccaut,.mst__vcown{font-size:13px;line-height:1.55;color:var(--ink);background:#fbf8f2;border:1px solid #e6e0d4;border-radius:10px;padding:10px 14px;margin-top:10px}'
+      +'.mst__vccaut ul,.mst__vcown ul{margin:6px 0 0 18px;padding:0}'
+      +'@media(max-width:600px){.mst__vcrow{flex-direction:column;gap:4px}.mst__vcfig{flex:none}}';
+    document.head.appendChild(st);
+  }
+
   $('m-spec').addEventListener('change',function(){state.spec=this.value;state.prodIdx=0;fillProd();render();});
   $('m-prod').addEventListener('change',function(){state.prodIdx=parseInt(this.value,10);render();});
   $('m-geo').addEventListener('change',function(){fillTrust();render();});
   $('m-sec').addEventListener('click',function(){state.setting='secondary';render();});
   $('m-pri').addEventListener('click',function(){state.setting='primary';render();});
   $('tab-map').addEventListener('click',function(){showTab('map');});
-  $('tab-calc').addEventListener('click',function(){showTab('calc');calc();});
+  $('tab-calc').addEventListener('click',function(){showTab('calc');renderValueRefs();calc();});
   ['c-prob','c-cost','c-vol','c-eff','c-dir','c-price','c-units','c-cash'].forEach(function(id){$(id).addEventListener('input',calc);});
   $('c-copy').addEventListener('click',copy);
   ['c-prob','c-cost','c-vol','c-eff','c-dir','c-price','c-units','c-cash'].forEach(function(id){$(id).addEventListener('input',vcRender);});
   $('tab-calc').addEventListener('click',vcRender);
-  injectCSS();fillGeo();fillSpec();fillProd();ensureMounts();render();calc();vcMount();vcRender();loadTrustData();
+  injectCSS();injectVcCSS();fillGeo();fillSpec();fillProd();ensureMounts();render();renderValueRefs();calc();vcMount();vcRender();loadTrustData();
 })();
