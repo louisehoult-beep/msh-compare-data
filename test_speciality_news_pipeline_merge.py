@@ -299,6 +299,15 @@ class BuildMerge(unittest.TestCase):
         self.assertTrue(getattr(got, "ok", False))
         self.assertFalse(getattr(N.fetch_pipeline_intel(token=""), "ok", False))
 
+    def test_headline_tagged_row_is_labelled_live_desk_not_verified(self):
+        e = N.pipeline_entry({"title": "GBUK IV cannula framework", "url": "https://x.example",
+                              "date": "2026-09-22", "matched_on": "cannula"})
+        self.assertEqual(e["source"], "Hub Live Desk")
+        self.assertIs(e["verified"], False)
+        e2 = N.pipeline_entry({"title": "t", "url": "https://y.example", "date": "2026-09-22"})
+        self.assertEqual(e2["source"], "Hub intelligence")
+        self.assertIs(e2["verified"], True)
+
     # ---- rolling month (30/09/2026) ----
     def _seed_dated(self, slug, rows):
         with open(os.path.join(self._tmp, "%s.json" % slug), "w", encoding="utf-8") as fh:

@@ -115,6 +115,11 @@ PIPELINE_TOKEN_ENV = "PIPELINE_READ_TOKEN"
 # upstream RSS feed or the pipeline's internal source_id, because the point of
 # the label is the TIER of checking, not the plumbing.
 PIPELINE_LABEL = "Hub intelligence"
+# A Live Desk story the pipeline placed on a speciality by a term in its
+# headline (cloud-pipeline speciality_terms.py, 30/09/2026) rather than by a
+# checked classification. It says where the story came from, and it is not
+# marked verified: the placement is a word match, not a check.
+LIVE_DESK_LABEL = "Hub Live Desk"
 
 # Synced from cloud-pipeline/sources.py, feeds=["speciality_pages"] entries, 15/09/2026.
 # id/name/url/specialities only — everything else in that registry (cadence, category)
@@ -348,8 +353,8 @@ def pipeline_entry(row):
         "link": row.get("url", ""),
         "published": row.get("date") or None,
         "summary": clip_summary(row.get("summary") or ""),
-        "source": PIPELINE_LABEL,
-        "verified": True,
+        "source": LIVE_DESK_LABEL if row.get("matched_on") else PIPELINE_LABEL,
+        "verified": not row.get("matched_on"),
         "opportunity": bool(row.get("opportunity")),
     }
 
