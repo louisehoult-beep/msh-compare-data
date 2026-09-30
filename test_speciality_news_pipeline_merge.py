@@ -171,6 +171,8 @@ class BuildMerge(unittest.TestCase):
         self._real_sources = N.SOURCES
         self._real_fetch = N.fetch
         self._real_pipe = N.fetch_pipeline_intel
+        self._real_gone = N.link_gone
+        N.link_gone = lambda url: False
 
     def tearDown(self):
         import shutil
@@ -178,6 +180,7 @@ class BuildMerge(unittest.TestCase):
         N.SOURCES = self._real_sources
         N.fetch = self._real_fetch
         N.fetch_pipeline_intel = self._real_pipe
+        N.link_gone = self._real_gone
         shutil.rmtree(self._tmp, ignore_errors=True)
 
     def _read(self, slug):
@@ -203,13 +206,19 @@ class BuildMerge(unittest.TestCase):
     def test_opportunity_is_not_cut_by_newer_trade_press(self):
         # The whole point of the second sort. Six fresher headlines would
         # otherwise fill the cap and drop the one item a rep can act on.
+        # The cap is a 100-row ceiling since 30/09/2026; pin it at six here so
+        # the test still exercises a cap that actually bites.
         self._rss(8, slug="urology")
         opp = dict(N.pipeline_entry(HANDOFF["specialities"]["urology"][0]))
-        opp["published"] = "2026-01-01"          # deliberately the OLDEST item
+        opp["published"] = self._ago(20)          # deliberately the OLDEST item
         N.fetch_pipeline_intel = lambda token=None: {"urology": [opp]}
-        N.build(pause=0)
+        real_cap, N.ITEMS_PER_SPECIALITY = N.ITEMS_PER_SPECIALITY, 6
+        try:
+            N.build(pause=0)
+        finally:
+            N.ITEMS_PER_SPECIALITY = real_cap
         items = self._read("urology")["items"]
-        self.assertEqual(len(items), N.ITEMS_PER_SPECIALITY)
+        self.assertEqual(len(items), 6)
         self.assertEqual(items[0]["title"], "A urology opportunity")
         self.assertIs(items[0]["opportunity"], True)
 
@@ -289,6 +298,67 @@ class BuildMerge(unittest.TestCase):
         self.assertEqual(got, {})
         self.assertTrue(getattr(got, "ok", False))
         self.assertFalse(getattr(N.fetch_pipeline_intel(token=""), "ok", False))
+
+    # ---- rolling month (30/09/2026) ----
+    def _seed_dated(self, slug, rows):
+        with open(os.path.join(self._tmp, "%s.json" % slug), "w", encoding="utf-8") as fh:
+            json.dump({"speciality": slug, "items": rows}, fh)
+
+    def _ago(self, days):
+        import datetime
+        return (datetime.datetime.now(datetime.timezone.utc)
+                - datetime.timedelta(days=days)).isoformat()
+
+    def test_story_that_left_the_feed_is_kept_for_the_month(self):
+        # The BD case: a story on the page yesterday, gone from every feed today.
+        self._rss(2, slug="urology")
+        self._seed_dated("urology", [{"title": "Yesterday's key story", "link": "https://k.example",
+                                      "published": self._ago(1), "source": "Hub intelligence"}])
+        N.fetch_pipeline_intel = lambda token=None: {}
+        N.build(pause=0)
+        titles = [i["title"] for i in self._read("urology")["items"]]
+        self.assertIn("Yesterday's key story", titles)
+        self.assertEqual(len(titles), 3)
+
+    def test_carried_story_past_the_window_is_dropped(self):
+        self._rss(1, slug="urology")
+        self._seed_dated("urology", [{"title": "Stale", "link": "https://s.example",
+                                      "published": self._ago(N.MAX_AGE_DAYS + 2)}])
+        N.fetch_pipeline_intel = lambda token=None: {}
+        N.build(pause=0)
+        self.assertNotIn("Stale", [i["title"] for i in self._read("urology")["items"]])
+
+    def test_undated_previous_item_is_not_carried(self):
+        self._rss(1, slug="urology")
+        self._seed_dated("urology", [{"title": "No date", "link": "https://n.example"}])
+        N.fetch_pipeline_intel = lambda token=None: {}
+        N.build(pause=0)
+        self.assertNotIn("No date", [i["title"] for i in self._read("urology")["items"]])
+
+    def test_fresh_copy_replaces_carried_copy(self):
+        self._rss(1, slug="urology")      # writes "Trade item 0" at https://example.com/t0
+        self._seed_dated("urology", [{"title": "Old headline", "link": "https://example.com/t0",
+                                      "published": self._ago(1)}])
+        N.fetch_pipeline_intel = lambda token=None: {}
+        N.build(pause=0)
+        titles = [i["title"] for i in self._read("urology")["items"]]
+        self.assertEqual(titles, ["Trade item 0"])
+
+    def test_carried_story_with_a_dead_link_is_dropped(self):
+        self._rss(1, slug="urology")
+        self._seed_dated("urology", [{"title": "Dead", "link": "https://gone.example",
+                                      "published": self._ago(2)}])
+        N.fetch_pipeline_intel = lambda token=None: {}
+        N.link_gone = lambda url: url == "https://gone.example"
+        N.build(pause=0)
+        self.assertNotIn("Dead", [i["title"] for i in self._read("urology")["items"]])
+
+    def test_more_than_six_in_the_month_are_all_kept(self):
+        self._rss(12, slug="urology")
+        N.fetch_pipeline_intel = lambda token=None: {}
+        N.build(pause=0)
+        self.assertEqual(len(self._read("urology")["items"]), 12)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

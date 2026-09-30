@@ -33,6 +33,7 @@
    and 02-Elevate-and-Thrive/Hub/speciality-page-news-pipeline-gap-2026-09-15.md
    for why this exists as a repo separate from cloud-pipeline. */
 (function () {
+  var PAGE_ITEMS = 6;
   var BASE = 'https://raw.githubusercontent.com/louisehoult-beep/msh-compare-data/main/data/speciality-news/';
   var mounts = document.querySelectorAll('[data-speciality-news]');
   if (!mounts.length) { return; }
@@ -85,7 +86,9 @@
   }
 
   function render(mount, doc) {
-    var items = (doc && doc.items) || [];
+    // The file holds a rolling month for My Hub (30/09/2026); a speciality
+    // page's band stays at its six, opportunities first as the file orders them.
+    var items = ((doc && doc.items) || []).slice(0, PAGE_ITEMS);
     if (!items.length) { return; }   // additive only — nothing to add, so add nothing
     css();
     var body = '';

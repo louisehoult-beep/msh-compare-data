@@ -58,7 +58,19 @@ verified=True so the renderer can label and badge them differently.
 CADENCE AND FRESHNESS. Items older than MAX_AGE_DAYS are dropped before
 writing — a "what changed this month" band should not still be citing a
 six-month-old article. Each file keeps at most ITEMS_PER_SPECIALITY entries,
-newest first.
+opportunities first, then newest first.
+
+A ROLLING MONTH, NOT A SNAPSHOT (30/09/2026). Until today each run rebuilt
+every file from only what the feeds and the handoff held THAT morning, capped
+at six. A busy feed (Vascular News posts several a day) pushed a story off
+within days, and a handoff row vanished the moment the pipeline stopped
+ranking it. Lou, 30/09/2026: "I want to be able to see all recent news in the
+last month in my speciality". So a run now reads the file it is about to
+replace and carries forward every DATED item still inside MAX_AGE_DAYS that
+this run did not fetch again (a fresh copy of the same link wins). Undated
+items are never carried: nothing can prove they are still current. The
+speciality pages still show six (app/speciality-news.js caps the render);
+My Hub shows the whole month behind its "Show all".
 
 Usage
     python3 scripts/build_speciality_news.py                # every tagged speciality
@@ -82,8 +94,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT_DIR = os.path.join(ROOT, "data", "speciality-news")
 
-MAX_AGE_DAYS = 60
-ITEMS_PER_SPECIALITY = 6
+MAX_AGE_DAYS = 31
+# A safety ceiling, not a display count: the speciality pages render six
+# (app/speciality-news.js PAGE_ITEMS) and My Hub pages through the rest. At
+# 31 days even the busiest tagged feed stays well under this.
+ITEMS_PER_SPECIALITY = 100
 FETCH_TIMEOUT = 20
 
 UA = "Mozilla/5.0 (compatible; MedSalesHub/1.0; +https://medsalesintelligencehub.co.uk)"
@@ -233,6 +248,15 @@ def parse_pubdate(raw):
             dt = dt.replace(tzinfo=datetime.timezone.utc)
         return dt.astimezone(datetime.timezone.utc)
     except (TypeError, ValueError):
+        pass
+    try:
+        # Any ISO 8601 form, including the fractional seconds and "Z" that
+        # stored items and the handoff can carry.
+        dt = datetime.datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=datetime.timezone.utc)
+        return dt.astimezone(datetime.timezone.utc)
+    except ValueError:
         pass
     for fmt in ("%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%d"):
         try:
@@ -388,6 +412,74 @@ def fetch_pipeline_intel(token=None):
     return out
 
 
+def _story_key(it):
+    return re.sub(r"[^a-z0-9]+", " ", (it.get("title") or "").lower()).strip()
+
+
+def read_previous(slug):
+    """The items in the file this run is about to replace, or [] if none."""
+    path = os.path.join(OUT_DIR, "%s.json" % slug)
+    try:
+        with open(path, encoding="utf-8") as fh:
+            doc = json.load(fh)
+    except (OSError, ValueError):
+        return []
+    items = doc.get("items") if isinstance(doc, dict) else None
+    return [i for i in (items or []) if isinstance(i, dict)]
+
+
+def link_gone(url):
+    """True only when the page answers 404 or 410.
+
+    A carried story is no longer vouched for by any feed, so its link is
+    re-checked before it goes back on a page (radiology-and-imaging.json's
+    dead Yahoo link is exactly what carrying forward would otherwise keep
+    alive). Anything short of a definite "gone" keeps the row: a timeout, a
+    403 bot wall or a Wordfence 503 says nothing about the article.
+    One check per link per run: the same story can sit in several files."""
+    if url not in _GONE:
+        req = urllib.request.Request(url, headers={"User-Agent": UA})
+        try:
+            with urllib.request.urlopen(req, timeout=LINK_TIMEOUT):
+                _GONE[url] = False
+        except urllib.error.HTTPError as e:
+            _GONE[url] = e.code in (404, 410)
+        except Exception:
+            _GONE[url] = False
+    return _GONE[url]
+
+
+_GONE = {}
+LINK_TIMEOUT = 8
+
+
+def carry_forward(fresh, previous, cutoff, check=None):
+    """Fresh items plus every previous item still inside the window.
+
+    See "A ROLLING MONTH" in the docstring. A previous item is carried only if
+    it is dated, inside the window, and this run did not already bring the
+    same link or the same headline. Fresh copies win, so a corrected title or
+    summary replaces the old one."""
+    out = list(fresh)
+    seen_links = {i.get("link") for i in fresh if i.get("link")}
+    seen_titles = {_story_key(i) for i in fresh if _story_key(i)}
+    for it in previous:
+        if not it.get("title") or not it.get("link"):
+            continue
+        dt = parse_pubdate(it.get("published")) if it.get("published") else None
+        if dt is None or dt < cutoff:
+            continue
+        if it["link"] in seen_links or _story_key(it) in seen_titles:
+            continue
+        if check and check(it["link"]):
+            log("  dropped carried item, link gone: %s" % it["link"])
+            continue
+        seen_links.add(it["link"])
+        seen_titles.add(_story_key(it))
+        out.append(it)
+    return out
+
+
 def build(only_id=None, dry_run=False, pause=0.6):
     now = datetime.datetime.now(datetime.timezone.utc)
     cutoff = now - datetime.timedelta(days=MAX_AGE_DAYS)
@@ -476,7 +568,11 @@ def build(only_id=None, dry_run=False, pause=0.6):
 
     os.makedirs(OUT_DIR, exist_ok=True)
     for slug in sorted(slugs):
-        items = by_speciality.get(slug, [])
+        # The handoff keeps its own, longer window; hold every row to this one.
+        fresh = [i for i in by_speciality.get(slug, [])
+                 if not (i.get("published") and parse_pubdate(i["published"])
+                         and parse_pubdate(i["published"]) < cutoff)]
+        items = carry_forward(fresh, read_previous(slug), cutoff, check=link_gone)
 
         def sort_key(it):
             dt = parse_pubdate(it["published"]) if it["published"] else None
