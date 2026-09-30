@@ -131,8 +131,12 @@ class Sources(unittest.TestCase):
     doesn't exist — a typo here would silently publish to no page at all."""
 
     def test_every_source_has_at_least_one_speciality(self):
+        # A source with no whole-feed tag is allowed only if the keyword slice
+        # reads it (29/09/2026, bjon_toc); otherwise it would publish nowhere.
+        general = N.load_keyword_rules()["general"]
         for s in N.SOURCES:
-            self.assertTrue(s.get("specialities"), "%s carries no specialities" % s["id"])
+            self.assertTrue(s.get("specialities") or s["id"] in general,
+                            "%s carries no specialities and is not a general source" % s["id"])
 
     def test_every_source_has_id_name_url(self):
         for s in N.SOURCES:

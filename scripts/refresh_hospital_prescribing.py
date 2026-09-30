@@ -32,7 +32,18 @@ All four are published in index.json and rendered by app/hospital-prescribing.js
                    valproate/Epilim. 74.3% of substances have an AA product; the
                    remainder had no generic dispensed in the month and are flagged
                    `g: false` rather than silently labelled.
-  3. LABEL       = the product's most common BNF_NAME truncated at its first digit,
+  2b. SPLIT      = BNF's catch-all codes put unrelated brands under one 11-character
+                   code: 130201000BB ("Other emollient preparations") holds Dermol,
+                   Doublebase, Aveeno, E45 and more. Counting at 11 characters
+                   labelled every one of them "Dermol". So where the 13-character
+                   children of an 11-character code carry labels that do not share a
+                   first word, each child is its own product and its key is 4
+                   characters (e.g. 'BBIC'). Generic 'AA' codes are never split, and
+                   appliance codes (chapters 20-23) are 11 characters and cannot be.
+                   Split codes are listed in index.json `splitProducts`. The rule
+                   lives in scripts/bnf_products.py, shared with the GP builder.
+                   Fixed 29/09/2026.
+  3. LABEL       = the product's most common BNF_NAME truncated at its first word starting with a digit,
                    so "Zopiclone 3.75mg tablets" becomes "Zopiclone". Names with no
                    digit are kept whole.
   4. TREND       = a percentage change is published ONLY where the baseline month is
@@ -57,6 +68,9 @@ import re
 import sys
 import time
 import urllib.request
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from bnf_products import label_of, product_codes, split_codes  # noqa: E402
 
 PACKAGE = "hospital-prescribing-dispensed-in-the-community"
 CKAN = "https://opendata.nhsbsa.net/api/3/action"
@@ -117,12 +131,6 @@ def resources():
     return sorted((p, u) for p, (_rev, u) in best.items())
 
 
-def label_of(name):
-    """Rule 3: truncate at the first digit. 'Zopiclone 3.75mg tablets' -> 'Zopiclone'."""
-    m = re.search(r"\d", name or "")
-    return ((name[:m.start()] if m else name) or "").strip(" _-") or (name or "").strip()
-
-
 def calendar_back(latest, months):
     """N contiguous YYYYMM ending at `latest`, oldest first."""
     y, m = int(latest[:4]), int(latest[4:6])
@@ -135,7 +143,33 @@ def calendar_back(latest, months):
     return list(reversed(out))
 
 
-def build(months, outdir):
+def collapse(series13, names13, n):
+    """Rule 2 / 2b. Fold 13-character series into substance -> trust -> product key.
+
+    series13: {code13: {trust: [items per month]}}   (code13 is 11 chars for appliances)
+    names13:  {code13: Counter({BNF_NAME: items})}
+
+    Returns (series, names, split) where
+      series {sub: {trust: {key: [items]}}}  key is 2 chars, or 4 for a split catch-all
+      names  {(sub, key): Counter(BNF_NAME)}
+      split  sorted list of the 11-character codes that were split
+    """
+    pmap = product_codes(names13)
+    series = collections.defaultdict(
+        lambda: collections.defaultdict(lambda: collections.defaultdict(lambda: [0] * n)))
+    names = collections.defaultdict(collections.Counter)
+    for c13, by_trust in series13.items():
+        prod = pmap[c13]
+        sub, key = prod[:9], prod[9:]
+        for tcode, arr in by_trust.items():
+            dst = series[sub][tcode][key]
+            for i, v in enumerate(arr):
+                dst[i] += v
+        names[(sub, key)].update(names13[c13])
+    return series, names, split_codes(pmap)
+
+
+def build(months, outdir, fetch=fetch, resources=resources):
     res = resources()
     if not res:
         sys.exit("no CSV resources found in package %s" % PACKAGE)
@@ -159,12 +193,11 @@ def build(months, outdir):
         print("  NOT PUBLISHED BY NHSBSA, carried as null: %s" % ", ".join(missing))
 
     trusts = {}
-    # series[substance][trust][product_segment] = [items per month]
-    series = collections.defaultdict(
-        lambda: collections.defaultdict(lambda: collections.defaultdict(lambda: [0] * n)))
+    # series13[code13][trust] = [items per month]; folded into products by collapse()
+    series13 = collections.defaultdict(lambda: collections.defaultdict(lambda: [0] * n))
     # cost[substance][trust] = [actual cost per month]
     cost = collections.defaultdict(lambda: collections.defaultdict(lambda: [0.0] * n))
-    names = collections.defaultdict(collections.Counter)   # (sub, seg) -> name counter
+    names13 = collections.defaultdict(collections.Counter)   # code13 -> name counter
 
     for period, url in window:
         raw = fetch(url)
@@ -175,20 +208,23 @@ def build(months, outdir):
             tcode = (row.get("HOSPITAL_TRUST_CODE") or "").strip()
             if len(code) < 11 or not tcode:
                 continue
-            sub, seg = code[:9], code[9:11]
+            sub, c13 = code[:9], code[:13]
             trusts.setdefault(tcode, (row.get("HOSPITAL_TRUST") or "").strip())
             try:
                 items = int(row.get("TOTAL_ITEMS") or 0)
             except ValueError:
                 items = 0
-            series[sub][tcode][seg][i] += items
+            series13[c13][tcode][i] += items
             try:
                 cost[sub][tcode][i] += float(row.get("TOTAL_ACTUAL_COST") or 0)
             except ValueError:
                 pass
-            names[(sub, seg)][(row.get("BNF_NAME") or "").strip()] += items
+            names13[c13][(row.get("BNF_NAME") or "").strip()] += items
             rows += 1
         print("  %s  %7d rows  (%.1f MB)" % (period, rows, len(raw) / 1e6))
+
+    series, names, split = collapse(series13, names13, n)
+    print("  %d catch-all 11-character codes counted per 13-character product" % len(split))
 
     # ---- labels -----------------------------------------------------------
     # Segments are taken from what actually SHIPS — a segment whose every month is
@@ -290,8 +326,11 @@ def build(months, outdir):
         "rules": {
             "substance": "BNF code characters 1-9.",
             "product": "BNF code characters 1-11; segment 10-11 'AA' is the generic, "
-                       "any other pair is a brand.",
-            "label": "The product's most common BNF_NAME truncated at its first digit.",
+                       "any other pair is a brand. Where one 11-character code holds "
+                       "presentations whose names do not share a first word (a BNF "
+                       "catch-all such as 'Other emollient preparations'), each "
+                       "13-character code is its own product. Generics are never split.",
+            "label": "The product's most common BNF_NAME truncated at its first word that starts with a digit (a digit inside a brand word, as in E45, is kept).",
             "trend": "A percentage change is published only where the baseline month is "
                      "at or above %d items. Below that the tool prints 'too few to "
                      "trend' and no number." % MIN_BASELINE_ITEMS,
@@ -299,6 +338,7 @@ def build(months, outdir):
         "minBaselineItems": MIN_BASELINE_ITEMS,
         "periods": periods,
         "missingPeriods": missing,
+        "splitProducts": split,
         "trusts": trusts,
         "substances": catalogue,
     }

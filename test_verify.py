@@ -2423,6 +2423,39 @@ def _(tmp):
     return "Refusing a shrunken"
 
 
+# --- GP prescribing by ICB (NHSBSA EPD with SNOMED, added 29/09/2026).
+
+def _gp_present():
+    return os.path.exists("data/gp-prescribing/index.json")
+
+
+@case("a GP prescribing shard that no longer adds up to the NHSBSA section total")
+def _(tmp):
+    if not _gp_present():
+        return None
+    p = "data/gp-prescribing/s-1302.json"
+    if not os.path.exists(p):
+        return None
+    d = json.load(open(p))
+    sub = next(iter(d["s"].values()))
+    icb = next(iter(sub["t"].values()))
+    arr = next(iter(icb.values()))
+    arr[-1] = (arr[-1] or 0) + 1000
+    json.dump(d, open(p, "w"), separators=(",", ":"))
+    return "does not add up"
+
+
+@case("GP prescribing published under a dissolved pre-April-2026 ICB code")
+def _(tmp):
+    if not _gp_present():
+        return None
+    p = "data/gp-prescribing/index.json"
+    d = json.load(open(p))
+    d["icbs"]["QNQ"] = "NHS FRIMLEY INTEGRATED CARE BOARD"
+    json.dump(d, open(p, "w"), separators=(",", ":"))
+    return "outside the 36"
+
+
 
 
 # --------------------------------------------------------------------------

@@ -3014,7 +3014,9 @@ for good in [
         # The maternity pathway.
         "Lease_PROJ004570_Antenatal Ultrasound Scanner",
         "Supply of Surgical Positioning Table and Leg Positioning Accessories for Maternity and Gynaecology Procedures",
-        "NGH - Maternity Bereavement Suite",
+        # "NGH - Maternity Bereavement Suite" was here until 29/09/2026. It is building
+        # work (J.E.T. Construction, CPV 45453100), and building and estates works no
+        # longer count as a speciality award (is_works_award); test_speciality_panels_phase2.py.
         "Button Hole CTG Belts [4806692]",
         "Fetal Cushions [3299279]",
         "Obstetrics and Vinyl Pessaries",

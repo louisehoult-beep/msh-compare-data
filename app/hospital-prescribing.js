@@ -17,6 +17,15 @@
    brand, so one molecule at one trust splits into "how much went to my brand"
    and "how much went to generics". Most CRMs do not surface that.
 
+   A PRODUCT KEY IS 2 CHARACTERS, OR 4 FOR A SPLIT CATCH-ALL
+   ---------------------------------------------------------
+   Some BNF codes are catch-alls: 130201000BB ("Other emollient preparations")
+   holds Dermol, Doublebase, Aveeno, E45 and more, and until 29/09/2026 this
+   panel listed all of them as "Dermol". The builder now splits such a code by
+   characters 12-13, so its keys read 'BBIC', 'BBJD' and so on (index.json
+   splitProducts lists them). The generic is never split and is always 'AA'.
+   Keys are otherwise opaque here: never assume a key is 2 characters long.
+
    THE RULES THIS PANEL PUBLISHES
    ------------------------------
    All four are read from index.json rather than restated here, so the panel and
@@ -232,7 +241,7 @@
       for (seg in by) {
         if (!Object.prototype.hasOwnProperty.call(by, seg)) { continue; }
         for (k = 0; k < n; k++) { if (!MISS[k]) { tot[k] += by[seg][k] || 0; } }
-        if (seg === 'AA') { genLatest += by[seg][last] || 0; }
+        if (seg.slice(0, 2) === 'AA') { genLatest += by[seg][last] || 0; }
         else { brandLatest += by[seg][last] || 0; }
       }
       rows.push({
@@ -247,8 +256,13 @@
     var shown = rows.slice(0, SHOW);
     var grand = rows.reduce(function (t, r) { return t + r.latest; }, 0);
 
-    var brandNames = Object.keys(segs).filter(function (s) { return s !== 'AA'; })
-      .map(function (s) { return segs[s]; });
+    /* Deduplicated: several presentations of one brand can carry the same label
+       (two strengths of a split catch-all, or appliance variants), and the list
+       names brands, not presentations. */
+    var seen = {};
+    var brandNames = Object.keys(segs).filter(function (s) { return s.slice(0, 2) !== 'AA'; })
+      .map(function (s) { return segs[s]; })
+      .filter(function (nm) { if (seen[nm]) { return false; } seen[nm] = true; return true; });
 
     var h = '<h3 style="font:600 20px/1.3 Georgia,serif;color:' + INK + ';margin:4px 0 2px">' +
       esc(meta.n) + '</h3>' +

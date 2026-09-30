@@ -117,6 +117,10 @@ REFS = {
     # Added 30/09/2026: each product's Differentiator category, for Product
     # Comparison's suggested rival. Minted with `stamp_notice.py --mint`.
     "product-categories.json":         "ETH-D933F4DFD",
+    # Added 29/09/2026 with the MHRA Drug Safety Update feed and Drug Tariff
+    # Part VIIIA. Minted with `stamp_notice.py --mint`.
+    "mhra-dsu.json":                   "ETH-D761DEE34",
+    "drug-tariff-part-viiia.json":     "ETH-D8AEA63D7",
 }
 
 

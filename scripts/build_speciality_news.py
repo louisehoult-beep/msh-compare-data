@@ -55,6 +55,31 @@ verified=True so the renderer can label and badge them differently.
     working with no credentials at all, and keeps one repo's outage from
     failing the other repo's daily build.
 
+THE KEYWORD SLICE (added 29/09/2026, Lou's decision the same day). The
+evidence floor above left 20 of the 43 speciality pages with no source at all,
+because the only feeds that would cover them are general titles (Pulse, Nursing
+in Practice, the British Journal of Nursing) that must never be tagged whole to
+one page. The slice is the "tested per-item tagger" cloud-pipeline/sources.py
+says those titles were waiting for:
+
+  * Only sources named in generalSources of scripts/speciality-news-rules.json are
+    sliced. Specialist feeds keep their whole-feed tagging, unchanged.
+  * An item reaches a page only when its HEADLINE matches that page's rule
+    (whole words; the summary can exclude but never include), after a deny list
+    of routine publications. Each routed item carries match = {slice, rule,
+    terms} saying exactly why it is there.
+  * It is ADDITIVE and lower tier. On a page that already has tagged or merged
+    items it takes at most KEYWORD_SLOTS of the ITEMS_PER_SPECIALITY places
+    (more only if the tagged side cannot fill them), and a sales opportunity is
+    never cut for it. Duplicates of an item already on the page are dropped.
+  * Pulse and Nursing in Practice show only ten items per feed page, about
+    two to three days of news, so sources marked "paged" are read page by page
+    (WordPress ?paged=N) back to MAX_AGE_DAYS or MAX_PAGES, whichever is first.
+  * Precision over recall. An empty list is the honest outcome; loosening a
+    rule to fill a page is the mistake the Sales Triggers Desk made first.
+  * A --only run skips the slice (it would rewrite every page a general item
+    touched); the next full run restores it.
+
 CADENCE AND FRESHNESS. Items older than MAX_AGE_DAYS are dropped before
 writing — a "what changed this month" band should not still be citing a
 six-month-old article. Each file keeps at most ITEMS_PER_SPECIALITY entries,
@@ -100,6 +125,11 @@ MAX_AGE_DAYS = 31
 # 31 days even the busiest tagged feed stays well under this.
 ITEMS_PER_SPECIALITY = 100
 FETCH_TIMEOUT = 20
+
+# Keyword slice (see "THE KEYWORD SLICE" in the docstring).
+RULES_PATH = os.path.join(HERE, "speciality-news-rules.json")
+KEYWORD_SLOTS = 2
+MAX_PAGES = 25
 
 UA = "Mozilla/5.0 (compatible; MedSalesHub/1.0; +https://medsalesintelligencehub.co.uk)"
 
@@ -191,11 +221,19 @@ SOURCES = [
     {"id": "htn_health_tech", "name": "HTN", "url": "https://htn.co.uk/feed/",
      "specialities": ["digital-and-medical-it"]},
     {"id": "pulse_today", "name": "Pulse Today", "url": "https://www.pulsetoday.co.uk/feed/",
-     "specialities": ["primary-care-and-general-practice"]},
+     "specialities": ["primary-care-and-general-practice"], "paged": True},
     {"id": "nursing_in_practice", "name": "Nursing in Practice", "url": "https://www.nursinginpractice.com/feed/",
-     "specialities": ["primary-care-and-general-practice"]},
+     "specialities": ["primary-care-and-general-practice"], "paged": True},
     {"id": "bgs_news", "name": "British Geriatrics Society", "url": "https://www.bgs.org.uk/rss.xml",
      "specialities": ["frailty-and-older-people"]},
+    # Added 29/09/2026 for the keyword slice ONLY: no whole-feed speciality tag,
+    # because BJN is multi-speciality (cloud-pipeline/sources.py files it under
+    # "real and current but deliberately not tagged" for that reason). Its items
+    # reach a page only through scripts/speciality-news-rules.json. Lou named it
+    # when approving the slice, 29/09/2026.
+    {"id": "bjon_toc", "name": "British Journal of Nursing (contents)",
+     "url": "https://www.magonlinelibrary.com/action/showFeed?jc=bjon&type=etoc&feed=rss",
+     "specialities": []},
 ]
 
 
@@ -485,27 +523,174 @@ def carry_forward(fresh, previous, cutoff, check=None):
     return out
 
 
+
+# --- keyword slice ------------------------------------------------------------
+
+def _wrap(pattern):
+    # Whole words only: a hyphen counts as part of a word, so "burns" never
+    # matches inside "Burnham" and "falls" never matches "pitfalls".
+    return re.compile(r"(?<![\w-])(?:%s)(?![\w-])" % pattern, re.I)
+
+
+def load_keyword_rules(path=None):
+    """Read and compile scripts/speciality-news-rules.json.
+
+    Returns {"general": set(source ids), "deny": [re], "denyWhole": [re],
+    "rules": {slug: {"include": [(pattern, re)], "exclude": [re]}}}. A missing
+    or unreadable file returns None and the slice is skipped with a loud log
+    line: the tagged feeds must still publish."""
+    path = path or RULES_PATH
+    try:
+        with open(path, encoding="utf-8") as fh:
+            doc = json.load(fh)
+    except (OSError, ValueError) as e:
+        log("keyword rules: UNREADABLE (%s) — keyword slice skipped this run" % e)
+        return None
+    rules = {}
+    for slug, r in (doc.get("rules") or {}).items():
+        rules[slug] = {
+            "include": [(p, _wrap(p)) for p in r.get("include", [])],
+            "exclude": [_wrap(p) for p in r.get("exclude", [])],
+        }
+    return {
+        "general": set(doc.get("generalSources") or []),
+        "deny": [_wrap(p) for p in doc.get("denyTitle", [])],
+        "denyWhole": [re.compile(p, re.I) for p in doc.get("denyTitleWhole", [])],
+        "rules": rules,
+    }
+
+
+def denied(title, compiled):
+    """True when a headline is a routine publication, whatever its topic."""
+    t = (title or "").strip()
+    if any(rx.search(t) for rx in compiled["denyWhole"]):
+        return True
+    return any(rx.search(t) for rx in compiled["deny"])
+
+
+def keyword_matches(item, compiled):
+    """[(slug, [matched text, ...]), ...] for every rule the HEADLINE matches.
+
+    Include patterns are tested on the title only. Exclude patterns are tested
+    on title and summary together, so the summary can only ever remove."""
+    title = item.get("title") or ""
+    if not title or denied(title, compiled) or is_job(title):
+        return []
+    both = title + " " + (item.get("summary") or "")
+    out = []
+    for slug, rule in compiled["rules"].items():
+        hits = []
+        for _pat, rx in rule["include"]:
+            m = rx.search(title)
+            if m and m.group(0) not in hits:
+                hits.append(m.group(0))
+        if not hits:
+            continue
+        if any(rx.search(both) for rx in rule["exclude"]):
+            continue
+        out.append((slug, hits))
+    return out
+
+
+def _dedupe_key(it):
+    link = (it.get("link") or "").split("#", 1)[0].split("?", 1)[0].rstrip("/").lower()
+    return link, re.sub(r"\W+", " ", (it.get("title") or "").lower()).strip()
+
+
+def _sort_key(it):
+    dt = parse_pubdate(it["published"]) if it.get("published") else None
+    return dt or datetime.datetime.min.replace(tzinfo=datetime.timezone.utc)
+
+
+def combine(primary, keyword, cap=None, slots=None):
+    """Final list for one page: tagged + merged items (primary) with the
+    keyword slice added on top, deduplicated, capped.
+
+    primary keeps the long-standing order (newest first, opportunities first)
+    and never loses an opportunity. keyword items take at most `slots` places
+    unless primary cannot fill the page, in which case they take the rest."""
+    cap = ITEMS_PER_SPECIALITY if cap is None else cap
+    slots = KEYWORD_SLOTS if slots is None else slots
+    primary = sorted(primary, key=_sort_key, reverse=True)
+    primary.sort(key=lambda it: 0 if it.get("opportunity") else 1)
+
+    seen = set()
+    for it in primary:
+        seen.update(k for k in _dedupe_key(it) if k)
+    kw = []
+    for it in sorted(keyword, key=_sort_key, reverse=True):
+        keys = [k for k in _dedupe_key(it) if k]
+        if any(k in seen for k in keys):
+            continue
+        seen.update(keys)
+        kw.append(it)
+
+    opps = sum(1 for it in primary if it.get("opportunity"))
+    kw_take = min(len(kw), max(slots, cap - len(primary)))
+    primary_take = max(cap - kw_take, min(opps, cap))
+    kw_take = max(0, min(kw_take, cap - primary_take))
+    out = primary[:primary_take] + kw[:kw_take]
+    out.sort(key=_sort_key, reverse=True)
+    out.sort(key=lambda it: 0 if it.get("opportunity") else 1)
+    return out[:cap]
+
+
+def fetch_source_items(src, cutoff, pause=0.6):
+    """All parsed items for one source. A source marked "paged" is read page
+    by page (WordPress ?paged=N) until a page's oldest dated item predates the
+    cutoff, a page is empty or fails, or MAX_PAGES is reached. Page 1 failing
+    raises, exactly as a single fetch always has; a later page failing just
+    stops paging."""
+    items = parse_feed(fetch(src["url"]), src["name"])
+    if not src.get("paged"):
+        return items
+    sep = "&" if "?" in src["url"] else "?"
+    page = 1
+    while page < MAX_PAGES:
+        dated = [parse_pubdate(i["published"]) for i in items if i.get("published")]
+        dated = [d for d in dated if d]
+        if not dated or min(dated) < cutoff:
+            break
+        page += 1
+        time.sleep(pause)
+        try:
+            more = parse_feed(fetch("%s%spaged=%d" % (src["url"], sep, page)), src["name"])
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError) as e:
+            log("  page %d failed (%s) — stopping paging" % (page, e))
+            break
+        known = {i["link"] for i in items}
+        new = [i for i in more if i["link"] not in known]
+        if not new:
+            break
+        items.extend(new)
+    log("  %d page(s) read" % page)
+    return items
+
+
 def build(only_id=None, dry_run=False, pause=0.6):
     now = datetime.datetime.now(datetime.timezone.utc)
     cutoff = now - datetime.timedelta(days=MAX_AGE_DAYS)
 
     by_speciality = {}   # slug -> list of {title, link, published, summary, source}
+    by_keyword = {}      # slug -> keyword-slice items (see "THE KEYWORD SLICE")
     fetch_errors = []
+    compiled = None if only_id else load_keyword_rules()
+    general = compiled["general"] if compiled else set()
 
     for src in SOURCES:
         if only_id and src["id"] != only_id:
             continue
         log("fetching %s (%s)" % (src["id"], src["url"]))
         try:
-            raw = fetch(src["url"])
+            items = fetch_source_items(src, cutoff, pause=pause)
         except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError) as e:
             log("  FETCH ERROR: %s" % e)
             fetch_errors.append({"id": src["id"], "error": str(e)})
             time.sleep(pause)
             continue
 
-        items = parse_feed(raw, src["name"])
         kept = 0
+        sliced = 0
         for it in items:
             dt = parse_pubdate(it["published"]) if it["published"] else None
             # An item with no parseable date is kept (some journal TOC feeds
@@ -519,8 +704,17 @@ def build(only_id=None, dry_run=False, pause=0.6):
                 entry["kind"] = "job"
             for slug in src["specialities"]:
                 by_speciality.setdefault(slug, []).append(entry)
+            if src["id"] in general:
+                for slug, terms in keyword_matches(entry, compiled):
+                    if slug in src["specialities"]:
+                        continue      # already on that page by whole-feed tag
+                    kw = dict(entry)
+                    kw["match"] = {"slice": "keyword", "rule": slug, "terms": terms}
+                    by_keyword.setdefault(slug, []).append(kw)
+                    sliced += 1
             kept += 1
-        log("  %d item(s) within %dd" % (kept, MAX_AGE_DAYS))
+        log("  %d item(s) within %dd%s" % (kept, MAX_AGE_DAYS,
+            ", %d keyword routing(s)" % sliced if src["id"] in general else ""))
         time.sleep(pause)
 
     # Merge the cloud-pipeline handoff on top of the trade press. Done for an
@@ -553,8 +747,29 @@ def build(only_id=None, dry_run=False, pause=0.6):
         # Never on a failed read (that would wipe verified rows over an outage)
         # and never widened to RSS-tagged slugs: a failed RSS fetch must keep
         # that slug's file, which is the fetch_errors path below.
+        rss_slugs = {s for src in SOURCES for s in src["specialities"]}
+        if compiled:
+            # Every speciality with a rule gets a file, empty if nothing
+            # matched: an honest empty state rather than no file at all.
+            slugs |= set(compiled["rules"])
+            if not getattr(pipeline, "ok", False):
+                # The slice now rewrites files for slugs no RSS source covers.
+                # On a FAILED pipeline read those files hold verified rows this
+                # run could not refresh; carry them forward rather than wipe
+                # them over an outage (the rule the 25/09 block below keeps).
+                for slug in set(compiled["rules"]) - rss_slugs:
+                    if slug in by_speciality:
+                        continue
+                    path = os.path.join(OUT_DIR, "%s.json" % slug)
+                    try:
+                        with open(path, encoding="utf-8") as fh:
+                            prev = json.load(fh).get("items") or []
+                    except (OSError, ValueError, AttributeError):
+                        continue
+                    keep = [i for i in prev if isinstance(i, dict) and not i.get("match")]
+                    if keep:
+                        by_speciality[slug] = keep
         if getattr(pipeline, "ok", False):
-            rss_slugs = {s for src in SOURCES for s in src["specialities"]}
             if os.path.isdir(OUT_DIR):
                 for name in os.listdir(OUT_DIR):
                     if name.endswith(".json"):
@@ -564,11 +779,16 @@ def build(only_id=None, dry_run=False, pause=0.6):
 
     if dry_run:
         for slug in sorted(slugs):
-            got = by_speciality.get(slug, [])
-            log("--- %s: %d item(s) (%d merged, %d opportunity)"
+            got = combine(by_speciality.get(slug, []), by_keyword.get(slug, []))
+            log("--- %s: %d item(s) (%d merged, %d opportunity, %d keyword of %d matched)"
                 % (slug, len(got),
                    sum(1 for i in got if i.get("verified")),
-                   sum(1 for i in got if i.get("opportunity"))))
+                   sum(1 for i in got if i.get("opportunity")),
+                   sum(1 for i in got if i.get("match")),
+                   len(by_keyword.get(slug, []))))
+            for i in got:
+                if i.get("match"):
+                    log("      [kw %s] %s (%s)" % (",".join(i["match"]["terms"]), i["title"], i["source"]))
         return 0
 
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -577,20 +797,13 @@ def build(only_id=None, dry_run=False, pause=0.6):
         fresh = [i for i in by_speciality.get(slug, [])
                  if not (i.get("published") and parse_pubdate(i["published"])
                          and parse_pubdate(i["published"]) < cutoff)]
-        items = carry_forward(fresh, read_previous(slug), cutoff, check=link_gone)
-
-        def sort_key(it):
-            dt = parse_pubdate(it["published"]) if it["published"] else None
-            return dt or datetime.datetime.min.replace(tzinfo=datetime.timezone.utc)
-
-        items.sort(key=sort_key, reverse=True)
-        # Second, STABLE sort: anything flagged as a sales opportunity goes to
-        # the top, newest-first order preserved inside each group. A rep opening
-        # a speciality page wants the thing to act on first; Lou, 16/09/2026.
-        # This runs after the cap-free date sort and before the cap, so an
-        # opportunity can never be cut by six older trade-press headlines.
-        items.sort(key=lambda it: 0 if it.get("opportunity") else 1)
-        items = items[:ITEMS_PER_SPECIALITY]
+        # Rolling month (30/09/2026) first: fresh tagged/merged rows plus every
+        # carried row still inside the window. Then combine() adds the keyword
+        # slice and keeps the long-standing ordering: newest first, then a
+        # STABLE sort putting anything flagged as a sales opportunity on top
+        # (Lou, 16/09/2026) before the cap, so an opportunity can never be cut.
+        primary = carry_forward(fresh, read_previous(slug), cutoff, check=link_gone)
+        items = combine(primary, by_keyword.get(slug, []))
         doc = {
             "speciality": slug,
             "generatedAt": now.strftime("%Y-%m-%dT%H:%M:%SZ"),

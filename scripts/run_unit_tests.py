@@ -102,6 +102,7 @@ RUN = [
     "test_icb_watch.py",
     "test_ask_passages.py",
     "test_hub_tools_demo_fixes.py",
+    "test_bnf_products.py",
     "test_breadcrumb_division.py",
     "test_careers_jobpages.py",
     "test_careers_rotation.py",
@@ -119,9 +120,13 @@ RUN = [
     "test_eclass_itemclass_scope.py",
     "test_fetch_issues_icn_depth.py",
     "test_framework_lots.py",
+    "test_gp_prescribing.py",            # 29/09/2026, offline, no workflow of its own
     "test_hospital_prescribing_resources.py",
     "test_identity_policy.py",
     "test_merge_seed_on_retry.py",
+    # 29/09/2026: MHRA Drug Safety Update feed + Drug Tariff Part VIIIA, and
+    # their verify.py checks. Offline, stdlib only, ~0.1s, writes nothing.
+    "test_mhra_dsu_and_tariff_viiia.py",
     "test_my_hub_catalogue.py",
     "test_nhssc_card.py",
     "test_numeric_id_division.py",
@@ -140,7 +145,9 @@ RUN = [
     "test_slug_name_divergence_detail.py",
     "test_speciality_news.py",
     "test_speciality_news_pipeline_merge.py",
+    "test_speciality_news_keywords.py",
     "test_speciality_panels.py",
+    "test_speciality_panels_phase2.py",  # 29/09/2026, in-memory build, writes nothing
     "test_stale_brief_rows.py",
     "test_awards_history.py",
     "test_supplier_index_awards.py",

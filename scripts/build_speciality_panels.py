@@ -653,7 +653,7 @@ SPECIALITY_RULES = {
         "coverageNote": (
             "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This patch has no single "
             "framework and no single market-share figure: spend sits across at least "
-            "thirteen separate NHS Supply Chain frameworks, each a different product "
+            "[[frameworks|word]] separate NHS Supply Chain frameworks, each a different product "
             "category with its own buying cycle, and none publishes a unit share "
             "breakdown. Being named on a framework is not evidence of volume, and "
             "being absent from one is not evidence of absence from the market. NHS "
@@ -787,7 +787,7 @@ SPECIALITY_RULES = {
         # consumable on this patch is listed there, so the panel carries none.
         "coverageNote": (
             "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Total Orthopaedic Solutions 3 "
-            "is the main NHS Supply Chain route for this patch and carries 101 named "
+            "is the main NHS Supply Chain route for this patch and carries [[fwListed:Total Orthopaedic Solutions 3]] named "
             "suppliers, but being named on it is evidence of a route, not of volume, "
             "and NHS Supply Chain is only one route. The award record below shows "
             "orthopaedic and trauma implants bought through NHS Wales Shared Services, "
@@ -929,10 +929,10 @@ SPECIALITY_RULES = {
             "allografts come direct from NHS Blood and Transplant Tissue and Eye "
             "Services, neither of which has an NHS Supply Chain framework page, so "
             "neither appears below. The one framework that does carry this patch, "
-            "Advanced Wound Care, names 56 suppliers across 18 lots and publishes NO "
+            "Advanced Wound Care, names [[fwListed:Advanced Wound Care]] suppliers across 18 lots and publishes NO "
             "lot-by-lot breakdown, so the supplier list below is the whole framework's "
             "membership and not a Burns and Scar Management supplier list: most of "
-            "those 56 are on other, general wound care lots. Being named on the "
+            "those [[fwListed:Advanced Wound Care]] are on other, general wound care lots. Being named on the "
             "framework is not evidence of burns volume, and being absent from it is "
             "not evidence of absence from this market."
         ),
@@ -1577,8 +1577,8 @@ SPECIALITY_RULES = {
         "coverageNote": (
             "COVERAGE, STATED RATHER THAN ASSUMED. Unlike the interventional radiology "
             "and vascular surgery patches, every NHS Supply Chain framework this "
-            "speciality buys on parsed cleanly, so the twelve below really are the whole "
-            "national route: the eleven modality briefs that share reference 2021/S "
+            "speciality buys on parsed cleanly, so the [[frameworks|word]] below really are the whole "
+            "national route: the [[fwWithRef:2021/S 000-007768|word]] modality briefs that share reference 2021/S "
             "000-007768 and expire together on 31 March 2028 with both 24-month "
             "extensions already used, and Digital Diagnostic Solutions (2025/S "
             "000-043444, expiring 31 July 2027) for PACS, RIS, VNA, dose monitoring and "
@@ -1813,9 +1813,9 @@ SPECIALITY_RULES = {
     # feeding and parenteral nutrition, across acute and community." The page's own
     # research, verified 08/09/2026, establishes that this is two markets sharing a
     # clinical pathway and almost nothing else: a community prescribing market worth
-    # 638.2m of net ingredient cost in England in 2024/25, written on FP10 and reimbursed
+    # £638.2m of net ingredient cost in England in 2024/25, written on FP10 and reimbursed
     # under Part XV of the Drug Tariff, entirely outside any framework; and an acute
-    # device market of 89m over the whole term of one NHS Supply Chain framework, four
+    # device market of £89m over the whole term of one NHS Supply Chain framework, four
     # fifths of which is syringes and tubes rather than food. This panel can only see the
     # second of those two. The coverage note below says so on the page rather than
     # leaving a reader to infer that 89m is the market.
@@ -1921,7 +1921,7 @@ SPECIALITY_RULES = {
             "weight management is the one speciality in this Hub with no NHS Supply Chain "
             "framework at all, because almost none of the money is bought through one. It "
             "moves two other ways instead. The first is community prescribing: Mounjaro "
-            "alone accounted for 574,302,390 of net ingredient cost across 3,064,223 items "
+            "alone accounted for \u00a3574,302,390 of net ingredient cost across 3,064,223 items "
             "in England in 2025/26, which is 4.93% of England's entire community "
             "prescribing bill from one brand, and none of it can appear in a framework or "
             "an award notice because none of it is bought that way. The second is hospital "
@@ -2058,7 +2058,7 @@ SPECIALITY_RULES = {
         "coverageNote": (
             "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. This panel shows the smaller "
             "half of this patch by value, and it is much the smaller half. Nutrition and "
-            "dietetics is two markets. The community market is prescribing: 638.2m of "
+            "dietetics is two markets. The community market is prescribing: \u00a3638.2m of "
             "net ingredient cost in England in 2024/25 across BNF sections 0913 and "
             "0914, decided by a dietitian, written on an FP10, gated by ACBS approval "
             "and the ICB formulary, reimbursed under Part XV of the Drug Tariff, and "
@@ -2067,7 +2067,7 @@ SPECIALITY_RULES = {
             "appear in a framework or tender feed, because none of it is bought that "
             "way. What follows is the acute device route only: NHS Supply Chain's "
             "Enteral Feeding, Bile Bags and Associated Products framework (2025/S "
-            "000-028317, 19 suppliers, 89m over its full term, ending 13 July 2027), the "
+            "000-028317, 19 suppliers, \u00a389m over its full term, ending 13 July 2027), the "
             "Infant Feeding and Accessories framework (2023/S 000-011743, 18 suppliers, "
             "ending 28 February 2028), and the trust and national award trail for feeds, "
             "pumps and parenteral nutrition. Being named on a framework here is not "
@@ -2249,7 +2249,7 @@ SPECIALITY_RULES = {
             "implants, cerebrospinal fluid shunts or valves, dural substitutes, "
             "aneurysm clips, cranial fixation or hydrocephalus. Those products are "
             "bought at trust or unit level and no framework record can show them. What "
-            "is counted below is the two of the five agreements the page names whose "
+            "is counted below is the [[frameworks|word]] of the five agreements the page names whose "
             "supplier lists are genuinely this patch's. Three are not counted: Robotic "
             "Medical Equipment, whose Lot 2 Spinal and Neurological Robots holds "
             "Medtronic Limited alone, and Total Orthopaedic Solutions 3, which carries "
@@ -2735,19 +2735,20 @@ SPECIALITY_RULES = {
         # an appliance and is never dispensed against an FP10. The field is left out
         # rather than reached for.
         "coverageNote": (
-            "WHAT THE COUNTS BELOW DO AND DO NOT COVER. The 122 suppliers on Laboratory "
+            "WHAT THE COUNTS BELOW DO AND DO NOT COVER. The [[fwListed:Laboratory Diagnostics, Point of Care Testing]] suppliers on Laboratory "
             "Diagnostics, Point of Care Testing and Pathology Managed Services are the "
-            "names NHS Supply Chain lists across seven lots, and the count matches the "
-            "total on its own product matrix. They are not 122 competitors for any one "
-            "piece of business: no supplier is on all seven lots, only Roche Diagnostics "
-            "and VWR International are on six, and 71 of the 122 are on exactly one lot. "
+            "names NHS Supply Chain lists across seven lots ([[fwListVsStated:Laboratory Diagnostics, Point of Care Testing]]). "
+            "They are not [[fwListed:Laboratory Diagnostics, Point of Care Testing]] competitors for any one "
+            "piece of business: on the product matrix as read for this rule, no supplier "
+            "is on all seven lots, only Roche Diagnostics and VWR International are on "
+            "six, and 71 of its 122 names are on exactly one lot. "
             "Lot 7, Outsourcing, was never awarded at all, so no supplier below is a "
             "route to a managed pathology service through this agreement. This panel "
             "carries no lot-by-lot split because the product matrix is not part of this "
             "dataset; page 2827 sets the lot structure out in full. "
             "Three NHS Supply Chain frameworks that carry a genuine laboratory strand "
             "are counted elsewhere and named in the rule rather than dropped: Digital "
-            "Diagnostic Solutions, whose 54 suppliers mix laboratory information "
+            "Diagnostic Solutions, whose [[fwListed:Digital Diagnostic Solutions]] suppliers mix laboratory information "
             "systems and digital pathology with about twenty radiology and imaging-AI "
             "firms and which publishes no supplier-by-lot split, is left to the "
             "radiology and imaging page; Specimen Cabinets is specimen radiography, an "
@@ -2905,8 +2906,8 @@ SPECIALITY_RULES = {
             "obligation to use any NHS framework at all. None of that spend appears "
             "below, because it is not "
             "procured through anything this dataset records. What is counted is the one "
-            "NHS Supply Chain framework this speciality is defined by, and it expires "
-            "on 30 September 2026 with no successor named on its brief. Six further "
+            "NHS Supply Chain framework this speciality is defined by, and it "
+            "[[fwExpires:Infusion Pumps and Administration Sets]], with no successor named on its brief when it was read. Six further "
             "buying routes the page claims are counted elsewhere or are outside this "
             "dataset: NHS SBS10015 is an NHS Shared Business Services agreement and "
             "frameworks.json is built from NHS Supply Chain briefs only; Pressure Area "
@@ -2914,11 +2915,11 @@ SPECIALITY_RULES = {
             "Daily Living, Disposable and Washable Continence Care and Technology "
             "Enabled Care are all counted on the pages whose frameworks they primarily "
             "are. The supplier count also needs reading with care: NHS Supply Chain "
-            "states no supplier total on its own brief for this framework, so the 27 is "
-            "a count of the names it lists, and 27 names are not 27 competitors — two "
+            "states no supplier total on its own brief for this framework, so the [[fwListed:Infusion Pumps and Administration Sets]] is "
+            "a count of the names it lists, and [[fwListed:Infusion Pumps and Administration Sets]] names are not [[fwListed:Infusion Pumps and Administration Sets]] competitors — two "
             "are Becton Dickinson entities, two more are the same ICU Medical group, "
             "and the T34 and the BodyGuard-T are the same company's products. The "
-            "Suppliers count below reads 26 and not 27 for exactly that reason: NHS "
+            "Suppliers count below reads [[suppliers]] and not [[fwListed:Infusion Pumps and Administration Sets]] for exactly that reason: NHS "
             "Supply Chain's two spellings of the ICU Medical group resolve to one entry. "
             "The page's Suppliers section sets out which names collapse into which group."
         ),
@@ -3024,12 +3025,12 @@ SPECIALITY_RULES = {
         # Hull's "Home Peritoneal Dialysis" call-off with Vantive is — so there is no
         # renal part to claim.
         "coverageNote": (
-            "WHAT THE COUNTS BELOW DO AND DO NOT COVER. NHS Supply Chain lists 25 "
+            "WHAT THE COUNTS BELOW DO AND DO NOT COVER. NHS Supply Chain lists "
             "supplier names on Renal Replacement Therapies Services, Technologies and "
-            "Consumables, and that count matches the total stated on its own page. The "
-            "Suppliers tab shows 24, because Nikkiso Belgium BV and Nikkiso Europe GmbH "
+            "Consumables: [[fwListVsStated:Renal Replacement Therapies]]. The "
+            "Suppliers tab shows [[suppliers]], because Nikkiso Belgium BV and Nikkiso Europe GmbH "
             "are one company and the Hub resolves them to one entry with both spellings "
-            "against it. They are not 24 competitors for any one piece of business "
+            "against it. They are not [[suppliers]] competitors for any one piece of business "
             "either: the framework spans haemodialysis machines, peritoneal dialysis, "
             "continuous renal replacement therapy, water treatment and body composition "
             "monitoring, and no lot-by-lot split is published in this dataset, so a "
@@ -3072,6 +3073,10 @@ SPECIALITY_RULES = {
     # laboratory to Pathology and laboratory medicine.
     "haematology-and-patient-blood-management": {
         "label": "Haematology and Patient Blood Management",
+        # Re-checked on every build (check_absent_frameworks): the coverage note says
+        # these agreements are NOT in the Hub's parsed framework record. If one is
+        # crawled, the build stops until the sentence is rewritten.
+        "absentFrameworks": ("Suction, Wound Drainage", "Blood Draw Tools"),
         # TWO FRAMEWORKS, NOT THE SEVEN THE PAGE NAMES, AND THE GAP IS DELIBERATE.
         # The page's Buying route section names seven NHS Supply Chain agreements that
         # each carry a slice of this patch. Two of the seven are not in frameworks.json
@@ -3238,11 +3243,11 @@ SPECIALITY_RULES = {
             "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. There is no NHS Supply Chain "
             "haematology framework. The page's Buying route section names seven "
             "agreements written for other categories that each carry a slice of this "
-            "patch, and the Frameworks tab below claims two of them. Blood Collection "
+            "patch, and the Frameworks tab below claims [[frameworks|word]] of them. Blood Collection "
             "Devices and Pressure Infusers and Associated Products are claimed because "
             "each is wholly this patch. Laboratory Diagnostics, Point of Care Testing "
-            "and Pathology Managed Services (122 suppliers) and Vascular Therapy and "
-            "Associated Products (23 suppliers) are NOT claimed: this patch is one lot "
+            "and Pathology Managed Services ([[fwListed:Laboratory Diagnostics, Point of Care Testing]] suppliers) and Vascular Therapy and "
+            "Associated Products ([[fwListed:Vascular Therapy and Associated Products]] suppliers) are NOT claimed: this patch is one lot "
             "of seven on the first and three lots of ten on the second, neither "
             "publishes a supplier-by-lot split in this dataset, and claiming either "
             "whole would put genomics, digital pathology or compression hosiery firms "
@@ -3253,7 +3258,7 @@ SPECIALITY_RULES = {
             "them matters. Suction, Wound Drainage, Autologous Blood Systems and Related "
             "Consumables (302060/1487175) is the only national route to cell salvage, "
             "and Blood Draw Tools and Accessories (2024/S 000-009366) carries the "
-            "tourniquets and blood lancets. Neither is among the 121 framework records "
+            "tourniquets and blood lancets. Neither is among the [[fwTotal]] framework records "
             "the Hub holds, so their suppliers are not counted below. Their own award "
             "notices do appear in the awards list, because awards are matched on the "
             "title of the notice and not on framework membership. "
@@ -3272,7 +3277,7 @@ SPECIALITY_RULES = {
             "Companies House register, searched 09/09/2026, and the Hub\'s own record "
             "for the second spelling already carries gbukgroup.com as its website. The "
             "Hub\'s supplier seed still holds them as two records, so the count below "
-            "reads 26 where 25 companies stand. Merging them changes the Compare tab as "
+            "reads [[suppliers]] where [[suppliers-1]] companies stand. Merging them changes the Compare tab as "
             "well as this panel and is being done as its own change rather than folded "
             "into this one. Read them as one supplier. "
             "THE AWARDS LIST IS WIDER THAN THE TWO CLINICAL PATHWAYS THE PAGE WALKS "
@@ -3494,8 +3499,8 @@ SPECIALITY_RULES = {
         # Healthy Start and the DHSC scheme above rather than through Part IX. So the
         # panel carries no tariff rather than reaching for the nearest part.
         "coverageNote": (
-            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. All four NHS Supply Chain "
-            "agreements the page names are claimed below, and two of the four carry "
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. [[frameworks|Word]] NHS Supply Chain "
+            "agreements the page names are claimed below, and two of them carry "
             "more than this patch. Maternity, Obstetrics, Gynaecology and Sexual "
             "Health Products has two lots, of which Lot 2 is Sexual Health; "
             "Anaesthesia Machines, Ventilators, Neonatal Equipment and Phototherapy "
@@ -3521,7 +3526,7 @@ SPECIALITY_RULES = {
             "SAFE TO QUOTE. The brief states 54 suppliers in its Overview and 54 again "
             "in its Suppliers section, where it also says 11 are new against 12 in the "
             "Overview. The list printed underneath contains 51 entries. This panel "
-            "shows 51, because that is the number the published list supports; 54 is "
+            "shows [[fwListed:Maternity, Obstetrics, Gynaecology]], because that is the number the published list supports; 54 is "
             "what NHS Supply Chain asserts. Two of the 51 (Elemental Healthcare Ltd "
             "and Pelvic Relief) may be one company presented as two lines, which is "
             "why the honest statement is 51 printed entries against a stated 54 rather "
@@ -3568,6 +3573,10 @@ SPECIALITY_RULES = {
     # sexual health, fertility and termination of pregnancy.
     "gynaecology-and-womens-health": {
         "label": "Gynaecology and Women's Health",
+        # Re-checked on every build (check_absent_frameworks): the coverage note says
+        # these agreements are NOT in the Hub's parsed framework record. If one is
+        # crawled, the build stops until the sentence is rewritten.
+        "absentFrameworks": ("Operating (Theatre and Outpatient) Microscopes", "Operating Theatre and Outpatient Microscopes"),
         # SIX AGREEMENTS, and every one of them is named in the page's own Buying
         # route blocks, which were read against frameworks.json on 10/09/2026. The
         # reference number and end date of all six match what the page states:
@@ -3823,7 +3832,7 @@ SPECIALITY_RULES = {
             "category at NHS Supply Chain. Its briefs sit in six categories, none of "
             "which is a population or a speciality, so this patch is scattered across "
             "agreements owned by different category teams with different expiry "
-            "dates. Six agreements are counted below and every one of them carries "
+            "dates. [[frameworks|Word]] agreements are counted below and every one of them carries "
             "more than gynaecology. Maternity, Obstetrics, Gynaecology and Sexual "
             "Health Products has two lots and the obstetric half is the maternity and "
             "neonatal page's. Minimally Invasive Surgery has eight lots, of which "
@@ -3860,7 +3869,7 @@ SPECIALITY_RULES = {
             "ONE ROUTE THE PAGE NAMES IS MISSING FROM THIS PANEL BECAUSE THE HUB'S "
             "DATA DOES NOT HOLD IT. Operating Theatre and Outpatient Microscopes and "
             "Associated Accessories (2022/S 000-020537), the colposcope route, is not "
-            "among the 121 framework records the Hub has crawled, so it cannot be "
+            "among the [[fwTotal]] framework records the Hub has crawled, so it cannot be "
             "shown here. The page carries it, including its 4 December 2026 expiry. "
             "That is a gap in this panel's source data, not a finding about the "
             "market. Neuromodulation Devices and Associated Products is also left "
@@ -4139,6 +4148,10 @@ SPECIALITY_RULES = {
     # its own name, and that agreement goes to tender on 11/09/2026.
     "urology": {
         "label": "Urology",
+        # Re-checked on every build (check_absent_frameworks): the coverage note says
+        # these agreements are NOT in the Hub's parsed framework record. If one is
+        # crawled, the build stops until the sentence is rewritten.
+        "absentFrameworks": ("Maintenance, Repair and Calibration",),
         # NINE AGREEMENTS. Every one is named on the page's own Buying route and
         # framework tables, and all nine were matched back against the 121 names in
         # frameworks.json on 10/09/2026:
@@ -4329,7 +4342,7 @@ SPECIALITY_RULES = {
             r"bladder (?:infusion|irrigat\w*|washout)|urine (?:meters?|bags?))\b"
         ),
         "coverageNote": (
-            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the nine agreements "
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the [[frameworks|word]] agreements "
             "above, Rigid Endoscopy and Flexible Endoscopes, are capital routes shared "
             "with other specialities, and their suppliers are endoscope manufacturers "
             "rather than urology houses; three more, Urology and Bowel Management, "
@@ -4340,11 +4353,11 @@ SPECIALITY_RULES = {
             "carries is missing here for a data reason rather than a judgement: "
             "Maintenance, Repair and Calibration of Medical Equipment, which names "
             "urodynamics and lithotripsy equipment among the estates it maintains, is "
-            "not one of the 121 framework names the Hub's crawler holds, so it cannot "
-            "be claimed. Five of the nine agreements share one procurement reference, "
-            "2021/S 000-007768, and all five end on 31 March 2028 — that reference "
-            "wraps NHS Supply Chain's whole diagnostic capital portfolio and 22 of its "
-            "140 briefs carry it, so its expiry is not a urology event. Finally, the "
+            "not one of the [[fwTotal]] framework names the Hub's crawler holds, so it cannot "
+            "be claimed. [[fwWithRef:2021/S 000-007768|Word]] of the [[frameworks|word]] agreements share one procurement reference, "
+            "2021/S 000-007768, and all of them end on 31 March 2028 — that reference "
+            "wraps NHS Supply Chain's whole diagnostic capital portfolio and [[fwAllWithRef:2021/S 000-007768]] of the [[fwTotal]] "
+            "framework records the Hub holds carry it, so its expiry is not a urology event. Finally, the "
             "larger half of the catheter economy is bought in the community on "
             "prescription through NHSBSA Drug Tariff Part IX and the dispensing "
             "appliance contractors, a route with no NHS Supply Chain framework page at "
@@ -4570,7 +4583,7 @@ SPECIALITY_RULES = {
             r"tracheostomy and laryngectomy protector"
         ),
         "coverageNote": (
-            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the four agreements "
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the [[frameworks|word]] agreements "
             "above are shared routes rather than respiratory ones: Airway Management "
             "Products is categorised by NHS Supply Chain under Medical and Surgical "
             "Consumables and is claimed by theatres and surgical, and Anaesthesia "
@@ -4579,10 +4592,10 @@ SPECIALITY_RULES = {
             "page claiming only the ventilator half. Being named on a framework is not "
             "evidence of volume on this patch, and being absent from one is not "
             "evidence of absence from the market. The supplier list is built from the "
-            "four frameworks, so it counts airway and anaesthesia houses alongside "
-            "respiratory ones; the page's own overlap analysis is the better guide to "
-            "who is really on this patch, and it finds one supplier on all four lists "
-            "and five on three. Home oxygen is the largest gap and it is a real one: "
+            "[[frameworks|word]] frameworks, so it counts airway and anaesthesia houses alongside "
+            "respiratory ones; overlap is the better guide to who is really on this "
+            "patch. In the list below, suppliers on all [[frameworks|word]] frameworks: "
+            "[[supOnAll]]; on [[frameworks-1|word]]: [[supOnAllBut1]]. Home oxygen is the largest gap and it is a real one: "
             "it is bought through regional Home Oxygen Service contracts, not through "
             "any national NHS Supply Chain framework, so it appears in awards and "
             "tenders and nowhere else. The community medicines half of this patch — "
@@ -4714,9 +4727,9 @@ SPECIALITY_RULES = {
         # machines are hospital capital and hospital consumables and appear nowhere in
         # it. The panel carries none rather than reaching for the nearest part.
         "coverageNote": (
-            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. These are the four NHS Supply "
+            "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. These are the [[frameworks|word]] NHS Supply "
             "Chain frameworks this page's own scope names, and being on one is not the "
-            "same as selling to critical care. Each of the four is bought by wards far "
+            "same as selling to critical care. Each of them is bought by wards far "
             "beyond the intensive care unit — the patient monitoring framework covers "
             "every bedside in the hospital, the anaesthesia framework covers the "
             "theatre suite and the neonatal unit — so a supplier counted here is a "
@@ -4928,14 +4941,14 @@ SPECIALITY_RULES = {
         # are hospital and ambulance-trust capital and consumables and appear nowhere
         # in it. The panel carries no tariff rather than reaching for the nearest part.
         "coverageNote": (
-            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the five agreements "
+            "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. Two of the [[frameworks|word]] agreements "
             "above are shared routes rather than emergency care ones, and this page "
             "claims only part of each: Airway Management Products is claimed by "
             "theatres and surgical and by respiratory, and NHS Supply Chain's own "
             "description has it covering theatres, wards, intensive care and "
             "ambulances as well as A&E; Respiratory Solutions is respiratory's "
             "framework and is claimed here for Lot 4, Anaesthesia and Resuscitation, "
-            "alone. The supplier list is built from all five frameworks whole, because "
+            "alone. The supplier list is built from all [[frameworks|word]] frameworks whole, because "
             "NHS Supply Chain publishes suppliers per framework and not per lot, so a "
             "supplier counted here may be on this page only through a lot this patch "
             "does not buy. Being named on a framework is not evidence of volume on "
@@ -5074,11 +5087,11 @@ SPECIALITY_RULES = {
             "The other two agreements shown here are shared general agreements that "
             "pain services buy through rather than own, and their supplier counts are "
             "borrowed: Infusion Pumps is also claimed by critical care, palliative "
-            "care and sepsis, and Syringes, Needles is claimed very widely. Three of "
-            "the four award rows are for a SERVICE rather than a product, and two of "
-            "those three hand one trust’s pain service to an independent provider "
-            "in the same week; the only product award in either feed is a 2021 Northern "
-            "Irish pain-pump contract. A search of all 1,474 award rows for stimulat, "
+            "care and sepsis, and Syringes, Needles is claimed very widely. [[awardsTitle:\\bservices?\\b|Word]] of "
+            "the [[awards|word]] award rows are for a SERVICE rather than a product by their title, and when this rule was "
+            "last read two of them handed one trust’s pain service to an independent provider "
+            "in the same week; the only product award in either feed was then a 2021 Northern "
+            "Irish pain-pump contract. A search on 11 September 2026 of all 1,474 framework-award rows for stimulat, "
             "neuro, infusion, syringe, needle, epidural, anaesthe, analges and catheter "
             "returned no neuromodulation device award of any kind, because those devices "
             "move by eDirect order on the framework rather than by individually noticed "
@@ -5353,7 +5366,7 @@ SPECIALITY_RULES = {
         "coverageNote": (
             "COVERAGE LIMIT, STATED RATHER THAN HIDDEN. Sepsis is a pathway, not a "
             "product category, and every number in this panel is borrowed from an "
-            "agreement bought for something broader. All four frameworks here are "
+            "agreement bought for something broader. All [[frameworks|word]] frameworks here are "
             "shared: the Laboratory Diagnostics agreement is counted on the pathology "
             "page, the infusion pumps agreement on the critical care and palliative "
             "care pages, and all four are used across wards that have nothing to do "
@@ -5372,7 +5385,7 @@ SPECIALITY_RULES = {
             "the source holds it and not as the speciality page states it: "
             "frameworks.json carries no end date for the Pressure Infusers agreement, "
             "where NHS Supply Chain's own contract launch brief says 31 August 2028. "
-            "Four of the fifteen awards below are Department of Health and Social Care "
+            "[[awardsTitle:Pandemic Preparedness|Word]] of the [[awards|word]] awards below are Department of Health and Social Care "
             "pandemic-preparedness stockpile buys rather than trust purchases, and they "
             "are kept deliberately: the product in each is intravenous cannulae or "
             "intravenous giving sets, which is exactly what two of the frameworks above "
@@ -5727,9 +5740,9 @@ SPECIALITY_RULES = {
             "prints RPA Dental Equipment twice. A list that does not match the page it "
             "came from is not published here. Read the brief itself for that "
             "framework. THE DRUG TARIFF PANEL BELOW OVERLAPS THE RESPIRATORY PAGE ON "
-            "PURPOSE: 582 of its 645 lines are the tracheostomy and laryngectomy range, "
+            "PURPOSE: [[tariffShared:respiratory]] of its [[tariffLines]] lines are the tracheostomy and laryngectomy range, "
             "which is counted there too because the airway through the stoma is "
-            "respiratory's and the stoma itself is this speciality's. The 63 lines "
+            "respiratory's and the stoma itself is this speciality's. The [[tariffUnique:respiratory]] lines "
             "unique to this page are the voice prosthesis cleaning brushes, the "
             "tracheostomy dressings, the ear drops, the nasal preparations and the one "
             "auto inflation device."
@@ -5885,7 +5898,7 @@ SPECIALITY_RULES = {
             "the 2024 audiological diagnostics agreement, which is correct for the "
             "date each was signed. The Hub's supplier seed still holds the two names "
             "as two separate supplier records, so the alias registry cannot merge "
-            "them and the list below shows 25 entries for 24 companies. The names are "
+            "them and the list below shows [[suppliers]] entries for [[suppliers-1]] companies. The names are "
             "published exactly as the procurement record states them; merging the two "
             "seed records is a change to shared supplier data that affects the "
             "compare tab as well as this panel, so it is recorded here rather than "
@@ -6160,12 +6173,12 @@ SPECIALITY_RULES = {
             "framework for those. So a supplier named below may be on it for a "
             "product this page never sells: read the lot, not the membership. ONE "
             "SUPPLIER COUNT IS UNVERIFIED. NHS Supply Chain publishes no supplier "
-            "total on the Flexible Endoscopes brief, so its five names are the five "
-            "the Hub's crawler parsed and nothing confirms five is all of them; the "
-            "same is true of Rigid Endoscopy's 18. Endoscopy, Endourology and "
-            "Oncology Ablation Consumables (58), Decontamination Capital Equipment "
-            "(20) and Urology and Bowel Management (57) all state their own totals "
-            "and all three match. THE CONTRACT DATES MATTER MORE HERE THAN ON MOST "
+            "total on the Flexible Endoscopes brief, so its [[fwListed:Flexible Endoscopes|word]] names are the ones "
+            "the Hub's crawler parsed and nothing confirms that is all of them; the "
+            "same is true of Rigid Endoscopy's [[fwListed:Rigid Endoscopy]]. Endoscopy, Endourology and "
+            "Oncology Ablation Consumables ([[fwListVsStated:Endoscopy, Endourology]]), Decontamination Capital Equipment "
+            "([[fwListVsStated:Decontamination Capital Equipment]]) and Urology and Bowel Management ([[fwListVsStated:Urology and Bowel Management]]) "
+            "all state their own totals. THE CONTRACT DATES MATTER MORE HERE THAN ON MOST "
             "PAGES. Urology and Bowel Management ends 20 February 2028, "
             "Decontamination Capital Equipment 18 February 2027 and Endoscopy, "
             "Endourology and Oncology Ablation Consumables 30 September 2027, and "
@@ -6185,8 +6198,8 @@ SPECIALITY_RULES = {
             "claim Part IXC and the three stoma award rows, in the same way Pressure "
             "Area Care is shared between wound care and patient handling. WHAT IS "
             "NOT HERE: the FIT assays NICE names in NG12 are bought by pathology "
-            "laboratories on pathology's own managed service route and only three "
-            "FIT contracts reach the award feeds at all; the theatre products in "
+            "laboratories on pathology's own managed service route and only [[feedTitle:(?-i:\\bFIT\\b)|faecal immunochemical|word]] "
+            "FIT contract titles reach the two award feeds at all; the theatre products in "
             "step 6 -- staplers, energy devices, ports, colonic stents, robotic "
             "consumables -- are on the theatres and surgical page's frameworks; the "
             "AI polyp detection boxes NICE names in HTG514 have no framework at all "
@@ -6235,7 +6248,7 @@ SPECIALITY_RULES = {
                 "NO NHS SUPPLY CHAIN FRAMEWORK IS COUNTED HERE, AND THAT IS THE FINDING "
                 "RATHER THAN A GAP. NHS Supply Chain's own website search returns \"No "
                 "results found for 'dermatology'\", run 11 September 2026, and no one of "
-                "the 121 framework names in the Hub's record is this speciality's. TWO "
+                "the 121 framework names the Hub's record held on 11 September 2026 is this speciality's. TWO "
                 "AGREEMENTS DO CARRY A DERMATOLOGY LOT AND BOTH ARE NAMED HERE RATHER "
                 "THAN COUNTED. Total Patient Assessment Device Solutions, 2025/S "
                 "000-032216, 4 August 2026 to 3 August 2028, 40 suppliers, with an "
@@ -6273,10 +6286,19 @@ SPECIALITY_RULES = {
                 "ANSWER ON THIS PATCH IS THE DRUG TARIFF, NOT A FRAMEWORK. The "
                 "reimbursed emollient range below, every line NHSBSA files under BNF "
                 "21.22 including the brands it lists only as 'Generic <brand>', names "
-                "the companies a dermatology conversation is actually had with. This panel "
-                "will not fall back to a keyword guess against the supplier directory."
+                "the companies a dermatology conversation is actually had with. The "
+                "companies the Hub's supplier directory files under dermatology are listed "
+                "separately, labelled directory-tagged, which is the directory's own "
+                "filing of each company's range and not a keyword guess."
             ),
         },
+        # 29/09/2026: THE FEED NOW CARRIES SEVENTEEN, and the published text said
+        # "thirteen" for a fortnight after it stopped being true. The four added since -
+        # Mid Cheshire (Dermwise), Somerset medical photography for dermatology clinics,
+        # Barking, Havering and Redbridge outsourced dermatology, and NHS Greater
+        # Manchester Tier 3 community dermatology - were read and are all dermatology
+        # services. Every count in the published text is now computed at build time
+        # (render_counts), so the paragraph below is the history, not the current total.
         # EVERY MATCH WAS READ, ONE BY ONE, AND THERE ARE THIRTEEN. Ten in
         # framework-awards.json and three in tender-history.json, and all thirteen are
         # this speciality. NINE are commissioned community dermatology or teledermatology
@@ -6475,23 +6497,25 @@ SPECIALITY_RULES = {
         "coverageNote": (
             "COVERAGE LIMITS, STATED RATHER THAN HIDDEN. THIS IS A PATCH WITH NO "
             "FRAMEWORK AND THEREFORE NO FRAMEWORK SUPPLIER LIST, AND THE EMPTY "
-            "FRAMEWORKS AND SUPPLIERS SECTIONS ARE THE ANSWER, NOT A FAILURE TO LOAD. "
+            "FRAMEWORKS SECTION AND EMPTY FRAMEWORK-NAMED SUPPLIER LIST ARE THE ANSWER, "
+            "NOT A FAILURE TO LOAD. The suppliers shown are directory-tagged, and are "
+            "labelled so. "
             "NHS Supply Chain's own site search returns no results at all for "
             "'dermatology', run 11 September 2026, and its Procurement Calendar carries "
             "no dermatology row. The two agreements that do carry a dermatology lot are "
             "named in full in the frameworks rule, with their references, dates and lot "
             "names, so a rep can go to the right agreement without this panel "
             "publishing sixty-five suppliers of thermometers, weighing scales and "
-            "ventilators as a dermatology market. THE AWARDS BELOW ARE SERVICE "
+            "ventilators as a dermatology market. MOST OF THE AWARDS BELOW ARE SERVICE "
             "CONTRACTS, NOT PRODUCT CONTRACTS, AND THAT IS WHAT THIS MARKET LOOKS LIKE. "
-            "Nine of the thirteen are Integrated Care Board and trust commissioning of "
-            "community dermatology and teledermatology services - Royal Wolverhampton, "
-            "North East London, St George's, Greater Manchester, West Yorkshire, "
-            "Lancashire and South Cumbria - and one is NHS Essex's urgent skin cancer "
-            "dermoscopy triage service. A product supplier's route into those is the "
-            "provider who won them, not the notice. Only one award in the whole feed is "
-            "a dermatology product purchase: Calderdale and Huddersfield's dermatoscopes "
-            "and image transfer system, and it was published in 2021. TWO AWARDS ARE A "
+            "[[awardsTitle:\\bservices?\\b|community dermatology|teledermatology|Word]] of the [[awards|word]] matched notices "
+            "name a dermatology service in their title: Integrated Care Board and trust "
+            "commissioning of community dermatology, teledermatology, outsourced clinics, "
+            "medical photography and urgent skin cancer triage. A product supplier's route "
+            "into those is the provider who won them, not the notice. When every award on "
+            "this panel was read on 29 September 2026, the only dermatology product purchase "
+            "among them was Calderdale and Huddersfield's dermatoscopes and image transfer "
+            "system, published in 2021. TWO AWARDS ARE A "
             "THREE-SPECIALITY MEDICINES BASKET and are included because skin is named in "
             "the title, not because the whole award is this patch: NHS National Services "
             "Scotland's 'ENT, Ophthalmology & Skin Medicines/Medical Devices', 2022 and "
@@ -6505,7 +6529,9 @@ SPECIALITY_RULES = {
             "corticosteroids, topical retinoids, antifungals, isotretinoin and every "
             "biologic NICE has appraised for atopic dermatitis, psoriasis, prurigo "
             "nodularis and hidradenitis suppurativa are Part VIII medicines, not Part IX "
-            "appliances, and no part of the Drug Tariff in this dataset carries them. "
+            "appliances; the generic medicines among them are in the Part VIIIA slice "
+            "shown separately, and branded medicines are in no part of the Drug Tariff "
+            "this panel holds. "
             "THESE LINES ALSO SIT INSIDE THE PART IXA TOTAL THE TISSUE VIABILITY AND "
             "WOUND CARE PAGE CARRIES WHOLE, which is stated so nobody reads the two "
             "panels as counting different things. WHAT IS NOT HERE: wigs, which most "
@@ -6694,7 +6720,7 @@ SPECIALITY_RULES = {
             "award to one supplier, Primel Corporation Ltd, expiry 14 June 2027). Go to "
             "the Speciality page's own Buying route tab for the full twenty-row table "
             "with lots, terms and supplier counts. THE SUPPLIER LIST BELOW IS THEREFORE "
-            "SIXTEEN FRAMEWORKS' WORTH, NOT TWENTY. It is not the whole supplier market "
+            "[[frameworks|WORD]] FRAMEWORKS' WORTH, NOT TWENTY. It is not the whole supplier market "
             "on this patch and the four above carry names it does not. THERE IS NO NHS "
             "SUPPLY CHAIN INFECTION PREVENTION CATEGORY. The twenty agreements sit "
             "under Medical and Surgical Consumables, Facilities and Office Solutions, "
@@ -6738,8 +6764,8 @@ SPECIALITY_RULES = {
             "Global' and '2San Global Limited (New to the framework and NHS Supply "
             "Chain)'; 'Reliance Medical' and 'Reliance Medical Ltd (New)'. This is "
             "the first page in the rollout to carry both spellings of any of them, "
-            "because it is the first to carry sixteen frameworks at once. 58 of the "
-            "205 names below are flagged unresolved for the same reason - they are "
+            "because it is the first to carry [[frameworks|word]] frameworks at once. [[unresolved]] of the "
+            "[[suppliers]] names below are flagged unresolved for the same reason - they are "
             "the cleaning machine, janitorial and waste firms on the Facilities and "
             "Office Solutions agreements, which the registry was built for medical "
             "device companies and does not yet hold. Every one is printed exactly "
@@ -6916,7 +6942,7 @@ SPECIALITY_RULES = {
             "chemotherapy product, and the drug itself does not travel this way at "
             "all: it moves through NICE technology appraisal, the Cancer Drugs Fund, "
             "NHS England specialised commissioning and regional medicines procurement, "
-            "none of which has an NHS Supply Chain framework page. The two agreements "
+            "none of which has an NHS Supply Chain framework page. The [[frameworks|word]] agreements "
             "below are general ones that a cancer service buys THROUGH, not cancer "
             "agreements. Infusion Pumps, Administration Sets and Associated Products "
             "is the whole hospital's pump and giving-set route, counted on the "
@@ -6924,7 +6950,7 @@ SPECIALITY_RULES = {
             "Endourology and Oncology Ablation Consumables is the only agreement in "
             "the catalogue whose name carries the word oncology, and it carries it for "
             "tumour ablation devices; NHS Supply Chain publishes no lot breakdown for "
-            "it, so all 58 of its suppliers are listed and most of them sell endoscopy "
+            "it, so all [[fwListed:Endoscopy, Endourology]] of its suppliers are listed and most of them sell endoscopy "
             "rather than anything a chemotherapy day unit or an aseptic unit buys. "
             "Radiotherapy is not counted here either: its three NHS Supply Chain "
             "frameworks and Brachytherapy Seeds are a different treatment modality, "
@@ -7005,6 +7031,8 @@ SPECIALITY_RULES = {
     # the rule.
     "capital-estates-watch": {
         "label": "Capital and Estates Watch",
+        # Exempt from the works filter (is_works_award): estates works are this page's whole patch.
+        "worksAreThePatch": True,
         "frameworks": r"(batteries, lighting, tools)",
         "include": (
             r"\b(backlog maintenance|estates?|capital works?|refurbishment|refurbish\w*|"
@@ -7134,7 +7162,7 @@ SPECIALITY_RULES = {
         "exclude": None,
         "coverageNote": (
             "This is the one speciality in the Hub with no single buying route, and "
-            "this panel shows the two NHS Supply Chain frameworks that do reach it "
+            "this panel shows the [[frameworks|word]] NHS Supply Chain frameworks that do reach it "
             "\u2014 Digital Diagnostic Solutions and Radiotherapy IT Solutions. It "
             "cannot show the rest, because the rest are not NHS Supply Chain "
             "agreements: all four pages of the contract launch brief index were "
@@ -7158,6 +7186,9 @@ SPECIALITY_RULES = {
 
     "pharmacy-and-medicines": {
         "label": "Pharmacy and Medicines",
+        # Part VIIIA whole (29/09/2026): the generic medicine price list IS this page's
+        # tariff, so it is summarised unsliced rather than by BNF market.
+        "viiiaWhole": True,
         # NO FRAMEWORK. All 121 parsed framework names in frameworks.json and all 16
         # unparsed ones were read on 11/09/2026 and not one of them is a medicine.
         # There is no pharmacy CBU category. The three that come nearest were checked
@@ -7186,7 +7217,7 @@ SPECIALITY_RULES = {
                 "Supply Chain does not buy medicines. All four pages of its contract "
                 "launch brief index, 140 briefs, were read on 11 September 2026 and not "
                 "one covers a medicine; there is no pharmacy category; and none of the "
-                "121 framework names in the Hub's record, or the 16 it holds unparsed, "
+                "121 framework names the Hub's record held that day, or the 16 it held unparsed, "
                 "is a medicine. Medicines reach the NHS by four other routes entirely - "
                 "NHS England medicines procurement and its Branded and Generic "
                 "Pharmaceuticals tenders, regional pharmaceutical procurement in Wales, "
@@ -7194,7 +7225,7 @@ SPECIALITY_RULES = {
                 "Tariff reimbursement in the community. Those are what the awards and "
                 "tenders panel shows. THREE AGREEMENTS COME NEAR AND ARE NAMED RATHER "
                 "THAN COUNTED. Infusion Pumps and Administration Sets and Associated "
-                "Products (Project_12 ITT_382, expiring 30 September 2026) and "
+                "Products (Project_12 ITT_382, [[fwExpiring:Infusion Pumps and Administration Sets]]) and "
                 "Syringes, Needles and Associated Products are the hardware a medicine "
                 "is given through, not the medicine; both are counted on the vascular "
                 "access and IV therapy page. Robotic Medical Equipment and Associated "
@@ -7368,9 +7399,11 @@ SPECIALITY_RULES = {
             "This page carries no Drug Tariff panel, and that is deliberate. The Hub "
             "holds Part IX of the Drug Tariff, which is the appliance list - dressings "
             "and elastic hosiery, incontinence appliances, stoma appliances. Medicines "
-            "are reimbursed under Part VIII, which the Hub does not hold. A community "
+            "are reimbursed under Part VIII. The Hub holds Part VIIIA, the basic prices of "
+            "generic medicines, and it is summarised on this panel; it does not hold "
+            "Parts VIIIB or VIIIC. A community "
             "pharmacy dispenses the whole of Part IX, so claiming it here would be easy "
-            "and would bury the medicine under twenty thousand appliance lines that "
+            "and would bury the medicine under [[partIxLines]] appliance lines that "
             "belong to the wound care, continence and stoma pages. The community "
             "medicines figure a rep actually needs is on this page's own money section, "
             "computed from Prescription Cost Analysis. SECOND, SINGLE-PRODUCT AWARDS. "
@@ -7507,10 +7540,10 @@ SPECIALITY_RULES = {
             "panel claims none of them. The insulin and GLP-1 medicines themselves - "
             "semaglutide, tirzepatide, the insulin analogues - are BNF Chapter 6 "
             "prescribing and appear in no framework and no Part IX line here; they "
-            "are pharmacy's and obesity's. The awards list is also unusually "
-            "service-heavy: the six rows from the framework-awards feed are eye "
-            "screening, community diabetes services and digital prevention "
-            "programmes, not device buys. Two rows are named rather than hidden "
+            "are pharmacy's and obesity's. The awards list mixes service and product "
+            "buys: [[awardsTitle:service|programme|screening|word]] of the [[awards|word]] matched rows name a "
+            "service, a programme or screening in their title - eye screening, community "
+            "diabetes services and prevention programmes - and the rest name none. Two rows are named rather than hidden "
             "because the product is exactly what this patch sells even though the "
             "buyer is not a trust: a portable glucometer contract bought by Leidos "
             "Supply for defence, and the Northern Ireland insulin pen needle "
@@ -7532,6 +7565,8 @@ SPECIALITY_RULES = {
     # is zero, and the supplier count is zero with it. That is the finding, not a gap.
     "mental-health": {
         "label": "Mental Health",
+        # Exempt from the works filter (is_works_award): anti-ligature and safe-environment works are how this patch's product market buys; the rule admits them on purpose.
+        "worksAreThePatch": True,
         # NO NHS SUPPLY CHAIN FRAMEWORK. frameworks.json holds all 140 contract launch
         # briefs NHS Supply Chain publishes: 121 parsed framework names, 16 the crawler
         # could not parse and 3 expired. All three lists were searched this session and
@@ -7549,8 +7584,8 @@ SPECIALITY_RULES = {
         "frameworksFinding": {
             "frameworks": (
                 "NO NHS SUPPLY CHAIN FRAMEWORK IS COUNTED HERE, AND THAT IS THE FINDING "
-                "RATHER THAN A GAP. The Hub's record covers all 140 contract launch briefs "
-                "NHS Supply Chain publishes - 121 parsed framework names, 16 unparsed and "
+                "RATHER THAN A GAP. On 12 September 2026 the Hub's record covered all 140 contract launch briefs "
+                "NHS Supply Chain published - 121 parsed framework names, 16 unparsed and "
                 "3 expired - and all three lists were searched: not one name is mental "
                 "health, and NHS Supply Chain runs no mental health category. ONE AGREEMENT TOUCHES THIS PATCH AND IT IS NAMED HERE "
                 "RATHER THAN COUNTED: Medical Healthcare Furniture, reference 2024/S "
@@ -7752,7 +7787,7 @@ SPECIALITY_RULES = {
             "frameworks": (
                 "NO NHS SUPPLY CHAIN FRAMEWORK IS COUNTED HERE, AND THAT IS THE FINDING "
                 "RATHER THAN A GAP. All 140 contract launch briefs NHS Supply Chain "
-                "publishes were read - 121 parsed framework names, 16 unparsed and 3 "
+                "published were read on 12 September 2026 - 121 parsed framework names, 16 unparsed and 3 "
                 "expired - and not one of them is primary care or general practice. NHS "
                 "Supply Chain organises its agreements by product category and runs six "
                 "of them: Diagnostic Equipment and Services, Facilities and Office "
@@ -7764,7 +7799,7 @@ SPECIALITY_RULES = {
                 "and Washable Continence Care. ONE AGREEMENT COMES CLOSEST AND IT IS "
                 "NAMED HERE RATHER THAN COUNTED: Laboratory Diagnostics, Point of Care "
                 "Testing and Pathology Managed Services, category Diagnostic Equipment "
-                "and Services, 122 suppliers. Point of care testing in general practice "
+                "and Services, [[fwListed:Laboratory Diagnostics, Point of Care Testing]] suppliers. Point of care testing in general practice "
                 "sits inside it. WHY IT IS NOT COUNTED: NHS Supply Chain publishes "
                 "supplier names per agreement and never per lot, so claiming it would "
                 "put all 122 laboratory and pathology suppliers in front of a rep as the "
@@ -7778,7 +7813,7 @@ SPECIALITY_RULES = {
                 "NO SUPPLIER LIST IS PUBLISHED FOR THIS SPECIALITY, because this panel "
                 "names suppliers only where an NHS Supply Chain framework record names "
                 "them on this speciality's own frameworks, and a care setting has none. "
-                "The 122 suppliers on Laboratory Diagnostics, Point of Care Testing and "
+                "The [[fwListed:Laboratory Diagnostics, Point of Care Testing]] suppliers on Laboratory Diagnostics, Point of Care Testing and "
                 "Pathology Managed Services are not reproduced here: that list is "
                 "published per agreement rather than per lot, so it would name the "
                 "pathology market rather than the general practice point of care testing "
@@ -7908,10 +7943,10 @@ SPECIALITY_RULES = {
             "commissioning route, and NHS Essex ICB's denosumab outpatient therapy "
             "agreement, where primary care appears only as the recipient of the shared "
             "care paperwork. WHAT A READER OF THIS LIST SHOULD KNOW BEFORE READING IT: "
-            "56 of the 81 matching notices are a single contract family - NHS South "
+            "[[awardsTitle:Locally Commissioned Services]] of the [[awards]] matching notices are a single contract family - NHS South "
             "Yorkshire ICB's GP Locally Commissioned Services, awarded practice by "
-            "practice across Sheffield and published on 9 and 10 September 2026. They "
-            "are genuine, they are counted, and because this panel shows the 40 most "
+            "practice across Sheffield, the first of them published on 9 and 10 September 2026. They "
+            "are genuine, they are counted, and because this panel shows the [[awardCap]] most "
             "recent of what it matches, they fill it. The count above is the honest "
             "total and the rest of this patch is inside it rather than on the screen. "
             "IT IS ALSO WHAT THE PATCH LOOKS LIKE: general practice is commissioned one "
@@ -7919,7 +7954,7 @@ SPECIALITY_RULES = {
             "enhanced services produces dozens of notices in two days while a whole year "
             "of national activity produces a handful. SO THAT ONE ROUND OF LOCAL "
             "PAPERWORK DOES NOT BECOME THE WHOLE PAGE, this panel - alone among the "
-            "Hub's speciality panels - limits any single buyer to twelve of its forty "
+            "Hub's speciality panels - limits any single buyer to [[buyerCap|word]] of its [[awardCap|word]] "
             "display slots. That is a display rule and not a filter: nothing is removed "
             "from the matched total, and the number of notices held back from the screen "
             "is published as awardsWithheldByBuyerCap so a reader can see it was done. "
@@ -8092,6 +8127,58 @@ def build_suppliers(frameworks, registry):
 
 def build_awards(rx, rule, th_doc, fa_doc):
     """Awarded contracts on this patch, from the two award feeds."""
+    uniq = matched_awards(rx, rule, th_doc, fa_doc)
+    return cap_awards(rule, uniq)
+
+
+# BUILDING AND ESTATES WORKS ARE NOT A SPECIALITY AWARD (Lou, 29/09/2026). "Alterations
+# to Diabetes Centre", won by an architects' practice, was on the diabetes panel because
+# the title names the speciality's department. A contract to build, alter or re-roof a
+# room is estates money, and it is capital-estates-watch's patch, not the clinical one.
+# A notice is treated as works when ANY of these holds:
+#   1. its title names works outright (alterations, architect, demolition, remodelling,
+#      reconfiguration, building/construction works, boiler, roof, fire stopping...);
+#   2. every winning supplier is a builder or architect by its own name;
+#   3. EVERY CPV code on it is a works code (45 construction, 712 architectural,
+#      7154 construction project management) AND the title either says works/
+#      refurbishment or names no equipment. That last clause is what keeps
+#      "X-Ray Room Replacement" and Philips' "Ultrasound refit" (both filed under 45 by
+#      the buyer) on the radiology panel: the equipment is the purchase.
+# A rule whose patch IS the estate sets "worksAreThePatch": True (capital estates;
+# mental health, where anti-ligature works are the product market).
+WORKS_TITLE = re.compile(
+    r"\b(alterations?|architects?|architectural|demolition|remodelling|reconfiguration|"
+    r"building works|construction works?|boilers?|roof\w*|fire (?:stopping|alarm|door|"
+    r"damper|compartmentation)\w*)\b", re.I)
+WORKS_SUPPLIER = re.compile(r"\b(construct\w*|contractors?|builders?|architects?|"
+                            r"building services|roofing)\b", re.I)
+WORKS_WORD = re.compile(r"\b(works?|refurbish\w*|construction)\b", re.I)
+EQUIPMENT_WORD = re.compile(
+    r"\b(x-?ray|mri|ct|ultrasound|scanners?|fluoroscop\w*|gamma camera|macerators?|"
+    r"equipment|devices?|systems?|machines?|robots?|monitors?|analysers?)\b", re.I)
+WORKS_CPV = ("45", "712", "7154")
+
+
+def is_works_award(row):
+    """True when an award row is building or estates works (see WORKS_TITLE above)."""
+    title = row.get("title") or ""
+    if WORKS_TITLE.search(title):
+        return True
+    # Every named winner must be a builder: a community equipment service that lists
+    # a building-services firm alongside the equipment provider is not works.
+    sups = [x.strip() for x in re.split(r",\s+(?=[A-Z0-9])", row.get("supplier") or "") if x.strip()]
+    if sups and all(WORKS_SUPPLIER.search(x) for x in sups):
+        return True
+    cpv = [str(c) for c in (row.get("cpv") or [])]
+    if cpv and all(c.startswith(WORKS_CPV) for c in cpv):
+        return bool(WORKS_WORD.search(title)) or not EQUIPMENT_WORD.search(title)
+    return False
+
+
+def matched_awards(rx, rule, th_doc, fa_doc):
+    """EVERY award row the rule matches, newest first, de-duplicated. The display cap
+    is applied by cap_awards; counts stated in rule text are computed from this set
+    (see render_counts), never from the capped slice."""
     rows = []
     schema = th_doc["schema"]
     ix = {k: i for i, k in enumerate(schema)}
@@ -8148,7 +8235,12 @@ def build_awards(rx, rule, th_doc, fa_doc):
             continue
         seen.add(k)
         uniq.append(r)
+    if not rule.get("worksAreThePatch"):
+        uniq = [r for r in uniq if not is_works_award(r)]
+    return uniq
 
+
+def cap_awards(rule, uniq):
     # OPT-IN BUYER CAP, AND IT IS A DISPLAY RULE ONLY. Some patches are commissioned
     # one contract at a time, so a single buyer doing one round of work floods the
     # feed: NHS South Yorkshire ICB published 56 GP Locally Commissioned Services
@@ -8222,6 +8314,21 @@ def build_tariff(rule, dt_doc):
     if not parts:
         return None
     ix = {k: i for i, k in enumerate(dt_doc["schema"])}
+    rows = tariff_rows(rule, dt_doc)
+    vmp_pattern = rule.get("tariffVmp")
+    bnf_prefixes = tuple(rule.get("tariffBnf") or ())
+    if not rows:
+        return None
+    return summarise_tariff(rows, ix, parts, bnf_prefixes, vmp_pattern, dt_doc)
+
+
+def tariff_rows(rule, dt_doc):
+    """The Part IX lines a rule selects. build_tariff summarises them; render_counts
+    reads the same rows, so a count in rule text and the summary cannot disagree."""
+    parts = tuple(rule.get("tariffParts") or ())
+    if not parts:
+        return []
+    ix = {k: i for i, k in enumerate(dt_doc["schema"])}
     rows = [r for r in dt_doc["rows"] if r[ix["part"]] in parts]
     vmp_pattern = rule.get("tariffVmp")
     # WHICH NAME THE FILTER READS. By default the virtual medicinal product
@@ -8262,8 +8369,10 @@ def build_tariff(rule, dt_doc):
                     else (vrx is not None and by_name(r)))]
     elif vrx is not None:
         rows = [r for r in rows if by_name(r)]
-    if not rows:
-        return None
+    return rows
+
+
+def summarise_tariff(rows, ix, parts, bnf_prefixes, vmp_pattern, dt_doc):
     by_sup = {}
     prices = []
     for r in rows:
@@ -8301,6 +8410,1059 @@ def build_tariff(rule, dt_doc):
     }
 
 
+# ---------------------------------------------------------------------------
+# PHASE 2 (29/09/2026): directory-tagged suppliers, GP prescribing, MHRA Drug
+# Safety Updates, Drug Tariff Part VIIIA, and counts computed at build time.
+# ---------------------------------------------------------------------------
+
+# SUPPLIER DIRECTORY TAG -> SPECIALITY PANEL. The supplier directory
+# (data/supplier-seed.json) tags each company with free-text speciality labels.
+# data/speciality-label-map.json and data/speciality-map.json resolve those labels to
+# the Compare tab's short ids ("wound", "derm..." etc). This table is the one bridge
+# from a Compare id to the speciality pages. It starts from the bridge already used in
+# scripts/build_prospect_lists.py (CAL) and is kept here because it has a different
+# job: CAL only picks a conference, this decides which page lists a company. An id with
+# no entry reaches no page, and a page no id reaches says so rather than borrowing a
+# neighbour's list. Changing a line here changes which companies appear on a page.
+SEED_TAG_TO_PANELS = {
+    "wound": ["tissue-viability-and-wound-care"],
+    "vascular": ["vascular-access-and-iv-therapy"],
+    "continence": ["continence-bladder-and-bowel", "urology"],
+    "ostomy": ["continence-bladder-and-bowel", "colorectal-gi-and-endoscopy"],
+    "endourology": ["urology"],
+    "pathology": ["pathology-and-laboratory-medicine"],
+    "bloodcoll": ["pathology-and-laboratory-medicine"],
+    "bloodtx": ["haematology-and-patient-blood-management"],
+    "respiratory": ["respiratory"],
+    "ortho": ["orthopaedics-and-trauma"],
+    "theatres": ["theatres-and-surgical"],
+    "surgical": ["theatres-and-surgical"],
+    "mis": ["theatres-and-surgical"],
+    "handling": ["patient-handling"],
+    "rehab": ["rehabilitation-prosthetics-and-orthotics"],
+    "orthotics": ["rehabilitation-prosthetics-and-orthotics"],
+    "infection": ["infection-prevention-and-control"],
+    "skin-prep": ["infection-prevention-and-control"],
+    "ssd": ["infection-prevention-and-control"],
+    "digital": ["digital-and-medical-it"],
+    "it": ["digital-and-medical-it"],
+    "cardiology": ["cardiology-and-cardiac-surgery"],
+    "diabetes": ["diabetes-and-endocrinology"],
+    "endoscopy": ["colorectal-gi-and-endoscopy"],
+    "gastro": ["colorectal-gi-and-endoscopy"],
+    "anaesthesia": ["critical-care"],
+    "monitoring": ["critical-care"],
+    "neuro": ["neurology-and-neurosurgery"],
+    "womens": ["gynaecology-and-womens-health", "maternity-and-neonatal"],
+    "neonatal": ["maternity-and-neonatal"],
+    "nutrition": ["nutrition-and-dietetics"],
+    "oncology": ["oncology-and-sact"],
+    "imaging": ["radiology-and-imaging"],
+    "ultrasound": ["radiology-and-imaging"],
+    "nuclear": ["radiology-and-imaging"],
+    "renal": ["renal"],
+    "ent": ["ent-and-head-and-neck"],
+    "audiology": ["audiology-and-hearing"],
+    "ophthalmology": ["ophthalmology"],
+    "pharma": ["pharmacy-and-medicines"],
+    "dermatology": ["dermatology"],
+    "vascsurg": ["vascular-surgery-and-pad"],
+    "facilities": ["capital-estates-watch"],
+}
+
+
+def _norm(s):
+    return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
+
+
+def seed_label_resolver(label_map_doc, spec_map_doc):
+    """label -> (compare ids, how). Three sources, strongest first: a label-map entry
+    with slugs (an exact label decided or normalised there), the supplierSpecialityMap
+    in speciality-map.json (hand-written, including compound labels), and a label that
+    IS a canonical speciality label. Anything else resolves to nothing."""
+    by_label = {}
+    for e in (label_map_doc or {}).get("entries") or []:
+        if e.get("slugs"):
+            by_label.setdefault(e["label"], (list(e["slugs"]), "speciality-label-map.json"))
+    for lab, v in ((spec_map_doc or {}).get("supplierSpecialityMap") or {}).items():
+        if v.get("to"):
+            by_label.setdefault(lab, (list(v["to"]), "speciality-map.json supplierSpecialityMap"))
+    for c in (spec_map_doc or {}).get("canonicalSpecialities") or []:
+        if c.get("label") and c.get("id"):
+            by_label.setdefault(c["label"], ([c["id"]], "speciality-map.json canonical label"))
+    return lambda label: by_label.get(label, ([], None))
+
+
+def framework_index(fw_doc, registry, cache):
+    """{company key: [framework summary]} across every parsed NHSSC framework, keyed
+    by the alias registry's canonical name where it resolves, else the name as NHSSC
+    wrote it. Built once per run."""
+    if "fwIndex" in cache:
+        return cache["fwIndex"]
+    idx = {}
+    for f in fw_doc.get("frameworks") or []:
+        summary = {"name": f.get("name"), "url": f.get("url"),
+                   "reference": f.get("reference"), "ends": f.get("ends")}
+        for s in f.get("suppliers") or []:
+            if not isinstance(s, str):
+                continue
+            key = resolve_key(s, registry, cache)
+            lst = idx.setdefault(key, [])
+            if not any(x["name"] == summary["name"] for x in lst):
+                lst.append(summary)
+    cache["fwIndex"] = idx
+    return idx
+
+
+def resolve_key(name, registry, cache):
+    memo = cache.setdefault("resolve", {})
+    if name not in memo:
+        status, canonical, _how = company_alias.resolve(name, registry)
+        memo[name] = (canonical if status == "RESOLVED" else name, status == "RESOLVED")
+    return memo[name][0]
+
+
+def _seed_frameworks(rec):
+    """The seed record's own framework notes, as (name, url or None, source)."""
+    out = []
+    for f in rec.get("frameworks") or []:
+        if isinstance(f, dict) and f.get("name"):
+            out.append((f["name"], f.get("url"), f.get("source") or "supplier directory"))
+        elif isinstance(f, str) and f.strip():
+            out.append((f.strip(), None, "supplier directory"))
+    return out
+
+
+def framework_note(other, directory_only=()):
+    """The note Lou asked for (29/09/2026): which framework(s) a listed supplier is on
+    that are NOT counted as this speciality's, so the company is not lost from the page."""
+    parts = []
+    if other:
+        parts.append("Named on %s not counted as this speciality's: %s." % (
+            "an NHS Supply Chain framework" if len(other) == 1 else
+            "%s NHS Supply Chain frameworks" % number_word(len(other)),
+            "; ".join(o["name"] for o in other)))
+    if directory_only:
+        parts.append("The Hub's supplier directory also records: %s." % "; ".join(
+            d["name"] for d in directory_only))
+    return " ".join(parts) or None
+
+
+def build_directory_suppliers(slug, frameworks, suppliers, sources):
+    """Suppliers the Hub's own supplier directory tags to this speciality.
+
+    PROVENANCE IS THE POINT. A framework-named supplier is on this speciality's own
+    NHS Supply Chain framework, read off the brief. A directory-tagged supplier is one
+    the Hub's supplier directory files under this speciality from the company's own
+    product range. Both are facts, of different kinds, so they are kept in two lists
+    and never merged into one count. Lou's rule, 29/09/2026: where a supplier is on
+    ANOTHER framework (one not counted for this speciality), it is still listed, with
+    a note naming that framework and its link, so it is not lost.
+
+    Returns (directory rows, set of framework-named keys that are also tagged).
+    """
+    seed = sources.get("seed") or []
+    resolver = sources.get("labelResolver")
+    registry = sources["registry"]
+    cache = sources.setdefault("cache", {})
+    if not seed or resolver is None:
+        return [], set()
+    own = {f["name"] for f in frameworks}
+    fw_named = {s["name"] for s in suppliers}
+    fw_idx = framework_index(sources["frameworks"], registry, cache)
+    rows, tagged_fw_named = {}, set()
+    for rec in seed:
+        labels, via = [], set()
+        for lab in rec.get("specialities") or []:
+            ids, how = resolver(lab)
+            if any(slug in SEED_TAG_TO_PANELS.get(i, ()) for i in ids):
+                labels.append(lab)
+                via.add(how)
+        if not labels:
+            continue
+        name = rec.get("name") or ""
+        key = resolve_key(name, registry, cache)
+        resolved = cache["resolve"][name][1]
+        keys = [key] + [resolve_key(a, registry, cache) for a in (rec.get("aliases") or [])
+                        if isinstance(a, str)]
+        if any(k in fw_named for k in keys):
+            tagged_fw_named.update(k for k in keys if k in fw_named)
+            continue
+        other = []
+        for k in keys:
+            for f in fw_idx.get(k, []):
+                if f["name"] not in own and not any(o["name"] == f["name"] for o in other):
+                    other.append({"name": f["name"], "url": f.get("url"),
+                                  "source": "NHS Supply Chain contract launch brief"})
+        # The directory's own framework notes, where they name something the brief
+        # record does not already give (another buying organisation's agreement, such
+        # as an NHS Shared Business Services framework).
+        known = [_norm(o["name"]) for o in other] + [_norm(n) for n in own]
+        directory_only = []
+        for fname, furl, fsrc in _seed_frameworks(rec):
+            nf = _norm(fname)
+            if any(k and k in nf for k in known):
+                continue
+            if any(_norm(d["name"]) == nf for d in directory_only):
+                continue
+            directory_only.append({"name": fname, "url": furl, "source": fsrc})
+        row = rows.get(key)
+        if row is None:
+            row = rows[key] = {
+                "name": key, "resolved": resolved, "provenance": "directory-tagged",
+                "directoryName": name, "seedLabels": [], "via": [],
+                "otherFrameworks": [], "directoryFrameworks": [],
+            }
+        for lab in labels:
+            if lab not in row["seedLabels"]:
+                row["seedLabels"].append(lab)
+        for v in sorted(v for v in via if v):
+            if v not in row["via"]:
+                row["via"].append(v)
+        for o in other:
+            if not any(x["name"] == o["name"] for x in row["otherFrameworks"]):
+                row["otherFrameworks"].append(o)
+        for d in directory_only:
+            if not any(x["name"] == d["name"] for x in row["directoryFrameworks"]):
+                row["directoryFrameworks"].append(d)
+    out = []
+    for row in rows.values():
+        row["otherFrameworks"].sort(key=lambda o: o["name"] or "")
+        row["frameworkNote"] = framework_note(row["otherFrameworks"], row["directoryFrameworks"])
+        out.append(row)
+    # Order: companies on another framework first (they carry the most to act on),
+    # then alphabetical. An ordering, never a ranking of size.
+    out.sort(key=lambda r: (not r["otherFrameworks"], r["name"].lower()))
+    return out, tagged_fw_named
+
+
+def annotate_framework_suppliers(suppliers, tagged):
+    """Mark every framework-named row with its provenance. The other-framework note is
+    carried on directory-tagged rows, which are the ones that would otherwise be lost;
+    a framework-named row is already on the page through its own framework, and
+    repeating every other agreement a large supplier holds would take the heaviest
+    panels past the 200 KB a page may pull (test_speciality_panels.py)."""
+    for s in suppliers:
+        s["provenance"] = "framework-named"
+        s["directoryTagged"] = s["name"] in tagged
+    return suppliers
+
+
+# GP PRESCRIBING MARKETS. Which BNF sections are a speciality's prescribing market, in
+# NHSBSA's own BNF classification (data/gp-prescribing/, English Prescribing Dataset
+# with SNOMED). A prefix is a BNF section (4 characters), a chapter (2), or a finer
+# paragraph or chemical substance code. A speciality with no entry gets an honest
+# "not sized" state: no section is borrowed from a neighbouring page. Part VIIIA lines
+# are classified with the medicine prefixes (chapters 01 to 19) of the same markets,
+# so the two sections of a panel always describe one market.
+GP_MARKETS = {
+    "dermatology": [
+        {"id": "emollients", "label": "Emollients: BNF 13.02.01 and 21.22 emollient devices",
+         "prefixes": ["130201", "2122"],
+         "note": "Most prescribed emollients are now coded to 21.22 (Appliances), not 13.02. "
+                 "Both are counted; 13.02.02 barrier preparations are not.",
+         "brandShare": True},
+        {"id": "skin", "label": "Skin: BNF chapter 13", "prefixes": ["13"]},
+    ],
+    "respiratory": [
+        {"id": "resp", "label": "Respiratory system: BNF chapter 3", "prefixes": ["03"]},
+        {"id": "resp-devices", "label": "Peak flow meters and inhalation solutions: BNF 21.12 and 21.32",
+         "prefixes": ["2112", "2132"]},
+    ],
+    "diabetes-and-endocrinology": [
+        {"id": "diabetes", "label": "Drugs used in diabetes: BNF 6.1", "prefixes": ["0601"],
+         "note": "BNF 6.1 includes GLP-1 and GIP/GLP-1 medicines prescribed for weight "
+                 "management; the dataset does not separate them by indication."},
+        {"id": "sensors", "label": "Interstitial fluid glucose sensors: BNF 21.48", "prefixes": ["2148"]},
+        {"id": "thyroid", "label": "Thyroid and antithyroid drugs: BNF 6.2", "prefixes": ["0602"]},
+    ],
+    "obesity-and-weight-management": [
+        {"id": "antiobesity", "label": "Anti-obesity drugs: BNF 4.5", "prefixes": ["0405"]},
+        {"id": "incretins", "label": "Tirzepatide, semaglutide and liraglutide, all indications (BNF 6.1)",
+         "prefixes": ["0601023AZ", "0601023AW", "0601023AB"],
+         "note": "NHSBSA files these under drugs used in diabetes. This figure is every "
+                 "indication together; the dataset cannot split weight management from "
+                 "type 2 diabetes."},
+    ],
+    "continence-bladder-and-bowel": [
+        {"id": "continence", "label": "Catheters, catheter maintenance and incontinence appliances: BNF 21.02, 21.13 and chapter 22",
+         "prefixes": ["2102", "2113", "22"]},
+        {"id": "irrigation", "label": "Anal irrigation systems: BNF 21.28", "prefixes": ["2128"]},
+    ],
+    "urology": [
+        {"id": "gu", "label": "Drugs for genito-urinary disorders: BNF 7.4", "prefixes": ["0704"]},
+        {"id": "catheters", "label": "Catheters and catheter maintenance: BNF 21.02 and 21.13",
+         "prefixes": ["2102", "2113"]},
+    ],
+    "colorectal-gi-and-endoscopy": [
+        {"id": "stoma", "label": "Stoma appliances: BNF chapter 23", "prefixes": ["23"]},
+        {"id": "gi", "label": "Gastro-intestinal system: BNF chapter 1", "prefixes": ["01"]},
+    ],
+    "tissue-viability-and-wound-care": [
+        {"id": "dressings", "label": "Wound management and other dressings: BNF 20.03", "prefixes": ["2003"]},
+        {"id": "compression", "label": "Elastic hosiery, venous ulcer compression and lymphoedema garments: BNF 21.07, 21.20 and 21.27",
+         "prefixes": ["2107", "2120", "2127"]},
+    ],
+    "ophthalmology": [
+        {"id": "eye", "label": "Eye: BNF chapter 11", "prefixes": ["11"]},
+        {"id": "eye-products", "label": "Eye products: BNF 21.30", "prefixes": ["2130"]},
+    ],
+    "ent-and-head-and-neck": [
+        {"id": "ent", "label": "Ear, nose and oropharynx: BNF chapter 12", "prefixes": ["12"]},
+        {"id": "trache", "label": "Tracheostomy and laryngectomy appliances: BNF 20.05", "prefixes": ["2005"]},
+    ],
+    "nutrition-and-dietetics": [
+        {"id": "ons", "label": "Oral nutritional supplements and enteral feeds: BNF 9.13 and 9.14",
+         "prefixes": ["0913", "0914"]},
+    ],
+    "cardiology-and-cardiac-surgery": [
+        {"id": "cv", "label": "Cardiovascular system: BNF chapter 2", "prefixes": ["02"]},
+    ],
+    "neurology-and-neurosurgery": [
+        {"id": "neuro", "label": "Antiepileptics, Parkinsonism and dementia drugs: BNF 4.8, 4.9 and 4.11",
+         "prefixes": ["0408", "0409", "0411"]},
+    ],
+    "mental-health": [
+        {"id": "mh", "label": "Hypnotics and anxiolytics, antipsychotics, antidepressants and CNS stimulants: BNF 4.1 to 4.4",
+         "prefixes": ["0401", "0402", "0403", "0404"]},
+    ],
+    "pain-management": [
+        {"id": "analgesics", "label": "Analgesics: BNF 4.7", "prefixes": ["0407"]},
+    ],
+    "oncology-and-sact": [
+        {"id": "onc", "label": "Malignant disease and immunosuppression: BNF chapter 8", "prefixes": ["08"]},
+    ],
+    "gynaecology-and-womens-health": [
+        {"id": "gynae", "label": "Obstetrics, gynaecology, contraceptives and menopause drugs: BNF 7.1, 7.2, 7.3 and 7.5",
+         "prefixes": ["0701", "0702", "0703", "0705"]},
+        {"id": "vaginal", "label": "Vaginal moisturisers: BNF 21.23", "prefixes": ["2123"]},
+    ],
+    "haematology-and-patient-blood-management": [
+        {"id": "anaemia", "label": "Anaemias and other blood disorders: BNF 9.1", "prefixes": ["0901"]},
+    ],
+}
+GP_TOP_N = 10
+GP_ICB_LEADERS = 3
+
+
+def _fmt_bnf(p):
+    if len(p) == 2:
+        return "chapter %d" % int(p)
+    if len(p) <= 6:
+        parts = [p[i:i + 2] for i in range(0, len(p), 2)]
+        return ".".join(parts)
+    return p
+
+
+class GPData:
+    """Lazy reader over data/gp-prescribing/. Shards load on first use."""
+
+    def __init__(self, root):
+        self.root = root
+        self.index = None
+        self.shards = {}
+        p = os.path.join(root, "index.json")
+        if os.path.exists(p):
+            with open(p, encoding="utf-8") as fh:
+                self.index = json.load(fh)
+
+    def shard(self, sec):
+        if sec not in self.shards:
+            p = os.path.join(self.root, "s-%s.json" % sec)
+            if os.path.exists(p):
+                with open(p, encoding="utf-8") as fh:
+                    self.shards[sec] = json.load(fh)
+            else:
+                self.shards[sec] = None
+        return self.shards[sec]
+
+
+def _pct(new, old, floor):
+    if old is None or new is None or old < floor:
+        return None
+    return round((new - old) * 100.0 / old, 1)
+
+
+def gp_market(market, gp):
+    ix = gp.index
+    periods = ix["periods"]
+    n = len(periods)
+    floor = ix.get("minBaselineItems") or 25
+    secs = [s for s in ix["sections"]
+            if any(s.startswith(p[:4]) if len(p) >= 4 else s.startswith(p)
+                   for p in market["prefixes"])]
+    items = [0.0] * n
+    cost = [0.0] * n
+    prod = {}
+    icb_tot = {}
+    icb_prod = {}
+    for sec in secs:
+        doc = gp.shard(sec)
+        if not doc:
+            continue
+        for code, sub in doc["s"].items():
+            if not any(code.startswith(p) for p in market["prefixes"]):
+                continue
+            labels = sub.get("p") or {}
+            for icb, by_key in (sub.get("t") or {}).items():
+                for key, arr in by_key.items():
+                    pk = code + key
+                    rec = prod.setdefault(pk, {"label": labels.get(key) or pk,
+                                               "generic": key.startswith("AA") and sub.get("g") is True,
+                                               "i": [0.0] * n, "c": [0.0] * n})
+                    for m, v in enumerate(arr):
+                        if v:
+                            rec["i"][m] += v
+                            items[m] += v
+                    if icb != "-" and arr and arr[-1]:
+                        icb_tot[icb] = icb_tot.get(icb, 0.0) + arr[-1]
+                        d = icb_prod.setdefault(icb, {})
+                        d[pk] = d.get(pk, 0.0) + arr[-1]
+            for key, arr in (sub.get("nc") or {}).items():
+                pk = code + key
+                rec = prod.setdefault(pk, {"label": labels.get(key) or pk,
+                                           "generic": key.startswith("AA") and sub.get("g") is True,
+                                           "i": [0.0] * n, "c": [0.0] * n})
+                for m, v in enumerate(arr):
+                    if v:
+                        rec["c"][m] += v
+                        cost[m] += v
+    if not prod:
+        return None
+    last = n - 1
+    total = items[last]
+    top = sorted(prod.items(), key=lambda kv: (-kv[1]["i"][last], kv[1]["label"]))[:GP_TOP_N]
+    names = ix.get("icbs") or {}
+    leaders = []
+    for icb in sorted(icb_prod, key=lambda c: icb_display(names.get(c, c))):
+        tot = icb_tot.get(icb) or 0.0
+        best = sorted(icb_prod[icb].items(), key=lambda kv: (-kv[1], prod[kv[0]]["label"]))[:GP_ICB_LEADERS]
+        leaders.append({
+            "icb": icb, "name": icb_display(names.get(icb, icb)), "items": int(round(tot)),
+            "leaders": [{"code": pk, "label": prod[pk]["label"], "generic": prod[pk]["generic"],
+                         "items": int(round(v)),
+                         "share": round(v * 100.0 / tot, 1) if tot else None} for pk, v in best],
+        })
+    return {
+        "id": market["id"],
+        "label": market["label"],
+        "bnf": [_fmt_bnf(p) for p in market["prefixes"]],
+        "note": market.get("note"),
+        "latestPeriod": periods[last],
+        "baselinePeriod": periods[0],
+        "items": int(round(total)),
+        "cost": int(round(cost[last])),
+        "items12m": int(round(sum(items[-12:]))),
+        "cost12m": int(round(sum(cost[-12:]))),
+        "itemsYoY": _pct(items[last], items[0], floor),
+        "products": sum(1 for r in prod.values() if r["i"][last] > 0),
+        "topNational": [{
+            "code": pk, "label": r["label"], "generic": r["generic"],
+            "items": int(round(r["i"][last])),
+            "share": round(r["i"][last] * 100.0 / total, 1) if total else None,
+            "cost": int(round(r["c"][last])),
+            "yoy": _pct(r["i"][last], r["i"][0], floor),
+        } for pk, r in top],
+        "icbLeaders": leaders,
+    }
+
+
+def build_gp_prescribing(slug, gp):
+    if gp is None or gp.index is None:
+        return None
+    markets = GP_MARKETS.get(slug)
+    ix = gp.index
+    base = {
+        "generatedOn": ix.get("generatedOn"),
+        "source": (ix.get("source") or {}).get("name"),
+        "sourceUrl": (ix.get("source") or {}).get("url"),
+        "attribution": (ix.get("source") or {}).get("attribution"),
+        "scope": ix.get("scope"),
+        "periods": [ix["periods"][0], ix["periods"][-1]],
+        "minBaselineItems": ix.get("minBaselineItems"),
+    }
+    if not markets:
+        base.update({"defined": False, "markets": [],
+                     "whyEmpty": "No BNF section is mapped to this speciality, so no GP "
+                                 "prescribing market is sized here rather than borrowing "
+                                 "a neighbouring page's."})
+        return base
+    out = [m for m in (gp_market(mk, gp) for mk in markets) if m]
+    base.update({"defined": True, "markets": out})
+    return base
+
+
+# WHO HOLDS THE MARKET, COMPUTED (30/09/2026). Lou found on a member demo that the
+# Tissue Viability page's Market Intelligence shows who holds the share in primary care,
+# in acute and on the Drug Tariff, and Dermatology showed nothing like it. The wound
+# care breakdown is a one-off hand analysis typed into the page body (NHSBSA
+# Prescription Cost Analysis by supplier, SCCL spend over £25,000, 12/09/2026); no
+# script produced it, so no other speciality could ever get one. Dermatology's page
+# body sized the market from BNF chapter 13 only ("Emollient and barrier
+# preparations", 13.02) and missed BNF 21.22 emollient devices, where most branded
+# emollients, QV included, are coded. This block computes the equivalent from the
+# daily-refreshed data for any GP market marked brandShare:
+#   primary care   NHSBSA English Prescribing Dataset (data/gp-prescribing/)
+#   secondary care NHSBSA hospital prescribing dispensed in the community
+#                  (data/hospital-prescribing/), same BNF codes
+#   Drug Tariff    this panel's own Part IX slice (drugTariff.topSuppliers)
+# A BRAND is the first word of NHSBSA's product label (bnf_products.first_word), so
+# "QV cream", "QV Gentle wash" and "QV Intensive ointment" are one brand. A label that
+# carries its supplier in brackets ("Aqueous cream (Zuche Pharmaceuticals Ltd)") is a
+# descriptive product, not a brand family, and stays on its own. Generics are one
+# "generic" row. It is BRAND share of items, never company share: the data does not
+# name the company.
+BRAND_TOP_N = 12
+BRAND_PICK_N = 30   # the picker; every panel must stay under 200 KB
+BRAND_ICB_N = 5
+BRAND_SECONDARY_N = 15
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from bnf_products import first_word  # noqa: E402
+
+
+def brand_key(label, generic):
+    if generic:
+        return "__generic__", "Generic (non-proprietary)"
+    lab = (label or "").strip()
+    if "(" in lab:
+        return "l:" + lab.lower(), lab
+    fw = first_word(lab)
+    if not fw:
+        return "l:" + lab.lower(), lab
+    tok = lab.split()[0].rstrip(",;")
+    if tok.lower() == "half" and len(lab.split()) > 1:
+        tok = lab.split()[1]
+    return "b:" + fw, tok
+
+
+class HPData:
+    """Lazy reader over data/hospital-prescribing/ (chapter shards)."""
+
+    def __init__(self, root):
+        self.root = root
+        self.index = None
+        self.shards = {}
+        p = os.path.join(root, "index.json")
+        if os.path.exists(p):
+            with open(p, encoding="utf-8") as fh:
+                self.index = json.load(fh)
+
+    def chapter(self, ch):
+        if ch not in self.shards:
+            p = os.path.join(self.root, "ch-%s.json" % ch)
+            if os.path.exists(p):
+                with open(p, encoding="utf-8") as fh:
+                    self.shards[ch] = json.load(fh)
+            else:
+                self.shards[ch] = None
+        return self.shards[ch]
+
+
+def _families(prod):
+    """prod: {pk: {"label", "generic", ...}} -> {family key: {"name", "members": [pk]}}."""
+    fam = {}
+    for pk, r in prod.items():
+        key, name = brand_key(r["label"], r["generic"])
+        f = fam.setdefault(key, {"key": key, "name": name, "members": []})
+        f["members"].append(pk)
+    return fam
+
+
+def gp_brand_share(market, gp):
+    ix = gp.index
+    periods = ix["periods"]
+    n = len(periods)
+    last = n - 1
+    floor = ix.get("minBaselineItems") or 25
+    names = ix.get("icbs") or {}
+    secs = [s for s in ix["sections"]
+            if any(s.startswith(p[:4]) if len(p) >= 4 else s.startswith(p)
+                   for p in market["prefixes"])]
+    prod = {}
+    icb_tot = {}
+    for sec in secs:
+        doc = gp.shard(sec)
+        if not doc:
+            continue
+        for code, sub in doc["s"].items():
+            if not any(code.startswith(p) for p in market["prefixes"]):
+                continue
+            labels = sub.get("p") or {}
+            for icb, by_key in (sub.get("t") or {}).items():
+                for key, arr in by_key.items():
+                    pk = code + key
+                    rec = prod.setdefault(pk, {"label": labels.get(key) or pk,
+                                               "generic": key.startswith("AA") and sub.get("g") is True,
+                                               "i": [0.0] * n, "c": [0.0] * n, "icb": {}})
+                    for m, v in enumerate(arr):
+                        if v:
+                            rec["i"][m] += v
+                    if icb != "-" and arr and arr[-1]:
+                        rec["icb"][icb] = rec["icb"].get(icb, 0.0) + arr[-1]
+                        icb_tot[icb] = icb_tot.get(icb, 0.0) + arr[-1]
+            for key, arr in (sub.get("nc") or {}).items():
+                pk = code + key
+                if pk in prod:
+                    for m, v in enumerate(arr):
+                        if v:
+                            prod[pk]["c"][m] += v
+    if not prod:
+        return None
+    total = sum(r["i"][last] for r in prod.values())
+    total12 = sum(sum(r["i"][-12:]) for r in prod.values())
+    rows = []
+    for f in _families(prod).values():
+        mem = [prod[pk] for pk in f["members"]]
+        it = [sum(r["i"][m] for r in mem) for m in range(n)]
+        ct = [sum(r["c"][m] for r in mem) for m in range(n)]
+        if it[last] <= 0 and sum(it[-12:]) <= 0:
+            continue
+        icb = {}
+        for r in mem:
+            for c, v in r["icb"].items():
+                icb[c] = icb.get(c, 0.0) + v
+        top_icb = sorted(icb.items(), key=lambda kv: (-kv[1], kv[0]))[:BRAND_ICB_N]
+        prods = sorted(mem, key=lambda r: -r["i"][last])
+        rows.append({
+            "brand": f["name"],
+            "generic": f["key"] == "__generic__",
+            "products": list(dict.fromkeys(r["label"] for r in prods if r["i"][last] > 0))[:5],
+            "items": int(round(it[last])),
+            "share": round(it[last] * 100.0 / total, 1) if total else None,
+            "cost": int(round(ct[last])),
+            "items12m": int(round(sum(it[-12:]))),
+            "share12m": round(sum(it[-12:]) * 100.0 / total12, 1) if total12 else None,
+            "yoy": _pct(it[last], it[0], floor),
+            "icbsPrescribing": sum(1 for v in icb.values() if v > 0),
+            "topIcbs": [{"icb": c, "name": icb_display(names.get(c, c)), "items": int(round(v)),
+                         "shareOfIcb": round(v * 100.0 / icb_tot[c], 1) if icb_tot.get(c) else None}
+                        for c, v in top_icb],
+        })
+    rows.sort(key=lambda r: (-r["items"], r["brand"].lower()))
+    picked = rows[:BRAND_PICK_N]
+    rest = rows[BRAND_PICK_N:]
+    return {
+        "basis": "items",
+        "latestPeriod": periods[last],
+        "window12m": [periods[max(0, n - 12)], periods[last]],
+        "items": int(round(total)),
+        "items12m": int(round(total12)),
+        "brandCount": len(rows),
+        "topN": BRAND_TOP_N,
+        "brands": picked,
+        "otherBrands": {"count": len(rest), "items": sum(r["items"] for r in rest),
+                        "share": round(sum(r["items"] for r in rest) * 100.0 / total, 1) if total else None},
+    }
+
+
+def hp_brand_share(market, hp):
+    if hp is None or hp.index is None:
+        return None
+    ix = hp.index
+    periods = ix["periods"]
+    n = len(periods)
+    floor = ix.get("minBaselineItems") or 25
+    chs = sorted({p[:2] for p in market["prefixes"]})
+    prod = {}
+    trusts = set()
+    for ch in chs:
+        doc = hp.chapter(ch)
+        if not doc:
+            continue
+        for code, sub in (doc.get("s") or {}).items():
+            if not any(code.startswith(p) for p in market["prefixes"]):
+                continue
+            labels = sub.get("p") or {}
+            generic_sub = ch not in ("20", "21", "22", "23")
+            for trust, by_key in (sub.get("t") or {}).items():
+                for key, arr in by_key.items():
+                    pk = code + key
+                    rec = prod.setdefault(pk, {"label": labels.get(key) or pk,
+                                               "generic": generic_sub and key[:2] == "AA",
+                                               "i": [0.0] * n})
+                    for m, v in enumerate(arr):
+                        if v:
+                            rec["i"][m] += v
+                    if any(arr[-12:]):
+                        trusts.add(trust)
+    if not prod:
+        return None
+    last = n - 1
+    total12 = sum(sum(r["i"][-12:]) for r in prod.values())
+    rows = []
+    for f in _families(prod).values():
+        mem = [prod[pk] for pk in f["members"]]
+        it = [sum(r["i"][m] for r in mem) for m in range(n)]
+        if sum(it[-12:]) <= 0:
+            continue
+        rows.append({"brand": f["name"], "generic": f["key"] == "__generic__",
+                     "items12m": int(round(sum(it[-12:]))),
+                     "share12m": round(sum(it[-12:]) * 100.0 / total12, 1) if total12 else None,
+                     "yoy": _pct(it[last], it[0], floor)})
+    rows.sort(key=lambda r: (-r["items12m"], r["brand"].lower()))
+    return {
+        "basis": "items",
+        "window12m": [periods[max(0, n - 12)], periods[last]],
+        "items12m": int(round(total12)),
+        "trusts": len(trusts),
+        "brandCount": len(rows),
+        "brands": rows[:BRAND_SECONDARY_N],
+        "source": (ix.get("source") or {}).get("name"),
+        "sourceUrl": (ix.get("source") or {}).get("url"),
+        "scope": ix.get("scope"),
+    }
+
+
+def build_market_share(slug, gp, hp, tariff):
+    """The computed 'who holds the market' block for each GP market marked brandShare."""
+    if gp is None or gp.index is None:
+        return None
+    out = []
+    for mk in GP_MARKETS.get(slug) or []:
+        if not mk.get("brandShare"):
+            continue
+        prim = gp_brand_share(mk, gp)
+        if not prim:
+            continue
+        sec = hp_brand_share(mk, hp)
+        dt = None
+        if tariff and tariff.get("topSuppliers"):
+            dt = {"effectiveMonth": tariff.get("effectiveMonth"),
+                  "lineCount": tariff.get("lineCount"),
+                  "supplierCount": tariff.get("supplierCount"),
+                  "bnfFilter": tariff.get("bnfFilter"),
+                  "topSuppliers": tariff.get("topSuppliers")[:12]}
+        out.append({"id": mk["id"], "label": mk["label"], "bnf": [_fmt_bnf(p) for p in mk["prefixes"]],
+                    "primary": prim, "secondary": sec, "tariff": dt})
+    if not out:
+        return None
+    return {"markets": out,
+            "gpSource": (gp.index.get("source") or {}).get("name"),
+            "gpSourceUrl": (gp.index.get("source") or {}).get("url"),
+            "attribution": (gp.index.get("source") or {}).get("attribution")}
+
+
+def market_share_rule(ms):
+    if not ms:
+        return None
+    m = ms["markets"][0]
+    p = m["primary"]
+    return (
+        "Computed at every build from NHSBSA data, not bought in and not estimated. PRIMARY "
+        "CARE: every item dispensed in England against a GP practice prescription, English "
+        "Prescribing Dataset with SNOMED code, for the BNF codes named on the market (%s), "
+        "latest month %s, with a 12-month total. SECONDARY CARE: NHS trust prescriptions "
+        "dispensed in a community pharmacy (NHSBSA hospital prescribing dispensed in the "
+        "community), the same BNF codes, 12 months; it is not in-hospital use, which NHSBSA "
+        "publishes only by chemical substance and so cannot show a brand. DRUG TARIFF: this "
+        "panel's Part IX slice, counted in tariff lines per supplier, which measures what is "
+        "listed and reimbursable, not what is sold. A BRAND is the first word of NHSBSA's "
+        "product label, so the products of one range are counted together; a label that names "
+        "its supplier in brackets stays on its own, and every generic is one row. Share is "
+        "share of ITEMS, never company share: the data does not name the company, and one "
+        "company can own several brands. A change on a year earlier is printed only where "
+        "that month had at least 25 items. An ICB's share is the brand's items as a share "
+        "of that ICB's whole market in the same month."
+        % (", ".join(m["bnf"]), p["latestPeriod"]))
+
+
+def build_mhra_dsu(slug, dsu_doc, limit=8):
+    if not dsu_doc:
+        return None
+    rows = [u for u in dsu_doc.get("updates") or [] if slug in (u.get("specialities") or [])]
+    main = [u for u in rows if not u.get("roundup")]
+    no_facet = slug in (dsu_doc.get("panelsWithNoFacet") or [])
+    return {
+        "dataAsOf": dsu_doc.get("dataAsOf"),
+        "sourcePage": dsu_doc.get("sourcePage"),
+        "noFacet": no_facet,
+        "whyEmpty": ("MHRA does not tag Drug Safety Updates to this area: no GOV.UK "
+                     "therapeutic-area facet maps to this speciality. That is a fact "
+                     "about how GOV.UK files them, not a finding that there are no "
+                     "safety updates relevant to it.") if no_facet else (
+                     None if main else "No Drug Safety Update is tagged to this speciality."),
+        "count": len(main),
+        "roundupsExcluded": len(rows) - len(main),
+        "updates": [{k: u.get(k) for k in ("title", "url", "published", "updated", "summary")}
+                    for u in main[:limit]],
+    }
+
+
+VIIIA_LINE_CAP = 80
+
+
+def viiia_prefixes(slug):
+    """Medicine prefixes (chapters 01 to 19) of the speciality's GP markets, with any
+    prefix already covered by a shorter one dropped."""
+    cand = []
+    for m in GP_MARKETS.get(slug) or []:
+        for p in m["prefixes"]:
+            if p[:2] not in ("20", "21", "22", "23") and p not in cand:
+                cand.append(p)
+    return [p for p in cand if not any(q != p and p.startswith(q) for q in cand)]
+
+
+def icb_display(name):
+    """NHSBSA writes ICB names in capitals. 'NHS NORTH EAST LONDON INTEGRATED CARE
+    BOARD' -> 'NHS North East London'. Display only; the code is carried alongside."""
+    n = re.sub(r"\s+INTEGRATED CARE BOARD$", "", (name or "").strip(), flags=re.I)
+    keep = {"NHS": "NHS", "AND": "and", "OF": "of", "THE": "the"}
+    return " ".join(keep.get(w.upper(), w.capitalize()) for w in n.split())
+
+
+def build_viiia(slug, rule, v_doc):
+    if not v_doc:
+        return None
+    whole = bool(rule.get("viiiaWhole"))
+    prefixes = viiia_prefixes(slug)
+    if not whole and not prefixes:
+        return None
+    bnf = v_doc.get("bnfBySnomed") or {}
+    rows = []
+    for r in v_doc.get("rows") or []:
+        code = bnf.get(r[5])
+        if whole or (code and code.startswith(tuple(prefixes))):
+            rows.append((r, code))
+    if not rows:
+        return None
+    cats = {}
+    prices = []
+    for r, _c in rows:
+        cats[r[3]] = cats.get(r[3], 0) + 1
+        prices.append(r[4] / 100.0)
+    order = {"M": 0, "C": 1, "A": 2, "H": 3}
+    shown = sorted(rows, key=lambda rc: (order.get(rc[0][3], 9), rc[0][0].lower()))[:VIIIA_LINE_CAP]
+    return {
+        "effectiveMonth": v_doc.get("effectiveMonth"),
+        "latestPublishedMonth": v_doc.get("latestPublishedMonth"),
+        "dataAsOf": v_doc.get("dataAsOf"),
+        "sourcePage": v_doc.get("sourcePage"),
+        "whole": whole,
+        "bnfFilter": None if whole else [_fmt_bnf(p) for p in prefixes],
+        "lineCount": len(rows),
+        "categoryCounts": cats,
+        "fileLines": len(v_doc.get("rows") or []),
+        "fileLinesWithoutBnf": v_doc.get("bnfUnmapped"),
+        "priceMin": round(min(prices), 2),
+        "priceMax": round(max(prices), 2),
+        "linesShown": len(shown),
+        "lines": [{"medicine": r[0], "pack": ("%s %s" % (r[1], r[2])).strip(),
+                   "category": r[3], "price": round(r[4] / 100.0, 2), "bnf": c}
+                  for r, c in shown],
+    }
+
+
+# ---------------------------------------------------------------------------
+# COUNTS IN RULE TEXT ARE COMPUTED, NEVER TYPED (29/09/2026). The dermatology rule
+# said "all thirteen" awards for a fortnight after the feed reached seventeen. A
+# number in published rule text that describes this panel's own data is written as a
+# token, [[name:argument|format]], and filled from the data at build time:
+#
+#   awards, awardsShown, awardCap, buyerCap       the matched set, the cap
+#   awardsTitle:<regex>, awardsNotTitle:<regex>   matched rows whose title does / not
+#   awardsBuyer:<regex>                           matched rows whose buyer matches
+#   feedTitle:<regex>                             rows in EITHER award feed, whole
+#   frameworks, suppliers, unresolved             this panel's lists
+#   supOnAll, supOnAllBut1                        suppliers on every / all-but-one fw
+#   fwListed:<name>, fwStated:<name>              a framework's names / stated total
+#   fwListVsStated:<name>                         "58, matching the total it states"
+#   fwExpires:<name>, fwExpiring:<name>           tense follows today's date
+#   fwTotal, fwWithRef:<ref>, fwAllWithRef:<ref>  the Hub's framework record
+#   tariffLines, tariffShared:<slug>, tariffUnique:<slug>, partLines:<part>, partIxLines
+#
+# An arithmetic suffix is allowed (suppliers-1). Formats: word, Word, WORD. An unknown
+# token or a framework name that no longer matches STOPS THE BUILD: a stale sentence
+# must not be published because its anchor moved.
+# ---------------------------------------------------------------------------
+_TOKEN = re.compile(r"\[\[(.+?)\]\]")
+_WORDS = ("zero one two three four five six seven eight nine ten eleven twelve thirteen "
+          "fourteen fifteen sixteen seventeen eighteen nineteen").split()
+_TENS = "twenty thirty forty fifty sixty seventy eighty ninety".split()
+
+
+def number_word(n):
+    if 0 <= n < 20:
+        return _WORDS[n]
+    if 20 <= n < 100:
+        t, u = divmod(n, 10)
+        return _TENS[t - 2] + ("-" + _WORDS[u] if u else "")
+    return "{:,}".format(n)
+
+
+def _fw_lookup(name, ctx):
+    for f in ctx["frameworks"]:
+        if (f.get("name") or "").startswith(name):
+            return f, True
+    for f in ctx["fw_doc"].get("frameworks") or []:
+        if (f.get("name") or "").startswith(name):
+            return f, False
+    raise SystemExit("build_speciality_panels: rule text for %s names framework %r, which "
+                     "is no longer in frameworks.json. Re-read the brief and fix the rule."
+                     % (ctx["slug"], name))
+
+
+def _parse_date(txt):
+    try:
+        return datetime.datetime.strptime(txt.strip(), "%d %B %Y").date()
+    except (AttributeError, ValueError):
+        return None
+
+
+def _token_value(name, arg, ctx):
+    aw = ctx["awards"]
+    if name == "awards":
+        return len(aw)
+    if name == "awardsShown":
+        return ctx["awardsShown"]
+    if name == "awardCap":
+        return AWARD_CAP
+    if name == "buyerCap":
+        return ctx["rule"].get("buyerCap")
+    if name in ("awardsTitle", "awardsNotTitle", "awardsBuyer"):
+        rx = re.compile(arg, re.I)
+        field = "buyer" if name == "awardsBuyer" else "title"
+        hit = sum(1 for a in aw if rx.search(a.get(field) or ""))
+        return len(aw) - hit if name == "awardsNotTitle" else hit
+    if name == "feedTitle":
+        rx = re.compile(arg, re.I)
+        seen = set()
+        th = ctx["th_doc"]
+        ix = {k: i for i, k in enumerate(th["schema"])}
+        for r in th["rows"]:
+            if rx.search(r[ix["t"]] or ""):
+                seen.add(r[ix["u"]] or (r[ix["t"]], r[ix["d"]]))
+        for a in ctx["fa_doc"]["awards"]:
+            if rx.search(a.get("title") or ""):
+                seen.add(a.get("url") or (a.get("title"), a.get("published")))
+        return len(seen)
+    if name == "frameworks":
+        return len(ctx["frameworks"])
+    if name == "suppliers":
+        return len(ctx["suppliers"])
+    if name == "unresolved":
+        return sum(1 for s in ctx["suppliers"] if not s["resolved"])
+    if name in ("supOnAll", "supOnAllBut1"):
+        n = len(ctx["frameworks"]) - (0 if name == "supOnAll" else 1)
+        return sum(1 for s in ctx["suppliers"] if len(s["frameworks"]) == n)
+    if name in ("fwListed", "fwStated", "fwListVsStated", "fwExpires", "fwExpiring"):
+        f, in_panel = _fw_lookup(arg, ctx)
+        listed = len(f.get("suppliers") or [])
+        raw = next((x for x in ctx["fw_doc"]["frameworks"] if x.get("name") == f.get("name")), f)
+        stated = raw.get("supplierCount")
+        if name == "fwListed":
+            return listed
+        if name == "fwStated":
+            return stated
+        if name == "fwListVsStated":
+            if stated is None:
+                return "%s, with no total stated on the brief" % "{:,}".format(listed)
+            if stated == listed:
+                return "%s, matching the total the brief states" % "{:,}".format(listed)
+            return "%s listed against a stated total of %s" % ("{:,}".format(listed), "{:,}".format(stated))
+        ends = raw.get("ends") or f.get("ends")
+        d = _parse_date(ends or "")
+        if d is None:
+            return "with no end date in the Hub's framework record"
+        past = d < datetime.date.today()
+        if name == "fwExpires":
+            return ("expired on %s" if past else "expires on %s") % ends
+        return ("which expired on %s" if past else "expiring %s") % ends
+    if name == "fwTotal":
+        return len(ctx["fw_doc"].get("frameworks") or [])
+    if name == "fwWithRef":
+        return sum(1 for f in ctx["frameworks"] if f.get("reference") == arg)
+    if name == "fwAllWithRef":
+        return sum(1 for f in ctx["fw_doc"].get("frameworks") or [] if f.get("reference") == arg)
+    if name == "tariffLines":
+        return len(ctx["tariffRows"])
+    if name in ("tariffShared", "tariffUnique"):
+        other = tariff_rows(SPECIALITY_RULES[arg], ctx["dt_doc"])
+        keys = {tuple(r) for r in other}
+        shared = sum(1 for r in ctx["tariffRows"] if tuple(r) in keys)
+        return shared if name == "tariffShared" else len(ctx["tariffRows"]) - shared
+    if name == "partLines":
+        ix = {k: i for i, k in enumerate(ctx["dt_doc"]["schema"])}
+        return sum(1 for r in ctx["dt_doc"]["rows"] if r[ix["part"]] == arg)
+    if name == "partIxLines":
+        return len(ctx["dt_doc"]["rows"])
+    raise SystemExit("build_speciality_panels: unknown count token [[%s]] in the %s rule"
+                     % (name, ctx["slug"]))
+
+
+def render_counts(text, ctx):
+    """Fill every [[token]] in a rule string from this build's data."""
+    if not text or "[[" not in text:
+        return text
+
+    def one(m):
+        body = m.group(1)
+        fmt = None
+        if "|" in body:
+            body, fmt = body.rsplit("|", 1)
+        arg = None
+        if ":" in body:
+            body, arg = body.split(":", 1)
+        adj = 0
+        am = re.fullmatch(r"([A-Za-z0-9]+)([+-]\d+)", body)
+        if am:
+            body, adj = am.group(1), int(am.group(2))
+        v = _token_value(body, arg, ctx)
+        if isinstance(v, str):
+            return v
+        if v is None:
+            raise SystemExit("build_speciality_panels: [[%s]] has no value for %s"
+                             % (m.group(1), ctx["slug"]))
+        v += adj
+        if fmt in ("word", "Word", "WORD"):
+            w = number_word(v)
+            return w if fmt == "word" else (w.capitalize() if fmt == "Word" else w.upper())
+        return "{:,}".format(v)
+
+    out = _TOKEN.sub(one, text)
+    if "[[" in out:
+        raise SystemExit("build_speciality_panels: unrendered token left in the %s rule"
+                         % ctx["slug"])
+    return out
+
+
+# MONEY IS PRINTED WITH A POUND SIGN (29/09/2026). Three published sentences on the
+# nutrition and obesity panels read "638.2m", "89m" and "574,302,390" of net ingredient
+# cost with no currency at all. Every rule string is checked before it is written: a
+# money-shaped figure with no pound sign, or any dollar sign, stops the build.
+_MONEY_BARE = (
+    re.compile(r"(?<![\u00a3\w.,])\d[\d,]*(?:\.\d+)?\s?(?:m|bn|million|billion)\b"),
+    re.compile(r"(?<![\u00a3\d.,])\d{1,3}(?:,\d{3})+(?:\.\d+)?\s+(?:of|in)\s+"
+               r"(?:net ingredient cost|spend|actual cost|cost|value)\b"),
+    re.compile(r"\$\s?\d"),
+)
+
+
+def check_money(slug, rules):
+    for key, text in (rules or {}).items():
+        if not isinstance(text, str):
+            continue
+        for rx in _MONEY_BARE:
+            m = rx.search(text)
+            if m:
+                raise SystemExit(
+                    "build_speciality_panels: the %s %s rule prints money without a pound "
+                    "sign: ...%s... Write it as \u00a3 in the rule text." % (
+                        slug, key, text[max(0, m.start() - 40):m.end() + 20]))
+
+
+def check_absent_frameworks(slug, rule, fw_doc):
+    """A rule that says a named agreement is NOT in the Hub's framework record is
+    re-checked on every build. If it has since been crawled, the sentence is stale and
+    the build stops until someone reads the brief and rewrites it."""
+    names = [(f.get("name") or "").lower() for f in fw_doc.get("frameworks") or []]
+    for want in rule.get("absentFrameworks") or ():
+        if any(n.startswith(want.lower()) for n in names):
+            raise SystemExit(
+                "build_speciality_panels: the %s rule says %r is not in the Hub's framework "
+                "record, and it now is. Re-read its brief and rewrite the rule text."
+                % (slug, want))
+
+
 def build(slug, sources):
     rule = SPECIALITY_RULES.get(slug)
     generated = datetime.date.today().isoformat()
@@ -8323,15 +9485,28 @@ def build(slug, sources):
 
     frameworks = build_frameworks(rx, rule, fw_doc)
     suppliers = build_suppliers(frameworks, sources["registry"])
-    awards, award_total, awards_withheld = build_awards(rx, rule, th_doc, fa_doc)
+    directory, tagged = build_directory_suppliers(slug, frameworks, suppliers, sources)
+    annotate_framework_suppliers(suppliers, tagged)
+    matched = matched_awards(rx, rule, th_doc, fa_doc)
+    awards, award_total, awards_withheld = cap_awards(rule, matched)
     open_tenders = build_open_tenders(rx, slug, ot_doc)
     tariff = build_tariff(rule, dt_doc)
     local_intel = build_local_intel(slug, sources.get("local_intel") or {})
+    gp = build_gp_prescribing(slug, sources.get("gp"))
+    dsu = build_mhra_dsu(slug, sources.get("mhra_dsu"))
+    viiia = build_viiia(slug, rule, sources.get("tariff_viiia"))
+    market_share = build_market_share(slug, sources.get("gp"), sources.get("hp"), tariff)
+    check_absent_frameworks(slug, rule, fw_doc)
 
-    note = rule.get("coverageNote")
-    qualify = (lambda text: (text + " " + note) if note else text)
+    ctx = {"slug": slug, "rule": rule, "frameworks": frameworks, "suppliers": suppliers,
+           "awards": matched, "awardsShown": len(awards), "fw_doc": fw_doc,
+           "th_doc": th_doc, "fa_doc": fa_doc, "dt_doc": dt_doc,
+           "tariffRows": tariff_rows(rule, dt_doc)}
+    R = (lambda text: render_counts(text, ctx))
+    note = R(rule.get("coverageNote"))
+    qualify = (lambda text: R(text + " " + note) if note else R(text))
 
-    return {
+    doc = {
         "_notice": sources["notice"],
         "slug": slug,
         "label": rule["label"],
@@ -8344,6 +9519,12 @@ def build(slug, sources):
             "openTenders": ot_doc.get("dataAsOf"),
             "drugTariff": dt_doc.get("dataAsOf"),
             "localIntel": (sources.get("local_intel") or {}).get("checkedOn"),
+            "supplierDirectory": (sources.get("seed_meta") or {}).get("dataAsOf"),
+            "gpPrescribing": (gp or {}).get("generatedOn"),
+            "mhraDsu": (dsu or {}).get("dataAsOf"),
+            "drugTariffViiia": (viiia or {}).get("dataAsOf"),
+            "hospitalPrescribing": ((sources.get("hp") and sources["hp"].index) or {}).get("generatedOn")
+            if market_share else None,
         },
         "rules": {
             "localIntel": (
@@ -8360,11 +9541,12 @@ def build(slug, sources):
                 if rule["frameworks"] is None and rule.get("frameworksFinding") else
                 ("NO NHS Supply Chain framework covers this speciality. That is a finding "
                  "about the patch, not a missing filter: every NHSSC framework name was "
-                 "read and none of them is this speciality's. Suppliers on this page are "
-                 "therefore empty for the same reason, because the supplier list is built "
-                 "from the speciality's own frameworks and there are none to build it "
-                 "from. Where a supplier here does appear on an NHSSC framework, it is "
-                 "another speciality's framework and is counted on that page.")
+                 "read and none of them is this speciality's. The framework-named supplier "
+                 "list on this page is therefore empty for the same reason, because it is "
+                 "built from the speciality's own frameworks and there are none to build it "
+                 "from. Suppliers the Hub's supplier directory tags to this speciality are "
+                 "listed separately and labelled as directory-tagged; where one of them is on "
+                 "another speciality's NHSSC framework, that framework is named against it.")
                 if rule["frameworks"] is None else
                 ("NHS Supply Chain framework names matching /%s/i. NHSSC names a framework "
                  "after its clinical category, so the name is the key; the CBU category "
@@ -8373,12 +9555,12 @@ def build(slug, sources):
             "suppliers": qualify(
                 (rule.get("frameworksFinding") or {}).get("suppliers")
                 if rule["frameworks"] is None and rule.get("frameworksFinding") else
-                ("No supplier list is published for this speciality, because this patch has no "
-                 "NHS Supply Chain framework for one to be drawn from. This panel names "
-                 "suppliers only where the procurement record names them on this speciality's "
-                 "own frameworks. It will not fall back to a keyword guess against the "
-                 "supplier directory, which would return firms that sell to this patch and "
-                 "firms that merely mention it in the same list.")
+                ("No supplier list is published for this speciality from the framework route, because "
+                 "this patch has no NHS Supply Chain framework for one to be drawn from. The "
+                 "framework-named list only ever names suppliers where the procurement record "
+                 "names them on this speciality's own frameworks. It never falls back to a "
+                 "keyword guess against the supplier directory, which would return firms that "
+                 "sell to this patch and firms that merely mention it in the same list.")
                 if rule["frameworks"] is None else
                 "Every supplier NHS Supply Chain names on the frameworks above, resolved to one "
                 "name per company through the Hub's alias registry, and ordered by how many of "
@@ -8397,7 +9579,7 @@ def build(slug, sources):
                 ("Award-stage notices whose TITLE matches /%s/i and does not match /%s/i. %s "
                  "%%s Buyer names are never matched on." % (
                      rule["include"], rule["exclude"],
-                     rule.get("excludeFinding")
+                     R(rule.get("excludeFinding"))
                      or ("The exclusion list exists because every pattern in it matched a real "
                          "notice that was not this speciality.")))
             ) % (
@@ -8414,7 +9596,7 @@ def build(slug, sources):
                 "Notices still open for bidding, matched the same way. An empty list means no "
                 "open notice on this patch today, not that none was looked for."
             ),
-            "drugTariff": (
+            "drugTariff": R(
                 ("NHSBSA Drug Tariff Part %s for the stated effective month, narrowed to the "
                  "lines NHSBSA itself files under BNF %s, and then summarised. The BNF code "
                  "is NHSBSA's own classification of each line and is used in preference to "
@@ -8423,7 +9605,7 @@ def build(slug, sources):
                  "about what the product is. A line published without a BNF code is counted "
                  "only if its virtual medicinal product description matches /%s/i. The part "
                  "is sliced rather than claimed whole because the part is not this "
-                 "speciality: Part IXA is some 56,800 lines, most of them dressings and "
+                 "speciality: Part IXA is [[partLines:IXA]] lines, most of them dressings and "
                  "elastic hosiery, which are the tissue viability page's. Every count and "
                  "price below is taken from the lines selected. Prices are the reimbursement "
                  "price at publication, converted from the pence NHSBSA publishes, and are "
@@ -8438,7 +9620,7 @@ def build(slug, sources):
                  "marker often lives only in the brand: a half-unit insulin pen sold as "
                  "JuniorSTAR is a children's dosing device whose generic description says "
                  "nothing about children. The parts are sliced rather than claimed whole "
-                 "because no part of the tariff is this speciality: Part IXA alone is 56,833 "
+                 "because no part of the tariff is this speciality: Part IXA alone is [[partLines:IXA]] "
                  "lines of dressings and elastic hosiery, which are the tissue viability "
                  "page's. THE LIMIT OF THIS RULE, STATED RATHER THAN HIDDEN: a product for "
                  "children named without one of those words, which is to say a small-size "
@@ -8453,7 +9635,7 @@ def build(slug, sources):
                 ("NHSBSA Drug Tariff Part %s for the stated effective month, narrowed to the "
                  "lines whose virtual medicinal product description matches /%s/i, and then "
                  "summarised. The part is sliced rather than claimed whole because the part is "
-                 "not this speciality: Part IXA is 56,833 lines of dressings and elastic "
+                 "not this speciality: Part IXA is [[partLines:IXA]] lines of dressings and elastic "
                  "hosiery, which are the tissue viability page's, and only the lines this "
                  "pattern selects belong here. Every count and price below is taken from those "
                  "lines. Prices are the reimbursement price at publication, converted from the "
@@ -8470,6 +9652,11 @@ def build(slug, sources):
                 "(IXC) and elastic hosiery (IXR); nothing on this patch is listed there, so "
                 "the panel carries no tariff rather than reaching for the nearest part."
             ),
+            "directorySuppliers": directory_rule(slug, directory),
+            "gpPrescribing": gp_rule(gp),
+            "mhraDsu": dsu_rule(dsu),
+            "drugTariffViiia": viiia_rule(viiia),
+            "marketShare": market_share_rule(market_share),
         },
         "counts": {
             "frameworks": len(frameworks),
@@ -8480,6 +9667,13 @@ def build(slug, sources):
             "awardsWithheldByBuyerCap": awards_withheld,
             "openTenders": len(open_tenders),
             "localIntel": len(local_intel),
+            "suppliersFrameworkNamedAlsoTagged": sum(1 for s in suppliers if s.get("directoryTagged")),
+            "suppliersDirectoryTagged": len(directory),
+            "suppliersDirectoryOnOtherFrameworks": sum(1 for d in directory if d["otherFrameworks"]),
+            "suppliersDirectoryWithFrameworkNote": sum(1 for d in directory if d["frameworkNote"]),
+            "gpMarkets": len((gp or {}).get("markets") or []),
+            "mhraDsu": (dsu or {}).get("count", 0),
+            "drugTariffViiiaLines": (viiia or {}).get("lineCount", 0),
         },
         "frameworks": frameworks,
         "suppliers": suppliers,
@@ -8488,7 +9682,101 @@ def build(slug, sources):
         "drugTariff": tariff,
         "localIntel": local_intel,
         "localIntelGroups": (sources.get("local_intel") or {}).get("groups") or {},
+        "directorySuppliers": directory,
+        "gpPrescribing": gp,
+        "mhraDsu": dsu,
+        "drugTariffViiia": viiia,
+        "marketShare": market_share,
     }
+    if not market_share:
+        del doc["marketShare"]
+        del doc["rules"]["marketShare"]
+    check_money(slug, doc["rules"])
+    return doc
+
+
+def directory_rule(slug, directory):
+    reaches = sorted(i for i, panels in SEED_TAG_TO_PANELS.items() if slug in panels)
+    if not reaches:
+        return ("No supplier directory label maps to this speciality, so no directory-tagged "
+                "supplier is listed. That is a gap in the directory's vocabulary, not a "
+                "finding that no company sells here, and no neighbouring page's list is "
+                "borrowed to fill it.")
+    on_other = sum(1 for d in directory if d["frameworkNote"])
+    return (
+        "Companies the Hub's own supplier directory files under this speciality, from the "
+        "speciality labels on each company's directory record, resolved through "
+        "speciality-label-map.json and speciality-map.json (Compare ids: %s). They are "
+        "labelled DIRECTORY-TAGGED because the tag is the Hub's filing of a company's "
+        "range, not a procurement record: being listed here is not evidence of a contract "
+        "or of volume, and the list is not a census of the market. A company that is also "
+        "on this speciality's own frameworks is listed once, with the framework-named "
+        "suppliers, and marked as also directory-tagged. WHERE A COMPANY IS ON ANOTHER "
+        "FRAMEWORK: where a directory-tagged company is named on an NHS Supply Chain framework that is "
+        "not counted as this speciality's, it is still listed, with that framework named "
+        "against it and linked, so it is not lost from the page. %s of the %s listed here "
+        "carry such a note. Framework names and links come from NHS Supply Chain's own "
+        "contract launch briefs as held in frameworks.json; an agreement the directory "
+        "records from another buying organisation, such as an NHS Shared Business Services "
+        "framework, is shown as the directory states it."
+        % (", ".join(reaches), "{:,}".format(on_other), "{:,}".format(len(directory))))
+
+
+def gp_rule(gp):
+    if not gp:
+        return None
+    if not gp.get("defined"):
+        return gp.get("whyEmpty")
+    return (
+        "%s %s Each market below is a set of BNF codes exactly as NHSBSA classifies them, "
+        "named with the market. Figures are for the latest month in the dataset (%s) with a "
+        "12-month total; a change on the same month a year earlier is published only where "
+        "that month had at least %s items, and otherwise no percentage is printed. Share is "
+        "share of ITEMS by NHSBSA product (BNF code characters 1 to 11, split to 13 where a "
+        "catch-all code holds several brands). It is product share, not company share: the "
+        "dataset does not name the company, and one company can hold several products. An "
+        "ICB's leaders are ranked within that ICB's own total for the same market and month. "
+        "%s"
+        % (gp.get("scope") or "", "Source: %s." % gp.get("source"),
+           gp["periods"][1], gp.get("minBaselineItems"), gp.get("attribution") or ""))
+
+
+def dsu_rule(dsu):
+    if not dsu:
+        return None
+    if dsu.get("noFacet"):
+        return dsu["whyEmpty"]
+    return (
+        "Every MHRA Drug Safety Update that GOV.UK itself tags to a therapeutic area mapped "
+        "to this speciality in config/mhra-dsu-speciality-map.json. The speciality comes only "
+        "from GOV.UK's own facet, never from the title or the text. The monthly 'Letters and "
+        "medicine recalls sent to healthcare professionals' roundup is left out (%s here). "
+        "Newest first; the count is every tagged update in the archive, and the list shows the "
+        "most recent. MHRA Drug Safety Update, GOV.UK, as at %s."
+        % ("{:,}".format(dsu.get("roundupsExcluded") or 0), dsu.get("dataAsOf")))
+
+
+def viiia_rule(v):
+    if not v:
+        return None
+    if v.get("whole"):
+        scope = "every line in the file, because the medicine list as a whole is this speciality"
+    else:
+        scope = ("narrowed to the lines whose medicine NHSBSA prescribes under BNF %s. The BNF code is the "
+                 "one NHSBSA attaches to the line's VMP SNOMED code in its English Prescribing "
+                 "Dataset, the same classification-first approach as the Part IX slice, never a "
+                 "medicine-name pattern. %s of the %s lines in the file carry no BNF code because "
+                 "the medicine was not prescribed in primary care in the months read, so this "
+                 "slice can understate the range and does not overstate it"
+                 % (" or ".join(v["bnfFilter"]), "{:,}".format(v.get("fileLinesWithoutBnf") or 0),
+                    "{:,}".format(v.get("fileLines") or 0)))
+    return (
+        "NHSBSA Drug Tariff Part VIIIA, the basic prices of generic medicines, for effective "
+        "month %s: %s. Every count and price is taken from the lines selected. "
+        "Prices are the basic price at publication, converted from the pence NHSBSA "
+        "publishes, and are not necessarily today's. The list shows at most %d lines, "
+        "Category M first."
+        % (v.get("effectiveMonth"), scope, VIIIA_LINE_CAP))
 
 
 def build_local_intel(slug, li_doc):
@@ -8510,6 +9798,25 @@ def build_local_intel(slug, li_doc):
 
 
 def main():
+    sources = load_sources()
+    slugs = sys.argv[1:] or sorted(SPECIALITY_RULES)
+    os.makedirs(OUT, exist_ok=True)
+    for slug in slugs:
+        doc = build(slug, sources)
+        path = os.path.join(OUT, slug + ".json")
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump(doc, fh, indent=1, ensure_ascii=False)
+        c = doc.get("counts") or {}
+        print("%-38s frameworks=%s suppliers=%s awards=%s/%s open=%s tariff=%s  (%d KB)" % (
+            slug, c.get("frameworks"), c.get("suppliers"), c.get("awardsShown"),
+            c.get("awardsMatched"), c.get("openTenders"),
+            (doc.get("drugTariff") or {}).get("lineCount") if doc.get("drugTariff") else "-",
+            os.path.getsize(path) // 1024))
+
+
+def load_sources():
+    """Every input the build reads, loaded once. Tests call this to build a panel in
+    memory without writing data/speciality-panels/."""
     sources = {
         "frameworks": load("frameworks.json"),
         "tender_history": load("tender-history.json"),
@@ -8537,20 +9844,20 @@ def main():
                            "scripts/stamp_notice.py walks only data/*.json.")
     sources["notice"] = notice
     sources["registry"] = company_alias.load_registry()
-
-    slugs = sys.argv[1:] or sorted(SPECIALITY_RULES)
-    os.makedirs(OUT, exist_ok=True)
-    for slug in slugs:
-        doc = build(slug, sources)
-        path = os.path.join(OUT, slug + ".json")
-        with open(path, "w", encoding="utf-8") as fh:
-            json.dump(doc, fh, indent=1, ensure_ascii=False)
-        c = doc.get("counts") or {}
-        print("%-38s frameworks=%s suppliers=%s awards=%s/%s open=%s tariff=%s  (%d KB)" % (
-            slug, c.get("frameworks"), c.get("suppliers"), c.get("awardsShown"),
-            c.get("awardsMatched"), c.get("openTenders"),
-            (doc.get("drugTariff") or {}).get("lineCount") if doc.get("drugTariff") else "-",
-            os.path.getsize(path) // 1024))
+    # Phase 2 sources. Each is optional in the sense that a missing file yields no
+    # section rather than a crash, and the panel says which sections it carries.
+    seed_doc = load("supplier-seed.json")
+    sources["seed"] = seed_doc.get("suppliers") or []
+    sources["seed_meta"] = {"dataAsOf": max(
+        [str(x.get("verified"))[:10] for x in sources["seed"] if x.get("verified")] or [None])}
+    sources["labelResolver"] = seed_label_resolver(load("speciality-label-map.json"),
+                                                   load("speciality-map.json"))
+    sources["gp"] = GPData(os.path.join(DATA, "gp-prescribing"))
+    sources["hp"] = HPData(os.path.join(DATA, "hospital-prescribing"))
+    for key, name in (("mhra_dsu", "mhra-dsu.json"), ("tariff_viiia", "drug-tariff-part-viiia.json")):
+        path = os.path.join(DATA, name)
+        sources[key] = load(name) if os.path.exists(path) else None
+    return sources
 
 
 if __name__ == "__main__":

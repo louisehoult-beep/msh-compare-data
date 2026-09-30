@@ -809,6 +809,121 @@ def check_no_person_contact_details():
 
 
 # --------------------------------------------------------------------------
+# 5c. MHRA DRUG SAFETY UPDATES and DRUG TARIFF PART VIIIA (added 29/09/2026)
+# --------------------------------------------------------------------------
+# Two speciality-panel sources, each with one writer: scripts/refresh_mhra_dsu.py
+# (.github/workflows/mhra-dsu.yml) and scripts/refresh_drug_tariff_part_viiia.py
+# (.github/workflows/drug-tariff.yml). Both optional: an absent file is a no-op.
+#
+# The DSU check RE-DERIVES every row's specialities from
+# config/mhra-dsu-speciality-map.json with the writer's own map_facets(), so the
+# table and the data cannot drift, and a speciality can only ever come from
+# GOV.UK's own facet, never from a guess. Every target must be a real panel.
+DSU_URL_PREFIX = "https://www.gov.uk/drug-safety-update/"
+DSU_MAP = os.path.join("config", "mhra-dsu-speciality-map.json")
+VIIIA_SCHEMA = ["medicine", "packSize", "unit", "category", "price", "vmpSnomed"]
+VIIIA_CATEGORIES = {"A", "C", "H", "M"}
+VIIIA_MIN_ROWS = 3000   # NHSBSA's file has run ~3,530 rows in 2026
+
+
+def _panel_slugs():
+    d = os.path.join(DATA, "speciality-panels")
+    if not os.path.isdir(d):
+        return set()
+    return {fn[:-5] for fn in os.listdir(d) if fn.endswith(".json")}
+
+
+def check_mhra_dsu(doc):
+    if doc is None:
+        return
+    sys.path.insert(0, os.path.join(REPO_DIR, "scripts"))
+    try:
+        from refresh_mhra_dsu import map_facets, validate_map
+        # The table is code, not data: read the checked copy if one is present
+        # (test_verify.py's --root copy), otherwise the repo's own.
+        path = DSU_MAP if os.path.exists(DSU_MAP) else os.path.join(REPO_DIR, DSU_MAP)
+        with open(path, encoding="utf-8") as fh:
+            table = json.load(fh)["facets"]
+    except Exception as exc:
+        FAIL("mhra-dsu", "cannot load the writer's mapping rule or %s (%s), so no "
+                         "speciality on data/mhra-dsu.json can be re-derived." % (DSU_MAP, exc))
+        return
+    slugs = _panel_slugs()
+    for e in validate_map(table, sorted(slugs)):
+        FAIL("mhra-dsu", "mapping table: %s" % e)
+    rows = doc.get("updates") or []
+    counts = doc.get("counts") or {}
+    if counts.get("updates") != len(rows):
+        FAIL("mhra-dsu", "counts.updates is %r but the file holds %d rows"
+             % (counts.get("updates"), len(rows)))
+    if not (doc.get("coverage") or {}).get("complete"):
+        FAIL("mhra-dsu", "coverage.complete is not true: a partial walk of GOV.UK's index "
+                         "must not publish (the writer refuses; this file was not written by it)")
+    seen, by_spec, bad = set(), {}, []
+    t = today().isoformat()
+    for r in rows:
+        url = r.get("url") or ""
+        if not url.startswith(DSU_URL_PREFIX):
+            bad.append("url not a GOV.UK Drug Safety Update: %r" % url)
+        if url in seen:
+            bad.append("duplicate row %s" % url)
+        seen.add(url)
+        if not (r.get("title") or "").strip():
+            bad.append("no title: %s" % url)
+        pub = r.get("published") or ""
+        if not re.match(r"^\d{4}-\d{2}-\d{2}$", pub) or pub > t:
+            bad.append("published %r is not a real past date: %s" % (pub, url))
+        want = sorted(map_facets(r.get("therapeuticAreas") or [], table)[0])
+        if r.get("specialities") != want:
+            bad.append("%s carries specialities %s but its GOV.UK facets map to %s"
+                       % (url, r.get("specialities"), want))
+        for s_ in r.get("specialities") or []:
+            by_spec[s_] = by_spec.get(s_, 0) + 1
+            if s_ not in slugs:
+                bad.append("%s tagged %r, which has no speciality panel" % (url, s_))
+    for b in bad[:10]:
+        FAIL("mhra-dsu", b)
+    if len(bad) > 10:
+        FAIL("mhra-dsu", "... and %d more row problem(s)" % (len(bad) - 10))
+    stated = {k: v for k, v in (counts.get("bySpeciality") or {}).items() if v}
+    if stated != by_spec:
+        FAIL("mhra-dsu", "counts.bySpeciality does not equal the rows")
+
+
+def check_drug_tariff_viiia(doc):
+    if doc is None:
+        return
+    if doc.get("schema") != VIIIA_SCHEMA:
+        FAIL("tariff-viiia", "schema drifted: %r" % doc.get("schema"))
+        return
+    rows = doc.get("rows") or []
+    if doc.get("rowCount") != len(rows):
+        FAIL("tariff-viiia", "rowCount %r does not match %d rows" % (doc.get("rowCount"), len(rows)))
+    if len(rows) < VIIIA_MIN_ROWS:
+        FAIL("tariff-viiia", "%d rows is implausibly low for Part VIIIA (floor %d)"
+             % (len(rows), VIIIA_MIN_ROWS))
+    em = doc.get("effectiveMonth") or ""
+    nxt = today().replace(day=1) + datetime.timedelta(days=32)
+    if not re.match(r"^\d{4}-\d{2}$", em) or em > nxt.strftime("%Y-%m"):
+        FAIL("tariff-viiia", "effectiveMonth %r is not a real month at or before next month" % em)
+    if not (doc.get("source") or "").startswith("https://www.nhsbsa.nhs.uk/"):
+        FAIL("tariff-viiia", "source %r is not an NHSBSA file" % doc.get("source"))
+    cats, bad = {}, 0
+    for r in rows:
+        if (len(r) != len(VIIIA_SCHEMA) or r[3] not in VIIIA_CATEGORIES
+                or not isinstance(r[4], int) or isinstance(r[4], bool) or r[4] <= 0
+                or not str(r[0]).strip()):
+            bad += 1
+            continue
+        cats[r[3]] = cats.get(r[3], 0) + 1
+    if bad:
+        FAIL("tariff-viiia", "%d row(s) with a bad shape, category, price or name" % bad)
+    stated = {k: v for k, v in (doc.get("categoryCounts") or {}).items() if v}
+    if stated != cats:
+        FAIL("tariff-viiia", "categoryCounts %r does not equal the rows %r" % (stated, cats))
+
+
+# --------------------------------------------------------------------------
 # 6. SHRINK GUARD
 # --------------------------------------------------------------------------
 def check_shrink():
@@ -816,7 +931,9 @@ def check_shrink():
                         ("data/trust-pressures.json",
                          lambda d: len(d.get("trusts", {}))),
                         ("data/trust-contacts.json",
-                         lambda d: sum(len(v) for v in d.get("trusts", {}).values()))):
+                         lambda d: sum(len(v) for v in d.get("trusts", {}).values())),
+                        ("data/mhra-dsu.json", lambda d: len(d.get("updates", []))),
+                        ("data/drug-tariff-part-viiia.json", lambda d: len(d.get("rows", [])))):
         if not os.path.exists(path):
             continue
         old = committed(path)
@@ -5329,6 +5446,120 @@ def check_hospital_prescribing(doc):
 
 
 # --------------------------------------------------------------------------
+# GP PRESCRIBING (NHSBSA EPD with SNOMED) — data/gp-prescribing/
+# --------------------------------------------------------------------------
+# Primary care prescribing aggregated to the 36 current ICBs, one shard per BNF
+# section, built by scripts/refresh_gp_prescribing.py (added 29/09/2026). Optional
+# like the hospital layer: no index, nothing fires. Built, it must be whole. The
+# series rules are the hospital ones; the two added checks are the ones specific
+# to this build: every ICB key must be a current ICB, and every shard must add up
+# to the server-side section totals the builder recorded, which is what catches a
+# short CSV download or a hand-edited shard.
+GP_DIR = "data/gp-prescribing"
+GP_INDEX = os.path.join(GP_DIR, "index.json")
+GP_APPLIANCE = {"20", "21", "22", "23"}
+
+
+def check_gp_prescribing(doc):
+    if not doc:
+        return
+    periods = [str(p) for p in (doc.get("periods") or [])]
+    missing = [str(p) for p in (doc.get("missingPeriods") or [])]
+    if not periods or any(not re.fullmatch(r"\d{6}", p) for p in periods):
+        FAIL("gp-prescribing", "%s carries no periods or malformed ones — expected YYYYMM."
+                               % GP_INDEX)
+        return
+    if sorted(periods) != periods or (_hp_months_between(periods[0], periods[-1]) + 1
+                                      != len(periods)):
+        FAIL("gp-prescribing", "gap or disorder in the monthly series in %s (%s to %s, %d "
+                               "slots). A month NHSBSA never published keeps its slot and is "
+                               "named in missingPeriods; it is never closed up."
+                               % (GP_INDEX, periods[0], periods[-1], len(periods)))
+    stray = [p for p in missing if p not in set(periods)]
+    if stray:
+        FAIL("gp-prescribing", "%s names %s in missingPeriods without carrying the slot."
+                               % (GP_INDEX, ", ".join(stray[:5])))
+
+    # Evidence floor stated = evidence floor built.
+    built = None
+    try:
+        m = re.search(r"^MIN_BASELINE_ITEMS\s*=\s*(\d+)",
+                      open(os.path.join(REPO_DIR, "scripts", "refresh_gp_prescribing.py")).read(),
+                      re.M)
+        built = int(m.group(1)) if m else None
+    except Exception:
+        pass
+    if built is None:
+        WARN("gp-prescribing", "could not read MIN_BASELINE_ITEMS from "
+                               "scripts/refresh_gp_prescribing.py.")
+    elif doc.get("minBaselineItems") != built:
+        FAIL("gp-prescribing", "%s states an evidence floor of %s items, but the builder used "
+                               "MIN_BASELINE_ITEMS = %d." % (GP_INDEX, doc.get("minBaselineItems"),
+                                                            built))
+
+    icbs = set(doc.get("icbs") or {})
+    bad_icb = sorted(icbs - ICB_CODES - {"-"})
+    if bad_icb:
+        FAIL("gp-prescribing", "%s carries ICB code(s) %s outside the 36 effective 01/04/2026. "
+                               "Old-boundary months must be re-attributed to current ICBs, "
+                               "never published under a dissolved code."
+                               % (GP_INDEX, ", ".join(bad_icb[:6])))
+
+    totals = doc.get("sectionTotals") or {}
+    n = len(periods)
+    gen_bad, recon_bad, unlisted = [], [], set()
+    for sec in doc.get("sections") or []:
+        path = os.path.join(GP_DIR, "s-%s.json" % sec)
+        try:
+            with open(path) as f:
+                shard = json.load(f)
+        except Exception as exc:
+            FAIL("gp-prescribing", "%s is listed in sections but %s cannot be read (%s)."
+                                   % (sec, path, exc))
+            continue
+        if shard.get("periods") != periods:
+            FAIL("gp-prescribing", "%s carries different periods from %s." % (path, GP_INDEX))
+            continue
+        items = [0] * n
+        for sub, rec in (shard.get("s") or {}).items():
+            prods = rec.get("p") or {}
+            want = None if sub[:2] in GP_APPLIANCE else any(k[:2] == "AA" for k in prods)
+            if rec.get("g") != want:
+                gen_bad.append("%s (%s)" % (sub, rec.get("n")))
+            for icb, by in (rec.get("t") or {}).items():
+                if icb not in icbs:
+                    unlisted.add(icb)
+                for arr in by.values():
+                    for j in range(min(n, len(arr))):
+                        items[j] += arr[j] or 0
+        want_i = (totals.get(sec) or {}).get("i") or [None] * n
+        for j in range(n):
+            if want_i[j] is not None and items[j] != want_i[j]:
+                recon_bad.append("%s %s: shard %d vs source %d"
+                                 % (sec, periods[j], items[j], want_i[j]))
+    if gen_bad:
+        FAIL("gp-prescribing", "the brand/generic rule has broken on %d substance(s), e.g. %s. "
+                               "g must be true exactly when a generic (key starting 'AA') ships, and "
+                               "null for appliance chapters 20-23."
+                               % (len(gen_bad), ", ".join(gen_bad[:3])))
+    if unlisted:
+        FAIL("gp-prescribing", "shards carry series for ICB(s) %s that %s does not name."
+                               % (", ".join(sorted(unlisted)[:5]), GP_INDEX))
+    if recon_bad:
+        FAIL("gp-prescribing", "Refusing a GP prescribing build that does not add up: %d "
+                               "section-month(s) differ from the NHSBSA server totals the "
+                               "builder recorded, e.g. %s. A short download or a hand-edited "
+                               "shard; rebuild it." % (len(recon_bad), "; ".join(recon_bad[:3])))
+
+    old = committed(GP_INDEX)
+    if old:
+        o, nw = len(old.get("substances") or []), len(doc.get("substances") or [])
+        if o and nw < o * 0.9:
+            FAIL("gp-prescribing", "Refusing a shrunken GP prescribing index: substances drop "
+                                   "from %d to %d (-%.0f%%)." % (o, nw, (1 - nw / o) * 100))
+
+
+# --------------------------------------------------------------------------
 # THE DIFFERENTIATOR — data/differentiator.json
 # --------------------------------------------------------------------------
 # Product-level comparison, built from the manufacturer's own site AND the NHSSC
@@ -6479,6 +6710,8 @@ def main():
     check_js()
     check_speciality_news_freshness()
     check_product_types(load("product-types.json"))
+    check_mhra_dsu(load("mhra-dsu.json"))
+    check_drug_tariff_viiia(load("drug-tariff-part-viiia.json"))
 
     suppress = set()
     sup = load("suppressed-notices.json") or {}
@@ -6552,6 +6785,8 @@ def main():
     # the tool is not built. Built, every check below is one the tests demanded
     # before the checks existed — which is exactly why it had not shipped.
     check_hospital_prescribing(load("hospital-prescribing/index.json"))
+    # NHSBSA GP prescribing by ICB. Optional; built, it must reconcile to source.
+    check_gp_prescribing(load("gp-prescribing/index.json"))
     # The Differentiator. The category lock is the check — see the note above.
     check_differentiator(load("differentiator.json"), load("compare-suppliers.json"))
     check_coverage_ledger(load("coverage-ledger.json"))

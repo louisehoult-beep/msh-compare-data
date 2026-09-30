@@ -1,4 +1,4 @@
-name: Drug Tariff Part IX (daily check, monthly source)
+name: Drug Tariff Parts IX and VIIIA (daily check, monthly source)
 
 # WHY THIS WORKFLOW EXISTS (added 02/09/2026)
 #
@@ -26,6 +26,12 @@ name: Drug Tariff Part IX (daily check, monthly source)
 # ⚠️ stamp_notice.py MUST run after the refresh. refresh_drug_tariff_part_ix.py rebuilds
 # the file from scratch, which drops the _notice ownership block; without the re-stamp
 # the job would publish an unmarked file and break the next hand-push's gate.
+#
+# PART VIIIA ADDED 29/09/2026. refresh_drug_tariff_part_viiia.py writes
+# data/drug-tariff-part-viiia.json (medicines basic prices, category A/C/M/H) for
+# the speciality panels. Same publisher, same cadence, same gates. Its file names
+# on NHSBSA's Part VIII page are irregular, so it reads the link off the index
+# page rather than building one. The month input applies to both parts.
 
 on:
   schedule:
@@ -62,6 +68,11 @@ jobs:
           python3 scripts/refresh_drug_tariff_part_ix.py --out data/drug-tariff-part-ix.json \
             ${{ github.event.inputs.month && format('--month {0}', github.event.inputs.month) || '' }}
 
+      - name: Fetch and convert current Part VIIIA
+        run: |
+          python3 scripts/refresh_drug_tariff_part_viiia.py --out data/drug-tariff-part-viiia.json \
+            ${{ github.event.inputs.month && format('--month {0}', github.event.inputs.month) || '' }}
+
       - name: Re-stamp the ownership notice and data markers
         run: python3 scripts/stamp_notice.py
 
@@ -76,6 +87,12 @@ jobs:
           assert n >= 50000, 'row count %d implausibly low for a Part IX file — refusing to publish' % n
           assert sum(1 for r in d['rows'] if r[8]) >= 0.95 * n, 'BNF codes missing from most rows — the speciality panels classify by them'
           print('gate passed:', n, 'rows,', d.get('effectiveMonth'))
+          v = json.load(open('data/drug-tariff-part-viiia.json'))
+          assert v.get('schema') == ['medicine','packSize','unit','category','price','vmpSnomed'], 'VIIIA schema drifted'
+          m = v.get('rowCount', 0)
+          assert m == len(v.get('rows', [])), 'VIIIA rowCount does not match rows length'
+          assert m >= 3000, 'VIIIA row count %d implausibly low - refusing to publish' % m
+          print('VIIIA gate passed:', m, 'rows,', v.get('effectiveMonth'))
           "
 
       - name: Publish gate — the same one every other writer runs
@@ -86,8 +103,8 @@ jobs:
         run: |
           git config user.name "drug-tariff-bot"
           git config user.email "actions@github.com"
-          git add data/drug-tariff-part-ix.json
-          git diff --cached --quiet || git commit -m "Drug Tariff Part IX $(date -u +%F)"
+          git add data/drug-tariff-part-ix.json data/drug-tariff-part-viiia.json
+          git diff --cached --quiet || git commit -m "Drug Tariff Parts IX and VIIIA $(date -u +%F)"
           pushed=0
           for attempt in 1 2 3; do
             if git push; then
@@ -99,10 +116,11 @@ jobs:
             git fetch origin
             git reset --hard origin/main
             python3 scripts/refresh_drug_tariff_part_ix.py --out data/drug-tariff-part-ix.json
+            python3 scripts/refresh_drug_tariff_part_viiia.py --out data/drug-tariff-part-viiia.json
             python3 scripts/stamp_notice.py
             bash scripts/gate.sh || { echo "GATE FAILED after re-fetch - refusing to push"; exit 1; }
-            git add data/drug-tariff-part-ix.json
-            git diff --cached --quiet || git commit -m "Drug Tariff Part IX $(date -u +%F) (retry)"
+            git add data/drug-tariff-part-ix.json data/drug-tariff-part-viiia.json
+            git diff --cached --quiet || git commit -m "Drug Tariff Parts IX and VIIIA $(date -u +%F) (retry)"
             sleep 5
           done
           if [ "$pushed" -ne 1 ]; then

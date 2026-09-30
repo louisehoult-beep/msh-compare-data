@@ -23,7 +23,11 @@ name: Speciality panels rebuild
 #   company-intelligence  Mon 03:10 -> frameworks.json
 #   framework-awards      06:10   -> framework-awards.json
 #   open-tenders          06:25   -> open-tenders.json
-#   drug-tariff           06:40   -> drug-tariff.json
+#   drug-tariff           06:40   -> drug-tariff-part-ix.json, drug-tariff-part-viiia.json
+#   mhra-dsu              02:55   -> mhra-dsu.json
+#   gp-prescribing        07:20 (15th-28th, monthly data) -> data/gp-prescribing/
+#     This one lands AFTER the rebuild, deliberately not waited for: a new NHSBSA
+#     month reaches the panels at the next morning's run, one day later.
 # Building before those would publish a panel set already a day behind, which is
 # the failure this workflow exists to end. Same reasoning as differentiator.yml's
 # "after every writer that feeds it".
@@ -73,7 +77,10 @@ jobs:
         run: |
           git config user.name "hub-bot"
           git config user.email "contact@elevateandthrive.uk"
-          git add data/speciality-panels/
+          # speciality-local-intel.json too (29/09/2026): the checker above writes each
+          # item's lastCheck, and until now only this run's build used it; the stored
+          # dates only moved when someone ran the checker by hand.
+          git add data/speciality-panels/ data/speciality-local-intel.json
           git diff --cached --quiet || git commit -m "speciality panels rebuild $(date -u +'%F %H:%M')"
           pushed=0
           for attempt in 1 2 3 4 5; do
