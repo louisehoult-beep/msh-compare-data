@@ -2635,7 +2635,10 @@
       esc(a.noticeSupplierName) + '&rdquo;' +
       /* History rows join a multi-supplier award into one string; it is split
          before matching, so say this company was one of several named. */
-      (a.noticeSupplierCount > 1 ? ', one of ' + (a.noticeSupplierString && a.noticeSupplierString.length >= 80 ? 'at least ' : '') +
+      /* "at least" only where the export really cut the string (supplierCut, set by
+         refresh_awards.py from a capped file). Since 30/09/2026 names are whole, and
+         a length test here said "at least" on every long, complete list. */
+      (a.noticeSupplierCount > 1 ? ', one of ' + (a.supplierCut ? 'at least ' : '') +
         esc(String(a.noticeSupplierCount)) + ' suppliers named' : '') + ' &middot; ' +
       '<a href="' + esc(a.url) + '" target="_blank" rel="noopener" style="color:' + G + ';font-weight:600;">' +
       esc(a.source) + ' notice &#8599;</a>' +

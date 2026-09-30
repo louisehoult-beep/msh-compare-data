@@ -97,6 +97,9 @@ class HistoryIngest(unittest.TestCase):
         cut = [r for r in doc["unmatched"] if "cuts supplier names" in r["reason"]]
         self.assertEqual([r["noticeSupplierName"] for r in cut], ["Organon Pharma (UK"])
         self.assertEqual(doc["counts"]["historySupplierCutOff"], 1)
+        named = [r for r in doc["unmatched"] + [x for v in doc["companies"].values() for x in v]
+                 if r.get("noticeSupplierString") == sup]
+        self.assertTrue(named and all(r.get("supplierCut") for r in named))
 
     def test_uncapped_export_never_marks_an_80_char_name_cut(self):
         # 30/09/2026: the export stopped cutting names. When any supplier string in
@@ -110,6 +113,8 @@ class HistoryIngest(unittest.TestCase):
                              None, None, None, None]))
         self.assertEqual(doc["counts"]["historySupplierCutOff"], 0)
         self.assertFalse([r for r in doc["unmatched"] if "cuts supplier names" in r["reason"]])
+        rows = doc["unmatched"] + [x for v in doc["companies"].values() for x in v]
+        self.assertFalse([r for r in rows if r.get("supplierCut")])   # no "at least"
 
     def test_no_fuzzy_or_substring(self):
         doc = build(history([CF + "a1", "c", "Beds", "Trust", "Acme Medical Group Ltd",

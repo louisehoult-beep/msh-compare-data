@@ -445,6 +445,8 @@ def history_rows(history, index):
             if len(pieces) > 1 or cut:
                 row["noticeSupplierString"] = sup
                 row["noticeSupplierCount"] = len(pieces)
+            if cut:
+                row["supplierCut"] = True       # company-report.js says "at least N"
             if cut and n == len(pieces) - 1:
                 stats["truncated"] += 1
                 row["cutOff"] = True
